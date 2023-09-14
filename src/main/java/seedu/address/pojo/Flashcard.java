@@ -9,12 +9,11 @@ public class Flashcard {
     private int level; // How many times successfully remembered
 
     public Flashcard(String originalWord, String translatedWord, Date whenToReview, int level) {
-        this.originalWord = originalWord;
-        this.translatedWord = translatedWord;
-        this.whenToReview = whenToReview;
         this.level = level;
+        this.whenToReview = whenToReview;
+        this.translatedWord = translatedWord;
+        this.originalWord = originalWord;
     }
-
 
     /**
      * Will update the whenToRead based on the algorithm and the level

@@ -1,5 +1,6 @@
 package seedu.address.management;
 
+import seedu.address.cardsList.CardList;
 import seedu.address.pojo.Flashcard;
 
 import java.io.BufferedReader;
@@ -9,10 +10,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class TextFileReader {
+public class TextReader {
     private String filePath;
 
-    public TextFileReader(String filePath) {
+    private CardList ls;
+
+    public TextReader(String filePath) {
         this.filePath = filePath;
     }
 
@@ -30,7 +33,9 @@ public class TextFileReader {
                     Date reviewDate = dateFormat.parse(columns[2]);
                     int level = Integer.parseInt(columns[3]);
 
-                    Flashcard flashcard = new Flashcard(word, translation, dateFormat.format(reviewDate). level);
+                    Flashcard flashcard = new Flashcard(word, translation, reviewDate, level);
+                    ls.add(flashcard);
+
                 } else {
                     System.err.println("Invalid data format: " + line);
                 }
@@ -38,12 +43,6 @@ public class TextFileReader {
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
-    }
-
-    public static void main(String[] args) {
-        String filePath = "data.txt";
-        TextFileReader reader = new TextFileReader(filePath);
-        reader.readAndProcessFile();
     }
 }
 
