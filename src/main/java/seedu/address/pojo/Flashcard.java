@@ -1,12 +1,20 @@
 package seedu.address.pojo;
 
 import java.time.ZonedDateTime;
+import java.util.Date;
 
 public class Flashcard {
     private String originalWord;
     private String translatedWord;
-    private ZonedDateTime whenToReview; // Date the flashcard was needs to be reviewed
+    private Date whenToReview; // Date the flashcard was needs to be reviewed
     private int level; // How many times successfully remembered
+
+    public Flashcard(String originalWord, String translatedWord, Date whenToReview, int level) {
+        this.level = level;
+        this.whenToReview = whenToReview;
+        this.translatedWord = translatedWord;
+        this.originalWord = originalWord;
+    }
 
     /**
      * Will update the whenToRead based on the algorithm and the level
