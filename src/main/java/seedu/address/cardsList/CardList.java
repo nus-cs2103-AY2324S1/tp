@@ -14,4 +14,27 @@ public class CardList {
     public int size() {
         return ls.size();
     }
+
+    public Flashcard get(int index) {
+        return ls.get(index);
+    }
+
+    public void delete(int index) {
+        ls.remove(index);
+    }
+
+    /**
+     * To be used for the main CardList parsed from the text file
+     * @return A CardList of all flashcards that need to be reviewed
+     */
+    public CardList toReview() {
+        CardList review = new CardList();
+        for (Flashcard fc : ls) {
+            if (fc.isOverdue()) {
+                review.add(fc);
+            }
+        }
+        return review;
+    }
+
 }
