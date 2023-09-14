@@ -1,6 +1,5 @@
 package seedu.address.pojo;
 
-import java.time.ZonedDateTime;
 import java.util.Date;
 
 public class Flashcard {
@@ -26,9 +25,8 @@ public class Flashcard {
     public void updateLastRead(Boolean hasRemembered) {
         if (hasRemembered) {
             this.level += 1;
-            this.whenToReview = ZonedDateTime.now().plusDays(this.level);
-        } else {
-            this.whenToReview = ZonedDateTime.now().plusDays(this.level);
         }
+        // Current date in ms + 1 day per level in ms
+        this.whenToReview = new Date(new Date().getTime() + this.level * 86400000);
     }
 }
