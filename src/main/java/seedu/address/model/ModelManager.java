@@ -37,7 +37,18 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        filteredTransactions = new FilteredList<>(FXCollections.observableArrayList());
+        ObservableList<Transaction> tmpTransactions = FXCollections.observableArrayList();
+        filteredTransactions = new FilteredList<>(tmpTransactions);
+
+        // Placeholder transaction objects (x5)
+        tmpTransactions.add(new Transaction());
+        tmpTransactions.add(new Transaction());
+        tmpTransactions.add(new Transaction());
+        tmpTransactions.add(new Transaction());
+        tmpTransactions.add(new Transaction());
+
+        // Set default view to staff on startup
+        updateFilteredTransactionList(PREDICATE_HIDE_ALL_TRANSACTIONS);
     }
 
     public ModelManager() {
@@ -130,6 +141,22 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    //=========== Filtered Transaction List Accessors ========================================================
+    /**
+     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Transaction> getFilteredTransactionList() {
+        return filteredTransactions;
+    }
+
+    @Override
+    public void updateFilteredTransactionList(Predicate<Transaction> predicate) {
+        requireNonNull(predicate);
+        filteredTransactions.setPredicate(predicate);
     }
 
     @Override

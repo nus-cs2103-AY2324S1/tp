@@ -2,7 +2,9 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_HIDE_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_HIDE_ALL_TRANSACTIONS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TRANSACTIONS;
 
 import seedu.address.model.Model;
 
@@ -10,6 +12,9 @@ import seedu.address.model.Model;
  * Lists all persons in the address book to the user.
  */
 public class ViewCommand extends Command {
+    /**
+     * Enum for different types of views.
+     */
     public enum ViewType {
         STAFF,
         TRANSACTION
@@ -35,10 +40,12 @@ public class ViewCommand extends Command {
         requireNonNull(model);
         if (type == ViewType.TRANSACTION) {
             model.updateFilteredPersonList(PREDICATE_HIDE_ALL_PERSONS);
+            model.updateFilteredTransactionList(PREDICATE_SHOW_ALL_TRANSACTIONS);
             return new CommandResult(MESSAGE_SUCCESS_TRANSACTIONS);
         }
 
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredTransactionList(PREDICATE_HIDE_ALL_TRANSACTIONS);
         return new CommandResult(MESSAGE_SUCCESS_STAFF);
     }
 }
