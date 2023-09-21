@@ -1,0 +1,24 @@
+2023-09-21T11:32:41.258Z - info: Initialization success.
+2023-09-21T11:33:00.013Z - info: Website generation started at 7:32:59 pm
+2023-09-21T11:33:00.257Z - info: Building assets...
+2023-09-21T11:33:00.492Z - info: Assets built
+2023-09-21T11:33:00.493Z - info: Generating pages...
+2023-09-21T11:33:00.666Z - error: 'page' layout does not exist
+2023-09-21T11:33:00.740Z - error: 'page' layout does not exist
+2023-09-21T11:33:00.741Z - error: 'page' layout does not exist
+2023-09-21T11:33:00.794Z - error: 'page' layout does not exist
+2023-09-21T11:33:00.806Z - error: 'page' layout does not exist
+2023-09-21T11:33:00.825Z - error: 'page' layout does not exist
+2023-09-21T11:33:00.827Z - error: 'page' layout does not exist
+2023-09-21T11:33:00.865Z - error: 'page' layout does not exist
+2023-09-21T11:33:00.899Z - error: 'page' layout does not exist
+2023-09-21T11:33:00.901Z - error: 'page' layout does not exist
+2023-09-21T11:33:00.902Z - error: 'page' layout does not exist
+2023-09-21T11:33:00.947Z - error: 'page' layout does not exist
+2023-09-21T11:33:00.960Z - error: 'page' layout does not exist
+2023-09-21T11:33:00.960Z - error: 'page' layout does not exist
+2023-09-21T11:33:01.001Z - info: Pages built
+2023-09-21T11:33:01.208Z - info: Site data built
+2023-09-21T11:33:01.208Z - info: Website generation complete! Total build time: 1.255s
+2023-09-21T11:33:01.235Z - info: Serving "C:\Users\ruoyu\CS2103T-TP-Official\tp\_site" at http://127.0.0.1:8080
+2023-09-21T11:33:01.235Z - info: Press CTRL+C to stop ...
