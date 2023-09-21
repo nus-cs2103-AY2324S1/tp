@@ -66,7 +66,7 @@ public class LogicManagerTest {
 
     @Test
     public void execute_validCommand_success() throws Exception {
-        String listCommand = ViewCommand.COMMAND_WORD;
+        String listCommand = ViewCommand.COMMAND_WORD + " staff";
         assertCommandSuccess(listCommand, ViewCommand.MESSAGE_SUCCESS_STAFF, model);
     }
 
@@ -85,6 +85,11 @@ public class LogicManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void getFilteredTransactionList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredTransactionList().remove(0));
     }
 
     /**
