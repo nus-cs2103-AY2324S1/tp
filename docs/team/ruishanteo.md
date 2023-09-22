@@ -4,6 +4,8 @@ This is an address book made for tuition centre managers to easily track, schedu
 
 Given below are my contributions to the project.
 
+### TO BE ADDED SOON
+
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=ruishanteo&breakdown=true)
 
 * **Enhancements implemented**:
