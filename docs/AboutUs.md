@@ -9,13 +9,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Aryan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/AryanG01.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[homepage](https://ay2324s1-cs2103t-f10-1.github.io/tp)]
+[[github](https://github.com/AryanG01)]
+[[portfolio](team/AryanG01.md)]
 
 * Role: Project Advisor
 
