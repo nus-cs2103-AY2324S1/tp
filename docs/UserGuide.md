@@ -118,6 +118,21 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
+### Search for a booking
+
+Search and locate specific bookings based on room, date, name and booking ID. 
+
+Format: `search booking [r/ROOM] [d/DATE] [n/NAME] [id/BOOKING_ID]`
+
+Examples:
+
+- `search booking r/102`
+- `search booking d/2023-01-01`
+- `search booking n/ji hoon`
+- `search booking r/102 n/ji hoon id/12345`
+
+
+
 ### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
