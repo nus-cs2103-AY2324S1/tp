@@ -19,15 +19,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Rohan Bahl
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/rb9823.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/RB9823)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: close
+* Responsibilities: Add a booking
 
 ### Johnny Doe
 
