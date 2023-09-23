@@ -101,6 +101,12 @@ Shows a list of all persons in the address book.
 
 Format: `list`
 
+### Viewing all bookings: `view all bookings`
+
+Shows a comprehensive list of all the bookings made to hotel receptionists for them to prepare for the arrival of guests ahead of time to streamline work processes.
+
+Format: `view all bookings`
+
 ### Editing a person : `edit`
 
 Edits an existing person in the address book.
