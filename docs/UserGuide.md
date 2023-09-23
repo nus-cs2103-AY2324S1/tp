@@ -71,6 +71,13 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
+### Viewing room availability: `view availbility`
+Allows hotel receptionists to view rooms that are available at a specified date, upon the request of a client.
+
+Format: `view availability d/DATE`
+
+Examples:
+* `view availability d/2023-09-16`
 
 ### Adding a person: `add`
 
@@ -149,6 +156,16 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+### Cancelling a booking: `cancelBooking`
+
+This feature provides hotel receptionists with the capability to cancel an existing booking in a straightforward and 
+efficient manner, streamlining their workflow and enhancing customer service.
+
+Format: `cancelBooking INDEX`
+
+Examples:
+* `cancelBooking 12345`
 
 ### Clearing all entries : `clear`
 
