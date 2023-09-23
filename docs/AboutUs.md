@@ -29,11 +29,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: close
 * Responsibilities: Add a booking
 
-### Johnny Doe
+### Mark Garcera
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/markgcera.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/markgcera)] [[portfolio](team/markgcera.md)]
 
 * Role: Developer
 * Responsibilities: Data
