@@ -15,7 +15,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[homepage](https://ay2324s1-cs2103t-f10-1.github.io/tp)]
 [[github](https://github.com/AryanG01)]
-[[portfolio](team/AryanG01.md)]
+[[portfolio](team/aryang01.md)]
 
 * Role: Project Advisor
 
