@@ -86,6 +86,15 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
+### Adding a booking: `add booking`
+
+Allows hotel receptionists to add new room bookings upon confirmation of a room reservation.
+
+Format: `add booking r/ROOM NUMBER d/DATE t/START_TIME-END_TIME`
+
+Examples:
+* `add booking r/101 d/2023-09-16 t/09:00-12:00`
+
 ### Listing all persons : `list`
 
 Shows a list of all persons in the address book.
