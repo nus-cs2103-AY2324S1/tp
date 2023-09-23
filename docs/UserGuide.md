@@ -71,6 +71,14 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
+### Viewing room availability on a specific date: `view availability`
+
+Allows hotel receptionists to view rooms that are available at a specified date, upon the request of a client.
+
+Format: `view availability d/DATE`
+
+Examples:
+* `view availability d/2023-09-16'
 
 ### Adding a person: `add`
 
