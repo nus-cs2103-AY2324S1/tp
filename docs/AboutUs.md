@@ -33,7 +33,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/markgcera.png" width="200px">
 
-[[github](http://github.com/markgcera)] [[portfolio](team/markGarcera.md)]
+[[github](http://github.com/markgcera)] [[portfolio](team/markgcera.md)]
 
 * Role: Developer
 * Responsibilities: Data
