@@ -46,6 +46,11 @@ public class CardList {
         return review;
     }
 
+    /**
+     * Checks if the CardList contains the card
+     *
+     * @param card The card to check if there's a duplicate of
+     */
     public boolean hasCard(FlashCard card) {
         for (FlashCard fc : ls) {
             if (fc.equals(card)) {

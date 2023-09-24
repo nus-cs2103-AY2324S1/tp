@@ -1,16 +1,12 @@
 package seedu.address.logic.command;
 
+import java.util.Date;
 
 import seedu.address.cardslist.CardList;
-import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
-import seedu.address.logic.command.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
 import seedu.address.pojo.FlashCard;
 
-import java.util.Date;
 
 /**
  * Adds a person to the address book.
