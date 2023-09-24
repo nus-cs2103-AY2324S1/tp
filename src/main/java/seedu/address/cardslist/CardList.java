@@ -46,4 +46,13 @@ public class CardList {
         return review;
     }
 
+    public boolean hasCard(FlashCard card) {
+        for (FlashCard fc : ls) {
+            if (fc.equals(card)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

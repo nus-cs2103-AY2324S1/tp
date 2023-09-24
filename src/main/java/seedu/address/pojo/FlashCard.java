@@ -60,6 +60,18 @@ public class FlashCard {
         return sb;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof FlashCard)) {
+            return false;
+        }
+        FlashCard fc = (FlashCard) obj;
+        if (fc.originalWord.equals(this.originalWord) && fc.translatedWord.equals(this.translatedWord)) {
+            return true;
+        }
+        return false;
+    }
+
     public boolean isOverdue() {
         return this.whenToReview.before(new Date());
     }
