@@ -37,44 +37,39 @@ Expected output: `User profile has been successfully updated!`
 
 Output if error: ```Please follow the required format (EditP /name Adam /age 123 /gender F /horoscope Cancer)```
 
-Creation of new date
-Format: “NewD/ name NAME / age AGE / gender GENDER / horoscope HOROSCOPE”
+### Creation of new date
+Format: `NewD/ name NAME / age AGE / gender GENDER / horoscope HOROSCOPE`
 Parameter constraints:
-Name should be non non-empty string.
-Age should be a positive integer.
-Gender should be a character (M/F).
-Horoscope should be a non-empty string.
+- Name should be non non-empty string.
+- Age should be a positive integer.
+- Gender should be a character (M/F).
+- Horoscope should be a non-empty string.
 
 Example:
-“New date /name Cleon /age 22 /gender F /horoscope Taurus”
+`New date /name Cleon /age 22 /gender F /horoscope Taurus`
 
 Expected output: New date has been successfully added!
 
 Output if error:
 Please follow the required format to add a new date (New date /name Adam /age 123 /gender F /horoscope Cancer)
 Edit existing dates
-Format: “EditD INDEX/ METRIC NEW ARG”
+Format: `EditD INDEX/ METRIC NEW ARG`
 
 Parameter constraints:
-The index must be a positive integer, and be within the range of the recorded dates
-Metric is limited to “gender, age, horoscope, name” only
-New arg replaces the existing argument for that metric
-User can edit up to n number of metrics in one command line, where n refers to the number of metrics available
+- The index must be a positive integer, and be within the range of the recorded dates
+- Metric is limited to `gender, age, horoscope, name` only
+- New arg replaces the existing argument for that metric
+- User can edit up to n number of metrics in one command line, where n refers to the number of metrics available
 
 Example:
-“EditD 3/ name Cleon” (editing 1 metric)
-“EditD 3/ name Cleon/ horoscope Cancer” (editing 2 metrics)
-“EditD 3/ horoscope Cancer/ name Cleon” (sequence doesn't matter)
+`EditD 3/ name Cleon` (editing 1 metric)
+`EditD 3/ name Cleon/ horoscope Cancer` (editing 2 metrics)
+`EditD 3/ horoscope Cancer/ name Cleon` (sequence doesn't matter)
 
-Expected Output: “The date information has been successfully updated!”
+Expected Output: `The date information has been successfully updated!`
 
-
-Random Date Generator [Bob]
-
-Filter by different metrics [Bob]
-
-Random Date Generator
-Format: “Random”
+### Random Date Generator
+Format: `random`
 
 Parameter constraints:
 
@@ -82,3 +77,20 @@ Expected Output: A random date entry is printed
 
 Output if error:
 No dates in list!
+	
+### Filter by Metric
+Format: `filter /METRIC ARG`
+
+Parameter constraints:
+- Filter must be from list of metrics
+- Metric is limited to `gender, age, horoscope, name` only
+	
+Example:
+`filter /name Cleon`
+`filter /gender M`
+	
+
+Expected Output: `Lists the dates with the metric specified`
+
+Output if error:
+No dates found!
