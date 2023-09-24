@@ -1,13 +1,21 @@
-package seedu.address.cardsList;
-
-import seedu.address.pojo.Flashcard;
+package seedu.address.cardslist;
 
 import java.util.ArrayList;
 
-public class CardList {
-    private static ArrayList<Flashcard> ls;
+import seedu.address.pojo.FlashCard;
 
-    public void add(Flashcard flashcard) {
+/**
+ * Stores flashcards
+ *
+ * @author Nathanael M. Tan
+ * @author Wang Cheng
+ * @version 1.0
+ * @since 1.0
+ */
+public class CardList {
+    private static ArrayList<FlashCard> ls;
+
+    public void add(FlashCard flashcard) {
         ls.add(flashcard);
     }
 
@@ -15,7 +23,7 @@ public class CardList {
         return ls.size();
     }
 
-    public Flashcard get(int index) {
+    public FlashCard get(int index) {
         return ls.get(index);
     }
 
@@ -25,11 +33,12 @@ public class CardList {
 
     /**
      * To be used for the main CardList parsed from the text file
+     *
      * @return A CardList of all flashcards that need to be reviewed
      */
     public CardList toReview() {
         CardList review = new CardList();
-        for (Flashcard fc : ls) {
+        for (FlashCard fc : ls) {
             if (fc.isOverdue()) {
                 review.add(fc);
             }
