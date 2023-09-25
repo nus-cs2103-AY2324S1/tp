@@ -113,23 +113,21 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Searching for data : `search`
 
-Finds persons whose names contain any of the given keywords.
+Search for people whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `search [KEYWORD]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* The search is case-insensitive. e.g `joe` will match `Joe`
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Partial words can be matched. e.g. `Han` will match `Hans`
+* All persons matching the keyword will be returned (i.e. `OR` search).
+  e.g. `Alfred` will return `alfred`, `Alfred Tan`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `search Yuan` returns `Chuan Yuan` and `Li Yuan`<br>
+  ![result for 'search Yuan'](images/searchYuanResult.png)
 
 ### Deleting a person : `delete`
 
