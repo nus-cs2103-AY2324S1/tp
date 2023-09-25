@@ -158,7 +158,7 @@ Format: `exit`
 
 ### Save and Load Data
 
-The patient, specialist data will automatically be saved to the device’s harddrive every time the data is updated, and will automatically be loaded when the user starts the application. The user does not need to manually save any data.
+The patient and specialist data will automatically be saved to the device’s harddrive every time the data is updated, and will automatically be loaded when the user starts the application. The user does not need to manually save any data.
 
 ### Editing the data file
 
