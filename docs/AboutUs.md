@@ -10,15 +10,15 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project team
 
-### John Doe
+### Vansh Nath
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/vansh284.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/vansh284)]
+[[portfolio](team/vansh284.md)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibilities: Team lead, Integration
 
 ### Gavin Chiam Xiang Zhe
 
