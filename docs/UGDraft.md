@@ -1,5 +1,14 @@
 # LoveBook User Guide Draft
 
+LoveBook, is a dating-focused address book application, revolving around providing users with a convenient
+and enjoyable tool to enhance their dating experiences. Featuring user profile management, date organization,
+compatibility ranking, and customizable filtering options, LoveBook enhances the efficiency and effectiveness of your
+online dating journey.
+
+## Wireframes
+
+![Figma](/docs/images/user-guide/Figma.png)  
+
 ## Features
 
 ### Listing current dates : `list`
@@ -26,10 +35,10 @@ Output if error : `The index you have provided is out of bounds of your current 
 Format: `editP /name NAME /age AGE /gender GENDER /horoscope  HOROSCOPE`
 
 Parameter constraints:
-- Name should be non empty string.
+- Name should be non-empty string.
 - Age should be positive integer.
 - Gender should be a character (M/F).
-- Horoscope should be a non empty string.
+- Horoscope should be a non-empty string.
 
 Example: `editP /name Ryann /age 22 /gender F /horoscope Taurus`
 
@@ -48,12 +57,13 @@ Parameter constraints:
 Example:
 `New date /name Cleon /age 22 /gender F /horoscope Taurus`
 
-Expected output: New date has been successfully added!
+Expected output: `New date has been successfully added!`
 
 Output if error:
 Please follow the required format to add a new date (New date /name Adam /age 123 /gender F /horoscope Cancer)
-Edit existing dates
-Format: `EditD INDEX/ METRIC NEW ARG`
+
+### Edit existing dates
+Format: `EditD INDEX /METRIC NEW ARG`
 
 Parameter constraints:
 - The index must be a positive integer, and be within the range of the recorded dates
@@ -62,21 +72,18 @@ Parameter constraints:
 - User can edit up to n number of metrics in one command line, where n refers to the number of metrics available
 
 Example:
-`EditD 3/ name Cleon` (editing 1 metric)
-`EditD 3/ name Cleon/ horoscope Cancer` (editing 2 metrics)
-`EditD 3/ horoscope Cancer/ name Cleon` (sequence doesn't matter)
+- `EditD 3 /name Cleon` (editing 1 metric)
+- `EditD 3 /name Cleon /horoscope Cancer` (editing 2 metrics)
+- `EditD 3 /horoscope Cancer /name Cleon` (sequence doesn't matter)
 
 Expected Output: `The date information has been successfully updated!`
 
 ### Random Date Generator
 Format: `random`
 
-Parameter constraints:
+Expected Output: `A random date entry is printed`
 
-Expected Output: A random date entry is printed
-
-Output if error:
-No dates in list!
+Output if error: ```No dates in list!```
 	
 ### Filter by Metric
 Format: `filter /METRIC ARG`
@@ -86,11 +93,9 @@ Parameter constraints:
 - Metric is limited to `gender, age, horoscope, name` only
 	
 Example:
-`filter /name Cleon`
-`filter /gender M`
-	
+- `filter /name Cleon`
+- `filter /gender M`
 
 Expected Output: `Lists the dates with the metric specified`
 
-Output if error:
-No dates found!
+Output if error: ```No dates found!```
