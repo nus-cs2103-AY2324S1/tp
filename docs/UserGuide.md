@@ -156,9 +156,9 @@ Exits the program.
 
 Format: `exit`
 
-### Saving the data
+### Save and Load Data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+The patient, specialist and pharmacist data will automatically be saved to the device’s harddrive every time the data is updated, and will automatically be loaded when the user starts the application. The user does not need to manually save any data.
 
 ### Editing the data file
 
@@ -171,6 +171,10 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 ### Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
+
+### UI mock-up :
+
+![UI mock-up](images/Uimockup.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
