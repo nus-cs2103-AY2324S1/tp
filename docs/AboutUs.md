@@ -30,14 +30,15 @@ We are a team based in the [School of Computing, National University of Singapor
 * Role: Developer
 * Responsibilities: Code Quality, Deliverables and Deadlines, Git Expert
 
-### Johnny Doe
+### Lim Jun Han, Alvin
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/alvinlim277.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/alvinlim277)] 
+[[portfolio](team/alvinlim277.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Documentation, Testing 
 
 ### Jean Doe
 
