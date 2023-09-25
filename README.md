@@ -4,7 +4,7 @@
 
 * Tutorium is **a tool to help tuition centre administrative staff with marketing and outreach**.<br>
   Example usages:
-  * taking in student data as inputs 
+  * taking in student data as inputs
   * generating statistics on student enrolment
   * visualising data on student demographics
 * The product aims to provide quantitative data analysis of students. From this, users can draw conclusions on commonalities among students and their demographics, gaining insights on marketing strategies.
