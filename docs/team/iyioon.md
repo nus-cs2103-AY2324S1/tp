@@ -18,6 +18,8 @@ CheckMate is designed to streamline the process of room bookings for hotel emplo
 * **Enhancements to existing features**:
 
 * **Documentation**:
+  * User Guide:
+  * Developer Guide:
 
 * **Community**:
 
