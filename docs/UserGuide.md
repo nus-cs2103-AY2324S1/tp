@@ -3,8 +3,7 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
-
+DoConnek Pro is a **desktop app** that helps **General Practitioner Clinic Management Staffs** manage their **contact information for patients, specialists and pharmacists**. It is optimized for **Command Line Interface (CLI) users** while having a **Graphical User Interface (GUI)**. This allows frequent tasks to be completed faster by typing in commands.
 * Table of Contents
 {:toc}
 
@@ -86,11 +85,15 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-### Listing all persons : `list`
+### Listing patient and specialist records: `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all patients or specialists in stored records.
 
-Format: `list`
+Format: `list -PERSON_TYPE`
+
+Examples:
+* `list -pa` Lists all patients in records.
+* `list -sp` Lists all specialists in records.
 
 ### Editing a person : `edit`
 
