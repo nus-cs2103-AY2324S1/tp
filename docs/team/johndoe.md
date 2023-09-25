@@ -1,8 +1,3 @@
----
-layout: default.md
-title: "John Doe's Project Portfolio Page"
----
-
 ### Project: LoveBook
 
 LoveBook, is a dating-focused address book application, revolving around providing users with a convenient and an
@@ -20,7 +15,7 @@ Given below are my contributions to the project.
 
 * **New Feature**:
 
-* **Code contributed**: [RepoSense link]()
+* **Code contributed**:
 
 * **Project management**:
 
