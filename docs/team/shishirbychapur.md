@@ -1,6 +1,6 @@
 ---
 layout: default.md
-title: "John Doe's Project Portfolio Page"
+title: "Shishir Bychapur's Project Portfolio Page"
 ---
 
 ### Project: LoveBook
@@ -12,13 +12,13 @@ journey.
 
 Given below are my contributions to the project.
 
-* **New Feature**:
-    * What it does:
-    * Justification:
-    * Highlights:
-    * Credits:
+* **New Feature**: 
+    * What it does: 
+    * Justification: 
+    * Highlights: 
+    * Credits: 
 
-* **New Feature**:
+* **New Feature**: 
 
 * **Code contributed**: [RepoSense link]()
 
