@@ -40,15 +40,15 @@ We are a team based in the [School of Computing, National University of Singapor
 * Role: Developer
 * Responsibilities: Documentation, Testing 
 
-### Jean Doe
+### Ng Kok Seng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/kokseng1.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/kokseng1)]
+[[portfolio](team/kokseng1.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+  * Responsibilities: Scheduling and tracking, in charge of models
 
 ### James Doe
 
