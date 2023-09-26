@@ -19,9 +19,9 @@ Given below are my contributions to the project.
 
 * **Documentation**:
     * User Guide:
-        * to be added soon
+        * Complete user guide for deleting data.
     * Developer Guide:
-        * to be added soon
+        * Complete 8 user cases.
 
 * **Team-based tasks**:
     * to be added soon
