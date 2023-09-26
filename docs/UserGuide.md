@@ -71,19 +71,21 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding a patient or specialist: `add`
 
-Adds a person to the address book.
+Adds a patient or specialist to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
-
+Format (for patients): `add -pa n/NAME p/PHONE_NUMBER a/AGE [m/MEDICAL_HISTORY]...​`<br>
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+A patient can have any number of medical histories (including 0)
 </div>
 
+Format (for specialists): `add -sp n/NAME p/PHONE_NUMBER s/SPECIALISATION l/LOCATION`
+
+
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add -pa n/John p/12345678 a/21 m/Osteoporosis m/Rheumatoid arthritis`
+* `add -sp n/Jane p/73331515 s/Dermatologist l/Ang Mo Kio`
 
 ### Listing patient and specialist records: `list`
 
@@ -195,7 +197,8 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add (patient)** | `add -pa n/NAME p/PHONE_NUMBER a/AGE [m/MEDICAL_HISTORY]...` <br> e.g., `add -pa n/John p/12345678 a/21 m/Osteoporosis m/Rheumatoid arthritis`
+**Add (specialist)** | `add -sp n/NAME p/PHONE_NUMBER s/SPECIALISATION l/LOCATION` <br> e.g., `add -sp n/Jane p/73331515 s/Dermatologist l/Ang Mo Kio`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
