@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+UniMate is a desktop app for students to **manage contacts** and **manage schedules** optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, UniMate can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -14,11 +14,11 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `UniMate.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for UniMate.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar UniMate.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -71,6 +71,7 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
+## Contact Management
 
 ### Adding a person: `add`
 
@@ -127,6 +128,22 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+### Locating persons by tag: `filter`
+
+Finds persons whose tags contain any of the given keywords.
+
+Format: `filter TAG [MORE_TAGS]`
+
+* Filter is case-insensitive. e.g. `cs2103` will match `CS2103`
+* The order of the tags does not matter.
+* Only tags are searched
+* All tags containing the words will be matched e.g. `Ba` will return `Badminton` or `Basketball` or `Football` or `Backgammon`.
+* Only persons matching all keywords will be returned (i.e. `and` search).
+
+Examples:
+* `filter CS2103` - Displays all contacts with the CS2103 tag or tags containing CS2103 e.g. CS2103T
+* `filter MA2116 CS1010S` - Displays all contacts with the MA2116 and CS1010S tags or tags containing either
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
@@ -153,6 +170,51 @@ Exits the program.
 
 Format: `exit`
 
+## Calendar System
+
+### Adding an event (Coming Soon)
+
+Adds an event to the user's calendar.
+
+Format: `addEvent DESCRIPTION d/DATE s/START_TIME e/END_TIME`
+
+* Adds the event starting from `START_TIME` and ending at `END_TIME`
+* `START_TIME` and `END_TIME` must be in 24 hour notation
+* `DATE` must be in the format `DD/MM/YYYY`
+
+Example:
+* `addEvent Cry about deadlines d/12/12/2012 s/2200 e/2359`
+
+### Deleting an event (Coming Soon)
+
+Deletes an event from the user's calendar.
+
+Format `deleteEvent d/DATE s/START_TIME`
+
+* Deletes an event starting from `START_TIME` on `DATE`
+* If there is no event starting at `START_TIME`, an error will be returned
+* `START_TIME` must be in 24 hour notation
+* `DATE` must be in the format `DD/MM/YYYY`
+
+Example:
+`deleteEvent d/12/12/2012 s/2200`
+
+### Viewing all events (Coming Soon)
+
+Opens a view of all events currently stored in the calendar.
+
+Format: `viewEvents`
+
+## Miscellaneous
+
+### Force saving all contacts and events
+
+Forces a save of all current contacts and events iin the program.
+
+Format: `save`
+
+* All data is also saved in the hard disk automatically when the program is closed.
+
 ### Saving the data
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -174,7 +236,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous UniMate home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -193,5 +255,9 @@ Action | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Filter** | `filter TAG [MORE_TAGS]` <br> e.g., `filter CSGOD CS2103`
 **List** | `list`
 **Help** | `help`
+**addEvent** | `addEvent DESCRIPTION d/DAY s/START_TIME e/END_TIME` <br> e.g., `addEvent Cry about deadlines d/MON s/2200 e/2359`
+**deleteEvent** | `deleteEvent d/DATE s/START_TIME` <br> e.g., `deleteEvent d/12/12/2012 s/2200`
+**viewEvents** | `viewEvents`
