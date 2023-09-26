@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-DoConnek Pro is a **desktop app** that helps **General Practitioner Clinic Management Staffs** manage their **contact information for patients, specialists and pharmacists**. It is optimized for **Command Line Interface (CLI) users** while having a **Graphical User Interface (GUI)**. This allows frequent tasks to be completed faster by typing in commands.
+DoConnek Pro is a **desktop app** that helps **General Practitioner Clinic Management Staff** manage their **contact information for patients and specialists**. It is optimized for **Command Line Interface (CLI) users** while having a **Graphical User Interface (GUI)**. This allows frequent tasks to be completed faster by typing in commands.
 * Table of Contents
 {:toc}
 
@@ -44,19 +44,22 @@ DoConnek Pro is a **desktop app** that helps **General Practitioner Clinic Manag
 
 **:information_source: Notes about the command format:**<br>
 
+* Commands acting on the address book must contain the `-pa` (for patient) and the `-sp` (for specialist) tag to specify which subset they 
+would like the command to operate on.
+
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `add -pa n/NAME`, `NAME` is a parameter which can be used as `add -pa n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME [m/MEDICAL_HISTORY]` can be used as `n/John Doe m/Osteoporosis` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[m/MEDICAL_HISTORY]…​` can be used as ` ` (i.e. 0 times), `m/Osteoporosis`, `m/Osteoporosis m/Asthma` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -87,7 +90,7 @@ Examples:
 * `add -pa n/John p/12345678 a/21 m/Osteoporosis m/Rheumatoid arthritis`
 * `add -sp n/Jane p/73331515 s/Dermatologist l/Ang Mo Kio`
 
-### Listing patient and specialist records: `list`
+### Listing patient or specialist records: `list`
 
 Shows a list of all patients or specialists in stored records.
 
@@ -97,28 +100,11 @@ Examples:
 * `list -pa` Lists all patients in records.
 * `list -sp` Lists all specialists in records.
 
-### Editing a person : `edit`
-
-Edits an existing person in the address book.
-
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
-
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
-
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-
 ### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find -PERSON_TYPE KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -128,27 +114,26 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find -pa John` returns the patient `john` and the patient `John Doe`
+* `find -sp alex david` returns the specialists `Alex Yeoh` and `David Li`<br>
 
-### Deleting a person : `delete`
+### Deleting a patient or specialist : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified patient or specialist from the stored records.
 
-Format: `delete INDEX`
+Format: `delete -PERSON_TYPE INDEX`
 
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive integer** 1, 2, 3, …​ with a maximum value of the list size.
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list -pa` followed by `delete -pa 2` deletes the 2nd patient in the listed patients. 
+* `find -sp Betsy` followed by `delete -sp 1` deletes the 1st specialist from the specialists listed in the `find` command.
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from the stored records.
 
 Format: `clear`
 
@@ -164,15 +149,11 @@ The patient and specialist data will automatically be saved to the device’s ha
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+DoConnekPro data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
+If your changes to the data file makes its format invalid, DoConnekPro will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </div>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 ### UI mock-up :
 
@@ -200,8 +181,7 @@ Action | Format, Examples
 **Add (patient)** | `add -pa n/NAME p/PHONE_NUMBER a/AGE [m/MEDICAL_HISTORY]...` <br> e.g., `add -pa n/John p/12345678 a/21 m/Osteoporosis m/Rheumatoid arthritis`
 **Add (specialist)** | `add -sp n/NAME p/PHONE_NUMBER s/SPECIALISATION l/LOCATION` <br> e.g., `add -sp n/Jane p/73331515 s/Dermatologist l/Ang Mo Kio`
 **Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
+**Delete** | `delete -PERSON_TYPE INDEX`<br> e.g., `delete -pa 3`
+**Find** | `find -PERSON_TYPE KEYWORD [MORE_KEYWORDS]`<br> e.g., `find -pa James Jake`
+**List** | `list -pa`
 **Help** | `help`
