@@ -21,7 +21,7 @@ Given below are my contributions to the project.
     * User Guide:
         * Complete user guide for deleting data.
     * Developer Guide:
-        * Complete 8 user cases.
+        * Complete 8 use cases.
 
 * **Team-based tasks**:
     * to be added soon
