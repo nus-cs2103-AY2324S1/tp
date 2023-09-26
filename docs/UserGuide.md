@@ -127,21 +127,24 @@ Format: `search [KEYWORD]`
 
 Examples:
 * `search Yuan` returns `Chuan Yuan` and `Li Yuan`<br>
-  ![result for 'search Yuan'](images/searchYuanResult.png)
+  ![result for 'search Yuan'](images/ug_images/searchYuanResult.png)
 
-### Deleting a person : `delete`
+### Deleting data : `delete`
 
-Deletes the specified person from the address book.
+Deletes data of a specified student.
 
-Format: `delete INDEX`
+Format: `delete n/[NAME]` or `delete e/[EMAIL]`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Deletes the person with the specified `NAME` or `EMAIL`.
+* `NAME`: The deletion is case-insensitive. e.g `joe` will match `Joe`.
+* `EMAIL`: username@domain
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `delete n/John Doe`
+* `delete e/johndoe@gmail.com` 
+<br></br>
+* `delete n/Chuan Yuan` deletes student data that contains name `Chuan Yuan`
+  ![result for 'delete Chuan Yuan'](images/ug_images/deleteChuanYuanResult.png)
 
 ### Clearing all entries : `clear`
 
