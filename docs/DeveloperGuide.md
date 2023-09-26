@@ -321,7 +321,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 3a. The given parameters are invalid
+* 3a. The given parameters are invalid.
 
   * 3a1. DoConnek Pro shows an error message.
 
