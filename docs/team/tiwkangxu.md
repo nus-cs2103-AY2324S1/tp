@@ -21,7 +21,11 @@ Given below are my contributions to the project.
     * User Guide:
         * to be added soon
     * Developer Guide:
+<<<<<<< Updated upstream
         * to be added soon
+=======
+        * Complete 8 use cases.
+>>>>>>> Stashed changes
 
 * **Team-based tasks**:
     * to be added soon
