@@ -19,15 +19,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Andre Sim
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/fallman2.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/fallman2)]
+[[portfolio](team/fallman2.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Team Member
+* Responsibilities: Filtering by Tags
 
 ### Johnny Doe
 
