@@ -88,7 +88,7 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-### Listing patient and specialist records: `list`
+### Listing patient or specialist records: `list`
 
 Shows a list of all patients or specialists in stored records.
 
@@ -115,7 +115,7 @@ Examples:
 * `find -pa John` returns the patient `john` and the patient `John Doe`
 * `find -sp alex david` returns the specialists `Alex Yeoh` and `David Li`<br>
 
-### Deleting a patient and specialist : `delete`
+### Deleting a patient or specialist : `delete`
 
 Deletes the specified patient or specialist from the stored records.
 
