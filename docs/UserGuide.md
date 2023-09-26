@@ -71,7 +71,6 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
-
 ### Adding a person: `add`
 
 Adds a person to the address book.
@@ -168,6 +167,51 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 ### Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
+
+### Entering times
+
+Accept multiple date formats
+
+Example usage: add interview with Naruto time/ 12/03/2023 3pm
+
+Format: `time/ <Accepted Time Format(see list for a list of accepted time formats)>`
+
+List of accepted date formats:
+* Day, Month & Year formats(only DD*MM*YY/YYYY formats accepted):
+  * 12/03/2023
+  *  12/03/23
+  *  12/03/2023 5pm
+  *  12/03/2023 1700
+  *  12/03/2023 5.03pm
+  *  12/03/23 5pm
+  *  12-03-2023
+  *  12-03-2023 5pm
+  *  12-03-23
+  *  12-03-23 5pm
+  *  12th December 2023
+  *  12th December 2023 5pm
+* Day & Month formats
+  * 12/03
+  *  12/03 5pm
+  *  12-03 5pm
+  *  12-03
+  *  12th December
+  *  12th December 5pm
+  *  12th Dec
+  *  12th Dec 5pm
+* Day formats
+  *  Mon/tues/wed/…/sun
+  *  Monday/Tuesday/Wednesday/…/Sunday
+  *  Today
+  *  Tomorrow
+  *  Next week
+  *  Next month
+
+Other features:
+  * When the user enters the date properly: `added <interview description> at <time>`
+  * When the user does not input the date properly: `“Oops! Please enter a valid date String!”`
+  * When there is an interview clash: `“Oops! You have an <insert interview object> scheduled at <from date & by date>`
+
 
 --------------------------------------------------------------------------------------------------------------------
 
