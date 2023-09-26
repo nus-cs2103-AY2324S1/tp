@@ -257,7 +257,7 @@ _{Explain here how the data archiving feature will be implemented}_
 ### Product scope
 
 **Target user profile**:
-The targets users...
+The target users...
 
 * are management staff at a General Practitioner's Clinic
 * need to keep track of the clinic's patients' details
