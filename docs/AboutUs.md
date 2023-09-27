@@ -11,7 +11,7 @@ This project was done by a team of 4 members.
 
 ### Li Hongguang
 
-<img src="images/hongguang.png" width="200px">
+<img src="images/lihongguang00.png" width="200px">
 
 [[github](https://github.com/lihongguang00)]
 [[portfolio](team/johndoe.md)]
@@ -28,14 +28,15 @@ This project was done by a team of 4 members.
 * Role: Team Member
 * Responsibilities: Filtering by Tags
 
-### Johnny Doe
+### Low Jun Hong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/junhonglow.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/junhonglow)]
+[[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: TBD
 
 ### Jean Doe
 
