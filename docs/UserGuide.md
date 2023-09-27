@@ -4,200 +4,432 @@
   pageNav: 3
 ---
 
-# AB-3 User Guide
+# Staff-Snap User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+## User Interface Guide
 
-<!-- * Table of Contents -->
-<page-nav-print />
+![User Interface Guide Example](./images/User Interface Guide.png)
 
---------------------------------------------------------------------------------------------------------------------
-
-## Quick start
-
-1. Ensure you have Java `11` or above installed in your Computer.
-
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
-
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
-
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
-
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
-
-   * `list` : Lists all contacts.
-
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
-
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
-
-   * `clear` : Deletes all contacts.
-
-   * `exit` : Exits the app.
-
-1. Refer to the [Features](#features) below for details of each command.
-
---------------------------------------------------------------------------------------------------------------------
+## Notation Guide
+Here are some conventions used in this guide when describing the commands:
+Words in `UPPER_CASE` are the parameters to be supplied by the user.
+Items in square brackets are optional.
+Parameters can be in any order.
+Extraneous parameters for commands that do not take in parameters such as `help`, `list`, `clear`, `exit` will be ignored.
 
 ## Features
+---
 
-<box type="info" seamless>
+### add : Adding a new employee entry
 
-**Notes about the command format:**<br>
+Add a new employee entry to the current list.
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+Format: `add n/NAME id/IDENTIFIER d/DEPARTMENT j/JOB_TITLE s/SALARY sd/START_DATE f/IS_FULL_TIME`
 
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+Example:
+`add n/John Doe id/S7891234A d/Marketing j/marketing associate s/1600 sd/2023-09-18 f/true
+`
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+Acceptable values for each parameter:
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* `NAME` : non-empty string
+* `IDENTIFIER` : string of length 9
+* `DEPARTMENT` : must be one of the following strings below.
+  * marketing
+  * finance
+  * operations
+  * hr
+* `JOB_TITLE` : must be one of the following strings below.
+  * hr manager
+  * assistant hr manager
+  * hr associate
+  * head chef
+  * sous chef
+  * kitchen helper
+  * cleaner
+  * server
+  * restaurant manager
+  * assistant restaurant manager
+  * accounting manager
+  * assistant accounting manager
+  * accounting associate
+  * marketing manager
+  * assistant marketing manager
+  * marketing associate
+* `SALARY` : non-negative integer value
+* `START_DATE` : valid date in the format of YYYY-MM-DD
+* `IS_FULL_TIME` : true or false
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+Expected output when the command succeeds:
+* Response Area shows: “Added employee NAME successfully.”
+* Working Area shows the updated list of employees
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</box>
+Expected output when the command fails:  
+* Incorrect number of parameters: “The number of input parameters is incorrect. The command format should be `add n/NAME id/IDENTIFIER d/DEPARTMENT j/JOB_TITLE s/SALARY sd/START_DATE f/IS_FULL_TIME`.”
+* Non-unique identifier: “Invalid value for `IDENTIFIER`. Employee with that identifier already exists.”
+* Negative salary: “Invalid value for `SALARY`. Salary value cannot be negative.”
+* Invalid identifier : “Invalid value for `IDENTIFIER`. The format should be XXXXXXXXX.”
+* Invalid startDate: “Invalid value for `START_DATE`. The format should be YYYY-MM-DD.”
+* Invalid isFullTime: “Invalid value for `IS_FULL_TIME`.The value should either be true or false.”
+* Invalid department: “Invalid value for `DEPARTMENT`. The value should be marketing/finance/operations/hr.”
 
-### Viewing help : `help`
+UI mockup:
 
-Shows a message explaning how to access the help page.
+![Add UI Mockup](./images/Add.png)
 
-![help message](images/helpMessage.png)
+---
+### edit : Editing an employee entry
 
-Format: `help`
+Edit the details of a current employee
 
+Format: `edit i/INDEX [n/NAME] [id/IDENTIFIER] [d/DEPARTMENT] [j/JOB_TITLE] [s/SALARY] [sd/START_DATE] [f/IS_FULL_TIME]`
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
+* At least one of the optional fields must be provided.
 
-### Adding a person: `add`
+Example:
+* `edit i/1 s/1500 sd/2023-09-20`
 
-Adds a person to the address book.
+Acceptable value for each parameter:
+* `INDEX` : positive integer not larger than the number of employees
+* `NAME` : non-empty string
+* `IDENTIFIER` : string of length 9
+* `DEPARTMENT` : must be one of the following strings below.
+  * marketing
+  * finance
+  * operations
+  * hr
+* `JOB_TITLE` : must be one of the following strings below.
+  * hr manager
+  * assistant hr manager
+  * hr associate
+  * head chef
+  * sous chef
+  * kitchen helper
+  * cleaner
+  * server
+  * restaurant manager
+  * assistant restaurant manager
+  * accounting manager
+  * assistant accounting manager
+  * accounting associate
+  * marketing manager
+  * assistant marketing manager
+  * marketing associate
+* `SALARY` : non-negative integer value
+* `START_DATE` : valid date in the format of YYYY-MM-DD
+* `IS_FULL_TIME` : true or false
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Expected output when the command succeeds:
+* Response Area shows: “Updated employee NAME details successfully.”
+* Working Area shows the updated employee details
 
-<box type="tip" seamless>
+Expected output when the command fails:
+* Non-unique identifier: “Invalid value for IDENTIFIER. Employee with that identifier already exists.”
+* Negative salary: “Invalid value for SALARY. Salary value cannot be negative.”
+* Missing index: “Missing INDEX. The command format should be `edit i/INDEX [n/NAME] [id/IDENTIFIER] [d/DEPARTMENT] [j/JOB_TITLE] [s/SALARY] [sd/START_DATE] [f/IS_FULL_TIME]`.”
+* Invalid identifier: “Invalid value for IDENTIFIER. The format should be XXXXXXXXX.”
+* Invalid startDate: “Invalid value for START_DATE. The format should be YYYY-MM-DD.”
+* Invalid isFullTime: “Invalid value for IS_FULL_TIME.The value should either be true or false.”
+* Invalid index: “Invalid value for INDEX. The index should be a positive integer not larger than the number of employees.”
+* No fields provided: “Please input at least one field to update.”
+* Invalid department: “Invalid value for DEPARTMENT. The value should be marketing/finance/operations/hr.”
 
-**Tip:** A person can have any number of tags (including 0)
-</box>
+UI mockup:
+![Edit UI Mockup](./images/Edit.png)
+---
+### list : Listing all employee entries
 
-Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
-
-### Listing all persons : `list`
-
-Shows a list of all persons in the address book.
+Displays the full list of all employee entries.
 
 Format: `list`
 
-### Editing a person : `edit`
+Examples:
+* `list`
 
-Edits an existing person in the address book.
+Acceptable values for each parameter:
+* No parameters required.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Expected output when the command succeeds:
+* Response Area shows “Listed all employees.”.
+* Working Area shows the full indexed list of employees with their details.
+* If the list is empty, Response Area shows “The employee list is empty.”
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+
+Expected output when the command fails:
+* This command should never fail.
+
+UI mockup:
+![List UI Mockup](./images/List.png)
+---
+### delete : Deleting an employee entry
+
+Deletes a particular employee entry based on their index number.
+
+Format: `delete i/INDEX`
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `delete i/2` deletes the employee with index number 2
 
-### Locating persons by name: `find`
+Acceptable values for each parameter:
+* `INDEX` : positive integer not larger than the number of employees
 
-Finds persons whose names contain any of the given keywords.
+Expected output when the command succeeds:
+* Response Area shows “Deleted employee with index number `INDEX`.”
+* Working Area shows the updated list of employees with their details
+
+
+Expected output when the command fails:
+Missing index. “Missing `INDEX`. The command format should be `delete i/INDEX`”
+Invalid index: “Invalid `INDEX`. The index should be a positive integer not larger than the number of employees.”
+
+UI mockup:
+![Delete UI Mockup](./images/Delete.png)
+
+---
+### find : Finding an employee by name
+
+Find employees whose name contains a particular keyword.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* The search is case-insensitive, e.g. `LEE` will return both `lee` and `Lee`
+* The order of the keywords does not matter. e.g. `Aly Han` will match `Han Aly`
+* Only the employee name is searched
+* Any person whose name contains the sequence of characters given as the keyword will be given as a result. e.g. `Ed` will match both `Edward` and `Ed`
+* Persons matching at least one keyword will be returned (i.e. OR search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find CARL` finds any employee whose name contains “carl”
+* `find CARL YANG` finds any employee whose name contains “carl” or contains “yang”
 
-### Deleting a person : `delete`
+Acceptable values for each parameter:
+* KEYWORD : a string with at least 1 character
+* MORE_KEYWORDS : a string with at least 1 character, optional to have, must be preceded by a keyword
 
-Deletes the specified person from the address book.
+Expected output when the command succeeds:
+* Response Area shows “Search results for: `KEYWORD [MORE_KEYWORDS]`”
+* Working Area shows list of persons matching the name shown
+* If no matches are found, Response Area shows “No matches found.”
 
-Format: `delete INDEX`
+Expected output when the command fails:
+Missing keyword: “Missing `KEYWORD`. Please input a keyword.”
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+UI mockup:
+![Find UI Mockup](./images/Find.png)
+---
+### sort: Sorting employees by descriptor
+
+Sorts the employee list by using a particular descriptor as the sorting criteria.
+
+Format: `sort d/DESCRIPTOR`
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `sort name` sorts the list of employees by name alphabetically
+* `sort department` sorts the list of employees by department alphabetically
+* `sort job_title` sorts the list of employees by job_title alphabetically
+* `sort salary` sorts the list of employees by salary in ascending order
+* `sort start_date` sorts the list of employees by start date chronologically
+* `sort is_full_time` sorts the list of employees by full timers then part timers
 
-### Clearing all entries : `clear`
+Acceptable values for each parameter:
+* `DESCRIPTOR` : must be one of the following strings below.
+  * name
+  * department
+  * job_title
+  * salary
+  * start_date
+  * is_full_time
 
-Clears all entries from the address book.
+Expected output when the command succeeds:
+* Response Area shows success message “List of employees sorted by `DESCRIPTOR`.”
+* Working Area shows the list of employees sorted by the descriptor chosen.
+
+Expected output when the command fails:
+* Missing descriptor: “Missing `DESCRIPTOR`. Please input a descriptor to sort by.”
+* Invalid descriptor: “Invalid value for `DESCRIPTOR`. Please input a valid descriptor from this list: `name / department / job_title / salary / start_date / is_full_time`.”
+
+UI mockup:
+![Sort UI Mockup](./images/Sort.png)
+---
+
+
+### filter: Filtering employees by descriptor criteria
+
+Filters the employee list by using a particular descriptor criteria. Returns a list of employees that satisfies the specified criterion.
+
+Format: `filter d/DESCRIPTOR c/CRITERIA`
+* DESCRIPTOR: the descriptor of the employee we want to filter by
+* CRITERIA: the criteria to apply to the chosen descriptor
+
+There are 3 types of subcommands under the `filter` function. You can filter the list of employees based on a criteria for their `department`, or `job_title`, or `is_full_time`.
+
+Below we provide a more granular description for each subcommand functionality:
+
+---
+#### Filtering based on department
+
+Format: `filter d/department c/DEPARTMENT_NAME`
+
+Examples:
+* `filter d/department c/marketing` filters to show only employees in the marketing department
+* `filter d/department c/operations` filters to show only employees in the operations department
+
+Acceptable value for each parameter:
+* `DEPARTMENT_NAME` : must be one of the following strings below.
+  * marketing
+  * finance
+  * operations
+  * hr
+---
+
+#### Filtering based on job_title
+
+Format: `filter d/job_title c/JOB_TITLE`
+
+Examples:
+* `filter d/job_title c/server` filters to show only employees who are servers
+* `filter d/job_title c/assistant manager` filters to show only employees who are assistant managers
+
+Acceptable value for each parameter:
+* `JOB_TITLE` : must be one of the following strings below.
+  * hr manager
+  * assistant hr manager
+  * hr associate
+  * head chef
+  * sous chef
+  * kitchen helper
+  * cleaner
+  * server
+  * restaurant manager
+  * assistant restaurant manager
+  * accounting manager
+  * assistant accounting manager
+  * accounting associate
+  * marketing manager
+  * assistant marketing manager
+  * marketing associate
+---
+
+
+#### Filtering based on is_full_time
+
+Format: `filter d/is_full_time c/IS_FULL_TIME`
+
+Examples:
+* `filter d/is_full_time c/true` filters to show only full time employees
+* `filter d/is_full_time c/false` filters to show only part time employees
+
+Acceptable value for each parameter:
+* `IS_FULL_TIME` : must be one of the following strings below.
+  * true
+  * false
+---
+
+Expected output when the command succeeds:
+* Working area shows list of employees filtered by the criteria used
+* Response area shows “Employees filtered by DESCRIPTOR CRITERIA”
+
+Expected output when the command fails:
+* No descriptor given: “Please input a descriptor to filter by.”
+* No criteria given: “Please input a criteria to filter by.”
+* Invalid descriptor: “Invalid value for `DESCRIPTOR`. Please input a valid descriptor from this list: `name / department / job_title / salary / start_date / is_full_time`.”
+* Invalid criteria: “Invalid value for `CRITERIA`. Please input a valid criteria.”
+
+UI mockup:
+
+![Filter UI Mockup](./images/Filter.png)
+
+---
+### Saving the data
+
+Automatically saves the data to a local file whenever there is a change to the employee list
+
+Format: no command required. The data will be automatically saved to a local file every time one of these command is executed:
+* `add`
+* `edit`
+* `delete`
+
+Examples:
+* After adding a new employee, the data file is updated
+* After deleting an employee, the data file is updated
+
+Acceptable values for each parameter:
+* No parameters are required as there is no explicit command needed.
+
+Expected output when the command succeeds:
+* There is no output as there is no explicit command to execute.
+
+Expected output when the command fails:
+* There is no output as there is no explicit command to execute.
+
+UI mockup:
+There is no UI to display for this function.
+---
+### clear : Purging all employee entries
+
+Clears all the current data stored in the system.
 
 Format: `clear`
 
-### Exiting the program : `exit`
+Examples:
+* `clear`: this command initiates the data clearing process.
+
+Acceptable values for each parameter:
+* No parameters required.
+
+Expected output when the command succeeds:
+* Response Area shows “All data cleared.”
+* Working Area shows empty employee list.
+
+
+Expected output when the command fails:
+* This command should never fail.
+
+UI mockup:
+![Clear UI Mockup](./images/Clear.png)
+
+---
+### help : Listing all commands
+
+Displays the full list of all possible commands and its functions.
+
+Format: `help`
+
+Example:
+* `help`
+
+Acceptable values for each parameter:
+* No parameters required.
+
+Expected output when the command succeeds:
+* A popup window containing the URL to the user guide will be shown to allow users to navigate to the URL.
+
+
+Expected output when the command fails:
+* This command should never fail.
+
+UI mockup:
+![Help UI Mockup](./images/Help.png)
+
+---
+### exit : Exiting the program
 
 Exits the program.
 
 Format: `exit`
 
-### Saving the data
+Example:
+* `exit`
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+Acceptable values for each parameter:
+* No parameters required.
 
-### Editing the data file
+Expected output when the command succeeds:
+* The program closes.
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<box type="warning" seamless>
+Expected output when the command fails:
+This command should never fail.
 
-**Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
-</box>
+UI mockup:
+There is no UI to display for this command.
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
---------------------------------------------------------------------------------------------------------------------
-
-## FAQ
-
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
-
---------------------------------------------------------------------------------------------------------------------
-
-## Known issues
-
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-
---------------------------------------------------------------------------------------------------------------------
-
-## Command summary
-
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**   | `list`
-**Help**   | `help`
