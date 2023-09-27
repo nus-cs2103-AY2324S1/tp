@@ -31,11 +31,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role:
 * Responsibilities:
 
-### Johnny Doe
+### Lin Chenyu
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/linchenyu2030s.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/linchenyu2030s)] 
+[[portfolio](team/linchenyu2030s.md)]
 
 * Role:
 * Responsibilities:
