@@ -284,12 +284,36 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
 |----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| `* * *`  | As an admin staff           | I can insert new individual data into AB3 | so that I can gain new insights into the market by expanding student list|
+| `* * *`  | As an admin staff           | I can delete data from AB3,  |  so that I can gain new insights into the market by removing irrelevant data|
+| `* * *`  | As an admin staff                          | I can edit student information        | so that the data is correctly updated     |
+| `* * *`  | As an admin staff                         | I can view student information     | so that I can know the details of students|
+| `* *`    | As an admin staff                         | I can import data from various sources | so that it is more convenient to add data to the app |
+| `* *`    | As an admin staff                        | I can save all student data into storage / database | so that I can access it again in the future |
+| `* *`    | As an admin staff                          | I can archieve data | so that my data will be more organized  |
+| `* *`    | As an admin staff                          | I can select multiple data from student list | so that I can perform an action on these data |
+| `* *`    | As an admin staff                          | I can filter student data by date modified | so that i can distinguish outdated data |
+| `* *`    | As an admin staff                          | I can filter student data by demographics | so that I can easily search for student by demographics  |
+| `* *`    | As an admin staff                         | I can filter student data by location   | so that I can easily search for student by location   |
+| `* *`    | As an admin staff                      | I can sort student data by ascending / descending   | so that I can easily search for student   |
+| `* *`    | As an admin staff    | I can view the total number of students in the same age group   | so that I can tailor my marketing strategies by age group |
+| `* *`    | As an admin staff           | I can view the total number of students with same gender   | so that I can tailor my marketing strategies by gender |
+| `* *`    | As an admin staff      | I can view the total number of students in the same location   | so that I can tailor my marketing strategies by location.   |
+| `* *`    | As an admin staff       | I can view the total number of students who took the same subject   | so that I can tailor my marketing strategies by subject taken   |
+| `* *`    | As an admin staff                 | I can see the total number of students    | so that I can know how many people are in our tuition center   |
+| `* *`    | As a new user of this application            | I can read the user guide   | so that I can familiarize myself with  this application   |
+| `* *`    | As a new user of this application               | I can easily download and use this application   | so that I do not have to spend too much time and effort in figuring out setup settings   |
+| `* *`    | As a new user            | I have access to help commadn / help page   | so that I can get help for the problem faced   |
+| `* *`    | As an admin staff             | I can visualize data in different charts   | so that I can easily view the overall trend of the market   |
+| `* *`    | As an admin staff                         | I can get the correlation between two factors that are related to my service   | so that I can have a quantitative analysis on the relationship between two factors related to my service  |
+| `* *`    | As an admin staff                         | I can see the five number summary (min, Q1, mean, Q3, max) of my user data   | so that I can compare different groups of students' data   |
+| `* *`    | As an admin staff             | I can export data as charts'graphical representations    | so that I can present my insights to my colleagues   |
+| `* *`    | As an admin staff                        | I can view the trend of student attributes   | so that I can make predictions to target potential students   |
+| `* *`    | As an admin staff               | I can save historical analyzed statistics   | so that I can learn form my past success and failure to imporve future strategies   |
+| `* `    | As an admin staff               | I can collect data on online engagement   | so that I can conduct further analysis on digital marketing strategies   |
+| `* `    | As an experienced user                | I can use shortcuts to perform tasks in the app   | so that I save time which I can spend on other activities   |
+| `* `    | As an admin staff                | I can collect feedback(s) from my students.   | so that I can improve my service further based on those feedback(s)   |
+| `* `    | As an admin staff                         | I can schedule my marketing campaigns and events   | so that I know when is my marketing events   |
 
 *{More to be added}*
 
@@ -496,7 +520,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+3.  A user with above-average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  The students' data format should persistent.
+5.  The application should be usable by a novice who has never interacted with command line interface before.
+6.  The project is expected to adhere to a schedule that delivers several features implemented by 4 to 5 team members every week.
 
 *{More to be added}*
 
@@ -504,6 +531,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Student data**: Name, phone number, email, address, tag for each student
 
 --------------------------------------------------------------------------------------------------------------------
 
