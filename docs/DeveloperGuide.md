@@ -290,9 +290,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list persons
-2.  DoConnek Pro shows a list of persons
+2.  System shows a list of persons
 3.  User requests to delete a specific person in the list
-4.  DoConnek Pro deletes the person
+4.  System deletes the person
 
     Use case ends.
 
@@ -304,7 +304,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. DoConnek Pro shows an error message.
+    * 3a1. System shows an error message.
 
       Use case resumes at step 2.
 
@@ -312,10 +312,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User searches list to check if patient is already in DoConnek Pro
-2. DoConnek Pro shows that there are no entries matching the patient's name
-3. User adds patient to DoConnek Pro
-2. DoConnek Pro confirms that the person has been added
+1. User searches list to check if patient is already in the system
+2. System shows that there are no entries matching the patient's name
+3. User adds patient to the system
+4. System confirms that the person has been added
 
     Use case ends.
 
@@ -323,7 +323,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given parameters are invalid.
 
-  * 3a1. DoConnek Pro shows an error message.
+  * 3a1. System shows an error message.
 
     Use case resumes at step 2.
 
