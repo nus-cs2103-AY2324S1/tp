@@ -531,7 +531,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Student data** Name, phone number, email, address, tag for each student
+* **Student data**: Name, phone number, email, address, tag for each student
 
 --------------------------------------------------------------------------------------------------------------------
 
