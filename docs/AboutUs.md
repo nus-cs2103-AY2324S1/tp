@@ -41,12 +41,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role:
 * Responsibilities:
 
-### Jean Doe
+### Ng Chuan Xin
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/chuanxinng.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/ChuanXinNg)]
+[[portfolio](team/chuanxinng.md)]
 
 * Role:
 * Responsibilities:
