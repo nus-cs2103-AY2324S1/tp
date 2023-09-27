@@ -96,22 +96,31 @@ Shows a list of all persons in the address book.
 
 Format: `list`
 
-### Editing a person : `edit`
+### Editing a student's data : `edit`
 
-Edits an existing person in the address book.
+Edits an existing student's data in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: 1. edit n/[NAME] or edit e/[EMAIL] (firstly specify for which student you want to edit)
+        2. e/[NEW_EMAIL] or n/[NEW_NAME] or a/[NEW_ADDRESS] or t/[NEW_TAG]  (change a particular field)
+        3. n/[NEW_NAME] e/[NEW_EMAIL]  or e/[NEW_EMAIL] t/[NEW_TAG] a/[NEW_ADRESS] (change multiple fields)
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the person with a specific name or email.
+  - edit n/[NAME] 
+  - edit e/[EMAIL]
+* After the prompt “OK! Now you can edit NAME”
+  - e/[NEW_EMAIL]
+  - n/[NEW_NAME]
+  - a/[NEW_ADDRESS]
+  - t/[NEW_TAG]
+* Or you change multiple fields within one command:
+  - n/[NEW_NAME] e/[NEW_EMAIL] 
+  - e/[NEW_EMAIL] t/[NEW_TAG] a/[NEW_ADRESS]
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit n/joe` specify that you want to do edit operation on the student "joe", if there are more than one student named "joe", you will be prompted to specify student email further: `edit n/joe123@example.com`.
+*  `n/joey e/joey123@example.com` Edits the name and email of the student you specified earlier to be `joey` and `joey123@example.com`.
 
 ### Searching for data : `search`
 
