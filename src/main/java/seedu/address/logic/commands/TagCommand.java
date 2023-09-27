@@ -1,14 +1,17 @@
 package seedu.address.logic.commands;
 
-import seedu.address.model.Model;
-import seedu.address.logic.commands.exceptions.CommandException;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+
+import java.util.List;
+import java.util.Set;
+
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
-import java.util.*;
 
 /**
  * Changes the tags of an existing person in the address book.
