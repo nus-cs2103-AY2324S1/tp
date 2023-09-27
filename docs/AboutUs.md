@@ -18,7 +18,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/johndoe.md)]
 
 * Role: Documentation IC
-* Responsibilities: 
+* Responsibilities:
 
 ### Chen Zhiruo
 
@@ -37,7 +37,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
 
 * Role: Scheduling and Tracking IC
-* Responsibilities: 
+* Responsibilities:
 
 ### Miguel Foo Ming Yew
 
