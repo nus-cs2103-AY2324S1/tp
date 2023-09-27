@@ -313,6 +313,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: Exit the program**
+
+**MSS**
+
+1.  User is done with all operations
+2.  User requests to exit the program
+3.  System saves current data and program ends
+
+    Use case ends.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
