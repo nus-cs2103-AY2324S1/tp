@@ -317,9 +317,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User is done with all operations
-2.  User requests to exit the program
-3.  System saves current data and program ends
+1.  User requests to exit the program
+2.  System saves current data and program ends
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. System detects invalid request format.
+
+  * 1a1. System shows an error message.
 
     Use case ends.
 
