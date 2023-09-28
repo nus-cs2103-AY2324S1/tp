@@ -7,55 +7,71 @@
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us at the email `craigton.lian[at]gmail.com`
 
 ## Project team
 
-### John Doe
+### Craigton Lian Ee John
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/craigtonlian.png" width="200px" height = "200px" style = "border-radius: 50%;">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
 
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
+* Links: 
+  [[github](https://github.com/craigtonlian)]
+  [[portfolio](team/craigtonlian.md)]
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities:
+  * Overall coordination
+  * Ensure proper testing
+  * Version and release control
+  * Repo maintenance and integration
 
-### Jean Doe
+### Austin Huang De Yu
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/austinhuang1203.png" width="200px" height = "200px" style = "border-radius: 50%;">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
+* Links: 
+  [[github](http://github.com/austinhuang1203)]
+  [[portfolio](team/austinhuang1203.md)]
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities:
+  * Review coding standards
 
-### James Doe
+### Ivan Lee Kai Kiat
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ivanleekk.png" width="200px" height = "200px" style = "border-radius: 50%;">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
 
+* Links:
+  [[github](http://github.com/ivanleekk)]
+  [[portfolio](team/ivanleekk.md)]
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities:
+  * Monitor deadlines
+  * Format deliverables
+
+### Celestine Tan Yen Tong
+
+<img src="images/celestinetan03.png" width="200px" height = "200px" style = "border-radius: 50%;">
+
+
+* Links:
+  [[github](http://github.com/celestinetan03)]
+  [[portfolio](team/celestinetan03.md)]
+* Role: Developer
+* Responsibilities:
+  * Define and assign tasks
+  * Maintain issue tracker
+  * Manage project board
+
+### Wang Jingting
+
+<img src="images/jingting1412.png" width="200px" height = "200px" style = "border-radius: 50%;">
+
+
+* Links:
+  [[github](http://github.com/jingting1412)]
+  [[portfolio](team/jingting1412.md)]
+* Role: Developer
+* Responsibilities:
+  * Coordinate documentation
