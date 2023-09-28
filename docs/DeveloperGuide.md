@@ -288,16 +288,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `DoConnek Pro` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: Delete a person**
 
 **MSS**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  System shows a list of persons
 3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+4.  System deletes the person
 
     Use case ends.
 
@@ -309,9 +309,63 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. System shows an error message.
 
       Use case resumes at step 2.
+
+**Use case: Add a patient**
+
+**MSS**
+
+1. User searches list to check if patient is already in the system
+2. System shows that there are no entries matching the patient's name
+3. User adds patient to the system
+4. System confirms that the person has been added
+
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The given parameters are invalid.
+
+  * 3a1. System shows an error message.
+
+    Use case resumes at step 2.
+
+**Use case: Listing all patients**
+
+**MSS**
+
+1. User requests to list all patients
+2. System shows a list of all patients stored 
+   
+    Use case ends.
+
+**Extensions**
+
+* 1a. System detects invalid request format
+
+    * 1a1. System shows an error message.
+  
+      Use case ends.
+
+**Use case: Listing all specialists**
+
+**MSS**
+
+1. User requests to list all specialists
+2. System shows a list of all specialists stored 
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. System detects invalid request format
+
+    * 1a1. System shows an error message.
+
+      Use case ends.
 
 **Use case: Exit the program**
 
@@ -319,10 +373,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to exit the program
 2.  System exits the program
-
-    Use case ends.
-
-**Extensions**
 
 * 1a. System detects invalid request format.
 
