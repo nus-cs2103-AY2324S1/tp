@@ -144,7 +144,7 @@ Examples:
 
 Clears all entries from the address book.
 
-Format: `clear` 
+Format: `clear`
 
 ![clear](images/clear.png)
 
