@@ -135,13 +135,17 @@ Examples:
 
 Clears all entries from the address book.
 
-Format: `clear`
+Format: `clear` 
+
+![clear](images/clear.png)
 
 ### Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
+
+![exit](images/exit.png)
 
 ### Saving the data
 
@@ -185,3 +189,4 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
+**Exit** | `exit`
