@@ -19,14 +19,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Koh Kai Jie
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/kaijie.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[homepage](https://www.linkedin.com/in/koh-kai-jie-1064b728b/)]
+[[github](http://github.com/kohkaijie)]
+[[portfolio](team/kaijie.md)]
 
-* Role: Team Lead
+* Role: Developer
 * Responsibilities: UI
 
 ### Johnny Doe
