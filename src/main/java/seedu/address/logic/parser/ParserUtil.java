@@ -12,6 +12,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.NextOfKinName;
+import seedu.address.model.person.NextOfKinPhone;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -93,6 +95,34 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+    /**
+     * Parses a {@code String nokName} into a {@code NextOfKinName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code nokName} is invalid.
+     */
+    public static NextOfKinName parseNextOfKinName(String nokName) throws ParseException {
+        requireNonNull(nokName);
+        String trimmedNokName = nokName.trim();
+        if (!NextOfKinName.isValidName(trimmedNokName)) {
+            throw new ParseException(NextOfKinName.MESSAGE_CONSTRAINTS);
+        }
+        return new NextOfKinName(trimmedNokName);
+    }
+    /**
+     * Parses a {@code String nokPhone} into an {@code NextOfKinPhone}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code nokPhone} is invalid.
+     */
+    public static NextOfKinPhone parseNextOfKinPhone(String nokPhone) throws ParseException {
+        requireNonNull(nokPhone);
+        String trimmedNokPhone = nokPhone.trim();
+        if (!NextOfKinPhone.isValidPhone(trimmedNokPhone)) {
+            throw new ParseException(NextOfKinPhone.MESSAGE_CONSTRAINTS);
+        }
+        return new NextOfKinPhone(trimmedNokPhone);
     }
 
     /**
