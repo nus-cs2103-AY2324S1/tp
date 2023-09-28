@@ -43,6 +43,10 @@ public class Messages {
                 .append(person.getEmail())
                 .append("; Address: ")
                 .append(person.getAddress())
+                .append("; Next-of-kin Name: ")
+                .append(person.getNextOfKinName())
+                .append("; Next-of-kin Phone: ")
+                .append(person.getNextOfKinPhone())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
         return builder.toString();

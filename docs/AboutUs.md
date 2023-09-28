@@ -50,10 +50,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Alyssa Png Kai Wen
 
-<img src="images/AlyssaPng.png" width="200px">
+<img src="images/alyssapng.png" width="200px">
 
 [[github](https://github.com/AlyssaPng)]
-[[portfolio](team/AlyssaPng.md)]
+[[portfolio](team/alyssapng.md)]
 
 * Role: Developer
 * Responsibilities: UI + Debugging
