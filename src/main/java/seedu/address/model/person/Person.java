@@ -23,17 +23,22 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private final NextOfKinName nokName;
+    private final NextOfKinPhone nokPhone;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, NextOfKinName nokName,
+                  NextOfKinPhone nokPhone, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, nokName, nokPhone, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.nokName = nokName;
+        this.nokPhone = nokPhone;
         this.tags.addAll(tags);
     }
 
@@ -51,6 +56,12 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+    public NextOfKinName getNextOfKinName() {
+        return nokName;
+    }
+    public NextOfKinPhone getNextOfKinPhone() {
+        return nokPhone;
     }
 
     /**
@@ -94,13 +105,15 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
+                && nokName.equals(otherPerson.nokName)
+                && nokPhone.equals(otherPerson.nokPhone)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, nokName, nokPhone, tags);
     }
 
     @Override
@@ -110,6 +123,8 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("nextOfKinName", nokName)
+                .add("nextOfKinPhone", nokPhone)
                 .add("tags", tags)
                 .toString();
     }

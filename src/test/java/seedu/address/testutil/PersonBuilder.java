@@ -6,6 +6,8 @@ import java.util.Set;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.NextOfKinName;
+import seedu.address.model.person.NextOfKinPhone;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -20,11 +22,15 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_NOK_NAME = "Adam Bee";
+    public static final String DEFAULT_NOK_PHONE = "85555255";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
+    private NextOfKinName nokName;
+    private NextOfKinPhone nokPhone;
     private Set<Tag> tags;
 
     /**
@@ -35,6 +41,8 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        nokName = new NextOfKinName(DEFAULT_NOK_NAME);
+        nokPhone = new NextOfKinPhone(DEFAULT_NOK_PHONE);
         tags = new HashSet<>();
     }
 
@@ -46,6 +54,8 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
+        nokName = personToCopy.getNextOfKinName();
+        nokPhone = personToCopy.getNextOfKinPhone();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -88,9 +98,23 @@ public class PersonBuilder {
         this.email = new Email(email);
         return this;
     }
+    /**
+     * Sets the {@code NextOfKinName} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withNextOfKinName(String nokName) {
+        this.nokName = new NextOfKinName(nokName);
+        return this;
+    }
+    /**
+     * Sets the {@code NextOfKinPhone} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withNextOfKinPhone(String nokPhone) {
+        this.nokPhone = new NextOfKinPhone(nokPhone);
+        return this;
+    }
 
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        return new Person(name, phone, email, address, nokName, nokPhone, tags);
     }
 
 }
