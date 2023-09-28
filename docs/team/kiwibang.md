@@ -14,8 +14,6 @@ Given below are my contributions to the project.
     * Justification: Different individuals have different ways of entering dates
     * Highlights: This feature increases the flexibility of the command, allowing the user to type in inputs without the input being rejected, leading to better UX.
 
-* **New Feature**: Added a history command that allows the user to navigate to previous commands using up/down keys.
-
 * **Code contributed**: [RepoSense link]()
 
 * **Project management**: `to be added soon` 
@@ -23,6 +21,3 @@ Given below are my contributions to the project.
 * **Documentation**:
     * User Guide:
         * Added documentation for the features `accepted time formats`
-      
-    * Developer Guide:
-        * Added implementation details of the `delete` feature.
