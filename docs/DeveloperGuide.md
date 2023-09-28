@@ -318,7 +318,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to exit the program
-2.  System saves current data and program ends
+2.  System exits the program
 
     Use case ends.
 
