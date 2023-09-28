@@ -15,7 +15,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[homepage](https://www.linkedin.com/in/tanveersingh10/)]
 [[github](https://github.com/tanveersingh10)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/tanveer.md)]
 
 * Role: Project Advisor
 
