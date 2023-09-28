@@ -24,7 +24,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/nicholaschia.PNG" width="200px">
 
 [[github](http://github.com/nikele2001)]
-[[portfolio](team/nicholaschia.md)]
+[[portfolio](team/nikele2001.md)]
 
 * Role: Team Lead
 * Responsibilities: UI
