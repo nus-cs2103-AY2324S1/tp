@@ -22,5 +22,3 @@ Given below are my contributions to the project.
 * **Documentation**:
     * User Guide:
         * Added documentation for the features `accepted time formats`
-  * Developer Guide:
-      * Added implementation details of the `delete` feature.
