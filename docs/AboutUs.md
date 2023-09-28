@@ -40,7 +40,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Kee Song Yang
 
-<img src="images/s0ngyang.png.jpg" width="200px">
+<img src="images/s0ngyang.png" width="200px">
 
 [[github](http://github.com/s0ngyang)]
 [[portfolio](team/s0ngyang.md)]
