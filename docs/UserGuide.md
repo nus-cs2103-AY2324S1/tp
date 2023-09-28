@@ -6,7 +6,7 @@
 
 # AB-3 User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+HealthSync is a **desktop app for managing patient details, optimised for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, HealthSync can help you organise and manage patient details faster than traditional GUI apps
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -51,6 +51,12 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
+* The word `or` indicates that at least one of the fields has to be supplied by the user. The output `or` will return the above field that was supplied by the user.
+
+* [field] … indicate that multiple fields can be supplied by the user.
+
+* [field] … can be in any order.
+
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
@@ -65,6 +71,12 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
+
+### Auto Save : `nil`
+
+HealthSync data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+Format: `nil` , saving is done automatically
 
 ### Viewing help : `help`
 
@@ -156,10 +168,6 @@ Format: `clear`
 Exits the program.
 
 Format: `exit`
-
-### Saving the data
-
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
