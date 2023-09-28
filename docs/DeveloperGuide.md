@@ -322,6 +322,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. User adds patient to the system
 4. System confirms that the person has been added
 
+
     Use case ends.
 
 **Extensions**
@@ -331,10 +332,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 3a1. System shows an error message.
 
     Use case resumes at step 2.
-
-
-
-*{More to be added}*
 
 **Use case: Listing all patients**
 
@@ -369,6 +366,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. System shows an error message.
 
       Use case ends.
+
+**Use case: Exit the program**
+
+**MSS**
+
+1.  User requests to exit the program
+2.  System exits the program
+
+* 1a. System detects invalid request format.
+
+  * 1a1. System shows an error message.
+
+    Use case ends.
+
+*{More to be added}*
 
 ### Non-Functional Requirements
 
