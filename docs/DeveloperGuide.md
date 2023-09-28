@@ -288,16 +288,33 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `HouR` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add an employee**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to add a specific person
+2.  HouR adds the person to the list of employees
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The employee to be added already exists in the list.
+    * 1a1. HouR shows an error message.
+
+  Use case ends.
+
+
+**Use case: Delete an employee**
+
+**MSS**
+
+1.  User requests to list employees
+2.  HouR shows a list of employees
+3.  User requests to delete a specific employee in the list
+4.  HouR deletes the employee
 
     Use case ends.
 
@@ -309,9 +326,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. HouR shows an error message.
 
       Use case resumes at step 2.
+
+**Use case: List employees**
+
+**MSS**
+
+1.  User requests to list employees
+2.  HouR display a list of every employee that has been added
+
+    Use case ends.
+
+**Use case: Exit HouR**
+
+**MSS**
+
+1.  User requests to exit HouR
+2.  HouR exits
+
+    Use case ends.
 
 *{More to be added}*
 
