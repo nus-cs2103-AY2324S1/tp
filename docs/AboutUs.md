@@ -50,11 +50,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Ong Zhen Dong
 
 <img src="images/zd292.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](https://github.com/zd292)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
