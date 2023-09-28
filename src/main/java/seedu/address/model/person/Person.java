@@ -23,22 +23,22 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private final NextOfKinName nokName;
-    private final NextOfKinPhone nokPhone;
+    private final NextOfKinName nextOfKinName;
+    private final NextOfKinPhone nextOfKinPhone;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, NextOfKinName nokName,
-                  NextOfKinPhone nokPhone, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, nokName, nokPhone, tags);
+    public Person(Name name, Phone phone, Email email, Address address, NextOfKinName nextOfKinName,
+                  NextOfKinPhone nextOfKinPhone, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, nextOfKinName, nextOfKinPhone, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.nokName = nokName;
-        this.nokPhone = nokPhone;
+        this.nextOfKinName = nextOfKinName;
+        this.nextOfKinPhone = nextOfKinPhone;
         this.tags.addAll(tags);
     }
 
@@ -58,10 +58,10 @@ public class Person {
         return address;
     }
     public NextOfKinName getNextOfKinName() {
-        return nokName;
+        return nextOfKinName;
     }
     public NextOfKinPhone getNextOfKinPhone() {
-        return nokPhone;
+        return nextOfKinPhone;
     }
 
     /**
@@ -105,15 +105,15 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && nokName.equals(otherPerson.nokName)
-                && nokPhone.equals(otherPerson.nokPhone)
+                && nextOfKinName.equals(otherPerson.nextOfKinName)
+                && nextOfKinPhone.equals(otherPerson.nextOfKinPhone)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, nokName, nokPhone, tags);
+        return Objects.hash(name, phone, email, address, nextOfKinName, nextOfKinPhone, tags);
     }
 
     @Override
@@ -123,8 +123,8 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
-                .add("nextOfKinName", nokName)
-                .add("nextOfKinPhone", nokPhone)
+                .add("nextOfKinName", nextOfKinName)
+                .add("nextOfKinPhone", nextOfKinPhone)
                 .add("tags", tags)
                 .toString();
     }

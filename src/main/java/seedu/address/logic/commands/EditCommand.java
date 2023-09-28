@@ -4,8 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NOK_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NOK_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXT_OF_KIN_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXT_OF_KIN_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -47,8 +47,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_NOK_NAME + "NOK_NAME] "
-            + "[" + PREFIX_NOK_PHONE + "NOK_PHONE] "
+            + "[" + PREFIX_NEXT_OF_KIN_NAME + "NOK_NAME] "
+            + "[" + PREFIX_NEXT_OF_KIN_PHONE + "NOK_PHONE] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -146,8 +146,8 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
-        private NextOfKinName nokName;
-        private NextOfKinPhone nokPhone;
+        private NextOfKinName nextOfKinName;
+        private NextOfKinPhone nextOfKinPhone;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -161,8 +161,8 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
-            setNextOfKinName(toCopy.nokName);
-            setNextOfKinPhone(toCopy.nokPhone);
+            setNextOfKinName(toCopy.nextOfKinName);
+            setNextOfKinPhone(toCopy.nextOfKinPhone);
             setTags(toCopy.tags);
         }
 
@@ -170,7 +170,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, nokName, nokPhone, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, nextOfKinName, nextOfKinPhone, tags);
         }
 
         public void setName(Name name) {
@@ -205,19 +205,19 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
         public void setNextOfKinName(NextOfKinName nokName) {
-            this.nokName = nokName;
+            this.nextOfKinName = nokName;
         }
 
         public Optional<NextOfKinName> getNextOfKinName() {
-            return Optional.ofNullable(nokName);
+            return Optional.ofNullable(nextOfKinName);
         }
 
         public void setNextOfKinPhone(NextOfKinPhone nokPhone) {
-            this.nokPhone = nokPhone;
+            this.nextOfKinPhone = nokPhone;
         }
 
         public Optional<NextOfKinPhone> getNextOfKinPhone() {
-            return Optional.ofNullable(nokPhone);
+            return Optional.ofNullable(nextOfKinPhone);
         }
 
         /**
@@ -253,8 +253,8 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(nokName, otherEditPersonDescriptor.nokName)
-                    && Objects.equals(nokPhone, otherEditPersonDescriptor.nokPhone)
+                    && Objects.equals(nextOfKinName, otherEditPersonDescriptor.nextOfKinName)
+                    && Objects.equals(nextOfKinPhone, otherEditPersonDescriptor.nextOfKinPhone)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
@@ -265,8 +265,8 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
-                    .add("nextOfKinName", nokName)
-                    .add("nextOfKinPhone", nokPhone)
+                    .add("nextOfKinName", nextOfKinName)
+                    .add("nextOfKinPhone", nextOfKinPhone)
                     .add("tags", tags)
                     .toString();
         }
