@@ -270,16 +270,21 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​                 | I want to …​                    | So that I can…​                                             |
+|----------|-------------------------| ----------------------------- | ----------------------------------------------------------- |
+| `* * *`  | new user                | add/delete dummy data        | familiarise myself with the commands available              |
+| `* * *`  | beginner user           | delete existing employee record           |   remove ex-employees from database                                               |
+| `* * *`  | beginner user           | see the list of all employee data         | easily view all the employee data in one place              |
+| `* * *`  | beginner user           | add new employees to the database         | keep the records up-to-date |
+| `* * *`  | new user                | see clear error messages when I enter incorrect or incomplete information        | correct mistakes efficiently                 |
+| `* * `   | beginner user           | assign custom tags to employees           |  organise them according to different criteria                                                |
+| `* * `   | new user                | access a user guide         |  know how to set up and launch the application              |
+| `* *  `  | new user                | access a quick tutorial or guided tour         | learn how to use basic features of the application |
+| `* * `   | new user                | purge all current data  | get rid of sample/experimental data I used for exploring the app |
+| `* *`    | forgetful beginner user | access a command summary           |   easily know which commands to use                         |
+| `*  `    |                         |           |  |
+| `* `     |                         |    |                 |
+| `*`      |  |            |                                                  |
 
 ### Use cases
 
