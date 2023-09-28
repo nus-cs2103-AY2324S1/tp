@@ -18,7 +18,7 @@ Given below are my contributions to the project.
 
 * **Code contributed**: [RepoSense link]()
 
-* **Project management**: `to be added soon` 
+* **Project management**: `to be added soon`
 
 * **Documentation**:
     * User Guide:

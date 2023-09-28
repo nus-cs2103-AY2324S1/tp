@@ -5,7 +5,7 @@ title: JasonLCY-Temp Project Portfolio Page
 
 ### Project: InterviewHub
 
-InterviewHub is a CLI-focused desktop application for Tech/Engineering hiring managers to assist them 
+InterviewHub is a CLI-focused desktop application for Tech/Engineering hiring managers to assist them
 in keeping track of their pool of interviewees, job openings and related information.
 It has a GUI created with JavaFX. It is written in Java, and has >10 kLoC.
 
