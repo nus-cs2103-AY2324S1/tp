@@ -1,4 +1,5 @@
-[![codecov](https://codecov.io/gh/AY2324S1-CS2103T-T11-2/tp/graph/badge.svg?token=1IoaWm9UaE)](https://codecov.io/gh/AY2324S1-CS2103T-T11-2/tp)
+[![Java CI](https://github.com/AY2324S1-CS2103T-T11-2/tp/actions/workflows/gradle.yml/badge.svg?branch=master)](https://github.com/AY2324S1-CS2103T-T11-2/tp/actions/workflows/gradle.yml)
+[![codecov](https://codecov.io/gh/AY2324S1-CS2103T-T11-2/tp/graph/badge.svg?token=1IoaWm9UaE)](https://app.codecov.io/gh/AY2324S1-CS2103T-T11-2/tp/tree/master)
 
 ![Ui](docs/images/Ui.png)
 
