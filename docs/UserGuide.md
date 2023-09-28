@@ -76,8 +76,14 @@ Adds an employee to the employee list.
 Format: `add n/NAME p/POSITION id/EMPLOYEE_ID`
 
 Examples:
-* `add n/John Doe p/Senior Software Enginner id/EID2023-7890`
 * `add n/Jane Doe p/Manager id/EID2023-7891`
+* `add n/Alex Yeoh/Software Engineer id/EID2023-7890`
+
+![add success](images/addSuccess.png)
+
+* `add n/John Doe/Software Engineer id/EID2023-7890` is invalid because `id` already exists in the records.
+
+![add failure](images/addFailure.png)
 
 ### Listing all persons : `list`
 
@@ -96,8 +102,11 @@ Format: `edit INDEX [n/NAME] [p/POSITION] [id/EMPLOYEE_ID]`
 * Existing values will be updated to the input values.
 
 Examples:
-*  `edit 1 p/Software Engineer` Edits the position of the 1st person to be `Software Engineer`.
-*  `edit 2 n/Janelle Doe t/` Edits the name of the 2nd person to be `Janelle Doe`.
+*  `edit 1 p/Senior Software Engineer` Edits the position of the 1st person to be `Senior Software Engineer`.
+*  `edit 2 n/Bernice Yu t/` Edits the name of the 2nd person to be `Bernice Yu`.
+![edit success](images/editSuccess.png)
+*  `edit 10 p/Senior Software Engineer` is invalid because the index does not exist.
+![edit failure](images/editFailure.png)
 
 ### Locating persons by name: `find`
 
