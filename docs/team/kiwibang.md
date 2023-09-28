@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Tan Kerway's portfolio 
+title: Tan Kerway's portfolio
 ---
 
 ### Project: InterviewHub
@@ -19,10 +19,10 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link]()
 
 * **Project management**: `to be added soon` 
-  
+
 * **Documentation**:
     * User Guide:
         * Added documentation for the features `accepted time formats`
-      
+
     * Developer Guide:
         * Added implementation details of the `delete` feature.
