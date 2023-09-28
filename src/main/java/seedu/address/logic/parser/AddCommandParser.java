@@ -51,7 +51,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         NextOfKinName nokName = ParserUtil.parseNextOfKinName(argMultimap.getValue(PREFIX_NEXT_OF_KIN_NAME).get());
-        NextOfKinPhone nokPhone = ParserUtil.parseNextOfKinPhone((argMultimap.getValue(PREFIX_NEXT_OF_KIN_PHONE)).get());
+        NextOfKinPhone nokPhone = ParserUtil
+                .parseNextOfKinPhone((argMultimap.getValue(PREFIX_NEXT_OF_KIN_PHONE)).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Person person = new Person(name, phone, email, address, nokName, nokPhone, tagList);

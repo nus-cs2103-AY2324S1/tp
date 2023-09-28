@@ -56,9 +56,11 @@ public class CommandTestUtil {
 
     public static final String NEXT_OF_KIN_NAME_DESC_BOB = " " + PREFIX_NEXT_OF_KIN_NAME + VALID_NEXT_OF_KIN_NAME_BOB;
 
-    public static final String NEXT_OF_KIN_PHONE_DESC_AMY = " " + PREFIX_NEXT_OF_KIN_PHONE + VALID_NEXT_OF_KIN_PHONE_AMY;
+    public static final String NEXT_OF_KIN_PHONE_DESC_AMY = " " + PREFIX_NEXT_OF_KIN_PHONE
+            + VALID_NEXT_OF_KIN_PHONE_AMY;
 
-    public static final String NEXT_OF_KIN_PHONE_DESC_BOB = " " + PREFIX_NEXT_OF_KIN_PHONE + VALID_NEXT_OF_KIN_PHONE_BOB;
+    public static final String NEXT_OF_KIN_PHONE_DESC_BOB = " " + PREFIX_NEXT_OF_KIN_PHONE
+            + VALID_NEXT_OF_KIN_PHONE_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
@@ -66,8 +68,10 @@ public class CommandTestUtil {
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
-    public static final String INVALID_NEXT_OF_KIN_NAME_DESC = " " + PREFIX_NEXT_OF_KIN_NAME + "James&"; // '&' not allowed in names
-    public static final String INVALID_NEXT_OF_KIN_PHONE_DESC = " " + PREFIX_NEXT_OF_KIN_PHONE + "911a"; // 'a' not allowed in phones
+    public static final String INVALID_NEXT_OF_KIN_NAME_DESC = " " + PREFIX_NEXT_OF_KIN_NAME
+            + "James&"; // '&' not allowed in names
+    public static final String INVALID_NEXT_OF_KIN_PHONE_DESC = " " + PREFIX_NEXT_OF_KIN_PHONE
+            + "911a"; // 'a' not allowed in phones
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
