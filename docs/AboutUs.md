@@ -16,7 +16,7 @@ We currently do not offer any means to contacting us, thank you for your underst
 [[github](https://github.com/JasonLCY-Temp)]
 [[portfolio](team/jasonlcy-temp.md)]
 
-* Role: Scheduling and tracking, In charge of `Interview`
+* Role: Scheduling and tracking, CI/CD Pipeline manager, In charge of `Interview`
 
 ### Jane Doe
 
