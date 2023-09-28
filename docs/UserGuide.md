@@ -126,6 +126,23 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+### Locating persons by job: `find-job`
+
+Finds persons whose job descriptions contain any of the given keywords.
+
+Format: `find-job KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `ANALYST` will match `analyst`
+* The order of the keywords does not matter. e.g. `Software Engineer` will match `Engineer Software`
+* Only the job description is searched.
+* Only full words will be matched e.g. `Analyst` will not match `Analysts`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Software Engineer` will return `Software Developer`, `System Engineer`
+
+Examples:
+* `find-job software engineer` returns `Thomas<software engineer>` and `William<software engineer>`.
+* `find-job software engineer data analyst` returns `Thomas<software engineer>`, `William<software engineer>`, and `Robert<data analyst>`.
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
@@ -237,5 +254,6 @@ Action | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find-Job**| `find-job KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-job Data Analyst`
 **List** | `list`
 **Help** | `help`
