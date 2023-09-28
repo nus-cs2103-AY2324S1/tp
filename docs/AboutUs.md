@@ -5,19 +5,18 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+We currently do not offer any means to contacting us, thank you for your understanding.
 
-## Project team
+## Team CS2103T-T11-2
 
-### John Doe
+### Jason Lim
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jasonlcy-temp.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/JasonLCY-Temp)]
+[[portfolio](team/jasonlcy-temp.md)]
 
-* Role: Project Advisor
+* Role: Scheduling and tracking, CI/CD Pipeline manager, In charge of `Interview`
 
 ### Jane Doe
 
@@ -38,15 +37,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Jony
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jonyxzx.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/jonyxzx)]
+[[portfolio](team/jonyxzx.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Improve find feature
 
 ### Tan Kerway
 
