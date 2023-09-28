@@ -11,15 +11,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Wee Hung
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/weehung.jpg" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[homepage](https://github.com/WeeeHung)]
+[[github](https://github.com/WeeeHung)]
+[[portfolio](team/weeehung.md)]
 
-* Role: Project Advisor
+* Role: Peasant
+* Responsibilities: Anything the team wants me to do
 
 ### Jane Doe
 
