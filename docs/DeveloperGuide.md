@@ -336,6 +336,40 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
+**Use case: Listing all patients**
+
+**MSS**
+
+1. User requests to list all patients
+2. System shows a list of all patients stored 
+   
+    Use case ends.
+
+**Extensions**
+
+* 1a. System detects invalid request format
+
+    * 1a1. System shows an error message.
+  
+      Use case ends.
+
+**Use case: Listing all specialists**
+
+**MSS**
+
+1. User requests to list all specialists
+2. System shows a list of all specialists stored 
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. System detects invalid request format
+
+    * 1a1. System shows an error message.
+
+      Use case ends.
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
