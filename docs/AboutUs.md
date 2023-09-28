@@ -9,51 +9,51 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Shah Saumya Snehal
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/saumyashah.jpeg" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/LordSaumya)]
+[[portfolio](team/saumyashah.md)]
 
 * Role: Team Lead
+* Responsibilities: Model
+
+### Kok Fangyu Inez
+
+<img src="images/inezkok.png" width="200px">
+
+[[github](http://github.com/inezkok)]
+[[portfolio](team/inezkok.md)]
+
+* Role: Deliverables and deadlines, Scheduling and tracking
 * Responsibilities: UI
 
-### Johnny Doe
+### Lim Jin Yin
 
 <img src="images/johndoe.png" width="200px">
 
 [[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Documentation
+* Responsibilities: Logic
 
-### Jean Doe
+### Kee Song Yang
+
+<img src="images/s0ngyang.png" width="200px">
+
+[[github](http://github.com/s0ngyang)]
+[[portfolio](team/s0ngyang.md)]
+
+* Role: Integration
+* Responsibilities: Logic
+
+### Jason Ray
 
 <img src="images/johndoe.png" width="200px">
 
 [[github](http://github.com/johndoe)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: UI
+* Role: Testing
+* Responsibilities: Storage

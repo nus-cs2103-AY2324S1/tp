@@ -270,29 +270,51 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​                 | I want to …​                    | So that I can…​                                             |
+|----------|-------------------------| ----------------------------- | ----------------------------------------------------------- |
+| `* * *`  | new user                | add/delete dummy data        | familiarise myself with the commands available              |
+| `* * *`  | beginner user           | delete existing employee record           |   remove ex-employees from database                                               |
+| `* * *`  | beginner user           | see the list of all employee data         | easily view all the employee data in one place              |
+| `* * *`  | beginner user           | add new employees to the database         | keep the records up-to-date |
+| `* * *`  | new user                | see clear error messages when I enter incorrect or incomplete information        | correct mistakes efficiently                 |
+| `* * `   | beginner user           | assign custom tags to employees           |  organise them according to different criteria                                                |
+| `* * `   | new user                | access a user guide         |  know how to set up and launch the application              |
+| `* *  `  | new user                | access a quick tutorial or guided tour         | learn how to use basic features of the application |
+| `* * `   | new user                | purge all current data  | get rid of sample/experimental data I used for exploring the app |
+| `* *`    | forgetful beginner user | access a command summary           |   easily know which commands to use                         |
+| `*  `    |                         |           |  |
+| `* `     |                         |    |                 |
+| `*`      |  |            |                                                  |
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `HouR` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add an employee**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to add a specific person
+2.  HouR adds the person to the list of employees
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The employee to be added already exists in the list.
+    * 1a1. HouR shows an error message.
+
+  Use case ends.
+
+
+**Use case: Delete an employee**
+
+**MSS**
+
+1.  User requests to list employees
+2.  HouR shows a list of employees
+3.  User requests to delete a specific employee in the list
+4.  HouR deletes the employee
 
     Use case ends.
 
@@ -304,9 +326,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. HouR shows an error message.
 
       Use case resumes at step 2.
+
+**Use case: List employees**
+
+**MSS**
+
+1.  User requests to list employees
+2.  HouR display a list of every employee that has been added
+
+    Use case ends.
+
+**Use case: Exit HouR**
+
+**MSS**
+
+1.  User requests to exit HouR
+2.  HouR exits
+
+    Use case ends.
 
 *{More to be added}*
 
