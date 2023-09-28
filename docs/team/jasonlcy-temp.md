@@ -33,5 +33,9 @@ Given below are my contributions to the project.
   * Developer Guide:
     * PLACEHOLDER
 
-* **Community**:
-  * PRs reviewed (with non-trivial review comments): [PLACEHOLDER]()
+* **PRs reviewed**:
+  * Git conventions tips/advice: 
+    [#19](https://github.com/AY2324S1-CS2103T-T11-2/tp/pull/19)
+    [#20](https://github.com/AY2324S1-CS2103T-T11-2/tp/pull/20)
+
+  * Coding standards tips/advice: [PLACEHOLDER]()
