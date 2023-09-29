@@ -14,7 +14,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/kb-tay.png" width="200px">
 
 [[github](https://github.com/Kb-tay)]
-[[portfolio](team/aaron.md)]
+[[portfolio](team/kb-tay.md)]
 
 * Role: Developer
 * Responsibilities: User Stories
