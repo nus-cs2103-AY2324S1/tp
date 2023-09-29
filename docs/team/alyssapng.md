@@ -11,7 +11,7 @@ To be added soon.
 
 Given below are my contributions to the project.
 
-* **Code Contributed**: [RepoSense](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=sopa301&breakdown=true)
+* **Code Contributed**: [RepoSense](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=alyssapng&breakdown=true)
 
 * **Enhancements Implemented**: to be added soon.
 
