@@ -11,7 +11,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Aaron Tay Kai Boon
 
-<img src="images/aaron.png" width="200px">
+<img src="images/kb-tay.png" width="200px">
 
 [[github](https://github.com/Kb-tay)]
 [[portfolio](team/aaron.md)]
@@ -21,7 +21,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Nicholas Chia
 
-<img src="images/nicholaschia.PNG" width="200px">
+<img src="images/nikele2001.png" width="200px">
 
 [[github](http://github.com/nikele2001)]
 [[portfolio](team/nikele2001.md)]
