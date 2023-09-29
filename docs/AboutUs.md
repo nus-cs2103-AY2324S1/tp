@@ -51,11 +51,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role:
 * Responsibilities:
 
-### James Doe
+### Kam Jia Yue
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/kamjiayue.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](https://github.com/KamJiaYue)]
 [[portfolio](team/johndoe.md)]
 
 * Role:
