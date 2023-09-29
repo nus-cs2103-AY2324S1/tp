@@ -87,7 +87,7 @@ Examples:
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all employees in the employee list.
 
 Format: `list`
 
@@ -108,9 +108,9 @@ Examples:
 *  `edit 10 p/Senior Software Engineer` is invalid because the index does not exist.
 ![edit failure](images/editFailure.png)
 
-### Locating persons by name: `find`
+### Locating persons by name: `find` [coming soon]
 
-Finds persons whose names contain any of the given keywords.
+Finds employees whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
