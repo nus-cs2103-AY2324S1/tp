@@ -341,7 +341,7 @@ compared to a hypothetical GUI-only version of the app.
     standard screen resolutions 1920x1080 and higher, and for screen scales 100% and 125%.
 12. All functions can be used via the GUI, even if the user experience is not optimal, for resolutions 1280x720 and higher,
     and for screen scales 150%.
-13. The software should provide clear error messages which states the error and provides guidance on correcting the error.
+13. The software should provide error messages which clearly states the error and provides guidance on correcting the error.
 14. The software should provide easily accessible help in the form of documentation for users unfamiliar with the commands.
 15. The software should include automated tests to ensure correctness and reliability.
 
