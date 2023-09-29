@@ -54,7 +54,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/about-us/evan-yan.png" width="200px">
 
 [[github](https://github.com/evanyan13)]
-[[portfolio](team/evan-yan.md)]
+[[portfolio](team/evanyan13.md)]
 
 * Role: Team Lead
 * Responsibilities: UI
