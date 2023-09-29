@@ -34,6 +34,11 @@ public class FindCommand extends Command {
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
 
+    /**
+     * Checks if the person exists.
+     * @param other Other person.
+     * @return true if equals, false if not equals.
+     */
     public boolean equals(Object other) {
         if (other == this) {
             return true;
