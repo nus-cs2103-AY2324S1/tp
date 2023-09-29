@@ -39,6 +39,7 @@ public class FindCommand extends Command {
      * @param other Other person.
      * @return true if equals, false if not equals.
      */
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
