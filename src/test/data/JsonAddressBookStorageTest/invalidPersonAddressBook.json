@@ -4,7 +4,7 @@
     "phone": "9482424",
     "email": "hans@example.com",
     "address": "4th street",
-    "nokName": "Person Dad",
-    "nokPhone": "9482111"
+    "nextOfKinName": "Person Dad",
+    "nextOfKinPhone": "9482111"
   } ]
 }

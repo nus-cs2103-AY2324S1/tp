@@ -30,8 +30,8 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
-    private final String nokName;
-    private final String nokPhone;
+    private final String nextOfKinName;
+    private final String nextOfKinPhone;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -39,15 +39,16 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("nokName") String nokName, @JsonProperty("nokPhone") String nokPhone,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                             @JsonProperty("email") String email, @JsonProperty("address") String address,
+                             @JsonProperty("nextOfKinName") String nextOfKinName,
+                             @JsonProperty("nextOfKinPhone") String nextOfKinPhone,
+                             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.nokName = nokName;
-        this.nokPhone = nokPhone;
+        this.nextOfKinName = nextOfKinName;
+        this.nextOfKinPhone = nextOfKinPhone;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -61,8 +62,8 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        nokName = source.getNextOfKinName().fullName;
-        nokPhone = source.getNextOfKinPhone().value;
+        nextOfKinName = source.getNextOfKinName().fullName;
+        nextOfKinPhone = source.getNextOfKinPhone().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -111,23 +112,23 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        if (nokName == null) {
+        if (nextOfKinName == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     NextOfKinName.class.getSimpleName()));
         }
-        if (!NextOfKinName.isValidName(nokName)) {
+        if (!NextOfKinName.isValidName(nextOfKinName)) {
             throw new IllegalValueException(NextOfKinName.MESSAGE_CONSTRAINTS);
         }
-        final NextOfKinName modelNextOfKinName = new NextOfKinName(nokName);
+        final NextOfKinName modelNextOfKinName = new NextOfKinName(nextOfKinName);
 
-        if (nokPhone == null) {
+        if (nextOfKinPhone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     NextOfKinPhone.class.getSimpleName()));
         }
-        if (!NextOfKinPhone.isValidPhone(nokPhone)) {
+        if (!NextOfKinPhone.isValidPhone(nextOfKinPhone)) {
             throw new IllegalValueException(NextOfKinPhone.MESSAGE_CONSTRAINTS);
         }
-        final NextOfKinPhone modelNextOfKinPhone = new NextOfKinPhone(nokPhone);
+        final NextOfKinPhone modelNextOfKinPhone = new NextOfKinPhone(nextOfKinPhone);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelNextOfKinName, modelNextOfKinPhone,

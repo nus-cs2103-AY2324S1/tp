@@ -8,9 +8,9 @@ public class NextOfKinPhone extends Phone {
     /**
      * Constructs a {@code NextOfKinPhone}.
      *
-     * @param nokPhone A valid phone number.
+     * @param nextOfKinPhone A valid phone number.
      */
-    public NextOfKinPhone(String nokPhone) {
-        super(nokPhone);
+    public NextOfKinPhone(String nextOfKinPhone) {
+        super(nextOfKinPhone);
     }
 }

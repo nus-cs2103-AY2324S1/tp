@@ -8,9 +8,9 @@ public class NextOfKinName extends Name {
     /**
      * Constructs a {@code NextOfKinName}.
      *
-     * @param nokName A valid next-of-kin name.
+     * @param nextOfKinName A valid next-of-kin name.
      */
-    public NextOfKinName(String nokName) {
-        super(nokName);
+    public NextOfKinName(String nextOfKinName) {
+        super(nextOfKinName);
     }
 }
