@@ -16,7 +16,7 @@ This project was done by a team of 4 members.
 [[github](https://github.com/lihongguang00)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Team Member
+- Role: Team Member
 
 ### Andre Sim
 
@@ -25,8 +25,8 @@ This project was done by a team of 4 members.
 [[github](http://github.com/fallman2)]
 [[portfolio](team/fallman2.md)]
 
-* Role: Team Member
-* Responsibilities: Filtering by Tags
+- Role: Team Member
+- Responsibilities: Filtering by Tags
 
 ### Low Jun Hong
 
@@ -35,8 +35,18 @@ This project was done by a team of 4 members.
 [[github](http://github.com/junhonglow)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: TBD
+- Role: Developer
+- Responsibilities: TBD
+
+### Nicholas Lee
+
+<img src="images/nicrandomlee.png" width="200px">
+
+[[github](http://github.com/nicrandomlee)]
+[[portfolio](team/nicrandomlee.md)]
+
+- Role: Developer
+- Responsibilities: TBD
 
 ### Jean Doe
 
@@ -45,8 +55,8 @@ This project was done by a team of 4 members.
 [[github](http://github.com/johndoe)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+- Role: Developer
+- Responsibilities: Dev Ops + Threading
 
 ### James Doe
 
@@ -55,5 +65,5 @@ This project was done by a team of 4 members.
 [[github](http://github.com/johndoe)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: UI
+- Role: Developer
+- Responsibilities: UI
