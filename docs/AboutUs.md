@@ -9,12 +9,11 @@ We are a team based in the [School of Computing, National University of Singapor
 
 You can reach us at the email `seer[at]comp.nus.edu.sg`
 
-## Project FAKEJARVIS' Team
-<img src="images/fakejarvis.png" width="200px">
+## Project team
 
 ### Yeap Rayson
 
-<img src="images/respirayson.png" width="200px">
+<img src="images/respirayson.png.jpg" width="200px">
 
 [[homepage](http://linkedin.com/in/rayson-yeap)]
 [[github](https://github.com/respirayson)]
@@ -22,15 +21,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Git expert, Documentation
 
-### Jian Song
+### Jane Doe
 
-<img src="images/raydenlim.png" width="200px">
+<img src="images/johndoe.png" width="200px">
 
-[[github](http://github.com/raydenlim)]
-[[portfolio](team/raydenlim.md)]
+[[github](http://github.com/johndoe)]
+[[portfolio](team/johndoe.md)]
 
-* Role: Morale Booster, Debugger
-* Responsibilities: *
+* Role: Team Lead
+* Responsibilities: UI
 
 ### Johnny Doe
 
