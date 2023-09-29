@@ -56,8 +56,10 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        nextOfKinName.setText(person.getNextOfKinName().fullName);
-        nextOfKinPhone.setText(person.getNextOfKinPhone().value);
+        String nextOfKinNameText = "Next-of-kin: " + person.getNextOfKinName().fullName;
+        nextOfKinName.setText(nextOfKinNameText);
+        String nextOfKinPhoneText = "Next-of-kin Phone: " + person.getNextOfKinPhone().value;
+        nextOfKinPhone.setText(nextOfKinPhoneText);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
