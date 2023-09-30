@@ -270,14 +270,25 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                  | I want to …​                                                         | So that I can…​                                                   |
+|----------|--------------------------|----------------------------------------------------------------------|-------------------------------------------------------------------|
+| `* * *`  | new user                 | see usage instructions                                               | refer to instructions when I forget how to use the App            |
+| `* * *`  | user                     | deal with patient and specialist records separately                  | easily do patient-specific or specialist-specific operations      |
+| `* * *`  | user                     | add a new patient to the records                                     | keep track of details of new patients                             |
+| `* * *`  | user                     | delete individual patient details                                    | delete records of patients I no longer take care                  |
+| `* *`    | user                     | edit details of existing patients                                    | make sure the patients' details are up to date                    |
+| `* *`    | user                     | easily search for patient by name                                    | find relevant patient information quickly                         |
+| `* * *`  | user                     | access a patient's medical history                                   | provide more informed care based on the patient's medical history |
+| `* * *`  | user                     | access a patient's contact number                                    | quickly get in contact with the patient                           |
+| `* * *`  | user                     | access a patient's age                                               | provide age-specific care and treatment to the patient            |
+| `* *`    | user                     | filter patient records by criteria such as medical condition and age | simplify the process of finding specific patient information      |
+| `*`      | user                     | customise tags for my patients                                       | have control over the organisation of my patients                 |
+| `*`      | user                     | group delete patients by category or tag                             | save time when removing large amount of patient records           |
+| `* *`    | user                     | search for specialists by their speciality                           | refer patients to the right experts                               |
+| `*`      | user with poor eyesight  | customise font size and style of the App                             | easily read the information on the screen                         |
+| `*`      | user who is colour blind | customise colour schemes of the App                                  | meet my accessibility needs                                       |
+| `*`      | user who is a fast typer | perform all tasks will the CLI rather than the GUI                   | be more efficient in managing records                             |
+| `* *`    | user who is impatient    | add new keyboard shortcuts to the App                                | save time when performing frequently repeated tasks               |
 
 *{More to be added}*
 
