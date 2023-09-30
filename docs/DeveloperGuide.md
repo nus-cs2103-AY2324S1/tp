@@ -359,16 +359,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Should work on any mainstream OS as long as it has Java 11 or above installed. 
+2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage. 
+3. A user with above-average typing speed for regular English text (i.e. not code, not system admin commands)
+   should be able to accomplish most of the tasks faster using commands than using the mouse. 
+4. The commands should be intuitive to use and easy to remember for the average user (i.e. no complex commands)
+5. The system should be usable by a novice who has never managed HR data 
+6. The product is not required to handle the printing of reports 
+7. The app only supports English.
+
 
 *{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Employee**: A worker in the company
 
 --------------------------------------------------------------------------------------------------------------------
 
