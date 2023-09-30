@@ -12,4 +12,18 @@ public class CliSyntax {
     public static final Prefix PREFIX_ADDRESS = new Prefix("a/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
 
+
+    //new prefixes for Person
+    public static final Prefix PREFIX_NRIC = new Prefix("ic/");
+    public static final Prefix PREFIX_GENDER = new Prefix("g/");
+
+
+    //specific to patient
+    public static final Prefix PREFIX_BLOODTYPE = new Prefix("b/");
+    public static final Prefix PREFIX_CONDITION = new Prefix("c/");
+    public static final Prefix PREFIX_DOCTOR = new Prefix("d/");
+
+
+    //specific to doctor
+    public static final Prefix PREFIX_PATIENTS = new Prefix("pts/");
 }
