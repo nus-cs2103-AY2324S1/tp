@@ -30,6 +30,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: Development
 
+### Wang Yiwen
+
+<img src="images/yiwen.png" width="200px">
+
+[[github](http://github.com/yiwen101)]
+[[portfolio](team/yiwen.md)]
 ### Johnny Doe
 
 <img src="images/johndoe.png" width="200px">
