@@ -3,7 +3,9 @@ package seedu.address.model;
 import seedu.address.model.booking.Booking;
 import seedu.address.model.booking.UniqueBookingList;
 
-
+/**
+ * Booking class holding unique booking list.
+ */
 public class BookingBook {
     private final UniqueBookingList bookings;
 
@@ -13,7 +15,8 @@ public class BookingBook {
      *
      * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
      *   among constructors.
-     */ {
+     */
+    {
         bookings = new UniqueBookingList();
     }
 
