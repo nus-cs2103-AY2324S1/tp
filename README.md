@@ -2,7 +2,7 @@
 
 [![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
 
-![Ui](docs/images/Ui.png)
+![image](https://github.com/AY2324S1-CS2103T-W15-3/tp/assets/120372506/a18f4945-82c7-42da-9779-cd629cff13f9)
 
 * This is **a sample project for Software Engineering (SE) students**.<br>
   Example usages:
