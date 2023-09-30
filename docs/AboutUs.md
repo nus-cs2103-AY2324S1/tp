@@ -11,12 +11,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Qu Zhetao
 
-<img src="images/quzhetao.png" width="200px">
+<img src="images/quzhetao01.png" width="200px">
 
 [[github](https://github.com/quzhetao01)]
 [[portfolio](team/quzhetao.md)]
 
-* Role: Developer
+* Role: Deliverables and deadlines
 
 ### Jane Doe
 
