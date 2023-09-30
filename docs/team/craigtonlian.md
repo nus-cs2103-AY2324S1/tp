@@ -1,14 +1,16 @@
 ---
-layout: default.md
-  title: " Project Portfolio Page"
+  layout: default.md 
+  title: "Project Portfolio Page"
 ---
 
-### Project: Staff-Snap
-Author: Craigton Lian @craigtonlian
+# Project: Staff-Snap
 
-Staff-Snap is a desktop HR management application used for managing employees. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about **~~10 kLoC~~**.
+> ***Craigton Lian's*** *Project Portfolio Page*<br>
 
-Given below are my contributions to the project.
+### Overview<hr>
+Staff-Snap is a desktop HR management application used for managing employees. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about <span style="color:red">**[TO BE UPDATED]**</span> 10 kLoC.
+
+### Summary of Contributions<hr>
 
 * **New Feature**: Added the ability to undo/redo previous commands.
   * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
@@ -29,16 +31,23 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for the features `delete` and `find` [\#72]()
+    * <span style="color:red">**[TO BE UPDATED]**</span> Added documentation for the features `delete` and `find` [\#72]()
     * Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]()
   * Developer Guide:
-    * Added implementation details of the `delete` feature.
+    * <span style="color:red">**[TO BE UPDATED]**</span> Added implementation details of the `delete` feature.
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
-  * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
-  * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
-  * Some parts of the history feature I added was adopted by several other class mates ([1](), [2]())
+  * <span style="color:red">**[TO BE UPDATED]**</span> PRs reviewed (with non-trivial review comments): 
+      [\#31](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/31), 
+      [\#32](), 
+      [\#19](), 
+      [\#42]()
+  * Contributed to forum discussions (examples: 
+      [\#2](https://github.com/nus-cs2103-AY2324S1/forum/issues/2), 
+      [\#121](https://github.com/nus-cs2103-AY2324S1/forum/issues/121), 
+      [\#158](https://github.com/nus-cs2103-AY2324S1/forum/issues/158), 
+      [\#228](https://github.com/nus-cs2103-AY2324S1/forum/issues/228))
+  * <span style="color:red">**[TO BE UPDATED]**</span> Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
 
 * **Tools**:
   * Integrated a third party library (Natty) to the project ([\#42]())
