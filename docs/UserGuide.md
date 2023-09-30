@@ -62,7 +62,7 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -126,19 +126,24 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Deleting an employee : `delete`
 
-Deletes the specified person from the address book.
+Deletes an employee from the employee list.
 
 Format: `delete INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Deletes the employee at the specified `INDEX`.
+* The index refers to the index number shown in the employee list.
+* The index **must be a positive integer** (1, 2, 3, …)
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `delete 3`
+
+Expected outcome of success:  
+![delete success](images/deleteSuccess.png)  
+
+Expected outcome of failure:  
+![delete failure](images/deleteFailure.png)
 
 ### Clearing all entries : `clear`
 
