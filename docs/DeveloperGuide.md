@@ -1,9 +1,10 @@
+
 ---
 layout: page
 title: Developer Guide
 ---
 * Table of Contents
-{:toc}
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -224,13 +225,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
 
@@ -256,39 +257,37 @@ _{Explain here how the data archiving feature will be implemented}_
 ### Product scope
 
 **Target user profile**:
+The target users...
 
-* has a need to manage a significant number of contacts
+* are management staff at a General Practitioner's Clinic
+* need to keep track of the clinic's patients' details
+* need to keep track of the affiliated specialists that the clinic refers patients to
 * prefer desktop apps over other types
 * can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* prefer typing to mouse interactions
+* are reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: A one-stop application that allows management of both a clinic's patient and specialist details faster than a typical mouse/GUI driven app.
+
 
 
 ### User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+Priorities: Essential (must have) - `* * *`, Typical (nice to have) - `* *`, Novel (unlikely to have) - `*`
 
-| Priority | As a …​                  | I want to …​                                                         | So that I can…​                                                   |
-|----------|--------------------------|----------------------------------------------------------------------|-------------------------------------------------------------------|
-| `* * *`  | new user                 | see usage instructions                                               | refer to instructions when I forget how to use the App            |
-| `* * *`  | user                     | deal with patient and specialist records separately                  | easily do patient-specific or specialist-specific operations      |
-| `* * *`  | user                     | add a new patient to the records                                     | keep track of details of new patients                             |
-| `* * *`  | user                     | delete individual patient details                                    | delete records of patients I no longer take care                  |
-| `* *`    | user                     | edit details of existing patients                                    | make sure the patients' details are up to date                    |
-| `* *`    | user                     | easily search for patient by name                                    | find relevant patient information quickly                         |
-| `* * *`  | user                     | access a patient's medical history                                   | provide more informed care based on the patient's medical history |
-| `* * *`  | user                     | access a patient's contact number                                    | quickly get in contact with the patient                           |
-| `* * *`  | user                     | access a patient's age                                               | provide age-specific care and treatment to the patient            |
-| `* *`    | user                     | filter patient records by criteria such as medical condition and age | simplify the process of finding specific patient information      |
-| `*`      | user                     | customise tags for my patients                                       | have control over the organisation of my patients                 |
-| `*`      | user                     | group delete patients by category or tag                             | save time when removing large amount of patient records           |
-| `* *`    | user                     | search for specialists by their speciality                           | refer patients to the right experts                               |
-| `*`      | user with poor eyesight  | customise font size and style of the App                             | easily read the information on the screen                         |
-| `*`      | user who is colour blind | customise colour schemes of the App                                  | meet my accessibility needs                                       |
-| `*`      | user who is a fast typer | perform all tasks will the CLI rather than the GUI                   | be more efficient in managing records                             |
-| `* *`    | user who is impatient    | add new keyboard shortcuts to the App                                | save time when performing frequently repeated tasks               |
+| Priority | As a …​                  | I want to …​                                                         | So that I can…​                                              |
+|----------|--------------------------|----------------------------------------------------------------------|--------------------------------------------------------------|
+| `* * *`  | new user                 | see usage instructions                                               | refer to instructions when I forget how to use the App       |
+| `* * *`  | user                     | deal with patient and specialist records separately                  | easily do patient-specific or specialist-specific operations |
+| `* * *`  | user                     | access a patient's age                                               | provide age-specific care and treatment to the patient       |
+| `* *`    | user                     | filter patient records by criteria such as medical condition and age | simplify the process of finding specific patient information |
+| `*`      | user                     | customise tags for my patients                                       | have control over the organisation of my patients            |
+| `*`      | user                     | group delete patients by category or tag                             | save time when removing large amount of patient records      |
+| `* *`    | user                     | search for specialists by their speciality                           | refer patients to the right experts                          |
+| `*`      | user with poor eyesight  | customise font size and style of the App                             | easily read the information on the screen                    |
+| `*`      | user who is colour blind | customise colour schemes of the App                                  | meet my accessibility needs                                  |
+| `*`      | user who is a fast typer | perform all tasks will the CLI rather than the GUI                   | be more efficient in managing records                        |
+| `* *`    | user who is impatient    | add new keyboard shortcuts to the App                                | save time when performing frequently repeated tasks          |
 
 *{More to be added}*
 
@@ -301,9 +300,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list persons
-2.  DoConnek Pro shows a list of persons
+2.  System shows a list of persons
 3.  User requests to delete a specific person in the list
-4.  DoConnek Pro deletes the person
+4.  System deletes the person
 
     Use case ends.
 
@@ -315,7 +314,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. DoConnek Pro shows an error message.
+    * 3a1. System shows an error message.
 
       Use case resumes at step 2.
 
@@ -323,10 +322,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User searches list to check if patient is already in DoConnek Pro
-2. DoConnek Pro shows that there are no entries matching the patient's name
-3. User adds patient to DoConnek Pro
-2. DoConnek Pro confirms that the person has been added
+1. User searches list to check if patient is already in the system
+2. System shows that there are no entries matching the patient's name
+3. User adds patient to the system
+4. System confirms that the person has been added
+
 
     Use case ends.
 
@@ -334,11 +334,56 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given parameters are invalid.
 
-  * 3a1. DoConnek Pro shows an error message.
+  * 3a1. System shows an error message.
 
     Use case resumes at step 2.
 
+**Use case: Listing all patients**
 
+**MSS**
+
+1. User requests to list all patients
+2. System shows a list of all patients stored 
+   
+    Use case ends.
+
+**Extensions**
+
+* 1a. System detects invalid request format
+
+    * 1a1. System shows an error message.
+  
+      Use case ends.
+
+**Use case: Listing all specialists**
+
+**MSS**
+
+1. User requests to list all specialists
+2. System shows a list of all specialists stored 
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. System detects invalid request format
+
+    * 1a1. System shows an error message.
+
+      Use case ends.
+
+**Use case: Exit the program**
+
+**MSS**
+
+1.  User requests to exit the program
+2.  System exits the program
+
+* 1a. System detects invalid request format.
+
+  * 1a1. System shows an error message.
+
+    Use case ends.
 
 *{More to be added}*
 
@@ -347,13 +392,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  Should be made for use by a single user rather than multiple users.
+5.  Any data should be stored locally in a human-editable text file without any use of a Database Management System.
+6.  Should be usable with the download of a single JAR file of size less than 100 MB.
+7.  Should not require any installation by the users.
+7.  Should not depend on any remote server.
+8.  The product should start from the given code base and be evolved/enhanced/morphed in a breadth-first incremental manner.
+9.  The code should primarily follow the Object-oriented paradigm.
+10. Should only use _appropriate third party frameworks/libraries/services_ that have been approved.
+11. The product's _GUI should work well_ for standard screen resolutions 1920x1080 and higher, and, for screen scales 100% and 125%.
+12. The product's _GUI should be usable_ for resolutions 1280x720 and higher, and, for screen scales 150%.
+13. Should be intuitive to use for a user without a technical background.
+13. The product is not required to handle printing of the patient and specialist records.
 
-*{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Appropriate third party frameworks/libraries/systems**: Those frameworks/libraries/systems that are free, open-source, have permissive license terms, don't require installation by the users and don't violate other constraints.
+* **GUI should work well**: The GUI should not cause resolution-related inconveniences for the user.
+* **GUI should be usable**: The GUI's functions can all be used, although user-experience may be suboptimal.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -370,15 +429,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
@@ -387,16 +446,16 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `delete 1`<br>
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `delete 0`<br>
+       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
 
@@ -404,6 +463,6 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
