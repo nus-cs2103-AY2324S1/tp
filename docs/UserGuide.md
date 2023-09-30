@@ -4,6 +4,7 @@
 
 Jobfindr is a **Contact Book app** for NUS fresh graduates who are looking for jobs. 
 It simplifies _contact management_, provides _reminders_ and enhances _organisation_, helping users _stay competitive_ in the job market.
+The project simulates an ongoing software project for a desktop application (called _JobFindr_) used for managing job applications.
 
 --------------------------------------------------------------------------------------------------------------------
 
