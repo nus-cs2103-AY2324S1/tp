@@ -31,14 +31,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Janssen Lau
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/kanna-1.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/kanna-1)] [[portfolio](team/kanna-1.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Documentation + Code Quality
 
 ### Jean Doe
 
