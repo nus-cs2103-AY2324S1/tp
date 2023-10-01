@@ -2,7 +2,6 @@
 layout: page
 title: User Guide
 ---
-
 AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
@@ -142,17 +141,14 @@ Examples:
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 ### Clearing all entries : `clear`
-
 Clears all entries from the address book.
 
 Format: `clear`
 
 ### Exiting the program : `exit`
-
 Exits the program.
 
 Format: `exit`
-
 ### Saving the data
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -166,26 +162,18 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 </div>
 
 ### Archiving data files `[coming in v2.0]`
-
 _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
-
 ## FAQ
-
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
-
 --------------------------------------------------------------------------------------------------------------------
-
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-
 --------------------------------------------------------------------------------------------------------------------
-
 ## Command summary
-
 Action | Format, Examples
 --------|------------------
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
