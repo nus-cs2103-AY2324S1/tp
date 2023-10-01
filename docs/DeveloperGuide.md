@@ -328,7 +328,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. The application should respond promptly to user inputs, with minimal latency and loading times for data retrieval and processing.
 3. The user interface should be user-friendly and intuitive, designed to optimize the workflow of frontdesk staff who need to complete tasks within 2-3 minutes.
 4. The application should be designed to handle an increasing volume of patient records efficiently without noticeable performance degradation.
-5. Ensure that the application complies with PDPA and healthcare regulations
+5. Ensure that the application complies with PDPA and healthcare regulations.
 
 *{More to be added}*
 
