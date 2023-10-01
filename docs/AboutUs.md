@@ -36,11 +36,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[github](http://github.com/yiwen101)]
 [[portfolio](team/yiwen.md)]
-### Johnny Doe
+### Marcus Soh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/marcus.jpg" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/HollaG)] [[portfolio](team/marcus.md)]
 
 * Role: Developer
 * Responsibilities: Data
