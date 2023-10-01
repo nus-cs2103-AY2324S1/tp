@@ -344,8 +344,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  The application should respond and load all data within three seconds.
+5.  The response time for adding, updating, or deleting student records should be within two seconds.
+6.  The system should be usable with a user interface that is intuitive enough for users who have not used similar applications before.
+7.  Users will only have access to their own students' data.
 
-*{More to be added}*
 
 ### Glossary
 
