@@ -40,12 +40,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Documentation + Code Quality
 
-### Jean Doe
+### Huang Yi Chee
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/hyc17003.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/hyc17003)]
+[[portfolio](team/hyc17003.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
