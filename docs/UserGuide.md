@@ -32,7 +32,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete n/Alex Yeoh` : Deletes Alex Yeoh details from the current list.
 
    * `clear` : Deletes all contacts.
 
@@ -131,19 +131,28 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Deleting a person or field: `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified person or the fields for the person from HealthSync
 
-Format: `delete INDEX`
+Format: `delete [identification] [field]`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Deletes the person with the specified `identification`.
+* Identification refers to the person's name or IC number
+* The identification must be a valid input
+* To delete a specified field only instead of the entire person, we indicate the field behind of the identification
+* If multiple people has the same name, HealthSync will display a list of people with that name together with their IC number.
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `Delete id/S9987362H` deletes all the details of the person with the specified IC number from HealthSync.
+* `Delete n/John Doe` deletes all the details of John Doe from HealthSync.
+* `Delete n/John Doe /PHONE_NUMBER` deletes John Doe phone number from his profile.
+
+<!--
+Original format, can consider using
+list followed by delete 2 deletes the 2nd person in the address book.
+find Betsy followed by delete 1 deletes the 1st person in the results of the find command.
+--> 
 
 ### Clearing all entries : `clear`
 
@@ -196,7 +205,7 @@ Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Delete** | `delete [idenfication] [field]`<br> e.g., `delete n/John Doe e/johndoe@example.com`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**   | `list`
