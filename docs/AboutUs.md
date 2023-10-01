@@ -21,7 +21,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Koh Kai Jie
 
-<img src="images/kaijie.png" width="200px">
+<img src="images/kohkaijie.png" width="200px">
 
 [[homepage](https://www.linkedin.com/in/koh-kai-jie-1064b728b/)]
 [[github](http://github.com/kohkaijie)]
