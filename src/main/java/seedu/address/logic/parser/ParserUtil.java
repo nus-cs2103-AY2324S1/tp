@@ -92,10 +92,6 @@ public class ParserUtil {
         return new Email(trimmedEmail);
     }
 
-    public static Remark parseRemark(String remark) {
-        return new Remark(remark);
-    }
-
     /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
