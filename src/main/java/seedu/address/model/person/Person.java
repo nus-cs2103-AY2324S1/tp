@@ -14,12 +14,14 @@ import seedu.address.model.tag.Tag;
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public abstract class Person {
 
     // Identity fields
     private final Name name;
     private final Phone phone;
     private final Email email;
+    private final Gender gender;
+    private final Ic ic;
 
     // Data fields
     private final Address address;
@@ -29,13 +31,16 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Remark remark, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Remark remark, Gender gender, Ic ic,
+                  Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, gender, ic, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.remark = remark;
+        this.gender = gender;
+        this.ic = ic;
         this.tags.addAll(tags);
     }
 
@@ -57,6 +62,14 @@ public class Person {
 
     public Remark getRemark() {
         return remark;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public Ic getIc() {
+        return ic;
     }
 
     /**
@@ -100,13 +113,15 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
+                && gender.equals(otherPerson.gender)
+                && ic.equals(otherPerson.ic)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, gender, ic, tags);
     }
 
     @Override
@@ -117,6 +132,8 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("remark", remark)
+                .add("gender", gender)
+                .add("nric", ic)
                 .add("tags", tags)
                 .toString();
     }

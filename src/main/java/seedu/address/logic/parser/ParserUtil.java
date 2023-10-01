@@ -93,6 +93,36 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String ic} into an {@code Ic}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code ic} is invalid.
+     */
+    public static Ic parseIc(String ic) throws ParseException {
+        requireNonNull(ic);
+        String trimmedIc = ic.trim();
+        if (!Ic.isValidIc(trimmedIc)) {
+            throw new ParseException(Ic.MESSAGE_CONSTRAINTS);
+        }
+        return new Ic(trimmedIc);
+    }
+
+    /**
+     * Parses a {@code String gender} into an {@code Gender}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code gender} is invalid.
+     */
+    public static Gender parseGender(String gender) throws ParseException {
+        requireNonNull(gender);
+        String trimmedGender = gender.trim();
+        if (!Gender.isValidGender(trimmedGender)) {
+            throw new ParseException(Gender.MESSAGE_CONSTRAINTS);
+        }
+        return new Gender(trimmedGender);
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
