@@ -269,13 +269,15 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
+* works as a tuition administrative staff
 * can type fast
 * prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* wants to know his students well as part of his work
+* wants to make use of statistics and technology to make marketing decisions
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Our product will take in data as inputs and return statistical analysis. 
+Instead of showing information of independent individuals, our product aims to provide quantitative data analysis of students for users to draw conclusions on commonalities among students and their demographics, offering insights on marketing strategies. 
+
 
 
 ### User stories
