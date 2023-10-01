@@ -32,7 +32,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete n/Alex Yeoh` : Deletes Alex Yeoh details from the current list.
 
    * `clear` : Deletes all contacts.
 
@@ -114,35 +114,62 @@ Examples:
 
 ### Locating persons by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Enables front desk workers to quickly retrieve patient information based on command executed. If no fields are provided, the function returns all the patient’s related information. Else, only the details relating to the field are provided.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Patient information includes:
+- Patient’s contacts
+- Patient’s medical history
+- Patient’s ward information
+- Patient’s upcoming appointment time(s)
+
+Formats:
+1. `find n/NAME` *or* `id/IC_NUMBER`
+2. `find n/NAME [field]` *or* `id/IC_NUMBER [field]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
+* Only the name or IC number is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* For the name, only persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+Acceptable values for each parameter:
+* String
 
-### Deleting a person : `delete`
+Expected outputs when the command succeeds:
+* `Patient n/NAME or id/IC_NUMBER: [field] …`
 
-Deletes the specified person from the address book.
-
-Format: `delete INDEX`
-
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+Expected output when the command fails:
+* `Unable to find the patient. Check if the patient’s information is correct.`
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `find n/John` returns `john` and `John Doe`
+* `find id/s894219J phone/ address/` returns phone and address of patient with IC number s894219J
+* `find id/S872D` returns `Alex Yeoh`, with IC number `S872D` <br>
+  ![result for 'find id/S872D'](images/findidS872DResult.png)
+
+### Deleting a person or field: `delete`
+
+Deletes the specified person or the fields for the person from HealthSync
+
+Format: `delete [identification] [field]`
+
+* Deletes the person with the specified `identification`.
+* Identification refers to the person's name or IC number
+* The identification must be a valid input
+* To delete a specified field only instead of the entire person, we indicate the field behind of the identification
+* If multiple people has the same name, HealthSync will display a list of people with that name together with their IC number.
+
+Examples:
+* `Delete id/S9987362H` deletes all the details of the person with the specified IC number from HealthSync.
+* `Delete n/John Doe` deletes all the details of John Doe from HealthSync.
+* `Delete n/John Doe /PHONE_NUMBER` deletes John Doe phone number from his profile.
+
+<!--
+Original format, can consider using
+list followed by delete 2 deletes the 2nd person in the address book.
+find Betsy followed by delete 1 deletes the 1st person in the results of the find command.
+--> 
 
 ### Clearing all entries : `clear`
 
@@ -195,8 +222,8 @@ Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Delete** | `delete [idenfication] [field]`<br> e.g., `delete n/John Doe e/johndoe@example.com`
 **Edit**   | `edit n/NAME or id/IC_NUMBER [field] ... `<br> e.g.,`edit n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find**   | `find n/NAME [field]` *or* `find id/IC_NUMBER [field]`<br> e.g., `find n/James Jake` *or* `find id/S872D`
 **List**   | `list`
 **Help**   | `help`
