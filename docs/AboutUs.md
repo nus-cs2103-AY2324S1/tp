@@ -20,21 +20,27 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Lead Developer
 
-### Jane Doe
+### Richie Hsieh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/richiehx.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/richiehx)]
+[[portfolio](team/richiehx.md)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: Development
 
-### Johnny Doe
+### Wang Yiwen
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/yiwen.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/yiwen101)]
+[[portfolio](team/yiwen.md)]
+### Marcus Soh
+
+<img src="images/marcus.jpg" width="200px">
+
+[[github](http://github.com/HollaG)] [[portfolio](team/marcus.md)]
 
 * Role: Developer
 * Responsibilities: Data
