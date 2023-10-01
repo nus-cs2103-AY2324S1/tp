@@ -12,7 +12,7 @@ Given below are my contributions to the project.
 * **Accept multiple time formats**: Added the ability to accept multiple time formats.
     * What it does: Allows the user to enter a time in different formats
     * Justification: Different individuals have different ways of entering dates
-    * Highlights: This feature increases the flexibility of the command, 
+    * Highlights: This feature increases the flexibility of the command,
       allowing the user to type in inputs without the input being rejected, leading to better UX.
 
 * **Code contributed**: [RepoSense link]()

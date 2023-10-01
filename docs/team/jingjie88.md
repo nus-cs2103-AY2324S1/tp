@@ -6,20 +6,20 @@ title: Jing Jie's Project Portfolio Page
 ### Project: InterviewHub
 
 InterviewHub is a desktop interview management application for tech hiring managers.
-The user interacts with it using a CLI, and it has a GUI created with JavaFX. 
+The user interacts with it using a CLI, and it has a GUI created with JavaFX.
 It is written in Java.
 
 Given below are my contributions to the project.
 
 * **New Feature**: To be added
-    * What it does: 
-    * Justification: 
-    * Highlights: 
-    * Credits: 
+    * What it does:
+    * Justification:
+    * Highlights:
+    * Credits:
 
 
 * **Code contributed**: [RepoSense link]()
-    * placeholder 
+    * placeholder
 * **Project management**:
     * placeholder
 
