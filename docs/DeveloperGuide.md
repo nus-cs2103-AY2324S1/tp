@@ -324,9 +324,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. The application should be compatible with the designated operating systems and hardware configurations, as specified in the system requirements.
+2. The application should respond promptly to user inputs, with minimal latency and loading times for data retrieval and processing.
+3. The user interface should be user-friendly and intuitive, designed to optimize the workflow of frontdesk staff who need to complete tasks within 2-3 minutes.
+4. The application should be designed to handle an increasing volume of patient records efficiently without noticeable performance degradation.
+5. Ensure that the application complies with PDPA and healthcare regulations
 
 *{More to be added}*
 
