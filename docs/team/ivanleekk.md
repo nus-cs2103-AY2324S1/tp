@@ -3,12 +3,30 @@ layout: default.md
   title: " Project Portfolio Page"
 ---
 
-### Project: Staff-Snap
+# Project: Staff-Snap
+## Ivan Lee's Project Portfolio Page!
 Author: Ivan Lee @ivanleekk
+
+### What is Staff-Snap?
+
+---
 
 Staff-Snap is a desktop HR management application used for managing employees. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about **~~10 kLoC~~**.
 
+### What have I done?
+
+___
+
 Given below are my contributions to the project.
+
+TODO: 
+- [ ] Update features 
+- [ ] Update reposense link
+- [ ] Update Project Management
+- [ ] Update Enhancements
+- [ ] Update User guide and Dev guide
+- [ ] Update Community
+- [ ] Update Tools
 
 * **New Feature**: Added the ability to undo/redo previous commands.
   * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
