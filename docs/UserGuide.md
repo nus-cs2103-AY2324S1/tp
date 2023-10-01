@@ -230,17 +230,14 @@ Examples:
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Clearing all entries : `clear`
-
 Clears all entries from the address book.
 
 Format: `clear`
 
 ### Exiting the program : `exit`
-
 Exits the program.
 
 Format: `exit`
-
 ### Saving the data
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -254,11 +251,9 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 </div>
 
 ### Archiving data files `[coming in v2.0]`
-
 _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
-
 ## Command summary
 
 Action | Format
