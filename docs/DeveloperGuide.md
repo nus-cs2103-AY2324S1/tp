@@ -260,7 +260,7 @@ HouR is a desktop app for human resources staff managing employee data, optimise
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* has a need to manage a significant number of employee records
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
@@ -371,13 +371,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 6. The product is not required to handle the printing of reports 
 7. The app only supports English.
 
-
 *{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Employee**: A worker in the company
+
+*{More to be added}*
 
 --------------------------------------------------------------------------------------------------------------------
 

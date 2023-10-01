@@ -41,12 +41,12 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
 
 ## Features
 
-- List of commands: `help`
+- List of commands (coming soon): `help`
 - Add an employee: `add`
 - Delete an employee: `delete`
 - List all employees: `list`
 - Find employees by name (coming soon): `find`
-- Clear all employees: `clear`
+- Clear all employees (coming soon): `clear`
 - Exit the program: `exit`
 
 <div markdown="block" class="alert alert-info">
@@ -89,7 +89,7 @@ Examples:
 
 ![add success](images/addSuccess.png)
 
-* `add n/John Doe/Software Engineer id/EID2023-7890` is invalid because `id` already exists in the records.
+* `add n/John Doe p/Software Engineer id/EID2023-7890` is invalid because `id` already exists in the records.
 
 ![add failure](images/addFailure.png)
 
@@ -111,7 +111,6 @@ Format: `edit INDEX [n/NAME] [p/POSITION] [id/EMPLOYEE_ID]`
 
 Examples:
 *  `edit 1 p/Senior Software Engineer` Edits the position of the 1st person to be `Senior Software Engineer`.
-*  `edit 2 n/Bernice Yu t/` Edits the name of the 2nd person to be `Bernice Yu`.
 ![edit success](images/editSuccess.png)
 *  `edit 10 p/Senior Software Engineer` is invalid because the index does not exist.
 ![edit failure](images/editFailure.png)
@@ -130,9 +129,10 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find Alex` returns `Alex Yeoh`
+* ![find sucess](images/findSuccess.png)
+* `find John` is invalid since no employee matches the keyword<br>
+  ![find failuer](images/findFailure.png)
 
 ### Deleting an employee : `delete`
 
@@ -153,7 +153,7 @@ Expected outcome of success:
 Expected outcome of failure:  
 ![delete failure](images/deleteFailure.png)
 
-### Clearing all entries : `clear`
+### Clearing all entries : `clear` [coming soon]
 
 Clears all entries from the address book.
 
