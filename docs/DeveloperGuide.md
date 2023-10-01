@@ -255,6 +255,9 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
+HouR is a desktop app for human resources staff managing employee data, optimised for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, HouR can get your employee management tasks done faster than traditional GUI apps.
+
+
 **Target user profile**:
 
 * has a need to manage a significant number of contacts
