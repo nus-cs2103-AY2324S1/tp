@@ -131,9 +131,37 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+### Showing a person's details : `show`
+
+Shows the details of the specified person from the contact list in the application.
+
+Format: `show INDEX`
+
+* Shows the details of the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `show 2` shows the details of the 2nd person in the contact list.
+* `find Betsy` followed by `show 1` shows the details of the 1st person in the results of the `find` command.
+
+Success Output:
+```
+Leah
+Subjects: Chemistry, Math
+Phone Number: 98765432
+Email: leah@example.com
+Address: Evergreen street, block 123, #01-01
+```
+
+Failure Output:
+```
+Invalid Index entered, please try showing the contact again with the correct Index!
+```
+
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified person from the contact list in the application.
 
 Format: `delete INDEX`
 
@@ -142,8 +170,18 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
+* `list` followed by `delete 2` deletes the 2nd person in the contact list.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+Success Output:
+```
+Student Leah has been deleted successfully!
+```
+
+Failure Output:
+```
+Invalid Index entered, please try deleting the contact again with the correct Index!
+```
 
 ### Clearing all entries : `clear`
 
