@@ -3,13 +3,30 @@
 
 ![Ui](docs/images/Ui.png)
 
-* This is **a sample project for Software Engineering (SE) students**.<br>
-  Example usages:
-  * as a starting point of a course project (as opposed to writing everything from scratch)
-  * as a case study
-* The project simulates an ongoing software project for a desktop application (called _AddressBook_) used for managing contact details.
-  * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC) than what students usually write in beginner-level SE modules, without being overwhelmingly big.
-  * It comes with a **reasonable level of user and developer documentation**.
-* It is named `AddressBook Level 3` (`AB3` for short) because it was initially created as a part of a series of `AddressBook` projects (`Level 1`, `Level 2`, `Level 3` ...).
-* For the detailed documentation of this project, see the **[Address Book Product Website](https://se-education.org/addressbook-level3)**.
-* This project is a **part of the se-education.org** initiative. If you would like to contribute code to this project, see [se-education.org](https://se-education.org#https://se-education.org/#contributing) for more info.
+This is an addressbook app for HR people to use.
+
+**Features**
+**CRUD**
+* Create Employee
+* Read Employee data
+* Update Employee data
+* Delete Employee data
+* Save data to file
+* Delete all data
+
+**Employee Management**
+* Sorting employees based on: alphabetical order of name
+* Search for employees based on: name
+* Filter employees based on: department, full-time/part-time
+* Tag the department which the employee is working in
+* Track the number of vacation days left for the employee
+* Add positive feedback received from customers to an employee’s information,  on a 5 point scale for how positive the feedback was and a description of what they did to receive the praise
+* Add negative feedback received from customers to an employee’s information, on a 5 point scale for severity and a description of what the incident was about
+* Mark if the employee was late for work, including on which day and for how many mins/hours
+* View performance analytics for all employees, based on tracked metrics like feedback received and frequency of late coming
+
+**Payroll**
+* Update on a monthly basis whether an employee has been paid for that payment period
+* Update on a monthly basis if an entire department has been paid for that payment period
+* Generate a preliminary bonus allocation based on the performance analytics score as a basis for splitting the bonus amount among all eligible staff, depending on the sum available for disbursal
+

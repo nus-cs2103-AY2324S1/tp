@@ -61,7 +61,7 @@ Acceptable values for each parameter:
 * `IS_FULL_TIME` : true or false
 
 Expected output when the command succeeds:
-* Response Area shows: “Added employee NAME successfully.”
+* Response Area shows: “Added employee `NAME` successfully. Data saved to file.”
 * Working Area shows the updated list of employees
 
 Expected output when the command fails:  
@@ -120,7 +120,7 @@ Acceptable value for each parameter:
 * `IS_FULL_TIME` : true or false
 
 Expected output when the command succeeds:
-* Response Area shows: “Updated employee NAME details successfully.”
+* Response Area shows: “Updated employee `NAME` details successfully. Data saved to file.”
 * Working Area shows the updated employee details
 
 Expected output when the command fails:
@@ -174,7 +174,7 @@ Acceptable values for each parameter:
 * `INDEX` : positive integer not larger than the number of employees
 
 Expected output when the command succeeds:
-* Response Area shows “Deleted employee with index number `INDEX`.”
+* Response Area shows “Deleted employee with index number `INDEX`. Data saved to file.”
 * Working Area shows the updated list of employees with their details
 
 
@@ -326,7 +326,7 @@ Acceptable value for each parameter:
 
 Expected output when the command succeeds:
 * Working area shows list of employees filtered by the criteria used
-* Response area shows “Employees filtered by DESCRIPTOR CRITERIA”
+* Response area shows “Employees filtered by `DESCRIPTOR CRITERIA`”
 
 Expected output when the command fails:
 * No descriptor given: “Please input a descriptor to filter by.”
