@@ -22,7 +22,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/KumChaiYin.png" width="200px">
 
-[[github](http://github.com/KumChaiYin)] 
+[[github](http://github.com/KumChaiYin)]
 [[portfolio](team/KumChaiYin.md)]
 
 * Role: Documentation
