@@ -9,7 +9,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Chen Peiran
 
 <img src="images/johndoe.png" width="200px">
 
@@ -17,43 +17,44 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/johndoe)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Project Advisor
+* Role: Documentation IC
+* Responsibilities:
 
-### Jane Doe
+### Chen Zhiruo
 
 <img src="images/johndoe.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/czhiruo)]
+[[portfolio](team/czhiruo.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Deliverables and Deadlines IC
+* Responsibilities:
 
-### Johnny Doe
+### Jeremy Yong Zheming
 
 <img src="images/johndoe.png" width="200px">
 
 [[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Scheduling and Tracking IC
+* Responsibilities:
 
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
+### Miguel Foo Ming Yew
 
 <img src="images/johndoe.png" width="200px">
 
 [[github](http://github.com/johndoe)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Developer
+* Role: Testing & Code Quality IC
+* Responsibilities:
+
+### Yan Weidong (Evan)
+
+<img src="images/about-us/evan-yan.png" width="200px">
+
+[[github](https://github.com/evanyan13)]
+[[portfolio](team/evanyan13.md)]
+
+* Role: Team Lead
 * Responsibilities: UI

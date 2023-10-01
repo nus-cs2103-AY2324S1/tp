@@ -1,11 +1,10 @@
----
-layout: page
-title: User Guide
----
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+# JobFindr User Guide
 
-* Table of Contents
-{:toc}
+---
+
+Jobfindr is a **Contact Book app** for NUS fresh graduates who are looking for jobs. 
+It simplifies _contact management_, provides _reminders_ and enhances _organisation_, helping users _stay competitive_ in the job market.
+The project simulates an ongoing software project for a desktop application (called _JobFindr_) used for managing job applications.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -62,34 +61,139 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
+---
+
+### Adding an application : `add`
+
+Adds an application to a company to the list.
+
+**Format:** `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS​`
+
+* Users must input a company `NAME`
+* Details of the company such as `PHONE_NUMBER`, `EMAIL` and `ADDRESS` are optional
+
+**Successful command:**
+print “Application to (Company name) has been added.”
+
+**Failed command:**
+print “Error: ” and error message for:
+* `NAME` is not in the command: “Name of company was not included in the command.”
+
+**Examples:**
+* `add n/Microsoft p/98765432 e/microsoft@gmail.com a/182 Cecil St, #13-01, Singapore 069547`
+  Adds a company called microsoft, adds their phone number, email and address 
+* `add n/The Coca-Cola Company e/cocacola@yahoo.com`
+  Adds a company called The Coca Cola Company, adds their email
+
+---
+
+### Deleting an application : `delete`
+
+Deletes the specified application from the list.
+
+**Format:** `delete INDEX`
+
+* Deletes the application to the company at the specified `INDEX`.
+* The `INDEX` refers to the index number shown in the displayed application list.
+* The `INDEX` must be a _positive integer_ 1, 2, 3, …​
+
+**Successful command:**
+print “Application to (Company name) has been deleted.”
+
+**Failed command:**
+print “Error: ” and error message for:
+* `INDEX` is not a positive integer: “Index must be a positive integer.”
+* `INDEX` is larger than list size: “No such company at index (`INDEX`).”
+
+**Examples:**
+* `list` followed by `delete 2`
+  Deletes the 2nd application in the list.
+
+---
+
+### Listing all applications : `list`
+
+Shows a list of all applications in the list.
+
+**Format:** `list`
+
+**Successful command:**
+List out all applications to companies in the list with index.
+
+**Failed command:**
+print “Error: ” and error message for:
+* List is empty: “List is empty.”
+* Arguments passed after the list command: “Unexpected arguments.”
+
+**UI mockup:**
+(insert photo)
+
+---
+
+### Marking the status of an application : `mark`
+
+Marks the status of an existing application in the list.
+
+**Format:** `mark INDEX s/STATUS`
+
+* Marks the status of the application at the specified `INDEX` as submitted, pending, accepted, or rejected.
+* The `INDEX` refers to the index number shown in the displayed application list.
+* The `INDEX` must be a _positive integer_ 1, 2, 3, …​
+
+**Successful command:**
+print “Application to (Company name) has been marked as `STATUS`.”
+
+**Failed command:**
+print “Error: ” and error message for:
+* `INDEX` is not a positive integer: “Index must be a positive integer.”
+* `INDEX` is larger than list size: “No such company at index (`INDEX`).”
+
+**Examples:**
+* `mark 1 submitted` 
+  Marks the status of the company application at index 1 as submitted.
+* `mark 2 rejected` 
+  Marks the status of the company application at index 1 as rejected.
+
+---
+
+### Setting the deadline for an application submission : `set deadline`
+
+Sets submission deadline for an existing application in the list.
+
+**Format:** `set deadline INDEX d/DEADLINE`
+
+* Sets deadline for the existing application at the specified `INDEX`.
+* The `INDEX` refers to the index number shown in the displayed application list.
+* The `INDEX` must be a _positive integer_ 1, 2, 3, …​
+* `DEADLINE` must be provided in the accepted `DATETIME` Format as listed below:
+  - Nov 12 2022 1200 
+  - 12 Nov 2022 1200 
+  - 2022-11-12 1200 
+  - 12/11/2022 1200
+
+**Successful command:**
+print “(Company Name)’s application deadline has been set to `DEADLINE`.”
+
+**Failed command:**
+print “Error: ” and error message:
+* `INDEX` is not a positive integer: “Index must be a positive integer.”
+* `INDEX` is larger than list size: “No such company at index (index).”
+
+**Examples:**
+* `setdeadline 1 d/Nov 12 2022 1200` 
+  Sets deadline for application at index 1 to be Nov 12 2022 1200.
+
+---
+
+# [coming soon]
+
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
 Format: `help`
-
-
-### Adding a person: `add`
-
-Adds a person to the address book.
-
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
-
-Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
-
-### Listing all persons : `list`
-
-Shows a list of all persons in the address book.
-
-Format: `list`
 
 ### Editing a person : `edit`
 
@@ -102,12 +206,11 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+  specifying any tags after it.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-
 ### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
@@ -125,20 +228,6 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
-
-### Deleting a person : `delete`
-
-Deletes the specified person from the address book.
-
-Format: `delete INDEX`
-
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 ### Clearing all entries : `clear`
 Clears all entries from the address book.
@@ -165,21 +254,18 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
-## FAQ
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
---------------------------------------------------------------------------------------------------------------------
-## Known issues
-
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
---------------------------------------------------------------------------------------------------------------------
 ## Command summary
-Action | Format, Examples
+
+Action | Format
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`
+**Delete** | `delete INDEX`
+**List** | `list`
+**Mark** | `mark INDEX s/STATUS`
+**SetDeadline** | `set deadline INDEX d/DEADLINE`
+
+### [coming soon]
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
 **Help** | `help`
+**Clear** | `clear`
