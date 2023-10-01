@@ -75,20 +75,38 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding a patient: `add`
 
-Adds a person to the address book.
+Adds a patient into the program, with the given patient information.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+A patient's name and IC are required when creating a new entry into the program.
 
-<box type="tip" seamless>
+Optional Patient information includes:
+ - Patient’s contacts
+ - Patient’s medical history
+ - Patient’s ward information
+ - Patient’s upcoming appointment time(s)
 
-**Tip:** A person can have any number of tags (including 0)
-</box>
+Command format: `add n/NAME id/IC_NUMBER [field] ...`
 
-Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+`[field]` include the following:
+```
+phone/PHONE_NUMBER
+email/EMAIL
+address/ADDRESS
+medical/MEDICAL_HISTORY
+ward/WARD_INFORMATION
+start/APPOINTMENT_START end/APPOINTMENT_END (Used as start/end/ in commands)
+```
+Example commands:
+ - `add n/Aaron Tan Jun Jie id/S8943782H ward/Psychology phone/98114839`
+
+Expected outputs when the command succeeds:
+ - `Patient Aaron Tan Jun Jie has been added with the fields: id/S8943782H ward/Psychology phone/98114839`
+
+Expected outputs when the command fails:
+ - `Unable to add the patient to the database: Patient already exists.`
+ - `Unable to add the patient to the database: IC required.`
 
 ### Listing all persons : `list`
 
