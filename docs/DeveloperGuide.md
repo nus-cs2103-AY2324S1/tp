@@ -295,16 +295,42 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `HealthSync` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC1 - Add a patient**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to add a patient into the list.
+2.  HealthSync adds the target patient into the list
+    and displays the patient inside the updated list.
+3.  HealthSync <u>performs an auto-save (UC0A)</u>.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The user does not specify one or more of the compulsory fields.
+
+  * 1a1. HealthSync shows an error message.
+
+    Use case ends.
+
+* 1b. The user specifies a name or IC that is not unique in the current list.
+
+  * 1b1. HealthSync shows an error message.
+
+    Use case ends.
+
+**Use case: UC2 - Delete a patient**
+
+**MSS**
+
+1.  User requests a list of patients inside the system.
+2.  HealthSync displays the list of patients.
+3.  User requests to delete a specific user in the list.
+4.  HealthSync deletes the patient from the list.
+5.  HealthSync <u>performs an auto-save (UC0A)</u>.
 
     Use case ends.
 
@@ -314,11 +340,102 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 3a. The user specifies an invalid index.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. HealthSync shows an error message.
 
-      Use case resumes at step 2.
+      Use case ends.
+
+**Use case: UC3 - Find a patient**
+
+**MSS**
+
+1.  User requests a list of patients inside the system.
+2.  HealthSync displays the list of patients.
+3.  User requests to change a specific user's fields with a new value in the list.
+4.  HealthSync edits only the patient's fields in the list.
+5.  HealthSync <u>performs an auto-save (UC0A)</u>.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The user specifies an invalid index.
+
+    * 3a1. HealthSync shows an error message.
+
+      Use case ends.
+
+* 3b. The user does not specify any fields they want to edit.
+
+    * 3b1. HealthSync shows an error message.
+
+      Use case ends.
+
+* 3c. The user specifies duplicate fields they want to edit.
+
+    * 3c1. HealthSync shows an error message.
+
+      Use case ends.
+
+* 3d. The user specifies no value in a name/IC field.
+
+    * 3d1. HealthSync shows an error message.
+
+      Use case ends.
+
+* 3e. The user specifies no value in an optional field.
+
+    * 3e1. HealthSync deletes the value from the patient.
+
+      Resume from step 5.
+
+**Use case: UC4 - Edit a patient**
+
+**MSS**
+
+1.  User requests for matches to the given query.
+2.  HealthSync displays the list of patients matching the query.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. No matches exist in the list.
+
+    * 1a1. HealthSync displays a "no matches found" message.
+
+      Use case ends.
+
+* 1b. User additionally specifies fields of the patient that they are interested in.
+
+    * 1b1. HealthSync displays only the specific fields of the patients that match the query.
+
+      Use case ends.
+
+**Use case: UC0A - Auto-save**
+
+**Actors:** Operating System (OS)
+
+**MSS**
+
+1.  HealthSync requests for permissions from the OS to access its save location.
+2.  OS grants HealthSync permission to access its save location.
+3.  HealthSync saves the session data into the save location.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. OS does not grant HealthSync save location permissions.
+
+    * 1a1. HealthSync shows an error message.
+
+    Use case ends.
 
 *{More to be added}*
 
