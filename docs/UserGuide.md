@@ -41,6 +41,14 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
 
 ## Features
 
+- List of commands: `help`
+- Add an employee: `add`
+- Delete an employee: `delete`
+- List all employees: `list`
+- Find employees by name (coming soon): `find`
+- Clear all employees: `clear`
+- Exit the program: `exit`
+
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
