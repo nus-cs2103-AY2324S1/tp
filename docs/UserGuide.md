@@ -75,20 +75,20 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding a student's data: `add`
 
-Adds a person to the address book.
+Adds a student's data to the address book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <box type="tip" seamless>
 
-**Tip:** A person can have any number of tags (including 0)
+**Tip:** A student must have at least 1 tag (subject)
 </box>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/Chemistry`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/Mathematics`
 
 ### Listing all persons : `list`
 
