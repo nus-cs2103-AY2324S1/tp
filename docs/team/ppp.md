@@ -1,3 +1,4 @@
+
 ---
 layout: page
 title: <Your Name>'s Project Portfolio Page
@@ -19,7 +20,10 @@ Given below are my contributions to the project.
 * **Enhancements to existing features**:
   *to be added soon*
 
-* **Documentation**:
+* **Documentation for Developer Guide**:
+  *to be added soon*
+
+* **Documentation for User Guide**:
   *to be added soon*
 
 * **Community**:
