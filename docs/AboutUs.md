@@ -43,7 +43,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/Kevin-Liusx.png" width="200px">
 
 [[github](https://github.com/Kevin-Liusx)]
-[[portfolio](team/shixin.md)]
+[[portfolio](team/kevin-liusx.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops
