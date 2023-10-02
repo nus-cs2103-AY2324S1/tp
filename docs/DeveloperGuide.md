@@ -335,7 +335,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to read information of existing staff member
 2. ManaGease displays the information for a member
 
-   Use case ends
+   Use case ends.
    
 **Extensions**
 
