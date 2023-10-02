@@ -1,4 +1,4 @@
-brqplugins {
+plugins {
     id 'java'
     id 'checkstyle'
     id 'com.github.johnrengelman.shadow' version '7.1.2'
