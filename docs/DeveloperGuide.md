@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# Staff-Snap Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -324,16 +324,36 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. The entire software should be able to be packaged into a single _JAR file_ for users to download.
+3. The file size of the JAR file should not exceed 100MB.
+4. A user who can type fast should be able to accomplish most tasks faster via a _command line interface (CLI)_, 
+compared to a hypothetical GUI-only version of the app.
+5. The product is for single-users. The application should not be running in a shared computer and with
+   different people using it at different times. 
+6. The software should respond to user input within 2 seconds under normal load conditions.
+7. There should be no shared file storage mechanism. The data file created by one user should not be accessed by
+   another user during regular operations.
+8. The data should be stored locally and should be in a _human editable text file_.
+9. The software should work without requiring an installer.
+10. The software should not depend on a remote server so that anyone can use the app at anytime.
+11. The _GUI_ should not cause any resolution-related inconveniences to the user for
+    standard screen resolutions 1920x1080 and higher, and for screen scales 100% and 125%.
+12. All functions can be used via the GUI, even if the user experience is not optimal, for resolutions 1280x720 and higher,
+    and for screen scales 150%.
+13. The software should provide error messages which clearly states the error and provides guidance on correcting the error.
+14. The software should provide easily accessible help in the form of documentation for users unfamiliar with the commands.
+15. The software should include automated tests to ensure correctness and reliability.
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Mainstream OS**: Windows, Linux, MacOS
+* **JAR file**: A package file format that bundles all the components of a Java application into a single file for distribution.
+* **Command Line Interface (CLI)**: A means for users to interact with a software by inputting commands
+* **Human editable text file**: A text file that can be viewed and modified using a standard text editor by a user. 
+(e.g. a `.txt` file)
+* **Graphical User Interface (GUI)**: A type of user interface that allows users to interact with software through 
+graphical icons and visual indicators.
 
 --------------------------------------------------------------------------------------------------------------------
 
