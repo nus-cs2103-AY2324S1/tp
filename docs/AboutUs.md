@@ -9,51 +9,47 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Antony Swami Alfred Ben
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/AlfredBeNoel.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/AlfredBeNoel)]
+[[portfolio](team/AlfredBeNoel.md)]
 
-* Role: Project Advisor
+* Role: Documentation Expert
 
-### Jane Doe
+### Chan Rui Jia
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/matochichap.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/matochichap)]
+[[portfolio](team/matochichap.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Intellij Expert
 
-### Johnny Doe
+### Jonas Ong Si Wei
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jonasongg.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/jonasongg)]
+[[portfolio](team/jonasongg.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Git Expert
 
-### Jean Doe
+### Lim Win Sheng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/WinSheng1.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/WinSheng1)]
+[[portfolio](team/WinSheng1.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Scheduling and Tracking
 
-### James Doe
+### Teng Hui Xin Alicia
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/Saezenn.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/Saezenn)]
+[[portfolio](team/Saezenn.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: UI Design Expert
