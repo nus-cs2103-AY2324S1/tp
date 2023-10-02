@@ -1,6 +1,6 @@
 ---
 layout: default.md
-title: "Shishir Bychapur's Project Portfolio Page"
+title: "Seng Kitt Bychapur's Project Portfolio Page"
 ---
 
 # Seng Kitt's Portfolio Page
