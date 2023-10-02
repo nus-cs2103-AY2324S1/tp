@@ -8,7 +8,7 @@
 
 ## User Interface Guide
 
-![User Interface Guide Example](./images/User Interface Guide.png)
+![User Interface Guide Example](./images/userInterfaceGuide.png)
 
 ## Notation Guide
 Here are some conventions used in this guide when describing the commands:
@@ -75,7 +75,7 @@ Expected output when the command fails:
 
 UI mockup:
 
-![Add UI Mockup](./images/Add.png)
+![Add UI Mockup](./images/add.png)
 
 ---
 ### edit : Editing an employee entry
@@ -135,7 +135,7 @@ Expected output when the command fails:
 * Invalid department: “Invalid value for DEPARTMENT. The value should be marketing/finance/operations/hr.”
 
 UI mockup:
-![Edit UI Mockup](./images/Edit.png)
+![Edit UI Mockup](./images/edit.png)
 ---
 ### list : Listing all employee entries
 
@@ -159,7 +159,7 @@ Expected output when the command fails:
 * This command should never fail.
 
 UI mockup:
-![List UI Mockup](./images/List.png)
+![List UI Mockup](./images/list.png)
 ---
 ### delete : Deleting an employee entry
 
@@ -183,7 +183,7 @@ Missing index. “Missing `INDEX`. The command format should be `delete i/INDEX`
 Invalid index: “Invalid `INDEX`. The index should be a positive integer not larger than the number of employees.”
 
 UI mockup:
-![Delete UI Mockup](./images/Delete.png)
+![Delete UI Mockup](./images/delete.png)
 
 ---
 ### find : Finding an employee by name
@@ -214,7 +214,7 @@ Expected output when the command fails:
 Missing keyword: “Missing `KEYWORD`. Please input a keyword.”
 
 UI mockup:
-![Find UI Mockup](./images/Find.png)
+![Find UI Mockup](./images/find.png)
 ---
 ### sort: Sorting employees by descriptor
 
@@ -248,7 +248,7 @@ Expected output when the command fails:
 * Invalid descriptor: “Invalid value for `DESCRIPTOR`. Please input a valid descriptor from this list: `name / department / job_title / salary / start_date / is_full_time`.”
 
 UI mockup:
-![Sort UI Mockup](./images/Sort.png)
+![Sort UI Mockup](./images/sort.png)
 ---
 
 
@@ -336,7 +336,7 @@ Expected output when the command fails:
 
 UI mockup:
 
-![Filter UI Mockup](./images/Filter.png)
+![Filter UI Mockup](./images/filter.png)
 
 ---
 ### Saving the data
@@ -385,7 +385,7 @@ Expected output when the command fails:
 * This command should never fail.
 
 UI mockup:
-![Clear UI Mockup](./images/Clear.png)
+![Clear UI Mockup](./images/clear.png)
 
 ---
 ### help : Listing all commands
@@ -408,7 +408,7 @@ Expected output when the command fails:
 * This command should never fail.
 
 UI mockup:
-![Help UI Mockup](./images/Help.png)
+![Help UI Mockup](./images/help.png)
 
 ---
 ### exit : Exiting the program

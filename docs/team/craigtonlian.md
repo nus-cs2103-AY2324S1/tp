@@ -7,11 +7,10 @@
 
 > ***Craigton Lian's*** *Project Portfolio Page*<br>
 
-### Overview<hr>
+## Overview
 Staff-Snap is a desktop HR management application used for managing employees. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about <span style="color:red">**[TO BE UPDATED]**</span> 10 kLoC.
 
-### Summary of Contributions<hr>
-
+## Summary of Contributions
 * **New Feature**: Added the ability to undo/redo previous commands.
   * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
   * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
