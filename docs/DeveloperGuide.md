@@ -314,9 +314,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to edit an existing staff member
-2. ManaGease edits information of member
-3. ManaGease displays a confirmation message that information for members is updated
+1. User requests to edit an existing staff member.
+2. ManaGease edits the information of members.
+3. ManaGease displays a confirmation message that information for members is updated.
 
    Use case ends.
    
@@ -332,8 +332,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to read information of existing staff member
-2. ManaGease displays the information for a member
+1. User requests to read information about existing staff members.
+2. ManaGease displays the information for a member.
 
    Use case ends.
    
@@ -349,8 +349,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to delete an existing staff member
-2. ManaGease deletes existing members
+1. User requests to delete an existing staff member.
+2. ManaGease deletes existing members.
 
    Use case ends.
 
@@ -362,7 +362,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
  
    	Use case ends.
  
-* 1b. User requests to delete existing member via name
+* 1b. User requests to delete existing member via name.
   
 	 * 1b1. ManaGease will display a list of members with the same name.
  
