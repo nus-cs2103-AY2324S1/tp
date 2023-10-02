@@ -23,7 +23,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Goh En Rui Ryann
 
-<img src="images/gohenruiryann.jpg" width="200px">
+<img src="images/gohenruiryann.png" width="200px">
 
 [[github](http://github.com/ryamgoh)]
 [[portfolio](team/gohenruiryann.md)]

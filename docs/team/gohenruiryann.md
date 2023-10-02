@@ -3,6 +3,8 @@ layout: default.md
 title: "Ryann's Project Portfolio Page"
 ---
 
+# Ryann's Portfolio Page
+
 ### Project: LoveBook
 
 LoveBook, is a dating-focused address book application, revolving around providing users with a convenient and an
