@@ -51,10 +51,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Jin Hao
 
-<img src="images/jinhao.png" width="200px">
+<img src="images/leb14.png" width="200px">
 
 [[github](http://github.com/Leb14)]
-[[portfolio](team/jinHao.md)]
+[[portfolio](team/leb14.md)]
 
 * Role: Developer
 * Responsibilities: Logic
