@@ -57,4 +57,5 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/cyaoxuan)]
 [[portfolio](team/cyaoxuan.md)]
 
-* Role: Git ExpertResponsibilities: Help other team members with matters related to Github
+* Role: Git Expert
+* Responsibilities: Help other team members with matters related to Github
