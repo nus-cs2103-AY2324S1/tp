@@ -88,12 +88,14 @@ Examples:
 
 When the command succeeds:
 
+```
 Added person: Snowball; Phone: 87098312; Email: snowball@example.com; Course of study: Computer Science; Year of Study: 2;  
+```
 
 When the command fails:
 
-- Incorrect format (e.g., missing information): "Invalid command format!"
-- Duplicate input (the TA is already in the address book): "This TA has been registered."
+- Incorrect format (e.g., missing information): `Invalid command format!`
+- Duplicate input (the TA is already in the address book): `This TA has been registered.`
 
 ### Removing a Teaching Assistant: `delete`
 
@@ -114,14 +116,16 @@ Examples:
 
 When the command succeeds:
 
+```
 Deleted Person: Snowball; Phone: 87098312; Email: snowball@example.com; Course of study: Computer Science; Year of Study: 2;
+```
 
 When the command fails:
 
-- Incorrect format (missing index or index is not a positive integer): “Invalid command format!"
+- Incorrect format (missing index or index is not a positive integer): `Invalid command format!`
 - Index does not correspond to a TA: For example, there are only 5 TAs but the user tried to delete a TA at index 6
   
-  “The person index provided is invalid”
+  `The person index provided is invalid`
 
 ### Viewing Teaching Assistants: `list`
 
@@ -133,6 +137,7 @@ Example: `list`
 
 When the command succeeds:
 
+```
 Here is a list of TAs:
 
 Snowball; Phone: 87098312; Email: snowball@example.com; Course of study: Computer Science; Year of Study: 2;
@@ -140,6 +145,7 @@ Snowball; Phone: 87098312; Email: snowball@example.com; Course of study: Compute
 Snowflake; Phone: 83124113; Email: snowflake@example.com; Course of study: Computer Science; Year of Study: 2;
 
 Snowman; Phone: 83172153; Email: snowman@example.com; Course of study: Computer Science; Year of Study: 2;
+```
 
 ### Clearing all entries : `clear`
 
