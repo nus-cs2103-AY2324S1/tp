@@ -1,6 +1,6 @@
 ---
   layout: default.md
-  title: " Project Portfolio Page"
+  title: "Project Portfolio Page"
 ---
 
 # Project: Staff-Snap
