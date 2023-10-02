@@ -44,9 +44,24 @@ public class Attendee {
         return attendeeName.hashCode();
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Attendee)) {
+            return false;
+        }
+
+        Attendee otherAttendee = (Attendee) other;
+        return attendeeName.equals(otherAttendee.attendeeName);
+    }
+
     /**
      * Format state as text for viewing.
      */
+    @Override
     public String toString() {
         return attendeeName + " ";
     }

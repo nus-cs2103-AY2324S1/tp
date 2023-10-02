@@ -121,7 +121,7 @@ public class UniqueMeetingListTest {
     }
 
     @Test
-    public void remove_MeetingDoesNotExist_throwsPersonNotFoundException() {
+    public void remove_meetingDoesNotExist_throwsPersonNotFoundException() {
         assertThrows(MeetingNotFoundException.class, () -> uniqueMeetingList.remove(MEETING1));
     }
 
@@ -161,7 +161,7 @@ public class UniqueMeetingListTest {
                 .build();
         List<Meeting> meetingList = Collections.singletonList(editedMeeting1);
         uniqueMeetingList.setMeetings(meetingList);
-        UniqueMeetingList expectedUniqueMeetingList = new UniqueMeetingList()    ;
+        UniqueMeetingList expectedUniqueMeetingList = new UniqueMeetingList();
         expectedUniqueMeetingList.add(editedMeeting1);
         assertEquals(expectedUniqueMeetingList, uniqueMeetingList);
     }

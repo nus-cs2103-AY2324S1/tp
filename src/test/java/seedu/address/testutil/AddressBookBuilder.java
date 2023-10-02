@@ -29,6 +29,9 @@ public class AddressBookBuilder {
         return this;
     }
 
+    /**
+     * Adds a new {@code Meeting} to the {@code AddressBook} that we are building.
+     */
     public AddressBookBuilder withMeeting(Meeting meeting) {
         addressBook.addMeeting(meeting);
         return this;

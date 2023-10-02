@@ -6,9 +6,9 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.meeting.Attendee;
 import seedu.address.model.meeting.Location;
 import seedu.address.model.meeting.Meeting;
-import seedu.address.model.meeting.Attendee;
 import seedu.address.model.meeting.Title;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -89,6 +89,6 @@ public class MeetingBuilder {
     }
 
     public Meeting build() {
-            return new Meeting(title, location, start, end, attendees);
-        }
+        return new Meeting(title, location, start, end, attendees);
+    }
 }

@@ -1,7 +1,6 @@
 package seedu.address.testutil;
 
 import seedu.address.model.meeting.Meeting;
-import seedu.address.model.person.Person;
 
 /**
  * A utility class containing a list of {@code Meetings} objects to be used in tests.

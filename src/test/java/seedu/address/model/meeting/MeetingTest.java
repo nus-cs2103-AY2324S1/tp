@@ -3,22 +3,14 @@ package seedu.address.model.meeting;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalMeetings.MEETING1;
 import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.person.Person;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.MeetingBuilder;
-import seedu.address.testutil.PersonBuilder;
 
 public class MeetingTest {
 
@@ -92,8 +84,9 @@ public class MeetingTest {
 
     @Test
     public void toStringMethod() {
-        String expected = Meeting.class.getCanonicalName() + "{title=" + MEETING1.getTitle() + ", location=" + MEETING1.getLocation()
-                + ", start=" + MEETING1.getStart() + ", end=" + MEETING1.getEnd() + ", attendees=" + MEETING1.getAttendees() + "}";
+        String expected = Meeting.class.getCanonicalName() + "{title=" + MEETING1.getTitle()
+                + ", location=" + MEETING1.getLocation() + ", start=" + MEETING1.getStart()
+                + ", end=" + MEETING1.getEnd() + ", attendees=" + MEETING1.getAttendees() + "}";
         assertEquals(expected, MEETING1.toString());
     }
 }
