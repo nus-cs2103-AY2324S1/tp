@@ -22,10 +22,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Chai Yin
 
-<img src="images/KumChaiYin.png" width="200px">
+<img src="images/kumchaiyin.png" width="200px">
 
 [[github](http://github.com/KumChaiYin)]
-[[portfolio](team/KumChaiYin.md)]
+[[portfolio](team/kumchaiyin.md)]
 
 * Role: Documentation
 * Responsibilities: Responsible for the quality of various project documents
