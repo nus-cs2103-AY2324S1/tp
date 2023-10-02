@@ -313,8 +313,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+2.  Should be able to handle as many interviewees as the user is able to manage in their workday/workweek
+3.  The app should be reasonably responsive to the entire set of user requests(i.e. within 1 second at maximum load)
+4.  The app should follow data privacy protocols of the region the company is based in(e.g. deleting data of 
+interviewees after >30 days)
+5. The system should have an interface that is very easy to pick up for our target audience(i.e. Engineering Managers 
+that have many years of programming experience)
 
 *{More to be added}*
 
