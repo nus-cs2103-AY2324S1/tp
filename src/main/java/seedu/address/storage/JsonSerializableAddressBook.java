@@ -19,7 +19,7 @@ import seedu.address.model.employee.Employee;
 @JsonRootName(value = "addressbook")
 class JsonSerializableAddressBook {
 
-    public static final String MESSAGE_DUPLICATE_Employee = "Employees list contains duplicate employee(s).";
+    public static final String MESSAGE_DUPLICATE_EMPLOYEE = "Employees list contains duplicate employee(s).";
 
     private final List<JsonAdaptedEmployee> employees = new ArrayList<>();
 
@@ -50,7 +50,7 @@ class JsonSerializableAddressBook {
         for (JsonAdaptedEmployee jsonAdaptedEmployee : employees) {
             Employee employee = jsonAdaptedEmployee.toModelType();
             if (addressBook.hasEmployee(employee)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_Employee);
+                throw new IllegalValueException(MESSAGE_DUPLICATE_EMPLOYEE);
             }
             addressBook.addEmployee(employee);
         }
