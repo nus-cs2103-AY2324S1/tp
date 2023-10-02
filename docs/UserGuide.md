@@ -5,9 +5,6 @@ title: User Guide
 
 ManaGease is a **desktop app for managing full time staff in any workplace, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ManaGease can get your contact management tasks done faster than traditional apps.
 
-* Table of Contents
-{:toc}
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start (Coming soon)
@@ -59,21 +56,23 @@ Refer to the [Features](#features) below for details of each command.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
-## Viewing help : `help` [Coming soon]
+### Viewing help : `help` [Coming soon]
 **What it does:**
+
 Shows a message explaning how to access the help page.
 
-### Command Format: 
+**Command Format:**
+
 `help`
 
 
-## Adding a person: `add`
+### Adding a person: `add`
 
 **What it does**
 
 This feature allows users to add a new employee to the ManaGease app, creating a profile with essential details.
 
-### Command format: 
+**Command format:**
 ```
 add /n NAME /e EMAIL /p PHONE /a ADDRESS /b BANK_ACCOUNT /jd JOIN_DATE /s SALARY /al ANNUAL_LEAVE
 ```
@@ -94,7 +93,9 @@ Output:
 * “Employee “Jane Smith” successfully added”
 * If tag used is not defined, an error message will appear and say "Tag not found, please use any of the following tags: /n, /e, /p, /a, /b, /jd, /s, /al"
 
-![result for adding employee]('images/addSuccess.png)
+![result for adding employee](images/addSuccess.png)
+![failed result for adding employee](images/addFailed.png)
+
 
 ### Editing a person : `edit`
 
@@ -102,22 +103,37 @@ Output:
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] `
+**Command Format:**
+
+`edit INDEX [/n NAME] [/p PHONE] [/e EMAIL] [/a ADDRESS] `
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower ` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 1 /p 91234567 /e johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 /n Betsy Crower ` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+
+Output:
+* The ScheduleEase app should display a confirmation message indicating that the employee information has been successfully updated.
+  
+* Specifying the part that has been updated
+  
+* The employee's profile should be updated with the provided information.
+  
+* “Employee 3’s information successfully updated!”
+
+![result for editing employee](images/editSuccess.png)
+
 
 ### Deleting a person : `delete`
 
 **What it does**
 This feature allows users to delete an employee based on index or name.
 
-# Command Format: 
+**Command Format**
+
 `delete INDEX` or `delete /n NAME`
 
 
@@ -128,6 +144,55 @@ This feature allows users to delete an employee based on index or name.
 Examples:
 * `list` followed by `delete 2` deletes the 2nd employee in the employee directory.
 * `find Betsy` followed by `delete 1` deletes the 1st employee in the results of the `find` command.
+
+Output:
+* If there are multiple employees with the same name, we just list down the employees for them to view, return “Here is the list of the matching employees:”
+  
+* Otherwise, the ScheduleEase app should display a confirmation message indicating that the employee information has been successfully deleted. 
+  * Specifying the part that has been updated
+    
+  * “Employee “Jane Smith” has been removed”
+    
+* The employee's list should be updated by removing the employee.
+
+
+
+![result for deleting employee](images/deleteSuccess.png)
+![result for deleting employee](images/deleteMultiple.png)
+
+### Reading a person's information : `read`
+
+**What it does**
+This feature allows users to view specific information about an employee.
+
+**Command Format**
+
+`read INDEX INFORMATION`
+
+* Reads the person's `INFORMATION` at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer**.
+
+Examples:
+* `read 3 /e` reads the email of the third person in the most recently displayed list.
+
+Output:
+
+* If the index is not within the numbers in the list, the app should display “Please enter a valid index number”.
+  
+* If the command is incorrect, the app should display “Please use the following format to read information : read INDEX INFORMATION”
+  
+* If the INFORMATION provided is not in the list, the app should display “Please provide a valid information to read”.
+  
+* If the INFORMATION has not been stored in the list, the app should display “There isn’t any information on this employee’s INFORMATION”
+
+
+
+![result for deleting employee](images/readSuccess.png)
+![result for deleting employee](images/readFailed.png)
+
+
+
 
 ### Listing all persons : `list` [Coming soon]
 
@@ -187,10 +252,10 @@ AddressBook data are saved in the hard disk automatically after any command that
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+ManaGease data are saved automatically as a JSON file `[JAR file location]/data/managease.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
+If your changes to the data file makes its format invalid, Managease will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
@@ -202,7 +267,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ManaGease home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -214,12 +279,12 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+| Action     | Format, Examples                                                                                                                                                       |
+|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add /n NAME /p PHONE_NUMBER /e EMAIL /a ADDRESS`     <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`    |
+| **Clear**  | `clear`                                                                                                                                                                |
+| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                    |
+| **Edit**   | `edit INDEX /n NAME /e EMAIL /p PHONE_NUMBER /a ADDRESS /b BANK_ACCOUNT /jd JOIN_DATE /s SALARY /al ANNUAL_LEAVE`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` |
+| **Read**   | `read INDEX PARAM`<br> e.g., `read 3 /n`                                                                                                                               |
+| **List**   | `list`                                                                                                                                                                 |
+| **Help**   | `help`                                                                                                                                                                 |
