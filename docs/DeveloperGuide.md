@@ -378,7 +378,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Course**: A program students are enrolled in to work towards a degree
-* **Teaching Assistant**: Students who support the teaching of a course
+* **Teaching Assistant (TA)**: Students who support the teaching of a course
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 
