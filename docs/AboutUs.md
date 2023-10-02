@@ -11,7 +11,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### Calvin
+### Calvin Fong
 
 <img src="images/lordidiot.png" width="200px">
 
@@ -20,7 +20,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 - Role: Team lead, Scheduling and tracking
 
-### Kok Rui
+### Wong Kok Rui
 
 <img src="images/kokrui.png" width="200px">
 
@@ -29,7 +29,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 - Role: Code quality, Integration
 
-### Hao
+### Nguyen Phu Hao
 
 <img src="images/vn-hao.png" width="200px">
 
@@ -38,7 +38,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 - Role: Testing
 
-### Jun Xian
+### Lim Jun Xian
 
 <img src="images/limjunxian1.png" width="200px">
 
@@ -47,7 +47,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 - Role: Deliverables and deadlines
 
-### Conrad
+### Conrad Soon
 
 <img src="images/conradsoon.png" width="200px">
 
