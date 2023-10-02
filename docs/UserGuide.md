@@ -72,6 +72,7 @@ Format: `help`
 ### Adding a Teaching Assistant: `add`
 
 Adds a new teaching assistant to the address book.
+
 ![add TA](images/addTA.png)
 
 Format: `add n/NAME p/PHONE e/EMAIL c/COURSE_OF_STUDY y/YEAR`
@@ -86,15 +87,18 @@ Examples:
 - `add n/Snowball p/87098312 e/snowball@example.com c/Computer Science y/2`
 
 When the command succeeds:
+
 Added person: Snowball; Phone: 87098312; Email: snowball@example.com; Course of study: Computer Science; Year of Study: 2;  
 
 When the command fails:
+
 - Incorrect format (e.g., missing information): "Invalid command format!"
 - Duplicate input (the TA is already in the address book): "This TA has been registered."
 
 ### Removing a Teaching Assistant: `delete`
 
 Removes the specified teaching assistant from the address book.
+
 ![remove TA](images/removeTA.png)
 
 Format: `delete INDEX`
@@ -104,15 +108,19 @@ Format: `delete INDEX`
 - The index must be a positive integer (1, 2, 3, ...).
 
 Examples:
+
 - `list` followed by `delete 2` deletes the 2nd teaching assistant in the address book.
 - `find Betsy` followed by `delete 1` deletes the 1st teaching assistant in the results of the `find` command.
 
 When the command succeeds:
+
 Deleted Person: Snowball; Phone: 87098312; Email: snowball@example.com; Course of study: Computer Science; Year of Study: 2;
+
 When the command fails:
+
 - Incorrect format (missing index or index is not a positive integer): “Invalid command format!"
-- Index does not correspond to a TA:
-  For example, there are only 5 TAs but the user tried to delete a TA at index 6
+- Index does not correspond to a TA: For example, there are only 5 TAs but the user tried to delete a TA at index 6
+  
   “The person index provided is invalid”
 
 ### Viewing Teaching Assistants: `list`
@@ -124,9 +132,13 @@ Format: `list`
 Example: `list`
 
 When the command succeeds:
+
 Here is a list of TAs:
+
 Snowball; Phone: 87098312; Email: snowball@example.com; Course of study: Computer Science; Year of Study: 2;
+
 Snowflake; Phone: 83124113; Email: snowflake@example.com; Course of study: Computer Science; Year of Study: 2;
+
 Snowman; Phone: 83172153; Email: snowman@example.com; Course of study: Computer Science; Year of Study: 2;
 
 ### Clearing all entries : `clear`
