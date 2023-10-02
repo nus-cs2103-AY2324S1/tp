@@ -45,7 +45,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/lynnlow.png" width="200px">
 
 [[github](http://github.com/lynnlow175)]
-[[portfolio](team/lynnlow.md)]
+[[portfolio](team/lynnlow175.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
