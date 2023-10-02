@@ -1,6 +1,6 @@
 ---
-Eric's Porfolio Page
-
+layout: page
+title: Eric's Project Portfolio Page
 ---
 
 ### Project: WellNUS
