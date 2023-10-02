@@ -29,11 +29,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Documentation
 * Responsibilities: Logic
 
-### John Doe
 
-<img src="images/johndoe.png" width="200px">
+### He Yifan
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+<img src="images/jibtaf.png" width="200px">
+
+[[github](http://github.com/jibtaf)] [[portfolio](team/jibtaf.md)]
 
 * Role: Developer
 * Responsibilities: Data
@@ -48,12 +49,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Jin Hao
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jinhao.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/Leb14)]
+[[portfolio](team/jinHao.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Logic
