@@ -1,5 +1,7 @@
 package seedu.address.model.meeting;
 
+import static java.util.Objects.requireNonNull;
+
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -12,6 +14,7 @@ import seedu.address.commons.util.ToStringBuilder;
 public class MeetingTime {
     public static final String MESSAGE_CONSTRAINTS = "MeetingTimes should be in LocalDateTime"
             + " and start cannot be after end";
+
     private final LocalDateTime start;
     private final LocalDateTime end;
 
@@ -19,6 +22,8 @@ public class MeetingTime {
      * Constructs the meeting time for a meeting.
      */
     public MeetingTime(LocalDateTime start, LocalDateTime end) {
+        requireNonNull(start);
+        requireNonNull(end);
         this.start = start;
         this.end = end;
     }

@@ -103,7 +103,8 @@ public class Meeting {
         return new ToStringBuilder(this)
                 .add("title", title)
                 .add("location", location)
-                .add("meeting time", meetingTime)
+                .add("start", meetingTime.getStart())
+                .add("end", meetingTime.getEnd())
                 .add("attendees", attendees)
                 .toString();
     }
