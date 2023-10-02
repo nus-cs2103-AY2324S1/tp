@@ -82,7 +82,7 @@ Format: `add n/NAME i/NRIC c/CONTACT NUMBER l/LICENCE PLATE…​`
 * **All** of the fields must be present when using this command.
 
 Examples:
-* `add n/Mary i/627A c/73052859 l/SLU5237J` creates a person whose name is Mary, NRIC last four digits is 627A, contact number is 73052859, licence plate is SLU5237J in the database.
+* `add n/Mary i/627A c/73052859 l/SLU5237J` creates a person whose name is `Mary`, NRIC last four digits is `627A`, contact number is `73052859`, licence plate is `SLU5237J` in the database.
 
 Acceptable values for each parameter:
 * `n/NAME`: Alphabets
