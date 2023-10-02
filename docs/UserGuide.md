@@ -71,31 +71,31 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
-### Adding a person: `add`
+### Adding an interviewee: `add`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01, j/software engineer`
+* `add n/Betsy Crowe e/betsycrowe@example.com a/Street street p/1234567 t/good interviewee j/data analyst`
 
-### Listing all persons : `list`
+### Listing all interviewees : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all interviewees in the address book.
 
 Format: `list`
 
-### Editing a person : `edit`
+### Editing an interviewee : `edit`
 
-Edits an existing person in the address book.
+Edits an existing interviewee in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [j/JOB] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -107,6 +107,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 3 j/product manager` Edits the job role of the 3rd person to be `product manager`.
 
 ### Locating persons by name: `find`
 
@@ -143,14 +144,14 @@ Examples:
 * `find-job software engineer` returns `Thomas<software engineer>` and `William<software engineer>`.
 * `find-job software engineer data analyst` returns `Thomas<software engineer>`, `William<software engineer>`, and `Robert<data analyst>`.
 
-### Deleting a person : `delete`
+### Deleting an interviewee : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified interviewee from the address book.
 
 Format: `delete INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Deletes the interviewee at the specified `INDEX`.
+* The index refers to the index number shown in the displayed interviewee list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
