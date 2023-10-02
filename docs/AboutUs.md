@@ -11,51 +11,47 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Calvin Fong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/lordidiot.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/lordidiot)]
+[[portfolio](team/lordidiot.md)]
 
-* Role: Project Advisor
+- Role: Team lead, Scheduling and tracking
 
-### Jane Doe
+### Wong Kok Rui
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/kokrui.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/kokrui)]
+[[portfolio](team/kokrui.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+- Role: Code quality, Integration
 
-### Johnny Doe
+### Nguyen Phu Hao
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/vn-hao.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/vn-hao)]
+[[portfolio](team/vn-hao.md)]
 
-* Role: Developer
-* Responsibilities: Data
+- Role: Testing
 
-### Jean Doe
+### Lim Jun Xian
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/limjunxian1.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/limjunxian1)]
+[[portfolio](team/limjunxian1.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+- Role: Deliverables and deadlines
 
-### James Doe
+### Conrad Soon
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/conradsoon.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/conradsoon)]
+[[portfolio](team/conradsoon.md)]
 
-* Role: Developer
-* Responsibilities: UI
+- Role: Documentation
