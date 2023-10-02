@@ -14,25 +14,25 @@ import seedu.address.model.employee.Employee;
  * Panel containing the list of persons.
  */
 public class EmployeeListPanel extends UiPart<Region> {
-    private static final String FXML = "PersonListPanel.fxml";
+    private static final String FXML = "EmployeeListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(EmployeeListPanel.class);
 
     @FXML
-    private ListView<Employee> personListView;
+    private ListView<Employee> employeeListView;
 
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public EmployeeListPanel(ObservableList<Employee> personList) {
+    public EmployeeListPanel(ObservableList<Employee> employeeList) {
         super(FXML);
-        personListView.setItems(personList);
-        personListView.setCellFactory(listView -> new PersonListViewCell());
+        employeeListView.setItems(employeeList);
+        employeeListView.setCellFactory(listView -> new EmployeeListViewCell());
     }
 
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
      */
-    class PersonListViewCell extends ListCell<Employee> {
+    class EmployeeListViewCell extends ListCell<Employee> {
         @Override
         protected void updateItem(Employee person, boolean empty) {
             super.updateItem(person, empty);
