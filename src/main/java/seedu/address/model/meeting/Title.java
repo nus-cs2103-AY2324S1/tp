@@ -1,47 +1,35 @@
-package seedu.address.model.person;
+package seedu.address.model.meeting;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-/**
- * Represents a Person's name in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
- */
-public class Name {
+public class Title {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Titles should only contain alphanumeric characters and spaces, and it should not be blank";
 
     /*
      * The first character of the title must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
-
-    public final String fullName;
-
-    /**
-     * Constructs a {@code Name}.
-     *
-     * @param name A valid name.
-     */
-    public Name(String name) {
-        requireNonNull(name);
-        checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
-        fullName = name;
+    public final String meetingTitle;
+    public Title(String meetingTitle) {
+        requireNonNull(meetingTitle);
+        checkArgument(isValidTitle(meetingTitle), MESSAGE_CONSTRAINTS);
+        this.meetingTitle = meetingTitle;
     }
 
     /**
      * Returns true if a given string is a valid name.
      */
-    public static boolean isValidName(String test) {
+    public static boolean isValidTitle(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
-
     @Override
     public String toString() {
-        return fullName;
+        return meetingTitle;
     }
 
     @Override
@@ -51,17 +39,16 @@ public class Name {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Name)) {
+        if (!(other instanceof Title)) {
             return false;
         }
 
-        Name otherName = (Name) other;
-        return fullName.equals(otherName.fullName);
+        Title otherTitle = (Title) other;
+        return meetingTitle.equals(otherTitle.meetingTitle);
     }
 
     @Override
     public int hashCode() {
-        return fullName.hashCode();
+        return meetingTitle.hashCode();
     }
-
 }

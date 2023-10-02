@@ -2,6 +2,9 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,8 +12,13 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.meeting.Attendee;
+import seedu.address.model.meeting.Location;
+import seedu.address.model.meeting.MeetingTime;
+import seedu.address.model.meeting.Title;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
@@ -21,6 +29,8 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+
+    public static final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("dd.MM.yyyy HHmm");
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -51,6 +61,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String title} into a {@code Title}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code title} is invalid.
+     */
+    public static Title parseTitle(String title) throws ParseException {
+        requireNonNull(title);
+        String trimmedTitle = title.trim();
+        if (!Title.isValidTitle(trimmedTitle)) {
+            throw new ParseException(Title.MESSAGE_CONSTRAINTS);
+        }
+        return new Title(trimmedTitle);
+    }
+
+    /**
      * Parses a {@code String phone} into a {@code Phone}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -65,6 +90,20 @@ public class ParserUtil {
         return new Phone(trimmedPhone);
     }
 
+    /**
+     * Parses a {@code String location} into a {@code Location}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code location} is invalid.
+     */
+    public static Location parseLocation(String location) throws ParseException {
+        requireNonNull(location);
+        String trimmedLocation = location.trim();
+        if (!Location.isValidLocation(trimmedLocation)) {
+            throw new ParseException(Location.MESSAGE_CONSTRAINTS);
+        }
+        return new Location(trimmedLocation);
+    }
 
     /**
      * Parses a {@code String email} into an {@code Email}.
@@ -79,6 +118,22 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String start} into an {@code LocalDateTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code start} is invalid.
+     */
+    public static LocalDateTime parseTime(String time) throws ParseException {
+        requireNonNull(time);
+        String trimmedStart = time.trim();
+        try {
+            return LocalDateTime.parse(trimmedStart, FORMAT);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(MeetingTime.MESSAGE_CONSTRAINTS);
+        }
     }
 
     /**
@@ -106,6 +161,24 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    public static Attendee parseAttendee(String attendee) throws ParseException {
+        requireNonNull(attendee);
+        String trimmedAttendee = attendee.trim();
+        if (!Attendee.isValidAttendee(trimmedAttendee)) {
+            throw new ParseException(Attendee.MESSAGE_CONSTRAINTS);
+        }
+        return new Attendee(trimmedAttendee);
+    }
+
+    public static Set<Attendee> parseAttendees(Collection<String> attendees) throws ParseException {
+        requireNonNull(attendees);
+        final Set<Attendee> attendeeSet = new HashSet<>();
+        for (String person : attendees) {
+            attendeeSet.add(parseAttendee(person));
+        }
+        return attendeeSet;
     }
 
     /**
