@@ -1,6 +1,6 @@
 # Staff-Snap
 
-[![CI Status](https://github.com/craigtonlian/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/craigtonlian/tp/actions)
+[![CI Status](https://github.com/AY2324S1-CS2103T-W08-1/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2324S1-CS2103T-W08-1/tp/actions)
 [![codecov](https://codecov.io/gh/AY2324S1-CS2103T-W08-1/tp/graph/badge.svg?token=7PPPGQNQFE)](https://codecov.io/gh/AY2324S1-CS2103T-W08-1/tp)
 
 This is a CS2103T project by [**AY2324S1-CS2103T-W08-1**](https://github.com/orgs/AY2324S1-CS2103T-W08-1/people).
@@ -35,6 +35,6 @@ Spot a bug? Let us know by launching a Bug Report at the [Issues tab](https://gi
 
 ## Links
 - [User Guide](https://ay2324s1-cs2103t-w08-1.github.io/tp/UserGuide.html)
-- [User Stories](https://ay2324s1-cs2103t-w08-1.github.io/tp/DeveloperGuide.html)
+- [Developer Guide](https://ay2324s1-cs2103t-w08-1.github.io/tp/DeveloperGuide.html)
 - [Github Project Board](https://github.com/orgs/AY2324S1-CS2103T-W08-1/projects/1)
 - [Github Organization](https://github.com/orgs/AY2324S1-CS2103T-W08-1)
