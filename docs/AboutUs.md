@@ -18,7 +18,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/lordidiot)]
 [[portfolio](team/lordidiot.md)]
 
-- Role: Team lead
+- Role: Team lead, Scheduling and tracking
 
 ### Kok Rui
 
