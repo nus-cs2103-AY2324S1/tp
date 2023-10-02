@@ -257,27 +257,44 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
+* is a car insurance agent
 * has a need to manage a significant number of contacts
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Provide quick and easy contact management system of large car owners database with policies bought by them and have a better overview of the premium due dates.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​          | I want to …​                                                                                        | So that I can…​                                                                      |
+|----------|------------------|-----------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------|
+| `* * *`  | beginner user    | add a person                                                                                        | expand my client list                                                                |
+| `* * *`  | beginner user    | delete a person                                                                                     | remove entries who I am no longer working with                                       |
+| `* * *`  | beginner user    | find person(s) by fields                                                                            | locate details of persons without having to go through the entire list               |
+| `* * *`  | beginner user    | edit a person                                                                                       | make changes to details of a person                                                  |
+| `* * *`  | expert user      | export the entire database                                                                          | have a secured copy of all my clients information                                    |
+| `* *`    | first-time user  | see the layout of the application filled with dummy data                                            | learn how to use the application without corrupting my own data yet                  |
+| `* *`    | first-time user  | delete all the dummy data                                                                           | start using the application for my own use                                           |
+| `* *`    | first-time user  | import an existing database into the system                                                         | have all my contacts in one place for different insurance companies I am working for |
+| `* *`    | beginner-user    | check which policies are close to completion                                                        | perform follow-up actions outside of the application                                 |
+| `* *`    | experienced-user | have reminders for premium due dates expiry whenever I start the application                        | notify my clients about the upcoming payment                                         |
+| `* *`    | experienced-user | add comments to a person                                                                            |                                                                                      |
+| `* *`    | expert user      | sort persons by premium due date expiry                                                             | locate a person who needs to be urgently contacted                                   |
+| `*`      | first-time user  | have a tutorial function                                                                            | familiarise myself with the features and understand how to use the application       |
+| `*`      | experienced user | schedule follow-up calls or meetings with persons directly from the contact number in their profile | save the hassle of reaching out to them using another avenue                         |
+| `*`      | experienced user | review and categorise persons as leads or clients                                                   | prioritise my outreach efforts                                                       |
+| `*`      | experienced user | categorise persons by insurance company                                                             | easily find out which insurance company the person bought insurance from             |
+| `*`      | experienced user | customise the layout of the application                                                             | better suit my preferences                                                           |
+| `*`      | expert user      | generate reports on policy renewals and customer interactions                                       | assess my performance                                                                |
+| `*`      | expert user      | differentiate between polices based on coverage types                                               | provide tailored advice to clients                                                   |
+| `*`      | expert user      | track communication history with each person                                                        | provide personalised service                                                         |
+| `*`      | expert user      | automatically edit a person who made their payment for the premium before the due date              | save the hassle of editing the person manually                                       |
+| `*`      | expert user      | create custom commands                                                                              | successfully perform tasks in a shorter time                                         |
 
 *{More to be added}*
 
