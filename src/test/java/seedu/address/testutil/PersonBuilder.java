@@ -3,11 +3,11 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -20,12 +20,11 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final String DEFAULT_REMARK = "";
 
     private Name name;
     private Phone phone;
     private Email email;
-    private Remark remark;
+    private Address address;
     private Set<Tag> tags;
 
     /**
@@ -35,7 +34,7 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
-        remark = new Remark(DEFAULT_REMARK);
+        address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
     }
 
@@ -46,7 +45,7 @@ public class PersonBuilder {
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
-        remark = personToCopy.getRemark();
+        address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -67,10 +66,10 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code remark} of the {@code Person} that we are building.
+     * Sets the {@code Address} of the {@code Person} that we are building.
      */
-    public PersonBuilder withRemark(String remark) {
-        this.remark = new Remark(remark);
+    public PersonBuilder withAddress(String address) {
+        this.address = new Address(address);
         return this;
     }
 
@@ -91,7 +90,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, remark, tags);
+        return new Person(name, phone, email, address, tags);
     }
 
 }
