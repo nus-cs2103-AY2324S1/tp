@@ -262,7 +262,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* is reasonably comfortable using _CLI_ apps
 
 **Value proposition**: Provide quick and easy contact management system of large car owners database with policies bought by them and have a better overview of the premium due dates.
 
@@ -354,7 +354,7 @@ Should work on any _mainstream OS_ as long as it has Java `11` or above installe
 
 6. **Interoperability:**
     - The system should be compatible with various operating systems commonly used by insurance agents.
-    - It should support importing/exporting data in standard formats (e.g., CSV, JSON) for interoperability with other systems.
+    - It should support importing/exporting data in _standard formats_ for interoperability with other systems.
 
 7. **Documentation:**
    - Comprehensive documentation, including user manuals and technical guides, should be available to assist users and administrators.
@@ -369,7 +369,7 @@ Should work on any _mainstream OS_ as long as it has Java `11` or above installe
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **standard formats**: CSV, JSON
 
 --------------------------------------------------------------------------------------------------------------------
 
