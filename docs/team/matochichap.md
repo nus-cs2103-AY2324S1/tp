@@ -9,6 +9,8 @@ ClubMembersContacts is an application that allows users to keep track of their c
 
 Given below are my contributions to the project.
 
+* Code Contributed: [link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=jonasongg&breakdown=false&sort=groupTitle%20dsc&sortWithin=title&since=2023-09-22&timeframe=commit&mergegroup=&groupSelect=groupByRepos)
+
 * **New Feature**: to be added soon
     * What it does: to be added soon
     * Justification: to be added soon
