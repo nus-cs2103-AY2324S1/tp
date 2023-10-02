@@ -15,8 +15,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[github](https://github.com/brendanneojw)]
 [[portfolio](team/brendanneojw.md)]
+[[linkedin](https://www.linkedin.com/in/brendan-neo-jia-wei-a1a949217/)]
 
 * Role: Team Lead
+* Responsibilities: Responsible for overall project coordination
 
 ### Chai Yin
 
@@ -26,6 +28,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/KumChaiYin.md)]
 
 * Role: Documentation
+* Responsibilities: Responsible for the quality of various project documents
 
 ### Rohan
 
@@ -35,6 +38,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/RSXIX.md)]
 
 * Role: Testing
+* Responsibilities: Ensures the testing of the project is done properly and on time
 
 ### Suryansh
 
@@ -44,6 +48,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/suryanshkushwaha.md)]
 
 * Role: Code Quality
+* Responsibilities: Responsible for the quality of various project documents
 
 ### Yao Xuan
 
@@ -53,3 +58,4 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/cyaoxuan.md)]
 
 * Role: Git Expert
+* Responsibilities: Help other team members with matters related to Github
