@@ -109,23 +109,39 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Locating persons by fields: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds person(s) whose fields matches any of the given fields.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find [n/NAME] [i/NRIC] [c/CONTACT NUMBER] [l/LICENCE PLATE]
+[pn/POLICY NUMBER] [pi/POLICY ISSUE DATE] [pe/POLICY EXPIRY DATE]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
+* The order of the fields does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* **At least one** of the fields must be present
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Persons matching at least one field will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find n/mary` returns all profiles that has the name `Mary`
+* `find n/john pn/AB12345J` returns the profile whose name contains `John` with policy number `AB12345J`
+
+Acceptable values for each parameter:
+* `n/NAME`: Alphabets 
+* `i/NRIC`: Alphanumeric, _exactly_ 4 characters 
+* `c/CONTACT NUMBER`: Numeric, _exactly_ 8 characters 
+* `l/LICENCE PLATE`: Alphanumeric, _up to_ 9 characters 
+* `pn/POLICY NUMBER`: Alphanumeric, _exactly_ 8 characters 
+* `pi/POLICY ISSUE DATE` and `pe/POLICY EXPIRY DATE`: Date in the format _dd-mm-yyyy_
+
+Expected output upon success: [coming soon]
+
+Expected output upon failure:
+* Format error in any field:`Error: Please adhere to the format for the fields`
+* No field given: `Error: Please give at least one field`
+* Field flag given but no value: `Error: Please give a value in the field(s) indicated`
+
 
 ### Deleting a person : `delete`
 
@@ -192,6 +208,6 @@ Action | Format, Examples
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find** | `find [n/NAME] [i/NRIC] [c/CONTACT NUMBER] [l/LICENCE PLATE] [pn/POLICY NUMBER] [pi/POLICY ISSUE DATE] [pe/POLICY EXPIRY DATE]`<br> e.g., `find n/John /pn AB12345J`
 **List** | `list`
 **Help** | `help`
