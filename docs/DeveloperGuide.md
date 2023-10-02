@@ -269,29 +269,52 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* CS2103T Teaching Assistants
+* has a need to manage student information across different classes
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: 
 
+* provide fast access to student’s contact information
+* provide easy ways to compare and visualise student's grades across classes
+* optimised for users who prefer CLI
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​ | I want to …​                                                | So that I can…​                                                         |
+|----------|---------|-------------------------------------------------------------|-------------------------------------------------------------------------|
+| `* * *`  | TA      | manually enter the details of students into my address book | track the information                                                   |
+| `* * *`  | TA      | be able to delete students from the class                   | manage students who drop out                                            |
+| `* * *`  | TA      | edit the contact information of students                    | maintain the correct information if it changes                          |
+| `* *`    | TA      | keep track of the attendance percentage of each student     | use it for their participation grade                                    |
+| `* *`    | TA      | be able to add the grades of each student in each tutorial  | use it to view students that need help                                  |
+| `*`      | TA      | be able to keep records of my students in past semesters    | refer to the history of student performance                             |
+| `*`      | TA      | add comments to specific students                           | attach additional information to them                                   |
+| `* * *`  | TA      | tag students with certain labels                            | filter and search more conveniently                                     |
+| `* * *`  | TA      | lookup all students in a particular tutorial group          | obtain their contact information                                        |
+| `* *`    | TA      | search particular students across different tutorial groups | contact them easily                                                     |
+| `*`      | TA      | know the students I searched recently                       | minimize repeated searches                                              |
+| `* *`    | TA      | filter students by tags/labels                              | categorize and organize students                                        |
+| `* *`    | TA      | filter students by their year of study                      | gain a better understanding of the whole tutorial                       |
+| `*`      | TA      | have a composite filter for tutorial group attendance       | look up the attendance of a particular tutorial group on a certain week |
+| `*`      | TA      | randomly select a specific number of students               | use as a feature during teaching                                        |
+| `* *`    | TA      | sort students by coding experience                          | group students with similar experience levels                           |
+| `* *`    | TA      | sort students based on their individual score marks         | understand the performance of the whole class                           |
+| `* *`    | TA      | sort students by alphabetical order                         | compare to the attendance sheet                                         |
+| `* *`    | TA      | sort students by their overall grades                       | identify students falling behind in my class                            |
+| `* `     | TA      | customise my GUI                                            | use a theme that suits my desktop theme                                 |
+| `* `     | TA      | enable dark mode for my device                              | use it at night                                                         |
+| `* `     | TA      | choose different layouts                                    | select a comfortable layout                                             |
+| `* *`    | TA      | have keyboard shortcuts for commonly used features          | save time and fit my habit                                              |
+| `* *`    | TA      | customise commands                                          | save time and fit my habit                                              |
+| `* * *`  | TA      | export and import app’s data                                | work on different devices                                               |
+| `* * *`  | TA      | save queries and searches to the application                | not lose progress                                                       |
 
-*{More to be added}*
 
 ### Use cases
 
@@ -327,8 +350,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  Application should be secure (with password) as sensitive information is stored
+5.  Application needs to have proper documentation and user guide so that users can understand how to use the application
+ 
 
-*{More to be added}*
 
 ### Glossary
 
