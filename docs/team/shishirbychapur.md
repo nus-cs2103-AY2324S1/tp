@@ -3,6 +3,8 @@ layout: default.md
 title: "Shishir Bychapur's Project Portfolio Page"
 ---
 
+# Shishir's Portfolio Page
+
 ### Project: LoveBook
 
 LoveBook, is a dating-focused address book application, revolving around providing users with a convenient and an
