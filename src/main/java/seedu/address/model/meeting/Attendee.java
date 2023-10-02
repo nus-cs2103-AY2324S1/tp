@@ -7,7 +7,15 @@ import seedu.address.model.person.Person;
 
 public class Attendee {
 
-    public static final String MESSAGE_CONSTRAINTS = "Attendee names should have a 1 to 1 correlation with Person names";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Attendees should only contain alphanumeric characters and spaces, and it should not be blank";
+
+    /*
+     * The first character of the title must not be a whitespace,
+     * otherwise " " (a blank string) becomes a valid input.
+     */
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+
     private final String attendeeName;
 
     /**
@@ -22,7 +30,7 @@ public class Attendee {
     }
 
     public static boolean isValidAttendee(String test) {
-        return true;
+        return test.matches(VALIDATION_REGEX);
     }
 
     public String getAttendeeName() {

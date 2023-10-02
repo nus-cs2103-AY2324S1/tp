@@ -11,6 +11,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.meeting.Attendee;
 import seedu.address.model.meeting.Meeting;
 
 /**
@@ -37,6 +38,7 @@ public class AddMeetingCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New meeting added: %1$s";
     public static final String MESSAGE_DUPLICATE_MEETING = "This meeting already exists in the address book";
+    public static final String MESSAGE_ATTENDEE_NOT_FOUND = "Meeting attendee is not found in Persons list";
 
     private final Meeting toAdd;
 
@@ -54,6 +56,11 @@ public class AddMeetingCommand extends Command {
 
         if (model.hasMeeting(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_MEETING);
+        }
+        for (Attendee attendee : toAdd.getAttendees()) {
+            if (!model.hasName(attendee.getAttendeeName())) {
+                throw new CommandException(MESSAGE_ATTENDEE_NOT_FOUND);
+            }
         }
 
         model.addMeeting(toAdd);

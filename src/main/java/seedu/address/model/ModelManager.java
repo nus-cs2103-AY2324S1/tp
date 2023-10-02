@@ -98,6 +98,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasName(String name) {
+        requireAllNonNull(name);
+        return addressBook.hasName(name);
+    }
+
+    @Override
     public boolean hasMeeting(Meeting meeting) {
         requireNonNull(meeting);
         return addressBook.hasMeeting(meeting);
