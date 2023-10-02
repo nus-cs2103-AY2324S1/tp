@@ -40,10 +40,13 @@ public class TagCommandParser implements Parser<TagCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     TagCommand.MESSAGE_USAGE), ive);
         }
+
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAGS)).ifPresent(this::setTags);
+
         if (this.tags == null) {
             throw new ParseException(TagCommand.MESSAGE_TAG_FAILED);
         }
+        
         return new TagCommand(index, this.tags);
     }
 
@@ -58,7 +61,9 @@ public class TagCommandParser implements Parser<TagCommand> {
         if (tags.isEmpty()) {
             return Optional.empty();
         }
+
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
+
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
 
