@@ -1,5 +1,5 @@
 [![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
-
+[![codecov](https://codecov.io/gh/AY2324S1-CS2103-T16-1/tp/graph/badge.svg?token=1OBKNJ3UHU)](https://codecov.io/gh/AY2324S1-CS2103-T16-1/tp)
 # ManageHR
 ManageHR is your all-in-one solution for seamless Human Resources management. Say goodbye to paperwork, spreadsheets, and administrative headaches. Our cutting-edge software empowers HR professionals to focus on what truly matters – your people.
 
