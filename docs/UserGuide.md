@@ -127,20 +127,32 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Deleting a fosterer : `delete`
 
-Deletes the specified person from the address book.
+Deletes the data entry at the index-th position of the currently displayed list.
 
-Format: `delete INDEX`
+Format: `delete INDEX...`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+Parameter: `INDEX...`
+* Index of a fosterer is shown in the list obtained by the `find/list` command.
+* Must be a positive integer 1, 2, 3, …
+* Multiple indexes are allowed for mass deletion,  each index separated by a white space.
+* `delete` without an index is valid if and only if there exists only one data entry in the current list.
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list` followed by `delete 2` deletes the 2nd fosterer in the address book
+* `find Jerry` followed by `delete 1` deletes the 1st fosterer in the results of the find command
+* `list` followed by `delete 1 3 7` deletes the 1st, 3rd and 7th fosterers in the address book
 
+Expected output (success):
+```agsl
+Fosterers Jerry Chee, John Doe, and Mary Ann are successfully deleted!
+```
+
+Expected output (fail):
+```agsl
+Oops! Invalid fosterer index provided, please check again.
+```
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
