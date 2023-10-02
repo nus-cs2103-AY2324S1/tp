@@ -283,16 +283,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `AddressBook`, the **Person** is the `user` and the **Actors** are `student`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 - Delete a person**
 
 **MSS**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  FumbleLog shows a list of persons
 3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+4.  FumbleLog deletes the person
 
     Use case ends.
 
@@ -304,17 +304,203 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. FumbleLog shows an error message.
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**Use case: UC02 - Add a person**
+
+**MSS**
+1. User requests to add persons
+2. User supplies all necessary parameters they wish to associate with the person to be added
+3. FumbleLog adds the person
+
+   Use case ends.
+
+**Extensions**
+* 2a. User supplies the wrong type of parameters
+    
+    * 2a1. FumbleLog shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: UC03 - Edit a person**
+
+**MSS**
+1. User requests to list persons
+2. FumbleLog shows a list of persons
+3. User request to edit a specific person in the list
+4. User supplies parameters that they want to change
+5. Fumblelog edits the person
+
+   Use case ends.
+
+**Extensions**
+* 2a. List is empty
+
+  Use case ends.
+
+* 3a. User supplies an invalid index to edit
+    
+    * 3a1. Fumblelog shows an error message.
+
+      Use case resumes at step 2.
+
+ **Use case: UC04 - Show events**
+
+ **MSS**
+ 
+ 1. User requests to show all events
+ 2. FumbleLog shows a list of events
+
+    Use case ends.
+
+**Extensions**
+* 2a. List is empty
+
+  Use case ends.
+
+**Use case: UC05 - Add an event**
+
+**MSS**
+
+1. User requests to add a event
+2. User supplies the necessary parameters for the event
+3. Fumblelog adds the event
+
+**Extensions**
+* 2a. User supplies invalid parameters
+
+    * 2a1. FumbeLog shows an error message
+
+      Use case resumes at step 2.
+
+ **Use case: UC06 - Edit an event**
+
+ **MSS**
+1. User requests to list events
+2. FumbleLog shows a list of events
+3. User request to edit a specific event in the list
+4. User supplies parameters that they want to change
+5. Fumblelog edits the event
+
+**Extensions**
+* 2a. List is empty
+
+  Use case ends.
+
+* 3a. User supplies an invalid index to edit
+    
+    * 3a1. Fumblelog shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: UC07 - Delete an event**
+
+**MSS**
+
+1.  User requests to <u> list events </u> 
+2.  FumbleLog shows a list of events
+3.  User requests to delete a specific event in the list
+4.  FumbleLog deletes the event
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty
+
+  Use case ends.
+
+* 3a. The given index is invalid
+
+    * 3a1. FumbleLog shows an error message.
+
+      Use case resumes at step 2.
+
+ **Use case: UC08 - Sort events**
+ 
+**MSS**
+
+1. User requests to sort the events
+2. FumbleLog shows the list of events in sorted order
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty
+
+  Use case ends.
+
+**Use case: UC09 - Filter persons by group**
+
+1. User requests to filter persons by specifying a group
+2. FumbleLog shows the list of persons that belong in the specified group
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The group does not exist
+
+    * 1a1. FumbeLog shows an error message
+
+    Use case resumes at step 1.
+
+* 2a. The list is empty
+
+  Use case ends.
+
+
+**Use case: UC10 - Show reminders for events/birthdays happening soon**
+
+**MSS**
+1. User request a reminder for events/birthdays happening soon
+2. FumbleLog displays a list of events/birthdays happening soon
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User can specify the range of time to search
+    * 1a1. FumbleLog shows the list of events/birthdays happening within the specified range of time
+
+   Use case ends.
+
+* 2a. The list is empty
+
+  Use case ends.
+
+
+**Use case: UC11 - Customise short form commands**
+
+**MSS**
+1. User request to define a command in a custom format
+2. FumbleLog stores the newly defined command
+3. The defined short form command can now be used
+
+**Extensions**
+
+* 1a. The short-form command is conflicting with something else
+    * 1a1. FumbleLog shows an error message
+
+      Use case ends.
+
+* 3a. User uses a short-form command that is not defined
+    * 3a1. FumbleLog shows an error message
+ 
+      Use case ends.
+
+
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  Should be able to hold up to 1000 events without a noticeable sluggishness in performance for typical usage.
+5.  The data stored on the hard drive should be light-weight and not take too much space.
 
 *{More to be added}*
 
