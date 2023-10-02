@@ -5,19 +5,7 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
-
-### Thomas the Tank Engine
-
-<img src="images/johndoe.png" width="200px">
-
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
 
 ### Jane Doe
 
@@ -28,6 +16,17 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Team Lead
 * Responsibilities: UI
+
+### Matthew Sung
+
+<img src="images/sungmatt.png" width="200px">
+
+[[homepage](http://sungmatt.com)]
+[[github](https://github.com/sungmatt)]
+[[portfolio](team/sungmatt.md)]
+
+* Role: Developer
+* Responsibilities: Dev Ops, Administrative
 
 ### Johnny Doe
 
