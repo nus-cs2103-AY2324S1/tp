@@ -19,16 +19,16 @@ import seedu.address.model.employee.Employee;
 @JsonRootName(value = "addressbook")
 class JsonSerializableAddressBook {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_Employee = "Employees list contains duplicate employee(s).";
 
-    private final List<JsonAdaptedPerson> persons = new ArrayList<>();
+    private final List<JsonAdaptedEmployee> employees = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons.
+     * Constructs a {@code JsonSerializableAddressBook} with the given employees.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons) {
-        this.persons.addAll(persons);
+    public JsonSerializableAddressBook(@JsonProperty("employees") List<JsonAdaptedEmployee> employee) {
+        this.employees.addAll(employee);
     }
 
     /**
@@ -37,7 +37,7 @@ class JsonSerializableAddressBook {
      * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
-        persons.addAll(source.getEmployeeList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        employees.addAll(source.getEmployeeList().stream().map(JsonAdaptedEmployee::new).collect(Collectors.toList()));
     }
 
     /**
@@ -47,12 +47,12 @@ class JsonSerializableAddressBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
-        for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
-            Employee person = jsonAdaptedPerson.toModelType();
-            if (addressBook.hasPerson(person)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+        for (JsonAdaptedEmployee jsonAdaptedEmployee : employees) {
+            Employee employee = jsonAdaptedEmployee.toModelType();
+            if (addressBook.hasEmployee(employee)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_Employee);
             }
-            addressBook.addPerson(person);
+            addressBook.addEmployee(employee);
         }
         return addressBook;
     }

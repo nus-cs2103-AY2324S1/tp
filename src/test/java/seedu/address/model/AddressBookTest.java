@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalEmployees.ALICE;
+import static seedu.address.testutil.TypicalEmployees.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -20,7 +20,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.employee.Employee;
 import seedu.address.model.employee.exceptions.DuplicateEmployeeException;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.EmployeeBuilder;
 
 public class AddressBookTest {
 
@@ -44,64 +44,64 @@ public class AddressBookTest {
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
-        // Two persons with the same identity fields
-        Employee editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+    public void resetData_withDuplicateEmployees_throwsDuplicateEmployeeException() {
+        // Two employees with the same identity fields
+        Employee editedAlice = new EmployeeBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        List<Employee> newPersons = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newPersons);
+        List<Employee> newEmployees = Arrays.asList(ALICE, editedAlice);
+        AddressBookStub newData = new AddressBookStub(newEmployees);
 
         assertThrows(DuplicateEmployeeException.class, () -> addressBook.resetData(newData));
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasPerson(null));
+    public void hasEmployee_nullEmployee_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasEmployee(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasPerson(ALICE));
+    public void hasEmployee_employeeNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasEmployee(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
-        assertTrue(addressBook.hasPerson(ALICE));
+    public void hasEmployee_employeeInAddressBook_returnsTrue() {
+        addressBook.addEmployee(ALICE);
+        assertTrue(addressBook.hasEmployee(ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
-        Employee editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+    public void hasEmployee_employeeWithSameIdentityFieldsInAddressBook_returnsTrue() {
+        addressBook.addEmployee(ALICE);
+        Employee editedAlice = new EmployeeBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(addressBook.hasPerson(editedAlice));
+        assertTrue(addressBook.hasEmployee(editedAlice));
     }
 
     @Test
-    public void getPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getEmployeeList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getEmployeeList().remove(0));
     }
 
     @Test
     public void toStringMethod() {
-        String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getEmployeeList() + "}";
+        String expected = AddressBook.class.getCanonicalName() + "{employees=" + addressBook.getEmployeeList() + "}";
         assertEquals(expected, addressBook.toString());
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
+     * A stub ReadOnlyAddressBook whose employees list can violate interface constraints.
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
-        private final ObservableList<Employee> persons = FXCollections.observableArrayList();
+        private final ObservableList<Employee> employees = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Employee> persons) {
-            this.persons.setAll(persons);
+        AddressBookStub(Collection<Employee> employees) {
+            this.employees.setAll(employees);
         }
 
         @Override
         public ObservableList<Employee> getEmployeeList() {
-            return persons;
+            return employees;
         }
     }
 

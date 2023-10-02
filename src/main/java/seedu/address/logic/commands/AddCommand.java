@@ -14,13 +14,13 @@ import seedu.address.model.Model;
 import seedu.address.model.employee.Employee;
 
 /**
- * Adds a person to the address book.
+ * Adds an employee to the address book.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an employee to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -35,17 +35,17 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_SUCCESS = "New employee added: %1$s";
+    public static final String MESSAGE_DUPLICATE_EMPLOYEE = "This employee already exists in the address book";
 
     private final Employee toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddCommand to add the specified {@code Employee}
      */
-    public AddCommand(Employee person) {
-        requireNonNull(person);
-        toAdd = person;
+    public AddCommand(Employee employee) {
+        requireNonNull(employee);
+        toAdd = employee;
     }
 
     @Override
@@ -53,7 +53,7 @@ public class AddCommand extends Command {
         requireNonNull(model);
 
         if (model.hasEmployee(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_EMPLOYEE);
         }
 
         model.addEmployee(toAdd);

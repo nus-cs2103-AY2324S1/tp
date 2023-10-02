@@ -11,7 +11,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Person in the address book.
+ * Represents an Employee in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Employee {
@@ -62,21 +62,21 @@ public class Employee {
     }
 
     /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both employees have the same name.
+     * This defines a weaker notion of equality between two employees.
      */
-    public boolean isSamePerson(Employee otherPerson) {
-        if (otherPerson == this) {
+    public boolean isSameEmployee(Employee otherEmployee) {
+        if (otherEmployee == this) {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getName().equals(getName());
+        return otherEmployee != null
+                && otherEmployee.getName().equals(getName());
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both employees have the same identity and data fields.
+     * This defines a stronger notion of equality between two employees.
      */
     @Override
     public boolean equals(Object other) {
@@ -89,12 +89,12 @@ public class Employee {
             return false;
         }
 
-        Employee otherPerson = (Employee) other;
-        return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+        Employee otherEmployee = (Employee) other;
+        return name.equals(otherEmployee.name)
+                && phone.equals(otherEmployee.phone)
+                && email.equals(otherEmployee.email)
+                && address.equals(otherEmployee.address)
+                && tags.equals(otherEmployee.tags);
     }
 
     @Override

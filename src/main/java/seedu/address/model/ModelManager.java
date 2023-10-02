@@ -21,7 +21,7 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Employee> filteredPersons;
+    private final FilteredList<Employee> filteredEmployees;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -33,7 +33,7 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getEmployeeList());
+        filteredEmployees = new FilteredList<>(this.addressBook.getEmployeeList());
     }
 
     public ModelManager() {
@@ -88,44 +88,44 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasEmployee(Employee person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
+    public boolean hasEmployee(Employee employee) {
+        requireNonNull(employee);
+        return addressBook.hasEmployee(employee);
     }
 
     @Override
     public void deleteEmployee(Employee target) {
-        addressBook.removePerson(target);
+        addressBook.removeEmployee(target);
     }
 
     @Override
-    public void addEmployee(Employee person) {
-        addressBook.addPerson(person);
-        updateFilteredEmployeeList(PREDICATE_SHOW_ALL_PERSONS);
+    public void addEmployee(Employee employee) {
+        addressBook.addEmployee(employee);
+        updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
     }
 
     @Override
-    public void setEmployee(Employee target, Employee editedPerson) {
-        requireAllNonNull(target, editedPerson);
+    public void setEmployee(Employee target, Employee editedEmployee) {
+        requireAllNonNull(target, editedEmployee);
 
-        addressBook.setPerson(target, editedPerson);
+        addressBook.setEmployee(target, editedEmployee);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Employee List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Employee} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
     public ObservableList<Employee> getFilteredEmployeeList() {
-        return filteredPersons;
+        return filteredEmployees;
     }
 
     @Override
     public void updateFilteredEmployeeList(Predicate<Employee> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredEmployees.setPredicate(predicate);
     }
 
     @Override
@@ -142,7 +142,7 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredEmployees.equals(otherModelManager.filteredEmployees);
     }
 
 }

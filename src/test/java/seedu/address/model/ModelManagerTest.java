@@ -3,10 +3,10 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EMPLOYEES;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalEmployees.ALICE;
+import static seedu.address.testutil.TypicalEmployees.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -73,29 +73,29 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
+    public void hasEmployee_nullEmployee_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.hasEmployee(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasEmployee_employeeNotInAddressBook_returnsFalse() {
         assertFalse(modelManager.hasEmployee(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasEmployee_employeeInAddressBook_returnsTrue() {
         modelManager.addEmployee(ALICE);
         assertTrue(modelManager.hasEmployee(ALICE));
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getFilteredEmployeeList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredEmployeeList().remove(0));
     }
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        AddressBook addressBook = new AddressBookBuilder().withEmployee(ALICE).withEmployee(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -122,7 +122,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_PERSONS);
+        modelManager.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
