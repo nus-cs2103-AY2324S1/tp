@@ -38,7 +38,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/yiwen.md)]
 ### Marcus Soh
 
-<img src="images/marcus.jpg" width="200px">
+<img src="images/hollag.png" width="200px">
 
 [[github](http://github.com/HollaG)] [[portfolio](team/marcus.md)]
 
