@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+InsureIQ is a **contact management system of large car owners database with policies bought by them** optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, InsureIQ can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -27,7 +27,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/Mary i/627A c/73052859 l/SLU5237J` : Adds a contact named `Mary` to the InsureIQ.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -74,17 +74,29 @@ Format: `help`
 
 ### Adding a person: `add`
 
-Adds a person to the address book.
+Adds a person to the database.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME i/NRIC c/CONTACT NUMBER l/LICENCE PLATE…​`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
+* Add a person's details in the database.
+* **All** of the fields must be present when using this command.
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/Mary i/627A c/73052859 l/SLU5237J` creates a person whose name is Mary, NRIC last four digits is 627A, contact number is 73052859, licence plate is SLU5237J in the database.
+
+Acceptable values for each parameter:
+* `n/NAME`: Alphabets
+* `i/NRIC`: Alphanumeric, _exactly_ 4 characters
+* `c/CONTACT NUMBER`: Numeric, _exactly_ 8 characters
+* `l/LICENCE PLATE`: Alphanumeric, _up to_ 9 characters
+
+Expected output upon success: [coming soon]
+
+Expected output upon failure:
+* Any one of the fields missing: `Error: Please provide all required fields (pn, new, field)`
+* Fields specified for add are not valid or empty: `Error: Invalid field for adding.`
+* Format of added value is incorrect or not allowed for the specified field: `Error: Invalid value format.`
+
 
 ### Listing all persons : `list`
 
@@ -216,12 +228,12 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                                                      |
-|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Clear**  | `clear`                                                                                                                                                               |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
-| **Find**   | `find [n/NAME] [i/NRIC] [c/CONTACT NUMBER] [l/LICENCE PLATE] [pn/POLICY NUMBER] [pi/POLICY ISSUE DATE] [pe/POLICY EXPIRY DATE]`<br> e.g., `find n/John /pn AB12345J`  |
-| **List**   | `list`                                                                                                                                                                |
-| **Help**   | `help`                                                                                                                                                                |
+| Action     | Format, Examples                                                                                                                                                     |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME i/NRIC c/CONTACT NUMBER l/LICENCE PLATE…​` <br> e.g., `add n/Mary i/627A c/73052859 l/SLU5237J`                                                          |
+| **Clear**  | `clear`                                                                                                                                                              |
+| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                  |
+| **Edit**   | `edit INDEX [l/LICENCEPLATE] [pn/POLICY NUMBER] [pi/POLICY ISSUE DATE] [pe/POLICY EXPIRY DATE]…​`<br> e.g.,`edit 2 pn/AB12345J pe/31-12-2024`                        |
+| **Find**   | `find [n/NAME] [i/NRIC] [c/CONTACT NUMBER] [l/LICENCE PLATE] [pn/POLICY NUMBER] [pi/POLICY ISSUE DATE] [pe/POLICY EXPIRY DATE]`<br> e.g., `find n/John /pn AB12345J` |
+| **List**   | `list`                                                                                                                                                               |
+| **Help**   | `help`                                                                                                                                                               |
