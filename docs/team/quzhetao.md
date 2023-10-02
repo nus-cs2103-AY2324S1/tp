@@ -1,6 +1,6 @@
 ---
-Zhetao's Porfolio Page
-
+layout: page
+title: Zhetao's Project Portfolio Page
 ---
 
 ### Project: WellNUS
