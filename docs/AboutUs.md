@@ -19,17 +19,17 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Wee Ming Qing
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/weemingqing.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/WeeMingQing)]
+[[portfolio](team/weemingqing.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Documentation
+* Responsibilities: Logic
 
-### Johnny Doe
+### John Doe
 
 <img src="images/johndoe.png" width="200px">
 
