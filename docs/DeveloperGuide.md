@@ -295,30 +295,198 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `Staff-Snap` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 - Add an employee**
+
+Guarantees: The new employee will be added to the list of employees.
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User inputs the command to add an employee.
+2.  Staff-Snap adds the new employee to the employee list and displays the updated list.
+   
+    Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command.
+
+    * 1a1. Staff-Snap shows an error message.
+
+      Use case resumes at step 1.
+
+**Use case: UC02 - Edit employee's information**
+
+Guarantees: The employee's information will be updated.
+
+**MSS**
+
+1.  User inputs the command to edit an employee's information.
+2.  Staff-Snap updates the employee list with the updated employee information.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. User enters an invalid command.
 
-  Use case ends.
+    * 1a1. Staff-Snap shows an error message.
 
-* 3a. The given index is invalid.
+      Use case resumes at step 1.
 
-    * 3a1. AddressBook shows an error message.
+**Use case: UC03 - List all employees**
 
-      Use case resumes at step 2.
+Guarantees: All employees will be listed.
+
+**MSS**
+
+1.  User inputs the command to view the list of all employees.
+2.  Staff-Snap displays the list of all employees.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command.
+
+    * 1a1. Staff-Snap shows an error message.
+
+      Use case resumes at step 1.
+* 1b. Employee list is empty.
+
+    * 1b1. Staff-Snap shows an empty employee list.
+
+      Use case ends.
+
+**Use case: UC04 - Delete an employee**
+
+Guarantees: The employee will be removed from the list of employees.
+
+**MSS**
+
+1.  User inputs the command to delete an employee.
+2.  Staff-Snap removes the employee from the list of employees.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command.
+
+    * 1a1. Staff-Snap shows an error message.
+
+      Use case resumes at step 1.
+
+**Use case: UC05 - Find an employee by name**
+
+Guarantees: The employees with name matching the search will be listed.
+
+**MSS**
+
+1.  User inputs the command to to find an employee by name.
+2.  Staff-Snap displays the list of all employees that match the search.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command.
+
+    * 1a1. Staff-Snap shows an error message.
+
+      Use case resumes at step 1.
+* 1b. No employee found.
+
+    * 1b1. Staff-Snap shows an empty employee list.
+
+      Use case ends.
+
+**Use case: UC06 - Sort employees**
+
+Guarantees: The list of employees will be sorted by the descriptor.
+
+**MSS**
+
+1.  User inputs the command to sort the employees by a particular descriptor.
+2.  Staff-Snap displays the list of employees sorted by the descriptor.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command.
+
+    * 1a1. Staff-Snap shows an error message.
+
+      Use case resumes at step 1.
+
+**Use case: UC07 - Filter employees**
+
+Guarantees: Only employees that satisfies the specified criterion will be listed.
+
+**MSS**
+
+1.  User inputs the command to filter the list of employees by a specified criterion.
+2.  Staff-Snap displays the list of all employees that satisfies the specified criterion.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command.
+
+    * 1a1. Staff-Snap shows an error message.
+
+      Use case resumes at step 1.
+
+**Use case: UC08 - List all commands**
+
+Guarantees: The list of all available commands will be made accessible.
+
+**MSS**
+
+1.  User inputs the command to view the list of all available commands.
+2.  Staff-Snap displays a popup window containing the URL to the user guide.
+3.  User clicks on the URL.
+4.  Staff-Snap opens the user guide in the default browser.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command.
+
+    * 1a1. Staff-Snap shows an error message.
+
+      Use case resumes at step 1.
+* 2a. User closes the popup window.
+
+    * 2a1. Staff-Snap closes the popup window.
+
+      Use case ends.
+
+**Use case: UC09 - Exit the program**
+
+Guarantees: Staff-Snap exits.
+
+**MSS**
+
+1.  User inputs the command to exit the program.
+2.  Staff-Snap exits and closes.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command.
+
+    * 1a1. Staff-Snap shows an error message.
+
+      Use case resumes at step 1.
+* 1b. User closes the application window.
+
+    Use case resumes at step 2.
 
 *{More to be added}*
 
