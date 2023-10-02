@@ -5,12 +5,12 @@ Zhetao's Porfolio Page
 
 ### Project: WellNUS
 
-WellNUS is a desktop application used by NUS Counsellors to manage and schedule appointmentments with their student clients.
+WellNUS is a desktop application used by NUS Counsellors to manage and schedule appointments with their student clients.
 The user interacts with it using a CLI, and it has a GUI created with JavaFX.
 
 Summary of Contributions:
 
-* **Enchancements implemented:**
+* **Enhancements implemented:**
 
 1. To be added.
 2. To be added.
