@@ -36,6 +36,9 @@ public class UniquePersonList implements Iterable<Person> {
         return internalList.stream().anyMatch(toCheck::isSamePerson);
     }
 
+    /**
+     * Returns true if the list contains a person with the same name as the given argument.
+     */
     public boolean contains(String name) {
         requireAllNonNull(name);
         return internalList.stream().anyMatch(person -> person.getName().equals(new Name(name)));

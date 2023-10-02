@@ -74,7 +74,8 @@ class JsonAdaptedMeeting {
         }
 
         if (title == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Title.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Title.class.getSimpleName()));
         }
         if (!Title.isValidTitle(title)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
@@ -82,7 +83,8 @@ class JsonAdaptedMeeting {
         final Title modelTitle = new Title(title);
 
         if (location == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Location.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Location.class.getSimpleName()));
         }
         if (!Location.isValidLocation(location)) {
             throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
@@ -90,7 +92,8 @@ class JsonAdaptedMeeting {
         final Location modelLocation = new Location(location);
 
         if (start == null || end == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,  LocalDateTime.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    LocalDateTime.class.getSimpleName()));
         }
         if (!MeetingTime.isValidMeetingTime(LocalDateTime.parse(start), LocalDateTime.parse(end))) {
             throw new IllegalValueException(MeetingTime.MESSAGE_CONSTRAINTS);

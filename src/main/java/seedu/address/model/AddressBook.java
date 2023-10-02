@@ -69,6 +69,9 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     //// person-level operations
 
+    /**
+     * Returns true if a person with the same name as {@code name} exists in the address book.
+     */
     public boolean hasName(String name) {
         requireNonNull(name);
         return persons.contains(name);
@@ -120,7 +123,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Replaces the given meeting {@code meeting} in the list with {@code editedMeeting}.
      * {@code target} must exist in the address book.
-     * The meeting identity of {@code editedMeeting} must not be the same as another existing meeting in the address book.
+     * The meeting identity of {@code editedMeeting} must be different than an existing meeting in the address book.
      */
     public void setMeeting(Meeting target, Meeting editedMeeting) {
         requireNonNull(editedMeeting);

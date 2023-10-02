@@ -18,7 +18,6 @@ import seedu.address.model.meeting.MeetingTime;
 import seedu.address.model.meeting.Title;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
@@ -163,6 +162,12 @@ public class ParserUtil {
         return tagSet;
     }
 
+    /**
+     * Parses a {@code String attendee} into a {@code Attendee}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code attendee} is invalid.
+     */
     public static Attendee parseAttendee(String attendee) throws ParseException {
         requireNonNull(attendee);
         String trimmedAttendee = attendee.trim();
@@ -172,6 +177,9 @@ public class ParserUtil {
         return new Attendee(trimmedAttendee);
     }
 
+    /**
+     * Parses {@code Collection<String> attendees} into a {@code Set<Attendee>}.
+     */
     public static Set<Attendee> parseAttendees(Collection<String> attendees) throws ParseException {
         requireNonNull(attendees);
         final Set<Attendee> attendeeSet = new HashSet<>();

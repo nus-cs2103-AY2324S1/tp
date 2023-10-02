@@ -3,8 +3,10 @@ package seedu.address.model.meeting;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import seedu.address.model.person.Person;
-
+/**
+ * Represents a Person in the address book that will attend the meeting.
+ * Guarantees: immutable; is valid as declared in {@link #isValidAttendee(String)}
+ */
 public class Attendee {
 
     public static final String MESSAGE_CONSTRAINTS =

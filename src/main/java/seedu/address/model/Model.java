@@ -98,7 +98,7 @@ public interface Model {
     /**
      * Replaces the given meeting {@code target} with {@code editedMeeting}.
      * {@code target} must exist in the address book.
-     * The meeting identity of {@code editedMeeting} must not be the same as another existing meeting in the address book.
+     * The meeting identity of {@code editedMeeting} must be different than an existing meeting in the address book.
      */
     void setMeeting(Meeting target, Meeting editedMeeting);
 

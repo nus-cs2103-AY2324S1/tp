@@ -5,10 +5,19 @@ import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
 
+/**
+ * Represents a scheduled time for a meeting in the address book.
+ * Guarantees: details are present and not null, field values are validated, immutable.
+ */
 public class MeetingTime {
-    public static final String MESSAGE_CONSTRAINTS = "MeetingTimes should be in LocalDateTime and start cannot be after end";
+    public static final String MESSAGE_CONSTRAINTS = "MeetingTimes should be in LocalDateTime"
+            + " and start cannot be after end";
     private final LocalDateTime start;
     private final LocalDateTime end;
+
+    /**
+     * Constructs the meeting time for a meeting.
+     */
     public MeetingTime(LocalDateTime start, LocalDateTime end) {
         this.start = start;
         this.end = end;

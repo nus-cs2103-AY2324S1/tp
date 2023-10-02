@@ -8,12 +8,19 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 
+/**
+ * Represents a Meeting in the address book.
+ * Guarantees: details are present and not null, field values are validated, immutable.
+ */
 public class Meeting {
     private final Title title;
     private final Location location;
     private final MeetingTime meetingTime;
     private final Set<Attendee> attendees = new HashSet<>();
 
+    /**
+     * Every field must be present and not null.
+     */
     public Meeting(Title title, Location location, LocalDateTime start, LocalDateTime end, Set<Attendee> attendees) {
         this.title = title;
         this.location = location;
@@ -41,10 +48,17 @@ public class Meeting {
         return meetingTime;
     }
 
+    /**
+     * Returns an immutable attendee set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
     public Set<Attendee> getAttendees() {
         return Collections.unmodifiableSet(attendees);
     }
 
+    /**
+     * Returns true if {@code otherMeeting} has the same identity as this meeting.
+     */
     public boolean isSameMeeting(Meeting otherMeeting) {
         if (otherMeeting == this) {
             return true;

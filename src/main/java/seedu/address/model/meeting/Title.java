@@ -3,6 +3,10 @@ package seedu.address.model.meeting;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents a Meeting's name in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidTitle(String)}
+ */
 public class Title {
 
     public static final String MESSAGE_CONSTRAINTS =
@@ -14,6 +18,10 @@ public class Title {
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
     public final String meetingTitle;
+
+    /**
+     * Constructs the meeting name/title of the meeting.
+     */
     public Title(String meetingTitle) {
         requireNonNull(meetingTitle);
         checkArgument(isValidTitle(meetingTitle), MESSAGE_CONSTRAINTS);

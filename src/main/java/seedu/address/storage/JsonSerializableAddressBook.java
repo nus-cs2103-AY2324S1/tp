@@ -67,7 +67,7 @@ class JsonSerializableAddressBook {
             Meeting meeting = jsonAdaptedMeeting.toModelType();
             Set<Attendee> meetingAttendees = meeting.getAttendees();
             for (Attendee attendee : meetingAttendees) {
-                if(!addressBook.hasName(attendee.getAttendeeName())) {
+                if (!addressBook.hasName(attendee.getAttendeeName())) {
                     throw new IllegalValueException(MESSAGE_ATTENDEE_NOT_FOUND);
                 }
             }
