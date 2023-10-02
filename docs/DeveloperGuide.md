@@ -262,7 +262,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
-* is reasonably comfortable using _CLI_ apps
+* is reasonably comfortable using CLI apps
 
 **Value proposition**: Provide quick and easy contact management system of large car owners database with policies bought by them and have a better overview of the premium due dates.
 
