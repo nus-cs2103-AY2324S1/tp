@@ -43,3 +43,7 @@ Connectify offers a seamless approach to client management, ensuring that every 
 ---
 
 For detailed command usage, examples, and acceptable values, please refer to the comprehensive user guide.
+
+---
+
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org)
