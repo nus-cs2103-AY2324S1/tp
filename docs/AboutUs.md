@@ -38,7 +38,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Lim Win Sheng
 
-<img src="images/WinSheng1.png" width="200px">
+<img src="images/winsheng1.png" width="200px">
 
 [[github](http://github.com/WinSheng1)]
 [[portfolio](team/WinSheng1.md)]
