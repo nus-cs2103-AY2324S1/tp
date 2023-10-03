@@ -3,9 +3,10 @@ layout: page
 title: Kwang Thiag's Project Portfolio Page
 ---
 
-### Project: AddressBook Level 3
+### Project: MediFlowR
 
-AddressBook - Level 3 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+MediFlowR is a application that enables users to manage patient records within the system.
+The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java.
 
 Given below are my contributions to the project.
 
