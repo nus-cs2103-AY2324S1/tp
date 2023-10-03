@@ -129,17 +129,16 @@ Examples:
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified patient from the patient list.
 
-Format: `delete INDEX`
+Format: `delete id=[patient-id]`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Deletes the patient with the specified `patient-id`.
+* The patient id refers to the id of the patient shown in the displayed patient list.
+* The patient id **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+`delete id=12345` deletes the patient with id **12345** in the patient list.
 
 ### Clearing all entries : `clear`
 
