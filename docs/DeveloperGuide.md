@@ -257,27 +257,48 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* has a need to manage a significant number of tutors and their schedules
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: help tuition centre managers easily track, schedule, and notify tutors of their upcoming schedule
+
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority &nbsp; | As a …​   | I want to …​                                                                                   | So that I can…​                                                             |
+|-----------------|-----------|------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------|
+| `* * *`         | manager   | add new tutors to the system                                                                   | manage them                                                                 |
+| `* * *`         | manager   | store each tutor's contact information, including their name, phone number, and email address  | access it later                                                             |
+| `* * *`         | manager   | remove tutors from the system when they are no longer available                                | keep the system up to date                                                  |
+| `* * *`         | manager   | view a list of all tutors in the system                                                        | have an overview of available tutors                                        |
+| `* * *`         | manager   | search for a tutor by their name                                                               | quickly find their information                                              |
+| `* * *`         | manager   | create a schedule for each tutor                                                               | track their schedule                                                        |
+| `* * *`         | manager   | delete a schedule for a tutor                                                                  | remove an appointment when the tutor is not available                       |
+| `* * *`         | manager   | view a summary of all upcoming tutoring sessions                                               | plan accordingly                                                            |
+| `* * *`         | manager   | save the schedule and tutor’s information                                                      | can access it again in the future                                           |
+| `* *`           | manager   | mark sessions as attended or missed                                                            | track the status of tutoring sessions                                       |
+| `* *`           | manager   | keep a record of completed tutoring sessions                                                   | maintain a history of successful sessions                                   |
+| `* *`           | manager   | keep a record of missed tutoring sessions                                                      | monitor attendance and address any issues                                   |
+| `* *`           | manager   | edit the tutor information                                                                     | update their details easily                                                 |
+| `* *`           | manager   | edit the schedule information                                                                  | reschedule tutoring sessions                                                |
+| `* *`           | manager   | shorter syntax                                                                                 | work faster                                                                 |
+| `* *`           | manager   | view schedules by tutor                                                                        | easily plan the schedule of that tutor                                      |
+| `* *`           | manager   | have a help function                                                                           | quickly check the command parameters without having to check the User Guide |
+| `*`             | manager   | export data to an excel file                                                                   | use the data for other purposes                                             |
+| `*`             | manager   | import data from an excel file                                                                 | easily restore and update records                                           |
+| `*`             | manager   | add new students to the system                                                                 | enrol them                                                                  |
+| `*`             | manager   | store each students contact information, including their name, phone number, and email address | access it later                                                             |
+| `*`             | manager   | remove students from the system when they are no longer enrolled                               | maintain an accurate student list                                           |
+| `*`             | manager   | view a list of all students in the system                                                      | have an overview of enrolled students                                       |
+| `*`             | manager   | edit the student information                                                                   | keep their details up to date                                               |
+| `*`             | manager   | assign specific tutors to a student                                                            | have personalised tutoring (one tutor to many students)                     |
+| `*`             | manager   | reassign tutors to students                                                                    | adapt to changing needs and preferences                                     |
+
 
 *{More to be added}*
 
