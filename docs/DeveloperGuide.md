@@ -283,30 +283,39 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `TuitionConnect` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 - View all tutees**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to view all tutees.
+2.  System shows all tutees.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+- 1a. The list of tutees is empty.
+    - 1a1. System informs the user that the list is empty.
 
-  Use case ends.
+      Use case ends.
 
-* 3a. The given index is invalid.
+**Use case: UC02 - Add a tutee**
 
-    * 3a1. AddressBook shows an error message.
+**MSS**
 
-      Use case resumes at step 2.
+1. User requests to add a tutee.
+2. System adds a tutee.
+
+   Use case ends.
+
+**Extensions**
+
+- 1a. User inputs incomplete tutee data. <br>
+    - 1a1. System informs user of the incomplete tutee data.
+
+      Use case resumes at 1.
 
 *{More to be added}*
 
