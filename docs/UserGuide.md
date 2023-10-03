@@ -5,7 +5,7 @@ title: User Guide
 
 Connectify is a **desktop app for managing clients, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Connectify can get your client management tasks done faster than traditional GUI apps.
 
-![Ui Markup](https://share.balsamiq.com/g/cBVnfURj9edJb6L5JXMgnU.png)
+![Ui Markup](images/UiMockup.png)
 
 * Table of Contents
 {:toc}
