@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIENDS;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
@@ -74,7 +74,7 @@ public class TagCommandTest {
                 TypicalPersons.ALICE.getTags());
 
         TagCommand commandWithSameValue = new TagCommand(INDEX_FIRST_PERSON,
-                SampleDataUtil.getTagSet(VALID_TAG_FRIEND));
+                SampleDataUtil.getTagSet(VALID_TAG_FRIENDS));
 
         assertTrue(standardCommand.equals(commandWithSameValue));
 
