@@ -325,10 +325,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 *{More to be added}*
 
 ### Non-Functional Requirements
-
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1.  Cross-Platform Compatibility:
+    - Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2.  Scalability and Performance:
+    - Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+    - Should support efficient data retrieval and manipulation for the specified contact volume.
+3.  Usability and Efficiency:
+    - A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should 
+    be able to perform the majority of tasks more quickly using _CLI_ commands compared to using a mouse on the _GUI_.
+    - The _CLI_ interface should prioritise efficiency by providing clear and concise commands, minimising unncessary prompts,
+    and offering time-saving shortcuts.
+4. Updates and Maintenance:
+    - Updates should not disrupt the user's workflow or data.
 
 *{More to be added}*
 
@@ -336,6 +344,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **CLI**: Command Line Interface. Usually the in-built terminal or in the IDE the application is run on.
+* **GUI**: Graphical User Interface.
+* **Risk Level**: Students can be classified as high, medium, or low-risk level determined by the counsellor.
 
 --------------------------------------------------------------------------------------------------------------------
 
