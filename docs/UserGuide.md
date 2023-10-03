@@ -113,17 +113,17 @@ Examples:
 
 Finds patients whose names contain any of the given keywords.
 
-Format: `search name=KEYWORD [MORE_KEYWORDS]`
+Format: `search name=[name]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* The search is case-insensitive. e.g `tianrun` will match `Tianrun`
+* The order of the keywords does not matter. e.g. `Lebron James` will match `James Lebron`
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* Only full words will be matched e.g. `Curr` will not match `Curry`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+  e.g. `Chris Paul` will return `Chris Bumstead`, `Logan Paul`
 
 Examples:
-* `search name=John` returns `john` and `John Doe`
+* `search name=James` returns `james` and `James Harden`
 * `search name=alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
