@@ -10,7 +10,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 ## Project team
 
 ### Brendan
-
+git
 <img src="images/brendanneojw.png" width="200px">
 
 [[github](https://github.com/brendanneojw)]
@@ -32,7 +32,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Rohan
 
-<img src="images/RSXIX.png" width="200px">
+<img src="images/rushedphotorohan.png" width="200px">
 
 [[github](http://github.com/RSXIX)]
 [[portfolio](team/RSXIX.md)]
