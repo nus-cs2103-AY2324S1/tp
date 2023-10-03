@@ -21,7 +21,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Muhammad Fikri
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/mfjkri.png" width="200px">
 
 [[github](http://github.com/mfjkri)]
 [[portfolio](team/mfjkri.md)]
