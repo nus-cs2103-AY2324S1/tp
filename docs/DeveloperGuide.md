@@ -296,32 +296,82 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 _{More to be added}_
 
-### Use cases
+### Use case
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
-
-**Use case: Delete a person**
+**Use case: Add a contact to a meeting**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list meetings.
+2.  OutBook shows a list of meetings.
+3.  User requests to list contacts.
+4.  OutBook shows a list of contacts.
+5.  User requests to add a specific contact to a specific meeting.
+6.  OutBook adds the contact to the meeting.
 
     Use case ends.
 
 **Extensions**
 
-- 2a. The list is empty.
+- 2a. The list of meetings is empty.
 
   Use case ends.
 
-- 3a. The given index is invalid.
+- 4a. The list of contacts is empty.
 
-  - 3a1. AddressBook shows an error message.
+  Use case ends.
+
+- 5a. The given meeting index is invalid.
+
+  - 5a1. OutBook shows an error message.
 
     Use case resumes at step 2.
+
+- 5b. The given contact index is invalid.
+
+  - 5b1. OutBook shows an error message.
+
+    Use case resumes at step 4.
+
+- 5c. The contact is already in the meeting.
+
+  - 5a1. OutBook shows an error message.
+
+    Use case ends.
+
+**Use case: Remove contact from a meeting**
+
+**MSS**
+
+1.  User requests to list meetings.
+2.  OutBook shows a list of meetings.
+3.  User requests to view details of a specific meeting.
+4.  User requests to remove a specific contact from the meeting.
+5.  OutBook removes the contact from the meeting.
+
+    Use case ends.
+
+**Extensions**
+
+- 2a. The list of meetings is empty.
+
+  Use case ends.
+
+- 3a. There are no contacts in the meeting.
+
+  Use case ends.
+
+- 4a. The given meeting index is invalid.
+
+  - 4a1. OutBook shows an error message.
+
+    Use case resumes at step 2.
+
+- 4b. The given contact index is invalid.
+
+  - 4b1. OutBook shows an error message.
+
+    Use case resumes at step 3.
 
 _{More to be added}_
 
