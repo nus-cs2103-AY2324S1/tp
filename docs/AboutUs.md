@@ -9,15 +9,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Gao Tianrun
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/tianrun.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/dinde2004.md)]
+[[github](https://github.com/trgao)]
+[[portfolio](team/trgao.md)]
 
-* Role: Project Advisor
+* Role: Team Lead
+* Responsibilities: 
 
 ### Shen Licong
 
@@ -39,15 +39,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Doan Quoc Thinh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/dinde2004.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/dinde2004)]
 [[portfolio](team/dinde2004.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: 
 
 ### Kwang Thiag
 
