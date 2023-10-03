@@ -11,7 +11,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Joshua Weng Hao
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jweng88.png" width="200px">
 
 [[github](https://github.com/jweng88)]
 [[portfolio](team/jweng88.md)]
