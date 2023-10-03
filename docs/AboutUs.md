@@ -51,7 +51,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Jason Ray
 
-<img src="images/JasonRay168.png" width="200px">
+<img src="images/jasonray168.png" width="200px">
 
 [[github](https://github.com/JasonRay168)]
 [[portfolio](team/JasonRay168.md)]
