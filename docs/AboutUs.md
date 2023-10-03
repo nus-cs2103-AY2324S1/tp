@@ -34,7 +34,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/ngeeyonglim.png" width="200px">
 
-[[github](http://github.com/ngeeyonglim)] 
+[[github](http://github.com/ngeeyonglim)]
 [[portfolio](team/ngeeyonglim.md)]
 
 * Role: Developer

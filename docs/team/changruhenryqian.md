@@ -5,7 +5,7 @@
 ## Summary of Contributions
 to be added soon
 
-### Code Contributed 
+### Code Contributed
 [Individual Dashboard](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=changruhenryqian&breakdown=true)
 
 ### Enhancements Implemented
