@@ -316,85 +316,130 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-* 1b. The user specifies a name or IC that is not unique in the current list.
+  * 1b. The user specifies an IC that is already exists in the current list.
 
-  * 1b1. HealthSync shows an error message.
+    * 1b1. HealthSync shows an error message.
 
-    Use case ends.
+      Use case ends.
 
 **Use case: UC2 - Delete a patient**
 
 **MSS**
 
-1.  User requests a list of patients inside the system.
-2.  HealthSync displays the list of patients.
-3.  User requests to delete a specific user in the list.
-4.  HealthSync deletes the patient from the list.
-5.  HealthSync <u>performs an auto-save (UC0A)</u>.
+1.  User requests to delete a specific patient based on an identifier from the list.
+2.  HealthSync searches for the patient in the list.
+3.  HealthSync deletes the specified patient from the list.
+4.  HealthSync <u>performs an auto-save (UC0A)</u>.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The user does not exist in the list.
 
-  Use case ends.
-
-* 3a. The user specifies an invalid index.
-
-    * 3a1. HealthSync shows an error message.
+    * 2a1. HealthSync shows an error message.
 
       Use case ends.
 
-**Use case: UC3 - Find a patient**
+* 2b. HealthSync finds more than 1 patient for the list.
+
+    * 2b1. HealthSync shows a list of patients matching the identifier in the list.
+    * 2b2. User indicates the patient to delete in the list.
+      
+      Use case continues from step 3.
+
+**Use case: UC3 - Delete fields from a patient**
 
 **MSS**
 
-1.  User requests a list of patients inside the system.
-2.  HealthSync displays the list of patients.
-3.  User requests to change a specific user's fields with a new value in the list.
-4.  HealthSync edits only the patient's fields in the list.
-5.  HealthSync <u>performs an auto-save (UC0A)</u>.
+1.  User requests to delete fields from a specific patient based
+    on an identifier from the list.
+2.  HealthSync searches for the patient in the list.
+3.  HealthSync deletes the fields of a specified patient from the list.
+4.  HealthSync <u>performs an auto-save (UC0A)</u>.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The user does not specify any fields they want to delete.
 
-  Use case ends.
-
-* 3a. The user specifies an invalid index.
-
-    * 3a1. HealthSync shows an error message.
+    * 1a1. HealthSync <u>deletes the patient from the list instead (UC2).</u>
 
       Use case ends.
 
-* 3b. The user does not specify any fields they want to edit.
+* 1b. The user attempts to delete a name/IC field.
 
-    * 3b1. HealthSync shows an error message.
-
-      Use case ends.
-
-* 3c. The user specifies duplicate fields they want to edit.
-
-    * 3c1. HealthSync shows an error message.
+    * 1b1. HealthSync shows an error message.
 
       Use case ends.
 
-* 3d. The user specifies no value in a name/IC field.
+* 2a. The user does not exist in the list.
 
-    * 3d1. HealthSync shows an error message.
+    * 2a1. HealthSync shows an error message.
 
       Use case ends.
 
-* 3e. The user specifies no value in an optional field.
+* 2b. HealthSync finds more than 1 patient for the list.
 
-    * 3e1. HealthSync deletes the value from the patient.
+    * 2b1. HealthSync shows a list of patients matching the identifier in the list.
+    * 2b2. User indicates the patient to delete from in the list.
 
-      Resume from step 5.
+      Use case continues from step 3.
 
 **Use case: UC4 - Edit a patient**
+
+**MSS**
+
+1.  User requests to change a specific user's fields based on an identifier 
+    with a new value in the list.
+2.  HealthSync searches for the patient in the list.
+3.  HealthSync edits the specified patient's fields in the list.
+4.  HealthSync <u>performs an auto-save (UC0A)</u>.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The user does not specify any fields they want to edit.
+
+    * 1a1. HealthSync shows an error message.
+
+      Use case ends.
+
+* 1b. The user specifies duplicate fields they want to edit.
+
+    * 1b1. HealthSync shows an error message.
+
+      Use case ends.
+
+* 1c. The user specifies no value in a name/IC field that they wish to edit.
+
+    * 1c1. HealthSync shows an error message.
+
+      Use case ends.
+
+* 1d. The user attempts to change the IC of the patient to one that already
+      exists in the list.
+
+    * 1d1. HealthSync shows an error message.
+
+      Use case ends.
+
+* 2a. The user does not exist in the list.
+
+    * 2a1. HealthSync shows an error message.
+
+      Use case ends.
+
+* 2b. HealthSync finds more than 1 patient for the list.
+
+    * 2b1. HealthSync shows a list of patients matching the identifier in the list.
+    * 2b2. User indicates the patient to edit in the list.
+
+      Use case continues from step 3.
+
+**Use case: UC5 - Find a patient**
 
 **MSS**
 
