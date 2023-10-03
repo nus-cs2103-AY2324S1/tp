@@ -46,7 +46,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Hannah Caroline Solomonraj
 
-<img src="images/Screenshot 2023-10-03 at 10.08.05 PM.png" width="200px">
+<img src="images/hcs1203.png" width="200px">
 
 [[github](http://github.com/hcs1203)]
 [[portfolio](team/hcs1203.md)]
