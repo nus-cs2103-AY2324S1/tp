@@ -50,6 +50,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/elaineshijie.png" width="200px">
 
 [[github](http://github.com/elaineshijie)]
+[[portfolio](team/elaineshijie.md)]
 
 
 * Role: Developer
