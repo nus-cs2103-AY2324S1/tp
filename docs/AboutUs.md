@@ -48,12 +48,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Add Tutors functionalities
 
-### James Doe
+### Yeo Di Sheng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/dishenggg.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/dishenggg)]
+[[portfolio](team/dishenggg.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Add schedule
