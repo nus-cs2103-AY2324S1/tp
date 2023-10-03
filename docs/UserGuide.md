@@ -32,7 +32,7 @@ Tutorium is a **desktop application for tuition centre staff** to obtain data an
 
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete John Doe` : Deletes the contact with matching name in the current list.
 
    * `clear` : Deletes all contacts.
 
@@ -89,32 +89,35 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/Chemistry`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/Mathematics`
+  ![result for 'add n/Joe p/32101234 e/joe@example.com a/John street, block 123, #01-01 t/Math'](images/ug_images/addedJoeResult.png)
 
 ### Editing a student's data : `edit`
 
 Edits an existing student's data in the address book.
 
-Format: 1. edit n/[NAME] or edit e/[EMAIL] (firstly specify for which student you want to edit)
-        2. e/[NEW_EMAIL] or n/[NEW_NAME] or a/[NEW_ADDRESS] or t/[NEW_TAG]  (change a particular field)
-        3. n/[NEW_NAME] e/[NEW_EMAIL]  or e/[NEW_EMAIL] t/[NEW_TAG] a/[NEW_ADRESS] (change multiple fields)
+Format: 
+1. `edit n/[NAME] or edit e/[EMAIL]` (firstly specify for which student you want to edit)
+2. `e/[NEW_EMAIL] or n/[NEW_NAME]` or `a/[NEW_ADDRESS]` or `t/[NEW_TAG]`  (change a particular field)
+3. `n/[NEW_NAME] e/[NEW_EMAIL]`  or `e/[NEW_EMAIL] t/[NEW_TAG] a/[NEW_ADRESS]` (change multiple fields)
 
 * Edits the person with a specific name or email.
-  - edit n/[NAME] 
-  - edit e/[EMAIL]
+  - `edit n/[NAME]` 
+  - `edit e/[EMAIL]`
 * After the prompt “OK! Now you can edit NAME”
-  - e/[NEW_EMAIL]
-  - n/[NEW_NAME]
-  - a/[NEW_ADDRESS]
-  - t/[NEW_TAG]
+  - `e/[NEW_EMAIL]`
+  - `n/[NEW_NAME]`
+  - `a/[NEW_ADDRESS]`
+  - `t/[NEW_TAG]`
 * Or you change multiple fields within one command:
-  - n/[NEW_NAME] e/[NEW_EMAIL] 
-  - e/[NEW_EMAIL] t/[NEW_TAG] a/[NEW_ADRESS]
+  - `n/[NEW_NAME] e/[NEW_EMAIL]` 
+  - `e/[NEW_EMAIL] t/[NEW_TAG] a/[NEW_ADDRESS]`
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
 Examples:
 *  `edit n/joe` specify that you want to do edit operation on the student "joe", if there are more than one student named "joe", you will be prompted to specify student email further: `edit n/joe123@example.com`.
 *  `n/joey e/joey123@example.com` Edits the name and email of the student you specified earlier to be `joey` and `joey123@example.com`.
+   ![result for 'edit Chuan Yuan'](images/ug_images/editChuanYuanResult.png)
 
 ### Searching for data : `search`
 
@@ -147,7 +150,7 @@ Examples:
 * `delete e/johndoe@gmail.com` 
 <br></br>
 * `delete n/Chuan Yuan` deletes student data that contains name `Chuan Yuan`
-  ![result for 'delete Chuan Yuan'](images/ug_images/deleteChuanYuanResult.png)
+  ![result for 'delete Chuan Yuan'](images/ug_images/deleteJoeResult.png)
 
 ### Grouping data : `group`
 
@@ -165,7 +168,7 @@ Format: `group /by [TAG_NAME]`
   Shows error message: `Group usage: group /by [TAG_NAME]`
 
 Examples:
-* `group Maths` returns `Chuan Yuan`, `Li Yuan` and `Alfred` <br>
+* `group /by Maths` returns `Chuan Yuan`, `Li Yuan` and `Alfred` <br>
   ![result for 'group Maths'](images/ug_images/groupMathsResult.png)
 
 ### Clearing all entries : `clear`
@@ -182,16 +185,16 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+Tutorium data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+Tutorium data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
+If your changes to the data file makes its format invalid, Tutorium will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
 </box>
 
 ### Archiving data files `[coming in v2.0]`
@@ -203,7 +206,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Tutorium home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -218,8 +221,9 @@ _Details coming soon ..._
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/Chemistry`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Group**   | `group`
+**Delete** | `delete n/[NAME]`<br> e.g., `delete Joe`
+**Edit**   | `edit n/[NAME]`<br> `e/[NEW_EMAIL] t/[NEW_TAG] a/[NEW_ADRESS]` <br> e.g., `edit n/John Doe`<br> `e/johndoe@example.com t/English`
+**Search** | `search [KEYWORD]`<br> e.g., `search Yuan`
+**Group**  | `group /by [TAG_NAME]` <br> e.g., `group /by English`
+**Clear**  | `clear`
 **Help**   | `help`
