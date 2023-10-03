@@ -96,22 +96,22 @@ Format: `update id=[patient-id] illness=[illness]`
 Examples:
 *  `update id=12345 illness=Fever` updates the illness of the patient with patient ID `12345` to `Fever`.
 
-### Locating persons by name: `find`
+### Locating patients by name: `search`
 
-Finds persons whose names contain any of the given keywords.
+Finds patients whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `search name=[name]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* The search is case-insensitive. e.g `tianrun` will match `Tianrun`
+* The order of the keywords does not matter. e.g. `Lebron James` will match `James Lebron`
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* Only full words will be matched e.g. `Curr` will not match `Curry`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+  e.g. `Chris Paul` will return `Chris Bumstead`, `Logan Paul`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `search name=James` returns `james` and `James Harden`
+* `search name=alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a person : `delete`
