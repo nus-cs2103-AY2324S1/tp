@@ -50,6 +50,8 @@ For a more technical and comprehensive overview of CampusConnect's codebase, ple
         - Track payment [Coming Soon]
         - Change language [Coming Soon]
     - Help System [Coming Soon]
+    - Miscellaneous
+        - Undo last action [Coming Soon]
 3. Troubleshooting / FAQ
 
 --------------------------------------------------------------------------------------------------------------------
@@ -159,6 +161,10 @@ For a more technical and comprehensive overview of CampusConnect's codebase, ple
 #### Change language [Coming Soon]
 
 ### Help System [Coming Soon]
+
+### Miscellaneous
+
+#### Undo last action [Coming Soon]
 
 --------------------------------------------------------------------------------------------------------------------
 
