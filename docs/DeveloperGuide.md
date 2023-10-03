@@ -256,57 +256,60 @@ _{Explain here how the data archiving feature will be implemented}_
 ### Product scope
 
 **Target user profile**:
-
-* has a need to manage a significant number of contacts
+* non-profit animal shelters who currently do not have a good logistical workflow to keep track of foster families
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
-
+**Value proposition**: low budget and efficient system that manages animal fosterers
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                                    | I want to …​                                                              | So that I can…​                                                        |
+| -------- |--------------------------------------------|---------------------------------------------------------------------------|------------------------------------------------------------------------|
+| `* * *`  | administrative staff                       | delete a fosterer from the list when they want to stop fostering with us  | update the list to see the fosterers who are currently in our program  |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `FosterFamily` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Delete fosterers**
+
+**Preconditions:** A list of fosterers is currently displayed, obtained from a list/find command.
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User enters the fosterers to delete, who are identified by their index in the currently displayed list.
+2. System deletes fosterers.
+3. System shows confirmation message of fosterers successfully deleted.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The list is empty. 
 
-  Use case ends.
+    Use case ends.
 
-* 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+* 1b. System detects an invalid index.
+  * 1b1. System requests user to enter a valid index.
+  * 1b2. User enters valid index.
+  
+    Use case resumes at step 2.
+  
 
-      Use case resumes at step 2.
+* 1c. System detects an invalid command format after the `delete` command.
+  * 1c1. System requests for user to enter command in correct format.
+  * 1c2. User enters delete command in correct format.
+    
+    Use case resumes at step 2.
+
 
 *{More to be added}*
 
