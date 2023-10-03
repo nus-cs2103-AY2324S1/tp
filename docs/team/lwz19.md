@@ -1,6 +1,6 @@
 ---
-  layout: default.md
-  title: "Liang Wenzhong's Project Portfolio Page"
+layout: default.md
+title: "Wen Zhong's Project Portfolio Page"
 ---
 
 ### Project: ClassManager-2023
