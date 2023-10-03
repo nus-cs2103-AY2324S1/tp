@@ -17,6 +17,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.NoteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -31,54 +32,67 @@ public class AddressBookParser {
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
 
     /**
-     * Parses user input into command for execution.
+     * Returns a parsed Command based on the specified user input.
      *
-     * @param userInput full user input string
-     * @return the command based on the user input
-     * @throws ParseException if the user input does not conform the expected format
+     * The returned Command can then be used for execution.
+     *
+     * @param userInput Full user input string.
+     * @throws ParseException If user input does not conform to expected format.
      */
     public Command parseCommand(String userInput) throws ParseException {
-        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
+        String trimmed = userInput.trim();
+        Matcher matcher = BASIC_COMMAND_FORMAT.matcher(trimmed);
         if (!matcher.matches()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+            throw new ParseException(
+                String.format(
+                    MESSAGE_INVALID_COMMAND_FORMAT,
+                    HelpCommand.MESSAGE_USAGE
+                )
+            );
         }
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
-
-        // Note to developers: Change the log level in config.json to enable lower level (i.e., FINE, FINER and lower)
-        // log messages such as the one below.
-        // Lower level log messages are used sparingly to minimize noise in the code.
-        logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
+        /* NOTE
+         * Change the log level in your dev workspace's config.json file to
+         * enable the displaying of lower level log messages such as this one.
+         * Eg FINE, FINER or lower. Lower level logging is done sparingly to
+         * avoid bloating the codebase.
+        */
+        logger.fine(
+            String.format(
+                "BASIC_COMMAND_FORMAT successfully matched commandWord (%s) arguments (%s)",
+                commandWord,
+                arguments
+            )
+        );
 
         switch (commandWord) {
-
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
-
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
-
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
-
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
-
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
-
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
-
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
-
+        case FindCommand.COMMAND_WORD:
+            return new FindCommandParser().parse(arguments);
+        case NoteCommand.COMMAND_WORD:
+            return new NoteCommand();
+        case EditCommand.COMMAND_WORD:
+            return new EditCommandParser().parse(arguments);
+        case DeleteCommand.COMMAND_WORD:
+            return new DeleteCommandParser().parse(arguments);
+        case ClearCommand.COMMAND_WORD:
+            return new ClearCommand();
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
-
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
         default:
-            logger.finer("This user input caused a ParseException: " + userInput);
+            logger.finer(
+                String.format(
+                    "Throwing ParseException for userInput (%s)",
+                    userInput
+                )
+            );
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
