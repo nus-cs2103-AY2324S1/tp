@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -257,29 +257,43 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* NUS Student Counsellors
+* has a need to manage a significant number of students
+* need to manage student details as well as appointments and todos
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: This product is meant to help the counsellors better schedule their appointments with students faster than a typical mouse/GUI driven app. Users will be able to store details like personal information, appointment dates, number of visits, emergency contacts etc.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​    | I want to …​                                 | So that I can…​                                                                      |
+|----------|------------|----------------------------------------------|--------------------------------------------------------------------------------------|
+| `* * *`  | counsellor | add student profile                          | keep track of each student's information                                             |
+| `* * *`  | counsellor | set student risk profile                     | monitor the risk profile of each student                                             |
+| `* * *`  | counsellor | delete student notes                         | remove student in the event they do not require any further consultation             |
+| `* * *`  | counsellor | view student notes                           | keep track of notes for future reference                                             |
+| `* *`    | counsellor | edit student notes                           | update student particulars should there be any changes                               |
+| `* *`    | counsellor | view my appointments                         | look through my timetable for the day/week                                           |
+| `* *`    | counsellor | filter student notes                         | look up students in particular categories                                            |
+| `* *`    | counsellor | sort appointments by date                    | organise my appointments and plan my schedule accordingly                            |
+| `*`      | counsellor | block out busy times                         | prevent clashes in scheduling                                                        |
+| `*`      | counsellor | prevent double booking                       | prevent clashes in scheduling                                                        |
+| `* *`    | counsellor | set appointments                             | keep track of my appointments in the application                                     |
+| `*`      | counsellor | link students to the respective appointments | have easy access to the student profile that can help me prepare for the appointment |
+| `* *`    | counsellor | view appointment as a list                   | look at all my appointments at a glance to plan my schedule                          |
+| `* *`    | counsellor | edit appointment info                        | plan my schedule accordingly if there are any last-minute changes                    |
+| `*`      | counsellor | add todos items                              | keep track of todos for each student                                                 |
+| `*`      | counsellor | view todos items                             | view todos for students at a glance                                                  |
+| `*`      | counsellor | link todos items to students                 | have easy access to the contact information for the students                         |
+| `*`      | counsellor | sort todos items by dateline                 | organise my appointments and plan my schedule accordingly                            |
+| `* *`    | counsellor | search by name or ID                         | look up particular students                                                          |
+| `* *`    | counsellor | tag students                                 | highlight students with specific issues.                                             |
 
 ### Use cases
 
@@ -332,6 +346,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **CLI**: Command Line Interface. Usually the in-built terminal or in the IDE the application is run on.
 * **GUI**: Graphical User Interface.
+* **Risk Level**: Students can be classified as high, medium, or low-risk level determined by the counsellor.
 
 --------------------------------------------------------------------------------------------------------------------
 
