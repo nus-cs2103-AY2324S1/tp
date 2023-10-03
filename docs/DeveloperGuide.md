@@ -277,7 +277,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | client profiles                | remove entries that I no longer need                                   |
 | `* *`    | user                                       | add notes of my meetings with my clients          | track details for future interaction with client |
 | `* *`    | user                                       | log the outcomes of my client interactions (e.g., interested, not interested, follow-up required)   | track progress of client interactions                |
-| `*`      | user                                       | mark a client as a "hot lead," "warm lead," or "cold lead           | gauge the sales potential of the client                                                 |
+| `* *`      | user                                       | mark a client as a "hot lead," "warm lead," or "cold lead           | gauge the sales potential of the client                                                 |
 
 *{More to be added}*
 
@@ -330,7 +330,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3b. The client interaction is empty
    
-      * 3b1. Connectify shows an error message.
+    * 3b1. Connectify shows an error message.
    
       Use case resumes at step 2.
 ### Non-Functional Requirements
