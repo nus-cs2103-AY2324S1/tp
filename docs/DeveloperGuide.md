@@ -368,6 +368,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. User supplies the necessary parameters for the event
 3. Fumblelog adds the event
 
+   Use case ends.
+
 **Extensions**
 * 2a. User supplies invalid parameters
 
@@ -383,6 +385,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. User request to edit a specific event in the list
 4. User supplies parameters that they want to change
 5. Fumblelog edits the event
+
+   Use case ends.
 
 **Extensions**
 * 2a. List is empty
@@ -418,22 +422,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
- **Use case: UC08 - Sort events**
  
-**MSS**
-
-1. User requests to sort the events
-2. FumbleLog shows the list of events in sorted order
-
-   Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty
-
-  Use case ends.
-
-**Use case: UC09 - Filter persons by group**
+**Use case: UC08 - Filter persons by group**
 
 1. User requests to filter persons by specifying a group
 2. FumbleLog shows the list of persons that belong in the specified group
@@ -453,7 +443,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case ends.
 
 
-**Use case: UC10 - Show reminders for events/birthdays happening soon**
+**Use case: UC09 - Show reminders for events/birthdays happening soon**
 
 **MSS**
 1. User request a reminder for events/birthdays happening soon
@@ -473,12 +463,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case ends.
 
 
-**Use case: UC11 - Customise short form commands**
+**Use case: UC10 - Customise short form commands**
 
 **MSS**
 1. User request to define a command in a custom format
 2. FumbleLog stores the newly defined command
 3. The defined short form command can now be used
+
+   Use case ends.
 
 **Extensions**
 
@@ -492,8 +484,96 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
  
       Use case ends.
 
+**Use case: UC11 - Assigning a group to an event**
 
+**MSS**
+1. User requests to show a list of events
+2. FumbleLog shows list of events
+3. User requests to assign a group to a specific event in the list
+4. FumbleLog assigns all persons in the group to the event
 
+   Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty
+
+  Use case ends.
+
+* 3a. User tries to assign a group to an invalid event
+    * 3a1. FumbleLog shows an error message
+ 
+      Use case resumes at step 3.
+
+* 3b. User tries to assign an invalid group to an event
+    * 3b1. FumbleLog shows an error message
+
+      Use case ends.
+
+**Use case: UC12 - Marking an event as recurring**
+
+**MSS**
+1. User requests to show a list of events
+2. FumbeLog shows list of events
+3. User requests to mark an event as recurring
+4. User specifies how often the event occurs
+5. FumbeLog sets the event as a recurring event
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty
+
+  Use case ends.
+
+* 3a. User tries to mark an invalid event as recurring
+    * 3a1. FumbeLog shows an error message
+
+      Use case resumes at step 3.
+
+* 3b. User tries to mark an event as recurring when it has already been marked as a recurring event
+    * 3b1. FumbleLog shows an error message
+
+      Use case ends.
+
+**Use case: UC13 - Pin a person**
+
+**MSS**
+
+1. User requests to show a list of persons
+2. FumbleLog shows a list of persons
+3. User requests to pin a person from the list
+4. FumbeLog pins the person
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty
+
+  Use case ends.
+
+* 3a. User requests to pin an invalid person
+  * 3a1. FumbeLog shows an error message
+
+  Use case resumes at step 3.
+
+**Use case: UC14 - Display events in Calendar**
+
+1. User requests to show events in a calendar form
+2. FumebleLog shows all the events in a calendar
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty
+  * 1a1. FumbleLog shows an empty calendar
+
+    Use case ends.
+
+  
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
