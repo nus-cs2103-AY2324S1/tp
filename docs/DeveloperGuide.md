@@ -257,7 +257,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-This product is targetted at busy university students who struggle to manage their interpersonal relationships and committments due to the demands of their academic and social lives. They are relatively tech saavy and prefer to use the keyboard over the mouse, prefer short commands over full sentences. These users seek an intuitive and efficient solution to help them stay organized, prioritize their tasks and manage their time effectively.
+This product is targeted at busy university students who struggle to manage their interpersonal relationships and commitments due to the demands of their academic and social lives. They are relatively tech savvy and prefer to use the keyboard over the mouse, prefer short commands over full sentences. These users seek an intuitive and efficient solution to help them stay organized, prioritize their tasks and manage their time effectively.
 
 **Value proposition**:
 
@@ -267,16 +267,25 @@ We provide students with an easy-to-use application to manage their social lives
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​            | I want to …​                                 | So that I can…​                                                        |
+|----------|--------------------|----------------------------------------------|------------------------------------------------------------------------|
+| `* * *`  | university student | see usage instructions                       | refer to instructions when I forget how to use the App                 |
+| `* * *`  | university student | add a new person                             | keep my address book up to date                                        |
+| `* * *`  | university student | include optional fields when adding contacts | include comprehensive and personalized information for each contact    |
+| `* * *`  | university student | delete a person                              | remove contacts that I no longer need                                  |
+| `* * *`  | university student | find a person by name                        | locate details of persons without having to go through the entire list |
+| `* * *`  | university student | edit a person details                        | reflect any contact changes accordingly                                |   
+| `* * *`  | university student | create an event                              | schedule and keep track of important commitments                       |   
+| `* * *`  | university student | view all upcoming events                     | stay informed about my scheduled commitments                           |
+| `* * *`  | university student | edit an event                                | modify event details like the date, time, or location                  |
+| `* * *`  | university student | delete an event                              | remove events that are canceled or no longer relevant                  |
+| `* * *`  | university student | access a separate event column in the GUI    | simultaneously view contact details and event details                  |
+| `* *`    | university student | be reminded on events                        | so that i can remember upcoming social activities                      |
+| `* *`    | university student | set recurring events                         | automate scheduling for repetitive commitments                         |
+| `* *`    | university student | customise short form commands                | perform commands more efficiently                                      |
+| `* *`    | university student | assign contacts to groups                    | i can easily identify who is involved in specific events               |
+| `* *`    | university student | pin contacts or groups                       | access and communicate with frequently contacted groups                |
 
-*{More to be added}*
 
 ### Use cases
 
@@ -319,6 +328,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Event**:  An encompassing term that refers to any organized occurrence or gathering,  
+which can include various types of activities, such as meetings, birthdays, and other scheduled events.
+* **Meeting**: A specific type of event that involves the interaction of two or more individuals. Contacts or groups of contacts can be assigned to a single meeting.
+* **Group**: A collection of contacts grouped together for organizational purposes. 
+Contacts or groups can be assigned to a single meeting, allowing for efficient management and coordination of events and interactions.
 
 --------------------------------------------------------------------------------------------------------------------
 
