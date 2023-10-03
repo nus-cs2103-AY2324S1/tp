@@ -44,22 +44,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Deliverables and deadlines
 
-### Jean Doe
+### Hannah Caroline Solomonraj
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/hcs1203.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/hcs1203)]
+[[portfolio](team/hcs1203.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: UI
+* Role: Deliverables and deadlines
+  

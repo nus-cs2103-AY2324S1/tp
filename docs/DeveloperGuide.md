@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -257,64 +257,169 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* NUS Student Counsellors
+* has a need to manage a significant number of students
+* need to manage student details as well as appointments and todos
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: This product is meant to help the counsellors better schedule their appointments with students faster than a typical mouse/GUI driven app. Users will be able to store details like personal information, appointment dates, number of visits, emergency contacts etc.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​    | I want to …​                                 | So that I can…​                                                                      |
+|----------|------------|----------------------------------------------|--------------------------------------------------------------------------------------|
+| `* * *`  | counsellor | add student profile                          | keep track of each student's information                                             |
+| `* * *`  | counsellor | set student risk profile                     | monitor the risk profile of each student                                             |
+| `* * *`  | counsellor | delete student notes                         | remove student in the event they do not require any further consultation             |
+| `* * *`  | counsellor | view student notes                           | keep track of notes for future reference                                             |
+| `* *`    | counsellor | edit student notes                           | update student particulars should there be any changes                               |
+| `* *`    | counsellor | view my appointments                         | look through my timetable for the day/week                                           |
+| `* *`    | counsellor | filter student notes                         | look up students in particular categories                                            |
+| `* *`    | counsellor | sort appointments by date                    | organise my appointments and plan my schedule accordingly                            |
+| `*`      | counsellor | block out busy times                         | prevent clashes in scheduling                                                        |
+| `*`      | counsellor | prevent double booking                       | prevent clashes in scheduling                                                        |
+| `* *`    | counsellor | set appointments                             | keep track of my appointments in the application                                     |
+| `*`      | counsellor | link students to the respective appointments | have easy access to the student profile that can help me prepare for the appointment |
+| `* *`    | counsellor | view appointment as a list                   | look at all my appointments at a glance to plan my schedule                          |
+| `* *`    | counsellor | edit appointment info                        | plan my schedule accordingly if there are any last-minute changes                    |
+| `*`      | counsellor | add todos items                              | keep track of todos for each student                                                 |
+| `*`      | counsellor | view todos items                             | view todos for students at a glance                                                  |
+| `*`      | counsellor | link todos items to students                 | have easy access to the contact information for the students                         |
+| `*`      | counsellor | sort todos items by dateline                 | organise my appointments and plan my schedule accordingly                            |
+| `* *`    | counsellor | search by name or ID                         | look up particular students                                                          |
+| `* *`    | counsellor | tag students                                 | highlight students with specific issues.                                             |
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `WellNUS` and the **Actor** is the `counselor`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add a student #UC01**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list students
+2.  WellNUS shows the list of students
+3.  User requests to add a new student to the list
+4.  WellNUS adds the person, and shows confirmation message
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 3a. The student name/contact number already exists.
+  * 3a1. WellNUS shows an error message. 
+    * Use case ends.
 
-  Use case ends.
+* 3b. The given name is invalid (non-alphabetical input) or contact number is invalid (non-numerical input).
+  * 3b1. WellNUS shows an error message.
+    * Use case ends.
 
-* 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+**Use case: View existing students #UC02**
 
-      Use case resumes at step 2.
+**MSS**
+
+1.  User requests to list students
+2.  WellNUS shows the list of students
+3.  User can find student index that can be used for other use cases, eg. edit student info
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty
+  * Use case ends.
+
+
+**Use case: Delete existing students #UC03**
+
+**MSS**
+
+1.  User requests to list students
+2.  WellNUS shows the list of students
+3.  User can find student index
+4.  Delete user by specifying the index
+5.  Get confirmation of successful delete
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The student index is invalid.
+  * 3a1. WellNUS shows an error message.
+    * Use case ends.
+
+
+**Use case: Tag student to risk level #UC04**
+
+**MSS**
+
+1.  User requests to list students
+2.  WellNUS shows the list of students
+3.  User can find student index
+4.  Tag/change student risk level using the student index
+5.  Information gets updated for future reference
+
+    Use case ends.
+
+**Extensions**
+
+* 4a. The student index is invalid.
+  * 4a1. WellNUS shows an error message.
+    * Use case ends.
+
+* 4b. The risk level is invalid (not high/medium/low)
+  * 4b1. WellNUS shows an error message.
+    * Use case ends.
+
+
+**Use case: Add an appointment #UC05**
+
+**MSS**
+
+1.  User requests to list appointments
+2.  WellNUS shows the list of appointments, along with some basic information like time and student
+3.  User requests to add a new appointment to the list
+4.  WellNUS adds the appointment 
+5. WellNUS shows confirmation message
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. The student index is invalid.
+  * 3a1. WellNUS shows an error message.
+    * Use case ends.
+
+* 3b. The given time is invalid (wrong time format).
+  * 3b1. WellNUS shows an error message.
+    * Use case ends.
+
+* 3c. The given time overlaps with an existing appointment.
+  * 3c1. WellNUS shows an error message.
+    * Use case ends.
 
 *{More to be added}*
 
 ### Non-Functional Requirements
-
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1.  Cross-Platform Compatibility:
+    - Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2.  Scalability and Performance:
+    - Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+    - Should support efficient data retrieval and manipulation for the specified contact volume.
+3.  Usability and Efficiency:
+    - A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should 
+    be able to perform the majority of tasks more quickly using _CLI_ commands compared to using a mouse on the _GUI_.
+    - The _CLI_ interface should prioritise efficiency by providing clear and concise commands, minimising unncessary prompts,
+    and offering time-saving shortcuts.
+4. Updates and Maintenance:
+    - Updates should not disrupt the user's workflow or data.
 
 *{More to be added}*
 
@@ -322,6 +427,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **CLI**: Command Line Interface. Usually the in-built terminal or in the IDE the application is run on.
+* **GUI**: Graphical User Interface.
+* **Risk Level**: Students can be classified as high, medium, or low-risk level determined by the counsellor.
 
 --------------------------------------------------------------------------------------------------------------------
 
