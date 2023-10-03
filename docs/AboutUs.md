@@ -17,7 +17,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/trgao.md)]
 
 * Role: Team Lead
-* Responsibilities: 
+* Responsibilities:
 
 ### Shen Licong
 
@@ -27,7 +27,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/licongshen12.md)]
 
 * Role: Developer
-* Responsibilities: 
+* Responsibilities:
 
 ### Johnny Doe
 
@@ -47,7 +47,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/dinde2004.md)]
 
 * Role: Developer
-* Responsibilities: 
+* Responsibilities:
 
 ### Kwang Thiag
 
@@ -57,4 +57,4 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/kwangthiag.md)]
 
 * Role: Developer
-* Responsibilities: 
+* Responsibilities:
