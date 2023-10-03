@@ -90,6 +90,20 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
+### Adding a remark to a person: `remark`
+
+Edits a remark to an existing person to the address book
+
+Format: `remark INDEX r/REMARK`
+
+* Edits the remark for the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* The previous remark is not saved, and instead is replaced by the inputted remark. The command does not add to the existing remark
+* You can empty out a remark by inputting an empty string
+
+Examples: 
+*  `remark 1 r/Great attitude, hardworking` Edits the remark of the 1st person on the list to have a remark `Great attitude, hardworking`
+*  `remark 1 r/` Empties the remark of the 1st person. 
+
 ### Listing all persons : `list`
 
 Shows a list of all persons in the address book.
@@ -221,6 +235,7 @@ _Details coming soon ..._
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Remark** | `remark r/REMARK` <br> e.g., `remark 1 r/Great attitude, hardworking`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
