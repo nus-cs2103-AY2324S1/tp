@@ -157,6 +157,41 @@ Exits the program.
 
 Format: `exit`
 
+### Add emergency contact: `addemer`
+
+Adds an existing contact as an emergency contact.
+
+Format: `addemer INDEX [tag/TAG]`
+* `tag/TAG` Optional tag indicating the type of emergency contact, e.g. RA (residential assistant) or SO (security officer)
+
+Examples:
+* `addemer 1 RA`
+  * Indicates that the contact at index 1 is the residential assistant (RA) for contact during emergencies
+
+### Remove emergency contact: `delemer`
+
+Removes contact as an emergency contact.
+
+Note: Contact will not be deleted, only unmarked as an emergency contact.
+
+Format: `delemer INDEX`
+
+Examples:
+* `delemer 1`
+  * Indicates that contact at index 1 is no longer an emergency contact
+
+### List emergency contacts: `listemer`
+
+Lists all emergency contacts that have been registered.
+
+Format: `listemer [tag/TAG]`
+* `tag/TAG` Optional tag to filter for emergency contacts of a certain type, e.g. RA (residential assistant) or SO (security officer)
+
+Examples:
+* `listemer`
+* `listemer tag/RA`
+  * Only lists emergency contacts tagged as residential assistants (RA)
+
 ### Saving the data
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -192,12 +227,15 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**   | `list`
-**Help**   | `help`
+Action        | Format, Examples
+--------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Add**       | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Clear**     | `clear`
+**Delete**    | `delete INDEX`<br> e.g., `delete 3`
+**Edit**      | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Find**      | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**List**      | `list`
+**Help**      | `help`
+**Addemer**   | `addemer INDEX [tag/TAG]`
+**Delemer**   | `delemer INDEX`
+**Listemer**  | `listemer [tag/TAG]`
