@@ -9,7 +9,7 @@
   * Schedule an interview with an interviewee
   * Detect clashes in interview timings
   * Write notes about the interviewee
-* For the detailed documentation of this project, see the **[InterviewHub Product Website](https://se-education.org/addressbook-level3)**.
+* For the detailed documentation of this project, see the **[InterviewHub Product Website](https://ay2324s1-cs2103t-t11-2.github.io/tp/)**.
 
 * This project is an ongoing software project for a desktop application to make the hiring process easier
   * It preserves the **OOP principles** of the original project 
