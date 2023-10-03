@@ -26,7 +26,7 @@ Given below are my contributions to the project.
 <br/><br/>
 
 * **Code contributed**:  
-  * _To be added soon_
+  * [Individual Dashboard](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=lwz19&breakdown=true)
   <br/><br/>
 
 * **Project management**:

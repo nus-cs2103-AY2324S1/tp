@@ -9,7 +9,7 @@ Class Manager 2023 aims to provide fast access to CS2103T TAs who need help in m
 
 Given below are my contributions to the project:
 
-* **Code contributed**: to be added soon
+* **Code contributed**: [Individual Dashboard](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=cikguseven&breakdown=true)
 
 * **Enhancements implemented**: to be added soon
 
