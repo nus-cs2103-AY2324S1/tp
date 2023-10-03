@@ -18,15 +18,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer Documentation
 
-### Jane Doe
+### Mikhil Anand
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/sasmik23.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/sasmik23)]
+[[portfolio](team/sasmik23.md)]
 
-- Role: Team Lead
-- Responsibilities: UI
+- Role: User Documentation
 
 ### Johnny Doe
 
