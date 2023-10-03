@@ -42,7 +42,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Lynn Low
 
-<img src="images/lynnlow.png" width="200px">
+<img src="images/lynnlow175.png" width="200px">
 
 [[github](http://github.com/lynnlow175)]
 [[portfolio](team/lynnlow175.md)]
