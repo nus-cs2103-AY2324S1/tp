@@ -46,7 +46,7 @@ public class TagCommandParser implements Parser<TagCommand> {
         if (this.tags == null) {
             throw new ParseException(TagCommand.MESSAGE_TAG_FAILED);
         }
-        
+
         return new TagCommand(index, this.tags);
     }
 

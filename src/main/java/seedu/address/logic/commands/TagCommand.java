@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -69,12 +71,12 @@ public class TagCommand extends Command {
 
     /**
      * Generates a command execution success message based on whether
-     * the remark is added to or removed from
+     * the tag is added to or removed from
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {
         String message = !tags.isEmpty() ? MESSAGE_ADD_TAG_SUCCESS : MESSAGE_DELETE_TAG_SUCCESS;
-        return String.format(message, personToEdit);
+        return String.format(message, Messages.format(personToEdit));
     }
 
     @Override
@@ -91,5 +93,12 @@ public class TagCommand extends Command {
         TagCommand e = (TagCommand) other;
         return index.equals(e.index)
                 && tags.equals(e.tags);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("tags", tags)
+                .toString();
     }
 }
