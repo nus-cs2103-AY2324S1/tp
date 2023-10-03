@@ -2,7 +2,7 @@
 
 ---
 
-Jobfindr is a **Contact Book app** for NUS fresh graduates who are looking for jobs. 
+JobFindr is a **Contact Book app** for NUS fresh graduates who are looking for jobs. 
 It simplifies _contact management_, provides _reminders_ and enhances _organisation_, helping users _stay competitive_ in the job market.
 The project simulates an ongoing software project for a desktop application (called _JobFindr_) used for managing job applications.
 
@@ -12,15 +12,15 @@ The project simulates an ongoing software project for a desktop application (cal
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
@@ -33,7 +33,7 @@ The project simulates an ongoing software project for a desktop application (cal
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -41,13 +41,13 @@ The project simulates an ongoing software project for a desktop application (cal
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the command format:**<br>
+**information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
@@ -83,7 +83,7 @@ print “Error: ” and error message for:
 * `add n/Microsoft p/98765432 e/microsoft@gmail.com a/182 Cecil St, #13-01, Singapore 069547`
   Adds a company called microsoft, adds their phone number, email and address 
 * `add n/The Coca-Cola Company e/cocacola@yahoo.com`
-  Adds a company called The Coca Cola Company, adds their email
+  Adds a company called The Coca-Cola Company, adds their email
 
 ---
 
@@ -204,7 +204,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
   specifying any tags after it.
 
@@ -217,7 +217,7 @@ Finds persons whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The search is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
@@ -256,13 +256,13 @@ _Details coming soon ..._
 --------------------------------------------------------------------------------------------------------------------
 ## Command summary
 
-Action | Format
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`
-**Delete** | `delete INDEX`
-**List** | `list`
-**Mark** | `mark INDEX s/STATUS`
-**SetDeadline** | `set deadline INDEX d/DEADLINE`
+| Action          | Format                                        |
+|-----------------|-----------------------------------------------|
+| **Add**         | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS` |
+| **Delete**      | `delete INDEX`                                |
+| **List**        | `list`                                        |
+| **Mark**        | `mark INDEX s/STATUS`                         |
+| **SetDeadline** | `set deadline INDEX d/DEADLINE`               |
 
 ### [coming soon]
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
