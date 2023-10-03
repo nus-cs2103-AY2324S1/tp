@@ -68,8 +68,7 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-
-### Adding a student: `add`
+### Adding a student
 
 Adds a student with his/her relevant details.
 
@@ -190,6 +189,6 @@ _Details coming soon ..._
 | **Tag student to risk level** | `TODO`                                                                                                                                  |
 | **Add an appointment**        | `add appointment d/<DATETIME_OF_APPOINMENT> n/<NAME_OF_STUDENT>`<br> e.g., `add appointment d/2023-12-31 16:30 n/Jon`                   |
 | **View appointments**         | `view appointments`                                                                                                                     |
-| **Delete an appointment**     | `delete appointment <INDEX>`<br> e.g., `delete appointment 3`                                                                           |
+| **Delete an appointment**     | `delete appointment <INDEX>`<br> e.g., `delete appointment 2`                                                                           |
 | **Help**                      | `help`                                                                                                                                  |
 | **Exit**                      | `exit`                                                                                                                                  |
