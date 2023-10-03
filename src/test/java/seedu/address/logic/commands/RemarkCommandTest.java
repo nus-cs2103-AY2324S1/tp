@@ -103,5 +103,4 @@ public class RemarkCommandTest {
 
         assertCommandFailure(remarkCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
-    
 }
