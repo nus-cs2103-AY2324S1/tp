@@ -312,7 +312,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 1.  Cross-Platform Compatibility:
-
     - Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Scalability and Performance:
     - Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
@@ -333,7 +332,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **CLI**: Command Line Interface. Usually the in-built terminal or in the IDE the application is run on.
 * **GUI**: Graphical User Interface.
-* 
 
 --------------------------------------------------------------------------------------------------------------------
 
