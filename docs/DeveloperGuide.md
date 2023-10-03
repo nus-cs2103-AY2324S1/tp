@@ -36,7 +36,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2324S1-CS2103T-W16-3/tp/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2324S1-CS2103T-W16-3/tp/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -68,13 +68,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2324S1-CS2103T-W16-3/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2324S1-CS2103T-W16-3/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2324S1-CS2103T-W16-3/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -85,7 +85,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2324S1-CS2103T-W16-3/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -114,7 +114,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-W16-3/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -135,7 +135,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-W16-3/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -296,20 +296,61 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | expert user      | automatically edit a person who made their payment for the premium before the due date              | save the hassle of editing the person manually                                       |
 | `*`      | expert user      | create custom commands                                                                              | successfully perform tasks in a shorter time                                         |
 
-*{More to be added}*
-
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `InsureIQ` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC1 - List all persons**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list all persons.
+2.  InsureIQ shows a list of all persons.
+
+    Use case ends.
+
+**Use case: UC2 - Find persons**
+
+**MSS**
+
+1.  User requests to list persons based on a specific condition.
+2.  InsureIQ shows a list of persons that satisfy the condition.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The conditions specified are of invalid format.
+
+    * 2a1. InsureIQ shows an error message.
+
+      Use case ends.
+
+**Use case: UC3 - Add a person**
+
+**MSS**
+
+1.  User requests to add a person.
+2.  InsureIQ shows a confirmation message that the person was added.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The adding of the person fails.
+
+    * 2a1. InsureIQ shows an error message.
+
+      Use case ends.
+
+**Use case: UC4 - Delete a person**
+
+**MSS**
+
+1.  User requests to <u>list all persons (UC1)</u> or <u>find persons (UC2)</u>.
+2.  InsureIQ shows a list of persons.
+3.  User requests to delete a specific person in the list.
+4.  InsureIQ shows a confirmation message that the person was deleted.
 
     Use case ends.
 
@@ -321,11 +362,38 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. InsureIQ shows an error message.
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**Use case: UC5 - Edit a person**
+
+**MSS**
+
+1.  User requests to <u>list all persons (UC1)</u> or <u>find persons (UC2)</u>.
+2.  InsureIQ shows a list of persons.
+3.  User requests to edit a specific person in the list.
+4.  InsureIQ shows a confirmation message that the person was edited.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. InsureIQ shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The fields to be edited are of invalid format.
+
+    * 3b1. InsureIQ shows an error message.
+
+      Use case resumes at step 2.
 
 ### Non-Functional Requirements
 
@@ -363,8 +431,6 @@ Should work on any _mainstream OS_ as long as it has Java `11` or above installe
 8. **Response Time:**
    - The system should provide real-time updates on policy status and customer information, ensuring that agents can quickly access the information they need.
    - Queries for customer data should return results in less than 2 seconds.
-
-*{More to be added}*
 
 ### Glossary
 
