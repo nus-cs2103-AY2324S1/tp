@@ -257,11 +257,19 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-This product is targeted at busy university students who struggle to manage their interpersonal relationships and commitments due to the demands of their academic and social lives. They are relatively tech savvy and prefer to use the keyboard over the mouse, prefer short commands over full sentences. These users seek an intuitive and efficient solution to help them stay organized, prioritize their tasks and manage their time effectively.
+This product is targeted at busy university students who struggle to manage
+their interpersonal relationships and commitments due to the demands of their
+academic and social lives. They are relatively tech savvy and prefer to use the
+keyboard over the mouse, prefer short commands over full sentences. 
+These users seek an intuitive and efficient solution to help them stay organized,
+prioritize their tasks and manage their time effectively.
 
 **Value proposition**:
 
-We provide students with an easy-to-use application to manage their social lives and time better. Our app reminds students of their upcoming commitments and helps them to prioritize their tasks. It also helps them to keep track of their friends’ birthdays and other important events.
+We provide students with an easy-to-use application to manage their social lives and 
+time better. Our app reminds students of their upcoming commitments and helps them to
+prioritize their tasks. It also helps them to keep track of their friends’ birthdays and
+other important events.
 
 ### User stories
 
