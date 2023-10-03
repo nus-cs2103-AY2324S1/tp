@@ -7,8 +7,8 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.address.annotation.Nullable;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
@@ -38,7 +38,7 @@ public class AddressBookParser {
      * The returned Command can then be used for execution.
      *
      * @param userInput Full user input string.
-     * @throws ParseException If user input does not conform to expected format.
+     * @throws ParseException If input doesn't conform to expected format.
      */
     public Command parseCommand(String userInput) throws ParseException {
         String trimmed = userInput.trim();
@@ -52,8 +52,8 @@ public class AddressBookParser {
             );
         }
 
-        final String commandWord = matcher.group("commandWord");
-        final String arguments = matcher.group("arguments");
+        final @Nullable String commandWord = matcher.group("commandWord");
+        final @Nullable String arguments = matcher.group("arguments");
         /* NOTE
          * Change the log level in your dev workspace's config.json file to
          * enable the displaying of lower level log messages such as this one.
@@ -76,7 +76,7 @@ public class AddressBookParser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
         case NoteCommand.COMMAND_WORD:
-            return new NoteCommand(Index.fromOneBased(1),  "CS2103 Prof.");
+            return (new NoteCommandParser()).parse(arguments);
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
         case DeleteCommand.COMMAND_WORD:
