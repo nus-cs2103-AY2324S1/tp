@@ -277,22 +277,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | client profiles                | remove entries that I no longer need                                   |
 | `* *`    | user                                       | add notes of my meetings with my clients          | track details for future interaction with client |
 | `* *`    | user                                       | log the outcomes of my client interactions (e.g., interested, not interested, follow-up required)   | track progress of client interactions                |
-| `*`      | user                                       | mark a client as a "hot lead," "warm lead," or "cold lead           | gauge the sales potential of the client                                                 |
+| `* *`      | user                                       | mark a client as a "hot lead," "warm lead," or "cold lead           | gauge the sales potential of the client                                                 |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `Connectify` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Delete a client**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list clients
+2.  Connectify shows a list of clients
+3.  User requests to delete a specific client in the list
+4.  Connectify deletes the client
 
     Use case ends.
 
@@ -308,6 +308,58 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+
+**Use case: Add a client interaction**
+
+**MSS**
+
+1.  User requests to list clients
+2.  Connectify shows a list of clients
+3.  User requests create a client interaction
+4.  Connectify adds the interaction to the client profile
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The user does not exist.
+
+    * 3a1. Connectify shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The client interaction is empty
+   
+    * 3b1. Connectify shows an error message.
+   
+      Use case resumes at step 2.
+
+
+**Use case: Mark a client as “Cold”, “Warm” or “Hot” Leads**
+
+**MSS**
+
+1.  User requests to list clients
+2.  Connectify shows a list of clients
+3.  User requests to mark a client as “Cold”, “Warm” or “Hot” Lead
+4.  Connectify displays the updated client profile
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The user does not exist.
+
+    * 3a1. Connectify shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The lead category is key'ed in wrong or empty
+   
+    * 3b1. Connectify shows an error message.
+   
+      Use case resumes at step 2.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
@@ -321,7 +373,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Hot/Warm/Cold Lead**: A hot lead is a potential client who is ready to buy. A warm lead is a potential client who is interested in buying. A cold lead is a potential client who is not ready to buy.
+
+*{More to be added}*
 
 --------------------------------------------------------------------------------------------------------------------
 
