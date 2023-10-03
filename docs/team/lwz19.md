@@ -1,18 +1,52 @@
-# Class Manager 2023
+---
+  layout: default.md
+  title: "Liang Wenzhong's Project Portfolio Page"
+---
 
-*Class Manager 2023 aims to provide fast access to CS2103S TAs who need help in maintaining student information across multiple classes. It also aims to help TAs visualize data across and within classes.*
+### Project: ClassManager-2023
 
-## Summary of Contributions
-to be added soon
+ClassManager-2023 is a desktop address book application used for TA to manage their students' details. 
+The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
 
-### Code Contributed
-[Individual Dashboard](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=lwz19&breakdown=true)
+Given below are my contributions to the project.
 
-### Enhancements Implemented
-to be added soon
+* **New Feature**: \
+  _To be added soon_
+  * What it does: \
+    _To be added soon_
+    <br/><br/>
+  * Justification: \
+    _To be added soon_
+    <br/><br/>
+  * Highlights: \
+    _To be added soon_
+    <br/><br/>
+  * Credits: \
+    _To be added soon_
+<br/><br/>
 
-### Contributions to the UG
-to be added soon
+* **Code contributed**:  
+  * [Individual Dashboard](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=lwz19&breakdown=true)
+  <br/><br/>
 
-### Contributions beyond the Project
-to be added soon
+* **Project management**:
+  * _To be added soon_
+<br/><br/>
+  
+* **Enhancements to existing features**:
+  * _To be added soon_
+<br/><br/>
+  
+* **Documentation**:
+  * User Guide:
+    * _To be added soon_
+  * Developer Guide:
+    * _To be added soon_
+<br/><br/>
+    
+* **Community**:
+  * _To be added soon_ 
+<br/><br/>
+  
+* **Tools**:
+  * _To be added soon_

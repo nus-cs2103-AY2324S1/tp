@@ -1,18 +1,24 @@
-# Class Manager 2023
+---
+layout: default.md
+title: "Kieron's Project Portfolio Page"
+---
 
-*Class Manager 2023 aims to provide fast access to CS2103S TAs who need help in maintaining student information across multiple classes. It also aims to help TAs visualize data across and within classes.*
+### Project: Class Manager 2023
 
-## Summary of Contributions
-to be added soon
+Class Manager 2023 aims to provide fast access to CS2103T TAs who need help in maintaining student information across multiple classes. It also aims to help TAs compare and visualize students’ grades across classes.
 
-### Code Contributed
-[Individual Dashboard](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=cikguseven&breakdown=true)
+Given below are my contributions to the project:
 
-### Enhancements Implemented
-to be added soon
+* **Code contributed**: [Individual Dashboard](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=cikguseven&breakdown=true)
 
-### Contributions to the UG
-to be added soon
+* **Enhancements implemented**: to be added soon
 
-### Contributions beyond the Project
-to be added soon
+* **Documentation**:
+    * User Guide: to be added soon
+    * Developer Guide: to be added soon
+
+* **Team-based tasks**: to be added soon
+
+* **Review/mentoring**: to be added soon
+
+* **Beyond the project team**: to be added soon
