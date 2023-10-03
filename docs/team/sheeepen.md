@@ -19,8 +19,7 @@ Summary of Contributions:
 
 * **Documentation**:
     * User Guide:
-        * Example: Added documentation for the features `delete` and `find` [\#72]()
-        * Example: Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]()
+        * Example: Added documentation for the features regarding `appointments`: `add`, `view`, `delete`[\#69]()
     * Developer Guide:
         * Example: Added implementation details of the `delete` feature.
 
