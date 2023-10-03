@@ -171,6 +171,17 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
 </box>
 
+### Loading the data file: `load`
+
+Load student information from an existing JSON file. Copy the JSON file to be loaded into the data folder. The data in the JSON file will be loaded into the app. The file also becomes the new default save file.
+
+Format: `load f/ {file name}`
+* File name does not need to include .json extension.
+* File name is case-insensitive
+
+Examples:
+* `load export-v1` loads the export-v1.json file in the data folder.
+
 ### Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
@@ -201,3 +212,4 @@ Action     | Format, Examples
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**   | `list`
 **Help**   | `help`
+**Load**   | `load f/FILE_NAME`
