@@ -269,29 +269,28 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* has a need to manage a significant number of employees
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
-
+**Value proposition**: manage employees faster than a typical mouse/GUI driven app
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​ | I want to …​                    | So that I can…​                             |
+|----------|---------|---------------------------------|---------------------------------------------|
+| `* * *`  | user    | view all the available commands | I know how to use the app                   |
+| `* * *`  | user    | add a new employee              | track the details of new hires              |
+| `* * *`  | user    | edit an employee entry detail   | maintain an updated database of employees   |
+| `* * *`  | user    | view the full list of employees | access important employee information       |
+| `* * *`  | user    | delete an employee entry        | track only the employees currently employed |
+| `*`      | user    | purge all existing data         | remove sample data and populate real data   |
+| `*`      | user    | find an employee by name        | access the employee's information quickly   |
 
-*{More to be added}*
 
 ### Use cases
 
