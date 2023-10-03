@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Zhetao's Project Portfolio Page
+title: Darren's Project Portfolio Page
 ---
 
 ### Project: WellNUS
@@ -15,7 +15,7 @@ Summary of Contributions:
 1. To be added.
 2. To be added.
 
-* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=quzhetao01&breakdown=true)
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=darrentfy&breakdown=true)
 
 * **Documentation**:
     * User Guide:
