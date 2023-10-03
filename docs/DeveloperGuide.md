@@ -255,29 +255,57 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
-
-* has a need to manage a significant number of contacts
+**Target user profile**: Financial Advisors
+* has a need to manage a significant number of client contacts
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: 
+This tool functions as a digital address book suited to the needs of financial advisors. 
+It allows them to track, update, and manage their clients’ information efficiently. 
+This is facilitated through the use of a command line interface for efficient and effective querying and 
+modifying of clients’ data.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                                                                   | I want to …​                                                                                                          | So that I can…​                                                                                                                      |
+|----------|---------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
+| `* * *`  | financial advisor who often works with numerous clients                   | have a central repository for my clients’ contacts details                                                            | effectively manage the intricate details of each of my clients.                                                                      |
+| `* * *`  | financial advisor                                                         | add clients' contacts to the contact book                                                                             | accumulate contacts for future purposes.                                                                                             |
+| `* * *`  | financial advisor                                                         | remove clients contacts from the contact book                                                                         | keep my contact book compact and relevant.                                                                                           |
+| `* * *`  | financial advisor                                                         | edit clients’ contacts in the contact book                                                                            | keep my information updated.                                                                                                         |
+| `*`      | busy financial advisor                                                    | streamline administrative tasks like tracking my clients contacts                                                     | focus most of my time on giving personalised financial advice and services to my clients.                                            |
+| `*`      | financial advisor managing a substantial client portfolio                 | follow a standardised format to collect my clients’ information                                                       | manage data consistency among my clients.                                                                                            |
+| `*`      | financial advisor                                                         | search for specific client details                                                                                    | quickly contact my clients.                                                                                                          |
+| `*`      | user who values both my clients' time and the quality of our interactions | set reminders for follow-up sessions with clients                                                                     | ensure I never miss an important meeting.                                                                                            |
+| `*`      | financial advisor                                                         | efficiently track referral sources for my clients                                                                     | manage their relationships.                                                                                                          |
+| `*`      | financial advisor                                                         | sort my clients in certain orders including alphabetical order portfolio value in both ascending and descending order | view my clients in a more systematic manner.                                                                                         |
+| `*`      | financial advisor                                                         | filter my clients based on certain metrics like financial products purchased and minimum portfolio value              | choose clients.                                                                                                                      |
+| `*`      | financial advisor                                                         | record appointments with clients with the application                                                                 | keep track of when my last meeting with each client is.                                                                              |
+| `*`      | financial advisor                                                         | export my contact data and client data in a readable format                                                           | use it for backup purposes or to run data processing with other software tools.                                                      |
+| `*`      | financial advisor                                                         | have a dashboard 	                                                                                                    | obtain insights into my clientele base including metrics like client acquisition, retention rates and revenue I generate each month. |
+| `*`      | financial advisor	                                                        | categorise contacts based on their financial status (high net worth regular) 	                                        | prioritise my client interactions.                                                                                                   |
+| `*`      | financial advisor                                                         | update my profile information (name, contact, details, company)                                                       | ensure my personal information is always accurate.                                                                                   |
+| `*`      | an experienced user                                                       | edit the data file directly  	                                                                                        | be more efficient.                                                                                                                   |
+| `*`      | user                                                                      | undo actions                                                                                                          | recover from my mistakes.                                                                                                            |
+| `*`      | busy financial advisor                                                    | quickly add incomplete details of a client and be reminded about it                                                   | fill the rest in later.                                                                                                              |
+| `*`      | financial advisor                                                         | check the appointments scheduled today                                                                                | 	 not forget to meet a client                                                                                                        |
+| `*`      | financial advisor                                                         | view contacts of all my clients I am meeting for the day                                                              | 	efficiently search for their contacts.                                                                                              |
+| `*`      | financial advisor                                                         | view all the insurance plans my client has purchased easily                                                           | make planning during an appointment easier.                                                                                          |
+| `*`      | financial advisor                                                         | filter the plans of my client                                                                                         | to make it focus on certain plans during my appointment                                                                              |
+| `*`      | financial advisor                                                         | make updates to their plans on the app easily	                                                                        | keep track of changes to the clients plans                                                                                           |
+| `*`      | financial advisor                                                         | check which client has been under me the longest                                                                      | 	plan welfare to retain them as long term customers.                                                                                 |
+| `*`      | financial advisor                                                         | add notes on clients                                                                                                  | 	excess them when needed                                                                                                             |
+| `*`      | financial advisor                                                         | display data from the address book into a excel file                                                                  | 	more easily present to clients                                                                                                      |
+| `*`      | financial advisor                                                         | add tags to customers                                                                                                 | 	collate and notify people with the same plan should there be a new change                                                           |
+| `*`      | manager                                                                   | retrieve data on the types of plans purchased                                                                         | 	better understand the products my team member is selling                                                                            |
+| `*`      | manager                                                                   | monitor expiring insurance plans                                                                                      | 	advice trainees on time management                                                                                                  |
+| `*`      | financial advisor	                                                        | import a file                                                                                                         | 	easily transfer client information when client leaves                                                                               |
 
 *{More to be added}*
 
@@ -285,14 +313,74 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add a client**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User request to add a client to the list 
+2.  AddressBook adds the client
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The format is Invalid
+    * 1a1. AddressBook shows an error message.
+
+      Use case resumes at step 1.
+
+**Use case: View list of clients**
+
+**MSS**
+
+1.  User requests to list clients
+2.  AddressBook shows a list of clients
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+**Use case: Edit a client's contacts**
+
+**MSS**
+
+1.  User requests to list clients
+2.  AddressBook shows a list of clients 
+3.  User request to edit client’s contacts from the list 
+4.  AddressBook changes the client’s contacts
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+  
+* 3b. The format is Invalid.
+
+  * 3b1. AddressBook shows an error message.
+
+    Use case resumes at step 2.
+
+**Use case: Delete a client**
+
+**MSS**
+
+1.  User requests to list clients
+2.  AddressBook shows a list of clients
+3.  User requests to delete a specific client in the list
+4.  AddressBook deletes the client
 
     Use case ends.
 
