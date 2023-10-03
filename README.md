@@ -1,9 +1,11 @@
 # Connectify
-
 [![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
 
-![Ui](docs/images/Ui.png)
+## Introduction
 
+**Connectify** is a robust client management tool designed to streamline the process of tracking, categorizing, and interacting with clients for salesperson. It enables users to efficiently manage client profiles and interactions through a series of straightforward commands. From creating new profiles to logging interactions and categorizing leads, Connectify provides a comprehensive solution for managing client relationships and ensuring no detail is overlooked.
+
+![Ui](docs/images/Ui.png)
 ## Key Features
 
 ### 1. **Client Profile Management**
