@@ -19,17 +19,13 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link]()
 
 * **Project management**:
-  
 
 * **Enhancements to existing features**:
-  * 
 
 * **Documentation**:
   * User Guide:
     * Added documentation for the features `delete` [\#21]()
 
 * **Community**:
-  * 
 
 * **Tools**:
-  * 
