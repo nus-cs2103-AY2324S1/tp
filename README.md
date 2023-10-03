@@ -12,3 +12,6 @@
   * Search for fellow campus residents using expressive filters
 * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC) than what students usually write in beginner-level SE modules, without being overwhelmingly big.
 * For the detailed documentation of this project, see the **[CampusConnect Product Website](https://ay2324s1-cs2103t-t13-2.github.io/tp/)**.
+
+---
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
