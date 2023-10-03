@@ -68,14 +68,10 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-### Adding a student
-
-### Adding a student: `add`
 
 Adds a student with his/her relevant details.
 
-Format: `add student n/NAME c/CONTACT_NUMBER a/HOME_ADDRESS`
-
+Format: `add student n/<NAME> c/<CONTACT_NUMBER> a/<HOME_ADDRESS>`
 
 **Parameters**:
 1. Name
@@ -92,7 +88,22 @@ Examples:
 
 ### View all students //TODO
 
-### Delete a student //TODO
+Shows a list of all students.
+
+Format: `view students`
+
+### Delete a student
+
+Deletes an existing student.
+
+Format: `delete <INDEX>`
+
+**Parameters**:
+1. Appointment Index
+    - Numerical characters only
+
+Examples:
+* `delete appointment 2`
 
 ### Tag student to risk level //TODO
 
@@ -122,14 +133,14 @@ Format: `view appointments`
 
 Deletes an existing appointment.
 
-Format: `delete appointment n/INDEX`
+Format: `delete appointment <INDEX>`
 
 **Parameters**:
 1. Appointment Index
     - Numerical characters only
 
 Examples:
-* `delete appointment n/2`
+* `delete appointment 2`
 
 ### Exiting the program : `exit`
 
@@ -143,8 +154,7 @@ AddressBook data are saved in the hard disk automatically after any command that
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
-
+AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </div>
@@ -171,6 +181,7 @@ _Details coming soon ..._
 ## Command summary //TODO: update your respective things
 
 
+
 | Action                        | Format, Examples                                                                                                                    |
 |-------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|
 | **Add student**               | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add student n/John c/81349705 a/Yishun Street 56 Blk 21 #05-07` |
@@ -181,3 +192,4 @@ _Details coming soon ..._
 | **View appointments**         | `list`                                                                                                                              |
 | **Help**                      | `help`                                                                                                                              |
 | **Exit**                      | `exit`                                                                                                                              |
+
