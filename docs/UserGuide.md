@@ -102,7 +102,7 @@ Format: `update id=[patient-id] illness=[illness]`
 * Existing illness will be changed to the `illness`.
 
 Examples:
-*  `update id=12345 illness=Fever` updates the illness of the patient `12345` to `Fever`.
+*  `update id=12345 illness=Fever` updates the illness of the patient with patient ID `12345` to `Fever`.
 
 ### Locating persons by name: `find`
 
