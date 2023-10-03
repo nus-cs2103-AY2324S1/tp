@@ -19,21 +19,22 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Shen Licong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/Licong.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/dinde2004.md)]
+[[github](http://github.com/licongshen12)]
+[[portfolio](team/licongshen12.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Developer
+* Responsibilities: 
 
 ### Johnny Doe
 
 <img src="images/johndoe.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/dinde2004.md)]
+[[github](http://github.com/johndoe)]
+[[portfolio](team/dinde2004.md)]
 
 * Role: Developer
 * Responsibilities: Data
