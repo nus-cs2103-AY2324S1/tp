@@ -10,31 +10,41 @@ import java.util.Set;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 
+
+
 /**
- * Represents a Person in the address book.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Represents a Person, i.e. a contact.
+ *
+ * Guarantees that all details are present and validated.
  */
 public class Person {
-
     // Identity fields
-    private final Name name;
-    private final Phone phone;
-    private final Email email;
+    private Name name;
+    private Phone phone;
+    private Email email;
 
     // Data fields
-    private final Address address; //TODO to be scrapped
-    private final Set<Tag> tags = new HashSet<>();
+    private Note note;
+    private Set<Tag> tags = new HashSet<>();
 
     /**
-     * Every field must be present and not null.
+     * Constructs a Person.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
+    public Person(
+        Name _name,
+        Phone _phone,
+        Email _email,
+        Note _note,
+        Set<Tag> _tags
+    ) {
+        requireAllNonNull(_name, _phone, _email, _note, _tags);
+
+        this.name = _name;
+        this.phone = _phone;
+        this.email = _email;
+        this.note = _note;
+
+        this.tags.addAll(_tags);
     }
 
     public Name getName() {
@@ -47,10 +57,6 @@ public class Person {
 
     public Email getEmail() {
         return email;
-    }
-
-    public Address getAddress() {
-        return address;
     }
 
     /**
@@ -93,14 +99,14 @@ public class Person {
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
+                && note.equals(otherPerson.note)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, note, tags);
     }
 
     @Override
@@ -109,7 +115,7 @@ public class Person {
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
-                .add("address", address)
+                .add("note", note)
                 .add("tags", tags)
                 .toString();
     }
