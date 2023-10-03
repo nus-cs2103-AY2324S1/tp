@@ -367,8 +367,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+4.  The system should work in both 32-bit and 64-bit environments.
+5.  Response time for fetching a contact's details should not exceed 1.5 seconds. 
+6.  Search operations should return results within 2 seconds for queries against the full dataset.
+7.  The system must be backward compatible with data generated from previous versions of the software.
 
 ### Glossary
 
