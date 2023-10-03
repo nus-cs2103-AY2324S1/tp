@@ -285,7 +285,7 @@
 
         <module name="WhitespaceAfter">
             <!-- Checks that commas, semicolons and typecasts are followed by whitespace. -->
-            <property name="tokens" value="COMMA, SEMI, TYPECAST"/>
+            <property name="tokens" value="COMMA, SEMI"/>
         </module>
 
         <module name="NoWhitespaceAfter">
