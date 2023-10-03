@@ -321,7 +321,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * Use case ends.
 
 
-
 **Use case: View existing students #UC02**
 
 **MSS**
@@ -337,7 +336,74 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The list is empty
   * Use case ends.
 
-    
+
+**Use case: Delete existing students #UC03**
+
+**MSS**
+
+1.  User requests to list students
+2.  WellNUS shows the list of students
+3.  User can find student index
+4.  Delete user by specifying the index
+5.  Get confirmation of successful delete
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The student index is invalid.
+  * 3a1. WellNUS shows an error message.
+    * Use case ends.
+
+
+**Use case: Tag student to risk level #UC04**
+
+**MSS**
+
+1.  User requests to list students
+2.  WellNUS shows the list of students
+3.  User can find student index
+4.  Tag/change student risk level using the student index
+5.  Information gets updated for future reference
+
+    Use case ends.
+
+**Extensions**
+
+* 4a. The student index is invalid.
+  * 4a1. WellNUS shows an error message.
+    * Use case ends.
+
+* 4b. The risk level is invalid (not high/medium/low)
+  * 4b1. WellNUS shows an error message.
+    * Use case ends.
+
+
+**Use case: Add an appointment #UC05**
+
+**MSS**
+
+1.  User requests to list appointments
+2.  WellNUS shows the list of appointments, along with some basic information like time and student
+3.  User requests to add a new appointment to the list
+4.  WellNUS adds the appointment 
+5. WellNUS shows confirmation message
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. The student index is invalid.
+  * 3a1. WellNUS shows an error message.
+    * Use case ends.
+
+* 3b. The given time is invalid (wrong time format).
+  * 3b1. WellNUS shows an error message.
+    * Use case ends.
+
+* 3c. The given time overlaps with an existing appointment.
+  * 3c1. WellNUS shows an error message.
+    * Use case ends.
 
 *{More to be added}*
 
