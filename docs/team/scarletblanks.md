@@ -15,4 +15,3 @@ It makes their life easier by allowing them to easily fetch important info about
 * Keeping track of deadlines and objectives*:
   **Code quality: Looks after code quality, ensures adherence to coding standards, etc.s**:
   **Contributions beyond the project team**:*
-* 
