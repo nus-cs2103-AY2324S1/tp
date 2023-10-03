@@ -75,7 +75,6 @@ Adds a student with his/her relevant details.
 
 Format: `add student n/NAME c/CONTACT_NUMBER a/HOME_ADDRESS`
 
-
 **Parameters**:
 1. Name
    - Alphabetical characters only
@@ -88,8 +87,6 @@ Examples:
 * `add student n/John c/81349705 a/Yishun Street 56 Blk 21 #05-07`
 * `add student n/Sally c/94149785 a/Woodlands Street 11 Blk 888 #08-08`
 
-
-
 ### View all students //TODO
 
 ### Delete a student //TODO
@@ -98,9 +95,24 @@ Examples:
 
 ### Add an appointment //TODO
 
-### View all appointments //TODO
+### View all appointments 
 
+Shows a list of all appointments.
 
+Format: `view appointments`
+
+### Delete an appointment 
+
+Deletes an existing appointment.
+
+Format: `delete appointment n/INDEX`
+
+**Parameters**:
+1. Appointment Index
+    - Numerical characters only
+
+Examples:
+* `delete appointment n/2`
 
 ### Exiting the program : `exit`
 
