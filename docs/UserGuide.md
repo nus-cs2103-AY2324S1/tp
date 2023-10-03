@@ -7,7 +7,7 @@ NetworkBook is a **desktop contact book application**. You can use it to network
 
 ## Features
 
-### **<u>Category 1 - Add contact information</u>**
+### <u>Category 1 - Add contact information</u>
 
 ### Add email to a contact: `add /email /index`
 
@@ -72,7 +72,7 @@ as a link to your contact at index 2.`
 
 
 
-### **Assign priority levels:** **`add /priority /index`** 
+### Assign priority levels: `add /priority /index` 
 
 You can set the priority level of a contact, 
 
@@ -120,7 +120,7 @@ When the command fails:
 
 
 
-### **Add tag to a contact: **  **`add /tag /index`** 
+### Add tag to a contact:   `add /tag /index`
 
 You can use the `tag` command to associate a custom category with a contact, 
 
@@ -158,7 +158,7 @@ When the command fails:
 
 
 
-### **<u>Category 2 - Edit contact details</u>**
+### <u>Category 2 - Edit contact details</u>
 
 ### Update contact detail : `update /field /index`
 
@@ -207,7 +207,7 @@ from https://nknguyenhc.github.io/ip to https://nknguyenhc.github.io/.`
 
 
 
-### **Delete a contact**:  **`delete`** 
+### Delete a contact: `delete` 
 
 You can remove a contact from your NetworkBook using the `delete` command, 
 
@@ -244,7 +244,7 @@ When the command fails:
 
 
 
-### **<u>Category 3 - Find contacts</u>**
+### <u>Category 3 - Find contacts</u>
 
 
 
