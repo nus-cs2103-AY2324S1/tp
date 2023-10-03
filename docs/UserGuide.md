@@ -68,12 +68,14 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
+### Adding a student
 
 ### Adding a student: `add`
 
 Adds a student with his/her relevant details.
 
 Format: `add student n/NAME c/CONTACT_NUMBER a/HOME_ADDRESS`
+
 
 **Parameters**:
 1. Name
@@ -86,6 +88,7 @@ Format: `add student n/NAME c/CONTACT_NUMBER a/HOME_ADDRESS`
 Examples:
 * `add student n/John c/81349705 a/Yishun Street 56 Blk 21 #05-07`
 * `add student n/Sally c/94149785 a/Woodlands Street 11 Blk 888 #08-08`
+
 
 ### View all students //TODO
 
@@ -166,6 +169,7 @@ _Details coming soon ..._
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary //TODO: update your respective things
+
 
 | Action                        | Format, Examples                                                                                                                    |
 |-------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|
