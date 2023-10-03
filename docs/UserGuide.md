@@ -70,8 +70,6 @@ Format: `help`
 
 ### Adding a student
 
-### Adding a student: `add`
-
 Adds a student with his/her relevant details.
 
 Format: `add student n/<NAME> c/<CONTACT_NUMBER> a/<HOME_ADDRESS>`
@@ -184,7 +182,6 @@ _Details coming soon ..._
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary //TODO: update your respective things
-
 
 | Action                        | Format, Examples                                                                                                                        |
 |-------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------|
