@@ -282,29 +282,31 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​                                     | I want to …​                                 | So that I can…​                                                         |
+|----------|---------------------------------------------|----------------------------------------------|-------------------------------------------------------------------------|
+| `* * *`  | new user                                    | see usage instructions                       | refer to instructions when I forget how to use the App                  |
+| `* * *`  | user                                        | add a new student                            |                                                                         |
+| `* * *`  | user                                        | delete a student                             | remove entries that I no longer need                                    |
+| `* * *`  | user                                        | find a student by their matriculation number | locate details of students without having to go through the entire list |
+| `* * *`  | user                                        | tag my students with labels                  | categorise my students in an organised manner                           |
+| `* *`    | user                                        | save my app state                            | continue using the app in the future                                    |
+| `* *`    | user                                        | export and import my app's data              | continue working on different devices                                   |
+| `*`      | user with many students in the address book | filter students by labels                    | locate a student easily                                                 |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `ClassManager` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Delete a student**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list students
+2.  ClassManager shows a list of students
+3.  User requests to delete a specific student in the list
+4.  ClassManager deletes the student
 
     Use case ends.
 
@@ -314,11 +316,93 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 3a. The given matriculation number is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. ClassManager shows an error message.
 
       Use case resumes at step 2.
+
+**Use case: Tag a student with a label**
+
+**MSS**
+
+1.  User requests to list students
+2.  ClassManager shows a list of students
+3.  User requests to tag a specific student in the list
+4.  ClassManager tags the student
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given matriculation number is invalid.
+
+    * 3a1. ClassManager shows an error message.
+
+      Use case resumes at step 2.
+  
+* 3b. The student already has the given tag.
+
+    * 3b1. ClassManager shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Tag a student with a label**
+
+**MSS**
+
+1.  User requests to list students
+2.  ClassManager shows a list of students
+3.  User requests to tag a specific student in the list
+4.  ClassManager tags the student
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given matriculation number is invalid.
+
+    * 3a1. ClassManager shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The student already has the given tag.
+
+    * 3b1. ClassManager shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Loading a saved file**
+
+**MSS**
+
+1.  User copies saved JSON file to data folder
+2.  User requests to load JSON file
+3.  ClassManager reads and loads the JSON file
+4.  ClassManager updates the app to show the new data
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The JSON file cannot be found 
+  * 3a1. ClassManager shows an error message.
+
+    Use case resumes at step 2.
+
+* 4a. The JSON file data is invalid.
+
+    * 4a1. ClassManager shows an error message.
+
+      Use case resumes at step 3.
 
 *{More to be added}*
 
