@@ -109,15 +109,15 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower` Edits the name of the 2nd person to be `Betsy Crower`.
 
-### Tagging a person: `tag`
+### Tagging a student: `tag`
 
-Tags the existing person in the address book.
+Tags the existing student in the address book.
 
 Format: `tag STUDENT NUMBER [t/TAG]…​`
 
 * Tags the student with the specified `STUDENT NUMBER`. 
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
+* When editing tags, the existing tags of the student will be removed i.e adding of tags is not cumulative.
+* You can remove all the student’s tags by typing `t/` without
   specifying any tags after it.
 
 Examples:
