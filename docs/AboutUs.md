@@ -11,7 +11,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Chen Peiran
 
-<img src="images/about-us/peiran.png" width="200px">
+<img src="images/about-us/peiran.jpeg" width="200px">
 
 [[github](https://github.com/peiran18)]
 [[portfolio](team/peiran18.md)
@@ -21,7 +21,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Chen Zhiruo
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/about-us/zhiruo.jpeg" width="200px">
 
 [[github](http://github.com/czhiruo)]
 [[portfolio](team/czhiruo.md)]
@@ -31,16 +31,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Jeremy Yong Zheming
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/about-us/jeremy.jpeg" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/jeremyyong128.md)]
+[[github](https://github.com/JeremyYong128)] [[portfolio](team/jeremyyong128.md)]
 
 * Role: Scheduling and Tracking IC
 * Responsibilities:
 
 ### Miguel Foo Ming Yew
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/about-us/miguel.jpeg" width="200px">
 
 [[github](http://github.com/migfoo02)]
 [[portfolio](team/migfoo02.md)]
@@ -50,7 +50,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Yan Weidong (Evan)
 
-<img src="images/about-us/evan-yan.png" width="200px">
+<img src="images/about-us/evan.jpeg" width="200px">
 
 [[github](https://github.com/evanyan13)]
 [[portfolio](team/evanyan13.md)]
