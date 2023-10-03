@@ -68,12 +68,10 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-### Adding a student
 
 Adds a student with his/her relevant details.
 
 Format: `add student n/<NAME> c/<CONTACT_NUMBER> a/<HOME_ADDRESS>`
-
 
 **Parameters**:
 1. Name
@@ -88,7 +86,7 @@ Examples:
 * `add student n/Sally c/94149785 a/Woodlands Street 11 Blk 888 #08-08`
 
 
-### View all students
+### View all students //TODO
 
 Shows a list of all students.
 
@@ -183,14 +181,15 @@ _Details coming soon ..._
 
 ## Command summary //TODO: update your respective things
 
-| Action                        | Format, Examples                                                                                                                        |
-|-------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------|
-| **Add student**               | `add student n/<NAME> p/<PHONE_NUMBER> a/<HOME_ADDRESS> …​` <br> e.g., `add student n/John c/81349705 a/Yishun Street 56 Blk 21 #05-07` |
-| **View Students**             | `view students`                                                                                                                         |
-| **Delete student**            | `delete student <INDEX>`<br> e.g., `delete student 3`                                                                                   |
-| **Tag student to risk level** | `TODO`                                                                                                                                  |
-| **Add appointment**           | `add appointment d/<DATETIME_OF_APPOINMENT> n/<NAME_OF_STUDENT>`<br> e.g., `add appointment d/2023-12-31 16:30 n/Jon`                   |
-| **View appointments**         | `view appointments`                                                                                                                     |
-| **Delete an appointment**     | `delete appointment <INDEX>`<br> e.g., `delete appointment 2`                                                                           |
-| **Help**                      | `help`                                                                                                                                  |
-| **Exit**                      | `exit`                                                                                                                                  |
+
+| Action                        | Format, Examples                                                                                                                    |
+|-------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|
+| **Add student**               | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add student n/John c/81349705 a/Yishun Street 56 Blk 21 #05-07` |
+| **View Students**             | `clear`                                                                                                                             |
+| **Delete student**            | `delete INDEX`<br> e.g., `delete 3`                                                                                                 |
+| **Tag student to risk level** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`         |
+| **Add appointment**           | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                          |
+| **View appointments**         | `list`                                                                                                                              |
+| **Help**                      | `help`                                                                                                                              |
+| **Exit**                      | `exit`                                                                                                                              |
+
