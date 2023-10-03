@@ -19,8 +19,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/WeeeHung)]
 [[portfolio](team/weeehung.md)]
 
-* Role: Peasant
-* Responsibilities: Anything the team wants me to do
+* Role: Developer
+* Responsibilities: Deliverables and deadlines
 
 ### Jane Doe
 
