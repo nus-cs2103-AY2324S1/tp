@@ -157,7 +157,7 @@ If your changes to the data file makes its format invalid, DoConnekPro will disc
 
 ### UI mock-up :
 
-![UI mock-up](images/Uimockup.png)
+![UI mock-up](images/Ui.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
