@@ -346,6 +346,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **CLI**: Command Line Interface. Usually the in-built terminal or in the IDE the application is run on.
 * **GUI**: Graphical User Interface.
+* **Risk Level**: Students can be classified as high, medium, or low-risk level determined by the counsellor.
 
 --------------------------------------------------------------------------------------------------------------------
 
