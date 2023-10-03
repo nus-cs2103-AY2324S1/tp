@@ -238,7 +238,7 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add**    | `add n/NAME id/IC_NUMBER [field] ...` <br> e.g., `add n/James Ho id/SXXXX123D p/22224444 a/123, Clementi Rd, 1234665`
 **Clear**  | `clear`
 **Delete** | `delete [idenfication] [field]`<br> e.g., `delete n/John Doe e/johndoe@example.com`
 **Edit**   | `edit n/NAME or id/IC_NUMBER [field] ... `<br> e.g.,`edit n/James Lee e/jameslee@example.com`
