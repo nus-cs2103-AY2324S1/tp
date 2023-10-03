@@ -16,7 +16,7 @@ We are a team of students from the [School of Computing, National University of 
 [[portfolio](team/nknguyenhc.md)]
 
 * Role: Team Lead
-* Responsibilities: 
+* Responsibilities:
   * Scheduling and tracking
   * Deliverables and deadlines
   * Integration
