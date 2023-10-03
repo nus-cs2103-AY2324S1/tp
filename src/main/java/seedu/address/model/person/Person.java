@@ -22,7 +22,7 @@ public class Person {
     private final Email email;
 
     // Data fields
-    private final Address address;
+    private final Address address; //TODO to be scrapped
     private final Set<Tag> tags = new HashSet<>();
 
     /**

@@ -8,6 +8,7 @@ import seedu.address.annotation.Nullable;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.NoteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Note;
 
 
 
@@ -40,7 +41,8 @@ public class NoteCommandParser implements Parser<NoteCommand> {
             );
         }
 
-        String note = map.getValue(CliSyntax.PREFIX_NOTE).orElse("");
+        String noteString = map.getValue(CliSyntax.PREFIX_NOTE).orElse("");
+        Note note = new Note(noteString);
 
         return new NoteCommand(index, note);
     }

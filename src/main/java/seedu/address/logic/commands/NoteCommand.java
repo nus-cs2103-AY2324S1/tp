@@ -2,9 +2,9 @@ package seedu.address.logic.commands;
 
 import seedu.address.annotation.Nullable;
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Note;
 
 
 
@@ -33,16 +33,16 @@ public class NoteCommand extends Command {
     public static final String MESSAGE_ARGUMENTS = "index (%d) note (%s)";
 
     private Index number;
-    private String note;
+    private Note note;
 
     /**
      * Constructs a NoteCommand for setting the specified note for the contact
      * with the specified number.
      *
-     * @param number Number of the contact.
-     * @param note Note to set.
+     * @param _number Number of the contact.
+     * @param _note Note to set.
      */
-    public NoteCommand(Index _number, String _note) {
+    public NoteCommand(Index _number, Note _note) {
         this.number = _number;
         this.note = _note;
     }
@@ -71,7 +71,7 @@ public class NoteCommand extends Command {
             String.format(
                 MESSAGE_ARGUMENTS,
                 this.number.getOneBased(),
-                this.note
+                this.note.toString()
             )
         );
     }
