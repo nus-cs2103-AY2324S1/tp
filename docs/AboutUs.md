@@ -27,14 +27,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Deliverables and deadlines
 
-### Johnny Doe
+### Stephen
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/sheeepen.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/sheeepen)]
+[[portfolio](team/sheeepen.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Deliverables and deadlines
 
 ### Jean Doe
 
