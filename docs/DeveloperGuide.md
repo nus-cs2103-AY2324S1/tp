@@ -283,16 +283,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `Connectify` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Delete a client**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list clients
+2.  Connectify shows a list of clients
+3.  User requests to delete a specific client in the list
+4.  Connectify deletes the client
 
     Use case ends.
 
@@ -308,8 +308,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-*{More to be added}*
 
+**Use case: Add a client interaction**
+
+**MSS**
+
+1.  User requests to list clients
+2.  Connectify shows a list of clients
+3.  User requests create a client interaction
+4.  Connectify adds the interaction to the client profile
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The user does not exist.
+
+    * 3a1. Connectify shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The client interaction is empty
+   
+      * 3b1. Connectify shows an error message.
+   
+      Use case resumes at step 2.
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
