@@ -283,11 +283,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | create a new contact | keep information about persons in my network |
+| `* * *`  | user                                       | create a new contact | keep a record of individuals in my network |
+| `* * *` | user | add more details about an existing contact | store information about my contacts for future reference |
 | `* * *` | user | update details of a contact | replace outdated details with more accurate information |
 | `* * *`  | user                                       | delete a contact          | remove entries that are no longer relevant             |
-| `* * *`  | user                                       | find a contact by name    | locate details of persons without having to go through the entire list |
-| `*`      | user with many contacts in NetworkBook | sort contacts by their details | locate a person easily                                                 |
+| `* * `  | user                                       | find a contact by name    | locate details of contacts without having to go through the entire list |
+| `*`      | user with many contacts | sort contacts by their details | locate contacts with special characteristics that I am looking for |
+| `* ` | user with many contacts | filter contacts based on their details | locate contacts who fulfil certain conditions that I am looking for |
 | `* *` | new user | have a quick-start guide | start using the basic functionality of the app as soon as possible|
 | `* *` | new user | use commonly-available keyboard shortcuts (e.g. ctrl-c for copy, ctrl-v for paste) | use the shortcuts I am accustomed to|
 | `* *` | NUS computing student | use simple and easy-to-remember shortcuts | have no trouble remembering and executing the shortcuts|
