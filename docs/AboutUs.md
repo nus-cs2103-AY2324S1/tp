@@ -27,14 +27,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 - Role: User Documentation
 
-### Johnny Doe
+### Ku Shang Yi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/bombbird2001.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/bombbird2001)] [[portfolio](team/bombbird2001.md)]
 
-- Role: Developer
-- Responsibilities: Data
+- Role: Team Lead, Developer
+- Responsibilities: Scheduling and tracking
 
 ### Jean Doe
 
