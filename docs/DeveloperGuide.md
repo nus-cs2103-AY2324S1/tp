@@ -270,22 +270,14 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-As a sales personnel, I can record my client’s contact information.
-As a sales personnel, I can access the full details of a particular client's information comprehensively, so it can aid my future interaction with this client.
-As a sales personnel, I can delete inactive client profiles, so I can keep my address book organized.
-As a sales personnel, I can take notes of my meetings with my clients.
-As a sales personnel, I can log the outcomes of my client interactions (e.g., interested, not interested, follow-up required), so that I can track progress.
-As a sales personnel, I can mark a client as a "hot lead," "warm lead," or "cold lead," so I can gauge their potential.
-
-
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
+| Priority | As a …​                                     | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | user                                  | record my client’s contact information.         | conveniently refer to it later                             |
+| `* * *`  | user                                       | record my client’s contact information         | conveniently refer to it later                             |
 | `* * *`  | user                                       | access the full details of a particular client's information comprehensively               | aid my future interaction with this client |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| `* * *`  | user                                       | client profiles                | remove entries that I no longer need                                   |
+| `* *`    | user                                       | add notes of my meetings with my clients          | track details for future interaction with client |
+| `* *`    | user                                       | log the outcomes of my client interactions (e.g., interested, not interested, follow-up required)   | track progress of client interactions                |
+| `*`      | user                                       | mark a client as a "hot lead," "warm lead," or "cold lead           | gauge the sales potential of the client                                                 |
 
 *{More to be added}*
 
