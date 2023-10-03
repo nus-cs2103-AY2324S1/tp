@@ -1,4 +1,9 @@
-# PetrichorPrecipice's Projet Portfolio Page
+---
+layout: page
+title: Joon Hung's Project Portfolio Page
+---
+
+# Joon Hung's Project Portfolio Page
 
 ## Project: Tran$act
 Tran$act is a desktop bookkeeping application used to keep track of a small business's
