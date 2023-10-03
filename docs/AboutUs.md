@@ -48,7 +48,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/kevin-liusx.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops
+* Responsibilities: Development and Operations
 
 ### Jin Hao
 
