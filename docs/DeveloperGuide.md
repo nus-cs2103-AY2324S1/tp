@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This project is a **part of the se-education.org** initiative. If you would like to contribute code to this project, see [se-education.org](https://se-education.org#https://se-education.org/#contributing) for more info.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -257,29 +257,54 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* is a Computer Science University student in NUS
+* wishes to excel in their studies
+* requires a learning aid that enforces their understanding and memorisation of the content taught
+* may take several courses at once and each course is expected to have multiple topics/concepts
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: For Computing students in University who struggle with memorisation and consolidation of knowledge, our app provides users the ability to create categorised flashcards to organise concepts taught to them fast. Optimised for CLI and users who type fast.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​                                | I want to …​                                                                                    | So that I can…​                                  |
+|----------|----------------------------------------|-------------------------------------------------------------------------------------------------|--------------------------------------------------|
+| `* * *`  | new user                               | create a new flashcard                                                                          | start adding content                             |
+| `* * *`  | user                                   | edit the content of an existing flashcard                                                       | update my study materials                        |
+| `* * *`  | user                                   | delete a flashcard                                                                              | remove irrelevant content                        |
+| `* * *`  | user                                   | view a list of all my flashcards                                                                | quickly access my study materials                |
+| `* * *`  | user                                   | organise my flashcards with tags                                                                | manage my study materials efficiently            |
+| `*`      | user                                   | search for a specific flashcard                                                                 | edit the card accordingly                        |
+| `* *`    | user                                   | sort my flashcards by date created or modified                                                  | view them in an organised manner                 |
+| `*`      | user who learns better with pictures   | add images to my flashcards                                                                     | enhance my learning experience                   |
+| `* * *`  | user who wants to update my flashcards | modify answers to my flashcard                                                                  | make sure that my content is up to date          |
+| `* * *`  | user                                   | practise with my flashcards                                                                     | test my knowledge                                |
+| `* *`    | user                                   | shuffle the order of my flashcards during practice                                              | avoid memorising in a fixed sequence             |
+| `* * *`  | user                                   | mark a flashcard as "learnt" during practice                                                    | track my progress                                |
+| `*`      | user                                   | see statistics on my practice sessions, such as the number of cards reviewed and the time spent |                                                  |
+| `* * *`  | user                                   | tag my flashcards with course IDs and coursework                                                | easily categorise them by subject                |
+| `* * *`  | user                                   | tag my flashcards with the type of concept (e.g., definitions, formulas, field)                 | filter them for specific study needs             |
+| `* *`    | user                                   | can change my tag colours                                                                       | personalise my studying methods                  |
+| `* *`    | user                                   | enable spaced repetition for my flashcards                                                      | optimise my memorization process                 |
+| `* *`    | user                                   | adjust the spacing intervals for spaced repetition                                              | personalise my learning experience               |
+| `* *`    | diligent user                          | review flashcards due for repetition                                                            | reinforce my memory                              |
+| `* *`    | experienced user                       | format the text on my flashcards using Markdown or a similar markup language                    | create personalised rich content                 |
+| `*`      | experienced user                       | preview the formatted text on my flashcards                                                     | ensure it appears as intended                    |
+| `* *`    | picky user                             | customise the app's colour scheme and interface                                                 | personalise my learning environment              |
+| `* *`    | user                                   | reset my progress and start fresh with my flashcards                                            | can reattempt my studies                         |
+| `* *`    | user                                   | export my flashcards to a file                                                                  | back up my data or share it with others          |
+| `* *`    | user                                   | import flashcards from an external file                                                         | easily migrate or collaborate on study materials |
+| `* * *`  | user                                   | access a user guide                                                                             | learn how to use the app effectively             |
+| `* *`    | user                                   | receive notifications to remind me of my study sessions and flashcard reviews                   |                                                  |
+| `* *`    | user                                   | set daily or weekly study goals                                                                 | track my progress toward my learning objectives  |
+| `*`      | user                                   | provide feedback or report issues to the app developers                                         | contribute to app improvement                    |
+| `*`      | multilingual user                      | input non-english characters                                                                    | study in other languages                         |
 
 ### Use cases
 
@@ -342,7 +367,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 flashcards without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 *{More to be added}*
@@ -350,7 +375,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Flashcard**: A two-sided card containing a question and an answer
+* **Tag**: A label used to categorise flashcards
 
 --------------------------------------------------------------------------------------------------------------------
 
