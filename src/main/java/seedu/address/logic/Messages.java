@@ -10,7 +10,10 @@ import seedu.address.model.person.Person;
 
 
 /**
- * Container for user visible messages.
+ * Utility class with some useful static properties and methods related to
+ * user-facing messages.
+ *
+ * //NOTE this class can probably be absorbed into other related classes.
  */
 public class Messages {
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
