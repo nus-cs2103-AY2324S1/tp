@@ -35,6 +35,7 @@ Given below are my contributions to the project.
     * e.g. Added documentation for the features `delete` and `find` [\#72]()
     * e.g. Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]()
   * Developer Guide:
+    * Added use cases for the functions to be implemented in v1.2 [\#42](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/42)
     * e.g. Added implementation details of the `delete` feature.
 
 * **Community**:
