@@ -3,9 +3,7 @@ layout: page
 title: About Us
 ---
 
-We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
-
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+We are a team of students from the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
 ## Project team
 
@@ -18,7 +16,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/nknguyenhc.md)]
 
 * Role: Team Lead
-* Responsibilities: 
+* Responsibilities:
   * Scheduling and tracking
   * Deliverables and deadlines
   * Integration
@@ -52,12 +50,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Xenos Fiorenzo Anong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/xenosf.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[homepage](https://xenosf.io/)]
+[[github](http://github.com/xenosf)]
+[[portfolio](team/xenosf.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities:
+  * Code Quality
+  * Documentation
