@@ -283,30 +283,59 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `lesSON` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 Creating a card**
 
-**MSS**
+**MSS:**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User inputs command to create a card, along with the necessary details.
+2. lesSON displays a success message.
 
-    Use case ends.
+   Use case ends.
 
-**Extensions**
+**Use case: UC02 deleting a card**
 
-* 2a. The list is empty.
+**MSS:**
 
-  Use case ends.
+1. User displays all cards (UC04).
+2. User inputs command to delete a card, along with the index of the card.
+3. lesSON displays a success message.
+   
+   Use case ends.
 
-* 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+**Use case: UC03 viewing a card**
 
-      Use case resumes at step 2.
+**MSS:**
+
+1. User displays all cards (UC04).
+2. User inputs command to view a card, along with the index of the card.
+3. lesSON displays the selected card.
+
+   Use case ends.
+
+
+**Use case: UC04 displaying all cards**
+
+**MSS:**
+
+1. User inputs command to view all cards.
+2. lesSON displays all cards.
+
+   Use case ends.
+
+
+**Use case: UC05 editing a card**
+
+**MSS:**
+
+1. User displays all cards (UC04). 
+2. User inputs command to edit a card, along with the necessary details. 
+3. lesSON displays a success message.
+
+   Use case ends.
+
 
 *{More to be added}*
 
