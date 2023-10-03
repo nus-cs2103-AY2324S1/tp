@@ -26,20 +26,16 @@ public class PersonCard extends UiPart<Region> {
 
     public final Person person;
 
-    @FXML
-    private HBox cardPane;
-    @FXML
-    private Label name;
-    @FXML
-    private Label id;
-    @FXML
-    private Label phone;
-    @FXML
-    private Label address;
-    @FXML
-    private Label email;
-    @FXML
-    private FlowPane tags;
+    @FXML private HBox cardPane;
+
+    @FXML private Label id;
+    @FXML private Label name;
+    @FXML private FlowPane tags;
+    @FXML private Label phone;
+    @FXML private Label email;
+    @FXML private Label note;
+
+    @FXML private Label address; //TODO to be scrapped
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
