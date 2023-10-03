@@ -1,8 +1,14 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -14,8 +20,8 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.util.SampleDataUtil;
 import seedu.address.testutil.TypicalPersons;
-
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for TagCommand.
@@ -48,6 +54,35 @@ public class TagCommandTest {
         expectedModel.setPerson(model.getFilteredPersonList().get(2), TypicalPersons.CARL);
 
         assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_indexOutOfBound_failure() {
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        Index outOfBoundIndex = INDEX_SECOND_PERSON;
+        // ensures that outOfBoundIndex is still in bounds of address book list
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+
+        TagCommand tagCommand = new TagCommand(outOfBoundIndex, TypicalPersons.ALICE.getTags());
+
+        assertCommandFailure(tagCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void equals() {
+        final TagCommand standardCommand = new TagCommand(INDEX_FIRST_PERSON,
+                TypicalPersons.ALICE.getTags());
+
+        TagCommand commandWithSameValue = new TagCommand(INDEX_FIRST_PERSON,
+                SampleDataUtil.getTagSet(VALID_TAG_FRIEND));
+
+        assertTrue(standardCommand.equals(commandWithSameValue));
+
+        assertTrue(standardCommand.equals(standardCommand));
+
+        assertFalse(standardCommand.equals(null));
+
+        assertFalse(standardCommand.equals(new ClearCommand()));
     }
 
     @Test
