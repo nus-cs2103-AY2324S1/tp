@@ -1,27 +1,25 @@
 ---
-  layout: default.md
-  title: "Misra Aditya's Project Portfolio Page"
+layout: default.md
+title: "Sean Koh's Project Portfolio Page"
 ---
 
-### Project: JABPro
+# Project: JABPRO
+## Overview 
+JABPro aims to solve the problem of HR managers having to sort through tons of job applications.
+It makes their life easier by allowing them to easily fetch important info about job applicants such as their contact details, application status etc. It serves as a one-stop addressbook for job applications.
+## Summary of Contributions
+**Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=madlamprey&breakdown=true)
 
-JABPro is a desktop application for hiring managers to help manage applicants. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+**Enhancement implemented**:
 
-Given below are my contributions to the project.
+**Contribution to the UG**:
 
-* **New Feature**: To be added
+**Contribution to DG**:
+* Contributed to DG for non-functional requirements
 
-* **Code contributed**: [RepoSense link]()
+**Contribution to team-based tasks**:
+* Keeping track of deadlines and objectives
 
-* **Project management**: To be added
+**Review/mentoring contributions**:
 
-* **Enhancements to existing features**: To be added
-
-* **Documentation**:
-  * User Guide:
-    * Added documentation for the features `add linkedin/github` and `linkedin`, `github`
-  * Developer Guide: To be added
-
-* **Community**: To be added
-
-* **Tools**: To be added
+**Contributions beyond the project team**:
