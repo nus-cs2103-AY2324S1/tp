@@ -93,7 +93,21 @@ Examples:
 
 ### Tag student to risk level //TODO
 
-### Add an appointment //TODO
+### Add an appointment
+
+Adds a new appointment for a student.
+
+Format: `add appointment d/<DATETIME_OF_APPOINMENT> n/<NAME_OF_STUDENT>`
+
+**Parameters**:
+1. Date/Time of appointment
+   - Must be in one of the following formats: `yyyy-MM-dd HH:mm`, or `HH:mm`. If in `HH:mm` the appointment date is set on the date of creation
+2. Name
+    - Alphabetical characters only
+
+Examples:
+- `add appointment d/2023-12-31 16:30  n/Jon`
+- `add appointment d/18:30 n/Kiat`
 
 ### View all appointments 
 
@@ -153,13 +167,13 @@ _Details coming soon ..._
 
 ## Command summary //TODO: update your respective things
 
-Action | Format, Examples
---------|------------------
-**Add student** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add student n/John c/81349705 a/Yishun Street 56 Blk 21 #05-07`
-**View Students** | `clear`
-**Delete student** | `delete INDEX`<br> e.g., `delete 3`
-**Tag student to risk level** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Add appointment** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**View appointments** | `list`
-**Help** | `help`
-**Exit** | `exit`
+| Action                        | Format, Examples                                                                                                                    |
+|-------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|
+| **Add student**               | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add student n/John c/81349705 a/Yishun Street 56 Blk 21 #05-07` |
+| **View Students**             | `clear`                                                                                                                             |
+| **Delete student**            | `delete INDEX`<br> e.g., `delete 3`                                                                                                 |
+| **Tag student to risk level** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`         |
+| **Add appointment**           | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                          |
+| **View appointments**         | `list`                                                                                                                              |
+| **Help**                      | `help`                                                                                                                              |
+| **Exit**                      | `exit`                                                                                                                              |
