@@ -17,6 +17,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/quzhetao.md)]
 
 * Role: Deliverables and deadlines
+* Responsibilities: Data
 
 ### Darren Tan Fanyi
 
@@ -26,6 +27,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/darrentfy.md)]
 
 * Role: Deliverables and deadlines
+
+### Eric Sim
+
+<img src="images/simwperic.png" width="200px">
+
+[[github](http://github.com/simwperic)]
+[[portfolio](team/simwperic.md)]
 
 ### Stephen
 
