@@ -65,26 +65,24 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding a new patient: `add`
 
-Adds a person to the address book.
+Creates a new patient profile to be added to the patient records. 
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
+Format: `add name=[name] birthdate=[birthdate] gender=[gender]
+illness=[illness]​`
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+*  `add name=John birthdate=30/09/2001 gender=Male illness=Fever`
+
+* `add name=Cena birthdate=30/12/1993 gender=Male illness=Schizophrenia`
 
 ### Listing all persons : `list`
 
