@@ -189,7 +189,7 @@ _Details coming soon ..._
 | **Delete a student**          | `delete student <INDEX>`<br> e.g., `delete student 3`                                                                                   |
 | **Tag student to risk level** | `TODO`                                                                                                                                  |
 | **Add an appointment**        | `add appointment d/<DATETIME_OF_APPOINMENT> n/<NAME_OF_STUDENT>`<br> e.g., `add appointment d/2023-12-31 16:30 n/Jon`                   |
-| **View all appointments**     | `view appointments`                                                                                                                     |
+| **View appointments**         | `view appointments`                                                                                                                     |
 | **Delete an appointment**     | `delete appointment <INDEX>`<br> e.g., `delete appointment 3`                                                                           |
 | **Help**                      | `help`                                                                                                                                  |
 | **Exit**                      | `exit`                                                                                                                                  |
