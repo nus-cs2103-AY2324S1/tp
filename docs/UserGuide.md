@@ -3,6 +3,7 @@
 ---
 
 JobFindr is a **Contact Book app** for NUS fresh graduates who are looking for jobs. 
+
 It simplifies _contact management_, provides _reminders_ and enhances _organisation_, helping users _stay competitive_ in the job market.
 The project simulates an ongoing software project for a desktop application (called _JobFindr_) used for managing job applications.
 
@@ -81,7 +82,7 @@ print “Error: ” and error message for:
 
 **Examples:**
 * `add n/Microsoft p/98765432 e/microsoft@gmail.com a/182 Cecil St, #13-01, Singapore 069547`
-  Adds a company called microsoft, adds their phone number, email and address 
+  Adds a company called microsoft, adds their phone number, email and address
 * `add n/The Coca-Cola Company e/cocacola@yahoo.com`
   Adds a company called The Coca-Cola Company, adds their email
 
@@ -149,9 +150,9 @@ print “Error: ” and error message for:
 * `INDEX` is larger than list size: “No such company at index (`INDEX`).”
 
 **Examples:**
-* `mark 1 submitted` 
+* `mark 1 submitted`
   Marks the status of the company application at index 1 as submitted.
-* `mark 2 rejected` 
+* `mark 2 rejected`
   Marks the status of the company application at index 1 as rejected.
 
 ---
@@ -166,9 +167,9 @@ Sets submission deadline for an existing application in the list.
 * The `INDEX` refers to the index number shown in the displayed application list.
 * The `INDEX` must be a _positive integer_ 1, 2, 3, …​
 * `DEADLINE` must be provided in the accepted `DATETIME` Format as listed below:
-  - Nov 12 2022 1200 
+  - Nov 12 2022 1200
   - 12 Nov 2022 1200 
-  - 2022-11-12 1200 
+  - 2022-11-12 1200
   - 12/11/2022 1200
 
 **Successful command:**
@@ -180,7 +181,7 @@ print “Error: ” and error message:
 * `INDEX` is larger than list size: “No such company at index (index).”
 
 **Examples:**
-* `setdeadline 1 d/Nov 12 2022 1200` 
+* `setdeadline 1 d/Nov 12 2022 1200`
   Sets deadline for application at index 1 to be Nov 12 2022 1200.
 
 ---
