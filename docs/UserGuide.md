@@ -113,23 +113,49 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Search job applicants by category: `search`
 
-Finds persons whose names contain any of the given keywords.
+Finds job applicants whose profiles match the specified categories' keywords. The search categories are: name, status
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+#### Search job applicants by name
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+Finds job applicants whose names contain the given keywords.
+
+Format: `search n/KEYWORD [MORE KEYWORDS]`
+
+* Keywords are case-insensitive: `search n/Josh` and `search n/josh` return the same result.
+* Keyword has to be a string that does not contain any non-alpha numeric characters.
+* The order of the keywords does not matter. e.g. `Josh Peck` will match `Peck Josh`
+* Only full words will be matched e.g. `Jo` will not match `Josh`
+* Applicants matching at least one keyword will be returned (i.e. `OR` search)
+  e.g. `Josh Peck` will return `Josh Gad`, `Josh Job`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `search n/John` returns `john` and `John Doe`
+* `search n/david` returns `Alex Yeoh`, `David Li`<br>
+
+#### Search job applicants by status
+
+Finds job applicants whose status match any of the given keywords
+
+Format: `search s/KEYWORD [MORE KEYWORDS]`
+
+* Keywords can only be from the following list: `Pending`, `Interviewed`, `Rejected`, `Offered`
+  e.g. `search s/interviewing` will give an error.
+* Keywords are case-insensitive: `search s/interviewd` and `search s/INTERVIEWED` return the same result.
+
+Example:
+* `search s/interviewed`
+
+#### Notes for advanced users:
+* You can combine the name and status search categories (e.g. `search n/Alex s/offered`) in a single search command.
+* Each search category can be used at most once in a single search command
+  e.g. `search n/Alex n/Adam s/rejected` is not allowed.
+
+Example:
+* `search n/Alex Bernice s/interviewed rejected` will output applicants whose:
+    * names contain either Alex `or` Bernice
+    * `and` status is either interviewed `or` rejected.
 
 ### Deleting a person : `delete`
 
