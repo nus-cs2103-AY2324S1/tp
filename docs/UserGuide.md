@@ -74,7 +74,7 @@ Format: `help`
 
 Adds a student with his/her relevant details.
 
-Format: `add student n/NAME c/CONTACT_NUMBER a/HOME_ADDRESS`
+Format: `add student n/<NAME> c/<CONTACT_NUMBER> a/<HOME_ADDRESS>`
 
 
 **Parameters**:
@@ -90,9 +90,24 @@ Examples:
 * `add student n/Sally c/94149785 a/Woodlands Street 11 Blk 888 #08-08`
 
 
-### View all students //TODO
+### View all students
 
-### Delete a student //TODO
+Shows a list of all students.
+
+Format: `view students`
+
+### Delete a student
+
+Deletes an existing student.
+
+Format: `delete <INDEX>`
+
+**Parameters**:
+1. Appointment Index
+    - Numerical characters only
+
+Examples:
+* `delete appointment 2`
 
 ### Tag student to risk level //TODO
 
@@ -122,14 +137,14 @@ Format: `view appointments`
 
 Deletes an existing appointment.
 
-Format: `delete appointment n/INDEX`
+Format: `delete appointment <INDEX>`
 
 **Parameters**:
 1. Appointment Index
     - Numerical characters only
 
 Examples:
-* `delete appointment n/2`
+* `delete appointment 2`
 
 ### Exiting the program : `exit`
 
@@ -171,13 +186,14 @@ _Details coming soon ..._
 ## Command summary //TODO: update your respective things
 
 
-| Action                        | Format, Examples                                                                                                                    |
-|-------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|
-| **Add student**               | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add student n/John c/81349705 a/Yishun Street 56 Blk 21 #05-07` |
-| **View Students**             | `clear`                                                                                                                             |
-| **Delete student**            | `delete INDEX`<br> e.g., `delete 3`                                                                                                 |
-| **Tag student to risk level** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`         |
-| **Add appointment**           | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                          |
-| **View appointments**         | `list`                                                                                                                              |
-| **Help**                      | `help`                                                                                                                              |
-| **Exit**                      | `exit`                                                                                                                              |
+| Action                        | Format, Examples                                                                                                                        |
+|-------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------|
+| **Add student**               | `add student n/<NAME> p/<PHONE_NUMBER> a/<HOME_ADDRESS> …​` <br> e.g., `add student n/John c/81349705 a/Yishun Street 56 Blk 21 #05-07` |
+| **View Students**             | `view students`                                                                                                                         |
+| **Delete student**            | `delete student <INDEX>`<br> e.g., `delete student 3`                                                                                   |
+| **Tag student to risk level** | `TODO`                                                                                                                                  |
+| **Add appointment**           | `add appointment d/<DATETIME_OF_APPOINMENT> n/<NAME_OF_STUDENT>`<br> e.g., `add appointment d/2023-12-31 16:30 n/Jon`                   |
+| **View appointments**         | `view appointments`                                                                                                                     |
+| **Delete an appointment**     | `delete appointment <INDEX>`<br> e.g., `delete appointment 2`                                                                           |
+| **Help**                      | `help`                                                                                                                                  |
+| **Exit**                      | `exit`                                                                                                                                  |
