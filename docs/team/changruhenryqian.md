@@ -1,3 +1,8 @@
+---
+layout: default.md
+title: "Changru's Project Portfolio Page"
+---
+
 # Class Manager 2023
 
 *Class Manager 2023 aims to provide fast access to CS2103S TAs who need help in maintaining student information across multiple classes. It also aims to help TAs visualize data across and within classes.*
