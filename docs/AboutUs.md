@@ -35,8 +35,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/simwperic)]
 [[portfolio](team/simwperic.md)]
 
-* Role: Developer
-* Responsibilities: Data
+### Stephen
+
+<img src="images/sheeepen.png" width="200px">
+
+[[github](http://github.com/sheeepen)]
+[[portfolio](team/sheeepen.md)]
+
+* Role: Deliverables and deadlines
 
 ### Jean Doe
 
