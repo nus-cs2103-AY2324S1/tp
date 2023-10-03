@@ -4,7 +4,7 @@ title: MediFlowR
 ---
 
 [![CI Status](https://github.com/AY2324S1-CS2103T-T08-4/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2324S1-CS2103T-T08-4/tp/actions)
-[![codecov](https://codecov.io/gh/AY2324S1-CS2103T-T08-4/branch/tp/graph/badge.svg)](https://codecov.io/gh/AY2324S1-CS2103T-T08-4/tp)
+[![codecov](https://codecov.io/gh/AY2324S1-CS2103T-T08-4/tp/graph/badge.svg?token=W34CGP58OU)](https://codecov.io/gh/AY2324S1-CS2103T-T08-4/tp)
 
 ![Ui](images/Ui.png)
 
