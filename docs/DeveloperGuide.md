@@ -291,15 +291,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to view all tutees.
 2.  System shows all tutees.
-
+	
     Use case ends.
 
 **Extensions**
 
-- 1a. The list of tutees is empty.
-    - 1a1. System informs the user that the list is empty.
-
-      Use case ends.
+- 2a. The list of tutees is empty.
+    - 2a1. System informs the user that the list is empty.
+	
+    Use case ends.
 
 **Use case: UC02 - Add a tutee**
 
@@ -316,6 +316,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 1a1. System informs user of the incomplete tutee data.
 
       Use case resumes at 1.
+
+**Use case: UC03 - Delete a tutee**
+
+**MSS**
+
+1.  User views the list of tutees.
+2.  User requests to delete a tutee.
+2.  System deletes the tutee
+
+    Use case ends.
+
+**Extensions**
+
+* 2a1. The tutee that the user is trying to delete does not exist in the list.
+* 3a1. System informs that the list of tutees is now empty
+
+    Use case ends.
 
 *{More to be added}*
 
