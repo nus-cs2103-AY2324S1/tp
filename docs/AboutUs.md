@@ -32,7 +32,7 @@ git
 
 ### Rohan
 
-<img src="images/rushedphotorohan.png" width="200px">
+<img src="images/RSXIX.png" width="200px">
 
 [[github](http://github.com/RSXIX)]
 [[portfolio](team/RSXIX.md)]
