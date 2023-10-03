@@ -48,15 +48,19 @@ public class Person {
     }
 
     public Name getName() {
-        return name;
+        return this.name;
     }
 
     public Phone getPhone() {
-        return phone;
+        return this.phone;
     }
 
     public Email getEmail() {
-        return email;
+        return this.email;
+    }
+
+    public Note getNote() {
+        return this.note;
     }
 
     /**
