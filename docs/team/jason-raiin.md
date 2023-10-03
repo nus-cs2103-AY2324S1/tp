@@ -9,7 +9,7 @@ OutBook is a desktop personal secretary application used for saving contacts and
 
 My contributions to the project are listed below.
 
-- **New Feature**: Added the ability to undo/redo previous commands.
+- **New Feature**:
 
   - to be added soon
 
@@ -25,7 +25,11 @@ My contributions to the project are listed below.
 
 - **Documentation**:
 
-  - to be added soon
+  - Developer Guide
+    - User profile
+    - Value proposition
+    - User stories
+    - Use cases
 
 - **Community**:
 
