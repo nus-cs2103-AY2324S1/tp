@@ -120,7 +120,7 @@ When the command fails:
 
 
 
-### Add tag to a contact:   `add /tag /index`
+### Add tag to a contact: `add /tag /index`
 
 You can use the `tag` command to associate a custom category with a contact, 
 
