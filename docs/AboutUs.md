@@ -50,12 +50,14 @@ We are a team of students from the [School of Computing, National University of 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Xenos Fiorenzo Anong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/xenosf.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/xenosf)]
+[[portfolio](team/xenosf.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities:
+  * Code Quality
+  * Documentation
