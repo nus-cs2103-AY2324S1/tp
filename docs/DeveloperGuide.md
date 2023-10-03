@@ -283,30 +283,47 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `WellNUS` and the **Actor** is the `counselor`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add a student #UC01**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list students
+2.  WellNUS shows the list of students
+3.  User requests to add a new student to the list
+4.  WellNUS adds the person, and shows confirmation message
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 3a. The student name/contact number already exists.
+  * 3a1. WellNUS shows an error message. 
+    * Use case ends.
 
-  Use case ends.
+* 3b. The given name is invalid (non-alphabetical input) or contact number is invalid (non-numerical input).
+  * 3b1. WellNUS shows an error message.
+    * Use case ends.
 
-* 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
 
-      Use case resumes at step 2.
+**Use case: View existing students #UC02**
+
+**MSS**
+
+1.  User requests to list students
+2.  WellNUS shows the list of students
+3.  User can find student index that can be used for other use cases, eg. edit student info
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty
+  * Use case ends.
+
+    
 
 *{More to be added}*
 
