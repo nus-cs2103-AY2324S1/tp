@@ -257,13 +257,23 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
+* NUS computing students and computing professionals
 * has a need to manage a significant number of contacts
+* has a need to manage a lot of details for each contact
+* looking into networking with other computing students and professionals
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: As computing students and professionals 
+network with alumni to expand their career prospects, 
+our app keeps a list of contacts of people that each user networks with.
+* Sort users by priority, courses taken/taking, 
+specialisation(s) taken/intending to take, graduation year
+* Offline, with a static online page that contains user manual and download link
+* Search by any details, i.e. phone number, email, specialisations,
+courses taken, graduation year.
 
 
 ### User stories
@@ -278,8 +288,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
 | `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
 | `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| `* *` | new user | have a quick-start guide | start using the basic functionality of the app as soon as possible
+| `* *` | new user | use commonly-available keyboard shortcuts (e.g. ctrl-c for copy, ctrl-v for paste) | use the shortcuts I am accustomed to
+| `* *` | NUS computing student | use simple and easy-to-remember shortcuts | have no trouble remembering and executing the shortcuts
 
-*{More to be added}*
 
 ### Use cases
 
@@ -312,16 +324,35 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+1. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+1. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. A new user should be able to familiarise him/herself 
+with mose of the basic features of the app
+upon finishing going through the quick-start guide.
+1. A user should be able to use commonly available and easy-to-remember keyboard shorcuts
+   * Ctrl+C: copy text
+   * Ctrl+V: paste text
+   * Ctrl+N: new contact detail
+   * Ctrl+W: exit the app
+   * Ctrl+F: find a contact
+   * Ctrl+H/Ctrl+R/Ctrl+G: edit a contact
+1. Keywords to be used in commands must be self-explanatory.
 
-*{More to be added}*
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Mainstream OS**: Windows, Linux, Unix, OS-X.
+* **Contact**: a contact of person in the app,
+which includes name, phone number, emails, links, courses taken, specialisations, 
+graduation year, priority level and tags of/associated with the person.
+* **Command**: a string keyed in by the user in the GUI text input
+that signifies an action to be done by the app.
+* **Course taken**: a module that a person has taken in university or outside
+(for e.g. CS2103T module in NUS).
+* **Specialisation**: the specialisation in Computer Science degree
+that a person takes in university (for e.g. Software Engineering, Artificial Intelligence).
+* **Tag**: an annotation to a person. This can be anything memorable of the person.
 
 --------------------------------------------------------------------------------------------------------------------
 
