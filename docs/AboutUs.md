@@ -19,14 +19,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Yu Jiali
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/a1waysd.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/a1waysd)]
+[[portfolio](team/a1waysd.md)]
 
-* Role: Team Lead
+* Role: Scheduling and tracking, Lead
 * Responsibilities: UI
 
 ### Johnny Doe
