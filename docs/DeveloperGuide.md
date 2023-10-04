@@ -400,7 +400,7 @@ Priorities: Essential (must have) - `* * *`, Typical (nice to have) - `* *`, Nov
 
       Use case ends.
 
-* 1b. System could not find the patient from the keyword
+* 1b. System could not find any patient from the keyword
 
     * 1b1. System shows an error message.
 
