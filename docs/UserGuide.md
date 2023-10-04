@@ -8,6 +8,8 @@
 
 Text-friendly project management tool that helps students schedule meetings with different groups while also keeping track of tasks and responsibilities of each member. Our app will track the schedule of each contact and tasks individuals have to do for their project.
 
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+
 <!-- * Table of Contents -->
 <page-nav-print />
 
@@ -155,6 +157,25 @@ Acceptable values: `NAME should be a string.`
 
 Expected output when succeeds: `Contact successfully deleted`
 
+Expected output when fails: `Error, invalid input entered`
+
+### Add contacts to groups: `group`
+
+Add a contact to a group.
+
+Format: `group n/NAME g/GROUPNAME`
+
+* Add the contact with given `NAME` from the given `GROUPNAME`
+* If group or name does not exist, print error
+
+Acceptable values:
+* `NAME` and `GROUPNAME` are strings
+
+Example(s):
+* `group n/John g/cs2101 tut`
+* `group n/samantha tan g/saturday 9am yoga`
+
+Expected outputs when it succeeds: `John is now part of group cs2101.`
 Expected output when fails: `Error, invalid input entered`
 
 ### Remove contacts from groups: `ungroup`
