@@ -32,7 +32,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/elgintzm.png" width="200px">
 
-[[github](http://github.com/ElginTZM)] [[portfolio](team/elgintzm.md)]
+[[github](http://github.com/ElginTZM)]
+[[portfolio](team/elgintzm.md)]
 
 * Role: Developer
 * Responsibilities: Testing
