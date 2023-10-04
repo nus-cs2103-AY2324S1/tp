@@ -257,33 +257,39 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* NUS fresh graduates who are looking for jobs 
+* Has a need to manage a significant number of job applications 
+* Prefers desktop apps over other types 
+* Able to type fast 
+* Prefers typing to mouse interactions
+* Reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+
+**Value proposition**: Manage job applications faster than a typical mouse/GUI-driven app.
+
 
 
 ### User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …                                    | I want to …                     | So that I can…                        |
+|--------| ---------------------------------------- | ------------------------------ | -------------------------------------- |
+| `***`  | user                                     | add applications I have applied to, including their names and contact information | keep track and manage my job applications |
+| `***`  | user                                     | record application deadlines for each job listing | stay organized on application deadlines |
+| `***`  | user                                     | mark the status of each application | keep track of application progress |
+| `***`  | user                                     | delete job applications that are no longer relevant | update my list according to my current interests |
+| `***`  | user                                     | view all applications I have added |                                        |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `JobFindr` and the **Actor** is the `User`, unless specified otherwise)
+
+**System:** JobFindr
+
+**Actor:** User
 
 **Use case: Delete a person**
 
@@ -308,20 +314,41 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+
+**Use case: Set deadline for an application**
+**MSS**
+1. User requests to list applications
+2. System shows a list of applications
+3. User requests to set a deadline for an application, specifying an index and deadline
+4. System adds deadline to the application at the index specified
+Use case ends
+
+**Extensions**
+* 2a. The list is empty. 
+
+  Use case ends.
+
+* 3a. The given index/deadline is invalid. 
+  * 3a1. System shows an error message. 
+  
+  Use case resumes at step 3.
+
+
 *{More to be added}*
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Should work on any mainstream OS as long as it has Java 11 or above installed.
+2. A user with above-average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse. 
+3. The system should respond to the user’s command within two seconds. 
+4. The user interface should be intuitive enough for users who are first-time users. 
+5. The project is expected to adhere to a schedule that delivers a milestone set every two weeks.
 
 *{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
 
 --------------------------------------------------------------------------------------------------------------------
 
