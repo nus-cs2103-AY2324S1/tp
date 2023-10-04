@@ -40,7 +40,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Nicholas Tng
 
 <img src="images/nicholastng010601.png" width="200px">
 
