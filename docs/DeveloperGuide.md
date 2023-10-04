@@ -316,6 +316,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
     Use case resumes at step 2.
 
+**Use case: List Fosterers**
+
+**MSS**
+
+1. User enters the list command as text.
+2. System shows list of fosterers matching query string.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. System cannot parse the command (invalid syntax).
+  * 1a1. System indicates syntax invalidity to the user.
+  * 1a2. User enters a new command as text.
+    
+    Steps 1a1 to 1a2 are repeated until the command is valid.
+    If the new command is still a list command, use case resumes from step 2; otherwise switch use cases.
 
 *{More to be added}*
 
