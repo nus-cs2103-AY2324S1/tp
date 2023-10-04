@@ -18,15 +18,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Deliverables and Deadlines, Code Quality
 
-### Jane Doe
+### Sia Zhi Hong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/h1410101.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/h1410101)]
+[[portfolio](team/h1410101.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Integration
 
 ### Johnny Doe
 
