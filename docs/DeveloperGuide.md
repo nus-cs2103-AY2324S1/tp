@@ -315,6 +315,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  Should retain a majority of the core functionality even without internet access
+5.  Application should not exceed file size of 50MB
+6.  Should respond to user inputs within approximately 2 seconds
+7.  Should show understandable messages to users and not crash under recoverable errors
+8.  Application should have an intuitive and user-friendly interface, following design principles
+9.  Should provide clear and comprehensive user documentation to assist users in using the application effectively
+10. Should maintain technical documentation for developers, detailing the software architecture
 
 *{More to be added}*
 
