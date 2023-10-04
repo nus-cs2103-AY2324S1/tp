@@ -86,12 +86,6 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-### Listing all persons : `list`
-
-Shows a list of all persons in the address book.
-
-Format: `list`
-
 ### Editing a person : `edit`
 
 Edits an existing person in the address book.
@@ -109,23 +103,36 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Listing fosterers: `list`
 
-Finds persons whose names contain any of the given keywords.
+Lists fosterers that match a particular description or search, or all fosterers if the search is blank.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `list *KEYWORDS`
+Alias: `find`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* The keywords are case-insensitive.
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
+* All fields are searched (including tags).
+* Keywords can match as parts of words. e.g. `john` will match `Johnny`.
+* Keywords can overlap. e.g. `samm my` will match `Sammy`
+* Fosters must match all keywords (i.e. `AND` search).
+  e.g. `Hans Bo` will return `Hansbo Grahm`, but not `Hans Duo`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `list` lists all fosterers in the address book
+* `list john doe` matches "John Doe", "Doe John", "Johnny Doe", and "Mary" who lives on "John Doe Street"
+* `list john john doe` is redundant and gives the same result as `list john doe`
+
+Expected output (success):
+```agsl
+Fosterers matching query are listed.
+```
+UI also updates with a list of fosterers matching the query.
+
+Expected output (fail):
+```agsl
+Oops! Invalid search expression, please check again.
+```
 
 ### Deleting a fosterer : `delete`
 
