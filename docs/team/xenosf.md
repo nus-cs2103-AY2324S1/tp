@@ -1,11 +1,11 @@
 ---
 layout: page
-title: Xenos's Project Portfolio Page
+title: Xenos' Project Portfolio Page
 ---
 
 ### Project: AddressBook Level 3
 
-NetworkBook is a desktop contact book application tha aims to help computing students and professionals from NUS to network with each other. The user interacts with it using a command-line-interface (CLI), and it has a graphical user interface (GUI) created with JavaFX.
+NetworkBook is a desktop contact book application that aims to help computing students and professionals from NUS network with each other. The user can interact with the application using a command-line-interface (CLI), as well as a graphical user interface (GUI) created with JavaFX.
 
 Given below are my contributions to the project.
 
