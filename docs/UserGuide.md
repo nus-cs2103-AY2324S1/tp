@@ -5,11 +5,36 @@ and enjoyable tool to enhance their dating experiences. Featuring user profile m
 compatibility ranking, and customizable filtering options, LoveBook enhances the efficiency and effectiveness of your
 online dating journey.
 
-## Wireframes
+--------------------------------------------------------------------------------------------------------------------
+
+# Wireframes
 
 ![Figma](/docs/images/user-guide/Figma.png)
 
-## Features
+# 1 Quick start (Ryann)
+
+1. Ensure that you have Java `11` or above installed in your Computer.
+
+2. Download the latest `LoveBook.jar` from [here](https://github.com/AY2324S1-CS2103T-F10-2/tp).
+
+3. Double-click the file to start the app. The window that appears will be similar to the below should appear in a few seconds. Note how
+   the app contains some sample information.<br>
+   ![Ui](images/Ui.png)
+   *Figure 1: A view of LoveBook at startup*
+
+4. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing `Enter` to
+   open the help window.<br>
+   Some commands you can try:
+
+    * `list 1` : Lists all dtes and their associated details
+
+    * `exit` : Exits the app
+
+5. Refer to the features below for details of each command.
+
+--------------------------------------------------------------------------------------------------------------------
+
+# 2 Features
 
 ### Listing current dates : `list`
 
@@ -114,3 +139,106 @@ Expected output: `Preferences have been updated!`
 
 Output if error:
 `Please follow the required format to add a new date (setPreference /gender M /age -3 height/ -20 income/ 2000)`
+
+--------------------------------------------------------------------------------------------------------------------
+
+## 3 Use Cases
+
+BOB
+
+# Non-Functional Requirements (Ryann)
+
+### Usability and Accessibility:
+The application should provide clear and user-friendly CLI prompts and menus.
+It should support keyboard shortcuts for navigation to enhance accessibility.
+
+### Scalability:
+The address book should be capable of storing at least 10,000 contacts without a significant decrease in performance.
+
+### Reliability and Availability:
+The application should have a 99.9% uptime, ensuring that users can access their contacts reliably.
+It should automatically back up address book data daily to prevent data loss.
+
+### Portability:
+The CLI application should be compatible with multiple operating systems, including Windows, macOS, and Linux.
+
+--------------------------------------------------------------------------------------------------------------------
+
+# 3 FAQ (Ryann)
+
+**Q**: How do I transfer my data to another Computer?<br>
+**A**: Install the app in the other computer and overwrite the empty data file with the file that
+contains the data of your previous LoveBook home folder.
+
+**Q**: Is my data stored in the cloud? Will I be open to data breaches?<br>
+**A**: No, all your data is stored locally, no need to fear a potential data hack.
+
+**Q**: Do I have to save before exiting the application for my data to safely backed up on my computer? <br>
+**A**: All your data is saved on your computer as soon as you enter in the command. There is no need to manually save
+your data. In the event of a power outage, all your data will be safe.
+
+**Q**: Where do I go if I have issues with LoveBook? <br>
+**A**: You may leave your issues [here](https://github.com/AY2324S1-CS2103T-F10-2/tp/issues).
+
+--------------------------------------------------------------------------------------------------------------------
+
+# 4 Summary
+
+Action | Format, Examples | Scope: | `PROJECT_LIST` | `PERSON_LIST` | `PROJECT` | `PERSON` | `TASK` | `TEAMMATE`
+--------|------------------|-------|---------------|---------------|-------------|--------|--------|------------
+
+[//]: # (**Gets Help** | `help` |                                                                                                                                                                                                                                                          | √ | √ | √ | √ | √ | √)
+
+[//]: # (**Exits application** | `exit` |                                                                                                                                                                                                                                                  | √ | √ | √ | √ | √ | √)
+
+[//]: # (**Leaves a view** | `leave` |                                                                                                                                                                                                                                                     | √ | √ | √ | √ | √ | √)
+
+[//]: # (**Shows all projects** | `listprojects` |                                                                                                                                                                                                                                         | √ | √ | √ |   | √ | √)
+
+[//]: # (**Shows all persons** | `listpersons` |                                                                                                                                                                                                                                           | √ | √ |   | √ |   |)
+
+[//]: # (**Starts a project** | `startproject INDEX`<br> e.g., `startproject 3` |                                                                                                                                                                                                          | √ |   | √ |   |   |)
+
+[//]: # (**Starts a person** | `startperson INDEX`<br> e.g., `startperson 3` |                                                                                                                                                                                                             |   | √ |   | √ |   |)
+
+[//]: # (**Adds project** | `add n/PROJECT_NAME dl/DEADLINE ru/REPO_URL d/PROJECT_DESCRIPTION [tg/TAGS]... `   eg, `add n/Blair project dl/29-02-2020 00:00:00 ru/http://github.com/a/b.git d/Coding in Greenwich tg/challenging` |                                                        | √ |   | √ |   | √ | √)
+
+[//]: # (**Deletes project** | `delete INDEX` <br> e.g. `delete 2` |                                                                                                                                                                                                                       | √ |   | √ |   | √ | √)
+
+[//]: # (**Finds KEYWORD** | `find KEYWORD` <br> e.g. `find read` |                                                                                                                                                                                                                        | √ |   | √ |   | √ | √)
+
+[//]: # (**Edits Project** | `edit [n/PROJECT NAME] [dl/DEADLINE] [ru/REPO URL] [d/PROJECT DESCRIPTION] [tg/TAGS...] ` eg, `edit n/Resident Evil project d/ new horror`|                                                                                                                   | √ |   | √ |   | √ | √)
+
+[//]: # (**Adds Task** | `addtask tn/TASK_NAME td/TASK_DEADLINE [tp/TASK_PROGRESS] [d/TASK DESCRIPTION]` eg, `addtask tn/Do User Guide tp/30 td/29-02-2020 00:00:00` |                                                                                                                                             |   |   | √ |   | √ | √)
+
+[//]: # (**Assigns A Task To A Teammate** | `assign INDEX NAME` <br> e.g. `assign 1 Niaaz` |                                                                                                                                                                                               |   |   | √ |   | √ | √)
+
+[//]: # (**Edits task details** | `edittask INDEX [tn/TASK_NAME] [tp/TASK_PROGRESS] [td/TASK_DEADLINE] [d/TASK DESCRIPTION]` eg, `edittask 3 tn/Finish project` |                                                                                                                                   |   |   | √ |   | √ | √)
+
+[//]: # (**Deletes a task** | `deletetask INDEX` <br>e.g. `deletetask 1` |                                                                                                                                                                                                                 |   |   | √ |   | √ | √)
+
+[//]: # (**Filters tasks** | <code>filter &#40;ta/ASSIGNEE_GITHUB_USERNAME&#41;&#124;&#124;&#40;tn/KEYWORD [MORE_KEYWORDS]...&#41;&#124;&#124;&#40;td/DEADLINE&#41;&#124;&#124;&#40;start/START_DATE end/END_DATE&#41;&#124;&#124;&#40;tp/TASK_PROGRESS&#41;&#124;&#124;&#40;done/DONE_STATUS&#41;</code> <br>e.g. `filter tn/CS2103T` |   |   |   | √ |   | √ | √)
+
+[//]: # (**Shows all the tasks** | `alltasks` |                                                                                                                                                                                                                                            |   |   | √ |   | √ | √)
+
+[//]: # (**Sorts tasks** | <code>sort &#40;sa/&#41;&#124;&#124;&#40;sd/&#41; &#40;td/&#41;&#124;&#124;&#40;tp/&#41;&#124;&#124;&#40;tn/&#41;&#124;&#124;&#40;done/&#41;</code> <br>e.g. `sort sa/ td/` |                                                                                                                                   |   |   | √ |   | √ | √)
+
+[//]: # (**Views Details of A Task** | `viewtask INDEX` <br> e.g. `viewtask 1` |                                                                                                                                                                                                           |   |   | √ |   | √ | √)
+
+[//]: # (**Creates a new person** | `addperson mn/TEAMMATE_NAME mg/GITHUB_USERNAME mp/PHONE_NUMBER me/EMAIL ma/ADDRESS` e.g. `addperson mn/Lucas mg/LucasTai98 mp/93824823 me/lucas@gmail.com ma/18 Evelyn Road` |                                                                         | √ | √ | √ | √ | √ | √)
+
+[//]: # (**Adds a teammate to a project** | `addtoproject GITHUB_USERNAME` e.g. `addtoproject LucasTai98` |                                                                                                                                                                                |   |   | √ |   | √ | √)
+
+[//]: # (**Removes a teammate from a project** | `deletefromproject GITHUB_USERNAME` e.g. `deletefromproject LucasTai98` |                                                                                                                                                                 |   |   | √ |   | √ | √)
+
+[//]: # (**Edits teammate details** | `editteammate GITHUB_USERNAME [mn/TEAMMATE_NAME] [mp/PHONE_NUMBER] [me/EMAIL] [ma/ADDRESS]` e.g. `editteammate Lucas98 tn/GeNiaaz ta/5 Hacker Way`|                                                                                                  |   |   | √ |   | √ | √)
+
+[//]: # (**Views a teammate’s details** | `viewteammate GITHUB_USERNAME` e.g. `viewteammate Lucas98`|                                                                                                                                                                                      |   |   | √ |   | √ | √)
+
+[//]: # (**Deletes a teammate** | `deleteperson GITHUB_USERNAME` e.g. `deleteperson Lucas98` |)
+
+--------------------------------------------------------------------------------------------------------------------
+
+# 5 Glossary
+
+### Mainstream OS: Windows, Linux, Unix, OS-X.
