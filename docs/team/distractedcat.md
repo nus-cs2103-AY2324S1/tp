@@ -26,10 +26,21 @@ AddressBook - Level 3 is a desktop address book application used for teaching So
 
 * **Contributions to Developer Guide**:
     * Wrote the first 14 use cases.
+        * Includes (but not limited to):
+          1. CRUD operations for persons
+          2. CRUD operations for events
+          3. Use cases for calendar
+          
     * Added Non-Functional requirements for the project
-
-* **Contributions to team-based tasks**:
-    * To be added soon
-
+        * Includes:
+          1. Expected efficiency for events
+          2. Expected efficiency for storage
+            
 * **Community**:
-    * To be added soon
+  * PRs reviewed (with non-trivial review comments): *{To be added}*
+  * Contributed to forum discussions: *{To be added}*
+  * Reported bugs and suggestions for other teams in the class: *{To be added}*
+  * Some parts of the history feature I added was adopted by several other class mates: *{To be added}*
+
+* **Tools**:
+  * *{To be added}*
