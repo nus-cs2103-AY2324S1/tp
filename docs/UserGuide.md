@@ -171,6 +171,30 @@ Adds a schedule to a specified tutor.
 * `Wrong input: s/`: The start time entered is not in datetime format.
 * `Wrong input: e/`: The end time entered is not in datetime format..
 
+### Deleting a tutor: `delete-t`
+
+Deletes a tutor in the address book based on their index number in the table.
+
+![delete tutor](images/deleteTutor.png)
+
+**Format**: `delete-t TUTOR_INDEX`
+
+**Examples**:
+* `delete-t 5` deletes the tutor that is indexed as 5 in the address book.
+* `list` followed by `delete-t 2` deletes the 2nd person in the address book.
+
+**Acceptable values for each parameter**:
+* `TUTOR_INDEX`: Only accepts numerical value
+
+**Expected output**:
+* `Tutor has been deleted: Alex Yeoh; Phone: 87438807; 
+  Email: alexyeoh@example.com; Address: Blk 30 Geylang Street 29, #06-40`
+
+**Error messages**:
+* `Index number given is out of range`: Given index is out of range.
+* `Invalid parameter given`: Parameter given is not a numerical value.
+
+
 
 
 _Details coming soon ..._
@@ -197,7 +221,7 @@ _Details coming soon ..._
 | **Add Tutor**    | `add-t n/NAME p/PHONE NUMBER e/EMAIL` <br> e.g., `add-t n/John Doe p/98765432 e/johnd@example.com`                          |
 | **Add Schedule** | `add-s ti/TUTOR_INDEX s/START_TIME e/END_TIME` <br> e.g., `add-s ti/1 s/2023-09-15T09:00:00 e/2023-09-15T11:00:00`          |
 | **Clear**        | `clear`                                                                                                                     |
-| **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                         |
+| **Delete Tutor** | `delete-t TUTOR_INDEX`<br> e.g., `delete-t 3`                                                                               |
 | **Edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` |
 | **Find**         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                  |
 | **List**         | `list`                                                                                                                      |
