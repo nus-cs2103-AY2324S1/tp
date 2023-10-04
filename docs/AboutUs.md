@@ -48,12 +48,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Song Mengfei
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/song-mengfei.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/Song-Mengfei)]
+[[portfolio](team/song-mengfei.md)]
 
 * Role: Developer
 * Responsibilities: UI
