@@ -415,6 +415,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. The user is done using the program and wants to exit the program.
 
+   Use case ends.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
