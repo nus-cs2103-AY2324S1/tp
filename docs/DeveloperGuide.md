@@ -284,7 +284,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `ConText` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Add a contact**
+**Use case: UC01 - Add a contact**
 
 **MSS**
 
@@ -295,20 +295,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The given data is invalid.
+* 1a. The given data is invalid.
 
-  * 2a1. ConText shows an error message.
+  * 1a1. ConText shows an error message.
 
     Use case resumes at step 1.
 
-**Use case: Delete a contact**
+**Use case: UC02 - Delete a contact**
 
 **MSS**
 
-1.  User requests to list contacts
-2.  ConText shows a list of contacts
-3.  User requests to delete a specific contact in the list
-4.  ConText deletes the contact
+1.  User requests to view the list of contacts (UC03)
+2.  User requests to delete a specific contact in the list
+3.  ConText deletes the contact
 
     Use case ends.
 
@@ -322,14 +321,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 3a1. ConText shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 3.
 
-**Use case: List all contacts**
+**Use case: UC03 - List all contacts**
 
 **MSS**
 
 1. User requests to list contacts
 2. ConText shows a list of contacts
+
+**Extensions**
+
+* 2a. The list is empty.
 
     Use case ends
 
