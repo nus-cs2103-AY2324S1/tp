@@ -282,51 +282,124 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​                          | I want to …​                                                                                                                        | So that I can…​                                                 |
+|----------|----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------|
+| `* * *`  | user                             | add new contacts with basic contact information                                                                                     | keep track of the people I know.                                |
+| `* * *`  | user                             | add alternative contact information such as telegram, email and linkedin, which are preferred communication channels of my contacts | stay better connected to them                                   |
+| `* * *`  | user                             | delete contacts                                                                                                                     | reduce clutter and keep my contact list organised.              |
+| `* * *`  | forgetful user                   | upload photos for my contacts                                                                                                       | visually remember them.                                         |
+| `* * *`  | user                             | update photos for my contacts                                                                                                       | visually recognize them.                                        |
+| `* * *`  | forgetful user                   | add the birthday of my contact                                                                                                      | keep track and remember my contacts’ birthdays.                 |
+| `* * *`  | forgetful user                   | receive a notification when it is my contact’s actual birthday                                                                      | remember to celebrate his/her birthday.                         |
+| `* * *`  | user                             | opt out of receiving notifications                                                                                                  | keep myself from being distracted by the notifications.         |
+| `* * *`  | user                             | search through my contacts based on their respective contact information                                                            | quickly access the information required.                        |
+| `* * *`  | user                             | search my contacts by name                                                                                                          | quickly find a person without scrolling through my entire list. |
+| `* * *`  | user                             | search my contacts by phone number                                                                                                  | identify who is calling me from an unfamiliar number.           |
+| `* * *`  | international in-campus resident | add Singapore’s emergency contact details                                                                                           | access them quickly in urgent situations.                       |
+| `* * *`  | in-campus resident               | add campus specific information to my contacts, in particular, a tag called RA (Residential Assistant) and SO (Security Officer)    | quickly reach out to them when required.                        |
+| `* * *`  | on-campus student                | quickly list the emergency contacts I have previously registered                                                                    | contact them in an emergency.                                   |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `CampusConnect` and the **Actor** is a `NUS student who stays in campus`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC1- Opt out notifications**
 
 **MSS**
-
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
-
-    Use case ends.
+1. User requests to opt out from receiving notifications.
+2. System requests for confirmation.
+3. User confirms.
+4. System opts out the user from receiving notifications. <br>
+Use case ends. 
 
 **Extensions**
+   * 1a. System detects an error in data entered.
+     * 1a1. System shows the correct format for request.
+     * 1a2. User enters a new opt out request. 
+     
+     Steps 1a1-1a2 are repeated until the data entered are correct. <br> 
+     Use case resumes from step 4.
 
-* 2a. The list is empty.
+**Use case: UC2 - List contacts**
 
-  Use case ends.
+**MSS**
+1. User requests list all contacts.
+2. System shows a list of all contacts. <br>
+Use case ends.
 
-* 3a. The given index is invalid.
+**Use case: UC3 - Delete emergency contact**
 
-    * 3a1. AddressBook shows an error message.
+**MSS**
+1. User <ins>lists all contacts (UC2).</ins>
+2. User enters an index to delete contact as an emergency contact.
+3. System deletes contact from the emergency contact list. <br> 
+Use case ends.
 
-      Use case resumes at step 2.
+**Extensions**
+* 1a. System shows an empty contact list. 
+Use case ends.
+* 2a. System detects an invalid index entered.
+  * 2a1. System shows an error message.
+  * 2a2. User enters a new delete request. <br> 
+  Steps 2a1- 2a2 are repeated until the data entered are correct. <br> 
+  Use case resumes from step 3.
+
+**Use case: UC4 - Delete contact**
+
+**MSS**
+1. User <ins>lists all contacts (UC2).</ins>
+2. User enters an index to delete a contact from the system.
+3. System deletes contact inside its system. <br>
+Use case ends.
+
+**Extensions**
+* 1a. System shows an empty contact list. 
+Use case ends.
+* 2a. System detects an invalid index entered.
+  * 2a1. System shows an error message.
+  * 2a2. User enters a new delete request. <br>
+  Steps 2a1- 2a2 are repeated until the data entered are correct. <br> 
+  Use case resumes from step 3.
+
+**Use Case UC5: Add emergency contact**
+
+**MSS**
+1. User <ins>lists all contacts (UC2).</ins>
+2. User adds a contact to the emergency contact list.
+3. System adds the contact into the emergency contact list. <br>
+Use case ends.
+
+**Extensions**
+* 1a. System detects that the tag given to the contact is invalid.
+  * 1a1. System shows the valid tags for input.
+  * 1a2. User enters a new add emergency contact request. <br>
+  Steps 1a1- 1a2 are repeated until the data entered are correct. <br>
+  Use case resumes from step 3.
+* 1b. System detects an invalid index entered.
+  * 1b1. System shows an error message.
+  * 1b2. User enters a new delete request. <br>
+  Steps 1b1- 1b2 are repeated until the data entered are correct. <br>
+  Use case resumes from step 3.
+
 
 *{More to be added}*
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Should work on any mainstream OS as long as it has Java 11 or above installed. 
+2. Able to hold up to 1000 contacts without a compromise in performance. 
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse. 
+4. Should respond within 1 second for any command the user inputs 
+5. Should be easy to use and navigate for the users. 
+6. Should be able to accommodate growth and expansion. It should be easy to add new features and functionalities as needed. 
+7. Should be easy to maintain and update through a clear and well-documented architecture, and it should be easy to troubleshoot and fix problems should they arise. 
+8. Data stored should be persistent until removal by the user, and all contact details should be secure. 
+9. The code should be well-organised and well-documented to ensure ease of maintenance and debugging. 
+10. Should provide clear and easily accessible help and documentation, including FAQs and tutorials, to assist the user in using the platform effectively. 
+11. Should be designed to prevent errors and provide clear, actionable error messages if errors occur, so that users can correct any issues.
+
 
 *{More to be added}*
 
