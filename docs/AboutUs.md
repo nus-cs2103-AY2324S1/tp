@@ -19,15 +19,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Shu Yang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/shuyang.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/shuyangk)]
+[[portfolio](team/shuyangk.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Developer
+* Responsibilities: Documentation
 
 ### Johnny Doe
 
