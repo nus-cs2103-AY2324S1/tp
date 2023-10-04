@@ -47,12 +47,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Code Quality
 
-### James Doe
+### Quek Zong Jin
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/zjinnnn.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/Zjinnnn)]
+[[portfolio](team/zjinnnn.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Deliverables and Deadlines
