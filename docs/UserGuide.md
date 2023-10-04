@@ -77,9 +77,14 @@ Format: `help`
 
 ### Adding a person: `add`
 
-Adds a person to the address book.
+This feature in Class Manager 2023 is a robust tool that empowers CS2103T TAs to add new student information according
+to the specified parameters (FIRST NAME, LAST NAME, SCHOOL EMAIL, CLASS NUMBER, and STUDENT NUMBER, TAG[Optional]).
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add f/{FIRST NAME} l/{LAST NAME} e/{EMAIL} c/{CLASS NUMBER} s/{STUDENT NUMBER} [t/{TAG}]…​`
+
+* **ALL** the fields must be provided.
+* The FIRST NAME and LAST NAME fields are case-sensitive.
+* SCHOOL EMAIL and STUDENT NUMBER needs to be unique
 
 <box type="tip" seamless>
 
@@ -87,8 +92,8 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 </box>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add f/ Ngee Yong l/ Lim e/ e0930481@u.nus.edu c/ 11 s/ A0249112A t/Best Student t/Possible TA`
+* `add f/ Boh Shin l/ Yeo e/ e09301234@u.nus.edu c/ 5 s/ A0126362A`
 
 ### Listing all persons : `list`
 
