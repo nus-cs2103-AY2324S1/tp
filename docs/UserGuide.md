@@ -113,26 +113,23 @@ Oops! There seems to be an error, please check the format of your command again.
 
 Edits the details of a fosterer stored in the address book.
 
-**Format** 1: `edit INDEX`
+**Format**: `edit INDEX`
+Alias: `view`
 
 **Parameter**: `INDEX`
 
-* Index of a fosterer to be edited is shown in the list obtained by  the find/list command.
-
-**Format** 2: (In the fosterer profile view) `edit`
+* Index of a fosterer to be edited is shown in the list obtained by the find/list command.
 
 **Examples**:
-*  `list` followed by `edit 3` generates the edit-window for the 3rd fosterer in the address book
-*  `list` followed by `view 3` followed by `edit` allows making changes from the fosterer profile view. 
+*  `list` followed by `edit 3` or `view 3` generates the edit-window for the 3rd fosterer in the address book.
 
 **How to Edit**:
 1. Type in `list` command to see the list of fosterers in the address book.
-2. Type `view INDEX` to enter the profile page of the fosterer with the corresponding `INDEX` from the `list` command. 
-3. Type `edit` to edit the fosterer's details (alternatively, you can skip step 2 by typing `edit INDEX` command.)
-4. Type in the command line to search the list of fields, and press enter to edit the first match. This creates a text field around the detail corresponding to the chosen field.
-5. Edit the content of the detail and press enter. 
-6. Repeat step 4-5 until you made all your edits. 
-7. While the command line is empty, press enter to save all applied changes to all fields, or the esc key to revert them to before the edit command. Both will send you back to the home window.
+2. Type `edit INDEX` to edit the details of the fosterer with the corresponding INDEX in the list. 
+3. Type in the command line to search the list of fields, and press enter to edit the first match. This creates a text field around the detail corresponding to the chosen field.
+4. Edit the content of the detail and press enter to confirm the changes, or the esc key to cancel them. 
+5. Repeat step 4-5 until you made all your edits. 
+6. While the command line is empty, press enter to save all applied changes to all fields, or the esc key to revert them to before the edit command. Both will send you back to the home window.
 
 **Expected Output (success)**:
 ```
