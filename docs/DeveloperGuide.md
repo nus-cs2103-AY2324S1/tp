@@ -362,13 +362,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: UC06 List all interviewees for a job role**
+**Use case: UC06 List all applicants for a job role**
 
 **MSS**
 
 1. Hiring manager <u> views the list of all job roles (UC05) </u>
-2. Hiring manager requests to view all interviewees for a specific job role.
-3. InterviewHub displays all the interviewees for the specific job role.
+2. Hiring manager requests to view all applicants for a specific job role.
+3. InterviewHub displays all the applicants for the specific job role.
 
     Use case ends.
 
@@ -395,12 +395,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case resumes at step 2.
 
 
-**Use case: UC08 Add an interviewee**
+**Use case: UC08 Add an applicant**
 
 **MSS**
 
-1. Hiring manager requests to add an interviewee.
-2. InterviewHub adds the interviewee.
+1. Hiring manager requests to add an applicant.
+2. InterviewHub adds the applicant.
 
    Use case ends.
 
@@ -410,12 +410,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 1.
 
-**Use case: UC09 List all interviewees**
+**Use case: UC09 List all applicants**
 
 **MSS**
 
-1. Hiring manager requests to list all interviewees.
-2. InterviewHub displays all scheduled interviewees.
+1. Hiring manager requests to list all applicants.
+2. InterviewHub displays all scheduled applicants.
 
    Use case ends.
 
@@ -425,13 +425,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC010 Delete an Interviewee**
+**Use case: UC010 Delete an applicant**
 
 **MSS**
 
-1. Hiring manager <u> views the list of all interviewees (UC09) </u>
-2. Hiring manager requests to delete a specific interviewee
-3. InterviewHub deletes the specified interviewee
+1. Hiring manager <u> views the list of all applicants (UC09) </u>
+2. Hiring manager requests to delete a specific applicant
+3. InterviewHub deletes the specified applicant
 
    Use case ends.
 
@@ -447,7 +447,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to handle as many interviewees as the user is able to manage in their workday/workweek.
+2.  Should be able to handle as many applicants as the user is able to manage in their workday/workweek.
 3.  The app should be reasonably responsive to the entire set of user requests(i.e. within 1 second at maximum load).
 4.  The system should have an interface that is very easy to pick up for our target audience(i.e. Engineering Managers 
 that have many years of programming experience).
@@ -458,6 +458,13 @@ that have many years of programming experience).
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Applicant**: The person applying to a particular job role.
+* **Hiring manager**: The manager interviewing the applicant. 
+This manager is familiar with the technical aspects of the role. Also called engineering manager.
+* **MSS**: Main Success Scenario. It describes the most straightforward 
+interaction in a use case where nothing goes wrong.
+* **Extensions**: In a use case, an extension describes an alternative flow of events 
+that are different from the MSS.
 
 --------------------------------------------------------------------------------------------------------------------
 
