@@ -139,16 +139,16 @@ Displays a list of all tutors in the address book in a table format.
 **Example**:
 * `list-t`
 
-**Acceptable values for each parameter:**
+**Acceptable values for each parameter**:
 * No acceptable values as list-t has no parameters
 
-**Expected Output:**
+**Expected Output**:
 * Displays a table of tutors with columns for Name, Phone Number, and Email like 
   the [image](#listing-all-tutors--list-t) above
 * If there are no tutors in the address book, displays a message telling the user
   to add a tutor with add-t: `There are no tutors in the address book. Please use /add-t to add a tutor.`
 
-**Error messages:**
+**Error messages**:
 * No error messages as this command ignores extra parameters.
 
 ### Adding a schedule: `add-s`
