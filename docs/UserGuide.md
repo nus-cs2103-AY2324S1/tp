@@ -9,7 +9,7 @@ NetworkBook is a **desktop contact book application**. You can use it to network
 
 ### <u>Category 1 - Add contact information</u>
 
-### Create new contact: `create /name [name] [/optional fields]`
+### Create new contact: `create /name [/optional fields]`
 
 You can use the create command to create a new contact. When creating a contact, you must provide the name field, and it's optional to provide other fields which will be added to the new contact.
 
@@ -292,7 +292,7 @@ When the command fails:
 
 ### <u>Category 3 - Find contacts</u>
 
-### Search: `search [/field]`
+### Search: `search /name`
 
 You can use the `search` command to search for contacts by their name if you wish to quickly reference a particular contact’s details.
 
@@ -305,22 +305,24 @@ Example usage:
 Parameters:
 * `[name]` is the name of the contact, or a part of it
 
-Expected output when the command succeeds:
-* `Here’s a list of contacts with names including your search term:
-  [list of relevant contacts]`
+When the command succeeds:
+* `search /name Jack`
+
+`Here is the list of contacts with the name "Jack": [list of relevant contacts]`
 
 ![search success](images/find/search-success.png)
 
-Expected output when the command fails:
-* if missing search term:
+When the command fails:
+* `search /name`:
+
 `Oops, it seems you did not include a search term.`
 
 
 
 ## Command summary
 
-| Category | Format, Examples |
-|----------|------------------|
-| **Add**  | `add /email [email] /index [index]` <br> e.g., `add /email test@example.com /index 2`<br><br>`add /link [link] [note] /index [index]`<br>e.g., `add /link https://nknguyenhc.github.io/ website /index 1`<br><br>`add /priority [priority level] /index [index]`<br>e.g., `add /priority high /index 1`<br><br>`add /tag [tag name] /index [index]`<br>e.g., `add /index 1 /tag data analytics` |
-| **Edit** | `update /[parameter name] [new parameter value] /index [index]`<br> e.g.,`update /name nkn /index 1`<br><br>`delete [index]`<br>e.g., `delete 1`  |
-| **Find** |     |  
+| Category | Format, Examples                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**  | `create /name [name] [/phone /email /link /grad /course /spec /priority /tag]` <br> e.g., `create /name Oreki /phone +6598765432 /grad AY2526-S2`<br><br>`add /phone [phone] /index [index]` <br> e.g., `add /phone +6591234567 /index 1`<br><br>`add /email [email] /index [index]` <br> e.g., `add /email test@example.com /index 2`<br><br>`add /link [link] [note] /index [index]`<br>e.g., `add /link https://nknguyenhc.github.io/ website /index 1`<br><br>`add /priority [priority level] /index [index]`<br>e.g., `add /priority high /index 1`<br><br>`add /tag [tag name] /index [index]`<br>e.g., `add /index 1 /tag data analytics` |
+| **Edit** | `update /[parameter name] [new parameter value] /index [index]`<br> e.g.,`update /name nkn /index 1`<br><br>`delete [index]`<br>e.g., `delete 1`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| **Find** | `search /name [name]` <br> e.g., `search /name Kai Jie`<br><br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |  
