@@ -23,15 +23,15 @@ On top of these functionalities, we believe that tuition centre management must 
 
 <div markdown="block" class="alert alert-success">
 
-**:information_source: Tip**<br>
+**:bulb: Tip**<br>
 
 `Tips` are used to provide helpful advice, suggestions, or best practices to enhance your experience by making a task easier or more efficient.
 
 </div>
 
-<div markdown="block" class="alert alert-danger">
+<div markdown="block" class="alert alert-warning">
 
-**:information_source: Warning**<br>
+**:warning: Warning**<br>
 
 `Warnings` are used to alert you about potential issues, errors, or risks associated with a task or action. They are essential for preventing mistakes and ensuring safety.
 
