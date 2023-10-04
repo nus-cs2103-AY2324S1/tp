@@ -18,6 +18,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Deliverables and Deadlines, Code Quality
 
+### Nanette Tan
+
+<img src="images/nananakx-x.png" width="200px">
+
+[[github](https://github.com/nananakx-x)]
+[[portfolio](team/nananakx-x.md)]
+
+* Role: Testing
+
 ### Sia Zhi Hong
 
 <img src="images/h1410101.png" width="200px">
@@ -26,15 +35,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/h1410101.md)]
 
 * Role: Integration
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
 
 ### Jean Doe
 

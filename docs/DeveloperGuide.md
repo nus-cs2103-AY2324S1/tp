@@ -256,33 +256,96 @@ _{Explain here how the data archiving feature will be implemented}_
 ### Product scope
 
 **Target user profile**:
-* non-profit animal shelters who currently do not have a good logistical workflow to keep track of foster families
-* prefer desktop apps over other types
+* Non-profit animal shelters who currently do not have a good logistical workflow to keep track of foster families
+* Prefer desktop apps over other types
 * can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Prefers typing to mouse interactions
+* Is reasonably comfortable using CLI apps
 
-**Value proposition**: low budget and efficient system that manages animal fosterers
+**Value proposition**: Low budget and efficient system that manages animal fosterers
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                                                              | So that I can…​                                                        |
-| -------- |--------------------------------------------|---------------------------------------------------------------------------|------------------------------------------------------------------------|
-| `* * *`  | administrative staff                       | delete a fosterer from the list when they want to stop fostering with us  | update the list to see the fosterers who are currently in our program  |
-| `* * *`  | administrative staff                       | add each foster family's details efficiently  | allow my colleagues who are conducting home visits to view these information without any inconvenience  |
-| `* * *`  | administrative staff                       | provide details of the fostered animal of concern to the fosterer | ensure that the animal is well taken care by informing the fosterer of existing health conditionsto prepare for |
-| `* * *`  | administrative staff                       | update each foster family’s and animal’s details | keep track of foster family’s most up-to-date information, including updated information of the animal fostered |
-| `* * *`  | administrative staff                       | allocate volunteers to each foster family | keep track of who is in charge of checking the pet’s condition for each foster family and send help if needed |
-| `* * *`  | administrative staff                       | search for a specific animal / fosterer’s detail | find specific fosterers or animals more easily, given only partial information |
-| `* * *`  | administrative staff                       | filter and sort the animals in the database by any criteria | easily view the animals that suit specific fosterer’s accommodation capabilities and prioritise the animals more in need |
+| Priority | As a …                                    | I want to …                                                              | So that I can…                                                        |
+| -------- |-------------------------------------------|--------------------------------------------------------------------------|-----------------------------------------------------------------------|
+| `* * *`  | administrative staff                      | delete a fosterer from the list when they want to stop fostering with us | update the list to see the fosterers who are currently in our program |
+| `* * *`  | administrative staff                      | add each foster family's details efficiently  | allow my colleagues who are conducting home visits to view these information without any inconvenience |
+| `* * *`  | administrative staff                      | provide details of the fostered animal of concern to the fosterer | ensure that the animal is well taken care by informing the fosterer of existing health conditionsto prepare for |
+| `* * *`  | administrative staff                      | update each foster family’s and animal’s details | keep track of foster family’s most up-to-date information, including updated information of the animal fostered |
+| `* * *`  | administrative staff                      | allocate volunteers to each foster family | keep track of who is in charge of checking the pet’s condition for each foster family and send help if needed |
+| `* * *`  | administrative staff                      | search for a specific animal / fosterer’s detail | find specific fosterers or animals more easily, given only partial information |
+| `* * *`  | administrative staff                      | filter and sort the animals in the database by any criteria | easily view the animals that suit specific fosterer’s accommodation capabilities and prioritise the animals more in need |
 
 *{More to be added}*
 
 ### Use cases
 
 (For all use cases below, the **System** is the `FosterFamily` and the **Actor** is the `user`, unless specified otherwise)
+
+**Use case: Adding tags to a fosterer**
+
+**MSS**
+
+1. User (Admin staff) collates information from the fosterer.
+2. Adds a fosterer to the address book with the command format `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS animal/ANIMAL_NAME t/AVAILABILITY t/HOUSING_TYPE t/TYPE_OF_ANIMAL_FOSTERED/WANTED…​`.
+3. System displays confirmation message of the fosterer successfully added.
+4. System displays the updated current list of fosterers.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. System detects an error in the entered command, usually a formatting error.
+    * 2a1. System requests for data to be inputted in the correct format, with the correct format displayed as guidance.
+    * 2a2. User enters new command.
+
+      Steps 2a1 and 2a2 are repeated until the data entered is in the correct format.
+      Use case resumes at step 3.
+
+**Use case: Editing a fosterer**
+
+**Preconditions:** A list of fosterers is currently displayed, obtained from a list/find command.
+
+**MSS**
+
+1. User enters the edit command with the index corresponding to the foster family shown in the list.
+2. System generates a pop-up window with the details of the foster family.
+3. User inputs a new detail onto the corresponding field.
+4. User enters the save edit command.
+5. System updates the target foster family’s details in the database.
+6. System directs the user to the initial Command-Line UI.
+
+   Use case ends.
+
+**Extensions**
+
+* 4a. User did not fill up the compulsory fields: name, address, etc.
+    * 4a1. System indicates missing field error.
+    * 4a2. User fills up the missing compulsory fields.
+    * 4a3. User enters the save edit command.
+
+      Steps 6a1-6a3 are repeated until every compulsory field is filled.
+      Use case resumes at step 5.
+
+**Use case: List**
+
+**MSS**
+
+1. User enters the list command as text.
+2. System shows list of fosterers matching query string.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. System cannot parse the command (invalid syntax).
+    * 1a1. System indicates syntax invalidity to the user.
+    * 1a2. User enters a new command as text.
+
+      Steps 1a1 to 1a2 are repeated until the command is valid.
+      If the new command is still a list command, use case resumes from step 2; otherwise switch use cases.
 
 **Use case: Delete fosterers**
 
@@ -316,23 +379,49 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
     Use case resumes at step 2.
 
-**Use case: List Fosterers**
+**Use case: Help**
 
 **MSS**
 
-1. User enters the list command as text.
-2. System shows list of fosterers matching query string.
+1. User wants to know what a command does and how to use it properly. 
+2. User uses the ‘help’ command followed by the command that the user wants information of.
+3. System displays the command information along with its format and several examples.
+4. User proceeds to use the new command.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
-* 1a. System cannot parse the command (invalid syntax).
-  * 1a1. System indicates syntax invalidity to the user.
-  * 1a2. User enters a new command as text.
-    
-    Steps 1a1 to 1a2 are repeated until the command is valid.
-    If the new command is still a list command, use case resumes from step 2; otherwise switch use cases.
+* 2a. User enters a command that does not exist after the ‘help’ command.
+    * 2a1. System displays an error that the command does not exist.
+    * 2a2. The system then lists the commands that is available to the user.
+    * 2a3. User enters the command with the corrected format.
+
+      Steps 2a1 to 2a3 are repeated until the command executes successfully.
+      Use case resumes at step 3.
+
+**Use case: Reset**
+
+**MSS**
+
+1. User needs to reset the address book for some reason.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The user needs to reset the address book.
+    * 1a1. System displays an error.
+    * 1a2. Pull out the hard drive and throw it away.
+    * 1a3. Replace the hard drive and reinstall our program.
+
+**Use case: Exit**
+
+**MSS**
+
+1. The user is done using the program and wants to exit the program.
+
+   Use case ends.
 
 *{More to be added}*
 
@@ -341,13 +430,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  The system should be usable by a novice admin staff who has never tried out keeping track of fosterers through this new system. 
+5.  The system should respond within two seconds. (i.e. each time a valid command is entered or there is any use action)
+6.  The system should not contain the fosterer's private information in the case that the fosterer did not give consent. 
+7.  The system should be able to contain up to 2000 entries of fosterers’ details. 
+8.  The user interface should be intuitive enough for users who are not IT-savvy. 
+9.  The user guide should be easily understood by target users. (admin staff of animal shelters, assuming they have no relevant technical knowledge)
+10. The system should be able to detect an error in formatting or validity of commands within 2 seconds. 
+11. The system must be able to scale up or down as needed. (in the case where there is a sudden influx of shelter animals, etc.)
+12. The system must comply with all applicable laws and regulations like PDPA. 
+13. The address book system system should be reliable, easy to maintain, and accessible 24/7. (in case urgent visits are required) 
+14. It should be ensured that the data recorded remains accurate and up-to-date. 
+15. The product should be able to run on mainstream OS.
 
 *{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Housing type**: Categorised into HDB, Condo, Landed
+* **Types of animal fostered**: Categorised into solely cats and/or dogs (current.dog/cat or able.dog/cat depends on availability of fosterer)
+* **Current list**: The currently displayed list obtained from a list command or its variants
 
 --------------------------------------------------------------------------------------------------------------------
 
