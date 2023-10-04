@@ -33,7 +33,7 @@ management tasks done faster than traditional GUI apps.
 
    * `list` : Lists all student details.
      
-   * `add f/ John l/ Doe e/ e0123456@u.nus.edu c/ 11 s/ A0123456X` : Adds a student named `John Doe` to the Class Manager.
+   * `add f/John l/Doe e/e0123456@u.nus.edu c/11 s/A0123456X` : Adds a student named `John Doe` to the Class Manager.
 
    * `delete 3` : Deletes the 3rd student detail shown in the current list.
 
@@ -61,7 +61,7 @@ management tasks done faster than traditional GUI apps.
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  e.g. if the command specifies `n/NAME c/CLASS_NUMBER`, `c/CLASS_NUMBER n/NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -71,7 +71,7 @@ management tasks done faster than traditional GUI apps.
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -97,9 +97,9 @@ Examples:
 * `add f/ Ngee Yong l/ Lim e/ e0930481@u.nus.edu c/ 11 s/ A0249112A t/Best Student t/Possible TA`
 * `add f/ Boh Shin l/ Yeo e/ e09301234@u.nus.edu c/ 5 s/ A0126362A`
 
-### Listing all persons : `list`
+### Listing all student details : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all student details in the class manager.
 
 Format: `list`
 
@@ -132,23 +132,35 @@ Examples:
 * `tag A1234567N t/smart t/shy t/funny` tags the specified student with the smart, shy and funny.
 * `tag A1234567N t/` clear the tags from the specified student.
 
-### Locating persons by name: `find`
+### Lookup students: `lookup`
 
-Finds persons whose names contain any of the given keywords.
+**TL;DR:** Lookup student details containing any of the given fields.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+This feature in Class Manager 2023 is a robust tool that empowers CS2103T TAs to 
+efficiently search for and access student information based on specific criteria. 
+This feature offers both broad and granular search capabilities, enabling TAs to
+list all students from a particular class or narrow down their search by providing
+one or more lookup parameters.
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
+Format: `lookup [c/CLASS_NUMBER}] [l/LAST_NAME] [e/EMAIL] [s/STUDENT_NUMBER] [t/TAG]`
+
+<box type="warning" seamless>
+
+**Caution:**
+_At least one_ of the optional fields must be provided. `lookup` alone is not allowed.
+</box>
+
+* The command is case-insensitive. e.g `hans` will match `Hans`
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* This command can only take one word per field. e.g. `lookup c/11 12` is _**not** allowed_.
+  * Taking multiple words per field _coming soon_ in future versions.
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+* `lookup l/li` returns `Alex Li`, `David Li`<br>
+  ![result for 'lookup l/ li'](images/lookupLastNameResult.png) </br></br>
+* `lookup c/111` return all students in class number 111<br>
+  ![result for 'lookup c/ 111'](images/lookupClassResult.png)
 
 ### Deleting a person : `delete`
 
@@ -229,7 +241,7 @@ Action     | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Tag**    | `tag STUDENT NUMBER [t/TAG]…​` <br> e.g `tag A0123456N t/smart t/shy`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Lookup** | `lookup [c/CLASS_NUMBER}] [l/LAST_NAME] [e/EMAIL] [s/STUDENT_NUMBER] [t/TAG]` <br> e.g `lookup c/111`
 **List**   | `list`
 **Help**   | `help`
 **Load**   | `load f/FILE_NAME`
