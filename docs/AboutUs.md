@@ -50,7 +50,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Quek Zong Jin
 
-<img src="images/zjinnnn.png.png" width="200px">
+<img src="images/zjinnnn.png" width="200px">
 
 [[github](http://github.com/Zjinnnn)]
 [[portfolio](team/zjinnnn.md)]
