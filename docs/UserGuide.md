@@ -191,7 +191,7 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 
 Load student information from an existing JSON file. Copy the JSON file to be loaded into the data folder. The data in the JSON file will be loaded into the app. The file also becomes the new default save file.
 
-Format: `load f/ {file name}`
+Format: `load f/FILE_NAME`
 * File name does not need to include .json extension.
 * File name is case-insensitive
 

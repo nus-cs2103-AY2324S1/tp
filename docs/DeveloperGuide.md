@@ -440,9 +440,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Student Number**: Matriculation number of NUS student
-* **Email**: NUS email account (...@u.nus.edu)
+* **Email**: NUS email address (eXXXXXXX@u.nus.edu)
 * **CLI**: Command Line Interface
-* **GUI** Graphic User Interface
+* **GUI**: Graphical User Interface
 
 --------------------------------------------------------------------------------------------------------------------
 
