@@ -8,6 +8,8 @@
 
 Text-friendly project management tool that helps students schedule meetings with different groups while also keeping track of tasks and responsibilities of each member. Our app will track the schedule of each contact and tasks individuals have to do for their project.
 
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+
 <!-- * Table of Contents -->
 <page-nav-print />
 
@@ -157,6 +159,25 @@ Expected output when succeeds: `Contact successfully deleted`
 
 Expected output when fails: `Error, invalid input entered`
 
+### Add contacts to groups: `group`
+
+Add a contact to a group.
+
+Format: `group n/NAME g/GROUPNAME`
+
+* Add the contact with given `NAME` from the given `GROUPNAME`
+* If group or name does not exist, print error
+
+Acceptable values:
+* `NAME` and `GROUPNAME` are strings
+
+Example(s):
+* `group n/John g/cs2101 tut`
+* `group n/samantha tan g/saturday 9am yoga`
+
+Expected outputs when it succeeds: `John is now part of group cs2101.`
+Expected output when fails: `Error, invalid input entered`
+
 ### Remove contacts from groups: `ungroup`
 
 Removes a contact from a group.
@@ -244,11 +265,13 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL [g/GROUPNAME]` <br> e.g., `add n/Adam Lee p/81112222 e/jamesho@example.com, g/cs2103`
 **Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Delete** | `delete NAME`<br> e.g., `delete nicholas`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Group**   | `group n/NAME g/GROUPNAME`<br> e.g., `group n/John g/cs2103 tut` 
+**Ungroup**   | `ungroup n/NAME g/GROUPNAME`<br> e.g., `ungroup n/John g/cs2103 tut` 
 **New**    | `new g/GROUPNAME`<br> e.g., `new g/cs2103`
 **List**   | `list`
 **Help**   | `help`
