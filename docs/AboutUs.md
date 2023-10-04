@@ -9,15 +9,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Anthony Tamzil
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/anthonytamzil.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/anthonytamzil)]
+[[portfolio](team/anthonytamzil.md)]
 
-* Role: Project Advisor
+* Role: Team Lead
 
 ### Jane Doe
 
@@ -38,22 +37,22 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Testing
 
-### Jean Doe
+### Tan Liyan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/spatuly.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/spatuly)]
+[[portfolio](team/spatuly.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Code Quality
+
+### Quek Zong Jin
+
+<img src="images/zjinnnn.png" width="200px">
+
+[[github](http://github.com/Zjinnnn)]
+[[portfolio](team/zjinnnn.md)]
+
+* Role: Developer
+* Responsibilities: Deliverables and Deadlines

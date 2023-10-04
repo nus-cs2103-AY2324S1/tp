@@ -3,7 +3,7 @@ layout: page
 title: Developer Guide
 ---
 * Table of Contents
-{:toc}
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -224,13 +224,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
 
@@ -257,56 +257,100 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* is a Teaching Assistant (TA) for National University of Singapore Computer Science modules
+* has a need to manage a significant number of student information
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: provide a convenient one-stop platform for tutors to keep track of the work submission and attendance of each student
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​         | I want to …​                                                       | So that I can…​                                                                           |
+|----------|--------------------|--------------------------------------------------------------------|-------------------------------------------------------------------------------------------|
+| `* * *`  | meticulous user    | mark attendance for each student separately                        | make sure each students' attendace record is accurate                                     |
+| `* * *`  | user               | see a summary of attendance records                                | verify the attendance records                                                             |
+| `* * *`  | user               | easily create new or edit contacts                                 | easily add or remove contacts                                                             |
+| `* * *`  | user               | search for a student by name or student ID                         | quickly access their attendance and assignment records                                    |
+| `* * *`  | user               | view a list of all my students                                     | quickly scan who's in my tutorial groups                                                  |
+| `* * *`  | user               | filter for specific tutorial groups                                | efficiently engage in tutorial-group-based tasks such as marking attendace after a lesson |
+| `* *`    | frequent user      | organise my students' contacts by modules                          | better manage my students                                                                 |
+| `* *`    | forgetful user     | add additional notes for my students                               | better remember my students                                                               |
+| `* *`    | user               | indicate reason for absence                                        | know when there is a valid excuse                                                         |
+| `* *`    | user               | be able to search for contacts using keywords (modules)            | more easily find contacts                                                                 |
+| `* *`    | user               | categorize students into different tutorial groups                 | manage and monitor each group efficiently                                                 |
+| `* *`    | user               | view the tallied attendance over the semester of each student      | submit their overall attendance mark quickly                                              |
+| `* *`    | user               | remove students from the address book                              | avoid having unnecessary contacts                                                         |
+| `* *`    | impatient user     | mass mark attendance for all my students                           | mark attendance more efficiently                                                          |
+| `* *`    | long-term user     | delete all contacts from tutorial group at once                    | avoid doing so one-by-one after the module ends                                           |
+| `* *`    | long-term user     | archive past module records                                        | have a less cluttered worksapce                                                           |
+| `* *`    | new user           | have the application feel intuitive                                | easily learn the various functions                                                        |
+| `* *`    | careless user      | undo my last action                                                | recover any important data                                                                |
+| `*`      | new user           | import my contacts from another database                           | easily get started using the app                                                          |
+| `*`      | user               | export my attendance records to another database                   | easily upload attendance records                                                          |
+| `*`      | forgetful user     | be reminded on incomplete attendance records                       | rectify any potential gaps in the records                                                 |
+| `*`      | user               | add pictures to the contacts                                       | easily identify my students                                                               |
+| `*`      | forgetful user     | merge duplicate contacts                                           | avoid having duplicate contacts jamming up the application                                |
+| `*`      | busy user          | set reminders if I have a meeting with the student                 | remember all one-on-one meetings that I have with the students                            |
+| `*`      | user               | view a count of how many sessions each student has missed          | identify frequent absentees                                                               |
+| `*`      | user               | add simple notes next to a student's name (like "late submission") | remember specific incidents                                                               |
+| `*`      | user               | add and edit status of work submissions                            | keep track of the students’ work                                                          |
+| `*`      | user               | track the submission status of each student's assignments          | be aware of who has or hasn't turned in their work                                        |
+| `*`      | user               | add and view my student’s preferred name                           | call on them with the correct name                                                        |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `TAvigator` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC02 - View Summary of Attendance Records**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to view a summary of attendance records and enters a tutorial group ID.
+2.  TAvigator shows a summary of attendance records for the corresponding tutorial group.
+
+    Use case ends.
+
+
+**Extensions**
+
+* 2a. The given ID is invalid.
+    * 2a1. TAvigator shows an error message.
+
+      Use case ends.
+
+* 2b. User leaves the tutorial group ID blank.
+    * 2b1. TAvigator shows a summary of all attendance records.
+
+      Use case ends.
+
+**Use case: UC03 - View List of Students**
+
+**MSS**
+
+1.  User requests to view a list of students and enters a tutorial group ID.
+2.  TAvigator shows a list of students in the corresponding tutorial group.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The given ID is invalid.
+    * 2a1. TAvigator shows an error message.
 
-  Use case ends.
+      Use case ends.
 
-* 3a. The given index is invalid.
+* 2b. User leaves the tutorial group ID blank.
+    * 2b1. TAvigator shows a list of all students and their tutorial group ID.
 
-    * 3a1. AddressBook shows an error message.
-
-      Use case resumes at step 2.
+      Use case ends.
 
 *{More to be added}*
 
@@ -315,6 +359,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  Should retain a majority of the core functionality even without internet access
+5.  Application should not exceed file size of 50MB
+6.  Should respond to user inputs within approximately 2 seconds
+7.  Should show understandable messages to users and not crash under recoverable errors
+8.  Application should have an intuitive and user-friendly interface, following design principles
+9.  Should provide clear and comprehensive user documentation to assist users in using the application effectively
+10. Should maintain technical documentation for developers, detailing the software architecture
 
 *{More to be added}*
 
@@ -338,15 +389,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
@@ -355,16 +406,16 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `delete 1`<br>
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `delete 0`<br>
+       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
 
@@ -372,6 +423,6 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
