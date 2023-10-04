@@ -22,36 +22,24 @@ For a more technical and comprehensive overview of CampusConnect's codebase, ple
 
 # Table of Contents
 1. Quick Start
-2. Features
-    - Contact
-        - Add contact
-          - Add normal contact
-          - Add emergency contact
-        - Add alternative information to contact
-        - Upload contact's photo
-        - Update contact's photo
-        - Search contact
-          - Search name
-          - Search phone number
-          - Search email
-          - Search address
-          - Search tag
-          - Search multiple fields
-        - Delete contact
-          - Delete normal contact
-          - Delete emergency contact
-        - List emergency contact
-    - Notification
-        - Receive notification
-          - Receive actual birthday notification 
-          - Receive upcoming birthday notification [Coming Soon]
-        - Opt out notification
-    - Personalisation
-        - Track payment [Coming Soon]
-        - Change language [Coming Soon]
-    - Help System [Coming Soon]
-    - Miscellaneous
-        - Undo last action [Coming Soon]
+2. Features 
+   - Request help [Coming Soon]
+   - Add normal contact
+   - Add emergency contact
+   - Add alternative information to contact
+   - Upload contact's photo
+   - Update contact's photo
+   - Search contact
+   - List all contacts
+   - List emergency contacts
+   - Delete normal contact
+   - Delete emergency contact
+   - Undo last action [Coming Soon]
+   - Receive actual birthday notification 
+   - Receive upcoming birthday notification [Coming Soon]
+   - Opt out notification
+   - Track payment [Coming Soon]
+   - Change language [Coming Soon]
 3. Troubleshooting / FAQ
 
 --------------------------------------------------------------------------------------------------------------------
@@ -109,62 +97,30 @@ For a more technical and comprehensive overview of CampusConnect's codebase, ple
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
-### Contact
-
-#### Add contact
-
-1. Add normal contact: 
-
-2. Add emergency contact: 
-
-#### Add alternative information to contact
-
-#### Upload contact's photo
-
-#### Update contact's photo
-
-#### Search contact
+### Request help [Coming Soon]
+### Add normal contact
+###  Add emergency contact
+###  Add alternative information to contact
+###  Upload contact's photo
+###  Update contact's photo
+###  Search contact
 1. Search name
-
-2. Search phone number 
-
-3. Search email 
-
-4. Search address 
-
-5. Search tag 
+2. Search phone number
+3. Search email
+4. Search address
+5. Search tag
 
 6. Search multiple fields
-
-#### Delete contact
-
-1. Delete normal contact 
-
-2. Delete emergency contact
-
-#### List emergency contact
-
-### Notification
-
-#### Receive notification
-
-1. Receive actual birthday notification 
-
-2. Receive upcoming birthday notification [Coming Soon]
-
-#### Opt out notification
-
-### Personalisation
-
-#### Track payment [Coming Soon]
-
-#### Change language [Coming Soon]
-
-### Help System [Coming Soon]
-
-### Miscellaneous
-
-#### Undo last action [Coming Soon]
+###  List all contacts
+###  List emergency contacts
+###  Delete normal contact
+###  Delete emergency contact
+###  Undo last action [Coming Soon]
+###  Receive actual birthday notification
+###  Receive upcoming birthday notification [Coming Soon]
+###  Opt out notification
+###  Track payment [Coming Soon]
+###  Change language [Coming Soon]
 
 --------------------------------------------------------------------------------------------------------------------
 
