@@ -19,7 +19,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Documentation & Deliverables IC
 * Responsibilities:
   * Review Documentations
-  * Track Project Deliverables
+  * Tasks Allocation
+  * Milestone Tracking
 
 ### Chen Zhiruo
 
@@ -28,10 +29,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/czhiruo)]
 [[portfolio](team/czhiruo.md)]
 
-* Role: Scheduling & Tracking IC
+* Role: Testing IC
 * Responsibilities:
-  * Tasks Allocation
-  * Milestone Tracking
+  * Code Testing
+  * Supervises Continuous Integration
 
 ### Jeremy Yong Zheming
 
@@ -39,11 +40,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[github](https://github.com/JeremyYong128)] [[portfolio](team/jeremyyong128.md)]
 
-* Role: Code Quality & Testing IC
+* Role: Code Implementation & Quality IC
 * Responsibilities:
-  * Ensure Proper Testing
-  * Review Code Quality
   * Logic Implementation
+  * Reviews Code Quality
 
 ### Miguel Foo Ming Yew
 
