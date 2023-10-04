@@ -11,16 +11,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
 ### Goh En Rui Ryann
 
 <img src="images/gohenruiryann.png" width="200px">
@@ -31,14 +21,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
 
 ### Lynn Low
 
@@ -59,13 +41,21 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: Logic
-* 
 * ### Lee Seng Kitt
 
 <img src="images/sengkitt.png" width="200px">
 
 [[github](http://github.com/bobscodedump)]
 [[portfolio](team/sengkitt.md)]
+
+* Role: Developer
+* Responsibilities: Software Engineering
+* ### Cleon Tan De Xuan
+
+<img src="images/cleontandexuan.png" width="200px">
+
+[[github](http://github.com/Cleon2)]
+[[portfolio](team/cleontandexuan.md)]
 
 * Role: Developer
 * Responsibilities: Software Engineering
