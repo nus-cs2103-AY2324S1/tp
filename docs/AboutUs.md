@@ -18,15 +18,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Deliverables and Deadlines, Code Quality
 
-### Jane Doe
+### Nam Dohyun (Brandon)
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/brandon-nam.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/brandon-nam)]
+[[portfolio](team/brandon-nam.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Scheduling and Tracking 
 
 ### Johnny Doe
 
