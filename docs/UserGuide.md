@@ -2,13 +2,26 @@
 layout: page
 title: User Guide
 ---
-
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
-
-* Table of Contents
-{:toc}
+# BandConnect++ User Guide
+BandConnect++ is a powerful desktop app that helps musicians manage contact with other musicians to easily form a band. You can use it to manage musician contacts, select band members, and form a band of your preference, all within a few clicks or a few seconds of typing!
 
 --------------------------------------------------------------------------------------------------------------------
+## About this guide
+Welcome to the *BandConnect++ User Guide*! This user guide provides an in-depth documentation on everything about *BandConnect++*, including installation, set up, features, common FAQ and troubleshooting recommendations. 
+
+For first-time users, please go to the [Quick start](#quick-start) section below to start an end-to-end tutorial that gets you onboard. Should you encounter any difficulty understanding the terminology, don't forget to refer to the [Glossary](#glossary)!
+
+### Table of Contents
+* [Glossary](#glossary)
+* [Quick start](#quick-start)
+* [Features](#features)
+* [Command Summary](#command-summary)
+* [Troubleshooting](#troubleshooting)
+
+
+## Glossary
+To be added.
+
 
 ## Quick start
 
@@ -41,6 +54,8 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 ## Features
 
+### Formatting Convention
+
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
@@ -72,19 +87,26 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding a musician contact: `add`
 
-Adds a person to the address book.
+Adds a musician to the contact book. Name, phone number and email can be recorded.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+**Format:** `add n/NAME p/PHONE_NUMBER e/EMAIL`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
+**Examples:**
+* `add n/John Doe p/98928479 e/johndpiano@xmail.com`
+* `add n/Betsy Crowe e/violinistbetsy@smtp.com p/87988039`
 
-Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+**Upon success:**
+
+You will see a message indicating successful addition of the musician like below:
+[insert image]
+
+**Upon failure:**
+
+Should you input a musician which is already in your contact book(ie. have the same phone number or email as an existing contact), you will see a message like below, please input a different phone/email for the current contact or modify the original contact's relevant details.
+
+[insert image]
 
 ### Listing all persons : `list`
 
@@ -171,7 +193,7 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+## Troubleshooting
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
