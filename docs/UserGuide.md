@@ -176,6 +176,25 @@ Example(s):
 Expected outputs when it succeeds: `John has been removed from cs2101 tut.`
 Expected output when fails: `Error, invalid input entered`
 
+### Create a new group : `new`
+
+Creates a new group with group name provided.
+
+Format: `new g/GROUPNAME`
+* Creates a new group with group name provided. 
+* GROUPNAME has to be unique (not an existing group)
+
+Expected output when succeeds: New group added: GROUPNAME<br>
+
+Expected output when fails: This group already exists in the address book.<br>
+
+Expected output when fails: Invalid command format
+
+Examples:
+* `new g/CS2103T` Creates a new group named CS2103T
+* `new g/CS2101_OP1` Creates a new group named CS2101_OP1
+
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -230,5 +249,6 @@ Action     | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**New**    | `new g/GROUPNAME`<br> e.g., `new g/cs2103`
 **List**   | `list`
 **Help**   | `help`
