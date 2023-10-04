@@ -32,7 +32,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Wang Yiwen
 
-<img src="images/yiwen.png" width="200px">
+<img src="images/yiwen101.png" width="200px">
 
 [[github](http://github.com/yiwen101)]
 [[portfolio](team/yiwen.md)]
