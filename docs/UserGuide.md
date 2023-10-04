@@ -39,7 +39,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 --------------------------------------------------------------------------------------------------------------------
 ## Contents
-- [Adding a Doctor: `new Doctor`](#adding-a-doctor--new-doctor)
+- [Adding a Doctor: `add Doctor`](#adding-a-doctor--add-doctor)
 ## Features
 
 <div markdown="block" class="alert alert-info">
@@ -73,11 +73,11 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 
-### Adding a Doctor: `new Doctor`
+### Adding a Doctor: `add Doctor`
 
 Adds a Doctor to the hospital database.
 
-Format: `new Doctor n/NAME ic/IC g/GENDER p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ pt/PATIENT_1 …​`
+Format: `add Doctor n/NAME ic/IC g/GENDER p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ pt/PATIENT_1 …​`
 
 <div markdown="span" class="alert alert-primary">:bulb:
 **Tip:**
@@ -93,8 +93,8 @@ A person can have any number of tags (including 0)
 - PATIENT must contain the valid IC of a Patient in the Database.
 
 Examples:
-* `new Doctor n/John Doe ic/S9851386G g/Male p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pt/T0123456H`
-* `new Doctor n/Betsy Crowe ic/S9851586G g/Female p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/Surgeon pt/T0123556H`
+* `add Doctor n/John Doe ic/S9851386G g/Male p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pt/T0123456H`
+* `add Doctor n/Betsy Crowe ic/S9851586G g/Female p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/Surgeon pt/T0123556H`
 
 ### Listing all persons : `list`
 
@@ -198,7 +198,7 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**New Doctor** | `new Doctor n/NAME ic/IC g/GENDER p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ pt/PATIENT_1 …​` <br> e.g., `new Doctor n/John Doe ic/S9851386G g/Male p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pt/T0123456H`
+**New Doctor** | `add Doctor n/NAME ic/IC g/GENDER p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ pt/PATIENT_1 …​` <br> e.g., `add Doctor n/John Doe ic/S9851386G g/Male p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pt/T0123456H`
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
