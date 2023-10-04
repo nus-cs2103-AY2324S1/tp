@@ -283,40 +283,121 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `ManageHR` and the **Actor** is the `HR manager`, unless specified otherwise)
 
-**Use case: Delete a person**
+#### Use case: UC01 - List all employees
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. HR manager requests to list employees
+2. ManageHR shows a list of employees
+
+    Use case ends.
+
+
+#### Use case: UC02 - Delete an employee
+
+**MSS**
+
+1. HR manager [lists all employees (UC01)](#use-case-uc01---list-all-employees).
+2. HR manager requests to delete a specific employee in the list
+3. ManageHR deletes the employee
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The list is empty.
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 2a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 2a1. ManageHR shows an error message.
 
       Use case resumes at step 2.
 
-*{More to be added}*
+#### Use case: UC03 - Add an employee
+
+**MSS**
+
+1. HR manager enters the employee details
+2. A confirmation message is displayed to the HR manager, indicating that the employee has been successfully added.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. ManageHR detects an error with the entered employee's details.
+  * 1a1. ManageHR shows an error message.
+
+    Use case resumes at step 1.
+
+#### Use case: UC04 - Edit an employee details
+
+**MSS**
+
+1. HR manager [lists all employees (UC01)](#use-case-uc01---list-all-employees).
+2. HR manager edits a specific employee's details in the list.
+3. ManageHR modifies the employee's details.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+* 2a. The given index is invalid.
+
+    * 2a1. ManageHR shows an error message.
+
+        Use case resumes at step 2.
+
+* 2b. ManageHR detects an error with the entered employee's details.
+
+    * 2b1. ManageHR shows an error message.
+
+        Use case resumes at step 2.
+
+#### Use case: UC05 - Get help with ManageHR's features 
+
+**MSS**
+
+1. HR manager is using the ManageHR and has forgotten some of the features in the app.
+2. HR manager requests help
+3. ManageHR displays a link to access the user guide.
+4. HR manager access the user guide and obtains information on the different features.
+
+   Use case ends.
+
+**Extensions**
+
+* 4a. HR manager does not find the required information in the user guide.
+
+    * 4a1. ManageHR provides options for contacting customer support or accessing additional help resources.
+
+        Use case ends.
+
+#### Use case: UC06 - Close ManageHR
+
+**MSS**
+
+1. HR manager requests to close ManageHR.
+2. ManageHR closes.
+
+   Use case ends.
+ 
+
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. Should be able to hold up to 1000 employees without a noticeable sluggishness in performance for typical usage.
+3. A HR manager with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. The user interface should be intuitive and user-friendly for HR managers to easily understand.
+5. ManageHR's code should be well-documented and adhere to coding standards to allow for efficient updates to it.
 
 ### Glossary
 
