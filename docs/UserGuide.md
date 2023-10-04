@@ -122,7 +122,7 @@ Edits the details of a fosterer stored in the address book.
 **Format** 2: (In the fosterer profile view) `edit`
 
 **Examples**:
-*  `list` followed by `edit 3` Generates the edit-window for the 3rd fosterer in the address book
+*  `list` followed by `edit 3` generates the edit-window for the 3rd fosterer in the address book
 *  `list` followed by `view 3` followed by `edit` allows making changes from the fosterer profile view. 
 
 **How to Edit**:
