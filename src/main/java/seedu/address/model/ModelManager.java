@@ -96,6 +96,7 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
+        // Interesting, deleting a person does not update the filtered persons list
     }
 
     @Override
