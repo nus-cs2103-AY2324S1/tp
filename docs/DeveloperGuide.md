@@ -255,15 +255,18 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
+**Target user profile**:Healthcare Professionals, especially those who handle multiple patient records
 
-* has a need to manage a significant number of contacts
+* has a need to manage a significant number of patients at any given time
+* add, update, delete and search patient records
+* required to update, access and track multiple patients' treatment history
+* manage the scheduling, rescheduling and cancelling of appointments
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: manage patients' medical records faster than a typical GUI driven app in a systematic manner
 
 
 ### User stories
