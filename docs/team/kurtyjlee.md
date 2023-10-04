@@ -42,5 +42,3 @@ Given below are my contributions to the project.
 
 * **Tools**:
   * *{To be added}*
-
-* _{you can add/remove categories in the list above}_
