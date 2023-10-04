@@ -271,6 +271,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​                                    | I want to …​                                                              | So that I can…​                                                        |
 | -------- |--------------------------------------------|---------------------------------------------------------------------------|------------------------------------------------------------------------|
 | `* * *`  | administrative staff                       | delete a fosterer from the list when they want to stop fostering with us  | update the list to see the fosterers who are currently in our program  |
+| `* * *`  | administrative staff                       | add each foster family's details efficiently  | allow my colleagues who are conducting home visits to view these information without any inconvenience  |
+| `* * *`  | administrative staff                       | provide details of the fostered animal of concern to the fosterer | ensure that the animal is well taken care by informing the fosterer of existing health conditionsto prepare for |
+| `* * *`  | administrative staff                       | update each foster family’s and animal’s details | keep track of foster family’s most up-to-date information, including updated information of the animal fostered |
+| `* * *`  | administrative staff                       | allocate volunteers to each foster family | keep track of who is in charge of checking the pet’s condition for each foster family and send help if needed |
+| `* * *`  | administrative staff                       | search for a specific animal / fosterer’s detail | find specific fosterers or animals more easily, given only partial information |
+| `* * *`  | administrative staff                       | filter and sort the animals in the database by any criteria | easily view the animals that suit specific fosterer’s accommodation capabilities and prioritise the animals more in need |
 
 *{More to be added}*
 
