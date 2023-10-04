@@ -45,7 +45,7 @@ You can reach us at the email `ManageHR@comp.nus.edu.sg`
 <img src="images/xihuaz.png" width="200px">
 
 [[github](https://github.com/XihuaZ)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/xihuaz.md)]
 
 * Role: Developer
 * Responsibilities: UX + Code Quality
