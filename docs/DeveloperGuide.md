@@ -309,6 +309,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is `TAvigator` and the **Actor** is the `user`, unless specified otherwise)
 
+**Use case: UC01 - Mark Student Attendance Separately**
+
+**MSS**
+
+1.  User decides to mark attendance for a student.
+2.  User enters student name or ID, followed by the attendance status.
+3.  TAvigator marks the attendance of student and displays message for confirmation of attendance.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given student name or ID is invalid
+    * 1a1. TAvigator shows an error message.
+
+      Use case ends.
+
+* 1b. The given attendance record is invalid
+    * 1b1. TAvigator shows an error message.
+
+      Use case ends.
+
+
 **Use case: UC02 - View Summary of Attendance Records**
 
 **MSS**
