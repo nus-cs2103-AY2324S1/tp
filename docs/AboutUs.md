@@ -55,7 +55,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/cleontandexuan.png" width="200px">
 
 [[github](http://github.com/Cleon2)]
-[[portfolio](team/cleontandexuan.md)]
+[[portfolio](team/Cleon2.md)]
 
 * Role: Developer
 * Responsibilities: Software Engineering
