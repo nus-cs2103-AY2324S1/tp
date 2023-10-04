@@ -44,3 +44,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/brandon-nam.md)]
 
 * Role: Scheduling and Tracking
+
+### Tyrus Lye
+
+<img src="images/tyrus-lye.png" width="200px">
+
+[[github](https://github.com/TyrusLye)]
+[[portfolio](team/TyrusLye.md)]
+
+* Role: Documentation
