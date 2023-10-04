@@ -313,11 +313,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 3a. The given index is invalid.
+* 2a. The given index is invalid.
 
-    * 3a1. ConText shows an error message.
+    * 2a1. ConText shows an error message.
 
-      Use case resumes at step 3.
+      Use case resumes at step 2.
 
 **Use case: UC03 - List all contacts**
 
