@@ -295,30 +295,86 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `CampusConnect` and the **Actor** is a `NUS student who stays in campus`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC1- Opt out notifications**
 
 **MSS**
-
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
-
-    Use case ends.
+1. User requests to opt out from receiving notifications.
+2. System requests for confirmation.
+3. User confirms.
+4. System opts out the user from receiving notifications. <br>
+Use case ends. 
 
 **Extensions**
+   * 1a. System detects an error in data entered.
+     * 1a1. System shows the correct format for request.
+     * 1a2. User enters a new opt out request. 
+     
+     Steps 1a1-1a2 are repeated until the data entered are correct. <br> 
+     Use case resumes from step 4.
 
-* 2a. The list is empty.
+**Use case: UC2 - List contacts**
 
-  Use case ends.
+**MSS**
+1. User requests list all contacts.
+2. System shows a list of all contacts. <br>
+Use case ends.
 
-* 3a. The given index is invalid.
+**Use case: UC3 - Delete emergency contact**
 
-    * 3a1. AddressBook shows an error message.
+**MSS**
+1. User <ins>lists all contacts (UC2).</ins>
+2. User enters an index to delete contact as an emergency contact.
+3. System deletes contact from the emergency contact list. <br> 
+Use case ends.
 
-      Use case resumes at step 2.
+**Extensions**
+* 1a. System shows an empty contact list. 
+Use case ends.
+* 2a. System detects an invalid index entered.
+  * 2a1. System shows an error message.
+  * 2a2. User enters a new delete request. <br> 
+  Steps 2a1- 2a2 are repeated until the data entered are correct. <br> 
+  Use case resumes from step 3.
+
+**Use case: UC4 - Delete contact**
+
+**MSS**
+1. User <ins>lists all contacts (UC2).</ins>
+2. User enters an index to delete a contact from the system.
+3. System deletes contact inside its system. <br>
+Use case ends.
+
+**Extensions**
+* 1a. System shows an empty contact list. 
+Use case ends.
+* 2a. System detects an invalid index entered.
+  * 2a1. System shows an error message.
+  * 2a2. User enters a new delete request. <br>
+  Steps 2a1- 2a2 are repeated until the data entered are correct. <br> 
+  Use case resumes from step 3.
+
+**Use Case UC5: Add emergency contact**
+
+**MSS**
+1. User <ins>lists all contacts (UC2).</ins>
+2. User adds a contact to the emergency contact list.
+3. System adds the contact into the emergency contact list. <br>
+Use case ends.
+
+**Extensions**
+* 1a. System detects that the tag given to the contact is invalid.
+  * 1a1. System shows the valid tags for input.
+  * 1a2. User enters a new add emergency contact request. <br>
+  Steps 1a1- 1a2 are repeated until the data entered are correct. <br>
+  Use case resumes from step 3.
+* 1b. System detects an invalid index entered.
+  * 1b1. System shows an error message.
+  * 1b2. User enters a new delete request. <br>
+  Steps 1b1- 1b2 are repeated until the data entered are correct. <br>
+  Use case resumes from step 3.
+
 
 *{More to be added}*
 
