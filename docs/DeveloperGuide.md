@@ -313,10 +313,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The list is empty.
-
-  Use case ends.
-
 * 3a. The given index is invalid.
 
     * 3a1. ConText shows an error message.
