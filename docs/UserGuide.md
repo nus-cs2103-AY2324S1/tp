@@ -132,7 +132,7 @@ Edits the details of a fosterer stored in the address book.
 4. Type in the command line to search the list of fields, and press enter to edit the first match. This creates a text field around the detail corresponding to the chosen field.
 5. Edit the content of the detail and press enter. 
 6. Repeat step 4-5 until you made all your edits. 
-7. Type in `save` command to save the changes and prompt you back to the home window.
+7. While the command line is empty, press enter to save all applied changes to all fields, or the esc key to revert them to before the edit command. Both will send you back to the home window.
 
 **Expected Output (success)**:
 ```
