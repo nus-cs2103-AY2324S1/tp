@@ -74,21 +74,28 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
-
 ### Adding a person: `add`
-
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [g/GROUPNAME]​`
 
 <box type="tip" seamless>
 
-**Tip:** A person can have any number of tags (including 0)
+**Tip:** A person can be added with or without a group
 </box>
 
+Acceptable values: phone number should be an 8 digit integer, while other parameters be strings.
+
+Names should be unique, no two contacts should have the same name input.
+
+Expected output when succeeds: “Contact successfully added”
+
+Expected output when fails: “Error, invalid input entered”
+
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/Adam Lee p/81112222 e/adam@example.com g/cs2103 g/cs2101`
+* `add n/Brian p/98765432 e/brian@example.com`
+
 
 ### Listing all persons : `list`
 
