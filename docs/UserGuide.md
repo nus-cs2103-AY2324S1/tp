@@ -151,8 +151,47 @@ Examples:
 
 ###  Undo last action [Coming Soon]
 ###  Receive actual birthday notification
+
+Receives a pop-up notification that contains a list of people in CampusConnect whose birthdays have arrived.
+
+Upon launching the application, if any of your contacts’ birthday in CampusConnect have arrived, you should see the following pop-up notification: <br>
+
+![birthdayNotification](images/birthdayNotification.png)
+
+The notification will contain the names of the birthday individuals saved in CampusConnect.
+
 ###  Receive upcoming birthday notification [Coming Soon]
 ###  Opt out notification
+
+Opts you out from receiving birthday related notifications, such as turning off actual birthday notification feature.
+
+Format: `optout NOTIFICATION_DESCRIPTION`
+
+- `NOTIFICATION_DESCRIPTION` Mandatory field to enter which only includes the following and are not case-sensitive:
+    - `Notify Birthdays`
+    - `All`
+
+Examples:
+- `optout notify birthdays`
+- `optout Notify Birthdays`
+- `optout NOTIFY BIRTHDAYS`
+    - Requests to opt out from receiving actual birthday notifications in the future.
+- `optout all`
+    - Requests to turn off all kinds of notifications CampusConnect will send.
+
+Upon request to opt out notification, you should see the following pop-up message: <br>
+
+![optOutNotification](images/optOutNotification.png)
+
+Select `OK` to opt out notifications or `Cancel` to cancel the request.
+
+Below shows some examples of ___invalid usage___ of the command and the response that CampusConnect will provide.
+
+Invalid Input Example | Application Output
+---|---
+**optout notifications** | Invalid `NOTIFICATION_DESCRIPTION` (refer to aforementioned for the list of `NOTIFICATION_DESCRIPTION` to enter).
+**optout** | `NOTIFICATION_DESCRIPTION` cannot be empty.
+
 ###  Track payment [Coming Soon]
 ###  Change language [Coming Soon]
 
@@ -179,3 +218,4 @@ Action        | Format, Examples
 **Addemer**   | `addemer INDEX [tag/TAG]`
 **Delemer**   | `delemer INDEX`
 **Listemer**  | `listemer [tag/TAG]`
+**Optout**    | `optout NOTIFICATION_DESCRIPTION`
