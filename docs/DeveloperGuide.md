@@ -283,28 +283,162 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `InterviewHub` and the **Actor** is the `hiring manager`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 Add an interview**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. Hiring manager requests to add an interview.
+2. InterviewHub adds the interview.
+
+    Use case ends.
+
+**Extensions**
+* 1a. One of the user-provided parameters is invalid
+    * 1a1. InterviewHub shows an error message.
+
+      Use case resumes at step 1.
+
+**Use case: UC02 List all interview**
+
+**MSS**
+
+1. Hiring manager requests to list all interviews.
+2. InterviewHub displays all scheduled interviews.
+
+    Use case ends.
+
+**Extensions**
+* 1a. The list is empty
+  * 1a1. InterviewHub shows an error message.
+  
+    Use case ends.
+
+**Use case: UC03 Delete an Interview**
+
+**MSS**
+
+1. Hiring manager <u> views the list of all interviews (UC02) </u>
+2. Hiring manager requests to delete a specific interview
+3. InterviewHub deletes the specified interview
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The provided index is invalid 
+  * 2a1. InterviewHub shows an error message.
+   
+    Use case resumes at step 2.
 
-  Use case ends.
+**Use case: UC04 Add a job role**
 
-* 3a. The given index is invalid.
+**MSS**
 
-    * 3a1. AddressBook shows an error message.
+1. Hiring manager requests to add a job role.
+2. InterviewHub adds the job role.
+
+    Use case ends.
+
+**Extensions**
+* 1a. One of the user-provided parameters is invalid
+  * 1a1. InterviewHub shows an error message.
+
+    Use case resumes at step 1.
+
+**Use case: UC05 List all job roles**
+
+**MSS**
+
+1. Hiring manager requests to list all job roles.
+2. InterviewHub displays all job roles.
+
+    Use case ends.
+
+**Extensions**
+* 1a. The list is empty
+  * 1a1. InterviewHub shows an error message.
+
+    Use case ends.
+
+**Use case: UC06 List all interviewees for a job role**
+
+**MSS**
+
+1. Hiring manager <u> views the list of all job roles (UC05) </u>
+2. Hiring manager requests to view all interviewees for a specific job role.
+3. InterviewHub displays all the interviewees for the specific job role.
+
+    Use case ends.
+
+* 2a. The provided index is invalid
+  * 2a1. InterviewHub shows an error message.
+
+    Use case resumes at step 2.
+
+**Use case: UC07 Delete a job role**
+
+**MSS**
+
+1. Hiring manager <u> views the list of all job roles (UC02) </u>
+2. Hiring manager requests to delete a specific job role
+3. InterviewHub deletes the specified job role
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The provided index is invalid
+  * 2a1. InterviewHub shows an error message.
+
+    Use case resumes at step 2.
+
+
+**Use case: UC08 Add an interviewee**
+
+**MSS**
+
+1. Hiring manager requests to add an interviewee.
+2. InterviewHub adds the interviewee.
+
+   Use case ends.
+
+**Extensions**
+* 1a. One of the user-provided parameters is invalid
+  * 1a1. InterviewHub shows an error message.
+
+    Use case resumes at step 1.
+
+**Use case: UC09 List all interviewees**
+
+**MSS**
+
+1. Hiring manager requests to list all interviewees.
+2. InterviewHub displays all scheduled interviewees.
+
+   Use case ends.
+
+**Extensions**
+* 1a. The list is empty
+  * 1a1. InterviewHub shows an error message.
+
+      Use case ends.
+
+**Use case: UC010 Delete an Interviewee**
+
+**MSS**
+
+1. Hiring manager <u> views the list of all interviewees (UC09) </u>
+2. Hiring manager requests to delete a specific interviewee
+3. InterviewHub deletes the specified interviewee
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The provided index is invalid
+    * 2a1. InterviewHub shows an error message.
 
       Use case resumes at step 2.
 
