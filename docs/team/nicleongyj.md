@@ -33,5 +33,3 @@ AddressBook - Level 3 is a desktop address book application used for teaching So
 
 * **Community**:
     * To be added soon
-
-
