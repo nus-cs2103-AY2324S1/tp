@@ -99,7 +99,18 @@ For a more technical and comprehensive overview of CampusConnect's codebase, ple
 
 ### Request help [Coming Soon]
 ### Add normal contact
-###  Add emergency contact
+
+### Add emergency contact
+
+Adds an existing contact as an emergency contact.
+
+Format: `addemer INDEX [tag/TAG]`
+* `tag/TAG` Optional tag indicating the type of emergency contact, e.g. RA (residential assistant) or SO (security officer)
+
+Examples:
+* `addemer 1 RA`
+  * Indicates that the contact at index 1 is the residential assistant (RA) for contact during emergencies
+
 ###  Add alternative information to contact
 ###  Upload contact's photo
 ###  Update contact's photo
@@ -112,9 +123,32 @@ For a more technical and comprehensive overview of CampusConnect's codebase, ple
 
 6. Search multiple fields
 ###  List all contacts
+
 ###  List emergency contacts
+
+Lists all emergency contacts that have been registered.
+
+Format: `listemer [tag/TAG]`
+* `tag/TAG` Optional tag to filter for emergency contacts of a certain type, e.g. RA (residential assistant) or SO (security officer)
+
+Examples:
+* `listemer`
+* `listemer tag/RA`
+  * Only lists emergency contacts tagged as residential assistants (RA)
+
 ###  Delete normal contact
 ###  Delete emergency contact
+
+Removes contact as an emergency contact.
+
+Note: Contact will not be deleted, only unmarked as an emergency contact.
+
+Format: `delemer INDEX`
+
+Examples:
+* `delemer 1`
+  * Indicates that contact at index 1 is no longer an emergency contact
+
 ###  Undo last action [Coming Soon]
 ###  Receive actual birthday notification
 ###  Receive upcoming birthday notification [Coming Soon]
@@ -139,10 +173,9 @@ For a more technical and comprehensive overview of CampusConnect's codebase, ple
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-
-
-
-
+Action        | Format, Examples
+--------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Add**       | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Addemer**   | `addemer INDEX [tag/TAG]`
+**Delemer**   | `delemer INDEX`
+**Listemer**  | `listemer [tag/TAG]`
