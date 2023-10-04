@@ -145,6 +145,25 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Remove contacts from groups: `ungroup`
+
+Removes a contact from a group.
+
+Format: `ungroup n/NAME g/GROUPNAME`
+
+* Deletes the contact with given `NAME` from the given `GROUPNAME`
+* If group or name does not exist, print error
+
+Acceptable values:
+* `NAME` and `GROUPNAME` are strings
+
+Example(s): 
+* `ungroup n/John g/cs2101 tut`
+* `ungroup n/samantha tan g/saturday 9am yoga`
+
+Expected outputs when it succeeds: `John has been removed from cs2101 tut.`
+Expected output when fails: `Error, invalid input entered`
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
