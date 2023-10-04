@@ -58,4 +58,4 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/zd292.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Team Lead
