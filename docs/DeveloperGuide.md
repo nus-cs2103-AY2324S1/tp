@@ -284,16 +284,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
 |----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | get a list of the commands       | know how to use the commands and their parameters |
-| `* * *`  | user                                          | add a new contact                     | record one person's phone number and email address |
-| `* * *`  | user                                          | delete a contact                         | remove a contact (by name) that I do not need |
-| `* * *`  | user                                          | view all contact                          | easily see and know what contacts are currently stored in the application in one place  |
-| `* *`    | user                                           | view all notes                             | easily see and know what notes are currently stored in the application in one place |
-| `* *`    | user                                           | add notes to a contact               | record additional information about that contact in the notes |
-| `* *`    | user                                           | delete notes to a contact           | remove additional information that are no longer needed about that contact in the notes   |
-| `* *`    | user who has some event to do | add an event record                 | record an event with start time and also end time, location and any additional information like what to do during the event   |
-| `* *`    | user who has/had some event to do | delete an event                  | remove an event after it is obsolete, cancelled or no longer needed to be recorded |
-| `* * *` | user who finishes using the application                                         | exit the program         | exit the program normally while ensuring all my data is currectly saved   |
+| `* * *`  | new user                                               | get a list of the commands    | know how to use the commands and their parameters |
+| `* * *`  | user                                                       | add a new contact                 | record one person's phone number and email address |
+| `* * *`  | user                                                       | delete a contact                     | remove a contact (by name) that I do not need |
+| `* * *`  | user                                                       | view all contact                      | easily see and know what contacts are currently stored in the application in one place  |
+| `* *`    | user                                                        | view all notes                        | easily see and know what notes are currently stored in the application in one place |
+| `* *`    | user                                                        | add notes to a contact          | record additional information about that contact in the notes |
+| `* *`    | user                                                        | delete notes to a contact       | remove additional information that are no longer needed about that contact in the notes   |
+| `* *`    | user who has some event to do             | add an event                         | record an event with start time and also end time, location and any additional information like what to do during the event   |
+| `* *`    | user who has/had some event to do      | delete an event                     | remove an event after it is obsolete, cancelled or no longer needed to be recorded |
+| `* * *` | user who finishes using the application  | exit the program                   | exit the program normally while ensuring all my data is currectly saved |
 
 *{More to be added}*
 
