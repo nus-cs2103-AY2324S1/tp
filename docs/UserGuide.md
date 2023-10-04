@@ -145,6 +145,25 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Create a new group : `new`
+
+Creates a new group with group name provided.
+
+Format: `new g/GROUPNAME`
+* Creates a new group with group name provided. 
+* GROUPNAME has to be unique (not an existing group)
+
+Expected output when succeeds: New group added: GROUPNAME<br>
+
+Expected output when fails: This group already exists in the address book.<br>
+
+Expected output when fails: Invalid command format
+
+Examples:
+* `new g/CS2103T` Creates a new group named CS2103T
+* `new g/CS2101_OP1` Creates a new group named CS2101_OP1
+
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
