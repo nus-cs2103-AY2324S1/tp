@@ -102,7 +102,24 @@ For a more technical and comprehensive overview of CampusConnect's codebase, ple
 </box>
 
 ### Request help [Coming Soon]
+
 ### Add normal contact
+
+Add a new contact with basic details like name, phone number, email, and address.
+
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]`
+* `n/NAME` Replace NAME with the contact's name.
+* `p/PHONE_NUMBER` Replace PHONE_NUMBER with the contact's phone number.
+* `e/EMAIL` Replace EMAIL with the contact's email address.
+* `a/ADDRESS` Replace ADDRESS with the contact's physical address.
+* `[t/TAG] (Optional)` You can add tags to help categorise your contacts. Replace TAG with the desired tag, e.g., "friend", "colleague", etc. Multiple tags can be added by repeating the `[t/TAG]` format.
+
+Examples
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/friend`
+  * Adds a contact named "John Doe" with the phone number "98765432", email "johnd@example.com", address "John street, block 123, #01-01", and a tag "friend"
+* `add n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567 t/friend t/colleague`
+  * Adds a contact named "Betsy Crowe" with the email "betsycrowe@example.com", address "Newgate Prison", phone "1234567", and two tags "friend" and "colleague"
+
 
 ### Add emergency contact
 
@@ -116,8 +133,44 @@ Examples:
   * Indicates that the contact at index 1 is the residential assistant (RA) for contact during emergencies
 
 ###  Add alternative information to contact
+
+Adds alternative contact information to an existing contact.
+
+Format: `addalt INDEX [tg/TELEGRAM] [e2/SECONDARY_EMAIL] [li/LINKEDIN]`
+
+At least one of the optional fields must be provided.
+
+Examples:
+* addalt 1 tg/johndoe_telegram e2/johndoe2@example.com 
+  * Adds John Doe's Telegram and secondary email
+* addalt 2 li/betsycrowe_linkedin
+  * Adds Betsy Crowe's LinkedIn
+
 ###  Upload contact's photo
+
+Uploads a photo for an existing contact.
+
+Format: `uploadphoto INDEX path/PHOTO_PATH`
+
+Examples:
+* `uploadphoto 1 path/C:/photos/johndoe.jpg`
+  * Uploads a photo for the 1st person from the specified path.
+* `uploadphoto 2 path/C:/photos/betsycrowe.png`
+  * Uploads a photo for the 2nd person from the specified path.
+
 ###  Update contact's photo
+
+Updates the photo of an existing contact.
+
+Format: `updatephoto INDEX path/NEW_PHOTO_PATH`
+
+Examples:
+* `updatephoto 1 path/C:/photos/new_johndoe.jpg`
+  * Updates the photo for the 1st person with a new image from the specified path.
+* `updatephoto 2 path/C:/photos/new_betsycrowe.png`
+  * Updates the photo for the 2nd person with a new image from the specified path.
+
+
 ###  Search contact
 
 Generally, search commands will contain the following tokens:
@@ -196,6 +249,10 @@ Examples:
 
 ###  List all contacts
 
+Shows a list of all contacts.
+
+Format: `list`
+
 ###  List emergency contacts
 
 Lists all emergency contacts that have been registered.
@@ -209,6 +266,17 @@ Examples:
   * Only lists emergency contacts tagged as residential assistants (RA)
 
 ###  Delete normal contact
+
+Deletes an existing contact from the address book.
+
+Format: `delete INDEX`
+
+Examples:
+* `delete 1`
+  * Deletes the 1st person from the list
+* `delete 2`
+  * Deletes the 2nd person from the list
+
 ###  Delete emergency contact
 
 Removes contact as an emergency contact.
