@@ -3,7 +3,7 @@ layout: default.md
 title: "Cleon's Project Portfolio Page"
 ---
 
-# Cleon's Portfolio Page
+# Cleon's Project Portfolio Page
 
 ### Project: LoveBook
 

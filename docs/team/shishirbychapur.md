@@ -3,7 +3,7 @@ layout: default.md
 title: "Shishir Bychapur's Project Portfolio Page"
 ---
 
-# Shishir's Portfolio Page
+# Shishir's Project Portfolio Page
 
 ### Project: LoveBook
 
