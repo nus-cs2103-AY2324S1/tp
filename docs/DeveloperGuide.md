@@ -270,14 +270,14 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a…         | I want to …                                          | So that I can …                                                |   |
+|----------|---------------|------------------------------------------------------|----------------------------------------------------------------|---|
+| `***`    | beginner user | Add an employee entry with details                   | Keep track of employees                                        |   |
+| `***`    | Beginner user | Delete employee entries                              | Maintain employee list so that it doesn’t get too long         |   |
+| `***`    | Beginner user | Edit employee entries                                | Update employee details                                        |   |
+| `***`    | user          | Retrieve information of past records                 | Find details of applicants that have been keyed in previously. |   |
+| `***`    | Beginner user | There is a ‘help’ command to list functions/features | Know how to use the app                                        |   |
+| `***`    | Beginner user | Exception handling                                   | Handle invalid inputs                                          |   |                                          |
 
 *{More to be added}*
 
