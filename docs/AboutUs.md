@@ -56,3 +56,13 @@ We currently do not offer any means to contacting us, thank you for your underst
 
 * Role: Developer
 * Responsibilities: Time man
+
+### Chen Xin-An
+
+<img src="images/chen1x.png" width="200px">
+
+[[github](http://github.com/Chen1x)]
+[[portfolio](team/chen1x.md)]
+
+* Role: Developer
+* Responsibilities: Job role object
