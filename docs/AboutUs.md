@@ -40,15 +40,17 @@ We are a team of students from the [School of Computing, National University of 
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Aw Hang Bin
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/awhb.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/awhb)]
+[[portfolio](team/awhb.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities:
+  * Code Quality
+  * Troubleshooting
 
 ### Xenos Fiorenzo Anong
 
