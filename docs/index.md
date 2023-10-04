@@ -8,7 +8,10 @@ title: InterviewHub
 
 ![Ui](images/Ui.png)
 
-**Interview Hub is TBD Placeholder text** The quick brown fox jumped over the lazy dog.
+**Interview Hub is a CLI application is designed for Engineering Managers of tech companies.**
+Provides hiring managers quick access to the entire pool of interviewees,their contacts and their resumes.
+Also allows the hiring managers to take notes during the interview and to also leave a review/rating of the potential hire for future internal usage
+
 
 * If you are interested in using InterviewHub, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
 * If you are interested about developing InterviewHub, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
