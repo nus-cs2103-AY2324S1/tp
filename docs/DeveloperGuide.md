@@ -306,29 +306,6 @@ Priorities: Essential (must have) - `* * *`, Typical (nice to have) - `* *`, Nov
 
 (For all use cases below, the **System** is the `DoConnek Pro` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Quick Start the DoConnek Pro **
-
-**MSS**
-
-1. User downloads the latest '.jar' file.
-2. User navigates to the desired home folder for the application.
-3. User copies the downloaded '.jar' file to the selected home folder.
-4. User double-clicks the '.jar' file.
-5. System detects the file and initiates the application.
-6. The application initializes and displays the welcome interface.
-
-   Use case ends.
-
-**Extensions**
-
-* 5a. The system detects an incompatible Java version.
-
-  Use case ends.
-
-* 5b. The user does not have Java installed on their system.
-
-  Use case ends.
-
 **Use case: Delete a person**
 
 **MSS**
