@@ -94,6 +94,20 @@ Shows a list of all persons in the address book.
 
 Format: `list`
 
+### Searching for student's contact via keyword : `find` [Coming Soon]
+
+Finds a student's contact either via their name or student ID.
+
+Format: `find /name STUDENTNAME | /id STUDENTID`
+
+* Finds a student's contact either via their name or student ID.
+* `STUDENTNAME` should be a string made up of alphabetical characters, with no numbers or special characters.
+* `STUDENTID` should be a string made up of alphabetical characters and numbers, with no special characters or space.
+
+Examples:
+*  `find /name Anthony` Finds all contacts with the name "Anthony".
+*  `find /id A0123456H` Finds all contacts with the student ID "A0123456H".
+
 ### Editing a person : `edit`
 
 Edits an existing person in the address book.
