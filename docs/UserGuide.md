@@ -4,9 +4,9 @@
   pageNav: 3
 ---
 
-# AB-3 User Guide
+# ProjectPRO User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+Text-friendly project management tool that helps students schedule meetings with different groups while also keeping track of tasks and responsibilities of each member. Our app will track the schedule of each contact and tasks individuals have to do for their project.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -133,17 +133,22 @@ Examples:
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified contact from the contact list. (This contact will also be removed from any existing groups.)
 
-Format: `delete INDEX`
-
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+Format: `delete NAME`
+* Deletes the contact with the specified NAME
+* NAME has to be unique (no existing contact with same name)
+* NAME has to be an exact match
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `delete Gerald (cs2101)`
+* `delete jane`
+
+Acceptable values: `NAME should be a string.`
+
+Expected output when succeeds: `Contact successfully deleted`
+
+Expected output when fails: `Error, invalid input entered`
 
 ### Clearing all entries : `clear`
 
