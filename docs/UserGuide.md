@@ -1,6 +1,11 @@
-# JobFindr User Guide
-
 ---
+layout: page
+title: User Guide
+---
+* Table of Contents
+  {:toc}
+
+--------------------------------------------------------------------------------------------------------------------
 
 JobFindr is a **Contact Book app** for NUS fresh graduates who are looking for jobs. 
 
@@ -13,11 +18,11 @@ The project simulates an ongoing software project for a desktop application (cal
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `jobfindr.jar` from [here](https://github.com/AY2324S1-CS2103T-W12-3/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar jobfindr.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -86,6 +91,8 @@ print “Error: ” and error message for:
 * `add n/The Coca-Cola Company e/cocacola@yahoo.com`
   Adds a company called The Coca-Cola Company, adds their email
 
+**UI mockup:**
+![AddCommand](images/user-guide/AddCommand.png)
 ---
 
 ### Deleting an application : `delete`
@@ -110,6 +117,8 @@ print “Error: ” and error message for:
 * `list` followed by `delete 2`
   Deletes the 2nd application in the list.
 
+**UI mockup:**
+![DeleteCommand](images/user-guide/DeleteCommand.png)
 ---
 
 ### Listing all applications : `list`
@@ -127,7 +136,7 @@ print “Error: ” and error message for:
 * Arguments passed after the list command: “Unexpected arguments.”
 
 **UI mockup:**
-(insert photo)
+![ListCommand](images/user-guide/ListCommand.png)
 
 ---
 
@@ -154,6 +163,9 @@ print “Error: ” and error message for:
   Marks the status of the company application at index 1 as submitted.
 * `mark 2 rejected`
   Marks the status of the company application at index 1 as rejected.
+
+**UI mockup:**
+![MarkCommand](images/user-guide/MarkCommand.png)
 
 ---
 
@@ -183,6 +195,9 @@ print “Error: ” and error message:
 **Examples:**
 * `setdeadline 1 d/Nov 12 2022 1200`
   Sets deadline for application at index 1 to be Nov 12 2022 1200.
+
+**UI mockup:**
+  ![DeadlineCommand](images/user-guide/DeadlineCommand.png)
 
 ---
 
