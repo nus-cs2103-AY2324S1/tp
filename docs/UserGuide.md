@@ -164,27 +164,38 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Viewing specific tutorial groups: `filter add` [Coming Soon]
+### Adding a filter: `filter add` [Coming Soon]
 
 Shows a list of students from a specified tutorial group
 
-Format: `filter add TUTORIALGROUPID`
+Format: `filter add /tg TUTORIALGROUPID | /course COURSECODE`
 
-* Filters students that are in the tutorial group specified by `TUTORIALGROUPID`
+* Filters students that are in the tutorial group specified by `TUTORIALGROUPID` or course specified by `COURSECODE`
 * `TUTORIALGROUPID` should be a string made up of alphabetical characters and numbers, with no special characters.
 * `TUTORIALGROUPID` must correspond to an existing tutorial group.
+* `COURSECODE` should be a string made up of alphabetical characters and numbers, with no special characters.
+* `COURSECODE` must correspond to an existing course.
 
 Examples:
-* `filter add G08` returns a list of students from tutorial group G08
+* `filter add /tg G08` returns a list of students from tutorial group G08.
+* `filter add /course CS2103T` returns a list of students in the course CS2103T.
 
 ### Removing filters: `filter remove` [Coming Soon]
 
 Removes any applied filter
 
-Format: `filter remove`
+Format: `filter remove [/tg TUTORIALGROUPID] [/course COURSECODE]`
+
+* Remove the tutorial group filter specified by `TUTORIALGROUPID` or course filter specified by `COURSECODE`
+* `TUTORIALGROUPID` should be a string made up of alphabetical characters and numbers, with no special characters.
+* `TUTORIALGROUPID` must correspond to an existing tutorial group.
+* `COURSECODE` should be a string made up of alphabetical characters and numbers, with no special characters.
+* `COURSECODE` must correspond to an existing course.
 
 Examples:
-* `filter remove` returns the list of all students 
+* `filter remove` returns the list of all students
+* `filter remove /tg G08` returns a list of students containing those from tutorial group G08.
+* `filter remove /course CS2103T` returns a list of students containing those in the course CS2103T.
 
 ### Deleting a person : `delete`
 
