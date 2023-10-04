@@ -128,6 +128,29 @@ Error messages:
 * `Wrong input: p/`: The phone number entered does not consist of numbers only. 
 * `Wrong input: e/`: The email entered is invalid.
 
+### Listing all tutors: `list-t`
+
+Displays a list of all tutors in the address book in a table format.
+
+![list tutor](images/listTutor.png)
+
+**Format**: `list-t`
+
+**Example**:
+* `list-t`
+
+**Acceptable values for each parameter:**
+* No acceptable values as list-t has no parameters
+
+**Expected Output:**
+* Displays a table of tutors with columns for Name, Phone Number, and Email like 
+  the [image](#listing-all-tutors--list-t) above
+* If there are no tutors in the address book, displays a message telling the user
+  to add a tutor with add-t: `There are no tutors in the address book. Please use /add-t to add a tutor.`
+
+**Error messages:**
+* `Too many parameters`: list-t does not accept any parameters.
+
 ### Adding a schedule: `add-s`
 
 Adds a schedule to a specified tutor.
@@ -200,5 +223,5 @@ _Details coming soon ..._
 | **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                         |
 | **Edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` |
 | **Find**         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                  |
-| **List**         | `list`                                                                                                                      |
+| **List Tutor**   | `list-t`                                                                                                                    |
 | **Help**         | `help`                                                                                                                      |
