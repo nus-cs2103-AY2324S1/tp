@@ -309,6 +309,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is `TAvigator` and the **Actor** is the `user`, unless specified otherwise)
 
+**Use case: UC01 - Creating a new contact and editing relevant information**
+
+**MSS**
+
+1. User creates a new contact. 
+
+    Use case ends.
+
+**Extensions**
+
+1a. User edits the contact name. 
+
+1b. User edits the Module Code associated with the contact. 
+
+1c. User edits the Tutorial Group Number associated with the contact.
+
 **Use case: UC02 - View Summary of Attendance Records**
 
 **MSS**
