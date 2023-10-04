@@ -39,7 +39,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Mohammed Faiz
 
-<img src="images/Faiz_Profile.png" width="200px">
+<img src="images/mohammed-faizzzz.png" width="200px">
 
 [[LinkedIn](https://www.linkedin.com/in/mohammed-faiz-47585017a/)]
 [[Github](https://github.com/Mohammed-Faizzzz)]
