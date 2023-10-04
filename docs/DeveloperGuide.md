@@ -283,14 +283,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-| `* *` | new user | have a quick-start guide | start using the basic functionality of the app as soon as possible
-| `* *` | new user | use commonly-available keyboard shortcuts (e.g. ctrl-c for copy, ctrl-v for paste) | use the shortcuts I am accustomed to
-| `* *` | NUS computing student | use simple and easy-to-remember shortcuts | have no trouble remembering and executing the shortcuts
+| `* * *`  | user                                       | create a new contact | keep a record of individuals in my network |
+| `* * *` | user | add more details about an existing contact | store information about my contacts for future reference |
+| `* * *` | user | update details of a contact | replace outdated details with more accurate information |
+| `* * *`  | user                                       | delete a contact          | remove entries that are no longer relevant             |
+| `* * `  | user                                       | find a contact by name    | locate details of contacts without having to go through the entire list |
+| `*`      | user with many contacts | sort contacts by their details | locate contacts with special characteristics that I am looking for |
+| `* ` | user with many contacts | filter contacts based on their details | locate contacts who fulfil certain conditions that I am looking for |
+| `* *` | new user | have a quick-start guide | start using the basic functionality of the app as soon as possible|
+| `* *` | new user | use commonly-available keyboard shortcuts (e.g. ctrl-c for copy, ctrl-v for paste) | use the shortcuts I am accustomed to|
+| `* *` | NUS computing student | use simple and easy-to-remember shortcuts | have no trouble remembering and executing the shortcuts|
 
 
 ### Use cases
@@ -337,6 +339,7 @@ upon finishing going through the quick-start guide.
    * Ctrl+W: exit the app
    * Ctrl+F: find a contact
    * Ctrl+H/Ctrl+R/Ctrl+G: edit a contact
+   * Up/down arrow keys: access previous commands
 1. Keywords to be used in commands must be self-explanatory.
 
 
