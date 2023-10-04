@@ -86,7 +86,7 @@ Examples:
 * `add student n/Sally c/94149785 a/Woodlands Street 11 Blk 888 #08-08`
 
 
-### View all students //TODO
+### View all students 
 
 Shows a list of all students.
 
@@ -105,7 +105,16 @@ Format: `delete <INDEX>`
 Examples:
 * `delete appointment 2`
 
-### Tag student to risk level //TODO
+### Tag student to risk level 
+Tags a student with a risk level based on their current mental health status, categorizing them as high, medium, low tag_student <index> <RISK_LEVEL>
+   
+Format: `tag_student <index> <RISK_LEVEL>`
+   
+**Parameters**:
+1. Student Index
+    - The index of an existing student in the system
+2. RISK LEVEL 
+   - One of the following HIGH, MEDIUM, LOW
 
 ### Add an appointment
 
@@ -178,7 +187,7 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary //TODO: update your respective things
+## Command summary 
 
 
 
@@ -187,7 +196,7 @@ _Details coming soon ..._
 | **Add student**               | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add student n/John c/81349705 a/Yishun Street 56 Blk 21 #05-07` |
 | **View Students**             | `clear`                                                                                                                             |
 | **Delete student**            | `delete INDEX`<br> e.g., `delete 3`                                                                                                 |
-| **Tag student to risk level** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`         |
+| **Tag student to risk level** | `tag_student <index> <RISK_LEVEL>`<br> e.g.,`tag_student 4 HIGH`                                                                    |
 | **Add appointment**           | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                          |
 | **View appointments**         | `list`                                                                                                                              |
 | **Help**                      | `help`                                                                                                                              |
