@@ -21,14 +21,29 @@ On top of these functionalities, we believe that tuition centre management must 
 
 ## Common Notation
 
-> ### 💡 Tip
-> `Tips` are used to provide helpful advice, suggestions, or best practices to enhance your experience by making a task easier or more efficient.
+<div markdown="block" class="alert alert-success">
 
-> ### ⚠️ Warning
-> `Warnings` are used to alert you about potential issues, errors, or risks associated with a task or action. They are essential for preventing mistakes and ensuring safety.
+**:information_source: Tip**<br>
 
-> ### ℹ️ Information
-> `Information` sections provide additional background knowledge or context to help you understand a topic better.
+`Tips` are used to provide helpful advice, suggestions, or best practices to enhance your experience by making a task easier or more efficient.
+
+</div>
+
+<div markdown="block" class="alert alert-danger">
+
+**:information_source: Warning**<br>
+
+`Warnings` are used to alert you about potential issues, errors, or risks associated with a task or action. They are essential for preventing mistakes and ensuring safety.
+
+</div>
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Information**<br>
+
+`Information` sections provide additional background knowledge or context to help you understand a topic better.
+
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -47,11 +62,16 @@ On top of these functionalities, we believe that tuition centre management must 
 
 4. Double-click the jar file to launch the application.
 
-> ## ℹ️ Mac Users
-> If you are a Mac user, you may encounter a warning that says 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Mac Users**<br>
+
+If you are a Mac user, you may encounter a warning that says 
    the jar file cannot be opened because it is from an unidentified developer. To continue:
->   1. Right-click on the jar file and select `Open With > JavaLauncher (default)`
->   2. Press Open when prompted
+   1. Right-click on the jar file and select `Open With > JavaLauncher (default)`
+   2. Press Open when prompted
+
+</div>
 
 5. Refer to the [Features](#features) below for details of each command.
 
@@ -59,20 +79,25 @@ On top of these functionalities, we believe that tuition centre management must 
 
 ## Features
 
-> ## ℹ️ Command Format
-> * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-> * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-> * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-> * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-> * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) 
-    > will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-> * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple 
-    > lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Command Format:**<br>
+
+* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+ e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+* Items in square brackets are optional.<br>
+ e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+* Items with `…`​ after them can be used multiple times including zero times.<br>
+ e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+* Parameters can be in any order.<br>
+ e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) 
+  will be ignored.<br>
+ e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple  
+  lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+
+</div>
 
 ### Adding a tutor: `add-t`
 
