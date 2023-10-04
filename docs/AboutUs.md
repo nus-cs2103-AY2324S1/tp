@@ -9,24 +9,25 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Tanveer Singh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/tanveer.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[homepage](https://www.linkedin.com/in/tanveersingh10/)]
+[[github](https://github.com/tanveersingh10)]
+[[portfolio](team/tanveer.md)]
 
 * Role: Project Advisor
 
-### Jane Doe
+### Koh Kai Jie
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/kohkaijie.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[homepage](https://www.linkedin.com/in/koh-kai-jie-1064b728b/)]
+[[github](http://github.com/kohkaijie)]
+[[portfolio](team/kaijie.md)]
 
-* Role: Team Lead
+* Role: Developer
 * Responsibilities: UI
 
 ### Johnny Doe
@@ -48,12 +49,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Huang Chao Ming
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/cmhuang777.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/cmHuang777)]
+[[portfolio](team/cmhuang777.md)]
 
 * Role: Developer
 * Responsibilities: UI
