@@ -76,15 +76,11 @@ Format: `help`
 
 Creates a new contact with the specified name and module code(s).
 
-Format: `new contact /name <Name> /mod <Optional: Module Code>`
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of module codes (including 0)
-</div>
+Format: `new contact /name <Name> /mod <Optional: Module Code> /grp <Optional: Tutorial Group Number>`
 
 Examples:
 * `new contact /name Fu Yiqiao`
-* `new contact /name Fu Yiqiao /mod CS2103T`
+* `new contact /name Fu Yiqiao /mod CS2103T /grp T09`
 
 ### Viewing summary of attendance : `list attendance`
 
@@ -134,6 +130,20 @@ To remove a module, simply leave the newMod section empty
 Examples:
 *  `edit mod Fu Yiqiao /oldmod CS2103T CS2101` Edits the module with code CS2103T to CS2101
 *  `edit mod Fu Yiqiao /oldmod CS2103T` Removes the module with code CS2103T from the contact
+
+### Editing tutorial group number : `edit grp`
+
+Edits the tutorial group number associated with the contact.
+
+Format: `edit grp <Name> /oldgrp <oldgrp> /newgrp <newgrp>`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+To remove a group number, simply leave out the newgrp section
+</div>
+
+Examples:
+*  `edit grp Fu Yiqiao /oldgrp T09 /newgrp T10` Edits the group from T09 to T10
+*  `edit grp Fu Yiqiao /oldgrp T09` Removes the group number from the contact
 
 
 ### Locating persons by name: `find`
@@ -215,10 +225,10 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add** | `new contact /name <Name> /mod <Optional: Module Code> /grp <Optional: Tutorial Group Number>` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit** | `edit name /oldname <oldName> /newname <newName>`<br> `edit mod <Name> /oldmod <oldMod> <newMod>`<br> `edit grp <Name> /oldgrp <oldgrp> /newgrp <newgrp>`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
