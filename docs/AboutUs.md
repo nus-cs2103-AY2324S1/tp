@@ -32,6 +32,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: UI
 
+### Kailashwaran
+
+<img src="images/Kailash201.png" width="200px">
+
+[[github](http://github.com/Kailash201)]
+[[portfolio](team/Kailash201.md)]
+
+* Role: Developer
+* Responsibilities: Team Lead
+
 ### Nicholas Tng
 
 <img src="images/nicholastng010601.png" width="200px">
@@ -47,7 +57,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/zd292.png" width="200px">
 
 [[github](https://github.com/zd292)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/zd292.md)]
 
 * Role: Developer
 * Responsibilities: Documentation
