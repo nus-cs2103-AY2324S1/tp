@@ -375,6 +375,58 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+**Use case: UC04 - Adding a filter**
+
+**MSS**
+
+1.  User requests to add a filter and enters a tutorial group ID or course ID.
+2.  TAvigator shows a list of students matching the filters applied.
+
+    Use case ends.
+
+**Extensions**
+
+* 4a. The given tutorial group ID is invalid.
+    * 4a1. TAvigator shows an error message.
+
+      Use case ends.
+
+* 4b. The given course ID is invalid.
+    * 4b1. TAvigator shows an error message.
+
+      Use case ends.
+
+* 4c. User does not specify a tutorial group ID or course ID.
+    * 4c1. TAvigator shows an error message.
+
+      Use case ends.
+
+**Use case: UC05 - Removing a filter**
+
+**MSS**
+
+1.  User requests to remove a filter and enters a tutorial group ID or course ID.
+2.  TAvigator shows a list of students with the updated filters.
+
+    Use case ends.
+
+**Extensions**
+
+* 5a. The given tutorial group ID is invalid.
+    * 5a1. TAvigator shows an error message.
+
+      Use case ends.
+
+* 5b. The given course ID is invalid.
+    * 5b1. TAvigator shows an error message.
+
+      Use case ends.
+
+* 5c. User does not specify a tutorial group ID or course ID.
+    * 5c1. TAvigator removes all applied filters.
+
+      Use case ends.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
