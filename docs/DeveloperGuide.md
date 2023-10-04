@@ -324,29 +324,40 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* University students often spend a lot of time coordinating project meetup 
+* sessions and waiting for replies and they are not aware of one another’s schedules. 
+* This app can help to save time by listing available time slots of individuals in a team.
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+
+**Value proposition**: Text-friendly project management tool that helps students schedule meetings with different groups while also keeping track of tasks and 
+responsibilities of each member. Our app will track the schedule of each contact and tasks individuals have to do for their project.
 
 
 ### User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
-
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
+| Priority | As a ...                                    | I want to ...                | So that I can ...                                                     |
 |----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
-
-*{More to be added}*
+| `***`    | student                                    | add a new contact            | keep track of any new contacts                                        |
+| `***`    | student with many contacts                 | organize contacts into groups | easily keep track and manage my contacts                               |
+| `***`    | student with many team members             | record team members' info     | keep track of my team members' contact information                     |
+| `***`    | student with many projects                 | delete a group               | avoid clutter and unnecessary attention to completed projects           |
+| `***`    | student with many contacts                 | search for group members     | quickly access contact details using name, contact number, or address  |
+| `***`    | user                                       | save entered information      | avoid repetitive data entry                                           |
+| `**`     | team leader                                | add tasks to contacts        | remember who is responsible for which task                            |
+| `**`     | student                                    | filter contacts by project   | easily view tasks for a specific project group                         |
+| `**`     | user                                       | prioritize tasks             | work on important tasks first                                         |
+| `**`     | student                                    | add time slots of group mates| find a suitable meeting time when everyone is available                |
+| `**`     | new user                                   | access a help command        | quickly learn about application functions without reading a long guide |
+| `*`      | impatient user                             | access the user guide        | quickly learn how to use the application                               |
+| `*`      | technology-challenged student              | read the user guide          | gain a better understanding of how to use the application               |
+| `*`      | fast but inaccurate typer                  | undo a previous command      | correct typing mistakes                                               |
+| `*`      | forgetful student                          | add a reminder               | ensure attendance at upcoming project meetings                         |
+| `*`      | student with many projects                 | color code projects          | differentiate between various project groups                           |
+| `*`      | lazy user                                  | minimize typing/clicking     | achieve tasks with minimal effort                                      |
+| `*`      | student with an irregular schedule         | edit contact information     | easily manage changes in contact details                               |
+| `*`      | user                                       | filter contacts by courses   | view contacts based on shared courses or projects                       |
+| `*`      | user                                       | upload attachments/files     | improve collaboration and reference for tasks and projects              |
+| `*`      | user                                       | view contact profiles        | access course schedules, contact details, and profile pictures         |
 
 ### Use cases
 
@@ -379,15 +390,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+1. Should work on any mainstream OS as long as it has Java 11 or above installed.
+2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Should be able to save the state of the user’s actions.
+5. Should be able to handle an increasing number of contacts and events without a significant degradation in performance.
+6. Data loss or corruption should not occur, even in the event of unexpected crashes or system failures.
+7. Should not support any online features. No user actions or data manipulation should require online features.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
+* **Java 11**: Programming language
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 
 --------------------------------------------------------------------------------------------------------------------
