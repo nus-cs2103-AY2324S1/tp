@@ -291,3 +291,4 @@ Action        | Format, Examples
 **Delemer**   | `delemer INDEX`
 **Listemer**  | `listemer [tag/TAG]`
 **Optout**    | `optout NOTIFICATION_DESCRIPTION`
+**Find**      | `find FIELD/KEYWORD [FIELD/KEYWORD]`
