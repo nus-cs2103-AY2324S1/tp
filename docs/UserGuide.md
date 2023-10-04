@@ -3,8 +3,8 @@ layout: page
 title: User Guide
 ---
 
-Interview Hub (IH) is a **desktop app for scheduling job interviews and managing applicants, 
-optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). 
+Interview Hub (IH) is a **desktop app for scheduling job interviews and managing applicants,
+optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
 If you can type fast, IH can get your Interview management tasks done faster than traditional GUI apps.
 
 * Table of Contents
@@ -109,7 +109,7 @@ Edits an existing applicant in the address book.
 
 Format: `edit-applicant APPLICANT_INDEX [n/NAME] [t/INTERVIEW_DATETIME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
 
-* Edits the person at the specified `APPLICANT_INDEX`. The index refers to the index number shown in the displayed applicant list. 
+* Edits the person at the specified `APPLICANT_INDEX`. The index refers to the index number shown in the displayed applicant list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * Job index is fixed and cannot be edited, to change the job of an applicant, delete the applicant and add a new one.
 * At least one of the optional fields must be provided.
