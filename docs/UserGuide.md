@@ -9,6 +9,52 @@ NetworkBook is a **desktop contact book application**. You can use it to network
 
 ### <u>Category 1 - Add contact information</u>
 
+### Create new contact: `create /name [name] [/optional fields]`
+
+You can use the create command to create a new contact. When creating a contact, you must provide the name field, and it's optional to provide other fields which will be added to the new contact.
+
+Format: `create /name [name] [/phone /email /link /grad /course /spec /priority /tag]`
+
+Example usage:
+* `create /name Oreki`
+* `create /name Oreki /phone +12345678 /grad AY2526-S2`
+
+Parameters:
+* `[name]`  is the name of the contact you wish to add.
+* `[optional fields]` are the non-mandatory fields you can associate with the contact at the point of creation. The fields can also be added using the add command.
+
+When the command succeeds:
+* `create /name Oreki`
+
+`Noted, I have added contact with the name Oreki at index 1.`
+
+### Add phone number to contact: `add /phone /index`
+
+You can add a phone number to an existing contact. A new phone number will be added to the contact's list of phone numbers, and no new contact will be created.
+
+Format: `add /phone [phone] /index [index]`
+
+Example usage:
+* `add /phone +6591234567 /index 1`
+* `add /phone +11234567890 /index 2`
+
+Parameters:
+* `[phone]` is a valid phone number (Country code must be included with + (plus sign) present.)
+* `[index]` is the index of the contact in the list.
+
+When the command succeeds:
+* `add /phone +6591234567 /index 1`
+
+`Noted, I have added phone number +6591234567 to the contact at index 1 (Oreki).`
+
+When the command fails:
+* `add /phone +6591234567`
+
+`Oops, you did not provide the index of the contact to add to.`
+* `add /email 91234567 /index 1`
+
+`Oops, you did not provide a valid phone number that includes a country code.`
+
 ### Add email to a contact: `add /email /index`
 
 You can add an email to an existing contact.
@@ -246,7 +292,28 @@ When the command fails:
 
 ### <u>Category 3 - Find contacts</u>
 
+### Search: `search [/field]`
 
+You can use the `search` command to search for contacts by their name if you wish to quickly reference a particular contact’s details.
+
+Format: `search /name [name]`
+
+Example usage:
+* `search /name Jack`
+* `search /name Kai Jie`
+
+Parameters:
+* `[name]` is the name of the contact, or a part of it
+
+Expected output when the command succeeds:
+* `Here’s a list of contacts with names including your search term:
+  [list of relevant contacts]`
+
+![search success](images/find/search-success.png)
+
+Expected output when the command fails:
+* if missing search term:
+`Oops, it seems you did not include a search term.`
 
 
 
