@@ -270,14 +270,32 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                                               | I want to …​                             | So that I can…​                                                        |
+|----------|-------------------------------------------------------|------------------------------------------|------------------------------------------------------------------------|
+| `* * *`  | New user of the app                                   | see usage instructions                   | refer to instructions when I first started to use the App              |
+| `* * *`  | Engineering Manager ready for job applicant           | add a new applicant                      | save their contact details into the App                                |
+| `* * *`  | Engineering Manager opening a job role                | add a new job role                       | keep track of the job role available for application                   |
+| `* * *`  | Engineering Manager ready to start an interview       | add a new interview slot                 | save the interview information into the App                            |
+| `* * *`  | Engineering Manager ready for next round of interview | delete an applicant                      | remove their contact details that I no longer need                     |
+| `* * *`  | Engineering Manager that finished an interview        | delete an interview                      | remove the interview that has already been completed                   |
+| `* * *`  | Busy Engineering Manager                              | find an applicant by name                | locate details of persons without having to go through the entire list |
+| `* * *`  | Busy Engineering Manager                              | find a job role by name                  | easily locate the job role which are still available                   |
+| `* *`    | Busy Engineering Manager                              | set reminder of interview                | stay organised and track upcoming interview                            |
+| `* *`    | Engineering Manager with sensitive information        | hide private contact details             | protect the privacy of the applicants information in the App           |
+| `* *`    | Engineering Manager with many applicants              | sort the applicants by skill             | prioritise and focus on the most promising candidates                  |
+| `* *`    | Engineering Manager with many applicants              | rank the applicants                      | keep track of the applicants who have performed well                   |
+| `* *`    | Engineering Manager                                   | update an applicant details              | easily update their information on the App                             |
+| `* *`    | Engineering Manager                                   | update a job role                        | easily change the details about the job role                           |
+| `* *`    | Engineering Manager with limited budget               | track the cost per hire                  | ensure that the company budget is not exceeded                         |
+| `* *`    | Team-Oriented Engineering Manager                     | add other interviewer                    | facililate collaboration and delegation of responsibilities            |
+| `*`      | Organised Engineering Manager                         | sort persons by name                     | locate an applicant easily                                             |
+| `*`      | Engineering Manager with many contacts                | import contacts from other file          | add multiple contacts into the App smoothly                            |
+| `*`      | Meticulous Engineering Manager                        | store the applicant's background         | make a more informed choice to benefit the company                     |
+| `*`      | Engineering Manager with multiple rounds of interview | track the progress of each candidate     | maintain a clear overview of our recruitment efforts                   |
+| `*`      | New Engineering Manager                               | analyse the performance of the interview | make improvements to my interview processes                            |
+| `*`      | Helpful Engineering Manager                           | provide feedback to the applicant        | offer constructive advice to help them improve their skills            |
+| `*`      | Long user of the app                                  | provide feedback to the developer        | suggest improvements and enhancements for the app                      |
+
 
 *{More to be added}*
 
