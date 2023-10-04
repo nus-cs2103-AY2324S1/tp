@@ -287,35 +287,35 @@ _{Explain here how the data archiving feature will be implemented}_
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 
-| Priority | As a …​ | I want to …​                                                | So that I can…​                                                         |
-|----------|---------|-------------------------------------------------------------|-------------------------------------------------------------------------|
-| `* * *`  | TA      | manually enter the details of students into my address book | track the information                                                   |
-| `* * *`  | TA      | be able to delete students from the class                   | manage students who drop out                                            |
-| `* * *`  | TA      | edit the contact information of students                    | maintain the correct information if it changes                          |
-| `* *`    | TA      | keep track of the attendance percentage of each student     | use it for their participation grade                                    |
-| `* *`    | TA      | be able to add the grades of each student in each tutorial  | use it to view students that need help                                  |
-| `*`      | TA      | be able to keep records of my students in past semesters    | refer to the history of student performance                             |
-| `*`      | TA      | add comments to specific students                           | attach additional information to them                                   |
-| `* * *`  | TA      | tag students with certain labels                            | filter and search more conveniently                                     |
-| `* * *`  | TA      | lookup all students in a particular tutorial group          | obtain their contact information                                        |
-| `* *`    | TA      | search particular students across different tutorial groups | contact them easily                                                     |
-| `*`      | TA      | know the students I searched recently                       | minimize repeated searches                                              |
-| `* *`    | TA      | filter students by tags/labels                              | categorize and organize students                                        |
-| `* *`    | TA      | filter students by their year of study                      | gain a better understanding of the whole tutorial                       |
-| `*`      | TA      | have a composite filter for tutorial group attendance       | look up the attendance of a particular tutorial group on a certain week |
-| `*`      | TA      | randomly select a specific number of students               | use as a feature during teaching                                        |
-| `* *`    | TA      | sort students by coding experience                          | group students with similar experience levels                           |
-| `* *`    | TA      | sort students based on their individual score marks         | understand the performance of the whole class                           |
-| `* *`    | TA      | sort students by alphabetical order                         | compare to the attendance sheet                                         |
-| `* *`    | TA      | sort students by their overall grades                       | identify students falling behind in my class                            |
-| `* `     | TA      | customise my GUI                                            | use a theme that suits my desktop theme                                 |
-| `* `     | TA      | enable dark mode for my device                              | use it at night                                                         |
-| `* `     | TA      | choose different layouts                                    | select a comfortable layout                                             |
-| `* *`    | TA      | have keyboard shortcuts for commonly used features          | save time and fit my habit                                              |
-| `* *`    | TA      | customise commands                                          | save time and fit my habit                                              |
-| `* * *`  | TA      | export and import app’s data                                | work on different devices                                               |
-| `* * *`  | TA      | save queries and searches to the application                | not lose progress                                                       |
-
+| Priority | As a …​  | I want to …​                                                | So that I can…​                                                         |
+|----------|----------|-------------------------------------------------------------|-------------------------------------------------------------------------|
+| `* * *`  | TA       | manually enter the details of students into my address book | track the information                                                   |
+| `* * *`  | TA       | be able to delete students from the class                   | manage students who drop out                                            |
+| `* * *`  | TA       | edit the contact information of students                    | maintain the correct information if it changes                          |
+| `* *`    | TA       | keep track of the attendance percentage of each student     | use it for their participation grade                                    |
+| `* *`    | TA       | be able to add the grades of each student in each tutorial  | use it to view students that need help                                  |
+| `*`      | TA       | be able to keep records of my students in past semesters    | refer to the history of student performance                             |
+| `*`      | TA       | add comments to specific students                           | attach additional information to them                                   |
+| `* * *`  | TA       | tag students with certain labels                            | filter and search more conveniently                                     |
+| `* * *`  | TA       | lookup all students in a particular tutorial group          | obtain their contact information                                        |
+| `* *`    | TA       | search particular students across different tutorial groups | contact them easily                                                     |
+| `*`      | TA       | know the students I searched recently                       | minimize repeated searches                                              |
+| `* *`    | TA       | filter students by tags/labels                              | categorize and organize students                                        |
+| `* *`    | TA       | filter students by their year of study                      | gain a better understanding of the whole tutorial                       |
+| `*`      | TA       | have a composite filter for tutorial group attendance       | look up the attendance of a particular tutorial group on a certain week |
+| `*`      | TA       | randomly select a specific number of students               | use as a feature during teaching                                        |
+| `* *`    | TA       | sort students by coding experience                          | group students with similar experience levels                           |
+| `* *`    | TA       | sort students based on their individual score marks         | understand the performance of the whole class                           |
+| `* *`    | TA       | sort students by alphabetical order                         | compare to the attendance sheet                                         |
+| `* *`    | TA       | sort students by their overall grades                       | identify students falling behind in my class                            |
+| `* `     | TA       | customise my GUI                                            | use a theme that suits my desktop theme                                 |
+| `* `     | TA       | enable dark mode for my device                              | use it at night                                                         |
+| `* `     | TA       | choose different layouts                                    | select a comfortable layout                                             |
+| `* *`    | TA       | have keyboard shortcuts for commonly used features          | save time and fit my habit                                              |
+| `* *`    | TA       | customise commands                                          | save time and fit my habit                                              |
+| `* * *`  | TA       | export and import app’s data                                | work on different devices                                               |
+| `* * *`  | TA       | save queries and searches to the application                | not lose progress                                                       |
+| `* * *`  | new user | see usage instructions                                      | refer to instructions when I forget how to use the App                  |
 
 ### Use cases
 
@@ -439,7 +439,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Student Number**: Matriculation number of NUS student
+* **Email**: NUS email account (...@u.nus.edu)
+* **CLI**: Command Line Interface
+* **GUI** Graphic User Interface
 
 --------------------------------------------------------------------------------------------------------------------
 
