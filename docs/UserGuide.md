@@ -8,9 +8,9 @@ title: User Guide
 Tutor Connect is an address book made for **tuition centre managers** to easily track and schedule.
 
 Here’s an overview of what you can do with Tutor Connect:
-Store and edit information about your tutors
-Create and plan your tutor availability and schedule
-View upcoming schedules
+* Store and edit information about your tutors
+* Create and plan your tutor availability and schedule
+* View upcoming schedules
 
 On top of these functionalities, we believe that tuition centre management must be efficient. Therefore, Tutor Connect is **optimised for users who can type fast** and utilise the Command Line Interface (CLI) to complete tasks using the keyboard faster than using the mouse.
 
