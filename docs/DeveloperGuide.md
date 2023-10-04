@@ -255,16 +255,17 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:Healthcare Professionals, especially those who handle multiple patient records
+**Target user profile**:
+Healthcare Professionals who
 
 * has a need to manage a significant number of patients at any given time
-* add, update, delete and search patient records
-* required to update, access and track multiple patients' treatment history
+* can add, update, delete and search patient records
+* are required to update, access and track multiple patients' treatment history
 * manage the scheduling, rescheduling and cancelling of appointments
 * prefer desktop apps over other types
 * can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* prefer typing to mouse interactions
+* are reasonably comfortable using CLI apps
 
 **Value proposition**: manage patients' medical records faster than a typical GUI driven app in a systematic manner
 
@@ -273,14 +274,20 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                                    | I want to …​                                                                                                           | So that I can…​                                                                  |
+|-----|--------------------------------------------|------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
+| `* * *` | healthcare professional                    | create new patient records with relevant demographic information                                                       | add new patient records into the system                                          |
+| `* * *` | healthcare professional                    | update patient records as needed                                                                                       | keep the patient's information accurate and up to date                           |
+| `* * *` | healthcare professional                    | delete patient records as needed                                                                                       | remove unused/outdated patient records                                           |
+| `* * *` | healthcare professional                    | search and retrieve patient records using their name quickly                                                           | find the necessary information efficiently without going through the entire list |
+| `* * *` | healthcare professional                    | list all patients currently recorded in the system                                                                     | see the general workload of the service.                                         |
+| `* *` | healthcare professional                    | add custom remarks to a patient's records                                                                              | give them detailed instructions and feedback after consultation                  |
+| `* * *` | healthcare professional                    | schedule appointments for patients                                                                                     | set the date and time of patients' next appointment                              |
+| `* * *` | healthcare professional                    | reschedule appointments when necessary                                                                                 | make sure my schedule does not clash with the appointments                       |
+| `* * *` | healthcare professional                    | cancel appointments when necessary                                                                                     | clear up my schedule if a patient is not able to make it                         |
+| `* *` | healthcare professional                    | view a calendar with all scheduled appointments                                                                        | plan my day effectively                                                          |
+| `*` | healthcare professional                    | schedule appointments for patients and assign them to specific doctors with matching schedules                         | efficiently match patients with free doctors                                     |
+| `*` | healthcare professional                    | set reminders to patients for follow-up appointments                                                                   | ensure that patients know about the follow-up appointments                       |
 
 *{More to be added}*
 
@@ -326,7 +333,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. MFR shows an error message.
   
 
-      Use case ends.
+    Use case ends.
 
 **Use case: List all patients**
 
@@ -345,7 +352,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. MFR displays a message "The list is empty"
   
 
-      Use case ends.
+    Use case ends.
 
 **Use case: Search a patient**
 
@@ -364,7 +371,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. MFR displays a message "No such user found" 
   
 
-      Use case ends.
+    Use case ends.
 
 **Use case: Update a patient's illness**
 
@@ -383,7 +390,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. MFR shows an error message.
   
 
-      Use case ends.
+    Use case ends.
 
 **Use case: Ask For Help**
 
@@ -394,7 +401,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 
     Use case ends.
-****
 
 *{More to be added}*
 
