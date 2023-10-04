@@ -19,6 +19,19 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/lerxuann)]
 [[portfolio](team/lerxuann.md)]
 
+* Role: Developer
+* Responsibilities: Data
+
+### Huang Yixin
+
+<img src="images/coderhuang559.png" width="200px">
+
+[[github](http://github.com/coderhuang559)]
+[[portfolio](team/coderhuang559.md)]
+
+* Role: Developer
+* Responsibilities: UI
+
 ### Nicholas Tng
 
 <img src="images/nicholastng010601.png" width="200px">
@@ -37,4 +50,4 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Documentation
