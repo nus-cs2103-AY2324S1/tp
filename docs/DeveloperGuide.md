@@ -286,16 +286,55 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `MediFlowR (MFR)` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add a patient**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to add a patient with name
+2.  MFR adds the patient and displays a confirmation message
+
+
+    Use case ends.
+
+**Use case: Clear Database**
+
+**MSS**
+
+1.  User requests clear all patients
+2.  MFR clears the list and displays a confirmation message
+
+
+    Use case ends.
+
+
+**Use case: Delete a patient**
+
+**MSS**
+
+1. User requests to delete a patient using ID
+2. MFR deletes the person and displays a confirmation message
+
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given ID is invalid.
+
+    * 2a1. MFR shows an error message.
+  
+
+      Use case ends.
+
+**Use case: List all patients**
+
+**MSS**
+
+1.  User asks for a list of all patients
+2.  MFR displays a list of all patients
+
 
     Use case ends.
 
@@ -303,15 +342,62 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The list is empty.
 
-  Use case ends.
+    * 2a1. MFR displays a message "The list is empty"
+  
 
-* 3a. The given index is invalid.
+      Use case ends.
 
-    * 3a1. AddressBook shows an error message.
+**Use case: Search a patient**
 
-      Use case resumes at step 2.
+**MSS**
+
+1.  User searches for a name
+2.  MFR displays a list of patients which contain that name
+
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+  
+    * 2a1. MFR displays a message "No such user found" 
+  
+
+      Use case ends.
+
+**Use case: Update a patient's illness**
+
+**MSS**
+
+1.  User uses the command to update the patient with that ID with the new illness
+2.  MFR displays a confirmation message
+
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given ID is invalid.
+
+    * 2a1. MFR shows an error message.
+  
+
+      Use case ends.
+
+**Use case: Ask For Help**
+
+**MSS**
+
+1. User asks for help
+2. MFR displays a link to the help page
+
+
+    Use case ends.
+****
 
 *{More to be added}*
+
 
 ### Non-Functional Requirements
 
