@@ -86,11 +86,31 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-### Listing all persons : `list`
+### Viewing summary of attendance : `list attendance`
 
-Shows a list of all persons in the address book.
+Shows a summary of attendance records.
 
-Format: `list`
+Format: `list attendance [/tg ID]`
+*  Shows a summary of the attendance records of the tutorial group corresponding to the specified ID.
+*  ID must be made up of **alphabetical characters and numbers** only, with no special characters.
+*  ID must correspond to an existing tutorial group.
+
+Examples:
+*  `list attendance` Shows a summary of attendance records of all students.
+*  `list attendance /tg T09` Shows a summary of attendance records of the students in tutorial group T09.
+
+### Listing students : `list students`
+
+Shows a list of students.
+
+Format: `list students [/tg ID]`
+*  Shows a list of students in the tutorial group corresponding to the specified ID.
+*  ID must be made up of **alphabetical characters and numbers** only, with no special characters.
+*  ID must correspond to an existing tutorial group.
+
+Examples:
+*  `list students` Shows a list of all students.
+*  `list students /tg T09` Shows a list of the students in tutorial group T09.
 
 ### Editing a person : `edit`
 
