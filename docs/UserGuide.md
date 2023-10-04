@@ -51,6 +51,9 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
+* Items with `|` indicate that the command accepts either parameters.<br>
+  e.g `mark /name STUDENTNAME | /id STUDENTID` takes in `STUDENTNAME` or `STUDENTID` as its first argument.
+
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
@@ -85,6 +88,20 @@ A person can have any number of tags (including 0)
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+
+### Marking attendance of student: `mark` [Coming Soon]
+
+Format: `mark /name STUDENTNAME | /id STUDENTID /attendance ATTENDANCE`
+* Marks the attendance of a student corresponding to the student name or student ID.
+* `STUDENTNAME` should be a string made up of alphabetical characters, with no numbers or special characters.
+* `STUDENTID` should be a string made up of alphabetical characters, with no special characters or space.
+* `ATTENDANCE` should only be 0 or 1, where 0 indicates student is absent and 1 indicates student is present.
+
+Examples:
+* `mark /name Zong Jin /attendance 1` Marks student named, Zong Jin, as present.
+* `mark /name Zong Jin /attendance 0` Marks student named, Zong Jin, as absent.
+* `mark /id A0123456E /attendance 1` Marks student with student ID, A0123456E, as present.
+* `mark /id A0123456E /attendance 0` Marks student with student ID, A0123456E, as absent.
 
 ### Viewing summary of attendance : `list attendance`
 
