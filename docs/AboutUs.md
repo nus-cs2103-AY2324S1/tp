@@ -18,6 +18,24 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Deliverables and Deadlines, Code Quality
 
+### Nanette Tan
+
+<img src="images/nananakx-x.png" width="200px">
+
+[[github](https://github.com/nananakx-x)]
+[[portfolio](team/nananakx-x.md)]
+
+* Role: Testing
+
+### Sia Zhi Hong
+
+<img src="images/h1410101.png" width="200px">
+
+[[github](http://github.com/h1410101)]
+[[portfolio](team/h1410101.md)]
+
+* Role: Integration
+
 ### Nam Dohyun (Brandon)
 
 <img src="images/brandon-nam.png" width="200px">
@@ -25,33 +43,4 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/brandon-nam)]
 [[portfolio](team/brandon-nam.md)]
 
-* Role: Scheduling and Tracking 
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: UI
+* Role: Scheduling and Tracking
