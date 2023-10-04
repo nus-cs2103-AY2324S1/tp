@@ -339,10 +339,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+2.  The software should be platform independent (i.e. work on the Windows, Linux, and OS-X platforms).
+3. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+4. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+5. The product is a single user product (i.e. The data file created by one user cannot be accessed by another user during regular operations)
+6. The data should be stored locally and should be in a human editable text file.
+7. The product should not use a DBMS to store data.
+8. The software should work without requiring an installer.
+9. The software should not depend on a remote server.
+10. The GUI should work well (i.e., should not cause any resolution-related inconveniences to the user) for, standard screen resolutions 1920x1080 and higher, and, for screen scales 100% and 125%.
+11. the GUI should be usable (i.e., all functions can be used even if the user experience is not optimal) for, resolutions 1280x720 and higher, and, for screen scales 150%.
+12. The product should be packaged into a single JAR file.
+13. The DG and UG should be PDF-friendly. Expandable panels, embedded videos, animated GIFs should not be used.
+14. The file sizes of the deliverables should be reasonable and not exceed the limits given below:
 
-*{More to be added}*
+    - Product (i.e., the JAR/ZIP file): 100MB
+
+    - Documents (i.e., PDF files): 15MB/file
 
 ### Glossary
 
