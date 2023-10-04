@@ -171,6 +171,28 @@ Adds a schedule to a specified tutor.
 * `Wrong input: s/`: The start time entered is not in datetime format.
 * `Wrong input: e/`: The end time entered is not in datetime format..
 
+### List all schedules: `list-s`
+
+Displays a list of all schedules in the address book in a table format.
+
+
+![view schedule](images/viewSchedule.png)
+
+Format: `list-s`
+
+Example:
+* `list-s` shows all recorded schedules in the address book.
+
+Expected output:
+* Displays a table of schedules with columns for List number, Tutor Name, Start Time, and End Time
+* If there are no schedules in the address book, displays a message telling the user to add a tutor with `add-s`.
+
+![empty schedule list](images/emptyScheduleList.png)
+
+Error messages:
+* `Too many parameters`: `list-s` does accept any parameters other than its own command. (E.g. `list-s 1` will result in an error).
+
+
 ### Deleting a schedule: `delete-s`
 
 Deletes a schedule in the address book based on their index number in the table of schedules listed.
