@@ -16,7 +16,7 @@ Given below are my contributions to the project.
   * Highlights:
   * Credits:
 
-* **Code contributed**: [RepoSense link]()
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=dinde2004&breakdown=true)
 
 * **Project management**:
 

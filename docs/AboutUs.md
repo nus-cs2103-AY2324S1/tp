@@ -11,7 +11,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Gao Tianrun
 
-<img src="images/tianrun.png" width="200px">
+<img src="images/trgao.png" width="200px">
 
 [[github](https://github.com/trgao)]
 [[portfolio](team/trgao.md)]
@@ -21,7 +21,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Shen Licong
 
-<img src="images/Licong.png" width="200px">
+<img src="images/licongshen12.png" width="200px">
 
 [[github](http://github.com/licongshen12)]
 [[portfolio](team/licongshen12.md)]
@@ -29,15 +29,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities:
 
-### Johnny Doe
+### Stalin Muthukumar Bill Kirankumar
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/billieboy7.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/dinde2004.md)]
+[[github](http://github.com/billieboy7)]
+[[portfolio](team/billieboy7.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities:
 
 ### Doan Quoc Thinh
 
