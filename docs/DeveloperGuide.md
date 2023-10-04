@@ -321,7 +321,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. Hiring manager <u> views the list of all interviews (UC02) </u>
 2. Hiring manager requests to delete a specific interview
-3. InterviewHub deletes the interview
+3. InterviewHub deletes the specified interview
 
     Use case ends.
 
@@ -383,7 +383,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. Hiring manager <u> views the list of all job roles (UC02) </u>
 2. Hiring manager requests to delete a specific job role
-3. InterviewHub deletes the interview
+3. InterviewHub deletes the specified job role
 
     Use case ends.
 
@@ -431,7 +431,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. Hiring manager <u> views the list of all interviewees (UC09) </u>
 2. Hiring manager requests to delete a specific interviewee
-3. InterviewHub deletes the interviewee
+3. InterviewHub deletes the specified interviewee
 
    Use case ends.
 
