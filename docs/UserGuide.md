@@ -92,23 +92,46 @@ Shows a list of all persons in the address book.
 
 Format: `list`
 
-### Editing a person : `edit`
+### Editing a fosterer's detail : `edit`
 
-Edits an existing person in the address book.
+Edits the details of a fosterer stored in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+**Format** 1: `edit INDEX`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+**Parameter**: `INDEX`
 
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* Index of a fosterer to be edited is shown in the list obtained by  the find/list command.
 
+**Format** 2: (In the fosterer profile view) `edit`
+
+**Examples**:
+*  `list` followed by `edit 3` Generates the edit-window for the 3rd fosterer in the address book
+*  `list` followed by `view 3` followed by `edit` allows making changes from the fosterer profile view. 
+
+**How to Edit**:
+1. Type in `list` command to see the list of fosterers in the address book.
+2. Type `view INDEX` to enter the profile page of the fosterer with the corresponding `INDEX` from the `list` command. 
+3. Type `edit` to edit the fosterer's details (alternatively, you can skip step 2 by typing `edit INDEX` command.)
+4. In the command line, type the name of the field you want to edit and press enter. This converts a plain text into a 
+text field with the detail. 
+5. Edit the content of the detail and press enter. 
+6. Repeat step 4-5 until you made all your edits. 
+7. Type in `save` command to save the changes and prompt you back to the home window.
+
+**Expected Output (success)**:
+```
+Edit Success! 
+```
+
+**Expected Output (failure)**:
+1. Compulsory fields are not filled in
+```
+Edit failed: Compulsory fields are not filled in!
+```
+2. System Error
+```
+Edit failed: There seems to be an error, please check your fields again.
+```
 ### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
