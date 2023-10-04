@@ -89,7 +89,7 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-### Marking attendance of student: `mark`
+### Marking attendance of student: `mark` [Coming Soon]
 
 Format: `mark /name STUDENTNAME | /id STUDENTID /attendance ATTENDANCE`
 * Marks the attendance of a student corresponding to the student name or student ID.
