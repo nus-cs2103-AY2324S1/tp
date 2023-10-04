@@ -45,12 +45,13 @@ public class MainApp extends Application {
     protected Storage storage;
     protected Model model;
     protected Config config;
+
     @Override
     public void init() throws Exception {
         logger.info("=============================[ Initializing AddressBook ]===========================");
         super.init();
 
-        AppParameters appParameters = AppParameters.parse(this.getParameters());
+        AppParameters appParameters = AppParameters.parse(getParameters());
         config = initConfig(appParameters.getConfigPath());
         initLogging(config);
 
