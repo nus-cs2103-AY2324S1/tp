@@ -18,8 +18,37 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/Kailash201)]
 [[portfolio](team/Kailash201.md)]
 
+* Role: Project Advisor
+
+### Huang Yixin
+
+<img src="images/coderhuang559.png" width="200px">
+
+[[github](http://github.com/coderhuang559)]
+[[portfolio](team/coderhuang559.md)]
+
 * Role: Developer
-* Responsibilities: Team Lead
+* Responsibilities: UI
+
+### Nicholas Tng
+
+<img src="images/nicholastng010601.png" width="200px">
+
+[[github](http://github.com/nicholastng010601)]
+[[portfolio](team/nicholastng010601.md)]
+
+* Role: Developer
+* Responsibilities: Code quality
+
+### Goh Ler Xuan
+
+<img src="images/lerxuann.png" width="200px">
+
+[[github](http://github.com/lerxuann)]
+[[portfolio](team/lerxuann.md)]
+
+* Role: Developer
+* Responsibilities: Documentation
 
 ### Ong Zhen Dong
 
