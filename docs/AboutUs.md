@@ -18,15 +18,15 @@ We currently do not offer any means to contacting us, thank you for your underst
 
 * Role: Scheduling and tracking, CI/CD Pipeline manager, In charge of `Interview`
 
-### Jane Doe
+### Tan Jing Jie
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jingjie88.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/jingjie88)]
+[[portfolio](team/jingjie88.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Developer
+* Responsibilities: Improve `add`, `edit`, `delete` features
 
 ### Johnny Doe
 
