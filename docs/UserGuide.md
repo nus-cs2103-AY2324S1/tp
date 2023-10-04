@@ -74,18 +74,40 @@ Format: `help`
 
 ### Adding a person: `add`
 
-Adds a person to the address book.
+Adds a fosterer to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS animal/ANIMAL_NAME t/AVAILABILITY t/HOUSING_TYPE t/TYPE_OF_ANIMAL_FOSTERED/WANTED…​`
+
+Parameters:
+* `NAME`: Name of fosterer
+* `PHONE_NUMBER`: Phone number of fosterer
+* `EMAIL`: Email of fosterer
+* `ADDRESS`: Address of foster family
+* `ANIMAL_NAME`: Name of animal fostered (if fosterer is currently fostering an animal / “NotAvailable”)
+* `AVAILABILITY`: Available / NotAvailable
+* `HOUSING_TYPE`: HDB / Condo / Landed
+* `TYPE_OF_ANIMAL_FOSTERED` (if not available): current.Dog / current.Cat
+* `TYPE_OF_ANIMAL_WANTED` (if available): able.Dog / able.Cat
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+A person can have any number of tags. Mandatory Tags: Availability, housing type and type of animal fostered/wanted. ANIMAL_NAME is optional, depending on whether the fosterer is currently fostering an animal.
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/Jerry Tan p/98765432 e/jerry123@example.com a/Baker street, block 5, #27-01 animal/Dexter t/NotAvailable t/Condo t/current.Cat t/Urgent`
+adds a fosterer named Jerry Tan with the phone number 98765432 and email address jerry123@example.com; his address is Baker street, block 5, #27-01, housing type is condominium and he is fostering a cat named Dexter. An urgent visit is required.
+* `add n/Tom Lee p/98123456 e/tom@example.com a/Happy street, block 123, #01-01 t/Available t/HDB t/able.Dog`
+adds a fosterer named Tom Lee with the phone number 98123456 and email address tom@example.com; his address is Happy street, block 123, #01-01, housing type is HDB and currently he is not fostering any animal but looking to foster a dog.
 
+Expected output (success):
+```agsl
+Fosterer Jerry Tan is successfully added!
+```
+
+Expected output (fail):
+```agsl
+Oops! There seems to be an error, please check the format of your command again.
+```
 ### Listing all persons : `list`
 
 Shows a list of all persons in the address book.
