@@ -306,14 +306,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Delete a tutor**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list tutors
+2.  TutorConnect shows a list of tutors
+3.  User requests to delete a specific tutor in the list
+4.  TutorConnect deletes the tutor
 
     Use case ends.
 
@@ -325,9 +325,226 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. TutorConnect shows an error message.
 
       Use case resumes at step 2.
+
+
+**Use case: Add a schedule**
+
+**MSS**
+
+1.  User requests to list tutors
+2.  TutorConnect shows a list of tutors
+3.  User requests to add a schedule for a specific tutor in the list
+4.  TutorConnect adds the schedule and displays a list of schedule
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. TutorConnect shows an error message.
+
+      Use case resumes at step 2.
+  
+* 3b. The schedule parameters is invalid.
+
+    * 3b1. TutorConnect shows an error message.
+
+      Use case resumes at step 2.
+
+
+**Use case: Delete a schedule**
+
+**MSS**
+
+1.  User requests to list schedules
+2.  TutorConnect shows a list of schedules
+3.  User requests to delete a specific schedule in the list
+4.  TutorConnect deletes the schedule
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. TutorConnect shows an error message.
+
+      Use case resumes at step 2.
+
+
+**Use case: Mark a schedule as completed**
+
+**MSS**
+
+1.  User requests to list schedules
+2.  TutorConnect shows a list of schedules
+3.  User requests to mark a specific schedule in the list as completed
+4.  TutorConnect marks the schedule as completed
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. TutorConnect shows an error message.
+
+      Use case resumes at step 2.
+
+
+**Use case: Edit a tutor information**
+
+**MSS**
+
+1.  User requests to list tutors
+2.  TutorConnect shows a list of tutors
+3.  User requests to edit a specific tutor information in the list
+4.  TutorConnect modifies the tutor information
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. TutorConnect shows an error message.
+
+      Use case resumes at step 2.
+  
+* 3b. The tutor information parameters is invalid.
+
+    * 3b1. TutorConnect shows an error message.
+
+      Use case resumes at step 2.
+
+
+**Use case: Edit a schedule information**
+
+**MSS**
+
+1.  User requests to list schedules
+2.  TutorConnect shows a list of schedules
+3.  User requests to edit a specific schedule information in the list
+4.  TutorConnect modifies the schedule information
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. TutorConnect shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The schedule information parameters is invalid.
+
+    * 3b1. TutorConnect shows an error message.
+
+      Use case resumes at step 2.
+
+
+**Use case: View schedules by tutor**
+
+**MSS**
+
+1.  User requests to list tutors
+2.  TutorConnect shows a list of schedules
+3.  User requests to view schedules for a specific tutor in the list
+4.  TutorConnect displays a list of schedules for the tutor
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. TutorConnect shows an error message.
+
+      Use case resumes at step 2.
+
+
+**Use case: Delete a student**
+
+**MSS**
+
+1.  User requests to list students
+2.  TutorConnect shows a list of students
+3.  User requests to delete a specific student in the list
+4.  TutorConnect deletes the student
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. TutorConnect shows an error message.
+
+      Use case resumes at step 2.
+
+
+**Use case: Edit a student information**
+
+**MSS**
+
+1.  User requests to list students
+2.  TutorConnect shows a list of students
+3.  User requests to edit a specific student information in the list
+4.  TutorConnect modifies the student information
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. TutorConnect shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The student information parameters is invalid.
+
+    * 3b1. TutorConnect shows an error message.
+
+      Use case resumes at step 2.
+
 
 *{More to be added}*
 
