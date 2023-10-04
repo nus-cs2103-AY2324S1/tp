@@ -27,8 +27,8 @@ You can reach us at the email `ManageHR@comp.nus.edu.sg`
 [[github](https://github.com/sungmatt)]
 [[portfolio](team/sungmatt.md)]
 
-* Role: Team Lead + Project Advisor
-* Responsibilities: Scheduling and tracking + Documentation
+* Role: Developer
+* Responsibilities: Dev Ops, Administrative
 
 ### Lee Bing Heng
 
