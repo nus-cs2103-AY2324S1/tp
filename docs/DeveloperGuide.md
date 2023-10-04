@@ -8,6 +8,61 @@
 
 <!-- * Table of Contents -->
 <page-nav-print />
+Use case: Creating contact<br>
+Actor: user<br>
+Run projectPRO<br>
+1.Type in the contact details in input bar.<br>
+2.Parser reads “add” in input and instantiates an addCommandParser.<br>
+3.AddCommandParser instantiates addCommand.<br>
+4.AddCommand is executed and produces message success commandResult.<br>
+5.Use Case ends<br>
+
+
+Extensions:<br>
+3a. AddCommandParser detects invalid format for user input.<br>
+3a1. AddCommandParser throws CommandException.<br>
+3a2. Produces error message in command result.<br>
+3a3. User retypes input.<br>
+Repeat from step 2.
+
+3b. AddCommandParser detects duplicate for user input.<br>
+3b1. AddCommandParser throws CommandException.<br>
+3b2. Produces error message stating duplicate person in command result.<br>
+3b3. user retypes input.<br>
+Repeat from step 2
+
+
+System: ProjectPRO<br>
+Use case: Delete contact<br>
+Actor: user<br>
+Run projectPRO<br>
+1.Type in the contact name in the input bar with the delete command.<br>
+2.Parser reads “delete” in input and instantiates a deleteCommandParser.<br>
+3.deleteCommandParser instantiates deleteCommand.<br>
+4.deleteCommand is executed and produces message success commandResult.<br>
+5.Use Case ends
+
+Extensions<br>
+3a. deleteCommandParser detects invalid format for user input.<br>
+3a1. deleteCommandParser throws CommandException.<br>
+3a2. Produces error message in command result<br>
+3a3. Steps 2-3 are repeated until the data entered are correct.<br>
+
+Use case: Add contact to group<br>
+Actor: user<br>
+Run projectPRO<br>
+1.Type in the group command.<br>
+2.Parser reads “group” in input and instantiates a groupParser.<br>
+3.groupParser instantiates groupCommand.<br>
+4.groupCommand is executed and produces message success commandResult.<br>
+5.Use Case ends<br>
+
+Extensions<br>
+3a. projectPRO detects an error in the entered data.<br>
+3a1. projectPRO requests for the correct data.<br>
+3a2. User enters new data<br>
+3a3. Steps 3a1-3a2 are repeated until the data entered are correct.<br>
+Use case resumes from step 4.
 
 --------------------------------------------------------------------------------------------------------------------
 
