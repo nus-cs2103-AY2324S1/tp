@@ -72,25 +72,42 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding a fosterer: `add`
 
-Adds a person to the address book.
+Adds a fosterer to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS animal/ANIMAL_NAME t/AVAILABILITY t/HOUSING_TYPE t/TYPE_OF_ANIMAL_FOSTERED/WANTED…​`
+
+Parameters:
+* `NAME`: Name of fosterer
+* `PHONE_NUMBER`: Phone number of fosterer
+* `EMAIL`: Email of fosterer
+* `ADDRESS`: Address of foster family
+* `ANIMAL_NAME`: Name of animal fostered (if fosterer is currently fostering an animal / “NotAvailable”)
+* `AVAILABILITY`: Available / NotAvailable
+* `HOUSING_TYPE`: HDB / Condo / Landed
+* `TYPE_OF_ANIMAL_FOSTERED` (if not available): current.Dog / current.Cat
+* `TYPE_OF_ANIMAL_WANTED` (if available): able.Dog / able.Cat
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+A person can have any number of tags. Mandatory Tags: Availability, housing type and type of animal fostered/wanted. ANIMAL_NAME is optional, depending on whether the fosterer is currently fostering an animal.
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/Jerry Tan p/98765432 e/jerry123@example.com a/Baker street, block 5, #27-01 animal/Dexter t/NotAvailable t/Condo t/current.Cat t/Urgent`
+adds a fosterer named Jerry Tan with the phone number 98765432 and email address jerry123@example.com; his address is Baker street, block 5, #27-01, housing type is condominium and he is fostering a cat named Dexter. An urgent visit is required.
+* `add n/Tom Lee p/98123456 e/tom@example.com a/Happy street, block 123, #01-01 t/Available t/HDB t/able.Dog`
+adds a fosterer named Tom Lee with the phone number 98123456 and email address tom@example.com; his address is Happy street, block 123, #01-01, housing type is HDB and currently he is not fostering any animal but looking to foster a dog.
 
-### Listing all persons : `list`
+Expected output (success):
+```agsl
+Fosterer Jerry Tan is successfully added!
+```
 
-Shows a list of all persons in the address book.
-
-Format: `list`
+Expected output (fail):
+```agsl
+Oops! There seems to be an error, please check the format of your command again.
+```
 
 ### Editing a fosterer's detail : `edit`
 
@@ -132,23 +149,36 @@ Edit failed: Compulsory fields are not filled in!
 ```
 Edit failed: There seems to be an error, please check your fields again.
 ```
-### Locating persons by name: `find`
+### Listing fosterers: `list`
 
-Finds persons whose names contain any of the given keywords.
+Lists fosterers that match a particular description or search, or all fosterers if the search is blank.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `list *KEYWORDS`
+Alias: `find`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* The keywords are case-insensitive.
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
+* All fields are searched (including tags).
+* Keywords can match as parts of words. e.g. `john` will match `Johnny`.
+* Keywords can overlap. e.g. `samm my` will match `Sammy`
+* Fosters must match all keywords (i.e. `AND` search).
+  e.g. `Hans Bo` will return `Hansbo Grahm`, but not `Hans Duo`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `list` lists all fosterers in the address book
+* `list john doe` matches "John Doe", "Doe John", "Johnny Doe", and "Mary" who lives on "John Doe Street"
+* `list john john doe` is redundant and gives the same result as `list john doe`
+
+Expected output (success):
+```agsl
+Fosterers matching query are listed.
+```
+UI also updates with a list of fosterers matching the query.
+
+Expected output (fail):
+```agsl
+Oops! Invalid search expression, please check again.
+```
 
 ### Deleting a fosterer : `delete`
 
@@ -221,12 +251,12 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+| Action     | Format, Examples                                                                                                                                                     |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Clear**  | `clear`                                                                                                                                                              |
+| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                  |
+| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
+| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                           |
+| **List**   | `list`                                                                                                                                                               |
+| **Help**   | `help`                                                                                                                                                               |
