@@ -8,7 +8,7 @@ lesSON is a flashcard software aimed to help individuals with their memory work 
 
 
 Some of the functions of lesSON includes:
-  * Customise flashcard
+  * Customise flashcards
   * Managing existing flashcards
   * Practice using the existing flashcard deck
 
