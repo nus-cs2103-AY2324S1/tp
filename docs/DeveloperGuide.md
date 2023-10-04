@@ -268,9 +268,15 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                                                              | So that I can…​                                                        |
-| -------- |--------------------------------------------|---------------------------------------------------------------------------|------------------------------------------------------------------------|
-| `* * *`  | administrative staff                       | delete a fosterer from the list when they want to stop fostering with us  | update the list to see the fosterers who are currently in our program  |
+| Priority | As a …                                    | I want to …                                                              | So that I can…                                                        |
+| -------- |-------------------------------------------|--------------------------------------------------------------------------|-----------------------------------------------------------------------|
+| `* * *`  | administrative staff                      | delete a fosterer from the list when they want to stop fostering with us | update the list to see the fosterers who are currently in our program |
+| `* * *`  | administrative staff                      | add each foster family's details efficiently  | allow my colleagues who are conducting home visits to view these information without any inconvenience |
+| `* * *`  | administrative staff                      | provide details of the fostered animal of concern to the fosterer | ensure that the animal is well taken care by informing the fosterer of existing health conditionsto prepare for |
+| `* * *`  | administrative staff                      | update each foster family’s and animal’s details | keep track of foster family’s most up-to-date information, including updated information of the animal fostered |
+| `* * *`  | administrative staff                      | allocate volunteers to each foster family | keep track of who is in charge of checking the pet’s condition for each foster family and send help if needed |
+| `* * *`  | administrative staff                      | search for a specific animal / fosterer’s detail | find specific fosterers or animals more easily, given only partial information |
+| `* * *`  | administrative staff                      | filter and sort the animals in the database by any criteria | easily view the animals that suit specific fosterer’s accommodation capabilities and prioritise the animals more in need |
 
 *{More to be added}*
 
@@ -294,7 +300,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. System detects an error in the entered command, usually a formatting error.
     * 2a1. System requests for data to be inputted in the correct format, with the correct format displayed as guidance.
     * 2a2. User enters new command.
-  
+
       Steps 2a1 and 2a2 are repeated until the data entered is in the correct format.
       Use case resumes at step 3.
 
@@ -304,11 +310,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User enters the edit command with the index corresponding to the foster family shown in the list. 
-2. System generates a pop-up window with the details of the foster family. 
-3. User inputs a new detail onto the corresponding field. 
-4. User enters the save edit command. 
-5. System updates the target foster family’s details in the database. 
+1. User enters the edit command with the index corresponding to the foster family shown in the list.
+2. System generates a pop-up window with the details of the foster family.
+3. User inputs a new detail onto the corresponding field.
+4. User enters the save edit command.
+5. System updates the target foster family’s details in the database.
 6. System directs the user to the initial Command-Line UI.
 
    Use case ends.
@@ -327,7 +333,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User enters the list command as text. 
+1. User enters the list command as text.
 2. System shows list of fosterers matching query string.
 
    Use case ends.
