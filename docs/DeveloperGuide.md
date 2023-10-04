@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# LoveBook Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -282,15 +282,22 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
-
+|  As a …​ | I want to …​                        | So that I can…​                                                                            |
+|----------|-------------------------------------|--------------------------------------------------------------------------------------------|
+| new user     | be greeted with a welcome message when i launch the app | so that I feel welcome                                                                     |
+| new user     | see a brief introduction message of the app and its capabilities and instructions         | so that I know how to get started.                                                         |
+| new user     | be able to key in my height in my profile                          | so that the algorithm can recommend me a suitable date based on our height compatibility   |
+| new user     | be able to key in my horoscope in my profile           | so that the algorithm can recommend me a suitable date based on our horoscope compatibility |
+| new user     | be able to key in my own income in my profile      | so that the algorithm can recommend me a suitable date based on our income compatibility   |
+| new user     | to be able to key in my own gender in my own profile | so that the algorithm can match me to the appropriate gender                               |
+| serial dater | be able to pull up a list of my previous dates         | so that I can keep track of who I have dated in the past                                   |
+| serial dater | be able to delete dates from my list                   | so that my dating list is only limited to those who I am still interested in               |
+| serial dater | to be able create a new date entry with his/her gender, name, income, height, horoscope and hobbies                   | so that I can keep my list growing                                                         |
+| serial dater | to be able to edit the details of my date             | so that I can keep my dates details up to date                                             |
+| serial dater | to be able to be recommended a complete random date            | so that I can have an exciting date that day                                               |
+| serial dater | to be able to filter my past dates based on a particular metric             | so that I can find dates that I am interested in amidst my long and ever growing list      |
+| serial dater | to be able to be recommended the most compatible date for me            | so that I optimize my chance of finding my one true love                                   |
+| serial dater | to be able to set my dating preferences            | so that the algorithm can recommend me a suitable match                    |
 *{More to be added}*
 
 ### Use cases
