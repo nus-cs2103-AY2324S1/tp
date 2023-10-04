@@ -22,20 +22,28 @@ Given below are my contributions to the project.
 * **Project management**:
   * Created the `organization` and `team` on GitHub
   * Created the `team repo` on GitHub (including setting up `CodeCov` CI)
-  * Managed milestone `v1.1` on GitHub (Creating and assigning issues, reviewing and merging PRs)
+  * Kept track of deadlines (internal and external) and performed task tracking/scheduling for milestone `v1.1`
 
 * **Enhancements to existing features**:
   * PLACEHOLDER
 
 * **Documentation**:
   * User Guide:
-    * PLACEHOLDER
+    * CRD for Interview
   * Developer Guide:
-    * PLACEHOLDER
+    * Use Cases
 
 * **PRs reviewed**:
-  * Git conventions tips/advice: 
+  * Git conventions and GitHub usage tips/advice: 
     [#19](https://github.com/AY2324S1-CS2103T-T11-2/tp/pull/19)
     [#20](https://github.com/AY2324S1-CS2103T-T11-2/tp/pull/20)
 
-  * Coding standards tips/advice: [PLACEHOLDER]()
+  * Coding standards tips/advice:
+    [PLACEHOLDER]()
+
+  * General quality checks: 
+    [#27](https://github.com/AY2324S1-CS2103T-T11-2/tp/pull/27)
+
+* **Community Contribution**:
+  * Point out (potentially) confusing instructions for clarification 
+    [#236](https://github.com/nus-cs2103-AY2324S1/forum/issues/236)
