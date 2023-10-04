@@ -225,10 +225,12 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL [g/GROUPNAME]` <br> e.g., `add n/Adam Lee p/81112222 e/jamesho@example.com, g/cs2103`
 **Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Delete** | `delete NAME`<br> e.g., `delete nicholas`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Group**   | `group n/NAME g/GROUPNAME`<br> e.g., `group n/John g/cs2103 tut` 
+**Ungroup**   | `ungroup n/NAME g/GROUPNAME`<br> e.g., `ungroup n/John g/cs2103 tut` 
 **List**   | `list`
 **Help**   | `help`
