@@ -4,9 +4,9 @@
   pageNav: 3
 ---
 
-# AB-3 User Guide
+# ProjectPRO User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+Text-friendly project management tool that helps students schedule meetings with different groups while also keeping track of tasks and responsibilities of each member. Our app will track the schedule of each contact and tasks individuals have to do for their project.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -74,21 +74,28 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
-
 ### Adding a person: `add`
-
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [g/GROUPNAME]​`
 
 <box type="tip" seamless>
 
-**Tip:** A person can have any number of tags (including 0)
+**Tip:** A person can be added with or without a group
 </box>
 
+Acceptable values: phone number should be an 8 digit integer, while other parameters be strings.
+
+Names should be unique, no two contacts should have the same name input.
+
+Expected output when succeeds: “Contact successfully added”
+
+Expected output when fails: “Error, invalid input entered”
+
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/Adam Lee p/81112222 e/adam@example.com g/cs2103 g/cs2101`
+* `add n/Brian p/98765432 e/brian@example.com`
+
 
 ### Listing all persons : `list`
 
@@ -133,17 +140,41 @@ Examples:
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified contact from the contact list. (This contact will also be removed from any existing groups.)
 
-Format: `delete INDEX`
-
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+Format: `delete NAME`
+* Deletes the contact with the specified NAME
+* NAME has to be unique (no existing contact with same name)
+* NAME has to be an exact match
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `delete Gerald (cs2101)`
+* `delete jane`
+
+Acceptable values: `NAME should be a string.`
+
+Expected output when succeeds: `Contact successfully deleted`
+
+Expected output when fails: `Error, invalid input entered`
+
+### Remove contacts from groups: `ungroup`
+
+Removes a contact from a group.
+
+Format: `ungroup n/NAME g/GROUPNAME`
+
+* Deletes the contact with given `NAME` from the given `GROUPNAME`
+* If group or name does not exist, print error
+
+Acceptable values:
+* `NAME` and `GROUPNAME` are strings
+
+Example(s): 
+* `ungroup n/John g/cs2101 tut`
+* `ungroup n/samantha tan g/saturday 9am yoga`
+
+Expected outputs when it succeeds: `John has been removed from cs2101 tut.`
+Expected output when fails: `Error, invalid input entered`
 
 ### Clearing all entries : `clear`
 
