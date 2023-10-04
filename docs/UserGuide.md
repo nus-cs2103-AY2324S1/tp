@@ -119,13 +119,81 @@ Examples:
 ###  Upload contact's photo
 ###  Update contact's photo
 ###  Search contact
-1. Search name
-2. Search phone number
-3. Search email
-4. Search address
-5. Search tag
 
-6. Search multiple fields
+Generally, search commands will contain the following tokens:
+
+* `FIELD`: Specifies the field to search within (name, phone, email, address, tag).
+
+* `KEYWORD`: Words or characters you're looking for in a contact's information.
+
+Format: `find FIELD/KEYWORD [FIELD/KEYWORD]`
+
+You may include multiple field-keyword combinations. The `find` command will perform a logical `AND` on all field-keyword combinations.
+
+#### Search contact by name
+
+Locates persons in the address book whose names contain the given keywords.
+
+Format: `find name/KEYWORD`
+
+Examples:
+* `find name/John`
+  * Returns all contacts with names that contain "John" (e.g. "John Smith", "John Doe")
+* `find name/Alex name/Ye`
+  * Returns all contacts with names that contain both "Alex" and "Ye" (e.g. "Alex Yeoh", "Yervis Alexis")
+
+#### Search contact by phone number
+
+Locates persons in the address book whose phone numbers contain the given digits.
+
+Format: `find phone/KEYWORD`
+
+Examples:
+* `find phone/9876`
+  * Returns all contacts with phone numbers that contain "9876"
+
+#### Search contact by email
+
+Locates persons in the address book whose email addresses contain the given keywords.
+
+Format: `find email/KEYWORD`
+
+Examples:
+* `find email/tan email/@u.nus.edu`
+  * Returns all contacts with email addresses that contain "tan" and "@u.nus.edu"
+
+#### Search contact by address
+
+Locates persons in the address book whose addresses contain the given keywords.
+
+Format: `find address/KEYWORD`
+
+Examples:
+* `find address/street`
+  * Returns all contacts with addresses that contain the word "street"
+
+#### Search contact by tag
+
+Locates persons in the address book that have the given tags.
+
+Format: `find tag/KEYWORD`
+
+Examples:
+* `find tag/RA`
+  * Returns all contacts that have tags containing the string "RA"
+
+#### Multiple field search
+
+Combines multiple search criteria for more specific searching. Search criteria are combined with the logical `AND`.
+
+Format: `find FIELD/KEYWORD FIELD/KEYWORD [ANOTHER_FIELD/ANOTHER_KEYWORD]`
+
+Examples:
+* `find name/John tag/friend`
+  * Returns all contacts named John who also have the "friend" tag
+* `find email/@u.nus.edu phone/9876`
+  * Returns all contacts with emails containing "@u.nus.edu" and phone numbers containing "9876"
+
 ###  List all contacts
 
 ###  List emergency contacts
@@ -223,3 +291,4 @@ Action        | Format, Examples
 **Delemer**   | `delemer INDEX`
 **Listemer**  | `listemer [tag/TAG]`
 **Optout**    | `optout NOTIFICATION_DESCRIPTION`
+**Find**      | `find FIELD/KEYWORD [FIELD/KEYWORD]`
