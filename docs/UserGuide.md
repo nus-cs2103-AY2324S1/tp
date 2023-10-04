@@ -10,7 +10,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+# Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
@@ -39,7 +39,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+# Features
 
 <div markdown="block" class="alert alert-info">
 
@@ -71,34 +71,51 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
+## Contact commands
 
-### Adding a person: `add`
+### Adding a contact: `addc`
 
-Adds a person to the address book.
+Adds a contact to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `addc n/NAME p/PHONE_NUMBER e/EMAIL o/ORGANISATION [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `addc n/John Doe p/98765432 e/johnd@example.com o/Market Co.`
+* `addc n/Betsy Crowe t/friend e/betsycrowe@example.com o/NUS p/1234567 t/Professor`
 
-### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+### Listing all persons : `listc`
 
-Format: `list`
+Shows a list of all contacts in the address book.
 
-### Editing a person : `edit`
+Format: `listc`
 
-Edits an existing person in the address book.
+### Deleting a person : `deletec`
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Deletes the specified person from the address book.
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+Format: `deletec INDEX`
+
+* Deletes the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `listc` followed by `delete 2` deletes the 2nd person in the address book.
+* `findc Betsy` followed by `delete 1` deletes the 1st person in the results of the `findc` command.
+
+
+### Editing a contact : `editc` [coming soon]
+
+Edits an existing contact in the address book.
+
+Format: `editc INDEX [n/NAME] [p/PHONE] [e/EMAIL] [o/ORGANISATION] [t/TAG]…​`
+
+* Edits the contact at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
@@ -106,14 +123,28 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
     specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `editc 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+*  `editc 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Viewing detailed contact information : `viewc`
 
-Finds persons whose names contain any of the given keywords.
+Views detailed information of a contact in the address book.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `viewc INDEX`
+
+* Views detailed information of the contact at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `viewc 2` Displays detailed information related to the 2nd contact on the list.
+
+
+### Locating persons by name: `findc`
+
+Find contacts whose names contain any of the given keywords.
+
+Format: `findc KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -123,23 +154,108 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `findc John` returns `john` and `John Doe`
+* `findc alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+## Meeting commands
 
-Deletes the specified person from the address book.
+### Adding a meeting: `addm`
 
-Format: `delete INDEX`
+Adds a meeting to the address book.
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+Format: `addc m/TITLE a/LOCATION s/START e/END`
+
+Examples:
+* `addm m/Lunch a/Cafeteria s/20.09.2023 1200 e/20.09.2023 1300`
+* `addm m/CS2103T meeting a/Zoom call url s/20.09.2023 1000 e/20.09.2023 1200`
+
+
+### Listing all meetings : `listm`
+
+Shows a list of all meetings in the address book.
+
+Format: `listm`
+
+
+### Deleting a meeting : `deletem`
+
+Deletes the specified meeting from the address book.
+
+Format: `deletec INDEX`
+
+* Deletes the meeting at the specified `INDEX`.
+* The index refers to the index number shown in the displayed meeting list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `listm` followed by `deletem 2` deletes the 2nd meeting in the address book.
+* `findm Project` followed by `deletem 1` deletes the 1st meeting in the results of the `findm` command.
+
+
+### Viewing detailed meeting information : `viewm`
+
+Views detailed information of a meeting in the address book.
+
+Format: `viewm INDEX`
+
+* Views detailed information of the meeting at the specified `INDEX`.
+* The index refers to the index number shown in the displayed meeting list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `viewm 2` Displays detailed information related to the 2nd meeting on the list, including current participants.
+
+
+### Locating meetings by name: `findm` [to be added soon]
+
+Find meetings whose title contain any of the given keywords.
+
+Format: `findm KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `shop` will match `SHOP`
+* The order of the keywords does not matter. e.g. `Shop Meet` will match `Meet Shop`
+* Only the name is searched.
+* Only full words will be matched e.g. `Meet` will not match `Meeting`
+* Meetings matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Shop Meet` will return `Shop at mall`, `Meet client`
+
+Examples:
+* `findm project` returns `project` and `Project work`
+* `findm zoom meet` returns `Zoom session`, `Zoom meet`, `Meet advisor`<br>
+
+
+### Add contact to meeting: `addmc`
+
+Assigns contact to meetings as participants.
+
+Format: `addmc INDEX n/NAME`
+
+* Adds a contact to the meeting at the specified `INDEX`.
+* The index refers to the index number shown in the displayed meeting list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* Contacts will be listed in the detailed description of meetings when `viewm` is used.
+* `NAME` must refer to the name of an existing contact.
+
+Examples:
+* `addmc 3 n/Howen` assigns the contact `Howen` as a participant to the 3rd meeting in the address book.
+
+
+### Remove contact from meeting: `rmmc`
+
+Removes a contact from a meeting.
+
+Format: `rmmc INDEX n/NAME`
+
+* Removes a contact to the meeting at the specified `INDEX`.
+* The index refers to the index number shown in the displayed meeting list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* Contacts will be listed in the detailed description of meetings when `viewm` is used.
+* `NAME` must refer to the name of an existing contact that is currently a participant in the meeting.
+
+Examples:
+* `rmmc 3 n/Howen` removes the contact `Howen` from the 3rd meeting in the address book.
+
 
 ### Clearing all entries : `clear`
 
@@ -165,9 +281,6 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </div>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -186,12 +299,20 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+| Action                          | Format, Examples                                                                                                                                      |
+|---------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add contact**                 | `addc n/NAME p/PHONE_NUMBER e/EMAIL o/ORGANISATION [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com o/NUS t/friend t/colleague` |
+| **Add contact to meeting**      | `addmc INDEX n/NAME` <br> e.g., `addmc 2 n/James Ho`                                                                                                  |
+| **Add meeting**                 | `addc m/TITLE a/LOCATION s/START e/END` <br> e.g., `addm m/Lunch a/Cafeteria s/20.09.2023 1200 e/20.09.2023 1300`                                     |
+| **Clear**                       | `clear`                                                                                                                                               |
+| **Delete contact**              | `deletec INDEX` <br> e.g., `deletec 3`                                                                                                                |
+| **Delete meeting**              | `deletem INDEX` <br> e.g., `deletem 3`                                                                                                                |
+| **Edit contact**                | `editc INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [o/ORGANISATION] [t/TAG]…​`<br> e.g.,`editc 2 n/James Lee e/jameslee@example.com`                    |
+| **Find contact**                | `findc KEYWORD [MORE_KEYWORDS]` <br> e.g., `findc James Jake`                                                                                         |
+| **Find meeting**                | `findm KEYWORD [MORE_KEYWORDS]` <br> e.g., `findm Zoom Meet`                                                                                          |
+| **Help**                        | `help`                                                                                                                                                |
+| **List contacts**               | `listc`                                                                                                                                               |
+| **List meetings**               | `listm`                                                                                                                                               |
+| **Remove contact from meeting** | `rmmc INDEX n/NAME` <br> e.g., `rmmc 2 n/James Ho`                                                                                                    |
+| **View contact details**        | `viewc INDEX` <br> e.g., `viewc 4`                                                                                                                    |
+| **View meeting details**        | `viewm INDEX` <br> e.g., `viewm 4`                                                                                                                    |
