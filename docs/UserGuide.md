@@ -157,6 +157,25 @@ Expected output when succeeds: `Contact successfully deleted`
 
 Expected output when fails: `Error, invalid input entered`
 
+### Add contacts to groups: `group`
+
+Add a contact to a group.
+
+Format: `group n/NAME g/GROUPNAME`
+
+* Add the contact with given `NAME` from the given `GROUPNAME`
+* If group or name does not exist, print error
+
+Acceptable values:
+* `NAME` and `GROUPNAME` are strings
+
+Example(s):
+* `group n/John g/cs2101 tut`
+* `group n/samantha tan g/saturday 9am yoga`
+
+Expected outputs when it succeeds: `John is now part of group cs2101.`
+Expected output when fails: `Error, invalid input entered`
+
 ### Remove contacts from groups: `ungroup`
 
 Removes a contact from a group.
