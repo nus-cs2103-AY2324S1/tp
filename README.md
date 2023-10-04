@@ -1,9 +1,8 @@
 [![CI Status](https://github.com/AY2324S1-CS2103T-T09-4/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2324S1-CS2103T-T09-4/tp/actions)
 [![codecov](https://codecov.io/gh/AY2324S1-CS2103T-T09-4/tp/graph/badge.svg?token=ZD7IOSM5SQ)](https://codecov.io/gh/AY2324S1-CS2103T-T09-4/tp)
 
-<p align="center">
-  <img src="docs/images/TAvigator LogoBanner.png"/>
-</p>
+![TAvigator Logo](docs/images/TAvigator%20LogoBanner%20(Light%20Theme).png#gh-light-mode-only)
+![TAvigator Logo](docs/images/TAvigator%20LogoBanner%20(Dark%20Theme).png#gh-dark-mode-only)
 
 # TAvigator
 
