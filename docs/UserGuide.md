@@ -33,14 +33,28 @@ Foster Family is a **desktop app for managing contacts, optimized for use via a 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
-### Viewing help : `help`
+### Viewing Help for Commands : `help`
 
-Shows a message explaning how to access the help page.
+Shows the purpose and format of the different commands.
 
-![help message](images/helpMessage.png)
+Format: `help COMMAND`
 
-Format: `help`
+Parameter:
+* `COMMAND`: One of the available commands
 
+Examples:
+* `help add` Displays the function and the format of how to use the `add` command
+
+Expected output(success):
+```agsl
+Adds a fosterer to the address book.
+Format: add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS animal/ANIMAL_NAME t/HOUSING_TYPE t/TYPE_OF_ANIMAL_FOSTERED…​
+```
+
+Expected output (fail):
+```agsl
+Oops! There seems to be an error, please check the format of your command again.
+```
 
 ### Adding a fosterer: `add`
 
@@ -172,11 +186,11 @@ Expected output (fail):
 ```agsl
 Oops! Invalid fosterer index provided, please check again.
 ```
-### Clearing all entries : `clear`
+### Clearing all entries : `reset`
 
 Clears all entries from the address book.
 
-Format: `clear`
+Format: `reset`
 
 ### Exiting the program : `exit`
 
