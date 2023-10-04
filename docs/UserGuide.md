@@ -149,7 +149,7 @@ Displays a list of all tutors in the address book in a table format.
   to add a tutor with add-t: `There are no tutors in the address book. Please use /add-t to add a tutor.`
 
 **Error messages:**
-* `Too many parameters`: list-t does not accept any parameters.
+* No error messages as this command ignores extra parameters.
 
 ### Adding a schedule: `add-s`
 
