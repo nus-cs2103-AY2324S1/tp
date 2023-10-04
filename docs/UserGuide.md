@@ -14,11 +14,11 @@ InsureIQ is a **contact management system of large car owners database with poli
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `insureiq.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for InsureIQ.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar insureiq.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -142,11 +142,11 @@ Finds person(s) whose fields matches any of the given fields.
 Format: `find [n/NAME] [i/NRIC] [c/CONTACT NUMBER] [l/LICENCE PLATE]
 [pn/POLICY NUMBER] [pi/POLICY ISSUE DATE] [pe/POLICY EXPIRY DATE]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The search is case-insensitive e.g `hans` will match `Hans`
 * The order of the fields does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * **At least one** of the fields must be present
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one field will be returned (i.e. `OR` search).
+* Persons matching at least one field will be returned (i.e. `OR` search)
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
@@ -210,7 +210,7 @@ InsureIQ data are saved in the hard disk automatically after any command that ch
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+InsureIQ data are saved automatically as a JSON file `[JAR file location]/data/insureiq.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, InsureIQ will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
@@ -225,7 +225,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous InsureIQ home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 

@@ -32,10 +32,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Rohan
 
-<img src="images/RSXIX.png" width="200px">
+<img src="images/rsxix.png" width="200px">
 
 [[github](http://github.com/RSXIX)]
-[[portfolio](team/RSXIX.md)]
+[[portfolio](team/rsxix.md)]
 
 * Role: Testing
 * Responsibilities: Ensures the testing of the project is done properly and on time
