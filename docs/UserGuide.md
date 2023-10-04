@@ -72,11 +72,11 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding a Doctor: `add Doctor`
 
-Adds a person to the address book.
+Adds a Doctor to the hospital database.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add Doctor n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​, g/GENDER, ic/IC, pt/PATIENTS`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
