@@ -129,8 +129,7 @@ Edits the details of a fosterer stored in the address book.
 1. Type in `list` command to see the list of fosterers in the address book.
 2. Type `view INDEX` to enter the profile page of the fosterer with the corresponding `INDEX` from the `list` command. 
 3. Type `edit` to edit the fosterer's details (alternatively, you can skip step 2 by typing `edit INDEX` command.)
-4. In the command line, type the name of the field you want to edit and press enter. This converts a plain text into a 
-text field with the detail. 
+4. Type in the command line to search the list of fields, and press enter to edit the first match. This creates a text field around the detail corresponding to the chosen field.
 5. Edit the content of the detail and press enter. 
 6. Repeat step 4-5 until you made all your edits. 
 7. Type in `save` command to save the changes and prompt you back to the home window.
