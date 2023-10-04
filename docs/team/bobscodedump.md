@@ -1,9 +1,9 @@
 ---
 layout: default.md
-title: "Seng Kitt Bychapur's Project Portfolio Page"
+title: "Seng Kitt's Project Portfolio Page"
 ---
 
-# Seng Kitt's Portfolio Page
+# Seng Kitt's Project Portfolio Page
 
 ### Project: LoveBook
 

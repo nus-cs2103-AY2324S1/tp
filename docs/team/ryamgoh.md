@@ -3,7 +3,7 @@ layout: default.md
 title: "Ryann's Project Portfolio Page"
 ---
 
-# Ryann's Portfolio Page
+# Ryann's Project Portfolio Page
 
 ### Project: LoveBook
 

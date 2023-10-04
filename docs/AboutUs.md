@@ -43,16 +43,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Responsibilities: Logic
 * ### Lee Seng Kitt
 
-<img src="images/sengkitt.png" width="200px">
+<img src="images/bobscodedump.png" width="200px">
 
 [[github](http://github.com/bobscodedump)]
-[[portfolio](team/sengkitt.md)]
+[[portfolio](team/bobscodedump.md)]
 
 * Role: Developer
 * Responsibilities: Software Engineering
 * ### Cleon Tan De Xuan
 
-<img src="images/cleontandexuan.png" width="200px">
+<img src="images/cleon2.png" width="200px">
 
 [[github](http://github.com/Cleon2)]
 [[portfolio](team/Cleon2.md)]
