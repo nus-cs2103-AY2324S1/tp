@@ -50,12 +50,12 @@ We are a team based in the [School of Computing, National University of Singapor
 * Role: Developer
   * Responsibilities: Scheduling and tracking, in charge of models
 
-### James Doe
+### Angky Akdi Frandy Putrakelana
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/angkyakdifp.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/angkyakdifp)]
+[[portfolio](team/angkyakdifp.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: In Charge of UI, In Charge of Storage
