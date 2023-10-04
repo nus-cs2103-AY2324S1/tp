@@ -31,6 +31,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Code quality
 
+### Goh Ler Xuan
+
+<img src="images/lerxuann.png" width="200px">
+
+[[github](http://github.com/lerxuann)]
+[[portfolio](team/lerxuann.md)]
+
+* Role: Developer
+* Responsibilities: Documentation
+
 ### Ong Zhen Dong
 
 <img src="images/zd292.png" width="200px">
