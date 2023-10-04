@@ -11,34 +11,26 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
 
-<img src="images/johndoe.png" width="200px">
+### Goh Ler Xuan
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+<img src="images/lerxuann.png" width="200px">
 
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/lerxuann)]
+[[portfolio](team/lerxuann.md)]
 
 * Role: Developer
 * Responsibilities: Data
+
+### Huang Yixin
+
+<img src="images/coderhuang559.png" width="200px">
+
+[[github](http://github.com/coderhuang559)]
+[[portfolio](team/coderhuang559.md)]
+
+* Role: Developer
+* Responsibilities: UI
 
 ### Kailashwaran
 
@@ -50,12 +42,22 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Team Lead
 
+### Nicholas Tng
+
+<img src="images/nicholastng010601.png" width="200px">
+
+[[github](http://github.com/nicholastng010601)]
+[[portfolio](team/nicholastng010601.md)]
+
+* Role: Developer
+* Responsibilities: Code Quality
+
 ### Ong Zhen Dong
 
 <img src="images/zd292.png" width="200px">
 
 [[github](https://github.com/zd292)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/zd292.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Documentation
