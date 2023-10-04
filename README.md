@@ -6,7 +6,7 @@
 
 **Connectify** is a robust client management tool designed to streamline the process of tracking, categorizing, and interacting with clients for salesperson. It enables users to efficiently manage client profiles and interactions through a series of straightforward commands. From creating new profiles to logging interactions and categorizing leads, Connectify provides a comprehensive solution for managing client relationships and ensuring no detail is overlooked.
 
-![UiMockup](docs/images/UiMockup.png)
+![UiMockup](docs/images/Ui.png)
 
 ## Key Features
 

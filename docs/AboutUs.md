@@ -11,7 +11,7 @@ You can reach us at the email `connectify[at]comp.nus.edu.sg`
 
 ### Kamili Arsyad
 
-<img src="images/team/kamiliarsyad.png" width="200px">
+<img src="images/kamiliarsyad.png" width="200px">
 
 [[github](https://github.com/KamiliArsyad)]
 [[portfolio](team/kamiliarsyad.md)]
@@ -21,7 +21,7 @@ You can reach us at the email `connectify[at]comp.nus.edu.sg`
 
 ### Dick Ong
 
-<img src="images/team/dickongwd.png" width="200px">
+<img src="images/dickongwd.png" width="200px">
 
 [[github](http://github.com/dickongwd)]
 [[portfolio](team/dickongwd.md)]
@@ -31,7 +31,7 @@ You can reach us at the email `connectify[at]comp.nus.edu.sg`
 
 ### Jair Goh
 
-<img src="images/team/lilozz2.png" width="200px">
+<img src="images/lilozz2.png" width="200px">
 
 [[github](http://github.com/lilozz2)]
 [[portfolio](team/lilozz2.md)]
@@ -41,7 +41,7 @@ You can reach us at the email `connectify[at]comp.nus.edu.sg`
 
 ### Sean Wang
 
-<img src="images/team/magnificentcreature.png" width="200px">
+<img src="images/magnificentcreature.png" width="200px">
 
 [[github](http://github.com/magnificentcreature)]
 [[portfolio](team/magnificentcreature.md)]
@@ -51,7 +51,7 @@ You can reach us at the email `connectify[at]comp.nus.edu.sg`
 
 ### Zhang Yu Han
 
-<img src="images/team/zhyuhan.png" width="200px">
+<img src="images/zhyuhan.png" width="200px">
 
 [[github](http://github.com/zhyuhan)]
 [[portfolio](team/zhyuhan.md)]
