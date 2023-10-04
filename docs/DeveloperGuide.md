@@ -338,7 +338,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given matriculation number is invalid.
+* 3a. The given student number is invalid.
 
     * 3a1. ClassManager shows an error message.
 
