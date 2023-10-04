@@ -1,15 +1,26 @@
 [![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
 [![codecov](https://codecov.io/gh/AY2324S1-CS2103T-T09-4/tp/graph/badge.svg?token=ZD7IOSM5SQ)](https://codecov.io/gh/AY2324S1-CS2103T-T09-4/tp)
 
+<p align="center">
+  <img src="docs/images/TAvigator LogoBanner.png"/>
+</p>
+
+# TAvigator
+
+> Your personal navigator as a Teaching Assistant (TA)
 ![Ui](docs/images/Ui.png)
 
-* This is **TAvigators**.<br>
-  Example usages:
-  * as a starting point of a course project (as opposed to writing everything from scratch)
-  * as a case study
-* The project simulates an ongoing software project for a desktop application (called _AddressBook_) used for managing contact details.
-  * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC) than what students usually write in beginner-level SE modules, without being overwhelmingly big.
-  * It comes with a **reasonable level of user and developer documentation**.
-* It is named `AddressBook Level 3` (`AB3` for short) because it was initially created as a part of a series of `AddressBook` projects (`Level 1`, `Level 2`, `Level 3` ...).
-* For the detailed documentation of this project, see the **[Address Book Product Website](https://se-education.org/addressbook-level3)**.
-* This project is a **part of the se-education.org** initiative. If you would like to contribute code to this project, see [se-education.org](https://se-education.org#https://se-education.org/#contributing) for more info.
+**TAvigator** streamlines the teaching process for TAs around the world. Our software understands the various roles a TA has to play, from meticulous record-keeping to fostering connections with students.
+
+Tavigator is optimised for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, TAvigator can get your lesson management tasks done faster than traditional GUI apps.
+
+## Key Features
+
+### Beta Stage
+
+- Mark attendance of students
+- View summary of attendance records
+- Create/Edit student contacts
+- Search students up by name or student ID
+- View a list of your students
+- Filter for specific tutorial groups
