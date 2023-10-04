@@ -45,7 +45,7 @@ You can reach us at the email `jason.lee.jia.xuan[at]u.nus.edu`
 [[portfolio](team/weeweh.md)]
 
 * Role: Code Quality
-* Responsibilities: UI
+* Responsibilities: UX
 
 ### Winson
 
