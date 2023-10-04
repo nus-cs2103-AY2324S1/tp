@@ -147,6 +147,28 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+### Viewing specific tutorial groups: `filter add` [Coming Soon]
+
+Shows a list of students from a specified tutorial group
+
+Format: `filter add TUTORIALGROUPID`
+
+* Filters students that are in the tutorial group specified by `TUTORIALGROUPID`
+* `TUTORIALGROUPID` should be a string made up of alphabetical characters and numbers, with no special characters.
+* `TUTORIALGROUPID` must correspond to an existing tutorial group.
+
+Examples:
+* `filter add G08` returns a list of students from tutorial group G08
+
+### Removing filters: `filter remove` [Coming Soon]
+
+Removes any applied filter
+
+Format: `filter remove`
+
+Examples:
+* `filter remove` returns the list of all students 
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
