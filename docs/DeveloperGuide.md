@@ -283,28 +283,162 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `InterviewHub` and the **Actor** is the `hiring manager`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 Add an interview**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. Hiring manager requests to add an interview.
+2. InterviewHub adds the interview.
+
+    Use case ends.
+
+**Extensions**
+* 1a. One of the user-provided parameters is invalid
+    * 1a1. InterviewHub shows an error message.
+
+      Use case resumes at step 1.
+
+**Use case: UC02 List all interview**
+
+**MSS**
+
+1. Hiring manager requests to list all interviews.
+2. InterviewHub displays all scheduled interviews.
+
+    Use case ends.
+
+**Extensions**
+* 1a. The list is empty
+  * 1a1. InterviewHub shows an error message.
+  
+    Use case ends.
+
+**Use case: UC03 Delete an Interview**
+
+**MSS**
+
+1. Hiring manager <u> views the list of all interviews (UC02) </u>
+2. Hiring manager requests to delete a specific interview
+3. InterviewHub deletes the specified interview
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The provided index is invalid 
+  * 2a1. InterviewHub shows an error message.
+   
+    Use case resumes at step 2.
 
-  Use case ends.
+**Use case: UC04 Add a job role**
 
-* 3a. The given index is invalid.
+**MSS**
 
-    * 3a1. AddressBook shows an error message.
+1. Hiring manager requests to add a job role.
+2. InterviewHub adds the job role.
+
+    Use case ends.
+
+**Extensions**
+* 1a. One of the user-provided parameters is invalid
+  * 1a1. InterviewHub shows an error message.
+
+    Use case resumes at step 1.
+
+**Use case: UC05 List all job roles**
+
+**MSS**
+
+1. Hiring manager requests to list all job roles.
+2. InterviewHub displays all job roles.
+
+    Use case ends.
+
+**Extensions**
+* 1a. The list is empty
+  * 1a1. InterviewHub shows an error message.
+
+    Use case ends.
+
+**Use case: UC06 List all interviewees for a job role**
+
+**MSS**
+
+1. Hiring manager <u> views the list of all job roles (UC05) </u>
+2. Hiring manager requests to view all interviewees for a specific job role.
+3. InterviewHub displays all the interviewees for the specific job role.
+
+    Use case ends.
+
+* 2a. The provided index is invalid
+  * 2a1. InterviewHub shows an error message.
+
+    Use case resumes at step 2.
+
+**Use case: UC07 Delete a job role**
+
+**MSS**
+
+1. Hiring manager <u> views the list of all job roles (UC02) </u>
+2. Hiring manager requests to delete a specific job role
+3. InterviewHub deletes the specified job role
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The provided index is invalid
+  * 2a1. InterviewHub shows an error message.
+
+    Use case resumes at step 2.
+
+
+**Use case: UC08 Add an interviewee**
+
+**MSS**
+
+1. Hiring manager requests to add an interviewee.
+2. InterviewHub adds the interviewee.
+
+   Use case ends.
+
+**Extensions**
+* 1a. One of the user-provided parameters is invalid
+  * 1a1. InterviewHub shows an error message.
+
+    Use case resumes at step 1.
+
+**Use case: UC09 List all interviewees**
+
+**MSS**
+
+1. Hiring manager requests to list all interviewees.
+2. InterviewHub displays all scheduled interviewees.
+
+   Use case ends.
+
+**Extensions**
+* 1a. The list is empty
+  * 1a1. InterviewHub shows an error message.
+
+      Use case ends.
+
+**Use case: UC010 Delete an Interviewee**
+
+**MSS**
+
+1. Hiring manager <u> views the list of all interviewees (UC09) </u>
+2. Hiring manager requests to delete a specific interviewee
+3. InterviewHub deletes the specified interviewee
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The provided index is invalid
+    * 2a1. InterviewHub shows an error message.
 
       Use case resumes at step 2.
 
@@ -313,8 +447,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+2.  Should be able to handle as many interviewees as the user is able to manage in their workday/workweek.
+3.  The app should be reasonably responsive to the entire set of user requests(i.e. within 1 second at maximum load).
+4.  The system should have an interface that is very easy to pick up for our target audience(i.e. Engineering Managers 
+that have many years of programming experience).
 
 *{More to be added}*
 
