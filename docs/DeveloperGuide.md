@@ -456,6 +456,95 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
   Use case resumes from step 1.
 
+**Use case: Add a ToDo #UC09**
+
+**MSS**
+
+1.  User requests to list existing ToDos
+2.  WellNUS shows the list of ToDos, along with some basic information like dateline and student
+3.  User requests to add a new ToDo to the list
+4.  WellNUS adds the ToDo, and shows confirmation message
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The given student name does not exist.
+
+    * 3a1. WellNUS shows an error message.
+
+    Use case ends.
+
+* 3b. The given student name is invalid (non-alphabetical input) / dateline is invalid (past dateline, invalid format).
+
+    * 3b1. WellNUS shows an error message.
+
+    Use case ends.
+
+**Use case: View existing ToDos #UC10**
+
+**MSS**
+
+1.  User requests to list ToDos
+2.  WellNUS shows the list of ToDos
+3.  Users can find information like dateline, student, etc.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+**Use case: Delete existing ToDos #UC11**
+
+**MSS**
+
+1.  User requests to list ToDos
+2.  WellNUS shows the list of ToDos
+3.  User can find ToDos index
+4.  Delete ToDos by specifying the index
+5.  Get confirmation of successful delete
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The ToDo index is invalid.
+
+    * 3a1. WellNUS shows an error message.
+
+    Use case ends.
+
+**Use case: Tag student to ToDo #UC12**
+
+**MSS**
+
+1.  User requests to list students
+2.  WellNUS shows the list of students
+3.  User can find student index
+4.  Tag/change student to ToDo
+5.  Information gets updated for future reference
+
+    Use case ends.
+
+
+**Extensions**
+
+
+* 3a. The given index is invalid.
+
+    * 3a1. WellNUS shows an error message.
+
+    Use case ends.
+
+* 3b. The referenced ToDo is invalid.
+
+    * 3a1. WellNUS shows an error message.
+
+    Use case ends.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
