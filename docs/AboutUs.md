@@ -36,6 +36,9 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[github](http://github.com/yiwen101)]
 [[portfolio](team/yiwen.md)]
+
+* Role: Developer
+* Responsibilities: User Usability
 ### Marcus Soh
 
 <img src="images/hollag.png" width="200px">
