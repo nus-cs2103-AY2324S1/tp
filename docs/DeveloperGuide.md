@@ -473,7 +473,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list tutors
-2.  TutorConnect shows a list of schedules
+2.  TutorConnect shows a list of tutors
 3.  User requests to view schedules for a specific tutor in the list
 4.  TutorConnect displays a list of schedules for the tutor
 
