@@ -47,7 +47,7 @@ On top of these functionalities, we believe that tuition centre management must 
 
 4. Double-click the jar file to launch the application.
 
-> ## ℹ️ Information
+> ## ℹ️ Mac Users
 > If you are a Mac user, you may encounter a warning that says 
    the jar file cannot be opened because it is from an unidentified developer. To continue:
 >   1. Right-click on the jar file and select `Open With > JavaLauncher (default)`
@@ -59,11 +59,7 @@ On top of these functionalities, we believe that tuition centre management must 
 
 ## Features
 
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Notes about the command format:**<br>
-
-> ## ℹ️ Information
+> ## ℹ️ Command Format
 > * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 > * Items in square brackets are optional.<br>
@@ -77,7 +73,6 @@ On top of these functionalities, we believe that tuition centre management must 
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 > * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple 
     > lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</div>
 
 ### Adding a tutor: `add-t`
 
