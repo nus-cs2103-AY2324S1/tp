@@ -324,13 +324,13 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* University students often spend a lot of time coordinating project meetup 
+* sessions and waiting for replies and they are not aware of one another’s schedules. 
+* This app can help to save time by listing available time slots of individuals in a team.
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+
+**Value proposition**: Text-friendly project management tool that helps students schedule meetings with different groups while also keeping track of tasks and 
+responsibilities of each member. Our app will track the schedule of each contact and tasks individuals have to do for their project.
 
 
 ### User stories
