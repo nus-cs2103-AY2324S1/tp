@@ -14,7 +14,7 @@ You can reach us at the email `ManageHR@comp.nus.edu.sg`
 <img src="images/kenvynkwek.png" width="200px">
 
 [[github](https://github.com/kenvynkwek)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/kenvynkwek.md)]
 
 * Role: Team Lead + Developer
 * Responsibilities: Deliverables and deadlines + Integration
@@ -35,7 +35,7 @@ You can reach us at the email `ManageHR@comp.nus.edu.sg`
 <img src="images/starrylight99.png" width="200px">
 
 [[github](https://github.com/starrylight99)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/starrylight99.md)]
 
 * Role: Developer
 * Responsibilities: UI + Testing
