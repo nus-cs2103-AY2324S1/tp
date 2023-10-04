@@ -127,6 +127,51 @@ Error messages:
 * `Wrong input: p/`: The phone number entered does not consist of numbers only. 
 * `Wrong input: e/`: The email entered is invalid.
 
+### Adding a schedule: `add-s`
+
+Adds a schedule to a specified tutor.
+
+![add schedule](images/addSchedule.png)
+
+**Format**: `add-s ti/TUTOR_INDEX s/START_TIME e/END_TIME`
+
+**Examples**:
+* `add-s ti/1 s/2023-09-15T09:00:00 e/2023-09-15T11:00:00`
+* `add-s ti/2 s/2023-09-16T17:00:00 e/2023-09-16T19:00:00`
+
+**Acceptable values for each parameter**:
+* `TUTOR_INDEX`: Only number input accepted, starting from 1 to the last tutor index shown in the list of tutors.
+* `START_TIME`: Only datetime in `yyyy-MM-ddTHH:mm:ss` format is accepted
+* `END_TIME`: Only datetime in `yyyy-MM-ddTHH:mm:ss` format is accepted
+
+    <div markdown="block" class="alert alert-info">
+    
+    **:information_source: Information**<br>
+    
+    * `yyyy` represents the **year** (e.g., 2023).
+    * `MM` represents the **month** with a leading zero (e.g., 09 for September, 10 for October).
+    * `dd` represents the **day** of the month with a leading zero (e.g., 03, 15).
+    * `T` is a **separator** indicating the start of the time portion.
+    * `HH` represents the **hour** in **24-hour format** with a leading zero (e.g., 09 for 9 AM, 21 for 9 PM).
+    * `mm` represents the **minutes** with a leading zero (e.g., 05).
+    * `ss` represents the **seconds** with a leading zero (e.g., 05).
+    
+    </div>
+
+**Expected output**:
+* `New schedule John Doe starting from Sep 15 2023 09:00 to Sep 15  2023 11:00 has been added.`
+
+**Error messages**:
+* `Missing parameter: ti/`: The tag ti/ is missing or tutor’s index is missing.
+* `Missing parameter: s/`: The tag s/ is missing or schedule’s start time is missing.
+* `Missing parameter: e/`: The tag e/ is missing or the schedule’s end time is missing.
+* `Wrong input: ti/`: The tutor index entered is not a valid number.
+* `Index number given is out of range`: Given index is out of range.
+* `Wrong input: s/`: The start time entered is not in datetime format.
+* `Wrong input: e/`: The end time entered is not in datetime format..
+
+
+
 _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
@@ -146,12 +191,13 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add Tutor** | `add-t n/NAME p/PHONE NUMBER e/EMAIL` <br> e.g., `add-t n/John Doe p/98765432 e/johnd@example.com`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+| Action           | Format, Examples                                                                                                            |
+|------------------|-----------------------------------------------------------------------------------------------------------------------------|
+| **Add Tutor**    | `add-t n/NAME p/PHONE NUMBER e/EMAIL` <br> e.g., `add-t n/John Doe p/98765432 e/johnd@example.com`                          |
+| **Add Schedule** | `add-s ti/TUTOR_INDEX s/START_TIME e/END_TIME` <br> e.g., `add-s ti/1 s/2023-09-15T09:00:00 e/2023-09-15T11:00:00`          |
+| **Clear**        | `clear`                                                                                                                     |
+| **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                         |
+| **Edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` |
+| **Find**         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                  |
+| **List**         | `list`                                                                                                                      |
+| **Help**         | `help`                                                                                                                      |
