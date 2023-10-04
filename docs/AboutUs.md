@@ -23,8 +23,9 @@ You can reach us at the email `ManageHR@comp.nus.edu.sg`
 
 <img src="images/sungmatt.png" width="200px">
 
-[[github](https://github.com/SungMatt)]
-[[portfolio](team/johndoe.md)]
+[[homepage](http://sungmatt.com)]
+[[github](https://github.com/sungmatt)]
+[[portfolio](team/sungmatt.md)]
 
 * Role: Team Lead + Project Advisor
 * Responsibilities: Scheduling and tracking + Documentation
