@@ -338,7 +338,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given matriculation number is invalid.
+* 3a. The given student number is invalid.
 
     * 3a1. ClassManager shows an error message.
 
@@ -361,7 +361,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given matriculation number is invalid.
+* 3a. The given student number is invalid.
 
     * 3a1. ClassManager shows an error message.
 
@@ -390,7 +390,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given matriculation number is invalid.
+* 3a. The given student number is invalid.
 
     * 3a1. ClassManager shows an error message.
 
@@ -435,16 +435,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  Application should be secure (with password) as sensitive information is stored
 5.  Application needs to have proper documentation and user guide so that users can understand how to use the application
- 
-
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Student Number**: Matriculation number of NUS student
-* **Email**: NUS email account (...@u.nus.edu)
+* **Email**: NUS email address (eXXXXXXX@u.nus.edu)
 * **CLI**: Command Line Interface
-* **GUI** Graphic User Interface
+* **GUI**: Graphical User Interface
 
 --------------------------------------------------------------------------------------------------------------------
 
