@@ -440,7 +440,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Housing type**: Categorised into HDB, Condo, Landed
+* **Types of animal fostered**: Categorised into solely cats and/or dogs (current.dog/cat or able.dog/cat depends on availability of fosterer)
+* **Current list**: The currently displayed list obtained from a list command or its variants
 
 --------------------------------------------------------------------------------------------------------------------
 
