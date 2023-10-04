@@ -11,10 +11,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Anthony Tamzil
 
-<img src="images/anthony.png" width="200px">
+<img src="images/anthonytamzil.png" width="200px">
 
 [[github](https://github.com/anthonytamzil)]
-[[portfolio](team/anthony.md)]
+[[portfolio](team/anthonytamzil.md)]
 
 * Role: Team Lead
 
