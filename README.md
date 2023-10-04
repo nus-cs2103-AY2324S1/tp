@@ -23,11 +23,14 @@ Average 4.7 :star: 17M+ Reviews :astonished:
 - [ ] attach tasks to employees (coming soon)
 
 ## Ratings and Reviews
-> 5/5 :star: "This application is amazing ! I don't have to chug panadols anymore every time an employee schedules a meeting with me" -Jenny, Head of a HR Department
-> 
-> 5/5 :star: "Wow ! I wish I discovered an application like this sooner" -Johnny Sins, a HR staff
-> 
-> 4.5/5 :star: "Revolutionary technology, good stuff" -Ricardo Milos, a HR intern
+Jenny, Head of a HR Department
+> 5/5 :star: "This application is amazing ! I don't have to chug panadols anymore every time an employee schedules a meeting with me"
+
+Johnny Sins, a HR staff
+> 5/5 :star: "Wow ! I wish I discovered an application like this sooner"
+
+Ricardo Milos, a HR intern
+> 4.5/5 :star: "Revolutionary technology, good stuff"
 
 ## Miscellaneous
 Project website available [here](https://ay2324s1-cs2103-t16-1.github.io/tp/) (includes user guide).
