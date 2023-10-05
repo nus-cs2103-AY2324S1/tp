@@ -15,7 +15,7 @@ Here’s an overview of what you can do with Tutor Connect:
 On top of these functionalities, we believe that tuition centre management must be efficient. Therefore, Tutor Connect is **optimised for users who can type fast** and utilise the Command Line Interface (CLI) to complete tasks using the keyboard faster than using the mouse.
 
 * Table of Contents
-  {:toc}
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -258,6 +258,7 @@ _More details coming soon ..._
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
+
 | Action              | Format, Examples                                                                                                            |
 |---------------------|-----------------------------------------------------------------------------------------------------------------------------|
 | **Add Tutor**       | `add-t n/NAME p/PHONE NUMBER e/EMAIL` <br> e.g., `add-t n/John Doe p/98765432 e/johnd@example.com`                          |
