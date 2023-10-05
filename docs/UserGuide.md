@@ -77,11 +77,13 @@ Example:
 - `help`
 
 Acceptable values for each parameter:
+
 | Paramters | Accepted input |
 | --- | --- |
 | nil | - |
 
 Expected outputs:
+
 | Outcome | Output |
 | --- | --- |
 | command success | Refer to the user guide: https://ay2324s1-cs2103-t16-1.github.io/tp/UserGuide.html |
@@ -102,6 +104,7 @@ Examples:
 * `add n/Elon p/12345678 e/elonma@gmail.com a/Elon street, block 140, #20-01 d/R&D`
 
 Acceptable values for each parameter:
+
 | Parameters | Accepted input |
 | --- | --- |
 | `NAME` | Alphabets |
@@ -122,7 +125,11 @@ Description: Lists all employees currently stored
 
 Format: `list`
 
-Acceptable values for each parameter: None
+Acceptable values for each parameter:
+
+| Parameters | Accepted input |
+| --- | --- |
+| nil | - |
 
 Succeed:
 
