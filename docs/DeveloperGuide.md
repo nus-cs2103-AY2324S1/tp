@@ -334,6 +334,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  Usability and Accessibility: The application should provide clear and user-friendly CLI prompts and menus.
+It should support keyboard shortcuts for navigation to enhance accessibility.
+5.  Scalability: The address book should be capable of storing at least 10,000 contacts without a significant decrease in performance.
+6.  Reliability and Availability: The application should have a 99.9% uptime, ensuring that users can access their contacts reliably.
+It should automatically back up address book data daily to prevent data loss.
+7.  Portability: The CLI application should be compatible with multiple operating systems, including Windows, macOS, and Linux.
 
 *{More to be added}*
 

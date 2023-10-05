@@ -146,21 +146,6 @@ Output if error:
 
 BOB
 
-# Non-Functional Requirements (Ryann)
-
-### Usability and Accessibility:
-The application should provide clear and user-friendly CLI prompts and menus.
-It should support keyboard shortcuts for navigation to enhance accessibility.
-
-### Scalability:
-The address book should be capable of storing at least 10,000 contacts without a significant decrease in performance.
-
-### Reliability and Availability:
-The application should have a 99.9% uptime, ensuring that users can access their contacts reliably.
-It should automatically back up address book data daily to prevent data loss.
-
-### Portability:
-The CLI application should be compatible with multiple operating systems, including Windows, macOS, and Linux.
 
 --------------------------------------------------------------------------------------------------------------------
 
