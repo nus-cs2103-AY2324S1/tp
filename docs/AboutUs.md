@@ -24,7 +24,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Zhang Yiheng
 
-<img src="images/yiheng.jpg" width="200px">
+<img src="images/yiheng.png" width="200px">
 
 [[github](http://github.com/nubnubyas)]
 [[portfolio](team/yiheng.md)]
