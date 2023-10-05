@@ -285,10 +285,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
 |----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
 | `* * *`  | developer                                  | view all members of my team  | refer to instructions when I forget how to use the App                 |
-| `* * *`  | project manager                            | access the names of all my   | them regarding the project                                             |
-                                                          deveopers and team leaders     
-| `* * *`  | project manager                            | assign a node for a team     |   the target team leaders can fill in their information by themselves  |
-                                                          leader
+| `* * *`  | project manager                            | access the names of all my deveopers and team leaders     | them regarding the project                                             |
+| `* * *`  | project manager                            | assign a node for a team  leader    |   the target team leaders can fill in their information by themselves  |                                                         
 | `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
 | `* *`    | developer                                  | hide private contact details | minimize chance of someone else seeing them by accident                |
 | `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
