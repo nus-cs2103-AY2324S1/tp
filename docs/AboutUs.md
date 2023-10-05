@@ -31,14 +31,15 @@ We are a team of students from the [School of Computing, National University of 
 * Role: Developer
 * Responsibilities: Documentation
 
-### Johnny Doe
+### Edwin Zheng Yuanyi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/eola-z.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/eola-z)]
+[[portfolio](team/eola-z.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Developer, Mockup artist
+* Responsibilities: UI mockups and diagrams
 
 ### Aw Hang Bin
 
