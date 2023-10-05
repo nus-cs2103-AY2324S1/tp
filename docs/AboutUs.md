@@ -16,7 +16,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/DeltonCheng)]
 [[portfolio]()]
 
-* Role: Deliverables, Deadline and Documentation 
+* Role: Developer
+* Responsibilities: Deliverables, Deadline and Documentation
 
 ### Shu Yang
 
