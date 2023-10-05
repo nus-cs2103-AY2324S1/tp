@@ -184,7 +184,7 @@ Find tutors whose names contain any of the given keywords.
 * `0 tutors listed!`
 
 **Error messages**:
-* `Missing search keyword:`: No search keyword provided.
+* `Invalid command format!`: No search keyword provided.
 
 ### Adding a schedule: `add-s`
 
