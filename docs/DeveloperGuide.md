@@ -294,7 +294,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | serial dater | be able to delete dates from my list                   | so that my dating list is only limited to those who I am still interested in                |
 | serial dater | to be able create a new date entry with his/her gender, name, income, height, horoscope and hobbies                   | so that I can keep my list growing                                                          |
 | serial dater | to be able to edit the details of my date             | so that I can keep my dates details up to date                                              |
-| serial dater | to be able to be recommended a complete random date            | so that I can have a surprise date that day                                                 |
+| serial dater | to be able to be recommended a complete random date            | so that I can have an exciting surprise date that day                                       |
 | serial dater | to be able to filter my past dates based on a particular metric             | so that I can find dates that I am interested in amidst my long and ever growing list       |
 | serial dater | to be able to be recommended the most compatible date for me            | so that I optimize my chance of finding my one true love                                    |
 | serial dater | to be able to set my dating preferences            | so that the algorithm can recommend me a suitable match                                     |
