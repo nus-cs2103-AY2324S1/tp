@@ -50,6 +50,9 @@ When the command succeeds:
 
 ![remove_duplicate](images/add-remark/remove-duplicate.png)
 
+When the command fails:
+* `Invalid response, please type ‘1, 2, 3’ only`
+
 ### Add phone number to contact: `add /phone /index`
 
 You can add a phone number to an existing contact. A new phone number will be added to the contact's list of phone numbers, and no new contact will be created.
@@ -162,6 +165,19 @@ When the command succeeds:
 
 ![add priority success](images/add-remark/add-course.png)
 
+When the command fails:
+* `add /course CS1101S /index 1 /date 1`
+  * `Incorrect format for start date/end date`
+* `add /course CS1101S /index 1 /date 30-02-2022`
+  * `Invalid date entered`
+* `add /course CS1234567S /index 1 /date 01-08-2022`
+  * `Course code should not be longer than 8 characters`
+* `add /course CS1101S`
+  * `Course code/index/start date missing`
+* `add /course CS1101S /index 20000 /date 01-08-2022 07-12-2022`
+  * `Student with index 20000 cannot be found`
+
+
 ### Add specialisation: `add /spec /index`
 
 You can add a specialisation to an existing contact.  A new specialisation will be added to the contact's list of specialisations, and no new contact will be created.
@@ -180,6 +196,16 @@ When the command succeeds:
 * `add /spec Robotics & AI /index 1`
 
 `Added specialisation Robotics & AI to [name of contact]`
+
+When the command fails:
+* `add /spec /index 1`
+  * `Specialisation cannot be blank`
+* `add /spec Robotics & AI /index 20000`
+  * `Student with index 20000 cannot be found`
+* `add /spec Robotics & AI`
+  * `Index missing`
+* `add /spec Robotics & AI /index 1`
+  * `Specialization already exists on contact with index 1 ([name of contact])`
 
 ### Assign priority levels: `add /priority /index` 
 
