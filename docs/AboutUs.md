@@ -14,7 +14,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/deltoncheng.png" width="200px">
 
 [[github](https://github.com/DeltonCheng)]
-[[portfolio]()]
+[[portfolio](team/deltoncheng.md)]
 
 * Role: Deliverables, Deadline and Documentation 
 
