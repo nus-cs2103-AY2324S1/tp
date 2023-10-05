@@ -41,15 +41,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Doctor Class and related Classes/Features
 
-### Jean Doe
+### Chong Zhen Xi, Isaac
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/chonguschonguschongus.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[LinkedIn](https://www.linkedin.com/in/zhen-xi-chong-0a6499292/)]
+[[github](http://github.com/chonguschonguschongus)]
+[[portfolio](team/chonguschonguschongus.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Testing
 
 ### Huang Chao Ming
 
