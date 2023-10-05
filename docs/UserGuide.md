@@ -95,7 +95,7 @@ On top of these functionalities, we believe that tuition centre management must 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`)
   will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple  
+* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple 
   lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
 </div>
@@ -143,7 +143,7 @@ Displays a list of all tutors in the address book in a table format.
 * No acceptable values as list-t has no parameters
 
 **Expected Output**:
-* Displays a table of tutors with columns for Name, Phone Number, and Email like 
+* Displays a table of tutors with columns for Name, Phone Number, and Email like
   the [image](#listing-all-tutors--list-t) above
 * If there are no tutors in the address book, displays a message telling the user
   to add a tutor with add-t: `There are no tutors in the address book. Please use /add-t to add a tutor.`
@@ -167,7 +167,7 @@ Deletes a tutor in the address book based on their index number in the table.
 * `TUTOR_INDEX`: Only accepts numerical value
 
 **Expected output**:
-* `Tutor has been deleted: Alex Yeoh; Phone: 87438807; 
+* `Tutor has been deleted: Alex Yeoh; Phone: 87438807;
   Email: alexyeoh@example.com; Address: Blk 30 Geylang Street 29, #06-40`
 
 **Error messages**:
