@@ -52,7 +52,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Tang Moyan
 
-<img src="images/Tang-Moyan.png" width="200px">
+<img src="images/tang-moyan.png" width="200px">
 
 [[github](http://github.com/Tang-Moyan)]
 [[portfolio](team/Tang-Moyan.md)]
