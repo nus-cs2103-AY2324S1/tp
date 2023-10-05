@@ -43,7 +43,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Chong Zhen Xi, Isaac
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/chonguschonguschongus.png" width="200px">
 
 [[LinkedIn](https://www.linkedin.com/in/zhen-xi-chong-0a6499292/)]
 [[github](http://github.com/chonguschonguschongus)]
