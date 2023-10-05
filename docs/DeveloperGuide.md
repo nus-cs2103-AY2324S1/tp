@@ -331,7 +331,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User chooses what field to sort by (e.g. name, specialization, graduation year) and which order to sort by (ascending or descending).
 
-1.  System shows list of user’s contacts, sorted by the specified field and in the specified order.
+2.  System shows list of user’s contacts, sorted by the specified field and in the specified order.
 
     Use case ends.
 
@@ -378,13 +378,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User specifies the text they would like to search.
 
-1.  System shows list of user’s contacts with names containing the searched text.
+2.  System shows list of user’s contacts with names containing the searched text.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The user has no contacts to sort.
+* 1a. The user has no contacts to search.
 
     * 1a1. System shows an empty contact list.
 
