@@ -383,6 +383,29 @@ Priorities: Essential (must have) - `* * *`, Typical (nice to have) - `* *`, Nov
 
       Use case ends.
 
+**Use case: Searching for patients**
+
+**MSS**
+
+1. User requests to find patients from a keyword.
+2. System shows a list of patients that match the keyword with their names.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. System detects invalid request format
+
+    * 1a1. System shows an error message.
+
+      Use case ends.
+
+* 1b. System could not find any patient from the keyword
+
+    * 1b1. System shows an error message.
+
+      Use case ends.
+
 **Use case: Exit the program**
 
 **MSS**

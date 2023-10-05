@@ -13,22 +13,22 @@ DoConnek Pro is a **desktop app** that helps **General Practitioner Clinic Manag
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `DocConnekPro.jar` from [here](https://github.com/AY2324S1-CS2103T-W13-1/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your DocConnek Pro.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar DocConnekPro.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+1. Type the command in the command input box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `list -pa` : Lists all patients.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add -pa n/John p/12345678 a/21 m/Osteoporosis m/Rheumatoid arthritis` : Adds a patient named `John` to the list.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete -pa 3` : Deletes the 3rd patient shown in the current list.
 
    * `clear` : Deletes all contacts.
 
