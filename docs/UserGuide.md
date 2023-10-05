@@ -38,7 +38,8 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
-
+## Contents
+- [Adding a Doctor: `add Doctor`](#adding-a-doctor--add-doctor)
 ## Features
 
 <div markdown="block" class="alert alert-info">
@@ -72,19 +73,28 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding a Doctor: `add Doctor`
 
-Adds a person to the address book.
+Adds a Doctor to the hospital database.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add Doctor n/NAME ic/IC g/GENDER p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ pt/PATIENT_1 …​`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">:bulb:
+**Tip:**
 A person can have any number of tags (including 0)
 </div>
+<div markdown="span" class="alert alert-primary">:note:
+**Take Note:**
+
+- A doctor **MUST** have a non-empty NAME and a valid IC at the very least. Failure to include these details may result in an error.
+- Phone Numbers and Emails have to be in a valid format. 
+  - PHONE_NUMBER must have exactly 8 digits.
+  - EMAIL must contain email domain (eg. `@gmail.com`).
+- PATIENT must contain the valid IC of a Patient in the Database.
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add Doctor n/John Doe ic/S9851386G g/Male p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pt/T0123456H`
+* `add Doctor n/Betsy Crowe ic/S9851586G g/Female p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/Surgeon pt/T0123556H`
 
 ### Listing all persons : `list`
 
@@ -188,6 +198,7 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
+**New Doctor** | `add Doctor n/NAME ic/IC g/GENDER p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ pt/PATIENT_1 …​` <br> e.g., `add Doctor n/John Doe ic/S9851386G g/Male p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pt/T0123456H`
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`

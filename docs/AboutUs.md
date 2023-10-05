@@ -30,14 +30,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: UI
 
-### Johnny Doe
+### Mohammed Faiz
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/mohammed-faizzzz.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[LinkedIn](https://www.linkedin.com/in/mohammed-faiz-47585017a/)]
+[[Github](https://github.com/Mohammed-Faizzzz)]
+[[Portfolio](team/faiz.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Doctor Class and related Classes/Features
 
 ### Jean Doe
 

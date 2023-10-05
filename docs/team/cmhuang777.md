@@ -33,5 +33,6 @@ Given below are my contributions to the project.
 * **Team-based tasks**:
     * Forked the team repo from the source code
     * Set up the team website
+    * Updated readme
 
 
