@@ -64,10 +64,7 @@ The index **must be a positive integer** 1, 2, 3, …​
 
 ### Viewing Help: `help`
 
-Access a summary of all available commands.
-
-**Format:**   
-`help`
+Click the help button on the top to navigate to a comprehensive help manual.
 
 ---
 
@@ -85,7 +82,7 @@ Search and display contacts with names containing any of the given keywords.
 
 ### Clearing All Entries: `clear`
 
-Remove all contacts from your list.
+Remove all contacts from your list. Apply with caution!
 
 **Format:**   
 `clear`
