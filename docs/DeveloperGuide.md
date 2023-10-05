@@ -324,14 +324,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `LinkTree` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: View all members of my team**
+**Actor: Developer**
 
 **MSS**
 
 1. Developer requests to list team members.
-2. TeamDirectory displays a list of team members.
+2. LinkTree displays a list of team members.
 3. Developer views the members' contact information.
 
     Use case ends.
@@ -345,6 +346,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ---
 
 **Use case: Search contacts using tags**
+**Actor: Developer**
 
 **MSS**
 
@@ -363,6 +365,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ---
 
 **Use case: Access names of developers**
+**Actor: Project Manager**
 
 **MSS**
 
@@ -374,6 +377,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ---
 
 **Use case: Edit or update my information**
+**Actor: Developer**
 
 **MSS**
 
@@ -386,6 +390,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ---
 
 **Use case: Assign a node for a team leader**
+**Actor: Project Manager**
 
 **MSS**
 
@@ -398,6 +403,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ---
 
 **Use case: Create a public profile for a team**
+**Actor: Team lead**
 
 **MSS**
 
@@ -469,6 +475,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Team Directory**: The system or platform where all the contact details of developers, team leaders, and project managers are stored.
+* **Node**: A designated area or profile within the Team Directory where specific users (like team leaders or developers) can input or update their information.
+* **Tag-Based System**: A system in the Team Directory that allows contacts to be tagged with specific roles or responsibilities, like "Database Management" or "Code Review".
+* **Public Profile**: A profile in the Team Directory visible to all users, containing non-sensitive information about a team or individual.
+* **Status Feature**: A tool enabling users to set and display their current status or availability (e.g., online, busy, away) within the Team Directory.
+* **Inventory Checking**: A feature that logs the state of an item (like an apartment) at a specific time, allowing for easy comparison at a later date.
 
 --------------------------------------------------------------------------------------------------------------------
 
