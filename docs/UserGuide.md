@@ -132,7 +132,7 @@ Edits an existing patient's details in the address book.
 
 Format: `edit n/NAME or id/IC_NUMBER [field] ...`
 
-* Edits the person with the specified name or id. 
+* Edits the person with the specified name or id.
 * If an invalid name or id is passed, an error message will be logged.
 * At least one of the optional fields must be provided.
 * Existing fields will be updated to the input values.
@@ -203,7 +203,7 @@ Expected outputs when the command succeeds:
 * `The [field] of Patient n/NAME or id/IC_NUMBER has been removed from the database`
 
 Expected output when the command fails:
-* `Error code’s message (i.e. Invalid NRIC/ Invalid Field(s) / Database Error) `  
+* `Error code’s message (i.e. Invalid NRIC/ Invalid Field(s) / Database Error) `
 
 Examples:
 * `Delete id/S9987362H` deletes all the details of the person with the specified IC number from HealthSync.
@@ -214,7 +214,7 @@ Examples:
 Original format, can consider using
 list followed by delete 2 deletes the 2nd person in the address book.
 find Betsy followed by delete 1 deletes the 1st person in the results of the find command.
---> 
+-->
 
 ### Clearing all entries : `clear`
 
