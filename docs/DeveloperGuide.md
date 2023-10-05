@@ -407,13 +407,52 @@ Use case ends.
 
 * 2a. The list is empty.
 
-  Use case ends.
+    * 2a1. AddressBook displays a message indicating that the list is empty.
+  
+      Use case ends.
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. AddressBook shows an error message indicating that the specified index is invalid.
 
-      Use case resumes at step 2.
+      Use case resumes at step 3.
+
+* 4a. Deletion encounters an error
+
+    * 4a1. AddressBook displays an error message indicating that the deletion process failed.
+
+      Use case ends.
+
+**Use case: Set a person's status**
+
+**MSS**
+
+1.  User requests to list persons
+2.  AddressBook shows a list of persons
+3.  User requests to set the status of a specific person in the list
+4.  AddressBook sets the status of that person in the list
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+    * 2a1. AddressBook displays a message indicating that the list is empty.
+
+      Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. AddressBook shows an error message indicating that the specified index is invalid.
+
+      Use case resumes at step 3.
+
+* 3b. The given status is invalid.
+
+    * 3b1. AddressBook shows an error message indicating that the specified status is invalid.
+
+      Use case resumes at step 3.
 
 *{More to be added}*
 
