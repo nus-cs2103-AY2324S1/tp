@@ -16,7 +16,8 @@ We currently do not offer any means to contacting us, thank you for your underst
 [[github](https://github.com/JasonLCY-Temp)]
 [[portfolio](team/jasonlcy-temp.md)]
 
-* Role: Scheduling and tracking, CI/CD Pipeline manager, In charge of `Interview`
+* Role: Scheduling and tracking, CI Pipeline manager
+* Responsibilities: In charge of  `Interview`
 
 ### Tan Jing Jie
 
@@ -56,3 +57,13 @@ We currently do not offer any means to contacting us, thank you for your underst
 
 * Role: Developer
 * Responsibilities: Time man
+
+### Chen Xin-An
+
+<img src="images/chen1x.png" width="200px">
+
+[[github](http://github.com/Chen1x)]
+[[portfolio](team/chen1x.md)]
+
+* Role: Developer
+* Responsibilities: Job role object
