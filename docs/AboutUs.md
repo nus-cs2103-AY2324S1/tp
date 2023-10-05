@@ -36,7 +36,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[LinkedIn](https://www.linkedin.com/in/mohammed-faiz-47585017a/)]
 [[Github](https://github.com/Mohammed-Faizzzz)]
-[[Portfolio](team/faiz.md)]
+[[Portfolio](team/mohammed-faizzzz.md)]
 
 * Role: Developer
 * Responsibilities: Doctor Class and related Classes/Features
