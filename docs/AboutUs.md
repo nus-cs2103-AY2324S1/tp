@@ -31,31 +31,32 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role:
 * Responsibilities:
 
-### Johnny Doe
+### Lin Chenyu
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/linchenyu2030s.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role:
-* Responsibilities:
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/linchenyu2030s)] 
+[[portfolio](team/linchenyu2030s.md)]
 
 * Role:
 * Responsibilities:
 
-### James Doe
+### Ng Chuan Xin
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/chuanxinng.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/ChuanXinNg)]
+[[portfolio](team/chuanxinng.md)]
+
+* Role:
+* Responsibilities:
+
+### Kam Jia Yue
+
+<img src="images/kamjiayue.png" width="200px">
+
+[[github](https://github.com/KamJiaYue)]
+[[portfolio](team/kamjiayue.md)]
 
 * Role:
 * Responsibilities:
