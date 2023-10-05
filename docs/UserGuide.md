@@ -86,11 +86,23 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-### Listing all persons : `list`
+### Listing all employees : `list`
 
-Shows a list of all persons in the address book.
+Description: Lists all employees currently stored
 
 Format: `list`
+
+Acceptable values for each parameter: None
+
+Succeed:
+
+* Outcome: If the command is successful, it lists all employees and 
+  displays a message "Listed all employees" along with a table of employee data as shown below.
+
+![Display from list Command](images/listDisplay.png)
+
+Fail:
+* Outcome: If the command format is incorrect, it displays a warning message "Unknown command."
 
 ### Editing a person : `edit`
 
@@ -109,7 +121,7 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Locating persons by name: `find` `[Coming Soon]`
 
 Finds persons whose names contain any of the given keywords.
 
@@ -144,17 +156,11 @@ Examples:
 Succeed:
 * You’ll see a reply "<Employee name> successfully deleted."
 
-Fail;
+Fail:
 * If the person to be deleted does not exist, a warning will be displayed.
 “The person you’re trying to delete does not exist.”
 
-
-### Clearing all entries : `clear`
-
-Clears all entries from the address book.
-
-Format: `clear`
-
+  
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -196,10 +202,9 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DEPARTMENT` <br> e.g., `add n/Johnny p/91242712 e/johnnysins@gmail.com a/Johnny street, block 69, #05-05 d/ R&D`
+**Exit** | `exit`
+**Delete** | `delete INDEX`<br> e.g., `delete 4`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [d/DEPARTMENT]`<br> e.g.,`edit 1 p/91234567 e/johnsimmons@gmail.com`
 **List** | `list`
 **Help** | `help`
