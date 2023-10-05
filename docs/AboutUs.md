@@ -21,15 +21,15 @@ This page is designed to closely follow the format required by grading scripts.
 - Role: Team Lead
 - Responsibilities: Code quality. Assists with: Integration (e.g. maintaining repo, merging PRs), scheduling & tracking (e.g. defining/assigning/editing issues/PRs)
 
-### Jane Doe
+### mamayuan
 
-<img src="./images/johndoe.png" width="200px">
+<img src="images/mamayuan.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](./team/johndoe.md)]
+[[github](http://github.com/mamayuan)]
+[[portfolio](./team/mamayuan.md)]
 
-- Role: Developer
-- Responsibilities: UI
+* Role: Developer
+* Responsibilities: Testing and Integration (e.g. maintaining repo, merging PRs)
 
 ### Johnny Doe
 
