@@ -214,8 +214,8 @@ Deletes a tutor in the address book based on their index number in the table.
 * `TUTOR_INDEX`: Only accepts numerical value
 
 **Expected output**:
-* `Tutor has been deleted: Alex Yeoh; Phone: 87438807; 
-  Email: alexyeoh@example.com; Address: Blk 30 Geylang Street 29, #06-40`
+* `Tutor has been deleted: Bernice Yu; Phone: 99272758; 
+  Email: alexyeoh@example.com`
 
 **Error messages**:
 * `Index number given is out of range`: Given index is out of range.
