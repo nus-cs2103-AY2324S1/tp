@@ -11,7 +11,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Tanveer Singh
 
-<img src="images/tanveer.png" width="200px">
+<img src="images/tanveersingh10.png" width="200px">
 
 [[homepage](https://www.linkedin.com/in/tanveersingh10/)]
 [[github](https://github.com/tanveersingh10)]
