@@ -271,7 +271,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * active online dater
 * has a need to manage a significant number of dates
 * prefer desktop apps over other types
-* can search and filter their dates for better compatibility
+* can find, filter and organize their dates for better compatibility
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
