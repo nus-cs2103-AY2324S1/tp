@@ -226,7 +226,7 @@ Deletes a schedule in the address book based on their index number in the table 
 **Format:** `delete-s SCHEDULE_INDEX`
 
 **Example:**
-* `delele-s 5` deletes the schedule that is indexed as 5 in the schedule list.
+* `delete-s 5` deletes the schedule that is indexed as 5 in the schedule list.
 * `list` followed by `delete-s 2` deletes the 2nd schedule in the schedule list.
 
 **Acceptable values for each parameter:**
