@@ -11,7 +11,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Antony Swami Alfred Ben
 
-<img src="images/AlfredBeNoel.png" width="200px">
+<img src="images/alfredbenoel.png" width="200px">
 
 [[github](https://github.com/AlfredBeNoel)]
 [[portfolio](team/AlfredBeNoel.md)]
@@ -47,7 +47,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Teng Hui Xin Alicia
 
-<img src="images/Saezenn.png" width="200px">
+<img src="images/saezenn.png" width="200px">
 
 [[github](http://github.com/Saezenn)]
 [[portfolio](team/Saezenn.md)]

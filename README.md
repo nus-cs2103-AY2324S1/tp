@@ -1,6 +1,6 @@
 # ClubMembersContacts
 
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/nus-cs2103-AY2324S1/tp/actions)
+[![CI Status](https://github.com/AY2324S1-CS2103T-W15-3/tp/workflows/Java%20CI/badge.svg)](https://github.com/nus-cs2103-AY2324S1/tp/actions)
 
 ![image](./docs/images/Ui.png)
 
