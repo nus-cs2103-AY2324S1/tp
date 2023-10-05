@@ -241,7 +241,7 @@ Action     | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Tag**    | `tag STUDENT NUMBER [t/TAG]…​` <br> e.g `tag A0123456N t/smart t/shy`
-**Lookup** | `lookup [c/CLASS_NUMBER}] [l/LAST_NAME] [e/EMAIL] [s/STUDENT_NUMBER] [t/TAG]` <br> e.g `lookup c/111`
+**Lookup** | `lookup [c/CLASS_NUMBER] [l/LAST_NAME] [e/EMAIL] [s/STUDENT_NUMBER] [t/TAG]` <br> e.g `lookup c/111`
 **List**   | `list`
 **Help**   | `help`
 **Load**   | `load f/FILE_NAME`
