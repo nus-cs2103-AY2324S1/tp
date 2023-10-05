@@ -1,8 +1,5 @@
 package seedu.address.management;
 
-import seedu.address.cardsList.CardList;
-import seedu.address.pojo.Flashcard;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -10,8 +7,19 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import seedu.address.cardslist.CardList;
+import seedu.address.pojo.FlashCard;
+
+
+/**
+ * Reads from .txt file and returns CardList
+ *
+ * @author Wang Cheng
+ * @version 1.0
+ * @since 1.0
+ */
 public class TextReader {
-    private String filePath;
+    private final String filePath;
 
     private CardList ls;
 
@@ -19,6 +27,9 @@ public class TextReader {
         this.filePath = filePath;
     }
 
+    /**
+     * Reads .txt file and processes the data into flashcards to be placed in a CardList
+     */
     public void readAndProcessFile() {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
@@ -33,7 +44,7 @@ public class TextReader {
                     Date reviewDate = dateFormat.parse(columns[2]);
                     int level = Integer.parseInt(columns[3]);
 
-                    Flashcard flashcard = new Flashcard(word, translation, reviewDate, level);
+                    FlashCard flashcard = new FlashCard(word, translation, reviewDate, level);
                     ls.add(flashcard);
 
                 } else {

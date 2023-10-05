@@ -2,14 +2,29 @@ package seedu.address.pojo;
 
 import java.util.Date;
 
-public class Flashcard {
-    private String originalWord;
-    private String translatedWord;
+/**
+ * Represents each flashcard
+ *
+ * @author Nathanael M. Tan
+ * @version 1.0
+ * @since 1.0
+ */
+public class FlashCard {
+    private final String originalWord;
+    private final String translatedWord;
     private Date whenToReview; // Date the flashcard was needs to be reviewed
     private int level; // How many times successfully remembered
     private boolean toDelete = false;
 
-    public Flashcard(String originalWord, String translatedWord, Date whenToReview, int level) {
+    /**
+     * Constructor for Flashcard
+     *
+     * @param originalWord   The word in the original language
+     * @param translatedWord The word in the language you are learning
+     * @param whenToReview   The date of when you need to review this word
+     * @param level          The level of familiarity with the word
+     */
+    public FlashCard(String originalWord, String translatedWord, Date whenToReview, int level) {
         this.level = level;
         this.whenToReview = whenToReview;
         this.translatedWord = translatedWord;
@@ -30,8 +45,8 @@ public class Flashcard {
         if (level == 5) {
             toDelete = true; // If remembered enough, delete from the list
         }
-         // Current date in ms + 1 day per level in ms
-        this.whenToReview = new Date(new Date().getTime() + this.level * 86400000);
+        // Current date in ms + 1 day per level in ms
+        this.whenToReview = new Date(new Date().getTime() + this.level * 86400000L);
     }
 
     /**
@@ -41,20 +56,11 @@ public class Flashcard {
      */
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(originalWord);
-        sb.append("\t");
-        sb.append(translatedWord);
-        sb.append("\t");
-        sb.append(whenToReview.toString());
-        sb.append("\t");
-        sb.append(level);
-        return sb.toString();
+        String sb = originalWord + "\t" + translatedWord + "\t" + whenToReview.toString() + "\t" + level;
+        return sb;
     }
 
     public boolean isOverdue() {
         return this.whenToReview.before(new Date());
     }
-
-
 }
