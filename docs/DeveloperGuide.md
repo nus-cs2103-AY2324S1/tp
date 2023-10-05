@@ -282,22 +282,22 @@ LoveBook simplifies the process of storing dates' information and assessing comp
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-|  As a …​ | I want to …​                        | So that I can…​                                                                            |
-|----------|-------------------------------------|--------------------------------------------------------------------------------------------|
-| new user     | be greeted with a welcome message when i launch the app | so that I feel welcome                                                                     |
-| new user     | see a brief introduction message of the app and its capabilities and instructions         | so that I know how to get started.                                                         |
-| new user     | be able to key in my height in my profile                          | so that the algorithm can recommend me a suitable date based on our height compatibility   |
+|  As a …​ | I want to …​                        | So that I can…​                                                                             |
+|----------|-------------------------------------|---------------------------------------------------------------------------------------------|
+| new user     | be greeted with a welcome message when i launch the app | so that I feel welcome                                                                      |
+| new user     | see a brief introduction message of the app and its capabilities and instructions         | so that I know how to get started.                                                          |
+| new user     | be able to key in my height in my profile                          | so that the algorithm can recommend me a suitable date based on our height compatibility    |
 | new user     | be able to key in my horoscope in my profile           | so that the algorithm can recommend me a suitable date based on our horoscope compatibility |
-| new user     | be able to key in my own income in my profile      | so that the algorithm can recommend me a suitable date based on our income compatibility   |
-| new user     | to be able to key in my own gender in my own profile | so that the algorithm can match me to the appropriate gender                               |
-| serial dater | be able to pull up a list of my previous dates         | so that I can keep track of who I have dated in the past                                   |
-| serial dater | be able to delete dates from my list                   | so that my dating list is only limited to those who I am still interested in               |
-| serial dater | to be able create a new date entry with his/her gender, name, income, height, horoscope and hobbies                   | so that I can keep my list growing                                                         |
-| serial dater | to be able to edit the details of my date             | so that I can keep my dates details up to date                                             |
-| serial dater | to be able to be recommended a complete random date            | so that I can have an exciting date that day                                               |
-| serial dater | to be able to filter my past dates based on a particular metric             | so that I can find dates that I am interested in amidst my long and ever growing list      |
-| serial dater | to be able to be recommended the most compatible date for me            | so that I optimize my chance of finding my one true love                                   |
-| serial dater | to be able to set my dating preferences            | so that the algorithm can recommend me a suitable match                    |
+| new user     | be able to key in my own income in my profile      | so that the algorithm can recommend me a suitable date based on our income compatibility    |
+| new user     | to be able to key in my own gender in my own profile | so that the algorithm can match me to the appropriate gender                                |
+| serial dater | be able to pull up a list of my previous dates         | so that I can keep track of who I have dated in the past                                    |
+| serial dater | be able to delete dates from my list                   | so that my dating list is only limited to those who I am still interested in                |
+| serial dater | to be able create a new date entry with his/her gender, name, income, height, horoscope and hobbies                   | so that I can keep my list growing                                                          |
+| serial dater | to be able to edit the details of my date             | so that I can keep my dates details up to date                                              |
+| serial dater | to be able to be recommended a complete random date            | so that I can have a surprise date that day                                                 |
+| serial dater | to be able to filter my past dates based on a particular metric             | so that I can find dates that I am interested in amidst my long and ever growing list       |
+| serial dater | to be able to be recommended the most compatible date for me            | so that I optimize my chance of finding my one true love                                    |
+| serial dater | to be able to set my dating preferences            | so that the algorithm can recommend me a suitable match                                     |
 *{More to be added}*
 
 ### Use cases
