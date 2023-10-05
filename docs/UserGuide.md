@@ -5,6 +5,7 @@ title: User Guide
 ---
 
 **ConText** is a **desktop app designed for managing contacts of NUS SoC students.** ConText leverages a Command Line Interface (CLI) combined with a modern Graphical User Interface (GUI) to offer speedy contact management. If you're familiar with typing commands, you'll find ConText incredibly efficient.
+![ConText UI](images/Ui.png)
 
 * Table of Contents
   {:toc}
@@ -48,17 +49,16 @@ Display all your stored contacts.
 
 ### Deleting a Contact: `delete`
 
-Remove a contact based on their name.
+Remove a contact based on the index. The index refers to the index number shown in the displayed person list.
 
 **Format:**   
-`delete n/FULL_NAME`
+`delete INDEX`
 
 **Examples:**
 - `delete n/John Doe`
 
-**Expected outputs:**
-- Success: `Contact with the name <FULL_NAME> is successfully deleted.`
-- Error: `Contact <FULL_NAME> not found.`
+Deletes the person at the specified `INDEX`.
+The index **must be a positive integer** 1, 2, 3, …​
 
 ---
 
@@ -113,4 +113,4 @@ Modify an existing contact's details in your list.
 
 ---
 
-Remember, whenever in doubt, you can always refer to the `help` command to get a quick summary of all available commands in ConText.
+Remember, whenever in doubt, you can always navigate to the help webpage via the `help` tab at the top.
