@@ -468,8 +468,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+4.  Should be able to generate output in less than 5 seconds.
+5. Should be able to show correct input format in case the user enters the input in wrong format.
+6. The system should be usable by a new developer/intern who has not used such a software before.
+7. Should be able to transfer the database from one system to another.
 
 ### Glossary
 
