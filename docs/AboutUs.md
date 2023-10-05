@@ -36,6 +36,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 - Role: Testing
 
+### Ku Shang Yi
+
+<img src="images/bombbird2001.png" width="200px">
+
+[[github](http://github.com/bombbird2001)] [[portfolio](team/bombbird2001.md)]
+
+- Role: Team Lead, Developer
+- Responsibilities: Scheduling and tracking
 ### Xavier Oh
 
 <img src="images/cxo05.png" width="200px">
