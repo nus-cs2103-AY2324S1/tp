@@ -22,15 +22,15 @@ Given below are my contributions to the project.
 
 * **New Feature**: 
 
-* **Code contributed**: [RepoSense link]()
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=lynnlow175&breakdown=false&sort=groupTitle%20dsc&sortWithin=title&since=2023-09-22&timeframe=commit&mergegroup=&groupSelect=groupByRepos)
 
 * **Project management**:
 
 * **Enhancements to existing features**:
 
 * **Documentation**:
-    * User Guide:
-    * Developer Guide:
+    * User Guide: Creation of Date Profile, Edit of Date's information
+    * Developer Guide: Value Proposition
 
 * **Community**:
 
