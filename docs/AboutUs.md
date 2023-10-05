@@ -29,14 +29,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Tan Yiming
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/tanyyyming.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/tanyyming)] 
+[[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Scheduling and Tracking + Code Quality
 
 ### Jean Doe
 
@@ -53,7 +54,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/johndoe.png" width="200px">
 
 [[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/tanyyyming.md)]
 
 * Role: Developer
 * Responsibilities: UI
