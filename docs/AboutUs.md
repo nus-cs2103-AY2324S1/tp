@@ -39,7 +39,7 @@ This page is designed to closely follow the format required by grading scripts.
 [[portfolio](./team/bwangpj.md)]
 
 - Role: Developer
-- Responsibilities: Documentation
+- Responsibilities: Documentation 
 
 ### Jean Doe
 
