@@ -38,4 +38,6 @@ public class Main {
         logger.warning("The warning about Unsupported JavaFX configuration below can be ignored.");
         Application.launch(MainApp.class, args);
     }
+
+
 }
