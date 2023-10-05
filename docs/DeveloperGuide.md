@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -346,6 +346,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+
 * 2b. User leaves the tutorial group ID blank.
     * 2b1. TAvigator shows a summary of all attendance records.
 
@@ -366,6 +367,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. TAvigator shows an error message.
 
       Use case ends.
+
 
 * 2b. User leaves the tutorial group ID blank.
     * 2b1. TAvigator shows a list of all students and their tutorial group ID.
@@ -445,6 +447,37 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1c1. TAvigator removes all applied filters.
 
       Use case ends.
+      
+**Use case: UC07 - Search For Contacts via Student Name or ID**
+
+**MSS**
+
+1. User requests to search for a contact via student name or ID.
+2. User enters desired student name or ID.
+3. TAvigator shows list of students with matching name or ID.
+
+    Use case ends.
+
+
+**Extensions**
+
+* 3a. The given ID or name does not exist.
+    * 3a1. TAvigator shows message indicating that contacts with the specified names or ID do not exist.
+
+      Use case ends.
+
+
+* 3b. User leaves the student name or ID blank
+    * 3b1. TAvigator shows an error message.
+
+      Use case ends.
+
+
+* 3c. User enters an invalid student name or ID
+    * 3c1. TAvigator shows an error message.
+
+      Use case ends.
+
 
 *{More to be added}*
 

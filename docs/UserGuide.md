@@ -3,7 +3,9 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+TAvigator is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still 
+having the benefits of a Graphical User Interface (GUI). If you can type fast, TAvigator can get your contact management 
+tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -112,6 +114,20 @@ Examples:
 *  `list attendance` Shows a summary of attendance records of all students.
 *  `list attendance /tg T09` Shows a summary of attendance records of the students in tutorial group T09.
 
+### Searching for student's contact via keyword : `find` [Coming Soon]
+
+Finds a student's contact either via their name or student ID.
+
+Format: `find /name STUDENTNAME | /id STUDENTID`
+
+* Finds a student's contact either via their name or student ID.
+* `STUDENTNAME` should be a string made up of alphabetical characters, with no numbers or special characters.
+* `STUDENTID` should be a string made up of alphabetical characters and numbers, with no special characters or space.
+
+Examples:
+*  `find /name Anthony` Finds all contacts with the name "Anthony".
+*  `find /id A0123456H` Finds all contacts with the student ID "A0123456H".
+
 ### Listing students : `list students`
 
 Shows a list of students.
@@ -161,25 +177,6 @@ To remove a group number, simply leave out the newgrp section
 Examples:
 *  `edit grp Fu Yiqiao /oldgrp T09 /newgrp T10` Edits the group from T09 to T10
 *  `edit grp Fu Yiqiao /oldgrp T09` Removes the group number from the contact
-
-
-### Locating persons by name: `find`
-
-Finds persons whose names contain any of the given keywords.
-
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Adding a filter: `filter add` [Coming Soon]
 
