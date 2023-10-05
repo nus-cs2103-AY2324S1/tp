@@ -368,6 +368,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
+* **Architecture Diagram**: A visual representation that depicts the high-level design and structure of the software application.
+
+* **Component**: A modular part of the system with a distinct responsibility. The main components mentioned are UI, Logic, Model, and Storage.
+
+* **Commons**: Classes or utilities used by multiple components of the application.
+
+* **Sequence Diagram**: A type of diagram that visually represents how objects in the system interact with each other in a particular sequence.
+
+* **API (Application Programming Interface)**: A set of rules that allows different software entities to communicate with each other.
+
+* **JavaFx**: A Java library used to create desktop applications. It is the framework used for the UI component of the app.
+
+* **JSON (JavaScript Object Notation)**: A lightweight data-interchange format that's easy to read and write for humans and easy to parse and generate for machines.
+
+* **Brownfield**: A term used in software development to describe a project that has existing constraints, typically an existing system or codebase, as opposed to a greenfield project which starts from scratch.
+
+* **CLI (Command Line Interface)**: A type of user interface that allows users to interact with software by typing in commands.
+
+* **Platform independent**: Software that can run on any computer regardless of its operating system, such as Mac/Windows/Linux.
+
+* **Human editable file**: A file format designed to be easily readable and editable by humans.
+
+* **Portable**: Software that doesn't require installation and can be run from any location, such as from a USB stick.
+
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 
 ---
