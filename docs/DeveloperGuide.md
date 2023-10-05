@@ -289,6 +289,11 @@ Priorities: Essential (must have) - `* * *`, Typical (nice to have) - `* *`, Nov
 | `* *`   | user                     | filter patient records by criteria such as medical condition and age   | simplify the process of finding specific patient information          |
 | `*`     | user                     | customise tags for my patients                                         | have control over the organisation of my patients                     |
 | `*`     | user                     | group delete patients by category or tag                               | save time when removing large amount of patient records               |
+| `* * *` | user                     | add a new specialist to the records                                    | keep track of details of new specialists patients can be referred to  |
+| `* *`   | user                     | edit details of existing specialists                                   | make sure the specialist details are up to date                       |
+| `* * *` | user                     | delete specialist details                                              | delete records of specialists I no longer work with                   |
+| `* * *` | user                     | access specialist details                                              | provide relevant details to the patient I am refering                 |
+| `* *`   | user                     | search for specialists by location                                     | refer patients to convenient specialists to minimise time             | 
 | `* *`   | user                     | search for specialists by their speciality                             | refer patients to the right experts                                   |
 | `*`     | user with poor eyesight  | customise font size and style of the App                               | easily read the information on the screen                             |
 | `*`     | user who is colour blind | customise colour schemes of the App                                    | meet my accessibility needs                                           |
@@ -299,11 +304,6 @@ Priorities: Essential (must have) - `* * *`, Typical (nice to have) - `* *`, Nov
 | `* * *` | user                     | save the App data                                                      | retain data for future reference                                      |
 | `* * *` | user                     | load previously saved App data                                         | examine past records/information                                      |
 | `*`     | experienced user         | manipulate the save file directly                                      | make quick changes to data without having to open the application     |
-| `* * *` | user                     | add a new specialist to the records                                    | keep track of details of new specialists patients can be referred  to |
-| `* *`   | user                     | edit details of existing specialists                                   | make sure the specialist details are up to date                       |
-| `* * *` | user                     | delete specialist details                                              | delete records of specialists I no longer work with                   |
-| `* *`   | user                     | access specialist details                                              | provide relevant details to the patient I am reffering                |
-| `* *`   | user                     | search for specialists by location                                     | refer patients to convenient specialists to minimise time             | 
 *{More to be added}*
 
 ### Use cases
