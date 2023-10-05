@@ -50,7 +50,18 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 
 **Use case: Add an application**
 
-(ZHI RUO)
+**Use case: Add an application**
+
+_MSS_
+1. User requests to add an application, specifying the company name
+2. System adds the application
+
+   Use case ends.
+
+_Extensions_
+* 1a. The company is not specified
+
+  Use case ends.
 
 ---
 
