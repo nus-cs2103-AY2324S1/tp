@@ -309,17 +309,40 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
-### Non-Functional Requirements
+### Non-functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+1. "Brownfield" - Changes to the codebase must be done in small increments.
+1. "Typing preferred" - The product must target users who can type fast and prefer CLI as their means of input.
+1. "Single user" - The product must be designed for a single user.
+1. "Incremental" - The product must be developed breadth-first as well as consistently each week.
+1. "Human editable file" - Data must be stored locally in a human-editable text file format.
+1. "No DBMS" - DataBase Management Systems must not be used.
+1. "OO" - Software must mostly follow the object-oriented paradigm.
+1. "Platform independent" - Software must work on Windows, Linux, and OSX. I.e., avoid OS-dependent libraries and OS-specific features.
+1. "Java version" - Software must work on a computer that has Java version 11 installed.
+1. "Portable" - Software must work without requiring an installer.
+1. "No remote server" - Software must not depend on a remote server.
+1. "External software" - Any 3rd party frameworks/libraries/services used must:
+    1. Be free and open-source (except services), with permissive license terms (e.g. non-time limited trial).
+    1. Not require installation by users. Services that require account creation on their 3rd party service are strongly discouraged.
+    1. Not violate other project constraints.
+    1. Be approved by the teaching team.
+1. "Screen resolution" - GUI must work well for standard screen resolutions and scales, as specified in the admin info. GUI must still be usable if those factors are non-standard.
+1. "Single file" - Software must all be packed into a single JAR file.
+1. "File size" - Software must not exceed 100MB and must not be unnecessarily bloated. Documents must not exceed 15MB per file.
+1. "PDF-friendly" - Developer and user guides must be PDF-friendly, without using expandable panels, embedded videos, animated GIFs etc.
+1. "Minimal network" - Any public APIs used should have a fallback mechanism in the event that they are down. Any NUS data used should have the approval of NUS IT.
+1. "Testability" - Features should not be hard to test or make the product hard to test, be the testing manual or automated.
+1. "CLI first" - Users who can type fast should be able to accomplish most tasks faster via the CLI as compared to if they were to use a hypothetical GUI-only version of the product.
+1. There must exist an image with the exact name and format `docs/images/Ui.png` depicting the final product, with similar proportions as the original AB3 image.
+1. There must exist an `AboutUs` page that closely follows the original template, such that CS2103 grading scripts can understand it.
+    1. Each team member must have an appropriately named lowercase PNG of their profile picture, as specified in the admin info.
+1. There must exist Project Portfolio Pages (PPPs) in `docs/team/`, containing sections specified in the admin info.
+    1. Each team member must have their own appropriately named lowercase page file, as specified in the admin info.
+    1. The page must be written to account for paged PDF conversion.
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 
 ---
