@@ -70,6 +70,71 @@ If you need to remove a contact, use the `delete` command.
 - Success: `<FULL_NAME>’s contact is successfully deleted.`
 - Error: `Contact <FULL_NAME> not found.`
 
+### Viewing Help: `help`
+
+Need assistance with the available commands? Use the `help` command.
+
+**Format:**   
+`help`
+
+**Expected Output:**   
+A message or a window will provide information on how to use ConText and its available commands.
+
+---
+
+### Locating Persons by Name: `find`
+
+Quickly find contacts based on name keywords.
+
+**Format:**   
+`find KEYWORD [MORE_KEYWORDS]`
+
+**Examples:**
+- `find John`
+- `find Alex David`
+
+**Expected Output:**  
+List of contacts matching the provided keyword(s) will be displayed in the central panel of the GUI.
+
+---
+
+### Editing a Contact: `edit`
+
+Modify details of an existing contact.
+
+**Format:**   
+`edit INDEX /name FULL_NAME /phone PHONE_NUMBER`
+
+**Examples:**
+- `edit 1 /name Jane Doe /phone 91234567`
+
+**Expected Output:**  
+The details of the specified contact will be updated.
+
+---
+
+### Clearing All Contacts: `clear`
+
+Wish to start afresh? This command clears all stored contacts.
+
+**Format:**   
+`clear`
+
+**Expected Output:**  
+All contacts will be deleted, and the central panel of the GUI will be empty.
+
+---
+
+### Exiting the Application: `exit`
+
+Done managing your contacts for the day? Use the `exit` command.
+
+**Format:**   
+`exit`
+
+**Expected Output:**   
+ConText application will close.
+
 ---
 
 Future updates will introduce more features and improvements to enhance your contact management experience with ConText.
