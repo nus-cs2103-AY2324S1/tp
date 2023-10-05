@@ -269,14 +269,31 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                         | I want to …​                                                                         | So that I can…​                                                                 |
+|----------|---------------------------------|--------------------------------------------------------------------------------------|---------------------------------------------------------------------------------|
+| `* * *`  | user                            | add contacts                                                                         | keep track of my friends and schoolmates                                        |
+| `* * *`  | user                            | delete contacts                                                                      | remove my contact with that person                                              |
+| `* * *`  | user                            | view my contacts                                                                     | know who I have as contacts                                                     |
+| `* * `   | user                            | update contacts                                                                      | make changes to my contact info when they occur                                 |
+| `* *`    | user                            | search for contacts                                                                  | find a specific contact directly and easily                                     |
+| `* *`    | potential user                  | access an easy-to-follow tutorial                                                    | understand the app's core features                                              |
+| `* *`    | user                            | add tags to contacts                                                                 | classify them based on contact type                                             |
+| `* *`    | user                            | attach images to contacts such as a business card scan                               | store all additional or miscellaneous info about a contact                      |
+| `* *`    | user                            | share a contact with other users or apps                                             | transfer my contact info easily                                                 |
+| `* *`    | user                            | merge duplicate contacts                                                             | my contact list stays clean                                                     |
+| `* *`    | user                            | sort contacts by certain criteria                                                    | find contacts satisfying a certain criteria easily                              |
+| `* *`    | user of many communication apps | enter info about various platforms that my contacts use                              | keep track of all the various ways I can contact the same person                |
+| `* *`    | user                            | indicate whether a contact is from NUS or not                                        | differentiate between NUS and non-NUS contacts                                  |
+| `* *`    | user                            | enter names in a different format depending on contact type                          | maintain respect based on profession (e.g. prefix a professor's name with Prof) |
+| `* *`    | user                            | see my contacts in different formats depending on their profession                   | easily differentiate them in a familiar way                                     |
+| `* *`    | user                            | indicate where I met each contact                                                    | keep track of people I have various levels of familiarity with                  |
+| `* *`    | user                            | view contacts by groups or type                                                      | more easily manage related contacts                                             |
+| `* *`    | user                            | indicate where I met each contact                                                    | keep track of people I have various levels of familiarity with                  |
+| `* *`    | new user                        | perform functions to a satisfying degree despite only using simple or basic commands | use the app without a steep learning curve                                      |
+| `* *`    | long-time user                  | identify old and/or rarely-used contacts                                             | hide or delete them to reduce clutter                                           |
+| `* *`    | user                            | export my contacts to an external file                                               | backup my contacts’ information                                                 |
+| `* *`    | user                            | import my contacts from an external file                                             | quickly populate the app with my existing contacts                              |
+
 
 *{More to be added}*
 
