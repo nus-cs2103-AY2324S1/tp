@@ -269,27 +269,28 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Developers engaged in medium to large-scale software projects; 
+* Collaborates frequently with multiple teams or departments; 
+* Requires quick access to contact details of other team members based on their roles and responsibilities; 
+* Prefers an organized and streamlined method for contact management; 
+* Tech-savvy and open to adopting new tools for enhancing productivity.
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: LinkTree is the top contact solution for software professionals. Using our unique tag-based system, access contacts by roles and responsibilities instantly. With LinkTree, swiftly connect with the right stakeholder, ensuring smooth project execution and superior collaboration.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
+| Priority | As a …​                                     | I want to …​                  | So that I can…​                                                         |
 |----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
 | `* * *`  | developer                                  | view all members of my team  | refer to instructions when I forget how to use the App                 |
 | `* * *`  | project manager                            | access the names of all my deveopers and team leaders     | them regarding the project                                             |
-| `* * *`  | project manager                            | assign a node for a team  leader    |   the target team leaders can fill in their information by themselves  |                                                         
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
+| `* * *`  | project manager                            | assign a node for a team  leader    | the target team leaders can fill in their information by themselves  |                                                         
+| `* * *`  | team leader                                | assign a node for a developers      | the target developer can fill in his information by himself |
 | `* *`    | developer                                  | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| `* *`    | new user                                   | use a help command         | see all the available functions of the app                               |
+| `* *`    | new user                                   | use a bye command          | close the app easily                                                     |
 
 *{More to be added}*
 
