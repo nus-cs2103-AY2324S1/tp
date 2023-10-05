@@ -106,21 +106,21 @@ Adds a tutor to the address book.
 
 ![add tutor](images/addTutor.png)
 
-Format: `add-t n/NAME p/PHONE NUMBER e/EMAIL`
+**Format**: `add-t n/NAME p/PHONE NUMBER e/EMAIL`
 
-Example:
+**Example**:
 * `add-t n/John Doe p/98765432 e/johnd@example.com`
 * `add-t n/Betsy Crowe p/91234567 e/betsycrowe@example.com`
 
-Acceptable values for each parameter:
-* `NAME`: Only string input accepted 
-* `PHONE`: NUMBER Only numerical input 
+**Acceptable values for each parameter**:
+* `NAME`: Only string input accepted
+* `PHONE NUMBER`: Only numerical input
 * `EMAIL`: Only valid email addresses
 
-Expected output:
+**Expected output**:
 * `New tutor John Doe 98765432 johnd@example.com has been added.`
 
-Error messages:
+**Error messages**:
 * `Missing parameter: n/`: The tag n/ is missing or tutor’s name is missing. 
 * `Missing parameter: p/`: The tag p/ is missing or tutor’s phone number is missing. 
 * `Missing parameter: e/`: The tag e/ is missing or tutor’s email is missing. 
