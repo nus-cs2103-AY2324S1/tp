@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+MediLink Contacts(MLC) is a **desktop app for managing patients and doctors details, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, MLC can get your patients management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -14,11 +14,11 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `mediLink.jar` from [here](https://github.com/AY2324S1-CS2103T-T09-3/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your MLC.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar medilink.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -27,9 +27,9 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add Doctor n/John Doe ic/S9851386G g/Male p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pt/T0123456H` : Adds a doctor named `John Doe` to the Address Book.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete ic/S9851386G` : Deletes the person with ic S9851386G.
 
    * `clear` : Deletes all contacts.
 
@@ -40,6 +40,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 --------------------------------------------------------------------------------------------------------------------
 ## Contents
 - [Adding a Doctor: `add Doctor`](#adding-a-doctor--add-doctor)
+- [Adding a Patient: `add Patient`](#adding-a-patient--add-patient)
 ## Features
 
 <div markdown="block" class="alert alert-info">
@@ -96,15 +97,37 @@ Examples:
 * `add Doctor n/John Doe ic/S9851386G g/Male p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pt/T0123456H`
 * `add Doctor n/Betsy Crowe ic/S9851586G g/Female p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/Surgeon pt/T0123556H`
 
+
+### Adding a Patient: `add Patient`
+
+Adds a Patient to the hospital database.
+
+Format: `add Patient n/NAME ic/IC g/GENDER p/PHONE_NUMBER ec/EMERGENCY_CONTACT e/EMAIL a/ADDRESS [t/TAG] [d/DOCTOR] [c/CONDITION] [b/BLOODTYPE] …​`
+
+<div markdown="span" class="alert alert-primary">:note:
+**Take Note:**
+
+- A patient **MUST** have a non-empty NAME and a valid IC at the very least. Failure to include these details may result in an error.
+- Phone Numbers and Emails have to be in a valid format.
+    - PHONE_NUMBER must have exactly 8 digits.
+    - EMAIL must contain email domain (eg. `@gmail.com`).
+- DOCTOR must contain the valid IC of a doctor in the Database.
+- EMERGENCY_CONTACT must contain valid emergency contact number, which needs to be a valid phone number.
+- Blood type must be a combination of A/B/AB/O and +/-
+
+Examples:
+* `add Patient n/John Doe ic/S9851386G g/Male p/98765432 ec/90123456 e/johnd@example.com a/John street, block 123, #01-01 d/T0123456H c/pneumothorax b/O+`
+* `add Patient n/Betsy Crowe ic/S9851586G g/Female p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/High Priority pt/T0123556H`
+
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons in the MediLink Contacts.
 
 Format: `list`
 
 ### Editing a person : `edit`
 
-Edits an existing person in the address book.
+Edits an existing person in the MediLink Contacts.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
@@ -153,7 +176,7 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from the MdeiLink Contacts.
 
 Format: `clear`
 
@@ -165,14 +188,14 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+MediLink Contacts data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+MediLink Contacts data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
+If your changes to the data file makes its format invalid, MediLink Contacts will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
@@ -184,7 +207,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous MediLink Contacts home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -196,13 +219,13 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**New Doctor** | `add Doctor n/NAME ic/IC g/GENDER p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ pt/PATIENT_1 …​` <br> e.g., `add Doctor n/John Doe ic/S9851386G g/Male p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pt/T0123456H`
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+| Action          | Format, Examples                                                                                                                                                                                                                                                                                                |
+|-----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **New Doctor**  | `add Doctor n/NAME ic/IC g/GENDER p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ pt/PATIENT_1 …​` <br> e.g., `add Doctor n/John Doe ic/S9851386G g/Male p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pt/T0123456H`                                                                               |
+| **New Patient** | `add Patient n/NAME ic/IC g/GENDER p/PHONE_NUMBER ec/EMERGENCY_CONTACT e/EMAIL a/ADDRESS [t/TAG] [d/DOCTOR] [c/CONDITION] [b/BLOODTYPE] …​` <br> e.g., `add Patient n/John Doe ic/S9851386G g/Male p/98765432 ec/90123456 e/johnd@example.com a/John street, block 123, #01-01 d/T0123456H c/pneumothorax b/O+` |
+| **Clear**       | `clear`                                                                                                                                                                                                                                                                                                         |
+| **Delete**      | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                                                                                                             |
+| **Edit**        | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                                                                                                                     |
+| **Find**        | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                                                                                                      |
+| **List**        | `list`                                                                                                                                                                                                                                                                                                          |
+| **Help**        | `help`                                                                                                                                                                                                                                                                                                          |
