@@ -56,4 +56,4 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/yytan25.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: UI, Scheduling and Tracking
