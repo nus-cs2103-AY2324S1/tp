@@ -412,7 +412,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to change a specific user's fields
-based on an identifier 
+based on an identifier
     with a new value in the list.
 2.  HealthSync searches for the patient in the list.
 3.  HealthSync edits the specified patient's fields in the list.
