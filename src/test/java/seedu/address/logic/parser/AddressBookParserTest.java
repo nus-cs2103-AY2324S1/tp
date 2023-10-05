@@ -28,7 +28,6 @@ import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
-
 public class AddressBookParserTest {
 
     private final AddressBookParser parser = new AddressBookParser();
