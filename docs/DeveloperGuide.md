@@ -254,15 +254,13 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
++**Target user profile**: NUS SoC students, who
+* have a need to label their contacts by categories (e.g. classmates in a certain course, professors)
+* can type fast and prefers typing
+* is reasonably comfortable with command-line inputs
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
-
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Manage contacts quickly via text commands which computing students are familiar with,
+and with useful features relevant to computing (and in particular, SoC) students
 
 
 ### User stories
