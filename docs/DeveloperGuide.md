@@ -282,15 +282,43 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                     | I want to …​                  | So that I can…​                                                         |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | developer                                  | view all members of my team  | refer to instructions when I forget how to use the App                 |
-| `* * *`  | project manager                            | access the names of all my deveopers and team leaders     | them regarding the project                                             |
-| `* * *`  | project manager                            | assign a node for a team  leader    | the target team leaders can fill in their information by themselves  |                                                         
-| `* * *`  | team leader                                | assign a node for a developers      | the target developer can fill in his information by himself |
-| `* *`    | developer                                  | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `* *`    | new user                                   | use a help command         | see all the available functions of the app                               |
-| `* *`    | new user                                   | use a bye command          | close the app easily                                                     |
+### User stories
+
+Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+
+### User stories
+
+Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+
+| Priority | As a …​             | I want to …​                                 | So that I can…​                                                                 |
+|----------|---------------------|----------------------------------------------|--------------------------------------------------------------------------------|
+| `* * *`  | developer           | view all members of my team                  | get their email address/contact                                                 |
+| `* * *`  | developer           | search contacts using a tag-based system     | swiftly find contacts relevant to specific responsibilities                      |
+| `* * *`  | developer           | view my team leader’s contact details        | contact him when I need direction on an issue                                    |
+| `* *`    | developer           | edit or update my information                | easily update my info                                                           |
+| `* *`    | developer           | set a status (available, busy, OOO)          | others know when to reach out to me                                             |
+| `* *`    | developer           | search contact with partial information      | find the person without remembering their full name                              |
+| `* *`    | developer           | add a tag/short bio about my expertise       | others recognize my specialties                                                 |
+| `* * *`  | project manager     | access the names of all my developers        | contact them regarding the project                                              |
+| `* * *`  | project manager     | view all my team leaders                     | contact them when collaborating on developing a certain feature                  |
+| `* * *`  | project manager     | assign a node for a team leader              | target team leaders can fill in their information by themselves                 |
+| `* * *`  | project manager     | remove another user                          | if he leaves the team/company                                                   |
+| `* *`    | project manager     | choose to share my contact information       | not everyone can contact me directly                                            |
+| `* *`    | project manager     | archive old contacts or groups               | keep active list clutter-free while retaining old information                   |
+| `* *`    | software team lead  | color-code my contacts                       | visually scan and prioritize my interactions                                    |
+| `* *`    | software team lead  | set a verification code                      | control who registers as a project manager                                      |
+| `*`      | software team lead  | get notifications on birthdays               | maintain relationships through personal touches                                 |
+| `*`      | software team lead  | create a public profile for my team          | external stakeholders can find and reach out to the right member                |
+| `* * *`  | team leader         | assign a node for a developers               | target developer can fill in his information by himself                         |
+| `* * *`  | team leader         | see info of other team leaders               | coordinate work for the project                                                 |
+| `* *`    | new user            | use a help command                           | understand available functions of the app                                       |
+| `* *`    | user                | use bye command                              | close the app easily                                                            |
+| `* *`    | user with access    | receive notifications on contact changes     | stay updated on team changes                                                    |
+| `* *`    | first-time user     | easily register                              | access the phonebook                                                            |
+
+
+
+
 
 *{More to be added}*
 
