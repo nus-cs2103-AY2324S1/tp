@@ -362,10 +362,15 @@ Extensions
 1.  Should work on any Windows, Linux, and MacOs as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable(> 1 second) sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  Should there be an irregular termination of the app, the data should not be corrupted.
-5.  The app should respond to user text input within 0.2 second.
+4.  The application should respond and load all data within three seconds.
+5.  The response time for adding, updating, or deleting student records should be within two seconds.
+6.  The system should be usable with a user interface that is intuitive enough for users who have not used similar applications before.
+7.  Users will only have access to their own students' data.
+8.  Should there be an irregular termination of the app, the data should not be corrupted.
+9.  The app should respond to user text input within 0.2 second.
 
-*{More to be added}*
+
+
 
 ### Glossary
 
