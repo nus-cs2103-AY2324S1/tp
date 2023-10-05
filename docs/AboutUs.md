@@ -41,7 +41,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/winsheng1.png" width="200px">
 
 [[github](http://github.com/WinSheng1)]
-[[portfolio](team/WinSheng1.md)]
+[[portfolio](team/winsheng1.md)]
 
 * Role: Scheduling and Tracking
 
@@ -50,6 +50,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/saezenn.png" width="200px">
 
 [[github](http://github.com/Saezenn)]
-[[portfolio](team/Saezenn.md)]
+[[portfolio](team/saezenn.md)]
 
 * Role: UI Design Expert
