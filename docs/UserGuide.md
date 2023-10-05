@@ -3,10 +3,14 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+ManageHR is your all-in-one solution for seamless Human Resources management. Say goodbye to paperwork, spreadsheets, and administrative headaches. Our cutting-edge software empowers HR professionals to focus on what truly matters – your people.
 
-* Table of Contents
-{:toc}
+Table of Contents
+- Quick Start
+- Features
+- FAQ
+- Known Issues
+- Command summary
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -65,26 +69,52 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
-
-![help message](images/helpMessage.png)
+Shows a message explaning how to access the user guide.
 
 Format: `help`
 
+Example:
+- `help`
+
+Acceptable values for each parameter:
+| Paramters | Accepted input |
+| --- | --- |
+| nil | - |
+
+Expected outputs:
+| Outcome | Output |
+| --- | --- |
+| command success | Refer to the user guide: https://ay2324s1-cs2103-t16-1.github.io/tp/UserGuide.html |
+| command fail | Command input error. Please check your command input. |
+
+![help message](images/helpMessage.png)
 
 ### Adding a person: `add`
 
-Adds a person to the address book.
+Adds a person to ManageHR’s entries.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DEPARTMENT`
+- Adds an employee with the above fields
+- All fields must be provided
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/Johnny p/91242712 e/johnnysins@gmail.com a/Johnny street, block 69, #05-05 d/ R&D`
+* `add n/Elon p/12345678 e/elonma@gmail.com a/Elon street, block 140, #20-01 d/R&D`
+
+Acceptable values for each parameter:
+| Parameters | Accepted input |
+| --- | --- |
+| `NAME` | Alphabets |
+| `PHONE_NUMBER` | 8 digits |
+| `EMAIL` | Email with the pattern x@x.com where ‘x’ are alphanumerics |
+| `ADDRESS` | Alphanumerics and ascii characters i.e. #, - |
+| `DEPARTMENT` | Alphabets and ascii characters i.e. &, - |
+
+Expected outputs:
+| Outcome | Output |
+| --- | --- |
+| command success | Employee added! Johnny \| 12345678 \| johnnysins@gmail.com \| Johnny Street, block 69, #05-05 \| R&D |
+| command fail | Please check the parameter inputs |
 
 ### Listing all persons : `list`
 
