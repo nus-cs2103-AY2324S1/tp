@@ -6,10 +6,14 @@
 
 For detailed documentation on this project, see its [product website here](https://ay2324s1-cs2103-w14-3.github.io/tp/).
 
+
+* This is a desktop app designed for managing contacts of NUS SoC students. 
+  * It leverages a Command Line Interface (CLI) combined with a modern Graphical User Interface (GUI) to offer speedy contact management. 
+  * It offers significant efficiency for students familiar with typing commands. 
+
 ---
 
-//TODO to be updated:
+### Acknowledgements
 
-* The project simulates an ongoing software project for a desktop application (called _AddressBook_) used for managing contact details.
-  * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC) than what students usually write in beginner-level SE modules, without being overwhelmingly big.
-  * It comes with a **reasonable level of user and developer documentation**.
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+
