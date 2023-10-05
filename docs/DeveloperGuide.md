@@ -318,7 +318,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `JABPro` and the **Actor** is the `hiring manager`, unless specified otherwise)
 
 ****Use case: Add a person****
 **MSS**
@@ -347,6 +347,50 @@ Use case ends.
     * 2a2. Use case resumes at step 1
 * 2b. User does not provide a remark
     * 3. JABPro adds an empty remark to the person, remark no longer seen
+
+
+**Use case: Search a person by name**
+
+**MSS**
+
+1.  Hiring manager types in name keywords to search users by name
+2.  JABPro shows a list of persons whose names contain matching keywords
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given name keyword is invalid (invalid name).
+
+    * 1a1. JABPro shows an error message.
+
+      Use case resumes at step 1.
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+**Use case: Search a person by application status**
+
+**MSS**
+
+1.  User keys in search command with application status (i.e. interviewed, pending, rejected, offered)
+2.  JABPro shows a list of persons whose status match the given status keywords
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given name status is invalid (not from the given list of valid status keywords).
+
+    * 1a1. JABPro shows an error message.
+
+      Use case resumes at step 1.
+
+* 2a. The list is empty.
+
+  Use case ends.
+
 
 **Use case: Delete a person**
 
@@ -393,8 +437,9 @@ Use case ends.
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Hiring Manager**: Inter-changable with users in this context
-* **Candidate**: Inter-changable with persons in this context
+* **Candidate**: Inter-changable with persons/job applicants in this context
 * **AddressBook**: Inter-changable with JABPro in this context since this is an evolve project built on-top of AB3 functionality
+* **Keyword**: Search parameter
 
 --------------------------------------------------------------------------------------------------------------------
 
