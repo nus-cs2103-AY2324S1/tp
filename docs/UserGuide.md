@@ -9,6 +9,52 @@ NetworkBook is a **desktop contact book application**. You can use it to network
 
 ### <u>Category 1 - Add contact information</u>
 
+### Create new contact: `create /name [/optional fields]`
+
+You can use the create command to create a new contact. When creating a contact, you must provide the name field, and it's optional to provide other fields which will be added to the new contact.
+
+Format: `create /name [name] [/phone /email /link /grad /course /spec /priority /tag]`
+
+Example usage:
+* `create /name Oreki`
+* `create /name Oreki /phone +12345678 /grad AY2526-S2`
+
+Parameters:
+* `[name]`  is the name of the contact you wish to add.
+* `[optional fields]` are the non-mandatory fields you can associate with the contact at the point of creation. The fields can also be added using the add command.
+
+When the command succeeds:
+* `create /name Oreki`
+
+`Noted, I have added contact with the name Oreki at index 1.`
+
+### Add phone number to contact: `add /phone /index`
+
+You can add a phone number to an existing contact. A new phone number will be added to the contact's list of phone numbers, and no new contact will be created.
+
+Format: `add /phone [phone] /index [index]`
+
+Example usage:
+* `add /phone +6591234567 /index 1`
+* `add /phone +11234567890 /index 2`
+
+Parameters:
+* `[phone]` is a valid phone number (Country code must be included with + (plus sign) present.)
+* `[index]` is the index of the contact in the list.
+
+When the command succeeds:
+* `add /phone +6591234567 /index 1`
+
+`Noted, I have added phone number +6591234567 to the contact at index 1 (Oreki).`
+
+When the command fails:
+* `add /phone +6591234567`
+
+`Oops, you did not provide the index of the contact to add to.`
+* `add /email 91234567 /index 1`
+
+`Oops, you did not provide a valid phone number that includes a country code.`
+
 ### Add email to a contact: `add /email /index`
 
 You can add an email to an existing contact.
@@ -248,49 +294,28 @@ When the command fails:
 
 ### Search for a contact: `search /name`
 
-You can use the `search` command to search for contacts by their name.
+You can use the `search` command to search for contacts by their name if you wish to quickly reference a particular contact’s details.
 
 Format: `search /name [name]`
 
 Example usage:
-
-* `search /name Ness`
+* `search /name Jack`
 * `search /name Kai Jie`
-* `search /name alex`
 
 Parameters:
-
 * `[name]` is the name of the contact, or a part of it.
 
 When the command succeeds:
+* `search /name Jack`
 
-* `search /name alex`
+`Here is the list of contacts with the name "Jack": [list of relevant contacts]`
 
-```text
-Here’s a list of contacts with names including your search term:
-[list of matching contacts, e.g. "Alex Smith", "Alexandria Lee"]
-```
+![search success](images/find/search-success.png)
 
-* `search /name kai jie`
+When the command fails:
+* `search /name`:
 
-```text
-Here’s a list of contacts with names including your search term:
-[list of matching contacts, e.g. "Wong Kai Jie", "Kai Jie Tan"]
-```
-
-* `search /name abcdefghijk`
-
-```text
-Could not find any contacts with names including your search term.
-```
-
-Expected output when the command fails:
-
-* `search /name`
-
-```text
-Oops, it seems you did not include a search term.
-```
+`Oops, it seems you did not include a search term.`
 
 
 ### Sort contacts list: `sort /by /order`
@@ -358,9 +383,8 @@ name, grad, course, spec/specialization, priority.`
 
 ## Command summary
 
-Category | Format, Examples
---------|------------------
-**Add** | `add /email [email] /index [index]` <br> e.g., `add /email test@example.com /index 2`<br><br>`add /link [link] [note] /index [index]`<br>e.g., `add /link https://nknguyenhc.github.io/ website /index 1`<br><br>`add /priority [priority level] /index [index]`<br>e.g., `add /priority high /index 1`<br><br>`add /tag [tag name] /index [index]`<br>e.g., `add /index 1 /tag data analytics` 
-**Edit** | `update /[parameter name] [new parameter value] /index [index]`<br> e.g.,`update /name nkn /index 1`<br><br>`delete [index]`<br>e.g., `delete 1` 
-**Find** |  `search /name [name]` <br> e.g., `search /name Ness`<br><br>`sort /by [field] /order [order]`<br>e.g., `sort /by name /order asc`
-
+| Category | Format, Examples                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**  | `create /name [name] [/phone /email /link /grad /course /spec /priority /tag]` <br> e.g., `create /name Oreki /phone +6598765432 /grad AY2526-S2`<br><br>`add /phone [phone] /index [index]` <br> e.g., `add /phone +6591234567 /index 1`<br><br>`add /email [email] /index [index]` <br> e.g., `add /email test@example.com /index 2`<br><br>`add /link [link] [note] /index [index]`<br>e.g., `add /link https://nknguyenhc.github.io/ website /index 1`<br><br>`add /priority [priority level] /index [index]`<br>e.g., `add /priority high /index 1`<br><br>`add /tag [tag name] /index [index]`<br>e.g., `add /index 1 /tag data analytics` |
+| **Edit** | `update /[parameter name] [new parameter value] /index [index]`<br> e.g.,`update /name nkn /index 1`<br><br>`delete [index]`<br>e.g., `delete 1`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+**Find** |  `search /name [name]` <br> e.g., `search /name Ness`<br><br>`sort /by [field] /order [order]`<br>e.g., `sort /by name /order asc`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |  
