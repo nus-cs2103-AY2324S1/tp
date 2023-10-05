@@ -12,11 +12,6 @@ import seedu.address.model.person.Remark;
  */
 public class RemarkCommand extends Command {
 
-    public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Remark: %2$s";
-
-    private final Index index;
-    private final Remark remark;
-
     public static final String COMMAND_WORD = "remark";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -28,6 +23,16 @@ public class RemarkCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + "r/ Likes to swim.";
 
+    public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Remark: %2$s";
+
+    private final Index index;
+    private final Remark remark;
+
+    /**
+     * Constructs a RemarkCommand object that represents the user's remark command
+     * @param index index of the person to attach remark to
+     * @param remark remark to attach
+     */
     public RemarkCommand(Index index, Remark remark) {
         requireAllNonNull(index, remark);
 

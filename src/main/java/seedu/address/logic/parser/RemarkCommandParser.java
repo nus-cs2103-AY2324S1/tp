@@ -14,6 +14,13 @@ import seedu.address.model.person.Remark;
  * Parses input arguments and creates a new {@code RemarkCommand} object
  */
 public class RemarkCommandParser implements Parser<RemarkCommand> {
+
+    /**
+     * Parses raw user input and returns a RemarkCommand object that represent's the user's remark command
+     * @param args the raw user input
+     * @return a RemarkCommand object that represents the user's input
+     * @throws ParseException thrown when there is an error with the user's input format
+     */
     public RemarkCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
