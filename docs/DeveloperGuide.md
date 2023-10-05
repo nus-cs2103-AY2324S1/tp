@@ -295,32 +295,192 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `KeepInTouch` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 - View command list**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to view command list.
+2.  KeepInTouch shows the command list.
+
+    Use case ends.
+
+**Use case: UC02 - Add a new contact**
+
+**MSS**
+
+1.  User requests to add a new contact.
+2.  KeepInTouch adds the contact to the list.
+3.  KeepInTouch shows the updated list of contacts.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. User inputs incomplete or invalid data.
 
-  Use case ends.
+    * 1a1. KeepInTouch shows a message indicating incomplete or invalid data.
 
-* 3a. The given index is invalid.
+      Use case resumes at step 1.
 
-    * 3a1. AddressBook shows an error message.
+**Use case: UC03 - Delete a contact**
 
-      Use case resumes at step 2.
+**MSS**
 
-*{More to be added}*
+1.  User requests to delete a contact.
+2.  KeepInTouch deletes the contact.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User inputs a contact that does not exist.
+
+    * 1a1. KeepInTouch shows a message indicating the non-existent contact.
+
+      Use case ends.
+
+* 2a. The contact list is empty.
+
+    * 2a1. KeepInTouch shows a message indicating the empty contact list.
+
+      Use case ends.
+
+**Use case: UC04 - View all contacts**
+
+**MSS**
+
+1.  User requests to view all contacts.
+2.  KeepInTouch shows all contacts.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The contact list is empty.
+
+    * 2a1. KeepInTouch shows a message indicating the empty contact list.
+
+      Use case ends.
+
+**Use case: UC05 - View all notes**
+
+**MSS**
+
+1.  User requests to view all notes.
+2.  KeepInTouch shows all notes.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. There are no notes exists.
+
+    * 2a1. KeepInTouch shows a message indicating the non-existent notes.
+
+      Use case ends.
+
+**Use case: UC06 - Add notes to a contact**
+
+**MSS**
+
+1.  User requests to add notes to a contact.
+2.  KeepInTouch adds the notes to the contact.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User inputs incomplete data.
+
+    * 1a1. KeepInTouch shows a message indicating incomplete data.
+
+      Use case resumes at step 1.
+
+* 1b. User inputs a contact that does not exist.
+
+    * 1b1. KeepInTouch shows a message indicating the non-existent contact.
+
+      Use case resumes at step 1.
+
+**Use case: UC07 - Delete notes from a contact**
+
+**MSS**
+
+1.  User requests to delete notes from a contact.
+2.  KeepInTouch deletes the notes from the contact.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User inputs incomplete data.
+
+    * 1a1. KeepInTouch shows a message indicating incomplete data.
+
+      Use case ends.
+
+* 1b. User inputs a contact that does not exist.
+
+    * 1b1. KeepInTouch shows a message indicating the non-existent contact.
+
+      Use case ends.
+
+* 1c. User inputs notes that does not exist.
+
+    * 1c1. KeepInTouch shows a message indicating the non-existent notes.
+
+      Use case ends.
+
+**Use case: UC08 - Add an event**
+
+**MSS**
+
+1.  User requests to add an event.
+2.  KeepInTouch adds the event.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User inputs incomplete data.
+
+    * 1a1. KeepInTouch shows a message indicating incomplete data.
+
+      Use case resumes at step 1.
+
+**Use case: UC09 - Delete an event**
+
+**MSS**
+
+1.  User requests to delete an event.
+2.  KeepInTouch deletes the event.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User inputs incomplete data.
+
+    * 1a1. KeepInTouch shows a message indicating incomplete data.
+
+      Use case ends.
+
+* 1b. User inputs an event that does not exist.
+
+    * 1b1. KeepInTouch shows a message indicating the non-existent event.
+
+      Use case ends.
+
+**Use case: UC10 - Exit the program**
+
+**MSS**
+
+1.  User requests to exit the program.
+2.  KeepInTouch exits the program.
+
+    Use case ends.
 
 ### Non-Functional Requirements
 
