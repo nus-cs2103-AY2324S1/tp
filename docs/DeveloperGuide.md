@@ -304,30 +304,117 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+#### Use Case: Add a Person
 
-**MSS**
+**Main Success Scenario (MSS):**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User requests to add a new person to the address book.
+2. AddressBook prompts the user to provide the person's details, including name, phone number, and email.
+3. User enters the required details.
+4. AddressBook validates the input.
+5. AddressBook adds the new person to the address book.
+6. AddressBook displays a confirmation message.
 
-    Use case ends.
+**Extensions:**
 
-**Extensions**
+2a. User cancels the operation.
+- Use case ends.
 
-* 2a. The list is empty.
+4a. The input is invalid (e.g., missing name or an invalid email address).
+- AddressBook shows an error message.
+- User is prompted to re-enter the details.
+- Use case resumes at step 3.
 
-  Use case ends.
+#### Use Case: Search for a Person
 
-* 3a. The given index is invalid.
+**Main Success Scenario (MSS):**
 
-    * 3a1. AddressBook shows an error message.
+1. User requests to search for a person in the address book.
+2. AddressBook prompts the user to enter a search query (e.g., name or phone number).
+3. User enters the search query.
+4. AddressBook performs a search based on the query.
+5. AddressBook displays a list of persons matching the search query.
 
-      Use case resumes at step 2.
+**Extensions:**
 
-*{More to be added}*
+4a. No persons match the search query.
+- AddressBook displays a message indicating that no matching persons were found.
+
+#### Use Case: Edit Person Details
+
+**Main Success Scenario (MSS):**
+
+1. User requests to edit the details of a specific person.
+2. AddressBook shows a list of persons.
+3. User selects the person they want to edit from the list.
+4. AddressBook prompts the user to provide the updated details for the selected person.
+5. User enters the updated details.
+6. AddressBook validates the input.
+7. AddressBook updates the person's details with the new information.
+8. AddressBook displays a confirmation message.
+
+**Extensions:**
+
+2a. The list is empty.
+- AddressBook displays a message indicating that there are no persons to edit.
+- Use case ends.
+
+3a. The selected person does not exist.
+- AddressBook displays an error message.
+- User is prompted to select a valid person.
+- Use case resumes at step 3.
+
+6a. The input is invalid (e.g., missing name or an invalid phone number).
+- AddressBook shows an error message.
+- User is prompted to re-enter the details.
+- Use case resumes at step 5.
+
+#### Use Case: View Person Details
+
+**Main Success Scenario (MSS):**
+
+1. User requests to view the details of a specific person.
+2. AddressBook shows a list of persons.
+3. User selects the person they want to view from the list.
+4. AddressBook displays the person's details, including name, phone number, and email.
+
+**Extensions:**
+
+2a. The list is empty.
+- AddressBook displays a message indicating that there are no persons to view.
+- Use case ends.
+
+3a. The selected person does not exist.
+- AddressBook displays an error message.
+- User is prompted to select a valid person.
+- Use case resumes at step 3.
+
+#### Use Case: Delete a Person
+
+**Main Success Scenario (MSS):**
+
+1. User requests to delete a specific person from the address book.
+2. AddressBook shows a list of persons.
+3. User selects the person they want to delete from the list.
+4. AddressBook confirms the deletion with the user.
+5. User confirms the deletion.
+6. AddressBook deletes the person from the address book.
+7. AddressBook displays a confirmation message.
+
+**Extensions:**
+
+2a. The list is empty.
+- AddressBook displays a message indicating that there are no persons to delete.
+- Use case ends.
+
+3a. The selected person does not exist.
+- AddressBook displays an error message.
+- User is prompted to select a valid person.
+- Use case resumes at step 3.
+
+5a. User cancels the deletion.
+- Use case ends.
+
 
 ### Non-Functional Requirements
 
