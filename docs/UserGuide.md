@@ -53,6 +53,9 @@ tasks done faster than traditional GUI apps.
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
+* Items with `|` indicate that the command accepts either parameters.<br>
+  e.g `mark /name STUDENTNAME | /id STUDENTID` takes in `STUDENTNAME` or `STUDENTID` as its first argument.
+
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
@@ -74,25 +77,42 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding a new contact: `new contact`
 
-Adds a person to the address book.
+Creates a new contact with the specified name and module code(s).
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
+Format: `new contact /name <Name> /mod <Optional: Module Code> /grp <Optional: Tutorial Group Number>`
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `new contact /name Fu Yiqiao`
+* `new contact /name Fu Yiqiao /mod CS2103T /grp T09`
 
-### Listing all persons : `list`
+### Marking attendance of student: `mark` [Coming Soon]
 
-Shows a list of all persons in the address book.
+Format: `mark /name STUDENTNAME | /id STUDENTID /attendance ATTENDANCE`
+* Marks the attendance of a student corresponding to the student name or student ID.
+* `STUDENTNAME` should be a string made up of alphabetical characters, with no numbers or special characters.
+* `STUDENTID` should be a string made up of alphabetical characters, with no special characters or space.
+* `ATTENDANCE` should only be 0 or 1, where 0 indicates student is absent and 1 indicates student is present.
 
-Format: `list`
+Examples:
+* `mark /name Zong Jin /attendance 1` Marks student named, Zong Jin, as present.
+* `mark /name Zong Jin /attendance 0` Marks student named, Zong Jin, as absent.
+* `mark /id A0123456E /attendance 1` Marks student with student ID, A0123456E, as present.
+* `mark /id A0123456E /attendance 0` Marks student with student ID, A0123456E, as absent.
+
+### Viewing summary of attendance : `list attendance`
+
+Shows a summary of attendance records.
+
+Format: `list attendance [/tg ID]`
+*  Shows a summary of the attendance records of the tutorial group corresponding to the specified ID.
+*  ID must be made up of **alphabetical characters and numbers** only, with no special characters.
+*  ID must correspond to an existing tutorial group.
+
+Examples:
+*  `list attendance` Shows a summary of attendance records of all students.
+*  `list attendance /tg T09` Shows a summary of attendance records of the students in tutorial group T09.
 
 ### Searching for student's contact via keyword : `find` [Coming Soon]
 
@@ -108,40 +128,88 @@ Examples:
 *  `find /name Anthony` Finds all contacts with the name "Anthony".
 *  `find /id A0123456H` Finds all contacts with the student ID "A0123456H".
 
-### Editing a person : `edit`
+### Listing students : `list students`
 
-Edits an existing person in the address book.
+Shows a list of students.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
-
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+Format: `list students [/tg ID]`
+*  Shows a list of students in the tutorial group corresponding to the specified ID.
+*  ID must be made up of **alphabetical characters and numbers** only, with no special characters.
+*  ID must correspond to an existing tutorial group.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `list students` Shows a list of all students.
+*  `list students /tg T09` Shows a list of the students in tutorial group T09.
 
-### Locating persons by name: `find`
+### Editing a contact name : `edit name`
 
-Finds persons whose names contain any of the given keywords.
+Edits the contact name.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+Format: `edit name /oldname <oldName> /newname <newName>`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+*  `edit name /oldname Fu Yiqiao /newname Tan Liyan` Edits the student with name Fu Yiqiao to Tan Liyan
+
+### Editing a contact module : `edit mod`
+
+Edits the module associated with the contact.
+
+Format: `edit mod <Name> /oldmod <oldMod> <newMod>`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+To remove a module, simply leave the newMod section empty
+</div>
+
+Examples:
+*  `edit mod Fu Yiqiao /oldmod CS2103T CS2101` Edits the module with code CS2103T to CS2101
+*  `edit mod Fu Yiqiao /oldmod CS2103T` Removes the module with code CS2103T from the contact
+
+### Editing tutorial group number : `edit grp`
+
+Edits the tutorial group number associated with the contact.
+
+Format: `edit grp <Name> /oldgrp <oldgrp> /newgrp <newgrp>`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+To remove a group number, simply leave out the newgrp section
+</div>
+
+Examples:
+*  `edit grp Fu Yiqiao /oldgrp T09 /newgrp T10` Edits the group from T09 to T10
+*  `edit grp Fu Yiqiao /oldgrp T09` Removes the group number from the contact
+
+### Adding a filter: `filter add` [Coming Soon]
+
+Shows a list of students from a specified tutorial group
+
+Format: `filter add /tg TUTORIALGROUPID | /course COURSECODE`
+
+* Filters students that are in the tutorial group specified by `TUTORIALGROUPID` or course specified by `COURSECODE`
+* `TUTORIALGROUPID` should be a string made up of alphabetical characters and numbers, with no special characters.
+* `TUTORIALGROUPID` must correspond to an existing tutorial group.
+* `COURSECODE` should be a string made up of alphabetical characters and numbers, with no special characters.
+* `COURSECODE` must correspond to an existing course.
+
+Examples:
+* `filter add /tg G08` returns a list of students from tutorial group G08.
+* `filter add /course CS2103T` returns a list of students in the course CS2103T.
+
+### Removing filters: `filter remove` [Coming Soon]
+
+Removes any applied filter
+
+Format: `filter remove [/tg TUTORIALGROUPID] [/course COURSECODE]`
+
+* Remove the tutorial group filter specified by `TUTORIALGROUPID` or course filter specified by `COURSECODE`
+* `TUTORIALGROUPID` should be a string made up of alphabetical characters and numbers, with no special characters.
+* `TUTORIALGROUPID` must correspond to an existing tutorial group.
+* `COURSECODE` should be a string made up of alphabetical characters and numbers, with no special characters.
+* `COURSECODE` must correspond to an existing course.
+
+Examples:
+* `filter remove` returns the list of all students
+* `filter remove /tg G08` returns a list of students containing those from tutorial group G08.
+* `filter remove /course CS2103T` returns a list of students containing those in the course CS2103T.
 
 ### Deleting a person : `delete`
 
@@ -204,10 +272,10 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add** | `new contact /name <Name> /mod <Optional: Module Code> /grp <Optional: Tutorial Group Number>` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit** | `edit name /oldname <oldName> /newname <newName>`<br> `edit mod <Name> /oldmod <oldMod> <newMod>`<br> `edit grp <Name> /oldgrp <oldgrp> /newgrp <newgrp>`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`

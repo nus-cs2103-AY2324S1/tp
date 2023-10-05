@@ -309,6 +309,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is `TAvigator` and the **Actor** is the `user`, unless specified otherwise)
 
+**Use case: UC01 - Creating a new contact and editing relevant information**
+
+**MSS**
+
+1. User creates a new contact. 
+
+    Use case ends.
+    
+
+**Extensions**
+
+1a. User edits the contact name. 
+
+1b. User edits the Module Code associated with the contact. 
+
+1c. User edits the Tutorial Group Number associated with the contact.
+
+    Use case ends.
+    
+
 **Use case: UC02 - View Summary of Attendance Records**
 
 **MSS**
@@ -354,7 +374,81 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC05 - Search For Contacts via Student Name or ID**
+**Use case: UC04 - Mark Student Attendance Separately**
+
+**MSS**
+
+1.  User decides to mark attendance for a student.
+2.  User enters student name or ID, followed by the attendance status.
+3.  TAvigator marks the attendance of student and displays message for confirmation of attendance.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given student name or ID is invalid
+    * 1a1. TAvigator shows an error message.
+
+      Use case ends.
+
+* 1b. The given attendance record is invalid
+    * 1b1. TAvigator shows an error message.
+
+      Use case ends.
+
+**Use case: UC05 - Adding a filter**
+
+**MSS**
+
+1.  User requests to add a filter and enters a tutorial group ID or course ID.
+2.  TAvigator shows a list of students matching the filters applied.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given tutorial group ID is invalid.
+    * 1a1. TAvigator shows an error message.
+
+      Use case ends.
+
+* 1b. The given course ID is invalid.
+    * 1b1. TAvigator shows an error message.
+
+      Use case ends.
+
+* 1c. User does not specify a tutorial group ID or course ID.
+    * 1c1. TAvigator shows an error message.
+
+      Use case ends.
+
+**Use case: UC06 - Removing a filter**
+
+**MSS**
+
+1.  User requests to remove a filter and enters a tutorial group ID or course ID.
+2.  TAvigator shows a list of students with the updated filters.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given tutorial group ID is invalid.
+    * 1a1. TAvigator shows an error message.
+
+      Use case ends.
+
+* 1b. The given course ID is invalid.
+    * 1b1. TAvigator shows an error message.
+
+      Use case ends.
+
+* 1c. User does not specify a tutorial group ID or course ID.
+    * 1c1. TAvigator removes all applied filters.
+
+      Use case ends.
+      
+**Use case: UC07 - Search For Contacts via Student Name or ID**
 
 **MSS**
 
@@ -384,6 +478,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+
 *{More to be added}*
 
 ### Non-Functional Requirements
@@ -391,6 +486,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  Should retain a majority of the core functionality even without internet access
+5.  Application should not exceed file size of 50MB
+6.  Should respond to user inputs within approximately 2 seconds
+7.  Should show understandable messages to users and not crash under recoverable errors
+8.  Application should have an intuitive and user-friendly interface, following design principles
+9.  Should provide clear and comprehensive user documentation to assist users in using the application effectively
+10. Should maintain technical documentation for developers, detailing the software architecture
 
 *{More to be added}*
 

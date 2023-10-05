@@ -1,15 +1,42 @@
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
+[![CI Status](https://github.com/AY2324S1-CS2103T-T09-4/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2324S1-CS2103T-T09-4/tp/actions)
 [![codecov](https://codecov.io/gh/AY2324S1-CS2103T-T09-4/tp/graph/badge.svg?token=ZD7IOSM5SQ)](https://codecov.io/gh/AY2324S1-CS2103T-T09-4/tp)
 
+![TAvigator Logo](docs/images/TAvigator%20LogoBanner%20(Light%20Theme).png#gh-light-mode-only)
+![TAvigator Logo](docs/images/TAvigator%20LogoBanner%20(Dark%20Theme).png#gh-dark-mode-only)
+
+# TAvigator
+
+> Your personal navigator as a Teaching Assistant (TA)
 ![Ui](docs/images/Ui.png)
 
-* This is **TAvigators**.<br>
-  Example usages:
-  * as a starting point of a course project (as opposed to writing everything from scratch)
-  * as a case study
-* The project simulates an ongoing software project for a desktop application (called _AddressBook_) used for managing contact details.
-  * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC) than what students usually write in beginner-level SE modules, without being overwhelmingly big.
-  * It comes with a **reasonable level of user and developer documentation**.
-* It is named `AddressBook Level 3` (`AB3` for short) because it was initially created as a part of a series of `AddressBook` projects (`Level 1`, `Level 2`, `Level 3` ...).
-* For the detailed documentation of this project, see the **[Address Book Product Website](https://se-education.org/addressbook-level3)**.
-* This project is a **part of the se-education.org** initiative. If you would like to contribute code to this project, see [se-education.org](https://se-education.org#https://se-education.org/#contributing) for more info.
+**TAvigator** streamlines the teaching process for TAs around the world. Our software understands the various roles a TA has to play, from meticulous record-keeping to fostering connections with students.
+
+Tavigator is optimised for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, TAvigator can get your lesson management tasks done faster than traditional GUI apps.
+
+## Key Features
+
+### Beta Stage
+
+- Mark attendance of students
+- View summary of attendance records
+- Create/Edit student contacts
+- Search students up by name or student ID
+- View a list of your students
+- Filter for specific tutorial groups
+
+### Upcoming
+
+- Organise student contacts by modules
+- Create additional notes for students
+- Search contacts using keywords
+
+*Many more to come...*
+
+## Site Map
+-  [User Guide](https://ay2324s1-cs2103t-t09-4.github.io/tp/UserGuide.html)
+-  [Developer Guide](https://ay2324s1-cs2103t-t09-4.github.io/tp/DeveloperGuide.html)
+-  [About Us](https://ay2324s1-cs2103t-t09-4.github.io/tp/AboutUs.html)
+
+## Issues & Bugs
+
+Spot a bug? Let us know by launching a Bug Report at the [Issues tab](https://github.com/AY2324S1-CS2103T-T09-4/tp/issues)!
