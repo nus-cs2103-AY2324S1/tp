@@ -26,7 +26,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/mamayuan)]
 [[portfolio](./team/mamayuan.md)]
 
-* Role: Team Member
+* Role: Developer
 * Responsibilities: Testing and Integration (e.g. maintaining repo, merging PRs)
 
 ### Johnny Doe
