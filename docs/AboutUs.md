@@ -40,10 +40,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Armando Jovan Kusuma
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jovkusuma.png" width="200px">
 
 [[github](https://github.com/jovkusuma)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/jovkusuma.md)]
 
 * Role: Developer
 * Responsibilities: Not determined yet
