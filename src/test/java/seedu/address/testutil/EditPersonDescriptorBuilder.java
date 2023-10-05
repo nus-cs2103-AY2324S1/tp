@@ -6,8 +6,11 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditRoomDescriptor;
-import seedu.address.model.booking.*;
+import seedu.address.model.booking.Address;
 import seedu.address.model.booking.Booking;
+import seedu.address.model.booking.Email;
+import seedu.address.model.booking.Name;
+import seedu.address.model.booking.Phone;
 import seedu.address.model.tag.Tag;
 
 /**

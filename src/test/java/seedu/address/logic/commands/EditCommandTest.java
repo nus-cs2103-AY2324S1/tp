@@ -25,8 +25,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.booking.Booking;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.BookingBuilder;
+import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
@@ -41,7 +41,8 @@ public class EditCommandTest {
         EditCommand.EditRoomDescriptor descriptor = new EditPersonDescriptorBuilder(editedBooking).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_BOOKING_SUCCESS, Messages.format(editedBooking));
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_BOOKING_SUCCESS,
+                Messages.format(editedBooking));
 
         Model expectedModel = new ModelManager(new BookingsBook(model.getBookingsBook()), new UserPrefs());
         expectedModel.setBooking(model.getFilteredBookingList().get(0), editedBooking);
@@ -62,7 +63,8 @@ public class EditCommandTest {
                 .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
         EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_BOOKING_SUCCESS, Messages.format(editedBooking));
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_BOOKING_SUCCESS,
+                Messages.format(editedBooking));
 
         Model expectedModel = new ModelManager(new BookingsBook(model.getBookingsBook()), new UserPrefs());
         expectedModel.setBooking(lastBooking, editedBooking);
@@ -75,7 +77,8 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, new EditRoomDescriptor());
         Booking editedBooking = model.getFilteredBookingList().get(INDEX_FIRST_PERSON.getZeroBased());
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_BOOKING_SUCCESS, Messages.format(editedBooking));
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_BOOKING_SUCCESS,
+                Messages.format(editedBooking));
 
         Model expectedModel = new ModelManager(new BookingsBook(model.getBookingsBook()), new UserPrefs());
 
@@ -91,7 +94,8 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_BOOKING_SUCCESS, Messages.format(editedBooking));
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_BOOKING_SUCCESS,
+                Messages.format(editedBooking));
 
         Model expectedModel = new ModelManager(new BookingsBook(model.getBookingsBook()), new UserPrefs());
         expectedModel.setBooking(model.getFilteredBookingList().get(0), editedBooking);

@@ -19,7 +19,7 @@ import seedu.address.model.booking.Booking;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final BookingsBook BookingsBook;
+    private final BookingsBook bookingsBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Booking> filteredBookings;
 
@@ -31,9 +31,9 @@ public class ModelManager implements Model {
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
-        this.BookingsBook = new BookingsBook(addressBook);
+        this.bookingsBook = new BookingsBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredBookings = new FilteredList<>(this.BookingsBook.getPersonList());
+        filteredBookings = new FilteredList<>(this.bookingsBook.getPersonList());
 
     }
 
@@ -80,28 +80,28 @@ public class ModelManager implements Model {
 
     @Override
     public void setBookingsBook(ReadOnlyBookingsBook bookingsBook) {
-        this.BookingsBook.resetData(bookingsBook);
+        this.bookingsBook.resetData(bookingsBook);
     }
 
     @Override
     public ReadOnlyBookingsBook getBookingsBook() {
-        return BookingsBook;
+        return bookingsBook;
     }
 
     @Override
     public boolean hasBooking(Booking booking) {
         requireNonNull(booking);
-        return BookingsBook.hasBooking(booking);
+        return bookingsBook.hasBooking(booking);
     }
 
     @Override
     public void deleteBooking(Booking target) {
-        BookingsBook.removePerson(target);
+        bookingsBook.removePerson(target);
     }
 
     @Override
     public void addBooking(Booking booking) {
-        BookingsBook.addBooking(booking);
+        bookingsBook.addBooking(booking);
         updateFilteredBookingList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
@@ -109,7 +109,7 @@ public class ModelManager implements Model {
     public void setBooking(Booking target, Booking editedBooking) {
         requireAllNonNull(target, editedBooking);
 
-        BookingsBook.setBooking(target, editedBooking);
+        bookingsBook.setBooking(target, editedBooking);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -141,7 +141,7 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return BookingsBook.equals(otherModelManager.BookingsBook)
+        return bookingsBook.equals(otherModelManager.bookingsBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredBookings.equals(otherModelManager.filteredBookings);
     }

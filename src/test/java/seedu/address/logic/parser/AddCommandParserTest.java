@@ -37,8 +37,11 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.model.booking.*;
+import seedu.address.model.booking.Address;
 import seedu.address.model.booking.Booking;
+import seedu.address.model.booking.Email;
+import seedu.address.model.booking.Name;
+import seedu.address.model.booking.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.BookingBuilder;
 

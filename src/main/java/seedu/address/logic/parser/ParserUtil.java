@@ -9,7 +9,11 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.booking.*;
+import seedu.address.model.booking.Address;
+import seedu.address.model.booking.Email;
+import seedu.address.model.booking.Name;
+import seedu.address.model.booking.Phone;
+import seedu.address.model.booking.Room;
 import seedu.address.model.tag.Tag;
 
 /**
