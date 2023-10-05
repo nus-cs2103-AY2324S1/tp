@@ -126,18 +126,14 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [d/DEPARTMENT]​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 1 p/91234567 e/johnsimmons@gmail.com` Edits the phone number and email address of the 1st person to be `91234567` and `johnsimmons@gmail.com` respectively.
 
 ### Locating persons by name: `find`
 
@@ -187,7 +183,7 @@ Format: `clear`
 
 ### Exiting the program : `exit`
 
-Exits the program.
+Exits the application.
 
 Format: `exit`
 
@@ -211,8 +207,18 @@ _Details coming soon ..._
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**Q:** How do I transfer my data to another Computer?
+
+**A:** To transfer your data to another computer, follow these steps:
+
+1. Install the app on the other computer if you haven't already.
+
+2. Locate the empty data file that the app creates on the new computer.
+
+3. Replace the empty data file with the file containing the data from your previous AddressBook home folder.
+
+Now, your data should be successfully transferred to the new computer.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
