@@ -67,8 +67,6 @@ FumbleLog is a **desktop app for managing contacts, optimized for use via a Comm
 
 Shows a message explaning how to access the help page.
 
-![help message](images/helpMessage.png)
-
 Format: `help`
 
 ## Commands for Persons
