@@ -297,7 +297,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook`, the **Person** is the `user` and the **Actors** are `student`, unless specified otherwise)
+(For all use cases below, the **System** is `FumbleLog`, the **Person** is the `user` and the **Actors** are `student`, unless specified otherwise)
 
 **Use case: UC01 - Delete a person**
 
@@ -345,7 +345,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. FumbleLog shows a list of persons
 3. User request to edit a specific person in the list
 4. User supplies parameters that they want to change
-5. Fumblelog edits the person
+5. FumbleLog edits the person
 
    Use case ends.
 
@@ -356,7 +356,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. User supplies an invalid index to edit
     
-    * 3a1. Fumblelog shows an error message.
+    * 3a1. FumbleLog shows an error message.
 
       Use case resumes at step 2.
 
@@ -380,14 +380,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to add a event
 2. User supplies the necessary parameters for the event
-3. Fumblelog adds the event
+3. FumbleLog adds the event
 
    Use case ends.
 
 **Extensions**
 * 2a. User supplies invalid parameters
 
-    * 2a1. FumbeLog shows an error message
+    * 2a1. FumbleLog shows an error message
 
       Use case resumes at step 2.
 
@@ -398,7 +398,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. FumbleLog shows a list of events
 3. User request to edit a specific event in the list
 4. User supplies parameters that they want to change
-5. Fumblelog edits the event
+5. FumbleLog edits the event
 
    Use case ends.
 
@@ -409,7 +409,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. User supplies an invalid index to edit
     
-    * 3a1. Fumblelog shows an error message.
+    * 3a1. FumbleLog shows an error message.
 
       Use case resumes at step 2.
 
@@ -448,7 +448,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The group does not exist
 
-    * 1a1. FumbeLog shows an error message
+    * 1a1. FumbleLog shows an error message
 
     Use case resumes at step 1.
 
@@ -528,10 +528,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 1. User requests to show a list of events
-2. FumbeLog shows list of events
+2. FumbleLog shows list of events
 3. User requests to mark an event as recurring
 4. User specifies how often the event occurs
-5. FumbeLog sets the event as a recurring event
+5. FumbleLog sets the event as a recurring event
 
    Use case ends.
 
@@ -542,7 +542,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case ends.
 
 * 3a. User tries to mark an invalid event as recurring
-    * 3a1. FumbeLog shows an error message
+    * 3a1. FumbleLog shows an error message
 
       Use case resumes at step 3.
 
@@ -558,7 +558,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to show a list of persons
 2. FumbleLog shows a list of persons
 3. User requests to pin a person from the list
-4. FumbeLog pins the person
+4. FumbleLog pins the person
 
    Use case ends.
 
@@ -576,7 +576,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case: UC14 - Display events in Calendar**
 
 1. User requests to show events in a calendar form
-2. FumebleLog shows all the events in a calendar
+2. FumbleLog shows all the events in a calendar
 
    Use case ends.
 
