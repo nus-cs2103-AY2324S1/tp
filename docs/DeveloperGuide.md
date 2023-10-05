@@ -326,30 +326,136 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: View all members of my team**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. Developer requests to list team members.
+2. TeamDirectory displays a list of team members.
+3. Developer views the members' contact information.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The team member list is empty.
+  * 2a1. TeamDirectory indicates there are no members currently.
+    Use case ends.
 
-  Use case ends.
+---
 
-* 3a. The given index is invalid.
+**Use case: Search contacts using tags**
 
-    * 3a1. AddressBook shows an error message.
+**MSS**
 
-      Use case resumes at step 2.
+1. Developer wants to find contacts with a specific tag.
+2. Developer inputs the desired tag into TeamDirectory.
+3. TeamDirectory displays a list of contacts with that tag.
 
-*{More to be added}*
+    Use case ends.
+
+**Extensions**
+
+* 2a. No contacts have the specified tag.
+  * 2a1. TeamDirectory shows a message that no contacts were found with that tag.
+    Use case ends.
+
+---
+
+**Use case: Access names of developers**
+
+**MSS**
+
+1. Project manager requests a list of all developers.
+2. TeamDirectory displays the list of developers.
+
+    Use case ends.
+
+---
+
+**Use case: Edit or update my information**
+
+**MSS**
+
+1. Developer wants to update their contact info.
+2. Developer selects their profile and makes desired changes.
+3. TeamDirectory confirms the updates.
+
+    Use case ends.
+
+---
+
+**Use case: Assign a node for a team leader**
+
+**MSS**
+
+1. Project manager wants to assign a node to a team leader.
+2. Project manager selects the desired team leader and assigns a node.
+3. TeamDirectory confirms the assignment.
+
+    Use case ends.
+
+---
+
+**Use case: Create a public profile for a team**
+
+**MSS**
+
+1. Software team lead wants to create a public profile.
+2. Software team lead inputs relevant information for the public profile.
+3. TeamDirectory creates and displays the new public profile.
+
+    Use case ends.
+
+---
+
+**Use case: Remove a user**
+
+**MSS**
+
+1. Project manager wants to remove a user.
+2. Project manager selects the user and requests removal.
+3. TeamDirectory confirms the removal of the user.
+
+    Use case ends.
+
+---
+
+**Use case: Set a verification code for project manager registration**
+
+**MSS**
+
+1. Software team lead sets a verification code.
+2. New project managers must input this code to register.
+3. TeamDirectory verifies the code and allows the registration.
+
+    Use case ends.
+
+---
+
+**Use case: Receive notifications about contact changes**
+
+**MSS**
+
+1. User with access wants to be notified of contact changes.
+2. TeamDirectory sends notifications whenever there are contact changes.
+3. User views the notifications.
+
+    Use case ends.
+
+---
+
+**Use case: Easily register as a first-time user**
+
+**MSS**
+
+1. First-time user wants to register.
+2. First-time user inputs necessary details into TeamDirectory.
+3. TeamDirectory confirms successful registration.
+
+    Use case ends.
+
+---
 
 ### Non-Functional Requirements
 
