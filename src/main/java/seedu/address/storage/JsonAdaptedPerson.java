@@ -114,12 +114,12 @@ class JsonAdaptedPerson {
         final Remark modelRemark = new Remark(remark);
 
         if (gender == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Gender.class.getSimpleName()));
         }
         final Gender modelGender = new Gender(gender);
 
         if (ic == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Ic.class.getSimpleName()));
         }
         final Ic modelIc = new Ic(ic);
 
