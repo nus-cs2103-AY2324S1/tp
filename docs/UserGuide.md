@@ -32,8 +32,8 @@ LinkTree is the top contact solution for software professionals. Using our uniqu
 ### Installation
 
 1. Ensure you have Java `11` or above installed on your Computer.
-2. Download the latest `LinkTree.jar` from [here]([https://github.com/se-edu/addressbook-level3/releases](https://github.com/AY2324S1-CS2103T-W11-4/tp/releases)).
-3. Copy the file to the folder you wish to use as the _home folder_ for your AddressBook.
+2. Download the latest `LinkTree.jar` from [here](https://github.com/AY2324S1-CS2103T-W11-4/tp/releases).
+3. Copy the file to the folder you wish to use as the _home folder_ for your smart contact book.
 
 ### Initial Setup
 
