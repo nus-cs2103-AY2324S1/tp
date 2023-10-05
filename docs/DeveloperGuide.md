@@ -557,7 +557,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5. _GUI_ should work well for standard screen resolutions 1920x1080 and higher, and, for screen scales 100% and 125%.
 6. _GUI_ should be usable for resolutions 1280x720 and higher, and, for screen scales 150%.
 7. Should not require the user to have an internet connection to use.
-8. Should be a single-user application. 
+8. Should be a single-user application.
 9. Should persistently save data in a human-readable text file between sessions.
 10. Should be able to transfer the data file to another device with no loss of data.
 
