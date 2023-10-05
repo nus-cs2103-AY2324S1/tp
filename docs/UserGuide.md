@@ -173,15 +173,15 @@ Find tutors whose names contain any of the given keywords.
 
     * Search is case-insensitive. e.g. `hans` will match `Hans`
     * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-    * Only the name is searched.
+    * Only the tutor name is searched.
     * Only full words will be matched. e.g. `Han` will not match `Hans`
     * Persons matching at least one keyword will be returned (i.e. OR search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
     </div>
 
 **Expected output**:
-* `2 persons listed!`
-* `0 persons listed!`
+* `2 tutors listed!`
+* `0 tutors listed!`
 
 **Error messages**:
 * `Missing search keyword:`: No search keyword provided.
