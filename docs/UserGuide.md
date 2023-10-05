@@ -151,6 +151,41 @@ Displays a list of all tutors in the address book in a table format.
 **Error messages**:
 * No error messages as this command ignores extra parameters.
 
+
+### Locating tutors by name: `find`
+
+Find tutors whose names contain any of the given keywords.
+
+![find tutor](images/findTutor.png)
+
+**Format**: `find KEYWORD [MORE_KEYWORDS]`
+
+**Examples**:
+* `find John` returns `John Smith` and `John Doe`
+* `find Alex David Li` returns `Alex David Li`
+
+**Acceptable values for each parameter**:
+* `KEYWORD`: Any input accepted
+
+    <div markdown="block" class="alert alert-info">
+
+    **:information_source: Search behaviour**<br>
+
+    * Search is case-insensitive. e.g. `hans` will match `Hans`
+    * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+    * Only the tutor name is searched.
+    * Only full words will be matched. e.g. `Han` will not match `Hans`
+    * Tutors matching at least one keyword will be returned (i.e. OR search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+    </div>
+
+**Expected output**:
+* `2 tutors listed!`
+* `0 tutors listed!`
+
+**Error messages**:
+* `Invalid command format!`: No search keyword provided.
+
 ### Adding a schedule: `add-s`
 
 Adds a schedule to a specified tutor.
