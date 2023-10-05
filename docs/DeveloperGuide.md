@@ -392,8 +392,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Portable**: Software that doesn't require installation and can be run from any location, such as from a USB stick.
 
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-
 ---
 
 ## **Appendix: Instructions for manual testing**
