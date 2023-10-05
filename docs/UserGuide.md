@@ -28,6 +28,11 @@ When the command succeeds:
 
 `Noted, I have added contact with the name Oreki at index 1.`
 
+When the command fails:
+* `create /name`
+
+`Oops, you did not provide the name of the contact to be added.`
+
 ### Add phone number to contact: `add /phone /index`
 
 You can add a phone number to an existing contact. A new phone number will be added to the contact's list of phone numbers, and no new contact will be created.
