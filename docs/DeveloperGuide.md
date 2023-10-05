@@ -287,13 +287,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *` | user | add more details about an existing contact | store information about my contacts for future reference |
 | `* * *` | user | update details of a contact | replace outdated details with more accurate information |
 | `* * *`  | user                                       | delete a contact          | remove entries that are no longer relevant             |
-| `* * `  | user                                       | find a contact by name    | locate details of contacts without having to go through the entire list |
-| `*`      | user with many contacts | sort contacts by their details | locate contacts with special characteristics that I am looking for |
-| `* ` | user with many contacts | filter contacts based on their details | locate contacts who fulfil certain conditions that I am looking for |
+| `* *`  | user                                       | find a contact by name    | locate details of contacts without having to go through the entire list |
+| `* *`      | user with many contacts | sort contacts by their details | locate contacts with special characteristics that I am looking for |
+| `*` | user with many contacts | filter contacts based on their details | locate contacts who fulfil certain conditions that I am looking for |
 | `* *` | new user | have a quick-start guide | start using the basic functionality of the app as soon as possible|
 | `* *` | new user | use commonly-available keyboard shortcuts (e.g. ctrl-c for copy, ctrl-v for paste) | use the shortcuts I am accustomed to|
-| `* *` | NUS computing student | use simple and easy-to-remember shortcuts | have no trouble remembering and executing the shortcuts|
-
+| `* *` | user | use simple and easy-to-remember shortcuts | have no trouble remembering and executing the shortcuts |
+| `* *` | user | use keyboard shortcuts that are easy to press | use them more conveniently |
 
 ### Use cases
 
