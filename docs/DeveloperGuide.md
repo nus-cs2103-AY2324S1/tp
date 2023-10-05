@@ -292,7 +292,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`      | user with many contacts | sort contacts by their details | locate contacts with special characteristics that I am looking for |
 | `*` | user with many contacts | filter contacts based on their details | locate contacts who fulfil certain conditions that I am looking for |
 | `* *` | new user | have a quick-start guide | start using the basic functionality of the app as soon as possible|
-| `* *` | new user | use commonly-available keyboard shortcuts (e.g. ctrl-c for copy, ctrl-v for paste) | learn how to use the app's keyboard shortcuts more easily |
+| `* *` | new user | use commonly-available keyboard shortcuts (e.g. ctrl-c for copy, ctrl-v for paste) | use my existing habits and knowledge to smoothly use the app |
 | `* *` | user | use simple and easy-to-remember shortcuts | have no trouble remembering and executing the shortcuts |
 | `* *` | user | use keyboard shortcuts that are easy to press | use them more conveniently |
 
