@@ -257,27 +257,48 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* has a need to manage a significant number of tutors and their schedules
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: help tuition centre managers easily track, schedule, and notify tutors of their upcoming schedule
+
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority &nbsp; | As a …​   | I want to …​                                                                                   | So that I can…​                                                             |
+|-----------------|-----------|------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------|
+| `* * *`         | manager   | add new tutors to the system                                                                   | manage them                                                                 |
+| `* * *`         | manager   | store each tutor's contact information, including their name, phone number, and email address  | access it later                                                             |
+| `* * *`         | manager   | remove tutors from the system when they are no longer available                                | keep the system up to date                                                  |
+| `* * *`         | manager   | view a list of all tutors in the system                                                        | have an overview of available tutors                                        |
+| `* * *`         | manager   | search for a tutor by their name                                                               | quickly find their information                                              |
+| `* * *`         | manager   | create a schedule for each tutor                                                               | track their schedule                                                        |
+| `* * *`         | manager   | delete a schedule for a tutor                                                                  | remove an appointment when the tutor is not available                       |
+| `* * *`         | manager   | view a summary of all upcoming tutoring sessions                                               | plan accordingly                                                            |
+| `* * *`         | manager   | save the schedule and tutor’s information                                                      | can access it again in the future                                           |
+| `* *`           | manager   | mark sessions as attended or missed                                                            | track the status of tutoring sessions                                       |
+| `* *`           | manager   | keep a record of completed tutoring sessions                                                   | maintain a history of successful sessions                                   |
+| `* *`           | manager   | keep a record of missed tutoring sessions                                                      | monitor attendance and address any issues                                   |
+| `* *`           | manager   | edit the tutor information                                                                     | update their details easily                                                 |
+| `* *`           | manager   | edit the schedule information                                                                  | reschedule tutoring sessions                                                |
+| `* *`           | manager   | shorter syntax                                                                                 | work faster                                                                 |
+| `* *`           | manager   | view schedules by tutor                                                                        | easily plan the schedule of that tutor                                      |
+| `* *`           | manager   | have a help function                                                                           | quickly check the command parameters without having to check the User Guide |
+| `*`             | manager   | export data to an excel file                                                                   | use the data for other purposes                                             |
+| `*`             | manager   | import data from an excel file                                                                 | easily restore and update records                                           |
+| `*`             | manager   | add new students to the system                                                                 | enrol them                                                                  |
+| `*`             | manager   | store each students contact information, including their name, phone number, and email address | access it later                                                             |
+| `*`             | manager   | remove students from the system when they are no longer enrolled                               | maintain an accurate student list                                           |
+| `*`             | manager   | view a list of all students in the system                                                      | have an overview of enrolled students                                       |
+| `*`             | manager   | edit the student information                                                                   | keep their details up to date                                               |
+| `*`             | manager   | assign specific tutors to a student                                                            | have personalised tutoring (one tutor to many students)                     |
+| `*`             | manager   | reassign tutors to students                                                                    | adapt to changing needs and preferences                                     |
+
 
 *{More to be added}*
 
@@ -285,14 +306,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Delete a tutor**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list tutors
+2.  TutorConnect shows a list of tutors
+3.  User requests to delete a specific tutor in the list
+4.  TutorConnect deletes the tutor
 
     Use case ends.
 
@@ -304,24 +325,249 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. TutorConnect shows an error message.
 
       Use case resumes at step 2.
+
+
+**Use case: Add a schedule**
+
+**MSS**
+
+1.  User requests to list tutors
+2.  TutorConnect shows a list of tutors
+3.  User requests to add a schedule for a specific tutor in the list
+4.  TutorConnect adds the schedule and displays a list of schedule
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. TutorConnect shows an error message.
+
+      Use case resumes at step 2.
+  
+* 3b. The schedule parameters is invalid.
+
+    * 3b1. TutorConnect shows an error message.
+
+      Use case resumes at step 2.
+
+
+**Use case: Delete a schedule**
+
+**MSS**
+
+1.  User requests to list schedules
+2.  TutorConnect shows a list of schedules
+3.  User requests to delete a specific schedule in the list
+4.  TutorConnect deletes the schedule
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. TutorConnect shows an error message.
+
+      Use case resumes at step 2.
+
+
+**Use case: Mark a schedule as completed**
+
+**MSS**
+
+1.  User requests to list schedules
+2.  TutorConnect shows a list of schedules
+3.  User requests to mark a specific schedule in the list as completed
+4.  TutorConnect marks the schedule as completed
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. TutorConnect shows an error message.
+
+      Use case resumes at step 2.
+
+
+**Use case: Edit a tutor information**
+
+**MSS**
+
+1.  User requests to list tutors
+2.  TutorConnect shows a list of tutors
+3.  User requests to edit a specific tutor information in the list
+4.  TutorConnect modifies the tutor information
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. TutorConnect shows an error message.
+
+      Use case resumes at step 2.
+  
+* 3b. The tutor information parameters is invalid.
+
+    * 3b1. TutorConnect shows an error message.
+
+      Use case resumes at step 2.
+
+
+**Use case: Edit a schedule information**
+
+**MSS**
+
+1.  User requests to list schedules
+2.  TutorConnect shows a list of schedules
+3.  User requests to edit a specific schedule information in the list
+4.  TutorConnect modifies the schedule information
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. TutorConnect shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The schedule information parameters is invalid.
+
+    * 3b1. TutorConnect shows an error message.
+
+      Use case resumes at step 2.
+
+
+**Use case: View schedules by tutor**
+
+**MSS**
+
+1.  User requests to list tutors
+2.  TutorConnect shows a list of tutors
+3.  User requests to view schedules for a specific tutor in the list
+4.  TutorConnect displays a list of schedules for the tutor
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. TutorConnect shows an error message.
+
+      Use case resumes at step 2.
+
+
+**Use case: Delete a student**
+
+**MSS**
+
+1.  User requests to list students
+2.  TutorConnect shows a list of students
+3.  User requests to delete a specific student in the list
+4.  TutorConnect deletes the student
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. TutorConnect shows an error message.
+
+      Use case resumes at step 2.
+
+
+**Use case: Edit a student information**
+
+**MSS**
+
+1.  User requests to list students
+2.  TutorConnect shows a list of students
+3.  User requests to edit a specific student information in the list
+4.  TutorConnect modifies the student information
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. TutorConnect shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The student information parameters is invalid.
+
+    * 3b1. TutorConnect shows an error message.
+
+      Use case resumes at step 2.
+
 
 *{More to be added}*
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+1.  Should work on any _mainstream OS_ as long as it has Java `11` installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse. 
+4. Should work without requiring an installer 
+5. _GUI_ should work well for standard screen resolutions 1920x1080 and higher, and, for screen scales 100% and 125%. 
+6. _GUI_ should be usable for resolutions 1280x720 and higher, and, for screen scales 150%. 
+7. Should not require the user to have an internet connection to use. 
+8. Should be a single-user application. 
+9. Should persistently save data in a human-readable text file between sessions. 
+10. Should be able to transfer the data file to another device with no loss of data.
 
 *{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Use case**: A description of a set of sequences of actions, including variants, that a system performs to yield an observable result of value to an actor 
+* **GUI**: Graphical user interface
 
 --------------------------------------------------------------------------------------------------------------------
 
