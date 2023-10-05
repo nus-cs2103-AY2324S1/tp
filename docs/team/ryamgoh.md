@@ -15,7 +15,7 @@ journey.
 Given below are my contributions to the project.
 
 * **New Feature**:
-    * What it does:
+    * What it does: Help button for new users
     * Justification:
     * Highlights:
     * Credits:
