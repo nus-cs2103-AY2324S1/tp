@@ -162,7 +162,7 @@ Examples:
 * `lookup c/111` return all students in class number 111<br>
   ![result for 'lookup c/ 111'](images/lookupClassResult.png)
 
-### Deleting students : `delete`
+### Deleting a student : `delete`
 
 Deletes the specific student.
 
