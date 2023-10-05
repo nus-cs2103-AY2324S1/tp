@@ -1,5 +1,5 @@
 # TAManager
-[![Java CI](https://github.com/AY2324S1-CS2103-T10-1/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2324S1-CS2103-T10-1/tp/actions/workflows/gradle.yml)
+[![CI Status](https://github.com/AY2324S1-CS2103T-T10-1/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2324S1-CS2103T-T10-1/tp/actions)
 
 ![Ui](docs/images/Ui.png)
 
