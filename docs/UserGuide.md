@@ -246,8 +246,114 @@ When the command fails:
 
 ### <u>Category 3 - Find contacts</u>
 
+### Search for a contact: `search /name`
+
+You can use the `search` command to search for contacts by their name.
+
+Format: `search /name [name]`
+
+Example usage:
+
+* `search /name Ness`
+* `search /name Kai Jie`
+* `search /name alex`
+
+Parameters:
+
+* `[name]` is the name of the contact, or a part of it.
+
+When the command succeeds:
+
+* `search /name alex`
+
+```text
+Here’s a list of contacts with names including your search term:
+[list of matching contacts, e.g. "Alex Smith", "Alexandria Lee"]
+```
+
+* `search /name kai jie`
+
+```text
+Here’s a list of contacts with names including your search term:
+[list of matching contacts, e.g. "Wong Kai Jie", "Kai Jie Tan"]
+```
+
+* `search /name abcdefghijk`
+
+```text
+Could not find any contacts with names including your search term.
+```
+
+Expected output when the command fails:
+
+* `search /name`
+
+```text
+Oops, it seems you did not include a search term.
+```
 
 
+### Sort contacts list: `sort /by /order`
+
+You can use the `sort` command to sort your list of contacts.
+
+Format: `sort /by [field] /order [order]`
+
+Example usage:
+
+* `sort /by grad /order asc`
+* `sort /by name /order descending`
+* `sort /by course`
+
+Parameters
+
+* `[field]` is the information to sort by.
+
+    List of options:
+    * `name` - Sort alphabetically by contact name
+    * `grad` - Sort chronologically by graduation year
+    * `course` - Sort alphabetically by course taken
+    * `spec`/`specialization` - Sort alphabetically by specialization
+    * `priority` - Sort by priority
+
+* `[order]` (optional) is the order to sort in. If not specified, defaults to ascending.
+
+    List of options:
+    * `asc`/`ascending` - Sort in ascending order
+    * `desc`/`descending` - Sort in descending order
+
+When the command succeeds:
+
+* `sort /by course`
+
+```text
+Here’s your sorted list of contacts:
+[list of contacts, sorted in ascending order by course]
+```
+
+* `sort /by name /order desc`
+
+```text
+Here’s your sorted list of contacts:
+[list of contacts, sorted in descending order by name]
+```
+
+When the command fails:
+
+* Field not specified: `sort`
+
+`OOPS, I don’t know what to sort by. Please use the following command format: [correct format]`
+
+
+* Invalid field: `sort /by nickname`
+
+`OOPS, I don’t know what [input field] is. Please use one of the following options:
+name, grad, course, spec/specialization, priority.`
+
+
+* Invalid order: `sort /by name /order normal`
+
+`OOPS, I don’t know how to sort by "normal". Please use one of the following options: asc/ascending, desc/descending.`
 
 
 ## Command summary
@@ -256,4 +362,5 @@ Category | Format, Examples
 --------|------------------
 **Add** | `add /email [email] /index [index]` <br> e.g., `add /email test@example.com /index 2`<br><br>`add /link [link] [note] /index [index]`<br>e.g., `add /link https://nknguyenhc.github.io/ website /index 1`<br><br>`add /priority [priority level] /index [index]`<br>e.g., `add /priority high /index 1`<br><br>`add /tag [tag name] /index [index]`<br>e.g., `add /index 1 /tag data analytics` 
 **Edit** | `update /[parameter name] [new parameter value] /index [index]`<br> e.g.,`update /name nkn /index 1`<br><br>`delete [index]`<br>e.g., `delete 1` 
-**Find** |  
+**Find** |  `search /name [name]` <br> e.g., `search /name Ness`<br><br>`sort /by [field] /order [order]`<br>e.g., `sort /by name /order asc`
+
