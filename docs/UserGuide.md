@@ -188,10 +188,12 @@ Displays a list of all schedules in the address book in a table format.
 * If there are no schedules in the address book, displays a message telling the user to add a tutor with `add-s`.
 
 ![empty schedule list](images/emptyScheduleList.png)
+<div markdown="block" class="alert alert-warning">
 
-**Error messages:**
-* `Too many parameters`: `list-s` does accept any parameters other than its own command. (E.g. `list-s 1` will result in an error).
+**:warning: Warning**<br>
 
+Note that any additional parameters introduced after `list-s` will be ignored.
+</div>
 
 ### Deleting a schedule: `delete-s`
 
