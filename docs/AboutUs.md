@@ -27,24 +27,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 - Role: User Documentation
 
-### Johnny Doe
+### Wong Joon Hung
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/petrichorprecipice.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/PetrichorPrecipice)]
+[[portfolio](team/petrichorprecipice.md)]
 
-- Role: Developer
-- Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-- Role: Developer
-- Responsibilities: Dev Ops + Threading
+- Role: Testing
 
 ### Xavier Oh
 
