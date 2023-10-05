@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# LinkTree Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -284,11 +284,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
 |----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
+| `* * *`  | developer                                  | view all members of my team  | refer to instructions when I forget how to use the App                 |
+| `* * *`  | project manager                            | access the names of all my   | them regarding the project                                             |
+                                                          deveopers and team leaders     
+| `* * *`  | project manager                            | assign a node for a team     |   the target team leaders can fill in their information by themselves  |
+                                                          leader
 | `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
+| `* *`    | developer                                  | hide private contact details | minimize chance of someone else seeing them by accident                |
 | `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
 
 *{More to be added}*
