@@ -323,7 +323,85 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**Use case: Sort contacts**
+
+**Actor:** User
+
+**MSS**
+
+1.  User chooses what field to sort by (e.g. name, specialization, graduation year) and which order to sort by (ascending or descending).
+
+1.  System shows list of user’s contacts, sorted by the specified field and in the specified order.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The user has no contacts to sort.
+
+    * 1a1. System shows an empty contact list.
+
+      Use case ends.
+
+* 1a. The specified field is missing.
+
+    * 1a1. System shows an error message.
+
+      Use case ends.
+
+* 1a. The specified field is invalid.
+
+    * 1a1. System shows an error message.
+
+      Use case ends.
+
+ * 1a. The specified sorting order is invalid.
+
+    * 1a1. System shows an error message.
+
+      Use case ends.
+
+ * 1a. Certain contacts do not have any data in the specified field (e.g. no email address stored)
+
+    * 1a1. System shows list of user’s contacts, sorted by the specified field and in the specified order. Any contacts without that field specified are put at the end of the list.
+
+      Use case ends.
+
+
+
+
+**Use case: Search contacts by name**
+
+**Actor:** User
+
+**MSS**
+
+1.  User specifies the text they would like to search.
+
+1.  System shows list of user’s contacts with names containing the searched text.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The user has no contacts to sort.
+
+    * 1a1. System shows an empty contact list.
+
+      Use case ends.
+
+* 1a. The search text is not specified.
+
+    * 1a1. System shows an error message.
+
+      Use case ends.
+
+ * 1a. There are no contacts matching the searched name.
+
+    * 1a1. System shows a message saying that there are no matches.
+
+      Use case ends.
+
 
 ### Non-Functional Requirements
 
