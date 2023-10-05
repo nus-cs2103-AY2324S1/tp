@@ -180,7 +180,8 @@ Find tutors whose names contain any of the given keywords.
     </div>
 
 **Expected output**:
-* `Displays a list of matching search results.`
+* `2 persons listed!`
+* `0 persons listed!`
 
 **Error messages**:
 * `Missing search keyword:`: No search keyword provided.
