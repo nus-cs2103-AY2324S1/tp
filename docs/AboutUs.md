@@ -13,7 +13,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Kailashwaran
 
-<img src="images/Kailash201.png" width="200px">
+<img src="images/kailash201.png" width="200px">
 
 [[github](http://github.com/Kailash201)]
 [[portfolio](team/Kailash201.md)]
