@@ -272,12 +272,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| `* * *` | language learner | add new flashcards |  |
+| `* * *` | language learner | delete a flashcard |  |
+| `* * *` | language learner | list all my flashcards | see what words are currently saved |
+| `* * *` | language learner | save my list of flashcards | keep my progress of my words and the flashcards without having to re-input |
+| `* * *` | language learner | load my flashcards | continue my progress from my last save point |
+| `* * *` | language learner | flip over a flashcard | reveal the translated word to remember |
+| `* * *` | forgetful language learner | be shown the flashcards to see | go through the required flashcards without needing to keep track of what needs to be read |
+| `* *`   | not tech saavy language learner | be directed to the help page easily | use the application correctly |
+| `* *`   | langauge learner | see my success rate for each flashcard | see what words are challenging |
+| `*`     | multi language learner | categorise flashcards by language | study each language individually |
+| `*`     | lazy language learner | get translations for the original word | add words in easily without manually searching for the translation |
 
 *{More to be added}*
 
