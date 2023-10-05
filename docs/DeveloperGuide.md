@@ -276,7 +276,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * is reasonably comfortable using CLI apps
 
 **Value proposition**:
-LoveBook simplifies the process of storing dates' information and assessing compatibility by taking into account the user’s preferences and profile, thereby enhancing the efficiency and effectiveness of finding the perfect match.
+LoveBook simplifies the process of storing information of dates and assessing compatibility betweenn user and his/ her dates by taking into account the user’s preferences and profile, thereby enhancing the efficiency and effectiveness of finding the perfect match.
 
 ### User stories
 
