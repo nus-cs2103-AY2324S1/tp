@@ -1,4 +1,5 @@
 ---
+
 layout: page
 title: User Guide
 ---
@@ -12,7 +13,7 @@ title: User Guide
 
 ## Getting Started
 
-Upon launching ConText, you'll be presented with a clean interface. At the top is the command input box, and below it, you'll find a list of your contacts. The bottom of the window will display feedback from the commands you input.
+Upon launching ConText, you'll be presented with a clean interface. At the top is the command input box. Right below it, feedback from the commands you input will be displayed. Beneath the feedback section, you'll find a list of your contacts.
 
 ### Entering text commands
 
@@ -20,7 +21,7 @@ Upon launching ConText, you'll be presented with a clean interface. At the top i
 2. Type your command.
 3. Press `Enter` to run the command.
 
-Feedback will appear at the bottom. If there's an error in your command, it will be highlighted in red in the input box. Simply modify and retry.
+Any feedback, including errors, will appear directly below the input box.
 
 ---
 
@@ -29,112 +30,87 @@ Feedback will appear at the bottom. If there's an error in your command, it will
 Easily add a new contact to your list with the `add` command.
 
 **Format:**   
-`add /name FULL_NAME /phone PHONE_NUMBER`
+`add n/FULL_NAME p/PHONE_NUMBER e/EMAIL`
 
 **Examples:**
-- `add /name John Doe /phone 98765432`
-
-**Acceptable values:**
-- `FULL_NAME`: Names can contain spaces.
-- `PHONE_NUMBER`: Adheres to the format /\+?\d+/u (optional '+' followed by digits)
-
-**Expected outputs:**
-- Success: `<FULL_NAME>’s contact is successfully added.`
-- Error: `Given input is not valid.`
+- `add n/John Doe p/98765432 e/john.doe@email.com`
 
 ---
 
 ### Viewing All Contacts: `list`
 
-To view all your stored contacts.
+Display all your stored contacts.
 
 **Format:**   
 `list`
-
-**Expected output:**  
-Your contacts will appear in the central panel of the GUI, each showing their name, phone number, and any associated tags.
 
 ---
 
 ### Deleting a Contact: `delete`
 
-If you need to remove a contact, use the `delete` command.
+Remove a contact based on their name.
 
 **Format:**   
-`delete /name FULL_NAME`
+`delete n/FULL_NAME`
 
 **Examples:**
-- `delete /name John Doe`
+- `delete n/John Doe`
 
 **Expected outputs:**
-- Success: `<FULL_NAME>’s contact is successfully deleted.`
+- Success: `Contact with the name <FULL_NAME> is successfully deleted.`
 - Error: `Contact <FULL_NAME> not found.`
+
+---
 
 ### Viewing Help: `help`
 
-Need assistance with the available commands? Use the `help` command.
+Access a summary of all available commands.
 
 **Format:**   
 `help`
-
-**Expected Output:**   
-A message or a window will provide information on how to use ConText and its available commands.
 
 ---
 
 ### Locating Persons by Name: `find`
 
-Quickly find contacts based on name keywords.
+Search and display contacts with names containing any of the given keywords.
 
 **Format:**   
 `find KEYWORD [MORE_KEYWORDS]`
 
-**Examples:**
-- `find John`
-- `find Alex David`
-
-**Expected Output:**  
-List of contacts matching the provided keyword(s) will be displayed in the central panel of the GUI.
+**Example:**   
+`find John Alice`
 
 ---
 
-### Editing a Contact: `edit`
+### Clearing All Entries: `clear`
 
-Modify details of an existing contact.
-
-**Format:**   
-`edit INDEX /name FULL_NAME /phone PHONE_NUMBER`
-
-**Examples:**
-- `edit 1 /name Jane Doe /phone 91234567`
-
-**Expected Output:**  
-The details of the specified contact will be updated.
-
----
-
-### Clearing All Contacts: `clear`
-
-Wish to start afresh? This command clears all stored contacts.
+Remove all contacts from your list.
 
 **Format:**   
 `clear`
 
-**Expected Output:**  
-All contacts will be deleted, and the central panel of the GUI will be empty.
-
 ---
 
-### Exiting the Application: `exit`
+### Exiting the Program: `exit`
 
-Done managing your contacts for the day? Use the `exit` command.
+Close the ConText application.
 
 **Format:**   
 `exit`
 
-**Expected Output:**   
-ConText application will close.
+---
+
+### Editing a Person: `edit`
+
+Modify an existing contact's details in your list.
+
+**Format:**   
+`edit INDEX n/FULL_NAME p/PHONE_NUMBER e/EMAIL`
+
+**Example:**   
+`edit 2 n/John Doe p/98765432 e/john.doe@email.com`
 
 ---
 
-Future updates will introduce more features and improvements to enhance your contact management experience with ConText.
+Remember, whenever in doubt, you can always refer to the `help` command to get a quick summary of all available commands in ConText.
