@@ -5,7 +5,7 @@ title: Connectify
 
 [![CI Status](https://github.com/AY2324S1-CS2103T-F11-4/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2324S1-CS2103T-F11-4/tp/actions)
 
-![UiMockup](images/UiMockup.png)
+![UiMockup](images/Ui.png)
 
 **Connectify is a desktop application for managing your clients.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
 
