@@ -149,4 +149,3 @@ To be added soon
 | **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                              |
 | **Edit**   | `edit INDEX n/NAME p/PHONE_NUMBER a/ADDRESS s/SUBJECTS d/DAY b/BEGIN e/END`<br> e.g.,`edit p/91234567 d/Sun`                                                                     |
 | **List**   | `list`|
-s
