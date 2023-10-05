@@ -450,7 +450,7 @@ Use case ends.
 
 * 3b. The given status is invalid.
 
-    * 3a1. AddressBook shows an error message indicating that the specified status is invalid.
+    * 3b1. AddressBook shows an error message indicating that the specified status is invalid.
 
       Use case resumes at step 3.
 
