@@ -326,7 +326,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Flashcard**: A virtual card with a word on one side and its translation on the other side
+* **Word**: A word in the language you want to learn
+* **Translation**: The word in your native language that corresponds to the word you want to learn
 
 --------------------------------------------------------------------------------------------------------------------
 
