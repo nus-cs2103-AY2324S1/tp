@@ -269,13 +269,14 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* is seeking and applying to many jobs
+* has the habit of taking many notes
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: manage information regarding many job offers in a organised and uncluttered manner for users who is comfortable with CLI apps.
 
 
 ### User stories
@@ -284,49 +285,218 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
 |----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| `* * *`  | new user                                               | get a list of the commands    | know how to use the commands and their parameters |
+| `* * *`  | user                                                       | add a new contact                 | record one person's phone number and email address |
+| `* * *`  | user                                                       | delete a contact                     | remove a contact (by name) that I do not need |
+| `* * *`  | user                                                       | view all contact                      | easily see and know what contacts are currently stored in the application in one place  |
+| `* *`    | user                                                        | view all notes                        | easily see and know what notes are currently stored in the application in one place |
+| `* *`    | user                                                        | add notes to a contact          | record additional information about that contact in the notes |
+| `* *`    | user                                                        | delete notes to a contact       | remove additional information that are no longer needed about that contact in the notes   |
+| `* *`    | user who has some event to do             | add an event                         | record an event with start time and also end time, location and any additional information like what to do during the event   |
+| `* *`    | user who has/had some event to do      | delete an event                     | remove an event after it is obsolete, cancelled or no longer needed to be recorded |
+| `* * *` | user who finishes using the application  | exit the program                   | exit the program normally while ensuring all my data is currectly saved |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `KeepInTouch` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 - View command list**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to view command list.
+2.  KeepInTouch shows the command list.
+
+    Use case ends.
+
+**Use case: UC02 - Add a new contact**
+
+**MSS**
+
+1.  User requests to add a new contact.
+2.  KeepInTouch adds the contact to the list.
+3.  KeepInTouch shows the updated list of contacts.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. User inputs incomplete or invalid data.
 
-  Use case ends.
+    * 1a1. KeepInTouch shows a message indicating incomplete or invalid data.
 
-* 3a. The given index is invalid.
+      Use case resumes at step 1.
 
-    * 3a1. AddressBook shows an error message.
+**Use case: UC03 - Delete a contact**
 
-      Use case resumes at step 2.
+**MSS**
 
-*{More to be added}*
+1.  User requests to delete a contact.
+2.  KeepInTouch deletes the contact.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User inputs a contact that does not exist.
+
+    * 1a1. KeepInTouch shows a message indicating the non-existent contact.
+
+      Use case ends.
+
+* 2a. The contact list is empty.
+
+    * 2a1. KeepInTouch shows a message indicating the empty contact list.
+
+      Use case ends.
+
+**Use case: UC04 - View all contacts**
+
+**MSS**
+
+1.  User requests to view all contacts.
+2.  KeepInTouch shows all contacts.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The contact list is empty.
+
+    * 2a1. KeepInTouch shows a message indicating the empty contact list.
+
+      Use case ends.
+
+**Use case: UC05 - View all notes**
+
+**MSS**
+
+1.  User requests to view all notes.
+2.  KeepInTouch shows all notes.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. There are no notes exists.
+
+    * 2a1. KeepInTouch shows a message indicating the non-existent notes.
+
+      Use case ends.
+
+**Use case: UC06 - Add notes to a contact**
+
+**MSS**
+
+1.  User requests to add notes to a contact.
+2.  KeepInTouch adds the notes to the contact.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User inputs incomplete data.
+
+    * 1a1. KeepInTouch shows a message indicating incomplete data.
+
+      Use case resumes at step 1.
+
+* 1b. User inputs a contact that does not exist.
+
+    * 1b1. KeepInTouch shows a message indicating the non-existent contact.
+
+      Use case resumes at step 1.
+
+**Use case: UC07 - Delete notes from a contact**
+
+**MSS**
+
+1.  User requests to delete notes from a contact.
+2.  KeepInTouch deletes the notes from the contact.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User inputs incomplete data.
+
+    * 1a1. KeepInTouch shows a message indicating incomplete data.
+
+      Use case ends.
+
+* 1b. User inputs a contact that does not exist.
+
+    * 1b1. KeepInTouch shows a message indicating the non-existent contact.
+
+      Use case ends.
+
+* 1c. User inputs notes that does not exist.
+
+    * 1c1. KeepInTouch shows a message indicating the non-existent notes.
+
+      Use case ends.
+
+**Use case: UC08 - Add an event**
+
+**MSS**
+
+1.  User requests to add an event.
+2.  KeepInTouch adds the event.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User inputs incomplete data.
+
+    * 1a1. KeepInTouch shows a message indicating incomplete data.
+
+      Use case resumes at step 1.
+
+**Use case: UC09 - Delete an event**
+
+**MSS**
+
+1.  User requests to delete an event.
+2.  KeepInTouch deletes the event.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User inputs incomplete data.
+
+    * 1a1. KeepInTouch shows a message indicating incomplete data.
+
+      Use case ends.
+
+* 1b. User inputs an event that does not exist.
+
+    * 1b1. KeepInTouch shows a message indicating the non-existent event.
+
+      Use case ends.
+
+**Use case: UC10 - Exit the program**
+
+**MSS**
+
+1.  User requests to exit the program.
+2.  KeepInTouch exits the program.
+
+    Use case ends.
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+2.  Should be able to hold up to 1000 users without a noticeable sluggishness in performance for typical usage.
+3.  Should be able to hold up to 10000 contacts without a noticeable sluggishness in performance for typical usage. 
+4.  All commands should be executed within two seconds. 
+5.  Should work without requiring any installer. 
+6.  Should work without requiring any internet connection. 
+7.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+8.  The GUI should work well for standard screen resolutions 1920x1080 and higher, and, for screen scales 100% and 125%.
 
 *{More to be added}*
 
