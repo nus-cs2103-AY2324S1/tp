@@ -268,14 +268,14 @@ _{Explain here how the data archiving feature will be implemented}_
 ### Product scope
 
 **Target user profile**:
-
-* has a need to manage a significant number of contacts
+* active online dater
+* has a need to manage a significant number of dates
 * prefer desktop apps over other types
-* can type fast
+* can search and filter their dates for better compatibility
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:
 
 
 ### User stories
