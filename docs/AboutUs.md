@@ -18,41 +18,42 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Team Lead
 
-### Jane Doe
+### Fu Yiqiao
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/fuyiqiao.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/fuyiqiao)]
+[[portfolio](team/fuyiqiao.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Documentation
 
-### Jean Doe
+### Elgin Tan Zhi Ming
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/elgintzm.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/ElginTZM)]
+[[portfolio](team/elgintzm.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Testing
+
+### Tan Liyan
+
+<img src="images/spatuly.png" width="200px">
+
+[[github](http://github.com/spatuly)]
+[[portfolio](team/spatuly.md)]
+
+* Role: Developer
+* Responsibilities: Code Quality
+
+### Quek Zong Jin
+
+<img src="images/zjinnnn.png" width="200px">
+
+[[github](http://github.com/Zjinnnn)]
+[[portfolio](team/zjinnnn.md)]
+
+* Role: Developer
+* Responsibilities: Deliverables and Deadlines

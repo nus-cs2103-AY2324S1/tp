@@ -309,6 +309,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is `TAvigator` and the **Actor** is the `user`, unless specified otherwise)
 
+**Use case: UC01 - Creating a new contact and editing relevant information**
+
+**MSS**
+
+1. User creates a new contact. 
+
+    Use case ends.
+    
+
+**Extensions**
+
+1a. User edits the contact name. 
+
+1b. User edits the Module Code associated with the contact. 
+
+1c. User edits the Tutorial Group Number associated with the contact.
+
+    Use case ends.
+    
+
 **Use case: UC02 - View Summary of Attendance Records**
 
 **MSS**
@@ -354,7 +374,81 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC05 - Search For Contacts via Student Name or ID**
+**Use case: UC04 - Mark Student Attendance Separately**
+
+**MSS**
+
+1.  User decides to mark attendance for a student.
+2.  User enters student name or ID, followed by the attendance status.
+3.  TAvigator marks the attendance of student and displays message for confirmation of attendance.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given student name or ID is invalid
+    * 1a1. TAvigator shows an error message.
+
+      Use case ends.
+
+* 1b. The given attendance record is invalid
+    * 1b1. TAvigator shows an error message.
+
+      Use case ends.
+
+**Use case: UC05 - Adding a filter**
+
+**MSS**
+
+1.  User requests to add a filter and enters a tutorial group ID or course ID.
+2.  TAvigator shows a list of students matching the filters applied.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given tutorial group ID is invalid.
+    * 1a1. TAvigator shows an error message.
+
+      Use case ends.
+
+* 1b. The given course ID is invalid.
+    * 1b1. TAvigator shows an error message.
+
+      Use case ends.
+
+* 1c. User does not specify a tutorial group ID or course ID.
+    * 1c1. TAvigator shows an error message.
+
+      Use case ends.
+
+**Use case: UC06 - Removing a filter**
+
+**MSS**
+
+1.  User requests to remove a filter and enters a tutorial group ID or course ID.
+2.  TAvigator shows a list of students with the updated filters.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given tutorial group ID is invalid.
+    * 1a1. TAvigator shows an error message.
+
+      Use case ends.
+
+* 1b. The given course ID is invalid.
+    * 1b1. TAvigator shows an error message.
+
+      Use case ends.
+
+* 1c. User does not specify a tutorial group ID or course ID.
+    * 1c1. TAvigator removes all applied filters.
+
+      Use case ends.
+      
+**Use case: UC07 - Search For Contacts via Student Name or ID**
 
 **MSS**
 
@@ -383,6 +477,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3c1. TAvigator shows an error message.
 
       Use case ends.
+
 
 *{More to be added}*
 
