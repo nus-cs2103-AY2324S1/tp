@@ -31,14 +31,15 @@ This page is designed to closely follow the format required by grading scripts.
 * Role: Developer
 * Responsibilities: Testing and Integration (e.g. maintaining repo, merging PRs)
 
-### Johnny Doe
+### bwangpj
 
-<img src="./images/johndoe.png" width="200px">
+<img src="./images/bwangpj.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](./team/johndoe.md)]
+[[github](http://github.com/bwangpj)] 
+[[portfolio](./team/bwangpj.md)]
 
 - Role: Developer
-- Responsibilities: Data
+- Responsibilities: Documentation
 
 ### Jean Doe
 
