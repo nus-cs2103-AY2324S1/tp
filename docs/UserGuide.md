@@ -16,7 +16,7 @@ FumbleLog is a **desktop app for managing contacts, optimized for use via a Comm
 
 2. Download the latest `fumblelog.jar` from [here](hhttps://github.com/AY2324S1-CS2103T-T12-2/tp/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for your FumbleLog.
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar fumblelog.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
@@ -27,7 +27,7 @@ FumbleLog is a **desktop app for managing contacts, optimized for use via a Comm
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the FumbleLog.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -65,7 +65,7 @@ FumbleLog is a **desktop app for managing contacts, optimized for use via a Comm
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 Format: `help`
 
@@ -73,7 +73,7 @@ Format: `help`
 
 ### Adding a person: `add`
 
-Adds a person to the address book.
+Adds a person to the FumbleLog.
 
 Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [g/GROUP]…​`
 
@@ -99,11 +99,11 @@ Expected output when a command succeeds:
 * Output: `New person added: james; Phone: 999; Email: example@gmail.com; Address: 1 computing drive; Birthday: Sep 09 2001; groups:; `
 
 Expected output when the command fails
-* `Invalid command format! add: Adds a person to the address book. Parameters: n/NAME [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [g/GROUP]…​`
+* `Invalid command format! add: Adds a person to the FumbleLog. Parameters: n/NAME [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [g/GROUP]…​`
 
 ### Editing a person : `edit`
 
-Edits an existing person in the address book.
+Edits an existing person in the FumbleLog.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [g/GROUP]…​`
 
@@ -135,7 +135,7 @@ Expected output when the command fails:
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons in the FumbleLog.
 
 Format: `list`
 
@@ -162,7 +162,7 @@ Examples:
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified person from the FumbleLog.
 
 Format: `delete INDEX`
 
@@ -171,7 +171,7 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
+* `list` followed by `delete 2` deletes the 2nd person in the FumbleLog.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 Expected output when a command succeeds:
@@ -185,7 +185,7 @@ Expected output when the command fails:
 
 ### Adding a meeting : `add_meeting`
 
-Add a meeting to the address book.
+Add a meeting to the FumbleLog.
 
 Format: `add_meeting n/MEETING_DETAILS d/DATE [s/START_TIME] [e/END_TIME]`
 
@@ -205,11 +205,11 @@ Expected output when the command succeeds:
 * Output: `New meeting added: tP week 3 meeting; Date: 2023-10-05; Start Time: 1500; End Time: 1700; `
 
 Expected output when the command fails:
-* `Invalid command format! add_meeting: Adds a meeting to the address book. Parameters: MEETING_DETAILS d/DATE [s/START_TIME] [e/END_TIME]`
+* `Invalid command format! add_meeting: Adds a meeting to the FumbleLog. Parameters: MEETING_DETAILS d/DATE [s/START_TIME] [e/END_TIME]`
 
 ### Editing a meeting : `edit_meeting`
 
-Edits an existing meeting in the address book.
+Edits an existing meeting in the FumbleLog.
 
 Format: `edit_meeting INDEX [n/MEETING_DETAILS] [d/DATE] [s/START_TIME] [e/END_TIME]`
 
@@ -232,12 +232,12 @@ Expected output when the command succeeds:
 * Output: `Meeting edited: tP week 3 meeting; Date: 2023-10-05; Start Time: 1500; End Time: 1700; `
 
 Expected output when the command fails:
-* `Invalid command format! edit_meeting: Edits a meeting in the address book. Parameters: INDEX [MEETING_DETAILS] [d/DATE] [s/START_TIME] [e/END_TIME]`
+* `Invalid command format! edit_meeting: Edits a meeting in the FumbleLog. Parameters: INDEX [MEETING_DETAILS] [d/DATE] [s/START_TIME] [e/END_TIME]`
 
 
 ### Deleting a meeting : `delete_meeting`
 
-Deletes the specified meeting from the address book.
+Deletes the specified meeting from the FumbleLog.
 
 Format: `delete_meeting INDEX`
 
@@ -291,7 +291,7 @@ Acceptable values for each parameter:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book. Be very sure before using this command.
+Clears all entries from the FumbleLog. Be very sure before using this command.
 
 Format: `clear`
 
@@ -305,14 +305,14 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+FumbleLog data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+FumbleLog data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
+If your changes to the data file makes its format invalid, FumbleLog will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
@@ -324,7 +324,7 @@ _Details coming soon ..._
 # FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous FumbleLog home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
