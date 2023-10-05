@@ -9,16 +9,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
 ### Lang Heran
 
 <img src="images/heran9.png" width="200px">
@@ -27,6 +17,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: NA
+
+### Lim Yih Fei
+<img src="images/yihfei.png" width="200px">
+
+[[github](http://github.com/yihfei)]
+[[portfolio](team/yihfei.md)]
+
+* Role: Developer
+* Responsibilities: Not determined yet
 
 ### Lam Jin Heng Braydon
 
