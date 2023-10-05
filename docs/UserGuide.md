@@ -4,9 +4,9 @@
   pageNav: 3
 ---
 
-# AB-3 User Guide
+# JABPro User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+JobApplicationsBook Pro (JABPro) is a **desktop app for hiring managers of companies to ease the management of applicants, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, JABPro can get your applicant management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -17,26 +17,27 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `jabpro.jar` from [here](https://github.com/AY2324S1-CS2103T-W09-4/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your JabPro.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar jabpro.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+1. Type the command in the command box and press Enter to execute it.<br>
    Some example commands you can try:
 
-    * `list` : Lists all contacts.
+    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`: adds an applicant with the specified contact details
+   
+    * `remark 1 r/Great attitude, hardworking`: edits the remark of the 1st person on the list to have a remark `Great attitude, hardworking`
+   
+    * `search n/John`: Searches for applicants whose names contain the keyword `John`
+   
+    * `add linkedin 1 alexyeoh`: Adds LinkedIn account to candidate's existing contact information
+   
+    * `github Alex Yeoh`: Redirects the user to the Github account of the candidate
 
-    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
-
-    * `delete 3` : Deletes the 3rd contact shown in the current list.
-
-    * `clear` : Deletes all contacts.
-
-    * `exit` : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -147,23 +148,49 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Search job applicants by category: `search`
 
-Finds persons whose names contain any of the given keywords.
+Finds job applicants whose profiles match the specified categories' keywords. The search categories are: name, status
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+#### Search job applicants by name
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+Finds job applicants whose names contain the given keywords.
+
+Format: `search n/KEYWORD [MORE KEYWORDS]`
+
+* Keywords are case-insensitive: `search n/Josh` and `search n/josh` return the same result.
+* Keyword has to be a string that does not contain any non-alpha numeric characters.
+* The order of the keywords does not matter. e.g. `Josh Peck` will match `Peck Josh`
+* Only full words will be matched e.g. `Jo` will not match `Josh`
+* Applicants matching at least one keyword will be returned (i.e. `OR` search)
+  e.g. `Josh Peck` will return `Josh Gad`, `Josh Job`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `search n/John` returns `john` and `John Doe`
+* `search n/david` returns `Alex Yeoh`, `David Li`<br>
+
+#### Search job applicants by status
+
+Finds job applicants whose status match any of the given keywords
+
+Format: `search s/KEYWORD [MORE KEYWORDS]`
+
+* Keywords can only be from the following list: `Pending`, `Interviewed`, `Rejected`, `Offered`
+  e.g. `search s/interviewing` will give an error.
+* Keywords are case-insensitive: `search s/interviewd` and `search s/INTERVIEWED` return the same result.
+
+Example:
+* `search s/interviewed`
+
+#### Notes for advanced users:
+* You can combine the name and status search categories (e.g. `search n/Alex s/offered`) in a single search command.
+* Each search category can be used at most once in a single search command
+  e.g. `search n/Alex n/Adam s/rejected` is not allowed.
+
+Example:
+* `search n/Alex Bernice s/interviewed rejected` will output applicants whose:
+    * names contain either Alex `or` Bernice
+    * `and` status is either interviewed `or` rejected.
 
 ### Deleting a person : `delete`
 
