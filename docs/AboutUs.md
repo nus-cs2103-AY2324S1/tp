@@ -19,15 +19,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### mamayuan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/mamayuan.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/mamayuan)]
+[[portfolio](./team/mamayuan.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Team Member
+* Responsibilities: Testing and Integration (e.g. maintaining repo, merging PRs)
 
 ### Johnny Doe
 
