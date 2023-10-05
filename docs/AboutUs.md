@@ -19,15 +19,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Lim Yih Fei
+<img src="images/yihfei.png" width="200px">
 
-<img src="images/johndoe.png" width="200px">
+[[github](http://github.com/yihfei)]
+[[portfolio](team/yihfei.md)]
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Developer
+* Responsibilities: Not determined yet
 
 ### Lam Jin Heng Braydon
 
