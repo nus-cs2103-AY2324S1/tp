@@ -11,7 +11,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Lee Zheng Jing
 
-<img src="images/leezhengjing.png" width="200">
+<img src="images/leezhengjing.png" width="200px">
 
 [[github](https://github.com/leezhengjing)]
 [[portfolio](team/leezhengjing.md)]
