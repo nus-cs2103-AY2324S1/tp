@@ -317,19 +317,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case: Install the app**
 MSS 
 1. User execute the installation package
-2. The app ask for continue or cancel with a pop up window
-3. User click continue
+2. The app ask for continue or cancel the installation
+3. User respond by indicating continue
 4. The app install the app
-5. The app show a pop up window to inform user the installation is successful
+5. The app informs the user that the installation is successful
 Use Case ends
 
 Extensions
-* 3a. User click cancel
+* 3a. User respond by indicating cancel
   * 3a1. The app close the installation package
   * Use case ends
 
 * 4a. A error occur during installation
-  * 4a1. The app show a pop up window to inform user the installation is unsuccessful and error message
+  * 4a1. The app informs the user that the installation is unsuccessful and display reasons
   * Use case ends
 
 **Use case: Delete a person**
