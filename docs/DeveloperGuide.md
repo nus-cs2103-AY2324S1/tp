@@ -292,16 +292,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is `BandConnect+` and the **Actor** is the `producer`, unless specified otherwise)
+(For all use cases below, the **System** is `BandConnect++` and the **Actor** is the `producer`, unless specified otherwise)
 
 **Use case: UC03 - Delete a person**
 
 **MSS**
 
 1.  User requests to list musicians
-2.  BandConnect+ shows a list of musicians
+2.  BandConnect++ shows a list of musicians
 3.  User requests to delete a specific musician in the list
-4.  BandConnect+ deletes the person
+4.  BandConnect++ deletes the person
 
     Use case ends.
 
@@ -313,7 +313,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. BandConnect+ shows an error message.
+    * 3a1. BandConnect++ shows an error message.
 
       Use case resumes at step 2.
 
@@ -322,9 +322,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list musicians
-2.  BandConnect+ shows a list of musicians
+2.  BandConnect++ shows a list of musicians
 3.  User tags a specific musician with the instrument they play
-4.  BandConnect+ tags the musician appropriately
+4.  BandConnect++ tags the musician appropriately
 
     Use case ends.
 
@@ -334,9 +334,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. BandConnect+ detects an error in the entered data.
+* 3a. BandConnect++ detects an error in the entered data.
 
-    * 3a1. BandConnect+ shows an error message.
+    * 3a1. BandConnect++ shows an error message.
 
       Use case resumes at step 2.
 
