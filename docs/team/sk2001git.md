@@ -20,7 +20,10 @@ It makes their life easier by allowing them to easily fetch important info about
 * Updated UG for the `remark' command
 
 **Contribution to DG**:
+* Contributed to DG for writing in User Stories for week 7
 * Contributed to DG for non-functional requirements
+* Contributed to DG for glossary
+* Contributed to DG for use cases regarding add and remark features
 
 **Contribution to team-based tasks**:
 * Keeping track of deadlines and objectives
