@@ -29,14 +29,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Tutor search
 
-### Johnny Doe
+### Seow Xuan Yi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/saltedfishxx.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/saltedfishxx)] [[portfolio](team/saltedfishxx.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Deleting and viewing schedules
 
 ### Teo Rui Shan
 

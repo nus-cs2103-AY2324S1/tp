@@ -128,6 +128,52 @@ Error messages:
 * `Wrong input: p/`: The phone number entered does not consist of numbers only.
 * `Wrong input: e/`: The email entered is invalid.
 
+### Listing all tutors: `list-t`
+
+Displays a list of all tutors in the address book in a table format.
+
+![list tutor](images/listTutor.png)
+
+**Format**: `list-t`
+
+**Example**:
+* `list-t`
+
+**Acceptable values for each parameter**:
+* No acceptable values as list-t has no parameters
+
+**Expected Output**:
+* Displays a table of tutors with columns for Name, Phone Number, and Email like 
+  the [image](#listing-all-tutors--list-t) above
+* If there are no tutors in the address book, displays a message telling the user
+  to add a tutor with add-t: `There are no tutors in the address book. Please use /add-t to add a tutor.`
+
+**Error messages**:
+* No error messages as this command ignores extra parameters.
+
+### Deleting a tutor: `delete-t`
+
+Deletes a tutor in the address book based on their index number in the table.
+
+![delete tutor](images/deleteTutor.png)
+
+**Format**: `delete-t TUTOR_INDEX`
+
+**Examples**:
+* `delete-t 5` deletes the tutor that is indexed as 5 in the address book.
+* `list` followed by `delete-t 2` deletes the 2nd person in the address book.
+
+**Acceptable values for each parameter**:
+* `TUTOR_INDEX`: Only accepts numerical value
+
+**Expected output**:
+* `Tutor has been deleted: Alex Yeoh; Phone: 87438807; 
+  Email: alexyeoh@example.com; Address: Blk 30 Geylang Street 29, #06-40`
+
+**Error messages**:
+* `Index number given is out of range`: Given index is out of range.
+* `Invalid parameter given`: Parameter given is not a numerical value.
+
 ### Adding a schedule: `add-s`
 
 Adds a schedule to a specified tutor.
@@ -217,7 +263,6 @@ Deletes a schedule in the address book based on their index number in the table 
 * `Index number given is out of range`: Given index is out of range.
 * `Invalid value in parameter SCHEDULE_INDEX`: Parameter given is not a numerical value.
 * `Missing parameter SCHEDULE_INDEX`: A numerical value is not provided when calling the command `delete-s`.
-
 
 _More details coming soon ..._
 
