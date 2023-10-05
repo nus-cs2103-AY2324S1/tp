@@ -129,7 +129,16 @@ Examples:
 
 Shows a list of all persons in the address book.
 
-Format: `list`
+Format: `list s/ATTRIBUTE`
+
+* `s/ATTRIBUTE` is completely **optional**, on default will NOT be sorted.
+* As of v1.2, the attributes that are supported are `name` and `email`.
+* Attribute is case-insensitive: `list s/NAME` and `list s/name` return the same result.
+* The result will be sorted in **ascending** order.
+
+Examples:
+* `list` Shows a list of all persons.
+* `list s/name` Show a list of all persons, sorted by name in ascending order.
 
 ### Editing a person : `edit`
 
@@ -263,5 +272,5 @@ Action                     | Format, Examples
 **Delete**                 | `delete INDEX`<br> e.g., `delete 3`
 **Edit**                   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**                   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**                   | `list`
+**List**                   | `list s/ATTRIBUTE` <br> e.g. `list s/name`
 **Help**                   | `help`
