@@ -11,51 +11,51 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Liu Diwen
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/stevenliudw.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/stevenliudw)]
+[[portfolio](team/stevenliudw.md)]
 
-* Role: Project Advisor
+* Role: Developer
 
-### Jane Doe
+### Chen Jizhuo
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jizhuochen.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/jizhuochen)]
+[[portfolio](team/jizhuochen.md)]
 
-* Role: Team Lead
+* Role: Developer
 * Responsibilities: UI
 
-### Johnny Doe
+### Adhitya Gopal
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/adhigop13.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/adhigop13)] 
+[[portfolio](team/adhigop13.md)]
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Kishore
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/erohsikivar.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/erohsikivar)]
+[[portfolio](team/erohsikivar.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Tang Moyan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/tang-moyan.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/Tang-Moyan)]
+[[portfolio](team/Tang-Moyan.md)]
 
 * Role: Developer
 * Responsibilities: UI
