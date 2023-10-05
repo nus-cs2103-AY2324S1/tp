@@ -199,22 +199,22 @@ Deletes a schedule in the address book based on their index number in the table 
 
 ![delete schedule](images/deleteSchedule.png)
 
-**Format:** `delete-s INDEX_NO`
+**Format:** `delete-s SCHEDULE_INDEX`
 
 **Example:**
 * `delele-s 5` deletes the schedule that is indexed as 5 in the schedule list.
 * `list` followed by `delete-s 2` deletes the 2nd schedule in the schedule list.
 
 **Acceptable values for each parameter:**
-* `INDEX_NO`: NUMBER Only numerical input that ranges from 1 to the last schedule shown in the list of schedules
+* `SCHEDULE_INDEX`: NUMBER Only numerical input that ranges from 1 to the last schedule shown in the list of schedules
 
 **Expected output:**
 * `Schedule has been deleted: Tutor: John Doe; Start date: Sep 15, 2023 09:00; End date: Sep 15, 2023 11:00;`
 
 **Error messages:**
 * `Index number given is out of range`: Given index is out of range.
-* `Invalid value in parameter INDEX_NO`: Parameter given is not a numerical value.
-* `Missing parameter INDEX_NO`: A numerical value is not provided when calling the command `delete-s`.
+* `Invalid value in parameter SCHEDULE_INDEX`: Parameter given is not a numerical value.
+* `Missing parameter SCHEDULE_INDEX`: A numerical value is not provided when calling the command `delete-s`.
 
 
 _More details coming soon ..._
