@@ -25,7 +25,9 @@ My contributions to the project are listed below.
 
 - **Documentation**:
 
-  - to be added soon
+  - Developer Guide
+    - Non-functional Requirements
+    - Glossary
 
 - **Community**:
 

@@ -377,9 +377,23 @@ _{More to be added}_
 
 ### Non-Functional Requirements
 
+**Performance**
+1.  Should be able to respond to user input within 2 seconds under normal operating conditions.
+2.  Should be able to handle a database of up to 1000 contacts and 500 meetings without a significant performance degradation.
+
+**Reliability**
+1.  Data integrity should be ensured under any usage conditions through automatic data backup.
+
+**Usability**
+1.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+2.  Application GUI should be intuitive wherever possible, to reduce training for new users.
+
+**Documentation**
+1.  User documentation should include a comprehensive user manual.
+2.  Developer documentation should cover the architecture, code structure, and guidelines for future development.
+
+**Compatibility**
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 _{More to be added}_
 
