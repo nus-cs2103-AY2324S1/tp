@@ -19,15 +19,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Lang Heran
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/heran9.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/heran9)] [[portfolio](team/heran9.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Developer
+* Responsibilities: NA
 
 ### Lam Jin Heng Braydon
 
