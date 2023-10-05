@@ -75,19 +75,15 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding a new contact: `new contact`
 
-Adds a person to the address book.
+Creates a new contact with the specified name and module code(s).
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
+Format: `new contact /name <Name> /mod <Optional: Module Code> /grp <Optional: Tutorial Group Number>`
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `new contact /name Fu Yiqiao`
+* `new contact /name Fu Yiqiao /mod CS2103T /grp T09`
 
 ### Marking attendance of student: `mark` [Coming Soon]
 
@@ -129,22 +125,43 @@ Examples:
 *  `list students` Shows a list of all students.
 *  `list students /tg T09` Shows a list of the students in tutorial group T09.
 
-### Editing a person : `edit`
+### Editing a contact name : `edit name`
 
-Edits an existing person in the address book.
+Edits the contact name.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
-
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+Format: `edit name /oldname <oldName> /newname <newName>`
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit name /oldname Fu Yiqiao /newname Tan Liyan` Edits the student with name Fu Yiqiao to Tan Liyan
+
+### Editing a contact module : `edit mod`
+
+Edits the module associated with the contact.
+
+Format: `edit mod <Name> /oldmod <oldMod> <newMod>`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+To remove a module, simply leave the newMod section empty
+</div>
+
+Examples:
+*  `edit mod Fu Yiqiao /oldmod CS2103T CS2101` Edits the module with code CS2103T to CS2101
+*  `edit mod Fu Yiqiao /oldmod CS2103T` Removes the module with code CS2103T from the contact
+
+### Editing tutorial group number : `edit grp`
+
+Edits the tutorial group number associated with the contact.
+
+Format: `edit grp <Name> /oldgrp <oldgrp> /newgrp <newgrp>`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+To remove a group number, simply leave out the newgrp section
+</div>
+
+Examples:
+*  `edit grp Fu Yiqiao /oldgrp T09 /newgrp T10` Edits the group from T09 to T10
+*  `edit grp Fu Yiqiao /oldgrp T09` Removes the group number from the contact
+
 
 ### Locating persons by name: `find`
 
@@ -225,10 +242,10 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add** | `new contact /name <Name> /mod <Optional: Module Code> /grp <Optional: Tutorial Group Number>` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit** | `edit name /oldname <oldName> /newname <newName>`<br> `edit mod <Name> /oldmod <oldMod> <newMod>`<br> `edit grp <Name> /oldgrp <oldgrp> /newgrp <newgrp>`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
