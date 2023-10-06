@@ -43,12 +43,8 @@ public class Messages {
                 .append(person.getPhone())
                 .append("; Email: ")
                 .append(person.getEmail())
-                .append("; Groups: ")
-                .append(person.getGroups());
-                //.append("; Address: ")
-                //.append(person.getAddress())
-                //.append("; Tags: ");
-        //person.getGroups().forEach(builder::append);
+                .append("; Groups: ");
+                person.getGroups().toStream().map(Group::getGroupName).forEach(builder::append);
         return builder.toString();
     }
 

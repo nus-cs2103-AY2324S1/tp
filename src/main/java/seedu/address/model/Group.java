@@ -38,8 +38,14 @@ public class Group {
                 && otherGroup.getGroupName().equals(getGroupName());
     }
 
-    public boolean isValidGroup(String name) {
-        return false;
+    /**
+     * Returns if the name of the group is valid.
+     * @param name The name of the group
+     * @return The validity of the group name.
+     */
+    //For now no constraints
+    public static boolean isValidGroup(String name) {
+        return true;
     }
 
     /**

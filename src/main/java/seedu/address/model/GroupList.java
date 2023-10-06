@@ -48,6 +48,10 @@ public class GroupList {
         }
     }
 
+    /**
+     * Converts the internal list to streams.
+     * @return Internal list into streams.
+     */
     public Stream<Group> toStream() {
         return internalList.stream();
     }

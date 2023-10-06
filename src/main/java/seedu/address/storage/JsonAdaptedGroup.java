@@ -10,28 +10,28 @@ import seedu.address.model.tag.Tag;
 /**
  * Jackson-friendly version of {@link Tag}.
  */
-class JsonAdaptedTag {
+class JsonAdaptedGroup {
 
-    private final String tagName;
+    private final String groupName;
 
     /**
-     * Constructs a {@code JsonAdaptedTag} with the given {@code tagName}.
+     * Constructs a {@code JsonAdaptedGroup} with the given {@code groupName}.
      */
     @JsonCreator
-    public JsonAdaptedTag(String tagName) {
-        this.tagName = tagName;
+    public JsonAdaptedGroup(String groupName) {
+        this.groupName = groupName;
     }
 
     /**
      * Converts a given {@code Tag} into this class for Jackson use.
      */
-    public JsonAdaptedTag(Tag source) {
-        tagName = source.tagName;
+    public JsonAdaptedGroup(Group source) {
+        groupName = source.getGroupName();
     }
 
     @JsonValue
     public String getTagName() {
-        return tagName;
+        return groupName;
     }
 
     /**
@@ -40,10 +40,10 @@ class JsonAdaptedTag {
      * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
      */
     public Group toModelType() throws IllegalValueException {
-        if (!Tag.isValidTagName(tagName)) {
-            throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
+        if (!Group.isValidGroup(groupName)) {
+            throw new IllegalValueException("illegal value");
         }
-        return new Group(tagName);
+        return new Group(groupName);
     }
 
 }

@@ -97,11 +97,17 @@ public class ParserUtil {
         return new Email(trimmedEmail);
     }
 
+    /**
+     * Parses a {@code String groupName} into an {@code GroupList}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code groupName} is invalid.
+     */
     public static GroupList parseGroup(String groupName) throws ParseException {
-        //maybe requireNonnull
+        requireNonNull(groupName);
         String trimmedGroupName = groupName.trim();
         GroupList groupList = new GroupList();
-        groupList.add(new Group(groupName));
+        groupList.add(new Group(trimmedGroupName));
         return groupList;
     }
 

@@ -25,12 +25,8 @@ public class Person {
     private final Email email;
 
     // Data fields
-    //private final Address address;
-    //private final Set<Tag> groupNames = new HashSet<>();
-    //private final PersonGrpList groupNames = new PersonGrpList();
-    //private final ArrayList<Group> personGroups = new ArrayList<Group>();
     private GroupList personGroups = new GroupList();
-    //private final Group group;
+
 
     /**
      * Every field must be present and not null.
@@ -59,14 +55,6 @@ public class Person {
     public GroupList getGroups() {
         return personGroups;
     }
-
-    /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-//    public Set<Tag> getTags() {
-//        return Collections.unmodifiableSet(tags);
-//    }
 
     /**
      * Returns true if both persons have the same name.

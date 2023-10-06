@@ -33,6 +33,7 @@ public class AddCommandParser implements Parser<AddCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddCommand parse(String args) throws ParseException {
+        GroupList groupList;
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_GROUPTAG);
 
@@ -41,13 +42,18 @@ public class AddCommandParser implements Parser<AddCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
+
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_GROUPTAG);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-        //Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        //Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        GroupList groupList = ParserUtil.parseGroup(argMultimap.getValue(PREFIX_GROUPTAG).get());
+
+        // edit here of add more than 1 group
+        if (arePrefixesPresent(argMultimap, PREFIX_GROUPTAG)) {
+            groupList = ParserUtil.parseGroup(argMultimap.getValue(PREFIX_GROUPTAG).get());
+        } else {
+            groupList = new GroupList();
+        }
 
         Person person = new Person(name, phone, email, groupList);
 
