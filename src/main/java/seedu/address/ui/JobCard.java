@@ -7,7 +7,7 @@ import javafx.scene.layout.Region;
 import seedu.address.model.job.Job;
 
 /**
- * An UI component that displays information of a {@code Job}.
+ * A UI component that displays information of a {@code Job}.
  */
 public class JobCard extends UiPart<Region> {
 
@@ -20,7 +20,6 @@ public class JobCard extends UiPart<Region> {
      *
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
-
     public final Job job;
 
     @FXML
@@ -31,6 +30,8 @@ public class JobCard extends UiPart<Region> {
     private Label id;
     @FXML
     private Label company;
+    @FXML
+    private Label remark;
 
     /**
      * Creates a {@code JobCode} with the given {@code Job} and index to display.
@@ -41,5 +42,6 @@ public class JobCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         role.setText(job.getRole().description);
         company.setText(job.getCompany().name);
+        remark.setText(job.getRemark().value);
     }
 }

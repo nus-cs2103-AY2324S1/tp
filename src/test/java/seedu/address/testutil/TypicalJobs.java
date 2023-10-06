@@ -38,6 +38,9 @@ public class TypicalJobs {
     public static final Job SPRINTER = new JobBuilder().withRole("Sprinter")
             .withCompany("Nike").build();
 
+    public static final Job STUDENT = new JobBuilder().withRole("Student")
+            .withCompany("Sparkletots").withRemark("Pays not bad").build();
+
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Job CHEF = new JobBuilder().withRole(VALID_ROLE_CHEF)
             .withCompany(VALID_COMPANY_CHEF).build();
@@ -61,6 +64,6 @@ public class TypicalJobs {
 
     public static List<Job> getTypicalJobs() {
         return new ArrayList<>(Arrays.asList(SOFTWARE_ENGINEER, TEACHER, WAITER, PILOT,
-                POLICE_OFFICER, FRUIT_SELLER, GRASS_CUTTER));
+                POLICE_OFFICER, FRUIT_SELLER, GRASS_CUTTER, STUDENT));
     }
 }

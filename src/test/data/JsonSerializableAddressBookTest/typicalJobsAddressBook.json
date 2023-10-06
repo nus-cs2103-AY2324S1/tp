@@ -2,24 +2,31 @@
   "_comment": "AddressBook save file which contains the same Job values as in TypicalJobs#getTypicalAddressBook()",
   "jobs" : [ {
     "role" : "Software Engineer",
-    "company" : "Google"
+    "company" : "Google",
+    "remark" : ""
   }, {
     "role" : "Teacher",
-    "company" : "NUS"
+    "company" : "NUS",
+    "remark" : ""
   }, {
     "role" : "Waiter",
-    "company" : "McDonalds"
+    "company" : "McDonalds",
+    "remark" : ""
   }, {
     "role" : "Pilot",
-    "company" : "Singapore Airlines"
+    "company" : "Singapore Airlines",
+    "remark" : ""
   }, {
     "role" : "Police Officer",
-    "company" : "SPF"
+    "company" : "SPF",
+    "remark" : ""
   }, {
     "role" : "Fruit Seller",
-    "company" : "ABC Fruits"
+    "company" : "ABC Fruits",
+    "remark" : ""
   }, {
     "role" : "Grass Cutter",
-    "company" : "XYZ Gardening"
+    "company" : "XYZ Gardening",
+    "remark" : ""
   } ]
 }

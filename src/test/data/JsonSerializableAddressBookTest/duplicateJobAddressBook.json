@@ -1,9 +1,11 @@
 {
   "jobs": [ {
     "role" : "Software Engineer",
-    "company" : "Google"
+    "company" : "Google",
+    "remark" : ""
   }, {
     "role" : "Software Engineer",
-    "company" : "Google"
+    "company" : "Google",
+    "remark" : ""
   } ]
 }

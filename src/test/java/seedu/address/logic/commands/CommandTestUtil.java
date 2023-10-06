@@ -27,6 +27,7 @@ public class CommandTestUtil {
     public static final String VALID_ROLE_CLEANER = "Cleaner";
     public static final String VALID_COMPANY_CHEF = "FineFoods";
     public static final String VALID_COMPANY_CLEANER = "Bleach Inc";
+    public static final String VALID_REMARK_CHEF = "Knows how to cook";
     public static final String ROLE_DESC_CHEF = " " + PREFIX_ROLE + VALID_ROLE_CHEF;
     public static final String ROLE_DESC_CLEANER = " " + PREFIX_ROLE + VALID_ROLE_CLEANER;
     public static final String COMPANY_DESC_CHEF = " " + PREFIX_COMPANY + VALID_COMPANY_CHEF;
