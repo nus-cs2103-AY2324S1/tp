@@ -296,6 +296,7 @@ Displays a list of all schedules in the address book in a table format.
 * If there are no schedules in the address book, displays a message telling the user to add a tutor with `add-s`.
 
 ![empty schedule list](images/emptyScheduleList.png)
+    
     <div markdown="block" class="alert alert-info">
 
     **:information_source: Information**<br>
