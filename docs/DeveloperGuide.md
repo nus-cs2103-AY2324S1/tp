@@ -292,7 +292,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | user                              | assign named tags to meetings   | organise meetings                        |
 | `*`      | user                              | filter meetings by tags         | view related meetings together           |
 
-| `* * *`
 
 _{More to be added}_
 

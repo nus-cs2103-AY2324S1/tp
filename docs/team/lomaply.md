@@ -9,11 +9,11 @@ OutBook is a desktop personal secretary application used for saving contacts and
 
 My contributions to the project are listed below.
 
-- **New Feature**: Added the ability to undo/redo previous commands.
+- **New Feature**:
 
   - to be added soon
 
-- **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=jason-raiin&breakdown=true)
+- **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=lomaply&breakdown=true)
 
 - **Project management**:
 
@@ -24,8 +24,9 @@ My contributions to the project are listed below.
   - to be added soon
 
 - **Documentation**:
-
-  - to be added soon
+  
+  - User Guide
+    - First draft of User Guide with initial plans for v1.2
 
 - **Community**:
 

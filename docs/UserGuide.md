@@ -1,9 +1,9 @@
 ---
 layout: page
-title: User Guide
+title: OutBook User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+OutBook is an app that allows busy professionals to manage their numerous contacts and meeting schedule.
 
 * Table of Contents
 {:toc}
@@ -14,22 +14,22 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `outbook.jar` from [here](https://github.com/AY2324S1-CS2103T-F12-4/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar outbook.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `listc` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `addc n/John Doe p/98765432 e/johnd@example.com o/NUS` : Adds a contact named `John Doe` to OutBook.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `deletec 3` : Deletes the 3rd contact shown in the current list.
 
    * `clear` : Deletes all contacts.
 
@@ -75,7 +75,7 @@ Format: `help`
 
 ### Adding a contact: `addc`
 
-Adds a contact to the address book.
+Adds a contact to OutBook.
 
 Format: `addc n/NAME p/PHONE_NUMBER e/EMAIL o/ORGANISATION [t/TAG]…​`
 
@@ -90,13 +90,13 @@ Examples:
 
 ### Listing all persons : `listc`
 
-Shows a list of all contacts in the address book.
+Shows a list of all contacts in OutBook.
 
 Format: `listc`
 
 ### Deleting a person : `deletec`
 
-Deletes the specified person from the address book.
+Deletes the specified person from OutBook.
 
 Format: `deletec INDEX`
 
@@ -105,13 +105,13 @@ Format: `deletec INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `listc` followed by `delete 2` deletes the 2nd person in the address book.
+* `listc` followed by `delete 2` deletes the 2nd person in the results of the `listc` command.
 * `findc Betsy` followed by `delete 1` deletes the 1st person in the results of the `findc` command.
 
 
 ### Editing a contact : `editc` [coming soon]
 
-Edits an existing contact in the address book.
+Edits an existing contact in OutBook.
 
 Format: `editc INDEX [n/NAME] [p/PHONE] [e/EMAIL] [o/ORGANISATION] [t/TAG]…​`
 
@@ -128,7 +128,7 @@ Examples:
 
 ### Viewing detailed contact information : `viewc`
 
-Views detailed information of a contact in the address book.
+Views detailed information of a contact in OutBook.
 
 Format: `viewc INDEX`
 
@@ -162,7 +162,7 @@ Examples:
 
 ### Adding a meeting: `addm`
 
-Adds a meeting to the address book.
+Adds a meeting to OutBook.
 
 Format: `addc m/TITLE a/LOCATION s/START e/END`
 
@@ -173,14 +173,14 @@ Examples:
 
 ### Listing all meetings : `listm`
 
-Shows a list of all meetings in the address book.
+Shows a list of all meetings in OutBook.
 
 Format: `listm`
 
 
 ### Deleting a meeting : `deletem`
 
-Deletes the specified meeting from the address book.
+Deletes the specified meeting from OutBook.
 
 Format: `deletec INDEX`
 
@@ -189,13 +189,13 @@ Format: `deletec INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `listm` followed by `deletem 2` deletes the 2nd meeting in the address book.
+* `listm` followed by `deletem 2` deletes the 2nd meeting in the results of the `listm` command.
 * `findm Project` followed by `deletem 1` deletes the 1st meeting in the results of the `findm` command.
 
 
 ### Viewing detailed meeting information : `viewm`
 
-Views detailed information of a meeting in the address book.
+Views detailed information of a meeting in OutBook.
 
 Format: `viewm INDEX`
 
@@ -238,7 +238,7 @@ Format: `addmc INDEX n/NAME`
 * `NAME` must refer to the name of an existing contact.
 
 Examples:
-* `addmc 3 n/Howen` assigns the contact `Howen` as a participant to the 3rd meeting in the address book.
+* `addmc 3 n/Howen` assigns the contact `Howen` as a participant to the 3rd meeting in OutBook.
 
 
 ### Remove contact from meeting: `rmmc`
@@ -254,12 +254,12 @@ Format: `rmmc INDEX n/NAME`
 * `NAME` must refer to the name of an existing contact that is currently a participant in the meeting.
 
 Examples:
-* `rmmc 3 n/Howen` removes the contact `Howen` from the 3rd meeting in the address book.
+* `rmmc 3 n/Howen` removes the contact `Howen` from the 3rd meeting in OutBook.
 
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from the displayed list in OutBook.
 
 Format: `clear`
 
@@ -271,11 +271,11 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+OutBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+OutBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
