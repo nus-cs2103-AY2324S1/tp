@@ -21,7 +21,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Shu Yang
 
-<img src="images/shuyang.png" width="200px">
+<img src="images/shuyangk.png" width="200px">
 
 [[github](http://github.com/shuyangk)]
 [[portfolio](team/shuyangk.md)]
