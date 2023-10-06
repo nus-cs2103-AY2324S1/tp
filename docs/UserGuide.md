@@ -256,6 +256,36 @@ Adds a schedule to a specified tutor.
 * `Wrong input: s/`: The start time entered is not in datetime format.
 * `Wrong input: e/`: The end time entered is not in datetime format..
 
+### List all schedules: `list-s`
+
+Displays a list of all schedules in the address book in a table format.
+
+
+![view schedule](images/viewSchedule.png)
+
+**Format:** `list-s`
+
+**Example:**
+* `list-s` shows all recorded schedules in the address book.
+
+**Expected output:**
+* Displays a table of schedules with columns for List number, Tutor Name, Start Time, and End Time
+* If there are no schedules in the address book, displays a message telling the user to add a tutor with `add-s`.
+
+![empty schedule list](images/emptyScheduleList.png)
+
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Information**<br>
+    
+* list-s command does not take in any parameters.
+* Any extraneous parameters after `list-s` will be ignored.
+    e.g. if the command specifies `list-s 123`, it will be interpreted as `list-s`.
+* No error messages as anything typed behind is ignored.
+    
+</div>
+
 ### Deleting a schedule: `delete-s`
 
 Deletes a schedule in the address book based on their index number in the table of schedules listed.
@@ -269,7 +299,7 @@ Deletes a schedule in the address book based on their index number in the table 
 * `list` followed by `delete-s 2` deletes the 2nd schedule in the schedule list.
 
 **Acceptable values for each parameter:**
-* `SCHEDULE_INDEX`: NUMBER Only numerical input that ranges from 1 to the last schedule shown in the list of schedules.
+* `SCHEDULE_INDEX`: Only numerical input that ranges from 1 to the last schedule shown in the list of schedules.
 
 **Expected output:**
 * `Schedule has been deleted: Tutor: John Doe; Start date: Sep 15, 2023 09:00; End date: Sep 15, 2023 11:00;`
