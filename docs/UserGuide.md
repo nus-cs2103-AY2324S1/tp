@@ -106,18 +106,18 @@ Adds a tutor to the address book.
 
 ![add tutor](images/addTutor.png)
 
-Format: `add-t n/NAME p/PHONE NUMBER e/EMAIL`
+**Format**: `add-t n/NAME p/PHONE NUMBER e/EMAIL`
 
-Example:
+**Example**:
 * `add-t n/John Doe p/98765432 e/johnd@example.com`
 * `add-t n/Betsy Crowe p/91234567 e/betsycrowe@example.com`
 
-Acceptable values for each parameter:
+**Acceptable values for each parameter**:
 * `NAME`: Only string input accepted
-* `PHONE`: NUMBER Only numerical input
+* `PHONE NUMBER`: Only numerical input
 * `EMAIL`: Only valid email addresses
 
-Expected output:
+**Expected output**:
 * `New tutor John Doe 98765432 johnd@example.com has been added.`
 
 Error messages:
@@ -139,17 +139,56 @@ Displays a list of all tutors in the address book in a table format.
 **Example**:
 * `list-t`
 
-**Acceptable values for each parameter**:
-* No acceptable values as list-t has no parameters
-
 **Expected Output**:
-* Displays a table of tutors with columns for Name, Phone Number, and Email like
-  the [image](#listing-all-tutors--list-t) above
+* `Listed all tutors`
 * If there are no tutors in the address book, displays a message telling the user
-  to add a tutor with add-t: `There are no tutors in the address book. Please use /add-t to add a tutor.`
+  to add a tutor with add-t: `There are no tutors in the address book. Please use add-t to add a tutor.`
+
+    <div markdown="block" class="alert alert-info">
+
+    **:information_source: Information**<br>
+    
+    * list-t command does not take in any parameters.
+    * Any extraneous parameters after `list-t` will be ignored.
+      e.g. if the command specifies `list-t 123`, it will be interpreted as `list-t`.
+    * No error messages as anything typed behind is ignored.
+    
+    </div>
+
+
+### Locating tutors by name: `find`
+
+Find tutors whose names contain any of the given keywords.
+
+![find tutor](images/findTutor.png)
+
+**Format**: `find KEYWORD [MORE_KEYWORDS]`
+
+**Examples**:
+* `find John` returns `John Smith` and `John Doe`
+* `find Alex David Li` returns `Alex David Li`
+
+**Acceptable values for each parameter**:
+* `KEYWORD`: Any input accepted
+
+    <div markdown="block" class="alert alert-info">
+
+    **:information_source: Search behaviour**<br>
+
+    * Search is case-insensitive. e.g. `hans` will match `Hans`
+    * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+    * Only the tutor name is searched.
+    * Only full words will be matched. e.g. `Han` will not match `Hans`
+    * Tutors matching at least one keyword will be returned (i.e. OR search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+    </div>
+
+**Expected output**:
+* `2 tutors listed!`
+* `0 tutors listed!`
 
 **Error messages**:
-* No error messages as this command ignores extra parameters.
+* `Invalid command format!`: No search keyword provided.
 
 ### Deleting a tutor: `delete-t`
 
