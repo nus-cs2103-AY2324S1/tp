@@ -260,3 +260,15 @@ delete Member | deleteMember INDEX<br> e.g., deleteMember 3
 delete Applicant | deleteApplicant INDEX <br> e.g., deleteApplicant 3
 view Members | viewMembers
 view Applicants | viewApplicants
+
+## Command summary
+
+| Action              | Format, Examples                                                                                                                                                                                 |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **View Members**    | `viewMembers`                                                                                                                                                                                    |
+| **view Applicants** | `viewApplicants`                                                                                                                                                                                 |
+| **Add Member**      | `addMember /name {memberName} /number {phoneNumber} /email {email} /tele {telegramHandle}`   e.g., `addMember /name Alicia /number 92345678`                                                     |
+| **Add Applicant**   | `addApplicant /name {applicantName} /email {email}` e.g,  `addApplicant /name Alicia /email abc@gmail.com`                                                                                       |
+| **Delete Member**   | `deleteMember INDEX` e.g., `deleteMember 3`                                                                                                                                                      |
+| **Delete Applicant**| `deleteApplicant INDEX`  e.g., `deleteApplicant 3`                                                                                                                                               |
+
