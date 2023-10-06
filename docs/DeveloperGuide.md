@@ -58,7 +58,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -407,9 +407,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Every operation should run in less than 100 milliseconds.
+5. The application should be able to scale horizontally and vertically to accommodate increasing data of user loads.
+6. The uptime percentage of the application should be greater than or equal 99.9%.
+7. The app should be able to handle unexpected input and edge cases, without making the app to crash or any data loss.
+8. The user interface should be friendly enough for users who are not tech-savvy.
+9. Testing should be implemented to avoid errors.
+10. The application does not require for internet connection to work properly.
+11. The size of the application in the hard disk should be no larger than 100MB, exclusive of the data.
 
 *{More to be added}*
 
