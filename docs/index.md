@@ -1,6 +1,6 @@
 ---
 layout: page
-title: AddressBook Level-3
+title: Tran$act
 ---
 
 [![CI Status](https://github.com/AY2324S1-CS2103T-W13-3/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2324S1-CS2103T-W13-3/tp/actions)
