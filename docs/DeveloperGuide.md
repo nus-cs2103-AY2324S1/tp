@@ -13,7 +13,7 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+This project is based on the [AddressBook-Level3 project](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -314,6 +314,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
+**Use case: Install the app**
+MSS 
+1. User execute the installation package
+2. The app ask for continue or cancel the installation
+3. User respond by indicating continue
+4. The app install the app
+5. The app informs the user that the installation is successful
+Use Case ends
+
+Extensions
+* 3a. User respond by indicating cancel
+  * 3a1. The app close the installation package
+  * Use case ends
+
+* 4a. A error occur during installation
+  * 4a1. The app informs the user that the installation is unsuccessful and display reasons
+  * Use case ends
+
 **Use case: Delete a person**
 
 **MSS**
@@ -341,15 +359,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+1.  Should work on any Windows, Linux, and MacOs as long as it has Java `11` or above installed.
+2.  Should be able to hold up to 1000 persons without a noticeable(> 1 second) sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  The application should respond and load all data within three seconds.
+5.  The response time for adding, updating, or deleting student records should be within two seconds.
+6.  The system should be usable with a user interface that is intuitive enough for users who have not used similar applications before.
+7.  Users will only have access to their own students' data.
+8.  Should there be an irregular termination of the app, the data should not be corrupted.
+9.  The app should respond to user text input within 0.2 second.
 
-*{More to be added}*
+
+
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 
 --------------------------------------------------------------------------------------------------------------------
