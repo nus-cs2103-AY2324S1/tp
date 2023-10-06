@@ -340,6 +340,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: UC05 - Find a musician based on their name**
+
+**MSS**
+
+1.  User requests to find a musician with a keyword
+2.  BandConnect++ shows a list of musicians that matches the keyword
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+
 *{More to be added}*
 
 ### Non-Functional Requirements
