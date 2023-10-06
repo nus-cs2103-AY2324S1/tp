@@ -6,7 +6,6 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.Group;
-import seedu.address.model.GroupList;
 import seedu.address.model.person.Person;
 
 /**
@@ -44,7 +43,7 @@ public class Messages {
                 .append("; Email: ")
                 .append(person.getEmail())
                 .append("; Groups: ");
-                person.getGroups().toStream().map(Group::getGroupName).forEach(builder::append);
+        person.getGroups().toStream().map(Group::getGroupName).forEach(builder::append);
         return builder.toString();
     }
 

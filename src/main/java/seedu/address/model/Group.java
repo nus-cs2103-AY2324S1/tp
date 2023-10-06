@@ -9,9 +9,12 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
+/**
+ * Class representing a group
+ */
 public class Group {
-    ObservableList<Person> listOfGroupMates = FXCollections.observableArrayList();
-    String groupName;
+    private final ObservableList<Person> listOfGroupMates = FXCollections.observableArrayList();
+    private final String groupName;
 
     /**
      * Name field must be present and not null.
