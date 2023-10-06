@@ -13,7 +13,7 @@ My contributions to the project are listed below.
 
   - to be added soon
 
-- **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=jason-raiin&breakdown=true)
+- **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=howenc&breakdown=true)
 
 - **Project management**:
 
