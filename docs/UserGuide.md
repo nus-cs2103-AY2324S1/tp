@@ -251,15 +251,7 @@ Got it! These are the applicants for the CCA.
 	There are no applicants for the CCA :--(
 ```
 
-## Command summary
-Action | Format, Examples
---------|------------------
-add Member | addMember /name {memberName} /number {phoneNumber} /email {email} /tele {telegramHandle} <br> e.g., addMember /name Alicia /number 92345678
-add Applicant | addApplicant /name {applicantName} /email {email} <br> e.g., addApplicant /name Alicia /email abc@gmail.com
-delete Member | deleteMember INDEX<br> e.g., deleteMember 3
-delete Applicant | deleteApplicant INDEX <br> e.g., deleteApplicant 3
-view Members | viewMembers
-view Applicants | viewApplicants
+--------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
