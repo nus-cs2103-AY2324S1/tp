@@ -33,6 +33,10 @@ public class PersonBuilder {
     private Ic ic;
     private Set<Tag> tags;
 
+    /**
+     * Constructor for the PersonBuilder class that initialises
+     * a PersonBuilder instance populated with default values.
+     */
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
