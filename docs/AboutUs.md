@@ -25,7 +25,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/sasmik23)]
 [[portfolio](team/sasmik23.md)]
 
-- Role: User Documentation
+- Role: Developer
+- Responsibilities: User Documentation
 
 ### Wong Joon Hung
 
