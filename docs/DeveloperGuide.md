@@ -352,7 +352,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. TutorConnect shows an error message.
 
       Use case resumes at step 2.
-  
+
 * 3b. The schedule parameters is invalid.
 
     * 3b1. TutorConnect shows an error message.
@@ -430,7 +430,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. TutorConnect shows an error message.
 
       Use case resumes at step 2.
-  
+
 * 3b. The tutor information parameters is invalid.
 
     * 3b1. TutorConnect shows an error message.
@@ -552,13 +552,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse. 
-4. Should work without requiring an installer 
-5. _GUI_ should work well for standard screen resolutions 1920x1080 and higher, and, for screen scales 100% and 125%. 
-6. _GUI_ should be usable for resolutions 1280x720 and higher, and, for screen scales 150%. 
-7. Should not require the user to have an internet connection to use. 
-8. Should be a single-user application. 
-9. Should persistently save data in a human-readable text file between sessions. 
+3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Should work without requiring an installer
+5. _GUI_ should work well for standard screen resolutions 1920x1080 and higher, and, for screen scales 100% and 125%.
+6. _GUI_ should be usable for resolutions 1280x720 and higher, and, for screen scales 150%.
+7. Should not require the user to have an internet connection to use.
+8. Should be a single-user application.
+9. Should persistently save data in a human-readable text file between sessions.
 10. Should be able to transfer the data file to another device with no loss of data.
 
 *{More to be added}*
@@ -566,7 +566,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Use case**: A description of a set of sequences of actions, including variants, that a system performs to yield an observable result of value to an actor 
+* **Use case**: A description of a set of sequences of actions, including variants, that a system performs to yield an observable result of value to an actor
 * **GUI**: Graphical user interface
 
 --------------------------------------------------------------------------------------------------------------------

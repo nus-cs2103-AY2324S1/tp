@@ -95,7 +95,7 @@ On top of these functionalities, we believe that tuition centre management must 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`)
   will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple  
+* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple
   lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
 </div>
@@ -106,18 +106,18 @@ Adds a tutor to the address book.
 
 ![add tutor](images/addTutor.png)
 
-Format: `add-t n/NAME p/PHONE NUMBER e/EMAIL`
+**Format**: `add-t n/NAME p/PHONE NUMBER e/EMAIL`
 
-Example:
+**Example**:
 * `add-t n/John Doe p/98765432 e/johnd@example.com`
 * `add-t n/Betsy Crowe p/91234567 e/betsycrowe@example.com`
 
-Acceptable values for each parameter:
+**Acceptable values for each parameter**:
 * `NAME`: Only string input accepted
-* `PHONE`: NUMBER Only numerical input
+* `PHONE NUMBER`: Only numerical input
 * `EMAIL`: Only valid email addresses
 
-Expected output:
+**Expected output**:
 * `New tutor John Doe 98765432 johnd@example.com has been added.`
 
 Error messages:
@@ -139,17 +139,79 @@ Displays a list of all tutors in the address book in a table format.
 **Example**:
 * `list-t`
 
-**Acceptable values for each parameter**:
-* No acceptable values as list-t has no parameters
-
 **Expected Output**:
-* Displays a table of tutors with columns for Name, Phone Number, and Email like 
-  the [image](#listing-all-tutors--list-t) above
+* `Listed all tutors`
 * If there are no tutors in the address book, displays a message telling the user
-  to add a tutor with add-t: `There are no tutors in the address book. Please use /add-t to add a tutor.`
+  to add a tutor with add-t: `There are no tutors in the address book. Please use add-t to add a tutor.`
+
+    <div markdown="block" class="alert alert-info">
+
+    **:information_source: Information**<br>
+    
+    * list-t command does not take in any parameters.
+    * Any extraneous parameters after `list-t` will be ignored.
+      e.g. if the command specifies `list-t 123`, it will be interpreted as `list-t`.
+    * No error messages as anything typed behind is ignored.
+    
+    </div>
+
+
+### Locating tutors by name: `find`
+
+Find tutors whose names contain any of the given keywords.
+
+![find tutor](images/findTutor.png)
+
+**Format**: `find KEYWORD [MORE_KEYWORDS]`
+
+**Examples**:
+* `find John` returns `John Smith` and `John Doe`
+* `find Alex David Li` returns `Alex David Li`
+
+**Acceptable values for each parameter**:
+* `KEYWORD`: Any input accepted
+
+    <div markdown="block" class="alert alert-info">
+
+    **:information_source: Search behaviour**<br>
+
+    * Search is case-insensitive. e.g. `hans` will match `Hans`
+    * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+    * Only the tutor name is searched.
+    * Only full words will be matched. e.g. `Han` will not match `Hans`
+    * Tutors matching at least one keyword will be returned (i.e. OR search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+    </div>
+
+**Expected output**:
+* `2 tutors listed!`
+* `0 tutors listed!`
 
 **Error messages**:
-* No error messages as this command ignores extra parameters.
+* `Invalid command format!`: No search keyword provided.
+
+### Deleting a tutor: `delete-t`
+
+Deletes a tutor in the address book based on their index number in the table.
+
+![delete tutor](images/deleteTutor.png)
+
+**Format**: `delete-t TUTOR_INDEX`
+
+**Examples**:
+* `delete-t 5` deletes the tutor that is indexed as 5 in the address book.
+* `list` followed by `delete-t 2` deletes the 2nd person in the address book.
+
+**Acceptable values for each parameter**:
+* `TUTOR_INDEX`: Only accepts numerical value
+
+**Expected output**:
+* `Tutor has been deleted: Alex Yeoh; Phone: 87438807;
+  Email: alexyeoh@example.com; Address: Blk 30 Geylang Street 29, #06-40`
+
+**Error messages**:
+* `Index number given is out of range`: Given index is out of range.
+* `Invalid parameter given`: Parameter given is not a numerical value.
 
 ### Deleting a tutor: `delete-t`
 
@@ -234,15 +296,16 @@ Displays a list of all schedules in the address book in a table format.
 * If there are no schedules in the address book, displays a message telling the user to add a tutor with `add-s`.
 
 ![empty schedule list](images/emptyScheduleList.png)
-<div markdown="block" class="alert alert-info">
+    <div markdown="block" class="alert alert-info">
 
-**Error messages**:
-* No error messages to show.
-
-**:information_source: Information**<br>
-
-Note that any additional parameters introduced after `list-s` will be ignored.
-</div>
+    **:information_source: Information**<br>
+    
+    * list-s command does not take in any parameters.
+    * Any extraneous parameters after `list-s` will be ignored.
+      e.g. if the command specifies `list-s 123`, it will be interpreted as `list-s`.
+    * No error messages as anything typed behind is ignored.
+    
+    </div>
 
 ### Deleting a schedule: `delete-s`
 
@@ -253,11 +316,11 @@ Deletes a schedule in the address book based on their index number in the table 
 **Format:** `delete-s SCHEDULE_INDEX`
 
 **Example:**
-* `delele-s 5` deletes the schedule that is indexed as 5 in the schedule list.
+* `delete-s 5` deletes the schedule that is indexed as 5 in the schedule list.
 * `list` followed by `delete-s 2` deletes the 2nd schedule in the schedule list.
 
 **Acceptable values for each parameter:**
-* `SCHEDULE_INDEX`: NUMBER Only numerical input that ranges from 1 to the last schedule shown in the list of schedules
+* `SCHEDULE_INDEX`: Only numerical input that ranges from 1 to the last schedule shown in the list of schedules.
 
 **Expected output:**
 * `Schedule has been deleted: Tutor: John Doe; Start date: Sep 15, 2023 09:00; End date: Sep 15, 2023 11:00;`
