@@ -77,15 +77,15 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 
-### Adding a new contact: `new contact`
+### Adding a new contact: `new contact` [Coming Soon]
 
-Creates a new contact with the specified name and module code(s).
+Creates a new contact with the specified name and course code.
 
-Format: `new contact /name <Name> /mod <Optional: Module Code> /grp <Optional: Tutorial Group Number>`
+Format: `new contact /name <Name> /course <Optional: Course Code> /grp <Optional: Tutorial Group Number>`
 
 Examples:
 * `new contact /name Fu Yiqiao`
-* `new contact /name Fu Yiqiao /mod CS2103T /grp T09`
+* `new contact /name Fu Yiqiao /course CS2103T /grp T09`
 
 ### Marking attendance of student: `mark` [Coming Soon]
 
@@ -101,7 +101,7 @@ Examples:
 * `mark /id A0123456E /attendance 1` Marks student with student ID, A0123456E, as present.
 * `mark /id A0123456E /attendance 0` Marks student with student ID, A0123456E, as absent.
 
-### Viewing summary of attendance : `list attendance`
+### Viewing summary of attendance : `list attendance` [Coming Soon]
 
 Shows a summary of attendance records.
 
@@ -128,7 +128,7 @@ Examples:
 *  `find /name Anthony` Finds all contacts with the name "Anthony".
 *  `find /id A0123456H` Finds all contacts with the student ID "A0123456H".
 
-### Listing students : `list students`
+### Listing students : `list students` [Coming Soon]
 
 Shows a list of students.
 
@@ -141,7 +141,7 @@ Examples:
 *  `list students` Shows a list of all students.
 *  `list students /tg T09` Shows a list of the students in tutorial group T09.
 
-### Editing a contact name : `edit name`
+### Editing a contact name : `edit name` [Coming Soon]
 
 Edits the contact name.
 
@@ -150,11 +150,11 @@ Format: `edit name /oldname <oldName> /newname <newName>`
 Examples:
 *  `edit name /oldname Fu Yiqiao /newname Tan Liyan` Edits the student with name Fu Yiqiao to Tan Liyan
 
-### Editing a contact module : `edit mod`
+### Editing a contact course : `edit course`
 
 Edits the module associated with the contact.
 
-Format: `edit mod <Name> /oldmod <oldMod> <newMod>`
+Format: `edit course <Name> /oldcourse <oldCourse> <newCourse>`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 To remove a module, simply leave the newMod section empty
@@ -164,7 +164,7 @@ Examples:
 *  `edit mod Fu Yiqiao /oldmod CS2103T CS2101` Edits the module with code CS2103T to CS2101
 *  `edit mod Fu Yiqiao /oldmod CS2103T` Removes the module with code CS2103T from the contact
 
-### Editing tutorial group number : `edit grp`
+### Editing tutorial group number : `edit grp` [Coming Soon]
 
 Edits the tutorial group number associated with the contact.
 
@@ -272,10 +272,10 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `new contact /name <Name> /mod <Optional: Module Code> /grp <Optional: Tutorial Group Number>` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add** | `new contact /name <Name> /course <Optional: Course Code> /grp <Optional: Tutorial Group Number>` <br>
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit name /oldname <oldName> /newname <newName>`<br> `edit mod <Name> /oldmod <oldMod> <newMod>`<br> `edit grp <Name> /oldgrp <oldgrp> /newgrp <newgrp>`
+**Edit** | `edit name /oldname <oldName> /newname <newName>`<br> `edit course <Name> /oldcourse <oldCourse> <newCourse>`<br> `edit grp <Name> /oldgrp <oldgrp> /newgrp <newgrp>`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
