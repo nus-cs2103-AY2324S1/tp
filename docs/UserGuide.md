@@ -96,7 +96,7 @@ Phone number should be 8 numbers, and must start with 6, 8, or 9
 Telegram handles can only contain alphanumeric characters and underscore!
 ```
 
-##Delete Member
+## Delete Member
 
 ### Usage: 
 
@@ -128,7 +128,7 @@ There are no members to be deleted.
 ### Acceptable values for parameters:
 - index: Index of member to be deleted (starting from 1).
 
-##View Members
+## View Members
 
 ### Usage:
 
