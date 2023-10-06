@@ -271,8 +271,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * Sort users by priority, courses taken/taking, specialisation(s) taken/intending to take, graduation year
 
 * Offline, with a static online page that contains user manual and download link
-* Search by any details, i.e. phone number, email, specialisations,
-  courses taken, graduation year.
+* Search by any details, i.e. phone number, email, specialisations, courses taken, graduation year.
 
 
 ### User stories
