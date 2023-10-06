@@ -48,12 +48,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Documentation
 
-### James Doe
+### Tan Yang Yi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/yytan25.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/tanyyyming.md)]
+[[github](http://github.com/yytan25)]
+[[portfolio](team/yytan25.md)]
 
 * Role: Developer
 * Responsibilities: UI
