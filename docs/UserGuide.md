@@ -50,7 +50,8 @@ You will see a message indicating successful addition of the musician like below
 
 **Upon failure:**
 
-Should you input a musician which is already in your contact book(ie. have the same phone number or email as an existing contact), you will see an error message showing the possible error, please input a different phone/email for the current contact or modify the original contact's relevant details.
+Should you input a musician which is already in your contact book (ie. have the same phone number or email as an existing contact),
+you will see an error message showing the possible error. Please input a different phone/email for the current contact or modify the original contact's relevant details.
 
 ### Removing a musician contact: `remove`
 
@@ -76,32 +77,37 @@ containing 5 musicians), or input a non-positive index (e.g. `remove 0` or `remo
 
 Please verify that the index is correct and try again.
 
+### Tagging a musician with instruments: `tag instrument`
+
+Tags a musician with one or more instruments he/she is proficient in.
+
+**Format:** `tag instrument INDEX i/INSTRUMENT…`
+
+**Constraints:**
+* `INDEX` must be a positive integer 1, 2, 3, …​
+* The instrument tag must be *non-empty*.
+* You have to supply *at least one instrument tag* to the musician you are tagging.
+
+**Examples:**
+* `tag instrument 1 i/Piano i/Violin`
+* `tag instrument 2 i/Drums`
+
+**Upon success:**
+
+You will see a message indicating successful addition of instruments like below:
+[insert image]
+
+**Upon failure:**
+
+Should you try to tag a musician with zero instrument tags or empty tags, i.e., `tag instrument 1 i/` or
+`tag instrument 1`, you will see a message like below:
+[insert image]
+
 ### Tagging a musician with genres: `tag genre`
 
 Tags a musician with one or more genres he/she is proficient in.
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
-
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-
-### Locating musicians by name: `find`
-
-Finds musician whose names contain any of the given keywords.
-
-**Format:** `find KEYWORD`
-
-Examples:
-* `find John` returns `john` and `John Doe`
-
-Upon Success:  
-[To be added]
+**Format:** `tag genre INDEX g/GENRE…`
 
 **Constraints:**
 * `INDEX` must be a positive integer 1, 2, 3, …​
@@ -109,24 +115,38 @@ Upon Success:
 * You have to supply *at least one genre tag* to the musician you are tagging.
 
 **Examples:**
-* `tag 1 g/rock g/pop`
-* `tag 2 g/jazz`
+* `tag genre 1 g/rock g/pop`
+* `tag genre 2 g/jazz`
 
 **Upon success:**
 
-You will see a message indicating successful addition of the musician like below:
+You will see a message indicating successful addition of tags like below:
 [insert image]
 
 **Upon failure:**
 
-Should you try to tag a musician with zero genre tags or empty tags, i.e., `tag 1 g/` or `tag 1`, you will see a message like below:
+Should you try to tag a musician with zero genre tags or empty tags, i.e., `tag genre 1 g/` or `tag genre 1`,
+you will see a message like below:
 [insert image]
 
-### Clearing all entries : `clear`
+### Locating musicians by name: `find`
 
-Clears all entries from the address book.
+Finds all musicians whose names contain any of the given keywords.
 
-Format: `clear`
+**Format:** `find KEYWORD`
+
+Examples:
+* `find John` returns `john` and `John Doe`
+
+**Upon success:**
+
+You will see a list of musicians as follows:
+[insert image]
+
+**Upon failure:**
+
+Should you input `find` without any keyword, you will see a message like below:
+[insert image]
 
 ### Exiting the program : `exit`
 
@@ -136,23 +156,13 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-
-### Editing the data file
-
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
-
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
-</div>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
+BandConnect++ data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Troubleshooting
+
+[to be added soon]
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -160,10 +170,10 @@ _Details coming soon ..._
 ## Command summary
 
 
-| Action             | Format, Examples                                                                                 |
-|--------------------|--------------------------------------------------------------------------------------------------|
-| **Add**            | `add n/NAME p/PHONE_NUMBER e/EMAIL`<br> e.g., `add n/John Doe p/98928479 e/johndpiano@xmail.com` |
-| **Remove**         | `remove INDEX`<br> e.g., `remove 1`                                                              |
-| **Tag Instrument** | `tag instrument n/NAME i/TAG…​`<br> e.g.,`tag instrument n/John Doe i/piano i/guitar`            |
-| **Tag Genre**      | `tag genre INDEX g/GENRE…​`<br> e.g., `tag genre 1 g/rock g/pop`                                 |
-| **Find**           | `find KEYWORD`                                                                                   |
+| Action             | Format, Examples                                                                                               |
+|--------------------|----------------------------------------------------------------------------------------------------------------|
+| **Add**            | `add n/NAME p/PHONE_NUMBER e/EMAIL i/INSTRUMENT`<br> e.g., `add n/John Doe p/98928479 e/johndpiano@xmail.com i/Piano` |
+| **Remove**         | `remove INDEX`<br> e.g., `remove 1`                                                                            |
+| **Tag Instrument** | `tag instrument INDEX i/INSTRUMENT…​`<br> e.g.,`tag instrument 1 i/piano i/guitar`                             |
+| **Tag Genre**      | `tag genre INDEX g/GENRE…​`<br> e.g., `tag genre 1 g/rock g/pop`                                               |
+| **Find**           | `find KEYWORD`                                                                                                 |
