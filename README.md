@@ -1,4 +1,4 @@
-# Tutor Connect 
+# Tutor Connect
 [![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/AY2324S1-CS2103T-T17-3/tp/actions)
 [![codecov](https://codecov.io/gh/AY2324S1-CS2103T-T17-3/tp/graph/badge.svg?token=CY67NSXKQZ)](https://codecov.io/gh/AY2324S1-CS2103T-T17-3/tp)
 
@@ -31,7 +31,7 @@ To verify, perform the following steps:
 
 3. Double click the jar file to launch the application.
 
-> If you are a **Mac** user, you may encounter a warning that says the jar file cannot be opened because it is from an unidentified developer. 
+> If you are a **Mac** user, you may encounter a warning that says the jar file cannot be opened because it is from an unidentified developer.
 > To continue:
 >
 >    i. **Right click** on the jar file and select `Open With > JavaLauncher (default)`.
@@ -39,4 +39,4 @@ To verify, perform the following steps:
 >    ii. Press **Open** when prompted.
 
 ## Acknowledgements
-This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).	
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
