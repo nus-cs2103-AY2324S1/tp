@@ -378,27 +378,36 @@ _{More to be added}_
 ### Non-Functional Requirements
 
 **Performance**
+
 1.  Should be able to respond to user input within 2 seconds under normal operating conditions.
 2.  Should be able to handle a database of up to 1000 contacts and 500 meetings without a significant performance degradation.
 
 **Reliability**
+
 1.  Data integrity should be ensured under any usage conditions through automatic data backup.
 
 **Usability**
+
 1.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 2.  Application GUI should be intuitive wherever possible, to reduce training for new users.
 
 **Documentation**
+
 1.  User documentation should include a comprehensive user manual.
 2.  Developer documentation should cover the architecture, code structure, and guidelines for future development.
 
 **Compatibility**
+
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 
 _{More to be added}_
 
 ### Glossary
 
+- **User Interface (UI)**: The point of interaction between a user and a software application, with both graphical and non-graphical elements.
+- **Application Programming Interface (API)**: A set of rules and tools allowing different software applications to communicate and exchange information.
+- **Command Line Interface (CLI)**: A text-based interface for interacting with a computer program or operating system, where users enter commands.
+- **Graphical User Interface (GUI)**: A visual interface using graphical elements like windows, icons, and buttons for user interaction with a software application.
 - **Mainstream OS**: Windows, Linux, Unix, OS-X
 - **Private contact detail**: A contact detail that is not meant to be shared with others
 
