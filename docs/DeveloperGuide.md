@@ -50,8 +50,6 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 
 **Use case: Add an application**
 
-**Use case: Add an application**
-
 _MSS_
 1. User requests to add an application, specifying the company name
 2. System adds the application
@@ -133,7 +131,12 @@ _Extensions_
 
 **Use case: List applications**
 
-(MIGUEL)
+_MSS_
+1. User requests to list applications
+2. System shows a list of applications
+
+   Use case ends.
+
 
 ---
 
