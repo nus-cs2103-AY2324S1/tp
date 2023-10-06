@@ -125,7 +125,7 @@ public class EditCommandParserTest {
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
-        assertParseSuccess(parser, userInput, expectedCommand, PersonType.PATIENT);
+        assertParseSuccess(parser, userInput, expectedCommand, PersonType.SPECIALIST);
     }
 
     @Test
