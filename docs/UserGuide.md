@@ -48,7 +48,7 @@ Examples:
 Expected output(success):
 ```agsl
 Adds a fosterer to the address book.
-Format: add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS animal/ANIMAL_NAME t/HOUSING_TYPE t/TYPE_OF_ANIMAL_FOSTERED…​
+Format: add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS animal/ANIMAL_NAME t/AVAILABILITY t/HOUSING_TYPE t/TYPE_OF_ANIMAL_FOSTERED/WANTED…​
 ```
 
 Expected output (fail):
@@ -98,7 +98,8 @@ Oops! There seems to be an error, please check the format of your command again.
 Edits the details of a fosterer stored in the address book.
 
 **Format**: `edit INDEX`
-Alias: `view`
+
+**Alias: `view`**
 
 **Parameter**: `INDEX`
 
