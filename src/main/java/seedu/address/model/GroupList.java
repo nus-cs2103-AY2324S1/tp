@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Stream;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -46,6 +47,11 @@ public class GroupList {
             throw new GroupNotFoundException();
         }
     }
+
+    public Stream<Group> toStream() {
+        return internalList.stream();
+    }
+
 
     @Override
     public boolean equals(Object other) {

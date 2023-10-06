@@ -2,12 +2,15 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.Group;
+import seedu.address.model.GroupList;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -22,19 +25,23 @@ public class Person {
     private final Email email;
 
     // Data fields
-    private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
+    //private final Address address;
+    //private final Set<Tag> groupNames = new HashSet<>();
+    //private final PersonGrpList groupNames = new PersonGrpList();
+    //private final ArrayList<Group> personGroups = new ArrayList<Group>();
+    private GroupList personGroups = new GroupList();
+    //private final Group group;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, GroupList personGroups) {
+        requireAllNonNull(name, phone, email, personGroups);
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
+        this.personGroups = personGroups;
+
     }
 
     public Name getName() {
@@ -49,17 +56,17 @@ public class Person {
         return email;
     }
 
-    public Address getAddress() {
-        return address;
+    public GroupList getGroups() {
+        return personGroups;
     }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
-    }
+//    public Set<Tag> getTags() {
+//        return Collections.unmodifiableSet(tags);
+//    }
 
     /**
      * Returns true if both persons have the same name.
@@ -93,14 +100,13 @@ public class Person {
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && personGroups.equals(otherPerson.personGroups);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, personGroups);
     }
 
     @Override
@@ -109,8 +115,7 @@ public class Person {
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
-                .add("address", address)
-                .add("tags", tags)
+                .add("groups", personGroups)
                 .toString();
     }
 

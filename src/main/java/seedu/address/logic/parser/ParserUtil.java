@@ -9,6 +9,8 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Group;
+import seedu.address.model.GroupList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -93,6 +95,14 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    public static GroupList parseGroup(String groupName) throws ParseException {
+        //maybe requireNonnull
+        String trimmedGroupName = groupName.trim();
+        GroupList groupList = new GroupList();
+        groupList.add(new Group(groupName));
+        return groupList;
     }
 
     /**
