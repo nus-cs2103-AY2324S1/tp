@@ -13,7 +13,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Wee Hung
 
-<img src="images/weehung.jpg" width="200px">
+<img src="images/weeehung.png" width="200px">
 
 [[homepage](https://github.com/WeeeHung)]
 [[github](https://github.com/WeeeHung)]
