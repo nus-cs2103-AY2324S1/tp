@@ -25,15 +25,15 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-* `list` : Lists all contacts.
+   * `list` : Lists all contacts.
 
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
-* `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete 3` : Deletes the 3rd contact shown in the current list.
 
-* `clear` : Deletes all contacts.
+   * `clear` : Deletes all contacts.
 
-* `exit` : Exits the app.
+   * `exit` : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -130,10 +130,10 @@ Examples:
 
 Removes a musician contact from the address book.
 
-**Format:** `remove n/NAME`
+**Format:** `remove INDEX`
 
 **Examples:**
-* `remove n/Betsy Crowe`
+* `remove INDEX`
 
 **Upon success:**
 
@@ -143,10 +143,12 @@ You will see a message indicating successful removal of the musician contact lik
 
 **Upon failure:**
 
-Should you attempt to remove a musician contact whose name does not exist in your address book, you will see a message like below.
-Please verify that there are no typographical errors in the musician's name and try again.
+Should you input an index greater than the number of musicians in your address book (e.g. `remove 6` in an address book
+containing 5 musicians), or input a non-positive index (e.g. `remove 0` or `remove -1`), you will see a message like below.
 
 [insert image]
+
+Please verify that the index is correct and try again.
 
 ### Clearing all entries : `clear`
 
@@ -196,8 +198,8 @@ _Details coming soon ..._
 | Action             | Format, Examples                                                                                 |
 |--------------------|--------------------------------------------------------------------------------------------------|
 | **Add**            | `add n/NAME p/PHONE_NUMBER e/EMAIL`<br> e.g., `add n/John Doe p/98928479 e/johndpiano@xmail.com` |
-| **Delete**         | `delete n/NAME`<br> e.g., `delete n/Betsy Crowe`                                                 |
+| **Remove**         | `remove INDEX`<br> e.g., `remove 1`                                                              |
 | **Tag Instrument** | `tag instrument n/NAME i/TAG…​`<br> e.g.,`tag instrument n/John Doe i/piano i/guitar`            |
-| **Tag Genre**      | `tag genre n/NAME t/TAG…​`<br> e.g., `tag genre n/John Doe t/pop t/rock`                         |
-| **View All**       | `view all`                                                                                       |
+| **Tag Genre**      | `tag genre INDEX g/GENRE…​`<br> e.g., `tag genre 1 g/rock g/pop`                                 |
+| **Find**           | `find KEYWORD`                                                                                   |
 
