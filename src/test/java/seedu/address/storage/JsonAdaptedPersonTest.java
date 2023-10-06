@@ -118,12 +118,12 @@ public class JsonAdaptedPersonTest {
     }
 
     @Test
-    public void toModelType_invalidGender_throwsIllegalArgumentException() {
+    public void toModelType_invalidGender_throwsIllegalValueException() {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_REMARK,
                         INVALID_GENDER, VALID_NRIC, VALID_TAGS);
         String expectedMessage = Gender.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalArgumentException.class, expectedMessage, person::toModelType);
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
     @Test

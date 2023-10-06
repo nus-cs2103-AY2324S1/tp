@@ -36,7 +36,7 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("remark") String remark, @JsonProperty("gender") String gender,
-            @JsonProperty("nric") String ic, @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+            @JsonProperty("nric") String ic, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -116,10 +116,16 @@ class JsonAdaptedPerson {
         if (gender == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Gender.class.getSimpleName()));
         }
+        if (!Gender.isValidGender(gender)) {
+            throw new IllegalValueException(Gender.MESSAGE_CONSTRAINTS);
+        }
         final Gender modelGender = new Gender(gender);
 
         if (ic == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Ic.class.getSimpleName()));
+        }
+        if (!Ic.isValidIc(ic)) {
+            throw new IllegalValueException(Ic.MESSAGE_CONSTRAINTS);
         }
         final Ic modelIc = new Ic(ic);
 
