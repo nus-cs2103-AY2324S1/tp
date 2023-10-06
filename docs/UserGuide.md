@@ -120,7 +120,7 @@ To edit name and address of your tutee:
 **Expected Output when the command fails**: Please input a valid index
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
+* `list` followed by `delete 2` deletes the 2nd person in the list.
 
 
 --------------------------------------------------------------------------------------------------------------------
