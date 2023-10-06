@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-UNO FAs (One Financial Advisors app) is a **desktop app for Financial Advisors to manage client's contacts, 
+UNOFAS (One Financial Advisors app) is a **desktop app for Financial Advisors to manage client's contacts, 
 optimized for use via a Command Line Interface** (CLI) while still having the benefits of a 
 Graphical User Interface (GUI). If you can type fast, UNO FAs can help you manage and retrieve client's information better than traditional GUI apps.
 
