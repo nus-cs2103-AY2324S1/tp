@@ -280,20 +280,25 @@ courses taken, graduation year.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | create a new contact | keep a record of individuals in my network |
-| `* * *` | user | add more details about an existing contact | store information about my contacts for future reference |
-| `* * *` | user | update details of a contact | replace outdated details with more accurate information |
-| `* * *`  | user                                       | delete a contact          | remove entries that are no longer relevant             |
-| `* * `  | user                                       | find a contact by name    | locate details of contacts without having to go through the entire list |
-| `*`      | user with many contacts | sort contacts by their details | locate contacts with special characteristics that I am looking for |
-| `* ` | user with many contacts | filter contacts based on their details | locate contacts who fulfil certain conditions that I am looking for |
-| `* *` | new user | have a quick-start guide | start using the basic functionality of the app as soon as possible|
-| `* *` | new user | use commonly-available keyboard shortcuts (e.g. ctrl-c for copy, ctrl-v for paste) | use the shortcuts I am accustomed to|
-| `* *` | NUS computing student | use simple and easy-to-remember shortcuts | have no trouble remembering and executing the shortcuts|
-
+| Priority | As a …​                 | I want to …​                                                                             | So that I can…​                                                        |
+|---------|-------------------------|------------------------------------------------------------------------------------------|------------------------------------------------------------------------|
+| `* * *` | new user                | see usage instructions                                                                   | refer to instructions when I forget how to use the App                 |
+| `* * *` | user                    | create a new contact                                                                     | keep a record of individuals in my network                             |
+| `* * *` | user                    | add more details about an existing contact                                               | store information about my contacts for future reference               |
+| `* * *` | user                    | update details of a contact                                                              | replace outdated details with more accurate information                |
+| `* * *` | user                    | delete a contact                                                                         | remove entries that are no longer relevant                             |
+| `* * `  | user                    | find a contact by name                                                                   | locate details of contacts without having to go through the entire list |
+| `*`     | user with many contacts | sort contacts by their details                                                           | locate contacts with special characteristics that I am looking for     |
+| `* `    | user with many contacts | filter contacts based on their details                                                   | locate contacts who fulfil certain conditions that I am looking for    |
+| `* *`   | new user                | have a quick-start guide                                                                 | start using the basic functionality of the app as soon as possible     |
+| `* *`   | new user                | use commonly-available keyboard shortcuts (e.g. ctrl-c for copy, ctrl-v for paste)       | use the shortcuts I am accustomed to                                   |
+| `* *`   | NUS computing student   | use simple and easy-to-remember shortcuts                                                | have no trouble remembering and executing the shortcuts                |
+| `*`     | user                     | open my email app from my NetworkBook app                                                | quickly send an email when needed                                      |
+| `* *`   | user                     | open the relevant social media platform from the NetworkBook app                         | quickly contact them on social media                                       |
+| `* *`   | user                     | an easily accessible and static online page containing a download link to the mobile app | quickly download the app on my device when needed                                 |
+| `* *`   | user                     | visit an easily accessible and static online page containing a user manual               | quickly refer to instructions when needed                                       |
+| `*`     | user                     | navigate to the relevant section of the online manual directly from the catalogue        | quickly find instructions on the feature I want to use                                |
+| `* *`   | user                     | export my contacts in the form of readable text        | easily share my contacts with others                                |
 
 ### Use cases
 
@@ -321,6 +326,137 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. AddressBook shows an error message.
 
       Use case resumes at step 2.
+
+
+**Use case: Open email app from NetworkBook**
+
+**MSS**
+
+1.  User requests to list contacts.
+2.  AddressBook shows a list of contacts.
+3.  User requests to email a specific contact in the list.
+4.  AddressBook loads the default email app of the user and pre-fills the contact's email in the recipient field.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The user has not logged in to his default email app.
+
+    * 3a1. User will be taken to the sign-in page of his default email app.
+
+      Use case ends.
+
+**Use case: Open social media platform from NetworkBook**
+
+**MSS**
+
+1.  User requests to list contacts.
+2.  AddressBook shows a list of contacts.
+3.  User requests to contact a specific contact in the list via a particular social media platform.
+4.  AddressBook loads the social media platform page of the specific contact in the list.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The social media platform page link is invalid.
+
+    * 3a1. The user will see the error page displayed by the browser used to load the page link.
+
+      Use case ends.
+
+* 3b. The page is valid but fails to load.
+
+    * 3b1. The user will see the error page displayed by the browser used to load the page link.
+
+      Use case ends.
+
+* 3c. The user has not logged in to his social media app.
+
+    * 3c1. The user will be taken to the sign-in page of his social media app.
+
+      Use case ends.
+
+**Use case: Download link to mobile app from online page**
+
+**MSS**
+
+1. User requests to visit the online page. 
+2. The online page renders.
+3. User selects download link to mobile app.
+4. Mobile app starts downloading on the user's device.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The online page fails to load.
+
+    * 1a1. The user will see the error page displayed by the browser used to load the page link.
+
+      Use case ends.
+
+**Use case: Access user manual on online page**
+
+**MSS**
+
+1.  User requests to visit the online page.
+2. The online page renders.
+3. User selects link to visit the user manual.
+4. The user manual page renders.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The online page fails to load.
+
+    * 1a1. The user will see the error page displayed by the browser used to load the page link.
+
+      Use case ends.
+  
+* 3a. The user manual page fails to load.
+
+    * 3a1. The user will see the error page displayed by the browser used to load the page link.
+
+      Use case ends.
+
+**Use case: Navigate from catalogue to relevant section of online manual**
+
+**Preconditions:** User is on user manual page.
+
+**MSS**
+
+1. User chooses a manual section title within the catalog.
+2. Browser navigates to display relevant section of online manual. 
+
+    Use case ends.
+
+**Use case: Export contact in readable text**
+
+**MSS**
+
+1.  User requests to list contacts.
+2.  AddressBook shows a list of contacts.
+3.  User requests to export a specific contact in the list.
+4.  AddressBook exports a text file storing user details in a readable format.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
 
 *{More to be added}*
 
