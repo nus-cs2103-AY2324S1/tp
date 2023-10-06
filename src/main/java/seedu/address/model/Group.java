@@ -38,6 +38,10 @@ public class Group {
                 && otherGroup.getGroupName().equals(getGroupName());
     }
 
+    public boolean isValidGroup(String name) {
+        return false;
+    }
+
     /**
      * Removes the person from the group.
      * The person must exist in the group.
