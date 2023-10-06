@@ -32,7 +32,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/qz1004.png" width="200px">
 
 
-[[github](http://github.com/qz1004)] [[portfolio](team/qz1004.md)]
+[[github](http://github.com/qz1004)]
+[[portfolio](team/qz1004.md)]
 
 * Role: Developer
 * Responsibilities: In charge of Model component
@@ -49,10 +50,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Linus Lee
 
-<img src="images/LoMaply.png" width="200px">
+<img src="images/lomaply.png" width="200px">
 
 [[github](http://github.com/LoMaply)]
-[[portfolio](team/LoMaply.md)]
+[[portfolio](team/lomaply.md)]
 
 * Role: Developer
 * Responsibilities: In charge of UI component
