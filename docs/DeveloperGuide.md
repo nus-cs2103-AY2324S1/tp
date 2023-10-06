@@ -441,6 +441,40 @@ Use case ends.
     * 3b1. AddressBook shows an error message indicating that the specified status is invalid.  
       Use case resumes at step 3.
 
+**Use case: Add social profile to person's details**
+
+**MSS**
+1. User requests to add social profile (linkedin or github)
+2. JABPro shows that command has been executed successfully
+3. JABPro adds the social profile to the person's existing details in the list
+   Use case ends.
+
+**Extensions**
+* 2a. User does not provide valid information for the person.
+    * 2a1. JABPro displays error message.
+      Use case resumes at Step 1.
+* 2b. User requests to add social profile other than LinkedIn or Github
+    * 2b1. JABPro displays error message.
+      Use case resumes at Step 1.
+
+**Use case: Open social profile for a person**
+
+**MSS**
+1. User requests to open social profile for a person
+2. JABPro shows that command has been executed successfully
+3. JABPro redirects to the webpage of the corresponding profile
+   Use case ends.
+
+**Extension**
+* 1a. Person does not exist in the list.
+    * 1a1. JABPro displays error message.
+    Use case ends.
+* 1b. Social profile requested other than LinkedIn or Github
+    * 1b1. JABPro displays error message.
+    Use case ends.
+* 3a. User does not exist on the social platform
+  Use case ends.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
