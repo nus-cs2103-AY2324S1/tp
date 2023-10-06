@@ -413,10 +413,43 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
-### Glossary
+## Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+- **Mainstream OS**:
+    - Refers to the most commonly used operating systems in the market, including Windows, Linux, Unix, and OS-X (MacOS).
+
+- **Private contact detail**:
+    - A specific piece of information or data about a contact that isn't intended for public view or distribution.
+
+- **.puml files**:
+    - Files used to define and create diagrams in the PlantUML format. These are typically used for illustrating software design or architecture.
+
+- **JavaFx UI framework**:
+    - A Java library used for developing user interfaces. It provides functionalities for creating windows, dialogs, buttons, text fields, and other UI components.
+
+- **JSON**:
+    - Stands for JavaScript Object Notation. It's a lightweight data-interchange format that is easy for humans to read and write and easy for machines to parse and generate.
+
+- **MSS**:
+    - Stands for Main Success Scenario. It describes the primary pathway of a use case that leads to a successful outcome.
+
+- **API**:
+    - Stands for Application Programming Interface. It's a set of tools, definitions, and protocols for building and interacting with software and applications.
+
+- **AddressBook**:
+    - In the context of the provided document, it refers to the core data structure or component in the application that keeps a record of contacts or persons.
+
+- **ObservableList**:
+    - A list that allows listeners to track changes when they occur. Typically used in GUI applications to update the UI when underlying data changes.
+
+- **UI**:
+    - Stands for User Interface. Refers to the space where interactions between humans and machines occur. The goal of this interaction is effective operation and control of the machine from the human end.
+
+- **Command**:
+    - In the context of the provided document, it refers to a directive given by the user to perform certain operations or functions in the application.
+
+- **PlantUML**:
+    - A component that allows to quickly write diagrams in a plain text format, which it then processes to produce visual diagrams.
 
 --------------------------------------------------------------------------------------------------------------------
 
