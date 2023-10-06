@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.job.Company;
 import seedu.address.model.job.Job;
-import seedu.address.model.job.Remark;
 import seedu.address.model.job.Role;
 
 /**
@@ -18,17 +17,14 @@ class JsonAdaptedJob {
 
     private final String role;
     private final String company;
-    private final String remark;
 
     /**
      * Constructs a {@code JsonAdaptedJob} with the given job details.
      */
     @JsonCreator
-    public JsonAdaptedJob(@JsonProperty("role") String role, @JsonProperty("company") String company,
-                          @JsonProperty("remark") String remark) {
+    public JsonAdaptedJob(@JsonProperty("role") String role, @JsonProperty("company") String company) {
         this.role = role;
         this.company = company;
-        this.remark = remark;
     }
 
     /**
@@ -37,7 +33,6 @@ class JsonAdaptedJob {
     public JsonAdaptedJob(Job source) {
         role = source.getRole().description;
         company = source.getCompany().name;
-        remark = source.getRemark().value;;
     }
 
     /**
@@ -62,12 +57,7 @@ class JsonAdaptedJob {
         }
         final Company modelCompany = new Company(company);
 
-        if (remark == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
-        }
-        final Remark modelRemark = new Remark(remark);
-
-        return new Job(modelRole, modelCompany, modelRemark);
+        return new Job(modelRole, modelCompany);
     }
 
 }

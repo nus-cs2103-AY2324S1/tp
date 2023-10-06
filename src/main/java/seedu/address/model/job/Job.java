@@ -15,16 +15,14 @@ public class Job {
     // Identity fields
     private final Role role;
     private final Company company;
-    private final Remark remark;
 
     /**
      * Every field must be present and not null.
      */
-    public Job(Role role, Company company, Remark remark) {
+    public Job(Role role, Company company) {
         requireAllNonNull(role, company);
         this.role = role;
         this.company = company;
-        this.remark = remark;
     }
 
     public Role getRole() {
@@ -33,10 +31,6 @@ public class Job {
 
     public Company getCompany() {
         return company;
-    }
-
-    public Remark getRemark() {
-        return remark;
     }
 
     /**
@@ -84,7 +78,6 @@ public class Job {
         return new ToStringBuilder(this)
                 .add("role", role)
                 .add("company", company)
-                .add("remark", remark)
                 .toString();
     }
 

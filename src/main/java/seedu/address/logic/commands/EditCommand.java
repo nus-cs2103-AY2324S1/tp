@@ -17,7 +17,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.job.Company;
 import seedu.address.model.job.Job;
-import seedu.address.model.job.Remark;
 import seedu.address.model.job.Role;
 
 /**
@@ -86,9 +85,8 @@ public class EditCommand extends Command {
 
         Role updatedRole = editJobDescriptor.getRole().orElse(jobToEdit.getRole());
         Company updatedCompany = editJobDescriptor.getCompany().orElse(jobToEdit.getCompany());
-        Remark updatedRemark = jobToEdit.getRemark();
 
-        return new Job(updatedRole, updatedCompany, updatedRemark);
+        return new Job(updatedRole, updatedCompany);
     }
 
     @Override

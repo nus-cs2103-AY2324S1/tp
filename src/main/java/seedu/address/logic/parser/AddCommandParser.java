@@ -10,7 +10,6 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.job.Company;
 import seedu.address.model.job.Job;
-import seedu.address.model.job.Remark;
 import seedu.address.model.job.Role;
 
 /**
@@ -35,10 +34,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ROLE, PREFIX_COMPANY);
         Role role = ParserUtil.parseRole(argMultimap.getValue(PREFIX_ROLE).get());
         Company company = ParserUtil.parseCompany(argMultimap.getValue(PREFIX_COMPANY).get());
-        Remark remark = new Remark("");
 
-
-        Job job = new Job(role, company, remark);
+        Job job = new Job(role, company);
 
         return new AddCommand(job);
     }

@@ -6,7 +6,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.job.Company;
-import seedu.address.model.job.Remark;
 import seedu.address.model.job.Role;
 
 /**
@@ -57,21 +56,6 @@ public class ParserUtil {
             throw new ParseException(Company.MESSAGE_CONSTRAINTS);
         }
         return new Company(trimmedCompany);
-    }
-
-    /**
-     * Parses a {@code String Company} into a {@code Company}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code company} is invalid.
-     */
-    public static Remark parseRemark(String remark) throws ParseException {
-        requireNonNull(remark);
-        String trimmedRemark = remark.trim();
-        if (!Remark.isValidRemark(trimmedRemark)) {
-            throw new ParseException(Remark.MESSAGE_CONSTRAINTS);
-        }
-        return new Remark(trimmedRemark);
     }
 
 }
