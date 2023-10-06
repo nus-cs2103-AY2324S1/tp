@@ -114,10 +114,11 @@ Acceptable values for each parameter:
 | `DEPARTMENT` | Alphabets and ascii characters i.e. &, - |
 
 Expected outputs:
+
 | Outcome | Output |
 | --- | --- |
-| command success | Employee added! Johnny \| 12345678 \| johnnysins@gmail.com \| Johnny Street, block 69, #05-05 \| R&D |
-| command fail | Please check the parameter inputs |
+| **Success** | Employee added! Johnny \| 12345678 \| johnnysins@gmail.com \| Johnny Street, block 69, #05-05 \| R&D |
+| **Fail** | Please check the parameter inputs |
 
 ### Listing all employees : `list`
 
