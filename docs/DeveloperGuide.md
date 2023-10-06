@@ -363,7 +363,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: UC05 - Find a musician based on their name**
+**Use case: UC06 - Find a musician based on their name**
 
 **MSS**
 
