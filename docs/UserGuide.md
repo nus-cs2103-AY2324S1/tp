@@ -1,197 +1,254 @@
----
-layout: page
-title: User Guide
----
+# User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+ClubMembersContacts is an app to help EXCO members of School of Computing's CCAs to manage the contacts of all their members and applicants in a fast and convenient yet powerful way through a CLI or text-based interface for greater speed.
+  * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC) than what students usually write in beginner-level SE modules, without being overwhelmingly big.
+  * It comes with a **reasonable level of user and developer documentation**.
 
-* Table of Contents
-{:toc}
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
-
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have Java 11 or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest clubmemberscontact.jar from [here](https://github.com/se-edu/addressbook-level3/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+4. Open a command terminal, cd into the folder you put the jar file in, and use the java -jar addressbook.jar command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. 
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * viewMembers : view all members in the members list.
+  
+   * viewApplicants : view all applicants in the applicants list.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * addMember /name Alicia /number 92345678 : The member will be added with the specified name and phone number
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * deleteMember 3 : The specified member at the index will be deleted from the member list. (index starts at 1)
 
-   * `clear` : Deletes all contacts.
 
-   * `exit` : Exits the app.
-
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
 
-<div markdown="block" class="alert alert-info">
+## Add Member
 
-**:information_source: Notes about the command format:**<br>
+### Usage: 
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+`addMember /name {memberName} /number {phoneNumber} /email {email} /tele {telegramHandle}`
 
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+### Acceptable values for parameters:
+- memberName: Only alphabetical characters, @, () are allowed
+- phoneNumber: Only 8 digits allowed, must start with 6, 8, or 9
+- email: Must follow the format of xyz@abc.wsd
+- telegramHandle: Only alphanumeric characters, and underscore, are allowed
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+### Example of usage:
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+`addMember /name Alicia /number 92345678`
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+### Expected Outcome:
+```
+The member will be added with specified details: name and phone number
+```
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</div>
+### If member added successfully (Success)
 
-### Viewing help : `help`
+```
+Got it! This member has been added: Alicia (Phone number: 92345678)
+```
 
-Shows a message explaning how to access the help page.
+### If name or number parameter is not specified (Failure):
 
-![help message](images/helpMessage.png)
+```
+Incorrect Usage! Usage: addMember /name {memberName} /number {phoneNumber}
+```
 
-Format: `help`
+### If name contains invalid characters (Failure):
+
+```
+Name can only contain alphabetical characters and: @, (, )
+```
+
+### If phone number is invalid (Failure):
+
+```
+Phone number should be 8 numbers, and must start with 6, 8, or 9
+```
+
+### If telegram handle is invalid (Failure):
+
+```
+Telegram handles can only contain alphanumeric characters and underscore!
+```
+
+##Delete Member
+
+### Usage: 
+
+`deleteMember {index}`
+
+### Expected Outcome:
+```
+The specified member at the index will be deleted from the member list.(index starts at 1)
+```
+
+### If member is found (Success):
+
+```
+Got it! This member has been removed: {memberName}
+```
+
+### If index is out of range (Failure):
+
+```
+Invalid index! Use viewMembers to see all members and their indices.
+```
+
+### If there are 0 members (Failure):
+
+```
+There are no members to be deleted.
+```
+
+### Acceptable values for parameters:
+- index: Index of member to be deleted (starting from 1).
+
+##View Members
+
+### Usage:
+
+`viewMembers`
+
+### Expected Outcome:
+Generates a list of all existing members in the members list.
+
+### If there is at least 1 member (Success):
+
+```
+Got it! These are the current members in the CCA.
+	1. Alicia
+	2. Rui Jia
+	3. Jonas
+	4. Win Sheng
+	5. Alfred
+```
+
+### If there are 0 members (Failure):
+```
+There are no members in the CCA!
+```
+
+## Add Applicant
+
+### Expected Outcome:
+The specified applicant will be added to the applicant list.
+
+### Usage: 
+
+`addApplicant /name {applicantName} /email {email}`
+
+### Acceptable values for parameters:
+applicantName: Only alphabetical characters, @, () are allowed
+email: Must follow the format of xyz@abc.wsd
+
+### Example of usage:
+
+`addApplicant /name Alicia /email abc@gmail.com`
+
+### Expected Outcome:
+The applicant will be added with specified details: name and email.
+
+### If member added successfully (Success):
+
+```
+Got it! This applicant has been added: Alicia (Email : abc@gmail.com)
+```
+
+### If name or email parameter is not specified (Failure):
+
+```
+Incorrect Usage! Usage: addApplicant /name {applicantName} /email {email}
+```
+
+### If name contains invalid characters (Failure):
+
+```
+Name can only contain alphabetical characters and: @, (, )
+```
+
+### If email has invalid format (Failure):
+```
+Email must be in the format of abc@def.ghi
+```
+
+## Delete Applicant
+
+### Usage: 
+
+`deleteApplicant {index}`
+
+### Expected Outcome:
+The specified member at the index will be deleted from the member list. (Index starts at 1)
 
 
-### Adding a person: `add`
+### If applicant is found (Success):
+```
+	Got it! This applicant has been removed: {applicantName}
+```
 
-Adds a person to the address book.
+### If index is out of range (Failure):
+```
+Invalid index! Use viewApplicants to see all members and their indices.
+```
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+### If 0 members in member list (Failure)
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
+```
+There are no applicants to be deleted.
+```
 
-Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+### Acceptable values for parameters:
+- index: Index of applicant to be deleted (starting from 1).
 
-### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
 
-Format: `list`
+## View Applicants
 
-### Editing a person : `edit`
+### Usage:
 
-Edits an existing person in the address book.
+`viewApplicants`
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+### Expected Outcome:
+Generates a list of all existing members in the applicant list.
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+### If there is at least 1 applicant (Success):
+```
+Got it! These are the applicants for the CCA.
+	1. Alicia
+	2. Rui Jia
+	3. Jonas
+	4. Win Sheng
+	5. Alfred
+```
 
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-
-### Locating persons by name: `find`
-
-Finds persons whose names contain any of the given keywords.
-
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
-
-### Deleting a person : `delete`
-
-Deletes the specified person from the address book.
-
-Format: `delete INDEX`
-
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-
-### Clearing all entries : `clear`
-
-Clears all entries from the address book.
-
-Format: `clear`
-
-### Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
-
-### Saving the data
-
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-
-### Editing the data file
-
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
-
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
-</div>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
---------------------------------------------------------------------------------------------------------------------
-
-## FAQ
-
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
-
---------------------------------------------------------------------------------------------------------------------
-
-## Known issues
-
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-
---------------------------------------------------------------------------------------------------------------------
+### If there are 0 applicants (Failure):
+```
+	There are no applicants for the CCA :--(
+```
 
 ## Command summary
-
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+add Member | addMember /name {memberName} /number {phoneNumber} /email {email} /tele {telegramHandle} <br> e.g., addMember /name Alicia /number 92345678
+add Applicant | addApplicant /name {applicantName} /email {email} <br> e.g., addApplicant /name Alicia /email abc@gmail.com
+delete Member | deleteMember INDEX<br> e.g., deleteMember 3
+delete Applicant | deleteApplicant INDEX <br> e.g., deleteApplicant 3
+view Members | viewMembers
+view Applicants | viewApplicants
