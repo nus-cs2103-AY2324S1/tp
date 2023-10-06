@@ -340,7 +340,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: UC05 - Find a musician based on their name**
+**Use case: UC05 - Tag a musician with the genre(s) he/she specialises in**
+
+**MSS**
+
+1.  User requests to list musicians
+2.  BandConnect++ shows a list of musicians
+3.  User tags a specific musician with one or more genres
+4.  BandConnect++ tags the musician appropriately
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. BandConnect++ detects an empty genre tag or no genre tag.
+
+    * 3a1. BandConnect++ shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: UC06 - Find a musician based on their name**
 
 **MSS**
 
@@ -354,7 +377,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The list is empty.
 
   Use case ends.
-
 
 *{More to be added}*
 
