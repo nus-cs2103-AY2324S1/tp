@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-# User Guide
+# ClubMemberContacts
 
 ClubMembersContacts is an app to help EXCO members of School of Computing's CCAs to manage the contacts of all their members and applicants in a fast and convenient yet powerful way through a CLI or text-based interface for greater speed.
   * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC) than what students usually write in beginner-level SE modules, without being overwhelmingly big.
