@@ -146,7 +146,6 @@ Format: `find KEYWORD`
 
 Examples:
 * `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
 
 Upon Success:  
 [To be added]
