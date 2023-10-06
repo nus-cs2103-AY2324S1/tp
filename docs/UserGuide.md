@@ -2,129 +2,55 @@
 layout: page
 title: User Guide
 ---
+# BandConnect++ User Guide
+BandConnect++ is a powerful desktop app that helps musicians manage contact with other musicians to easily form a band. You can use it to manage musician contacts, select band members, and form a band of your preference, all within a few clicks or a few seconds of typing!
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+--------------------------------------------------------------------------------------------------------------------
+## About this guide
+Welcome to the *BandConnect++ User Guide*! This user guide provides an in-depth documentation on everything about *BandConnect++*, including installation, set up, features, common FAQ and troubleshooting recommendations. 
 
-* Table of Contents
-{:toc}
+For first-time users, please go to the [Quick start](#quick-start) section below to start an end-to-end tutorial that gets you onboard. Should you encounter any difficulty understanding the terminology, don't forget to refer to the [Glossary](#glossary)!
+
+### Table of Contents
+* [Glossary](#glossary)
+* [Quick start](#quick-start)
+* [Features](#features)
+* [Command Summary](#command-summary)
+* [Troubleshooting](#troubleshooting)
+
+
+## Glossary
+To be added.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
-
-1. Ensure you have Java `11` or above installed in your Computer.
-
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
-
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
-
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
-
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
-
-   * `list` : Lists all contacts.
-
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
-
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
-
-   * `clear` : Deletes all contacts.
-
-   * `exit` : Exits the app.
-
-1. Refer to the [Features](#features) below for details of each command.
+To be added.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
 
-<div markdown="block" class="alert alert-info">
+### Formatting Convention
 
-**:information_source: Notes about the command format:**<br>
+### Adding a musician contact: `add`
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+Adds a musician to the contact book. Name, phone number, email, and instrument can be recorded.
 
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+**Format:** `add n/NAME p/PHONE_NUMBER e/EMAIL i/INSTRUMENT`
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+**Examples:**
+* `add n/John Doe p/98765432 e/johnd@example.com i/Violin`
+* `add n/Betsy Crowe e/pianistbetsy@smtp.com p/87988039 i/Piano`
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+**Upon success:**
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+You will see a message indicating successful addition of the musician like below:
+![img.png](images/addJohnDoe.png)
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</div>
+**Upon failure:**
 
-### Viewing help : `help`
-
-Shows a message explaning how to access the help page.
-
-![help message](images/helpMessage.png)
-
-Format: `help`
-
-
-### Adding a person: `add`
-
-Adds a person to the address book.
-
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
-
-Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
-
-### Listing all persons : `list`
-
-Shows a list of all persons in the address book.
-
-Format: `list`
-
-### Editing a person : `edit`
-
-Edits an existing person in the address book.
-
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
-
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without specifying any tags after it.
-
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-
-### Locating persons by name: `find`
-
-Finds persons whose names contain any of the given keywords.
-
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+Should you input a musician which is already in your contact book(ie. have the same phone number or email as an existing contact), you will see an error message showing the possible error, please input a different phone/email for the current contact or modify the original contact's relevant details.
 
 ### Removing a musician contact: `remove`
 
@@ -133,7 +59,7 @@ Removes a musician contact from the address book.
 **Format:** `remove INDEX`
 
 **Examples:**
-* `remove INDEX`
+* `remove 1`
 
 **Upon success:**
 
@@ -149,6 +75,37 @@ containing 5 musicians), or input a non-positive index (e.g. `remove 0` or `remo
 [insert image]
 
 Please verify that the index is correct and try again.
+
+### Tagging a musician with genres: `tag genre`
+
+Tags a musician with one or more genres he/she is proficient in.
+
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* You can remove all the person’s tags by typing `t/` without specifying any tags after it.
+
+**Format:** `tag genre INDEX g/GENRE...`
+
+**Constraints:**
+* `INDEX` must be a positive integer 1, 2, 3, …​
+* The genre tag must be *non-empty*.
+* You have to supply *at least one genre tag* to the musician you are tagging.
+
+**Examples:**
+* `tag 1 g/rock g/pop`
+* `tag 2 g/jazz`
+
+**Upon success:**
+
+You will see a message indicating successful addition of the musician like below:
+[insert image]
+
+**Upon failure:**
+
+Should you try to tag a musician with zero genre tags or empty tags, i.e., `tag 1 g/` or `tag 1`, you will see a message like below:
+[insert image]
 
 ### Clearing all entries : `clear`
 
@@ -180,20 +137,13 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
-
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+## Troubleshooting
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Known issues
-
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-
---------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
+
 
 | Action             | Format, Examples                                                                                 |
 |--------------------|--------------------------------------------------------------------------------------------------|
@@ -202,4 +152,3 @@ _Details coming soon ..._
 | **Tag Instrument** | `tag instrument n/NAME i/TAG…​`<br> e.g.,`tag instrument n/John Doe i/piano i/guitar`            |
 | **Tag Genre**      | `tag genre INDEX g/GENRE…​`<br> e.g., `tag genre 1 g/rock g/pop`                                 |
 | **Find**           | `find KEYWORD`                                                                                   |
-
