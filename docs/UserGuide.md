@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 User Guide
+# HealthSync User Guide
 
 HealthSync is a **desktop app for managing patient details, optimised for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, HealthSync can help you organise and manage patient details faster than traditional GUI apps
 
@@ -132,7 +132,7 @@ Edits an existing patient's details in the address book.
 
 Format: `edit n/NAME or id/IC_NUMBER [field] ...`
 
-* Edits the person with the specified name or id. 
+* Edits the person with the specified name or id.
 * If an invalid name or id is passed, an error message will be logged.
 * At least one of the optional fields must be provided.
 * Existing fields will be updated to the input values.
@@ -182,13 +182,28 @@ Examples:
 
 Deletes the specified person or the fields for the person from HealthSync
 
-Format: `delete [identification] [field]`
+Patient information includes:
+- Patient’s contacts
+- Patient’s medical history
+- Patient’s ward information
+- Patient’s upcoming appointment time(s)
 
-* Deletes the person with the specified `identification`.
-* Identification refers to the person's name or IC number
-* The identification must be a valid input
+Format: `delete n/NAME or id/IC_NUMBER [field]`
+
+* Deletes the person with the specified `n/NAME or id/IC_NUMBER`.
+* The name or ic number must be a valid input
 * To delete a specified field only instead of the entire person, we indicate the field behind of the identification
 * If multiple people has the same name, HealthSync will display a list of people with that name together with their IC number.
+
+Acceptable values for each parameter:
+* String
+
+Expected outputs when the command succeeds:
+* `Patient n/NAME or id/IC_NUMBER has been removed from the database`
+* `The [field] of Patient n/NAME or id/IC_NUMBER has been removed from the database`
+
+Expected output when the command fails:
+* `Error code’s message (i.e. Invalid NRIC/ Invalid Field(s) / Database Error) `
 
 Examples:
 * `Delete id/S9987362H` deletes all the details of the person with the specified IC number from HealthSync.
@@ -199,7 +214,7 @@ Examples:
 Original format, can consider using
 list followed by delete 2 deletes the 2nd person in the address book.
 find Betsy followed by delete 1 deletes the 1st person in the results of the find command.
---> 
+-->
 
 ### Clearing all entries : `clear`
 

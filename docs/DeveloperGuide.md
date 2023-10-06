@@ -277,7 +277,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: 
+**Value proposition**:
 
 HealthSync caters to counter staff, enabling them to register and access patient information within 2-3 minutes. It offers a user-friendly platform, optimizing contact management, patient tracking, department coordination, and health record access, ensuring efficient patient management, appointment scheduling, and comprehensive health record retrieval, enhancing care delivery and saving time.
 
@@ -365,7 +365,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 2b1. HealthSync shows a list of patients matching the identifier in the list.
     * 2b2. User indicates the patient to delete in the list.
-      
+
       Use case continues from step 3.
 
 **Use case: UC3 - Delete fields from a patient**
@@ -411,7 +411,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to change a specific user's fields based on an identifier 
+1.  User requests to change a specific user's fields
+based on an identifier
     with a new value in the list.
 2.  HealthSync searches for the patient in the list.
 3.  HealthSync edits the specified patient's fields in the list.
