@@ -429,6 +429,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **API**: Application Programming Interface that enables application to use capabilities or data from another application
+* **Financial Advisor**: A person who provides financial advice to clients
+* **Financial Products**: A product connected with the way a person manages or uses money(eg. Insurance)
+* **Client**: A person whos financial products are being managed by a financial advisor
+* **Portfolio value**: The intrinsic value of all financial products being held under a clients name
+* **Central Repository**: A centralised storage location for all user data
+* **Contact details**: Name, email, phone number, next-of-kin name, next-of-kin phone number and home address of a client
+* **Manager**: A person who is a superior in charge of managing and mentoring a group of financial advisors.
 
 --------------------------------------------------------------------------------------------------------------------
 
