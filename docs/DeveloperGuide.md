@@ -257,42 +257,51 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* has a need to manage a significant number of musician contacts
+* has a need to categorise musicians by genre or instrument
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: manage contacts faster than a typical mouse/GUI driven app, tracking relevant information
+about musicians to potentially work with
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                                          | I want to …​                                     | So that I can…​                                                        |
+|----------|--------------------------------------------------|--------------------------------------------------|------------------------------------------------------------------------|
+| `* * *`  | producer                                         | see usage instructions                           | refer to instructions when I forget how to use the App                 |
+| `* * *`  | producer                                         | add a new person                                 | contact them to form a band                                            |
+| `* * *`  | producer                                         | delete a record for one musician                 | remove entries that I no longer need                                   |
+| `* * *`  | producer                                         | find a person by name                            | locate details of persons without having to go through the entire list |
+| `* *`    | producer                                         | tag a musician with an instrument they play      | know their potential role in a band                                    |
+| `* *`    | producer                                         | tag a musician with the genre they specialise in | find musicians suiting the song I am making                            |
+| `* *`    | producer                                         | edit a record for a musician                     | modify or update the information for a musician                        |
+| `* *`    | producer                                         | view all records of musicians I have stored      | easily see all the information I have                                  |
+| `* *`    | producer                                         | hide private contact details                     | minimize chance of someone else seeing them by accident                |
+| `*`      | producer who has worked with a musician before   | give a musician a rating                         | can keep track of my past experience with them                         |
+| `*`      | producer who is actively producing music         | check the availability of a musician             | I can avoid musicians with clashing schedules                          |
+| `*`      | producer with many musicians in the address book | sort persons by name                             | locate a person easily                                                 |
+
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `BandConnect++` and the **Actor** is the `producer`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC03 - Delete a person**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list musicians
+2.  BandConnect++ shows a list of musicians
+3.  User requests to delete a specific musician in the list
+4.  BandConnect++ deletes the person
 
     Use case ends.
 
@@ -304,7 +313,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. BandConnect++ shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: UC04 - Tag a musician with the instrument they play**
+
+**MSS**
+
+1.  User requests to list musicians
+2.  BandConnect++ shows a list of musicians
+3.  User tags a specific musician with the instrument they play
+4.  BandConnect++ tags the musician appropriately
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. BandConnect++ detects an error in the entered data.
+
+    * 3a1. BandConnect++ shows an error message.
 
       Use case resumes at step 2.
 
@@ -321,6 +353,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
+* **Genre**: Genre of music, including but not limited to: Jazz, Classical, Rock
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 
 --------------------------------------------------------------------------------------------------------------------

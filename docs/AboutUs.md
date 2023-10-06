@@ -9,44 +9,44 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Delton Cheng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/deltoncheng.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/DeltonCheng)]
+[[portfolio](team/deltoncheng.md)]
 
-* Role: Project Advisor
+* Role: Deliverables, Deadline and Documentation 
 
-### Jane Doe
+### Shu Yang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/shuyangk.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/shuyangk)]
+[[portfolio](team/shuyangk.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Documentation
 
-### Jean Doe
+### Tan Yiming
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/tanyyyming.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/tanyyming)] 
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Scheduling and Tracking + Code Quality
+
+### Wang Hejin
+
+<img src="images/wanghejin.png" width="200px">
+
+[[github](http://github.com/wanghejin)]
+[[portfolio](team/wanghejin.md)]
+
+* Role: Developer
+* Responsibilities: Documentation
 
 ### Tan Yang Yi
 
