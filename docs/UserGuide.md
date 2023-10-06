@@ -79,7 +79,7 @@ When the command fails:
 * `add /phone +6591234567`
 
 `Oops, you did not provide the index of the contact to add to.`
-* `add /email 91234567 /index 1`
+* `add /phone 91234567 /index 1`
 
 `Oops, you did not provide a valid phone number that includes a country code.`
 
@@ -111,6 +111,15 @@ When the command succeeds:
 
 ![add email success](images/add-remark/add-email.png)
 
+When the command fails:
+* `add /email nknguyentdn@gmail /index 1`
+
+`Oops, you did not provide a valid email address.`
+
+* `add /email nknguyentdn@gmail.com`
+
+`Oops, you did not provide the index of the contact to add the email to.`
+
 ### Add link to a contact: `add /link /index`
 
 You can add a social link to an existing contact.
@@ -141,6 +150,11 @@ as the “website” of your contact at index 1.`
 as a link to your contact at index 2.`
 
 ![add link success](images/add-remark/add-link.png)
+
+When the command fails:
+* `add /link https://nknguyenhc.github.io/`
+
+`Oops, you did not provide the index of the contact to add the link to.`
 
 ### Add course to a contact: `add /course /index`
 
@@ -340,7 +354,15 @@ from https://nknguyenhc.github.io/ip to https://nknguyenhc.github.io/.`
 
 ![update success](images/edit/edit.png)
 
+When the command fails:
 
+* `update /email nknguyentdn@gmail /index 1`
+
+`Oops, you did not provide a valid email address.`
+
+* `update /email nknguyentdn@gmail.com`
+
+`Oops, you did not provide the index of the contact to update email.`
 
 ### Delete a contact: `delete` 
 
