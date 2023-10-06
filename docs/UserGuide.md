@@ -25,7 +25,7 @@ Tuition connect is a desktop app that helps tutors keep track of their tutees an
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-    * `list` : Lists all contacts.
+    * `list` : Lists all tutees.
 
     * `add n/John Doe p/98765432 a/John street, block 123, #01-01 sb/Primary 4 Math d/wed b/1500 e/1600` : Adds a tutee named `John Doe` to the list.
 
