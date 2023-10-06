@@ -9,50 +9,48 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Lang Heran
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/heran9.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/heran9)] [[portfolio](team/heran9.md)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibilities: NA
 
-### Jane Doe
+### Lim Yih Fei
+<img src="images/yihfei.png" width="200px">
 
-<img src="images/johndoe.png" width="200px">
+[[github](http://github.com/yihfei)]
+[[portfolio](team/yihfei.md)]
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+* Role: Developer
+* Responsibilities: Not determined yet
 
-* Role: Team Lead
-* Responsibilities: UI
+### Lam Jin Heng Braydon
 
-### Johnny Doe
+<img src="images/lambraydon.png" width="200px">
 
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/lambraydon)] [[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: Data
 
 ### Armando Jovan Kusuma
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jovkusuma.png" width="200px">
 
 [[github](https://github.com/jovkusuma)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/jovkusuma.md)]
 
 * Role: Developer
 * Responsibilities: Not determined yet
 
-### James Doe
+### Winston Leonard Prayonggo
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/Winston.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/WinstonLeonard)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
