@@ -48,7 +48,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Winston Leonard Prayonggo
 
-<img src="images/Winston.png" width="200px">
+<img src="images/winstonleonard.png" width="200px">
 
 [[github](http://github.com/WinstonLeonard)]
 [[portfolio](team/johndoe.md)]
