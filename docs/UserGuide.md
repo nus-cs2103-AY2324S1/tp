@@ -1,3 +1,8 @@
+---
+layout: page
+title: User Guide
+---
+
 # User Guide
 
 ClubMembersContacts is an app to help EXCO members of School of Computing's CCAs to manage the contacts of all their members and applicants in a fast and convenient yet powerful way through a CLI or text-based interface for greater speed.
@@ -5,6 +10,9 @@ ClubMembersContacts is an app to help EXCO members of School of Computing's CCAs
   * It comes with a **reasonable level of user and developer documentation**.
 
 This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+
+* Table of Contents
+{:toc}	
 
 --------------------------------------------------------------------------------------------------------------------
 ## Quick start
