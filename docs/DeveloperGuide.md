@@ -318,7 +318,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 MSS 
 1. User executes the installation package
-2. The app asks for continue or cancel the installation
+2. The app asks to continue or cancel the installation
 3. User responds by indicating continue
 4. The app installs the app
 5. The app informs the user that the installation is successful
@@ -329,7 +329,7 @@ Extensions
   * 3a1. The app closes the installation package
   * Use case ends
 
-* 4a. An error occur during installation
+* 4a. An error occurs during installation
   * 4a1. The app informs the user that the installation is unsuccessful and displays reasons
   * Use case ends
 
@@ -347,8 +347,8 @@ MSS
 Use Case ends
 
 Extensions
-* 2a. An error parsing the user entered information was detected
-  * 2a1. The app informs the user of the parse error.
+* 2a. Some required details are missing and / or incorrect.
+  * 2a1. The app informs the user of the error
   * 2a2. The app requests for the correct data.
   * 2a3. The user enters new data.
   * Steps 2a2 - 2a3 are repeated until the data entered is correct.
@@ -418,8 +418,8 @@ Use Case ends
 Use Case ends
 
 Extensions
-* 2a. An error parsing the user entered information was detected
-    * 2a1. The app informs the user of the parse error.
+* 2a. Some required details are missing and / or incorrect.
+    * 2a1. The app informs the user of the error
     * 2a2. The app requests for the correct data.
     * 2a3. The user enters new data.
     * Steps 2a2 - 2a3 are repeated until the data entered is correct.
