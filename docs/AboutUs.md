@@ -11,7 +11,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Chen Peiran
 
-<img src="images/about-us/peiran.png" width="200px">
+<img src="images/peiran18.png" width="200px">
 
 [[github](https://github.com/peiran18)]
 [[portfolio](team/peiran18.md)
@@ -24,7 +24,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Chen Zhiruo
 
-<img src="images/about-us/zhiruo.png" width="200px">
+<img src="images/czhiruo.png" width="200px">
 
 [[github](http://github.com/czhiruo)]
 [[portfolio](team/czhiruo.md)]
@@ -36,7 +36,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Jeremy Yong Zheming
 
-<img src="images/about-us/jeremy.png" width="200px">
+<img src="images/jeremyyong128.png" width="200px">
 
 [[github](https://github.com/JeremyYong128)] [[portfolio](team/jeremyyong128.md)]
 
@@ -47,7 +47,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Miguel Foo Ming Yew
 
-<img src="images/about-us/miguel.png" width="200px">
+<img src="images/migfoo02.png" width="200px">
 
 [[github](http://github.com/migfoo02)]
 [[portfolio](team/migfoo02.md)]
@@ -59,7 +59,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Yan Weidong (Evan)
 
-<img src="images/about-us/evan.png" width="200px">
+<img src="images/evanyan13.png" width="200px">
 
 [[github](https://github.com/evanyan13)]
 [[portfolio](team/evanyan13.md)]
