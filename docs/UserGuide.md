@@ -213,29 +213,6 @@ Deletes a tutor in the address book based on their index number in the table.
 * `Index number given is out of range`: Given index is out of range.
 * `Invalid parameter given`: Parameter given is not a numerical value.
 
-### Deleting a tutor: `delete-t`
-
-Deletes a tutor in the address book based on their index number in the table.
-
-![delete tutor](images/deleteTutor.png)
-
-**Format**: `delete-t TUTOR_INDEX`
-
-**Examples**:
-* `delete-t 5` deletes the tutor that is indexed as 5 in the address book.
-* `list` followed by `delete-t 2` deletes the 2nd person in the address book.
-
-**Acceptable values for each parameter**:
-* `TUTOR_INDEX`: Only accepts numerical value
-
-**Expected output**:
-* `Tutor has been deleted: Alex Yeoh; Phone: 87438807; 
-  Email: alexyeoh@example.com; Address: Blk 30 Geylang Street 29, #06-40`
-
-**Error messages**:
-* `Index number given is out of range`: Given index is out of range.
-* `Invalid parameter given`: Parameter given is not a numerical value.
-
 ### Adding a schedule: `add-s`
 
 Adds a schedule to a specified tutor.
