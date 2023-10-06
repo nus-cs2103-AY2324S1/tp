@@ -1,6 +1,6 @@
 # KeepInTouch User Guide
 
-KeepInTouch is a **desktop app for managing contacts for people in the working industry (recruiters, engineers, etc.) as well as events for career purposes. 
+KeepInTouch is a **desktop app for managing contacts for people in the working industry (recruiters, engineers, etc.) as well as events for career purposes.
 KeepInTouch is optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
 If you can type fast, KeepInTouch can get your contact management tasks done faster than traditional GUI apps.
 

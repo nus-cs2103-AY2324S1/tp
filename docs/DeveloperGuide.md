@@ -491,10 +491,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 users without a noticeable sluggishness in performance for typical usage.
-3.  Should be able to hold up to 10000 contacts without a noticeable sluggishness in performance for typical usage. 
-4.  All commands should be executed within two seconds. 
-5.  Should work without requiring any installer. 
-6.  Should work without requiring any internet connection. 
+3.  Should be able to hold up to 10000 contacts without a noticeable sluggishness in performance for typical usage.
+4.  All commands should be executed within two seconds.
+5.  Should work without requiring any installer.
+6.  Should work without requiring any internet connection.
 7.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 8.  The GUI should work well for standard screen resolutions 1920x1080 and higher, and, for screen scales 100% and 125%.
 
