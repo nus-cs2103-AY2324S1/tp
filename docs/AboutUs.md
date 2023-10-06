@@ -25,7 +25,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[homepage](https://www.linkedin.com/in/koh-kai-jie-1064b728b/)]
 [[github](http://github.com/kohkaijie)]
-[[portfolio](team/kaijie.md)]
+[[portfolio](team/kohkaijie.md)]
 
 * Role: Developer
 * Responsibilities: UI
