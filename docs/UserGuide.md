@@ -22,6 +22,7 @@ For first-time users, please go to the [Quick start](#quick-start) section below
 ## Glossary
 To be added.
 
+--------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
 To be added.
@@ -51,6 +52,31 @@ You will see a message indicating successful addition of the musician like below
 
 Should you input a musician which is already in your contact book(ie. have the same phone number or email as an existing contact), you will see an error message showing the possible error, please input a different phone/email for the current contact or modify the original contact's relevant details.
 
+
+### Tagging a musician with genres: `tag genre`
+
+Tags a musician with one or more genres he/she is proficient in.
+
+**Format:** `tag genre INDEX g/GENRE...`
+
+**Constraints:**
+* `INDEX` must be a positive integer 1, 2, 3, …​
+* The genre tag must be *non-empty*.
+* You have to supply *at least one genre tag* to the musician you are tagging.
+
+**Examples:**
+* `tag 1 g/rock g/pop`
+* `tag 2 g/jazz`
+
+**Upon success:**
+
+You will see a message indicating successful addition of the musician like below:
+[insert image]
+
+**Upon failure:**
+
+Should you try to tag a musician with zero genre tags or empty tags, i.e., `tag 1 g/` or `tag 1`, you will see a message like below:
+[insert image]
 
 --------------------------------------------------------------------------------------------------------------------
 
