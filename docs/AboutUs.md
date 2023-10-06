@@ -9,19 +9,18 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Delton Cheng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/deltoncheng.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/DeltonCheng)]
+[[portfolio](team/deltoncheng.md)]
 
-* Role: Project Advisor
+* Role: Deliverables, Deadline and Documentation 
 
 ### Shu Yang
 
-<img src="images/shuyang.png" width="200px">
+<img src="images/shuyangk.png" width="200px">
 
 [[github](http://github.com/shuyangk)]
 [[portfolio](team/shuyangk.md)]
@@ -49,12 +48,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Documentation
 
-### James Doe
+### Tan Yang Yi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/yytan25.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/tanyyyming.md)]
+[[github](http://github.com/yytan25)]
+[[portfolio](team/yytan25.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: UI, Scheduling and Tracking
