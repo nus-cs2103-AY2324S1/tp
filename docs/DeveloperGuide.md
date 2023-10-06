@@ -272,14 +272,13 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                                    | I want to …​                                | So that I can…​                                                 |
+| -------- |--------------------------------------------|---------------------------------------------|-----------------------------------------------------------------|
+| `* * *`  | tutor                                      | view a list of all tutees                   |                                                                 |
+| `* * *`  | tutor                                      | view the specific details of a single tutee |                                                                 |
+| `* * *`  | tutor                                      | add a new tutee                             |                                                                 |
+| `* * *`  | tutor                                      | edit their details                          | account for changes in their information e.g. change in address |
+| `* *`    | tutor                                      | remove tutees from the list                 | keep track of tutees that I have stopped teaching               |
 
 *{More to be added}*
 
