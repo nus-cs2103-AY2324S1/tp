@@ -266,48 +266,330 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: As computing students and professionals 
-network with alumni to expand their career prospects, 
-our app keeps a list of contacts of people that each user networks with.
 
-* Sort users by priority, courses taken/taking, 
-specialisation(s) taken/intending to take, graduation year
+**Value proposition**: As computing students and professionals network with alumni to expand their career prospects, our app keeps a list of contacts of people that each user networks with.
+
+* Sort users by priority, courses taken/taking, specialization(s) taken/intending to take, graduation year
 * Offline, with a static online page that contains user manual and download link
-* Search by any details, i.e. phone number, email, specialisations,
-courses taken, graduation year.
+* Search by any details, i.e. phone number, email, specialisations, courses taken, graduation year.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | create a new contact | keep a record of individuals in my network |
-| `* * *` | user | add more details about an existing contact | store information about my contacts for future reference |
-| `* * *` | user | update details of a contact | replace outdated details with more accurate information |
-| `* * *`  | user                                       | delete a contact          | remove entries that are no longer relevant             |
-| `* *`  | user                                       | find a contact by name    | locate details of contacts without having to go through the entire list |
-| `* *`      | user with many contacts | sort contacts by their details | locate contacts with special characteristics that I am looking for |
-| `*` | user with many contacts | filter contacts based on their details | locate contacts who fulfil certain conditions that I am looking for |
-| `* *` | new user | have a quick-start guide | start using the basic functionality of the app as soon as possible|
-| `* *` | new user | use commonly-available keyboard shortcuts (e.g. ctrl-c for copy, ctrl-v for paste) | use my existing habits and knowledge to smoothly use the app |
-| `* *` | user | use simple and easy-to-remember shortcuts | have no trouble remembering and executing the shortcuts |
-| `* *` | user | use keyboard shortcuts that are easy to press | use them more conveniently |
+| Priority | As a …​                 | I want to …​                                                                              | So that I can…​                                                          |
+|---------|-------------------------|------------------------------------------------------------------------------------------|-------------------------------------------------------------------------|
+| `* * *` | new user                | see usage instructions                                                                   | refer to instructions when I forget how to use the App                  |
+| `* * *` | user                    | create a new contact                                                                     | keep a record of individuals in my network                              |
+| `* * *` | user                    | add more details about an existing contact                                               | store information about my contacts for future reference                |
+| `* * *` | user                    | update details of a contact                                                              | replace outdated details with more accurate information                 |
+| `* * *` | user                    | delete a contact                                                                         | remove entries that are no longer relevant                              |
+| `* *`   | user                    | find a contact by name                                                                   | locate details of contacts without having to go through the entire list |
+| `* *`   | user with many contacts | sort contacts by their details                                                           | locate contacts with special characteristics that I am looking for      |
+| `*`     | user with many contacts | filter contacts based on their details                                                   | locate contacts who fulfil certain conditions that I am looking for     |
+| `* *`   | new user                | have a quick-start guide                                                                 | start using the basic functionality of the app as soon as possible      |
+| `* *`   | new user                | use commonly-available keyboard shortcuts (e.g. ctrl-c for copy, ctrl-v for paste)       | use the shortcuts I am accustomed to                                    |
+| `* *`   | user                    | use simple and easy-to-remember shortcuts                                                | have no trouble remembering and executing the shortcuts                 |
+| `*`     | user                    | open my email app from my NetworkBook app                                                | quickly send an email when needed                                       |
+| `* *`   | user                    | use keyboard shortcuts that are easy to press                                            | use them more conveniently                                              |
+| `* *`   | user                    | open the relevant social media platform from the NetworkBook app                         | quickly contact them on social media                                    |
+| `* *`   | user                    | an easily accessible and static online page containing a download link to the mobile app | quickly download the app on my device when needed                       |
+| `* *`   | user                    | visit an easily accessible and static online page containing a user manual               | quickly refer to instructions when needed                               |
+| `*`     | user                    | navigate to the relevant section of the online manual directly from the catalogue        | quickly find instructions on the feature I want to use                  |
+| `* *`   | user                    | export my contacts in the form of readable text                                          | easily share my contacts with others                                    |
 
 ### Use cases
 
 (For all use cases below, the **System** is the `NetworkBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Create a new contact**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User requests to create a new contact with a name.
+
+2. NetworkBook creates a new contact with the name.
+
+   Use case ends.
+
+**Extensions**
+
+- 1a. User does not include the contact's name in the request.
+
+  - 1a1. NetworkBook shows an error message.
+
+    Use case ends.
+
+- 1b. User includes more details about the contact in the request.
+
+  - 1ba. All the details provided are in the correct format.
+
+    - 1ba1. NetworkBook adds a contact with all included details.
+
+      Use case ends.
+
+  - 1bb. Some of the details provided are not correctly formatted.
+
+    - 1bb1. NetworkBook shows an error message.
+
+      Use case ends.
+
+- 1c. The name is not unique.
+
+  - 1c1. NetworkBook requests user to select from one of three options: create a new contact, delete the old contact and add the new one, or abort the current add operation.
+
+    - 1c1a. User selects option to create a new contact.
+
+      Use case resumes at step 2.
+
+    - 1c1b. User selects option to delete the old contact and add the new one.
+
+      - 1c1b1. NetworkBook deletes the old contact.
+
+      - 1c1b2. NetworkBook adds the new contact with all included details.
+
+        Use case ends.
+
+    - 1c1c. User selects option to abort the current add operation.
+
+      Use case ends.
+
+**Use case: Add phone number to contact**
+
+(This use case is also applicable to adding **email, specialisation, tag** to a contact. For each contact, each of these fields is recorded by a list, and new entries added to a field will be appended to the field's list.)
+
+**MSS**
+
+1. User requests to list contacts.
+
+2. NetworkBook shows a list of contacts.
+
+3. User requests to add a phone number to a specific contact in the list.
+
+4. NetworkBook adds the new phone number to the contact's list of phone numbers.
+
+5. NetworkBook informs user of the contact's new list of phone numbers.
+
+   Use case ends.
+
+**Extensions**
+
+- 2a. The list is empty.
+
+  Use case ends.
+
+- 3a. The given index is invalid.
+
+  - 3a1. NetworkBook shows an error message.
+
+    Use case resumes at step 2.
+
+- 3b. User does not give a phone number.
+
+  - 3b1. NetworkBook shows an error message.
+
+    Use case resumes at step 2.
+
+- 3c. The given phone number is in an invalid format.
+
+  - 3c1. NetworkBook shows an error message.
+
+    Use case resumes at step 2.
+
+**Use case: Add graduation year to a contact**
+
+(This use case is also applicable to adding **priority** to a contact. For each contact, each of these fields is a single value instead of a list. New entries added to a field will replace the field's original value.)
+
+**MSS**
+
+1. User requests to list contacts.
+
+2. NetworkBook shows a list of contacts.
+
+3. User requests to add graduation year to a specific contact in the list.
+
+4. NetworkBook updates the graduation year of the contact to the new value.
+
+5. NetworkBook informs user of the contact's new graduation year.
+
+   Use case ends.
+
+**Extensions**
+
+- 2a. The list is empty.
+
+  Use case ends.
+
+- 3a. The given index is invalid.
+
+  - 3a1. NetworkBook shows an error message.
+
+    Use case resumes at step 2.
+
+- 3b. User does not give a graduation year.
+
+  - 3b1. NetworkBook shows an error message.
+
+    Use case resumes at step 2.
+
+- 3c. The given graduation year is in an invalid format.
+
+  - 3c1. NetworkBook shows an error message.
+
+    Use case resumes at step 2.
+
+**Use case: Add course to a contact**
+
+**MSS**
+
+1. User requests to list contacts.
+
+2. NetworkBook shows a list of contacts.
+
+3. User requests to add course to a specific contact in the list.
+
+4. NetworkBook adds the course to the contact's list of courses.
+
+5. NetworkBook informs user of the contact's new list of courses.
+
+   Use case ends.
+
+**Extensions**
+
+- 2a. The list is empty.
+
+  Use case ends.
+
+- 3a. The given index is invalid.
+
+  - 3a1. NetworkBook shows an error message.
+
+    Use case resumes at step 2.
+
+- 3b. User does not give a course code.
+
+  - 3b1. NetworkBook shows an error message.
+
+    Use case resumes at step 2.
+
+- 3c. The given course code is in an invalid format.
+
+  - 3c1. NetworkBook shows an error message.
+
+    Use case resumes at step 2.
+
+- 3d. User does not give a start date.
+
+  - 3d1. NetworkBook shows an error message.
+
+    Use case resumes at step 2.
+
+- 3e. The given start/end date is in an invalid format.
+
+  - 3e1. NetworkBook shows an error message.
+
+    Use case resumes at step 2.
+
+- 3f. User gives an end date in the correct format.
+
+  - 3f1. NetworkBook includes end date in the new course's details.
+
+  - 3f2. NetworkBook adds the new course to the contact's list of courses.
+
+    Use case resumes at step 5.
+
+- 3g. The given course code is already present in the contact's list of courses.
+
+  - 3g1. NetworkBook updates the given course with the new course details provided.
+
+    Use case resumes at step 5.
+
+**Use case: Add social link to a contact**
+
+**MSS**
+
+1. User requests to list contacts.
+
+2. NetworkBook shows a list of contacts.
+
+3. User requests to add social link a specific contact in the list.
+
+4. NetworkBook adds the social link to the contact's list of links
+
+5. NetworkBook informs user of the contact's new list of links.
+
+   Use case ends.
+
+**Extensions**
+
+- 2a. The list is empty.
+
+  Use case ends.
+
+- 3a. The given index is invalid.
+
+  - 3a1. NetworkBook shows an error message.
+
+    Use case resumes at step 2.
+
+- 3b. User does not give a social link.
+
+  - 3b1. NetworkBook shows an error message.
+
+    Use case resumes at step 2.
+
+- 3c. The given social link is in an invalid format.
+
+  - 3c1. NetworkBook shows an error message.
+
+    Use case resumes at step 2.
+
+- 3d. User provides additional note after the social link.
+
+  - 3d1. NetworkBook includes the note in the link's details.
+
+  - 3d2. NetworkBook adds the new social link to the contact's list of links.
+
+    Use case resumes at step 5.
+
+**Use case: Edit a contact**
+
+**MSS**
+
+1.  User requests to list contacts.
+2.  System shows a list of contacts
+3.  User requests to edit some attribute of a specific contact in the list 
+4.  System updates the contact
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+  
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. System shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. Attributes are incorrectly entered or invalid.
+
+    * 3b1. System shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Delete a contact**
+
+**MSS**
+
+1.  User requests to list contacts
+2.  NetworkBook shows a list of contacts
+3.  User requests to delete a specific contact in the list
+4.  NetworkBook deletes the contact
 
     Use case ends.
 
@@ -319,21 +601,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. NetworkBook shows an error message.
 
       Use case resumes at step 2.
 
-**Use case: Sort contacts**
 
-**Actor:** User
+**Use case: Sort contacts**
 
 **MSS**
 
 1.  User chooses what field to sort by (e.g. name, specialization, graduation year) and which order to sort by (ascending or descending).
 
 2.  System shows list of user’s contacts, sorted by the specified field and in the specified order.
-
-    Use case ends.
 
 **Extensions**
 
@@ -367,20 +646,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-
-
-
 **Use case: Search contacts by name**
-
-**Actor:** User
 
 **MSS**
 
 1.  User specifies the text they would like to search.
 
 2.  System shows list of user’s contacts with names containing the searched text.
-
-    Use case ends.
 
 **Extensions**
 
@@ -403,10 +675,141 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 
+**Use case: Open email app from NetworkBook**
+
+**MSS**
+
+1.  User requests to list contacts.
+2.  NetworkBook shows a list of contacts.
+3.  User requests to email a specific contact in the list.
+4.  NetworkBook loads the default email app of the user and pre-fills the contact's email in the recipient field.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The user has not logged in to his default email app.
+
+    * 3a1. User will be taken to the sign-in page of his default email app.
+
+      Use case ends.
+
+**Use case: Open social media platform from NetworkBook**
+
+**MSS**
+
+1.  User requests to list contacts.
+2.  NetworkBook shows a list of contacts.
+3.  User requests to contact a specific contact in the list via a particular social media platform.
+4.  NetworkBook loads the social media platform page of the specific contact in the list.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The social media platform page link is invalid.
+
+    * 3a1. The user will see the error page displayed by the browser used to load the page link.
+
+      Use case ends.
+
+* 3b. The page is valid but fails to load.
+
+    * 3b1. The user will see the error page displayed by the browser used to load the page link.
+
+      Use case ends.
+
+* 3c. The user has not logged in to his social media app.
+
+    * 3c1. The user will be taken to the sign-in page of his social media app.
+
+      Use case ends.
+
+**Use case: Download link to mobile app from online page**
+
+**MSS**
+
+1. User requests to visit the online page. 
+2. The online page renders.
+3. User selects download link to mobile app.
+4. Mobile app starts downloading on the user's device.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The online page fails to load.
+
+    * 1a1. The user will see the error page displayed by the browser used to load the page link.
+
+      Use case ends.
+
+**Use case: Access user manual on online page**
+
+**MSS**
+
+1.  User requests to visit the online page.
+2. The online page renders.
+3. User selects link to visit the user manual.
+4. The user manual page renders.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The online page fails to load.
+
+    * 1a1. The user will see the error page displayed by the browser used to load the page link.
+
+      Use case ends.
+  
+* 3a. The user manual page fails to load.
+
+    * 3a1. The user will see the error page displayed by the browser used to load the page link.
+
+      Use case ends.
+
+**Use case: Navigate from catalogue to relevant section of online manual**
+
+**Preconditions:** User is on user manual page.
+
+**MSS**
+
+1. User chooses a manual section title within the catalog.
+2. Browser navigates to display relevant section of online manual. 
+
+    Use case ends.
+
+**Use case: Export contact in readable text**
+
+**MSS**
+
+1.  User requests to list contacts.
+2.  NetworkBook shows a list of contacts.
+3.  User requests to export a specific contact in the list.
+4.  NetworkBook exports a text file storing user details in a readable format.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-1. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+1. Should be able to hold up to 1000 contacts without a noticeable sluggishness in performance for typical usage.
 1. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 1. A new user should be able to familiarise him/herself 
 with most of the basic features of the app
@@ -425,16 +828,18 @@ upon finishing going through the quick-start guide.
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X.
-* **Contact**: a contact of person in the app,
+* **Command**: a string keyed in by the user in the GUI text input
+  that signifies an action to be done by the app.
+* **Contact**: a contact of the user whose information is stored in the app,
 which includes name, phone number, emails, links, courses taken, specialisations, 
 graduation year, priority level and tags of/associated with the person.
-* **Command**: a string keyed in by the user in the GUI text input
-that signifies an action to be done by the app.
 * **Course taken**: a module that a person has taken in university or outside
 (for e.g. CS2103T module in NUS).
 * **Specialization**: the specialization students can
 take in their Computer Science university degree in NUS (e.g. Software Engineering, Artificial Intelligence).
+* **Link**: a web link which directs to a contact's profile page on a social platform (e.g. LinkedIn, GitHub).
 * **Tag**: an annotation to a person. This can be anything memorable of the person.
+* **Priority**: the priority level of a contact set by the user. Its value can be either high, medium or low.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -463,6 +868,31 @@ testers are expected to do more *exploratory* testing.
        Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
+
+### Editing a person
+
+1. Editing a person's name while all persons are being shown
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   
+   2. Test case: `update /name Test 1`
+      
+      Expected: Name of the first contact should change to `Test`. System should show details of the old and new name of the contact.
+   
+   3. Test case: `update /name Test 0`
+
+      Expected: No person is updated. Error details shown in the status message.
+2. Editing other attributes of a person
+   1. Prerequisites: List all persons using the 'list' command. Multiple persons in the list.
+
+   2. Test case: `update /phone 12345678 1`
+
+      Expected: Phone number of first contact should change to `12345678`. System should show details of old and new phone number.
+
+   3. Test case: `update /email test@email.com 1`
+
+      Expected: Email of first contact should change to `test@email.com`. System should show details of the old and new email of the contact.
+
+   4. _{ Likewise for `course`, `specialisation`, `link`, `grad`, `priority`, `tag` }_
 
 ### Deleting a person
 
