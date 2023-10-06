@@ -304,6 +304,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
+**Use case: Edit a person**
+
+**MSS**
+
+1.  User requests to list persons.
+2.  System shows a list of persons
+3.  User requests to edit some attribute of a specific person in the list 
+4.  System updates the person
+
+    Use case ends.
+
+**Extensions**
+* 2a. The list is empty.
+  
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. System shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. Attributes are incorrectly entered or invalid.
+
+    * 3b1. System shows an error message.
+
+      Use case resumes at step 2.
+
 **Use case: Delete a person**
 
 **MSS**
@@ -520,6 +548,31 @@ testers are expected to do more *exploratory* testing.
        Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
+
+### Editing a person
+
+1. Editing a person's name while all persons are being shown
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   
+   2. Test case: `update /name Test 1`
+      
+      Expected: Name of the first contact should change to `Test`. System should show details of the old and new name of the contact.
+   
+   3. Test case: `update /name Test 0`
+
+      Expected: No person is updated. Error details shown in the status message.
+2. Editing other attributes of a person
+   1. Prerequisites: List all persons using the 'list' command. Multiple persons in the list.
+
+   2. Test case: `update /phone 12345678 1`
+
+      Expected: Phone number of first contact should change to `12345678`. System should show details of old and new phone number.
+
+   3. Test case: `update /email test@email.com 1`
+
+      Expected: Email of first contact should change to `test@email.com`. System should show details of the old and new email of the contact.
+
+   4. _{ Likewise for `course`, `specialisation`, `link`, `grad`, `priority`, `tag` }_
 
 ### Deleting a person
 
