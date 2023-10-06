@@ -9,7 +9,7 @@ To be Added Soon
 
 Given below are my contributions to the project:
 
-* **New Feature**: 
+* **New Feature**:
     * To be added soon
     * To be added soon
 
@@ -32,8 +32,8 @@ Given below are my contributions to the project:
 
 
 * **Community**:
-    * To be added soon 
-  
+    * To be added soon
+
 
 * **Tools**:
     * To be added soon
