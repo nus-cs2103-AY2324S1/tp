@@ -257,19 +257,19 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* NUS computing students and computing professionals
+* is an NUS computing student or computing professional
 * has a need to manage a significant number of contacts
 * has a need to manage a lot of details for each contact
-* looking into networking with other computing students and professionals
-* prefer desktop apps over other types
+* is looking into networking with other computing students and professionals
+* prefers desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
+
 **Value proposition**: As computing students and professionals network with alumni to expand their career prospects, our app keeps a list of contacts of people that each user networks with.
 
-* Sort users by priority, courses taken/taking, specialisation(s) taken/intending to take, graduation year
-
+* Sort users by priority, courses taken/taking, specialization(s) taken/intending to take, graduation year
 * Offline, with a static online page that contains user manual and download link
 * Search by any details, i.e. phone number, email, specialisations, courses taken, graduation year.
 
@@ -278,25 +278,26 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                 | I want to …​                                                                             | So that I can…​                                                        |
-|---------|-------------------------|------------------------------------------------------------------------------------------|------------------------------------------------------------------------|
-| `* * *` | new user                | see usage instructions                                                                   | refer to instructions when I forget how to use the App                 |
-| `* * *` | user                    | create a new contact                                                                     | keep a record of individuals in my network                             |
-| `* * *` | user                    | add more details about an existing contact                                               | store information about my contacts for future reference               |
-| `* * *` | user                    | update details of a contact                                                              | replace outdated details with more accurate information                |
-| `* * *` | user                    | delete a contact                                                                         | remove entries that are no longer relevant                             |
-| `* * `  | user                    | find a contact by name                                                                   | locate details of contacts without having to go through the entire list |
-| `*`     | user with many contacts | sort contacts by their details                                                           | locate contacts with special characteristics that I am looking for     |
-| `* `    | user with many contacts | filter contacts based on their details                                                   | locate contacts who fulfil certain conditions that I am looking for    |
-| `* *`   | new user                | have a quick-start guide                                                                 | start using the basic functionality of the app as soon as possible     |
-| `* *`   | new user                | use commonly-available keyboard shortcuts (e.g. ctrl-c for copy, ctrl-v for paste)       | use the shortcuts I am accustomed to                                   |
-| `* *`   | NUS computing student   | use simple and easy-to-remember shortcuts                                                | have no trouble remembering and executing the shortcuts                |
-| `*`     | user                     | open my email app from my NetworkBook app                                                | quickly send an email when needed                                      |
-| `* *`   | user                     | open the relevant social media platform from the NetworkBook app                         | quickly contact them on social media                                       |
-| `* *`   | user                     | an easily accessible and static online page containing a download link to the mobile app | quickly download the app on my device when needed                                 |
-| `* *`   | user                     | visit an easily accessible and static online page containing a user manual               | quickly refer to instructions when needed                                       |
-| `*`     | user                     | navigate to the relevant section of the online manual directly from the catalogue        | quickly find instructions on the feature I want to use                                |
-| `* *`   | user                     | export my contacts in the form of readable text        | easily share my contacts with others                                |
+| Priority | As a …​                 | I want to …​                                                                              | So that I can…​                                                          |
+|---------|-------------------------|------------------------------------------------------------------------------------------|-------------------------------------------------------------------------|
+| `* * *` | new user                | see usage instructions                                                                   | refer to instructions when I forget how to use the App                  |
+| `* * *` | user                    | create a new contact                                                                     | keep a record of individuals in my network                              |
+| `* * *` | user                    | add more details about an existing contact                                               | store information about my contacts for future reference                |
+| `* * *` | user                    | update details of a contact                                                              | replace outdated details with more accurate information                 |
+| `* * *` | user                    | delete a contact                                                                         | remove entries that are no longer relevant                              |
+| `* *`   | user                    | find a contact by name                                                                   | locate details of contacts without having to go through the entire list |
+| `* *`   | user with many contacts | sort contacts by their details                                                           | locate contacts with special characteristics that I am looking for      |
+| `*`     | user with many contacts | filter contacts based on their details                                                   | locate contacts who fulfil certain conditions that I am looking for     |
+| `* *`   | new user                | have a quick-start guide                                                                 | start using the basic functionality of the app as soon as possible      |
+| `* *`   | new user                | use commonly-available keyboard shortcuts (e.g. ctrl-c for copy, ctrl-v for paste)       | use the shortcuts I am accustomed to                                    |
+| `* *`   | user                    | use simple and easy-to-remember shortcuts                                                | have no trouble remembering and executing the shortcuts                 |
+| `*`     | user                    | open my email app from my NetworkBook app                                                | quickly send an email when needed                                       |
+| `* *`   | user                    | use keyboard shortcuts that are easy to press                                            | use them more conveniently                                              |
+| `* *`   | user                    | open the relevant social media platform from the NetworkBook app                         | quickly contact them on social media                                    |
+| `* *`   | user                    | an easily accessible and static online page containing a download link to the mobile app | quickly download the app on my device when needed                       |
+| `* *`   | user                    | visit an easily accessible and static online page containing a user manual               | quickly refer to instructions when needed                               |
+| `*`     | user                    | navigate to the relevant section of the online manual directly from the catalogue        | quickly find instructions on the feature I want to use                  |
+| `* *`   | user                    | export my contacts in the form of readable text                                          | easily share my contacts with others                                    |
 
 ### Use cases
 
@@ -604,6 +605,76 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+
+**Use case: Sort contacts**
+
+**MSS**
+
+1.  User chooses what field to sort by (e.g. name, specialization, graduation year) and which order to sort by (ascending or descending).
+
+2.  System shows list of user’s contacts, sorted by the specified field and in the specified order.
+
+**Extensions**
+
+* 1a. The user has no contacts to sort.
+
+    * 1a1. System shows an empty contact list.
+
+      Use case ends.
+
+* 1a. The specified field is missing.
+
+    * 1a1. System shows an error message.
+
+      Use case ends.
+
+* 1a. The specified field is invalid.
+
+    * 1a1. System shows an error message.
+
+      Use case ends.
+
+ * 1a. The specified sorting order is invalid.
+
+    * 1a1. System shows an error message.
+
+      Use case ends.
+
+ * 1a. Certain contacts do not have any data in the specified field (e.g. no email address stored)
+
+    * 1a1. System shows list of user’s contacts, sorted by the specified field and in the specified order. Any contacts without that field specified are put at the end of the list.
+
+      Use case ends.
+
+**Use case: Search contacts by name**
+
+**MSS**
+
+1.  User specifies the text they would like to search.
+
+2.  System shows list of user’s contacts with names containing the searched text.
+
+**Extensions**
+
+* 1a. The user has no contacts to search.
+
+    * 1a1. System shows an empty contact list.
+
+      Use case ends.
+
+* 1a. The search text is not specified.
+
+    * 1a1. System shows an error message.
+
+      Use case ends.
+
+ * 1a. There are no contacts matching the searched name.
+
+    * 1a1. System shows a message saying that there are no matches.
+
+      Use case ends.
+
+
 **Use case: Open email app from NetworkBook**
 
 **MSS**
@@ -734,7 +805,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-*{More to be added}*
 
 ### Non-Functional Requirements
 
@@ -742,7 +812,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. Should be able to hold up to 1000 contacts without a noticeable sluggishness in performance for typical usage.
 1. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 1. A new user should be able to familiarise him/herself 
-with mose of the basic features of the app
+with most of the basic features of the app
 upon finishing going through the quick-start guide.
 1. A user should be able to use commonly available and easy-to-remember keyboard shorcuts
    * Ctrl+C: copy text
@@ -765,8 +835,8 @@ which includes name, phone number, emails, links, courses taken, specialisations
 graduation year, priority level and tags of/associated with the person.
 * **Course taken**: a module that a person has taken in university or outside
 (for e.g. CS2103T module in NUS).
-* **Specialisation**: the specialisation in Computer Science degree
-that a person takes in university (for e.g. Software Engineering, Artificial Intelligence).
+* **Specialization**: the specialization students can
+take in their Computer Science university degree in NUS (e.g. Software Engineering, Artificial Intelligence).
 * **Link**: a web link which directs to a contact's profile page on a social platform (e.g. LinkedIn, GitHub).
 * **Tag**: an annotation to a person. This can be anything memorable of the person.
 * **Priority**: the priority level of a contact set by the user. Its value can be either high, medium or low.
