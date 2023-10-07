@@ -79,12 +79,10 @@ organise and manage patient details faster than traditional GUI apps.
   as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
-### Auto Save : `nil`
+### Auto Save
 
 HealthSync data are saved in the hard disk automatically after any command that changes the data.
 There is no need to save manually.
-
-Format: `nil`, saving is done automatically
 
 ### Viewing help : `help`
 
