@@ -47,7 +47,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/d_limiter.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: UI and backend
 
 ### Song Mengfei
 
