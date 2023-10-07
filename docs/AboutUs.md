@@ -35,7 +35,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/linchenyu2030s.png" width="200px">
 
-[[github](http://github.com/linchenyu2030s)] 
+[[github](http://github.com/linchenyu2030s)]
 [[portfolio](team/linchenyu2030s.md)]
 
 * Role:
