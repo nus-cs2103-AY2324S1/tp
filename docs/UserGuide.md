@@ -113,20 +113,35 @@ Adds a tutor to the address book.
 * `add-t n/Betsy Crowe p/91234567 e/betsycrowe@example.com`
 
 **Acceptable values for each parameter**:
-* `NAME`: Only string input accepted
-* `PHONE NUMBER`: Only numerical input
-* `EMAIL`: Only valid email addresses
+* `NAME`: Only contain alphanumeric characters and spaces, and should not be blank
+* `PHONE NUMBER`: Only contain numbers, and should be at least 3 digits long
+* `EMAIL`: Of the format local-part@domain
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Email Format**<br>
+
+1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
+2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
+
+The domain name must:
+* end with a domain label at least 2 characters long
+* have each domain label start and end with alphanumeric characters
+* have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+
+</div>
 
 **Expected output**:
-* `New tutor John Doe 98765432 johnd@example.com has been added.`
+* `New tutor John Doe; Phone: 98765432; Email: johnd@example.com has been added.`
 
-Error messages:
-* `Missing parameter: n/`: The tag n/ is missing or tutor’s name is missing.
-* `Missing parameter: p/`: The tag p/ is missing or tutor’s phone number is missing.
-* `Missing parameter: e/`: The tag e/ is missing or tutor’s email is missing.
-* `Wrong input: n/`: The name entered is not a valid string.
-* `Wrong input: p/`: The phone number entered does not consist of numbers only.
-* `Wrong input: e/`: The email entered is invalid.
+**Error messages**:
+* `Invalid command format!`: One or more of the tags `n/`, `p/`, `e/` is missing. 
+* `Names should only contain alphanumeric characters and spaces, and it should not be blank`: Tutor name input was 
+  either invalid or blank. 
+* `Phone numbers should only contain numbers, and it should be at least 3 digits long`: Tutor phone number input was
+  either invalid or blank.
+* `Emails should be of the format local-part@domain and adhere to the following constraints:`: Tutor email input was
+  either invalid or blank.
 
 ### Listing all tutors: `list-t`
 
