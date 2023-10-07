@@ -107,6 +107,9 @@ public class ParserUtil {
     public static GroupList parseGroup(String groupName) throws ParseException {
         requireNonNull(groupName);
         String trimmedGroupName = groupName.trim();
+        if (!Group.isValidGroup(trimmedGroupName)) {
+            throw new ParseException(Group.MESSAGE_CONSTRAINTS);
+        }
         GroupList groupList = new GroupList();
         groupList.add(new Group(trimmedGroupName));
         return groupList;
@@ -140,14 +143,17 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code String groupName} into a {@code Group}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @throws ParseException if the given {@code groupName} is invalid.
      */
-    public static Group parseGroup(String group) throws ParseException {
-        requireNonNull(group);
-        String trimmedGroup = group.trim();
+    public static Group parseSingleGroup(String groupName) throws ParseException {
+        requireNonNull(groupName);
+        String trimmedGroup = groupName.trim();
+        if (!Group.isValidGroup(trimmedGroup)) {
+            throw new ParseException(Group.MESSAGE_CONSTRAINTS);
+        }
         return new Group(trimmedGroup);
     }
 }

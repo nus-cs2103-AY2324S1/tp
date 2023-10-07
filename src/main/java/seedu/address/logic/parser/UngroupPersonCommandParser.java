@@ -32,7 +32,7 @@ public class UngroupPersonCommandParser implements Parser<UngroupPersonCommand> 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_GROUPTAG);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
 
-        Group group = ParserUtil.parseGroup(argMultimap.getValue(PREFIX_GROUPTAG).get());
+        Group group = ParserUtil.parseSingleGroup(argMultimap.getValue(PREFIX_GROUPTAG).get());
 
         return new UngroupPersonCommand(new NameEqualsKeywordPredicate(name.toString()), group);
     }

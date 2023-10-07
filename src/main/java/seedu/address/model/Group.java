@@ -13,6 +13,7 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
  * Class representing a group
  */
 public class Group {
+    public static final String MESSAGE_CONSTRAINTS = "Group names should be alphanumeric";
     private final ObservableList<Person> listOfGroupMates = FXCollections.observableArrayList();
     private final String groupName;
 

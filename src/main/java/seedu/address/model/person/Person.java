@@ -19,7 +19,7 @@ public class Person {
     private final Email email;
 
     // Data fields
-    private GroupList personGroups = new GroupList();
+    private GroupList personGroups;
 
 
     /**
@@ -31,7 +31,6 @@ public class Person {
         this.phone = phone;
         this.email = email;
         this.personGroups = personGroups;
-
     }
 
     public Name getName() {

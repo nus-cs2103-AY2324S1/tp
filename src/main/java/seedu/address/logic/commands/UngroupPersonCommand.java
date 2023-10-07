@@ -30,7 +30,6 @@ public class UngroupPersonCommand extends Command {
     public static final String MESSAGE_UNGROUP_PERSON_SUCCESS = "Ungrouped Person: %1$s";
 
     private final NameEqualsKeywordPredicate predicate;
-//    private final String name;
     private final Group group;
 
     public UngroupPersonCommand(NameEqualsKeywordPredicate predicate, Group group) {
@@ -42,9 +41,6 @@ public class UngroupPersonCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        if (!GroupList.contains(group)) {
-            throw new CommandException("Cannot find group.");
-        }
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
         List<Person> lastShownList = model.getFilteredPersonList();
@@ -53,8 +49,16 @@ public class UngroupPersonCommand extends Command {
         }
         Index index = Index.fromZeroBased(0);
         Person personToUngroup = lastShownList.get(index.getZeroBased());
-        group.remove(personToUngroup);
-        //insert another line here to person.remove(group);
+        GroupList personGroups = personToUngroup.getGroups();
+        if (!personGroups.contains(group)) {
+            throw new CommandException("Person does not have this group.");
+        } else if (!group.contains(personToUngroup)) {
+            throw new CommandException("Person is not in this group.");
+        } else {
+            personGroups.remove(group);
+            group.remove(personToUngroup);
+        }
+
         return new CommandResult(
                 String.format(MESSAGE_UNGROUP_PERSON_SUCCESS, Messages.format(personToUngroup)));
     }
