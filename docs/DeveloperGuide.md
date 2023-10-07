@@ -312,50 +312,127 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `TutorMate` and the **Actor** is the `Tutor`, unless specified otherwise)
 
-**Use case: Install the app**
+### Use case: Install the app [UC01]
+
 MSS 
-1. User execute the installation package
-2. The app ask for continue or cancel the installation
-3. User respond by indicating continue
-4. The app install the app
+1. User executes the installation package
+2. The app asks to continue or cancel the installation
+3. User responds by indicating continue
+4. The app installs the app
 5. The app informs the user that the installation is successful
 Use Case ends
 
 Extensions
-* 3a. User respond by indicating cancel
-  * 3a1. The app close the installation package
+* 3a. User responds by indicating cancel
+  * 3a1. The app closes the installation package
   * Use case ends
 
-* 4a. A error occur during installation
-  * 4a1. The app informs the user that the installation is unsuccessful and display reasons
+* 4a. An error occurs during installation
+  * 4a1. The app informs the user that the installation is unsuccessful and displays reasons
   * Use case ends
 
-**Use case: Delete a person**
+### Use case: Add a student [UC02]
+
+Preconditions
+1. User has installed the app
+
+MSS
+1. User chooses to add a new student.
+2. User enters the required details to create a student.
+3. TutorMate creates the student.
+4. The app shows the user the new student created.
+
+Use Case ends
+
+Extensions
+* 2a. Some required details are missing and / or incorrect.
+  * 2a1. The app informs the user of the error
+  * 2a2. The app requests for the correct data.
+  * 2a3. The user enters new data.
+  * Steps 2a2 - 2a3 are repeated until the data entered is correct.
+  * Use case resumes from step 2.
+
+
+### Use case: Delete a student [UC03]
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User requests to list students
+2. TutorMate shows a list of persons
+3. User requests to delete a specific person in the list
+4. TutorMate deletes the person
 
-    Use case ends.
+Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
-
-  Use case ends.
-
+* 2a. The list is empty (No students added). 
+      Use case ends.
 * 3a. The given index is invalid.
+  * 3a1. TutorMate shows an error message.
+         Use case resumes at step 2.
 
-    * 3a1. AddressBook shows an error message.
 
+
+### Use case: Show a student [UC04]
+
+**MSS**
+
+1. User requests to list students
+2. TutorMate shows a list of students
+3. User requests to see a specific student
+4. TutorMate shows the student
+
+Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty (No students found).
+  Use case ends.
+* 3a. The given index is invalid.
+    * 3a1. TutorMate shows an error message.
       Use case resumes at step 2.
 
-*{More to be added}*
+
+### Use case: Find & see a student with their details [UC05]
+
+**MSS**
+1. User requests to find a student by a specific characteristic e.g. Name
+2. TutorMate shows a list of students that match the user's input
+3. User <u>shows a student (UC04)</u>
+
+Use Case ends
+
+
+
+### Use case: Edit a student's details [UC06]
+
+**MSS**
+1. User requests to list students
+2. User chooses to edit a student and enters the required data
+3. TutorMate edits the student's details
+4. TutorMate shows the edited student's details
+
+Use Case ends
+
+Extensions
+* 2a. Some required details are missing and / or incorrect.
+    * 2a1. The app informs the user of the error
+    * 2a2. The app requests for the correct data.
+    * 2a3. The user enters new data.
+    * Steps 2a2 - 2a3 are repeated until the data entered is correct.
+    * Use case resumes from step 2.
+
+    
+### Use case: See a day's schedule [UC07]
+
+**MSS**
+1. User requests to see a day's schedule (today, or any day)
+2. TutorMate shows that day's schedule
+
+Use Case ends
 
 ### Non-Functional Requirements
 
