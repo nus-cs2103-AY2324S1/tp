@@ -29,24 +29,25 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Scheduling and tracking, Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### TAN SHEN, NATHANAEL MARK
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/itsnattan.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/itsNatTan)] 
+[[portfolio](team/itsnattan.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Data and backend
+
+### BHARDWAJ TAANISH
+
+<img src="images/d_limiter.png" width="200px">
+
+[[github](http://github.com/D-Limiter)]
+[[portfolio](team/d_limiter.md)]
+
+* Role: Developer
+* Responsibilities: UI
 
 ### Song Mengfei
 
