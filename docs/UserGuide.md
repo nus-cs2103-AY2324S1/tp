@@ -79,6 +79,34 @@ organise and manage patient details faster than traditional GUI apps.
   as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
+### Common Shared Fields
+
+Throughout the various commands, you will see parameters of the command given in the form `n/NAME`.
+
+For these parameters, single letter flags such as `n/` tell the program what field you are trying to give the program,
+and the value of the parameters is given in the area written in **ALL-CAPS**.
+
+The 2 identifying parameters are given below:
+
+| Tag   | Representative Value  | Example Usage  | General Form in Commands |
+|-------|-----------------------|----------------|--------------------------|
+| `n/`  | Name                  | `n/Alex`       | `n/NAME`                 |
+| `id/` | Identification Number | `id/S2345678A` | `id/IC_NUMBER`           |
+
+1 or more identifying parameters must be specified in each command, unless stated otherwise.
+
+`[field]` are common optional fields that can be specified behind commands. The common optional fields are:
+
+| Tag      | Representative Value   | Example Usage         | General Form in Commands | Remarks                      |
+|----------|------------------------|-----------------------|--------------------------|------------------------------|
+| `p/`     | Phone Number           | `p/91234567`          | `p/PHONE_NUMBER`         |                              |
+| `e/`     | Email Address          | `e/example@a.com`     | `e/EMAIL`                |                              |
+| `a/`     | Address                | `a/Location, Here Rd` | `a/ADDRESS`              |                              |
+| `m/`     | Medical History        | `m/Asthmatic`         | `m/MEDICAL_HISTORY`      |                              |
+| `w/`     | Ward                   | `w/Ward 16A`          | `w/WARD_INFORMATION`     |                              |
+| `start/` | Appointment Start Time | `start/Nov 11, 9AM`   | `start/APPT_START`       | Must be paired with `/end`   |
+| `end/`   | Appointment End Time   | `end/Nov 11, 12PM`    | `end/APPT_END`           | Must be paired with `/start` |
+
 ### Auto Save
 
 HealthSync data are saved in the hard disk automatically after any command that changes the data.
@@ -99,23 +127,8 @@ Adds a patient into the program, with the given patient information.
 
 A patient's name and IC are required when creating a new entry into the program.
 
-Optional Patient information includes:
- - Patient’s contacts
- - Patient’s medical history
- - Patient’s ward information
- - Patient’s upcoming appointment time(s)
-
 Command format: `add n/NAME id/IC_NUMBER [field] ...`
 
-`[field]` include the following:
-```
-phone/PHONE_NUMBER
-email/EMAIL
-address/ADDRESS
-medical/MEDICAL_HISTORY
-ward/WARD_INFORMATION
-start/APPOINTMENT_START end/APPOINTMENT_END (Used as start/end/ in commands)
-```
 Example commands:
  * `add n/Aaron Tan Jun Jie id/S8943782H w/Psychology p/98114839`
 
@@ -144,8 +157,6 @@ Edits an existing patient's details in the address book.
 
 Format: `edit n/NAME or id/IC_NUMBER [field] ...`
 
- * See `add` for the list of fields that can be edited.
-
 Examples:
  * `edit n/John Doe p/91234567 e/johndoe@example.com`
    * Edits the phone number and email address of patient with name `John Doe` to be `91234567` and
@@ -160,12 +171,6 @@ Enables front desk workers to quickly retrieve patient information based on comm
 If no fields are provided, the function returns all the patient’s related information.
 Else, only the details relating to the field are provided.
 
-Patient information includes:
- - Patient’s contacts
- - Patient’s medical history
- - Patient’s ward information
- - Patient’s upcoming appointment time(s)
-
 Search properties:
  * The search is case-insensitive. e.g `hans` will match `Hans`
  * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -177,9 +182,6 @@ Search properties:
 Formats:
  1. `find n/NAME` *or* `id/IC_NUMBER`
  2. `find n/NAME [field]` *or* `id/IC_NUMBER [field]`
-
-Acceptable values for each parameter:
- * String
 
 Expected outputs when the command succeeds:
  * `Patient n/NAME or id/IC_NUMBER: [field] …`
@@ -196,12 +198,6 @@ Examples:
 ### Deleting a person or field: `delete`
 
 Deletes the specified person or the fields for the person from HealthSync
-
-Patient information includes:
- - Patient’s contacts
- - Patient’s medical history
- - Patient’s ward information
- - Patient’s upcoming appointment time(s)
 
 Format: `delete n/NAME or id/IC_NUMBER [field]`
 
