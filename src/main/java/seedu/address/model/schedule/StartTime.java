@@ -28,6 +28,9 @@ public class StartTime {
         this.time = time;
     }
 
+    /**
+     * Returns true if a given string is a valid start time.
+     */
     public static boolean isValidStartTime(String test) {
         if (!test.matches(VALIDATION_REGEX)) {
             return false;

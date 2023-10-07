@@ -27,6 +27,9 @@ public class EndTime {
         this.time = time;
     }
 
+    /**
+     * Returns true if a given string is a valid end time.
+     */
     public static boolean isValidEndTime(String test) {
         if (!test.matches(VALIDATION_REGEX)) {
             return false;
