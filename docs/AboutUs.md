@@ -14,7 +14,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/quzhetao01.png" width="200px">
 
 [[github](https://github.com/quzhetao01)]
-[[portfolio](team/quzhetao.md)]
+[[portfolio](team/quzhetao01.md)]
 
 * Role: Deliverables and deadlines
 * Responsibilities: Data

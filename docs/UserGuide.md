@@ -68,6 +68,7 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
+### Add a student
 
 Adds a student with his/her relevant details.
 
@@ -86,7 +87,7 @@ Examples:
 * `add student n/Sally c/94149785 a/Woodlands Street 11 Blk 888 #08-08`
 
 
-### View all students 
+### View all students
 
 Shows a list of all students.
 
@@ -102,8 +103,6 @@ Format: `delete <INDEX>`
 1. Appointment Index
     - Numerical characters only
 
-Examples:
-* `delete appointment 2`
 
 ### Tag student to risk level 
 Tags a student with a risk level based on their current mental health status, categorizing them as high, medium, low tag_student <index> <RISK_LEVEL>
