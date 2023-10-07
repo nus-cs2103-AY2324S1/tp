@@ -117,10 +117,10 @@ ward/WARD_INFORMATION
 start/APPOINTMENT_START end/APPOINTMENT_END (Used as start/end/ in commands)
 ```
 Example commands:
- * `add n/Aaron Tan Jun Jie id/S8943782H ward/Psychology phone/98114839`
+ * `add n/Aaron Tan Jun Jie id/S8943782H w/Psychology p/98114839`
 
 Expected outputs when the command succeeds:
- * `Patient Aaron Tan Jun Jie has been added with the fields: id/S8943782H ward/Psychology phone/98114839`
+ * `Patient Aaron Tan Jun Jie has been added with the fields: id/S8943782H w/Psychology p/98114839`
 
 Expected outputs when the command fails:
  * `Unable to add the patient to the database: Patient already exists.`
@@ -147,12 +147,12 @@ Format: `edit n/NAME or id/IC_NUMBER [field] ...`
  * See `add` for the list of fields that can be edited.
 
 Examples:
- * `edit n/John Doe phone/91234567 email/johndoe@example.com`
+ * `edit n/John Doe p/91234567 e/johndoe@example.com`
    * Edits the phone number and email address of patient with name `John Doe` to be `91234567` and
      `johndoe@example.com` respectively.
 
- * `edit id/S8943782H  ward/Psychology `
-   * Edits the ward of the patient with id `S8943782` to be `Psychology`.
+ * `edit id/S8943782H w/Psychology `
+   * Edits the ward of the patient with id `S8943782H` to be `Psychology`.
 
 ### Locating persons by name: `find`
 
@@ -189,7 +189,7 @@ Expected output when the command fails:
 
 Examples:
  * `find n/John` returns `john` and `John Doe`
- * `find id/s894219J phone/ address/` returns phone and address of patient with IC number s894219J
+ * `find id/s894219J p/ a/` returns phone and address of patient with IC number s894219J
  * `find id/S872D` returns `Alex Yeoh`, with IC number `S872D` <br>
    ![result for 'find id/S872D'](images/findidS872DResult.png)
 
@@ -221,9 +221,9 @@ Expected output when the command fails:
  * `Error code’s message (i.e. Invalid NRIC/ Invalid Field(s) / Database Error) `
 
 Examples:
- * `Delete id/S9987362H` deletes all the details of the person with the specified IC number from HealthSync.
- * `Delete n/John Doe` deletes all the details of John Doe from HealthSync.
- * `Delete n/John Doe /PHONE_NUMBER` deletes John Doe phone number from his profile.
+ * `delete id/S9987362H` deletes all the details of the person with the specified IC number from HealthSync.
+ * `delete n/John Doe` deletes all the details of John Doe from HealthSync.
+ * `delete n/John Doe p/` deletes John Doe phone number from his profile.
 
 <!--
 Original format, can consider using
@@ -279,12 +279,12 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME id/IC_NUMBER [field] ...` <br> e.g., `add n/James Ho id/SXXXX123D p/91234567 a/A Estate, Clementi Rd, 1234665`
-**Clear**  | `clear`
-**Delete** | `delete n/NAME [field]` *or* `delete id/IC_NUMBER [field]`<br> e.g., `delete n/John Doe e/johndoe@example.com`
-**Edit**   | `edit n/NAME [field]` *or* `edit id/IC_NUMBER [field] ... `<br> e.g.,`edit n/James Lee e/jameslee@example.com`
-**Find**   | `find n/NAME [field]` *or* `find id/IC_NUMBER [field]`<br> e.g., `find n/James Jake` *or* `find id/S872D`
-**List**   | `list`
-**Help**   | `help`
+| Action     | Format, Examples                                                                                                           |
+|------------|----------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME id/IC_NUMBER [field] ...` <br> e.g., `add n/James Ho id/SXXXX123D p/91234567 a/A Estate, Clementi Rd, 1234665` |
+| **Clear**  | `clear`                                                                                                                    |
+| **Delete** | `delete n/NAME [field]` *or* `delete id/IC_NUMBER [field]`<br> e.g., `delete n/John Doe e/`                                |
+| **Edit**   | `edit n/NAME [field]` *or* `edit id/IC_NUMBER [field] ... `<br> e.g.,`edit n/James Lee e/jameslee@example.com`             |
+| **Find**   | `find n/NAME [field]` *or* `find id/IC_NUMBER [field]`<br> e.g., `find n/James Jake` *or* `find id/S872D`                  |
+| **List**   | `list`                                                                                                                     |
+| **Help**   | `help`                                                                                                                     |
