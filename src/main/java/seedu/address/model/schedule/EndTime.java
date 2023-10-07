@@ -14,6 +14,7 @@ public class EndTime {
             "EndTime should only contain a valid date and time in the format 2023-09-15T09:00:00, and it should not "
                     + "be blank";
     public static final String VALIDATION_REGEX = "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}";
+
     private final LocalDateTime time;
 
     /**
@@ -41,6 +42,10 @@ public class EndTime {
         } catch (DateTimeParseException e) {
             return false;
         }
+    }
+
+    public LocalDateTime getTime() {
+        return time;
     }
 
     @Override

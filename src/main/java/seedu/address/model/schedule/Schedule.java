@@ -1,5 +1,6 @@
 package seedu.address.model.schedule;
 
+import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
@@ -11,6 +12,7 @@ import seedu.address.commons.util.ToStringBuilder;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Schedule {
+    private static final String MESSAGE_CONSTRAINTS = "Schedules start time should be before its end time.";
     private final TutorIndex tutorIndex;
     private final StartTime startTime;
     private final EndTime endTime;
@@ -20,10 +22,17 @@ public class Schedule {
      */
     public Schedule(TutorIndex tutorIndex, StartTime startTime, EndTime endTime) {
         requireAllNonNull(tutorIndex, startTime, endTime);
+        checkArgument(isValidSchedule(startTime, endTime), MESSAGE_CONSTRAINTS);
+
         this.tutorIndex = tutorIndex;
         this.startTime = startTime;
         this.endTime = endTime;
     }
+
+    private boolean isValidSchedule(StartTime startTime, EndTime endTime) {
+        return startTime.getTime().isBefore(endTime.getTime());
+    }
+
 
     public TutorIndex getTutorIndex() {
         return tutorIndex;
