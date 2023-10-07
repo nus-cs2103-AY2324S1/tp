@@ -14,7 +14,7 @@ Flashlingo is a **desktop app for learning words by flashcard, optimized for use
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `flashlingo.jar` from [here](https://github.com/se-edu/addressbook-level3/releases) (Not finished yet).
+1. Download the latest `flashlingo.jar` from [here](https://github.com/AY2324S1-CS2103T-T11-4/tp/releases) (Not finished yet).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
