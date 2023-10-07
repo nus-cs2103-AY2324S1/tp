@@ -38,6 +38,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
+
 **`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/transact/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/transact/MainApp.java)) is in charge of the app launch and shut down.
 
 - At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
@@ -119,7 +120,10 @@ How the parsing works:
 
 ### Model component
 
+**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/transact/model/Model.java)
+
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -261,26 +265,39 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-- has a need to manage a significant number of contacts
-- prefer desktop apps over other types
+
+- has a need to manage a significant number of transactions
 - can type fast
 - prefers typing to mouse interactions
 - is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Quickly add company inflow and outflow via the CLI. Easily keep track of company profits and expenses associated with staff and visualize them.
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ---------------------------- | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority                 | As a …​                                           | I want to …​                                               | So that I can…​                                                        |
+| ------------------------ | ------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `* * *`                  | new user                                          | see usage instructions                                     | refer to instructions when I forget how to use the App                 |
+| `* * *`                  | user                                              | add a new person                                           |                                                                        |
+| `* * *`                  | user                                              | delete a person                                            | remove entries that I no longer need                                   |
+| `* * *`                  | user                                              | find a person by name                                      | locate details of persons without having to go through the entire list |
+| `* *`                    | user                                              | hide private contact details                               | minimize chance of someone else seeing them by accident                |
+| `*`                      | user with many persons in the address book        | sort persons by name                                       | locate a person easily                                                 |
+| Transaction Recording    |
+| `* * *`                  | user                                              | add a new transaction                                      |                                                                        |
+| `* * *`                  | user                                              | remove a transaction                                       |                                                                        |
+| `* * *`                  | user                                              | view all transactions                                      |                                                                        |
+| `* *`                    | user                                              | edit transactions                                          |                                                                        |
+| Financial Reporting      |
+| `*`                      | user who needs to analyze transactions            | have a variety of financial reports                        |                                                                        |
+| `*`                      | user who needs to share data with others          | generate reports downloadable in common formats (PDF, CSV) |                                                                        |
+| `*`                      | user                                              | restore from a backup                                      | undo large changes                                                     |
+| Data Security and Backup |
+| `*`                      | user who needs to keep sensitive data confidental | encrypt the data                                           | ensure the security and privacy of financial data                      |
+| `*`                      | user who does not have reliable hardware          | have automated backups                                     | prevent unnessary data loss                                            |
+| `*`                      | user                                              | restore from a backup                                      | undo large changes                                                     |
 
 _{More to be added}_
 
@@ -316,7 +333,7 @@ _{More to be added}_
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 transactions without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 _{More to be added}_
@@ -325,6 +342,11 @@ _{More to be added}_
 
 - **Mainstream OS**: Windows, Linux, Unix, OS-X
 - **Private contact detail**: A contact detail that is not meant to be shared with others
+- **Transaction**: An exchange of money (e.g. Buying, Selling)
+- **Transactor/Party**: Person that carried out the transaction or is related to the transaction
+- **Income**: Money received (e.g. Sales of product)
+- **Expense**: Costs incurred (e.g. Staff salary, cost of product)
+
 
 ---
 
