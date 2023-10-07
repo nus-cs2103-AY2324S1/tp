@@ -519,6 +519,19 @@ based on an identifier
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Architecture Diagram**: A visual representation that illustrates the high-level design of the application
+* **Main**: The function responsible for launching the application
+* **UI**: Stands for User Interface
+* **API**: Stands for Application Programming Interface, it defines the methods and protocols of the application
+* **ObservableList**: A list implementation that allows other objects to observe and be notified when there is changes
+* **JSON**: Stands for JavaScript Object Notation, it is a lightweight data interchange format
+* **Classes**: Defines an object in the application
+* **CLI**: Stands for Command-Line Interface, it is a text-based interface for interaction with computer system or software applications through use of commands 
+* **IC**: Stands for Identity Card
+* **Database**: A structured collection of data organized and stored in computer system
+* **Latency**: The time delay between user's action or request and the system's response
+* **PDPA**: Stands for Personal Data Protection Act, it is the legislation related to the protection of personal data and privacy
+
 
 --------------------------------------------------------------------------------------------------------------------
 
