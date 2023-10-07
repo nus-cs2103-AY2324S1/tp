@@ -35,6 +35,13 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
         return new AddEventCommand(new Event(description, eventPeriod));
     }
 
+    /**
+     * Checks if all the given prefix fields are non-empty.
+     *
+     * @param argumentMultimap argumentMultimap managing arguments for this command.
+     * @param prefixes prefixes to be tested.
+     * @return true if all fields are non-empty, false if any field contains empty value.
+     */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }

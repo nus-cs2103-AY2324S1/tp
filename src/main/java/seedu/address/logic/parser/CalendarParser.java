@@ -10,9 +10,13 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * Parses user input for calendar component of application.
+ */
 public class CalendarParser extends ComponentParser {
     private static final Logger logger = LogsCenter.getLogger(CalendarParser.class);
 
+    @Override
     public Command parseCommand(String userInput) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {

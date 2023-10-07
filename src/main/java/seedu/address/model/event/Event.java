@@ -7,10 +7,15 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
  * Represents an event in the calendar
  */
 public class Event {
-
     private EventDescription description;
     private EventPeriod eventPeriod;
 
+    /**
+     * Constructs an event with a given description occurring over the given time period.
+     *
+     * @param description The description of the event.
+     * @param eventPeriod The period of time when the event occurs.
+     */
     public Event(EventDescription description, EventPeriod eventPeriod) {
         requireAllNonNull(description, eventPeriod);
 
@@ -18,31 +23,61 @@ public class Event {
         this.eventPeriod = eventPeriod;
     }
 
+    /**
+     * Creates and returns a new Event object that is guaranteed to not conflict with any other event.
+     *
+     * @return A new non-conflicting Event object.
+     */
     public static Event createNonConflictingEvent() {
         return new Event(EventDescription.createUnusedDescription(), EventPeriod.createNonConflictingPeriod());
     }
 
+    /**
+     * Gets the description of the event.
+     *
+     * @return The description of the event.
+     */
     public EventDescription getDescription() {
         return this.description;
     }
 
+    /**
+     * Gets the time period during which the event occurs.
+     *
+     * @return The time period of the event.
+     */
     public EventPeriod getEventPeriod() {
         return this.eventPeriod;
     }
 
-
+    /**
+     * Checks if this event conflicts with another event.
+     *
+     * @param other The other event to check for conflicts with.
+     * @return True if there is a conflict, false otherwise.
+     */
     public boolean isConflicting(Event other) {
         requireNonNull(other);
 
         return this.eventPeriod.isOverlapping(other.eventPeriod);
     }
 
+    /**
+     * Changes the description of the event.
+     *
+     * @param description The new description for the event.
+     */
     public void changeDescription(EventDescription description) {
         requireNonNull(description);
 
         this.description = description;
     }
 
+    /**
+     * Changes the time period during which the event occurs.
+     *
+     * @param eventPeriod The new time period for the event.
+     */
     public void changeEventPeriod(EventPeriod eventPeriod) {
         requireNonNull(eventPeriod);
 
