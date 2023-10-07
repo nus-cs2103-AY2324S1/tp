@@ -88,7 +88,6 @@ Examples:
 
 
 ### View all students
-### View all students
 
 Shows a list of all students.
 
@@ -104,8 +103,7 @@ Format: `delete <INDEX>`
 1. Appointment Index
     - Numerical characters only
 
-Examples:
-* `delete appointment 2`
+
 
 ### Tag student to risk level 
 Tags a student with a risk level based on their current mental health status, categorizing them as high, medium, low tag_student <index> <RISK_LEVEL>
