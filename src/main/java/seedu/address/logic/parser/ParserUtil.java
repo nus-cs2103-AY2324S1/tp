@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -9,6 +10,8 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.event.EventPeriod;
+import seedu.address.model.event.EventDescription;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -120,5 +123,24 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    public static EventDescription parseEventDescription(String description) throws ParseException {
+        requireNonNull(description);
+        String trimmedDescription = description.trim();
+        if (trimmedDescription.isEmpty()) {
+            throw new ParseException(EventDescription.MESSAGE_CONSTRAINTS);
+        }
+        return new EventDescription(trimmedDescription);
+    }
+
+    public static EventPeriod parseEventPeriod(String startDate, String endDate) throws ParseException {
+        requireAllNonNull(startDate, endDate);
+        String trimmedStartDate = startDate.trim();
+        String trimmedEndDate = endDate.trim();
+        if (!EventPeriod.isValidPeriod(trimmedStartDate, trimmedEndDate)) {
+            throw new ParseException(EventPeriod.MESSAGE_CONSTRAINTS);
+        }
+        return new EventPeriod(trimmedStartDate, trimmedEndDate);
     }
 }
