@@ -79,14 +79,14 @@ Format: `view availability d/DATE`
 Examples:
 * `view availability d/2023-09-16`
 
-### Adding a person: `add`
+### Adding a booking: `add`
 
-Adds a person to the address book.
+Adds a booking to the address book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+A booking can have any number of tags (including 0)
 </div>
 
 Examples:
@@ -102,9 +102,9 @@ Format: `add booking r/ROOM NUMBER d/DATE t/START_TIME-END_TIME`
 Examples:
 * `add booking r/101 d/2023-09-16 t/09:00-12:00`
 
-### Listing all persons : `list`
+### Listing all bookings : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all bookings in the address book.
 
 Format: `list`
 
@@ -114,22 +114,22 @@ Shows a comprehensive list of all the bookings made to hotel receptionists for t
 
 Format: `view all bookings`
 
-### Editing a person : `edit`
+### Editing a booking : `edit`
 
-Edits an existing person in the address book.
+Edits an existing booking in the address book.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the booking at the specified `INDEX`. The index refers to the index number shown in the displayed booking list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
+* When editing tags, the existing tags of the booking will be removed i.e adding of tags is not cumulative.
+* You can remove all the booking’s tags by typing `t/` without
   specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st booking to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd booking to be `Betsy Crower` and clears all existing tags.
 
 ### Search for a booking
 
@@ -146,9 +146,9 @@ Examples:
 
 
 
-### Locating persons by name: `find`
+### Locating bookings by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds bookings whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -164,19 +164,19 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Deleting a booking : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified booking from the address book.
 
 Format: `delete INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Deletes the booking at the specified `INDEX`.
+* The index refers to the index number shown in the displayed booking list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list` followed by `delete 2` deletes the 2nd booking in the address book.
+* `find Betsy` followed by `delete 1` deletes the 1st booking in the results of the `find` command.
 
 ### Cancelling a booking: `cancelBooking`
 

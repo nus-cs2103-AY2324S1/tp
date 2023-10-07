@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.booking;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -14,9 +14,10 @@ import seedu.address.model.tag.Tag;
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public class Booking {
 
     // Identity fields
+    private final Room room;
     private final Name name;
     private final Phone phone;
     private final Email email;
@@ -28,8 +29,9 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Booking(Room room, Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
+        this.room = room;
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -37,6 +39,9 @@ public class Person {
         this.tags.addAll(tags);
     }
 
+    public Room getRoom() {
+        return room;
+    }
     public Name getName() {
         return name;
     }
@@ -65,13 +70,13 @@ public class Person {
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
-    public boolean isSamePerson(Person otherPerson) {
-        if (otherPerson == this) {
+    public boolean isSameBooking(Booking otherBooking) {
+        if (otherBooking == this) {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getName().equals(getName());
+        return otherBooking != null
+                && otherBooking.getRoom().equals(getRoom());
     }
 
     /**
@@ -85,27 +90,29 @@ public class Person {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Person)) {
+        if (!(other instanceof Booking)) {
             return false;
         }
 
-        Person otherPerson = (Person) other;
-        return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+        Booking otherBooking = (Booking) other;
+        return room.equals(otherBooking.room)
+                && name.equals(otherBooking.name)
+                && phone.equals(otherBooking.phone)
+                && email.equals(otherBooking.email)
+                && address.equals(otherBooking.address)
+                && tags.equals(otherBooking.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(room, name, phone, email, address, tags);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
+                .add("room", room)
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
