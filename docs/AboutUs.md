@@ -17,6 +17,7 @@ This project was done by a team of 4 members.
 [[portfolio](team/johndoe.md)]
 
 - Role: Team Member
+- Responsibilities: TBD
 
 ### Andre Sim
 
@@ -47,23 +48,3 @@ This project was done by a team of 4 members.
 
 - Role: Developer
 - Responsibilities: TBD
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-- Role: Developer
-- Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-- Role: Developer
-- Responsibilities: UI

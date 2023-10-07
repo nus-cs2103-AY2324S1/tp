@@ -257,11 +257,15 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
+
 * has a need to manage a significant number of contacts
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
+* is an NUS student
+* has a need to organize and coordinate schedules
+
 
 **Value proposition**: manage contacts faster than a typical mouse/GUI driven app
 
@@ -270,51 +274,319 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                                                             | I want to …​                                                                 | So that I can…​                                                                         |
+|----------|---------------------------------------------------------------------|------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------|
+| `* * *`  | NUS student                                                         | search for the contacts of other students within my university               | contact them for group projects                                                         |
+| `* * *`  | NUS student                                                         | search for a name in the contact                                             | easily find the person’s contact                                                        |
+| `* * *`  | NUS student                                                         | add contacts into my address book easily                                     | retrieve the saved contact                                                              |
+| `* * *`  | NUS student living on campus                                        | save the contacts of my neighbors                                            | contact them in case of any emergencies                                                 |
+| `* * *`  | NUS student living on campus                                        | save the addresses of my neighbours                                          | locate them easily when necessary                                                       | 
+| `* * *`  | NUS student in multiple CCAs                                        | filter my contacts by tags to identify all people in a group                 | find the relevant contacts in a certain group quickly                                   |
+| `* * *`  | student staying on campus                                           | label multiple tags to my contacts                                           | locate my friends taking the same module and staying in the same campus residence as me |
+| `* * *`  | user that is familiar with the keyboard                             | use the keyboard to type commands in the applications                        | access the features of the application                                                  |
+| `* * *`  | user with bad memory                                                | save a short description of my contact                                       | identify my contacts better                                                             |
+| `* * *`  | visual-reliant user                                                 | save a photo of the person into my contacts                                  | quickly recognise and find them                                                         |
+| `* * *`  | non-tech-savvy user                                                 | use the help feature of the app                                              | navigate about the app easily                                                           |
+| `* *`    | NUS student                                                         | import the NUS calendar into the application                                 | view all academic commitments more conveniently                                         | 
+| `* *`    | NUS Student                                                         | compare timetables/calendars with my peers easily                            | plan meetings more conveniently                                                         |
+| `* *`    | NUS student                                                         | allocate tasks and responsibilities within a project or CCA group            | tasks can be done efficiently                                                           |
+| `* *`    | NUS Student in multiple CCAs                                        | group my contacts                                                            | identify which group my contacts belong to                                              |
+| `* *`    | NUS student doing a group project                                   | export my calendar in my application                                         | send it to my teammates to coordinate meeting times                                     |
+| `* *`    | forgetful user                                                      | view a password hint                                                         | I can recall my password when I forget it                                               |
+| `* *`    | forgetful student                                                   | be reminded of upcoming assignments                                          | prioritize which assignment to work on first                                            |
+| `* *`    | forgetful student                                                   | be reminded of upcoming examinations                                         | prioritize which exam module to study on first                                          |
+| `* *`    | forgetful student                                                   | be reminded of upcoming projects                                             | prioritize which project to work on first                                               |
+| `* *`    | forgetful student                                                   | be reminded of upcoming tutorials                                            | so that I can prioritize which tutorial to complete first                               |
+| `* *`    | security conscious user                                             | password-protect my appliation                                               | prevent others from accessing my application profile easily                             |
+| `* *`    | data conscious user                                                 | backup my data                                                               | so that I can recover it in the case my data is corrupted                               |
+| `* *`    | user who cares about user experience                                | change the color of my user interface                                        | modify the interface to my liking                                                       |
+| `* *`    | user with a strong urge for aesthetics                              | interact with a clean user interface                                         | feel at ease when using the application                                                 |
+| `* *`    | non-tech-savvy user that does not know how to use terminal commands | use buttons around the application to navigate around the application easily |
+| `*`      | student who prefers using a tablet                                  | I can use the application on my tablet                                       | access contacts easily on my tablet                                                     |
+| `*`      | student who prefers mobile devices                                  | I can use the application on my mobile phone                                 | sync my contacts with those in the application                                          |
+| `*`      | student in a group project                                          | send a QR code of my application contact details                             | have my teammates add my contact details on the application much faster                 |
+| `*`      | user who prefers cloud storage                                      | sync the contacts in my application with Google Contacts                     | save it in cloud-based storage                                                          |
+| `*`      | user accustomed to a PC                                             | view all commands at once                                                    | explore features quickly                                                                |
+| `*`      | user with a tendency to open many applications at once              | have the application time out and exit                                       | ensure my computer would not be cluttered by too many applications                      |
+
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+(For all use cases below, the **System** is the `UniMate` and the **Actor** is the `user`, unless specified otherwise)
+
+**Use case: UC1 List persons**
+
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
 
-    Use case ends.
+1. User requests to list persons
+2. UniMate shows a list of persons
+
+Use case ends.
+
 
 **Extensions**
 
+
 * 2a. The list is empty.
 
-  Use case ends.
+
+* 2b. UniMate displays a message to the user.
+
+
+Use case ends.
+
+
+**Use case: UC2 Delete a person**
+
+
+**MSS**
+
+
+1.  User requests to list persons (UC1)
+2.  User requests to delete a specific person in the list
+3.  UniMate deletes the person
+
+
+Use case ends.
+
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
 
-      Use case resumes at step 2.
+* 3a1. UniMate shows an error message.
 
-*{More to be added}*
+
+     Use case resumes at step 2.
+
+
+**Use case: UC3 Add a person**
+
+
+
+
+**MSS**
+
+
+
+
+1.  User requests to add in a person into the UniMate
+2.  UniMate adds the person
+3.  UniMate displays a success message
+
+
+Use case ends.
+
+**Extensions**
+
+
+* 1a. The given format is wrong
+
+    * 1a1. UniMate shows an error message
+
+
+Use case ends.
+
+
+* 1b. Person is already in UniMate
+
+
+      Use case ends.
+
+
+**Use case: UC4 Clear All Entries**
+
+
+**MSS**
+
+
+1.  User requests to clear all entries in UniMate
+2.  UniMate deletes all entries
+
+
+      Use Case Ends.
+
+**Extensions**
+
+
+* 1a. UniMate has no data
+
+
+    Use Case Ends
+
+
+**Use case: UC5 Edit persons**
+
+
+**MSS**
+
+
+1. Use requests to list all persons(UC1).
+2. User requests to edit person at a specified index with new parameters.
+3. UniMate updates the person at specified index with new parameters.
+   Use case ends.
+
+
+**Extensions**
+
+
+* 2a. The given index is invalid.
+    * 2a1. UniMate displays an error message.
+      Use case ends.
+* 2b. The given parameters are invalid.
+    * 2b1. UniMate displays an error message.
+      Use case ends.
+
+
+**Use case: UC6 Exit application**
+
+
+**MSS**
+
+
+1. User requests to exit the application.
+2. UniMate closes the application.
+   Use case ends.
+
+
+**Use case: UC7 Search by name**
+
+
+**MSS**
+
+
+1. User requests to search persons by specified keywords
+2. UniMate displays persons with names that match keywords
+   Use case ends.
+
+
+
+**Use case: UC8 View events**
+
+
+**MSS**
+
+
+1. User requests to view events.
+2. UniMate displays all events.
+
+
+Use Case ends.
+
+
+**Extensions**
+* 2a. There are no events recorded.
+  2a1. Unimate displays a message indicating that there are no events.
+
+  Use case ends.
+
+
+**Use case: UC9 Add an event**
+
+
+**MSS**
+
+
+1. User requests to add an event.
+2. UniMate adds the event.
+
+
+Use case ends.
+
+
+**Extensions**
+*  2a. UniMate detects a conflict with an existing event.
+   2a1. UniMate shows conflicted timings and requests to modify one of the timings.
+   2a2. User modifies the timing and submits the new timings.
+   Steps 2a1 and 2a2 are repeated until there are no conflicts in timings.
+
+
+    Use case ends.
+
+
+**Use case: UC10 Delete an event**
+
+
+**MSS**
+
+
+1. User requests to view events.(UC 8)
+2. User requests to delete an event.
+3. UniMate deletes the event.
+
+
+Use case ends.
+
+
+**Extensions**
+* 2a. Event does not exist.
+  2a1. UniMate shows an error message.
+
+
+    Use case ends.
+
+
+**Use case: UC11 Edit an event**
+
+
+**MSS**
+
+
+1. User requests to view events. (UC 8)
+2. User requests to edit an event.
+3. Unimate edits the event.
+
+
+**Extensions**
+* 2a. Event does not exist.
+  2a1. UniMate shows an error message.
+
+
+    Use case ends.
+
+
+*  3a. UniMate detects a conflict with an existing event.
+   3a1. UniMate shows conflicted timings and requests to modify one of the timings.
+   3a2. User modifies the timing and submits the new timings.
+   Steps 3a1 and 3a2 are repeated until there are no conflicts in timings.
+
+
+    Use case ends.
+
+
+**Use case: UC12 Filter by tags.**
+
+
+**MSS**
+
+
+1. User requests to list persons with specific tags
+2. UniMate displays persons with specified tags
+
+   Use case ends.
+
+
+**Extensions**
+
+
+* 2a. There are no persons matching the specified tags
+    * UniMate displays a message indicating that no persons matched the specified tags.
+      Use case ends.
+
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+2.  Should be able to hold up to 200 events without a noticeable sluggishness in performance for typical usage.
+3.  Calendar should have a combined 1 academic year look forward and look back period (In AY22/23, can look through calendar for this academic year)
+4. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+5. Calendar should be able to check if there are any event timing conflicts within 1 second
+6. System should be easily picked up by a freshman at NUS with just the application's website
+
 
 *{More to be added}*
 
@@ -322,6 +594,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* * **Event**: An activity to be marked on the calendar with a specified time frame.
 
 --------------------------------------------------------------------------------------------------------------------
 
