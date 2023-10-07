@@ -2,21 +2,12 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.*;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.UngroupPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Group;
 import seedu.address.model.person.*;
-import seedu.address.model.tag.Tag;
 
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.Set;
 import java.util.stream.Stream;
 
 /**

@@ -14,12 +14,12 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 public class GroupList {
 
-    private final ObservableList<Group> internalList = FXCollections.observableArrayList();
+    private static final ObservableList<Group> internalList = FXCollections.observableArrayList();
 
     /**
      * Returns true if the list contains an equivalent group as the given argument.
      */
-    public boolean contains(Group toCheck) {
+    public static boolean contains(Group toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSameGroup);
     }
@@ -28,7 +28,7 @@ public class GroupList {
      * Adds a group to the list.
      * The group must not already exist in the list.
      */
-    public void add(Group toAdd) {
+    public static void add(Group toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
             throw new DuplicatePersonException();
@@ -40,7 +40,7 @@ public class GroupList {
      * Removes the equivalent person from the list.
      * The person must exist in the list.
      */
-    public void remove(Group toRemove) {
+    public static void remove(Group toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
             throw new GroupNotFoundException();

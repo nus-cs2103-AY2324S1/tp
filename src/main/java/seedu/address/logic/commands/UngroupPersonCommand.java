@@ -1,16 +1,13 @@
 package seedu.address.logic.commands;
 
-import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.GroupList;
 import seedu.address.model.Model;
-import seedu.address.model.AddressBook;
 import seedu.address.model.person.NameEqualsKeywordPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.Group;
-import seedu.address.model.person.UniquePersonList;
-import seedu.address.model.tag.Tag;
 
 import java.util.*;
 
@@ -45,9 +42,15 @@ public class UngroupPersonCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        if (!GroupList.contains(group)) {
+            throw new CommandException("Cannot find group.");
+        }
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
         List<Person> lastShownList = model.getFilteredPersonList();
+        if (lastShownList.size() != 1) {
+            throw new CommandException("Cannot find person.");
+        }
         Index index = Index.fromZeroBased(0);
         Person personToUngroup = lastShownList.get(index.getZeroBased());
         group.remove(personToUngroup);
@@ -55,6 +58,4 @@ public class UngroupPersonCommand extends Command {
         return new CommandResult(
                 String.format(MESSAGE_UNGROUP_PERSON_SUCCESS, Messages.format(personToUngroup)));
     }
-
-
 }
