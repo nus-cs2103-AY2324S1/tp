@@ -68,6 +68,7 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
+### Add a student
 
 Adds a student with his/her relevant details.
 
@@ -101,7 +102,6 @@ Format: `delete <INDEX>`
 **Parameters**:
 1. Appointment Index
     - Numerical characters only
-
 
 
 ### Tag student to risk level 
