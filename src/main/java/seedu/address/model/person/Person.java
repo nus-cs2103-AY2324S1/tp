@@ -37,6 +37,16 @@ public class Person {
         this.tags.addAll(tags);
     }
 
+    /**
+     * Constructor to incorporate User and Date class.
+     */
+    public Person() {
+        this.name = null;
+        this.phone = null;
+        this.email = null;
+        this.address = null;
+    }
+
     public Name getName() {
         return name;
     }
