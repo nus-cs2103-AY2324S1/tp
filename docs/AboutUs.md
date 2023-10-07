@@ -7,7 +7,6 @@
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
@@ -18,7 +17,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/pzl111)]
 [[portfolio](team/pzl111.md)]
 
-* Role: Lead Developer
+* Role: Developer
+* Responsibilities: Development
 
 ### Richie Hsieh
 
@@ -27,7 +27,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/richiehx)]
 [[portfolio](team/richiehx.md)]
 
-* Role: Team Lead
+* Role: Developer
 * Responsibilities: Development
 
 ### Wang Yiwen
@@ -39,11 +39,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: User Usability
+
 ### Marcus Soh
 
 <img src="images/hollag.png" width="200px">
 
-[[github](http://github.com/HollaG)] [[portfolio](team/marcus.md)]
+[[github](http://github.com/HollaG)]
+[[portfolio](team/marcus.md)]
 
 * Role: Developer
 * Responsibilities: Data
@@ -54,7 +56,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[github](http://github.com/elaineshijie)]
 [[portfolio](team/elaineshijie.md)]
-
 
 * Role: Developer
 * Responsibilities: Development
