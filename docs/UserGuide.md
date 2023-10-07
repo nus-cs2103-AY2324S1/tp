@@ -11,7 +11,7 @@ title: User Guide
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `transact.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `transact.jar` from [here].
 
 1. Copy the file to the folder you want to use as the _home folder_ for your tran$act.
 
@@ -51,7 +51,7 @@ Success/Fail Output:
 * Error: <Error Message> (Toast)
 
 
-### Remove transaction: `del`
+### Removing transaction: `del`
 
 Format: `del <id>`
 
@@ -61,14 +61,14 @@ Success/Fail Output:
 * Removed transaction (Toast)
 * Error: <Error Message> (Toast)
 
-### viewing transactions : `view t`
+### Viewing transactions : `view t`
 
 Switches UI to transaction tabs, which shows the full list of transactions
 
 Format: `view t` or `view transaction`
 
 
-### add staff : `addstaf`
+### Adding staff : `addstaf`
 
 Format: `addstaff n/<name> p/<phone no> e/<email> a/<address> [t/<tag>]`
 
@@ -76,7 +76,7 @@ Success/Fail Output:
 * Added staff (Toast)
 * Error: <Error Message> (Toast)
 
-### remove staff: `delstaff`
+### Removing staff: `delstaff`
 
 Format: `delstaff <staff id>`
 
@@ -87,7 +87,7 @@ Success/Fail Output:
 * Error: <Error Message> (Toast)
 
 
-### view staff : `view s`
+### Viewing staff : `view s`
 
 Switches UI to staff tabs, which shows the full list of staff
 
