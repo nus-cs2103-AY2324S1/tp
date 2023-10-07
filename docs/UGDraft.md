@@ -1,21 +1,21 @@
 # User Guide
 - [User Guide](#user-guide)
-  - [Usage](#usage)
-    - [Help](#help)
-    - [Add](#add)
-    - [Del](#del)
-    - [List](#list)
-    - [Start](#start)
-    - [Flip](#flip)
-    - [Yes](#yes)
-    - [No](#no)
-    - [Stop](#stop)
-    - [Exit](#exit)
-    - [Save](#save)
-    - [Load](#load)
-    - [`Yes` :  Indicates user has memorized the word](#yes---indicates-user-has-memorized-the-word)
-    - [`No` :  Indicates user has forgotten the word](#no---indicates-user-has-forgotten-the-word)
-  - [Main UI](#main-ui)
+    - [Usage](#usage)
+        - [Help](#help)
+        - [Add](#add)
+        - [Del](#del)
+        - [List](#list)
+        - [Start](#start)
+        - [Flip](#flip)
+        - [Yes](#yes)
+        - [No](#no)
+        - [Stop](#stop)
+        - [Exit](#exit)
+        - [Save](#save)
+        - [Load](#load)
+        - [`Yes` :  Indicates user has memorized the word](#yes---indicates-user-has-memorized-the-word)
+        - [`No` :  Indicates user has forgotten the word](#no---indicates-user-has-forgotten-the-word)
+    - [Main UI](#main-ui)
 
 ## Usage
 
@@ -176,5 +176,4 @@ Format: `no`
 
 ## Main UI
 ![img.png](MainUi.png)
-
 
