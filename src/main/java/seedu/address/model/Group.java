@@ -9,9 +9,12 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
+/**
+ * Class representing a group
+ */
 public class Group {
-    ObservableList<Person> listOfGroupMates = FXCollections.observableArrayList();
-    String groupName;
+    private final ObservableList<Person> listOfGroupMates = FXCollections.observableArrayList();
+    private final String groupName;
 
     /**
      * Name field must be present and not null.
@@ -36,6 +39,16 @@ public class Group {
 
         return otherGroup != null
                 && otherGroup.getGroupName().equals(getGroupName());
+    }
+
+    /**
+     * Returns if the name of the group is valid.
+     * @param name The name of the group
+     * @return The validity of the group name.
+     */
+    //For now no constraints
+    public static boolean isValidGroup(String name) {
+        return true;
     }
 
     /**
