@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+Flashlingo is a **desktop app for learning words by flashcard, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). Flashlingo can help you to schedule your language learning plan.
 
 * Table of Contents
 {:toc}
@@ -14,26 +14,40 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `flashlingo.jar` from [here](https://github.com/se-edu/addressbook-level3/releases) (Not finished yet).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar flashlingo.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![Ui](images/MainUi.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+1. Type the command in the command box and press Enter to execute it.
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `help` : Shows the User Guide.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `list` : Shows the list of cards.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `add w/WORD t/TRANSLATION` :Adds a word to the flashcard with its translation.
 
-   * `clear` : Deletes all contacts.
+   * `del w/WORD` : Deletes a words and its related information.
 
-   * `exit` : Exits the app.
+   * `start` : Shows flashcard, starts today’s flashcard session.
+
+   * `flip` : Shows the other side of the flash card.
+
+   * `yes` :  Indicates user has memorized the word.
+
+   * `no` :  Indicates user has forgotten the word.
+
+   * `stop` :  Stops the current flashcard session.
+
+   * `exit` : Terminates the program.
+
+   * `save` : Changes save location.
+
+   * `load` : Loads the previously stored data
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -46,18 +60,9 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `add w/WORD t/TRANSLATION`, `WORD` and `TRANSLATION` are a parameter which can be used as `add w/regarder t/look`.
 
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`and `exit`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -65,101 +70,148 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Opens a browser with the help page (User Guide).
 
-![help message](images/helpMessage.png)
+![help message](images/helpMessage.png) (Not finished yet)
 
 Format: `help`
 
 
-### Adding a person: `add`
+### Listing all cards : `list`
 
-Adds a person to the address book.
-
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
-
-Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
-
-### Listing all persons : `list`
-
-Shows a list of all persons in the address book.
+Shows the list of cards with both the original word and the corresponding translation.
 
 Format: `list`
 
-### Editing a person : `edit`
+Format: `list`
 
-Edits an existing person in the address book.
+Output:
+* `There are no words in the list! Add your flashcards now!`
+* `Here are the words:`  
+  `1. ORIGINAL_WORD - TRANSLATION`  
+  `2. ORIGINAL_WORD - TRANSLATION`  
+  `3. ORIGINAL_WORD - TRANSLATION`  
+  `...`
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+![img.png](images/ListUi.png)
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+### Adding a word card: `add`
 
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+Adds a word to the flashcard with its translation.
+* Creates a wild card.
+* Works to add a word with its translation in the expected language.
+* The already saved translation can be overridden with a new translation in a different language.
 
-### Locating persons by name: `find`
-
-Finds persons whose names contain any of the given keywords.
-
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+Format: `add w/WORD t/TRANSLATION`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `add w/regarder t/look` saves the translation of regarder as look
+* `add w/entschuldigung t/sorry` saves the translation of entschuldigung as sorry
 
-### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+### Deleting a word card : `del`
 
-Format: `delete INDEX`
+Deletes a words and its related information
+* Deletes a wild card.
+* Looks up the word and deletes it and all its related information.
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+Format: `del w/WORD`
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `del w/regarder` deletes the word and its translation
+* `del w/entschuldigung` deletes the word and its translation.
 
-### Clearing all entries : `clear`
+###  Showing flashcard, starts today’s flashcard session : `start`
 
-Clears all entries from the address book.
+Shows the words the user is going to study.
 
-Format: `clear`
+Format: `start`
+
+Output:
+![img.png](images/StartUi.png)
+
+
+### Showsing the other side of the flash card : `flip`
+
+Shows the meaning of the word.
+
+Format: `flip`/`f`
+
+Output :
+![img.png](images/StartUi.png)
+
+### Indicating user has memorized the word : `yes`
+
+Marks the word as memorized and pushes the word into the next retention stage.
+
+Format: `yes`
+
+
+###  Indicating user has forgotten the word : `no`
+
+Marks the word as not grasped and leaves it in its current retention stage.
+
+Format: `no`
+
+
+### Stopping the current flashcard session : `stop`
+
+Stops the current flashcard session and returns to the main menu.
+
+Format: `stop`
+
+Output: `Congratulations! You have completed FINISHED_WORDS out of TOTAL_WORDS words!`
 
 ### Exiting the program : `exit`
 
-Exits the program.
+Closes the GUI and terminates the Java program
 
 Format: `exit`
 
+
+### Changing save location : `save`
+
+FlashLingo data is stored automatically to hard disk after every change, there is no need to manually save.
+
+This function is to change the file path where the cards will be stored as a .txt file.
+
+Format: `save <FILEPATH> `
+
+* Changes the default save location to the FILEPATH.
+* ⚠️ Please specify a directory that exists, or a file that ends with .txt
+
+Examples:
+* `save C:/Users/Directory` will save to C:/Users/Directory/FlashLingo.txt
+* `save C:/Users/Directory/FileName.txt` will save to C:/Users/Directory/FileName.txt
+
+Output:
+* `Success`: File has been successfully saved to <FILEPATH>
+* `Failure`: File has not been saved to <FILEPATH>. Please confirm that the path is correct
+
+### Loading the previously stored data : `load`
+
+Loads the data stored by the save function into the program’s list
+
+Format: `load <FILEPATH> `
+
+* Loads the data specified from the .txt file.
+* ⚠️ Please specify a .txt file that was created by the save function. Do NOT load any other txt files.
+
+Examples:
+* `load C:/Users/Directory/FileName.txt` will load the data from FileName.txt
+
+Output:
+* `Success`: File has been successfully loaded from <FILEPATH>
+* `Failure`: File has not been loaded from <FILEPATH>. Please confirm that the path is correct, and that it is a file generated by FlashLingo.
+
+
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+Flashlingo data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+Flashlingo data are saved automatically as a JSON file `[JAR file location]/data/flashlingo.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
@@ -174,13 +226,14 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Flashlingo home folder.
+... (to be completed)
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+1. ... (to be completed)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -188,10 +241,17 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
 **Help** | `help`
+**List** | `list`
+**Add** | `add w/WORD t/TRANSLATION` <br> e.g., `add w/regarder t/look`
+**Delete** | `del w/WORD`<br> e.g., `del w/look`
+**Start** | `start`
+**Flip** | `flip`/`f`
+**Yes** | `yes`
+**No** | `no`
+**Stop** | `stop`
+**Exit** | `exit`
+**Save** | `save <FILEPATH>`<br> e.g., `save C:/Users/Directory`
+**Load** | `load <FILEPATH>`<br> e.g., `load C:/Users/Directory/FileName.txt`
+
+
