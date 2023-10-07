@@ -66,12 +66,6 @@ public class StringUtilTest {
     }
 
     @Test
-    public void containsWordIgnoreCase_multipleWords_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, "Word parameter should be a single word", ()
-            -> StringUtil.containsWordIgnoreCase("typical sentence", "aaa BBB"));
-    }
-
-    @Test
     public void containsWordIgnoreCase_nullSentence_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> StringUtil.containsWordIgnoreCase(null, "abc"));
     }
@@ -125,6 +119,12 @@ public class StringUtilTest {
 
         // Matches multiple words in sentence
         assertTrue(StringUtil.containsWordIgnoreCase("AAA bBb ccc  bbb", "bbB"));
+
+        // Inputs consisting of more than 1 word
+        assertTrue(StringUtil.containsWordIgnoreCase("AAA bBb ccc  bbb", "bbB cc"));
+        assertTrue(StringUtil.containsWordIgnoreCase("AAA bBb ccc  bbb", "a b"));
+        assertTrue(StringUtil.containsWordIgnoreCase("AAA bBb ccc  bbb", "c  bb"));
+        assertTrue(StringUtil.containsWordIgnoreCase("AAA bBb ccc  bbb", "AAA bB"));
     }
 
     //---------------- Tests for getDetails --------------------------------------
