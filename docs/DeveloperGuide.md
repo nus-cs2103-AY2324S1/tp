@@ -2,9 +2,6 @@
 layout: page
 title: Developer Guide
 ---
-# Flashlingo Developer Guide
-
---------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
 
