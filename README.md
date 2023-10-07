@@ -1,6 +1,6 @@
 [![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
 
-![Ui](docs/images/Ui.png)
+![Ui](docs/images/MainUi.png)
 
 * This is **a vocabulary memorizing project for all language learners**.<br>
 * This project is designed to assist language learners in memorizing words efficiently using a scientific approach based on the **Ebbinghaus Forgetting Curve**.
