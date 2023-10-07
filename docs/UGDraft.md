@@ -1,41 +1,114 @@
 # User Guide
-- [Usage](#usage)
-    * [Help](#help)
-    * [List](#list)
-    * [Stop](#stop)
-    * [Exit](#exit)
-    * [Save](#save)
-    * [Load](#load)
-    * [Yes](#Yes)
-    * [No](#No)
-  
+- [User Guide](#user-guide)
+  - [Usage](#usage)
+    - [Help](#help)
+    - [Add](#add)
+    - [Del](#del)
+    - [List](#list)
+    - [Start](#start)
+    - [Flip](#flip)
+    - [Yes](#yes)
+    - [No](#no)
+    - [Stop](#stop)
+    - [Exit](#exit)
+    - [Save](#save)
+    - [Load](#load)
+    - [`Yes` :  Indicates user has memorized the word](#yes---indicates-user-has-memorized-the-word)
+    - [`No` :  Indicates user has forgotten the word](#no---indicates-user-has-forgotten-the-word)
+  - [Main UI](#main-ui)
+
 ## Usage
 
-
-### `help` :  Shows the User Guide
+### Help
+**`help` :  Shows the User Guide**
 
 Opens a browser with the help page (User Guide)
 
 Format: `help`
 
-### `list` :  Shows the list of cards
+### Add
+**`add` : Adds a word**
+Adds a word to the flashcard with its translation.
+* Creates a wild card.
+* Works to add a word with its translation in the expected language.
+* The already saved translation can be overridden with a new translation in a different language.
+
+Format: `add w/WORD t/TRANSLATION`
+
+Examples:
+* `add w/regarder t/look` saves the translation of regarder as look
+* `add w/entschuldigung t/sorry` saves the translation of entschuldigung as sorry
+
+
+### Del
+**`del` : Deletes a word**
+Deletes a words and its related information
+* Deletes a wild card.
+* Looks up the word and deletes it and all its related information.
+
+Format: `del w/WORD`
+
+Examples:
+* `del w/regarder` deletes the word and its translation
+* `del w/entschuldigung` deletes the word and its translation.
+
+
+### List
+**`list` :  Shows the list of cards**
 
 Shows the list of cards with both the original word and the corresponding translation.
 
 Format: `list`
 
-Output: 
+Output:
 * `There are no words in the list! Add your flashcards now!`
 * `Here are the words:`  
-`1. ORIGINAL_WORD - TRANSLATION`  
-`2. ORIGINAL_WORD - TRANSLATION`  
-`3. ORIGINAL_WORD - TRANSLATION`  
-`...`
+  `1. ORIGINAL_WORD - TRANSLATION`  
+  `2. ORIGINAL_WORD - TRANSLATION`  
+  `3. ORIGINAL_WORD - TRANSLATION`  
+  `...`
 
 ![img.png](ListUi.png)
 
+### Start
+**`start` : Shows flashcard, starts today’s flashcard session**
 
-### `stop` :  Stops the current flashcard session
+Shows the words the user is going to study.
+
+Format: `start`
+
+Output:
+![img.png](StartUi.png)
+
+
+### Flip
+**`flip` : Shows the other side of the flash card**
+
+Shows the meaning of the word.
+
+Format: `flip`/`f`
+
+Output :
+![img.png](StartUi.png)
+
+### Yes
+**`yes` :  Indicates user has memorized the word**
+
+Marks the word as memorized and pushes the word into the next retention stage.
+
+Format: `yes`
+
+
+### No
+**`no` :  Indicates user has forgotten the word**
+
+Marks the word as not grasped and leaves it in its current retention stage.
+
+Format: `no`
+
+
+### Stop
+**`stop` :  Stops the current flashcard session**
 
 Stops the current flashcard session and returns to the main menu.
 
@@ -43,14 +116,16 @@ Format: `stop`
 
 Output: `Congratulations! You have completed FINISHED_WORDS out of TOTAL_WORDS words!`
 
-### `exit` : Terminates the program
+### Exit
+**`exit` : Terminates the program**
 
 Closes the GUI and terminates the Java program
 
 Format: `exit`
 
 
-### `save` : Changes save location
+### Save
+**`save` : Changes save location**
 
 FlashLingo data is stored automatically to hard disk after every change, there is no need to manually save.
 
@@ -69,7 +144,8 @@ Output:
 * `Success`: File has been successfully saved to <FILEPATH>
 * `Failure`: File has not been saved to <FILEPATH>. Please confirm that the path is correct
 
-### `load` : Loads the previously stored data 
+### Load
+**`load` : Loads the previously stored data**
 
 Loads the data stored by the save function into the program’s list
 
