@@ -34,7 +34,7 @@ organise and manage patient details faster than traditional GUI apps.
 
    * `list` : Lists all patients.
 
-   * `add n/John Doe id/S8943782H ward/Psychology phone/98114839` : Adds a patient named `John Doe` to HealthSync.
+   * `add n/John Doe id/S8943782H w/Psychology p/98114839` : Adds a patient named `John Doe` to HealthSync.
 
    * `delete n/Alex Yeoh` : Deletes Alex Yeoh details from the current list.
 
@@ -97,15 +97,16 @@ The 2 identifying parameters are given below:
 
 `[field]` are common optional fields that can be specified behind commands. The common optional fields are:
 
-| Tag      | Representative Value   | Example Usage         | General Form in Commands | Remarks                      |
-|----------|------------------------|-----------------------|--------------------------|------------------------------|
-| `p/`     | Phone Number           | `p/91234567`          | `p/PHONE_NUMBER`         |                              |
-| `e/`     | Email Address          | `e/example@a.com`     | `e/EMAIL`                |                              |
-| `a/`     | Address                | `a/Location, Here Rd` | `a/ADDRESS`              |                              |
-| `m/`     | Medical History        | `m/Asthmatic`         | `m/MEDICAL_HISTORY`      |                              |
-| `w/`     | Ward                   | `w/Ward 16A`          | `w/WARD_INFORMATION`     |                              |
-| `start/` | Appointment Start Time | `start/Nov 11, 9AM`   | `start/APPT_START`       | Must be paired with `/end`   |
-| `end/`   | Appointment End Time   | `end/Nov 11, 12PM`    | `end/APPT_END`           | Must be paired with `/start` |
+| Tag      | Representative Value   | Example Usage         | General Form in Commands | Remarks                         |
+|----------|------------------------|-----------------------|--------------------------|---------------------------------|
+| `p/`     | Phone Number           | `p/91234567`          | `p/PHONE_NUMBER`         |                                 |
+| `e/`     | Email Address          | `e/example@a.com`     | `e/EMAIL`                |                                 |
+| `a/`     | Address                | `a/Location, Here Rd` | `a/ADDRESS`              |                                 |
+| `m/`     | Medical History        | `m/Asthmatic`         | `m/MEDICAL_HISTORY`      |                                 |
+| `w/`     | Ward                   | `w/Ward 16A`          | `w/WARD_INFORMATION`     |                                 |
+| `start/` | Appointment Start Time | `start/Nov 11, 9AM`   | `start/APPT_START`       | Must be paired with `/end`      |
+| `end/`   | Appointment End Time   | `end/Nov 11, 12PM`    | `end/APPT_END`           | Must be paired with `/start`    |
+| `t/`     | Tag                    | `t/Emergency`         | `t/TAG`                  | Can have multiple of this field |
 
 ### Auto Save
 
@@ -206,9 +207,6 @@ Format: `delete n/NAME or id/IC_NUMBER [field]`
  * To delete a specified field only instead of the entire person, we indicate the field behind of the identification
  * If multiple people has the same name, HealthSync will display a list of people with that name together with their IC number.
 
-Acceptable values for each parameter:
- * String
-
 Expected outputs when the command succeeds:
  * `Patient n/NAME or id/IC_NUMBER has been removed from the database`
  * `The [field] of Patient n/NAME or id/IC_NUMBER has been removed from the database`
@@ -227,9 +225,9 @@ list followed by delete 2 deletes the 2nd person in the address book.
 find Betsy followed by delete 1 deletes the 1st person in the results of the find command.
 -->
 
-### Clearing all entries : `clear`
+### Delete all patients : `clear`
 
-Clears all entries from the program.
+Deletes all patients from the program.
 
 Format: `clear`
 
