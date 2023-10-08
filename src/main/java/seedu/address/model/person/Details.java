@@ -1,5 +1,8 @@
 package seedu.address.model.person;
 
+/**
+ * Represents a Person's details in the address book.
+ */
 public class Details {
 
     public static final String MESSAGE_CONSTRAINTS = "Details should only contain alphanumeric characters "
