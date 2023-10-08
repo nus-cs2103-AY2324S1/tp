@@ -49,7 +49,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: UI and backend
 
-### Song Mengfei
+### Song Mengfei 
 
 <img src="images/song-mengfei.png" width="200px">
 
