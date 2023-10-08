@@ -1,7 +1,7 @@
 package seedu.lovebook.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_NAME;
@@ -39,7 +39,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_AGE + "AGE] "
             + "[" + PREFIX_GENDER + "GENDER] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_HEIGHT + "HEIGHT] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_AGE + "91234567 "
@@ -95,7 +95,7 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElse(dateToEdit.getName());
         Age updatedAge = editPersonDescriptor.getAge().orElse(dateToEdit.getAge());
         Gender updatedGender = editPersonDescriptor.getGender().orElse(dateToEdit.getGender());
-        Height updatedHeight = editPersonDescriptor.getAddress().orElse(dateToEdit.getAddress());
+        Height updatedHeight = editPersonDescriptor.getHeight().orElse(dateToEdit.getHeight());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(dateToEdit.getTags());
 
         return new Date(updatedName, updatedAge, updatedGender, updatedHeight, updatedTags);
@@ -185,7 +185,7 @@ public class EditCommand extends Command {
             this.height = height;
         }
 
-        public Optional<Height> getAddress() {
+        public Optional<Height> getHeight() {
             return Optional.ofNullable(height);
         }
 

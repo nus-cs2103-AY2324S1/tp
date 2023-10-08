@@ -1,13 +1,13 @@
 package seedu.lovebook.logic.parser;
 
 import static seedu.lovebook.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.lovebook.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
-import static seedu.lovebook.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
+import static seedu.lovebook.logic.commands.CommandTestUtil.HEIGHT_DESC_AMY;
+import static seedu.lovebook.logic.commands.CommandTestUtil.HEIGHT_DESC_BOB;
 import static seedu.lovebook.logic.commands.CommandTestUtil.AGE_DESC_AMY;
 import static seedu.lovebook.logic.commands.CommandTestUtil.AGE_DESC_BOB;
 import static seedu.lovebook.logic.commands.CommandTestUtil.GENDER_DESC_AMY;
 import static seedu.lovebook.logic.commands.CommandTestUtil.GENDER_DESC_BOB;
-import static seedu.lovebook.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
+import static seedu.lovebook.logic.commands.CommandTestUtil.INVALID_HEIGHT_DESC;
 import static seedu.lovebook.logic.commands.CommandTestUtil.INVALID_AGE_DESC;
 import static seedu.lovebook.logic.commands.CommandTestUtil.INVALID_GENDER_DESC;
 import static seedu.lovebook.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
@@ -15,14 +15,14 @@ import static seedu.lovebook.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.lovebook.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.lovebook.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.lovebook.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
+import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_HEIGHT_AMY;
 import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_AGE_AMY;
 import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_AGE_BOB;
 import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_GENDER_AMY;
 import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_TAG;
@@ -86,7 +86,7 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
         assertParseFailure(parser, "1" + INVALID_AGE_DESC, Age.MESSAGE_CONSTRAINTS); // invalid age
         assertParseFailure(parser, "1" + INVALID_GENDER_DESC, Gender.MESSAGE_CONSTRAINTS); // invalid gender
-        assertParseFailure(parser, "1" + INVALID_ADDRESS_DESC, Height.MESSAGE_CONSTRAINTS); // invalid lovebook
+        assertParseFailure(parser, "1" + INVALID_HEIGHT_DESC, Height.MESSAGE_CONSTRAINTS); // invalid lovebook
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
 
         // invalid age followed by valid gender
@@ -99,7 +99,7 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
-        assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_GENDER_DESC + VALID_ADDRESS_AMY + VALID_AGE_AMY,
+        assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_GENDER_DESC + VALID_HEIGHT_AMY + VALID_AGE_AMY,
                 Name.MESSAGE_CONSTRAINTS);
     }
 
@@ -107,10 +107,10 @@ public class EditCommandParserTest {
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + AGE_DESC_BOB + TAG_DESC_HUSBAND
-                + GENDER_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND;
+                + GENDER_DESC_AMY + HEIGHT_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withAge(VALID_AGE_BOB).withGender(VALID_GENDER_AMY).withAddress(VALID_ADDRESS_AMY)
+                .withAge(VALID_AGE_BOB).withGender(VALID_GENDER_AMY).withHeight(VALID_HEIGHT_AMY)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
@@ -151,8 +151,8 @@ public class EditCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // lovebook
-        userInput = targetIndex.getOneBased() + ADDRESS_DESC_AMY;
-        descriptor = new EditPersonDescriptorBuilder().withAddress(VALID_ADDRESS_AMY).build();
+        userInput = targetIndex.getOneBased() + HEIGHT_DESC_AMY;
+        descriptor = new EditPersonDescriptorBuilder().withHeight(VALID_HEIGHT_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -180,19 +180,19 @@ public class EditCommandParserTest {
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_AGE));
 
         // mulltiple valid fields repeated
-        userInput = targetIndex.getOneBased() + AGE_DESC_AMY + ADDRESS_DESC_AMY + GENDER_DESC_AMY
-                + TAG_DESC_FRIEND + AGE_DESC_AMY + ADDRESS_DESC_AMY + GENDER_DESC_AMY + TAG_DESC_FRIEND
-                + AGE_DESC_BOB + ADDRESS_DESC_BOB + GENDER_DESC_BOB + TAG_DESC_HUSBAND;
+        userInput = targetIndex.getOneBased() + AGE_DESC_AMY + HEIGHT_DESC_AMY + GENDER_DESC_AMY
+                + TAG_DESC_FRIEND + AGE_DESC_AMY + HEIGHT_DESC_AMY + GENDER_DESC_AMY + TAG_DESC_FRIEND
+                + AGE_DESC_BOB + HEIGHT_DESC_BOB + GENDER_DESC_BOB + TAG_DESC_HUSBAND;
 
         assertParseFailure(parser, userInput,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_AGE, PREFIX_GENDER, PREFIX_ADDRESS));
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_AGE, PREFIX_GENDER, PREFIX_HEIGHT));
 
         // multiple invalid values
-        userInput = targetIndex.getOneBased() + INVALID_AGE_DESC + INVALID_ADDRESS_DESC + INVALID_GENDER_DESC
-                + INVALID_AGE_DESC + INVALID_ADDRESS_DESC + INVALID_GENDER_DESC;
+        userInput = targetIndex.getOneBased() + INVALID_AGE_DESC + INVALID_HEIGHT_DESC + INVALID_GENDER_DESC
+                + INVALID_AGE_DESC + INVALID_HEIGHT_DESC + INVALID_GENDER_DESC;
 
         assertParseFailure(parser, userInput,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_AGE, PREFIX_GENDER, PREFIX_ADDRESS));
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_AGE, PREFIX_GENDER, PREFIX_HEIGHT));
     }
 
     @Test

@@ -1,13 +1,13 @@
 package seedu.lovebook.logic.parser;
 
 import static seedu.lovebook.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.lovebook.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
-import static seedu.lovebook.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
+import static seedu.lovebook.logic.commands.CommandTestUtil.HEIGHT_DESC_AMY;
+import static seedu.lovebook.logic.commands.CommandTestUtil.HEIGHT_DESC_BOB;
 import static seedu.lovebook.logic.commands.CommandTestUtil.AGE_DESC_AMY;
 import static seedu.lovebook.logic.commands.CommandTestUtil.AGE_DESC_BOB;
 import static seedu.lovebook.logic.commands.CommandTestUtil.GENDER_DESC_AMY;
 import static seedu.lovebook.logic.commands.CommandTestUtil.GENDER_DESC_BOB;
-import static seedu.lovebook.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
+import static seedu.lovebook.logic.commands.CommandTestUtil.INVALID_HEIGHT_DESC;
 import static seedu.lovebook.logic.commands.CommandTestUtil.INVALID_AGE_DESC;
 import static seedu.lovebook.logic.commands.CommandTestUtil.INVALID_GENDER_DESC;
 import static seedu.lovebook.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
@@ -18,13 +18,13 @@ import static seedu.lovebook.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.lovebook.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.lovebook.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.lovebook.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_HEIGHT_BOB;
 import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_AGE_BOB;
 import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_GENDER_BOB;
 import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_NAME;
@@ -54,21 +54,21 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + AGE_DESC_BOB + GENDER_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedDate));
+                + HEIGHT_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedDate));
 
 
         // multiple tags - all accepted
         Date expectedDateMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
         assertParseSuccess(parser,
-                NAME_DESC_BOB + AGE_DESC_BOB + GENDER_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                NAME_DESC_BOB + AGE_DESC_BOB + GENDER_DESC_BOB + HEIGHT_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 new AddCommand(expectedDateMultipleTags));
     }
 
     @Test
     public void parse_repeatedNonTagValue_failure() {
         String validExpectedPersonString = NAME_DESC_BOB + AGE_DESC_BOB + GENDER_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND;
+                + HEIGHT_DESC_BOB + TAG_DESC_FRIEND;
 
         // multiple names
         assertParseFailure(parser, NAME_DESC_AMY + validExpectedPersonString,
@@ -83,14 +83,14 @@ public class AddCommandParserTest {
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_GENDER));
 
         // multiple addresses
-        assertParseFailure(parser, ADDRESS_DESC_AMY + validExpectedPersonString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
+        assertParseFailure(parser, HEIGHT_DESC_AMY + validExpectedPersonString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_HEIGHT));
 
         // multiple fields repeated
         assertParseFailure(parser,
-                validExpectedPersonString + AGE_DESC_AMY + GENDER_DESC_AMY + NAME_DESC_AMY + ADDRESS_DESC_AMY
+                validExpectedPersonString + AGE_DESC_AMY + GENDER_DESC_AMY + NAME_DESC_AMY + HEIGHT_DESC_AMY
                         + validExpectedPersonString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_ADDRESS, PREFIX_GENDER, PREFIX_AGE));
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_HEIGHT, PREFIX_GENDER, PREFIX_AGE));
 
         // invalid value followed by valid value
 
@@ -107,8 +107,8 @@ public class AddCommandParserTest {
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_AGE));
 
         // invalid lovebook
-        assertParseFailure(parser, INVALID_ADDRESS_DESC + validExpectedPersonString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
+        assertParseFailure(parser, INVALID_HEIGHT_DESC + validExpectedPersonString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_HEIGHT));
 
         // valid value followed by invalid value
 
@@ -125,15 +125,15 @@ public class AddCommandParserTest {
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_AGE));
 
         // invalid lovebook
-        assertParseFailure(parser, validExpectedPersonString + INVALID_ADDRESS_DESC,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
+        assertParseFailure(parser, validExpectedPersonString + INVALID_HEIGHT_DESC,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_HEIGHT));
     }
 
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
         Date expectedDate = new PersonBuilder(AMY).withTags().build();
-        assertParseSuccess(parser, NAME_DESC_AMY + AGE_DESC_AMY + GENDER_DESC_AMY + ADDRESS_DESC_AMY,
+        assertParseSuccess(parser, NAME_DESC_AMY + AGE_DESC_AMY + GENDER_DESC_AMY + HEIGHT_DESC_AMY,
                 new AddCommand(expectedDate));
     }
 
@@ -142,55 +142,55 @@ public class AddCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
 
         // missing name prefix
-        assertParseFailure(parser, VALID_NAME_BOB + AGE_DESC_BOB + GENDER_DESC_BOB + ADDRESS_DESC_BOB,
+        assertParseFailure(parser, VALID_NAME_BOB + AGE_DESC_BOB + GENDER_DESC_BOB + HEIGHT_DESC_BOB,
                 expectedMessage);
 
         // missing age prefix
-        assertParseFailure(parser, NAME_DESC_BOB + VALID_AGE_BOB + GENDER_DESC_BOB + ADDRESS_DESC_BOB,
+        assertParseFailure(parser, NAME_DESC_BOB + VALID_AGE_BOB + GENDER_DESC_BOB + HEIGHT_DESC_BOB,
                 expectedMessage);
 
         // missing gender prefix
-        assertParseFailure(parser, NAME_DESC_BOB + AGE_DESC_BOB + VALID_GENDER_BOB + ADDRESS_DESC_BOB,
+        assertParseFailure(parser, NAME_DESC_BOB + AGE_DESC_BOB + VALID_GENDER_BOB + HEIGHT_DESC_BOB,
                 expectedMessage);
 
         // missing lovebook prefix
-        assertParseFailure(parser, NAME_DESC_BOB + AGE_DESC_BOB + GENDER_DESC_BOB + VALID_ADDRESS_BOB,
+        assertParseFailure(parser, NAME_DESC_BOB + AGE_DESC_BOB + GENDER_DESC_BOB + VALID_HEIGHT_BOB,
                 expectedMessage);
 
         // all prefixes missing
-        assertParseFailure(parser, VALID_NAME_BOB + VALID_AGE_BOB + VALID_GENDER_BOB + VALID_ADDRESS_BOB,
+        assertParseFailure(parser, VALID_NAME_BOB + VALID_AGE_BOB + VALID_GENDER_BOB + VALID_HEIGHT_BOB,
                 expectedMessage);
     }
 
     @Test
     public void parse_invalidValue_failure() {
         // invalid name
-        assertParseFailure(parser, INVALID_NAME_DESC + AGE_DESC_BOB + GENDER_DESC_BOB + ADDRESS_DESC_BOB
+        assertParseFailure(parser, INVALID_NAME_DESC + AGE_DESC_BOB + GENDER_DESC_BOB + HEIGHT_DESC_BOB
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Name.MESSAGE_CONSTRAINTS);
 
         // invalid age
-        assertParseFailure(parser, NAME_DESC_BOB + INVALID_AGE_DESC + GENDER_DESC_BOB + ADDRESS_DESC_BOB
+        assertParseFailure(parser, NAME_DESC_BOB + INVALID_AGE_DESC + GENDER_DESC_BOB + HEIGHT_DESC_BOB
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Age.MESSAGE_CONSTRAINTS);
 
         // invalid gender
-        assertParseFailure(parser, NAME_DESC_BOB + AGE_DESC_BOB + INVALID_GENDER_DESC + ADDRESS_DESC_BOB
+        assertParseFailure(parser, NAME_DESC_BOB + AGE_DESC_BOB + INVALID_GENDER_DESC + HEIGHT_DESC_BOB
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Gender.MESSAGE_CONSTRAINTS);
 
         // invalid lovebook
-        assertParseFailure(parser, NAME_DESC_BOB + AGE_DESC_BOB + GENDER_DESC_BOB + INVALID_ADDRESS_DESC
+        assertParseFailure(parser, NAME_DESC_BOB + AGE_DESC_BOB + GENDER_DESC_BOB + INVALID_HEIGHT_DESC
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Height.MESSAGE_CONSTRAINTS);
 
         // invalid tag
-        assertParseFailure(parser, NAME_DESC_BOB + AGE_DESC_BOB + GENDER_DESC_BOB + ADDRESS_DESC_BOB
+        assertParseFailure(parser, NAME_DESC_BOB + AGE_DESC_BOB + GENDER_DESC_BOB + HEIGHT_DESC_BOB
                 + INVALID_TAG_DESC + VALID_TAG_FRIEND, Tag.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
-        assertParseFailure(parser, INVALID_NAME_DESC + AGE_DESC_BOB + GENDER_DESC_BOB + INVALID_ADDRESS_DESC,
+        assertParseFailure(parser, INVALID_NAME_DESC + AGE_DESC_BOB + GENDER_DESC_BOB + INVALID_HEIGHT_DESC,
                 Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + AGE_DESC_BOB + GENDER_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                + HEIGHT_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 }

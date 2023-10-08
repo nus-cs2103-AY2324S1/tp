@@ -2,7 +2,7 @@ package seedu.lovebook.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_NAME;
@@ -32,8 +32,8 @@ public class CommandTestUtil {
     public static final String VALID_AGE_BOB = "22";
     public static final String VALID_GENDER_AMY = "F";
     public static final String VALID_GENDER_BOB = "M";
-    public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
-    public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
+    public static final String VALID_HEIGHT_AMY = "30";
+    public static final String VALID_HEIGHT_BOB = "10";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
@@ -43,15 +43,15 @@ public class CommandTestUtil {
     public static final String AGE_DESC_BOB = " " + PREFIX_AGE + VALID_AGE_BOB;
     public static final String GENDER_DESC_AMY = " " + PREFIX_GENDER + VALID_GENDER_AMY;
     public static final String GENDER_DESC_BOB = " " + PREFIX_GENDER + VALID_GENDER_BOB;
-    public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
-    public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
+    public static final String HEIGHT_DESC_AMY = " " + PREFIX_HEIGHT + VALID_HEIGHT_AMY;
+    public static final String HEIGHT_DESC_BOB = " " + PREFIX_HEIGHT + VALID_HEIGHT_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_AGE_DESC = " " + PREFIX_AGE + "911a"; // 'a' not allowed in ages
     public static final String INVALID_GENDER_DESC = " " + PREFIX_GENDER + "bob!yahoo"; // missing '@' symbol
-    public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
+    public static final String INVALID_HEIGHT_DESC = " " + PREFIX_HEIGHT; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
@@ -62,10 +62,10 @@ public class CommandTestUtil {
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withAge(VALID_AGE_AMY).withGender(VALID_GENDER_AMY).withAddress(VALID_ADDRESS_AMY)
+                .withAge(VALID_AGE_AMY).withGender(VALID_GENDER_AMY).withHeight(VALID_HEIGHT_AMY)
                 .withTags(VALID_TAG_FRIEND).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withAge(VALID_AGE_BOB).withGender(VALID_GENDER_BOB).withAddress(VALID_ADDRESS_BOB)
+                .withAge(VALID_AGE_BOB).withGender(VALID_GENDER_BOB).withHeight(VALID_HEIGHT_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 

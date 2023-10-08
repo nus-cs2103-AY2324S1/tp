@@ -20,26 +20,27 @@ public class HeightTest {
     }
 
     @Test
-    public void isValidAddress() {
+    public void isValidHeight() {
         // null lovebook
-        assertThrows(NullPointerException.class, () -> Height.isValidAddress(null));
+        assertThrows(NullPointerException.class, () -> Height.isValidHeight(null));
 
         // invalid addresses
-        assertFalse(Height.isValidAddress("")); // empty string
-        assertFalse(Height.isValidAddress(" ")); // spaces only
+        assertFalse(Height.isValidHeight("")); // empty string
+        assertFalse(Height.isValidHeight(" ")); // spaces only
+        assertFalse(Height.isValidHeight("Blk 456, Den Road, #01-355"));
+        assertFalse(Height.isValidHeight("-")); // one character
+        assertFalse(Height.isValidHeight("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA")); // long lovebook
 
         // valid addresses
-        assertTrue(Height.isValidAddress("Blk 456, Den Road, #01-355"));
-        assertTrue(Height.isValidAddress("-")); // one character
-        assertTrue(Height.isValidAddress("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA")); // long lovebook
+        assertTrue(Height.isValidHeight("123"));
     }
 
     @Test
     public void equals() {
-        Height height = new Height("Valid Height");
+        Height height = new Height("20");
 
         // same values -> returns true
-        assertTrue(height.equals(new Height("Valid Height")));
+        assertTrue(height.equals(new Height("20")));
 
         // same object -> returns true
         assertTrue(height.equals(height));
@@ -51,6 +52,6 @@ public class HeightTest {
         assertFalse(height.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(height.equals(new Height("Other Valid Height")));
+        assertFalse(height.equals(new Height("30")));
     }
 }

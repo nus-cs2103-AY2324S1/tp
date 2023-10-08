@@ -107,7 +107,7 @@ In `src/test/data/`, data meant for testing purposes are stored. While keeping t
     "name": "Person with invalid name field: Ha!ns Mu@ster",
     "age": "9482424",
     "gender": "hans@example.com",
-    "height": "4th street"
+    "height": "23245"
   } ]
 }
 ```

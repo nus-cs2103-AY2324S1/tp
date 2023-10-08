@@ -74,7 +74,7 @@ public class ParserUtil {
     public static Height parseAddress(String height) throws ParseException {
         requireNonNull(height);
         String trimmedAddress = height.trim();
-        if (!Height.isValidAddress(trimmedAddress)) {
+        if (!Height.isValidHeight(trimmedAddress)) {
             throw new ParseException(Height.MESSAGE_CONSTRAINTS);
         }
         return new Height(trimmedAddress);

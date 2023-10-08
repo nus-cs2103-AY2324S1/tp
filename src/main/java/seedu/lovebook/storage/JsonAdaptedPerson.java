@@ -50,7 +50,7 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         age = source.getAge().value;
         gender = source.getGender().value;
-        height = source.getAddress().value;
+        height = source.getHeight().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -94,7 +94,7 @@ class JsonAdaptedPerson {
         if (height == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Height.class.getSimpleName()));
         }
-        if (!Height.isValidAddress(height)) {
+        if (!Height.isValidHeight(height)) {
             throw new IllegalValueException(Height.MESSAGE_CONSTRAINTS);
         }
         final Height modelHeight = new Height(height);

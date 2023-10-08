@@ -59,7 +59,7 @@ public class Date {
         return gender;
     }
 
-    public Height getAddress() {
+    public Height getHeight() {
         return height;
     }
 

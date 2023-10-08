@@ -5,7 +5,7 @@ import static seedu.lovebook.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Date's lovebook in the lovebook book.
- * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidHeight(String)}
  */
 public class Height {
 
@@ -15,7 +15,7 @@ public class Height {
      * The first character of the lovebook must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[^\\s].*";
+    public static final String VALIDATION_REGEX = "^[1-9]\\d*$";
 
     public final String value;
 
@@ -26,14 +26,14 @@ public class Height {
      */
     public Height(String height) {
         requireNonNull(height);
-        checkArgument(isValidAddress(height), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidHeight(height), MESSAGE_CONSTRAINTS);
         value = height;
     }
 
     /**
      * Returns true if a given string is a valid gender.
      */
-    public static boolean isValidAddress(String test) {
+    public static boolean isValidHeight(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 

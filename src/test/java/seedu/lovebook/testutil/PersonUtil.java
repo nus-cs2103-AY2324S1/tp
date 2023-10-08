@@ -1,6 +1,6 @@
 package seedu.lovebook.testutil;
 
-import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_NAME;
@@ -33,7 +33,7 @@ public class PersonUtil {
         sb.append(PREFIX_NAME + date.getName().fullName + " ");
         sb.append(PREFIX_AGE + date.getAge().value + " ");
         sb.append(PREFIX_GENDER + date.getGender().value + " ");
-        sb.append(PREFIX_ADDRESS + date.getAddress().value + " ");
+        sb.append(PREFIX_HEIGHT + date.getHeight().value + " ");
         date.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
@@ -48,7 +48,7 @@ public class PersonUtil {
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getAge().ifPresent(age -> sb.append(PREFIX_AGE).append(age.value).append(" "));
         descriptor.getGender().ifPresent(gender -> sb.append(PREFIX_GENDER).append(gender.value).append(" "));
-        descriptor.getAddress().ifPresent(height -> sb.append(PREFIX_ADDRESS).append(height.value).append(" "));
+        descriptor.getHeight().ifPresent(height -> sb.append(PREFIX_HEIGHT).append(height.value).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {

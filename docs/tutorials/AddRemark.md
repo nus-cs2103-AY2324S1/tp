@@ -349,7 +349,7 @@ save it with `Model#setPerson()`.
         Person dateToEdit = lastShownList.get(index.getZeroBased());
         Person editedDate = new Person(
                 dateToEdit.getName(), dateToEdit.getAge(), dateToEdit.getGender(),
-                dateToEdit.getAddress(), remark, dateToEdit.getTags());
+                dateToEdit.getHeight(), remark, dateToEdit.getTags());
 
         model.setPerson(dateToEdit, editedDate);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

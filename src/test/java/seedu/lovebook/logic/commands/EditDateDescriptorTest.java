@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.lovebook.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.lovebook.logic.commands.CommandTestUtil.DESC_BOB;
-import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_HEIGHT_BOB;
 import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_AGE_BOB;
 import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_GENDER_BOB;
 import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_NAME_BOB;
@@ -49,7 +49,7 @@ public class EditDateDescriptorTest {
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different lovebook -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withAddress(VALID_ADDRESS_BOB).build();
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withHeight(VALID_HEIGHT_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different tags -> returns false
@@ -64,7 +64,7 @@ public class EditDateDescriptorTest {
                 + editPersonDescriptor.getName().orElse(null) + ", age="
                 + editPersonDescriptor.getAge().orElse(null) + ", gender="
                 + editPersonDescriptor.getGender().orElse(null) + ", lovebook="
-                + editPersonDescriptor.getAddress().orElse(null) + ", tags="
+                + editPersonDescriptor.getHeight().orElse(null) + ", tags="
                 + editPersonDescriptor.getTags().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());
     }

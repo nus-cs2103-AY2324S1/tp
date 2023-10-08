@@ -50,7 +50,7 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(date.getName().fullName);
         age.setText(date.getAge().value);
-        height.setText(date.getAddress().value);
+        height.setText(date.getHeight().value);
         gender.setText(date.getGender().value);
         date.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))

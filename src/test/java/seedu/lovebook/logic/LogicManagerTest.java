@@ -3,7 +3,7 @@ package seedu.lovebook.logic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.lovebook.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.lovebook.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.lovebook.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
+import static seedu.lovebook.logic.commands.CommandTestUtil.HEIGHT_DESC_AMY;
 import static seedu.lovebook.logic.commands.CommandTestUtil.AGE_DESC_AMY;
 import static seedu.lovebook.logic.commands.CommandTestUtil.GENDER_DESC_AMY;
 import static seedu.lovebook.logic.commands.CommandTestUtil.NAME_DESC_AMY;
@@ -166,7 +166,7 @@ public class LogicManagerTest {
 
         // Triggers the saveLoveBook method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + AGE_DESC_AMY
-                + GENDER_DESC_AMY + ADDRESS_DESC_AMY;
+                + GENDER_DESC_AMY + HEIGHT_DESC_AMY;
         Date expectedDate = new PersonBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedDate);

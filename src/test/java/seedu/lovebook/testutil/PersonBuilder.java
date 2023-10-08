@@ -16,7 +16,7 @@ public class PersonBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_AGE = "33";
     public static final String DEFAULT_GENDER = "F";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_HEIGHT = "123";
 
     private Name name;
     private Age age;
@@ -31,7 +31,7 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         age = new Age(DEFAULT_AGE);
         gender = new Gender(DEFAULT_GENDER);
-        height = new Height(DEFAULT_ADDRESS);
+        height = new Height(DEFAULT_HEIGHT);
         tags = new HashSet<>();
     }
 
@@ -42,7 +42,7 @@ public class PersonBuilder {
         name = dateToCopy.getName();
         age = dateToCopy.getAge();
         gender = dateToCopy.getGender();
-        height = dateToCopy.getAddress();
+        height = dateToCopy.getHeight();
         tags = new HashSet<>(dateToCopy.getTags());
     }
 
@@ -65,7 +65,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code Height} of the {@code Date} that we are building.
      */
-    public PersonBuilder withAddress(String height) {
+    public PersonBuilder withHeight(String height) {
         this.height = new Height(height);
         return this;
     }

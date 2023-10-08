@@ -3,11 +3,11 @@
     "name": "Valid Person",
     "age": "33",
     "gender": "M",
-    "height": "4th street"
+    "height": "23245"
   }, {
     "name": "Person With Invalid Age Field",
     "age": "948asdf2424",
     "gender": "Transgender",
-    "height": "4th street"
+    "height": "23245"
   } ]
 }

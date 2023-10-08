@@ -42,7 +42,7 @@ public class Messages {
                 .append("; Gender: ")
                 .append(date.getGender())
                 .append("; Height: ")
-                .append(date.getAddress())
+                .append(date.getHeight())
                 .append("; Tags: ");
         date.getTags().forEach(builder::append);
         return builder.toString();

@@ -1,7 +1,7 @@
 package seedu.lovebook.testutil;
 
-import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
-import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_HEIGHT_AMY;
+import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_HEIGHT_BOB;
 import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_AGE_AMY;
 import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_AGE_BOB;
 import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_GENDER_AMY;
@@ -24,35 +24,35 @@ import seedu.lovebook.model.person.Date;
 public class TypicalPersons {
 
     public static final Date ALICE = new PersonBuilder().withName("Alice Pauline")
-            .withAddress("123, Jurong West Ave 6, #08-111").withGender("F")
+            .withHeight("123").withGender("F")
             .withAge("31")
             .withTags("friends").build();
     public static final Date BENSON = new PersonBuilder().withName("Benson Meier")
-            .withAddress("311, Clementi Ave 2, #02-25")
+            .withHeight("23124")
             .withGender("M").withAge("22")
             .withTags("owesMoney", "friends").build();
     public static final Date CARL = new PersonBuilder().withName("Carl Kurz").withAge("23")
-            .withGender("M").withAddress("wall street").build();
+            .withGender("M").withHeight("54321").build();
     public static final Date DANIEL = new PersonBuilder().withName("Daniel Meier").withAge("25")
-            .withGender("M").withAddress("10th street").withTags("friends").build();
+            .withGender("M").withHeight("10").withTags("friends").build();
     public static final Date ELLE = new PersonBuilder().withName("Elle Meyer").withAge("34")
-            .withGender("F").withAddress("michegan ave").build();
+            .withGender("F").withHeight("1023").build();
     public static final Date FIONA = new PersonBuilder().withName("Fiona Kunz").withAge("24")
-            .withGender("F").withAddress("little tokyo").build();
+            .withGender("F").withHeight("3444").build();
     public static final Date GEORGE = new PersonBuilder().withName("George Best").withAge("94")
-            .withGender("M").withAddress("4th street").build();
+            .withGender("M").withHeight("23245").build();
 
     // Manually added
     public static final Date HOON = new PersonBuilder().withName("Hoon Meier").withAge("76")
-            .withGender("M").withAddress("little india").build();
+            .withGender("M").withHeight("little india").build();
     public static final Date IDA = new PersonBuilder().withName("Ida Mueller").withAge("38")
-            .withGender("F").withAddress("chicago ave").build();
+            .withGender("F").withHeight("chicago ave").build();
 
     // Manually added - Date's details found in {@code CommandTestUtil}
     public static final Date AMY = new PersonBuilder().withName(VALID_NAME_AMY).withAge(VALID_AGE_AMY)
-            .withGender(VALID_GENDER_AMY).withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND).build();
+            .withGender(VALID_GENDER_AMY).withHeight(VALID_HEIGHT_AMY).withTags(VALID_TAG_FRIEND).build();
     public static final Date BOB = new PersonBuilder().withName(VALID_NAME_BOB).withAge(VALID_AGE_BOB)
-            .withGender(VALID_GENDER_BOB).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+            .withGender(VALID_GENDER_BOB).withHeight(VALID_HEIGHT_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
