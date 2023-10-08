@@ -41,10 +41,10 @@ public class EditCommandParser implements Parser<EditCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG,
                         PREFIX_NRIC, PREFIX_GENDER, PREFIX_BLOODTYPE, PREFIX_CONDITION, PREFIX_DOCTOR, PREFIX_PATIENTS);
 
-        Index index;
+        String nric;
 
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            nric = ParserUtil.parseNRIC(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
@@ -73,7 +73,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         // make it pass a 3rd argument on whether doctor or patient
-        return new EditCommand(index, editPersonDescriptor);
+        return new EditCommand(nric, editPersonDescriptor);
     }
 
     /**

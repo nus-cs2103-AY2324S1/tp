@@ -21,6 +21,8 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_NRIC = "Invalid NRIC.";
+    public static final int SG_NRIC_LENGTH = 9;
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -33,6 +35,14 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    public static String parseNRIC(String nric) throws ParseException {
+        String cleanedNRIC = nric.trim().toUpperCase();
+        if (cleanedNRIC.length() != SG_NRIC_LENGTH) {
+            throw new ParseException(MESSAGE_INVALID_NRIC);
+        }
+        return cleanedNRIC;
     }
 
     /**

@@ -52,18 +52,18 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
-    private final Index index;
+    private final String nric;
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
      * @param index of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
-        requireNonNull(index);
+    public EditCommand(String nric, EditPersonDescriptor editPersonDescriptor) {
+        requireNonNull(nric);
         requireNonNull(editPersonDescriptor);
 
-        this.index = index;
+        this.nric = nric;
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
     }
 
@@ -72,12 +72,21 @@ public class EditCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        List<Person> personToEditList = lastShownList.stream().filter(x -> x.NRIC.toString().equals(nric));
+        if (personToEdit.size() == 0) {
+            throw new CommandException("This NRIC does not exist");
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
+        Person personToEdit = personToEditList.get(0);
+
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+
+        String personRole;
+        if (personToEdit instanceof Doctor) {
+            personRole = "doctor";
+        } else {
+            personRole = "patient";
+        }
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
