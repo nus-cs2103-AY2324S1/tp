@@ -9,6 +9,7 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.GroupList;
 
 /**
  * Represents a Person in the address book.
@@ -20,6 +21,7 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
+
 
     // Data fields
     private final Address address;
