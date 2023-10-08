@@ -180,11 +180,11 @@ Action | Format, Examples | Scope: | `PROJECT_LIST` | `PERSON_LIST` | `PROJECT` 
 
 [//]: # (**Shows all projects** | `listprojects` |                                                                                                                                                                                                                                         | √ | √ | √ |   | √ | √)
 
-[//]: # (**Shows all persons** | `listpersons` |                                                                                                                                                                                                                                           | √ | √ |   | √ |   |)
+[//]: # (**Shows all dates** | `listdates` |                                                                                                                                                                                                                                           | √ | √ |   | √ |   |)
 
 [//]: # (**Starts a project** | `startproject INDEX`<br> e.g., `startproject 3` |                                                                                                                                                                                                          | √ |   | √ |   |   |)
 
-[//]: # (**Starts a person** | `startperson INDEX`<br> e.g., `startperson 3` |                                                                                                                                                                                                             |   | √ |   | √ |   |)
+[//]: # (**Starts a date** | `startperson INDEX`<br> e.g., `startperson 3` |                                                                                                                                                                                                             |   | √ |   | √ |   |)
 
 [//]: # (**Adds project** | `add n/PROJECT_NAME dl/DEADLINE ru/REPO_URL d/PROJECT_DESCRIPTION [tg/TAGS]... `   eg, `add n/Blair project dl/29-02-2020 00:00:00 ru/http://github.com/a/b.git d/Coding in Greenwich tg/challenging` |                                                        | √ |   | √ |   | √ | √)
 
@@ -210,13 +210,13 @@ Action | Format, Examples | Scope: | `PROJECT_LIST` | `PERSON_LIST` | `PROJECT` 
 
 [//]: # (**Views Details of A Task** | `viewtask INDEX` <br> e.g. `viewtask 1` |                                                                                                                                                                                                           |   |   | √ |   | √ | √)
 
-[//]: # (**Creates a new person** | `addperson mn/TEAMMATE_NAME mg/GITHUB_USERNAME mp/PHONE_NUMBER me/EMAIL ma/ADDRESS` e.g. `addperson mn/Lucas mg/LucasTai98 mp/93824823 me/lucas@gmail.com ma/18 Evelyn Road` |                                                                         | √ | √ | √ | √ | √ | √)
+[//]: # (**Creates a new date** | `addperson mn/TEAMMATE_NAME mg/GITHUB_USERNAME mp/PHONE_NUMBER me/GENDER ma/ADDRESS` e.g. `addperson mn/Lucas mg/LucasTai98 mp/93824823 me/lucas@gmail.com ma/18 Evelyn Road` |                                                                         | √ | √ | √ | √ | √ | √)
 
 [//]: # (**Adds a teammate to a project** | `addtoproject GITHUB_USERNAME` e.g. `addtoproject LucasTai98` |                                                                                                                                                                                |   |   | √ |   | √ | √)
 
 [//]: # (**Removes a teammate from a project** | `deletefromproject GITHUB_USERNAME` e.g. `deletefromproject LucasTai98` |                                                                                                                                                                 |   |   | √ |   | √ | √)
 
-[//]: # (**Edits teammate details** | `editteammate GITHUB_USERNAME [mn/TEAMMATE_NAME] [mp/PHONE_NUMBER] [me/EMAIL] [ma/ADDRESS]` e.g. `editteammate Lucas98 tn/GeNiaaz ta/5 Hacker Way`|                                                                                                  |   |   | √ |   | √ | √)
+[//]: # (**Edits teammate details** | `editteammate GITHUB_USERNAME [mn/TEAMMATE_NAME] [mp/PHONE_NUMBER] [me/] [ma/ADDRESS]` e.g. `editteammate Lucas98 tn/GeNiaaz ta/5 Hacker Way`|                                                                                                  |   |   | √ |   | √ | √)
 
 [//]: # (**Views a teammate’s details** | `viewteammate GITHUB_USERNAME` e.g. `viewteammate Lucas98`|                                                                                                                                                                                      |   |   | √ |   | √ | √)
 

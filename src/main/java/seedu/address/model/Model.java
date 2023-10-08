@@ -5,14 +5,14 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Date;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Date> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -53,35 +53,35 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a date with the same identity as {@code date} exists in the address book.
      */
-    boolean hasPerson(Person person);
+    boolean hasPerson(Date date);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Deletes the given date.
+     * The date must exist in the address book.
      */
-    void deletePerson(Person target);
+    void deletePerson(Date target);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Adds the given date.
+     * {@code date} must not already exist in the address book.
      */
-    void addPerson(Person person);
+    void addPerson(Date date);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
+     * Replaces the given date {@code target} with {@code editedDate}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * The date identity of {@code editedDate} must not be the same as another existing date in the address book.
      */
-    void setPerson(Person target, Person editedPerson);
+    void setPerson(Date target, Date editedDate);
 
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered date list */
+    ObservableList<Date> getFilteredPersonList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered date list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void updateFilteredPersonList(Predicate<Date> predicate);
 }

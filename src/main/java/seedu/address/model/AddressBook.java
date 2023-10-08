@@ -6,7 +6,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Date;
 import seedu.address.model.person.UniquePersonList;
 
 /**
@@ -15,7 +15,7 @@ import seedu.address.model.person.UniquePersonList;
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
-    private final UniquePersonList persons;
+    private final UniquePersonList dates;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -25,7 +25,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
-        persons = new UniquePersonList();
+        dates = new UniquePersonList();
     }
 
     public AddressBook() {}
@@ -41,11 +41,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the person list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of the date list with {@code dates}.
+     * {@code dates} must not contain duplicate dates.
      */
-    public void setPersons(List<Person> persons) {
-        this.persons.setPersons(persons);
+    public void setPersons(List<Date> dates) {
+        this.dates.setPersons(dates);
     }
 
     /**
@@ -57,41 +57,41 @@ public class AddressBook implements ReadOnlyAddressBook {
         setPersons(newData.getPersonList());
     }
 
-    //// person-level operations
+    //// date-level operations
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a date with the same identity as {@code date} exists in the address book.
      */
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return persons.contains(person);
+    public boolean hasPerson(Date date) {
+        requireNonNull(date);
+        return dates.contains(date);
     }
 
     /**
-     * Adds a person to the address book.
-     * The person must not already exist in the address book.
+     * Adds a date to the address book.
+     * The date must not already exist in the address book.
      */
-    public void addPerson(Person p) {
-        persons.add(p);
+    public void addPerson(Date p) {
+        dates.add(p);
     }
 
     /**
-     * Replaces the given person {@code target} in the list with {@code editedPerson}.
+     * Replaces the given date {@code target} in the list with {@code editedDate}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * The date identity of {@code editedDate} must not be the same as another existing date in the address book.
      */
-    public void setPerson(Person target, Person editedPerson) {
-        requireNonNull(editedPerson);
+    public void setPerson(Date target, Date editedDate) {
+        requireNonNull(editedDate);
 
-        persons.setPerson(target, editedPerson);
+        dates.setPerson(target, editedDate);
     }
 
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
-    public void removePerson(Person key) {
-        persons.remove(key);
+    public void removePerson(Date key) {
+        dates.remove(key);
     }
 
     //// util methods
@@ -99,13 +99,13 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("persons", persons)
+                .add("dates", dates)
                 .toString();
     }
 
     @Override
-    public ObservableList<Person> getPersonList() {
-        return persons.asUnmodifiableObservableList();
+    public ObservableList<Date> getPersonList() {
+        return dates.asUnmodifiableObservableList();
     }
 
     @Override
@@ -120,11 +120,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         AddressBook otherAddressBook = (AddressBook) other;
-        return persons.equals(otherAddressBook.persons);
+        return dates.equals(otherAddressBook.dates);
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return dates.hashCode();
     }
 }

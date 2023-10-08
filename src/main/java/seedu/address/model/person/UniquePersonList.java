@@ -12,35 +12,35 @@ import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
- * A list of persons that enforces uniqueness between its elements and does not allow nulls.
- * A person is considered unique by comparing using {@code Person#isSamePerson(Person)}. As such, adding and updating of
- * persons uses Person#isSamePerson(Person) for equality so as to ensure that the person being added or updated is
- * unique in terms of identity in the UniquePersonList. However, the removal of a person uses Person#equals(Object) so
- * as to ensure that the person with exactly the same fields will be removed.
+ * A list of dates that enforces uniqueness between its elements and does not allow nulls.
+ * A date is considered unique by comparing using {@code Date#isSamePerson(Date)}. As such, adding and updating of
+ * dates uses Date#isSamePerson(Date) for equality so as to ensure that the date being added or updated is
+ * unique in terms of identity in the UniquePersonList. However, the removal of a date uses Date#equals(Object) so
+ * as to ensure that the date with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
- * @see Person#isSamePerson(Person)
+ * @see Date#isSamePerson(Date)
  */
-public class UniquePersonList implements Iterable<Person> {
+public class UniquePersonList implements Iterable<Date> {
 
-    private final ObservableList<Person> internalList = FXCollections.observableArrayList();
-    private final ObservableList<Person> internalUnmodifiableList =
+    private final ObservableList<Date> internalList = FXCollections.observableArrayList();
+    private final ObservableList<Date> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent person as the given argument.
+     * Returns true if the list contains an equivalent date as the given argument.
      */
-    public boolean contains(Person toCheck) {
+    public boolean contains(Date toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSamePerson);
     }
 
     /**
-     * Adds a person to the list.
-     * The person must not already exist in the list.
+     * Adds a date to the list.
+     * The date must not already exist in the list.
      */
-    public void add(Person toAdd) {
+    public void add(Date toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
             throw new DuplicatePersonException();
@@ -49,30 +49,30 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * Replaces the person {@code target} in the list with {@code editedPerson}.
+     * Replaces the date {@code target} in the list with {@code editedDate}.
      * {@code target} must exist in the list.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
+     * The date identity of {@code editedDate} must not be the same as another existing date in the list.
      */
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
+    public void setPerson(Date target, Date editedDate) {
+        requireAllNonNull(target, editedDate);
 
         int index = internalList.indexOf(target);
         if (index == -1) {
             throw new PersonNotFoundException();
         }
 
-        if (!target.isSamePerson(editedPerson) && contains(editedPerson)) {
+        if (!target.isSamePerson(editedDate) && contains(editedDate)) {
             throw new DuplicatePersonException();
         }
 
-        internalList.set(index, editedPerson);
+        internalList.set(index, editedDate);
     }
 
     /**
-     * Removes the equivalent person from the list.
-     * The person must exist in the list.
+     * Removes the equivalent date from the list.
+     * The date must exist in the list.
      */
-    public void remove(Person toRemove) {
+    public void remove(Date toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
             throw new PersonNotFoundException();
@@ -85,27 +85,27 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * Replaces the contents of this list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of this list with {@code dates}.
+     * {@code dates} must not contain duplicate dates.
      */
-    public void setPersons(List<Person> persons) {
-        requireAllNonNull(persons);
-        if (!personsAreUnique(persons)) {
+    public void setPersons(List<Date> dates) {
+        requireAllNonNull(dates);
+        if (!datesAreUnique(dates)) {
             throw new DuplicatePersonException();
         }
 
-        internalList.setAll(persons);
+        internalList.setAll(dates);
     }
 
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
-    public ObservableList<Person> asUnmodifiableObservableList() {
+    public ObservableList<Date> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
     }
 
     @Override
-    public Iterator<Person> iterator() {
+    public Iterator<Date> iterator() {
         return internalList.iterator();
     }
 
@@ -135,12 +135,12 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * Returns true if {@code persons} contains only unique persons.
+     * Returns true if {@code dates} contains only unique dates.
      */
-    private boolean personsAreUnique(List<Person> persons) {
-        for (int i = 0; i < persons.size() - 1; i++) {
-            for (int j = i + 1; j < persons.size(); j++) {
-                if (persons.get(i).isSamePerson(persons.get(j))) {
+    private boolean datesAreUnique(List<Date> dates) {
+        for (int i = 0; i < dates.size() - 1; i++) {
+            for (int j = i + 1; j < dates.size(); j++) {
+                if (dates.get(i).isSamePerson(dates.get(j))) {
                     return false;
                 }
             }

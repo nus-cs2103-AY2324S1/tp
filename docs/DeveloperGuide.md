@@ -103,7 +103,7 @@ How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).
+1. The command can communicate with the `Model` when it is executed (e.g. to delete a date).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
@@ -175,11 +175,11 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th date in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new date. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 <puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
@@ -189,7 +189,7 @@ Step 3. The user executes `add n/David …​` to add a new person. The `add` co
 
 </box>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the date was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 <puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
 
@@ -241,7 +241,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  * Pros: Will use less memory (e.g. for `delete`, just save the date being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
@@ -308,11 +308,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Main Success Scenario (MSS):**
 
-1. User requests to add a new person to the address book.
-2. AddressBook prompts the user to provide the person's details, including name, phone number, and email.
+1. User requests to add a new date to the address book.
+2. AddressBook prompts the user to provide the date's details, including name, age number, and gender.
 3. User enters the required details.
 4. AddressBook validates the input.
-5. AddressBook adds the new person to the address book.
+5. AddressBook adds the new date to the address book.
 6. AddressBook displays a confirmation message.
 
 **Extensions:**
@@ -320,7 +320,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2a. User cancels the operation.
 - Use case ends.
 
-4a. The input is invalid (e.g., missing name or an invalid email address).
+4a. The input is invalid (e.g., missing name or an invalid gender address).
 - AddressBook shows an error message.
 - User is prompted to re-enter the details.
 - Use case resumes at step 3.
@@ -329,42 +329,42 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Main Success Scenario (MSS):**
 
-1. User requests to search for a person in the address book.
-2. AddressBook prompts the user to enter a search query (e.g., name or phone number).
+1. User requests to search for a date in the address book.
+2. AddressBook prompts the user to enter a search query (e.g., name or age number).
 3. User enters the search query.
 4. AddressBook performs a search based on the query.
-5. AddressBook displays a list of persons matching the search query.
+5. AddressBook displays a list of dates matching the search query.
 
 **Extensions:**
 
-4a. No persons match the search query.
-- AddressBook displays a message indicating that no matching persons were found.
+4a. No dates match the search query.
+- AddressBook displays a message indicating that no matching dates were found.
 
 #### Use Case: Edit Person Details
 
 **Main Success Scenario (MSS):**
 
-1. User requests to edit the details of a specific person.
-2. AddressBook shows a list of persons.
-3. User selects the person they want to edit from the list.
-4. AddressBook prompts the user to provide the updated details for the selected person.
+1. User requests to edit the details of a specific date.
+2. AddressBook shows a list of dates.
+3. User selects the date they want to edit from the list.
+4. AddressBook prompts the user to provide the updated details for the selected date.
 5. User enters the updated details.
 6. AddressBook validates the input.
-7. AddressBook updates the person's details with the new information.
+7. AddressBook updates the date's details with the new information.
 8. AddressBook displays a confirmation message.
 
 **Extensions:**
 
 2a. The list is empty.
-- AddressBook displays a message indicating that there are no persons to edit.
+- AddressBook displays a message indicating that there are no dates to edit.
 - Use case ends.
 
-3a. The selected person does not exist.
+3a. The selected date does not exist.
 - AddressBook displays an error message.
-- User is prompted to select a valid person.
+- User is prompted to select a valid date.
 - Use case resumes at step 3.
 
-6a. The input is invalid (e.g., missing name or an invalid phone number).
+6a. The input is invalid (e.g., missing name or an invalid age number).
 - AddressBook shows an error message.
 - User is prompted to re-enter the details.
 - Use case resumes at step 5.
@@ -373,43 +373,43 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Main Success Scenario (MSS):**
 
-1. User requests to view the details of a specific person.
-2. AddressBook shows a list of persons.
-3. User selects the person they want to view from the list.
-4. AddressBook displays the person's details, including name, phone number, and email.
+1. User requests to view the details of a specific date.
+2. AddressBook shows a list of dates.
+3. User selects the date they want to view from the list.
+4. AddressBook displays the date's details, including name, age number, and gender.
 
 **Extensions:**
 
 2a. The list is empty.
-- AddressBook displays a message indicating that there are no persons to view.
+- AddressBook displays a message indicating that there are no dates to view.
 - Use case ends.
 
-3a. The selected person does not exist.
+3a. The selected date does not exist.
 - AddressBook displays an error message.
-- User is prompted to select a valid person.
+- User is prompted to select a valid date.
 - Use case resumes at step 3.
 
 #### Use Case: Delete a Person
 
 **Main Success Scenario (MSS):**
 
-1. User requests to delete a specific person from the address book.
-2. AddressBook shows a list of persons.
-3. User selects the person they want to delete from the list.
+1. User requests to delete a specific date from the address book.
+2. AddressBook shows a list of dates.
+3. User selects the date they want to delete from the list.
 4. AddressBook confirms the deletion with the user.
 5. User confirms the deletion.
-6. AddressBook deletes the person from the address book.
+6. AddressBook deletes the date from the address book.
 7. AddressBook displays a confirmation message.
 
 **Extensions:**
 
 2a. The list is empty.
-- AddressBook displays a message indicating that there are no persons to delete.
+- AddressBook displays a message indicating that there are no dates to delete.
 - Use case ends.
 
-3a. The selected person does not exist.
+3a. The selected date does not exist.
 - AddressBook displays an error message.
-- User is prompted to select a valid person.
+- User is prompted to select a valid date.
 - Use case resumes at step 3.
 
 5a. User cancels the deletion.
@@ -460,17 +460,17 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a date
 
-1. Deleting a person while all persons are being shown
+1. Deleting a date while all dates are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all dates using the `list` command. Multiple dates in the list.
 
    1. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No date is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.

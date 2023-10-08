@@ -1,13 +1,13 @@
 {
-  "persons": [ {
+  "dates": [ {
     "name": "Valid Person",
-    "phone": "9482424",
-    "email": "hans@example.com",
+    "age": "33",
+    "gender": "M",
     "address": "4th street"
   }, {
-    "name": "Person With Invalid Phone Field",
-    "phone": "948asdf2424",
-    "email": "hans@example.com",
+    "name": "Person With Invalid Age Field",
+    "age": "948asdf2424",
+    "gender": "Transgender",
     "address": "4th street"
   } ]
 }
