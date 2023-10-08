@@ -78,7 +78,8 @@ public class ClientDirectory implements ReadOnlyClientDirectory {
     /**
      * Replaces the given client {@code target} in the list with {@code editedClient}.
      * {@code target} must exist in the client directory.
-     * The client identity of {@code editedClient} must not be the same as another existing client in the client directory.
+     * The client identity of {@code editedClient} must not be the same as another
+     * existing client in the client directory.
      */
     public void setClient(Client target, Client editedClient) {
         requireNonNull(editedClient);
