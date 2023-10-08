@@ -15,15 +15,15 @@ import seedu.lovebook.commons.util.ConfigUtil;
 import seedu.lovebook.commons.util.StringUtil;
 import seedu.lovebook.logic.Logic;
 import seedu.lovebook.logic.LogicManager;
-import seedu.lovebook.model.AddressBook;
+import seedu.lovebook.model.LoveBook;
 import seedu.lovebook.model.Model;
 import seedu.lovebook.model.ModelManager;
-import seedu.lovebook.model.ReadOnlyAddressBook;
+import seedu.lovebook.model.ReadOnlyLoveBook;
 import seedu.lovebook.model.ReadOnlyUserPrefs;
 import seedu.lovebook.model.UserPrefs;
 import seedu.lovebook.model.util.SampleDataUtil;
-import seedu.lovebook.storage.AddressBookStorage;
-import seedu.lovebook.storage.JsonAddressBookStorage;
+import seedu.lovebook.storage.LoveBookStorage;
+import seedu.lovebook.storage.JsonLoveBookStorage;
 import seedu.lovebook.storage.JsonUserPrefsStorage;
 import seedu.lovebook.storage.Storage;
 import seedu.lovebook.storage.StorageManager;
@@ -48,7 +48,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing LoveBook ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -57,8 +57,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        LoveBookStorage LoveBookStorage = new JsonLoveBookStorage(userPrefs.getLoveBookFilePath());
+        storage = new StorageManager(LoveBookStorage, userPrefsStorage);
 
         model = initModelManager(storage, userPrefs);
 
@@ -73,21 +73,21 @@ public class MainApp extends Application {
      * or an empty lovebook book will be used instead if errors occur when reading {@code storage}'s lovebook book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        logger.info("Using data file : " + storage.getAddressBookFilePath());
+        logger.info("Using data file : " + storage.getLoveBookFilePath());
 
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        Optional<ReadOnlyLoveBook> LoveBookOptional;
+        ReadOnlyLoveBook initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("Creating a new data file " + storage.getAddressBookFilePath()
-                        + " populated with a sample AddressBook.");
+            LoveBookOptional = storage.readLoveBook();
+            if (!LoveBookOptional.isPresent()) {
+                logger.info("Creating a new data file " + storage.getLoveBookFilePath()
+                        + " populated with a sample LoveBook.");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = LoveBookOptional.orElseGet(SampleDataUtil::getSampleLoveBook);
         } catch (DataLoadingException e) {
-            logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
-                    + " Will be starting with an empty AddressBook.");
-            initialData = new AddressBook();
+            logger.warning("Data file at " + storage.getLoveBookFilePath() + " could not be loaded."
+                    + " Will be starting with an empty LoveBook.");
+            initialData = new LoveBook();
         }
 
         return new ModelManager(initialData, userPrefs);
@@ -170,7 +170,7 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting AddressBook " + MainApp.VERSION);
+        logger.info("Starting LoveBook " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 

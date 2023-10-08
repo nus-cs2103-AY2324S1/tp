@@ -6,7 +6,7 @@ import seedu.lovebook.model.person.Date;
 /**
  * Unmodifiable view of an lovebook book
  */
-public interface ReadOnlyAddressBook {
+public interface ReadOnlyLoveBook {
 
     /**
      * Returns an unmodifiable view of the dates list.

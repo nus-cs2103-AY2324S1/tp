@@ -25,10 +25,10 @@ import seedu.lovebook.logic.commands.exceptions.CommandException;
 import seedu.lovebook.logic.parser.exceptions.ParseException;
 import seedu.lovebook.model.Model;
 import seedu.lovebook.model.ModelManager;
-import seedu.lovebook.model.ReadOnlyAddressBook;
+import seedu.lovebook.model.ReadOnlyLoveBook;
 import seedu.lovebook.model.UserPrefs;
 import seedu.lovebook.model.person.Date;
-import seedu.lovebook.storage.JsonAddressBookStorage;
+import seedu.lovebook.storage.JsonLoveBookStorage;
 import seedu.lovebook.storage.JsonUserPrefsStorage;
 import seedu.lovebook.storage.StorageManager;
 import seedu.lovebook.testutil.PersonBuilder;
@@ -45,10 +45,10 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonAddressBookStorage addressBookStorage =
-                new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonLoveBookStorage LoveBookStorage =
+                new JsonLoveBookStorage(temporaryFolder.resolve("LoveBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(LoveBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -123,7 +123,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getLoveBook(), new UserPrefs());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
@@ -149,10 +149,10 @@ public class LogicManagerTest {
     private void assertCommandFailureForExceptionFromStorage(IOException e, String expectedMessage) {
         Path prefPath = temporaryFolder.resolve("ExceptionUserPrefs.json");
 
-        // Inject LogicManager with an AddressBookStorage that throws the IOException e when saving
-        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(prefPath) {
+        // Inject LogicManager with an LoveBookStorage that throws the IOException e when saving
+        JsonLoveBookStorage LoveBookStorage = new JsonLoveBookStorage(prefPath) {
             @Override
-            public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath)
+            public void saveLoveBook(ReadOnlyLoveBook LoveBook, Path filePath)
                     throws IOException {
                 throw e;
             }
@@ -160,11 +160,11 @@ public class LogicManagerTest {
 
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(LoveBookStorage, userPrefsStorage);
 
         logic = new LogicManager(model, storage);
 
-        // Triggers the saveAddressBook method by executing an add command
+        // Triggers the saveLoveBook method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + AGE_DESC_AMY
                 + GENDER_DESC_AMY + ADDRESS_DESC_AMY;
         Date expectedDate = new PersonBuilder(AMY).withTags().build();

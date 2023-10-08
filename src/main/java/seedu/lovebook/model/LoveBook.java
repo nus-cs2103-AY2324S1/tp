@@ -13,7 +13,7 @@ import seedu.lovebook.model.person.UniquePersonList;
  * Wraps all data at the lovebook-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class LoveBook implements ReadOnlyLoveBook {
 
     private final UniquePersonList dates;
 
@@ -28,12 +28,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         dates = new UniquePersonList();
     }
 
-    public AddressBook() {}
+    public LoveBook() {}
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an LoveBook using the Persons in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public LoveBook(ReadOnlyLoveBook toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -49,9 +49,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code LoveBook} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyLoveBook newData) {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
@@ -87,7 +87,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
+     * Removes {@code key} from this {@code LoveBook}.
      * {@code key} must exist in the lovebook book.
      */
     public void removePerson(Date key) {
@@ -115,12 +115,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddressBook)) {
+        if (!(other instanceof LoveBook)) {
             return false;
         }
 
-        AddressBook otherAddressBook = (AddressBook) other;
-        return dates.equals(otherAddressBook.dates);
+        LoveBook otherLoveBook = (LoveBook) other;
+        return dates.equals(otherLoveBook.dates);
     }
 
     @Override

@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.lovebook.model.AddressBook;
-import seedu.lovebook.model.ReadOnlyAddressBook;
+import seedu.lovebook.model.LoveBook;
+import seedu.lovebook.model.ReadOnlyLoveBook;
 import seedu.lovebook.model.person.Address;
 import seedu.lovebook.model.person.Age;
 import seedu.lovebook.model.person.Date;
@@ -14,7 +14,7 @@ import seedu.lovebook.model.person.Name;
 import seedu.lovebook.model.tag.Tag;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code LoveBook} with sample data.
  */
 public class SampleDataUtil {
     public static Date[] getSamplePersons() {
@@ -40,8 +40,8 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
+    public static ReadOnlyLoveBook getSampleLoveBook() {
+        LoveBook sampleAb = new LoveBook();
         for (Date sampleDate : getSamplePersons()) {
             sampleAb.addPerson(sampleDate);
         }

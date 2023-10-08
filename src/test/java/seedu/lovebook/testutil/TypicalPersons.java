@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.lovebook.model.AddressBook;
+import seedu.lovebook.model.LoveBook;
 import seedu.lovebook.model.person.Date;
 
 /**
@@ -60,10 +60,10 @@ public class TypicalPersons {
     private TypicalPersons() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical dates.
+     * Returns an {@code LoveBook} with all the typical dates.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static LoveBook getTypicalLoveBook() {
+        LoveBook ab = new LoveBook();
         for (Date date : getTypicalPersons()) {
             ab.addPerson(date);
         }

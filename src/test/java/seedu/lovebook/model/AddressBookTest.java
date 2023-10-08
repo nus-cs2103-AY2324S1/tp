@@ -7,7 +7,7 @@ import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.lovebook.testutil.Assert.assertThrows;
 import static seedu.lovebook.testutil.TypicalPersons.ALICE;
-import static seedu.lovebook.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.lovebook.testutil.TypicalPersons.getTypicalLoveBook;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -22,25 +22,25 @@ import seedu.lovebook.model.person.Date;
 import seedu.lovebook.model.person.exceptions.DuplicatePersonException;
 import seedu.lovebook.testutil.PersonBuilder;
 
-public class AddressBookTest {
+public class LoveBookTest {
 
-    private final AddressBook addressBook = new AddressBook();
+    private final LoveBook LoveBook = new LoveBook();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getPersonList());
+        assertEquals(Collections.emptyList(), LoveBook.getPersonList());
     }
 
     @Test
     public void resetData_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.resetData(null));
+        assertThrows(NullPointerException.class, () -> LoveBook.resetData(null));
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = getTypicalAddressBook();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+    public void resetData_withValidReadOnlyLoveBook_replacesData() {
+        LoveBook newData = getTypicalLoveBook();
+        LoveBook.resetData(newData);
+        assertEquals(newData, LoveBook);
     }
 
     @Test
@@ -49,53 +49,53 @@ public class AddressBookTest {
         Date editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Date> newDates = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newDates);
+        LoveBookStub newData = new LoveBookStub(newDates);
 
-        assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicatePersonException.class, () -> LoveBook.resetData(newData));
     }
 
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasPerson(null));
+        assertThrows(NullPointerException.class, () -> LoveBook.hasPerson(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasPerson(ALICE));
+    public void hasPerson_personNotInLoveBook_returnsFalse() {
+        assertFalse(LoveBook.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
-        assertTrue(addressBook.hasPerson(ALICE));
+    public void hasPerson_personInLoveBook_returnsTrue() {
+        LoveBook.addPerson(ALICE);
+        assertTrue(LoveBook.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
+    public void hasPerson_personWithSameIdentityFieldsInLoveBook_returnsTrue() {
+        LoveBook.addPerson(ALICE);
         Date editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(addressBook.hasPerson(editedAlice));
+        assertTrue(LoveBook.hasPerson(editedAlice));
     }
 
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> LoveBook.getPersonList().remove(0));
     }
 
     @Test
     public void toStringMethod() {
-        String expected = AddressBook.class.getCanonicalName() + "{dates=" + addressBook.getPersonList() + "}";
-        assertEquals(expected, addressBook.toString());
+        String expected = LoveBook.class.getCanonicalName() + "{dates=" + LoveBook.getPersonList() + "}";
+        assertEquals(expected, LoveBook.toString());
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose dates list can violate interface constraints.
+     * A stub ReadOnlyLoveBook whose dates list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class LoveBookStub implements ReadOnlyLoveBook {
         private final ObservableList<Date> dates = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Date> dates) {
+        LoveBookStub(Collection<Date> dates) {
             this.dates.setAll(dates);
         }
 

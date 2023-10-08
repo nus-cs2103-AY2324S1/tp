@@ -37,20 +37,20 @@ public interface Model {
     /**
      * Returns the user prefs' lovebook book file path.
      */
-    Path getAddressBookFilePath();
+    Path getLoveBookFilePath();
 
     /**
      * Sets the user prefs' lovebook book file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setLoveBookFilePath(Path LoveBookFilePath);
 
     /**
-     * Replaces lovebook book data with the data in {@code addressBook}.
+     * Replaces lovebook book data with the data in {@code LoveBook}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setLoveBook(ReadOnlyLoveBook LoveBook);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the LoveBook */
+    ReadOnlyLoveBook getLoveBook();
 
     /**
      * Returns true if a date with the same identity as {@code date} exists in the lovebook book.

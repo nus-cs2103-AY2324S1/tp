@@ -2,7 +2,7 @@ package seedu.lovebook.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.lovebook.model.AddressBook;
+import seedu.lovebook.model.LoveBook;
 import seedu.lovebook.model.Model;
 
 /**
@@ -17,7 +17,7 @@ public class ClearCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.setAddressBook(new AddressBook());
+        model.setLoveBook(new LoveBook());
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

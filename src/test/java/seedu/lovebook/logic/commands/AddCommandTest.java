@@ -18,9 +18,9 @@ import javafx.collections.ObservableList;
 import seedu.lovebook.commons.core.GuiSettings;
 import seedu.lovebook.logic.Messages;
 import seedu.lovebook.logic.commands.exceptions.CommandException;
-import seedu.lovebook.model.AddressBook;
+import seedu.lovebook.model.LoveBook;
 import seedu.lovebook.model.Model;
-import seedu.lovebook.model.ReadOnlyAddressBook;
+import seedu.lovebook.model.ReadOnlyLoveBook;
 import seedu.lovebook.model.ReadOnlyUserPrefs;
 import seedu.lovebook.model.person.Date;
 import seedu.lovebook.testutil.PersonBuilder;
@@ -109,12 +109,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getLoveBookFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setLoveBookFilePath(Path LoveBookFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -124,12 +124,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void setLoveBook(ReadOnlyLoveBook newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyLoveBook getLoveBook() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -196,8 +196,8 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyLoveBook getLoveBook() {
+            return new LoveBook();
         }
     }
 

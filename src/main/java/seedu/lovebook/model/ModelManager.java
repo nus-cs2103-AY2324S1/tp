@@ -19,25 +19,25 @@ import seedu.lovebook.model.person.Date;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final LoveBook LoveBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Date> filteredDates;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given LoveBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
+    public ModelManager(ReadOnlyLoveBook LoveBook, ReadOnlyUserPrefs userPrefs) {
+        requireAllNonNull(LoveBook, userPrefs);
 
-        logger.fine("Initializing with lovebook book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with lovebook book: " + LoveBook + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.LoveBook = new LoveBook(LoveBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredDates = new FilteredList<>(this.addressBook.getPersonList());
+        filteredDates = new FilteredList<>(this.LoveBook.getPersonList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new LoveBook(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -65,42 +65,42 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getLoveBookFilePath() {
+        return userPrefs.getLoveBookFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setLoveBookFilePath(Path LoveBookFilePath) {
+        requireNonNull(LoveBookFilePath);
+        userPrefs.setLoveBookFilePath(LoveBookFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== LoveBook ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+    public void setLoveBook(ReadOnlyLoveBook LoveBook) {
+        this.LoveBook.resetData(LoveBook);
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public ReadOnlyLoveBook getLoveBook() {
+        return LoveBook;
     }
 
     @Override
     public boolean hasPerson(Date date) {
         requireNonNull(date);
-        return addressBook.hasPerson(date);
+        return LoveBook.hasPerson(date);
     }
 
     @Override
     public void deletePerson(Date target) {
-        addressBook.removePerson(target);
+        LoveBook.removePerson(target);
     }
 
     @Override
     public void addPerson(Date date) {
-        addressBook.addPerson(date);
+        LoveBook.addPerson(date);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
@@ -108,14 +108,14 @@ public class ModelManager implements Model {
     public void setPerson(Date target, Date editedDate) {
         requireAllNonNull(target, editedDate);
 
-        addressBook.setPerson(target, editedDate);
+        LoveBook.setPerson(target, editedDate);
     }
 
     //=========== Filtered Date List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Date} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedLoveBook}
      */
     @Override
     public ObservableList<Date> getFilteredPersonList() {
@@ -140,7 +140,7 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook)
+        return LoveBook.equals(otherModelManager.LoveBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredDates.equals(otherModelManager.filteredDates);
     }

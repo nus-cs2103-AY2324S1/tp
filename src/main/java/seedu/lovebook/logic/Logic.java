@@ -7,7 +7,7 @@ import seedu.lovebook.commons.core.GuiSettings;
 import seedu.lovebook.logic.commands.CommandResult;
 import seedu.lovebook.logic.commands.exceptions.CommandException;
 import seedu.lovebook.logic.parser.exceptions.ParseException;
-import seedu.lovebook.model.ReadOnlyAddressBook;
+import seedu.lovebook.model.ReadOnlyLoveBook;
 import seedu.lovebook.model.person.Date;
 
 /**
@@ -24,11 +24,11 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
-     * Returns the AddressBook.
+     * Returns the LoveBook.
      *
-     * @see seedu.lovebook.model.Model#getAddressBook()
+     * @see seedu.lovebook.model.Model#getLoveBook()
      */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyLoveBook getLoveBook();
 
     /** Returns an unmodifiable view of the filtered list of dates */
     ObservableList<Date> getFilteredPersonList();
@@ -36,7 +36,7 @@ public interface Logic {
     /**
      * Returns the user prefs' lovebook book file path.
      */
-    Path getAddressBookFilePath();
+    Path getLoveBookFilePath();
 
     /**
      * Returns the user prefs' GUI settings.

@@ -9,52 +9,52 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.lovebook.commons.exceptions.IllegalValueException;
-import seedu.lovebook.model.AddressBook;
-import seedu.lovebook.model.ReadOnlyAddressBook;
+import seedu.lovebook.model.LoveBook;
+import seedu.lovebook.model.ReadOnlyLoveBook;
 import seedu.lovebook.model.person.Date;
 
 /**
- * An Immutable AddressBook that is serializable to JSON format.
+ * An Immutable LoveBook that is serializable to JSON format.
  */
-@JsonRootName(value = "addressbook")
-class JsonSerializableAddressBook {
+@JsonRootName(value = "LoveBook")
+class JsonSerializableLoveBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate date(s).";
 
     private final List<JsonAdaptedPerson> dates = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given dates.
+     * Constructs a {@code JsonSerializableLoveBook} with the given dates.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("dates") List<JsonAdaptedPerson> dates) {
+    public JsonSerializableLoveBook(@JsonProperty("dates") List<JsonAdaptedPerson> dates) {
         this.dates.addAll(dates);
     }
 
     /**
-     * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
+     * Converts a given {@code ReadOnlyLoveBook} into this class for Jackson use.
      *
-     * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
+     * @param source future changes to this will not affect the created {@code JsonSerializableLoveBook}.
      */
-    public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
+    public JsonSerializableLoveBook(ReadOnlyLoveBook source) {
         dates.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
     }
 
     /**
-     * Converts this lovebook book into the model's {@code AddressBook} object.
+     * Converts this lovebook book into the model's {@code LoveBook} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public AddressBook toModelType() throws IllegalValueException {
-        AddressBook addressBook = new AddressBook();
+    public LoveBook toModelType() throws IllegalValueException {
+        LoveBook LoveBook = new LoveBook();
         for (JsonAdaptedPerson jsonAdaptedPerson : dates) {
             Date date = jsonAdaptedPerson.toModelType();
-            if (addressBook.hasPerson(date)) {
+            if (LoveBook.hasPerson(date)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            addressBook.addPerson(date);
+            LoveBook.addPerson(date);
         }
-        return addressBook;
+        return LoveBook;
     }
 
 }

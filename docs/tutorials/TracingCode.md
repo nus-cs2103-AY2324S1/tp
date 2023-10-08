@@ -124,14 +124,14 @@ Recall from the User Guide that the `edit` command has the format: `edit INDEX [
 
         CommandResult commandResult;
         //Parse user input from String to a Command
-        Command command = addressBookParser.parseCommand(commandText);
+        Command command = LoveBookParser.parseCommand(commandText);
         //Executes the Command and stores the result
         commandResult = command.execute(model);
 
         try {
             //We can deduce that the previous line of code modifies model in some way
             // since it's being stored here.
-            storage.saveAddressBook(model.getAddressBook());
+            storage.saveLoveBook(model.getLoveBook());
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
@@ -145,7 +145,7 @@ Recall from the User Guide that the `edit` command has the format: `edit INDEX [
 1. _Step over_ the logging code since it is of no interest to us now.
    ![StepOver](../images/tracing/StepOver.png)
 
-1. _Step into_ the line where user input in parsed from a String to a Command, which should bring you to the `AddressBookParser#parseCommand()` method (partial code given below):
+1. _Step into_ the line where user input in parsed from a String to a Command, which should bring you to the `LoveBookParser#parseCommand()` method (partial code given below):
    ```java
    public Command parseCommand(String userInput) throws ParseException {
        ...
@@ -226,20 +226,20 @@ Recall from the User Guide that the `edit` command has the format: `edit INDEX [
 
    <box type="tip" seamless>
 
-   **Intellij Tip:** When trying to step into a statement such as `storage.saveAddressBook(model.getAddressBook())` which contains multiple method calls, Intellij will let you choose (by clicking) which one you want to step into.
+   **Intellij Tip:** When trying to step into a statement such as `storage.saveLoveBook(model.getLoveBook())` which contains multiple method calls, Intellij will let you choose (by clicking) which one you want to step into.
    </box>
 
-1. As you step through the code inside the `Storage` component, you will eventually arrive at the `JsonAddressBook#saveAddressBook()` method which calls the `JsonSerializableAddressBook` constructor, to create an object that can be _serialized_ (i.e., stored in storage medium) in JSON format. That constructor is given below (with added line breaks for easier readability):
+1. As you step through the code inside the `Storage` component, you will eventually arrive at the `JsonLoveBook#saveLoveBook()` method which calls the `JsonSerializableLoveBook` constructor, to create an object that can be _serialized_ (i.e., stored in storage medium) in JSON format. That constructor is given below (with added line breaks for easier readability):
 
-    **`JsonSerializableAddressBook` constructor:**
+    **`JsonSerializableLoveBook` constructor:**
     ```java
     /**
-     * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
+     * Converts a given {@code ReadOnlyLoveBook} into this class for Jackson use.
      *
      * @param source future changes to this will not affect the created
-     * {@code JsonSerializableAddressBook}.
+     * {@code JsonSerializableLoveBook}.
      */
-    public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
+    public JsonSerializableLoveBook(ReadOnlyLoveBook source) {
         dates.addAll(
             source.getPersonList()
                   .stream()
@@ -248,7 +248,7 @@ Recall from the User Guide that the `edit` command has the format: `edit INDEX [
     }
     ```
 
-1. It appears that a `JsonAdaptedPerson` is created for each `Person` and then added to the `JsonSerializableAddressBook`.
+1. It appears that a `JsonAdaptedPerson` is created for each `Person` and then added to the `JsonSerializableLoveBook`.
    This is because regular Java objects need to go through an _adaptation_ for them to be suitable to be saved in JSON format.
 
 1. While you are stepping through the classes in the `Storage` component, here is the component's class diagram to help you understand how those classes fit into the structure of the component.<br>
