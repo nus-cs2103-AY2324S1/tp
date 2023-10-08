@@ -16,7 +16,7 @@ This project was done by a team of 4 members.
 <img src="images/lihongguang00.png" width="200px">
 
 [[github](https://github.com/lihongguang00)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/lihongguang00.md)]
 
 - Role: Team Member
 - Responsibilities: TBD
@@ -36,7 +36,7 @@ This project was done by a team of 4 members.
 <img src="images/junhonglow.png" width="200px">
 
 [[github](http://github.com/junhonglow)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/junhonglow.md)]
 
 - Role: Developer
 - Responsibilities: TBD
