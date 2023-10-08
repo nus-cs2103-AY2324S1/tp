@@ -10,8 +10,8 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.event.EventPeriod;
 import seedu.address.model.event.EventDescription;
+import seedu.address.model.event.EventPeriod;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -125,6 +125,13 @@ public class ParserUtil {
         return tagSet;
     }
 
+    /**
+     * Parses the event description String into a EventDescription object.
+     *
+     * @param description description String.
+     * @return EventDescription object with the given description String.
+     * @throws ParseException if the description is empty.
+     */
     public static EventDescription parseEventDescription(String description) throws ParseException {
         requireNonNull(description);
         String trimmedDescription = description.trim();
@@ -134,6 +141,14 @@ public class ParserUtil {
         return new EventDescription(trimmedDescription);
     }
 
+    /**
+     * Parses given start date string and end date string into an EventPeriod object.
+     *
+     * @param startDate start date string in 'yyyy-MM-dd HH:mm' format.
+     * @param endDate end date string in 'yyyy-MM-dd HH:mm' format.
+     * @return EventPeriod object describing the time period between startDate and endDate.
+     * @throws ParseException if the startDate or endDate strings are in inproper format.
+     */
     public static EventPeriod parseEventPeriod(String startDate, String endDate) throws ParseException {
         requireAllNonNull(startDate, endDate);
         String trimmedStartDate = startDate.trim();

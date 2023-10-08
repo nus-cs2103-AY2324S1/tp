@@ -4,8 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Map;
 import java.util.NavigableMap;
-import java.util.TreeMap;
 import java.util.Optional;
+import java.util.TreeMap;
 
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventPeriod;
