@@ -34,13 +34,6 @@ public class ParserUtil {
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
 
-    public static String parseNRIC(String nric) throws ParseException {
-        String cleanedNRIC = nric.trim().toUpperCase();
-        if (cleanedNRIC.length() != SG_NRIC_LENGTH) {
-            throw new ParseException(MESSAGE_INVALID_NRIC);
-        }
-        return cleanedNRIC;
-    }
 
     /**
      * Parses a {@code String name} into a {@code Name}.
@@ -110,7 +103,7 @@ public class ParserUtil {
      */
     public static Ic parseIc(String ic) throws ParseException {
         requireNonNull(ic);
-        String trimmedIc = ic.trim();
+        String trimmedIc = ic.trim().toUpperCase();
         if (!Ic.isValidIc(trimmedIc)) {
             throw new ParseException(Ic.MESSAGE_CONSTRAINTS);
         }

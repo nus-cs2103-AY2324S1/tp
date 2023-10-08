@@ -14,6 +14,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PATIENTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import seedu.address.model.person.Ic;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -42,10 +43,10 @@ public class EditCommandParser implements Parser<EditCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_REMARK,
                         PREFIX_GENDER, PREFIX_NRIC, PREFIX_TAG);
 
-        String nric;
+        Ic nric;
 
         try {
-            nric = ParserUtil.parseNRIC(argMultimap.getPreamble());
+            nric = ParserUtil.parseIc(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
