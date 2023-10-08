@@ -1,17 +1,16 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Iterator;
-import java.util.List;
+import java.util.stream.Stream;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
 
+/**
+ * A list containing groups
+ */
 public class GroupList {
 
     private final ObservableList<Group> internalList = FXCollections.observableArrayList();
@@ -46,6 +45,15 @@ public class GroupList {
             throw new GroupNotFoundException();
         }
     }
+
+    /**
+     * Converts the internal list to streams.
+     * @return Internal list into streams.
+     */
+    public Stream<Group> toStream() {
+        return internalList.stream();
+    }
+
 
     @Override
     public boolean equals(Object other) {
