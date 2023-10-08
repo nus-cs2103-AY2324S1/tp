@@ -13,7 +13,7 @@ lesSON is a **flashcard software aimed to help individuals with their memory wor
 ## Feature List
 
 ### Adding a Flashcard `add`
-Adds a flashcard to the deck.
+Adds a flashcard to the deck for the user.
 
 Format: `add q/question a/answer [t/TAG]​`
 
