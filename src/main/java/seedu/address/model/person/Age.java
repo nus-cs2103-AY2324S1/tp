@@ -4,13 +4,13 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's age in the address book.
+ * Represents a Date's age in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidAge(String)}
  */
 public class Age {
     public static final String MESSAGE_CONSTRAINTS =
             "Age should only contain positive numbers.";
-    public static final String VALIDATION_REGEX = "\\d{3,}";
+    public static final String VALIDATION_REGEX = "^(?:[1-9]|[1-9][0-9]|1[0-4][0-9]|150)$"; // 1-150 Age Accepted
     public final String value;
 
     /**
@@ -47,8 +47,8 @@ public class Age {
             return false;
         }
 
-        Age otherPhone = (Age) other;
-        return value.equals(otherPhone.value);
+        Age otherAge = (Age) other;
+        return value.equals(otherAge.value);
     }
 
     @Override
