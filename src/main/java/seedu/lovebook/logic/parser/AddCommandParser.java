@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 
 import seedu.lovebook.logic.commands.AddCommand;
 import seedu.lovebook.logic.parser.exceptions.ParseException;
-import seedu.lovebook.model.person.Address;
+import seedu.lovebook.model.person.Height;
 import seedu.lovebook.model.person.Age;
 import seedu.lovebook.model.person.Date;
 import seedu.lovebook.model.person.Gender;
@@ -42,10 +42,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Age age = ParserUtil.parseAge(argMultimap.getValue(PREFIX_AGE).get());
         Gender gender = ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get());
-        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
+        Height height = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Date date = new Date(name, age, gender, address, tagList);
+        Date date = new Date(name, age, gender, height, tagList);
 
         return new AddCommand(date);
     }

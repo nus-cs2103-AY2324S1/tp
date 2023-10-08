@@ -38,7 +38,7 @@ import seedu.lovebook.commons.core.index.Index;
 import seedu.lovebook.logic.Messages;
 import seedu.lovebook.logic.commands.EditCommand;
 import seedu.lovebook.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.lovebook.model.person.Address;
+import seedu.lovebook.model.person.Height;
 import seedu.lovebook.model.person.Age;
 import seedu.lovebook.model.person.Gender;
 import seedu.lovebook.model.person.Name;
@@ -86,7 +86,7 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
         assertParseFailure(parser, "1" + INVALID_AGE_DESC, Age.MESSAGE_CONSTRAINTS); // invalid age
         assertParseFailure(parser, "1" + INVALID_GENDER_DESC, Gender.MESSAGE_CONSTRAINTS); // invalid gender
-        assertParseFailure(parser, "1" + INVALID_ADDRESS_DESC, Address.MESSAGE_CONSTRAINTS); // invalid lovebook
+        assertParseFailure(parser, "1" + INVALID_ADDRESS_DESC, Height.MESSAGE_CONSTRAINTS); // invalid lovebook
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
 
         // invalid age followed by valid gender

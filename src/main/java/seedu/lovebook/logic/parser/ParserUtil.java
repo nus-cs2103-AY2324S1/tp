@@ -9,7 +9,7 @@ import java.util.Set;
 import seedu.lovebook.commons.core.index.Index;
 import seedu.lovebook.commons.util.StringUtil;
 import seedu.lovebook.logic.parser.exceptions.ParseException;
-import seedu.lovebook.model.person.Address;
+import seedu.lovebook.model.person.Height;
 import seedu.lovebook.model.person.Age;
 import seedu.lovebook.model.person.Gender;
 import seedu.lovebook.model.person.Name;
@@ -66,18 +66,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String lovebook} into an {@code Address}.
+     * Parses a {@code String lovebook} into an {@code Height}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code lovebook} is invalid.
      */
-    public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+    public static Height parseAddress(String height) throws ParseException {
+        requireNonNull(height);
+        String trimmedAddress = height.trim();
+        if (!Height.isValidAddress(trimmedAddress)) {
+            throw new ParseException(Height.MESSAGE_CONSTRAINTS);
         }
-        return new Address(trimmedAddress);
+        return new Height(trimmedAddress);
     }
 
     /**

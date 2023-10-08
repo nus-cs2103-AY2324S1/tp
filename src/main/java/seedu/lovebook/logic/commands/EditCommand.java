@@ -21,11 +21,8 @@ import seedu.lovebook.commons.util.ToStringBuilder;
 import seedu.lovebook.logic.Messages;
 import seedu.lovebook.logic.commands.exceptions.CommandException;
 import seedu.lovebook.model.Model;
-import seedu.lovebook.model.person.Address;
-import seedu.lovebook.model.person.Age;
-import seedu.lovebook.model.person.Date;
-import seedu.lovebook.model.person.Gender;
-import seedu.lovebook.model.person.Name;
+import seedu.lovebook.model.person.*;
+import seedu.lovebook.model.person.Height;
 import seedu.lovebook.model.tag.Tag;
 
 /**
@@ -98,10 +95,10 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElse(dateToEdit.getName());
         Age updatedAge = editPersonDescriptor.getAge().orElse(dateToEdit.getAge());
         Gender updatedGender = editPersonDescriptor.getGender().orElse(dateToEdit.getGender());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(dateToEdit.getAddress());
+        Height updatedHeight = editPersonDescriptor.getAddress().orElse(dateToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(dateToEdit.getTags());
 
-        return new Date(updatedName, updatedAge, updatedGender, updatedAddress, updatedTags);
+        return new Date(updatedName, updatedAge, updatedGender, updatedHeight, updatedTags);
     }
 
     @Override
@@ -136,7 +133,7 @@ public class EditCommand extends Command {
         private Name name;
         private Age age;
         private Gender gender;
-        private Address address;
+        private Height height;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -149,7 +146,7 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setAge(toCopy.age);
             setGender(toCopy.gender);
-            setAddress(toCopy.address);
+            setAddress(toCopy.height);
             setTags(toCopy.tags);
         }
 
@@ -157,7 +154,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, age, gender, address, tags);
+            return CollectionUtil.isAnyNonNull(name, age, gender, height, tags);
         }
 
         public void setName(Name name) {
@@ -184,12 +181,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(gender);
         }
 
-        public void setAddress(Address address) {
-            this.address = address;
+        public void setAddress(Height height) {
+            this.height = height;
         }
 
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
+        public Optional<Height> getAddress() {
+            return Optional.ofNullable(height);
         }
 
         /**
@@ -224,7 +221,7 @@ public class EditCommand extends Command {
             return Objects.equals(name, otherEditPersonDescriptor.name)
                     && Objects.equals(age, otherEditPersonDescriptor.age)
                     && Objects.equals(gender, otherEditPersonDescriptor.gender)
-                    && Objects.equals(address, otherEditPersonDescriptor.address)
+                    && Objects.equals(height, otherEditPersonDescriptor.height)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
@@ -234,7 +231,7 @@ public class EditCommand extends Command {
                     .add("name", name)
                     .add("age", age)
                     .add("gender", gender)
-                    .add("lovebook", address)
+                    .add("lovebook", height)
                     .add("tags", tags)
                     .toString();
         }

@@ -1,6 +1,6 @@
 # LoveBook User Guide Draft
 
-LoveBook, is a dating-focused address book application, revolving around providing users with a convenient
+LoveBook, is a dating-focused height book application, revolving around providing users with a convenient
 and enjoyable tool to enhance their dating experiences. Featuring user profile management, date organization,
 compatibility ranking, and customizable filtering options, LoveBook enhances the efficiency and effectiveness of your
 online dating journey.

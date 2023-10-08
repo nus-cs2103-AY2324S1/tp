@@ -3,11 +3,8 @@ package seedu.lovebook.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.lovebook.model.person.Address;
-import seedu.lovebook.model.person.Age;
-import seedu.lovebook.model.person.Date;
-import seedu.lovebook.model.person.Gender;
-import seedu.lovebook.model.person.Name;
+import seedu.lovebook.model.person.*;
+import seedu.lovebook.model.person.Height;
 import seedu.lovebook.model.tag.Tag;
 import seedu.lovebook.model.util.SampleDataUtil;
 
@@ -24,7 +21,7 @@ public class PersonBuilder {
     private Name name;
     private Age age;
     private Gender gender;
-    private Address address;
+    private Height height;
     private Set<Tag> tags;
 
     /**
@@ -34,7 +31,7 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         age = new Age(DEFAULT_AGE);
         gender = new Gender(DEFAULT_GENDER);
-        address = new Address(DEFAULT_ADDRESS);
+        height = new Height(DEFAULT_ADDRESS);
         tags = new HashSet<>();
     }
 
@@ -45,7 +42,7 @@ public class PersonBuilder {
         name = dateToCopy.getName();
         age = dateToCopy.getAge();
         gender = dateToCopy.getGender();
-        address = dateToCopy.getAddress();
+        height = dateToCopy.getAddress();
         tags = new HashSet<>(dateToCopy.getTags());
     }
 
@@ -66,10 +63,10 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code Date} that we are building.
+     * Sets the {@code Height} of the {@code Date} that we are building.
      */
-    public PersonBuilder withAddress(String address) {
-        this.address = new Address(address);
+    public PersonBuilder withAddress(String height) {
+        this.height = new Height(height);
         return this;
     }
 
@@ -90,7 +87,7 @@ public class PersonBuilder {
     }
 
     public Date build() {
-        return new Date(name, age, gender, address, tags);
+        return new Date(name, age, gender, height, tags);
     }
 
 }

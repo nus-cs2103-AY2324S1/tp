@@ -10,11 +10,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.lovebook.commons.exceptions.IllegalValueException;
-import seedu.lovebook.model.person.Address;
-import seedu.lovebook.model.person.Age;
-import seedu.lovebook.model.person.Date;
-import seedu.lovebook.model.person.Gender;
-import seedu.lovebook.model.person.Name;
+import seedu.lovebook.model.person.*;
+import seedu.lovebook.model.person.Height;
 import seedu.lovebook.model.tag.Tag;
 
 /**
@@ -27,7 +24,7 @@ class JsonAdaptedPerson {
     private final String name;
     private final String age;
     private final String gender;
-    private final String address;
+    private final String height;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -35,12 +32,12 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("age") String age,
-            @JsonProperty("gender") String gender, @JsonProperty("lovebook") String address,
+            @JsonProperty("gender") String gender, @JsonProperty("lovebook") String height,
             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.age = age;
         this.gender = gender;
-        this.address = address;
+        this.height = height;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -53,7 +50,7 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         age = source.getAge().value;
         gender = source.getGender().value;
-        address = source.getAddress().value;
+        height = source.getAddress().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -94,16 +91,16 @@ class JsonAdaptedPerson {
         }
         final Gender modelGender = new Gender(gender);
 
-        if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+        if (height == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Height.class.getSimpleName()));
         }
-        if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+        if (!Height.isValidAddress(height)) {
+            throw new IllegalValueException(Height.MESSAGE_CONSTRAINTS);
         }
-        final Address modelAddress = new Address(address);
+        final Height modelHeight = new Height(height);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Date(modelName, modelAge, modelGender, modelAddress, modelTags);
+        return new Date(modelName, modelAge, modelGender, modelHeight, modelTags);
     }
 
 }

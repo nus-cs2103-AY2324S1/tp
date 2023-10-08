@@ -22,18 +22,18 @@ public class Date {
     private final Gender gender;
 
     // Data fields
-    private final Address address;
+    private final Height height;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Date(Name name, Age age, Gender gender, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, age, gender, address, tags);
+    public Date(Name name, Age age, Gender gender, Height height, Set<Tag> tags) {
+        requireAllNonNull(name, age, gender, height, tags);
         this.name = name;
         this.age = age;
         this.gender = gender;
-        this.address = address;
+        this.height = height;
         this.tags.addAll(tags);
     }
 
@@ -44,7 +44,7 @@ public class Date {
         this.name = null;
         this.age = null;
         this.gender = null;
-        this.address = null;
+        this.height = null;
     }
 
     public Name getName() {
@@ -59,8 +59,8 @@ public class Date {
         return gender;
     }
 
-    public Address getAddress() {
-        return address;
+    public Height getAddress() {
+        return height;
     }
 
     /**
@@ -103,14 +103,14 @@ public class Date {
         return name.equals(otherDate.name)
                 && age.equals(otherDate.age)
                 && gender.equals(otherDate.gender)
-                && address.equals(otherDate.address)
+                && height.equals(otherDate.height)
                 && tags.equals(otherDate.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, age, gender, address, tags);
+        return Objects.hash(name, age, gender, height, tags);
     }
 
     @Override
@@ -119,7 +119,7 @@ public class Date {
                 .add("name", name)
                 .add("age", age)
                 .add("gender", gender)
-                .add("lovebook", address)
+                .add("lovebook", height)
                 .add("tags", tags)
                 .toString();
     }
