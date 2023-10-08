@@ -26,10 +26,10 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
 
     // Optional fields
-    private final String telegram;
-    private final String profession;
-    private final Number income;
-    private final String details;
+    private final TelegramHandle telegram;
+    private final Profession profession;
+    private final Income income;
+    private final Details details;
 
     /**
      * Every field must be present and not null.
@@ -52,7 +52,7 @@ public class Person {
      * Same constructor but with optional fields.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                  String telegram, String profession, Number income, String details) {
+                  TelegramHandle telegram, Profession profession, Income income, Details details) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -82,19 +82,19 @@ public class Person {
         return address;
     }
 
-    public String getTelegram() {
+    public TelegramHandle getTelegram() {
         return telegram;
     }
 
-    public String getProfession() {
+    public Profession getProfession() {
         return profession;
     }
 
-    public Number getIncome() {
+    public Income getIncome() {
         return income;
     }
 
-    public String getDetails() {
+    public Details getDetails() {
         return details;
     }
 
