@@ -102,7 +102,7 @@ public class EventPeriod {
         }
 
         EventPeriod otherEventPeriod = (EventPeriod) other;
-        return otherEventPeriod.start.equals(this.start) && otherEventPeriod.end.equals(this.end);
+        return otherEventPeriod.start.isEqual(this.start) && otherEventPeriod.end.isEqual(this.end);
     }
 
     @Override
