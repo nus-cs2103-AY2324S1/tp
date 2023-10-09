@@ -10,35 +10,35 @@ import transact.commons.util.ToStringBuilder;
  * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
  */
 public class NameContainsKeywordsPredicate implements Predicate<Person> {
-  private final List<String> keywords;
+    private final List<String> keywords;
 
-  public NameContainsKeywordsPredicate(List<String> keywords) {
-    this.keywords = keywords;
-  }
-
-  @Override
-  public boolean test(Person person) {
-    return keywords.stream()
-        .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword));
-  }
-
-  @Override
-  public boolean equals(Object other) {
-    if (other == this) {
-      return true;
+    public NameContainsKeywordsPredicate(List<String> keywords) {
+        this.keywords = keywords;
     }
 
-    // instanceof handles nulls
-    if (!(other instanceof NameContainsKeywordsPredicate)) {
-      return false;
+    @Override
+    public boolean test(Person person) {
+        return keywords.stream()
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword));
     }
 
-    NameContainsKeywordsPredicate otherNameContainsKeywordsPredicate = (NameContainsKeywordsPredicate) other;
-    return keywords.equals(otherNameContainsKeywordsPredicate.keywords);
-  }
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
 
-  @Override
-  public String toString() {
-    return new ToStringBuilder(this).add("keywords", keywords).toString();
-  }
+        // instanceof handles nulls
+        if (!(other instanceof NameContainsKeywordsPredicate)) {
+            return false;
+        }
+
+        NameContainsKeywordsPredicate otherNameContainsKeywordsPredicate = (NameContainsKeywordsPredicate) other;
+        return keywords.equals(otherNameContainsKeywordsPredicate.keywords);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this).add("keywords", keywords).toString();
+    }
 }

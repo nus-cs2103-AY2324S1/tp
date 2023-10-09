@@ -12,17 +12,17 @@ import javafx.scene.layout.Region;
  */
 public class StatusBarFooter extends UiPart<Region> {
 
-  private static final String FXML = "StatusBarFooter.fxml";
+    private static final String FXML = "StatusBarFooter.fxml";
 
-  @FXML
-  private Label saveLocationStatus;
+    @FXML
+    private Label saveLocationStatus;
 
-  /**
-   * Creates a {@code StatusBarFooter} with the given {@code Path}.
-   */
-  public StatusBarFooter(Path saveLocation) {
-    super(FXML);
-    saveLocationStatus.setText(Paths.get(".").resolve(saveLocation).toString());
-  }
+    /**
+     * Creates a {@code StatusBarFooter} with the given {@code Path}.
+     */
+    public StatusBarFooter(Path saveLocation) {
+        super(FXML);
+        saveLocationStatus.setText(Paths.get(".").resolve(saveLocation).toString());
+    }
 
 }

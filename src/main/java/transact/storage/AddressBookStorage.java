@@ -12,35 +12,38 @@ import transact.model.ReadOnlyAddressBook;
  */
 public interface AddressBookStorage {
 
-  /**
-   * Returns the file path of the data file.
-   */
-  Path getAddressBookFilePath();
+    /**
+     * Returns the file path of the data file.
+     */
+    Path getAddressBookFilePath();
 
-  /**
-   * Returns AddressBook data as a {@link ReadOnlyAddressBook}.
-   * Returns {@code Optional.empty()} if storage file is not found.
-   *
-   * @throws DataLoadingException if loading the data from storage failed.
-   */
-  Optional<ReadOnlyAddressBook> readAddressBook() throws DataLoadingException;
+    /**
+     * Returns AddressBook data as a {@link ReadOnlyAddressBook}.
+     * Returns {@code Optional.empty()} if storage file is not found.
+     *
+     * @throws DataLoadingException
+     *             if loading the data from storage failed.
+     */
+    Optional<ReadOnlyAddressBook> readAddressBook() throws DataLoadingException;
 
-  /**
-   * @see #getAddressBookFilePath()
-   */
-  Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataLoadingException;
+    /**
+     * @see #getAddressBookFilePath()
+     */
+    Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataLoadingException;
 
-  /**
-   * Saves the given {@link ReadOnlyAddressBook} to the storage.
-   * 
-   * @param addressBook cannot be null.
-   * @throws IOException if there was any problem writing to the file.
-   */
-  void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
+    /**
+     * Saves the given {@link ReadOnlyAddressBook} to the storage.
+     *
+     * @param addressBook
+     *            cannot be null.
+     * @throws IOException
+     *             if there was any problem writing to the file.
+     */
+    void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
 
-  /**
-   * @see #saveAddressBook(ReadOnlyAddressBook)
-   */
-  void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException;
+    /**
+     * @see #saveAddressBook(ReadOnlyAddressBook)
+     */
+    void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException;
 
 }

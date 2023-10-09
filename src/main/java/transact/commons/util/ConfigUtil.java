@@ -12,12 +12,12 @@ import transact.commons.exceptions.DataLoadingException;
  */
 public class ConfigUtil {
 
-  public static Optional<Config> readConfig(Path configFilePath) throws DataLoadingException {
-    return JsonUtil.readJsonFile(configFilePath, Config.class);
-  }
+    public static Optional<Config> readConfig(Path configFilePath) throws DataLoadingException {
+        return JsonUtil.readJsonFile(configFilePath, Config.class);
+    }
 
-  public static void saveConfig(Config config, Path configFilePath) throws IOException {
-    JsonUtil.saveJsonFile(config, configFilePath);
-  }
+    public static void saveConfig(Config config, Path configFilePath) throws IOException {
+        JsonUtil.saveJsonFile(config, configFilePath);
+    }
 
 }

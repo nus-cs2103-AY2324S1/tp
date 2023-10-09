@@ -14,46 +14,46 @@ import transact.model.person.NameContainsKeywordsPredicate;
  */
 public class FindCommand extends Command {
 
-  public static final String COMMAND_WORD = "find";
+    public static final String COMMAND_WORD = "find";
 
-  public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
-      + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-      + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-      + "Example: " + COMMAND_WORD + " alice bob charlie";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
+            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
+            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
+            + "Example: " + COMMAND_WORD + " alice bob charlie";
 
-  private final NameContainsKeywordsPredicate predicate;
+    private final NameContainsKeywordsPredicate predicate;
 
-  public FindCommand(NameContainsKeywordsPredicate predicate) {
-    this.predicate = predicate;
-  }
-
-  @Override
-  public CommandResult execute(Model model) {
-    requireNonNull(model);
-    model.updateFilteredPersonList(predicate);
-    return new CommandResult(
-        String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
-  }
-
-  @Override
-  public boolean equals(Object other) {
-    if (other == this) {
-      return true;
+    public FindCommand(NameContainsKeywordsPredicate predicate) {
+        this.predicate = predicate;
     }
 
-    // instanceof handles nulls
-    if (!(other instanceof FindCommand)) {
-      return false;
+    @Override
+    public CommandResult execute(Model model) {
+        requireNonNull(model);
+        model.updateFilteredPersonList(predicate);
+        return new CommandResult(
+                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
 
-    FindCommand otherFindCommand = (FindCommand) other;
-    return predicate.equals(otherFindCommand.predicate);
-  }
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
 
-  @Override
-  public String toString() {
-    return new ToStringBuilder(this)
-        .add("predicate", predicate)
-        .toString();
-  }
+        // instanceof handles nulls
+        if (!(other instanceof FindCommand)) {
+            return false;
+        }
+
+        FindCommand otherFindCommand = (FindCommand) other;
+        return predicate.equals(otherFindCommand.predicate);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("predicate", predicate)
+                .toString();
+    }
 }

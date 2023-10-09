@@ -14,19 +14,19 @@ import transact.model.UserPrefs;
  */
 public interface Storage extends AddressBookStorage, UserPrefsStorage {
 
-  @Override
-  Optional<UserPrefs> readUserPrefs() throws DataLoadingException;
+    @Override
+    Optional<UserPrefs> readUserPrefs() throws DataLoadingException;
 
-  @Override
-  void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException;
+    @Override
+    void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException;
 
-  @Override
-  Path getAddressBookFilePath();
+    @Override
+    Path getAddressBookFilePath();
 
-  @Override
-  Optional<ReadOnlyAddressBook> readAddressBook() throws DataLoadingException;
+    @Override
+    Optional<ReadOnlyAddressBook> readAddressBook() throws DataLoadingException;
 
-  @Override
-  void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
+    @Override
+    void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
 
 }
