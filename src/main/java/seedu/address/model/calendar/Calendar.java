@@ -54,6 +54,15 @@ public class Calendar {
     }
 
     /**
+     * Get the tree map storing the events.
+     *
+     * @return tree map data structure object storing events of this calendar.
+     */
+    public NavigableMap<EventPeriod, Event> getEventTree() {
+        return eventTree;
+    }
+
+    /**
      * Checks if the given index is valid for accessing events.
      *
      * @param index The index to be checked.
@@ -98,5 +107,36 @@ public class Calendar {
         assert(this.eventTree.containsValue(toBeRemoved));
 
         this.eventTree.remove(getEventAtIndex(index));
+    }
+
+    /**
+     * Clears the calendar
+     */
+    public void clear() {
+        this.eventTree.clear();
+    }
+
+    /**
+     * Check if the calendar contains the event.
+     *
+     * @param event event to be checked.
+     * @return true if it is contained in the calendar, false otherwise.
+     */
+    public boolean contains(Event event) {
+        return this.eventTree.containsValue(event);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+
+        if (!(other instanceof Calendar)) {
+            return false;
+        }
+
+        Calendar otherCalendar = (Calendar) other;
+        return this.eventTree.equals(otherCalendar.eventTree);
     }
 }
