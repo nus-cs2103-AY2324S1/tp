@@ -277,27 +277,28 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority                 | As a …​                                           | I want to …​                                               | So that I can…​                                                        |
-| ------------------------ | ------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------------------- |
-| `* * *`                  | new user                                          | see usage instructions                                     | refer to instructions when I forget how to use the App                 |
-| `* * *`                  | user                                              | add a new person                                           |                                                                        |
-| `* * *`                  | user                                              | delete a person                                            | remove entries that I no longer need                                   |
-| `* * *`                  | user                                              | find a person by name                                      | locate details of persons without having to go through the entire list |
-| `* *`                    | user                                              | hide private contact details                               | minimize chance of someone else seeing them by accident                |
-| `*`                      | user with many persons in the address book        | sort persons by name                                       | locate a person easily                                                 |
+| Priority                 | As a …​                               | I want to …​                                               | So that I can…​                                                        |
+| ------------------------ |---------------------------------------|------------------------------------------------------------| ---------------------------------------------------------------------- |
+| `* * *`                  | new user                              | see usage instructions                                     | refer to instructions when I forget how to use the App                 |
+| `* * *`                  | user                                  | add a new person                                           |                                                                        |
+| `* * *`                  | user                                  | delete a person                                            | remove entries that I no longer need                                   |
+| `* * *`                  | user                                  | find a person by name                                      | locate details of persons without having to go through the entire list |
+| `* *`                    | user                                  | hide private contact details                               | minimize chance of someone else seeing them by accident                |
+| `*`                      | user with many persons in the address book | sort persons by name                                       | locate a person easily                                                 |
 | Transaction Recording    |
-| `* * *`                  | user                                              | add a new transaction                                      |                                                                        |
-| `* * *`                  | user                                              | remove a transaction                                       |                                                                        |
-| `* * *`                  | user                                              | view all transactions                                      |                                                                        |
-| `* *`                    | user                                              | edit transactions                                          |                                                                        |
+| `* * *`                  | user                                  | add a new transaction                                      |                                                                        |
+| `* * *`                  | user                                  | remove a transaction                                       |                                                                        |
+| `* * *`                  | user                                  | view all transactions                                      |                                                                        |
+| `* *`                    | user                                  | edit transactions through the software                     |                                                                        |
+| `* *`                    | user                                  | edit transactions without opening the software             |                                                                        |
 | Financial Reporting      |
-| `*`                      | user who needs to analyze transactions            | have a variety of financial reports                        |                                                                        |
-| `*`                      | user who needs to share data with others          | generate reports downloadable in common formats (PDF, CSV) |                                                                        |
-| `*`                      | user                                              | restore from a backup                                      | undo large changes                                                     |
+| `*`                      | user who needs to analyze transactions | have a variety of financial reports                        |                                                                        |
+| `*`                      | user who needs to share data with others | generate reports downloadable in common formats (PDF, CSV) |                                                                        |
+| `*`                      | user                                  | restore from a backup                                      | undo large changes                                                     |
 | Data Security and Backup |
 | `*`                      | user who needs to keep sensitive data confidental | encrypt the data                                           | ensure the security and privacy of financial data                      |
-| `*`                      | user who does not have reliable hardware          | have automated backups                                     | prevent unnessary data loss                                            |
-| `*`                      | user                                              | restore from a backup                                      | undo large changes                                                     |
+| `*`                      | user who does not have reliable hardware | have automated backups                                     | prevent unnessary data loss                                            |
+| `*`                      | user                                  | restore from a backup                                      | undo large changes                                                     |
 
 _{More to be added}_
 
