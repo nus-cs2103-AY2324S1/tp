@@ -44,7 +44,7 @@ public class EventPeriod {
      * @return A new EventPeriod object with minimum date/time values.
      */
     public static EventPeriod createNonConflictingPeriod() {
-        return new EventPeriod(LocalDateTime.MIN, LocalDateTime.MIN);
+        return new EventPeriod(LocalDateTime.MAX, LocalDateTime.MIN);
     }
 
     /**
