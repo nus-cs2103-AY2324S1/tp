@@ -17,13 +17,14 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteCommand parse(String args) throws ParseException {
-        try {
-            Name name = ParserUtil.parseName(args);
-            return new DeleteCommand(name);
-        } catch (ParseException pe) {
+
+        if (args == "" || args == null) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
+
+        Name name = ParserUtil.parseName(args);
+        return new DeleteCommand(name);
     }
 
 }
