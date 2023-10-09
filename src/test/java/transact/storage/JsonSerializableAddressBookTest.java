@@ -1,17 +1,17 @@
 package transact.storage;
 
-import static transact.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static transact.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.junit.jupiter.api.Test;
 
-import transact.testutil.TypicalPersons;
 import transact.commons.exceptions.IllegalValueException;
 import transact.commons.util.JsonUtil;
 import transact.model.AddressBook;
+import transact.testutil.TypicalPersons;
 
 public class JsonSerializableAddressBookTest {
 

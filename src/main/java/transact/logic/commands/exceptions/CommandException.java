@@ -1,5 +1,7 @@
 package transact.logic.commands.exceptions;
 
+import transact.logic.commands.Command;
+
 /**
  * Represents an error which occurs during execution of a {@link Command}.
  */

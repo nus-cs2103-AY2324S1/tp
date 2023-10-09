@@ -1,13 +1,13 @@
 package transact.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static transact.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static transact.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static transact.testutil.Assert.assertThrows;
 import static transact.testutil.TypicalPersons.ALICE;
 import static transact.testutil.TypicalPersons.BOB;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -15,9 +15,9 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import transact.testutil.PersonBuilder;
 import transact.model.person.exceptions.DuplicatePersonException;
 import transact.model.person.exceptions.PersonNotFoundException;
+import transact.testutil.PersonBuilder;
 
 public class UniquePersonListTest {
 

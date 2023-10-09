@@ -1,12 +1,12 @@
 package transact.model;
 
-import static transact.testutil.Assert.assertThrows;
-import static transact.testutil.TypicalPersons.ALICE;
-import static transact.testutil.TypicalPersons.BENSON;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static transact.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static transact.testutil.Assert.assertThrows;
+import static transact.testutil.TypicalPersons.ALICE;
+import static transact.testutil.TypicalPersons.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -14,9 +14,9 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
-import transact.testutil.AddressBookBuilder;
 import transact.commons.core.GuiSettings;
 import transact.model.person.NameContainsKeywordsPredicate;
+import transact.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
 

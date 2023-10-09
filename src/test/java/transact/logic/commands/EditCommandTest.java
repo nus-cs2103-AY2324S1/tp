@@ -1,5 +1,8 @@
 package transact.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static transact.logic.commands.CommandTestUtil.DESC_AMY;
 import static transact.logic.commands.CommandTestUtil.DESC_BOB;
 import static transact.logic.commands.CommandTestUtil.VALID_NAME_BOB;
@@ -11,14 +14,9 @@ import static transact.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static transact.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static transact.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static transact.testutil.TypicalPersons.getTypicalAddressBook;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import transact.testutil.EditPersonDescriptorBuilder;
-import transact.testutil.PersonBuilder;
 import transact.commons.core.index.Index;
 import transact.logic.Messages;
 import transact.logic.commands.EditCommand.EditPersonDescriptor;
@@ -27,6 +25,8 @@ import transact.model.Model;
 import transact.model.ModelManager;
 import transact.model.UserPrefs;
 import transact.model.person.Person;
+import transact.testutil.EditPersonDescriptorBuilder;
+import transact.testutil.PersonBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for

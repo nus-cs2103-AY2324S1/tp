@@ -1,12 +1,12 @@
 package transact.storage;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static transact.testutil.Assert.assertThrows;
 import static transact.testutil.TypicalPersons.ALICE;
 import static transact.testutil.TypicalPersons.HOON;
 import static transact.testutil.TypicalPersons.IDA;
 import static transact.testutil.TypicalPersons.getTypicalAddressBook;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.io.IOException;
 import java.nio.file.Path;

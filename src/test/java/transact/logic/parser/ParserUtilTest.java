@@ -1,10 +1,10 @@
 package transact.logic.parser;
 
-import static transact.testutil.Assert.assertThrows;
-import static transact.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static transact.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+import static transact.testutil.Assert.assertThrows;
+import static transact.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
 import java.util.Collections;

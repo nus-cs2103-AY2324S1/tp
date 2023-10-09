@@ -1,5 +1,6 @@
 package transact.logic.parser;
 
+import static transact.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static transact.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static transact.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static transact.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
@@ -23,19 +24,17 @@ import static transact.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static transact.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static transact.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static transact.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static transact.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static transact.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static transact.testutil.TypicalPersons.AMY;
-import static transact.testutil.TypicalPersons.BOB;
-import static transact.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static transact.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static transact.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static transact.logic.parser.CliSyntax.PREFIX_NAME;
 import static transact.logic.parser.CliSyntax.PREFIX_PHONE;
+import static transact.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static transact.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static transact.testutil.TypicalPersons.AMY;
+import static transact.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
 
-import transact.testutil.PersonBuilder;
 import transact.logic.Messages;
 import transact.logic.commands.AddCommand;
 import transact.model.person.Address;
@@ -44,6 +43,7 @@ import transact.model.person.Name;
 import transact.model.person.Person;
 import transact.model.person.Phone;
 import transact.model.tag.Tag;
+import transact.testutil.PersonBuilder;
 
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();

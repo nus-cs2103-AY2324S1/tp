@@ -1,14 +1,14 @@
 package transact.logic;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static transact.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static transact.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static transact.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static transact.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static transact.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static transact.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static transact.testutil.Assert.assertThrows;
 import static transact.testutil.TypicalPersons.AMY;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static transact.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
-import static transact.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
@@ -18,7 +18,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import transact.testutil.PersonBuilder;
 import transact.logic.commands.AddCommand;
 import transact.logic.commands.CommandResult;
 import transact.logic.commands.ListCommand;
@@ -32,6 +31,7 @@ import transact.model.person.Person;
 import transact.storage.JsonAddressBookStorage;
 import transact.storage.JsonUserPrefsStorage;
 import transact.storage.StorageManager;
+import transact.testutil.PersonBuilder;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy IO exception");

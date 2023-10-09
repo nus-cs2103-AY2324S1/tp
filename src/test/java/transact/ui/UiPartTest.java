@@ -1,8 +1,8 @@
 package transact.ui;
 
-import static transact.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static transact.testutil.Assert.assertThrows;
 
 import java.net.URL;
 import java.nio.file.Path;

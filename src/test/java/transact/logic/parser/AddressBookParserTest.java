@@ -1,11 +1,11 @@
 package transact.logic.parser;
 
-import static transact.testutil.Assert.assertThrows;
-import static transact.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static transact.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static transact.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static transact.testutil.Assert.assertThrows;
+import static transact.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,21 +13,21 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import transact.testutil.EditPersonDescriptorBuilder;
-import transact.testutil.PersonBuilder;
-import transact.testutil.PersonUtil;
 import transact.logic.commands.AddCommand;
 import transact.logic.commands.ClearCommand;
 import transact.logic.commands.DeleteCommand;
 import transact.logic.commands.EditCommand;
+import transact.logic.commands.EditCommand.EditPersonDescriptor;
 import transact.logic.commands.ExitCommand;
 import transact.logic.commands.FindCommand;
 import transact.logic.commands.HelpCommand;
 import transact.logic.commands.ListCommand;
-import transact.logic.commands.EditCommand.EditPersonDescriptor;
 import transact.logic.parser.exceptions.ParseException;
 import transact.model.person.NameContainsKeywordsPredicate;
 import transact.model.person.Person;
+import transact.testutil.EditPersonDescriptorBuilder;
+import transact.testutil.PersonBuilder;
+import transact.testutil.PersonUtil;
 
 public class AddressBookParserTest {
 

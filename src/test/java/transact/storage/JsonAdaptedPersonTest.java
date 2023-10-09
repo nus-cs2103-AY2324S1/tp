@@ -1,9 +1,9 @@
 package transact.storage;
 
-import static transact.testutil.Assert.assertThrows;
-import static transact.testutil.TypicalPersons.BENSON;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static transact.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
+import static transact.testutil.Assert.assertThrows;
+import static transact.testutil.TypicalPersons.BENSON;
 
 import java.util.ArrayList;
 import java.util.List;

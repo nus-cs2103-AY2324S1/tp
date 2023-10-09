@@ -1,8 +1,8 @@
 package transact.commons.util;
 
-import static transact.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static transact.testutil.Assert.assertThrows;
 
 import java.io.FileNotFoundException;
 

@@ -7,12 +7,12 @@ import static transact.testutil.TypicalPersons.getTypicalAddressBook;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import transact.testutil.PersonBuilder;
 import transact.logic.Messages;
 import transact.model.Model;
 import transact.model.ModelManager;
 import transact.model.UserPrefs;
 import transact.model.person.Person;
+import transact.testutil.PersonBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) for

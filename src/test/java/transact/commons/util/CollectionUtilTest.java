@@ -1,9 +1,9 @@
 package transact.commons.util;
 
-import static transact.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static transact.commons.util.CollectionUtil.requireAllNonNull;
+import static transact.testutil.Assert.assertThrows;
 
 import java.util.Arrays;
 import java.util.Collection;

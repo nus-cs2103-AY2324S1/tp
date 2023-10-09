@@ -1,11 +1,11 @@
 package transact.logic.commands;
 
-import static transact.testutil.Assert.assertThrows;
-import static transact.testutil.TypicalPersons.ALICE;
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static transact.testutil.Assert.assertThrows;
+import static transact.testutil.TypicalPersons.ALICE;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -14,7 +14,6 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
-import transact.testutil.PersonBuilder;
 import javafx.collections.ObservableList;
 import transact.commons.core.GuiSettings;
 import transact.logic.Messages;
@@ -24,6 +23,7 @@ import transact.model.Model;
 import transact.model.ReadOnlyAddressBook;
 import transact.model.ReadOnlyUserPrefs;
 import transact.model.person.Person;
+import transact.testutil.PersonBuilder;
 
 public class AddCommandTest {
 

@@ -1,8 +1,8 @@
 package transact.commons.core;
 
-import static transact.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static transact.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
