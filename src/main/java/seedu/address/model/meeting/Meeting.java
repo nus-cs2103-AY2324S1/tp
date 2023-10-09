@@ -6,11 +6,13 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
  * Represents a Meeting in the address book.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Guarantees: details are present and not null, field values are validated,
+ * immutable.
  */
 public class Meeting {
     private final Title title;
@@ -49,7 +51,8 @@ public class Meeting {
     }
 
     /**
-     * Returns an immutable attendee set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable attendee set, which throws
+     * {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Attendee> getAttendees() {
