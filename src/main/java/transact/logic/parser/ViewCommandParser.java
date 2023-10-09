@@ -20,7 +20,16 @@ public class ViewCommandParser implements Parser<ViewCommand> {
 
         ViewCommand.ViewType type;
         try {
-            type = ViewCommand.ViewType.valueOf(argList[0].toUpperCase());
+            switch (argList[0].toLowerCase()) {
+            case "s":
+                type = ViewCommand.ViewType.STAFF;
+                break;
+            case "t":
+                type = ViewCommand.ViewType.TRANSACTION;
+                break;
+            default:
+                type = ViewCommand.ViewType.valueOf(argList[0].toUpperCase());
+            }
         } catch (IllegalArgumentException e) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));

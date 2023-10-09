@@ -48,4 +48,19 @@ public class ViewCommand extends Command {
         model.updateFilteredTransactionList(PREDICATE_HIDE_ALL_TRANSACTIONS);
         return new CommandResult(MESSAGE_SUCCESS_STAFF);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ViewCommand)) {
+            return false;
+        }
+
+        ViewCommand otherViewCommand = (ViewCommand) other;
+        return type == otherViewCommand.type;
+    }
 }
