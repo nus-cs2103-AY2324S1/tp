@@ -1,19 +1,20 @@
 package seedu.address.model.event;
 
-import seedu.address.model.person.Person;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+
+import seedu.address.model.person.Person;
 
 /**
  * Represents an Event in the address book.
  */
 public abstract class Event {
 
-    ArrayList<Person> person;
-    LocalDateTime startDateTime;
-    LocalDateTime endDateTime;
+    private ArrayList<Person> person;
+
+    private LocalDateTime startDateTime;
+    private LocalDateTime endDateTime;
 
     /**
      * Constructor for the event with start datetime and end datetime

@@ -33,11 +33,6 @@ public class Meeting extends Event {
      */
     @Override
     public String toString() {
-        return "Meeting: " + date.toString();
+        return "Meeting: " + super.getDateTime().toString();
     }
-
-    /**
-     * Assign a person to meeting
-     */
-
 }
