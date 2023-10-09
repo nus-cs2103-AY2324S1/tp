@@ -2,17 +2,20 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.meeting.Attendee;
 import seedu.address.model.meeting.Meeting;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Removes a Person from the Attendee list of a Meeting
  */
 public class RemoveMeetingContactCommand extends Command {
 
@@ -21,9 +24,9 @@ public class RemoveMeetingContactCommand extends Command {
   public static final String MESSAGE_USAGE = COMMAND_WORD
       + ": Removes the attendee indicated by the attendee index in the attendees list of the meeting indicated by the meeting index.\n"
       + "Parameters: MEETING_INDEX ATTENDEE_INDEX \n"
-      + "Example: " + COMMAND_WORD + " 1";
+      + "Example: " + COMMAND_WORD + " 1" + " 1";
 
-  public static final String MESSAGE_REMOVE_MEETING_CONTACT_SUCCESS = "Remove Person (%1$s) from Meeting (%1$s)";
+  public static final String MESSAGE_REMOVE_MEETING_CONTACT_SUCCESS = "Removed Person (%1$s) from Meeting (%2$s)";
 
   private final Index meetingIndex, attendeeIndex;
 
@@ -41,8 +44,35 @@ public class RemoveMeetingContactCommand extends Command {
     }
 
     Meeting meeting = lastShownList.get(meetingIndex.getZeroBased());
+    Set<Attendee> attendees = meeting.getAttendees();
+    Attendee attendeeToRemove = meeting.getAttendee(attendeeIndex);
 
-    return new CommandResult(String.format(MESSAGE_REMOVE_MEETING_CONTACT_SUCCESS, "wan", "too"));
+    Set<Attendee> updatedAttendees = new LinkedHashSet<>(attendees);
+    updatedAttendees.remove(attendeeToRemove);
+
+    Meeting updatedMeeting = updateMeetingAttendees(meeting, updatedAttendees);
+    model.setMeeting(meeting, updatedMeeting);
+
+    return new CommandResult(
+        String.format(MESSAGE_REMOVE_MEETING_CONTACT_SUCCESS, attendeeToRemove.getAttendeeName(), meeting.getTitle()));
+  }
+
+  /**
+   * Creates a new {@code Meeting} with updated attendee list.
+   */
+  static Meeting updateMeetingAttendees(Meeting meeting, Set<Attendee> attendees) {
+    if (attendees.equals(meeting.getAttendees())) {
+      return meeting;
+    }
+
+    Meeting updatedMeeting = new Meeting(
+        meeting.getTitle(),
+        meeting.getLocation(),
+        meeting.getStart(),
+        meeting.getEnd(),
+        attendees);
+
+    return updatedMeeting;
   }
 
   @Override

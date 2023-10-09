@@ -11,12 +11,17 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.meeting.Attendee;
+import seedu.address.model.meeting.Meeting;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -31,13 +36,25 @@ public class RemoveMeetingContactCommandTest {
                 RemoveMeetingContactCommand rmmcCommand = new RemoveMeetingContactCommand(INDEX_FIRST_MEETING,
                                 INDEX_FIRST_MEETING);
 
-                String expectedMessage = String.format(
-                                RemoveMeetingContactCommand.MESSAGE_REMOVE_MEETING_CONTACT_SUCCESS,
-                                "wan", "too");
+                Meeting meeting = model.getFilteredMeetingList().get(INDEX_FIRST_MEETING.getZeroBased());
+                Attendee attendeeToRemove = meeting.getAttendee(INDEX_FIRST_PERSON);
 
+                Set<Attendee> expectedAttendees = new LinkedHashSet<>(meeting.getAttendees());
+                expectedAttendees.remove(attendeeToRemove);
+
+                // No errors thrown
                 String message = assertDoesNotThrow(() -> rmmcCommand.execute(model)).getFeedbackToUser();
 
+                String expectedMessage = String.format(
+                                RemoveMeetingContactCommand.MESSAGE_REMOVE_MEETING_CONTACT_SUCCESS,
+                                attendeeToRemove.getAttendeeName(), meeting.getTitle());
+
+                // Output message is correct
                 assertEquals(expectedMessage, message);
+
+                Meeting updatedMeeting = model.getFilteredMeetingList().get(INDEX_FIRST_MEETING.getZeroBased());
+                Set<Attendee> updatedAttendees = updatedMeeting.getAttendees();
+                assertEquals(expectedAttendees, updatedAttendees);
         }
 
         @Test
