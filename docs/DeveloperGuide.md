@@ -271,12 +271,26 @@ _{Explain here how the data archiving feature will be implemented}_
 - prefers typing to mouse interactions
 - is reasonably comfortable using CLI apps
 
-**Value proposition**: Quickly add company inflow and outflow via the CLI. Easily keep track of company profits and expenses associated with staff and visualize them.
 
-### User stories
+# Developer Guide
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+## Introduction
 
+Welcome to the development guide for **Tran$act**, a command-line interface (CLI) application designed to help accountants in small businesses efficiently manage their financial transactions and related data. This guide provides detailed instructions for developers on how to build and maintain Tran$act, ensuring it meets the needs and expectations of our target users.
+
+## Target User Profile
+
+Tran$act is specifically tailored for accountants and finance professionals in small businesses who have the following characteristics:
+
+- **Need to manage a significant number of transactions**: Tran$act is designed to handle a high volume of financial transactions efficiently.
+
+- **Fast typists**: Users are expected to be proficient in typing, as the application primarily relies on keyboard inputs for data entry and interaction.
+
+- **Prefer CLI interactions**: Our users prefer command-line interactions over graphical user interfaces, as it allows for quicker data entry and navigation.
+
+- **Reasonably comfortable with CLI apps**: Users should have a basic understanding of using command-line applications.
+
+## User Stories
 | Priority                 | As a …​                                           | I want to …​                                               | So that I can…​                                                        |
 | ------------------------ | ------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------------------- |
 | `* * *`                  | new user                                          | see usage instructions                                     | refer to instructions when I forget how to use the App                 |
@@ -299,47 +313,188 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`                      | user who does not have reliable hardware          | have automated backups                                     | prevent unnessary data loss                                            |
 | `*`                      | user                                              | restore from a backup                                      | undo large changes                                                     |
 
-_{More to be added}_
+### Transaction Recording
 
-### Use cases
+1. **Adding a Transaction**
+    - As an accountant, I want to add a new financial transaction quickly.
+    - I should be able to specify the amount, type (income or expense), date, and optionally, the associated person for the transaction.
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+2. **Removing a Transaction**
+    - As an accountant, I want to delete a transaction when necessary.
+    - I should be able to remove a transaction from the records to correct mistakes or manage data.
 
-**Use case: Delete a person**
+3. **Viewing All Transactions**
+    - As an accountant, I want to see a list of all recorded transactions for reference.
+    - This list will provide an overview of all financial activities in one place.
 
-**MSS**
+4. **Editing a Transaction**
+    - As an accountant, I need the ability to edit transaction details.
+    - I should be able to make corrections or updates to transaction records as needed.
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+5. **Restoring Deleted Transactions**
+    - As an accountant, I want a safety net for accidental deletions.
+    - I should be able to retrieve transactions I have mistakenly deleted from a "bin" or archive.
 
-    Use case ends.
+6. **Fast Data Entry**
+    - As a fast typist, I want shortcuts and efficient data entry methods.
+    - This will enable me to record transactions, including income and expenses, quickly via the CLI.
 
-**Extensions**
+### Dashboard Overview
 
-- 2a. The list is empty.
+1. **Dashboard Display**
+    - As an accountant, I want to see a clear and concise dashboard upon opening the app.
+    - The dashboard should display total income, total expenses, net profit for the selected period (usually monthly), and a breakdown of expenses by sector to improve cost efficiency.
 
-  Use case ends.
+### Financial Reporting
 
-- 3a. The given index is invalid.
+1. **Access to Financial Reports**
+    - As an accountant who analyzes transactions, I need access to various financial reports.
+    - I should be able to generate income statements, balance sheets, and cash flow statements.
 
-  - 3a1. AddressBook shows an error message.
+2. **Customizable Reports**
+    - As an accountant who shares data with stakeholders, I want to generate customizable reports.
+    - I should be able to create reports in common formats (PDF, CSV, Excel) to share with others.
 
-    Use case resumes at step 2.
+### Data Security and Backup
 
-_{More to be added}_
+1. **Data Security**
+    - As a user who values data privacy, I expect the app to secure financial data.
+    - The app should implement security measures, potentially including encryption, to protect sensitive information.
 
-### Non-Functional Requirements
+2. **Automated Backups**
+    - As a user concerned about data loss, I want the option for automated backups.
+    - The app should allow me to set up automated backups to prevent data loss due to hardware issues.
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 transactions without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+3. **Undo and Restore**
+    - As a user prone to mistakes, I need the ability to undo actions or restore from backups.
+    - This feature will help me recover from errors or data corruption.
 
-_{More to be added}_
+### Address Book
 
-### Glossary
+1. **Importing Staff List**
+    - As a user who needs efficiency, I want to import a staff list into the address book.
+    - This will help me quickly access contact information for employees and associates.
 
+2. **Adding and Editing People**
+    - As a user who manages relationships, I need to add, edit, and remove people from the address book.
+    - This allows me to keep the address book up to date and accurate.
+
+3. **Viewing Address Book**
+    - As a user who relies on contact information, I want to view the entire address book.
+    - This provides easy access to contact details for individuals in the address book.
+
+## Use Cases
+
+### Use Case 1: Adding a Transaction
+
+**Actor:** Accountant
+
+**Preconditions:** The accountant is logged into the Tran$act application.
+
+**Description:**
+1. The accountant specifies the transaction details, including the amount, type (income or expense), date, and optionally, the associated person.
+2. The system validates the input data.
+3. The system records the transaction in the database.
+
+**Extensions:**
+- If the input data is invalid, the system displays an error message.
+
+### Use Case 2: Removing a Transaction
+
+**Actor:** Accountant
+
+**Preconditions:** The accountant is logged into the Tran$act application.
+
+**Description:**
+1. The accountant selects a transaction to remove from the records.
+2. The system confirms the removal with the accountant.
+3. The system removes the transaction from the database.
+
+### Use Case 3: Viewing All Transactions
+
+**Actor:** Accountant
+
+**Preconditions:** The accountant is logged into the Tran$act application.
+
+**Description:**
+1. The accountant selects the option to view all transactions.
+2. The system retrieves and displays a list of all recorded transactions.
+
+### Use Case 4: Editing a Transaction
+
+**Actor:** Accountant
+
+**Preconditions:** The accountant is logged into the Tran$act application.
+
+**Description:**
+1. The accountant selects a transaction to edit.
+2. The system allows the accountant to modify the transaction details.
+3. The system saves the updated transaction in the database.
+
+**Extensions:**
+- If the input data is invalid, the system displays an error message.
+
+### Use Case 5: Restoring Deleted Transactions
+**Value proposition**: Quickly add company inflow and outflow via the CLI. Easily keep track of company profits and expenses associated with staff and visualize them.
+
+**Actor:** Accountant
+
+**Preconditions:** The accountant is logged into the Tran$act application.
+
+**Description:**
+1. The accountant selects the option to restore deleted transactions.
+2. The system presents a list of previously deleted transactions.
+3. The accountant selects a transaction to restore.
+4. The system restores the selected transaction to the active records.
+
+### Use Case 6: Dashboard Display
+
+
+**Actor:** Accountant
+
+**Preconditions:** The accountant is logged into the Tran$act application.
+
+**Description:**
+1. Upon opening the app, the system displays a dashboard.
+2. The dashboard shows total income, total expenses, net profit for the selected period (usually monthly), and a breakdown of expenses by sector.
+
+### Use
+
+Case 7: Access to Financial Reports
+
+**Actor:** Accountant
+
+**Preconditions:** The accountant is logged into the Tran$act application.
+
+**Description:**
+1. The accountant selects the option to access financial reports.
+2. The system generates and displays financial reports, including income statements, balance sheets, and cash flow statements.
+
+
+### Use Case 8: Customizable Reports
+
+**Actor:** Accountant
+
+**Preconditions:** The accountant is logged into the Tran$act application.
+
+**Description:**
+1. The accountant selects the option to generate customizable reports.
+2. The system provides tools for the accountant to customize the report parameters.
+3. The system generates and displays the customized report in common formats (PDF, CSV, Excel).
+
+## Non-functional Requirements (NFR)
+
+- Tran$act should support the storage of at least 1000 transactions per month to accommodate the needs of small businesses.
+-  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+-  Should be able to hold up to 1000 transactions without a noticeable sluggishness in performance for typical usage.
+-  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+
+## Glossary
+
+- **Transaction**: An exchange of money, which includes buying and selling activities.
+- **Transactor/Party**: The person or entity that carried out the transaction or is related to it.
+- **Income**: Money received, such as sales revenue.
+- **Expense**: Costs incurred, including staff salaries and product costs.
 - **Mainstream OS**: Windows, Linux, Unix, OS-X
 - **Private contact detail**: A contact detail that is not meant to be shared with others
 - **Transaction**: An exchange of money (e.g. Buying, Selling)
