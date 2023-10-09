@@ -17,7 +17,6 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -67,8 +66,7 @@ public class RemoveMeetingContactCommandTest {
                                 INDEX_FIRST_PERSON);
 
                 // throws error for invalid meeting index
-                assertThrows(CommandException.class, () -> rmmcCommand.execute(model),
-                                Messages.MESSAGE_INVALID_MEETING_DISPLAYED_INDEX);
+                assertThrows(CommandException.class, () -> rmmcCommand.execute(model));
         }
 
         @Test
@@ -77,8 +75,7 @@ public class RemoveMeetingContactCommandTest {
                                 INDEX_OUT_OF_BOUNDS);
 
                 // throws error for invalid attendee index
-                assertThrows(CommandException.class, () -> rmmcCommand.execute(model),
-                                Messages.MESSAGE_INVALID_ATTENDEE_INDEX);
+                assertThrows(CommandException.class, () -> rmmcCommand.execute(model));
         }
 
         @Test
