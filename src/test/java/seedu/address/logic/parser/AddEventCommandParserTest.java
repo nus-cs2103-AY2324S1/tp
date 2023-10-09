@@ -2,11 +2,11 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.AddEventCommand.COMMAND_WORD;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_DESCRIPTION;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DESCRIPTION;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_START_DATE_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_END_DATE_TIME;
