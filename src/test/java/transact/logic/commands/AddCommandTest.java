@@ -23,6 +23,7 @@ import transact.model.Model;
 import transact.model.ReadOnlyAddressBook;
 import transact.model.ReadOnlyUserPrefs;
 import transact.model.person.Person;
+import transact.model.transaction.Transaction;
 import transact.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -155,6 +156,16 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Transaction> getFilteredTransactionList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredTransactionList(Predicate<Transaction> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }

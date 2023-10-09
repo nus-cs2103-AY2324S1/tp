@@ -16,6 +16,7 @@ import transact.logic.parser.exceptions.ParseException;
 import transact.model.Model;
 import transact.model.ReadOnlyAddressBook;
 import transact.model.person.Person;
+import transact.model.transaction.Transaction;
 import transact.storage.Storage;
 
 /**
@@ -69,6 +70,11 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return model.getFilteredPersonList();
+    }
+
+    @Override
+    public ObservableList<Transaction> getFilteredTransactionList() {
+        return model.getFilteredTransactionList();
     }
 
     @Override

@@ -16,7 +16,7 @@ import transact.logic.commands.EditCommand;
 import transact.logic.commands.ExitCommand;
 import transact.logic.commands.FindCommand;
 import transact.logic.commands.HelpCommand;
-import transact.logic.commands.ListCommand;
+import transact.logic.commands.ViewCommand;
 import transact.logic.parser.exceptions.ParseException;
 
 /**
@@ -70,8 +70,8 @@ public class AddressBookParser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+        case ViewCommand.COMMAND_WORD:
+            return new ViewCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

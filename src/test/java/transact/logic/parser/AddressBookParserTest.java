@@ -21,7 +21,7 @@ import transact.logic.commands.EditCommand.EditPersonDescriptor;
 import transact.logic.commands.ExitCommand;
 import transact.logic.commands.FindCommand;
 import transact.logic.commands.HelpCommand;
-import transact.logic.commands.ListCommand;
+import transact.logic.commands.ViewCommand;
 import transact.logic.parser.exceptions.ParseException;
 import transact.model.person.NameContainsKeywordsPredicate;
 import transact.model.person.Person;
@@ -83,9 +83,10 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_list() throws Exception {
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    public void parseCommand_view() throws Exception {
+        assertTrue(parser.parseCommand(ViewCommand.COMMAND_WORD + " staff") instanceof ViewCommand);
+        assertTrue(parser.parseCommand(ViewCommand.COMMAND_WORD + " transaction") instanceof ViewCommand);
+        assertTrue(parser.parseCommand(ViewCommand.COMMAND_WORD + " staff 3") instanceof ViewCommand);
     }
 
     @Test

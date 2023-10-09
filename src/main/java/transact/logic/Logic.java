@@ -9,6 +9,7 @@ import transact.logic.commands.exceptions.CommandException;
 import transact.logic.parser.exceptions.ParseException;
 import transact.model.ReadOnlyAddressBook;
 import transact.model.person.Person;
+import transact.model.transaction.Transaction;
 
 /**
  * API of the Logic component
@@ -36,6 +37,9 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
+
+    /** Returns an unmodifiable view of the filtered list of transactions */
+    ObservableList<Transaction> getFilteredTransactionList();
 
     /**
      * Returns the user prefs' address book file path.
