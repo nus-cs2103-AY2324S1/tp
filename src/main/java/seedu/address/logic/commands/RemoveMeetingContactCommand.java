@@ -54,10 +54,7 @@ public class RemoveMeetingContactCommand extends Command {
         }
         Attendee attendeeToRemove = meeting.getAttendee(attendeeIndex);
 
-        Set<Attendee> updatedAttendees = new LinkedHashSet<>(attendees);
-        updatedAttendees.remove(attendeeToRemove);
-
-        Meeting updatedMeeting = updateMeetingAttendees(meeting, updatedAttendees);
+        Meeting updatedMeeting = removeAttendee(meeting, attendeeToRemove);
         model.setMeeting(meeting, updatedMeeting);
 
         return new CommandResult(String.format(MESSAGE_REMOVE_MEETING_CONTACT_SUCCESS,
@@ -65,11 +62,13 @@ public class RemoveMeetingContactCommand extends Command {
     }
 
     /**
-     * Creates a new {@code Meeting} with updated attendee list.
+     * Creates a new {@code Meeting} that has attendee list with the specified attendee removed.
      */
-    static Meeting updateMeetingAttendees(Meeting meeting, Set<Attendee> attendees) {
+    static Meeting removeAttendee(Meeting meeting, Attendee attendeeToRemove) {
+        Set<Attendee> updatedAttendees = new LinkedHashSet<>(meeting.getAttendees());
+        updatedAttendees.remove(attendeeToRemove);
         Meeting updatedMeeting = new Meeting(meeting.getTitle(), meeting.getLocation(), meeting.getStart(),
-                meeting.getEnd(), attendees);
+                meeting.getEnd(), updatedAttendees);
 
         return updatedMeeting;
     }
