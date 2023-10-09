@@ -99,7 +99,8 @@ class JsonAdaptedPerson {
         final Email modelEmail = new Email(email);
 
         if (studentNumber == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, StudentNumber.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    StudentNumber.class.getSimpleName()));
         }
         if (!StudentNumber.isValidStudentNumber(studentNumber)) {
             throw new IllegalValueException(StudentNumber.MESSAGE_CONSTRAINTS);
@@ -107,7 +108,8 @@ class JsonAdaptedPerson {
         final StudentNumber modelStudentNumber = new StudentNumber(studentNumber);
 
         if (classNumber == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, ClassNumber.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    ClassNumber.class.getSimpleName()));
         }
         if (!ClassNumber.isValidClassNumber(classNumber)) {
             throw new IllegalValueException(ClassNumber.MESSAGE_CONSTRAINTS);

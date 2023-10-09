@@ -1,7 +1,5 @@
 package seedu.address.model.person;
 
-import java.util.HashSet;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -27,10 +25,10 @@ public class ClassNumber {
      * @param ClassNumber A valid Class Number
      *
      */
-    public ClassNumber(String ClassNumber) {
-        requireNonNull(ClassNumber);
-        checkArgument(isValidClassNumber(ClassNumber), MESSAGE_CONSTRAINTS);
-        value = ClassNumber;
+    public ClassNumber(String classNumber) {
+        requireNonNull(classNumber);
+        checkArgument(isValidClassNumber(classNumber), MESSAGE_CONSTRAINTS);
+        value = classNumber;
     }
 
     /**

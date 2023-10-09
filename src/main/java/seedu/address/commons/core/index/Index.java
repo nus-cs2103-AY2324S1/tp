@@ -2,8 +2,6 @@ package seedu.address.commons.core.index;
 
 import seedu.address.commons.util.ToStringBuilder;
 
-import java.util.HashMap;
-
 /**
  * Represents a zero-based or one-based index.
  *

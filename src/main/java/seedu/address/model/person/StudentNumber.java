@@ -1,7 +1,5 @@
 package seedu.address.model.person;
 
-import java.util.HashSet;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -11,10 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class StudentNumber {
 
-    public static HashSet<StudentNumber> allStudentNumbers = new HashSet<>();
-
-    public static final String MESSAGE_CONSTRAINTS = "Student Number can take any value starting with A, " +
-            "and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Student Number can take any value starting with A, "
+            + "and it should not be blank";
 
     /*
      * The first character of the student number needs to be "A".
@@ -30,6 +26,7 @@ public class StudentNumber {
      */
     public StudentNumber(String studentNumber) {
         requireNonNull(studentNumber);
+        studentNumber = studentNumber.toUpperCase().trim();
         checkArgument(isValidStudentNumber(studentNumber), MESSAGE_CONSTRAINTS);
         value = studentNumber;
     }
@@ -40,8 +37,6 @@ public class StudentNumber {
      */
     public static boolean isValidStudentNumber(String test) {
         return (test.matches(VALIDATION_REGEX));
-
-
     }
 
     @Override

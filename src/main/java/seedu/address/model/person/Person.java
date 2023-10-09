@@ -58,7 +58,9 @@ public class Person {
         return studentNumber;
     }
 
-    public ClassNumber  getClassNumber() { return classNumber; }
+    public ClassNumber getClassNumber() {
+        return classNumber;
+    }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}

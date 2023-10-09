@@ -101,13 +101,14 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        StudentNumber updatedStudentNumber = editPersonDescriptor.getStudentNumber().
-                orElse(personToEdit.getStudentNumber());
-        ClassNumber updatedClassNumber = editPersonDescriptor.getClassNumber().
-                orElse(personToEdit.getClassNumber());
+        StudentNumber updatedStudentNumber = editPersonDescriptor.getStudentNumber()
+                        .orElse(personToEdit.getStudentNumber());
+        ClassNumber updatedClassNumber = editPersonDescriptor.getClassNumber()
+                        .orElse(personToEdit.getClassNumber());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedStudentNumber, updatedClassNumber, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedStudentNumber,
+                updatedClassNumber, updatedTags);
     }
 
     @Override
@@ -199,8 +200,9 @@ public class EditCommand extends Command {
         public Optional<StudentNumber> getStudentNumber() {
             return Optional.ofNullable(studentNumber);
         }
-
-        public void setClassNumber(ClassNumber classNumber) { this.classNumber = classNumber; }
+        public void setClassNumber(ClassNumber classNumber) {
+            this.classNumber = classNumber;
+        }
 
         public Optional<ClassNumber> getClassNumber() {
             return Optional.ofNullable(classNumber);
