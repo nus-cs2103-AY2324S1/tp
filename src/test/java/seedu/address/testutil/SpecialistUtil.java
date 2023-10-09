@@ -1,18 +1,13 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.parser.CliSyntax.PATIENT_TAG;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-
 import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditSpecialistDescriptor;
 import seedu.address.model.person.Specialist;
 import seedu.address.model.tag.Tag;
+
+import static seedu.address.logic.parser.CliSyntax.*;
 
 /**
  * A utility class for Specialist.
@@ -23,7 +18,7 @@ public class SpecialistUtil {
      * Returns an add command string for adding the {@code specialist}.
      */
     public static String getAddCommand(Specialist specialist) {
-        return AddCommand.COMMAND_WORD + " " + PATIENT_TAG + " " + getSpecialistDetails(specialist);
+        return AddCommand.COMMAND_WORD + " " + SPECIALIST_TAG + " " + getSpecialistDetails(specialist);
     }
 
     /**
@@ -38,6 +33,7 @@ public class SpecialistUtil {
         specialist.getTags().stream().forEach(
                 s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
+        sb.append(PREFIX_SPECIALTY + specialist.getSpecialty().value + " ");
         return sb.toString();
     }
 
