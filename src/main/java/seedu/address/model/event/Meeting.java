@@ -2,14 +2,12 @@ package seedu.address.model.event;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 /**
  * Represents a Meeting in the address book.
  */
 public class Meeting extends Event {
-
-    LocalDateTime startTime;
-    LocalDateTime endTime;
 
     /**
      * Constructor for the meeting with optional start and end time
@@ -17,18 +15,17 @@ public class Meeting extends Event {
      * @param startTime start time of the meeting
      * @param endTime end time of the meeting
      */
-    public Meeting(LocalDate date, LocalDateTime startTime, LocalDateTime endTime) {
-        super(date);
-        this.startTime = startTime;
-        this.endTime = endTime;
+    public Meeting(LocalDate date, LocalTime startTime, LocalTime endTime) {
+        super(LocalDateTime.of(date, startTime), LocalDateTime.of(date, endTime));
     }
 
     /**
-     * Constructor for the meeting with only date (no start and end time)
+     * Constructor with just the date (without start and end time)
      * @param date date of the meeting
      */
     public Meeting(LocalDate date) {
-        super(date);
+        super(LocalDateTime.of(date.getYear(), date.getMonth(), date.getDayOfMonth(), 0, 0),
+                LocalDateTime.of(date.getYear(), date.getMonth(), date.getDayOfMonth(), 0, 0));
     }
 
     /**
