@@ -42,9 +42,12 @@ public class RemoveMeetingContactCommand extends Command {
     if (meetingIndex.getZeroBased() >= lastShownList.size()) {
       throw new CommandException(Messages.MESSAGE_INVALID_MEETING_DISPLAYED_INDEX);
     }
-
     Meeting meeting = lastShownList.get(meetingIndex.getZeroBased());
+
     Set<Attendee> attendees = meeting.getAttendees();
+    if (attendeeIndex.getZeroBased() >= attendees.size()) {
+      throw new CommandException(Messages.MESSAGE_INVALID_ATTENDEE_INDEX);
+    }
     Attendee attendeeToRemove = meeting.getAttendee(attendeeIndex);
 
     Set<Attendee> updatedAttendees = new LinkedHashSet<>(attendees);

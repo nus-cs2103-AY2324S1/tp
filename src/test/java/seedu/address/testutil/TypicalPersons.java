@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
@@ -82,7 +83,8 @@ public class TypicalPersons {
         public static String[] getTypicalAttendees() {
                 List<Person> typicalPersons = getTypicalPersons();
                 String[] typicalAttendees = typicalPersons.stream()
-                                .map(person -> person.getName().toString())
+                                .map(Person::getName)
+                                .map(Name::toString)
                                 .collect(Collectors.toList())
                                 .toArray(new String[0]);
                 return typicalAttendees;

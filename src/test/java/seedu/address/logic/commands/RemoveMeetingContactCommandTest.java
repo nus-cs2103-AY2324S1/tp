@@ -6,8 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MEETING;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_MEETING;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_OUT_OF_BOUNDS;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_MEETING;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -16,6 +17,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -32,9 +34,9 @@ public class RemoveMeetingContactCommandTest {
         private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
         @Test
-        public void execute_validIndex_success() {
+        public void execute_valid_success() {
                 RemoveMeetingContactCommand rmmcCommand = new RemoveMeetingContactCommand(INDEX_FIRST_MEETING,
-                                INDEX_FIRST_MEETING);
+                                INDEX_FIRST_PERSON);
 
                 Meeting meeting = model.getFilteredMeetingList().get(INDEX_FIRST_MEETING.getZeroBased());
                 Attendee attendeeToRemove = meeting.getAttendee(INDEX_FIRST_PERSON);
@@ -54,15 +56,29 @@ public class RemoveMeetingContactCommandTest {
 
                 Meeting updatedMeeting = model.getFilteredMeetingList().get(INDEX_FIRST_MEETING.getZeroBased());
                 Set<Attendee> updatedAttendees = updatedMeeting.getAttendees();
+
+                // updated attendees set is correct
                 assertEquals(expectedAttendees, updatedAttendees);
         }
 
         @Test
-        public void execute_invalidIndex_throwsCommandException() {
+        public void execute_invalidMeetingIndex_throwsCommandException() {
                 RemoveMeetingContactCommand rmmcCommand = new RemoveMeetingContactCommand(INDEX_SECOND_MEETING,
-                                INDEX_FIRST_MEETING);
+                                INDEX_FIRST_PERSON);
 
-                assertThrows(CommandException.class, () -> rmmcCommand.execute(model));
+                // throws error for invalid meeting index
+                assertThrows(CommandException.class, () -> rmmcCommand.execute(model),
+                                Messages.MESSAGE_INVALID_MEETING_DISPLAYED_INDEX);
+        }
+
+        @Test
+        public void execute_invalidAttendeeIndex_throwsCommandException() {
+                RemoveMeetingContactCommand rmmcCommand = new RemoveMeetingContactCommand(INDEX_FIRST_MEETING,
+                                INDEX_OUT_OF_BOUNDS);
+
+                // throws error for invalid attendee index
+                assertThrows(CommandException.class, () -> rmmcCommand.execute(model),
+                                Messages.MESSAGE_INVALID_ATTENDEE_INDEX);
         }
 
         @Test

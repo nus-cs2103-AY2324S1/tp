@@ -14,4 +14,6 @@ public class TypicalIndexes {
     public static final Index INDEX_FIRST_MEETING = Index.fromOneBased(1);
     public static final Index INDEX_SECOND_MEETING = Index.fromOneBased(2);
     public static final Index INDEX_THIRD_MEETING = Index.fromOneBased(3);
+
+    public static final Index INDEX_OUT_OF_BOUNDS = Index.fromOneBased(1000);
 }
