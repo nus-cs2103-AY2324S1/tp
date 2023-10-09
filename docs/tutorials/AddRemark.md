@@ -11,18 +11,17 @@ This command allows users of the AddressBook application to add optional remarks
 
 We’ll assume that you have already set up the development environment as outlined in the Developer’s Guide.
 
-
 ## Create a new `remark` command
 
 Looking in the `logic.command` package, you will notice that each existing command have their own class. All the commands inherit from the abstract class `Command` which means that they must override `execute()`. Each `Command` returns an instance of `CommandResult` upon success and `CommandResult#feedbackToUser` is printed to the `ResultDisplay`.
 
-Let’s start by creating a new `RemarkCommand` class in the `src/main/java/seedu/address/logic/command` directory.
+Let’s start by creating a new `RemarkCommand` class in the `src/main/java/transact/logic/command` directory.
 
 For now, let’s keep `RemarkCommand` as simple as possible and print some output. We accomplish that by returning a `CommandResult` with an accompanying message.
 
 **`RemarkCommand.java`:**
 
-``` java
+```java
 package transact.logic.commands;
 
 import transact.model.Model;
@@ -63,7 +62,7 @@ Following the convention in other commands, we add relevant messages as constant
 
 **`RemarkCommand.java`:**
 
-``` java
+```java
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Edits the remark of the person identified "
             + "by the index number used in the last person listing. "
@@ -90,7 +89,7 @@ Let’s change `RemarkCommand` to parse input from the user.
 
 We start by modifying the constructor of `RemarkCommand` to accept an `Index` and a `String`. While we are at it, let’s change the error message to echo the values. While this is not a replacement for tests, it is an obvious way to tell if our code is functioning as intended.
 
-``` java
+```java
 import static transact.commons.util.CollectionUtil.requireAllNonNull;
 //...
 public class RemarkCommand extends Command {
@@ -148,7 +147,7 @@ Thankfully, `ArgumentTokenizer#tokenize()` makes it trivial to parse user input.
 
 **`ArgumentTokenizer.java`:**
 
-``` java
+```java
 /**
  * Tokenizes an arguments string and returns an {@code ArgumentMultimap}
  * object that maps prefixes to their respective argument values. Only the
@@ -166,7 +165,7 @@ We can tell `ArgumentTokenizer#tokenize()` to look out for our new prefix `r/` a
 
 **`ArgumentMultimap.java`:**
 
-``` java
+```java
 /**
  * Returns the last value of {@code prefix}.
  */
@@ -181,7 +180,7 @@ This appears to be what we need to get a String of the remark. But what about th
 
 **`DeleteCommandParser.java`:**
 
-``` java
+```java
 Index index = ParserUtil.parseIndex(args);
 return new DeleteCommand(index);
 ```
@@ -192,7 +191,7 @@ Now that we have the know-how to extract the data that we need from the user’s
 
 **`RemarkCommandParser.java`:**
 
-``` java
+```java
 public RemarkCommand parse(String args) throws ParseException {
     requireNonNull(args);
     ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
@@ -244,11 +243,10 @@ Simply add the following to [`transact.ui.PersonCard`](https://github.com/se-edu
 
 **`PersonCard.java`:**
 
-``` java
+```java
 @FXML
 private Label remark;
 ```
-
 
 `@FXML` is an annotation that marks a private or protected field and makes it accessible to FXML. It might sound like Greek to you right now, don’t worry — we will get back to it later.
 
@@ -256,7 +254,7 @@ Then insert the following into [`main/resources/view/PersonListCard.fxml`](https
 
 **`PersonListCard.fxml`:**
 
-``` xml
+```xml
 <Label fx:id="remark" styleClass="cell_small_label" text="\$remark" />
 ```
 
@@ -284,7 +282,6 @@ Unfortunately, a change to `Person` will cause other commands to break, you will
 
 Refer to [this commit](https://github.com/se-edu/addressbook-level3/commit/ce998c37e65b92d35c91d28c7822cd139c2c0a5c) and check that you have got everything in order!
 
-
 ## Updating Storage
 
 AddressBook stores data by serializing `JsonAdaptedPerson` into `json` with the help of an external library — Jackson. Let’s update `JsonAdaptedPerson` to work with our new `Person`!
@@ -308,7 +305,7 @@ Just add [this one line of code!](https://github.com/se-edu/addressbook-level3/c
 
 **`PersonCard.java`:**
 
-``` java
+```java
 public PersonCard(Person person, int displayedIndex) {
     //...
     remark.setText(person.getRemark().value);
@@ -328,7 +325,7 @@ save it with `Model#setPerson()`.
 
 **`RemarkCommand.java`:**
 
-``` java
+```java
 //...
     public static final String MESSAGE_ADD_REMARK_SUCCESS = "Added remark to Person: %1$s";
     public static final String MESSAGE_DELETE_REMARK_SUCCESS = "Removed remark from Person: %1$s";

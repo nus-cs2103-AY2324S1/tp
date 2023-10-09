@@ -9,16 +9,15 @@ import static transact.commons.util.AppUtil.checkArgument;
  */
 public class Phone {
 
-
-    public static final String MESSAGE_CONSTRAINTS =
-            "Phone numbers should only contain numbers, and it should be at least 3 digits long";
+    public static final String MESSAGE_CONSTRAINTS = "Phone numbers should only contain numbers, and it should be at least 3 digits long";
     public static final String VALIDATION_REGEX = "\\d{3,}";
     public final String value;
 
     /**
      * Constructs a {@code Phone}.
      *
-     * @param phone A valid phone number.
+     * @param phone
+     *            A valid phone number.
      */
     public Phone(String phone) {
         requireNonNull(phone);

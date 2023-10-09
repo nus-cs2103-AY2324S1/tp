@@ -19,7 +19,8 @@ import transact.model.AddressBook;
 import transact.model.person.Person;
 
 /**
- * A utility class containing a list of {@code Person} objects to be used in tests.
+ * A utility class containing a list of {@code Person} objects to be used in
+ * tests.
  */
 public class TypicalPersons {
 
@@ -57,7 +58,8 @@ public class TypicalPersons {
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
-    private TypicalPersons() {} // prevents instantiation
+    private TypicalPersons() {
+    } // prevents instantiation
 
     /**
      * Returns an {@code AddressBook} with all the typical persons.

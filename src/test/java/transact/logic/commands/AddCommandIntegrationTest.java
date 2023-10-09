@@ -15,7 +15,8 @@ import transact.model.person.Person;
 import transact.testutil.PersonBuilder;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code AddCommand}.
+ * Contains integration tests (interaction with the Model) for
+ * {@code AddCommand}.
  */
 public class AddCommandIntegrationTest {
 

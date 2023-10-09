@@ -1,7 +1,8 @@
 package transact.commons.util;
 
 /**
- * Builds a string representation of an object that is suitable as the return value of {@link Object#toString()}.
+ * Builds a string representation of an object that is suitable as the return
+ * value of {@link Object#toString()}.
  */
 public class ToStringBuilder {
     private static final String OBJECT_PREFIX = "{";
@@ -13,14 +14,16 @@ public class ToStringBuilder {
     private boolean hasField;
 
     /**
-     * Constructs a {@code ToStringBuilder} whose formatted output will be prefixed with {@code objectName}.
+     * Constructs a {@code ToStringBuilder} whose formatted output will be prefixed
+     * with {@code objectName}.
      */
     public ToStringBuilder(String objectName) {
         stringBuilder.append(objectName).append(OBJECT_PREFIX);
     }
 
     /**
-     * Constructs a {@code ToStringBuilder} whose formatted output will be prefixed with the
+     * Constructs a {@code ToStringBuilder} whose formatted output will be prefixed
+     * with the
      * canonical class name of {@code object}.
      */
     public ToStringBuilder(Object object) {
@@ -30,9 +33,12 @@ public class ToStringBuilder {
     /**
      * Adds a field name/value pair to the output string.
      *
-     * @param fieldName The name of the field.
-     * @param fieldValue The value of the field.
-     * @return A reference to this {@code ToStringBuilder} object, allowing method calls to be chained.
+     * @param fieldName
+     *            The name of the field.
+     * @param fieldValue
+     *            The value of the field.
+     * @return A reference to this {@code ToStringBuilder} object, allowing method
+     *         calls to be chained.
      */
     public ToStringBuilder add(String fieldName, Object fieldValue) {
         if (hasField) {

@@ -9,51 +9,48 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Su Shenyi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/alains87.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/AlainS87)]
+[[portfolio](team/alains87.md)]
 
-* Role: Project Advisor
+* Role: Developer Documentation
 
-### Jane Doe
+### Mikhil Anand
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/sasmik23.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/sasmik23)]
+[[portfolio](team/sasmik23.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+- Role: Developer
+- Responsibilities: User Documentation
 
-### Johnny Doe
+### Wong Joon Hung
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/petrichorprecipice.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/PetrichorPrecipice)]
+[[portfolio](team/petrichorprecipice.md)]
 
-* Role: Developer
-* Responsibilities: Data
+- Role: Testing
 
-### Jean Doe
+### Ku Shang Yi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/bombbird2001.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/bombbird2001)] [[portfolio](team/bombbird2001.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+- Role: Team Lead, Developer
+- Responsibilities: Scheduling and tracking
+### Xavier Oh
 
-### James Doe
+<img src="images/cxo05.png" width="200px">
 
-<img src="images/johndoe.png" width="200px">
+[[github](http://github.com/cxo05)]
+[[portfolio](team/cxo05.md)]
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: UI
+- Role: Developer
+- Responsibilities: UI

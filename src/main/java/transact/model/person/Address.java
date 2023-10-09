@@ -5,7 +5,8 @@ import static transact.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's address in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
+ * Guarantees: immutable; is valid as declared in
+ * {@link #isValidAddress(String)}
  */
 public class Address {
 
@@ -22,7 +23,8 @@ public class Address {
     /**
      * Constructs an {@code Address}.
      *
-     * @param address A valid address.
+     * @param address
+     *            A valid address.
      */
     public Address(String address) {
         requireNonNull(address);
