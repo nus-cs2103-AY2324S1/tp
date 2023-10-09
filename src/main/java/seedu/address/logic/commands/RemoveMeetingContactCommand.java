@@ -42,7 +42,7 @@ public class RemoveMeetingContactCommand extends Command {
 
     Meeting meeting = lastShownList.get(meetingIndex.getZeroBased());
 
-    return new CommandResult(String.format(MESSAGE_REMOVE_MEETING_CONTACT_SUCCESS, meeting, "too"));
+    return new CommandResult(String.format(MESSAGE_REMOVE_MEETING_CONTACT_SUCCESS, "wan", "too"));
   }
 
   @Override
