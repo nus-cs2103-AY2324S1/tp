@@ -68,10 +68,6 @@ public class RemoveMeetingContactCommand extends Command {
      * Creates a new {@code Meeting} with updated attendee list.
      */
     static Meeting updateMeetingAttendees(Meeting meeting, Set<Attendee> attendees) {
-        if (attendees.equals(meeting.getAttendees())) {
-            return meeting;
-        }
-
         Meeting updatedMeeting = new Meeting(meeting.getTitle(), meeting.getLocation(), meeting.getStart(),
                 meeting.getEnd(), attendees);
 

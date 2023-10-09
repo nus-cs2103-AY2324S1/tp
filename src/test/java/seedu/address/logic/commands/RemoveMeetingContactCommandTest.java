@@ -72,6 +72,7 @@ public class RemoveMeetingContactCommandTest {
 
     @Test
     public void execute_invalidAttendeeIndex_throwsCommandException() {
+        model.addMeeting(TypicalMeetings.MEETING1);
         RemoveMeetingContactCommand rmmcCommand = new RemoveMeetingContactCommand(INDEX_FIRST_MEETING,
                 INDEX_OUT_OF_BOUNDS);
 
