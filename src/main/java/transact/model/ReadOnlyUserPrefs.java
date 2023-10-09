@@ -9,8 +9,8 @@ import transact.commons.core.GuiSettings;
  */
 public interface ReadOnlyUserPrefs {
 
-  GuiSettings getGuiSettings();
+    GuiSettings getGuiSettings();
 
-  Path getAddressBookFilePath();
+    Path getAddressBookFilePath();
 
 }

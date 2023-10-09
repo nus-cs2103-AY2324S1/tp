@@ -12,55 +12,55 @@ import transact.commons.util.ToStringBuilder;
  */
 public class Config {
 
-  public static final Path DEFAULT_CONFIG_FILE = Paths.get("config.json");
+    public static final Path DEFAULT_CONFIG_FILE = Paths.get("config.json");
 
-  // Config values customizable through config file
-  private Level logLevel = Level.INFO;
-  private Path userPrefsFilePath = Paths.get("preferences.json");
+    // Config values customizable through config file
+    private Level logLevel = Level.INFO;
+    private Path userPrefsFilePath = Paths.get("preferences.json");
 
-  public Level getLogLevel() {
-    return logLevel;
-  }
-
-  public void setLogLevel(Level logLevel) {
-    this.logLevel = logLevel;
-  }
-
-  public Path getUserPrefsFilePath() {
-    return userPrefsFilePath;
-  }
-
-  public void setUserPrefsFilePath(Path userPrefsFilePath) {
-    this.userPrefsFilePath = userPrefsFilePath;
-  }
-
-  @Override
-  public boolean equals(Object other) {
-    if (other == this) {
-      return true;
+    public Level getLogLevel() {
+        return logLevel;
     }
 
-    // instanceof handles nulls
-    if (!(other instanceof Config)) {
-      return false;
+    public void setLogLevel(Level logLevel) {
+        this.logLevel = logLevel;
     }
 
-    Config otherConfig = (Config) other;
-    return Objects.equals(logLevel, otherConfig.logLevel)
-        && Objects.equals(userPrefsFilePath, otherConfig.userPrefsFilePath);
-  }
+    public Path getUserPrefsFilePath() {
+        return userPrefsFilePath;
+    }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(logLevel, userPrefsFilePath);
-  }
+    public void setUserPrefsFilePath(Path userPrefsFilePath) {
+        this.userPrefsFilePath = userPrefsFilePath;
+    }
 
-  @Override
-  public String toString() {
-    return new ToStringBuilder(this)
-        .add("logLevel", logLevel)
-        .add("userPrefsFilePath", userPrefsFilePath)
-        .toString();
-  }
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Config)) {
+            return false;
+        }
+
+        Config otherConfig = (Config) other;
+        return Objects.equals(logLevel, otherConfig.logLevel)
+                && Objects.equals(userPrefsFilePath, otherConfig.userPrefsFilePath);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(logLevel, userPrefsFilePath);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("logLevel", logLevel)
+                .add("userPrefsFilePath", userPrefsFilePath)
+                .toString();
+    }
 
 }

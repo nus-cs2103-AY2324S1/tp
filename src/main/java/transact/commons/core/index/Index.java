@@ -15,59 +15,59 @@ import transact.commons.util.ToStringBuilder;
  * component again.
  */
 public class Index {
-  private int zeroBasedIndex;
+    private int zeroBasedIndex;
 
-  /**
-   * Index can only be created by calling {@link Index#fromZeroBased(int)} or
-   * {@link Index#fromOneBased(int)}.
-   */
-  private Index(int zeroBasedIndex) {
-    if (zeroBasedIndex < 0) {
-      throw new IndexOutOfBoundsException();
+    /**
+     * Index can only be created by calling {@link Index#fromZeroBased(int)} or
+     * {@link Index#fromOneBased(int)}.
+     */
+    private Index(int zeroBasedIndex) {
+        if (zeroBasedIndex < 0) {
+            throw new IndexOutOfBoundsException();
+        }
+
+        this.zeroBasedIndex = zeroBasedIndex;
     }
 
-    this.zeroBasedIndex = zeroBasedIndex;
-  }
-
-  public int getZeroBased() {
-    return zeroBasedIndex;
-  }
-
-  public int getOneBased() {
-    return zeroBasedIndex + 1;
-  }
-
-  /**
-   * Creates a new {@code Index} using a zero-based index.
-   */
-  public static Index fromZeroBased(int zeroBasedIndex) {
-    return new Index(zeroBasedIndex);
-  }
-
-  /**
-   * Creates a new {@code Index} using a one-based index.
-   */
-  public static Index fromOneBased(int oneBasedIndex) {
-    return new Index(oneBasedIndex - 1);
-  }
-
-  @Override
-  public boolean equals(Object other) {
-    if (other == this) {
-      return true;
+    public int getZeroBased() {
+        return zeroBasedIndex;
     }
 
-    // instanceof handles nulls
-    if (!(other instanceof Index)) {
-      return false;
+    public int getOneBased() {
+        return zeroBasedIndex + 1;
     }
 
-    Index otherIndex = (Index) other;
-    return zeroBasedIndex == otherIndex.zeroBasedIndex;
-  }
+    /**
+     * Creates a new {@code Index} using a zero-based index.
+     */
+    public static Index fromZeroBased(int zeroBasedIndex) {
+        return new Index(zeroBasedIndex);
+    }
 
-  @Override
-  public String toString() {
-    return new ToStringBuilder(this).add("zeroBasedIndex", zeroBasedIndex).toString();
-  }
+    /**
+     * Creates a new {@code Index} using a one-based index.
+     */
+    public static Index fromOneBased(int oneBasedIndex) {
+        return new Index(oneBasedIndex - 1);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Index)) {
+            return false;
+        }
+
+        Index otherIndex = (Index) other;
+        return zeroBasedIndex == otherIndex.zeroBasedIndex;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this).add("zeroBasedIndex", zeroBasedIndex).toString();
+    }
 }

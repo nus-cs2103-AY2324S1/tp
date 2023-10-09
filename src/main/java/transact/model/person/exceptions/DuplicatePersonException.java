@@ -6,7 +6,7 @@ package transact.model.person.exceptions;
  * identity).
  */
 public class DuplicatePersonException extends RuntimeException {
-  public DuplicatePersonException() {
-    super("Operation would result in duplicate persons");
-  }
+    public DuplicatePersonException() {
+        super("Operation would result in duplicate persons");
+    }
 }

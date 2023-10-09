@@ -12,36 +12,36 @@ import javafx.beans.DefaultProperty;
 @DefaultProperty("text")
 public class TestFxmlObject {
 
-  private String text;
+    private String text;
 
-  public TestFxmlObject() {
-  }
-
-  public TestFxmlObject(String text) {
-    setText(text);
-  }
-
-  public String getText() {
-    return text;
-  }
-
-  public void setText(String text) {
-    this.text = text;
-  }
-
-  @Override
-  public boolean equals(Object other) {
-    if (other == this) {
-      return true;
+    public TestFxmlObject() {
     }
 
-    // instanceof handles nulls
-    if (!(other instanceof TestFxmlObject)) {
-      return false;
+    public TestFxmlObject(String text) {
+        setText(text);
     }
 
-    TestFxmlObject otherTestFxmlObject = (TestFxmlObject) other;
-    return Objects.equals(text, otherTestFxmlObject.text);
-  }
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof TestFxmlObject)) {
+            return false;
+        }
+
+        TestFxmlObject otherTestFxmlObject = (TestFxmlObject) other;
+        return Objects.equals(text, otherTestFxmlObject.text);
+    }
 
 }
