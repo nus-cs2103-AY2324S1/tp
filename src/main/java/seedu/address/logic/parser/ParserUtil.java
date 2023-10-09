@@ -37,7 +37,7 @@ public class ParserUtil {
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading
      * and trailing whitespaces will be trimmed.
-     * 
+     *
      * @throws ParseException if the specified index is invalid (not non-zero
      *                        unsigned integer).
      */
@@ -53,7 +53,7 @@ public class ParserUtil {
      * Splits multiple {@code oneBasedIndexes} by whitespace and parses them into an
      * ArrayList of {@code Indexes} and returns it. Leading and trailing whitespaces
      * will be trimmed.
-     * 
+     *
      * @throws ParseException if any indexes are invalid (not non-zero
      *                        unsigned integer).
      */
