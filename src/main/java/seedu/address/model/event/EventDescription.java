@@ -36,6 +36,20 @@ public class EventDescription {
     }
 
     @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof EventDescription)) {
+            return false;
+        }
+
+        EventDescription otherDescription = (EventDescription) other;
+        return otherDescription.description.equals(this.description);
+    }
+
+    @Override
     public String toString() {
         return this.description;
     }

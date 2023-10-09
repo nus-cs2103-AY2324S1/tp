@@ -92,6 +92,20 @@ public class EventPeriod {
     }
 
     @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof EventPeriod)) {
+            return false;
+        }
+
+        EventPeriod otherEventPeriod = (EventPeriod) other;
+        return otherEventPeriod.start.equals(this.start) && otherEventPeriod.end.equals(this.end);
+    }
+
+    @Override
     public String toString() {
         return "start: "
                 + this.start.format(DATE_TIME_STRING_FORMATTER)

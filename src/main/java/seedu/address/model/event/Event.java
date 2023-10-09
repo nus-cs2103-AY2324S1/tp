@@ -83,4 +83,18 @@ public class Event {
 
         this.eventPeriod = eventPeriod;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Event)) {
+            return false;
+        }
+
+        Event otherEvent = (Event) other;
+        return (otherEvent.description.equals(this.description) && otherEvent.eventPeriod.equals(this.eventPeriod));
+    }
 }
