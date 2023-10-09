@@ -288,6 +288,7 @@ Tran$act is specifically tailored for accountants and finance professionals in s
 
 - **Prefer CLI interactions**: Our users prefer command-line interactions over graphical user interfaces, as it allows for quicker data entry and navigation.
 
+
 - **Reasonably comfortable with CLI apps**: Users should have a basic understanding of using command-line applications.
 
 ## User Stories
@@ -300,18 +301,19 @@ Tran$act is specifically tailored for accountants and finance professionals in s
 | `* *`                    | user                                              | hide private contact details                               | minimize chance of someone else seeing them by accident                |
 | `*`                      | user with many persons in the address book        | sort persons by name                                       | locate a person easily                                                 |
 | Transaction Recording    |
-| `* * *`                  | user                                              | add a new transaction                                      |                                                                        |
-| `* * *`                  | user                                              | remove a transaction                                       |                                                                        |
-| `* * *`                  | user                                              | view all transactions                                      |                                                                        |
-| `* *`                    | user                                              | edit transactions                                          |                                                                        |
+| `* * *`                  | user                                  | add a new transaction                                      |                                                                        |
+| `* * *`                  | user                                  | remove a transaction                                       |                                                                        |
+| `* * *`                  | user                                  | view all transactions                                      |                                                                        |
+| `* *`                    | user                                  | edit transactions through the software                     |                                                                        |
+| `* *`                    | user                                  | edit transactions without opening the software             |                                                                        |
 | Financial Reporting      |
-| `*`                      | user who needs to analyze transactions            | have a variety of financial reports                        |                                                                        |
-| `*`                      | user who needs to share data with others          | generate reports downloadable in common formats (PDF, CSV) |                                                                        |
-| `*`                      | user                                              | restore from a backup                                      | undo large changes                                                     |
+| `*`                      | user who needs to analyze transactions | have a variety of financial reports                        |                                                                        |
+| `*`                      | user who needs to share data with others | generate reports downloadable in common formats (PDF, CSV) |                                                                        |
+| `*`                      | user                                  | restore from a backup                                      | undo large changes                                                     |
 | Data Security and Backup |
 | `*`                      | user who needs to keep sensitive data confidental | encrypt the data                                           | ensure the security and privacy of financial data                      |
-| `*`                      | user who does not have reliable hardware          | have automated backups                                     | prevent unnessary data loss                                            |
-| `*`                      | user                                              | restore from a backup                                      | undo large changes                                                     |
+| `*`                      | user who does not have reliable hardware | have automated backups                                     | prevent unnessary data loss                                            |
+| `*`                      | user                                  | restore from a backup                                      | undo large changes                                                     |
 
 ### Transaction Recording
 
