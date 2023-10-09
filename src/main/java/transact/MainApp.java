@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.application.Application;
+import javafx.application.HostServices;
 import javafx.stage.Stage;
 import transact.commons.core.Config;
 import transact.commons.core.LogsCenter;
@@ -46,6 +47,8 @@ public class MainApp extends Application {
     protected Model model;
     protected Config config;
 
+    public static HostServices hostServices;
+
     @Override
     public void init() throws Exception {
         logger.info("=============================[ Initializing AddressBook ]===========================");
@@ -65,6 +68,8 @@ public class MainApp extends Application {
         logic = new LogicManager(model, storage);
 
         ui = new UiManager(logic);
+
+        hostServices = getHostServices();
     }
 
     /**
@@ -188,5 +193,9 @@ public class MainApp extends Application {
         } catch (IOException e) {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         }
+    }
+
+    public static HostServices getLocalHostServices() {
+        return hostServices;
     }
 }

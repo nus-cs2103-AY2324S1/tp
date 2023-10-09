@@ -1,14 +1,11 @@
 package transact.ui;
 
-import java.util.logging.Logger;
-
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
-import transact.commons.core.LogsCenter;
 import transact.model.person.Person;
 import transact.model.transaction.Transaction;
 
@@ -17,7 +14,6 @@ import transact.model.transaction.Transaction;
  */
 public class CardListPanel extends UiPart<Region> {
     private static final String FXML = "CardListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(CardListPanel.class);
 
     @FXML
     private ListView<Person> personListView;
@@ -49,7 +45,8 @@ public class CardListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Person} using
+     * a {@code PersonCard}.
      */
     class ItemListViewCell extends ListCell<Person> {
         @Override
@@ -66,7 +63,8 @@ public class CardListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Person} using
+     * a {@code PersonCard}.
      */
     class TransactionListViewCell extends ListCell<Transaction> {
         @Override
