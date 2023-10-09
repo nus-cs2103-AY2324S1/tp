@@ -3,6 +3,9 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents a Specialist's specialty in the address book.
+ */
 public class Specialty {
     public static final String MESSAGE_CONSTRAINTS =
             "Specialty should only contain alphanumeric characters and spaces, and it should not be blank";
