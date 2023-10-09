@@ -236,22 +236,22 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseEventPeriod_InvalidStart_throwsParseException() {
+    public void parseEventPeriod_invalidStart_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseEventPeriod(INVALID_DATE, VALID_END_DATE));
     }
 
     @Test
-    public void parseEventPeriod_InvalidEnd_throwsParseException() {
+    public void parseEventPeriod_invalidEnd_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseEventPeriod(VALID_START_DATE, INVALID_DATE));
     }
 
     @Test
-    public void parseEventPeriod_InvalidStartAndEnd_throwsParseException() {
+    public void parseEventPeriod_invalidStartAndEnd_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseEventPeriod(INVALID_DATE, INVALID_DATE));
     }
 
     @Test
-    public void parseEventPeriod_EndBeforeStart_throwsParseException() {
+    public void parseEventPeriod_endBeforeStart_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseEventPeriod(VALID_END_DATE, VALID_START_DATE));
     }
 
