@@ -12,8 +12,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_MEETING;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +22,9 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.meeting.Attendee;
 import seedu.address.model.meeting.Meeting;
+import seedu.address.testutil.MeetingBuilder;
 import seedu.address.testutil.TypicalMeetings;
+import seedu.address.testutil.TypicalPersons;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -42,9 +43,6 @@ public class RemoveMeetingContactCommandTest {
         Meeting meeting = model.getFilteredMeetingList().get(INDEX_FIRST_MEETING.getZeroBased());
         Attendee attendeeToRemove = meeting.getAttendee(INDEX_FIRST_PERSON);
 
-        Set<Attendee> expectedAttendees = new LinkedHashSet<>(meeting.getAttendees());
-        expectedAttendees.remove(attendeeToRemove);
-
         // No errors thrown
         String message = assertDoesNotThrow(() -> rmmcCommand.execute(model)).getFeedbackToUser();
 
@@ -55,10 +53,13 @@ public class RemoveMeetingContactCommandTest {
         assertEquals(expectedMessage, message);
 
         Meeting updatedMeeting = model.getFilteredMeetingList().get(INDEX_FIRST_MEETING.getZeroBased());
-        Set<Attendee> updatedAttendees = updatedMeeting.getAttendees();
+        String[] expectedAttendees = Arrays.copyOfRange(TypicalPersons.getTypicalAttendees(), 1, 7);
+        Meeting expectedMeeting = new MeetingBuilder(meeting)
+            .withAttendees(expectedAttendees)
+            .build();
 
         // updated attendees set is correct
-        assertEquals(expectedAttendees, updatedAttendees);
+        assertEquals(expectedMeeting, updatedMeeting);
     }
 
     @Test
