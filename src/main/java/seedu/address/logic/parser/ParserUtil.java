@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,6 +15,9 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.schedule.EndTime;
+import seedu.address.model.schedule.StartTime;
+import seedu.address.model.schedule.TutorIndex;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -25,6 +30,7 @@ public class ParserUtil {
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -120,5 +126,60 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses {@code String index} into a {@code TutorIndex}.
+     */
+    public static TutorIndex parseTutorIndex(String index) throws ParseException {
+        requireNonNull(index);
+        String trimmedIndex = index.trim();
+
+        if (!TutorIndex.isValidTutorIndex(trimmedIndex)) {
+            throw new ParseException(TutorIndex.MESSAGE_CONSTRAINTS);
+        }
+
+        try {
+            return new TutorIndex(Integer.parseInt(trimmedIndex));
+        } catch (NumberFormatException e) {
+            throw new ParseException(TutorIndex.MESSAGE_CONSTRAINTS);
+        }
+
+    }
+
+    /**
+     * Parses {@code String time} into a {@code StartTime}.
+     */
+    public static StartTime parseStartTime(String time) throws ParseException {
+        requireNonNull(time);
+        String trimmedTime = time.trim();
+
+        if (!StartTime.isValidStartTime(trimmedTime)) {
+            throw new ParseException(StartTime.MESSAGE_CONSTRAINTS);
+        }
+
+        try {
+            return new StartTime(LocalDateTime.parse(trimmedTime));
+        } catch (DateTimeParseException e) {
+            throw new ParseException(StartTime.MESSAGE_CONSTRAINTS);
+        }
+    }
+
+    /**
+     * Parses {@code String time} into a {@code EndTime}.
+     */
+    public static EndTime parseEndTime(String time) throws ParseException {
+        requireNonNull(time);
+        String trimmedTime = time.trim();
+
+        if (!EndTime.isValidEndTime(trimmedTime)) {
+            throw new ParseException(EndTime.MESSAGE_CONSTRAINTS);
+        }
+
+        try {
+            return new EndTime(LocalDateTime.parse(trimmedTime));
+        } catch (DateTimeParseException e) {
+            throw new ParseException(EndTime.MESSAGE_CONSTRAINTS);
+        }
     }
 }
