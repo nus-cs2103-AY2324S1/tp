@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
+
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
@@ -33,6 +34,10 @@ public class PersonBuilder {
     private Ic ic;
     private Set<Tag> tags;
 
+    /**
+     * Constructor for the PersonBuilder class that initialises
+     * a PersonBuilder instance populated with default values.
+     */
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
