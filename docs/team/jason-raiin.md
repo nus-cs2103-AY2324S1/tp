@@ -9,9 +9,7 @@ OutBook is a desktop personal secretary application used for saving contacts and
 
 My contributions to the project are listed below.
 
-- **New Feature**:
-
-  - to be added soon
+- **New Feature**: Remove contact from meeting 
 
 - **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=jason-raiin&breakdown=true)
 
@@ -21,7 +19,7 @@ My contributions to the project are listed below.
 
 - **Enhancements to existing features**:
 
-  - to be added soon
+  - to be added soon 
 
 - **Documentation**:
 
@@ -37,4 +35,4 @@ My contributions to the project are listed below.
 
 - **Tools**:
 
-  - to be added soon
+  - Added util method `parseIndex`
