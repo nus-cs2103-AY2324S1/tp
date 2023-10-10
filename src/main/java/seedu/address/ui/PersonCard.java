@@ -55,5 +55,12 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        person.getMods().stream()
+                .sorted(Comparator.comparing(mod -> mod.tagName))
+                .forEach(mod -> {
+                    Label label = new Label(mod.tagName);
+                    label.setStyle("-fx-background-color: #FF8C00");
+                    tags.getChildren().add(label);
+                });
     }
 }

@@ -75,27 +75,32 @@ Adds a new teaching assistant to the address book.
 
 ![add TA](images/addTA.png)
 
-Format: `add n/NAME p/PHONE e/EMAIL c/COURSE_OF_STUDY y/YEAR`
+Format: `add n/NAME p/PHONE e/EMAIL c/COURSE_OF_STUDY y/YEAR [t/TAG]… [m/MODULE_CODE]…`
 
 - `NAME` should be a string.
 - `PHONE` should be an 8-digit integer.
 - `EMAIL` should contain "@".
 - `COURSE_OF_STUDY` should be a string.
 - `YEAR` should be an integer.
+- `TAG` should be a alphanumeric string without spaces.
+- `MODULE_CODE` should start with 2-3 alphabets, followed by 4 numbers, and optionally end with an alphabet.
 
 Examples:
-- `add n/Snowball p/87098312 e/snowball@example.com c/Computer Science y/2`
+- `add n/Snowball p/87098312 e/snowball@example.com c/Computer Science y/2 t/year2 m/CS2103T m/CS2101`
 
 When the command succeeds:
 
 ```
-Added person: Snowball; Phone: 87098312; Email: snowball@example.com; Course of study: Computer Science; Year of Study: 2;  
+Added person: Snowball; Phone: 87098312; Email: snowball@example.com; Course of study: Computer Science; 
+Year of Study: 2 ; Tags: [year2]; Modules: [CS2103T, CS2101];
 ```
 
 When the command fails:
 
 - Incorrect format (e.g., missing information): `Invalid command format!`
 - Duplicate input (the TA is already in the address book): `This TA has been registered.`
+- Invalid input (e.g. invalid module code): `Mod codes should have 2-3 alphabets, followed by 4 digits,
+and optionally ending with an alphabet.`
 
 ### Removing a Teaching Assistant: `delete`
 

@@ -15,6 +15,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Telegram;
+import seedu.address.model.tag.Mod;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -30,19 +31,25 @@ class JsonAdaptedPerson {
     private final String telegram;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
+    private final List<JsonAdaptedMod> mods = new ArrayList<>();
+
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("telegram") String telegram,
-                             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                             @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                             @JsonProperty("mods") List<JsonAdaptedMod> mods) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.telegram = telegram;
         if (tags != null) {
             this.tags.addAll(tags);
+        }
+        if (mods != null) {
+            this.mods.addAll(mods);
         }
     }
 
@@ -57,6 +64,9 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        mods.addAll(source.getMods().stream()
+                .map(JsonAdaptedMod::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -68,6 +78,11 @@ class JsonAdaptedPerson {
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
+        }
+
+        final List<Mod> personMods = new ArrayList<>();
+        for (JsonAdaptedMod mod : mods) {
+            personMods.add(mod.toModelType());
         }
 
         if (name == null) {
@@ -104,7 +119,8 @@ class JsonAdaptedPerson {
         final Telegram modelTelegram = new Telegram(telegram);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelTelegram, modelTags);
+        final Set<Mod> modelMods = new HashSet<>(personMods);
+        return new Person(modelName, modelPhone, modelEmail, modelTelegram, modelTags, modelMods);
     }
 
 }

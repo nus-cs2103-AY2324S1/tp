@@ -45,6 +45,8 @@ public class Messages {
                 .append(person.getTelegram())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
+        builder.append("; Mods: ");
+        person.getMods().forEach(builder::append);
         return builder.toString();
     }
 
