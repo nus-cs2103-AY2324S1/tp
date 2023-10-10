@@ -91,7 +91,7 @@ public class AddCommandParserTest {
         // multiple addresses
         assertParseFailure(parser, ADDRESS_DESC_AMY + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
-        
+
         // multiple birthdays
         assertParseFailure(parser, BIRTHDAY_DESC_AMY + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_BIRTHDAY));
@@ -120,7 +120,7 @@ public class AddCommandParserTest {
         // invalid address
         assertParseFailure(parser, INVALID_ADDRESS_DESC + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
-        
+
         // invalid birthday
         assertParseFailure(parser, INVALID_BIRTHDAY_DESC + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_BIRTHDAY));
@@ -142,7 +142,7 @@ public class AddCommandParserTest {
         // invalid address
         assertParseFailure(parser, validExpectedPersonString + INVALID_ADDRESS_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
-        
+
         // invalid birthday
         assertParseFailure(parser, validExpectedPersonString + INVALID_BIRTHDAY_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_BIRTHDAY));
@@ -152,7 +152,7 @@ public class AddCommandParserTest {
     public void parse_optionalFieldsMissing_success() {
         // zero groups
         Person expectedPerson = new PersonBuilder(AMY).withGroups().build();
-        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY 
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
                         + ADDRESS_DESC_AMY + BIRTHDAY_DESC_AMY,
                 new AddCommand(expectedPerson));
     }
@@ -199,20 +199,20 @@ public class AddCommandParserTest {
         // invalid address
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
                 + BIRTHDAY_DESC_BOB + GROUP_DESC_HUSBAND + GROUP_DESC_FRIEND, Address.MESSAGE_CONSTRAINTS);
-        
+
         // invalid birthday
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + INVALID_BIRTHDAY_DESC + GROUP_DESC_HUSBAND + GROUP_DESC_FRIEND, Birthday.MESSAGE_CONSTRAINTS);
-        
+
         // invalid group
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + BIRTHDAY_DESC_BOB + INVALID_GROUP_DESC + VALID_GROUP_FRIEND, Group.MESSAGE_CONSTRAINTS);
-        
+
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
                 + BIRTHDAY_DESC_BOB,
                 Name.MESSAGE_CONSTRAINTS);
-        
+
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + BIRTHDAY_DESC_BOB + GROUP_DESC_HUSBAND + GROUP_DESC_FRIEND,

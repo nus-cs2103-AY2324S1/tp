@@ -79,10 +79,6 @@ public class LogicManagerTest {
 
     @Test
     public void execute_storageThrowsAdException_throwsCommandException() {
-        String expected = String.format(
-                LogicManager.FILE_OPS_PERMISSION_ERROR_FORMAT, DUMMY_AD_EXCEPTION.getMessage());
-        System.out.println(expected);
-                
         assertCommandFailureForExceptionFromStorage(DUMMY_AD_EXCEPTION, String.format(
                 LogicManager.FILE_OPS_PERMISSION_ERROR_FORMAT, DUMMY_AD_EXCEPTION.getMessage()));
     }

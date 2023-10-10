@@ -72,7 +72,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setAddress(new Address(address));
         return this;
     }
-    
+
     /**
      * Sets the {@code Birthday} of the {@code EditPersonDescriptor} that we are building.
      */

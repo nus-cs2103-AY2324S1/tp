@@ -93,7 +93,7 @@ public class PersonBuilder {
         this.email = new Email(email);
         return this;
     }
-    
+
     /**
      * Sets the {@code Birthday} of the {@code Person} that we are building.
      */

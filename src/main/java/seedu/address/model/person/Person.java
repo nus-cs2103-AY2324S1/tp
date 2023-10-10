@@ -54,8 +54,9 @@ public class Person {
     public Address getAddress() {
         return address;
     }
-    public Birthday getBirthday() { return birthday; }
-    
+    public Birthday getBirthday() {
+        return birthday;
+    }
     /**
      * Returns an immutable group set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.

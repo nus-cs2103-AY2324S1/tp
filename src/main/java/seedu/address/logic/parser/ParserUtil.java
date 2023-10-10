@@ -80,7 +80,13 @@ public class ParserUtil {
         }
         return new Address(trimmedAddress);
     }
-    
+
+    /**
+     * Parses a {@code String birthday} into an {@code Birthday}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if a given {@code birthday} is invalid.
+     */
     public static Birthday parseBirthday(String birthday) throws ParseException {
         requireNonNull(birthday);
         String trimmedBirthday = birthday.trim();

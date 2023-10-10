@@ -197,10 +197,10 @@ public class EditCommand extends Command {
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
         }
-        
         public void setBirthday(Birthday birthday) {
             this.birthday = birthday;
         }
+
         public Optional<Birthday> getBirthday() {
             return Optional.ofNullable(birthday);
         }
