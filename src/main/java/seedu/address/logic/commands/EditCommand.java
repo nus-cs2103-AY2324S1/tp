@@ -21,6 +21,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.event.Event;
 import seedu.address.model.note.Note;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -102,8 +103,10 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         List<Note> updatedNotes = editPersonDescriptor.getNotes().orElse(personToEdit.getNotes());
+        List<Event> updatedEvents = editPersonDescriptor.getEvents().orElse(personToEdit.getEvents());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedNotes);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedNotes,
+                updatedEvents);
     }
 
     @Override
@@ -142,6 +145,7 @@ public class EditCommand extends Command {
         private Address address;
         private Set<Tag> tags;
         private List<Note> notes;
+        private List<Event> events;
 
         public EditPersonDescriptor() {
         }
@@ -156,6 +160,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setNotes(toCopy.notes);
             setNotes(toCopy.notes);
         }
 
@@ -232,6 +237,24 @@ public class EditCommand extends Command {
          */
         public Optional<List<Note>> getNotes() {
             return (notes != null) ? Optional.of(Collections.unmodifiableList(notes)) : Optional.empty();
+        }
+
+        /**
+         * Sets {@code events} to this object's {@code events}.
+         * A defensive copy of {@code events} is used internally.
+         */
+        public void setEvents(List<Event> events) {
+            this.events = (events != null) ? events : null;
+        }
+
+        /**
+         * Returns an unmodifiable event list, which throws
+         * {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code notes} is null.
+         */
+        public Optional<List<Event>> getEvents() {
+            return (events != null) ? Optional.of(Collections.unmodifiableList(events)) : Optional.empty();
         }
 
         @Override

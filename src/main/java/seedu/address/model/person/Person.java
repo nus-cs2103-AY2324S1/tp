@@ -10,6 +10,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.event.Event;
 import seedu.address.model.note.Note;
 import seedu.address.model.tag.Tag;
 
@@ -29,18 +30,21 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final List<Note> notes = new ArrayList<>();
+    private final List<Event> events = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, List<Note> notes) {
-        requireAllNonNull(name, phone, email, address, tags, notes);
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, List<Note> notes,
+            List<Event> events) {
+        requireAllNonNull(name, phone, email, address, tags, notes, events);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
         this.notes.addAll(notes);
+        this.events.addAll(events);
     }
 
     public Name getName() {
@@ -75,6 +79,15 @@ public class Person {
      */
     public List<Note> getNotes() {
         return Collections.unmodifiableList(notes);
+    }
+
+    /**
+     * Returns an immutable events, which throws
+     * {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public List<Event> getEvents() {
+        return Collections.unmodifiableList(events);
     }
 
     /**

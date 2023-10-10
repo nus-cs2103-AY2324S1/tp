@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.event.Event;
 import seedu.address.model.note.Note;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -31,6 +32,7 @@ class JsonAdaptedPerson {
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final List<JsonAdaptedNote> notes = new ArrayList<>();
+    private final List<JsonAdaptedEvent> events = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -38,7 +40,8 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("notes") List<JsonAdaptedNote> notes) {
+            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("notes") List<JsonAdaptedNote> notes,
+            @JsonProperty("events") List<JsonAdaptedEvent> events) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -48,6 +51,9 @@ class JsonAdaptedPerson {
         }
         if (notes != null) {
             this.notes.addAll(notes);
+        }
+        if (events != null) {
+            this.events.addAll(events);
         }
     }
 
@@ -64,6 +70,9 @@ class JsonAdaptedPerson {
                 .collect(Collectors.toList()));
         notes.addAll(source.getNotes().stream()
                 .map(JsonAdaptedNote::new)
+                .collect(Collectors.toList()));
+        events.addAll(source.getEvents().stream()
+                .map(JsonAdaptedEvent::new)
                 .collect(Collectors.toList()));
     }
 
@@ -83,6 +92,11 @@ class JsonAdaptedPerson {
         final List<Note> modelNotes = new ArrayList<>();
         for (JsonAdaptedNote note : notes) {
             modelNotes.add(note.toModelType());
+        }
+
+        final List<Event> modelEvents = new ArrayList<>();
+        for (JsonAdaptedEvent event : events) {
+            modelEvents.add(event.toModelType());
         }
 
         if (name == null) {
@@ -118,7 +132,7 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelNotes);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelNotes, modelEvents);
     }
 
 }
