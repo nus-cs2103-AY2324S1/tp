@@ -47,4 +47,10 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+
+    /**
+     * Temp for test.
+     */
+    Person getViewedPerson();
 }

@@ -24,6 +24,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Meeting> filteredMeetings;
+    private Person viewedPerson;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -133,11 +134,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void viewPerson(Person person) {
-        System.out.println("Command successfully parsed");
-    }
-
-    @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
@@ -201,4 +197,14 @@ public class ModelManager implements Model {
                 && filteredMeetings.equals(otherModelManager.filteredMeetings);
     }
 
+    @Override
+    public void setViewedPerson(Person person) {
+        viewedPerson = person;
+        System.out.println("View Command parsed successfully");
+    }
+
+    @Override
+    public Person getViewedPerson() {
+        return viewedPerson;
+    }
 }

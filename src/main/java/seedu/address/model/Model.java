@@ -89,12 +89,6 @@ public interface Model {
     void addMeeting(Meeting meeting);
 
     /**
-     * Views detailed information of given person.
-     * The person must exist in the address book.
-     */
-    void viewPerson(Person person);
-
-    /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
@@ -127,4 +121,12 @@ public interface Model {
     void updateFilteredMeetingList(Predicate<Meeting> predicate);
 
     boolean hasName(String attendeeName);
+
+
+    /**
+     * Set current viewed person.
+     */
+    void setViewedPerson(Person person);
+
+    Person getViewedPerson();
 }
