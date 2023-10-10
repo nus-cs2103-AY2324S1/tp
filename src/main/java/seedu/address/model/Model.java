@@ -72,7 +72,8 @@ public interface Model {
     /**
      * Replaces the given musician {@code target} with {@code editedMusician}.
      * {@code target} must exist in the address book.
-     * The musician identity of {@code editedMusician} must not be the same as another existing musician in the address book.
+     * The musician identity of {@code editedMusician} must not be the same as another existing musician
+     * in the address book.
      */
     void setMusician(Musician target, Musician editedMusician);
 
