@@ -15,7 +15,7 @@ public class EndTime {
                     + "be blank";
     public static final String VALIDATION_REGEX = "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}";
 
-    private final LocalDateTime time;
+    public final LocalDateTime value;
 
     /**
      * Constructs a {@code EndTime}.
@@ -25,7 +25,7 @@ public class EndTime {
     public EndTime(LocalDateTime time) {
         requireNonNull(time);
 
-        this.time = time;
+        this.value = time;
     }
 
     /**
@@ -45,7 +45,7 @@ public class EndTime {
     }
 
     public LocalDateTime getTime() {
-        return time;
+        return value;
     }
 
     @Override
@@ -60,11 +60,11 @@ public class EndTime {
         }
 
         EndTime otherEndTime = (EndTime) other;
-        return time.equals(otherEndTime.time);
+        return value.equals(otherEndTime.value);
     }
 
     @Override
     public int hashCode() {
-        return time.hashCode();
+        return value.hashCode();
     }
 }

@@ -16,17 +16,17 @@ public class StartTime {
                     + " and it should not be blank";
     public static final String VALIDATION_REGEX = "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}";
 
-    private final LocalDateTime time;
+    public final LocalDateTime value;
 
     /**
      * Constructs a {@code StartTime}.
      *
-     * @param time A valid start time.
+     * @param value A valid start time.
      */
-    public StartTime(LocalDateTime time) {
-        requireNonNull(time);
+    public StartTime(LocalDateTime value) {
+        requireNonNull(value);
 
-        this.time = time;
+        this.value = value;
     }
 
     /**
@@ -46,7 +46,7 @@ public class StartTime {
     }
 
     public LocalDateTime getTime() {
-        return time;
+        return value;
     }
 
 
@@ -62,11 +62,11 @@ public class StartTime {
         }
 
         StartTime otherStartTime = (StartTime) other;
-        return time.equals(otherStartTime.time);
+        return value.equals(otherStartTime.value);
     }
 
     @Override
     public int hashCode() {
-        return time.hashCode();
+        return value.hashCode();
     }
 }

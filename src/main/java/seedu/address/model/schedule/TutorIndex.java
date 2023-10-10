@@ -11,7 +11,7 @@ public class TutorIndex {
     public static final String MESSAGE_CONSTRAINTS =
             "TutorIndex should only contain a positive integer, and it should not be blank";
     public static final String VALIDATION_REGEX = "^[1-9]\\d*$";
-    private final Integer index;
+    public final Integer value;
 
     /**
      * Constructs a {@code TutorIndex}.
@@ -21,7 +21,7 @@ public class TutorIndex {
     public TutorIndex(Integer index) {
         requireNonNull(index);
         checkArgument(isPositive(index), MESSAGE_CONSTRAINTS);
-        this.index = index;
+        this.value = index;
     }
 
     public static boolean isValidTutorIndex(String test) {
@@ -44,11 +44,11 @@ public class TutorIndex {
         }
 
         TutorIndex otherIndex = (TutorIndex) other;
-        return index.equals(otherIndex.index);
+        return value.equals(otherIndex.value);
     }
 
     @Override
     public int hashCode() {
-        return index.hashCode();
+        return value.hashCode();
     }
 }

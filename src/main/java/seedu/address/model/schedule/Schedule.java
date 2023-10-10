@@ -33,7 +33,6 @@ public class Schedule {
         return startTime.getTime().isBefore(endTime.getTime());
     }
 
-
     public TutorIndex getTutorIndex() {
         return tutorIndex;
     }
