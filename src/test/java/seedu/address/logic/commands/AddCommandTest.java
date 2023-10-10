@@ -50,7 +50,7 @@ public class AddCommandTest {
         AddCommand addCommand = new AddCommand(validMusician);
         ModelStub modelStub = new ModelStubWithPerson(validMusician);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_MUSICIAN, () -> addCommand.execute(modelStub));
     }
 
     @Test
@@ -119,7 +119,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addPerson(Musician musician) {
+        public void addMusician(Musician musician) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -134,27 +134,27 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Musician musician) {
+        public boolean hasMusician(Musician musician) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deletePerson(Musician target) {
+        public void deleteMusician(Musician target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setPerson(Musician target, Musician editedMusician) {
+        public void setMusician(Musician target, Musician editedMusician) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Musician> getFilteredPersonList() {
+        public ObservableList<Musician> getFilteredMusicianList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<Musician> predicate) {
+        public void updateFilteredMusicianList(Predicate<Musician> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -171,7 +171,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Musician musician) {
+        public boolean hasMusician(Musician musician) {
             requireNonNull(musician);
             return this.musician.isSamePerson(musician);
         }
@@ -184,13 +184,13 @@ public class AddCommandTest {
         final ArrayList<Musician> personsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Musician musician) {
+        public boolean hasMusician(Musician musician) {
             requireNonNull(musician);
             return personsAdded.stream().anyMatch(musician::isSamePerson);
         }
 
         @Override
-        public void addPerson(Musician musician) {
+        public void addMusician(Musician musician) {
             requireNonNull(musician);
             personsAdded.add(musician);
         }

@@ -169,7 +169,7 @@ public class LogicManagerTest {
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
         Musician expectedMusician = new PersonBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
-        expectedModel.addPerson(expectedMusician);
+        expectedModel.addMusician(expectedMusician);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
 }

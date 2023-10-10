@@ -31,7 +31,7 @@ public class AddCommandIntegrationTest {
         Musician validMusician = new PersonBuilder().build();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.addPerson(validMusician);
+        expectedModel.addMusician(validMusician);
 
         assertCommandSuccess(new AddCommand(validMusician), model,
                 String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validMusician)),
@@ -42,7 +42,7 @@ public class AddCommandIntegrationTest {
     public void execute_duplicatePerson_throwsCommandException() {
         Musician musicianInList = model.getAddressBook().getPersonList().get(0);
         assertCommandFailure(new AddCommand(musicianInList), model,
-                AddCommand.MESSAGE_DUPLICATE_PERSON);
+                AddCommand.MESSAGE_DUPLICATE_MUSICIAN);
     }
 
 }

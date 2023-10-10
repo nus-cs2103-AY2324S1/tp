@@ -12,7 +12,7 @@ import seedu.address.model.musician.Musician;
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Musician> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Musician> PREDICATE_SHOW_ALL_MUSICIANS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -55,33 +55,33 @@ public interface Model {
     /**
      * Returns true if a musician with the same identity as {@code musician} exists in the address book.
      */
-    boolean hasPerson(Musician musician);
+    boolean hasMusician(Musician musician);
 
     /**
      * Deletes the given musician.
      * The musician must exist in the address book.
      */
-    void deletePerson(Musician target);
+    void deleteMusician(Musician target);
 
     /**
      * Adds the given musician.
      * {@code musician} must not already exist in the address book.
      */
-    void addPerson(Musician musician);
+    void addMusician(Musician musician);
 
     /**
      * Replaces the given musician {@code target} with {@code editedMusician}.
      * {@code target} must exist in the address book.
      * The musician identity of {@code editedMusician} must not be the same as another existing musician in the address book.
      */
-    void setPerson(Musician target, Musician editedMusician);
+    void setMusician(Musician target, Musician editedMusician);
 
     /** Returns an unmodifiable view of the filtered musician list */
-    ObservableList<Musician> getFilteredPersonList();
+    ObservableList<Musician> getFilteredMusicianList();
 
     /**
      * Updates the filter of the filtered musician list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Musician> predicate);
+    void updateFilteredMusicianList(Predicate<Musician> predicate);
 }

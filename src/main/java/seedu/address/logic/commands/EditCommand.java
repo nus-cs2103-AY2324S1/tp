@@ -6,7 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_MUSICIANS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -67,7 +67,7 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Musician> lastShownList = model.getFilteredPersonList();
+        List<Musician> lastShownList = model.getFilteredMusicianList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -76,12 +76,12 @@ public class EditCommand extends Command {
         Musician musicianToEdit = lastShownList.get(index.getZeroBased());
         Musician editedMusician = createEditedPerson(musicianToEdit, editPersonDescriptor);
 
-        if (!musicianToEdit.isSamePerson(editedMusician) && model.hasPerson(editedMusician)) {
+        if (!musicianToEdit.isSamePerson(editedMusician) && model.hasMusician(editedMusician)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.setPerson(musicianToEdit, editedMusician);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.setMusician(musicianToEdit, editedMusician);
+        model.updateFilteredMusicianList(PREDICATE_SHOW_ALL_MUSICIANS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedMusician)));
     }
 

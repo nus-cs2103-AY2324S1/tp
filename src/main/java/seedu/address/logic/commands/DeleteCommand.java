@@ -34,14 +34,14 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Musician> lastShownList = model.getFilteredPersonList();
+        List<Musician> lastShownList = model.getFilteredMusicianList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Musician musicianToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deletePerson(musicianToDelete);
+        model.deleteMusician(musicianToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(musicianToDelete)));
     }
 

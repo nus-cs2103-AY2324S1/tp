@@ -36,20 +36,20 @@ public class TestUtil {
      * Returns the middle index of the musician in the {@code model}'s musician list.
      */
     public static Index getMidIndex(Model model) {
-        return Index.fromOneBased(model.getFilteredPersonList().size() / 2);
+        return Index.fromOneBased(model.getFilteredMusicianList().size() / 2);
     }
 
     /**
      * Returns the last index of the musician in the {@code model}'s musician list.
      */
     public static Index getLastIndex(Model model) {
-        return Index.fromOneBased(model.getFilteredPersonList().size());
+        return Index.fromOneBased(model.getFilteredMusicianList().size());
     }
 
     /**
      * Returns the musician in the {@code model}'s musician list at {@code index}.
      */
     public static Musician getPerson(Model model, Index index) {
-        return model.getFilteredPersonList().get(index.getZeroBased());
+        return model.getFilteredMusicianList().get(index.getZeroBased());
     }
 }
