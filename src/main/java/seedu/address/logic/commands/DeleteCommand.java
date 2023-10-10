@@ -9,7 +9,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Musician;
+import seedu.address.model.musician.Musician;
 
 /**
  * Deletes a musician identified using it's displayed index from the address book.
