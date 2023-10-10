@@ -12,7 +12,7 @@ public class Birthday {
             "Birthdays should only contain numbers, and it should be in yyyy-MM-dd format";
     
     public static final String VALIDATION_REGEX = "\\d{4}-\\d{2}-\\d{2}";
-//    public final String value;
+    public final String stringValue;
     public final LocalDate value;
     /**
      * Constructs a {@code Birthday}.
@@ -23,6 +23,7 @@ public class Birthday {
     public Birthday(String birthday) {
         requireNonNull(birthday);
         checkArgument(isValidBirthday(birthday), MESSAGE_CONSTRAINTS);
+        this.stringValue = birthday;
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDate parsedDate = LocalDate.parse(birthday, formatter);
@@ -42,6 +43,10 @@ public class Birthday {
     @Override
     public String toString() {
         return value.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+    }
+    
+    public String getStringValue() {
+        return stringValue;
     }
     
     @Override

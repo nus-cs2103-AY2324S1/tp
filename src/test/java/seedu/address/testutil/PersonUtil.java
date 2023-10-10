@@ -35,7 +35,7 @@ public class PersonUtil {
         sb.append(PREFIX_PHONE + person.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
-        sb.append(PREFIX_BIRTHDAY + person.getBirthday().toString() + " ");
+        sb.append(PREFIX_BIRTHDAY + person.getBirthday().getStringValue() + " ");
         person.getGroups().stream().forEach(
             s -> sb.append(PREFIX_GROUP + s.groupName + " ")
         );
@@ -51,7 +51,7 @@ public class PersonUtil {
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
-        descriptor.getBirthday().ifPresent(birthday -> sb.append(PREFIX_BIRTHDAY).append(birthday.toString())
+        descriptor.getBirthday().ifPresent(birthday -> sb.append(PREFIX_BIRTHDAY).append(birthday.getStringValue())
                 .append(" "));
         if (descriptor.getGroups().isPresent()) {
             Set<Group> groups = descriptor.getGroups().get();
