@@ -50,7 +50,8 @@ public class AddCommandTest {
         AddCommand addCommand = new AddCommand(validMusician);
         ModelStub modelStub = new ModelStubWithPerson(validMusician);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_MUSICIAN, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class,
+                AddCommand.MESSAGE_DUPLICATE_MUSICIAN, () -> addCommand.execute(modelStub));
     }
 
     @Test

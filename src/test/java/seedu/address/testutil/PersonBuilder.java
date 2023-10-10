@@ -5,8 +5,8 @@ import java.util.Set;
 
 import seedu.address.model.musician.Address;
 import seedu.address.model.musician.Email;
-import seedu.address.model.musician.Name;
 import seedu.address.model.musician.Musician;
+import seedu.address.model.musician.Name;
 import seedu.address.model.musician.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -60,7 +60,7 @@ public class PersonBuilder {
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Musician} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
+    public PersonBuilder withTags(String... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
