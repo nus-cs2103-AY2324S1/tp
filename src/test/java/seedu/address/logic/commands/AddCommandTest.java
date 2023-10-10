@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalMusicians.ALICE;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.musician.Musician;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.MusicianBuilder;
 
 public class AddCommandTest {
 
@@ -34,8 +34,8 @@ public class AddCommandTest {
 
     @Test
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Musician validMusician = new PersonBuilder().build();
+        ModelStubAcceptingMusicianAdded modelStub = new ModelStubAcceptingMusicianAdded();
+        Musician validMusician = new MusicianBuilder().build();
 
         CommandResult commandResult = new AddCommand(validMusician).execute(modelStub);
 
@@ -46,9 +46,9 @@ public class AddCommandTest {
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
-        Musician validMusician = new PersonBuilder().build();
+        Musician validMusician = new MusicianBuilder().build();
         AddCommand addCommand = new AddCommand(validMusician);
-        ModelStub modelStub = new ModelStubWithPerson(validMusician);
+        ModelStub modelStub = new ModelStubWithMusician(validMusician);
 
         assertThrows(CommandException.class,
                 AddCommand.MESSAGE_DUPLICATE_MUSICIAN, () -> addCommand.execute(modelStub));
@@ -56,8 +56,8 @@ public class AddCommandTest {
 
     @Test
     public void equals() {
-        Musician alice = new PersonBuilder().withName("Alice").build();
-        Musician bob = new PersonBuilder().withName("Bob").build();
+        Musician alice = new MusicianBuilder().withName("Alice").build();
+        Musician bob = new MusicianBuilder().withName("Bob").build();
         AddCommand addAliceCommand = new AddCommand(alice);
         AddCommand addBobCommand = new AddCommand(bob);
 
@@ -163,10 +163,10 @@ public class AddCommandTest {
     /**
      * A Model stub that contains a single musician.
      */
-    private class ModelStubWithPerson extends ModelStub {
+    private class ModelStubWithMusician extends ModelStub {
         private final Musician musician;
 
-        ModelStubWithPerson(Musician musician) {
+        ModelStubWithMusician(Musician musician) {
             requireNonNull(musician);
             this.musician = musician;
         }
@@ -181,7 +181,7 @@ public class AddCommandTest {
     /**
      * A Model stub that always accept the musician being added.
      */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
+    private class ModelStubAcceptingMusicianAdded extends ModelStub {
         final ArrayList<Musician> personsAdded = new ArrayList<>();
 
         @Override

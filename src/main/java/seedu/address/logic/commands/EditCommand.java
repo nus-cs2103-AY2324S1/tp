@@ -53,18 +53,18 @@ public class EditCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSON = "This musician already exists in the address book.";
 
     private final Index index;
-    private final EditPersonDescriptor editPersonDescriptor;
+    private final EditMusicianDescriptor editMusicianDescriptor;
 
     /**
      * @param index of the musician in the filtered musician list to edit
-     * @param editPersonDescriptor details to edit the musician with
+     * @param editMusicianDescriptor details to edit the musician with
      */
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+    public EditCommand(Index index, EditMusicianDescriptor editMusicianDescriptor) {
         requireNonNull(index);
-        requireNonNull(editPersonDescriptor);
+        requireNonNull(editMusicianDescriptor);
 
         this.index = index;
-        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.editMusicianDescriptor = new EditMusicianDescriptor(editMusicianDescriptor);
     }
 
     @Override
@@ -77,7 +77,7 @@ public class EditCommand extends Command {
         }
 
         Musician musicianToEdit = lastShownList.get(index.getZeroBased());
-        Musician editedMusician = createEditedPerson(musicianToEdit, editPersonDescriptor);
+        Musician editedMusician = createEditedPerson(musicianToEdit, editMusicianDescriptor);
 
         if (!musicianToEdit.isSamePerson(editedMusician) && model.hasMusician(editedMusician)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
@@ -90,16 +90,16 @@ public class EditCommand extends Command {
 
     /**
      * Creates and returns a {@code Musician} with the details of {@code musicianToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * edited with {@code editMusicianDescriptor}.
      */
-    private static Musician createEditedPerson(Musician musicianToEdit, EditPersonDescriptor editPersonDescriptor) {
+    private static Musician createEditedPerson(Musician musicianToEdit, EditMusicianDescriptor editMusicianDescriptor) {
         assert musicianToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(musicianToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(musicianToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(musicianToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(musicianToEdit.getAddress());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(musicianToEdit.getTags());
+        Name updatedName = editMusicianDescriptor.getName().orElse(musicianToEdit.getName());
+        Phone updatedPhone = editMusicianDescriptor.getPhone().orElse(musicianToEdit.getPhone());
+        Email updatedEmail = editMusicianDescriptor.getEmail().orElse(musicianToEdit.getEmail());
+        Address updatedAddress = editMusicianDescriptor.getAddress().orElse(musicianToEdit.getAddress());
+        Set<Tag> updatedTags = editMusicianDescriptor.getTags().orElse(musicianToEdit.getTags());
 
         return new Musician(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
     }
@@ -117,14 +117,14 @@ public class EditCommand extends Command {
 
         EditCommand otherEditCommand = (EditCommand) other;
         return index.equals(otherEditCommand.index)
-                && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
+                && editMusicianDescriptor.equals(otherEditCommand.editMusicianDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("index", index)
-                .add("editPersonDescriptor", editPersonDescriptor)
+                .add("editMusicianDescriptor", editMusicianDescriptor)
                 .toString();
     }
 
@@ -132,20 +132,20 @@ public class EditCommand extends Command {
      * Stores the details to edit the musician with. Each non-empty field value will replace the
      * corresponding field value of the musician.
      */
-    public static class EditPersonDescriptor {
+    public static class EditMusicianDescriptor {
         private Name name;
         private Phone phone;
         private Email email;
         private Address address;
         private Set<Tag> tags;
 
-        public EditPersonDescriptor() {}
+        public EditMusicianDescriptor() {}
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+        public EditMusicianDescriptor(EditMusicianDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
@@ -216,16 +216,16 @@ public class EditCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditPersonDescriptor)) {
+            if (!(other instanceof EditMusicianDescriptor)) {
                 return false;
             }
 
-            EditPersonDescriptor otherEditPersonDescriptor = (EditPersonDescriptor) other;
-            return Objects.equals(name, otherEditPersonDescriptor.name)
-                    && Objects.equals(phone, otherEditPersonDescriptor.phone)
-                    && Objects.equals(email, otherEditPersonDescriptor.email)
-                    && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+            EditMusicianDescriptor otherEditMusicianDescriptor = (EditMusicianDescriptor) other;
+            return Objects.equals(name, otherEditMusicianDescriptor.name)
+                    && Objects.equals(phone, otherEditMusicianDescriptor.phone)
+                    && Objects.equals(email, otherEditMusicianDescriptor.email)
+                    && Objects.equals(address, otherEditMusicianDescriptor.address)
+                    && Objects.equals(tags, otherEditMusicianDescriptor.tags);
         }
 
         @Override
