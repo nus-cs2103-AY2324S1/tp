@@ -4,8 +4,8 @@ package seedu.address.model.tag;
  * Represents a Mod in the address book.
  */
 public class Mod extends Tag {
-    public static final String MESSAGE_CONSTRAINTS = "Mod codes should have 2-3 alphabets, followed by 4 digits,"
-            + " and optionally ending with an alphabet.";
+    public static final String MESSAGE_CONSTRAINTS = "Mod codes should start with 2-3 alphabets, "
+            + "followed by 4 numbers, and optionally end with an alphabet.";
 
     // 2-3 alphabets, followed by 4 digits, and optionally ending with an alphabet
     public static final String VALIDATION_REGEX = "^[A-Za-z]{2,3}\\d{4}[A-Za-z]?$";
