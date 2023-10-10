@@ -16,7 +16,7 @@ class EndTimeTest {
 
     @Test
     void isValidEndTime() {
-        // null TutorIndex number
+        // null
         assertThrows(NullPointerException.class, () -> EndTime.isValidEndTime(null));
 
         // invalid EndTimes

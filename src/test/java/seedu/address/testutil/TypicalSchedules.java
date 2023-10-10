@@ -10,6 +10,7 @@ import seedu.address.model.schedule.Schedule;
 /**
  * A utility class containing a list of {@code Schedule} objects to be used in tests.
  */
+// Schedule objects are named in the format: SCHEDULE_{TUTOR_INDEX}_{DAY}_{MONTH}
 public class TypicalSchedules {
     public static final Schedule SCHEDULE_ONE_FIRST_JAN = new ScheduleBuilder()
             .withTutorIndex(1)
@@ -25,7 +26,7 @@ public class TypicalSchedules {
 
     private TypicalSchedules() {} // prevents instantiation
 
-    public static List<Schedule> getTypicalPersons() {
+    public static List<Schedule> getTypicalSchedules() {
         return new ArrayList<>(Arrays.asList(SCHEDULE_ONE_FIRST_JAN, SCHEDULE_TWO_SECOND_JAN));
     }
 }

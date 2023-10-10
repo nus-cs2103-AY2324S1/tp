@@ -16,7 +16,7 @@ class StartTimeTest {
 
     @Test
     void isValidStartTime() {
-        // null TutorIndex number
+        // null
         assertThrows(NullPointerException.class, () -> StartTime.isValidStartTime(null));
 
         // invalid StartTimes

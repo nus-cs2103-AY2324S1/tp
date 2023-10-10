@@ -59,7 +59,7 @@ class ScheduleTest {
         // different type -> returns false
         assertFalse(SCHEDULE_ONE_FIRST_JAN.equals(5));
 
-        // different person -> returns false
+        // different schedule -> returns false
         assertFalse(SCHEDULE_ONE_FIRST_JAN.equals(SCHEDULE_TWO_SECOND_JAN));
 
         // different tutor index -> returns false
