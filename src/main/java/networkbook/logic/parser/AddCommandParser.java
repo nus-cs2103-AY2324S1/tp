@@ -1,5 +1,6 @@
 package networkbook.logic.parser;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -12,6 +13,7 @@ import networkbook.model.person.Name;
 import networkbook.model.person.Person;
 import networkbook.model.person.Phone;
 import networkbook.model.tag.Tag;
+import networkbook.model.util.UniquePropertyList;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -53,10 +55,11 @@ public class AddCommandParser implements Parser<AddCommand> {
         Name name = ParserUtil.parseName(argMultimap.getValue(CliSyntax.PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(CliSyntax.PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(CliSyntax.PREFIX_EMAIL).get());
+        UniquePropertyList<Email> emails = new UniquePropertyList<Email>().setItems(List.of(email));
         Address address = ParserUtil.parseAddress(argMultimap.getValue(CliSyntax.PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(CliSyntax.PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, address, tagList);
+        Person person = new Person(name, phone, emails, address, tagList);
 
         return new AddCommand(person);
     }

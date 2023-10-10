@@ -5,8 +5,10 @@ import java.util.Set;
 import networkbook.logic.commands.AddCommand;
 import networkbook.logic.commands.EditCommand;
 import networkbook.logic.parser.CliSyntax;
+import networkbook.model.person.Email;
 import networkbook.model.person.Person;
 import networkbook.model.tag.Tag;
+import networkbook.model.util.UniquePropertyList;
 
 /**
  * A utility class for Person.
@@ -27,7 +29,9 @@ public class PersonUtil {
         StringBuilder sb = new StringBuilder();
         sb.append(CliSyntax.PREFIX_NAME + person.getName().fullName + " ");
         sb.append(CliSyntax.PREFIX_PHONE + person.getPhone().value + " ");
-        sb.append(CliSyntax.PREFIX_EMAIL + person.getEmail().value + " ");
+        person.getEmails().stream().forEach(
+                e -> sb.append(CliSyntax.PREFIX_EMAIL + e.toString() + " ")
+        );
         sb.append(CliSyntax.PREFIX_ADDRESS + person.getAddress().value + " ");
         person.getTags().stream().forEach(
             s -> sb.append(CliSyntax.PREFIX_TAG + s.tagName + " ")
@@ -42,7 +46,14 @@ public class PersonUtil {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(CliSyntax.PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(CliSyntax.PREFIX_PHONE).append(phone.value).append(" "));
-        descriptor.getEmail().ifPresent(email -> sb.append(CliSyntax.PREFIX_EMAIL).append(email.value).append(" "));
+        if (descriptor.getEmails().isPresent()) {
+            UniquePropertyList<Email> emails = descriptor.getEmails().get();
+            if (emails.isEmpty()) {
+                sb.append(CliSyntax.PREFIX_EMAIL);
+            } else {
+                emails.forEach(e -> sb.append(CliSyntax.PREFIX_EMAIL).append(e.toString()).append(" "));
+            }
+        }
         descriptor.getAddress().ifPresent(address -> sb.append(CliSyntax.PREFIX_ADDRESS)
                 .append(address.value).append(" "));
         if (descriptor.getTags().isPresent()) {
