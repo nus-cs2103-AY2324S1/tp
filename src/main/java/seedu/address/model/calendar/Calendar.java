@@ -73,7 +73,7 @@ public class Calendar {
     }
 
     /**
-     * Retrieves the event at the specified index.
+     * Retrieves the event at the specified index. Index specified must be a valid index.
      *
      * @param index The index of the event to retrieve.
      * @return The event at the specified index.
@@ -92,7 +92,10 @@ public class Calendar {
     public void editEventPeriod(int index, EventPeriod eventPeriod) {
         requireNonNull(eventPeriod);
 
-        getEventAtIndex(index).changeEventPeriod(eventPeriod);
+        Event eventToEdit = getEventAtIndex(index);
+        eventToEdit.changeEventPeriod(eventPeriod);
+        removeEvent(index);
+        addEvent(eventToEdit);
     }
 
     /**
@@ -106,7 +109,8 @@ public class Calendar {
         Event toBeRemoved = getEventAtIndex(index);
         assert(this.eventTree.containsValue(toBeRemoved));
 
-        this.eventTree.remove(getEventAtIndex(index));
+        EventPeriod keyToEventToBeRemoved = toBeRemoved.getEventPeriod();
+        this.eventTree.remove(keyToEventToBeRemoved);
     }
 
     /**
@@ -124,6 +128,15 @@ public class Calendar {
      */
     public boolean contains(Event event) {
         return this.eventTree.containsValue(event);
+    }
+
+    /**
+     * Checks if the calendar is empty.
+     *
+     * @return true if calendar is empty, false otherwise.
+     */
+    public boolean isEmpty() {
+        return this.eventTree.isEmpty();
     }
 
     @Override

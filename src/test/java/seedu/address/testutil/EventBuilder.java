@@ -44,7 +44,7 @@ public class EventBuilder {
     }
 
     /**
-     * Set the start date to the user input
+     * Set the start date to the user input while setting the end date to the default.
      *
      * @param startDate user input in format 'yyyy-MM-dd HH:mm'.
      * @return EventBuilder object with start date changed to user input.
@@ -55,7 +55,7 @@ public class EventBuilder {
     }
 
     /**
-     * Set the end date to the user input.
+     * Set the end date to the user input while setting the start date to the default.
      *
      * @param endDate user input in format 'yyyy-MM-dd HH:mm'.
      * @return EventBuilder object with the end date changed to user input.
