@@ -133,6 +133,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void viewPerson(Person person) {
+        System.out.println("Command successfully parsed");
+    }
+
+    @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
