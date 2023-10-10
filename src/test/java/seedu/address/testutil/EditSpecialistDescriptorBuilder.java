@@ -1,7 +1,6 @@
 package seedu.address.testutil;
 
 import seedu.address.logic.commands.EditCommand.EditSpecialistDescriptor;
-import seedu.address.model.person.Phone;
 import seedu.address.model.person.Specialist;
 import seedu.address.model.person.Specialty;
 
