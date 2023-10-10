@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddEventCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
@@ -22,13 +23,13 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses user input for address book component of application.
  */
-public class AddressBookParser extends ComponentParser {
+public class UniMateParser extends ComponentParser {
 
     /**
      * Used for initial separation of command word and args.
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
-    private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
+    private static final Logger logger = LogsCenter.getLogger(UniMateParser.class);
 
     @Override
     public Command parseCommand(String userInput) throws ParseException {
@@ -70,6 +71,9 @@ public class AddressBookParser extends ComponentParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case AddEventCommand.COMMAND_WORD:
+            return new AddEventCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
