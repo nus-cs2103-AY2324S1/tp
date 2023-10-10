@@ -163,7 +163,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, groups);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, birthday, groups);
         }
 
         public void setName(Name name) {
@@ -197,10 +197,10 @@ public class EditCommand extends Command {
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
         }
+        
         public void setBirthday(Birthday birthday) {
             this.birthday = birthday;
         }
-        
         public Optional<Birthday> getBirthday() {
             return Optional.ofNullable(birthday);
         }
