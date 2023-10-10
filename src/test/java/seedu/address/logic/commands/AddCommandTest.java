@@ -28,12 +28,12 @@ import seedu.address.testutil.MusicianBuilder;
 public class AddCommandTest {
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
+    public void constructor_nullMusician_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddCommand(null));
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
+    public void execute_musicianAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingMusicianAdded modelStub = new ModelStubAcceptingMusicianAdded();
         Musician validMusician = new MusicianBuilder().build();
 
@@ -45,7 +45,7 @@ public class AddCommandTest {
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
+    public void execute_duplicateMusician_throwsCommandException() {
         Musician validMusician = new MusicianBuilder().build();
         AddCommand addCommand = new AddCommand(validMusician);
         ModelStub modelStub = new ModelStubWithMusician(validMusician);
@@ -174,7 +174,7 @@ public class AddCommandTest {
         @Override
         public boolean hasMusician(Musician musician) {
             requireNonNull(musician);
-            return this.musician.isSamePerson(musician);
+            return this.musician.isSameMusician(musician);
         }
     }
 
@@ -187,7 +187,7 @@ public class AddCommandTest {
         @Override
         public boolean hasMusician(Musician musician) {
             requireNonNull(musician);
-            return musiciansAdded.stream().anyMatch(musician::isSamePerson);
+            return musiciansAdded.stream().anyMatch(musician::isSameMusician);
         }
 
         @Override

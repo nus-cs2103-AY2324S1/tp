@@ -13,15 +13,15 @@ import seedu.address.model.musician.exceptions.MusicianNotFoundException;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
- * A musician is considered unique by comparing using {@code Musician#isSamePerson(Musician)}.
- * As such, adding and updating of persons uses Musician#isSamePerson(Musician) for equality
+ * A musician is considered unique by comparing using {@code Musician#isSameMusician(Musician)}.
+ * As such, adding and updating of persons uses Musician#isSameMusician(Musician) for equality
  * so as to ensure that the musician being added or updated is unique in terms of identity in the UniqueMusicianList.
  * However, the removal of a musician uses Musician#equals(Object) so as to ensure that
  * the musician with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
- * @see Musician#isSamePerson(Musician)
+ * @see Musician#isSameMusician(Musician)
  */
 public class UniqueMusicianList implements Iterable<Musician> {
 
@@ -34,7 +34,7 @@ public class UniqueMusicianList implements Iterable<Musician> {
      */
     public boolean contains(Musician toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSamePerson);
+        return internalList.stream().anyMatch(toCheck::isSameMusician);
     }
 
     /**
@@ -54,7 +54,7 @@ public class UniqueMusicianList implements Iterable<Musician> {
      * {@code target} must exist in the list.
      * The musician identity of {@code editedMusician} must not be the same as another existing musician in the list.
      */
-    public void setPerson(Musician target, Musician editedMusician) {
+    public void setMusician(Musician target, Musician editedMusician) {
         requireAllNonNull(target, editedMusician);
 
         int index = internalList.indexOf(target);
@@ -62,7 +62,7 @@ public class UniqueMusicianList implements Iterable<Musician> {
             throw new MusicianNotFoundException();
         }
 
-        if (!target.isSamePerson(editedMusician) && contains(editedMusician)) {
+        if (!target.isSameMusician(editedMusician) && contains(editedMusician)) {
             throw new DuplicateMusicianException();
         }
 
@@ -80,7 +80,7 @@ public class UniqueMusicianList implements Iterable<Musician> {
         }
     }
 
-    public void setPersons(UniqueMusicianList replacement) {
+    public void setMusicians(UniqueMusicianList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
@@ -89,9 +89,9 @@ public class UniqueMusicianList implements Iterable<Musician> {
      * Replaces the contents of this list with {@code musicians}.
      * {@code musicians} must not contain duplicate musicians.
      */
-    public void setPersons(List<Musician> musicians) {
+    public void setMusicians(List<Musician> musicians) {
         requireAllNonNull(musicians);
-        if (!personsAreUnique(musicians)) {
+        if (!musiciansAreUnique(musicians)) {
             throw new DuplicateMusicianException();
         }
 
@@ -138,10 +138,10 @@ public class UniqueMusicianList implements Iterable<Musician> {
     /**
      * Returns true if {@code musicians} contains only unique musicians.
      */
-    private boolean personsAreUnique(List<Musician> musicians) {
+    private boolean musiciansAreUnique(List<Musician> musicians) {
         for (int i = 0; i < musicians.size() - 1; i++) {
             for (int j = i + 1; j < musicians.size(); j++) {
-                if (musicians.get(i).isSamePerson(musicians.get(j))) {
+                if (musicians.get(i).isSameMusician(musicians.get(j))) {
                     return false;
                 }
             }

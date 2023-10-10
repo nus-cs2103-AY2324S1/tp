@@ -48,9 +48,9 @@ public class EditCommand extends Command {
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Musician: %1$s";
+    public static final String MESSAGE_EDIT_MUSICIAN_SUCCESS = "Edited Musician: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This musician already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_MUSICIAN = "This musician already exists in the address book.";
 
     private final Index index;
     private final EditMusicianDescriptor editMusicianDescriptor;
@@ -73,26 +73,27 @@ public class EditCommand extends Command {
         List<Musician> lastShownList = model.getFilteredMusicianList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_MUSICIAN_DISPLAYED_INDEX);
         }
 
         Musician musicianToEdit = lastShownList.get(index.getZeroBased());
-        Musician editedMusician = createEditedPerson(musicianToEdit, editMusicianDescriptor);
+        Musician editedMusician = createEditedMusician(musicianToEdit, editMusicianDescriptor);
 
-        if (!musicianToEdit.isSamePerson(editedMusician) && model.hasMusician(editedMusician)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        if (!musicianToEdit.isSameMusician(editedMusician) && model.hasMusician(editedMusician)) {
+            throw new CommandException(MESSAGE_DUPLICATE_MUSICIAN);
         }
 
         model.setMusician(musicianToEdit, editedMusician);
         model.updateFilteredMusicianList(PREDICATE_SHOW_ALL_MUSICIANS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedMusician)));
+        return new CommandResult(String.format(MESSAGE_EDIT_MUSICIAN_SUCCESS, Messages.format(editedMusician)));
     }
 
     /**
      * Creates and returns a {@code Musician} with the details of {@code musicianToEdit}
      * edited with {@code editMusicianDescriptor}.
      */
-    private static Musician createEditedPerson(Musician musicianToEdit, EditMusicianDescriptor editMusicianDescriptor) {
+    private static Musician createEditedMusician(
+            Musician musicianToEdit, EditMusicianDescriptor editMusicianDescriptor) {
         assert musicianToEdit != null;
 
         Name updatedName = editMusicianDescriptor.getName().orElse(musicianToEdit.getName());

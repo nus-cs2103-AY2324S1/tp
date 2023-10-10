@@ -65,7 +65,7 @@ public class Musician {
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
-    public boolean isSamePerson(Musician otherMusician) {
+    public boolean isSameMusician(Musician otherMusician) {
         if (otherMusician == this) {
             return true;
         }

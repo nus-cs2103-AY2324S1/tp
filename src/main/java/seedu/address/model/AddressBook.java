@@ -11,7 +11,7 @@ import seedu.address.model.musician.UniqueMusicianList;
 
 /**
  * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Duplicates are not allowed (by .isSameMusician comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
@@ -26,7 +26,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an AddressBook using the Musicians in the {@code toBeCopied}
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
@@ -40,7 +40,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code musicians} must not contain duplicate musicians.
      */
     public void setMusicians(List<Musician> musicians) {
-        this.musicians.setPersons(musicians);
+        this.musicians.setMusicians(musicians);
     }
 
     /**
@@ -57,7 +57,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Returns true if a musician with the same identity as {@code musician} exists in the address book.
      */
-    public boolean hasPerson(Musician musician) {
+    public boolean hasMusician(Musician musician) {
         requireNonNull(musician);
         return musicians.contains(musician);
     }
@@ -66,7 +66,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Adds a musician to the address book.
      * The musician must not already exist in the address book.
      */
-    public void addPerson(Musician p) {
+    public void addMusician(Musician p) {
         musicians.add(p);
     }
 
@@ -76,17 +76,17 @@ public class AddressBook implements ReadOnlyAddressBook {
      * The musician identity of {@code editedMusician} must not be the same as another existing musician in the
      * address book.
      */
-    public void setPerson(Musician target, Musician editedMusician) {
+    public void setMusician(Musician target, Musician editedMusician) {
         requireNonNull(editedMusician);
 
-        musicians.setPerson(target, editedMusician);
+        musicians.setMusician(target, editedMusician);
     }
 
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
-    public void removePerson(Musician key) {
+    public void removeMusician(Musician key) {
         musicians.remove(key);
     }
 

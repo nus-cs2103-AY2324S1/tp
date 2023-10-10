@@ -22,13 +22,13 @@ public class MusicianUtil {
      * Returns an add command string for adding the {@code musician}.
      */
     public static String getAddCommand(Musician musician) {
-        return AddCommand.COMMAND_WORD + " " + getPersonDetails(musician);
+        return AddCommand.COMMAND_WORD + " " + getMusicianDetails(musician);
     }
 
     /**
      * Returns the part of command string for the given {@code musician}'s details.
      */
-    public static String getPersonDetails(Musician musician) {
+    public static String getMusicianDetails(Musician musician) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + musician.getName().fullName + " ");
         sb.append(PREFIX_PHONE + musician.getPhone().value + " ");
@@ -43,7 +43,7 @@ public class MusicianUtil {
     /**
      * Returns the part of command string for the given {@code EditMusicianDescriptor}'s details.
      */
-    public static String getEditPersonDescriptorDetails(EditCommand.EditMusicianDescriptor descriptor) {
+    public static String getEditMusicianDescriptorDetails(EditCommand.EditMusicianDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));

@@ -90,17 +90,17 @@ public class ModelManager implements Model {
     @Override
     public boolean hasMusician(Musician musician) {
         requireNonNull(musician);
-        return addressBook.hasPerson(musician);
+        return addressBook.hasMusician(musician);
     }
 
     @Override
     public void deleteMusician(Musician target) {
-        addressBook.removePerson(target);
+        addressBook.removeMusician(target);
     }
 
     @Override
     public void addMusician(Musician musician) {
-        addressBook.addPerson(musician);
+        addressBook.addMusician(musician);
         updateFilteredMusicianList(PREDICATE_SHOW_ALL_MUSICIANS);
     }
 
@@ -108,7 +108,7 @@ public class ModelManager implements Model {
     public void setMusician(Musician target, Musician editedMusician) {
         requireAllNonNull(target, editedMusician);
 
-        addressBook.setPerson(target, editedMusician);
+        addressBook.setMusician(target, editedMusician);
     }
 
     //=========== Filtered Musician List Accessors =============================================================

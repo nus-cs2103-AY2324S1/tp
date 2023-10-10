@@ -10,9 +10,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.logic.commands.CommandTestUtil.showMusicianAtIndex;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MUSICIAN;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_MUSICIAN;
 import static seedu.address.testutil.TypicalMusicians.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -39,9 +39,9 @@ public class EditCommandTest {
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Musician editedMusician = new MusicianBuilder().build();
         EditCommand.EditMusicianDescriptor descriptor = new EditMusicianDescriptorBuilder(editedMusician).build();
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_MUSICIAN, descriptor);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MUSICIAN_SUCCESS,
                 Messages.format(editedMusician));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
@@ -52,18 +52,18 @@ public class EditCommandTest {
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
-        Index indexLastPerson = Index.fromOneBased(model.getFilteredMusicianList().size());
-        Musician lastMusician = model.getFilteredMusicianList().get(indexLastPerson.getZeroBased());
+        Index indexLastMusician = Index.fromOneBased(model.getFilteredMusicianList().size());
+        Musician lastMusician = model.getFilteredMusicianList().get(indexLastMusician.getZeroBased());
 
-        MusicianBuilder personInList = new MusicianBuilder(lastMusician);
-        Musician editedMusician = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+        MusicianBuilder musicianInList = new MusicianBuilder(lastMusician);
+        Musician editedMusician = musicianInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
 
         EditCommand.EditMusicianDescriptor descriptor = new EditMusicianDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
-        EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
+        EditCommand editCommand = new EditCommand(indexLastMusician, descriptor);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MUSICIAN_SUCCESS,
                 Messages.format(editedMusician));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
@@ -74,10 +74,10 @@ public class EditCommandTest {
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, new EditMusicianDescriptor());
-        Musician editedMusician = model.getFilteredMusicianList().get(INDEX_FIRST_PERSON.getZeroBased());
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_MUSICIAN, new EditMusicianDescriptor());
+        Musician editedMusician = model.getFilteredMusicianList().get(INDEX_FIRST_MUSICIAN.getZeroBased());
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MUSICIAN_SUCCESS,
                 Messages.format(editedMusician));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
@@ -87,14 +87,14 @@ public class EditCommandTest {
 
     @Test
     public void execute_filteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showMusicianAtIndex(model, INDEX_FIRST_MUSICIAN);
 
-        Musician musicianInFilteredList = model.getFilteredMusicianList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Musician musicianInFilteredList = model.getFilteredMusicianList().get(INDEX_FIRST_MUSICIAN.getZeroBased());
         Musician editedMusician = new MusicianBuilder(musicianInFilteredList).withName(VALID_NAME_BOB).build();
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_MUSICIAN,
                 new EditMusicianDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MUSICIAN_SUCCESS,
                 Messages.format(editedMusician));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
@@ -104,34 +104,34 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_duplicatePersonUnfilteredList_failure() {
-        Musician firstMusician = model.getFilteredMusicianList().get(INDEX_FIRST_PERSON.getZeroBased());
+    public void execute_duplicateMusicianUnfilteredList_failure() {
+        Musician firstMusician = model.getFilteredMusicianList().get(INDEX_FIRST_MUSICIAN.getZeroBased());
         EditCommand.EditMusicianDescriptor descriptor = new EditMusicianDescriptorBuilder(firstMusician).build();
-        EditCommand editCommand = new EditCommand(INDEX_SECOND_PERSON, descriptor);
+        EditCommand editCommand = new EditCommand(INDEX_SECOND_MUSICIAN, descriptor);
 
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_MUSICIAN);
     }
 
     @Test
-    public void execute_duplicatePersonFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+    public void execute_duplicateMusicianFilteredList_failure() {
+        showMusicianAtIndex(model, INDEX_FIRST_MUSICIAN);
 
         // edit musician in filtered list into a duplicate in address book
-        Musician musicianInList = model.getAddressBook().getMusicianList().get(INDEX_SECOND_PERSON.getZeroBased());
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
+        Musician musicianInList = model.getAddressBook().getMusicianList().get(INDEX_SECOND_MUSICIAN.getZeroBased());
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_MUSICIAN,
                 new EditMusicianDescriptorBuilder(musicianInList).build());
 
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_MUSICIAN);
     }
 
     @Test
-    public void execute_invalidPersonIndexUnfilteredList_failure() {
+    public void execute_invalidMusicianIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredMusicianList().size() + 1);
         EditCommand.EditMusicianDescriptor descriptor =
                 new EditMusicianDescriptorBuilder().withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_MUSICIAN_DISPLAYED_INDEX);
     }
 
     /**
@@ -139,25 +139,25 @@ public class EditCommandTest {
      * but smaller than size of address book
      */
     @Test
-    public void execute_invalidPersonIndexFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
+    public void execute_invalidMusicianIndexFilteredList_failure() {
+        showMusicianAtIndex(model, INDEX_FIRST_MUSICIAN);
+        Index outOfBoundIndex = INDEX_SECOND_MUSICIAN;
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getMusicianList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
                 new EditMusicianDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_MUSICIAN_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        final EditCommand standardCommand = new EditCommand(INDEX_FIRST_PERSON, DESC_AMY);
+        final EditCommand standardCommand = new EditCommand(INDEX_FIRST_MUSICIAN, DESC_AMY);
 
         // same values -> returns true
         EditCommand.EditMusicianDescriptor copyDescriptor = new EditMusicianDescriptor(DESC_AMY);
-        EditCommand commandWithSameValues = new EditCommand(INDEX_FIRST_PERSON, copyDescriptor);
+        EditCommand commandWithSameValues = new EditCommand(INDEX_FIRST_MUSICIAN, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -170,10 +170,10 @@ public class EditCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(INDEX_SECOND_PERSON, DESC_AMY)));
+        assertFalse(standardCommand.equals(new EditCommand(INDEX_SECOND_MUSICIAN, DESC_AMY)));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_PERSON, DESC_BOB)));
+        assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_MUSICIAN, DESC_BOB)));
     }
 
     @Test

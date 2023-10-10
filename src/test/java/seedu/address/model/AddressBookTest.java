@@ -44,7 +44,7 @@ public class AddressBookTest {
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
+    public void resetData_withDuplicateMusicians_throwsDuplicateMusicianException() {
         // Two musicians with the same identity fields
         Musician editedAlice = new MusicianBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
@@ -55,31 +55,31 @@ public class AddressBookTest {
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasPerson(null));
+    public void hasMusician_nullMusician_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasMusician(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasPerson(ALICE));
+    public void hasMusician_musicianNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasMusician(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
-        assertTrue(addressBook.hasPerson(ALICE));
+    public void hasMusician_musicianInAddressBook_returnsTrue() {
+        addressBook.addMusician(ALICE);
+        assertTrue(addressBook.hasMusician(ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
+    public void hasMusician_musicianWithSameIdentityFieldsInAddressBook_returnsTrue() {
+        addressBook.addMusician(ALICE);
         Musician editedAlice = new MusicianBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(addressBook.hasPerson(editedAlice));
+        assertTrue(addressBook.hasMusician(editedAlice));
     }
 
     @Test
-    public void getPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getMusicianList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getMusicianList().remove(0));
     }
 

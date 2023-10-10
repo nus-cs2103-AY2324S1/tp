@@ -49,7 +49,7 @@ public class TestUtil {
     /**
      * Returns the musician in the {@code model}'s musician list at {@code index}.
      */
-    public static Musician getPerson(Model model, Index index) {
+    public static Musician getMusician(Model model, Index index) {
         return model.getFilteredMusicianList().get(index.getZeroBased());
     }
 }

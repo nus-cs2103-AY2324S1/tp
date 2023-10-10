@@ -24,23 +24,23 @@ public class UniqueMusicianListTest {
     private final UniqueMusicianList uniqueMusicianList = new UniqueMusicianList();
 
     @Test
-    public void contains_nullPerson_throwsNullPointerException() {
+    public void contains_nullMusician_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueMusicianList.contains(null));
     }
 
     @Test
-    public void contains_personNotInList_returnsFalse() {
+    public void contains_musicianNotInList_returnsFalse() {
         assertFalse(uniqueMusicianList.contains(ALICE));
     }
 
     @Test
-    public void contains_personInList_returnsTrue() {
+    public void contains_musicianInList_returnsTrue() {
         uniqueMusicianList.add(ALICE);
         assertTrue(uniqueMusicianList.contains(ALICE));
     }
 
     @Test
-    public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
+    public void contains_musicianWithSameIdentityFieldsInList_returnsTrue() {
         uniqueMusicianList.add(ALICE);
         Musician editedAlice = new MusicianBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
@@ -48,79 +48,79 @@ public class UniqueMusicianListTest {
     }
 
     @Test
-    public void add_nullPerson_throwsNullPointerException() {
+    public void add_nullMusician_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueMusicianList.add(null));
     }
 
     @Test
-    public void add_duplicatePerson_throwsDuplicatePersonException() {
+    public void add_duplicateMusician_throwsDuplicateMusicianException() {
         uniqueMusicianList.add(ALICE);
         assertThrows(DuplicateMusicianException.class, () -> uniqueMusicianList.add(ALICE));
     }
 
     @Test
-    public void setPerson_nullTargetPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueMusicianList.setPerson(null, ALICE));
+    public void setMusician_nullTargetMusician_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueMusicianList.setMusician(null, ALICE));
     }
 
     @Test
-    public void setPerson_nullEditedPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueMusicianList.setPerson(ALICE, null));
+    public void setMusician_nullEditedMusician_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueMusicianList.setMusician(ALICE, null));
     }
 
     @Test
-    public void setPerson_targetPersonNotInList_throwsPersonNotFoundException() {
-        assertThrows(MusicianNotFoundException.class, () -> uniqueMusicianList.setPerson(ALICE, ALICE));
+    public void setMusician_targetMusicianNotInList_throwsMusicianNotFoundException() {
+        assertThrows(MusicianNotFoundException.class, () -> uniqueMusicianList.setMusician(ALICE, ALICE));
     }
 
     @Test
-    public void setPerson_editedPersonIsSamePerson_success() {
+    public void setMusician_editedMusicianIsSameMusician_success() {
         uniqueMusicianList.add(ALICE);
-        uniqueMusicianList.setPerson(ALICE, ALICE);
+        uniqueMusicianList.setMusician(ALICE, ALICE);
         UniqueMusicianList expectedUniqueMusicianList = new UniqueMusicianList();
         expectedUniqueMusicianList.add(ALICE);
         assertEquals(expectedUniqueMusicianList, uniqueMusicianList);
     }
 
     @Test
-    public void setPerson_editedPersonHasSameIdentity_success() {
+    public void setMusician_editedMusicianHasSameIdentity_success() {
         uniqueMusicianList.add(ALICE);
         Musician editedAlice = new MusicianBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        uniqueMusicianList.setPerson(ALICE, editedAlice);
+        uniqueMusicianList.setMusician(ALICE, editedAlice);
         UniqueMusicianList expectedUniqueMusicianList = new UniqueMusicianList();
         expectedUniqueMusicianList.add(editedAlice);
         assertEquals(expectedUniqueMusicianList, uniqueMusicianList);
     }
 
     @Test
-    public void setPerson_editedPersonHasDifferentIdentity_success() {
+    public void setMusician_editedMusicianHasDifferentIdentity_success() {
         uniqueMusicianList.add(ALICE);
-        uniqueMusicianList.setPerson(ALICE, BOB);
+        uniqueMusicianList.setMusician(ALICE, BOB);
         UniqueMusicianList expectedUniqueMusicianList = new UniqueMusicianList();
         expectedUniqueMusicianList.add(BOB);
         assertEquals(expectedUniqueMusicianList, uniqueMusicianList);
     }
 
     @Test
-    public void setPerson_editedPersonHasNonUniqueIdentity_throwsDuplicatePersonException() {
+    public void setMusician_editedMusicianHasNonUniqueIdentity_throwsDuplicateMusicianException() {
         uniqueMusicianList.add(ALICE);
         uniqueMusicianList.add(BOB);
-        assertThrows(DuplicateMusicianException.class, () -> uniqueMusicianList.setPerson(ALICE, BOB));
+        assertThrows(DuplicateMusicianException.class, () -> uniqueMusicianList.setMusician(ALICE, BOB));
     }
 
     @Test
-    public void remove_nullPerson_throwsNullPointerException() {
+    public void remove_nullMusician_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueMusicianList.remove(null));
     }
 
     @Test
-    public void remove_personDoesNotExist_throwsPersonNotFoundException() {
+    public void remove_musicianDoesNotExist_throwsMusicianNotFoundException() {
         assertThrows(MusicianNotFoundException.class, () -> uniqueMusicianList.remove(ALICE));
     }
 
     @Test
-    public void remove_existingPerson_removesPerson() {
+    public void remove_existingMusician_removesMusician() {
         uniqueMusicianList.add(ALICE);
         uniqueMusicianList.remove(ALICE);
         UniqueMusicianList expectedUniqueMusicianList = new UniqueMusicianList();
@@ -128,38 +128,39 @@ public class UniqueMusicianListTest {
     }
 
     @Test
-    public void setPersons_nullUniquePersonList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueMusicianList.setPersons((UniqueMusicianList) null));
+    public void setMusicians_nullUniqueMusicianList_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueMusicianList.setMusicians((UniqueMusicianList) null));
     }
 
     @Test
-    public void setPersons_uniquePersonList_replacesOwnListWithProvidedUniquePersonList() {
+    public void setMusicians_uniqueMusicianList_replacesOwnListWithProvidedUniqueMusicianList() {
         uniqueMusicianList.add(ALICE);
         UniqueMusicianList expectedUniqueMusicianList = new UniqueMusicianList();
         expectedUniqueMusicianList.add(BOB);
-        uniqueMusicianList.setPersons(expectedUniqueMusicianList);
+        uniqueMusicianList.setMusicians(expectedUniqueMusicianList);
         assertEquals(expectedUniqueMusicianList, uniqueMusicianList);
     }
 
     @Test
-    public void setPersons_nullList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueMusicianList.setPersons((List<Musician>) null));
+    public void setMusicians_nullList_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueMusicianList.setMusicians((List<Musician>) null));
     }
 
     @Test
-    public void setPersons_list_replacesOwnListWithProvidedList() {
+    public void setMusicians_list_replacesOwnListWithProvidedList() {
         uniqueMusicianList.add(ALICE);
         List<Musician> musicianList = Collections.singletonList(BOB);
-        uniqueMusicianList.setPersons(musicianList);
+        uniqueMusicianList.setMusicians(musicianList);
         UniqueMusicianList expectedUniqueMusicianList = new UniqueMusicianList();
         expectedUniqueMusicianList.add(BOB);
         assertEquals(expectedUniqueMusicianList, uniqueMusicianList);
     }
 
     @Test
-    public void setPersons_listWithDuplicatePersons_throwsDuplicatePersonException() {
+    public void setMusicians_listWithDuplicateMusicians_throwsDuplicateMusicianException() {
         List<Musician> listWithDuplicateMusicians = Arrays.asList(ALICE, ALICE);
-        assertThrows(DuplicateMusicianException.class, () -> uniqueMusicianList.setPersons(listWithDuplicateMusicians));
+        assertThrows(DuplicateMusicianException.class,
+                () -> uniqueMusicianList.setMusicians(listWithDuplicateMusicians));
     }
 
     @Test
