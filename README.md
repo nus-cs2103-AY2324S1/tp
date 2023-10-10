@@ -4,7 +4,7 @@
 
 * This is **a vocabulary memorizing project for all language learners**.<br>
 * This project is designed to assist language learners in memorizing words efficiently using a scientific approach based on the **Ebbinghaus Forgetting Curve**.
-  * The app provides a command-line interface (CLI) for users to interact with.
+  * The app provides a  command-line interface (CLI) for users to interact with.
   * It schedules word revision sessions at specific times to maximize word retention.
 * The project is based on a software project for a desktop application (called _AddressBook_) used for managing contact details.
   * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC) than what students usually write in beginner-level SE modules, without being overwhelmingly big.
