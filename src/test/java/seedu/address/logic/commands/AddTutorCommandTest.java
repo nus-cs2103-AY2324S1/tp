@@ -25,6 +25,9 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
+/**
+ * Contains tests for {@code AddTutorCommand}.
+ */
 public class AddTutorCommandTest {
 
     @Test

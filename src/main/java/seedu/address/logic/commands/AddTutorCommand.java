@@ -34,7 +34,7 @@ public class AddTutorCommand extends Command {
     private final Person toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddTutorCommand to add the specified {@code Person}
      */
     public AddTutorCommand(Person person) {
         requireNonNull(person);
