@@ -4,9 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTOR_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -25,7 +28,7 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
  * Contains helper methods for testing commands.
  */
 public class CommandTestUtil {
-
+    /* Tutor related */
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_PHONE_AMY = "11111111";
@@ -54,6 +57,26 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
+    /* Schedule related */
+    public static final String VALID_TUTOR_INDEX_ONE = "1";
+    public static final String VALID_TUTOR_INDEX_TWO = "2";
+    public static final String VALID_START_TIME_ONE = "2023-01-01T09:00:00";
+    public static final String VALID_START_TIME_TWO = "2023-01-02T20:00:00";
+    public static final String VALID_END_TIME_ONE = "2023-01-01T11:00:00";
+    public static final String VALID_END_TIME_TWO = "2023-01-02T22:00:00";
+
+    public static final String TUTOR_INDEX_DESC_ONE = " " + PREFIX_TUTOR_INDEX + VALID_TUTOR_INDEX_ONE;
+    public static final String TUTOR_INDEX_DESC_TWO = " " + PREFIX_TUTOR_INDEX + VALID_TUTOR_INDEX_TWO;
+    public static final String START_TIME_DESC_ONE = " " + PREFIX_START_TIME + VALID_START_TIME_ONE;
+    public static final String START_TIME_DESC_TWO = " " + PREFIX_START_TIME + VALID_START_TIME_TWO;
+    public static final String END_TIME_DESC_ONE = " " + PREFIX_END_TIME + VALID_END_TIME_ONE;
+    public static final String END_TIME_DESC_TWO = " " + PREFIX_END_TIME + VALID_END_TIME_TWO;
+
+    public static final String INVALID_TUTOR_INDEX = " " + PREFIX_TUTOR_INDEX + "-1"; // negative indices not allowed
+    public static final String INVALID_START_TIME = " " + PREFIX_START_TIME + "2023-01-01 09:00"; // missing 'T'
+    public static final String INVALID_END_TIME = " " + PREFIX_END_TIME + "2023-01-01T1100"; // missing ':'
+
+    /* Others */
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
@@ -75,7 +98,7 @@ public class CommandTestUtil {
      * - the {@code actualModel} matches {@code expectedModel}
      */
     public static void assertCommandSuccess(Command command, Model actualModel, CommandResult expectedCommandResult,
-            Model expectedModel) {
+                                            Model expectedModel) {
         try {
             CommandResult result = command.execute(actualModel);
             assertEquals(expectedCommandResult, result);
@@ -90,7 +113,7 @@ public class CommandTestUtil {
      * that takes a string {@code expectedMessage}.
      */
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
-            Model expectedModel) {
+                                            Model expectedModel) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
@@ -111,6 +134,7 @@ public class CommandTestUtil {
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
     }
+
     /**
      * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
      * {@code model}'s address book.

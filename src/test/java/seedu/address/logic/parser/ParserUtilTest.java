@@ -43,9 +43,9 @@ public class ParserUtilTest {
     /* Schedule related */
     private static final String INVALID_TUTOR_INDEX_STRING_1 = "-1";
     private static final String INVALID_TUTOR_INDEX_STRING_2 = "0";
-    private static final String INVALID_TIME_STRING_1 = "2023-12-12 44:44";
+    private static final String INVALID_TIME_STRING_1 = "2023-12-12T44:44";
     private static final String INVALID_TIME_STRING_2 = "2023-12-12 10:00";
-    private static final String INVALID_TIME_STRING_3 = "2023-15-12 10:00";
+    private static final String INVALID_TIME_STRING_3 = "2023-15-12T10:00";
 
     private static final String VALID_TUTOR_INDEX_STRING = "1";
     private static final Integer VALID_TUTOR_INDEX_VALUE = 1;
