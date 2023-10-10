@@ -31,7 +31,7 @@ public class AddMeetingCommandParser implements Parser<AddMeetingCommand> {
      */
     public AddMeetingCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_TITLE, PREFIX_LOCATION, PREFIX_START, PREFIX_END, PREFIX_NAME);
+                ArgumentTokenizer.tokenize(args, PREFIX_TITLE, PREFIX_LOCATION, PREFIX_START, PREFIX_END);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_TITLE, PREFIX_LOCATION, PREFIX_START, PREFIX_END)
                 || !argMultimap.getPreamble().isEmpty()) {

@@ -27,14 +27,11 @@ public class AddMeetingCommand extends Command {
             + PREFIX_LOCATION + "LOCATION "
             + PREFIX_START + "START "
             + PREFIX_END + "END "
-            + "[" + PREFIX_NAME + "ATTENDEES]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TITLE + "Meeting with friends "
             + PREFIX_LOCATION + "Starbucks "
             + PREFIX_START + "18.10.2023 1200 "
-            + PREFIX_END + "18.10.2023 1400 "
-            + PREFIX_NAME + "John Doe "
-            + PREFIX_NAME + "Dohn Joe";
+            + PREFIX_END + "18.10.2023 1400 ";
 
     public static final String MESSAGE_SUCCESS = "New meeting added: %1$s";
     public static final String MESSAGE_DUPLICATE_MEETING = "This meeting already exists in the address book";
