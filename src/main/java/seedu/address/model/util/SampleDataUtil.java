@@ -27,23 +27,36 @@ public class SampleDataUtil {
     public static Person[] getSamplePersons() {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                new Remark(""),
-                getTagSet("friends")),
+                        new Remark(""),
+                        getTagSet("friends")),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                new Remark(""),
-                getTagSet("colleagues", "friends")),
+                        new Remark(""),
+                        getTagSet("colleagues", "friends")),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                new Remark(""),
-                getTagSet("neighbours")),
+                        new Remark(""),
+                        getTagSet("neighbours")),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                new Remark(""),
-                getTagSet("family")),
+                        new Remark(""),
+                        getTagSet("family")),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                new Remark(""),
-                getTagSet("classmates")),
+                        new Remark(""),
+                        getTagSet("classmates")),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                new Remark(""),
-                getTagSet("colleagues"))
+                        new Remark(""),
+                        getTagSet("colleagues"))
+        };
+    }
+
+    public static Meeting[] getSampleMeetings() {
+        return new Meeting[] {
+            new Meeting(new Title("Test Meeting 1"), new Location("Room 1"),
+                    LocalDateTime.parse("02.10.2023 1000", FORMAT),
+                    LocalDateTime.parse("03.10.2023 1000", FORMAT),
+                    getAttendeeSet("Alex Yeoh")),
+            new Meeting(new Title("Test Meeting 2"), new Location("Room 2"),
+                    LocalDateTime.parse("02.10.2023 1000", FORMAT),
+                    LocalDateTime.parse("02.10.2023 1000", FORMAT),
+                    getAttendeeSet()),
         };
     }
 

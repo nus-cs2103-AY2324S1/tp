@@ -182,6 +182,4 @@ public class UniqueMeetingListTest {
     public void toStringMethod() {
         assertEquals(uniqueMeetingList.asUnmodifiableObservableList().toString(), uniqueMeetingList.toString());
     }
-
-
 }

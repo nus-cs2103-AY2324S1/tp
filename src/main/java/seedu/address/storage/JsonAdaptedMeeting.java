@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -40,6 +41,7 @@ class JsonAdaptedMeeting {
     public JsonAdaptedMeeting(@JsonProperty("title") String title, @JsonProperty("location") String location,
                              @JsonProperty("start") String start, @JsonProperty("end") String end,
                              @JsonProperty("attendees") List<JsonAdaptedAttendee> attendees) {
+
         this.title = title;
         this.location = location;
         this.start = start;
@@ -78,7 +80,7 @@ class JsonAdaptedMeeting {
                     Title.class.getSimpleName()));
         }
         if (!Title.isValidTitle(title)) {
-            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(Title.MESSAGE_CONSTRAINTS);
         }
         final Title modelTitle = new Title(title);
 
@@ -87,7 +89,7 @@ class JsonAdaptedMeeting {
                     Location.class.getSimpleName()));
         }
         if (!Location.isValidLocation(location)) {
-            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(Location.MESSAGE_CONSTRAINTS);
         }
         final Location modelLocation = new Location(location);
 
@@ -95,7 +97,11 @@ class JsonAdaptedMeeting {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     LocalDateTime.class.getSimpleName()));
         }
-        if (!MeetingTime.isValidMeetingTime(LocalDateTime.parse(start), LocalDateTime.parse(end))) {
+        try {
+            if (!MeetingTime.isValidMeetingTime(LocalDateTime.parse(start), LocalDateTime.parse(end))) {
+                throw new IllegalValueException(MeetingTime.MESSAGE_CONSTRAINTS);
+            }
+        } catch (DateTimeParseException e) {
             throw new IllegalValueException(MeetingTime.MESSAGE_CONSTRAINTS);
         }
         final LocalDateTime modelStart = LocalDateTime.parse(start);
