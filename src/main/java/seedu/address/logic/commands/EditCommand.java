@@ -21,8 +21,11 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.musician.*;
+import seedu.address.model.musician.Address;
+import seedu.address.model.musician.Email;
 import seedu.address.model.musician.Musician;
+import seedu.address.model.musician.Name;
+import seedu.address.model.musician.Phone;
 import seedu.address.model.tag.Tag;
 
 /**

@@ -78,7 +78,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Replaces the given musician {@code target} in the list with {@code editedMusician}.
      * {@code target} must exist in the address book.
-     * The musician identity of {@code editedMusician} must not be the same as another existing musician in the address book.
+     * The musician identity of {@code editedMusician} must not be the same as another existing musician in the
+     * address book.
      */
     public void setPerson(Musician target, Musician editedMusician) {
         requireNonNull(editedMusician);

@@ -13,10 +13,11 @@ import seedu.address.model.musician.exceptions.MusicianNotFoundException;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
- * A musician is considered unique by comparing using {@code Musician#isSamePerson(Musician)}. As such, adding and updating of
- * persons uses Musician#isSamePerson(Musician) for equality so as to ensure that the musician being added or updated is
- * unique in terms of identity in the UniqueMusicianList. However, the removal of a musician uses Musician#equals(Object) so
- * as to ensure that the musician with exactly the same fields will be removed.
+ * A musician is considered unique by comparing using {@code Musician#isSamePerson(Musician)}.
+ * As such, adding and updating of persons uses Musician#isSamePerson(Musician) for equality
+ * so as to ensure that the musician being added or updated is unique in terms of identity in the UniqueMusicianList.
+ * However, the removal of a musician uses Musician#equals(Object) so as to ensure that
+ * the musician with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
