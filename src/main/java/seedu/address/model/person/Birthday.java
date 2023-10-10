@@ -2,6 +2,9 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static java.util.Objects.requireNonNull;
+import java.time.LocalDate;
+
+import java.time.format.DateTimeFormatter;
 
 public class Birthday {
 
@@ -9,7 +12,8 @@ public class Birthday {
             "Birthdays should only contain numbers, and it should be in yyyy-MM-dd format";
     
     public static final String VALIDATION_REGEX = "\\d{4}-\\d{2}-\\d{2}";
-    public final String value;
+//    public final String value;
+    public final LocalDate value;
     /**
      * Constructs a {@code Birthday}.
      *
@@ -19,7 +23,13 @@ public class Birthday {
     public Birthday(String birthday) {
         requireNonNull(birthday);
         checkArgument(isValidBirthday(birthday), MESSAGE_CONSTRAINTS);
-        value = birthday;
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate parsedDate = LocalDate.parse(birthday, formatter);
+            this.value = parsedDate;
+        } catch (java.time.format.DateTimeParseException e) {
+            throw new IllegalArgumentException(e);
+        }
     }
     
     /**
@@ -31,7 +41,7 @@ public class Birthday {
     
     @Override
     public String toString() {
-        return value;
+        return value.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
     
     @Override
