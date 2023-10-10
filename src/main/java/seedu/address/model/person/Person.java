@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.tag.Mod;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -25,16 +26,19 @@ public class Person {
     private final Telegram telegram;
     private final Set<Tag> tags = new HashSet<>();
 
+    private final Set<Mod> mods = new HashSet<>();
+
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Telegram telegram, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, telegram, tags);
+    public Person(Name name, Phone phone, Email email, Telegram telegram, Set<Tag> tags, Set<Mod> mods) {
+        requireAllNonNull(name, phone, email, telegram, tags, mods);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.telegram = telegram;
         this.tags.addAll(tags);
+        this.mods.addAll(mods);
     }
 
     public Name getName() {
@@ -59,6 +63,14 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Returns an immutable mod set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Mod> getMods() {
+        return Collections.unmodifiableSet(mods);
     }
 
     /**
@@ -94,13 +106,14 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && telegram.equals(otherPerson.telegram)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && mods.equals(otherPerson.mods);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, telegram, tags);
+        return Objects.hash(name, phone, email, telegram, tags, mods);
     }
 
     @Override
@@ -111,6 +124,7 @@ public class Person {
                 .add("email", email)
                 .add("telegram", telegram)
                 .add("tags", tags)
+                .add("mods", mods)
                 .toString();
     }
 

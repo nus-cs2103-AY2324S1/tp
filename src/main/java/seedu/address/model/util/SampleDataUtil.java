@@ -11,6 +11,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Telegram;
+import seedu.address.model.tag.Mod;
 import seedu.address.model.tag.Tag;
 
 
@@ -22,22 +23,28 @@ public class SampleDataUtil {
         return new Person[]{
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                         new Telegram("@alexyeoh"),
-                        getTagSet("friends")),
+                        getTagSet("friends"),
+                        getModSet("CS2103T")),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                         new Telegram("@berrrrrnice"),
-                        getTagSet("colleagues", "friends")),
+                        getTagSet("colleagues", "friends"),
+                        getModSet("CS2103T")),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                         new Telegram("@heyimcharlotte"),
-                        getTagSet("neighbours")),
+                        getTagSet("neighbours"),
+                        getModSet("CS2103T")),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                         new Telegram("@davidli123"),
-                        getTagSet("family")),
+                        getTagSet("family"),
+                        getModSet("CS2103T")),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                         new Telegram("@irfannn"),
-                        getTagSet("classmates")),
+                        getTagSet("classmates"),
+                        getModSet("CS1231S")),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                         new Telegram("@rollieroy"),
-                        getTagSet("colleagues"))
+                        getTagSet("colleagues"),
+                        getModSet("CS1231S"))
         };
     }
 
@@ -58,4 +65,12 @@ public class SampleDataUtil {
                 .collect(Collectors.toSet());
     }
 
+    /**
+     * Returns a mod set containing the list of strings given.
+     */
+    public static Set<Mod> getModSet(String... strings) {
+        return Arrays.stream(strings)
+                .map(Mod::new)
+                .collect(Collectors.toSet());
+    }
 }

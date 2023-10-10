@@ -5,42 +5,49 @@
     "phone" : "94351253",
     "email" : "alice@example.com",
     "telegram": "@aliceheyhey",
-    "tags" : [ "friends" ]
+    "tags" : [ ],
+    "mods" : [ ]
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "telegram": "@bensonnn123",
-    "tags" : [ "owesMoney", "friends" ]
+    "tags" : [ "owesMoney", "friends" ],
+    "mods" : [ "CS1231", "CS2103T" ]
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "telegram": "@carlkurz",
-    "tags" : [ ]
+    "tags" : [ ],
+    "mods" : [ ]
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "telegram": "@danielmeier",
-    "tags" : [ "friends" ]
+    "tags" : [ "friends" ],
+    "mods" : [ ]
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
     "email" : "werner@example.com",
     "telegram": "@hiitselle",
-    "tags" : [ ]
+    "tags" : [ ],
+    "mods" : [ ]
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
     "email" : "lydia@example.com",
     "telegram": "@imfionaa",
-    "tags" : [ ]
+    "tags" : [ ],
+    "mods" : [ ]
   }, {
     "name" : "George Best",
     "phone" : "9482442",
     "email" : "anna@example.com",
     "telegram": "@georgiey",
-    "tags" : [ ]
+    "tags" : [ ],
+    "mods" : [ ]
   } ]
 }
