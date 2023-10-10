@@ -294,7 +294,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | frontdesk worker                               | find a patient by name                             | locate details of persons without having to go through the entire list   |
 | `* * *`  | frontdesk worker                               | delete a patient entry                             | clean and update the database when patient no longer exist               |
 | `* * *`  | frontdesk worker                               | edit patient entries                               | update their details, especially for upcoming appointment dates          |
-|----------|------------------------------------------------|----------------------------------------------------|--------------------------------------------------------------------------|
 | `* * `   | a new user of the app                          | view hints on commonly used commands               | be familiar with the app as soon as possible                             |
 | `* * `   | a new user of the app                          | view preloaded sample data                         | know how the basic UI look like when it is populated                     |
 | `* * `   | frontdesk worker                               | use app with shortcuts                             | get my task done very quickly                                            |
@@ -302,13 +301,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * `   | frontdesk worker                               | see conflicts in appointment schedules             | seamlessly schedule appointments for patients                            |
 | `* * `   | frontdesk worker                               | reminder when patient's appointment is coming soon | call and remind patients accordingly                                     |
 | `* * `   | healthcare provider                            | document patient encounters(ie. exam notes)        | maintain up-to-date records of patient information                       |
-|----------|------------------------------------------------|----------------------------------------------------|--------------------------------------------------------------------------|
 | `* `     | a new user of the app                          | have physical UI Buttons                           | use to execute tasks before I'm familiar with shortcuts                  |
 | `* `     | frontdesk worker                               | have a very optimised app                          | do my task and have data reading almost instantly (O(1))                 |
 | `* `     | frontdesk worker                               | add tags to patients                               | view and filter patients accordingly                                     |
 | `* `     | frontdesk worker                               | leverage on database statistics                    | analyse data (ie. how many appointments booked/ month for doctors)       |
 | `* `     | frontdesk worker                               | save back-up or archive patient details somewhere  | maintain a fast application while still having data securely stored      |
-|----------|------------------------------------------------|----------------------------------------------------|--------------------------------------------------------------------------|
 
 
 *{More to be added}*
