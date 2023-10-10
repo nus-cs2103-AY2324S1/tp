@@ -159,8 +159,8 @@ public class UniqueMusicianListTest {
     @Test
     public void setMusicians_listWithDuplicateMusicians_throwsDuplicateMusicianException() {
         List<Musician> listWithDuplicateMusicians = Arrays.asList(ALICE, ALICE);
-        assertThrows(DuplicateMusicianException.class,
-                () -> uniqueMusicianList.setMusicians(listWithDuplicateMusicians));
+        assertThrows(DuplicateMusicianException.class, () -> uniqueMusicianList.setMusicians(
+                listWithDuplicateMusicians));
     }
 
     @Test
