@@ -193,8 +193,13 @@ public class ModelManager implements Model {
         return output;
     }
 
-    @Override
-    public void assignGroup(Person person, Group group) throws CommandException {
+    /**
+     * Assign person to group
+     * @param person person to be grouped
+     * @param group group in consideration
+     * @throws CommandException if person has already been assigned to group
+     */
+    private void assignGroup(Person person, Group group) throws CommandException {
        group.addPerson(person);
        person.addGroup(group);
     }

@@ -122,6 +122,5 @@ public interface Model {
      * @param person will store group reference
      * @param group will store person reference
      */
-    public void assignGroup(Person person, Group group) throws CommandException;
 
 }
