@@ -15,8 +15,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.musician.exceptions.DuplicatePersonException;
-import seedu.address.model.musician.exceptions.PersonNotFoundException;
+import seedu.address.model.musician.exceptions.DuplicateMusicianException;
+import seedu.address.model.musician.exceptions.MusicianNotFoundException;
 import seedu.address.testutil.PersonBuilder;
 
 public class UniqueMusicianListTest {
@@ -55,7 +55,7 @@ public class UniqueMusicianListTest {
     @Test
     public void add_duplicatePerson_throwsDuplicatePersonException() {
         uniqueMusicianList.add(ALICE);
-        assertThrows(DuplicatePersonException.class, () -> uniqueMusicianList.add(ALICE));
+        assertThrows(DuplicateMusicianException.class, () -> uniqueMusicianList.add(ALICE));
     }
 
     @Test
@@ -70,7 +70,7 @@ public class UniqueMusicianListTest {
 
     @Test
     public void setPerson_targetPersonNotInList_throwsPersonNotFoundException() {
-        assertThrows(PersonNotFoundException.class, () -> uniqueMusicianList.setPerson(ALICE, ALICE));
+        assertThrows(MusicianNotFoundException.class, () -> uniqueMusicianList.setPerson(ALICE, ALICE));
     }
 
     @Test
@@ -106,7 +106,7 @@ public class UniqueMusicianListTest {
     public void setPerson_editedPersonHasNonUniqueIdentity_throwsDuplicatePersonException() {
         uniqueMusicianList.add(ALICE);
         uniqueMusicianList.add(BOB);
-        assertThrows(DuplicatePersonException.class, () -> uniqueMusicianList.setPerson(ALICE, BOB));
+        assertThrows(DuplicateMusicianException.class, () -> uniqueMusicianList.setPerson(ALICE, BOB));
     }
 
     @Test
@@ -116,7 +116,7 @@ public class UniqueMusicianListTest {
 
     @Test
     public void remove_personDoesNotExist_throwsPersonNotFoundException() {
-        assertThrows(PersonNotFoundException.class, () -> uniqueMusicianList.remove(ALICE));
+        assertThrows(MusicianNotFoundException.class, () -> uniqueMusicianList.remove(ALICE));
     }
 
     @Test
@@ -159,7 +159,7 @@ public class UniqueMusicianListTest {
     @Test
     public void setPersons_listWithDuplicatePersons_throwsDuplicatePersonException() {
         List<Musician> listWithDuplicateMusicians = Arrays.asList(ALICE, ALICE);
-        assertThrows(DuplicatePersonException.class, () -> uniqueMusicianList.setPersons(listWithDuplicateMusicians));
+        assertThrows(DuplicateMusicianException.class, () -> uniqueMusicianList.setPersons(listWithDuplicateMusicians));
     }
 
     @Test

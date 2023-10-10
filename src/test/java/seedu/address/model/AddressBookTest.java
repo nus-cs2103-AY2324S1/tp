@@ -19,7 +19,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.musician.Musician;
-import seedu.address.model.musician.exceptions.DuplicatePersonException;
+import seedu.address.model.musician.exceptions.DuplicateMusicianException;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddressBookTest {
@@ -51,7 +51,7 @@ public class AddressBookTest {
         List<Musician> newMusicians = Arrays.asList(ALICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newMusicians);
 
-        assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicateMusicianException.class, () -> addressBook.resetData(newData));
     }
 
     @Test

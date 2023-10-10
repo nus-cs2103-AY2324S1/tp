@@ -8,8 +8,8 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.musician.exceptions.DuplicatePersonException;
-import seedu.address.model.musician.exceptions.PersonNotFoundException;
+import seedu.address.model.musician.exceptions.DuplicateMusicianException;
+import seedu.address.model.musician.exceptions.MusicianNotFoundException;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
@@ -43,7 +43,7 @@ public class UniqueMusicianList implements Iterable<Musician> {
     public void add(Musician toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateMusicianException();
         }
         internalList.add(toAdd);
     }
@@ -58,11 +58,11 @@ public class UniqueMusicianList implements Iterable<Musician> {
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            throw new PersonNotFoundException();
+            throw new MusicianNotFoundException();
         }
 
         if (!target.isSamePerson(editedMusician) && contains(editedMusician)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateMusicianException();
         }
 
         internalList.set(index, editedMusician);
@@ -75,7 +75,7 @@ public class UniqueMusicianList implements Iterable<Musician> {
     public void remove(Musician toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
-            throw new PersonNotFoundException();
+            throw new MusicianNotFoundException();
         }
     }
 
@@ -91,7 +91,7 @@ public class UniqueMusicianList implements Iterable<Musician> {
     public void setPersons(List<Musician> musicians) {
         requireAllNonNull(musicians);
         if (!personsAreUnique(musicians)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateMusicianException();
         }
 
         internalList.setAll(musicians);
