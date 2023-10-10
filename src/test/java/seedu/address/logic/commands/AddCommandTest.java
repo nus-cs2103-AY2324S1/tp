@@ -41,7 +41,7 @@ public class AddCommandTest {
 
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validMusician)),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validMusician), modelStub.personsAdded);
+        assertEquals(Arrays.asList(validMusician), modelStub.musiciansAdded);
     }
 
     @Test
@@ -182,18 +182,18 @@ public class AddCommandTest {
      * A Model stub that always accept the musician being added.
      */
     private class ModelStubAcceptingMusicianAdded extends ModelStub {
-        final ArrayList<Musician> personsAdded = new ArrayList<>();
+        final ArrayList<Musician> musiciansAdded = new ArrayList<>();
 
         @Override
         public boolean hasMusician(Musician musician) {
             requireNonNull(musician);
-            return personsAdded.stream().anyMatch(musician::isSamePerson);
+            return musiciansAdded.stream().anyMatch(musician::isSamePerson);
         }
 
         @Override
         public void addMusician(Musician musician) {
             requireNonNull(musician);
-            personsAdded.add(musician);
+            musiciansAdded.add(musician);
         }
 
         @Override
