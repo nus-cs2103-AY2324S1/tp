@@ -4,9 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 /**
  * Represents a Person's NRIC in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidNRIC(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidNric(String)}
  */
-public class NRIC {
+public class Nric {
 
     public static final String MESSAGE_CONSTRAINTS = "NRIC can take any values, and it should not be blank";
 
@@ -19,20 +19,20 @@ public class NRIC {
     public final String value;
 
     /**
-     * Constructs an {@code NRIC}.
+     * Constructs an {@code Nric}.
      *
      * @param nric A valid NRIC.
      */
-    public NRIC(String nric) {
+    public Nric(String nric) {
         requireNonNull(nric);
-        checkArgument(isValidNRIC(nric), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidNric(nric), MESSAGE_CONSTRAINTS);
         value = nric;
     }
 
     /**
      * Returns true if a given string is a valid NRIC.
      */
-    public static boolean isValidNRIC(String test) {
+    public static boolean isValidNric(String test) {
 
         // to add more checks for a valid nric combination
         return test.matches(VALIDATION_REGEX);
@@ -50,12 +50,12 @@ public class NRIC {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof NRIC)) {
+        if (!(other instanceof Nric)) {
             return false;
         }
 
-        NRIC otherNRIC = (NRIC) other;
-        return value.equals(otherNRIC.value);
+        Nric otherNric = (Nric) other;
+        return value.equals(otherNric.value);
     }
 
     @Override

@@ -1,7 +1,6 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
-import java.util.concurrent.Flow;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -56,12 +55,11 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        nric.setText(person.getNRIC().value);
+        nric.setText(person.getNric().value);
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         appointment.setText(person.getAppointment().value);
-//        medicalHistories.setText(person.getMedicalHistories() == null ? "Diabetes" : "Headache");
         person.getMedicalHistories().stream()
                 .sorted(Comparator.comparing(medicalHistory -> medicalHistory.value))
                 .forEach(medicalHistory -> medicalHistories.getChildren().add(new Label(medicalHistory.value)));

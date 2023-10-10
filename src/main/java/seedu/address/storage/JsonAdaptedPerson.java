@@ -14,8 +14,8 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Appointment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.MedicalHistory;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.NRIC;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -64,7 +64,7 @@ class JsonAdaptedPerson {
      */
     public JsonAdaptedPerson(Person source) {
         name = source.getName().fullName;
-        nric = source.getNRIC().value;
+        nric = source.getNric().value;
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
@@ -102,12 +102,12 @@ class JsonAdaptedPerson {
 
         if (nric == null) {
             System.out.println(nric);
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, NRIC.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Nric.class.getSimpleName()));
         }
-        if (!NRIC.isValidNRIC(nric)) {
-            throw new IllegalValueException(NRIC.MESSAGE_CONSTRAINTS);
+        if (!Nric.isValidNric(nric)) {
+            throw new IllegalValueException(Nric.MESSAGE_CONSTRAINTS);
         }
-        final NRIC modelNRIC = new NRIC(nric);
+        final Nric modelNric = new Nric(nric);
 
         if (phone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
@@ -134,7 +134,8 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         if (appointment == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Appointment.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Appointment.class.getSimpleName()));
         }
         if (!Appointment.isValidAppointment(appointment)) {
             throw new IllegalValueException(Appointment.MESSAGE_CONSTRAINTS);
@@ -143,7 +144,7 @@ class JsonAdaptedPerson {
 
         final Set<MedicalHistory> modelMedicalHistories = new HashSet<>(personMedicalHistory);
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelNRIC, modelPhone, modelEmail, modelAddress, modelAppointment,
+        return new Person(modelName, modelNric, modelPhone, modelEmail, modelAddress, modelAppointment,
                 modelMedicalHistories, modelTags);
     }
 
