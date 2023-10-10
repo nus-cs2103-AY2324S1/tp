@@ -33,7 +33,7 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredMusicians = new FilteredList<>(this.addressBook.getPersonList());
+        filteredMusicians = new FilteredList<>(this.addressBook.getMusicianList());
     }
 
     public ModelManager() {

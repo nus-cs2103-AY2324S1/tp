@@ -15,7 +15,7 @@ import seedu.address.model.musician.UniqueMusicianList;
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
-    private final UniqueMusicianList persons;
+    private final UniqueMusicianList musicians;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -23,12 +23,12 @@ public class AddressBook implements ReadOnlyAddressBook {
      *
      * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
      *   among constructors.
-     */
-    {
-        persons = new UniqueMusicianList();
+     */ {
+        musicians = new UniqueMusicianList();
     }
 
-    public AddressBook() {}
+    public AddressBook() {
+    }
 
     /**
      * Creates an AddressBook using the Persons in the {@code toBeCopied}
@@ -44,8 +44,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Replaces the contents of the musician list with {@code musicians}.
      * {@code musicians} must not contain duplicate musicians.
      */
-    public void setPersons(List<Musician> musicians) {
-        this.persons.setPersons(musicians);
+    public void setMusicians(List<Musician> musicians) {
+        this.musicians.setPersons(musicians);
     }
 
     /**
@@ -54,7 +54,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
-        setPersons(newData.getPersonList());
+        setMusicians(newData.getMusicianList());
     }
 
     //// musician-level operations
@@ -64,7 +64,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public boolean hasPerson(Musician musician) {
         requireNonNull(musician);
-        return persons.contains(musician);
+        return musicians.contains(musician);
     }
 
     /**
@@ -72,7 +72,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * The musician must not already exist in the address book.
      */
     public void addPerson(Musician p) {
-        persons.add(p);
+        musicians.add(p);
     }
 
     /**
@@ -84,7 +84,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setPerson(Musician target, Musician editedMusician) {
         requireNonNull(editedMusician);
 
-        persons.setPerson(target, editedMusician);
+        musicians.setPerson(target, editedMusician);
     }
 
     /**
@@ -92,7 +92,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code key} must exist in the address book.
      */
     public void removePerson(Musician key) {
-        persons.remove(key);
+        musicians.remove(key);
     }
 
     //// util methods
@@ -100,13 +100,13 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("persons", persons)
+                .add("musicians", musicians)
                 .toString();
     }
 
     @Override
-    public ObservableList<Musician> getPersonList() {
-        return persons.asUnmodifiableObservableList();
+    public ObservableList<Musician> getMusicianList() {
+        return musicians.asUnmodifiableObservableList();
     }
 
     @Override
@@ -121,11 +121,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         AddressBook otherAddressBook = (AddressBook) other;
-        return persons.equals(otherAddressBook.persons);
+        return musicians.equals(otherAddressBook.musicians);
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return musicians.hashCode();
     }
 }
