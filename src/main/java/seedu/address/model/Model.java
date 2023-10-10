@@ -4,7 +4,10 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import javafx.util.Pair;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
 /**
@@ -79,11 +82,15 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
+    /** Returns an unmodifiable view of the filtered group list */
+    ObservableList<Group> getFilteredGroupList();
+
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
 
     /**
      * Returns true if a group with the same identity as {@code group} exists in the address book.
@@ -101,4 +108,20 @@ public interface Model {
      * {@code key} must exist in the address book.
      */
     public void removeGroup(Group key);
+
+    /**
+     * Assign person to group and return corresponding person and group object in a pair
+     * @param personName String representing person name
+     * @param groupName String representing group name
+     * @return Pair representing Person and Group object of interest
+     */
+    public Pair<Person, Group> groupPerson(String personName, String groupName) throws CommandException;
+
+    /**
+     * Assign person to group
+     * @param person will store group reference
+     * @param group will store person reference
+     */
+    public void assignGroup(Person person, Group group) throws CommandException;
+
 }

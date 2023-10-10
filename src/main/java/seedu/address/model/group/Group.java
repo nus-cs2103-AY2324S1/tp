@@ -1,10 +1,11 @@
-package seedu.address.model;
+package seedu.address.model.group;
 
 import static java.util.Objects.requireNonNull;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
@@ -42,6 +43,15 @@ public class Group {
     }
 
     /**
+     * Check if same group according to name since groupName is unique
+     * @param groupName of interest
+     * @return whether group is the same group
+     */
+    public boolean nameEquals(String groupName) {
+        return this.groupName.equals(groupName);
+    }
+
+    /**
      * Returns if the name of the group is valid.
      * @param name The name of the group
      * @return The validity of the group name.
@@ -74,12 +84,12 @@ public class Group {
      * Adds a person to the list.
      * The person must not already exist in the list.
      */
-    public void add(Person toAdd) {
-        requireNonNull(toAdd);
-        if (contains(toAdd)) {
-            throw new DuplicatePersonException();
+    public void addPerson(Person personToAdd) throws CommandException {
+        requireNonNull(personToAdd);
+        if (contains(personToAdd)) {
+            throw new CommandException(String.format("%s is already in this group: %s", personToAdd.getName().fullName, this.groupName));
         }
-        listOfGroupMates.add(toAdd);
+        listOfGroupMates.add(personToAdd);
     }
 
     @Override
@@ -87,6 +97,10 @@ public class Group {
         return new ToStringBuilder(this)
                 .add("Group name", groupName)
                 .toString();
+    }
+
+    public String groupName() {
+        return this.groupName;
     }
 
 }

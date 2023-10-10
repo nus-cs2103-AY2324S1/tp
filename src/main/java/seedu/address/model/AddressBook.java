@@ -6,6 +6,9 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -98,6 +101,12 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     //// group-level operations
 
+    public void addPersonToGroup(Person person, Group group) {
+        requireNonNull(person);
+        requireNonNull(group);
+        GroupList groups = person.getGroups();
+    }
+
     /**
      * Returns true if a group with the same identity as {@code group} exists in the address book.
      */
@@ -131,11 +140,26 @@ public class AddressBook implements ReadOnlyAddressBook {
                 .toString();
     }
 
+    public Person getPerson(String personName) throws CommandException {
+        // person list get that person object with same name
+       return persons.getPerson(personName);
+    }
+
+    public Group getGroup(String groupName) throws CommandException {
+        // group list get that group object with same name
+        return groups.getGroup(groupName);
+    }
+
+
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
     }
 
+    @Override
+    public ObservableList<Group> getGroupList() {
+        return groups.asUnmodifiableObservableList();
+    }
     @Override
     public boolean equals(Object other) {
         if (other == this) {

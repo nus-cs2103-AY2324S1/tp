@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
-import seedu.address.model.Group;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
 /**
