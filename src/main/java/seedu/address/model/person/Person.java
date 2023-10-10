@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -23,6 +24,7 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private Optional<Birthday> birthday;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -34,6 +36,20 @@ public class Person {
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.birthday = Optional.empty();
+        this.tags.addAll(tags);
+    }
+
+    /**
+     * Constructor including optional fields.
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Optional<Birthday> birthday, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, birthday, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.birthday = birthday;
         this.tags.addAll(tags);
     }
 
@@ -51,6 +67,14 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public void setBirthday(Birthday birthday) {
+        this.birthday = Optional.of(birthday);
+    }
+
+    public Optional<Birthday> getBirthday() {
+        return birthday;
     }
 
     /**
