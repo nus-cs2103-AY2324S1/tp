@@ -382,7 +382,7 @@ Use case ends.
 
 **System:** Flashlingo\
 **Use case:** UC12 – Load data source\
-**Actor:** User\
+**Actor:** user\
 **MSS:**
 1.	User chooses to load a data source at input file-path.
 2.	Flashlingo loads data source and displays success or failure message
