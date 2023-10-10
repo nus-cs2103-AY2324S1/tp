@@ -1,6 +1,8 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -27,30 +29,30 @@ public class TelegramTest {
         // invalid telegram handle
         assertFalse(Telegram.isValidTelegram("")); // empty string
         assertFalse(Telegram.isValidTelegram(" ")); // spaces only
+        assertFalse(Telegram.isValidTelegram("@heymumble_jumbo123blahblahhellohellotestme")); // long address
+        assertFalse(Telegram.isValidTelegram("@s")); // one character
 
         // valid telegram handle
         assertTrue(Telegram.isValidTelegram("@heyanything"));
-        assertTrue(Telegram.isValidTelegram("@s")); // one character
-        assertTrue(Telegram.isValidTelegram("@heymumble_jumbo123blahblahhellohellotestme")); // long address
     }
 
     @Test
     public void equals() {
-        Telegram telegram = new Telegram("Valid Telegram");
+        Telegram telegram = new Telegram("@helloitstele");
 
         // same values -> returns true
-        assertTrue(telegram.equals(new Telegram("Valid Telegram")));
+        assertEquals(telegram, new Telegram("@helloitstele"));
 
         // same object -> returns true
-        assertTrue(telegram.equals(telegram));
+        assertEquals(telegram, telegram);
 
         // null -> returns false
-        assertFalse(telegram.equals(null));
+        assertNotEquals(null, telegram);
 
         // different types -> returns false
-        assertFalse(telegram.equals(5.0f));
+        assertNotEquals(5.0f, telegram, "0.0");
 
         // different values -> returns false
-        assertFalse(telegram.equals(new Telegram("Other Valid Telegram")));
+        assertNotEquals(telegram, new Telegram("@todayisnice"));
     }
 }

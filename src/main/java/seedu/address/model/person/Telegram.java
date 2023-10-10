@@ -9,13 +9,14 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Telegram {
 
-    public static final String MESSAGE_CONSTRAINTS = "Telegram handle can take any values, and it should start with @";
+    public static final String MESSAGE_CONSTRAINTS = "Telegram handle should be between 5-32 characters, "
+            + "and it should start with @";
 
     /*
      * The first character of the telegram handle should be @,
      * blank string should not be a valid input.
      */
-    public static final String VALIDATION_REGEX = "@[^\\s].*";
+    public static final String VALIDATION_REGEX = ".*\\B@(?=\\w{5,32}\\b)[a-zA-Z0-9]+(?:_[a-zA-Z0-9]+)*.*";
 
     public final String value;
 
