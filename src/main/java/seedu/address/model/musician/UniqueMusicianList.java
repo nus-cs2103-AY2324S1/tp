@@ -15,14 +15,14 @@ import seedu.address.model.musician.exceptions.PersonNotFoundException;
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
  * A musician is considered unique by comparing using {@code Musician#isSamePerson(Musician)}. As such, adding and updating of
  * persons uses Musician#isSamePerson(Musician) for equality so as to ensure that the musician being added or updated is
- * unique in terms of identity in the UniquePersonList. However, the removal of a musician uses Musician#equals(Object) so
+ * unique in terms of identity in the UniqueMusicianList. However, the removal of a musician uses Musician#equals(Object) so
  * as to ensure that the musician with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
  * @see Musician#isSamePerson(Musician)
  */
-public class UniquePersonList implements Iterable<Musician> {
+public class UniqueMusicianList implements Iterable<Musician> {
 
     private final ObservableList<Musician> internalList = FXCollections.observableArrayList();
     private final ObservableList<Musician> internalUnmodifiableList =
@@ -79,7 +79,7 @@ public class UniquePersonList implements Iterable<Musician> {
         }
     }
 
-    public void setPersons(UniquePersonList replacement) {
+    public void setPersons(UniqueMusicianList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
@@ -116,12 +116,12 @@ public class UniquePersonList implements Iterable<Musician> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof UniquePersonList)) {
+        if (!(other instanceof UniqueMusicianList)) {
             return false;
         }
 
-        UniquePersonList otherUniquePersonList = (UniquePersonList) other;
-        return internalList.equals(otherUniquePersonList.internalList);
+        UniqueMusicianList otherUniqueMusicianList = (UniqueMusicianList) other;
+        return internalList.equals(otherUniqueMusicianList.internalList);
     }
 
     @Override
