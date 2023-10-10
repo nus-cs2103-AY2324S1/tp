@@ -17,16 +17,16 @@ import seedu.address.model.tag.Tag;
 public class Person {
 
     // Identity fields
-    private final Name name;
-    private final Phone phone;
-    private final Email email;
-    private final Gender gender;
-    private final Ic ic;
+    protected final Name name;
+    protected final Phone phone;
+    protected final Email email;
+    protected final Gender gender;
+    protected final Ic ic;
 
     // Data fields
-    private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
-    private final Remark remark;
+    protected final Address address;
+    protected final Set<Tag> tags = new HashSet<>();
+    protected final Remark remark;
 
     /**
      * Every field must be present and not null.
@@ -90,7 +90,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getIc().equals(getIc());
     }
 
     /**
