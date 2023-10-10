@@ -9,7 +9,9 @@ public class ProjectManagerTest {
 
     @Test
     public void equals() {
-        ProjectManager aliceManager = new ProjectManager(ALICE.getName(), ALICE.getPhone(), ALICE.getEmail(), ALICE.getAddress(), ALICE.getRemark(), ALICE.getTags());
+        ProjectManager aliceManager =
+                new ProjectManager(ALICE.getName(), ALICE.getPhone(), ALICE.getEmail(),
+                        ALICE.getAddress(), ALICE.getRemark(), ALICE.getTags());
 
         // same object -> returns true
         assertTrue(aliceManager.equals(aliceManager));

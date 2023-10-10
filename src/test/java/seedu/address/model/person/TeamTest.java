@@ -9,7 +9,9 @@ public class TeamTest {
 
     @Test
     public void equals() {
-        TeamLeader aliceLeader = new TeamLeader(ALICE.getName(), ALICE.getPhone(), ALICE.getEmail(), ALICE.getAddress(), ALICE.getRemark(), ALICE.getTags());
+        TeamLeader aliceLeader =
+                new TeamLeader(ALICE.getName(), ALICE.getPhone(), ALICE.getEmail(),
+                        ALICE.getAddress(), ALICE.getRemark(), ALICE.getTags());
         Team aliceTeam = new Team(aliceLeader);
 
         // same object -> returns true

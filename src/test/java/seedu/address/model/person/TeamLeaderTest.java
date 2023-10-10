@@ -10,8 +10,12 @@ public class TeamLeaderTest {
 
     @Test
     public void equals() {
-        TeamLeader aliceLeader = new TeamLeader(ALICE.getName(), ALICE.getPhone(), ALICE.getEmail(), ALICE.getAddress(), ALICE.getRemark(), ALICE.getTags());
-        TeamLeader bobLeader = new TeamLeader(BOB.getName(), BOB.getPhone(), BOB.getEmail(), BOB.getAddress(), BOB.getRemark(), BOB.getTags());
+        TeamLeader aliceLeader =
+                new TeamLeader(ALICE.getName(), ALICE.getPhone(), ALICE.getEmail(),
+                ALICE.getAddress(), ALICE.getRemark(), ALICE.getTags());
+        TeamLeader bobLeader =
+                new TeamLeader(BOB.getName(), BOB.getPhone(), BOB.getEmail(),
+                        BOB.getAddress(), BOB.getRemark(), BOB.getTags());
 
         // same object -> returns true
         assertTrue(aliceLeader.equals(aliceLeader));
