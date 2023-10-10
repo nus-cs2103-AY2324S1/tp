@@ -14,7 +14,7 @@ import seedu.address.model.person.Person;
 public class PersonUtil {
 
     /**
-     * Returns an add command string for adding the {@code person}.
+     * Returns an add tutor command string for adding the {@code person}.
      */
     public static String getAddTutorCommand(Person person) {
         return AddTutorCommand.COMMAND_WORD + " " + getPersonDetails(person);

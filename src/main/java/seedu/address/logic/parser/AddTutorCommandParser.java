@@ -15,13 +15,13 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 
 /**
- * Parses input arguments and creates a new AddCommand object
+ * Parses input arguments and creates a new AddTutorCommand object
  */
 public class AddTutorCommandParser implements Parser<AddTutorCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the AddTutorCommand
+     * and returns an AddTutorCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddTutorCommand parse(String args) throws ParseException {
