@@ -36,7 +36,7 @@ public class Messages {
     
     public static final String MESSAGE_Duplicate_Person_Exception = "Operation would result in duplicate persons";
 
-    // Attributes constraints 
+    // Messages associated with Attributes constraints 
     public static final String MESSAGE_NAME_CONSTRAINTS = 
             "Names should only contain alphanumeric characters and spaces, and it should not be blank";
     public static final String MESSAGE_PHONE_CONSTRAINTS =
@@ -55,6 +55,7 @@ public class Messages {
     // alphanumeric and special characters
     public static final String MESSAGE_TAG_CONSTRAINTS = "Tags names should be alphanumeric";
 
+    // Messages associated with Storage
     public static final String MESSAGE_FIELD_MISSING = "Person's %s field is missing!";
     public static final String MESSAGE_CONTAIN_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
 }
