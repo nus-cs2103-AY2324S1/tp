@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTOR_INDEX;
@@ -25,16 +26,35 @@ public class AddScheduleCommand extends Command {
             + PREFIX_START_TIME + "2023-09-15T09:00:00 "
             + PREFIX_END_TIME + "2023-09-15T11:00:00";
 
+    private final Schedule toAdd;
+
     /**
      * Creates an AddScheduleCommand to add the specified {@code Schedule}
      */
     public AddScheduleCommand(Schedule schedule) {
+        requireNonNull(schedule);
+        toAdd = schedule;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         // Temporary value for parser
         return new CommandResult("Temp");
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof AddScheduleCommand)) {
+            return false;
+        }
+
+        AddScheduleCommand otherAddScheduleCommand = (AddScheduleCommand) other;
+        return toAdd.equals(otherAddScheduleCommand.toAdd);
     }
 
 }

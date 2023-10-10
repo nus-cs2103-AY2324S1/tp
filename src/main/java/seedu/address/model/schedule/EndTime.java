@@ -10,6 +10,8 @@ import java.time.format.DateTimeParseException;
  * Guarantees: immutable; is valid as declared in {@link #isValidEndTime(String)}
  */
 public class EndTime {
+    public static final String DATETIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss";
+
     public static final String MESSAGE_CONSTRAINTS =
             "EndTime should only contain a valid date and time in the format 2023-09-15T09:00:00, and it should not "
                     + "be blank";

@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddScheduleCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -25,9 +26,12 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.schedule.Schedule;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.ScheduleBuilder;
+import seedu.address.testutil.ScheduleUtil;
 
 public class AddressBookParserTest {
 
@@ -89,9 +93,17 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_addSchedule() throws Exception {
+        Schedule schedule = new ScheduleBuilder().build();
+        AddScheduleCommand command =
+                (AddScheduleCommand) parser.parseCommand(ScheduleUtil.getAddScheduleCommand(schedule));
+        assertEquals(new AddScheduleCommand(schedule), command);
+    }
+
+    @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand(""));
+                -> parser.parseCommand(""));
     }
 
     @Test
