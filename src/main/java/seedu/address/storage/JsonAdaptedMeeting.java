@@ -17,9 +17,7 @@ import seedu.address.model.meeting.Location;
 import seedu.address.model.meeting.Meeting;
 import seedu.address.model.meeting.MeetingTime;
 import seedu.address.model.meeting.Title;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
 
 /**
  * Jackson-friendly version of {@link Person}.
