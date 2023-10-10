@@ -11,8 +11,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Appointment;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.MedicalHistory;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.NRIC;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -25,22 +28,32 @@ class JsonAdaptedPerson {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
 
     private final String name;
+    private final String nric;
     private final String phone;
     private final String email;
     private final String address;
+    private final String appointment;
+    private final List<JsonAdaptedMedicalHistory> medicalHistories = new ArrayList<>();
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
+    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("nric") String nric,
+                             @JsonProperty("phone") String phone, @JsonProperty("email") String email,
+                             @JsonProperty("address") String address, @JsonProperty("appointment") String appointment,
+                             @JsonProperty("medicalHistories") List<JsonAdaptedMedicalHistory> medicalHistories,
             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
+        this.nric = nric;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.appointment = appointment;
+        if (medicalHistories != null) {
+            this.medicalHistories.addAll(medicalHistories);
+        }
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -51,9 +64,14 @@ class JsonAdaptedPerson {
      */
     public JsonAdaptedPerson(Person source) {
         name = source.getName().fullName;
+        nric = source.getNRIC().value;
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        appointment = source.getAppointment().value;
+        medicalHistories.addAll(source.getMedicalHistories().stream()
+                .map(JsonAdaptedMedicalHistory::new)
+                .collect(Collectors.toList()));
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -69,6 +87,10 @@ class JsonAdaptedPerson {
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
         }
+        final List<MedicalHistory> personMedicalHistory = new ArrayList<>();
+        for (JsonAdaptedMedicalHistory medicalHistory : medicalHistories) {
+            personMedicalHistory.add(medicalHistory.toModelType());
+        }
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
@@ -77,6 +99,15 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
         final Name modelName = new Name(name);
+
+        if (nric == null) {
+            System.out.println(nric);
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, NRIC.class.getSimpleName()));
+        }
+        if (!NRIC.isValidNRIC(nric)) {
+            throw new IllegalValueException(NRIC.MESSAGE_CONSTRAINTS);
+        }
+        final NRIC modelNRIC = new NRIC(nric);
 
         if (phone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
@@ -102,8 +133,18 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        if (appointment == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Appointment.class.getSimpleName()));
+        }
+        if (!Appointment.isValidAppointment(appointment)) {
+            throw new IllegalValueException(Appointment.MESSAGE_CONSTRAINTS);
+        }
+        final Appointment modelAppointment = new Appointment(appointment);
+
+        final Set<MedicalHistory> modelMedicalHistories = new HashSet<>(personMedicalHistory);
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Person(modelName, modelNRIC, modelPhone, modelEmail, modelAddress, modelAppointment,
+                modelMedicalHistories, modelTags);
     }
 
 }

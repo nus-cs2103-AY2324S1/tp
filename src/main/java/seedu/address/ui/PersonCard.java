@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.concurrent.Flow;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -31,15 +32,21 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
+    private Label nric;
+    @FXML
     private Label id;
     @FXML
     private Label phone;
     @FXML
     private Label address;
     @FXML
+    private Label appointment;
+    @FXML
     private Label email;
     @FXML
     private FlowPane tags;
+    @FXML
+    private FlowPane medicalHistories;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -49,9 +56,15 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
+        nric.setText(person.getNRIC().value);
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+        appointment.setText(person.getAppointment().value);
+//        medicalHistories.setText(person.getMedicalHistories() == null ? "Diabetes" : "Headache");
+        person.getMedicalHistories().stream()
+                .sorted(Comparator.comparing(medicalHistory -> medicalHistory.value))
+                .forEach(medicalHistory -> medicalHistories.getChildren().add(new Label(medicalHistory.value)));
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
