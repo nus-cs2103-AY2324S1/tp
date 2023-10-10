@@ -6,8 +6,8 @@ package seedu.address.model.person;
 public class TelegramHandle {
 
     public static final String MESSAGE_CONSTRAINTS = "Telegram handles should only contain alphanumeric characters "
-            + "and spaces, and it should not be blank";
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+            + "and spaces, and it should not be blank. It also should start with '@'";
+    public static final String VALIDATION_REGEX = "@[\\p{Alnum}][\\p{Alnum} ]*";
 
     public final String value;
 

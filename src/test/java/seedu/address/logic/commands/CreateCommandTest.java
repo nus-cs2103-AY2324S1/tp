@@ -58,24 +58,24 @@ public class CreateCommandTest {
     public void equals() {
         Person alice = new PersonBuilder().withName("Alice").build();
         Person bob = new PersonBuilder().withName("Bob").build();
-        CreateCommand addAliceCommand = new CreateCommand(alice);
-        CreateCommand addBobCommand = new CreateCommand(bob);
+        CreateCommand createAliceCommand = new CreateCommand(alice);
+        CreateCommand createBobCommand = new CreateCommand(bob);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertTrue(createAliceCommand.equals(createAliceCommand));
 
         // same values -> returns true
         CreateCommand addAliceCommandCopy = new CreateCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        assertTrue(createAliceCommand.equals(addAliceCommandCopy));
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertFalse(createAliceCommand.equals(1));
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertFalse(createAliceCommand.equals(null));
 
         // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        assertFalse(createAliceCommand.equals(createBobCommand));
     }
 
     @Test
