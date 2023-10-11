@@ -202,8 +202,7 @@ public class EditCommand extends Command {
             this.id = id;
         }
 
-        public Optional<ID> getId()
-        {
+        public Optional<ID> getId() {
             return Optional.ofNullable(id);
         }
 

@@ -10,6 +10,9 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Person;
 
+/**
+ * Represents a command to mark the attendance of a student.
+ */
 public class MarkAttendanceCommand extends Command {
     public static final String COMMAND_WORD = "mark";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks the attendance of a student. "
@@ -21,6 +24,13 @@ public class MarkAttendanceCommand extends Command {
     private final boolean isPresent;
     private final LocalDate date;
 
+    /**
+     * Constructs a MarkAttendanceCommand to mark the specified student's attendance.
+     *
+     * @param identifier The student's name or ID.
+     * @param isPresent The attendance status.
+     * @param date The date of the attendance.
+     */
     public MarkAttendanceCommand(String identifier, boolean isPresent, LocalDate date) {
         this.identifier = identifier;
         this.isPresent = isPresent;
@@ -33,7 +43,8 @@ public class MarkAttendanceCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         Person targetPerson = lastShownList.stream()
-                .filter(person -> person.getName().fullName.equals(identifier) || person.getId().value.equals(identifier))
+                .filter(person -> person.getName().fullName.equals(identifier) || person.getId().value.equals(
+                        identifier))
                 .findFirst()
                 .orElse(null);
 
