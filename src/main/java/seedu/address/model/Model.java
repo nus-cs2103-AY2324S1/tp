@@ -118,6 +118,14 @@ public interface Model {
     public Pair<Person, Group> groupPerson(String personName, String groupName) throws CommandException;
 
     /**
+     * Unassign group and return corresponding person and group object in a pair
+     * @param personName String representing person name
+     * @param groupName String representing group name
+     * @return Pair representing Person and Group object of interest
+     */
+    Pair<Person, Group> ungroupPerson(String personName, String groupName) throws CommandException;
+
+    /**
      * Assign person to group
      * @param person will store group reference
      * @param group will store person reference

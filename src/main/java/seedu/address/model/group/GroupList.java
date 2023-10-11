@@ -9,6 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.group.exceptions.DuplicateGroupException;
 import seedu.address.model.group.exceptions.GroupNotFoundException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
@@ -18,7 +19,7 @@ import seedu.address.model.person.exceptions.DuplicatePersonException;
  */
 public class GroupList implements Iterable<Group> {
 
-    private final ObservableList<Group> internalList = FXCollections.observableArrayList();
+    private ObservableList<Group> internalList = FXCollections.observableArrayList();
     private final ObservableList<Group> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
@@ -36,21 +37,22 @@ public class GroupList implements Iterable<Group> {
      */
     public void add(Group toAdd) {
         requireNonNull(toAdd);
-        if (contains(toAdd)) {
-            throw new DuplicatePersonException();
+        if (this.contains(toAdd)) {
+            throw new DuplicateGroupException();
         }
         internalList.add(toAdd);
     }
 
     /**
-     * Removes the equivalent person from the list.
-     * The person must exist in the list.
+     * Removes the equivalent group from the list.
+     * The group must exist in the list.
      */
     public void remove(Group toRemove) {
         requireNonNull(toRemove);
-        if (!internalList.remove(toRemove)) {
+        if (!this.contains(toRemove)) {
             throw new GroupNotFoundException();
         }
+        internalList.remove(toRemove);
     }
 
     /**

@@ -24,7 +24,7 @@ public class Person {
 
 
     // Data fields
-    private GroupList personGroups = new GroupList();
+    private GroupList personGroups;
 
 
     /**
@@ -65,6 +65,18 @@ public class Person {
             throw new CommandException(String.format("%s is already in this group: %s", this.name.fullName, group.getGroupName()));
         }
         this.personGroups.add(group);
+    }
+
+    /**
+     * Removes group from persons existing groupList
+     * @param group to be removed from person groupList
+     */
+    public void removeGroup(Group group) throws CommandException {
+        requireNonNull(group);
+        if (!this.personGroups.contains(group)) {
+            throw new CommandException(String.format("%s is not in this group: %s", this.name.fullName, group.getGroupName()));
+        }
+        this.personGroups.remove(group);
     }
 
     /**

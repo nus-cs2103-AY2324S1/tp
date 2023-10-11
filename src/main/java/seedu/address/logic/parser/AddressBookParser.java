@@ -51,8 +51,11 @@ public class AddressBookParser {
         case CreateGroupCommand.COMMAND_WORD:
             return new CreateGroupParser().parse(arguments);
 
-         case GroupPersonCommand.COMMAND_WORD:
+        case GroupPersonCommand.COMMAND_WORD:
              return new GroupPersonParser().parse(arguments);
+
+        case UngroupPersonCommand.COMMAND_WORD:
+            return new UngroupPersonCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
