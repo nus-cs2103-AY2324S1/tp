@@ -257,42 +257,42 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* has a need to track information about business clients
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: manage useful information about a clients faster than a typical mouse/GUI driven app
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
+| Priority | As a …​                                     | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| `* * *`  | user                                       | record my client’s contact information         | conveniently refer to it later                             |
+| `* * *`  | user                                       | access the full details of a particular client's information comprehensively               | aid my future interaction with this client |
+| `* * *`  | user                                       | client profiles                | remove entries that I no longer need                                   |
+| `* *`    | user                                       | add notes of my meetings with my clients          | track details for future interaction with client |
+| `* *`    | user                                       | log the outcomes of my client interactions (e.g., interested, not interested, follow-up required)   | track progress of client interactions                |
+| `* *`      | user                                       | mark a client as a "hot lead," "warm lead," or "cold lead           | gauge the sales potential of the client                                                 |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `Connectify` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Delete a client**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list clients
+2.  Connectify shows a list of clients
+3.  User requests to delete a specific client in the list
+4.  Connectify deletes the client
 
     Use case ends.
 
@@ -308,6 +308,58 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+
+**Use case: Add a client interaction**
+
+**MSS**
+
+1.  User requests to list clients
+2.  Connectify shows a list of clients
+3.  User requests create a client interaction
+4.  Connectify adds the interaction to the client profile
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The user does not exist.
+
+    * 3a1. Connectify shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The client interaction is empty
+   
+    * 3b1. Connectify shows an error message.
+   
+      Use case resumes at step 2.
+
+
+**Use case: Mark a client as “Cold”, “Warm” or “Hot” Leads**
+
+**MSS**
+
+1.  User requests to list clients
+2.  Connectify shows a list of clients
+3.  User requests to mark a client as “Cold”, “Warm” or “Hot” Lead
+4.  Connectify displays the updated client profile
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The user does not exist.
+
+    * 3a1. Connectify shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The lead category is key'ed in wrong or empty
+   
+    * 3b1. Connectify shows an error message.
+   
+      Use case resumes at step 2.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
@@ -315,13 +367,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+4.  The system should work in both 32-bit and 64-bit environments.
+5.  Response time for fetching a contact's details should not exceed 1.5 seconds. 
+6.  Search operations should return results within 2 seconds for queries against the full dataset.
+7.  The system must be backward compatible with data generated from previous versions of the software.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Hot/Warm/Cold Lead**: A hot lead is a potential client who is ready to buy. A warm lead is a potential client who is interested in buying. A cold lead is a potential client who is not ready to buy.
+
+*{More to be added}*
 
 --------------------------------------------------------------------------------------------------------------------
 
