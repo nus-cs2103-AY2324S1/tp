@@ -12,5 +12,4 @@ public class OriginalWord {
     public OriginalWord(String word) {
         this.word = word;
     }
-
 }
