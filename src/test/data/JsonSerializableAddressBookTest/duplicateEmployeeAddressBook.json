@@ -3,7 +3,7 @@
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "alice@example.com",
-    "tags": [ "friends" ]
+    "departments": [ "friends" ]
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",

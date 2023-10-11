@@ -37,7 +37,7 @@ public class EmployeeCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private FlowPane tags;
+    private FlowPane departments;
 
     /**
      * Creates a {@code EmployeeCode} with the given {@code EmployeeCode} and index to display.
@@ -49,8 +49,8 @@ public class EmployeeCard extends UiPart<Region> {
         name.setText(employee.getName().fullName);
         phone.setText(employee.getPhone().value);
         email.setText(employee.getEmail().value);
-        employee.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        employee.getDepartments().stream()
+                .sorted(Comparator.comparing(department -> department.departmentName))
+                .forEach(department -> departments.getChildren().add(new Label(department.departmentName)));
     }
 }
