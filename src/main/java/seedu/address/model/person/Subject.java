@@ -16,7 +16,7 @@ public class Subject {
 
     public final Subjects subjectName;
 
-    public final String colour;
+    private String colour;
     // useful resource: https://www.w3schools.com/tags/ref_colornames.asp for colours
     private HashMap<String, String> subjectToColourMap = new HashMap<String, String>() {{
             put("MATHEMATICS", "red");
@@ -24,6 +24,7 @@ public class Subject {
             put("BIOLOGY", "green");
             put("CHEMISTRY", "lightBlue");
             put("ENGLISH", "orange");
+            put("NONE", "invalid");
         }};
 
 
@@ -51,7 +52,6 @@ public class Subject {
             colour = subjectToColourMap.get(subject.toUpperCase());
         } else {
             subjectName = Subjects.NONE;
-            colour = "invalid";
         }
     }
 
@@ -92,6 +92,10 @@ public class Subject {
     @Override
     public int hashCode() {
         return subjectName.hashCode();
+    }
+
+    public String getColour() {
+        return colour;
     }
 
 

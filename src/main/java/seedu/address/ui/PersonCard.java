@@ -108,7 +108,7 @@ public class PersonCard extends UiPart<Region> {
         person.getSubjects().stream()
                 .sorted(Comparator.comparing(subject -> subject.subjectName))
                 .forEach(subject -> subjects.getChildren()
-                        .add(new ColoredTextEntry(subject.subjectName.toString(), subject.colour)));
+                        .add(new ColoredTextEntry(subject.subjectName.toString(), subject.getColour())));
         subjects.setHgap(10);
         fields.getChildren().add(subjects);
     }
