@@ -2,12 +2,12 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_DATETIME_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_END_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_INFORMATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_START_TIME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_END_TIME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_LOCATION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_INFORMATION;
 
 import seedu.address.logic.commands.AddEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -22,8 +22,9 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
 
     @Override
     public AddEventCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_EVENT_NAME, PREFIX_EVENT_START_TIME,
-                PREFIX_EVENT_END_TIME, PREFIX_EVENT_LOCATION, PREFIX_EVENT_INFORMATION);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME,
+                PREFIX_EVENT_NAME, PREFIX_EVENT_START_TIME, PREFIX_EVENT_END_TIME,
+                PREFIX_EVENT_LOCATION, PREFIX_EVENT_INFORMATION);
 
         if (!AddressBookParser.arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_EVENT_NAME, PREFIX_EVENT_START_TIME)
                 || !argMultimap.getPreamble().isEmpty()) {

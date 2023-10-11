@@ -20,7 +20,9 @@ public class AddPersonCommand extends AddCommand {
 
     public static final String SECONDARY_COMMAND_WORD = "contact";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " " + SECONDARY_COMMAND_WORD + ": Adds a person to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " "
+            + SECONDARY_COMMAND_WORD
+            + ": Adds a person to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "

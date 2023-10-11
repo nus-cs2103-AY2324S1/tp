@@ -1,7 +1,6 @@
 package seedu.address.model.event;
 
 import seedu.address.model.util.DateTimeUtil;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 

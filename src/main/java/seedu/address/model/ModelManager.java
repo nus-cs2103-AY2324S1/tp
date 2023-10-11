@@ -135,7 +135,7 @@ public class ModelManager implements Model {
         requireNonNull(name);
         List<Person> tmp = addressBook.getPersonList().stream().filter(person->person.getName().toString().equals(name))
                 .collect(Collectors.toList());
-        if(tmp.isEmpty()) {
+        if (tmp.isEmpty()) {
             return null;
         }
         return tmp.get(0);

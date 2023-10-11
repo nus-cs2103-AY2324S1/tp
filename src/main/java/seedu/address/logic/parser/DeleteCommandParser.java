@@ -1,11 +1,11 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeletePersonCommand;
 import seedu.address.logic.commands.DeleteEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-
-import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 /**
  * The parser for all secondary {@code delete} commands
