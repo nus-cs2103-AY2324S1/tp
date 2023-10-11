@@ -5,6 +5,8 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
@@ -35,6 +37,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private CardListPanel cardListPanel;
+    private TransactionTablePanel transactionTablePanel;
     private ResultDisplay resultDisplay;
 
     @FXML
@@ -44,7 +47,13 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem userGuideMenuItem;
 
     @FXML
+    private TabPane tabPane;
+
+    @FXML
     private StackPane cardListPanelPlaceholder;
+
+    @FXML
+    private Tab transactionTab;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -109,11 +118,24 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Switch tabs
+     *
+     * @param index
+     *            The index of the tab
+     */
+    void switchTab(int index) {
+        tabPane.getSelectionModel().select(index);
+    }
+
+    /**
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        cardListPanel = new CardListPanel(logic.getFilteredPersonList(), logic.getFilteredTransactionList());
+        cardListPanel = new CardListPanel(logic.getFilteredPersonList());
         cardListPanelPlaceholder.getChildren().add(cardListPanel.getRoot());
+
+        transactionTablePanel = new TransactionTablePanel(logic.getFilteredTransactionList());
+        transactionTab.setContent(transactionTablePanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -187,6 +209,8 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isExit()) {
                 handleExit();
             }
+
+            switchTab(commandResult.getTabIndex());
 
             return commandResult;
         } catch (CommandException | ParseException e) {

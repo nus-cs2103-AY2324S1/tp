@@ -46,9 +46,6 @@ public class ModelManager implements Model {
         tmpTransactions.add(new Transaction());
         tmpTransactions.add(new Transaction());
         tmpTransactions.add(new Transaction());
-
-        // Set default view to staff on startup
-        updateFilteredTransactionList(PREDICATE_HIDE_ALL_TRANSACTIONS);
     }
 
     public ModelManager() {
@@ -147,9 +144,11 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
-    //=========== Filtered Transaction List Accessors ========================================================
+    // =========== Filtered Transaction List Accessors
+    // ========================================================
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Person} backed by the
+     * internal list of
      * {@code versionedAddressBook}
      */
     @Override

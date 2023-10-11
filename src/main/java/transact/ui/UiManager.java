@@ -50,6 +50,10 @@ public class UiManager implements Ui {
         }
     }
 
+    public MainWindow getMainWindow() {
+        return this.mainWindow;
+    }
+
     private Image getImage(String imagePath) {
         return new Image(MainApp.class.getResourceAsStream(imagePath));
     }

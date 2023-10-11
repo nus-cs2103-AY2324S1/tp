@@ -39,7 +39,7 @@
   -fx-max-height: 0;
 }
 
-.table-view {
+/* .table-view {
   -fx-base: #1d1d1d;
   -fx-control-inner-background: #1d1d1d;
   -fx-background-color: #1d1d1d;
@@ -71,7 +71,7 @@
 
 .table-view:focused .table-row-cell:filled:focused:selected {
   -fx-background-color: -fx-focus-color;
-}
+} */
 
 .split-pane:horizontal .split-pane-divider {
   -fx-background-color: derive(#1d1d1d, 20%);

@@ -21,10 +21,6 @@
   </icons>
   <scene>
     <Scene>
-      <stylesheets>
-        <URL value="@DarkTheme.css" />
-        <URL value="@Extensions.css" />
-      </stylesheets>
          <BorderPane prefHeight="700.0" prefWidth="800.0">
             <top>
            <MenuBar fx:id="menuBar" BorderPane.alignment="CENTER">
@@ -37,16 +33,19 @@
            </MenuBar>
             </top>
             <center>
-               <TabPane prefHeight="200.0" prefWidth="200.0" stylesheets="@TabPane.css" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+               <TabPane fx:id="tabPane" prefHeight="200.0" prefWidth="200.0" stylesheets="@TabPane.css" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
                  <tabs>
                    <Tab text="Overview">
                      <content>
                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #3c3c3c;" />
                      </content>
                    </Tab>
-                   <Tab text="Transactions">
+                   <Tab fx:id="transactionTab" text="Transactions">
                      <content>
-                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #3c3c3c;" />
+                       <AnchorPane fx:id="transactionTablePanelPlaceholder" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #3c3c3c;">
+                              <padding>
+                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                              </padding></AnchorPane>
                      </content>
                    </Tab>
                      <Tab text="Addressbook">
@@ -73,6 +72,10 @@
                </VBox>
             </bottom>
          </BorderPane>
+         <stylesheets>
+            <URL value="@Extensions.css" />
+            <URL value="@DarkTheme.css" />
+         </stylesheets>
     </Scene>
   </scene>
 </fx:root>
