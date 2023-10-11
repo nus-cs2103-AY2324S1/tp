@@ -25,7 +25,7 @@ public class InfoDisplayPanel extends UiPart<Region> {
         if (person == null) {
             infoDisplay.setText("Nothing!");
         } else {
-            infoDisplay.setText(person.toString());
+            infoDisplay.setText(person.toDisplayString());
         }
     }
 }

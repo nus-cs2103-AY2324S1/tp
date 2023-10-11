@@ -7,12 +7,12 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
 <fx:root minHeight="600" minWidth="450" onCloseRequest="#handleExit" title="Address App" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/address_book_32.png" />
@@ -48,32 +48,34 @@
 
         <GridPane VBox.vgrow="ALWAYS">
           <columnConstraints>
-            <ColumnConstraints percentWidth="33"/>
-            <ColumnConstraints percentWidth="34"/>
-            <ColumnConstraints percentWidth="33"/>
+            <ColumnConstraints percentWidth="33" />
+            <ColumnConstraints percentWidth="34" />
+            <ColumnConstraints percentWidth="33" />
           </columnConstraints>
+
           <children>
-            <VBox fx:id="personList" styleClass="pane-with-border" GridPane.columnIndex="0">
+            <VBox fx:id="personList" styleClass="pane-with-border" GridPane.columnIndex="0" GridPane.vgrow="ALWAYS">
               <padding>
                 <Insets bottom="10" left="10" right="10" top="10" />
               </padding>
               <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
             </VBox>
 
-            <VBox fx:id="meetingSchedule" styleClass="pane-with-border" GridPane.columnIndex="1">
+            <VBox fx:id="meetingSchedule" styleClass="pane-with-border" GridPane.columnIndex="1" GridPane.vgrow="ALWAYS">
               <padding>
                 <Insets bottom="10" left="10" right="10" top="10" />
               </padding>
-              <StackPane fx:id="meetingSchedulePanelPlaceholder" VBox.vgrow="ALWAYS"/>
+              <StackPane fx:id="meetingSchedulePanelPlaceholder" VBox.vgrow="ALWAYS" />
             </VBox>
 
-            <VBox fx:id="infoDisplay" styleClass="pane-with-border" GridPane.columnIndex="2">
+            <VBox fx:id="infoDisplay" styleClass="pane-with-border" GridPane.columnIndex="2" GridPane.vgrow="ALWAYS">
               <padding>
                 <Insets bottom="10" left="10" right="10" top="10" />
               </padding>
               <StackPane fx:id="infoDisplayPanelPlaceholder" VBox.vgrow="ALWAYS" />
             </VBox>
           </children>
+
         </GridPane>
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />

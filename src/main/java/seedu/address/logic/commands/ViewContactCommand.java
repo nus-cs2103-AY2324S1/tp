@@ -43,7 +43,6 @@ public class ViewContactCommand extends Command {
         }
 
         Person personToView = lastShownList.get(targetIndex.getZeroBased());
-
         model.setViewedPerson(personToView);
         return new CommandResult(Messages.MESSAGE_PERSON_VIEWED_OVERVIEW);
     }
