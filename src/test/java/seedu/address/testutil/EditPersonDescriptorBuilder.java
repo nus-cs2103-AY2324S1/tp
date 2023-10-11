@@ -11,6 +11,7 @@ import seedu.address.model.booking.Booking;
 import seedu.address.model.booking.Email;
 import seedu.address.model.booking.Name;
 import seedu.address.model.booking.Phone;
+import seedu.address.model.booking.Room;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -33,11 +34,21 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder(Booking booking) {
         descriptor = new EditCommand.EditRoomDescriptor();
+        descriptor.setRoom(booking.getRoom());
         descriptor.setName(booking.getName());
         descriptor.setPhone(booking.getPhone());
         descriptor.setEmail(booking.getEmail());
         descriptor.setAddress(booking.getAddress());
         descriptor.setTags(booking.getTags());
+    }
+
+
+    /**
+     * Sets the {@code Name} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withRoom(String room) {
+        descriptor.setRoom(new Room(room));
+        return this;
     }
 
     /**
