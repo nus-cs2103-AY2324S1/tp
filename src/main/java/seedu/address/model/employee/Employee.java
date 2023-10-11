@@ -19,7 +19,7 @@ public class Employee {
     // Identity fields
     private final Name name;
     private final Phone phone; //identifier
-    private final Email email; //department
+    private final Department department; //department
     // Data fields
     private final Address address; //position
     private final Set<Tag> tags = new HashSet<>();
@@ -27,11 +27,11 @@ public class Employee {
     /**
      * Every field must be present and not null.
      */
-    public Employee(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Employee(Name name, Phone phone, Department department, Address address, Set<Tag> tags) {
+        requireAllNonNull(name, phone, department, address, tags);
         this.name = name;
         this.phone = phone;
-        this.email = email;
+        this.department = department;
         this.address = address;
         this.tags.addAll(tags);
     }
@@ -44,8 +44,8 @@ public class Employee {
         return phone;
     }
 
-    public Email getEmail() {
-        return email;
+    public Department getDepartment() {
+        return department;
     }
 
     public Address getAddress() {
@@ -91,7 +91,7 @@ public class Employee {
         Employee otherEmployee = (Employee) other;
         return name.equals(otherEmployee.name)
                 && phone.equals(otherEmployee.phone)
-                && email.equals(otherEmployee.email)
+                && department.equals(otherEmployee.department)
                 && address.equals(otherEmployee.address)
                 && tags.equals(otherEmployee.tags);
     }
@@ -99,7 +99,7 @@ public class Employee {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, department, address, tags);
     }
 
     @Override
@@ -107,7 +107,7 @@ public class Employee {
         return new ToStringBuilder(this)
                 .add("name", name)
                 .add("phone", phone)
-                .add("email", email)
+                .add("department", department)
                 .add("address", address)
                 .add("tags", tags)
                 .toString();

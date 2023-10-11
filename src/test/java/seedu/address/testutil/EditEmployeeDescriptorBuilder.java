@@ -6,7 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditEmployeeDescriptor;
 import seedu.address.model.employee.Address;
-import seedu.address.model.employee.Email;
+import seedu.address.model.employee.Department;
 import seedu.address.model.employee.Employee;
 import seedu.address.model.employee.Name;
 import seedu.address.model.employee.Phone;
@@ -34,7 +34,7 @@ public class EditEmployeeDescriptorBuilder {
         descriptor = new EditEmployeeDescriptor();
         descriptor.setName(employee.getName());
         descriptor.setPhone(employee.getPhone());
-        descriptor.setEmail(employee.getEmail());
+        descriptor.setDepartment(employee.getDepartment());
         descriptor.setAddress(employee.getAddress());
         descriptor.setTags(employee.getTags());
     }
@@ -56,10 +56,10 @@ public class EditEmployeeDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Email} of the {@code EditEmployeeDescriptor} that we are building.
+     * Sets the {@code Department} of the {@code EditEmployeeDescriptor} that we are building.
      */
-    public EditEmployeeDescriptorBuilder withEmail(String email) {
-        descriptor.setEmail(new Email(email));
+    public EditEmployeeDescriptorBuilder withDepartment(String department) {
+        descriptor.setDepartment(new Department(department));
         return this;
     }
 

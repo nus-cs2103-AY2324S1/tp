@@ -39,8 +39,8 @@ public class Messages {
         builder.append(employee.getName())
                 .append("; Phone: ")
                 .append(employee.getPhone())
-                .append("; Email: ")
-                .append(employee.getEmail())
+                .append("; Department: ")
+                .append(employee.getDepartment())
                 .append("; Address: ")
                 .append(employee.getAddress())
                 .append("; Tags: ");
