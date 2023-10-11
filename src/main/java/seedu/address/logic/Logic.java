@@ -39,6 +39,10 @@ public interface Logic {
     Path getAddressBookFilePath();
 
     /**
+     * Returns the list of attributes that is to be displayed on the list in gui.
+     */
+    String[] getDisplayedFieldsList();
+    /**
      * Returns the user prefs' GUI settings.
      */
     GuiSettings getGuiSettings();
