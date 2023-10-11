@@ -34,10 +34,10 @@ public class ListEventCommandTest {
         model.findPersonByName("George Best").addEvent(VALID_EVENT_1);
         model.findPersonByName("George Best").addEvent(VALID_EVENT_2);
         assertCommandSuccessWithFeedback(() -> new ListEventCommand()
-                .execute(model), ListEventCommand.MESSAGE
-                + "[Benson Meier] " + VALID_EVENT_0.getUiText() + "\n"
-                + "[George Best] " + VALID_EVENT_1.getUiText() + "\n"
-                + "[George Best] " + VALID_EVENT_2.getUiText() + "\n"
+                .execute(model), new StringBuilder(ListEventCommand.MESSAGE)
+                .append("[Benson Meier] ").append(VALID_EVENT_0.getUiText()).append("\n")
+                .append("[George Best] ").append(VALID_EVENT_1.getUiText()).append("\n")
+                .append("[George Best] ").append(VALID_EVENT_2.getUiText()).append("\n").toString()
         );
     }
 
