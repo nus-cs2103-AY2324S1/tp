@@ -39,7 +39,7 @@ public class MarkAttendanceCommandParser implements Parser<MarkAttendanceCommand
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             identifier = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()).fullName;
         } else {
-            identifier = ParserUtil.parseID(argMultimap.getValue(PREFIX_ID).get()).value;
+            identifier = ParserUtil.parseId(argMultimap.getValue(PREFIX_ID).get()).value;
         }
 
         boolean isPresent = ParserUtil.parseAttendance(argMultimap.getValue(PREFIX_ATTENDANCE).get());

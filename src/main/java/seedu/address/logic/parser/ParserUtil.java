@@ -104,7 +104,7 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code id} is invalid.
      */
-    public static ID parseID(String id) throws ParseException {
+    public static ID parseId(String id) throws ParseException {
         requireNonNull(id);
         String trimmedID = id.trim();
         if (!ID.isValidID(trimmedID)) {
