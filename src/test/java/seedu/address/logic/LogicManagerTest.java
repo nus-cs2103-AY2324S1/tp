@@ -45,13 +45,16 @@ public class LogicManagerTest {
     private Model model = new ModelManager();
     private Logic logic;
 
+    private LogicManager logicManager;
+
     @BeforeEach
     public void setUp() {
         JsonAddressBookStorage addressBookStorage =
                 new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
-        logic = new LogicManager(model, storage);
+        logicManager = new LogicManager(model, storage);
+        logic = logicManager;
     }
 
     @Test
@@ -87,6 +90,15 @@ public class LogicManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void getDisplayedFieldsList_modifyList_throwsUnsupportedOperationException() {
+        String[] fieldsNames = logic.getDisplayedFieldsList();
+        assertEquals(0, fieldsNames.length);
+        logicManager.setDisplayedFieldsList(new String[] {"phone"});
+        assertEquals(1, logic.getDisplayedFieldsList().length);
+        assertEquals(5, LogicManager.DISPLAYABLE_FIELDS.length);
     }
 
     /**

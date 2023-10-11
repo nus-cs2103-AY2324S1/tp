@@ -1,16 +1,15 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.address.model.person.Person;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * A UI component that displays information of a {@code Person}.
  */
 public class PersonCard extends UiPart<Region> {
 
@@ -25,6 +24,8 @@ public class PersonCard extends UiPart<Region> {
      */
 
     public final Person person;
+    @FXML
+    private VBox fields;
 
     @FXML
     private HBox cardPane;
@@ -33,33 +34,18 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label phone;
-    @FXML
-    private Label address;
-    @FXML
-    private Label email;
-    @FXML
-    private FlowPane subjects;
-    @FXML
     private FlowPane tags;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public PersonCard(Person person, int displayedIndex) {
+    public PersonCard(Person person, int displayedIndex, String[] displayFields) {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
-
-        person.getSubjects().stream()
-                .sorted(Comparator.comparing(subject -> subject.subjectName))
-                .forEach(subject -> subjects.getChildren().add(new Label(subject.subjectName.toString())));
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        for (String field : displayFields) {
+            PersonCardFieldBuilder.build(field, person, fields, tags);
+        }
     }
 }

@@ -24,6 +24,8 @@ import seedu.address.storage.Storage;
 public class LogicManager implements Logic {
     public static final String FILE_OPS_ERROR_FORMAT = "Could not save data due to the following error: %s";
 
+    public static final String[] DISPLAYABLE_FIELDS = {"phone", "email", "address", "tags", "subjects"};
+
     public static final String FILE_OPS_PERMISSION_ERROR_FORMAT =
             "Could not save data to file %s due to insufficient permissions to write to the file or the folder.";
 
@@ -32,6 +34,8 @@ public class LogicManager implements Logic {
     private final Model model;
     private final Storage storage;
     private final AddressBookParser addressBookParser;
+
+    private String[] displayedFieldsList = new String[0];
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -84,5 +88,14 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public String[] getDisplayedFieldsList() {
+        return displayedFieldsList;
+    }
+    // list command should validate the fields, make sure they are valid
+    public void setDisplayedFieldsList(String[] displayedFieldsList) {
+        this.displayedFieldsList = displayedFieldsList;
     }
 }
