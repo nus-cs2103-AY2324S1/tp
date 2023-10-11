@@ -1,13 +1,16 @@
 package seedu.address.ui;
 
+
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import seedu.address.model.person.Person;
 
 /**
@@ -42,7 +45,7 @@ public class PersonCard extends UiPart<Region> {
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
     public PersonCard(Person person, int displayedIndex) {
-       this(person, displayedIndex, new String[]{});
+       this(person, displayedIndex, new String[]{"subjects"});
     }
 
     public PersonCard(Person person, int displayedIndex, String[] displayFields) {
@@ -67,6 +70,9 @@ public class PersonCard extends UiPart<Region> {
             break;
         case "tags":
             buildTags();
+            break;
+        case "subjects":
+            buildSubjects();
             break;
         }
     }
@@ -95,4 +101,27 @@ public class PersonCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
+    void buildSubjects() {
+        FlowPane subjects = new FlowPane();
+        person.getSubjects().stream()
+                .sorted(Comparator.comparing(subject -> subject.subjectName))
+                .forEach(subject -> subjects.getChildren().add(new ColoredTextEntry(subject.subjectName.toString(), subject.colour)));
+        subjects.setHgap(10);
+        fields.getChildren().add(subjects);
+    }
+
+    public class ColoredTextEntry extends StackPane {
+
+        public ColoredTextEntry(String text, String color) {
+            Text textNode = new Text(text);
+            textNode.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+            Rectangle rectangle = new Rectangle(textNode.getLayoutBounds().getWidth() + 10, textNode.getLayoutBounds().getHeight() + 10);
+            rectangle.setArcWidth(20); // Customize the arc width to make it curved.
+            rectangle.setArcHeight(20); // Customize the arc height to make it curved.
+            rectangle.setFill(Color.web(color));
+
+            getChildren().addAll(rectangle, textNode);
+        }
+    }
+
 }

@@ -1,5 +1,7 @@
 package seedu.address.model.person;
 
+import java.util.HashMap;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -12,6 +14,17 @@ public class Subject {
             "Subject should only be Mathematics, Physics, Biology, Chemistry or English";
 
     public final Subjects subjectName;
+
+    public final String colour;
+    // useful resource: https://www.w3schools.com/tags/ref_colornames.asp for colours
+    private HashMap<String,String> subjectToColourMap = new HashMap<String,String>() {{
+        put("MATHEMATICS", "red");
+        put("PHYSICS", "yellow");
+        put("BIOLOGY", "green");
+        put("CHEMISTRY", "lightBlue");
+        put("ENGLISH", "orange");
+    }};
+
 
     /**
      * Subjects that tutor teaches.
@@ -34,8 +47,10 @@ public class Subject {
         checkArgument(isValidSubject(subject.toUpperCase()), MESSAGE_CONSTRAINTS);
         if (isValidSubject(subject.toUpperCase())) {
             subjectName = Subjects.valueOf(subject.toUpperCase());
+            colour = subjectToColourMap.get(subject.toUpperCase());
         } else {
             subjectName = Subjects.NONE;
+            colour = "invalid";
         }
     }
 
@@ -77,4 +92,6 @@ public class Subject {
     public int hashCode() {
         return subjectName.hashCode();
     }
+
+
 }
