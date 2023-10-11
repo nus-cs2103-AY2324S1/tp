@@ -69,12 +69,7 @@ public class AddressBookParser {
             return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
-            if(arguments.isEmpty()){
-                return new ListCommand();
-            }
-            else {
-                return new FindCommandParser().parse(arguments);
-            }
+            return new ListCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
