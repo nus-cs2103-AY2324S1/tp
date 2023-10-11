@@ -15,7 +15,6 @@ import static seedu.address.testutil.TypicalPersons.AMY;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
-import java.util.Arrays;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -95,11 +94,11 @@ public class LogicManagerTest {
 
     @Test
     public void getDisplayedFieldsList_modifyList_throwsUnsupportedOperationException() {
-            String[] fieldsNames = logic.getDisplayedFieldsList();
-            assertEquals(0, fieldsNames.length);
-            logicManager.setDisplayedFieldsList(new String[] {"phone"});
-            assertEquals(1, logic.getDisplayedFieldsList().length);
-            assertEquals(5, LogicManager.DISPLAYABLE_FIELDS.length);
+        String[] fieldsNames = logic.getDisplayedFieldsList();
+        assertEquals(0, fieldsNames.length);
+        logicManager.setDisplayedFieldsList(new String[] {"phone"});
+        assertEquals(1, logic.getDisplayedFieldsList().length);
+        assertEquals(5, LogicManager.DISPLAYABLE_FIELDS.length);
     }
 
     /**
