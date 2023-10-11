@@ -128,5 +128,8 @@ public interface Model {
      */
     void setViewedPerson(Person person);
 
+    /**
+     * Get current viewed person.
+     */
     Person getViewedPerson();
 }

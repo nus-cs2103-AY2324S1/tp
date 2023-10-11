@@ -50,7 +50,7 @@ public interface Logic {
 
 
     /**
-     * Temp for test.
+     * Current working method to forward Person to UI from Logic.
      */
     Person getViewedPerson();
 }
