@@ -1,8 +1,9 @@
 package seedu.address.model.event;
 
-import seedu.address.model.util.DateTimeUtil;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
+
+import seedu.address.model.util.DateTimeUtil;
 
 /**
  * The class for holding the "start" and "end" part for an Event
