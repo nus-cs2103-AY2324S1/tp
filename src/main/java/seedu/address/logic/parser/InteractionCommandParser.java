@@ -27,11 +27,14 @@ public class InteractionCommandParser implements Parser<Command> {
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_OUTCOME);
+        System.out.println(argMultimap.getPreamble());
 
         Index index;
 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            //TODO Fix the issue of running "interaction 1 I am interested in this product"
+            //Preamble becomes "1 I am interested in this product" and this throws error
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 InteractionCommand.MESSAGE_USAGE), pe);
@@ -43,7 +46,8 @@ public class InteractionCommandParser implements Parser<Command> {
         String note = "";
 
         if (argMultimap.getValue(PREFIX_OUTCOME).isPresent()) {
-            outcome = ParserUtil.parseOutcome(argMultimap.getValue(PREFIX_OUTCOME).get());
+            String outcomeString = argMultimap.getValue(PREFIX_OUTCOME).get().split("\\s+")[0];
+            outcome = ParserUtil.parseOutcome(outcomeString);
             String[] trimmedArgsParts = trimmedArgs.split("\\s+", 4);
             if (trimmedArgsParts.length < 4) {
                 note = "";

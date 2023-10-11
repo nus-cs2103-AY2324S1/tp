@@ -15,13 +15,14 @@ public class Interaction {
         UNKNOWN;
 
         public static final String MESSAGE_CONSTRAINTS = "Outcome should be one of the following: "
-                + "INTERESTED, NOT_INTERESTED, FOLLOWUP_REQUIRED, UNKNOWN"
+                + "INTERESTED, NOT_INTERESTED, FOLLOWUP_REQUIRED, UNKNOWN "
                 + "and it should not be blank";
 
         /**
         * Returns true if a given string is a valid outcome.
         */
         public static boolean isValidOutcome(String test) {
+            System.out.println(test);
             return test.matches("INTERESTED|NOT_INTERESTED|FOLLOWUP_REQUIRED|UNKNOWN");
         }
     }
