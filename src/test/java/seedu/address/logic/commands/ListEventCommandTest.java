@@ -43,7 +43,7 @@ public class ListEventCommandTest {
 
     private void assertCommandSuccessWithFeedback(ThrowingSupplier<CommandResult> function, String result) {
         try {
-            assertEquals(function.get(), new CommandResult(result));
+            assertEquals(function.get().getFeedbackToUser(), result);
         } catch (Throwable e) {
             throw new AssertionError("Execution of command should not fail.", e);
         }
