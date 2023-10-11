@@ -4,23 +4,13 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-<<<<<<< HEAD:src/test/java/seedu/staffsnap/testutil/EditEmployeeDescriptorBuilder.java
 import seedu.staffsnap.logic.commands.EditCommand.EditEmployeeDescriptor;
-import seedu.staffsnap.model.employee.Email;
+import seedu.staffsnap.model.employee.Department;
 import seedu.staffsnap.model.employee.Employee;
 import seedu.staffsnap.model.employee.JobTitle;
 import seedu.staffsnap.model.employee.Name;
 import seedu.staffsnap.model.employee.Phone;
 import seedu.staffsnap.model.tag.Tag;
-=======
-import seedu.address.logic.commands.EditCommand.EditEmployeeDescriptor;
-import seedu.address.model.employee.Address;
-import seedu.address.model.employee.Department;
-import seedu.address.model.employee.Employee;
-import seedu.address.model.employee.Name;
-import seedu.address.model.employee.Phone;
-import seedu.address.model.tag.Tag;
->>>>>>> 81681bbbe6672d8647326ca44cf820b987267d7b:src/test/java/seedu/address/testutil/EditEmployeeDescriptorBuilder.java
 
 /**
  * A utility class to help with building EditEmployeeDescriptor objects.
@@ -44,13 +34,8 @@ public class EditEmployeeDescriptorBuilder {
         descriptor = new EditEmployeeDescriptor();
         descriptor.setName(employee.getName());
         descriptor.setPhone(employee.getPhone());
-<<<<<<< HEAD:src/test/java/seedu/staffsnap/testutil/EditEmployeeDescriptorBuilder.java
-        descriptor.setEmail(employee.getEmail());
-        descriptor.setJobTitle(employee.getJobTitle());
-=======
         descriptor.setDepartment(employee.getDepartment());
-        descriptor.setAddress(employee.getAddress());
->>>>>>> 81681bbbe6672d8647326ca44cf820b987267d7b:src/test/java/seedu/address/testutil/EditEmployeeDescriptorBuilder.java
+        descriptor.setJobTitle(employee.getJobTitle());
         descriptor.setTags(employee.getTags());
     }
 

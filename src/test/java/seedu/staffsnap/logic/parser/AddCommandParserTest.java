@@ -60,7 +60,8 @@ public class AddCommandParserTest {
         Employee expectedEmployeeMultipleTags = new EmployeeBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
         assertParseSuccess(parser, NAME_DESC_BOB
-                        + PHONE_DESC_BOB + DEPARTMENT_DESC_BOB + JOB_TITLE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                        + PHONE_DESC_BOB + DEPARTMENT_DESC_BOB + JOB_TITLE_DESC_BOB
+                        + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 new AddCommand(expectedEmployeeMultipleTags));
     }
 

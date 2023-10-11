@@ -1,18 +1,10 @@
 package seedu.staffsnap.testutil;
 
-<<<<<<< HEAD:src/test/java/seedu/staffsnap/testutil/EmployeeUtil.java
-import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_DEPARTMENT;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_JOB_TITLE;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_TAG;
-=======
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DEPARTMENT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
->>>>>>> 81681bbbe6672d8647326ca44cf820b987267d7b:src/test/java/seedu/address/testutil/EmployeeUtil.java
 
 import java.util.Set;
 
@@ -40,13 +32,8 @@ public class EmployeeUtil {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + employee.getName().fullName + " ");
         sb.append(PREFIX_PHONE + employee.getPhone().value + " ");
-<<<<<<< HEAD:src/test/java/seedu/staffsnap/testutil/EmployeeUtil.java
-        sb.append(PREFIX_EMAIL + employee.getEmail().value + " ");
-        sb.append(PREFIX_JOB_TITLE + employee.getJobTitle().value + " ");
-=======
         sb.append(PREFIX_DEPARTMENT + employee.getDepartment().value + " ");
-        sb.append(PREFIX_ADDRESS + employee.getAddress().value + " ");
->>>>>>> 81681bbbe6672d8647326ca44cf820b987267d7b:src/test/java/seedu/address/testutil/EmployeeUtil.java
+        sb.append(PREFIX_JOB_TITLE + employee.getJobTitle().value + " ");
         employee.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
@@ -60,14 +47,9 @@ public class EmployeeUtil {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
-<<<<<<< HEAD:src/test/java/seedu/staffsnap/testutil/EmployeeUtil.java
-        descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
-        descriptor.getJobTitle().ifPresent(jobTitle -> sb.append(PREFIX_JOB_TITLE).append(jobTitle.value).append(" "));
-=======
         descriptor.getDepartment().ifPresent(department -> sb.append(PREFIX_DEPARTMENT).append(department.value)
                 .append(" "));
-        descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
->>>>>>> 81681bbbe6672d8647326ca44cf820b987267d7b:src/test/java/seedu/address/testutil/EmployeeUtil.java
+        descriptor.getJobTitle().ifPresent(jobTitle -> sb.append(PREFIX_JOB_TITLE).append(jobTitle.value).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {
