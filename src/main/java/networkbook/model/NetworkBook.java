@@ -16,19 +16,9 @@ import networkbook.model.util.UniqueList;
 public class NetworkBook implements ReadOnlyNetworkBook {
 
     private final UniqueList<Person> persons;
-
-    /*
-     * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
-     * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
-     *
-     * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
-     *   among constructors.
-     */
-    {
-        persons = new UniqueList<Person>();
+    public NetworkBook() {
+        this.persons = new UniqueList<>();
     }
-
-    public NetworkBook() {}
 
     /**
      * Creates an NetworkBook using the Persons in the {@code toBeCopied}
