@@ -70,7 +70,7 @@ public class StringUtil {
      * Adds specified String to the end of the toString return while keeping the format constant
      * @param stringToAdd string to be added
      * @param originalToString string to be added to
-     * @return String consistent with Person.toString() format
+     * @return String consistent with Person#toString() format
      */
     public static String addFieldToPersonToString(String stringToAdd, String originalToString) {
         StringBuilder stringBuilder = new StringBuilder(originalToString);
