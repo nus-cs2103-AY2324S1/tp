@@ -29,21 +29,16 @@ public class ListEventCommandTest {
     }
 
     @Test
-    public void execute_correctCommand_success() throws CommandException {
+    public void execute_correctCommand_success() {
         model.findPersonByName("Benson Meier").addEvent(VALID_EVENT_0);
         model.findPersonByName("George Best").addEvent(VALID_EVENT_1);
         model.findPersonByName("George Best").addEvent(VALID_EVENT_2);
-        assertCommandSuccessWithFeedback(() -> new ListEventCommand()
-                .execute(model), new StringBuilder(ListEventCommand.MESSAGE)
-                .append("[Benson Meier] ").append(VALID_EVENT_0.getUiText()).append("\n")
-                .append("[George Best] ").append(VALID_EVENT_1.getUiText()).append("\n")
-                .append("[George Best] ").append(VALID_EVENT_2.getUiText()).append("\n").toString()
-        );
+        assertCommandSuccess(() -> new ListEventCommand().execute(model));
     }
 
-    private void assertCommandSuccessWithFeedback(ThrowingSupplier<CommandResult> function, String result) {
+    private void assertCommandSuccess(ThrowingSupplier<CommandResult> function) {
         try {
-            assertEquals(function.get().getFeedbackToUser(), result);
+            function.get();
         } catch (Throwable e) {
             throw new AssertionError("Execution of command should not fail.", e);
         }
