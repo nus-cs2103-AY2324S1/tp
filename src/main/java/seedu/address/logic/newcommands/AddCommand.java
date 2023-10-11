@@ -5,7 +5,11 @@ import java.util.Date;
 import seedu.address.cardslist.CardList;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.pojo.FlashCard;
+import seedu.address.logic.newcommands.Command;
+import seedu.address.model.flashcard.FlashCard;
+
+import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 
 /**
@@ -16,7 +20,13 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     // For help function
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book.";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book.\n"
+            + "Parameters: "
+            + PREFIX_ORIGINAL_WORD + "ORIGINAL WORD "
+            + PREFIX_TRANSLATED_WORD + "TRANSLATION "
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_ORIGINAL_WORD + "sorry "
+            + PREFIX_TRANSLATED_WORD + "entschuldigung ";
 
     public static final String MESSAGE_SUCCESS = "New flashcard added: %s - %s";
     public static final String MESSAGE_DUPLICATE_CARD = "This flashcard already exists";
