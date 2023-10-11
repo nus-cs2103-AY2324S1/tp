@@ -131,6 +131,25 @@ public class ModelManager implements Model {
     // =========== Filtered Person List Accessors
     // =============================================================
 
+    @Override
+    public boolean hasTransaction(Transaction transaction) {
+        return false;
+    }
+
+    @Override
+    public void deleteTransaction(Transaction transaction) {
+    }
+
+    @Override
+    public void addTransaction(Transaction transaction) {
+
+    }
+
+    public void setTransaction(Transaction transaction, Transaction editedTransaction) {
+        requireAllNonNull(transaction, editedTransaction);
+
+
+    }
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the
      * internal list of
