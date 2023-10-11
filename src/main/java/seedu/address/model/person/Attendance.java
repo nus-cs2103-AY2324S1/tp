@@ -1,10 +1,10 @@
-package seedu.address.model.attendance;
+package seedu.address.model.person;
 
 import java.time.LocalDate;
 
 public class Attendance {
     private final LocalDate date;
-    private final boolean isPresent;
+    private boolean isPresent;
     private final String moduleName;
 
     public Attendance(LocalDate date, boolean isPresent, String moduleName) {
@@ -23,6 +23,10 @@ public class Attendance {
 
     public String getModuleName() {
         return moduleName;
+    }
+
+    public void setAttendance(boolean isPresent) {
+        this.isPresent = isPresent;
     }
 
     @Override
