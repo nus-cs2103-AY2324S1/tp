@@ -15,7 +15,7 @@ Given below are my contributions to the project.
   * Highlights: 
   * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
 
-* **Code contributed**: [RepoSense link]()
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=itsNatTan&breakdown=false)
 
 * **Project management**:
   * 
@@ -25,7 +25,7 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   * User Guide:
-    * 
+    * Created the UGDraft.md file, and added the documentation for the help, exit, save, load functions.
   * Developer Guide:
     * 
 
@@ -34,5 +34,3 @@ Given below are my contributions to the project.
 
 * **Tools**:
   * 
-
-* _{you can add/remove categories in the list above}_

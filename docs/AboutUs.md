@@ -9,51 +9,52 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Wang Cheng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/wangcheng0116.png" width="200px">  
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/wangcheng0116)]
+[[portfolio](team/wangcheng0116.md)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibilities: Data and backend
 
-### Jane Doe
+### Yu Jiali
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/a1waysd.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/a1waysd)]
+[[portfolio](team/a1waysd.md)]
 
-* Role: Team Lead
+* Role: Scheduling and tracking, Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### TAN SHEN, NATHANAEL MARK
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/itsnattan.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/itsNatTan)] 
+[[portfolio](team/itsnattan.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Data and backend
 
-### James Doe
+### BHARDWAJ TAANISH
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/d-limiter.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/D-Limiter)]
+[[portfolio](team/d_limiter.md)]
+
+* Role: Developer
+* Responsibilities: UI and backend
+
+### Song Mengfei 
+
+<img src="images/song-mengfei.png" width="200px">
+
+[[github](http://github.com/Song-Mengfei)]
+[[portfolio](team/song-mengfei.md)]
 
 * Role: Developer
 * Responsibilities: UI

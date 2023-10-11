@@ -1,4 +1,4 @@
-package seedu.address.pojo;
+package seedu.address.model.flashcard;
 
 import java.util.Date;
 
@@ -10,10 +10,10 @@ import java.util.Date;
  * @since 1.0
  */
 public class FlashCard {
-    private final String originalWord;
-    private final String translatedWord;
+    private final OriginalWord originalWord;
+    private final Translation translatedWord;
     private Date whenToReview; // Date the flashcard was needs to be reviewed
-    private int level; // How many times successfully remembered
+    private ProficiencyLevel level; // How many times successfully remembered
     private boolean toDelete = false;
 
     /**
@@ -25,10 +25,10 @@ public class FlashCard {
      * @param level          The level of familiarity with the word
      */
     public FlashCard(String originalWord, String translatedWord, Date whenToReview, int level) {
-        this.level = level;
+        this.level = new ProficiencyLevel(level);
         this.whenToReview = whenToReview;
-        this.translatedWord = translatedWord;
-        this.originalWord = originalWord;
+        this.translatedWord = new Translation(translatedWord);
+        this.originalWord = new OriginalWord(originalWord);
     }
 
     /**
@@ -40,13 +40,13 @@ public class FlashCard {
      */
     public void updateLastRead(Boolean hasRemembered) {
         if (hasRemembered) {
-            this.level += 1;
+            this.level.upgradeLevel();
+        } else {
+            this.level.downgradeLevel();
         }
-        if (level == 5) {
-            toDelete = true; // If remembered enough, delete from the list
-        }
+        toDelete = this.level.toDelete(); // If remembered enough, delete from the list
         // Current date in ms + 1 day per level in ms
-        this.whenToReview = new Date(new Date().getTime() + this.level * 86400000L);
+        this.whenToReview = new Date(new Date().getTime() + this.level.calculateNextReviewInterval());
     }
 
     /**
