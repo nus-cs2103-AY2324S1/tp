@@ -28,14 +28,14 @@ public class JsonAdaptedPersonTest {
     private static final String VALID_PHONE = BENSON.getPhone().toString();
     private static final String VALID_EMAIL = BENSON.getEmail().toString();
     private static final String VALID_ADDRESS = BENSON.getAddress().toString();
-    public static final List<JsonAdaptedNote> VALID_NOTES = BENSON.getNotes().stream()
-            .map(JsonAdaptedNote::new)
-            .collect(Collectors.toList());
-    public static final List<JsonAdaptedEvent> VALID_EVENTS = BENSON.getEvents().stream()
-            .map(JsonAdaptedEvent::new)
-            .collect(Collectors.toList());
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
+            .collect(Collectors.toList());
+    private static final List<JsonAdaptedNote> VALID_NOTES = BENSON.getNotes().stream()
+            .map(JsonAdaptedNote::new)
+            .collect(Collectors.toList());
+    private static final List<JsonAdaptedEvent> VALID_EVENTS = BENSON.getEvents().stream()
+            .map(JsonAdaptedEvent::new)
             .collect(Collectors.toList());
 
     @Test
