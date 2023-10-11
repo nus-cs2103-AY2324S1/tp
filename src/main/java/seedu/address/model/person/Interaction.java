@@ -8,7 +8,7 @@ public class Interaction {
     /**
      * Represents the outcome of the interaction.
      */
-    private enum Outcome {
+    public static enum Outcome {
         INTERESTED,
         NOT_INTERESTED,
         FOLLOWUP_REQUIRED,

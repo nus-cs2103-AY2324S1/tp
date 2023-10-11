@@ -178,6 +178,8 @@ public class ParserUtil {
         return new Details(trimmedDetails);
     }
 
+    public static Outcome 
+
 
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
