@@ -8,6 +8,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.InteractionCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Interaction.Outcome;
 
 /**
  * Parses input arguments and creates a new InteractionCommand object.
@@ -23,21 +24,25 @@ public class InteractionCommandParser implements Parser<Command> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_OUTCOME);
-        
+
         Index index;
 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
+            // CHECKSTYLE.OFF: LineLength
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, InteractionCommand.MESSAGE_USAGE), pe);
+            // CHECKSTYLE.ON: LineLength
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_OUTCOME);
+
+        Outcome outcome = Outcome.UNKNOWN;
 
         if (argMultimap.getValue(PREFIX_OUTCOME).isPresent()) {
             outcome = ParserUtil.parseOutcome(argMultimap.getValue(PREFIX_OUTCOME).get());
         }
 
-        return new InteractionCommand(index, );
+        return new InteractionCommand(index, outcome);
     }
 }

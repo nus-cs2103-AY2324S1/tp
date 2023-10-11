@@ -12,7 +12,14 @@ public class Interaction {
         INTERESTED,
         NOT_INTERESTED,
         FOLLOWUP_REQUIRED,
-        UNKNOWN
+        UNKNOWN;
+
+        /**
+        * Returns true if a given string is a valid outcome.
+        */
+        public static boolean isValidOutcome(String test) {
+            return test.matches("INTERESTED|NOT_INTERESTED|FOLLOWUP_REQUIRED|UNKNOWN");
+        }
     }
 
     public final String interactionNote;

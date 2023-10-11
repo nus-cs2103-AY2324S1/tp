@@ -24,4 +24,4 @@ src/test/data/sandbox/
 docs/_site/
 
 #Settings file
-settings.json
+.vscode/settings.json
