@@ -109,8 +109,8 @@ class JsonAdaptedPerson {
         if (id == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, ID.class.getSimpleName()));
         }
-        if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+        if (!ID.isValidID(id)) {
+            throw new IllegalValueException(ID.MESSAGE_CONSTRAINTS);
         }
         final ID modelId = new ID(id);
 
