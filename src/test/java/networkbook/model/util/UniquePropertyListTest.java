@@ -126,8 +126,8 @@ public class UniquePropertyListTest {
 
     @Test
     public void remove_itemDoesNotExist_throwsItemNotFoundException() {
-        assertThrows(ItemNotFoundException.class,
-                () -> new UniquePropertyList<UniqueNumber>().remove(new UniqueNumber(1, 0)));
+        assertThrows(ItemNotFoundException.class, ()
+                -> new UniquePropertyList<UniqueNumber>().remove(new UniqueNumber(1, 0)));
     }
 
     @Test
