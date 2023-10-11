@@ -14,7 +14,7 @@ import networkbook.testutil.TypicalPersons;
 /**
  * Contains integration tests (interaction with the Model) for {@code AddCommand}.
  */
-public class AddCommandIntegrationTest {
+public class CreateCommandIntegrationTest {
 
     private Model model;
 
@@ -30,16 +30,16 @@ public class AddCommandIntegrationTest {
         Model expectedModel = new ModelManager(model.getNetworkBook(), new UserPrefs());
         expectedModel.addPerson(validPerson);
 
-        CommandTestUtil.assertCommandSuccess(new AddCommand(validPerson), model,
-                String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+        CommandTestUtil.assertCommandSuccess(new CreateCommand(validPerson), model,
+                String.format(CreateCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
                 expectedModel);
     }
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
         Person personInList = model.getNetworkBook().getPersonList().get(0);
-        CommandTestUtil.assertCommandFailure(new AddCommand(personInList), model,
-                AddCommand.MESSAGE_DUPLICATE_PERSON);
+        CommandTestUtil.assertCommandFailure(new CreateCommand(personInList), model,
+                CreateCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
 }

@@ -11,8 +11,8 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import networkbook.logic.Messages;
-import networkbook.logic.commands.AddCommand;
 import networkbook.logic.commands.ClearCommand;
+import networkbook.logic.commands.CreateCommand;
 import networkbook.logic.commands.DeleteCommand;
 import networkbook.logic.commands.EditCommand;
 import networkbook.logic.commands.ExitCommand;
@@ -34,8 +34,8 @@ public class NetworkBookParserTest {
     @Test
     public void parseCommand_add() throws Exception {
         Person person = new PersonBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
-        assertEquals(new AddCommand(person), command);
+        CreateCommand command = (CreateCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
+        assertEquals(new CreateCommand(person), command);
     }
 
     @Test

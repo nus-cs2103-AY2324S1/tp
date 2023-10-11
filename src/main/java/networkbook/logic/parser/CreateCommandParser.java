@@ -5,7 +5,7 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 import networkbook.logic.Messages;
-import networkbook.logic.commands.AddCommand;
+import networkbook.logic.commands.CreateCommand;
 import networkbook.logic.parser.exceptions.ParseException;
 import networkbook.model.person.Address;
 import networkbook.model.person.Email;
@@ -18,14 +18,14 @@ import networkbook.model.util.UniqueList;
 /**
  * Parses input arguments and creates a new AddCommand object
  */
-public class AddCommandParser implements Parser<AddCommand> {
+public class CreateCommandParser implements Parser<CreateCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public AddCommand parse(String args) throws ParseException {
+    public CreateCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(
                         args,
@@ -43,7 +43,8 @@ public class AddCommandParser implements Parser<AddCommand> {
                 CliSyntax.PREFIX_PHONE,
                 CliSyntax.PREFIX_EMAIL
         ) || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                                                    CreateCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(
@@ -61,7 +62,7 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         Person person = new Person(name, phone, emails, address, tagList);
 
-        return new AddCommand(person);
+        return new CreateCommand(person);
     }
 
     /**

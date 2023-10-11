@@ -11,9 +11,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import networkbook.logic.commands.AddCommand;
 import networkbook.logic.commands.CommandResult;
 import networkbook.logic.commands.CommandTestUtil;
+import networkbook.logic.commands.CreateCommand;
 import networkbook.logic.commands.ListCommand;
 import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.logic.parser.exceptions.ParseException;
@@ -160,7 +160,7 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Triggers the saveNetworkBook method by executing an add command
-        String addCommand = AddCommand.COMMAND_WORD + CommandTestUtil.NAME_DESC_AMY + CommandTestUtil.PHONE_DESC_AMY
+        String addCommand = CreateCommand.COMMAND_WORD + CommandTestUtil.NAME_DESC_AMY + CommandTestUtil.PHONE_DESC_AMY
                 + CommandTestUtil.EMAIL_DESC_AMY + CommandTestUtil.ADDRESS_DESC_AMY;
         Person expectedPerson = new PersonBuilder(TypicalPersons.AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
