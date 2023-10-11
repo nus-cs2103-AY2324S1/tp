@@ -1,4 +1,4 @@
-package seedu.address.model.room.exceptions;
+package seedu.address.model.booking.exceptions;
 
 /**
  * Signals that the operation will result in duplicate room (Persons are considered duplicates if they have the same
