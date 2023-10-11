@@ -204,6 +204,26 @@ public class ModelManager implements Model {
        person.addGroup(group);
     }
 
+    @Override
+    public Pair<Person, Group> ungroupPerson(String personName, String groupName) throws CommandException {
+        // both throw exception if not exists exact match
+        Person person = addressBook.getPerson(personName);
+        Group group = addressBook.getGroup(groupName);
+        this.unassignGroup(person, group);
+        Pair<Person, Group> output = new Pair<>(person, group);
+        return output;
+    }
+
+    /**
+     * Assign person to group
+     * @param person person to be grouped
+     * @param group group in consideration
+     * @throws CommandException if person has already been assigned to group
+     */
+    private void unassignGroup(Person person, Group group) throws CommandException {
+        person.removeGroup(group);
+        group.removePerson(person);
+    }
 
     @Override
     public boolean equals(Object other) {

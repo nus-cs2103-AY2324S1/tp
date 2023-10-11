@@ -127,8 +127,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
-    public void removeGroup(Group key) {
-        groups.remove(key);
+    public void removeGroup(Group g) {
+        groups.remove(g);
     }
 
     //// util methods

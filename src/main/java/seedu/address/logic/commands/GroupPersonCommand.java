@@ -14,7 +14,7 @@ import seedu.address.model.group.exceptions.DuplicateGroupException;
 import seedu.address.model.person.Person;
 
 /**
- * Adds a person to the address book.
+ * Adds a person to a group.
  */
 public class GroupPersonCommand extends Command {
 
@@ -64,9 +64,10 @@ public class GroupPersonCommand extends Command {
 //		Person person = personList.get(0);
 //		Group group = groupList.get(0);
 		// person already in the group
+		System.out.println(person.toString());
 
 
-		return new CommandResult(java.lang.String.format(MESSAGE_SUCCESS, person.getName().fullName, group.groupName()));
+		return new CommandResult(java.lang.String.format(MESSAGE_SUCCESS, person.getName().fullName, group.getName()));
 	}
 
 	@Override
@@ -80,9 +81,9 @@ public class GroupPersonCommand extends Command {
 			return false;
 		}
 
-		GroupPersonCommand otherAddCommand = (GroupPersonCommand) other;
+		GroupPersonCommand otherGroupPersonCommand = (GroupPersonCommand) other;
 		// to check
-		return this.equals(otherAddCommand);
+		return this.equals(otherGroupPersonCommand);
 
 	}
 

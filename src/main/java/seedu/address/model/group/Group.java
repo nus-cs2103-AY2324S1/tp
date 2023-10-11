@@ -14,6 +14,7 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
  * Class representing a group
  */
 public class Group {
+    public static final String MESSAGE_CONSTRAINTS = "Group names should be alphanumeric";
     private final ObservableList<Person> listOfGroupMates = FXCollections.observableArrayList();
     private final String groupName;
 
@@ -65,11 +66,12 @@ public class Group {
      * Removes the person from the group.
      * The person must exist in the group.
      */
-    public void remove(Person toRemove) {
+    public void removePerson(Person toRemove) throws CommandException {
         requireNonNull(toRemove);
-        if (!listOfGroupMates.remove(toRemove)) {
-            throw new PersonNotFoundException();
+        if (!contains(toRemove)) {
+            throw new CommandException(String.format("%s is not in this group: %s", toRemove.getName().fullName, this.groupName));
         }
+        listOfGroupMates.remove(toRemove);
     }
 
     /**
@@ -86,7 +88,7 @@ public class Group {
      */
     public void addPerson(Person personToAdd) throws CommandException {
         requireNonNull(personToAdd);
-        if (contains(personToAdd)) {
+        if (this.contains(personToAdd)) {
             throw new CommandException(String.format("%s is already in this group: %s", personToAdd.getName().fullName, this.groupName));
         }
         listOfGroupMates.add(personToAdd);
@@ -99,8 +101,7 @@ public class Group {
                 .toString();
     }
 
-    public String groupName() {
+    public String getName() {
         return this.groupName;
     }
-
 }
