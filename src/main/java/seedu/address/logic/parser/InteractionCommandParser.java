@@ -33,9 +33,8 @@ public class InteractionCommandParser implements Parser<Command> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            // CHECKSTYLE.OFF: LineLength
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, InteractionCommand.MESSAGE_USAGE), pe);
-            // CHECKSTYLE.ON: LineLength
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                InteractionCommand.MESSAGE_USAGE), pe);
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_OUTCOME);
@@ -45,17 +44,19 @@ public class InteractionCommandParser implements Parser<Command> {
 
         if (argMultimap.getValue(PREFIX_OUTCOME).isPresent()) {
             outcome = ParserUtil.parseOutcome(argMultimap.getValue(PREFIX_OUTCOME).get());
-            String[] trimmedArgsParts = trimmedArgs.split("\\s+", 3);
-            if (trimmedArgsParts.length < 3) {
+            String[] trimmedArgsParts = trimmedArgs.split("\\s+", 4);
+            if (trimmedArgsParts.length < 4) {
                 note = "";
+            } else {
+                note = trimmedArgsParts[3];
             }
         } else {
-            String[] trimmedArgsParts = trimmedArgs.split("\\s+", 2);
-            if (trimmedArgsParts.length < 2) {
+            String[] trimmedArgsParts = trimmedArgs.split("\\s+", 3);
+            if (trimmedArgsParts.length < 3) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         InteractionCommand.MESSAGE_USAGE));
             }
-            note = trimmedArgsParts[1];
+            note = trimmedArgsParts[2];
         }
 
         return new InteractionCommand(index, new Interaction(note, outcome));

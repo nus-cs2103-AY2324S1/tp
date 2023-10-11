@@ -55,4 +55,19 @@ public class Interaction {
     public String toString() {
         return interactionNote + "\nThe outcome of this interaction is: " + outcome;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Interaction)) {
+            return false;
+        }
+
+        Interaction otherInteraction = (Interaction) other;
+        return otherInteraction.interactionNote.equals(this.interactionNote)
+                && otherInteraction.outcome.equals(this.outcome);
+    }
 }
