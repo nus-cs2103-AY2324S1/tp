@@ -191,7 +191,7 @@ public class ParserUtil {
         if (!Outcome.isValidOutcome(trimmedOutcome)) {
             throw new ParseException(Outcome.MESSAGE_CONSTRAINTS);
         }
-        return new Outcome(trimmedOutcome);
+        return Outcome.valueOf(trimmedOutcome);
     }
 
     /**

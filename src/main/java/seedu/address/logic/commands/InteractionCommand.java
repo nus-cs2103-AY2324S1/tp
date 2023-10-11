@@ -30,6 +30,9 @@ public class InteractionCommand extends Command {
     private final Index index;
     private final Interaction interaction;
 
+    /**
+     * Creates an InteractionCommand to add the specified {@code Interaction}
+     */
     public InteractionCommand(Index index, Interaction interaction) {
         requireNonNull(index);
 

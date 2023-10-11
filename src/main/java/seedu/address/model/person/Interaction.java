@@ -14,6 +14,10 @@ public class Interaction {
         FOLLOWUP_REQUIRED,
         UNKNOWN;
 
+        public static final String MESSAGE_CONSTRAINTS = "Outcome should be one of the following: "
+                + "INTERESTED, NOT_INTERESTED, FOLLOWUP_REQUIRED, UNKNOWN"
+                + "and it should not be blank";
+
         /**
         * Returns true if a given string is a valid outcome.
         */

@@ -23,5 +23,5 @@ src/test/data/sandbox/
 .DS_Store
 docs/_site/
 
-#Settings file
+#VSCode settings file
 .vscode/settings.json

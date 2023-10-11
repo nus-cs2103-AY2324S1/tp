@@ -8,6 +8,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.InteractionCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Interaction;
 import seedu.address.model.person.Interaction.Outcome;
 
 /**
@@ -22,6 +23,8 @@ public class InteractionCommandParser implements Parser<Command> {
      */
     public Command parse(String args) throws ParseException {
         requireNonNull(args);
+        String trimmedArgs = args.trim();
+
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_OUTCOME);
 
@@ -38,11 +41,23 @@ public class InteractionCommandParser implements Parser<Command> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_OUTCOME);
 
         Outcome outcome = Outcome.UNKNOWN;
+        String note = "";
 
         if (argMultimap.getValue(PREFIX_OUTCOME).isPresent()) {
             outcome = ParserUtil.parseOutcome(argMultimap.getValue(PREFIX_OUTCOME).get());
+            String[] trimmedArgsParts = trimmedArgs.split("\\s+", 3);
+            if (trimmedArgsParts.length < 3) {
+                note = "";
+            }
+        } else {
+            String[] trimmedArgsParts = trimmedArgs.split("\\s+", 2);
+            if (trimmedArgsParts.length < 2) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        InteractionCommand.MESSAGE_USAGE));
+            }
+            note = trimmedArgsParts[1];
         }
 
-        return new InteractionCommand(index, outcome);
+        return new InteractionCommand(index, new Interaction(note, outcome));
     }
 }
