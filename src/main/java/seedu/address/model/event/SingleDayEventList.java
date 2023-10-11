@@ -2,10 +2,10 @@ package seedu.address.model.event;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
 import java.util.Map;
 import java.util.NavigableMap;
 import java.util.Optional;
-import java.time.LocalDate;
 import java.util.TreeMap;
 
 import javafx.collections.FXCollections;
