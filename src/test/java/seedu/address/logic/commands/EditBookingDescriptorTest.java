@@ -60,7 +60,8 @@ public class EditBookingDescriptorTest {
     @Test
     public void toStringMethod() {
         EditCommand.EditRoomDescriptor editRoomDescriptor = new EditCommand.EditRoomDescriptor();
-        String expected = EditCommand.EditRoomDescriptor.class.getCanonicalName() + "{name="
+        String expected = EditCommand.EditRoomDescriptor.class.getCanonicalName() + "{room="
+                + editRoomDescriptor.getRoom().orElse(null) + ", name="
                 + editRoomDescriptor.getName().orElse(null) + ", phone="
                 + editRoomDescriptor.getPhone().orElse(null) + ", email="
                 + editRoomDescriptor.getEmail().orElse(null) + ", address="

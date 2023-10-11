@@ -6,6 +6,8 @@ package seedu.address.model.room;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Room {
+    public static final String MESSAGE_CONSTRAINTS =
+            "Room is not a between 1 and 500 inclusive.";
     private final int roomNumber;
 
     public Room(int roomNumber) {
