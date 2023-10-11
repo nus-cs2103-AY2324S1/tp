@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.employee.Address;
-import seedu.address.model.employee.Email;
+import seedu.address.model.employee.Department;
 import seedu.address.model.employee.Employee;
 import seedu.address.model.employee.Name;
 import seedu.address.model.employee.Phone;
@@ -18,12 +18,12 @@ public class EmployeeBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
-    public static final String DEFAULT_EMAIL = "amy@gmail.com";
+    public static final String DEFAULT_DEPARTMENT = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
     private Name name;
     private Phone phone;
-    private Email email;
+    private Department department;
     private Address address;
     private Set<Tag> tags;
 
@@ -33,7 +33,7 @@ public class EmployeeBuilder {
     public EmployeeBuilder() {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
-        email = new Email(DEFAULT_EMAIL);
+        department = new Department(DEFAULT_DEPARTMENT);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
     }
@@ -44,7 +44,7 @@ public class EmployeeBuilder {
     public EmployeeBuilder(Employee employeeToCopy) {
         name = employeeToCopy.getName();
         phone = employeeToCopy.getPhone();
-        email = employeeToCopy.getEmail();
+        department = employeeToCopy.getDepartment();
         address = employeeToCopy.getAddress();
         tags = new HashSet<>(employeeToCopy.getTags());
     }
@@ -82,15 +82,15 @@ public class EmployeeBuilder {
     }
 
     /**
-     * Sets the {@code Email} of the {@code Employee} that we are building.
+     * Sets the {@code Department} of the {@code Employee} that we are building.
      */
-    public EmployeeBuilder withEmail(String email) {
-        this.email = new Email(email);
+    public EmployeeBuilder withDepartment(String department) {
+        this.department = new Department(department);
         return this;
     }
 
     public Employee build() {
-        return new Employee(name, phone, email, address, tags);
+        return new Employee(name, phone, department, address, tags);
     }
 
 }
