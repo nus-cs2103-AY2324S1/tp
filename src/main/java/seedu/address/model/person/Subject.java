@@ -1,9 +1,10 @@
 package seedu.address.model.person;
 
-import java.util.HashMap;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import java.util.HashMap;
+
 
 /**
  * Represents a student's subject in the address book.
@@ -17,13 +18,13 @@ public class Subject {
 
     public final String colour;
     // useful resource: https://www.w3schools.com/tags/ref_colornames.asp for colours
-    private HashMap<String,String> subjectToColourMap = new HashMap<String,String>() {{
-        put("MATHEMATICS", "red");
-        put("PHYSICS", "yellow");
-        put("BIOLOGY", "green");
-        put("CHEMISTRY", "lightBlue");
-        put("ENGLISH", "orange");
-    }};
+    private HashMap<String, String> subjectToColourMap = new HashMap<String, String>() {{
+            put("MATHEMATICS", "red");
+            put("PHYSICS", "yellow");
+            put("BIOLOGY", "green");
+            put("CHEMISTRY", "lightBlue");
+            put("ENGLISH", "orange");
+        }};
 
 
     /**

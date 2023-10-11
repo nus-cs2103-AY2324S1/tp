@@ -5,7 +5,11 @@ import java.util.Comparator;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.*;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -44,10 +48,6 @@ public class PersonCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public PersonCard(Person person, int displayedIndex) {
-       this(person, displayedIndex, new String[]{"subjects"});
-    }
-
     public PersonCard(Person person, int displayedIndex, String[] displayFields) {
         super(FXML);
         this.person = person;
@@ -73,6 +73,8 @@ public class PersonCard extends UiPart<Region> {
             break;
         case "subjects":
             buildSubjects();
+            break;
+        default:
             break;
         }
     }
@@ -105,17 +107,26 @@ public class PersonCard extends UiPart<Region> {
         FlowPane subjects = new FlowPane();
         person.getSubjects().stream()
                 .sorted(Comparator.comparing(subject -> subject.subjectName))
-                .forEach(subject -> subjects.getChildren().add(new ColoredTextEntry(subject.subjectName.toString(), subject.colour)));
+                .forEach(subject -> subjects.getChildren()
+                        .add(new ColoredTextEntry(subject.subjectName.toString(), subject.colour)));
         subjects.setHgap(10);
         fields.getChildren().add(subjects);
     }
 
+    /**
+     * A custom UI component that displays a colored text entry.
+     */
     public class ColoredTextEntry extends StackPane {
-
+        /**
+         * Creates a colored text entry.
+         * @param text The text content to display.
+         * @param color The color of the background fillout.
+         */
         public ColoredTextEntry(String text, String color) {
             Text textNode = new Text(text);
             textNode.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
-            Rectangle rectangle = new Rectangle(textNode.getLayoutBounds().getWidth() + 10, textNode.getLayoutBounds().getHeight() + 10);
+            Rectangle rectangle = new Rectangle(textNode.getLayoutBounds().getWidth() + 10,
+                    textNode.getLayoutBounds().getHeight() + 10);
             rectangle.setArcWidth(20); // Customize the arc width to make it curved.
             rectangle.setArcHeight(20); // Customize the arc height to make it curved.
             rectangle.setFill(Color.web(color));
