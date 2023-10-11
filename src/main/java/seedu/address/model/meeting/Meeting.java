@@ -1,22 +1,25 @@
 package seedu.address.model.meeting;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
  * Represents a Meeting in the address book.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Guarantees: details are present and not null, field values are validated,
+ * immutable.
  */
 public class Meeting {
     private final Title title;
     private final Location location;
     private final MeetingTime meetingTime;
-    private final Set<Attendee> attendees = new HashSet<>();
+    private final Set<Attendee> attendees;
 
     /**
      * Every field must be present and not null.
@@ -25,7 +28,7 @@ public class Meeting {
         this.title = title;
         this.location = location;
         this.meetingTime = new MeetingTime(start, end);
-        this.attendees.addAll(attendees);
+        this.attendees = new LinkedHashSet<>(attendees);
     }
 
     public Title getTitle() {
@@ -49,11 +52,20 @@ public class Meeting {
     }
 
     /**
-     * Returns an immutable attendee set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable attendee set, which throws
+     * {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Attendee> getAttendees() {
         return Collections.unmodifiableSet(attendees);
+    }
+
+    /**
+     * Returns an attendee at the given {@code index}
+     */
+    public Attendee getAttendee(Index index) {
+        // TODO: catch index out of bounds
+        return new ArrayList<>(attendees).get(index.getZeroBased());
     }
 
     /**
