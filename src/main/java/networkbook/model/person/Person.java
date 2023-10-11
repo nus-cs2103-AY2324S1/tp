@@ -9,13 +9,14 @@ import java.util.Set;
 
 import networkbook.commons.util.ToStringBuilder;
 import networkbook.model.tag.Tag;
+import networkbook.model.util.Identifiable;
 import networkbook.model.util.UniquePropertyList;
 
 /**
  * Represents a Person in the network book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public class Person implements Identifiable<Person> {
 
     // Identity fields
     private final Name name;
@@ -66,13 +67,22 @@ public class Person {
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
-    public boolean isSamePerson(Person otherPerson) {
+    public boolean isSame(Person otherPerson) {
         if (otherPerson == this) {
             return true;
         }
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
+    }
+
+    /**
+     * Returns string for Json storage.
+     * However, a person cannot be converted to a simple string for Json storage.
+     * Hence, this method is unsupported here.
+     */
+    public String getValue() {
+        throw new UnsupportedOperationException("Person does not have String representation for Json storage");
     }
 
     /**

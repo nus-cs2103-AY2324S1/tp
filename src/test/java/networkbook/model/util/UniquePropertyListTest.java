@@ -53,43 +53,43 @@ public class UniquePropertyListTest {
     }
 
     @Test
-    public void set_nullTarget_throwsNullPointerException() {
+    public void setItem_nullTarget_throwsNullPointerException() {
         assertThrows(NullPointerException.class, ()
-                -> new UniquePropertyList<UniqueNumber>().set(null, new UniqueNumber(5, 0)));
+                -> new UniquePropertyList<UniqueNumber>().setItem(null, new UniqueNumber(5, 0)));
     }
 
     @Test
-    public void set_nullEdited_throwsNullPointerException() {
+    public void setItem_nullEdited_throwsNullPointerException() {
         assertThrows(NullPointerException.class, ()
-                -> new UniquePropertyList<UniqueNumber>().set(new UniqueNumber(5, 0), null));
+                -> new UniquePropertyList<UniqueNumber>().setItem(new UniqueNumber(5, 0), null));
     }
 
     @Test
-    public void set_targetNotInList_throwsItemNotFoundException() {
+    public void setItem_targetNotInList_throwsItemNotFoundException() {
         UniquePropertyList<UniqueNumber> uniqueList = new UniquePropertyList<UniqueNumber>();
         uniqueList.add(new UniqueNumber(1, 0));
         assertThrows(ItemNotFoundException.class, ()
-                -> uniqueList.set(new UniqueNumber(1, 1), new UniqueNumber(2, 0)));
+                -> uniqueList.setItem(new UniqueNumber(1, 1), new UniqueNumber(2, 0)));
     }
 
     @Test
-    public void set_editedEqualToTarget_success() {
+    public void setItem_editedEqualToTarget_success() {
         UniquePropertyList<UniqueNumber> uniqueList = new UniquePropertyList<>();
         UniqueNumber uniqueNumber = new UniqueNumber(1, 0);
         uniqueList.add(uniqueNumber);
-        uniqueList.set(uniqueNumber, uniqueNumber);
+        uniqueList.setItem(uniqueNumber, uniqueNumber);
         UniquePropertyList<UniqueNumber> expectedList = new UniquePropertyList<>();
         expectedList.add(uniqueNumber);
         assertEquals(expectedList, uniqueList);
     }
 
     @Test
-    public void set_editedIsSameAsTarget_success() {
+    public void setItem_editedIsSameAsTarget_success() {
         UniquePropertyList<UniqueNumber> uniqueList = new UniquePropertyList<>();
         UniqueNumber target = new UniqueNumber(1, 0);
         UniqueNumber edited = new UniqueNumber(1, 10);
         uniqueList.add(target);
-        uniqueList.set(target, edited);
+        uniqueList.setItem(target, edited);
         UniquePropertyList<UniqueNumber> expectedList = new UniquePropertyList<>();
         expectedList.add(edited);
         UniquePropertyList<UniqueNumber> wrongList = new UniquePropertyList<>();
@@ -99,12 +99,12 @@ public class UniquePropertyListTest {
     }
 
     @Test
-    public void set_editedDifferentFromTarget_success() {
+    public void setItem_editedDifferentFromTarget_success() {
         UniquePropertyList<UniqueNumber> uniqueList = new UniquePropertyList<>();
         UniqueNumber target = new UniqueNumber(1, 0);
         UniqueNumber edited = new UniqueNumber(2, 10);
         uniqueList.add(target);
-        uniqueList.set(target, edited);
+        uniqueList.setItem(target, edited);
         UniquePropertyList<UniqueNumber> expectedList = new UniquePropertyList<>();
         expectedList.add(edited);
         UniquePropertyList<UniqueNumber> wrongList = new UniquePropertyList<>();
@@ -114,14 +114,14 @@ public class UniquePropertyListTest {
     }
 
     @Test
-    public void set_editedNotUnique_throwsDuplicateException() {
+    public void setItem_editedNotUnique_throwsDuplicateException() {
         UniquePropertyList<UniqueNumber> uniqueList = new UniquePropertyList<>();
         UniqueNumber target = new UniqueNumber(1, 0);
         UniqueNumber edited = new UniqueNumber(2, 10);
         UniqueNumber duplicate = new UniqueNumber(2, 10);
         uniqueList.add(target);
         uniqueList.add(edited);
-        assertThrows(DuplicateException.class, () -> uniqueList.set(target, duplicate));
+        assertThrows(DuplicateException.class, () -> uniqueList.setItem(target, duplicate));
     }
 
     @Test

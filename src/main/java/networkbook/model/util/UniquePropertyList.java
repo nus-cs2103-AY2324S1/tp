@@ -50,7 +50,7 @@ public class UniquePropertyList<T extends Identifiable<T>> implements Iterable<T
      * @param target The target to replace.
      * @param edited The new value of the
      */
-    public void set(T target, T edited) {
+    public void setItem(T target, T edited) {
         requireAllNonNull(target, edited);
 
         int index = internalList.indexOf(target);

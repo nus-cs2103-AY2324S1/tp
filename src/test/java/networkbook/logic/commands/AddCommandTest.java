@@ -144,7 +144,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setPerson(Person target, Person editedPerson) {
+        public void setItem(Person target, Person editedPerson) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -173,7 +173,7 @@ public class AddCommandTest {
         @Override
         public boolean hasPerson(Person person) {
             requireNonNull(person);
-            return this.person.isSamePerson(person);
+            return this.person.isSame(person);
         }
     }
 
@@ -186,7 +186,7 @@ public class AddCommandTest {
         @Override
         public boolean hasPerson(Person person) {
             requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSamePerson);
+            return personsAdded.stream().anyMatch(person::isSame);
         }
 
         @Override

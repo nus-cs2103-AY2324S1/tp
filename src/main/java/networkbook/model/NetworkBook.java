@@ -7,15 +7,15 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import networkbook.commons.util.ToStringBuilder;
 import networkbook.model.person.Person;
-import networkbook.model.person.UniquePersonList;
+import networkbook.model.util.UniquePropertyList;
 
 /**
  * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Duplicates are not allowed (by .isSame comparison)
  */
 public class NetworkBook implements ReadOnlyNetworkBook {
 
-    private final UniquePersonList persons;
+    private final UniquePropertyList<Person> persons;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -25,7 +25,7 @@ public class NetworkBook implements ReadOnlyNetworkBook {
      *   among constructors.
      */
     {
-        persons = new UniquePersonList();
+        persons = new UniquePropertyList<Person>();
     }
 
     public NetworkBook() {}
@@ -44,8 +44,8 @@ public class NetworkBook implements ReadOnlyNetworkBook {
      * Replaces the contents of the person list with {@code persons}.
      * {@code persons} must not contain duplicate persons.
      */
-    public void setPersons(List<Person> persons) {
-        this.persons.setPersons(persons);
+    public void setItems(List<Person> persons) {
+        this.persons.setItems(persons);
     }
 
     /**
@@ -54,7 +54,7 @@ public class NetworkBook implements ReadOnlyNetworkBook {
     public void resetData(ReadOnlyNetworkBook newData) {
         requireNonNull(newData);
 
-        setPersons(newData.getPersonList());
+        setItems(newData.getPersonList());
     }
 
     //// person-level operations
@@ -80,10 +80,10 @@ public class NetworkBook implements ReadOnlyNetworkBook {
      * {@code target} must exist in the network book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the network book.
      */
-    public void setPerson(Person target, Person editedPerson) {
+    public void setItem(Person target, Person editedPerson) {
         requireNonNull(editedPerson);
 
-        persons.setPerson(target, editedPerson);
+        persons.setItem(target, editedPerson);
     }
 
     /**
