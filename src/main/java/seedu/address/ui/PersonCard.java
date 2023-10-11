@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.address.model.person.Person;
 
 /**
@@ -25,6 +26,8 @@ public class PersonCard extends UiPart<Region> {
      */
 
     public final Person person;
+    @FXML
+    private VBox fields;
 
     @FXML
     private HBox cardPane;
@@ -45,13 +48,55 @@ public class PersonCard extends UiPart<Region> {
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
     public PersonCard(Person person, int displayedIndex) {
+       this(person, displayedIndex, new String[]{});
+    }
+
+    public PersonCard(Person person, int displayedIndex, String[] displayFields) {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
+        for (String field : displayFields) {
+            build(field);
+        }
+    }
+    void build(String field) {
+        switch (field) {
+        case "phone":
+            buildPhone();
+            break;
+        case "address":
+            buildAddress();
+            break;
+        case "email":
+            buildEmail();
+            break;
+        case "tags":
+            buildTags();
+            break;
+        }
+    }
+
+    void buildPhone() {
+        Label phone = new Label(person.getPhone().value);
+        phone.getStyleClass().add("cell_small_label");
+        fields.getChildren().add(phone);
+    }
+
+    void buildAddress() {
+        Label address = new Label(person.getAddress().value);
+        address.getStyleClass().add("cell_small_label");
+        fields.getChildren().add(address);
+    }
+
+    void buildEmail() {
+        Label email = new Label(person.getEmail().value);
+        email.getStyleClass().add("cell_small_label");
+        fields.getChildren().add(email);
+    }
+
+    void buildTags() {
+        //why creating a new pane tags and push to fields does not work?
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
