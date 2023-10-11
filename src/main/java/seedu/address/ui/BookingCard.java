@@ -7,12 +7,12 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.person.Person;
+import seedu.address.model.booking.Booking;
 
 /**
  * An UI component that displays information of a {@code Person}.
  */
-public class PersonCard extends UiPart<Region> {
+public class BookingCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
 
@@ -24,10 +24,12 @@ public class PersonCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Person person;
+    public final Booking booking;
 
     @FXML
     private HBox cardPane;
+    @FXML
+    private Label room;
     @FXML
     private Label name;
     @FXML
@@ -44,15 +46,16 @@ public class PersonCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public PersonCard(Person person, int displayedIndex) {
+    public BookingCard(Booking booking, int displayedIndex) {
         super(FXML);
-        this.person = person;
+        this.booking = booking;
         id.setText(displayedIndex + ". ");
-        name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
-        person.getTags().stream()
+        room.setText("Room: " + booking.getRoom().value);
+        name.setText("Client: " + booking.getName().fullName);
+        phone.setText("Contact: " + booking.getPhone().value);
+        email.setText("Email: " + booking.getEmail().value);
+        address.setText("Home Address: " + booking.getAddress().value);
+        booking.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }

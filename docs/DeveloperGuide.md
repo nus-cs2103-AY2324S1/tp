@@ -38,7 +38,7 @@ CheckMate is a powerful room booking and management system designed for hotel em
 Hotel employees, especially those in administrative and management roles.
 
 ### Value Proposition
-CheckMate empowers hotel employees to efficiently manage room bookings, optimize room-person matching, and enhance guest experiences. It offers real-time room availability, service scheduling, and amenity management. It is optimized for administrative roles, ensuring seamless room allocation and guest service.
+CheckMate empowers hotel employees to efficiently manage room bookings, optimize room-booking matching, and enhance guest experiences. It offers real-time room availability, service scheduling, and amenity management. It is optimized for administrative roles, ensuring seamless room allocation and guest service.
 
 ## 2. Getting Started
 
@@ -155,7 +155,7 @@ Detailed instructions for using each feature can be found in the respective sect
 - CheckMate works on any mainstream OS with Java 11 or above.
 
 ### Performance Expectations
-- It can hold up to 1000 persons without noticeable sluggishness in performance for typical usage.
+- It can hold up to 1000 bookings without noticeable sluggishness in performance for typical usage.
 
 ### User Typing Speed
 - A user with above-average typing speed for regular English text should be able to accomplish tasks faster using commands than using the mouse.

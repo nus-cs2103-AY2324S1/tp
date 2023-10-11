@@ -6,16 +6,16 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.booking.Booking;
+import seedu.address.model.booking.UniqueBookingList;
 
 /**
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class BookingsBook implements ReadOnlyBookingsBook {
 
-    private final UniquePersonList persons;
+    private final UniqueBookingList bookings;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -25,15 +25,15 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
-        persons = new UniquePersonList();
+        bookings = new UniqueBookingList();
     }
 
-    public AddressBook() {}
+    public BookingsBook() {}
 
     /**
      * Creates an AddressBook using the Persons in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public BookingsBook(ReadOnlyBookingsBook toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -44,17 +44,17 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Replaces the contents of the person list with {@code persons}.
      * {@code persons} must not contain duplicate persons.
      */
-    public void setPersons(List<Person> persons) {
-        this.persons.setPersons(persons);
+    public void setBookings(List<Booking> bookings) {
+        this.bookings.setBookings(bookings);
     }
 
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyBookingsBook newData) {
         requireNonNull(newData);
 
-        setPersons(newData.getPersonList());
+        setBookings(newData.getPersonList());
     }
 
     //// person-level operations
@@ -62,17 +62,17 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return persons.contains(person);
+    public boolean hasBooking(Booking booking) {
+        requireNonNull(booking);
+        return bookings.contains(booking);
     }
 
     /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */
-    public void addPerson(Person p) {
-        persons.add(p);
+    public void addBooking(Booking p) {
+        bookings.add(p);
     }
 
     /**
@@ -80,18 +80,18 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
-    public void setPerson(Person target, Person editedPerson) {
-        requireNonNull(editedPerson);
+    public void setBooking(Booking target, Booking editedBooking) {
+        requireNonNull(editedBooking);
 
-        persons.setPerson(target, editedPerson);
+        bookings.setBooking(target, editedBooking);
     }
 
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
-    public void removePerson(Person key) {
-        persons.remove(key);
+    public void removePerson(Booking key) {
+        bookings.remove(key);
     }
 
     //// util methods
@@ -99,13 +99,13 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("persons", persons)
+                .add("persons", bookings)
                 .toString();
     }
 
     @Override
-    public ObservableList<Person> getPersonList() {
-        return persons.asUnmodifiableObservableList();
+    public ObservableList<Booking> getPersonList() {
+        return bookings.asUnmodifiableObservableList();
     }
 
     @Override
@@ -115,16 +115,16 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddressBook)) {
+        if (!(other instanceof BookingsBook)) {
             return false;
         }
 
-        AddressBook otherAddressBook = (AddressBook) other;
-        return persons.equals(otherAddressBook.persons);
+        BookingsBook otherAddressBook = (BookingsBook) other;
+        return bookings.equals(otherAddressBook.bookings);
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return bookings.hashCode();
     }
 }

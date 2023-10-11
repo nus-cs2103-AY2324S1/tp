@@ -1,76 +1,74 @@
 package seedu.address.model.booking;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import seedu.address.model.person.Person;
-import seedu.address.model.room.Room;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+
+import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.tag.Tag;
 
 /**
- * Booking that links a person and a room.
+ * Represents a Person in the address book.
+ * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Booking {
+
+    // Identity fields
     private final Room room;
-    private final Person person;
-    private final LocalDateTime dateTime;
-    private final long id;
+    private final Name name;
+    private final Phone phone;
+    private final Email email;
+
+    // Data fields
+    private final Address address;
+    private final Set<Tag> tags = new HashSet<>();
 
     /**
-     * Constructor for Booking.
-     *
-     * @param room     associated with the booking.
-     * @param person   associated with the booking.
-     * @param dateTime of the booking.
+     * Every field must be present and not null.
      */
-    public Booking(Room room, Person person, LocalDateTime dateTime) {
+    public Booking(Room room, Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, tags);
         this.room = room;
-        this.person = person;
-        this.dateTime = dateTime;
-        this.id = generateId();
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+    }
 
+    public Room getRoom() {
+        return room;
+    }
+    public Name getName() {
+        return name;
+    }
+
+    public Phone getPhone() {
+        return phone;
+    }
+
+    public Email getEmail() {
+        return email;
+    }
+
+    public Address getAddress() {
+        return address;
     }
 
     /**
-     * Generates a unique booking id using
-     * the details.
+     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
      */
-    private long generateId() {
-        int roomNumber = room.getRoomNumber();
-
-        // Convert LocalDateTime to a unique string, e.g., YYYYMMDDHHMM
-        String dateTimeStr = String.format("%04d%02d%02d%02d%02d",
-                dateTime.getYear(),
-                dateTime.getMonthValue(),
-                dateTime.getDayOfMonth(),
-                dateTime.getHour(),
-                dateTime.getMinute());
-
-        // Concatenate room number and dateTimeStr
-        String uniqueIdStr = String.valueOf(roomNumber) + dateTimeStr;
-
-        // Convert to long
-        long uniqueId = Long.parseLong(uniqueIdStr);
-
-        return uniqueId;
+    public Set<Tag> getTags() {
+        return Collections.unmodifiableSet(tags);
     }
 
     /**
-     * Returns the date and time in the format "yyyy-MM-dd hh:mm a".
-     *
-     * @return A string representing the formatted date and time.
-     */
-    public String getDateTime() {
-        // Create a DateTimeFormatter object
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm a");
-
-        // Format the LocalDateTime to a string
-        String formattedDateTime = dateTime.format(formatter);
-
-        return formattedDateTime;
-    }
-
-    /**
-     * Check if two bookings are the same using id.
+     * Returns true if both persons have the same name.
+     * This defines a weaker notion of equality between two persons.
      */
     public boolean isSameBooking(Booking otherBooking) {
         if (otherBooking == this) {
@@ -78,11 +76,49 @@ public class Booking {
         }
 
         return otherBooking != null
-                && otherBooking.id == id;
+                && otherBooking.getName().equals(getName());
+    }
+
+    /**
+     * Returns true if both persons have the same identity and data fields.
+     * This defines a stronger notion of equality between two persons.
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Booking)) {
+            return false;
+        }
+
+        Booking otherBooking = (Booking) other;
+        return room.equals(otherBooking.room)
+                && name.equals(otherBooking.name)
+                && phone.equals(otherBooking.phone)
+                && email.equals(otherBooking.email)
+                && address.equals(otherBooking.address)
+                && tags.equals(otherBooking.tags);
+    }
+
+    @Override
+    public int hashCode() {
+        // use this method for custom fields hashing instead of implementing your own
+        return Objects.hash(room, name, phone, email, address, tags);
     }
 
     @Override
     public String toString() {
-        return "Booking " + id + "\nBy " + person.getName() + "\nAt " + getDateTime();
+        return new ToStringBuilder(this)
+                .add("room", room)
+                .add("name", name)
+                .add("phone", phone)
+                .add("email", email)
+                .add("address", address)
+                .add("tags", tags)
+                .toString();
     }
+
 }
