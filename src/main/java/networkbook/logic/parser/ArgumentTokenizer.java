@@ -119,8 +119,8 @@ public class ArgumentTokenizer {
                                         PrefixPosition nextPrefixPosition) {
         Prefix prefix = currentPrefixPosition.getPrefix();
 
-        int valueStartPos = currentPrefixPosition.getStartPosition() +
-                                prefix.getPrefix().length() + 1; // +1  as offset for whitespace
+        int valueStartPos = currentPrefixPosition.getStartPosition()
+                                + prefix.getPrefix().length() + 1; // +1  as offset for whitespace
         String value = argsString.substring(valueStartPos, nextPrefixPosition.getStartPosition());
 
         return value.trim();
