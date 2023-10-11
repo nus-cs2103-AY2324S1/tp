@@ -8,7 +8,7 @@ import networkbook.logic.parser.CliSyntax;
 import networkbook.model.person.Email;
 import networkbook.model.person.Person;
 import networkbook.model.tag.Tag;
-import networkbook.model.util.UniquePropertyList;
+import networkbook.model.util.UniqueList;
 
 /**
  * A utility class for Person.
@@ -47,7 +47,7 @@ public class PersonUtil {
         descriptor.getName().ifPresent(name -> sb.append(CliSyntax.PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(CliSyntax.PREFIX_PHONE).append(phone.value).append(" "));
         if (descriptor.getEmails().isPresent()) {
-            UniquePropertyList<Email> emails = descriptor.getEmails().get();
+            UniqueList<Email> emails = descriptor.getEmails().get();
             if (emails.isEmpty()) {
                 sb.append(CliSyntax.PREFIX_EMAIL);
             } else {

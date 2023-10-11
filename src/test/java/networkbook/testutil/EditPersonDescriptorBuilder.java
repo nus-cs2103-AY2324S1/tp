@@ -12,7 +12,7 @@ import networkbook.model.person.Name;
 import networkbook.model.person.Person;
 import networkbook.model.person.Phone;
 import networkbook.model.tag.Tag;
-import networkbook.model.util.UniquePropertyList;
+import networkbook.model.util.UniqueList;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.
@@ -61,7 +61,7 @@ public class EditPersonDescriptorBuilder {
      * Sets the {@code Email} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withEmail(String email) {
-        descriptor.setEmails(new UniquePropertyList<Email>().setItems(List.of(new Email(email))));
+        descriptor.setEmails(new UniqueList<Email>().setItems(List.of(new Email(email))));
         return this;
     }
 

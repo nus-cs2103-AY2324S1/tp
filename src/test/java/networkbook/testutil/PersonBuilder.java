@@ -11,7 +11,7 @@ import networkbook.model.person.Person;
 import networkbook.model.person.Phone;
 import networkbook.model.tag.Tag;
 import networkbook.model.util.SampleDataUtil;
-import networkbook.model.util.UniquePropertyList;
+import networkbook.model.util.UniqueList;
 
 /**
  * A utility class to help with building Person objects.
@@ -25,7 +25,7 @@ public class PersonBuilder {
 
     private Name name;
     private Phone phone;
-    private UniquePropertyList<Email> emails;
+    private UniqueList<Email> emails;
     private Address address;
     private Set<Tag> tags;
 
@@ -35,7 +35,7 @@ public class PersonBuilder {
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
-        emails = new UniquePropertyList<Email>().setItems(List.of(new Email(DEFAULT_EMAIL)));
+        emails = new UniqueList<Email>().setItems(List.of(new Email(DEFAULT_EMAIL)));
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
     }
@@ -87,7 +87,7 @@ public class PersonBuilder {
      * Sets the {@code Email} of the {@code Person} that we are building.
      */
     public PersonBuilder withEmail(String email) {
-        this.emails = new UniquePropertyList<Email>().setItems(List.of(new Email(email)));
+        this.emails = new UniqueList<Email>().setItems(List.of(new Email(email)));
         return this;
     }
 

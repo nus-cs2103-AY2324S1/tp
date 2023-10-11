@@ -13,7 +13,7 @@ import networkbook.model.person.Name;
 import networkbook.model.person.Person;
 import networkbook.model.person.Phone;
 import networkbook.model.tag.Tag;
-import networkbook.model.util.UniquePropertyList;
+import networkbook.model.util.UniqueList;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -55,7 +55,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Name name = ParserUtil.parseName(argMultimap.getValue(CliSyntax.PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(CliSyntax.PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(CliSyntax.PREFIX_EMAIL).get());
-        UniquePropertyList<Email> emails = new UniquePropertyList<Email>().setItems(List.of(email));
+        UniqueList<Email> emails = new UniqueList<Email>().setItems(List.of(email));
         Address address = ParserUtil.parseAddress(argMultimap.getValue(CliSyntax.PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(CliSyntax.PREFIX_TAG));
 

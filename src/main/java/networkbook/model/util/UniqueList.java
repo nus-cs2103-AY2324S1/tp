@@ -16,7 +16,7 @@ import networkbook.model.person.exceptions.ItemNotFoundException;
  * Represents a list of items that need to be unique.
  * @param <T> The class representing the item.
  */
-public class UniquePropertyList<T extends Identifiable<T>> implements Iterable<T> {
+public class UniqueList<T extends Identifiable<T>> implements Iterable<T> {
     private final ObservableList<T> internalList = FXCollections.observableArrayList();
     private final ObservableList<T> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
@@ -90,7 +90,7 @@ public class UniquePropertyList<T extends Identifiable<T>> implements Iterable<T
      * @param items Items to replace.
      * @return This list itself.
      */
-    public UniquePropertyList<T> setItems(List<T> items) {
+    public UniqueList<T> setItems(List<T> items) {
         requireAllNonNull(items);
         if (!itemsAreUnique(items)) {
             throw new DuplicateException();
@@ -99,7 +99,7 @@ public class UniquePropertyList<T extends Identifiable<T>> implements Iterable<T
         return this;
     }
 
-    public UniquePropertyList<T> setItems(UniquePropertyList<T> items) {
+    public UniqueList<T> setItems(UniqueList<T> items) {
         requireNonNull(items);
         internalList.setAll(items.internalList);
         return this;
@@ -135,11 +135,11 @@ public class UniquePropertyList<T extends Identifiable<T>> implements Iterable<T
             return true;
         }
 
-        if (!(another instanceof UniquePropertyList<?>)) {
+        if (!(another instanceof UniqueList<?>)) {
             return false;
         }
 
-        UniquePropertyList<?> anotherList = (UniquePropertyList<?>) another;
+        UniqueList<?> anotherList = (UniqueList<?>) another;
         return internalList.equals(anotherList.internalList);
     }
 

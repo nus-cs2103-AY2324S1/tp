@@ -16,7 +16,7 @@ import networkbook.model.person.Name;
 import networkbook.model.person.Person;
 import networkbook.model.person.Phone;
 import networkbook.model.tag.Tag;
-import networkbook.model.util.UniquePropertyList;
+import networkbook.model.util.UniqueList;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -99,7 +99,7 @@ class JsonAdaptedPerson {
                 .allMatch(Email::isValidEmail)) {
             throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
         }
-        final UniquePropertyList<Email> modelEmails = new UniquePropertyList<>();
+        final UniqueList<Email> modelEmails = new UniqueList<>();
         emails.forEach(email -> modelEmails.add(new Email(email.getName())));
 
         if (address == null) {

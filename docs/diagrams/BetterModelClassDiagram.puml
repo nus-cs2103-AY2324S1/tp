@@ -4,13 +4,13 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-AddressBook *-right-> "1" UniquePropertyList<Person>
+AddressBook *-right-> "1" UniqueList<Person>
 AddressBook *-right-> "1" UniqueTagList
-UniqueTagList -[hidden]down- UniquePropertyList<Person>
-UniqueTagList -[hidden]down- UniquePropertyList<Person>
+UniqueTagList -[hidden]down- UniqueList<Person>
+UniqueTagList -[hidden]down- UniqueList<Person>
 
 UniqueTagList -right-> "*" Tag
-UniquePropertyList<Person> -right-> Person
+UniqueList<Person> -right-> Person
 
 Person -up-> "*" Tag
 

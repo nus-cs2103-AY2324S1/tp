@@ -13,16 +13,16 @@ import org.junit.jupiter.api.Test;
 import networkbook.model.person.exceptions.DuplicateException;
 import networkbook.model.person.exceptions.ItemNotFoundException;
 
-public class UniquePropertyListTest {
+public class UniqueListTest {
     @Test
     public void contains_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new UniquePropertyList<UniqueNumber>().contains(null));
+        assertThrows(NullPointerException.class, () -> new UniqueList<UniqueNumber>().contains(null));
     }
 
     @Test
     public void contains_elementNotInList_returnsFalse() {
-        assertFalse(new UniquePropertyList<UniqueNumber>().contains(new UniqueNumber(3, 0)));
-        UniquePropertyList<UniqueNumber> uniqueList = new UniquePropertyList<>();
+        assertFalse(new UniqueList<UniqueNumber>().contains(new UniqueNumber(3, 0)));
+        UniqueList<UniqueNumber> uniqueList = new UniqueList<>();
         uniqueList.add(new UniqueNumber(3, 0));
         assertFalse(uniqueList.contains(new UniqueNumber(4, 0)));
         uniqueList.add(new UniqueNumber(2, 0));
@@ -31,7 +31,7 @@ public class UniquePropertyListTest {
 
     @Test
     public void contains_elementInList_returnsTrue() {
-        UniquePropertyList<UniqueNumber> uniqueList = new UniquePropertyList<>();
+        UniqueList<UniqueNumber> uniqueList = new UniqueList<>();
         uniqueList.add(new UniqueNumber(3, 0));
         assertTrue(uniqueList.contains(new UniqueNumber(3, 1)));
         assertTrue(uniqueList.contains(new UniqueNumber(3, 0)));
@@ -42,12 +42,12 @@ public class UniquePropertyListTest {
 
     @Test
     public void add_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new UniquePropertyList<UniqueNumber>().add(null));
+        assertThrows(NullPointerException.class, () -> new UniqueList<UniqueNumber>().add(null));
     }
 
     @Test
     public void add_duplicate_throwsDuplicateException() {
-        UniquePropertyList<UniqueNumber> uniqueList = new UniquePropertyList<>();
+        UniqueList<UniqueNumber> uniqueList = new UniqueList<>();
         uniqueList.add(new UniqueNumber(1, 0));
         assertThrows(DuplicateException.class, () -> uniqueList.add(new UniqueNumber(1, 10)));
     }
@@ -55,18 +55,18 @@ public class UniquePropertyListTest {
     @Test
     public void setItem_nullTarget_throwsNullPointerException() {
         assertThrows(NullPointerException.class, ()
-                -> new UniquePropertyList<UniqueNumber>().setItem(null, new UniqueNumber(5, 0)));
+                -> new UniqueList<UniqueNumber>().setItem(null, new UniqueNumber(5, 0)));
     }
 
     @Test
     public void setItem_nullEdited_throwsNullPointerException() {
         assertThrows(NullPointerException.class, ()
-                -> new UniquePropertyList<UniqueNumber>().setItem(new UniqueNumber(5, 0), null));
+                -> new UniqueList<UniqueNumber>().setItem(new UniqueNumber(5, 0), null));
     }
 
     @Test
     public void setItem_targetNotInList_throwsItemNotFoundException() {
-        UniquePropertyList<UniqueNumber> uniqueList = new UniquePropertyList<UniqueNumber>();
+        UniqueList<UniqueNumber> uniqueList = new UniqueList<UniqueNumber>();
         uniqueList.add(new UniqueNumber(1, 0));
         assertThrows(ItemNotFoundException.class, ()
                 -> uniqueList.setItem(new UniqueNumber(1, 1), new UniqueNumber(2, 0)));
@@ -74,25 +74,25 @@ public class UniquePropertyListTest {
 
     @Test
     public void setItem_editedEqualToTarget_success() {
-        UniquePropertyList<UniqueNumber> uniqueList = new UniquePropertyList<>();
+        UniqueList<UniqueNumber> uniqueList = new UniqueList<>();
         UniqueNumber uniqueNumber = new UniqueNumber(1, 0);
         uniqueList.add(uniqueNumber);
         uniqueList.setItem(uniqueNumber, uniqueNumber);
-        UniquePropertyList<UniqueNumber> expectedList = new UniquePropertyList<>();
+        UniqueList<UniqueNumber> expectedList = new UniqueList<>();
         expectedList.add(uniqueNumber);
         assertEquals(expectedList, uniqueList);
     }
 
     @Test
     public void setItem_editedIsSameAsTarget_success() {
-        UniquePropertyList<UniqueNumber> uniqueList = new UniquePropertyList<>();
+        UniqueList<UniqueNumber> uniqueList = new UniqueList<>();
         UniqueNumber target = new UniqueNumber(1, 0);
         UniqueNumber edited = new UniqueNumber(1, 10);
         uniqueList.add(target);
         uniqueList.setItem(target, edited);
-        UniquePropertyList<UniqueNumber> expectedList = new UniquePropertyList<>();
+        UniqueList<UniqueNumber> expectedList = new UniqueList<>();
         expectedList.add(edited);
-        UniquePropertyList<UniqueNumber> wrongList = new UniquePropertyList<>();
+        UniqueList<UniqueNumber> wrongList = new UniqueList<>();
         wrongList.add(target);
         assertEquals(expectedList, uniqueList);
         assertNotEquals(wrongList, uniqueList);
@@ -100,14 +100,14 @@ public class UniquePropertyListTest {
 
     @Test
     public void setItem_editedDifferentFromTarget_success() {
-        UniquePropertyList<UniqueNumber> uniqueList = new UniquePropertyList<>();
+        UniqueList<UniqueNumber> uniqueList = new UniqueList<>();
         UniqueNumber target = new UniqueNumber(1, 0);
         UniqueNumber edited = new UniqueNumber(2, 10);
         uniqueList.add(target);
         uniqueList.setItem(target, edited);
-        UniquePropertyList<UniqueNumber> expectedList = new UniquePropertyList<>();
+        UniqueList<UniqueNumber> expectedList = new UniqueList<>();
         expectedList.add(edited);
-        UniquePropertyList<UniqueNumber> wrongList = new UniquePropertyList<>();
+        UniqueList<UniqueNumber> wrongList = new UniqueList<>();
         wrongList.add(target);
         assertEquals(expectedList, uniqueList);
         assertNotEquals(wrongList, uniqueList);
@@ -115,7 +115,7 @@ public class UniquePropertyListTest {
 
     @Test
     public void setItem_editedNotUnique_throwsDuplicateException() {
-        UniquePropertyList<UniqueNumber> uniqueList = new UniquePropertyList<>();
+        UniqueList<UniqueNumber> uniqueList = new UniqueList<>();
         UniqueNumber target = new UniqueNumber(1, 0);
         UniqueNumber edited = new UniqueNumber(2, 10);
         UniqueNumber duplicate = new UniqueNumber(2, 10);
@@ -127,51 +127,51 @@ public class UniquePropertyListTest {
     @Test
     public void remove_itemDoesNotExist_throwsItemNotFoundException() {
         assertThrows(ItemNotFoundException.class, ()
-                -> new UniquePropertyList<UniqueNumber>().remove(new UniqueNumber(1, 0)));
+                -> new UniqueList<UniqueNumber>().remove(new UniqueNumber(1, 0)));
     }
 
     @Test
     public void remove_itemExists_removesItem() {
-        UniquePropertyList<UniqueNumber> uniqueList = new UniquePropertyList<>();
+        UniqueList<UniqueNumber> uniqueList = new UniqueList<>();
         uniqueList.add(new UniqueNumber(1, 0));
         uniqueList.remove(new UniqueNumber(1, 0));
-        UniquePropertyList<UniqueNumber> expected = new UniquePropertyList<>();
+        UniqueList<UniqueNumber> expected = new UniqueList<>();
         assertEquals(expected, uniqueList);
     }
 
     @Test
     public void setItems_nullList_throwsNullPointerException() {
         assertThrows(NullPointerException.class, ()
-                -> new UniquePropertyList<UniqueNumber>().setItems((List<UniqueNumber>) null));
+                -> new UniqueList<UniqueNumber>().setItems((List<UniqueNumber>) null));
         assertThrows(NullPointerException.class, ()
-                -> new UniquePropertyList<UniqueNumber>().setItems((UniquePropertyList<UniqueNumber>) null));
+                -> new UniqueList<UniqueNumber>().setItems((UniqueList<UniqueNumber>) null));
     }
 
     @Test
     public void setItems_uniqueList_replacesOwnListWithProvided() {
-        UniquePropertyList<UniqueNumber> expectedUniqueList = new UniquePropertyList<>();
+        UniqueList<UniqueNumber> expectedUniqueList = new UniqueList<>();
         List<UniqueNumber> expectedList = List.of(new UniqueNumber(3, 1));
         expectedList.forEach(expectedUniqueList::add);
-        assertEquals(expectedUniqueList, new UniquePropertyList<UniqueNumber>().setItems(expectedUniqueList));
-        assertNotEquals(new UniquePropertyList<UniqueNumber>(),
-                new UniquePropertyList<UniqueNumber>().setItems(expectedUniqueList));
-        assertEquals(expectedUniqueList, new UniquePropertyList<UniqueNumber>().setItems(expectedList));
+        assertEquals(expectedUniqueList, new UniqueList<UniqueNumber>().setItems(expectedUniqueList));
+        assertNotEquals(new UniqueList<UniqueNumber>(),
+                new UniqueList<UniqueNumber>().setItems(expectedUniqueList));
+        assertEquals(expectedUniqueList, new UniqueList<UniqueNumber>().setItems(expectedList));
     }
 
     @Test
     public void setItems_listWithDuplicate_throwsDuplicateException() {
         List<UniqueNumber> list = List.of(new UniqueNumber(1, 0), new UniqueNumber(1, 1));
-        assertThrows(DuplicateException.class, () -> new UniquePropertyList<UniqueNumber>().setItems(list));
+        assertThrows(DuplicateException.class, () -> new UniqueList<UniqueNumber>().setItems(list));
     }
 
     @Test
     public void isEmpty_emptyList_returnsTrue() {
-        assertTrue(new UniquePropertyList<UniqueNumber>().isEmpty());
+        assertTrue(new UniqueList<UniqueNumber>().isEmpty());
     }
 
     @Test
     public void isEmpty_notEmptyList_returnsFalse() {
-        UniquePropertyList<UniqueNumber> uniqueList = new UniquePropertyList<>();
+        UniqueList<UniqueNumber> uniqueList = new UniqueList<>();
         uniqueList.add(new UniqueNumber(1, 0));
         assertFalse(uniqueList.isEmpty());
     }
@@ -179,14 +179,14 @@ public class UniquePropertyListTest {
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
-                -> new UniquePropertyList<UniqueNumber>()
+                -> new UniqueList<UniqueNumber>()
                 .asUnmodifiableObservableList()
                 .add(new UniqueNumber(1, 0)));
     }
 
     @Test
     public void toStringMethod() {
-        UniquePropertyList<UniqueNumber> uniqueList = new UniquePropertyList<>();
+        UniqueList<UniqueNumber> uniqueList = new UniqueList<>();
         uniqueList.setItems(List.of(new UniqueNumber(1, 0)));
         assertEquals(uniqueList.asUnmodifiableObservableList().toString(), uniqueList.toString());
     }

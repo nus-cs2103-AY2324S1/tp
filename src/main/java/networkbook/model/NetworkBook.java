@@ -7,7 +7,7 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import networkbook.commons.util.ToStringBuilder;
 import networkbook.model.person.Person;
-import networkbook.model.util.UniquePropertyList;
+import networkbook.model.util.UniqueList;
 
 /**
  * Wraps all data at the address-book level
@@ -15,7 +15,7 @@ import networkbook.model.util.UniquePropertyList;
  */
 public class NetworkBook implements ReadOnlyNetworkBook {
 
-    private final UniquePropertyList<Person> persons;
+    private final UniqueList<Person> persons;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -25,7 +25,7 @@ public class NetworkBook implements ReadOnlyNetworkBook {
      *   among constructors.
      */
     {
-        persons = new UniquePropertyList<Person>();
+        persons = new UniqueList<Person>();
     }
 
     public NetworkBook() {}

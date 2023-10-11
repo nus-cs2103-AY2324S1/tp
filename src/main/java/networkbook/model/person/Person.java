@@ -10,7 +10,7 @@ import java.util.Set;
 import networkbook.commons.util.ToStringBuilder;
 import networkbook.model.tag.Tag;
 import networkbook.model.util.Identifiable;
-import networkbook.model.util.UniquePropertyList;
+import networkbook.model.util.UniqueList;
 
 /**
  * Represents a Person in the network book.
@@ -21,7 +21,7 @@ public class Person implements Identifiable<Person> {
     // Identity fields
     private final Name name;
     private final Phone phone;
-    private final UniquePropertyList<Email> emails;
+    private final UniqueList<Email> emails;
 
     // Data fields
     private final Address address;
@@ -30,7 +30,7 @@ public class Person implements Identifiable<Person> {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, UniquePropertyList<Email> emails, Address address, Set<Tag> tags) {
+    public Person(Name name, Phone phone, UniqueList<Email> emails, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, emails, address, tags);
         this.name = name;
         this.phone = phone;
@@ -47,7 +47,7 @@ public class Person implements Identifiable<Person> {
         return phone;
     }
 
-    public UniquePropertyList<Email> getEmails() {
+    public UniqueList<Email> getEmails() {
         return emails;
     }
 

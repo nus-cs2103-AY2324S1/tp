@@ -15,7 +15,7 @@ import networkbook.logic.commands.EditCommand.EditPersonDescriptor;
 import networkbook.logic.parser.exceptions.ParseException;
 import networkbook.model.person.Email;
 import networkbook.model.tag.Tag;
-import networkbook.model.util.UniquePropertyList;
+import networkbook.model.util.UniqueList;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -71,7 +71,7 @@ public class EditCommandParser implements Parser<EditCommand> {
                     ParserUtil.parsePhone(argMultimap.getValue(CliSyntax.PREFIX_PHONE).get()));
         }
         if (argMultimap.getValue(CliSyntax.PREFIX_EMAIL).isPresent()) {
-            editPersonDescriptor.setEmails(new UniquePropertyList<Email>().setItems(List.of(
+            editPersonDescriptor.setEmails(new UniqueList<Email>().setItems(List.of(
                     ParserUtil.parseEmail(argMultimap.getValue(CliSyntax.PREFIX_EMAIL).get()))));
         }
         if (argMultimap.getValue(CliSyntax.PREFIX_ADDRESS).isPresent()) {

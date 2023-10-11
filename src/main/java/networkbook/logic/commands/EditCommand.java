@@ -23,7 +23,7 @@ import networkbook.model.person.Name;
 import networkbook.model.person.Person;
 import networkbook.model.person.Phone;
 import networkbook.model.tag.Tag;
-import networkbook.model.util.UniquePropertyList;
+import networkbook.model.util.UniqueList;
 
 /**
  * Edits the details of an existing person in the network book.
@@ -94,7 +94,7 @@ public class EditCommand extends Command {
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        UniquePropertyList<Email> updatedEmails = editPersonDescriptor.getEmails().orElse(personToEdit.getEmails());
+        UniqueList<Email> updatedEmails = editPersonDescriptor.getEmails().orElse(personToEdit.getEmails());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
@@ -132,7 +132,7 @@ public class EditCommand extends Command {
     public static class EditPersonDescriptor {
         private Name name;
         private Phone phone;
-        private UniquePropertyList<Email> emails;
+        private UniqueList<Email> emails;
         private Address address;
         private Set<Tag> tags;
 
@@ -173,11 +173,11 @@ public class EditCommand extends Command {
             return Optional.ofNullable(phone);
         }
 
-        public void setEmails(UniquePropertyList<Email> emails) {
+        public void setEmails(UniqueList<Email> emails) {
             this.emails = emails;
         }
 
-        public Optional<UniquePropertyList<Email>> getEmails() {
+        public Optional<UniqueList<Email>> getEmails() {
             return Optional.ofNullable(emails);
         }
 
