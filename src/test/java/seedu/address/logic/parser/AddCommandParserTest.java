@@ -51,17 +51,16 @@ public class AddCommandParserTest {
     @Test
     public void parse_allFieldsPresent_success() {
         Booking expectedBooking = new BookingBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
-
-        // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + ROOM_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB
                 + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedBooking));
+
 
 
         // multiple tags - all accepted
         Booking expectedBookingMultipleTags = new BookingBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
-        assertParseSuccess(parser,
-                ROOM_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+        assertParseSuccess(parser, ROOM_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                        + ADDRESS_DESC_BOB
                         + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 new AddCommand(expectedBookingMultipleTags));
     }
