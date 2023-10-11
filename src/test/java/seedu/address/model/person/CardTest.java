@@ -1,14 +1,15 @@
 package seedu.address.model.person;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.testutil.CardBuilder;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.TypicalCards.CS2100;
-import static seedu.address.testutil.TypicalCards.CS1231S;
 import static seedu.address.testutil.TypicalCards.CS1101S;
+import static seedu.address.testutil.TypicalCards.CS1231S;
+import static seedu.address.testutil.TypicalCards.CS2100;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.testutil.CardBuilder;
 
 public class CardTest {
     @Test
@@ -37,8 +38,8 @@ public class CardTest {
     @Test
     public void equals() {
         // same values -> returns true
-        Card CS1101SCopy = new CardBuilder(CS1101S).build();
-        assertTrue(CS1101S.equals(CS1101SCopy));
+        Card cs1101sCopy = new CardBuilder(CS1101S).build();
+        assertTrue(CS1101S.equals(cs1101sCopy));
 
         // same object -> returns true
         assertTrue(CS1101S.equals(CS1101S));

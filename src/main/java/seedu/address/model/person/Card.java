@@ -1,13 +1,15 @@
 package seedu.address.model.person;
 
-import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.tag.Tag;
-
-import java.util.Objects;
-import java.util.Set;
-
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Objects;
+
+import seedu.address.commons.util.ToStringBuilder;
+
+/**
+ * Represents a Card in lesSON.
+ * Guarantees: details are present and not null, field values are validated, immutable.
+ */
 public class Card {
     private final Question question;
     private final Answer answer;

@@ -8,8 +8,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Question {
     public static final String MESSAGE_CONSTRAINTS =
-            "Questions should only contain alphanumeric characters, some special characters " +
-                    "and spaces, and it should not be blank";
+            "Questions should only contain alphanumeric characters, some special characters "
+                    + "and spaces, and it should not be blank";
     public static final String VALIDATION_REGEX = "^(?=.*[\\p{Alnum}.,?'():-])\\s*[\\p{Alnum}.,?'(): -]+$";
 
     public final String question;
