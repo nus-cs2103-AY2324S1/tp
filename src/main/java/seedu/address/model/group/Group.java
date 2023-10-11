@@ -1,10 +1,11 @@
-package seedu.address.model;
+package seedu.address.model.group;
 
 import static java.util.Objects.requireNonNull;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
@@ -13,6 +14,7 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
  * Class representing a group
  */
 public class Group {
+    public static final String MESSAGE_CONSTRAINTS = "Group names should be alphanumeric";
     private final ObservableList<Person> listOfGroupMates = FXCollections.observableArrayList();
     private final String groupName;
 
@@ -42,6 +44,15 @@ public class Group {
     }
 
     /**
+     * Check if same group according to name since groupName is unique
+     * @param groupName of interest
+     * @return whether group is the same group
+     */
+    public boolean nameEquals(String groupName) {
+        return this.groupName.equals(groupName);
+    }
+
+    /**
      * Returns if the name of the group is valid.
      * @param name The name of the group
      * @return The validity of the group name.
@@ -55,11 +66,12 @@ public class Group {
      * Removes the person from the group.
      * The person must exist in the group.
      */
-    public void remove(Person toRemove) {
+    public void removePerson(Person toRemove) throws CommandException {
         requireNonNull(toRemove);
-        if (!listOfGroupMates.remove(toRemove)) {
-            throw new PersonNotFoundException();
+        if (!contains(toRemove)) {
+            throw new CommandException(String.format("%s is not in this group: %s", toRemove.getName().fullName, this.groupName));
         }
+        listOfGroupMates.remove(toRemove);
     }
 
     /**
@@ -74,12 +86,12 @@ public class Group {
      * Adds a person to the list.
      * The person must not already exist in the list.
      */
-    public void add(Person toAdd) {
-        requireNonNull(toAdd);
-        if (contains(toAdd)) {
-            throw new DuplicatePersonException();
+    public void addPerson(Person personToAdd) throws CommandException {
+        requireNonNull(personToAdd);
+        if (this.contains(personToAdd)) {
+            throw new CommandException(String.format("%s is already in this group: %s", personToAdd.getName().fullName, this.groupName));
         }
-        listOfGroupMates.add(toAdd);
+        listOfGroupMates.add(personToAdd);
     }
 
     @Override
@@ -89,4 +101,7 @@ public class Group {
                 .toString();
     }
 
+    public String getName() {
+        return this.groupName;
+    }
 }

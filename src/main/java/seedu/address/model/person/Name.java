@@ -38,9 +38,13 @@ public class Name {
         return test.matches(VALIDATION_REGEX);
     }
 
+    public boolean nameEquals(String personName) {
+        return (this.fullName).equals(personName);
+    }
+
 
     @Override
-    public String toString() {
+    public java.lang.String toString() {
         return fullName;
     }
 
