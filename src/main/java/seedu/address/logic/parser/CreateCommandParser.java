@@ -11,6 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PROFESSION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -20,6 +21,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Details;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Income;
+import seedu.address.model.person.Interaction;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -68,8 +70,11 @@ public class CreateCommandParser implements Parser<CreateCommand> {
         Details details = argMultimap.getValue(PREFIX_DETAILS).isPresent()
                 ? ParserUtil.parseDetails(argMultimap.getValue(PREFIX_DETAILS).get())
                 : null;
+        Set<Interaction> interaction = new HashSet<Interaction>();
+        // command does not allow adding interactions right away
 
-        Person person = new Person(name, phone, email, address, tagList, telegram, profession, income, details);
+        Person person = new Person(name, phone, email, address, tagList, telegram, profession, income, details,
+                interaction);
 
         return new CreateCommand(person);
     }

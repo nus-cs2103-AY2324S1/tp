@@ -30,7 +30,7 @@ public class Person {
     private final Profession profession;
     private final Income income;
     private final Details details;
-    private Set<Interaction> interactions;
+    private Set<Interaction> interactions = new HashSet<>();
 
     /**
      * Every field must be present and not null.
@@ -47,14 +47,13 @@ public class Person {
         this.profession = null;
         this.income = null;
         this.details = null;
-        this.interactions = null;
     }
 
     /**
      * Same constructor but with optional fields.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                  TelegramHandle telegram, Profession profession, Income income, Details details) {
+                  TelegramHandle telegram, Profession profession, Income income, Details details, Set<Interaction> interaction) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -66,6 +65,7 @@ public class Person {
         this.profession = profession;
         this.income = income;
         this.details = details;
+        this.interactions.addAll(interaction);
     }
 
     public Name getName() {
