@@ -85,4 +85,16 @@ public class EmailTest {
         // different values -> returns false
         assertFalse(email.equals(new Email("other.valid@email")));
     }
+
+    @Test
+    public void isSame_sameEmails_returnsTrue() {
+        assertTrue(new Email("valid@exam.com").isSame(new Email("valid@exam.com")));
+        assertTrue(new Email("test@random.com").isSame(new Email("test@random.com")));
+    }
+
+    @Test
+    public void isSame_differentEmails_returnsFalse() {
+        assertFalse(new Email("valid@exam.com").isSame(new Email("valid@random.com")));
+        assertFalse(new Email("valid@exam.com").isSame(new Email("test@exam.com")));
+    }
 }
