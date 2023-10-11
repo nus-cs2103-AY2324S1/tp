@@ -1,6 +1,7 @@
 package seedu.staffsnap.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+<<<<<<< HEAD:src/test/java/seedu/staffsnap/logic/LogicManagerTest.java
 import static seedu.staffsnap.logic.Messages.MESSAGE_INVALID_EMPLOYEE_DISPLAYED_INDEX;
 import static seedu.staffsnap.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
@@ -9,6 +10,16 @@ import static seedu.staffsnap.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.staffsnap.testutil.Assert.assertThrows;
 import static seedu.staffsnap.testutil.TypicalEmployees.AMY;
+=======
+import static seedu.address.logic.Messages.MESSAGE_INVALID_EMPLOYEE_DISPLAYED_INDEX;
+import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.DEPARTMENT_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalEmployees.AMY;
+>>>>>>> 81681bbbe6672d8647326ca44cf820b987267d7b:src/test/java/seedu/address/logic/LogicManagerTest.java
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
@@ -166,7 +177,11 @@ public class LogicManagerTest {
 
         // Triggers the saveAddressBook method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
+<<<<<<< HEAD:src/test/java/seedu/staffsnap/logic/LogicManagerTest.java
                 + EMAIL_DESC_AMY + JOB_TITLE_DESC_AMY;
+=======
+                + DEPARTMENT_DESC_AMY + ADDRESS_DESC_AMY;
+>>>>>>> 81681bbbe6672d8647326ca44cf820b987267d7b:src/test/java/seedu/address/logic/LogicManagerTest.java
         Employee expectedEmployee = new EmployeeBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addEmployee(expectedEmployee);

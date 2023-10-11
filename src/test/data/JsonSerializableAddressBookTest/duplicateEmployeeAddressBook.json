@@ -2,13 +2,23 @@
   "employees": [ {
     "name": "Alice Pauline",
     "phone": "94351253",
+<<<<<<< HEAD
     "email": "alice@example.com",
     "jobTitle": "123, Jurong West Ave 6, #08-111",
+=======
+    "department": "alice@example.com",
+    "address": "123, Jurong West Ave 6, #08-111",
+>>>>>>> 81681bbbe6672d8647326ca44cf820b987267d7b
     "tags": [ "friends" ]
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
+<<<<<<< HEAD
     "email": "pauline@example.com",
     "jobTitle": "4th street"
+=======
+    "department": "pauline@example.com",
+    "address": "4th street"
+>>>>>>> 81681bbbe6672d8647326ca44cf820b987267d7b
   } ]
 }

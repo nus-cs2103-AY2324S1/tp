@@ -2,7 +2,12 @@
   "employees": [ {
     "name": "Employee with invalid name field: Ha!ns Mu@ster",
     "phone": "9482424",
+<<<<<<< HEAD
     "email": "hans@example.com",
     "jobTitle": "4th street"
+=======
+    "department": "hans@example.com",
+    "address": "4th street"
+>>>>>>> 81681bbbe6672d8647326ca44cf820b987267d7b
   } ]
 }

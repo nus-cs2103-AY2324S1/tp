@@ -3,6 +3,7 @@ package seedu.staffsnap.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+<<<<<<< HEAD:src/test/java/seedu/staffsnap/logic/commands/EditEmployeeDescriptorTest.java
 import static seedu.staffsnap.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
@@ -10,6 +11,15 @@ import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_JOB_TITLE_BOB
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+=======
+import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPARTMENT_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+>>>>>>> 81681bbbe6672d8647326ca44cf820b987267d7b:src/test/java/seedu/address/logic/commands/EditEmployeeDescriptorTest.java
 
 import org.junit.jupiter.api.Test;
 
@@ -44,8 +54,8 @@ public class EditEmployeeDescriptorTest {
         editedAmy = new EditEmployeeDescriptorBuilder(DESC_AMY).withPhone(VALID_PHONE_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
-        // different email -> returns false
-        editedAmy = new EditEmployeeDescriptorBuilder(DESC_AMY).withEmail(VALID_EMAIL_BOB).build();
+        // different department -> returns false
+        editedAmy = new EditEmployeeDescriptorBuilder(DESC_AMY).withDepartment(VALID_DEPARTMENT_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different jobTitle -> returns false
@@ -62,9 +72,15 @@ public class EditEmployeeDescriptorTest {
         EditEmployeeDescriptor editEmployeeDescriptor = new EditEmployeeDescriptor();
         String expected = EditEmployeeDescriptor.class.getCanonicalName() + "{name="
                 + editEmployeeDescriptor.getName().orElse(null) + ", phone="
+<<<<<<< HEAD:src/test/java/seedu/staffsnap/logic/commands/EditEmployeeDescriptorTest.java
                 + editEmployeeDescriptor.getPhone().orElse(null) + ", email="
                 + editEmployeeDescriptor.getEmail().orElse(null) + ", jobTitle="
                 + editEmployeeDescriptor.getJobTitle().orElse(null) + ", tags="
+=======
+                + editEmployeeDescriptor.getPhone().orElse(null) + ", department="
+                + editEmployeeDescriptor.getDepartment().orElse(null) + ", address="
+                + editEmployeeDescriptor.getAddress().orElse(null) + ", tags="
+>>>>>>> 81681bbbe6672d8647326ca44cf820b987267d7b:src/test/java/seedu/address/logic/commands/EditEmployeeDescriptorTest.java
                 + editEmployeeDescriptor.getTags().orElse(null) + "}";
         assertEquals(expected, editEmployeeDescriptor.toString());
     }

@@ -3,7 +3,7 @@ package seedu.staffsnap.model.employee;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_DEPARTMENT_BOB;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_JOB_TITLE_BOB;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -33,8 +33,9 @@ public class EmployeeTest {
         assertFalse(ALICE.isSameEmployee(null));
 
         // same name, all other attributes different -> returns true
-        Employee editedAlice = new EmployeeBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withJobTitle(VALID_JOB_TITLE_BOB).withTags(VALID_TAG_HUSBAND).build();
+        Employee editedAlice = new EmployeeBuilder(ALICE).withPhone(VALID_PHONE_BOB)
+                .withDepartment(VALID_DEPARTMENT_BOB).withJobTitle(VALID_JOB_TITLE_BOB)
+                .withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSameEmployee(editedAlice));
 
         // different name, all other attributes same -> returns false
@@ -77,8 +78,8 @@ public class EmployeeTest {
         editedAlice = new EmployeeBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different email -> returns false
-        editedAlice = new EmployeeBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
+        // different department -> returns false
+        editedAlice = new EmployeeBuilder(ALICE).withDepartment(VALID_DEPARTMENT_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different jobTitle -> returns false
@@ -93,7 +94,7 @@ public class EmployeeTest {
     @Test
     public void toStringMethod() {
         String expected = Employee.class.getCanonicalName() + "{name=" + ALICE.getName()
-                + ", phone=" + ALICE.getPhone() + ", email=" + ALICE.getEmail()
+                + ", phone=" + ALICE.getPhone() + ", department=" + ALICE.getDepartment()
                 + ", jobTitle=" + ALICE.getJobTitle() + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
     }

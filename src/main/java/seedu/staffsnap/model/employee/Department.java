@@ -4,13 +4,13 @@ import static java.util.Objects.requireNonNull;
 import static seedu.staffsnap.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Employee's email in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}
+ * Represents a Employee's department in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidDepartment(String)}
  */
-public class Email {
+public class Department {
 
     private static final String SPECIAL_CHARACTERS = "+_.-";
-    public static final String MESSAGE_CONSTRAINTS = "Emails should be of the format local-part@domain "
+    public static final String MESSAGE_CONSTRAINTS = "Departments should be of the format local-part@domain "
             + "and adhere to the following constraints:\n"
             + "1. The local-part should only contain alphanumeric characters and these special characters, excluding "
             + "the parentheses, (" + SPECIAL_CHARACTERS + "). The local-part may not start or end with any special "
@@ -34,20 +34,20 @@ public class Email {
     public final String value;
 
     /**
-     * Constructs an {@code Email}.
+     * Constructs an {@code Department}.
      *
-     * @param email A valid email address.
+     * @param department A valid department.
      */
-    public Email(String email) {
-        requireNonNull(email);
-        checkArgument(isValidEmail(email), MESSAGE_CONSTRAINTS);
-        value = email;
+    public Department(String department) {
+        requireNonNull(department);
+        checkArgument(isValidDepartment(department), MESSAGE_CONSTRAINTS);
+        value = department;
     }
 
     /**
-     * Returns if a given string is a valid email.
+     * Returns if a given string is a valid department.
      */
-    public static boolean isValidEmail(String test) {
+    public static boolean isValidDepartment(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
@@ -63,12 +63,12 @@ public class Email {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Email)) {
+        if (!(other instanceof Department)) {
             return false;
         }
 
-        Email otherEmail = (Email) other;
-        return value.equals(otherEmail.value);
+        Department otherDepartment = (Department) other;
+        return value.equals(otherDepartment.value);
     }
 
     @Override

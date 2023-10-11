@@ -1,7 +1,7 @@
 package seedu.staffsnap.logic.parser;
 
 import static seedu.staffsnap.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_DEPARTMENT;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_JOB_TITLE;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 
 import seedu.staffsnap.logic.commands.AddCommand;
 import seedu.staffsnap.logic.parser.exceptions.ParseException;
-import seedu.staffsnap.model.employee.Email;
+import seedu.staffsnap.model.employee.Department;
 import seedu.staffsnap.model.employee.Employee;
 import seedu.staffsnap.model.employee.JobTitle;
 import seedu.staffsnap.model.employee.Name;
@@ -31,21 +31,22 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_JOB_TITLE, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_DEPARTMENT,
+                        PREFIX_JOB_TITLE, PREFIX_TAG);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_JOB_TITLE, PREFIX_PHONE, PREFIX_EMAIL)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_JOB_TITLE, PREFIX_PHONE, PREFIX_DEPARTMENT)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_JOB_TITLE);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_DEPARTMENT, PREFIX_JOB_TITLE);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
+        Department department = ParserUtil.parseDepartment(argMultimap.getValue(PREFIX_DEPARTMENT).get());
         JobTitle jobTitle = ParserUtil.parseJobTitle(argMultimap.getValue(PREFIX_JOB_TITLE).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Employee employee = new Employee(name, phone, email, jobTitle, tagList);
+        Employee employee = new Employee(name, phone, department, jobTitle, tagList);
 
         return new AddCommand(employee);
     }

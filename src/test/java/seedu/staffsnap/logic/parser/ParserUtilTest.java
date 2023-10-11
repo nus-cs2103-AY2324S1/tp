@@ -13,24 +13,43 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+<<<<<<< HEAD:src/test/java/seedu/staffsnap/logic/parser/ParserUtilTest.java
 import seedu.staffsnap.logic.parser.exceptions.ParseException;
 import seedu.staffsnap.model.employee.Email;
 import seedu.staffsnap.model.employee.JobTitle;
 import seedu.staffsnap.model.employee.Name;
 import seedu.staffsnap.model.employee.Phone;
 import seedu.staffsnap.model.tag.Tag;
+=======
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.employee.Address;
+import seedu.address.model.employee.Department;
+import seedu.address.model.employee.Name;
+import seedu.address.model.employee.Phone;
+import seedu.address.model.tag.Tag;
+>>>>>>> 81681bbbe6672d8647326ca44cf820b987267d7b:src/test/java/seedu/address/logic/parser/ParserUtilTest.java
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
+<<<<<<< HEAD:src/test/java/seedu/staffsnap/logic/parser/ParserUtilTest.java
     private static final String INVALID_JOB_TITLE = " ";
     private static final String INVALID_EMAIL = "example.com";
+=======
+    private static final String INVALID_ADDRESS = " ";
+    private static final String INVALID_DEPARTMENT = "example.com";
+>>>>>>> 81681bbbe6672d8647326ca44cf820b987267d7b:src/test/java/seedu/address/logic/parser/ParserUtilTest.java
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
+<<<<<<< HEAD:src/test/java/seedu/staffsnap/logic/parser/ParserUtilTest.java
     private static final String VALID_JOB_TITLE = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
+=======
+    private static final String VALID_ADDRESS = "123 Main Street #0505";
+    private static final String VALID_DEPARTMENT = "rachel@example.com";
+>>>>>>> 81681bbbe6672d8647326ca44cf820b987267d7b:src/test/java/seedu/address/logic/parser/ParserUtilTest.java
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
 
@@ -126,26 +145,26 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseEmail_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseEmail((String) null));
+    public void parseDepartment_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDepartment((String) null));
     }
 
     @Test
-    public void parseEmail_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseEmail(INVALID_EMAIL));
+    public void parseDepartment_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDepartment(INVALID_DEPARTMENT));
     }
 
     @Test
-    public void parseEmail_validValueWithoutWhitespace_returnsEmail() throws Exception {
-        Email expectedEmail = new Email(VALID_EMAIL);
-        assertEquals(expectedEmail, ParserUtil.parseEmail(VALID_EMAIL));
+    public void parseDepartment_validValueWithoutWhitespace_returnsDepartment() throws Exception {
+        Department expectedDepartment = new Department(VALID_DEPARTMENT);
+        assertEquals(expectedDepartment, ParserUtil.parseDepartment(VALID_DEPARTMENT));
     }
 
     @Test
-    public void parseEmail_validValueWithWhitespace_returnsTrimmedEmail() throws Exception {
-        String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
-        Email expectedEmail = new Email(VALID_EMAIL);
-        assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
+    public void parseDepartment_validValueWithWhitespace_returnsTrimmedDepartment() throws Exception {
+        String departmentWithWhitespace = WHITESPACE + VALID_DEPARTMENT + WHITESPACE;
+        Department expectedDepartment = new Department(VALID_DEPARTMENT);
+        assertEquals(expectedDepartment, ParserUtil.parseDepartment(departmentWithWhitespace));
     }
 
     @Test

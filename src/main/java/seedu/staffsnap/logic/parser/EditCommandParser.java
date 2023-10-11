@@ -2,7 +2,7 @@ package seedu.staffsnap.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.staffsnap.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_DEPARTMENT;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_JOB_TITLE;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -32,7 +32,8 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_JOB_TITLE, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_DEPARTMENT,
+                        PREFIX_JOB_TITLE, PREFIX_TAG);
 
         Index index;
 
@@ -42,7 +43,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_JOB_TITLE);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_DEPARTMENT, PREFIX_JOB_TITLE);
 
         EditEmployeeDescriptor editEmployeeDescriptor = new EditEmployeeDescriptor();
 
@@ -52,8 +53,9 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
             editEmployeeDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
         }
-        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            editEmployeeDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
+        if (argMultimap.getValue(PREFIX_DEPARTMENT).isPresent()) {
+            editEmployeeDescriptor.setDepartment(ParserUtil.parseDepartment(
+                    argMultimap.getValue(PREFIX_DEPARTMENT).get()));
         }
         if (argMultimap.getValue(PREFIX_JOB_TITLE).isPresent()) {
             editEmployeeDescriptor.setJobTitle(ParserUtil.parseJobTitle(argMultimap.getValue(PREFIX_JOB_TITLE).get()));

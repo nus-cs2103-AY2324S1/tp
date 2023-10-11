@@ -68,10 +68,17 @@ public class NameContainsKeywordsPredicateTest {
         predicate = new NameContainsKeywordsPredicate(Arrays.asList("Carol"));
         assertFalse(predicate.test(new EmployeeBuilder().withName("Alice Bob").build()));
 
+<<<<<<< HEAD:src/test/java/seedu/staffsnap/model/employee/NameContainsKeywordsPredicateTest.java
         // Keywords match phone, email and jobTitle, but does not match name
         predicate = new NameContainsKeywordsPredicate(Arrays.asList("12345", "alice@email.com", "Main", "Street"));
         assertFalse(predicate.test(new EmployeeBuilder().withName("Alice").withPhone("12345")
                 .withEmail("alice@email.com").withJobTitle("Main Street").build()));
+=======
+        // Keywords match phone, department and address, but does not match name
+        predicate = new NameContainsKeywordsPredicate(Arrays.asList("12345", "alice@department.com", "Main", "Street"));
+        assertFalse(predicate.test(new EmployeeBuilder().withName("Alice").withPhone("12345")
+                .withDepartment("alice@department.com").withAddress("Main Street").build()));
+>>>>>>> 81681bbbe6672d8647326ca44cf820b987267d7b:src/test/java/seedu/address/model/employee/NameContainsKeywordsPredicateTest.java
     }
 
     @Test
