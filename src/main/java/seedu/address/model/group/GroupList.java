@@ -49,10 +49,14 @@ public class GroupList implements Iterable<Group> {
      */
     public void remove(Group toRemove) {
         requireNonNull(toRemove);
-        if (!this.contains(toRemove)) {
-            throw new GroupNotFoundException();
+        try {
+            internalList.remove(getGroup(toRemove.getName()));
+        } catch (CommandException e) {
+            System.out.println("Person is not in this group");
         }
-        internalList.remove(toRemove);
+//        if (!this.contains(toRemove)) {
+//            throw new GroupNotFoundException();
+//        }
     }
 
     /**
