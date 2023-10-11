@@ -55,6 +55,8 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
+        notes = new ArrayList<>(personToCopy.getNotes());
+        events = new ArrayList<>(personToCopy.getEvents());
     }
 
     /**

@@ -1,5 +1,7 @@
 package seedu.address.logic.parser;
 
+import seedu.address.logic.parser.exceptions.ParseException;
+
 /**
  * Helper methods for parsing secondary commands
  */
@@ -10,8 +12,13 @@ public abstract class SecondaryCommandSelector {
      * @param str The command arguments after the primary command word
      * @return The secondary command word
      */
-    public static String getSecondaryCommandWord(String str) {
-        return str.split(" ")[1];
+    public static String getSecondaryCommandWord(String str) throws ParseException {
+        try {
+            return str.split(" ")[1];
+        } catch (Exception e) {
+            throw new ParseException("Can not get secondary command");
+        }
+
     }
 
     /**
