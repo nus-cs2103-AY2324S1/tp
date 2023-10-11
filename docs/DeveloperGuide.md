@@ -256,9 +256,9 @@ _{Explain here how the data archiving feature will be implemented}_
 ### Product scope
 
 **Target user profile**:
-* Non-profit animal shelters who currently do not have a good logistical workflow to keep track of foster families
+* Foster manager of non-profit animal shelters which currently do not have a good logistical workflow to keep track of foster families
 * Prefer desktop apps over other types
-* can type fast
+* Can type fast
 * Prefers typing to mouse interactions
 * Is reasonably comfortable using CLI apps
 
@@ -268,158 +268,169 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …                                    | I want to …                                                              | So that I can…                                                        |
-| -------- |-------------------------------------------|--------------------------------------------------------------------------|-----------------------------------------------------------------------|
-| `* * *`  | administrative staff                      | delete a fosterer from the list when they want to stop fostering with us | update the list to see the fosterers who are currently in our program |
-| `* * *`  | administrative staff                      | add each foster family's details efficiently  | allow my colleagues who are conducting home visits to view these information without any inconvenience |
-| `* * *`  | administrative staff                      | provide details of the fostered animal of concern to the fosterer | ensure that the animal is well taken care by informing the fosterer of existing health conditionsto prepare for |
-| `* * *`  | administrative staff                      | update each foster family’s and animal’s details | keep track of foster family’s most up-to-date information, including updated information of the animal fostered |
-| `* * *`  | administrative staff                      | allocate volunteers to each foster family | keep track of who is in charge of checking the pet’s condition for each foster family and send help if needed |
-| `* * *`  | administrative staff                      | search for a specific animal / fosterer’s detail | find specific fosterers or animals more easily, given only partial information |
-| `* * *`  | administrative staff                      | filter and sort the animals in the database by any criteria | easily view the animals that suit specific fosterer’s accommodation capabilities and prioritise the animals more in need |
+| Priority | As a …         | I want to …                                                              | So that I can…                                                                                                           |
+| -------- |----------------|--------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
+| `* * *`  | foster manager | delete a fosterer from the list when they want to stop fostering with us | update the list to see the fosterers who are currently in our program                                                    |
+| `* * *`  | foster manager | add each fosterer's details efficiently                                  | allow my colleagues who are conducting home visits to view these information without any inconvenience                   |
+| `* * *`  | foster manager | provide details of the fostered animal of concern to the fosterer        | ensure that the animal is well taken care by informing the fosterer of existing health conditions to prepare for         |
+| `* * *`  | foster manager | update each foster family’s and animal’s details                         | keep track of fosterer's most up-to-date information, including updated information of the animal fostered                |
+| `* * *`  | foster manager | allocate volunteers to each foster family                                | keep track of who is in charge of checking the pet’s condition for each fosterer and send help if needed                 |
+| `* * *`  | foster manager | search for a specific animal / fosterer’s detail                         | find specific fosterers or animals more easily, given only partial information                                           |
+| `* * *`  | foster manager | filter and sort the animals in the database by any criteria              | easily view the animals that suit specific fosterer’s accommodation capabilities and prioritise the animals more in need |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `FosterFamily` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `Foster Family`, and the **Actor**  is the `Foster Manager`, unless specified otherwise)
 
-**Use case: Adding tags to a fosterer**
+**Use case: UC1 - Add Fosterer**
+
+**Preconditions**: Foster Manager has collected fosterer details.
 
 **MSS**
 
-1. User (Admin staff) collates information from the fosterer.
-2. Adds a fosterer to the address book with the command format `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS animal/ANIMAL_NAME t/AVAILABILITY t/HOUSING_TYPE t/TYPE_OF_ANIMAL_FOSTERED/WANTED…​`.
-3. System displays confirmation message of the fosterer successfully added.
-4. System displays the updated current list of fosterers.
+1. Foster Manager requests to add fosterer to the System. 
+2. System displays confirmation message of the fosterer successfully added. 
+3. System displays the updated current list of fosterers.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. System detects an error in the entered command, usually a formatting error.
-    * 2a1. System requests for data to be inputted in the correct format, with the correct format displayed as guidance.
-    * 2a2. User enters new command.
+* 1a. System detects a format error in the entered command.
+    * 1a1. System indicates the error and requests for data to be inputted in the correct format.
+    * 1a2. Foster Manager enters new command.
 
-      Steps 2a1 and 2a2 are repeated until the data entered is in the correct format.
-      Use case resumes at step 3.
-
-**Use case: Editing a fosterer**
-
-**Preconditions:** A list of fosterers is currently displayed, obtained from a list/find command.
-
-**MSS**
-
-1. User enters the edit command with the index corresponding to the foster family shown in the list.
-2. System generates a pop-up window with the details of the foster family.
-3. User inputs a new detail onto the corresponding field.
-4. User enters the save edit command.
-5. System updates the target foster family’s details in the database.
-6. System directs the user to the initial Command-Line UI.
-
-   Use case ends.
-
-**Extensions**
-
-* 4a. User did not fill up the compulsory fields: name, address, etc.
-    * 4a1. System indicates missing field error.
-    * 4a2. User fills up the missing compulsory fields.
-    * 4a3. User enters the save edit command.
-
-      Steps 6a1-6a3 are repeated until every compulsory field is filled.
-      Use case resumes at step 5.
-
-**Use case: List**
-
-**MSS**
-
-1. User enters the list command as text.
-2. System shows list of fosterers matching query string.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. System cannot parse the command (invalid syntax).
-    * 1a1. System indicates syntax invalidity to the user.
-    * 1a2. User enters a new command as text.
-
-      Steps 1a1 to 1a2 are repeated until the command is valid.
-      If the new command is still a list command, use case resumes from step 2; otherwise switch use cases.
-
-**Use case: Delete fosterers**
-
-**Preconditions:** A list of fosterers is currently displayed, obtained from a list/find command.
-
-**MSS**
-
-1. User enters the fosterers to delete, who are identified by their index in the currently displayed list.
-2. System deletes fosterers.
-3. System shows confirmation message of fosterers successfully deleted.
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. The list is empty. 
-
-    Use case ends.
-
-
-* 1b. System detects an invalid index.
-  * 1b1. System requests user to enter a valid index.
-  * 1b2. User enters valid index.
+        Steps 1a1 - 1a2 are repeated until the command entered is in the correct format.
   
-    Use case resumes at step 2.
+        Use case resumes from step 2.
   
-
-* 1c. System detects an invalid command format after the `delete` command.
-  * 1c1. System requests for user to enter command in correct format.
-  * 1c2. User enters delete command in correct format.
     
-    Use case resumes at step 2.
-
-**Use case: Help**
+**Use case: UC2 - List Fosterers**
 
 **MSS**
 
-1. User wants to know what a command does and how to use it properly. 
-2. User uses the ‘help’ command followed by the command that the user wants information of.
-3. System displays the command information along with its format and several examples.
-4. User proceeds to use the new command.
+1. Foster Manager requests to list fosterers.
+2. System displays list of fosterers that matches the Foster Manager's query.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. User enters a command that does not exist after the ‘help’ command.
-    * 2a1. System displays an error that the command does not exist.
-    * 2a2. The system then lists the commands that is available to the user.
-    * 2a3. User enters the command with the corrected format.
+* 1a. System detects a format error in the entered command.
+    * 1a1. System indicates the error and requests for data to be inputted in the correct format.
+    * 1a2. Foster Manager enters new command.
 
-      Steps 2a1 to 2a3 are repeated until the command executes successfully.
-      Use case resumes at step 3.
+        Steps 1a1 - 1a2 are repeated until the command entered is in the correct format. 
 
-**Use case: Reset**
+        Use case resumes from step 2.
+
+
+**Use case: UC3 - Edit Fosterer**
+
+**Preconditions:** A list of fosterers is currently displayed.
 
 **MSS**
 
-1. User needs to reset the address book for some reason.
+1. Foster Manager requests to edit a fosterer referenced by their index shown in the list.
+2. System displays details of the selected fosterer.
+3. Foster Manager enters the desired changes.
+4. Foster Manager requests to save the changes.
+5. System displays the updated list of fosterers.
+
+   Use case ends.
+
+**Extensions**
+* 1a. System detects an invalid index.
+    * 1a1. System indicates the error and requests for a valid index.
+    * 1a2. Foster Manager enters new command.
+
+      Steps 1a1 - 1a2 are repeated until the entered index is valid.
+
+      Use case resumes from step 2.
+  
+
+* 4a. System detects that the Foster Manager did not fill up compulsory fields.
+    * 4a1. System indicates missing field error.
+    * 4a2. Foster Manager fills up the missing compulsory fields.
+    * 4a3. Foster Manager requests to save the changes.
+
+      Steps 4a1-4a3 are repeated until every compulsory field is filled.
+  
+      Use case resumes from step 5.
+
+**Use case: UC4 - Delete Fosterers**
+
+**Preconditions:** A list of fosterers is currently displayed.
+
+**MSS**
+
+1. Foster Manager requests to delete fosterers referenced by their index shown in the list.
+2. System deletes selected fosterers.
+3. System displays the updated list of fosterers.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The displayed list is empty. 
+
+    Use case ends.
+
+
+* 1b. System detects invalid indices.
+    * 1b1. System indicates the error and requests for valid indices.
+    * 1b2. Foster Manager enters new command.
+
+      Steps 1b1 - 1b2 are repeated until all entered indices are valid.
+
+      Use case resumes from step 2.
+
+**Use case: UC5 - Request For Command Help**
+
+**MSS**
+
+1. Foster Manager requests for information about a command from the System.
+2. System displays the command information.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. The user needs to reset the address book.
-    * 1a1. System displays an error.
-    * 1a2. Pull out the hard drive and throw it away.
-    * 1a3. Replace the hard drive and reinstall our program.
+* 1a. System cannot find the command requested by Foster Manager.
+    * 1a1. System indicates an error that the command does not exist.
+    * 1a2. The system then lists the commands that is available to the Foster Manager.
+    * 1a3. Foster Manager enters new command.
 
-**Use case: Exit**
+      Steps 1a1 to 1a3 are repeated until the command information requested for exists.
+  
+      Use case resumes at step 2.
+
+**Use case: UC6 - Reset System**
 
 **MSS**
 
-1. The user is done using the program and wants to exit the program.
+1. Foster Manager requests to reset the System.
+2. System warns Foster Manager that this is irreversible.
+3. System requests for confirmation.
+4. Foster Manager confirms.
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. Foster Manager chooses to cancel the reset.
+
+    Use case ends.
+
+
+**Use case: UC7 - Exit**
+
+**MSS**
+
+1. Foster Manager requests to exit the program.
+2. System closes program.
 
    Use case ends.
 
