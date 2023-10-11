@@ -2,10 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
@@ -25,16 +22,31 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
+    private final Optional<Name> animalName;
+
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Optional<Name> animalName, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address,  animalName, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.animalName = animalName;
         this.tags.addAll(tags);
+    }
+
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+        this(name, phone, email, address, Optional.empty(), tags);
+    }
+
+    public Person(Name name, Phone phone, Email email, Address address, Name animalName, Set<Tag> tags) {
+        this(name, phone, email, address, Optional.of(animalName), tags);
+    }
+
+    public Name getAnimalName() {
+        return animalName.isPresent() ? animalName.get() : null;
     }
 
     public Name getName() {
@@ -94,13 +106,14 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && animalName.equals(otherPerson.animalName);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, animalName, tags);
     }
 
     @Override
@@ -111,6 +124,7 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
+                .add("animalName", animalName)
                 .toString();
     }
 
