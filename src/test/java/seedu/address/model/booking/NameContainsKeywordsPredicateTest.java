@@ -45,6 +45,10 @@ public class NameContainsKeywordsPredicateTest {
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Collections.singletonList("Alice"));
         assertTrue(predicate.test(new BookingBuilder().withName("Alice Bob").build()));
 
+        // One keyword with room
+        predicate = new NameContainsKeywordsPredicate(Collections.singletonList("1"));
+        assertTrue(predicate.test(new BookingBuilder().withName("Alice Bob").build()));
+
         // Multiple keywords
         predicate = new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob"));
         assertTrue(predicate.test(new BookingBuilder().withName("Alice Bob").build()));
