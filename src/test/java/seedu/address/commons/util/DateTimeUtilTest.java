@@ -3,10 +3,10 @@ package seedu.address.commons.util;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import org.junit.jupiter.api.Test;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
+
+import org.junit.jupiter.api.Test;
 
 public class DateTimeUtilTest {
     @Test
@@ -27,15 +27,10 @@ public class DateTimeUtilTest {
 
     @Test
     public void test_wrongFormat_fails() {
-        assertThrows(DateTimeParseException.class,
-                () -> DateTimeUtil.parseString("002:00"));
-        assertThrows(DateTimeParseException.class,
-                () -> DateTimeUtil.parseString("02:0"));
-        assertThrows(DateTimeParseException.class,
-                () -> DateTimeUtil.parseString("12:1"));
-        assertThrows(DateTimeParseException.class,
-                () -> DateTimeUtil.parseString("2023-10-12"));
-        assertThrows(DateTimeParseException.class,
-                () -> DateTimeUtil.parseString("2023-10-12 0:0:0"));
+        assertThrows(DateTimeParseException.class, () -> DateTimeUtil.parseString("002:00"));
+        assertThrows(DateTimeParseException.class, () -> DateTimeUtil.parseString("02:0"));
+        assertThrows(DateTimeParseException.class, () -> DateTimeUtil.parseString("12:1"));
+        assertThrows(DateTimeParseException.class, () -> DateTimeUtil.parseString("2023-10-12"));
+        assertThrows(DateTimeParseException.class, () -> DateTimeUtil.parseString("2023-10-12 0:0:0"));
     }
 }

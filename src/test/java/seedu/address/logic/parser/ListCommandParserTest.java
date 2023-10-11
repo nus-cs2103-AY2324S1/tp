@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import org.junit.jupiter.api.Test;
@@ -19,13 +18,13 @@ public class ListCommandParserTest {
 
     @Test
     public void execute_correctCommand_success() throws CommandException {
-        assertParseSuccessWithCommand(() -> parser.parse( " "
+        assertParseSuccessWithCommand(() -> parser.parse(" "
                 + ListEventCommand.SECONDARY_COMMAND_WORD), ListEventCommand.class.getName());
     }
 
     @Test
     public void execute_commandNotFound_fails() throws CommandException {
-        assertParseFailedWithError(() -> parser.parse( " "
+        assertParseFailedWithError(() -> parser.parse(" "
                 + " unknown_command 1 2 3"), MESSAGE_UNKNOWN_COMMAND);
     }
 
@@ -43,7 +42,7 @@ public class ListCommandParserTest {
         try {
             function.get();
         } catch (Throwable e) {
-            if ( !(e instanceof ParseException)) {
+            if (!(e instanceof ParseException)) {
                 throw new AssertionError("Execution of parser failed but not due to ParseException.");
             }
             assertEquals(e.getMessage(), errResult);

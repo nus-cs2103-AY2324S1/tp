@@ -5,8 +5,8 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import org.junit.jupiter.api.function.ThrowingSupplier;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -15,9 +15,9 @@ import seedu.address.model.event.Event;
 
 public class AddEventCommandTest {
 
-    private final Event VALID_EVENT_0 = new Event("Have a meeting", "2:00", "4:00","COM1",
-            "Discuss project");
-    private final Event VALID_EVENT_SAME_NAME_0 = new Event("Have a meeting", "5:00", "7:00",
+    private static final Event VALID_EVENT_0 = new Event("Have a meeting", "2:00", "4:00",
+            "COM1", "Discuss project");
+    private static final Event VALID_EVENT_SAME_NAME_0 = new Event("Have a meeting", "5:00", "7:00",
             "COM1", "Discuss project again");
 
     private Model model;
@@ -63,7 +63,7 @@ public class AddEventCommandTest {
         try {
             function.get();
         } catch (Throwable e) {
-            if ( !(e instanceof CommandException)) {
+            if (!(e instanceof CommandException)) {
                 throw new AssertionError("Execution of command failed but not due to CommandException.");
             }
             assertEquals(e.getMessage(), errResult);

@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.ThrowingSupplier;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -13,11 +14,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 public class ListEventCommandTest {
-    private final Event VALID_EVENT_0 = new Event("Have a meeting", "2:00", "4:00","COM1",
-            "Discuss project");
-    private final Event VALID_EVENT_1 = new Event("Midterm Exam", "2:00", "4:00",
+    private static final Event VALID_EVENT_0 = new Event("Have a meeting", "2:00", "4:00",
+            "COM1", "Discuss project");
+    private static final Event VALID_EVENT_1 = new Event("Midterm Exam", "2:00", "4:00",
             "MPSH1", "Seat number is xxx.");
-    private final Event VALID_EVENT_2 = new Event("Another Midterm Exam", "4:00", "6:00",
+    private static final Event VALID_EVENT_2 = new Event("Another Midterm Exam", "4:00", "6:00",
             "MPSH2", "Seat number is xxx.");
 
     private Model model;
@@ -28,7 +29,7 @@ public class ListEventCommandTest {
     }
 
     @Test
-    public void execute_correct_command_success() throws CommandException {
+    public void execute_correctCommand_success() throws CommandException {
         model.findPersonByName("Benson Meier").addEvent(VALID_EVENT_0);
         model.findPersonByName("George Best").addEvent(VALID_EVENT_1);
         model.findPersonByName("George Best").addEvent(VALID_EVENT_2);

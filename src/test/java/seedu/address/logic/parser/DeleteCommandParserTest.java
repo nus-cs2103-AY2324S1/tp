@@ -19,19 +19,19 @@ public class DeleteCommandParserTest {
 
     @Test
     public void execute_correctCommand_success() throws CommandException {
-        assertParseSuccessWithCommand(() -> parser.parse( " "
+        assertParseSuccessWithCommand(() -> parser.parse(" "
                 + DeleteEventCommand.SECONDARY_COMMAND_WORD + " -n a -en aa"), DeleteEventCommand.class.getName());
     }
 
     @Test
     public void execute_commandNotFound_fails() throws CommandException {
-        assertParseFailedWithError(() -> parser.parse( " "
+        assertParseFailedWithError(() -> parser.parse(" "
                 + " unknown_command 1 2 3"), MESSAGE_UNKNOWN_COMMAND);
     }
 
     @Test
     public void execute_commandFormatError_fails() throws CommandException {
-        assertParseFailedWithError(() -> parser.parse( " "
+        assertParseFailedWithError(() -> parser.parse(" "
                 + DeleteEventCommand.SECONDARY_COMMAND_WORD + " -...."),
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteEventCommand.MESSAGE_USAGE));
     }
@@ -49,7 +49,7 @@ public class DeleteCommandParserTest {
         try {
             function.get();
         } catch (Throwable e) {
-            if ( !(e instanceof ParseException)) {
+            if (!(e instanceof ParseException)) {
                 throw new AssertionError("Execution of parser failed but not due to ParseException.");
             }
             assertEquals(e.getMessage(), errResult);
