@@ -28,6 +28,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
 
+    // TODO Update to actual URL when done
     private static final String USER_GUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
