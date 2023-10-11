@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import seedu.address.cardslist.CardList;
-import seedu.address.pojo.FlashCard;
+import seedu.address.model.flashcard.FlashCard;
 
 
 /**

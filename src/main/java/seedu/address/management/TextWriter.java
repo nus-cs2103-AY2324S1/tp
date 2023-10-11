@@ -5,7 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import seedu.address.cardslist.CardList;
-import seedu.address.pojo.FlashCard;
+import seedu.address.model.flashcard.FlashCard;
 /**
  * Writes a .txt file based on the cardList
  *

@@ -2,7 +2,7 @@ package seedu.address.cardslist;
 
 import java.util.ArrayList;
 
-import seedu.address.pojo.FlashCard;
+import seedu.address.model.flashcard.FlashCard;
 
 /**
  * Stores flashcards
