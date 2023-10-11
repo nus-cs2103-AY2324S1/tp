@@ -1,65 +1,74 @@
 package seedu.address.logic.commands;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.Messages;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.GroupList;
-import seedu.address.model.Model;
-import seedu.address.model.person.NameEqualsKeywordPredicate;
-import seedu.address.model.person.Person;
-import seedu.address.model.Group;
-
-import java.util.*;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUPTAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import javafx.util.Pair;
+import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.group.Group;
+import seedu.address.model.Model;
+import seedu.address.model.person.Person;
 
+/**
+ * Removes a person from a group.
+ */
 public class UngroupPersonCommand extends Command {
+
     public static final String COMMAND_WORD = "ungroup";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Removes the person from the group.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes a person from a group in the address book. "
             + "Parameters: "
-            + "NAME (must be a string)\n"
-            + "GROUPNAME (must be a string)\n"
-            + "Example: " + COMMAND_WORD
-            + PREFIX_NAME + "John "
-            + PREFIX_GROUPTAG + "CS2103T ";
+            + PREFIX_NAME + "NAME "
+            + PREFIX_GROUPTAG + "GROUP ";
 
-    public static final String MESSAGE_UNGROUP_PERSON_SUCCESS = "Ungrouped Person: %1$s";
+    public static final String MESSAGE_SUCCESS = "%1$s is no longer a part of %2$s";
+    private final String personName;
+    private final String groupName;
 
-    private final NameEqualsKeywordPredicate predicate;
-    private final Group group;
 
-    public UngroupPersonCommand(NameEqualsKeywordPredicate predicate, Group group) {
-        requireNonNull(predicate);
-        requireNonNull(group);
-        this.predicate = predicate;
-        this.group = group;
+    /**
+     * Creates an UngroupPersonCommand to add the specified {@code Person}
+     * to the specified {@code Group}
+     */
+    public UngroupPersonCommand(String personName, String groupName) {
+        requireNonNull(personName);
+        requireNonNull(groupName);
+        this.personName = personName;
+        this.groupName = groupName;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
-        List<Person> lastShownList = model.getFilteredPersonList();
-        if (lastShownList.size() != 1) {
-            throw new CommandException("Cannot find person.");
-        }
-        Index index = Index.fromZeroBased(0);
-        Person personToUngroup = lastShownList.get(index.getZeroBased());
-        GroupList personGroups = personToUngroup.getGroups();
-        if (!personGroups.contains(group)) {
-            throw new CommandException("Person does not have this group.");
-        } else if (!group.contains(personToUngroup)) {
-            throw new CommandException("Person is not in this group.");
-        } else {
-            personGroups.remove(group);
-            group.remove(personToUngroup);
+        Pair<Person, Group> output =  model.ungroupPerson(this.personName, this.groupName);
+        Person person = output.getKey();
+        Group group = output.getValue();
+        System.out.println(person.toString());
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, person.getName().fullName, group.getName()));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
         }
 
-        return new CommandResult(
-                String.format(MESSAGE_UNGROUP_PERSON_SUCCESS, Messages.format(personToUngroup)));
+        if (!(other instanceof GroupPersonCommand)) {
+            return false;
+        }
+
+        UngroupPersonCommand otherUngroupPersonCommand = (UngroupPersonCommand) other;
+        return this.equals(otherUngroupPersonCommand);
+
+    }
+
+    // to fix
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("toRemoveFromGroup", "")
+                .toString();
     }
 }
