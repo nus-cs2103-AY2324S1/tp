@@ -3,11 +3,11 @@
     "name": "Valid Employee",
     "phone": "9482424",
     "department": "hans@example.com",
-    "address": "4th street"
+    "jobTitle": "4th street"
   }, {
     "name": "Employee With Invalid Phone Field",
     "phone": "948asdf2424",
     "department": "hans@example.com",
-    "address": "4th street"
+    "jobTitle": "4th street"
   } ]
 }
