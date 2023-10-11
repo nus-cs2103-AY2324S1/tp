@@ -4,11 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 
 
 public class WelcomeCommandTest {
