@@ -1,10 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.ATTENDEE_DESC_ALICE;
-import static seedu.address.logic.commands.CommandTestUtil.ATTENDEE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.END_DESC_MEETING1;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_ATTENDEE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_END_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_LOCATION_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_START_DESC;
@@ -25,19 +22,15 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TITLE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalMeetings.MEETING1;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddMeetingCommand;
-import seedu.address.model.meeting.Attendee;
 import seedu.address.model.meeting.Location;
 import seedu.address.model.meeting.Meeting;
 import seedu.address.model.meeting.MeetingTime;
 import seedu.address.model.meeting.Title;
-import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.MeetingBuilder;
 
 public class AddMeetingCommandParserTest {
@@ -45,14 +38,11 @@ public class AddMeetingCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        AddressBookBuilder test = new AddressBookBuilder();
-        test.withPerson(ALICE);
-        test.withPerson(BOB);
-        Meeting expectedMeeting = new MeetingBuilder(MEETING1).build(); //.withAttendees("Alice Pauline").build();
+        Meeting expectedMeeting = new MeetingBuilder(MEETING1).withAttendees().build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + TITLE_DESC_MEETING1 + LOCATION_DESC_MEETING1
-                + START_DESC_MEETING1 + END_DESC_MEETING1, // + ATTENDEE_DESC_ALICE,
+                + START_DESC_MEETING1 + END_DESC_MEETING1,
                 new AddMeetingCommand(expectedMeeting));
 
         /*
