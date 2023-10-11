@@ -36,8 +36,7 @@ public class Messages {
     // Messages associated with Attributes constraints 
     public static final String MESSAGE_NAME_CONSTRAINTS = 
             "Names should only contain alphanumeric characters and spaces, and it should not be blank";
-    public static final String MESSAGE_PHONE_CONSTRAINTS =
-            "Phone numbers should only contain numbers, and it should be at least 3 digits long";
+    public static final String MESSAGE_PHONE_CONSTRAINTS = "Phone numbers should only contain numbers, and it should be at least 3 digits long";
     public static final String MESSAGE_EMAIL_CONSTRAINTS = "Emails should be of the format local-part@domain "
             + "and adhere to the following constraints:\n"
             + "1. The local-part should only contain alphanumeric characters and these special characters, excluding "
