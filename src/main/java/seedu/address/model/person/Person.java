@@ -1,11 +1,15 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.GroupList;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupList;
+import seedu.address.model.group.exceptions.DuplicateGroupException;
 
 /**
  * Represents a Person in the address book.
@@ -17,6 +21,7 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
+
 
     // Data fields
     private GroupList personGroups = new GroupList();
@@ -51,6 +56,28 @@ public class Person {
     }
 
     /**
+     * Adds group to persons existing groupList
+     * @param group to be added to person groupList
+     */
+    public void addGroup(Group group) throws CommandException {
+        requireNonNull(group);
+        if (this.personGroups.contains(group)) {
+            throw new CommandException(String.format("%s is already in this group: %s", this.name.fullName, group.getGroupName()));
+        }
+        this.personGroups.add(group);
+    }
+
+    /**
+     * Check whether person is part of group
+     * @param group group to check
+     * @return boolean depending on whether person is in group
+     */
+    public boolean containsGroup(Group group) {
+        return personGroups.contains(group);
+    }
+
+
+    /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
@@ -61,6 +88,10 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
+    }
+
+    public boolean nameEquals(String personName) {
+        return name.nameEquals(personName);
     }
 
     /**

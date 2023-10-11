@@ -8,6 +8,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -146,5 +147,14 @@ public class UniquePersonList implements Iterable<Person> {
             }
         }
         return true;
+    }
+
+    public Person getPerson(String personName) throws CommandException {
+       for (Person person: this.internalList) {
+           if (person.nameEquals(personName)) {
+              return person;
+           }
+       }
+       throw new CommandException("Person does not exist");
     }
 }
