@@ -6,6 +6,9 @@ import seedu.address.model.person.Person;
 
 import java.util.List;
 
+/**
+ * The command handler for {@code list events} command
+ */
 public class ListEventCommand extends ListCommand {
     public static final String SECONDARY_COMMAND_WORD = "events";
     private static final String MESSAGE = "Here are all the events in this address book: ";
@@ -16,7 +19,9 @@ public class ListEventCommand extends ListCommand {
         StringBuilder str = new StringBuilder("All events:\n");
         persons.forEach(
                 person -> person.getEvents().forEach(
-                        event -> str.append("[").append(person.getName().toString()).append("] ").append(event.getUIText()).append("\n")
+                        event -> str.append("[").append(
+                                person.getName().toString()).append("] ")
+                                .append(event.getUiText()).append("\n")
                 )
         );
         return new CommandResult(str.toString());

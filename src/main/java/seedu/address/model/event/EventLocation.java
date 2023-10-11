@@ -1,5 +1,8 @@
 package seedu.address.model.event;
 
+/**
+ * The class for holding the "location" part for an Event
+ */
 public class EventLocation {
     private final String location;
 

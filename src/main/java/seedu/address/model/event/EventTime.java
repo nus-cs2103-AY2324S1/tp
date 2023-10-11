@@ -3,9 +3,11 @@ package seedu.address.model.event;
 import seedu.address.model.util.DateTimeUtil;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * The class for holding the "start" and "end" part for an Event
+ */
 public class EventTime {
     private final LocalDateTime time;
 

@@ -1,13 +1,15 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.commands.AddEventCommand;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_NAME;
+
 import seedu.address.logic.commands.DeleteEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.ui.MainWindow;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
-
+/**
+ * Parses input arguments and creates a new DeleteEventCommand object
+ */
 public class DeleteEventCommandParser implements Parser<DeleteEventCommand> {
     @Override
     public DeleteEventCommand parse(String args) throws ParseException {

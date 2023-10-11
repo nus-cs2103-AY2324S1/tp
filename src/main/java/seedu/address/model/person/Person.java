@@ -97,8 +97,8 @@ public class Person {
      */
     public boolean removeEventByName(String eventName) {
         int eventCount = events.size();
-        for(int i = 0; i < eventCount; i++) {
-            if(this.events.get(i).getName().equals(eventName)){
+        for (int i = 0; i < eventCount; i++) {
+            if (this.events.get(i).getName().equals(eventName)) {
                 this.events.remove(i);
                 return true;
             }

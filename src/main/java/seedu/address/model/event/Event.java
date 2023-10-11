@@ -1,7 +1,8 @@
 package seedu.address.model.event;
 
-import java.time.LocalDateTime;
-
+/**
+ * The class for holding an Event
+ */
 public class Event {
     private final EventTime start;
     private final EventTime end;
@@ -72,15 +73,15 @@ public class Event {
      * Get a string that can be used to represent this event on GUI
      * @return The information in string
      */
-    public String getUIText() {
+    public String getUiText() {
         String result = this.getName() + " ( Starts at: " + this.start;
-        if(!this.end.toString().isEmpty()) {
+        if (!this.end.toString().isEmpty()) {
             result += ", Ends at: " + this.end;
         }
-        if(!this.location.toString().isEmpty()) {
+        if (!this.location.toString().isEmpty()) {
             result += ", Location: " + this.location;
         }
-        if(!this.information.toString().isEmpty()) {
+        if (!this.information.toString().isEmpty()) {
             result += ", Information: " + this.information;
         }
         result += " )";

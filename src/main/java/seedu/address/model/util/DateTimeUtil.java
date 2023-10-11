@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Utilities about date and time
+ */
 public class DateTimeUtil {
     /**
      * Parse string into LocalDateTime
@@ -14,17 +17,17 @@ public class DateTimeUtil {
     public static LocalDateTime parseString(String str) throws DateTimeParseException {
         DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm[:ss]");
         LocalDateTime result = null;
-        try{
+        try {
             result = LocalDateTime.parse(str);
         }
         catch (DateTimeParseException e) {
-            try{
+            try {
                 result = LocalDateTime.parse(str, formatter1);
             }
             catch (DateTimeParseException e2) {
                 LocalDateTime now = LocalDateTime.now();
                 String appendDate = now.getYear() + "-" + now.getMonthValue() + "-" + now.getDayOfMonth() + " ";
-                try{
+                try {
                     result = LocalDateTime.parse(appendDate + str, formatter1);
                 }
                 catch (DateTimeParseException e3) {

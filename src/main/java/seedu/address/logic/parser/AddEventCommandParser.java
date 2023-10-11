@@ -1,16 +1,22 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_DATETIME_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_START_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_END_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_LOCATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_INFORMATION;
+
 import seedu.address.logic.commands.AddEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Event;
-import seedu.address.ui.MainWindow;
-
 import java.time.format.DateTimeParseException;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_DATETIME_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
-
+/**
+ * Parses input arguments and creates a new AddEventCommand object
+ */
 public class AddEventCommandParser implements Parser<AddEventCommand> {
 
 
@@ -34,7 +40,7 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
         String location = argMultimap.getValue(PREFIX_EVENT_LOCATION).orElseGet(()->"");
         String information = argMultimap.getValue(PREFIX_EVENT_INFORMATION).orElseGet(()->"");
         Event newEvent = null;
-        try{
+        try {
             newEvent = new Event(eventName, startTime, endTime, location, information);
         }
         catch (DateTimeParseException e) {

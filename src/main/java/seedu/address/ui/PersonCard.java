@@ -4,7 +4,6 @@ import java.util.Comparator;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -62,6 +61,6 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         person.getEvents().stream()
                 .sorted(Comparator.comparing(Event::getName))
-                .forEach(event -> events.getChildren().add(new Label(event.getUIText())));
+                .forEach(event -> events.getChildren().add(new Label(event.getUiText())));
     }
 }

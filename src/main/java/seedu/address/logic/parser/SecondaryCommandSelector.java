@@ -1,6 +1,9 @@
 package seedu.address.logic.parser;
 
-public abstract class SecondaryCommandSelector{
+/**
+ * Helper methods for parsing secondary commands
+ */
+public abstract class SecondaryCommandSelector {
 
     /**
      * Get the secondary command word. For example, the command word {@code event} in the comman {@code add event ...}
@@ -17,6 +20,6 @@ public abstract class SecondaryCommandSelector{
      * @return The arguments after secondary command word
      */
     public static String getArguments(String secondaryCommandWord, String str) {
-        return str.replaceFirst(secondaryCommandWord,"");
+        return str.replaceFirst(secondaryCommandWord, "");
     }
 }
