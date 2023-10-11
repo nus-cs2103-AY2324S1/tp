@@ -70,7 +70,7 @@ public class MainWindow extends UiPart<Stage> {
 
         helpWindow = new HelpWindow();
 
-        INSTANCE = this;
+        iNSTANCE = this;
     }
 
     public Stage getPrimaryStage() {
