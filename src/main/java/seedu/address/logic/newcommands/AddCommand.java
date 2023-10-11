@@ -1,15 +1,17 @@
-package seedu.address.logic.command;
+package seedu.address.logic.newcommands;
 
 import java.util.Date;
 
 import seedu.address.cardslist.CardList;
+import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.newcommands.Command;
+import seedu.address.model.Model;
 import seedu.address.model.flashcard.FlashCard;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.*;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 
 /**
@@ -37,20 +39,44 @@ public class AddCommand extends Command {
     private String translated;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddCommand to add the specified {@code FlashCard}
      */
     public AddCommand(String original, String translated, CardList cardList) {
         this.cardList = cardList;
         this.original = original;
         this.translated = translated;
-        this.toAdd = new FlashCard(original, translated, new Date(), 0);
+        this.toAdd = new FlashCard(original, translated, new Date(), 1);
     }
 
     @Override
-    public CommandResult execute() throws CommandException {
+    public CommandResult execute(Model model) throws CommandException {
+        requireNonNull(model);
+
         if (cardList.hasCard(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_CARD);
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, this.original, this.translated));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof AddCommand)) {
+            return false;
+        }
+
+        AddCommand otherAddCommand = (AddCommand) other;
+        return toAdd.equals(otherAddCommand.toAdd);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("toAdd", toAdd)
+                .toString();
     }
 }
