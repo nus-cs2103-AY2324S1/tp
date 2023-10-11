@@ -121,7 +121,7 @@ public class ModelManager implements Model {
     //=========== Calendar ===================================================================================
     @Override
    public boolean canAddEvent(Event event) {
-        return this.calendar.isEventAddValid(event);
+        return this.calendar.canAddEvent(event);
     }
 
     @Override

@@ -2,6 +2,8 @@ package seedu.address.model.event;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import java.time.LocalDate;
+import java.util.List;
 
 /**
  * Represents an event in the calendar
@@ -82,6 +84,15 @@ public class Event {
         requireNonNull(eventPeriod);
 
         this.eventPeriod = eventPeriod;
+    }
+
+    /**
+     * Get the dates the event spans, stored in a list.
+     *
+     * @return list of the dates the event spans.
+     */
+    public List<LocalDate> getEventDays() {
+        return this.eventPeriod.getDates();
     }
 
     @Override

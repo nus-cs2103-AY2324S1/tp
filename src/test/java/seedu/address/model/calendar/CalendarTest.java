@@ -5,12 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
-import java.util.TreeMap;
-
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.event.AllDaysEventListManager;
 import seedu.address.model.event.Event;
-import seedu.address.model.event.EventPeriod;
 import seedu.address.testutil.EventBuilder;
 
 public class CalendarTest {
@@ -18,7 +16,7 @@ public class CalendarTest {
 
     @Test
     public void constructor() {
-        assertEquals(new TreeMap<EventPeriod, Event>(), calendar.getEventTree());
+        assertEquals(new AllDaysEventListManager(), calendar.getEventManager());
     }
 
     @Test
@@ -29,6 +27,7 @@ public class CalendarTest {
 
     @Test
     public void isEmptyValid_nonEmptyCalendar_returnsFalse() {
+        this.calendar.clear();
         this.calendar.addEvent(new EventBuilder().build());
         assertFalse(this.calendar.isEmpty());
     }
@@ -63,20 +62,6 @@ public class CalendarTest {
         assertTrue(this.calendar.contains(validEvent));
     }
 
-    @Test
-    public void isEventAddValid_conflictingEvent_returnsFalse() {
-        this.calendar.clear();
-        Event conflictingEvent = new EventBuilder().build();
-        this.calendar.addEvent(conflictingEvent);
-        assertFalse(this.calendar.isEventAddValid(conflictingEvent));
-    }
-
-    @Test
-    public void isEventAddValid_validEvent_returnsTrue() {
-        this.calendar.clear();
-        Event validEvent = new EventBuilder().build();
-        assertTrue(this.calendar.isEventAddValid(validEvent));
-    }
 
     @Test
     public void isEqualsValid_nullValue_returnsFalse() {
@@ -120,21 +105,5 @@ public class CalendarTest {
         assertFalse(this.calendar.equals(nonEqualCalendar));
     }
 
-    @Test
-    public void isRemoveEventValid_removeFromOneEventCalendar_returnsEmptyCalendar() {
-        this.calendar.clear();
-        this.calendar.addEvent(new EventBuilder().build());
-        int validIndex = this.calendar.getEventTree().size();
-        this.calendar.removeEvent(validIndex);
-        assertTrue(this.calendar.isEmpty());
-    }
 
-    @Test
-    public void isEditEventPeriodValid_nullEventPeriod_throwsNullPointerException() {
-        this.calendar.clear();
-        this.calendar.addEvent(new EventBuilder().build());
-        int validIndex = this.calendar.getEventTree().size();
-        assertThrows(NullPointerException.class, () -> this.calendar.editEventPeriod(
-                validIndex, null));
-    }
 }

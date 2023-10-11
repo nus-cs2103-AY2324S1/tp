@@ -163,6 +163,11 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    @FXML
+    private void handleComingSoon() {
+
+    }
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
     }

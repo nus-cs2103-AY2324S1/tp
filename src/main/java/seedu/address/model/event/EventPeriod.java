@@ -2,9 +2,13 @@ package seedu.address.model.event;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents a period in time when an event will occur.
@@ -92,6 +96,21 @@ public class EventPeriod {
         } else {
             return -1;
         }
+    }
+
+    /**
+     * Get the dates the eventPeriod spans, stored in an arrayList.
+     *
+     * @return list of the dates the eventPeriod spans.
+     */
+    public List<LocalDate> getDates() {
+        Duration durationBetweenStartAndEnd = Duration.between(start, end);
+        long numberOfDays = durationBetweenStartAndEnd.toDays();
+        List<LocalDate> listOfDates = new ArrayList<LocalDate>();
+        for (long i = 0; i <= numberOfDays; i++) {
+            listOfDates.add(this.start.toLocalDate().plusDays(i));
+        }
+        return listOfDates;
     }
 
     @Override
