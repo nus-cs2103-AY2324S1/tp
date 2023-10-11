@@ -19,18 +19,15 @@ public class DateTimeUtil {
         LocalDateTime result = null;
         try {
             result = LocalDateTime.parse(str);
-        }
-        catch (DateTimeParseException e) {
+        } catch (DateTimeParseException e) {
             try {
                 result = LocalDateTime.parse(str, formatter1);
-            }
-            catch (DateTimeParseException e2) {
+            } catch (DateTimeParseException e2) {
                 LocalDateTime now = LocalDateTime.now();
                 String appendDate = now.getYear() + "-" + now.getMonthValue() + "-" + now.getDayOfMonth() + " ";
                 try {
                     result = LocalDateTime.parse(appendDate + str, formatter1);
-                }
-                catch (DateTimeParseException e3) {
+                } catch (DateTimeParseException e3) {
                     String appendZero = "0";
                     result = LocalDateTime.parse(appendDate + appendZero + str, formatter1);
                 }

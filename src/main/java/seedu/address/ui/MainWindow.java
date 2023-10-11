@@ -23,7 +23,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class MainWindow extends UiPart<Stage> {
 
-    private static MainWindow INSTANCE;
+    private static MainWindow iNSTANCE;
 
     private static final String FXML = "MainWindow.fxml";
 
@@ -203,8 +203,8 @@ public class MainWindow extends UiPart<Stage> {
      * Refresh the person list panel and all person cards immediately
      */
     public static void refreshPersonListPanelImmediately() {
-        INSTANCE.personListPanelPlaceholder.getChildren().clear();
-        INSTANCE.personListPanel = new PersonListPanel(INSTANCE.logic.getFilteredPersonList());
-        INSTANCE.personListPanelPlaceholder.getChildren().add(INSTANCE.personListPanel.getRoot());
+        iNSTANCE.personListPanelPlaceholder.getChildren().clear();
+        iNSTANCE.personListPanel = new PersonListPanel(iNSTANCE.logic.getFilteredPersonList());
+        iNSTANCE.personListPanelPlaceholder.getChildren().add(iNSTANCE.personListPanel.getRoot());
     }
 }

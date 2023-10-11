@@ -44,8 +44,7 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
         Event newEvent = null;
         try {
             newEvent = new Event(eventName, startTime, endTime, location, information);
-        }
-        catch (DateTimeParseException e) {
+        } catch (DateTimeParseException e) {
             throw new ParseException(String.format(MESSAGE_INVALID_DATETIME_FORMAT, e.getMessage()));
         }
 
