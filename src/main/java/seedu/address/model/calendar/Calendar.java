@@ -2,18 +2,8 @@ package seedu.address.model.calendar;
 
 import static java.util.Objects.requireNonNull;
 
-import java.time.LocalDate;
-import java.util.Map;
-import java.util.NavigableMap;
-import java.util.Optional;
-import java.util.TreeMap;
-
-import javafx.collections.ObservableList;
-import seedu.address.model.ReadOnlyCalendar;
 import seedu.address.model.event.AllDaysEventListManager;
 import seedu.address.model.event.Event;
-import seedu.address.model.event.EventPeriod;
-import seedu.address.model.event.SingleDayEventList;
 
 /**
  * Represents a calendar that stores and manages events.
