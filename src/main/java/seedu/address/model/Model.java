@@ -84,4 +84,10 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Find a person by name.
+     * If the person does not exist, returns null.
+     */
+    Person findPersonByName(String name);
 }

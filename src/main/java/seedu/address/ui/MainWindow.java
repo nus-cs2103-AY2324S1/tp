@@ -10,6 +10,7 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import seedu.address.Main;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
@@ -50,6 +51,8 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane statusbarPlaceholder;
 
+    private static MainWindow INSTANCE;
+
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
@@ -66,6 +69,8 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+
+        INSTANCE = this;
     }
 
     public Stage getPrimaryStage() {
@@ -192,5 +197,14 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    /**
+     * Refresh the person list panel and all person cards immediately
+     */
+    public static void refreshPersonListPanelImmediately() {
+        INSTANCE.personListPanelPlaceholder.getChildren().clear();
+        INSTANCE.personListPanel = new PersonListPanel(INSTANCE.logic.getFilteredPersonList());
+        INSTANCE.personListPanelPlaceholder.getChildren().add(INSTANCE.personListPanel.getRoot());
     }
 }

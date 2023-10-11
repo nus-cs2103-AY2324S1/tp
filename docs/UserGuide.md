@@ -145,13 +145,13 @@ Examples:
 
 ### Adding events: `add event`
 
-Adds an event to the address book.
+Adds an event to a contact.
 
-Format: `add event -n EVENT_NAME -st START_TIME [-et END_TIME] [-loc LOCATION] [-i INFORMATION]`
+Format: `add event -n CONTACT_NAME -en EVENT_NAME -st START_TIME [-et END_TIME] [-loc LOCATION] [-i INFORMATION]`
 
 Examples:
-* `add event -n Meeting with professor -st 12:00 -et 1:00 -loc COM 1 Basement -i Discuss the project implementation with the professor`
-* `add event -n Chat with TikTok recruiter -st 17:00`
+* `add event -n Professor XXX -en Meeting with professor -st 12:00 -et 1:00 -loc COM 1 Basement -i Discuss the project implementation with the professor`
+* `add event -n TikTok recruiter -en Chat with TikTok recruiter -st 17:00`
 
 ### Listing all events : `list events`
 
@@ -161,14 +161,14 @@ Format: `list events`
 
 ### Deleting an event : `delete event`
 
-Deletes the specified event.
+Deletes the specified event from a contact.
 
-Format: `delete event EVENT_NAME`
+Format: `delete event -n CONTACT_NAME -en EVENT_NAME`
 
-* Deletes the event with the name `EVENT_NAME`.
+* Deletes the event with the name `EVENT_NAME` from the contact `CONTACT_NAME`.
 
 Examples:
-* `list events` followed by `delete event Meeting with professor` deletes the event with the name Meeting with professor.
+* `list events` followed by `delete event -n Professor XXX -en Meeting with professor` deletes the event with the name Meeting with professor under contact Professor XXX.
 
 ### Exiting the program : `exit`
 
@@ -213,7 +213,7 @@ Action             | Format, Examples
 **Add Note**       | `add note -n NAME -t NOTE_TITLE -c NOTE_CONTENT` <br> e.g., `add note -n Daniel -t Open Position -e Applications for SWE full-time positions will open soon`
 **Delete Note**    | `delete note -n NAME -t NOTE_TITLE`<br> e.g., `delete note -n Aaron -t Meeting Topics`
 **List Notes**     | `list notes`
-**Add Event**      | `add event -n EVENT_NAME -st START_TIME [-et END_TIME] [-loc LOCATION] [-i INFORMATION]` <br> e.g., `add event -n Meeting with professor -st 12:00 -et 1:00 -loc COM 1 Basement -i Discuss the project implementation with the professor`
-**Delete Event**   | `delete event EVENT_NAME`<br> e.g., `delete event Meeting with professor`
+**Add Event**      | `add event -n CONTACT_NAME -en EVENT_NAME -st START_TIME [-et END_TIME] [-loc LOCATION] [-i INFORMATION]` <br> e.g., `add event -n Professor XXX -en Meeting with professor -st 12:00 -et 1:00 -loc COM 1 Basement -i Discuss the project implementation with the professor`
+**Delete Event**   | `delete event -n CONTACT_NAME -en EVENT_NAME`<br> e.g., `delete event -n Professor XXX -en Meeting with professor`
 **List Events**    | `list events`
 **Help**           | `help`

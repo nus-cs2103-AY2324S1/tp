@@ -4,8 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -126,6 +128,17 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public Person findPersonByName(String name) {
+        requireNonNull(name);
+        List<Person> tmp = addressBook.getPersonList().stream().filter(person->person.getName().toString().equals(name))
+                .collect(Collectors.toList());
+        if(tmp.isEmpty()) {
+            return null;
+        }
+        return tmp.get(0);
     }
 
     @Override

@@ -16,15 +16,23 @@ public class JsonAdaptedEvent {
     private final String start;
     private final String end;
 
+    private final String location;
+
+    private final String information;
+
     /**
      * Constructs a {@code JsonAdaptedEvent} with the given person details.
      */
     @JsonCreator
     public JsonAdaptedEvent(@JsonProperty("name") String name,
-            @JsonProperty("start") String start, @JsonProperty("end") String end) {
+            @JsonProperty("start") String start, @JsonProperty("end") String end,
+            @JsonProperty("location") String location,
+            @JsonProperty("information") String information) {
         this.name = name;
         this.start = start;
         this.end = end;
+        this.location = location;
+        this.information = information;
     }
 
     /**
@@ -34,6 +42,8 @@ public class JsonAdaptedEvent {
         name = source.getName();
         start = source.getStartString();
         end = source.getEndString();
+        location = source.getLocationStr();
+        information = source.getInformationStr();
     }
 
     /**
@@ -57,6 +67,14 @@ public class JsonAdaptedEvent {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "end"));
         }
 
-        return new Event(name, start, end);
+        if (location == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "location"));
+        }
+
+        if (information == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "information"));
+        }
+
+        return new Event(name, start, end, location, information);
     }
 }
