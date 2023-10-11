@@ -30,6 +30,7 @@ public class Person {
     private final Profession profession;
     private final Income income;
     private final Details details;
+    private Set<Interaction> interactions;
 
     /**
      * Every field must be present and not null.
@@ -46,6 +47,7 @@ public class Person {
         this.profession = null;
         this.income = null;
         this.details = null;
+        this.interactions = null;
     }
 
     /**
@@ -96,6 +98,10 @@ public class Person {
 
     public Details getDetails() {
         return details;
+    }
+
+    public Set<Interaction> getInteractions() {
+        return interactions;
     }
 
     /**
