@@ -24,31 +24,36 @@ public class PersonTest {
     }
 
     @Test
-    public void isSamePerson() {
+    public void isSame() {
         // same object -> returns true
-        assertTrue(TypicalPersons.ALICE.isSamePerson(TypicalPersons.ALICE));
+        assertTrue(TypicalPersons.ALICE.isSame(TypicalPersons.ALICE));
 
         // null -> returns false
-        assertFalse(TypicalPersons.ALICE.isSamePerson(null));
+        assertFalse(TypicalPersons.ALICE.isSame(null));
 
         // same name, all other attributes different -> returns true
         Person editedAlice = new PersonBuilder(TypicalPersons.ALICE)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(TypicalPersons.ALICE.isSamePerson(editedAlice));
+        assertTrue(TypicalPersons.ALICE.isSame(editedAlice));
 
         // different name, all other attributes same -> returns false
         editedAlice = new PersonBuilder(TypicalPersons.ALICE).withName(VALID_NAME_BOB).build();
-        assertFalse(TypicalPersons.ALICE.isSamePerson(editedAlice));
+        assertFalse(TypicalPersons.ALICE.isSame(editedAlice));
 
         // name differs in case, all other attributes same -> returns false
         Person editedBob = new PersonBuilder(TypicalPersons.BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
-        assertFalse(TypicalPersons.BOB.isSamePerson(editedBob));
+        assertFalse(TypicalPersons.BOB.isSame(editedBob));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new PersonBuilder(TypicalPersons.BOB).withName(nameWithTrailingSpaces).build();
-        assertFalse(TypicalPersons.BOB.isSamePerson(editedBob));
+        assertFalse(TypicalPersons.BOB.isSame(editedBob));
+    }
+
+    @Test
+    public void getValue_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, TypicalPersons.ALICE::getValue);
     }
 
     @Test
@@ -93,7 +98,7 @@ public class PersonTest {
     @Test
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + TypicalPersons.ALICE.getName()
-                + ", phone=" + TypicalPersons.ALICE.getPhone() + ", email=" + TypicalPersons.ALICE.getEmail()
+                + ", phone=" + TypicalPersons.ALICE.getPhone() + ", email=" + TypicalPersons.ALICE.getEmails()
                 + ", address=" + TypicalPersons.ALICE.getAddress() + ", tags=" + TypicalPersons.ALICE.getTags() + "}";
         assertEquals(expected, TypicalPersons.ALICE.toString());
     }

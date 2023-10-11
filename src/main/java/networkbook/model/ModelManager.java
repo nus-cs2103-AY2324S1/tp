@@ -105,10 +105,10 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
+    public void setItem(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
-        networkBook.setPerson(target, editedPerson);
+        networkBook.setItem(target, editedPerson);
     }
 
     //=========== Filtered Person List Accessors =============================================================

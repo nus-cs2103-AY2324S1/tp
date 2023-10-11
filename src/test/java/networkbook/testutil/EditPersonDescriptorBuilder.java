@@ -1,5 +1,6 @@
 package networkbook.testutil;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -11,6 +12,7 @@ import networkbook.model.person.Name;
 import networkbook.model.person.Person;
 import networkbook.model.person.Phone;
 import networkbook.model.tag.Tag;
+import networkbook.model.util.UniqueList;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.
@@ -34,7 +36,7 @@ public class EditPersonDescriptorBuilder {
         descriptor = new EditCommand.EditPersonDescriptor();
         descriptor.setName(person.getName());
         descriptor.setPhone(person.getPhone());
-        descriptor.setEmail(person.getEmail());
+        descriptor.setEmails(person.getEmails());
         descriptor.setAddress(person.getAddress());
         descriptor.setTags(person.getTags());
     }
@@ -59,7 +61,7 @@ public class EditPersonDescriptorBuilder {
      * Sets the {@code Email} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withEmail(String email) {
-        descriptor.setEmail(new Email(email));
+        descriptor.setEmails(new UniqueList<Email>().setItems(List.of(new Email(email))));
         return this;
     }
 

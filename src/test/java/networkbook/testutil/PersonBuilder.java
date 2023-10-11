@@ -1,6 +1,7 @@
 package networkbook.testutil;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import networkbook.model.person.Address;
@@ -10,6 +11,7 @@ import networkbook.model.person.Person;
 import networkbook.model.person.Phone;
 import networkbook.model.tag.Tag;
 import networkbook.model.util.SampleDataUtil;
+import networkbook.model.util.UniqueList;
 
 /**
  * A utility class to help with building Person objects.
@@ -23,7 +25,7 @@ public class PersonBuilder {
 
     private Name name;
     private Phone phone;
-    private Email email;
+    private UniqueList<Email> emails;
     private Address address;
     private Set<Tag> tags;
 
@@ -33,7 +35,7 @@ public class PersonBuilder {
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
-        email = new Email(DEFAULT_EMAIL);
+        emails = new UniqueList<Email>().setItems(List.of(new Email(DEFAULT_EMAIL)));
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
     }
@@ -44,7 +46,7 @@ public class PersonBuilder {
     public PersonBuilder(Person personToCopy) {
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
-        email = personToCopy.getEmail();
+        emails = personToCopy.getEmails();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
     }
@@ -85,12 +87,12 @@ public class PersonBuilder {
      * Sets the {@code Email} of the {@code Person} that we are building.
      */
     public PersonBuilder withEmail(String email) {
-        this.email = new Email(email);
+        this.emails = new UniqueList<Email>().setItems(List.of(new Email(email)));
         return this;
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        return new Person(name, phone, emails, address, tags);
     }
 
 }

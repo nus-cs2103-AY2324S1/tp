@@ -9,17 +9,19 @@ import java.util.Set;
 
 import networkbook.commons.util.ToStringBuilder;
 import networkbook.model.tag.Tag;
+import networkbook.model.util.Identifiable;
+import networkbook.model.util.UniqueList;
 
 /**
  * Represents a Person in the network book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public class Person implements Identifiable<Person> {
 
     // Identity fields
     private final Name name;
     private final Phone phone;
-    private final Email email;
+    private final UniqueList<Email> emails;
 
     // Data fields
     private final Address address;
@@ -28,11 +30,11 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, UniqueList<Email> emails, Address address, Set<Tag> tags) {
+        requireAllNonNull(name, phone, emails, address, tags);
         this.name = name;
         this.phone = phone;
-        this.email = email;
+        this.emails = emails;
         this.address = address;
         this.tags.addAll(tags);
     }
@@ -45,8 +47,8 @@ public class Person {
         return phone;
     }
 
-    public Email getEmail() {
-        return email;
+    public UniqueList<Email> getEmails() {
+        return emails;
     }
 
     public Address getAddress() {
@@ -65,13 +67,22 @@ public class Person {
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
-    public boolean isSamePerson(Person otherPerson) {
+    public boolean isSame(Person otherPerson) {
         if (otherPerson == this) {
             return true;
         }
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
+    }
+
+    /**
+     * Returns string for Json storage.
+     * However, a person cannot be converted to a simple string for Json storage.
+     * Hence, this method is unsupported here.
+     */
+    public String getValue() {
+        throw new UnsupportedOperationException("Person does not have String representation for Json storage");
     }
 
     /**
@@ -92,7 +103,7 @@ public class Person {
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
+                && emails.equals(otherPerson.emails)
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags);
     }
@@ -100,7 +111,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, emails, address, tags);
     }
 
     @Override
@@ -108,7 +119,7 @@ public class Person {
         return new ToStringBuilder(this)
                 .add("name", name)
                 .add("phone", phone)
-                .add("email", email)
+                .add("email", emails)
                 .add("address", address)
                 .add("tags", tags)
                 .toString();

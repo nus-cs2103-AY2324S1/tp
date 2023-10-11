@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import networkbook.model.person.Person;
-import networkbook.model.person.exceptions.DuplicatePersonException;
+import networkbook.model.person.exceptions.DuplicateException;
 import networkbook.testutil.PersonBuilder;
 import networkbook.testutil.TypicalPersons;
 
@@ -43,7 +43,7 @@ public class NetworkBookTest {
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
+    public void resetData_withDuplicatePersons_throwsDuplicateException() {
         // Two persons with the same identity fields
         Person editedAlice = new PersonBuilder(TypicalPersons.ALICE)
                 .withAddress(VALID_ADDRESS_BOB)
@@ -52,7 +52,7 @@ public class NetworkBookTest {
         List<Person> newPersons = Arrays.asList(TypicalPersons.ALICE, editedAlice);
         NetworkBookStub newData = new NetworkBookStub(newPersons);
 
-        assertThrows(DuplicatePersonException.class, () -> networkBook.resetData(newData));
+        assertThrows(DuplicateException.class, () -> networkBook.resetData(newData));
     }
 
     @Test

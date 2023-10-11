@@ -3,11 +3,13 @@ package networkbook.model.person;
 import static java.util.Objects.requireNonNull;
 import static networkbook.commons.util.AppUtil.checkArgument;
 
+import networkbook.model.util.Identifiable;
+
 /**
  * Represents a Person's email in the network book.
  * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}
  */
-public class Email {
+public class Email implements Identifiable<Email> {
 
     private static final String SPECIAL_CHARACTERS = "+_.-";
     public static final String MESSAGE_CONSTRAINTS = "Emails should be of the format local-part@domain "
@@ -31,7 +33,7 @@ public class Email {
     private static final String DOMAIN_REGEX = "(" + DOMAIN_PART_REGEX + "\\.)*" + DOMAIN_LAST_PART_REGEX;
     public static final String VALIDATION_REGEX = LOCAL_PART_REGEX + "@" + DOMAIN_REGEX;
 
-    public final String value;
+    private final String value;
 
     /**
      * Constructs an {@code Email}.
@@ -49,6 +51,16 @@ public class Email {
      */
     public static boolean isValidEmail(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    @Override
+    public boolean isSame(Email another) {
+        return this.value.equals(another.value);
+    }
+
+    @Override
+    public String getValue() {
+        return this.value;
     }
 
     @Override
