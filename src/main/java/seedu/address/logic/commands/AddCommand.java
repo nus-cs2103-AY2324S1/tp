@@ -36,7 +36,7 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "owesMoney";
 
     private final Person toAdd;
-
+    
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */

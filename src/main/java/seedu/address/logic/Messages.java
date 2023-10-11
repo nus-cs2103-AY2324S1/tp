@@ -28,14 +28,11 @@ public class Messages {
     public static final String MESSAGE_EDIT_COMMAND_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_HELP_COMMAND_SHOW_HELP = "Opened help window.";
     public static final String MESSAGE_LIST_COMMAND_SUCCESS = "Listed all persons";
-
+    // Exception message
     public static final String FILE_OPS_ERROR_FORMAT = "Could not save data due to the following error: %s";
-
     public static final String FILE_OPS_PERMISSION_ERROR_FORMAT =
             "Could not save data to file %s due to insufficient permissions to write to the file or the folder.";
-    
     public static final String MESSAGE_Duplicate_Person_Exception = "Operation would result in duplicate persons";
-
     // Messages associated with Attributes constraints 
     public static final String MESSAGE_NAME_CONSTRAINTS = 
             "Names should only contain alphanumeric characters and spaces, and it should not be blank";
@@ -54,7 +51,6 @@ public class Messages {
             + "    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.";
     // alphanumeric and special characters
     public static final String MESSAGE_TAG_CONSTRAINTS = "Tags names should be alphanumeric";
-
     // Messages associated with Storage
     public static final String MESSAGE_FIELD_MISSING = "Person's %s field is missing!";
     public static final String MESSAGE_CONTAIN_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
