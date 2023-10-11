@@ -3,7 +3,7 @@ package seedu.address.model.event;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
-import seedu.address.model.util.DateTimeUtil;
+import seedu.address.commons.util.DateTimeUtil;
 
 /**
  * The class for holding the "start" and "end" part for an Event

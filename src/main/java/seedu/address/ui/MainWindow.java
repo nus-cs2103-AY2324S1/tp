@@ -203,6 +203,9 @@ public class MainWindow extends UiPart<Stage> {
      * Refresh the person list panel and all person cards immediately
      */
     public static void refreshPersonListPanelImmediately() {
+        if (iNSTANCE == null) {
+            return;
+        }
         iNSTANCE.personListPanelPlaceholder.getChildren().clear();
         iNSTANCE.personListPanel = new PersonListPanel(iNSTANCE.logic.getFilteredPersonList());
         iNSTANCE.personListPanelPlaceholder.getChildren().add(iNSTANCE.personListPanel.getRoot());

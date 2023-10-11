@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.address.Main;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
@@ -14,14 +15,14 @@ import seedu.address.ui.MainWindow;
 public class AddEventCommand extends AddCommand {
 
     public static final String SECONDARY_COMMAND_WORD = "event";
+    public static final String MESSAGE_SUCCESS = "New event added: ";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + SECONDARY_COMMAND_WORD
             + ": Adds an event to a contact.\n"
             + "Usage:  add event -n CONTACT_NAME -en EVENT_NAME -st "
             + "START_TIME [-et END_TIME] [-loc LOCATION] [-i INFORMATION]";
-    private static final String MESSAGE_PERSON_NOT_FOUNT = "Can not find the target contact with name: ";
-    private static final String MESSAGE_DUPLICATE_EVENT = "This event already exists under the contact.";
-    private static final String MESSAGE_SUCCESS = "New event added: ";
+    public static final String MESSAGE_PERSON_NOT_FOUNT = "Can not find the target contact with name: ";
+    public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists under the contact.";
 
     private final Event toAdd;
     private final String contactName;
