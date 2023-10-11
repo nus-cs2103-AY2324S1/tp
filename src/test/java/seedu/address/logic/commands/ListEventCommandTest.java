@@ -1,5 +1,8 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.ThrowingSupplier;
@@ -9,9 +12,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.event.Event;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 public class ListEventCommandTest {
     private static final Event VALID_EVENT_0 = new Event("Have a meeting", "2:00", "4:00",

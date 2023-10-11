@@ -27,7 +27,7 @@ public class DeleteEventCommandTest {
     }
 
     @Test
-    public void execute_correct_command_success() throws CommandException {
+    public void execute_correctCommand_success() throws CommandException {
         String personName = "Benson Meier";
         model.findPersonByName(personName).addEvent(VALID_EVENT_0);
         assertCommandSuccessWithFeedback(() -> new DeleteEventCommand(personName, VALID_EVENT_0.getName())
