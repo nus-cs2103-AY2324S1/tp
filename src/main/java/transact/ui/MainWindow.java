@@ -50,7 +50,7 @@ public class MainWindow extends UiPart<Stage> {
     private TabPane tabPane;
 
     @FXML
-    private StackPane cardListPanelPlaceholder;
+    private Tab cardListTab;
 
     @FXML
     private Tab transactionTab;
@@ -132,7 +132,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         cardListPanel = new CardListPanel(logic.getFilteredPersonList());
-        cardListPanelPlaceholder.getChildren().add(cardListPanel.getRoot());
+        cardListTab.setContent(cardListPanel.getRoot());
 
         transactionTablePanel = new TransactionTablePanel(logic.getFilteredTransactionList());
         transactionTab.setContent(transactionTablePanel.getRoot());

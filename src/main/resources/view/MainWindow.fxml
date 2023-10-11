@@ -48,13 +48,9 @@
                               </padding></AnchorPane>
                      </content>
                    </Tab>
-                     <Tab text="Addressbook">
+                     <Tab fx:id="cardListTab" text="Addressbook">
                        <content>
-                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #3c3c3c;">
-                              <children>
-                                 <StackPane fx:id="cardListPanelPlaceholder" prefHeight="320.0" prefWidth="799.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                              </children>
-                           </AnchorPane>
+                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #3c3c3c;" />
                        </content>
                      </Tab>
                  </tabs>
