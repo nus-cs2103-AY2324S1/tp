@@ -8,7 +8,7 @@ import static transact.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
 
-import transact.logic.commands.AddCommand;
+import transact.logic.commands.AddStaffCommand;
 import transact.logic.commands.EditCommand.EditPersonDescriptor;
 import transact.model.person.Person;
 import transact.model.tag.Tag;
@@ -21,8 +21,8 @@ public class PersonUtil {
     /**
      * Returns an add command string for adding the {@code person}.
      */
-    public static String getAddCommand(Person person) {
-        return AddCommand.COMMAND_WORD + " " + getPersonDetails(person);
+    public static String getAddStaffCommand(Person person) {
+        return AddStaffCommand.COMMAND_WORD + " " + getPersonDetails(person);
     }
 
     /**

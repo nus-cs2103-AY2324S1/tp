@@ -16,9 +16,9 @@ import transact.model.person.Person;
 /**
  * Adds a person to the address book.
  */
-public class AddCommand extends Command {
+public class AddStaffCommand extends Command {
 
-    public static final String COMMAND_WORD = "add";
+    public static final String COMMAND_WORD = "addstaff";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
             + "Parameters: "
@@ -41,9 +41,9 @@ public class AddCommand extends Command {
     private final Person toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddStaffCommand to add the specified {@code Person}
      */
-    public AddCommand(Person person) {
+    public AddStaffCommand(Person person) {
         requireNonNull(person);
         toAdd = person;
     }
@@ -67,12 +67,12 @@ public class AddCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddCommand)) {
+        if (!(other instanceof AddStaffCommand)) {
             return false;
         }
 
-        AddCommand otherAddCommand = (AddCommand) other;
-        return toAdd.equals(otherAddCommand.toAdd);
+        AddStaffCommand otherAddStaffCommand = (AddStaffCommand) other;
+        return toAdd.equals(otherAddStaffCommand.toAdd);
     }
 
     @Override

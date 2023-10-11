@@ -8,10 +8,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import transact.commons.core.LogsCenter;
-import transact.logic.commands.AddCommand;
+import transact.logic.commands.AddStaffCommand;
 import transact.logic.commands.ClearCommand;
 import transact.logic.commands.Command;
-import transact.logic.commands.DeleteCommand;
+import transact.logic.commands.DeleteStaffCommand;
 import transact.logic.commands.EditCommand;
 import transact.logic.commands.ExitCommand;
 import transact.logic.commands.FindCommand;
@@ -55,14 +55,14 @@ public class AddressBookParser {
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
 
         switch (commandWord) {
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+        case AddStaffCommand.COMMAND_WORD:
+            return new AddStaffCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+        case DeleteStaffCommand.COMMAND_WORD:
+            return new DeleteStaffCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();

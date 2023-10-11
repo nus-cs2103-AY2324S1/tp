@@ -178,11 +178,11 @@ public Optional<String> getValue(Prefix prefix) {
 
 This appears to be what we need to get a String of the remark. But what about the Index? Let's take a quick peek at existing `Command` that uses an index to see how it is done.
 
-**`DeleteCommandParser.java`:**
+**`DeleteStaffCommandParser.java`:**
 
 ```java
 Index index = ParserUtil.parseIndex(args);
-return new DeleteCommand(index);
+return new DeleteStaffCommand(index);
 ```
 
 There appears to be another utility class that obtains an `Index` from the input provided by the user.
