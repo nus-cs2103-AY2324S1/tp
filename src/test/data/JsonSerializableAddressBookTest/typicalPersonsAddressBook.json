@@ -38,13 +38,13 @@
     "email" : "lydia@example.com",
     "address" : "little tokyo",
     "tags" : [ ],
-    "specialty" : "orthopaedia"
+    "specialty" : "orthopaedic"
   }, {
     "name" : "George Best",
     "phone" : "9482442",
     "email" : "anna@example.com",
     "address" : "4th street",
     "tags" : [ ],
-    "specialty" : "physiotherapist"
+    "specialty" : "physiotherapy"
   } ]
 }

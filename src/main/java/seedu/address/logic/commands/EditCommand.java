@@ -20,6 +20,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
+import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -346,14 +347,8 @@ public class EditCommand extends Command {
 
         @Override
         public String toString() {
-            return new ToStringBuilder(this)
-                    .add("name", super.getName().orElse(null))
-                    .add("phone", super.getPhone().orElse(null))
-                    .add("email", super.getEmail().orElse(null))
-                    .add("address", super.getAddress().orElse(null))
-                    .add("tags", super.getTags().orElse(null))
-                    .add("specialty", specialty)
-                    .toString();
+            String stringToAdd = ", specialty=" + specialty;
+            return StringUtil.addFieldToPersonToString(stringToAdd, super.toString());
         }
 
         /**

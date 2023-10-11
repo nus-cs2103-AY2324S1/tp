@@ -3,7 +3,7 @@ package seedu.address.model.person;
 
 import java.util.Set;
 
-import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.commons.util.StringUtil;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -23,14 +23,8 @@ public class Specialist extends Person {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("name", super.getName())
-                .add("phone", super.getPhone())
-                .add("email", super.getEmail())
-                .add("address", super.getAddress())
-                .add("tags", super.getTags())
-                .add("specialty", specialty)
-                .toString();
+        String stringToAdd = ", specialty=" + specialty;
+        return StringUtil.addFieldToPersonToString(stringToAdd, super.toString());
     }
 
     /**
