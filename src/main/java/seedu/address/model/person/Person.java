@@ -53,7 +53,8 @@ public class Person {
      * Same constructor but with optional fields.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                  TelegramHandle telegram, Profession profession, Income income, Details details, Set<Interaction> interaction) {
+        TelegramHandle telegram, Profession profession, Income income, Details details,
+        Set<Interaction> interaction) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
