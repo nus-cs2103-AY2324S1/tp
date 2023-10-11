@@ -8,7 +8,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.GroupList;
+import seedu.address.model.group.GroupList;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -55,7 +55,13 @@ public class DeleteCommand extends Command {
 
         //Delete person from all groups
         GroupList personGroups = personToDelete.getGroups();
-        personGroups.toStream().forEach(g -> g.remove(personToDelete));
+        personGroups.toStream().forEach(g -> {
+            try {
+                g.removePerson(personToDelete);
+            } catch (CommandException e) {
+                throw new RuntimeException(e);
+            }
+        });
 
         //Delete person from address book
         model.deletePerson(personToDelete);
