@@ -8,6 +8,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Subject;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -25,6 +26,7 @@ public class PersonBuilder {
     private Phone phone;
     private Email email;
     private Address address;
+    private Set<Subject> subjects;
     private Set<Tag> tags;
 
     /**
@@ -35,6 +37,7 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        subjects = new HashSet<>();
         tags = new HashSet<>();
     }
 
@@ -46,6 +49,7 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
+        subjects = new HashSet<>(personToCopy.getSubjects());
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -62,6 +66,14 @@ public class PersonBuilder {
      */
     public PersonBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
+    /**
+     * Parses the {@code subjects} into a {@code Set<Subject>} and set it to the {@code Subject} that we are building.
+     */
+    public PersonBuilder withSubjects(String ... subjects) {
+        this.subjects = SampleDataUtil.getSubjectSet(subjects);
         return this;
     }
 
@@ -90,7 +102,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        return new Person(name, phone, email, address, subjects, tags);
     }
 
 }
