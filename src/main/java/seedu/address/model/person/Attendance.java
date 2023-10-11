@@ -3,6 +3,9 @@ package seedu.address.model.person;
 import java.time.LocalDate;
 
 public class Attendance {
+
+    public static final String MESSAGE_CONSTRAINTS = "Attendance should only be 0 or 1, where 0 indicates student is " +
+            "absent and 1 indicates student is present";
     private final LocalDate date;
     private boolean isPresent;
     private final String moduleName;
