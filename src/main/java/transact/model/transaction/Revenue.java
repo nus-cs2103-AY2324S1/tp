@@ -18,6 +18,9 @@ public class Revenue extends Transaction {
     public Revenue(TransactionId transactionId, Person person, Description description, Amount amount) {
         super(transactionId, person, description, amount);
     }
+    public Revenue(TransactionId transactionId, Description description, Amount amount) {
+        super(transactionId, description, amount);
+    }
 }
 
 

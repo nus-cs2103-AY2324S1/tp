@@ -16,13 +16,13 @@ import static java.util.Objects.requireNonNull;
 /**
  * A class to access TransactionLog data stored as a json file on the hard disk.
  */
-public class JsonTransactionLogStorage implements TransactionLogStorage {
+public class JsonAdaptedTransactionLogStorage implements TransactionLogStorage {
 
-    private static final Logger logger = LogsCenter.getLogger(JsonTransactionLogStorage.class);
+    private static final Logger logger = LogsCenter.getLogger(JsonAdaptedTransactionLogStorage.class);
 
     private Path filePath;
 
-    public JsonTransactionLogStorage(Path filePath) {
+    public JsonAdaptedTransactionLogStorage(Path filePath) {
         this.filePath = filePath;
     }
 

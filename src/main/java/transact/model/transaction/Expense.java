@@ -1,5 +1,6 @@
 package transact.model.transaction;
 
+import transact.model.person.Person;
 import transact.model.transaction.info.Amount;
 import transact.model.transaction.info.Description;
 import transact.model.transaction.info.TransactionId;
@@ -15,6 +16,9 @@ public class Expense extends Transaction {
      */
     public Expense(TransactionId transactionId, Description description, Amount amount) {
         super(transactionId, description, amount);
+    }
+    public Expense(TransactionId transactionId, Person person, Description description, Amount amount) {
+        super(transactionId, person, description, amount);
     }
 }
 

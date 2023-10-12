@@ -29,6 +29,7 @@ public class TransactionLog implements ReadOnlyTransactionLog {
         resetData(toBeCopied);
     }
 
+
     //// list overwrite operations
 
     /**
