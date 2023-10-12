@@ -38,10 +38,10 @@ public class IdTest {
 
     @Test
     public void equals() {
-        Id id = new Id("Valid Id");
+        Id id = new Id("EID1234-5678");
 
         // same values -> returns true
-        assertTrue(id.equals(new Id("Valid Id")));
+        assertTrue(id.equals(new Id("EID1234-5678")));
 
         // same object -> returns true
         assertTrue(id.equals(id));
@@ -53,6 +53,6 @@ public class IdTest {
         assertFalse(id.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(id.equals(new Id("Other Valid Id")));
+        assertFalse(id.equals(new Id("EID5678-1234")));
     }
 }
