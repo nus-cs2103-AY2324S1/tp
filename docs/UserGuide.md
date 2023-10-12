@@ -150,8 +150,10 @@ Format: `lookup [c/CLASS_NUMBER] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/STUDENT_
 _At least one_ of the optional fields must be provided. `lookup` alone is not allowed.
 </box>
 
-* The command is case-insensitive. e.g `hans` will match `Hans`
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* The command is **case-insensitive**. e.g `hans` will match `Hans`
+* Only **full words** will be matched e.g. `Han` will not match `Hans`
+* The order of the fields does **not** matter. e.g. `lookup n/li c/T11` will return the same result as `lookup c/T11 n/li`
+* Field with nothing will be **accepted** as a valid input. e.g. `lookup c/` will return all classes.
 * This command can only take one word per field. e.g. `lookup c/T11 T12` is _**not** allowed_.
   * Taking multiple words per field _coming soon_ in future versions.
 
