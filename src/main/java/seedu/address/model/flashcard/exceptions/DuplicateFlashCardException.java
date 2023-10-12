@@ -1,7 +1,8 @@
 package seedu.address.model.flashcard.exceptions;
 
 /**
- * Signals that the operation will result in duplicate FlashCards (FlashCards are considered duplicates if they have the same
+ * Signals that the operation will result in duplicate FlashCards
+ * (FlashCards are considered duplicates if they have the same
  * originalWord and Translation).
  */
 public class DuplicateFlashCardException extends RuntimeException {
