@@ -87,7 +87,7 @@ public class AddressBookParser {
                 return new FindCommandParser().parse(personType, arguments);
 
             case ListCommand.COMMAND_WORD:
-                return new ListCommand();
+                return new ListCommand(personType);
 
             default:
                 logger.finer("This user input caused a ParseException: " + userInput);
