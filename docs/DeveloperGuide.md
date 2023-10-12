@@ -291,6 +291,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | long-time user                  | identify old and/or rarely-used contacts                                             | hide or delete them to reduce clutter                                           |
 | `* *`    | user                            | export my contacts to an external file                                               | backup my contacts’ information                                                 |
 | `* *`    | user                            | import my contacts from an external file                                             | quickly populate the app with my existing contacts                              |
+| `*`      | user who prefers CLI            | use keyboard shortcuts                                                               | perform tasks more efficiently                                                  |
+| `*`      | user                            | see a different background colour for each contact                                   | differentiate between contacts more easily                                      |
+| `*`      | power user with many contacts   | use some scripting capabilities                                                      | automate tedious actions or achieve the exact results I specify                 |
+| `*`      | busy user                       | use icons to denote certain contact information                                      | identify the information I want at a glance                                     |
+| `*`      | user                            | see a log of past interactions with a contact                                        | know my history with my contacts                                                |
+| `*`      | advanced user                   | search/filter by specific parts of contacts (e.g. containing certain words)          | narrow down contacts to exactly what I am looking for                           |
+| `*`      | user who prefers CLI            | switch between previously entered commands in history                                | easily repeat previous commands                                                 |
+| `*`      | infrequent user                 | view a “cheatsheet” or help dialog for the text commands                             | remember some basic commands I may have forgotten                               |
 
 
 *{More to be added}*
