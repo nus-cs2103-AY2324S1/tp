@@ -26,7 +26,7 @@ import seedu.address.model.person.Phone;
  */
 public class EditTutorCommand extends Command {
 
-    public static final String COMMAND_WORD = "edit_t";
+    public static final String COMMAND_WORD = "edit-t";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the tutor identified "
             + "by the index number used in the displayed tutor list. "
