@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.ListView?>
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane HBox.hgrow="ALWAYS">
     <columnConstraints>
@@ -32,9 +32,10 @@
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
-      <ScrollPane style="-fx-background-color: gray;" minViewportHeight="20">
+      <!--<ScrollPane style="-fx-background-color: gray;" minViewportHeight="20">
         <VBox fx:id="events" style="-fx-background-color: gray;" minWidth="800"/>
-      </ScrollPane>
+      </ScrollPane>-->
+      <ListView fx:id="events" VBox.vgrow="ALWAYS" prefHeight="70"/>
     </VBox>
   </GridPane>
 </HBox>

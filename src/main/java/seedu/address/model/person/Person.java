@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.event.Event;
 import seedu.address.model.note.Note;
@@ -30,7 +32,7 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final List<Note> notes = new ArrayList<>();
-    private final List<Event> events = new ArrayList<>();
+    private final ObservableList<Event> events = FXCollections.observableArrayList();
 
     /**
      * Every field must be present and not null.
@@ -86,9 +88,10 @@ public class Person {
      * {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public List<Event> getEvents() {
-        return Collections.unmodifiableList(events);
+    public ObservableList<Event> getEvents() {
+        return FXCollections.unmodifiableObservableList(events);
     }
+
 
     /**
      * Remove an event by its user-friendly id

@@ -4,10 +4,12 @@ import java.util.Comparator;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 
@@ -43,10 +45,10 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
-    private VBox events;
+    private ListView<Event> events;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code PersonCard} with the given {@code Person} and index to display.
      */
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
@@ -60,16 +62,18 @@ public class PersonCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         IntegerContainer eventIdCounter = new IntegerContainer(0);
-        person.getEvents().stream()
+        /*person.getEvents().stream()
                 .sorted(Comparator.comparing(Event::getName))
                 .forEach(event -> {
                     eventIdCounter.setValue(eventIdCounter.getValue() + 1);
                     events.getChildren().add(new Label(eventIdCounter.toString() + ". "
                             + event.getUiText()));
-                });
+                });*/
+        events.setItems(person.getEvents());
+        events.setCellFactory(cell -> new EventCell());
     }
 
-    private class IntegerContainer {
+    private static class IntegerContainer {
         private int value;
         public IntegerContainer(int value) {
             this.value = value;
@@ -83,6 +87,20 @@ public class PersonCard extends UiPart<Region> {
         @Override
         public String toString() {
             return Integer.valueOf(this.value).toString();
+        }
+    }
+
+    private static class EventCell extends ListCell<Event> {
+        @Override
+        protected void updateItem(Event event, boolean empty) {
+            super.updateItem(event, empty);
+            if (empty || event == null) {
+                setGraphic(null);
+                setText(null);
+            } else {
+                setText(event.getUiText());
+                setTextFill(Color.WHITE);
+            }
         }
     }
 }
