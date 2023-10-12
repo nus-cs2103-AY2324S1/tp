@@ -21,7 +21,7 @@ public class AddInterviewCommandParser implements Parser<AddInterviewCommand> {
      * Parses the given {@code String} of arguments in the context of the AddInterviewCommand
      * and returns an AddInterviewCommand object for execution.
      * @throws seedu.address.logic.parser.exceptions.ParseException if the user input does not conform the
-     * expected format
+     *     expected format
      */
     public AddInterviewCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
