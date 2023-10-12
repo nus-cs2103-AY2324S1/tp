@@ -1,24 +1,25 @@
 package seedu.address.model.person;
 
-import java.util.List;
-import java.util.function.Predicate;
-
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
+
+import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * Tests that a {@code Person}'s {@code Ic} matches any of the keywords given.
  */
-public class IcContainsKeywordsPredicate implements Predicate<Person> {
-    private final String keywords;
+public class NameContainsKeywordsPredicate implements Predicate<Person> {
+    private final List<String> keywords;
 
-    public IcContainsKeywordsPredicate(String keywords) {
+    public NameContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
 
     @Override
     public boolean test(Person person) {
-        return keywords.equalsIgnoreCase(person.getIc().toString());
+        return keywords.stream()
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getIc().toString(), keyword));
     }
 
     @Override
@@ -28,12 +29,12 @@ public class IcContainsKeywordsPredicate implements Predicate<Person> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof IcContainsKeywordsPredicate)) {
+        if (!(other instanceof NameContainsKeywordsPredicate)) {
             return false;
         }
 
-        IcContainsKeywordsPredicate otherIcContainsKeywordsPredicate = (IcContainsKeywordsPredicate) other;
-        return keywords.equals(otherIcContainsKeywordsPredicate.keywords);
+        NameContainsKeywordsPredicate otherNameContainsKeywordsPredicate = (NameContainsKeywordsPredicate) other;
+        return keywords.equals(otherNameContainsKeywordsPredicate.keywords);
     }
 
     @Override

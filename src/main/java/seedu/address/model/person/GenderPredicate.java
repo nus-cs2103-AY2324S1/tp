@@ -1,24 +1,24 @@
 package seedu.address.model.person;
 
-import java.util.List;
-import java.util.function.Predicate;
-
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 
+import java.util.List;
+import java.util.function.Predicate;
+
 /**
- * Tests that a {@code Person}'s {@code Ic} matches any of the keywords given.
+ * Tests that a {@code Person}'s {@code Gender} matches either male or female.
  */
-public class IcContainsKeywordsPredicate implements Predicate<Person> {
+public class GenderPredicate implements Predicate<Person> {
     private final String keywords;
 
-    public IcContainsKeywordsPredicate(String keywords) {
+    public GenderPredicate(String keywords) {
         this.keywords = keywords;
     }
 
     @Override
     public boolean test(Person person) {
-        return keywords.equalsIgnoreCase(person.getIc().toString());
+        return keywords.equalsIgnoreCase(person.getGender().toString());
     }
 
     @Override
@@ -28,12 +28,12 @@ public class IcContainsKeywordsPredicate implements Predicate<Person> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof IcContainsKeywordsPredicate)) {
+        if (!(other instanceof GenderPredicate)) {
             return false;
         }
 
-        IcContainsKeywordsPredicate otherIcContainsKeywordsPredicate = (IcContainsKeywordsPredicate) other;
-        return keywords.equals(otherIcContainsKeywordsPredicate.keywords);
+        GenderPredicate otherGenderPredicate = (GenderPredicate) other;
+        return keywords.equals(otherGenderPredicate.keywords);
     }
 
     @Override
