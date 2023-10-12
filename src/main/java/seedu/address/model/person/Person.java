@@ -24,17 +24,19 @@ public class Person {
     // Data fields
     private final Telegram telegram;
     private final Set<Tag> tags = new HashSet<>();
+    private final FreeTime freeTime;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Telegram telegram, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Telegram telegram, Set<Tag> tags, FreeTime freeTime) {
         requireAllNonNull(name, phone, email, telegram, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.telegram = telegram;
         this.tags.addAll(tags);
+        this.freeTime = freeTime == null ? FreeTime.EMPTY_FREE_TIME : freeTime;
     }
 
     public Name getName() {
@@ -59,6 +61,10 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public FreeTime getFreeTime() {
+        return freeTime;
     }
 
     /**
@@ -94,7 +100,8 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && telegram.equals(otherPerson.telegram)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && freeTime.equals(otherPerson.freeTime);
     }
 
     @Override
@@ -111,7 +118,7 @@ public class Person {
                 .add("email", email)
                 .add("telegram", telegram)
                 .add("tags", tags)
+                .add("free time", freeTime)
                 .toString();
     }
-
 }

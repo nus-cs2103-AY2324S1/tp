@@ -1,5 +1,6 @@
 package seedu.address.storage;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -11,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.FreeTime;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -29,6 +31,8 @@ class JsonAdaptedPerson {
     private final String email;
     private final String telegram;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final String from;
+    private final String to;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -36,7 +40,8 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("telegram") String telegram,
-                             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                             @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("from") String from,
+                             @JsonProperty("to") String to) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -44,6 +49,8 @@ class JsonAdaptedPerson {
         if (tags != null) {
             this.tags.addAll(tags);
         }
+        this.from = from;
+        this.to = to;
     }
 
     /**
@@ -57,6 +64,8 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        from = source.getFreeTime().getFrom();
+        to = source.getFreeTime().getTo();
     }
 
     /**
@@ -104,7 +113,19 @@ class JsonAdaptedPerson {
         final Telegram modelTelegram = new Telegram(telegram);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelTelegram, modelTags);
+
+        FreeTime modelFreeTime = FreeTime.EMPTY_FREE_TIME;
+        if (from != null && to != null) {
+            LocalTime start = LocalTime.parse(from);
+            LocalTime end = LocalTime.parse(to);
+            if (!FreeTime.isValidFreeTime(start, end)) {
+                throw new IllegalValueException(FreeTime.MESSAGE_CONSTRAINTS);
+            } else {
+                modelFreeTime = new FreeTime(start, end);
+            }
+        }
+
+        return new Person(modelName, modelPhone, modelEmail, modelTelegram, modelTags, modelFreeTime);
     }
 
 }
