@@ -40,29 +40,12 @@ public class AddMemberCommandParser implements Parser<AddMemberCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddMemberCommand.MESSAGE_USAGE));
         }
 
-        Name name = new Name(null);
-        Phone phone = new Phone(null);
-        Telegram telegram = new Telegram(null);
-        Set<Tag> tagList = null;
-        Email email = new Email(null);
-
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TELEGRAM);
-
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        }
-
-        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-        }
-
-        if (argMultimap.getValue(PREFIX_TELEGRAM).isPresent()) {
-            telegram = ParserUtil.parseTelegram(argMultimap.getValue(PREFIX_TELEGRAM).get());
-        }
-
-        if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
-            tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        }
+        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
+        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
+        Telegram telegram = ParserUtil.parseTelegram(argMultimap.getValue(PREFIX_TELEGRAM).get());
+        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Member member = new Member(name, phone, email, telegram, tagList);
 
