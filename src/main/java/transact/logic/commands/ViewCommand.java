@@ -19,7 +19,6 @@ public class ViewCommand extends Command {
         STAFF,
         TRANSACTION
     }
-
     public static final String COMMAND_WORD = "view";
 
     public static final String MESSAGE_SUCCESS_STAFF = "Listed all staff";

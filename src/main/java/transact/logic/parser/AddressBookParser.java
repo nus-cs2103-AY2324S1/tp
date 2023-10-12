@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 
 import transact.commons.core.LogsCenter;
 import transact.logic.commands.AddStaffCommand;
+import transact.logic.commands.AddTransactionCommand;
 import transact.logic.commands.ClearCommand;
 import transact.logic.commands.Command;
 import transact.logic.commands.DeleteStaffCommand;
@@ -57,6 +58,9 @@ public class AddressBookParser {
         switch (commandWord) {
         case AddStaffCommand.COMMAND_WORD:
             return new AddStaffCommandParser().parse(arguments);
+
+        case AddTransactionCommand.COMMAND_WORD:
+            return new AddTransactionCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
