@@ -9,6 +9,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
+import java.util.Objects;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.PersonBuilder;
@@ -77,5 +79,19 @@ public class PersonTest {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + "}";
         assertEquals(expected, ALICE.toString());
+    }
+
+    @Test
+    public void hashCode_validTutor_returnsHashCode() {
+        Person tutor = new Person(
+            new Name("John Doe"),
+            new Phone("12345678"),
+            new Email("johndoe@example.com")
+        );
+
+        int expectedHashCode = Objects.hash(tutor.getName(),
+            tutor.getPhone(),
+            tutor.getEmail());
+        assertEquals(expectedHashCode, tutor.hashCode());
     }
 }
