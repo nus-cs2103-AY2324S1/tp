@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.musician;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -11,10 +11,10 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Person in the address book.
+ * Represents a Musician in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public class Musician {
 
     // Identity fields
     private final Name name;
@@ -28,7 +28,7 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Musician(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -65,13 +65,13 @@ public class Person {
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
-    public boolean isSamePerson(Person otherPerson) {
-        if (otherPerson == this) {
+    public boolean isSameMusician(Musician otherMusician) {
+        if (otherMusician == this) {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getName().equals(getName());
+        return otherMusician != null
+                && otherMusician.getName().equals(getName());
     }
 
     /**
@@ -85,16 +85,16 @@ public class Person {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Person)) {
+        if (!(other instanceof Musician)) {
             return false;
         }
 
-        Person otherPerson = (Person) other;
-        return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+        Musician otherMusician = (Musician) other;
+        return name.equals(otherMusician.name)
+                && phone.equals(otherMusician.phone)
+                && email.equals(otherMusician.email)
+                && address.equals(otherMusician.address)
+                && tags.equals(otherMusician.tags);
     }
 
     @Override

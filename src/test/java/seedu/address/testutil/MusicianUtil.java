@@ -9,41 +9,41 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.person.Person;
+import seedu.address.logic.commands.EditCommand;
+import seedu.address.model.musician.Musician;
 import seedu.address.model.tag.Tag;
 
 /**
- * A utility class for Person.
+ * A utility class for Musician.
  */
-public class PersonUtil {
+public class MusicianUtil {
 
     /**
-     * Returns an add command string for adding the {@code person}.
+     * Returns an add command string for adding the {@code musician}.
      */
-    public static String getAddCommand(Person person) {
-        return AddCommand.COMMAND_WORD + " " + getPersonDetails(person);
+    public static String getAddCommand(Musician musician) {
+        return AddCommand.COMMAND_WORD + " " + getMusicianDetails(musician);
     }
 
     /**
-     * Returns the part of command string for the given {@code person}'s details.
+     * Returns the part of command string for the given {@code musician}'s details.
      */
-    public static String getPersonDetails(Person person) {
+    public static String getMusicianDetails(Musician musician) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_NAME + person.getName().fullName + " ");
-        sb.append(PREFIX_PHONE + person.getPhone().value + " ");
-        sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
-        sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
-        person.getTags().stream().forEach(
+        sb.append(PREFIX_NAME + musician.getName().fullName + " ");
+        sb.append(PREFIX_PHONE + musician.getPhone().value + " ");
+        sb.append(PREFIX_EMAIL + musician.getEmail().value + " ");
+        sb.append(PREFIX_ADDRESS + musician.getAddress().value + " ");
+        musician.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
         return sb.toString();
     }
 
     /**
-     * Returns the part of command string for the given {@code EditPersonDescriptor}'s details.
+     * Returns the part of command string for the given {@code EditMusicianDescriptor}'s details.
      */
-    public static String getEditPersonDescriptorDetails(EditPersonDescriptor descriptor) {
+    public static String getEditMusicianDescriptorDetails(EditCommand.EditMusicianDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));

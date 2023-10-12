@@ -101,7 +101,7 @@ How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).
+1. The command can communicate with the `Model` when it is executed (e.g. to delete a musician).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
@@ -171,11 +171,11 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th musician in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new musician. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
@@ -183,7 +183,7 @@ Step 3. The user executes `add n/David …​` to add a new person. The `add` co
 
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the musician was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
@@ -228,7 +228,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Pros: Will use less memory (e.g. for `delete`, just save the musician being deleted).
     * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
@@ -274,9 +274,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​                                          | I want to …​                                     | So that I can…​                                                        |
 |----------|--------------------------------------------------|--------------------------------------------------|------------------------------------------------------------------------|
 | `* * *`  | producer                                         | see usage instructions                           | refer to instructions when I forget how to use the App                 |
-| `* * *`  | producer                                         | add a new person                                 | contact them to form a band                                            |
+| `* * *`  | producer                                         | add a new musician                                 | contact them to form a band                                            |
 | `* * *`  | producer                                         | delete a record for one musician                 | remove entries that I no longer need                                   |
-| `* * *`  | producer                                         | find a person by name                            | locate details of persons without having to go through the entire list |
+| `* * *`  | producer                                         | find a musician by name                            | locate details of musicians without having to go through the entire list |
 | `* *`    | producer                                         | tag a musician with an instrument they play      | know their potential role in a band                                    |
 | `* *`    | producer                                         | tag a musician with the genre they specialise in | find musicians suiting the song I am making                            |
 | `* *`    | producer                                         | edit a record for a musician                     | modify or update the information for a musician                        |
@@ -284,7 +284,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | producer                                         | hide private contact details                     | minimize chance of someone else seeing them by accident                |
 | `*`      | producer who has worked with a musician before   | give a musician a rating                         | can keep track of my past experience with them                         |
 | `*`      | producer who is actively producing music         | check the availability of a musician             | I can avoid musicians with clashing schedules                          |
-| `*`      | producer with many musicians in the address book | sort persons by name                             | locate a person easily                                                 |
+| `*`      | producer with many musicians in the address book | sort musicians by name                             | locate a musician easily                                                 |
 
 
 *{More to be added}*
@@ -305,7 +305,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. This person is already stored in the system
+* 2a. This musician is already stored in the system
 * 2a1. System shows a message showing that the contact is already stored.
 
   Use case ends.
@@ -319,7 +319,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User requests to list musicians
 2.  BandConnect++ shows a list of musicians
 3.  User requests to delete a specific musician in the list
-4.  BandConnect++ deletes the person
+4.  BandConnect++ deletes the musician
 
     Use case ends.
 
@@ -442,17 +442,17 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a musician
 
-1. Deleting a person while all persons are being shown
+1. Deleting a musician while all musicians are being shown
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all musicians using the `list` command. Multiple musicians in the list.
 
     1. Test case: `delete 1`<br>
        Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
     1. Test case: `delete 0`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+       Expected: No musician is deleted. Error details shown in the status message. Status bar remains the same.
 
     1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
