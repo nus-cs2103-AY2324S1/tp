@@ -4,7 +4,7 @@ public class Status {
     private StatusTypes statusType;
 
 
-    public Status(){
+    public Status() {
         this.statusType = StatusTypes.PRELIMINARY;
     }
 
