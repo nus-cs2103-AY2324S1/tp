@@ -47,4 +47,10 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+
+    /**
+     * Current working method to forward Person to UI from Logic.
+     */
+    Person getViewedPerson();
 }
