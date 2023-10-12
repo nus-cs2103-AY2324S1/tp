@@ -1,8 +1,0 @@
-{
-  "employees": [ {
-    "name": "Hans Muster",
-    "phone": "9482424",
-    "department": "invalid@email!3e",
-    "jobTitle": "4th street"
-  } ]
-}

@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.staffsnap.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.staffsnap.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.staffsnap.testutil.Assert.assertThrows;
-import static seedu.staffsnap.testutil.TypicalIndexes.INDEX_FIRST_EMPLOYEE;
+import static seedu.staffsnap.testutil.TypicalIndexes.INDEX_FIRST_APPLICANT;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,17 +17,17 @@ import seedu.staffsnap.logic.commands.AddCommand;
 import seedu.staffsnap.logic.commands.ClearCommand;
 import seedu.staffsnap.logic.commands.DeleteCommand;
 import seedu.staffsnap.logic.commands.EditCommand;
-import seedu.staffsnap.logic.commands.EditCommand.EditEmployeeDescriptor;
+import seedu.staffsnap.logic.commands.EditCommand.EditApplicantDescriptor;
 import seedu.staffsnap.logic.commands.ExitCommand;
 import seedu.staffsnap.logic.commands.FindCommand;
 import seedu.staffsnap.logic.commands.HelpCommand;
 import seedu.staffsnap.logic.commands.ListCommand;
 import seedu.staffsnap.logic.parser.exceptions.ParseException;
-import seedu.staffsnap.model.employee.Employee;
-import seedu.staffsnap.model.employee.NameContainsKeywordsPredicate;
-import seedu.staffsnap.testutil.EditEmployeeDescriptorBuilder;
-import seedu.staffsnap.testutil.EmployeeBuilder;
-import seedu.staffsnap.testutil.EmployeeUtil;
+import seedu.staffsnap.model.applicant.Applicant;
+import seedu.staffsnap.model.applicant.NameContainsKeywordsPredicate;
+import seedu.staffsnap.testutil.ApplicantBuilder;
+import seedu.staffsnap.testutil.ApplicantUtil;
+import seedu.staffsnap.testutil.EditApplicantDescriptorBuilder;
 
 public class AddressBookParserTest {
 
@@ -35,9 +35,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Employee employee = new EmployeeBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(EmployeeUtil.getAddCommand(employee));
-        assertEquals(new AddCommand(employee), command);
+        Applicant applicant = new ApplicantBuilder().build();
+        AddCommand command = (AddCommand) parser.parseCommand(ApplicantUtil.getAddCommand(applicant));
+        assertEquals(new AddCommand(applicant), command);
     }
 
     @Test
@@ -49,17 +49,20 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_EMPLOYEE.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_EMPLOYEE), command);
+                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_APPLICANT.getOneBased());
+        assertEquals(new DeleteCommand(INDEX_FIRST_APPLICANT), command);
     }
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Employee employee = new EmployeeBuilder().build();
-        EditEmployeeDescriptor descriptor = new EditEmployeeDescriptorBuilder(employee).build();
-        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_EMPLOYEE.getOneBased() + " " + EmployeeUtil.getEditEmployeeDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_EMPLOYEE, descriptor), command);
+        Applicant applicant = new ApplicantBuilder().build();
+        EditApplicantDescriptor descriptor = new EditApplicantDescriptorBuilder(applicant).build();
+        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD
+                + " "
+                + INDEX_FIRST_APPLICANT.getOneBased()
+                + " "
+                + ApplicantUtil.getEditApplicantDescriptorDetails(descriptor));
+        assertEquals(new EditCommand(INDEX_FIRST_APPLICANT, descriptor), command);
     }
 
     @Test

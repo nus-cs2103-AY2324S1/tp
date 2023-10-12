@@ -5,14 +5,14 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.staffsnap.commons.core.GuiSettings;
-import seedu.staffsnap.model.employee.Employee;
+import seedu.staffsnap.model.applicant.Applicant;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Employee> PREDICATE_SHOW_ALL_EMPLOYEES = unused -> true;
+    Predicate<Applicant> PREDICATE_SHOW_ALL_APPLICANTS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -53,36 +53,36 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
-     * Returns true if an employee with the same identity as {@code employee} exists in the address book.
+     * Returns true if an applicant with the same identity as {@code applicant} exists in the address book.
      */
-    boolean hasEmployee(Employee employee);
+    boolean hasApplicant(Applicant applicant);
 
     /**
-     * Deletes the given employee.
-     * The employee must exist in the address book.
+     * Deletes the given applicant.
+     * The applicant must exist in the address book.
      */
-    void deleteEmployee(Employee target);
+    void deleteApplicant(Applicant target);
 
     /**
-     * Adds the given employee.
-     * {@code employee} must not already exist in the address book.
+     * Adds the given applicant.
+     * {@code applicant} must not already exist in the address book.
      */
-    void addEmployee(Employee employee);
+    void addApplicant(Applicant applicant);
 
     /**
-     * Replaces the given employee {@code target} with {@code editedEmployee}.
+     * Replaces the given applicant {@code target} with {@code editedApplicant}.
      * {@code target} must exist in the address book.
-     * The employee identity of {@code editedEmployee} must not be the same as another existing employee in the
+     * The applicant identity of {@code editedApplicant} must not be the same as another existing applicant in the
      * address book.
      */
-    void setEmployee(Employee target, Employee editedEmployee);
+    void setApplicant(Applicant target, Applicant editedApplicant);
 
-    /** Returns an unmodifiable view of the filtered employee list */
-    ObservableList<Employee> getFilteredEmployeeList();
+    /** Returns an unmodifiable view of the filtered applicant list */
+    ObservableList<Applicant> getFilteredApplicantList();
 
     /**
-     * Updates the filter of the filtered employee list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered applicant list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredEmployeeList(Predicate<Employee> predicate);
+    void updateFilteredApplicantList(Predicate<Applicant> predicate);
 }

@@ -3,12 +3,12 @@ package seedu.staffsnap.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.staffsnap.logic.Messages.MESSAGE_EMPLOYEES_LISTED_OVERVIEW;
+import static seedu.staffsnap.logic.Messages.MESSAGE_APPLICANTS_LISTED_OVERVIEW;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.staffsnap.testutil.TypicalEmployees.CARL;
-import static seedu.staffsnap.testutil.TypicalEmployees.ELLE;
-import static seedu.staffsnap.testutil.TypicalEmployees.FIONA;
-import static seedu.staffsnap.testutil.TypicalEmployees.getTypicalAddressBook;
+import static seedu.staffsnap.testutil.TypicalApplicants.CARL;
+import static seedu.staffsnap.testutil.TypicalApplicants.ELLE;
+import static seedu.staffsnap.testutil.TypicalApplicants.FIONA;
+import static seedu.staffsnap.testutil.TypicalApplicants.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 import seedu.staffsnap.model.Model;
 import seedu.staffsnap.model.ModelManager;
 import seedu.staffsnap.model.UserPrefs;
-import seedu.staffsnap.model.employee.NameContainsKeywordsPredicate;
+import seedu.staffsnap.model.applicant.NameContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -50,28 +50,28 @@ public class FindCommandTest {
         // null -> returns false
         assertFalse(findFirstCommand.equals(null));
 
-        // different employee -> returns false
+        // different applicant -> returns false
         assertFalse(findFirstCommand.equals(findSecondCommand));
     }
 
     @Test
-    public void execute_zeroKeywords_noEmployeeFound() {
-        String expectedMessage = String.format(MESSAGE_EMPLOYEES_LISTED_OVERVIEW, 0);
+    public void execute_zeroKeywords_noApplicantFound() {
+        String expectedMessage = String.format(MESSAGE_APPLICANTS_LISTED_OVERVIEW, 0);
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredEmployeeList(predicate);
+        expectedModel.updateFilteredApplicantList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredEmployeeList());
+        assertEquals(Collections.emptyList(), model.getFilteredApplicantList());
     }
 
     @Test
-    public void execute_multipleKeywords_multipleEmployeesFound() {
-        String expectedMessage = String.format(MESSAGE_EMPLOYEES_LISTED_OVERVIEW, 3);
+    public void execute_multipleKeywords_multipleApplicantsFound() {
+        String expectedMessage = String.format(MESSAGE_APPLICANTS_LISTED_OVERVIEW, 3);
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredEmployeeList(predicate);
+        expectedModel.updateFilteredApplicantList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredEmployeeList());
+        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredApplicantList());
     }
 
     @Test

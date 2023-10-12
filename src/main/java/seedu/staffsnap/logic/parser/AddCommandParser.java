@@ -12,11 +12,11 @@ import java.util.stream.Stream;
 
 import seedu.staffsnap.logic.commands.AddCommand;
 import seedu.staffsnap.logic.parser.exceptions.ParseException;
-import seedu.staffsnap.model.employee.Department;
-import seedu.staffsnap.model.employee.Employee;
-import seedu.staffsnap.model.employee.JobTitle;
-import seedu.staffsnap.model.employee.Name;
-import seedu.staffsnap.model.employee.Phone;
+import seedu.staffsnap.model.applicant.Applicant;
+import seedu.staffsnap.model.applicant.Department;
+import seedu.staffsnap.model.applicant.JobTitle;
+import seedu.staffsnap.model.applicant.Name;
+import seedu.staffsnap.model.applicant.Phone;
 import seedu.staffsnap.model.tag.Tag;
 
 /**
@@ -46,9 +46,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         JobTitle jobTitle = ParserUtil.parseJobTitle(argMultimap.getValue(PREFIX_JOB_TITLE).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Employee employee = new Employee(name, phone, department, jobTitle, tagList);
+        Applicant applicant = new Applicant(name, phone, department, jobTitle, tagList);
 
-        return new AddCommand(employee);
+        return new AddCommand(applicant);
     }
 
     /**

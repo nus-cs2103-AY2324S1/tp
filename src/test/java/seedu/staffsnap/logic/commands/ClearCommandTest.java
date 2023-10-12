@@ -1,7 +1,7 @@
 package seedu.staffsnap.logic.commands;
 
 import static seedu.staffsnap.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.staffsnap.testutil.TypicalEmployees.getTypicalAddressBook;
+import static seedu.staffsnap.testutil.TypicalApplicants.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 

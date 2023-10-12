@@ -17,9 +17,9 @@ import seedu.staffsnap.commons.core.index.Index;
 import seedu.staffsnap.logic.commands.exceptions.CommandException;
 import seedu.staffsnap.model.AddressBook;
 import seedu.staffsnap.model.Model;
-import seedu.staffsnap.model.employee.Employee;
-import seedu.staffsnap.model.employee.NameContainsKeywordsPredicate;
-import seedu.staffsnap.testutil.EditEmployeeDescriptorBuilder;
+import seedu.staffsnap.model.applicant.Applicant;
+import seedu.staffsnap.model.applicant.NameContainsKeywordsPredicate;
+import seedu.staffsnap.testutil.EditApplicantDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -58,14 +58,14 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditEmployeeDescriptor DESC_AMY;
-    public static final EditCommand.EditEmployeeDescriptor DESC_BOB;
+    public static final EditCommand.EditApplicantDescriptor DESC_AMY;
+    public static final EditCommand.EditApplicantDescriptor DESC_BOB;
 
     static {
-        DESC_AMY = new EditEmployeeDescriptorBuilder().withName(VALID_NAME_AMY)
+        DESC_AMY = new EditApplicantDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withDepartment(VALID_DEPARTMENT_AMY).withJobTitle(VALID_JOB_TITLE_AMY)
                 .withTags(VALID_TAG_FRIEND).build();
-        DESC_BOB = new EditEmployeeDescriptorBuilder().withName(VALID_NAME_BOB)
+        DESC_BOB = new EditApplicantDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withDepartment(VALID_DEPARTMENT_BOB).withJobTitle(VALID_JOB_TITLE_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
@@ -100,30 +100,30 @@ public class CommandTestUtil {
      * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
-     * - the address book, filtered employee list and selected employee in {@code actualModel} remain unchanged
+     * - the address book, filtered applicant list and selected applicant in {@code actualModel} remain unchanged
      */
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
-        List<Employee> expectedFilteredList = new ArrayList<>(actualModel.getFilteredEmployeeList());
+        List<Applicant> expectedFilteredList = new ArrayList<>(actualModel.getFilteredApplicantList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
-        assertEquals(expectedFilteredList, actualModel.getFilteredEmployeeList());
+        assertEquals(expectedFilteredList, actualModel.getFilteredApplicantList());
     }
     /**
-     * Updates {@code model}'s filtered list to show only the employee at the given {@code targetIndex} in the
+     * Updates {@code model}'s filtered list to show only the applicant at the given {@code targetIndex} in the
      * {@code model}'s address book.
      */
-    public static void showEmployeeAtIndex(Model model, Index targetIndex) {
-        assertTrue(targetIndex.getZeroBased() < model.getFilteredEmployeeList().size());
+    public static void showApplicantAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredApplicantList().size());
 
-        Employee employee = model.getFilteredEmployeeList().get(targetIndex.getZeroBased());
-        final String[] splitName = employee.getName().fullName.split("\\s+");
-        model.updateFilteredEmployeeList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        Applicant applicant = model.getFilteredApplicantList().get(targetIndex.getZeroBased());
+        final String[] splitName = applicant.getName().fullName.split("\\s+");
+        model.updateFilteredApplicantList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
-        assertEquals(1, model.getFilteredEmployeeList().size());
+        assertEquals(1, model.getFilteredApplicantList().size());
     }
 
 }

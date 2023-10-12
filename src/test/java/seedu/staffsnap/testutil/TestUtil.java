@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 
 import seedu.staffsnap.commons.core.index.Index;
 import seedu.staffsnap.model.Model;
-import seedu.staffsnap.model.employee.Employee;
+import seedu.staffsnap.model.applicant.Applicant;
 
 /**
  * A utility class for test cases.
@@ -33,23 +33,23 @@ public class TestUtil {
     }
 
     /**
-     * Returns the middle index of the employee in the {@code model}'s employee list.
+     * Returns the middle index of the applicant in the {@code model}'s applicant list.
      */
     public static Index getMidIndex(Model model) {
-        return Index.fromOneBased(model.getFilteredEmployeeList().size() / 2);
+        return Index.fromOneBased(model.getFilteredApplicantList().size() / 2);
     }
 
     /**
-     * Returns the last index of the employee in the {@code model}'s employee list.
+     * Returns the last index of the applicant in the {@code model}'s applicant list.
      */
     public static Index getLastIndex(Model model) {
-        return Index.fromOneBased(model.getFilteredEmployeeList().size());
+        return Index.fromOneBased(model.getFilteredApplicantList().size());
     }
 
     /**
-     * Returns the employee in the {@code model}'s employee list at {@code index}.
+     * Returns the applicant in the {@code model}'s applicant list at {@code index}.
      */
-    public static Employee getEmployee(Model model, Index index) {
-        return model.getFilteredEmployeeList().get(index.getZeroBased());
+    public static Applicant getApplicant(Model model, Index index) {
+        return model.getFilteredApplicantList().get(index.getZeroBased());
     }
 }

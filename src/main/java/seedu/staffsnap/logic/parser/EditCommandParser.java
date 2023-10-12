@@ -15,7 +15,7 @@ import java.util.Set;
 
 import seedu.staffsnap.commons.core.index.Index;
 import seedu.staffsnap.logic.commands.EditCommand;
-import seedu.staffsnap.logic.commands.EditCommand.EditEmployeeDescriptor;
+import seedu.staffsnap.logic.commands.EditCommand.EditApplicantDescriptor;
 import seedu.staffsnap.logic.parser.exceptions.ParseException;
 import seedu.staffsnap.model.tag.Tag;
 
@@ -45,28 +45,28 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_DEPARTMENT, PREFIX_JOB_TITLE);
 
-        EditEmployeeDescriptor editEmployeeDescriptor = new EditEmployeeDescriptor();
+        EditApplicantDescriptor editApplicantDescriptor = new EditApplicantDescriptor();
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editEmployeeDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+            editApplicantDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            editEmployeeDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
+            editApplicantDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
         }
         if (argMultimap.getValue(PREFIX_DEPARTMENT).isPresent()) {
-            editEmployeeDescriptor.setDepartment(ParserUtil.parseDepartment(
+            editApplicantDescriptor.setDepartment(ParserUtil.parseDepartment(
                     argMultimap.getValue(PREFIX_DEPARTMENT).get()));
         }
         if (argMultimap.getValue(PREFIX_JOB_TITLE).isPresent()) {
-            editEmployeeDescriptor.setJobTitle(ParserUtil.parseJobTitle(argMultimap.getValue(PREFIX_JOB_TITLE).get()));
+            editApplicantDescriptor.setJobTitle(ParserUtil.parseJobTitle(argMultimap.getValue(PREFIX_JOB_TITLE).get()));
         }
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editEmployeeDescriptor::setTags);
+        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editApplicantDescriptor::setTags);
 
-        if (!editEmployeeDescriptor.isAnyFieldEdited()) {
+        if (!editApplicantDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditCommand(index, editEmployeeDescriptor);
+        return new EditCommand(index, editApplicantDescriptor);
     }
 
     /**

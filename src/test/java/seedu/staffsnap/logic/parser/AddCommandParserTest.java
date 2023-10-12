@@ -30,112 +30,113 @@ import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.staffsnap.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.staffsnap.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.staffsnap.testutil.TypicalEmployees.AMY;
-import static seedu.staffsnap.testutil.TypicalEmployees.BOB;
+import static seedu.staffsnap.testutil.TypicalApplicants.AMY;
+import static seedu.staffsnap.testutil.TypicalApplicants.BOB;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.staffsnap.logic.Messages;
 import seedu.staffsnap.logic.commands.AddCommand;
-import seedu.staffsnap.model.employee.Department;
-import seedu.staffsnap.model.employee.Employee;
-import seedu.staffsnap.model.employee.JobTitle;
-import seedu.staffsnap.model.employee.Name;
-import seedu.staffsnap.model.employee.Phone;
+import seedu.staffsnap.model.applicant.Applicant;
+import seedu.staffsnap.model.applicant.Department;
+import seedu.staffsnap.model.applicant.JobTitle;
+import seedu.staffsnap.model.applicant.Name;
+import seedu.staffsnap.model.applicant.Phone;
 import seedu.staffsnap.model.tag.Tag;
-import seedu.staffsnap.testutil.EmployeeBuilder;
+import seedu.staffsnap.testutil.ApplicantBuilder;
 
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Employee expectedEmployee = new EmployeeBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
+        Applicant expectedApplicant = new ApplicantBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + DEPARTMENT_DESC_BOB
-                + JOB_TITLE_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedEmployee));
+                + JOB_TITLE_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedApplicant));
 
         // multiple tags - all accepted
-        Employee expectedEmployeeMultipleTags = new EmployeeBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
+        Applicant expectedApplicantMultipleTags = new ApplicantBuilder(BOB)
+                .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
         assertParseSuccess(parser, NAME_DESC_BOB
                         + PHONE_DESC_BOB + DEPARTMENT_DESC_BOB + JOB_TITLE_DESC_BOB
                         + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                new AddCommand(expectedEmployeeMultipleTags));
+                new AddCommand(expectedApplicantMultipleTags));
     }
 
     @Test
     public void parse_repeatedNonTagValue_failure() {
-        String validExpectedEmployeeString = NAME_DESC_BOB + PHONE_DESC_BOB + DEPARTMENT_DESC_BOB
+        String validExpectedApplicantString = NAME_DESC_BOB + PHONE_DESC_BOB + DEPARTMENT_DESC_BOB
                 + JOB_TITLE_DESC_BOB + TAG_DESC_FRIEND;
 
         // multiple names
-        assertParseFailure(parser, NAME_DESC_AMY + validExpectedEmployeeString,
+        assertParseFailure(parser, NAME_DESC_AMY + validExpectedApplicantString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
 
         // multiple phones
-        assertParseFailure(parser, PHONE_DESC_AMY + validExpectedEmployeeString,
+        assertParseFailure(parser, PHONE_DESC_AMY + validExpectedApplicantString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
         // multiple departments
-        assertParseFailure(parser, DEPARTMENT_DESC_AMY + validExpectedEmployeeString,
+        assertParseFailure(parser, DEPARTMENT_DESC_AMY + validExpectedApplicantString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_DEPARTMENT));
 
         // multiple jobTitles
-        assertParseFailure(parser, JOB_TITLE_DESC_AMY + validExpectedEmployeeString,
+        assertParseFailure(parser, JOB_TITLE_DESC_AMY + validExpectedApplicantString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_JOB_TITLE));
 
         // multiple fields repeated
         assertParseFailure(parser,
-                validExpectedEmployeeString + PHONE_DESC_AMY + DEPARTMENT_DESC_AMY + NAME_DESC_AMY + JOB_TITLE_DESC_AMY
-                        + validExpectedEmployeeString,
+                validExpectedApplicantString + PHONE_DESC_AMY + DEPARTMENT_DESC_AMY + NAME_DESC_AMY + JOB_TITLE_DESC_AMY
+                        + validExpectedApplicantString,
                 Messages.getErrorMessageForDuplicatePrefixes(
                         PREFIX_NAME, PREFIX_JOB_TITLE, PREFIX_DEPARTMENT, PREFIX_PHONE));
 
         // invalid value followed by valid value
 
         // invalid name
-        assertParseFailure(parser, INVALID_NAME_DESC + validExpectedEmployeeString,
+        assertParseFailure(parser, INVALID_NAME_DESC + validExpectedApplicantString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
 
         // invalid department
-        assertParseFailure(parser, INVALID_DEPARTMENT_DESC + validExpectedEmployeeString,
+        assertParseFailure(parser, INVALID_DEPARTMENT_DESC + validExpectedApplicantString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_DEPARTMENT));
 
         // invalid phone
-        assertParseFailure(parser, INVALID_PHONE_DESC + validExpectedEmployeeString,
+        assertParseFailure(parser, INVALID_PHONE_DESC + validExpectedApplicantString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
         // invalid jobTitle
-        assertParseFailure(parser, INVALID_JOB_TITLE_DESC + validExpectedEmployeeString,
+        assertParseFailure(parser, INVALID_JOB_TITLE_DESC + validExpectedApplicantString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_JOB_TITLE));
 
         // valid value followed by invalid value
 
         // invalid name
-        assertParseFailure(parser, validExpectedEmployeeString + INVALID_NAME_DESC,
+        assertParseFailure(parser, validExpectedApplicantString + INVALID_NAME_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
 
         // invalid department
-        assertParseFailure(parser, validExpectedEmployeeString + INVALID_DEPARTMENT_DESC,
+        assertParseFailure(parser, validExpectedApplicantString + INVALID_DEPARTMENT_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_DEPARTMENT));
 
         // invalid phone
-        assertParseFailure(parser, validExpectedEmployeeString + INVALID_PHONE_DESC,
+        assertParseFailure(parser, validExpectedApplicantString + INVALID_PHONE_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
         // invalid jobTitle
-        assertParseFailure(parser, validExpectedEmployeeString + INVALID_JOB_TITLE_DESC,
+        assertParseFailure(parser, validExpectedApplicantString + INVALID_JOB_TITLE_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_JOB_TITLE));
     }
 
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Employee expectedEmployee = new EmployeeBuilder(AMY).withTags().build();
+        Applicant expectedApplicant = new ApplicantBuilder(AMY).withTags().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + DEPARTMENT_DESC_AMY + JOB_TITLE_DESC_AMY,
-                new AddCommand(expectedEmployee));
+                new AddCommand(expectedApplicant));
     }
 
     @Test

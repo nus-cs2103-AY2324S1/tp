@@ -9,10 +9,10 @@ import java.util.Set;
 import seedu.staffsnap.commons.core.index.Index;
 import seedu.staffsnap.commons.util.StringUtil;
 import seedu.staffsnap.logic.parser.exceptions.ParseException;
-import seedu.staffsnap.model.employee.Department;
-import seedu.staffsnap.model.employee.JobTitle;
-import seedu.staffsnap.model.employee.Name;
-import seedu.staffsnap.model.employee.Phone;
+import seedu.staffsnap.model.applicant.Department;
+import seedu.staffsnap.model.applicant.JobTitle;
+import seedu.staffsnap.model.applicant.Name;
+import seedu.staffsnap.model.applicant.Phone;
 import seedu.staffsnap.model.tag.Tag;
 
 /**

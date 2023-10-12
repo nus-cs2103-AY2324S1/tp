@@ -28,22 +28,22 @@ import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.staffsnap.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.staffsnap.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.staffsnap.testutil.TypicalIndexes.INDEX_FIRST_EMPLOYEE;
-import static seedu.staffsnap.testutil.TypicalIndexes.INDEX_SECOND_EMPLOYEE;
-import static seedu.staffsnap.testutil.TypicalIndexes.INDEX_THIRD_EMPLOYEE;
+import static seedu.staffsnap.testutil.TypicalIndexes.INDEX_FIRST_APPLICANT;
+import static seedu.staffsnap.testutil.TypicalIndexes.INDEX_SECOND_APPLICANT;
+import static seedu.staffsnap.testutil.TypicalIndexes.INDEX_THIRD_APPLICANT;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.staffsnap.commons.core.index.Index;
 import seedu.staffsnap.logic.Messages;
 import seedu.staffsnap.logic.commands.EditCommand;
-import seedu.staffsnap.logic.commands.EditCommand.EditEmployeeDescriptor;
-import seedu.staffsnap.model.employee.Department;
-import seedu.staffsnap.model.employee.JobTitle;
-import seedu.staffsnap.model.employee.Name;
-import seedu.staffsnap.model.employee.Phone;
+import seedu.staffsnap.logic.commands.EditCommand.EditApplicantDescriptor;
+import seedu.staffsnap.model.applicant.Department;
+import seedu.staffsnap.model.applicant.JobTitle;
+import seedu.staffsnap.model.applicant.Name;
+import seedu.staffsnap.model.applicant.Phone;
 import seedu.staffsnap.model.tag.Tag;
-import seedu.staffsnap.testutil.EditEmployeeDescriptorBuilder;
+import seedu.staffsnap.testutil.EditApplicantDescriptorBuilder;
 
 public class EditCommandParserTest {
 
@@ -92,7 +92,7 @@ public class EditCommandParserTest {
         // invalid phone followed by valid department
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC + DEPARTMENT_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
 
-        // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Employee} being edited,
+        // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Applicant} being edited,
         // parsing it together with a valid tag results in error
         assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_DESC_HUSBAND + TAG_EMPTY, Tag.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_EMPTY + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS);
@@ -105,11 +105,11 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        Index targetIndex = INDEX_SECOND_EMPLOYEE;
+        Index targetIndex = INDEX_SECOND_APPLICANT;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + TAG_DESC_HUSBAND
                 + DEPARTMENT_DESC_AMY + JOB_TITLE_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND;
 
-        EditEmployeeDescriptor descriptor = new EditEmployeeDescriptorBuilder().withName(VALID_NAME_AMY)
+        EditApplicantDescriptor descriptor = new EditApplicantDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withDepartment(VALID_DEPARTMENT_AMY).withJobTitle(VALID_JOB_TITLE_AMY)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
@@ -119,10 +119,10 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_someFieldsSpecified_success() {
-        Index targetIndex = INDEX_FIRST_EMPLOYEE;
+        Index targetIndex = INDEX_FIRST_APPLICANT;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + DEPARTMENT_DESC_AMY;
 
-        EditEmployeeDescriptor descriptor = new EditEmployeeDescriptorBuilder().withPhone(VALID_PHONE_BOB)
+        EditApplicantDescriptor descriptor = new EditApplicantDescriptorBuilder().withPhone(VALID_PHONE_BOB)
                 .withDepartment(VALID_DEPARTMENT_AMY).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
@@ -132,33 +132,33 @@ public class EditCommandParserTest {
     @Test
     public void parse_oneFieldSpecified_success() {
         // name
-        Index targetIndex = INDEX_THIRD_EMPLOYEE;
+        Index targetIndex = INDEX_THIRD_APPLICANT;
         String userInput = targetIndex.getOneBased() + NAME_DESC_AMY;
-        EditEmployeeDescriptor descriptor = new EditEmployeeDescriptorBuilder().withName(VALID_NAME_AMY).build();
+        EditApplicantDescriptor descriptor = new EditApplicantDescriptorBuilder().withName(VALID_NAME_AMY).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // phone
         userInput = targetIndex.getOneBased() + PHONE_DESC_AMY;
-        descriptor = new EditEmployeeDescriptorBuilder().withPhone(VALID_PHONE_AMY).build();
+        descriptor = new EditApplicantDescriptorBuilder().withPhone(VALID_PHONE_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // department
         userInput = targetIndex.getOneBased() + DEPARTMENT_DESC_AMY;
-        descriptor = new EditEmployeeDescriptorBuilder().withDepartment(VALID_DEPARTMENT_AMY).build();
+        descriptor = new EditApplicantDescriptorBuilder().withDepartment(VALID_DEPARTMENT_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // jobTitle
         userInput = targetIndex.getOneBased() + JOB_TITLE_DESC_AMY;
-        descriptor = new EditEmployeeDescriptorBuilder().withJobTitle(VALID_JOB_TITLE_AMY).build();
+        descriptor = new EditApplicantDescriptorBuilder().withJobTitle(VALID_JOB_TITLE_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // tags
         userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND;
-        descriptor = new EditEmployeeDescriptorBuilder().withTags(VALID_TAG_FRIEND).build();
+        descriptor = new EditApplicantDescriptorBuilder().withTags(VALID_TAG_FRIEND).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -169,7 +169,7 @@ public class EditCommandParserTest {
         // AddCommandParserTest#parse_repeatedNonTagValue_failure()
 
         // valid followed by invalid
-        Index targetIndex = INDEX_FIRST_EMPLOYEE;
+        Index targetIndex = INDEX_FIRST_APPLICANT;
         String userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + PHONE_DESC_BOB;
 
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
@@ -197,10 +197,10 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_resetTags_success() {
-        Index targetIndex = INDEX_THIRD_EMPLOYEE;
+        Index targetIndex = INDEX_THIRD_APPLICANT;
         String userInput = targetIndex.getOneBased() + TAG_EMPTY;
 
-        EditEmployeeDescriptor descriptor = new EditEmployeeDescriptorBuilder().withTags().build();
+        EditApplicantDescriptor descriptor = new EditApplicantDescriptorBuilder().withTags().build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);

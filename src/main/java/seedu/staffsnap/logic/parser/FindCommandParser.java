@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 import seedu.staffsnap.logic.commands.FindCommand;
 import seedu.staffsnap.logic.parser.exceptions.ParseException;
-import seedu.staffsnap.model.employee.NameContainsKeywordsPredicate;
+import seedu.staffsnap.model.applicant.NameContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object

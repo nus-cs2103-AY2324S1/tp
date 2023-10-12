@@ -1,9 +1,9 @@
 package seedu.staffsnap.logic.commands;
 
 import static seedu.staffsnap.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.staffsnap.logic.commands.CommandTestUtil.showEmployeeAtIndex;
-import static seedu.staffsnap.testutil.TypicalEmployees.getTypicalAddressBook;
-import static seedu.staffsnap.testutil.TypicalIndexes.INDEX_FIRST_EMPLOYEE;
+import static seedu.staffsnap.logic.commands.CommandTestUtil.showApplicantAtIndex;
+import static seedu.staffsnap.testutil.TypicalApplicants.getTypicalAddressBook;
+import static seedu.staffsnap.testutil.TypicalIndexes.INDEX_FIRST_APPLICANT;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,7 +33,7 @@ public class ListCommandTest {
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
-        showEmployeeAtIndex(model, INDEX_FIRST_EMPLOYEE);
+        showApplicantAtIndex(model, INDEX_FIRST_APPLICANT);
         assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 }

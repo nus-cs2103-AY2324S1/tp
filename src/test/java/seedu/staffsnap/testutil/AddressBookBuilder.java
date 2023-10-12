@@ -1,12 +1,12 @@
 package seedu.staffsnap.testutil;
 
 import seedu.staffsnap.model.AddressBook;
-import seedu.staffsnap.model.employee.Employee;
+import seedu.staffsnap.model.applicant.Applicant;
 
 /**
  * A utility class to help with building Addressbook objects.
  * Example usage: <br>
- *     {@code AddressBook ab = new AddressBookBuilder().withEmployee("John", "Doe").build();}
+ *     {@code AddressBook ab = new AddressBookBuilder().withApplicant("John", "Doe").build();}
  */
 public class AddressBookBuilder {
 
@@ -21,10 +21,10 @@ public class AddressBookBuilder {
     }
 
     /**
-     * Adds a new {@code Employee} to the {@code AddressBook} that we are building.
+     * Adds a new {@code Applicant} to the {@code AddressBook} that we are building.
      */
-    public AddressBookBuilder withEmployee(Employee employee) {
-        addressBook.addEmployee(employee);
+    public AddressBookBuilder withApplicant(Applicant applicant) {
+        addressBook.addApplicant(applicant);
         return this;
     }
 

@@ -6,7 +6,7 @@ import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_JOB_TITLE;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.staffsnap.model.Model.PREDICATE_SHOW_ALL_EMPLOYEES;
+import static seedu.staffsnap.model.Model.PREDICATE_SHOW_ALL_APPLICANTS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -21,22 +21,22 @@ import seedu.staffsnap.commons.util.ToStringBuilder;
 import seedu.staffsnap.logic.Messages;
 import seedu.staffsnap.logic.commands.exceptions.CommandException;
 import seedu.staffsnap.model.Model;
-import seedu.staffsnap.model.employee.Department;
-import seedu.staffsnap.model.employee.Employee;
-import seedu.staffsnap.model.employee.JobTitle;
-import seedu.staffsnap.model.employee.Name;
-import seedu.staffsnap.model.employee.Phone;
+import seedu.staffsnap.model.applicant.Applicant;
+import seedu.staffsnap.model.applicant.Department;
+import seedu.staffsnap.model.applicant.JobTitle;
+import seedu.staffsnap.model.applicant.Name;
+import seedu.staffsnap.model.applicant.Phone;
 import seedu.staffsnap.model.tag.Tag;
 
 /**
- * Edits the details of an existing employee in the address book.
+ * Edits the details of an existing applicant in the address book.
  */
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the employee identified "
-            + "by the index number used in the displayed employee list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the applicant identified "
+            + "by the index number used in the displayed applicant list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
@@ -48,61 +48,61 @@ public class EditCommand extends Command {
             + PREFIX_PHONE + "91234567 "
             + PREFIX_DEPARTMENT + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_EMPLOYEE_SUCCESS = "Edited Employee: %1$s";
+    public static final String MESSAGE_EDIT_APPLICANT_SUCCESS = "Edited Applicant: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_EMPLOYEE = "This employee already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_APPLICANT = "This applicant already exists in the address book.";
 
     private final Index index;
-    private final EditEmployeeDescriptor editEmployeeDescriptor;
+    private final EditApplicantDescriptor editApplicantDescriptor;
 
     /**
-     * @param index of the employee in the filtered employee list to edit
-     * @param editEmployeeDescriptor details to edit the employee with
+     * @param index of the applicant in the filtered applicant list to edit
+     * @param editApplicantDescriptor details to edit the applicant with
      */
-    public EditCommand(Index index, EditEmployeeDescriptor editEmployeeDescriptor) {
+    public EditCommand(Index index, EditApplicantDescriptor editApplicantDescriptor) {
         requireNonNull(index);
-        requireNonNull(editEmployeeDescriptor);
+        requireNonNull(editApplicantDescriptor);
 
         this.index = index;
-        this.editEmployeeDescriptor = new EditEmployeeDescriptor(editEmployeeDescriptor);
+        this.editApplicantDescriptor = new EditApplicantDescriptor(editApplicantDescriptor);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Employee> lastShownList = model.getFilteredEmployeeList();
+        List<Applicant> lastShownList = model.getFilteredApplicantList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_EMPLOYEE_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_APPLICANT_DISPLAYED_INDEX);
         }
 
-        Employee employeeToEdit = lastShownList.get(index.getZeroBased());
-        Employee editedEmployee = createEditedEmployee(employeeToEdit, editEmployeeDescriptor);
+        Applicant applicantToEdit = lastShownList.get(index.getZeroBased());
+        Applicant editedApplicant = createEditedApplicant(applicantToEdit, editApplicantDescriptor);
 
-        if (!employeeToEdit.isSameEmployee(editedEmployee) && model.hasEmployee(editedEmployee)) {
-            throw new CommandException(MESSAGE_DUPLICATE_EMPLOYEE);
+        if (!applicantToEdit.isSameApplicant(editedApplicant) && model.hasApplicant(editedApplicant)) {
+            throw new CommandException(MESSAGE_DUPLICATE_APPLICANT);
         }
 
-        model.setEmployee(employeeToEdit, editedEmployee);
-        model.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
-        return new CommandResult(String.format(MESSAGE_EDIT_EMPLOYEE_SUCCESS, Messages.format(editedEmployee)));
+        model.setApplicant(applicantToEdit, editedApplicant);
+        model.updateFilteredApplicantList(PREDICATE_SHOW_ALL_APPLICANTS);
+        return new CommandResult(String.format(MESSAGE_EDIT_APPLICANT_SUCCESS, Messages.format(editedApplicant)));
     }
 
     /**
-     * Creates and returns a {@code Employee} with the details of {@code employeeToEdit}
-     * edited with {@code editEmployeeDescriptor}.
+     * Creates and returns a {@code Applicant} with the details of {@code applicantToEdit}
+     * edited with {@code editApplicantDescriptor}.
      */
-    private static Employee createEditedEmployee(
-            Employee employeeToEdit, EditEmployeeDescriptor editEmployeeDescriptor) {
-        assert employeeToEdit != null;
+    private static Applicant createEditedApplicant(
+            Applicant applicantToEdit, EditApplicantDescriptor editApplicantDescriptor) {
+        assert applicantToEdit != null;
 
-        Name updatedName = editEmployeeDescriptor.getName().orElse(employeeToEdit.getName());
-        Phone updatedPhone = editEmployeeDescriptor.getPhone().orElse(employeeToEdit.getPhone());
-        Department updatedDepartment = editEmployeeDescriptor.getDepartment().orElse(employeeToEdit.getDepartment());
-        JobTitle updatedJobTitle = editEmployeeDescriptor.getJobTitle().orElse(employeeToEdit.getJobTitle());
-        Set<Tag> updatedTags = editEmployeeDescriptor.getTags().orElse(employeeToEdit.getTags());
+        Name updatedName = editApplicantDescriptor.getName().orElse(applicantToEdit.getName());
+        Phone updatedPhone = editApplicantDescriptor.getPhone().orElse(applicantToEdit.getPhone());
+        Department updatedDepartment = editApplicantDescriptor.getDepartment().orElse(applicantToEdit.getDepartment());
+        JobTitle updatedJobTitle = editApplicantDescriptor.getJobTitle().orElse(applicantToEdit.getJobTitle());
+        Set<Tag> updatedTags = editApplicantDescriptor.getTags().orElse(applicantToEdit.getTags());
 
-        return new Employee(updatedName, updatedPhone, updatedDepartment, updatedJobTitle, updatedTags);
+        return new Applicant(updatedName, updatedPhone, updatedDepartment, updatedJobTitle, updatedTags);
     }
 
     @Override
@@ -118,35 +118,35 @@ public class EditCommand extends Command {
 
         EditCommand otherEditCommand = (EditCommand) other;
         return index.equals(otherEditCommand.index)
-                && editEmployeeDescriptor.equals(otherEditCommand.editEmployeeDescriptor);
+                && editApplicantDescriptor.equals(otherEditCommand.editApplicantDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("index", index)
-                .add("editEmployeeDescriptor", editEmployeeDescriptor)
+                .add("editApplicantDescriptor", editApplicantDescriptor)
                 .toString();
     }
 
     /**
-     * Stores the details to edit the employee with. Each non-empty field value will replace the
-     * corresponding field value of the employee.
+     * Stores the details to edit the applicant with. Each non-empty field value will replace the
+     * corresponding field value of the applicant.
      */
-    public static class EditEmployeeDescriptor {
+    public static class EditApplicantDescriptor {
         private Name name;
         private Phone phone;
         private Department department;
         private JobTitle jobTitle;
         private Set<Tag> tags;
 
-        public EditEmployeeDescriptor() {}
+        public EditApplicantDescriptor() {}
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public EditEmployeeDescriptor(EditEmployeeDescriptor toCopy) {
+        public EditApplicantDescriptor(EditApplicantDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setDepartment(toCopy.department);
@@ -217,16 +217,16 @@ public class EditCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditEmployeeDescriptor)) {
+            if (!(other instanceof EditApplicantDescriptor)) {
                 return false;
             }
 
-            EditEmployeeDescriptor otherEditEmployeeDescriptor = (EditEmployeeDescriptor) other;
-            return Objects.equals(name, otherEditEmployeeDescriptor.name)
-                    && Objects.equals(phone, otherEditEmployeeDescriptor.phone)
-                    && Objects.equals(department, otherEditEmployeeDescriptor.department)
-                    && Objects.equals(jobTitle, otherEditEmployeeDescriptor.jobTitle)
-                    && Objects.equals(tags, otherEditEmployeeDescriptor.tags);
+            EditApplicantDescriptor otherEditApplicantDescriptor = (EditApplicantDescriptor) other;
+            return Objects.equals(name, otherEditApplicantDescriptor.name)
+                    && Objects.equals(phone, otherEditApplicantDescriptor.phone)
+                    && Objects.equals(department, otherEditApplicantDescriptor.department)
+                    && Objects.equals(jobTitle, otherEditApplicantDescriptor.jobTitle)
+                    && Objects.equals(tags, otherEditApplicantDescriptor.tags);
         }
 
         @Override
