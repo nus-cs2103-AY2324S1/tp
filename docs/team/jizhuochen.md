@@ -1,6 +1,6 @@
 ---
   layout: default.md
-    title: "Chen Jizhuo's Project Portfolio Page"
+  title: "Chen Jizhuo's Project Portfolio Page"
 ---
 
 ### Project: LinkTree
