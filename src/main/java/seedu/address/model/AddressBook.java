@@ -110,7 +110,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addInterview(Interview i) {
         interviews.add(i);
-    }    
+    }
 
     //// util methods
 
@@ -129,7 +129,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Interview> getInterviewList() {
         return interviews.asUnmodifiableObservableList();
-    }    
+    }
 
     @Override
     public boolean equals(Object other) {

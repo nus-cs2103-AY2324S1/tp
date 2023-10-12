@@ -13,7 +13,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMING;
 
 /**
  * Parses input arguments and creates a new AddCommand object
- * 
  * Adapted from AB3's AddCommandParser class
  */
 public class AddInterviewCommandParser implements Parser<AddInterviewCommand> {

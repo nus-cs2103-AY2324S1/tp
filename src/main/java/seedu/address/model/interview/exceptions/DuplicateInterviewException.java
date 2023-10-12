@@ -1,7 +1,7 @@
 package seedu.address.model.interview.exceptions;
 
 /**
- * Signals that the operation will result in duplicate Interviews 
+ * Signals that the operation will result in duplicate Interviews
  * (Interviews are considered duplicates if they have the same identity - As checked by IsValidInterview).
  */
 public class DuplicateInterviewException extends RuntimeException {

@@ -14,12 +14,11 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
  * A list of interviews that enforces uniqueness between its elements and does not allow nulls.
- * A interview is considered unique by comparing using {@code Interview#isValidInterview(Interview)}. 
- * As such, adding and updating of Interviews uses Interview#isValidInterview(Interview) for equality 
- * so as to ensure that the interview being added or updated is unique in terms of identity in the UniqueInterviewList. 
+ * A interview is considered unique by comparing using {@code Interview#isValidInterview(Interview)}.
+ * As such, adding and updating of Interviews uses Interview#isValidInterview(Interview) for equality
+ * so as to ensure that the interview being added or updated is unique in terms of identity in the UniqueInterviewList.
  * However, the removal of an interview uses Interview#equals(Object) so as to ensure that the interview
  * with exactly the same fields will be removed.
- * 
  * Supports a minimal set of list operations.
  * Adapted from AB3 UniquePersonList
  */

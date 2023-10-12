@@ -60,6 +60,6 @@ public class Messages {
                 interview.getJobRole() +
                 "; Scheduled for: " +
                 interview.getInterviewTiming();
-    }    
+    }
 
 }

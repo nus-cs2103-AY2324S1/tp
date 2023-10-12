@@ -6,10 +6,10 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
  * Represents an Interview in the address book.
  */
 public class Interview {
-    /** 
+    /**
      * Static counter of how many Interview objects have been globally created.
      * Used as the unique ID (until int limit 2,147,483,647) for Interview objects.
-     * Limit is presumed to not feasibly be reached ever since the application is constrained to 
+     * Limit is presumed to not feasibly be reached ever since the application is constrained to
      * 'no remote server, single user'
      */
     static int globalInterviewId = 0;
@@ -56,11 +56,11 @@ public class Interview {
     public String getInterviewApplicant() {
         return applicant;
     }
-    
+
     public String getJobRole() {
         return jobRole;
     }
-    
+
     public String getInterviewTiming() {
         return interviewTiming;
     }

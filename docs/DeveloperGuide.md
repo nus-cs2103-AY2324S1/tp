@@ -331,7 +331,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 * 1a. The list is empty
   * 1a1. InterviewHub shows an error message.
-  
+
     Use case ends.
 
 **Use case: UC03 Delete an Interview**
@@ -346,9 +346,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The provided index is invalid 
+* 2a. The provided index is invalid
   * 2a1. InterviewHub shows an error message.
-   
+
     Use case resumes at step 2.
 
 **Use case: UC04 Add a job role**
@@ -468,7 +468,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to handle as many applicants as the user is able to manage in their workday/workweek.
 3.  The app should be reasonably responsive to the entire set of user requests(i.e. within 1 second at maximum load).
-4.  The system should have an interface that is very easy to pick up for our target audience(i.e. Engineering Managers 
+4.  The system should have an interface that is very easy to pick up for our target audience(i.e. Engineering Managers
 that have many years of programming experience).
 
 *{More to be added}*
@@ -478,11 +478,11 @@ that have many years of programming experience).
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Applicant**: The person applying to a particular job role.
-* **Hiring manager**: The manager interviewing the applicant. 
+* **Hiring manager**: The manager interviewing the applicant.
 This manager is familiar with the technical aspects of the role. Also called engineering manager.
-* **MSS**: Main Success Scenario. It describes the most straightforward 
+* **MSS**: Main Success Scenario. It describes the most straightforward
 interaction in a use case where nothing goes wrong.
-* **Extensions**: In a use case, an extension describes an alternative flow of events 
+* **Extensions**: In a use case, an extension describes an alternative flow of events
 that are different from the MSS.
 
 --------------------------------------------------------------------------------------------------------------------
