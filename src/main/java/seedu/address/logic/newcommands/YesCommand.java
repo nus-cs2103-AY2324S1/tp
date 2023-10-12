@@ -6,18 +6,19 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TRANSLATED_WORD;
 
 import java.util.Date;
 
-import seedu.address.cardslist.CardList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.NewCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.NewModel;
 import seedu.address.model.flashcard.FlashCard;
 
 /**
  * Adds a person to the address book.
  */
-public class YesCommand extends Command {
+public class YesCommand extends NewCommand {
 
     public static final String COMMAND_WORD = "yes";
 
@@ -36,7 +37,7 @@ public class YesCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(NewModel model) throws CommandException {
         requireNonNull(model);
         return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
