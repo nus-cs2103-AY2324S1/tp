@@ -28,7 +28,7 @@ DoConnek Pro is a **desktop app** that helps **General Practitioner Clinic Manag
 
    * `add -pa n/John p/12345678 a/21 m/Osteoporosis m/Rheumatoid arthritis` : Adds a patient named `John` to the list.
 
-   * `delete -pa 3` : Deletes the 3rd patient shown in the current list.
+   * `delete 3` : Deletes the 3rd person shown in the current list.
 
    * `clear` : Deletes all contacts.
 
@@ -121,15 +121,15 @@ Examples:
 
 Deletes the specified patient or specialist from the stored records.
 
-Format: `delete -PERSON_TYPE INDEX`
+Format: `delete INDEX`
 
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​ with a maximum value of the list size.
 
 Examples:
-* `list -pa` followed by `delete -pa 2` deletes the 2nd patient in the listed patients. 
-* `find -sp Betsy` followed by `delete -sp 1` deletes the 1st specialist from the specialists listed in the `find` command.
+* `list -pa` followed by `delete 2` deletes the 2nd patient in the listed patients. 
+* `find -sp Betsy` followed by `delete 1` deletes the 1st specialist from the specialists listed in the `find` command.
 
 ### Clearing all entries : `clear`
 
@@ -181,7 +181,7 @@ Action | Format, Examples
 **Add (patient)** | `add -pa n/NAME p/PHONE_NUMBER a/AGE [m/MEDICAL_HISTORY]...` <br> e.g., `add -pa n/John p/12345678 a/21 m/Osteoporosis m/Rheumatoid arthritis`
 **Add (specialist)** | `add -sp n/NAME p/PHONE_NUMBER s/SPECIALISATION l/LOCATION` <br> e.g., `add -sp n/Jane p/73331515 s/Dermatologist l/Ang Mo Kio`
 **Clear** | `clear`
-**Delete** | `delete -PERSON_TYPE INDEX`<br> e.g., `delete -pa 3`
+**Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Find** | `find -PERSON_TYPE KEYWORD [MORE_KEYWORDS]`<br> e.g., `find -pa James Jake`
 **List** | `list -pa`
 **Help** | `help`

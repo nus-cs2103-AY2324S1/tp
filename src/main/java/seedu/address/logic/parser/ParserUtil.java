@@ -17,7 +17,7 @@ import seedu.address.model.person.Specialty;
 import seedu.address.model.tag.Tag;
 
 /**
- * Contains utility methods used for parsing strings in the various *Parser classes.
+ * Contains utility methods used for parsing strings in the various *ParserComplex classes.
  */
 public class ParserUtil {
 
