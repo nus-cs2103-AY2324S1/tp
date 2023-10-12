@@ -9,13 +9,13 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Represents a Person's car insurance policy issue date in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidPolicyIssueDate(String)}
+ * Represents a Person's car insurance policy issue / expiry date in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidPolicyDate(String)}
  */
-public class PolicyIssueDate {
+public class PolicyDate {
 
     public static final String MESSAGE_CONSTRAINTS
-            = "Policy issue date should be in the format dd-mm-yyyy";
+            = "Policy issue / expiry date should be in the format dd-mm-yyyy";
 
     /*
      * Should be in the format dd-mm-yyyy, checked with SimpleDateFormat
@@ -25,20 +25,20 @@ public class PolicyIssueDate {
     public final LocalDate date;
 
     /**
-     * Constructs a {@code PolicyIssueDate}.
+     * Constructs a {@code PolicyDate}.
      *
-     * @param policyIssueDate A valid policy issue date.
+     * @param policyDate A valid policy expiry date.
      */
-    public PolicyIssueDate(String policyIssueDate) {
-        requireNonNull(policyIssueDate);
-        checkArgument(isValidPolicyIssueDate(policyIssueDate), MESSAGE_CONSTRAINTS);
-        date = LocalDate.parse(policyIssueDate);
+    public PolicyDate(String policyDate) {
+        requireNonNull(policyDate);
+        checkArgument(isValidPolicyDate(policyDate), MESSAGE_CONSTRAINTS);
+        date = LocalDate.parse(policyDate);
     }
 
     /**
-     * Returns true if a given string is a valid policy issue date.
+     * Returns true if a given string is a valid date in the format dd-mm-yyyy.
      */
-    public static boolean isValidPolicyIssueDate(String test) {
+    public static boolean isValidPolicyDate(String test) {
         try {
             SimpleDateFormat format = new SimpleDateFormat(VALIDATION_DATE_FORMAT);
             format.parse(test);
@@ -60,12 +60,12 @@ public class PolicyIssueDate {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof PolicyIssueDate)) {
+        if (!(other instanceof PolicyDate)) {
             return false;
         }
 
-        PolicyIssueDate otherPolicyIssueDate = (PolicyIssueDate) other;
-        return date.equals(otherPolicyIssueDate.date);
+        PolicyDate otherPolicyDate = (PolicyDate) other;
+        return date.equals(otherPolicyDate.date);
     }
 
     @Override
