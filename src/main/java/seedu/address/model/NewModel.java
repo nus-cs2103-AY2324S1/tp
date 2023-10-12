@@ -13,7 +13,7 @@ import java.util.function.Predicate;
  */
 public interface NewModel {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_FLASHCARDS = unused -> true;
+    Predicate<FlashCard> PREDICATE_SHOW_ALL_FLASHCARDS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.

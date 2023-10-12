@@ -31,9 +31,9 @@ public class Flashlingo implements ReadOnlyFlashlingo {
     public Flashlingo() {}
 
     /**
-     * Creates an Flashlingo using the FlashCards in the {@code toBeCopied}
+     * Creates a Flashlingo using the FlashCards in the {@code toBeCopied}
      */
-    public Flashlingo(ReadOnlyAddressBook toBeCopied) {
+    public Flashlingo(ReadOnlyFlashlingo toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -42,25 +42,25 @@ public class Flashlingo implements ReadOnlyFlashlingo {
 
     /**
      * Replaces the contents of the person list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * {@code flashCards} must not contain duplicate flashcards.
      */
     public void setPersons(List<FlashCard> flashCards) {
         this.flashCards.setFlashCards(flashCards);
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code Flashlingo} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyFlashlingo newData) {
         requireNonNull(newData);
 
-        setPersons(newData.getPersonList());
+        setPersons(newData.getFlashCardList());
     }
 
-    //// person-level operations
+    //// flashcard-level operations
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a flashcard with the same identity as {@code flashcard} exists in the flashlingo.
      */
     public boolean hasFlashCard(FlashCard flashCard) {
         requireNonNull(flashCard);
@@ -68,17 +68,17 @@ public class Flashlingo implements ReadOnlyFlashlingo {
     }
 
     /**
-     * Adds a person to the address book.
-     * The person must not already exist in the address book.
+     * Adds a flashcard to the flashlingo.
+     * The flashcard must not already exist in the flashlingo.
      */
     public void addFlashCard(FlashCard flashCard) {
         flashCards.add(flashCard);
     }
 
     /**
-     * Replaces the given person {@code target} in the list with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * Replaces the given flashcard {@code target} in the list with {@code editedFlashCard}.
+     * {@code target} must exist in the flashlingo.
+     * The flashcard identity of {@code editedFlashCard} must not be the same as another existing flashcard in the flashlingo.
      */
     public void setFlashCard(FlashCard target, FlashCard editedFlashCard) {
         requireNonNull(editedFlashCard);
@@ -87,8 +87,8 @@ public class Flashlingo implements ReadOnlyFlashlingo {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes {@code key} from this {@code flashlingo}.
+     * {@code key} must exist in the flashlingo.
      */
     public void removeFlashCard(FlashCard key) {
         flashCards.remove(key);
@@ -115,7 +115,7 @@ public class Flashlingo implements ReadOnlyFlashlingo {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddressBook)) {
+        if (!(other instanceof Flashlingo)) {
             return false;
         }
 
