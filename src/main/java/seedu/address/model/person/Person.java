@@ -25,6 +25,8 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
+    private final Status currentStatus = new Status();
+
     /**
      * Every field must be present and not null.
      */
@@ -52,6 +54,11 @@ public class Person {
     public Address getAddress() {
         return address;
     }
+
+    public Status getStatus() {return currentStatus;}
+
+    public void setStatus(StatusTypes newType){ this.currentStatus.setStatusType(newType);}
+
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -111,6 +118,7 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
+                .add("status", currentStatus)
                 .toString();
     }
 
