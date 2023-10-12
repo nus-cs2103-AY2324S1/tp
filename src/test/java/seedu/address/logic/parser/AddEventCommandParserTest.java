@@ -29,8 +29,7 @@ public class AddEventCommandParserTest {
     public void parse_allFieldsPresent_success() {
         Event expectedEvent = new EventBuilder().withDescription(VALID_DESCRIPTION)
                 .withStartEndDate(VALID_START_DATE, VALID_END_DATE).build();
-        String validUserInput = COMMAND_WORD
-                + " " + PREFIX_EVENT_DESCRIPTION + VALID_DESCRIPTION
+        String validUserInput = " " + PREFIX_EVENT_DESCRIPTION + VALID_DESCRIPTION
                 + " " + PREFIX_EVENT_START_DATE_TIME + VALID_START_DATE
                 + " " + PREFIX_EVENT_END_DATE_TIME + VALID_END_DATE;
 
@@ -39,8 +38,7 @@ public class AddEventCommandParserTest {
 
     @Test
     public void parse_repeatedPrefix_failure() {
-        String userInputRepeatDescriptionPrefix = COMMAND_WORD
-                + " " + PREFIX_EVENT_DESCRIPTION + VALID_DESCRIPTION
+        String userInputRepeatDescriptionPrefix = " " + PREFIX_EVENT_DESCRIPTION + VALID_DESCRIPTION
                 + " " + PREFIX_EVENT_DESCRIPTION + VALID_DESCRIPTION
                 + " " + PREFIX_EVENT_START_DATE_TIME + VALID_START_DATE
                 + " " + PREFIX_EVENT_END_DATE_TIME + VALID_END_DATE;
@@ -48,8 +46,7 @@ public class AddEventCommandParserTest {
         assertParseFailure(parser, userInputRepeatDescriptionPrefix,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EVENT_DESCRIPTION));
 
-        String userInputRepeatEventStartDateTimePrefix = COMMAND_WORD
-                + " " + PREFIX_EVENT_DESCRIPTION + VALID_DESCRIPTION
+        String userInputRepeatEventStartDateTimePrefix = " " + PREFIX_EVENT_DESCRIPTION + VALID_DESCRIPTION
                 + " " + PREFIX_EVENT_START_DATE_TIME + VALID_START_DATE
                 + " " + PREFIX_EVENT_START_DATE_TIME + VALID_START_DATE
                 + " " + PREFIX_EVENT_END_DATE_TIME + VALID_END_DATE;
@@ -57,8 +54,7 @@ public class AddEventCommandParserTest {
         assertParseFailure(parser, userInputRepeatEventStartDateTimePrefix,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EVENT_START_DATE_TIME));
 
-        String userInputRepeatEventEndDateTimePrefix = COMMAND_WORD
-                + " " + PREFIX_EVENT_DESCRIPTION + VALID_DESCRIPTION
+        String userInputRepeatEventEndDateTimePrefix = " " + PREFIX_EVENT_DESCRIPTION + VALID_DESCRIPTION
                 + " " + PREFIX_EVENT_START_DATE_TIME + VALID_START_DATE
                 + " " + PREFIX_EVENT_END_DATE_TIME + VALID_END_DATE
                 + " " + PREFIX_EVENT_END_DATE_TIME + VALID_END_DATE;
@@ -66,8 +62,7 @@ public class AddEventCommandParserTest {
         assertParseFailure(parser, userInputRepeatEventEndDateTimePrefix,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EVENT_END_DATE_TIME));
 
-        String userInputRepeatMultiplePrefix = COMMAND_WORD
-                + " " + PREFIX_EVENT_DESCRIPTION + VALID_DESCRIPTION
+        String userInputRepeatMultiplePrefix = " " + PREFIX_EVENT_DESCRIPTION + VALID_DESCRIPTION
                 + " " + PREFIX_EVENT_DESCRIPTION + VALID_DESCRIPTION
                 + " " + PREFIX_EVENT_START_DATE_TIME + VALID_START_DATE
                 + " " + PREFIX_EVENT_START_DATE_TIME + VALID_START_DATE
@@ -83,20 +78,17 @@ public class AddEventCommandParserTest {
     public void parse_compulsoryFieldMissing_failure() {
         String exepectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE);
 
-        String missingDescription = COMMAND_WORD
-                + " " + PREFIX_EVENT_START_DATE_TIME + VALID_START_DATE
+        String missingDescription = " " + PREFIX_EVENT_START_DATE_TIME + VALID_START_DATE
                 + " " + PREFIX_EVENT_END_DATE_TIME + VALID_END_DATE;
 
         assertParseFailure(parser, missingDescription, exepectedMessage);
 
-        String missingStartDate = COMMAND_WORD
-                + " " + PREFIX_EVENT_DESCRIPTION + VALID_DESCRIPTION
+        String missingStartDate = " " + PREFIX_EVENT_DESCRIPTION + VALID_DESCRIPTION
                 + " " + PREFIX_EVENT_END_DATE_TIME + VALID_END_DATE;
 
         assertParseFailure(parser, missingStartDate, exepectedMessage);
 
-        String missingEndDate = COMMAND_WORD
-                + " " + PREFIX_EVENT_DESCRIPTION + VALID_DESCRIPTION
+        String missingEndDate = " " + PREFIX_EVENT_DESCRIPTION + VALID_DESCRIPTION
                 + " " + PREFIX_EVENT_START_DATE_TIME + VALID_START_DATE;
 
         assertParseFailure(parser, missingEndDate, exepectedMessage);
@@ -104,24 +96,21 @@ public class AddEventCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        String userInputInvalidDescription = COMMAND_WORD
-                + " " + PREFIX_EVENT_DESCRIPTION + INVALID_DESCRIPTION
+        String userInputInvalidDescription = " " + PREFIX_EVENT_DESCRIPTION + INVALID_DESCRIPTION
                 + " " + PREFIX_EVENT_START_DATE_TIME + VALID_START_DATE
                 + " " + PREFIX_EVENT_END_DATE_TIME + VALID_END_DATE;
 
         assertParseFailure(parser, userInputInvalidDescription,
                 EventDescription.MESSAGE_CONSTRAINTS);
 
-        String userInputInvalidStartDateTime = COMMAND_WORD
-                + " " + PREFIX_EVENT_DESCRIPTION + VALID_DESCRIPTION
+        String userInputInvalidStartDateTime = " " + PREFIX_EVENT_DESCRIPTION + VALID_DESCRIPTION
                 + " " + PREFIX_EVENT_START_DATE_TIME + INVALID_DATE
                 + " " + PREFIX_EVENT_END_DATE_TIME + VALID_END_DATE;
 
         assertParseFailure(parser, userInputInvalidStartDateTime,
                 EventPeriod.MESSAGE_CONSTRAINTS);
 
-        String userInputInvalidEndDateTime = COMMAND_WORD
-                + " " + PREFIX_EVENT_DESCRIPTION + VALID_DESCRIPTION
+        String userInputInvalidEndDateTime = " " + PREFIX_EVENT_DESCRIPTION + VALID_DESCRIPTION
                 + " " + PREFIX_EVENT_START_DATE_TIME + VALID_START_DATE
                 + " " + PREFIX_EVENT_END_DATE_TIME + INVALID_DATE;
 
