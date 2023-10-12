@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.application.model.Model.PREDICATE_SHOW_ALL_JOBS;
+import static seedu.application.model.job.Role.ROLE_FIND_SPECIFIER;
 import static seedu.application.testutil.Assert.assertThrows;
 import static seedu.application.testutil.TypicalJobs.CHEF;
 import static seedu.application.testutil.TypicalJobs.CLEANER;
@@ -15,7 +16,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.application.commons.core.GuiSettings;
-import seedu.application.model.job.RoleContainsKeywordsPredicate;
+import seedu.application.model.job.FieldContainsKeywordsPredicate;
 import seedu.application.testutil.ApplicationBookBuilder;
 
 public class ModelManagerTest {
@@ -118,7 +119,8 @@ public class ModelManagerTest {
 
         // different filteredList -> returns false
         String[] keywords = CHEF.getRole().description.split("\\s+");
-        modelManager.updateFilteredJobList(new RoleContainsKeywordsPredicate(Arrays.asList(keywords)));
+        modelManager.updateFilteredJobList(
+                new FieldContainsKeywordsPredicate(ROLE_FIND_SPECIFIER, Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(applicationBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
