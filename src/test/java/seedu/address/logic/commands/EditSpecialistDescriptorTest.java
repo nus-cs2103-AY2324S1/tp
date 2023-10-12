@@ -69,7 +69,8 @@ public class EditSpecialistDescriptorTest {
                 + editSpecialistDescriptor.getPhone().orElse(null) + ", email="
                 + editSpecialistDescriptor.getEmail().orElse(null) + ", address="
                 + editSpecialistDescriptor.getAddress().orElse(null) + ", tags="
-                + editSpecialistDescriptor.getTags().orElse(null) + "}";
+                + editSpecialistDescriptor.getTags().orElse(null) + ", specialty="
+                + editSpecialistDescriptor.getSpecialty().orElse(null) + "}";
         assertEquals(expected, editSpecialistDescriptor.toString());
     }
 }

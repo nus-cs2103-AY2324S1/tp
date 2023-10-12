@@ -37,13 +37,13 @@ public class TypicalPersons {
             .withEmail("heinz@example.com").withAddress("wall street").build();
     public static final Patient DANIEL = (Patient) new PatientBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends").build();
-    public static final Specialist ELLE = (Specialist) new SpecialistBuilder()
+    public static final Specialist ELLE = (Specialist) new SpecialistBuilder().withSpecialty("Dermatology")
             .withName("Elle Meyer").withPhone("9482224")
             .withEmail("werner@example.com").withAddress("michegan ave").build();
-    public static final Specialist FIONA = (Specialist) new SpecialistBuilder()
+    public static final Specialist FIONA = (Specialist) new SpecialistBuilder().withSpecialty("Orthopaedic")
             .withName("Fiona Kunz").withPhone("9482427")
             .withEmail("lydia@example.com").withAddress("little tokyo").build();
-    public static final Specialist GEORGE = (Specialist) new SpecialistBuilder()
+    public static final Specialist GEORGE = (Specialist) new SpecialistBuilder().withSpecialty("Physiotherapy")
             .withName("George Best").withPhone("9482442")
             .withEmail("anna@example.com").withAddress("4th street").build();
 

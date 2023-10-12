@@ -88,7 +88,7 @@ public class AddressBookParserTest {
         Specialist person = new SpecialistBuilder().build();
         EditSpecialistDescriptor descriptor = new EditSpecialistDescriptorBuilder(person).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD
-                + " " + CliSyntax.PATIENT_TAG + " "
+                + " " + CliSyntax.SPECIALIST_TAG + " "
                 + INDEX_FIRST_PERSON.getOneBased()
                 + " " + SpecialistUtil.getEditSpecialistDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);

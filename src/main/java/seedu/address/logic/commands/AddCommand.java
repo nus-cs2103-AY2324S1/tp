@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SPECIALTY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.SPECIALIST_TAG;
 
@@ -24,13 +25,15 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
             + "Specify whether the person is a patient or specialist using the "
-            + PATIENT_TAG + " or " + SPECIALIST_TAG + " tags."
+            + PATIENT_TAG + " or " + SPECIALIST_TAG + " tags. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
             + "[" + PREFIX_TAG + "TAG]...\n"
+            + "If the person is a specialist, add their specialty by using the "
+            + PREFIX_SPECIALTY + " prefix. \n"
             + "Example: " + COMMAND_WORD + " "
             + PATIENT_TAG + " "
             + PREFIX_NAME + "John Doe "

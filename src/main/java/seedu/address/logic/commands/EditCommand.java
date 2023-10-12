@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SPECIALTY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.SPECIALIST_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -19,6 +20,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
+import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -30,6 +32,7 @@ import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Specialist;
+import seedu.address.model.person.Specialty;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -43,13 +46,15 @@ public class EditCommand extends Command {
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Specify whether the person is a patient or specialist using the "
-            + PATIENT_TAG + " or " + SPECIALIST_TAG + " tags."
+            + PATIENT_TAG + " or " + SPECIALIST_TAG + " tags. "
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
+            + "If the person is a specialist, edit their specialty by using the "
+            + PREFIX_SPECIALTY + " prefix. \n"
             + "Example: " + COMMAND_WORD + " "
             + PATIENT_TAG + " "
             + "1 "
@@ -141,8 +146,10 @@ public class EditCommand extends Command {
         Email updatedEmail = editSpecialistDescriptor.getEmail().orElse(specialistToEdit.getEmail());
         Address updatedAddress = editSpecialistDescriptor.getAddress().orElse(specialistToEdit.getAddress());
         Set<Tag> updatedTags = editSpecialistDescriptor.getTags().orElse(specialistToEdit.getTags());
+        Specialty updatedSpecialty = editSpecialistDescriptor.getSpecialty().orElse(specialistToEdit.getSpecialty());
 
-        return new Specialist(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+
+        return new Specialist(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedSpecialty);
     }
 
     @Override
@@ -305,27 +312,51 @@ public class EditCommand extends Command {
             return super.toString();
         }
     }
+
     /**
      * Stores the details to edit the specialist with. Each non-empty field value will replace the
      * corresponding field value of the specialist.
      */
     public static class EditSpecialistDescriptor extends EditPersonDescriptor {
-        public EditSpecialistDescriptor() {}
-
+        private Specialty specialty;
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
         public EditSpecialistDescriptor(EditSpecialistDescriptor toCopy) {
             super(toCopy);
+            setSpecialty(toCopy.specialty);
         }
+        public EditSpecialistDescriptor() {}
+        public void setSpecialty(Specialty specialty) {
+            this.specialty = specialty;
+        }
+
+        public Optional<Specialty> getSpecialty() {
+            return Optional.ofNullable(specialty);
+        }
+
         @Override
         public boolean equals(Object other) {
-            return super.equals(other);
+            if (super.equals(other) && other instanceof EditSpecialistDescriptor) {
+                EditSpecialistDescriptor otherEditSpecialistDescriptor = (EditSpecialistDescriptor) other;
+                return Objects.equals(specialty, otherEditSpecialistDescriptor.specialty);
+            }
+            return false;
         }
+
         @Override
         public String toString() {
-            return super.toString();
+            String stringToAdd = ", specialty=" + specialty;
+            return StringUtil.addFieldToPersonToString(stringToAdd, super.toString());
+        }
+
+        /**
+         * Returns true if at least one field is edited.
+         */
+        @Override
+        public boolean isAnyFieldEdited() {
+            return super.isAnyFieldEdited() || CollectionUtil.isAnyNonNull(specialty);
         }
     }
 }
