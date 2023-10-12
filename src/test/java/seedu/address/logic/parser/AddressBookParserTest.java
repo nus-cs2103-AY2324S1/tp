@@ -61,15 +61,13 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_delete_patient() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + CliSyntax.SPECIALIST_TAG
-                        + " " + INDEX_FIRST_PERSON.getOneBased());
+                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
     }
     @Test
     public void parseCommand_delete_specialist() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + CliSyntax.SPECIALIST_TAG
-                        + " " + INDEX_FIRST_PERSON.getOneBased());
+                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
     }
 
@@ -80,7 +78,7 @@ public class AddressBookParserTest {
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD
                 + " " + CliSyntax.PATIENT_TAG + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PatientUtil.getEditPatientDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor, PersonType.PATIENT), command);
+        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 
     @Test
@@ -91,7 +89,7 @@ public class AddressBookParserTest {
                 + " " + CliSyntax.SPECIALIST_TAG + " "
                 + INDEX_FIRST_PERSON.getOneBased()
                 + " " + SpecialistUtil.getEditSpecialistDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor, PersonType.SPECIALIST), command);
+        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 
     @Test

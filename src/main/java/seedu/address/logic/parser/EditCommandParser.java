@@ -25,7 +25,7 @@ import seedu.address.model.tag.Tag;
 /**
  * Parses input arguments and creates a new EditCommand object
  */
-public class EditCommandParser implements Parser<EditCommand> {
+public class EditCommandParser implements ParserComplex<EditCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
@@ -74,7 +74,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (!editPatientDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
-        return new EditCommand(index, editPatientDescriptor, PersonType.PATIENT);
+        return new EditCommand(index, editPatientDescriptor);
     }
     private EditCommand parseSpecialist(String args) throws ParseException {
         ArgumentMultimap argMultimap =
@@ -114,7 +114,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (!editSpecialistDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
-        return new EditCommand(index, editSpecialistDescriptor, PersonType.SPECIALIST);
+        return new EditCommand(index, editSpecialistDescriptor);
     }
 
     /**
