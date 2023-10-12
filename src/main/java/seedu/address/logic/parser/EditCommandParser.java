@@ -14,18 +14,18 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PATIENTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import seedu.address.model.person.Ic;
 
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
+
+import seedu.address.model.person.Ic;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -51,6 +51,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
 
+
+
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_NRIC,
                 PREFIX_GENDER, PREFIX_BLOODTYPE, PREFIX_CONDITION, PREFIX_DOCTOR, PREFIX_PATIENTS);
 
@@ -74,6 +76,13 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_NRIC).isPresent()) {
             editPersonDescriptor.setIc(ParserUtil.parseIc(argMultimap.getValue(PREFIX_NRIC).get()));
         }
+        if (argMultimap.getValue(PREFIX_CONDITION).isPresent()) {
+            editPersonDescriptor.setIc(ParserUtil.parseIc(argMultimap.getValue(PREFIX_CONDITION).get()));
+        }
+        if (argMultimap.getValue(PREFIX_BLOODTYPE).isPresent()) {
+            editPersonDescriptor.setIc(ParserUtil.parseIc(argMultimap.getValue(PREFIX_BLOODTYPE).get()));
+        }
+
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {

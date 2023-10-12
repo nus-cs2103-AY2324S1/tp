@@ -4,12 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BLOODTYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONDITION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DOCTOR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PATIENTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -23,17 +21,19 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.BloodType;
+import seedu.address.model.person.Condition;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Ic;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
@@ -55,6 +55,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_GENDER + "GENDER] "
+            + "[" + PREFIX_CONDITION + "CONDITION] "
+            + "[" + PREFIX_BLOODTYPE + "BLOOD TYPE] "
             + "[" + PREFIX_NRIC + "NRIC] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
@@ -69,7 +71,7 @@ public class EditCommand extends Command {
 
     private final Ic nric;
     private final EditPersonDescriptor editPersonDescriptor;
-    private static String personRole;
+    private String personRole;
 
     /**
      * @param nric of the person in the filtered person list to edit
@@ -87,31 +89,32 @@ public class EditCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
+
         List<Person> personToEditList = lastShownList.stream()
-                .filter(x -> x.getIc().toString().equals(nric.toString()))
+                .filter(x -> x.getIc().equals(nric))
                 .collect(Collectors.toList());
+
         if (personToEditList.size() == 0) {
             throw new CommandException(MESSAGE_DOESNT_EXIST);
         }
 
+        //developer assumption - can't have 2 people with same IC
+        assert personToEditList.size() < 2;
+
         Person personToEdit = personToEditList.get(0);
         Person editedPerson;
 
-        if (personToEdit instanceof Doctor) {
+        if (personToEdit instanceof Patient) {
+            personRole = "patient";
+            editedPerson = createEditedPatient((Patient) personToEdit, editPersonDescriptor);
+        } else {
+            //assert personToEdit instancof Doctor
             if (editPersonDescriptor.getCondition().isPresent() || editPersonDescriptor.getBloodType().isPresent()) {
-                throw new CommandException("Doctors cannot have Condition or BloodType fields edited.");
+                throw new CommandException("Doctors cannot have Condition or BloodType fields.");
             }
             personRole = "doctor";
-            editedPerson = createEditedDoctor(personToEdit, editPersonDescriptor);
-            // Assuming other instances are patients
-        } else {
-            if (editPersonDescriptor.getPatients().isPresent()) {
-                throw new CommandException("Patients cannot have Patients field edited.");
-            }
-            personRole = "patient";
-            editedPerson = createEditedPatient(personToEdit, editPersonDescriptor);
+            editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
         }
-
 
         //Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
@@ -145,26 +148,10 @@ public class EditCommand extends Command {
                 updatedGender, updatedIc, updatedTags);
     }
 
-    private static Doctor createEditedDoctor(Doctor personToEdit, EditPersonDescriptor editPersonDescriptor) {
-        assert personToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Remark updatedRemarks = editPersonDescriptor.getRemark().orElse(personToEdit.getRemark());
-        Gender updatedGender = editPersonDescriptor.getGender().orElse(personToEdit.getGender());
-        Ic updatedIc = editPersonDescriptor.getIc().orElse(personToEdit.getIc());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        ArrayList<Patient> updatedPatients = editPersonDescriptor.getPatients().orElse(personToEdit.getPatients());
-
-        return new Doctor(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRemarks,
-                updatedGender, updatedIc, updatedTags, updatedPatients);
-    }
 
     private static Patient createEditedPatient(Patient personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
-
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
@@ -176,7 +163,7 @@ public class EditCommand extends Command {
         BloodType updatedBloodType = editPersonDescriptor.getBloodType().orElse(personToEdit.getBloodType());
         Condition updatedCondition = editPersonDescriptor.getCondition().orElse(personToEdit.getCondition());
         return new Patient(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRemarks,
-                updatedGender, updatedIc, updatedTags, updatedBloodType, updatedCondition);
+                updatedGender, updatedIc, updatedCondition, updatedBloodType, updatedTags);
     }
 
     @Override
@@ -203,6 +190,8 @@ public class EditCommand extends Command {
                 .toString();
     }
 
+
+
     /**
      * Stores the details to edit the person with. Each non-empty field value will replace the
      * corresponding field value of the person.
@@ -216,6 +205,8 @@ public class EditCommand extends Command {
         private Gender gender;
         private Ic ic;
         private Set<Tag> tags;
+        private Condition condition;
+        private BloodType bloodType;
 
         public EditPersonDescriptor() {}
 
@@ -223,6 +214,7 @@ public class EditCommand extends Command {
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
+
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
@@ -232,6 +224,8 @@ public class EditCommand extends Command {
             setGender(toCopy.gender);
             setIc(toCopy.ic);
             setTags(toCopy.tags);
+            setBloodType(toCopy.bloodType);
+            setCondition(toCopy.condition);
         }
 
         /**
@@ -298,6 +292,20 @@ public class EditCommand extends Command {
             return Optional.ofNullable(ic);
         }
 
+        public void setCondition(Condition condition) {
+            this.condition = condition;
+        }
+        public Optional<Condition> getCondition() {
+            return Optional.ofNullable(condition);
+        }
+        public void setBloodType(BloodType bloodType) {
+            this.bloodType = bloodType;
+        }
+        public Optional<BloodType> getBloodType() {
+            return Optional.ofNullable(bloodType);
+        }
+
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -333,35 +341,24 @@ public class EditCommand extends Command {
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(gender, otherEditPersonDescriptor.gender)
                     && Objects.equals(ic, otherEditPersonDescriptor.ic)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
+                    && Objects.equals(condition, otherEditPersonDescriptor.condition)
+                    && Objects.equals(bloodType, otherEditPersonDescriptor.bloodType);
         }
 
         @Override
         public String toString() {
-            if (personRole.equals("doctor")) {
-                return new ToStringBuilder(this)
-                        .add("name", name)
-                        .add("phone", phone)
-                        .add("email", email)
-                        .add("address", address)
-                        .add("gender", gender)
-                        .add("nric", ic)
-                        .add("tags", tags)
-                        .add("patients", patients)
-                        .toString();
-            } else {
-                return new ToStringBuilder(this)
-                        .add("name", name)
-                        .add("phone", phone)
-                        .add("email", email)
-                        .add("address", address)
-                        .add("gender", gender)
-                        .add("nric", ic)
-                        .add("tags", tags)
-                        .add("bloodType", bloodType)
-                        .add("condition", condition)
-                        .toString();
-            }
+            return new ToStringBuilder(this)
+                .add("name", name)
+                .add("phone", phone)
+                .add("email", email)
+                .add("address", address)
+                .add("gender", gender)
+                .add("nric", ic)
+                .add("tags", tags)
+                .add("condition", condition)
+                .add("blood type", bloodType)
+                .toString();
         }
     }
 }
