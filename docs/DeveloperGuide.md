@@ -326,7 +326,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User displays all cards (UC04).
 2. User inputs command to delete a card, along with the index of the card.
 3. lesSON displays a success message.
-   
+
    Use case ends.
 
 
@@ -355,8 +355,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS:**
 
-1. User displays all cards (UC04). 
-2. User inputs command to edit a card, along with the necessary details. 
+1. User displays all cards (UC04).
+2. User inputs command to edit a card, along with the necessary details.
 3. lesSON displays a success message.
 
    Use case ends.
