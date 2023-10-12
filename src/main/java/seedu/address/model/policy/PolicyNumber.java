@@ -9,8 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class PolicyNumber {
 
-    public static final String MESSAGE_CONSTRAINTS
-            = "Policy numbers should be an alphanumeric string with 1-8 characters";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Policy numbers should be an alphanumeric string with 1-8 characters";
 
     /*
      * Should be an alphanumeric string with 1-8 characters

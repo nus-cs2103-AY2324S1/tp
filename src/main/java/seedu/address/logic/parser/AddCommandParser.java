@@ -15,8 +15,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.LicencePlate;
-import seedu.address.model.person.NRIC;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.policy.Policy;
@@ -50,7 +50,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         // temporary variables to change
-        NRIC nric = new NRIC("000A");
+        Nric nric = new Nric("000A");
         LicencePlate licencePlate = new LicencePlate("SAA1A");
         PolicyNumber policyNumber = new PolicyNumber("1");
         PolicyDate policyIssueDate = new PolicyDate(PolicyDate.DEFAULT_VALUE);

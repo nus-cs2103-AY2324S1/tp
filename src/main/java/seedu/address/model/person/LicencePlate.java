@@ -9,8 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class LicencePlate {
 
-    public static final String MESSAGE_CONSTRAINTS
-            = "Licence plates should be in the format Sxx####y which follows the following constraints:\n"
+    public static final String MESSAGE_CONSTRAINTS =
+            "Licence plates should be in the format Sxx####y which follows the following constraints:\n"
             + "1. S - starts with the letter S, which stands for private vehicle\n"
             + "2. x - Alphabetical series (all except 'I' and 'O')\n"
             + "3. #### – Numerical series (from 1 to 9999, without leading zeroes)\n"

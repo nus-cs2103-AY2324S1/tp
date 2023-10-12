@@ -7,10 +7,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Person's NRIC (last 4 digits only) in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidNric(String)}
  */
-public class NRIC {
+public class Nric {
 
-    public static final String MESSAGE_CONSTRAINTS
-            = "NRIC should be the last 3 numbers + 1 letter of your NRIC";
+    public static final String MESSAGE_CONSTRAINTS = "NRIC should be the last 3 numbers + 1 letter of your NRIC";
 
     /*
      * Should be an alphanumeric string with 4 characters, with the first 3
@@ -25,7 +24,7 @@ public class NRIC {
      *
      * @param nric A valid NRIC.
      */
-    public NRIC(String nric) {
+    public Nric(String nric) {
         requireNonNull(nric);
         checkArgument(isValidNric(nric), MESSAGE_CONSTRAINTS);
         value = nric;
@@ -50,11 +49,11 @@ public class NRIC {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof NRIC)) {
+        if (!(other instanceof Nric)) {
             return false;
         }
 
-        NRIC otherNric = (NRIC) other;
+        Nric otherNric = (Nric) other;
         return value.equals(otherNric.value);
     }
 

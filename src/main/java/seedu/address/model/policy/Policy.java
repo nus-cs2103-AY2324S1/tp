@@ -3,7 +3,6 @@ package seedu.address.model.policy;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.Person;
 
 /**
  * Represents a person's policy in the address book.
@@ -15,6 +14,10 @@ public class Policy {
     private final PolicyDate policyIssueDate;
     private final PolicyDate policyExpiryDate;
 
+    /**
+     * Every field must be present and not null.
+     * In the case of leads with null policy fields, default values will be put in place by the respective classes.
+     */
     public Policy(PolicyNumber policyNumber, PolicyDate policyIssueDate, PolicyDate policyExpiryDate) {
         this.policyNumber = policyNumber;
         this.policyIssueDate = policyIssueDate;

@@ -24,8 +24,8 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.LicencePlate;
-import seedu.address.model.person.NRIC;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.policy.Policy;
@@ -106,7 +106,7 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         // temporary variables to change
-        NRIC updatedNRIC = new NRIC("000A");
+        Nric updatedNric = new Nric("000A");
         LicencePlate updatedLicencePlate = new LicencePlate("SAA1A");
         PolicyNumber updatedPolicyNumber = new PolicyNumber("1");
         PolicyDate updatedPolicyIssueDate = new PolicyDate(PolicyDate.DEFAULT_VALUE);
@@ -114,7 +114,7 @@ public class EditCommand extends Command {
         Policy updatedPolicy = new Policy(updatedPolicyNumber, updatedPolicyIssueDate, updatedPolicyExpiryDate);
         //
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedNRIC,
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedNric,
                 updatedLicencePlate, updatedPolicy);
     }
 

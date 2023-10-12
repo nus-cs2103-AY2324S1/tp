@@ -25,7 +25,7 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-    private final NRIC nric;
+    private final Nric nric;
     private final LicencePlate licencePlate;
     private final Policy policy;
 
@@ -33,7 +33,7 @@ public class Person {
      * Every field must be present and not null.
      * In the case of leads with null policy fields, default values will be put in place by the respective classes.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, NRIC nric,
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Nric nric,
                   LicencePlate licencePlate, Policy policy) {
         requireAllNonNull(name, phone, email, nric, licencePlate, address, tags, policy);
         this.name = name;
@@ -70,7 +70,7 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
-    public NRIC getNric() {
+    public Nric getNric() {
         return nric;
     }
 
