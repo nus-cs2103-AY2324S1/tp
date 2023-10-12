@@ -58,8 +58,10 @@ public class DeleteCommand extends Command {
         personGroups.toStream().forEach(g -> {
             try {
                 g.removePerson(personToDelete);
+                g.printGrpMates(); //for debugging purpose, prints the remaining user in each grp after del person
             } catch (CommandException e) {
-                throw new RuntimeException(e);
+                System.out.println("error in line 62 in deleteCommand");
+                throw new RuntimeException();
             }
         });
 
