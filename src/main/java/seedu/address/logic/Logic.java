@@ -52,7 +52,7 @@ public interface Logic {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Get latest notifications.
+     * Returns the latest notifications.
      * @param currentDateTime Current time.
      * @return List of latest notifications.
      */
