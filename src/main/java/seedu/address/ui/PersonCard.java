@@ -61,36 +61,11 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        IntegerContainer eventIdCounter = new IntegerContainer(0);
-        /*person.getEvents().stream()
-                .sorted(Comparator.comparing(Event::getName))
-                .forEach(event -> {
-                    eventIdCounter.setValue(eventIdCounter.getValue() + 1);
-                    events.getChildren().add(new Label(eventIdCounter.toString() + ". "
-                            + event.getUiText()));
-                });*/
         events.setItems(person.getEvents());
         events.setCellFactory(cell -> new EventCell());
     }
 
-    private static class IntegerContainer {
-        private int value;
-        public IntegerContainer(int value) {
-            this.value = value;
-        }
-        public int getValue() {
-            return value;
-        }
-        public void setValue(int value) {
-            this.value = value;
-        }
-        @Override
-        public String toString() {
-            return Integer.valueOf(this.value).toString();
-        }
-    }
-
-    private static class EventCell extends ListCell<Event> {
+    private class EventCell extends ListCell<Event> {
         @Override
         protected void updateItem(Event event, boolean empty) {
             super.updateItem(event, empty);
@@ -98,7 +73,7 @@ public class PersonCard extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setText(event.getUiText());
+                setText((getIndex() + 1) + ". " + event.getUiText());
                 setTextFill(Color.WHITE);
             }
         }

@@ -32,9 +32,6 @@
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
-      <!--<ScrollPane style="-fx-background-color: gray;" minViewportHeight="20">
-        <VBox fx:id="events" style="-fx-background-color: gray;" minWidth="800"/>
-      </ScrollPane>-->
       <ListView fx:id="events" VBox.vgrow="ALWAYS" prefHeight="70"/>
     </VBox>
   </GridPane>
