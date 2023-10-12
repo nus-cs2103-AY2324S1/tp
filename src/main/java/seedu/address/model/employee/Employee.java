@@ -19,6 +19,7 @@ public class Employee {
     // Identity fields
     private final Name name;
     private final Position position;
+    private final Id id;
     private final Phone phone;
     private final Email email;
 
@@ -28,10 +29,11 @@ public class Employee {
     /**
      * Every field must be present and not null.
      */
-    public Employee(Name name, Position position, Phone phone, Email email, Set<Department> departments) {
+    public Employee(Name name, Position position, Id id, Phone phone, Email email, Set<Department> departments) {
         requireAllNonNull(name, phone, email, departments);
         this.name = name;
         this.position = position;
+        this.id = id;
         this.phone = phone;
         this.email = email;
         this.departments.addAll(departments);
@@ -43,6 +45,10 @@ public class Employee {
 
     public Position getPosition() {
         return position;
+    }
+
+    public Id getId() {
+        return id;
     }
 
     public Phone getPhone() {
@@ -92,6 +98,8 @@ public class Employee {
 
         Employee otherEmployee = (Employee) other;
         return name.equals(otherEmployee.name)
+                && position.equals(otherEmployee.position)
+                && id.equals(otherEmployee.id)
                 && phone.equals(otherEmployee.phone)
                 && email.equals(otherEmployee.email)
                 && departments.equals(otherEmployee.departments);
@@ -100,13 +108,15 @@ public class Employee {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, departments);
+        return Objects.hash(name, position, id, phone, email, departments);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
+                .add("position", position)
+                .add("id", id)
                 .add("phone", phone)
                 .add("email", email)
                 .add("departments", departments)
