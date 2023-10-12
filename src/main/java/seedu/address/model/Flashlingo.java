@@ -31,7 +31,7 @@ public class Flashlingo implements ReadOnlyFlashlingo {
     public Flashlingo() {}
 
     /**
-     * Creates an Flashlingo using the FlashCards in the {@code toBeCopied}
+     * Creates a Flashlingo using the FlashCards in the {@code toBeCopied}
      */
     public Flashlingo(ReadOnlyFlashlingo toBeCopied) {
         this();
@@ -53,14 +53,13 @@ public class Flashlingo implements ReadOnlyFlashlingo {
      */
     public void resetData(ReadOnlyFlashlingo newData) {
         requireNonNull(newData);
-
         setFlashCards(newData.getFlashCardList());
     }
 
     //// flashcard-level operations
 
     /**
-     * Returns true if a flashcard with the same identity as {@code flashcard} exists in flashlingo.
+     * Returns true if a flashcard with the same identity as {@code flashcard} exists in the flashlingo.
      */
     public boolean hasFlashCard(FlashCard flashCard) {
         requireNonNull(flashCard);

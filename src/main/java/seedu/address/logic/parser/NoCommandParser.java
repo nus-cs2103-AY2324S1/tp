@@ -12,7 +12,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses input arguments and creates a new FindCommand object
  */
-public class NoCommandParser implements Parser<NoCommand> {
+public class NoCommandParser implements NewParser<NoCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the NoCommand
