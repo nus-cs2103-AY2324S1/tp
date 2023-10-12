@@ -45,7 +45,7 @@ public class Messages {
                 .append(person.getStudentNumber())
                 .append(";\n Class Number: ")
                 .append(person.getClassNumber())
-                .append(";n\ Tags: ");
+                .append(";\n Tags: ");
         person.getTags().forEach(builder::append);
         return builder.toString();
     }
