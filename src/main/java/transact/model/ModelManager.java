@@ -7,7 +7,6 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import transact.commons.core.GuiSettings;
@@ -22,6 +21,7 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
+    private final RecordBook recordBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Transaction> filteredTransactions;
@@ -29,32 +29,21 @@ public class ModelManager implements Model {
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyRecordBook recordBook,
+                        ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
+        this.recordBook = new RecordBook(recordBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-
-        ObservableList<Transaction> tmpTransactions = FXCollections.observableArrayList();
-
-        // Placeholder transaction objects (x5)
-        tmpTransactions.add(new Transaction());
-        tmpTransactions.add(new Transaction());
-        tmpTransactions.add(new Transaction());
-        tmpTransactions.add(new Transaction());
-        tmpTransactions.add(new Transaction());
-
-        filteredTransactions = new FilteredList<>(tmpTransactions);
-
-        // This line is required to pass test's, needs further debugging
-        updateFilteredTransactionList(PREDICATE_HIDE_ALL_TRANSACTIONS);
+        filteredTransactions = new FilteredList<>(this.recordBook.getTransactionList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new RecordBook(), new UserPrefs());
     }
 
     // =========== UserPrefs
@@ -135,23 +124,30 @@ public class ModelManager implements Model {
 
     @Override
     public boolean hasTransaction(Transaction transaction) {
-        return false;
+        return recordBook.hasTransaction(transaction);
     }
 
     @Override
     public void deleteTransaction(Transaction transaction) {
+        recordBook.removeTransaction(transaction);
     }
 
     @Override
     public void addTransaction(Transaction transaction) {
-
+        requireNonNull(transaction);
+        recordBook.addTransaction(transaction);
     }
 
     public void setTransaction(Transaction transaction, Transaction editedTransaction) {
         requireAllNonNull(transaction, editedTransaction);
-
-
+        recordBook.setTransaction(transaction, editedTransaction);
     }
+
+    @Override
+    public RecordBook getRecordBook() {
+        return recordBook;
+    }
+
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the
      * internal list of
@@ -199,6 +195,7 @@ public class ModelManager implements Model {
 
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
+                && recordBook.equals(otherModelManager.recordBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons)
                 && filteredTransactions.equals(otherModelManager.filteredTransactions);

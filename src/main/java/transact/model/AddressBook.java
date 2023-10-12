@@ -9,8 +9,8 @@ import transact.commons.util.ToStringBuilder;
 import transact.model.person.Person;
 
 /**
- * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Wraps person data at the address-book level
+ * Duplicates are not allowed (by .isSameEntry comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
@@ -89,7 +89,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setPerson(Person target, Person editedPerson) {
         requireNonNull(editedPerson);
 
-        persons.setPerson(target, editedPerson);
+        persons.setEntry(target, editedPerson);
     }
 
     /**

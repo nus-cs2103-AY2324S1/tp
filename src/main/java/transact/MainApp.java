@@ -21,6 +21,7 @@ import transact.model.Model;
 import transact.model.ModelManager;
 import transact.model.ReadOnlyAddressBook;
 import transact.model.ReadOnlyUserPrefs;
+import transact.model.RecordBook;
 import transact.model.UserPrefs;
 import transact.model.util.SampleDataUtil;
 import transact.storage.AddressBookStorage;
@@ -97,7 +98,9 @@ public class MainApp extends Application {
             initialData = new AddressBook();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        // TODO Read transaction data, create record book and pass to model manager
+
+        return new ModelManager(initialData, new RecordBook(), userPrefs);
     }
 
     private void initLogging(Config config) {

@@ -111,6 +111,9 @@ public interface Model {
      */
     void setTransaction(Transaction target, Transaction editedTransaction);
 
+    /** Returns the RecordBook */
+    ReadOnlyRecordBook getRecordBook();
+
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();

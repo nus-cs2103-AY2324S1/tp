@@ -21,6 +21,7 @@ import transact.logic.commands.exceptions.CommandException;
 import transact.model.AddressBook;
 import transact.model.Model;
 import transact.model.ReadOnlyAddressBook;
+import transact.model.ReadOnlyRecordBook;
 import transact.model.ReadOnlyUserPrefs;
 import transact.model.person.Person;
 import transact.model.transaction.Transaction;
@@ -151,22 +152,27 @@ public class AddStaffCommandTest {
 
         @Override
         public boolean hasTransaction(Transaction transaction) {
-            return false;
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void deleteTransaction(Transaction transaction) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void addTransaction(Transaction transaction) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void setTransaction(Transaction target, Transaction editedTransaction) {
+            throw new AssertionError("This method should not be called.");
+        }
 
+        @Override
+        public ReadOnlyRecordBook getRecordBook() {
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override

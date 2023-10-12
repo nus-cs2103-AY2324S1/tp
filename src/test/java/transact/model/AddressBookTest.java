@@ -18,8 +18,8 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import transact.model.person.Person;
 import transact.model.entry.exceptions.DuplicateEntryException;
+import transact.model.person.Person;
 import transact.testutil.PersonBuilder;
 
 public class AddressBookTest {

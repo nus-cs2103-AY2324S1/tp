@@ -59,7 +59,7 @@ public class UniqueEntryList<E extends Entry> implements Iterable<E> {
      * The identity of {@code editedEntry} must not be the same as another
      * existing entry in the list.
      */
-    public void setPerson(E target, E editedEntry) {
+    public void setEntry(E target, E editedEntry) {
         requireAllNonNull(target, editedEntry);
 
         int index = internalList.indexOf(target);
@@ -126,8 +126,8 @@ public class UniqueEntryList<E extends Entry> implements Iterable<E> {
             return false;
         }
 
-        UniqueEntryList<?> otherUniquePersonList = (UniqueEntryList<?>) other;
-        return internalList.equals(otherUniquePersonList.internalList);
+        UniqueEntryList<?> otherUniqueEntryList = (UniqueEntryList<?>) other;
+        return internalList.equals(otherUniqueEntryList.internalList);
     }
 
     @Override
