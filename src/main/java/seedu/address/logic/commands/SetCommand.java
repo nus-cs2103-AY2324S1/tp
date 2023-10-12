@@ -8,6 +8,7 @@ import seedu.address.model.person.StatusTypes;
 /**
  * Sets the status of a person in the address book.
  */
+
 public class SetCommand extends Command {
     public static final String COMMAND_WORD = "set";
 
@@ -26,10 +27,12 @@ public class SetCommand extends Command {
      * @param targetIndex The index of the person to set the status.
      * @param newStatus   The new status to set.
      */
+
     public SetCommand(int targetIndex, StatusTypes newStatus) {
         this.targetIndex = targetIndex;
         this.newStatus = newStatus;
     }
+
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -46,21 +49,10 @@ public class SetCommand extends Command {
     }
 
     @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        if (!(other instanceof SetCommand)) {
-            return false;
-        }
-
-        SetCommand otherSetCommand = (SetCommand) other;
-        return targetIndex == otherSetCommand.targetIndex && newStatus.equals(otherSetCommand.newStatus);
-    }
-
-    @Override
     public String toString() {
-        return new ToStringBuilder(this).add("targetIndex", targetIndex).add("newStatus", newStatus).toString();
+        return new ToStringBuilder(this).add("targetIndex", targetIndex)
+                .add("newStatus", newStatus).toString();
     }
 }
+
+
