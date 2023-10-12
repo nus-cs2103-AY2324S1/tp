@@ -15,7 +15,7 @@ import seedu.flashlingo.model.tag.Tag;
 public class SampleDataUtil {
     public static FlashCard[] getSampleFlashCards() {
         //TODO: Add sample data/import from file
-        return null;
+        return new FlashCard[]{};
     }
 
     public static ReadOnlyFlashlingo getSampleFlashlingo() {
