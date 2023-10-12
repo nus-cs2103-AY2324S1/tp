@@ -18,7 +18,7 @@ dependencies {
      * Path results in a full path instead of the original relative one
     */
     String versionJackson = '2.7.0'
-    String versionJavaFx = '21'
+    String versionJavaFx = '17.0.8'
 
     implementation group: 'org.openjfx', name: 'javafx-base', version: versionJavaFx, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-base', version: versionJavaFx, classifier: 'mac'
