@@ -11,6 +11,13 @@ import seedu.address.model.person.Remark;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+
+/**
+ * The RemarkCommand class represents a command in a software application for editing remarks associated with persons.
+ * This command allows the user to add or update a remark for a person identified by their index number in the last
+ * person listing. If a remark already exists for the person, it will be overwritten by the new input remark.
+ * If the remark input is empty, the existing remark for the person can be removed.
+ */
 public class RemarkCommand extends Command {
     public static final String COMMAND_WORD = "remark";
 
