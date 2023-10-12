@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TRANSLATED_WORD;
 import java.util.Date;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.NewCommand;
 import seedu.address.logic.commands.exceptions.CommandException;

@@ -34,11 +34,11 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     /**
      * Resets the existing data of this {@code UserPrefs} with {@code newUserPrefs}.
      */
-//    public void resetData(ReadOnlyUserPrefs newUserPrefs) {
-//        requireNonNull(newUserPrefs);
-//        setGuiSettings(newUserPrefs.getGuiSettings());
-//        setAddressBookFilePath(newUserPrefs.getAddressBookFilePath());
-//    }
+    //    public void resetData(ReadOnlyUserPrefs newUserPrefs) {
+    //        requireNonNull(newUserPrefs);
+    //        setGuiSettings(newUserPrefs.getGuiSettings());
+    //        setAddressBookFilePath(newUserPrefs.getAddressBookFilePath());
+    // }
 
     public void resetData(ReadOnlyUserPrefs newUserPrefs) {
         requireNonNull(newUserPrefs);
@@ -85,9 +85,8 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         }
 
         UserPrefs otherUserPrefs = (UserPrefs) other;
-//        return guiSettings.equals(otherUserPrefs.guiSettings)
-//                && addressBookFilePath.equals(otherUserPrefs.addressBookFilePath);
-//
+        //        return guiSettings.equals(otherUserPrefs.guiSettings)
+        //                && addressBookFilePath.equals(otherUserPrefs.addressBookFilePath);
         return guiSettings.equals(otherUserPrefs.guiSettings)
                 && flashlingoFilePath.equals(otherUserPrefs.flashlingoFilePath);
 

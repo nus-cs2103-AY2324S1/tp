@@ -10,15 +10,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.flashcard.exceptions.DuplicateFlashCardException;
 import seedu.address.model.flashcard.exceptions.FlashCardNotFoundException;
-import seedu.address.model.person.UniquePersonList;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
  * A list of flashcards that enforces uniqueness between its elements and does not allow nulls.
- * A flashcard is considered unique by comparing using {@code FlashCard#isSameFlashCard(FlashCard)}. As such, adding and updating of
- * flashcards uses FlashCard#isSameFlashCard(FlashCard) for equality so as to ensure that the flashcard being added or updated is
- * unique in terms of identity in the UniqueFlashCardList. However, the removal of a flashcard uses FlashCard#equals(Object) so
+ * A flashcard is considered unique by comparing using {@code FlashCard#isSameFlashCard(FlashCard)}.
+ * As such, adding and updating of
+ * flashcards uses FlashCard#isSameFlashCard(FlashCard)
+ * for equality so as to ensure that the flashcard being added or updated is
+ * unique in terms of identity in the UniqueFlashCardList.
+ * However, the removal of a flashcard uses FlashCard#equals(Object) so
  * as to ensure that the flashcard with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
@@ -29,7 +29,7 @@ public class UniqueFlashCardList implements Iterable<FlashCard> {
 
     private final ObservableList<FlashCard> internalList = FXCollections.observableArrayList();
     private final ObservableList<FlashCard> internalUnmodifiableList =
-      FXCollections.unmodifiableObservableList(internalList);
+        FXCollections.unmodifiableObservableList(internalList);
 
     /**
      * Returns true if the list contains an equivalent flashcard as the given argument.

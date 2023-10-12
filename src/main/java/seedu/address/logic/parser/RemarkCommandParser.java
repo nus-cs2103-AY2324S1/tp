@@ -23,7 +23,7 @@ public class RemarkCommandParser {
     public RemarkCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
-          PREFIX_REMARK);
+            PREFIX_REMARK);
 
         Index index;
         try {
