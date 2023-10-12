@@ -1,3 +1,5 @@
+package seedu.address.model.appointment;
+
 public class Appointment {
     private DateTime dateTime;
     private StudentName studentName;
