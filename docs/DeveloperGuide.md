@@ -262,7 +262,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * is reasonably comfortable using CLI apps
 
 
-**Value proposition**: 
+**Value proposition**:
 
 Our product empowers users to efficiently manage their vocabulary through vivid flashcards and seamlessly review their acquired language skills according to scientific learning curves. With Flashlingo, language learners can master new words while staying in control of their customized language learning journey.
 
