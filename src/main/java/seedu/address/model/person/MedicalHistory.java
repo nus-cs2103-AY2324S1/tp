@@ -46,7 +46,7 @@ public class MedicalHistory {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Specialty)) {
+        if (!(other instanceof MedicalHistory)) {
             return false;
         }
 
