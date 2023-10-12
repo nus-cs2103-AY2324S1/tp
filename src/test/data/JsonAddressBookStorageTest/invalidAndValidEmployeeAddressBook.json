@@ -1,11 +1,16 @@
 {
-  "employees": [ {
-    "name": "Valid Employee",
-    "phone": "9482424",
-    "email": "hans@example.com"
-  }, {
-    "name": "Employee With Invalid Phone Field",
-    "phone": "948asdf2424",
-    "email": "hans@example.com"
-  } ]
+  "employees": [
+    {
+      "name": "Valid Employee",
+      "position": "Valid Position",
+      "phone": "9482424",
+      "email": "hans@example.com"
+    },
+    {
+      "name": "Employee With Invalid Phone Field",
+      "position": "Valid Position",
+      "phone": "948asdf2424",
+      "email": "hans@example.com"
+    }
+  ]
 }
