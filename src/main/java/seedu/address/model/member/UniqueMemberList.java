@@ -3,13 +3,13 @@ package seedu.address.model.member;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Iterator;
+import java.util.List;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.member.exceptions.DuplicateMemberException;
 import seedu.address.model.member.exceptions.MemberNotFoundException;
-
-import java.util.Iterator;
-import java.util.List;
 
 /**
  * A list of members that enforces uniqueness between its elements and does not allow nulls.
