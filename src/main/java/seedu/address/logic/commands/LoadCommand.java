@@ -8,7 +8,11 @@ import java.nio.file.Path;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.storage.AddressBookStorage;
+import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.Storage;
+import seedu.address.storage.StorageManager;
+import seedu.address.MainApp;
 
 public class LoadCommand extends Command{
 
@@ -49,7 +53,6 @@ public class LoadCommand extends Command{
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        System.out.println("8r8r8");
         try {
             File f = filePath.toFile();
             if (!f.isFile()) {
@@ -57,8 +60,10 @@ public class LoadCommand extends Command{
             }
             requireNonNull(model);
             model.setAddressBookFilePath(filePath);
-            ReadOnlyAddressBook newAddressBook = model.getAddressBook();
-            model.setAddressBook(newAddressBook);
+            Path newAddressBookFilePath = model.getAddressBookFilePath();
+            AddressBookStorage addressBookStorage = new JsonAddressBookStorage(newAddressBookFilePath);
+            Storage storage = new StorageManager(addressBookStorage, userPrefsStorage);
+            model = model.initModelManager(storage, userPrefs);
             return new CommandResult(String.format(MESSAGE_SUCCESS, fileName));
         } catch (FileNotFoundException e) {
             throw new CommandException(String.format(MESSAGE_FILE_NOT_FOUND, fileName));
