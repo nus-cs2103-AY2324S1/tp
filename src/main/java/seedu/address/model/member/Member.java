@@ -2,6 +2,9 @@ package seedu.address.model.member;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Objects;
+import java.util.Set;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -10,14 +13,18 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
-import java.util.Objects;
-import java.util.Set;
-
+/**
+ * Represents a Member in the address book.
+ * Guarantees: details are present and not null, field values are validated, immutable.
+ */
 public class Member extends Person {
 
     // Identity Fields
     private final Telegram telegram;
 
+    /**
+     * Every field must be present and not null.
+     */
     public Member(Name name, Phone phone, Email email, Telegram telegram, Set<Tag> tags) {
         super(name, phone, email, new Address("sample"), tags);
         requireAllNonNull(telegram);

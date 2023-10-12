@@ -1,5 +1,8 @@
 package seedu.address.model.member;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.member.exceptions.DuplicateMemberException;
@@ -8,16 +11,12 @@ import seedu.address.model.member.exceptions.MemberNotFoundException;
 import java.util.Iterator;
 import java.util.List;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
 /**
  * A list of members that enforces uniqueness between its elements and does not allow nulls.
  * A person is considered unique by comparing using {@code Member#isSameMember(Member)}. As such, adding and updating of
  * persons uses Member#isSameMember(Member) for equality as to ensure that the Member being added or updated is
  * unique in terms of identity in the UniquePersonList. However, the removal of a person uses Member#equals(Object) as
  * to ensure that the person with exactly the same fields will be removed.
- *
  * Supports a minimal set of list operations.
  *
  * @see Member#isSameMember(Member)
@@ -80,24 +79,6 @@ public class UniqueMemberList implements Iterable<Member> {
         }
     }
 
-    public void setMembers(seedu.address.model.member.UniqueMemberList replacement) {
-        requireNonNull(replacement);
-        internalList.setAll(replacement.internalList);
-    }
-
-    /**
-     * Replaces the contents of this list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
-     */
-    public void setMembers(List<Member> members) {
-        requireAllNonNull(members);
-        if (!membersAreUnique(members)) {
-            throw new DuplicateMemberException();
-        }
-
-        internalList.setAll(members);
-    }
-
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
@@ -121,7 +102,8 @@ public class UniqueMemberList implements Iterable<Member> {
             return false;
         }
 
-        seedu.address.model.member.UniqueMemberList otherUniquePersonList = (seedu.address.model.member.UniqueMemberList) other;
+        seedu.address.model.member.UniqueMemberList otherUniquePersonList =
+                (seedu.address.model.member.UniqueMemberList) other;
         return internalList.equals(otherUniquePersonList.internalList);
     }
 
