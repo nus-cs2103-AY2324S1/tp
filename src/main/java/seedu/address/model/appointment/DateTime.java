@@ -1,7 +1,6 @@
 package seedu.address.model.appointment;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Represents the date and time of an appointment.
