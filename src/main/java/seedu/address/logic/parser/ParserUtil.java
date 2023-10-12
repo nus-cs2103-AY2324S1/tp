@@ -11,6 +11,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.department.Department;
 import seedu.address.model.employee.Email;
+import seedu.address.model.employee.Id;
 import seedu.address.model.employee.Name;
 import seedu.address.model.employee.Phone;
 import seedu.address.model.employee.Position;
@@ -112,6 +113,21 @@ public class ParserUtil {
             throw new ParseException(Position.MESSAGE_CONSTRAINTS);
         }
         return new Position(trimmedPosition);
+    }
+
+    /**
+     * Parses a {@code String id} into an {@code Id}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code id} is invalid.
+     */
+    public static Id parseId(String id) throws ParseException {
+        requireNonNull(id);
+        String trimmedId = id.trim();
+        if (!Id.isValidId(trimmedId)) {
+            throw new ParseException(Id.MESSAGE_CONSTRAINTS);
+        }
+        return new Id(trimmedId);
     }
 
     /**
