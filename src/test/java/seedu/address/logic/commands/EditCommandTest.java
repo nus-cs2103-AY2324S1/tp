@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
@@ -31,7 +30,8 @@ import seedu.address.testutil.EditEmployeeDescriptorBuilder;
 import seedu.address.testutil.EmployeeBuilder;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for
+ * EditCommand.
  */
 public class EditCommandTest {
 
@@ -58,10 +58,12 @@ public class EditCommandTest {
         Employee lastEmployee = model.getFilteredEmployeeList().get(indexLastEmployee.getZeroBased());
 
         EmployeeBuilder employeeInlist = new EmployeeBuilder(lastEmployee);
-        Employee editedEmployee = employeeInlist.withName(VALID_NAME_BOB).withPosition(VALID_POSITION_BOB).withPhone(VALID_PHONE_BOB)
+        Employee editedEmployee = employeeInlist.withName(VALID_NAME_BOB).withPosition(VALID_POSITION_BOB)
+                .withPhone(VALID_PHONE_BOB)
                 .withDepartments(VALID_DEPARTMENT_HUSBAND).build();
 
-        EditEmployeeDescriptor descriptor = new EditEmployeeDescriptorBuilder().withName(VALID_NAME_BOB).withPosition(VALID_POSITION_BOB)
+        EditEmployeeDescriptor descriptor = new EditEmployeeDescriptorBuilder().withName(VALID_NAME_BOB)
+                .withPosition(VALID_POSITION_BOB)
                 .withPhone(VALID_PHONE_BOB).withDepartments(VALID_DEPARTMENT_HUSBAND).build();
         EditCommand editCommand = new EditCommand(indexLastEmployee, descriptor);
 
@@ -101,7 +103,7 @@ public class EditCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setEmployee(model.getFilteredEmployeeList().get(0), editedEmployee);
-        
+
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 

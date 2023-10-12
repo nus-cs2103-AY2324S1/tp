@@ -25,14 +25,16 @@ import seedu.address.model.department.Department;
 public class EditCommandParser implements Parser<EditCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the EditCommand
+     * Parses the given {@code String} of arguments in the context of the
+     * EditCommand
      * and returns an EditCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_POSITION, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_DEPARTMENT);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_POSITION, PREFIX_PHONE,
+                PREFIX_EMAIL, PREFIX_DEPARTMENT);
 
         Index index;
 
@@ -69,8 +71,10 @@ public class EditCommandParser implements Parser<EditCommand> {
     }
 
     /**
-     * Parses {@code Collection<String> departments} into a {@code Set<Department>} if {@code departments} is non-empty.
-     * If {@code departments} contain only one element which is an empty string, it will be parsed into a
+     * Parses {@code Collection<String> departments} into a {@code Set<Department>}
+     * if {@code departments} is non-empty.
+     * If {@code departments} contain only one element which is an empty string, it
+     * will be parsed into a
      * {@code Set<Department>} containing zero departments.
      */
     private Optional<Set<Department>> parseDepartmentsForEdit(Collection<String> departments) throws ParseException {
@@ -80,7 +84,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             return Optional.empty();
         }
         Collection<String> departmentSet = departments.size() == 1 && departments.contains("")
-                ? Collections.emptySet() : departments;
+                ? Collections.emptySet()
+                : departments;
         return Optional.of(ParserUtil.parseDepartments(departmentSet));
     }
 

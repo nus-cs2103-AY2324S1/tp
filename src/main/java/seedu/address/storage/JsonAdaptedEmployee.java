@@ -34,7 +34,8 @@ class JsonAdaptedEmployee {
      * Constructs a {@code JsonAdaptedEmployee} with the given employee details.
      */
     @JsonCreator
-    public JsonAdaptedEmployee(@JsonProperty("name") String name, @JsonProperty("position") String position, @JsonProperty("phone") String phone,
+    public JsonAdaptedEmployee(@JsonProperty("name") String name, @JsonProperty("position") String position,
+            @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("departments") List<JsonAdaptedDepartment> departments) {
         this.name = name;
         this.position = position;
@@ -59,9 +60,11 @@ class JsonAdaptedEmployee {
     }
 
     /**
-     * Converts this Jackson-friendly adapted employee object into the model's {@code Employee} object.
+     * Converts this Jackson-friendly adapted employee object into the model's
+     * {@code Employee} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted employee.
+     * @throws IllegalValueException if there were any data constraints violated in
+     *                               the adapted employee.
      */
     public Employee toModelType() throws IllegalValueException {
         final List<Department> employeeDepartments = new ArrayList<>();

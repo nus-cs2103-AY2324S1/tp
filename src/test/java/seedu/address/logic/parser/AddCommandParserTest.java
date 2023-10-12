@@ -53,8 +53,8 @@ public class AddCommandParserTest {
         Employee expectedEmployee = new EmployeeBuilder(BOB).withDepartments(VALID_DEPARTMENT_FRIEND).build();
 
         // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + POSITION_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + DEPARTMENT_DESC_FRIEND, new AddCommand(expectedEmployee));
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + POSITION_DESC_BOB
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB + DEPARTMENT_DESC_FRIEND, new AddCommand(expectedEmployee));
 
 
         // multiple departments - all accepted
@@ -62,7 +62,8 @@ public class AddCommandParserTest {
                 .withDepartments(VALID_DEPARTMENT_FRIEND, VALID_DEPARTMENT_HUSBAND)
                 .build();
         assertParseSuccess(parser,
-                NAME_DESC_BOB + POSITION_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + DEPARTMENT_DESC_HUSBAND + DEPARTMENT_DESC_FRIEND,
+                NAME_DESC_BOB + POSITION_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                + DEPARTMENT_DESC_HUSBAND + DEPARTMENT_DESC_FRIEND,
                 new AddCommand(expectedEmployeeMultipleDepartments));
     }
 
@@ -74,7 +75,7 @@ public class AddCommandParserTest {
         // multiple names
         assertParseFailure(parser, NAME_DESC_AMY + validExpectedEmployeeString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
-        
+
         // multiple positions
         assertParseFailure(parser, POSITION_DESC_AMY + validExpectedEmployeeString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_POSITION));
@@ -186,7 +187,8 @@ public class AddCommandParserTest {
                 Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
-        assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + POSITION_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+        assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB
+                + POSITION_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + DEPARTMENT_DESC_HUSBAND + DEPARTMENT_DESC_FRIEND,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }

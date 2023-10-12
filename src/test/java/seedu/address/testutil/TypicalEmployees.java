@@ -64,7 +64,8 @@ public class TypicalEmployees {
     public static final Employee AMY = new EmployeeBuilder().withName(VALID_NAME_AMY).withPosition(VALID_POSITION_AMY)
                 .withPhone(VALID_PHONE_AMY)
                 .withEmail(VALID_EMAIL_AMY).withDepartments(VALID_DEPARTMENT_FRIEND).build();
-    public static final Employee BOB = new EmployeeBuilder().withName(VALID_NAME_BOB).withPosition(VALID_POSITION_BOB).withPhone(VALID_PHONE_BOB)
+    public static final Employee BOB = new EmployeeBuilder().withName(VALID_NAME_BOB)
+                .withPosition(VALID_POSITION_BOB).withPhone(VALID_PHONE_BOB)
                 .withEmail(VALID_EMAIL_BOB).withDepartments(VALID_DEPARTMENT_HUSBAND, VALID_DEPARTMENT_FRIEND)
                 .build();
 
