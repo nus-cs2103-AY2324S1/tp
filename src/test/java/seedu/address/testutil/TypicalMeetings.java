@@ -1,5 +1,10 @@
 package seedu.address.testutil;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import seedu.address.model.AddressBook;
 import seedu.address.model.meeting.Meeting;
 
 /**
@@ -12,4 +17,29 @@ public class TypicalMeetings {
             .withStart("20.09.2023 1000").withEnd("20.09.2023 1200")
             .withAttendees(TypicalPersons.getTypicalAttendees())
             .build();
+
+    public static final Meeting MEETING2 = new MeetingBuilder().withTitle("CS2107 meeting")
+            .withLocation("in person")
+            .withStart("20.09.2023 1000").withEnd("20.09.2023 1200")
+            .withAttendees(TypicalPersons.getTypicalAttendees())
+            .build();
+    
+    public static final Meeting MEETING3 = new MeetingBuilder().withTitle("CS2101 meeting")
+            .withLocation("com 3")
+            .withStart("20.09.2023 1000").withEnd("20.09.2023 1200")
+            .withAttendees(TypicalPersons.getTypicalAttendees())
+            .build();
+
+    public static AddressBook getTypicalAddressBook() {
+        AddressBook ab = new AddressBook();
+        for (Meeting meeting : getTypicalMeetings()) {
+            ab.addMeeting(meeting);
+        }
+
+        return ab;
+    }
+
+    public static List<Meeting> getTypicalMeetings() {
+        return new ArrayList<>(Arrays.asList(MEETING1, MEETING2, MEETING3));
+    }
 }

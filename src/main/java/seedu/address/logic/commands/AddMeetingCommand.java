@@ -14,7 +14,7 @@ import seedu.address.model.meeting.Attendee;
 import seedu.address.model.meeting.Meeting;
 
 /**
- * Adds a person to the address book.
+ * Adds a meeting to the address book.
  */
 public class AddMeetingCommand extends Command {
 
