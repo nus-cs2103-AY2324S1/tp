@@ -2,7 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAGS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WILDCARD;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -12,6 +13,8 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.commands.AddTagCommand;
+import seedu.address.logic.commands.DeleteTagCommand;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
@@ -31,23 +34,33 @@ public class TagCommandParser implements Parser<TagCommand> {
     public TagCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
-                PREFIX_TAGS);
+                PREFIX_TAG, PREFIX_WILDCARD);
 
         Index index;
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (IllegalValueException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    TagCommand.MESSAGE_USAGE), ive);
+                    TagCommand.MESSAGE_TAG_FAILED + TagCommand.MESSAGE_USAGE), ive);
         }
 
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAGS)).ifPresent(this::setTags);
+        String action = argMultimap.getValue(PREFIX_WILDCARD).orElse("");
+
+        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(this::setTags);
 
         if (this.tags == null) {
-            throw new ParseException(TagCommand.MESSAGE_TAG_FAILED);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                TagCommand.MESSAGE_TAG_FAILED + TagCommand.MESSAGE_USAGE));
         }
 
-        return new TagCommand(index, this.tags);
+        switch (action) {
+        case TagCommand.ADD_TAGS:
+            return new AddTagCommand(index, this.tags);
+        case TagCommand.DELETE_TAGS:
+            return new DeleteTagCommand(index, this.tags);
+        default:
+            return new TagCommand(index, this.tags);
+        }
     }
 
     /**

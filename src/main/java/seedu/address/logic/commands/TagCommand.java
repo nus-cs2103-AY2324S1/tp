@@ -8,7 +8,6 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -16,28 +15,25 @@ import seedu.address.model.tag.Tag;
 
 
 /**
- * Changes the tags of an existing person in the address book.
+ * Changes the tags of an existing student in the address book.
  */
 public class TagCommand extends Command {
 
     public static final String COMMAND_WORD = "tag";
-
+    public static final String ADD_TAGS = "add";
+    public static final String DELETE_TAGS = "delete";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Edits the tags of the person identified "
-            + "by the student number. "
+            + ": Edits the tags of the student identified by the student number.\n"
             + "Existing tags will be overwritten by the input.\n"
-            + "Parameters: Student number (must be exist in address book) "
-            + "/t [LABEL]\n"
-            + "Example: " + COMMAND_WORD + " A1234567N "
-            + "/t smart.";
-    public static final String MESSAGE_ADD_TAG_SUCCESS = "Added tag to Person: %1$s";
-    public static final String MESSAGE_DELETE_TAG_SUCCESS = "Removed tag from Person: %1$s";
-    public static final String MESSAGE_TAG_FAILED = COMMAND_WORD
-            + ": There was an issue tagging the student.\n Please check "
-            + "that the index of the student exists or each label has "
-            + "the “/t ” prefix.";
-    private final Index index;
-    private final Set<Tag> tags;
+            + "Parameters: Student number (must be exist in address book) t/[TAG]\n"
+            + "Example: " + COMMAND_WORD + " A1234567N t/smart.";
+    public static final String MESSAGE_ADD_TAG_SUCCESS = "Added following tags to Student %1$s:\n";
+    public static final String MESSAGE_DELETE_TAG_SUCCESS = "Removed following tags from Student %1$s:\n";
+    public static final String MESSAGE_DELETE_ALL_TAG_SUCCESS = "Removed all tags from Student %1$s:\n";
+    public static final String MESSAGE_TAG_FAILED = "There was an issue tagging the student.\n"
+        + "Please check that the index of the student exists or each label has the “t/” prefix.\n";
+    protected final Index index;
+    protected final Set<Tag> tags;
 
     /**
      * @param index of the person in the filtered person list to edit the remark
@@ -75,8 +71,8 @@ public class TagCommand extends Command {
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {
-        String message = !tags.isEmpty() ? MESSAGE_ADD_TAG_SUCCESS : MESSAGE_DELETE_TAG_SUCCESS;
-        return String.format(message, Messages.format(personToEdit));
+        String message = !tags.isEmpty() ? MESSAGE_ADD_TAG_SUCCESS : MESSAGE_DELETE_ALL_TAG_SUCCESS;
+        return String.format(message, personToEdit.getName()) + personToEdit.getTags();
     }
 
     @Override

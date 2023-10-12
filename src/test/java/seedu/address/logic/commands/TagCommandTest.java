@@ -35,7 +35,7 @@ public class TagCommandTest {
         TagCommand tagCommand = new TagCommand(INDEX_FIRST_PERSON, TypicalPersons.ALICE.getTags());
 
         String expectedMessage = String.format(TagCommand.MESSAGE_ADD_TAG_SUCCESS,
-                Messages.format(TypicalPersons.ALICE));
+                TypicalPersons.ALICE.getName()) + TypicalPersons.ALICE.getTags().toString();
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), TypicalPersons.ALICE);
@@ -44,11 +44,11 @@ public class TagCommandTest {
     }
 
     @Test
-    public void execute_deleteTag_success() {
+    public void execute_deleteAllTag_success() {
         TagCommand tagCommand = new TagCommand(INDEX_THIRD_PERSON, TypicalPersons.CARL.getTags());
 
-        String expectedMessage = String.format(TagCommand.MESSAGE_DELETE_TAG_SUCCESS,
-                Messages.format(TypicalPersons.CARL));
+        String expectedMessage = String.format(TagCommand.MESSAGE_DELETE_ALL_TAG_SUCCESS,
+                TypicalPersons.CARL.getName()) + TypicalPersons.CARL.getTags().toString();
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(2), TypicalPersons.CARL);
@@ -60,7 +60,7 @@ public class TagCommandTest {
     public void execute_indexOutOfBound_failure() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
-        // ensures that outOfBoundIndex is still in bounds of address book list
+
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
         TagCommand tagCommand = new TagCommand(outOfBoundIndex, TypicalPersons.ALICE.getTags());
