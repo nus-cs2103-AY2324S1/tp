@@ -1,5 +1,7 @@
 package seedu.address.model.person;
-
+/**
+ * Represents a StatusType in the Status class.
+ */
 public enum StatusTypes {
     PRELIMINARY("Preliminary"),
     INTERVIEWED("Interviewed"),

@@ -1,5 +1,8 @@
 package seedu.address.model.person;
 
+/**
+ * Represents a Status in the Person class
+ */
 public class Status {
     private StatusTypes statusType;
 

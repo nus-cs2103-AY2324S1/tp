@@ -11,7 +11,9 @@ import seedu.address.model.person.StatusTypes;
 public class SetCommand extends Command {
     public static final String COMMAND_WORD = "set";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sets the status of a person. " + "Parameters: " + "[" + COMMAND_WORD + " <USERID> <STATUS>]...\n" + "Example: " + COMMAND_WORD + " 5 Interviewed";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sets the status of a person. " + "Parameters: " +
+            "[" + COMMAND_WORD + " <USERID> <STATUS>]...\n"
+            + "Example: " + COMMAND_WORD + " 5 Interviewed";
 
     public static final String MESSAGE_SUCCESS = "Status set for: %1$s";
 
