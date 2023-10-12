@@ -1,8 +1,9 @@
 package seedu.address.logic.commands;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
-import seedu.address.model.person.StatusTypes;
+
 import seedu.address.model.person.Status;
 
 public class SetCommandTest {
