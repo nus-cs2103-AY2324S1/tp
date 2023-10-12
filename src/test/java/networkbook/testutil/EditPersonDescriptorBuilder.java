@@ -11,6 +11,7 @@ import networkbook.model.person.Email;
 import networkbook.model.person.Name;
 import networkbook.model.person.Person;
 import networkbook.model.person.Phone;
+import networkbook.model.person.Priority;
 import networkbook.model.tag.Tag;
 import networkbook.model.util.UniqueList;
 
@@ -39,6 +40,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setEmails(person.getEmails());
         descriptor.setAddress(person.getAddress());
         descriptor.setTags(person.getTags());
+        person.getPriority().ifPresent((Priority p) -> descriptor.setPriority(p));
     }
 
     /**
@@ -80,6 +82,14 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Priority} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withPriority(String priority) {
+        descriptor.setPriority(new Priority(priority));
         return this;
     }
 
