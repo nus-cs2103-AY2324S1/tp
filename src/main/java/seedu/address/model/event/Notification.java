@@ -1,5 +1,7 @@
 package seedu.address.model.event;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 /**
  * Encapsulates details of notifications.
  */
@@ -13,6 +15,7 @@ public class Notification {
      * @param description Description of notification.
      */
     public Notification(String title, String description) {
+        requireAllNonNull(title, description);
         this.title = title;
         this.description = description;
     }

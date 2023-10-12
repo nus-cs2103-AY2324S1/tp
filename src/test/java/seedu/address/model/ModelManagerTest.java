@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -10,11 +11,13 @@ import static seedu.address.testutil.TypicalPersons.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
@@ -91,6 +94,23 @@ public class ModelManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void addEvent_validEvent_success() {
+        assertDoesNotThrow(() -> modelManager.addEvent(new Event("", "", LocalDateTime.MIN)));
+    }
+
+    @Test
+    public void getEventList_nonEmpty_success() {
+        assertTrue(modelManager.getEventList() != null);
+    }
+
+    @Test
+    public void getEventList_latestEvent_success() {
+        Event event = new Event("A", "B", LocalDateTime.MIN);
+        modelManager.addEvent(event);
+        assertTrue(modelManager.getEventList().contains(event));
     }
 
     @Test
