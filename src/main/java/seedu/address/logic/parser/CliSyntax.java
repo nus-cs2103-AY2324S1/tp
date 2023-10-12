@@ -14,4 +14,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_ORIGINAL_WORD = new Prefix("w/");
     public static final Prefix PREFIX_TRANSLATED_WORD = new Prefix("t/");
 
+
 }

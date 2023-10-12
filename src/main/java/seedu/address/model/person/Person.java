@@ -21,6 +21,8 @@ public class Person {
     private final Phone phone;
     private final Email email;
 
+    private final Remark remark;
+
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
@@ -28,11 +30,12 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Remark remark, Address address, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, remark, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.remark = remark;
         this.address = address;
         this.tags.addAll(tags);
     }
@@ -47,6 +50,10 @@ public class Person {
 
     public Email getEmail() {
         return email;
+    }
+
+    public Remark getRemark() {
+        return remark;
     }
 
     public Address getAddress() {
@@ -71,7 +78,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+          && otherPerson.getName().equals(getName());
     }
 
     /**
@@ -91,10 +98,11 @@ public class Person {
 
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+          && phone.equals(otherPerson.phone)
+          && email.equals(otherPerson.email)
+          && remark.equals(otherPerson.remark)
+          && address.equals(otherPerson.address)
+          && tags.equals(otherPerson.tags);
     }
 
     @Override
@@ -106,12 +114,13 @@ public class Person {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("name", name)
-                .add("phone", phone)
-                .add("email", email)
-                .add("address", address)
-                .add("tags", tags)
-                .toString();
+          .add("name", name)
+          .add("phone", phone)
+          .add("email", email)
+          .add("remark", remark)
+          .add("address", address)
+          .add("tags", tags)
+          .toString();
     }
 
 }
