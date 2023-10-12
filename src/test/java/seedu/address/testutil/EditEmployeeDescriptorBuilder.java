@@ -10,6 +10,7 @@ import seedu.address.model.employee.Email;
 import seedu.address.model.employee.Employee;
 import seedu.address.model.employee.Name;
 import seedu.address.model.employee.Phone;
+import seedu.address.model.employee.Position;
 
 /**
  * A utility class to help with building EditEmployeeDescriptor objects.
@@ -32,6 +33,7 @@ public class EditEmployeeDescriptorBuilder {
     public EditEmployeeDescriptorBuilder(Employee employee) {
         descriptor = new EditEmployeeDescriptor();
         descriptor.setName(employee.getName());
+        descriptor.setPosition(employee.getPosition());
         descriptor.setPhone(employee.getPhone());
         descriptor.setEmail(employee.getEmail());
         descriptor.setDepartments(employee.getDepartments());
@@ -42,6 +44,14 @@ public class EditEmployeeDescriptorBuilder {
      */
     public EditEmployeeDescriptorBuilder withName(String name) {
         descriptor.setName(new Name(name));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Position} of the {@code EditEmployeeDescriptor} that we are building.
+     */
+    public EditEmployeeDescriptorBuilder withPosition(String position) {
+        descriptor.setPosition(new Position(position));
         return this;
     }
 
