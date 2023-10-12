@@ -12,6 +12,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Telegram;
+import seedu.address.model.tag.Mod;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -38,8 +39,9 @@ public class EditPersonDescriptorBuilder {
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
         descriptor.setTelegram(person.getTelegram());
-        descriptor.setTags(person.getTags());
         descriptor.setFreeTime(person.getFreeTime());
+        descriptor.setTags(person.getTags().size() == 0 ? null : person.getTags());
+        descriptor.setMods(person.getMods().size() == 0 ? null : person.getMods());
     }
 
     /**
@@ -93,6 +95,16 @@ public class EditPersonDescriptorBuilder {
         } else {
             descriptor.setFreeTime(new FreeTime(LocalTime.parse(from), LocalTime.parse(to)));
         }
+        return this;
+    }
+
+    /**
+     * Parses the {@code mods} into a {@code Set<Mod>} and set it to the {@code EditPersonDescriptor}
+     * that we are building.
+     */
+    public EditPersonDescriptorBuilder withMods(String... mods) {
+        Set<Mod> modSet = Stream.of(mods).map(Mod::new).collect(Collectors.toSet());
+        descriptor.setMods(modSet);
         return this;
     }
 

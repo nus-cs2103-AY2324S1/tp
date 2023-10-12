@@ -17,11 +17,13 @@ public class PersonCard extends UiPart<Region> {
     private static final String FXML = "PersonListCard.fxml";
 
     /**
-     * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
+     * Note: Certain keywords such as "location" and "resources" are reserved
+     * keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
      * or an exception will be thrown by JavaFX during runtime.
      *
-     * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
+     * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The
+     *      issue on AddressBook level 4</a>
      */
 
     public final Person person;
@@ -44,7 +46,8 @@ public class PersonCard extends UiPart<Region> {
     private Label freeTime;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code PersonCode} with the given {@code Person} and index to
+     * display.
      */
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
@@ -58,5 +61,12 @@ public class PersonCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         freeTime.setText(person.getFreeTime().toString());
+        person.getMods().stream()
+                .sorted(Comparator.comparing(mod -> mod.tagName))
+                .forEach(mod -> {
+                    Label label = new Label(mod.tagName);
+                    label.setStyle("-fx-background-color: #FF8C00");
+                    tags.getChildren().add(label);
+                });
     }
 }

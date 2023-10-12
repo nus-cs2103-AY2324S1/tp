@@ -17,6 +17,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Telegram;
+import seedu.address.model.tag.Mod;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -34,14 +35,17 @@ class JsonAdaptedPerson {
     private final String from;
     private final String to;
 
+    private final List<JsonAdaptedMod> mods = new ArrayList<>();
+
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                             @JsonProperty("email") String email, @JsonProperty("telegram") String telegram,
-                             @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("from") String from,
-                             @JsonProperty("to") String to) {
+            @JsonProperty("email") String email, @JsonProperty("telegram") String telegram,
+            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("from") String from,
+            @JsonProperty("to") String to,
+            @JsonProperty("mods") List<JsonAdaptedMod> mods) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -51,6 +55,9 @@ class JsonAdaptedPerson {
         }
         this.from = from;
         this.to = to;
+        if (mods != null) {
+            this.mods.addAll(mods);
+        }
     }
 
     /**
@@ -66,17 +73,27 @@ class JsonAdaptedPerson {
                 .collect(Collectors.toList()));
         from = source.getFreeTime().getFrom();
         to = source.getFreeTime().getTo();
+        mods.addAll(source.getMods().stream()
+                .map(JsonAdaptedMod::new)
+                .collect(Collectors.toList()));
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
+     * Converts this Jackson-friendly adapted person object into the model's
+     * {@code Person} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws IllegalValueException if there were any data constraints violated in
+     *                               the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
+        }
+
+        final List<Mod> personMods = new ArrayList<>();
+        for (JsonAdaptedMod mod : mods) {
+            personMods.add(mod.toModelType());
         }
 
         if (name == null) {
@@ -125,7 +142,8 @@ class JsonAdaptedPerson {
             }
         }
 
-        return new Person(modelName, modelPhone, modelEmail, modelTelegram, modelTags, modelFreeTime);
+        final Set<Mod> modelMods = new HashSet<>(personMods);
+        return new Person(modelName, modelPhone, modelEmail, modelTelegram, modelTags, modelFreeTime, modelMods);
     }
 
 }

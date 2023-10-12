@@ -16,6 +16,7 @@ import seedu.address.model.person.FreeTime;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Telegram;
+import seedu.address.model.tag.Mod;
 import seedu.address.model.tag.Tag;
 
 
@@ -140,5 +141,31 @@ public class ParserUtil {
             throw new ParseException(FreeTime.MESSAGE_CONSTRAINTS);
         }
         return new FreeTime(start, end);
+    }
+
+    /**
+     * Parses a {@code String mod} into a {@code Mod}.
+     */
+    public static Mod parseMod(String mod) throws ParseException {
+        requireNonNull(mod);
+        String trimmedMod = mod.trim();
+        if (!Mod.isValidModName(trimmedMod)) {
+            throw new ParseException(Mod.MESSAGE_CONSTRAINTS);
+        }
+        return new Mod(trimmedMod);
+    }
+
+    /**
+     * Parses a {@code String mod} into a {@code Mod}.
+     *
+     * @throws ParseException if the given {@code mod} is invalid.
+     */
+    public static Set<Mod> parseMods(Collection<String> mods) throws ParseException {
+        requireNonNull(mods);
+        final Set<Mod> modSet = new HashSet<>();
+        for (String modName : mods) {
+            modSet.add(parseMod(modName));
+        }
+        return modSet;
     }
 }

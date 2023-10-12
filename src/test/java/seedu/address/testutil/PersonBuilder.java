@@ -10,6 +10,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Telegram;
+import seedu.address.model.tag.Mod;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -22,13 +23,13 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_TELEGRAM = "@amybee";
-
     private Name name;
     private Phone phone;
     private Email email;
     private Telegram telegram;
     private Set<Tag> tags;
     private FreeTime freeTime;
+    private Set<Mod> mods;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -40,6 +41,7 @@ public class PersonBuilder {
         telegram = new Telegram(DEFAULT_TELEGRAM);
         tags = new HashSet<>();
         freeTime = FreeTime.EMPTY_FREE_TIME;
+        mods = new HashSet<>();
     }
 
     /**
@@ -52,6 +54,7 @@ public class PersonBuilder {
         telegram = personToCopy.getTelegram();
         tags = new HashSet<>(personToCopy.getTags());
         freeTime = personToCopy.getFreeTime();
+        mods = new HashSet<>(personToCopy.getMods());
     }
 
     /**
@@ -67,6 +70,14 @@ public class PersonBuilder {
      */
     public PersonBuilder withTags(String... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
+    /**
+     * Parses the {@code mods} into a {@code Set<Mod>} and set it to the {@code Person} that we are building.
+     */
+    public PersonBuilder withMods(String ... mods) {
+        this.mods = SampleDataUtil.getModSet(mods);
         return this;
     }
 
@@ -107,7 +118,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, telegram, tags, freeTime);
+        return new Person(name, phone, email, telegram, tags, freeTime, mods);
     }
 
 }

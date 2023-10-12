@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MOD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -29,6 +30,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Telegram;
+import seedu.address.model.tag.Mod;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -38,8 +40,9 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the teaching assistant "
+            + "identified "
+            + "by the index number used in the displayed teaching assistant list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
@@ -48,14 +51,15 @@ public class EditCommand extends Command {
             + "[" + PREFIX_TELEGRAM + "TELEGRAM] "
             + "[" + PREFIX_FROM + "FROM "
             + PREFIX_TO + "TO] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TAG + "TAG] "
+            + "[" + PREFIX_MOD + "MOD]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Teaching Assistant: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This teaching assistant already exists in the address book.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -106,8 +110,10 @@ public class EditCommand extends Command {
         Telegram updatedTelegram = editPersonDescriptor.getTelegram().orElse(personToEdit.getTelegram());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         FreeTime updatedFreeTime = editPersonDescriptor.getFreeTime().orElse(personToEdit.getFreeTime());
+        Set<Mod> updatedMods = editPersonDescriptor.getMods().orElse(personToEdit.getMods());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedTelegram, updatedTags, updatedFreeTime);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedTelegram, updatedTags, updatedFreeTime,
+                updatedMods);
     }
 
     @Override
@@ -135,7 +141,8 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
+     * Stores the details to edit the person with. Each non-empty field value will
+     * replace the
      * corresponding field value of the person.
      */
     public static class EditPersonDescriptor {
@@ -144,8 +151,8 @@ public class EditCommand extends Command {
         private Email email;
         private Telegram telegram;
         private Set<Tag> tags;
-
         private FreeTime freeTime;
+        private Set<Mod> mods;
 
         public EditPersonDescriptor() {
         }
@@ -161,13 +168,14 @@ public class EditCommand extends Command {
             setTelegram(toCopy.telegram);
             setTags(toCopy.tags);
             setFreeTime(toCopy.freeTime);
+            setMods(toCopy.mods);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, telegram, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, telegram, tags, mods);
         }
 
         public void setName(Name name) {
@@ -211,7 +219,8 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * Returns an unmodifiable tag set, which throws
+         * {@code UnsupportedOperationException}
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code tags} is null.
          */
@@ -227,6 +236,24 @@ public class EditCommand extends Command {
 
         public Optional<FreeTime> getFreeTime() {
             return Optional.ofNullable(freeTime);
+        }
+
+        /**
+         * Sets {@code mods} to this object's {@code mods}.
+         * A defensive copy of {@code mods} is used internally.
+         */
+        public void setMods(Set<Mod> mods) {
+            this.mods = (mods != null) ? new HashSet<>(mods) : null;
+        }
+
+        /**
+         * Returns an unmodifiable mod set, which throws
+         * {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code mods} is null.
+         */
+        public Optional<Set<Mod>> getMods() {
+            return (mods != null) ? Optional.of(Collections.unmodifiableSet(mods)) : Optional.empty();
         }
 
         @Override
@@ -246,7 +273,8 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(telegram, otherEditPersonDescriptor.telegram)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags)
-                    && Objects.equals(freeTime, otherEditPersonDescriptor.freeTime);
+                    && Objects.equals(freeTime, otherEditPersonDescriptor.freeTime)
+                    && Objects.equals(mods, otherEditPersonDescriptor.mods);
         }
 
         @Override
@@ -258,6 +286,7 @@ public class EditCommand extends Command {
                     .add("telegram", telegram)
                     .add("tags", tags)
                     .add("free time", freeTime)
+                    .add("mods", mods)
                     .toString();
         }
     }

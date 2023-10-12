@@ -47,6 +47,8 @@ public class Messages {
                 .append(person.getFreeTime())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
+        builder.append("; Mods: ");
+        person.getMods().forEach(builder::append);
         return builder.toString();
     }
 
