@@ -11,38 +11,38 @@ import seedu.address.model.department.Department;
  */
 class JsonAdaptedDepartment {
 
-    private final String tagName;
+    private final String departmentName;
 
     /**
-     * Constructs a {@code JsonAdaptedTag} with the given {@code tagName}.
+     * Constructs a {@code JsonAdaptedDepartment} with the given {@code departmentName}.
      */
     @JsonCreator
-    public JsonAdaptedDepartment(String tagName) {
-        this.tagName = tagName;
+    public JsonAdaptedDepartment(String departmentName) {
+        this.departmentName = departmentName;
     }
 
     /**
-     * Converts a given {@code Tag} into this class for Jackson use.
+     * Converts a given {@code Department} into this class for Jackson use.
      */
     public JsonAdaptedDepartment(Department source) {
-        tagName = source.departmentName;
+        departmentName = source.departmentName;
     }
 
     @JsonValue
-    public String getTagName() {
-        return tagName;
+    public String getDepartmentName() {
+        return departmentName;
     }
 
     /**
-     * Converts this Jackson-friendly adapted tag object into the model's {@code Tag} object.
+     * Converts this Jackson-friendly adapted department object into the model's {@code Department} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted department.
      */
     public Department toModelType() throws IllegalValueException {
-        if (!Department.isValidDepartmentName(tagName)) {
+        if (!Department.isValidDepartmentName(departmentName)) {
             throw new IllegalValueException(Department.MESSAGE_CONSTRAINTS);
         }
-        return new Department(tagName);
+        return new Department(departmentName);
     }
 
 }

@@ -97,9 +97,9 @@ public class EditCommand extends Command {
         assert employeeToEdit != null;
 
         Name updatedName = editEmployeeDescriptor.getName().orElse(employeeToEdit.getName());
+        Position updatedPosition = editEmployeeDescriptor.getPosition().orElse(employeeToEdit.getPosition());
         Phone updatedPhone = editEmployeeDescriptor.getPhone().orElse(employeeToEdit.getPhone());
         Email updatedEmail = editEmployeeDescriptor.getEmail().orElse(employeeToEdit.getEmail());
-        Position updatedPosition = editEmployeeDescriptor.getPosition().orElse(employeeToEdit.getPosition());
         Set<Department> updatedDepartments = editEmployeeDescriptor.getDepartments()
                 .orElse(employeeToEdit.getDepartments());
 
@@ -225,6 +225,7 @@ public class EditCommand extends Command {
 
             EditEmployeeDescriptor otherEditEmployeeDescriptor = (EditEmployeeDescriptor) other;
             return Objects.equals(name, otherEditEmployeeDescriptor.name)
+                    && Objects.equals(position, otherEditEmployeeDescriptor.position)
                     && Objects.equals(phone, otherEditEmployeeDescriptor.phone)
                     && Objects.equals(email, otherEditEmployeeDescriptor.email)
                     && Objects.equals(departments, otherEditEmployeeDescriptor.departments);
@@ -234,6 +235,7 @@ public class EditCommand extends Command {
         public String toString() {
             return new ToStringBuilder(this)
                     .add("name", name)
+                    .add("position", position)
                     .add("phone", phone)
                     .add("email", email)
                     .add("departments", departments)
