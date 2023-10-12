@@ -45,6 +45,19 @@ public class Person {
         this.tags.addAll(tags);
     }
 
+    // Original Constructor for Person for current test folder
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        // set new fields to null
+        this.nric = null;
+        this.appointment = null;
+    }
+
     public Name getName() {
         return name;
     }
