@@ -18,6 +18,9 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
     private final Optional<String> studentNumber;
     private final Optional<String> tag;
 
+    /**
+     * Constructs a {@code PersonContainsKeywordsPredicate} with the given keywords.
+     */
     public PersonContainsKeywordsPredicate(String classNumber, String email, String name,
                                            String phone, String studentNumber, String tag) {
         this.classNumber = Optional.ofNullable(classNumber);

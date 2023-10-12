@@ -8,8 +8,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTNUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.List;
-import java.util.Optional;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.LookupCommand;
@@ -22,8 +20,8 @@ import seedu.address.model.person.PersonContainsKeywordsPredicate;
 public class LookupCommandParser implements Parser<LookupCommand> {
 
     private static final Prefix[] prefixList = new Prefix[] {PREFIX_CLASSNUMBER,
-            PREFIX_EMAIL, PREFIX_NAME, PREFIX_PHONE,
-            PREFIX_STUDENTNUMBER, PREFIX_TAG};
+        PREFIX_EMAIL, PREFIX_NAME, PREFIX_PHONE,
+        PREFIX_STUDENTNUMBER, PREFIX_TAG};
 
     /**
      * Parses the given {@code String} of arguments in the context of the LookupCommand
