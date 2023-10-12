@@ -7,20 +7,21 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 
 /**
- * Represents a Person's car insurance policy issue / expiry date in the address book.
+ * Represents a car insurance policy issue / expiry date in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidPolicyDate(String)}
  */
 public class PolicyDate {
 
-    public static final String MESSAGE_CONSTRAINTS
-            = "Policy issue / expiry date should be in the format dd-mm-yyyy";
+    public static final String MESSAGE_CONSTRAINTS = "Policy issue / expiry date should be in the format dd-mm-yyyy";
 
     /*
      * Should be in the format dd-mm-yyyy, checked with SimpleDateFormat
      */
     public static final String VALIDATION_DATE_FORMAT = "dd-MM-yyyy";
+    public static final String DEFAULT_VALUE = "01-01-1000";
 
     public final LocalDate date;
 
@@ -32,7 +33,7 @@ public class PolicyDate {
     public PolicyDate(String policyDate) {
         requireNonNull(policyDate);
         checkArgument(isValidPolicyDate(policyDate), MESSAGE_CONSTRAINTS);
-        date = LocalDate.parse(policyDate);
+        date = LocalDate.parse(policyDate, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
     }
 
     /**
@@ -50,7 +51,7 @@ public class PolicyDate {
 
     @Override
     public String toString() {
-        return date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
     }
 
     @Override

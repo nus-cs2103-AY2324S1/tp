@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's car insurance policy number in the address book.
+ * Represents a car insurance policy number in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidPolicyNumber(String)}
  */
 public class PolicyNumber {
@@ -16,6 +16,7 @@ public class PolicyNumber {
      * Should be an alphanumeric string with 1-8 characters
      */
     public static final String VALIDATION_REGEX = "^[a-zA-Z0-9]{1,8}$";
+    public static final String DEFAULT_VALUE = "NOPOLICY";
 
     public final String value;
 

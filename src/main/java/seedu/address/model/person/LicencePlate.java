@@ -19,7 +19,7 @@ public class LicencePlate {
     /*
      * Should be an alphanumeric string satisfying the above constraints
      */
-    public static final String VALIDATION_REGEX = "^S[^IO][A-Z]{2}\\d{1,4}[A-EGHJKLMPRSTUXYZ]$";
+    public static final String VALIDATION_REGEX = "^S[^IO]{2}\\d{1,4}[A-EGHJKLMPRSTUXYZ]$";
 
     public final String value;
 

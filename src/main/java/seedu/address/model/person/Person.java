@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.policy.Policy;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -24,17 +25,25 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final NRIC nric;
+    private final LicencePlate licencePlate;
+    private final Policy policy;
 
     /**
      * Every field must be present and not null.
+     * In the case of leads with null policy fields, default values will be put in place by the respective classes.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, NRIC nric,
+                  LicencePlate licencePlate, Policy policy) {
+        requireAllNonNull(name, phone, email, nric, licencePlate, address, tags, policy);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.nric = nric;
+        this.licencePlate = licencePlate;
+        this.policy = policy;
     }
 
     public Name getName() {
@@ -59,6 +68,18 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public NRIC getNric() {
+        return nric;
+    }
+
+    public LicencePlate getLicencePlate() {
+        return licencePlate;
+    }
+
+    public Policy getPolicy() {
+        return policy;
     }
 
     /**
@@ -94,13 +115,16 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && nric.equals(otherPerson.nric)
+                && licencePlate.equals(otherPerson.licencePlate)
+                && policy.equals(otherPerson.policy);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, nric, licencePlate, policy);
     }
 
     @Override
@@ -111,6 +135,9 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
+                .add("nric", nric)
+                .add("licence plate", licencePlate)
+                .add("policy", policy)
                 .toString();
     }
 
