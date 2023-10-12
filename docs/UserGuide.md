@@ -18,9 +18,9 @@ Table of Contents
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `<ManageHR.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `ManageHR.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your app.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar ManageHR.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
