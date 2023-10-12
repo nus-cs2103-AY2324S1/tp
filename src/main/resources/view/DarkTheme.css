@@ -350,3 +350,31 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+#instruments {
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+}
+
+#instruments .label {
+    -fx-text-fill: white;
+    -fx-background-color: #43A944;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
+}
+
+#genres {
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+}
+
+#genres .label {
+    -fx-text-fill: white;
+    -fx-background-color: #C8890D;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
+}

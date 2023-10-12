@@ -29,6 +29,8 @@ class JsonAdaptedMusician {
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final List<JsonAdaptedTag> instruments = new ArrayList<>();
+    private final List<JsonAdaptedTag> genres = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedMusician} with the given musician details.
@@ -36,13 +38,21 @@ class JsonAdaptedMusician {
     @JsonCreator
     public JsonAdaptedMusician(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                                @JsonProperty("email") String email, @JsonProperty("address") String address,
-                               @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                               @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                               @JsonProperty("instruments") List<JsonAdaptedTag> instruments,
+                               @JsonProperty("genres") List<JsonAdaptedTag> genres) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         if (tags != null) {
             this.tags.addAll(tags);
+        }
+        if (instruments != null) {
+            this.instruments.addAll(instruments);
+        }
+        if (genres != null) {
+            this.genres.addAll(genres);
         }
     }
 
@@ -57,6 +67,12 @@ class JsonAdaptedMusician {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        instruments.addAll(source.getInstruments().stream()
+                .map(JsonAdaptedTag::new)
+                .collect(Collectors.toList()));
+        genres.addAll(source.getGenres().stream()
+                .map(JsonAdaptedTag::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -65,9 +81,18 @@ class JsonAdaptedMusician {
      * @throws IllegalValueException if there were any data constraints violated in the adapted musician.
      */
     public Musician toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
+        final List<Tag> musicianTags = new ArrayList<>();
+        final List<Tag> musicianInstruments = new ArrayList<>();
+        final List<Tag> musicianGenres = new ArrayList<>();
+
         for (JsonAdaptedTag tag : tags) {
-            personTags.add(tag.toModelType());
+            musicianTags.add(tag.toModelType());
+        }
+        for (JsonAdaptedTag instrument : instruments) {
+            musicianInstruments.add(instrument.toModelType());
+        }
+        for (JsonAdaptedTag genre : genres) {
+            musicianGenres.add(genre.toModelType());
         }
 
         if (name == null) {
@@ -102,8 +127,10 @@ class JsonAdaptedMusician {
         }
         final Address modelAddress = new Address(address);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Musician(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        final Set<Tag> modelTags = new HashSet<>(musicianTags);
+        final Set<Tag> modelInstruments = new HashSet<>(musicianInstruments);
+        final Set<Tag> modelGenres = new HashSet<>(musicianGenres);
+        return new Musician(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelInstruments, modelGenres);
     }
 
 }

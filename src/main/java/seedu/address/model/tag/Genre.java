@@ -7,9 +7,9 @@ import java.util.HashSet;
 
 /**
  * Represents a Genre Tag in the address book.
- * Guarantees: immutable; name is valid as declared in {@link #isValidGenreTagName(String)}
+ * Guarantees: immutable; name is valid as declared in {@link #isValidGenreName(String)}
  */
-public class GenreTag extends Tag {
+public class Genre extends Tag {
 
     public static final String MESSAGE_CONSTRAINTS = "Genre tags names should be a valid genre name";
     public static final HashSet<String> VALID_GENRES = new HashSet<String>(Arrays.asList(
@@ -21,15 +21,15 @@ public class GenreTag extends Tag {
      *
      * @param tagName A valid genre tag name.
      */
-    public GenreTag(String tagName) {
+    public Genre(String tagName) {
         super(tagName);
-        checkArgument(isValidGenreTagName(tagName), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidGenreName(tagName), MESSAGE_CONSTRAINTS);
     }
 
     /**
      * Returns true if a given string is a valid genre tag name.
      */
-    public static boolean isValidGenreTagName(String test) {
+    public static boolean isValidGenreName(String test) {
         return VALID_GENRES.contains(test);
     }
 }

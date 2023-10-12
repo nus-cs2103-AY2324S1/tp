@@ -24,17 +24,22 @@ public class Musician {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final Set<Tag> instruments = new HashSet<>();
+    private final Set<Tag> genres = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Musician(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Musician(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Set<Tag> instrumentTags,
+                    Set<Tag> genreTags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.instruments.addAll(instrumentTags);
+        this.genres.addAll(genreTags);
     }
 
     public Name getName() {
@@ -59,6 +64,14 @@ public class Musician {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public Set<Tag> getInstruments() {
+        return Collections.unmodifiableSet(instruments);
+    }
+
+    public Set<Tag> getGenres() {
+        return Collections.unmodifiableSet(genres);
     }
 
     /**
@@ -94,13 +107,15 @@ public class Musician {
                 && phone.equals(otherMusician.phone)
                 && email.equals(otherMusician.email)
                 && address.equals(otherMusician.address)
-                && tags.equals(otherMusician.tags);
+                && tags.equals(otherMusician.tags)
+                && instruments.equals(otherMusician.instruments)
+                && genres.equals(otherMusician.genres);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, instruments, genres);
     }
 
     @Override
@@ -111,6 +126,8 @@ public class Musician {
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
+                .add("instrumentTags", instruments)
+                .add("genreTags", genres)
                 .toString();
     }
 
