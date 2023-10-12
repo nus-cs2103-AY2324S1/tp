@@ -1,5 +1,7 @@
 package seedu.address.model.util;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Set;
@@ -26,7 +28,11 @@ public class SampleDataUtil {
         sampleNotes.add(new Note("Hello", "Sample body"));
 
         ArrayList<Event> sampleEvents = new ArrayList<Event>();
-        sampleEvents.add(new Event("Sample event", null, null));
+        sampleEvents.add(new Event("Sample event", LocalDateTime.now()
+                .format(DateTimeFormatter.ofPattern("HH:mm:ss")),
+                LocalDateTime.now().plusHours(1)
+                        .format(DateTimeFormatter.ofPattern("HH:mm:ss")), "Some Location",
+                "Some Information"));
 
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
@@ -46,6 +52,9 @@ public class SampleDataUtil {
                     getTagSet("classmates"), sampleNotes, sampleEvents),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                     new Address("Blk 45 Aljunied Street 85, #11-31"),
+                    getTagSet("colleagues"), sampleNotes, sampleEvents),
+            new Person(new Name("Professor XXX"), new Phone("11111111"), new Email("123@example.com"),
+                    new Address("Example Addres"),
                     getTagSet("colleagues"), sampleNotes, sampleEvents)
         };
     }

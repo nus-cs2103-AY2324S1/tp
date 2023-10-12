@@ -84,4 +84,16 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Find a person by index.
+     * If the index is invalid, returns null.
+     */
+    Person findPersonByIndex(int index);
+
+    /**
+     * Find a person by the user-friendly ID displayed in the person card on the UI.
+     * If the ID is invalid, returns null.
+     */
+    Person findPersonByUserFriendlyId(int id);
 }

@@ -14,4 +14,10 @@ public interface ReadOnlyAddressBook {
      */
     ObservableList<Person> getPersonList();
 
+    /**
+     * Convert the event list to a human-readable string
+     * @return The event list as string
+     */
+    String eventListToString();
+
 }

@@ -4,9 +4,13 @@ import java.util.Comparator;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 
 /**
@@ -40,9 +44,11 @@ public class PersonCard extends UiPart<Region> {
     private Label email;
     @FXML
     private FlowPane tags;
+    @FXML
+    private ListView<Event> events;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code PersonCard} with the given {@code Person} and index to display.
      */
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
@@ -55,5 +61,21 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        events.setItems(person.getEvents());
+        events.setCellFactory(cell -> new EventCell());
+    }
+
+    private class EventCell extends ListCell<Event> {
+        @Override
+        protected void updateItem(Event event, boolean empty) {
+            super.updateItem(event, empty);
+            if (empty || event == null) {
+                setGraphic(null);
+                setText(null);
+            } else {
+                setText((getIndex() + 1) + ". " + event.getUiText());
+                setTextFill(Color.WHITE);
+            }
+        }
     }
 }

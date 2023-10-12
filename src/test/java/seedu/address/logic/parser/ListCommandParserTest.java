@@ -1,26 +1,25 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.ThrowingSupplier;
 
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.DeleteEventCommand;
+import seedu.address.logic.commands.ListEventCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-public class DeleteCommandParserTest {
+public class ListCommandParserTest {
 
-    private DeleteCommandParser parser = new DeleteCommandParser();
+    private ListCommandParser parser = new ListCommandParser();
 
 
     @Test
     public void execute_correctCommand_success() throws CommandException {
         assertParseSuccessWithCommand(() -> parser.parse(" "
-                + DeleteEventCommand.SECONDARY_COMMAND_WORD + " -id 1 -eid 1"), DeleteEventCommand.class.getName());
+                + ListEventCommand.SECONDARY_COMMAND_WORD), ListEventCommand.class.getName());
     }
 
     @Test
@@ -29,12 +28,6 @@ public class DeleteCommandParserTest {
                 + " unknown_command 1 2 3"), MESSAGE_UNKNOWN_COMMAND);
     }
 
-    @Test
-    public void execute_commandFormatError_fails() throws CommandException {
-        assertParseFailedWithError(() -> parser.parse(" "
-                + DeleteEventCommand.SECONDARY_COMMAND_WORD + " -...."),
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteEventCommand.MESSAGE_USAGE));
-    }
 
     private void assertParseSuccessWithCommand(ThrowingSupplier<Command> function, String commandClassName) {
         try {
