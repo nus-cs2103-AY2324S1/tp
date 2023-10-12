@@ -13,7 +13,7 @@ import seedu.address.model.person.Person;
  */
 public class EventFactory {
     /**
-     * Create events from current model state.
+     * Creates events from current model state.
      * @param model {@code Model} representing current state of program.
      * @return
      */
