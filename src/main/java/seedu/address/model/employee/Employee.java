@@ -18,6 +18,7 @@ public class Employee {
 
     // Identity fields
     private final Name name;
+    private final Position position;
     private final Phone phone;
     private final Email email;
 
@@ -27,9 +28,10 @@ public class Employee {
     /**
      * Every field must be present and not null.
      */
-    public Employee(Name name, Phone phone, Email email, Set<Department> departments) {
+    public Employee(Name name, Position position, Phone phone, Email email, Set<Department> departments) {
         requireAllNonNull(name, phone, email, departments);
         this.name = name;
+        this.position = position;
         this.phone = phone;
         this.email = email;
         this.departments.addAll(departments);
@@ -39,6 +41,10 @@ public class Employee {
         return name;
     }
 
+    public Position getPosition() {
+        return position;
+    }
+
     public Phone getPhone() {
         return phone;
     }
@@ -46,6 +52,7 @@ public class Employee {
     public Email getEmail() {
         return email;
     }
+
 
     /**
      * Returns an immutable department set, which throws {@code UnsupportedOperationException}

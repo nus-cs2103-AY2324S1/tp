@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DEPARTMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EMPLOYEES;
 
 import java.util.Collections;
@@ -25,6 +26,7 @@ import seedu.address.model.employee.Email;
 import seedu.address.model.employee.Employee;
 import seedu.address.model.employee.Name;
 import seedu.address.model.employee.Phone;
+import seedu.address.model.employee.Position;
 
 /**
  * Edits the details of an existing employee in the address book.
@@ -38,6 +40,7 @@ public class EditCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_POSITION + "POSITION] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_DEPARTMENT + "DEPARTMENT]...\n"
@@ -94,12 +97,13 @@ public class EditCommand extends Command {
         assert employeeToEdit != null;
 
         Name updatedName = editEmployeeDescriptor.getName().orElse(employeeToEdit.getName());
+        Position updatedPosition = editEmployeeDescriptor.getPosition().orElse(employeeToEdit.getPosition());
         Phone updatedPhone = editEmployeeDescriptor.getPhone().orElse(employeeToEdit.getPhone());
         Email updatedEmail = editEmployeeDescriptor.getEmail().orElse(employeeToEdit.getEmail());
         Set<Department> updatedDepartments = editEmployeeDescriptor.getDepartments()
                 .orElse(employeeToEdit.getDepartments());
 
-        return new Employee(updatedName, updatedPhone, updatedEmail, updatedDepartments);
+        return new Employee(updatedName, updatedPosition, updatedPhone, updatedEmail, updatedDepartments);
     }
 
     @Override
@@ -132,6 +136,7 @@ public class EditCommand extends Command {
      */
     public static class EditEmployeeDescriptor {
         private Name name;
+        private Position position;
         private Phone phone;
         private Email email;
         private Set<Department> departments;
@@ -144,6 +149,7 @@ public class EditCommand extends Command {
          */
         public EditEmployeeDescriptor(EditEmployeeDescriptor toCopy) {
             setName(toCopy.name);
+            setPosition(toCopy.position);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setDepartments(toCopy.departments);
@@ -180,6 +186,15 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
+        public void setPosition(Position position) {
+            this.position = position;
+        }
+
+        public Optional<Position> getPosition() {
+            return Optional.ofNullable(position);
+        }
+
+
         /**
          * Sets {@code departments} to this object's {@code departments}.
          * A defensive copy of {@code departments} is used internally.
@@ -210,6 +225,7 @@ public class EditCommand extends Command {
 
             EditEmployeeDescriptor otherEditEmployeeDescriptor = (EditEmployeeDescriptor) other;
             return Objects.equals(name, otherEditEmployeeDescriptor.name)
+                    && Objects.equals(position, otherEditEmployeeDescriptor.position)
                     && Objects.equals(phone, otherEditEmployeeDescriptor.phone)
                     && Objects.equals(email, otherEditEmployeeDescriptor.email)
                     && Objects.equals(departments, otherEditEmployeeDescriptor.departments);
@@ -219,6 +235,7 @@ public class EditCommand extends Command {
         public String toString() {
             return new ToStringBuilder(this)
                     .add("name", name)
+                    .add("position", position)
                     .add("phone", phone)
                     .add("email", email)
                     .add("departments", departments)

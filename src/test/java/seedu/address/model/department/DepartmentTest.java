@@ -12,14 +12,14 @@ public class DepartmentTest {
     }
 
     @Test
-    public void constructor_invalidTagName_throwsIllegalArgumentException() {
-        String invalidTagName = "";
-        assertThrows(IllegalArgumentException.class, () -> new Department(invalidTagName));
+    public void constructor_invalidDepartmentName_throwsIllegalArgumentException() {
+        String invalidDepartmentName = "";
+        assertThrows(IllegalArgumentException.class, () -> new Department(invalidDepartmentName));
     }
 
     @Test
-    public void isValidTagName() {
-        // null tag name
+    public void isValidDepartmentName() {
+        // null department name
         assertThrows(NullPointerException.class, () -> Department.isValidDepartmentName(null));
     }
 

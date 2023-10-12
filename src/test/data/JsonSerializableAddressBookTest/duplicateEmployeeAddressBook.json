@@ -1,12 +1,19 @@
 {
-  "employees": [ {
-    "name": "Alice Pauline",
-    "phone": "94351253",
-    "email": "alice@example.com",
-    "departments": [ "friends" ]
-  }, {
-    "name": "Alice Pauline",
-    "phone": "94351253",
-    "email": "pauline@example.com"
-  } ]
+  "employees": [
+    {
+      "name": "Alice Pauline",
+      "position": "CEO",
+      "phone": "94351253",
+      "email": "alice@example.com",
+      "departments": [
+        "friends"
+      ]
+    },
+    {
+      "name": "Alice Pauline",
+      "position": "CEO",
+      "phone": "94351253",
+      "email": "pauline@example.com"
+    }
+  ]
 }

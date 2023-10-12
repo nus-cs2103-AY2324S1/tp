@@ -1,7 +1,10 @@
 {
-  "employees": [ {
-    "name": "Hans Muster",
-    "phone": "9482424",
-    "email": "invalid@email!3e"
-  } ]
+  "employees": [
+    {
+      "name": "Hans Muster",
+      "position": "CEO",
+      "phone": "9482424",
+      "email": "invalid@email!3e"
+    }
+  ]
 }

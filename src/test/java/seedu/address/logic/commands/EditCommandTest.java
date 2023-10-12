@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPARTMENT_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_POSITION_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showEmployeeAtIndex;
@@ -29,7 +30,8 @@ import seedu.address.testutil.EditEmployeeDescriptorBuilder;
 import seedu.address.testutil.EmployeeBuilder;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for
+ * EditCommand.
  */
 public class EditCommandTest {
 
@@ -56,10 +58,12 @@ public class EditCommandTest {
         Employee lastEmployee = model.getFilteredEmployeeList().get(indexLastEmployee.getZeroBased());
 
         EmployeeBuilder employeeInlist = new EmployeeBuilder(lastEmployee);
-        Employee editedEmployee = employeeInlist.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+        Employee editedEmployee = employeeInlist.withName(VALID_NAME_BOB).withPosition(VALID_POSITION_BOB)
+                .withPhone(VALID_PHONE_BOB)
                 .withDepartments(VALID_DEPARTMENT_HUSBAND).build();
 
         EditEmployeeDescriptor descriptor = new EditEmployeeDescriptorBuilder().withName(VALID_NAME_BOB)
+                .withPosition(VALID_POSITION_BOB)
                 .withPhone(VALID_PHONE_BOB).withDepartments(VALID_DEPARTMENT_HUSBAND).build();
         EditCommand editCommand = new EditCommand(indexLastEmployee, descriptor);
 

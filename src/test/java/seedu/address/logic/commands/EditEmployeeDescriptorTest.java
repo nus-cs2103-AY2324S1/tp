@@ -56,7 +56,8 @@ public class EditEmployeeDescriptorTest {
     public void toStringMethod() {
         EditEmployeeDescriptor editEmployeeDescriptor = new EditEmployeeDescriptor();
         String expected = EditEmployeeDescriptor.class.getCanonicalName() + "{name="
-                + editEmployeeDescriptor.getName().orElse(null) + ", phone="
+                + editEmployeeDescriptor.getName().orElse(null) + ", position="
+                + editEmployeeDescriptor.getPosition().orElse(null) + ", phone="
                 + editEmployeeDescriptor.getPhone().orElse(null) + ", email="
                 + editEmployeeDescriptor.getEmail().orElse(null) + ", departments="
                 + editEmployeeDescriptor.getDepartments().orElse(null) + "}";
