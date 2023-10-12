@@ -1,8 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PATIENTS;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SPECIALISTS;
 
 import seedu.address.model.Model;
 import seedu.address.model.person.PersonType;
@@ -31,13 +29,10 @@ public class ListCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        if (personType == PersonType.PATIENT) {
-            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PATIENTS);
-            return new CommandResult(PATIENT_MESSAGE_SUCCESS);
-        } else {
-            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_SPECIALISTS);
-            return new CommandResult(SPECIALIST_MESSAGE_SUCCESS);
-        }
+        model.updateFilteredPersonList(personType.getSearchPredicate());
+        return new CommandResult(personType == PersonType.PATIENT
+                ? PATIENT_MESSAGE_SUCCESS
+                : SPECIALIST_MESSAGE_SUCCESS);
 
     }
 }

@@ -11,8 +11,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonType;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -35,7 +35,9 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PATIENTS);
+
+        // DoConnek Pro shows all patients on startup by default.
+        updateFilteredPersonList(PersonType.PATIENT.getSearchPredicate());
     }
 
     public ModelManager() {
