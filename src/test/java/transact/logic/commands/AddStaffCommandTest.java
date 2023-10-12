@@ -150,6 +150,26 @@ public class AddStaffCommandTest {
         }
 
         @Override
+        public boolean hasTransaction(Transaction transaction) {
+            return false;
+        }
+
+        @Override
+        public void deleteTransaction(Transaction transaction) {
+
+        }
+
+        @Override
+        public void addTransaction(Transaction transaction) {
+
+        }
+
+        @Override
+        public void setTransaction(Transaction target, Transaction editedTransaction) {
+
+        }
+
+        @Override
         public ObservableList<Person> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -169,7 +189,6 @@ public class AddStaffCommandTest {
             throw new AssertionError("This method should not be called.");
         }
     }
-
     /**
      * A Model stub that contains a single person.
      */

@@ -85,6 +85,33 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    /**
+     * Returns true if a transaction with the same details as {@code transaction} exists in
+     * the record book.
+     */
+    boolean hasTransaction(Transaction transaction);
+
+    /**
+     * Deletes the given transaction.
+     * The transaction must exist in the record book.
+     */
+    void deleteTransaction(Transaction transaction);
+
+    /**
+     * Adds the given transaction.
+     * {@code transaction} must not already exist in the record book.
+     */
+    void addTransaction(Transaction transaction);
+
+    /**
+     * Replaces the given transaction {@code target} with {@code editedTransaction}.
+     * {@code target} must exist in the record book.
+     * The person identity of {@code editedTransaction} must not be the same as another
+     * existing transaction in the record book.
+     */
+    void setTransaction(Transaction target, Transaction editedTransaction);
+
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 

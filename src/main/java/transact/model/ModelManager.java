@@ -37,17 +37,21 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+
         ObservableList<Transaction> tmpTransactions = FXCollections.observableArrayList();
-        filteredTransactions = new FilteredList<>(tmpTransactions);
 
         // Placeholder transaction objects (x5)
         /*tmpTransactions.add(new Transaction());
         tmpTransactions.add(new Transaction());
         tmpTransactions.add(new Transaction());
         tmpTransactions.add(new Transaction());
+        tmpTransactions.add(new Transaction());*/
+
         tmpTransactions.add(new Transaction());
-*/
-        // Set default view to staff on startup
+
+        filteredTransactions = new FilteredList<>(tmpTransactions);
+
+        // This line is required to pass test's, needs further debugging
         updateFilteredTransactionList(PREDICATE_HIDE_ALL_TRANSACTIONS);
     }
 
@@ -131,6 +135,25 @@ public class ModelManager implements Model {
     // =========== Filtered Person List Accessors
     // =============================================================
 
+    @Override
+    public boolean hasTransaction(Transaction transaction) {
+        return false;
+    }
+
+    @Override
+    public void deleteTransaction(Transaction transaction) {
+    }
+
+    @Override
+    public void addTransaction(Transaction transaction) {
+
+    }
+
+    public void setTransaction(Transaction transaction, Transaction editedTransaction) {
+        requireAllNonNull(transaction, editedTransaction);
+
+
+    }
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the
      * internal list of
@@ -147,9 +170,11 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
-    //=========== Filtered Transaction List Accessors ========================================================
+    // =========== Filtered Transaction List Accessors
+    // ========================================================
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Transaction} backed by the
+     * internal list of
      * {@code versionedAddressBook}
      */
     @Override

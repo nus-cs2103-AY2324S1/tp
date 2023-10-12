@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.application.Application;
+import javafx.application.HostServices;
 import javafx.stage.Stage;
 import transact.commons.core.Config;
 import transact.commons.core.LogsCenter;
@@ -39,6 +40,7 @@ public class MainApp extends Application {
     public static final Version VERSION = new Version(0, 2, 2, true);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
+    private static HostServices hostServices;
 
     protected Ui ui;
     protected Logic logic;
@@ -65,6 +67,8 @@ public class MainApp extends Application {
         logic = new LogicManager(model, storage);
 
         ui = new UiManager(logic);
+
+        hostServices = getHostServices();
     }
 
     /**
@@ -188,5 +192,9 @@ public class MainApp extends Application {
         } catch (IOException e) {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         }
+    }
+
+    public static HostServices getLocalHostServices() {
+        return hostServices;
     }
 }

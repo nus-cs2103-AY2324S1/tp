@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import transact.logic.parser.Prefix;
 import transact.model.person.Person;
+import transact.model.transaction.Transaction;
 
 /**
  * Container for user visible messages.
@@ -46,4 +47,11 @@ public class Messages {
         return builder.toString();
     }
 
+    /**
+     * Formats the {@code transaction} for display to the user.
+     */
+
+    public static String format(Transaction transaction) {
+        return "";
+    }
 }

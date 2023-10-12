@@ -13,6 +13,8 @@ public class CommandResult {
 
     private final String feedbackToUser;
 
+    private final int tabIndex;
+
     /** Help information should be shown to the user. */
     private final boolean showHelp;
 
@@ -22,10 +24,20 @@ public class CommandResult {
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, int tabIndex, boolean showHelp, boolean exit) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.tabIndex = tabIndex;
         this.showHelp = showHelp;
         this.exit = exit;
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
+     * ,switches to the specified {@code tabIndex}
+     * and other fields set to their default value.
+     */
+    public CommandResult(String feedbackToUser, int tabIndex) {
+        this(feedbackToUser, tabIndex, false, false);
     }
 
     /**
@@ -33,11 +45,15 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, 0, false, false);
     }
 
     public String getFeedbackToUser() {
         return feedbackToUser;
+    }
+
+    public int getTabIndex() {
+        return tabIndex;
     }
 
     public boolean isShowHelp() {
@@ -67,13 +83,14 @@ public class CommandResult {
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, tabIndex, showHelp, exit);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("feedbackToUser", feedbackToUser)
+                .add("tabIndex", tabIndex)
                 .add("showHelp", showHelp)
                 .add("exit", exit)
                 .toString();

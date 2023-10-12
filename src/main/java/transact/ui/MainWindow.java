@@ -5,11 +5,14 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import transact.MainApp;
 import transact.commons.core.GuiSettings;
 import transact.commons.core.LogsCenter;
 import transact.logic.Logic;
@@ -25,6 +28,9 @@ public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
 
+    // TODO Update to actual URL when done
+    private static final String USER_GUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
+
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private Stage primaryStage;
@@ -32,23 +38,29 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private CardListPanel cardListPanel;
+    private TransactionTablePanel transactionTablePanel;
     private ResultDisplay resultDisplay;
-    private HelpWindow helpWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
 
     @FXML
-    private MenuItem helpMenuItem;
+    private MenuItem userGuideMenuItem;
 
     @FXML
-    private StackPane cardListPanelPlaceholder;
+    private TabPane tabPane;
+
+    @FXML
+    private Tab cardListTab;
+
+    @FXML
+    private Tab transactionTab;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
 
-    @FXML
-    private StackPane statusbarPlaceholder;
+    // @FXML
+    // private StackPane statusbarPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -64,8 +76,6 @@ public class MainWindow extends UiPart<Stage> {
         setWindowDefaultSize(logic.getGuiSettings());
 
         setAccelerators();
-
-        helpWindow = new HelpWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -73,7 +83,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void setAccelerators() {
-        setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+        setAccelerator(userGuideMenuItem, KeyCombination.valueOf("F1"));
     }
 
     /**
@@ -109,17 +119,31 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Switch tabs
+     *
+     * @param index
+     *            The index of the tab
+     */
+    void switchTab(int index) {
+        tabPane.getSelectionModel().select(index);
+    }
+
+    /**
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        cardListPanel = new CardListPanel(logic.getFilteredPersonList(), logic.getFilteredTransactionList());
-        cardListPanelPlaceholder.getChildren().add(cardListPanel.getRoot());
+        cardListPanel = new CardListPanel(logic.getFilteredPersonList());
+        cardListTab.setContent(cardListPanel.getRoot());
+
+        transactionTablePanel = new TransactionTablePanel(logic.getFilteredTransactionList());
+        transactionTab.setContent(transactionTablePanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
-        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
+        // StatusBarFooter statusBarFooter = new
+        // StatusBarFooter(logic.getAddressBookFilePath());
+        // statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
@@ -142,10 +166,10 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleHelp() {
-        if (!helpWindow.isShowing()) {
-            helpWindow.show();
-        } else {
-            helpWindow.focus();
+        try {
+            MainApp.getLocalHostServices().showDocument(USER_GUIDE_URL);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -161,7 +185,6 @@ public class MainWindow extends UiPart<Stage> {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
-        helpWindow.hide();
         primaryStage.hide();
     }
 
@@ -187,6 +210,8 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isExit()) {
                 handleExit();
             }
+
+            switchTab(commandResult.getTabIndex());
 
             return commandResult;
         } catch (CommandException | ParseException e) {
