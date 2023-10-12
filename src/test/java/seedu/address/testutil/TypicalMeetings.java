@@ -23,7 +23,8 @@ public class TypicalMeetings {
             .withStart("20.09.2023 1000").withEnd("20.09.2023 1200")
             .withAttendees(Arrays.copyOfRange(TypicalPersons.getTypicalAttendees(), 1, 7))
             .build();
-    
+
+            
     public static final Meeting MEETING3 = new MeetingBuilder().withTitle("CS2101 meeting")
             .withLocation("com 3")
             .withStart("20.09.2023 1000").withEnd("20.09.2023 1200")
