@@ -14,7 +14,7 @@ public class WebLinkTest {
     }
 
     @Test
-    public void constructor_invalidEmail_throwsIllegalArgumentException() {
+    public void constructor_invalidLink_throwsIllegalArgumentException() {
         String invalidLink = "";
         assertThrows(IllegalArgumentException.class, () -> new Email(invalidLink));
     }
@@ -61,13 +61,13 @@ public class WebLinkTest {
     }
 
     @Test
-    public void isSame_sameEmails_returnsTrue() {
+    public void isSame_sameLinks_returnsTrue() {
         assertTrue(new WebLink("facebook.com/colin").isSame(new WebLink("facebook.com/colin")));
         assertTrue(new WebLink("www.google.com").isSame(new WebLink("www.google.com")));
     }
 
     @Test
-    public void isSame_differentEmails_returnsFalse() {
+    public void isSame_differentLinks_returnsFalse() {
         assertFalse(new WebLink("facebook.com/colin").isSame(new WebLink("facebook.com/aaron")));
         assertFalse(new WebLink("www.google.com").isSame(new WebLink("www.exam.com")));
     }
