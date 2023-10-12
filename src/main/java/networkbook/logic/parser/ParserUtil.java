@@ -13,6 +13,7 @@ import networkbook.model.person.Address;
 import networkbook.model.person.Email;
 import networkbook.model.person.Name;
 import networkbook.model.person.Phone;
+import networkbook.model.person.Priority;
 import networkbook.model.tag.Tag;
 
 /**
@@ -120,5 +121,20 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String priority} into a {@code Priority}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static Priority parsePriority(String priority) throws ParseException {
+        if (priority == null) {
+            return null;
+        }
+        String trimmedPriority = priority.trim();
+        if (!Priority.isValidPriority(Priority.parsePriorityLevel(trimmedPriority))) {
+            throw new ParseException(Priority.MESSAGE_CONSTRAINTS);
+        }
+        return new Priority(trimmedPriority);
     }
 }

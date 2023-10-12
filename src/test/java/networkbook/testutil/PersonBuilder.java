@@ -9,6 +9,7 @@ import networkbook.model.person.Email;
 import networkbook.model.person.Name;
 import networkbook.model.person.Person;
 import networkbook.model.person.Phone;
+import networkbook.model.person.Priority;
 import networkbook.model.tag.Tag;
 import networkbook.model.util.SampleDataUtil;
 import networkbook.model.util.UniqueList;
@@ -22,12 +23,14 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_PRIORITY = null;
 
     private Name name;
     private Phone phone;
     private UniqueList<Email> emails;
     private Address address;
     private Set<Tag> tags;
+    private Priority priority;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -38,6 +41,7 @@ public class PersonBuilder {
         emails = new UniqueList<Email>().setItems(List.of(new Email(DEFAULT_EMAIL)));
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        priority = null;
     }
 
     /**
@@ -49,6 +53,7 @@ public class PersonBuilder {
         emails = personToCopy.getEmails();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
+        priority = personToCopy.getPriority().orElse(null);
     }
 
     /**
@@ -91,8 +96,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Pmail} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withPriority(String priority) {
+        this.priority = new Priority(priority);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, emails, address, tags);
+        return new Person(name, phone, emails, address, tags, priority);
     }
 
 }

@@ -12,17 +12,18 @@ import networkbook.model.person.Email;
 import networkbook.model.person.Name;
 import networkbook.model.person.Person;
 import networkbook.model.person.Phone;
+import networkbook.model.person.Priority;
 import networkbook.model.tag.Tag;
 import networkbook.model.util.UniqueList;
 
 /**
- * Parses input arguments and creates a new AddCommand object
+ * Parses input arguments and creates a new CreateCommand object
  */
 public class CreateCommandParser implements Parser<CreateCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the CreateCommand
+     * and returns an CreateCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public CreateCommand parse(String args) throws ParseException {
@@ -33,7 +34,8 @@ public class CreateCommandParser implements Parser<CreateCommand> {
                         CliSyntax.PREFIX_PHONE,
                         CliSyntax.PREFIX_EMAIL,
                         CliSyntax.PREFIX_ADDRESS,
-                        CliSyntax.PREFIX_TAG
+                        CliSyntax.PREFIX_TAG,
+                        CliSyntax.PREFIX_PRIORITY
                 );
 
         if (!arePrefixesPresent(
@@ -51,7 +53,8 @@ public class CreateCommandParser implements Parser<CreateCommand> {
                 CliSyntax.PREFIX_NAME,
                 CliSyntax.PREFIX_PHONE,
                 CliSyntax.PREFIX_EMAIL,
-                CliSyntax.PREFIX_ADDRESS
+                CliSyntax.PREFIX_ADDRESS,
+                CliSyntax.PREFIX_PRIORITY
         );
         Name name = ParserUtil.parseName(argMultimap.getValue(CliSyntax.PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(CliSyntax.PREFIX_PHONE).get());
@@ -59,8 +62,9 @@ public class CreateCommandParser implements Parser<CreateCommand> {
         UniqueList<Email> emails = new UniqueList<Email>().setItems(List.of(email));
         Address address = ParserUtil.parseAddress(argMultimap.getValue(CliSyntax.PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(CliSyntax.PREFIX_TAG));
+        Priority priority = ParserUtil.parsePriority(argMultimap.getValue(CliSyntax.PREFIX_PRIORITY).orElse(null));
 
-        Person person = new Person(name, phone, emails, address, tagList);
+        Person person = new Person(name, phone, emails, address, tagList, priority);
 
         return new CreateCommand(person);
     }

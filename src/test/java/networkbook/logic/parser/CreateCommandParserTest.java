@@ -129,7 +129,8 @@ public class CreateCommandParserTest {
         Person expectedPerson = new PersonBuilder(TypicalPersons.AMY).withTags().build();
         CommandParserTestUtil.assertParseSuccess(parser,
                 CommandTestUtil.NAME_DESC_AMY + CommandTestUtil.PHONE_DESC_AMY
-                        + CommandTestUtil.EMAIL_DESC_AMY + CommandTestUtil.ADDRESS_DESC_AMY,
+                        + CommandTestUtil.EMAIL_DESC_AMY + CommandTestUtil.ADDRESS_DESC_AMY
+                        + CommandTestUtil.PRIORITY_DESC_AMY,
                 new CreateCommand(expectedPerson));
     }
 

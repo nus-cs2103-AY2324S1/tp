@@ -12,6 +12,7 @@ import networkbook.model.person.Email;
 import networkbook.model.person.Name;
 import networkbook.model.person.Person;
 import networkbook.model.person.Phone;
+import networkbook.model.person.Priority;
 import networkbook.model.tag.Tag;
 
 /**
@@ -23,27 +24,27 @@ public class SampleDataUtil {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"),
                 new UniqueList<Email>().setItems(List.of(new Email("alexyeoh@example.com"))),
                 new Address("Blk 30 Geylang Street 29, #06-40"),
-                getTagSet("friends")),
+                getTagSet("friends"), new Priority("low")),
             new Person(new Name("Bernice Yu"), new Phone("99272758"),
                 new UniqueList<Email>().setItems(List.of(new Email("berniceyu@example.com"))),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                getTagSet("colleagues", "friends")),
+                getTagSet("colleagues", "friends"), new Priority("high")),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"),
                 new UniqueList<Email>().setItems(List.of(new Email("charlotte@example.com"))),
                 new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                getTagSet("neighbours")),
+                getTagSet("neighbours"), new Priority("M")),
             new Person(new Name("David Li"), new Phone("91031282"),
                 new UniqueList<Email>().setItems(List.of(new Email("lidavid@example.com"))),
                 new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                getTagSet("family")),
+                getTagSet("family"), new Priority("High")),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"),
                 new UniqueList<Email>().setItems(List.of(new Email("irfan@example.com"))),
                 new Address("Blk 47 Tampines Street 20, #17-35"),
-                getTagSet("classmates")),
+                getTagSet("classmates"), new Priority("lOW")),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"),
                 new UniqueList<Email>().setItems(List.of(new Email("royb@example.com"))),
                 new Address("Blk 45 Aljunied Street 85, #11-31"),
-                getTagSet("colleagues"))
+                getTagSet("colleagues"), null)
         };
     }
 
