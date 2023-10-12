@@ -39,6 +39,8 @@ public class Messages {
         builder.append(employee.getName())
                 .append("; Position: ")
                 .append(employee.getPosition())
+                .append("; Id: ")
+                .append(employee.getId())
                 .append("; Phone: ")
                 .append(employee.getPhone())
                 .append("; Email: ")
