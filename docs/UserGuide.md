@@ -224,6 +224,6 @@ Action             | Format, Examples
 **Delete Note**    | `delete note -n NAME -t NOTE_TITLE`<br> e.g., `delete note -n Aaron -t Meeting Topics`
 **List Notes**     | `list notes`
 **Add Event**      | `add event -id CONTACT_ID -en EVENT_NAME -st START_TIME [-et END_TIME] [-loc LOCATION] [-info INFORMATION]` <br> e.g., `add event -id 1 -en Meeting with professor -st 12:00 -et 01:00 -loc COM 1 Basement -info Discuss the project implementation with the professor`
-**Delete Event**   | `delete event -id CONTACT_ID -en EVENT_NAME`<br> e.g., `delete event -id 1 -en Meeting with professor`
+**Delete Event**   | `delete event -id CONTACT_ID -eid EVENT_ID`<br> e.g., `delete event -id 1 -eid 1`
 **List Events**    | `list events`
 **Help**           | `help`
