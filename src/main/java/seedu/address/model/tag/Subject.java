@@ -1,11 +1,11 @@
 package seedu.address.model.tag;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Subject in the address book.
@@ -58,6 +58,15 @@ public class Subject {
         return subjectName.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Checks if the given date is valid.
+     *
+     * @param date The given date String object.
+     * @param enrolDate An array of size 1 representing
+     *                  a student's enrol date of a
+     *                  particular subject.
+     * @return true if the given date is valid, false otherwise.
+     */
     public static boolean isValidDate(String date, YearMonth[] enrolDate) {
         try {
             enrolDate[0] = YearMonth.parse(date, FORMATTER);

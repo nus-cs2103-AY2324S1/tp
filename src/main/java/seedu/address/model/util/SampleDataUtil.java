@@ -11,9 +11,9 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.MrtStation;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Phone;
 import seedu.address.model.person.SecLevel;
 import seedu.address.model.person.Student;
-import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Subject;
 
 /**

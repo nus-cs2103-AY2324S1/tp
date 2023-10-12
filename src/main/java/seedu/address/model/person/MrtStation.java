@@ -3,6 +3,9 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents the Mrt Station in the address book.
+ */
 public class MrtStation {
     public static final String MESSAGE_CONSTRAINTS =
             "MRT Station names should only contain alphanumeric characters and spaces, and it should not be blank";

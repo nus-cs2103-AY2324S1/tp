@@ -5,9 +5,12 @@ import java.util.Set;
 
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Gender;
+import seedu.address.model.person.MrtStation;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Student;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.SecLevel;
+import seedu.address.model.person.Student;
 import seedu.address.model.tag.Subject;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -25,6 +28,9 @@ public class PersonBuilder {
     private Phone phone;
     private Email email;
     private Address address;
+    private Gender gender;
+    private SecLevel secLevel;
+    private MrtStation nearestMrtStation;
     private Set<Subject> subjects;
 
     /**
@@ -46,7 +52,7 @@ public class PersonBuilder {
         phone = studentToCopy.getPhone();
         email = studentToCopy.getEmail();
         address = studentToCopy.getAddress();
-        subjects = new HashSet<>(studentToCopy.getTags());
+        subjects = new HashSet<>(studentToCopy.getSubjects());
     }
 
     /**
@@ -89,8 +95,15 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Creates a student object.
+     *
+     * @return a student.
+     */
     public Student build() {
-        return new Student(name, phone, email, address, subjects);
+        return new Student(name, phone, email, address,
+                gender, secLevel, nearestMrtStation,
+                subjects);
     }
 
 }
