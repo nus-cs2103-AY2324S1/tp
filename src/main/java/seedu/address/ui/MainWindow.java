@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.awt.Desktop;
+import java.net.URI;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -136,14 +138,27 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Opens the help window or focuses on it if it's already opened.
+     * Attempts to open the UserGuide in the default browser.
+     * Upon failure, pop up a HelpWindow with the URL shown, or focuses on it if it is already open
      */
     @FXML
     public void handleHelp() {
-        if (!helpWindow.isShowing()) {
-            helpWindow.show();
+        if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+            try {
+                Desktop.getDesktop().browse(new URI("https://ay2324s1-cs2103t-t11-4.github.io/tp/UserGuide.html"));
+            } catch (Exception e) {
+                if (!helpWindow.isShowing()) {
+                    helpWindow.show();
+                } else {
+                    helpWindow.focus();
+                }
+            }
         } else {
-            helpWindow.focus();
+            if (!helpWindow.isShowing()) {
+                helpWindow.show();
+            } else {
+                helpWindow.focus();
+            }
         }
     }
 
