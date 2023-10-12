@@ -10,6 +10,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
 /**
@@ -53,6 +54,15 @@ public class AddCommand extends Command {
         }
 
         model.addPerson(toAdd);
+        toAdd.getGroups().toStream().findFirst().ifPresent(group -> {
+            model.addGroup(group);
+            try {
+                group.addPerson(toAdd);
+            } catch (CommandException e) {
+                System.out.println(e.toString());
+                throw new RuntimeException(e);
+            }
+        });
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
