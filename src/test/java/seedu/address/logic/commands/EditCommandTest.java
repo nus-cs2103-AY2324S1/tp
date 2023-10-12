@@ -28,12 +28,9 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonType;
-import seedu.address.model.person.Specialist;
 import seedu.address.testutil.EditPatientDescriptorBuilder;
-import seedu.address.testutil.EditSpecialistDescriptorBuilder;
 import seedu.address.testutil.PatientBuilder;
 import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.SpecialistBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
