@@ -43,10 +43,15 @@ public class Messages {
                 .append(person.getEmail())
                 .append("; Address: ")
                 .append(person.getAddress())
-                .append("; Animal name: ")
-                .append(person.getAnimalName())
-                .append("; Tags: ");
+                .append("; Animal name: ");
+
+        if (person.getAnimalName() != null) {
+            builder.append(person.getAnimalName());
+        }
+
+        builder.append("; Tags: ");
         person.getTags().forEach(builder::append);
+
         return builder.toString();
     }
 }
