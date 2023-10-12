@@ -200,7 +200,6 @@ public class ModelManager implements Model {
     @Override
     public void setViewedPerson(Person person) {
         viewedPerson = person;
-        System.out.println("View Command parsed successfully");
     }
 
     @Override
