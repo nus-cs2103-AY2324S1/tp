@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-import seedu.address.ui.MainWindow;
 
 /**
  * The command handler for {@code delete event} command
@@ -42,7 +41,6 @@ public class DeleteEventCommand extends DeleteCommand {
             throw new CommandException(MESSAGE_EVENT_NOT_FOUND + this.eventIdToDelete);
         }
 
-        MainWindow.refreshPersonListPanelImmediately();
         return new CommandResult(MESSAGE_SUCCESS + this.eventIdToDelete);
     }
 }

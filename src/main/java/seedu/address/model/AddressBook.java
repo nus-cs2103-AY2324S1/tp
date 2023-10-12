@@ -94,6 +94,19 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    @Override
+    public String eventListToString() {
+        StringBuilder str = new StringBuilder();
+        persons.forEach(
+                person -> person.getEvents().forEach(
+                        event -> str.append("[").append(
+                                        person.getName().toString()).append("] ")
+                                .append(event.getUiText()).append("\n")
+                )
+        );
+        return str.toString();
+    }
+
     //// util methods
 
     @Override

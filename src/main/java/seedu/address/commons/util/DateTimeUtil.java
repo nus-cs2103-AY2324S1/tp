@@ -21,8 +21,13 @@ public class DateTimeUtil {
             result = LocalDateTime.parse(str, formatter1);
         } catch (DateTimeParseException e2) {
             LocalDateTime now = LocalDateTime.now();
-            String appendDate = now.getYear() + "-" + now.getMonthValue() + "-" + now.getDayOfMonth() + " ";
-            result = LocalDateTime.parse(appendDate + str, formatter1);
+            if (str.contains("-")) {
+                String appendTime = " 00:00:00";
+                result = LocalDateTime.parse(str + appendTime, formatter1);
+            } else {
+                String appendDate = now.getYear() + "-" + now.getMonthValue() + "-" + now.getDayOfMonth() + " ";
+                result = LocalDateTime.parse(appendDate + str, formatter1);
+            }
         }
         return result;
     }

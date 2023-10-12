@@ -38,7 +38,7 @@ public class AddEventCommandTest {
     public void execute_personNotExist_fails() throws CommandException {
         int personId = 99999;
         assertCommandFailWithFeedback(() -> new AddEventCommand(personId, VALID_EVENT_SAME_NAME_0)
-                .execute(model), AddEventCommand.MESSAGE_PERSON_NOT_FOUNT + personId);
+                .execute(model), AddEventCommand.MESSAGE_PERSON_NOT_FOUND + personId);
     }
 
 

@@ -6,7 +6,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
-import seedu.address.ui.MainWindow;
 
 /**
  * The command handler for {@code add event} command
@@ -20,7 +19,7 @@ public class AddEventCommand extends AddCommand {
             + ": Adds an event to a contact.\n"
             + "Usage:  add event -n CONTACT_NAME -en EVENT_NAME -st "
             + "START_TIME [-et END_TIME] [-loc LOCATION] [-i INFORMATION]";
-    public static final String MESSAGE_PERSON_NOT_FOUNT = "Can not find the target contact with ID: ";
+    public static final String MESSAGE_PERSON_NOT_FOUND = "Can not find the target contact with ID: ";
 
     private final Event toAdd;
     private final int contactId;
@@ -39,11 +38,10 @@ public class AddEventCommand extends AddCommand {
         requireNonNull(model);
         Person person = model.findPersonByUserFriendlyId(this.contactId);
         if (person == null) {
-            throw new CommandException(MESSAGE_PERSON_NOT_FOUNT + this.contactId);
+            throw new CommandException(MESSAGE_PERSON_NOT_FOUND + this.contactId);
         }
         person.addEvent(this.toAdd);
 
-        MainWindow.refreshPersonListPanelImmediately();
         return new CommandResult(MESSAGE_SUCCESS + toAdd.getName());
     }
 }

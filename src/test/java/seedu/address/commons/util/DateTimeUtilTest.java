@@ -29,6 +29,8 @@ public class DateTimeUtilTest {
                 LocalDateTime.parse("2023-10-12T20:05:00"));
         assertEquals(DateTimeUtil.parseString("2023-10-12 20:05:30"),
                 LocalDateTime.parse("2023-10-12T20:05:30"));
+        assertEquals(DateTimeUtil.parseString("2023-10-12"),
+                LocalDateTime.parse("2023-10-12T00:00:00"));
     }
 
     @Test
@@ -36,7 +38,6 @@ public class DateTimeUtilTest {
         assertThrows(DateTimeParseException.class, () -> DateTimeUtil.parseString("002:00"));
         assertThrows(DateTimeParseException.class, () -> DateTimeUtil.parseString("02:0"));
         assertThrows(DateTimeParseException.class, () -> DateTimeUtil.parseString("12:1"));
-        assertThrows(DateTimeParseException.class, () -> DateTimeUtil.parseString("2023-10-12"));
         assertThrows(DateTimeParseException.class, () -> DateTimeUtil.parseString("2023-10-12 0:0:0"));
     }
 }

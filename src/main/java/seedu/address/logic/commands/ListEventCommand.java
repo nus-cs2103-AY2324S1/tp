@@ -19,14 +19,7 @@ public class ListEventCommand extends ListCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> persons = model.getAddressBook().getPersonList();
-        StringBuilder str = new StringBuilder(MESSAGE);
-        persons.forEach(
-                person -> person.getEvents().forEach(
-                        event -> str.append("[").append(
-                                person.getName().toString()).append("] ")
-                                .append(event.getUiText()).append("\n")
-                )
-        );
-        return new CommandResult(str.toString());
+        String result = MESSAGE + model.getAddressBook().eventListToString();
+        return new CommandResult(result);
     }
 }

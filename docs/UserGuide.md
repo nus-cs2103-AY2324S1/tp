@@ -155,6 +155,8 @@ Date-Time Format:
  - You can use one of the following formats for start time and end time:
     - Date and time: `yyyy-MM-dd HH:mm[:ss]`
       - Example: `2023-10-12 20:05`, `2023-10-12 20:05:30`
+   - Only date (Time will then refers to 00:00): `yyyy-MM-dd`
+       - Example: `2023-10-12`
     - Only time (Date will then refers to the current date): `HH:mm[:ss]`
       - Example: `00:10`, `05:01:45`
 
