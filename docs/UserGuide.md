@@ -69,10 +69,10 @@ If you can type fast, KeepInTouch can get your contact management tasks done fas
 * Items in square brackets are optional.<br>
   e.g `add contact -n NAME [-p PHONE_NUMBER] [-a ADDRESS] [-e EMAIL]` can be used as `add contact -n Aaron -p 12345678 -a Baker Street 12 -e aaron123@gmail.com` or as `add contact -n Aaron -e aaron123@gmail.com`.
 
+* `CONTACT_ID` is the number that is on the left of the person's name in each person card.
+
 * Parameters can be in any order.<br>
   e.g. if the command specifies `-n NAME -t NOTE_TITLE`, `-t NOTE_TITLE -n NAME` is also acceptable.
-
-* `Person ID` is the number that is on the left of the person's name in each person card.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list contact`, and `exit`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
