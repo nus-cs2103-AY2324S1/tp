@@ -16,6 +16,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.flashlingo.model.AddressBook;
+import seedu.flashlingo.model.Flashlingo;
+import seedu.flashlingo.model.flashcard.FlashCard;
 import seedu.flashlingo.model.person.Person;
 
 /**
@@ -60,17 +62,18 @@ public class TypicalPersons {
     private TypicalPersons() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code Flashlingo} with all the typical flashcards.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
-        for (Person person : getTypicalPersons()) {
-            ab.addPerson(person);
+    public static Flashlingo getTypicalFlashlingo() {
+        Flashlingo fl = new Flashlingo();
+        for (FlashCard flashCard : getTypicalFlashCards()) {
+            fl.addFlashCard(flashCard);
         }
-        return ab;
+        return fl;
     }
 
-    public static List<Person> getTypicalPersons() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    public static List<FlashCard> getTypicalFlashCards() {
+        //TODO:
+        return null;
     }
 }

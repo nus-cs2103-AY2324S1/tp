@@ -10,6 +10,7 @@ import seedu.flashlingo.logic.parser.exceptions.ParseException;
 import seedu.flashlingo.model.NewModel;
 import seedu.flashlingo.model.ReadOnlyFlashlingo;
 import seedu.flashlingo.model.flashcard.FlashCard;
+import seedu.flashlingo.model.person.Person;
 
 /**
  * API of the Logic component
@@ -33,6 +34,10 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of flashcards */
     ObservableList<FlashCard> getFilteredFlashCardList();
+
+    // FIXME: Temp for ui to work
+    ObservableList<Person> getFilteredPersonList();
+    Path getAddressBookFilePath();
 
     /**
      * Returns the user prefs' Flashlingo file path.

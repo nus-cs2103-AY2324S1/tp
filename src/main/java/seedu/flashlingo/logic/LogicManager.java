@@ -5,19 +5,19 @@ import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.flashlingo.commons.core.GuiSettings;
 import seedu.flashlingo.commons.core.LogsCenter;
-import seedu.flashlingo.logic.commands.Command;
 import seedu.flashlingo.logic.commands.CommandResult;
 import seedu.flashlingo.logic.commands.exceptions.CommandException;
 import seedu.flashlingo.logic.newcommands.NewCommand;
-import seedu.flashlingo.logic.parser.AddressBookParser;
-import seedu.flashlingo.logic.parser.NewParser;
+import seedu.flashlingo.logic.parser.FlashlingoParser;
 import seedu.flashlingo.logic.parser.exceptions.ParseException;
 import seedu.flashlingo.model.NewModel;
 import seedu.flashlingo.model.ReadOnlyFlashlingo;
 import seedu.flashlingo.model.flashcard.FlashCard;
+import seedu.flashlingo.model.person.Person;
 import seedu.flashlingo.storage.Storage;
 
 /**
@@ -33,7 +33,7 @@ public class LogicManager implements Logic {
 
     private final NewModel model;
     private final Storage storage;
-    private final NewParser flashlingoParser;
+    private final FlashlingoParser flashlingoParser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -41,9 +41,7 @@ public class LogicManager implements Logic {
     public LogicManager(NewModel model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        flashlingoParser = new NewParser();
-        //TODO: Change to FlashlingoParser
-        addressBookParser = new AddressBookParser();
+        flashlingoParser = new FlashlingoParser();
     }
 
     @Override
@@ -51,7 +49,7 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        NewCommand command = addressBookParser.parseCommand(commandText);
+        NewCommand command = flashlingoParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
         try {
@@ -73,6 +71,17 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<FlashCard> getFilteredFlashCardList() {
         return model.getFilteredFlashCardList();
+    }
+
+    //FIXME: Temp for ui to work
+    @Override
+    public ObservableList<Person> getFilteredPersonList() {
+        return FXCollections.observableArrayList();
+    }
+
+    @Override
+    public Path getAddressBookFilePath() {
+        return model.getFlashlingoFilePath();
     }
 
     @Override

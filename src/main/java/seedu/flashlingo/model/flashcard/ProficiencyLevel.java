@@ -50,4 +50,12 @@ public class ProficiencyLevel {
         return false;
     }
 
+    /**
+     * Returns the level of proficiency
+     * @return The level of proficiency.
+     */
+    public int getLevel() {
+        return level;
+    }
+
 }

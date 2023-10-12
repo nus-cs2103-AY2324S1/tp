@@ -1,6 +1,11 @@
 package seedu.flashlingo.model.flashcard;
 
+import seedu.flashlingo.model.tag.Tag;
+
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Represents each flashcard
@@ -37,6 +42,18 @@ public class FlashCard {
 
     public Translation getTranslatedWord() {
         return translatedWord;
+    }
+
+    public Date getWhenToReview() {
+        return whenToReview;
+    }
+
+    public ProficiencyLevel getLevel() {
+        return level;
+    }
+
+    public boolean getToDelete() {
+        return toDelete;
     }
 
     /**

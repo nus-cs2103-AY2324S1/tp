@@ -15,19 +15,15 @@ import seedu.flashlingo.commons.util.ConfigUtil;
 import seedu.flashlingo.commons.util.StringUtil;
 import seedu.flashlingo.logic.Logic;
 import seedu.flashlingo.logic.LogicManager;
-import seedu.flashlingo.model.AddressBook;
 import seedu.flashlingo.model.Flashlingo;
-import seedu.flashlingo.model.Model;
-import seedu.flashlingo.model.ModelManager;
 import seedu.flashlingo.model.NewModel;
 import seedu.flashlingo.model.NewModelManager;
-import seedu.flashlingo.model.ReadOnlyAddressBook;
 import seedu.flashlingo.model.ReadOnlyFlashlingo;
 import seedu.flashlingo.model.ReadOnlyUserPrefs;
 import seedu.flashlingo.model.UserPrefs;
 import seedu.flashlingo.model.util.SampleDataUtil;
-import seedu.flashlingo.storage.AddressBookStorage;
-import seedu.flashlingo.storage.JsonAddressBookStorage;
+import seedu.flashlingo.storage.FlashlingoStorage;
+import seedu.flashlingo.storage.JsonFlashlingoStorage;
 import seedu.flashlingo.storage.JsonUserPrefsStorage;
 import seedu.flashlingo.storage.Storage;
 import seedu.flashlingo.storage.StorageManager;
@@ -61,8 +57,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        FlashlingoStorage flashlingoStorage = new JsonFlashlingoStorage(userPrefs.getFlashlingoFilePath());
+        storage = new StorageManager(flashlingoStorage, userPrefsStorage);
 
         model = initModelManager(storage, userPrefs);
 
