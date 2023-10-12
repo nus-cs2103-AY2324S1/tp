@@ -28,9 +28,12 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonType;
+import seedu.address.model.person.Specialist;
 import seedu.address.testutil.EditPatientDescriptorBuilder;
+import seedu.address.testutil.EditSpecialistDescriptorBuilder;
 import seedu.address.testutil.PatientBuilder;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.SpecialistBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
@@ -55,22 +58,24 @@ public class EditCommandTest {
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
+        model.updateFilteredPersonList(PersonType.SPECIALIST.getSearchPredicate());
         Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
         Person lastPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
 
-        PersonBuilder personInList = new PatientBuilder((Patient) lastPerson);
+        PersonBuilder personInList = new SpecialistBuilder((Specialist) lastPerson);
         Person editedPerson = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
 
-        EditPersonDescriptor descriptor = new EditPatientDescriptorBuilder().withName(VALID_NAME_BOB)
+        EditPersonDescriptor descriptor = new EditSpecialistDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
-        EditCommand editCommand = new EditCommand(indexLastPerson, descriptor, PersonType.PATIENT);
+        EditCommand editCommand = new EditCommand(indexLastPerson, descriptor, PersonType.SPECIALIST);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(lastPerson, editedPerson);
 
+        expectedModel.setPerson(lastPerson, editedPerson);
+        expectedModel.updateFilteredPersonList(PersonType.SPECIALIST.getSearchPredicate());
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
@@ -173,6 +178,9 @@ public class EditCommandTest {
 
         // different descriptor -> returns false
         assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_PERSON, DESC_BOB, PersonType.PATIENT)));
+
+        // different personType -> returns false
+        assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_PERSON, DESC_AMY, PersonType.SPECIALIST)));
     }
 
     @Test
