@@ -41,8 +41,10 @@ public class Messages {
                 .append(person.getPhone())
                 .append("; Email: ")
                 .append(person.getEmail())
-                .append("; Address: ")
-                .append(person.getAddress())
+                .append("; Student Number: ")
+                .append(person.getStudentNumber())
+                .append("; Class Number: ")
+                .append(person.getClassNumber())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
         return builder.toString();
