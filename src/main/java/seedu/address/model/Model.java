@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -91,4 +92,10 @@ public interface Model {
      * @param event Event to track.
      */
     void addEvent(Event event);
+
+    /**
+     * Gets all events being tracked.
+     * @return List of events.
+     */
+    List<Event> getEventList();
 }

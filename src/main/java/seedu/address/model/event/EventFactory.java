@@ -48,6 +48,7 @@ public class EventFactory {
 
             event.addReminder(Duration.ofDays(1)); // Birthday reminder defaults to 1 day in advance
             event.addMember(person);
+            events.add(event);
         }
 
         return events;

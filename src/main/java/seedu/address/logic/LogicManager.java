@@ -3,7 +3,12 @@ package seedu.address.logic;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
@@ -15,6 +20,8 @@ import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.event.Event;
+import seedu.address.model.event.Notification;
 import seedu.address.model.person.Person;
 import seedu.address.storage.Storage;
 
@@ -84,5 +91,14 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public List<Notification> getLatestNotifications(LocalDateTime currentDateTime) {
+        return model.getEventList().stream()
+                .map(event -> event.getNotificationAtTime(currentDateTime))
+                .filter(Optional::isPresent)
+                .map(Optional::orElseThrow)
+                .collect(Collectors.toList());
     }
 }
