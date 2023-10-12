@@ -142,7 +142,7 @@ This feature offers both broad and granular search capabilities, enabling TAs to
 list all students from a particular class or narrow down their search by providing
 one or more lookup parameters.
 
-Format: `lookup [c/CLASS_NUMBER}] [l/LAST_NAME] [e/EMAIL] [s/STUDENT_NUMBER] [t/TAG]`
+Format: `lookup [c/CLASS_NUMBER] [n/NAME] [p/PHONE] [e/EMAIL] [s/STUDENT_NUMBER] [t/TAG]`
 
 <box type="warning" seamless>
 
@@ -152,15 +152,15 @@ _At least one_ of the optional fields must be provided. `lookup` alone is not al
 
 * The command is case-insensitive. e.g `hans` will match `Hans`
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* This command can only take one word per field. e.g. `lookup c/11 12` is _**not** allowed_.
+* This command can only take one word per field. e.g. `lookup c/T11 T12` is _**not** allowed_.
   * Taking multiple words per field _coming soon_ in future versions.
 
 Examples:
 
-* `lookup l/li` returns `Alex Li`, `David Li`<br>
-  ![result for 'lookup l/ li'](images/lookupLastNameResult.png) </br></br>
-* `lookup c/111` return all students in class number 111<br>
-  ![result for 'lookup c/ 111'](images/lookupClassResult.png)
+* `lookup n/li` returns `Alex Li`, `David Li`<br>
+  ![result for 'lookup n/li'](images/lookupLastNameResult.png) </br></br>
+* `lookup c/T11` return all students in class number 111<br>
+  ![result for 'lookup c/T11'](images/lookupClassResult.png)
 
 ### Deleting a student : `delete`
 
@@ -238,7 +238,7 @@ Action     | Format, Examples
 **Delete** | `delete s/STUDENT_NUMBER`<br> e.g., `delete s/A0249112A`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Tag**    | `tag STUDENT NUMBER [t/TAG]…​` <br> e.g `tag A0123456N t/smart t/shy`
-**Lookup** | `lookup [c/CLASS_NUMBER] [l/LAST_NAME] [e/EMAIL] [s/STUDENT_NUMBER] [t/TAG]` <br> e.g `lookup c/111`
+**Lookup** | `lookup [c/CLASS_NUMBER] [n/NAME] [p/PHONE] [e/EMAIL] [s/STUDENT_NUMBER] [t/TAG]` <br> e.g `lookup c/T11`
 **List**   | `list`
 **Help**   | `help`
 **Load**   | `load f/FILE_NAME`
