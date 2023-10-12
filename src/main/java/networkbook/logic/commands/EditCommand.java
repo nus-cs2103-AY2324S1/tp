@@ -22,6 +22,7 @@ import networkbook.model.person.Email;
 import networkbook.model.person.Name;
 import networkbook.model.person.Person;
 import networkbook.model.person.Phone;
+import networkbook.model.person.Priority;
 import networkbook.model.tag.Tag;
 import networkbook.model.util.UniqueList;
 
@@ -36,11 +37,12 @@ public class EditCommand extends Command {
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + CliSyntax.PREFIX_NAME + " NAME] "
-            + "[" + CliSyntax.PREFIX_PHONE + " PHONE] "
-            + "[" + CliSyntax.PREFIX_EMAIL + " EMAIL] "
-            + "[" + CliSyntax.PREFIX_ADDRESS + " ADDRESS] "
-            + "[" + CliSyntax.PREFIX_TAG + " TAG]...\n"
+            + "[" + CliSyntax.PREFIX_NAME + "NAME] "
+            + "[" + CliSyntax.PREFIX_PHONE + "PHONE] "
+            + "[" + CliSyntax.PREFIX_EMAIL + "EMAIL] "
+            + "[" + CliSyntax.PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + CliSyntax.PREFIX_TAG + "TAG] "
+            + "[" + CliSyntax.PREFIX_PRIORITY + "PRIORITY]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + CliSyntax.PREFIX_PHONE + " 91234567 "
             + CliSyntax.PREFIX_EMAIL + " johndoe@example.com";
@@ -97,8 +99,10 @@ public class EditCommand extends Command {
         UniqueList<Email> updatedEmails = editPersonDescriptor.getEmails().orElse(personToEdit.getEmails());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Priority updatedPriority = editPersonDescriptor.getPriority().orElse(personToEdit.getPriority()
+                                                                     .orElse(null));
 
-        return new Person(updatedName, updatedPhone, updatedEmails, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmails, updatedAddress, updatedTags, updatedPriority);
     }
 
     @Override
@@ -135,6 +139,7 @@ public class EditCommand extends Command {
         private UniqueList<Email> emails;
         private Address address;
         private Set<Tag> tags;
+        private Priority priority;
 
         public EditPersonDescriptor() {}
 
@@ -148,13 +153,14 @@ public class EditCommand extends Command {
             setEmails(toCopy.emails);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setPriority(toCopy.priority);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, emails, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, emails, address, tags, priority);
         }
 
         public void setName(Name name) {
@@ -206,6 +212,14 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        public void setPriority(Priority priority) {
+            this.priority = priority;
+        }
+
+        public Optional<Priority> getPriority() {
+            return Optional.ofNullable(this.priority);
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -222,18 +236,22 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(emails, otherEditPersonDescriptor.emails)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
+                    && Objects.equals(priority, otherEditPersonDescriptor.priority);
         }
 
         @Override
         public String toString() {
-            return new ToStringBuilder(this)
+            ToStringBuilder tsb = new ToStringBuilder(this)
                     .add("name", name)
                     .add("phone", phone)
                     .add("email", emails)
                     .add("address", address)
-                    .add("tags", tags)
-                    .toString();
+                    .add("tags", tags);
+            if (priority != null) {
+                tsb.add("priority", priority);
+            }
+            return tsb.toString();
         }
     }
 }

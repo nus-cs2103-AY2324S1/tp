@@ -1,19 +1,10 @@
 package networkbook.logic.parser;
 
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Stream;
-
+import networkbook.commons.core.index.Index;
 import networkbook.logic.Messages;
 import networkbook.logic.commands.AddCommand;
+import networkbook.logic.commands.EditCommand.EditPersonDescriptor;
 import networkbook.logic.parser.exceptions.ParseException;
-import networkbook.model.person.Address;
-import networkbook.model.person.Email;
-import networkbook.model.person.Name;
-import networkbook.model.person.Person;
-import networkbook.model.person.Phone;
-import networkbook.model.tag.Tag;
-import networkbook.model.util.UniqueList;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -33,43 +24,39 @@ public class AddCommandParser implements Parser<AddCommand> {
                         CliSyntax.PREFIX_PHONE,
                         CliSyntax.PREFIX_EMAIL,
                         CliSyntax.PREFIX_ADDRESS,
-                        CliSyntax.PREFIX_TAG
+                        CliSyntax.PREFIX_TAG,
+                        CliSyntax.PREFIX_PRIORITY
                 );
 
-        if (!arePrefixesPresent(
-                argMultimap,
-                CliSyntax.PREFIX_NAME,
-                CliSyntax.PREFIX_ADDRESS,
-                CliSyntax.PREFIX_PHONE,
-                CliSyntax.PREFIX_EMAIL
-        ) || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        Index index;
+
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (ParseException pe) {
+            throw new ParseException(
+                    String.format(
+                            Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                            AddCommand.MESSAGE_USAGE
+                    ),
+                    pe
+            );
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(
                 CliSyntax.PREFIX_NAME,
                 CliSyntax.PREFIX_PHONE,
                 CliSyntax.PREFIX_EMAIL,
-                CliSyntax.PREFIX_ADDRESS
+                CliSyntax.PREFIX_ADDRESS,
+                CliSyntax.PREFIX_PRIORITY
         );
-        Name name = ParserUtil.parseName(argMultimap.getValue(CliSyntax.PREFIX_NAME).get());
-        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(CliSyntax.PREFIX_PHONE).get());
-        Email email = ParserUtil.parseEmail(argMultimap.getValue(CliSyntax.PREFIX_EMAIL).get());
-        UniqueList<Email> emails = new UniqueList<Email>().setItems(List.of(email));
-        Address address = ParserUtil.parseAddress(argMultimap.getValue(CliSyntax.PREFIX_ADDRESS).get());
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(CliSyntax.PREFIX_TAG));
 
-        Person person = new Person(name, phone, emails, address, tagList);
+        EditPersonDescriptor editPersonDescriptor = EditCommandParser.generateEditPersonDescriptor(argMultimap);
 
-        return new AddCommand(person);
-    }
+        if (!editPersonDescriptor.isAnyFieldEdited()) {
+            throw new ParseException(AddCommand.MESSAGE_NO_INFO);
+        }
 
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+        return new AddCommand(index, editPersonDescriptor);
     }
 
 }

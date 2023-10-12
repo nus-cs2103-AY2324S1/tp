@@ -9,6 +9,7 @@ import networkbook.logic.Messages;
 import networkbook.logic.commands.AddCommand;
 import networkbook.logic.commands.ClearCommand;
 import networkbook.logic.commands.Command;
+import networkbook.logic.commands.CreateCommand;
 import networkbook.logic.commands.DeleteCommand;
 import networkbook.logic.commands.EditCommand;
 import networkbook.logic.commands.ExitCommand;
@@ -50,6 +51,9 @@ public class NetworkBookParser {
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
 
         switch (commandWord) {
+
+        case CreateCommand.COMMAND_WORD:
+            return new CreateCommandParser().parse(arguments);
 
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);

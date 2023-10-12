@@ -15,6 +15,7 @@ import networkbook.model.person.Email;
 import networkbook.model.person.Name;
 import networkbook.model.person.Person;
 import networkbook.model.person.Phone;
+import networkbook.model.person.Priority;
 import networkbook.model.tag.Tag;
 import networkbook.model.util.UniqueList;
 
@@ -30,6 +31,7 @@ class JsonAdaptedPerson {
     private final List<JsonAdaptedProperty<Email>> emails = new ArrayList<>();
     private final String address;
     private final List<JsonAdaptedProperty<Tag>> tags = new ArrayList<>();
+    private final String priority;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -37,7 +39,7 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") List<JsonAdaptedProperty<Email>> emails, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedProperty<Tag>> tags) {
+            @JsonProperty("tags") List<JsonAdaptedProperty<Tag>> tags, @JsonProperty("priority") String priority) {
         this.name = name;
         this.phone = phone;
         if (emails != null) {
@@ -47,6 +49,7 @@ class JsonAdaptedPerson {
         if (tags != null) {
             this.tags.addAll(tags);
         }
+        this.priority = priority;
     }
 
     /**
@@ -62,6 +65,7 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedProperty::new)
                 .collect(Collectors.toList()));
+        priority = source.getPriority().map(Priority::toString).orElse(null);
     }
 
     /**
@@ -111,7 +115,16 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmails, modelAddress, modelTags);
+
+        Priority modelPriority = null;
+        if (priority != null) {
+            if (!Priority.isValidPriority(Priority.parsePriorityLevel(priority))) {
+                throw new IllegalValueException(Priority.MESSAGE_CONSTRAINTS);
+            }
+            modelPriority = new Priority(priority);
+        }
+
+        return new Person(modelName, modelPhone, modelEmails, modelAddress, modelTags, modelPriority);
     }
 
 }

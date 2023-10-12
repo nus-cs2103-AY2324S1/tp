@@ -60,6 +60,21 @@ public class EditCommandParser implements Parser<EditCommand> {
                 CliSyntax.PREFIX_ADDRESS
         );
 
+        EditPersonDescriptor editPersonDescriptor = generateEditPersonDescriptor(argMultimap);
+
+        if (!editPersonDescriptor.isAnyFieldEdited()) {
+            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+        }
+
+        return new EditCommand(index, editPersonDescriptor);
+    }
+
+    /**
+     * Creates an {@code EditPersonDescriptor} based on the arguments provided in an edit or add command.
+     * @throws ParseException if the user input does not conform the expected format
+     */
+    public static EditPersonDescriptor generateEditPersonDescriptor(ArgumentMultimap argMultimap)
+            throws ParseException {
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
         if (argMultimap.getValue(CliSyntax.PREFIX_NAME).isPresent()) {
@@ -80,12 +95,12 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         parseTagsForEdit(argMultimap.getAllValues(CliSyntax.PREFIX_TAG))
                 .ifPresent(editPersonDescriptor::setTags);
-
-        if (!editPersonDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+        if (argMultimap.getValue(CliSyntax.PREFIX_PRIORITY).isPresent()) {
+            editPersonDescriptor.setPriority(
+                    ParserUtil.parsePriority(argMultimap.getValue(CliSyntax.PREFIX_PRIORITY).get()));
         }
 
-        return new EditCommand(index, editPersonDescriptor);
+        return editPersonDescriptor;
     }
 
     /**
@@ -93,7 +108,7 @@ public class EditCommandParser implements Parser<EditCommand> {
      * If {@code tags} contain only one element which is an empty string, it will be parsed into a
      * {@code Set<Tag>} containing zero tags.
      */
-    private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
+    private static Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
         assert tags != null;
 
         if (tags.isEmpty()) {

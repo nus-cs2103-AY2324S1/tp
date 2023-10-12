@@ -1,204 +1,149 @@
 package networkbook.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-import static networkbook.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.function.Predicate;
-
 import org.junit.jupiter.api.Test;
 
-import javafx.collections.ObservableList;
-import networkbook.commons.core.GuiSettings;
+import networkbook.commons.core.index.Index;
 import networkbook.logic.Messages;
-import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.model.Model;
+import networkbook.model.ModelManager;
 import networkbook.model.NetworkBook;
-import networkbook.model.ReadOnlyNetworkBook;
-import networkbook.model.ReadOnlyUserPrefs;
+import networkbook.model.UserPrefs;
 import networkbook.model.person.Person;
+import networkbook.testutil.EditPersonDescriptorBuilder;
 import networkbook.testutil.PersonBuilder;
+import networkbook.testutil.TypicalIndexes;
 import networkbook.testutil.TypicalPersons;
 
+
+/**
+ * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
+ */
 public class AddCommandTest {
 
+    private Model model = new ModelManager(TypicalPersons.getTypicalNetworkBook(), new UserPrefs());
+
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
+    public void execute_someFieldsSpecifiedUnfilteredList_success() {
+        Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
+        Person lastPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
+
+        PersonBuilder personInList = new PersonBuilder(lastPerson);
+        Person editedPerson = personInList.withPhone(CommandTestUtil.VALID_PHONE_BOB)
+                .withTags(CommandTestUtil.VALID_TAG_HUSBAND).build();
+
+        EditCommand.EditPersonDescriptor descriptor =
+                new EditPersonDescriptorBuilder().withPhone(CommandTestUtil.VALID_PHONE_BOB)
+                        .withTags(CommandTestUtil.VALID_TAG_HUSBAND).build();
+        AddCommand addCommand = new AddCommand(indexLastPerson, descriptor);
+
+        String expectedMessage = String.format(AddCommand.MESSAGE_ADD_INFO_SUCCESS, Messages.format(editedPerson));
+
+        Model expectedModel = new ModelManager(new NetworkBook(model.getNetworkBook()), new UserPrefs());
+        expectedModel.setItem(lastPerson, editedPerson);
+
+        CommandTestUtil.assertCommandSuccess(addCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
+    public void execute_noFieldSpecifiedUnfilteredList_success() {
+        AddCommand addCommand =
+                new AddCommand(TypicalIndexes.INDEX_FIRST_PERSON, new EditCommand.EditPersonDescriptor());
+        Person editedPerson = model.getFilteredPersonList().get(TypicalIndexes.INDEX_FIRST_PERSON.getZeroBased());
 
-        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
+        String expectedMessage = String.format(AddCommand.MESSAGE_ADD_INFO_SUCCESS, Messages.format(editedPerson));
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
-                commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+        Model expectedModel = new ModelManager(new NetworkBook(model.getNetworkBook()), new UserPrefs());
+
+        CommandTestUtil.assertCommandSuccess(addCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Person validPerson = new PersonBuilder().build();
-        AddCommand addCommand = new AddCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+    public void execute_filteredList_success() {
+        CommandTestUtil.showPersonAtIndex(model, TypicalIndexes.INDEX_FIRST_PERSON);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        Person personInFilteredList = model.getFilteredPersonList()
+                .get(TypicalIndexes.INDEX_FIRST_PERSON.getZeroBased());
+        Person editedPerson = new PersonBuilder(personInFilteredList)
+                .withAddress(CommandTestUtil.VALID_ADDRESS_BOB).build();
+        AddCommand addCommand = new AddCommand(TypicalIndexes.INDEX_FIRST_PERSON,
+                new EditPersonDescriptorBuilder().withAddress(CommandTestUtil.VALID_ADDRESS_BOB).build());
+
+        String expectedMessage = String.format(AddCommand.MESSAGE_ADD_INFO_SUCCESS, Messages.format(editedPerson));
+
+        Model expectedModel = new ModelManager(new NetworkBook(model.getNetworkBook()), new UserPrefs());
+        expectedModel.setItem(model.getFilteredPersonList().get(0), editedPerson);
+
+        CommandTestUtil.assertCommandSuccess(addCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_invalidPersonIndexUnfilteredList_failure() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        EditCommand.EditPersonDescriptor descriptor =
+                new EditPersonDescriptorBuilder().withName(CommandTestUtil.VALID_NAME_BOB).build();
+        AddCommand addCommand = new AddCommand(outOfBoundIndex, descriptor);
+
+        CommandTestUtil.assertCommandFailure(addCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    /**
+     * Edit filtered list where index is larger than size of filtered list,
+     * but smaller than size of network book
+     */
+    @Test
+    public void execute_invalidPersonIndexFilteredList_failure() {
+        CommandTestUtil.showPersonAtIndex(model, TypicalIndexes.INDEX_FIRST_PERSON);
+        Index outOfBoundIndex = TypicalIndexes.INDEX_SECOND_PERSON;
+        // ensures that outOfBoundIndex is still in bounds of network book list
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getNetworkBook().getPersonList().size());
+
+        AddCommand addCommand = new AddCommand(outOfBoundIndex,
+                new EditPersonDescriptorBuilder().withName(CommandTestUtil.VALID_NAME_BOB).build());
+
+        CommandTestUtil.assertCommandFailure(addCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
-
-        // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        final AddCommand standardCommand =
+                new AddCommand(TypicalIndexes.INDEX_FIRST_PERSON, CommandTestUtil.DESC_AMY);
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        EditCommand.EditPersonDescriptor copyDescriptor =
+                new EditCommand.EditPersonDescriptor(CommandTestUtil.DESC_AMY);
+        AddCommand commandWithSameValues = new AddCommand(TypicalIndexes.INDEX_FIRST_PERSON, copyDescriptor);
+        assertTrue(standardCommand.equals(commandWithSameValues));
 
-        // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        // same object -> returns true
+        assertTrue(standardCommand.equals(standardCommand));
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertFalse(standardCommand.equals(null));
 
-        // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        // different types -> returns false
+        assertFalse(standardCommand.equals(new ClearCommand()));
+
+        // different index -> returns false
+        assertFalse(standardCommand.equals(
+                new AddCommand(TypicalIndexes.INDEX_SECOND_PERSON, CommandTestUtil.DESC_AMY)));
+
+        // different descriptor -> returns false
+        assertFalse(standardCommand.equals(
+                new AddCommand(TypicalIndexes.INDEX_FIRST_PERSON, CommandTestUtil.DESC_BOB)));
     }
 
     @Test
     public void toStringMethod() {
-        AddCommand addCommand = new AddCommand(TypicalPersons.ALICE);
-        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + TypicalPersons.ALICE + "}";
+        Index index = Index.fromOneBased(1);
+        EditCommand.EditPersonDescriptor editPersonDescriptor = new EditCommand.EditPersonDescriptor();
+        AddCommand addCommand = new AddCommand(index, editPersonDescriptor);
+        String expected = AddCommand.class.getCanonicalName() + "{index=" + index + ", editPersonDescriptor="
+                + editPersonDescriptor + "}";
         assertEquals(expected, addCommand.toString());
-    }
-
-    /**
-     * A default model stub that have all of the methods failing.
-     */
-    private class ModelStub implements Model {
-        @Override
-        public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ReadOnlyUserPrefs getUserPrefs() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public GuiSettings getGuiSettings() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setGuiSettings(GuiSettings guiSettings) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public Path getNetworkBookFilePath() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setNetworkBookFilePath(Path networkBookFilePath) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void addPerson(Person person) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setNetworkBook(ReadOnlyNetworkBook newData) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ReadOnlyNetworkBook getNetworkBook() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean hasPerson(Person person) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void deletePerson(Person target) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setItem(Person target, Person editedPerson) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ObservableList<Person> getFilteredPersonList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateFilteredPersonList(Predicate<Person> predicate) {
-            throw new AssertionError("This method should not be called.");
-        }
-    }
-
-    /**
-     * A Model stub that contains a single person.
-     */
-    private class ModelStubWithPerson extends ModelStub {
-        private final Person person;
-
-        ModelStubWithPerson(Person person) {
-            requireNonNull(person);
-            this.person = person;
-        }
-
-        @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return this.person.isSame(person);
-        }
-    }
-
-    /**
-     * A Model stub that always accept the person being added.
-     */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Person> personsAdded = new ArrayList<>();
-
-        @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSame);
-        }
-
-        @Override
-        public void addPerson(Person person) {
-            requireNonNull(person);
-            personsAdded.add(person);
-        }
-
-        @Override
-        public ReadOnlyNetworkBook getNetworkBook() {
-            return new NetworkBook();
-        }
     }
 
 }
