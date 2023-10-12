@@ -126,7 +126,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, nric, phone, email, address, appointment, medicalHistories, tags);
+        return new Person(name, phone, email, address, tags);
     }
 
 }

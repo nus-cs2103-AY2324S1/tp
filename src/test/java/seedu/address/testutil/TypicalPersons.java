@@ -24,62 +24,42 @@ import seedu.address.model.person.Person;
 public class TypicalPersons {
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
-            .withNric("T0987654A")
             .withAddress("311, Clementi Ave 2, #02-25")
-            .withAppointment("9 AUG 2023 10AM - 11AM")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withMedicalHistories("Diabetes", "Hypertension")
             .withTags("owesMoney", "friends").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
-            .withNric("T0987654A")
             .withAddress("311, Clementi Ave 2, #02-25")
-            .withAppointment("9 AUG 2023 10AM - 11AM")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withMedicalHistories("Diabetes", "Hypertension")
             .withTags("owesMoney", "friends").build();
-    public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withNric("T0987654A")
+    public static final Person CARL = new PersonBuilder().withName("Carl Kurz")
             .withAddress("311, Clementi Ave 2, #02-25")
-            .withAppointment("9 AUG 2023 10AM - 11AM")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withMedicalHistories("Diabetes", "Hypertension")
             .withTags("owesMoney", "friends").build();
-    public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withNric("T0987654A")
+    public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
-            .withAppointment("9 AUG 2023 10AM - 11AM")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withMedicalHistories("Diabetes", "Hypertension")
             .withTags("owesMoney", "friends").build();
-    public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withNric("T0987654A")
+    public static final Person ELLE = new PersonBuilder().withName("Elle Meyer")
             .withAddress("311, Clementi Ave 2, #02-25")
-            .withAppointment("9 AUG 2023 10AM - 11AM")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withMedicalHistories("Diabetes", "Hypertension")
             .withTags("owesMoney", "friends").build();
-    public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withNric("T0987654A")
+    public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz")
             .withAddress("311, Clementi Ave 2, #02-25")
-            .withAppointment("9 AUG 2023 10AM - 11AM")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withMedicalHistories("Diabetes", "Hypertension")
             .withTags("owesMoney", "friends").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withNric("T0987654A")
             .withAddress("311, Clementi Ave 2, #02-25")
-            .withAppointment("9 AUG 2023 10AM - 11AM")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withMedicalHistories("Diabetes", "Hypertension")
             .withTags("owesMoney", "friends").build();
 
     // Manually added
-    public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withNric("T0987654A")
+    public static final Person HOON = new PersonBuilder().withName("Hoon Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
-            .withAppointment("9 AUG 2023 10AM - 11AM")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withMedicalHistories("Diabetes", "Hypertension")
             .withTags("owesMoney", "friends").build();
-    public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withNric("T0987654A")
+    public static final Person IDA = new PersonBuilder().withName("Ida Mueller")
             .withAddress("311, Clementi Ave 2, #02-25")
-            .withAppointment("9 AUG 2023 10AM - 11AM")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withMedicalHistories("Diabetes", "Hypertension")
             .withTags("owesMoney", "friends").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
