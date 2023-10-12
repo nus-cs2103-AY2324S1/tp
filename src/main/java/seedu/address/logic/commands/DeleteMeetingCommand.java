@@ -18,12 +18,12 @@ public class DeleteMeetingCommand extends Command {
 
     public static final String COMMAND_WORD = "deletem";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD 
+    public static final String MESSAGE_DELETE_MEETING_SUCCESS = "Meeting deleted: %1$s";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the meeting identified by the index number used in the displayed meetings list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + "1";
-
-    public static final String MESSAGE_DELETE_MEETING_SUCCESS = "Meeting deleted: %1$s";
 
     private final Index targetIndex;
 
@@ -36,7 +36,7 @@ public class DeleteMeetingCommand extends Command {
         requireNonNull(model);
         List<Meeting> lastShownList = model.getFilteredMeetingList();
 
-        if(targetIndex.getZeroBased() >= lastShownList.size()) {
+        if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_MEETING_DISPLAYED_INDEX);
         }
 
