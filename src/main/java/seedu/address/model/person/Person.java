@@ -18,10 +18,10 @@ public class Person {
 
     // Identity fields
     private final Name name;
+    private final Gender gender;
     private final Phone phone;
     private final Email email;
     private final Birthdate birthdate;
-    private final Gender gender;
 
     // Data fields
     private final Address address;
@@ -30,20 +30,24 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Birthdate birthdate, Gender gender,
+    public Person(Name name, Gender gender, Phone phone, Email email, Birthdate birthdate,
                   Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
+        this.gender = gender;
         this.phone = phone;
         this.email = email;
         this.birthdate = birthdate;
-        this.gender = gender;
         this.address = address;
         this.tags.addAll(tags);
     }
 
     public Name getName() {
         return name;
+    }
+
+    public Gender getGender() {
+        return gender;
     }
 
     public Phone getPhone() {
@@ -56,10 +60,6 @@ public class Person {
 
     public Birthdate getBirthdate() {
         return birthdate;
-    }
-
-    public Gender getGender() {
-        return gender;
     }
 
     public Address getAddress() {
@@ -104,10 +104,10 @@ public class Person {
 
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
+                && gender.equals(otherPerson.gender)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && birthdate.equals(otherPerson.birthdate)
-                && gender.equals(otherPerson.gender)
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags);
     }
@@ -115,17 +115,17 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, birthdate, gender, address, tags);
+        return Objects.hash(name, gender, phone, email, birthdate, address, tags);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
+                .add("gender", gender)
                 .add("phone", phone)
                 .add("email", email)
                 .add("birthdate", birthdate)
-                .add("gender", gender)
                 .add("address", address)
                 .add("tags", tags)
                 .toString();

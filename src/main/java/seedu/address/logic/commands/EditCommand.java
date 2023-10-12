@@ -109,8 +109,8 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail,updatedBirthdate,
-                updatedGender, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedGender, updatedPhone, updatedEmail, updatedBirthdate,
+                updatedAddress, updatedTags);
     }
 
     @Override
@@ -251,6 +251,7 @@ public class EditCommand extends Command {
 
             EditPersonDescriptor otherEditPersonDescriptor = (EditPersonDescriptor) other;
             return Objects.equals(name, otherEditPersonDescriptor.name)
+                    && Objects.equals(gender, otherEditPersonDescriptor.gender)
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(birthdate, otherEditPersonDescriptor.birthdate)
@@ -262,6 +263,7 @@ public class EditCommand extends Command {
         public String toString() {
             return new ToStringBuilder(this)
                     .add("name", name)
+                    .add("gender", gender)
                     .add("phone", phone)
                     .add("email", email)
                     .add("birthdate", birthdate)

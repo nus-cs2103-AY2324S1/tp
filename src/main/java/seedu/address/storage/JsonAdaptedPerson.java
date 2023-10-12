@@ -87,6 +87,14 @@ class JsonAdaptedPerson {
         }
         final Name modelName = new Name(name);
 
+        if (gender == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Gender.class.getSimpleName()));
+        }
+        if (!Gender.isValidGender(gender)) {
+            throw new IllegalValueException(Gender.MESSAGE_CONSTRAINTS);
+        }
+        final Gender modelGender = new Gender(gender);
+
         if (phone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
         }
@@ -104,20 +112,13 @@ class JsonAdaptedPerson {
         final Email modelEmail = new Email(email);
 
         if (birthdate == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Birthdate.class.getSimpleName()));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Birthdate.class.getSimpleName()));
         }
         if (!Birthdate.isValidBirthdate(birthdate)) {
-            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(Birthdate.MESSAGE_CONSTRAINTS);
         }
         final Birthdate modelBirthdate = new Birthdate(birthdate);
-
-        if (gender == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Gender.class.getSimpleName()));
-        }
-        if (!Gender.isValidGender(gender)) {
-            throw new IllegalValueException(Gender.MESSAGE_CONSTRAINTS);
-        }
-        final Gender modelGender = new Gender(gender);
 
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
@@ -128,7 +129,7 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelBirthdate, modelGender, modelAddress, modelTags);
+        return new Person(modelName, modelGender, modelPhone, modelEmail, modelBirthdate, modelAddress, modelTags);
     }
 
 }

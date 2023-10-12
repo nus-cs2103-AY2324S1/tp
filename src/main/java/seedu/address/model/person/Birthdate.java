@@ -17,6 +17,11 @@ public class Birthdate {
 
     public final String value;
 
+    /**
+     * Constructs an {@code Birthdate}.
+     *
+     * @param birthdate A valid birthdate.
+     */
     public Birthdate(String birthdate) {
         requireNonNull(birthdate);
         value = birthdate;
