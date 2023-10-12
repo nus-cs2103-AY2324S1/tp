@@ -1,6 +1,7 @@
 package seedu.address.model.util;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Set;
@@ -27,8 +28,10 @@ public class SampleDataUtil {
         sampleNotes.add(new Note("Hello", "Sample body"));
 
         ArrayList<Event> sampleEvents = new ArrayList<Event>();
-        sampleEvents.add(new Event("Sample event", LocalDateTime.now().toString(),
-                LocalDateTime.now().plusHours(1).toString(), "Some Location",
+        sampleEvents.add(new Event("Sample event", LocalDateTime.now()
+                .format(DateTimeFormatter.ofPattern("HH:mm:ss")),
+                LocalDateTime.now().plusHours(1)
+                        .format(DateTimeFormatter.ofPattern("HH:mm:ss")), "Some Location",
                 "Some Information"));
 
         return new Person[] {
