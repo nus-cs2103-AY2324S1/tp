@@ -106,7 +106,7 @@ public class ParserUtil {
         requireNonNull(birthdate);
         String trimmedBirthdate = birthdate.trim();
         if (!Birthdate.isValidBirthdate(trimmedBirthdate)) {
-            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Birthdate.MESSAGE_CONSTRAINTS);
         }
         return new Birthdate(trimmedBirthdate);
     }

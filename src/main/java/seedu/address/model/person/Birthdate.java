@@ -7,6 +7,8 @@ import static java.util.Objects.requireNonNull;
  * Guarantees: immutable; is always valid
  */
 public class Birthdate {
+    public static final String MESSAGE_CONSTRAINTS = "Birthdates should be of the form MM/DD/YYYY";
+
     /*
      * The first character of the birthdate must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
