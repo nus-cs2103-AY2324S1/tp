@@ -1,8 +1,6 @@
 package transact.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static transact.model.Model.PREDICATE_HIDE_ALL_PERSONS;
-import static transact.model.Model.PREDICATE_HIDE_ALL_TRANSACTIONS;
 import static transact.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static transact.model.Model.PREDICATE_SHOW_ALL_TRANSACTIONS;
 
@@ -16,8 +14,7 @@ public class ViewCommand extends Command {
      * Enum for different types of views.
      */
     public enum ViewType {
-        STAFF,
-        TRANSACTION
+        STAFF, TRANSACTION
     }
     public static final String COMMAND_WORD = "view";
 
@@ -38,14 +35,12 @@ public class ViewCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         if (type == ViewType.TRANSACTION) {
-            model.updateFilteredPersonList(PREDICATE_HIDE_ALL_PERSONS);
             model.updateFilteredTransactionList(PREDICATE_SHOW_ALL_TRANSACTIONS);
-            return new CommandResult(MESSAGE_SUCCESS_TRANSACTIONS);
+            return new CommandResult(MESSAGE_SUCCESS_TRANSACTIONS, 1);
         }
 
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        model.updateFilteredTransactionList(PREDICATE_HIDE_ALL_TRANSACTIONS);
-        return new CommandResult(MESSAGE_SUCCESS_STAFF);
+        return new CommandResult(MESSAGE_SUCCESS_STAFF, 2);
     }
 
     @Override
