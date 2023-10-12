@@ -24,7 +24,10 @@ public class LoadCommandParser implements Parser<LoadCommand> {
             requireNonNull(args);
             ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_FILE);
             String fileName = argMultimap.getValue(PREFIX_FILE).orElse("");
-            Path newAddressBookFilePath = Paths.get("data", fileName);
+            if (fileName.isEmpty()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LoadCommand.MESSAGE_USAGE));
+            }
+            Path newAddressBookFilePath = Paths.get("data", fileName + ".json");
             return new LoadCommand(fileName, newAddressBookFilePath);
         } catch (NullPointerException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LoadCommand.MESSAGE_USAGE), pe);

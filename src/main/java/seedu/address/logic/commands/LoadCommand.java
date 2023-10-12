@@ -3,28 +3,25 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.nio.file.Path;
+import java.util.Optional;
 
+import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.JsonAddressBookStorage;
-import seedu.address.storage.Storage;
-import seedu.address.storage.StorageManager;
-import seedu.address.MainApp;
 
 public class LoadCommand extends Command{
 
     public static final String COMMAND_WORD = "load";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Load student information from an existing JSON file. "
-            + "Copy the JSON file to be loaded into the data folder. "
-            + "The data in the JSON file will be loaded into the app. "
-            + "The file also becomes the new default save file.\n"
-            + "Parameters: FILE_NAME (case sensitive string) "
-            + "f/FILE_NAME\n"
+            + ": Load student information from an existing JSON file in the data folder. "
+            + "The file becomes the new default save file. "
+            + "Parameters: f/FILE_NAME\n"
             + "Example: " + COMMAND_WORD + " "
             + "f/export-v1";
 
@@ -32,12 +29,10 @@ public class LoadCommand extends Command{
             + "This will be the new default save file.\n";
 
     public static final String MESSAGE_FILE_NOT_FOUND = "The file %1$s.json cannot be found.\n"
-            + "Please make sure that the file is in the /data folder.\n";
+            + "Please make sure the file is in the /data folder.\n";
 
     public static final String MESSAGE_FILE_CANNOT_LOAD = "The file %1$s.json cannot be loaded.\n"
-            + "Please try loading another file.\n";
-
-    public static final String MESSAGE_GENERAL_EXCEPTION = "General Exception!";
+            + "Please make sure the file is formatted correctly.\n";
 
     private final String fileName;
     private final Path filePath;
@@ -51,27 +46,39 @@ public class LoadCommand extends Command{
         this.filePath = filePath;
     }
 
+    /**
+     * Checks if the file exists and loads the file into the address book.
+     * If the file cannot be loaded or does not exist, an exception is thrown.
+     * @param  model {@code Model} which the command should operate on.
+     * @return A command result with the success message.
+     * @throws CommandException If the file cannot be loaded or does not exist.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        try {
-            File f = filePath.toFile();
-            if (!f.isFile()) {
-                throw new FileNotFoundException();
-            }
-            requireNonNull(model);
-            model.setAddressBookFilePath(filePath);
-            Path newAddressBookFilePath = model.getAddressBookFilePath();
-            AddressBookStorage addressBookStorage = new JsonAddressBookStorage(newAddressBookFilePath);
-            Storage storage = new StorageManager(addressBookStorage, userPrefsStorage);
-            model = model.initModelManager(storage, userPrefs);
-            return new CommandResult(String.format(MESSAGE_SUCCESS, fileName));
-        } catch (FileNotFoundException e) {
+        File f = filePath.toFile();
+        if (!f.isFile()) {
             throw new CommandException(String.format(MESSAGE_FILE_NOT_FOUND, fileName));
-        } catch (Exception e) {
-            throw new CommandException(e.getMessage());
         }
+        requireNonNull(model);
+        AddressBookStorage tempAddressBookStorage = new JsonAddressBookStorage(filePath);
+        Optional<ReadOnlyAddressBook> addressBookOptional;
+        ReadOnlyAddressBook newData;
+        try {
+            addressBookOptional = tempAddressBookStorage.readAddressBook();
+            newData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+        } catch (DataLoadingException e) {
+            throw new CommandException(String.format(MESSAGE_FILE_CANNOT_LOAD, fileName));
+        }
+        model.setAddressBookFilePath(filePath);
+        model.setAddressBook(newData);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, fileName));
     }
 
+    /**
+     * Checks if the file path and file name are the same.
+     * @param other Object to compare with.
+     * @return True if the file path and file name are the same.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -84,6 +91,6 @@ public class LoadCommand extends Command{
         }
 
         LoadCommand e = (LoadCommand) other;
-        return filePath.equals(e.filePath);
+        return filePath.equals(e.filePath) && fileName.equals(e.fileName);
     }
 }
