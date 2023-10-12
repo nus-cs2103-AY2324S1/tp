@@ -140,6 +140,11 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
+//        System.out.println(networkBook.equals(otherModelManager.networkBook)); false
+//        System.out.println(userPrefs.equals(otherModelManager.userPrefs)); true
+//        System.out.println(filteredPersons.equals(otherModelManager.filteredPersons)); false
+        NetworkBook nb1 = networkBook;
+        NetworkBook nb2 = otherModelManager.networkBook;
         return networkBook.equals(otherModelManager.networkBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);

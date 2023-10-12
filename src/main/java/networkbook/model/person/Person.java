@@ -5,6 +5,7 @@ import static networkbook.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import networkbook.commons.util.ToStringBuilder;
@@ -26,17 +27,22 @@ public class Person implements Identifiable<Person> {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final Priority priority;
 
     /**
-     * Every field must be present and not null.
+     * Name must be present and not null.
+     * Other fields are nullable.
      */
-    public Person(Name name, Phone phone, UniqueList<Email> emails, Address address, Set<Tag> tags) {
+    public Person(Name name, Phone phone, UniqueList<Email> emails, Address address, Set<Tag> tags,
+                  Priority priority) {
+        // TODO: review requireAllNonNull
         requireAllNonNull(name, phone, emails, address, tags);
         this.name = name;
         this.phone = phone;
         this.emails = emails;
         this.address = address;
         this.tags.addAll(tags);
+        this.priority = priority;
     }
 
     public Name getName() {
@@ -61,6 +67,10 @@ public class Person implements Identifiable<Person> {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public Optional<Priority> getPriority() {
+        return Optional.ofNullable(priority);
     }
 
     /**
@@ -100,29 +110,35 @@ public class Person implements Identifiable<Person> {
             return false;
         }
 
+        // TODO: nullable fields should use Objects.equals
+
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && emails.equals(otherPerson.emails)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && Objects.equals(priority, otherPerson.priority);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, emails, address, tags);
+        return Objects.hash(name, phone, emails, address, tags, priority);
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
+        ToStringBuilder tsb = new ToStringBuilder(this)
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", emails)
                 .add("address", address)
-                .add("tags", tags)
-                .toString();
+                .add("tags", tags);
+        if (priority != null) {
+            tsb.add("priority", priority);
+        }
+        return tsb.toString();
     }
 
 }

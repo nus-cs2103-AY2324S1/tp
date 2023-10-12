@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import networkbook.logic.parser.Prefix;
 import networkbook.model.person.Person;
+import networkbook.model.person.Priority;
 
 /**
  * Container for user visible messages.
@@ -45,6 +46,10 @@ public class Messages {
                 .append(person.getAddress())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
+        person.getPriority().ifPresent((Priority p) -> {
+            builder.append("; Priority: ");
+            builder.append(p);
+        } );
         return builder.toString();
     }
 
