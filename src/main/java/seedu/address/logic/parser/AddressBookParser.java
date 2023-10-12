@@ -89,12 +89,11 @@ public class AddressBookParser {
         case ViewContactCommand.COMMAND_WORD:
             return new ViewContactCommandParser().parse(arguments);
 
-        case AddMeetingCommand.COMMAND_WORD:
-            return new AddMeetingCommandParser().parse(arguments);
-        
-            
         case DeleteMeetingCommand.COMMAND_WORD:
             return new DeleteMeetingCommandParser().parse(arguments);
+
+        case AddMeetingCommand.COMMAND_WORD:
+            return new AddMeetingCommandParser().parse(arguments);
 
         case RemoveMeetingContactCommand.COMMAND_WORD:
             return new RemoveMeetingContactCommandParser().parse(arguments);
