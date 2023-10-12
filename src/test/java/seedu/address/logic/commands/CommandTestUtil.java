@@ -43,6 +43,7 @@ public class CommandTestUtil {
     public static final String VALID_GENDER_FEMALE = "F";
     public static final String VALID_NRIC_AMY = "S8643226I";
     public static final String VALID_NRIC_BOB = "S8192320E";
+    public static final String VALID_NRIC_ALICE = "T0131267K";
     public static final String VALID_REMARK_AMY = "She likes aardvarks.";
     public static final String VALID_REMARK_BOB = "He likes football.";
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
@@ -76,9 +77,10 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
+                .withGender(VALID_GENDER_FEMALE).withIc(VALID_NRIC_AMY).withTags(VALID_TAG_FRIEND).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
+                .withGender(VALID_GENDER_MALE).withIc(VALID_NRIC_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 
