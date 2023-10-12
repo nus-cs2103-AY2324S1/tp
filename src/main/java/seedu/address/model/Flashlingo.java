@@ -41,10 +41,10 @@ public class Flashlingo implements ReadOnlyFlashlingo {
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the person list with {@code persons}.
-     * {@code flashCards} must not contain duplicate flashcards.
+     * Replaces the contents of the flashcard list with {@code flashCards}.
+     * {@code flashCards} must not contain duplicate flashCards.
      */
-    public void setPersons(List<FlashCard> flashCards) {
+    public void setFlashCards(List<FlashCard> flashCards) {
         this.flashCards.setFlashCards(flashCards);
     }
 
@@ -53,8 +53,7 @@ public class Flashlingo implements ReadOnlyFlashlingo {
      */
     public void resetData(ReadOnlyFlashlingo newData) {
         requireNonNull(newData);
-
-        setPersons(newData.getFlashCardList());
+        setFlashCards(newData.getFlashCardList());
     }
 
     //// flashcard-level operations
@@ -68,8 +67,8 @@ public class Flashlingo implements ReadOnlyFlashlingo {
     }
 
     /**
-     * Adds a flashcard to the flashlingo.
-     * The flashcard must not already exist in the flashlingo.
+     * Adds a flashcard to Flashlingo
+     * The flashcard must not already exist in Flashlingo.
      */
     public void addFlashCard(FlashCard flashCard) {
         flashCards.add(flashCard);
@@ -77,8 +76,8 @@ public class Flashlingo implements ReadOnlyFlashlingo {
 
     /**
      * Replaces the given flashcard {@code target} in the list with {@code editedFlashCard}.
-     * {@code target} must exist in the flashlingo.
-     * The flashcard identity of {@code editedFlashCard} must not be the same as another existing flashcard in the flashlingo.
+     * {@code target} must exist in flashlingo.
+     * The flashcard identity of {@code editedFlashCard} must not be the same as another existing flashcard in flashlingo.
      */
     public void setFlashCard(FlashCard target, FlashCard editedFlashCard) {
         requireNonNull(editedFlashCard);
@@ -87,8 +86,8 @@ public class Flashlingo implements ReadOnlyFlashlingo {
     }
 
     /**
-     * Removes {@code key} from this {@code flashlingo}.
-     * {@code key} must exist in the flashlingo.
+     * Removes {@code key} from this {@code Flashlingo}.
+     * {@code key} must exist in Flashlingo.
      */
     public void removeFlashCard(FlashCard key) {
         flashCards.remove(key);
