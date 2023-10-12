@@ -11,7 +11,7 @@ Given below are my contributions to the project.
 
 - **New Feature**: _To be added soon_
 
-- **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=awhb&breakdown=true)
+- **Code contributed**: [RepoSense webLink](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=awhb&breakdown=true)
 
 - **Project management**:
 

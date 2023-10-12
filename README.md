@@ -17,7 +17,7 @@
 3. **Value proposition:** As computing students and professionals network with alumni to expand their career prospects, our app keeps a list of contacts of people that each user networks with.
 
 - Users can sort contacts by priority, courses taken/taking, specialisation(s) taken/intending to take.
-- This project is offline, and has a static online page that contains user manual and download link.
+- This project is offline, and has a static online page that contains user manual and download webLink.
 
 ## Contributors
 

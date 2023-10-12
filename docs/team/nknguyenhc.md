@@ -12,11 +12,11 @@ Given below are my contributions to the project.
 * **New Feature**: Add an email to a person.
 The command adds the new email to the target person's current list of emails.
 
-* **New Feature**: Attach a link to a person.
-The link can be the person's social page or personal website.
-The command adds the new link to the target person's current list of emails.
+* **New Feature**: Attach a webLink to a person.
+The webLink can be the person's social page or personal website.
+The command adds the new webLink to the target person's current list of emails.
 
-* **Code contributed**: [RepoSense link]()
+* **Code contributed**: [RepoSense webLink]()
 
 * **Project management**:
   * Managed releases `v1.1` on GitHub
@@ -31,7 +31,7 @@ The command adds the new link to the target person's current list of emails.
   * User Guide:
     * Added documentation for the following features:
       * Add an email to a person
-      * Attach a link to a person
+      * Attach a webLink to a person
       * Edit details of a person
   * Developer Guide:
     * Add user stories, use cases and non-functional requirements

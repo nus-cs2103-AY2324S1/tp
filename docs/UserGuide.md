@@ -13,7 +13,7 @@ NetworkBook is a **desktop contact book application**. You can use it to network
 
 You can use the create command to create a new contact. When creating a contact, you must provide the name field, and it's optional to provide other fields which will be added to the new contact.
 
-Format: `create /name [name] [/phone /email /link /grad /course /spec /priority /tag]`
+Format: `create /name [name] [/phone /email /webLink /grad /course /spec /priority /tag]`
 
 Example usage:
 * `create /name Oreki`
@@ -120,41 +120,41 @@ When the command fails:
 
 `Oops, you did not provide the index of the contact to add the email to.`
 
-### Add link to a contact: `add /link /index`
+### Add webLink to a contact: `add /webLink /index`
 
-You can add a social link to an existing contact.
-A new link will be added to the contact's list of links,
+You can add a social webLink to an existing contact.
+A new webLink will be added to the contact's list of links,
 and no new contact will be created.
 
-Format: `add /link [link] [note] /index [index]`
+Format: `add /webLink [webLink] [note] /index [index]`
 
 Example usage:
-* `add /link https://nknguyenhc.github.io/ website /index 1`
-* `add /link https://www.linkedin.com/in/nguyen-khoi-nguyen-6279341a8/ /index 2`
+* `add /webLink https://nknguyenhc.github.io/ website /index 1`
+* `add /webLink https://www.linkedin.com/in/nguyen-khoi-nguyen-6279341a8/ /index 2`
 
 Parameters:
-* `[link]` is a valid URL linking to a contact’s social media page.
+* `[webLink]` is a valid URL linking to a contact’s social media page.
 * `[note]` is a note on the URL for your own reference. 
 This parameter is optional, and should be separated.
 * `[index]` is the index of the person in the list.
 
 When the command succeeds:
-* `add /link https://nknguyenhc.github.io/ /note website /index 1`
+* `add /webLink https://nknguyenhc.github.io/ /note website /index 1`
 
 `Noted, I have added https://nknguyenhc.github.io/ 
 as the “website” of your contact at index 1.`
 
-* `add /link https://www.linkedin.com/in/nguyen-khoi-nguyen-6279341a8/ /index 2`
+* `add /webLink https://www.linkedin.com/in/nguyen-khoi-nguyen-6279341a8/ /index 2`
 
 `Noted, I have added https://www.linkedin.com/in/nguyen-khoi-nguyen-6279341a8/ 
-as a link to your contact at index 2.`
+as a webLink to your contact at index 2.`
 
-![add link success](images/add-remark/add-link.png)
+![add webLink success](images/add-remark/add-webLink.png)
 
 When the command fails:
-* `add /link https://nknguyenhc.github.io/`
+* `add /webLink https://nknguyenhc.github.io/`
 
-`Oops, you did not provide the index of the contact to add the link to.`
+`Oops, you did not provide the index of the contact to add the webLink to.`
 
 ### Add course to a contact: `add /course /index`
 
@@ -317,7 +317,7 @@ Format: `update /[parameter name] [new parameter value] /index [index]`
 
 Example usage:
 * `update /name nkn /index 1`
-* `update /link https://nknguyenhc.github.io/ /index 1`
+* `update /webLink https://nknguyenhc.github.io/ /index 1`
 
 Parameters:
 
@@ -327,7 +327,7 @@ Parameters:
   * `course`
   * `specialisation`
   * `email`
-  * `link`
+  * `webLink`
   * `grad`
   * `priority`
   * `tag`
@@ -339,7 +339,7 @@ When command succeeds:
 
 `OK, the name of the contact at index 1 (Nguyen) has been updated to “nkn”.`
 
-* `update /link https://nknguyenhc.github.io/ /index 1`
+* `update /webLink https://nknguyenhc.github.io/ /index 1`
 
 ```
 There are multiple links to the contact at index 1. Which one do you wish to update?
@@ -349,7 +349,7 @@ https://www.linkedin.com/in/nguyen-khoi-nguyen-6279341a8/
 
 Assume that you in 1:
 
-`OK, a link of the contact at index 1 (Nguyen) has been updated
+`OK, a webLink of the contact at index 1 (Nguyen) has been updated
 from https://nknguyenhc.github.io/ip to https://nknguyenhc.github.io/.`
 
 ![update success](images/edit/edit.png)
@@ -497,7 +497,7 @@ name, grad, course, spec/specialization, priority.`
 
 | Category | Format, Examples                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 |----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**  | `create /name [name] [/phone /email /link /grad /course /spec /priority /tag]` <br> e.g., `create /name Oreki /phone +6598765432 /grad AY2526-S2`<br><br>`add /phone [phone] /index [index]` <br> e.g., `add /phone +6591234567 /index 1`<br><br>`add /email [email] /index [index]` <br> e.g., `add /email test@example.com /index 2`<br><br>`add /link [link] [note] /index [index]`<br>e.g., `add /link https://nknguyenhc.github.io/ website /index 1`<br><br>`add /course [course code] /index [index] /date [start date] [end date]`<br>e.g., `add /course CS1101S /index 1 /date 01-08-2022 07-12-2022`<br><br>`add /spec [specialisation] /index [index]`<br>e.g., `add /spec Robotics & AI /index 1`<br><br>`add /priority [priority level] /index [index]`<br>e.g., `add /priority high /index 1`<br><br>`add /tag [tag name] /index [index]`<br>e.g., `add /index 1 /tag data analytics`|                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |  
+| **Add**  | `create /name [name] [/phone /email /webLink /grad /course /spec /priority /tag]` <br> e.g., `create /name Oreki /phone +6598765432 /grad AY2526-S2`<br><br>`add /phone [phone] /index [index]` <br> e.g., `add /phone +6591234567 /index 1`<br><br>`add /email [email] /index [index]` <br> e.g., `add /email test@example.com /index 2`<br><br>`add /webLink [webLink] [note] /index [index]`<br>e.g., `add /webLink https://nknguyenhc.github.io/ website /index 1`<br><br>`add /course [course code] /index [index] /date [start date] [end date]`<br>e.g., `add /course CS1101S /index 1 /date 01-08-2022 07-12-2022`<br><br>`add /spec [specialisation] /index [index]`<br>e.g., `add /spec Robotics & AI /index 1`<br><br>`add /priority [priority level] /index [index]`<br>e.g., `add /priority high /index 1`<br><br>`add /tag [tag name] /index [index]`<br>e.g., `add /index 1 /tag data analytics`|                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |  
 | **Edit** | `update /[parameter name] [new parameter value] /index [index]`<br> e.g.,`update /name nkn /index 1`<br><br>`delete [index]`<br>e.g., `delete 1`     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | **Find** | `search /name [name]` <br> e.g., `search /name Ness`<br><br>`sort /by [field] /order [order]`<br>e.g., `sort /by name /order asc`                    |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |  
 
