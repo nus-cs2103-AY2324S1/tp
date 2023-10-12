@@ -59,7 +59,7 @@ public class Person {
         return currentStatus;
     }
 
-   /* public void setStatus(StatusTypes newType) {
+    /* public void setStatus(StatusTypes newType) {
         this.currentStatus.setStatusType(newType);
     }*/
 
