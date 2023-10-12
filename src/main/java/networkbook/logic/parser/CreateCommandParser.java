@@ -7,7 +7,12 @@ import java.util.stream.Stream;
 import networkbook.logic.Messages;
 import networkbook.logic.commands.CreateCommand;
 import networkbook.logic.parser.exceptions.ParseException;
-import networkbook.model.person.*;
+import networkbook.model.person.Address;
+import networkbook.model.person.Email;
+import networkbook.model.person.Name;
+import networkbook.model.person.Person;
+import networkbook.model.person.Phone;
+import networkbook.model.person.Priority;
 import networkbook.model.tag.Tag;
 import networkbook.model.util.UniqueList;
 

@@ -7,7 +7,12 @@ import java.util.stream.Collectors;
 
 import networkbook.model.NetworkBook;
 import networkbook.model.ReadOnlyNetworkBook;
-import networkbook.model.person.*;
+import networkbook.model.person.Address;
+import networkbook.model.person.Email;
+import networkbook.model.person.Name;
+import networkbook.model.person.Person;
+import networkbook.model.person.Phone;
+import networkbook.model.person.Priority;
 import networkbook.model.tag.Tag;
 
 /**

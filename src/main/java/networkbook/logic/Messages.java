@@ -49,7 +49,7 @@ public class Messages {
         person.getPriority().ifPresent((Priority p) -> {
             builder.append("; Priority: ");
             builder.append(p);
-        } );
+        });
         return builder.toString();
     }
 

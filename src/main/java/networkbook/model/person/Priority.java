@@ -5,14 +5,14 @@ import static networkbook.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's priority level in the network book.
- * Guarantees: immutable; is valid as declared in {@link #isValidPriority(PRIORITY_LEVEL)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidPriority(PriorityLevel)}
  */
 public class Priority {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Priority is among {high, medium, low}, either the word or the first letter, and is not case-sensitive";
 
-    private final PRIORITY_LEVEL value;
+    private final PriorityLevel value;
 
     /**
      * Constructs a {@code Priority}.
@@ -21,39 +21,39 @@ public class Priority {
      */
     public Priority(String priorityString) {
         requireNonNull(priorityString);
-        PRIORITY_LEVEL priorityLevel = parsePriorityLevel(priorityString);
+        PriorityLevel priorityLevel = parsePriorityLevel(priorityString);
         checkArgument(isValidPriority(priorityLevel), MESSAGE_CONSTRAINTS);
         value = priorityLevel;
     }
 
     /**
-     * Parses user input {@code priorityString} into a {@code PRIORITY_LEVEL}
+     * Parses user input {@code priorityString} into a {@code PriorityLevel}
      *
      * @param priorityString provided in user command
-     * @return corresponding PRIORITY_LEVEL
+     * @return corresponding PriorityLevel
      */
-    public static PRIORITY_LEVEL parsePriorityLevel(String priorityString) {
+    public static PriorityLevel parsePriorityLevel(String priorityString) {
         priorityString = priorityString.toLowerCase();
-        switch (priorityString){
+        switch (priorityString) {
         case "high":
         case "h":
-            return Priority.PRIORITY_LEVEL.HIGH;
+            return Priority.PriorityLevel.HIGH;
         case "medium":
         case "m":
-            return Priority.PRIORITY_LEVEL.MEDIUM;
+            return Priority.PriorityLevel.MEDIUM;
         case "low":
         case "l":
-            return Priority.PRIORITY_LEVEL.LOW;
+            return Priority.PriorityLevel.LOW;
         default:
-            return Priority.PRIORITY_LEVEL.INVALID;
+            return Priority.PriorityLevel.INVALID;
         }
     }
 
     /**
      * Returns true if a given priority level is valid.
      */
-    public static boolean isValidPriority(PRIORITY_LEVEL priorityLevel) {
-        return priorityLevel != PRIORITY_LEVEL.INVALID;
+    public static boolean isValidPriority(PriorityLevel priorityLevel) {
+        return priorityLevel != PriorityLevel.INVALID;
     }
 
     @Override
@@ -90,7 +90,10 @@ public class Priority {
         return value.hashCode();
     }
 
-    public enum PRIORITY_LEVEL {
+    /**
+     * Enumerates the possible priority levels of a contact.
+     */
+    public enum PriorityLevel {
         HIGH,
         MEDIUM,
         LOW,

@@ -17,7 +17,12 @@ import networkbook.logic.Messages;
 import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.logic.parser.CliSyntax;
 import networkbook.model.Model;
-import networkbook.model.person.*;
+import networkbook.model.person.Address;
+import networkbook.model.person.Email;
+import networkbook.model.person.Name;
+import networkbook.model.person.Person;
+import networkbook.model.person.Phone;
+import networkbook.model.person.Priority;
 import networkbook.model.tag.Tag;
 import networkbook.model.util.UniqueList;
 
