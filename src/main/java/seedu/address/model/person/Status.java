@@ -11,9 +11,9 @@ public class Status {
         this.statusType = StatusTypes.PRELIMINARY;
     }
 
-    public StatusTypes getStatusType() {
+    /*public StatusTypes getStatusType() {
         return this.statusType;
-    }
+    }*/
 
     public void setStatusType(StatusTypes newStatus) {
         this.statusType = newStatus;
