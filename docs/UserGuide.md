@@ -176,7 +176,7 @@ Format: `exit`
 
 Adds an event to the user's calendar.
 
-Format: `addEvent d/DESCRIPTION ds/START_DATE_TIME de/END_DATE_TIME`
+Format: `addEvent d/DESCRIPTION ts/START_DATE_TIME te/END_DATE_TIME`
 
 * Adds the event starting from `START_DATE_TIME` and ending at `END_DATE_TIME`
 * `START_DATE_TIME` and `END_DATE_TIME` must be in `yyyy-MM-dd HH:mm` format

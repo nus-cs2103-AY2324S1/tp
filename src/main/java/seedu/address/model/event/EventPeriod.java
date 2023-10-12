@@ -90,11 +90,11 @@ public class EventPeriod {
      */
     public int compareTo(EventPeriod other) {
         if (this.start.isBefore(other.start)) {
-            return 1;
+            return -1;
         } else if (this.start.isEqual(other.start)) {
             return 0;
         } else {
-            return -1;
+            return 1;
         }
     }
 

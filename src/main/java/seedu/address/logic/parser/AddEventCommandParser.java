@@ -24,7 +24,7 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
                         PREFIX_EVENT_END_DATE_TIME);
 
         if (!arePrefixesPresent(argMultiMap, PREFIX_EVENT_DESCRIPTION, PREFIX_EVENT_START_DATE_TIME,
-                PREFIX_EVENT_END_DATE_TIME) || argMultiMap.getPreamble().isEmpty()) {
+                PREFIX_EVENT_END_DATE_TIME) || !argMultiMap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE));
         }
 
