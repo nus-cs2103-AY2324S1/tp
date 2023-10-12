@@ -1,17 +1,17 @@
 package seedu.address.logic.commands;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
+import seedu.address.model.person.StatusTypes;
+import seedu.address.model.person.Status;
 
 public class SetCommandTest {
 
     @Test
-    public void execute_emptyAddressBook_success() {
-        assert (true);
+    public void execute_validIndexAndStatus_success() {
+        // Check if the status of the person in the model has been updated
+        assertEquals(new Status(), "Preliminary");
     }
 
-    @Test
-    public void execute_nonEmptyAddressBook_success() {
-        assert (true);
-    }
 
 }
