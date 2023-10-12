@@ -60,8 +60,8 @@ public class JsonLoveBookStorage implements LoveBookStorage {
     }
 
     @Override
-    public void saveLoveBook(ReadOnlyLoveBook LoveBook) throws IOException {
-        saveLoveBook(LoveBook, filePath);
+    public void saveLoveBook(ReadOnlyLoveBook loveBook) throws IOException {
+        saveLoveBook(loveBook, filePath);
     }
 
     /**
@@ -69,12 +69,12 @@ public class JsonLoveBookStorage implements LoveBookStorage {
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveLoveBook(ReadOnlyLoveBook LoveBook, Path filePath) throws IOException {
-        requireNonNull(LoveBook);
+    public void saveLoveBook(ReadOnlyLoveBook loveBook, Path filePath) throws IOException {
+        requireNonNull(loveBook);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableLoveBook(LoveBook), filePath);
+        JsonUtil.saveJsonFile(new JsonSerializableLoveBook(loveBook), filePath);
     }
 
 }

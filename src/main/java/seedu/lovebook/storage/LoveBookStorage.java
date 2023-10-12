@@ -32,14 +32,14 @@ public interface LoveBookStorage {
 
     /**
      * Saves the given {@link ReadOnlyLoveBook} to the storage.
-     * @param LoveBook cannot be null.
+     * @param loveBook cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveLoveBook(ReadOnlyLoveBook LoveBook) throws IOException;
+    void saveLoveBook(ReadOnlyLoveBook loveBook) throws IOException;
 
     /**
      * @see #saveLoveBook(ReadOnlyLoveBook)
      */
-    void saveLoveBook(ReadOnlyLoveBook LoveBook, Path filePath) throws IOException;
+    void saveLoveBook(ReadOnlyLoveBook loveBook, Path filePath) throws IOException;
 
 }

@@ -42,12 +42,12 @@ public interface Model {
     /**
      * Sets the user prefs' lovebook book file path.
      */
-    void setLoveBookFilePath(Path LoveBookFilePath);
+    void setLoveBookFilePath(Path loveBookFilePath);
 
     /**
      * Replaces lovebook book data with the data in {@code LoveBook}.
      */
-    void setLoveBook(ReadOnlyLoveBook LoveBook);
+    void setLoveBook(ReadOnlyLoveBook loveBook);
 
     /** Returns the LoveBook */
     ReadOnlyLoveBook getLoveBook();

@@ -51,13 +51,13 @@ public class JsonLoveBookStorageTest {
     }
 
     @Test
-    public void readLoveBook_invalidPersonLoveBook_throwDataLoadingException() {
-        assertThrows(DataLoadingException.class, () -> readLoveBook("invalidPersonLoveBook.json"));
+    public void readLoveBook_invalidDateLoveBook_throwDataLoadingException() {
+        assertThrows(DataLoadingException.class, () -> readLoveBook("invalidDateLoveBook.json"));
     }
 
     @Test
-    public void readLoveBook_invalidAndValidPersonLoveBook_throwDataLoadingException() {
-        assertThrows(DataLoadingException.class, () -> readLoveBook("invalidAndValidPersonLoveBook.json"));
+    public void readLoveBook_invalidAndValidDateLoveBook_throwDataLoadingException() {
+        assertThrows(DataLoadingException.class, () -> readLoveBook("invalidAndValidDateLoveBook.json"));
     }
 
     @Test

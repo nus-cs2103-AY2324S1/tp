@@ -17,14 +17,14 @@ import seedu.lovebook.model.UserPrefs;
 public class StorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private LoveBookStorage LoveBookStorage;
+    private LoveBookStorage loveBookStorage;
     private UserPrefsStorage userPrefsStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code LoveBookStorage} and {@code UserPrefStorage}.
      */
-    public StorageManager(LoveBookStorage LoveBookStorage, UserPrefsStorage userPrefsStorage) {
-        this.LoveBookStorage = LoveBookStorage;
+    public StorageManager(LoveBookStorage loveBookStorage, UserPrefsStorage userPrefsStorage) {
+        this.loveBookStorage = loveBookStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
@@ -50,29 +50,29 @@ public class StorageManager implements Storage {
 
     @Override
     public Path getLoveBookFilePath() {
-        return LoveBookStorage.getLoveBookFilePath();
+        return loveBookStorage.getLoveBookFilePath();
     }
 
     @Override
     public Optional<ReadOnlyLoveBook> readLoveBook() throws DataLoadingException {
-        return readLoveBook(LoveBookStorage.getLoveBookFilePath());
+        return readLoveBook(loveBookStorage.getLoveBookFilePath());
     }
 
     @Override
     public Optional<ReadOnlyLoveBook> readLoveBook(Path filePath) throws DataLoadingException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return LoveBookStorage.readLoveBook(filePath);
+        return loveBookStorage.readLoveBook(filePath);
     }
 
     @Override
-    public void saveLoveBook(ReadOnlyLoveBook LoveBook) throws IOException {
-        saveLoveBook(LoveBook, LoveBookStorage.getLoveBookFilePath());
+    public void saveLoveBook(ReadOnlyLoveBook loveBook) throws IOException {
+        saveLoveBook(loveBook, loveBookStorage.getLoveBookFilePath());
     }
 
     @Override
-    public void saveLoveBook(ReadOnlyLoveBook LoveBook, Path filePath) throws IOException {
+    public void saveLoveBook(ReadOnlyLoveBook loveBook, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        LoveBookStorage.saveLoveBook(LoveBook, filePath);
+        loveBookStorage.saveLoveBook(loveBook, filePath);
     }
 
 }

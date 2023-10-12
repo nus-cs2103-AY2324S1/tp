@@ -19,21 +19,21 @@ import seedu.lovebook.model.person.Date;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final LoveBook LoveBook;
+    private final LoveBook loveBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Date> filteredDates;
 
     /**
      * Initializes a ModelManager with the given LoveBook and userPrefs.
      */
-    public ModelManager(ReadOnlyLoveBook LoveBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(LoveBook, userPrefs);
+    public ModelManager(ReadOnlyLoveBook loveBook, ReadOnlyUserPrefs userPrefs) {
+        requireAllNonNull(loveBook, userPrefs);
 
-        logger.fine("Initializing with lovebook book: " + LoveBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with lovebook book: " + loveBook + " and user prefs " + userPrefs);
 
-        this.LoveBook = new LoveBook(LoveBook);
+        this.loveBook = new LoveBook(loveBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredDates = new FilteredList<>(this.LoveBook.getPersonList());
+        filteredDates = new FilteredList<>(this.loveBook.getPersonList());
     }
 
     public ModelManager() {
@@ -70,37 +70,37 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setLoveBookFilePath(Path LoveBookFilePath) {
-        requireNonNull(LoveBookFilePath);
-        userPrefs.setLoveBookFilePath(LoveBookFilePath);
+    public void setLoveBookFilePath(Path loveBookFilePath) {
+        requireNonNull(loveBookFilePath);
+        userPrefs.setLoveBookFilePath(loveBookFilePath);
     }
 
     //=========== LoveBook ================================================================================
 
     @Override
-    public void setLoveBook(ReadOnlyLoveBook LoveBook) {
-        this.LoveBook.resetData(LoveBook);
+    public void setLoveBook(ReadOnlyLoveBook loveBook) {
+        this.loveBook.resetData(loveBook);
     }
 
     @Override
     public ReadOnlyLoveBook getLoveBook() {
-        return LoveBook;
+        return loveBook;
     }
 
     @Override
     public boolean hasPerson(Date date) {
         requireNonNull(date);
-        return LoveBook.hasPerson(date);
+        return loveBook.hasPerson(date);
     }
 
     @Override
     public void deletePerson(Date target) {
-        LoveBook.removePerson(target);
+        loveBook.removePerson(target);
     }
 
     @Override
     public void addPerson(Date date) {
-        LoveBook.addPerson(date);
+        loveBook.addPerson(date);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
@@ -108,7 +108,7 @@ public class ModelManager implements Model {
     public void setPerson(Date target, Date editedDate) {
         requireAllNonNull(target, editedDate);
 
-        LoveBook.setPerson(target, editedDate);
+        loveBook.setPerson(target, editedDate);
     }
 
     //=========== Filtered Date List Accessors =============================================================
@@ -140,7 +140,7 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return LoveBook.equals(otherModelManager.LoveBook)
+        return loveBook.equals(otherModelManager.loveBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredDates.equals(otherModelManager.filteredDates);
     }

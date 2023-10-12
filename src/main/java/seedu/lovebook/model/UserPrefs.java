@@ -14,7 +14,7 @@ import seedu.lovebook.commons.core.GuiSettings;
 public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
-    private Path LoveBookFilePath = Paths.get("data" , "LoveBook.json");
+    private Path loveBookFilePath = Paths.get("data" , "LoveBook.json");
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -48,12 +48,12 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     }
 
     public Path getLoveBookFilePath() {
-        return LoveBookFilePath;
+        return loveBookFilePath;
     }
 
-    public void setLoveBookFilePath(Path LoveBookFilePath) {
-        requireNonNull(LoveBookFilePath);
-        this.LoveBookFilePath = LoveBookFilePath;
+    public void setLoveBookFilePath(Path loveBookFilePath) {
+        requireNonNull(loveBookFilePath);
+        this.loveBookFilePath = loveBookFilePath;
     }
 
     @Override
@@ -69,19 +69,19 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
         UserPrefs otherUserPrefs = (UserPrefs) other;
         return guiSettings.equals(otherUserPrefs.guiSettings)
-                && LoveBookFilePath.equals(otherUserPrefs.LoveBookFilePath);
+                && loveBookFilePath.equals(otherUserPrefs.loveBookFilePath);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(guiSettings, LoveBookFilePath);
+        return Objects.hash(guiSettings, loveBookFilePath);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Gui Settings : " + guiSettings);
-        sb.append("\nLocal data file location : " + LoveBookFilePath);
+        sb.append("\nLocal data file location : " + loveBookFilePath);
         return sb.toString();
     }
 

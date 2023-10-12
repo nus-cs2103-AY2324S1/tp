@@ -27,6 +27,6 @@ public interface Storage extends LoveBookStorage, UserPrefsStorage {
     Optional<ReadOnlyLoveBook> readLoveBook() throws DataLoadingException;
 
     @Override
-    void saveLoveBook(ReadOnlyLoveBook LoveBook) throws IOException;
+    void saveLoveBook(ReadOnlyLoveBook loveBook) throws IOException;
 
 }

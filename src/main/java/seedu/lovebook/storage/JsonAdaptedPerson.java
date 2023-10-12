@@ -10,8 +10,11 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.lovebook.commons.exceptions.IllegalValueException;
-import seedu.lovebook.model.person.*;
+import seedu.lovebook.model.person.Age;
+import seedu.lovebook.model.person.Date;
+import seedu.lovebook.model.person.Gender;
 import seedu.lovebook.model.person.Height;
+import seedu.lovebook.model.person.Name;
 import seedu.lovebook.model.tag.Tag;
 
 /**
@@ -32,7 +35,7 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("age") String age,
-            @JsonProperty("gender") String gender, @JsonProperty("lovebook") String height,
+            @JsonProperty("gender") String gender, @JsonProperty("height") String height,
             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.age = age;

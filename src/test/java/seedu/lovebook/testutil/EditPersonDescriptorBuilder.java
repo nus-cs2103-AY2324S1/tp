@@ -35,7 +35,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setName(date.getName());
         descriptor.setAge(date.getAge());
         descriptor.setGender(date.getGender());
-        descriptor.setAddress(date.getHeight());
+        descriptor.setHeight(date.getHeight());
         descriptor.setTags(date.getTags());
     }
 
@@ -67,7 +67,7 @@ public class EditPersonDescriptorBuilder {
      * Sets the {@code Height} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withHeight(String height) {
-        descriptor.setAddress(new Height(height));
+        descriptor.setHeight(new Height(height));
         return this;
     }
 

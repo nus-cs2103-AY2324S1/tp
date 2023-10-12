@@ -6,10 +6,10 @@ import java.util.stream.Collectors;
 
 import seedu.lovebook.model.LoveBook;
 import seedu.lovebook.model.ReadOnlyLoveBook;
-import seedu.lovebook.model.person.Height;
 import seedu.lovebook.model.person.Age;
 import seedu.lovebook.model.person.Date;
 import seedu.lovebook.model.person.Gender;
+import seedu.lovebook.model.person.Height;
 import seedu.lovebook.model.person.Name;
 import seedu.lovebook.model.tag.Tag;
 

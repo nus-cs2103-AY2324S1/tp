@@ -1,9 +1,9 @@
 package seedu.lovebook.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_GENDER;
+import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -36,7 +36,7 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New date added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This date already exists in the lovebook book";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This date already exists in the love book";
 
     private final Date toAdd;
 

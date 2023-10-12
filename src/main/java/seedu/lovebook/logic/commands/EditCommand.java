@@ -1,9 +1,9 @@
 package seedu.lovebook.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_GENDER;
+import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.lovebook.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -21,8 +21,11 @@ import seedu.lovebook.commons.util.ToStringBuilder;
 import seedu.lovebook.logic.Messages;
 import seedu.lovebook.logic.commands.exceptions.CommandException;
 import seedu.lovebook.model.Model;
-import seedu.lovebook.model.person.*;
+import seedu.lovebook.model.person.Age;
+import seedu.lovebook.model.person.Date;
+import seedu.lovebook.model.person.Gender;
 import seedu.lovebook.model.person.Height;
+import seedu.lovebook.model.person.Name;
 import seedu.lovebook.model.tag.Tag;
 
 /**
@@ -146,7 +149,7 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setAge(toCopy.age);
             setGender(toCopy.gender);
-            setAddress(toCopy.height);
+            setHeight(toCopy.height);
             setTags(toCopy.tags);
         }
 
@@ -181,7 +184,7 @@ public class EditCommand extends Command {
             return Optional.ofNullable(gender);
         }
 
-        public void setAddress(Height height) {
+        public void setHeight(Height height) {
             this.height = height;
         }
 
@@ -231,7 +234,7 @@ public class EditCommand extends Command {
                     .add("name", name)
                     .add("age", age)
                     .add("gender", gender)
-                    .add("lovebook", height)
+                    .add("height", height)
                     .add("tags", tags)
                     .toString();
         }

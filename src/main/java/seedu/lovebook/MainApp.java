@@ -22,9 +22,9 @@ import seedu.lovebook.model.ReadOnlyLoveBook;
 import seedu.lovebook.model.ReadOnlyUserPrefs;
 import seedu.lovebook.model.UserPrefs;
 import seedu.lovebook.model.util.SampleDataUtil;
-import seedu.lovebook.storage.LoveBookStorage;
 import seedu.lovebook.storage.JsonLoveBookStorage;
 import seedu.lovebook.storage.JsonUserPrefsStorage;
+import seedu.lovebook.storage.LoveBookStorage;
 import seedu.lovebook.storage.Storage;
 import seedu.lovebook.storage.StorageManager;
 import seedu.lovebook.storage.UserPrefsStorage;
@@ -57,8 +57,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        LoveBookStorage LoveBookStorage = new JsonLoveBookStorage(userPrefs.getLoveBookFilePath());
-        storage = new StorageManager(LoveBookStorage, userPrefsStorage);
+        LoveBookStorage loveBookStorage = new JsonLoveBookStorage(userPrefs.getLoveBookFilePath());
+        storage = new StorageManager(loveBookStorage, userPrefsStorage);
 
         model = initModelManager(storage, userPrefs);
 
@@ -75,15 +75,15 @@ public class MainApp extends Application {
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         logger.info("Using data file : " + storage.getLoveBookFilePath());
 
-        Optional<ReadOnlyLoveBook> LoveBookOptional;
+        Optional<ReadOnlyLoveBook> loveBookOptional;
         ReadOnlyLoveBook initialData;
         try {
-            LoveBookOptional = storage.readLoveBook();
-            if (!LoveBookOptional.isPresent()) {
+            loveBookOptional = storage.readLoveBook();
+            if (!loveBookOptional.isPresent()) {
                 logger.info("Creating a new data file " + storage.getLoveBookFilePath()
                         + " populated with a sample LoveBook.");
             }
-            initialData = LoveBookOptional.orElseGet(SampleDataUtil::getSampleLoveBook);
+            initialData = loveBookOptional.orElseGet(SampleDataUtil::getSampleLoveBook);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getLoveBookFilePath() + " could not be loaded."
                     + " Will be starting with an empty LoveBook.");

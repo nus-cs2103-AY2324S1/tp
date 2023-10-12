@@ -46,15 +46,15 @@ class JsonSerializableLoveBook {
      * @throws IllegalValueException if there were any data constraints violated.
      */
     public LoveBook toModelType() throws IllegalValueException {
-        LoveBook LoveBook = new LoveBook();
+        LoveBook loveBook = new LoveBook();
         for (JsonAdaptedPerson jsonAdaptedPerson : dates) {
             Date date = jsonAdaptedPerson.toModelType();
-            if (LoveBook.hasPerson(date)) {
+            if (loveBook.hasPerson(date)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            LoveBook.addPerson(date);
+            loveBook.addPerson(date);
         }
-        return LoveBook;
+        return loveBook;
     }
 
 }

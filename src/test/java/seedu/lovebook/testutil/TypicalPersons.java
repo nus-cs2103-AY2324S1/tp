@@ -44,9 +44,9 @@ public class TypicalPersons {
 
     // Manually added
     public static final Date HOON = new PersonBuilder().withName("Hoon Meier").withAge("76")
-            .withGender("M").withHeight("little india").build();
+            .withGender("M").withHeight("232").build();
     public static final Date IDA = new PersonBuilder().withName("Ida Mueller").withAge("38")
-            .withGender("F").withHeight("chicago ave").build();
+            .withGender("F").withHeight("35545").build();
 
     // Manually added - Date's details found in {@code CommandTestUtil}
     public static final Date AMY = new PersonBuilder().withName(VALID_NAME_AMY).withAge(VALID_AGE_AMY)

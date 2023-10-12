@@ -1,9 +1,9 @@
 package seedu.lovebook.logic.parser;
 
 import static seedu.lovebook.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_GENDER;
+import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -12,10 +12,10 @@ import java.util.stream.Stream;
 
 import seedu.lovebook.logic.commands.AddCommand;
 import seedu.lovebook.logic.parser.exceptions.ParseException;
-import seedu.lovebook.model.person.Height;
 import seedu.lovebook.model.person.Age;
 import seedu.lovebook.model.person.Date;
 import seedu.lovebook.model.person.Gender;
+import seedu.lovebook.model.person.Height;
 import seedu.lovebook.model.person.Name;
 import seedu.lovebook.model.tag.Tag;
 
