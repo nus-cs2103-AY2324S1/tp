@@ -275,8 +275,8 @@ _{Explain here how the data archiving feature will be implemented}_
 * wants to know his students well as part of his work
 * wants to make use of statistics and technology to make marketing decisions
 
-**Value proposition**: Our product will take in data as inputs and return statistical analysis. 
-Instead of showing information of independent individuals, our product aims to provide quantitative data analysis of students for users to draw conclusions on commonalities among students and their demographics, offering insights on marketing strategies. 
+**Value proposition**: Our product will take in data as inputs and return statistical analysis.
+Instead of showing information of independent individuals, our product aims to provide quantitative data analysis of students for users to draw conclusions on commonalities among students and their demographics, offering insights on marketing strategies.
 
 
 
@@ -327,14 +327,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. Staff chooses to add student data. 
+1. Staff chooses to add student data.
 2. Tutorium stores the new data. <br>
     Use case ends.
 
 **Extensions**
 
-* 1a. Tutorium detects a format error in the entered command. 
-  * 1a1. Tutorium requests for the correctly formatted command. 
+* 1a. Tutorium detects a format error in the entered command.
+  * 1a1. Tutorium requests for the correctly formatted command.
   * 1a2. User enters a new command. <br>
     Steps 1a1-1a2 are repeated until the command entered is correctly formatted. <br>
     Use case resumes from step 2.
@@ -343,26 +343,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. Staff chooses to delete student data. 
+1. Staff chooses to delete student data.
 2. Tutorium deleted the student's data. <br>
     Use case ends.
 
 **Extensions**
 
-* 1a. Tutorium detects a format error in the entered command. 
+* 1a. Tutorium detects a format error in the entered command.
   * 1a1. Tutorium requests for the correctly formatted command.
   * 1a2. User enters a new command. <br>
     Steps 1a1-1a2 are repeated until the command entered is correctly formatted. <br>
     Use case resumes from step 2.
 
-* 1b. Tutorium detects multiple student data that match with the entered student’s name. 
-  * 1b1. Tutorium requests for the student’s email address. 
+* 1b. Tutorium detects multiple student data that match with the entered student’s name.
+  * 1b1. Tutorium requests for the student’s email address.
   * 1b2. User enters the email address. <br>
     Steps 1b1-1b2 are repeated until the data entered are correct. <br>
     Use case resumes from step 2.
 
-* 1c. Tutorium could not find any student data that matches with the entered student’s name. 
-  * 1c1. Tutorium requests for a valid student’s name. 
+* 1c. Tutorium could not find any student data that matches with the entered student’s name.
+  * 1c1. Tutorium requests for a valid student’s name.
   * 1c2. User enters a new student’s name. <br>
     Steps 1c1-1c2 are repeated until the data entered are correct.  <br>
     Use case resumes from step 2.
@@ -371,34 +371,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. Staff chooses to edit student data. 
-2. Tutorium acknowledges the edit process. 
-3. Staff enters the new data. 
+1. Staff chooses to edit student data.
+2. Tutorium acknowledges the edit process.
+3. Staff enters the new data.
 4. Tutorium edits the student’s data. <br>
     Use case ends.
 
 **Extensions**
 
-* 1a. Tutorium detects a format error in the entered command. 
-  * 1a1. Tutorium requests for the correctly formatted command. 
+* 1a. Tutorium detects a format error in the entered command.
+  * 1a1. Tutorium requests for the correctly formatted command.
   * 1a2. User enters a new command.  <br>
     Steps 1a1-1a2 are repeated until the command entered is correctly formatted. <br>
     Use case resumes from step 2.
 
-* 1b. Tutorium detects multiple student data that match with the entered student’s name. 
-  * 1b1. Tutorium requests for the student’s email address. 
+* 1b. Tutorium detects multiple student data that match with the entered student’s name.
+  * 1b1. Tutorium requests for the student’s email address.
   * 1b2. User enters the email address.  <br>
     Steps 1b1-1b2 are repeated until the data entered are correct. <br>
     Use case resumes from step 2.
 
-* 1c. Tutorium could not find any student data that matches with the entered student’s name. 
-  * 1c1. Tutorium requests for a valid student’s name. 
+* 1c. Tutorium could not find any student data that matches with the entered student’s name.
+  * 1c1. Tutorium requests for a valid student’s name.
   * 1c2. User enters a new student’s name.  <br>
     Steps 1c1-1c2 are repeated until the data entered are correct. <br>
     Use case resumes from step 2.
 
 * 3a. Tutorium detects a format error in the entered command.
-  * 3a1. Tutorium requests for the correctly formatted command. 
+  * 3a1. Tutorium requests for the correctly formatted command.
   * 3a2. User enters a new command.  <br>
     Steps 3a1-3a2 are repeated until the command entered is correctly formatted. <br>
     Use case resumes from step 4.
@@ -412,13 +412,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. Staff chooses to search student data with particular keywords. 
+1. Staff chooses to search student data with particular keywords.
 2. Tutorium shows the list of student data that contain the keywords. <br>
    Use case ends.
 
 **Extensions**
 
-* 1a. Tutorium could not find any student data that contains the keywords. 
+* 1a. Tutorium could not find any student data that contains the keywords.
   * 1a1. Tutorium returns a message indicating no data found.  <br>
     Use case ends.
 
@@ -426,15 +426,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. Staff chooses to group student data by a tag. 
+1. Staff chooses to group student data by a tag.
 2. Tutorium shows the list of student data that contain the tag. <br>
    Use case ends.
 
 **Extensions**
 
-* 1a. Tutorium detects a format error in the entered command. 
-  * 1a1. Tutorium requests for the correctly formatted command. 
-  * 1a2. User enters a new command. <br> 
+* 1a. Tutorium detects a format error in the entered command.
+  * 1a1. Tutorium requests for the correctly formatted command.
+  * 1a2. User enters a new command. <br>
     Steps 1a1-1a2 are repeated until the command entered is correctly formatted. <br>
     Use case resumes from step 2.
 
@@ -446,16 +446,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. Staff chooses to <ins> group student data by a course subject (UC05) </ins>. 
-2. Staff selects all students in the list. 
-3. Tutorium shows the number of students who took the subject. <br> 
+1. Staff chooses to <ins> group student data by a course subject (UC05) </ins>.
+2. Staff selects all students in the list.
+3. Tutorium shows the number of students who took the subject. <br>
    Use case ends.
 
 **Extensions**
 
-* 2a. Tutorium detects a format error in the entered command. 
-  * 2a1. Tutorium requests for the correctly formatted command. 
-  * 2a2. User enters a new command. <br> 
+* 2a. Tutorium detects a format error in the entered command.
+  * 2a1. Tutorium requests for the correctly formatted command.
+  * 2a2. User enters a new command. <br>
     Steps 2a1-2a2 are repeated until the command entered is correctly formatted. <br>
     Use case resumes from step 3.
 
@@ -463,29 +463,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. Staff chooses to visualize data by a particular category. 
-2. Tutorium acknowledges the visualization. 
-3. Staff chooses a chart type as visual representation. 
+1. Staff chooses to visualize data by a particular category.
+2. Tutorium acknowledges the visualization.
+3. Staff chooses a chart type as visual representation.
 4. Tutorium shows the chart of the category chosen. <br>
    Use case ends.
 
 **Extensions**
 
-* 1a. Tutorium detects a format error in the entered command. 
-  * 1a1. Tutorium requests for the correctly formatted command. 
-  * 1a2. User enters a new command. <br> 
+* 1a. Tutorium detects a format error in the entered command.
+  * 1a1. Tutorium requests for the correctly formatted command.
+  * 1a2. User enters a new command. <br>
     Steps 1a1-1a2 are repeated until the command entered is correctly formatted. <br>
     Use case resumes from step 2.
 
-* 1b. Tutorium could not find any category that matches with the entered category. 
-  * 1b1. Tutorium requests for a valid category. 
-  * 1b2. User enters a new category. <br> 
+* 1b. Tutorium could not find any category that matches with the entered category.
+  * 1b1. Tutorium requests for a valid category.
+  * 1b2. User enters a new category. <br>
     Steps 1b1-1b2 are repeated until the data entered are correct. <br>
     Use case resumes from step 2.
 
-* 3a. Tutorium detects a format error in the entered command. 
-  * 3a1. Tutorium requests for the correctly formatted command. 
-  * 3a2. User enters a new command. <br> 
+* 3a. Tutorium detects a format error in the entered command.
+  * 3a1. Tutorium requests for the correctly formatted command.
+  * 3a2. User enters a new command. <br>
     Steps 3a1-3a2 are repeated until the command entered is correctly formatted. <br>
     Use case resumes from step 4.
 
@@ -493,28 +493,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. Staff chooses to <ins> visualize data in charts (UC07) <ins>. 
-2. Staff chooses to export the charts to a file with a particular file path. 
+1. Staff chooses to <ins> visualize data in charts (UC07) <ins>.
+2. Staff chooses to export the charts to a file with a particular file path.
 3. Tutorium exports the charts to the file. <br>
    Use case ends.
 
 **Extensions**
 
-* 2a. Tutorium detects a format error in the entered command. 
-  * 2a1. Tutorium requests for the correctly formatted command. 
-  * 2a2. User enters a new command. <br> 
+* 2a. Tutorium detects a format error in the entered command.
+  * 2a1. Tutorium requests for the correctly formatted command.
+  * 2a2. User enters a new command. <br>
   Steps 2a1-2a2 are repeated until the command entered is correctly formatted. <br>
   Use case resumes from step 3.
 
-* 2b. Tutorium could not find the file path entered. 
-  * 2b1. Tutorium requests for a valid file path. 
-  * 2b2. User enters a new file path. <br> 
+* 2b. Tutorium could not find the file path entered.
+  * 2b1. Tutorium requests for a valid file path.
+  * 2b2. User enters a new file path. <br>
     Steps 2b1-2b2 are repeated until the file path entered is correct. <br>
     Use case resumes from step 3.
 
 * *a. At any time, User chooses to cancel the export.
   * *a1. Tutorium requests to confirm the cancellation.
-  * *a2. User chooses to cancel the export. <br> 
+  * *a2. User chooses to cancel the export. <br>
     Use case ends.
 
 

@@ -95,13 +95,13 @@ Examples:
 
 Edits an existing student's data in the address book.
 
-Format: 
+Format:
 1. `edit n/[NAME] or edit e/[EMAIL]` (firstly specify for which student you want to edit)
 2. `e/[NEW_EMAIL] or n/[NEW_NAME]` or `a/[NEW_ADDRESS]` or `t/[NEW_TAG]`  (change a particular field)
 3. `n/[NEW_NAME] e/[NEW_EMAIL]`  or `e/[NEW_EMAIL] t/[NEW_TAG] a/[NEW_ADRESS]` (change multiple fields)
 
 * Edits the person with a specific name or email.
-  - `edit n/[NAME]` 
+  - `edit n/[NAME]`
   - `edit e/[EMAIL]`
 * After the prompt “OK! Now you can edit NAME”
   - `e/[NEW_EMAIL]`
@@ -109,7 +109,7 @@ Format:
   - `a/[NEW_ADDRESS]`
   - `t/[NEW_TAG]`
 * Or you change multiple fields within one command:
-  - `n/[NEW_NAME] e/[NEW_EMAIL]` 
+  - `n/[NEW_NAME] e/[NEW_EMAIL]`
   - `e/[NEW_EMAIL] t/[NEW_TAG] a/[NEW_ADDRESS]`
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
@@ -147,7 +147,7 @@ Format: `delete n/[NAME]` or `delete e/[EMAIL]`
 
 Examples:
 * `delete n/John Doe`
-* `delete e/johndoe@gmail.com` 
+* `delete e/johndoe@gmail.com`
 <br></br>
 * `delete n/Chuan Yuan` deletes student data that contains name `Chuan Yuan`
   ![result for 'delete Chuan Yuan'](images/ug_images/deleteJoeResult.png)
