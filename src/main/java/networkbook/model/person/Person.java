@@ -25,9 +25,10 @@ public class Person implements Identifiable<Person> {
     private final UniqueList<Email> emails;
 
     // Data fields
-    // private final Link link;
-    // private final GradYear gradYear;
+    // private final WebLink webLink;
+    // private final GraduatingYear graduatingYear;
     // private final Course course;
+    // private final Specialisation specialisation;
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final Priority priority;
