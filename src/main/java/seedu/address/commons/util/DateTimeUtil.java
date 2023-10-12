@@ -18,20 +18,11 @@ public class DateTimeUtil {
         DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm[:ss]");
         LocalDateTime result = null;
         try {
-            result = LocalDateTime.parse(str);
-        } catch (DateTimeParseException e) {
-            try {
-                result = LocalDateTime.parse(str, formatter1);
-            } catch (DateTimeParseException e2) {
-                LocalDateTime now = LocalDateTime.now();
-                String appendDate = now.getYear() + "-" + now.getMonthValue() + "-" + now.getDayOfMonth() + " ";
-                try {
-                    result = LocalDateTime.parse(appendDate + str, formatter1);
-                } catch (DateTimeParseException e3) {
-                    String appendZero = "0";
-                    result = LocalDateTime.parse(appendDate + appendZero + str, formatter1);
-                }
-            }
+            result = LocalDateTime.parse(str, formatter1);
+        } catch (DateTimeParseException e2) {
+            LocalDateTime now = LocalDateTime.now();
+            String appendDate = now.getYear() + "-" + now.getMonthValue() + "-" + now.getDayOfMonth() + " ";
+            result = LocalDateTime.parse(appendDate + str, formatter1);
         }
         return result;
     }

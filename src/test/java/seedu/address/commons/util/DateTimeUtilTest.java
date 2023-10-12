@@ -13,16 +13,22 @@ public class DateTimeUtilTest {
     public void test_correctFormat_pass() {
         assertEquals(DateTimeUtil.parseString("12:00"), LocalDateTime.now()
                 .withHour(12).withMinute(0).withSecond(0).withNano(0));
-        assertEquals(DateTimeUtil.parseString("2:00"), LocalDateTime.now()
+        assertEquals(DateTimeUtil.parseString("02:00"), LocalDateTime.now()
                 .withHour(2).withMinute(0).withSecond(0).withNano(0));
         assertEquals(DateTimeUtil.parseString("02:01"), LocalDateTime.now()
                 .withHour(2).withMinute(1).withSecond(0).withNano(0));
         assertEquals(DateTimeUtil.parseString("02:10"), LocalDateTime.now()
                 .withHour(2).withMinute(10).withSecond(0).withNano(0));
+        assertEquals(DateTimeUtil.parseString("00:10"), LocalDateTime.now()
+                .withHour(0).withMinute(10).withSecond(0).withNano(0));
+        assertEquals(DateTimeUtil.parseString("05:01:45"), LocalDateTime.now()
+                .withHour(5).withMinute(1).withSecond(45).withNano(0));
         assertEquals(DateTimeUtil.parseString("2023-10-12 02:10"),
                 LocalDateTime.parse("2023-10-12T02:10:00"));
-        assertEquals(DateTimeUtil.parseString("2023-10-12 00:01"),
-                LocalDateTime.parse("2023-10-12T00:01:00"));
+        assertEquals(DateTimeUtil.parseString("2023-10-12 20:05"),
+                LocalDateTime.parse("2023-10-12T20:05:00"));
+        assertEquals(DateTimeUtil.parseString("2023-10-12 20:05:30"),
+                LocalDateTime.parse("2023-10-12T20:05:30"));
     }
 
     @Test

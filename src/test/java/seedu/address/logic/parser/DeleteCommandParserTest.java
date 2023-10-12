@@ -20,7 +20,7 @@ public class DeleteCommandParserTest {
     @Test
     public void execute_correctCommand_success() throws CommandException {
         assertParseSuccessWithCommand(() -> parser.parse(" "
-                + DeleteEventCommand.SECONDARY_COMMAND_WORD + " -n a -en aa"), DeleteEventCommand.class.getName());
+                + DeleteEventCommand.SECONDARY_COMMAND_WORD + " -id 1 -eid 1"), DeleteEventCommand.class.getName());
     }
 
     @Test

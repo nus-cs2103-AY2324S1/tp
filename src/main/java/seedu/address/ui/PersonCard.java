@@ -59,8 +59,30 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        IntegerContainer eventIdCounter = new IntegerContainer(0);
         person.getEvents().stream()
                 .sorted(Comparator.comparing(Event::getName))
-                .forEach(event -> events.getChildren().add(new Label(event.getUiText())));
+                .forEach(event -> {
+                    eventIdCounter.setValue(eventIdCounter.getValue() + 1);
+                    events.getChildren().add(new Label(eventIdCounter.toString() + ". "
+                            + event.getUiText()));
+                });
+    }
+
+    private class IntegerContainer {
+        private int value;
+        public IntegerContainer(int value) {
+            this.value = value;
+        }
+        public int getValue() {
+            return value;
+        }
+        public void setValue(int value) {
+            this.value = value;
+        }
+        @Override
+        public String toString() {
+            return Integer.valueOf(this.value).toString();
+        }
     }
 }

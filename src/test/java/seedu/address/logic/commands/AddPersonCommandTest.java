@@ -160,7 +160,12 @@ public class AddPersonCommandTest {
         }
 
         @Override
-        public Person findPersonByName(String name) {
+        public Person findPersonByIndex(int index) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Person findPersonByUserFriendlyId(int id) {
             throw new AssertionError("This method should not be called.");
         }
     }

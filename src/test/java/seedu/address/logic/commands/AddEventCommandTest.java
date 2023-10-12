@@ -15,9 +15,9 @@ import seedu.address.model.event.Event;
 
 public class AddEventCommandTest {
 
-    private static final Event VALID_EVENT_0 = new Event("Have a meeting", "2:00", "4:00",
+    private static final Event VALID_EVENT_0 = new Event("Have a meeting", "02:00", "04:00",
             "COM1", "Discuss project");
-    private static final Event VALID_EVENT_SAME_NAME_0 = new Event("Have a meeting", "5:00", "7:00",
+    private static final Event VALID_EVENT_SAME_NAME_0 = new Event("Have a meeting", "05:00", "07:00",
             "COM1", "Discuss project again");
 
     private Model model;
@@ -29,25 +29,16 @@ public class AddEventCommandTest {
 
     @Test
     public void execute_correctCommand_success() throws CommandException {
-        String personName = "Benson Meier";
-        assertCommandSuccessWithFeedback(() -> new AddEventCommand(personName, VALID_EVENT_0)
+        int personId = 1;
+        assertCommandSuccessWithFeedback(() -> new AddEventCommand(personId, VALID_EVENT_0)
                 .execute(model), AddEventCommand.MESSAGE_SUCCESS + VALID_EVENT_0.getName());
-    }
-
-    @Test
-    public void execute_duplicateEvent_fails() throws CommandException {
-        String personName = "George Best";
-        assertCommandSuccessWithFeedback(() -> new AddEventCommand(personName, VALID_EVENT_0)
-                .execute(model), AddEventCommand.MESSAGE_SUCCESS + VALID_EVENT_0.getName());
-        assertCommandFailWithFeedback(() -> new AddEventCommand(personName, VALID_EVENT_SAME_NAME_0)
-                .execute(model), AddEventCommand.MESSAGE_DUPLICATE_EVENT);
     }
 
     @Test
     public void execute_personNotExist_fails() throws CommandException {
-        String unknownPersonName = "unknown person";
-        assertCommandFailWithFeedback(() -> new AddEventCommand(unknownPersonName, VALID_EVENT_SAME_NAME_0)
-                .execute(model), AddEventCommand.MESSAGE_PERSON_NOT_FOUNT + unknownPersonName);
+        int personId = 99999;
+        assertCommandFailWithFeedback(() -> new AddEventCommand(personId, VALID_EVENT_SAME_NAME_0)
+                .execute(model), AddEventCommand.MESSAGE_PERSON_NOT_FOUNT + personId);
     }
 
 

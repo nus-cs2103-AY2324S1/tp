@@ -91,26 +91,20 @@ public class Person {
     }
 
     /**
-     * Remove an event by its name
-     * @param eventName The name of the event you want to remove
+     * Remove an event by its user-friendly id
+     * @param id The id of the event you want to remove
      * @return {@code true} if the operation is successful and {@code false} if the event with this name does not exist
      */
-    public boolean removeEventByName(String eventName) {
-        int eventCount = events.size();
-        for (int i = 0; i < eventCount; i++) {
-            if (this.events.get(i).getName().equals(eventName)) {
-                this.events.remove(i);
-                return true;
-            }
-        }
-        return false;
+    public boolean removeEventByUserFriendlyId(int id) {
+        return this.removeEventByIndex(id - 1);
     }
 
-    /**
-     * Add an event to this person
-     */
-    public void addEvent(Event event) {
-        this.events.add(event);
+    private boolean removeEventByIndex(int index) {
+        if (index < 0 || index >= this.events.size()) {
+            return false;
+        }
+        this.events.remove(index);
+        return true;
     }
 
     /**
@@ -164,6 +158,13 @@ public class Person {
                 .add("address", address)
                 .add("tags", tags)
                 .toString();
+    }
+
+    /**
+     * Add an event to this person
+     */
+    public void addEvent(Event event) {
+        this.events.add(event);
     }
 
 }

@@ -14,9 +14,9 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.event.Event;
 
 public class DeleteEventCommandTest {
-    private static final Event VALID_EVENT_0 = new Event("Have a meeting", "2:00", "4:00",
+    private static final Event VALID_EVENT_0 = new Event("Have a meeting", "02:00", "04:00",
             "COM1", "Discuss project");
-    private static final Event VALID_EVENT_1 = new Event("Have a meeting again", "5:00", "7:00",
+    private static final Event VALID_EVENT_1 = new Event("Have a meeting again", "05:00", "07:00",
             "COM1", "Discuss project again");
 
     private Model model;
@@ -28,25 +28,26 @@ public class DeleteEventCommandTest {
 
     @Test
     public void execute_correctCommand_success() throws CommandException {
-        String personName = "Benson Meier";
-        model.findPersonByName(personName).addEvent(VALID_EVENT_0);
-        assertCommandSuccessWithFeedback(() -> new DeleteEventCommand(personName, VALID_EVENT_0.getName())
-                .execute(model), DeleteEventCommand.MESSAGE_SUCCESS + VALID_EVENT_0.getName());
+        int personId = 1;
+        model.findPersonByUserFriendlyId(personId).addEvent(VALID_EVENT_0);
+        assertCommandSuccessWithFeedback(() -> new DeleteEventCommand(personId, 1)
+                .execute(model), DeleteEventCommand.MESSAGE_SUCCESS + "1");
     }
 
     @Test
     public void execute_personNotFound_fails() throws CommandException {
-        String personName = "unkonwn person";
-        assertCommandFailWithFeedback(() -> new DeleteEventCommand(personName, VALID_EVENT_0.getName())
-                .execute(model), DeleteEventCommand.MESSAGE_PERSON_NOT_FOUNT + personName);
+        int personId = 999;
+        assertCommandFailWithFeedback(() -> new DeleteEventCommand(personId, 1)
+                .execute(model), DeleteEventCommand.MESSAGE_PERSON_NOT_FOUNT + personId);
     }
 
     @Test
     public void execute_eventNotFound_fails() throws CommandException {
-        String personName = "Benson Meier";
-        model.findPersonByName(personName).addEvent(VALID_EVENT_0);
-        assertCommandFailWithFeedback(() -> new DeleteEventCommand(personName, VALID_EVENT_1.getName())
-                .execute(model), DeleteEventCommand.MESSAGE_EVENT_NOT_FOUND + VALID_EVENT_1.getName());
+        int personId = 1;
+        int invalidEventId = 99999;
+        model.findPersonByUserFriendlyId(personId).addEvent(VALID_EVENT_0);
+        assertCommandFailWithFeedback(() -> new DeleteEventCommand(personId, invalidEventId)
+                .execute(model), DeleteEventCommand.MESSAGE_EVENT_NOT_FOUND + invalidEventId);
     }
 
 

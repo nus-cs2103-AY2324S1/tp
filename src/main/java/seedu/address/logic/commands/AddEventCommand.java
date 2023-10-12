@@ -20,32 +20,26 @@ public class AddEventCommand extends AddCommand {
             + ": Adds an event to a contact.\n"
             + "Usage:  add event -n CONTACT_NAME -en EVENT_NAME -st "
             + "START_TIME [-et END_TIME] [-loc LOCATION] [-i INFORMATION]";
-    public static final String MESSAGE_PERSON_NOT_FOUNT = "Can not find the target contact with name: ";
-    public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists under the contact.";
+    public static final String MESSAGE_PERSON_NOT_FOUNT = "Can not find the target contact with ID: ";
 
     private final Event toAdd;
-    private final String contactName;
+    private final int contactId;
 
     /**
      * Creates an AddEventCommand to add the specified {@code Event}
      */
-    public AddEventCommand(String contactName, Event event) {
-        requireNonNull(contactName);
+    public AddEventCommand(int contactId, Event event) {
         requireNonNull(event);
-        this.contactName = contactName;
+        this.contactId = contactId;
         this.toAdd = event;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        Person person = model.findPersonByName(this.contactName);
+        Person person = model.findPersonByUserFriendlyId(this.contactId);
         if (person == null) {
-            throw new CommandException(MESSAGE_PERSON_NOT_FOUNT + this.contactName);
-        }
-        boolean eventExists = person.getEvents().stream().anyMatch(e -> e.getName().equals(this.toAdd.getName()));
-        if (eventExists) {
-            throw new CommandException(MESSAGE_DUPLICATE_EVENT);
+            throw new CommandException(MESSAGE_PERSON_NOT_FOUNT + this.contactId);
         }
         person.addEvent(this.toAdd);
 

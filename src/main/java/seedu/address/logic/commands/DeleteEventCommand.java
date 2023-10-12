@@ -16,35 +16,33 @@ public class DeleteEventCommand extends DeleteCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + " "
             + SECONDARY_COMMAND_WORD + ": Deletes an event from a contact.\n"
             + "Usage:  delete event -n CONTACT_NAME -en EVENT_NAME";
-    public static final String MESSAGE_PERSON_NOT_FOUNT = "Can not find the target contact with name: ";
+    public static final String MESSAGE_PERSON_NOT_FOUNT = "Can not find the target contact with ID: ";
     public static final String MESSAGE_SUCCESS = "Successfully deleted event: ";
-    public static final String MESSAGE_EVENT_NOT_FOUND = "Event not found: ";
+    public static final String MESSAGE_EVENT_NOT_FOUND = "Event not found: ID = ";
 
-    private final String eventNameToDelete;
-    private final String contactName;
+    private final int eventIdToDelete;
+    private final int contactId;
     /**
      * Creates an DeleteEventCommand to delete the specified {@code Event}
      */
-    public DeleteEventCommand(String contactName, String eventNameToDelete) {
-        requireNonNull(contactName);
-        requireNonNull(eventNameToDelete);
-        this.contactName = contactName;
-        this.eventNameToDelete = eventNameToDelete;
+    public DeleteEventCommand(int contactId, int eventIdToDelete) {
+        this.contactId = contactId;
+        this.eventIdToDelete = eventIdToDelete;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        Person person = model.findPersonByName(this.contactName);
+        Person person = model.findPersonByUserFriendlyId(this.contactId);
         if (person == null) {
-            throw new CommandException(MESSAGE_PERSON_NOT_FOUNT + this.contactName);
+            throw new CommandException(MESSAGE_PERSON_NOT_FOUNT + this.contactId);
         }
-        boolean success = person.removeEventByName(this.eventNameToDelete);
+        boolean success = person.removeEventByUserFriendlyId(this.eventIdToDelete);
         if (!success) {
-            throw new CommandException(MESSAGE_EVENT_NOT_FOUND + this.eventNameToDelete);
+            throw new CommandException(MESSAGE_EVENT_NOT_FOUND + this.eventIdToDelete);
         }
 
         MainWindow.refreshPersonListPanelImmediately();
-        return new CommandResult(MESSAGE_SUCCESS + this.eventNameToDelete);
+        return new CommandResult(MESSAGE_SUCCESS + this.eventIdToDelete);
     }
 }

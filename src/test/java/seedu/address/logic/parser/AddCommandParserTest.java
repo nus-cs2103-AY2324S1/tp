@@ -20,7 +20,7 @@ public class AddCommandParserTest {
     @Test
     public void execute_correctCommand_success() throws CommandException {
         assertParseSuccessWithCommand(() -> parser.parse(" "
-                + AddEventCommand.SECONDARY_COMMAND_WORD + " -n a -en aa -st 0:01"), AddEventCommand.class.getName());
+                + AddEventCommand.SECONDARY_COMMAND_WORD + " -id 1 -en aa -st 00:01"), AddEventCommand.class.getName());
     }
 
     @Test

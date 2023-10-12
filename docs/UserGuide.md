@@ -72,6 +72,8 @@ If you can type fast, KeepInTouch can get your contact management tasks done fas
 * Parameters can be in any order.<br>
   e.g. if the command specifies `-n NAME -t NOTE_TITLE`, `-t NOTE_TITLE -n NAME` is also acceptable.
 
+* `Person ID` is the number that is on the left of the person's name in each person card.
+
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list contact`, and `exit`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
@@ -147,11 +149,18 @@ Examples:
 
 Adds an event to a contact.
 
-Format: `add event -n CONTACT_NAME -en EVENT_NAME -st START_TIME [-et END_TIME] [-loc LOCATION] [-i INFORMATION]`
+Format: `add event -id CONTACT_ID -en EVENT_NAME -st START_TIME [-et END_TIME] [-loc LOCATION] [-info INFORMATION]`
+
+Date-Time Format:
+ - You can use one of the following formats for start time and end time:
+    - Date and time: `yyyy-MM-dd HH:mm[:ss]`
+      - Example: `2023-10-12 20:05`, `2023-10-12 20:05:30`
+    - Only time (Date will then refers to the current date): `HH:mm[:ss]`
+      - Example: `00:10`, `05:01:45`
 
 Examples:
-* `add event -n Professor XXX -en Meeting with professor -st 12:00 -et 1:00 -loc COM 1 Basement -i Discuss the project implementation with the professor`
-* `add event -n TikTok recruiter -en Chat with TikTok recruiter -st 17:00`
+* `add event -id 1 -en Meeting with professor -st 12:00 -et 1:00 -loc COM 1 Basement -info Discuss the project implementation with the professor`
+* `add event -id 2 -en Chat with TikTok recruiter -st 17:00`
 
 ### Listing all events : `list events`
 
@@ -163,12 +172,13 @@ Format: `list events`
 
 Deletes the specified event from a contact.
 
-Format: `delete event -n CONTACT_NAME -en EVENT_NAME`
+Format: `delete event -id CONTACT_ID -eid EVENT_ID`
 
-* Deletes the event with the name `EVENT_NAME` from the contact `CONTACT_NAME`.
+* Deletes the event with the id `EVENT_ID` from the contact `CONTACT_ID`.
+* Note that `EVENT_ID` is the number that are in the left of the event line under each person card.
 
 Examples:
-* `list events` followed by `delete event -n Professor XXX -en Meeting with professor` deletes the event with the name Meeting with professor under contact Professor XXX.
+* `list events` followed by `delete event -id 1 -eid 2` deletes the second event under contact that has id `1`.
 
 ### Exiting the program : `exit`
 
@@ -213,7 +223,7 @@ Action             | Format, Examples
 **Add Note**       | `add note -n NAME -t NOTE_TITLE -c NOTE_CONTENT` <br> e.g., `add note -n Daniel -t Open Position -e Applications for SWE full-time positions will open soon`
 **Delete Note**    | `delete note -n NAME -t NOTE_TITLE`<br> e.g., `delete note -n Aaron -t Meeting Topics`
 **List Notes**     | `list notes`
-**Add Event**      | `add event -n CONTACT_NAME -en EVENT_NAME -st START_TIME [-et END_TIME] [-loc LOCATION] [-i INFORMATION]` <br> e.g., `add event -n Professor XXX -en Meeting with professor -st 12:00 -et 1:00 -loc COM 1 Basement -i Discuss the project implementation with the professor`
-**Delete Event**   | `delete event -n CONTACT_NAME -en EVENT_NAME`<br> e.g., `delete event -n Professor XXX -en Meeting with professor`
+**Add Event**      | `add event -id CONTACT_ID -en EVENT_NAME -st START_TIME [-et END_TIME] [-loc LOCATION] [-info INFORMATION]` <br> e.g., `add event -id 1 -en Meeting with professor -st 12:00 -et 1:00 -loc COM 1 Basement -info Discuss the project implementation with the professor`
+**Delete Event**   | `delete event -id CONTACT_ID -en EVENT_NAME`<br> e.g., `delete event -id 1 -en Meeting with professor`
 **List Events**    | `list events`
 **Help**           | `help`

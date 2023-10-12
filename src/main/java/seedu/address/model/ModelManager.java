@@ -7,7 +7,6 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -131,14 +130,17 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Person findPersonByName(String name) {
-        requireNonNull(name);
-        List<Person> tmp = addressBook.getPersonList().stream().filter(person->person.getName().toString().equals(name))
-                .collect(Collectors.toList());
-        if (tmp.isEmpty()) {
+    public Person findPersonByIndex(int index) {
+        List<Person> personList = this.addressBook.getPersonList();
+        if (index < 0 || index >= personList.size()) {
             return null;
         }
-        return tmp.get(0);
+        return personList.get(index);
+    }
+
+    @Override
+    public Person findPersonByUserFriendlyId(int id) {
+        return this.findPersonByIndex(id - 1);
     }
 
     @Override
