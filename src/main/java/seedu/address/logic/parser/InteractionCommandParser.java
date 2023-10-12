@@ -32,9 +32,7 @@ public class InteractionCommandParser implements Parser<Command> {
         Index index;
 
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-            //TODO Fix the issue of running "interaction 1 I am interested in this product"
-            //Preamble becomes "1 I am interested in this product" and this throws error
+            index = ParserUtil.parseIndex(argMultimap.getPreamble().split("\\s+")[0]);
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 InteractionCommand.MESSAGE_USAGE), pe);
