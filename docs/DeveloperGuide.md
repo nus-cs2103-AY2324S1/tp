@@ -320,100 +320,160 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `JABPro` and the **Actor** is the `hiring manager`, unless specified otherwise)
 
-****Use case: Add a person****
+**Use case: Add a person**
+
 **MSS**
-1. User requests to add a person
-2. JABPro shows that command has been executed successfully
-3. JABPro adds the person to the list of persons  
+1. User requests to add a person.
+2. JABPro shows that command has been executed successfully.
+3. JABPro adds the person to the list of persons.   
 Use case ends.
 
 **Extensions**
-* 2a. User does not provide the correct information for a person to be added
-    * 2a1. JABPro shows an error message and provides course of action for remedy
-    * 2a2. Use case resumes at step 1
-* 2b. User has already been added to the list of persons
-    * 2b1. JABPro shows an error message and provides course of action for remedy
-    * 2b2. Use case resumes at step 1
+* 2a. User does not provide the correct information for a person to be added.
+    * 2a1. JABPro shows an error message and provides course of action for remedy.  
+    Use case resumes at step 1.
+* 2b. User has already been added to the list of persons.
+    * 2b1. JABPro shows an error message and provides course of action for remedy.  
+    Use case resumes at step 1.
 
-***Use case: Adding a remark to a person***
+**Use case: Add a remark to a person**
+
 **MSS**
-1. User requests to add a remark to a person
-2. JABPro shows that command has been executed successfully
-3. JABPro adds the remark to the person
+1. User requests to add a remark to a person.
+2. JABPro shows that command has been executed successfully.
+3. JABPro adds the remark to the person.  
+Use case ends.
 
-** Extensions**
-* 2a. User provides invalid index
-    * 2a1. JABPro shows an error message and provides course of action for remedy
-    * 2a2. Use case resumes at step 1
-* 2b. User does not provide a remark
-    * 3. JABPro adds an empty remark to the person, remark no longer seen
+**Extensions**
+* 2a. User provides invalid index.
+    * 2a1. JABPro shows an error message and provides course of action for remedy.  
+    Use case resumes at step 1.
+* 2b. User does not provide a remark.
+    * 2b1. JABPro adds an empty remark to the person, remark no longer seen.  
+    Use case ends.
 
+**Use case: List all persons**
+
+**MSS**
+1. User  requests to view a list of all persons.
+2. JABPro retrieves the list of all persons from the database.
+3. JABPro displays the list of all persons to the user. 
+4. If the user specifies an attribute to sort by, e.g., "s/name" for sorting by name, the application sorts the list accordingly. If no attribute is provided, the list remains unsorted.
+5. The sorted or unsorted list is displayed to the user in ascending order based on the specified attribute.   
+Use case ends.
+
+**Extensions**
+* 2a. User provides an incorrect attribute for sorting (e.g., "list s/phone").
+  * 2a1. JABPro shows an error message and provides course of action for remedy.   
+  Use case resumes at step 1.
+* 2b. User attempts to list persons when there are no entries in the address book.
+  * 2b1. JABPro shows a message indicating that there are no persons to display.  
+  Use case ends.
 
 **Use case: Search a person by name**
 
 **MSS**
-
-1.  Hiring manager types in name keywords to search users by name
-2.  JABPro shows a list of persons whose names contain matching keywords
-
+1.  Hiring manager types in name keywords to search users by name.
+2.  JABPro shows a list of persons whose names contain matching keywords.  
     Use case ends.
 
 **Extensions**
 
 * 1a. The given name keyword is invalid (invalid name).
-
-    * 1a1. JABPro shows an error message.
-
+    * 1a1. JABPro shows an error message.  
       Use case resumes at step 1.
-
-* 2a. The list is empty.
-
+* 2a. The list is empty.  
   Use case ends.
 
 **Use case: Search a person by application status**
 
 **MSS**
-
-1.  User keys in search command with application status (i.e. interviewed, pending, rejected, offered)
-2.  JABPro shows a list of persons whose status match the given status keywords
-
+1.  User keys in search command with application status (i.e. interviewed, pending, rejected, offered).
+2.  JABPro shows a list of persons whose status match the given status keywords.  
     Use case ends.
 
 **Extensions**
 
 * 1a. The given name status is invalid (not from the given list of valid status keywords).
-
-    * 1a1. JABPro shows an error message.
-
+    * 1a1. JABPro shows an error message.  
       Use case resumes at step 1.
-
-* 2a. The list is empty.
-
+* 2a. The list is empty.  
   Use case ends.
 
 
 **Use case: Delete a person**
 
 **MSS**
-
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
-
+1.  User requests to list persons.
+2.  AddressBook shows a list of persons.
+3.  User requests to delete a specific person in the list.
+4.  AddressBook deletes the person.  
     Use case ends.
 
 **Extensions**
-
 * 2a. The list is empty.
-
-  Use case ends.
-
+    * 2a1. AddressBook displays a message indicating that the list is empty.  
+      Use case ends.
 * 3a. The given index is invalid.
+    * 3a1. AddressBook shows an error message indicating that the specified index is invalid.  
+      Use case resumes at step 3.
+* 4a. Deletion encounters an error
+    * 4a1. AddressBook displays an error message indicating that the deletion process failed.  
+      Use case ends.
 
-    * 3a1. AddressBook shows an error message.
+**Use case: Set a person's status**
 
-      Use case resumes at step 2.
+**MSS**
+1.  User requests to list persons.
+2.  AddressBook shows a list of persons.
+3.  User requests to set the status of a specific person in the list.
+4.  AddressBook sets the status of that person in the list.  
+    Use case ends.
+
+**Extensions**
+* 2a. The list is empty.
+    * 2a1. AddressBook displays a message indicating that the list is empty.  
+      Use case ends.
+* 3a. The given index is invalid.
+    * 3a1. AddressBook shows an error message indicating that the specified index is invalid.  
+      Use case resumes at step 3.
+* 3b. The given status is invalid.
+    * 3b1. AddressBook shows an error message indicating that the specified status is invalid.  
+      Use case resumes at step 3.
+
+**Use case: Add social profile to person's details**
+
+**MSS**
+1. User requests to add social profile (linkedin or github)
+2. JABPro shows that command has been executed successfully
+3. JABPro adds the social profile to the person's existing details in the list
+   Use case ends.
+
+**Extensions**
+* 2a. User does not provide valid information for the person.
+    * 2a1. JABPro displays error message.
+      Use case resumes at Step 1.
+* 2b. User requests to add social profile other than LinkedIn or Github
+    * 2b1. JABPro displays error message.
+      Use case resumes at Step 1.
+
+**Use case: Open social profile for a person**
+
+**MSS**
+1. User requests to open social profile for a person
+2. JABPro shows that command has been executed successfully
+3. JABPro redirects to the webpage of the corresponding profile
+   Use case ends.
+
+**Extension**
+* 1a. Person does not exist in the list.
+    * 1a1. JABPro displays error message.
+    Use case ends.
+* 1b. Social profile requested other than LinkedIn or Github
+    * 1b1. JABPro displays error message.
+    Use case ends.
+* 3a. User does not exist on the social platform
+  Use case ends.
 
 *{More to be added}*
 

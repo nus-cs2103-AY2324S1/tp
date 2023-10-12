@@ -33,6 +33,10 @@ JobApplicationsBook Pro (JABPro) is a **desktop app for hiring managers of compa
     * `remark 1 r/Great attitude, hardworking`: edits the remark of the 1st person on the list to have a remark `Great attitude, hardworking`
    
     * `search n/John`: Searches for applicants whose names contain the keyword `John`
+
+    * `delete 3` : Deletes the 3rd contact shown in the current list.
+
+    * `set` : sets the applicant status to either of: (Preliminary, Interviewed, Rejected, Offered)
    
     * `add linkedin 1 alexyeoh`: Adds LinkedIn account to candidate's existing contact information
    
@@ -129,7 +133,16 @@ Examples:
 
 Shows a list of all persons in the address book.
 
-Format: `list`
+Format: `list s/ATTRIBUTE`
+
+* `s/ATTRIBUTE` is completely **optional**, on default will NOT be sorted.
+* As of v1.2, the attributes that are supported are `name` and `email`.
+* Attribute is case-insensitive: `list s/NAME` and `list s/name` return the same result.
+* The result will be sorted in **ascending** order.
+
+Examples:
+* `list` Shows a list of all persons.
+* `list s/name` Show a list of all persons, sorted by name in ascending order.
 
 ### Editing a person : `edit`
 
@@ -206,6 +219,21 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Setting an applicant's status : `set`
+
+Format: `set INDEX STATUS`
+
+Sets the applicant to a specific status ("Preliminary"/ "Interviewed"/ "Rejected"/ "Offered")
+
+* Sets the person at the specified `INDEX` to a specific hiring status.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* The status must be a string of exactly "Preliminary", "Interviewed", "Rejected" or "Offered".
+
+Examples:
+* `list` followed by `set 2 Interviewed` sets the 2nd person in the address book to "Interviewed".
+* `find Betsy` followed by `set 1 Interviewed` sets the status of 1st person in the results of the `find` command.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -261,7 +289,10 @@ Action                     | Format, Examples
 **Open Github/LinkedIn**   | `linkedin NAME` or `github NAME` e.g., `linkedin Alex Yeoh`, `github Bernice Sanders`
 **Clear**                  | `clear`
 **Delete**                 | `delete INDEX`<br> e.g., `delete 3`
+**Set**                    | `set INDEX STATUS`<br> e.g., `set 2 Interviewed`
 **Edit**                   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**                   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**                   | `list`
+**List**                   | `list s/ATTRIBUTE` <br> e.g. `list s/name`
 **Help**                   | `help`
+
+
