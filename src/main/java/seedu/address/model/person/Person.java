@@ -114,4 +114,12 @@ public class Person {
                 .toString();
     }
 
+    /**
+     * Returns detailed information of Person for display.
+     */
+    public String toDisplayString() {
+        return String.format("Name: %s\nPhone: %s\nEmail: %s\nRemark: %s\nTags: %s", name, phone, email,
+                remark, tags.stream().map(Tag::toString).reduce("", (total, tag) -> total + tag));
+    }
+
 }

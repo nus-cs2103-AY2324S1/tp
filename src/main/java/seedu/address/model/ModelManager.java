@@ -24,6 +24,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Meeting> filteredMeetings;
+    private Person viewedPerson;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -196,4 +197,13 @@ public class ModelManager implements Model {
                 && filteredMeetings.equals(otherModelManager.filteredMeetings);
     }
 
+    @Override
+    public void setViewedPerson(Person person) {
+        viewedPerson = person;
+    }
+
+    @Override
+    public Person getViewedPerson() {
+        return viewedPerson;
+    }
 }

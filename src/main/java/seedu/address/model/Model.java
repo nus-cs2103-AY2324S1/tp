@@ -121,4 +121,15 @@ public interface Model {
     void updateFilteredMeetingList(Predicate<Meeting> predicate);
 
     boolean hasName(String attendeeName);
+
+
+    /**
+     * Set current viewed person.
+     */
+    void setViewedPerson(Person person);
+
+    /**
+     * Get current viewed person.
+     */
+    Person getViewedPerson();
 }

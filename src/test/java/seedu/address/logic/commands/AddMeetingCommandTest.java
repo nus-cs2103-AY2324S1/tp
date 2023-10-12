@@ -194,6 +194,17 @@ public class AddMeetingCommandTest {
         public boolean hasName(String attendeeName) {
             return false;
         }
+
+
+        @Override
+        public void setViewedPerson(Person person) {
+
+        }
+
+        @Override
+        public Person getViewedPerson() {
+            throw new AssertionError("This method should not be called");
+        }
     }
 
     /**

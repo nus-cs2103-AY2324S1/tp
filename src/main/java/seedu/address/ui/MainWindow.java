@@ -32,6 +32,8 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private MeetingSchedulePanel meetingSchedulePanel;
+    private InfoDisplayPanel infoDisplayPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -43,6 +45,12 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane personListPanelPlaceholder;
+
+    @FXML
+    private StackPane meetingSchedulePanelPlaceholder;
+
+    @FXML
+    private StackPane infoDisplayPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -113,6 +121,14 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
+        // Nothing for now, will need list of all meetings for schedule
+        meetingSchedulePanel = new MeetingSchedulePanel();
+        meetingSchedulePanelPlaceholder.getChildren().add(meetingSchedulePanel.getRoot());
+
+        // For now Person object is forwarded here in executeCommand below
+        infoDisplayPanel = new InfoDisplayPanel();
+        infoDisplayPanelPlaceholder.getChildren().add(infoDisplayPanel.getRoot());
+
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -177,6 +193,9 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            // Insert Person object into infoDisplay for viewc
+            infoDisplayPanel.setViewedPerson(logic.getViewedPerson());
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
