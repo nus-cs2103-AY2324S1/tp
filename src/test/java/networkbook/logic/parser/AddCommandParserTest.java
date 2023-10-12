@@ -73,9 +73,9 @@ public class AddCommandParserTest {
                         + CommandTestUtil.ADDRESS_DESC_AMY + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(
                         CliSyntax.PREFIX_NAME,
-                        CliSyntax.PREFIX_ADDRESS,
+                        CliSyntax.PREFIX_PHONE,
                         CliSyntax.PREFIX_EMAIL,
-                        CliSyntax.PREFIX_PHONE));
+                        CliSyntax.PREFIX_ADDRESS));
 
         // invalid value followed by valid value
 

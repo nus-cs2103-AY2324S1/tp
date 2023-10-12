@@ -18,18 +18,18 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the network book. "
             + "Parameters: "
-            + CliSyntax.PREFIX_NAME + "NAME "
-            + CliSyntax.PREFIX_PHONE + "PHONE "
-            + CliSyntax.PREFIX_EMAIL + "EMAIL "
-            + CliSyntax.PREFIX_ADDRESS + "ADDRESS "
-            + "[" + CliSyntax.PREFIX_TAG + "TAG]...\n"
+            + CliSyntax.PREFIX_NAME + " NAME "
+            + CliSyntax.PREFIX_PHONE + " PHONE "
+            + CliSyntax.PREFIX_EMAIL + " EMAIL "
+            + CliSyntax.PREFIX_ADDRESS + " ADDRESS "
+            + "[" + CliSyntax.PREFIX_TAG + " TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + CliSyntax.PREFIX_NAME + "John Doe "
-            + CliSyntax.PREFIX_PHONE + "98765432 "
-            + CliSyntax.PREFIX_EMAIL + "johnd@example.com "
-            + CliSyntax.PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + CliSyntax.PREFIX_TAG + "friends "
-            + CliSyntax.PREFIX_TAG + "owesMoney";
+            + CliSyntax.PREFIX_NAME + " John Doe "
+            + CliSyntax.PREFIX_PHONE + " 98765432 "
+            + CliSyntax.PREFIX_EMAIL + " johnd@example.com "
+            + CliSyntax.PREFIX_ADDRESS + " 311, Clementi Ave 2, #02-25 "
+            + CliSyntax.PREFIX_TAG + " friends "
+            + CliSyntax.PREFIX_TAG + " owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the network book";
