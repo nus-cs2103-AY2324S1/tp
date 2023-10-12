@@ -58,7 +58,8 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code departments} into a {@code Set<Department>} and set it to the {@code Person} that we are building.
+     * Parses the {@code departments} into a {@code Set<Department>} and set it to the
+     * {@code Person} that we are building.
      */
     public PersonBuilder withDepartments(String ... departments) {
         this.departments = SampleDataUtil.getDepartmentSet(departments);

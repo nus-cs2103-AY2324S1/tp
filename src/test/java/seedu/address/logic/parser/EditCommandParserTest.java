@@ -3,29 +3,29 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.DEPARTMENT_DESC_INVESTMENT;
+import static seedu.address.logic.commands.CommandTestUtil.DEPARTMENT_DESC_LOGISTIC;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DEPARTMENT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_DEPARTMENT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.DEPARTMENT_DESC_INVESTMENT;
-import static seedu.address.logic.commands.CommandTestUtil.DEPARTMENT_DESC_LOGISTIC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPARTMENT_INVESTMENT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPARTMENT_LOGISTIC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPARTMENT_INVESTMENT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPARTMENT_LOGISTIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DEPARTMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DEPARTMENT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -94,9 +94,12 @@ public class EditCommandParserTest {
 
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Person} being edited,
         // parsing it together with a valid department results in error
-        assertParseFailure(parser, "1" + DEPARTMENT_DESC_INVESTMENT + DEPARTMENT_DESC_LOGISTIC + DEPARTMENT_EMPTY, Department.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + DEPARTMENT_DESC_INVESTMENT + DEPARTMENT_EMPTY + DEPARTMENT_DESC_LOGISTIC, Department.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + DEPARTMENT_EMPTY + DEPARTMENT_DESC_INVESTMENT + DEPARTMENT_DESC_LOGISTIC, Department.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + DEPARTMENT_DESC_INVESTMENT + DEPARTMENT_DESC_LOGISTIC
+                + DEPARTMENT_EMPTY, Department.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + DEPARTMENT_DESC_INVESTMENT
+                + DEPARTMENT_EMPTY + DEPARTMENT_DESC_LOGISTIC, Department.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + DEPARTMENT_EMPTY + DEPARTMENT_DESC_INVESTMENT
+                + DEPARTMENT_DESC_LOGISTIC, Department.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_ADDRESS_AMY + VALID_PHONE_AMY,
@@ -181,8 +184,9 @@ public class EditCommandParserTest {
 
         // mulltiple valid fields repeated
         userInput = targetIndex.getOneBased() + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY
-                + DEPARTMENT_DESC_INVESTMENT + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + DEPARTMENT_DESC_INVESTMENT
-                + PHONE_DESC_BOB + ADDRESS_DESC_BOB + EMAIL_DESC_BOB + DEPARTMENT_DESC_LOGISTIC;
+                + DEPARTMENT_DESC_INVESTMENT + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY
+                + DEPARTMENT_DESC_INVESTMENT + PHONE_DESC_BOB + ADDRESS_DESC_BOB + EMAIL_DESC_BOB
+                + DEPARTMENT_DESC_LOGISTIC;
 
         assertParseFailure(parser, userInput,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS));

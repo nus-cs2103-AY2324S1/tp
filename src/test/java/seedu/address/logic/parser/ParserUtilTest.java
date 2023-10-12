@@ -178,7 +178,8 @@ public class ParserUtilTest {
 
     @Test
     public void parseTags_collectionWithInvalidTags_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseDepartments(Arrays.asList(VALID_DEPARTMENT_1, INVALID_DEPARTMENT)));
+        assertThrows(ParseException.class, () -> ParserUtil.parseDepartments(
+                Arrays.asList(VALID_DEPARTMENT_1, INVALID_DEPARTMENT)));
     }
 
     @Test
@@ -188,8 +189,10 @@ public class ParserUtilTest {
 
     @Test
     public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
-        Set<Department> actualDepartmentSet = ParserUtil.parseDepartments(Arrays.asList(VALID_DEPARTMENT_1, VALID_DEPARTMENT_2));
-        Set<Department> expectedDepartmentSet = new HashSet<Department>(Arrays.asList(new Department(VALID_DEPARTMENT_1), new Department(VALID_DEPARTMENT_2)));
+        Set<Department> actualDepartmentSet = ParserUtil.parseDepartments(
+                Arrays.asList(VALID_DEPARTMENT_1, VALID_DEPARTMENT_2));
+        Set<Department> expectedDepartmentSet = new HashSet<Department>(Arrays.asList(
+                new Department(VALID_DEPARTMENT_1), new Department(VALID_DEPARTMENT_2)));
 
         assertEquals(expectedDepartmentSet, actualDepartmentSet);
     }
