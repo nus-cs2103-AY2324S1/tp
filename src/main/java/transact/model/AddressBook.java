@@ -7,7 +7,6 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import transact.commons.util.ToStringBuilder;
 import transact.model.person.Person;
-import transact.model.person.UniquePersonList;
 
 /**
  * Wraps all data at the address-book level
@@ -15,7 +14,7 @@ import transact.model.person.UniquePersonList;
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
-    private final UniquePersonList persons;
+    private final UniqueEntryList<Person> persons;
 
     /*
      * The 'unusual' code block below is a non-static initialization block,
@@ -28,7 +27,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * among constructors.
      */
     {
-        persons = new UniquePersonList();
+        persons = new UniqueEntryList<>();
     }
 
     public AddressBook() {
@@ -49,7 +48,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code persons} must not contain duplicate persons.
      */
     public void setPersons(List<Person> persons) {
-        this.persons.setPersons(persons);
+        this.persons.setEntries(persons);
     }
 
     /**
