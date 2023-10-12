@@ -15,14 +15,16 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
-import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.Messages;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.person.Person;
+import seedu.flashlingo.commons.core.GuiSettings;
+import seedu.flashlingo.logic.Messages;
+import seedu.flashlingo.logic.commands.AddCommand;
+import seedu.flashlingo.logic.commands.CommandResult;
+import seedu.flashlingo.logic.commands.exceptions.CommandException;
+import seedu.flashlingo.model.AddressBook;
+import seedu.flashlingo.model.Model;
+import seedu.flashlingo.model.ReadOnlyAddressBook;
+import seedu.flashlingo.model.ReadOnlyUserPrefs;
+import seedu.flashlingo.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {

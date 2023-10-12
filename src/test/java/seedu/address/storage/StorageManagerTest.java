@@ -10,10 +10,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.UserPrefs;
+import seedu.flashlingo.commons.core.GuiSettings;
+import seedu.flashlingo.model.AddressBook;
+import seedu.flashlingo.model.ReadOnlyAddressBook;
+import seedu.flashlingo.model.UserPrefs;
+import seedu.flashlingo.storage.JsonAddressBookStorage;
+import seedu.flashlingo.storage.JsonUserPrefsStorage;
+import seedu.flashlingo.storage.StorageManager;
 
 public class StorageManagerTest {
 

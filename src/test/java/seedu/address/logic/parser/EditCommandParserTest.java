@@ -1,6 +1,6 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.flashlingo.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
@@ -22,10 +22,10 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -34,15 +34,16 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.Messages;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.flashlingo.commons.core.index.Index;
+import seedu.flashlingo.logic.Messages;
+import seedu.flashlingo.logic.commands.EditCommand;
+import seedu.flashlingo.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.flashlingo.logic.parser.EditCommandParser;
+import seedu.flashlingo.model.person.Address;
+import seedu.flashlingo.model.person.Email;
+import seedu.flashlingo.model.person.Name;
+import seedu.flashlingo.model.person.Phone;
+import seedu.flashlingo.model.tag.Tag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 public class EditCommandParserTest {

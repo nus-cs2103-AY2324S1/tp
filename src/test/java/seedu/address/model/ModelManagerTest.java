@@ -3,7 +3,7 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.flashlingo.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
@@ -14,8 +14,11 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.flashlingo.commons.core.GuiSettings;
+import seedu.flashlingo.model.AddressBook;
+import seedu.flashlingo.model.ModelManager;
+import seedu.flashlingo.model.UserPrefs;
+import seedu.flashlingo.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {

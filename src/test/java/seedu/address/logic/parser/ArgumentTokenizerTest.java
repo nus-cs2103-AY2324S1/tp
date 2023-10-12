@@ -6,6 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
+import seedu.flashlingo.logic.parser.ArgumentMultimap;
+import seedu.flashlingo.logic.parser.ArgumentTokenizer;
+import seedu.flashlingo.logic.parser.Prefix;
 
 public class ArgumentTokenizerTest {
 

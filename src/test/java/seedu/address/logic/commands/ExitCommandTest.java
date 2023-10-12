@@ -1,12 +1,14 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT;
+import static seedu.flashlingo.logic.commands.ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
+import seedu.flashlingo.logic.commands.CommandResult;
+import seedu.flashlingo.logic.commands.ExitCommand;
+import seedu.flashlingo.model.Model;
+import seedu.flashlingo.model.ModelManager;
 
 public class ExitCommandTest {
     private Model model = new ModelManager();
