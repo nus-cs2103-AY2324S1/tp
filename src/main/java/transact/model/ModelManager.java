@@ -41,12 +41,12 @@ public class ModelManager implements Model {
         filteredTransactions = new FilteredList<>(tmpTransactions);
 
         // Placeholder transaction objects (x5)
+        /*tmpTransactions.add(new Transaction());
         tmpTransactions.add(new Transaction());
         tmpTransactions.add(new Transaction());
         tmpTransactions.add(new Transaction());
         tmpTransactions.add(new Transaction());
-        tmpTransactions.add(new Transaction());
-
+*/
         // Set default view to staff on startup
         updateFilteredTransactionList(PREDICATE_HIDE_ALL_TRANSACTIONS);
     }
