@@ -39,15 +39,18 @@ public class LookupCommandParserTest {
     @Test
     public void parse_invalidArgs_throwsParseException() {
         // no keywords
-        assertParseFailure(parser, " Alice Bob", String.format(MESSAGE_INVALID_COMMAND_FORMAT, LookupCommand.MESSAGE_USAGE));
-        assertParseFailure(parser, " /n Alice", String.format(MESSAGE_INVALID_COMMAND_FORMAT, LookupCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " Alice Bob",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, LookupCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " /n Alice",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, LookupCommand.MESSAGE_USAGE));
 
         // multiple keywords in one prefix
         assertParseFailure(parser, " n/Alice Bob", LookupCommand.MESSAGE_ADDITIONAL_KEYWORDS);
         assertParseFailure(parser, " c/t11 t12 t13", LookupCommand.MESSAGE_ADDITIONAL_KEYWORDS);
 
         // no leading whitespaces
-        assertParseFailure(parser, "n/Alice", String.format(MESSAGE_INVALID_COMMAND_FORMAT, LookupCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "n/Alice",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, LookupCommand.MESSAGE_USAGE));
     }
 
 }

@@ -23,7 +23,7 @@ public class PersonContainsKeywordsPredicateTest {
 
         // same values -> returns true
         PersonContainsKeywordsPredicate firstPredicateCopy = new PersonContainsKeywordsPredicate("T11",
-        null, "first", null, null, null);
+                null, "first", null, null, null);
         PersonContainsKeywordsPredicate secondPredicateCopy = new PersonContainsKeywordsPredicate(null,
                 "second@example.com", "second", "12345678", "A099999X", "test");
         assertTrue(firstPredicate.equals(firstPredicateCopy));

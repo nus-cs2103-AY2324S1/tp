@@ -6,10 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.BENSON;
-import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalPersons.DANIEL;
-import static seedu.address.testutil.TypicalPersons.ELLE;
-import static seedu.address.testutil.TypicalPersons.FIONA;
 import static seedu.address.testutil.TypicalPersons.HOON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -40,30 +37,30 @@ public class LookupCommandTest {
                 new PersonContainsKeywordsPredicate("T10", null,
                         null, null, null, null);
 
-        LookupCommand LookupFirstCommand = new LookupCommand(firstPredicate);
-        LookupCommand LookupSecondCommand = new LookupCommand(secondPredicate);
+        LookupCommand lookupFirstCommand = new LookupCommand(firstPredicate);
+        LookupCommand lookupSecondCommand = new LookupCommand(secondPredicate);
 
         // same object -> returns true
-        assertTrue(LookupFirstCommand.equals(LookupFirstCommand));
-        assertTrue(LookupSecondCommand.equals(LookupSecondCommand));
+        assertTrue(lookupFirstCommand.equals(lookupFirstCommand));
+        assertTrue(lookupSecondCommand.equals(lookupSecondCommand));
 
         // same values -> returns true
-        LookupCommand LookupFirstCommandCopy = new LookupCommand(firstPredicate);
-        LookupCommand LookupSecondCommandCopy = new LookupCommand(secondPredicate);
-        assertTrue(LookupFirstCommand.equals(LookupFirstCommandCopy));
-        assertTrue(LookupSecondCommand.equals(LookupSecondCommandCopy));
+        LookupCommand lookupFirstCommandCopy = new LookupCommand(firstPredicate);
+        LookupCommand lookupSecondCommandCopy = new LookupCommand(secondPredicate);
+        assertTrue(lookupFirstCommand.equals(lookupFirstCommandCopy));
+        assertTrue(lookupSecondCommand.equals(lookupSecondCommandCopy));
 
         // different types -> returns false
-        assertFalse(LookupFirstCommand.equals(1));
-        assertFalse(LookupSecondCommand.equals(1));
+        assertFalse(lookupFirstCommand.equals(1));
+        assertFalse(lookupSecondCommand.equals(1));
 
         // null -> returns false
-        assertFalse(LookupFirstCommand.equals(null));
-        assertFalse(LookupSecondCommand.equals(null));
+        assertFalse(lookupFirstCommand.equals(null));
+        assertFalse(lookupSecondCommand.equals(null));
 
         // different person -> returns false
-        assertFalse(LookupFirstCommand.equals(LookupSecondCommand));
-        assertFalse(LookupSecondCommand.equals(LookupFirstCommand));
+        assertFalse(lookupFirstCommand.equals(lookupSecondCommand));
+        assertFalse(lookupSecondCommand.equals(lookupFirstCommand));
     }
 
     @Test
@@ -79,6 +76,8 @@ public class LookupCommandTest {
 
     @Test
     public void execute_singleKeywords_multiplePersonsFound() {
+        expectedModel.addPerson(HOON);
+        model.addPerson(HOON);
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(null,
                 null, TypicalPersons.KEYWORD_MATCHING_MEIER, null, null, null);
@@ -86,6 +85,8 @@ public class LookupCommandTest {
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(BENSON, DANIEL, HOON), model.getFilteredPersonList());
+        expectedModel.deletePerson(HOON);
+        model.deletePerson(HOON);
     }
 
     @Test
@@ -123,8 +124,8 @@ public class LookupCommandTest {
     public void toStringMethod() {
         PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate("T11",
                 null, TypicalPersons.KEYWORD_MATCHING_MEIER, null, null, null);
-        LookupCommand LookupCommand = new LookupCommand(predicate);
+        LookupCommand lookupCommand = new LookupCommand(predicate);
         String expected = LookupCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
-        assertEquals(expected, LookupCommand.toString());
+        assertEquals(expected, lookupCommand.toString());
     }
 }
