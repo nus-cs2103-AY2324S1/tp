@@ -10,7 +10,7 @@ public class DeleteWordsCommand extends Command{
 
     private final Index targetIndex;
 
-    public DeleteCommand(Index targetIndex) {
+    public DeleteWordsCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
