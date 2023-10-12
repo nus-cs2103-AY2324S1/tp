@@ -1,7 +1,5 @@
 package seedu.address.ui;
 
-import static seedu.address.logic.parser.ParserUtil.FORMAT;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
