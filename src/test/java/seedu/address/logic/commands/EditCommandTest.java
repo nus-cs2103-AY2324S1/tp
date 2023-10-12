@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPARTMENT_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_POSITION_BOB;
@@ -59,10 +60,12 @@ public class EditCommandTest {
 
         EmployeeBuilder employeeInlist = new EmployeeBuilder(lastEmployee);
         Employee editedEmployee = employeeInlist.withName(VALID_NAME_BOB).withPosition(VALID_POSITION_BOB)
+                .withId(VALID_ID_BOB)
                 .withPhone(VALID_PHONE_BOB)
                 .withDepartments(VALID_DEPARTMENT_HUSBAND).build();
 
         EditEmployeeDescriptor descriptor = new EditEmployeeDescriptorBuilder().withName(VALID_NAME_BOB)
+                .withId(VALID_ID_BOB)
                 .withPosition(VALID_POSITION_BOB)
                 .withPhone(VALID_PHONE_BOB).withDepartments(VALID_DEPARTMENT_HUSBAND).build();
         EditCommand editCommand = new EditCommand(indexLastEmployee, descriptor);
