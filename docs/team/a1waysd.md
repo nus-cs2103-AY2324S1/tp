@@ -25,7 +25,7 @@ Given below are my contributions to the project.
         * Added documentation for the features `list` and `stop`
         * Drafted UI for main and `list` feature
     * Developer Guide:
-        * 
+      *
 
 * **Contributions to team-based tasks**:
     * Milestone v1.1 creation and issues assignment

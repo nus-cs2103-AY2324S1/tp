@@ -77,7 +77,8 @@ public class Flashlingo implements ReadOnlyFlashlingo {
     /**
      * Replaces the given flashcard {@code target} in the list with {@code editedFlashCard}.
      * {@code target} must exist in flashlingo.
-     * The flashcard identity of {@code editedFlashCard} must not be the same as another existing flashcard in flashlingo.
+     * The flashcard identity of {@code editedFlashCard} must not be the same as another existing
+     * flashcard in flashlingo.
      */
     public void setFlashCard(FlashCard target, FlashCard editedFlashCard) {
         requireNonNull(editedFlashCard);

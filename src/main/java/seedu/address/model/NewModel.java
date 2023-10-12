@@ -1,12 +1,11 @@
 package seedu.address.model;
 
+import java.nio.file.Path;
+import java.util.function.Predicate;
+
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.flashcard.FlashCard;
-import seedu.address.model.person.Person;
-
-import java.nio.file.Path;
-import java.util.function.Predicate;
 
 /**
  * The API of the Model component.
@@ -73,7 +72,8 @@ public interface NewModel {
     /**
      * Replaces the given flashcard {@code target} with {@code editedFlashCard}.
      * {@code target} must exist in the Flashlingo .
-     * The flashcard identity of {@code editedFlashCard} must not be the same as another existing FlashCard in the Flashlingo.
+     * The flashcard identity of {@code editedFlashCard} must not be the same as another existing
+     * FlashCard in the Flashlingo.
      */
     void setFlashCard(FlashCard target, FlashCard editedFlashCard);
 

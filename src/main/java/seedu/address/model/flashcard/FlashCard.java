@@ -1,8 +1,5 @@
 package seedu.address.model.flashcard;
 
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-
 import java.util.Date;
 
 /**
@@ -52,8 +49,8 @@ public class FlashCard {
         }
 
         return otherFlashCard != null
-          && otherFlashCard.getOriginalWord().equals(getOriginalWord())
-          && otherFlashCard.getTranslatedWord().equals(getTranslatedWord());
+            && otherFlashCard.getOriginalWord().equals(getOriginalWord())
+            && otherFlashCard.getTranslatedWord().equals(getTranslatedWord());
     }
 
     /**

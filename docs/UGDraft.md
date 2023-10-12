@@ -62,10 +62,10 @@ Format: `list`
 
 Output:
 * `There are no words in the list! Add your flashcards now!`
-* `Here are the words:`  
-  `1. ORIGINAL_WORD - TRANSLATION`  
-  `2. ORIGINAL_WORD - TRANSLATION`  
-  `3. ORIGINAL_WORD - TRANSLATION`  
+* `Here are the words:`
+  `1. ORIGINAL_WORD - TRANSLATION`
+  `2. ORIGINAL_WORD - TRANSLATION`
+  `3. ORIGINAL_WORD - TRANSLATION`
   `...`
 
 ![img.png](ListUi.png)

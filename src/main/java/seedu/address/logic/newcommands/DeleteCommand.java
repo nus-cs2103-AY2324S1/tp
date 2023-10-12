@@ -1,19 +1,17 @@
 package seedu.address.logic.newcommands;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.NewCommand;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-import seedu.address.model.NewModel;
-import seedu.address.model.flashcard.FlashCard;
+import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
-import static java.util.Objects.requireNonNull;
+import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.NewCommand;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.NewModel;
+import seedu.address.model.flashcard.FlashCard;
 
 /**
  * Deletes a person identified using it's displayed index from the address book.
@@ -60,7 +58,8 @@ public class DeleteCommand extends NewCommand {
             return false;
         }
 
-        seedu.address.logic.newcommands.DeleteCommand otherDeleteCommand = (seedu.address.logic.newcommands.DeleteCommand) other;
+        seedu.address.logic.newcommands.DeleteCommand otherDeleteCommand = (seedu
+                .address.logic.newcommands.DeleteCommand) other;
         return targetIndex.equals(otherDeleteCommand.targetIndex);
     }
 

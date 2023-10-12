@@ -11,7 +11,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Wang Cheng
 
-<img src="images/wangcheng0116.png" width="200px">  
+<img src="images/wangcheng0116.png" width="200px"> 
 
 [[github](https://github.com/wangcheng0116)]
 [[portfolio](team/wangcheng0116.md)]
@@ -33,7 +33,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/itsnattan.png" width="200px">
 
-[[github](https://github.com/itsNatTan)] 
+[[github](https://github.com/itsNatTan)]
 [[portfolio](team/itsnattan.md)]
 
 * Role: Developer
@@ -49,7 +49,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: UI and backend
 
-### Song Mengfei 
+### Song Mengfei
 
 <img src="images/song-mengfei.png" width="200px">
 

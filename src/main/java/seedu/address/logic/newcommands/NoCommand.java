@@ -1,19 +1,12 @@
 package seedu.address.logic.newcommands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ORIGINAL_WORD;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TRANSLATED_WORD;
-
-import java.util.Date;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.NewCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
 import seedu.address.model.NewModel;
-import seedu.address.model.flashcard.FlashCard;
 
 /**
  * Adds a person to the address book.
@@ -24,7 +17,7 @@ public class NoCommand extends NewCommand {
 
     // For help function
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Indicates user hasn't memorized the word.\n"
-      + "Example: " + COMMAND_WORD + " ";
+        + "Example: " + COMMAND_WORD + " ";
 
     public static final String MESSAGE_SUCCESS = "Great Job! You have indicated that you have memorized the word!";
 
