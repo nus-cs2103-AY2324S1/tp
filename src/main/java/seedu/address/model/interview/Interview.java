@@ -12,14 +12,14 @@ public class Interview {
      * Limit is presumed to not feasibly be reached ever since the application is constrained to
      * 'no remote server, single user'
      */
-    static int globalInterviewId = 0;
+    private static int globalInterviewId = 0;
 
-    int interviewId;
+    private int interviewId;
     /** TODO Change from 'String' to 'Applicant' once Applicant is on master*/
-    String applicant;
-    String jobRole;
+    private String applicant;
+    private String jobRole;
     /** TODO Change from 'String' to proper 'Date/Time' once natural DT is implemented*/
-    String interviewTiming;
+    private String interviewTiming;
 
     /**
      * Default constructor for Interview object.

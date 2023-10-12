@@ -99,6 +99,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     //// interview-level operations
+    /**
+     * Returns true if an interview with the same identity as {@code interview} exists in the address book.
+     */
     public boolean hasInterview(Interview interview) {
         requireNonNull(interview);
         return interviews.contains(interview);

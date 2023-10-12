@@ -1,15 +1,15 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.commands.AddInterviewCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.interview.Interview;
-
-import java.util.stream.Stream;
-
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPLICANT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMING;
+
+import java.util.stream.Stream;
+
+import seedu.address.logic.commands.AddInterviewCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.interview.Interview;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -20,7 +20,8 @@ public class AddInterviewCommandParser implements Parser<AddInterviewCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the AddInterviewCommand
      * and returns an AddInterviewCommand object for execution.
-     * @throws seedu.address.logic.parser.exceptions.ParseException if the user input does not conform the expected format
+     * @throws seedu.address.logic.parser.exceptions.ParseException if the user input does not conform the
+     * expected format
      */
     public AddInterviewCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
