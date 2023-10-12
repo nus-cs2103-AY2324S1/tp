@@ -25,18 +25,20 @@ import seedu.address.model.person.Specialist;
  */
 public class TypicalPersons {
 
-    public static final Patient ALICE = (Patient) new PatientBuilder().withName("Alice Pauline")
+    public static final Patient ALICE = (Patient) new PatientBuilder().withMedicalHistory("Anemia").withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253")
             .withTags("friends").build();
-    public static final Patient BENSON = (Patient) new PatientBuilder().withName("Benson Meier")
+    public static final Patient BENSON = (Patient) new PatientBuilder().withMedicalHistory("Osteoporosis").withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withTags("owesMoney", "friends").build();
-    public static final Patient CARL = (Patient) new PatientBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withEmail("heinz@example.com").withAddress("wall street").build();
-    public static final Patient DANIEL = (Patient) new PatientBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends").build();
+    public static final Patient CARL = (Patient) new PatientBuilder().withMedicalHistory("Diabetes")
+            .withName("Carl Kurz").withPhone("95352563").withEmail("heinz@example.com")
+            .withAddress("wall street").build();
+    public static final Patient DANIEL = (Patient) new PatientBuilder().withMedicalHistory("Asthma")
+            .withName("Daniel Meier").withPhone("87652533").withEmail("cornelia@example.com")
+            .withAddress("10th street").withTags("friends").build();
     public static final Specialist ELLE = (Specialist) new SpecialistBuilder().withSpecialty("Dermatology")
             .withName("Elle Meyer").withPhone("9482224")
             .withEmail("werner@example.com").withAddress("michegan ave").build();

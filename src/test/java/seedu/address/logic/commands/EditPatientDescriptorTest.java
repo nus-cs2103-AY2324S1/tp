@@ -70,7 +70,8 @@ public class EditPatientDescriptorTest {
                 + editPatientDescriptor.getPhone().orElse(null) + ", email="
                 + editPatientDescriptor.getEmail().orElse(null) + ", address="
                 + editPatientDescriptor.getAddress().orElse(null) + ", tags="
-                + editPatientDescriptor.getTags().orElse(null) + "}";
+                + editPatientDescriptor.getTags().orElse(null)
+                + editPatientDescriptor.getMedicalHistory().orElse(null) + "}";
         assertEquals(expected, editPatientDescriptor.toString());
     }
 }
