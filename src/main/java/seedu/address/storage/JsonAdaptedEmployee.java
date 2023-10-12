@@ -13,6 +13,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.department.Department;
 import seedu.address.model.employee.Email;
 import seedu.address.model.employee.Employee;
+import seedu.address.model.employee.Id;
 import seedu.address.model.employee.Name;
 import seedu.address.model.employee.Phone;
 import seedu.address.model.employee.Position;
@@ -26,6 +27,7 @@ class JsonAdaptedEmployee {
 
     private final String name;
     private final String position;
+    private final String id;
     private final String phone;
     private final String email;
     private final List<JsonAdaptedDepartment> departments = new ArrayList<>();
@@ -35,10 +37,11 @@ class JsonAdaptedEmployee {
      */
     @JsonCreator
     public JsonAdaptedEmployee(@JsonProperty("name") String name, @JsonProperty("position") String position,
-            @JsonProperty("phone") String phone,
+            @JsonProperty("id") String id, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("departments") List<JsonAdaptedDepartment> departments) {
         this.name = name;
         this.position = position;
+        this.id = id;
         this.phone = phone;
         this.email = email;
         if (departments != null) {
@@ -52,6 +55,7 @@ class JsonAdaptedEmployee {
     public JsonAdaptedEmployee(Employee source) {
         name = source.getName().fullName;
         position = source.getPosition().value;
+        id = source.getId().value;
         phone = source.getPhone().value;
         email = source.getEmail().value;
         departments.addAll(source.getDepartments().stream()
@@ -89,6 +93,14 @@ class JsonAdaptedEmployee {
         }
         final Position modelPosition = new Position(position);
 
+        if (id == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Id.class.getSimpleName()));
+        }
+        if (!Id.isValidId(id)) {
+            throw new IllegalValueException(Id.MESSAGE_CONSTRAINTS);
+        }
+        final Id modelId = new Id(id);
+
         if (phone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
         }
@@ -106,7 +118,7 @@ class JsonAdaptedEmployee {
         final Email modelEmail = new Email(email);
 
         final Set<Department> modelDepartments = new HashSet<>(employeeDepartments);
-        return new Employee(modelName, modelPosition, modelPhone, modelEmail, modelDepartments);
+        return new Employee(modelName, modelPosition, modelId, modelPhone, modelEmail, modelDepartments);
     }
 
 }
