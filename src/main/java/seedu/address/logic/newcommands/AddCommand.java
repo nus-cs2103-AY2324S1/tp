@@ -34,15 +34,13 @@ public class AddCommand extends Command {
     public static final String MESSAGE_DUPLICATE_CARD = "This flashcard already exists";
 
     private final FlashCard toAdd;
-    private CardList cardList;
     private String original;
     private String translated;
 
     /**
      * Creates an AddCommand to add the specified {@code FlashCard}
      */
-    public AddCommand(String original, String translated, CardList cardList) {
-        this.cardList = cardList;
+    public AddCommand(String original, String translated) {
         this.original = original;
         this.translated = translated;
         this.toAdd = new FlashCard(original, translated, new Date(), 1);
@@ -52,7 +50,7 @@ public class AddCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (cardList.hasCard(toAdd)) {
+        if (model.hasFlashCard(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_CARD);
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, this.original, this.translated));

@@ -1,5 +1,8 @@
 package seedu.address.model.flashcard;
 
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+
 import java.util.Date;
 
 /**
@@ -29,6 +32,28 @@ public class FlashCard {
         this.whenToReview = whenToReview;
         this.translatedWord = new Translation(translatedWord);
         this.originalWord = new OriginalWord(originalWord);
+    }
+
+    public OriginalWord getOriginalWord() {
+        return originalWord;
+    }
+
+    public Translation getTranslatedWord() {
+        return translatedWord;
+    }
+
+    /**
+     * Returns true if both flashcards have the same originalWord and translatedWord.
+     * This defines a weaker notion of equality between two flashcards.
+     */
+    public boolean isSameFlashCard(FlashCard otherFlashCard) {
+        if (otherFlashCard == this) {
+            return true;
+        }
+
+        return otherFlashCard != null
+          && otherFlashCard.getOriginalWord().equals(getOriginalWord())
+          && otherFlashCard.getTranslatedWord().equals(getTranslatedWord());
     }
 
     /**
