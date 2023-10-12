@@ -16,13 +16,6 @@ public interface Model {
     /** {@code Predicate} that always evaluates to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
-    /** {@code Predicate} that evaluates to true when {@code Person} is a {@code Patient}*/
-    Predicate<Person> PREDICATE_SHOW_ALL_PATIENTS = person -> person instanceof Patient;
-
-    /** {@code Predicate} that evaluates to true when {@code Person} is a {@code Specialist}*/
-    Predicate<Person> PREDICATE_SHOW_ALL_SPECIALISTS = person -> person instanceof Specialist;
-
-
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
