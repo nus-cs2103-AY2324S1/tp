@@ -6,9 +6,9 @@ import java.util.regex.Pattern;
 
 import networkbook.commons.core.LogsCenter;
 import networkbook.logic.Messages;
-import networkbook.logic.commands.AddCommand;
 import networkbook.logic.commands.ClearCommand;
 import networkbook.logic.commands.Command;
+import networkbook.logic.commands.CreateCommand;
 import networkbook.logic.commands.DeleteCommand;
 import networkbook.logic.commands.EditCommand;
 import networkbook.logic.commands.ExitCommand;
@@ -51,8 +51,8 @@ public class NetworkBookParser {
 
         switch (commandWord) {
 
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+        case CreateCommand.COMMAND_WORD:
+            return new CreateCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);

@@ -2,7 +2,7 @@ package networkbook.testutil;
 
 import java.util.Set;
 
-import networkbook.logic.commands.AddCommand;
+import networkbook.logic.commands.CreateCommand;
 import networkbook.logic.commands.EditCommand;
 import networkbook.logic.parser.CliSyntax;
 import networkbook.model.person.Email;
@@ -19,7 +19,7 @@ public class PersonUtil {
      * Returns an add command string for adding the {@code person}.
      */
     public static String getAddCommand(Person person) {
-        return AddCommand.COMMAND_WORD + " " + getPersonDetails(person);
+        return CreateCommand.COMMAND_WORD + " " + getPersonDetails(person);
     }
 
     /**

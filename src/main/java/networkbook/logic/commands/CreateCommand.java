@@ -10,13 +10,13 @@ import networkbook.model.Model;
 import networkbook.model.person.Person;
 
 /**
- * Adds a person to the network book.
+ * Creates a new contact in the network book.
  */
-public class AddCommand extends Command {
+public class CreateCommand extends Command {
 
-    public static final String COMMAND_WORD = "add";
+    public static final String COMMAND_WORD = "create";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the network book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a new contact in the network book. "
             + "Parameters: "
             + CliSyntax.PREFIX_NAME + " NAME "
             + CliSyntax.PREFIX_PHONE + " PHONE "
@@ -31,15 +31,15 @@ public class AddCommand extends Command {
             + CliSyntax.PREFIX_TAG + " friends "
             + CliSyntax.PREFIX_TAG + " owesMoney";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the network book";
+    public static final String MESSAGE_SUCCESS = "New contact created: %1$s";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This contact already exists in the network book";
 
     private final Person toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates a CreateCommand to create the specified {@code Person}
      */
-    public AddCommand(Person person) {
+    public CreateCommand(Person person) {
         requireNonNull(person);
         toAdd = person;
     }
@@ -63,12 +63,12 @@ public class AddCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddCommand)) {
+        if (!(other instanceof CreateCommand)) {
             return false;
         }
 
-        AddCommand otherAddCommand = (AddCommand) other;
-        return toAdd.equals(otherAddCommand.toAdd);
+        CreateCommand otherCreateCommand = (CreateCommand) other;
+        return toAdd.equals(otherCreateCommand.toAdd);
     }
 
     @Override
