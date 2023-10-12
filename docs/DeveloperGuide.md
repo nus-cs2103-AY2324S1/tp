@@ -471,7 +471,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4.  Should be able to generate output in less than 5 seconds.
 5. Should be able to show correct input format in case the user enters the input in wrong format.
 6. The system should be usable by a new developer/intern who has not used such a software before.
-7. Should be able to transfer the database from one system to another.
 
 ### Glossary
 
