@@ -50,13 +50,13 @@ public class SampleDataUtil {
             new Person(new Name("Irfan Ibrahim"), new Nric("S0123456F"), new Phone("92492021"),
                     new Email("irfan@example.com"),
                 new Address("Blk 47 Tampines Street 20, #17-35"),
-                    new Appointment("8 Aug 2023 10AM - 12PM"),
+                    new Appointment("8 Aug 2023 10AM - 11PM"),
                     getMedicalHistorySet("Diabetes"),
                     getTagSet("classmates")),
             new Person(new Name("Roy Balakrishnan"), new Nric("T0128456F"), new Phone("92624417"),
                     new Email("royb@example.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"),
-                    new Appointment("8 Aug 2023 10AM - 12PM"),
+                    new Appointment("8 Aug 2023 10AM - 11PM"),
                     getMedicalHistorySet("Diabetes"),
                     getTagSet("colleagues"))
         };
