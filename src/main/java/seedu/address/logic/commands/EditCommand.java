@@ -1,11 +1,14 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PATIENT_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SPECIALTY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.SPECIALIST_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -17,6 +20,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
+import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -24,8 +28,11 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Specialist;
+import seedu.address.model.person.Specialty;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -38,13 +45,19 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
+            + "Specify whether the person is a patient or specialist using the "
+            + PATIENT_TAG + " or " + SPECIALIST_TAG + " tags. "
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
+            + "If the person is a specialist, edit their specialty by using the "
+            + PREFIX_SPECIALTY + " prefix. \n"
+            + "Example: " + COMMAND_WORD + " "
+            + PATIENT_TAG + " "
+            + "1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
@@ -64,7 +77,11 @@ public class EditCommand extends Command {
         requireNonNull(editPersonDescriptor);
 
         this.index = index;
-        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        if (editPersonDescriptor instanceof EditPatientDescriptor) {
+            this.editPersonDescriptor = new EditPatientDescriptor((EditPatientDescriptor) editPersonDescriptor);
+        } else {
+            this.editPersonDescriptor = new EditSpecialistDescriptor((EditSpecialistDescriptor) editPersonDescriptor);
+        }
     }
 
     @Override
@@ -77,7 +94,19 @@ public class EditCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        Person editedPerson;
+        if (personToEdit instanceof Patient) {
+            if (!(editPersonDescriptor instanceof EditPatientDescriptor)) {
+                throw new CommandException(Messages.MESSAGE_PERSON_TYPE_MISMATCH_INDEX);
+            }
+            editedPerson = createEditedPatient((Patient) personToEdit, (EditPatientDescriptor) editPersonDescriptor);
+        } else {
+            if (!(editPersonDescriptor instanceof EditSpecialistDescriptor)) {
+                throw new CommandException(Messages.MESSAGE_PERSON_TYPE_MISMATCH_INDEX);
+            }
+            editedPerson = createEditedSpecialist((Specialist) personToEdit,
+                    (EditSpecialistDescriptor) editPersonDescriptor);
+        }
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
@@ -89,19 +118,38 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Patient} with the details of {@code patientToEdit}
+     * edited with {@code editPatientDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
-        assert personToEdit != null;
+    private static Patient createEditedPatient(Patient patientToEdit, EditPatientDescriptor editPatientDescriptor) {
+        assert patientToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Name updatedName = editPatientDescriptor.getName().orElse(patientToEdit.getName());
+        Phone updatedPhone = editPatientDescriptor.getPhone().orElse(patientToEdit.getPhone());
+        Email updatedEmail = editPatientDescriptor.getEmail().orElse(patientToEdit.getEmail());
+        Address updatedAddress = editPatientDescriptor.getAddress().orElse(patientToEdit.getAddress());
+        Set<Tag> updatedTags = editPatientDescriptor.getTags().orElse(patientToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Patient(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+    }
+
+    /**
+     * Creates and returns a {@code Specialist} with the details of {@code specialistToEdit}
+     * edited with {@code editSpecialistDescriptor}.
+     */
+    private static Specialist createEditedSpecialist(Specialist specialistToEdit,
+                                                     EditSpecialistDescriptor editSpecialistDescriptor) {
+        assert specialistToEdit != null;
+
+        Name updatedName = editSpecialistDescriptor.getName().orElse(specialistToEdit.getName());
+        Phone updatedPhone = editSpecialistDescriptor.getPhone().orElse(specialistToEdit.getPhone());
+        Email updatedEmail = editSpecialistDescriptor.getEmail().orElse(specialistToEdit.getEmail());
+        Address updatedAddress = editSpecialistDescriptor.getAddress().orElse(specialistToEdit.getAddress());
+        Set<Tag> updatedTags = editSpecialistDescriptor.getTags().orElse(specialistToEdit.getTags());
+        Specialty updatedSpecialty = editSpecialistDescriptor.getSpecialty().orElse(specialistToEdit.getSpecialty());
+
+
+        return new Specialist(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedSpecialty);
     }
 
     @Override
@@ -132,7 +180,7 @@ public class EditCommand extends Command {
      * Stores the details to edit the person with. Each non-empty field value will replace the
      * corresponding field value of the person.
      */
-    public static class EditPersonDescriptor {
+    public abstract static class EditPersonDescriptor {
         private Name name;
         private Phone phone;
         private Email email;
@@ -237,6 +285,78 @@ public class EditCommand extends Command {
                     .add("address", address)
                     .add("tags", tags)
                     .toString();
+        }
+    }
+
+    /**
+     * Stores the details to edit the patient with. Each non-empty field value will replace the
+     * corresponding field value of the patient.
+     */
+    public static class EditPatientDescriptor extends EditPersonDescriptor {
+        public EditPatientDescriptor() {}
+
+        /**
+         * Copy constructor.
+         * A defensive copy of {@code tags} is used internally.
+         */
+        public EditPatientDescriptor(EditPatientDescriptor toCopy) {
+            super(toCopy);
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            return super.equals(other);
+        }
+        @Override
+        public String toString() {
+            return super.toString();
+        }
+    }
+
+    /**
+     * Stores the details to edit the specialist with. Each non-empty field value will replace the
+     * corresponding field value of the specialist.
+     */
+    public static class EditSpecialistDescriptor extends EditPersonDescriptor {
+        private Specialty specialty;
+        /**
+         * Copy constructor.
+         * A defensive copy of {@code tags} is used internally.
+         */
+        public EditSpecialistDescriptor(EditSpecialistDescriptor toCopy) {
+            super(toCopy);
+            setSpecialty(toCopy.specialty);
+        }
+        public EditSpecialistDescriptor() {}
+        public void setSpecialty(Specialty specialty) {
+            this.specialty = specialty;
+        }
+
+        public Optional<Specialty> getSpecialty() {
+            return Optional.ofNullable(specialty);
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            if (super.equals(other) && other instanceof EditSpecialistDescriptor) {
+                EditSpecialistDescriptor otherEditSpecialistDescriptor = (EditSpecialistDescriptor) other;
+                return Objects.equals(specialty, otherEditSpecialistDescriptor.specialty);
+            }
+            return false;
+        }
+
+        @Override
+        public String toString() {
+            String stringToAdd = ", specialty=" + specialty;
+            return StringUtil.addFieldToPersonToString(stringToAdd, super.toString());
+        }
+
+        /**
+         * Returns true if at least one field is edited.
+         */
+        @Override
+        public boolean isAnyFieldEdited() {
+            return super.isAnyFieldEdited() || CollectionUtil.isAnyNonNull(specialty);
         }
     }
 }

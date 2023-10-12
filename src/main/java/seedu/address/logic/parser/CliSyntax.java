@@ -11,5 +11,10 @@ public class CliSyntax {
     public static final Prefix PREFIX_EMAIL = new Prefix("e/");
     public static final Prefix PREFIX_ADDRESS = new Prefix("a/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
+    public static final Prefix PREFIX_SPECIALTY = new Prefix("s/");
+    /* Tag definitions */
+    public static final String PATIENT_TAG = "-pa";
+
+    public static final String SPECIALIST_TAG = "-sp";
 
 }

@@ -1,11 +1,14 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PATIENT_TAG;
+import static seedu.address.logic.parser.CliSyntax.SPECIALIST_TAG;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.PersonType;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
@@ -17,13 +20,23 @@ public class FindCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
+            + "Specify whether the person is a patient or specialist using the "
+            + PATIENT_TAG + " or " + SPECIALIST_TAG + " tags."
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+            + "Example: " + COMMAND_WORD + " "
+            + PATIENT_TAG + " "
+            + "alice bob charlie";
 
     private final NameContainsKeywordsPredicate predicate;
+    private final PersonType personType;
 
-    public FindCommand(NameContainsKeywordsPredicate predicate) {
+    /**
+     * @param predicate The predicate that describes the name being searched for
+     * @param personType The type of person being searched for i.e. patient or specialist
+     */
+    public FindCommand(NameContainsKeywordsPredicate predicate, PersonType personType) {
         this.predicate = predicate;
+        this.personType = personType;
     }
 
     @Override
@@ -46,13 +59,14 @@ public class FindCommand extends Command {
         }
 
         FindCommand otherFindCommand = (FindCommand) other;
-        return predicate.equals(otherFindCommand.predicate);
+        return predicate.equals(otherFindCommand.predicate) && personType.equals(otherFindCommand.personType);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("predicate", predicate)
+                .add("personType", personType)
                 .toString();
     }
 }

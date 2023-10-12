@@ -10,11 +10,9 @@ import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * A UI component that displays information of a {@code Person}.
  */
-public class PersonCard extends UiPart<Region> {
-
-    private static final String FXML = "PersonListCard.fxml";
+public abstract class PersonCard extends UiPart<Region> {
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -26,6 +24,8 @@ public class PersonCard extends UiPart<Region> {
 
     public final Person person;
 
+    @FXML
+    private Label personType;
     @FXML
     private HBox cardPane;
     @FXML
@@ -44,8 +44,8 @@ public class PersonCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public PersonCard(Person person, int displayedIndex) {
-        super(FXML);
+    public PersonCard(Person person, int displayedIndex, String fxml) {
+        super(fxml);
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
