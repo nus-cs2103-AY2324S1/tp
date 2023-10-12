@@ -27,12 +27,12 @@ public class PersonBuilder {
     public static final String DEFAULT_APPOINTMENT = "10 AUG 2023 10AM - 11AM";
 
     private Name name;
-    private Nric nric;
+//    private Nric nric;
     private Phone phone;
     private Email email;
     private Address address;
-    private Appointment appointment;
-    private Set<MedicalHistory> medicalHistories;
+//    private Appointment appointment;
+//    private Set<MedicalHistory> medicalHistories;
     private Set<Tag> tags;
 
     /**
@@ -40,12 +40,9 @@ public class PersonBuilder {
      */
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
-        nric = new Nric(DEFAULT_NRIC);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        appointment = new Appointment(DEFAULT_APPOINTMENT);
-        medicalHistories = new HashSet<>();
         tags = new HashSet<>();
     }
 
@@ -54,12 +51,9 @@ public class PersonBuilder {
      */
     public PersonBuilder(Person personToCopy) {
         name = personToCopy.getName();
-        nric = personToCopy.getNric();
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
-        appointment = personToCopy.getAppointment();
-        medicalHistories = new HashSet<>(personToCopy.getMedicalHistories());
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -74,10 +68,10 @@ public class PersonBuilder {
      * Parses the {@code medicalHistories} into a {@code Set<MedicalHistory>}
      * and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withMedicalHistories(String ... medicalHistories) {
-        this.medicalHistories = SampleDataUtil.getMedicalHistorySet(medicalHistories);
-        return this;
-    }
+//    public PersonBuilder withMedicalHistories(String ... medicalHistories) {
+//        this.medicalHistories = SampleDataUtil.getMedicalHistorySet(medicalHistories);
+//        return this;
+//    }
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
      */
@@ -111,20 +105,20 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Nric} of the {@code Person} that we are building.
-     */
-    public PersonBuilder withNric(String nric) {
-        this.nric = new Nric(nric);
-        return this;
-    }
-
-    /**
      * Sets the {@code Email} of the {@code Person} that we are building.
      */
-    public PersonBuilder withAppointment(String appointment) {
-        this.appointment = new Appointment(appointment);
-        return this;
-    }
+//    public PersonBuilder withAppointment(String appointment) {
+//        this.appointment = new Appointment(appointment);
+//        return this;
+//    }
+
+    /**
+     * Sets the {@code Nric} of the {@code Person} that we are building.
+     */
+//    public PersonBuilder withNric(String nric) {
+//        this.nric = new Nric(nric);
+//        return this;
+//    }
 
     public Person build() {
         return new Person(name, phone, email, address, tags);

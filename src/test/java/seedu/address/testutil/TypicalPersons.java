@@ -47,7 +47,7 @@ public class TypicalPersons {
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withTags("owesMoney", "friends").build();
-    public static final Person GEORGE = new PersonBuilder().withName("George Best").withNric("T0987654A")
+    public static final Person GEORGE = new PersonBuilder().withName("George Best")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withTags("owesMoney", "friends").build();
