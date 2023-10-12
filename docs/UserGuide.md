@@ -159,7 +159,7 @@ Date-Time Format:
       - Example: `00:10`, `05:01:45`
 
 Examples:
-* `add event -id 1 -en Meeting with professor -st 12:00 -et 1:00 -loc COM 1 Basement -info Discuss the project implementation with the professor`
+* `add event -id 1 -en Meeting with professor -st 12:00 -et 01:00 -loc COM 1 Basement -info Discuss the project implementation with the professor`
 * `add event -id 2 -en Chat with TikTok recruiter -st 17:00`
 
 ### Listing all events : `list events`
@@ -223,7 +223,7 @@ Action             | Format, Examples
 **Add Note**       | `add note -n NAME -t NOTE_TITLE -c NOTE_CONTENT` <br> e.g., `add note -n Daniel -t Open Position -e Applications for SWE full-time positions will open soon`
 **Delete Note**    | `delete note -n NAME -t NOTE_TITLE`<br> e.g., `delete note -n Aaron -t Meeting Topics`
 **List Notes**     | `list notes`
-**Add Event**      | `add event -id CONTACT_ID -en EVENT_NAME -st START_TIME [-et END_TIME] [-loc LOCATION] [-info INFORMATION]` <br> e.g., `add event -id 1 -en Meeting with professor -st 12:00 -et 1:00 -loc COM 1 Basement -info Discuss the project implementation with the professor`
+**Add Event**      | `add event -id CONTACT_ID -en EVENT_NAME -st START_TIME [-et END_TIME] [-loc LOCATION] [-info INFORMATION]` <br> e.g., `add event -id 1 -en Meeting with professor -st 12:00 -et 01:00 -loc COM 1 Basement -info Discuss the project implementation with the professor`
 **Delete Event**   | `delete event -id CONTACT_ID -en EVENT_NAME`<br> e.g., `delete event -id 1 -en Meeting with professor`
 **List Events**    | `list events`
 **Help**           | `help`
