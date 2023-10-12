@@ -7,11 +7,12 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.Messages;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
+import seedu.flashlingo.logic.Messages;
+import seedu.flashlingo.logic.commands.AddCommand;
+import seedu.flashlingo.model.Model;
+import seedu.flashlingo.model.ModelManager;
+import seedu.flashlingo.model.UserPrefs;
+import seedu.flashlingo.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
 /**

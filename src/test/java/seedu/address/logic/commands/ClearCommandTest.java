@@ -5,10 +5,11 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
+import seedu.flashlingo.logic.commands.ClearCommand;
+import seedu.flashlingo.model.AddressBook;
+import seedu.flashlingo.model.Model;
+import seedu.flashlingo.model.ModelManager;
+import seedu.flashlingo.model.UserPrefs;
 
 public class ClearCommandTest {
 

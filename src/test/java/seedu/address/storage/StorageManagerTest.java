@@ -2,7 +2,7 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalFlashlingo;
 
 import java.nio.file.Path;
 
@@ -10,10 +10,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.UserPrefs;
+import seedu.flashlingo.commons.core.GuiSettings;
+import seedu.flashlingo.model.Flashlingo;
+import seedu.flashlingo.model.ReadOnlyFlashlingo;
+import seedu.flashlingo.model.UserPrefs;
+import seedu.flashlingo.storage.JsonFlashlingoStorage;
+import seedu.flashlingo.storage.JsonUserPrefsStorage;
+import seedu.flashlingo.storage.StorageManager;
 
 public class StorageManagerTest {
 
@@ -24,9 +27,9 @@ public class StorageManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(getTempFilePath("ab"));
+        JsonFlashlingoStorage flashlingoStorage = new JsonFlashlingoStorage(getTempFilePath("fl"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
+        storageManager = new StorageManager(flashlingoStorage, userPrefsStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -51,18 +54,18 @@ public class StorageManagerTest {
     public void addressBookReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
-         * {@link JsonAddressBookStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link JsonAddressBookStorageTest} class.
+         * {@link JsonFlashlingoStorage} class.
+         * More extensive testing of UserPref saving/reading is done in {@link JsonFlashlingoStorageTest} class.
          */
-        AddressBook original = getTypicalAddressBook();
-        storageManager.saveAddressBook(original);
-        ReadOnlyAddressBook retrieved = storageManager.readAddressBook().get();
-        assertEquals(original, new AddressBook(retrieved));
+        Flashlingo original = getTypicalFlashlingo();
+        storageManager.saveFlashlingo(original);
+        ReadOnlyFlashlingo retrieved = storageManager.readFlashlingo().get();
+        assertEquals(original, new Flashlingo(retrieved));
     }
 
     @Test
-    public void getAddressBookFilePath() {
-        assertNotNull(storageManager.getAddressBookFilePath());
+    public void getFlashlingoFilePath() {
+        assertNotNull(storageManager.getFlashlingoFilePath());
     }
 
 }

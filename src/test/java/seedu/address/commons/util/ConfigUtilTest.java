@@ -13,8 +13,9 @@ import java.util.logging.Level;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import seedu.address.commons.core.Config;
-import seedu.address.commons.exceptions.DataLoadingException;
+import seedu.flashlingo.commons.core.Config;
+import seedu.flashlingo.commons.exceptions.DataLoadingException;
+import seedu.flashlingo.commons.util.ConfigUtil;
 
 public class ConfigUtilTest {
 
