@@ -56,8 +56,8 @@ public class Person {
         this.address = address;
         this.tags.addAll(tags);
         // set new fields to null
-        this.nric = null;
-        this.appointment = null;
+        this.nric = new Nric("test");
+        this.appointment = new Appointment("test");
     }
 
     public Name getName() {

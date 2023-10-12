@@ -62,7 +62,6 @@ class JsonAdaptedPerson {
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
-    @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name,
                              @JsonProperty("phone") String phone, @JsonProperty("email") String email,
                              @JsonProperty("address") String address,
@@ -123,15 +122,6 @@ class JsonAdaptedPerson {
         }
         final Name modelName = new Name(name);
 
-        if (nric == null) {
-            System.out.println(nric);
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Nric.class.getSimpleName()));
-        }
-        if (!Nric.isValidNric(nric)) {
-            throw new IllegalValueException(Nric.MESSAGE_CONSTRAINTS);
-        }
-        final Nric modelNric = new Nric(nric);
-
         if (phone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
         }
@@ -155,6 +145,18 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
         final Address modelAddress = new Address(address);
+        final Set<Tag> modelTags = new HashSet<>(personTags);
+
+        if (nric == null) {
+            System.out.println(nric);
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Nric.class.getSimpleName()));
+        }
+        if (!Nric.isValidNric(nric)) {
+            throw new IllegalValueException(Nric.MESSAGE_CONSTRAINTS);
+        }
+        final Nric modelNric = new Nric(nric);
+
+        final Set<MedicalHistory> modelMedicalHistories = new HashSet<>(personMedicalHistory);
 
         if (appointment == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -165,8 +167,6 @@ class JsonAdaptedPerson {
         }
         final Appointment modelAppointment = new Appointment(appointment);
 
-        final Set<MedicalHistory> modelMedicalHistories = new HashSet<>(personMedicalHistory);
-        final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelName, modelNric, modelPhone, modelEmail, modelAddress, modelAppointment,
                 modelMedicalHistories, modelTags);
     }

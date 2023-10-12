@@ -48,7 +48,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         // temp null values for nric, appointment, medical histories
         // to add fields for add command
 
-        Person person = new Person(name, null, phone, email, address, null, null, tagList);
+        Person person = new Person(name, phone, email, address, tagList);
 
         return new AddCommand(person);
     }
