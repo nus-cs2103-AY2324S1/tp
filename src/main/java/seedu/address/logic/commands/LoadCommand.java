@@ -14,7 +14,10 @@ import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.JsonAddressBookStorage;
 
-public class LoadCommand extends Command{
+/**
+ * Loads student information from an existing JSON file in the data folder.
+ */
+public class LoadCommand extends Command {
 
     public static final String COMMAND_WORD = "load";
 
