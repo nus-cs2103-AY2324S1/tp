@@ -1,16 +1,16 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DEPARTMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditEmployeeDescriptor;
+import seedu.address.model.department.Department;
 import seedu.address.model.employee.Employee;
-import seedu.address.model.tag.Tag;
 
 /**
  * A utility class for Employee.
@@ -32,8 +32,8 @@ public class EmployeeUtil {
         sb.append(PREFIX_NAME + employee.getName().fullName + " ");
         sb.append(PREFIX_PHONE + employee.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + employee.getEmail().value + " ");
-        employee.getTags().stream().forEach(
-            s -> sb.append(PREFIX_TAG + s.tagName + " ")
+        employee.getDepartments().stream().forEach(
+            s -> sb.append(PREFIX_DEPARTMENT + s.departmentName + " ")
         );
         return sb.toString();
     }
@@ -46,12 +46,12 @@ public class EmployeeUtil {
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
-        if (descriptor.getTags().isPresent()) {
-            Set<Tag> tags = descriptor.getTags().get();
-            if (tags.isEmpty()) {
-                sb.append(PREFIX_TAG);
+        if (descriptor.getDepartments().isPresent()) {
+            Set<Department> departments = descriptor.getDepartments().get();
+            if (departments.isEmpty()) {
+                sb.append(PREFIX_DEPARTMENT);
             } else {
-                tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
+                departments.forEach(s -> sb.append(PREFIX_DEPARTMENT).append(s.departmentName).append(" "));
             }
         }
         return sb.toString();

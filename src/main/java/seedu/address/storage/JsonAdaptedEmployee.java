@@ -10,11 +10,11 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.department.Department;
 import seedu.address.model.employee.Email;
 import seedu.address.model.employee.Employee;
 import seedu.address.model.employee.Name;
 import seedu.address.model.employee.Phone;
-import seedu.address.model.tag.Tag;
 
 /**
  * Jackson-friendly version of {@link Employee}.
@@ -26,19 +26,19 @@ class JsonAdaptedEmployee {
     private final String name;
     private final String phone;
     private final String email;
-    private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final List<JsonAdaptedDepartment> departments = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedEmployee} with the given employee details.
      */
     @JsonCreator
     public JsonAdaptedEmployee(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("email") String email, @JsonProperty("departments") List<JsonAdaptedDepartment> departments) {
         this.name = name;
         this.phone = phone;
         this.email = email;
-        if (tags != null) {
-            this.tags.addAll(tags);
+        if (departments != null) {
+            this.departments.addAll(departments);
         }
     }
 
@@ -49,8 +49,8 @@ class JsonAdaptedEmployee {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
-        tags.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
+        departments.addAll(source.getDepartments().stream()
+                .map(JsonAdaptedDepartment::new)
                 .collect(Collectors.toList()));
     }
 
@@ -60,9 +60,9 @@ class JsonAdaptedEmployee {
      * @throws IllegalValueException if there were any data constraints violated in the adapted employee.
      */
     public Employee toModelType() throws IllegalValueException {
-        final List<Tag> employeeTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tags) {
-            employeeTags.add(tag.toModelType());
+        final List<Department> employeeDepartments = new ArrayList<>();
+        for (JsonAdaptedDepartment department : departments) {
+            employeeDepartments.add(department.toModelType());
         }
 
         if (name == null) {
@@ -89,8 +89,8 @@ class JsonAdaptedEmployee {
         }
         final Email modelEmail = new Email(email);
 
-        final Set<Tag> modelTags = new HashSet<>(employeeTags);
-        return new Employee(modelName, modelPhone, modelEmail, modelTags);
+        final Set<Department> modelDepartments = new HashSet<>(employeeDepartments);
+        return new Employee(modelName, modelPhone, modelEmail, modelDepartments);
     }
 
 }
