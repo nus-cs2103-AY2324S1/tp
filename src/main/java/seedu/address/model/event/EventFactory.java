@@ -1,14 +1,22 @@
 package seedu.address.model.event;
 
-import seedu.address.model.Model;
-import seedu.address.model.person.Person;
-
 import java.time.Duration;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import seedu.address.model.Model;
+import seedu.address.model.person.Person;
+
+/**
+ * EventFactory generates events from model state.
+ */
 public class EventFactory {
+    /**
+     * Create events from current model state.
+     * @param model {@code Model} representing current state of program.
+     * @return
+     */
     public static List<Event> createEvents(Model model) {
         ArrayList<Event> events = new ArrayList<>();
 

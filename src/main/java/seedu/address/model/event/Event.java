@@ -1,7 +1,5 @@
 package seedu.address.model.event;
 
-import seedu.address.model.person.Person;
-
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -9,6 +7,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+
+import seedu.address.model.person.Person;
 
 /**
  * Represents an Event in the address book.
@@ -20,6 +20,12 @@ public class Event {
     private ArrayList<Duration> reminderDeltas;
     private Set<Person> members;
 
+    /**
+     * Initialises {@code Event} instance.
+     * @param title Title of event.
+     * @param description Description of event.
+     * @param dateTime Date and time of event.
+     */
     public Event(String title, String description, LocalDateTime dateTime) {
         this.title = title;
         this.description = description;

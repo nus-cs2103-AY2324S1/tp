@@ -1,10 +1,8 @@
 package seedu.address.model.person;
 
-import java.time.LocalDate;
-import java.time.MonthDay;
-
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import java.time.MonthDay;
 
 /**
  * Represents a Person's birthday in the address book.
@@ -13,6 +11,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Birthday {
     public final MonthDay birthday;
 
+    /**
+     * Constructs a {@code Birthday}.
+     * @param birthday A valid month and day of the person's birthday.
+     */
     public Birthday(MonthDay birthday) {
         requireNonNull(birthday);
         this.birthday = birthday;

@@ -54,12 +54,6 @@ public interface Logic {
     /**
      * Get latest notifications.
      * @param currentDateTime Current time.
-     */
-
-
-    /**
-     * Get latest notifications.
-     * @param currentDateTime Current time.
      * @return List of latest notifications.
      */
     List<Notification> getLatestNotifications(LocalDateTime currentDateTime);
