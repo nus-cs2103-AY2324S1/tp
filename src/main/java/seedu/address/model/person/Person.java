@@ -3,7 +3,9 @@ package seedu.address.model.person;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
@@ -51,6 +53,28 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    /**
+     * Returns a map of fields and their existing attributes as strings.
+     * Intended for use with {@link seedu.address.logic.search.SearchPredicateApplier}.
+     *
+     * @return a Map; keys include all publicly gettable fields as well as all tags,
+     *         and values are values of the respective fields, or {@code null} for tags.
+     */
+    public Map<String, String> getFieldsAndAttributes() {
+        // note: this can be dynamically done using java.lang.reflect,
+        // but I can't guarantee its security/safety/suitability for this project
+        // (pretty sure it's overkill)
+        HashMap<String, String> map = new HashMap<>();
+        map.put("name", getName().toString());
+        map.put("phone", getPhone().toString());
+        map.put("email", getEmail().toString());
+        map.put("address", getAddress().toString());
+        for (Tag tag : getTags()) {
+            map.put(tag.tagName, null);
+        }
+        return map;
     }
 
     /**
