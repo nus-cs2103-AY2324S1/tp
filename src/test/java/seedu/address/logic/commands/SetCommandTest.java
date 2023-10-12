@@ -11,7 +11,7 @@ public class SetCommandTest {
     @Test
     public void execute_validIndexAndStatus_success() {
         // Check if the status of the person in the model has been updated
-        assertEquals(new Status(), "Preliminary");
+        assertEquals((new Status()).toString(), "Preliminary");
     }
 
 
