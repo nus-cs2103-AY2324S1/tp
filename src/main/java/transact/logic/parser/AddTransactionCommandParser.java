@@ -1,13 +1,12 @@
 package transact.logic.parser;
 
 import static transact.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static transact.logic.parser.CliSyntax.PREFIX_TYPE;
-import static transact.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static transact.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static transact.logic.parser.CliSyntax.PREFIX_DATE;
+import static transact.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static transact.logic.parser.CliSyntax.PREFIX_STAFF;
+import static transact.logic.parser.CliSyntax.PREFIX_TYPE;
 
-import java.util.Set;
 import java.util.stream.Stream;
 
 import transact.logic.commands.AddTransactionCommand;

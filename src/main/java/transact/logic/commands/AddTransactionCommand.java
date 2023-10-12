@@ -1,11 +1,11 @@
 package transact.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static transact.logic.parser.CliSyntax.PREFIX_TYPE;
-import static transact.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static transact.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static transact.logic.parser.CliSyntax.PREFIX_DATE;
+import static transact.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static transact.logic.parser.CliSyntax.PREFIX_STAFF;
+import static transact.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import transact.commons.util.ToStringBuilder;
 import transact.logic.Messages;
