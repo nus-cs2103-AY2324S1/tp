@@ -13,7 +13,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Subject {
 
-    private static final String MESSAGE_CONSTRAINTS = "Subjects names should be alphanumeric";
+    public static final String MESSAGE_CONSTRAINTS = "Subjects names should be alphanumeric";
     private static final String MESSAGE_INVALID_DATE_FORMAT = "Date format should be MMM YYYY (e.g. Jul 2023)";
     private static final String VALIDATION_REGEX = "\\p{Alnum}+";
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy MMM", Locale.ENGLISH);
@@ -25,6 +25,20 @@ public class Subject {
      * Constructs a {@code Subject}.
      *
      * @param subjectName A valid subject name.
+     */
+    public Subject(String subjectName) {
+        requireNonNull(subjectName);
+        checkArgument(isValidSubjectName(subjectName), MESSAGE_CONSTRAINTS);
+
+        this.subjectName = subjectName;
+        this.enrolDate = YearMonth.now();
+    }
+
+    /**
+     * Constructs a {@code Subject}.
+     *
+     * @param subjectName A valid subject name.
+     * @param date Subject enrol date.
      */
     public Subject(String subjectName, String date) {
         requireNonNull(subjectName);

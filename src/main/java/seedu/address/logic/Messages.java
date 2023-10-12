@@ -43,8 +43,14 @@ public class Messages {
                 .append(student.getEmail())
                 .append("; Address: ")
                 .append(student.getAddress())
-                .append("; Tags: ");
-        student.getTags().forEach(builder::append);
+                .append("; Gender: ")
+                .append(student.getGender())
+                .append("; Sec Level: ")
+                .append(student.getSecLevel())
+                .append("; Nearest MRT Station: ")
+                .append(student.getNearestMrtStation())
+                .append("; Subjects: ");
+        student.getSubjects().forEach(builder::append);
         return builder.toString();
     }
 

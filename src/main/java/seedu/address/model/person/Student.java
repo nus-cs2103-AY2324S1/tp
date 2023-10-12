@@ -32,7 +32,7 @@ public class Student {
     private final Address address;
     private final Gender gender;
     private final SecLevel secLevel;
-    private final String nearestMrtStation;
+    private final MrtStation nearestMrtStation;
     private final Set<Subject> subjects = new HashSet<>();
 
     private final LocalDateTime dateModified;
@@ -42,7 +42,7 @@ public class Student {
      */
     public Student(Name name, Phone phone, Email email,
                    Address address, Gender gender,
-                   SecLevel secLevel, String nearestMrtStation,
+                   SecLevel secLevel, MrtStation nearestMrtStation,
                    Set<Subject> subjects) {
         requireAllNonNull(name, phone, email, address, gender,
                 secLevel, nearestMrtStation, subjects);
@@ -54,6 +54,7 @@ public class Student {
         this.secLevel = secLevel;
         this.nearestMrtStation = nearestMrtStation;
         this.subjects.addAll(subjects);
+
         this.dateModified = LocalDateTime.now(SINGAPORE_ZONE_ID);
     }
 
@@ -81,7 +82,7 @@ public class Student {
         return secLevel;
     }
 
-    public String getNearestMrtStation() {
+    public MrtStation getNearestMrtStation() {
         return nearestMrtStation;
     }
 
@@ -93,7 +94,7 @@ public class Student {
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Subject> getTags() {
+    public Set<Subject> getSubjects() {
         return Collections.unmodifiableSet(subjects);
     }
 

@@ -13,6 +13,9 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Gender;
+import seedu.address.model.person.SecLevel;
+import seedu.address.model.person.MrtStation;
 import seedu.address.model.tag.Subject;
 
 /**
@@ -96,6 +99,51 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String gender} into an {@code Gender}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code gender} is invalid.
+     */
+    public static Gender parseGender(String gender) throws ParseException {
+        requireNonNull(gender);
+        String trimmedGender = gender.trim();
+        if (!Gender.isValidGender(trimmedGender)) {
+            throw new ParseException(Gender.MESSAGE_CONSTRAINTS);
+        }
+        return new Gender(trimmedGender);
+    }
+
+    /**
+     * Parses a {@code String secLevel} into an {@code SecLevel}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code secLevel} is invalid.
+     */
+    public static SecLevel parseSecLevel(String secLevel) throws ParseException {
+        requireNonNull(secLevel);
+        String trimmedSecLevel = secLevel.trim();
+        if (!SecLevel.isValidSecLevel(trimmedSecLevel)) {
+            throw new ParseException(SecLevel.MESSAGE_CONSTRAINTS);
+        }
+        return new SecLevel(trimmedSecLevel);
+    }
+
+    /**
+     * Parses a {@code String mrtStation} into an {@code MrtStation}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code mrtStation} is invalid.
+     */
+    public static MrtStation parseMrtStation(String mrtStation) throws ParseException {
+        requireNonNull(mrtStation);
+        String trimmedMrtStation = mrtStation.trim();
+        if (!MrtStation.isValidMrtStationName(trimmedMrtStation)) {
+            throw new ParseException(MrtStation.MESSAGE_CONSTRAINTS);
+        }
+        return new MrtStation(trimmedMrtStation);
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Subject}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -104,7 +152,7 @@ public class ParserUtil {
     public static Subject parseTag(String tag) throws ParseException {
         requireNonNull(tag);
         String trimmedTag = tag.trim();
-        if (!Subject.isValidTagName(trimmedTag)) {
+        if (!Subject.isValidSubjectName(trimmedTag)) {
             throw new ParseException(Subject.MESSAGE_CONSTRAINTS);
         }
         return new Subject(trimmedTag);

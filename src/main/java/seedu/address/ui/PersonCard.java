@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.Set;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -8,6 +9,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Student;
+import seedu.address.model.tag.Subject;
 
 /**
  * An UI component that displays information of a {@code Student}.
@@ -39,7 +41,13 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private FlowPane tags;
+    private Label gender;
+    @FXML
+    private Label secLevel;
+    @FXML
+    private Label nearestMrtStation;
+    @FXML
+    private FlowPane subjects;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Student} and index to display.
@@ -49,11 +57,15 @@ public class PersonCard extends UiPart<Region> {
         this.student = student;
         id.setText(displayedIndex + ". ");
         name.setText(student.getName().fullName);
-        phone.setText(student.getPhone().value);
-        address.setText(student.getAddress().value);
-        email.setText(student.getEmail().value);
-        student.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        phone.setText("Phone No: " + student.getPhone().value);
+        address.setText("Address: " + student.getAddress().value);
+        email.setText("Email: " + student.getEmail().value);
+        gender.setText("Gender: " + student.getGender().value);
+        secLevel.setText("Sec-Level: " + student.getSecLevel().value);
+        nearestMrtStation.setText("Nearest MRT Station: " + student.getNearestMrtStation().mrtStationName);
+        student.getSubjects().stream()
+                .sorted(Comparator.comparing(subject -> subject.subjectName))
+                .forEach(subject -> subjects.getChildren().add(new Label(subject.subjectName)));
+
     }
 }

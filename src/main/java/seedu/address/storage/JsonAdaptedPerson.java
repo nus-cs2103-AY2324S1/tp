@@ -12,7 +12,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Gender;
+import seedu.address.model.person.MrtStation;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.SecLevel;
 import seedu.address.model.person.Student;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Subject;
@@ -28,7 +31,11 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
-    private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final String gender;
+    private final String secLevel;
+    private final String nearestMrtStation;
+
+    private final List<JsonAdaptedTag> subjects = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given student details.
@@ -36,13 +43,18 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("gender") String gender, @JsonProperty("secLevel") String secLevel,
+            @JsonProperty("nearestMrtStation") String nearestMrtStation,
+            @JsonProperty("tags") List<JsonAdaptedTag> subjects) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        if (tags != null) {
-            this.tags.addAll(tags);
+        this.gender = gender;
+        this.secLevel = secLevel;
+        this.nearestMrtStation = nearestMrtStation;
+        if (subjects != null) {
+            this.subjects.addAll(subjects);
         }
     }
 
@@ -54,7 +66,10 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        tags.addAll(source.getTags().stream()
+        gender = source.getGender().value;
+        secLevel = source.getSecLevel().value;
+        nearestMrtStation = source.getNearestMrtStation().mrtStationName;
+        subjects.addAll(source.getSubjects().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
     }
@@ -66,8 +81,8 @@ class JsonAdaptedPerson {
      */
     public Student toModelType() throws IllegalValueException {
         final List<Subject> personSubjects = new ArrayList<>();
-        for (JsonAdaptedTag tag : tags) {
-            personSubjects.add(tag.toModelType());
+        for (JsonAdaptedTag subject : subjects) {
+            personSubjects.add(subject.toModelType());
         }
 
         if (name == null) {
@@ -102,8 +117,34 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        if (gender == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Gender.class.getSimpleName()));
+        }
+        if (!Gender.isValidGender(gender)) {
+            throw new IllegalValueException(Gender.MESSAGE_CONSTRAINTS);
+        }
+        final Gender modelGender = new Gender(gender);
+
+        if (secLevel == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, SecLevel.class.getSimpleName()));
+        }
+        if (!SecLevel.isValidSecLevel(secLevel)) {
+            throw new IllegalValueException(SecLevel.MESSAGE_CONSTRAINTS);
+        }
+        final SecLevel modelSecLevel = new SecLevel(secLevel);
+
+        if (nearestMrtStation == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    MrtStation.class.getSimpleName()));
+        }
+        if (!MrtStation.isValidMrtStationName(nearestMrtStation)) {
+            throw new IllegalValueException(MrtStation.MESSAGE_CONSTRAINTS);
+        }
+        final MrtStation modelNearestMrtStation = new MrtStation(nearestMrtStation);
+
         final Set<Subject> modelSubjects = new HashSet<>(personSubjects);
-        return new Student(modelName, modelPhone, modelEmail, modelAddress, modelSubjects);
+        return new Student(modelName, modelPhone, modelEmail, modelAddress,
+                modelGender, modelSecLevel, modelNearestMrtStation, modelSubjects);
     }
 
 }
