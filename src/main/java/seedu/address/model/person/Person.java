@@ -25,16 +25,23 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
+    private final LinkedIn linkedIn;
+
+    private final Github github;
+
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+                  LinkedIn linkedIn, Github github) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.linkedIn = linkedIn;
+        this.github = github;
     }
 
     public Name getName() {
@@ -59,6 +66,14 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public LinkedIn getLinkedIn() {
+        return linkedIn;
+    }
+
+    public Github getGithub() {
+        return github;
     }
 
     /**
@@ -100,18 +115,27 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, linkedIn, github);
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
+        ToStringBuilder builder = new ToStringBuilder(this)
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
-                .add("tags", tags)
-                .toString();
+                .add("tags", tags);
+
+        if (linkedIn != null) {
+            builder.add("linkedin", linkedIn);
+        }
+
+        if (github != null) {
+            builder.add("github", github);
+        }
+
+        return builder.toString();
     }
 
 }
