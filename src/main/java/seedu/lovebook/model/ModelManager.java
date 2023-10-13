@@ -129,6 +129,13 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public String getWelcomeMessage() {
+        return "\"Hey there, fabulous single! \uD83C\uDF1F " +
+                "Get ready to embark on an exciting journey with Barbie the cupid, " +
+                "your personal matchmaker on a mission to find your perfect match! \uD83D\uDC98\"";
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;

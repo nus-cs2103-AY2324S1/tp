@@ -28,6 +28,8 @@ import seedu.lovebook.storage.LoveBookStorage;
 import seedu.lovebook.storage.Storage;
 import seedu.lovebook.storage.StorageManager;
 import seedu.lovebook.storage.UserPrefsStorage;
+import seedu.lovebook.ui.MainWindow;
+import seedu.lovebook.ui.ResultDisplay;
 import seedu.lovebook.ui.Ui;
 import seedu.lovebook.ui.UiManager;
 
@@ -173,6 +175,7 @@ public class MainApp extends Application {
         logger.info("Starting LoveBook " + MainApp.VERSION);
         ui.start(primaryStage);
     }
+
 
     @Override
     public void stop() {
