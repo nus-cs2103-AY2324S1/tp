@@ -47,7 +47,6 @@ public class ModelManager implements Model {
         tmpTransactions.add(new Transaction());
         tmpTransactions.add(new Transaction());*/
 
-        tmpTransactions.add(new Transaction());
 
         filteredTransactions = new FilteredList<>(tmpTransactions);
 
