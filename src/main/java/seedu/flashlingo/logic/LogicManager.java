@@ -9,6 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.flashlingo.commons.core.GuiSettings;
 import seedu.flashlingo.commons.core.LogsCenter;
+import seedu.flashlingo.logic.commands.Command;
 import seedu.flashlingo.logic.commands.CommandResult;
 import seedu.flashlingo.logic.commands.exceptions.CommandException;
 import seedu.flashlingo.logic.parser.FlashlingoParser;
@@ -48,7 +49,7 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        seedu.flashlingo.logic.newcommands.Command command = flashlingoParser.parseCommand(commandText);
+        Command command = flashlingoParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
         try {
