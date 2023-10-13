@@ -23,7 +23,7 @@ public class AddApplicantCommand extends Command {
             + PREFIX_PHONE + " {phoneNumber} "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + " John Doe "
-            + PREFIX_PHONE + " 98765432 ";
+            + PREFIX_PHONE + " 98765432";
 
     public static final String MESSAGE_SUCCESS = "New applicant added: %1$s";
 
