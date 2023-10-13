@@ -22,12 +22,6 @@ public class GenderPredicateTest {
 
         // Test with a person having a different gender
         assertFalse(malePredicate.test(new PersonBuilder().withGender("F").build()));
-
-        // Test with a person having null gender
-        // assertFalse(malePredicate.test(new PersonBuilder().withGender(null).build()));
-
-        // Test with a person having empty gender
-        // assertFalse(malePredicate.test(new PersonBuilder().withGender("").build()));
     }
 }
 
