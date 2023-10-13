@@ -126,8 +126,8 @@ public class Musician {
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
-                .add("instrumentTags", instruments)
-                .add("genreTags", genres)
+                .add("instruments", instruments)
+                .add("genres", genres)
                 .toString();
     }
 

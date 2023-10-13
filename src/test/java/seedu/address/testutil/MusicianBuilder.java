@@ -26,6 +26,8 @@ public class MusicianBuilder {
     private Email email;
     private Address address;
     private Set<Tag> tags;
+    private Set<Tag> instruments;
+    private Set<Tag> genres;
 
     /**
      * Creates a {@code MusicianBuilder} with the default details.
@@ -36,6 +38,8 @@ public class MusicianBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        instruments = new HashSet<>();
+        genres = new HashSet<>();
     }
 
     /**
@@ -47,6 +51,8 @@ public class MusicianBuilder {
         email = musicianToCopy.getEmail();
         address = musicianToCopy.getAddress();
         tags = new HashSet<>(musicianToCopy.getTags());
+        instruments = new HashSet<>(musicianToCopy.getInstruments());
+        genres = new HashSet<>(musicianToCopy.getGenres());
     }
 
     /**
@@ -62,6 +68,22 @@ public class MusicianBuilder {
      */
     public MusicianBuilder withTags(String... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
+    /**
+     * Parses the {@code instruments} into a {@code Set<Tag>} and set it to the {@code Musician} that we are building.
+     */
+    public MusicianBuilder withInstruments(String... instruments) {
+        this.instruments = SampleDataUtil.getTagSet(instruments);
+        return this;
+    }
+
+    /**
+     * Parses the {@code genres} into a {@code Set<Tag>} and set it to the {@code Musician} that we are building.
+     */
+    public MusicianBuilder withGenres(String... genres) {
+        this.genres = SampleDataUtil.getTagSet(genres);
         return this;
     }
 
@@ -90,7 +112,7 @@ public class MusicianBuilder {
     }
 
     public Musician build() {
-        return new Musician(name, phone, email, address, tags);
+        return new Musician(name, phone, email, address, tags, instruments, genres);
     }
 
 }
