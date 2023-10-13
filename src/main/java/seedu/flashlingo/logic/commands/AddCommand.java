@@ -45,6 +45,13 @@ public class AddCommand extends Command {
         this.toAdd = new FlashCard(original, translated, new Date(), 1);
     }
 
+    /**
+     * Creates an AddCommand to add the specified {@code FlashCard}
+     */
+    public AddCommand(FlashCard flashCard) {
+        requireNonNull(flashCard);
+        toAdd = flashCard;
+    }
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);

@@ -28,10 +28,10 @@ public class CommandTestUtil {
     public static final String VALID_TRANSLATION_AMY = "艾米";
     public static final String VALID_TRANSLATION_BOB = "鲍勃";
 
-    public static final String NAME_DESC_AMY = " " + PREFIX_ORIGINAL_WORD + VALID_ORIGINAL_WORD_AMY;
-    public static final String NAME_DESC_BOB = " " + PREFIX_ORIGINAL_WORD + VALID_ORIGINAL_WORD_BOB;
-    public static final String PHONE_DESC_AMY = " " + PREFIX_TRANSLATED_WORD + VALID_TRANSLATION_AMY;
-    public static final String PHONE_DESC_BOB = " " + PREFIX_TRANSLATED_WORD + VALID_TRANSLATION_BOB;
+    public static final String WORD_DESC_AMY = " " + PREFIX_ORIGINAL_WORD + VALID_ORIGINAL_WORD_AMY;
+    public static final String WORD_DESC_BOB = " " + PREFIX_ORIGINAL_WORD + VALID_ORIGINAL_WORD_BOB;
+    public static final String TRANSLATION_DESC_AMY = " " + PREFIX_TRANSLATED_WORD + VALID_TRANSLATION_AMY;
+    public static final String TRANSLATION_DESC_BOB = " " + PREFIX_TRANSLATED_WORD + VALID_TRANSLATION_BOB;
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
