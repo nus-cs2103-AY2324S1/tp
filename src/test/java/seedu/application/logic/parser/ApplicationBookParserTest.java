@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.application.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.application.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.application.testutil.Assert.assertThrows;
 import static seedu.application.testutil.TypicalIndexes.INDEX_FIRST_JOB;
 
@@ -15,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.application.logic.commands.AddCommand;
 import seedu.application.logic.commands.ClearCommand;
+import seedu.application.logic.commands.DeadlineCommand;
 import seedu.application.logic.commands.DeleteCommand;
 import seedu.application.logic.commands.EditCommand;
 import seedu.application.logic.commands.EditCommand.EditJobDescriptor;
@@ -89,9 +91,17 @@ public class ApplicationBookParserTest {
     }
 
     @Test
+    public void parseCommand_remark() throws Exception {
+        final String deadline = "Dec 31 20230 1200";
+        DeadlineCommand command = (DeadlineCommand) parser.parseCommand(DeadlineCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_JOB.getOneBased() + " " + PREFIX_DEADLINE + deadline);
+        assertEquals(new DeadlineCommand(INDEX_FIRST_JOB, deadline), command);
+    }
+
+    @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand(""));
+                -> parser.parseCommand(""));
     }
 
     @Test

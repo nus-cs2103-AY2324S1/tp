@@ -11,6 +11,7 @@ import seedu.application.commons.core.LogsCenter;
 import seedu.application.logic.commands.AddCommand;
 import seedu.application.logic.commands.ClearCommand;
 import seedu.application.logic.commands.Command;
+import seedu.application.logic.commands.DeadlineCommand;
 import seedu.application.logic.commands.DeleteCommand;
 import seedu.application.logic.commands.EditCommand;
 import seedu.application.logic.commands.ExitCommand;
@@ -76,6 +77,9 @@ public class ApplicationBookParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case DeadlineCommand.COMMAND_WORD:
+            return new DeadlineCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
