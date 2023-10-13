@@ -18,9 +18,8 @@ public class Doctor extends Person {
      * Every field must be present and not null.
      */
     public Doctor(Name name, Phone phone, Email email, Address address, Remark remark, Gender gender,
-                  Ic ic, Set<Tag> tags, ArrayList<Patient> patients) {
+                  Ic ic, Set<Tag> tags) {
         super(name, phone, email, address, remark, gender, ic, tags);
-        this.patients = patients; // patients can be null
     }
     /**
      * Retrieves the list of patients stored in this medical facility.
