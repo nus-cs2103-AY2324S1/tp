@@ -25,6 +25,7 @@ class JsonAdaptedPerson {
     private final String animalName;
     private final String availability;
     private final String animalType;
+    private final String housing;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -34,7 +35,8 @@ class JsonAdaptedPerson {
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("animalName") String animalName,
                              @JsonProperty("availability") String availability,
-                             @JsonProperty("animalType") String animalType) {
+                             @JsonProperty("animalType") String animalType,
+                             @JsonProperty("housing") String housing) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -45,6 +47,7 @@ class JsonAdaptedPerson {
         this.animalName = animalName != null ? animalName : "nil";
         this.availability = availability != null ? availability : "nil";
         this.animalType = animalType != null ? animalType : "nil";
+        this.housing = housing != null ? housing : "nil";
     }
 
     /**
@@ -61,6 +64,7 @@ class JsonAdaptedPerson {
         animalName = source.getAnimalName().isPresent() ? source.getAnimalName().get().fullName : null;
         availability = source.getAvailability().isPresent() ? source.getAvailability().get().value : null;
         animalType = source.getAnimalType().isPresent() ? source.getAnimalType().get().value : null;
+        housing = source.getHousing().isPresent() ? source.getHousing().get().value : null;
     }
 
     /**
@@ -111,9 +115,10 @@ class JsonAdaptedPerson {
         Name modelAnimalName = animalName != null ? new Name(animalName) : null;
         Availability modelAvailability = availability != null ? new Availability(availability) : null;
         AnimalType modelAnimaltype = animalType != null ? new AnimalType(animalType, availability) : null;
+        Housing modelHousing = housing != null ? new Housing(housing) : null;
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelAnimalName,
-                modelAvailability, modelAnimaltype, modelTags);
+                modelAvailability, modelAnimaltype, modelHousing, modelTags);
     }
 
 }

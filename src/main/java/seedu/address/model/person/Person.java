@@ -30,13 +30,14 @@ public class Person {
     private final Optional<Name> animalName;
     private final Optional<Availability> availability;
     private final Optional<AnimalType> animalType;
+    private final Optional<Housing> housing;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Optional<Name> animalName,
                   Optional<Availability> availability, Optional<AnimalType> animalType,
-                  Set<Tag> tags) {
+                  Optional<Housing> housing, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, animalName, tags);
 
         if (animalType != null || animalName != null) {
@@ -50,21 +51,37 @@ public class Person {
         this.animalName = animalName;
         this.availability = availability;
         this.animalType = animalType;
+        this.housing = housing;
         this.tags.addAll(tags);
     }
 
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        this(name, phone, email, address, Optional.empty(), Optional.empty(), Optional.empty(), tags);
+        this(name, phone, email, address, Optional.empty(), Optional.empty(), Optional.empty(),
+                Optional.empty(), tags);
+    }
+
+    public Person(Name name, Phone phone, Email email, Address address,
+                  Availability availability, Housing housing, Set<Tag> tags) {
+        this(name, phone, email, address, Optional.empty(), Optional.of(availability), Optional.empty(),
+                Optional.of(housing), tags);
     }
 
     public Person(Name name, Phone phone, Email email, Address address,
                   Availability availability, Set<Tag> tags) {
-        this(name, phone, email, address, Optional.empty(), Optional.of(availability), Optional.empty(), tags);
+        this(name, phone, email, address, Optional.empty(), Optional.of(availability), Optional.empty(),
+                Optional.empty(), tags);
+    }
+
+    public Person(Name name, Phone phone, Email email, Address address,
+                  Housing housing, Set<Tag> tags) {
+        this(name, phone, email, address, Optional.empty(), Optional.empty(), Optional.empty(),
+                Optional.of(housing), tags);
     }
 
     public Person(Name name, Phone phone, Email email, Address address, Name animalName,
-                  Availability availability, AnimalType animalType, Set<Tag> tags) {
-        this(name, phone, email, address, Optional.of(animalName), Optional.of(availability), Optional.of(animalType), tags);
+                  Availability availability, AnimalType animalType, Housing housing, Set<Tag> tags) {
+        this(name, phone, email, address, Optional.of(animalName), Optional.of(availability), Optional.of(animalType),
+                Optional.of(housing), tags);
     }
 
     public Optional<Name> getAnimalName() {
@@ -77,6 +94,10 @@ public class Person {
 
     public Optional<AnimalType> getAnimalType() {
         return animalType;
+    }
+
+    public Optional<Housing> getHousing() {
+        return housing;
     }
 
     public Name getName() {
@@ -139,13 +160,14 @@ public class Person {
                 && tags.equals(otherPerson.tags)
                 && animalName.equals(otherPerson.animalName)
                 && availability.equals(otherPerson.availability)
-                && animalType.equals(otherPerson.animalType);
+                && animalType.equals(otherPerson.animalType)
+                && housing.equals(otherPerson.housing);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, animalName, availability, animalType, tags);
+        return Objects.hash(name, phone, email, address, animalName, availability, animalType, housing, tags);
     }
 
     @Override
@@ -159,6 +181,7 @@ public class Person {
                 .add("animalName", animalName)
                 .add("availability", availability)
                 .add("animalType", animalType)
+                .add("housing", housing)
                 .toString();
     }
 

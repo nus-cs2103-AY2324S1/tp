@@ -143,4 +143,13 @@ public class ParserUtil {
 
         return new AnimalType(trimmedAnimalType, availability);
     }
+
+    public static Housing parseHousing(String housing) throws ParseException {
+        requireNonNull(housing);
+        String trimmedHousing = housing.trim();
+        if (!Housing.isValidHousing(trimmedHousing)) {
+            throw new ParseException(Housing.MESSAGE_CONSTRAINTS);
+        }
+        return new Housing(trimmedHousing);
+    }
 }

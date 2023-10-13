@@ -43,8 +43,13 @@ public class Messages {
                 .append(person.getEmail())
                 .append("; Address: ")
                 .append(person.getAddress())
-                .append("; Availability: ");
+                .append("; Housing: ");
 
+        if (person.getHousing() != null) {
+            builder.append(person.getHousing());
+        }
+
+        builder.append("; Availability: ");
         if (person.getAvailability() != null) {
             builder.append(person.getAvailability());
         }
