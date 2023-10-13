@@ -2,8 +2,8 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
-import static seedu.address.testutil.TypicalPersons.getTypicalFlashlingo;
+import static seedu.address.testutil.TypicalFlashCards.getTypicalFlashlingo;
+import static seedu.flashlingo.logic.Messages.MESSAGE_DUPLICATE_FLASHCARD;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,7 +13,7 @@ import seedu.flashlingo.logic.commands.AddCommand;
 import seedu.flashlingo.model.Model;
 import seedu.flashlingo.model.ModelManager;
 import seedu.flashlingo.model.UserPrefs;
-import seedu.flashlingo.model.person.Person;
+import seedu.flashlingo.model.flashcard.FlashCard;
 import seedu.address.testutil.FlashcardBuilder;
 
 /**
@@ -30,21 +30,21 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_newPerson_success() {
-        Person validPerson = new FlashcardBuilder().build();
+        FlashCard flashCard = new FlashcardBuilder().build();
 
         Model expectedModel = new ModelManager(model.getFlashlingo(), new UserPrefs());
-        expectedModel.addPerson(validPerson);
+        expectedModel.addFlashCard(flashCard);
 
-        assertCommandSuccess(new AddCommand(validPerson), model,
-                String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+        assertCommandSuccess(new AddCommand(flashCard), model,
+                String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(flashCard)),
                 expectedModel);
     }
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
-        Person personInList = model.getAddressBook().getPersonList().get(0);
-        assertCommandFailure(new AddCommand(personInList), model,
-                AddCommand.MESSAGE_DUPLICATE_PERSON);
+        FlashCard flashcardList = model.getFlashlingo().getFlashCardList().get(0);
+        assertCommandFailure(new AddCommand(flashcardList), model,
+                MESSAGE_DUPLICATE_FLASHCARD);
     }
 
 }
