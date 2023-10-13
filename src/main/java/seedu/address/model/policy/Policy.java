@@ -60,11 +60,6 @@ public class Policy {
 
     @Override
     public String toString() {
-        if (policyNumber.equals(PolicyNumber.DEFAULT_VALUE)) {
-            // Policy does not actually exist
-            return "";
-        }
-
         return new ToStringBuilder(this)
                 .add("policy number", policyNumber)
                 .add("policy issue date", policyIssueDate)
@@ -72,4 +67,22 @@ public class Policy {
                 .toString();
     }
 
+    /**
+     * Return a string representation of the Policy that will be displayed on the Person's Card or the successful
+     * command box.
+     *
+     * @param isPersonCard true if the display is for the Person card, false otherwise.
+     * @return the string representation of the Policy.
+     */
+    public String toDisplay(boolean isPersonCard) {
+        if (policyNumber.value.equals(PolicyNumber.DEFAULT_VALUE)) {
+            // Policy does not actually exist
+            return "No Policy Found";
+        }
+
+        if (isPersonCard) {
+            return policyNumber.value + "\n" + policyIssueDate.toString() + "\n" + policyExpiryDate.toString();
+        }
+        return policyNumber.value + ", " + policyIssueDate.toString() + ", " + policyExpiryDate.toString();
+    }
 }
