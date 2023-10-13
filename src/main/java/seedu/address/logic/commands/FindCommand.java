@@ -34,6 +34,7 @@ public class FindCommand extends Command {
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
 
+    //Need to add contains check to find name fo person from several characters
     @Override
     public boolean equals(Object other) {
         if (other == this) {
