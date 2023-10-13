@@ -12,9 +12,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.LicencePlate;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.policy.Policy;
+import seedu.address.model.policy.PolicyDate;
+import seedu.address.model.policy.PolicyNumber;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -29,6 +34,11 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final String nric;
+    private final String licencePlate;
+    private final String policyNumber;
+    private final String policyIssueDate;
+    private final String policyExpiryDate;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -36,7 +46,10 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("nric") String nric,
+            @JsonProperty("licencePlate") String licencePlate, @JsonProperty("policyNumber") String policyNumber,
+            @JsonProperty("policyIssueDate") String policyIssueDate,
+            @JsonProperty("policyExpiryDate") String policyExpiryDate) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -44,6 +57,11 @@ class JsonAdaptedPerson {
         if (tags != null) {
             this.tags.addAll(tags);
         }
+        this.nric = nric;
+        this.licencePlate = licencePlate;
+        this.policyNumber = policyNumber;
+        this.policyIssueDate = policyIssueDate;
+        this.policyExpiryDate = policyExpiryDate;
     }
 
     /**
@@ -57,6 +75,12 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        nric = source.getNric().value;
+        licencePlate = source.getLicencePlate().value;
+        Policy sourcePolicy = source.getPolicy();
+        policyNumber = sourcePolicy.getPolicyNumber().value;
+        policyIssueDate = sourcePolicy.getPolicyIssueDate().toString();
+        policyExpiryDate = sourcePolicy.getPolicyExpiryDate().toString();
     }
 
     /**
@@ -103,7 +127,56 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+
+        if (nric == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Nric.class.getSimpleName()));
+        }
+        if (!Nric.isValidNric(nric)) {
+            throw new IllegalValueException(Nric.MESSAGE_CONSTRAINTS);
+        }
+        final Nric modelNric = new Nric(nric);
+
+        if (licencePlate == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    LicencePlate.class.getSimpleName()));
+        }
+        if (!LicencePlate.isValidLicencePlate(licencePlate)) {
+            System.out.println(LicencePlate.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(LicencePlate.MESSAGE_CONSTRAINTS);
+        }
+        final LicencePlate modelLicencePlate = new LicencePlate(licencePlate);
+
+        // Policy fields
+        if (policyNumber == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    PolicyNumber.class.getSimpleName()));
+        }
+        if (!PolicyNumber.isValidPolicyNumber(policyNumber)) {
+            throw new IllegalValueException(PolicyNumber.MESSAGE_CONSTRAINTS);
+        }
+        final PolicyNumber modelPolicyNumber = new PolicyNumber(policyNumber);
+
+        if (policyIssueDate == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    PolicyDate.class.getSimpleName()));
+        }
+        if (!PolicyDate.isValidPolicyDate(policyIssueDate)) {
+            throw new IllegalValueException(PolicyDate.MESSAGE_CONSTRAINTS);
+        }
+        final PolicyDate modelPolicyIssueDate = new PolicyDate(policyIssueDate);
+
+        if (policyExpiryDate == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    PolicyDate.class.getSimpleName()));
+        }
+        if (!PolicyDate.isValidPolicyDate(policyExpiryDate)) {
+            throw new IllegalValueException(PolicyDate.MESSAGE_CONSTRAINTS);
+        }
+        final PolicyDate modelPolicyExpiryDate = new PolicyDate(policyExpiryDate);
+
+        final Policy modelPolicy = new Policy(modelPolicyNumber, modelPolicyIssueDate, modelPolicyExpiryDate);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags,
+                modelNric, modelLicencePlate, modelPolicy);
     }
 
 }

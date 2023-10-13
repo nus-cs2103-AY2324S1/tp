@@ -14,9 +14,14 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.LicencePlate;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.policy.Policy;
+import seedu.address.model.policy.PolicyDate;
+import seedu.address.model.policy.PolicyNumber;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -44,8 +49,16 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        // temporary variables to change
+        Nric nric = new Nric("000A");
+        LicencePlate licencePlate = new LicencePlate("SAA1A");
+        PolicyNumber policyNumber = new PolicyNumber("1");
+        PolicyDate policyIssueDate = new PolicyDate(PolicyDate.DEFAULT_VALUE);
+        PolicyDate policyExpiryDate = new PolicyDate(PolicyDate.DEFAULT_VALUE);
+        Policy policy = new Policy(policyNumber, policyIssueDate, policyExpiryDate);
+        //
 
-        Person person = new Person(name, phone, email, address, tagList);
+        Person person = new Person(name, phone, email, address, tagList, nric, licencePlate, policy);
 
         return new AddCommand(person);
     }
