@@ -118,7 +118,7 @@ public class Employee implements Comparable<Employee> {
 
     /**
      * Update the descriptor for all Employees.
-     * @param newDescriptor
+     * @param newDescriptor the new descriptor to sort Employees by
      */
     public static void setComparisonField(Descriptor newDescriptor) {
         descriptor = newDescriptor;
@@ -146,7 +146,9 @@ public class Employee implements Comparable<Employee> {
 
     /**
      * @param o the object to be compared.
-     * @return
+     * @return the value 0 if the argument Employee is equal to this Employee; a value less than 0 if this Employee is
+     *      lexicographically less than the Employee argument; and a value greater than 0 if this Employee is
+     *      lexicographically greater than the Employee argument.
      */
     @Override
     public int compareTo(Employee o) {

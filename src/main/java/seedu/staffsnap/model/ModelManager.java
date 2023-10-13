@@ -12,7 +12,6 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import seedu.staffsnap.commons.core.GuiSettings;
 import seedu.staffsnap.commons.core.LogsCenter;
-import seedu.staffsnap.logic.commands.exceptions.CommandException;
 import seedu.staffsnap.model.employee.Descriptor;
 import seedu.staffsnap.model.employee.Employee;
 
@@ -133,7 +132,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateSortedEmployeeList(Descriptor descriptor) throws CommandException {
+    public void updateSortedEmployeeList(Descriptor descriptor) {
         Employee.setComparisonField(descriptor);
     }
 
