@@ -11,12 +11,11 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.AddTagCommand;
 import seedu.address.logic.commands.DeleteTagCommand;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.StudentNumber;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -36,17 +35,16 @@ public class TagCommandParser implements Parser<TagCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
                 PREFIX_TAG, PREFIX_WILDCARD);
 
-        Index index;
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (IllegalValueException ive) {
+        if (!StudentNumber.isValidStudentNumber(argMultimap.getPreamble())) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    TagCommand.MESSAGE_TAG_FAILED + TagCommand.MESSAGE_USAGE), ive);
+                TagCommand.MESSAGE_TAG_FAILED + TagCommand.MESSAGE_USAGE));
         }
+
+        StudentNumber studentNumber = new StudentNumber(argMultimap.getPreamble());
 
         String action = argMultimap.getValue(PREFIX_WILDCARD).orElse("");
 
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(this::setTags);
+        parseTags(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(this::setTags);
 
         if (this.tags == null) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -55,11 +53,11 @@ public class TagCommandParser implements Parser<TagCommand> {
 
         switch (action) {
         case TagCommand.ADD_TAGS:
-            return new AddTagCommand(index, this.tags);
+            return new AddTagCommand(studentNumber, this.tags);
         case TagCommand.DELETE_TAGS:
-            return new DeleteTagCommand(index, this.tags);
+            return new DeleteTagCommand(studentNumber, this.tags);
         default:
-            return new TagCommand(index, this.tags);
+            return new TagCommand(studentNumber, this.tags);
         }
     }
 
@@ -68,7 +66,7 @@ public class TagCommandParser implements Parser<TagCommand> {
      * If {@code tags} contain only one element which is an empty string, it will be parsed into a
      * {@code Set<Tag>} containing zero tags.
      */
-    private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
+    private Optional<Set<Tag>> parseTags(Collection<String> tags) throws ParseException {
         assert tags != null;
 
         if (tags.isEmpty()) {

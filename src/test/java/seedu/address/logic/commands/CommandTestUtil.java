@@ -37,7 +37,7 @@ public class CommandTestUtil {
     public static final String VALID_STUDENTNUMBER_BOB = "A0123819A";
     public static final String VALID_CLASSNUMBER_AMY = "T11";
     public static final String VALID_CLASSNUMBER_BOB = "T12";
-
+    public static final String INVALID_STUDENTNUMBER = "B2103818N";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_TAG_FRIENDS = "friends";
@@ -58,7 +58,7 @@ public class CommandTestUtil {
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
-    public static final String INVALID_STUDENTNUMBER_DESC = " " + PREFIX_STUDENTNUMBER + "B2103818";
+    public static final String INVALID_STUDENTNUMBER_DESC = " " + PREFIX_STUDENTNUMBER + INVALID_STUDENTNUMBER;
     // Student number should start with A
     public static final String INVALID_CLASSNUMBER_DESC = " " + PREFIX_CLASSNUMBER + "11";
     // Class number should start with T

@@ -66,9 +66,13 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_tag() throws Exception {
-        TagCommand command = (TagCommand) parser.parseCommand(TagCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getTagDetails(TypicalPersons.ALICE));
-        assertEquals(new TagCommand(INDEX_FIRST_PERSON, TypicalPersons.ALICE.getTags()), command);
+        TagCommand command = (TagCommand) parser.parseCommand(TagCommand.COMMAND_WORD
+            + " "
+            + TypicalPersons.ALICE.getStudentNumber()
+            + " "
+            + PersonUtil.getTagDetails(TypicalPersons.ALICE));
+        assertEquals(new TagCommand(TypicalPersons.ALICE.getStudentNumber(), TypicalPersons.ALICE.getTags()),
+            command);
     }
 
     @Test

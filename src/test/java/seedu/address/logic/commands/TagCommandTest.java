@@ -3,78 +3,91 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENTNUMBER_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIENDS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_SMART;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.StudentNumber;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
+import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TypicalPersons;
+
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for TagCommand.
  */
 public class TagCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(new AddressBook(getTypicalAddressBook()), new UserPrefs());
 
     @Test
     public void execute_replaceAllTag_success() {
-        TagCommand tagCommand = new TagCommand(INDEX_FIRST_PERSON, TypicalPersons.ALICE.getTags());
+        Person studentToTag = new PersonBuilder(TypicalPersons.ALICE)
+            .withTags(VALID_TAG_SMART, VALID_TAG_FRIENDS).build();
+        Set<Tag> replacedTags = SampleDataUtil.getTagSet(VALID_TAG_SMART, VALID_TAG_FRIENDS);
+        TagCommand tagCommand = new TagCommand(
+            studentToTag.getStudentNumber(),
+            replacedTags);
 
-        String expectedMessage = String.format(TagCommand.MESSAGE_ADD_TAG_SUCCESS,
-                TypicalPersons.ALICE.getName()) + TypicalPersons.ALICE.getTags();
+        String expectedMessage = String.format(TagCommand.MESSAGE_REPLACE_ALL_TAG_SUCCESS,
+                studentToTag.getName()) + replacedTags;
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), TypicalPersons.ALICE);
+        expectedModel.setPerson(model.getFilteredPersonList().get(0), studentToTag);
 
         assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_deleteAllTag_success() {
-        TagCommand tagCommand = new TagCommand(INDEX_THIRD_PERSON, TypicalPersons.CARL.getTags());
+        Person studentToRemoveTag = new PersonBuilder(TypicalPersons.CARL).build();
+        Set<Tag> emptyTag = new HashSet<>();
+        TagCommand tagCommand = new TagCommand(
+            studentToRemoveTag.getStudentNumber(),
+            emptyTag);
 
         String expectedMessage = String.format(TagCommand.MESSAGE_DELETE_ALL_TAG_SUCCESS,
-                TypicalPersons.CARL.getName()) + TypicalPersons.CARL.getTags().toString();
+                studentToRemoveTag.getName()) + emptyTag;
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(2), TypicalPersons.CARL);
+        expectedModel.setPerson(model.getFilteredPersonList().get(2), studentToRemoveTag);
 
         assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_indexOutOfBound_failure() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
+    public void execute_noStudentWithStudentNumber_failure() {
+        TagCommand tagCommand = new TagCommand(
+            new StudentNumber(VALID_STUDENTNUMBER_AMY),
+            TypicalPersons.ALICE.getTags());
 
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
-
-        TagCommand tagCommand = new TagCommand(outOfBoundIndex, TypicalPersons.ALICE.getTags());
-
-        assertCommandFailure(tagCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(tagCommand, model, Messages.MESSAGE_STUDENT_DOES_NOT_EXIST);
     }
 
     @Test
     public void equals() {
-        final TagCommand standardCommand = new TagCommand(INDEX_FIRST_PERSON,
-                TypicalPersons.ALICE.getTags());
+        final TagCommand standardCommand = new TagCommand(
+            TypicalPersons.ALICE.getStudentNumber(),
+            TypicalPersons.ALICE.getTags());
 
-        TagCommand commandWithSameValue = new TagCommand(INDEX_FIRST_PERSON,
-                SampleDataUtil.getTagSet(VALID_TAG_FRIENDS));
+        TagCommand commandWithSameValue = new TagCommand(
+            TypicalPersons.ALICE.getStudentNumber(),
+            SampleDataUtil.getTagSet(VALID_TAG_FRIENDS));
 
         assertTrue(standardCommand.equals(commandWithSameValue));
 
@@ -87,8 +100,9 @@ public class TagCommandTest {
 
     @Test
     public void toStringMethod() {
-        Index targetIndex = Index.fromOneBased(1);
-        TagCommand tagCommand = new TagCommand(targetIndex, TypicalPersons.ALICE.getTags());
+        TagCommand tagCommand = new TagCommand(
+            TypicalPersons.ALICE.getStudentNumber(),
+            TypicalPersons.ALICE.getTags());
         String expected = TagCommand.class.getCanonicalName() + "{tags=" + TypicalPersons.ALICE.getTags() + "}";
         assertEquals(expected, tagCommand.toString());
     }

@@ -1,44 +1,45 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.address.logic.Messages.MESSAGE_STUDENT_DOES_NOT_EXIST;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.StudentNumber;
 import seedu.address.model.tag.Tag;
 
 /**
- * Adds the tags of an existing student in the address book.
+ * Adds the tags to an existing student in the address book.
  */
 public class AddTagCommand extends TagCommand {
 
-    public AddTagCommand(Index index, Set<Tag> tags) {
-        super(index, tags);
+    public AddTagCommand(StudentNumber studentNumber, Set<Tag> tags) {
+        super(studentNumber, tags);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (super.index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        Person studentToTag;
+        try {
+            studentToTag = getStudentByStudentNumber(lastShownList, studentNumber);
+        } catch (NullPointerException ive) {
+            throw new CommandException(MESSAGE_STUDENT_DOES_NOT_EXIST);
         }
+        Set<Tag> newTags = addTags(studentToTag.getTags(), super.tags);
+        Person editedStudent = new Person(
+                studentToTag.getName(), studentToTag.getPhone(), studentToTag.getEmail(),
+                studentToTag.getStudentNumber(), studentToTag.getClassNumber(), newTags);
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Set<Tag> newTags = addTags(personToEdit.getTags(), super.tags);
-        Person editedPerson = new Person(
-                personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), newTags);
-
-        model.setPerson(personToEdit, editedPerson);
+        model.setPerson(studentToTag, editedStudent);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(generateSuccessMessage(editedPerson));
+        return new CommandResult(generateSuccessMessage(editedStudent));
     }
 
     private Set<Tag> addTags(Set<Tag> studentTags, Set<Tag> tagsToAdd) {
