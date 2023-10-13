@@ -12,114 +12,9 @@ import static java.lang.Math.min;
  * meant for use in filtering a list of persons.
  * Capable of dealing with arbitrary fields.
  *
- * <p>This is a <a href="package-summary.html">functional interface</a>
- * whose functional method is {@link #test(Map)}.
- *
  * <p>Adapted with minimal changes from {@link java.util.function.Predicate}.
  */
-@FunctionalInterface
-public abstract interface SearchPredicate{
-
-    /**
-     * Attached to a String representation of the value of a field,
-     * represents the start and end of a SearchPredicate match on that field.
-     * Intended for use by {@link #test(Map)}, to enable certain features such as {@link OrderedSearchPredicate}
-     * or enabling/disabling overlaps.
-     */
-    class Range {
-        private int start;
-        private int end;
-
-        private Range(int start, int end) throws InstantiationException {
-            if (start >= end) {
-                throw new InstantiationException("Range parameters illegal");
-            }
-            this.start = start;
-            this.end = end;
-        }
-
-        static boolean isRangeOverlap(Range a, Range b) {
-            if (a == null || b == null) {
-                return false;
-            }
-            return isBefore(a,b) || isAfter(a,b);
-        }
-
-        static boolean isBefore(Range a, Range b) {
-            if (a == null || b == null) {
-                return true;
-            }
-            return a.end < b.start;
-        }
-
-        static boolean isAfter(Range a, Range b) {
-            if (a == null || b == null) {
-                return true;
-            }
-            return a.start > b.end;
-        }
-
-        static Range union(Range a, Range b) {
-            if (a == null) {
-                return b;
-            } else if (b == null) {
-                return a;
-            }
-            Range range = null;
-            try {
-                range = new Range(min(a.start, b.start), max(a.end, b.end));
-            } catch (InstantiationException wontHappenTrust) { //assuming two valid range objects
-                ;
-            }
-            return range;
-        }
-    }
-
-    /**
-     * Used to represent a {@link SearchPredicate} match,
-     * determines the fields and corresponding sections of the fields where a match occurs.
-     */
-    class FieldRanges extends HashMap<String, Range> {
-
-        private boolean isMatch = false;
-
-        public FieldRanges(Map<String, String> person) {
-            if (person == null) {
-                return;
-            }
-            for (String key : person.keySet()) {
-                this.put(key, null);
-            }
-        }
-
-        @Override
-        public Range put(String key, Range value) {
-            if (value == null) {
-                return null;
-            }
-            isMatch = true;
-            return super.put(key, value);
-        }
-
-        public void setIsMatch(boolean isMatch) {
-            this.isMatch = isMatch;
-        }
-
-        public static FieldRanges union(FieldRanges a, FieldRanges b) {
-            FieldRanges ranges = new FieldRanges(null);
-            for (String key : a.keySet()) {
-                ranges.put(key, Range.union(a.get(key), b.get(key)));
-            }
-            return ranges;
-        }
-
-        public static boolean isMatch(FieldRanges ranges) {
-            if (ranges == null) {
-                return false;
-            }
-            return ranges.isMatch;
-        }
-    }
+interface SearchPredicate{
 
     /**
      * Evaluates this predicate on the given argument,
@@ -163,13 +58,13 @@ public abstract interface SearchPredicate{
      * predicate.
      *
      * @return a predicate that represents the logical negation of this
-     * predicate
+     * predicate.
      */
     default SearchPredicate negate() {
         return (person) -> {
             FieldRanges ranges = this.test(person);
             if (!FieldRanges.isMatch(ranges)) {
-                ranges = new FieldRanges(person);
+                ranges = new FieldRanges();
                 ranges.setIsMatch(true);
             } else {
                 ranges = null;
@@ -196,6 +91,35 @@ public abstract interface SearchPredicate{
     default SearchPredicate or(SearchPredicate other) {
         Objects.requireNonNull(other);
         return (person) -> FieldRanges.union(this.test(person), other.test(person));
+    }
+
+    /**
+     * Returns the closure of the current predicate, as a SearchPredicate.
+     * For most predicates, this does nothing; however for search parameters with flags attached to fences,
+     * this stops applying the flag to joined predicates.
+     *
+     * <p>Predicates can be joined through {@link #and} and {@link #or}.
+     *
+     * @return predicate after closure.
+     */
+    default SearchPredicate close() {
+        return this;
+    }
+
+    /**
+     * Returns a new SearchPredicate, based on a simple predicate.
+     * For most predicates, this merely returns the predicate;
+     * however for search parameters with flags attached to fences, this applies some flags to the predicate,
+     * and returns a new one.
+     *
+     * <p>Intended to be called on predicates before they are joined. If called after, behaviour is undefined.
+     *
+     * <p>Predicates can be joined through {@link #and} and {@link #or}.
+     *
+     * @return new SearchPredicate.
+     */
+    default SearchPredicate open(SearchPredicate predicate) {
+        return predicate;
     }
 
 }

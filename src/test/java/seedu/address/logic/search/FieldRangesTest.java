@@ -1,0 +1,90 @@
+package seedu.address.logic.search;
+
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class FieldRangesTest {
+
+    @Test
+    public void test_put_null() {
+        FieldRanges fr = new FieldRanges();
+        assertNull(fr.put("", null));
+        assertFalse(FieldRanges.isMatch(fr));
+    }
+
+    @SuppressWarnings("ConstantValue")
+    @Test
+    public void test_isMatch_null() {
+        assertFalse(FieldRanges.isMatch(null));
+    }
+
+    @Test
+    public void test_setIsMatch() {
+        FieldRanges fr = new FieldRanges();
+        assertFalse(FieldRanges.isMatch(fr));
+        fr.setIsMatch(true);
+        assertTrue(FieldRanges.isMatch(fr));
+        fr.setIsMatch(false);
+        assertFalse(FieldRanges.isMatch(fr));
+    }
+
+    @Test
+    public void test_unionSameRange() {
+        FieldRanges frA = new FieldRanges();
+        FieldRanges frB = new FieldRanges();
+        frA.put("a", new Range(1,5));
+        frB.put("a", new Range(3,8));
+        FieldRanges actual = FieldRanges.union(frA, frB);
+
+        FieldRanges expected = new FieldRanges();
+        expected.put("a", new Range(1,8));
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void test_unionDifferentRange() {
+        FieldRanges frA = new FieldRanges();
+        FieldRanges frB = new FieldRanges();
+        frA.put("a", new Range(1,5));
+        frB.put("b", new Range(3,8));
+        FieldRanges.union(frA, frB);
+        FieldRanges actual = FieldRanges.union(frA, frB);
+
+        FieldRanges expected = new FieldRanges();
+        expected.put("a", new Range(1,5));
+        expected.put("b", new Range(3,8));
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void test_unionNulls() {
+
+    }
+
+    @Test
+    public void test_equals() {
+        FieldRanges frA = new FieldRanges();
+        FieldRanges frB = new FieldRanges();
+
+        assertEquals(frA, frB);
+        frA.setIsMatch(true);
+        assertNotEquals(frA, frB);
+    }
+
+    @Test
+    public void test_unionEmptyMatches() {
+        FieldRanges frA = new FieldRanges();
+        FieldRanges frB = new FieldRanges();
+        frA.setIsMatch(true);
+        FieldRanges actual = FieldRanges.union(frA, frB);
+
+        FieldRanges expected = new FieldRanges();
+        expected.setIsMatch(true);
+
+        assertEquals(expected, actual);
+    }
+
+}
