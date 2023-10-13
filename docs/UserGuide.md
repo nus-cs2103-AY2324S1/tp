@@ -234,11 +234,11 @@ Adds a schedule to a specified tutor.
 
 ![add schedule](images/addSchedule.png)
 
-**Format**: `add-s ti/TUTOR_INDEX s/START_TIME e/END_TIME`
+**Format**: `add-s TUTOR_INDEX s/START_TIME e/END_TIME`
 
 **Examples**:
-* `add-s ti/1 s/2023-09-15T09:00:00 e/2023-09-15T11:00:00`
-* `add-s ti/2 s/2023-09-16T17:00:00 e/2023-09-16T19:00:00`
+* `add-s 1 s/2023-09-15T09:00:00 e/2023-09-15T11:00:00`
+* `add-s 2 s/2023-09-16T17:00:00 e/2023-09-16T19:00:00`
 
 **Acceptable values for each parameter**:
 * `TUTOR_INDEX`: Only number input accepted, starting from 1 to the last tutor index shown in the list of tutors.
@@ -260,16 +260,15 @@ Adds a schedule to a specified tutor.
     </div>
 
 **Expected output**:
-* `New schedule John Doe starting from Sep 15 2023 09:00 to Sep 15  2023 11:00 has been added.`
+* `New schedule for John Doe starting from Sep 15 2023 09:00 to Sep 15  2023 11:00 has been added.`
 
 **Error messages**:
-* `Missing parameter: ti/`: The tag ti/ is missing or tutor’s index is missing.
-* `Missing parameter: s/`: The tag s/ is missing or schedule’s start time is missing.
-* `Missing parameter: e/`: The tag e/ is missing or the schedule’s end time is missing.
-* `Wrong input: ti/`: The tutor index entered is not a valid number.
-* `Index number given is out of range`: Given index is out of range.
-* `Wrong input: s/`: The start time entered is not in datetime format.
-* `Wrong input: e/`: The end time entered is not in datetime format..
+* `Invalid command format!`: Invalid TUTOR_INDEX or some of the tags `s/`, `e/` is missing.
+* `EndTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm:ss", and it should not be blank`: 
+  The start time entered is not in the correct datetime format.
+* `StartTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm:ss", and it should not be blank`: The end time entered is not in the correct datetime format.
+* `Multiple values specified for the following single-valued field(s): s/`: More than 1 s/ was given in the command
+* `Multiple values specified for the following single-valued field(s): e/`: More than 1 e/ was given in the command
 
 ### List all schedules: `list-s`
 
