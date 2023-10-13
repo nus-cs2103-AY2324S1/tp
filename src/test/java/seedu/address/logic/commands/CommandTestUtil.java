@@ -8,7 +8,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTNUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAGS;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -38,10 +37,11 @@ public class CommandTestUtil {
     public static final String VALID_STUDENTNUMBER_BOB = "A0123819A";
     public static final String VALID_CLASSNUMBER_AMY = "T11";
     public static final String VALID_CLASSNUMBER_BOB = "T12";
-
+    public static final String INVALID_STUDENTNUMBER = "B2103818N";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_TAG_FRIENDS = "friends";
+    public static final String VALID_TAG_SMART = "smart";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -55,17 +55,14 @@ public class CommandTestUtil {
     public static final String CLASSNUMBER_DESC_BOB = " " + PREFIX_CLASSNUMBER + VALID_CLASSNUMBER_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
-    public static final String LABEL_DESC_FRIEND = " " + PREFIX_TAGS + VALID_TAG_FRIEND;
-    public static final String LABEL_DESC_HUSBAND = " " + PREFIX_TAGS + VALID_TAG_HUSBAND;
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
-    public static final String INVALID_STUDENTNUMBER_DESC = " " + PREFIX_STUDENTNUMBER + "B2103818";
+    public static final String INVALID_STUDENTNUMBER_DESC = " " + PREFIX_STUDENTNUMBER + INVALID_STUDENTNUMBER;
     // Student number should start with A
     public static final String INVALID_CLASSNUMBER_DESC = " " + PREFIX_CLASSNUMBER + "11";
     // Class number should start with T
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
-    public static final String INVALID_LABEL_DESC = " " + PREFIX_TAGS + "hubby*"; // '*' not allowed in tags
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 

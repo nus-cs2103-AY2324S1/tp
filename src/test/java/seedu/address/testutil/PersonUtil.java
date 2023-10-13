@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTNUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAGS;
 
 import java.util.Set;
 
@@ -72,9 +71,9 @@ public class PersonUtil {
         StringBuilder sb = new StringBuilder();
         Set<Tag> tags = person.getTags();
         if (tags.isEmpty()) {
-            sb.append(PREFIX_TAGS);
+            sb.append(PREFIX_TAG);
         } else {
-            tags.forEach(s -> sb.append(PREFIX_TAGS).append(" ").append(s.tagName).append(" "));
+            tags.forEach(s -> sb.append(PREFIX_TAG).append(" ").append(s.tagName).append(" "));
         }
 
         return sb.toString();

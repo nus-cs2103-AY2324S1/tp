@@ -5,12 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENTNUMBER_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIENDS;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_SMART;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -27,65 +25,45 @@ import seedu.address.model.util.SampleDataUtil;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TypicalPersons;
 
-
-/**
- * Contains integration tests (interaction with the Model) and unit tests for TagCommand.
- */
-public class TagCommandTest {
+public class DeleteTagCommandTest {
 
     private Model model = new ModelManager(new AddressBook(getTypicalAddressBook()), new UserPrefs());
 
     @Test
-    public void execute_replaceAllTag_success() {
-        Person studentToTag = new PersonBuilder(TypicalPersons.ALICE)
-            .withTags(VALID_TAG_SMART, VALID_TAG_FRIENDS).build();
-        Set<Tag> replacedTags = SampleDataUtil.getTagSet(VALID_TAG_SMART, VALID_TAG_FRIENDS);
-        TagCommand tagCommand = new TagCommand(
-            studentToTag.getStudentNumber(),
-            replacedTags);
+    public void execute_deleteTag_success() {
+        Person taggedStudent = new PersonBuilder(TypicalPersons.BENSON)
+            .withTags(VALID_TAG_FRIENDS).build();
+        Set<Tag> tagToDelete = SampleDataUtil.getTagSet("owesMoney");
+        DeleteTagCommand deleteTagCommand = new DeleteTagCommand(
+            TypicalPersons.BENSON.getStudentNumber(),
+            tagToDelete);
 
-        String expectedMessage = String.format(TagCommand.MESSAGE_REPLACE_ALL_TAG_SUCCESS,
-                studentToTag.getName()) + replacedTags;
-
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), studentToTag);
-
-        assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_deleteAllTag_success() {
-        Person studentToRemoveTag = new PersonBuilder(TypicalPersons.CARL).build();
-        Set<Tag> emptyTag = new HashSet<>();
-        TagCommand tagCommand = new TagCommand(
-            studentToRemoveTag.getStudentNumber(),
-            emptyTag);
-
-        String expectedMessage = String.format(TagCommand.MESSAGE_DELETE_ALL_TAG_SUCCESS,
-                studentToRemoveTag.getName()) + emptyTag;
+        String expectedMessage = String.format(TagCommand.MESSAGE_DELETE_TAG_SUCCESS,
+            taggedStudent.getName()) + tagToDelete;
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(2), studentToRemoveTag);
+        expectedModel.setPerson(model.getFilteredPersonList().get(1), taggedStudent);
 
-        assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deleteTagCommand, model, expectedMessage, expectedModel);
+        assertEquals(taggedStudent.getTags(), model.getFilteredPersonList().get(1).getTags());
     }
 
     @Test
     public void execute_noStudentWithStudentNumber_failure() {
-        TagCommand tagCommand = new TagCommand(
+        DeleteTagCommand deleteTagCommand = new DeleteTagCommand(
             new StudentNumber(VALID_STUDENTNUMBER_AMY),
             TypicalPersons.ALICE.getTags());
 
-        assertCommandFailure(tagCommand, model, Messages.MESSAGE_STUDENT_DOES_NOT_EXIST);
+        assertCommandFailure(deleteTagCommand, model, Messages.MESSAGE_STUDENT_DOES_NOT_EXIST);
     }
 
     @Test
     public void equals() {
-        final TagCommand standardCommand = new TagCommand(
+        final DeleteTagCommand standardCommand = new DeleteTagCommand(
             TypicalPersons.ALICE.getStudentNumber(),
             TypicalPersons.ALICE.getTags());
 
-        TagCommand commandWithSameValue = new TagCommand(
+        DeleteTagCommand commandWithSameValue = new DeleteTagCommand(
             TypicalPersons.ALICE.getStudentNumber(),
             SampleDataUtil.getTagSet(VALID_TAG_FRIENDS));
 
@@ -100,10 +78,10 @@ public class TagCommandTest {
 
     @Test
     public void toStringMethod() {
-        TagCommand tagCommand = new TagCommand(
+        DeleteTagCommand deleteTagCommand = new DeleteTagCommand(
             TypicalPersons.ALICE.getStudentNumber(),
             TypicalPersons.ALICE.getTags());
-        String expected = TagCommand.class.getCanonicalName() + "{tags=" + TypicalPersons.ALICE.getTags() + "}";
-        assertEquals(expected, tagCommand.toString());
+        String expected = DeleteTagCommand.class.getCanonicalName() + "{tags=" + TypicalPersons.ALICE.getTags() + "}";
+        assertEquals(expected, deleteTagCommand.toString());
     }
 }
