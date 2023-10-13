@@ -6,7 +6,7 @@ import static seedu.flashlingo.model.Model.PREDICATE_SHOW_ALL_FLASHCARDS;
 import seedu.flashlingo.model.Model;
 
 /**
- * Lists all persons in the address book to the user.
+ * Lists all flashcards in Flashlingo to the user.
  */
 public class ListCommand extends Command {
 
