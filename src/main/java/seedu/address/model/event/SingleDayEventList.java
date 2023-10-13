@@ -24,6 +24,8 @@ public class SingleDayEventList {
      * Constructs a SingleDayEventList to store events for the day.
      */
     public SingleDayEventList(LocalDate date) {
+        requireNonNull(date);
+
         this.date = date;
         this.eventTree = new TreeMap<EventPeriod, Event>(EventPeriod::compareTo);
     }
@@ -84,6 +86,7 @@ public class SingleDayEventList {
         for (Event thisEvent : this.eventTree.values()) {
             if (toRemove.equals(thisEvent)) {
                 this.eventTree.remove(thisEvent.getEventPeriod(), thisEvent);
+                return;
             }
         }
         throw new EventNotFoundException();
