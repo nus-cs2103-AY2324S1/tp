@@ -8,7 +8,7 @@ import seedu.address.commons.util.ToStringBuilder;
 /**
  * Tests that a {@code Person}'s {@code Name} matches the keyword given.
  */
-public class NameContainsKeywordPredicate implements Predicate<Person> {
+public class NameContainsKeywordPredicate implements Predicate<Student> {
     private final String keyword;
 
     public NameContainsKeywordPredicate(String keyword) {
@@ -16,7 +16,7 @@ public class NameContainsKeywordPredicate implements Predicate<Person> {
     }
 
     @Override
-    public boolean test(Person person) {
+    public boolean test(Student person) {
         return StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword);
     }
 
