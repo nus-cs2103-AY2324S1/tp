@@ -33,7 +33,7 @@ management tasks done faster than traditional GUI apps.
 
    * `list` : Lists all student details.
      
-   * `add f/John l/Doe e/e0123456@u.nus.edu c/11 s/A0123456X` : Adds a student named `John Doe` to the Class Manager.
+   * `add n/John Doe p/98765432 e/johnd@example.com s/A0245234A c/T11` : Adds a student named `John Doe` to the Class Manager.
 
    * `delete 3` : Deletes the 3rd student detail shown in the current list.
 
@@ -82,7 +82,7 @@ Format: `help`
 This feature in Class Manager 2023 is a robust tool that empowers CS2103T TAs to add new student information according
 to the specified parameters (FIRST NAME, LAST NAME, SCHOOL EMAIL, CLASS NUMBER, and STUDENT NUMBER, TAG[Optional]).
 
-Format: `add f/{FIRST NAME} l/{LAST NAME} e/{EMAIL} c/{CLASS NUMBER} s/{STUDENT NUMBER} [t/{TAG}]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL s/STUDENT_NUMBER c/CLASS_NUMBER [t/TAG]…​`
 
 * **ALL** the fields must be provided.
 * The FIRST NAME and LAST NAME fields are case-sensitive.
@@ -94,8 +94,8 @@ Format: `add f/{FIRST NAME} l/{LAST NAME} e/{EMAIL} c/{CLASS NUMBER} s/{STUDENT 
 </box>
 
 Examples:
-* `add f/ Ngee Yong l/ Lim e/ e0930481@u.nus.edu c/ 11 s/ A0249112A t/Best Student t/Possible TA`
-* `add f/ Boh Shin l/ Yeo e/ e09301234@u.nus.edu c/ 5 s/ A0126362A`
+* `add n/ Ngee Yong Lim e/ e0930481@u.nus.edu c/ T11 s/ A0249112A t/Best Student t/Possible TA`
+* `add n/ Boh Shin Yeo e/ e09301234@u.nus.edu c/ T5 s/ A0126362A`
 
 ### Listing all student details : `list`
 
@@ -107,7 +107,7 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]​`
+Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -142,7 +142,7 @@ This feature offers both broad and granular search capabilities, enabling TAs to
 list all students from a particular class or narrow down their search by providing
 one or more lookup parameters.
 
-Format: `lookup [c/CLASS_NUMBER}] [l/LAST_NAME] [e/EMAIL] [s/STUDENT_NUMBER] [t/TAG]`
+Format: `lookup [c/CLASS_NUMBER] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/STUDENT_NUMBER] [t/TAG]`
 
 <box type="warning" seamless>
 
@@ -150,17 +150,19 @@ Format: `lookup [c/CLASS_NUMBER}] [l/LAST_NAME] [e/EMAIL] [s/STUDENT_NUMBER] [t/
 _At least one_ of the optional fields must be provided. `lookup` alone is not allowed.
 </box>
 
-* The command is case-insensitive. e.g `hans` will match `Hans`
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* This command can only take one word per field. e.g. `lookup c/11 12` is _**not** allowed_.
+* The command is **case-insensitive**. e.g `hans` will match `Hans`
+* Only **full words** will be matched e.g. `Han` will not match `Hans`
+* The order of the fields does **not** matter. e.g. `lookup n/li c/T11` will return the same result as `lookup c/T11 n/li`
+* Field with nothing will be **accepted** as a valid input. e.g. `lookup c/` will return all classes.
+* This command can only take one word per field. e.g. `lookup c/T11 T12` is _**not** allowed_.
   * Taking multiple words per field _coming soon_ in future versions.
 
 Examples:
 
-* `lookup l/li` returns `Alex Li`, `David Li`<br>
-  ![result for 'lookup l/ li'](images/lookupLastNameResult.png) </br></br>
-* `lookup c/111` return all students in class number 111<br>
-  ![result for 'lookup c/ 111'](images/lookupClassResult.png)
+* `lookup n/li` returns `Alex Li`, `David Li`<br>
+  ![result for 'lookup n/li'](images/lookupLastNameResult.png) </br></br>
+* `lookup c/T11` return all students in class number 111<br>
+  ![result for 'lookup c/T11'](images/lookupClassResult.png)
 
 ### Deleting a student : `delete`
 
@@ -238,7 +240,7 @@ Action     | Format, Examples
 **Delete** | `delete s/STUDENT_NUMBER`<br> e.g., `delete s/A0249112A`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Tag**    | `tag STUDENT NUMBER [t/TAG]…​` <br> e.g `tag A0123456N t/smart t/shy`
-**Lookup** | `lookup [c/CLASS_NUMBER] [l/LAST_NAME] [e/EMAIL] [s/STUDENT_NUMBER] [t/TAG]` <br> e.g `lookup c/111`
+**Lookup** | `lookup [c/CLASS_NUMBER] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/STUDENT_NUMBER] [t/TAG]` <br> e.g `lookup c/T11`
 **List**   | `list`
 **Help**   | `help`
 **Load**   | `load f/FILE_NAME`
