@@ -1,12 +1,12 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Person;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Comparator;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
 
 /**
  * Parses input arguments and creates a new ListCommand object with sorting options.
@@ -36,8 +36,6 @@ public class ListCommandParser implements Parser<ListCommand> {
     private Comparator<Person> createSortingComparator(String sortingAttribute) {
         if ("name".equalsIgnoreCase(sortingAttribute)) {
             return Comparator.comparing(Person::getName);
-//        } else if ("email".equalsIgnoreCase(sortingAttribute)) {
-//            return (person1, person2) -> person1.getEmail().compareTo(person2.getEmail());
         } else {
             // Default: no sorting (you can change this behavior as needed)
             return null;
