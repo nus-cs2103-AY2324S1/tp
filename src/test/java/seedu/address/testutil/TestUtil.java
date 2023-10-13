@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 
 import seedu.flashlingo.commons.core.index.Index;
 import seedu.flashlingo.model.Model;
-import seedu.flashlingo.model.person.Person;
+import seedu.flashlingo.model.flashcard.FlashCard;
 
 /**
  * A utility class for test cases.
@@ -36,20 +36,20 @@ public class TestUtil {
      * Returns the middle index of the person in the {@code model}'s person list.
      */
     public static Index getMidIndex(Model model) {
-        return Index.fromOneBased(model.getFilteredPersonList().size() / 2);
+        return Index.fromOneBased(model.getFilteredFlashCardList().size() / 2);
     }
 
     /**
      * Returns the last index of the person in the {@code model}'s person list.
      */
     public static Index getLastIndex(Model model) {
-        return Index.fromOneBased(model.getFilteredPersonList().size());
+        return Index.fromOneBased(model.getFilteredFlashCardList().size());
     }
 
     /**
      * Returns the person in the {@code model}'s person list at {@code index}.
      */
-    public static Person getPerson(Model model, Index index) {
-        return model.getFilteredPersonList().get(index.getZeroBased());
+    public static FlashCard getFlashCard(Model model, Index index) {
+        return model.getFilteredFlashCardList().get(index.getZeroBased());
     }
 }
