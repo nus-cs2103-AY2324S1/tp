@@ -16,6 +16,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -32,6 +33,8 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+
+    private PersonProfile personProfile;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -66,6 +69,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+
     }
 
     public Stage getPrimaryStage() {
@@ -167,6 +171,19 @@ public class MainWindow extends UiPart<Stage> {
         return personListPanel;
     }
 
+    @FXML
+    private void handleView(Person personToView) {
+        personProfile = new PersonProfile(personToView);
+        personListPanelPlaceholder.getChildren().remove(personListPanel.getRoot());
+        personListPanelPlaceholder.getChildren().add(personProfile.getRoot());
+    }
+    @FXML
+    private void handleViewExit() {
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanelPlaceholder.getChildren().remove(personProfile.getRoot());
+        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+    }
+
     /**
      * Executes the command and returns the result.
      *
@@ -186,6 +203,14 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            if (commandResult.isShowView()) {
+                handleView(commandResult.getPersonToView());
+            }
+
+            if (commandResult.isViewExit()) {
+                handleViewExit();
+            }
+
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
@@ -193,4 +218,5 @@ public class MainWindow extends UiPart<Stage> {
             throw e;
         }
     }
+
 }
