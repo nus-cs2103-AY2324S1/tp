@@ -2,7 +2,7 @@ package seedu.flashlingo.logic.parser;
 
 import seedu.flashlingo.commons.core.LogsCenter;
 import seedu.flashlingo.logic.commands.ExitCommand;
-import seedu.flashlingo.logic.newcommands.HelpCommand;
+import seedu.flashlingo.logic.commands.HelpCommand;
 import seedu.flashlingo.logic.parser.exceptions.ParseException;
 
 import java.util.logging.Logger;

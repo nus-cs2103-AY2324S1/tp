@@ -1,9 +1,9 @@
 package seedu.flashlingo.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.flashlingo.model.NewModel.PREDICATE_SHOW_ALL_FLASHCARDS;
+import static seedu.flashlingo.model.Model.PREDICATE_SHOW_ALL_FLASHCARDS;
 
-import seedu.flashlingo.model.NewModel;
+import seedu.flashlingo.model.Model;
 
 /**
  * Lists all persons in the address book to the user.
@@ -16,7 +16,7 @@ public class ListCommand extends Command {
 
 
     @Override
-    public CommandResult execute(NewModel model) {
+    public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredFlashCardList(PREDICATE_SHOW_ALL_FLASHCARDS);
         return new CommandResult(MESSAGE_SUCCESS);

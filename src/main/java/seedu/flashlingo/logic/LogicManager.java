@@ -13,7 +13,7 @@ import seedu.flashlingo.logic.commands.CommandResult;
 import seedu.flashlingo.logic.commands.exceptions.CommandException;
 import seedu.flashlingo.logic.parser.FlashlingoParser;
 import seedu.flashlingo.logic.parser.exceptions.ParseException;
-import seedu.flashlingo.model.NewModel;
+import seedu.flashlingo.model.Model;
 import seedu.flashlingo.model.ReadOnlyFlashlingo;
 import seedu.flashlingo.model.flashcard.FlashCard;
 import seedu.flashlingo.model.person.Person;
@@ -30,14 +30,14 @@ public class LogicManager implements Logic {
 
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
-    private final NewModel model;
+    private final Model model;
     private final Storage storage;
     private final FlashlingoParser flashlingoParser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
      */
-    public LogicManager(NewModel model, Storage storage) {
+    public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
         flashlingoParser = new FlashlingoParser();

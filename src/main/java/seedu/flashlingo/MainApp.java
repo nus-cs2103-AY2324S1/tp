@@ -16,8 +16,8 @@ import seedu.flashlingo.commons.util.StringUtil;
 import seedu.flashlingo.logic.Logic;
 import seedu.flashlingo.logic.LogicManager;
 import seedu.flashlingo.model.Flashlingo;
-import seedu.flashlingo.model.NewModel;
-import seedu.flashlingo.model.NewModelManager;
+import seedu.flashlingo.model.Model;
+import seedu.flashlingo.model.ModelManager;
 import seedu.flashlingo.model.ReadOnlyFlashlingo;
 import seedu.flashlingo.model.ReadOnlyUserPrefs;
 import seedu.flashlingo.model.UserPrefs;
@@ -43,7 +43,7 @@ public class MainApp extends Application {
     protected Ui ui;
     protected Logic logic;
     protected Storage storage;
-    protected NewModel model;
+    protected Model model;
     protected Config config;
 
     @Override
@@ -72,7 +72,7 @@ public class MainApp extends Application {
      * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
-    private NewModel initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
+    private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         logger.info("Using data file : " + storage.getFlashlingoFilePath());
 
         Optional<ReadOnlyFlashlingo> flashlingoOptional;
@@ -90,7 +90,7 @@ public class MainApp extends Application {
             initialData = new Flashlingo();
         }
 
-        return new NewModelManager(initialData, userPrefs);
+        return new ModelManager(initialData, userPrefs);
     }
 
     private void initLogging(Config config) {

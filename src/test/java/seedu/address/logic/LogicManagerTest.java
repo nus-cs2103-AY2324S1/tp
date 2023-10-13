@@ -24,8 +24,8 @@ import seedu.flashlingo.logic.commands.CommandResult;
 import seedu.flashlingo.logic.commands.ListCommand;
 import seedu.flashlingo.logic.commands.exceptions.CommandException;
 import seedu.flashlingo.logic.parser.exceptions.ParseException;
-import seedu.flashlingo.model.NewModel;
-import seedu.flashlingo.model.NewModelManager;
+import seedu.flashlingo.model.Model;
+import seedu.flashlingo.model.ModelManager;
 import seedu.flashlingo.model.ReadOnlyFlashlingo;
 import seedu.flashlingo.model.UserPrefs;
 import seedu.flashlingo.model.flashcard.FlashCard;
@@ -40,7 +40,7 @@ public class LogicManagerTest {
     @TempDir
     public Path temporaryFolder;
 
-    private NewModel model = new NewModelManager();
+    private Model model = new ModelManager();
     private Logic logic;
 
     @BeforeEach
@@ -92,10 +92,10 @@ public class LogicManagerTest {
      * - no exceptions are thrown <br>
      * - the feedback message is equal to {@code expectedMessage} <br>
      * - the internal model manager state is the same as that in {@code expectedModel} <br>
-     * @see #assertCommandFailure(String, Class, String, NewModel)
+     * @see #assertCommandFailure(String, Class, String, Model)
      */
     private void assertCommandSuccess(String inputCommand, String expectedMessage,
-            NewModel expectedModel) throws CommandException, ParseException {
+            Model expectedModel) throws CommandException, ParseException {
         CommandResult result = logic.execute(inputCommand);
         assertEquals(expectedMessage, result.getFeedbackToUser());
         assertEquals(expectedModel, model);
@@ -103,7 +103,7 @@ public class LogicManagerTest {
 
     /**
      * Executes the command, confirms that a ParseException is thrown and that the result message is correct.
-     * @see #assertCommandFailure(String, Class, String, NewModel)
+     * @see #assertCommandFailure(String, Class, String, Model)
      */
     private void assertParseException(String inputCommand, String expectedMessage) {
         assertCommandFailure(inputCommand, ParseException.class, expectedMessage);
@@ -111,7 +111,7 @@ public class LogicManagerTest {
 
     /**
      * Executes the command, confirms that a CommandException is thrown and that the result message is correct.
-     * @see #assertCommandFailure(String, Class, String, NewModel)
+     * @see #assertCommandFailure(String, Class, String, Model)
      */
     private void assertCommandException(String inputCommand, String expectedMessage) {
         assertCommandFailure(inputCommand, CommandException.class, expectedMessage);
@@ -119,11 +119,11 @@ public class LogicManagerTest {
 
     /**
      * Executes the command, confirms that the exception is thrown and that the result message is correct.
-     * @see #assertCommandFailure(String, Class, String, NewModel)
+     * @see #assertCommandFailure(String, Class, String, Model)
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
-        NewModel expectedModel = new NewModelManager(model.getFlashlingo(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getFlashlingo(), new UserPrefs());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
@@ -132,10 +132,10 @@ public class LogicManagerTest {
      * - the {@code expectedException} is thrown <br>
      * - the resulting error message is equal to {@code expectedMessage} <br>
      * - the internal model manager state is the same as that in {@code expectedModel} <br>
-     * @see #assertCommandSuccess(String, String, NewModel)
+     * @see #assertCommandSuccess(String, String, Model)
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
-            String expectedMessage, NewModel expectedModel) {
+            String expectedMessage, Model expectedModel) {
         assertThrows(expectedException, expectedMessage, () -> logic.execute(inputCommand));
         assertEquals(expectedModel, model);
     }
@@ -170,7 +170,7 @@ public class LogicManagerTest {
         //FIXME:
 //        FlashCard expectedFlashCard = new FlashCardBuilder(AMY).withTags().build();
         FlashCard expectedFlashCard = null;
-        NewModelManager expectedModel = new NewModelManager();
+        ModelManager expectedModel = new ModelManager();
         expectedModel.addFlashCard(expectedFlashCard);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }

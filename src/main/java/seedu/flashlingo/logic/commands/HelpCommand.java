@@ -1,6 +1,6 @@
 package seedu.flashlingo.logic.commands;
 
-import seedu.flashlingo.model.NewModel;
+import seedu.flashlingo.model.Model;
 
 /**
  * Format full help instructions for every command for display.
@@ -15,7 +15,7 @@ public class HelpCommand extends Command {
     public static final String SHOWING_HELP_MESSAGE = "Opened help window.";
 
     @Override
-    public CommandResult execute(NewModel model) {
+    public CommandResult execute(Model model) {
         return new CommandResult(SHOWING_HELP_MESSAGE, true, false);
     }
 }

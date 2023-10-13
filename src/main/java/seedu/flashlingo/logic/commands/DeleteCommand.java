@@ -8,7 +8,7 @@ import seedu.flashlingo.commons.core.index.Index;
 import seedu.flashlingo.commons.util.ToStringBuilder;
 import seedu.flashlingo.logic.Messages;
 import seedu.flashlingo.logic.commands.exceptions.CommandException;
-import seedu.flashlingo.model.NewModel;
+import seedu.flashlingo.model.Model;
 import seedu.flashlingo.model.flashcard.FlashCard;
 
 /**
@@ -32,7 +32,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(NewModel model) throws CommandException {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<FlashCard> lastShownList = model.getFilteredFlashCardList();
 
