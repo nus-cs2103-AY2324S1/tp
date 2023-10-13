@@ -10,11 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.lovebook.commons.exceptions.IllegalValueException;
-import seedu.lovebook.model.person.Age;
-import seedu.lovebook.model.person.Date;
-import seedu.lovebook.model.person.Gender;
-import seedu.lovebook.model.person.Height;
-import seedu.lovebook.model.person.Name;
+import seedu.lovebook.model.person.*;
 import seedu.lovebook.model.tag.Tag;
 
 /**
@@ -28,6 +24,7 @@ class JsonAdaptedPerson {
     private final String age;
     private final String gender;
     private final String height;
+    private final String income;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -36,11 +33,13 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("age") String age,
             @JsonProperty("gender") String gender, @JsonProperty("height") String height,
+                             @JsonProperty("income") String income,
             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.age = age;
         this.gender = gender;
         this.height = height;
+        this.income = income;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -54,6 +53,7 @@ class JsonAdaptedPerson {
         age = source.getAge().value;
         gender = source.getGender().value;
         height = source.getHeight().value;
+        income = source.getIncome().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -102,8 +102,16 @@ class JsonAdaptedPerson {
         }
         final Height modelHeight = new Height(height);
 
+        if (income == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Income.class.getSimpleName()));
+        }
+        if (!Income.isValidIncome(income)) {
+            throw new IllegalValueException(Income.MESSAGE_CONSTRAINTS);
+        }
+        final Income modelIncome = new Income(income);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Date(modelName, modelAge, modelGender, modelHeight, modelTags);
+        return new Date(modelName, modelAge, modelGender, modelHeight, modelIncome, modelTags);
     }
 
 }

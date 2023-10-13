@@ -9,10 +9,7 @@ import java.util.Set;
 import seedu.lovebook.commons.core.index.Index;
 import seedu.lovebook.commons.util.StringUtil;
 import seedu.lovebook.logic.parser.exceptions.ParseException;
-import seedu.lovebook.model.person.Age;
-import seedu.lovebook.model.person.Gender;
-import seedu.lovebook.model.person.Height;
-import seedu.lovebook.model.person.Name;
+import seedu.lovebook.model.person.*;
 import seedu.lovebook.model.tag.Tag;
 
 /**
@@ -66,6 +63,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String gender} into an {@code Gender}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code gender} is invalid.
+     */
+    public static Gender parseGender(String gender) throws ParseException {
+        requireNonNull(gender);
+        String trimmedGender = gender.trim();
+        if (!Gender.isValidGender(trimmedGender)) {
+            throw new ParseException(Gender.MESSAGE_CONSTRAINTS);
+        }
+        return new Gender(trimmedGender);
+    }
+
+    /**
      * Parses a {@code String lovebook} into an {@code Height}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -81,19 +93,20 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String gender} into an {@code Gender}.
+     * Parses a {@code String income} into an {@code Income}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code gender} is invalid.
+     * @throws ParseException if the given {@code lovebook} is invalid.
      */
-    public static Gender parseGender(String gender) throws ParseException {
-        requireNonNull(gender);
-        String trimmedGender = gender.trim();
-        if (!Gender.isValidGender(trimmedGender)) {
-            throw new ParseException(Gender.MESSAGE_CONSTRAINTS);
+    public static Income parseIncome(String income) throws ParseException {
+        requireNonNull(income);
+        String trimmedIncome = income.trim();
+        if (!Height.isValidHeight(trimmedIncome)) {
+            throw new ParseException(Height.MESSAGE_CONSTRAINTS);
         }
-        return new Gender(trimmedGender);
+        return new Income(income);
     }
+
 
     /**
      * Parses a {@code String tag} into a {@code Tag}.

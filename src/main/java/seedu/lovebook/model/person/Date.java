@@ -23,17 +23,20 @@ public class Date {
 
     // Data fields
     private final Height height;
+
+    private final Income income;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Date(Name name, Age age, Gender gender, Height height, Set<Tag> tags) {
+    public Date(Name name, Age age, Gender gender, Height height, Income income, Set<Tag> tags) {
         requireAllNonNull(name, age, gender, height, tags);
         this.name = name;
         this.age = age;
         this.gender = gender;
         this.height = height;
+        this.income = income;
         this.tags.addAll(tags);
     }
 
@@ -45,6 +48,7 @@ public class Date {
         this.age = null;
         this.gender = null;
         this.height = null;
+        this.income = null;
     }
 
     public Name getName() {
@@ -61,6 +65,10 @@ public class Date {
 
     public Height getHeight() {
         return height;
+    }
+
+    public Income getIncome() {
+        return income;
     }
 
     /**
@@ -104,13 +112,14 @@ public class Date {
                 && age.equals(otherDate.age)
                 && gender.equals(otherDate.gender)
                 && height.equals(otherDate.height)
+                && income.equals(otherDate.income)
                 && tags.equals(otherDate.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, age, gender, height, tags);
+        return Objects.hash(name, age, gender, height, income, tags);
     }
 
     @Override
@@ -120,6 +129,7 @@ public class Date {
                 .add("age", age)
                 .add("gender", gender)
                 .add("height", height)
+                .add("income", income)
                 .add("tags", tags)
                 .toString();
     }

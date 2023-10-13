@@ -81,7 +81,7 @@ Parameter constraints:
 - Horoscope should be a non-empty string.
 
 Example:
-`NewD name/Cleon age/22 gender/F height/1.76 horoscope/Taurus income/3000`
+`newD name/Cleon age/22 gender/F height/1.76 horoscope/Taurus income/3000`
 
 Expected output: `New date has been successfully added!`
 
@@ -89,7 +89,7 @@ Output if error:
 Please follow the required format to add a new date (New date /name Adam /age 123 /gender F /horoscope Cancer)
 
 ### Edit existing dates
-Format: `EditD INDEX METRIC/NEW ARG`
+Format: `editD INDEX METRIC/NEW ARG`
 
 Parameter constraints:
 - The index must be a positive integer, and be within the range of the recorded dates
@@ -98,9 +98,9 @@ Parameter constraints:
 - User can edit up to n number of metrics in one command line, where n refers to the number of metrics available
 
 Example:
-- `EditD 3 name/Cleon` (editing 1 metric)
-- `EditD 3 name/Cleon horoscope/Cancer` (editing 2 metrics)
-- `EditD 3 horoscope/Cancer name/Cleon` (sequence doesn't matter)
+- `editD 3 name/Cleon` (editing 1 metric)
+- `editD 3 name/Cleon horoscope/Cancer` (editing 2 metrics)
+- `editD 3 horoscope/Cancer name/Cleon` (sequence doesn't matter)
 
 Expected Output: `The date information has been successfully updated!`
 

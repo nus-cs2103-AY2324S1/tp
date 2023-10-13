@@ -1,11 +1,7 @@
 package seedu.lovebook.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_AGE;
-import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_GENDER;
-import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HEIGHT;
-import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.lovebook.logic.parser.CliSyntax.*;
 
 import seedu.lovebook.commons.util.ToStringBuilder;
 import seedu.lovebook.logic.Messages;
@@ -26,12 +22,14 @@ public class AddCommand extends Command {
             + PREFIX_AGE + "AGE "
             + PREFIX_GENDER + "GENDER "
             + PREFIX_HEIGHT + "HEIGHT "
+            + PREFIX_INCOME + "INCOME "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_AGE + "21 "
             + PREFIX_GENDER + "M "
             + PREFIX_HEIGHT + "23124 "
+            + PREFIX_INCOME + "3000 "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 
