@@ -1,9 +1,5 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.commands.FilterCommand;
-import seedu.address.logic.commands.FilterCommand.PersonFilter;
-import seedu.address.logic.parser.exceptions.ParseException;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.commands.FilterCommand.CONTACTS_NOT_FILTERED;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
@@ -12,6 +8,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.ParserUtil.parseTagsForUse;
+
+import seedu.address.logic.commands.FilterCommand;
+import seedu.address.logic.commands.FilterCommand.PersonFilter;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Parses input arguments and creates a new FilterCommand object

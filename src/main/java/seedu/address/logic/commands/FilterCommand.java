@@ -1,18 +1,5 @@
 package seedu.address.logic.commands;
 
-import seedu.address.commons.util.CollectionUtil;
-import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
-import seedu.address.model.Model;
-import seedu.address.model.person.Person;
-import seedu.address.model.tag.Tag;
-
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.Objects;
-import java.util.Optional;
-
 import static java.util.Objects.nonNull;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
@@ -20,6 +7,17 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+
+import seedu.address.commons.util.CollectionUtil;
+import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
+import seedu.address.model.Model;
+import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 
 /**
  * Filters contact list to display contacts matching specified criteria.
@@ -45,6 +43,12 @@ public class FilterCommand extends Command {
     public static final String CONTACTS_NOT_FILTERED = "At least one parameter is required to filter contacts.";
     private final PersonFilter personFilter;
 
+    /**
+     * Filters out all persons that do not match the filter criteria specified.
+     * Field matching is case-insensitive
+     *
+     * @param personFilter Details to filter people with
+     */
     public FilterCommand(PersonFilter personFilter) {
         requireNonNull(personFilter);
         this.personFilter = personFilter;
@@ -91,6 +95,11 @@ public class FilterCommand extends Command {
 
         public PersonFilter() {}
 
+        /**
+         * Creates a copy of a filter with the same parameters as another filter.
+         *
+         * @param toCopy The other filter to create a copy of.
+         */
         public PersonFilter(PersonFilter toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
@@ -155,6 +164,12 @@ public class FilterCommand extends Command {
             return (tags != null) ? Collections.unmodifiableSet(tags) : null;
         }
 
+        /**
+         * Predicate to test if a person passes the filter by matching all parameters.
+         *
+         * @param person The person to be tested.
+         * @return a boolean representing whether the person passed the filter.
+         */
         public boolean test(Person person) {
             if (nonNull(name) && !person.getName().fullName.toLowerCase().contains(name.toLowerCase())) {
                 return false;

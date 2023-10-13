@@ -1,11 +1,20 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.FILTER_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.FILTER_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.commands.FilterCommand.PersonFilter;
 import seedu.address.testutil.PersonFilterBuilder;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.logic.commands.CommandTestUtil.*;
 
 class PersonFilterTest {
     @Test
@@ -20,7 +29,7 @@ class PersonFilterTest {
         assertFalse(FILTER_AMY.equals(5));
 
         // different values -> returns false
-        assertFalse(FILTER_AMY.equals(DESC_BOB));
+        assertFalse(FILTER_AMY.equals(FILTER_BOB));
 
         // different name -> returns false
         PersonFilter editedAmy = new PersonFilterBuilder(FILTER_AMY).withName(VALID_NAME_BOB).build();
