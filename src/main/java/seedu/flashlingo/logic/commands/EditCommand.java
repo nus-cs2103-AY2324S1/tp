@@ -19,6 +19,7 @@ import java.util.List;
 public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
     public static final String MESSAGE_EDIT_FLASHCARD_SUCCESS = "Edited Flashcard: %1$s";
+    public static final String MESSAGE_DUPLICATE_FLASHCARD = "This flashcard already exists in Flashlingo";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the flashcard identified "
           + "by the index number used in the displayed flashcard list. "

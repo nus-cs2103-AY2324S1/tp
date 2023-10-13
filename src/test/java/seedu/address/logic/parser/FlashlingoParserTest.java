@@ -15,22 +15,18 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.FlashcardBuilder;
 import seedu.flashlingo.logic.commands.AddCommand;
-import seedu.flashlingo.logic.commands.ClearCommand;
 import seedu.flashlingo.logic.commands.DeleteCommand;
 import seedu.flashlingo.logic.commands.EditCommand;
-import seedu.flashlingo.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.flashlingo.logic.commands.ExitCommand;
 import seedu.flashlingo.logic.commands.FindCommand;
 import seedu.flashlingo.logic.commands.HelpCommand;
 import seedu.flashlingo.logic.commands.ListCommand;
-import seedu.flashlingo.logic.parser.AddressBookParser;
 import seedu.flashlingo.logic.parser.FlashlingoParser;
 import seedu.flashlingo.logic.parser.exceptions.ParseException;
 import seedu.flashlingo.model.Flashlingo;
 import seedu.flashlingo.model.flashcard.FlashCard;
 import seedu.flashlingo.model.person.NameContainsKeywordsPredicate;
 import seedu.flashlingo.model.person.Person;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.FlashCardUtil;
 
 public class FlashlingoParserTest {

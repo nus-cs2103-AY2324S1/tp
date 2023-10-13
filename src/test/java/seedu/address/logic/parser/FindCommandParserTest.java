@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.flashlingo.logic.commands.FindCommand;
 import seedu.flashlingo.logic.parser.FindCommandParser;
+import seedu.flashlingo.model.flashcard.WordContainsKeywordsPredicate;
 import seedu.flashlingo.model.person.NameContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
@@ -25,7 +26,7 @@ public class FindCommandParserTest {
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand =
-                new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
+                new FindCommand(new WordContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
         assertParseSuccess(parser, "Alice Bob", expectedFindCommand);
 
         // multiple whitespaces between keywords
