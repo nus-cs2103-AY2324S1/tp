@@ -36,7 +36,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
-        descriptor.setTags(person.getDepartments());
+        descriptor.setDepartments(person.getDepartments());
     }
 
     /**
@@ -72,12 +72,12 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Department>} and set it to the {@code EditPersonDescriptor}
+     * Parses the {@code departments} into a {@code Set<Department>} and set it to the {@code EditPersonDescriptor}
      * that we are building.
      */
-    public EditPersonDescriptorBuilder withTags(String... tags) {
-        Set<Department> departmentSet = Stream.of(tags).map(Department::new).collect(Collectors.toSet());
-        descriptor.setTags(departmentSet);
+    public EditPersonDescriptorBuilder withDepartments(String... departments) {
+        Set<Department> departmentSet = Stream.of(departments).map(Department::new).collect(Collectors.toSet());
+        descriptor.setDepartments(departmentSet);
         return this;
     }
 

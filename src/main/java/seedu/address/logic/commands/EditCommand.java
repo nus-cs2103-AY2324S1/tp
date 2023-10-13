@@ -99,7 +99,7 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Set<Department> updatedDepartments = editPersonDescriptor.getTags().orElse(personToEdit.getDepartments());
+        Set<Department> updatedDepartments = editPersonDescriptor.getDepartments().orElse(personToEdit.getDepartments());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedDepartments);
     }
@@ -150,7 +150,7 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
-            setTags(toCopy.departments);
+            setDepartments(toCopy.departments);
         }
 
         /**
@@ -196,7 +196,7 @@ public class EditCommand extends Command {
          * Sets {@code departments} to this object's {@code departments}.
          * A defensive copy of {@code departments} is used internally.
          */
-        public void setTags(Set<Department> departments) {
+        public void setDepartments(Set<Department> departments) {
             this.departments = (departments != null) ? new HashSet<>(departments) : null;
         }
 
@@ -205,7 +205,7 @@ public class EditCommand extends Command {
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code departments} is null.
          */
-        public Optional<Set<Department>> getTags() {
+        public Optional<Set<Department>> getDepartments() {
             return (departments != null) ? Optional.of(Collections.unmodifiableSet(departments)) : Optional.empty();
         }
 

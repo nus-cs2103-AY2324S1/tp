@@ -103,11 +103,11 @@ public class ParserUtil {
      */
     public static Department parseDepartment(String department) throws ParseException {
         requireNonNull(department);
-        String trimmedTag = department.trim();
-        if (!Department.isValidDepartmentName(trimmedTag)) {
+        String trimmedDepartment = department.trim();
+        if (!Department.isValidDepartmentName(trimmedDepartment)) {
             throw new ParseException(Department.MESSAGE_CONSTRAINTS);
         }
-        return new Department(trimmedTag);
+        return new Department(trimmedDepartment);
     }
 
     /**
