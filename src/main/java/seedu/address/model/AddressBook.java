@@ -6,10 +6,10 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.applicant.Applicant;
 import seedu.address.model.applicant.UniqueApplicantList;
 import seedu.address.model.member.Member;
 import seedu.address.model.member.UniqueMemberList;
-import seedu.address.model.applicant.Applicant;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 

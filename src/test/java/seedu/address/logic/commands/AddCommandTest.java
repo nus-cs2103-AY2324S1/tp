@@ -22,6 +22,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.applicant.Applicant;
 import seedu.address.model.member.Member;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
@@ -125,6 +126,15 @@ public class AddCommandTest {
         }
 
         @Override
+        public void addMember(Member member) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void addApplicant(Applicant applicant) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
         }
@@ -145,12 +155,27 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasApplicant(Applicant applicant) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deletePerson(Person target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
+        public void deleteApplicant(Applicant target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setPerson(Person target, Person editedPerson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setApplicant(Applicant target, Applicant editedApplicant) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -165,6 +190,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Applicant> getFilteredApplicantList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
 
         }
@@ -175,10 +205,9 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addMember(Member toAdd) {
+        public void updateFilteredApplicantList(Predicate<Applicant> predicate) {
 
         }
-
     }
 
     /**
@@ -200,6 +229,24 @@ public class AddCommandTest {
     }
 
     /**
+     * A Model stub that contains a single applicant.
+     */
+    private class ModelStubWithApplicant extends ModelStub {
+        private final Applicant applicant;
+
+        ModelStubWithApplicant(Applicant applicant) {
+            requireNonNull(applicant);
+            this.applicant = applicant;
+        }
+
+        @Override
+        public boolean hasApplicant(Applicant applicant) {
+            requireNonNull(applicant);
+            return this.applicant.isSameApplicant(applicant);
+        }
+    }
+
+    /**
      * A Model stub that always accept the person being added.
      */
     private class ModelStubAcceptingPersonAdded extends ModelStub {
@@ -215,6 +262,27 @@ public class AddCommandTest {
         public void addPerson(Person person) {
             requireNonNull(person);
             personsAdded.add(person);
+        }
+
+        @Override
+        public ReadOnlyAddressBook getAddressBook() {
+            return new AddressBook();
+        }
+    }
+
+    private class ModelStubAcceptingApplicantAdded extends ModelStub {
+        final ArrayList<Applicant> applicantsAdded = new ArrayList<>();
+
+        @Override
+        public boolean hasApplicant(Applicant applicant) {
+            requireNonNull(applicant);
+            return applicantsAdded.stream().anyMatch(applicant::isSameApplicant);
+        }
+
+        @Override
+        public void addApplicant(Applicant applicant) {
+            requireNonNull(applicant);
+            applicantsAdded.add(applicant);
         }
 
         @Override
