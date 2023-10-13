@@ -48,4 +48,14 @@ public class Messages {
         return builder.toString();
     }
 
+    public static String format(Person[] people) {
+        int size = people.length;
+        final StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < size - 1; i++) {
+            builder.append(format(people[i]))
+                    .append(", ");
+        }
+        builder.append(format(people[size - 1]));
+        return builder.toString();
+    }
 }
