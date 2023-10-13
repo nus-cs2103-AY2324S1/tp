@@ -15,4 +15,10 @@ public class CliSyntax {
     public static final Prefix PREFIX_ADDRESS = new Prefix("address=");
     public static final Prefix PREFIX_TAG = new Prefix("illness=");
 
+
+    /* Prefixes for Appointment */
+    public static final Prefix PREFIX_APPOINTMENT_START = new Prefix("start=");
+    public static final Prefix PREFIX_APPOINTMENT_END = new Prefix("end=");
+    public static final Prefix PREFIX_DESCRIPTION = new Prefix("description=");
+
 }
