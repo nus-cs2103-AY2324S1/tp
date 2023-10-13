@@ -2,10 +2,10 @@ package seedu.address.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Applicant;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 
 /**
@@ -30,7 +30,7 @@ public class JsonAdaptedApplicant {
     /**
      * Converts a given {@code Applicant} into this class for Jackson use.
      */
-    public JsonAdaptedApplicant(Person source) {
+    public JsonAdaptedApplicant(Applicant source) {
         name = source.getName().fullName;
         phone = source.getPhone().value;
     }
@@ -40,7 +40,7 @@ public class JsonAdaptedApplicant {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted applicant.
      */
-    public Person toModelType() throws IllegalValueException {
+    public Applicant toModelType() throws IllegalValueException {
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
