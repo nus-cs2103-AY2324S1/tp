@@ -4,9 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.staffsnap.logic.Messages.MESSAGE_INVALID_APPLICANT_DISPLAYED_INDEX;
 import static seedu.staffsnap.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.DEPARTMENT_DESC_AMY;
-import static seedu.staffsnap.logic.commands.CommandTestUtil.JOB_TITLE_DESC_AMY;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.staffsnap.logic.commands.CommandTestUtil.POSITION_DESC_AMY;
 import static seedu.staffsnap.testutil.Assert.assertThrows;
 import static seedu.staffsnap.testutil.TypicalApplicants.AMY;
 
@@ -166,8 +166,8 @@ public class LogicManagerTest {
 
         // Triggers the saveAddressBook method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
-                + DEPARTMENT_DESC_AMY + JOB_TITLE_DESC_AMY;
-        Applicant expectedApplicant = new ApplicantBuilder(AMY).withTags().build();
+                + DEPARTMENT_DESC_AMY + POSITION_DESC_AMY;
+        Applicant expectedApplicant = new ApplicantBuilder(AMY).withInterviews().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addApplicant(expectedApplicant);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);

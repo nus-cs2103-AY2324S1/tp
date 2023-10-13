@@ -41,10 +41,10 @@ public class Messages {
                 .append(applicant.getPhone())
                 .append("; Department: ")
                 .append(applicant.getDepartment())
-                .append("; JobTitle: ")
-                .append(applicant.getJobTitle())
-                .append("; Tags: ");
-        applicant.getTags().forEach(builder::append);
+                .append("; Position: ")
+                .append(applicant.getPosition())
+                .append("; Interviews: ");
+        applicant.getInterviews().forEach(builder::append);
         return builder.toString();
     }
 

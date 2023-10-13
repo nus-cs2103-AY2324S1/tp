@@ -6,10 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_DEPARTMENT_BOB;
-import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_JOB_TITLE_BOB;
+import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_INTERVIEW_HUSBAND;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_POSITION_BOB;
 
 import org.junit.jupiter.api.Test;
 
@@ -49,12 +49,12 @@ public class EditApplicantDescriptorTest {
         editedAmy = new EditApplicantDescriptorBuilder(DESC_AMY).withDepartment(VALID_DEPARTMENT_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
-        // different jobTitle -> returns false
-        editedAmy = new EditApplicantDescriptorBuilder(DESC_AMY).withJobTitle(VALID_JOB_TITLE_BOB).build();
+        // different position -> returns false
+        editedAmy = new EditApplicantDescriptorBuilder(DESC_AMY).withPosition(VALID_POSITION_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
-        // different tags -> returns false
-        editedAmy = new EditApplicantDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
+        // different interviews -> returns false
+        editedAmy = new EditApplicantDescriptorBuilder(DESC_AMY).withInterviews(VALID_INTERVIEW_HUSBAND).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 
@@ -64,9 +64,9 @@ public class EditApplicantDescriptorTest {
         String expected = EditApplicantDescriptor.class.getCanonicalName() + "{name="
                 + editApplicantDescriptor.getName().orElse(null) + ", phone="
                 + editApplicantDescriptor.getPhone().orElse(null) + ", department="
-                + editApplicantDescriptor.getDepartment().orElse(null) + ", jobTitle="
-                + editApplicantDescriptor.getJobTitle().orElse(null) + ", tags="
-                + editApplicantDescriptor.getTags().orElse(null) + "}";
+                + editApplicantDescriptor.getDepartment().orElse(null) + ", position="
+                + editApplicantDescriptor.getPosition().orElse(null) + ", interviews="
+                + editApplicantDescriptor.getInterviews().orElse(null) + "}";
         assertEquals(expected, editApplicantDescriptor.toString());
     }
 }

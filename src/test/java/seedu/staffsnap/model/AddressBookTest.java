@@ -3,8 +3,8 @@ package seedu.staffsnap.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_JOB_TITLE_BOB;
-import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_INTERVIEW_HUSBAND;
+import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_POSITION_BOB;
 import static seedu.staffsnap.testutil.Assert.assertThrows;
 import static seedu.staffsnap.testutil.TypicalApplicants.ALICE;
 import static seedu.staffsnap.testutil.TypicalApplicants.getTypicalAddressBook;
@@ -47,7 +47,7 @@ public class AddressBookTest {
     public void resetData_withDuplicateApplicants_throwsDuplicateApplicantException() {
         // Two applicants with the same identity fields
         Applicant editedAlice = new ApplicantBuilder(ALICE)
-                .withJobTitle(VALID_JOB_TITLE_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withPosition(VALID_POSITION_BOB).withInterviews(VALID_INTERVIEW_HUSBAND).build();
         List<Applicant> newApplicants = Arrays.asList(ALICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newApplicants);
 
@@ -74,7 +74,7 @@ public class AddressBookTest {
     public void hasApplicant_applicantWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addApplicant(ALICE);
         Applicant editedAlice = new ApplicantBuilder(ALICE)
-                .withJobTitle(VALID_JOB_TITLE_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withPosition(VALID_POSITION_BOB).withInterviews(VALID_INTERVIEW_HUSBAND).build();
         assertTrue(addressBook.hasApplicant(editedAlice));
     }
 

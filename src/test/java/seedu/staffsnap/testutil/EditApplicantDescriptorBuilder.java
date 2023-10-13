@@ -7,10 +7,10 @@ import java.util.stream.Stream;
 import seedu.staffsnap.logic.commands.EditCommand.EditApplicantDescriptor;
 import seedu.staffsnap.model.applicant.Applicant;
 import seedu.staffsnap.model.applicant.Department;
-import seedu.staffsnap.model.applicant.JobTitle;
 import seedu.staffsnap.model.applicant.Name;
 import seedu.staffsnap.model.applicant.Phone;
-import seedu.staffsnap.model.tag.Tag;
+import seedu.staffsnap.model.applicant.Position;
+import seedu.staffsnap.model.interview.Interview;
 
 /**
  * A utility class to help with building EditApplicantDescriptor objects.
@@ -35,8 +35,8 @@ public class EditApplicantDescriptorBuilder {
         descriptor.setName(applicant.getName());
         descriptor.setPhone(applicant.getPhone());
         descriptor.setDepartment(applicant.getDepartment());
-        descriptor.setJobTitle(applicant.getJobTitle());
-        descriptor.setTags(applicant.getTags());
+        descriptor.setPosition(applicant.getPosition());
+        descriptor.setInterviews(applicant.getInterviews());
     }
 
     /**
@@ -64,20 +64,20 @@ public class EditApplicantDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code JobTitle} of the {@code EditApplicantDescriptor} that we are building.
+     * Sets the {@code Position} of the {@code EditApplicantDescriptor} that we are building.
      */
-    public EditApplicantDescriptorBuilder withJobTitle(String jobTitle) {
-        descriptor.setJobTitle(new JobTitle(jobTitle));
+    public EditApplicantDescriptorBuilder withPosition(String position) {
+        descriptor.setPosition(new Position(position));
         return this;
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditApplicantDescriptor}
+     * Parses the {@code interviews} into a {@code Set<Interview>} and set it to the {@code EditApplicantDescriptor}
      * that we are building.
      */
-    public EditApplicantDescriptorBuilder withTags(String... tags) {
-        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
-        descriptor.setTags(tagSet);
+    public EditApplicantDescriptorBuilder withInterviews(String... interviews) {
+        Set<Interview> interviewSet = Stream.of(interviews).map(Interview::new).collect(Collectors.toSet());
+        descriptor.setInterviews(interviewSet);
         return this;
     }
 

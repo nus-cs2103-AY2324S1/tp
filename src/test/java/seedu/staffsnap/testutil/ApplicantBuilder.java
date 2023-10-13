@@ -5,10 +5,10 @@ import java.util.Set;
 
 import seedu.staffsnap.model.applicant.Applicant;
 import seedu.staffsnap.model.applicant.Department;
-import seedu.staffsnap.model.applicant.JobTitle;
 import seedu.staffsnap.model.applicant.Name;
 import seedu.staffsnap.model.applicant.Phone;
-import seedu.staffsnap.model.tag.Tag;
+import seedu.staffsnap.model.applicant.Position;
+import seedu.staffsnap.model.interview.Interview;
 import seedu.staffsnap.model.util.SampleDataUtil;
 
 /**
@@ -19,13 +19,13 @@ public class ApplicantBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_DEPARTMENT = "amy@gmail.com";
-    public static final String DEFAULT_JOB_TITLE = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_POSITION = "123, Jurong West Ave 6, #08-111";
 
     private Name name;
     private Phone phone;
     private Department department;
-    private JobTitle jobTitle;
-    private Set<Tag> tags;
+    private Position position;
+    private Set<Interview> interviews;
 
     /**
      * Creates a {@code ApplicantBuilder} with the default details.
@@ -34,8 +34,8 @@ public class ApplicantBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         department = new Department(DEFAULT_DEPARTMENT);
-        jobTitle = new JobTitle(DEFAULT_JOB_TITLE);
-        tags = new HashSet<>();
+        position = new Position(DEFAULT_POSITION);
+        interviews = new HashSet<>();
     }
 
     /**
@@ -45,8 +45,8 @@ public class ApplicantBuilder {
         name = applicantToCopy.getName();
         phone = applicantToCopy.getPhone();
         department = applicantToCopy.getDepartment();
-        jobTitle = applicantToCopy.getJobTitle();
-        tags = new HashSet<>(applicantToCopy.getTags());
+        position = applicantToCopy.getPosition();
+        interviews = new HashSet<>(applicantToCopy.getInterviews());
     }
 
     /**
@@ -58,18 +58,19 @@ public class ApplicantBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Applicant} that we are building.
+     * Parses the {@code interviews} into a {@code Set<Interview>} and set it to the {@code Applicant} that we are
+     * building.
      */
-    public ApplicantBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
+    public ApplicantBuilder withInterviews(String ... interviews) {
+        this.interviews = SampleDataUtil.getInterviewSet(interviews);
         return this;
     }
 
     /**
-     * Sets the {@code JobTitle} of the {@code Applicant} that we are building.
+     * Sets the {@code Position} of the {@code Applicant} that we are building.
      */
-    public ApplicantBuilder withJobTitle(String jobTitle) {
-        this.jobTitle = new JobTitle(jobTitle);
+    public ApplicantBuilder withPosition(String position) {
+        this.position = new Position(position);
         return this;
     }
 
@@ -90,7 +91,7 @@ public class ApplicantBuilder {
     }
 
     public Applicant build() {
-        return new Applicant(name, phone, department, jobTitle, tags);
+        return new Applicant(name, phone, department, position, interviews);
     }
 
 }

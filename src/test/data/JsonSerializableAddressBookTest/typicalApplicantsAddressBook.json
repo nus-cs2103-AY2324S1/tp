@@ -4,43 +4,43 @@
     "name" : "Alice Pauline",
     "phone" : "94351253",
     "department" : "alice@example.com",
-    "jobTitle" : "123, Jurong West Ave 6, #08-111",
-    "tags" : [ "friends" ]
+    "position" : "123, Jurong West Ave 6, #08-111",
+    "interviews" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
     "department" : "johnd@example.com",
-    "jobTitle" : "311, Clementi Ave 2, #02-25",
-    "tags" : [ "owesMoney", "friends" ]
+    "position" : "311, Clementi Ave 2, #02-25",
+    "interviews" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
     "department" : "heinz@example.com",
-    "jobTitle" : "wall street",
-    "tags" : [ ]
+    "position" : "wall street",
+    "interviews" : [ ]
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "department" : "cornelia@example.com",
-    "jobTitle" : "10th street",
-    "tags" : [ "friends" ]
+    "position" : "10th street",
+    "interviews" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
     "department" : "werner@example.com",
-    "jobTitle" : "michegan ave",
-    "tags" : [ ]
+    "position" : "michegan ave",
+    "interviews" : [ ]
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
     "department" : "lydia@example.com",
-    "jobTitle" : "little tokyo",
-    "tags" : [ ]
+    "position" : "little tokyo",
+    "interviews" : [ ]
   }, {
     "name" : "George Best",
     "phone" : "9482442",
     "department" : "anna@example.com",
-    "jobTitle" : "4th street",
-    "tags" : [ ]
+    "position" : "4th street",
+    "interviews" : [ ]
   } ]
 }

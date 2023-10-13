@@ -1,17 +1,17 @@
 package seedu.staffsnap.testutil;
 
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_DEPARTMENT;
-import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_JOB_TITLE;
+import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_INTERVIEW;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_POSITION;
 
 import java.util.Set;
 
 import seedu.staffsnap.logic.commands.AddCommand;
 import seedu.staffsnap.logic.commands.EditCommand.EditApplicantDescriptor;
 import seedu.staffsnap.model.applicant.Applicant;
-import seedu.staffsnap.model.tag.Tag;
+import seedu.staffsnap.model.interview.Interview;
 
 /**
  * A utility class for Applicant.
@@ -33,9 +33,9 @@ public class ApplicantUtil {
         sb.append(PREFIX_NAME + applicant.getName().fullName + " ");
         sb.append(PREFIX_PHONE + applicant.getPhone().value + " ");
         sb.append(PREFIX_DEPARTMENT + applicant.getDepartment().value + " ");
-        sb.append(PREFIX_JOB_TITLE + applicant.getJobTitle().value + " ");
-        applicant.getTags().stream().forEach(
-            s -> sb.append(PREFIX_TAG + s.tagName + " ")
+        sb.append(PREFIX_POSITION + applicant.getPosition().value + " ");
+        applicant.getInterviews().stream().forEach(
+            s -> sb.append(PREFIX_INTERVIEW + s.type + " ")
         );
         return sb.toString();
     }
@@ -49,13 +49,13 @@ public class ApplicantUtil {
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getDepartment().ifPresent(department -> sb.append(PREFIX_DEPARTMENT).append(department.value)
                 .append(" "));
-        descriptor.getJobTitle().ifPresent(jobTitle -> sb.append(PREFIX_JOB_TITLE).append(jobTitle.value).append(" "));
-        if (descriptor.getTags().isPresent()) {
-            Set<Tag> tags = descriptor.getTags().get();
-            if (tags.isEmpty()) {
-                sb.append(PREFIX_TAG);
+        descriptor.getPosition().ifPresent(position -> sb.append(PREFIX_POSITION).append(position.value).append(" "));
+        if (descriptor.getInterviews().isPresent()) {
+            Set<Interview> interviews = descriptor.getInterviews().get();
+            if (interviews.isEmpty()) {
+                sb.append(PREFIX_INTERVIEW);
             } else {
-                tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
+                interviews.forEach(s -> sb.append(PREFIX_INTERVIEW).append(s.type).append(" "));
             }
         }
         return sb.toString();

@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.staffsnap.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Applicant's department in the address book.
+ * Represents an Applicant's department in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidDepartment(String)}
  */
 public class Department {

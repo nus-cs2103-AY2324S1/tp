@@ -4,15 +4,15 @@ import static java.util.Objects.requireNonNull;
 import static seedu.staffsnap.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Applicant's jobTitle in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidJobTitle(String)}
+ * Represents a Applicant's position in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidPosition(String)}
  */
-public class JobTitle {
+public class Position {
 
-    public static final String MESSAGE_CONSTRAINTS = "JobTitles can take any values, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Positions can take any values, and it should not be blank";
 
     /*
-     * The first character of the jobTitle must not be a whitespace,
+     * The first character of the position must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "[^\\s].*";
@@ -20,20 +20,20 @@ public class JobTitle {
     public final String value;
 
     /**
-     * Constructs an {@code JobTitle}.
+     * Constructs an {@code Position}.
      *
-     * @param jobTitle A valid jobTitle.
+     * @param position A valid position.
      */
-    public JobTitle(String jobTitle) {
-        requireNonNull(jobTitle);
-        checkArgument(isValidJobTitle(jobTitle), MESSAGE_CONSTRAINTS);
-        value = jobTitle;
+    public Position(String position) {
+        requireNonNull(position);
+        checkArgument(isValidPosition(position), MESSAGE_CONSTRAINTS);
+        value = position;
     }
 
     /**
      * Returns true if a given string is a valid email.
      */
-    public static boolean isValidJobTitle(String test) {
+    public static boolean isValidPosition(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
@@ -49,12 +49,12 @@ public class JobTitle {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof JobTitle)) {
+        if (!(other instanceof Position)) {
             return false;
         }
 
-        JobTitle otherJobTitle = (JobTitle) other;
-        return value.equals(otherJobTitle.value);
+        Position otherPosition = (Position) other;
+        return value.equals(otherPosition.value);
     }
 
     @Override

@@ -12,10 +12,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.staffsnap.commons.exceptions.IllegalValueException;
 import seedu.staffsnap.model.applicant.Applicant;
 import seedu.staffsnap.model.applicant.Department;
-import seedu.staffsnap.model.applicant.JobTitle;
 import seedu.staffsnap.model.applicant.Name;
 import seedu.staffsnap.model.applicant.Phone;
-import seedu.staffsnap.model.tag.Tag;
+import seedu.staffsnap.model.applicant.Position;
+import seedu.staffsnap.model.interview.Interview;
 
 /**
  * Jackson-friendly version of {@link Applicant}.
@@ -27,22 +27,22 @@ class JsonAdaptedApplicant {
     private final String name;
     private final String phone;
     private final String department;
-    private final String jobTitle;
-    private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final String position;
+    private final List<JsonAdaptedInterview> interviews = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedApplicant} with the given applicant details.
      */
     @JsonCreator
     public JsonAdaptedApplicant(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("department") String department, @JsonProperty("jobTitle") String jobTitle,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("department") String department, @JsonProperty("position") String position,
+            @JsonProperty("interviews") List<JsonAdaptedInterview> interviews) {
         this.name = name;
         this.phone = phone;
         this.department = department;
-        this.jobTitle = jobTitle;
-        if (tags != null) {
-            this.tags.addAll(tags);
+        this.position = position;
+        if (interviews != null) {
+            this.interviews.addAll(interviews);
         }
     }
 
@@ -53,9 +53,9 @@ class JsonAdaptedApplicant {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         department = source.getDepartment().value;
-        jobTitle = source.getJobTitle().value;
-        tags.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
+        position = source.getPosition().value;
+        interviews.addAll(source.getInterviews().stream()
+                .map(JsonAdaptedInterview::new)
                 .collect(Collectors.toList()));
     }
 
@@ -65,9 +65,9 @@ class JsonAdaptedApplicant {
      * @throws IllegalValueException if there were any data constraints violated in the adapted applicant.
      */
     public Applicant toModelType() throws IllegalValueException {
-        final List<Tag> applicantTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tags) {
-            applicantTags.add(tag.toModelType());
+        final List<Interview> applicantInterviews = new ArrayList<>();
+        for (JsonAdaptedInterview interview : interviews) {
+            applicantInterviews.add(interview.toModelType());
         }
 
         if (name == null) {
@@ -95,17 +95,17 @@ class JsonAdaptedApplicant {
         }
         final Department modelDepartment = new Department(department);
 
-        if (jobTitle == null) {
+        if (position == null) {
             throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, JobTitle.class.getSimpleName()));
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Position.class.getSimpleName()));
         }
-        if (!JobTitle.isValidJobTitle(jobTitle)) {
-            throw new IllegalValueException(JobTitle.MESSAGE_CONSTRAINTS);
+        if (!Position.isValidPosition(position)) {
+            throw new IllegalValueException(Position.MESSAGE_CONSTRAINTS);
         }
-        final JobTitle modelJobTitle = new JobTitle(jobTitle);
+        final Position modelPosition = new Position(position);
 
-        final Set<Tag> modelTags = new HashSet<>(applicantTags);
-        return new Applicant(modelName, modelPhone, modelDepartment, modelJobTitle, modelTags);
+        final Set<Interview> modelInterviews = new HashSet<>(applicantInterviews);
+        return new Applicant(modelName, modelPhone, modelDepartment, modelPosition, modelInterviews);
     }
 
 }

@@ -2,14 +2,14 @@ package seedu.staffsnap.testutil;
 
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_DEPARTMENT_AMY;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_DEPARTMENT_BOB;
-import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_JOB_TITLE_AMY;
-import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_JOB_TITLE_BOB;
+import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_INTERVIEW_FRIEND;
+import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_INTERVIEW_HUSBAND;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_POSITION_AMY;
+import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_POSITION_BOB;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,36 +24,37 @@ import seedu.staffsnap.model.applicant.Applicant;
 public class TypicalApplicants {
 
     public static final Applicant ALICE = new ApplicantBuilder().withName("Alice Pauline")
-            .withJobTitle("123, Jurong West Ave 6, #08-111").withDepartment("alice@example.com")
+            .withPosition("123, Jurong West Ave 6, #08-111").withDepartment("alice@example.com")
             .withPhone("94351253")
-            .withTags("friends").build();
+            .withInterviews("friends").build();
     public static final Applicant BENSON = new ApplicantBuilder().withName("Benson Meier")
-            .withJobTitle("311, Clementi Ave 2, #02-25")
+            .withPosition("311, Clementi Ave 2, #02-25")
             .withDepartment("johnd@example.com").withPhone("98765432")
-            .withTags("owesMoney", "friends").build();
+            .withInterviews("owesMoney", "friends").build();
     public static final Applicant CARL = new ApplicantBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withDepartment("heinz@example.com").withJobTitle("wall street").build();
+            .withDepartment("heinz@example.com").withPosition("wall street").build();
     public static final Applicant DANIEL = new ApplicantBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withDepartment("cornelia@example.com").withJobTitle("10th street").withTags("friends").build();
+            .withDepartment("cornelia@example.com").withPosition("10th street").withInterviews("friends").build();
     public static final Applicant ELLE = new ApplicantBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withDepartment("werner@example.com").withJobTitle("michegan ave").build();
+            .withDepartment("werner@example.com").withPosition("michegan ave").build();
     public static final Applicant FIONA = new ApplicantBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withDepartment("lydia@example.com").withJobTitle("little tokyo").build();
+            .withDepartment("lydia@example.com").withPosition("little tokyo").build();
     public static final Applicant GEORGE = new ApplicantBuilder().withName("George Best").withPhone("9482442")
-            .withDepartment("anna@example.com").withJobTitle("4th street").build();
+            .withDepartment("anna@example.com").withPosition("4th street").build();
 
     // Manually added
     public static final Applicant HOON = new ApplicantBuilder().withName("Hoon Meier").withPhone("8482424")
-            .withDepartment("stefan@example.com").withJobTitle("little india").build();
+            .withDepartment("stefan@example.com").withPosition("little india").build();
     public static final Applicant IDA = new ApplicantBuilder().withName("Ida Mueller").withPhone("8482131")
-            .withDepartment("hans@example.com").withJobTitle("chicago ave").build();
+            .withDepartment("hans@example.com").withPosition("chicago ave").build();
 
     // Manually added - Applicant's details found in {@code CommandTestUtil}
     public static final Applicant AMY = new ApplicantBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-            .withDepartment(VALID_DEPARTMENT_AMY).withJobTitle(VALID_JOB_TITLE_AMY).withTags(VALID_TAG_FRIEND).build();
+            .withDepartment(VALID_DEPARTMENT_AMY).withPosition(VALID_POSITION_AMY)
+            .withInterviews(VALID_INTERVIEW_FRIEND).build();
     public static final Applicant BOB = new ApplicantBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-            .withDepartment(VALID_DEPARTMENT_BOB).withJobTitle(VALID_JOB_TITLE_BOB)
-            .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+            .withDepartment(VALID_DEPARTMENT_BOB).withPosition(VALID_POSITION_BOB)
+            .withInterviews(VALID_INTERVIEW_HUSBAND, VALID_INTERVIEW_FRIEND).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

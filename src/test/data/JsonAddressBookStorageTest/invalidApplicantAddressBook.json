@@ -3,6 +3,6 @@
     "name": "Applicant with invalid name field: Ha!ns Mu@ster",
     "phone": "9482424",
     "department": "hans@example.com",
-    "jobTitle": "4th street"
+    "position": "4th street"
   } ]
 }

@@ -35,11 +35,11 @@ public class ApplicantCard extends UiPart<Region> {
     @FXML
     private Label phone;
     @FXML
-    private Label jobTitle;
+    private Label position;
     @FXML
     private Label department;
     @FXML
-    private FlowPane tags;
+    private FlowPane interviews;
 
     /**
      * Creates a {@code ApplicantCode} with the given {@code Applicant} and index to display.
@@ -50,10 +50,10 @@ public class ApplicantCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(applicant.getName().fullName);
         phone.setText(applicant.getPhone().value);
-        jobTitle.setText(applicant.getJobTitle().value);
+        position.setText(applicant.getPosition().value);
         department.setText(applicant.getDepartment().value);
-        applicant.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        applicant.getInterviews().stream()
+                .sorted(Comparator.comparing(interview -> interview.type))
+                .forEach(interview -> interviews.getChildren().add(new Label(interview.type)));
     }
 }

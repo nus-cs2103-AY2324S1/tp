@@ -15,24 +15,24 @@ import org.junit.jupiter.api.Test;
 
 import seedu.staffsnap.logic.parser.exceptions.ParseException;
 import seedu.staffsnap.model.applicant.Department;
-import seedu.staffsnap.model.applicant.JobTitle;
 import seedu.staffsnap.model.applicant.Name;
 import seedu.staffsnap.model.applicant.Phone;
-import seedu.staffsnap.model.tag.Tag;
+import seedu.staffsnap.model.applicant.Position;
+import seedu.staffsnap.model.interview.Interview;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
-    private static final String INVALID_JOB_TITLE = " ";
+    private static final String INVALID_POSITION = " ";
     private static final String INVALID_DEPARTMENT = "example.com";
-    private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_INTERVIEW = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
-    private static final String VALID_JOB_TITLE = "123 Main Street #0505";
+    private static final String VALID_POSITION = "123 Main Street #0505";
     private static final String VALID_DEPARTMENT = "rachel@example.com";
-    private static final String VALID_TAG_1 = "friend";
-    private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_INTERVIEW_1 = "friend";
+    private static final String VALID_INTERVIEW_2 = "neighbour";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -103,26 +103,26 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseJobTitle_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseJobTitle((String) null));
+    public void parsePosition_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parsePosition((String) null));
     }
 
     @Test
-    public void parseJobTitle_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseJobTitle(INVALID_JOB_TITLE));
+    public void parsePosition_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePosition(INVALID_POSITION));
     }
 
     @Test
-    public void parseJobTitle_validValueWithoutWhitespace_returnsJobTitle() throws Exception {
-        JobTitle expectedJobTitle = new JobTitle(VALID_JOB_TITLE);
-        assertEquals(expectedJobTitle, ParserUtil.parseJobTitle(VALID_JOB_TITLE));
+    public void parsePosition_validValueWithoutWhitespace_returnsPosition() throws Exception {
+        Position expectedPosition = new Position(VALID_POSITION);
+        assertEquals(expectedPosition, ParserUtil.parsePosition(VALID_POSITION));
     }
 
     @Test
-    public void parseJobTitle_validValueWithWhitespace_returnsTrimmedJobTitle() throws Exception {
-        String jobTitleWithWhitespace = WHITESPACE + VALID_JOB_TITLE + WHITESPACE;
-        JobTitle expectedJobTitle = new JobTitle(VALID_JOB_TITLE);
-        assertEquals(expectedJobTitle, ParserUtil.parseJobTitle(jobTitleWithWhitespace));
+    public void parsePosition_validValueWithWhitespace_returnsTrimmedPosition() throws Exception {
+        String positionWithWhitespace = WHITESPACE + VALID_POSITION + WHITESPACE;
+        Position expectedPosition = new Position(VALID_POSITION);
+        assertEquals(expectedPosition, ParserUtil.parsePosition(positionWithWhitespace));
     }
 
     @Test
@@ -149,48 +149,51 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseTag_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseTag(null));
+    public void parseInterview_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseInterview(null));
     }
 
     @Test
-    public void parseTag_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTag(INVALID_TAG));
+    public void parseInterview_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseInterview(INVALID_INTERVIEW));
     }
 
     @Test
-    public void parseTag_validValueWithoutWhitespace_returnsTag() throws Exception {
-        Tag expectedTag = new Tag(VALID_TAG_1);
-        assertEquals(expectedTag, ParserUtil.parseTag(VALID_TAG_1));
+    public void parseInterview_validValueWithoutWhitespace_returnsInterview() throws Exception {
+        Interview expectedInterview = new Interview(VALID_INTERVIEW_1);
+        assertEquals(expectedInterview, ParserUtil.parseInterview(VALID_INTERVIEW_1));
     }
 
     @Test
-    public void parseTag_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
-        String tagWithWhitespace = WHITESPACE + VALID_TAG_1 + WHITESPACE;
-        Tag expectedTag = new Tag(VALID_TAG_1);
-        assertEquals(expectedTag, ParserUtil.parseTag(tagWithWhitespace));
+    public void parseInterview_validValueWithWhitespace_returnsTrimmedInterview() throws Exception {
+        String interviewWithWhitespace = WHITESPACE + VALID_INTERVIEW_1 + WHITESPACE;
+        Interview expectedInterview = new Interview(VALID_INTERVIEW_1);
+        assertEquals(expectedInterview, ParserUtil.parseInterview(interviewWithWhitespace));
     }
 
     @Test
-    public void parseTags_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseTags(null));
+    public void parseInterviews_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseInterviews(null));
     }
 
     @Test
-    public void parseTags_collectionWithInvalidTags_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, INVALID_TAG)));
+    public void parseInterviews_collectionWithInvalidInterviews_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil
+                .parseInterviews(Arrays.asList(VALID_INTERVIEW_1, INVALID_INTERVIEW)));
     }
 
     @Test
-    public void parseTags_emptyCollection_returnsEmptySet() throws Exception {
-        assertTrue(ParserUtil.parseTags(Collections.emptyList()).isEmpty());
+    public void parseInterviews_emptyCollection_returnsEmptySet() throws Exception {
+        assertTrue(ParserUtil.parseInterviews(Collections.emptyList()).isEmpty());
     }
 
     @Test
-    public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
-        Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
-        Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
+    public void parseInterviews_collectionWithValidInterviews_returnsInterviewSet() throws Exception {
+        Set<Interview> actualInterviewSet = ParserUtil
+                .parseInterviews(Arrays.asList(VALID_INTERVIEW_1, VALID_INTERVIEW_2));
+        Set<Interview> expectedInterviewSet = new HashSet<Interview>(
+                Arrays.asList(new Interview(VALID_INTERVIEW_1), new Interview(VALID_INTERVIEW_2)));
 
-        assertEquals(expectedTagSet, actualTagSet);
+        assertEquals(expectedInterviewSet, actualInterviewSet);
     }
 }

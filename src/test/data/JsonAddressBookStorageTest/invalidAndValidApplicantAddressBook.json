@@ -3,11 +3,11 @@
     "name": "Valid Applicant",
     "phone": "9482424",
     "department": "hans@example.com",
-    "jobTitle": "4th street"
+    "position": "4th street"
   }, {
     "name": "Applicant With Invalid Phone Field",
     "phone": "948asdf2424",
     "department": "hans@example.com",
-    "jobTitle": "4th street"
+    "position": "4th street"
   } ]
 }

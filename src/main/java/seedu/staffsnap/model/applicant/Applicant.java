@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.staffsnap.commons.util.ToStringBuilder;
-import seedu.staffsnap.model.tag.Tag;
+import seedu.staffsnap.model.interview.Interview;
 
 /**
  * Represents an Applicant in the address book.
@@ -18,22 +18,22 @@ public class Applicant {
 
     // Identity fields
     private final Name name;
-    private final Phone phone; //identifier
-    private final Department department; //department
+    private final Phone phone; // to be changed to identifier
     // Data fields
-    private final JobTitle jobTitle;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Department department;
+    private final Position position;
+    private final Set<Interview> interviews = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Applicant(Name name, Phone phone, Department department, JobTitle jobTitle, Set<Tag> tags) {
-        requireAllNonNull(name, phone, department, jobTitle, tags);
+    public Applicant(Name name, Phone phone, Department department, Position position, Set<Interview> interviews) {
+        requireAllNonNull(name, phone, department, position, interviews);
         this.name = name;
         this.phone = phone;
         this.department = department;
-        this.jobTitle = jobTitle;
-        this.tags.addAll(tags);
+        this.position = position;
+        this.interviews.addAll(interviews);
     }
 
     public Name getName() {
@@ -48,16 +48,16 @@ public class Applicant {
         return department;
     }
 
-    public JobTitle getJobTitle() {
-        return jobTitle;
+    public Position getPosition() {
+        return position;
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable interview set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Set<Interview> getInterviews() {
+        return Collections.unmodifiableSet(interviews);
     }
 
     /**
@@ -92,14 +92,14 @@ public class Applicant {
         return name.equals(otherApplicant.name)
                 && phone.equals(otherApplicant.phone)
                 && department.equals(otherApplicant.department)
-                && jobTitle.equals(otherApplicant.jobTitle)
-                && tags.equals(otherApplicant.tags);
+                && position.equals(otherApplicant.position)
+                && interviews.equals(otherApplicant.interviews);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, department, jobTitle, tags);
+        return Objects.hash(name, phone, department, position, interviews);
     }
 
     @Override
@@ -108,8 +108,8 @@ public class Applicant {
                 .add("name", name)
                 .add("phone", phone)
                 .add("department", department)
-                .add("jobTitle", jobTitle)
-                .add("tags", tags)
+                .add("position", position)
+                .add("interviews", interviews)
                 .toString();
     }
 
