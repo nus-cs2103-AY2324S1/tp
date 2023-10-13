@@ -1,10 +1,8 @@
 package seedu.address.model.person;
 
-import seedu.address.commons.util.StringUtil;
-import seedu.address.commons.util.ToStringBuilder;
-
-import java.util.List;
 import java.util.function.Predicate;
+
+import seedu.address.commons.util.ToStringBuilder;
 
 /**
  * Tests that a {@code Person}'s {@code Gender} matches either male or female.
