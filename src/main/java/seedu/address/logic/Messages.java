@@ -43,8 +43,13 @@ public class Messages {
                 .append(person.getEmail())
                 .append("; Address: ")
                 .append(person.getAddress())
-                .append("; Animal name: ");
+                .append("; Availability: ");
 
+        if (person.getAvailability() != null) {
+            builder.append(person.getAvailability());
+        }
+
+        builder.append("; Animal name: ");
         if (person.getAnimalName() != null) {
             builder.append(person.getAnimalName());
         }

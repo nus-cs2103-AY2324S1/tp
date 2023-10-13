@@ -41,6 +41,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label animalName;
     @FXML
+    private Label availability;
+    @FXML
     private FlowPane tags;
 
     /**
@@ -59,5 +61,7 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         animalName.setText(person.getAnimalName().isPresent() ? "Fostering: " + person.getAnimalName().get().fullName
                 : "Fostering: nil");
+        availability.setText(person.getAvailability().isPresent() ? "Availability: " + person.getAvailability().get().value
+                : "Availability: nil");
     }
 }

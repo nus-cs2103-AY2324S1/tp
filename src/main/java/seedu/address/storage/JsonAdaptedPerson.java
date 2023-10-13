@@ -7,11 +7,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -27,6 +23,7 @@ class JsonAdaptedPerson {
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final String animalName;
+    private final String availability;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -34,7 +31,8 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("animalName") String animalName) {
+            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("animalName") String animalName,
+                             @JsonProperty("availability") String availability) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -43,6 +41,7 @@ class JsonAdaptedPerson {
             this.tags.addAll(tags);
         }
         this.animalName = animalName != null ? animalName : "nil";
+        this.availability = availability != null ? availability : "nil";
     }
 
     /**
@@ -57,6 +56,7 @@ class JsonAdaptedPerson {
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
         animalName = source.getAnimalName().isPresent() ? source.getAnimalName().get().fullName : null;
+        availability = source.getAvailability().isPresent() ? source.getAvailability().get().value : null;
     }
 
     /**
@@ -105,8 +105,9 @@ class JsonAdaptedPerson {
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
         Name modelAnimalName = animalName != null ? new Name(animalName) : null;
+        Availability modelAvailability = availability != null ? new Availability(availability) : null;
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelAnimalName, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelAnimalName, modelAvailability, modelTags);
     }
 
 }
