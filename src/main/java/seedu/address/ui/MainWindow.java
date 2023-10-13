@@ -43,8 +43,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
-
-    private ShowPersonPanel showPersonPanel;
+    private ShowPersonWindow showPersonWindow;
 
     @FXML
     private AnchorPane showPersonPanelPlaceholder;
@@ -80,6 +79,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        showPersonWindow = new ShowPersonWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -136,16 +136,6 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
-        // Placeholder values to test JavaFX
-        String DEFAULT_NAME = "Amy Bee";
-        String DEFAULT_PHONE = "85355255";
-        String DEFAULT_EMAIL = "amy@gmail.com";
-        String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-        showPersonPanel = new ShowPersonPanel(new Person(new Name(DEFAULT_NAME), new Phone(DEFAULT_PHONE),
-                            new Email(DEFAULT_EMAIL), new Address(DEFAULT_ADDRESS),
-                            new HashSet<>(Arrays.asList(new Subject("PHYSICS"), new Subject("MATHEMATICS"))),
-                            new HashSet<>()));
-        showPersonPanelPlaceholder.getChildren().add(showPersonPanel.getRoot());
     }
 
     /**
@@ -216,6 +206,20 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("An error occurred while executing command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
+        }
+    }
+
+    /**
+     * Opens the Person Details window or focuses on it if it's already opened.
+     *
+     * @param person The person to show the details of.
+     */
+    public void handleShowPerson(Person person) {
+        showPersonWindow.setPersonDetails(person);
+        if (!showPersonWindow.isShowing()) {
+            showPersonWindow.show();
+        } else {
+            showPersonWindow.focus();
         }
     }
 }

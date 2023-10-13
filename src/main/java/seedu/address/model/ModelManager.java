@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.ui.Ui;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,6 +23,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private Ui ui = null;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -111,6 +113,8 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -126,6 +130,21 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    //=========== Ui Changing =============================================================
+
+    public void linkUi(Ui ui) {
+        this.ui = ui;
+    }
+
+    @Override
+    public void showPerson(Person person) {
+        requireNonNull(person);
+        if (ui != null) {
+            ui.showPersonDetails(person);
+        }
+
     }
 
     @Override
@@ -144,5 +163,6 @@ public class ModelManager implements Model {
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
+
 
 }

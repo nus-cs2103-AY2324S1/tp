@@ -11,6 +11,7 @@ import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
+import seedu.address.model.person.Person;
 
 /**
  * The manager of the UI component.
@@ -83,6 +84,16 @@ public class UiManager implements Ui {
         showAlertDialogAndWait(Alert.AlertType.ERROR, title, e.getMessage(), e.toString());
         Platform.exit();
         System.exit(1);
+    }
+
+
+    /**
+     * Shows the details of the selected person.
+     *
+     * @param person The specified person to show the details of.
+     */
+    public void showPersonDetails(Person person) {
+        mainWindow.handleShowPerson(person);
     }
 
 }
