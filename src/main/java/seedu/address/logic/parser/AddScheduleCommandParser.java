@@ -1,9 +1,9 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTOR_INDEX;
 
 import java.util.stream.Stream;
 
@@ -24,23 +24,24 @@ public class AddScheduleCommandParser implements Parser<AddScheduleCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddScheduleCommand parse(String args) throws ParseException {
-        Index tutorIndex;
+        requireNonNull(args);
 
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_TUTOR_INDEX, PREFIX_START_TIME, PREFIX_END_TIME);
+                ArgumentTokenizer.tokenize(args, PREFIX_START_TIME, PREFIX_END_TIME);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_TUTOR_INDEX, PREFIX_START_TIME, PREFIX_END_TIME)
-                || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddScheduleCommand.MESSAGE_USAGE));
-        }
-
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TUTOR_INDEX, PREFIX_START_TIME, PREFIX_END_TIME);
+        Index tutorIndex;
 
         try {
-            tutorIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_TUTOR_INDEX).get());
+            tutorIndex = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddScheduleCommand.MESSAGE_USAGE), pe);
+        }
+
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_START_TIME, PREFIX_END_TIME);
+
+        if (!arePrefixesPresent(argMultimap, PREFIX_START_TIME, PREFIX_END_TIME)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddScheduleCommand.MESSAGE_USAGE));
         }
 
         StartTime startTime = ParserUtil.parseStartTime(argMultimap.getValue(PREFIX_START_TIME).get());

@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTOR_INDEX;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -21,11 +20,11 @@ public class AddScheduleCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a schedule to the address book for a tutor "
             + "by the index number used in the displayed tutor list.\n"
             + "Parameters: "
-            + PREFIX_TUTOR_INDEX + "TUTOR_INDEX (must be a positive integer)"
+            + "TUTOR_INDEX (must be a positive integer)"
             + PREFIX_START_TIME + "START_TIME "
             + PREFIX_END_TIME + "END_TIME\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_TUTOR_INDEX + "1 "
+            + "1 "
             + PREFIX_START_TIME + "2023-09-15T09:00:00 "
             + PREFIX_END_TIME + "2023-09-15T11:00:00";
 
