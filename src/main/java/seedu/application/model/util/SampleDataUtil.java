@@ -12,11 +12,12 @@ import seedu.application.model.job.Role;
  */
 public class SampleDataUtil {
 
+
     public static Job[] getSampleJobs() {
         return new Job[]{
-                new Job(new Role("Software Engineer"), new Company("Google"), Deadline.EMPTY_DEADLINE),
-                new Job(new Role("Cleaner"), new Company("NUS"), Deadline.EMPTY_DEADLINE),
-                new Job(new Role("Chef"), new Company("McDonalds"), Deadline.EMPTY_DEADLINE)
+            new Job(new Role("Software Engineer"), new Company("Google"), Deadline.EMPTY_DEADLINE),
+            new Job(new Role("Cleaner"), new Company("NUS"), Deadline.EMPTY_DEADLINE),
+            new Job(new Role("Chef"), new Company("McDonalds"), Deadline.EMPTY_DEADLINE)
         };
     }
 

@@ -35,7 +35,8 @@ public class DeadlineCommandTest {
         Job firstJob = model.getFilteredJobList().get(INDEX_FIRST_JOB.getZeroBased());
         Job editedJob = new JobBuilder(firstJob).withDeadline(DEADLINE_STUB).build();
 
-        DeadlineCommand deadlineCommand = new DeadlineCommand(INDEX_FIRST_JOB, new Deadline(editedJob.getDeadline().deadline));
+        DeadlineCommand deadlineCommand = new DeadlineCommand(INDEX_FIRST_JOB,
+            new Deadline(editedJob.getDeadline().deadline));
 
         String expectedMessage = String.format(DeadlineCommand.MESSAGE_SET_DEADLINE_SUCCESS, editedJob);
 
@@ -51,9 +52,10 @@ public class DeadlineCommandTest {
 
         Job firstJob = model.getFilteredJobList().get(INDEX_FIRST_JOB.getZeroBased());
         Job editedJob = new JobBuilder(model.getFilteredJobList().get(INDEX_FIRST_JOB.getZeroBased()))
-                .withDeadline(DEADLINE_STUB).build();
+            .withDeadline(DEADLINE_STUB).build();
 
-        DeadlineCommand deadlineCommand = new DeadlineCommand(INDEX_FIRST_JOB, new Deadline(editedJob.getDeadline().deadline));
+        DeadlineCommand deadlineCommand = new DeadlineCommand(INDEX_FIRST_JOB,
+            new Deadline(editedJob.getDeadline().deadline));
 
         String expectedMessage = String.format(DeadlineCommand.MESSAGE_SET_DEADLINE_SUCCESS, editedJob);
 

@@ -2,15 +2,18 @@
 layout: page
 title: User Guide
 ---
+
 * Table of Contents
   {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
-JobFindr is a **Contact Book app** for NUS fresh graduates who are looking for jobs. 
+JobFindr is a **Contact Book app** for NUS fresh graduates who are looking for jobs.
 
-It simplifies _contact management_, provides _reminders_ and enhances _organisation_, helping users _stay competitive_ in the job market.
-The project simulates an ongoing software project for a desktop application (called _JobFindr_) used for managing job applications.
+It simplifies _contact management_, provides _reminders_ and enhances _organisation_, helping users _stay competitive_
+in the job market.
+The project simulates an ongoing software project for a desktop application (called _JobFindr_) used for managing job
+applications.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -22,22 +25,25 @@ The project simulates an ongoing software project for a desktop application (cal
 
 3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar jobfindr.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar jobfindr.jar` command
+   to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
+   open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe`
+      to the Address Book.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
-   * `clear` : Deletes all contacts.
+    * `clear` : Deletes all contacts.
 
-   * `exit` : Exits the app.
+    * `exit` : Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
 
@@ -61,10 +67,13 @@ The project simulates an ongoing software project for a desktop application (cal
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be
+  ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
+  as space characters surrounding line-breaks may be omitted when copied over to the application.
+
 </div>
 
 ---
@@ -83,9 +92,11 @@ print “Application to (Company name) has been added.”
 
 **Failed command:**
 print “Error: ” and error message for:
+
 * `NAME` is not in the command: “Name of company was not included in the command.”
 
 **Examples:**
+
 * `add n/Microsoft p/98765432 e/microsoft@gmail.com a/182 Cecil St, #13-01, Singapore 069547`
   Adds a company called microsoft, adds their phone number, email and address
 * `add n/The Coca-Cola Company e/cocacola@yahoo.com`
@@ -110,10 +121,12 @@ print “Application to (Company name) has been deleted.”
 
 **Failed command:**
 print “Error: ” and error message for:
+
 * `INDEX` is not a positive integer: “Index must be a positive integer.”
 * `INDEX` is larger than list size: “No such company at index (`INDEX`).”
 
 **Examples:**
+
 * `list` followed by `delete 2`
   Deletes the 2nd application in the list.
 
@@ -132,6 +145,7 @@ List out all applications to companies in the list with index.
 
 **Failed command:**
 print “Error: ” and error message for:
+
 * List is empty: “List is empty.”
 * Arguments passed after the list command: “Unexpected arguments.”
 
@@ -155,10 +169,12 @@ print “Application to (Company name) has been marked as `STATUS`.”
 
 **Failed command:**
 print “Error: ” and error message for:
+
 * `INDEX` is not a positive integer: “Index must be a positive integer.”
 * `INDEX` is larger than list size: “No such company at index (`INDEX`).”
 
 **Examples:**
+
 * `mark 1 submitted`
   Marks the status of the company application at index 1 as submitted.
 * `mark 2 rejected`
@@ -173,39 +189,38 @@ print “Error: ” and error message for:
 
 Sets submission deadline for an existing application in the list.
 
-**Format:** `set deadline INDEX d/DEADLINE`
+**Format:** `deadline INDEX d/DEADLINE`
 
 * Sets deadline for the existing application at the specified `INDEX`.
 * The `INDEX` refers to the index number shown in the displayed application list.
 * The `INDEX` must be a _positive integer_ 1, 2, 3, …​
-* `DEADLINE` must be provided in the accepted `DATETIME` Format as listed below:
-  - Nov 12 2022 1200
-  - 12 Nov 2022 1200 
-  - 2022-11-12 1200
-  - 12/11/2022 1200
+* `DEADLINE` must be provided in the accepted `DATETIME` Format: Nov 12 2022 1200
 
 **Successful command:**
 print “(Company Name)’s application deadline has been set to `DEADLINE`.”
 
 **Failed command:**
 print “Error: ” and error message:
+
 * `INDEX` is not a positive integer: “Index must be a positive integer.”
 * `INDEX` is larger than list size: “No such company at index (index).”
 
 **Examples:**
-* `setdeadline 1 d/Nov 12 2022 1200`
+
+* `deadline 1 d/Nov 12 2022 1200`
   Sets deadline for application at index 1 to be Nov 12 2022 1200.
 
 **UI mockup:**
-  ![DeadlineCommand](images/user-guide/DeadlineCommand.png)
+![DeadlineCommand](images/user-guide/DeadlineCommand.png)
 
 --------------------------------------------------------------------------------------------------------------------
+
 ## Command summary
 
-| Action          | Format                                        |
-|-----------------|-----------------------------------------------|
-| **Add**         | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS` |
-| **Delete**      | `delete INDEX`                                |
-| **List**        | `list`                                        |
-| **Mark**        | `mark INDEX s/STATUS`                         |
-| **SetDeadline** | `set deadline INDEX d/DEADLINE`               |
+| Action       | Format                                        |
+|--------------|-----------------------------------------------|
+| **Add**      | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS` |
+| **Delete**   | `delete INDEX`                                |
+| **List**     | `list`                                        |
+| **Mark**     | `mark INDEX s/STATUS`                         |
+| **Deadline** | `deadline INDEX d/DEADLINE`                   |

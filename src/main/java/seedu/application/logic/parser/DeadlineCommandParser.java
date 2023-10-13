@@ -28,14 +28,16 @@ public class DeadlineCommandParser implements Parser<DeadlineCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DEADLINE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_DEADLINE)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeadlineCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeadlineCommand.MESSAGE_USAGE));
         }
 
         Index index;
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (IllegalValueException ive) {
-            throw new ParseException(String.format(MESSAGE_INVALID_JOB_DISPLAYED_INDEX, DeadlineCommand.MESSAGE_USAGE), ive);
+            throw new ParseException(String.format(MESSAGE_INVALID_JOB_DISPLAYED_INDEX,
+                DeadlineCommand.MESSAGE_USAGE), ive);
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_DEADLINE);
@@ -52,3 +54,4 @@ public class DeadlineCommandParser implements Parser<DeadlineCommand> {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }
+

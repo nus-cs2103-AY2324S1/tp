@@ -2,8 +2,9 @@
 layout: page
 title: Developer Guide
 ---
+
 * Table of Contents
-{:toc}
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -13,10 +14,10 @@ title: Developer Guide
 
 **Target user profile**:
 
-* NUS fresh graduates who are looking for jobs 
-* Has a need to manage a significant number of job applications 
-* Prefers desktop apps over other types 
-* Able to type fast 
+* NUS fresh graduates who are looking for jobs
+* Has a need to manage a significant number of job applications
+* Prefers desktop apps over other types
+* Able to type fast
 * Prefers typing to mouse interactions
 * Reasonably comfortable using CLI apps
 
@@ -51,12 +52,14 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 **Use case: Add an application**
 
 _MSS_
+
 1. User requests to add an application, specifying the company name
 2. System adds the application
 
    Use case ends.
 
 _Extensions_
+
 * 1a. The company is not specified
 
   Use case ends.
@@ -66,6 +69,7 @@ _Extensions_
 **Use case: Set deadline for an application**
 
 _MSS_
+
 1. User requests to list applications
 2. System shows a list of applications
 3. User requests to set a deadline for an application, specifying an index and deadline
@@ -74,20 +78,22 @@ _MSS_
    Use case ends.
 
 _Extensions_
-* 2a. The list is empty. 
+
+* 2a. The list is empty.
 
   Use case ends.
 
-* 3a. The given index/deadline is invalid. 
-  * 3a1. System shows an error message. 
-  
-    Use case resumes at step 3.
+* 3a. The given index/deadline is invalid.
+    * 3a1. System shows an error message.
+
+      Use case resumes at step 3.
 
 ---
 
 **Use case: Mark an application**
 
 _MSS_
+
 1. User requests to list applications
 2. System shows a list of applications
 3. User requests to mark an application in the list, specifying an index and status
@@ -96,6 +102,7 @@ _MSS_
    Use case ends.
 
 _Extensions_
+
 * 2a. The list is empty.
 
   Use case ends.
@@ -110,6 +117,7 @@ _Extensions_
 **Use case: Delete an application**
 
 _MSS_
+
 1. User requests to list applications
 2. System shows a list of applications
 3. User requests to delete an application in the list, specifying an index
@@ -118,6 +126,7 @@ _MSS_
    Use case ends.
 
 _Extensions_
+
 * 2a. The list is empty.
 
   Use case ends.
@@ -132,11 +141,11 @@ _Extensions_
 **Use case: List applications**
 
 _MSS_
+
 1. User requests to list applications
 2. System shows a list of applications
 
    Use case ends.
-
 
 ---
 
@@ -147,9 +156,10 @@ _MSS_
 ### Non-Functional Requirements
 
 1. Should work on any mainstream OS as long as it has Java 11 or above installed.
-2. A user with above-average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse. 
-3. The system should respond to the user’s command within two seconds. 
-4. The user interface should be intuitive enough for users who are first-time users. 
+2. A user with above-average typing speed for regular English text (i.e. not code, not system admin commands) should be
+   able to accomplish most of the tasks faster using commands than using the mouse.
+3. The system should respond to the user’s command within two seconds.
+4. The user interface should be intuitive enough for users who are first-time users.
 5. The project is expected to adhere to a schedule that delivers a milestone set every two weeks.
 
 *{More to be added}*

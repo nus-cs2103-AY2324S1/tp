@@ -12,21 +12,16 @@ import seedu.application.commons.util.AppUtil;
  * Guarantees: immutable; is valid as declared in {@link #isValidDeadline(String)}
  */
 public class Deadline {
+
     public static final String MESSAGE_CONSTRAINTS =
-            "Deadline should be in valid DateTime format: "
-                    + "MMMM dd yyyy HHmm\n"
-                    + "Eg. Dec 31 2030 1200";
+        "Deadline should be in valid DateTime format: "
+            + "MMMM dd yyyy HHmm\n"
+            + "Eg. Dec 31 2030 1200";
 
-    /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String VALIDATION_REGEX = "[^\\s].*";
-
-    public static String DEFAULT_DATETIME_FORMAT = "MMM dd yyyy HHmm";
-    public static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DEFAULT_DATETIME_FORMAT);
     public static final String TO_ADD_DEADLINE = "TO_ADD_DEADLINE";
     public static final Deadline EMPTY_DEADLINE = new Deadline(TO_ADD_DEADLINE);
+    public static final String DEFAULT_DATETIME_FORMAT = "MMM dd yyyy HHmm";
+    public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern(DEFAULT_DATETIME_FORMAT);
 
     public final String deadline;
 
@@ -54,10 +49,10 @@ public class Deadline {
             return true;
         }
         try {
-            LocalDateTime dateTime = LocalDateTime.parse(test, dateTimeFormatter);
+            LocalDateTime dateTime = LocalDateTime.parse(test, DATE_TIME_FORMATTER);
             LocalDateTime current = LocalDateTime.now();
-            return dateTime.format(dateTimeFormatter).equals(test)
-                    && dateTime.isAfter(current);
+            return dateTime.format(DATE_TIME_FORMATTER).equals(test)
+                && dateTime.isAfter(current);
         } catch (Exception e) {
             return false;
         }
@@ -75,8 +70,8 @@ public class Deadline {
         if (isEmptyDeadline(deadline)) {
             return TO_ADD_DEADLINE;
         } else {
-            LocalDateTime parsedDeadline = LocalDateTime.parse(deadline, dateTimeFormatter);
-            return parsedDeadline.format(dateTimeFormatter);
+            LocalDateTime parsedDeadline = LocalDateTime.parse(deadline, DATE_TIME_FORMATTER);
+            return parsedDeadline.format(DATE_TIME_FORMATTER);
         }
     }
 
@@ -99,6 +94,4 @@ public class Deadline {
     public int hashCode() {
         return deadline.hashCode();
     }
-
-
 }

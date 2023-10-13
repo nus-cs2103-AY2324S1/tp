@@ -10,6 +10,10 @@ import seedu.application.model.Model;
 import seedu.application.model.job.Deadline;
 import seedu.application.model.job.Job;
 
+/**
+ * Sets the deadline for an existing job application in the list.
+ * The existing deadline will be overwritten by the input deadline.
+ */
 public class DeadlineCommand extends Command {
 
     public static final String COMMAND_WORD = "deadline";
@@ -28,8 +32,10 @@ public class DeadlineCommand extends Command {
     private final Deadline deadline;
 
     /**
-     * @param index    of the job in the job list to edit the deadline
-     * @param deadline of the job to be updated to
+     * Creates a new DeadlineCommand with the specified index and deadline.
+     *
+     * @param index    The index of the job in the job list to edit the deadline.
+     * @param deadline The deadline of the job to be updated to.
      */
     public DeadlineCommand(Index index, Deadline deadline) {
         requireAllNonNull(index, deadline);
@@ -37,6 +43,9 @@ public class DeadlineCommand extends Command {
         this.deadline = deadline;
     }
 
+    /**
+     * Creates a new DeadlineCommand with the specified index and deadline.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         List<Job> lastShownList = model.getFilteredJobList();
@@ -67,6 +76,12 @@ public class DeadlineCommand extends Command {
         return String.format(message, jobToEdit);
     }
 
+    /**
+     * Checks if this DeadlineCommand is equal to another object.
+     *
+     * @param other The object to compare to.
+     * @return True if the objects are equal, false otherwise.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
