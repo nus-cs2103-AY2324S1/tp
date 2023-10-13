@@ -84,4 +84,10 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Date> predicate);
+
+    /**
+     * Greets the user with a welcome message upon initial launch of app.
+     * Returns a String of welcome message.
+     */
+    String getWelcomeMessage();
 }

@@ -174,6 +174,7 @@ public class MainApp extends Application {
         ui.start(primaryStage);
     }
 
+
     @Override
     public void stop() {
         logger.info("============================ [ Stopping Height Book ] =============================");

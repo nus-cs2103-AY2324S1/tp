@@ -18,6 +18,8 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d dates listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String WELCOME_MESSAGE = "Hey there, fabulous single!" + "\n"
+            + "Get ready to embark on an exciting journey with LoveBook to find your perfect match ❤︎₊ ⊹";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

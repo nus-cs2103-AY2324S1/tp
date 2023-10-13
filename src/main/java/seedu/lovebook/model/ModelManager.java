@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.lovebook.commons.core.GuiSettings;
 import seedu.lovebook.commons.core.LogsCenter;
+import seedu.lovebook.logic.Messages;
 import seedu.lovebook.model.person.Date;
 
 /**
@@ -126,6 +127,11 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Date> predicate) {
         requireNonNull(predicate);
         filteredDates.setPredicate(predicate);
+    }
+
+    @Override
+    public String getWelcomeMessage() {
+        return Messages.WELCOME_MESSAGE;
     }
 
     @Override

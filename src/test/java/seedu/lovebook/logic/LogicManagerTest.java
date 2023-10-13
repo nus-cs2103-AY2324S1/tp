@@ -87,6 +87,13 @@ public class LogicManagerTest {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
     }
 
+    @Test
+    public void executeGetWelcomeMessage() {
+        String expected = "Hey there, fabulous single!" + "\n"
+                + "Get ready to embark on an exciting journey with LoveBook to find your perfect match ❤︎₊ ⊹";
+        assertEquals(expected, logic.getWelcomeMessage());
+    }
+
     /**
      * Executes the command and confirms that
      * - no exceptions are thrown <br>
