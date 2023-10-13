@@ -1,16 +1,17 @@
 package seedu.flashlingo.storage;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import seedu.flashlingo.commons.exceptions.IllegalValueException;
 import seedu.flashlingo.model.flashcard.FlashCard;
 import seedu.flashlingo.model.flashcard.OriginalWord;
 import seedu.flashlingo.model.flashcard.Translation;
 import seedu.flashlingo.model.tag.Tag;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 /**
  * Jackson-friendly version of {@link FlashCard}.
@@ -47,7 +48,7 @@ public class JsonAdaptedFlashCard {
         originalWord = source.getOriginalWord().toString();
         translatedWord = source.getTranslatedWord().toString();
         whenToReview = source.getWhenToReview().toString();
-        //FIXME: bad method names, optimize
+        //Todo: bad method names, optimize
         level = source.getLevel().getLevel();
         toDelete = source.getToDelete() ? "T" : "F";
     }
@@ -80,8 +81,6 @@ public class JsonAdaptedFlashCard {
         if (toDelete == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT));
         }
-
-
 
         return new FlashCard(new OriginalWord(modelOriginalWord), new Translation(modelTranslatedWord), modelWhenToReview, level);
     }

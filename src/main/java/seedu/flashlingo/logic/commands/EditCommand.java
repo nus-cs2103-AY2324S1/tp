@@ -27,8 +27,8 @@ public class EditCommand extends Command {
           + "[" + PREFIX_ORIGINAL_WORD + "ORIGINAL WORD] "
           + "[" + PREFIX_TRANSLATED_WORD + "TRANSLATION] \n"
           + "Example: " + COMMAND_WORD + " 1 "
-          + PREFIX_ORIGINAL_WORD + "HELLO "
-          + PREFIX_TRANSLATED_WORD + "你好";
+          + PREFIX_ORIGINAL_WORD + "bye "
+          + PREFIX_TRANSLATED_WORD + "再见";
 
     private final Index index;
     private final FlashCard replacedFlashCard;
