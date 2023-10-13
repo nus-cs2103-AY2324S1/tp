@@ -83,7 +83,7 @@ public class UniqueScheduleList implements Iterable<Schedule> {
      * Replaces the list with {@code replacement}.
      * {@code replacement} must be a UniqueScheduleList.
      */
-    public void setSchedules(seedu.address.model.schedule.UniqueScheduleList replacement) {
+    public void setSchedules(UniqueScheduleList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
@@ -120,12 +120,11 @@ public class UniqueScheduleList implements Iterable<Schedule> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof seedu.address.model.schedule.UniqueScheduleList)) {
+        if (!(other instanceof UniqueScheduleList)) {
             return false;
         }
 
-        seedu.address.model.schedule.UniqueScheduleList
-            otherUniqueScheduleList = (seedu.address.model.schedule.UniqueScheduleList) other;
+        UniqueScheduleList otherUniqueScheduleList = (UniqueScheduleList) other;
         return internalList.equals(otherUniqueScheduleList.internalList);
     }
 
