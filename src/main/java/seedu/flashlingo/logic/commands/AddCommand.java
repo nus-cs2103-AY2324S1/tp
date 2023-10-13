@@ -14,14 +14,14 @@ import seedu.flashlingo.model.flashcard.OriginalWord;
 import seedu.flashlingo.model.flashcard.Translation;
 
 /**
- * Adds a person to the address book.
+ * Adds a flashcard to Flashlingo.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
     // For help function
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a flashcard to Flashlingo.\n"
             + "Parameters: "
             + PREFIX_ORIGINAL_WORD + "ORIGINAL WORD "
             + PREFIX_TRANSLATED_WORD + "TRANSLATION "

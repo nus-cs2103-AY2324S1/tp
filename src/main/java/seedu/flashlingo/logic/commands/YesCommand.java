@@ -7,7 +7,7 @@ import seedu.flashlingo.logic.commands.exceptions.CommandException;
 import seedu.flashlingo.model.Model;
 
 /**
- * Adds a person to the address book.
+ * Indicates user has memorized the word.
  */
 public class YesCommand extends Command {
 

@@ -22,8 +22,8 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_FLASHCARD_SUCCESS = "Edited Flashcard: %1$s";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-          + "by the index number used in the displayed person list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the flashcard identified "
+          + "by the index number used in the displayed flashcard list. "
           + "Existing values will be overwritten by the input values.\n"
           + "Parameters: INDEX (must be a positive integer) "
           + "[" + PREFIX_ORIGINAL_WORD + "ORIGINAL WORD] "
