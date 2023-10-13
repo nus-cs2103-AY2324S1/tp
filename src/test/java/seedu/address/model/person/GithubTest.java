@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -23,5 +24,12 @@ public class GithubTest {
         assertFalse(github.equals(5.0f));
 
         assertFalse(github.equals(new Github("zhiwang")));
+    }
+
+    @Test
+    public void toStringMethod() {
+        Github github = new Github("alexyeoh");
+        String s = "alexyeoh";
+        assertEquals(github.toString(), s);
     }
 }

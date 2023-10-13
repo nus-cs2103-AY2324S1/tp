@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -23,5 +24,12 @@ public class LinkedInTest {
         assertFalse(linkedIn.equals(5.0f));
 
         assertFalse(linkedIn.equals(new LinkedIn("zhiwang")));
+    }
+
+    @Test
+    public void toStringMethod() {
+        LinkedIn linkedIn = new LinkedIn("alexyeoh");
+        String s = "alexyeoh";
+        assertEquals(linkedIn.toString(), s);
     }
 }
