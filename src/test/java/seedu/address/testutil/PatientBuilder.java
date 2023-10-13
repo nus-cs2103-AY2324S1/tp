@@ -7,7 +7,7 @@ import seedu.address.model.person.Patient;
  * A utility class to help with building Patient objects.
  */
 public class PatientBuilder extends PersonBuilder {
-    public static final String DEFAULT_MEDICAL_HISTORY = "Osteoporosis";
+    public static final String DEFAULT_MEDICAL_HISTORY = "Anemia";
     private MedicalHistory medicalHistory;
 
     /**

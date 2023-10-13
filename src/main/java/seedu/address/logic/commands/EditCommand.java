@@ -332,7 +332,8 @@ public class EditCommand extends Command {
         }
         @Override
         public String toString() {
-            return super.toString();
+            String stringToAdd = ", medical history=" + medicalHistory;
+            return StringUtil.addFieldToPersonToString(stringToAdd, super.toString());
         }
         /**
          * Returns true if at least one field is edited.
