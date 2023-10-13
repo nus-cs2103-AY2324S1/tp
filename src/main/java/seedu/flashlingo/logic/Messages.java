@@ -39,9 +39,8 @@ public class Messages {
     public static String format(FlashCard flashCard) {
         final StringBuilder builder = new StringBuilder();
         builder.append(flashCard.getOriginalWord())
-                .append("; Original Word: ")
-                .append(flashCard.getTranslatedWord())
-                .append("; Translated Word: ");
+                .append("; Translated Word: ")
+                .append(flashCard.getTranslatedWord());
         return builder.toString();
     }
 }
