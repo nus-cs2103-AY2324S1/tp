@@ -18,6 +18,8 @@ public class Person {
 
     // Identity fields
     private final Name name;
+    private final Gender gender;
+    private final Birthdate birthdate;
     private final Phone phone;
     private final Email email;
 
@@ -28,9 +30,12 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Person(Name name, Gender gender, Birthdate birthdate, Phone phone, Email email,
+                  Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
+        this.gender = gender;
+        this.birthdate = birthdate;
         this.phone = phone;
         this.email = email;
         this.address = address;
@@ -39,6 +44,14 @@ public class Person {
 
     public Name getName() {
         return name;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public Birthdate getBirthdate() {
+        return birthdate;
     }
 
     public Phone getPhone() {
@@ -91,6 +104,8 @@ public class Person {
 
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
+                && gender.equals(otherPerson.gender)
+                && birthdate.equals(otherPerson.birthdate)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
@@ -100,13 +115,15 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, gender, birthdate, phone, email, address, tags);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
+                .add("gender", gender)
+                .add("birthdate", birthdate)
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
