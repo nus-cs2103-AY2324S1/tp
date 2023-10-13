@@ -25,6 +25,9 @@ public class Person {
     // Data fields
     private final Address address;
     private Optional<Birthday> birthday;
+    private Optional<Linkedin> linkedin;
+    private Optional<Email> secondaryEmail;
+    private Optional<Telegram> telegram;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -37,19 +40,27 @@ public class Person {
         this.email = email;
         this.address = address;
         this.birthday = Optional.empty();
+        this.linkedin = Optional.empty();
+        this.secondaryEmail = Optional.empty();
+        this.telegram = Optional.empty();
         this.tags.addAll(tags);
     }
 
     /**
      * Constructor including optional fields.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Optional<Birthday> birthday, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Optional<Birthday> birthday,
+                  Optional<Linkedin> linkedin, Optional<Email> secondaryEmail,
+                  Optional<Telegram> telegram, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, birthday, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.birthday = birthday;
+        this.linkedin = linkedin;
+        this.secondaryEmail = secondaryEmail;
+        this.telegram = telegram;
         this.tags.addAll(tags);
     }
 
@@ -75,6 +86,18 @@ public class Person {
 
     public Optional<Birthday> getBirthday() {
         return birthday;
+    }
+
+    public Optional<Linkedin> getLinkedin() {
+        return linkedin;
+    }
+
+    public Optional<Email> getSecondaryEmail() {
+        return secondaryEmail;
+    }
+
+    public Optional<Telegram> getTelegram() {
+        return telegram;
     }
 
     /**

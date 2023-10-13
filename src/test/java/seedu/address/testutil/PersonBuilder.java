@@ -8,9 +8,11 @@ import java.util.Set;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Linkedin;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -29,6 +31,9 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Optional<Birthday> birthday;
+    private Optional<Linkedin> linkedin;
+    private Optional<Email> secondaryEmail;
+    private Optional<Telegram> telegram;
     private Set<Tag> tags;
 
     /**
@@ -40,6 +45,9 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         birthday = Optional.empty(); // No birthday by default
+        linkedin = Optional.empty(); // No linkedin by default
+        secondaryEmail = Optional.empty(); // No secondaryEmail by default
+        telegram = Optional.empty(); // No telegram by default
         tags = new HashSet<>();
     }
 
@@ -52,6 +60,9 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         birthday = personToCopy.getBirthday();
+        linkedin = personToCopy.getLinkedin();
+        secondaryEmail = personToCopy.getSecondaryEmail();
+        telegram = personToCopy.getTelegram();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -88,6 +99,31 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code Linkedin} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withLinkedin(String linkedin) {
+        this.linkedin = Optional.of(new Linkedin(linkedin));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Secondary Email} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withSecondaryEmail(String secondaryEmail) {
+        this.secondaryEmail = Optional.of(new Email(secondaryEmail));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Secondary Email} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withTelegram(String telegram) {
+        this.telegram = Optional.of(new Telegram(telegram));
+        return this;
+    }
+
+
+    /**
      * Sets the {@code Phone} of the {@code Person} that we are building.
      */
     public PersonBuilder withPhone(String phone) {
@@ -104,7 +140,8 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, birthday, tags);
+        return new Person(name, phone, email, address, birthday, linkedin, secondaryEmail
+                , telegram, tags);
     }
 
 }

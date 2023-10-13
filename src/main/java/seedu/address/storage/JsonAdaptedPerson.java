@@ -15,9 +15,11 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Linkedin;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -32,6 +34,9 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final Optional<MonthDay> birthday;
+    private final Optional<String> linkedin;
+    private final Optional<String> secondaryEmail;
+    private final Optional<String> telegram;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -40,13 +45,19 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("birthday") Optional<MonthDay> birthday, @JsonProperty("tags") List<JsonAdaptedTag> tags
+            @JsonProperty("birthday") Optional<MonthDay> birthday, @JsonProperty("linkedin") Optional<String> linkedin,
+            @JsonProperty("secondaryEmail") Optional<String> secondaryEmail,
+            @JsonProperty("telegram") Optional<String> telegram,
+            @JsonProperty("tags") List<JsonAdaptedTag> tags
     ) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.birthday = birthday;
+        this.linkedin = linkedin;
+        this.secondaryEmail = secondaryEmail;
+        this.telegram = telegram;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -61,6 +72,9 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         birthday = source.getBirthday().map(b -> b.birthday);
+        linkedin = source.getLinkedin().map(l -> l.value);
+        secondaryEmail = source.getSecondaryEmail().map(e -> e.value);
+        telegram = source.getTelegram().map(t -> t.value);
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -111,9 +125,16 @@ class JsonAdaptedPerson {
 
         final Optional<Birthday> modelBirthday = birthday.map(monthDay -> new Birthday(monthDay));
 
+        final Optional<Linkedin> modelLinkedin = linkedin.map(linkedin -> new Linkedin(linkedin));
+
+        final Optional<Email> modelSecondaryEmail = secondaryEmail.map(email -> new Email(email));
+
+        final Optional<Telegram> modelTelegram = telegram.map(telegram -> new Telegram(telegram));
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelBirthday, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelBirthday, modelLinkedin,
+                modelSecondaryEmail, modelTelegram, modelTags);
     }
 
 }
