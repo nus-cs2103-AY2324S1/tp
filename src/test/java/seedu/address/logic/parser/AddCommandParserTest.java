@@ -28,7 +28,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENTNUMBER_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASS_NUMBER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSNUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -95,14 +95,14 @@ public class AddCommandParserTest {
 
         // multiple class number
         assertParseFailure(parser, CLASSNUMBER_DESC_AMY + validExpectedPersonString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_CLASS_NUMBER));
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_CLASSNUMBER));
 
 
         // multiple fields repeated
         assertParseFailure(parser,
                 validExpectedPersonString + PHONE_DESC_AMY + EMAIL_DESC_AMY + NAME_DESC_AMY + STUDENTNUMBER_DESC_AMY
                         + CLASSNUMBER_DESC_AMY + validExpectedPersonString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_STUDENT_NUMBER, PREFIX_CLASS_NUMBER,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_STUDENT_NUMBER, PREFIX_CLASSNUMBER,
                         PREFIX_EMAIL, PREFIX_PHONE));
 
         // invalid value followed by valid value
@@ -125,7 +125,7 @@ public class AddCommandParserTest {
 
         // invalid class number
         assertParseFailure(parser, INVALID_CLASSNUMBER_DESC + validExpectedPersonString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_CLASS_NUMBER));
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_CLASSNUMBER));
 
         // valid value followed by invalid value
 
@@ -147,7 +147,7 @@ public class AddCommandParserTest {
 
         // invalid class number
         assertParseFailure(parser, validExpectedPersonString + INVALID_CLASSNUMBER_DESC,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_CLASS_NUMBER));
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_CLASSNUMBER));
     }
 
     @Test

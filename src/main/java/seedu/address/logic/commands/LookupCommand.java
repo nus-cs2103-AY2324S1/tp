@@ -5,7 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSNUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTNUMBER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -31,7 +31,7 @@ public class LookupCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_STUDENTNUMBER + "STUDENT_NUMBER] "
+            + "[" + PREFIX_STUDENT_NUMBER + "STUDENT_NUMBER] "
             + "[" + PREFIX_TAG + "TAG]\n"
             + "Example: \n"
             + COMMAND_WORD + " " + PREFIX_NAME + "li\n"

@@ -1,6 +1,6 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASS_NUMBER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSNUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -36,7 +36,7 @@ public class PersonUtil {
         sb.append(PREFIX_PHONE + person.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
         sb.append(PREFIX_STUDENT_NUMBER + person.getStudentNumber().value + " ");
-        sb.append(PREFIX_CLASS_NUMBER + person.getClassNumber().value + " ");
+        sb.append(PREFIX_CLASSNUMBER + person.getClassNumber().value + " ");
         person.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
@@ -53,7 +53,7 @@ public class PersonUtil {
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getStudentNumber().ifPresent(studentNumber -> sb.append(PREFIX_STUDENT_NUMBER)
                         .append(studentNumber.value).append(" "));
-        descriptor.getClassNumber().ifPresent(classNumber -> sb.append(PREFIX_CLASS_NUMBER)
+        descriptor.getClassNumber().ifPresent(classNumber -> sb.append(PREFIX_CLASSNUMBER)
                         .append(classNumber.value).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();

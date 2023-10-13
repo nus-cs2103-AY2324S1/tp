@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASS_NUMBER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSNUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -51,8 +51,8 @@ public class CommandTestUtil {
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
     public static final String STUDENTNUMBER_DESC_AMY = " " + PREFIX_STUDENT_NUMBER + VALID_STUDENTNUMBER_AMY;
     public static final String STUDENTNUMBER_DESC_BOB = " " + PREFIX_STUDENT_NUMBER + VALID_STUDENTNUMBER_BOB;
-    public static final String CLASSNUMBER_DESC_AMY = " " + PREFIX_CLASS_NUMBER + VALID_CLASSNUMBER_AMY;
-    public static final String CLASSNUMBER_DESC_BOB = " " + PREFIX_CLASS_NUMBER + VALID_CLASSNUMBER_BOB;
+    public static final String CLASSNUMBER_DESC_AMY = " " + PREFIX_CLASSNUMBER + VALID_CLASSNUMBER_AMY;
+    public static final String CLASSNUMBER_DESC_BOB = " " + PREFIX_CLASSNUMBER + VALID_CLASSNUMBER_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String LABEL_DESC_FRIEND = " " + PREFIX_TAGS + VALID_TAG_FRIEND;
@@ -62,7 +62,7 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_STUDENTNUMBER_DESC = " " + PREFIX_STUDENT_NUMBER + "B2103818";
     // Student number should start with A
-    public static final String INVALID_CLASSNUMBER_DESC = " " + PREFIX_CLASS_NUMBER + "11";
+    public static final String INVALID_CLASSNUMBER_DESC = " " + PREFIX_CLASSNUMBER + "11";
     // Class number should start with T
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_LABEL_DESC = " " + PREFIX_TAGS + "hubby*"; // '*' not allowed in tags

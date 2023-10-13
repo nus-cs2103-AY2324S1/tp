@@ -2,7 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASS_NUMBER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSNUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -34,7 +34,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                        PREFIX_STUDENT_NUMBER, PREFIX_CLASS_NUMBER, PREFIX_TAG);
+                        PREFIX_STUDENT_NUMBER, PREFIX_CLASSNUMBER, PREFIX_TAG);
 
         Index index;
 
@@ -61,9 +61,9 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setStudentNumber(ParserUtil
                     .parseStudentNumber(argMultimap.getValue(PREFIX_STUDENT_NUMBER).get()));
         }
-        if (argMultimap.getValue(PREFIX_CLASS_NUMBER).isPresent()) {
+        if (argMultimap.getValue(PREFIX_CLASSNUMBER).isPresent()) {
             editPersonDescriptor.setClassNumber(ParserUtil
-                    .parseClassNumber(argMultimap.getValue(PREFIX_CLASS_NUMBER).get()));
+                    .parseClassNumber(argMultimap.getValue(PREFIX_CLASSNUMBER).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 

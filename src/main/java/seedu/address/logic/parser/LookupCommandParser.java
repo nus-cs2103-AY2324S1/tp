@@ -5,7 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSNUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTNUMBER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.stream.Stream;
@@ -21,7 +21,7 @@ public class LookupCommandParser implements Parser<LookupCommand> {
 
     private static final Prefix[] prefixList = new Prefix[] {PREFIX_CLASSNUMBER,
         PREFIX_EMAIL, PREFIX_NAME, PREFIX_PHONE,
-        PREFIX_STUDENTNUMBER, PREFIX_TAG};
+        PREFIX_STUDENT_NUMBER, PREFIX_TAG};
 
     /**
      * Parses the given {@code String} of arguments in the context of the LookupCommand
@@ -56,7 +56,7 @@ public class LookupCommandParser implements Parser<LookupCommand> {
                 .filter(s -> !s.isEmpty()).orElse(null);
         String phone = argMultimap.getValue(PREFIX_PHONE)
                 .filter(s -> !s.isEmpty()).orElse(null);
-        String studentNumber = argMultimap.getValue(PREFIX_STUDENTNUMBER)
+        String studentNumber = argMultimap.getValue(PREFIX_STUDENT_NUMBER)
                 .filter(s -> !s.isEmpty()).orElse(null);
         String tag = argMultimap.getValue(PREFIX_TAG)
                 .filter(s -> !s.isEmpty()).orElse(null);
