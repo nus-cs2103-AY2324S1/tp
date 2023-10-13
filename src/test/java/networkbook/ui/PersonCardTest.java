@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
@@ -15,6 +16,11 @@ import networkbook.model.person.Person;
 import networkbook.testutil.PersonBuilder;
 
 public class PersonCardTest {
+
+    @BeforeAll
+    public static void setupForHeadlessTesting() {
+        HeadlessHelper.setupForHeadlessTesting();
+    }
 
     @BeforeEach
     public void setup() throws Exception {
