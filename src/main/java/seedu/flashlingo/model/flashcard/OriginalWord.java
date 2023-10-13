@@ -31,4 +31,8 @@ public class OriginalWord {
         OriginalWord otherWord = (OriginalWord) other;
         return otherWord.word.equals(this.word);
     }
+    @Override
+    public String toString() {
+        return this.word;
+    }
 }

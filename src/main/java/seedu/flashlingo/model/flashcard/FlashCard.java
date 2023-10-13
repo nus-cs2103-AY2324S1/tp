@@ -95,7 +95,7 @@ public class FlashCard {
      */
     @Override
     public String toString() {
-        String sb = originalWord + "\t" + translatedWord + "\t" + whenToReview.toString() + "\t" + level;
+        String sb = originalWord + "\n" + translatedWord + "\n" + whenToReview.toString() + "\n" + level;
         return sb;
     }
 
