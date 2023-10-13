@@ -37,6 +37,7 @@ public class CommandTestUtil {
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_DESCRIPTION = "sleep";
+    public static final String VALID_UNUSED_DESCRIPTION = "THIS IS A PLACEHOLDER";
     public static final String VALID_START_DATE_EARLIER = "2023-01-01 08:00";
     public static final String VALID_END_DATE_EARLIER = "2023-01-01 09:00";
     public static final String VALID_START_DATE_LATER = "2024-01-01 08:00";

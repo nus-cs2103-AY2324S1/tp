@@ -1,5 +1,9 @@
 package seedu.address.model.event;
 
+import static java.util.Objects.requireNonNull;
+
+import seedu.address.model.event.exceptions.InvalidDescriptionException;
+
 /**
  * Represents the description of an event.
  */
@@ -13,6 +17,10 @@ public class EventDescription {
      * @param description The description of the event.
      */
     public EventDescription(String description) {
+        requireNonNull(description);
+        if (description.isEmpty()) {
+            throw new InvalidDescriptionException();
+        }
         this.description = description;
     }
 
@@ -26,15 +34,13 @@ public class EventDescription {
     }
 
     /**
-     * Checks if the provided event description is valid.
+     * Retrieve the underlying String of the description.
      *
-     * @param description The event description to be validated.
-     * @return True if the description is not empty, false otherwise.
+     * @return String of the description.
      */
-    public boolean isEventDescriptionValid(String description) {
-        return !description.isEmpty();
+    public String getDescription() {
+        return this.description;
     }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
