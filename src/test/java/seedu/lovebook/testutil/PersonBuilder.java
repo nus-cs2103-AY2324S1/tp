@@ -1,0 +1,96 @@
+package seedu.lovebook.testutil;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import seedu.lovebook.model.person.Age;
+import seedu.lovebook.model.person.Date;
+import seedu.lovebook.model.person.Gender;
+import seedu.lovebook.model.person.Height;
+import seedu.lovebook.model.person.Name;
+import seedu.lovebook.model.tag.Tag;
+import seedu.lovebook.model.util.SampleDataUtil;
+
+/**
+ * A utility class to help with building Date objects.
+ */
+public class PersonBuilder {
+
+    public static final String DEFAULT_NAME = "Amy Bee";
+    public static final String DEFAULT_AGE = "33";
+    public static final String DEFAULT_GENDER = "F";
+    public static final String DEFAULT_HEIGHT = "123";
+
+    private Name name;
+    private Age age;
+    private Gender gender;
+    private Height height;
+    private Set<Tag> tags;
+
+    /**
+     * Creates a {@code PersonBuilder} with the default details.
+     */
+    public PersonBuilder() {
+        name = new Name(DEFAULT_NAME);
+        age = new Age(DEFAULT_AGE);
+        gender = new Gender(DEFAULT_GENDER);
+        height = new Height(DEFAULT_HEIGHT);
+        tags = new HashSet<>();
+    }
+
+    /**
+     * Initializes the PersonBuilder with the data of {@code dateToCopy}.
+     */
+    public PersonBuilder(Date dateToCopy) {
+        name = dateToCopy.getName();
+        age = dateToCopy.getAge();
+        gender = dateToCopy.getGender();
+        height = dateToCopy.getHeight();
+        tags = new HashSet<>(dateToCopy.getTags());
+    }
+
+    /**
+     * Sets the {@code Name} of the {@code Date} that we are building.
+     */
+    public PersonBuilder withName(String name) {
+        this.name = new Name(name);
+        return this;
+    }
+
+    /**
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Date} that we are building.
+     */
+    public PersonBuilder withTags(String ... tags) {
+        this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Height} of the {@code Date} that we are building.
+     */
+    public PersonBuilder withHeight(String height) {
+        this.height = new Height(height);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Age} of the {@code Date} that we are building.
+     */
+    public PersonBuilder withAge(String age) {
+        this.age = new Age(age);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Gender} of the {@code Date} that we are building.
+     */
+    public PersonBuilder withGender(String gender) {
+        this.gender = new Gender(gender);
+        return this;
+    }
+
+    public Date build() {
+        return new Date(name, age, gender, height, tags);
+    }
+
+}

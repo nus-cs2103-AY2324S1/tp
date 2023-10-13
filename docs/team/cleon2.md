@@ -7,7 +7,7 @@ title: "Cleon's Project Portfolio Page"
 
 ### Project: LoveBook
 
-LoveBook, is a dating-focused address book application, revolving around providing users with a convenient and an
+LoveBook, is a dating-focused height book application, revolving around providing users with a convenient and an
 enjoyable tool to enhance their dating experiences. Featuring user profile management, date organisation, compatibility
 ranking, and customizable filtering options, LoveBook enhances the efficiency and effectiveness of your online dating
 journey.

@@ -35,7 +35,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/LoveBook-level3/tree/master/src/main/java/seedu/height/Main.java) and [`MainApp`](https://github.com/se-edu/LoveBook-level3/tree/master/src/main/java/seedu/height/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -67,13 +67,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/LoveBook-level3/tree/master/src/main/java/seedu/height/ui/Ui.java)
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/LoveBook-level3/tree/master/src/main/java/seedu/height/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/LoveBook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -84,7 +84,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/se-edu/LoveBook-level3/tree/master/src/main/java/seedu/height/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -101,7 +101,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
+1. When `Logic` is called upon to execute a command, it is passed to an `LoveBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a date).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
@@ -111,25 +111,25 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <puml src="diagrams/ParserClasses.puml" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `LoveBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `LoveBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/se-edu/LoveBook-level3/tree/master/src/main/java/seedu/height/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the height book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <box type="info" seamless>
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `LoveBook`, which `Person` references. This allows `LoveBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
@@ -138,18 +138,18 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/se-edu/LoveBook-level3/tree/master/src/main/java/seedu/height/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save both height book data and user preference data in JSON format, and read them back into corresponding objects.
+* inherits from both `LoveBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.LoveBook.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -161,42 +161,42 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The proposed undo/redo mechanism is facilitated by `VersionedLoveBook`. It extends `LoveBook` with an undo/redo history, stored internally as an `LoveBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+* `VersionedLoveBook#commit()` — Saves the current height book state in its history.
+* `VersionedLoveBook#undo()` — Restores the previous height book state from its history.
+* `VersionedLoveBook#redo()` — Restores a previously undone height book state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+These operations are exposed in the `Model` interface as `Model#commitLoveBook()`, `Model#undoLoveBook()` and `Model#redoLoveBook()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `VersionedLoveBook` will be initialized with the initial height book state, and the `currentStatePointer` pointing to that single height book state.
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `delete 5` command to delete the 5th date in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th date in the height book. The `delete` command calls `Model#commitLoveBook()`, causing the modified state of the height book after the `delete 5` command executes to be saved in the `LoveBookStateList`, and the `currentStatePointer` is shifted to the newly inserted height book state.
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add n/David …​` to add a new date. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new date. The `add` command also calls `Model#commitLoveBook()`, causing another modified height book state to be saved into the `LoveBookStateList`.
 
 <puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
 <box type="info" seamless>
 
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+**Note:** If a command fails its execution, it will not call `Model#commitLoveBook()`, so the height book state will not be saved into the `LoveBookStateList`.
 
 </box>
 
-Step 4. The user now decides that adding the date was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the date was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoLoveBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous height book state, and restores the height book to that state.
 
 <puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
 
 
 <box type="info" seamless>
 
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+**Note:** If the `currentStatePointer` is at index 0, pointing to the initial LoveBook state, then there are no previous LoveBook states to restore. The `undo` command uses `Model#canUndoLoveBook()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
 </box>
@@ -211,19 +211,19 @@ The following sequence diagram shows how the undo operation works:
 
 </box>
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite — it calls `Model#redoLoveBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the height book to that state.
 
 <box type="info" seamless>
 
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+**Note:** If the `currentStatePointer` is at index `LoveBookStateList.size() - 1`, pointing to the latest height book state, then there are no undone LoveBook states to restore. The `redo` command uses `Model#canRedoLoveBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </box>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the height book, such as `list`, will usually not call `Model#commitLoveBook()`, `Model#undoLoveBook()` or `Model#redoLoveBook()`. Thus, the `LoveBookStateList` remains unchanged.
 
 <puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitLoveBook()`. Since the `currentStatePointer` is not pointing at the end of the `LoveBookStateList`, all height book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 <puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
 
@@ -235,7 +235,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Aspect: How undo & redo executes:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Alternative 1 (current choice):** Saves the entire height book.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
@@ -302,26 +302,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `LoveBook` and the **Actor** is the `user`, unless specified otherwise)
 
 #### Use Case: Add a Person
 
 **Main Success Scenario (MSS):**
 
-1. User requests to add a new date to the address book.
-2. AddressBook prompts the user to provide the date's details, including name, age number, and gender.
+1. User requests to add a new date to the height book.
+2. LoveBook prompts the user to provide the date's details, including name, age number, and gender.
 3. User enters the required details.
-4. AddressBook validates the input.
-5. AddressBook adds the new date to the address book.
-6. AddressBook displays a confirmation message.
+4. LoveBook validates the input.
+5. LoveBook adds the new date to the height book.
+6. LoveBook displays a confirmation message.
 
 **Extensions:**
 
 2a. User cancels the operation.
 - Use case ends.
 
-4a. The input is invalid (e.g., missing name or an invalid gender address).
-- AddressBook shows an error message.
+4a. The input is invalid (e.g., missing name or an invalid gender height).
+- LoveBook shows an error message.
 - User is prompted to re-enter the details.
 - Use case resumes at step 3.
 
@@ -329,43 +329,43 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Main Success Scenario (MSS):**
 
-1. User requests to search for a date in the address book.
-2. AddressBook prompts the user to enter a search query (e.g., name or age number).
+1. User requests to search for a date in the height book.
+2. LoveBook prompts the user to enter a search query (e.g., name or age number).
 3. User enters the search query.
-4. AddressBook performs a search based on the query.
-5. AddressBook displays a list of dates matching the search query.
+4. LoveBook performs a search based on the query.
+5. LoveBook displays a list of dates matching the search query.
 
 **Extensions:**
 
 4a. No dates match the search query.
-- AddressBook displays a message indicating that no matching dates were found.
+- LoveBook displays a message indicating that no matching dates were found.
 
 #### Use Case: Edit Person Details
 
 **Main Success Scenario (MSS):**
 
 1. User requests to edit the details of a specific date.
-2. AddressBook shows a list of dates.
+2. LoveBook shows a list of dates.
 3. User selects the date they want to edit from the list.
-4. AddressBook prompts the user to provide the updated details for the selected date.
+4. LoveBook prompts the user to provide the updated details for the selected date.
 5. User enters the updated details.
-6. AddressBook validates the input.
-7. AddressBook updates the date's details with the new information.
-8. AddressBook displays a confirmation message.
+6. LoveBook validates the input.
+7. LoveBook updates the date's details with the new information.
+8. LoveBook displays a confirmation message.
 
 **Extensions:**
 
 2a. The list is empty.
-- AddressBook displays a message indicating that there are no dates to edit.
+- LoveBook displays a message indicating that there are no dates to edit.
 - Use case ends.
 
 3a. The selected date does not exist.
-- AddressBook displays an error message.
+- LoveBook displays an error message.
 - User is prompted to select a valid date.
 - Use case resumes at step 3.
 
 6a. The input is invalid (e.g., missing name or an invalid age number).
-- AddressBook shows an error message.
+- LoveBook shows an error message.
 - User is prompted to re-enter the details.
 - Use case resumes at step 5.
 
@@ -374,18 +374,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Main Success Scenario (MSS):**
 
 1. User requests to view the details of a specific date.
-2. AddressBook shows a list of dates.
+2. LoveBook shows a list of dates.
 3. User selects the date they want to view from the list.
-4. AddressBook displays the date's details, including name, age number, and gender.
+4. LoveBook displays the date's details, including name, age number, and gender.
 
 **Extensions:**
 
 2a. The list is empty.
-- AddressBook displays a message indicating that there are no dates to view.
+- LoveBook displays a message indicating that there are no dates to view.
 - Use case ends.
 
 3a. The selected date does not exist.
-- AddressBook displays an error message.
+- LoveBook displays an error message.
 - User is prompted to select a valid date.
 - Use case resumes at step 3.
 
@@ -393,22 +393,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Main Success Scenario (MSS):**
 
-1. User requests to delete a specific date from the address book.
-2. AddressBook shows a list of dates.
+1. User requests to delete a specific date from the height book.
+2. LoveBook shows a list of dates.
 3. User selects the date they want to delete from the list.
-4. AddressBook confirms the deletion with the user.
+4. LoveBook confirms the deletion with the user.
 5. User confirms the deletion.
-6. AddressBook deletes the date from the address book.
-7. AddressBook displays a confirmation message.
+6. LoveBook deletes the date from the height book.
+7. LoveBook displays a confirmation message.
 
 **Extensions:**
 
 2a. The list is empty.
-- AddressBook displays a message indicating that there are no dates to delete.
+- LoveBook displays a message indicating that there are no dates to delete.
 - Use case ends.
 
 3a. The selected date does not exist.
-- AddressBook displays an error message.
+- LoveBook displays an error message.
 - User is prompted to select a valid date.
 - Use case resumes at step 3.
 
@@ -420,9 +420,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  Usability and Accessibility: The application should provide clear and user-friendly CLI prompts and menus.
 It should support keyboard shortcuts for navigation to enhance accessibility.
-2.  Scalability: The address book should be capable of storing at least 10,000 contacts without a significant decrease in performance.
+2.  Scalability: The height book should be capable of storing at least 10,000 contacts without a significant decrease in performance.
 3.  Reliability and Availability: The application should have a 99.9% uptime, ensuring that users can access their contacts reliably.
-It should automatically back up address book data daily to prevent data loss.
+It should automatically back up height book data daily to prevent data loss.
 4.  Portability: The CLI application should be compatible with multiple operating systems, including Windows, macOS, and Linux.
 
 *{More to be added}*
