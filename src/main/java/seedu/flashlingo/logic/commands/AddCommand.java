@@ -52,6 +52,7 @@ public class AddCommand extends Command {
         if (model.hasFlashCard(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_CARD);
         }
+        model.addFlashCard(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, this.original, this.translated));
     }
 
