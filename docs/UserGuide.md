@@ -31,8 +31,12 @@ Flashlingo is a **desktop app for learning words by flashcard, optimized for use
 
    * `add w/WORD t/TRANSLATION` :Adds a word to the flashcard with its translation.
 
-   * `del w/WORD` : Deletes a words and its related information.
-
+   * `del index` : Deletes a words and its related information at the given index.
+   
+   * `edit index w/WORD t/TRANSALTION` : Edits the word and its translation at the given index.
+   
+   * `find KEYWORD` : Finds words whose original word or translation contains the given keyword.
+   
    * `start` : Shows flashcard, starts today’s flashcard session.
 
    * `flip` : Shows the other side of the flash card.
@@ -49,7 +53,7 @@ Flashlingo is a **desktop app for learning words by flashcard, optimized for use
 
    * `load` : Loads the previously stored data
 
-1. Refer to the [Features](#features) below for details of each command.
+2. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -72,10 +76,7 @@ Flashlingo is a **desktop app for learning words by flashcard, optimized for use
 
 Opens a browser with the help page (User Guide).
 
-![help message](images/helpMessage.png) (Not finished yet)
-
 Format: `help`
-
 
 ### Listing all cards : `list`
 
@@ -109,16 +110,37 @@ Examples:
 * `add w/entschuldigung t/sorry` saves the translation of entschuldigung as sorry
 
 
-### Deleting a word card : `del`
+### Deleting a word card : `delete`
 
 Deletes a words and its related information
-* Deletes a wild card.
-* Looks up the word and deletes it and all its related information.
+* Deletes a flashcard.
 
-Format: `del index`
+<<<<<<< HEAD
+Format: `deletle index`
 
 Examples:
-* `del 1` deletes the word and its translation at index 1
+* `delete 1` deletes the word and its translation at index 1
+
+### Editing a word card : `edit`
+
+Edits the word and its translation at the given index.
+* Edits a wild card.
+
+Format: `edit index w/WORD t/TRANSLATION`
+
+Examples:
+* `edit 1 w/Bye t/再见` edits the word and its translation at index 1
+
+### Finding a word card : `find`
+
+Finds words whose original word or translation contains the given keyword.
+* Finds a flashcard.
+* The search is insensitive. e.g `look` will match `Look`
+
+Format: `find KEYWORD`
+
+Examples:
+* `find look` returns the flashcard list  and its translation that contains the keyword `look`
 
 
 ###  Showing flashcard, starts today’s flashcard session : `start`
