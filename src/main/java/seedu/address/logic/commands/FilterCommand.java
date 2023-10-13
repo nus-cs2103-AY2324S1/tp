@@ -2,12 +2,18 @@ package seedu.address.logic.commands;
 
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.Objects;
+import java.util.Optional;
 
+import static java.util.Objects.nonNull;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -36,7 +42,8 @@ public class FilterCommand extends Command {
             + PREFIX_ADDRESS + "123, Tengah Ave 6, #69-420 "
             + PREFIX_TAG + "CS2103 "
             + PREFIX_TAG + "CSGod";
-    private PersonFilter personFilter;
+    public static final String CONTACTS_NOT_FILTERED = "At least one parameter is required to filter contacts.";
+    private final PersonFilter personFilter;
 
     public FilterCommand(PersonFilter personFilter) {
         requireNonNull(personFilter);
@@ -45,7 +52,10 @@ public class FilterCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult("Filtering");
+        requireNonNull(model);
+        model.updateFilteredPersonList(personFilter::test);
+        return new CommandResult(
+                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
 
     /**
@@ -59,18 +69,6 @@ public class FilterCommand extends Command {
         private Set<Tag> tags;
 
         public PersonFilter() {}
-
-        /**
-         * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public PersonFilter(PersonFilter toCopy) {
-            name = toCopy.name;
-            phone = toCopy.phone;
-            email = toCopy.email;
-            address = toCopy.address;
-            tags = toCopy.tags;
-        }
 
         /**
          * Returns true if at least one field is edited.
@@ -129,26 +127,26 @@ public class FilterCommand extends Command {
         }
 
         public boolean test(Person person) {
-            if (!person.getName().fullName.contains(name)) {
+            if (nonNull(name) && !person.getName().fullName.toLowerCase().contains(name.toLowerCase())) {
                 return false;
             }
-            if (!person.getPhone().value.contains(phone)) {
+            if (nonNull(phone) && !person.getPhone().value.contains(phone)) {
                 return false;
             }
-            if (!person.getEmail().value.contains(email)) {
+            if (nonNull(email) && !person.getEmail().value.toLowerCase().contains(email.toLowerCase())) {
                 return false;
             }
-            if (!person.getAddress().value.contains(address)) {
+            if (nonNull(address) && !person.getAddress().value.toLowerCase().contains(address.toLowerCase())) {
                 return false;
             }
-            if (!tags.isEmpty()) {
-                Tag[] tagsToCheck = tags.toArray(new Tag[1]);
+            if (nonNull(tags) && !tags.isEmpty()) {
+                Tag[] tagsToCheck = tags.toArray(new Tag[0]);
                 Tag[] currentTags = person.getTags().toArray(new Tag[0]);
                 for (Tag tag:tagsToCheck) {
                     for (int i = 0; i <= currentTags.length; i++) {
                         if (i == currentTags.length) {
                             return false;
-                        } else if (currentTags[i].tagName.contains(tag.tagName)) {
+                        } else if (currentTags[i].tagName.toLowerCase().contains(tag.tagName.toLowerCase())) {
                             break;
                         }
                     }

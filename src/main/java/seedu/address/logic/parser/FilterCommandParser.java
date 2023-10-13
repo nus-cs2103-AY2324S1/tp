@@ -1,14 +1,16 @@
 package seedu.address.logic.parser;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.FilterCommand.PersonFilter;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.commands.FilterCommand.CONTACTS_NOT_FILTERED;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.ParserUtil.parseTagsForUse;
 
 /**
@@ -44,7 +46,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         parseTagsForUse(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(personFilter::setTags);
 
         if (!personFilter.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+            throw new ParseException(CONTACTS_NOT_FILTERED);
         }
 
         return new FilterCommand(personFilter);
