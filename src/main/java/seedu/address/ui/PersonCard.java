@@ -41,12 +41,6 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label animalName;
     @FXML
-    private Label availability;
-    @FXML
-    private Label animalType;
-    @FXML
-    private Label housing;
-    @FXML
     private FlowPane tags;
 
     /**
@@ -60,16 +54,35 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+
+        if (person.getHousing().isPresent() && !"nil".equals(person.getHousing().get().value)) {
+            Label housingLabel = new Label(person.getHousing().get().value);
+            housingLabel.setStyle("-fx-background-color: #784c87;");
+            tags.getChildren().add(housingLabel);
+        }
+
+        if (person.getAvailability().isPresent() && !"nil".equals(person.getAvailability().get().value)) {
+            Label availabilityLabel = new Label(person.getAvailability().get().value);
+            if ("Available".equals(person.getAvailability().get().value)) {
+                availabilityLabel.setStyle("-fx-background-color: #55874c;");
+            }
+            if ("NotAvailable".equals(person.getAvailability().get().value)) {
+                availabilityLabel.setStyle("-fx-background-color: #874c53;");
+            }
+            tags.getChildren().add(availabilityLabel);
+        }
+
+        if (person.getAnimalType().isPresent() && !"nil".equals(person.getAnimalType().get().value)) {
+            Label animalTypeLabel = new Label(person.getAnimalType().get().value);
+            animalTypeLabel.setStyle("-fx-background-color: #87854c");
+            tags.getChildren().add(animalTypeLabel);
+        }
+
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
         animalName.setText(person.getAnimalName().isPresent() ? "Fostering: " + person.getAnimalName().get().fullName
                 : "Fostering: nil");
-        availability.setText(person.getAvailability().isPresent() ? "Availability: " + person.getAvailability().get().value
-                : "Availability: nil");
-        animalType.setText(person.getAnimalType().isPresent() ? "Animal Type: " + person.getAnimalType().get().value
-                : "Animal Type: nil");
-        housing.setText(person.getHousing().isPresent() ? "Housing Type: " + person.getHousing().get().value
-                : "Housing Type: nil");
     }
 }
