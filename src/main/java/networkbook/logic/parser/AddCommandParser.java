@@ -45,7 +45,6 @@ public class AddCommandParser implements Parser<AddCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(
                 CliSyntax.PREFIX_NAME,
                 CliSyntax.PREFIX_PHONE,
-                CliSyntax.PREFIX_EMAIL,
                 CliSyntax.PREFIX_ADDRESS,
                 CliSyntax.PREFIX_PRIORITY
         );

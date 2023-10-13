@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import networkbook.commons.core.index.Index;
 import networkbook.logic.Messages;
@@ -85,10 +86,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setPhone(
                     ParserUtil.parsePhone(argMultimap.getValue(CliSyntax.PREFIX_PHONE).get()));
         }
-        if (argMultimap.getValue(CliSyntax.PREFIX_EMAIL).isPresent()) {
-            editPersonDescriptor.setEmails(new UniqueList<Email>().setItems(List.of(
-                    ParserUtil.parseEmail(argMultimap.getValue(CliSyntax.PREFIX_EMAIL).get()))));
-        }
+        parseEmailsForEdit(argMultimap.getAllValues(CliSyntax.PREFIX_EMAIL))
+                .ifPresent(editPersonDescriptor::setEmails);
         if (argMultimap.getValue(CliSyntax.PREFIX_ADDRESS).isPresent()) {
             editPersonDescriptor.setAddress(
                     ParserUtil.parseAddress(argMultimap.getValue(CliSyntax.PREFIX_ADDRESS).get()));
@@ -104,12 +103,24 @@ public class EditCommandParser implements Parser<EditCommand> {
     }
 
     /**
+     * Parses {@code Collection<String> emails} into a {@code UniqueList<Email>}.
+     */
+    private static Optional<UniqueList<Email>> parseEmailsForEdit(Collection<String> emails) throws ParseException {
+        requireNonNull(emails);
+
+        if (emails.isEmpty()) {
+            return Optional.empty();
+        }
+        return Optional.of(ParserUtil.parseEmails(emails));
+    }
+
+    /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>} if {@code tags} is non-empty.
      * If {@code tags} contain only one element which is an empty string, it will be parsed into a
      * {@code Set<Tag>} containing zero tags.
      */
     private static Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
-        assert tags != null;
+        requireNonNull(tags);
 
         if (tags.isEmpty()) {
             return Optional.empty();

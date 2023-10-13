@@ -44,7 +44,6 @@ public class AddCommand extends Command {
             + CliSyntax.PREFIX_TAG + " friends "
             + CliSyntax.PREFIX_TAG + " owesMoney";
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the network book.";
     public static final String MESSAGE_NO_INFO = "At least one field to add must be provided.";
     public static final String MESSAGE_MULTIPLE_UNIQUE_FIELD = "Some fields provided cannot have multiple values.\n"
             + "Please use the 'update' command instead.";
@@ -79,10 +78,6 @@ public class AddCommand extends Command {
         Person personToAddInfo = lastShownList.get(index.getZeroBased());
         Person personAfterAddingInfo = addInfoToPerson(personToAddInfo, editPersonDescriptor);
 
-        if (!personToAddInfo.isSame(personAfterAddingInfo) && model.hasPerson(personAfterAddingInfo)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
-
         model.setItem(personToAddInfo, personAfterAddingInfo);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_ADD_INFO_SUCCESS, Messages.format(personAfterAddingInfo)));
@@ -114,7 +109,9 @@ public class AddCommand extends Command {
     }
 
     private UniqueList<Email> addEmails(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor) {
-        return editPersonDescriptor.getEmails().orElse(personToAddInfo.getEmails());
+        UniqueList<Email> emails = personToAddInfo.getEmails();
+        editPersonDescriptor.getEmails().ifPresent(emails::addAll);
+        return emails;
     }
 
     private Address addAddress(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor) {
