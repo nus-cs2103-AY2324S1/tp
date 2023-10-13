@@ -27,7 +27,7 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose attributes contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Specify whether the person is a patient or specialist using the "
             + PATIENT_TAG + " or " + SPECIALIST_TAG + " tags."
@@ -66,7 +66,7 @@ public class FindCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicate.and(personType.getSearchPredicate()));
+        model.updateFilteredPersonList(predicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
@@ -92,5 +92,13 @@ public class FindCommand extends Command {
                 .add("predicate", predicate)
                 .add("personType", personType)
                 .toString();
+    }
+
+    public PersonType getPersonType() {
+        return personType;
+    }
+
+    public Predicate<Person> getPredicate() {
+        return predicate;
     }
 }
