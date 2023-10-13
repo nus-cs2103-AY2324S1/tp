@@ -43,7 +43,13 @@ public class Messages {
                 .append(person.getEmail())
                 .append("; Address: ")
                 .append(person.getAddress())
-                .append("; Tags: ");
+                .append("; NRIC: ")
+                .append(person.getNric())
+                .append("; Licence Plate: ")
+                .append(person.getLicencePlate())
+                .append("\nPolicy Details (Policy Number, Policy Issue Date and Policy Expiry Date): ")
+                .append(person.getPolicy().toDisplay(false))
+                .append("\nTags: ");
         person.getTags().forEach(builder::append);
         return builder.toString();
     }
