@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -8,6 +10,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
@@ -16,6 +19,12 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Subject;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -34,6 +43,11 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+
+    private ShowPersonPanel showPersonPanel;
+
+    @FXML
+    private AnchorPane showPersonPanelPlaceholder;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -121,6 +135,17 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        // Placeholder values to test JavaFX
+        String DEFAULT_NAME = "Amy Bee";
+        String DEFAULT_PHONE = "85355255";
+        String DEFAULT_EMAIL = "amy@gmail.com";
+        String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+        showPersonPanel = new ShowPersonPanel(new Person(new Name(DEFAULT_NAME), new Phone(DEFAULT_PHONE),
+                            new Email(DEFAULT_EMAIL), new Address(DEFAULT_ADDRESS),
+                            new HashSet<>(Arrays.asList(new Subject("PHYSICS"), new Subject("MATHEMATICS"))),
+                            new HashSet<>()));
+        showPersonPanelPlaceholder.getChildren().add(showPersonPanel.getRoot());
     }
 
     /**
