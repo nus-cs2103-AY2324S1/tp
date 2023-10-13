@@ -1,5 +1,7 @@
 package seedu.flashlingo.model.flashcard;
 
+import seedu.flashlingo.logic.commands.AddCommand;
+
 /**
  * Represents the original word
  *
@@ -16,7 +18,6 @@ public class OriginalWord {
     public String getWord() {
         return word;
     }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -29,5 +30,9 @@ public class OriginalWord {
         }
         OriginalWord otherWord = (OriginalWord) other;
         return otherWord.word.equals(this.word);
+    }
+    @Override
+    public String toString() {
+        return this.word;
     }
 }

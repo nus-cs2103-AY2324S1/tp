@@ -26,4 +26,8 @@ public class Translation {
         Translation otherWord = (Translation) other;
         return otherWord.word.equals(this.word);
     }
+    @Override
+    public String toString() {
+        return this.word;
+    }
 }

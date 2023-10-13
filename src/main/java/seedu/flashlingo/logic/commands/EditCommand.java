@@ -1,19 +1,18 @@
 package seedu.flashlingo.logic.commands;
 
+import seedu.flashlingo.commons.core.index.Index;
+import seedu.flashlingo.commons.util.ToStringBuilder;
+import seedu.flashlingo.logic.Messages;
+import seedu.flashlingo.logic.commands.exceptions.CommandException;
+import seedu.flashlingo.model.Model;
+import seedu.flashlingo.model.flashcard.FlashCard;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_ORIGINAL_WORD;
 import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_TRANSLATED_WORD;
 import static seedu.flashlingo.model.Model.PREDICATE_SHOW_ALL_FLASHCARDS;
 
-import seedu.flashlingo.commons.core.index.Index;
-import seedu.flashlingo.commons.util.ToStringBuilder;
-import seedu.flashlingo.logic.commands.exceptions.CommandException;
-import seedu.flashlingo.model.Model;
-import seedu.flashlingo.model.flashcard.FlashCard;
-import seedu.flashlingo.logic.Messages;
-
 import java.util.List;
-
 /**
  * Edits the details of an existing flashcard in Flashlingo.
  */
