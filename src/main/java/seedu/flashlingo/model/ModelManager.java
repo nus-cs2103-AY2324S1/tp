@@ -125,6 +125,7 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredFlashCardList(Predicate<FlashCard> predicate) {
         requireNonNull(predicate);
+        System.out.println(predicate);
         filteredFlashCards.setPredicate(predicate);
     }
 

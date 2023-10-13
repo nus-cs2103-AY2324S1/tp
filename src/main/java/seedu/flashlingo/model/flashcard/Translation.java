@@ -13,6 +13,9 @@ public class Translation {
         this.word = word;
     }
 
+    public String getWord() {
+        return this.word;
+    }
     @Override
     public boolean equals(Object other) {
         if (other == this) {
