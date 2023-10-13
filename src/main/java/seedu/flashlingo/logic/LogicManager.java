@@ -73,7 +73,7 @@ public class LogicManager implements Logic {
         return model.getFilteredFlashCardList();
     }
 
-    //FIXME: Temp for ui to work
+    //TODO: Temp for ui to work
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return FXCollections.observableArrayList();

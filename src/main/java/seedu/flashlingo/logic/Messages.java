@@ -44,9 +44,4 @@ public class Messages {
                 .append("; Translated Word: ");
         return builder.toString();
     }
-
-//    public static String format(Person flashCard) {
-//        return flashCard.toString();
-//    }
-
 }

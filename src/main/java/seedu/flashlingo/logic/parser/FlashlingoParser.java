@@ -8,7 +8,16 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.flashlingo.commons.core.LogsCenter;
-import seedu.flashlingo.logic.commands.*;
+import seedu.flashlingo.logic.commands.AddCommand;
+import seedu.flashlingo.logic.commands.Command;
+import seedu.flashlingo.logic.commands.DeleteCommand;
+import seedu.flashlingo.logic.commands.EditCommand;
+import seedu.flashlingo.logic.commands.ExitCommand;
+import seedu.flashlingo.logic.commands.FindCommand;
+import seedu.flashlingo.logic.commands.HelpCommand;
+import seedu.flashlingo.logic.commands.ListCommand;
+import seedu.flashlingo.logic.commands.NoCommand;
+import seedu.flashlingo.logic.commands.YesCommand;
 import seedu.flashlingo.logic.parser.exceptions.ParseException;
 
 /**
@@ -47,10 +56,8 @@ public class FlashlingoParser {
             return new AddCommandParser().parse(arguments);
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
-
-//        case EditCommand.COMMAND_WORD:
-//                return new EditCommandParser().parse(arguments);
-
+        case EditCommand.COMMAND_WORD:
+            return new EditCommandParser().parse(arguments);
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
         case NoCommand.COMMAND_WORD:
