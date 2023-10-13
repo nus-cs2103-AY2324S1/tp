@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.staffsnap.commons.core.GuiSettings;
 import seedu.staffsnap.commons.core.LogsCenter;
 import seedu.staffsnap.logic.commands.exceptions.CommandException;
@@ -121,7 +122,8 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Employee> getFilteredEmployeeList() {
-        return filteredEmployees;
+        return new SortedList<>(filteredEmployees).sorted();
+
     }
 
     @Override

@@ -16,6 +16,9 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Employee> PREDICATE_SHOW_ALL_EMPLOYEES = unused -> true;
 
+    /** {@code Predicate} that always evaluate to false */
+    Predicate<Employee> PREDICATE_HIDE_ALL_EMPLOYEES = unused -> false;
+
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */

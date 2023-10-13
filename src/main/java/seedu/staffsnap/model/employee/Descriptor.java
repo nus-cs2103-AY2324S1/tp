@@ -4,11 +4,11 @@ package seedu.staffsnap.model.employee;
  * Enum for valid Descriptors
  */
 public enum Descriptor {
-    NAME;
+    NAME, PHONE;
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Descriptors should be one of the following:"
-            + "/n Name";
+            "Descriptors should be one of the following:\n"
+            + "Name, Phone";
 
     /**
      * Finds the correct descriptor by the string given

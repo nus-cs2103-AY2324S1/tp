@@ -135,6 +135,16 @@ public class Employee implements Comparable<Employee> {
     }
 
     /**
+     * @param o the Employee to be compared.
+     * @return the value 0 if the argument Phone is equal to this Phone; a value less than 0 if this Phone is
+     *      lexicographically less than the Phone argument; and a value greater than 0 if this Phone is
+     *      lexicographically greater than the Phone argument.
+     */
+    public int compareByPhone(Employee o) {
+        return this.phone.compareTo(o.phone);
+    }
+
+    /**
      * @param o the object to be compared.
      * @return
      */
@@ -143,6 +153,8 @@ public class Employee implements Comparable<Employee> {
         switch (descriptor) {
         case NAME:
             return compareByName(o);
+        case PHONE:
+            return compareByPhone(o);
         default:
             return 0;
         }

@@ -7,7 +7,7 @@ import static seedu.staffsnap.commons.util.AppUtil.checkArgument;
  * Represents a Employee's phone number in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
  */
-public class Phone {
+public class Phone implements Comparable<Phone> {
 
 
     public static final String MESSAGE_CONSTRAINTS =
@@ -58,4 +58,14 @@ public class Phone {
         return value.hashCode();
     }
 
+    /**
+     * @param o the object to be compared.
+     * @return the value 0 if the argument Phone is equal to this Phone; a value less than 0 if this Phone is
+     *      lexicographically less than the Phone argument; and a value greater than 0 if this Phone is
+     *      lexicographically greater than the Phone argument.
+     */
+    @Override
+    public int compareTo(Phone o) {
+        return this.value.compareTo(o.value);
+    }
 }
