@@ -69,15 +69,12 @@ public class AddressBookParser {
             return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
-<<<<<<< Updated upstream
             return new ListCommand();
-=======
             if (arguments.isEmpty()) {
                 return new ListCommand();
             } else {
                 return new FindCommandParser().parse(arguments);
             }
->>>>>>> Stashed changes
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
