@@ -66,9 +66,9 @@ class JsonAdaptedMember {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Member toModelType() throws IllegalValueException {
-        final List<Tag> MemberTags = new ArrayList<>();
+        final List<Tag> memberTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
-            MemberTags.add(tag.toModelType());
+            memberTags.add(tag.toModelType());
         }
 
         if (name == null) {
@@ -104,7 +104,7 @@ class JsonAdaptedMember {
         }
         final Telegram modelTelegram = new Telegram(telegram);
 
-        final Set<Tag> modelTags = new HashSet<>(MemberTags);
+        final Set<Tag> modelTags = new HashSet<>(memberTags);
         return new Member(modelName, modelPhone, modelEmail, modelTelegram, modelTags);
     }
 
