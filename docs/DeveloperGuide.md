@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# JABPro Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -12,6 +12,8 @@
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
+
+This is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).  
 
 _{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
 
@@ -269,71 +271,235 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* has a need to manage a significant number of candidates contacts
+* wants to view and manage candidates information in a single place
+* wants to filter and sort candidates based on their skills, experience, or application date
+* wants to compare candidates using their information
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:  
+
+JABPro aims to solve the problem of HR managers having to sort through tons of job applications.  
+
+It makes their life easier by allowing them to easily fetch important info about job applicants such as their contact details, application status etc.   
+
+It serves as a one-stop addressbook for managing job applications.
+
+
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
-
+| Priority | As a …​          | I want to …​                                                                                                                  | So that I can…​                                                                                          |
+|---------|------------------|-------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
+| `* * *` | Hiring Manager   | add a candidate's contact information, including name, email, phone number                                                    | I can easily access and reach out to candidates when needed                                              |
+| `* * *` | Hiring Manager   | add notes and comments to candidate profiles to document interview feedback and impressions                                   | I can maintain a record of interactions and feedback                                                     |
+| `* * *` | Hiring Manager   | delete job applicants information                                                                                             | I can remove redundant/unecessary data bloat and also to abide to privacy laws                           | 
+| `* * *` | Hiring Manager   | view a specific job applicant's resume or portfolio                                                                           | I can check whether they meet the requirements requested by other department heads                       |
+| `* * *` | Hiring Manager   | search for all job applicants that have a particular skill mentioned in their application                                     | I can find suitable candidates for a project                                                             |
+| `* * *` | Hiring Manager   | List all candidate's information                                                                                              | I can easily view each candidates information                                                            |
+| `* * `  | Hiring Manager   | update the application status for a candidate (e.g. "Interviewed", "Rejected", "Offered")                                     | I can keep track of each candidate's progress in the hiring process                                      |
+| `* * `  | Hiring Manager   | filter candidates based on their skills, experience, or application date                                                      | I can efficiently evaluate compare candidates                                                            |
+| `* * `  | Hiring Manager   | compare candidates that I am handling using the information i have stored such as that comparing CAP, Years of experience etc | so that I can choose the best candidates to the next stage of the hiring process                         |
+| `* * `  | Hiring Manager   | collate job applicants who were rejected but have potential for other positions in the company                                | I can forward this data to other departments who might need it                                           |
+| `* * `  | Hiring Manager   | collate job applicants who were offered the job and accepted it as well as deleting their details from JABPro                 | I can send this data to the HR department that manages existing employees                                |
+| `* * `  | Hiring Manager   | collate job applicants who were offered the job but rejected it                                                               | I can contact them to ask why they rejected the offer and get feedback                                   |
+| `* * `  | Hiring Manager   | add candidates key features into a multi-formatted form                                                                       | I can have a visual way to objectively view a candidates skills and information                          |
+| `*` | Hiring Manager   | easily get summary statistics such as total offers given out, rejections, cost associated with total offers                   | I can have a summary overview without going into each candidate data specifically                        |
+| `*` | Hiring Manager   | get data on which positions are lacking job applicants                                                                        | I can update the external recruitment team to focus on head hunting applicants for these roles           |
+| `*` | Hiring Manager   | get data on which positions already have too many applicants                                                                  | I can forward this to the department heads to see if they still want to keep the job posting or close it |
+| `*` | Hiring Manager   | get a visual alert or a section to display urgent task                                                                        | I can stay organized and ensure that remain up to date and on task with the hiring process               |
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `JABPro` and the **Actor** is the `hiring manager`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add a person**
 
 **MSS**
+1. User requests to add a person.
+2. JABPro shows that command has been executed successfully.
+3. JABPro adds the person to the list of persons.   
+Use case ends.
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+**Extensions**
+* 2a. User does not provide the correct information for a person to be added.
+    * 2a1. JABPro shows an error message and provides course of action for remedy.  
+    Use case resumes at step 1.
+* 2b. User has already been added to the list of persons.
+    * 2b1. JABPro shows an error message and provides course of action for remedy.  
+    Use case resumes at step 1.
 
+**Use case: Add a remark to a person**
+
+**MSS**
+1. User requests to add a remark to a person.
+2. JABPro shows that command has been executed successfully.
+3. JABPro adds the remark to the person.  
+Use case ends.
+
+**Extensions**
+* 2a. User provides invalid index.
+    * 2a1. JABPro shows an error message and provides course of action for remedy.  
+    Use case resumes at step 1.
+* 2b. User does not provide a remark.
+    * 2b1. JABPro adds an empty remark to the person, remark no longer seen.  
+    Use case ends.
+
+**Use case: List all persons**
+
+**MSS**
+1. User  requests to view a list of all persons.
+2. JABPro retrieves the list of all persons from the database.
+3. JABPro displays the list of all persons to the user. 
+4. If the user specifies an attribute to sort by, e.g., "s/name" for sorting by name, the application sorts the list accordingly. If no attribute is provided, the list remains unsorted.
+5. The sorted or unsorted list is displayed to the user in ascending order based on the specified attribute.   
+Use case ends.
+
+**Extensions**
+* 2a. User provides an incorrect attribute for sorting (e.g., "list s/phone").
+  * 2a1. JABPro shows an error message and provides course of action for remedy.   
+  Use case resumes at step 1.
+* 2b. User attempts to list persons when there are no entries in the address book.
+  * 2b1. JABPro shows a message indicating that there are no persons to display.  
+  Use case ends.
+
+**Use case: Search a person by name**
+
+**MSS**
+1.  Hiring manager types in name keywords to search users by name.
+2.  JABPro shows a list of persons whose names contain matching keywords.  
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
-
+* 1a. The given name keyword is invalid (invalid name).
+    * 1a1. JABPro shows an error message.  
+      Use case resumes at step 1.
+* 2a. The list is empty.  
   Use case ends.
 
+**Use case: Search a person by application status**
+
+**MSS**
+1.  User keys in search command with application status (i.e. interviewed, pending, rejected, offered).
+2.  JABPro shows a list of persons whose status match the given status keywords.  
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given name status is invalid (not from the given list of valid status keywords).
+    * 1a1. JABPro shows an error message.  
+      Use case resumes at step 1.
+* 2a. The list is empty.  
+  Use case ends.
+
+
+**Use case: Delete a person**
+
+**MSS**
+1.  User requests to list persons.
+2.  AddressBook shows a list of persons.
+3.  User requests to delete a specific person in the list.
+4.  AddressBook deletes the person.  
+    Use case ends.
+
+**Extensions**
+* 2a. The list is empty.
+    * 2a1. AddressBook displays a message indicating that the list is empty.  
+      Use case ends.
 * 3a. The given index is invalid.
+    * 3a1. AddressBook shows an error message indicating that the specified index is invalid.  
+      Use case resumes at step 3.
+* 4a. Deletion encounters an error
+    * 4a1. AddressBook displays an error message indicating that the deletion process failed.  
+      Use case ends.
 
-    * 3a1. AddressBook shows an error message.
+**Use case: Set a person's status**
 
-      Use case resumes at step 2.
+**MSS**
+1.  User requests to list persons.
+2.  AddressBook shows a list of persons.
+3.  User requests to set the status of a specific person in the list.
+4.  AddressBook sets the status of that person in the list.  
+    Use case ends.
+
+**Extensions**
+* 2a. The list is empty.
+    * 2a1. AddressBook displays a message indicating that the list is empty.  
+      Use case ends.
+* 3a. The given index is invalid.
+    * 3a1. AddressBook shows an error message indicating that the specified index is invalid.  
+      Use case resumes at step 3.
+* 3b. The given status is invalid.
+    * 3b1. AddressBook shows an error message indicating that the specified status is invalid.  
+      Use case resumes at step 3.
+
+**Use case: Add social profile to person's details**
+
+**MSS**
+1. User requests to add social profile (linkedin or github)
+2. JABPro shows that command has been executed successfully
+3. JABPro adds the social profile to the person's existing details in the list
+   Use case ends.
+
+**Extensions**
+* 2a. User does not provide valid information for the person.
+    * 2a1. JABPro displays error message.
+      Use case resumes at Step 1.
+* 2b. User requests to add social profile other than LinkedIn or Github
+    * 2b1. JABPro displays error message.
+      Use case resumes at Step 1.
+
+**Use case: Open social profile for a person**
+
+**MSS**
+1. User requests to open social profile for a person
+2. JABPro shows that command has been executed successfully
+3. JABPro redirects to the webpage of the corresponding profile
+   Use case ends.
+
+**Extension**
+* 1a. Person does not exist in the list.
+    * 1a1. JABPro displays error message.
+    Use case ends.
+* 1b. Social profile requested other than LinkedIn or Github
+    * 1b1. JABPro displays error message.
+    Use case ends.
+* 3a. User does not exist on the social platform
+  Use case ends.
 
 *{More to be added}*
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+2.  Should be able to `hold up to 1000 persons` without a noticeable sluggishness in performance for typical usage.
+3.  A user with above `average typing speed for regular English text` (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  System should respond within a `reasonable amount of time` (e.g. < 2 second) for typical usage (e.g. listing 1000 persons).
+5.  Should not deal with `external database` or `network connections`.
+6.  Product is expected to be used by a `single user` only.
+7.  Product is `not expected to contain API` for other software to communicate with.
+8.  Product is expected to be used in a system with at least 4GB RAM and `1GB free disk space`. 
+9.  Product Visuals should be `unambiguous` and clear to the user 
+10. Commands should be `easy to remember` and `intuitive` to use 
+11. Product should be `consistent` in its visuals and commands formatting
 
 *{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Hiring Manager**: Inter-changable with users in this context
+* **Candidate**: Inter-changable with persons/job applicants in this context
+* **AddressBook**: Inter-changable with JABPro in this context since this is an evolve project built on-top of AB3 functionality
+* **Keyword**: Search parameter
 
 --------------------------------------------------------------------------------------------------------------------
 

@@ -7,55 +7,64 @@
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us at the email `e0958427[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Sean Koh Hak Guan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/sk2001git.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
+[[github](https://github.com/sk2001git)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibilities: Deliverables & Deadlines, Integration
+* In charge of: Storage
 
-### Jane Doe
 
-<img src="images/johndoe.png" width="200px">
+### Ariella Thirza Callista
 
-[[github](http://github.com/johndoe)]
+
+<img src="images/ariellacallista.png" width="200px">
+
+[[github](http://github.com/AriellaCallista)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: Documentation
+* In charge of: Model, UI
 
-### Johnny Doe
+### Misra Aditya
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/madlamprey.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/MadLamprey)] 
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Testing 
+* In charge of: Test cases and coverage
 
-### James Doe
 
-<img src="images/johndoe.png" width="200px">
+### Catherine Liang
 
-[[github](http://github.com/johndoe)]
+<img src="images/ketweeen.png" width="200px">
+
+[[github](http://github.com/ketweeen)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Scheduling and tracking
+* In charge of: Commons
+
+### Goh Peng Tat
+
+<img src="images/scarletblanks.png" width="200px">
+
+[[github](http://github.com/ScarletBlanks)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Developer
+* Responsibilities: Code Quality
+* In charge of: Logic

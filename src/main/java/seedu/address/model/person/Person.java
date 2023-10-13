@@ -27,6 +27,8 @@ public class Person {
     private final Remark remark;
     private final Set<Tag> tags = new HashSet<>();
 
+    private final Status currentStatus = new Status();
+
     /**
      * Every field must be present and not null.
      */
@@ -60,6 +62,15 @@ public class Person {
         return remark;
     }
 
+
+    public Status getStatus() {
+        return currentStatus;
+    }
+
+    /* public void setStatus(StatusTypes newType) {
+        this.currentStatus.setStatusType(newType);
+    }*/
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -77,8 +88,7 @@ public class Person {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getName().equals(getName());
+        return otherPerson != null && otherPerson.getName().equals(getName());
     }
 
     /**
@@ -97,12 +107,15 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
+
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && remark.equals(otherPerson.remark)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && currentStatus.equals(otherPerson.currentStatus);
+
     }
 
     @Override
@@ -118,8 +131,9 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
-                .add("remark", remark)
                 .add("tags", tags)
+                .add("remark", remark)
+                .add("status", currentStatus)
                 .toString();
     }
 
