@@ -81,7 +81,7 @@ class JsonSerializableAddressBook {
         for (JsonAdaptedApplicant jsonAdaptedApplicant : applicants) {
             Applicant applicant = jsonAdaptedApplicant.toModelType();
             if (addressBook.hasApplicant(applicant)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_MEMBER);
+                throw new IllegalValueException(MESSAGE_DUPLICATE_APPLICANT);
             }
             addressBook.addApplicant(applicant);
         }
