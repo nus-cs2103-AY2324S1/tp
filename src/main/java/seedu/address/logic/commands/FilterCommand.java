@@ -57,6 +57,27 @@ public class FilterCommand extends Command {
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof FilterCommand)) {
+            return false;
+        }
+
+        FilterCommand otherFilterCommand = (FilterCommand) other;
+        return personFilter.equals(otherFilterCommand.personFilter);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("personFilter", personFilter)
+                .toString();
+    }
 
     /**
      * Stores the details to filter the contacts by. Contacts will be filtered by each non-empty field .
@@ -69,6 +90,14 @@ public class FilterCommand extends Command {
         private Set<Tag> tags;
 
         public PersonFilter() {}
+
+        public PersonFilter(PersonFilter toCopy) {
+            setName(toCopy.name);
+            setPhone(toCopy.phone);
+            setEmail(toCopy.email);
+            setAddress(toCopy.address);
+            setTags(toCopy.tags);
+        }
 
         /**
          * Returns true if at least one field is edited.
@@ -122,8 +151,8 @@ public class FilterCommand extends Command {
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code tags} is null.
          */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        public Set<Tag> getTags() {
+            return (tags != null) ? Collections.unmodifiableSet(tags) : null;
         }
 
         public boolean test(Person person) {
@@ -162,16 +191,16 @@ public class FilterCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof PersonFilter)) {
+            if (!(other instanceof FilterCommand)) {
                 return false;
             }
 
-            PersonFilter otherPersonFilterDescriptor = (PersonFilter) other;
-            return Objects.equals(name, otherPersonFilterDescriptor.name)
-                    && Objects.equals(phone, otherPersonFilterDescriptor.phone)
-                    && Objects.equals(email, otherPersonFilterDescriptor.email)
-                    && Objects.equals(address, otherPersonFilterDescriptor.address)
-                    && Objects.equals(tags, otherPersonFilterDescriptor.tags);
+            PersonFilter otherPersonFilter = (PersonFilter) other;
+            return name.equals(otherPersonFilter.getName())
+                    && phone.equals(otherPersonFilter.getPhone())
+                    && email.equals(otherPersonFilter.getEmail())
+                    && address.equals(otherPersonFilter.getAddress())
+                    && tags.equals(otherPersonFilter.getTags());
         }
 
         @Override
