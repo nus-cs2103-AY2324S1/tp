@@ -63,6 +63,12 @@ dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: jUnitVersion
 
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: jUnitVersion
+
+    var testFxVersion = "4.0.17"
+    testImplementation("org.testfx:testfx-core:${testFxVersion}")
+    testImplementation("org.testfx:testfx-junit5:${testFxVersion}")
+
+    testImplementation group: 'org.hamcrest', name: 'hamcrest', version: '2.1'
 }
 
 shadowJar {

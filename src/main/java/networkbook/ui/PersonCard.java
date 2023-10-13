@@ -62,4 +62,8 @@ public class PersonCard extends UiPart<Region> {
         person.getPriority().ifPresentOrElse((Priority p) ->
                         priority.setText(PRIORITY_HEADER + p), () -> priority.setVisible(false));
     }
+
+    public Label getPriority() {
+        return priority; // getter method for testing
+    }
 }
