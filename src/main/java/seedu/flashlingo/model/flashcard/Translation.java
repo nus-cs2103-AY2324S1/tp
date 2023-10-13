@@ -12,4 +12,18 @@ public class Translation {
     public Translation(String word) {
         this.word = word;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Translation)) {
+            return false;
+        }
+        Translation otherWord = (Translation) other;
+        return otherWord.word.equals(this.word);
+    }
 }
