@@ -1,5 +1,7 @@
 package seedu.flashlingo.model.flashcard;
 
+import seedu.flashlingo.logic.commands.AddCommand;
+
 /**
  * Represents the original word
  *
@@ -15,5 +17,18 @@ public class OriginalWord {
 
     public String getWord() {
         return word;
+    }
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof OriginalWord)) {
+            return false;
+        }
+        OriginalWord otherWord = (OriginalWord) other;
+        return otherWord.word.equals(this.word);
     }
 }
