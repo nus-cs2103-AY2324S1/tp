@@ -59,15 +59,16 @@ public class AddCommandParserTest {
         Person expectedPatient = new PatientBuilder(AMY).withTags(VALID_TAG_FRIEND).build();
 
         // whitespace only preamble
-        assertParseComplexSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + ADDRESS_DESC_AMY + TAG_DESC_FRIEND + MEDICAL_HISTORY_DESC_AMY, new AddCommand(expectedPatient), PersonType.PATIENT);
+        assertParseComplexSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_AMY + PHONE_DESC_AMY
+                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + TAG_DESC_FRIEND + MEDICAL_HISTORY_DESC_AMY,
+                new AddCommand(expectedPatient), PersonType.PATIENT);
 
         // multiple tags - all accepted
         Person expectedPatientMultipleTags = new PatientBuilder(AMY).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
         assertParseComplexSuccess(parser,
-                NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + TAG_DESC_HUSBAND + TAG_DESC_FRIEND
-                + MEDICAL_HISTORY_DESC_AMY,
+                NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
+                        + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + MEDICAL_HISTORY_DESC_AMY,
                 new AddCommand(expectedPatientMultipleTags), PersonType.PATIENT);
     }
     @Test
@@ -75,16 +76,18 @@ public class AddCommandParserTest {
         Person expectedSpecialist = new SpecialistBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
 
         // whitespace only preamble
-        assertParseComplexSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + SPECIALTY_DESC_BOB, new AddCommand(expectedSpecialist),
+        assertParseComplexSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB
+                        + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + SPECIALTY_DESC_BOB,
+                new AddCommand(expectedSpecialist),
                 PersonType.SPECIALIST);
 
         // multiple tags - all accepted
-        Person expectedSpecialistMultipleTags = new SpecialistBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
+        Person expectedSpecialistMultipleTags = new SpecialistBuilder(BOB).withTags(VALID_TAG_FRIEND,
+                        VALID_TAG_HUSBAND)
                 .build();
         assertParseComplexSuccess(parser,
-                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND
-                        + TAG_DESC_FRIEND + SPECIALTY_DESC_BOB,
+                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                        + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + SPECIALTY_DESC_BOB,
                 new AddCommand(expectedSpecialistMultipleTags), PersonType.SPECIALIST);
     }
 
@@ -113,9 +116,10 @@ public class AddCommandParserTest {
 
         // multiple fields repeated
         assertParseComplexFailure(parser,
-                validExpectedSpecialistString + PHONE_DESC_AMY + EMAIL_DESC_AMY + NAME_DESC_AMY + ADDRESS_DESC_AMY
-                        + validExpectedPersonString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_ADDRESS, PREFIX_EMAIL, PREFIX_PHONE),
+                validExpectedSpecialistString + PHONE_DESC_AMY + EMAIL_DESC_AMY +
+                        NAME_DESC_AMY + ADDRESS_DESC_AMY + validExpectedPersonString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_ADDRESS,
+                        PREFIX_EMAIL, PREFIX_PHONE),
                 PersonType.SPECIALIST);
 
         // invalid value followed by valid value
@@ -163,8 +167,8 @@ public class AddCommandParserTest {
     public void parse_optionalFieldsMissing_success() {
         // zero tags
         Person expectedPerson = new PatientBuilder(AMY).withTags().build();
-        assertParseComplexSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                + MEDICAL_HISTORY_DESC_AMY,
+        assertParseComplexSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
+                        + ADDRESS_DESC_AMY + MEDICAL_HISTORY_DESC_AMY,
                 new AddCommand(expectedPerson), PersonType.PATIENT);
     }
 
@@ -173,51 +177,51 @@ public class AddCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
 
         // missing name prefix
-        assertParseComplexFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
-                expectedMessage, PersonType.PATIENT);
+        assertParseComplexFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                        + ADDRESS_DESC_BOB, expectedMessage, PersonType.PATIENT);
 
         // missing phone prefix
-        assertParseComplexFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
-                expectedMessage, PersonType.PATIENT);
+        assertParseComplexFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB
+                        + ADDRESS_DESC_BOB, expectedMessage, PersonType.PATIENT);
 
         // missing email prefix
-        assertParseComplexFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + ADDRESS_DESC_BOB,
-                expectedMessage, PersonType.PATIENT);
+        assertParseComplexFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB
+                        + ADDRESS_DESC_BOB, expectedMessage, PersonType.PATIENT);
 
         // missing address prefix
-        assertParseComplexFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB,
-                expectedMessage, PersonType.PATIENT);
+        assertParseComplexFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                        + VALID_ADDRESS_BOB, expectedMessage, PersonType.PATIENT);
 
         // all prefixes missing
-        assertParseComplexFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB,
-                expectedMessage, PersonType.PATIENT);
+        assertParseComplexFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB
+                        + VALID_ADDRESS_BOB, expectedMessage, PersonType.PATIENT);
     }
 
     @Test
     public void parse_invalidValue_failure() {
         // invalid name
-        assertParseComplexFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + SPECIALTY_DESC_BOB,
+        assertParseComplexFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                        + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + SPECIALTY_DESC_BOB,
                 Name.MESSAGE_CONSTRAINTS, PersonType.SPECIALIST);
 
         // invalid phone
-        assertParseComplexFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + SPECIALTY_DESC_BOB,
+        assertParseComplexFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC + EMAIL_DESC_BOB
+                        + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + SPECIALTY_DESC_BOB,
                 Phone.MESSAGE_CONSTRAINTS, PersonType.SPECIALIST);
 
         // invalid email
-        assertParseComplexFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC + ADDRESS_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + SPECIALTY_DESC_BOB,
+        assertParseComplexFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC
+                        + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + SPECIALTY_DESC_BOB,
                 Email.MESSAGE_CONSTRAINTS, PersonType.SPECIALIST);
 
         // invalid address
-        assertParseComplexFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + SPECIALTY_DESC_BOB,
+        assertParseComplexFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                        + INVALID_ADDRESS_DESC + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + SPECIALTY_DESC_BOB,
                 Address.MESSAGE_CONSTRAINTS, PersonType.SPECIALIST);
 
         // invalid tag
-        assertParseComplexFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + INVALID_TAG_DESC + VALID_TAG_FRIEND + SPECIALTY_DESC_BOB,
+        assertParseComplexFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                        + ADDRESS_DESC_BOB + INVALID_TAG_DESC + VALID_TAG_FRIEND + SPECIALTY_DESC_BOB,
                 Tag.MESSAGE_CONSTRAINTS, PersonType.SPECIALIST);
 
         // two invalid values, only first invalid value reported
@@ -226,8 +230,10 @@ public class AddCommandParserTest {
                 Name.MESSAGE_CONSTRAINTS, PersonType.SPECIALIST);
 
         // non-empty preamble
-        assertParseComplexFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + SPECIALTY_DESC_BOB,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE), PersonType.SPECIALIST);
+        assertParseComplexFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB
+                        + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND
+                        + SPECIALTY_DESC_BOB,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE),
+                PersonType.SPECIALIST);
     }
 }
