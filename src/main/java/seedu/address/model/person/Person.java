@@ -85,6 +85,23 @@ public class Person {
     }
 
     /**
+     * Formats the {@code person} for display to the user.
+     */
+    public static String format(Person person) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(person.getName())
+                .append("; Phone: ")
+                .append(person.getPhone())
+                .append("; Email: ")
+                .append(person.getEmail())
+                .append("; Note: ")
+                .append(person.getNote())
+                .append("; Tags: ");
+        person.getTags().forEach(builder::append);
+        return builder.toString();
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
