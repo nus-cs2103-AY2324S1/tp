@@ -3,7 +3,6 @@ package seedu.flashlingo.model.flashcard;
 import java.util.List;
 import java.util.function.Predicate;
 
-import seedu.flashlingo.commons.util.StringUtil;
 import seedu.flashlingo.commons.util.ToStringBuilder;
 
 /**
