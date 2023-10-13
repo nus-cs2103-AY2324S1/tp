@@ -52,6 +52,4 @@ public class MainWindowTest extends ApplicationTest {
 //        // Verify that the CommandBox is added and visible
 //        verifyThat("#commandBoxPlaceholder #commandBox", isVisible());
     }
-
-
 }
