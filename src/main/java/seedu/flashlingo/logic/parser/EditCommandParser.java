@@ -1,9 +1,16 @@
 package seedu.flashlingo.logic.parser;
 
-import java.util.*;
+import static java.util.Objects.requireNonNull;
+import static seedu.flashlingo.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_ORIGINAL_WORD;
+import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_TRANSLATED_WORD;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
+import java.util.Optional;
+import java.util.Set;
 
-import org.apache.poi.ss.formula.functions.T;
 import seedu.flashlingo.commons.core.index.Index;
 import seedu.flashlingo.logic.commands.EditCommand;
 import seedu.flashlingo.logic.parser.exceptions.ParseException;
@@ -11,11 +18,6 @@ import seedu.flashlingo.model.flashcard.FlashCard;
 import seedu.flashlingo.model.flashcard.OriginalWord;
 import seedu.flashlingo.model.flashcard.Translation;
 import seedu.flashlingo.model.tag.Tag;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.flashlingo.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_ORIGINAL_WORD;
-import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_TRANSLATED_WORD;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -61,5 +63,4 @@ public class EditCommandParser implements Parser<EditCommand> {
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
-
 }

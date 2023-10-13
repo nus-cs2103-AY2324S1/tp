@@ -123,13 +123,20 @@ public class ParserUtil {
         }
         return tagSet;
     }
-    public static OriginalWord parseWord(String word) throws ParseException {
+
+    /**
+     * Parses {@code String word} into a {@code OriginalWord}.
+     */
+    public static OriginalWord parseWord(String word) {
         requireNonNull(word);
         final OriginalWord tarWord = new OriginalWord(word);
         return tarWord;
     }
 
-    public static Translation parseTranslation(String word) throws ParseException {
+    /**
+     * Parses {@code String word} into a {@code Translation}.
+     */
+    public static Translation parseTranslation(String word) {
         requireNonNull(word);
         final Translation tarWord = new Translation(word);
         return tarWord;
