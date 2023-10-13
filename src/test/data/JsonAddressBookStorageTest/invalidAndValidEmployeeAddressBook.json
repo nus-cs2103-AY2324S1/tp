@@ -3,12 +3,14 @@
     {
       "name": "Valid Employee",
       "position": "Valid Position",
+      "id": "EID1234-5678",
       "phone": "9482424",
       "email": "hans@example.com"
     },
     {
       "name": "Employee With Invalid Phone Field",
       "position": "Valid Position",
+      "id": "EID1234-5678",
       "phone": "948asdf2424",
       "email": "hans@example.com"
     }

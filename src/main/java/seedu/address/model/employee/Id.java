@@ -19,7 +19,7 @@ public class Id {
      */
     public static final String VALIDATION_REGEX = "^EID\\d{4}-\\d{4}$";
 
-    public final String id;
+    public final String value;
 
     /**
      * Constructs an employee {@code id}.
@@ -29,7 +29,7 @@ public class Id {
     public Id(String id) {
         requireNonNull(id);
         checkArgument(isValidId(id), MESSAGE_CONSTRAINTS);
-        this.id = id;
+        this.value = id;
     }
 
     /**
@@ -42,7 +42,7 @@ public class Id {
 
     @Override
     public String toString() {
-        return id;
+        return value;
     }
 
     @Override
@@ -57,12 +57,12 @@ public class Id {
         }
 
         Id otherId = (Id) other;
-        return id.equals(otherId.id);
+        return value.equals(otherId.value);
     }
 
     @Override
     public int hashCode() {
-        return id.hashCode();
+        return value.hashCode();
     }
 
 }

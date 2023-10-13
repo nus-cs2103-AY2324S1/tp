@@ -7,8 +7,10 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPARTMENT_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_POSITION_BOB;
 
 import org.junit.jupiter.api.Test;
 
@@ -39,6 +41,14 @@ public class EditEmployeeDescriptorTest {
         EditEmployeeDescriptor editedAmy = new EditEmployeeDescriptorBuilder(DESC_AMY).withName(VALID_NAME_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
+        // different position -> returns false
+        editedAmy = new EditEmployeeDescriptorBuilder(DESC_AMY).withPosition(VALID_POSITION_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different id -> returns false
+        editedAmy = new EditEmployeeDescriptorBuilder(DESC_AMY).withId(VALID_ID_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
         // different phone -> returns false
         editedAmy = new EditEmployeeDescriptorBuilder(DESC_AMY).withPhone(VALID_PHONE_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
@@ -57,7 +67,8 @@ public class EditEmployeeDescriptorTest {
         EditEmployeeDescriptor editEmployeeDescriptor = new EditEmployeeDescriptor();
         String expected = EditEmployeeDescriptor.class.getCanonicalName() + "{name="
                 + editEmployeeDescriptor.getName().orElse(null) + ", position="
-                + editEmployeeDescriptor.getPosition().orElse(null) + ", phone="
+                + editEmployeeDescriptor.getPosition().orElse(null) + ", id="
+                + editEmployeeDescriptor.getId().orElse(null) + ", phone="
                 + editEmployeeDescriptor.getPhone().orElse(null) + ", email="
                 + editEmployeeDescriptor.getEmail().orElse(null) + ", departments="
                 + editEmployeeDescriptor.getDepartments().orElse(null) + "}";

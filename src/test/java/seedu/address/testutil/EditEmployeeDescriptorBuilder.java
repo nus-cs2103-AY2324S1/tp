@@ -8,6 +8,7 @@ import seedu.address.logic.commands.EditCommand.EditEmployeeDescriptor;
 import seedu.address.model.department.Department;
 import seedu.address.model.employee.Email;
 import seedu.address.model.employee.Employee;
+import seedu.address.model.employee.Id;
 import seedu.address.model.employee.Name;
 import seedu.address.model.employee.Phone;
 import seedu.address.model.employee.Position;
@@ -34,6 +35,7 @@ public class EditEmployeeDescriptorBuilder {
         descriptor = new EditEmployeeDescriptor();
         descriptor.setName(employee.getName());
         descriptor.setPosition(employee.getPosition());
+        descriptor.setId(employee.getId());
         descriptor.setPhone(employee.getPhone());
         descriptor.setEmail(employee.getEmail());
         descriptor.setDepartments(employee.getDepartments());
@@ -52,6 +54,14 @@ public class EditEmployeeDescriptorBuilder {
      */
     public EditEmployeeDescriptorBuilder withPosition(String position) {
         descriptor.setPosition(new Position(position));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Id} of the {@code EditEmployeeDescriptor} that we are building.
+     */
+    public EditEmployeeDescriptorBuilder withId(String id) {
+        descriptor.setId(new Id(id));
         return this;
     }
 
