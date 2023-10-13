@@ -6,6 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.Person;
 
 /**
  * Represents a Schedule in the address book.
@@ -13,18 +14,18 @@ import seedu.address.commons.util.ToStringBuilder;
  */
 public class Schedule {
     private static final String MESSAGE_CONSTRAINTS = "Schedules start time should be before its end time.";
-    private final TutorIndex tutorIndex;
+    private final Person tutor;
     private final StartTime startTime;
     private final EndTime endTime;
 
     /**
      * Every field must be present and not null.
      */
-    public Schedule(TutorIndex tutorIndex, StartTime startTime, EndTime endTime) {
-        requireAllNonNull(tutorIndex, startTime, endTime);
+    public Schedule(Person tutor, StartTime startTime, EndTime endTime) {
+        requireAllNonNull(tutor, startTime, endTime);
         checkArgument(isValidSchedule(startTime, endTime), MESSAGE_CONSTRAINTS);
 
-        this.tutorIndex = tutorIndex;
+        this.tutor = tutor;
         this.startTime = startTime;
         this.endTime = endTime;
     }
@@ -33,8 +34,8 @@ public class Schedule {
         return startTime.getTime().isBefore(endTime.getTime());
     }
 
-    public TutorIndex getTutorIndex() {
-        return tutorIndex;
+    public Person getTutor() {
+        return tutor;
     }
 
     public StartTime getStartTime() {
@@ -61,7 +62,7 @@ public class Schedule {
         }
 
         Schedule otherSchedule = (Schedule) other;
-        return tutorIndex.equals(otherSchedule.tutorIndex)
+        return tutor.equals(otherSchedule.tutor)
                 && startTime.equals(otherSchedule.startTime)
                 && endTime.equals(otherSchedule.endTime);
     }
@@ -69,13 +70,13 @@ public class Schedule {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(tutorIndex, startTime, endTime);
+        return Objects.hash(tutor, startTime, endTime);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("tutorIndex", tutorIndex)
+                .add("tutor", tutor)
                 .add("startTime", startTime)
                 .add("endTime", endTime)
                 .toString();

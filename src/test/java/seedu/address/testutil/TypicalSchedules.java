@@ -10,16 +10,16 @@ import seedu.address.model.schedule.Schedule;
 /**
  * A utility class containing a list of {@code Schedule} objects to be used in tests.
  */
-// Schedule objects are named in the format: SCHEDULE_{TUTOR_INDEX}_{DAY}_{MONTH}
+// Schedule objects are named in the format: SCHEDULE_{TUTOR}_{DAY}_{MONTH}
 public class TypicalSchedules {
-    public static final Schedule SCHEDULE_ONE_FIRST_JAN = new ScheduleBuilder()
-            .withTutorIndex(1)
+    public static final Schedule SCHEDULE_ALICE_FIRST_JAN = new ScheduleBuilder()
+            .withTutor(TypicalPersons.ALICE)
             .withStartTime(LocalDateTime.of(2023, 1, 1, 9, 0, 0))
             .withEndTime(LocalDateTime.of(2023, 1, 1, 11, 0, 0))
             .build();
 
-    public static final Schedule SCHEDULE_TWO_SECOND_JAN = new ScheduleBuilder()
-            .withTutorIndex(2)
+    public static final Schedule SCHEDULE_BOB_SECOND_JAN = new ScheduleBuilder()
+            .withTutor(TypicalPersons.BOB)
             .withStartTime(LocalDateTime.of(2023, 1, 2, 20, 0))
             .withEndTime(LocalDateTime.of(2023, 1, 2, 22, 0))
             .build();
@@ -27,6 +27,6 @@ public class TypicalSchedules {
     private TypicalSchedules() {} // prevents instantiation
 
     public static List<Schedule> getTypicalSchedules() {
-        return new ArrayList<>(Arrays.asList(SCHEDULE_ONE_FIRST_JAN, SCHEDULE_TWO_SECOND_JAN));
+        return new ArrayList<>(Arrays.asList(SCHEDULE_ALICE_FIRST_JAN, SCHEDULE_BOB_SECOND_JAN));
     }
 }

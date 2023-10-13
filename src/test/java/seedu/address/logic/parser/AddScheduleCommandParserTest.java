@@ -20,29 +20,31 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTOR_INDEX;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalSchedules.SCHEDULE_ONE_FIRST_JAN;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+
+import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddScheduleCommand;
 import seedu.address.model.schedule.EndTime;
-import seedu.address.model.schedule.Schedule;
 import seedu.address.model.schedule.StartTime;
-import seedu.address.model.schedule.TutorIndex;
-import seedu.address.testutil.ScheduleBuilder;
 
 public class AddScheduleCommandParserTest {
+    private static final String MESSAGE_INVALID_FORMAT =
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddScheduleCommand.MESSAGE_USAGE);
     private AddScheduleCommandParser parser = new AddScheduleCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Schedule expectedSchedule = new ScheduleBuilder(SCHEDULE_ONE_FIRST_JAN).build();
+        StartTime startTime = new StartTime(LocalDateTime.parse(VALID_START_TIME_ONE));
+        EndTime endTime = new EndTime(LocalDateTime.parse(VALID_END_TIME_ONE));
 
         // whitespace only preamble
         assertParseSuccess(parser,
                 PREAMBLE_WHITESPACE + TUTOR_INDEX_DESC_ONE + START_TIME_DESC_ONE
-                        + END_TIME_DESC_ONE, new AddScheduleCommand(expectedSchedule));
+                        + END_TIME_DESC_ONE, new AddScheduleCommand(INDEX_FIRST_PERSON, startTime, endTime));
     }
 
     @Test
@@ -116,7 +118,7 @@ public class AddScheduleCommandParserTest {
     public void parse_invalidValue_failure() {
         // invalid tutor index
         assertParseFailure(parser, INVALID_TUTOR_INDEX + START_TIME_DESC_ONE + END_TIME_DESC_ONE,
-                TutorIndex.MESSAGE_CONSTRAINTS);
+                MESSAGE_INVALID_FORMAT);
 
         // invalid start time
         assertParseFailure(parser, TUTOR_INDEX_DESC_TWO + INVALID_START_TIME + END_TIME_DESC_ONE,
@@ -128,7 +130,7 @@ public class AddScheduleCommandParserTest {
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_TUTOR_INDEX + START_TIME_DESC_ONE + INVALID_END_TIME,
-                TutorIndex.MESSAGE_CONSTRAINTS);
+                MESSAGE_INVALID_FORMAT);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + TUTOR_INDEX_DESC_TWO + START_TIME_DESC_ONE

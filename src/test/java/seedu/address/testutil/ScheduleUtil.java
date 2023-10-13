@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTOR_INDEX;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.time.format.DateTimeFormatter;
 
@@ -30,7 +31,7 @@ public class ScheduleUtil {
      */
     public static String getScheduleDetails(Schedule schedule) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_TUTOR_INDEX + schedule.getTutorIndex().value.toString() + " ");
+        sb.append(PREFIX_TUTOR_INDEX.toString() + INDEX_FIRST_PERSON.getOneBased() + " ");
         sb.append(PREFIX_START_TIME + schedule.getStartTime().value.format(startTimeFormatter) + " ");
         sb.append(PREFIX_END_TIME + schedule.getEndTime().value.format(endTimeFormatter) + " ");
         return sb.toString();
