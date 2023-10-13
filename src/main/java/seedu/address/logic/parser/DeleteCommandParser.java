@@ -53,7 +53,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
-        String[] nameWords = trimmedName.split("\\s+");
+        String[] nameWords = trimmedName.toLowerCase().split("\\s+");
         return new DeleteCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameWords)));
     }
 
