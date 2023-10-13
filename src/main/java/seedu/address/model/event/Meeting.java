@@ -1,9 +1,5 @@
 package seedu.address.model.event;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-
 /**
  * Represents a Meeting in the address book.
  */
@@ -15,17 +11,16 @@ public class Meeting extends Event {
      * @param startTime start time of the meeting
      * @param endTime end time of the meeting
      */
-    public Meeting(Name name, LocalDate date, LocalTime startTime, LocalTime endTime) {
-        super(name, LocalDateTime.of(date, startTime), LocalDateTime.of(date, endTime));
+    public Meeting(EventName name, EventDate date, EventTime startTime, EventTime endTime) {
+        super(name, date, startTime, date, endTime);
     }
 
     /**
      * Constructor with just the date (without start and end time)
      * @param date date of the meeting
      */
-    public Meeting(Name name, LocalDate date) {
-        super(name, LocalDateTime.of(date.getYear(), date.getMonth(), date.getDayOfMonth(), 0, 0),
-                LocalDateTime.of(date.getYear(), date.getMonth(), date.getDayOfMonth(), 0, 0));
+    public Meeting(EventName name, EventDate date) {
+        super(name, date, null, date, null);
     }
 
     /**
@@ -33,6 +28,6 @@ public class Meeting extends Event {
      */
     @Override
     public String toString() {
-        return "Meeting: " + super.getStartDateTime().toString();
+        return "Meeting: " + super.getStartDate().toString();
     }
 }

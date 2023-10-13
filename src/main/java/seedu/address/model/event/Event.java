@@ -1,6 +1,8 @@
 package seedu.address.model.event;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 import seedu.address.model.person.Person;
@@ -12,43 +14,49 @@ public abstract class Event {
 
     private ArrayList<Person> persons = new ArrayList<>();
 
-    private LocalDateTime startDateTime;
-    private LocalDateTime endDateTime;
+    private EventDate startDate;
 
-    private Name name;
+    private EventTime startTime;
+    private EventDate endDate;
 
-    /**
-     * Constructor for the event with start datetime and end datetime
-     * @param startDateTime start date and time of the event
-     * @param endDateTime end date and time of the event
-     */
-    public Event(Name name, LocalDateTime startDateTime, LocalDateTime endDateTime) {
+    private EventTime endTime;
+
+    private EventName name;
+
+    public Event(EventName name, EventDate startDate, EventTime startTime, EventDate endDate, EventTime endTime) {
         this.name = name;
-        this.startDateTime = startDateTime;
-        this.endDateTime = endDateTime;
+        this.startDate = startDate;
+        this.startTime = startTime;
+        this.endDate = endDate;
+        this.endTime = endTime;
+
     }
 
     /**
      * Gets the start date time of the event
      * @return start date time of the event
      */
-    public LocalDateTime getStartDateTime() {
-        return this.startDateTime;
+    public EventDate getStartDate() {
+        return this.startDate;
     }
 
-    /**
-     * Gets the end date time of the event
-     * @return  end date time of the event
-     */
-    public LocalDateTime getEndDateTime() {
-        return this.endDateTime;
+    public EventTime getStartTime() {
+        return this.startTime;
+    }
+
+    public EventDate getEndDate() {
+        return this.endDate;
+    }
+
+    public EventTime getEndTime() {
+        return this.endTime;
     }
 
     /**
      * Gets the name of the event
      * @return name of the event
      */
-    public Name getName() {
+    public EventName getName() {
         return this.name;
     }
 }
