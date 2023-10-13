@@ -1,12 +1,22 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.StatusContainsKeywordsPredicate;
+
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Stream;
+
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -19,15 +29,49 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindCommand parse(String args) throws ParseException {
-        String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_STATUS);
+
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME)
+                || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        String[] nameKeywords = trimmedArgs.split("\\s+");
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_STATUS);
 
-        return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        String[] nameKeywords = parseKeywordsList(argMultimap.getAllValues(PREFIX_NAME));
+        String[] statusKeywords = parseKeywordsList(argMultimap.getAllValues(PREFIX_STATUS));
+
+        if (ParserUtil.parseStatus(argMultimap.getAllValues(PREFIX_STATUS)) == null) {
+            return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)),
+                    null);
+        }
+        return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)),
+                new StatusContainsKeywordsPredicate(Arrays.asList(statusKeywords)));
     }
 
+    /**
+     * Parses a list of keywords into an array of strings.
+     *
+     * @param keywordsList A list of keywords, where each element may contain multiple words.
+     * @return An array of strings where each element represents an individual keyword.
+     *
+     * The method first converts the list of keywords into a string representation,
+     * e.g., [Alex, Yeoh] (including square brackets). It then removes the square brackets
+     * from the string representation, resulting in a cleaned string, e.g., Alex, Yeoh (no square brackets).
+     * Finally, the cleaned string is split into an array of strings, where each word separated
+     * by a whitespace or comma is considered a single element.
+     *
+     * Example:
+     * If keywordsList is ["John Doe"], the returned array will be ["John", "Doe"].
+     */
+    private String[] parseKeywordsList(List<String> keywordsList) {
+        String list = keywordsList.toString();
+        String cleanedList = list.replaceAll("[\\[\\]]", "");
+        return cleanedList.split("\\s+");
+    }
+
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
 }

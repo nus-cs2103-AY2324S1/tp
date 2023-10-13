@@ -13,6 +13,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Status;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -121,4 +122,31 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    public static Set<String> parseNames(Collection<String> names) throws ParseException {
+        requireNonNull(names);
+        final Set<String> nameSet = new HashSet<>();
+        for (String name : names) {
+            nameSet.add(parseName(name).toString());
+        }
+        return nameSet;
+    }
+
+    public static Set<String> parseStatus(Collection<String> statusList) throws ParseException {
+        requireNonNull(statusList);
+        final Set<String> statusSet = new HashSet<>();
+        for (String status : statusList) {
+            status = status.trim();
+            if (!Status.isValidStatus(status)) {
+                throw new ParseException(Status.MESSAGE_CONSTRAINTS);
+            }
+            statusSet.add(status);
+        }
+//        if (statusSet.isEmpty()) {
+//            return null;
+//        }
+        return statusSet;
+
+    }
+
 }
