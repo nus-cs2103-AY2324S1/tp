@@ -37,6 +37,17 @@ public class FindCommandParser implements Parser<FindCommand> {
         return new FindCommand(checkAllFields);
     }
 
+    /**
+     * Returns a Predicate that checks all the relevant fields of a {@code Person} object
+     * against the keywords provided in the {@code ArgumentMultimap}.
+     * <p>
+     * The returned predicate will return {@code true} for a {@code Person} object if
+     * all its fields match all the corresponding keywords specified in the {@code argMultimap}.
+     * </p>
+     *
+     * @param argMultimap the parsed user input containing prefixes and their values.
+     * @return a Predicate checking all the fields of a Person against the keywords.
+     */
     private static Predicate<Person> checkAllFieldsPredicate(ArgumentMultimap argMultimap) {
         Predicate<Person> checkNames = person -> (argMultimap.getAllValues(PREFIX_NAME).stream()
                 .allMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword)));
