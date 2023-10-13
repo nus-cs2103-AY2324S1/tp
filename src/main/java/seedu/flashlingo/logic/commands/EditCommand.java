@@ -18,7 +18,6 @@ import java.util.List;
  */
 public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
-
     public static final String MESSAGE_EDIT_FLASHCARD_SUCCESS = "Edited Flashcard: %1$s";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the flashcard identified "
@@ -59,7 +58,7 @@ public class EditCommand extends Command {
         if (!flashCardToEdit.isSameFlashCard(editedFlashCard) && model.hasFlashCard(editedFlashCard)) {
             throw new CommandException(Messages.MESSAGE_DUPLICATE_FLASHCARD);
         }
-
+        System.out.println("here");
         model.setFlashCard(flashCardToEdit, editedFlashCard);
         model.updateFilteredFlashCardList(PREDICATE_SHOW_ALL_FLASHCARDS);
         return new CommandResult(String.format(MESSAGE_EDIT_FLASHCARD_SUCCESS, Messages.format(editedFlashCard)));
