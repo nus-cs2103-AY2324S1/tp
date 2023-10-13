@@ -25,5 +25,4 @@ public class DeleteMemberCommandParser implements Parser<DeleteMemberCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteMemberCommand.MESSAGE_USAGE), pe);
         }
     }
-
 }
