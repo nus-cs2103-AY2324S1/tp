@@ -3,13 +3,13 @@ package seedu.address.model.person;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.TestData.ALICE;
+import static seedu.address.testutil.TestData.BOB;
 import static seedu.address.testutil.TestData.VALID_EMAIL_BOB;
 import static seedu.address.testutil.TestData.VALID_NAME_BOB;
 import static seedu.address.testutil.TestData.VALID_NOTE_BOB;
 import static seedu.address.testutil.TestData.VALID_PHONE_BOB;
 import static seedu.address.testutil.TestData.VALID_TAG_HUSBAND;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
 

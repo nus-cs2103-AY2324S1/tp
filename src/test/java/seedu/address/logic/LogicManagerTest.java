@@ -4,11 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TestData.AMY;
 import static seedu.address.testutil.TestData.EMAIL_DESC_AMY;
 import static seedu.address.testutil.TestData.NAME_DESC_AMY;
 import static seedu.address.testutil.TestData.NOTE_DESC_AMY;
 import static seedu.address.testutil.TestData.PHONE_DESC_AMY;
-import static seedu.address.testutil.TypicalPersons.AMY;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;

@@ -7,6 +7,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.TestData.AMY;
+import static seedu.address.testutil.TestData.BOB;
 import static seedu.address.testutil.TestData.EMAIL_DESC_AMY;
 import static seedu.address.testutil.TestData.EMAIL_DESC_BOB;
 import static seedu.address.testutil.TestData.INVALID_EMAIL_DESC;
@@ -29,8 +31,6 @@ import static seedu.address.testutil.TestData.VALID_NOTE_BOB;
 import static seedu.address.testutil.TestData.VALID_PHONE_BOB;
 import static seedu.address.testutil.TestData.VALID_TAG_FRIEND;
 import static seedu.address.testutil.TestData.VALID_TAG_HUSBAND;
-import static seedu.address.testutil.TypicalPersons.AMY;
-import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
 

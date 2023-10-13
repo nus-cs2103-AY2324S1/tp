@@ -13,7 +13,7 @@ import static seedu.address.testutil.TestData.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TestData.VALID_NAME_BOB;
 import static seedu.address.testutil.TestData.VALID_PHONE_BOB;
 import static seedu.address.testutil.TestData.VALID_TAG_HUSBAND;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TestData.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 

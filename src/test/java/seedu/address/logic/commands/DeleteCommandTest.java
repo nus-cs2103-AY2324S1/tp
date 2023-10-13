@@ -8,7 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TestData.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TestData.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TestData.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
