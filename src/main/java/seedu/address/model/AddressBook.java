@@ -6,6 +6,8 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.member.Member;
+import seedu.address.model.member.UniqueMemberList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -16,6 +18,7 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private final UniqueMemberList memberList;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -26,6 +29,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        memberList = new UniqueMemberList();
     }
 
     public AddressBook() {}
@@ -94,6 +98,43 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    /// member-level methods
+
+    /**
+     * Returns true if a member with the same identity as {@code member} exists in the address book.
+     */
+    public boolean hasMember(Member member) {
+        requireNonNull(member);
+        return memberList.contains(member);
+    }
+
+    /**
+     * Adds a member to the address book.
+     * The member must not already exist in the address book.
+     */
+    public void addMember(Member m) {
+        memberList.add(m);
+    }
+
+    /**
+     * Replaces the given member {@code target} in the list with {@code editedMember}.
+     * {@code target} must exist in the address book.
+     * The member identity of {@code editedMember} must not be the same as another existing member in the address book.
+     */
+    public void setMember(Member target, Member editedMember) {
+        requireNonNull(editedMember);
+
+        memberList.setMember(target, editedMember);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeMember(Member key) {
+        memberList.remove(key);
+    }
+
     //// util methods
 
     @Override
@@ -106,6 +147,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Member> getMemberList() {
+        return memberList.asUnmodifiableObservableList();
     }
 
     @Override
