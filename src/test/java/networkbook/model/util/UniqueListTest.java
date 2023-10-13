@@ -59,12 +59,15 @@ public class UniqueListTest {
     }
 
     @Test
-    public void addAll_duplicate_throwsDuplicateException() {
+    public void addAll_duplicate_duplicateNotAdded() {
         UniqueList<UniqueNumber> uniqueList = new UniqueList<>();
         uniqueList.add(new UniqueNumber(1, 0));
         UniqueList<UniqueNumber> duplicateUniqueList = new UniqueList<>();
         duplicateUniqueList.add(new UniqueNumber(1, 10));
-        assertThrows(DuplicateException.class, () -> uniqueList.addAll(duplicateUniqueList));
+        uniqueList.addAll(duplicateUniqueList);
+        UniqueList<UniqueNumber> expectedList = new UniqueList<>();
+        expectedList.add(new UniqueNumber(1, 0));
+        assertEquals(expectedList, uniqueList);
     }
 
     @Test

@@ -18,6 +18,7 @@ import networkbook.model.person.Name;
 import networkbook.model.person.Phone;
 import networkbook.model.person.Priority;
 import networkbook.model.tag.Tag;
+import networkbook.model.util.UniqueList;
 import networkbook.testutil.TypicalIndexes;
 
 public class ParserUtilTest {
@@ -32,6 +33,7 @@ public class ParserUtilTest {
     private static final String VALID_PHONE = "123456";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
+    private static final String VALID_EMAIL_2 = "nkn@what.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
     private static final String VALID_PRIORITY = "meDIuM";
@@ -148,6 +150,29 @@ public class ParserUtilTest {
         String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
         Email expectedEmail = new Email(VALID_EMAIL);
         assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
+    }
+
+    @Test
+    public void parseEmails_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseEmails(null));
+    }
+
+    @Test
+    public void parseEmails_collectionWithInvalidEmails_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseEmails(Arrays.asList(VALID_EMAIL, INVALID_EMAIL)));
+    }
+
+    @Test
+    public void parseEmails_emptyCollection_returnsEmptyListOfEmails() throws Exception {
+        assertEquals(new UniqueList<Email>(), ParserUtil.parseEmails(Arrays.asList()));
+    }
+
+    @Test
+    public void parseEmails_collectionWithValidEmails_returnsEmailList() throws Exception {
+        UniqueList<Email> expectedList = new UniqueList<Email>()
+                .setItems(Arrays.asList(new Email(VALID_EMAIL), new Email(VALID_EMAIL_2)));
+        UniqueList<Email> actualList = ParserUtil.parseEmails(Arrays.asList(VALID_EMAIL, VALID_EMAIL_2));
+        assertEquals(expectedList, actualList);
     }
 
     @Test
