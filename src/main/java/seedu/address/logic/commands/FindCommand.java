@@ -36,20 +36,7 @@ public class FindCommand extends Command {
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
 
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof FindCommand)) {
-            return false;
-        }
-
-        FindCommand otherFindCommand = (FindCommand) other;
-        return predicate.equals(otherFindCommand.predicate);
-    }
+    // FindCommand should be compared by identity, since we can't check for equality of predicates for now
 
     @Override
     public String toString() {
