@@ -117,9 +117,9 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        filler = new PersonListPanel(logic.getFilteredPersonList());
+//        filler = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
-        appointmentListPanelPlaceholder.getChildren().add(filler.getRoot());
+//        appointmentListPanelPlaceholder.getChildren().add(filler.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
