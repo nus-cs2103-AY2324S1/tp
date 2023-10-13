@@ -130,9 +130,8 @@ public class ModelManager implements Model {
 
     @Override
     public String getWelcomeMessage() {
-        return "\"Hey there, fabulous single!" + "\n" +
-                "Get ready to embark on an exciting journey with Barbie the cupid, " + "\n" +
-                "your personal matchmaker on a mission to find your perfect match!";
+        return "Hey there, fabulous single!" + "\n" +
+                "Get ready to embark on an exciting journey with LoveBook to find your perfect match ❤︎₊ ⊹";
     }
 
     @Override
