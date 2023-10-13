@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.lovebook.commons.core.GuiSettings;
 import seedu.lovebook.commons.core.LogsCenter;
+import seedu.lovebook.logic.Messages;
 import seedu.lovebook.model.person.Date;
 
 /**
@@ -130,8 +131,7 @@ public class ModelManager implements Model {
 
     @Override
     public String getWelcomeMessage() {
-        return "Hey there, fabulous single!" + "\n"
-                + "Get ready to embark on an exciting journey with LoveBook to find your perfect match ❤︎₊ ⊹";
+        return Messages.WELCOME_MESSAGE;
     }
 
     @Override

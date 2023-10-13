@@ -94,6 +94,13 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void executeWelcomeMessage() {
+        String expected = "Hey there, fabulous single!" + "\n"
+                + "Get ready to embark on an exciting journey with LoveBook to find your perfect match ❤︎₊ ⊹";
+        assertEquals(expected, modelManager.getWelcomeMessage());
+    }
+
+    @Test
     public void equals() {
         LoveBook loveBook = new LoveBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         LoveBook differentLoveBook = new LoveBook();
