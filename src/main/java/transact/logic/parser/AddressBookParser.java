@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 import transact.commons.core.LogsCenter;
 import transact.logic.commands.AddStaffCommand;
 import transact.logic.commands.AddTransactionCommand;
+import transact.logic.commands.DeleteTransactionCommand;
 import transact.logic.commands.ClearCommand;
 import transact.logic.commands.Command;
 import transact.logic.commands.DeleteStaffCommand;
@@ -18,7 +19,6 @@ import transact.logic.commands.ExitCommand;
 import transact.logic.commands.FindCommand;
 import transact.logic.commands.HelpCommand;
 import transact.logic.commands.ViewCommand;
-import transact.logic.commands.DeleteTransactionCommand;
 import transact.logic.parser.exceptions.ParseException;
 
 /**

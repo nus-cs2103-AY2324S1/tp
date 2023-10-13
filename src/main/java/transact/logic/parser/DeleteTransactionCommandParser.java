@@ -3,7 +3,6 @@ package transact.logic.parser;
 import static transact.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import transact.commons.core.index.Index;
-import transact.logic.commands.DeleteStaffCommand;
 import transact.logic.commands.DeleteTransactionCommand;
 import transact.logic.parser.exceptions.ParseException;
 
