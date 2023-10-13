@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
+import seedu.address.model.person.LicenceContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 /**
@@ -20,16 +21,30 @@ public class FindCommand extends Command {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie";
 
-    private final NameContainsKeywordsPredicate predicate;
+    private final NameContainsKeywordsPredicate namePredicate;
+    private final LicenceContainsKeywordsPredicate licencePredicate;
 
-    public FindCommand(NameContainsKeywordsPredicate predicate) {
-        this.predicate = predicate;
+    /**
+     * Constructor for FindCommand
+     *
+     * @param namePredicate the predicate to be used for finding by name
+     * @param licencePredicate the predicate to be used for finding by licence plate number
+     */
+    public FindCommand(NameContainsKeywordsPredicate namePredicate,
+                       LicenceContainsKeywordsPredicate licencePredicate) {
+        this.namePredicate = namePredicate;
+        this.licencePredicate = licencePredicate;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
+        if (!namePredicate.isEmpty()) {
+            model.updateFilteredPersonList(namePredicate);
+        }
+        if (!licencePredicate.isEmpty()) {
+            model.updateFilteredPersonList(licencePredicate);
+        }
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
@@ -46,13 +61,15 @@ public class FindCommand extends Command {
         }
 
         FindCommand otherFindCommand = (FindCommand) other;
-        return predicate.equals(otherFindCommand.predicate);
+        return namePredicate.equals(otherFindCommand.namePredicate)
+                && licencePredicate.equals(otherFindCommand.licencePredicate);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("predicate", predicate)
+                .add("name predicate", namePredicate)
+                .add("licence predicate", licencePredicate)
                 .toString();
     }
 }
