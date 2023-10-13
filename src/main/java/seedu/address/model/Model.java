@@ -96,5 +96,15 @@ public interface Model {
 
     void updateFilteredMembersList(Predicate<Member> predicate);
 
+    /**
+     * Adds the given member.
+     * {@code member} must not already exist in the address book.
+     */
     void addMember(Member toAdd);
+
+    /**
+     * Deletes the member person.
+     * The member must exist in the address book.
+     */
+    void deleteMember(Member toDelete);
 }
