@@ -1,12 +1,11 @@
 package seedu.flashlingo.logic.parser;
 
-import seedu.flashlingo.logic.newcommands.NewCommand;
 import seedu.flashlingo.logic.parser.exceptions.ParseException;
 
 /**
  * Represents a Parser that is able to parse user input into a {@code Command} of type {@code T}.
  */
-public interface NewParser<T extends NewCommand> {
+public interface NewParser<T extends seedu.flashlingo.logic.newcommands.Command> {
 
     /**
      * Parses {@code userInput} into a command and returns it.

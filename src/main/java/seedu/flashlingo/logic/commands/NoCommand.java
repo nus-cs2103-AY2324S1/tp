@@ -1,16 +1,15 @@
-package seedu.flashlingo.logic.newcommands;
+package seedu.flashlingo.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
 import seedu.flashlingo.commons.util.ToStringBuilder;
-import seedu.flashlingo.logic.commands.CommandResult;
 import seedu.flashlingo.logic.commands.exceptions.CommandException;
 import seedu.flashlingo.model.NewModel;
 
 /**
  * Adds a person to the address book.
  */
-public class NoCommand extends NewCommand {
+public class NoCommand extends Command {
 
     public static final String COMMAND_WORD = "no";
 

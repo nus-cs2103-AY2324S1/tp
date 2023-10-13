@@ -1,9 +1,9 @@
 package seedu.flashlingo.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.flashlingo.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.flashlingo.model.NewModel.PREDICATE_SHOW_ALL_FLASHCARDS;
 
-import seedu.flashlingo.model.Model;
+import seedu.flashlingo.model.NewModel;
 
 /**
  * Lists all persons in the address book to the user.
@@ -12,13 +12,13 @@ public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
 
-    public static final String MESSAGE_SUCCESS = "Listed all persons";
+    public static final String MESSAGE_SUCCESS = "Listed all flashcards";
 
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(NewModel model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredFlashCardList(PREDICATE_SHOW_ALL_FLASHCARDS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

@@ -11,7 +11,6 @@ import seedu.flashlingo.commons.core.GuiSettings;
 import seedu.flashlingo.commons.core.LogsCenter;
 import seedu.flashlingo.logic.commands.CommandResult;
 import seedu.flashlingo.logic.commands.exceptions.CommandException;
-import seedu.flashlingo.logic.newcommands.NewCommand;
 import seedu.flashlingo.logic.parser.FlashlingoParser;
 import seedu.flashlingo.logic.parser.exceptions.ParseException;
 import seedu.flashlingo.model.NewModel;
@@ -49,7 +48,7 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        NewCommand command = flashlingoParser.parseCommand(commandText);
+        seedu.flashlingo.logic.newcommands.Command command = flashlingoParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
         try {
