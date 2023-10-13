@@ -3,11 +3,11 @@ package seedu.address.model.event;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_EARLIER;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_EARLIER;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_LATER;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_LATER;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE;
 import static seedu.address.model.event.EventPeriod.isValidPeriod;
 import static seedu.address.testutil.Assert.assertThrows;
 
