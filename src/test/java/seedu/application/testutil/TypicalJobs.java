@@ -2,6 +2,8 @@ package seedu.application.testutil;
 
 import static seedu.application.logic.commands.CommandTestUtil.VALID_COMPANY_CHEF;
 import static seedu.application.logic.commands.CommandTestUtil.VALID_COMPANY_CLEANER;
+import static seedu.application.logic.commands.CommandTestUtil.VALID_DEADLINE_CHEF;
+import static seedu.application.logic.commands.CommandTestUtil.VALID_DEADLINE_CLEANER;
 import static seedu.application.logic.commands.CommandTestUtil.VALID_ROLE_CHEF;
 import static seedu.application.logic.commands.CommandTestUtil.VALID_ROLE_CLEANER;
 
@@ -40,13 +42,14 @@ public class TypicalJobs {
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Job CHEF = new JobBuilder().withRole(VALID_ROLE_CHEF)
-            .withCompany(VALID_COMPANY_CHEF).build();
+            .withCompany(VALID_COMPANY_CHEF).withDeadline(VALID_DEADLINE_CHEF).build();
     public static final Job CLEANER = new JobBuilder().withRole(VALID_ROLE_CLEANER)
-            .withCompany(VALID_COMPANY_CLEANER).build();
+            .withCompany(VALID_COMPANY_CLEANER).withDeadline(VALID_DEADLINE_CLEANER).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
-    private TypicalJobs() {} // prevents instantiation
+    private TypicalJobs() {
+    } // prevents instantiation
 
     /**
      * Returns an {@code ApplicationBook} with all the typical jobs.

@@ -18,14 +18,17 @@ class JsonAdaptedJob {
 
     private final String role;
     private final String company;
+    private final String deadline;
 
     /**
      * Constructs a {@code JsonAdaptedJob} with the given job details.
      */
     @JsonCreator
-    public JsonAdaptedJob(@JsonProperty("role") String role, @JsonProperty("company") String company) {
+    public JsonAdaptedJob(@JsonProperty("role") String role, @JsonProperty("company") String company,
+                          @JsonProperty("deadline") String deadline) {
         this.role = role;
         this.company = company;
+        this.deadline = deadline;
     }
 
     /**
@@ -34,6 +37,7 @@ class JsonAdaptedJob {
     public JsonAdaptedJob(Job source) {
         role = source.getRole().description;
         company = source.getCompany().name;
+        deadline = source.getDeadline().deadline;
     }
 
     /**
@@ -57,7 +61,14 @@ class JsonAdaptedJob {
             throw new IllegalValueException(Company.MESSAGE_CONSTRAINTS);
         }
         final Company modelCompany = new Company(company);
-        final Deadline modelDeadline = null; //TODO: Implement parsing and marshalling in the storage commit.
+
+        if (deadline == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Deadline.class.getSimpleName()));
+        }
+        if (!Deadline.isValidDeadline(deadline)) {
+            throw new IllegalValueException(Deadline.MESSAGE_CONSTRAINTS);
+        }
+        final Deadline modelDeadline = new Deadline(deadline);
 
         return new Job(modelRole, modelCompany, modelDeadline);
     }

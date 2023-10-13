@@ -36,31 +36,33 @@ public class Deadline {
     public Deadline(String dateTime) {
         requireNonNull(dateTime);
         AppUtil.checkArgument(isValidDeadline(dateTime), MESSAGE_CONSTRAINTS);
-        this.deadline = dateTime;
+
+        if (isEmptyDeadline(dateTime)) {
+            this.deadline = TO_ADD_DEADLINE;
+        } else {
+            this.deadline = dateTime;
+        }
     }
 
     /**
      * Returns true if a given string is a valid deadline.
      */
-    public boolean isValidDeadline(String test) {
+    public static boolean isValidDeadline(String test) {
         if (isEmptyDeadline(test)) {
             return true;
         }
-        LocalDateTime dateTime = LocalDateTime.parse(test, dateTimeFormatter);
-        LocalDateTime current = LocalDateTime.now();
-        return dateTime.format(dateTimeFormatter).equals(test)
-                && dateTime.isAfter(current);
-    }
-
-    private boolean isEmptyDeadline() {
-        if (deadline.equals(TO_ADD_DEADLINE)) {
-            return true;
+        try {
+            LocalDateTime dateTime = LocalDateTime.parse(test, dateTimeFormatter);
+            LocalDateTime current = LocalDateTime.now();
+            return dateTime.format(dateTimeFormatter).equals(test)
+                    && dateTime.isAfter(current);
+        } catch (Exception e) {
+            return false;
         }
-        return false;
     }
 
-    private boolean isEmptyDeadline(String test) {
-        if (test.equals(TO_ADD_DEADLINE)) {
+    private static boolean isEmptyDeadline(String test) {
+        if (test.equals(TO_ADD_DEADLINE) || test.isEmpty()) {
             return true;
         }
         return false;
@@ -68,7 +70,7 @@ public class Deadline {
 
     @Override
     public String toString() {
-        if (isEmptyDeadline()) {
+        if (isEmptyDeadline(deadline)) {
             return TO_ADD_DEADLINE;
         } else {
             LocalDateTime parsedDeadline = LocalDateTime.parse(deadline, dateTimeFormatter);
