@@ -7,12 +7,15 @@ import java.util.stream.Stream;
 import networkbook.logic.Messages;
 import networkbook.logic.commands.CreateCommand;
 import networkbook.logic.parser.exceptions.ParseException;
-import networkbook.model.person.Address;
+import networkbook.model.person.Course;
 import networkbook.model.person.Email;
+import networkbook.model.person.GraduatingYear;
 import networkbook.model.person.Name;
 import networkbook.model.person.Person;
 import networkbook.model.person.Phone;
 import networkbook.model.person.Priority;
+import networkbook.model.person.Specialisation;
+import networkbook.model.person.WebLink;
 import networkbook.model.tag.Tag;
 import networkbook.model.util.UniqueList;
 
@@ -33,7 +36,10 @@ public class CreateCommandParser implements Parser<CreateCommand> {
                         CliSyntax.PREFIX_NAME,
                         CliSyntax.PREFIX_PHONE,
                         CliSyntax.PREFIX_EMAIL,
-                        CliSyntax.PREFIX_ADDRESS,
+                        CliSyntax.PREFIX_WEBLINK,
+                        CliSyntax.PREFIX_GRADUATING_YEAR,
+                        CliSyntax.PREFIX_COURSE,
+                        CliSyntax.PREFIX_SPECIALISATION,
                         CliSyntax.PREFIX_TAG,
                         CliSyntax.PREFIX_PRIORITY
                 );
@@ -41,7 +47,10 @@ public class CreateCommandParser implements Parser<CreateCommand> {
         if (!arePrefixesPresent(
                 argMultimap,
                 CliSyntax.PREFIX_NAME,
-                CliSyntax.PREFIX_ADDRESS,
+                CliSyntax.PREFIX_WEBLINK,
+                CliSyntax.PREFIX_GRADUATING_YEAR,
+                CliSyntax.PREFIX_COURSE,
+                CliSyntax.PREFIX_SPECIALISATION,
                 CliSyntax.PREFIX_PHONE,
                 CliSyntax.PREFIX_EMAIL
         ) || !argMultimap.getPreamble().isEmpty()) {
@@ -53,18 +62,27 @@ public class CreateCommandParser implements Parser<CreateCommand> {
                 CliSyntax.PREFIX_NAME,
                 CliSyntax.PREFIX_PHONE,
                 CliSyntax.PREFIX_EMAIL,
-                CliSyntax.PREFIX_ADDRESS,
+                CliSyntax.PREFIX_WEBLINK,
+                CliSyntax.PREFIX_GRADUATING_YEAR,
+                CliSyntax.PREFIX_COURSE,
+                CliSyntax.PREFIX_SPECIALISATION,
                 CliSyntax.PREFIX_PRIORITY
         );
         Name name = ParserUtil.parseName(argMultimap.getValue(CliSyntax.PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(CliSyntax.PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(CliSyntax.PREFIX_EMAIL).get());
         UniqueList<Email> emails = new UniqueList<Email>().setItems(List.of(email));
-        Address address = ParserUtil.parseAddress(argMultimap.getValue(CliSyntax.PREFIX_ADDRESS).get());
+        WebLink webLink = ParserUtil.parseWebLink(argMultimap.getValue(CliSyntax.PREFIX_WEBLINK).get());
+        GraduatingYear graduatingYear = ParserUtil.parseGraduatingYear(
+                    argMultimap.getValue(CliSyntax.PREFIX_GRADUATING_YEAR).get());
+        Course course = ParserUtil.parseCourse(argMultimap.getValue(CliSyntax.PREFIX_COURSE).get());
+        Specialisation specialisation = ParserUtil.parseSpecialisation(
+                    argMultimap.getValue(CliSyntax.PREFIX_SPECIALISATION).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(CliSyntax.PREFIX_TAG));
         Priority priority = ParserUtil.parsePriority(argMultimap.getValue(CliSyntax.PREFIX_PRIORITY).orElse(null));
 
-        Person person = new Person(name, phone, emails, address, tagList, priority);
+        Person person = new Person(name, phone, emails, webLink, graduatingYear, course, specialisation,
+                    tagList, priority);
 
         return new CreateCommand(person);
     }

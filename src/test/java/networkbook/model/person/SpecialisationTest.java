@@ -39,7 +39,7 @@ public class SpecialisationTest {
         Specialisation specialisation = new Specialisation("Valid specialisation");
 
         // same values -> returns true
-        assertTrue(specialisation.equals(new Specialisation("Valid Course")));
+        assertTrue(specialisation.equals(new Specialisation("Valid specialisation")));
 
         // same object -> returns true
         assertTrue(specialisation.equals(specialisation));

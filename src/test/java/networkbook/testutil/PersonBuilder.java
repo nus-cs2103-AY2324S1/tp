@@ -4,12 +4,15 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import networkbook.model.person.Address;
+import networkbook.model.person.Course;
 import networkbook.model.person.Email;
+import networkbook.model.person.GraduatingYear;
 import networkbook.model.person.Name;
 import networkbook.model.person.Person;
 import networkbook.model.person.Phone;
 import networkbook.model.person.Priority;
+import networkbook.model.person.Specialisation;
+import networkbook.model.person.WebLink;
 import networkbook.model.tag.Tag;
 import networkbook.model.util.SampleDataUtil;
 import networkbook.model.util.UniqueList;
@@ -22,13 +25,19 @@ public class PersonBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_WEBLINK = "github.com/amybeez";
+    public static final String DEFAULT_GRADUATING_YEAR = "2000";
+    public static final String DEFAULT_COURSE = "Computer Science";
+    public static final String DEFAULT_SPECIALISATION = "Game Development";
     public static final String DEFAULT_PRIORITY = null;
 
     private Name name;
     private Phone phone;
     private UniqueList<Email> emails;
-    private Address address;
+    private WebLink webLink;
+    private GraduatingYear graduatingYear;
+    private Course course;
+    private Specialisation specialisation;
     private Set<Tag> tags;
     private Priority priority;
 
@@ -39,7 +48,10 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         emails = new UniqueList<Email>().setItems(List.of(new Email(DEFAULT_EMAIL)));
-        address = new Address(DEFAULT_ADDRESS);
+        webLink = new WebLink(DEFAULT_WEBLINK);
+        graduatingYear = new GraduatingYear(DEFAULT_GRADUATING_YEAR);
+        course = new Course(DEFAULT_COURSE);
+        specialisation = new Specialisation(DEFAULT_SPECIALISATION);
         tags = new HashSet<>();
         priority = null;
     }
@@ -51,7 +63,10 @@ public class PersonBuilder {
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
         emails = personToCopy.getEmails();
-        address = personToCopy.getAddress();
+        webLink = personToCopy.getWebLink();
+        graduatingYear = personToCopy.getGraduatingYear();
+        course = personToCopy.getCourse();
+        specialisation = personToCopy.getSpecialisation();
         tags = new HashSet<>(personToCopy.getTags());
         priority = personToCopy.getPriority().orElse(null);
     }
@@ -73,10 +88,34 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code Person} that we are building.
+     * Sets the {@code WebLink} of the {@code Person} that we are building.
      */
-    public PersonBuilder withAddress(String address) {
-        this.address = new Address(address);
+    public PersonBuilder withWebLink(String webLink) {
+        this.webLink = new WebLink(webLink);
+        return this;
+    }
+
+    /**
+     * Sets the {@code GraduatingYear} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withGraduatingYear(String graduatingYear) {
+        this.graduatingYear = new GraduatingYear(graduatingYear);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Course} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withCourse(String course) {
+        this.course = new Course(course);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Specialisation} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withSpecialisation(String specialisation) {
+        this.specialisation = new Specialisation(specialisation);
         return this;
     }
 
@@ -105,7 +144,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, emails, address, tags, priority);
+        return new Person(name, phone, emails, webLink, graduatingYear, course, specialisation, tags, priority);
     }
 
 }

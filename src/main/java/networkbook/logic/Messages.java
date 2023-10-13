@@ -42,8 +42,14 @@ public class Messages {
                 .append(person.getPhone())
                 .append("; Email: ")
                 .append(person.getEmails())
-                .append("; Address: ")
-                .append(person.getAddress())
+                .append("; Web Link: ")
+                .append(person.getWebLink())
+                .append("; Graduating Year: ")
+                .append(person.getGraduatingYear())
+                .append("; Course: ")
+                .append(person.getCourse())
+                .append("; Specialisation: ")
+                .append(person.getSpecialisation())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
         person.getPriority().ifPresent((Priority p) -> {

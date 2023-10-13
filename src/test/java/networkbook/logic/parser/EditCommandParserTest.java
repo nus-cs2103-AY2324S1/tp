@@ -7,12 +7,17 @@ import org.junit.jupiter.api.Test;
 
 import networkbook.commons.core.index.Index;
 import networkbook.logic.Messages;
+import networkbook.logic.commands.Command;
 import networkbook.logic.commands.CommandTestUtil;
 import networkbook.logic.commands.EditCommand;
 import networkbook.model.person.Address;
+import networkbook.model.person.Course;
 import networkbook.model.person.Email;
+import networkbook.model.person.GraduatingYear;
 import networkbook.model.person.Name;
 import networkbook.model.person.Phone;
+import networkbook.model.person.Specialisation;
+import networkbook.model.person.WebLink;
 import networkbook.model.tag.Tag;
 import networkbook.testutil.EditPersonDescriptorBuilder;
 import networkbook.testutil.TypicalIndexes;
@@ -65,8 +70,17 @@ public class EditCommandParserTest {
                 "1" + CommandTestUtil.INVALID_EMAIL_DESC,
                 Email.MESSAGE_CONSTRAINTS); // invalid email
         assertParseFailure(parser,
-                "1" + CommandTestUtil.INVALID_ADDRESS_DESC,
-                Address.MESSAGE_CONSTRAINTS); // invalid address
+                "1" + CommandTestUtil.INVALID_WEBLINK_DESC,
+                WebLink.MESSAGE_CONSTRAINTS); // invalid weblink
+        assertParseFailure(parser,
+                "1" + CommandTestUtil.INVALID_GRADUATING_YEAR_DESC,
+                GraduatingYear.MESSAGE_CONSTRAINTS); // invalid graduating year
+        assertParseFailure(parser,
+                "1" + CommandTestUtil.INVALID_COURSE_DESC,
+                Course.MESSAGE_CONSTRAINTS); // invalid course
+        assertParseFailure(parser,
+                "1" + CommandTestUtil.INVALID_SPECIALISATION_DESC,
+                Specialisation.MESSAGE_CONSTRAINTS); // invalid specialisation
         assertParseFailure(parser,
                 "1" + CommandTestUtil.INVALID_TAG_DESC,
                 Tag.MESSAGE_CONSTRAINTS); // invalid tag
@@ -91,7 +105,7 @@ public class EditCommandParserTest {
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser,
                 "1" + CommandTestUtil.INVALID_NAME_DESC + CommandTestUtil.INVALID_EMAIL_DESC
-                        + CommandTestUtil.VALID_ADDRESS_AMY + CommandTestUtil.VALID_PHONE_AMY,
+                        + CommandTestUtil.VALID_WEBLINK_AMY + CommandTestUtil.VALID_PHONE_AMY,
                 Name.MESSAGE_CONSTRAINTS);
     }
 
@@ -99,14 +113,18 @@ public class EditCommandParserTest {
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = TypicalIndexes.INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.TAG_DESC_HUSBAND
-                + CommandTestUtil.EMAIL_DESC_AMY + CommandTestUtil.ADDRESS_DESC_AMY
+                + CommandTestUtil.EMAIL_DESC_AMY + CommandTestUtil.WEBLINK_DESC_AMY + CommandTestUtil.GRADUATING_YEAR_DESC_AMY
+                + CommandTestUtil.COURSE_DESC_AMY + CommandTestUtil.SPECIALISATION_DESC_AMY
                 + CommandTestUtil.NAME_DESC_AMY + CommandTestUtil.TAG_DESC_FRIEND;
 
         EditCommand.EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
                 .withName(CommandTestUtil.VALID_NAME_AMY)
                 .withPhone(CommandTestUtil.VALID_PHONE_BOB)
                 .withEmail(CommandTestUtil.VALID_EMAIL_AMY)
-                .withAddress(CommandTestUtil.VALID_ADDRESS_AMY)
+                .withWebLink(CommandTestUtil.VALID_WEBLINK_AMY)
+                .withGraduatingYear(CommandTestUtil.VALID_GRADUATING_YEAR_AMY)
+                .withCourse(CommandTestUtil.VALID_COURSE_AMY)
+                .withSpecialisation(CommandTestUtil.VALID_SPECIALISATION_AMY)
                 .withTags(CommandTestUtil.VALID_TAG_HUSBAND, CommandTestUtil.VALID_TAG_FRIEND)
                 .build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
@@ -150,9 +168,27 @@ public class EditCommandParserTest {
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // address
-        userInput = targetIndex.getOneBased() + CommandTestUtil.ADDRESS_DESC_AMY;
-        descriptor = new EditPersonDescriptorBuilder().withAddress(CommandTestUtil.VALID_ADDRESS_AMY).build();
+        // weblink
+        userInput = targetIndex.getOneBased() + CommandTestUtil.WEBLINK_DESC_AMY;
+        descriptor = new EditPersonDescriptorBuilder().withWebLink(CommandTestUtil.VALID_WEBLINK_AMY).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // graduating year
+        userInput = targetIndex.getOneBased() + CommandTestUtil.GRADUATING_YEAR_DESC_AMY;
+        descriptor = new EditPersonDescriptorBuilder().withGraduatingYear(CommandTestUtil.VALID_GRADUATING_YEAR_AMY).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // course
+        userInput = targetIndex.getOneBased() + CommandTestUtil.COURSE_DESC_AMY;
+        descriptor = new EditPersonDescriptorBuilder().withCourse(CommandTestUtil.VALID_COURSE_AMY).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // specialisation
+        userInput = targetIndex.getOneBased() + CommandTestUtil.SPECIALISATION_DESC_AMY;
+        descriptor = new EditPersonDescriptorBuilder().withSpecialisation(CommandTestUtil.VALID_SPECIALISATION_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -181,29 +217,44 @@ public class EditCommandParserTest {
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_PHONE));
 
         // mulltiple valid fields repeated
-        userInput = targetIndex.getOneBased() + CommandTestUtil.PHONE_DESC_AMY + CommandTestUtil.ADDRESS_DESC_AMY
-                + CommandTestUtil.EMAIL_DESC_AMY + CommandTestUtil.TAG_DESC_FRIEND + CommandTestUtil.PHONE_DESC_AMY
-                + CommandTestUtil.ADDRESS_DESC_AMY + CommandTestUtil.EMAIL_DESC_AMY + CommandTestUtil.TAG_DESC_FRIEND
-                + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.ADDRESS_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB
+        userInput = targetIndex.getOneBased() + CommandTestUtil.PHONE_DESC_AMY + CommandTestUtil.WEBLINK_DESC_AMY
+                + CommandTestUtil.GRADUATING_YEAR_DESC_AMY + CommandTestUtil.COURSE_DESC_AMY
+                + CommandTestUtil.SPECIALISATION_DESC_AMY + CommandTestUtil.EMAIL_DESC_AMY
+                + CommandTestUtil.TAG_DESC_FRIEND + CommandTestUtil.PHONE_DESC_AMY
+                + CommandTestUtil.WEBLINK_DESC_AMY + CommandTestUtil.GRADUATING_YEAR_DESC_AMY
+                + CommandTestUtil.COURSE_DESC_AMY + CommandTestUtil.SPECIALISATION_DESC_AMY
+                + CommandTestUtil.EMAIL_DESC_AMY + CommandTestUtil.TAG_DESC_FRIEND
+                + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.WEBLINK_DESC_BOB
+                + CommandTestUtil.GRADUATING_YEAR_DESC_BOB + CommandTestUtil.COURSE_DESC_BOB
+                + CommandTestUtil.SPECIALISATION_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB
                 + CommandTestUtil.TAG_DESC_HUSBAND;
 
         assertParseFailure(parser, userInput,
                 Messages.getErrorMessageForDuplicatePrefixes(
                         CliSyntax.PREFIX_PHONE,
                         CliSyntax.PREFIX_EMAIL,
-                        CliSyntax.PREFIX_ADDRESS));
+                        CliSyntax.PREFIX_WEBLINK,
+                        CliSyntax.PREFIX_GRADUATING_YEAR,
+                        CliSyntax.PREFIX_COURSE,
+                        CliSyntax.PREFIX_SPECIALISATION));
 
         // multiple invalid values
         userInput = targetIndex.getOneBased()
-                + CommandTestUtil.INVALID_PHONE_DESC + CommandTestUtil.INVALID_ADDRESS_DESC
-                + CommandTestUtil.INVALID_EMAIL_DESC + CommandTestUtil.INVALID_PHONE_DESC
-                + CommandTestUtil.INVALID_ADDRESS_DESC + CommandTestUtil.INVALID_EMAIL_DESC;
+                + CommandTestUtil.INVALID_PHONE_DESC + CommandTestUtil.INVALID_WEBLINK_DESC
+                + CommandTestUtil.INVALID_GRADUATING_YEAR_DESC + CommandTestUtil.INVALID_COURSE_DESC
+                + CommandTestUtil.INVALID_SPECIALISATION_DESC + CommandTestUtil.INVALID_EMAIL_DESC
+                + CommandTestUtil.INVALID_PHONE_DESC + CommandTestUtil.INVALID_WEBLINK_DESC
+                + CommandTestUtil.INVALID_GRADUATING_YEAR_DESC + CommandTestUtil.INVALID_COURSE_DESC
+                + CommandTestUtil.INVALID_SPECIALISATION_DESC + CommandTestUtil.INVALID_EMAIL_DESC;
 
         assertParseFailure(parser, userInput,
                 Messages.getErrorMessageForDuplicatePrefixes(
                         CliSyntax.PREFIX_PHONE,
                         CliSyntax.PREFIX_EMAIL,
-                        CliSyntax.PREFIX_ADDRESS));
+                        CliSyntax.PREFIX_WEBLINK,
+                        CliSyntax.PREFIX_GRADUATING_YEAR,
+                        CliSyntax.PREFIX_COURSE,
+                        CliSyntax.PREFIX_SPECIALISATION));
     }
 
     @Test

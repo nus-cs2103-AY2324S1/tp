@@ -9,11 +9,14 @@ import java.util.Set;
 import networkbook.commons.core.index.Index;
 import networkbook.commons.util.StringUtil;
 import networkbook.logic.parser.exceptions.ParseException;
-import networkbook.model.person.Address;
+import networkbook.model.person.Course;
 import networkbook.model.person.Email;
+import networkbook.model.person.GraduatingYear;
 import networkbook.model.person.Name;
 import networkbook.model.person.Phone;
 import networkbook.model.person.Priority;
+import networkbook.model.person.Specialisation;
+import networkbook.model.person.WebLink;
 import networkbook.model.tag.Tag;
 
 /**
@@ -67,18 +70,63 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String address} into an {@code Address}.
+     * Parses a {@code String WebLink} into an {@code WebLink}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code address} is invalid.
+     * @throws ParseException if the given {@code weblink} is invalid.
      */
-    public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+    public static WebLink parseWebLink(String webLink) throws ParseException {
+        requireNonNull(webLink);
+        String trimmedWebLink = webLink.trim();
+        if (!WebLink.isValidLink(trimmedWebLink)) {
+            throw new ParseException(WebLink.MESSAGE_CONSTRAINTS);
         }
-        return new Address(trimmedAddress);
+        return new WebLink(trimmedWebLink);
+    }
+
+    /**
+     * Parses a {@code String graduatingYear} into an {@code GraduatingYear}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code graduatingYear} is invalid.
+     */
+    public static GraduatingYear parseGraduatingYear(String graduatingYear) throws ParseException {
+        requireNonNull(graduatingYear);
+        String trimmedGraduatingYear = graduatingYear.trim();
+        if (!GraduatingYear.isValidGraduatingYear(trimmedGraduatingYear)) {
+            throw new ParseException(GraduatingYear.MESSAGE_CONSTRAINTS);
+        }
+        return new GraduatingYear(trimmedGraduatingYear);
+    }
+
+    /**
+     * Parses a {@code String course} into an {@code Course}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code course} is invalid.
+     */
+    public static Course parseCourse(String course) throws ParseException {
+        requireNonNull(course);
+        String trimmedCourse = course.trim();
+        if (!Course.isValidCourse(trimmedCourse)) {
+            throw new ParseException(Course.MESSAGE_CONSTRAINTS);
+        }
+        return new Course(trimmedCourse);
+    }
+
+    /**
+     * Parses a {@code String specialisation} into an {@code Specialisation}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code specialisation} is invalid.
+     */
+    public static Specialisation parseSpecialisation(String specialisation) throws ParseException {
+        requireNonNull(specialisation);
+        String trimmedSpecialisation = specialisation.trim();
+        if (!Specialisation.isValidSpecialisation(trimmedSpecialisation)) {
+            throw new ParseException(Specialisation.MESSAGE_CONSTRAINTS);
+        }
+        return new Specialisation(specialisation);
     }
 
     /**

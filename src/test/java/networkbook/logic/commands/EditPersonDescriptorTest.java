@@ -48,9 +48,27 @@ public class EditPersonDescriptorTest {
                 .build();
         assertFalse(CommandTestUtil.DESC_AMY.equals(editedAmy));
 
-        // different address -> returns false
+        // different web link -> returns false
         editedAmy = new EditPersonDescriptorBuilder(CommandTestUtil.DESC_AMY)
-                .withAddress(CommandTestUtil.VALID_ADDRESS_BOB)
+                .withWebLink(CommandTestUtil.VALID_WEBLINK_BOB)
+                .build();
+        assertFalse(CommandTestUtil.DESC_AMY.equals(editedAmy));
+
+        // different graduating year -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(CommandTestUtil.DESC_AMY)
+                .withGraduatingYear(CommandTestUtil.VALID_GRADUATING_YEAR_BOB)
+                .build();
+        assertFalse(CommandTestUtil.DESC_AMY.equals(editedAmy));
+
+        // different course -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(CommandTestUtil.DESC_AMY)
+                .withCourse(CommandTestUtil.VALID_COURSE_BOB)
+                .build();
+        assertFalse(CommandTestUtil.DESC_AMY.equals(editedAmy));
+
+        // different specialisation -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(CommandTestUtil.DESC_AMY)
+                .withSpecialisation(CommandTestUtil.VALID_SPECIALISATION_BOB)
                 .build();
         assertFalse(CommandTestUtil.DESC_AMY.equals(editedAmy));
 
@@ -67,8 +85,11 @@ public class EditPersonDescriptorTest {
         String expected = EditCommand.EditPersonDescriptor.class.getCanonicalName() + "{name="
                 + editPersonDescriptor.getName().orElse(null) + ", phone="
                 + editPersonDescriptor.getPhone().orElse(null) + ", email="
-                + editPersonDescriptor.getEmails().orElse(null) + ", address="
-                + editPersonDescriptor.getAddress().orElse(null) + ", tags="
+                + editPersonDescriptor.getEmails().orElse(null) + ", web link="
+                + editPersonDescriptor.getWebLink().orElse(null) + ", graduating year="
+                + editPersonDescriptor.getGraduatingYear().orElse(null) + ", course="
+                + editPersonDescriptor.getCourse().orElse(null) + ", specialisation="
+                + editPersonDescriptor.getSpecialisation().orElse(null) + ", tags="
                 + editPersonDescriptor.getTags().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());
     }

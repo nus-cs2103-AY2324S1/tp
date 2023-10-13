@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static networkbook.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 import networkbook.commons.core.index.Index;
@@ -14,12 +13,15 @@ import networkbook.logic.commands.EditCommand.EditPersonDescriptor;
 import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.logic.parser.CliSyntax;
 import networkbook.model.Model;
-import networkbook.model.person.Address;
+import networkbook.model.person.Course;
 import networkbook.model.person.Email;
+import networkbook.model.person.GraduatingYear;
 import networkbook.model.person.Name;
 import networkbook.model.person.Person;
 import networkbook.model.person.Phone;
 import networkbook.model.person.Priority;
+import networkbook.model.person.Specialisation;
+import networkbook.model.person.WebLink;
 import networkbook.model.tag.Tag;
 import networkbook.model.util.UniqueList;
 
@@ -34,13 +36,15 @@ public class AddCommand extends Command {
             + "Parameters: "
             + "[" + CliSyntax.PREFIX_PHONE + " PHONE] "
             + "[" + CliSyntax.PREFIX_EMAIL + " EMAIL] "
-            + "[" + CliSyntax.PREFIX_ADDRESS + " ADDRESS] "
+            + "[" + CliSyntax.PREFIX_WEBLINK + "WEBLINK] "
+            + "[" + CliSyntax.PREFIX_GRADUATING_YEAR + "GRADUATING YEAR] "
+            + "[" + CliSyntax.PREFIX_COURSE + "COURSE OF STUDY] "
+            + "[" + CliSyntax.PREFIX_SPECIALISATION + "SPECIALISATION] "
             + "[" + CliSyntax.PREFIX_TAG + " TAG] "
             + "[" + CliSyntax.PREFIX_PRIORITY + " PRIORITY]...\n"
             + "Example: " + COMMAND_WORD + " "
             + CliSyntax.PREFIX_PHONE + " 98765432 "
             + CliSyntax.PREFIX_EMAIL + " johnd@example.com "
-            + CliSyntax.PREFIX_ADDRESS + " 311, Clementi Ave 2, #02-25 "
             + CliSyntax.PREFIX_TAG + " friends "
             + CliSyntax.PREFIX_TAG + " owesMoney";
 
@@ -96,43 +100,23 @@ public class AddCommand extends Command {
             throws CommandException {
         assert personToAddInfo != null;
 
-        Name updatedName = personToAddInfo.getName();
-        Phone updatedPhone = addPhone(personToAddInfo, editPersonDescriptor);
-        UniqueList<Email> updatedEmails = addEmails(personToAddInfo, editPersonDescriptor);
-        Address updatedAddress = addAddress(personToAddInfo, editPersonDescriptor);
-        Set<Tag> updatedTags = addTags(personToAddInfo, editPersonDescriptor);
-        Priority updatedPriority = addPriority(personToAddInfo, editPersonDescriptor);
+        // TODO: for non-unique fields, change respective model to use list and append to the list
+        // TODO: now it just replaces the old value
+        Name updatedName = editPersonDescriptor.getName().orElse(personToAddInfo.getName());
+        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToAddInfo.getPhone());
+        UniqueList<Email> updatedEmails = editPersonDescriptor.getEmails().orElse(personToAddInfo.getEmails());
+        WebLink updatedWebLink = editPersonDescriptor.getWebLink().orElse(personToAddInfo.getWebLink());
+        GraduatingYear updatedGraduatingYear = editPersonDescriptor.getGraduatingYear()
+                .orElse(personToAddInfo.getGraduatingYear());
+        Course updatedCourse = editPersonDescriptor.getCourse().orElse(personToAddInfo.getCourse());
+        Specialisation updatedSpecialisation = editPersonDescriptor.getSpecialisation()
+                .orElse(personToAddInfo.getSpecialisation());
+        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToAddInfo.getTags());
+        Priority updatedPriority = editPersonDescriptor.getPriority().orElse(personToAddInfo.getPriority()
+                .orElse(null));
 
-        return new Person(updatedName, updatedPhone, updatedEmails, updatedAddress, updatedTags, updatedPriority);
-    }
-
-    // TODO: for non-unique fields, change respective model to use list and append to the list
-    // TODO: now it just replaces the old value
-
-    private Phone addPhone(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor) {
-        return editPersonDescriptor.getPhone().orElse(personToAddInfo.getPhone());
-    }
-
-    private UniqueList<Email> addEmails(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor) {
-        return editPersonDescriptor.getEmails().orElse(personToAddInfo.getEmails());
-    }
-
-    private Address addAddress(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor) {
-        return editPersonDescriptor.getAddress().orElse(personToAddInfo.getAddress());
-    }
-
-    private Set<Tag> addTags(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor) {
-        return editPersonDescriptor.getTags().orElse(personToAddInfo.getTags());
-    }
-
-    private Priority addPriority(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor)
-            throws CommandException {
-        Optional<Priority> oldPriority = personToAddInfo.getPriority();
-        Optional<Priority> newPriority = editPersonDescriptor.getPriority();
-        if (oldPriority.isPresent() && newPriority.isPresent()) {
-            throw new CommandException(MESSAGE_MULTIPLE_UNIQUE_FIELD);
-        }
-        return newPriority.orElse(oldPriority.orElse(null));
+        return new Person(updatedName, updatedPhone, updatedEmails, updatedWebLink, updatedGraduatingYear,
+                updatedCourse, updatedSpecialisation, updatedTags, updatedPriority);
     }
 
     @Override

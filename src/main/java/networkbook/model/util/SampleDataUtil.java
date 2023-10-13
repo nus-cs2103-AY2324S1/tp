@@ -7,12 +7,15 @@ import java.util.stream.Collectors;
 
 import networkbook.model.NetworkBook;
 import networkbook.model.ReadOnlyNetworkBook;
-import networkbook.model.person.Address;
+import networkbook.model.person.Course;
 import networkbook.model.person.Email;
+import networkbook.model.person.GraduatingYear;
 import networkbook.model.person.Name;
 import networkbook.model.person.Person;
 import networkbook.model.person.Phone;
 import networkbook.model.person.Priority;
+import networkbook.model.person.Specialisation;
+import networkbook.model.person.WebLink;
 import networkbook.model.tag.Tag;
 
 /**
@@ -22,29 +25,35 @@ public class SampleDataUtil {
     public static Person[] getSamplePersons() {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"),
-                new UniqueList<Email>().setItems(List.of(new Email("alexyeoh@example.com"))),
-                new Address("Blk 30 Geylang Street 29, #06-40"),
-                getTagSet("friends"), new Priority("low")),
+                    new UniqueList<Email>().setItems(List.of(new Email("alexyeoh@example.com"))),
+                    new WebLink("www.alexyeoh.net"), new GraduatingYear("2016"),
+                    new Course("Information Systems"), new Specialisation("Financial Technology"),
+                    getTagSet("friends"), new Priority("low")),
             new Person(new Name("Bernice Yu"), new Phone("99272758"),
-                new UniqueList<Email>().setItems(List.of(new Email("berniceyu@example.com"))),
-                new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                getTagSet("colleagues", "friends"), new Priority("high")),
+                    new UniqueList<Email>().setItems(List.of(new Email("berniceyu@example.com"))),
+                    new WebLink("github.com/bernfish"), new GraduatingYear("2020"),
+                    new Course("Computer Science"), new Specialisation("Artificial Intelligence"),
+                    getTagSet("colleagues", "friends"), new Priority("high")),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"),
-                new UniqueList<Email>().setItems(List.of(new Email("charlotte@example.com"))),
-                new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                getTagSet("neighbours"), new Priority("M")),
+                    new UniqueList<Email>().setItems(List.of(new Email("charlotte@example.com"))),
+                    new WebLink("facebook.com/Charlotte-Oliveiro"), new GraduatingYear("2000"),
+                    new Course("Computer Science"), new Specialisation("Computer Security"),
+                    getTagSet("neighbours"), new Priority("M")),
             new Person(new Name("David Li"), new Phone("91031282"),
-                new UniqueList<Email>().setItems(List.of(new Email("lidavid@example.com"))),
-                new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                getTagSet("family"), new Priority("High")),
+                    new UniqueList<Email>().setItems(List.of(new Email("lidavid@example.com"))),
+                    new WebLink("wordpress.com/specialli-mine"), new GraduatingYear("2024"),
+                    new Course("Computer Science"), new Specialisation("Database Systems"),
+                    getTagSet("family"), new Priority("High")),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"),
-                new UniqueList<Email>().setItems(List.of(new Email("irfan@example.com"))),
-                new Address("Blk 47 Tampines Street 20, #17-35"),
-                getTagSet("classmates"), new Priority("lOW")),
+                    new UniqueList<Email>().setItems(List.of(new Email("irfan@example.com"))),
+                    new WebLink("instagram.com/irfanny"), new GraduatingYear("2025"),
+                    new Course("Computer Science"), new Specialisation("Parallel Computing"),
+                    getTagSet("classmates"), new Priority("low")),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"),
-                new UniqueList<Email>().setItems(List.of(new Email("royb@example.com"))),
-                new Address("Blk 45 Aljunied Street 85, #11-31"),
-                getTagSet("colleagues"), null)
+                    new UniqueList<Email>().setItems(List.of(new Email("royb@example.com"))),
+                    new WebLink("incognito.com"), new GraduatingYear("2026"),
+                    new Course("Computer Science"), new Specialisation("Computer Graphics"),
+                    getTagSet("colleagues"), null)
         };
     }
 

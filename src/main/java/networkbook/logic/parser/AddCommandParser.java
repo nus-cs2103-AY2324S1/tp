@@ -23,7 +23,10 @@ public class AddCommandParser implements Parser<AddCommand> {
                         CliSyntax.PREFIX_NAME,
                         CliSyntax.PREFIX_PHONE,
                         CliSyntax.PREFIX_EMAIL,
-                        CliSyntax.PREFIX_ADDRESS,
+                        CliSyntax.PREFIX_WEBLINK,
+                        CliSyntax.PREFIX_GRADUATING_YEAR,
+                        CliSyntax.PREFIX_COURSE,
+                        CliSyntax.PREFIX_SPECIALISATION,
                         CliSyntax.PREFIX_TAG,
                         CliSyntax.PREFIX_PRIORITY
                 );
@@ -46,7 +49,10 @@ public class AddCommandParser implements Parser<AddCommand> {
                 CliSyntax.PREFIX_NAME,
                 CliSyntax.PREFIX_PHONE,
                 CliSyntax.PREFIX_EMAIL,
-                CliSyntax.PREFIX_ADDRESS,
+                CliSyntax.PREFIX_WEBLINK,
+                CliSyntax.PREFIX_GRADUATING_YEAR,
+                CliSyntax.PREFIX_COURSE,
+                CliSyntax.PREFIX_SPECIALISATION,
                 CliSyntax.PREFIX_PRIORITY
         );
 

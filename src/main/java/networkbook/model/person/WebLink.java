@@ -23,8 +23,8 @@ public class WebLink implements Identifiable<WebLink> {
 
     // alphanumeric and special characters
 
-    private static final String DOMAIN_NAME_REGEX = "^(http://|https://)?(www.)?[a-zA-Z0-9-]+.[a-z]{2,}";
-    private static final String PATH_REGEX = "/[\\w-]+(/\\w+)*"; // Valid URI path
+    private static final String DOMAIN_NAME_REGEX = "^(http://|https://)?(www\\.)?[a-zA-Z0-9-]+\\.[a-z]{2,}";
+    private static final String PATH_REGEX = "(/[\\w-]+)*"; // Valid URI path
 
     public static final String VALIDATION_REGEX = DOMAIN_NAME_REGEX + "(" + PATH_REGEX + ")?$";
 
