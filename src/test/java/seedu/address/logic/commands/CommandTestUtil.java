@@ -36,6 +36,17 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_NRIC_AMY = "000A";
+    public static final String VALID_NRIC_BOB = "123Z";
+    public static final String VALID_LICENCE_PLATE_AMY = "SBA1234A";
+    public static final String VALID_LICENCE_PLATE_BOB = "SYZ4321Z";
+    public static final String VALID_POLICY_NO_AMY = "AAAA1111";
+    public static final String VALID_POLICY_NO_BOB = "BBBB2";
+    public static final String VALID_POLICY_ISSUE_DATE_AMY = "01-01-2023";
+    public static final String VALID_POLICY_ISSUE_DATE_BOB = "01-01-2013";
+    public static final String VALID_POLICY_EXPIRY_DATE_AMY = "01-01-2030";
+    public static final String VALID_POLICY_EXPIRY_DATE_BOB = "01-01-2025";
+
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;

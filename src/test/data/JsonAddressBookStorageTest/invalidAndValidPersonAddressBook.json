@@ -3,11 +3,21 @@
     "name": "Valid Person",
     "phone": "9482424",
     "email": "hans@example.com",
-    "address": "4th street"
+    "address": "4th street",
+    "nric" : "362D",
+    "licencePlate" : "SLR5E",
+    "policyNumber" : "B3425",
+    "policyIssueDate" : "01-01-2020",
+    "policyExpiryDate" : "01-01-2030"
   }, {
     "name": "Person With Invalid Phone Field",
     "phone": "948asdf2424",
     "email": "hans@example.com",
-    "address": "4th street"
+    "address": "4th street",
+    "nric" : "362D",
+    "licencePlate" : "SLR5E",
+    "policyNumber" : "B3425",
+    "policyIssueDate" : "01-01-2020",
+    "policyExpiryDate" : "01-01-2030"
   } ]
 }
