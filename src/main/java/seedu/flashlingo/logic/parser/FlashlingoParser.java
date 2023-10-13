@@ -47,10 +47,8 @@ public class FlashlingoParser {
             return new AddCommandParser().parse(arguments);
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
-
-//        case EditCommand.COMMAND_WORD:
-//                return new EditCommandParser().parse(arguments);
-
+        case EditCommand.COMMAND_WORD:
+            return new EditCommandParser().parse(arguments);
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
         case NoCommand.COMMAND_WORD:
