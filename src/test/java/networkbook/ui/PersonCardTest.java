@@ -19,6 +19,10 @@ import networkbook.testutil.PersonBuilder;
 
 @ExtendWith(ApplicationExtension.class)
 public class PersonCardTest {
+    //NOTE: for GUI headless tests, running this single file or test case has issue on Windows,
+    //possibly due to issue discussed in https://github.com/Santulator/Santulator/issues/14
+    //To avoid the issue, either run gradle test command to perform all tests,
+    //or use 'gradlew check coverage' in command line in root folder
 
     @BeforeAll
     public static void setupForHeadlessTesting() {
