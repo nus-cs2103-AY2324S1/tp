@@ -1,7 +1,9 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.logic.Messages.*;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.address.logic.Messages.MESSAGE_UNAVAILABLE_COMMAND_IN_VIEW_MODE;
+import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
@@ -114,6 +116,13 @@ public class LogicManagerTest {
         assertEquals(expectedModel, model);
     }
 
+    /**
+     * Sets the boolean value isInViewMode to true to represent being in a profile view page after View command,
+     * then executes the command and confirms that
+     * - no exceptions are thrown <br>
+     * - the feedback message is equal to {@code expectedMessage} <br>
+     * - the internal model manager state is the same as that in {@code expectedModel} <br>
+     */
     private void assertViewModeCommandSuccess(String inputCommand, String expectedMessage,
                                                  Model expectedModel) throws CommandException, ParseException {
         logic.setIsInViewMode(true);
@@ -143,9 +152,6 @@ public class LogicManagerTest {
     private void assertParseException(String inputCommand, String expectedMessage) {
         assertCommandFailure(inputCommand, ParseException.class, expectedMessage);
     }
-    private void assertViewModeParseException(String inputCommand, String expectedMessage) {
-        assertViewModeCommandFailure(inputCommand, ParseException.class, expectedMessage);
-    }
 
     /**
      * Executes the command, confirms that a CommandException is thrown and that the result message is correct.
@@ -165,12 +171,6 @@ public class LogicManagerTest {
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
-    private void assertViewModeCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
-            String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        assertViewModeCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
-    }
-
     /**
      * Executes the command and confirms that
      * - the {@code expectedException} is thrown <br>
@@ -184,6 +184,33 @@ public class LogicManagerTest {
         assertEquals(expectedModel, model);
     }
 
+    /**
+     * Executes the command in profile view page,
+     * confirms that a ParseException is thrown and that the result message is correct.
+     * @see #assertViewModeCommandFailure(String, Class, String, Model)
+     */
+    private void assertViewModeParseException(String inputCommand, String expectedMessage) {
+        assertViewModeCommandFailure(inputCommand, ParseException.class, expectedMessage);
+    }
+
+    /**
+     * Executes the command in the profile page,
+     * confirms that the exception is thrown and that the result message is correct.
+     * @see #assertViewModeCommandFailure(String, Class, String, Model)
+     */
+    private void assertViewModeCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
+                                              String expectedMessage) {
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        assertViewModeCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
+    }
+
+    /**
+     * Sets the boolean value isInViewMode to true, representing that the user is in the profile view page,
+     * then executes the command and confirms that
+     * - the {@code expectedException} is thrown <br>
+     * - the resulting error message is equal to {@code expectedMessage} <br>
+     * - the internal model manager state is the same as that in {@code expectedModel} <br>
+     */
     private void assertViewModeCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage, Model expectedModel) {
         logic.setIsInViewMode(true);

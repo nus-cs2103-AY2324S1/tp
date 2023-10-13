@@ -3,7 +3,6 @@ package seedu.address.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
-import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.ViewExitCommand;
 
 public class ViewModeParserTest {
