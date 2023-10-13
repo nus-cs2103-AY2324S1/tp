@@ -24,23 +24,20 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-    private final LinkedIn linkedIn;
-    private final Github github;
+    private final LinkedIn linkedIn = new LinkedIn("");
+    private final Github github = new Github("");
     private final Status currentStatus = new Status();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                  LinkedIn linkedIn, Github github) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.linkedIn = linkedIn;
-        this.github = github;
     }
 
     public Name getName() {
@@ -119,7 +116,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, linkedIn, github);
+        return Objects.hash(name, phone, email, address, tags);
     }
 
     @Override
@@ -132,11 +129,11 @@ public class Person {
                 .add("tags", tags)
                 .add("status", currentStatus);
 
-        if (linkedIn != null) {
+        if (!linkedIn.value.isEmpty()) {
             builder.add("linkedin", linkedIn);
         }
 
-        if (github != null) {
+        if (!github.value.isEmpty()) {
             builder.add("github", github);
         }
 

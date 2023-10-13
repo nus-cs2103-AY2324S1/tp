@@ -5,7 +5,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 /**
- * Adds Github account to candidates existing details.
+ * Adds GitHub account to candidates existing details.
  */
 public class AddGCommand extends Command {
     public static final String COMMAND_WORD = "addL";
