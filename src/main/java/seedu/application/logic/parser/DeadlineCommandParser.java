@@ -30,8 +30,8 @@ public class DeadlineCommandParser implements Parser<DeadlineCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeadlineCommand.MESSAGE_USAGE), ive);
         }
 
-        String remark = argMultimap.getValue(PREFIX_DEADLINE).orElse("");
+        String deadline = argMultimap.getValue(PREFIX_DEADLINE).orElse("");
 
-        return new DeadlineCommand(index, remark);
+        return new DeadlineCommand(index, deadline);
     }
 }

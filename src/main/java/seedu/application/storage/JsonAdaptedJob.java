@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.application.commons.exceptions.IllegalValueException;
 import seedu.application.model.job.Company;
+import seedu.application.model.job.Deadline;
 import seedu.application.model.job.Job;
 import seedu.application.model.job.Role;
 
@@ -56,8 +57,9 @@ class JsonAdaptedJob {
             throw new IllegalValueException(Company.MESSAGE_CONSTRAINTS);
         }
         final Company modelCompany = new Company(company);
+        final Deadline modelDeadline = null; //TODO: Implement parsing and marshalling in the storage commit.
 
-        return new Job(modelRole, modelCompany);
+        return new Job(modelRole, modelCompany, modelDeadline);
     }
 
 }

@@ -31,6 +31,8 @@ public class JobCard extends UiPart<Region> {
     private Label id;
     @FXML
     private Label company;
+    @FXML
+    private Label deadline;
 
     /**
      * Creates a {@code JobCode} with the given {@code Job} and index to display.
