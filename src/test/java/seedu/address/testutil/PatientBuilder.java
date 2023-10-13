@@ -2,7 +2,6 @@ package seedu.address.testutil;
 
 import seedu.address.model.person.MedicalHistory;
 import seedu.address.model.person.Patient;
-import seedu.address.model.person.Specialty;
 
 /**
  * A utility class to help with building Patient objects.

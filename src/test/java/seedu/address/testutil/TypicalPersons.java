@@ -25,11 +25,14 @@ import seedu.address.model.person.Specialist;
  */
 public class TypicalPersons {
 
-    public static final Patient ALICE = (Patient) new PatientBuilder().withMedicalHistory("Anemia").withName("Alice Pauline")
-            .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
+    public static final Patient ALICE = (Patient) new PatientBuilder().withMedicalHistory("Anemia")
+            .withName("Alice Pauline")
+            .withAddress("123, Jurong West Ave 6, #08-111")
+            .withEmail("alice@example.com")
             .withPhone("94351253")
             .withTags("friends").build();
-    public static final Patient BENSON = (Patient) new PatientBuilder().withMedicalHistory("Osteoporosis").withName("Benson Meier")
+    public static final Patient BENSON = (Patient) new PatientBuilder().withMedicalHistory("Osteoporosis")
+            .withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withTags("owesMoney", "friends").build();
@@ -57,8 +60,9 @@ public class TypicalPersons {
             .withEmail("hans@example.com").withAddress("chicago ave").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
-    public static final Patient AMY = (Patient) new PatientBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-            .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND).build();
+    public static final Patient AMY = (Patient) new PatientBuilder().withName(VALID_NAME_AMY)
+            .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
+            .withTags(VALID_TAG_FRIEND).build();
     public static final Specialist BOB = (Specialist) new SpecialistBuilder()
             .withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
