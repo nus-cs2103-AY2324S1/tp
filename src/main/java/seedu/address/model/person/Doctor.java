@@ -22,7 +22,23 @@ public class Doctor extends Person {
         super(name, phone, email, address, remark, gender, ic, tags);
         this.patients = patients; // patients can be null
     }
+    /**
+     * Retrieves the list of patients stored in this medical facility.
+     *
+     * @return An ArrayList containing the patients currently registered in the facility.
+     */
+    public ArrayList<Patient> getPatients() {
+        return patients;
+    }
 
+    /**
+     * Adds a new patient to the medical facility's list of patients.
+     *
+     * @param patient The Patient object representing the individual to be added.
+     */
+    public void addPatient(Patient patient) {
+        this.patients.add(patient);
+    }
     /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
