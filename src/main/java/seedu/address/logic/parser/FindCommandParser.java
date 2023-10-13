@@ -14,24 +14,20 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.PersonType;
 import seedu.address.model.person.predicates.AddressContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.EmailContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.MedHistoryContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
-import seedu.address.model.person.PersonType;
 import seedu.address.model.person.predicates.PhoneContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.SpecialtyContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.TagsContainsKeywordsPredicate;
 
 /**
- * Parses input arguments and creates a new FindCommand object
+ * Parses input arguments and creates a new FindCommand object.
  */
 public class FindCommandParser implements ParserComplex<FindCommand> {
 
@@ -50,7 +46,7 @@ public class FindCommandParser implements ParserComplex<FindCommand> {
         }
     }
 
-    public FindCommand parsePatient(String args) throws ParseException {
+    private FindCommand parsePatient(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                         PREFIX_TAG, PREFIX_MEDICALHISTORY);
@@ -58,7 +54,7 @@ public class FindCommandParser implements ParserComplex<FindCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                 PREFIX_ADDRESS, PREFIX_MEDICALHISTORY);
 
-        List<Predicate<Person>> predicateList = SetupPersonPredicates(argMultimap);
+        List<Predicate<Person>> predicateList = setupPersonPredicates(argMultimap);
 
         if (argMultimap.getValue(PREFIX_MEDICALHISTORY).isPresent()) {
             List<String> medHistKeywords = splitKeywordsByWhitespace(argMultimap, PREFIX_MEDICALHISTORY);
@@ -71,7 +67,7 @@ public class FindCommandParser implements ParserComplex<FindCommand> {
         return new FindCommand(combinedPredicate, PersonType.PATIENT);
     }
 
-    public FindCommand parseSpecialist(String args) throws ParseException {
+    private FindCommand parseSpecialist(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                         PREFIX_TAG, PREFIX_SPECIALTY);
@@ -79,7 +75,7 @@ public class FindCommandParser implements ParserComplex<FindCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                 PREFIX_ADDRESS, PREFIX_SPECIALTY);
 
-        List<Predicate<Person>> predicateList = SetupPersonPredicates(argMultimap);
+        List<Predicate<Person>> predicateList = setupPersonPredicates(argMultimap);
 
         if (argMultimap.getValue(PREFIX_SPECIALTY).isPresent()) {
             List<String> specialtyKeywords = splitKeywordsByWhitespace(argMultimap, PREFIX_SPECIALTY);
@@ -101,7 +97,7 @@ public class FindCommandParser implements ParserComplex<FindCommand> {
         return new ArrayList<>();
     }
 
-    private List<Predicate<Person>>  SetupPersonPredicates(ArgumentMultimap argMultimap) {
+    private List<Predicate<Person>> setupPersonPredicates(ArgumentMultimap argMultimap) {
         List<Predicate<Person>> predicateList = new ArrayList<>();
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {

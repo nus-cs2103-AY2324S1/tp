@@ -1,13 +1,16 @@
 package seedu.address.model.person.predicates;
 
+import java.util.List;
+import java.util.function.Predicate;
+
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Specialist;
 
-import java.util.List;
-import java.util.function.Predicate;
-
+/**
+ * Tests that a {@code Specialist}'s {@code Specialty} matches any of the keywords given.
+ */
 public class SpecialtyContainsKeywordsPredicate implements Predicate<Person> {
 
     private final List<String> keywords;
@@ -40,7 +43,8 @@ public class SpecialtyContainsKeywordsPredicate implements Predicate<Person> {
             return false;
         }
 
-        SpecialtyContainsKeywordsPredicate otherSpecialtyContainsKeywordsPredicate = (SpecialtyContainsKeywordsPredicate) other;
+        SpecialtyContainsKeywordsPredicate otherSpecialtyContainsKeywordsPredicate =
+                (SpecialtyContainsKeywordsPredicate) other;
         return keywords.equals(otherSpecialtyContainsKeywordsPredicate.keywords);
     }
 

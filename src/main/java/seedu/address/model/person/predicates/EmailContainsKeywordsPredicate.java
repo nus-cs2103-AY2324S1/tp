@@ -7,6 +7,9 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 
+/**
+ * Tests that a {@code Person}'s {@code Email} matches any of the keywords given.
+ */
 public class EmailContainsKeywordsPredicate implements Predicate<Person> {
 
     private final List<String> keywords;
