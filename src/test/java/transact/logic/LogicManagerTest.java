@@ -27,8 +27,10 @@ import transact.logic.parser.exceptions.ParseException;
 import transact.model.Model;
 import transact.model.ModelManager;
 import transact.model.ReadOnlyAddressBook;
+import transact.model.ReadOnlyTransactionBook;
 import transact.model.UserPrefs;
 import transact.model.person.Person;
+import transact.storage.CsvAdaptedTransactionStorage;
 import transact.storage.JsonAddressBookStorage;
 import transact.storage.JsonUserPrefsStorage;
 import transact.storage.StorageManager;
@@ -48,8 +50,10 @@ public class LogicManagerTest {
     public void setUp() {
         JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(
                 temporaryFolder.resolve("addressBook.json"));
+        CsvAdaptedTransactionStorage transactionBookStorage = new CsvAdaptedTransactionStorage(
+                temporaryFolder.resolve("transactionBook.csv"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(addressBookStorage, transactionBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -137,7 +141,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAddressBook(), model.getRecordBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), model.getTransactionBook(), new UserPrefs());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
@@ -169,7 +173,7 @@ public class LogicManagerTest {
     private void assertCommandFailureForExceptionFromStorage(IOException e, String expectedMessage) {
         Path prefPath = temporaryFolder.resolve("ExceptionUserPrefs.json");
 
-        // Inject LogicManager with an AddressBookStorage that throws the IOException e
+        // Inject LogicManager with AddressBookStorage, TransactionBookStorage that throws the IOException e
         // when saving
         JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(prefPath) {
             @Override
@@ -179,9 +183,19 @@ public class LogicManagerTest {
             }
         };
 
+        CsvAdaptedTransactionStorage transactionBookStorage = new CsvAdaptedTransactionStorage(
+                temporaryFolder.resolve("ExceptionTransactionBook.csv")) {
+            @Override
+            public void saveTransactionBook(ReadOnlyTransactionBook transactionBook)
+                    throws IOException {
+                throw e;
+            }
+        };
+
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(
                 temporaryFolder.resolve("ExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(addressBookStorage,
+                transactionBookStorage, userPrefsStorage);
 
         logic = new LogicManager(model, storage);
 

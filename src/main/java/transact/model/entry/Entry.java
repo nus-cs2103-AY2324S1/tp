@@ -1,7 +1,7 @@
 package transact.model.entry;
 
 /**
- * Represents an entry that can be stored in the address/record book.
+ * Represents an entry that can be stored in the address/transaction book.
  */
 public interface Entry {
     /**

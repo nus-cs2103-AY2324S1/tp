@@ -9,7 +9,7 @@ import static transact.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static transact.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static transact.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static transact.testutil.TypicalPersons.getTypicalAddressBook;
-import static transact.testutil.TypicalTransactions.getTypicalRecordBook;
+import static transact.testutil.TypicalTransactions.getTypicalTransactionBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -26,7 +26,7 @@ import transact.model.person.Person;
  */
 public class DeleteStaffCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalRecordBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalTransactionBook(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -36,7 +36,7 @@ public class DeleteStaffCommandTest {
         String expectedMessage = String.format(DeleteStaffCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.format(personToDelete));
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), getTypicalRecordBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), getTypicalTransactionBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
 
         assertCommandSuccess(deleteStaffCommand, model, expectedMessage, expectedModel);
@@ -60,7 +60,7 @@ public class DeleteStaffCommandTest {
         String expectedMessage = String.format(DeleteStaffCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.format(personToDelete));
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), model.getRecordBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), model.getTransactionBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
         showNoPerson(expectedModel);
 

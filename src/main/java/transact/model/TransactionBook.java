@@ -9,10 +9,10 @@ import transact.commons.util.ToStringBuilder;
 import transact.model.transaction.Transaction;
 
 /**
- * Wraps transaction data at the record-book level
+ * Wraps transaction data at the transaction-book level
  * Duplicates are not allowed (by .isSameEntry comparison)
  */
-public class RecordBook implements ReadOnlyRecordBook {
+public class TransactionBook implements ReadOnlyTransactionBook {
 
     private final UniqueEntryList<Transaction> transactions;
 
@@ -20,13 +20,13 @@ public class RecordBook implements ReadOnlyRecordBook {
         transactions = new UniqueEntryList<>();
     }
 
-    public RecordBook() {
+    public TransactionBook() {
     }
 
     /**
-     * Creates a RecordBook using the Transactions in the {@code toBeCopied}
+     * Creates a TransactionBook using the Transactions in the {@code toBeCopied}
      */
-    public RecordBook(ReadOnlyRecordBook toBeCopied) {
+    public TransactionBook(ReadOnlyTransactionBook toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -42,9 +42,9 @@ public class RecordBook implements ReadOnlyRecordBook {
     }
 
     /**
-     * Resets the existing data of this {@code RecordBook} with {@code newData}.
+     * Resets the existing data of this {@code TransactionBook} with {@code newData}.
      */
-    public void resetData(ReadOnlyRecordBook newData) {
+    public void resetData(ReadOnlyTransactionBook newData) {
         requireNonNull(newData);
 
         setTransactions(newData.getTransactionList());
@@ -54,7 +54,7 @@ public class RecordBook implements ReadOnlyRecordBook {
 
     /**
      * Returns true if a transaction with the same identity as {@code transaction}
-     * exists in the record book.
+     * exists in the transaction book.
      */
     public boolean hasTransaction(Transaction transaction) {
         requireNonNull(transaction);
@@ -62,8 +62,8 @@ public class RecordBook implements ReadOnlyRecordBook {
     }
 
     /**
-     * Adds a transaction to the record book.
-     * The transaction must not already exist in the record book.
+     * Adds a transaction to the transaction book.
+     * The transaction must not already exist in the transaction book.
      */
     public void addTransaction(Transaction t) {
         transactions.add(t);
@@ -72,9 +72,9 @@ public class RecordBook implements ReadOnlyRecordBook {
     /**
      * Replaces the given transaction {@code target} in the list with
      * {@code editedTransaction}.
-     * {@code target} must exist in the record book.
+     * {@code target} must exist in the transaction book.
      * The transaction identity of {@code editedTransaction} must not be the
-     * same as another existing transaction in the record book.
+     * same as another existing transaction in the transaction book.
      */
     public void setTransaction(Transaction target, Transaction editedTransaction) {
         requireNonNull(editedTransaction);
@@ -83,8 +83,8 @@ public class RecordBook implements ReadOnlyRecordBook {
     }
 
     /**
-     * Removes {@code key} from this {@code RecordBook}.
-     * {@code key} must exist in the record book.
+     * Removes {@code key} from this {@code TransactionBook}.
+     * {@code key} must exist in the transaction book.
      */
     public void removeTransaction(Transaction key) {
         transactions.remove(key);
@@ -111,12 +111,12 @@ public class RecordBook implements ReadOnlyRecordBook {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof RecordBook)) {
+        if (!(other instanceof TransactionBook)) {
             return false;
         }
 
-        RecordBook otherRecordBook = (RecordBook) other;
-        return transactions.equals(otherRecordBook.transactions);
+        TransactionBook otherTransactionBook = (TransactionBook) other;
+        return transactions.equals(otherTransactionBook.transactions);
     }
 
     @Override

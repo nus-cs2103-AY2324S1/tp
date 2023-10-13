@@ -1,6 +1,6 @@
 package transact.testutil;
 
-import transact.model.RecordBook;
+import transact.model.TransactionBook;
 
 /**
  * A utility class containing a list of {@code Transaction} objects to be used in
@@ -10,9 +10,9 @@ public class TypicalTransactions {
     // TODO Add typical transactions after class is complete
 
     /**
-     * Returns a {@code RecordBook} with all the typical transactions.
+     * Returns a {@code TransactionBook} with all the typical transactions.
      */
-    public static RecordBook getTypicalRecordBook() {
-        return new RecordBook();
+    public static TransactionBook getTypicalTransactionBook() {
+        return new TransactionBook();
     }
 }

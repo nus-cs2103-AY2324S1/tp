@@ -4,9 +4,9 @@ import javafx.collections.ObservableList;
 import transact.model.transaction.Transaction;
 
 /**
- * Unmodifiable view of a record (transaction) book
+ * Unmodifiable view of a transaction book
  */
-public interface ReadOnlyRecordBook {
+public interface ReadOnlyTransactionBook {
 
     /**
      * Returns an unmodifiable view of the transaction list.

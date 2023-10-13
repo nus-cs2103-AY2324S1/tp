@@ -60,6 +60,24 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
+     * Returns the user prefs' transaction book file path.
+     */
+    Path getTransactionBookFilePath();
+
+    /**
+     * Sets the user prefs' transaction book file path.
+     */
+    void setTransactionBookFilePath(Path transactionBookFilePath);
+
+    /**
+     * Replaces transaction book data with the data in {@code transactionBook}.
+     */
+    void setTransactionBook(ReadOnlyTransactionBook transactionBook);
+
+    /** Returns the TransactionBook */
+    ReadOnlyTransactionBook getTransactionBook();
+
+    /**
      * Returns true if a person with the same identity as {@code person} exists in
      * the address book.
      */
@@ -87,33 +105,29 @@ public interface Model {
 
     /**
      * Returns true if a transaction with the same details as {@code transaction} exists in
-     * the record book.
+     * the transaction book.
      */
     boolean hasTransaction(Transaction transaction);
 
     /**
      * Deletes the given transaction.
-     * The transaction must exist in the record book.
+     * The transaction must exist in the transaction book.
      */
     void deleteTransaction(Transaction transaction);
 
     /**
      * Adds the given transaction.
-     * {@code transaction} must not already exist in the record book.
+     * {@code transaction} must not already exist in the transaction book.
      */
     void addTransaction(Transaction transaction);
 
     /**
      * Replaces the given transaction {@code target} with {@code editedTransaction}.
-     * {@code target} must exist in the record book.
+     * {@code target} must exist in the transaction book.
      * The person identity of {@code editedTransaction} must not be the same as another
-     * existing transaction in the record book.
+     * existing transaction in the transaction book.
      */
     void setTransaction(Transaction target, Transaction editedTransaction);
-
-    /** Returns the RecordBook */
-    ReadOnlyRecordBook getRecordBook();
-
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();

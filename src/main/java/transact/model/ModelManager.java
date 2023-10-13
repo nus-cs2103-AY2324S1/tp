@@ -21,7 +21,7 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
-    private final RecordBook recordBook;
+    private final TransactionBook transactionBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Transaction> filteredTransactions;
@@ -29,21 +29,21 @@ public class ModelManager implements Model {
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyRecordBook recordBook,
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyTransactionBook transactionBook,
                         ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
-        this.recordBook = new RecordBook(recordBook);
+        this.transactionBook = new TransactionBook(transactionBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        filteredTransactions = new FilteredList<>(this.recordBook.getTransactionList());
+        filteredTransactions = new FilteredList<>(this.transactionBook.getTransactionList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new RecordBook(), new UserPrefs());
+        this(new AddressBook(), new TransactionBook(), new UserPrefs());
     }
 
     // =========== UserPrefs
@@ -80,6 +80,17 @@ public class ModelManager implements Model {
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         userPrefs.setAddressBookFilePath(addressBookFilePath);
+    }
+
+    @Override
+    public Path getTransactionBookFilePath() {
+        return userPrefs.getTransactionBookFilePath();
+    }
+
+    @Override
+    public void setTransactionBookFilePath(Path transactionBookFilePath) {
+        requireNonNull(transactionBookFilePath);
+        userPrefs.setTransactionBookFilePath(transactionBookFilePath);
     }
 
     // =========== AddressBook
@@ -119,34 +130,42 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
-    // =========== Filtered Person List Accessors
-    // =============================================================
+    // =========== TransactionBook
+    // ================================================================================
+
+    @Override
+    public void setTransactionBook(ReadOnlyTransactionBook transactionBook) {
+        this.transactionBook.resetData(transactionBook);
+    }
+
+    @Override
+    public TransactionBook getTransactionBook() {
+        return transactionBook;
+    }
 
     @Override
     public boolean hasTransaction(Transaction transaction) {
-        return recordBook.hasTransaction(transaction);
+        return transactionBook.hasTransaction(transaction);
     }
 
     @Override
     public void deleteTransaction(Transaction transaction) {
-        recordBook.removeTransaction(transaction);
+        transactionBook.removeTransaction(transaction);
     }
 
     @Override
     public void addTransaction(Transaction transaction) {
         requireNonNull(transaction);
-        recordBook.addTransaction(transaction);
+        transactionBook.addTransaction(transaction);
     }
 
     public void setTransaction(Transaction transaction, Transaction editedTransaction) {
         requireAllNonNull(transaction, editedTransaction);
-        recordBook.setTransaction(transaction, editedTransaction);
+        transactionBook.setTransaction(transaction, editedTransaction);
     }
 
-    @Override
-    public RecordBook getRecordBook() {
-        return recordBook;
-    }
+    // =========== Filtered Person List Accessors
+    // =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the
@@ -195,7 +214,7 @@ public class ModelManager implements Model {
 
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
-                && recordBook.equals(otherModelManager.recordBook)
+                && transactionBook.equals(otherModelManager.transactionBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons)
                 && filteredTransactions.equals(otherModelManager.filteredTransactions);

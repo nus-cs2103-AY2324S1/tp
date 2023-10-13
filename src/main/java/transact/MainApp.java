@@ -20,15 +20,18 @@ import transact.model.AddressBook;
 import transact.model.Model;
 import transact.model.ModelManager;
 import transact.model.ReadOnlyAddressBook;
+import transact.model.ReadOnlyTransactionBook;
 import transact.model.ReadOnlyUserPrefs;
-import transact.model.RecordBook;
+import transact.model.TransactionBook;
 import transact.model.UserPrefs;
 import transact.model.util.SampleDataUtil;
 import transact.storage.AddressBookStorage;
+import transact.storage.CsvAdaptedTransactionStorage;
 import transact.storage.JsonAddressBookStorage;
 import transact.storage.JsonUserPrefsStorage;
 import transact.storage.Storage;
 import transact.storage.StorageManager;
+import transact.storage.TransactionBookStorage;
 import transact.storage.UserPrefsStorage;
 import transact.ui.Ui;
 import transact.ui.UiManager;
@@ -61,7 +64,8 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        TransactionBookStorage transactionBookStorage = new CsvAdaptedTransactionStorage(userPrefs.getTransactionBookFilePath());
+        storage = new StorageManager(addressBookStorage, transactionBookStorage, userPrefsStorage);
 
         model = initModelManager(storage, userPrefs);
 
@@ -81,26 +85,43 @@ public class MainApp extends Application {
      * {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        logger.info("Using data file : " + storage.getAddressBookFilePath());
+        logger.info("Using data file for address book: " + storage.getAddressBookFilePath());
 
         Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        ReadOnlyAddressBook initialAddressData;
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Creating a new data file " + storage.getAddressBookFilePath()
                         + " populated with a sample AddressBook.");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialAddressData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
                     + " Will be starting with an empty AddressBook.");
-            initialData = new AddressBook();
+            initialAddressData = new AddressBook();
         }
 
-        // TODO Read transaction data, create record book and pass to model manager
+        logger.info("Using data file for transaction book: " + storage.getTransactionBookFilePath());
 
-        return new ModelManager(initialData, new RecordBook(), userPrefs);
+        Optional<ReadOnlyTransactionBook> transactionBookOptional;
+        ReadOnlyTransactionBook initialTransactionData;
+        try {
+            transactionBookOptional = storage.readTransactionBook();
+            if (!transactionBookOptional.isPresent()) {
+                logger.info("Creating a new data file " + storage.getAddressBookFilePath()
+                        + " populated with a sample TransactionBook.");
+            }
+            // TODO replace with actual sample data
+            // initialTransactionData = transactionBookOptional.orElseGet(SampleDataUtil::getSampleTransactionBook);
+            initialTransactionData = transactionBookOptional.orElse(new TransactionBook());
+        } catch (DataLoadingException e) {
+            logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
+                    + " Will be starting with an empty TransactionBook.");
+            initialTransactionData = new TransactionBook();
+        }
+
+        return new ModelManager(initialAddressData, initialTransactionData, userPrefs);
     }
 
     private void initLogging(Config config) {

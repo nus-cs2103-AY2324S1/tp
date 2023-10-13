@@ -15,8 +15,8 @@ import com.opencsv.CSVWriter;
 import com.opencsv.exceptions.CsvValidationException;
 
 import transact.commons.exceptions.DataLoadingException;
-import transact.model.ReadOnlyTransactionLog;
-import transact.model.TransactionLog;
+import transact.model.ReadOnlyTransactionBook;
+import transact.model.TransactionBook;
 import transact.model.transaction.Expense;
 import transact.model.transaction.Revenue;
 import transact.model.transaction.Transaction;
@@ -25,9 +25,9 @@ import transact.model.transaction.info.Description;
 import transact.model.transaction.info.TransactionId;
 
 /**
- * CsvAdaptedTransactionStorage class
+ * A class to access TransactionBook data stored as a csv file on the hard disk.
  */
-public class CsvAdaptedTransactionStorage implements TransactionLogStorage {
+public class CsvAdaptedTransactionStorage implements TransactionBookStorage {
 
     private Path filePath;
 
@@ -36,23 +36,23 @@ public class CsvAdaptedTransactionStorage implements TransactionLogStorage {
     }
 
     @Override
-    public Path getTransactionLogFilePath() {
+    public Path getTransactionBookFilePath() {
         return filePath;
     }
 
     @Override
-    public Optional<ReadOnlyTransactionLog> readTransactionLog() throws DataLoadingException {
-        return readTransactionLog(filePath);
+    public Optional<ReadOnlyTransactionBook> readTransactionBook() throws DataLoadingException {
+        return readTransactionBook(filePath);
     }
 
     @Override
-    public Optional<ReadOnlyTransactionLog> readTransactionLog(Path path) throws DataLoadingException {
+    public Optional<ReadOnlyTransactionBook> readTransactionBook(Path path) throws DataLoadingException {
         try {
             if (!Files.exists(path)) {
                 return Optional.empty();
             }
 
-            TransactionLog transactions = new TransactionLog();
+            TransactionBook transactions = new TransactionBook();
 
             try (CSVReader reader = new CSVReader(new FileReader(path.toFile()))) {
                 String[] header = reader.readNext();
@@ -86,17 +86,17 @@ public class CsvAdaptedTransactionStorage implements TransactionLogStorage {
                 throw new RuntimeException(e);
             }
 
-            ReadOnlyTransactionLog transactionLog = new TransactionLog(transactions);
+            ReadOnlyTransactionBook transactionBook = new TransactionBook(transactions);
 
-            return Optional.of(transactionLog);
+            return Optional.of(transactionBook);
         } catch (IOException e) {
             throw new DataLoadingException(e);
         }
     }
 
     @Override
-    public void saveTransactionLog(ReadOnlyTransactionLog transactionLog) throws IOException {
-        List<Transaction> transactions = transactionLog.getTransactionList();
+    public void saveTransactionBook(ReadOnlyTransactionBook transactionBook) throws IOException {
+        List<Transaction> transactions = transactionBook.getTransactionList();
         try (CSVWriter writer = new CSVWriter(new FileWriter(filePath.toFile()))) {
             String[] header = { "TransactionId", "Category", "Person", "Description", "Amount" };
             writer.writeNext(header);
@@ -115,9 +115,13 @@ public class CsvAdaptedTransactionStorage implements TransactionLogStorage {
         }
     }
 
-    @Override
-    public void saveTransactionLog(ReadOnlyTransactionLog transactionLog, Path filePath) throws IOException {
-        List<Transaction> transactions = transactionLog.getTransactionList();
+    /**
+     * Similar to {@link #saveTransactionBook(ReadOnlyTransactionBook)} (ReadOnlyTransactionBook)}.
+     *
+     * @param filePath location of the data. Cannot be null.
+     */
+    public void saveTransactionBook(ReadOnlyTransactionBook transactionBook, Path filePath) throws IOException {
+        List<Transaction> transactions = transactionBook.getTransactionList();
         try (CSVWriter writer = new CSVWriter(new FileWriter(filePath.toFile()))) {
             String[] header = { "TransactionId", "Category", "Person", "Description", "Amount" };
             writer.writeNext(header);

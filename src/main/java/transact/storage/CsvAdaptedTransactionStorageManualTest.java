@@ -6,8 +6,8 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import transact.commons.exceptions.DataLoadingException;
-import transact.model.ReadOnlyTransactionLog;
-import transact.model.TransactionLog;
+import transact.model.ReadOnlyTransactionBook;
+import transact.model.TransactionBook;
 import transact.model.transaction.Expense;
 import transact.model.transaction.Revenue;
 import transact.model.transaction.Transaction;
@@ -19,30 +19,30 @@ public class CsvAdaptedTransactionStorageManualTest {
     public static void main(String[] args) {
         Path filePath = Path.of("transactions.csv");
 
-        ReadOnlyTransactionLog transactionLog = createTestTransactionLog();
+        ReadOnlyTransactionBook transactionBook = createTestTransactionBook();
 
         CsvAdaptedTransactionStorage storage = new CsvAdaptedTransactionStorage(filePath);
 
         try {
-            storage.saveTransactionLog(transactionLog);
+            storage.saveTransactionBook(transactionBook);
             System.out.println("Transaction log saved successfully.");
 
-            Optional<ReadOnlyTransactionLog> readTransactionLog = storage.readTransactionLog();
-            if (readTransactionLog.isPresent()) {
+            Optional<ReadOnlyTransactionBook> readTransactionBook = storage.readTransactionBook();
+            if (readTransactionBook.isPresent()) {
                 System.out.println("Transaction log loaded successfully.");
-                System.out.println("Loaded Transaction Log:");
-                System.out.println(readTransactionLog.get());
+                System.out.println("Loaded Transaction Book:");
+                System.out.println(readTransactionBook.get());
             } else {
                 System.out.println("No transaction log found.");
             }
-            storage.saveTransactionLog(transactionLog);
+            storage.saveTransactionBook(transactionBook);
             System.out.println("Transaction log saved successfully.");
         } catch (IOException | DataLoadingException e) {
             e.printStackTrace();
         }
     }
 
-    private static ReadOnlyTransactionLog createTestTransactionLog() {
+    private static ReadOnlyTransactionBook createTestTransactionBook() {
         Transaction transaction1 = new Expense(new TransactionId("11111111"), new Description("Expense 1"),
                 new Amount(new BigDecimal("10.50")));
         Transaction transaction2 = new Revenue(new TransactionId("22222222"), new Description("Revenue 1"),
@@ -56,14 +56,14 @@ public class CsvAdaptedTransactionStorageManualTest {
         Transaction transaction6 = new Expense(new TransactionId("23232R22"), new Description("E"),
                 new Amount(new BigDecimal("20.75")));
 
-        TransactionLog transactionLog = new TransactionLog();
-        transactionLog.addTransaction(transaction1);
-        transactionLog.addTransaction(transaction2);
-        transactionLog.addTransaction(transaction3);
-        transactionLog.addTransaction(transaction4);
-        transactionLog.addTransaction(transaction5);
-        transactionLog.addTransaction(transaction6);
+        TransactionBook transactionBook = new TransactionBook();
+        transactionBook.addTransaction(transaction1);
+        transactionBook.addTransaction(transaction2);
+        transactionBook.addTransaction(transaction3);
+        transactionBook.addTransaction(transaction4);
+        transactionBook.addTransaction(transaction5);
+        transactionBook.addTransaction(transaction6);
 
-        return transactionLog;
+        return transactionBook;
     }
 }

@@ -114,7 +114,16 @@ public class Transaction implements Entry {
 
     @Override
     public boolean isSameEntry(Entry otherEntry) {
-        // TODO Use ID to compare
-        return false;
+        if (otherEntry == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(otherEntry instanceof Transaction)) {
+            return false;
+        }
+
+        Transaction otherTransaction = (Transaction) otherEntry;
+        return transactionId == otherTransaction.transactionId;
     }
 }

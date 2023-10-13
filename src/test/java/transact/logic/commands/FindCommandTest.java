@@ -9,7 +9,7 @@ import static transact.testutil.TypicalPersons.CARL;
 import static transact.testutil.TypicalPersons.ELLE;
 import static transact.testutil.TypicalPersons.FIONA;
 import static transact.testutil.TypicalPersons.getTypicalAddressBook;
-import static transact.testutil.TypicalTransactions.getTypicalRecordBook;
+import static transact.testutil.TypicalTransactions.getTypicalTransactionBook;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -26,8 +26,8 @@ import transact.model.person.NameContainsKeywordsPredicate;
  * {@code FindCommand}.
  */
 public class FindCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalRecordBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), getTypicalRecordBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalTransactionBook(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalAddressBook(), getTypicalTransactionBook(), new UserPrefs());
 
     @Test
     public void equals() {

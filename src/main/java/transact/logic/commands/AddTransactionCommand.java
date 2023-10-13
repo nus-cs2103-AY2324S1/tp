@@ -22,7 +22,7 @@ public class AddTransactionCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a transaction to the address book. "
             + "Parameters: "
-            + PREFIX_TYPE + "NAME "
+            + PREFIX_TYPE + "TYPE "
             + PREFIX_DESCRIPTION + "DESCRIPTION "
             + PREFIX_AMOUNT + "AMOUNT "
             + PREFIX_DATE + "DATE "
@@ -35,7 +35,7 @@ public class AddTransactionCommand extends Command {
             + PREFIX_STAFF + "John";
 
     public static final String MESSAGE_SUCCESS = "New transaction added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This transaction already exists in the record book.";
+    public static final String MESSAGE_DUPLICATE_TRANSACTION = "This transaction already exists in the transaction book.";
 
     private final Transaction toAdd;
 
@@ -52,11 +52,11 @@ public class AddTransactionCommand extends Command {
         requireNonNull(model);
 
         if (model.hasTransaction(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_TRANSACTION);
         }
 
         model.addTransaction(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)), 1);
     }
 
     @Override
