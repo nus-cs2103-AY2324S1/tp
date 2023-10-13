@@ -103,7 +103,7 @@ How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).
+1. The command can communicate with the `Model` when it is executed (e.g. to delete a student).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
@@ -175,11 +175,11 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th student in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new student. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 <puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
@@ -189,7 +189,7 @@ Step 3. The user executes `add n/David …​` to add a new person. The `add` co
 
 </box>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the student was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 <puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
 
@@ -241,7 +241,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  * Pros: Will use less memory (e.g. for `delete`, just save the student being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
@@ -275,8 +275,8 @@ _{Explain here how the data archiving feature will be implemented}_
 * wants to know his students well as part of his work
 * wants to make use of statistics and technology to make marketing decisions
 
-**Value proposition**: Our product will take in data as inputs and return statistical analysis. 
-Instead of showing information of independent individuals, our product aims to provide quantitative data analysis of students for users to draw conclusions on commonalities among students and their demographics, offering insights on marketing strategies. 
+**Value proposition**: Our product will take in data as inputs and return statistical analysis.
+Instead of showing information of independent individuals, our product aims to provide quantitative data analysis of students for users to draw conclusions on commonalities among students and their demographics, offering insights on marketing strategies.
 
 
 
@@ -327,14 +327,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. Staff chooses to add student data. 
+1. Staff chooses to add student data.
 2. Tutorium stores the new data. <br>
     Use case ends.
 
 **Extensions**
 
-* 1a. Tutorium detects a format error in the entered command. 
-  * 1a1. Tutorium requests for the correctly formatted command. 
+* 1a. Tutorium detects a format error in the entered command.
+  * 1a1. Tutorium requests for the correctly formatted command.
   * 1a2. User enters a new command. <br>
     Steps 1a1-1a2 are repeated until the command entered is correctly formatted. <br>
     Use case resumes from step 2.
@@ -343,26 +343,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. Staff chooses to delete student data. 
+1. Staff chooses to delete student data.
 2. Tutorium deleted the student's data. <br>
     Use case ends.
 
 **Extensions**
 
-* 1a. Tutorium detects a format error in the entered command. 
+* 1a. Tutorium detects a format error in the entered command.
   * 1a1. Tutorium requests for the correctly formatted command.
   * 1a2. User enters a new command. <br>
     Steps 1a1-1a2 are repeated until the command entered is correctly formatted. <br>
     Use case resumes from step 2.
 
-* 1b. Tutorium detects multiple student data that match with the entered student’s name. 
-  * 1b1. Tutorium requests for the student’s email address. 
+* 1b. Tutorium detects multiple student data that match with the entered student’s name.
+  * 1b1. Tutorium requests for the student’s email address.
   * 1b2. User enters the email address. <br>
     Steps 1b1-1b2 are repeated until the data entered are correct. <br>
     Use case resumes from step 2.
 
-* 1c. Tutorium could not find any student data that matches with the entered student’s name. 
-  * 1c1. Tutorium requests for a valid student’s name. 
+* 1c. Tutorium could not find any student data that matches with the entered student’s name.
+  * 1c1. Tutorium requests for a valid student’s name.
   * 1c2. User enters a new student’s name. <br>
     Steps 1c1-1c2 are repeated until the data entered are correct.  <br>
     Use case resumes from step 2.
@@ -371,34 +371,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. Staff chooses to edit student data. 
-2. Tutorium acknowledges the edit process. 
-3. Staff enters the new data. 
+1. Staff chooses to edit student data.
+2. Tutorium acknowledges the edit process.
+3. Staff enters the new data.
 4. Tutorium edits the student’s data. <br>
     Use case ends.
 
 **Extensions**
 
-* 1a. Tutorium detects a format error in the entered command. 
-  * 1a1. Tutorium requests for the correctly formatted command. 
+* 1a. Tutorium detects a format error in the entered command.
+  * 1a1. Tutorium requests for the correctly formatted command.
   * 1a2. User enters a new command.  <br>
     Steps 1a1-1a2 are repeated until the command entered is correctly formatted. <br>
     Use case resumes from step 2.
 
-* 1b. Tutorium detects multiple student data that match with the entered student’s name. 
-  * 1b1. Tutorium requests for the student’s email address. 
+* 1b. Tutorium detects multiple student data that match with the entered student’s name.
+  * 1b1. Tutorium requests for the student’s email address.
   * 1b2. User enters the email address.  <br>
     Steps 1b1-1b2 are repeated until the data entered are correct. <br>
     Use case resumes from step 2.
 
-* 1c. Tutorium could not find any student data that matches with the entered student’s name. 
-  * 1c1. Tutorium requests for a valid student’s name. 
+* 1c. Tutorium could not find any student data that matches with the entered student’s name.
+  * 1c1. Tutorium requests for a valid student’s name.
   * 1c2. User enters a new student’s name.  <br>
     Steps 1c1-1c2 are repeated until the data entered are correct. <br>
     Use case resumes from step 2.
 
 * 3a. Tutorium detects a format error in the entered command.
-  * 3a1. Tutorium requests for the correctly formatted command. 
+  * 3a1. Tutorium requests for the correctly formatted command.
   * 3a2. User enters a new command.  <br>
     Steps 3a1-3a2 are repeated until the command entered is correctly formatted. <br>
     Use case resumes from step 4.
@@ -412,13 +412,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. Staff chooses to search student data with particular keywords. 
+1. Staff chooses to search student data with particular keywords.
 2. Tutorium shows the list of student data that contain the keywords. <br>
    Use case ends.
 
 **Extensions**
 
-* 1a. Tutorium could not find any student data that contains the keywords. 
+* 1a. Tutorium could not find any student data that contains the keywords.
   * 1a1. Tutorium returns a message indicating no data found.  <br>
     Use case ends.
 
@@ -426,15 +426,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. Staff chooses to group student data by a tag. 
+1. Staff chooses to group student data by a tag.
 2. Tutorium shows the list of student data that contain the tag. <br>
    Use case ends.
 
 **Extensions**
 
-* 1a. Tutorium detects a format error in the entered command. 
-  * 1a1. Tutorium requests for the correctly formatted command. 
-  * 1a2. User enters a new command. <br> 
+* 1a. Tutorium detects a format error in the entered command.
+  * 1a1. Tutorium requests for the correctly formatted command.
+  * 1a2. User enters a new command. <br>
     Steps 1a1-1a2 are repeated until the command entered is correctly formatted. <br>
     Use case resumes from step 2.
 
@@ -446,16 +446,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. Staff chooses to <ins> group student data by a course subject (UC05) </ins>. 
-2. Staff selects all students in the list. 
-3. Tutorium shows the number of students who took the subject. <br> 
+1. Staff chooses to <ins> group student data by a course subject (UC05) </ins>.
+2. Staff selects all students in the list.
+3. Tutorium shows the number of students who took the subject. <br>
    Use case ends.
 
 **Extensions**
 
-* 2a. Tutorium detects a format error in the entered command. 
-  * 2a1. Tutorium requests for the correctly formatted command. 
-  * 2a2. User enters a new command. <br> 
+* 2a. Tutorium detects a format error in the entered command.
+  * 2a1. Tutorium requests for the correctly formatted command.
+  * 2a2. User enters a new command. <br>
     Steps 2a1-2a2 are repeated until the command entered is correctly formatted. <br>
     Use case resumes from step 3.
 
@@ -463,29 +463,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. Staff chooses to visualize data by a particular category. 
-2. Tutorium acknowledges the visualization. 
-3. Staff chooses a chart type as visual representation. 
+1. Staff chooses to visualize data by a particular category.
+2. Tutorium acknowledges the visualization.
+3. Staff chooses a chart type as visual representation.
 4. Tutorium shows the chart of the category chosen. <br>
    Use case ends.
 
 **Extensions**
 
-* 1a. Tutorium detects a format error in the entered command. 
-  * 1a1. Tutorium requests for the correctly formatted command. 
-  * 1a2. User enters a new command. <br> 
+* 1a. Tutorium detects a format error in the entered command.
+  * 1a1. Tutorium requests for the correctly formatted command.
+  * 1a2. User enters a new command. <br>
     Steps 1a1-1a2 are repeated until the command entered is correctly formatted. <br>
     Use case resumes from step 2.
 
-* 1b. Tutorium could not find any category that matches with the entered category. 
-  * 1b1. Tutorium requests for a valid category. 
-  * 1b2. User enters a new category. <br> 
+* 1b. Tutorium could not find any category that matches with the entered category.
+  * 1b1. Tutorium requests for a valid category.
+  * 1b2. User enters a new category. <br>
     Steps 1b1-1b2 are repeated until the data entered are correct. <br>
     Use case resumes from step 2.
 
-* 3a. Tutorium detects a format error in the entered command. 
-  * 3a1. Tutorium requests for the correctly formatted command. 
-  * 3a2. User enters a new command. <br> 
+* 3a. Tutorium detects a format error in the entered command.
+  * 3a1. Tutorium requests for the correctly formatted command.
+  * 3a2. User enters a new command. <br>
     Steps 3a1-3a2 are repeated until the command entered is correctly formatted. <br>
     Use case resumes from step 4.
 
@@ -493,35 +493,35 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. Staff chooses to <ins> visualize data in charts (UC07) <ins>. 
-2. Staff chooses to export the charts to a file with a particular file path. 
+1. Staff chooses to <ins> visualize data in charts (UC07) <ins>.
+2. Staff chooses to export the charts to a file with a particular file path.
 3. Tutorium exports the charts to the file. <br>
    Use case ends.
 
 **Extensions**
 
-* 2a. Tutorium detects a format error in the entered command. 
-  * 2a1. Tutorium requests for the correctly formatted command. 
-  * 2a2. User enters a new command. <br> 
+* 2a. Tutorium detects a format error in the entered command.
+  * 2a1. Tutorium requests for the correctly formatted command.
+  * 2a2. User enters a new command. <br>
   Steps 2a1-2a2 are repeated until the command entered is correctly formatted. <br>
   Use case resumes from step 3.
 
-* 2b. Tutorium could not find the file path entered. 
-  * 2b1. Tutorium requests for a valid file path. 
-  * 2b2. User enters a new file path. <br> 
+* 2b. Tutorium could not find the file path entered.
+  * 2b1. Tutorium requests for a valid file path.
+  * 2b2. User enters a new file path. <br>
     Steps 2b1-2b2 are repeated until the file path entered is correct. <br>
     Use case resumes from step 3.
 
 * *a. At any time, User chooses to cancel the export.
   * *a1. Tutorium requests to confirm the cancellation.
-  * *a2. User chooses to cancel the export. <br> 
+  * *a2. User chooses to cancel the export. <br>
     Use case ends.
 
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
 3.  A user with above-average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  The students' data format should persistent.
 5.  The application should be usable by a novice who has never interacted with command line interface before.
@@ -565,17 +565,17 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a student
 
-1. Deleting a person while all persons are being shown
+1. Deleting a student while all students are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all students using the `list` command. Multiple students in the list.
 
    1. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
