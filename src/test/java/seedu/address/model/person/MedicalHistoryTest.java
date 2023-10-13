@@ -28,7 +28,7 @@ public class MedicalHistoryTest {
         // invalid specialties
         assertFalse(MedicalHistory.isValidMedicalHistory("")); // empty string
         assertFalse(MedicalHistory.isValidMedicalHistory(" ")); // spaces only
-        // valid specialties
+        // valid medical history
         assertTrue(MedicalHistory.isValidMedicalHistory(VALID_MEDICAL_HISTORY_OSTEOPOROSIS));
     }
 

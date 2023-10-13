@@ -11,7 +11,7 @@ public class MedicalHistory {
             "Medical History should only contain alphanumeric characters and spaces, and it should not be blank";
 
     /*
-     * The first character of the Specialty must not be a whitespace,
+     * The first character of the Medical History must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
@@ -21,7 +21,7 @@ public class MedicalHistory {
     /**
      * Constructs a {@code Name}.
      *
-     * @param medicalHistoryInput A valid specialty.
+     * @param medicalHistoryInput A valid medical history.
      */
     public MedicalHistory(String medicalHistoryInput) {
         requireNonNull(medicalHistoryInput);
@@ -30,7 +30,7 @@ public class MedicalHistory {
     }
 
     /**
-     * Returns true if a given string is a valid specialty.
+     * Returns true if a given string is a valid medical history.
      */
     public static boolean isValidMedicalHistory(String test) {
         return test.matches(VALIDATION_REGEX);

@@ -11,7 +11,7 @@ public class PatientBuilder extends PersonBuilder {
     private MedicalHistory medicalHistory;
 
     /**
-     * Constructor that assigns a default specialty.
+     * Constructor that assigns a default medical history.
      */
     public PatientBuilder() {
         super();
