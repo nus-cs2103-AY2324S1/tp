@@ -2,7 +2,11 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TestData.BENSON;
+import static seedu.address.testutil.TestData.INVALID_EMAIL;
+import static seedu.address.testutil.TestData.INVALID_NAME;
+import static seedu.address.testutil.TestData.INVALID_PHONE;
+import static seedu.address.testutil.TestData.INVALID_TAG;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,10 +22,6 @@ import seedu.address.model.person.Note;
 import seedu.address.model.person.Phone;
 
 public class JsonAdaptedPersonTest {
-    private static final String INVALID_NAME = "R@chel";
-    private static final String INVALID_PHONE = "+651234";
-    private static final String INVALID_EMAIL = "example.com";
-    private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();
