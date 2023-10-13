@@ -112,12 +112,8 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-        return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
-                && studentNumber.equals(otherPerson.studentNumber)
-                && classNumber.equals(otherPerson.classNumber)
-                && tags.equals(otherPerson.tags);
+
+        return studentNumber.equals(otherPerson.studentNumber);
     }
 
     @Override
