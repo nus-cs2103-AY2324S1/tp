@@ -55,13 +55,19 @@ class EndTimeTest {
         // same object -> returns true
         assertTrue(endTime.equals(endTime));
 
+        // same StartTime -> returns true
+        assertTrue(endTime.equals(new StartTime(LocalDateTime.of(2023, 1, 1, 0, 0, 0))));
+
         // null -> returns false
         assertFalse(endTime.equals(null));
 
         // different types -> returns false
-        assertFalse(endTime.equals(new StartTime(LocalDateTime.of(2023, 1, 1, 0, 0, 0))));
+        assertFalse(endTime.equals("String"));
 
         // different values -> returns false
         assertFalse(endTime.equals(new EndTime(LocalDateTime.of(2024, 1, 1, 0, 0, 0))));
+
+        // different StartTime -> returns false
+        assertFalse(endTime.equals(new StartTime(LocalDateTime.of(2024, 1, 1, 0, 0, 0))));
     }
 }
