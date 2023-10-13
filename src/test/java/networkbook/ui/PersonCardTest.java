@@ -8,6 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.ApplicationTest;
 
 import javafx.scene.control.Label;
@@ -15,6 +17,7 @@ import networkbook.MainApp;
 import networkbook.model.person.Person;
 import networkbook.testutil.PersonBuilder;
 
+@ExtendWith(ApplicationExtension.class)
 public class PersonCardTest {
 
     @BeforeAll

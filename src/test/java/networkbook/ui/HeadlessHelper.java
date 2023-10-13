@@ -6,21 +6,14 @@ package networkbook.ui;
  */
 public class HeadlessHelper {
     //@@author Singa-Pirate reused
-    //Reused from https://stackoverflow.com/a/70440691/19206704
+    //Reused from https://stackoverflow.com/a/35309920/19206704
 
     public static void setupForHeadlessTesting() {
-        String isRunningOnCi = System.getProperty("CI");
-        if ("true".equalsIgnoreCase(isRunningOnCi)) {
-            System.setProperty("monocle.platform", "Headless");
+        if (Boolean.getBoolean("headless")) {
             System.setProperty("testfx.robot", "glass");
-            System.setProperty("glass.platform", "Monocle");
-            System.setProperty("embedded", "monocle");
             System.setProperty("testfx.headless", "true");
             System.setProperty("prism.order", "sw");
-
-            // System.setProperty("prism.text", "t2k");
-            System.setProperty("prism.text", "native");
-
+            System.setProperty("prism.text", "t2k");
             System.setProperty("java.awt.headless", "true");
         }
     }
