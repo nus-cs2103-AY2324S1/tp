@@ -108,7 +108,7 @@ public class EditCommand extends Command {
         // temporary variables to change
         Nric updatedNric = new Nric("000A");
         LicencePlate updatedLicencePlate = new LicencePlate("SAA1A");
-        PolicyNumber updatedPolicyNumber = new PolicyNumber("1");
+        PolicyNumber updatedPolicyNumber = new PolicyNumber("NOPOLICY");
         PolicyDate updatedPolicyIssueDate = new PolicyDate(PolicyDate.DEFAULT_VALUE);
         PolicyDate updatedPolicyExpiryDate = new PolicyDate(PolicyDate.DEFAULT_VALUE);
         Policy updatedPolicy = new Policy(updatedPolicyNumber, updatedPolicyIssueDate, updatedPolicyExpiryDate);
