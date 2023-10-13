@@ -1,8 +1,10 @@
 package seedu.flashlingo.storage;
 
-import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -11,7 +13,7 @@ import seedu.flashlingo.commons.exceptions.IllegalValueException;
 import seedu.flashlingo.model.flashcard.FlashCard;
 import seedu.flashlingo.model.flashcard.OriginalWord;
 import seedu.flashlingo.model.flashcard.Translation;
-import seedu.flashlingo.model.tag.Tag;
+
 
 /**
  * Jackson-friendly version of {@link FlashCard}.
@@ -23,8 +25,6 @@ public class JsonAdaptedFlashCard {
     private final String translatedWord;
     private final String whenToReview;
     private final int level;
-    private final String toDelete;
-
     /**
      * Constructs a {@code JsonAdaptedFlashCard} with the given person details.
      */
@@ -32,13 +32,11 @@ public class JsonAdaptedFlashCard {
     public JsonAdaptedFlashCard(@JsonProperty("originalWord") String originalWord,
                                 @JsonProperty("translatedWord") String translatedWord,
                                 @JsonProperty("whenToReview") String whenToReview,
-                                @JsonProperty("level") int level,
-                                @JsonProperty("toDelete") String toDelete) {
+                                @JsonProperty("level") int level) {
         this.originalWord = originalWord;
         this.translatedWord = translatedWord;
         this.whenToReview = whenToReview;
         this.level = level;
-        this.toDelete = toDelete;
     }
 
     /**
@@ -48,9 +46,7 @@ public class JsonAdaptedFlashCard {
         originalWord = source.getOriginalWord().toString();
         translatedWord = source.getTranslatedWord().toString();
         whenToReview = source.getWhenToReview().toString();
-        //Todo: bad method names, optimize
         level = source.getLevel().getLevel();
-        toDelete = source.getToDelete() ? "T" : "F";
     }
 
     /**
@@ -59,8 +55,6 @@ public class JsonAdaptedFlashCard {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public FlashCard toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
-
         if (originalWord == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, OriginalWord.class.getSimpleName()));
         }
@@ -74,14 +68,16 @@ public class JsonAdaptedFlashCard {
         if (whenToReview == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT));
         }
-        final Date modelWhenToReview = new Date(whenToReview);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE MMM dd HH:mm:ss zzz yyyy");
+
+        LocalDateTime localDateTime = LocalDateTime.parse(whenToReview, formatter);
+
+        ZonedDateTime zonedDateTime = localDateTime.atZone(ZoneId.of("Asia/Singapore"));
+        Date modelWhenToReview = Date.from(zonedDateTime.toInstant());
 
         final int modelLevel = level;
 
-        if (toDelete == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT));
-        }
-
-        return new FlashCard(new OriginalWord(modelOriginalWord), new Translation(modelTranslatedWord), modelWhenToReview, level);
+        return new FlashCard(new OriginalWord(modelOriginalWord), new Translation(modelTranslatedWord), modelWhenToReview, modelLevel);
     }
 }
