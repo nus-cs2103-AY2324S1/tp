@@ -23,8 +23,6 @@ public class JsonAdaptedFlashCard {
     private final String whenToReview;
     private final int level;
     private final String toDelete;
-    //TODO: Whether to add tag
-//    private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedFlashCard} with the given person details.
@@ -40,9 +38,6 @@ public class JsonAdaptedFlashCard {
         this.whenToReview = whenToReview;
         this.level = level;
         this.toDelete = toDelete;
-//        if (tags != null) {
-//            this.tags.addAll(tags);
-//        }
     }
 
     /**
@@ -55,9 +50,6 @@ public class JsonAdaptedFlashCard {
         //FIXME: bad method names, optimize
         level = source.getLevel().getLevel();
         toDelete = source.getToDelete() ? "T" : "F";
-//        tags.addAll(source.getTags().stream()
-//                .map(JsonAdaptedTag::new)
-//                .collect(Collectors.toList()));
     }
 
     /**
@@ -67,17 +59,10 @@ public class JsonAdaptedFlashCard {
      */
     public FlashCard toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
-//        for (JsonAdaptedTag tag : tags) {
-//            personTags.add(tag.toModelType());
-//        }
 
         if (originalWord == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, OriginalWord.class.getSimpleName()));
         }
-        //TODO: Check validation
-//        if (!OriginalWord.isValidWord(originalWord)) {
-//            throw new IllegalValueException(OriginalWord.MESSAGE_CONSTRAINTS);
-//        }
         final String modelOriginalWord = originalWord;
 
         if (translatedWord == null) {
@@ -96,10 +81,8 @@ public class JsonAdaptedFlashCard {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT));
         }
 
-        //TODO: Check if needed for the left 3 attributes to be final
-        //FIXME: need toDelete in constructor
 
-//        final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new FlashCard(modelOriginalWord, modelTranslatedWord, modelWhenToReview, level);
+
+        return new FlashCard(new OriginalWord(modelOriginalWord), new Translation(modelTranslatedWord), modelWhenToReview, level);
     }
 }

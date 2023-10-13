@@ -3,8 +3,7 @@ package seedu.flashlingo.logic.parser;
 import static seedu.flashlingo.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.flashlingo.commons.core.index.Index;
-//import seedu.address.logic.commands.DeleteCommand;
-import seedu.flashlingo.logic.newcommands.DeleteCommand;
+import seedu.flashlingo.logic.commands.DeleteCommand;
 import seedu.flashlingo.logic.parser.exceptions.ParseException;
 
 /**

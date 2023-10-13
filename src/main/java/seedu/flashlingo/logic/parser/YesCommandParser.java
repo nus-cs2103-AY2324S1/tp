@@ -2,8 +2,7 @@ package seedu.flashlingo.logic.parser;
 
 import static seedu.flashlingo.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import seedu.flashlingo.logic.commands.FindCommand;
-import seedu.flashlingo.logic.newcommands.YesCommand;
+import seedu.flashlingo.logic.commands.YesCommand;
 import seedu.flashlingo.logic.parser.exceptions.ParseException;
 
 
@@ -21,7 +20,7 @@ public class YesCommandParser implements Parser<YesCommand> {
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty() || !trimmedArgs.equals("yes")) {
             throw new ParseException(
-              String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+              String.format(MESSAGE_INVALID_COMMAND_FORMAT));
         }
         return new YesCommand(trimmedArgs);
     }

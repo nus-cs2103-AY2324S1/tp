@@ -8,14 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.flashlingo.commons.core.LogsCenter;
-import seedu.flashlingo.logic.newcommands.AddCommand;
-import seedu.flashlingo.logic.newcommands.DeleteCommand;
-import seedu.flashlingo.logic.newcommands.ExitCommand;
-import seedu.flashlingo.logic.newcommands.HelpCommand;
-import seedu.flashlingo.logic.newcommands.ListCommand;
-import seedu.flashlingo.logic.newcommands.NewCommand;
-import seedu.flashlingo.logic.newcommands.NoCommand;
-import seedu.flashlingo.logic.newcommands.YesCommand;
+import seedu.flashlingo.logic.commands.*;
 import seedu.flashlingo.logic.parser.exceptions.ParseException;
 
 /**
@@ -35,7 +28,7 @@ public class FlashlingoParser {
      * @return the command based on the user input
      * @throws ParseException if the user input does not conform the expected format
      */
-    public seedu.flashlingo.logic.newcommands.Command parseCommand(String userInput) throws ParseException {
+    public Command parseCommand(String userInput) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));

@@ -2,8 +2,7 @@ package seedu.flashlingo.logic.parser;
 
 import static seedu.flashlingo.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import seedu.flashlingo.logic.commands.FindCommand;
-import seedu.flashlingo.logic.newcommands.NoCommand;
+import seedu.flashlingo.logic.commands.NoCommand;
 import seedu.flashlingo.logic.parser.exceptions.ParseException;
 
 
@@ -21,7 +20,7 @@ public class NoCommandParser implements Parser<NoCommand> {
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty() || !trimmedArgs.equals("no")) {
             throw new ParseException(
-              String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+              String.format(MESSAGE_INVALID_COMMAND_FORMAT));
         }
         return new NoCommand(trimmedArgs);
     }
