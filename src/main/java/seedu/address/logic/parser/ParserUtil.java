@@ -3,7 +3,6 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
@@ -91,11 +90,7 @@ public class ParserUtil {
             throw new ParseException(StartTime.MESSAGE_CONSTRAINTS);
         }
 
-        try {
-            return new StartTime(LocalDateTime.parse(trimmedTime));
-        } catch (DateTimeParseException e) {
-            throw new ParseException(StartTime.MESSAGE_CONSTRAINTS);
-        }
+        return new StartTime(LocalDateTime.parse(trimmedTime));
     }
 
     /**
@@ -109,10 +104,6 @@ public class ParserUtil {
             throw new ParseException(EndTime.MESSAGE_CONSTRAINTS);
         }
 
-        try {
-            return new EndTime(LocalDateTime.parse(trimmedTime));
-        } catch (DateTimeParseException e) {
-            throw new ParseException(EndTime.MESSAGE_CONSTRAINTS);
-        }
+        return new EndTime(LocalDateTime.parse(trimmedTime));
     }
 }
