@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -6,13 +6,21 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.EditCommand;
 
 /**
- * Contains data used for testing commands.
+ * Holds all data used by test cases.
  */
-public class CommandTestPersonData {
+public class TestData {
 
+    // These are used for default values during {@code PersonBuilder} initialisation.
+    public static final String DEFAULT_NAME = "Amy Bee";
+    public static final String DEFAULT_PHONE = "85355255";
+    public static final String DEFAULT_EMAIL = "amy@gmail.com";
+    public static final String DEFAULT_NOTE = "I forgot where this contact came from...";
+
+    // These are used for testing commands as well creating of {@code Person} objects
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_PHONE_AMY = "11111111";
@@ -23,6 +31,11 @@ public class CommandTestPersonData {
     public static final String VALID_NOTE_BOB = "CS2013 tutorial mate.";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String INVALID_NAME = "R@chel";
+    public static final String INVALID_PHONE = "+651234";
+    public static final String INVALID_EMAIL = "example.com";
+    public static final String INVALID_TAG = "#friend";
+    public static final String WHITESPACE = " \t\r\n";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -54,4 +67,24 @@ public class CommandTestPersonData {
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withNote(VALID_NOTE_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
+
+    // These are used to represent JSON String in {@code SerializableTestClass}
+    public static final String JSON_STRING_REPRESENTATION = String.format("{%n"
+            + "  \"name\" : \"This is a test class\",%n"
+            + "  \"listOfLocalDateTimes\" : "
+            + "[ \"-999999999-01-01T00:00:00\", \"+999999999-12-31T23:59:59.999999999\", "
+            + "\"0001-01-01T01:01:00\" ],%n"
+            + "  \"mapOfIntegerToString\" : {%n"
+            + "    \"1\" : \"One\",%n"
+            + "    \"2\" : \"Two\",%n"
+            + "    \"3\" : \"Three\"%n"
+            + "  }%n");
+
+    public static final String NAME_TEST_VALUE = "This is a test class";
+
+    // These contain {@code Index} objects that are used in test cases
+    public static final Index INDEX_FIRST_PERSON = Index.fromOneBased(1);
+    public static final Index INDEX_SECOND_PERSON = Index.fromOneBased(2);
+    public static final Index INDEX_THIRD_PERSON = Index.fromOneBased(3);
+
 }

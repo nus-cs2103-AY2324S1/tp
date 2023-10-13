@@ -1,5 +1,10 @@
 package seedu.address.testutil;
 
+import static seedu.address.testutil.TestData.DEFAULT_EMAIL;
+import static seedu.address.testutil.TestData.DEFAULT_NAME;
+import static seedu.address.testutil.TestData.DEFAULT_NOTE;
+import static seedu.address.testutil.TestData.DEFAULT_PHONE;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,10 +20,6 @@ import seedu.address.model.util.SampleDataUtil;
  * A utility class to help with building Person objects.
  */
 public class PersonBuilder {
-    public static final String DEFAULT_NAME = "Amy Bee";
-    public static final String DEFAULT_PHONE = "85355255";
-    public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_NOTE = "I forgot where this contact came from...";
 
     private Name name;
     private Phone phone;
