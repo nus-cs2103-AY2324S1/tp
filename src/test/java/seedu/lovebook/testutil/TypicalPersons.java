@@ -1,11 +1,11 @@
 package seedu.lovebook.testutil;
 
-import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_HEIGHT_AMY;
-import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_HEIGHT_BOB;
 import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_AGE_AMY;
 import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_AGE_BOB;
 import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_GENDER_AMY;
 import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_GENDER_BOB;
+import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_HEIGHT_AMY;
+import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_HEIGHT_BOB;
 import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;

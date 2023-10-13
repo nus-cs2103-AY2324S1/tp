@@ -10,25 +10,25 @@ import seedu.lovebook.model.person.Date;
  */
 public class LoveBookBuilder {
 
-    private LoveBook LoveBook;
+    private LoveBook loveBook;
 
     public LoveBookBuilder() {
-        LoveBook = new LoveBook();
+        loveBook = new LoveBook();
     }
 
-    public LoveBookBuilder(LoveBook LoveBook) {
-        this.LoveBook = LoveBook;
+    public LoveBookBuilder(LoveBook loveBook) {
+        this.loveBook = loveBook;
     }
 
     /**
      * Adds a new {@code Date} to the {@code LoveBook} that we are building.
      */
     public LoveBookBuilder withPerson(Date date) {
-        LoveBook.addPerson(date);
+        loveBook.addPerson(date);
         return this;
     }
 
     public LoveBook build() {
-        return LoveBook;
+        return loveBook;
     }
 }

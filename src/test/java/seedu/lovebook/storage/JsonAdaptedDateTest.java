@@ -12,9 +12,9 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.lovebook.commons.exceptions.IllegalValueException;
-import seedu.lovebook.model.person.Height;
 import seedu.lovebook.model.person.Age;
 import seedu.lovebook.model.person.Gender;
+import seedu.lovebook.model.person.Height;
 import seedu.lovebook.model.person.Name;
 
 public class JsonAdaptedDateTest {

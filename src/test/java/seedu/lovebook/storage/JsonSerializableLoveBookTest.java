@@ -24,9 +24,9 @@ public class JsonSerializableLoveBookTest {
     public void toModelType_typicalPersonsFile_success() throws Exception {
         JsonSerializableLoveBook dataFromFile = JsonUtil.readJsonFile(TYPICAL_PERSONS_FILE,
                 JsonSerializableLoveBook.class).get();
-        LoveBook LoveBookFromFile = dataFromFile.toModelType();
+        LoveBook loveBookFromFile = dataFromFile.toModelType();
         LoveBook typicalPersonsLoveBook = TypicalPersons.getTypicalLoveBook();
-        assertEquals(LoveBookFromFile, typicalPersonsLoveBook);
+        assertEquals(loveBookFromFile, typicalPersonsLoveBook);
     }
 
     @Test

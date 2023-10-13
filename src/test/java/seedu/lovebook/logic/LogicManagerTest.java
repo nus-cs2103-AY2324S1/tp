@@ -3,9 +3,9 @@ package seedu.lovebook.logic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.lovebook.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.lovebook.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.lovebook.logic.commands.CommandTestUtil.HEIGHT_DESC_AMY;
 import static seedu.lovebook.logic.commands.CommandTestUtil.AGE_DESC_AMY;
 import static seedu.lovebook.logic.commands.CommandTestUtil.GENDER_DESC_AMY;
+import static seedu.lovebook.logic.commands.CommandTestUtil.HEIGHT_DESC_AMY;
 import static seedu.lovebook.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.lovebook.testutil.Assert.assertThrows;
 import static seedu.lovebook.testutil.TypicalPersons.AMY;
@@ -45,10 +45,10 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonLoveBookStorage LoveBookStorage =
+        JsonLoveBookStorage loveBookStorage =
                 new JsonLoveBookStorage(temporaryFolder.resolve("LoveBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(LoveBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(loveBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -150,9 +150,9 @@ public class LogicManagerTest {
         Path prefPath = temporaryFolder.resolve("ExceptionUserPrefs.json");
 
         // Inject LogicManager with an LoveBookStorage that throws the IOException e when saving
-        JsonLoveBookStorage LoveBookStorage = new JsonLoveBookStorage(prefPath) {
+        JsonLoveBookStorage loveBookStorage = new JsonLoveBookStorage(prefPath) {
             @Override
-            public void saveLoveBook(ReadOnlyLoveBook LoveBook, Path filePath)
+            public void saveLoveBook(ReadOnlyLoveBook loveBook, Path filePath)
                     throws IOException {
                 throw e;
             }
@@ -160,7 +160,7 @@ public class LogicManagerTest {
 
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(LoveBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(loveBookStorage, userPrefsStorage);
 
         logic = new LogicManager(model, storage);
 

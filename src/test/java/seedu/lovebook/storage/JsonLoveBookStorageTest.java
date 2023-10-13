@@ -94,10 +94,10 @@ public class JsonLoveBookStorageTest {
     /**
      * Saves {@code LoveBook} at the specified {@code filePath}.
      */
-    private void saveLoveBook(ReadOnlyLoveBook LoveBook, String filePath) {
+    private void saveLoveBook(ReadOnlyLoveBook loveBook, String filePath) {
         try {
             new JsonLoveBookStorage(Paths.get(filePath))
-                    .saveLoveBook(LoveBook, addToTestDataPathIfNotNull(filePath));
+                    .saveLoveBook(loveBook, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }

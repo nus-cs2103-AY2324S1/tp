@@ -24,23 +24,23 @@ import seedu.lovebook.testutil.PersonBuilder;
 
 public class LoveBookTest {
 
-    private final LoveBook LoveBook = new LoveBook();
+    private final LoveBook loveBook = new LoveBook();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), LoveBook.getPersonList());
+        assertEquals(Collections.emptyList(), loveBook.getPersonList());
     }
 
     @Test
     public void resetData_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> LoveBook.resetData(null));
+        assertThrows(NullPointerException.class, () -> loveBook.resetData(null));
     }
 
     @Test
     public void resetData_withValidReadOnlyLoveBook_replacesData() {
         LoveBook newData = getTypicalLoveBook();
-        LoveBook.resetData(newData);
-        assertEquals(newData, LoveBook);
+        loveBook.resetData(newData);
+        assertEquals(newData, loveBook);
     }
 
     @Test
@@ -51,42 +51,42 @@ public class LoveBookTest {
         List<Date> newDates = Arrays.asList(ALICE, editedAlice);
         LoveBookStub newData = new LoveBookStub(newDates);
 
-        assertThrows(DuplicatePersonException.class, () -> LoveBook.resetData(newData));
+        assertThrows(DuplicatePersonException.class, () -> loveBook.resetData(newData));
     }
 
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> LoveBook.hasPerson(null));
+        assertThrows(NullPointerException.class, () -> loveBook.hasPerson(null));
     }
 
     @Test
     public void hasPerson_personNotInLoveBook_returnsFalse() {
-        assertFalse(LoveBook.hasPerson(ALICE));
+        assertFalse(loveBook.hasPerson(ALICE));
     }
 
     @Test
     public void hasPerson_personInLoveBook_returnsTrue() {
-        LoveBook.addPerson(ALICE);
-        assertTrue(LoveBook.hasPerson(ALICE));
+        loveBook.addPerson(ALICE);
+        assertTrue(loveBook.hasPerson(ALICE));
     }
 
     @Test
     public void hasPerson_personWithSameIdentityFieldsInLoveBook_returnsTrue() {
-        LoveBook.addPerson(ALICE);
+        loveBook.addPerson(ALICE);
         Date editedAlice = new PersonBuilder(ALICE).withHeight(VALID_HEIGHT_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(LoveBook.hasPerson(editedAlice));
+        assertTrue(loveBook.hasPerson(editedAlice));
     }
 
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> LoveBook.getPersonList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> loveBook.getPersonList().remove(0));
     }
 
     @Test
     public void toStringMethod() {
-        String expected = LoveBook.class.getCanonicalName() + "{dates=" + LoveBook.getPersonList() + "}";
-        assertEquals(expected, LoveBook.toString());
+        String expected = LoveBook.class.getCanonicalName() + "{dates=" + loveBook.getPersonList() + "}";
+        assertEquals(expected, loveBook.toString());
     }
 
     /**
