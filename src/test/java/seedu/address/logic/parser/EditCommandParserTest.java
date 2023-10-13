@@ -19,8 +19,8 @@ import static seedu.address.logic.commands.CommandTestUtil.NEAREST_MRT_STATION_D
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.SEC_LEVEL_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.SUBJECT_DESC_PHYSICS;
 import static seedu.address.logic.commands.CommandTestUtil.SUBJECT_DESC_MATHEMATICS;
+import static seedu.address.logic.commands.CommandTestUtil.SUBJECT_DESC_PHYSICS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_AMY;
@@ -29,8 +29,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NEAREST_MRT_STA
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SEC_LEVEL_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_PHYSICS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_MATHEMATICS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_PHYSICS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;

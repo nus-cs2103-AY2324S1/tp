@@ -20,8 +20,8 @@ import seedu.address.model.tag.Subject;
  */
 public class Student {
 
-//    private static final ZoneId SINGAPORE_ZONE_ID = ZoneId.of("Asia/Singapore");
-//    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy MMM", Locale.ENGLISH);
+    private static final ZoneId SINGAPORE_ZONE_ID = ZoneId.of("Asia/Singapore");
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy MMM", Locale.ENGLISH);
 
     // Identity fields
     private final Name name;
@@ -35,7 +35,7 @@ public class Student {
     private final MrtStation nearestMrtStation;
     private final Set<Subject> subjects = new HashSet<>();
 
-//    private final LocalDateTime dateModified;
+    private final LocalDateTime dateModified;
 
     /**
      * Every field must be present and not null.
@@ -55,7 +55,7 @@ public class Student {
         this.nearestMrtStation = nearestMrtStation;
         this.subjects.addAll(subjects);
 
-//        this.dateModified = LocalDateTime.now(SINGAPORE_ZONE_ID);
+        this.dateModified = LocalDateTime.now(SINGAPORE_ZONE_ID);
     }
 
     public Name getName() {
@@ -86,9 +86,9 @@ public class Student {
         return nearestMrtStation;
     }
 
-//    public LocalDateTime getDateModified() {
-//        return dateModified;
-//    }
+    public LocalDateTime getDateModified() {
+        return dateModified;
+    }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}

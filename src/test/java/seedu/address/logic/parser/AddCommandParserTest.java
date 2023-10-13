@@ -25,8 +25,8 @@ import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.SEC_LEVEL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.SEC_LEVEL_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.SUBJECT_DESC_PHYSICS;
 import static seedu.address.logic.commands.CommandTestUtil.SUBJECT_DESC_MATHEMATICS;
+import static seedu.address.logic.commands.CommandTestUtil.SUBJECT_DESC_PHYSICS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_BOB;
@@ -34,8 +34,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NEAREST_MRT_STATION_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SEC_LEVEL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_PHYSICS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_MATHEMATICS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_PHYSICS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
@@ -80,8 +80,8 @@ public class AddCommandParserTest {
         Student expectedStudentMultipleTags = new PersonBuilder(BOB).withSubjects(
                 VALID_SUBJECT_PHYSICS, VALID_SUBJECT_MATHEMATICS).build();
         assertParseSuccess(parser,
-                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB +
-                        ADDRESS_DESC_BOB + GENDER_DESC_BOB + SEC_LEVEL_DESC_BOB
+                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                        + ADDRESS_DESC_BOB + GENDER_DESC_BOB + SEC_LEVEL_DESC_BOB
                         + NEAREST_MRT_STATION_DESC_BOB + SUBJECT_DESC_MATHEMATICS + SUBJECT_DESC_PHYSICS,
                 new AddCommand(expectedStudentMultipleTags));
     }
