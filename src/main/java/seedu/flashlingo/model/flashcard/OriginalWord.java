@@ -8,8 +8,12 @@ package seedu.flashlingo.model.flashcard;
  * @since 1.2
  */
 public class OriginalWord {
-    private String word;
+    private final String word;
     public OriginalWord(String word) {
         this.word = word;
+    }
+
+    public String getWord() {
+        return word;
     }
 }
