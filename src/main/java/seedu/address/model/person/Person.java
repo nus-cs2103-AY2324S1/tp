@@ -45,8 +45,12 @@ public class Person {
         this(name, phone, email, address, Optional.empty(), tags);
     }
 
-    public Name getAnimalName() {
-        return animalName.orElse(null);
+    public Person(Name name, Phone phone, Email email, Address address, Name animalName, Set<Tag> tags) {
+        this(name, phone, email, address, Optional.of(animalName), tags);
+    }
+
+    public Optional<Name> getAnimalName() {
+        return animalName;
     }
 
     public Name getName() {

@@ -57,6 +57,7 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        animalName.setText(person.getAnimalName() != null ? "Fostering: " + person.getAnimalName().fullName : "");
+        animalName.setText(person.getAnimalName().isPresent() ? "Fostering: " + person.getAnimalName().get().fullName
+                : "Fostering: nil");
     }
 }
