@@ -24,7 +24,8 @@ public class AddCommand extends Command {
             + PREFIX_ADDRESS + "ADDRESS "
             + "[" + PREFIX_TAG + "TAG]... "
             + PREFIX_AVAILABILITY + "AVAILABILITY "
-            + PREFIX_ANIMAL_NAME + "ANIMAL_NAME\n"
+            + PREFIX_ANIMAL_NAME + "ANIMAL_NAME "
+            + PREFIX_ANIMAL_TYPE + "ANIMAL_TYPE\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
@@ -32,6 +33,7 @@ public class AddCommand extends Command {
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_AVAILABILITY + "NotAvailable "
             + PREFIX_ANIMAL_NAME + "Dexter "
+            + PREFIX_ANIMAL_TYPE + "current.Dog "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 

@@ -43,6 +43,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label availability;
     @FXML
+    private Label animalType;
+    @FXML
     private FlowPane tags;
 
     /**
@@ -63,5 +65,7 @@ public class PersonCard extends UiPart<Region> {
                 : "Fostering: nil");
         availability.setText(person.getAvailability().isPresent() ? "Availability: " + person.getAvailability().get().value
                 : "Availability: nil");
+        animalType.setText(person.getAnimalType().isPresent() ? "Animal Type: " + person.getAnimalType().get().value
+                : "Animal Type: nil");
     }
 }

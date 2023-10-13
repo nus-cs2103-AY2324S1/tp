@@ -27,7 +27,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG,
-                        PREFIX_ANIMAL_NAME, PREFIX_AVAILABILITY);
+                        PREFIX_ANIMAL_NAME, PREFIX_AVAILABILITY, PREFIX_ANIMAL_TYPE);
 
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
@@ -57,7 +57,16 @@ public class AddCommandParser implements Parser<AddCommand> {
             availability = Optional.empty();
         }
 
-        Person person = new Person(name, phone, email, address, animalName, availability, tagList);
+        Optional<AnimalType> animalType;
+        String availabilityValue = argMultimap.getValue(PREFIX_AVAILABILITY).orElse("nil");
+        if (argMultimap.getValue(PREFIX_ANIMAL_TYPE).isPresent()) {
+            animalType = Optional.of(ParserUtil.parseAnimalType(
+                    argMultimap.getValue(PREFIX_ANIMAL_TYPE).get(), availabilityValue));
+        } else {
+            animalType = Optional.empty();
+        }
+
+        Person person = new Person(name, phone, email, address, animalName, availability, animalType, tagList);
 
         return new AddCommand(person);
     }

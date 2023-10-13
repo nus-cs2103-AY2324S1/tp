@@ -33,8 +33,8 @@ public class Availability {
         if (other == null || getClass() != other.getClass()) {
             return false;
         }
-        Availability that = (Availability) other;
-        return value.equals(that.value);
+        Availability otherAvailability = (Availability) other;
+        return value.equals(otherAvailability.value);
     }
 
     @Override

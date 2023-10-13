@@ -13,5 +13,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_ANIMAL_NAME = new Prefix("animal/");
     public static final Prefix PREFIX_AVAILABILITY = new Prefix("availability/");
-
+    public static final Prefix PREFIX_ANIMAL_TYPE = new Prefix("animalType/");
+    public static final Prefix PREFIX_HOUSING_TYPE= new Prefix("housing/");
 }

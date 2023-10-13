@@ -54,6 +54,11 @@ public class Messages {
             builder.append(person.getAnimalName());
         }
 
+        builder.append("; Animal type: ");
+        if (person.getAnimalType() != null) {
+            builder.append(person.getAnimalType());
+        }
+
         builder.append("; Tags: ");
         person.getTags().forEach(builder::append);
 

@@ -24,6 +24,7 @@ class JsonAdaptedPerson {
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final String animalName;
     private final String availability;
+    private final String animalType;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -32,7 +33,8 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("animalName") String animalName,
-                             @JsonProperty("availability") String availability) {
+                             @JsonProperty("availability") String availability,
+                             @JsonProperty("animalType") String animalType) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -42,6 +44,7 @@ class JsonAdaptedPerson {
         }
         this.animalName = animalName != null ? animalName : "nil";
         this.availability = availability != null ? availability : "nil";
+        this.animalType = animalType != null ? animalType : "nil";
     }
 
     /**
@@ -57,6 +60,7 @@ class JsonAdaptedPerson {
                 .collect(Collectors.toList()));
         animalName = source.getAnimalName().isPresent() ? source.getAnimalName().get().fullName : null;
         availability = source.getAvailability().isPresent() ? source.getAvailability().get().value : null;
+        animalType = source.getAnimalType().isPresent() ? source.getAnimalType().get().value : null;
     }
 
     /**
@@ -106,8 +110,10 @@ class JsonAdaptedPerson {
 
         Name modelAnimalName = animalName != null ? new Name(animalName) : null;
         Availability modelAvailability = availability != null ? new Availability(availability) : null;
+        AnimalType modelAnimaltype = animalType != null ? new AnimalType(animalType, availability) : null;
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelAnimalName, modelAvailability, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelAnimalName,
+                modelAvailability, modelAnimaltype, modelTags);
     }
 
 }

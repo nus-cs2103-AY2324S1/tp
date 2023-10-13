@@ -30,6 +30,7 @@
       <FlowPane fx:id="tags" />
       <Label fx:id="availability" styleClass="cell_small_label" text="\$availability" />
       <Label fx:id="animalName" styleClass="cell_small_label" text="\$animalName" />
+      <Label fx:id="animalType" styleClass="cell_small_label" text="\$animalType" />
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />

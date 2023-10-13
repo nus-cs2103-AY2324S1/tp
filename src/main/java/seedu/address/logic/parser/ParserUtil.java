@@ -127,4 +127,20 @@ public class ParserUtil {
         }
         return new Availability(trimmedAvailability);
     }
+
+    public static AnimalType parseAnimalType(String animalType, String availability) throws ParseException {
+        requireNonNull(animalType);
+        requireNonNull(availability);
+
+        String trimmedAnimalType = animalType.trim();
+        if (availability.equals("Available") && !AnimalType.isValidAnimalType(trimmedAnimalType, AnimalType.VALIDATION_REGEX_AVAILABLE)) {
+            throw new ParseException(AnimalType.MESSAGE_CONSTRAINTS);
+        }
+
+        if (availability.equals("NotAvailable") && !AnimalType.isValidAnimalType(trimmedAnimalType, AnimalType.VALIDATION_REGEX_NOT_AVAILABLE)) {
+            throw new ParseException(AnimalType.MESSAGE_CONSTRAINTS);
+        }
+
+        return new AnimalType(trimmedAnimalType, availability);
+    }
 }
