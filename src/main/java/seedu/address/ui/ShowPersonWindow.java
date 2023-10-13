@@ -1,16 +1,11 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
-import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
-import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
 
 /**
@@ -45,11 +40,18 @@ public class ShowPersonWindow extends UiPart<Stage> {
     }
 
     /**
+     * Creates a new ShowPersonWindow.
+     */
+    public ShowPersonWindow() {
+        this(new Stage());
+    }
+
+    /**
      * Sets the Details of the person to be shown.
      *
      * @param person The person whose details are to be shown.
      */
-    public void setPersonDetails (Person person) {
+    public void setPersonDetails(Person person) {
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
@@ -63,12 +65,6 @@ public class ShowPersonWindow extends UiPart<Stage> {
                         .add(new ColoredTextEntry(subject.subjectName.toString(), subject.getColour())));
     }
 
-    /**
-     * Creates a new ShowPersonWindow.
-     */
-    public ShowPersonWindow() {
-        this(new Stage());
-    }
 
     /**
      * Shows the Show Person window.

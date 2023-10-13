@@ -1,7 +1,5 @@
 package seedu.address.ui;
 
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -19,12 +17,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Subject;
 
 /**
  * The Main Window. Provides the basic application layout containing
