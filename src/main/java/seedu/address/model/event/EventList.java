@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 public class EventList {
 
-    public ArrayList<Event> events = new ArrayList<>();
+    private ArrayList<Event> events = new ArrayList<>();
 
     /**
      * Adds an event to the list of events.
