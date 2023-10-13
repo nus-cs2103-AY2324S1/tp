@@ -11,7 +11,7 @@ import java.util.Arrays;
  * All Index objects in Indices have to be either zero-based or one-based.
  */
 public class Indices {
-    private ArrayList<Index> zeroBasedIndices;
+    private final ArrayList<Index> zeroBasedIndices;
     private int size;
 
     /**
@@ -20,6 +20,32 @@ public class Indices {
     private Indices(ArrayList<Index> zeroBasedIndices) {
         this.zeroBasedIndices = zeroBasedIndices;
         this.size = zeroBasedIndices.size();
+    }
+
+    public static Indices fromZeroBased(int[] zeroBasedIndices) {
+        Arrays.sort(zeroBasedIndices);
+        ArrayList<Index> result = new ArrayList<>();
+
+        for (int index : zeroBasedIndices) {
+            Index zeroBasedIndex = Index.fromZeroBased(index);
+            if (!result.contains(zeroBasedIndex)) {
+                result.add(zeroBasedIndex);
+            }
+        }
+        return new Indices(result);
+    }
+
+    public static Indices fromOneBased(int[] oneBasedIndices) {
+        Arrays.sort(oneBasedIndices);
+        ArrayList<Index> result = new ArrayList<>();
+
+        for (int index : oneBasedIndices) {
+            Index oneBasedIndex = Index.fromOneBased(index);
+            if (!result.contains(oneBasedIndex)) {
+                result.add(oneBasedIndex);
+            }
+        }
+        return new Indices(result);
     }
 
     public int[] getZeroBased() {
@@ -60,32 +86,6 @@ public class Indices {
         }
         result.append(oneBased[size - 1]);
         return result.toString();
-    }
-
-    public static Indices fromZeroBased(int[] zeroBasedIndices) {
-        Arrays.sort(zeroBasedIndices);
-        ArrayList<Index> result = new ArrayList<>();
-
-        for (int index : zeroBasedIndices) {
-            Index zeroBasedIndex = Index.fromZeroBased(index);
-            if (!result.contains(zeroBasedIndex)) {
-                result.add(zeroBasedIndex);
-            }
-        }
-        return new Indices(result);
-    }
-
-    public static Indices fromOneBased(int[] oneBasedIndices) {
-        Arrays.sort(oneBasedIndices);
-        ArrayList<Index> result = new ArrayList<>();
-
-        for (int index : oneBasedIndices) {
-            Index oneBasedIndex = Index.fromOneBased(index);
-            if (!result.contains(oneBasedIndex)) {
-                result.add(oneBasedIndex);
-            }
-        }
-        return new Indices(result);
     }
 
     public int getSize() {

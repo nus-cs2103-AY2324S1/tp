@@ -7,10 +7,10 @@ import static seedu.address.logic.commands.CommandTestUtil.getPeople;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.logic.commands.CommandTestUtil.showPeopleAtIndices;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndices.INDICES_ONE;
-import static seedu.address.testutil.TypicalIndices.INDICES_ONE_TO_THREE;
-import static seedu.address.testutil.TypicalIndices.INDICES_ONE_TO_THREE_JUMBLED;
-import static seedu.address.testutil.TypicalIndices.INDICES_FOUR_TO_SIX;
+import static seedu.address.testutil.TypicalIndices.ONEBASED_ONE;
+import static seedu.address.testutil.TypicalIndices.ONEBASED_ONE_TO_THREE;
+import static seedu.address.testutil.TypicalIndices.ONEBASED_ONE_TO_THREE_JUMBLED;
+import static seedu.address.testutil.TypicalIndices.ONEBASED_FOUR_TO_SIX;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -36,8 +36,8 @@ public class DeleteCommandTest {
 
     @Test
     public void getPeopleToDelete_validIndices_success() throws CommandException {
-        Person[] peopleToDelete = getPeople(model.getFilteredPersonList(), INDICES_ONE_TO_THREE);
-        DeleteCommand deleteCommand = new DeleteCommand(INDICES_ONE_TO_THREE);
+        Person[] peopleToDelete = getPeople(model.getFilteredPersonList(), ONEBASED_ONE_TO_THREE);
+        DeleteCommand deleteCommand = new DeleteCommand(ONEBASED_ONE_TO_THREE);
         assertArrayEquals(deleteCommand.getPeopleToDelete(model.getFilteredPersonList()), peopleToDelete);
     }
 
@@ -52,9 +52,9 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Person[] peopleToDelete = getPeople(model.getFilteredPersonList(), INDICES_ONE);
+        Person[] peopleToDelete = getPeople(model.getFilteredPersonList(), ONEBASED_ONE);
 
-        DeleteCommand deleteCommand = new DeleteCommand(INDICES_ONE);
+        DeleteCommand deleteCommand = new DeleteCommand(ONEBASED_ONE);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.format(peopleToDelete));
@@ -69,9 +69,9 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validIndicesUnfilteredList_success() {
-        Person[] peopleToDelete = getPeople(model.getFilteredPersonList(), INDICES_ONE_TO_THREE);
+        Person[] peopleToDelete = getPeople(model.getFilteredPersonList(), ONEBASED_ONE_TO_THREE);
 
-        DeleteCommand deleteCommand = new DeleteCommand(INDICES_ONE_TO_THREE);
+        DeleteCommand deleteCommand = new DeleteCommand(ONEBASED_ONE_TO_THREE);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PEOPLE_SUCCESS,
                 Messages.format(peopleToDelete));
@@ -99,7 +99,7 @@ public class DeleteCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDICES_ONE);
+        DeleteCommand deleteCommand = new DeleteCommand(ONEBASED_ONE);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.format(personToDelete));
@@ -113,10 +113,10 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validIndicesFilteredList_success() {
-        showPeopleAtIndices(model, INDICES_ONE_TO_THREE);
+        showPeopleAtIndices(model, ONEBASED_ONE_TO_THREE);
 
-        Person[] peopleToDelete = getPeople(model.getFilteredPersonList(), INDICES_ONE_TO_THREE);
-        DeleteCommand deleteCommand = new DeleteCommand(INDICES_ONE_TO_THREE);
+        Person[] peopleToDelete = getPeople(model.getFilteredPersonList(), ONEBASED_ONE_TO_THREE);
+        DeleteCommand deleteCommand = new DeleteCommand(ONEBASED_ONE_TO_THREE);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PEOPLE_SUCCESS,
                 Messages.format(peopleToDelete));
@@ -133,7 +133,7 @@ public class DeleteCommandTest {
     public void execute_invalidIndicesFilteredList_throwsCommandException() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        Indices outOfBoundIndices = INDICES_FOUR_TO_SIX;
+        Indices outOfBoundIndices = ONEBASED_FOUR_TO_SIX;
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndices.getZeroBasedMax() < model.getAddressBook().getPersonList().size());
 
@@ -144,14 +144,14 @@ public class DeleteCommandTest {
 
     @Test
     public void equals() {
-        DeleteCommand deleteFirstCommand = new DeleteCommand(INDICES_ONE_TO_THREE);
-        DeleteCommand deleteSecondCommand = new DeleteCommand(INDICES_FOUR_TO_SIX);
+        DeleteCommand deleteFirstCommand = new DeleteCommand(ONEBASED_ONE_TO_THREE);
+        DeleteCommand deleteSecondCommand = new DeleteCommand(ONEBASED_FOUR_TO_SIX);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDICES_ONE_TO_THREE_JUMBLED);
+        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(ONEBASED_ONE_TO_THREE_JUMBLED);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
@@ -166,8 +166,8 @@ public class DeleteCommandTest {
 
     @Test
     public void toStringMethod() {
-        DeleteCommand deleteCommand = new DeleteCommand(INDICES_ONE_TO_THREE);
-        String expected = DeleteCommand.class.getCanonicalName() + "{targetIndices=" + INDICES_ONE_TO_THREE + "}";
+        DeleteCommand deleteCommand = new DeleteCommand(ONEBASED_ONE_TO_THREE);
+        String expected = DeleteCommand.class.getCanonicalName() + "{targetIndices=" + ONEBASED_ONE_TO_THREE + "}";
         assertEquals(expected, deleteCommand.toString());
     }
 
