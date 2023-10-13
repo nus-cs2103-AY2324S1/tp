@@ -69,6 +69,17 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Returns the student with the given student number.
+     *
+     * @param studentNumber the given student number.
+     */
+    public Person getPerson(StudentNumber studentNumber) {
+        requireAllNonNull(studentNumber);
+        int index = internalList.indexOf(new Person(studentNumber));
+        return internalList.get(index);
+    }
+
+    /**
      * Removes the equivalent person from the list.
      * The person must exist in the list.
      */

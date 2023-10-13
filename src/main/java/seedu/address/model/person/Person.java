@@ -28,6 +28,19 @@ public class Person {
 
     private final Set<Tag> tags = new HashSet<>();
 
+
+    /**
+     * Every field must be present and not null.
+     */
+    public Person(StudentNumber studentNumber) {
+        requireAllNonNull(studentNumber);
+        this.name = null;
+        this.studentNumber = studentNumber;
+        this.phone = null;
+        this.email = null;
+        this.classNumber = null;
+    }
+
     /**
      * Every field must be present and not null.
      */

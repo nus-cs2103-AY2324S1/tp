@@ -39,6 +39,13 @@ public class StudentNumber {
         return (test.matches(VALIDATION_REGEX));
     }
 
+    /**
+     * Checks if the student number is valid.
+     */
+    public boolean isValid() {
+        return this.value.matches(VALIDATION_REGEX);
+    }
+
     @Override
     public String toString() {
         return value;
