@@ -1,17 +1,17 @@
 package seedu.flashlingo.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_ORIGINAL_WORD;
+import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_TRANSLATED_WORD;
+
+import java.util.Date;
 
 import seedu.flashlingo.commons.util.ToStringBuilder;
-import seedu.flashlingo.logic.Messages;
 import seedu.flashlingo.logic.commands.exceptions.CommandException;
 import seedu.flashlingo.model.Model;
-import seedu.flashlingo.model.person.Person;
+import seedu.flashlingo.model.flashcard.FlashCard;
+import seedu.flashlingo.model.flashcard.OriginalWord;
+import seedu.flashlingo.model.flashcard.Translation;
 
 /**
  * Adds a person to the address book.
@@ -20,46 +20,39 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    // For help function
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book.\n"
             + "Parameters: "
-            + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE "
-            + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_ADDRESS + "ADDRESS "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + PREFIX_ORIGINAL_WORD + "ORIGINAL WORD "
+            + PREFIX_TRANSLATED_WORD + "TRANSLATION "
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John Doe "
-            + PREFIX_PHONE + "98765432 "
-            + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_ORIGINAL_WORD + "sorry "
+            + PREFIX_TRANSLATED_WORD + "entschuldigung ";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_SUCCESS = "New flashcard added: %s - %s";
+    public static final String MESSAGE_DUPLICATE_CARD = "This flashcard already exists";
 
-    private final Person toAdd;
-    private Model model;
+    private final FlashCard toAdd;
+    private OriginalWord original;
+    private Translation translated;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddCommand to add the specified {@code FlashCard}
      */
-    public AddCommand(Person person) {
-        requireNonNull(person);
-        toAdd = person;
+    public AddCommand(OriginalWord original, Translation translated) {
+        this.original = original;
+        this.translated = translated;
+        this.toAdd = new FlashCard(original, translated, new Date(), 1);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        this.model = model;
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        if (model.hasFlashCard(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_CARD);
         }
-
-        model.addPerson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, this.original, this.translated));
     }
 
     @Override
