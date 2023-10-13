@@ -10,7 +10,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.applicant.exceptions.ApplicantNotFoundException;
 import seedu.address.model.applicant.exceptions.DuplicateApplicantException;
-import seedu.address.model.person.Applicant;
 
 /**
  * A list of applicants that enforces uniqueness between its elements and does not allow nulls.

@@ -8,7 +8,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Applicant;
+import seedu.address.model.applicant.Applicant;
 
 /**
  * Adds an applicant to the address book.
@@ -43,11 +43,11 @@ public class AddApplicantCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
+        if (model.hasApplicant(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_APPLICANT);
         }
 
-        model.addPerson(toAdd);
+        model.addApplicant(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
