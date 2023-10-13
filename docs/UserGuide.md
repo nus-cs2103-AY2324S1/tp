@@ -115,11 +115,11 @@ Deletes a words and its related information
 * Deletes a wild card.
 * Looks up the word and deletes it and all its related information.
 
-Format: `del w/WORD`
+Format: `del index`
 
 Examples:
-* `del w/regarder` deletes the word and its translation
-* `del w/entschuldigung` deletes the word and its translation.
+* `del 1` deletes the word and its translation at index 1
+
 
 ###  Showing flashcard, starts today’s flashcard session : `start`
 
