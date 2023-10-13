@@ -61,10 +61,10 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        animalName = source.getAnimalName().isPresent() ? source.getAnimalName().get().fullName : null;
-        availability = source.getAvailability().isPresent() ? source.getAvailability().get().value : null;
-        animalType = source.getAnimalType().isPresent() ? source.getAnimalType().get().value : null;
-        housing = source.getHousing().isPresent() ? source.getHousing().get().value : null;
+        animalName = source.getAnimalName().isPresent() ? source.getAnimalName().get().fullName : "nil";
+        availability = source.getAvailability().isPresent() ? source.getAvailability().get().value : "nil";
+        animalType = source.getAnimalType().isPresent() ? source.getAnimalType().get().value : "nil";
+        housing = source.getHousing().isPresent() ? source.getHousing().get().value : "nil";
     }
 
     /**
