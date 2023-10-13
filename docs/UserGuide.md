@@ -78,9 +78,7 @@ Format: `help`
 
 Shows the list of cards with both the original word and the corresponding translation.
 
-Format: `list`
-
-Format: `list`
+Format: `list`  
 
 Output:
 * `There are no words in the list! Add your flashcards now!`
