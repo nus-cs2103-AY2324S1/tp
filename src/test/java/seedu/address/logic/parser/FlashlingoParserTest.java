@@ -2,35 +2,22 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_FLASHCARD;
 import static seedu.flashlingo.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.flashlingo.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.FlashcardBuilder;
 import seedu.flashlingo.logic.commands.AddCommand;
-import seedu.flashlingo.logic.commands.ClearCommand;
 import seedu.flashlingo.logic.commands.DeleteCommand;
-import seedu.flashlingo.logic.commands.EditCommand;
-import seedu.flashlingo.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.flashlingo.logic.commands.ExitCommand;
-import seedu.flashlingo.logic.commands.FindCommand;
 import seedu.flashlingo.logic.commands.HelpCommand;
 import seedu.flashlingo.logic.commands.ListCommand;
-import seedu.flashlingo.logic.parser.AddressBookParser;
 import seedu.flashlingo.logic.parser.FlashlingoParser;
 import seedu.flashlingo.logic.parser.exceptions.ParseException;
-import seedu.flashlingo.model.Flashlingo;
 import seedu.flashlingo.model.flashcard.FlashCard;
-import seedu.flashlingo.model.person.NameContainsKeywordsPredicate;
-import seedu.flashlingo.model.person.Person;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.FlashCardUtil;
 
 public class FlashlingoParserTest {
@@ -47,8 +34,8 @@ public class FlashlingoParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_FLASHCARD.getOneBased());
+        assertEquals(new DeleteCommand(INDEX_FIRST_FLASHCARD), command);
     }
 
     @Test
