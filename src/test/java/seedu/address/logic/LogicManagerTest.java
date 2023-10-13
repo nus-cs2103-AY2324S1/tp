@@ -10,6 +10,7 @@ import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.AMY;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
@@ -42,7 +43,7 @@ public class LogicManagerTest {
     @TempDir
     public Path temporaryFolder;
 
-    private Model model = new ModelManager();
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Logic logic;
 
     @BeforeEach
@@ -67,7 +68,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_viewModeCommandExecutionError_throwsParseException() {
+    public void execute_viewModeCommandExecutionError_throwsParseException() throws CommandException, ParseException {
         String listCommand = "list";
         assertViewModeParseException(listCommand, MESSAGE_UNAVAILABLE_COMMAND_IN_VIEW_MODE);
     }
@@ -125,7 +126,8 @@ public class LogicManagerTest {
      */
     private void assertViewModeCommandSuccess(String inputCommand, String expectedMessage,
                                                  Model expectedModel) throws CommandException, ParseException {
-        logic.setIsInViewMode(true);
+        String viewCommand = "view 1";
+        CommandResult viewCommandResult = logic.execute(viewCommand);
         CommandResult result = logic.execute(inputCommand);
         assertEquals(expectedMessage, result.getFeedbackToUser());
         assertEquals(expectedModel, model);
@@ -189,7 +191,10 @@ public class LogicManagerTest {
      * confirms that a ParseException is thrown and that the result message is correct.
      * @see #assertViewModeCommandFailure(String, Class, String, Model)
      */
-    private void assertViewModeParseException(String inputCommand, String expectedMessage) {
+    private void assertViewModeParseException(String inputCommand, String expectedMessage)
+            throws CommandException, ParseException {
+        String viewCommand = "view 1";
+        CommandResult viewCommandResult = logic.execute(viewCommand);
         assertViewModeCommandFailure(inputCommand, ParseException.class, expectedMessage);
     }
 
@@ -213,7 +218,6 @@ public class LogicManagerTest {
      */
     private void assertViewModeCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage, Model expectedModel) {
-        logic.setIsInViewMode(true);
         assertThrows(expectedException, expectedMessage, () -> logic.execute(inputCommand));
         assertEquals(expectedModel, model);
     }
@@ -246,7 +250,7 @@ public class LogicManagerTest {
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
         Person expectedPerson = new PersonBuilder(AMY).withTags().build();
-        ModelManager expectedModel = new ModelManager();
+        ModelManager expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel.addPerson(expectedPerson);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }

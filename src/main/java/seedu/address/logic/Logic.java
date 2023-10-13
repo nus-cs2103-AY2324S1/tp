@@ -49,11 +49,6 @@ public interface Logic {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the boolean value to check if the page is in profile view page.
-     */
-    boolean getIsInViewMode();
-
-    /**
      * Sets the boolean value that checks if the page is in profile view page.
      */
     void setIsInViewMode(boolean isInViewMode);

@@ -81,9 +81,6 @@ public class LogicManager implements Logic {
 
         return commandResult;
     }
-    public boolean getIsInViewMode() {
-        return isInViewMode;
-    }
 
     public void setIsInViewMode(boolean isInViewMode) {
         this.isInViewMode = isInViewMode;
