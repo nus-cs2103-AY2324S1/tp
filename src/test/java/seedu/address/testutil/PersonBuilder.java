@@ -76,6 +76,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code Birthdate} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withBirthdate(String birthdate) {
+        this.birthdate = new Birthdate(birthdate);
+        return this;
+    }
+
+    /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
      */
     public PersonBuilder withTags(String ... tags) {
@@ -107,16 +115,8 @@ public class PersonBuilder {
         return this;
     }
 
-    /**
-     * Sets the {@code Birthdate} of the {@code Person} that we are building.
-     */
-    public PersonBuilder withBirthdate(String birthdate) {
-        this.birthdate = new Birthdate(birthdate);
-        return this;
-    }
-
     public Person build() {
-        return new Person(name, gender, phone, email, birthdate, address, tags);
+        return new Person(name, gender, birthdate, phone, email, address, tags);
     }
 
 }

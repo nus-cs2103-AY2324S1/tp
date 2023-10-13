@@ -53,7 +53,8 @@ public class PersonUtil {
         descriptor.getGender().ifPresent(gender -> sb.append(PREFIX_GENDER).append(gender.value).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
-        descriptor.getBirthdate().ifPresent(birthdate -> sb.append(PREFIX_BIRTHDATE).append(birthdate.value).append(" "));
+        descriptor.getBirthdate().ifPresent(
+                birthdate -> sb.append(PREFIX_BIRTHDATE).append(birthdate.value).append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
