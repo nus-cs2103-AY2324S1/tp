@@ -15,16 +15,16 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 public class Employee {
 
     // Identity fields
+    private final Email email;
     private final Name name;
     private final Phone phone;
-    private final Email email;
-
+    
     // Data fields
     private final Address address;
+    private final AnnualLeave annualLeave;
     private final BankAccount bankAccount;
     private final JoinDate joinDate;
     private final Salary salary;
-    private final AnnualLeave annualLeave;
 
     /**
      * Every field must be present and not null.
@@ -59,5 +59,21 @@ public class Employee {
                 .add("salary", salary)
                 .add("annual leave", annualLeave)
                 .toString();
+    }
+
+    public Address getAddress() {
+        return this.address;
+    }
+
+    public Email getEmail() {
+        return this.email;
+    }
+
+    public Name getName() {
+        return this.name;
+    }
+
+    public Phone getPhone() {
+        return this.phone;
     }
 }
