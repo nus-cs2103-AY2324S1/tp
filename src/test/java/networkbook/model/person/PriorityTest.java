@@ -84,4 +84,15 @@ public class PriorityTest {
         // different values -> returns false
         assertFalse(priority.equals(new Priority(VALID_PRIORITY_STRING_2)));
     }
+
+    @Test
+    public void toString_validPriority_success() {
+        String s1 = new Priority(VALID_PRIORITY_STRING_1).toString();
+        String s2 = new Priority(VALID_PRIORITY_STRING_2).toString();
+        String s3 = new Priority(VALID_PRIORITY_STRING_3).toString();
+        assertEquals("High", s1);
+        assertEquals("Medium", s2);
+        assertEquals("Low", s3);
+    }
+
 }

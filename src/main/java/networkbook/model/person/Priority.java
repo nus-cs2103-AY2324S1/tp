@@ -59,15 +59,14 @@ public class Priority {
 
     @Override
     public String toString() {
+        assert isValidPriority(value) : "Valid priority level should fall within the three categories";
         switch (value) {
         case HIGH:
             return "High";
         case MEDIUM:
             return "Medium";
-        case LOW:
-            return "Low";
         default:
-            return "Invalid priority level";
+            return "Low";
         }
     }
 
