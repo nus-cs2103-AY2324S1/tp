@@ -16,7 +16,7 @@ public class Applicant extends Person {
      */
     public Applicant(Name name, Phone phone) {
         // TODO: remove need to pass in stub fields
-        super(name, phone, new Email("sample"), new Address("sample"), new HashSet<>());
+        super(name, phone, new Email("sample@example.com"), new Address("sample"), new HashSet<>());
 
     }
 
