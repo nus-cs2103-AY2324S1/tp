@@ -19,7 +19,7 @@ public class KeywordParser {
      * a Predicate that tests the given attribute.
      */
     public static Predicate<Person> parseInput(String[] input) {
-        Pattern nricPattern = Pattern.compile("^[STFGM]\\d{7}[a-zA-Z]$");
+        Pattern nricPattern = Pattern.compile("^[ST]\\d{7}[A-Z]$");
         Pattern genderPattern = Pattern.compile("^([MF])$");
 
         Matcher genderMatcher = genderPattern.matcher(input[0]);

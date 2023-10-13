@@ -67,7 +67,7 @@ public class AddressBookParserTest {
     public void parseCommand_findName() throws Exception {
         String[] keywords = {"foo", "bar", "baz"};
         FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + "foo bar baz");
+                FindCommand.COMMAND_WORD + " foo bar baz");
         assertEquals(new FindCommand(KeywordParser.parseInput(keywords)), command);
     }
 
@@ -75,7 +75,7 @@ public class AddressBookParserTest {
     public void parseCommand_findIc() throws Exception {
         String[] keywords = {"T1234567Q"};
         FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + "foo bar baz");
+                FindCommand.COMMAND_WORD + " T1234567Q");
         assertEquals(new FindCommand(KeywordParser.parseInput(keywords)), command);
     }
 
@@ -83,7 +83,7 @@ public class AddressBookParserTest {
     public void parseCommand_findGender() throws Exception {
         String[] keywords = {"M"};
         FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + "foo bar baz");
+                FindCommand.COMMAND_WORD + " M");
         assertEquals(new FindCommand(KeywordParser.parseInput(keywords)), command);
     }
 
