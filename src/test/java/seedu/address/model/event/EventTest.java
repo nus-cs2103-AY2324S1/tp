@@ -54,7 +54,7 @@ public class EventTest {
                 new EventPeriodBuilder().changeStartAndEnd(VALID_START_DATE_EARLIER,
                         VALID_END_DATE_EARLIER).build());
 
-        assertEquals(new EventBuilder().withStartEndDate(VALID_START_DATE_EARLIER,
+        assertNotEquals(new EventBuilder().withStartEndDate(VALID_START_DATE_EARLIER,
                         VALID_END_DATE_EARLIER).build().getEventPeriod(),
                 new EventPeriodBuilder().changeStartAndEnd(VALID_START_DATE_LATER,
                         VALID_END_DATE_LATER).build());
