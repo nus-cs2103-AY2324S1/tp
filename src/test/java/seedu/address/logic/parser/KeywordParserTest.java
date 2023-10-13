@@ -2,15 +2,15 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Arrays;
+import java.util.function.Predicate;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.person.GenderPredicate;
 import seedu.address.model.person.IcContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
-
-import java.util.Arrays;
-import java.util.function.Predicate;
 
 public class KeywordParserTest {
 
