@@ -1,24 +1,15 @@
 package seedu.flashlingo.logic.parser;
 
 import static seedu.flashlingo.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_ORIGINAL_WORD;
+import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_TRANSLATED_WORD;
 
-import java.util.Set;
 import java.util.stream.Stream;
 
-import seedu.flashlingo.logic.commands.AddCommand;
+import seedu.flashlingo.logic.newcommands.AddCommand;
 import seedu.flashlingo.logic.parser.exceptions.ParseException;
-import seedu.flashlingo.model.person.Address;
-import seedu.flashlingo.model.person.Email;
-import seedu.flashlingo.model.person.Name;
-import seedu.flashlingo.model.person.Person;
-import seedu.flashlingo.model.person.Phone;
-import seedu.flashlingo.model.person.Remark;
-import seedu.flashlingo.model.tag.Tag;
+import seedu.flashlingo.model.flashcard.OriginalWord;
+import seedu.flashlingo.model.flashcard.Translation;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -32,24 +23,18 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+            ArgumentTokenizer.tokenize(args, PREFIX_ORIGINAL_WORD, PREFIX_TRANSLATED_WORD);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
+        if (!arePrefixesPresent(argMultimap, PREFIX_ORIGINAL_WORD, PREFIX_TRANSLATED_WORD)
             || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
-        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-        Remark remark = new Remark("");
-        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ORIGINAL_WORD, PREFIX_TRANSLATED_WORD);
+        OriginalWord word = ParserUtil.parseWord(argMultimap.getValue(PREFIX_ORIGINAL_WORD).get());
+        Translation translation = ParserUtil.parseTranslation(argMultimap.getValue(PREFIX_TRANSLATED_WORD).get());
 
-        Person person = new Person(name, phone, email, remark, address, tagList);
-
-        return new AddCommand(person);
+        return new AddCommand(word, translation);
     }
 
     /**

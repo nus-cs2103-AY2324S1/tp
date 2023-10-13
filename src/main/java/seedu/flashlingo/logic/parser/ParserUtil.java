@@ -9,6 +9,8 @@ import java.util.Set;
 import seedu.flashlingo.commons.core.index.Index;
 import seedu.flashlingo.commons.util.StringUtil;
 import seedu.flashlingo.logic.parser.exceptions.ParseException;
+import seedu.flashlingo.model.flashcard.OriginalWord;
+import seedu.flashlingo.model.flashcard.Translation;
 import seedu.flashlingo.model.person.Address;
 import seedu.flashlingo.model.person.Email;
 import seedu.flashlingo.model.person.Name;
@@ -120,5 +122,16 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+    public static OriginalWord parseWord(String word) throws ParseException {
+        requireNonNull(word);
+        final OriginalWord tarWord = new OriginalWord(word);
+        return tarWord;
+    }
+
+    public static Translation parseTranslation(String word) throws ParseException {
+        requireNonNull(word);
+        final Translation tarWord = new Translation(word);
+        return tarWord;
     }
 }

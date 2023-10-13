@@ -29,11 +29,11 @@ public class FlashCard {
      * @param whenToReview   The date of when you need to review this word
      * @param level          The level of familiarity with the word
      */
-    public FlashCard(String originalWord, String translatedWord, Date whenToReview, int level) {
+    public FlashCard(OriginalWord originalWord, Translation translatedWord, Date whenToReview, int level) {
         this.level = new ProficiencyLevel(level);
         this.whenToReview = whenToReview;
-        this.translatedWord = new Translation(translatedWord);
-        this.originalWord = new OriginalWord(originalWord);
+        this.translatedWord = translatedWord;
+        this.originalWord = originalWord;
     }
 
     public OriginalWord getOriginalWord() {
