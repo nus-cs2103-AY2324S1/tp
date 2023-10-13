@@ -1,6 +1,7 @@
 package seedu.address.model.event;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -59,6 +60,8 @@ public class EventPeriod {
      * @return True if the period is valid, false otherwise.
      */
     public static boolean isValidPeriod(String startString, String endString) {
+        requireAllNonNull(startString, endString);
+
         LocalDateTime startDateTime;
         LocalDateTime endDateTime;
         try {
@@ -89,6 +92,7 @@ public class EventPeriod {
      * @return 1 if this EventPeriod is after the other, -1 if it's before, 0 if they are the same.
      */
     public int compareTo(EventPeriod other) {
+        requireNonNull(other);
         if (this.start.isBefore(other.start)) {
             return -1;
         } else if (this.start.isEqual(other.start)) {
@@ -115,6 +119,7 @@ public class EventPeriod {
 
     @Override
     public boolean equals(Object other) {
+        requireNonNull(other);
         if (other == this) {
             return true;
         }

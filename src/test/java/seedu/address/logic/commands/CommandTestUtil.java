@@ -37,8 +37,10 @@ public class CommandTestUtil {
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_DESCRIPTION = "sleep";
-    public static final String VALID_START_DATE = "2023-01-01 08:00";
-    public static final String VALID_END_DATE = "2023-01-01 09:00";
+    public static final String VALID_START_DATE_EARLIER = "2023-01-01 08:00";
+    public static final String VALID_END_DATE_EARLIER = "2023-01-01 09:00";
+    public static final String VALID_START_DATE_LATER = "2024-01-01 08:00";
+    public static final String VALID_END_DATE_LATER = "2024-01-01 09:00";
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
