@@ -9,6 +9,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
 
+/**
+ * An UI component representing the profile with details of a {@code Person}.
+ */
 public class PersonProfile extends UiPart<Region> {
     private static final String FXML = "PersonProfile.fxml";
 

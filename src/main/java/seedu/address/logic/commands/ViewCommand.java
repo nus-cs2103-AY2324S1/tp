@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 
@@ -12,13 +11,16 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
+/**
+ * Views the profile of the fosterer using their displayed index in the addressbook.
+ */
 public class ViewCommand extends Command {
     public static final String COMMAND_WORD = "view";
-
-    private final Index targetIndex;
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows the profile of the user.\n"
             + "Example: " + COMMAND_WORD + " 1";
     public static final String VIEWING_PROFILE_SUCCESS = "Viewing Person: %1$s";
+    private final Index targetIndex;
+
     public ViewCommand(Index index) {
         this.targetIndex = index;
     }

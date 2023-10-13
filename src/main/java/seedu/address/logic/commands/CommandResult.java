@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 
@@ -27,6 +26,9 @@ public class CommandResult {
 
     private final boolean viewExit;
 
+    /**
+     * Constructs a {@code CommandResult} with the specified fields.
+     */
     public CommandResult(
             String feedbackToUser,
             boolean showHelp,
@@ -43,7 +45,8 @@ public class CommandResult {
     }
 
     /**
-     * Constructs a {@code CommandResult} with the specified fields.
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
+     * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
         this(requireNonNull(feedbackToUser), showHelp, exit, false, null, false);

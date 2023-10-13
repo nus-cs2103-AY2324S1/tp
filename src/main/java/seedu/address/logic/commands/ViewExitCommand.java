@@ -2,6 +2,9 @@ package seedu.address.logic.commands;
 
 import seedu.address.model.Model;
 
+/**
+ * Exits the view mode and prompts to the original fosterer list view.
+ */
 public class ViewExitCommand extends Command {
     public static final String COMMAND_WORD = "exit";
 
