@@ -3,10 +3,8 @@ package networkbook.logic.parser;
 import org.junit.jupiter.api.Test;
 
 import networkbook.logic.Messages;
-import networkbook.logic.commands.Command;
 import networkbook.logic.commands.CommandTestUtil;
 import networkbook.logic.commands.CreateCommand;
-import networkbook.model.person.Address;
 import networkbook.model.person.Course;
 import networkbook.model.person.Email;
 import networkbook.model.person.GraduatingYear;

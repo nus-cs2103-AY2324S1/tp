@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import networkbook.commons.core.index.Index;
 import networkbook.logic.Messages;
 import networkbook.logic.commands.AddCommand;
-import networkbook.logic.commands.Command;
 import networkbook.logic.commands.CommandTestUtil;
 import networkbook.logic.commands.EditCommand;
 import networkbook.model.person.Course;
@@ -167,7 +166,8 @@ public class AddCommandParserTest {
 
         // graduating year
         userInput = targetIndex.getOneBased() + CommandTestUtil.GRADUATING_YEAR_DESC_AMY;
-        descriptor = new EditPersonDescriptorBuilder().withGraduatingYear(CommandTestUtil.VALID_GRADUATING_YEAR_AMY).build();
+        descriptor = new EditPersonDescriptorBuilder().withGraduatingYear(CommandTestUtil.VALID_GRADUATING_YEAR_AMY)
+                    .build();
         expectedCommand = new AddCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -179,7 +179,8 @@ public class AddCommandParserTest {
 
         // specialisation
         userInput = targetIndex.getOneBased() + CommandTestUtil.SPECIALISATION_DESC_AMY;
-        descriptor = new EditPersonDescriptorBuilder().withSpecialisation(CommandTestUtil.VALID_SPECIALISATION_AMY).build();
+        descriptor = new EditPersonDescriptorBuilder().withSpecialisation(CommandTestUtil.VALID_SPECIALISATION_AMY)
+                    .build();
         expectedCommand = new AddCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 

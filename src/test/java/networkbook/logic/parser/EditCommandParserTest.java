@@ -7,10 +7,8 @@ import org.junit.jupiter.api.Test;
 
 import networkbook.commons.core.index.Index;
 import networkbook.logic.Messages;
-import networkbook.logic.commands.Command;
 import networkbook.logic.commands.CommandTestUtil;
 import networkbook.logic.commands.EditCommand;
-import networkbook.model.person.Address;
 import networkbook.model.person.Course;
 import networkbook.model.person.Email;
 import networkbook.model.person.GraduatingYear;
@@ -112,10 +110,11 @@ public class EditCommandParserTest {
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = TypicalIndexes.INDEX_SECOND_PERSON;
-        String userInput = targetIndex.getOneBased() + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.TAG_DESC_HUSBAND
-                + CommandTestUtil.EMAIL_DESC_AMY + CommandTestUtil.WEBLINK_DESC_AMY + CommandTestUtil.GRADUATING_YEAR_DESC_AMY
-                + CommandTestUtil.COURSE_DESC_AMY + CommandTestUtil.SPECIALISATION_DESC_AMY
-                + CommandTestUtil.NAME_DESC_AMY + CommandTestUtil.TAG_DESC_FRIEND;
+        String userInput = targetIndex.getOneBased() + CommandTestUtil.PHONE_DESC_BOB
+                + CommandTestUtil.TAG_DESC_HUSBAND + CommandTestUtil.EMAIL_DESC_AMY + CommandTestUtil.WEBLINK_DESC_AMY
+                + CommandTestUtil.GRADUATING_YEAR_DESC_AMY + CommandTestUtil.COURSE_DESC_AMY
+                + CommandTestUtil.SPECIALISATION_DESC_AMY + CommandTestUtil.NAME_DESC_AMY
+                + CommandTestUtil.TAG_DESC_FRIEND;
 
         EditCommand.EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
                 .withName(CommandTestUtil.VALID_NAME_AMY)
@@ -176,7 +175,8 @@ public class EditCommandParserTest {
 
         // graduating year
         userInput = targetIndex.getOneBased() + CommandTestUtil.GRADUATING_YEAR_DESC_AMY;
-        descriptor = new EditPersonDescriptorBuilder().withGraduatingYear(CommandTestUtil.VALID_GRADUATING_YEAR_AMY).build();
+        descriptor = new EditPersonDescriptorBuilder()
+                .withGraduatingYear(CommandTestUtil.VALID_GRADUATING_YEAR_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -188,7 +188,8 @@ public class EditCommandParserTest {
 
         // specialisation
         userInput = targetIndex.getOneBased() + CommandTestUtil.SPECIALISATION_DESC_AMY;
-        descriptor = new EditPersonDescriptorBuilder().withSpecialisation(CommandTestUtil.VALID_SPECIALISATION_AMY).build();
+        descriptor = new EditPersonDescriptorBuilder()
+                .withSpecialisation(CommandTestUtil.VALID_SPECIALISATION_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 

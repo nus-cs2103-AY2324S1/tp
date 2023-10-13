@@ -119,8 +119,8 @@ public class PersonTest {
                 + ", weblink=" + TypicalPersons.AMY.getWebLink()
                 + ", graduating year=" + TypicalPersons.AMY.getGraduatingYear()
                 + ", course=" + TypicalPersons.AMY.getCourse()
-                + ", specialisation=" + TypicalPersons.AMY.getSpecialisation() +
-                ", tags=" + TypicalPersons.AMY.getTags() + ", priority=" + TypicalPersons.AMY.getPriority().get() + "}";
+                + ", specialisation=" + TypicalPersons.AMY.getSpecialisation()
+                + ", tags=" + TypicalPersons.AMY.getTags() + ", priority=" + TypicalPersons.AMY.getPriority().get() + "}";
         assertEquals(expected, TypicalPersons.AMY.toString());
     }
 }

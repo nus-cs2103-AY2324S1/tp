@@ -62,8 +62,8 @@ public class PersonUtil {
         }
         descriptor.getWebLink().ifPresent(webLink -> sb.append(CliSyntax.PREFIX_WEBLINK).append(" ")
                                                     .append(webLink.getValue()).append(" "));
-        descriptor.getGraduatingYear().ifPresent(graduatingYear -> sb.append(CliSyntax.PREFIX_GRADUATING_YEAR).append(" ")
-                .append(graduatingYear.value).append(" "));
+        descriptor.getGraduatingYear().ifPresent(graduatingYear -> sb.append(CliSyntax.PREFIX_GRADUATING_YEAR)
+                .append(" ").append(graduatingYear.value).append(" "));
         descriptor.getCourse().ifPresent(course -> sb.append(CliSyntax.PREFIX_COURSE).append(" ")
                 .append(course.value).append(" "));
         descriptor.getSpecialisation().ifPresent(specialisation -> sb.append(CliSyntax.PREFIX_SPECIALISATION)

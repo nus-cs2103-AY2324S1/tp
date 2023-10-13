@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import networkbook.commons.exceptions.IllegalValueException;
-import networkbook.model.person.Address;
 import networkbook.model.person.Course;
 import networkbook.model.person.Email;
 import networkbook.model.person.GraduatingYear;
@@ -28,7 +27,7 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_WEBLINK = "facebookcom";
     private static final String INVALID_GRADUATING_YEAR = "123a";
     private static final String INVALID_COURSE = "";
-    private static final String INVALID_SPECIALISATION  = "";
+    private static final String INVALID_SPECIALISATION = "";
     private static final List<JsonAdaptedProperty<Email>> INVALID_EMAILS =
             List.of(new JsonAdaptedProperty<>("example.com"));
     private static final String INVALID_TAG = "#friend";
@@ -42,7 +41,7 @@ public class JsonAdaptedPersonTest {
     private static final String VALID_WEBLINK = "www.facebook.com/john-d";
     private static final String VALID_GRADUATING_YEAR = "2000";
     private static final String VALID_COURSE = "Computer Science";
-    private static final String VALID_SPECIALISATION  = "Game Development";
+    private static final String VALID_SPECIALISATION = "Game Development";
     private static final List<JsonAdaptedProperty<Tag>> VALID_TAGS = TypicalPersons.BENSON.getTags().stream()
             .map(JsonAdaptedProperty::new)
             .collect(Collectors.toList());

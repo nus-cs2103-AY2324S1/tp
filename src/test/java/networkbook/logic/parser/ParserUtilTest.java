@@ -12,7 +12,6 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import networkbook.logic.parser.exceptions.ParseException;
-import networkbook.model.person.Address;
 import networkbook.model.person.Email;
 import networkbook.model.person.Name;
 import networkbook.model.person.Phone;
@@ -26,7 +25,7 @@ public class ParserUtilTest {
     private static final String INVALID_WEBLINK = "facebookcom";
     private static final String INVALID_GRADUATING_YEAR = "123a";
     private static final String INVALID_COURSE = "";
-    private static final String INVALID_SPECIALISATION  = "";
+    private static final String INVALID_SPECIALISATION = "";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_PRIORITY = "hi";
@@ -36,7 +35,7 @@ public class ParserUtilTest {
     private static final String VALID_WEBLINK = "www.facebook.com/alice";
     private static final String VALID_GRADUATING_YEAR = "2000";
     private static final String VALID_COURSE = "Computer Science";
-    private static final String VALID_SPECIALISATION  = "Game Development";
+    private static final String VALID_SPECIALISATION = "Game Development";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
