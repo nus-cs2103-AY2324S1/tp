@@ -6,8 +6,10 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.applicant.UniqueApplicantList;
 import seedu.address.model.member.Member;
 import seedu.address.model.member.UniqueMemberList;
+import seedu.address.model.person.Applicant;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -19,6 +21,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
     private final UniqueMemberList memberList;
+    private final UniqueApplicantList applicants;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -30,6 +33,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     {
         persons = new UniquePersonList();
         memberList = new UniqueMemberList();
+        applicants = new UniqueApplicantList();
     }
 
     public AddressBook() {}
@@ -135,6 +139,44 @@ public class AddressBook implements ReadOnlyAddressBook {
         memberList.remove(key);
     }
 
+    //// applicant-level methods
+
+    /**
+     * Returns true if a applicant with the same identity as {@code applicant} exists in the address book.
+     */
+    public boolean hasApplicant(Applicant applicant) {
+        requireNonNull(applicant);
+        return applicants.contains(applicant);
+    }
+
+    /**
+     * Adds a applicant to the address book.
+     * The applicant must not already exist in the address book.
+     */
+    public void addApplicant(Applicant a) {
+        applicants.add(a);
+    }
+
+    /**
+     * Replaces the given applicant {@code target} in the list with {@code editedApplicant}.
+     * {@code target} must exist in the address book.
+     * The applicant identity of {@code editedApplicant} must not be the same as another existing applicant in the
+     * address book.
+     */
+    public void setApplicant(Applicant target, Applicant editedApplicant) {
+        requireNonNull(editedApplicant);
+
+        persons.setPerson(target, editedApplicant);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeApplicant(Applicant key) {
+        applicants.remove(key);
+    }
+
     //// util methods
 
     @Override
@@ -152,6 +194,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Member> getMemberList() {
         return memberList.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Applicant> getApplicantList() {
+        return applicants.asUnmodifiableObservableList();
     }
 
     @Override
