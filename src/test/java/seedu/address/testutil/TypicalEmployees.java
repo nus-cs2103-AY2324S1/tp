@@ -26,7 +26,7 @@ import seedu.address.model.employee.Employee;
 public class TypicalEmployees {
 
     public static final Employee ALICE = new EmployeeBuilder().withName("Alice Pauline")
-                .withPosition("Manager")
+                .withPosition("Senior Manager")
                 .withId("EID1234-5678")
                 .withEmail("alice@example.com")
                 .withPhone("94351253")
@@ -34,7 +34,8 @@ public class TypicalEmployees {
     public static final Employee BENSON = new EmployeeBuilder().withName("Benson Meier")
                 .withPosition("Assistant Manager")
                 .withId("EID5678-1234")
-                .withEmail("johnd@example.com").withPhone("98765432")
+                .withEmail("johnd@example.com")
+                .withPhone("98765432")
                 .withDepartments("owesMoney", "friends").build();
     public static final Employee CARL = new EmployeeBuilder().withName("Carl Kurz")
                 .withPosition("Software Engineer")
@@ -45,7 +46,8 @@ public class TypicalEmployees {
                 .withPosition("Tester")
                 .withId("EID4321-5678")
                 .withPhone("87652533")
-                .withEmail("cornelia@example.com").withDepartments("friends").build();
+                .withEmail("cornelia@example.com")
+                .withDepartments("friends").build();
     public static final Employee ELLE = new EmployeeBuilder().withName("Elle Meyer")
                 .withPosition("Junior Software Engineer")
                 .withId("EID2023-1234")
@@ -56,6 +58,7 @@ public class TypicalEmployees {
                 .withId("EID2023-5678")
                 .withPhone("9482427")
                 .withEmail("lydia@example.com").build();
+
     public static final Employee GEORGE = new EmployeeBuilder().withName("George Best")
                 .withPosition("Intern")
                 .withId("EID2023-9876")
@@ -64,23 +67,33 @@ public class TypicalEmployees {
 
     // Manually added
     public static final Employee HOON = new EmployeeBuilder().withName("Hoon Meier")
-                .withPosition("Intern").withId("EID2023-2024").withPhone("8482424")
-                .withEmail("stefan@example.com").build();
+                .withPosition("Intern")
+                .withId("EID2023-2024")
+                .withPhone("8482424")
+                .withEmail("stefan@example.com")
+                .build();
     public static final Employee IDA = new EmployeeBuilder().withName("Ida Mueller")
-                .withPosition("CEO").withId("2021-2022").withPhone("8482131")
-                .withEmail("hans@example.com").build();
+                .withPosition("CEO")
+                .withId("EID2021-2022")
+                .withPhone("8482131")
+                .withEmail("hans@example.com")
+                .build();
 
     // Manually added - Employee's details found in {@code CommandTestUtil}
     public static final Employee AMY = new EmployeeBuilder().withName(VALID_NAME_AMY)
                 .withPosition(VALID_POSITION_AMY)
                 .withId(VALID_ID_AMY)
                 .withPhone(VALID_PHONE_AMY)
-                .withEmail(VALID_EMAIL_AMY).withDepartments(VALID_DEPARTMENT_FRIEND).build();
+                .withEmail(VALID_EMAIL_AMY)
+                .withDepartments(VALID_DEPARTMENT_FRIEND)
+                .build();
     public static final Employee BOB = new EmployeeBuilder().withName(VALID_NAME_BOB)
                 .withPosition(VALID_POSITION_BOB)
                 .withId(VALID_ID_BOB)
                 .withPhone(VALID_PHONE_BOB)
-                .withEmail(VALID_EMAIL_BOB).withDepartments(VALID_DEPARTMENT_HUSBAND, VALID_DEPARTMENT_FRIEND).build();
+                .withEmail(VALID_EMAIL_BOB)
+                .withDepartments(VALID_DEPARTMENT_HUSBAND, VALID_DEPARTMENT_FRIEND)
+                .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
