@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_MEDICAL_HISTORY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_SPECIALTY_DESC;
@@ -27,11 +28,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SPECIALTY;
+import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseComplexFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseComplexSuccess;
 import static seedu.address.testutil.TypicalPersons.AMY;
@@ -98,6 +95,8 @@ public class AddCommandParserTest {
 
         String validExpectedSpecialistString = validExpectedPersonString + SPECIALTY_DESC_BOB;
 
+        String validExpectedPatientString = validExpectedPersonString + MEDICAL_HISTORY_DESC_AMY;
+
         // multiple names
         assertParseComplexFailure(parser, NAME_DESC_AMY + validExpectedSpecialistString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME), PersonType.SPECIALIST);
@@ -161,6 +160,10 @@ public class AddCommandParserTest {
         // invalid specialty
         assertParseComplexFailure(parser, validExpectedSpecialistString + INVALID_SPECIALTY_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_SPECIALTY), PersonType.SPECIALIST);
+
+        // invalid medical history
+        assertParseComplexFailure(parser, validExpectedPatientString + INVALID_MEDICAL_HISTORY_DESC,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_MEDICALHISTORY), PersonType.PATIENT);
     }
 
     @Test
