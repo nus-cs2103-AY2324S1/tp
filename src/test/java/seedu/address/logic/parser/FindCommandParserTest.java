@@ -20,6 +20,16 @@ public class FindCommandParserTest {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
+    @Test
+    public void parse_hasPreamble_throwsParseException() {
+        // just preamble
+        assertParseFailure(parser, " hello world",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+
+        // preamble with valid args after
+        assertParseFailure(parser, " hello world n/Alice",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+    }
 
     @Test
     public void parse_validOneArg_returnsFindCommand() throws ParseException {
@@ -45,7 +55,6 @@ public class FindCommandParserTest {
         // multiple distinct args with repeated fields
         assertDoesNotThrow(() -> parser.parse(" n/Alice t/colleagues t/friends"));
         assertTrue(parser.parse( " n/Alice t/colleagues t/friends") instanceof FindCommand);
-
     }
 
 }
