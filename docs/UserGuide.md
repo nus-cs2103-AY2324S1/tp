@@ -33,11 +33,15 @@ JobApplicationsBook Pro (JABPro) is a **desktop app for hiring managers of compa
     * `remark 1 r/Great attitude, hardworking`: edits the remark of the 1st person on the list to have a remark `Great attitude, hardworking`
    
     * `search n/John`: Searches for applicants whose names contain the keyword `John`
+
+    * `delete 3` : Deletes the 3rd contact shown in the current list.
+
+    * `set` : sets the applicant status to either of: (Preliminary, Interviewed, Rejected, Offered)
    
     * `add linkedin 1 alexyeoh`: Adds LinkedIn account to candidate's existing contact information
    
     * `github Alex Yeoh`: Redirects the user to the Github account of the candidate
-   
+
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -65,7 +69,7 @@ JobApplicationsBook Pro (JABPro) is a **desktop app for hiring managers of compa
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</box>
+  </box>
 
 ### Viewing help : `help`
 
@@ -101,15 +105,44 @@ Format: `remark INDEX r/REMARK`
 * The previous remark is not saved, and instead is replaced by the inputted remark. The command does not add to the existing remark
 * You can empty out a remark by inputting an empty string
 
-Examples: 
+Examples:
 *  `remark 1 r/Great attitude, hardworking` Edits the remark of the 1st person on the list to have a remark `Great attitude, hardworking`
-*  `remark 1 r/` Empties the remark of the 1st person. 
+*  `remark 1 r/` Empties the remark of the 1st person.
+
+### Adding Github/LinkedIn username for a user: 'add linkedin/github'
+
+Adds the username for their social profile [LinkedIn/Github] to the existing contact details of users
+
+Format: `add linkedin INDEX USERNAME` or `add github INDEX USERNAME`
+
+Examples:
+* `add github 2 MadLamprey`
+* `add linkedin 4 aditya-misra`
+
+### Opening user LinkedIn or GitHub account: 'linkedin' or 'github'
+
+Redirect user to candidate's LinkedIn or Github account
+
+Format: `linkedin NAME` or `github NAME`
+
+Examples:
+* `linkedin Alex Yeoh`
+* `github Bernice Sanders`
 
 ### Listing all persons : `list`
 
 Shows a list of all persons in the address book.
 
-Format: `list`
+Format: `list s/ATTRIBUTE`
+
+* `s/ATTRIBUTE` is completely **optional**, on default will NOT be sorted.
+* As of v1.2, the attributes that are supported are `name` and `email`.
+* Attribute is case-insensitive: `list s/NAME` and `list s/name` return the same result.
+* The result will be sorted in **ascending** order.
+
+Examples:
+* `list` Shows a list of all persons.
+* `list s/name` Show a list of all persons, sorted by name in ascending order.
 
 ### Editing a person : `edit`
 
@@ -122,7 +155,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+  specifying any tags after it.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -186,6 +219,21 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Setting an applicant's status : `set`
+
+Format: `set INDEX STATUS`
+
+Sets the applicant to a specific status ("Preliminary"/ "Interviewed"/ "Rejected"/ "Offered")
+
+* Sets the person at the specified `INDEX` to a specific hiring status.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* The status must be a string of exactly "Preliminary", "Interviewed", "Rejected" or "Offered".
+
+Examples:
+* `list` followed by `set 2 Interviewed` sets the 2nd person in the address book to "Interviewed".
+* `find Betsy` followed by `set 1 Interviewed` sets the status of 1st person in the results of the `find` command.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -233,13 +281,18 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Remark** | `remark r/REMARK` <br> e.g., `remark 1 r/Great attitude, hardworking`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**   | `list`
-**Help**   | `help`
+Action                     | Format, Examples
+---------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Add**                    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Remark**                 | `remark r/REMARK` <br> e.g., `remark 1 r/Great attitude, hardworking`
+**Add Github/LinkedIn**    | `add linkedin INDEX USERNAME` or `add github INDEX USERNAME` e.g., `add linkedin 1 alex-yeoh`, `add github 2 bernicesanders123`
+**Open Github/LinkedIn**   | `linkedin NAME` or `github NAME` e.g., `linkedin Alex Yeoh`, `github Bernice Sanders`
+**Clear**                  | `clear`
+**Delete**                 | `delete INDEX`<br> e.g., `delete 3`
+**Set**                    | `set INDEX STATUS`<br> e.g., `set 2 Interviewed`
+**Edit**                   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Find**                   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**List**                   | `list s/ATTRIBUTE` <br> e.g. `list s/name`
+**Help**                   | `help`
+
+
