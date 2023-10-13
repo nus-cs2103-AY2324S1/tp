@@ -53,4 +53,18 @@ public class AppointmentTest {
         // different values -> returns false
         assertFalse(appointment.equals(new Appointment("Other Valid Appointment")));
     }
+
+    @Test
+    public int hashCode() {
+        String appointmentValue = "Valid Appointment";
+        Appointment appointment = new Appointment(appointmentValue);
+
+        // same value
+        assertTrue(appointment.hashCode() == appointmentValue.hashCode());
+
+        // different value
+        assertFalse(appointment.hashCode() != appointmentValue.hashCode());
+
+        return 0;
+    }
 }

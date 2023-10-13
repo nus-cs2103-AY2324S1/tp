@@ -53,4 +53,18 @@ public class MedicalHistoryTest {
         // different values -> returns false
         assertFalse(medicalHistory.equals(new MedicalHistory("Other Valid Medical History")));
     }
+
+    @Test
+    public int hashCode() {
+        String medicalHistoryValue = "Valid Medical History";
+        MedicalHistory medicalHistory = new MedicalHistory(medicalHistoryValue);
+
+        // same value
+        assertTrue(medicalHistory.hashCode() == medicalHistoryValue.hashCode());
+
+        // different value
+        assertFalse(medicalHistory.hashCode() != medicalHistoryValue.hashCode());
+
+        return 0;
+    }
 }
