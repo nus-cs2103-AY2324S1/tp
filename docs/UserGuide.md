@@ -3,7 +3,6 @@
   title: "User Guide"
   pageNav: 3
 ---
-
 # CM-23 User Guide
 
 ClassManager-2023 (CM-23) is a **desktop app for managing your students' contacts,
@@ -20,20 +19,20 @@ management tasks done faster than traditional GUI apps.
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `classmanager.jar` from [here](https://github.com/AY2324S1-CS2103T-T11-1/tp/releases).
+2. Download the latest `classmanager.jar` from [here](https://github.com/AY2324S1-CS2103T-T11-1/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your ClassManager.
+3. Copy the file to the folder you want to use as the _home folder_ for your ClassManager.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar classmanager.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar classmanager.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all student details.
      
-   * `add f/John l/Doe e/e0123456@u.nus.edu c/11 s/A0123456X` : Adds a student named `John Doe` to the Class Manager.
+   * `add n/JohnDoe e/e0123456@u.nus.edu c/T11 s/A0123456X` : Adds a student named `John Doe` to the Class Manager.
 
    * `delete 3` : Deletes the 3rd student detail shown in the current list.
 
@@ -41,7 +40,7 @@ management tasks done faster than traditional GUI apps.
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -55,7 +54,7 @@ management tasks done faster than traditional GUI apps.
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
@@ -121,16 +120,18 @@ Examples:
 
 Tags the existing student in the address book.
 
-Format: `tag STUDENT NUMBER [t/TAG]…​`
+Format: `tag STUDENTNUMBER [/add] [/delete] t/[TAG]…​`
 
-* Tags the student with the specified `STUDENT NUMBER`. 
-* When editing tags, the existing tags of the student will be removed i.e adding of tags is not cumulative.
-* You can remove all the student’s tags by typing `t/` without
-  specifying any tags after it.
+* Tags the student with the specified `STUDENTNUMBER`. 
+* When editing tags without `/add` or `/delete`, the existing tags of the student will be removed.
+* You can remove all the student’s tags by typing without `/add` and `/delete` 
+  and `t/` without specifying any tags after it.
 
 Examples:
-* `tag A1234567N t/smart t/shy t/funny` tags the specified student with the smart, shy and funny.
-* `tag A1234567N t/` clear the tags from the specified student.
+* `tag A1234567N t/smart t/shy t/funny` replace all tags of the specified student with smart, shy and funny.
+* `tag A1234567N /add t/Java` adds the Java tag to specified student.
+* `tag A1234567N /delete t/shy` removes the shy tag from the specified student.
+* `tag A1234567N t/` clear all tags from the specified student.
 
 ### Lookup students: `lookup`
 
@@ -150,7 +151,7 @@ Format: `lookup [c/CLASS_NUMBER}] [l/LAST_NAME] [e/EMAIL] [s/STUDENT_NUMBER] [t/
 _At least one_ of the optional fields must be provided. `lookup` alone is not allowed.
 </box>
 
-* The command is case-insensitive. e.g `hans` will match `Hans`
+* The command is case-insensitive. e.g. `hans` will match `Hans`
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * This command can only take one word per field. e.g. `lookup c/11 12` is _**not** allowed_.
   * Taking multiple words per field _coming soon_ in future versions.
@@ -233,12 +234,12 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear**  | `clear`
-**Delete** | `delete s/STUDENT_NUMBER`<br> e.g., `delete s/A0249112A`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Tag**    | `tag STUDENT NUMBER [t/TAG]…​` <br> e.g `tag A0123456N t/smart t/shy`
-**Lookup** | `lookup [c/CLASS_NUMBER] [l/LAST_NAME] [e/EMAIL] [s/STUDENT_NUMBER] [t/TAG]` <br> e.g `lookup c/111`
+**Delete** | `delete s/STUDENT_NUMBER`<br> e.g. `delete s/A0249112A`
+**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`
+**Tag**    | `tag STUDENT NUMBER [/add] [/delete] t/[TAG]…​` <br> e.g. `tag A0123456N t/smart t/shy`
+**Lookup** | `lookup [c/CLASS_NUMBER] [l/LAST_NAME] [e/EMAIL] [s/STUDENT_NUMBER] [t/TAG]` <br> e.g. `lookup c/111`
 **List**   | `list`
 **Help**   | `help`
 **Load**   | `load f/FILE_NAME`
