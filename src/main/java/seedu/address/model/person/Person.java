@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
@@ -37,6 +38,11 @@ public class Person {
                   Optional<Availability> availability, Optional<AnimalType> animalType,
                   Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, animalName, tags);
+
+        if (animalType != null || animalName != null) {
+            requireNonNull(availability, "Availability is required when providing animalName or animalType.");
+        }
+
         this.name = name;
         this.phone = phone;
         this.email = email;

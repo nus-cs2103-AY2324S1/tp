@@ -35,6 +35,11 @@ public class AddCommandParser implements Parser<AddCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
+        if (argMultimap.getValue(PREFIX_ANIMAL_TYPE).isPresent() || argMultimap.getValue(PREFIX_ANIMAL_NAME).isPresent()) {
+            if (!argMultimap.getValue(PREFIX_AVAILABILITY).isPresent()) {
+                throw new ParseException("Availability is required when providing animalName or animalType.");
+            }
+        }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
