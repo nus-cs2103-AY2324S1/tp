@@ -1,11 +1,13 @@
 package seedu.flashlingo.logic.parser;
 
+import static seedu.flashlingo.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import java.util.Arrays;
 
 import seedu.flashlingo.logic.commands.FindCommand;
 import seedu.flashlingo.logic.parser.exceptions.ParseException;
-import seedu.flashlingo.model.person.NameContainsKeywordsPredicate;
-import seedu.flashlingo.logic.Messages;
+import seedu.flashlingo.model.flashcard.WordContainsKeywordsPredicate;
+
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -21,12 +23,12 @@ public class FindCommandParser implements Parser<FindCommand> {
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
-                    String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
         String[] nameKeywords = trimmedArgs.split("\\s+");
 
-        return new FindCommand();
+        return new FindCommand(new WordContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
     }
 
 }
