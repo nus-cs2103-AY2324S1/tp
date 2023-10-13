@@ -1,19 +1,16 @@
 package seedu.address.commons.core.index;
 
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.parser.exceptions.ParseException;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
- * Represents a group of unique Index objects.
+ * Represents one or more sorted, unique Index objects.
  * <p>
  * All Index objects in Indices have to be either zero-based or one-based.
  */
 public class Indices {
-
-    public static final String MESSAGE_DUPLICATE_INDEX = "Duplicate index detected.";
     private ArrayList<Index> zeroBasedIndices;
     private int size;
 
@@ -41,30 +38,66 @@ public class Indices {
         return result;
     }
 
-    public static Indices fromZeroBased(int[] zeroBasedIndices) throws ParseException {
+    public String getZeroBasedString() {
+        int[] zeroBased = this.getZeroBased();
+
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < size - 1; i++) {
+            result.append(zeroBased[i])
+                    .append(" ");
+        }
+        result.append(zeroBased[size - 1]);
+        return result.toString();
+    }
+
+    public String getOneBasedString() {
+        int[] oneBased = this.getOneBased();
+
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < size - 1; i++) {
+            result.append(oneBased[i])
+                    .append(" ");
+        }
+        result.append(oneBased[size - 1]);
+        return result.toString();
+    }
+
+    public static Indices fromZeroBased(int[] zeroBasedIndices) {
+        Arrays.sort(zeroBasedIndices);
         ArrayList<Index> result = new ArrayList<>();
 
         for (int index : zeroBasedIndices) {
             Index zeroBasedIndex = Index.fromZeroBased(index);
-            if (result.contains(zeroBasedIndex)) {
-                throw new ParseException(MESSAGE_DUPLICATE_INDEX);
+            if (!result.contains(zeroBasedIndex)) {
+                result.add(zeroBasedIndex);
             }
-            result.add(zeroBasedIndex);
         }
         return new Indices(result);
     }
 
-    public static Indices fromOneBased(int[] oneBasedIndices) throws ParseException {
+    public static Indices fromOneBased(int[] oneBasedIndices) {
+        Arrays.sort(oneBasedIndices);
         ArrayList<Index> result = new ArrayList<>();
 
         for (int index : oneBasedIndices) {
             Index oneBasedIndex = Index.fromOneBased(index);
-            if (result.contains(oneBasedIndex)) {
-                throw new ParseException(MESSAGE_DUPLICATE_INDEX);
+            if (!result.contains(oneBasedIndex)) {
+                result.add(oneBasedIndex);
             }
-            result.add(oneBasedIndex);
         }
         return new Indices(result);
+    }
+
+    public int getSize() {
+        return this.size;
+    }
+
+    public int getZeroBasedMin() {
+        return this.zeroBasedIndices.get(0).getZeroBased();
+    }
+
+    public int getZeroBasedMax() {
+        return this.zeroBasedIndices.get(size - 1).getZeroBased();
     }
 
     @Override
@@ -74,7 +107,7 @@ public class Indices {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Index)) {
+        if (!(other instanceof Indices)) {
             return false;
         }
 
@@ -94,7 +127,7 @@ public class Indices {
 
     @Override
     public String toString() {
-        int[] zeroBasedIndices = this.getZeroBased();
-        return new ToStringBuilder(this).add("zeroBasedIndices", zeroBasedIndices).toString();
+        return new ToStringBuilder(this).add("zeroBasedIndices",
+                this.getZeroBasedString()).toString();
     }
 }

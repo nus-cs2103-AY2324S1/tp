@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.core.index.Indices;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -111,6 +112,21 @@ public class CommandTestUtil {
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
     }
+
+    public static Person[] getPeople(List<Person> list, Indices indices) {
+        assertTrue(indices.getSize() <= list.size());
+        assertTrue(indices.getZeroBasedMax() < list.size());
+
+        int number = indices.getSize();
+        Person[] people = new Person[number];
+        int[] zeroBasedIndices = indices.getZeroBased();
+
+        for (int i = 0; i < number; i++) {
+            people[i] = list.get(zeroBasedIndices[i]);
+        }
+        return people;
+    }
+
     /**
      * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
      * {@code model}'s address book.
@@ -125,4 +141,15 @@ public class CommandTestUtil {
         assertEquals(1, model.getFilteredPersonList().size());
     }
 
+    public static void showPeopleAtIndices(Model model, Indices targetIndices) {
+
+        Person[] people = getPeople(model.getFilteredPersonList(), targetIndices);
+        ArrayList<String> keywords = new ArrayList<>();
+        for (Person person : people) {
+            final String[] splitName = person.getName().fullName.split("\\s+");
+            keywords.add(splitName[0]);
+        }
+        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(keywords));
+        assertEquals(targetIndices.getSize(), model.getFilteredPersonList().size());
+    }
 }

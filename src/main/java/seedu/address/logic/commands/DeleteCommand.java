@@ -34,13 +34,9 @@ public class DeleteCommand extends Command {
         this.targetIndices = targetIndices;
     }
 
-    @Override
-    public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+    public Person[] getPeopleToDelete(List<Person> lastShownList) throws CommandException {
         int[] zeroBasedIndices = this.targetIndices.getZeroBased();
-
-        int numberOfDeletions = zeroBasedIndices.length;
+        int numberOfDeletions = this.targetIndices.getSize();
         Person[] peopleToDelete = new Person[numberOfDeletions];
 
         for (int i = 0; i < numberOfDeletions; i++) {
@@ -52,12 +48,20 @@ public class DeleteCommand extends Command {
             Person personToDelete = lastShownList.get(targetIndex);
             peopleToDelete[i] = personToDelete;
         }
+        return peopleToDelete;
+    }
+
+    @Override
+    public CommandResult execute(Model model) throws CommandException {
+        requireNonNull(model);
+        List<Person> lastShownList = model.getFilteredPersonList();
+        Person[] peopleToDelete = getPeopleToDelete(lastShownList);
 
         for (Person personToDelete : peopleToDelete) {
             model.deletePerson(personToDelete);
         }
 
-        if (numberOfDeletions == 1) {
+        if (peopleToDelete.length == 1) {
            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(peopleToDelete)));
         }
         return new CommandResult(String.format(MESSAGE_DELETE_PEOPLE_SUCCESS, Messages.format(peopleToDelete)));
@@ -81,7 +85,7 @@ public class DeleteCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("targetIndex", targetIndices)
+                .add("targetIndices", targetIndices)
                 .toString();
     }
 }
