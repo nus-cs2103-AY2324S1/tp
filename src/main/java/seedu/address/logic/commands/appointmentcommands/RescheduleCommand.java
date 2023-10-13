@@ -1,33 +1,22 @@
 package seedu.address.logic.commands.appointmentcommands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_FROM_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_FROM_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_TO_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_TO_START;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 
-import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.personcommands.AddCommand;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.CollectionUtil;
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-import seedu.address.model.appointment.Appointment;
-import seedu.address.model.appointment.AppointmentTime;
-import seedu.address.model.tag.Tag;
-
+/**
+ * Reschedules an existing appointment
+ */
 public class RescheduleCommand extends Command {
     public static final String COMMAND_WORD = "reschedule";
 
@@ -35,7 +24,7 @@ public class RescheduleCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Reschedules the appointment identified "
             + "by the index number used in the displayed appointment list.\n"
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: "+ PREFIX_ID + "(must be a positive integer) "
+            + "Parameters: " + PREFIX_ID + "(must be a positive integer) "
             + "[" + PREFIX_APPOINTMENT_FROM_START + "FROM START DATE AND TIME] "
             + "[" + PREFIX_APPOINTMENT_FROM_END + "FROM END DATE AND TIME] "
             + "[" + PREFIX_APPOINTMENT_TO_START + "TO START DATE AND TIME] "
