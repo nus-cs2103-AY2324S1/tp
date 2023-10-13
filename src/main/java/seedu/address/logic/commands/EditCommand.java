@@ -131,7 +131,8 @@ public class EditCommand extends Command {
         Email updatedEmail = editPatientDescriptor.getEmail().orElse(patientToEdit.getEmail());
         Address updatedAddress = editPatientDescriptor.getAddress().orElse(patientToEdit.getAddress());
         Set<Tag> updatedTags = editPatientDescriptor.getTags().orElse(patientToEdit.getTags());
-        MedicalHistory updatedMedicalHistory = editPatientDescriptor.getMedicalHistory().orElse(patientToEdit.getMedicalHistory());
+        MedicalHistory updatedMedicalHistory = editPatientDescriptor.getMedicalHistory()
+                .orElse(patientToEdit.getMedicalHistory());
         return new Patient(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedMedicalHistory);
     }
 

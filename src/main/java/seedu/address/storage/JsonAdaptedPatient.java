@@ -9,7 +9,12 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.MedicalHistory;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Patient;
+import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 class JsonAdaptedPatient extends JsonAdaptedPerson {
@@ -33,7 +38,7 @@ class JsonAdaptedPatient extends JsonAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     MedicalHistory.class.getSimpleName()));
         }
-        if (!Specialty.isValidSpecialty(medicalHistory)) {
+        if (!MedicalHistory.isValidMedicalHistory(medicalHistory)) {
             throw new IllegalValueException(MedicalHistory.MESSAGE_CONSTRAINTS);
         }
         return medicalHistory;

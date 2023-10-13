@@ -73,7 +73,8 @@ public class EditCommandParser implements ParserComplex<EditCommand> {
             editPatientDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
         if (argMultimap.getValue(PREFIX_MEDICALHISTORY).isPresent()) {
-            editPatientDescriptor.setMedicalHistory(ParserUtil.parseMedicalHistory(argMultimap.getValue(PREFIX_MEDICALHISTORY).get()));
+            editPatientDescriptor.setMedicalHistory(ParserUtil.parseMedicalHistory(argMultimap
+                    .getValue(PREFIX_MEDICALHISTORY).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPatientDescriptor::setTags);
 

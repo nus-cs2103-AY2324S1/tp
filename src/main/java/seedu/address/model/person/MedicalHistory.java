@@ -3,6 +3,9 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents a Patient's medical history in the address book.
+ */
 public class MedicalHistory {
     public static final String MESSAGE_CONSTRAINTS =
             "Medical History should only contain alphanumeric characters and spaces, and it should not be blank";

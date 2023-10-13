@@ -12,6 +12,9 @@ public class PatientCard extends PersonCard {
     @javafx.fxml.FXML
     private Label medicalHistory;
 
+    /**
+     * Creates a {@code PatientCard} with the given {@code patient} and index to display.
+     */
     public PatientCard(Patient patient, int displayedIndex) {
         super(patient, displayedIndex, FXML);
         medicalHistory.setText(
