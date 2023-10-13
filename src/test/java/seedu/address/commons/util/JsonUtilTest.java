@@ -8,7 +8,6 @@ import java.nio.file.Path;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.SerializableTestClass;
-import seedu.address.testutil.TestData;
 import seedu.address.testutil.TestUtil;
 
 /**
@@ -25,12 +24,12 @@ public class JsonUtilTest {
 
         JsonUtil.serializeObjectToJsonFile(SERIALIZATION_FILE, serializableTestClass);
 
-        assertEquals(FileUtil.readFromFile(SERIALIZATION_FILE), TestData.JSON_STRING_REPRESENTATION);
+        assertEquals(FileUtil.readFromFile(SERIALIZATION_FILE), SerializableTestClass.JSON_STRING_REPRESENTATION);
     }
 
     @Test
     public void deserializeObjectFromJsonFile_noExceptionThrown() throws IOException {
-        FileUtil.writeToFile(SERIALIZATION_FILE, TestData.JSON_STRING_REPRESENTATION);
+        FileUtil.writeToFile(SERIALIZATION_FILE, SerializableTestClass.JSON_STRING_REPRESENTATION);
 
         SerializableTestClass serializableTestClass = JsonUtil
                 .deserializeObjectFromJsonFile(SERIALIZATION_FILE, SerializableTestClass.class);
