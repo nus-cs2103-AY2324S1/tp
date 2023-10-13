@@ -30,7 +30,7 @@ public class Person {
     private final Profession profession;
     private final Income income;
     private final Details details;
-    private Set<Interaction> interactions = new HashSet<>();
+    private final Set<Interaction> interactions = new HashSet<>();
 
     /**
      * Every field must be present and not null.
