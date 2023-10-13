@@ -30,6 +30,7 @@ Given below are my contributions to the project.
 * **Documentation**:
     * User Guide:
         * to be added soon
+        * to be added soon
     * Developer Guide:
         * to be added soon
 
