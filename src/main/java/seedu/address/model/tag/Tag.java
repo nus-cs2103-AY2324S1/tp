@@ -15,6 +15,25 @@ public class Tag {
     public final String tagName;
 
     /**
+     * Enum for emergency tags
+     */
+    public enum EmergencyTags {
+        RA,
+        SOS;
+        /**
+         * Returns true if a given string is a valid emergency tag name.
+         */
+        public static boolean isEmergencyTag(String tagName) {
+            for (EmergencyTags tag : EmergencyTags.values()) {
+                if (tag.name().equals(tagName)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+
+    /**
      * Constructs a {@code Tag}.
      *
      * @param tagName A valid tag name.

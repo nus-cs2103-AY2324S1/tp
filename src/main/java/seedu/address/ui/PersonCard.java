@@ -61,7 +61,14 @@ public class PersonCard extends UiPart<Region> {
         linkedin.setText(person.getLinkedin().map(l -> l.value).orElse(""));
         secondaryEmail.setText(person.getSecondaryEmail().map(e -> e.value).orElse(""));
         telegram.setText(person.getTelegram().map(t -> t.value).orElse(""));
-        person.getTags().stream()
+        person.getEmergencyTags().stream()
+            .sorted(Comparator.comparing(tag -> tag.tagName))
+            .forEach(tag -> {
+                Label label = new Label(tag.tagName);
+                label.setStyle("-fx-background-color: red; -fx-text-fill: white;");
+                tags.getChildren().add(label);
+            });
+        person.getNonEmergencyTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }

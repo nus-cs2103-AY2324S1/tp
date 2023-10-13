@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
@@ -106,6 +107,26 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Returns a set of non-emergency tags.
+     * @return
+     */
+    public Set<Tag> getNonEmergencyTags() {
+        return tags.stream()
+            .filter(tag -> !Tag.EmergencyTags.isEmergencyTag(tag.tagName))
+            .collect(Collectors.toSet());
+    }
+
+    /**
+     * Returns a set of emergency tags.
+     * @return
+     */
+    public Set<Tag> getEmergencyTags() {
+        return tags.stream()
+            .filter(tag -> Tag.EmergencyTags.isEmergencyTag(tag.tagName))
+            .collect(Collectors.toSet());
     }
 
     /**
