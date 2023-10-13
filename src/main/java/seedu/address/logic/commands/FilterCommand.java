@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.CollectionUtil;
@@ -206,16 +207,26 @@ public class FilterCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof FilterCommand)) {
+            if (!(other instanceof PersonFilter)) {
                 return false;
             }
 
             PersonFilter otherPersonFilter = (PersonFilter) other;
-            return name.equals(otherPersonFilter.getName())
-                    && phone.equals(otherPersonFilter.getPhone())
-                    && email.equals(otherPersonFilter.getEmail())
-                    && address.equals(otherPersonFilter.getAddress())
-                    && tags.equals(otherPersonFilter.getTags());
+            return isEqual(name, otherPersonFilter.getName())
+                    && isEqual(phone, otherPersonFilter.getPhone())
+                    && isEqual(email, otherPersonFilter.getEmail())
+                    && isEqual(address, otherPersonFilter.getAddress())
+                    && isEqual(tags, otherPersonFilter.getTags());
+        }
+
+        private boolean isEqual(Object first, Object second) {
+            if (Objects.isNull(first)) {
+                return Objects.isNull(second);
+            } else if (Objects.isNull(second)) {
+                return false;
+            } else {
+                return first.equals(second);
+            }
         }
 
         @Override
