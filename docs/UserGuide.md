@@ -115,6 +115,7 @@ Examples:
 Deletes a words and its related information
 * Deletes a flashcard.
 
+<<<<<<< HEAD
 Format: `deletle index`
 
 Examples:
@@ -140,6 +141,7 @@ Format: `find KEYWORD`
 
 Examples:
 * `find look` returns the flashcard list  and its translation that contains the keyword `look`
+
 
 ###  Showing flashcard, starts today’s flashcard session : `start`
 
