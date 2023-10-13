@@ -29,9 +29,6 @@ public class LogicManager implements Logic {
 
     public static final String FILE_OPS_PERMISSION_ERROR_FORMAT =
             "Could not save data to file %s due to insufficient permissions to write to the file or the folder.";
-    public static final String WINDOW_IN_VIEW_MODE_ERROR =
-            "You cannot run other commands while in view profile mode.";
-
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     private final Model model;
@@ -84,7 +81,13 @@ public class LogicManager implements Logic {
 
         return commandResult;
     }
+    public boolean getIsInViewMode() {
+        return isInViewMode;
+    }
 
+    public void setIsInViewMode(boolean isInViewMode) {
+        this.isInViewMode = isInViewMode;
+    }
     @Override
     public ReadOnlyAddressBook getAddressBook() {
         return model.getAddressBook();

@@ -1,8 +1,7 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
-import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.Messages.*;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
@@ -21,6 +20,7 @@ import org.junit.jupiter.api.io.TempDir;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ViewExitCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -65,10 +65,29 @@ public class LogicManagerTest {
     }
 
     @Test
+    public void execute_viewModeCommandExecutionError_throwsParseException() {
+        String listCommand = "list";
+        assertViewModeParseException(listCommand, MESSAGE_UNAVAILABLE_COMMAND_IN_VIEW_MODE);
+    }
+
+    @Test
     public void execute_validCommand_success() throws Exception {
         String listCommand = ListCommand.COMMAND_WORD;
         assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
     }
+
+    @Test
+    public void execute_addressBookParserCommand_success() throws Exception {
+        String listCommand = ListCommand.COMMAND_WORD;
+        assertAddressBookCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
+    }
+
+    @Test
+    public void execute_viewModeParserCommand_success() throws Exception {
+        String viewExitCommand = ViewExitCommand.COMMAND_WORD;
+        assertViewModeCommandSuccess(viewExitCommand, ViewExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT, model);
+    }
+
 
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
@@ -85,6 +104,22 @@ public class LogicManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+    }
+
+    private void assertAddressBookCommandSuccess(String inputCommand, String expectedMessage,
+            Model expectedModel) throws CommandException, ParseException {
+        logic.setIsInViewMode(false);
+        CommandResult result = logic.execute(inputCommand);
+        assertEquals(expectedMessage, result.getFeedbackToUser());
+        assertEquals(expectedModel, model);
+    }
+
+    private void assertViewModeCommandSuccess(String inputCommand, String expectedMessage,
+                                                 Model expectedModel) throws CommandException, ParseException {
+        logic.setIsInViewMode(true);
+        CommandResult result = logic.execute(inputCommand);
+        assertEquals(expectedMessage, result.getFeedbackToUser());
+        assertEquals(expectedModel, model);
     }
 
     /**
@@ -108,6 +143,9 @@ public class LogicManagerTest {
     private void assertParseException(String inputCommand, String expectedMessage) {
         assertCommandFailure(inputCommand, ParseException.class, expectedMessage);
     }
+    private void assertViewModeParseException(String inputCommand, String expectedMessage) {
+        assertViewModeCommandFailure(inputCommand, ParseException.class, expectedMessage);
+    }
 
     /**
      * Executes the command, confirms that a CommandException is thrown and that the result message is correct.
@@ -127,6 +165,12 @@ public class LogicManagerTest {
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
+    private void assertViewModeCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
+            String expectedMessage) {
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        assertViewModeCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
+    }
+
     /**
      * Executes the command and confirms that
      * - the {@code expectedException} is thrown <br>
@@ -136,6 +180,13 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage, Model expectedModel) {
+        assertThrows(expectedException, expectedMessage, () -> logic.execute(inputCommand));
+        assertEquals(expectedModel, model);
+    }
+
+    private void assertViewModeCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
+            String expectedMessage, Model expectedModel) {
+        logic.setIsInViewMode(true);
         assertThrows(expectedException, expectedMessage, () -> logic.execute(inputCommand));
         assertEquals(expectedModel, model);
     }
