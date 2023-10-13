@@ -122,7 +122,7 @@ public class MainWindow extends UiPart<Stage> {
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         // Nothing for now, will need list of all meetings for schedule
-        meetingSchedulePanel = new MeetingSchedulePanel();
+        meetingSchedulePanel = new MeetingSchedulePanel(logic.getFilteredMeetingList());
         meetingSchedulePanelPlaceholder.getChildren().add(meetingSchedulePanel.getRoot());
 
         // For now Person object is forwarded here in executeCommand below
