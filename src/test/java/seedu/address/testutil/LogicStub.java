@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import java.nio.file.Path;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -10,8 +11,9 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
 
-import java.nio.file.Path;
-
+/**
+ * A LogicStub class used for unit testing for MainWindow
+ */
 public class LogicStub implements Logic {
     private final Model model = new ModelStub(); // Replace with your actual ModelStub
 
@@ -29,7 +31,6 @@ public class LogicStub implements Logic {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return new FilteredList<Person>(FXCollections.observableArrayList());
-//        throw new AssertionError("This method should not be called.");
     }
 
     @Override

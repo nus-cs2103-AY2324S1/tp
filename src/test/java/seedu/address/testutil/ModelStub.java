@@ -1,5 +1,7 @@
 package seedu.address.testutil;
 
+import java.nio.file.Path;
+import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.Model;
@@ -7,9 +9,9 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
 
-import java.nio.file.Path;
-import java.util.function.Predicate;
-
+/**
+ * A ModelStub class used for unit testing
+ */
 public class ModelStub implements Model {
     @Override
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
