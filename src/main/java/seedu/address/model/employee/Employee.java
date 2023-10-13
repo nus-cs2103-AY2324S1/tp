@@ -76,4 +76,43 @@ public class Employee {
     public Phone getPhone() {
         return this.phone;
     }
+
+    /**
+     * Returns true if both employees have the same identity and data fields.
+     * This defines a stronger notion of equality between two employees.
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Employee)) {
+            return false;
+        }
+
+        Employee otherEmployee = (Employee) other;
+        return name.equals(otherEmployee.name)
+                && phone.equals(otherEmployee.phone)
+                && email.equals(otherEmployee.email)
+                && address.equals(otherEmployee.address)
+                && bankAccount.equals(otherEmployee.bankAccount)
+                && joinDate.equals(otherEmployee.joinDate)
+                && salary.equals(otherEmployee.salary)
+                && annualLeave.equals(otherEmployee.annualLeave);
+    }
+
+    /**
+     * Returns true if both employees have the same name.
+     * This defines a weaker notion of equality between two employees.
+     */
+    public boolean isSameEmployee(Employee otherEmployee) {
+        if (otherEmployee == this) {
+            return true;
+        }
+
+        return otherEmployee != null
+                && otherEmployee.getName().equals(getName());
+    }
 }
