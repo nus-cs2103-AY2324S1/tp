@@ -36,6 +36,21 @@ public class AddGCommand extends Command {
     }
 
     @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof AddGCommand)) {
+            return false;
+        }
+
+        AddGCommand otherAddGCommand = (AddGCommand) other;
+        return this.targetIndex == otherAddGCommand.targetIndex && this.username.equals(otherAddGCommand.username);
+    }
+
+    @Override
     public String toString() {
         return new ToStringBuilder(this).add("targetIndex", targetIndex).add("username", username).toString();
     }

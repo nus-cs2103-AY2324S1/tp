@@ -36,6 +36,21 @@ public class AddLCommand extends Command {
     }
 
     @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof AddLCommand)) {
+            return false;
+        }
+
+        AddLCommand otherAddLCommand = (AddLCommand) other;
+        return this.targetIndex == otherAddLCommand.targetIndex && this.username.equals(otherAddLCommand.username);
+    }
+
+    @Override
     public String toString() {
         return new ToStringBuilder(this).add("targetIndex", targetIndex).add("username", username).toString();
     }

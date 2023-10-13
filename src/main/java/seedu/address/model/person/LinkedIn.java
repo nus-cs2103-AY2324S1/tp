@@ -1,5 +1,7 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
+
 /**
  * Represents a person's LinkedIn details in JABPro.
  */
@@ -12,12 +14,13 @@ public class LinkedIn {
      * @param linkedin
      */
     public LinkedIn(String linkedin) {
+        requireNonNull(linkedin);
         value = linkedin;
     }
 
     @Override
     public String toString() {
-        return value != null ? value : "";
+        return value;
     }
 
     @Override
