@@ -11,34 +11,33 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.flashlingo.commons.core.GuiSettings;
 import seedu.flashlingo.commons.core.LogsCenter;
-import seedu.flashlingo.model.person.Person;
-import seedu.flashlingo.commons.util.CollectionUtil;
+import seedu.flashlingo.model.flashcard.FlashCard;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the flashlingo data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final Flashlingo flashlingo;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<FlashCard> filteredFlashCards;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given flashlingo and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        CollectionUtil.requireAllNonNull(addressBook, userPrefs);
+    public ModelManager(ReadOnlyFlashlingo flashlingo, ReadOnlyUserPrefs userPrefs) {
+        requireAllNonNull(flashlingo, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with Flashlingo: " + flashlingo + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.flashlingo = new Flashlingo(flashlingo);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredFlashCards = new FilteredList<>(this.flashlingo.getFlashCardList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new Flashlingo(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -66,67 +65,67 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getFlashlingoFilePath() {
+        return userPrefs.getFlashlingoFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setFlashlingoFilePath(Path flashlingoFilePath) {
+        requireNonNull(flashlingoFilePath);
+        userPrefs.setFlashlingoFilePath(flashlingoFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== Flashlingo ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
-    }
-
-    @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public void setFlashlingo(ReadOnlyFlashlingo flashlingo) {
+        this.flashlingo.resetData(flashlingo);
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
+    public ReadOnlyFlashlingo getFlashlingo() {
+        return flashlingo;
     }
 
     @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+    public boolean hasFlashCard(FlashCard flashCard) {
+        requireNonNull(flashCard);
+        return flashlingo.hasFlashCard(flashCard);
     }
 
     @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void deleteFlashCard(FlashCard target) {
+        flashlingo.removeFlashCard(target);
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        CollectionUtil.requireAllNonNull(target, editedPerson);
+    public void addFlashCard(FlashCard flashCard) {
+        flashlingo.addFlashCard(flashCard);
+        updateFilteredFlashCardList(PREDICATE_SHOW_ALL_FLASHCARDS);
+    }
 
-        addressBook.setPerson(target, editedPerson);
+    @Override
+    public void setFlashCard(FlashCard target, FlashCard editedFlashCard) {
+        requireAllNonNull(target, editedFlashCard);
+
+        flashlingo.setFlashCard(target, editedFlashCard);
     }
 
     //=========== Filtered Person List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
+     * Returns an unmodifiable view of the list of {@code FlashCard} backed by the internal list of
+     * {@code versionedFlashlingo}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<FlashCard> getFilteredFlashCardList() {
+        return filteredFlashCards;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredFlashCardList(Predicate<FlashCard> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredFlashCards.setPredicate(predicate);
     }
 
     @Override
@@ -141,9 +140,8 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook)
+        return flashlingo.equals(otherModelManager.flashlingo)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredFlashCards.equals(otherModelManager.filteredFlashCards);
     }
-
 }

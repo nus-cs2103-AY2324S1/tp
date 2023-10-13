@@ -6,7 +6,8 @@ import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_TRANSLATED_WORD;
 
 import java.util.stream.Stream;
 
-import seedu.flashlingo.logic.newcommands.AddCommand;
+
+import seedu.flashlingo.logic.commands.AddCommand;
 import seedu.flashlingo.logic.parser.exceptions.ParseException;
 import seedu.flashlingo.model.flashcard.OriginalWord;
 import seedu.flashlingo.model.flashcard.Translation;

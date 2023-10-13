@@ -9,7 +9,7 @@ import seedu.flashlingo.commons.util.ToStringBuilder;
 import seedu.flashlingo.logic.Messages;
 import seedu.flashlingo.logic.commands.exceptions.CommandException;
 import seedu.flashlingo.model.Model;
-import seedu.flashlingo.model.person.Person;
+import seedu.flashlingo.model.flashcard.FlashCard;
 
 /**
  * Deletes a person identified using it's displayed index from the address book.
@@ -19,11 +19,11 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
+            + ": Deletes the word identified by the index number used in the displayed flashcard list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Word: %1$s";
 
     private final Index targetIndex;
 
@@ -34,15 +34,15 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<FlashCard> lastShownList = model.getFilteredFlashCardList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
         }
 
-        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
+        FlashCard flashCardToDelete = lastShownList.get(targetIndex.getZeroBased());
+        model.deleteFlashCard(flashCardToDelete);
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(flashCardToDelete)));
     }
 
     @Override

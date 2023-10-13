@@ -7,7 +7,7 @@ import seedu.flashlingo.commons.core.GuiSettings;
 import seedu.flashlingo.logic.commands.CommandResult;
 import seedu.flashlingo.logic.commands.exceptions.CommandException;
 import seedu.flashlingo.logic.parser.exceptions.ParseException;
-import seedu.flashlingo.model.NewModel;
+import seedu.flashlingo.model.Model;
 import seedu.flashlingo.model.ReadOnlyFlashlingo;
 import seedu.flashlingo.model.flashcard.FlashCard;
 import seedu.flashlingo.model.person.Person;
@@ -28,7 +28,7 @@ public interface Logic {
     /**
      * Returns the Flashlingo.
      *
-     * @see NewModel#getFlashlingo()
+     * @see Model#getFlashlingo()
      */
     ReadOnlyFlashlingo getFlashlingo();
 

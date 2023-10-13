@@ -5,14 +5,14 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.flashlingo.commons.core.GuiSettings;
-import seedu.flashlingo.model.person.Person;
+import seedu.flashlingo.model.flashcard.FlashCard;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<FlashCard> PREDICATE_SHOW_ALL_FLASHCARDS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -35,53 +35,54 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' Flashlingo file path.
      */
-    Path getAddressBookFilePath();
+    Path getFlashlingoFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' Flashlingo file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setFlashlingoFilePath(Path flashlingoFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces Flashlingo data with the data in {@code flashlingo}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setFlashlingo(ReadOnlyFlashlingo flashlingo);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the Flashlingo */
+    ReadOnlyFlashlingo getFlashlingo();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a flashcard with the same identity as {@code flashcard} exists in the Flashlingo.
      */
-    boolean hasPerson(Person person);
+    boolean hasFlashCard(FlashCard flashCard);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Deletes the given flashcard.
+     * The flashcard must exist in the Flashlingo.
      */
-    void deletePerson(Person target);
+    void deleteFlashCard(FlashCard target);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Adds the given FlashCard.
+     * {@code flashCard} must not already exist in the Flashlingo.
      */
-    void addPerson(Person person);
+    void addFlashCard(FlashCard flashCard);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * Replaces the given flashcard {@code target} with {@code editedFlashCard}.
+     * {@code target} must exist in the Flashlingo .
+     * The flashcard identity of {@code editedFlashCard} must not be the same as another existing
+     * FlashCard in the Flashlingo.
      */
-    void setPerson(Person target, Person editedPerson);
+    void setFlashCard(FlashCard target, FlashCard editedFlashCard);
 
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered flashcard list */
+    ObservableList<FlashCard> getFilteredFlashCardList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered flashcard list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void updateFilteredFlashCardList(Predicate<FlashCard> predicate);
 }
