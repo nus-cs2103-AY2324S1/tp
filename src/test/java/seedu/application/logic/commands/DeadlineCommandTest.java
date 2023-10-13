@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import seedu.application.model.Model;
 import seedu.application.model.ModelManager;
 import seedu.application.model.UserPrefs;
+import seedu.application.model.job.Deadline;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for DeadlineCommand.
@@ -24,7 +25,7 @@ public class DeadlineCommandTest {
 
     @Test
     public void execute() {
-        final String deadline = "Some deadline";
+        final Deadline deadline = Deadline.EMPTY_DEADLINE;
 
         assertCommandFailure(new DeadlineCommand(INDEX_FIRST_JOB, deadline), model,
                 String.format(MESSAGE_ARGUMENTS, INDEX_FIRST_JOB.getOneBased(), deadline));
@@ -32,10 +33,10 @@ public class DeadlineCommandTest {
 
     @Test
     public void equals() {
-        final DeadlineCommand standardCommand = new DeadlineCommand(INDEX_FIRST_JOB, VALID_DEADLINE_CHEF);
+        final DeadlineCommand standardCommand = new DeadlineCommand(INDEX_FIRST_JOB, new Deadline(VALID_DEADLINE_CHEF));
 
         // same values -> returns true
-        DeadlineCommand commandWithSameValues = new DeadlineCommand(INDEX_FIRST_JOB, VALID_DEADLINE_CHEF);
+        DeadlineCommand commandWithSameValues = new DeadlineCommand(INDEX_FIRST_JOB, new Deadline(VALID_DEADLINE_CHEF));
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -48,9 +49,9 @@ public class DeadlineCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new DeadlineCommand(INDEX_SECOND_JOB, VALID_DEADLINE_CHEF)));
+        assertFalse(standardCommand.equals(new DeadlineCommand(INDEX_SECOND_JOB, new Deadline(VALID_DEADLINE_CHEF))));
 
         // different deadline -> returns false
-        assertFalse(standardCommand.equals(new DeadlineCommand(INDEX_FIRST_JOB, VALID_DEADLINE_CLEANER)));
+        assertFalse(standardCommand.equals(new DeadlineCommand(INDEX_FIRST_JOB, new Deadline(VALID_DEADLINE_CLEANER))));
     }
 }

@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.application.commons.core.index.Index;
 import seedu.application.logic.commands.DeadlineCommand;
+import seedu.application.model.job.Deadline;
 
 class DeadlineCommandParserTest {
     private DeadlineCommandParser parser = new DeadlineCommandParser();
@@ -19,12 +20,12 @@ class DeadlineCommandParserTest {
         // have deadline
         Index targetIndex = INDEX_FIRST_JOB;
         String userInput = targetIndex.getOneBased() + " " + PREFIX_DEADLINE + nonEmptyDeadline;
-        DeadlineCommand expectedCommand = new DeadlineCommand(INDEX_FIRST_JOB, nonEmptyDeadline);
+        DeadlineCommand expectedCommand = new DeadlineCommand(INDEX_FIRST_JOB, new Deadline(nonEmptyDeadline));
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // no deadline
         userInput = targetIndex.getOneBased() + " " + PREFIX_DEADLINE;
-        expectedCommand = new DeadlineCommand(INDEX_FIRST_JOB, "");
+        expectedCommand = new DeadlineCommand(INDEX_FIRST_JOB, Deadline.EMPTY_DEADLINE);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 

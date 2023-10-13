@@ -4,6 +4,7 @@ import static seedu.application.commons.util.CollectionUtil.requireAllNonNull;
 import seedu.application.commons.core.index.Index;
 import seedu.application.logic.commands.exceptions.CommandException;
 import seedu.application.model.Model;
+import seedu.application.model.job.Deadline;
 
 public class DeadlineCommand extends Command {
 
@@ -16,19 +17,17 @@ public class DeadlineCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) d/ [DEADLINE]\n"
             + "Example: " + COMMAND_WORD + " 1 " + "d/ Dec 31 2030 1200.";
 
-    public static final String MESSAGE_NOT_IMPLEMENTED_YET =
-            "Deadline command not implemented yet";
-
+    public static final String MESSAGE_SET_DEADLINE_SUCCESS = "Set Deadline: %1$s";
     public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Remark: %2$s";
 
     private final Index index;
-    private final String deadline;
+    private final Deadline deadline;
 
     /**
      * @param index    of the job in the job list to edit the deadline
      * @param deadline of the job to be updated to
      */
-    public DeadlineCommand(Index index, String deadline) {
+    public DeadlineCommand(Index index, Deadline deadline) {
         requireAllNonNull(index, deadline);
         this.index = index;
         this.deadline = deadline;

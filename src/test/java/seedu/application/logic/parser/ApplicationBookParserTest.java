@@ -25,6 +25,7 @@ import seedu.application.logic.commands.FindCommand;
 import seedu.application.logic.commands.HelpCommand;
 import seedu.application.logic.commands.ListCommand;
 import seedu.application.logic.parser.exceptions.ParseException;
+import seedu.application.model.job.Deadline;
 import seedu.application.model.job.Job;
 import seedu.application.model.job.RoleContainsKeywordsPredicate;
 import seedu.application.testutil.EditJobDescriptorBuilder;
@@ -91,11 +92,11 @@ public class ApplicationBookParserTest {
     }
 
     @Test
-    public void parseCommand_remark() throws Exception {
-        final String deadline = "Dec 31 20230 1200";
+    public void parseCommand_deadline() throws Exception {
+        final String deadline = "Dec 31 2030 1200";
         DeadlineCommand command = (DeadlineCommand) parser.parseCommand(DeadlineCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_JOB.getOneBased() + " " + PREFIX_DEADLINE + deadline);
-        assertEquals(new DeadlineCommand(INDEX_FIRST_JOB, deadline), command);
+        assertEquals(new DeadlineCommand(INDEX_FIRST_JOB, new Deadline(deadline)), command);
     }
 
     @Test
