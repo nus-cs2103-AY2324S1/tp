@@ -1,12 +1,11 @@
 package transact.model.transaction;
 
+import java.util.Scanner;
+
 import transact.model.person.Person;
-import transact.model.transaction.Transaction;
 import transact.model.transaction.info.Amount;
 import transact.model.transaction.info.Description;
 import transact.model.transaction.info.TransactionId;
-
-import java.util.Scanner;
 
 public class TransactionManualTest {
     public static void main(String[] args) {
@@ -50,5 +49,7 @@ public class TransactionManualTest {
         System.out.println("Person: " + transaction.getPerson());
         System.out.println("Description: " + transaction.getDescription());
         System.out.println("Amount: " + transaction.getAmount());
+
+        scanner.close();
     }
 }

@@ -1,15 +1,15 @@
 package transact.storage;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
+
 import javafx.collections.ObservableList;
 import transact.commons.exceptions.IllegalValueException;
-
 import transact.model.ReadOnlyTransactionLog;
 import transact.model.TransactionLog;
 import transact.model.transaction.Transaction;
@@ -25,18 +25,21 @@ public class JsonSerializableTransactionLog {
     private final List<JsonAdaptedTransaction> transactions = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableTransactionLog} with the given transactions.
+     * Constructs a {@code JsonSerializableTransactionLog} with the given
+     * transactions.
      */
     @JsonCreator
-    public JsonSerializableTransactionLog(@JsonProperty("transactions") ObservableList<JsonAdaptedTransaction> transactions) {
+    public JsonSerializableTransactionLog(
+            @JsonProperty("transactions") ObservableList<JsonAdaptedTransaction> transactions) {
         this.transactions.addAll(transactions);
     }
 
     /**
      * Converts a given {@code TransactionLog} into this class for Jackson use.
      *
-     * @param source future changes to this will not affect the created
-     *               {@code JsonSerializableTransactionLog}.
+     * @param source
+     *            future changes to this will not affect the created
+     *            {@code JsonSerializableTransactionLog}.
      */
     public JsonSerializableTransactionLog(ReadOnlyTransactionLog source) {
         transactions.addAll(source.getTransactionList().stream()
@@ -47,7 +50,8 @@ public class JsonSerializableTransactionLog {
     /**
      * Converts this transaction log into the model's {@code TransactionLog} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated.
+     * @throws IllegalValueException
+     *             if there were any data constraints violated.
      */
     public TransactionLog toModelType() throws IllegalValueException {
         TransactionLog transactionLog = new TransactionLog();
@@ -61,4 +65,3 @@ public class JsonSerializableTransactionLog {
         return transactionLog;
     }
 }
-

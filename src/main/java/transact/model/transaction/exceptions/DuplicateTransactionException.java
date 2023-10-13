@@ -1,6 +1,9 @@
 package transact.model.transaction.exceptions;
 
-public class DuplicateTransactionException extends RuntimeException{
+/**
+ * Signals that the operation will result in duplicate Transaction.
+ */
+public class DuplicateTransactionException extends RuntimeException {
     public DuplicateTransactionException() {
         super("Operation would result in duplicate transaction");
     }

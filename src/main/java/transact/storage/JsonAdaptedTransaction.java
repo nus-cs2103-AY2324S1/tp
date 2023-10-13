@@ -1,15 +1,16 @@
 package transact.storage;
 
+import java.math.BigDecimal;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import transact.commons.exceptions.IllegalValueException;
 import transact.model.person.Person;
 import transact.model.transaction.Transaction;
 import transact.model.transaction.info.Amount;
 import transact.model.transaction.info.Description;
 import transact.model.transaction.info.TransactionId;
-
-import java.math.BigDecimal;
 
 /**
  * Jackson-friendly version of {@link Transaction}.
@@ -23,9 +24,9 @@ class JsonAdaptedTransaction {
 
     @JsonCreator
     public JsonAdaptedTransaction(@JsonProperty("transactionId") String transactionId,
-                                  @JsonProperty("person") JsonAdaptedPerson person,
-                                  @JsonProperty("description") String description,
-                                  @JsonProperty("amount") BigDecimal amount) {
+            @JsonProperty("person") JsonAdaptedPerson person,
+            @JsonProperty("description") String description,
+            @JsonProperty("amount") BigDecimal amount) {
         this.transactionId = transactionId;
         this.person = person;
         this.description = description;
@@ -58,4 +59,3 @@ class JsonAdaptedTransaction {
         }
     }
 }
-

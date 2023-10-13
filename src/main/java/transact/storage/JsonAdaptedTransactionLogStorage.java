@@ -1,4 +1,7 @@
 package transact.storage;
+
+import static java.util.Objects.requireNonNull;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
@@ -10,8 +13,6 @@ import transact.commons.exceptions.IllegalValueException;
 import transact.commons.util.FileUtil;
 import transact.commons.util.JsonUtil;
 import transact.model.ReadOnlyTransactionLog;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * A class to access TransactionLog data stored as a json file on the hard disk.
@@ -79,4 +80,3 @@ public class JsonAdaptedTransactionLogStorage implements TransactionLogStorage {
         JsonUtil.saveJsonFile(new JsonSerializableTransactionLog(transactionLog), filePath);
     }
 }
-

@@ -3,11 +3,9 @@ package transact.storage;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
-import transact.commons.exceptions.IllegalValueException;
-import transact.model.person.Person;
-import transact.model.transaction.info.Description;
 
-import java.util.stream.Collectors;
+import transact.commons.exceptions.IllegalValueException;
+import transact.model.transaction.info.Description;
 
 /**
  * Jackson-friendly version of {@link Description}.
@@ -20,6 +18,7 @@ class JsonAdaptedDescription {
     public JsonAdaptedDescription(@JsonProperty("description") String description) {
         this.description = description;
     }
+
     public JsonAdaptedDescription(Description source) {
         this.description = source.getValue();
     }

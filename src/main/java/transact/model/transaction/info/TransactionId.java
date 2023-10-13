@@ -1,12 +1,14 @@
 package transact.model.transaction.info;
-import transact.commons.util.StringUtil;
 
 import static java.util.Objects.requireNonNull;
 import static transact.commons.util.AppUtil.checkArgument;
 
+import transact.commons.util.StringUtil;
+
 /**
  * Represents a unique transaction ID in the system.
- * Guarantees: immutable; is valid as declared in {@link #isValidTransactionId(String)}
+ * Guarantees: immutable; is valid as declared in
+ * {@link #isValidTransactionId(String)}
  */
 public class TransactionId {
 
@@ -25,6 +27,9 @@ public class TransactionId {
         checkArgument(isValidTransactionId(value), MESSAGE_CONSTRAINTS);
     }
 
+    /**
+     * Constructs a {@code TransactionId} with specified {@code id}
+     */
     public TransactionId(String id) {
         requireNonNull(id);
         checkArgument(isValidTransactionId(id), MESSAGE_CONSTRAINTS);
@@ -42,6 +47,7 @@ public class TransactionId {
     public String toString() {
         return value;
     }
+
     public String getValue() {
         return value;
     }

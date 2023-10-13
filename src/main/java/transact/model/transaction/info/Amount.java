@@ -1,4 +1,5 @@
 package transact.model.transaction.info;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
@@ -10,13 +11,15 @@ import java.text.NumberFormat;
  */
 public class Amount {
     public static final String MESSAGE_CONSTRAINTS = "Amount must be non-null and non-negative.";
-    private final BigDecimal value;
     private static final NumberFormat AMOUNT_FORMAT = new DecimalFormat("#0.00");
+
+    private final BigDecimal value;
 
     /**
      * Constructs an {@code Amount}.
      *
-     * @param amount A non-null, non-negative amount of money.
+     * @param amount
+     *            A non-null, non-negative amount of money.
      */
     public Amount(BigDecimal amount) {
         if (amount == null || amount.compareTo(BigDecimal.ZERO) < 0) {
@@ -28,7 +31,8 @@ public class Amount {
     /**
      * Constructs an {@code Amount} with a double value.
      *
-     * @param amount A non-negative amount of money as a double.
+     * @param amount
+     *            A non-negative amount of money as a double.
      */
     public Amount(double amount) {
         this(BigDecimal.valueOf(amount));

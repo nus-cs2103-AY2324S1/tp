@@ -1,31 +1,38 @@
 package transact.model.transaction;
+
+import static transact.commons.util.AppUtil.checkArgument;
+
+import java.util.Objects;
+
 import transact.commons.util.ToStringBuilder;
 import transact.model.person.Person;
 import transact.model.transaction.info.Amount;
 import transact.model.transaction.info.Description;
 import transact.model.transaction.info.TransactionId;
-import java.util.Objects;
-
-import static transact.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Transaction in the address book.
  */
 public class Transaction {
 
+    public static final String MESSAGE_CONSTRAINTS = "This Transaction does not contain information about people involved";
+
     private final TransactionId transactionId;
     private final Person person;
     private final Description description;
     private final Amount amount;
-    public static final String MESSAGE_CONSTRAINTS = "This Transaction does not contain information about people involved";
 
     /**
      * Creates a new Transaction.
      *
-     * @param transactionId The unique transaction ID.
-     * @param person        The person associated with the transaction.
-     * @param description   The description of the transaction.
-     * @param amount        The amount of the transaction.
+     * @param transactionId
+     *            The unique transaction ID.
+     * @param person
+     *            The person associated with the transaction.
+     * @param description
+     *            The description of the transaction.
+     * @param amount
+     *            The amount of the transaction.
      */
     public Transaction(TransactionId transactionId, Person person, Description description, Amount amount) {
         this.transactionId = transactionId;
@@ -37,9 +44,12 @@ public class Transaction {
     /**
      * Creates a new Transaction.
      *
-     * @param transactionId The unique transaction ID.
-     * @param description   The description of the transaction.
-     * @param amount        The amount of the transaction.
+     * @param transactionId
+     *            The unique transaction ID.
+     * @param description
+     *            The description of the transaction.
+     * @param amount
+     *            The amount of the transaction.
      */
     public Transaction(TransactionId transactionId, Description description, Amount amount) {
         this.transactionId = transactionId;
@@ -51,9 +61,11 @@ public class Transaction {
     public TransactionId getTransactionId() {
         return transactionId;
     }
+
     public Boolean hasPersonInfo() {
         return this.person != null;
     }
+
     public Person getPerson() {
         checkArgument(hasPersonInfo(), MESSAGE_CONSTRAINTS);
         return person;
@@ -69,13 +81,19 @@ public class Transaction {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Transaction)) return false;
+        if (this == o) {
+            return true;
+        }
+
+        if (!(o instanceof Transaction)) {
+            return false;
+        }
+
         Transaction that = (Transaction) o;
-        return Objects.equals(transactionId, that.transactionId) &&
-                Objects.equals(person, that.person) &&
-                Objects.equals(description, that.description) &&
-                Objects.equals(amount, that.amount);
+        return Objects.equals(transactionId, that.transactionId)
+                && Objects.equals(person, that.person)
+                && Objects.equals(description, that.description)
+                && Objects.equals(amount, that.amount);
     }
 
     @Override
@@ -92,13 +110,4 @@ public class Transaction {
                 .add("amount", amount)
                 .toString();
     }
-
-    public boolean isSameTransaction(Transaction other) {
-        if (other == this) {
-            return true;
-        }
-
-        return other != null && other.getTransactionId().equals(getTransactionId());
-    }
 }
-

@@ -1,13 +1,13 @@
 package transact.storage;
 
+import java.math.BigDecimal;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
-import transact.commons.exceptions.IllegalValueException;
-import transact.model.tag.Tag;
-import transact.model.transaction.info.Amount;
 
-import java.math.BigDecimal;
+import transact.commons.exceptions.IllegalValueException;
+import transact.model.transaction.info.Amount;
 
 /**
  * Jackson-friendly version of {@link Amount}.
@@ -37,4 +37,3 @@ class JsonAdaptedAmount {
         return new Amount(value);
     }
 }
-

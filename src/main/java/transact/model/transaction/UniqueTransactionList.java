@@ -1,4 +1,5 @@
 package transact.model.transaction;
+
 import static java.util.Objects.requireNonNull;
 import static transact.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -11,29 +12,28 @@ import transact.model.transaction.exceptions.DuplicateTransactionException;
 import transact.model.transaction.exceptions.TransactionNotFoundException;
 
 /**
- * A list of transactions that enforces uniqueness between its elements and does not allow nulls.
- * A transaction is considered unique by comparing using
- * {@code Transaction#isSameTransaction(Transaction)}. As such, adding and updating of
- * transactions uses Transaction#isSameTransaction(Transaction) for equality so as to ensure that
- * the transaction being added or updated is unique in terms of identity in the UniqueTransactionList.
- * However, the removal of a transaction uses Transaction#equals(Object) so as to ensure that the
+ * A list of transactions that enforces uniqueness between its elements and does
+ * not allow nulls.
+ * However, the removal of a transaction uses Transaction#equals(Object) so as
+ * to ensure that the
  * transaction with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
- * @see Transaction#isSameTransaction(Transaction)
  */
 public class UniqueTransactionList implements Iterable<Transaction> {
 
     private final ObservableList<Transaction> internalList = FXCollections.observableArrayList();
-    private final ObservableList<Transaction> internalUnmodifiableList = FXCollections.unmodifiableObservableList(internalList);
+    private final ObservableList<Transaction> internalUnmodifiableList = FXCollections
+            .unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent transaction as the given argument.
+     * Returns true if the list contains an equivalent transaction as the given
+     * argument.
      */
     public boolean contains(Transaction toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSameTransaction);
+        return internalList.stream().anyMatch(toCheck::equals);
     }
 
     /**
@@ -49,9 +49,11 @@ public class UniqueTransactionList implements Iterable<Transaction> {
     }
 
     /**
-     * Replaces the transaction {@code target} in the list with {@code editedTransaction}.
+     * Replaces the transaction {@code target} in the list with
+     * {@code editedTransaction}.
      * {@code target} must exist in the list.
-     * The transaction identity of {@code editedTransaction} must not be the same as another
+     * The transaction identity of {@code editedTransaction} must not be the same as
+     * another
      * existing transaction in the list.
      */
     public void setTransaction(Transaction target, Transaction editedTransaction) {
@@ -62,7 +64,7 @@ public class UniqueTransactionList implements Iterable<Transaction> {
             throw new TransactionNotFoundException();
         }
 
-        if (!target.isSameTransaction(editedTransaction) && contains(editedTransaction)) {
+        if (!target.equals(editedTransaction) && contains(editedTransaction)) {
             throw new DuplicateTransactionException();
         }
 
@@ -139,7 +141,7 @@ public class UniqueTransactionList implements Iterable<Transaction> {
     private boolean transactionsAreUnique(List<Transaction> transactions) {
         for (int i = 0; i < transactions.size() - 1; i++) {
             for (int j = i + 1; j < transactions.size(); j++) {
-                if (transactions.get(i).isSameTransaction(transactions.get(j))) {
+                if (transactions.get(i).equals(transactions.get(j))) {
                     return false;
                 }
             }
@@ -147,4 +149,3 @@ public class UniqueTransactionList implements Iterable<Transaction> {
         return true;
     }
 }
-

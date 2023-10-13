@@ -13,6 +13,8 @@ import java.util.Arrays;
  */
 public class StringUtil {
 
+    private static final String VALID_CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
     /**
      * Returns true if the {@code sentence} contains the {@code word}.
      * Ignores case, but a full word match is required.
@@ -76,14 +78,20 @@ public class StringUtil {
         }
     }
 
+    /**
+     * Generate a random string of length {@code length}
+     *
+     * @param length
+     *            Length of string
+     * @return Random string
+     */
     public static String generateRandomString(int length) {
-        final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         SecureRandom random = new SecureRandom();
 
         StringBuilder sb = new StringBuilder(length);
         for (int i = 0; i < length; i++) {
-            int randomIndex = random.nextInt(CHARACTERS.length());
-            char randomChar = CHARACTERS.charAt(randomIndex);
+            int randomIndex = random.nextInt(VALID_CHARACTERS.length());
+            char randomChar = VALID_CHARACTERS.charAt(randomIndex);
             sb.append(randomChar);
         }
         return sb.toString();
