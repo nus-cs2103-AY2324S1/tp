@@ -38,7 +38,7 @@ public class FindCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(namePredicate);
-        if (statusPredicate == null) {
+        if (statusPredicate != null) {
             model.updateFilteredPersonList(statusPredicate);
         }
         return new CommandResult(
