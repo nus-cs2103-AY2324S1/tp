@@ -7,8 +7,10 @@ import static seedu.address.logic.parser.CliSyntax.SPECIALIST_TAG;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonType;
+
+import java.util.function.Predicate;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
@@ -27,14 +29,14 @@ public class FindCommand extends Command {
             + PATIENT_TAG + " "
             + "alice bob charlie";
 
-    private final NameContainsKeywordsPredicate predicate;
+    private final Predicate<Person> predicate;
     private final PersonType personType;
 
     /**
      * @param predicate The predicate that describes the name being searched for
      * @param personType The type of person being searched for i.e. patient or specialist
      */
-    public FindCommand(NameContainsKeywordsPredicate predicate, PersonType personType) {
+    public FindCommand(Predicate<Person> predicate, PersonType personType) {
         this.predicate = predicate;
         this.personType = personType;
     }
