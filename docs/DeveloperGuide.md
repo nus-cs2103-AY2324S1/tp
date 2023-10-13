@@ -50,7 +50,16 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 
 **Use case: Add an application**
 
-(ZHI RUO)
+_MSS_
+1. User requests to add an application, specifying the company name
+2. System adds the application
+
+   Use case ends.
+
+_Extensions_
+* 1a. The company is not specified
+
+  Use case ends.
 
 ---
 
@@ -100,13 +109,34 @@ _Extensions_
 
 **Use case: Delete an application**
 
-(JEREMY)
+_MSS_
+1. User requests to list applications
+2. System shows a list of applications
+3. User requests to delete an application in the list, specifying an index
+4. System deletes the application at the index specified
+
+   Use case ends.
+
+_Extensions_
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+    * 3a1. System shows an error message.
+
+      Use case resumes at step 3.
 
 ---
 
 **Use case: List applications**
 
-(MIGUEL)
+_MSS_
+1. User requests to list applications
+2. System shows a list of applications
+
+   Use case ends.
+
 
 ---
 
