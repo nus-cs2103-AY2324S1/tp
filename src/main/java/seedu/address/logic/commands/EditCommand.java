@@ -24,9 +24,11 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Linkedin;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -101,9 +103,13 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Optional<Birthday> updatedBirthday = personToEdit.getBirthday(); // TODO: Allow edit of birthday here?
+        Optional<Linkedin> linkedin = personToEdit.getLinkedin();
+        Optional<Email> secondaryEmail = personToEdit.getSecondaryEmail();
+        Optional<Telegram> telegram = personToEdit.getTelegram();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedBirthday, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedBirthday,
+                linkedin, secondaryEmail, telegram, updatedTags);
     }
 
     @Override

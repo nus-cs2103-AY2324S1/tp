@@ -27,6 +27,9 @@ public class EventFactoryTest {
                 new Email("email@email.com"),
                 new Address("Some address"),
                 Optional.of(new Birthday(MonthDay.of(1, 20))),
+                Optional.empty(),
+                Optional.empty(),
+                Optional.empty(),
                 new HashSet<>()
         ));
 
