@@ -15,6 +15,7 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
+import seedu.address.testutil.FlashcardBuilder;
 import seedu.flashlingo.commons.core.GuiSettings;
 import seedu.flashlingo.logic.Messages;
 import seedu.flashlingo.logic.commands.AddCommand;
@@ -25,7 +26,6 @@ import seedu.flashlingo.model.Model;
 import seedu.flashlingo.model.ReadOnlyAddressBook;
 import seedu.flashlingo.model.ReadOnlyUserPrefs;
 import seedu.flashlingo.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
 
@@ -37,7 +37,7 @@ public class AddCommandTest {
     @Test
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
+        Person validPerson = new FlashcardBuilder().build();
 
         CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
 
@@ -48,7 +48,7 @@ public class AddCommandTest {
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
-        Person validPerson = new PersonBuilder().build();
+        Person validPerson = new FlashcardBuilder().build();
         AddCommand addCommand = new AddCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
@@ -57,8 +57,8 @@ public class AddCommandTest {
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
+        Person alice = new FlashcardBuilder().withName("Alice").build();
+        Person bob = new FlashcardBuilder().withName("Bob").build();
         AddCommand addAliceCommand = new AddCommand(alice);
         AddCommand addBobCommand = new AddCommand(bob);
 
