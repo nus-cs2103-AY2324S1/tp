@@ -2,15 +2,21 @@ package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LINKEDIN;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SECONDARY_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
+
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Birthday;
@@ -21,13 +27,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Tag;
-
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
 
 /**
  * Changes the remark of an existing person in the address book.
@@ -91,7 +90,8 @@ public class AddAltCommand extends Command {
         Set<Tag> tags = personToEdit.getTags();
         Optional<Birthday> birthday = personToEdit.getBirthday();
         Linkedin updatedLinkedin = personToEdit.getLinkedin().orElse(addAltPersonDescriptor.getLinkedin());
-        Email updatedSecondaryEmail = personToEdit.getSecondaryEmail().orElse(addAltPersonDescriptor.getSecondaryEmail());
+        Email updatedSecondaryEmail = personToEdit.getSecondaryEmail()
+                        .orElse(addAltPersonDescriptor.getSecondaryEmail());
         Telegram updatedTelegram = personToEdit.getTelegram().orElse(addAltPersonDescriptor.getTelegram());
 
         return new Person(name, phone, email, address, birthday, Optional.ofNullable(updatedLinkedin),
@@ -113,6 +113,10 @@ public class AddAltCommand extends Command {
                 && addAltPersonDescriptor.equals(otherAddAltCommand.addAltPersonDescriptor);
     }
 
+    /**
+     * Stores the alternative contact details to add the person with. Each non-empty field value will replace the
+     * corresponding field value of the person.
+     */
     public static class AddAltPersonDescriptor {
         private Name name;
         private Phone phone;
@@ -139,13 +143,6 @@ public class AddAltCommand extends Command {
             setSecondaryEmail(toCopy.secondaryEmail);
             setTelegram(toCopy.telegram);
             setTags(toCopy.tags);
-        }
-
-        /**
-         * Returns true if at least one field is edited.
-         */
-        public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
         }
 
         public void setName(Name name) {

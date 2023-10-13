@@ -3,6 +3,10 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents a Person's telegram in the address book.
+ * Is valid as declared in {@link #isValidTelegram(String)}
+ */
 public class Telegram {
     public static final String MESSAGE_CONSTRAINTS = "Telegram can take any values, and it should not be blank";
 

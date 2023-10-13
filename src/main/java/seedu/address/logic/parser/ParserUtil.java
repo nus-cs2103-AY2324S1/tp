@@ -97,6 +97,12 @@ public class ParserUtil {
         return new Email(trimmedEmail);
     }
 
+    /**
+     * Parses a {@code String linkedin} into an {@code Linkedin}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code linkedin} is invalid.
+     */
     public static Linkedin parseLinkedin(String linkedin) throws ParseException {
         requireNonNull(linkedin);
         String trimmedLinkedin = linkedin.trim();
@@ -106,6 +112,12 @@ public class ParserUtil {
         return new Linkedin(trimmedLinkedin);
     }
 
+    /**
+     * Parses a {@code String telegram} into an {@code Telegram}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code telegram} is invalid.
+     */
     public static Telegram parseTelegram(String telegram) throws ParseException {
         requireNonNull(telegram);
         String trimmedTelegram = telegram.trim();

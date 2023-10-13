@@ -12,11 +12,10 @@ import seedu.address.logic.commands.AddAltCommand;
 import seedu.address.logic.commands.AddAltCommand.AddAltPersonDescriptor;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Linkedin;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Telegram;
 
+/**
+ * Parses input arguments and creates a new AddAltCommand object
+ */
 public class AddAltCommandParser {
 
     /**
@@ -47,7 +46,8 @@ public class AddAltCommandParser {
             addAltPersonDescriptor.setLinkedin(ParserUtil.parseLinkedin(argMultimap.getValue(PREFIX_LINKEDIN).get()));
         }
         if (argMultimap.getValue(PREFIX_SECONDARY_EMAIL).isPresent()) {
-            addAltPersonDescriptor.setSecondaryEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_SECONDARY_EMAIL).get()));
+            addAltPersonDescriptor.setSecondaryEmail(ParserUtil.parseEmail(argMultimap
+                    .getValue(PREFIX_SECONDARY_EMAIL).get()));
         }
         if (argMultimap.getValue(PREFIX_TELEGRAM).isPresent()) {
             addAltPersonDescriptor.setTelegram(ParserUtil.parseTelegram(argMultimap.getValue(PREFIX_TELEGRAM).get()));
