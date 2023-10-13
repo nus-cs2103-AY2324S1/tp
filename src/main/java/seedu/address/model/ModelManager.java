@@ -189,7 +189,7 @@ public class ModelManager implements Model {
         Person person =addressBook.getPerson(personName);
         Group group = addressBook.getGroup(groupName);
         this.assignGroup(person, group);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        forceUpdateList();
         Pair<Person, Group> output = new Pair<>(person, group);
         return output;
     }
@@ -211,6 +211,7 @@ public class ModelManager implements Model {
         Person person = addressBook.getPerson(personName);
         Group group = addressBook.getGroup(groupName);
         this.unassignGroup(person, group);
+        forceUpdateList();
         Pair<Person, Group> output = new Pair<>(person, group);
         return output;
     }
@@ -224,6 +225,11 @@ public class ModelManager implements Model {
     private void unassignGroup(Person person, Group group) throws CommandException {
         group.removePerson(person);
         person.removeGroup(group);
+    }
+
+    private void forceUpdateList() {
+        updateFilteredPersonList(user -> false);
+        updateFilteredPersonList(user -> true);
     }
 
     @Override
