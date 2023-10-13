@@ -11,6 +11,8 @@ import seedu.flashlingo.logic.commands.CommandResult;
 import seedu.flashlingo.logic.commands.exceptions.CommandException;
 import seedu.flashlingo.model.NewModel;
 import seedu.flashlingo.model.flashcard.FlashCard;
+import seedu.flashlingo.model.flashcard.OriginalWord;
+import seedu.flashlingo.model.flashcard.Translation;
 
 /**
  * Adds a person to the address book.
@@ -32,13 +34,13 @@ public class AddCommand extends NewCommand {
     public static final String MESSAGE_DUPLICATE_CARD = "This flashcard already exists";
 
     private final FlashCard toAdd;
-    private String original;
-    private String translated;
+    private OriginalWord original;
+    private Translation translated;
 
     /**
      * Creates an AddCommand to add the specified {@code FlashCard}
      */
-    public AddCommand(String original, String translated) {
+    public AddCommand(OriginalWord original, Translation translated) {
         this.original = original;
         this.translated = translated;
         this.toAdd = new FlashCard(original, translated, new Date(), 1);
