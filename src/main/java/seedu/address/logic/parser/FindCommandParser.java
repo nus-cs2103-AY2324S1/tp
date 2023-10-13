@@ -4,18 +4,16 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Stream;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.StatusContainsKeywordsPredicate;
 
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Stream;
+
 
 
 /**
@@ -56,14 +54,14 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @param keywordsList A list of keywords, where each element may contain multiple words.
      * @return An array of strings where each element represents an individual keyword.
      *
-     * The method first converts the list of keywords into a string representation,
-     * e.g., [Alex, Yeoh] (including square brackets). It then removes the square brackets
-     * from the string representation, resulting in a cleaned string, e.g., Alex, Yeoh (no square brackets).
-     * Finally, the cleaned string is split into an array of strings, where each word separated
-     * by a whitespace or comma is considered a single element.
+     *     The method first converts the list of keywords into a string representation,
+     *     e.g., [Alex, Yeoh] (including square brackets). It then removes the square brackets
+     *     from the string representation, resulting in a cleaned string, e.g., Alex, Yeoh (no square brackets).
+     *     Finally, the cleaned string is split into an array of strings, where each word separated
+     *     by a whitespace or comma is considered a single element.
      *
-     * Example:
-     * If keywordsList is ["John Doe"], the returned array will be ["John", "Doe"].
+     *     Example:
+     *     If keywordsList is ["John Doe"], the returned array will be ["John", "Doe"].
      */
     private String[] parseKeywordsList(List<String> keywordsList) {
         String list = keywordsList.toString();

@@ -25,6 +25,9 @@ public class FindCommand extends Command {
     private final NameContainsKeywordsPredicate namePredicate;
     private final StatusContainsKeywordsPredicate statusPredicate;
 
+    /**
+     * Creates an FindCommand to find the specified {@code Person}
+     */
     public FindCommand(NameContainsKeywordsPredicate namePredicate, StatusContainsKeywordsPredicate statusPredicate) {
         this.namePredicate = namePredicate;
         this.statusPredicate = statusPredicate;
@@ -54,7 +57,12 @@ public class FindCommand extends Command {
         }
 
         FindCommand otherFindCommand = (FindCommand) other;
-        return namePredicate.equals(otherFindCommand.namePredicate) && statusPredicate.equals(otherFindCommand.statusPredicate);
+        if (statusPredicate != null) {
+            return namePredicate.equals(otherFindCommand.namePredicate)
+                    && statusPredicate.equals(otherFindCommand.statusPredicate);
+        }
+        return namePredicate.equals(otherFindCommand.namePredicate);
+
     }
 
     @Override

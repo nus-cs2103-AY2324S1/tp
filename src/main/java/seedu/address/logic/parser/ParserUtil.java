@@ -123,15 +123,9 @@ public class ParserUtil {
         return tagSet;
     }
 
-    public static Set<String> parseNames(Collection<String> names) throws ParseException {
-        requireNonNull(names);
-        final Set<String> nameSet = new HashSet<>();
-        for (String name : names) {
-            nameSet.add(parseName(name).toString());
-        }
-        return nameSet;
-    }
-
+    /**
+     * Parses {@code Collection<String> status} into a {@code Set<String> of status}.
+     */
     public static Set<String> parseStatus(Collection<String> statusList) throws ParseException {
         requireNonNull(statusList);
         final Set<String> statusSet = new HashSet<>();
@@ -142,11 +136,7 @@ public class ParserUtil {
             }
             statusSet.add(status);
         }
-//        if (statusSet.isEmpty()) {
-//            return null;
-//        }
         return statusSet;
-
     }
 
 }

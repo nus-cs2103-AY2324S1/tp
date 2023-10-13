@@ -8,6 +8,8 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Status;
+import seedu.address.model.person.StatusTypes;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -26,6 +28,7 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Set<Tag> tags;
+    private Status status;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -36,6 +39,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        status = new Status(); // default status is preliminary
     }
 
     /**
@@ -86,6 +90,30 @@ public class PersonBuilder {
      */
     public PersonBuilder withEmail(String email) {
         this.email = new Email(email);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Status} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withStatus(String status) {
+        switch (status) {
+        case "Preliminary":
+            this.status.setStatusType(StatusTypes.PRELIMINARY);
+            break;
+        case "Interviewed":
+            this.status.setStatusType(StatusTypes.INTERVIEWED);
+            break;
+        case "Rejected":
+            this.status.setStatusType(StatusTypes.REJECTED);
+            break;
+        case "Offered":
+            this.status.setStatusType(StatusTypes.OFFERED);
+            break;
+        default:
+            this.status.setStatusType(StatusTypes.PRELIMINARY);
+        }
+        System.out.println(this.status);
         return this;
     }
 
