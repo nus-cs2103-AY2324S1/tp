@@ -12,6 +12,9 @@ import java.util.stream.Stream;
 import transact.logic.commands.AddTransactionCommand;
 import transact.logic.parser.exceptions.ParseException;
 import transact.model.transaction.Transaction;
+import transact.model.transaction.info.Amount;
+import transact.model.transaction.info.Description;
+import transact.model.transaction.info.TransactionId;
 
 /**
  * Parses input arguments and creates a new AddStaffCommand object
@@ -19,7 +22,8 @@ import transact.model.transaction.Transaction;
 public class AddTransactionCommandParser implements Parser<AddTransactionCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddStaffCommand
+     * Parses the given {@code String} of arguments in the context of the
+     * AddStaffCommand
      * and returns an AddStaffCommand object for execution.
      *
      * @throws ParseException
@@ -29,7 +33,6 @@ public class AddTransactionCommandParser implements Parser<AddTransactionCommand
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TYPE, PREFIX_DESCRIPTION,
                 PREFIX_AMOUNT, PREFIX_DATE, PREFIX_STAFF);
 
-
         if (!arePrefixesPresent(argMultimap, PREFIX_TYPE, PREFIX_DESCRIPTION, PREFIX_AMOUNT, PREFIX_DATE,
                 PREFIX_STAFF)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -38,15 +41,21 @@ public class AddTransactionCommandParser implements Parser<AddTransactionCommand
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TYPE, PREFIX_DESCRIPTION, PREFIX_AMOUNT, PREFIX_DATE);
-        /* Edit this when Transaction class is done.
-        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_TYPE).get());
-        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        /*
+         * Edit this when Transaction class is done.
+         * Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_TYPE).get());
+         * Phone phone =
+         * ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
+         * Email email =
+         * ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
+         * Address address =
+         * ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
+         * Set<Tag> tagList =
+         * ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
          */
 
-        Transaction transaction = new Transaction();
+        Transaction transaction = new Transaction(new TransactionId(), new Description("Test Description"),
+                new Amount(10));
 
         return new AddTransactionCommand(transaction);
     }
