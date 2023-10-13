@@ -53,6 +53,7 @@ public class Priority {
      * Returns true if a given priority level is valid.
      */
     public static boolean isValidPriority(PriorityLevel priorityLevel) {
+        requireNonNull(priorityLevel);
         return priorityLevel != PriorityLevel.INVALID;
     }
 
@@ -64,7 +65,7 @@ public class Priority {
         case MEDIUM:
             return "Medium";
         case LOW:
-            return "LOW";
+            return "Low";
         default:
             return "Invalid priority level";
         }
@@ -81,8 +82,8 @@ public class Priority {
             return false;
         }
 
-        Priority otherPhone = (Priority) other;
-        return value.equals(otherPhone.value);
+        Priority otherPriority = (Priority) other;
+        return value.equals(otherPriority.value);
     }
 
     @Override

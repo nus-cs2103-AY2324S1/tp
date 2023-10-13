@@ -2,12 +2,14 @@ package networkbook.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
 import networkbook.commons.core.index.Index;
 import networkbook.logic.Messages;
+import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.model.Model;
 import networkbook.model.ModelManager;
 import networkbook.model.NetworkBook;
@@ -59,6 +61,23 @@ public class AddCommandTest {
         Model expectedModel = new ModelManager(new NetworkBook(model.getNetworkBook()), new UserPrefs());
 
         CommandTestUtil.assertCommandSuccess(addCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_multipleEntriesForUniqueField_commandException() throws Exception {
+        CommandTestUtil.showPersonAtIndex(model, TypicalIndexes.INDEX_FIRST_PERSON);
+
+        Person personInFilteredList = model.getFilteredPersonList()
+                .get(TypicalIndexes.INDEX_FIRST_PERSON.getZeroBased());
+
+        AddCommand addCommand = new AddCommand(TypicalIndexes.INDEX_FIRST_PERSON,
+                new EditPersonDescriptorBuilder().withPriority(CommandTestUtil.VALID_PRIORITY_AMY).build());
+
+        assertThrows(CommandException.class, () -> {
+            addCommand.execute(model);
+            addCommand.execute(model);
+        });
+
     }
 
     @Test

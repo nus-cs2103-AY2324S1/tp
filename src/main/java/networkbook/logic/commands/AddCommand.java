@@ -54,7 +54,7 @@ public class AddCommand extends Command {
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * Creates a CreateCommand to create the specified {@code Person}
+     * Creates an AddCommand to add information about the contact at {@code Index}
      *
      * @param index of the contact to add information about
      * @param editPersonDescriptor details to add to the contact
@@ -89,14 +89,13 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Person} with details in {@code editPersonDescriptor}
-     * added to {@code personToEdit}.
+     * Adds details from {@code editPersonDescriptor} and returns the {@code Person} after adding details.
      */
     private Person addInfoToPerson(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor)
             throws CommandException {
         assert personToAddInfo != null;
 
-        Name updatedName = personToAddInfo.getName();
+        Name updatedName = personToAddInfo.getName(); // name cannot be added
         Phone updatedPhone = addPhone(personToAddInfo, editPersonDescriptor);
         UniqueList<Email> updatedEmails = addEmails(personToAddInfo, editPersonDescriptor);
         Address updatedAddress = addAddress(personToAddInfo, editPersonDescriptor);
