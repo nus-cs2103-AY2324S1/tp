@@ -1,7 +1,12 @@
 package seedu.lovebook.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.lovebook.logic.parser.CliSyntax.*;
+import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_AGE;
+import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_GENDER;
+import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HEIGHT;
+import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_INCOME;
+import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.lovebook.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -17,7 +22,12 @@ import seedu.lovebook.commons.util.ToStringBuilder;
 import seedu.lovebook.logic.Messages;
 import seedu.lovebook.logic.commands.exceptions.CommandException;
 import seedu.lovebook.model.Model;
-import seedu.lovebook.model.person.*;
+import seedu.lovebook.model.person.Age;
+import seedu.lovebook.model.person.Date;
+import seedu.lovebook.model.person.Gender;
+import seedu.lovebook.model.person.Height;
+import seedu.lovebook.model.person.Income;
+import seedu.lovebook.model.person.Name;
 import seedu.lovebook.model.tag.Tag;
 
 /**

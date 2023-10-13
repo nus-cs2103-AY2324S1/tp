@@ -8,8 +8,8 @@ import static seedu.lovebook.commons.util.AppUtil.checkArgument;
  */
 public class Income {
 
-    public static final String MESSAGE_CONSTRAINTS = "Income can only take on positive values" +
-            ", and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Income can only take on positive values"
+            + ", and it should not be blank";
 
     /*
      * The first character of the lovebook must not be a whitespace,
