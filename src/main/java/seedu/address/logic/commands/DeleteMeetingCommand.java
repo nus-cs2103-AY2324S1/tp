@@ -12,7 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.meeting.Meeting;
 
 /**
- * Adds a meeting to the address book.
+ * Deletes a meeting from the address book.
  */
 public class DeleteMeetingCommand extends Command {
 
