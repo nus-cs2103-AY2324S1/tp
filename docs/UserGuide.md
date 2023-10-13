@@ -19,22 +19,24 @@ organise and manage patient details faster than traditional GUI apps.
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `healthsync.jar` from [here](https://github.com/AY2324S1-CS2103T-T14-4/tp/releases).
+2. Download the latest `healthsync.jar` from [here](https://github.com/AY2324S1-CS2103T-T14-4/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your HealthSync.
+3. Copy the file to the folder you want to use as the _home folder_ for your HealthSync.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar healthsync.jar`
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar healthsync.jar`
    command to run the application.<br>
+
+
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it.
+5. Type the command in the command box and press Enter to execute it.
    e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all patients.
 
-   * `add n/John Doe id/S8943782H w/Psychology p/98114839` : Adds a patient named `John Doe` to HealthSync.
+   * `add n/John Doe id/S8943782H p/98114839` : Adds a patient named `John Doe` to HealthSync.
 
    * `delete n/Alex Yeoh` : Deletes Alex Yeoh details from the current list.
 
@@ -42,7 +44,7 @@ organise and manage patient details faster than traditional GUI apps.
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -57,16 +59,11 @@ organise and manage patient details faster than traditional GUI apps.
 
 * The word `or` indicates that at least one of the fields has to be supplied by the user. 
   The output `or` will return the above field that was supplied by the user.
+* `[field]` are optional tags that can be added after a command.
 
-* [field] … indicate that multiple fields can be supplied by the user.
+* `[field] …` indicate that multiple fields can be supplied by the user.
 
-* [field] … can be in any order.
-
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-
-* Items with `...` after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]...` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+* `[field] …` can be in any order.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -81,12 +78,8 @@ organise and manage patient details faster than traditional GUI apps.
 
 ### Common Shared Fields
 
-Throughout the various commands, you will see parameters of the command given in the form `n/NAME`.
 
-For these parameters, single letter flags such as `n/` tell the program what field you are trying to give the program,
-and the value of the parameters is given in the area written in **ALL-CAPS**.
-
-The 2 identifying parameters are given below:
+The 2 identifying parameters of a patient are given below:
 
 | Tag   | Representative Value  | Example Usage  | General Form in Commands |
 |-------|-----------------------|----------------|--------------------------|
@@ -103,7 +96,6 @@ The 2 identifying parameters are given below:
 | `e/`     | Email Address          | `e/example@a.com`     | `e/EMAIL`                |                                 |
 | `a/`     | Address                | `a/Location, Here Rd` | `a/ADDRESS`              |                                 |
 | `m/`     | Medical History        | `m/Asthmatic`         | `m/MEDICAL_HISTORY`      |                                 |
-| `w/`     | Ward                   | `w/Ward 16A`          | `w/WARD_INFORMATION`     |                                 |
 | `start/` | Appointment Start Time | `start/Nov 11, 9AM`   | `start/APPT_START`       | Must be paired with `/end`      |
 | `end/`   | Appointment End Time   | `end/Nov 11, 12PM`    | `end/APPT_END`           | Must be paired with `/start`    |
 | `t/`     | Tag                    | `t/Emergency`         | `t/TAG`                  | Can have multiple of this field |
@@ -113,7 +105,7 @@ The 2 identifying parameters are given below:
 HealthSync data are saved in the hard disk automatically after any command that changes the data.
 There is no need to save manually.
 
-### Viewing help : `help`
+### Viewing help: `help`
 
 Shows a message explaining how to access the help page.
 
@@ -126,27 +118,27 @@ Format: `help`
 
 Adds a patient into the program, with the given patient information.
 
-A patient's name and IC are required when creating a new entry into the program.
+* A patient's name and IC are required when creating a new entry into the program.
 
-Command format: `add n/NAME id/IC_NUMBER [field] ...`
+Format: `add n/NAME id/IC_NUMBER [field] ...`
 
 Example commands:
- * `add n/Aaron Tan Jun Jie id/S8943782H w/Psychology p/98114839`
+ * `add n/Aaron Tan Jun Jie id/S8943782H p/98114839`
 
 Expected outputs when the command succeeds:
- * `Patient Aaron Tan Jun Jie has been added with the fields: id/S8943782H w/Psychology p/98114839`
+ * `Patient Aaron Tan Jun Jie has been added with the fields: id/S8943782H p/98114839`
 
 Expected outputs when the command fails:
  * `Unable to add the patient to the database: Patient already exists.`
  * `Unable to add the patient to the database: IC required.`
 
-### Listing all persons : `list`
+### Listing all persons: `list`
 
 Shows a list of all persons in the address book.
 
 Format: `list`
 
-### Editing a patient's details : `edit`
+### Editing a patient's details: `edit`
 
 Edits an existing patient's details in the address book.
 
@@ -158,13 +150,15 @@ Edits an existing patient's details in the address book.
 
 Format: `edit n/NAME or id/IC_NUMBER [field] ...`
 
-Examples:
+Example commands:
  * `edit n/John Doe p/91234567 e/johndoe@example.com`
-   * Edits the phone number and email address of patient with name `John Doe` to be `91234567` and
-     `johndoe@example.com` respectively.
 
- * `edit id/S8943782H w/Psychology `
-   * Edits the ward of the patient with id `S8943782H` to be `Psychology`.
+ 
+Expected outputs when the command succeeds:
+* `Patient John Doe has been updated with the fields:  p/91234567 e/johndoe@example.com`
+
+Expected outputs when command fails:
+* `Unable to edit the patient: Patient identification does not exist.`
 
 ### Locating persons by name: `find`
 
@@ -172,17 +166,25 @@ Enables front desk workers to quickly retrieve patient information based on comm
 If no fields are provided, the function returns all the patient’s related information.
 Else, only the details relating to the field are provided.
 
-Search properties:
- * The search is case-insensitive. e.g `hans` will match `Hans`
- * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+ * The search is case-insensitive. e.g `hans` will match `Hans`.
+ * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
  * Only the name or IC number is searched.
- * Only full words will be matched e.g. `Han` will not match `Hans`
+ * Only full words will be matched e.g. `Han` will not match `Hans`.
  * For the name, only persons matching at least one keyword will be returned (i.e. `OR` search).
-   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
 
 Formats:
  1. `find n/NAME` *or* `id/IC_NUMBER`
  2. `find n/NAME [field]` *or* `id/IC_NUMBER [field]`
+
+Example commands:
+* `find n/John` returns `john` and `John Doe`
+* `find id/s894219J p/ a/` returns phone and address of patient with IC number s894219J
+* `find id/S872D` returns `Alex Yeoh`, with IC number `S872D` <br>
+
+
+  ![result for 'find id/S872D'](images/findidS872DResult.png)
+
 
 Expected outputs when the command succeeds:
  * `Patient n/NAME or id/IC_NUMBER: [field] …`
@@ -190,22 +192,23 @@ Expected outputs when the command succeeds:
 Expected output when the command fails:
  * `Unable to find the patient. Check if the patient’s information is correct.`
 
-Examples:
- * `find n/John` returns `john` and `John Doe`
- * `find id/s894219J p/ a/` returns phone and address of patient with IC number s894219J
- * `find id/S872D` returns `Alex Yeoh`, with IC number `S872D` <br>
-   ![result for 'find id/S872D'](images/findidS872DResult.png)
 
 ### Deleting a person or field: `delete`
 
-Deletes the specified person or the fields for the person from HealthSync
+Deletes the specified person or the fields for the person from HealthSync.
+
+* Deletes the person with the specified `n/NAME or id/IC_NUMBER`.
+* The name or ic number must be a valid input.
+* To delete a specified field only instead of the entire person, we indicate the field behind of the identification.
+* If multiple people has the same name, HealthSync will display a list of people with that name together with their IC number.
 
 Format: `delete n/NAME or id/IC_NUMBER [field]`
 
- * Deletes the person with the specified `n/NAME or id/IC_NUMBER`.
- * The name or ic number must be a valid input
- * To delete a specified field only instead of the entire person, we indicate the field behind of the identification
- * If multiple people has the same name, HealthSync will display a list of people with that name together with their IC number.
+Example commands:
+* `delete id/S9987362H` deletes all the details of the person with the specified IC number from HealthSync.
+* `delete n/John Doe` deletes all the details of John Doe from HealthSync.
+* `delete n/John Doe p/` deletes John Doe phone number from his profile.
+
 
 Expected outputs when the command succeeds:
  * `Patient n/NAME or id/IC_NUMBER has been removed from the database`
@@ -214,24 +217,19 @@ Expected outputs when the command succeeds:
 Expected output when the command fails:
  * `Error code’s message (i.e. Invalid NRIC/ Invalid Field(s) / Database Error) `
 
-Examples:
- * `delete id/S9987362H` deletes all the details of the person with the specified IC number from HealthSync.
- * `delete n/John Doe` deletes all the details of John Doe from HealthSync.
- * `delete n/John Doe p/` deletes John Doe phone number from his profile.
-
 <!--
 Original format, can consider using
 list followed by delete 2 deletes the 2nd person in the address book.
 find Betsy followed by delete 1 deletes the 1st person in the results of the find command.
 -->
 
-### Delete all patients : `clear`
+### Delete all patients: `clear`
 
 Deletes all patients from the program.
 
 Format: `clear`
 
-### Exiting the program : `exit`
+### Exiting the program: `exit`
 
 Exits the program.
 
