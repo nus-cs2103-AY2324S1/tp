@@ -121,7 +121,7 @@ Examples:
 
 ### Searching for data : `search`
 
-Search for people whose names contain any of the given keywords.
+Search for people whose names contain the given keyword.
 
 Format: `search [KEYWORD]`
 
