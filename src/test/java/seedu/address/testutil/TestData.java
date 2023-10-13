@@ -79,7 +79,7 @@ public class TestData {
     public static final Index INDEX_SECOND_PERSON = Index.fromOneBased(2);
     public static final Index INDEX_THIRD_PERSON = Index.fromOneBased(3);
 
-    // These are used for JsonUtilsTest cases.
+    // These are used for JsonUtilTest test cases
     public static final String JSON_STRING_REPRESENTATION = String.format("{%n"
             + "  \"name\" : \"This is a test class\",%n"
             + "  \"listOfLocalDateTimes\" : "
