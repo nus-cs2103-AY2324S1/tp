@@ -2,8 +2,6 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEDICAL_HISTORY_ANEMIA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEDICAL_HISTORY_OSTEOPOROSIS;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -39,18 +37,18 @@ public class MedicalHistoryTest {
         MedicalHistory medicalHistory = new MedicalHistory(VALID_MEDICAL_HISTORY_OSTEOPOROSIS);
 
         // same values -> returns true
-        assertEquals(medicalHistory,new MedicalHistory(VALID_MEDICAL_HISTORY_OSTEOPOROSIS));
+        assertTrue(medicalHistory.equals(new MedicalHistory(VALID_MEDICAL_HISTORY_OSTEOPOROSIS)));
 
         // same object -> returns true
-        assertEquals(medicalHistory, medicalHistory);
+        assertTrue(medicalHistory.equals(medicalHistory));
 
         // null -> returns false
-        assertNotEquals(medicalHistory, null);
+        assertFalse(medicalHistory.equals(null));
 
         // different types -> returns false
-        assertNotEquals(medicalHistory, VALID_MEDICAL_HISTORY_OSTEOPOROSIS);
+        assertFalse(medicalHistory.equals(VALID_MEDICAL_HISTORY_OSTEOPOROSIS));
 
         // different values -> returns false
-        assertNotEquals(medicalHistory, new MedicalHistory(VALID_MEDICAL_HISTORY_ANEMIA));
+        assertFalse(medicalHistory.equals(new MedicalHistory(VALID_MEDICAL_HISTORY_ANEMIA)));
     }
 }
