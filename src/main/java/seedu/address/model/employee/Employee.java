@@ -1,9 +1,9 @@
 package seedu.address.model.employee;
 
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import java.util.Set;
+
+import static seedu.address.commons.util.CollectionUtil.isAnyNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 public class Employee {
 
@@ -18,4 +18,20 @@ public class Employee {
     private final JoinDate joinDate;
     private final Salary salary;
     private final AnnualLeave annualLeave;
+
+    /**
+     * Every field must be present and not null.
+     */
+    public Employee(Name name, Phone phone, Email email, Address address, BankAccount bankAccount, JoinDate joinDate, Salary salary, AnnualLeave annualLeave) {
+        requireAllNonNull(name, phone, email, address, bankAccount, joinDate, salary, annualLeave);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.bankAccount = bankAccount;
+        this.joinDate = joinDate;
+        this.salary = salary;
+        this.annualLeave = annualLeave;
+    }
+
 }
