@@ -14,7 +14,10 @@ import seedu.staffsnap.model.tag.Tag;
  * Represents an Employee in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Employee {
+public class Employee implements Comparable<Employee> {
+
+    // Field to compare by, default to Name
+    private static Descriptor descriptor = Descriptor.NAME;
 
     // Identity fields
     private final Name name;
@@ -114,12 +117,34 @@ public class Employee {
     }
 
     /**
+     * Update the descriptor for all Employees.
+     * @param newDescriptor
+     */
+    public static void setComparisonField(Descriptor newDescriptor) {
+        descriptor = newDescriptor;
+    }
+
+    /**
      * @param o the Employee to be compared.
      * @return the value 0 if the argument Name is equal to this Name; a value less than 0 if this Name is
-     * lexicographically less than the Name argument; and a value greater than 0 if this string is lexicographically
-     * greater than the Name argument.
+     *      lexicographically less than the Name argument; and a value greater than 0 if this string is
+     *      lexicographically greater than the Name argument.
      */
     public int compareByName(Employee o) {
         return this.name.compareTo(o.name);
+    }
+
+    /**
+     * @param o the object to be compared.
+     * @return
+     */
+    @Override
+    public int compareTo(Employee o) {
+        switch (descriptor) {
+        case NAME:
+            return compareByName(o);
+        default:
+            return 0;
+        }
     }
 }

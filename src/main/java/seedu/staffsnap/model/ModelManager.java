@@ -11,6 +11,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.staffsnap.commons.core.GuiSettings;
 import seedu.staffsnap.commons.core.LogsCenter;
+import seedu.staffsnap.logic.commands.exceptions.CommandException;
+import seedu.staffsnap.model.employee.Descriptor;
 import seedu.staffsnap.model.employee.Employee;
 
 /**
@@ -126,6 +128,11 @@ public class ModelManager implements Model {
     public void updateFilteredEmployeeList(Predicate<Employee> predicate) {
         requireNonNull(predicate);
         filteredEmployees.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateSortedEmployeeList(Descriptor descriptor) throws CommandException {
+        Employee.setComparisonField(descriptor);
     }
 
     @Override

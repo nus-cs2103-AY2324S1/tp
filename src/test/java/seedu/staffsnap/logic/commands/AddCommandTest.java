@@ -22,6 +22,7 @@ import seedu.staffsnap.model.AddressBook;
 import seedu.staffsnap.model.Model;
 import seedu.staffsnap.model.ReadOnlyAddressBook;
 import seedu.staffsnap.model.ReadOnlyUserPrefs;
+import seedu.staffsnap.model.employee.Descriptor;
 import seedu.staffsnap.model.employee.Employee;
 import seedu.staffsnap.testutil.EmployeeBuilder;
 
@@ -156,6 +157,11 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredEmployeeList(Predicate<Employee> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateSortedEmployeeList(Descriptor descriptor) {
             throw new AssertionError("This method should not be called.");
         }
     }

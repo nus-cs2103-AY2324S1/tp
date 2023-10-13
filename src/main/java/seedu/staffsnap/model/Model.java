@@ -5,6 +5,8 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.staffsnap.commons.core.GuiSettings;
+import seedu.staffsnap.logic.commands.exceptions.CommandException;
+import seedu.staffsnap.model.employee.Descriptor;
 import seedu.staffsnap.model.employee.Employee;
 
 /**
@@ -85,4 +87,10 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredEmployeeList(Predicate<Employee> predicate);
+
+    /**
+     * Updates the Descriptor for sorting employees.
+     * @ throws CommandException if an invalid field is given.
+     */
+    void updateSortedEmployeeList(Descriptor descriptor) throws CommandException;
 }

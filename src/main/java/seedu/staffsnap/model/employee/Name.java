@@ -67,8 +67,8 @@ public class Name implements Comparable<Name> {
     /**
      * @param o the object to be compared.
      * @return the value 0 if the argument Name is equal to this Name; a value less than 0 if this Name is
-     * lexicographically less than the Name argument; and a value greater than 0 if this string is lexicographically
-     * greater than the Name argument.
+     *      lexicographically less than the Name argument; and a value greater than 0 if this string is
+     *      lexicographically greater than the Name argument.
      */
     @Override
     public int compareTo(Name o) {
