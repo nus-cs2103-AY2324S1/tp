@@ -2,7 +2,9 @@
 
 ![Ui](docs/images/Ui.png)
 
-* This is **an animal foster manager for non-profit animal shelters** who currently do not have a good logistical workflow to keep track of foster families.<br>
+* This is **an application for managing animal foster families in non-profit animal shelters** which currently do not have a good logistical workflow to do so.<br>
+* Target user: Foster manager of the animal shelter
+* 
   Example usages:
   * as a streamlined workflow to **manage list of fosterers**
   * provides an **intuitive** way to manage fosterers' details, such as their **availability** and **animals they can foster**
