@@ -1,5 +1,6 @@
 package seedu.address.logic;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -45,23 +46,31 @@ public class Messages {
                 .append(person.getAddress())
                 .append("; Housing: ");
 
-        if (person.getHousing() != null) {
-            builder.append(person.getHousing());
+        if (!person.getHousing().equals(Optional.empty())) {
+            builder.append(person.getHousing().get().value);
+        } else {
+            builder.append("nil");
         }
 
         builder.append("; Availability: ");
-        if (person.getAvailability() != null) {
-            builder.append(person.getAvailability());
+        if (!person.getAvailability().equals(Optional.empty())) {
+            builder.append(person.getAvailability().get().value);
+        } else {
+            builder.append("nil");
         }
 
         builder.append("; Animal name: ");
-        if (person.getAnimalName() != null) {
-            builder.append(person.getAnimalName());
+        if (!person.getAnimalName().equals(Optional.empty())) {
+            builder.append(person.getAnimalName().get().fullName);
+        } else {
+            builder.append("nil");
         }
 
         builder.append("; Animal type: ");
-        if (person.getAnimalType() != null) {
-            builder.append(person.getAnimalType());
+        if (!person.getAnimalType().equals(Optional.empty())) {
+            builder.append(person.getAnimalType().get().value);
+        } else {
+            builder.append("nil");
         }
 
         builder.append("; Tags: ");
