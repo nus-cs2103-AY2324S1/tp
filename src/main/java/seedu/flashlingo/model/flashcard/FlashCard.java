@@ -1,11 +1,6 @@
 package seedu.flashlingo.model.flashcard;
 
-import seedu.flashlingo.model.tag.Tag;
-
-import java.util.Collections;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Represents each flashcard
@@ -19,8 +14,6 @@ public class FlashCard {
     private final Translation translatedWord;
     private Date whenToReview; // Date the flashcard was needs to be reviewed
     private ProficiencyLevel level; // How many times successfully remembered
-    private boolean toDelete = false;
-
     /**
      * Constructor for Flashcard
      *
@@ -35,7 +28,6 @@ public class FlashCard {
         this.translatedWord = translatedWord;
         this.originalWord = originalWord;
     }
-
     public OriginalWord getOriginalWord() {
         return originalWord;
     }
@@ -51,11 +43,6 @@ public class FlashCard {
     public ProficiencyLevel getLevel() {
         return level;
     }
-
-    public boolean getToDelete() {
-        return toDelete;
-    }
-
     /**
      * Returns true if both flashcards have the same originalWord and translatedWord.
      * This defines a weaker notion of equality between two flashcards.
@@ -68,25 +55,6 @@ public class FlashCard {
         return otherFlashCard != null
             && otherFlashCard.getOriginalWord().equals(getOriginalWord());
     }
-
-    /**
-     * Will update the whenToRead based on the algorithm and the level
-     * If hasRemembered is true, will increment level by one and update whenToRead
-     * Else, update whenToRead with original level
-     *
-     * @param hasRemembered If the user has successfully remembered the translated word
-     */
-    public void updateLastRead(Boolean hasRemembered) {
-        if (hasRemembered) {
-            this.level.upgradeLevel();
-        } else {
-            this.level.downgradeLevel();
-        }
-        toDelete = this.level.toDelete(); // If remembered enough, delete from the list
-        // Current date in ms + 1 day per level in ms
-        this.whenToReview = new Date(new Date().getTime() + this.level.calculateNextReviewInterval());
-    }
-
     /**
      * Formats Flashcard for writing to textFile
      *
