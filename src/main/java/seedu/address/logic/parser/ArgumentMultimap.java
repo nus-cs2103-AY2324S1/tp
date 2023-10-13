@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.Messages;
@@ -72,7 +74,20 @@ public class ArgumentMultimap {
                 .toArray(Prefix[]::new);
 
         if (duplicatedPrefixes.length > 0) {
-            throw new ParseException(Messages.getErrorMessageForDuplicatePrefixes(duplicatedPrefixes));
+            throw new ParseException(getErrorMessageForDuplicatePrefixes(duplicatedPrefixes));
         }
     }
+
+    /**
+     * Returns an error message indicating the duplicate prefixes.
+     */
+    public static String getErrorMessageForDuplicatePrefixes(Prefix... duplicatePrefixes) {
+        assert duplicatePrefixes.length > 0;
+
+        Set<String> duplicateFields =
+                Stream.of(duplicatePrefixes).map(Prefix::toString).collect(Collectors.toSet());
+
+        return Messages.MESSAGE_DUPLICATE_FIELDS + String.join(" ", duplicateFields);
+    }
+
 }
