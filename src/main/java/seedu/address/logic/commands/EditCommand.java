@@ -112,7 +112,7 @@ public class EditCommand extends Command {
         SecLevel updatedSecLevel = editPersonDescriptor.getSecLevel().orElse(studentToEdit.getSecLevel());
         MrtStation updatedNearestMrtStation = editPersonDescriptor
                 .getNearestMrtStation().orElse(studentToEdit.getNearestMrtStation());
-        Set<Subject> updatedSubjects = editPersonDescriptor.getTags().orElse(studentToEdit.getSubjects());
+        Set<Subject> updatedSubjects = editPersonDescriptor.getSubjects().orElse(studentToEdit.getSubjects());
 
         return new Student(updatedName, updatedPhone, updatedEmail,
                 updatedAddress, updatedGender, updatedSecLevel,
@@ -171,7 +171,7 @@ public class EditCommand extends Command {
             setGender(toCopy.gender);
             setSecLevel(toCopy.secLevel);
             setNearestMrtStation(toCopy.nearestMrtStation);
-            setTags(toCopy.subjects);
+            setSubjects(toCopy.subjects);
         }
 
         /**
@@ -242,7 +242,7 @@ public class EditCommand extends Command {
          * Sets {@code subjects} to this object's {@code subjects}.
          * A defensive copy of {@code subjects} is used internally.
          */
-        public void setTags(Set<Subject> subjects) {
+        public void setSubjects(Set<Subject> subjects) {
             this.subjects = (subjects != null) ? new HashSet<>(subjects) : null;
         }
 
@@ -251,7 +251,7 @@ public class EditCommand extends Command {
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code subjects} is null.
          */
-        public Optional<Set<Subject>> getTags() {
+        public Optional<Set<Subject>> getSubjects() {
             return (subjects != null) ? Optional.of(Collections.unmodifiableSet(subjects)) : Optional.empty();
         }
 

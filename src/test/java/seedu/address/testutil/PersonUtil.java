@@ -2,8 +2,11 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEAREST_MRT_STATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SEC_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 
 import java.util.Set;
@@ -34,6 +37,9 @@ public class PersonUtil {
         sb.append(PREFIX_PHONE + student.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + student.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + student.getAddress().value + " ");
+        sb.append(PREFIX_GENDER + student.getGender().value + " ");
+        sb.append(PREFIX_SEC_LEVEL + student.getSecLevel().value + " ");
+        sb.append(PREFIX_NEAREST_MRT_STATION + student.getNearestMrtStation().mrtStationName + " ");
         student.getSubjects().stream().forEach(
             s -> sb.append(PREFIX_SUBJECT + s.subjectName + " ")
         );
@@ -49,8 +55,13 @@ public class PersonUtil {
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
-        if (descriptor.getTags().isPresent()) {
-            Set<Subject> subjects = descriptor.getTags().get();
+        descriptor.getGender().ifPresent(gender -> sb.append(PREFIX_GENDER).append(gender.value).append(" "));
+        descriptor.getSecLevel().ifPresent(secLevel ->
+                sb.append(PREFIX_SEC_LEVEL).append(secLevel.value).append(" "));
+        descriptor.getNearestMrtStation().ifPresent(mrtStation ->
+                sb.append(PREFIX_NEAREST_MRT_STATION).append(mrtStation.mrtStationName).append(" "));
+        if (descriptor.getSubjects().isPresent()) {
+            Set<Subject> subjects = descriptor.getSubjects().get();
             if (subjects.isEmpty()) {
                 sb.append(PREFIX_SUBJECT);
             } else {
