@@ -32,6 +32,9 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+
+    // TODO: to be removed
+    private PersonListPanel filler;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -114,7 +117,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        PersonListPanel filler = new PersonListPanel(logic.getFilteredPersonList());
+        filler = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
         appointmentListPanelPlaceholder.getChildren().add(filler.getRoot());
 
