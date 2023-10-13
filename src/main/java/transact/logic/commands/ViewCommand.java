@@ -5,6 +5,7 @@ import static transact.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static transact.model.Model.PREDICATE_SHOW_ALL_TRANSACTIONS;
 
 import transact.model.Model;
+import transact.ui.MainWindow.TabWindow;
 
 /**
  * Lists all persons in the address book to the user.
@@ -16,6 +17,7 @@ public class ViewCommand extends Command {
     public enum ViewType {
         STAFF, TRANSACTION
     }
+
     public static final String COMMAND_WORD = "view";
 
     public static final String MESSAGE_SUCCESS_STAFF = "Listed all staff";
@@ -36,11 +38,11 @@ public class ViewCommand extends Command {
         requireNonNull(model);
         if (type == ViewType.TRANSACTION) {
             model.updateFilteredTransactionList(PREDICATE_SHOW_ALL_TRANSACTIONS);
-            return new CommandResult(MESSAGE_SUCCESS_TRANSACTIONS, 1);
+            return new CommandResult(MESSAGE_SUCCESS_TRANSACTIONS, TabWindow.TRANSACTIONS);
         }
 
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(MESSAGE_SUCCESS_STAFF, 2);
+        return new CommandResult(MESSAGE_SUCCESS_STAFF, TabWindow.ADDRESSBOOK);
     }
 
     @Override

@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import transact.model.Model;
 import transact.model.ModelManager;
+import transact.ui.MainWindow.TabWindow;
 
 public class HelpCommandTest {
     private Model model = new ModelManager();
@@ -14,7 +15,7 @@ public class HelpCommandTest {
 
     @Test
     public void execute_help_success() {
-        CommandResult expectedCommandResult = new CommandResult(SHOWING_HELP_MESSAGE, 0, true, false);
+        CommandResult expectedCommandResult = new CommandResult(SHOWING_HELP_MESSAGE, TabWindow.CURRENT, true, false);
         assertCommandSuccess(new HelpCommand(), model, expectedCommandResult, expectedModel);
     }
 }

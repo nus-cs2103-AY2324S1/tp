@@ -1,6 +1,7 @@
 package transact.logic.commands;
 
 import transact.model.Model;
+import transact.ui.MainWindow.TabWindow;
 
 /**
  * Terminates the program.
@@ -13,7 +14,7 @@ public class ExitCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(MESSAGE_EXIT_ACKNOWLEDGEMENT, 0, false, true);
+        return new CommandResult(MESSAGE_EXIT_ACKNOWLEDGEMENT, TabWindow.CURRENT, false, true);
     }
 
 }

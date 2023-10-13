@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.Objects;
 
 import transact.commons.util.ToStringBuilder;
+import transact.ui.MainWindow.TabWindow;
 
 /**
  * Represents the result of a command execution.
@@ -13,7 +14,7 @@ public class CommandResult {
 
     private final String feedbackToUser;
 
-    private final int tabIndex;
+    private final TabWindow tabWindow;
 
     /** Help information should be shown to the user. */
     private final boolean showHelp;
@@ -24,20 +25,20 @@ public class CommandResult {
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, int tabIndex, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, TabWindow tabWindow, boolean showHelp, boolean exit) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
-        this.tabIndex = tabIndex;
+        this.tabWindow = tabWindow;
         this.showHelp = showHelp;
         this.exit = exit;
     }
 
     /**
      * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
-     * ,switches to the specified {@code tabIndex}
+     * ,switches to the specified {@code tabWindow}
      * and other fields set to their default value.
      */
-    public CommandResult(String feedbackToUser, int tabIndex) {
-        this(feedbackToUser, tabIndex, false, false);
+    public CommandResult(String feedbackToUser, TabWindow tabWindow) {
+        this(feedbackToUser, tabWindow, false, false);
     }
 
     /**
@@ -45,15 +46,15 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, 0, false, false);
+        this(feedbackToUser, TabWindow.CURRENT, false, false);
     }
 
     public String getFeedbackToUser() {
         return feedbackToUser;
     }
 
-    public int getTabIndex() {
-        return tabIndex;
+    public TabWindow getTabWindow() {
+        return tabWindow;
     }
 
     public boolean isShowHelp() {
@@ -83,14 +84,14 @@ public class CommandResult {
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, tabIndex, showHelp, exit);
+        return Objects.hash(feedbackToUser, tabWindow, showHelp, exit);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("feedbackToUser", feedbackToUser)
-                .add("tabIndex", tabIndex)
+                .add("tabWindow", tabWindow)
                 .add("showHelp", showHelp)
                 .add("exit", exit)
                 .toString();
