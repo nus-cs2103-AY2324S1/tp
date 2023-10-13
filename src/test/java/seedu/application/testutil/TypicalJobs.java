@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.application.model.ApplicationBook;
+import seedu.application.model.job.Deadline;
 import seedu.application.model.job.Job;
 
 /**
@@ -20,19 +21,19 @@ import seedu.application.model.job.Job;
 public class TypicalJobs {
 
     public static final Job SOFTWARE_ENGINEER = new JobBuilder().withRole("Software Engineer")
-            .withCompany("Google").build();
+            .withCompany("Google").withDeadline(Deadline.TO_ADD_DEADLINE).build();
     public static final Job TEACHER = new JobBuilder().withRole("Teacher")
-            .withCompany("NUS").build();
+            .withCompany("NUS").withDeadline(Deadline.TO_ADD_DEADLINE).build();
     public static final Job WAITER = new JobBuilder().withRole("Waiter")
-            .withCompany("McDonalds").build();
+            .withCompany("McDonalds").withDeadline(Deadline.TO_ADD_DEADLINE).build();
     public static final Job PILOT = new JobBuilder().withRole("Pilot")
-            .withCompany("Singapore Airlines").build();
+            .withCompany("Singapore Airlines").withDeadline(Deadline.TO_ADD_DEADLINE).build();
     public static final Job POLICE_OFFICER = new JobBuilder().withRole("Police Officer")
-            .withCompany("SPF").build();
+            .withCompany("SPF").withDeadline(Deadline.TO_ADD_DEADLINE).build();
     public static final Job FRUIT_SELLER = new JobBuilder().withRole("Fruit Seller")
-            .withCompany("ABC Fruits").build();
+            .withCompany("ABC Fruits").withDeadline(Deadline.TO_ADD_DEADLINE).build();
     public static final Job GRASS_CUTTER = new JobBuilder().withRole("Grass Cutter")
-            .withCompany("XYZ Gardening").build();
+            .withCompany("XYZ Gardening").withDeadline(Deadline.TO_ADD_DEADLINE).build();
 
     // Manually added
     public static final Job ARTIST = new JobBuilder().withRole("Artist")

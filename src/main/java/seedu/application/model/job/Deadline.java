@@ -13,7 +13,9 @@ import seedu.application.commons.util.AppUtil;
  */
 public class Deadline {
     public static final String MESSAGE_CONSTRAINTS =
-            "Deadline should be in valid DateTime format.";
+            "Deadline should be in valid DateTime format: "
+                    + "MMMM dd yyyy HHmm\n"
+                    + "Eg. Dec 31 2030 1200";
 
     /*
      * The first character of the address must not be a whitespace,
@@ -62,7 +64,7 @@ public class Deadline {
     }
 
     private static boolean isEmptyDeadline(String test) {
-        if (test.equals(TO_ADD_DEADLINE) || test.isEmpty()) {
+        if (test.equals(TO_ADD_DEADLINE)) {
             return true;
         }
         return false;

@@ -43,5 +43,6 @@ public class JobCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         role.setText(job.getRole().description);
         company.setText(job.getCompany().name);
+        deadline.setText(job.getDeadline().deadline);
     }
 }
