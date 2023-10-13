@@ -120,7 +120,8 @@ public class PersonTest {
                 + ", graduating year=" + TypicalPersons.AMY.getGraduatingYear()
                 + ", course=" + TypicalPersons.AMY.getCourse()
                 + ", specialisation=" + TypicalPersons.AMY.getSpecialisation()
-                + ", tags=" + TypicalPersons.AMY.getTags() + ", priority=" + TypicalPersons.AMY.getPriority().get() + "}";
+                + ", tags=" + TypicalPersons.AMY.getTags() + ", priority=" + TypicalPersons.AMY.getPriority().get()
+                + "}";
         assertEquals(expected, TypicalPersons.AMY.toString());
     }
 }
