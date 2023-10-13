@@ -4,12 +4,12 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PATIENT_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICALHISTORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SPECIALTY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.SPECIALIST_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -27,6 +27,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.MedicalHistory;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
@@ -53,6 +54,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
+            + "If the person is a patient, edit their medical history by using the "
+            + PREFIX_MEDICALHISTORY + " prefix. \n"
             + "If the person is a specialist, edit their specialty by using the "
             + PREFIX_SPECIALTY + " prefix. \n"
             + "Example: " + COMMAND_WORD + " "
@@ -69,7 +72,7 @@ public class EditCommand extends Command {
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
+     * @param index                of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
     public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
@@ -113,7 +116,6 @@ public class EditCommand extends Command {
         }
 
         model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 
@@ -129,8 +131,9 @@ public class EditCommand extends Command {
         Email updatedEmail = editPatientDescriptor.getEmail().orElse(patientToEdit.getEmail());
         Address updatedAddress = editPatientDescriptor.getAddress().orElse(patientToEdit.getAddress());
         Set<Tag> updatedTags = editPatientDescriptor.getTags().orElse(patientToEdit.getTags());
-
-        return new Patient(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        MedicalHistory updatedMedicalHistory = editPatientDescriptor.getMedicalHistory()
+                .orElse(patientToEdit.getMedicalHistory());
+        return new Patient(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedMedicalHistory);
     }
 
     /**
@@ -293,7 +296,7 @@ public class EditCommand extends Command {
      * corresponding field value of the patient.
      */
     public static class EditPatientDescriptor extends EditPersonDescriptor {
-        public EditPatientDescriptor() {}
+        private MedicalHistory medicalHistory;
 
         /**
          * Copy constructor.
@@ -301,16 +304,45 @@ public class EditCommand extends Command {
          */
         public EditPatientDescriptor(EditPatientDescriptor toCopy) {
             super(toCopy);
+            setMedicalHistory(toCopy.medicalHistory);
         }
+
+        public EditPatientDescriptor() {}
+        public void setMedicalHistory(MedicalHistory medicalHistory) {
+            this.medicalHistory = medicalHistory;
+        }
+
+        public Optional<MedicalHistory> getMedicalHistory() {
+            return Optional.ofNullable(medicalHistory);
+        }
+
+
+        /**
+         * Copy constructor.
+         * A defensive copy of {@code tags} is used internally.
+         */
 
         @Override
         public boolean equals(Object other) {
-            return super.equals(other);
+            if (super.equals(other) && other instanceof EditPatientDescriptor) {
+                EditPatientDescriptor otherEditPatientDescriptor = (EditPatientDescriptor) other;
+                return Objects.equals(medicalHistory, otherEditPatientDescriptor.medicalHistory);
+            }
+            return false;
         }
         @Override
         public String toString() {
-            return super.toString();
+            String stringToAdd = ", medical history=" + medicalHistory;
+            return StringUtil.addFieldToPersonToString(stringToAdd, super.toString());
         }
+        /**
+         * Returns true if at least one field is edited.
+         */
+        @Override
+        public boolean isAnyFieldEdited() {
+            return super.isAnyFieldEdited() || CollectionUtil.isAnyNonNull(medicalHistory);
+        }
+
     }
 
     /**

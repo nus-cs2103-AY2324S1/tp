@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import static seedu.address.logic.parser.CliSyntax.PATIENT_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICALHISTORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -38,6 +39,7 @@ public class PatientUtil {
         patient.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
+        sb.append(PREFIX_MEDICALHISTORY + patient.getMedicalHistory().value + " ");
         return sb.toString();
     }
 

@@ -1,8 +1,8 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseComplexFailure;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseComplexSuccess;
 
 import java.util.Arrays;
 
@@ -18,7 +18,7 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        assertParseComplexFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 FindCommand.MESSAGE_USAGE), PersonType.PATIENT);
     }
 
@@ -27,10 +27,10 @@ public class FindCommandParserTest {
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand =
                 new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")), PersonType.PATIENT);
-        assertParseSuccess(parser, "Alice Bob", expectedFindCommand, PersonType.PATIENT);
+        assertParseComplexSuccess(parser, "Alice Bob", expectedFindCommand, PersonType.PATIENT);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n Alice \n \t Bob  \t", expectedFindCommand, PersonType.PATIENT);
+        assertParseComplexSuccess(parser, " \n Alice \n \t Bob  \t", expectedFindCommand, PersonType.PATIENT);
     }
 
 }
