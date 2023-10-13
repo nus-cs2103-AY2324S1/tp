@@ -45,13 +45,14 @@ public class DeleteCommand extends Command {
         ObservableList<Person> filteredPersons = model.getFilteredPersonList();
 
         if (filteredPersons.size() < 1) {
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             throw new CommandException(MESSAGE_NO_PERSON_WITH_NAME_FOUND);
         } else if (filteredPersons.size() > 1) {
             filteredPersons = filteredPersons.sorted();
         }
 
         Person personToDelete = filteredPersons.get(0);
-        String[] nameWords = personToDelete.getName().toString().split("\\s+");
+        String[] nameWords = personToDelete.getName().toString().toLowerCase().split("\\s+");
         if (!predicate.equals(new NameContainsKeywordsPredicate(Arrays.asList(nameWords)))) {
             throw new CommandException(MESSAGE_NO_PERSON_WITH_NAME_FOUND);
         }
@@ -63,7 +64,6 @@ public class DeleteCommand extends Command {
                 g.removePerson(personToDelete);
                 g.printGrpMates(); //for debugging purpose, prints the remaining user in each grp after del person
             } catch (CommandException e) {
-                System.out.println("error in line 62 in deleteCommand");
                 throw new RuntimeException();
             }
         });
