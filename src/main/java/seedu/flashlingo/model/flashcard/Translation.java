@@ -28,6 +28,6 @@ public class Translation {
     }
     @Override
     public String toString() {
-        return word;
+        return this.word;
     }
 }
