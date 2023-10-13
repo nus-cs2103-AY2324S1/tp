@@ -99,7 +99,8 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Set<Department> updatedDepartments = editPersonDescriptor.getDepartments().orElse(personToEdit.getDepartments());
+        Set<Department> updatedDepartments = editPersonDescriptor
+                .getDepartments().orElse(personToEdit.getDepartments());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedDepartments);
     }
