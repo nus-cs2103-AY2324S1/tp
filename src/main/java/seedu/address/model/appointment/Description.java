@@ -1,3 +1,5 @@
+package seedu.address.model.appointment;
+
 /**
  * Represents a description of an appointment.
  */
