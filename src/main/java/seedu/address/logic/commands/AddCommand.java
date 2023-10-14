@@ -1,11 +1,11 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSNUMBER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASS_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTNUMBER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -26,15 +26,15 @@ public class AddCommand extends Command {
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_STUDENTNUMBER + "STUDENT NUMBER "
-            + PREFIX_CLASSNUMBER + "CLASS NUMBER "
+            + PREFIX_STUDENT_NUMBER + "STUDENT NUMBER "
+            + PREFIX_CLASS_NUMBER + "CLASS NUMBER "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_STUDENTNUMBER + "A0245234A "
-            + PREFIX_CLASSNUMBER + "T11 "
+            + PREFIX_STUDENT_NUMBER + "A0245234A "
+            + PREFIX_CLASS_NUMBER + "T11 "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney ";
 

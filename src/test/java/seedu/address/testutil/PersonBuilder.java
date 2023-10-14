@@ -20,8 +20,8 @@ public class PersonBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_STUDENTNUMBER = "A0249434A";
-    public static final String DEFAULT_CLASSNUMBER = "T11";
+    public static final String DEFAULT_STUDENT_NUMBER = "A0249434A";
+    public static final String DEFAULT_CLASS_NUMBER = "T11";
 
     private Name name;
     private Phone phone;
@@ -38,8 +38,8 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
-        studentNumber = new StudentNumber(DEFAULT_STUDENTNUMBER);
-        classNumber = new ClassNumber(DEFAULT_CLASSNUMBER);
+        studentNumber = new StudentNumber(DEFAULT_STUDENT_NUMBER);
+        classNumber = new ClassNumber(DEFAULT_CLASS_NUMBER);
         tags = new HashSet<>();
     }
 

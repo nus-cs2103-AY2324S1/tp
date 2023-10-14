@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENTNUMBER_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_NUMBER_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIENDS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_SMART;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -73,7 +73,7 @@ public class TagCommandTest {
     @Test
     public void execute_noStudentWithStudentNumber_failure() {
         TagCommand tagCommand = new TagCommand(
-            new StudentNumber(VALID_STUDENTNUMBER_AMY),
+            new StudentNumber(VALID_STUDENT_NUMBER_AMY),
             TypicalPersons.ALICE.getTags());
 
         assertCommandFailure(tagCommand, model, Messages.MESSAGE_STUDENT_DOES_NOT_EXIST);

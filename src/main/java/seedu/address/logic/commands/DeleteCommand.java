@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTNUMBER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -19,9 +19,9 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a person."
             + "Parameters: "
-            + PREFIX_STUDENTNUMBER + "STUDENT NUMBER\n"
+            + PREFIX_STUDENT_NUMBER + "STUDENT NUMBER\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_STUDENTNUMBER + "A0245234A";
+            + PREFIX_STUDENT_NUMBER + "A0245234A";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 

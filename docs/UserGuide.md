@@ -3,11 +3,11 @@
   title: "User Guide"
   pageNav: 3
 ---
-# CM-23 User Guide
+# Class Manager 2023 User Guide
 
-ClassManager-2023 (CM-23) is a **desktop app for managing your students' contacts,
+Class Manager 2023 (CM 23) is a **desktop app for managing your students' contacts,
 optimized for use via a Command Line Interface** (CLI) while still having the benefits of a
-Graphical User Interface (GUI). If you can type fast, CM-23 can get your contact
+Graphical User Interface (GUI). If you can type fast, CM 23 can get your contact
 management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
@@ -19,7 +19,7 @@ management tasks done faster than traditional GUI apps.
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest `classmanager.jar` from [here](https://github.com/AY2324S1-CS2103T-T11-1/tp/releases).
+2. Download the latest `ClassManager.jar` from [here](https://github.com/AY2324S1-CS2103T-T11-1/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your ClassManager.
 
@@ -120,9 +120,9 @@ Examples:
 
 Tags the existing student in the address book.
 
-Format: `tag STUDENTNUMBER [/add] [/delete] t/[TAG]…​`
+Format: `tag STUDENT_NUMBER [/add] [/delete] t/[TAG]…​`
 
-* Tags the student with the specified `STUDENTNUMBER`. 
+* Tags the student with the specified `STUDENT_NUMBER`. 
 * When editing tags without `/add` or `/delete`, the existing tags of the student will be removed.
 * You can remove all the student’s tags by typing without `/add` and `/delete` 
   and `t/` without specifying any tags after it.
@@ -190,16 +190,16 @@ Format: `exit`
 
 ### Saving the data
 
-ClassManager data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+Class Manager 2023 data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-ClassManager data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+Class Manager 2023 data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, ClassManager will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
+If your changes to the data file makes its format invalid, Class Manager 2023 will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
 </box>
 
 ### Loading the data file: `load`
@@ -222,7 +222,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ClassManager home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Class Manager 2023 home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 

@@ -4,7 +4,7 @@
 
 <header sticky>
   <navbar type="dark">
-    <a slot="brand" href="{{baseUrl}}/index.html" title="Home" class="navbar-brand">ClassManager</a>
+    <a slot="brand" href="{{baseUrl}}/index.html" title="Home" class="navbar-brand">Class Manager 2023</a>
     <li><a href="{{baseUrl}}/UserGuide.html" class="nav-link">User Guide</a></li>
     <li><a href="{{baseUrl}}/DeveloperGuide.html" class="nav-link">Developer Guide</a></li>
     <li><a href="{{baseUrl}}/AboutUs.html" class="nav-link">About Us</a></li>

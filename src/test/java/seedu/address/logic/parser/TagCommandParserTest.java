@@ -4,7 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENTNUMBER_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_NUMBER_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -35,7 +35,7 @@ public class TagCommandParserTest {
         assertParseFailure(parser, TAG_EMPTY, MESSAGE_INVALID_FORMAT);
 
         // no field specified
-        assertParseFailure(parser, VALID_STUDENTNUMBER_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, VALID_STUDENT_NUMBER_AMY, MESSAGE_INVALID_FORMAT);
 
         // no index and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
@@ -56,39 +56,39 @@ public class TagCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        assertParseFailure(parser, VALID_STUDENTNUMBER_AMY
+        assertParseFailure(parser, VALID_STUDENT_NUMBER_AMY
             + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
 
         // while parsing {@code PREFIX_TAGS} alone will reset the tags of the {@code Person} being edited,
         // parsing it together with a valid tag results in error
-        assertParseFailure(parser, VALID_STUDENTNUMBER_AMY
+        assertParseFailure(parser, VALID_STUDENT_NUMBER_AMY
                 + TAG_DESC_FRIEND + TAG_DESC_HUSBAND + TAG_EMPTY,
                 Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, VALID_STUDENTNUMBER_AMY
+        assertParseFailure(parser, VALID_STUDENT_NUMBER_AMY
                 + TAG_DESC_FRIEND + TAG_EMPTY + TAG_DESC_HUSBAND,
                 Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, VALID_STUDENTNUMBER_AMY
+        assertParseFailure(parser, VALID_STUDENT_NUMBER_AMY
                 + TAG_EMPTY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND,
                 Tag.MESSAGE_CONSTRAINTS);
     }
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        String userInput = VALID_STUDENTNUMBER_AMY + TAG_DESC_HUSBAND + TAG_DESC_FRIEND;
+        String userInput = VALID_STUDENT_NUMBER_AMY + TAG_DESC_HUSBAND + TAG_DESC_FRIEND;
 
         Person person = new PersonBuilder().withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
         TagCommand expectedCommand = new TagCommand(
-            new StudentNumber(VALID_STUDENTNUMBER_AMY), person.getTags());
+            new StudentNumber(VALID_STUDENT_NUMBER_AMY), person.getTags());
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test
     public void parse_resetTags_success() {
-        String userInput = VALID_STUDENTNUMBER_AMY + TAG_EMPTY;
+        String userInput = VALID_STUDENT_NUMBER_AMY + TAG_EMPTY;
 
         TagCommand expectedCommand = new TagCommand(
-            new StudentNumber(VALID_STUDENTNUMBER_AMY), new HashSet<>());
+            new StudentNumber(VALID_STUDENT_NUMBER_AMY), new HashSet<>());
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
