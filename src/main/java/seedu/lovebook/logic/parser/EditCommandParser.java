@@ -2,7 +2,12 @@ package seedu.lovebook.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.lovebook.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.lovebook.logic.parser.CliSyntax.*;
+import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_AGE;
+import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_GENDER;
+import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HEIGHT;
+import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_INCOME;
+import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
 import java.util.Collections;
