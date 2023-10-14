@@ -107,13 +107,16 @@ public class CommandResult {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
+        ToStringBuilder t =  new ToStringBuilder(this)
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", showHelp)
                 .add("exit", exit)
                 .add("isInViewMode", isShowView())
-                .add("isViewExit", isViewExit())
-                .toString();
+                .add("isViewExit", isViewExit());
+        if (isShowView()) {
+            t.add("person", getPersonToView());
+        }
+        return t.toString();
     }
 
 }
