@@ -39,11 +39,6 @@ public class FindCommandParser implements Parser<FindCommand> {
      * and returns a list of keywords.
      */
     private List<String> getKeywordList(String[] specifierAndKeywords) throws ParseException {
-        if (specifierAndKeywords.length == 0) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-        }
-
         ArrayList<String> keywords = new ArrayList<>();
         for (int i = 1; i < specifierAndKeywords.length; i++) {
             keywords.add(specifierAndKeywords[i]);
