@@ -18,6 +18,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.SortIn;
 import seedu.address.model.tag.Subject;
 
 public class ParserUtilTest {
@@ -33,6 +34,8 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_SORT_IN = "ASC";
+
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -193,5 +196,16 @@ public class ParserUtilTest {
                 new Subject(VALID_TAG_1), new Subject(VALID_TAG_2)));
 
         assertEquals(expectedSubjectSet, actualSubjectSet);
+    }
+
+    @Test
+    public void parseSortIn_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTag(null));
+    }
+
+    @Test
+    public void parseSortIn_validValueWithoutWhitespace_returnsTag() throws Exception {
+        SortIn validSortIn = new SortIn(VALID_SORT_IN);
+        assertEquals(validSortIn, ParserUtil.parseSortIn(VALID_SORT_IN));
     }
 }
