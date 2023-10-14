@@ -3,13 +3,15 @@ package seedu.application.logic.parser;
 import static seedu.application.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.application.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.application.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.application.model.job.FieldContainsKeywordsPredicateTest.INVALID_SPECIFIER;
+import static seedu.application.model.job.Role.ROLE_FIND_SPECIFIER;
 
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.application.logic.commands.FindCommand;
-import seedu.application.model.job.RoleContainsKeywordsPredicate;
+import seedu.application.model.job.FieldContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
 
@@ -21,14 +23,21 @@ public class FindCommandParserTest {
     }
 
     @Test
+    public void parse_invalidSpecifier_throwsParseException() {
+        assertParseFailure(parser, INVALID_SPECIFIER,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_INVALID_SPECIFIER));
+    }
+
+    @Test
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand =
-                new FindCommand(new RoleContainsKeywordsPredicate(Arrays.asList("Software", "Grass")));
-        assertParseSuccess(parser, "Software Grass", expectedFindCommand);
+                new FindCommand(
+                        new FieldContainsKeywordsPredicate(ROLE_FIND_SPECIFIER, Arrays.asList("Software", "Grass")));
+        assertParseSuccess(parser, ROLE_FIND_SPECIFIER + " Software Grass", expectedFindCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n Software \n \t Grass  \t", expectedFindCommand);
+        assertParseSuccess(parser, ROLE_FIND_SPECIFIER + " \n Software \n \t Grass  \t", expectedFindCommand);
     }
 
 }

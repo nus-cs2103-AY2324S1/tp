@@ -5,24 +5,27 @@ import static java.util.Objects.requireNonNull;
 import seedu.application.commons.util.ToStringBuilder;
 import seedu.application.logic.Messages;
 import seedu.application.model.Model;
-import seedu.application.model.job.RoleContainsKeywordsPredicate;
+import seedu.application.model.job.FieldContainsKeywordsPredicate;
 
 /**
- * Finds and lists all jobs in application book whose name contains any of the argument keywords.
+ * Finds and lists all jobs in application book whose field contains any of the argument keywords.
+ * Field is specified by the user.
  * Keyword matching is case insensitive.
  */
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all jobs whose names contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all jobs whose field contains any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " software database network";
+            + "Parameters: FIELD_SPECIFIER KEYWORD [MORE_KEYWORDS]...\n"
+            + "Example: " + COMMAND_WORD + " -r software database network";
 
-    private final RoleContainsKeywordsPredicate predicate;
+    public static final String MESSAGE_INVALID_SPECIFIER = "Field specifier is invalid.";
 
-    public FindCommand(RoleContainsKeywordsPredicate predicate) {
+    private final FieldContainsKeywordsPredicate predicate;
+
+    public FindCommand(FieldContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 

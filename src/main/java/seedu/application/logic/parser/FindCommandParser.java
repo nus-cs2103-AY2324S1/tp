@@ -2,11 +2,12 @@ package seedu.application.logic.parser;
 
 import static seedu.application.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 import seedu.application.logic.commands.FindCommand;
 import seedu.application.logic.parser.exceptions.ParseException;
-import seedu.application.model.job.RoleContainsKeywordsPredicate;
+import seedu.application.model.job.FieldContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -25,9 +26,28 @@ public class FindCommandParser implements Parser<FindCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        String[] nameKeywords = trimmedArgs.split("\\s+");
+        String[] specifierAndKeywords = trimmedArgs.split("\\s+");
+        List<String> keywords = getKeywordList(specifierAndKeywords);
+        String specifier = specifierAndKeywords[0];
+        if (!(FieldContainsKeywordsPredicate.isValidSpecifier(specifier))) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_INVALID_SPECIFIER));
+        }
 
-        return new FindCommand(new RoleContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        return new FindCommand(new FieldContainsKeywordsPredicate(specifier, keywords));
+    }
+
+    /**
+     * Takes the given array of which contains the specifier and the keywords
+     * and returns a list of keywords.
+     */
+    private List<String> getKeywordList(String[] specifierAndKeywords) throws ParseException {
+        ArrayList<String> keywords = new ArrayList<>();
+        for (int i = 1; i < specifierAndKeywords.length; i++) {
+            keywords.add(specifierAndKeywords[i]);
+        }
+
+        return keywords;
     }
 
 }

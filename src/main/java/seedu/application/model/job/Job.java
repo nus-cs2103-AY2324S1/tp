@@ -14,14 +14,16 @@ public class Job {
     // Identity fields
     private final Role role;
     private final Company company;
+    private Deadline deadline;
 
     /**
-     * Every field must be present and not null.
+     * Not all fields are compulsory
      */
-    public Job(Role role, Company company) {
-        CollectionUtil.requireAllNonNull(role, company);
+    public Job(Role role, Company company, Deadline deadline) {
+        CollectionUtil.requireAllNonNull(role, company, deadline);
         this.role = role;
         this.company = company;
+        this.deadline = deadline;
     }
 
     public Role getRole() {
@@ -30,6 +32,10 @@ public class Job {
 
     public Company getCompany() {
         return company;
+    }
+
+    public Deadline getDeadline() {
+        return deadline;
     }
 
     /**
@@ -43,7 +49,8 @@ public class Job {
 
         return otherJob != null
                 && otherJob.getRole().equals(getRole())
-                && otherJob.getCompany().equals(getCompany());
+                && otherJob.getCompany().equals(getCompany())
+                && otherJob.getDeadline().equals(getDeadline());
     }
 
     /**
@@ -77,7 +84,7 @@ public class Job {
         return new ToStringBuilder(this)
                 .add("role", role)
                 .add("company", company)
+                .add("deadline", deadline)
                 .toString();
     }
-
 }

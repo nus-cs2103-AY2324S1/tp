@@ -27,10 +27,22 @@ public class DeleteCommand extends Command {
 
     private final Index targetIndex;
 
+    /**
+     * Constructs a DeleteCommand with the specified target index.
+     *
+     * @param targetIndex The index of the job to be deleted.
+     */
     public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
+    /**
+     * Executes the delete command to remove an application from the application list.
+     *
+     * @param model The model containing the application list.
+     * @return A CommandResult indicating the result of the execution.
+     * @throws CommandException If the command execution encounters an error.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -45,6 +57,12 @@ public class DeleteCommand extends Command {
         return new CommandResult(String.format(MESSAGE_DELETE_JOB_SUCCESS, Messages.format(jobToDelete)));
     }
 
+    /**
+     * Checks if this DeleteCommand is equal to another object.
+     *
+     * @param other The object to compare with this DeleteCommand.
+     * @return True if the objects are equal, false otherwise.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -60,6 +78,11 @@ public class DeleteCommand extends Command {
         return targetIndex.equals(otherDeleteCommand.targetIndex);
     }
 
+    /**
+     * Generates a string representation of this DeleteCommand.
+     *
+     * @return A string representing the DeleteCommand.
+     */
     @Override
     public String toString() {
         return new ToStringBuilder(this)

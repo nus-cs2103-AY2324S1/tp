@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.application.commons.exceptions.IllegalValueException;
 import seedu.application.model.job.Company;
+import seedu.application.model.job.Deadline;
 import seedu.application.model.job.Job;
 import seedu.application.model.job.Role;
 
@@ -17,14 +18,17 @@ class JsonAdaptedJob {
 
     private final String role;
     private final String company;
+    private final String deadline;
 
     /**
      * Constructs a {@code JsonAdaptedJob} with the given job details.
      */
     @JsonCreator
-    public JsonAdaptedJob(@JsonProperty("role") String role, @JsonProperty("company") String company) {
+    public JsonAdaptedJob(@JsonProperty("role") String role, @JsonProperty("company") String company,
+                          @JsonProperty("deadline") String deadline) {
         this.role = role;
         this.company = company;
+        this.deadline = deadline;
     }
 
     /**
@@ -33,6 +37,7 @@ class JsonAdaptedJob {
     public JsonAdaptedJob(Job source) {
         role = source.getRole().description;
         company = source.getCompany().name;
+        deadline = source.getDeadline().deadline;
     }
 
     /**
@@ -42,7 +47,8 @@ class JsonAdaptedJob {
      */
     public Job toModelType() throws IllegalValueException {
         if (role == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Role.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Role.class.getSimpleName()));
         }
         if (!Role.isValidRole(role)) {
             throw new IllegalValueException(Role.MESSAGE_CONSTRAINTS);
@@ -50,14 +56,24 @@ class JsonAdaptedJob {
         final Role modelRole = new Role(role);
 
         if (company == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Company.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Company.class.getSimpleName()));
         }
         if (!Company.isValidCompany(company)) {
             throw new IllegalValueException(Company.MESSAGE_CONSTRAINTS);
         }
         final Company modelCompany = new Company(company);
 
-        return new Job(modelRole, modelCompany);
+        if (deadline == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Deadline.class.getSimpleName()));
+        }
+        if (!Deadline.isValidDeadline(deadline)) {
+            throw new IllegalValueException(Deadline.MESSAGE_CONSTRAINTS);
+        }
+        final Deadline modelDeadline = new Deadline(deadline);
+
+        return new Job(modelRole, modelCompany, modelDeadline);
     }
 
 }

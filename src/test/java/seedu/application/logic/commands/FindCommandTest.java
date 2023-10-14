@@ -5,11 +5,13 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.application.logic.Messages.MESSAGE_JOBS_LISTED_OVERVIEW;
 import static seedu.application.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.application.model.job.Role.ROLE_FIND_SPECIFIER;
 import static seedu.application.testutil.TypicalJobs.FRUIT_SELLER;
 import static seedu.application.testutil.TypicalJobs.GRASS_CUTTER;
 import static seedu.application.testutil.TypicalJobs.POLICE_OFFICER;
 import static seedu.application.testutil.TypicalJobs.getTypicalApplicationBook;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -18,7 +20,7 @@ import org.junit.jupiter.api.Test;
 import seedu.application.model.Model;
 import seedu.application.model.ModelManager;
 import seedu.application.model.UserPrefs;
-import seedu.application.model.job.RoleContainsKeywordsPredicate;
+import seedu.application.model.job.FieldContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -29,10 +31,10 @@ public class FindCommandTest {
 
     @Test
     public void equals() {
-        RoleContainsKeywordsPredicate firstPredicate =
-                new RoleContainsKeywordsPredicate(Collections.singletonList("first"));
-        RoleContainsKeywordsPredicate secondPredicate =
-                new RoleContainsKeywordsPredicate(Collections.singletonList("second"));
+        FieldContainsKeywordsPredicate firstPredicate =
+                new FieldContainsKeywordsPredicate(ROLE_FIND_SPECIFIER, Collections.singletonList("first"));
+        FieldContainsKeywordsPredicate secondPredicate =
+                new FieldContainsKeywordsPredicate(ROLE_FIND_SPECIFIER, Collections.singletonList("second"));
 
         FindCommand findFirstCommand = new FindCommand(firstPredicate);
         FindCommand findSecondCommand = new FindCommand(secondPredicate);
@@ -57,7 +59,7 @@ public class FindCommandTest {
     @Test
     public void execute_zeroKeywords_noJobFound() {
         String expectedMessage = String.format(MESSAGE_JOBS_LISTED_OVERVIEW, 0);
-        RoleContainsKeywordsPredicate predicate = preparePredicate(" ");
+        FieldContainsKeywordsPredicate predicate = preparePredicate(ROLE_FIND_SPECIFIER + " ");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredJobList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -67,7 +69,7 @@ public class FindCommandTest {
     @Test
     public void execute_multipleKeywords_multipleJobsFound() {
         String expectedMessage = String.format(MESSAGE_JOBS_LISTED_OVERVIEW, 3);
-        RoleContainsKeywordsPredicate predicate = preparePredicate("Grass Seller Police");
+        FieldContainsKeywordsPredicate predicate = preparePredicate(ROLE_FIND_SPECIFIER + " Grass Seller Police");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredJobList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -76,16 +78,23 @@ public class FindCommandTest {
 
     @Test
     public void toStringMethod() {
-        RoleContainsKeywordsPredicate predicate = new RoleContainsKeywordsPredicate(Arrays.asList("keyword"));
+        FieldContainsKeywordsPredicate predicate =
+                new FieldContainsKeywordsPredicate(ROLE_FIND_SPECIFIER, Arrays.asList("keyword"));
         FindCommand findCommand = new FindCommand(predicate);
         String expected = FindCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
         assertEquals(expected, findCommand.toString());
     }
 
     /**
-     * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
+     * Parses {@code userInput} into a {@code FieldContainsKeywordsPredicate}.
      */
-    private RoleContainsKeywordsPredicate preparePredicate(String userInput) {
-        return new RoleContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+    private FieldContainsKeywordsPredicate preparePredicate(String userInput) {
+        String[] specifierAndKeywords = userInput.split("\\s+");
+        String specifier = specifierAndKeywords[0];
+        ArrayList<String> keywords = new ArrayList<>();
+        for (int i = 1; i < specifierAndKeywords.length; i++) {
+            keywords.add(specifierAndKeywords[i]);
+        }
+        return new FieldContainsKeywordsPredicate(specifier, keywords);
     }
 }

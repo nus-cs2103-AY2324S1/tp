@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.application.model.job.Role.ROLE_FIND_SPECIFIER;
 import static seedu.application.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -14,8 +15,8 @@ import seedu.application.commons.core.index.Index;
 import seedu.application.logic.commands.exceptions.CommandException;
 import seedu.application.model.ApplicationBook;
 import seedu.application.model.Model;
+import seedu.application.model.job.FieldContainsKeywordsPredicate;
 import seedu.application.model.job.Job;
-import seedu.application.model.job.RoleContainsKeywordsPredicate;
 import seedu.application.testutil.EditJobDescriptorBuilder;
 
 /**
@@ -27,6 +28,8 @@ public class CommandTestUtil {
     public static final String VALID_ROLE_CLEANER = "Cleaner";
     public static final String VALID_COMPANY_CHEF = "FineFoods";
     public static final String VALID_COMPANY_CLEANER = "Bleach Inc";
+    public static final String VALID_DEADLINE_CHEF = "Dec 31 2030 1200";
+    public static final String VALID_DEADLINE_CLEANER = "Dec 31 2040 1200";
     public static final String ROLE_DESC_CHEF = " " + PREFIX_ROLE + VALID_ROLE_CHEF;
     public static final String ROLE_DESC_CLEANER = " " + PREFIX_ROLE + VALID_ROLE_CLEANER;
     public static final String COMPANY_DESC_CHEF = " " + PREFIX_COMPANY + VALID_COMPANY_CHEF;
@@ -69,7 +72,7 @@ public class CommandTestUtil {
      * that takes a string {@code expectedMessage}.
      */
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
-            Model expectedModel) {
+                                            Model expectedModel) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
@@ -90,6 +93,7 @@ public class CommandTestUtil {
         assertEquals(expectedApplicationBook, actualModel.getApplicationBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredJobList());
     }
+
     /**
      * Updates {@code model}'s filtered list to show only the job at the given {@code targetIndex} in the
      * {@code model}'s application book.
@@ -99,7 +103,8 @@ public class CommandTestUtil {
 
         Job job = model.getFilteredJobList().get(targetIndex.getZeroBased());
         final String[] splitRole = job.getRole().description.split("\\s+");
-        model.updateFilteredJobList(new RoleContainsKeywordsPredicate(Arrays.asList(splitRole[0])));
+        model.updateFilteredJobList(
+                new FieldContainsKeywordsPredicate(ROLE_FIND_SPECIFIER, Arrays.asList(splitRole[0])));
 
         assertEquals(1, model.getFilteredJobList().size());
     }

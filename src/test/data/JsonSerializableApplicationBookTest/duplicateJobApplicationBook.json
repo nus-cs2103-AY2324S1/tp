@@ -1,9 +1,14 @@
 {
-  "jobs": [ {
-    "role" : "Software Engineer",
-    "company" : "Google"
-  }, {
-    "role" : "Software Engineer",
-    "company" : "Google"
-  } ]
+  "jobs": [
+    {
+      "role": "Software Engineer",
+      "company": "Google",
+      "deadline": "TO_ADD_DEADLINE"
+    },
+    {
+      "role": "Software Engineer",
+      "company": "Google",
+      "deadline": "TO_ADD_DEADLINE"
+    }
+  ]
 }
