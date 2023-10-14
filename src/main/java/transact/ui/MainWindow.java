@@ -38,6 +38,9 @@ public class MainWindow extends UiPart<Stage> {
     private TransactionTablePanel transactionTablePanel;
     private ResultDisplay resultDisplay;
 
+    /**
+     * The available tab windows
+     */
     public enum TabWindow {
         CURRENT, OVERVIEW, TRANSACTIONS, ADDRESSBOOK
     }
