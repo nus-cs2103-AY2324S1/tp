@@ -14,7 +14,7 @@ import seedu.application.testutil.JobBuilder;
 
 public class FieldContainsKeywordsPredicateTest {
 
-    private static final String INVALID_SPECIFIER = "Scndkcjnkcsjn";
+    public static final String INVALID_SPECIFIER = "Scndkcjnkcsjn";
 
     @Test
     public void equals() {
