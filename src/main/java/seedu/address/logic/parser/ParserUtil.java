@@ -9,7 +9,14 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Gender;
+import seedu.address.model.person.MrtStation;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.SecLevel;
+import seedu.address.model.person.SortIn;
 import seedu.address.model.tag.Subject;
 
 /**
@@ -164,15 +171,9 @@ public class ParserUtil {
         return subjectSet;
     }
 
-    public static SortBy parseSortBy(String sortBy) throws ParseException {
-        requireNonNull(sortBy);
-        String trimmedSortBy = sortBy.trim();
-        if (!SortBy.isValidSortBy(trimmedSortBy)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
-        }
-        return new SortBy(trimmedSortBy);
-    }
-
+    /**
+     * Parses {@code String } into a {@code Set<Subject>}.
+     */
     public static SortIn parseSortIn(String sortIn) throws ParseException {
         requireNonNull(sortIn);
         String trimmedSortIn = sortIn.trim();

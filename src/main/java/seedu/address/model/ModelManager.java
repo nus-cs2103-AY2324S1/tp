@@ -4,15 +4,11 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.SortIn;
@@ -26,11 +22,7 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-//    private final FilteredList<Student> filteredStudents;
     private FilteredList<Student> filteredStudents;
-
-    private final SortedList<Student> sortedStudents;
-
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -43,7 +35,6 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredStudents = new FilteredList<>(this.addressBook.getPersonList());
-        sortedStudents = new SortedList<>(this.addressBook.getPersonList());
     }
 
     public ModelManager() {
@@ -144,36 +135,6 @@ public class ModelManager implements Model {
     public void updateSortedPersonList(SortIn sequence) {
         requireNonNull(sequence);
         addressBook.sort(sequence);
-//        ArrayList<Student> studentsList = new ArrayList<>(filteredStudents);
-//
-//        studentsList.sort(new Comparator<Student>() {
-//            @Override
-//            public int compare(Student o1, Student o2) {
-//                String name1 = o1.getName().fullName.toLowerCase();
-//                String name2 = o2.getName().fullName.toLowerCase();
-//                return name1.compareTo(name2);
-//            }
-//        });
-//        sortedStudents.setComparator(new Comparator<Student>() {
-//            @Override
-//            public int compare(Student o1, Student o2) {
-//                String name1 = o1.getName().fullName.toLowerCase();
-//                String name2 = o2.getName().fullName.toLowerCase();
-//                return name1.compareTo(name2);
-//            }
-//        });
-//        filteredStudents = new FilteredList<>(sortedStudents);
-//        System.out.println("done sorting: " + filteredStudents);
-
-//        filteredStudents.sort(new Comparator<Student>() {
-//            @Override
-//            public int compare(Student o1, Student o2) {
-//                String name1 = o1.getName().fullName.toLowerCase();
-//                String name2 = o2.getName().fullName.toLowerCase();
-//                return name1.compareTo(name2);
-//            }
-//        });
-
     }
 
     @Override

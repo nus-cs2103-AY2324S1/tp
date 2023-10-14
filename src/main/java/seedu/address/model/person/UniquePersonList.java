@@ -150,6 +150,9 @@ public class UniquePersonList implements Iterable<Student> {
         return true;
     }
 
+    /**
+     * Sorts the list of unique students.
+     */
     public void sort(SortIn sequence) {
         requireNonNull(sequence);
         internalList.sort(Comparator.comparing(student -> student.getName().fullName.toLowerCase()));
