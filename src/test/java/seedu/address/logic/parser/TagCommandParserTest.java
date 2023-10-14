@@ -27,7 +27,7 @@ public class TagCommandParserTest {
 
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_TAG_FAILED + TagCommand.MESSAGE_USAGE);
-    private TagCommandParser parser = new TagCommandParser();
+    private final TagCommandParser parser = new TagCommandParser();
 
     @Test
     public void parse_missingParts_failure() {

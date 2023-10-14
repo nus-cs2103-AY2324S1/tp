@@ -13,5 +13,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_WILDCARD = new Prefix("/");
     public static final Prefix PREFIX_STUDENTNUMBER = new Prefix("s/");
     public static final Prefix PREFIX_CLASSNUMBER = new Prefix("c/");
-
+    public static final Prefix PREFIX_FILE = new Prefix("f/");
 }

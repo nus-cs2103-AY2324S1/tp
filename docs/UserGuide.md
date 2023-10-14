@@ -211,7 +211,7 @@ Format: `load f/FILE_NAME`
 * File name is case-insensitive
 
 Examples:
-* `load export-v1` loads the export-v1.json file in the data folder.
+* `load f/export-v1` loads the export-v1.json file in the data folder.
 
 ### Archiving data files `[coming in v2.0]`
 
