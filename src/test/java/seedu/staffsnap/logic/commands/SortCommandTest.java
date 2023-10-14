@@ -1,15 +1,16 @@
 package seedu.staffsnap.logic.commands;
 
+import static seedu.staffsnap.testutil.TypicalApplicants.getApplicantsSortedByName;
+import static seedu.staffsnap.testutil.TypicalApplicants.getApplicantsSortedByPhone;
+import static seedu.staffsnap.testutil.TypicalApplicants.getUnsortedAddressBook;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.staffsnap.logic.commands.exceptions.CommandException;
 import seedu.staffsnap.model.Model;
 import seedu.staffsnap.model.ModelManager;
 import seedu.staffsnap.model.UserPrefs;
 import seedu.staffsnap.model.applicant.Descriptor;
-
-import static seedu.staffsnap.testutil.TypicalApplicants.getApplicantsSortedByName;
-import static seedu.staffsnap.testutil.TypicalApplicants.getApplicantsSortedByPhone;
-import static seedu.staffsnap.testutil.TypicalApplicants.getUnsortedAddressBook;
 
 class SortCommandTest {
 
