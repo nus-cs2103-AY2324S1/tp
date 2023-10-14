@@ -14,10 +14,10 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.AddMemberCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Member;
-import seedu.address.model.person.fields.Telegram;
 import seedu.address.model.person.fields.Email;
 import seedu.address.model.person.fields.Name;
 import seedu.address.model.person.fields.Phone;
+import seedu.address.model.person.fields.Telegram;
 import seedu.address.model.tag.Tag;
 
 /**
