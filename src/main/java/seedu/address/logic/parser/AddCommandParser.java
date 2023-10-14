@@ -35,16 +35,29 @@ public class AddCommandParser implements Parser<AddCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
-        if (argMultimap.getValue(PREFIX_ANIMAL_TYPE).isPresent() || argMultimap.getValue(PREFIX_ANIMAL_NAME).isPresent()) {
-            if (!argMultimap.getValue(PREFIX_AVAILABILITY).isPresent()) {
-                throw new ParseException("Availability is required when providing animalName or animalType.");
+        if (argMultimap.getValue(PREFIX_AVAILABILITY).isPresent() && argMultimap.getValue(PREFIX_AVAILABILITY).get().equals("nil")) {
+            if (argMultimap.getValue(PREFIX_ANIMAL_NAME).isPresent() && !argMultimap.getValue(PREFIX_ANIMAL_NAME).get().equals("nil")) {
+                throw new ParseException("Animal name should be 'nil' when availability is 'nil'.");
+            }
+
+            if (argMultimap.getValue(PREFIX_ANIMAL_TYPE).isPresent() && !argMultimap.getValue(PREFIX_ANIMAL_TYPE).get().equals("nil")) {
+                throw new ParseException("Animal type should be 'nil' when availability is 'nil'.");
             }
         }
 
-        if (argMultimap.getValue(PREFIX_ANIMAL_NAME).isPresent()) {
-            if (argMultimap.getValue(PREFIX_AVAILABILITY).get().equals("Available")) {
-                throw new ParseException("animalName is invalid since availability is indicated as 'Available'; " +
-                        "the fosterer should not have an animal which he/she is currently fostering.");
+        if (argMultimap.getValue(PREFIX_ANIMAL_NAME).isPresent() && !argMultimap.getValue(PREFIX_ANIMAL_NAME).get().equals("nil")) {
+            if (argMultimap.getValue(PREFIX_AVAILABILITY).isPresent() && argMultimap.getValue(PREFIX_AVAILABILITY).get().equals("nil")) {
+                throw new ParseException("Availability cannot be 'nil' when an animal name is provided.");
+            }
+
+            if (argMultimap.getValue(PREFIX_AVAILABILITY).isPresent() && argMultimap.getValue(PREFIX_AVAILABILITY).get().equals("Available")) {
+                throw new ParseException("Availability cannot be 'Available' when an animal name is provided.");
+            }
+        }
+
+        if (argMultimap.getValue(PREFIX_ANIMAL_TYPE).isPresent() && !argMultimap.getValue(PREFIX_ANIMAL_TYPE).get().equals("nil")) {
+            if (argMultimap.getValue(PREFIX_AVAILABILITY).isPresent() && argMultimap.getValue(PREFIX_AVAILABILITY).get().equals("nil")) {
+                throw new ParseException("Availability cannot be 'nil' when an animal type is provided.");
             }
         }
 
@@ -55,37 +68,27 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Optional<Name> animalName;
-        if (argMultimap.getValue(PREFIX_ANIMAL_NAME).isPresent()) {
-            animalName = Optional.of(ParserUtil.parseName(argMultimap.getValue(PREFIX_ANIMAL_NAME).get()));
-        } else {
-            animalName = Optional.empty();
+        if (!argMultimap.getValue(PREFIX_ANIMAL_NAME).isPresent()) {
+            throw new ParseException("Animal name is required. Please indicate as 'nil' if information is not available.");
         }
+        Name animalName = ParserUtil.parseName(argMultimap.getValue(PREFIX_ANIMAL_NAME).get());
 
-        Optional<Availability> availability;
-        if (argMultimap.getValue(PREFIX_AVAILABILITY).isPresent()) {
-            availability = Optional.of(ParserUtil.parseAvailability(argMultimap.getValue(PREFIX_AVAILABILITY).get()));
-        } else {
-            availability = Optional.empty();
+        if (!argMultimap.getValue(PREFIX_AVAILABILITY).isPresent()) {
+            throw new ParseException("Availability is required. Please indicate as 'nil' if information is not available.");
         }
+        Availability availability = ParserUtil.parseAvailability(argMultimap.getValue(PREFIX_AVAILABILITY).get());
 
-        Optional<AnimalType> animalType;
-        String availabilityValue = argMultimap.getValue(PREFIX_AVAILABILITY).orElse("nil");
-        if (argMultimap.getValue(PREFIX_ANIMAL_TYPE).isPresent()) {
-            animalType = Optional.of(ParserUtil.parseAnimalType(
-                    argMultimap.getValue(PREFIX_ANIMAL_TYPE).get(), availabilityValue));
-        } else {
-            animalType = Optional.empty();
+        if (!argMultimap.getValue(PREFIX_ANIMAL_TYPE).isPresent()) {
+            throw new ParseException("Animal type is required. Please indicate as 'nil' if information is not available.");
         }
+        AnimalType animalType = ParserUtil.parseAnimalType(argMultimap.getValue(PREFIX_ANIMAL_TYPE).get(), availability.value);
 
-        Optional<Housing> housing;
-        if (argMultimap.getValue(PREFIX_HOUSING).isPresent()) {
-            housing = Optional.of(ParserUtil.parseHousing(argMultimap.getValue(PREFIX_HOUSING).get()));
-        } else {
-            housing = Optional.empty();
+        if (!argMultimap.getValue(PREFIX_HOUSING).isPresent()) {
+            throw new ParseException("Housing is required. Please indicate as 'nil' if information is not available.");
         }
+        Housing housing = ParserUtil.parseHousing(argMultimap.getValue(PREFIX_HOUSING).get());
 
-        Person person = new Person(name, phone, email, address, animalName, availability, animalType, housing, tagList);
+        Person person = new Person(name, phone, email, address, housing, availability, animalName, animalType, tagList);
 
         return new AddCommand(person);
     }
@@ -101,4 +104,3 @@ public class AddCommandParser implements Parser<AddCommand> {
 
 
 }
-

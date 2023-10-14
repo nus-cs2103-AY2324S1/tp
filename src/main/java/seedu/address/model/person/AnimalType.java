@@ -7,8 +7,9 @@ public class AnimalType {
     public final String value;
     public final String availability; // New field for availability
 
-    public static final String MESSAGE_CONSTRAINTS = "If fosterer is available, housing type should be 'able.Dog' / 'able.Cat'. " +
-            "If fosterer is NOT available, animal type should be 'current.Dog' / 'current.Cat'";
+    public static final String MESSAGE_CONSTRAINTS = "If fosterer is available, animal type should be 'able.Dog' / 'able.Cat'.\n" +
+            "If fosterer is NOT available, animal type should be 'current.Dog' / 'current.Cat'.\n" +
+            "If animal type information is not available, it should be inputted as 'nil'.";
 
     public static final String VALIDATION_REGEX_AVAILABLE = "^(able\\.Dog|able\\.Cat|nil)$";
     public static final String VALIDATION_REGEX_NOT_AVAILABLE = "^(current\\.Dog|current\\.Cat|nil)$";

@@ -55,25 +55,25 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
 
-        if (person.getHousing().isPresent() && !"nil".equals(person.getHousing().get().value)) {
-            Label housingLabel = new Label(person.getHousing().get().value);
+        if (!person.getHousing().equals(null) && !"nil".equals(person.getHousing().value)) {
+            Label housingLabel = new Label(person.getHousing().value);
             housingLabel.setStyle("-fx-background-color: #784c87;");
             tags.getChildren().add(housingLabel);
         }
 
-        if (person.getAvailability().isPresent() && !"nil".equals(person.getAvailability().get().value)) {
-            Label availabilityLabel = new Label(person.getAvailability().get().value);
-            if ("Available".equals(person.getAvailability().get().value)) {
+        if (!person.getAvailability().equals(null) && !"nil".equals(person.getAvailability().value)) {
+            Label availabilityLabel = new Label(person.getAvailability().value);
+            if ("Available".equals(person.getAvailability().value)) {
                 availabilityLabel.setStyle("-fx-background-color: #55874c;");
             }
-            if ("NotAvailable".equals(person.getAvailability().get().value)) {
+            if ("NotAvailable".equals(person.getAvailability().value)) {
                 availabilityLabel.setStyle("-fx-background-color: #874c53;");
             }
             tags.getChildren().add(availabilityLabel);
         }
 
-        if (person.getAnimalType().isPresent() && !"nil".equals(person.getAnimalType().get().value)) {
-            Label animalTypeLabel = new Label(person.getAnimalType().get().value);
+        if (!person.getAnimalType().equals(null) && !"nil".equals(person.getAnimalType().value)) {
+            Label animalTypeLabel = new Label(person.getAnimalType().value);
             animalTypeLabel.setStyle("-fx-background-color: #87854c");
             tags.getChildren().add(animalTypeLabel);
         }
@@ -82,7 +82,7 @@ public class PersonCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
 
-        animalName.setText(person.getAnimalName().isPresent() ? "Fostering: " + person.getAnimalName().get().fullName
+        animalName.setText(!person.getAnimalName().equals(null) ? "Fostering: " + person.getAnimalName().fullName
                 : "Fostering: nil");
     }
 }

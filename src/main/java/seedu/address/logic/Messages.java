@@ -46,29 +46,29 @@ public class Messages {
                 .append(person.getAddress())
                 .append("; Housing: ");
 
-        if (!person.getHousing().equals(Optional.empty())) {
-            builder.append(person.getHousing().get().value);
+        if (!person.getHousing().equals(null)) {
+            builder.append(person.getHousing().value);
         } else {
             builder.append("nil");
         }
 
         builder.append("; Availability: ");
-        if (!person.getAvailability().equals(Optional.empty())) {
-            builder.append(person.getAvailability().get().value);
+        if (!person.getAvailability().equals(null)) {
+            builder.append(person.getAvailability().value);
         } else {
             builder.append("nil");
         }
 
         builder.append("; Animal name: ");
-        if (!person.getAnimalName().equals(Optional.empty())) {
-            builder.append(person.getAnimalName().get().fullName);
+        if (!person.getAnimalName().equals(null)) {
+            builder.append(person.getAnimalName().fullName);
         } else {
             builder.append("nil");
         }
 
         builder.append("; Animal type: ");
-        if (!person.getAnimalType().equals(Optional.empty())) {
-            builder.append(person.getAnimalType().get().value);
+        if (!person.getAnimalType().equals(null)) {
+            builder.append(person.getAnimalType().value);
         } else {
             builder.append("nil");
         }

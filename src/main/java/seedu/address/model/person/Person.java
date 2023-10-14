@@ -1,12 +1,10 @@
 package seedu.address.model.person;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -27,77 +25,63 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
-    private final Optional<Name> animalName;
-    private final Optional<Availability> availability;
-    private final Optional<AnimalType> animalType;
-    private final Optional<Housing> housing;
+    private final Name animalName;
+    private final Availability availability;
+    private final Housing housing;
+    private final AnimalType animalType;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Optional<Name> animalName,
-                  Optional<Availability> availability, Optional<AnimalType> animalType,
-                  Optional<Housing> housing, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, animalName, tags);
-
-        if (animalType != null || animalName != null) {
-            requireNonNull(availability, "Availability is required when providing animalName or animalType.");
-        }
-
+    public Person(Name name, Phone phone, Email email, Address address, Housing housing,
+                  Availability availability, Name animalName, AnimalType animalType,
+                  Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.animalName = animalName;
-        this.availability = availability;
-        this.animalType = animalType;
         this.housing = housing;
+        this.availability = availability;
+        this.animalName = animalName;
+        this.animalType = animalType;
         this.tags.addAll(tags);
     }
 
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        this(name, phone, email, address, Optional.empty(), Optional.empty(), Optional.empty(),
-                Optional.empty(), tags);
+        this(name, phone, email, address, null, null, null, null, tags);
     }
 
     public Person(Name name, Phone phone, Email email, Address address,
-                  Availability availability, Housing housing, Set<Tag> tags) {
-        this(name, phone, email, address, Optional.empty(), Optional.of(availability), Optional.empty(),
-                Optional.of(housing), tags);
+                  Housing housing, Availability availability, Set<Tag> tags) {
+        this(name, phone, email, address, housing, availability, null, null, tags);
     }
 
     public Person(Name name, Phone phone, Email email, Address address,
                   Availability availability, Set<Tag> tags) {
-        this(name, phone, email, address, Optional.empty(), Optional.of(availability), Optional.empty(),
-                Optional.empty(), tags);
+        this(name, phone, email, address, null, availability, null, null, tags);
     }
 
     public Person(Name name, Phone phone, Email email, Address address,
                   Housing housing, Set<Tag> tags) {
-        this(name, phone, email, address, Optional.empty(), Optional.empty(), Optional.empty(),
-                Optional.of(housing), tags);
+        this(name, phone, email, address, housing, null, null, null, tags);
     }
 
-    public Person(Name name, Phone phone, Email email, Address address, Name animalName,
-                  Availability availability, AnimalType animalType, Housing housing, Set<Tag> tags) {
-        this(name, phone, email, address, Optional.of(animalName), Optional.of(availability), Optional.of(animalType),
-                Optional.of(housing), tags);
-    }
 
-    public Optional<Name> getAnimalName() {
+    public Name getAnimalName() {
         return animalName;
     }
 
-    public Optional<Availability> getAvailability() {
+    public Availability getAvailability() {
         return availability;
     }
 
-    public Optional<AnimalType> getAnimalType() {
-        return animalType;
+    public Housing getHousing() {
+        return housing;
     }
 
-    public Optional<Housing> getHousing() {
-        return housing;
+    public AnimalType getAnimalType() {
+        return animalType;
     }
 
     public Name getName() {
@@ -167,7 +151,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, animalName, availability, animalType, housing, tags);
+        return Objects.hash(name, phone, email, address, housing, availability, animalName, animalType, tags);
     }
 
     @Override

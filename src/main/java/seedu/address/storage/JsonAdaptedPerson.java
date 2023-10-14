@@ -61,10 +61,10 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        animalName = source.getAnimalName().isPresent() ? source.getAnimalName().get().fullName : "nil";
-        availability = source.getAvailability().isPresent() ? source.getAvailability().get().value : "nil";
-        animalType = source.getAnimalType().isPresent() ? source.getAnimalType().get().value : "nil";
-        housing = source.getHousing().isPresent() ? source.getHousing().get().value : "nil";
+        animalName = !source.getAnimalName().equals(null) ? source.getAnimalName().fullName : "nil";
+        availability = !source.getAvailability().equals(null) ? source.getAvailability().value : "nil";
+        animalType = !source.getAnimalType().equals(null) ? source.getAnimalType().value : "nil";
+        housing = !source.getHousing().equals(null) ? source.getHousing().value : "nil";
     }
 
     /**
@@ -117,8 +117,8 @@ class JsonAdaptedPerson {
         AnimalType modelAnimaltype = animalType != null ? new AnimalType(animalType, availability) : null;
         Housing modelHousing = housing != null ? new Housing(housing) : null;
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelAnimalName,
-                modelAvailability, modelAnimaltype, modelHousing, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelHousing, modelAvailability, modelAnimalName,
+                 modelAnimaltype,  modelTags);
     }
 
 }

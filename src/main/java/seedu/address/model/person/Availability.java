@@ -6,7 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Availability {
     public final String value;
 
-    public static final String MESSAGE_CONSTRAINTS = "Availability should be either 'Available' or 'NotAvailable'";
+    public static final String MESSAGE_CONSTRAINTS = "Availability should be either 'Available', 'NotAvailable' or 'nil'";
 
     public static final String VALIDATION_REGEX = "^(Available|NotAvailable|nil)$";
 

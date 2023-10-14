@@ -6,7 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Housing {
     public final String value;
 
-    public static final String MESSAGE_CONSTRAINTS = "Housing type should be either 'HDB', 'Condo' or 'Landed'";
+    public static final String MESSAGE_CONSTRAINTS = "Housing type should be either 'HDB', 'Condo', 'Landed' or 'nil'";
 
     public static final String VALIDATION_REGEX = "^(HDB|Condo|Landed|nil)$";
 
