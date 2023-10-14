@@ -29,7 +29,10 @@ public class FindCommandParser implements Parser<FindCommand> {
         String[] specifierAndKeywords = trimmedArgs.split("\\s+");
         List<String> keywords = getKeywordList(specifierAndKeywords);
         String specifier = specifierAndKeywords[0];
-        FieldContainsKeywordsPredicate.isValidSpecifier(specifier);
+        if (!(FieldContainsKeywordsPredicate.isValidSpecifier(specifier))) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_INVALID_SPECIFIER));
+        }
 
         return new FindCommand(new FieldContainsKeywordsPredicate(specifier, keywords));
     }

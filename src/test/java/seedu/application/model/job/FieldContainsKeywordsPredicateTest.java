@@ -10,7 +10,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.application.logic.parser.exceptions.ParseException;
 import seedu.application.testutil.JobBuilder;
 
 public class FieldContainsKeywordsPredicateTest {
@@ -48,15 +47,11 @@ public class FieldContainsKeywordsPredicateTest {
     @Test
     public void isValidSpecifier() {
         // valid specifier -> does not throw error
-        try {
-            FieldContainsKeywordsPredicate.isValidSpecifier(COMPANY_FIND_SPECIFIER);
-            FieldContainsKeywordsPredicate.isValidSpecifier(ROLE_FIND_SPECIFIER);
-        } catch (ParseException pe) {
-            fail();
-        }
+        assertTrue(FieldContainsKeywordsPredicate.isValidSpecifier(COMPANY_FIND_SPECIFIER));
+        assertTrue(FieldContainsKeywordsPredicate.isValidSpecifier(ROLE_FIND_SPECIFIER));
 
         // invalid specifier -> throws error
-        assertThrows(ParseException.class, () -> FieldContainsKeywordsPredicate.isValidSpecifier(INVALID_SPECIFIER));
+        assertFalse(FieldContainsKeywordsPredicate.isValidSpecifier(INVALID_SPECIFIER));
     }
 
     @Test
