@@ -5,12 +5,15 @@ import static transact.commons.util.AppUtil.checkArgument;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.security.SecureRandom;
 import java.util.Arrays;
 
 /**
  * Helper functions for handling strings.
  */
 public class StringUtil {
+
+    private static final String VALID_CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
     /**
      * Returns true if the {@code sentence} contains the {@code word}.
@@ -74,4 +77,24 @@ public class StringUtil {
             return false;
         }
     }
+
+    /**
+     * Generate a random string of length {@code length}
+     *
+     * @param length
+     *            Length of string
+     * @return Random string
+     */
+    public static String generateRandomString(int length) {
+        SecureRandom random = new SecureRandom();
+
+        StringBuilder sb = new StringBuilder(length);
+        for (int i = 0; i < length; i++) {
+            int randomIndex = random.nextInt(VALID_CHARACTERS.length());
+            char randomChar = VALID_CHARACTERS.charAt(randomIndex);
+            sb.append(randomChar);
+        }
+        return sb.toString();
+    }
+
 }
