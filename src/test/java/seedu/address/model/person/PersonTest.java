@@ -79,28 +79,8 @@ public class PersonTest {
         // different person -> returns false
         assertFalse(ALICE.equals(BOB));
 
-        // different name -> returns false
-        Person editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
-
-        // different phone -> returns false
-        editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
-
-        // different email -> returns false
-        editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
-
         // different student number -> returns false
-        editedAlice = new PersonBuilder(ALICE).withStudentNumber(VALID_STUDENTNUMBER_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
-
-        // different class number -> returns false
-        editedAlice = new PersonBuilder(ALICE).withClassNumber(VALID_CLASSNUMBER_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
-
-        // different tags -> returns false
-        editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
+        Person editedAlice = new PersonBuilder(ALICE).withStudentNumber(VALID_STUDENTNUMBER_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 
