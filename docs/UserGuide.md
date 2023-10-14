@@ -27,7 +27,7 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/Senior Software Enginner id/EID2023-7890` : Adds an employee named `John Doe` to the employee list.
+   * `add n/John Doe pos/Senior Software Enginner id/EID2023-7890 p/81239876 e/johndoe@test.com` : Adds an employee named `John Doe` to the employee list.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -57,7 +57,7 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `edit INDEX [n/NAME] [p/POSITION] [id/EMPLOYEE_ID]` can be used as `edit 1 n/John Doe` or as `edit 1 p/Software Engineer`.
+  e.g `edit INDEX [n/NAME] [pos/POSITION] [id/EMPLOYEE_ID] [p/PHONE_NUMBER] [e/EMAIL] [d/DEPARTMENT]...` can be used as `edit 1 n/John Doe` or as `edit 1 pos/Software Engineer`.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/POSITION`, `p/POSITION n/NAME` is also acceptable.
@@ -81,11 +81,11 @@ Format: `help`
 
 Adds an employee to the employee list.
 
-Format: `add n/NAME p/POSITION id/EMPLOYEE_ID`
+Format: `add n/NAME pos/POSITION id/EMPLOYEE_ID p/PHONE_NUMBER e/EMAIL [d/DEPARTMENT]...`
 
 Examples:
-* `add n/Jane Doe p/Manager id/EID2023-7891`
-* `add n/Alex Yeoh/Software Engineer id/EID2023-7890`
+* `add n/Jane Doe pos/Manager id/EID2023-7891 p/81234567 e/janedoe@test.com`
+* `add n/Alex Yeoh pos/Software Engineer id/EID2023-7890 p/97685243 e/alexyeoh@test.com d/IT`
 
 ![add success](images/addSuccess.png)
 
@@ -103,16 +103,16 @@ Format: `list`
 
 Edits an existing employee in the employee list.
 
-Format: `edit INDEX [n/NAME] [p/POSITION] [id/EMPLOYEE_ID]`
+Format: `edit INDEX [n/NAME] [pos/POSITION] [id/EMPLOYEE_ID] [p/PHONE_NUMBER] [e/EMAIL] [d/DEPARTMENT]...`
 
 * Edits the employee at the specified `INDEX`. The index refers to the index number shown in the displayed employee list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
 Examples:
-*  `edit 1 p/Senior Software Engineer` Edits the position of the 1st person to be `Senior Software Engineer`.
+*  `edit 1 pos/Senior Software Engineer` Edits the position of the 1st person to be `Senior Software Engineer`.
 ![edit success](images/editSuccess.png)
-*  `edit 10 p/Senior Software Engineer` is invalid because the index does not exist.
+*  `edit 10 pos/Senior Software Engineer` is invalid because the index does not exist.
 ![edit failure](images/editFailure.png)
 
 ### Locating persons by name: `find` [coming soon]
