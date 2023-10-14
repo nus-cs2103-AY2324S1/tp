@@ -85,4 +85,6 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Student> predicate);
+
+    void updateSortedPersonList(Predicate<Student> predicate);
 }
