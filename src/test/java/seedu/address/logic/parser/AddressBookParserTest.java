@@ -4,8 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import org.junit.jupiter.api.Test;
 
@@ -17,6 +21,7 @@ import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.LoadCommand;
 import seedu.address.logic.commands.LookupCommand;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -63,9 +68,13 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_tag() throws Exception {
-        TagCommand command = (TagCommand) parser.parseCommand(TagCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getTagDetails(TypicalPersons.ALICE));
-        assertEquals(new TagCommand(INDEX_FIRST_PERSON, TypicalPersons.ALICE.getTags()), command);
+        TagCommand command = (TagCommand) parser.parseCommand(TagCommand.COMMAND_WORD
+            + " "
+            + TypicalPersons.ALICE.getStudentNumber()
+            + " "
+            + PersonUtil.getTagDetails(TypicalPersons.ALICE));
+        assertEquals(new TagCommand(TypicalPersons.ALICE.getStudentNumber(), TypicalPersons.ALICE.getTags()),
+            command);
     }
 
     @Test
@@ -91,6 +100,14 @@ public class AddressBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_load() throws Exception {
+        LoadCommand command = (LoadCommand) parser.parseCommand(
+                LoadCommand.COMMAND_WORD + " " + PREFIX_FILE + "export-v1");
+        Path path = Paths.get("data", "export-v1.json");
+        assertEquals(new LoadCommand("export-v1", path), command);
     }
 
     @Test

@@ -168,6 +168,15 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Updates the application's save file path in the status bar footer.
+     */
+    @FXML
+    public void handleLoad() {
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
+    }
+
+    /**
      * Executes the command and returns the result.
      *
      * @see seedu.address.logic.Logic#execute(String)
@@ -184,6 +193,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isLoad()) {
+                handleLoad();
             }
 
             return commandResult;
