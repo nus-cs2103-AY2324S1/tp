@@ -2,11 +2,17 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
+
+import seedu.address.commons.util.PredicateUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.LicenceContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
@@ -39,12 +45,9 @@ public class FindCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        if (!namePredicate.isEmpty()) {
-            model.updateFilteredPersonList(namePredicate);
-        }
-        if (!licencePredicate.isEmpty()) {
-            model.updateFilteredPersonList(licencePredicate);
-        }
+        List<Predicate<Person>> predicates = addToPredicateList(namePredicate, licencePredicate);
+        model.updateFilteredPersonList(PredicateUtil.combinePredicates(predicates));
+
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
@@ -71,5 +74,18 @@ public class FindCommand extends Command {
                 .add("name predicate", namePredicate)
                 .add("licence predicate", licencePredicate)
                 .toString();
+    }
+
+    private List<Predicate<Person>> addToPredicateList(
+            NameContainsKeywordsPredicate namePredicate, LicenceContainsKeywordsPredicate licencePredicate) {
+        List<Predicate<Person>> predicates = new ArrayList<>();
+
+        if (!namePredicate.isEmpty()) {
+            predicates.add(namePredicate);
+        }
+        if (!licencePredicate.isEmpty()) {
+            predicates.add(licencePredicate);
+        }
+        return predicates;
     }
 }

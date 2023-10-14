@@ -29,11 +29,6 @@ public class StringUtil {
 
         String preppedWord = word.trim();
         checkArgument(!preppedWord.isEmpty(), "Word parameter cannot be empty");
-        // Comment below line because now we want to check the names by the whole thing and not a single word by word.
-        //checkArgument(preppedWord.split("\\s+").length == 1, "Word parameter should be a single word");
-
-        //String preppedSentence = sentence;
-        //String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
         String[] wordsInPreppedSentence = {sentence};
 
         return Arrays.stream(wordsInPreppedSentence)
