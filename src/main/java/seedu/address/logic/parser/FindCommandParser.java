@@ -42,34 +42,4 @@ public class FindCommandParser implements Parser<FindCommand> {
         return new FindCommand(checkAllFields);
     }
 
-    /**
-     * Returns a Predicate that checks all the relevant fields of a {@code Person} object
-     * against the keywords provided in the {@code ArgumentMultimap}.
-     * <p>
-     * The returned predicate will return {@code true} for a {@code Person} object if
-     * all its fields match all the corresponding keywords specified in the {@code argMultimap}.
-     * </p>
-     *
-     * @param argMultimap the parsed user input containing prefixes and their values.
-     * @return a Predicate checking all the fields of a Person against the keywords.
-     */
-    private static Predicate<Person> checkAllFieldsPredicate(ArgumentMultimap argMultimap) {
-        Predicate<Person> checkNames = person -> (argMultimap.getAllValues(PREFIX_NAME).stream()
-                .allMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword)));
-        Predicate<Person> checkPhones = person -> (argMultimap.getAllValues(PREFIX_PHONE).stream()
-                .allMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getPhone().value, keyword)));
-        Predicate<Person> checkEmails = person -> (argMultimap.getAllValues(PREFIX_EMAIL).stream()
-                .allMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getEmail().value, keyword)));
-        Predicate<Person> checkAddresses = person -> (argMultimap.getAllValues(PREFIX_ADDRESS).stream()
-                .allMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getAddress().value, keyword)));
-
-        // tags are slightly more complicated -- here a person passes the predicate if their tags
-        // is a superset of the tags specified in the find command
-        Predicate<Person> checkTags = person -> (argMultimap.getAllValues(PREFIX_TAG).stream()
-                .allMatch(keyword -> person.getTags().stream()
-                        .anyMatch(tag -> StringUtil.containsWordIgnoreCase(tag.tagName, keyword))));
-
-        return checkNames.and(checkPhones).and(checkEmails).and(checkAddresses).and(checkTags);
-    }
-
 }
