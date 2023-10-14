@@ -69,8 +69,10 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_SALARY).isPresent()) {
             editEmployeeDescriptor.setSalary(ParserUtil.parseSalary(argMultimap.getValue(PREFIX_SALARY).get()));
         }
-        parseDepartmentsForEdit(argMultimap.getAllValues(PREFIX_DEPARTMENT))
-                .ifPresent(editEmployeeDescriptor::setDepartments);
+        if (argMultimap.getValue(PREFIX_DEPARTMENT).isPresent()) {
+            parseDepartmentsForEdit(argMultimap.getAllValues(PREFIX_DEPARTMENT))
+                    .ifPresent(editEmployeeDescriptor::setDepartments);
+        }
 
         if (!editEmployeeDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);

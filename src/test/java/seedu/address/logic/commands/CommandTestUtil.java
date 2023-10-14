@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -39,6 +40,8 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_DEPARTMENT_HUSBAND = "husband";
     public static final String VALID_DEPARTMENT_FRIEND = "friend";
+    public static final String VALID_SALARY_AMY = "$7,000";
+    public static final String VALID_SALARY_BOB = "$5,000";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -53,6 +56,9 @@ public class CommandTestUtil {
     public static final String DEPARTMENT_DESC_FRIEND = " " + PREFIX_DEPARTMENT + VALID_DEPARTMENT_FRIEND;
     public static final String DEPARTMENT_DESC_HUSBAND = " " + PREFIX_DEPARTMENT + VALID_DEPARTMENT_HUSBAND;
 
+    public static final String SALARY_DESC_AMY = " " + PREFIX_SALARY + VALID_SALARY_AMY;
+    public static final String SALARY_DESC_BOB = " " + PREFIX_SALARY + VALID_SALARY_BOB;
+
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_POSITION_DESC = " " + PREFIX_POSITION; // empty string not allowed for positions
     public static final String INVALID_ID_DESC = " " + PREFIX_ID; // empty string not allowed for ids
@@ -60,6 +66,7 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_DEPARTMENT_DESC = " "
             + PREFIX_DEPARTMENT + "hubby*"; // '*' not allowed in departments
+    public static final String INVALID_SALARY_DESC = " " + PREFIX_SALARY + "10,000"; // missing '$' symbol
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -71,11 +78,13 @@ public class CommandTestUtil {
         DESC_AMY = new EditEmployeeDescriptorBuilder().withName(VALID_NAME_AMY).withPosition(VALID_POSITION_AMY)
                 .withId(VALID_ID_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY)
-                .withDepartments(VALID_DEPARTMENT_FRIEND).build();
+                .withDepartments(VALID_DEPARTMENT_FRIEND)
+                .withSalary(VALID_SALARY_AMY).build();
         DESC_BOB = new EditEmployeeDescriptorBuilder().withName(VALID_NAME_BOB).withPosition(VALID_POSITION_BOB)
                 .withId(VALID_ID_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withDepartments(VALID_DEPARTMENT_HUSBAND, VALID_DEPARTMENT_FRIEND).build();
+                .withDepartments(VALID_DEPARTMENT_HUSBAND, VALID_DEPARTMENT_FRIEND)
+                .withSalary(VALID_SALARY_BOB).build();
     }
 
     /**

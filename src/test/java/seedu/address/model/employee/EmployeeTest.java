@@ -9,6 +9,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_POSITION_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SALARY_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SALARY_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalEmployees.ALICE;
 import static seedu.address.testutil.TypicalEmployees.BOB;
@@ -94,13 +96,18 @@ public class EmployeeTest {
         // different departments -> returns false
         editedAlice = new EmployeeBuilder(ALICE).withDepartments(VALID_DEPARTMENT_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
+
+        // different salary -> returns false
+        editedAlice = new EmployeeBuilder(ALICE).withSalary(VALID_SALARY_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
     }
 
     @Test
     public void toStringMethod() {
         String expected = Employee.class.getCanonicalName() + "{name=" + ALICE.getName()
                 + ", position=" + ALICE.getPosition() + ", id=" + ALICE.getId() + ", phone=" + ALICE.getPhone()
-                + ", email=" + ALICE.getEmail() + ", departments=" + ALICE.getDepartments() + "}";
+                + ", email=" + ALICE.getEmail() + ", departments=" + ALICE.getDepartments()
+                + ", salary=" + ALICE.getSalary() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

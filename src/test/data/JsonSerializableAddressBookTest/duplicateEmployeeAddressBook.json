@@ -7,15 +7,17 @@
       "phone": "94351253",
       "email": "alice@example.com",
       "departments": [
-        "friends"
-      ]
+        "Management"
+      ],
+      "salary": "$14,000"
     },
     {
       "name": "Alice Pauline",
       "position": "CEO",
       "id": "EID1234-5678",
       "phone": "94351253",
-      "email": "pauline@example.com"
+      "email": "pauline@example.com",
+      "salary": "$14,000"
     }
   ]
 }

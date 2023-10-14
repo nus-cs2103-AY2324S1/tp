@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
 
 import java.util.Set;
 
@@ -39,6 +40,7 @@ public class EmployeeUtil {
         employee.getDepartments().stream().forEach(
             s -> sb.append(PREFIX_DEPARTMENT + s.departmentName + " ")
         );
+        sb.append(PREFIX_SALARY + employee.getSalary().value + " ");
         return sb.toString();
     }
 
@@ -60,6 +62,7 @@ public class EmployeeUtil {
                 departments.forEach(s -> sb.append(PREFIX_DEPARTMENT).append(s.departmentName).append(" "));
             }
         }
+        descriptor.getSalary().ifPresent(salary -> sb.append(PREFIX_SALARY).append(salary.value).append(" "));
         return sb.toString();
     }
 }
