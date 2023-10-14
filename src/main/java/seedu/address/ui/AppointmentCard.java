@@ -41,7 +41,7 @@ public class AppointmentCard extends UiPart<Region> {
         super(FXML);
         this.appointment = appointment;
         id.setText(displayedIndex + ". ");
-        patientName.setText(appointment.getPatientString());
+        patientName.setText(appointment.getPatientName());
         startDatetime.setText(appointment.getStartTime().toString());
         endDatetime.setText(appointment.getEndTime().toString());
     }
