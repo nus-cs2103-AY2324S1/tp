@@ -5,9 +5,14 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.staffsnap.logic.Messages.MESSAGE_APPLICANTS_LISTED_OVERVIEW;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.staffsnap.testutil.TypicalApplicants.BENSON;
 import static seedu.staffsnap.testutil.TypicalApplicants.CARL;
+import static seedu.staffsnap.testutil.TypicalApplicants.DANIEL;
 import static seedu.staffsnap.testutil.TypicalApplicants.ELLE;
 import static seedu.staffsnap.testutil.TypicalApplicants.FIONA;
+import static seedu.staffsnap.testutil.TypicalApplicants.FLORENCE;
+import static seedu.staffsnap.testutil.TypicalApplicants.HOON;
+import static seedu.staffsnap.testutil.TypicalApplicants.IDA;
 import static seedu.staffsnap.testutil.TypicalApplicants.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -66,13 +71,35 @@ public class FindCommandTest {
 
     @Test
     public void execute_multipleKeywords_multipleApplicantsFound() {
-        String expectedMessage = String.format(MESSAGE_APPLICANTS_LISTED_OVERVIEW, 3);
+        String expectedMessage = String.format(MESSAGE_APPLICANTS_LISTED_OVERVIEW, 5);
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredApplicantList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredApplicantList());
+        assertEquals(Arrays.asList(CARL, ELLE, FIONA, FLORENCE, IDA), model.getFilteredApplicantList());
     }
+
+    @Test
+    public void execute_multipleKeywords_singleApplicantFound() {
+        String expectedMessage = String.format(MESSAGE_APPLICANTS_LISTED_OVERVIEW, 1);
+        NameContainsKeywordsPredicate predicate = preparePredicate("Florence Fluorescence");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredApplicantList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(FLORENCE), model.getFilteredApplicantList());
+    }
+
+    @Test
+    public void execute_singleIncompleteKeyword_multipleApplicantsFound() {
+        String expectedMessage = String.format(MESSAGE_APPLICANTS_LISTED_OVERVIEW, 3);
+        NameContainsKeywordsPredicate predicate = preparePredicate("Mei");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredApplicantList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        System.out.println(model.getFilteredApplicantList());
+        assertEquals(Arrays.asList(BENSON, DANIEL, HOON), model.getFilteredApplicantList());
+    }
+
 
     @Test
     public void toStringMethod() {

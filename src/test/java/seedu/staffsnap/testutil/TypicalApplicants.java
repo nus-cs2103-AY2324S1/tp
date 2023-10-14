@@ -39,6 +39,8 @@ public class TypicalApplicants {
             .withDepartment("werner@example.com").withPosition("michegan ave").build();
     public static final Applicant FIONA = new ApplicantBuilder().withName("Fiona Kunz").withPhone("9482427")
             .withDepartment("lydia@example.com").withPosition("little tokyo").build();
+    public static final Applicant FLORENCE = new ApplicantBuilder().withName("Florence Kunz").withPhone("9482427")
+            .withDepartment("lydia@example.com").withPosition("little tokyo").build();
     public static final Applicant GEORGE = new ApplicantBuilder().withName("George Best").withPhone("9482442")
             .withDepartment("anna@example.com").withPosition("4th street").build();
 
@@ -72,6 +74,7 @@ public class TypicalApplicants {
     }
 
     public static List<Applicant> getTypicalApplicants() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(ALICE, BENSON, BOB, CARL, DANIEL, ELLE,
+                                             FIONA, FLORENCE, GEORGE, HOON, IDA, AMY));
     }
 }
