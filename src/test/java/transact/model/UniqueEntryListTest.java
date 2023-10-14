@@ -1,4 +1,4 @@
-package transact.model.person;
+package transact.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -15,12 +15,12 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import transact.model.UniqueEntryList;
 import transact.model.entry.exceptions.DuplicateEntryException;
 import transact.model.entry.exceptions.EntryNotFoundException;
+import transact.model.person.Person;
 import transact.testutil.PersonBuilder;
 
-public class UniquePersonListTest {
+public class UniqueEntryListTest {
 
     private final UniqueEntryList<Person> uniquePersonList = new UniqueEntryList<>();
 
