@@ -22,8 +22,10 @@ public class FieldContainsKeywordsPredicateTest {
         List<String> firstPredicateKeywordList = Collections.singletonList("first");
         List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
 
-        FieldContainsKeywordsPredicate firstPredicate = new FieldContainsKeywordsPredicate(ROLE_FIND_SPECIFIER, firstPredicateKeywordList);
-        FieldContainsKeywordsPredicate secondPredicate = new FieldContainsKeywordsPredicate(ROLE_FIND_SPECIFIER, secondPredicateKeywordList);
+        FieldContainsKeywordsPredicate firstPredicate = new FieldContainsKeywordsPredicate(
+                ROLE_FIND_SPECIFIER, firstPredicateKeywordList);
+        FieldContainsKeywordsPredicate secondPredicate = new FieldContainsKeywordsPredicate(
+                ROLE_FIND_SPECIFIER, secondPredicateKeywordList);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
