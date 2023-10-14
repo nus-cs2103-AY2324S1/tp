@@ -4,13 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndices.ONEBASED_FOUR_TO_SIX;
 import static seedu.address.testutil.TypicalIndices.ONEBASED_ONE;
 import static seedu.address.testutil.TypicalIndices.ONEBASED_ONE_TO_THREE;
-import static seedu.address.testutil.TypicalIndices.ONEBASED_FOUR_TO_SIX;
-import static seedu.address.testutil.TypicalIndices.ZEROBASED_ZERO_TO_TWO;
 import static seedu.address.testutil.TypicalIndices.ZEROBASED_THREE_TO_FIVE;
+import static seedu.address.testutil.TypicalIndices.ZEROBASED_ZERO_TO_TWO;
 
 import org.junit.jupiter.api.Test;
 
@@ -109,8 +108,8 @@ public class IndicesTest {
 
     @Test
     public void toStringMethod() {
-        String expected = Indices.class.getCanonicalName() + "{zeroBasedIndices=" +
-                ONEBASED_ONE_TO_THREE.getZeroBasedString() + "}";
+        String expected = Indices.class.getCanonicalName() + "{zeroBasedIndices="
+                + ONEBASED_ONE_TO_THREE.getZeroBasedString() + "}";
         assertEquals(expected, ONEBASED_ONE_TO_THREE.toString());
     }
 }

@@ -1,17 +1,23 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.getPeople;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.logic.commands.CommandTestUtil.showPeopleAtIndices;
+import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndices.ONEBASED_FOUR_TO_SIX;
 import static seedu.address.testutil.TypicalIndices.ONEBASED_ONE;
 import static seedu.address.testutil.TypicalIndices.ONEBASED_ONE_TO_THREE;
 import static seedu.address.testutil.TypicalIndices.ONEBASED_ONE_TO_THREE_JUMBLED;
-import static seedu.address.testutil.TypicalIndices.ONEBASED_FOUR_TO_SIX;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,9 +28,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
-
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
