@@ -46,6 +46,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String MESSAGE_PERSON_NOT_FOUND = "This person does not exist in the address book.";
+    public static final String MESSAGE_INCONSISTENT_NAME_AND_ID = "Both a name and an NRIC were provided, but they do not match the same person.";
+
     private final EditPersonDescriptor editPersonDescriptor;
 
 
@@ -98,8 +100,9 @@ public class EditCommand extends Command {
      *
      * @param persons A list of persons to search within.
      * @return An Optional containing the person to edit, if found, or an empty Optional if not found.
+     * @throws CommandException if there is inconsistency between the provided name and NRIC.
      */
-    private Optional<Person> findPersonToEdit(List<Person> persons) {
+    private Optional<Person> findPersonToEdit(List<Person> persons) throws CommandException {
         if (name != null && nric != null) {
             // Search for a person by name and NRIC
             Optional<Person> personByName = persons.stream()
@@ -111,6 +114,8 @@ public class EditCommand extends Command {
             // Check if both Optional instances are not empty, and return the one that represents the same person
             if (personByName.isPresent() && personByNric.isPresent() && personByName.get() == personByNric.get()) {
                 return personByName;
+            } else {
+                throw new CommandException(MESSAGE_INCONSISTENT_NAME_AND_ID);
             }
         }
         if (name != null) {

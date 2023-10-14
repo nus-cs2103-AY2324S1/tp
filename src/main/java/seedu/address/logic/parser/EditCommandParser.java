@@ -63,8 +63,6 @@ public class EditCommandParser implements Parser<EditCommand> {
             nric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
         }
 
-        //TODO: Need to handle the case where user gives name of patient A and ic of patient B
-
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
