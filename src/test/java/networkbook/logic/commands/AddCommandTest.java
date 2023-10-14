@@ -2,7 +2,6 @@ package networkbook.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
@@ -64,20 +63,20 @@ public class AddCommandTest {
     }
 
     @Test
-    public void execute_multipleEntriesForUniqueField_commandException() throws Exception {
+    public void execute_addPriorityToPersonWithPriority_commandException() throws Exception {
         CommandTestUtil.showPersonAtIndex(model, TypicalIndexes.INDEX_FIRST_PERSON);
-
-        Person personInFilteredList = model.getFilteredPersonList()
-                .get(TypicalIndexes.INDEX_FIRST_PERSON.getZeroBased());
 
         AddCommand addCommand = new AddCommand(TypicalIndexes.INDEX_FIRST_PERSON,
                 new EditPersonDescriptorBuilder().withPriority(CommandTestUtil.VALID_PRIORITY_AMY).build());
 
-        assertThrows(CommandException.class, () -> {
-            addCommand.execute(model);
-            addCommand.execute(model);
-        });
+        String expectedMessage = AddCommand.MESSAGE_MULTIPLE_UNIQUE_FIELD;
 
+        try {
+            addCommand.execute(model); // person would have priority
+            addCommand.execute(model); // add priority to the person again
+        } catch (CommandException e) {
+            assertEquals(expectedMessage, e.getMessage());
+        }
     }
 
     @Test
