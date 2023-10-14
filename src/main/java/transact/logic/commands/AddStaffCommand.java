@@ -12,6 +12,7 @@ import transact.logic.Messages;
 import transact.logic.commands.exceptions.CommandException;
 import transact.model.Model;
 import transact.model.person.Person;
+import transact.ui.MainWindow.TabWindow;
 
 /**
  * Adds a person to the address book.
@@ -57,7 +58,7 @@ public class AddStaffCommand extends Command {
         }
 
         model.addPerson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)), 2);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)), TabWindow.ADDRESSBOOK);
     }
 
     @Override
