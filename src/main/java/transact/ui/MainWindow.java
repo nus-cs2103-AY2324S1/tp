@@ -2,14 +2,11 @@ package transact.ui;
 
 import java.util.logging.Logger;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import transact.MainApp;
@@ -40,6 +37,13 @@ public class MainWindow extends UiPart<Stage> {
     private CardListPanel cardListPanel;
     private TransactionTablePanel transactionTablePanel;
     private ResultDisplay resultDisplay;
+
+    /**
+     * The available tab windows
+     */
+    public enum TabWindow {
+        CURRENT, OVERVIEW, TRANSACTIONS, ADDRESSBOOK
+    }
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -94,38 +98,18 @@ public class MainWindow extends UiPart<Stage> {
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
         menuItem.setAccelerator(keyCombination);
-
-        /*
-         * TODO: the code below can be removed once the bug reported here
-         * https://bugs.openjdk.java.net/browse/JDK-8131666
-         * is fixed in later version of SDK.
-         *
-         * According to the bug report, TextInputControl (TextField, TextArea) will
-         * consume function-key events. Because CommandBox contains a TextField, and
-         * ResultDisplay contains a TextArea, thus some accelerators (e.g F1) will
-         * not work when the focus is in them because the key event is consumed by
-         * the TextInputControl(s).
-         *
-         * For now, we add following event filter to capture such key events and open
-         * help window purposely so to support accelerators even when focus is
-         * in CommandBox or ResultDisplay.
-         */
-        getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-            if (event.getTarget() instanceof TextInputControl && keyCombination.match(event)) {
-                menuItem.getOnAction().handle(new ActionEvent());
-                event.consume();
-            }
-        });
     }
 
     /**
-     * Switch tabs
+     * Switch tabs. If tabWindow is set to current, do nothing.
      *
-     * @param index
-     *            The index of the tab
+     * @param tabWindow
+     *            The tab to switch to
      */
-    void switchTab(int index) {
-        tabPane.getSelectionModel().select(index);
+    void switchTab(TabWindow tabWindow) {
+        if (tabWindow != TabWindow.CURRENT) {
+            tabPane.getSelectionModel().select(tabWindow.ordinal() - 1);
+        }
     }
 
     /**
@@ -211,7 +195,7 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
-            switchTab(commandResult.getTabIndex());
+            switchTab(commandResult.getTabWindow());
 
             return commandResult;
         } catch (CommandException | ParseException e) {

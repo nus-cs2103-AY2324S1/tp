@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import transact.ui.MainWindow.TabWindow;
+
 public class CommandResultTest {
     @Test
     public void equals() {
@@ -14,7 +16,7 @@ public class CommandResultTest {
 
         // same values -> returns true
         assertTrue(commandResult.equals(new CommandResult("feedback")));
-        assertTrue(commandResult.equals(new CommandResult("feedback", 0, false, false)));
+        assertTrue(commandResult.equals(new CommandResult("feedback", TabWindow.CURRENT, false, false)));
 
         // same object -> returns true
         assertTrue(commandResult.equals(commandResult));
@@ -29,10 +31,10 @@ public class CommandResultTest {
         assertFalse(commandResult.equals(new CommandResult("different")));
 
         // different showHelp value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", 0, true, false)));
+        assertFalse(commandResult.equals(new CommandResult("feedback", TabWindow.CURRENT, true, false)));
 
         // different exit value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", 0, false, true)));
+        assertFalse(commandResult.equals(new CommandResult("feedback", TabWindow.CURRENT, false, true)));
     }
 
     @Test
@@ -46,18 +48,20 @@ public class CommandResultTest {
         assertNotEquals(commandResult.hashCode(), new CommandResult("different").hashCode());
 
         // different showHelp value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", 0, true, false).hashCode());
+        assertNotEquals(commandResult.hashCode(),
+                new CommandResult("feedback", TabWindow.CURRENT, true, false).hashCode());
 
         // different exit value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", 0, false, true).hashCode());
+        assertNotEquals(commandResult.hashCode(),
+                new CommandResult("feedback", TabWindow.CURRENT, false, true).hashCode());
     }
 
     @Test
     public void toStringMethod() {
         CommandResult commandResult = new CommandResult("feedback");
         String expected = CommandResult.class.getCanonicalName() + "{feedbackToUser="
-                + commandResult.getFeedbackToUser() + ", tabIndex="
-                + commandResult.getTabIndex() + ", showHelp="
+                + commandResult.getFeedbackToUser() + ", tabWindow="
+                + commandResult.getTabWindow() + ", showHelp="
                 + commandResult.isShowHelp()
                 + ", exit=" + commandResult.isExit() + "}";
         assertEquals(expected, commandResult.toString());

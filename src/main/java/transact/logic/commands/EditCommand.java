@@ -27,6 +27,7 @@ import transact.model.person.Name;
 import transact.model.person.Person;
 import transact.model.person.Phone;
 import transact.model.tag.Tag;
+import transact.ui.MainWindow.TabWindow;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -87,7 +88,8 @@ public class EditCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)), 2);
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)),
+                TabWindow.ADDRESSBOOK);
     }
 
     /**
