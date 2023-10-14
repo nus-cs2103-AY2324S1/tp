@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.person.SortIn;
 import seedu.address.model.person.Student;
 
 /**
@@ -77,6 +78,15 @@ public interface Model {
      */
     void setPerson(Student target, Student editedStudent);
 
+    //=========== Filtered Student List Accessors =============================================================
+
+    //=========== Filtered Student List Accessors =============================================================
+
+    //=========== Filtered Student List Accessors =============================================================
+
+
+
+
     /** Returns an unmodifiable view of the filtered student list */
     ObservableList<Student> getFilteredPersonList();
 
@@ -86,5 +96,6 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Student> predicate);
 
-    void updateSortedPersonList(Predicate<Student> predicate);
+
+    void updateSortedPersonList(SortIn sequence);
 }

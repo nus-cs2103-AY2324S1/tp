@@ -39,7 +39,8 @@ public class SortCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        return new CommandResult(String.format(MESSAGE_SUCCESS));
+        model.updateSortedPersonList(sortIn);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, model.getFilteredPersonList()));
     }
 
     @Override

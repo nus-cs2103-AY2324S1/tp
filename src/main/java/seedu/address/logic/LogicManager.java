@@ -66,8 +66,10 @@ public class LogicManager implements Logic {
         return model.getAddressBook();
     }
 
+
     @Override
     public ObservableList<Student> getFilteredPersonList() {
+        System.out.println("logic manager: \n" + model.getFilteredPersonList());
         return model.getFilteredPersonList();
     }
 
