@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# CM-23 Developer Guide
+# Class Manager 2023 Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
