@@ -208,7 +208,7 @@ Load student information from an existing JSON file. Copy the JSON file to be lo
 
 Format: `load f/FILE_NAME`
 * File name does not need to include .json extension.
-* File name is case-sensitive
+* File name is case-insensitive
 
 Examples:
 * `load f/export-v1` loads the export-v1.json file in the data folder.
