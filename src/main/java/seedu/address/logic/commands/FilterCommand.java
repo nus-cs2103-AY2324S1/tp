@@ -42,7 +42,8 @@ public class FilterCommand extends Command {
             + PREFIX_ADDRESS + "123, Tengah Ave 6, #69-420 "
             + PREFIX_TAG + "CS2103 "
             + PREFIX_TAG + "CSGod";
-    public static final String CONTACTS_NOT_FILTERED = String.format("%s \n%s", "At least one parameter is required to filter contacts.", MESSAGE_USAGE);
+    public static final String CONTACTS_NOT_FILTERED = String.format("%s \n%s",
+            "At least one parameter is required to filter contacts.", MESSAGE_USAGE);
     private final PersonFilter personFilter;
 
     /**
