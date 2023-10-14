@@ -45,4 +45,8 @@ public class EventDate {
         EventDate otherDate = (EventDate) other;
         return this.date.isEqual(otherDate.date);
     }
+
+    public String toString() {
+        return this.date.toString();
+    }
 }

@@ -80,4 +80,9 @@ public class JsonAdaptedMeeting {
 
         return new Meeting(modelName, modelEventDate, modelEventStartTime, modelEventEndTime);
     }
+
+    @Override
+    public String toString() {
+        return "Name: " + name + " Date: " + date + " Start Time: " + startTime + " End Time: " + endTime;
+    }
 }

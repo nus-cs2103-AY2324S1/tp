@@ -26,10 +26,11 @@ class JsonSerializableAddressBook {
     private final List<JsonAdaptedMeeting> events = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons.
+     * Constructs a {@code JsonSerializableAddressBook} with the given persons and meetings.
+     * Extracted from the database
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons, @JsonProperty("meetings") List<JsonAdaptedMeeting> meetings) {
+    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons, @JsonProperty("events") List<JsonAdaptedMeeting> meetings) {
         this.persons.addAll(persons);
         this.events.addAll(meetings);
     }
@@ -59,8 +60,8 @@ class JsonSerializableAddressBook {
             addressBook.addPerson(person);
         }
         for (JsonAdaptedMeeting jsonAdaptedMeeting : events) {
-            Event person = jsonAdaptedMeeting.toModelType();
-            addressBook.addEvent(jsonAdaptedMeeting.toModelType());
+            Event event = jsonAdaptedMeeting.toModelType();
+            addressBook.addEvent(event);
         }
         return addressBook;
     }

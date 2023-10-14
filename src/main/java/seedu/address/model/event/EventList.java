@@ -31,6 +31,10 @@ public class EventList {
         this.events.add(event);
     }
 
+    public void setEvents(ArrayList<Event> events) {
+        this.events = events;
+    }
+
     /**
      * Deletes an event from the list of events.
      * @param index index of the event to be deleted.

@@ -54,6 +54,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.persons.setPersons(persons);
     }
 
+    public void setEvents(ArrayList<Event> events) {
+        this.events.setEvents(events);
+    }
+
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
@@ -61,6 +65,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setEvents(newData.getEventList());
     }
 
     //// person-level operations
@@ -99,7 +104,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setEvent(Event target, Event editedEvent) {
         requireNonNull(editedEvent);
 
-        events.setEvent(target, editedEvent);
+        System.out.println("set event" + editedEvent);
+
+        this.events.setEvent(target, editedEvent);
     }
 
     /**

@@ -37,4 +37,9 @@ public class EventTime {
         EventTime otherTime = (EventTime) other;
         return this.eventTime.equals(otherTime.eventTime);
     }
+
+    @Override
+    public String toString() {
+        return this.eventTime.toString();
+    }
 }

@@ -9,6 +9,7 @@ import seedu.address.model.Model;
 import seedu.address.model.event.*;
 
 import java.util.List;
+import java.util.Optional;
 
 import static seedu.address.logic.parser.CliSyntax.*;
 
@@ -47,19 +48,30 @@ public class EditMeetingCommand extends Command {
         List<Event> lastShownList = model.getFilteredEventList();
 
         System.out.println("got filtered event list");
+        System.out.println(lastShownList.size());
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Event meetingToEdit = lastShownList.get(index.getZeroBased());
-        Event editedMeeting = new Meeting(
-                meetingToEdit.getName(), meetingToEdit.getStartDate(), meetingToEdit.getStartTime(),
-                meetingToEdit.getEndTime());
+        Event editedMeeting = createEditedMeeting(meetingToEdit, this.editMeetingDescriptor);
 
         model.setEvent(meetingToEdit, editedMeeting);
 
         return new CommandResult(generateSuccessMessage(editedMeeting));
+    }
+
+    private static Meeting createEditedMeeting(Event meetingToEdit,
+                                               EditMeetingDescriptor editMeetingDescriptor) {
+        assert meetingToEdit != null;
+
+        EventName updatedName = editMeetingDescriptor.getName().orElse(meetingToEdit.getName());
+        EventDate updatedDate = editMeetingDescriptor.getDate().orElse(meetingToEdit.getStartDate());
+        EventTime updatedStartTime = editMeetingDescriptor.getStartTime().orElse(meetingToEdit.getStartTime());
+        EventTime updatedEndTime = editMeetingDescriptor.getEndTime().orElse(meetingToEdit.getEndTime());
+
+        return new Meeting(updatedName, updatedDate, updatedStartTime, updatedEndTime);
     }
 
     private String generateSuccessMessage(Event meetingToEdit) {
@@ -90,6 +102,22 @@ public class EditMeetingCommand extends Command {
         private EventTime endTime;
 
         public EditMeetingDescriptor() {
+        }
+
+        public Optional<EventName> getName() {
+            return Optional.ofNullable(this.name);
+        }
+
+        public Optional<EventDate> getDate() {
+            return Optional.ofNullable(this.date);
+        }
+
+        public Optional<EventTime> getStartTime() {
+            return Optional.ofNullable(this.startTime);
+        }
+
+        public Optional<EventTime> getEndTime() {
+            return Optional.ofNullable(this.endTime);
         }
 
         public void setName(EventName name) {

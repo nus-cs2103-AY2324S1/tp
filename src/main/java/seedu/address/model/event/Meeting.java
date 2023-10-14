@@ -28,6 +28,6 @@ public class Meeting extends Event {
      */
     @Override
     public String toString() {
-        return "Meeting: " + super.getStartDate().toString();
+        return "Meeting: " + super.getName();
     }
 }
