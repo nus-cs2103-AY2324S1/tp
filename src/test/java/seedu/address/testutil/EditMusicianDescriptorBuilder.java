@@ -37,6 +37,8 @@ public class EditMusicianDescriptorBuilder {
         descriptor.setEmail(musician.getEmail());
         descriptor.setAddress(musician.getAddress());
         descriptor.setTags(musician.getTags());
+        descriptor.setInstruments(musician.getInstruments());
+        descriptor.setGenres(musician.getGenres());
     }
 
     /**
@@ -78,6 +80,26 @@ public class EditMusicianDescriptorBuilder {
     public EditMusicianDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
+        return this;
+    }
+
+    /**
+     * Parses the {@code instruments} into a {@code Set<Tag>} and set it to the {@code EditMusicianDescriptor}
+     * that we are building.
+     */
+    public EditMusicianDescriptorBuilder withInstruments(String... instruments) {
+        Set<Tag> instrumentSet = Stream.of(instruments).map(Tag::new).collect(Collectors.toSet());
+        descriptor.setInstruments(instrumentSet);
+        return this;
+    }
+
+    /**
+     * Parses the {@code genres} into a {@code Set<Tag>} and set it to the {@code EditMusicianDescriptor}
+     * that we are building.
+     */
+    public EditMusicianDescriptorBuilder withGenres(String... genres) {
+        Set<Tag> genreSet = Stream.of(genres).map(Tag::new).collect(Collectors.toSet());
+        descriptor.setGenres(genreSet);
         return this;
     }
 

@@ -23,12 +23,20 @@ public class JsonAdaptedMusicianTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_INSTRUMENT = "friend";
+    private static final String INVALID_GENRE = "friend";
 
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();
     private static final String VALID_EMAIL = BENSON.getEmail().toString();
     private static final String VALID_ADDRESS = BENSON.getAddress().toString();
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
+            .map(JsonAdaptedTag::new)
+            .collect(Collectors.toList());
+    private static final List<JsonAdaptedTag> VALID_INSTRUMENTS = BENSON.getInstruments().stream()
+            .map(JsonAdaptedTag::new)
+            .collect(Collectors.toList());
+    private static final List<JsonAdaptedTag> VALID_GENRES = BENSON.getGenres().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
 
@@ -41,7 +49,8 @@ public class JsonAdaptedMusicianTest {
     @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
         JsonAdaptedMusician musician =
-                new JsonAdaptedMusician(INVALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS);
+                new JsonAdaptedMusician(INVALID_NAME,
+                        VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_INSTRUMENTS, VALID_GENRES);
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, musician::toModelType);
     }
@@ -49,7 +58,7 @@ public class JsonAdaptedMusicianTest {
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
         JsonAdaptedMusician musician = new JsonAdaptedMusician(null,
-                VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS);
+                VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_INSTRUMENTS, VALID_GENRES);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, musician::toModelType);
     }
@@ -57,7 +66,8 @@ public class JsonAdaptedMusicianTest {
     @Test
     public void toModelType_invalidPhone_throwsIllegalValueException() {
         JsonAdaptedMusician musician =
-                new JsonAdaptedMusician(VALID_NAME, INVALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS);
+                new JsonAdaptedMusician(VALID_NAME, INVALID_PHONE,
+                        VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_INSTRUMENTS, VALID_GENRES);
         String expectedMessage = Phone.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, musician::toModelType);
     }
@@ -65,7 +75,7 @@ public class JsonAdaptedMusicianTest {
     @Test
     public void toModelType_nullPhone_throwsIllegalValueException() {
         JsonAdaptedMusician musician = new JsonAdaptedMusician(VALID_NAME, null,
-                VALID_EMAIL, VALID_ADDRESS, VALID_TAGS);
+                VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_INSTRUMENTS, VALID_GENRES);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, musician::toModelType);
     }
@@ -73,7 +83,8 @@ public class JsonAdaptedMusicianTest {
     @Test
     public void toModelType_invalidEmail_throwsIllegalValueException() {
         JsonAdaptedMusician musician =
-                new JsonAdaptedMusician(VALID_NAME, VALID_PHONE, INVALID_EMAIL, VALID_ADDRESS, VALID_TAGS);
+                new JsonAdaptedMusician(VALID_NAME, VALID_PHONE, INVALID_EMAIL,
+                        VALID_ADDRESS, VALID_TAGS, VALID_INSTRUMENTS, VALID_GENRES);
         String expectedMessage = Email.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, musician::toModelType);
     }
@@ -81,7 +92,7 @@ public class JsonAdaptedMusicianTest {
     @Test
     public void toModelType_nullEmail_throwsIllegalValueException() {
         JsonAdaptedMusician musician = new JsonAdaptedMusician(VALID_NAME, VALID_PHONE, null,
-                VALID_ADDRESS, VALID_TAGS);
+                VALID_ADDRESS, VALID_TAGS, VALID_INSTRUMENTS, VALID_GENRES);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, musician::toModelType);
     }
@@ -89,14 +100,16 @@ public class JsonAdaptedMusicianTest {
     @Test
     public void toModelType_invalidAddress_throwsIllegalValueException() {
         JsonAdaptedMusician musician =
-                new JsonAdaptedMusician(VALID_NAME, VALID_PHONE, VALID_EMAIL, INVALID_ADDRESS, VALID_TAGS);
+                new JsonAdaptedMusician(VALID_NAME, VALID_PHONE, VALID_EMAIL, INVALID_ADDRESS,
+                        VALID_TAGS, VALID_INSTRUMENTS, VALID_GENRES);
         String expectedMessage = Address.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, musician::toModelType);
     }
 
     @Test
     public void toModelType_nullAddress_throwsIllegalValueException() {
-        JsonAdaptedMusician musician = new JsonAdaptedMusician(VALID_NAME, VALID_PHONE, VALID_EMAIL, null, VALID_TAGS);
+        JsonAdaptedMusician musician = new JsonAdaptedMusician(VALID_NAME, VALID_PHONE, VALID_EMAIL, null,
+                VALID_TAGS, VALID_INSTRUMENTS, VALID_GENRES);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, musician::toModelType);
     }
@@ -106,8 +119,8 @@ public class JsonAdaptedMusicianTest {
         List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
         invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
         JsonAdaptedMusician musician =
-                new JsonAdaptedMusician(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, invalidTags);
+                new JsonAdaptedMusician(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                        invalidTags, VALID_INSTRUMENTS, VALID_GENRES);
         assertThrows(IllegalValueException.class, musician::toModelType);
     }
-
 }

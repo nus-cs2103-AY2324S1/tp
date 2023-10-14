@@ -66,7 +66,9 @@ public class EditMusicianDescriptorTest {
                 + editMusicianDescriptor.getPhone().orElse(null) + ", email="
                 + editMusicianDescriptor.getEmail().orElse(null) + ", address="
                 + editMusicianDescriptor.getAddress().orElse(null) + ", tags="
-                + editMusicianDescriptor.getTags().orElse(null) + "}";
+                + editMusicianDescriptor.getTags().orElse(null) + ", instruments="
+                + editMusicianDescriptor.getInstruments().orElse(null) + ", genres="
+                + editMusicianDescriptor.getGenres().orElse(null) + "}";
         assertEquals(expected, editMusicianDescriptor.toString());
     }
 }

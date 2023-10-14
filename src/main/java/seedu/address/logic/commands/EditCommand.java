@@ -101,8 +101,12 @@ public class EditCommand extends Command {
         Email updatedEmail = editMusicianDescriptor.getEmail().orElse(musicianToEdit.getEmail());
         Address updatedAddress = editMusicianDescriptor.getAddress().orElse(musicianToEdit.getAddress());
         Set<Tag> updatedTags = editMusicianDescriptor.getTags().orElse(musicianToEdit.getTags());
+        Set<Tag> updatedInstrumentTags = editMusicianDescriptor.getInstruments()
+                .orElse(musicianToEdit.getInstruments());
+        Set<Tag> updatedGenreTags = editMusicianDescriptor.getGenres().orElse(musicianToEdit.getGenres());
 
-        return new Musician(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Musician(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
+                updatedInstrumentTags, updatedGenreTags);
     }
 
     @Override
@@ -139,6 +143,8 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
+        private Set<Tag> instruments;
+        private Set<Tag> genres;
 
         public EditMusicianDescriptor() {}
 
@@ -152,13 +158,15 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setInstruments(toCopy.instruments);
+            setGenres(toCopy.genres);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, instruments, genres);
         }
 
         public void setName(Name name) {
@@ -210,6 +218,26 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        public void setInstruments(Set<Tag> instrumentTags) {
+            this.instruments = (instrumentTags != null) ? new HashSet<>(instrumentTags) : null;
+        }
+
+        public Optional<Set<Tag>> getInstruments() {
+            return (instruments != null)
+                    ? Optional.of(Collections.unmodifiableSet(instruments))
+                    : Optional.empty();
+        }
+
+        public void setGenres(Set<Tag> genreTags) {
+            this.genres = (genreTags != null) ? new HashSet<>(genreTags) : null;
+        }
+
+        public Optional<Set<Tag>> getGenres() {
+            return (genres != null)
+                    ? Optional.of(Collections.unmodifiableSet(genres))
+                    : Optional.empty();
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -226,7 +254,9 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditMusicianDescriptor.phone)
                     && Objects.equals(email, otherEditMusicianDescriptor.email)
                     && Objects.equals(address, otherEditMusicianDescriptor.address)
-                    && Objects.equals(tags, otherEditMusicianDescriptor.tags);
+                    && Objects.equals(tags, otherEditMusicianDescriptor.tags)
+                    && Objects.equals(instruments, otherEditMusicianDescriptor.instruments)
+                    && Objects.equals(genres, otherEditMusicianDescriptor.genres);
         }
 
         @Override
@@ -237,6 +267,8 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("tags", tags)
+                    .add("instruments", instruments)
+                    .add("genres", genres)
                     .toString();
         }
     }

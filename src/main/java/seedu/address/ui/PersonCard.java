@@ -40,6 +40,10 @@ public class PersonCard extends UiPart<Region> {
     private Label email;
     @FXML
     private FlowPane tags;
+    @FXML
+    private FlowPane instruments;
+    @FXML
+    private FlowPane genres;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Musician} and index to display.
@@ -55,5 +59,11 @@ public class PersonCard extends UiPart<Region> {
         musician.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        musician.getInstruments().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> instruments.getChildren().add(new Label(tag.tagName)));
+        musician.getGenres().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> genres.getChildren().add(new Label(tag.tagName)));
     }
 }

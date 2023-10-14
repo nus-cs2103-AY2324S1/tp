@@ -2,6 +2,8 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GENRE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INSTRUMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -37,6 +39,12 @@ public class MusicianUtil {
         musician.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
+        musician.getInstruments().stream().forEach(
+            s -> sb.append(PREFIX_INSTRUMENT + s.tagName + " ")
+        );
+        musician.getGenres().stream().forEach(
+            s -> sb.append(PREFIX_TAG + s.tagName + " ")
+        );
         return sb.toString();
     }
 
@@ -52,9 +60,25 @@ public class MusicianUtil {
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {
-                sb.append(PREFIX_TAG);
+                sb.append(PREFIX_TAG).append(" ");
             } else {
                 tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
+            }
+        }
+        if (descriptor.getInstruments().isPresent()) {
+            Set<Tag> instruments = descriptor.getInstruments().get();
+            if (instruments.isEmpty()) {
+                sb.append(PREFIX_INSTRUMENT).append(" ");
+            } else {
+                instruments.forEach(s -> sb.append(PREFIX_INSTRUMENT).append(s.tagName).append(" "));
+            }
+        }
+        if (descriptor.getGenres().isPresent()) {
+            Set<Tag> genres = descriptor.getGenres().get();
+            if (genres.isEmpty()) {
+                sb.append(PREFIX_GENRE).append(" ");
+            } else {
+                genres.forEach(s -> sb.append(PREFIX_GENRE).append(s.tagName).append(" "));
             }
         }
         return sb.toString();

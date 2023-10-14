@@ -7,7 +7,7 @@
 
 Need a place to store information on the musicians you have worked with?
 
-If so, then BandConnect++ is what you need!  
+If so, then BandConnect++ is what you need!
 
 BandConnect++ is an address book that allows you to keep track of fellow musicians you would like to work with.
 
@@ -29,7 +29,7 @@ Here's why you should use BandConnect++:
 ## Features
 - [ ] Add a musician
 - [ ] Tag a musician to a genre
-- [ ] Tag a musician to an instrument 
+- [ ] Tag a musician to an instrument
 - [ ] View all contacts
 - [ ] Find a specific musician
 - [ ] Remove a musician
