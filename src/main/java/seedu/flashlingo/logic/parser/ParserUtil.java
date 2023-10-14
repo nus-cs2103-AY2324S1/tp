@@ -127,18 +127,18 @@ public class ParserUtil {
     /**
      * Parses {@code String word} into a {@code OriginalWord}.
      */
-    public static OriginalWord parseWord(String word) {
+    public static OriginalWord parseWord(String word, String language) {
         requireNonNull(word);
-        final OriginalWord tarWord = new OriginalWord(word);
+        final OriginalWord tarWord = new OriginalWord(word, language);
         return tarWord;
     }
 
     /**
      * Parses {@code String word} into a {@code Translation}.
      */
-    public static TranslatedWord parseTranslation(String word) {
+    public static TranslatedWord parseTranslation(String word, String language) {
         requireNonNull(word);
-        final TranslatedWord tarWord = new TranslatedWord(word);
+        final TranslatedWord tarWord = new TranslatedWord(word, language);
         return tarWord;
     }
 }

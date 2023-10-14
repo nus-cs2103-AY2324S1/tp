@@ -25,8 +25,10 @@ public class CommandTestUtil {
 
     public static final String VALID_ORIGINAL_WORD_AMY = "Amy";
     public static final String VALID_ORIGINAL_WORD_BOB = "Bob";
+    public static final String VALID_ORIGINAL_WORD_LANGUAGE = "English";
     public static final String VALID_TRANSLATION_AMY = "艾米";
     public static final String VALID_TRANSLATION_BOB = "鲍勃";
+    public static final String VALID_TRANSLATION_LANGUAGE = "Mandarin";
 
     public static final String WORD_DESC_AMY = " " + PREFIX_ORIGINAL_WORD + VALID_ORIGINAL_WORD_AMY;
     public static final String WORD_DESC_BOB = " " + PREFIX_ORIGINAL_WORD + VALID_ORIGINAL_WORD_BOB;

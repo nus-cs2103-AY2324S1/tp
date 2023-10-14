@@ -68,7 +68,8 @@ public class FlashCard {
      */
     @Override
     public String toString() {
-        String sb = originalWord + " | " + translatedWord + " | " + whenToReview.toString() + " | " + level + "\n";
+        String sb = originalWord + " | " + originalWord.getLanguage() + " | " + translatedWord + " | "
+                + originalWord.getLanguage() + " | " + whenToReview.toString() + " | " + level + "\n";
         return sb;
     }
 

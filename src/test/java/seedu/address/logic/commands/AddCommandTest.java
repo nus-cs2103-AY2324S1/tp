@@ -7,20 +7,16 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 import seedu.flashlingo.logic.commands.AddCommand;
-import seedu.flashlingo.logic.commands.CommandResult;
-import seedu.flashlingo.logic.commands.exceptions.CommandException;
-import seedu.flashlingo.model.Model;
-import seedu.flashlingo.model.flashcard.FlashCard;
-import seedu.flashlingo.model.flashcard.OriginalWord;
-import seedu.flashlingo.model.flashcard.Translation;
+import seedu.flashlingo.model.flashcard.words.OriginalWord;
+import seedu.flashlingo.model.flashcard.words.TranslatedWord;
 
 public class AddCommandTest {
 
     @Test
     public void constructor_nullFlashCard_throwsNullPointerException() {
         // Check that the constructor throws a NullPointerException when a null FlashCard is provided.
-        OriginalWord original = new OriginalWord("hello");
-        Translation translation = new Translation("你好");
+        OriginalWord original = new OriginalWord("hello", "English");
+        TranslatedWord translation = new TranslatedWord("你好", "Mandarin");
         assertThrows(NullPointerException.class, () -> new AddCommand(null, translation));
         assertThrows(NullPointerException.class, () -> new AddCommand(original, null));
         assertThrows(NullPointerException.class, () -> new AddCommand(null, null));
