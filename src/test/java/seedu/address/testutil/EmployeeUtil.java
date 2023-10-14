@@ -57,7 +57,7 @@ public class EmployeeUtil {
         if (descriptor.getDepartments().isPresent()) {
             Set<Department> departments = descriptor.getDepartments().get();
             if (departments.isEmpty()) {
-                sb.append(PREFIX_DEPARTMENT);
+                sb.append("");
             } else {
                 departments.forEach(s -> sb.append(PREFIX_DEPARTMENT).append(s.departmentName).append(" "));
             }
