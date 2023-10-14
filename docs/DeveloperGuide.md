@@ -278,26 +278,26 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                 | I want to …​                                                                             | So that I can…​                                                          |
-|---------|-------------------------|------------------------------------------------------------------------------------------|-------------------------------------------------------------------------|
-| `* * *` | new user                | see usage instructions                                                                   | refer to instructions when I forget how to use the App                  |
-| `* * *` | user                    | create a new contact                                                                     | keep a record of individuals in my network                              |
-| `* * *` | user                    | add more details about an existing contact                                               | store information about my contacts for future reference                |
-| `* * *` | user                    | update details of a contact                                                              | replace outdated details with more accurate information                 |
-| `* * *` | user                    | delete a contact                                                                         | remove entries that are no longer relevant                              |
-| `* *`   | user                    | find a contact by name                                                                   | locate details of contacts without having to go through the entire list |
-| `* *`   | user with many contacts | sort contacts by their details                                                           | locate contacts with special characteristics that I am looking for      |
-| `*`     | user with many contacts | filter contacts based on their details                                                   | locate contacts who fulfil certain conditions that I am looking for     |
-| `* *`   | new user                | have a quick-start guide                                                                 | start using the basic functionality of the app as soon as possible      |
-| `* *`   | new user                | use commonly-available keyboard shortcuts (e.g. ctrl-c for copy, ctrl-v for paste)       | use the shortcuts I am accustomed to                                    |
-| `* *`   | user                    | use simple and easy-to-remember shortcuts                                                | have no trouble remembering and executing the shortcuts                 |
-| `*`     | user                    | open my email app from my NetworkBook app                                                | quickly send an email when needed                                       |
-| `* *`   | user                    | use keyboard shortcuts that are easy to press                                            | use them more conveniently                                              |
-| `* *`   | user                    | open the relevant social media platform from the NetworkBook app                         | quickly contact them on social media                                    |
-| `* *`   | user                    | an easily accessible and static online page containing a download link to the mobile app | quickly download the app on my device when needed                       |
-| `* *`   | user                    | visit an easily accessible and static online page containing a user manual               | quickly refer to instructions when needed                               |
-| `*`     | user                    | navigate to the relevant section of the online manual directly from the catalogue        | quickly find instructions on the feature I want to use                  |
-| `* *`   | user                    | export my contacts in the form of readable text                                          | easily share my contacts with others                                    |
+| Priority | As a …​                 | I want to …​                                                                               | So that I can…​                                                          |
+|---------|-------------------------|--------------------------------------------------------------------------------------------|-------------------------------------------------------------------------|
+| `* * *` | new user                | see usage instructions                                                                     | refer to instructions when I forget how to use the App                  |
+| `* * *` | user                    | create a new contact                                                                       | keep a record of individuals in my network                              |
+| `* * *` | user                    | add more details about an existing contact                                                 | store information about my contacts for future reference                |
+| `* * *` | user                    | update details of a contact                                                                | replace outdated details with more accurate information                 |
+| `* * *` | user                    | delete a contact                                                                           | remove entries that are no longer relevant                              |
+| `* *`   | user                    | find a contact by name                                                                     | locate details of contacts without having to go through the entire list |
+| `* *`   | user with many contacts | sort contacts by their details                                                             | locate contacts with special characteristics that I am looking for      |
+| `*`     | user with many contacts | filter contacts based on their details                                                     | locate contacts who fulfil certain conditions that I am looking for     |
+| `* *`   | new user                | have a quick-start guide                                                                   | start using the basic functionality of the app as soon as possible      |
+| `* *`   | new user                | use commonly-available keyboard shortcuts (e.g. ctrl-c for copy, ctrl-v for paste)         | use the shortcuts I am accustomed to                                    |
+| `* *`   | user                    | use simple and easy-to-remember shortcuts                                                  | have no trouble remembering and executing the shortcuts                 |
+| `*`     | user                    | open my email app from my NetworkBook app                                                  | quickly send an email when needed                                       |
+| `* *`   | user                    | use keyboard shortcuts that are easy to press                                              | use them more conveniently                                              |
+| `* *`   | user                    | open the relevant social media platform from the NetworkBook app                           | quickly contact them on social media                                    |
+| `* *`   | user                    | an easily accessible and static online page containing a download link to the mobile app   | quickly download the app on my device when needed                       |
+| `* *`   | user                    | visit an easily accessible and static online page containing a user manual                 | quickly refer to instructions when needed                               |
+| `*`     | user                    | navigate to the relevant section of the online manual directly from the catalogue          | quickly find instructions on the feature I want to use                  |
+| `* *`   | user                    | export my contacts in the form of readable text                                            | easily share my contacts with others                                    |
 
 ### Use cases
 

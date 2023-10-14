@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static networkbook.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import networkbook.commons.core.index.Index;
@@ -100,25 +101,53 @@ public class AddCommand extends Command {
             throws CommandException {
         assert personToAddInfo != null;
 
-        // TODO: for non-unique fields, change respective model to use list and append to the list
-        // TODO: now it just replaces the old value
-        Name updatedName = editPersonDescriptor.getName().orElse(personToAddInfo.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToAddInfo.getPhone());
-        UniqueList<Email> updatedEmails = editPersonDescriptor.getEmails().orElse(personToAddInfo.getEmails());
-        Link updatedLink = editPersonDescriptor.getWebLink().orElse(personToAddInfo.getWebLink());
-        GraduatingYear updatedGraduatingYear = editPersonDescriptor.getGraduatingYear()
-                .orElse(personToAddInfo.getGraduatingYear());
-        Course updatedCourse = editPersonDescriptor.getCourse().orElse(personToAddInfo.getCourse());
-        Specialisation updatedSpecialisation = editPersonDescriptor.getSpecialisation()
-                .orElse(personToAddInfo.getSpecialisation());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToAddInfo.getTags());
-        Priority updatedPriority = editPersonDescriptor.getPriority().orElse(personToAddInfo.getPriority()
-                .orElse(null));
+        Name updatedName = personToAddInfo.getName();
+        Phone updatedPhone = addPhone(personToAddInfo, editPersonDescriptor);
+        UniqueList<Email> updatedEmails = addEmails(personToAddInfo, editPersonDescriptor);
+        Link updatedLink = addLinks(personToAddInfo, editPersonDescriptor);
+        GraduatingYear updatedGraduatingYear = addGraduatingYear(personToAddInfo, editPersonDescriptor);
+        Course updatedCourse = addCourse(personToAddInfo, editPersonDescriptor);
+        Specialisation updatedSpecialisation = addSpecialisation(personToAddInfo, editPersonDescriptor);
+        Set<Tag> updatedTags = addTags(personToAddInfo, editPersonDescriptor);
+        Priority updatedPriority = addPriority(personToAddInfo, editPersonDescriptor);
 
         return new Person(updatedName, updatedPhone, updatedEmails, updatedLink, updatedGraduatingYear,
                 updatedCourse, updatedSpecialisation, updatedTags, updatedPriority);
     }
 
+    // TODO: for non-unique fields, change respective model to use list and append to the list
+    // TODO: now it just replaces the old value
+    private Phone addPhone(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor) {
+        return editPersonDescriptor.getPhone().orElse(personToAddInfo.getPhone());
+    }
+    private UniqueList<Email> addEmails(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor) {
+        return editPersonDescriptor.getEmails().orElse(personToAddInfo.getEmails());
+    }
+    private Link addLinks(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor) {
+        return editPersonDescriptor.getWebLink().orElse(personToAddInfo.getWebLink());
+    }
+    private GraduatingYear addGraduatingYear(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor) {
+        return editPersonDescriptor.getGraduatingYear().orElse(personToAddInfo.getGraduatingYear());
+    }
+    private Course addCourse(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor) {
+        return editPersonDescriptor.getCourse().orElse(personToAddInfo.getCourse());
+    }
+    private Specialisation addSpecialisation(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor) {
+        return editPersonDescriptor.getSpecialisation().orElse(personToAddInfo.getSpecialisation());
+    }
+    private Set<Tag> addTags(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor) {
+        return editPersonDescriptor.getTags().orElse(personToAddInfo.getTags());
+    }
+
+    private Priority addPriority(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor)
+            throws CommandException {
+        Optional<Priority> oldPriority = personToAddInfo.getPriority();
+        Optional<Priority> newPriority = editPersonDescriptor.getPriority();
+        if (oldPriority.isPresent() && newPriority.isPresent()) {
+            throw new CommandException(MESSAGE_MULTIPLE_UNIQUE_FIELD);
+        }
+        return newPriority.orElse(oldPriority.orElse(null));
+    }
     @Override
     public boolean equals(Object other) {
         if (other == this) {

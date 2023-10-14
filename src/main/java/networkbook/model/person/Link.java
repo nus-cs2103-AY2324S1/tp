@@ -11,7 +11,7 @@ import networkbook.model.util.Identifiable;
  */
 public class Link implements Identifiable<Link> {
 
-    public static final String MESSAGE_CONSTRAINTS = "Web links should follow the format: domain/path "
+    public static final String MESSAGE_CONSTRAINTS = "Links should follow the format: domain/path "
             + "and adhere to the following constraints:\n"
             + "1. The domain should adhere to these rules:\n"
             + "    - It must end with a domain label of at least 2 characters.\n"
@@ -24,7 +24,7 @@ public class Link implements Identifiable<Link> {
     // alphanumeric and special characters
 
     private static final String DOMAIN_NAME_REGEX = "^(http://|https://)?(www\\.)?[a-zA-Z0-9-]+\\.[a-z]{2,}";
-    private static final String PATH_REGEX = "(/[\\w-]+)*"; // Valid URI path
+    private static final String PATH_REGEX = "(/[\\w_-]*)*"; // Valid URI path
 
     public static final String VALIDATION_REGEX = DOMAIN_NAME_REGEX + "(" + PATH_REGEX + ")?$";
 

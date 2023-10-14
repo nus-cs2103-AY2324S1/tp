@@ -21,6 +21,7 @@ import networkbook.model.person.Specialisation;
 import networkbook.model.tag.Tag;
 import networkbook.testutil.TypicalPersons;
 
+// TODO: add/amend tests based on individual attribute specification
 public class JsonAdaptedPersonTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
@@ -98,7 +99,7 @@ public class JsonAdaptedPersonTest {
     }
 
     @Test
-    public void toModelType_invalidEmail_throwsIllegalValueException() {
+    public void toModelType_invalidEmails_throwsIllegalValueException() {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, INVALID_EMAILS,
                         VALID_WEBLINK, VALID_GRADUATING_YEAR, VALID_COURSE,

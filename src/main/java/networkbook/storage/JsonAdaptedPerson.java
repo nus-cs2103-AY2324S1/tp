@@ -32,7 +32,7 @@ class JsonAdaptedPerson {
     private final String name;
     private final String phone;
     private final List<JsonAdaptedProperty<Email>> emails = new ArrayList<>();
-    private final String webLink;
+    private final String link;
     private final String graduatingYear;
     private final String course;
     private final String specialisation;
@@ -44,7 +44,7 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") List<JsonAdaptedProperty<Email>> emails, @JsonProperty("web link") String webLink,
+            @JsonProperty("email") List<JsonAdaptedProperty<Email>> emails, @JsonProperty("link") String link,
             @JsonProperty("graduating year") String graduatingYear, @JsonProperty("course") String course,
             @JsonProperty("specialisation") String specialisation,
             @JsonProperty("tags") List<JsonAdaptedProperty<Tag>> tags, @JsonProperty("priority") String priority) {
@@ -53,7 +53,7 @@ class JsonAdaptedPerson {
         if (emails != null) {
             this.emails.addAll(emails);
         }
-        this.webLink = webLink;
+        this.link = link;
         this.graduatingYear = graduatingYear;
         this.course = course;
         this.specialisation = specialisation;
@@ -72,7 +72,7 @@ class JsonAdaptedPerson {
         emails.addAll(source.getEmails().stream()
                 .map(JsonAdaptedProperty::new)
                 .collect(Collectors.toList()));
-        webLink = source.getWebLink().getValue();
+        link = source.getWebLink().getValue();
         graduatingYear = source.getGraduatingYear().value;
         course = source.getCourse().value;
         specialisation = source.getSpecialisation().value;
@@ -120,13 +120,13 @@ class JsonAdaptedPerson {
         final UniqueList<Email> modelEmails = new UniqueList<>();
         emails.forEach(email -> modelEmails.add(new Email(email.getName())));
 
-        if (webLink == null) {
+        if (link == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Link.class.getSimpleName()));
         }
-        if (!Link.isValidLink(webLink)) {
+        if (!Link.isValidLink(link)) {
             throw new IllegalValueException(Link.MESSAGE_CONSTRAINTS);
         }
-        final Link modelLink = new Link(webLink);
+        final Link modelLink = new Link(link);
 
         if (graduatingYear == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,

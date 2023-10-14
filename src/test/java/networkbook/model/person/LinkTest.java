@@ -37,7 +37,7 @@ public class LinkTest {
         assertFalse(Link.isValidLink("exam_ple.com")); // underscore in domain name
 
         // valid link
-        assertTrue(Link.isValidLink("example1.com"));
+        assertTrue(Link.isValidLink("https://www.pythonanywhere.com/user/test_underscore/"));
     }
 
     @Test
