@@ -1,7 +1,10 @@
 package seedu.address.commons.core.index;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import seedu.address.commons.util.ToStringBuilder;
 
@@ -13,14 +16,14 @@ import seedu.address.commons.util.ToStringBuilder;
  * one index provided.
  */
 public class Indices {
-    private final ArrayList<Index> zeroBasedIndices;
+    private final SortedSet<Index> zeroBasedIndices;
     private int size;
 
     /**
      * Indices can only be created by calling {@link Indices#fromZeroBased} or
      * {@link Indices#fromOneBased(int[])}.
      */
-    private Indices(ArrayList<Index> zeroBasedIndices) {
+    private Indices(SortedSet<Index> zeroBasedIndices) {
         this.zeroBasedIndices = zeroBasedIndices;
         this.size = zeroBasedIndices.size();
     }
@@ -30,13 +33,11 @@ public class Indices {
      */
     public static Indices fromZeroBased(int[] zeroBasedIndices) {
         Arrays.sort(zeroBasedIndices);
-        ArrayList<Index> result = new ArrayList<>();
+        SortedSet<Index> result = new TreeSet<>();
 
         for (int index : zeroBasedIndices) {
             Index zeroBasedIndex = Index.fromZeroBased(index);
-            if (!result.contains(zeroBasedIndex)) {
-                result.add(zeroBasedIndex);
-            }
+            result.add(zeroBasedIndex);
         }
         return new Indices(result);
     }
@@ -46,29 +47,33 @@ public class Indices {
      */
     public static Indices fromOneBased(int[] oneBasedIndices) {
         Arrays.sort(oneBasedIndices);
-        ArrayList<Index> result = new ArrayList<>();
+        SortedSet<Index> result = new TreeSet<>();
 
         for (int index : oneBasedIndices) {
             Index oneBasedIndex = Index.fromOneBased(index);
-            if (!result.contains(oneBasedIndex)) {
-                result.add(oneBasedIndex);
-            }
+            result.add(oneBasedIndex);
         }
         return new Indices(result);
     }
 
     public int[] getZeroBased() {
         int[] result = new int[size];
-        for (int i = 0; i < size; i++) {
-            result[i] = this.zeroBasedIndices.get(i).getZeroBased();
+        Iterator<Index> iterator = this.zeroBasedIndices.iterator();
+        int counter = 0;
+        while (iterator.hasNext()) {
+            result[counter] = iterator.next().getZeroBased();
+            counter++;
         }
         return result;
     }
 
     public int[] getOneBased() {
         int[] result = new int[size];
-        for (int i = 0; i < size; i++) {
-            result[i] = this.zeroBasedIndices.get(i).getOneBased();
+        Iterator<Index> iterator = this.zeroBasedIndices.iterator();
+        int counter = 0;
+        while (iterator.hasNext()) {
+            result[counter] = iterator.next().getOneBased();
+            counter++;
         }
         return result;
     }
@@ -111,14 +116,14 @@ public class Indices {
      * Returns the smallest zero-based index in indices.
      */
     public int getZeroBasedMin() {
-        return this.zeroBasedIndices.get(0).getZeroBased();
+        return Collections.min(this.zeroBasedIndices).getZeroBased();
     }
 
     /**
      * Returns the largest zero-based index in indices.
      */
     public int getZeroBasedMax() {
-        return this.zeroBasedIndices.get(size - 1).getZeroBased();
+        return Collections.max(this.zeroBasedIndices).getZeroBased();
     }
 
     @Override
@@ -137,13 +142,7 @@ public class Indices {
         if (this.size != otherIndices.size) {
             return false;
         }
-
-        for (int i = 0; i < this.size; i++) {
-            if (!this.zeroBasedIndices.get(i).equals(otherIndices.zeroBasedIndices.get(i))) {
-                return false;
-            }
-        }
-        return true;
+        return this.zeroBasedIndices.equals(otherIndices.zeroBasedIndices);
     }
 
     @Override
