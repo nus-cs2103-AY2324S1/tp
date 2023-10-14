@@ -18,7 +18,10 @@ public class StatusContainsKeywordsPredicate implements Predicate<Person> {
     @Override
     public boolean test(Person person) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getStatus().toString(), keyword));
+                .anyMatch(keyword -> {
+                    System.out.println(person.getStatus().toString());
+                    return StringUtil.containsWordIgnoreCase(person.getStatus().toString(), keyword);
+                });
     }
 
     @Override
@@ -38,6 +41,6 @@ public class StatusContainsKeywordsPredicate implements Predicate<Person> {
 
     @Override
     public String toString() {
-        return keywords.toString();
+        return keywords.toString().replaceAll("[\\[\\]]", "");
     }
 }

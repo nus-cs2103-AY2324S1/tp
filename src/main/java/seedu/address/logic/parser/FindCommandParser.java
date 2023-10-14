@@ -40,10 +40,6 @@ public class FindCommandParser implements Parser<FindCommand> {
         String[] nameKeywords = parseKeywordsList(argMultimap.getAllValues(PREFIX_NAME));
         String[] statusKeywords = parseKeywordsList(argMultimap.getAllValues(PREFIX_STATUS));
 
-        if (ParserUtil.parseStatus(argMultimap.getAllValues(PREFIX_STATUS)) == null) {
-            return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)),
-                    null);
-        }
         return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)),
                 new StatusContainsKeywordsPredicate(Arrays.asList(statusKeywords)));
     }
