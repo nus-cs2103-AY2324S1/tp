@@ -107,7 +107,7 @@ public class CommandResult {
 
     @Override
     public String toString() {
-        ToStringBuilder t =  new ToStringBuilder(this)
+        ToStringBuilder t = new ToStringBuilder(this)
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", showHelp)
                 .add("exit", exit)
