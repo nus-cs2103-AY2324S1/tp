@@ -41,14 +41,6 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_invalidStudentNumber_throwsCommandException() {
-        StudentNumber studentNumber = new StudentNumber("K9dfq134a1r");
-        DeleteCommand deleteCommand = new DeleteCommand(studentNumber);
-
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_STUDENT_NUMBER);
-    }
-
-    @Test
     public void execute_nonexistentStudentNumber_success() {
         StudentNumber studentNumber = new StudentNumber("A0000000A");
         DeleteCommand deleteCommand = new DeleteCommand(studentNumber);

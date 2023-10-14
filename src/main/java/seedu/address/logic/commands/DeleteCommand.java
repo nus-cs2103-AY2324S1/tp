@@ -17,7 +17,7 @@ public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a person.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a person."
             + "Parameters: "
             + PREFIX_STUDENTNUMBER + "STUDENT NUMBER\n"
             + "Example: " + COMMAND_WORD + " "
@@ -34,10 +34,6 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
-        if (!this.targetStudentNumber.isValid()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_NUMBER);
-        }
 
         if (!model.hasPerson(new Person(targetStudentNumber))) {
             throw new CommandException(Messages.MESSAGE_NONEXISTENT_STUDENT_NUMBER);

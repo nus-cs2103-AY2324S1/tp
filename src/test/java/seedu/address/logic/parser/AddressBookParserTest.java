@@ -51,10 +51,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_delete() throws Exception {
-        Person p = TypicalPersons.getTypicalPersons().get(INDEX_FIRST_PERSON.getOneBased());
-        DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + p.getStudentNumber());
-        assertEquals(new DeleteCommand(p.getStudentNumber()), command);
+        Person person = new PersonBuilder().build();
+        DeleteCommand command = (DeleteCommand) parser.parseCommand(PersonUtil.getDeleteCommand(person));
+        assertEquals(new DeleteCommand(person.getStudentNumber()), command);
     }
 
     @Test
