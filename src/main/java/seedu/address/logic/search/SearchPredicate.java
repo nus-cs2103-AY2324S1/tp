@@ -1,11 +1,9 @@
 package seedu.address.logic.search;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-
-import static java.lang.Math.max;
-import static java.lang.Math.min;
 
 /**
  * Represents a predicate (boolean-valued function) of a Map representing a person,
@@ -14,7 +12,18 @@ import static java.lang.Math.min;
  *
  * <p>Adapted with minimal changes from {@link java.util.function.Predicate}.
  */
-interface SearchPredicate{
+abstract class SearchPredicate{
+
+    enum Flag {
+        CASE_SENSITIVITY,
+        FULL_WORD_MATCHING_ONLY
+    }
+
+    private Map<Flag, Boolean> flags;
+
+    SearchPredicate() {
+        initFlags();
+    }
 
     /**
      * Evaluates this predicate on the given argument,
@@ -24,7 +33,7 @@ interface SearchPredicate{
      * @return {@link FieldRanges} of all {@code null} values if no match,
      *      otherwise contains at least one {@link Range} that specifies the location(s) of the match.
      */
-    FieldRanges test(Map<String, String> p);
+    abstract FieldRanges test(Map<String, String> p);
 
     /**
      * Returns a composed predicate that represents a short-circuiting logical
@@ -42,14 +51,20 @@ interface SearchPredicate{
      * AND of this predicate and the {@code other} predicate
      * @throws NullPointerException if other is null
      */
-    default SearchPredicate and(SearchPredicate other) {
+    SearchPredicate and(SearchPredicate other) {
         Objects.requireNonNull(other);
-        return (person) -> {
-            FieldRanges ranges = this.test(person);
-            if (!FieldRanges.isMatch(ranges)) {
-                return null;
+        SearchPredicate old = this;
+        return new BinarySearchPredicate() {
+            @Override
+            FieldRanges test(Map<String, String> p) {
+                this.a = old;
+                this.b = other;
+                FieldRanges ranges = a.test(p);
+                if (!FieldRanges.isMatch(ranges)) {
+                    return null;
+                }
+                return FieldRanges.union(ranges, b.test(p));
             }
-            return FieldRanges.union(ranges, other.test(person));
         };
     }
 
@@ -60,16 +75,20 @@ interface SearchPredicate{
      * @return a predicate that represents the logical negation of this
      * predicate.
      */
-    default SearchPredicate negate() {
-        return (person) -> {
-            FieldRanges ranges = this.test(person);
-            if (!FieldRanges.isMatch(ranges)) {
-                ranges = new FieldRanges();
-                ranges.setIsMatch(true);
-            } else {
-                ranges = null;
+    SearchPredicate negate() {
+        SearchPredicate old = this;
+        return new SearchPredicate() {
+            @Override
+            FieldRanges test(Map<String, String> p) {
+                FieldRanges ranges = old.test(p);
+                if (!FieldRanges.isMatch(ranges)) {
+                    ranges = new FieldRanges();
+                    ranges.setIsMatch(true);
+                } else {
+                    ranges = null;
+                }
+                return ranges;
             }
-            return ranges;
         };
     }
 
@@ -88,38 +107,30 @@ interface SearchPredicate{
      * OR of this predicate and the {@code other} predicate
      * @throws NullPointerException if other is null
      */
-    default SearchPredicate or(SearchPredicate other) {
+    SearchPredicate or(SearchPredicate other) {
         Objects.requireNonNull(other);
-        return (person) -> FieldRanges.union(this.test(person), other.test(person));
+        SearchPredicate old = this;
+        return new BinarySearchPredicate() {
+            @Override
+            FieldRanges test(Map<String, String> p) {
+                this.a = old;
+                this.b = other;
+                return FieldRanges.union(a.test(p), b.test(p));
+            }
+        };
     }
 
-    /**
-     * Returns the closure of the current predicate, as a SearchPredicate.
-     * For most predicates, this does nothing; however for search parameters with flags attached to fences,
-     * this stops applying the flag to joined predicates.
-     *
-     * <p>Predicates can be joined through {@link #and} and {@link #or}.
-     *
-     * @return predicate after closure.
-     */
-    default SearchPredicate close() {
-        return this;
+    protected void initFlags() {
+        flags = new HashMap<>();
+        Arrays.stream(Flag.values()).forEach(flag -> flags.put(flag, false));
     }
 
-    /**
-     * Returns a new SearchPredicate, based on a simple predicate.
-     * For most predicates, this merely returns the predicate;
-     * however for search parameters with flags attached to fences, this applies some flags to the predicate,
-     * and returns a new one.
-     *
-     * <p>Intended to be called on predicates before they are joined. If called after, behaviour is undefined.
-     *
-     * <p>Predicates can be joined through {@link #and} and {@link #or}.
-     *
-     * @return new SearchPredicate.
-     */
-    default SearchPredicate open(SearchPredicate predicate) {
-        return predicate;
+    void setFlag(Flag flag, boolean isFlagApplied) {
+        flags.put(flag, isFlagApplied);
+    }
+
+    boolean isFlagApplied(Flag flag) {
+        return flags.get(flag);
     }
 
 }
