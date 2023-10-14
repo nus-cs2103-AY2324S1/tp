@@ -6,6 +6,7 @@ import seedu.application.commons.core.index.Index;
 import seedu.application.commons.util.StringUtil;
 import seedu.application.logic.parser.exceptions.ParseException;
 import seedu.application.model.job.Company;
+import seedu.application.model.job.Deadline;
 import seedu.application.model.job.Role;
 
 /**
@@ -18,6 +19,7 @@ public class ParserUtil {
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -56,6 +58,21 @@ public class ParserUtil {
             throw new ParseException(Company.MESSAGE_CONSTRAINTS);
         }
         return new Company(trimmedCompany);
+    }
+
+    /**
+     * Parses a {@code String Company} into a {@code Company}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code company} is invalid.
+     */
+    public static Deadline parseDeadline(String deadline) throws ParseException {
+        requireNonNull(deadline);
+        String trimmedDeadline = deadline.trim();
+        if (!Deadline.isValidDeadline(trimmedDeadline)) {
+            throw new ParseException(Deadline.MESSAGE_CONSTRAINTS);
+        }
+        return new Deadline(trimmedDeadline);
     }
 
 }

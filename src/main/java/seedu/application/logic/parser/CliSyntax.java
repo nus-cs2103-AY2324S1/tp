@@ -8,5 +8,6 @@ public class CliSyntax {
     /* Prefix definitions */
     public static final Prefix PREFIX_ROLE = new Prefix("z/");
     public static final Prefix PREFIX_COMPANY = new Prefix("c/");
+    public static final Prefix PREFIX_DEADLINE = new Prefix("d/");
 
 }

@@ -28,6 +28,8 @@ public class CommandTestUtil {
     public static final String VALID_ROLE_CLEANER = "Cleaner";
     public static final String VALID_COMPANY_CHEF = "FineFoods";
     public static final String VALID_COMPANY_CLEANER = "Bleach Inc";
+    public static final String VALID_DEADLINE_CHEF = "Dec 31 2030 1200";
+    public static final String VALID_DEADLINE_CLEANER = "Dec 31 2040 1200";
     public static final String ROLE_DESC_CHEF = " " + PREFIX_ROLE + VALID_ROLE_CHEF;
     public static final String ROLE_DESC_CLEANER = " " + PREFIX_ROLE + VALID_ROLE_CLEANER;
     public static final String COMPANY_DESC_CHEF = " " + PREFIX_COMPANY + VALID_COMPANY_CHEF;
@@ -70,7 +72,7 @@ public class CommandTestUtil {
      * that takes a string {@code expectedMessage}.
      */
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
-            Model expectedModel) {
+                                            Model expectedModel) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
@@ -91,6 +93,7 @@ public class CommandTestUtil {
         assertEquals(expectedApplicationBook, actualModel.getApplicationBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredJobList());
     }
+
     /**
      * Updates {@code model}'s filtered list to show only the job at the given {@code targetIndex} in the
      * {@code model}'s application book.

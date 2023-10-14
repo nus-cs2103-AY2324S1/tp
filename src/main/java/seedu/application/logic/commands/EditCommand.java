@@ -15,6 +15,7 @@ import seedu.application.logic.Messages;
 import seedu.application.logic.commands.exceptions.CommandException;
 import seedu.application.model.Model;
 import seedu.application.model.job.Company;
+import seedu.application.model.job.Deadline;
 import seedu.application.model.job.Job;
 import seedu.application.model.job.Role;
 
@@ -43,7 +44,7 @@ public class EditCommand extends Command {
     private final EditJobDescriptor editJobDescriptor;
 
     /**
-     * @param index of the job in the filtered job list to edit
+     * @param index             of the job in the filtered job list to edit
      * @param editJobDescriptor details to edit the job with
      */
     public EditCommand(Index index, EditJobDescriptor editJobDescriptor) {
@@ -84,8 +85,9 @@ public class EditCommand extends Command {
 
         Role updatedRole = editJobDescriptor.getRole().orElse(jobToEdit.getRole());
         Company updatedCompany = editJobDescriptor.getCompany().orElse(jobToEdit.getCompany());
+        Deadline updatedDeadline = jobToEdit.getDeadline(); // Edit Command does not edit deadline
 
-        return new Job(updatedRole, updatedCompany);
+        return new Job(updatedRole, updatedCompany, updatedDeadline);
     }
 
     @Override
@@ -120,7 +122,8 @@ public class EditCommand extends Command {
         private Role role;
         private Company company;
 
-        public EditJobDescriptor() {}
+        public EditJobDescriptor() {
+        }
 
         /**
          * Copy constructor.
