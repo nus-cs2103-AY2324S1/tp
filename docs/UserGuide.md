@@ -88,7 +88,7 @@ A person can have any number of tags (including 0)
 **Take Note:**
 
 - A doctor **MUST** have a non-empty NAME and a valid IC at the very least. Failure to include these details may result in an error.
-- Phone Numbers and Emails have to be in a valid format. 
+- Phone Numbers and Emails have to be in a valid format.
 - PHONE_NUMBER must have exactly 8 digits.
 - EMAIL must contain email domain (eg. `@gmail.com`).
 - PATIENT must contain the valid IC of a Patient in the Database.

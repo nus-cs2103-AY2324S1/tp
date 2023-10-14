@@ -11,8 +11,8 @@ public class Ic {
 
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Ic should start with S or T, followed by 7 numbers, and ends with a letter. " +
-                    "Letters must be in all caps. Empty strings are not allowed\n";
+            "Ic should start with S or T, followed by 7 numbers, and ends with a letter. "
+                    + "Letters must be in all caps. Empty strings are not allowed\n";
     public static final String VALIDATION_REGEX = "^[TS]\\d{7}[A-Z]$";
     public final String value;
 
