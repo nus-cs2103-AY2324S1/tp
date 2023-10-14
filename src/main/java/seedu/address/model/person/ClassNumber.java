@@ -22,7 +22,7 @@ public class ClassNumber {
     /**
      * Constructs an {@code Class Number}.
      *
-     * @param ClassNumber A valid Class Number
+     * @param classNumber A valid Class Number
      *
      */
     public ClassNumber(String classNumber) {

@@ -14,6 +14,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Parses input arguments and creates a new {@code LoadCommand} object
  */
 public class LoadCommandParser implements Parser<LoadCommand> {
+    public static final String MESSAGE_INVALID_FILE_NAME = "The file name cannot contain a forward slash.\n"
+            + "Please try again with a different file name.\n";
     /**
      * Parses the given {@code String} of arguments in the context of the {@code LoadCommand}
      * and returns a {@code LoadCommand} object for execution.
@@ -27,8 +29,11 @@ public class LoadCommandParser implements Parser<LoadCommand> {
             if (fileName.isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LoadCommand.MESSAGE_USAGE));
             }
-            Path newAddressBookFilePath = Paths.get("data", fileName + ".json");
-            return new LoadCommand(fileName, newAddressBookFilePath);
+            if (fileName.contains("/")) {
+                throw new ParseException(MESSAGE_INVALID_FILE_NAME);
+            }
+            Path addressBookFilePath = Paths.get("data", fileName + ".json");
+            return new LoadCommand(fileName, addressBookFilePath);
         } catch (NullPointerException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LoadCommand.MESSAGE_USAGE), pe);
         }

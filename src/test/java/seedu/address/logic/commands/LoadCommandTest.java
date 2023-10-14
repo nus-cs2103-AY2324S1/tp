@@ -68,5 +68,4 @@ public class LoadCommandTest {
         expectedModel.setAddressBookFilePath(filePath);
         expectedModel.setAddressBook(tempData);
     }
-
 }

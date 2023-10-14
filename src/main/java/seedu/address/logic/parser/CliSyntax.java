@@ -10,8 +10,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_PHONE = new Prefix("p/");
     public static final Prefix PREFIX_EMAIL = new Prefix("e/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
-    public static final Prefix PREFIX_TAGS = new Prefix("/t");
-    public static final Prefix PREFIX_STUDENT_NUMBER = new Prefix("s/");
+    public static final Prefix PREFIX_WILDCARD = new Prefix("/");
+    public static final Prefix PREFIX_STUDENTNUMBER = new Prefix("s/");
     public static final Prefix PREFIX_CLASSNUMBER = new Prefix("c/");
     public static final Prefix PREFIX_FILE = new Prefix("f/");
 }
