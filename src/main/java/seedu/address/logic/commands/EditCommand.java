@@ -46,7 +46,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String MESSAGE_PERSON_NOT_FOUND = "This person does not exist in the address book.";
-    public static final String MESSAGE_INCONSISTENT_NAME_AND_ID = "Both a name and an NRIC were provided, but they do not match the same person.";
+    public static final String MESSAGE_INCONSISTENT_NAME_AND_ID =
+            "Both a name and an NRIC were provided, but they do not match the same person.";
 
     private final EditPersonDescriptor editPersonDescriptor;
 
