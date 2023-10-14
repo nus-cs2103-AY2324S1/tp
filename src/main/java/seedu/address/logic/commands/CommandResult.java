@@ -111,6 +111,8 @@ public class CommandResult {
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", showHelp)
                 .add("exit", exit)
+                .add("isInViewMode", isShowView())
+                .add("isViewExit", isViewExit())
                 .toString();
     }
 
