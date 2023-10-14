@@ -37,6 +37,8 @@ public class AddScheduleCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New schedule %1$s has been added.";
     public static final String MESSAGE_DUPLICATE_SCHEDULE = "This schedule already exists in the address book";
+    public static final String MESSAGE_CLASHING_SCHEDULE = "This tutor already has a clashing schedule in the address "
+            + "book";
 
     private final Index index;
     private final StartTime startTime;
@@ -61,10 +63,20 @@ public class AddScheduleCommand extends Command {
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
-        Schedule toAdd = new Schedule(lastShownList.get(index.getZeroBased()), startTime, endTime);
+
+        Person tutor = lastShownList.get(index.getZeroBased());
+        Schedule toAdd = new Schedule(tutor, startTime, endTime);
+
+        boolean hasScheduleClash =
+                model.getAddressBook().getPersonList().stream().anyMatch(schedule -> schedule.isClashing(toAdd));
+
 
         if (model.hasSchedule(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_SCHEDULE);
+        }
+
+        if (model.hasScheduleClash(toAdd)) {
+            throw new CommandException(MESSAGE_CLASHING_SCHEDULE);
         }
 
         model.addSchedule(toAdd);

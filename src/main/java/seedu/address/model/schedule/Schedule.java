@@ -47,6 +47,24 @@ public class Schedule {
     }
 
     /**
+     * Checks if this schedule clashes with another schedule.
+     * Two schedules are considered clashing if they have the same tutor and their time intervals overlap.
+     *
+     * @param other The other schedule to compare against.
+     * @return {@code true} if the schedules clash, {@code false} otherwise.
+     */
+    public boolean isClashing(Schedule other) {
+        if (!this.tutor.equals(other.tutor)) {
+            return false;
+        }
+
+        boolean isEndBeforeOrEqualOtherStart = !this.endTime.getTime().isAfter(other.startTime.getTime());
+        boolean isStartAfterOrEqualOtherEnd = !this.startTime.getTime().isBefore(other.endTime.getTime());
+
+        return !(isEndBeforeOrEqualOtherStart || isStartAfterOrEqualOtherEnd);
+    }
+
+    /**
      * Returns true if both schedules have the same tutor index and time fields.
      * This defines a stronger notion of equality between two schedules.
      */
