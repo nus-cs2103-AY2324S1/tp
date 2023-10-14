@@ -84,4 +84,12 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+
+    /**
+     * Sets a specific person to be displayed.
+     *
+     * @param targetPerson The person that you want to set as the specific person to be displayed.
+     */
+    void setSpecificPersonToDisplay(Person targetPerson);
 }
