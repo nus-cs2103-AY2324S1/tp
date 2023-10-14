@@ -37,10 +37,10 @@ public class EmployeeUtil {
         sb.append(PREFIX_ID + employee.getId().value + " ");
         sb.append(PREFIX_PHONE + employee.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + employee.getEmail().value + " ");
+        sb.append(PREFIX_SALARY + employee.getSalary().value + " ");
         employee.getDepartments().stream().forEach(
             s -> sb.append(PREFIX_DEPARTMENT + s.departmentName + " ")
         );
-        sb.append(PREFIX_SALARY + employee.getSalary().value + " ");
         return sb.toString();
     }
 
@@ -54,6 +54,7 @@ public class EmployeeUtil {
         descriptor.getId().ifPresent(id -> sb.append(PREFIX_ID).append(id.value).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
+        descriptor.getSalary().ifPresent(salary -> sb.append(PREFIX_SALARY).append(salary.value).append(" "));
         if (descriptor.getDepartments().isPresent()) {
             Set<Department> departments = descriptor.getDepartments().get();
             if (departments.isEmpty()) {
@@ -62,7 +63,6 @@ public class EmployeeUtil {
                 departments.forEach(s -> sb.append(PREFIX_DEPARTMENT).append(s.departmentName).append(" "));
             }
         }
-        descriptor.getSalary().ifPresent(salary -> sb.append(PREFIX_SALARY).append(salary.value).append(" "));
         return sb.toString();
     }
 }

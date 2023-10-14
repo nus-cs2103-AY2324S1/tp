@@ -75,9 +75,9 @@ public class EditEmployeeDescriptorTest {
                 + editEmployeeDescriptor.getPosition().orElse(null) + ", id="
                 + editEmployeeDescriptor.getId().orElse(null) + ", phone="
                 + editEmployeeDescriptor.getPhone().orElse(null) + ", email="
-                + editEmployeeDescriptor.getEmail().orElse(null) + ", departments="
-                + editEmployeeDescriptor.getDepartments().orElse(null) + ", salary="
-                + editEmployeeDescriptor.getSalary().orElse(null) + "}";
+                + editEmployeeDescriptor.getEmail().orElse(null) + ", salary="
+                + editEmployeeDescriptor.getSalary().orElse(null) + ", departments="
+                + editEmployeeDescriptor.getDepartments().orElse(null) + "}";
         assertEquals(expected, editEmployeeDescriptor.toString());
     }
 }

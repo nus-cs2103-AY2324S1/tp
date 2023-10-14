@@ -36,7 +36,7 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_POSITION, PREFIX_ID,
-                PREFIX_PHONE, PREFIX_EMAIL, PREFIX_DEPARTMENT, PREFIX_SALARY);
+                PREFIX_PHONE, PREFIX_EMAIL, PREFIX_SALARY, PREFIX_DEPARTMENT);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_POSITION, PREFIX_ID, PREFIX_PHONE, PREFIX_EMAIL,
                 PREFIX_SALARY)
@@ -54,7 +54,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Salary salary = ParserUtil.parseSalary(argMultimap.getValue(PREFIX_SALARY).get());
         Set<Department> departmentList = ParserUtil.parseDepartments(argMultimap.getAllValues(PREFIX_DEPARTMENT));
 
-        Employee employee = new Employee(name, position, id, phone, email, departmentList, salary);
+        Employee employee = new Employee(name, position, id, phone, email, salary, departmentList);
 
         return new AddCommand(employee);
     }

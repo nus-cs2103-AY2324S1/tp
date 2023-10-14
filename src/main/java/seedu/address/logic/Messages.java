@@ -45,9 +45,9 @@ public class Messages {
                 .append(employee.getPhone())
                 .append("; Email: ")
                 .append(employee.getEmail())
-                .append("; Departments: ")
+                .append("; Salary: ")
                 .append(employee.getSalary())
-                .append("; Salary: ");
+                .append("; Departments: ");
         employee.getDepartments().forEach(builder::append);
         return builder.toString();
     }

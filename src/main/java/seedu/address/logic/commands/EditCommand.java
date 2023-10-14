@@ -107,12 +107,12 @@ public class EditCommand extends Command {
         Id updatedId = editEmployeeDescriptor.getId().orElse(employeeToEdit.getId());
         Phone updatedPhone = editEmployeeDescriptor.getPhone().orElse(employeeToEdit.getPhone());
         Email updatedEmail = editEmployeeDescriptor.getEmail().orElse(employeeToEdit.getEmail());
+        Salary updatedSalary = editEmployeeDescriptor.getSalary().orElse(employeeToEdit.getSalary());
         Set<Department> updatedDepartments = editEmployeeDescriptor.getDepartments()
                 .orElse(employeeToEdit.getDepartments());
-        Salary updatedSalary = editEmployeeDescriptor.getSalary().orElse(employeeToEdit.getSalary());
 
-        return new Employee(updatedName, updatedPosition, updatedId, updatedPhone, updatedEmail, updatedDepartments,
-                updatedSalary);
+        return new Employee(updatedName, updatedPosition, updatedId, updatedPhone, updatedEmail,
+                updatedSalary, updatedDepartments);
     }
 
     @Override
@@ -149,8 +149,8 @@ public class EditCommand extends Command {
         private Id id;
         private Phone phone;
         private Email email;
-        private Set<Department> departments;
         private Salary salary;
+        private Set<Department> departments;
 
         public EditEmployeeDescriptor() {}
 
@@ -164,15 +164,15 @@ public class EditCommand extends Command {
             setId(toCopy.id);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
-            setDepartments(toCopy.departments);
             setSalary(toCopy.salary);
+            setDepartments(toCopy.departments);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, departments);
+            return CollectionUtil.isAnyNonNull(name, position, id, phone, email, salary, departments);
         }
 
         public void setName(Name name) {
@@ -258,8 +258,8 @@ public class EditCommand extends Command {
                     && Objects.equals(id, otherEditEmployeeDescriptor.id)
                     && Objects.equals(phone, otherEditEmployeeDescriptor.phone)
                     && Objects.equals(email, otherEditEmployeeDescriptor.email)
-                    && Objects.equals(departments, otherEditEmployeeDescriptor.departments)
-                    && Objects.equals(salary, otherEditEmployeeDescriptor.salary);
+                    && Objects.equals(salary, otherEditEmployeeDescriptor.salary)
+                    && Objects.equals(departments, otherEditEmployeeDescriptor.departments);
         }
 
         @Override
@@ -270,8 +270,8 @@ public class EditCommand extends Command {
                     .add("id", id)
                     .add("phone", phone)
                     .add("email", email)
-                    .add("departments", departments)
                     .add("salary", salary)
+                    .add("departments", departments)
                     .toString();
         }
     }
