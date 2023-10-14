@@ -127,6 +127,7 @@ public class Student {
         }
 
         Student otherStudent = (Student) other;
+
         return name.equals(otherStudent.name)
                 && phone.equals(otherStudent.phone)
                 && email.equals(otherStudent.email)

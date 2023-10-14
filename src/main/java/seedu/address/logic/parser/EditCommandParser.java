@@ -73,7 +73,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setNearestMrtStation(ParserUtil.parseMrtStation(
                     argMultimap.getValue(PREFIX_NEAREST_MRT_STATION).get()));
         }
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_SUBJECT)).ifPresent(editPersonDescriptor::setTags);
+        parseTagsForEdit(argMultimap.getAllValues(PREFIX_SUBJECT)).ifPresent(editPersonDescriptor::setSubjects);
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);

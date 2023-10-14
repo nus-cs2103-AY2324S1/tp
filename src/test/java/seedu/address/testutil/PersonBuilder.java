@@ -23,6 +23,9 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_GENDER = "F";
+    public static final String DEFAULT_SEC_LEVEL = "2";
+    public static final String DEFAULT_NEAREST_MRT_STATION = "Buona Vista";
 
     private Name name;
     private Phone phone;
@@ -41,6 +44,9 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        gender = new Gender(DEFAULT_GENDER);
+        secLevel = new SecLevel(DEFAULT_SEC_LEVEL);
+        nearestMrtStation = new MrtStation(DEFAULT_NEAREST_MRT_STATION);
         subjects = new HashSet<>();
     }
 
@@ -52,6 +58,9 @@ public class PersonBuilder {
         phone = studentToCopy.getPhone();
         email = studentToCopy.getEmail();
         address = studentToCopy.getAddress();
+        gender = studentToCopy.getGender();
+        secLevel = studentToCopy.getSecLevel();
+        nearestMrtStation = studentToCopy.getNearestMrtStation();
         subjects = new HashSet<>(studentToCopy.getSubjects());
     }
 
@@ -66,8 +75,8 @@ public class PersonBuilder {
     /**
      * Parses the {@code subjects} into a {@code Set<Subject>} and set it to the {@code Student} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
-        this.subjects = SampleDataUtil.getTagSet(tags);
+    public PersonBuilder withSubjects(String ... subjects) {
+        this.subjects = SampleDataUtil.getSubjectSet(subjects);
         return this;
     }
 
@@ -92,6 +101,30 @@ public class PersonBuilder {
      */
     public PersonBuilder withEmail(String email) {
         this.email = new Email(email);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Email} of the {@code Student} that we are building.
+     */
+    public PersonBuilder withGender(String gender) {
+        this.gender = new Gender(gender);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Email} of the {@code Student} that we are building.
+     */
+    public PersonBuilder withSecLevel(String secLevel) {
+        this.secLevel = new SecLevel(secLevel);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Email} of the {@code Student} that we are building.
+     */
+    public PersonBuilder withNearestMrtStation(String nearestMrtStation) {
+        this.nearestMrtStation = new MrtStation(nearestMrtStation);
         return this;
     }
 

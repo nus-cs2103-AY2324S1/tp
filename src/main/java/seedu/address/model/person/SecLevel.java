@@ -15,7 +15,8 @@ public class SecLevel {
         SECONDARY_ONE,
         SECONDARY_TWO,
         SECONDARY_THREE,
-        SECONDARY_FOUR
+        SECONDARY_FOUR,
+        INVALID
     }
 
     public static final String MESSAGE_CONSTRAINTS =
@@ -37,7 +38,7 @@ public class SecLevel {
      * Returns true if a given string is a valid secondary school level.
      */
     public static boolean isValidSecLevel(String secLevel) {
-        SecLevel.SecLevels level = null;
+        SecLevel.SecLevels level = SecLevels.INVALID;
 
         if (secLevel.equals("1")) {
             level = SecLevels.SECONDARY_ONE;
@@ -75,12 +76,12 @@ public class SecLevel {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Phone)) {
+        if (!(other instanceof SecLevel)) {
             return false;
         }
 
-        Phone otherPhone = (Phone) other;
-        return value.equals(otherPhone.value);
+        SecLevel otherSecLevel = (SecLevel) other;
+        return value.equals(otherSecLevel.value);
     }
 
     @Override

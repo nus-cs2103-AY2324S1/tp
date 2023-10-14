@@ -7,8 +7,11 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Gender;
+import seedu.address.model.person.MrtStation;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.SecLevel;
 import seedu.address.model.person.Student;
 import seedu.address.model.tag.Subject;
 
@@ -36,7 +39,10 @@ public class EditPersonDescriptorBuilder {
         descriptor.setPhone(student.getPhone());
         descriptor.setEmail(student.getEmail());
         descriptor.setAddress(student.getAddress());
-        descriptor.setTags(student.getSubjects());
+        descriptor.setGender(student.getGender());
+        descriptor.setSecLevel(student.getSecLevel());
+        descriptor.setNearestMrtStation(student.getNearestMrtStation());
+        descriptor.setSubjects(student.getSubjects());
     }
 
     /**
@@ -72,12 +78,36 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
+     * Sets the {@code Gender} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withGender(String gender) {
+        descriptor.setGender(new Gender(gender));
+        return this;
+    }
+
+    /**
+     * Sets the {@code SecLevel} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withSecLevel(String secLevel) {
+        descriptor.setSecLevel(new SecLevel(secLevel));
+        return this;
+    }
+
+    /**
+     * Sets the {@code MrtStation} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withNearestMrtStation(String nearestMrtStation) {
+        descriptor.setNearestMrtStation(new MrtStation(nearestMrtStation));
+        return this;
+    }
+
+    /**
      * Parses the {@code tags} into a {@code Set<Subject>} and set it to the {@code EditPersonDescriptor}
      * that we are building.
      */
-    public EditPersonDescriptorBuilder withTags(String... tags) {
+    public EditPersonDescriptorBuilder withSubjects(String... tags) {
         Set<Subject> subjectSet = Stream.of(tags).map(Subject::new).collect(Collectors.toSet());
-        descriptor.setTags(subjectSet);
+        descriptor.setSubjects(subjectSet);
         return this;
     }
 

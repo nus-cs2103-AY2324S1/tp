@@ -13,7 +13,8 @@ public class Gender {
      */
     private enum Genders {
         MALE,
-        FEMALE
+        FEMALE,
+        INVALID
     }
 
     public static final String MESSAGE_CONSTRAINTS =
@@ -35,7 +36,7 @@ public class Gender {
      * Returns true if a given string is a valid gender.
      */
     public static boolean isValidGender(String gender) {
-        Genders g = null;
+        Genders g = Genders.INVALID;
 
         if (gender.equals("M")) {
             g = Genders.MALE;
@@ -65,12 +66,12 @@ public class Gender {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Phone)) {
+        if (!(other instanceof Gender)) {
             return false;
         }
 
-        Phone otherPhone = (Phone) other;
-        return value.equals(otherPhone.value);
+        Gender otherGender = (Gender) other;
+        return value.equals(otherGender.value);
     }
 
     @Override
