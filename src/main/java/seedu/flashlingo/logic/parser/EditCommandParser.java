@@ -15,8 +15,8 @@ import seedu.flashlingo.commons.core.index.Index;
 import seedu.flashlingo.logic.commands.EditCommand;
 import seedu.flashlingo.logic.parser.exceptions.ParseException;
 import seedu.flashlingo.model.flashcard.FlashCard;
-import seedu.flashlingo.model.flashcard.OriginalWord;
-import seedu.flashlingo.model.flashcard.Translation;
+import seedu.flashlingo.model.flashcard.words.OriginalWord;
+import seedu.flashlingo.model.flashcard.words.TranslatedWord;
 import seedu.flashlingo.model.tag.Tag;
 
 /**
@@ -45,7 +45,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ORIGINAL_WORD, PREFIX_TRANSLATED_WORD);
 
         OriginalWord word = new OriginalWord(argMultimap.getValue(PREFIX_ORIGINAL_WORD).get());
-        Translation translation = new Translation(argMultimap.getValue(PREFIX_TRANSLATED_WORD).get());
+        TranslatedWord translation = new TranslatedWord(argMultimap.getValue(PREFIX_TRANSLATED_WORD).get());
         return new EditCommand(index, new FlashCard(word, translation, new Date(), 1));
     }
 

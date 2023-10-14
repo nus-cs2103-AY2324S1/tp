@@ -1,4 +1,4 @@
-package seedu.flashlingo.model.flashcard;
+package seedu.flashlingo.model.flashcard.words;
 
 /**
  * Represents the translated word

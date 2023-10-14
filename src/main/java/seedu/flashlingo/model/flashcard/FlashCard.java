@@ -1,5 +1,8 @@
 package seedu.flashlingo.model.flashcard;
 
+import seedu.flashlingo.model.flashcard.words.OriginalWord;
+import seedu.flashlingo.model.flashcard.words.TranslatedWord;
+
 import java.util.Date;
 
 /**
@@ -11,7 +14,7 @@ import java.util.Date;
  */
 public class FlashCard {
     private final OriginalWord originalWord;
-    private final Translation translatedWord;
+    private final TranslatedWord translatedWord;
     private Date whenToReview; // Date the flashcard was needs to be reviewed
     private ProficiencyLevel level; // How many times successfully remembered
     /**
@@ -22,7 +25,7 @@ public class FlashCard {
      * @param whenToReview   The date of when you need to review this word
      * @param level          The level of familiarity with the word
      */
-    public FlashCard(OriginalWord originalWord, Translation translatedWord, Date whenToReview, int level) {
+    public FlashCard(OriginalWord originalWord, TranslatedWord translatedWord, Date whenToReview, int level) {
         this.level = new ProficiencyLevel(level);
         this.whenToReview = whenToReview;
         this.translatedWord = translatedWord;
@@ -32,7 +35,7 @@ public class FlashCard {
         return originalWord;
     }
 
-    public Translation getTranslatedWord() {
+    public TranslatedWord getTranslatedWord() {
         return translatedWord;
     }
 
@@ -54,6 +57,9 @@ public class FlashCard {
 
         return otherFlashCard != null
             && otherFlashCard.getOriginalWord().equals(getOriginalWord());
+    }
+    public boolean hasKeyword(String inputWord) {
+        return this.originalWord.hasSubpart(inputWord) || this.translatedWord.hasSubpart(inputWord);
     }
     /**
      * Formats Flashcard for writing to textFile
