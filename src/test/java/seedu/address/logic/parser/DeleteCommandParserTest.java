@@ -1,9 +1,9 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_STUDENTNUMBER_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.STUDENTNUMBER_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENTNUMBER_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_STUDENT_NUMBER_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.STUDENT_NUMBER_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_NUMBER_BOB;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -31,12 +31,12 @@ public class DeleteCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, STUDENTNUMBER_DESC_BOB,
-                new DeleteCommand(new StudentNumber(VALID_STUDENTNUMBER_BOB)));
+        assertParseSuccess(parser, STUDENT_NUMBER_DESC_BOB,
+                new DeleteCommand(new StudentNumber(VALID_STUDENT_NUMBER_BOB)));
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, INVALID_STUDENTNUMBER_DESC, StudentNumber.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, INVALID_STUDENT_NUMBER_DESC, StudentNumber.MESSAGE_CONSTRAINTS);
     }
 }

@@ -1,11 +1,11 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSNUMBER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASS_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTNUMBER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -27,11 +27,11 @@ public class LookupCommand extends Command {
             + "the specified keywords (case-insensitive) \nand displays them "
             + "as a list with index numbers.\n"
             + "Parameters: \n"
-            + "[" + PREFIX_CLASSNUMBER + "CLASS_NUMBER] "
+            + "[" + PREFIX_CLASS_NUMBER + "CLASS_NUMBER] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_STUDENTNUMBER + "STUDENT_NUMBER] "
+            + "[" + PREFIX_STUDENT_NUMBER + "STUDENT_NUMBER] "
             + "[" + PREFIX_TAG + "TAG]\n"
             + "Example: \n"
             + COMMAND_WORD + " " + PREFIX_NAME + "li\n"

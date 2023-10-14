@@ -1,10 +1,10 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSNUMBER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASS_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTNUMBER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
@@ -42,8 +42,8 @@ public class PersonUtil {
         sb.append(PREFIX_NAME + person.getName().fullName + " ");
         sb.append(PREFIX_PHONE + person.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
-        sb.append(PREFIX_STUDENTNUMBER + person.getStudentNumber().value + " ");
-        sb.append(PREFIX_CLASSNUMBER + person.getClassNumber().value + " ");
+        sb.append(PREFIX_STUDENT_NUMBER + person.getStudentNumber().value + " ");
+        sb.append(PREFIX_CLASS_NUMBER + person.getClassNumber().value + " ");
         person.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
@@ -55,7 +55,7 @@ public class PersonUtil {
      */
     public static String getPersonStudentNumber(Person person) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_STUDENTNUMBER + person.getStudentNumber().value + " ");
+        sb.append(PREFIX_STUDENT_NUMBER + person.getStudentNumber().value + " ");
         return sb.toString();
     }
 
@@ -67,9 +67,9 @@ public class PersonUtil {
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
-        descriptor.getStudentNumber().ifPresent(studentNumber -> sb.append(PREFIX_STUDENTNUMBER)
+        descriptor.getStudentNumber().ifPresent(studentNumber -> sb.append(PREFIX_STUDENT_NUMBER)
                         .append(studentNumber.value).append(" "));
-        descriptor.getClassNumber().ifPresent(classNumber -> sb.append(PREFIX_CLASSNUMBER)
+        descriptor.getClassNumber().ifPresent(classNumber -> sb.append(PREFIX_CLASS_NUMBER)
                         .append(classNumber.value).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();

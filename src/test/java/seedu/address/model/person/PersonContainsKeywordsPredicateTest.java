@@ -50,7 +50,7 @@ public class PersonContainsKeywordsPredicateTest {
         assertTrue(predicate.test(new PersonBuilder().withClassNumber("T100").build()));
 
         // Multiple keywords
-        predicate = new PersonContainsKeywordsPredicate(PersonBuilder.DEFAULT_CLASSNUMBER,
+        predicate = new PersonContainsKeywordsPredicate(PersonBuilder.DEFAULT_CLASS_NUMBER,
                 null, "Alice", PersonBuilder.DEFAULT_PHONE, null, "tag2");
         assertTrue(predicate.test(new PersonBuilder()
                 .withName("Alice Bob")

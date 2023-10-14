@@ -120,9 +120,9 @@ Examples:
 
 Tags the existing student in the address book.
 
-Format: `tag STUDENTNUMBER [/add] [/delete] t/[TAG]…​`
+Format: `tag STUDENT_NUMBER [/add] [/delete] t/[TAG]…​`
 
-* Tags the student with the specified `STUDENTNUMBER`. 
+* Tags the student with the specified `STUDENT_NUMBER`. 
 * When editing tags without `/add` or `/delete`, the existing tags of the student will be removed.
 * You can remove all the student’s tags by typing without `/add` and `/delete` 
   and `t/` without specifying any tags after it.
