@@ -61,8 +61,8 @@ applications.
 * Items in square brackets are optional.<br>
   e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+* Items with `…` after them can be used multiple times including zero times.<br>
+  e.g. `[t/TAG]…` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -82,7 +82,7 @@ applications.
 
 Adds an application to a company to the list.
 
-**Format:** `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS​`
+**Format:** `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`
 
 * Users must input a company `NAME`
 * Details of the company such as `PHONE_NUMBER`, `EMAIL` and `ADDRESS` are optional
@@ -114,7 +114,7 @@ Deletes the specified application from the list.
 
 * Deletes the application to the company at the specified `INDEX`.
 * The `INDEX` refers to the index number shown in the displayed application list.
-* The `INDEX` must be a _positive integer_ 1, 2, 3, …​
+* The `INDEX` must be a _positive integer_ 1, 2, 3, …
 
 **Successful command:**
 print “Application to (Company name) has been deleted.”
@@ -162,7 +162,7 @@ Marks the status of an existing application in the list.
 
 * Marks the status of the application at the specified `INDEX` as submitted, pending, accepted, or rejected.
 * The `INDEX` refers to the index number shown in the displayed application list.
-* The `INDEX` must be a _positive integer_ 1, 2, 3, …​
+* The `INDEX` must be a _positive integer_ 1, 2, 3, …
 
 **Successful command:**
 print “Application to (Company name) has been marked as `STATUS`.”
@@ -185,7 +185,7 @@ print “Error: ” and error message for:
 
 ---
 
-### Setting the deadline for an application submission : `set deadline`
+### Setting the deadline for an application submission : `deadline`
 
 Sets submission deadline for an existing application in the list.
 
@@ -193,15 +193,17 @@ Sets submission deadline for an existing application in the list.
 
 * Sets deadline for the existing application at the specified `INDEX`.
 * The `INDEX` refers to the index number shown in the displayed application list.
-* The `INDEX` must be a _positive integer_ 1, 2, 3, …​
+* The `INDEX` must be a _positive integer_ 1, 2, 3, …
 * `DEADLINE` must be provided in the accepted `DATETIME` Format: Nov 12 2022 1200
 
 **Successful command:**
 print “(Company Name)’s application deadline has been set to `DEADLINE`.”
 
 **Failed command:**
-print “Error: ” and error message:
+Prints the associated error messsage:
 
+* No arguments provided: "Invalid command format!" and provides the command format.
+* Invalid specifier: "Invalid command format!"
 * `INDEX` is not a positive integer: “Index must be a positive integer.”
 * `INDEX` is larger than list size: “No such company at index (index).”
 
@@ -212,6 +214,34 @@ print “Error: ” and error message:
 
 **UI mockup:**
 ![DeadlineCommand](images/user-guide/DeadlineCommand.png)
+
+---
+
+### Finding an application : `find`
+
+Find applications by specifying a field and keywords.
+
+**Format:** `find -FIELD [KEYWORDS]`
+
+* Lists all applications whose field contains any of the provided keywords.
+* Applications are filtered by the specified `FIELD`. 
+* The `FIELD` must be a valid specifier. `find` only supports searching by:
+  * Company: `-c`
+  * Role: `-r`
+
+**Successful command:**
+List is updated to contain applications meeting the search criteria. 
+
+**Failed command:**
+Prints the associated error message.
+
+* No arguments provided: “Invalid command format!” and provides the command format.
+* Invalid specifier: "Invalid command format! Field specifier is invalid".
+
+**Examples:**
+
+* `deadline 1 d/Nov 12 2022 1200`
+  Sets deadline for application at index 1 to be Nov 12 2022 1200.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -224,3 +254,4 @@ print “Error: ” and error message:
 | **List**     | `list`                                        |
 | **Mark**     | `mark INDEX s/STATUS`                         |
 | **Deadline** | `deadline INDEX d/DEADLINE`                   |
+| **Find**     | `find -FIELD [KEYWORDS]`                      |
