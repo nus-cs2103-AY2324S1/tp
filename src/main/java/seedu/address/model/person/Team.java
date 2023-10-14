@@ -12,13 +12,14 @@ import java.util.Set;
 public class Team {
 
     private final int leaderHashCode;
-    private String TeamName = "unassigned";
+    private Name teamName;
 
+    private TeamLeader teamLeader;
 
     //todo: set will ignore duplicated values, do we need to notify the user that he added a duplicate value or not?
     //use the hash code for representing each developer. The hash code will be updated when there is a change
     //to the developer's information.
-    private final Set<Integer> developerHashCode;
+    private final Set<Integer> developerHashCodeSet;
 
 
     /**
@@ -27,9 +28,11 @@ public class Team {
      * @param leader The leader of the team.
      */
 
-    public Team(TeamLeader leader) {
+    public Team(Name teamName, TeamLeader leader) {
+        this.teamName = teamName;
         this.leaderHashCode = leader.hashCode();
-        this.developerHashCode = new HashSet<>();
+        this.developerHashCodeSet = new HashSet<>();
+        this.teamLeader = teamLeader;
     }
 
     /**
@@ -38,7 +41,7 @@ public class Team {
      * @param developerHashCode The developer to be added.
      */
     public void addDeveloper(int developerHashCode) {
-        this.developerHashCode.add(developerHashCode);
+        this.developerHashCodeSet.add(developerHashCode);
     }
 
 
@@ -49,7 +52,7 @@ public class Team {
      * @param developerHashCode The developer to be removed.
      */
     public void removeDeveloper(int developerHashCode) {
-        this.developerHashCode.remove(developerHashCode);
+        this.developerHashCodeSet.remove(developerHashCode);
     }
 
 
@@ -68,7 +71,11 @@ public class Team {
      * @return A list of Developers.
      */
     public Set<Integer> getDevelopers() {
-        return developerHashCode;
+        return developerHashCodeSet;
+    }
+
+    public Name getTeamName() {
+        return teamName;
     }
 
 }

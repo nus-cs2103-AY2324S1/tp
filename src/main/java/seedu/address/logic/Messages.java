@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Team;
 
 /**
  * Container for user visible messages.
@@ -47,5 +48,25 @@ public class Messages {
         person.getTags().forEach(builder::append);
         return builder.toString();
     }
+
+    //Update this after the uniqueteamlist class is implemented. Need a way to retrieve leader name from the hashcode(which should be done in the new uniqueTeamList class)
+    //Need to format a team to hold teamname, leadername and developer set for the structure.
+
+    //    /**
+    //     * Formats the {@code team} for display to the user.
+    //     */
+    //    public static String format(Team team) {
+    //        final StringBuilder builder = new StringBuilder();
+    //        builder.append(team.getTeamName())
+    //                .append("; Phone: ")
+    //                .append(person.getPhone())
+    //                .append("; Email: ")
+    //                .append(person.getEmail())
+    //                .append("; Address: ")
+    //                .append(person.getAddress())
+    //                .append("; Tags: ");
+    //        person.getTags().forEach(builder::append);
+    //        return builder.toString();
+    //    }
 
 }

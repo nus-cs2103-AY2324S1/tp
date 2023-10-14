@@ -113,7 +113,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
-    public Person getPersonByHashCode (int hash) {
+    public Person getPersonByHashCode(int hash) {
         return persons.getPersonByHashCode(hash);
     }
 
@@ -148,7 +148,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
-    public void setTeams(Team target,Team editedTeam) {
+    public void setTeams(Team target, Team editedTeam) {
         requireNonNull(editedTeam);
 
         //todo: more data protection

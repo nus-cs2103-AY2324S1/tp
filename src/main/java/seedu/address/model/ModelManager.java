@@ -153,4 +153,43 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
 
+    //team level operations
+    public boolean hasTeam(Team team) {
+        requireNonNull(team);
+        return addressBook.hasTeam(team);
+    }
+
+    /**
+     * Adds a team to the team structure.
+     * The team must not already exist in the address book.
+     */
+    public void addTeam(Team team) {
+        addressBook.addTeam(team);
+    }
+
+    /**
+     * Removes {@code key} from team structure.
+     * {@code key} must exist in the address book.
+     */
+    public void removeTeam(Team key) {
+        addressBook.removeTeam(key);
+    }
+
+
+    /**
+     * Replaces the given team {@code target} in the list with {@code editedTeam}.
+     * {@code target} must exist in the address book.
+     * The team identity of {@code editedTeam} must not be the same as another existing team in the address book.
+     */
+    public void setTeams(Team target, Team editedTeam) {
+        requireNonNull(editedTeam);
+
+        //todo: more data protection
+        addressBook.setTeams(target, editedTeam);
+
+    }
+    public void addToTeam() {
+
+    }
+
 }

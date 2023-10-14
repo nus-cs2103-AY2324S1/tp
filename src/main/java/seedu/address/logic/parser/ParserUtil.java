@@ -9,10 +9,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -120,5 +117,19 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+    /**
+     * Parses a {@code String teamLeader} into an {@code TeamLeader}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code TeamLeader} is invalid.
+     */
+    public static TeamLeader parseTeamLeader(String teamLeader) throws ParseException {
+        requireNonNull(teamLeader);
+        String trimmedTeamLeader = teamLeader.trim();
+        if (//this developer does not exist in the list) {
+            throw new ParseException(//Does not exist);
+        }
+        return new TeamLeader(teamLeader);  //after checking that this developer exists, create a new TeamLeader using this developer
     }
 }

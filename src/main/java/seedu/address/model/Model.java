@@ -9,6 +9,8 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Team;
 
+import static java.util.Objects.requireNonNull;
+
 /**
  * The API of the Model component.
  */
@@ -88,4 +90,27 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    //team level functions to model
+    boolean hasTeam(Team team);
+
+    /**
+     * Adds a team to the team structure.
+     * The team must not already exist in the address book.
+     */
+    void addTeam(Team team);
+
+    /**
+     * Removes {@code key} from team structure.
+     * {@code key} must exist in the address book.
+     */
+    void removeTeam(Team key);
+
+
+    /**
+     * Replaces the given team {@code target} in the list with {@code editedTeam}.
+     * {@code target} must exist in the address book.
+     * The team identity of {@code editedTeam} must not be the same as another existing team in the address book.
+     */
+    void setTeams(Team target, Team editedTeam);
 }
