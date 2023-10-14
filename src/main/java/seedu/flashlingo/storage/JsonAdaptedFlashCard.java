@@ -11,9 +11,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.flashlingo.commons.exceptions.IllegalValueException;
 import seedu.flashlingo.model.flashcard.FlashCard;
-import seedu.flashlingo.model.flashcard.OriginalWord;
-import seedu.flashlingo.model.flashcard.Translation;
-
+import seedu.flashlingo.model.flashcard.words.OriginalWord;
+import seedu.flashlingo.model.flashcard.words.TranslatedWord;
 
 /**
  * Jackson-friendly version of {@link FlashCard}.
@@ -22,7 +21,9 @@ public class JsonAdaptedFlashCard {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Flash card's %s field is missing!";
 
     private final String originalWord;
+    private final String originalWordLanguage;
     private final String translatedWord;
+    private final String translatedWordLanguage;
     private final String whenToReview;
     private final int level;
     /**
@@ -30,11 +31,15 @@ public class JsonAdaptedFlashCard {
      */
     @JsonCreator
     public JsonAdaptedFlashCard(@JsonProperty("originalWord") String originalWord,
+                                @JsonProperty("originalWordLanguage") String originalWordLanguage,
                                 @JsonProperty("translatedWord") String translatedWord,
+                                @JsonProperty("translatedWordLanguage") String translatedWordLanguage,
                                 @JsonProperty("whenToReview") String whenToReview,
                                 @JsonProperty("level") int level) {
         this.originalWord = originalWord;
+        this.originalWordLanguage = originalWordLanguage;
         this.translatedWord = translatedWord;
+        this.translatedWordLanguage = translatedWordLanguage;
         this.whenToReview = whenToReview;
         this.level = level;
     }
@@ -44,7 +49,9 @@ public class JsonAdaptedFlashCard {
      */
     public JsonAdaptedFlashCard(FlashCard source) {
         originalWord = source.getOriginalWord().toString();
+        originalWordLanguage = source.getOriginalWord().getLanguage();
         translatedWord = source.getTranslatedWord().toString();
+        translatedWordLanguage = source.getTranslatedWord().getLanguage();
         whenToReview = source.getWhenToReview().toString();
         level = source.getLevel().getLevel();
     }
@@ -55,15 +62,17 @@ public class JsonAdaptedFlashCard {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public FlashCard toModelType() throws IllegalValueException {
-        if (originalWord == null) {
+        if (originalWord == null || originalWordLanguage == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, OriginalWord.class.getSimpleName()));
         }
         final String modelOriginalWord = originalWord;
+        final String modelOriginalWordLanguage = originalWordLanguage;
 
-        if (translatedWord == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Translation.class.getSimpleName()));
+        if (translatedWord == null || translatedWordLanguage == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, TranslatedWord.class.getSimpleName()));
         }
         final String modelTranslatedWord = translatedWord;
+        final String modelTranslatedWordLanguage = translatedWordLanguage;
 
         if (whenToReview == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT));
@@ -78,6 +87,7 @@ public class JsonAdaptedFlashCard {
 
         final int modelLevel = level;
 
-        return new FlashCard(new OriginalWord(modelOriginalWord), new Translation(modelTranslatedWord), modelWhenToReview, modelLevel);
+        return new FlashCard(new OriginalWord(modelOriginalWord, modelOriginalWordLanguage),
+                new TranslatedWord(modelTranslatedWord, modelTranslatedWordLanguage), modelWhenToReview, modelLevel);
     }
 }

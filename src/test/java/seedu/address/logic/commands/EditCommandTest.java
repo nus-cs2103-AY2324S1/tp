@@ -46,8 +46,9 @@ public class EditCommandTest {
         FlashCard lastFlashcard = model.getFilteredFlashCardList().get(indexLastFlashcard.getZeroBased());
 
         FlashcardBuilder flashcardInList = new FlashcardBuilder(lastFlashcard);
-        FlashCard editedFlashcard = flashcardInList.withOriginalWord(VALID_ORIGINAL_WORD_BOB)
-                .withTranslation(VALID_TRANSLATION_BOB)
+        FlashCard editedFlashcard = flashcardInList.withOriginalWord(VALID_ORIGINAL_WORD_BOB,
+                        VALID_ORIGINAL_WORD_LANGUAGE)
+                .withTranslation(VALID_TRANSLATION_BOB, VALID_TRANSLATION_LANGUAGE)
                 .build();
 
         EditCommand editCommand = new EditCommand(indexLastFlashcard, editedFlashcard);
@@ -67,9 +68,9 @@ public class EditCommandTest {
 
         FlashCard flashCardInFilteredList = model.getFilteredFlashCardList().get(INDEX_FIRST_FLASHCARD.getZeroBased());
         FlashCard editedFlashcard = new FlashcardBuilder(flashCardInFilteredList)
-                .withOriginalWord(VALID_ORIGINAL_WORD_BOB).build();
+                .withOriginalWord(VALID_ORIGINAL_WORD_BOB, VALID_ORIGINAL_WORD_LANGUAGE).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_FLASHCARD,
-                new FlashcardBuilder().withOriginalWord(VALID_ORIGINAL_WORD_BOB).build());
+                new FlashcardBuilder().withOriginalWord(VALID_ORIGINAL_WORD_BOB, VALID_TRANSLATION_LANGUAGE).build());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_FLASHCARD_SUCCESS,
                 Messages.format(editedFlashcard));
@@ -104,7 +105,8 @@ public class EditCommandTest {
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredFlashCardList().size() + 1);
-        FlashCard descriptor = new FlashcardBuilder().withOriginalWord(VALID_ORIGINAL_WORD_BOB).build();
+        FlashCard descriptor = new FlashcardBuilder().withOriginalWord(VALID_ORIGINAL_WORD_BOB,
+                VALID_ORIGINAL_WORD_LANGUAGE).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
@@ -122,7 +124,7 @@ public class EditCommandTest {
         assertTrue(outOfBoundIndex.getZeroBased() < model.getFlashlingo().getFlashCardList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
-                new FlashcardBuilder().withOriginalWord(VALID_ORIGINAL_WORD_BOB).build());
+                new FlashcardBuilder().withOriginalWord(VALID_ORIGINAL_WORD_BOB, VALID_TRANSLATION_LANGUAGE).build());
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
     }
