@@ -72,7 +72,7 @@ class JsonAdaptedPerson {
         emails.addAll(source.getEmails().stream()
                 .map(JsonAdaptedProperty::new)
                 .collect(Collectors.toList()));
-        link = source.getWebLink().getValue();
+        link = source.getLink().getValue();
         graduatingYear = source.getGraduatingYear().value;
         course = source.getCourse().value;
         specialisation = source.getSpecialisation().value;

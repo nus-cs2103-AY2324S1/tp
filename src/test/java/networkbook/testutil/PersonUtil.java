@@ -32,7 +32,7 @@ public class PersonUtil {
         person.getEmails().stream().forEach(
                 e -> sb.append(CliSyntax.PREFIX_EMAIL + " " + e.toString() + " ")
         );
-        sb.append(CliSyntax.PREFIX_WEBLINK + " " + person.getWebLink().getValue() + " ");
+        sb.append(CliSyntax.PREFIX_LINK + " " + person.getLink().getValue() + " ");
         sb.append(CliSyntax.PREFIX_GRADUATING_YEAR + " " + person.getGraduatingYear().value + " ");
         sb.append(CliSyntax.PREFIX_COURSE + " " + person.getCourse().value + " ");
         sb.append(CliSyntax.PREFIX_SPECIALISATION + " " + person.getSpecialisation().value + " ");
@@ -60,8 +60,8 @@ public class PersonUtil {
                                                     .append(e.toString()).append(" "));
             }
         }
-        descriptor.getWebLink().ifPresent(webLink -> sb.append(CliSyntax.PREFIX_WEBLINK).append(" ")
-                                                    .append(webLink.getValue()).append(" "));
+        descriptor.getLink().ifPresent(link -> sb.append(CliSyntax.PREFIX_LINK).append(" ")
+                                                    .append(link.getValue()).append(" "));
         descriptor.getGraduatingYear().ifPresent(graduatingYear -> sb.append(CliSyntax.PREFIX_GRADUATING_YEAR)
                 .append(" ").append(graduatingYear.value).append(" "));
         descriptor.getCourse().ifPresent(course -> sb.append(CliSyntax.PREFIX_COURSE).append(" ")

@@ -70,18 +70,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String WebLink} into an {@code WebLink}.
+     * Parses a {@code String link} into an {@code Link}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code weblink} is invalid.
+     * @throws ParseException if the given {@code link} is invalid.
      */
-    public static Link parseWebLink(String webLink) throws ParseException {
-        requireNonNull(webLink);
-        String trimmedWebLink = webLink.trim();
-        if (!Link.isValidLink(trimmedWebLink)) {
+    public static Link parseLink(String link) throws ParseException {
+        requireNonNull(link);
+        String trimmedLink = link.trim();
+        if (!Link.isValidLink(trimmedLink)) {
             throw new ParseException(Link.MESSAGE_CONSTRAINTS);
         }
-        return new Link(trimmedWebLink);
+        return new Link(trimmedLink);
     }
 
     /**

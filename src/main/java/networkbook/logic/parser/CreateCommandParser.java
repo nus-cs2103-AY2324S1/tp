@@ -36,7 +36,7 @@ public class CreateCommandParser implements Parser<CreateCommand> {
                         CliSyntax.PREFIX_NAME,
                         CliSyntax.PREFIX_PHONE,
                         CliSyntax.PREFIX_EMAIL,
-                        CliSyntax.PREFIX_WEBLINK,
+                        CliSyntax.PREFIX_LINK,
                         CliSyntax.PREFIX_GRADUATING_YEAR,
                         CliSyntax.PREFIX_COURSE,
                         CliSyntax.PREFIX_SPECIALISATION,
@@ -47,7 +47,7 @@ public class CreateCommandParser implements Parser<CreateCommand> {
         if (!arePrefixesPresent(
                 argMultimap,
                 CliSyntax.PREFIX_NAME,
-                CliSyntax.PREFIX_WEBLINK,
+                CliSyntax.PREFIX_LINK,
                 CliSyntax.PREFIX_GRADUATING_YEAR,
                 CliSyntax.PREFIX_COURSE,
                 CliSyntax.PREFIX_SPECIALISATION,
@@ -62,7 +62,7 @@ public class CreateCommandParser implements Parser<CreateCommand> {
                 CliSyntax.PREFIX_NAME,
                 CliSyntax.PREFIX_PHONE,
                 CliSyntax.PREFIX_EMAIL,
-                CliSyntax.PREFIX_WEBLINK,
+                CliSyntax.PREFIX_LINK,
                 CliSyntax.PREFIX_GRADUATING_YEAR,
                 CliSyntax.PREFIX_COURSE,
                 CliSyntax.PREFIX_SPECIALISATION,
@@ -72,7 +72,7 @@ public class CreateCommandParser implements Parser<CreateCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(CliSyntax.PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(CliSyntax.PREFIX_EMAIL).get());
         UniqueList<Email> emails = new UniqueList<Email>().setItems(List.of(email));
-        Link link = ParserUtil.parseWebLink(argMultimap.getValue(CliSyntax.PREFIX_WEBLINK).get());
+        Link link = ParserUtil.parseLink(argMultimap.getValue(CliSyntax.PREFIX_LINK).get());
         GraduatingYear graduatingYear = ParserUtil.parseGraduatingYear(
                     argMultimap.getValue(CliSyntax.PREFIX_GRADUATING_YEAR).get());
         Course course = ParserUtil.parseCourse(argMultimap.getValue(CliSyntax.PREFIX_COURSE).get());

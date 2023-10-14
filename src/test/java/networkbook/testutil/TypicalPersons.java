@@ -14,8 +14,8 @@ import static networkbook.logic.commands.CommandTestUtil.VALID_SPECIALISATION_AM
 import static networkbook.logic.commands.CommandTestUtil.VALID_SPECIALISATION_BOB;
 import static networkbook.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static networkbook.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static networkbook.logic.commands.CommandTestUtil.VALID_WEBLINK_AMY;
-import static networkbook.logic.commands.CommandTestUtil.VALID_WEBLINK_BOB;
+import static networkbook.logic.commands.CommandTestUtil.VALID_LINK_AMY;
+import static networkbook.logic.commands.CommandTestUtil.VALID_LINK_BOB;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,7 +35,7 @@ public class TypicalPersons {
             .withTags("friends").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withWebLink("www.facebook.com/john-d")
+            .withLink("www.facebook.com/john-d")
             .withTags("owesMoney", "friends").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").build();
@@ -56,11 +56,11 @@ public class TypicalPersons {
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-            .withEmail(VALID_EMAIL_AMY).withWebLink(VALID_WEBLINK_AMY).withGraduatingYear(VALID_GRADUATING_YEAR_AMY)
+            .withEmail(VALID_EMAIL_AMY).withLink(VALID_LINK_AMY).withGraduatingYear(VALID_GRADUATING_YEAR_AMY)
             .withCourse(VALID_COURSE_AMY).withSpecialisation(VALID_SPECIALISATION_AMY).withTags(VALID_TAG_FRIEND)
             .withPriority("High").build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-            .withEmail(VALID_EMAIL_BOB).withWebLink(VALID_WEBLINK_BOB).withGraduatingYear(VALID_GRADUATING_YEAR_BOB)
+            .withEmail(VALID_EMAIL_BOB).withLink(VALID_LINK_BOB).withGraduatingYear(VALID_GRADUATING_YEAR_BOB)
             .withCourse(VALID_COURSE_BOB).withSpecialisation(VALID_SPECIALISATION_BOB)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
 

@@ -37,7 +37,7 @@ public class AddCommand extends Command {
             + "Parameters: "
             + "[" + CliSyntax.PREFIX_PHONE + " PHONE] "
             + "[" + CliSyntax.PREFIX_EMAIL + " EMAIL] "
-            + "[" + CliSyntax.PREFIX_WEBLINK + "WEBLINK] "
+            + "[" + CliSyntax.PREFIX_LINK + "LINK] "
             + "[" + CliSyntax.PREFIX_GRADUATING_YEAR + "GRADUATING YEAR] "
             + "[" + CliSyntax.PREFIX_COURSE + "COURSE OF STUDY] "
             + "[" + CliSyntax.PREFIX_SPECIALISATION + "SPECIALISATION] "
@@ -124,7 +124,7 @@ public class AddCommand extends Command {
         return editPersonDescriptor.getEmails().orElse(personToAddInfo.getEmails());
     }
     private Link addLinks(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor) {
-        return editPersonDescriptor.getWebLink().orElse(personToAddInfo.getWebLink());
+        return editPersonDescriptor.getLink().orElse(personToAddInfo.getLink());
     }
     private GraduatingYear addGraduatingYear(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor) {
         return editPersonDescriptor.getGraduatingYear().orElse(personToAddInfo.getGraduatingYear());

@@ -62,7 +62,7 @@ public class Person implements Identifiable<Person> {
     public UniqueList<Email> getEmails() {
         return emails;
     }
-    public Link getWebLink() {
+    public Link getLink() {
         return link;
     }
     public GraduatingYear getGraduatingYear() {
@@ -150,7 +150,7 @@ public class Person implements Identifiable<Person> {
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", emails)
-                .add("weblink", link)
+                .add("link", link)
                 .add("graduating year", graduatingYear)
                 .add("course", course)
                 .add("specialisation", specialisation)

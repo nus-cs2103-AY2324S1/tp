@@ -25,7 +25,7 @@ public class PersonBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_WEBLINK = "github.com/amybeez";
+    public static final String DEFAULT_LINK = "github.com/amybeez";
     public static final String DEFAULT_GRADUATING_YEAR = "2000";
     public static final String DEFAULT_COURSE = "Computer Science";
     public static final String DEFAULT_SPECIALISATION = "Game Development";
@@ -48,7 +48,7 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         emails = new UniqueList<Email>().setItems(List.of(new Email(DEFAULT_EMAIL)));
-        link = new Link(DEFAULT_WEBLINK);
+        link = new Link(DEFAULT_LINK);
         graduatingYear = new GraduatingYear(DEFAULT_GRADUATING_YEAR);
         course = new Course(DEFAULT_COURSE);
         specialisation = new Specialisation(DEFAULT_SPECIALISATION);
@@ -63,7 +63,7 @@ public class PersonBuilder {
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
         emails = personToCopy.getEmails();
-        link = personToCopy.getWebLink();
+        link = personToCopy.getLink();
         graduatingYear = personToCopy.getGraduatingYear();
         course = personToCopy.getCourse();
         specialisation = personToCopy.getSpecialisation();
@@ -88,10 +88,10 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code WebLink} of the {@code Person} that we are building.
+     * Sets the {@code Link} of the {@code Person} that we are building.
      */
-    public PersonBuilder withWebLink(String webLink) {
-        this.link = new Link(webLink);
+    public PersonBuilder withLink(String link) {
+        this.link = new Link(link);
         return this;
     }
 

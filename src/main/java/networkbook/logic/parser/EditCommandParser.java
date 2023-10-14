@@ -35,7 +35,7 @@ public class EditCommandParser implements Parser<EditCommand> {
                         CliSyntax.PREFIX_NAME,
                         CliSyntax.PREFIX_PHONE,
                         CliSyntax.PREFIX_EMAIL,
-                        CliSyntax.PREFIX_WEBLINK,
+                        CliSyntax.PREFIX_LINK,
                         CliSyntax.PREFIX_GRADUATING_YEAR,
                         CliSyntax.PREFIX_COURSE,
                         CliSyntax.PREFIX_SPECIALISATION,
@@ -60,7 +60,7 @@ public class EditCommandParser implements Parser<EditCommand> {
                 CliSyntax.PREFIX_NAME,
                 CliSyntax.PREFIX_PHONE,
                 CliSyntax.PREFIX_EMAIL,
-                CliSyntax.PREFIX_WEBLINK,
+                CliSyntax.PREFIX_LINK,
                 CliSyntax.PREFIX_GRADUATING_YEAR,
                 CliSyntax.PREFIX_COURSE,
                 CliSyntax.PREFIX_SPECIALISATION
@@ -95,9 +95,9 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setEmails(new UniqueList<Email>().setItems(List.of(
                     ParserUtil.parseEmail(argMultimap.getValue(CliSyntax.PREFIX_EMAIL).get()))));
         }
-        if (argMultimap.getValue(CliSyntax.PREFIX_WEBLINK).isPresent()) {
-            editPersonDescriptor.setWebLink(
-                    ParserUtil.parseWebLink(argMultimap.getValue(CliSyntax.PREFIX_WEBLINK).get()));
+        if (argMultimap.getValue(CliSyntax.PREFIX_LINK).isPresent()) {
+            editPersonDescriptor.setLink(
+                    ParserUtil.parseLink(argMultimap.getValue(CliSyntax.PREFIX_LINK).get()));
         }
         if (argMultimap.getValue(CliSyntax.PREFIX_GRADUATING_YEAR).isPresent()) {
             editPersonDescriptor.setGraduatingYear(

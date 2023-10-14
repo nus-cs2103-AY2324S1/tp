@@ -28,8 +28,8 @@ public class CommandTestUtil {
     public static final String VALID_PHONE_BOB = "22222222";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
-    public static final String VALID_WEBLINK_AMY = "linkedin.com/in/Amy-beez";
-    public static final String VALID_WEBLINK_BOB = "github.com/bob2000";
+    public static final String VALID_LINK_AMY = "linkedin.com/in/Amy-beez";
+    public static final String VALID_LINK_BOB = "github.com/bob2000";
     public static final String VALID_GRADUATING_YEAR_AMY = "2000";
     public static final String VALID_GRADUATING_YEAR_BOB = "2026";
     public static final String VALID_COURSE_AMY = "Computer Science";
@@ -47,8 +47,8 @@ public class CommandTestUtil {
     public static final String EMAIL_DESC_AMY = " " + CliSyntax.PREFIX_EMAIL + " " + VALID_EMAIL_AMY;
     public static final String EMAIL_DESC_BOB = " " + CliSyntax.PREFIX_EMAIL + " " + VALID_EMAIL_BOB;
     // amend CliSyntax
-    public static final String WEBLINK_DESC_AMY = " " + CliSyntax.PREFIX_WEBLINK + " " + VALID_WEBLINK_AMY;
-    public static final String WEBLINK_DESC_BOB = " " + CliSyntax.PREFIX_WEBLINK + " " + VALID_WEBLINK_BOB;
+    public static final String LINK_DESC_AMY = " " + CliSyntax.PREFIX_LINK + " " + VALID_LINK_AMY;
+    public static final String LINK_DESC_BOB = " " + CliSyntax.PREFIX_LINK + " " + VALID_LINK_BOB;
     public static final String GRADUATING_YEAR_DESC_AMY = " " + CliSyntax.PREFIX_GRADUATING_YEAR + " "
             + VALID_GRADUATING_YEAR_AMY;
     public static final String GRADUATING_YEAR_DESC_BOB = " " + CliSyntax.PREFIX_GRADUATING_YEAR + " "
@@ -68,9 +68,9 @@ public class CommandTestUtil {
                                                         + " " + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + CliSyntax.PREFIX_EMAIL
                                                         + " " + "bob!yahoo"; // missing '@' symbol
-    public static final String INVALID_WEBLINK_DESC =
-            " " + CliSyntax.PREFIX_WEBLINK + " "
-            + "https://docs.google.com/viewform?edit_requested=true"; // '?' not allowed in weblink
+    public static final String INVALID_LINK_DESC =
+            " " + CliSyntax.PREFIX_LINK + " "
+            + "https://docs.google.com/viewform?edit_requested=true"; // '?' not allowed in link
     public static final String INVALID_GRADUATING_YEAR_DESC =
             " " + CliSyntax.PREFIX_GRADUATING_YEAR + " " + "123a"; // non-numerics not allowed for graduating year
     public static final String INVALID_COURSE_DESC =
@@ -90,11 +90,11 @@ public class CommandTestUtil {
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withWebLink(VALID_WEBLINK_AMY)
+                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withLink(VALID_LINK_AMY)
                 .withGraduatingYear(VALID_GRADUATING_YEAR_AMY).withCourse(VALID_COURSE_AMY)
                 .withSpecialisation(VALID_SPECIALISATION_AMY).withTags(VALID_TAG_FRIEND).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withWebLink(VALID_WEBLINK_BOB)
+                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withLink(VALID_LINK_BOB)
                 .withGraduatingYear(VALID_GRADUATING_YEAR_BOB).withCourse(VALID_COURSE_BOB)
                 .withSpecialisation(VALID_SPECIALISATION_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }

@@ -43,7 +43,7 @@ public class EditCommand extends Command {
             + "[" + CliSyntax.PREFIX_NAME + "NAME] "
             + "[" + CliSyntax.PREFIX_PHONE + "PHONE] "
             + "[" + CliSyntax.PREFIX_EMAIL + "EMAIL] "
-            + "[" + CliSyntax.PREFIX_WEBLINK + "WEBLINK] "
+            + "[" + CliSyntax.PREFIX_LINK + "LINK] "
             + "[" + CliSyntax.PREFIX_GRADUATING_YEAR + "GRADUATING YEAR] "
             + "[" + CliSyntax.PREFIX_COURSE + "COURSE OF STUDY] "
             + "[" + CliSyntax.PREFIX_SPECIALISATION + "SPECIALISATION] "
@@ -103,7 +103,7 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         UniqueList<Email> updatedEmails = editPersonDescriptor.getEmails().orElse(personToEdit.getEmails());
-        Link updatedLink = editPersonDescriptor.getWebLink().orElse(personToEdit.getWebLink());
+        Link updatedLink = editPersonDescriptor.getLink().orElse(personToEdit.getLink());
         GraduatingYear updatedGraduatingYear = editPersonDescriptor.getGraduatingYear()
                     .orElse(personToEdit.getGraduatingYear());
         Course updatedCourse = editPersonDescriptor.getCourse().orElse(personToEdit.getCourse());
@@ -166,7 +166,7 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmails(toCopy.emails);
-            setWebLink(toCopy.link);
+            setLink(toCopy.link);
             setGraduatingYear(toCopy.graduatingYear);
             setCourse(toCopy.course);
             setSpecialisation(toCopy.specialisation);
@@ -206,11 +206,11 @@ public class EditCommand extends Command {
             return Optional.ofNullable(emails);
         }
 
-        public void setWebLink(Link link) {
+        public void setLink(Link link) {
             this.link = link;
         }
 
-        public Optional<Link> getWebLink() {
+        public Optional<Link> getLink() {
             return Optional.ofNullable(link);
         }
 
@@ -292,7 +292,7 @@ public class EditCommand extends Command {
                     .add("name", name)
                     .add("phone", phone)
                     .add("email", emails)
-                    .add("web link", link)
+                    .add("link", link)
                     .add("graduating year", graduatingYear)
                     .add("course", course)
                     .add("specialisation", specialisation)

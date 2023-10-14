@@ -41,7 +41,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setName(person.getName());
         descriptor.setPhone(person.getPhone());
         descriptor.setEmails(person.getEmails());
-        descriptor.setWebLink(person.getWebLink());
+        descriptor.setLink(person.getLink());
         descriptor.setGraduatingYear(person.getGraduatingYear());
         descriptor.setCourse(person.getCourse());
         descriptor.setSpecialisation(person.getSpecialisation());
@@ -74,10 +74,10 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code WebLink} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Link} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withWebLink(String webLink) {
-        descriptor.setWebLink(new Link(webLink));
+    public EditPersonDescriptorBuilder withLink(String link) {
+        descriptor.setLink(new Link(link));
         return this;
     }
 

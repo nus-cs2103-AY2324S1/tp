@@ -29,7 +29,7 @@ public class CreateCommandParserTest {
         // whitespace only preamble
         CommandParserTestUtil.assertParseSuccess(parser, CommandTestUtil.PREAMBLE_WHITESPACE
                 + CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB
-                + CommandTestUtil.WEBLINK_DESC_BOB + CommandTestUtil.GRADUATING_YEAR_DESC_BOB
+                + CommandTestUtil.LINK_DESC_BOB + CommandTestUtil.GRADUATING_YEAR_DESC_BOB
                 + CommandTestUtil.COURSE_DESC_BOB + CommandTestUtil.SPECIALISATION_DESC_BOB
                 + CommandTestUtil.TAG_DESC_FRIEND,
                 new CreateCommand(expectedPerson));
@@ -41,7 +41,7 @@ public class CreateCommandParserTest {
                 .build();
         CommandParserTestUtil.assertParseSuccess(parser,
                 CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.PHONE_DESC_BOB
-                        + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.WEBLINK_DESC_BOB
+                        + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.LINK_DESC_BOB
                         + CommandTestUtil.GRADUATING_YEAR_DESC_BOB + CommandTestUtil.COURSE_DESC_BOB
                         + CommandTestUtil.SPECIALISATION_DESC_BOB + CommandTestUtil.TAG_DESC_HUSBAND
                         + CommandTestUtil.TAG_DESC_FRIEND,
@@ -52,7 +52,7 @@ public class CreateCommandParserTest {
     public void parse_repeatedNonTagValue_failure() {
         String validExpectedPersonString = CommandTestUtil.NAME_DESC_BOB
                 + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB
-                + CommandTestUtil.WEBLINK_DESC_BOB + CommandTestUtil.GRADUATING_YEAR_DESC_BOB
+                + CommandTestUtil.LINK_DESC_BOB + CommandTestUtil.GRADUATING_YEAR_DESC_BOB
                 + CommandTestUtil.COURSE_DESC_BOB + CommandTestUtil.SPECIALISATION_DESC_BOB
                 + CommandTestUtil.TAG_DESC_FRIEND;
 
@@ -73,21 +73,21 @@ public class CreateCommandParserTest {
 
         // multiple addresses
         CommandParserTestUtil.assertParseFailure(parser,
-                CommandTestUtil.WEBLINK_DESC_AMY + validExpectedPersonString,
-                Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_WEBLINK));
+                CommandTestUtil.LINK_DESC_AMY + validExpectedPersonString,
+                Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_LINK));
 
         // multiple fields repeated
         CommandParserTestUtil.assertParseFailure(parser,
                 validExpectedPersonString + CommandTestUtil.PHONE_DESC_AMY
                         + CommandTestUtil.EMAIL_DESC_AMY + CommandTestUtil.NAME_DESC_AMY
-                        + CommandTestUtil.WEBLINK_DESC_AMY + CommandTestUtil.GRADUATING_YEAR_DESC_AMY
+                        + CommandTestUtil.LINK_DESC_AMY + CommandTestUtil.GRADUATING_YEAR_DESC_AMY
                         + CommandTestUtil.COURSE_DESC_AMY + CommandTestUtil.SPECIALISATION_DESC_AMY
                         + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(
                         CliSyntax.PREFIX_NAME,
                         CliSyntax.PREFIX_PHONE,
                         CliSyntax.PREFIX_EMAIL,
-                        CliSyntax.PREFIX_WEBLINK,
+                        CliSyntax.PREFIX_LINK,
                         CliSyntax.PREFIX_GRADUATING_YEAR,
                         CliSyntax.PREFIX_COURSE,
                         CliSyntax.PREFIX_SPECIALISATION));
@@ -109,10 +109,10 @@ public class CreateCommandParserTest {
                 CommandTestUtil.INVALID_PHONE_DESC + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_PHONE));
 
-        // invalid weblink
+        // invalid link
         CommandParserTestUtil.assertParseFailure(parser,
-                CommandTestUtil.INVALID_WEBLINK_DESC + validExpectedPersonString,
-                Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_WEBLINK));
+                CommandTestUtil.INVALID_LINK_DESC + validExpectedPersonString,
+                Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_LINK));
 
         // invalid graduating year
         CommandParserTestUtil.assertParseFailure(parser,
@@ -146,10 +146,10 @@ public class CreateCommandParserTest {
                 validExpectedPersonString + CommandTestUtil.INVALID_PHONE_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_PHONE));
 
-        // invalid weblink
+        // invalid link
         CommandParserTestUtil.assertParseFailure(parser,
-                validExpectedPersonString + CommandTestUtil.INVALID_WEBLINK_DESC,
-                Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_WEBLINK));
+                validExpectedPersonString + CommandTestUtil.INVALID_LINK_DESC,
+                Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_LINK));
 
         // invalid graduating year
         CommandParserTestUtil.assertParseFailure(parser,
@@ -173,7 +173,7 @@ public class CreateCommandParserTest {
         Person expectedPerson = new PersonBuilder(TypicalPersons.AMY).withTags().build();
         CommandParserTestUtil.assertParseSuccess(parser,
                 CommandTestUtil.NAME_DESC_AMY + CommandTestUtil.PHONE_DESC_AMY
-                        + CommandTestUtil.EMAIL_DESC_AMY + CommandTestUtil.WEBLINK_DESC_AMY
+                        + CommandTestUtil.EMAIL_DESC_AMY + CommandTestUtil.LINK_DESC_AMY
                         + CommandTestUtil.GRADUATING_YEAR_DESC_AMY + CommandTestUtil.COURSE_DESC_AMY
                         + CommandTestUtil.SPECIALISATION_DESC_AMY + CommandTestUtil.PRIORITY_DESC_AMY,
                 new CreateCommand(expectedPerson));
@@ -186,7 +186,7 @@ public class CreateCommandParserTest {
         // missing name prefix
         CommandParserTestUtil.assertParseFailure(parser,
                 CommandTestUtil.VALID_NAME_BOB + CommandTestUtil.PHONE_DESC_BOB
-                        + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.WEBLINK_DESC_BOB
+                        + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.LINK_DESC_BOB
                         + CommandTestUtil.GRADUATING_YEAR_DESC_BOB + CommandTestUtil.COURSE_DESC_BOB
                         + CommandTestUtil.SPECIALISATION_DESC_BOB,
                 expectedMessage);
@@ -194,7 +194,7 @@ public class CreateCommandParserTest {
         // missing phone prefix
         CommandParserTestUtil.assertParseFailure(parser,
                 CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.VALID_PHONE_BOB
-                        + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.WEBLINK_DESC_BOB
+                        + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.LINK_DESC_BOB
                         + CommandTestUtil.GRADUATING_YEAR_DESC_BOB + CommandTestUtil.COURSE_DESC_BOB
                         + CommandTestUtil.SPECIALISATION_DESC_BOB,
                 expectedMessage);
@@ -202,15 +202,15 @@ public class CreateCommandParserTest {
         // missing email prefix
         CommandParserTestUtil.assertParseFailure(parser,
                 CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.PHONE_DESC_BOB
-                        + CommandTestUtil.VALID_EMAIL_BOB + CommandTestUtil.WEBLINK_DESC_BOB
+                        + CommandTestUtil.VALID_EMAIL_BOB + CommandTestUtil.LINK_DESC_BOB
                         + CommandTestUtil.GRADUATING_YEAR_DESC_BOB + CommandTestUtil.COURSE_DESC_BOB
                         + CommandTestUtil.SPECIALISATION_DESC_BOB,
                 expectedMessage);
 
-        // missing weblink prefix
+        // missing link prefix
         CommandParserTestUtil.assertParseFailure(parser,
                 CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.PHONE_DESC_BOB
-                        + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.VALID_WEBLINK_BOB
+                        + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.VALID_LINK_BOB
                         + CommandTestUtil.GRADUATING_YEAR_DESC_BOB + CommandTestUtil.COURSE_DESC_BOB
                         + CommandTestUtil.SPECIALISATION_DESC_BOB,
                 expectedMessage);
@@ -218,7 +218,7 @@ public class CreateCommandParserTest {
         // all prefixes missing
         CommandParserTestUtil.assertParseFailure(parser,
                 CommandTestUtil.VALID_NAME_BOB + CommandTestUtil.VALID_PHONE_BOB
-                        + CommandTestUtil.VALID_EMAIL_BOB + CommandTestUtil.VALID_WEBLINK_BOB
+                        + CommandTestUtil.VALID_EMAIL_BOB + CommandTestUtil.VALID_LINK_BOB
                         + CommandTestUtil.VALID_GRADUATING_YEAR_BOB + CommandTestUtil.VALID_COURSE_BOB
                         + CommandTestUtil.VALID_SPECIALISATION_BOB,
                 expectedMessage);
@@ -229,7 +229,7 @@ public class CreateCommandParserTest {
         // invalid name
         CommandParserTestUtil.assertParseFailure(parser,
                 CommandTestUtil.INVALID_NAME_DESC + CommandTestUtil.PHONE_DESC_BOB
-                        + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.WEBLINK_DESC_BOB
+                        + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.LINK_DESC_BOB
                         + CommandTestUtil.GRADUATING_YEAR_DESC_BOB + CommandTestUtil.COURSE_DESC_BOB
                         + CommandTestUtil.SPECIALISATION_DESC_BOB
                 + CommandTestUtil.TAG_DESC_HUSBAND + CommandTestUtil.TAG_DESC_FRIEND, Name.MESSAGE_CONSTRAINTS);
@@ -237,7 +237,7 @@ public class CreateCommandParserTest {
         // invalid phone
         CommandParserTestUtil.assertParseFailure(parser,
                 CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.INVALID_PHONE_DESC
-                        + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.WEBLINK_DESC_BOB
+                        + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.LINK_DESC_BOB
                         + CommandTestUtil.GRADUATING_YEAR_DESC_BOB + CommandTestUtil.COURSE_DESC_BOB
                         + CommandTestUtil.SPECIALISATION_DESC_BOB
                         + CommandTestUtil.TAG_DESC_HUSBAND + CommandTestUtil.TAG_DESC_FRIEND,
@@ -246,16 +246,16 @@ public class CreateCommandParserTest {
         // invalid email
         CommandParserTestUtil.assertParseFailure(parser,
                 CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.PHONE_DESC_BOB
-                        + CommandTestUtil.INVALID_EMAIL_DESC + CommandTestUtil.WEBLINK_DESC_BOB
+                        + CommandTestUtil.INVALID_EMAIL_DESC + CommandTestUtil.LINK_DESC_BOB
                         + CommandTestUtil.GRADUATING_YEAR_DESC_BOB + CommandTestUtil.COURSE_DESC_BOB
                         + CommandTestUtil.SPECIALISATION_DESC_BOB
                         + CommandTestUtil.TAG_DESC_HUSBAND + CommandTestUtil.TAG_DESC_FRIEND,
                 Email.MESSAGE_CONSTRAINTS);
 
-        // invalid weblink
+        // invalid link
         CommandParserTestUtil.assertParseFailure(parser,
                 CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.PHONE_DESC_BOB
-                        + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.INVALID_WEBLINK_DESC
+                        + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.INVALID_LINK_DESC
                         + CommandTestUtil.GRADUATING_YEAR_DESC_BOB + CommandTestUtil.COURSE_DESC_BOB
                         + CommandTestUtil.SPECIALISATION_DESC_BOB
                         + CommandTestUtil.TAG_DESC_HUSBAND + CommandTestUtil.TAG_DESC_FRIEND,
@@ -264,7 +264,7 @@ public class CreateCommandParserTest {
         // invalid graduating year
         CommandParserTestUtil.assertParseFailure(parser,
                 CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.PHONE_DESC_BOB
-                        + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.WEBLINK_DESC_BOB
+                        + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.LINK_DESC_BOB
                         + CommandTestUtil.INVALID_GRADUATING_YEAR_DESC + CommandTestUtil.COURSE_DESC_BOB
                         + CommandTestUtil.SPECIALISATION_DESC_BOB
                         + CommandTestUtil.TAG_DESC_HUSBAND + CommandTestUtil.TAG_DESC_FRIEND,
@@ -273,7 +273,7 @@ public class CreateCommandParserTest {
         // invalid course
         CommandParserTestUtil.assertParseFailure(parser,
                 CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.PHONE_DESC_BOB
-                        + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.WEBLINK_DESC_BOB
+                        + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.LINK_DESC_BOB
                         + CommandTestUtil.GRADUATING_YEAR_DESC_BOB + CommandTestUtil.INVALID_COURSE_DESC
                         + CommandTestUtil.SPECIALISATION_DESC_BOB
                         + CommandTestUtil.TAG_DESC_HUSBAND + CommandTestUtil.TAG_DESC_FRIEND,
@@ -282,7 +282,7 @@ public class CreateCommandParserTest {
         // invalid specialisation
         CommandParserTestUtil.assertParseFailure(parser,
                 CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.PHONE_DESC_BOB
-                        + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.WEBLINK_DESC_BOB
+                        + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.LINK_DESC_BOB
                         + CommandTestUtil.GRADUATING_YEAR_DESC_BOB + CommandTestUtil.COURSE_DESC_BOB
                         + CommandTestUtil.INVALID_SPECIALISATION_DESC
                         + CommandTestUtil.TAG_DESC_HUSBAND + CommandTestUtil.TAG_DESC_FRIEND,
@@ -291,7 +291,7 @@ public class CreateCommandParserTest {
         // invalid tag
         CommandParserTestUtil.assertParseFailure(parser,
                 CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.PHONE_DESC_BOB
-                        + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.WEBLINK_DESC_BOB
+                        + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.LINK_DESC_BOB
                         + CommandTestUtil.GRADUATING_YEAR_DESC_BOB + CommandTestUtil.COURSE_DESC_BOB
                         + CommandTestUtil.SPECIALISATION_DESC_BOB
                         + CommandTestUtil.INVALID_TAG_DESC + CommandTestUtil.VALID_TAG_FRIEND,
@@ -300,7 +300,7 @@ public class CreateCommandParserTest {
         // two invalid values, only first invalid value reported
         CommandParserTestUtil.assertParseFailure(parser,
                 CommandTestUtil.INVALID_NAME_DESC + CommandTestUtil.PHONE_DESC_BOB
-                        + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.INVALID_WEBLINK_DESC
+                        + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.INVALID_LINK_DESC
                         + CommandTestUtil.GRADUATING_YEAR_DESC_BOB + CommandTestUtil.COURSE_DESC_BOB
                         + CommandTestUtil.SPECIALISATION_DESC_BOB,
                 Name.MESSAGE_CONSTRAINTS);
@@ -309,7 +309,7 @@ public class CreateCommandParserTest {
         CommandParserTestUtil.assertParseFailure(parser,
                 CommandTestUtil.PREAMBLE_NON_EMPTY + CommandTestUtil.NAME_DESC_BOB
                         + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB
-                        + CommandTestUtil.WEBLINK_DESC_BOB
+                        + CommandTestUtil.LINK_DESC_BOB
                         + CommandTestUtil.GRADUATING_YEAR_DESC_BOB + CommandTestUtil.COURSE_DESC_BOB
                         + CommandTestUtil.SPECIALISATION_DESC_BOB + CommandTestUtil.TAG_DESC_HUSBAND
                         + CommandTestUtil.TAG_DESC_FRIEND,

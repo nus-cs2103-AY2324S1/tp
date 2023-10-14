@@ -48,9 +48,9 @@ public class EditPersonDescriptorTest {
                 .build();
         assertFalse(CommandTestUtil.DESC_AMY.equals(editedAmy));
 
-        // different web link -> returns false
+        // different link -> returns false
         editedAmy = new EditPersonDescriptorBuilder(CommandTestUtil.DESC_AMY)
-                .withWebLink(CommandTestUtil.VALID_WEBLINK_BOB)
+                .withLink(CommandTestUtil.VALID_LINK_BOB)
                 .build();
         assertFalse(CommandTestUtil.DESC_AMY.equals(editedAmy));
 
@@ -85,8 +85,8 @@ public class EditPersonDescriptorTest {
         String expected = EditCommand.EditPersonDescriptor.class.getCanonicalName() + "{name="
                 + editPersonDescriptor.getName().orElse(null) + ", phone="
                 + editPersonDescriptor.getPhone().orElse(null) + ", email="
-                + editPersonDescriptor.getEmails().orElse(null) + ", web link="
-                + editPersonDescriptor.getWebLink().orElse(null) + ", graduating year="
+                + editPersonDescriptor.getEmails().orElse(null) + ", link="
+                + editPersonDescriptor.getLink().orElse(null) + ", graduating year="
                 + editPersonDescriptor.getGraduatingYear().orElse(null) + ", course="
                 + editPersonDescriptor.getCourse().orElse(null) + ", specialisation="
                 + editPersonDescriptor.getSpecialisation().orElse(null) + ", tags="

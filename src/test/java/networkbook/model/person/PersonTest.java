@@ -7,7 +7,7 @@ import static networkbook.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static networkbook.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static networkbook.logic.commands.CommandTestUtil.VALID_SPECIALISATION_BOB;
 import static networkbook.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static networkbook.logic.commands.CommandTestUtil.VALID_WEBLINK_BOB;
+import static networkbook.logic.commands.CommandTestUtil.VALID_LINK_BOB;
 import static networkbook.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -37,7 +37,7 @@ public class PersonTest {
         // same name, all other attributes different -> returns true
         Person editedAmy = new PersonBuilder(TypicalPersons.AMY)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withWebLink(VALID_WEBLINK_BOB).withGraduatingYear(VALID_GRADUATING_YEAR_BOB)
+                .withLink(VALID_LINK_BOB).withGraduatingYear(VALID_GRADUATING_YEAR_BOB)
                 .withCourse(VALID_COURSE_BOB).withSpecialisation(VALID_SPECIALISATION_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
         assertTrue(TypicalPersons.AMY.isSame(editedAmy));
@@ -91,8 +91,8 @@ public class PersonTest {
         editedAmy = new PersonBuilder(TypicalPersons.AMY).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(TypicalPersons.AMY.equals(editedAmy));
 
-        // different weblink -> returns false
-        editedAmy = new PersonBuilder(TypicalPersons.AMY).withWebLink(VALID_WEBLINK_BOB).build();
+        // different link -> returns false
+        editedAmy = new PersonBuilder(TypicalPersons.AMY).withLink(VALID_LINK_BOB).build();
         assertFalse(TypicalPersons.AMY.equals(editedAmy));
 
         // different graduating year -> returns false
@@ -116,7 +116,7 @@ public class PersonTest {
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + TypicalPersons.AMY.getName()
                 + ", phone=" + TypicalPersons.AMY.getPhone() + ", email=" + TypicalPersons.AMY.getEmails()
-                + ", weblink=" + TypicalPersons.AMY.getWebLink()
+                + ", link=" + TypicalPersons.AMY.getLink()
                 + ", graduating year=" + TypicalPersons.AMY.getGraduatingYear()
                 + ", course=" + TypicalPersons.AMY.getCourse()
                 + ", specialisation=" + TypicalPersons.AMY.getSpecialisation()
