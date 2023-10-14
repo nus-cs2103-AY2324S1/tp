@@ -22,7 +22,6 @@ public class SortCommandParser implements Parser<SortCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public SortCommand parse(String args) throws ParseException {
-        System.out.println(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_SORT_IN);
         if (!arePrefixesPresent(argMultimap, PREFIX_SORT_IN) || !argMultimap.getPreamble().isEmpty()) {
