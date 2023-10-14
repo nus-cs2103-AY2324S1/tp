@@ -10,12 +10,12 @@ import networkbook.logic.parser.exceptions.ParseException;
 import networkbook.model.person.Course;
 import networkbook.model.person.Email;
 import networkbook.model.person.GraduatingYear;
+import networkbook.model.person.Link;
 import networkbook.model.person.Name;
 import networkbook.model.person.Person;
 import networkbook.model.person.Phone;
 import networkbook.model.person.Priority;
 import networkbook.model.person.Specialisation;
-import networkbook.model.person.WebLink;
 import networkbook.model.tag.Tag;
 import networkbook.model.util.UniqueList;
 
@@ -72,7 +72,7 @@ public class CreateCommandParser implements Parser<CreateCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(CliSyntax.PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(CliSyntax.PREFIX_EMAIL).get());
         UniqueList<Email> emails = new UniqueList<Email>().setItems(List.of(email));
-        WebLink webLink = ParserUtil.parseWebLink(argMultimap.getValue(CliSyntax.PREFIX_WEBLINK).get());
+        Link link = ParserUtil.parseWebLink(argMultimap.getValue(CliSyntax.PREFIX_WEBLINK).get());
         GraduatingYear graduatingYear = ParserUtil.parseGraduatingYear(
                     argMultimap.getValue(CliSyntax.PREFIX_GRADUATING_YEAR).get());
         Course course = ParserUtil.parseCourse(argMultimap.getValue(CliSyntax.PREFIX_COURSE).get());
@@ -81,7 +81,7 @@ public class CreateCommandParser implements Parser<CreateCommand> {
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(CliSyntax.PREFIX_TAG));
         Priority priority = ParserUtil.parsePriority(argMultimap.getValue(CliSyntax.PREFIX_PRIORITY).orElse(null));
 
-        Person person = new Person(name, phone, emails, webLink, graduatingYear, course, specialisation,
+        Person person = new Person(name, phone, emails, link, graduatingYear, course, specialisation,
                     tagList, priority);
 
         return new CreateCommand(person);

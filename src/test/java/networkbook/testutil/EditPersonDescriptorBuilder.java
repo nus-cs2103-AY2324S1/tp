@@ -14,7 +14,7 @@ import networkbook.model.person.Person;
 import networkbook.model.person.Phone;
 import networkbook.model.person.Priority;
 import networkbook.model.person.Specialisation;
-import networkbook.model.person.WebLink;
+import networkbook.model.person.Link;
 import networkbook.model.tag.Tag;
 import networkbook.model.util.UniqueList;
 
@@ -77,7 +77,7 @@ public class EditPersonDescriptorBuilder {
      * Sets the {@code WebLink} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withWebLink(String webLink) {
-        descriptor.setWebLink(new WebLink(webLink));
+        descriptor.setWebLink(new Link(webLink));
         return this;
     }
 

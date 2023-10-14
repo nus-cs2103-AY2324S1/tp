@@ -14,10 +14,10 @@ import networkbook.commons.exceptions.IllegalValueException;
 import networkbook.model.person.Course;
 import networkbook.model.person.Email;
 import networkbook.model.person.GraduatingYear;
+import networkbook.model.person.Link;
 import networkbook.model.person.Name;
 import networkbook.model.person.Phone;
 import networkbook.model.person.Specialisation;
-import networkbook.model.person.WebLink;
 import networkbook.model.tag.Tag;
 import networkbook.testutil.TypicalPersons;
 
@@ -113,7 +113,7 @@ public class JsonAdaptedPersonTest {
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAILS,
                         INVALID_WEBLINK, VALID_GRADUATING_YEAR, VALID_COURSE,
                         VALID_SPECIALISATION, VALID_TAGS, VALID_PRIORITY);
-        String expectedMessage = WebLink.MESSAGE_CONSTRAINTS;
+        String expectedMessage = Link.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
@@ -170,7 +170,7 @@ public class JsonAdaptedPersonTest {
                 VALID_SPECIALISATION, VALID_TAGS, VALID_PRIORITY);
         String expectedMessage = String.format(
                 JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT,
-                WebLink.class.getSimpleName()
+                Link.class.getSimpleName()
         );
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }

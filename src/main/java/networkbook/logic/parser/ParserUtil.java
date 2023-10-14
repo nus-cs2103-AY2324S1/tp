@@ -12,11 +12,11 @@ import networkbook.logic.parser.exceptions.ParseException;
 import networkbook.model.person.Course;
 import networkbook.model.person.Email;
 import networkbook.model.person.GraduatingYear;
+import networkbook.model.person.Link;
 import networkbook.model.person.Name;
 import networkbook.model.person.Phone;
 import networkbook.model.person.Priority;
 import networkbook.model.person.Specialisation;
-import networkbook.model.person.WebLink;
 import networkbook.model.tag.Tag;
 
 /**
@@ -75,13 +75,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code weblink} is invalid.
      */
-    public static WebLink parseWebLink(String webLink) throws ParseException {
+    public static Link parseWebLink(String webLink) throws ParseException {
         requireNonNull(webLink);
         String trimmedWebLink = webLink.trim();
-        if (!WebLink.isValidLink(trimmedWebLink)) {
-            throw new ParseException(WebLink.MESSAGE_CONSTRAINTS);
+        if (!Link.isValidLink(trimmedWebLink)) {
+            throw new ParseException(Link.MESSAGE_CONSTRAINTS);
         }
-        return new WebLink(trimmedWebLink);
+        return new Link(trimmedWebLink);
     }
 
     /**

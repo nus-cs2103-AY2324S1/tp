@@ -7,12 +7,12 @@ import java.util.Set;
 import networkbook.model.person.Course;
 import networkbook.model.person.Email;
 import networkbook.model.person.GraduatingYear;
+import networkbook.model.person.Link;
 import networkbook.model.person.Name;
 import networkbook.model.person.Person;
 import networkbook.model.person.Phone;
 import networkbook.model.person.Priority;
 import networkbook.model.person.Specialisation;
-import networkbook.model.person.WebLink;
 import networkbook.model.tag.Tag;
 import networkbook.model.util.SampleDataUtil;
 import networkbook.model.util.UniqueList;
@@ -34,7 +34,7 @@ public class PersonBuilder {
     private Name name;
     private Phone phone;
     private UniqueList<Email> emails;
-    private WebLink webLink;
+    private Link link;
     private GraduatingYear graduatingYear;
     private Course course;
     private Specialisation specialisation;
@@ -48,7 +48,7 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         emails = new UniqueList<Email>().setItems(List.of(new Email(DEFAULT_EMAIL)));
-        webLink = new WebLink(DEFAULT_WEBLINK);
+        link = new Link(DEFAULT_WEBLINK);
         graduatingYear = new GraduatingYear(DEFAULT_GRADUATING_YEAR);
         course = new Course(DEFAULT_COURSE);
         specialisation = new Specialisation(DEFAULT_SPECIALISATION);
@@ -63,7 +63,7 @@ public class PersonBuilder {
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
         emails = personToCopy.getEmails();
-        webLink = personToCopy.getWebLink();
+        link = personToCopy.getWebLink();
         graduatingYear = personToCopy.getGraduatingYear();
         course = personToCopy.getCourse();
         specialisation = personToCopy.getSpecialisation();
@@ -91,7 +91,7 @@ public class PersonBuilder {
      * Sets the {@code WebLink} of the {@code Person} that we are building.
      */
     public PersonBuilder withWebLink(String webLink) {
-        this.webLink = new WebLink(webLink);
+        this.link = new Link(webLink);
         return this;
     }
 
@@ -144,7 +144,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, emails, webLink, graduatingYear, course, specialisation, tags, priority);
+        return new Person(name, phone, emails, link, graduatingYear, course, specialisation, tags, priority);
     }
 
 }

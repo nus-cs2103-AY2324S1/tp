@@ -20,12 +20,12 @@ import networkbook.model.Model;
 import networkbook.model.person.Course;
 import networkbook.model.person.Email;
 import networkbook.model.person.GraduatingYear;
+import networkbook.model.person.Link;
 import networkbook.model.person.Name;
 import networkbook.model.person.Person;
 import networkbook.model.person.Phone;
 import networkbook.model.person.Priority;
 import networkbook.model.person.Specialisation;
-import networkbook.model.person.WebLink;
 import networkbook.model.tag.Tag;
 import networkbook.model.util.UniqueList;
 
@@ -103,7 +103,7 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         UniqueList<Email> updatedEmails = editPersonDescriptor.getEmails().orElse(personToEdit.getEmails());
-        WebLink updatedWebLink = editPersonDescriptor.getWebLink().orElse(personToEdit.getWebLink());
+        Link updatedLink = editPersonDescriptor.getWebLink().orElse(personToEdit.getWebLink());
         GraduatingYear updatedGraduatingYear = editPersonDescriptor.getGraduatingYear()
                     .orElse(personToEdit.getGraduatingYear());
         Course updatedCourse = editPersonDescriptor.getCourse().orElse(personToEdit.getCourse());
@@ -113,7 +113,7 @@ public class EditCommand extends Command {
         Priority updatedPriority = editPersonDescriptor.getPriority().orElse(personToEdit.getPriority()
                                                                      .orElse(null));
 
-        return new Person(updatedName, updatedPhone, updatedEmails, updatedWebLink, updatedGraduatingYear,
+        return new Person(updatedName, updatedPhone, updatedEmails, updatedLink, updatedGraduatingYear,
                 updatedCourse, updatedSpecialisation, updatedTags, updatedPriority);
     }
 
@@ -149,7 +149,7 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private UniqueList<Email> emails;
-        private WebLink webLink;
+        private Link link;
         private GraduatingYear graduatingYear;
         private Course course;
         private Specialisation specialisation;
@@ -166,7 +166,7 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmails(toCopy.emails);
-            setWebLink(toCopy.webLink);
+            setWebLink(toCopy.link);
             setGraduatingYear(toCopy.graduatingYear);
             setCourse(toCopy.course);
             setSpecialisation(toCopy.specialisation);
@@ -178,7 +178,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, emails, webLink, graduatingYear, course,
+            return CollectionUtil.isAnyNonNull(name, phone, emails, link, graduatingYear, course,
                         specialisation, tags, priority);
         }
 
@@ -206,12 +206,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(emails);
         }
 
-        public void setWebLink(WebLink webLink) {
-            this.webLink = webLink;
+        public void setWebLink(Link link) {
+            this.link = link;
         }
 
-        public Optional<WebLink> getWebLink() {
-            return Optional.ofNullable(webLink);
+        public Optional<Link> getWebLink() {
+            return Optional.ofNullable(link);
         }
 
         public void setGraduatingYear(GraduatingYear graduatingYear) {
@@ -278,7 +278,7 @@ public class EditCommand extends Command {
             return Objects.equals(name, otherEditPersonDescriptor.name)
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(emails, otherEditPersonDescriptor.emails)
-                    && Objects.equals(webLink, otherEditPersonDescriptor.webLink)
+                    && Objects.equals(link, otherEditPersonDescriptor.link)
                     && Objects.equals(graduatingYear, otherEditPersonDescriptor.graduatingYear)
                     && Objects.equals(course, otherEditPersonDescriptor.course)
                     && Objects.equals(specialisation, otherEditPersonDescriptor.specialisation)
@@ -292,7 +292,7 @@ public class EditCommand extends Command {
                     .add("name", name)
                     .add("phone", phone)
                     .add("email", emails)
-                    .add("web link", webLink)
+                    .add("web link", link)
                     .add("graduating year", graduatingYear)
                     .add("course", course)
                     .add("specialisation", specialisation)

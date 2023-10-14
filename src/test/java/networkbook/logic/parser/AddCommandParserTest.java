@@ -13,11 +13,11 @@ import networkbook.logic.commands.EditCommand;
 import networkbook.model.person.Course;
 import networkbook.model.person.Email;
 import networkbook.model.person.GraduatingYear;
+import networkbook.model.person.Link;
 import networkbook.model.person.Name;
 import networkbook.model.person.Phone;
 import networkbook.model.person.Priority;
 import networkbook.model.person.Specialisation;
-import networkbook.model.person.WebLink;
 import networkbook.model.tag.Tag;
 import networkbook.testutil.EditPersonDescriptorBuilder;
 import networkbook.testutil.TypicalIndexes;
@@ -69,7 +69,7 @@ public class AddCommandParserTest {
                 Email.MESSAGE_CONSTRAINTS); // invalid email
         assertParseFailure(parser,
                 "1" + CommandTestUtil.INVALID_WEBLINK_DESC,
-                WebLink.MESSAGE_CONSTRAINTS); // invalid WebLink
+                Link.MESSAGE_CONSTRAINTS); // invalid WebLink
         assertParseFailure(parser,
                 "1" + CommandTestUtil.INVALID_GRADUATING_YEAR_DESC,
                 GraduatingYear.MESSAGE_CONSTRAINTS); // invalid Graduating Year

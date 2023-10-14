@@ -9,7 +9,7 @@ import networkbook.model.util.Identifiable;
  * Represents a Person's web link in the network book.
  * Guarantees: immutable; is valid as declared in {@link #isValidLink(String)}
  */
-public class WebLink implements Identifiable<WebLink> {
+public class Link implements Identifiable<Link> {
 
     public static final String MESSAGE_CONSTRAINTS = "Web links should follow the format: domain/path "
             + "and adhere to the following constraints:\n"
@@ -35,7 +35,7 @@ public class WebLink implements Identifiable<WebLink> {
      *
      * @param link A valid web link.
      */
-    public WebLink(String link) {
+    public Link(String link) {
         requireNonNull(link);
         checkArgument(isValidLink(link), MESSAGE_CONSTRAINTS);
         value = link;
@@ -49,7 +49,7 @@ public class WebLink implements Identifiable<WebLink> {
     }
 
     @Override
-    public boolean isSame(WebLink another) {
+    public boolean isSame(Link another) {
         return this.value.equals(another.value);
     }
 
@@ -70,12 +70,12 @@ public class WebLink implements Identifiable<WebLink> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof WebLink)) {
+        if (!(other instanceof Link)) {
             return false;
         }
 
-        WebLink otherWebLink = (WebLink) other;
-        return value.equals(otherWebLink.value);
+        Link otherLink = (Link) other;
+        return value.equals(otherLink.value);
     }
 
     @Override

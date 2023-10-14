@@ -13,12 +13,12 @@ import networkbook.commons.exceptions.IllegalValueException;
 import networkbook.model.person.Course;
 import networkbook.model.person.Email;
 import networkbook.model.person.GraduatingYear;
+import networkbook.model.person.Link;
 import networkbook.model.person.Name;
 import networkbook.model.person.Person;
 import networkbook.model.person.Phone;
 import networkbook.model.person.Priority;
 import networkbook.model.person.Specialisation;
-import networkbook.model.person.WebLink;
 import networkbook.model.tag.Tag;
 import networkbook.model.util.UniqueList;
 
@@ -121,12 +121,12 @@ class JsonAdaptedPerson {
         emails.forEach(email -> modelEmails.add(new Email(email.getName())));
 
         if (webLink == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, WebLink.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Link.class.getSimpleName()));
         }
-        if (!WebLink.isValidLink(webLink)) {
-            throw new IllegalValueException(WebLink.MESSAGE_CONSTRAINTS);
+        if (!Link.isValidLink(webLink)) {
+            throw new IllegalValueException(Link.MESSAGE_CONSTRAINTS);
         }
-        final WebLink modelWebLink = new WebLink(webLink);
+        final Link modelLink = new Link(webLink);
 
         if (graduatingYear == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -164,7 +164,7 @@ class JsonAdaptedPerson {
             modelPriority = new Priority(priority);
         }
 
-        return new Person(modelName, modelPhone, modelEmails, modelWebLink, modelGraduatingYear, modelCourse,
+        return new Person(modelName, modelPhone, modelEmails, modelLink, modelGraduatingYear, modelCourse,
                 modelSpecialisation, modelTags, modelPriority);
     }
 

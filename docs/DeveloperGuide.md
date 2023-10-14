@@ -270,7 +270,7 @@ _{Explain here how the data archiving feature will be implemented}_
 **Value proposition**: As computing students and professionals network with alumni to expand their career prospects, our app keeps a list of contacts of people that each user networks with.
 
 * Sort users by priority, courses taken/taking, specialization(s) taken/intending to take, graduation year
-* Offline, with a static online page that contains user manual and download webLink
+* Offline, with a static online page that contains user manual and download link
 * Search by any details, i.e. phone number, email, specialisations, courses taken, graduation year.
 
 
@@ -278,7 +278,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                 | I want to …​                                                                              | So that I can…​                                                          |
+| Priority | As a …​                 | I want to …​                                                                             | So that I can…​                                                          |
 |---------|-------------------------|------------------------------------------------------------------------------------------|-------------------------------------------------------------------------|
 | `* * *` | new user                | see usage instructions                                                                   | refer to instructions when I forget how to use the App                  |
 | `* * *` | user                    | create a new contact                                                                     | keep a record of individuals in my network                              |
@@ -294,7 +294,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`     | user                    | open my email app from my NetworkBook app                                                | quickly send an email when needed                                       |
 | `* *`   | user                    | use keyboard shortcuts that are easy to press                                            | use them more conveniently                                              |
 | `* *`   | user                    | open the relevant social media platform from the NetworkBook app                         | quickly contact them on social media                                    |
-| `* *`   | user                    | an easily accessible and static online page containing a download webLink to the mobile app | quickly download the app on my device when needed                       |
+| `* *`   | user                    | an easily accessible and static online page containing a download link to the mobile app | quickly download the app on my device when needed                       |
 | `* *`   | user                    | visit an easily accessible and static online page containing a user manual               | quickly refer to instructions when needed                               |
 | `*`     | user                    | navigate to the relevant section of the online manual directly from the catalogue        | quickly find instructions on the feature I want to use                  |
 | `* *`   | user                    | export my contacts in the form of readable text                                          | easily share my contacts with others                                    |
@@ -505,7 +505,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 5.
 
-**Use case: Add social webLink to a contact**
+**Use case: Add social link to a contact**
 
 **MSS**
 
@@ -513,9 +513,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 2. NetworkBook shows a list of contacts.
 
-3. User requests to add social webLink a specific contact in the list.
+3. User requests to add social link a specific contact in the list.
 
-4. NetworkBook adds the social webLink to the contact's list of links
+4. NetworkBook adds the social link to the contact's list of links
 
 5. NetworkBook informs user of the contact's new list of links.
 
@@ -533,23 +533,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 2.
 
-- 3b. User does not give a social webLink.
+- 3b. User does not give a social link.
 
   - 3b1. NetworkBook shows an error message.
 
     Use case resumes at step 2.
 
-- 3c. The given social webLink is in an invalid format.
+- 3c. The given social link is in an invalid format.
 
   - 3c1. NetworkBook shows an error message.
 
     Use case resumes at step 2.
 
-- 3d. User provides additional note after the social webLink.
+- 3d. User provides additional note after the social link.
 
-  - 3d1. NetworkBook includes the note in the webLink's details.
+  - 3d1. NetworkBook includes the note in the link's details.
 
-  - 3d2. NetworkBook adds the new social webLink to the contact's list of links.
+  - 3d2. NetworkBook adds the new social link to the contact's list of links.
 
     Use case resumes at step 5.
 
@@ -715,15 +715,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The social media platform page webLink is invalid.
+* 3a. The social media platform page link is invalid.
 
-    * 3a1. The user will see the error page displayed by the browser used to load the page webLink.
+    * 3a1. The user will see the error page displayed by the browser used to load the page link.
 
       Use case ends.
 
 * 3b. The page is valid but fails to load.
 
-    * 3b1. The user will see the error page displayed by the browser used to load the page webLink.
+    * 3b1. The user will see the error page displayed by the browser used to load the page link.
 
       Use case ends.
 
@@ -733,13 +733,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: Download webLink to mobile app from online page**
+**Use case: Download link to mobile app from online page**
 
 **MSS**
 
 1. User requests to visit the online page. 
 2. The online page renders.
-3. User selects download webLink to mobile app.
+3. User selects download link to mobile app.
 4. Mobile app starts downloading on the user's device.
 
     Use case ends.
@@ -748,7 +748,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The online page fails to load.
 
-    * 1a1. The user will see the error page displayed by the browser used to load the page webLink.
+    * 1a1. The user will see the error page displayed by the browser used to load the page link.
 
       Use case ends.
 
@@ -758,7 +758,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to visit the online page.
 2. The online page renders.
-3. User selects webLink to visit the user manual.
+3. User selects link to visit the user manual.
 4. The user manual page renders.
 
    Use case ends.
@@ -767,13 +767,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The online page fails to load.
 
-    * 1a1. The user will see the error page displayed by the browser used to load the page webLink.
+    * 1a1. The user will see the error page displayed by the browser used to load the page link.
 
       Use case ends.
   
 * 3a. The user manual page fails to load.
 
-    * 3a1. The user will see the error page displayed by the browser used to load the page webLink.
+    * 3a1. The user will see the error page displayed by the browser used to load the page link.
 
       Use case ends.
 
@@ -837,7 +837,7 @@ graduation year, priority level and tags of/associated with the person.
 (for e.g. CS2103T module in NUS).
 * **Specialization**: the specialization students can
 take in their Computer Science university degree in NUS (e.g. Software Engineering, Artificial Intelligence).
-* **Link**: a web webLink which directs to a contact's profile page on a social platform (e.g. LinkedIn, GitHub).
+* **Link**: a web link which directs to a contact's profile page on a social platform (e.g. LinkedIn, GitHub).
 * **Tag**: an annotation to a person. This can be anything memorable of the person.
 * **Priority**: the priority level of a contact set by the user. Its value can be either high, medium or low.
 
@@ -892,7 +892,7 @@ testers are expected to do more *exploratory* testing.
 
       Expected: Email of first contact should change to `test@email.com`. System should show details of the old and new email of the contact.
 
-   4. _{ Likewise for `course`, `specialisation`, `webLink`, `grad`, `priority`, `tag` }_
+   4. _{ Likewise for `course`, `specialisation`, `link`, `grad`, `priority`, `tag` }_
 
 ### Deleting a person
 

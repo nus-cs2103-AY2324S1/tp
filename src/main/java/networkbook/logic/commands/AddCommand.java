@@ -16,12 +16,12 @@ import networkbook.model.Model;
 import networkbook.model.person.Course;
 import networkbook.model.person.Email;
 import networkbook.model.person.GraduatingYear;
+import networkbook.model.person.Link;
 import networkbook.model.person.Name;
 import networkbook.model.person.Person;
 import networkbook.model.person.Phone;
 import networkbook.model.person.Priority;
 import networkbook.model.person.Specialisation;
-import networkbook.model.person.WebLink;
 import networkbook.model.tag.Tag;
 import networkbook.model.util.UniqueList;
 
@@ -105,7 +105,7 @@ public class AddCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElse(personToAddInfo.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToAddInfo.getPhone());
         UniqueList<Email> updatedEmails = editPersonDescriptor.getEmails().orElse(personToAddInfo.getEmails());
-        WebLink updatedWebLink = editPersonDescriptor.getWebLink().orElse(personToAddInfo.getWebLink());
+        Link updatedLink = editPersonDescriptor.getWebLink().orElse(personToAddInfo.getWebLink());
         GraduatingYear updatedGraduatingYear = editPersonDescriptor.getGraduatingYear()
                 .orElse(personToAddInfo.getGraduatingYear());
         Course updatedCourse = editPersonDescriptor.getCourse().orElse(personToAddInfo.getCourse());
@@ -115,7 +115,7 @@ public class AddCommand extends Command {
         Priority updatedPriority = editPersonDescriptor.getPriority().orElse(personToAddInfo.getPriority()
                 .orElse(null));
 
-        return new Person(updatedName, updatedPhone, updatedEmails, updatedWebLink, updatedGraduatingYear,
+        return new Person(updatedName, updatedPhone, updatedEmails, updatedLink, updatedGraduatingYear,
                 updatedCourse, updatedSpecialisation, updatedTags, updatedPriority);
     }
 

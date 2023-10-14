@@ -8,11 +8,11 @@ import networkbook.logic.commands.CreateCommand;
 import networkbook.model.person.Course;
 import networkbook.model.person.Email;
 import networkbook.model.person.GraduatingYear;
+import networkbook.model.person.Link;
 import networkbook.model.person.Name;
 import networkbook.model.person.Person;
 import networkbook.model.person.Phone;
 import networkbook.model.person.Specialisation;
-import networkbook.model.person.WebLink;
 import networkbook.model.tag.Tag;
 import networkbook.testutil.PersonBuilder;
 import networkbook.testutil.TypicalPersons;
@@ -259,7 +259,7 @@ public class CreateCommandParserTest {
                         + CommandTestUtil.GRADUATING_YEAR_DESC_BOB + CommandTestUtil.COURSE_DESC_BOB
                         + CommandTestUtil.SPECIALISATION_DESC_BOB
                         + CommandTestUtil.TAG_DESC_HUSBAND + CommandTestUtil.TAG_DESC_FRIEND,
-                WebLink.MESSAGE_CONSTRAINTS);
+                Link.MESSAGE_CONSTRAINTS);
 
         // invalid graduating year
         CommandParserTestUtil.assertParseFailure(parser,
