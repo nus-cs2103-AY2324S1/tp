@@ -12,10 +12,10 @@
 * For the detailed documentation of this project, see the **[InterviewHub Product Website](https://ay2324s1-cs2103t-t11-2.github.io/tp/)**.
 
 * This project is an ongoing software project for a desktop application to make the hiring process easier
-  * It preserves the **OOP principles** of the original project 
+  * It preserves the **OOP principles** of the original project
   * It **evolves** the base project into an app with a narrower target audience
   * Our team is working on this project, so we can **practice the SE tools** that we have learnt in class.
-* It is named InterviewHub since our app aims to centralize the interview process within companies. 
+* It is named InterviewHub since our app aims to centralize the interview process within companies.
   * By placing all the critical utilities involved in one app, it increases the quality of life of our target audience.
 
 **Acknowledgements**

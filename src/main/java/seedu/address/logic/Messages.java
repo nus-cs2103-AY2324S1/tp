@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.interview.Interview;
 import seedu.address.model.person.Person;
 
 /**
@@ -46,6 +47,19 @@ public class Messages {
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
         return builder.toString();
+    }
+
+    /**
+     * Formats the {@code interview} for display to the user.
+     */
+    public static String formatInterview(Interview interview) {
+        return interview.getInterviewId()
+                + "; Applicant: "
+                + interview.getInterviewApplicant()
+                + "; Role: "
+                + interview.getJobRole()
+                + "; Scheduled for: "
+                + interview.getInterviewTiming();
     }
 
 }
