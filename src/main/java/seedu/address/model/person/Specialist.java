@@ -43,11 +43,8 @@ public class Specialist extends Person {
         }
 
         Specialist otherSpecialist = (Specialist) other;
-        return super.getName().equals(otherSpecialist.getName())
-                && super.getPhone().equals(otherSpecialist.getPhone())
-                && super.getEmail().equals(otherSpecialist.getEmail())
-                && super.getAddress().equals(otherSpecialist.getAddress())
-                && super.getTags().equals(otherSpecialist.getTags());
+        return super.equals(other)
+                && specialty.equals(otherSpecialist.specialty);
     }
 
     public Specialty getSpecialty() {

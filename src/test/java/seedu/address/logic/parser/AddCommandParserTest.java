@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.AGE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
@@ -62,7 +63,7 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseComplexSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_AMY + PHONE_DESC_AMY
-                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + TAG_DESC_FRIEND + MEDICAL_HISTORY_DESC_AMY,
+                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + TAG_DESC_FRIEND + AGE_DESC_AMY + MEDICAL_HISTORY_DESC_AMY,
                 new AddCommand(expectedPatient), PersonType.PATIENT);
 
         // multiple tags - all accepted
@@ -70,7 +71,7 @@ public class AddCommandParserTest {
                 .build();
         assertParseComplexSuccess(parser,
                 NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                        + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + MEDICAL_HISTORY_DESC_AMY,
+                        + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + AGE_DESC_AMY + MEDICAL_HISTORY_DESC_AMY,
                 new AddCommand(expectedPatientMultipleTags), PersonType.PATIENT);
     }
     @Test
@@ -100,7 +101,7 @@ public class AddCommandParserTest {
 
         String validExpectedSpecialistString = validExpectedPersonString + SPECIALTY_DESC_BOB;
 
-        String validExpectedPatientString = validExpectedPersonString + MEDICAL_HISTORY_DESC_AMY;
+        String validExpectedPatientString = validExpectedPersonString + AGE_DESC_AMY + MEDICAL_HISTORY_DESC_AMY;
 
         // multiple names
         assertParseComplexFailure(parser, NAME_DESC_AMY + validExpectedSpecialistString,
@@ -176,7 +177,7 @@ public class AddCommandParserTest {
         // zero tags
         Person expectedPerson = new PatientBuilder(AMY).withTags().build();
         assertParseComplexSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                        + ADDRESS_DESC_AMY + MEDICAL_HISTORY_DESC_AMY,
+                        + ADDRESS_DESC_AMY + AGE_DESC_AMY + MEDICAL_HISTORY_DESC_AMY,
                 new AddCommand(expectedPerson), PersonType.PATIENT);
     }
 

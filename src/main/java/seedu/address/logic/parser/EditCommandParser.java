@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICALHISTORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -47,10 +48,10 @@ public class EditCommandParser implements ParserComplex<EditCommand> {
     private EditCommand parsePatient(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_TAG, PREFIX_MEDICALHISTORY);
+                        PREFIX_TAG, PREFIX_AGE, PREFIX_MEDICALHISTORY);
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_ADDRESS, PREFIX_MEDICALHISTORY);
+                PREFIX_ADDRESS, PREFIX_AGE, PREFIX_MEDICALHISTORY);
         Index index;
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
@@ -75,6 +76,10 @@ public class EditCommandParser implements ParserComplex<EditCommand> {
         if (argMultimap.getValue(PREFIX_MEDICALHISTORY).isPresent()) {
             editPatientDescriptor.setMedicalHistory(ParserUtil.parseMedicalHistory(argMultimap
                     .getValue(PREFIX_MEDICALHISTORY).get()));
+        }
+        if (argMultimap.getValue(PREFIX_AGE).isPresent()) {
+            editPatientDescriptor.setAge(ParserUtil.parseAge(argMultimap
+                    .getValue(PREFIX_AGE).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPatientDescriptor::setTags);
 
