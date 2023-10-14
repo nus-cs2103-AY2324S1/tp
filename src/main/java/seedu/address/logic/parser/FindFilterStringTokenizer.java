@@ -43,7 +43,9 @@ public class FindFilterStringTokenizer {
                 tokens.add(new Token(Token.Type.NOT, "!"));
                 pos++;
             } else if (current == '(' || current == ')') {
-                tokens.add(new Token(current == '(' ? Token.Type.LPAREN : Token.Type.RPAREN, String.valueOf(current)));
+                tokens.add(new Token(current == '('
+                        ? Token.Type.LPAREN
+                        : Token.Type.RPAREN, String.valueOf(current)));
                 pos++;
             } else {
                 StringBuilder sb = new StringBuilder();
@@ -84,6 +86,7 @@ public class FindFilterStringTokenizer {
     public static class Token {
         final Type type;
         final String text;
+
         /**
          * Constructs a token.
          *
