@@ -3,6 +3,7 @@ package networkbook.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
@@ -63,7 +64,7 @@ public class AddCommandTest {
     }
 
     @Test
-    public void execute_addPriorityToPersonWithPriority_commandException() throws Exception {
+    public void execute_addPriorityToPersonWithPriority_commandException() {
         CommandTestUtil.showPersonAtIndex(model, TypicalIndexes.INDEX_FIRST_PERSON);
 
         AddCommand addCommand = new AddCommand(TypicalIndexes.INDEX_FIRST_PERSON,
@@ -74,8 +75,11 @@ public class AddCommandTest {
         try {
             addCommand.execute(model); // person would have priority
             addCommand.execute(model); // add priority to the person again
+            fail();
         } catch (CommandException e) {
             assertEquals(expectedMessage, e.getMessage());
+        } catch (Exception e) {
+            fail();
         }
     }
 
