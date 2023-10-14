@@ -3,6 +3,8 @@ package seedu.address.logic.parser;
 import java.util.ArrayList;
 import java.util.List;
 
+import seedu.address.logic.parser.exceptions.ParseException;
+
 /**
  * Parses complex boolean find filter strings into tokens.
  */
@@ -25,7 +27,7 @@ public class FindFilterStringTokenizer {
      *
      * @return a list of tokens representing the filter string components
      */
-    List<Token> tokenize() {
+    List<Token> tokenize() throws ParseException {
         List<Token> tokens = new ArrayList<>();
 
         while (pos < filterString.length()) {
@@ -47,12 +49,14 @@ public class FindFilterStringTokenizer {
                         ? Token.Type.LPAREN
                         : Token.Type.RPAREN, String.valueOf(current)));
                 pos++;
-            } else {
+            } else if (isPartOfCondition(current)) {
                 StringBuilder sb = new StringBuilder();
                 while (pos < filterString.length() && isPartOfCondition(peek())) {
                     sb.append(next());
                 }
                 tokens.add(new Token(Token.Type.CONDITION, sb.toString()));
+            } else {
+                throw new ParseException("Find command received an invalid filter string!");
             }
         }
 
@@ -61,7 +65,7 @@ public class FindFilterStringTokenizer {
 
     private boolean isPartOfCondition(char c) {
         return Character.isLetterOrDigit(c)
-                || c == '/' || c == ',' || c == '@' || c == '.' || c == '-' || c == '_';
+                || c == '/' || c == ',' || c == '@' || c == '.' || c == '-' || c == '_' || c == '#';
     }
 
     private char next() {

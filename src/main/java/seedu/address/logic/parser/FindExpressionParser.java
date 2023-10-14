@@ -11,6 +11,7 @@ import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.FindFilterStringTokenizer.Token;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
@@ -34,9 +35,16 @@ public class FindExpressionParser {
      * @param tokens The list of tokens to be parsed.
      * @return The root of the expression tree representing the parsed tokens.
      */
-    public ExprNode parse(List<Token> tokens) {
+    public ExprNode parse(List<Token> tokens) throws ParseException {
+        if (tokens.isEmpty()) {
+            throw new ParseException("Expression is empty!");
+        }
         this.tokens = tokens;
-        return expression();
+        ExprNode completedAst = expression();
+        if (!isAtEnd()) {
+            throw new ParseException("Find command received an invalid filter string!");
+        }
+        return completedAst;
     }
 
     /**
@@ -50,7 +58,7 @@ public class FindExpressionParser {
      *
      * @return The parsed expression node.
      */
-    private ExprNode expression() {
+    private ExprNode expression() throws ParseException {
         ExprNode node = term();
 
         while (match(Token.Type.OR)) {
@@ -72,7 +80,7 @@ public class FindExpressionParser {
      *
      * @return The parsed term node.
      */
-    private ExprNode term() {
+    private ExprNode term() throws ParseException {
         ExprNode node = factor();
 
         while (match(Token.Type.AND)) {
@@ -93,7 +101,7 @@ public class FindExpressionParser {
      *
      * @return The parsed factor node.
      */
-    private ExprNode factor() {
+    private ExprNode factor() throws ParseException {
         if (match(Token.Type.NOT)) {
             consume(Token.Type.NOT);
             ExprNode node = factor();
@@ -105,6 +113,10 @@ public class FindExpressionParser {
             return node;
         } else {
             Token token = consume(Token.Type.CONDITION);
+            // check if text contains a slash and is a valid condition
+            if (!token.text.contains("/") || token.text.startsWith("/") || token.text.endsWith("/")) {
+                throw new ParseException("Invalid condition: " + token.text);
+            }
             // split by slash but include slash in substrings
             String[] parts = token.text.split("(?<=/)");
             FindSupportedField field = FindSupportedField.fromPrefix(parts[0].trim().toLowerCase());
@@ -123,11 +135,16 @@ public class FindExpressionParser {
         return peek().type == type;
     }
 
-    private Token consume(Token.Type type) {
+    private Token consume(Token.Type type) throws ParseException {
         if (check(type)) {
             return tokens.get(pos++);
         }
-        throw new RuntimeException("Expected token of type " + type + " but found " + peek().type);
+        if (isAtEnd()) {
+            throw new ParseException("Find command received an invalid filter string: " +
+                    "Expected token of type " + type + " but reached end of input!");
+        }
+        throw new ParseException("Find command received an invalid filter string: " +
+                "Expected token of type " + type + " but found " + peek().type);
     }
 
     private Token peek() {
@@ -167,15 +184,15 @@ public class FindExpressionParser {
          *
          * @param prefix The prefix to look up.
          * @return The supported field corresponding to the given prefix.
-         * @throws IllegalArgumentException if the prefix is not supported.
+         * @throws ParseException if the prefix is not supported.
          */
-        public static FindSupportedField fromPrefix(String prefix) {
+        public static FindSupportedField fromPrefix(String prefix) throws ParseException {
             for (FindSupportedField field : FindSupportedField.values()) {
                 if (field.prefix.equals(prefix)) {
                     return field;
                 }
             }
-            throw new IllegalArgumentException("No supported field with prefix " + prefix);
+            throw new ParseException("No supported field with prefix " + prefix);
         }
     }
 
