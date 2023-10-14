@@ -44,7 +44,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         resetData(toBeCopied);
     }
 
-    //// list overwrite operations
+    //=========== List overwrite operations ===========================================================
 
     /**
      * Replaces the contents of the person list with {@code persons}.
@@ -54,6 +54,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.persons.setPersons(persons);
     }
 
+    /**
+     * Replaces the contents of the event list with {@code events}.
+     * @param events ArrayList of events to replace the existing list with.
+     */
     public void setEvents(ArrayList<Event> events) {
         this.events.setEvents(events);
     }
@@ -68,7 +72,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         setEvents(newData.getEventList());
     }
 
-    //// person-level operations
+    //=========== person-level operations ===========================================================
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
@@ -86,10 +90,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.add(p);
     }
 
-    public void addEvent(Event event) {
-        events.add(event);
-    }
-
     /**
      * Replaces the given person {@code target} in the list with {@code editedPerson}.
      * {@code target} must exist in the address book.
@@ -97,16 +97,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setPerson(Person target, Person editedPerson) {
         requireNonNull(editedPerson);
-
         persons.setPerson(target, editedPerson);
-    }
-
-    public void setEvent(Event target, Event editedEvent) {
-        requireNonNull(editedEvent);
-
-        System.out.println("set event" + editedEvent);
-
-        this.events.setEvent(target, editedEvent);
     }
 
     /**
@@ -117,7 +108,28 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
-    //// util methods
+    //=========== event-level operations ===========================================================
+
+    /**
+     * Replaces the given event {@code target} in the list with {@code editedEvent}.
+     * @param target event to be edited. {@code target} must exist in the address book.
+     * @param editedEvent event with the edited details.
+     */
+    public void setEvent(Event target, Event editedEvent) {
+        requireNonNull(editedEvent);
+        this.events.setEvent(target, editedEvent);
+    }
+
+    /**
+     * Adds an event to the address book.
+     * @param event Event to be added.
+     */
+    public void addEvent(Event event) {
+        events.add(event);
+    }
+
+
+    //=========== util methods ===========================================================
 
     @Override
     public String toString() {

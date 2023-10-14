@@ -2,9 +2,6 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -56,6 +53,12 @@ public class ParserUtil {
         return new Name(trimmedName);
     }
 
+    /**
+     * Parses a {@code String eventName} into a {@code EventName}.
+     * @param name String to be parsed
+     * @return EventName object
+     * @throws ParseException if the given {@code name} is invalid.
+     */
     public static EventName parseEventName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
@@ -65,6 +68,13 @@ public class ParserUtil {
         return new EventName(trimmedName);
     }
 
+
+    /**
+     * Parses a {@code String date} into a {@code EventDate}.
+     * @param date String to be parsed
+     * @return EventDate object
+     * @throws ParseException if the given {@code date} is invalid.
+     */
     public static EventDate parseEventDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
@@ -74,6 +84,12 @@ public class ParserUtil {
         return new EventDate(trimmedDate);
     }
 
+    /**
+     * Parses a {@code String time} into a {@code EventTime}.
+     * @param time String to be parsed
+     * @return EventTime object
+     * @throws ParseException if the given {@code time} is invalid.
+     */
     public static EventTime parseEventTime(String time) throws ParseException {
         requireNonNull(time);
         String trimmedTime = time.trim();

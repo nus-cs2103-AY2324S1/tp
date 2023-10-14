@@ -1,18 +1,29 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
+
+import java.util.List;
+import java.util.Optional;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.event.*;
+import seedu.address.model.event.Event;
+import seedu.address.model.event.EventDate;
+import seedu.address.model.event.EventName;
+import seedu.address.model.event.EventTime;
+import seedu.address.model.event.Meeting;
 
-import java.util.List;
-import java.util.Optional;
 
-import static seedu.address.logic.parser.CliSyntax.*;
-
+/**
+ * Command to edit a meeting in the address book.
+ */
 public class EditMeetingCommand extends Command {
     public static final String COMMAND_WORD = "edit_meeting";
 
@@ -28,9 +39,6 @@ public class EditMeetingCommand extends Command {
             + PREFIX_MEETING_NAME + "TP WEEK 8 MEETING"
             + PREFIX_DATE + "2023-10-13 ";
 
-    public static final String MESSAGE_NOT_IMPLEMENTED_YET =
-            "edit_meeting command not implemented yet";
-
     public static final String MESSAGE_EDIT_SUCCESS = "Edited meeting: %1$s";
 
     public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Remark: %2$s";
@@ -38,6 +46,11 @@ public class EditMeetingCommand extends Command {
     public final Index index;
     public final EditMeetingDescriptor editMeetingDescriptor;
 
+    /**
+     * Takes in the index of the meeting to edit and its descriptor.
+     * @param index of the meeting to edit
+     * @param editMeetingDescriptor details to edit the meeting with
+     */
     public EditMeetingCommand(Index index, EditMeetingDescriptor editMeetingDescriptor) {
         this.index = index;
         this.editMeetingDescriptor = editMeetingDescriptor;
@@ -45,13 +58,11 @@ public class EditMeetingCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        List<Event> lastShownList = model.getFilteredEventList();
+        List<Event> lastShownList = model.getEventList();
 
-        System.out.println("got filtered event list");
-        System.out.println(lastShownList.size());
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
         }
 
         Event meetingToEdit = lastShownList.get(index.getZeroBased());
@@ -62,6 +73,12 @@ public class EditMeetingCommand extends Command {
         return new CommandResult(generateSuccessMessage(editedMeeting));
     }
 
+    /**
+     * Creates and returns a {@code Meeting} with the details of {@code meetingToEdit}
+     * @param meetingToEdit meeting to edit
+     * @param editMeetingDescriptor details to edit the meeting with
+     * @return meeting with the appropriate details edited
+     */
     private static Meeting createEditedMeeting(Event meetingToEdit,
                                                EditMeetingDescriptor editMeetingDescriptor) {
         assert meetingToEdit != null;
@@ -74,6 +91,11 @@ public class EditMeetingCommand extends Command {
         return new Meeting(updatedName, updatedDate, updatedStartTime, updatedEndTime);
     }
 
+    /**
+     * Generates a command execution success message with the meeting edited.
+     * @param meetingToEdit meeting that was edited
+     * @return String containing the success message
+     */
     private String generateSuccessMessage(Event meetingToEdit) {
         return String.format(MESSAGE_EDIT_SUCCESS, meetingToEdit);
     }
@@ -94,6 +116,10 @@ public class EditMeetingCommand extends Command {
                 && this.editMeetingDescriptor.equals(e.editMeetingDescriptor);
     }
 
+    /**
+     * Stores the details to edit the meeting with. Each non-empty field value will replace the
+     * corresponding field value of the meeting.
+     */
     public static class EditMeetingDescriptor {
 
         private EventName name;
@@ -136,6 +162,10 @@ public class EditMeetingCommand extends Command {
             this.endTime = endTime;
         }
 
+        /**
+         * Checks if fields are edited.
+         * @return true if at least one field is edited
+         */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(this.name, this.date, this.startTime, this.endTime);
         }
@@ -144,9 +174,9 @@ public class EditMeetingCommand extends Command {
         public String toString() {
             return new ToStringBuilder(this)
                     .add("name", this.name)
-                    .add("phone", this.date.toString())
-                    .add("email", this.startTime.toString())
-                    .add("address", this.endTime.toString())
+                    .add("date", this.date.toString())
+                    .add("start time", this.startTime.toString())
+                    .add("end time", this.endTime.toString())
                     .toString();
         }
 

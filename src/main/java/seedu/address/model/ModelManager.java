@@ -25,7 +25,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
 
-    private final ArrayList<Event> filteredEvents;
+    private final ArrayList<Event> events;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -38,7 +38,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         this.filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        this.filteredEvents = this.addressBook.getEventList();
+        this.events = this.addressBook.getEventList();
     }
 
     public ModelManager() {
@@ -136,9 +136,13 @@ public class ModelManager implements Model {
         return this.filteredPersons;
     }
 
+    /**
+     * Returns the list of events
+     * @return
+     */
     @Override
-    public ArrayList<Event> getFilteredEventList() {
-        return this.filteredEvents;
+    public ArrayList<Event> getEventList() {
+        return this.events;
     }
 
     @Override

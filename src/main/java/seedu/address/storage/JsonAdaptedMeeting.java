@@ -2,13 +2,19 @@ package seedu.address.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.event.*;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
 
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.event.Event;
+import seedu.address.model.event.EventDate;
+import seedu.address.model.event.EventName;
+import seedu.address.model.event.EventTime;
+import seedu.address.model.event.Meeting;
+import seedu.address.model.person.Name;
+
+/**
+ * Json-friendly version of {@link Meeting}.
+ */
 public class JsonAdaptedMeeting {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
 
@@ -18,7 +24,7 @@ public class JsonAdaptedMeeting {
     private final String endTime;
 
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given person details.
+     * Constructs a {@code JsonAdaptedMeeting} with the given person details.
      */
     @JsonCreator
     public JsonAdaptedMeeting(@JsonProperty("name") String name, @JsonProperty("date") String date,
@@ -30,7 +36,7 @@ public class JsonAdaptedMeeting {
     }
 
     /**
-     * Converts a given {@code Person} into this class for Jackson use.
+     * Converts a given {@code Meeting} into this class for Json use.
      */
     public JsonAdaptedMeeting(Event source) {
         this.name = source.getName().name;
@@ -47,7 +53,8 @@ public class JsonAdaptedMeeting {
     public Meeting toModelType() throws IllegalValueException {
 
         if (this.name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, EventName.class.getSimpleName()));
         }
         if (!Name.isValidName(name)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
@@ -55,34 +62,34 @@ public class JsonAdaptedMeeting {
         final EventName modelName = new EventName(name);
 
         if (this.date == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, EventDate.class.getSimpleName()));
         }
         if (!EventDate.isValidDate(this.date)) {
             throw new IllegalValueException(EventDate.MESSAGE_CONSTRAINTS);
         }
         final EventDate modelEventDate = new EventDate(this.date);
 
-        if (this.startTime == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
-        }
-        if (!EventTime.isValidTime(this.startTime)) {
+        if (this.startTime != null && !EventTime.isValidTime(this.startTime)) {
             throw new IllegalValueException(EventTime.MESSAGE_CONSTRAINTS);
         }
-        final EventTime modelEventStartTime = new EventTime(this.startTime);
+        final EventTime modelEventStartTime = new EventTime(this.startTime); // Accept null and a valid time
 
-        if (this.endTime == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
-        }
-        if (!EventTime.isValidTime(this.endTime)) {
+        if (this.endTime != null && !EventTime.isValidTime(this.endTime)) {
             throw new IllegalValueException(EventTime.MESSAGE_CONSTRAINTS);
         }
-        final EventTime modelEventEndTime = new EventTime(this.endTime);
+        final EventTime modelEventEndTime = new EventTime(this.endTime); // Accept null and a valid time
 
         return new Meeting(modelName, modelEventDate, modelEventStartTime, modelEventEndTime);
     }
 
     @Override
     public String toString() {
-        return "Name: " + name + " Date: " + date + " Start Time: " + startTime + " End Time: " + endTime;
+        return new ToStringBuilder(this)
+                .add("name", this.name)
+                .add("date", this.date)
+                .add("start_time", this.startTime == null ? "" : this.startTime)
+                .add("end_time", this.endTime == null ? "" : this.endTime)
+                .toString();
     }
 }

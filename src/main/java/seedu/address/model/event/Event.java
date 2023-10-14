@@ -1,10 +1,8 @@
 package seedu.address.model.event;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 
 /**
@@ -12,24 +10,31 @@ import seedu.address.model.person.Person;
  */
 public abstract class Event {
 
-    private ArrayList<Person> persons = new ArrayList<>();
+    private final ArrayList<Person> persons = new ArrayList<>();
 
-    private EventDate startDate;
+    private final EventDate startDate;
 
-    private EventTime startTime;
-    private EventDate endDate;
+    private final EventTime startTime;
+    private final EventDate endDate;
 
-    private EventTime endTime;
+    private final EventTime endTime;
 
-    private EventName name;
+    private final EventName name;
 
+    /**
+     * Constructor for the event with optional start and end time
+     * @param name name of the event
+     * @param startDate start date of the event
+     * @param startTime start time of the event
+     * @param endDate end date of the event
+     * @param endTime end time of the event
+     */
     public Event(EventName name, EventDate startDate, EventTime startTime, EventDate endDate, EventTime endTime) {
         this.name = name;
         this.startDate = startDate;
         this.startTime = startTime;
         this.endDate = endDate;
         this.endTime = endTime;
-
     }
 
     /**
@@ -40,14 +45,26 @@ public abstract class Event {
         return this.startDate;
     }
 
+    /**
+     * Get the start time of the event
+     * @return start time of the event
+     */
     public EventTime getStartTime() {
         return this.startTime;
     }
 
+    /**
+     * Gets the end date of the event
+     * @return end date of the event
+     */
     public EventDate getEndDate() {
         return this.endDate;
     }
 
+    /**
+     * Gets the end time of the event
+     * @return end time of the event
+     */
     public EventTime getEndTime() {
         return this.endTime;
     }
@@ -58,5 +75,15 @@ public abstract class Event {
      */
     public EventName getName() {
         return this.name;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("meeting_details", this.name)
+                .add("date", this.startDate)
+                .add("start_time", this.startTime)
+                .add("end_time", this.endTime)
+                .toString();
     }
 }

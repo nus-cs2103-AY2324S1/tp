@@ -30,7 +30,8 @@ class JsonSerializableAddressBook {
      * Extracted from the database
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons, @JsonProperty("events") List<JsonAdaptedMeeting> meetings) {
+    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
+                                       @JsonProperty("events") List<JsonAdaptedMeeting> meetings) {
         this.persons.addAll(persons);
         this.events.addAll(meetings);
     }
