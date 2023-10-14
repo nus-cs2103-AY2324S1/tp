@@ -34,6 +34,16 @@ public class DeleteCommand extends Command {
     }
 
     /**
+     * Checks if zero-based target index is valid.
+     */
+    public static boolean isValidIndex(int targetIndex, int listSize) throws CommandException {
+        if (targetIndex >= listSize || targetIndex < 0) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+        return true;
+    }
+
+    /**
      * Returns the people to delete, given the last shown list of Persons.
      *
      * @throws CommandException when target index is out of bounds.
@@ -46,11 +56,10 @@ public class DeleteCommand extends Command {
         for (int i = 0; i < numberOfDeletions; i++) {
             int targetIndex = zeroBasedIndices[i];
 
-            if (targetIndex >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            if (isValidIndex(targetIndex, lastShownList.size())) {
+                Person personToDelete = lastShownList.get(targetIndex);
+                peopleToDelete[i] = personToDelete;
             }
-            Person personToDelete = lastShownList.get(targetIndex);
-            peopleToDelete[i] = personToDelete;
         }
         return peopleToDelete;
     }

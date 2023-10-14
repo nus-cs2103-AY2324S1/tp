@@ -38,6 +38,12 @@ public class DeleteCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
+    public void isValidIndex() throws CommandException {
+        assertTrue(DeleteCommand.isValidIndex(0, 1));
+        assertThrows(CommandException.class, () -> DeleteCommand.isValidIndex(1, 1));
+        assertThrows(CommandException.class, () -> DeleteCommand.isValidIndex(-1, 1));
+    }
+    @Test
     public void getPeopleToDelete_validIndices_success() throws CommandException {
         Person[] peopleToDelete = getPeople(model.getFilteredPersonList(), ONEBASED_ONE_TO_THREE);
         DeleteCommand deleteCommand = new DeleteCommand(ONEBASED_ONE_TO_THREE);

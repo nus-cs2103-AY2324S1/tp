@@ -44,16 +44,12 @@ public class IndexTest {
         assertEquals(0, Index.fromZeroBased(0).compareTo(Index.fromOneBased(1)));
 
         //less than
-        assertEquals(true, Index.fromOneBased(1)
-                .compareTo(Index.fromOneBased(2)) < 0);
-        assertEquals(true, Index.fromZeroBased(0)
-                .compareTo(Index.fromOneBased(2)) < 0);
+        assertTrue(Index.fromOneBased(1).compareTo(Index.fromOneBased(2)) < 0);
+        assertTrue(Index.fromZeroBased(0).compareTo(Index.fromOneBased(2)) < 0);
 
         //more than
-        assertEquals(true, Index.fromOneBased(2)
-                .compareTo(Index.fromOneBased(1)) > 0);
-        assertEquals(true, Index.fromZeroBased(1)
-                .compareTo(Index.fromOneBased(1)) > 0);
+        assertTrue(Index.fromOneBased(2).compareTo(Index.fromOneBased(1)) > 0);
+        assertTrue(Index.fromZeroBased(1).compareTo(Index.fromOneBased(1)) > 0);
     }
 
     @Test
