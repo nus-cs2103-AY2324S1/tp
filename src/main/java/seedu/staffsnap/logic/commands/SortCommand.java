@@ -16,10 +16,10 @@ import seedu.staffsnap.model.applicant.Descriptor;
 public class SortCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an Applicant to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorted all Applicants. "
             + "Parameters: "
             + PREFIX_DESCRIPTOR + "DESCRIPTOR ";
-    private static final String MESSAGE_SUCCESS = "Sorted all Applicants";
+    public static final String MESSAGE_SUCCESS = "Sorted all Applicants";
 
     private final Descriptor descriptor;
 

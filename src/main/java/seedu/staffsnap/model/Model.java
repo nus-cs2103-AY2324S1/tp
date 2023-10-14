@@ -7,7 +7,6 @@ import javafx.collections.ObservableList;
 import seedu.staffsnap.commons.core.GuiSettings;
 import seedu.staffsnap.model.applicant.Applicant;
 import seedu.staffsnap.model.applicant.Descriptor;
-
 /**
  * The API of the Model component.
  */

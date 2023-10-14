@@ -124,6 +124,10 @@ public class Applicant implements Comparable<Applicant> {
         descriptor = newDescriptor;
     }
 
+    public static Descriptor getDescriptor() {
+        return descriptor;
+    }
+
     /**
      * @param o the Applicant to be compared.
      * @return the value 0 if the argument Name is equal to this Name; a value less than 0 if this Name is
