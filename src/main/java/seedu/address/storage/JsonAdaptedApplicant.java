@@ -5,8 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Applicant;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.fields.Name;
+import seedu.address.model.person.fields.Phone;
 
 /**
  * Jackson-friendly version of {@link Applicant}.
