@@ -3,15 +3,16 @@ package seedu.address.storage;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
-
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.ReadOnlyUserPrefs2;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.UserPrefs2;
 
 /**
  * Represents a storage for {@link UserPrefs}.
  */
-public interface UserPrefsStorage {
+public interface UserPrefsStorage2 {
 
     /**
      * Returns the file path of the UserPrefs data file.
@@ -24,13 +25,13 @@ public interface UserPrefsStorage {
      *
      * @throws DataLoadingException if the loading of data from preference file failed.
      */
-    Optional<UserPrefs> readUserPrefs() throws DataLoadingException;
+    Optional<UserPrefs2> readUserPrefs() throws DataLoadingException;
 
     /**
      * Saves the given {@link ReadOnlyUserPrefs} to the storage.
      * @param userPrefs cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException;
+    void saveUserPrefs(ReadOnlyUserPrefs2 userPrefs) throws IOException;
 
 }
