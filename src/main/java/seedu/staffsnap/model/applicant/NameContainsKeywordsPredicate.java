@@ -3,7 +3,6 @@ package seedu.staffsnap.model.applicant;
 import java.util.List;
 import java.util.function.Predicate;
 
-import seedu.staffsnap.commons.util.StringUtil;
 import seedu.staffsnap.commons.util.ToStringBuilder;
 
 /**
