@@ -11,7 +11,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.member.Member;
+import seedu.address.model.person.Applicant;
+import seedu.address.model.person.Member;
 import seedu.address.model.person.Person;
 
 /**
@@ -24,6 +25,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Member> filteredMembers;
+    private final FilteredList<Applicant> filteredApplicants;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -37,6 +39,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredMembers = new FilteredList<>(this.addressBook.getMemberList());
+        filteredApplicants = new FilteredList<>(this.addressBook.getApplicantList());
     }
 
     public ModelManager() {
@@ -103,8 +106,19 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasApplicant(Applicant applicant) {
+        requireNonNull(applicant);
+        return addressBook.hasApplicant(applicant);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
+    }
+
+    @Override
+    public void deleteApplicant(Applicant target) {
+        addressBook.removeApplicant(target);
     }
 
     @Override
@@ -114,10 +128,29 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void addMember(Member member) {
+        addressBook.addMember(member);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void addApplicant(Applicant applicant) {
+        addressBook.addApplicant(applicant);
+        updateFilteredApplicantList(PREDICATE_SHOW_ALL_APPLICANTS);
+    }
+
+    @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+    }
+
+    @Override
+    public void setApplicant(Applicant target, Applicant editedApplicant) {
+        requireAllNonNull(target, editedApplicant);
+
+        addressBook.setApplicant(target, editedApplicant);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -140,6 +173,15 @@ public class ModelManager implements Model {
         return filteredMembers;
     }
 
+    /**
+     * Returns an unmodifiable view of the list of {@code Applicant} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Applicant> getFilteredApplicantList() {
+        return filteredApplicants;
+    }
+
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
@@ -153,9 +195,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addMember(Member member) {
-        addressBook.addMember(member);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void updateFilteredApplicantList(Predicate<Applicant> predicate) {
+        requireNonNull(predicate);
+        filteredApplicants.setPredicate(predicate);
     }
 
     @Override
