@@ -9,17 +9,18 @@ import java.util.List;
  */
 public class Team {
 
-    private final TeamLeader leader;
+    private final TeamLeader teamLeader;
     private final List<Developer> developers;
 
     /**
      * Constructs a new Team instance with the specified TeamLeader.
      *
-     * @param leader The leader of the team.
+     * @param teamLeader The leader of the team.
      */
-    public Team(TeamLeader leader) {
-        this.leader = leader;
+    public Team(TeamLeader teamLeader) {
+        this.teamLeader = teamLeader;
         this.developers = new ArrayList<>();
+        //this.teamName = teamName;
     }
 
     /**
@@ -37,7 +38,7 @@ public class Team {
      * @return The TeamLeader of the team.
      */
     public TeamLeader getLeader() {
-        return leader;
+        return teamLeader;
     }
 
     /**
