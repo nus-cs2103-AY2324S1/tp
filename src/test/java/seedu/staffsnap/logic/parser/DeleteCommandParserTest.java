@@ -3,7 +3,7 @@ package seedu.staffsnap.logic.parser;
 import static seedu.staffsnap.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.staffsnap.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.staffsnap.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.staffsnap.testutil.TypicalIndexes.INDEX_FIRST_EMPLOYEE;
+import static seedu.staffsnap.testutil.TypicalIndexes.INDEX_FIRST_APPLICANT;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +22,7 @@ public class DeleteCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, "1", new DeleteCommand(INDEX_FIRST_EMPLOYEE));
+        assertParseSuccess(parser, "1", new DeleteCommand(INDEX_FIRST_APPLICANT));
     }
 
     @Test

@@ -3,10 +3,10 @@ package seedu.staffsnap.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.staffsnap.model.Model.PREDICATE_SHOW_ALL_EMPLOYEES;
+import static seedu.staffsnap.model.Model.PREDICATE_SHOW_ALL_APPLICANTS;
 import static seedu.staffsnap.testutil.Assert.assertThrows;
-import static seedu.staffsnap.testutil.TypicalEmployees.ALICE;
-import static seedu.staffsnap.testutil.TypicalEmployees.BENSON;
+import static seedu.staffsnap.testutil.TypicalApplicants.ALICE;
+import static seedu.staffsnap.testutil.TypicalApplicants.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -15,7 +15,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.staffsnap.commons.core.GuiSettings;
-import seedu.staffsnap.model.employee.NameContainsKeywordsPredicate;
+import seedu.staffsnap.model.applicant.NameContainsKeywordsPredicate;
 import seedu.staffsnap.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -73,29 +73,29 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasEmployee_nullEmployee_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.hasEmployee(null));
+    public void hasApplicant_nullApplicant_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasApplicant(null));
     }
 
     @Test
-    public void hasEmployee_employeeNotInAddressBook_returnsFalse() {
-        assertFalse(modelManager.hasEmployee(ALICE));
+    public void hasApplicant_applicantNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasApplicant(ALICE));
     }
 
     @Test
-    public void hasEmployee_employeeInAddressBook_returnsTrue() {
-        modelManager.addEmployee(ALICE);
-        assertTrue(modelManager.hasEmployee(ALICE));
+    public void hasApplicant_applicantInAddressBook_returnsTrue() {
+        modelManager.addApplicant(ALICE);
+        assertTrue(modelManager.hasApplicant(ALICE));
     }
 
     @Test
-    public void getFilteredEmployeeList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredEmployeeList().remove(0));
+    public void getFilteredApplicantList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredApplicantList().remove(0));
     }
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withEmployee(ALICE).withEmployee(BENSON).build();
+        AddressBook addressBook = new AddressBookBuilder().withApplicant(ALICE).withApplicant(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -118,11 +118,11 @@ public class ModelManagerTest {
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredEmployeeList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        modelManager.updateFilteredApplicantList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
+        modelManager.updateFilteredApplicantList(PREDICATE_SHOW_ALL_APPLICANTS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();

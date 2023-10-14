@@ -2,24 +2,24 @@ package seedu.staffsnap.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_DESCRIPTOR;
-import static seedu.staffsnap.model.Model.PREDICATE_HIDE_ALL_EMPLOYEES;
-import static seedu.staffsnap.model.Model.PREDICATE_SHOW_ALL_EMPLOYEES;
+import static seedu.staffsnap.model.Model.PREDICATE_HIDE_ALL_APPLICANTS;
+import static seedu.staffsnap.model.Model.PREDICATE_SHOW_ALL_APPLICANTS;
 
 import seedu.staffsnap.logic.commands.exceptions.CommandException;
 import seedu.staffsnap.model.Model;
-import seedu.staffsnap.model.employee.Descriptor;
+import seedu.staffsnap.model.applicant.Descriptor;
 
 
 /**
- * Sorts all employees in the address book to the user.
+ * Sorts all Applicants in the address book to the user.
  */
 public class SortCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an employee to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an Applicant to the address book. "
             + "Parameters: "
             + PREFIX_DESCRIPTOR + "DESCRIPTOR ";
-    private static final String MESSAGE_SUCCESS = "Sorted all Employees";
+    private static final String MESSAGE_SUCCESS = "Sorted all Applicants";
 
     private final Descriptor descriptor;
 
@@ -35,9 +35,9 @@ public class SortCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.updateSortedEmployeeList(descriptor);
-        model.updateFilteredEmployeeList(PREDICATE_HIDE_ALL_EMPLOYEES);
-        model.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
+        model.updateSortedApplicantList(descriptor);
+        model.updateFilteredApplicantList(PREDICATE_HIDE_ALL_APPLICANTS);
+        model.updateFilteredApplicantList(PREDICATE_SHOW_ALL_APPLICANTS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

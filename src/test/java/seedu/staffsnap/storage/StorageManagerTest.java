@@ -2,7 +2,7 @@ package seedu.staffsnap.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static seedu.staffsnap.testutil.TypicalEmployees.getTypicalAddressBook;
+import static seedu.staffsnap.testutil.TypicalApplicants.getTypicalAddressBook;
 
 import java.nio.file.Path;
 

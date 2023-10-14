@@ -12,8 +12,8 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import seedu.staffsnap.commons.core.GuiSettings;
 import seedu.staffsnap.commons.core.LogsCenter;
-import seedu.staffsnap.model.employee.Descriptor;
-import seedu.staffsnap.model.employee.Employee;
+import seedu.staffsnap.model.applicant.Applicant;
+import seedu.staffsnap.model.applicant.Descriptor;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -23,7 +23,7 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Employee> filteredEmployees;
+    private final FilteredList<Applicant> filteredApplicants;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -35,7 +35,7 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredEmployees = new FilteredList<>(this.addressBook.getEmployeeList());
+        filteredApplicants = new FilteredList<>(this.addressBook.getApplicantList());
     }
 
     public ModelManager() {
@@ -90,50 +90,49 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasEmployee(Employee employee) {
-        requireNonNull(employee);
-        return addressBook.hasEmployee(employee);
+    public boolean hasApplicant(Applicant applicant) {
+        requireNonNull(applicant);
+        return addressBook.hasApplicant(applicant);
     }
 
     @Override
-    public void deleteEmployee(Employee target) {
-        addressBook.removeEmployee(target);
+    public void deleteApplicant(Applicant target) {
+        addressBook.removeApplicant(target);
     }
 
     @Override
-    public void addEmployee(Employee employee) {
-        addressBook.addEmployee(employee);
-        updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
+    public void addApplicant(Applicant applicant) {
+        addressBook.addApplicant(applicant);
+        updateFilteredApplicantList(PREDICATE_SHOW_ALL_APPLICANTS);
     }
 
     @Override
-    public void setEmployee(Employee target, Employee editedEmployee) {
-        requireAllNonNull(target, editedEmployee);
+    public void setApplicant(Applicant target, Applicant editedApplicant) {
+        requireAllNonNull(target, editedApplicant);
 
-        addressBook.setEmployee(target, editedEmployee);
+        addressBook.setApplicant(target, editedApplicant);
     }
 
-    //=========== Filtered Employee List Accessors =============================================================
+    //=========== Filtered Applicant List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Employee} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Applicant} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Employee> getFilteredEmployeeList() {
-        return new SortedList<>(filteredEmployees).sorted();
-
+    public ObservableList<Applicant> getFilteredApplicantList() {
+        return new SortedList<>(filteredApplicants).sorted();
     }
 
     @Override
-    public void updateFilteredEmployeeList(Predicate<Employee> predicate) {
+    public void updateFilteredApplicantList(Predicate<Applicant> predicate) {
         requireNonNull(predicate);
-        filteredEmployees.setPredicate(predicate);
+        filteredApplicants.setPredicate(predicate);
     }
 
     @Override
-    public void updateSortedEmployeeList(Descriptor descriptor) {
-        Employee.setComparisonField(descriptor);
+    public void updateSortedApplicantList(Descriptor descriptor) {
+        Applicant.setComparisonField(descriptor);
     }
 
     @Override
@@ -150,7 +149,7 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredEmployees.equals(otherModelManager.filteredEmployees);
+                && filteredApplicants.equals(otherModelManager.filteredApplicants);
     }
 
 }

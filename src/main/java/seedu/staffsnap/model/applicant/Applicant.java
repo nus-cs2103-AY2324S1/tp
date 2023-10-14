@@ -1,0 +1,165 @@
+package seedu.staffsnap.model.applicant;
+
+import static seedu.staffsnap.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+
+import seedu.staffsnap.commons.util.ToStringBuilder;
+import seedu.staffsnap.model.interview.Interview;
+
+/**
+ * Represents an Applicant in the address book.
+ * Guarantees: details are present and not null, field values are validated, immutable.
+ */
+public class Applicant implements Comparable<Applicant> {
+
+    // Field to compare by, default to Name
+    private static Descriptor descriptor = Descriptor.NAME;
+
+    // Identity fields
+    private final Name name;
+    private final Phone phone; // to be changed to identifier
+    // Data fields
+    private final Department department;
+    private final Position position;
+    private final Set<Interview> interviews = new HashSet<>();
+
+    /**
+     * Every field must be present and not null.
+     */
+    public Applicant(Name name, Phone phone, Department department, Position position, Set<Interview> interviews) {
+        requireAllNonNull(name, phone, department, position, interviews);
+        this.name = name;
+        this.phone = phone;
+        this.department = department;
+        this.position = position;
+        this.interviews.addAll(interviews);
+    }
+
+    public Name getName() {
+        return name;
+    }
+
+    public Phone getPhone() {
+        return phone;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    /**
+     * Returns an immutable interview set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Interview> getInterviews() {
+        return Collections.unmodifiableSet(interviews);
+    }
+
+    /**
+     * Returns true if both applicants have the same name.
+     * This defines a weaker notion of equality between two applicants.
+     */
+    public boolean isSameApplicant(Applicant otherApplicant) {
+        if (otherApplicant == this) {
+            return true;
+        }
+
+        return otherApplicant != null
+                && otherApplicant.getName().equals(getName());
+    }
+
+    /**
+     * Returns true if both applicants have the same identity and data fields.
+     * This defines a stronger notion of equality between two applicants.
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Applicant)) {
+            return false;
+        }
+
+        Applicant otherApplicant = (Applicant) other;
+        return name.equals(otherApplicant.name)
+                && phone.equals(otherApplicant.phone)
+                && department.equals(otherApplicant.department)
+                && position.equals(otherApplicant.position)
+                && interviews.equals(otherApplicant.interviews);
+    }
+
+    @Override
+    public int hashCode() {
+        // use this method for custom fields hashing instead of implementing your own
+        return Objects.hash(name, phone, department, position, interviews);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("name", name)
+                .add("phone", phone)
+                .add("department", department)
+                .add("position", position)
+                .add("interviews", interviews)
+                .toString();
+    }
+
+    /**
+     * Update the descriptor for all Applicants.
+     * @param newDescriptor the new descriptor to sort Applicants by
+     */
+    public static void setComparisonField(Descriptor newDescriptor) {
+        descriptor = newDescriptor;
+    }
+
+    /**
+     * @param o the Applicant to be compared.
+     * @return the value 0 if the argument Name is equal to this Name; a value less than 0 if this Name is
+     *      lexicographically less than the Name argument; and a value greater than 0 if this string is
+     *      lexicographically greater than the Name argument.
+     */
+    public int compareByName(Applicant o) {
+        return this.name.compareTo(o.name);
+    }
+
+    /**
+     * @param o the Applicant to be compared.
+     * @return the value 0 if the argument Phone is equal to this Phone; a value less than 0 if this Phone is
+     *      lexicographically less than the Phone argument; and a value greater than 0 if this Phone is
+     *      lexicographically greater than the Phone argument.
+     */
+    public int compareByPhone(Applicant o) {
+        return this.phone.compareTo(o.phone);
+    }
+
+    /**
+     * @param o the object to be compared.
+     * @return the value 0 if the argument Applicant is equal to this Applicant;
+     *      a value less than 0 if this Applicant is lexicographically less than the Applicant argument;
+     *      and a value greater than 0 if this Applicant is lexicographically greater than the Applicant argument.
+     */
+    @Override
+    public int compareTo(Applicant o) {
+        switch (descriptor) {
+        case NAME:
+            return compareByName(o);
+        case PHONE:
+            return compareByPhone(o);
+        default:
+            return 0;
+        }
+    }
+
+}

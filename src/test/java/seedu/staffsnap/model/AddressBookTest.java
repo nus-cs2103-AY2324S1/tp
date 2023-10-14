@@ -3,11 +3,11 @@ package seedu.staffsnap.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_JOB_TITLE_BOB;
-import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_INTERVIEW_HUSBAND;
+import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_POSITION_BOB;
 import static seedu.staffsnap.testutil.Assert.assertThrows;
-import static seedu.staffsnap.testutil.TypicalEmployees.ALICE;
-import static seedu.staffsnap.testutil.TypicalEmployees.getTypicalAddressBook;
+import static seedu.staffsnap.testutil.TypicalApplicants.ALICE;
+import static seedu.staffsnap.testutil.TypicalApplicants.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -18,9 +18,9 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.staffsnap.model.employee.Employee;
-import seedu.staffsnap.model.employee.exceptions.DuplicateEmployeeException;
-import seedu.staffsnap.testutil.EmployeeBuilder;
+import seedu.staffsnap.model.applicant.Applicant;
+import seedu.staffsnap.model.applicant.exceptions.DuplicateApplicantException;
+import seedu.staffsnap.testutil.ApplicantBuilder;
 
 public class AddressBookTest {
 
@@ -28,7 +28,7 @@ public class AddressBookTest {
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getEmployeeList());
+        assertEquals(Collections.emptyList(), addressBook.getApplicantList());
     }
 
     @Test
@@ -44,64 +44,64 @@ public class AddressBookTest {
     }
 
     @Test
-    public void resetData_withDuplicateEmployees_throwsDuplicateEmployeeException() {
-        // Two employees with the same identity fields
-        Employee editedAlice = new EmployeeBuilder(ALICE).withJobTitle(VALID_JOB_TITLE_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
-        List<Employee> newEmployees = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newEmployees);
+    public void resetData_withDuplicateApplicants_throwsDuplicateApplicantException() {
+        // Two applicants with the same identity fields
+        Applicant editedAlice = new ApplicantBuilder(ALICE)
+                .withPosition(VALID_POSITION_BOB).withInterviews(VALID_INTERVIEW_HUSBAND).build();
+        List<Applicant> newApplicants = Arrays.asList(ALICE, editedAlice);
+        AddressBookStub newData = new AddressBookStub(newApplicants);
 
-        assertThrows(DuplicateEmployeeException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicateApplicantException.class, () -> addressBook.resetData(newData));
     }
 
     @Test
-    public void hasEmployee_nullEmployee_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasEmployee(null));
+    public void hasApplicant_nullApplicant_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasApplicant(null));
     }
 
     @Test
-    public void hasEmployee_employeeNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasEmployee(ALICE));
+    public void hasApplicant_applicantNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasApplicant(ALICE));
     }
 
     @Test
-    public void hasEmployee_employeeInAddressBook_returnsTrue() {
-        addressBook.addEmployee(ALICE);
-        assertTrue(addressBook.hasEmployee(ALICE));
+    public void hasApplicant_applicantInAddressBook_returnsTrue() {
+        addressBook.addApplicant(ALICE);
+        assertTrue(addressBook.hasApplicant(ALICE));
     }
 
     @Test
-    public void hasEmployee_employeeWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addEmployee(ALICE);
-        Employee editedAlice = new EmployeeBuilder(ALICE).withJobTitle(VALID_JOB_TITLE_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
-        assertTrue(addressBook.hasEmployee(editedAlice));
+    public void hasApplicant_applicantWithSameIdentityFieldsInAddressBook_returnsTrue() {
+        addressBook.addApplicant(ALICE);
+        Applicant editedAlice = new ApplicantBuilder(ALICE)
+                .withPosition(VALID_POSITION_BOB).withInterviews(VALID_INTERVIEW_HUSBAND).build();
+        assertTrue(addressBook.hasApplicant(editedAlice));
     }
 
     @Test
-    public void getEmployeeList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getEmployeeList().remove(0));
+    public void getApplicantList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> addressBook.getApplicantList().remove(0));
     }
 
     @Test
     public void toStringMethod() {
-        String expected = AddressBook.class.getCanonicalName() + "{employees=" + addressBook.getEmployeeList() + "}";
+        String expected = AddressBook.class.getCanonicalName() + "{applicants=" + addressBook.getApplicantList() + "}";
         assertEquals(expected, addressBook.toString());
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose employees list can violate interface constraints.
+     * A stub ReadOnlyAddressBook whose applicants list can violate interface constraints.
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
-        private final ObservableList<Employee> employees = FXCollections.observableArrayList();
+        private final ObservableList<Applicant> applicants = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Employee> employees) {
-            this.employees.setAll(employees);
+        AddressBookStub(Collection<Applicant> applicants) {
+            this.applicants.setAll(applicants);
         }
 
         @Override
-        public ObservableList<Employee> getEmployeeList() {
-            return employees;
+        public ObservableList<Applicant> getApplicantList() {
+            return applicants;
         }
     }
 

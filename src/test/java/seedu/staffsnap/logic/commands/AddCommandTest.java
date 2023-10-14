@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.staffsnap.testutil.Assert.assertThrows;
-import static seedu.staffsnap.testutil.TypicalEmployees.ALICE;
+import static seedu.staffsnap.testutil.TypicalApplicants.ALICE;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -22,43 +22,43 @@ import seedu.staffsnap.model.AddressBook;
 import seedu.staffsnap.model.Model;
 import seedu.staffsnap.model.ReadOnlyAddressBook;
 import seedu.staffsnap.model.ReadOnlyUserPrefs;
-import seedu.staffsnap.model.employee.Descriptor;
-import seedu.staffsnap.model.employee.Employee;
-import seedu.staffsnap.testutil.EmployeeBuilder;
+import seedu.staffsnap.model.applicant.Applicant;
+import seedu.staffsnap.model.applicant.Descriptor;
+import seedu.staffsnap.testutil.ApplicantBuilder;
 
 public class AddCommandTest {
 
     @Test
-    public void constructor_nullEmployee_throwsNullPointerException() {
+    public void constructor_nullApplicant_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddCommand(null));
     }
 
     @Test
-    public void execute_employeeAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingEmployeeAdded modelStub = new ModelStubAcceptingEmployeeAdded();
-        Employee validEmployee = new EmployeeBuilder().build();
+    public void execute_applicantAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingApplicantAdded modelStub = new ModelStubAcceptingApplicantAdded();
+        Applicant validApplicant = new ApplicantBuilder().build();
 
-        CommandResult commandResult = new AddCommand(validEmployee).execute(modelStub);
+        CommandResult commandResult = new AddCommand(validApplicant).execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validEmployee)),
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validApplicant)),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validEmployee), modelStub.employeesAdded);
+        assertEquals(Arrays.asList(validApplicant), modelStub.applicantsAdded);
     }
 
     @Test
-    public void execute_duplicateEmployee_throwsCommandException() {
-        Employee validEmployee = new EmployeeBuilder().build();
-        AddCommand addCommand = new AddCommand(validEmployee);
-        ModelStub modelStub = new ModelStubWithEmployee(validEmployee);
+    public void execute_duplicateApplicant_throwsCommandException() {
+        Applicant validApplicant = new ApplicantBuilder().build();
+        AddCommand addCommand = new AddCommand(validApplicant);
+        ModelStub modelStub = new ModelStubWithApplicant(validApplicant);
 
         assertThrows(CommandException.class,
-                AddCommand.MESSAGE_DUPLICATE_EMPLOYEE, () -> addCommand.execute(modelStub));
+                AddCommand.MESSAGE_DUPLICATE_APPLICANT, () -> addCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
-        Employee alice = new EmployeeBuilder().withName("Alice").build();
-        Employee bob = new EmployeeBuilder().withName("Bob").build();
+        Applicant alice = new ApplicantBuilder().withName("Alice").build();
+        Applicant bob = new ApplicantBuilder().withName("Bob").build();
         AddCommand addAliceCommand = new AddCommand(alice);
         AddCommand addBobCommand = new AddCommand(bob);
 
@@ -75,7 +75,7 @@ public class AddCommandTest {
         // null -> returns false
         assertFalse(addAliceCommand.equals(null));
 
-        // different employee -> returns false
+        // different applicant -> returns false
         assertFalse(addAliceCommand.equals(addBobCommand));
     }
 
@@ -121,7 +121,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addEmployee(Employee employee) {
+        public void addApplicant(Applicant applicant) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -136,70 +136,70 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasEmployee(Employee employee) {
+        public boolean hasApplicant(Applicant applicant) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deleteEmployee(Employee target) {
+        public void deleteApplicant(Applicant target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setEmployee(Employee target, Employee editedEmployee) {
+        public void setApplicant(Applicant target, Applicant editedApplicant) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Employee> getFilteredEmployeeList() {
+        public ObservableList<Applicant> getFilteredApplicantList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredEmployeeList(Predicate<Employee> predicate) {
+        public void updateFilteredApplicantList(Predicate<Applicant> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateSortedEmployeeList(Descriptor descriptor) {
+        public void updateSortedApplicantList(Descriptor descriptor) {
             throw new AssertionError("This method should not be called.");
         }
     }
 
     /**
-     * A Model stub that contains a single employee.
+     * A Model stub that contains a single applicant.
      */
-    private class ModelStubWithEmployee extends ModelStub {
-        private final Employee employee;
+    private class ModelStubWithApplicant extends ModelStub {
+        private final Applicant applicant;
 
-        ModelStubWithEmployee(Employee employee) {
-            requireNonNull(employee);
-            this.employee = employee;
+        ModelStubWithApplicant(Applicant applicant) {
+            requireNonNull(applicant);
+            this.applicant = applicant;
         }
 
         @Override
-        public boolean hasEmployee(Employee employee) {
-            requireNonNull(employee);
-            return this.employee.isSameEmployee(employee);
+        public boolean hasApplicant(Applicant applicant) {
+            requireNonNull(applicant);
+            return this.applicant.isSameApplicant(applicant);
         }
     }
 
     /**
-     * A Model stub that always accept the employee being added.
+     * A Model stub that always accept the applicant being added.
      */
-    private class ModelStubAcceptingEmployeeAdded extends ModelStub {
-        final ArrayList<Employee> employeesAdded = new ArrayList<>();
+    private class ModelStubAcceptingApplicantAdded extends ModelStub {
+        final ArrayList<Applicant> applicantsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasEmployee(Employee employee) {
-            requireNonNull(employee);
-            return employeesAdded.stream().anyMatch(employee::isSameEmployee);
+        public boolean hasApplicant(Applicant applicant) {
+            requireNonNull(applicant);
+            return applicantsAdded.stream().anyMatch(applicant::isSameApplicant);
         }
 
         @Override
-        public void addEmployee(Employee employee) {
-            requireNonNull(employee);
-            employeesAdded.add(employee);
+        public void addApplicant(Applicant applicant) {
+            requireNonNull(applicant);
+            applicantsAdded.add(applicant);
         }
 
         @Override

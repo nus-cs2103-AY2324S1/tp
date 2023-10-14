@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 
 import seedu.staffsnap.logic.commands.SortCommand;
 import seedu.staffsnap.logic.parser.exceptions.ParseException;
-import seedu.staffsnap.model.employee.Descriptor;
+import seedu.staffsnap.model.applicant.Descriptor;
 
 /**
  * Parses input arguments and creates a new SortCommand object
