@@ -17,7 +17,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
-                "Multiple values specified for the following single-valued field(s): ";
+            "Multiple values specified for the following single-valued field(s): ";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -48,6 +48,9 @@ public class Messages {
         return builder.toString();
     }
 
+    /**
+     * Formats the {@code people} for display to the user.
+     */
     public static String format(Person[] people) {
         int size = people.length;
         final StringBuilder builder = new StringBuilder();

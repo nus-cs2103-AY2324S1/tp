@@ -1,27 +1,33 @@
 package seedu.address.commons.core.index;
 
-import seedu.address.commons.util.ToStringBuilder;
-
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import seedu.address.commons.util.ToStringBuilder;
 
 /**
  * Represents one or more sorted, unique Index objects.
  * <p>
- * All Index objects in Indices have to be either zero-based or one-based.
+ * All Index objects in Indices have to be either zero-based or one-based. Similar to {@code Index},
+ * it should be used right from the start when parsing new user input that allows for more than
+ * one index provided.
  */
 public class Indices {
     private final ArrayList<Index> zeroBasedIndices;
     private int size;
 
     /**
-     * Indices can only be created by calling
+     * Indices can only be created by calling {@link Indices#fromZeroBased} or
+     * {@link Indices#fromOneBased(int[])}.
      */
     private Indices(ArrayList<Index> zeroBasedIndices) {
         this.zeroBasedIndices = zeroBasedIndices;
         this.size = zeroBasedIndices.size();
     }
 
+    /**
+     * Creates a new {@code Indices} using zero-based indices.
+     */
     public static Indices fromZeroBased(int[] zeroBasedIndices) {
         Arrays.sort(zeroBasedIndices);
         ArrayList<Index> result = new ArrayList<>();
@@ -35,6 +41,9 @@ public class Indices {
         return new Indices(result);
     }
 
+    /**
+     * Creates a new {@code Indices} using one-based indices.
+     */
     public static Indices fromOneBased(int[] oneBasedIndices) {
         Arrays.sort(oneBasedIndices);
         ArrayList<Index> result = new ArrayList<>();
@@ -64,6 +73,9 @@ public class Indices {
         return result;
     }
 
+    /**
+     * Returns a white space separated string of zero-based indices.
+     */
     public String getZeroBasedString() {
         int[] zeroBased = this.getZeroBased();
 
@@ -76,6 +88,9 @@ public class Indices {
         return result.toString();
     }
 
+    /**
+     * Returns a white space separated string of one-based indices.
+     */
     public String getOneBasedString() {
         int[] oneBased = this.getOneBased();
 
@@ -92,10 +107,16 @@ public class Indices {
         return this.size;
     }
 
+    /**
+     * Returns the smallest zero-based index in indices.
+     */
     public int getZeroBasedMin() {
         return this.zeroBasedIndices.get(0).getZeroBased();
     }
 
+    /**
+     * Returns the largest zero-based index in indices.
+     */
     public int getZeroBasedMax() {
         return this.zeroBasedIndices.get(size - 1).getZeroBased();
     }

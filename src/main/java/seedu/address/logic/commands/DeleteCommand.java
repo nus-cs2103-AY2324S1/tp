@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import seedu.address.commons.core.index.Indices;
-
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -13,16 +12,16 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes one or more fosterers identified using their displayed index from the address book.
  */
 public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
+            + ": Deletes fosterers identified by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Example: " + COMMAND_WORD + " 1 2 3";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Fosterer: %1$s";
 
@@ -34,6 +33,11 @@ public class DeleteCommand extends Command {
         this.targetIndices = targetIndices;
     }
 
+    /**
+     * Returns the people to delete, given the last shown list of Persons.
+     *
+     * @throws CommandException when target index is out of bounds.
+     */
     public Person[] getPeopleToDelete(List<Person> lastShownList) throws CommandException {
         int[] zeroBasedIndices = this.targetIndices.getZeroBased();
         int numberOfDeletions = this.targetIndices.getSize();
@@ -62,7 +66,7 @@ public class DeleteCommand extends Command {
         }
 
         if (peopleToDelete.length == 1) {
-           return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(peopleToDelete)));
+            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(peopleToDelete)));
         }
         return new CommandResult(String.format(MESSAGE_DELETE_PEOPLE_SUCCESS, Messages.format(peopleToDelete)));
     }

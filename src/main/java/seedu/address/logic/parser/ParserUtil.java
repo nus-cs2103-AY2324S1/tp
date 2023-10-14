@@ -37,6 +37,12 @@ public class ParserUtil {
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
 
+    /**
+     * Parses a string of {@code oneBasedIndices} into {@code Indices} and returns it.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if at least one specified index is invalid (not non-zero unsigned integer).
+     */
     public static Indices parseIndices(String oneBasedIndices) throws ParseException {
         String[] indices = oneBasedIndices.trim().split("\\s+");
         int size = indices.length;
