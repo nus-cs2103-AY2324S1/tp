@@ -100,7 +100,7 @@ Format:
 2. `e/[NEW_EMAIL] or n/[NEW_NAME]` or `a/[NEW_ADDRESS]` or `t/[NEW_TAG]`  (change a particular field)
 3. `n/[NEW_NAME] e/[NEW_EMAIL]`  or `e/[NEW_EMAIL] t/[NEW_TAG] a/[NEW_ADRESS]` (change multiple fields)
 
-* Edits the person with a specific name or email.
+* Edits the student with a specific name or email.
   - `edit n/[NAME]`
   - `edit e/[EMAIL]`
 * After the prompt “OK! Now you can edit NAME”
@@ -121,14 +121,14 @@ Examples:
 
 ### Searching for data : `search`
 
-Search for people whose names contain any of the given keywords.
+Search for people whose names contain the given keyword.
 
 Format: `search [KEYWORD]`
 
 * The search is case-insensitive. e.g `joe` will match `Joe`
 * Only the name is searched.
 * Partial words can be matched. e.g. `Han` will match `Hans`
-* All persons matching the keyword will be returned (i.e. `OR` search).
+* All students matching the keyword will be returned (i.e. `OR` search).
   e.g. `Alfred` will return `alfred`, `Alfred Tan`
 
 Examples:
@@ -141,7 +141,7 @@ Deletes data of a specified student.
 
 Format: `delete n/[NAME]` or `delete e/[EMAIL]`
 
-* Deletes the person with the specified `NAME` or `EMAIL`.
+* Deletes the student with the specified `NAME` or `EMAIL`.
 * `NAME`: The deletion is case-insensitive. e.g `joe` will match `Joe`.
 * `EMAIL`: username@domain
 
