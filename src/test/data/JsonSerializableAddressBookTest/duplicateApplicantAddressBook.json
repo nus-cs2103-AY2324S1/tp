@@ -1,0 +1,14 @@
+{
+  "applicants": [ {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "department": "alice@example.com",
+    "position": "123, Jurong West Ave 6, #08-111",
+    "interviews": [ "friends" ]
+  }, {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "department": "pauline@example.com",
+    "position": "4th street"
+  } ]
+}

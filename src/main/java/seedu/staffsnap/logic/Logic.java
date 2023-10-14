@@ -8,7 +8,7 @@ import seedu.staffsnap.logic.commands.CommandResult;
 import seedu.staffsnap.logic.commands.exceptions.CommandException;
 import seedu.staffsnap.logic.parser.exceptions.ParseException;
 import seedu.staffsnap.model.ReadOnlyAddressBook;
-import seedu.staffsnap.model.employee.Employee;
+import seedu.staffsnap.model.applicant.Applicant;
 
 /**
  * API of the Logic component
@@ -30,8 +30,8 @@ public interface Logic {
      */
     ReadOnlyAddressBook getAddressBook();
 
-    /** Returns an unmodifiable view of the filtered list of employees */
-    ObservableList<Employee> getFilteredEmployeeList();
+    /** Returns an unmodifiable view of the filtered list of applicants */
+    ObservableList<Applicant> getFilteredApplicantList();
 
     /**
      * Returns the user prefs' address book file path.

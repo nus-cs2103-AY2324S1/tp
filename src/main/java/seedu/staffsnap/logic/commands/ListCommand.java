@@ -1,24 +1,24 @@
 package seedu.staffsnap.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.staffsnap.model.Model.PREDICATE_SHOW_ALL_EMPLOYEES;
+import static seedu.staffsnap.model.Model.PREDICATE_SHOW_ALL_APPLICANTS;
 
 import seedu.staffsnap.model.Model;
 
 /**
- * Lists all employees in the address book to the user.
+ * Lists all applicants in the address book to the user.
  */
 public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
 
-    public static final String MESSAGE_SUCCESS = "Listed all employees";
+    public static final String MESSAGE_SUCCESS = "Listed all applicants";
 
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
+        model.updateFilteredApplicantList(PREDICATE_SHOW_ALL_APPLICANTS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

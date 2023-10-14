@@ -15,7 +15,7 @@ import seedu.staffsnap.logic.parser.AddressBookParser;
 import seedu.staffsnap.logic.parser.exceptions.ParseException;
 import seedu.staffsnap.model.Model;
 import seedu.staffsnap.model.ReadOnlyAddressBook;
-import seedu.staffsnap.model.employee.Employee;
+import seedu.staffsnap.model.applicant.Applicant;
 import seedu.staffsnap.storage.Storage;
 
 /**
@@ -67,8 +67,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Employee> getFilteredEmployeeList() {
-        return model.getFilteredEmployeeList();
+    public ObservableList<Applicant> getFilteredApplicantList() {
+        return model.getFilteredApplicantList();
     }
 
     @Override

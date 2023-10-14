@@ -2,11 +2,11 @@ package seedu.staffsnap.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_DEPARTMENT;
-import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_JOB_TITLE;
+import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_INTERVIEW;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.staffsnap.model.Model.PREDICATE_SHOW_ALL_EMPLOYEES;
+import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_POSITION;
+import static seedu.staffsnap.model.Model.PREDICATE_SHOW_ALL_APPLICANTS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -21,88 +21,89 @@ import seedu.staffsnap.commons.util.ToStringBuilder;
 import seedu.staffsnap.logic.Messages;
 import seedu.staffsnap.logic.commands.exceptions.CommandException;
 import seedu.staffsnap.model.Model;
-import seedu.staffsnap.model.employee.Department;
-import seedu.staffsnap.model.employee.Employee;
-import seedu.staffsnap.model.employee.JobTitle;
-import seedu.staffsnap.model.employee.Name;
-import seedu.staffsnap.model.employee.Phone;
-import seedu.staffsnap.model.tag.Tag;
+import seedu.staffsnap.model.applicant.Applicant;
+import seedu.staffsnap.model.applicant.Department;
+import seedu.staffsnap.model.applicant.Name;
+import seedu.staffsnap.model.applicant.Phone;
+import seedu.staffsnap.model.applicant.Position;
+import seedu.staffsnap.model.interview.Interview;
 
 /**
- * Edits the details of an existing employee in the address book.
+ * Edits the details of an existing applicant in the address book.
  */
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the employee identified "
-            + "by the index number used in the displayed employee list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the applicant identified "
+            + "by the index number used in the displayed applicant list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_DEPARTMENT + "DEPARTMENT] "
-            + "[" + PREFIX_JOB_TITLE + "JOBTITLE] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_POSITION + "POSITION] "
+            + "[" + PREFIX_INTERVIEW + "INTERVIEW]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_DEPARTMENT + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_EMPLOYEE_SUCCESS = "Edited Employee: %1$s";
+    public static final String MESSAGE_EDIT_APPLICANT_SUCCESS = "Edited Applicant: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_EMPLOYEE = "This employee already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_APPLICANT = "This applicant already exists in the address book.";
 
     private final Index index;
-    private final EditEmployeeDescriptor editEmployeeDescriptor;
+    private final EditApplicantDescriptor editApplicantDescriptor;
 
     /**
-     * @param index of the employee in the filtered employee list to edit
-     * @param editEmployeeDescriptor details to edit the employee with
+     * @param index of the applicant in the filtered applicant list to edit
+     * @param editApplicantDescriptor details to edit the applicant with
      */
-    public EditCommand(Index index, EditEmployeeDescriptor editEmployeeDescriptor) {
+    public EditCommand(Index index, EditApplicantDescriptor editApplicantDescriptor) {
         requireNonNull(index);
-        requireNonNull(editEmployeeDescriptor);
+        requireNonNull(editApplicantDescriptor);
 
         this.index = index;
-        this.editEmployeeDescriptor = new EditEmployeeDescriptor(editEmployeeDescriptor);
+        this.editApplicantDescriptor = new EditApplicantDescriptor(editApplicantDescriptor);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Employee> lastShownList = model.getFilteredEmployeeList();
+        List<Applicant> lastShownList = model.getFilteredApplicantList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_EMPLOYEE_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_APPLICANT_DISPLAYED_INDEX);
         }
 
-        Employee employeeToEdit = lastShownList.get(index.getZeroBased());
-        Employee editedEmployee = createEditedEmployee(employeeToEdit, editEmployeeDescriptor);
+        Applicant applicantToEdit = lastShownList.get(index.getZeroBased());
+        Applicant editedApplicant = createEditedApplicant(applicantToEdit, editApplicantDescriptor);
 
-        if (!employeeToEdit.isSameEmployee(editedEmployee) && model.hasEmployee(editedEmployee)) {
-            throw new CommandException(MESSAGE_DUPLICATE_EMPLOYEE);
+        if (!applicantToEdit.isSameApplicant(editedApplicant) && model.hasApplicant(editedApplicant)) {
+            throw new CommandException(MESSAGE_DUPLICATE_APPLICANT);
         }
 
-        model.setEmployee(employeeToEdit, editedEmployee);
-        model.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
-        return new CommandResult(String.format(MESSAGE_EDIT_EMPLOYEE_SUCCESS, Messages.format(editedEmployee)));
+        model.setApplicant(applicantToEdit, editedApplicant);
+        model.updateFilteredApplicantList(PREDICATE_SHOW_ALL_APPLICANTS);
+        return new CommandResult(String.format(MESSAGE_EDIT_APPLICANT_SUCCESS, Messages.format(editedApplicant)));
     }
 
     /**
-     * Creates and returns a {@code Employee} with the details of {@code employeeToEdit}
-     * edited with {@code editEmployeeDescriptor}.
+     * Creates and returns a {@code Applicant} with the details of {@code applicantToEdit}
+     * edited with {@code editApplicantDescriptor}.
      */
-    private static Employee createEditedEmployee(
-            Employee employeeToEdit, EditEmployeeDescriptor editEmployeeDescriptor) {
-        assert employeeToEdit != null;
+    private static Applicant createEditedApplicant(
+            Applicant applicantToEdit, EditApplicantDescriptor editApplicantDescriptor) {
+        assert applicantToEdit != null;
 
-        Name updatedName = editEmployeeDescriptor.getName().orElse(employeeToEdit.getName());
-        Phone updatedPhone = editEmployeeDescriptor.getPhone().orElse(employeeToEdit.getPhone());
-        Department updatedDepartment = editEmployeeDescriptor.getDepartment().orElse(employeeToEdit.getDepartment());
-        JobTitle updatedJobTitle = editEmployeeDescriptor.getJobTitle().orElse(employeeToEdit.getJobTitle());
-        Set<Tag> updatedTags = editEmployeeDescriptor.getTags().orElse(employeeToEdit.getTags());
+        Name updatedName = editApplicantDescriptor.getName().orElse(applicantToEdit.getName());
+        Phone updatedPhone = editApplicantDescriptor.getPhone().orElse(applicantToEdit.getPhone());
+        Department updatedDepartment = editApplicantDescriptor.getDepartment().orElse(applicantToEdit.getDepartment());
+        Position updatedPosition = editApplicantDescriptor.getPosition().orElse(applicantToEdit.getPosition());
+        Set<Interview> updatedInterviews = editApplicantDescriptor
+                .getInterviews().orElse(applicantToEdit.getInterviews());
 
-        return new Employee(updatedName, updatedPhone, updatedDepartment, updatedJobTitle, updatedTags);
+        return new Applicant(updatedName, updatedPhone, updatedDepartment, updatedPosition, updatedInterviews);
     }
 
     @Override
@@ -118,47 +119,47 @@ public class EditCommand extends Command {
 
         EditCommand otherEditCommand = (EditCommand) other;
         return index.equals(otherEditCommand.index)
-                && editEmployeeDescriptor.equals(otherEditCommand.editEmployeeDescriptor);
+                && editApplicantDescriptor.equals(otherEditCommand.editApplicantDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("index", index)
-                .add("editEmployeeDescriptor", editEmployeeDescriptor)
+                .add("editApplicantDescriptor", editApplicantDescriptor)
                 .toString();
     }
 
     /**
-     * Stores the details to edit the employee with. Each non-empty field value will replace the
-     * corresponding field value of the employee.
+     * Stores the details to edit the applicant with. Each non-empty field value will replace the
+     * corresponding field value of the applicant.
      */
-    public static class EditEmployeeDescriptor {
+    public static class EditApplicantDescriptor {
         private Name name;
         private Phone phone;
         private Department department;
-        private JobTitle jobTitle;
-        private Set<Tag> tags;
+        private Position position;
+        private Set<Interview> interviews;
 
-        public EditEmployeeDescriptor() {}
+        public EditApplicantDescriptor() {}
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
+         * A defensive copy of {@code interviews} is used internally.
          */
-        public EditEmployeeDescriptor(EditEmployeeDescriptor toCopy) {
+        public EditApplicantDescriptor(EditApplicantDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setDepartment(toCopy.department);
-            setJobTitle(toCopy.jobTitle);
-            setTags(toCopy.tags);
+            setPosition(toCopy.position);
+            setInterviews(toCopy.interviews);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, department, jobTitle, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, department, position, interviews);
         }
 
         public void setName(Name name) {
@@ -185,29 +186,29 @@ public class EditCommand extends Command {
             return Optional.ofNullable(department);
         }
 
-        public void setJobTitle(JobTitle jobTitle) {
-            this.jobTitle = jobTitle;
+        public void setPosition(Position position) {
+            this.position = position;
         }
 
-        public Optional<JobTitle> getJobTitle() {
-            return Optional.ofNullable(jobTitle);
+        public Optional<Position> getPosition() {
+            return Optional.ofNullable(position);
         }
 
         /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
+         * Sets {@code interviews} to this object's {@code interviews}.
+         * A defensive copy of {@code interviews} is used internally.
          */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        public void setInterviews(Set<Interview> interviews) {
+            this.interviews = (interviews != null) ? new HashSet<>(interviews) : null;
         }
 
         /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * Returns an unmodifiable interview set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
+         * Returns {@code Optional#empty()} if {@code interviews} is null.
          */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        public Optional<Set<Interview>> getInterviews() {
+            return (interviews != null) ? Optional.of(Collections.unmodifiableSet(interviews)) : Optional.empty();
         }
 
         @Override
@@ -217,16 +218,16 @@ public class EditCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditEmployeeDescriptor)) {
+            if (!(other instanceof EditApplicantDescriptor)) {
                 return false;
             }
 
-            EditEmployeeDescriptor otherEditEmployeeDescriptor = (EditEmployeeDescriptor) other;
-            return Objects.equals(name, otherEditEmployeeDescriptor.name)
-                    && Objects.equals(phone, otherEditEmployeeDescriptor.phone)
-                    && Objects.equals(department, otherEditEmployeeDescriptor.department)
-                    && Objects.equals(jobTitle, otherEditEmployeeDescriptor.jobTitle)
-                    && Objects.equals(tags, otherEditEmployeeDescriptor.tags);
+            EditApplicantDescriptor otherEditApplicantDescriptor = (EditApplicantDescriptor) other;
+            return Objects.equals(name, otherEditApplicantDescriptor.name)
+                    && Objects.equals(phone, otherEditApplicantDescriptor.phone)
+                    && Objects.equals(department, otherEditApplicantDescriptor.department)
+                    && Objects.equals(position, otherEditApplicantDescriptor.position)
+                    && Objects.equals(interviews, otherEditApplicantDescriptor.interviews);
         }
 
         @Override
@@ -235,8 +236,8 @@ public class EditCommand extends Command {
                     .add("name", name)
                     .add("phone", phone)
                     .add("department", department)
-                    .add("jobTitle", jobTitle)
-                    .add("tags", tags)
+                    .add("position", position)
+                    .add("interviews", interviews)
                     .toString();
         }
     }

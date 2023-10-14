@@ -3,10 +3,10 @@ package seedu.staffsnap.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.staffsnap.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_DEPARTMENT;
-import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_JOB_TITLE;
+import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_INTERVIEW;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_POSITION;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -15,9 +15,9 @@ import java.util.Set;
 
 import seedu.staffsnap.commons.core.index.Index;
 import seedu.staffsnap.logic.commands.EditCommand;
-import seedu.staffsnap.logic.commands.EditCommand.EditEmployeeDescriptor;
+import seedu.staffsnap.logic.commands.EditCommand.EditApplicantDescriptor;
 import seedu.staffsnap.logic.parser.exceptions.ParseException;
-import seedu.staffsnap.model.tag.Tag;
+import seedu.staffsnap.model.interview.Interview;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -33,7 +33,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_DEPARTMENT,
-                        PREFIX_JOB_TITLE, PREFIX_TAG);
+                        PREFIX_POSITION, PREFIX_INTERVIEW);
 
         Index index;
 
@@ -43,45 +43,47 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_DEPARTMENT, PREFIX_JOB_TITLE);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_DEPARTMENT, PREFIX_POSITION);
 
-        EditEmployeeDescriptor editEmployeeDescriptor = new EditEmployeeDescriptor();
+        EditApplicantDescriptor editApplicantDescriptor = new EditApplicantDescriptor();
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editEmployeeDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+            editApplicantDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            editEmployeeDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
+            editApplicantDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
         }
         if (argMultimap.getValue(PREFIX_DEPARTMENT).isPresent()) {
-            editEmployeeDescriptor.setDepartment(ParserUtil.parseDepartment(
+            editApplicantDescriptor.setDepartment(ParserUtil.parseDepartment(
                     argMultimap.getValue(PREFIX_DEPARTMENT).get()));
         }
-        if (argMultimap.getValue(PREFIX_JOB_TITLE).isPresent()) {
-            editEmployeeDescriptor.setJobTitle(ParserUtil.parseJobTitle(argMultimap.getValue(PREFIX_JOB_TITLE).get()));
+        if (argMultimap.getValue(PREFIX_POSITION).isPresent()) {
+            editApplicantDescriptor.setPosition(ParserUtil.parsePosition(argMultimap.getValue(PREFIX_POSITION).get()));
         }
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editEmployeeDescriptor::setTags);
+        parseInterviewsForEdit(argMultimap.getAllValues(PREFIX_INTERVIEW))
+                .ifPresent(editApplicantDescriptor::setInterviews);
 
-        if (!editEmployeeDescriptor.isAnyFieldEdited()) {
+        if (!editApplicantDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditCommand(index, editEmployeeDescriptor);
+        return new EditCommand(index, editApplicantDescriptor);
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>} if {@code tags} is non-empty.
-     * If {@code tags} contain only one element which is an empty string, it will be parsed into a
-     * {@code Set<Tag>} containing zero tags.
+     * Parses {@code Collection<String> interviews} into a {@code Set<Interview>} if {@code interviews} is non-empty.
+     * If {@code interviews} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<Interview>} containing zero interviews.
      */
-    private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
-        assert tags != null;
+    private Optional<Set<Interview>> parseInterviewsForEdit(Collection<String> interviews) throws ParseException {
+        assert interviews != null;
 
-        if (tags.isEmpty()) {
+        if (interviews.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
-        return Optional.of(ParserUtil.parseTags(tagSet));
+        Collection<String> interviewSet = interviews.size() == 1 && interviews.contains("")
+                ? Collections.emptySet() : interviews;
+        return Optional.of(ParserUtil.parseInterviews(interviewSet));
     }
 
 }

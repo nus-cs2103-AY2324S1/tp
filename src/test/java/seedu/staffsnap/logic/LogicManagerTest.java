@@ -1,14 +1,14 @@
 package seedu.staffsnap.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.staffsnap.logic.Messages.MESSAGE_INVALID_EMPLOYEE_DISPLAYED_INDEX;
+import static seedu.staffsnap.logic.Messages.MESSAGE_INVALID_APPLICANT_DISPLAYED_INDEX;
 import static seedu.staffsnap.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.DEPARTMENT_DESC_AMY;
-import static seedu.staffsnap.logic.commands.CommandTestUtil.JOB_TITLE_DESC_AMY;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.staffsnap.logic.commands.CommandTestUtil.POSITION_DESC_AMY;
 import static seedu.staffsnap.testutil.Assert.assertThrows;
-import static seedu.staffsnap.testutil.TypicalEmployees.AMY;
+import static seedu.staffsnap.testutil.TypicalApplicants.AMY;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
@@ -27,11 +27,11 @@ import seedu.staffsnap.model.Model;
 import seedu.staffsnap.model.ModelManager;
 import seedu.staffsnap.model.ReadOnlyAddressBook;
 import seedu.staffsnap.model.UserPrefs;
-import seedu.staffsnap.model.employee.Employee;
+import seedu.staffsnap.model.applicant.Applicant;
 import seedu.staffsnap.storage.JsonAddressBookStorage;
 import seedu.staffsnap.storage.JsonUserPrefsStorage;
 import seedu.staffsnap.storage.StorageManager;
-import seedu.staffsnap.testutil.EmployeeBuilder;
+import seedu.staffsnap.testutil.ApplicantBuilder;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy IO exception");
@@ -61,7 +61,7 @@ public class LogicManagerTest {
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_EMPLOYEE_DISPLAYED_INDEX);
+        assertCommandException(deleteCommand, MESSAGE_INVALID_APPLICANT_DISPLAYED_INDEX);
     }
 
     @Test
@@ -83,8 +83,8 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void getFilteredEmployeeList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredEmployeeList().remove(0));
+    public void getFilteredApplicantList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredApplicantList().remove(0));
     }
 
     /**
@@ -166,10 +166,10 @@ public class LogicManagerTest {
 
         // Triggers the saveAddressBook method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
-                + DEPARTMENT_DESC_AMY + JOB_TITLE_DESC_AMY;
-        Employee expectedEmployee = new EmployeeBuilder(AMY).withTags().build();
+                + DEPARTMENT_DESC_AMY + POSITION_DESC_AMY;
+        Applicant expectedApplicant = new ApplicantBuilder(AMY).withInterviews().build();
         ModelManager expectedModel = new ModelManager();
-        expectedModel.addEmployee(expectedEmployee);
+        expectedModel.addApplicant(expectedApplicant);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
 }

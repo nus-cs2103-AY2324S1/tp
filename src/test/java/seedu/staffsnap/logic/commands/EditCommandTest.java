@@ -5,28 +5,28 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.DESC_BOB;
+import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_INTERVIEW_HUSBAND;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.staffsnap.logic.commands.CommandTestUtil.showEmployeeAtIndex;
-import static seedu.staffsnap.testutil.TypicalEmployees.getTypicalAddressBook;
-import static seedu.staffsnap.testutil.TypicalIndexes.INDEX_FIRST_EMPLOYEE;
-import static seedu.staffsnap.testutil.TypicalIndexes.INDEX_SECOND_EMPLOYEE;
+import static seedu.staffsnap.logic.commands.CommandTestUtil.showApplicantAtIndex;
+import static seedu.staffsnap.testutil.TypicalApplicants.getTypicalAddressBook;
+import static seedu.staffsnap.testutil.TypicalIndexes.INDEX_FIRST_APPLICANT;
+import static seedu.staffsnap.testutil.TypicalIndexes.INDEX_SECOND_APPLICANT;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.staffsnap.commons.core.index.Index;
 import seedu.staffsnap.logic.Messages;
-import seedu.staffsnap.logic.commands.EditCommand.EditEmployeeDescriptor;
+import seedu.staffsnap.logic.commands.EditCommand.EditApplicantDescriptor;
 import seedu.staffsnap.model.AddressBook;
 import seedu.staffsnap.model.Model;
 import seedu.staffsnap.model.ModelManager;
 import seedu.staffsnap.model.UserPrefs;
-import seedu.staffsnap.model.employee.Employee;
-import seedu.staffsnap.testutil.EditEmployeeDescriptorBuilder;
-import seedu.staffsnap.testutil.EmployeeBuilder;
+import seedu.staffsnap.model.applicant.Applicant;
+import seedu.staffsnap.testutil.ApplicantBuilder;
+import seedu.staffsnap.testutil.EditApplicantDescriptorBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
@@ -37,48 +37,48 @@ public class EditCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Employee editedEmployee = new EmployeeBuilder().build();
-        EditEmployeeDescriptor descriptor = new EditEmployeeDescriptorBuilder(editedEmployee).build();
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_EMPLOYEE, descriptor);
+        Applicant editedApplicant = new ApplicantBuilder().build();
+        EditApplicantDescriptor descriptor = new EditApplicantDescriptorBuilder(editedApplicant).build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_APPLICANT, descriptor);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_EMPLOYEE_SUCCESS,
-                Messages.format(editedEmployee));
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_APPLICANT_SUCCESS,
+                Messages.format(editedApplicant));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setEmployee(model.getFilteredEmployeeList().get(0), editedEmployee);
+        expectedModel.setApplicant(model.getFilteredApplicantList().get(0), editedApplicant);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
-        Index indexLastEmployee = Index.fromOneBased(model.getFilteredEmployeeList().size());
-        Employee lastEmployee = model.getFilteredEmployeeList().get(indexLastEmployee.getZeroBased());
+        Index indexLastApplicant = Index.fromOneBased(model.getFilteredApplicantList().size());
+        Applicant lastApplicant = model.getFilteredApplicantList().get(indexLastApplicant.getZeroBased());
 
-        EmployeeBuilder employeeInList = new EmployeeBuilder(lastEmployee);
-        Employee editedEmployee = employeeInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+        ApplicantBuilder applicantInList = new ApplicantBuilder(lastApplicant);
+        Applicant editedApplicant = applicantInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+                .withInterviews(VALID_INTERVIEW_HUSBAND).build();
 
-        EditEmployeeDescriptor descriptor = new EditEmployeeDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
-        EditCommand editCommand = new EditCommand(indexLastEmployee, descriptor);
+        EditApplicantDescriptor descriptor = new EditApplicantDescriptorBuilder().withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB).withInterviews(VALID_INTERVIEW_HUSBAND).build();
+        EditCommand editCommand = new EditCommand(indexLastApplicant, descriptor);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_EMPLOYEE_SUCCESS,
-                Messages.format(editedEmployee));
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_APPLICANT_SUCCESS,
+                Messages.format(editedApplicant));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setEmployee(lastEmployee, editedEmployee);
+        expectedModel.setApplicant(lastApplicant, editedApplicant);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_EMPLOYEE, new EditEmployeeDescriptor());
-        Employee editedEmployee = model.getFilteredEmployeeList().get(INDEX_FIRST_EMPLOYEE.getZeroBased());
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_APPLICANT, new EditApplicantDescriptor());
+        Applicant editedApplicant = model.getFilteredApplicantList().get(INDEX_FIRST_APPLICANT.getZeroBased());
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_EMPLOYEE_SUCCESS,
-                Messages.format(editedEmployee));
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_APPLICANT_SUCCESS,
+                Messages.format(editedApplicant));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
@@ -87,50 +87,51 @@ public class EditCommandTest {
 
     @Test
     public void execute_filteredList_success() {
-        showEmployeeAtIndex(model, INDEX_FIRST_EMPLOYEE);
+        showApplicantAtIndex(model, INDEX_FIRST_APPLICANT);
 
-        Employee employeeInFilteredList = model.getFilteredEmployeeList().get(INDEX_FIRST_EMPLOYEE.getZeroBased());
-        Employee editedEmployee = new EmployeeBuilder(employeeInFilteredList).withName(VALID_NAME_BOB).build();
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_EMPLOYEE,
-                new EditEmployeeDescriptorBuilder().withName(VALID_NAME_BOB).build());
+        Applicant applicantInFilteredList = model.getFilteredApplicantList().get(INDEX_FIRST_APPLICANT.getZeroBased());
+        Applicant editedApplicant = new ApplicantBuilder(applicantInFilteredList).withName(VALID_NAME_BOB).build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_APPLICANT,
+                new EditApplicantDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_EMPLOYEE_SUCCESS,
-                Messages.format(editedEmployee));
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_APPLICANT_SUCCESS,
+                Messages.format(editedApplicant));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setEmployee(model.getFilteredEmployeeList().get(0), editedEmployee);
+        expectedModel.setApplicant(model.getFilteredApplicantList().get(0), editedApplicant);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_duplicateEmployeeUnfilteredList_failure() {
-        Employee firstEmployee = model.getFilteredEmployeeList().get(INDEX_FIRST_EMPLOYEE.getZeroBased());
-        EditEmployeeDescriptor descriptor = new EditEmployeeDescriptorBuilder(firstEmployee).build();
-        EditCommand editCommand = new EditCommand(INDEX_SECOND_EMPLOYEE, descriptor);
+    public void execute_duplicateApplicantUnfilteredList_failure() {
+        Applicant firstApplicant = model.getFilteredApplicantList().get(INDEX_FIRST_APPLICANT.getZeroBased());
+        EditApplicantDescriptor descriptor = new EditApplicantDescriptorBuilder(firstApplicant).build();
+        EditCommand editCommand = new EditCommand(INDEX_SECOND_APPLICANT, descriptor);
 
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_EMPLOYEE);
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_APPLICANT);
     }
 
     @Test
-    public void execute_duplicateEmployeeFilteredList_failure() {
-        showEmployeeAtIndex(model, INDEX_FIRST_EMPLOYEE);
+    public void execute_duplicateApplicantFilteredList_failure() {
+        showApplicantAtIndex(model, INDEX_FIRST_APPLICANT);
 
-        // edit employee in filtered list into a duplicate in address book
-        Employee employeeInList = model.getAddressBook().getEmployeeList().get(INDEX_SECOND_EMPLOYEE.getZeroBased());
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_EMPLOYEE,
-                new EditEmployeeDescriptorBuilder(employeeInList).build());
+        // edit applicant in filtered list into a duplicate in address book
+        Applicant applicantInList = model.getAddressBook()
+                .getApplicantList().get(INDEX_SECOND_APPLICANT.getZeroBased());
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_APPLICANT,
+                new EditApplicantDescriptorBuilder(applicantInList).build());
 
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_EMPLOYEE);
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_APPLICANT);
     }
 
     @Test
-    public void execute_invalidEmployeeIndexUnfilteredList_failure() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredEmployeeList().size() + 1);
-        EditEmployeeDescriptor descriptor = new EditEmployeeDescriptorBuilder().withName(VALID_NAME_BOB).build();
+    public void execute_invalidApplicantIndexUnfilteredList_failure() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredApplicantList().size() + 1);
+        EditApplicantDescriptor descriptor = new EditApplicantDescriptorBuilder().withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_EMPLOYEE_DISPLAYED_INDEX);
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_APPLICANT_DISPLAYED_INDEX);
     }
 
     /**
@@ -138,25 +139,25 @@ public class EditCommandTest {
      * but smaller than size of address book
      */
     @Test
-    public void execute_invalidEmployeeIndexFilteredList_failure() {
-        showEmployeeAtIndex(model, INDEX_FIRST_EMPLOYEE);
-        Index outOfBoundIndex = INDEX_SECOND_EMPLOYEE;
+    public void execute_invalidApplicantIndexFilteredList_failure() {
+        showApplicantAtIndex(model, INDEX_FIRST_APPLICANT);
+        Index outOfBoundIndex = INDEX_SECOND_APPLICANT;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getEmployeeList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getApplicantList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
-                new EditEmployeeDescriptorBuilder().withName(VALID_NAME_BOB).build());
+                new EditApplicantDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_EMPLOYEE_DISPLAYED_INDEX);
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_APPLICANT_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        final EditCommand standardCommand = new EditCommand(INDEX_FIRST_EMPLOYEE, DESC_AMY);
+        final EditCommand standardCommand = new EditCommand(INDEX_FIRST_APPLICANT, DESC_AMY);
 
         // same values -> returns true
-        EditEmployeeDescriptor copyDescriptor = new EditEmployeeDescriptor(DESC_AMY);
-        EditCommand commandWithSameValues = new EditCommand(INDEX_FIRST_EMPLOYEE, copyDescriptor);
+        EditApplicantDescriptor copyDescriptor = new EditApplicantDescriptor(DESC_AMY);
+        EditCommand commandWithSameValues = new EditCommand(INDEX_FIRST_APPLICANT, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -169,19 +170,19 @@ public class EditCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(INDEX_SECOND_EMPLOYEE, DESC_AMY)));
+        assertFalse(standardCommand.equals(new EditCommand(INDEX_SECOND_APPLICANT, DESC_AMY)));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_EMPLOYEE, DESC_BOB)));
+        assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_APPLICANT, DESC_BOB)));
     }
 
     @Test
     public void toStringMethod() {
         Index index = Index.fromOneBased(1);
-        EditEmployeeDescriptor editEmployeeDescriptor = new EditEmployeeDescriptor();
-        EditCommand editCommand = new EditCommand(index, editEmployeeDescriptor);
-        String expected = EditCommand.class.getCanonicalName() + "{index=" + index + ", editEmployeeDescriptor="
-                + editEmployeeDescriptor + "}";
+        EditApplicantDescriptor editApplicantDescriptor = new EditApplicantDescriptor();
+        EditCommand editCommand = new EditCommand(index, editApplicantDescriptor);
+        String expected = EditCommand.class.getCanonicalName() + "{index=" + index + ", editApplicantDescriptor="
+                + editApplicantDescriptor + "}";
         assertEquals(expected, editCommand.toString());
     }
 

@@ -3,10 +3,10 @@ package seedu.staffsnap.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.staffsnap.testutil.Assert.assertThrows;
-import static seedu.staffsnap.testutil.TypicalEmployees.ALICE;
-import static seedu.staffsnap.testutil.TypicalEmployees.HOON;
-import static seedu.staffsnap.testutil.TypicalEmployees.IDA;
-import static seedu.staffsnap.testutil.TypicalEmployees.getTypicalAddressBook;
+import static seedu.staffsnap.testutil.TypicalApplicants.ALICE;
+import static seedu.staffsnap.testutil.TypicalApplicants.HOON;
+import static seedu.staffsnap.testutil.TypicalApplicants.IDA;
+import static seedu.staffsnap.testutil.TypicalApplicants.getTypicalAddressBook;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -51,13 +51,13 @@ public class JsonAddressBookStorageTest {
     }
 
     @Test
-    public void readAddressBook_invalidEmployeeAddressBook_throwDataLoadingException() {
-        assertThrows(DataLoadingException.class, () -> readAddressBook("invalidEmployeeAddressBook.json"));
+    public void readAddressBook_invalidApplicantAddressBook_throwDataLoadingException() {
+        assertThrows(DataLoadingException.class, () -> readAddressBook("invalidApplicantAddressBook.json"));
     }
 
     @Test
-    public void readAddressBook_invalidAndValidEmployeeAddressBook_throwDataLoadingException() {
-        assertThrows(DataLoadingException.class, () -> readAddressBook("invalidAndValidEmployeeAddressBook.json"));
+    public void readAddressBook_invalidAndValidApplicantAddressBook_throwDataLoadingException() {
+        assertThrows(DataLoadingException.class, () -> readAddressBook("invalidAndValidApplicantAddressBook.json"));
     }
 
     @Test
@@ -72,14 +72,14 @@ public class JsonAddressBookStorageTest {
         assertEquals(original, new AddressBook(readBack));
 
         // Modify data, overwrite exiting file, and read back
-        original.addEmployee(HOON);
-        original.removeEmployee(ALICE);
+        original.addApplicant(HOON);
+        original.removeApplicant(ALICE);
         jsonAddressBookStorage.saveAddressBook(original, filePath);
         readBack = jsonAddressBookStorage.readAddressBook(filePath).get();
         assertEquals(original, new AddressBook(readBack));
 
         // Save and read without specifying file path
-        original.addEmployee(IDA);
+        original.addApplicant(IDA);
         jsonAddressBookStorage.saveAddressBook(original); // file path not specified
         readBack = jsonAddressBookStorage.readAddressBook().get(); // file path not specified
         assertEquals(original, new AddressBook(readBack));

@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.staffsnap.logic.parser.Prefix;
-import seedu.staffsnap.model.employee.Employee;
+import seedu.staffsnap.model.applicant.Applicant;
 
 /**
  * Container for user visible messages.
@@ -14,8 +14,8 @@ public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
-    public static final String MESSAGE_INVALID_EMPLOYEE_DISPLAYED_INDEX = "The employee index provided is invalid";
-    public static final String MESSAGE_EMPLOYEES_LISTED_OVERVIEW = "%1$d employees listed!";
+    public static final String MESSAGE_INVALID_APPLICANT_DISPLAYED_INDEX = "The applicant index provided is invalid";
+    public static final String MESSAGE_APPLICANTS_LISTED_OVERVIEW = "%1$d applicants listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
 
@@ -32,19 +32,19 @@ public class Messages {
     }
 
     /**
-     * Formats the {@code employee} for display to the user.
+     * Formats the {@code applicant} for display to the user.
      */
-    public static String format(Employee employee) {
+    public static String format(Applicant applicant) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(employee.getName())
+        builder.append(applicant.getName())
                 .append("; Phone: ")
-                .append(employee.getPhone())
+                .append(applicant.getPhone())
                 .append("; Department: ")
-                .append(employee.getDepartment())
-                .append("; JobTitle: ")
-                .append(employee.getJobTitle())
-                .append("; Tags: ");
-        employee.getTags().forEach(builder::append);
+                .append(applicant.getDepartment())
+                .append("; Position: ")
+                .append(applicant.getPosition())
+                .append("; Interviews: ");
+        applicant.getInterviews().forEach(builder::append);
         return builder.toString();
     }
 

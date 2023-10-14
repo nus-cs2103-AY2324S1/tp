@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.staffsnap.commons.exceptions.IllegalValueException;
 import seedu.staffsnap.model.AddressBook;
 import seedu.staffsnap.model.ReadOnlyAddressBook;
-import seedu.staffsnap.model.employee.Employee;
+import seedu.staffsnap.model.applicant.Applicant;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
@@ -19,16 +19,16 @@ import seedu.staffsnap.model.employee.Employee;
 @JsonRootName(value = "addressbook")
 class JsonSerializableAddressBook {
 
-    public static final String MESSAGE_DUPLICATE_EMPLOYEE = "Employees list contains duplicate Employee(s).";
+    public static final String MESSAGE_DUPLICATE_APPLICANT = "Applicants list contains duplicate Applicant(s).";
 
-    private final List<JsonAdaptedEmployee> employees = new ArrayList<>();
+    private final List<JsonAdaptedApplicant> applicants = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given employees.
+     * Constructs a {@code JsonSerializableAddressBook} with the given applicants.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("employees") List<JsonAdaptedEmployee> employees) {
-        this.employees.addAll(employees);
+    public JsonSerializableAddressBook(@JsonProperty("applicants") List<JsonAdaptedApplicant> applicants) {
+        this.applicants.addAll(applicants);
     }
 
     /**
@@ -37,7 +37,8 @@ class JsonSerializableAddressBook {
      * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
-        employees.addAll(source.getEmployeeList().stream().map(JsonAdaptedEmployee::new).collect(Collectors.toList()));
+        applicants.addAll(source.getApplicantList().stream()
+                .map(JsonAdaptedApplicant::new).collect(Collectors.toList()));
     }
 
     /**
@@ -47,12 +48,12 @@ class JsonSerializableAddressBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
-        for (JsonAdaptedEmployee jsonAdaptedEmployee : employees) {
-            Employee employee = jsonAdaptedEmployee.toModelType();
-            if (addressBook.hasEmployee(employee)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_EMPLOYEE);
+        for (JsonAdaptedApplicant jsonAdaptedApplicant : applicants) {
+            Applicant applicant = jsonAdaptedApplicant.toModelType();
+            if (addressBook.hasApplicant(applicant)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_APPLICANT);
             }
-            addressBook.addEmployee(employee);
+            addressBook.addApplicant(applicant);
         }
         return addressBook;
     }
