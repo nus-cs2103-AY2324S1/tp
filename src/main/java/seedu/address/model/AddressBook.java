@@ -7,9 +7,7 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.applicant.Applicant;
-import seedu.address.model.applicant.UniqueApplicantList;
 import seedu.address.model.member.Member;
-import seedu.address.model.member.UniqueMemberList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -19,9 +17,9 @@ import seedu.address.model.person.UniquePersonList;
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
-    private final UniquePersonList persons;
-    private final UniqueMemberList memberList;
-    private final UniqueApplicantList applicants;
+    private final UniquePersonList<Person> persons;
+    private final UniquePersonList<Member> memberList;
+    private final UniquePersonList<Applicant> applicants;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -31,9 +29,9 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
-        persons = new UniquePersonList();
-        memberList = new UniqueMemberList();
-        applicants = new UniqueApplicantList();
+        persons = new UniquePersonList<>();
+        memberList = new UniquePersonList<>();
+        applicants = new UniquePersonList<>();
     }
 
     public AddressBook() {}
@@ -127,8 +125,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setMember(Member target, Member editedMember) {
         requireNonNull(editedMember);
-
-        memberList.setMember(target, editedMember);
+        memberList.setPerson(target, editedMember);
     }
 
     /**
@@ -165,8 +162,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setApplicant(Applicant target, Applicant editedApplicant) {
         requireNonNull(editedApplicant);
-
-        applicants.setApplicant(target, editedApplicant);
+        applicants.setPerson(target, editedApplicant);
     }
 
     /**
@@ -183,6 +179,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("persons", persons)
+                .add("members", memberList)
+                .add("applicants", applicants)
                 .toString();
     }
 
@@ -213,7 +211,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         AddressBook otherAddressBook = (AddressBook) other;
-        return persons.equals(otherAddressBook.persons);
+        return persons.equals(otherAddressBook.persons) &&
+                memberList.equals(otherAddressBook.memberList) &&
+                applicants.equals(otherAddressBook.applicants);
     }
 
     @Override
