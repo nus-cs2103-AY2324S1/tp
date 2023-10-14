@@ -11,12 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SEC_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -61,7 +56,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This student already exists in the address book.";
 
-    private final Index index;
+    private Index index;
+    private Name name;
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
@@ -76,16 +72,27 @@ public class EditCommand extends Command {
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
     }
 
+    public EditCommand(Name name, EditPersonDescriptor editPersonDescriptor) {
+        requireNonNull(name);
+        requireNonNull(editPersonDescriptor);
+
+        this.name = name;
+        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Student> lastShownList = model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        Student studentToEdit;
+        try {
+            // get the student from model filtered list by either name or index
+            studentToEdit = model.getStudentFromFilteredPersonListByName(name).orElseGet(
+                    () -> model.getStudentFromFilteredPersonListByIndex(index).get());
+        } catch(NoSuchElementException e) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
-
-        Student studentToEdit = lastShownList.get(index.getZeroBased());
         Student editedStudent = createEditedPerson(studentToEdit, editPersonDescriptor);
 
         if (!studentToEdit.isSamePerson(editedStudent) && model.hasPerson(editedStudent)) {
