@@ -1,6 +1,6 @@
 package networkbook.model;
 
-import static networkbook.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static networkbook.logic.commands.CommandTestUtil.VALID_COURSE_BOB;
 import static networkbook.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static networkbook.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -46,7 +46,7 @@ public class NetworkBookTest {
     public void resetData_withDuplicatePersons_throwsDuplicateException() {
         // Two persons with the same identity fields
         Person editedAlice = new PersonBuilder(TypicalPersons.ALICE)
-                .withAddress(VALID_ADDRESS_BOB)
+                .withCourse(VALID_COURSE_BOB)
                 .withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Person> newPersons = Arrays.asList(TypicalPersons.ALICE, editedAlice);
@@ -75,7 +75,7 @@ public class NetworkBookTest {
     public void hasPerson_personWithSameIdentityFieldsInNetworkBook_returnsTrue() {
         networkBook.addPerson(TypicalPersons.ALICE);
         Person editedAlice = new PersonBuilder(TypicalPersons.ALICE)
-                .withAddress(VALID_ADDRESS_BOB)
+                .withCourse(VALID_COURSE_BOB)
                 .withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(networkBook.hasPerson(editedAlice));

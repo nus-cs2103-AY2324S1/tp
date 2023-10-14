@@ -8,6 +8,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import networkbook.model.person.Person;
+import networkbook.model.person.Priority;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -15,6 +16,7 @@ import networkbook.model.person.Person;
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
+    private static final String PRIORITY_HEADER = "Priority: ";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -35,11 +37,19 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label phone;
     @FXML
-    private Label address;
+    private Label link;
+    @FXML
+    private Label graduatingYear;
+    @FXML
+    private Label course;
+    @FXML
+    private Label specialisation;
     @FXML
     private Label email;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label priority;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -50,10 +60,17 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
+        link.setText(person.getLink().getValue());
+        graduatingYear.setText(person.getGraduatingYear().value);
         email.setText(person.getEmails().toString());
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        person.getPriority().ifPresentOrElse((Priority p) ->
+                        priority.setText(PRIORITY_HEADER + p), () -> priority.setVisible(false));
+    }
+
+    public Label getPriority() {
+        return priority; // getter method for testing
     }
 }

@@ -3,11 +3,19 @@
     "name": "Valid Person",
     "phone": "9482424",
     "emails": [ "hans@example.com" ],
-    "address": "4th street"
+    "link": "hahahans.com",
+    "graduating year": "1965",
+    "course": "Computer Science",
+    "specialisation": "Programming Languages",
+    "tags": [ "friends" ]
   }, {
     "name": "Person With Invalid Phone Field",
     "phone": "948asdf2424",
     "emails": [ "hans@example.com" ],
-    "address": "4th street"
+    "link": "person.com",
+    "graduating year": "1965",
+    "course": "Computer Science",
+    "specialisation": "Programming Languages",
+    "tags": [ "friends" ]
   } ]
 }
