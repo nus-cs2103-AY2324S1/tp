@@ -2,6 +2,7 @@ package seedu.address.model.event;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_EARLIER;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_LATER;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_EARLIER;
@@ -123,5 +124,48 @@ public class SingleDayEventListTest {
         dayEventList.remove(duplicateEvent);
 
         assertTrue(dayEventList.getDayEventList().isEmpty());
+    }
+
+    @Test
+    public void getDayEventListTest() {
+        SingleDayEventList dayEventList = new SingleDayEventListBuilder().build();
+        Event toBeAdded = new EventBuilder().build();
+
+        assertTrue(dayEventList.getDayEventList().isEmpty());
+
+        dayEventList.addEvent(toBeAdded);
+
+        assertFalse(dayEventList.getDayEventList().isEmpty());
+        assertTrue(dayEventList.getDayEventList().contains(toBeAdded));
+    }
+
+    @Test
+    public void equalsTest() {
+        SingleDayEventList dayEventList = new SingleDayEventListBuilder().build();
+        SingleDayEventList comparisonList = new SingleDayEventListBuilder().build();
+        Event validEvent = new EventBuilder().withDescription(VALID_DESCRIPTION)
+                .withStartEndDate(VALID_START_DATE_EARLIER, VALID_END_DATE_EARLIER).build();
+        Event nonConflictingEvent = new EventBuilder().withDescription(VALID_UNUSED_DESCRIPTION)
+                .withStartEndDate(VALID_START_DATE_LATER, VALID_END_DATE_LATER).build();
+        Object notSingleDayEventList = new Object();
+
+        assertTrue(dayEventList.equals(dayEventList));
+
+        assertTrue(dayEventList.equals(comparisonList));
+
+        assertFalse(dayEventList.equals(notSingleDayEventList));
+
+        dayEventList.addEvent(validEvent);
+
+        assertFalse(dayEventList.equals(comparisonList));
+
+        comparisonList.addEvent(nonConflictingEvent);
+
+        assertFalse(dayEventList.equals(comparisonList));
+
+        dayEventList.addEvent(nonConflictingEvent);
+        comparisonList.addEvent(validEvent);
+
+        assertTrue(dayEventList.equals(comparisonList));
     }
 }

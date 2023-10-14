@@ -1,11 +1,7 @@
 package seedu.address.testutil;
 
 import java.time.LocalDate;
-import java.util.NavigableMap;
-import java.util.TreeMap;
 
-import seedu.address.model.event.Event;
-import seedu.address.model.event.EventPeriod;
 import seedu.address.model.event.SingleDayEventList;
 
 /**
@@ -37,7 +33,7 @@ public class SingleDayEventListBuilder {
      * Create the SingleDayEventList object with the attributes of this SingleDayEventListBuilder object.
      *
      * @return SingleDayEventList object with date corresponding to the SingleDayEventListBuilder object's date
-     * attribute.
+     *     attribute.
      */
     public SingleDayEventList build() {
         return new SingleDayEventList(date);
