@@ -35,7 +35,7 @@ class FilterCommandTest {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         FilterCommand.PersonFilter filter = new PersonFilterBuilder().withPhone("948").build();
         FilterCommand command = new FilterCommand(filter);
-        expectedModel.updateFilteredPersonList(filter::test);
+        expectedModel.updateFilteredPersonList(filter::matchesFilter);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(ELLE, FIONA, GEORGE), model.getFilteredPersonList());
     }
@@ -44,7 +44,7 @@ class FilterCommandTest {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
         FilterCommand.PersonFilter filter = new PersonFilterBuilder().withName("carl").withEmail("heinz").build();
         FilterCommand command = new FilterCommand(filter);
-        expectedModel.updateFilteredPersonList(filter::test);
+        expectedModel.updateFilteredPersonList(filter::matchesFilter);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL), model.getFilteredPersonList());
     }

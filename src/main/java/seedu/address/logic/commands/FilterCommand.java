@@ -12,6 +12,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
@@ -58,7 +59,7 @@ public class FilterCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(personFilter::test);
+        model.updateFilteredPersonList(personFilter::matchesFilter);
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
@@ -171,7 +172,7 @@ public class FilterCommand extends Command {
          * @param person The person to be tested.
          * @return a boolean representing whether the person passed the filter.
          */
-        public boolean test(Person person) {
+        public boolean matchesFilter(Person person) {
             if (nonNull(name) && !person.getName().fullName.toLowerCase().contains(name.toLowerCase())) {
                 return false;
             }
@@ -185,17 +186,9 @@ public class FilterCommand extends Command {
                 return false;
             }
             if (nonNull(tags) && !tags.isEmpty()) {
-                Tag[] tagsToCheck = tags.toArray(new Tag[0]);
-                Tag[] currentTags = person.getTags().toArray(new Tag[0]);
-                for (Tag tag:tagsToCheck) {
-                    for (int i = 0; i <= currentTags.length; i++) {
-                        if (i == currentTags.length) {
-                            return false;
-                        } else if (currentTags[i].tagName.toLowerCase().contains(tag.tagName.toLowerCase())) {
-                            break;
-                        }
-                    }
-                }
+                Stream<Tag> tagsToCheck = tags.stream();
+                Stream<Tag> currentTags = person.getTags().stream();
+                return tagsToCheck.allMatch(x -> currentTags.anyMatch(y -> y.tagName.contains(x.tagName)));
             }
             return true;
         }
