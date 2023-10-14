@@ -4,13 +4,13 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TreeMap;
+//import java.util.TreeMap;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.person.Team;
+import seedu.address.model.person.UniquePersonList;
 
 /**
  * Wraps all data at the address-book level
@@ -113,13 +113,17 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
-    public Person getPersonByHashCode (int hash) {
+    public Person getPersonByHashCode(int hash) {
         return persons.getPersonByHashCode(hash);
     }
 
 
     //// teams-level operations----------------------------------------------------------------------------------------
 
+    /**
+     * @param team TODO(I added to pass checkstyle but im not sure what it is)
+     * @return a boolean indicating whether there is any existing team
+     */
     public boolean hasTeam(Team team) {
         requireNonNull(team);
         return teams.contains(team);
@@ -148,7 +152,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
-    public void setTeams(Team target,Team editedTeam) {
+    public void setTeams(Team target, Team editedTeam) {
         requireNonNull(editedTeam);
 
         //todo: more data protection
