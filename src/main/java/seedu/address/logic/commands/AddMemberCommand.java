@@ -31,8 +31,8 @@ public class AddMemberCommand extends Command {
             + PREFIX_NAME + " John Doe "
             + PREFIX_PHONE + " 98765432 "
             + PREFIX_EMAIL + " johnd@example.com "
-            + PREFIX_TELEGRAM + " @johndoe"
-            + PREFIX_TAG + "Welfare Head ";
+            + PREFIX_TELEGRAM + " @johndoe "
+            + PREFIX_TAG + " WelfareHead";
 
     public static final String MESSAGE_SUCCESS = "New member added: %1$s";
     public static final String MESSAGE_DUPLICATE_MEMBER = "This member already exists in the member list";
