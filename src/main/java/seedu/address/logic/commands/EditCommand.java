@@ -1,15 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_END;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICAL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_START;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -29,9 +22,9 @@ import seedu.address.model.person.Appointment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.MedicalHistory;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Nric;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -82,7 +75,7 @@ public class EditCommand extends Command {
         Optional<Person> personOptional = findPersonToEdit(lastShownList);
 
         if (personOptional.isEmpty()) {
-            throw new CommandException( MESSAGE_PERSON_NOT_FOUND);
+            throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
         }
 
         Person personToEdit = personOptional.get();
@@ -124,7 +117,8 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Appointment updatedAppointment = editPersonDescriptor.getAppointment().orElse(personToEdit.getAppointment());
-        Set<MedicalHistory> updatedMedicalHistories = editPersonDescriptor.getMedicalHistories().orElse((personToEdit.getMedicalHistories()));
+        Set<MedicalHistory> updatedMedicalHistories =
+                editPersonDescriptor.getMedicalHistories().orElse((personToEdit.getMedicalHistories()));
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedNric, updatedPhone, updatedEmail, updatedAddress,
@@ -143,9 +137,8 @@ public class EditCommand extends Command {
         }
 
         EditCommand otherEditCommand = (EditCommand) other;
-        return  editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
+        return editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
     }
-
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -257,7 +250,8 @@ public class EditCommand extends Command {
          * Returns {@code Optional#empty()} if {@code medicalHistories} is null.
          */
         public Optional<Set<MedicalHistory>> getMedicalHistories() {
-            return (medicalHistories != null) ? Optional.of(Collections.unmodifiableSet(medicalHistories)) : Optional.empty();
+            return (medicalHistories != null)
+                    ? Optional.of(Collections.unmodifiableSet(medicalHistories)) : Optional.empty();
         }
 
         /**

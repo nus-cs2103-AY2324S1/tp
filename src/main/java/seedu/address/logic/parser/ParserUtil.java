@@ -172,7 +172,8 @@ public class ParserUtil {
      * @return A Set of MedicalHistory.
      * @throws ParseException if any medical history format is invalid.
      */
-    public static Set<MedicalHistory> parseMedicalHistories(Collection<String> medicalHistoryStrings) throws ParseException {
+    public static Set<MedicalHistory> parseMedicalHistories(Collection<String> medicalHistoryStrings)
+            throws ParseException {
         requireNonNull(medicalHistoryStrings);
 
         final Set<MedicalHistory> medicalHistories = new HashSet<>();

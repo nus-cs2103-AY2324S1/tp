@@ -10,7 +10,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Appointment {
 
     public static final String MESSAGE_CONSTRAINTS = "Appointment can take any values, and it should not be blank";
-    public static final String MESSAGE_CONSTRAINTS_START = "Start time should be in the format DD-MM-YYYY HH:MM, e.g., 01-01-2023 09:45";
+    public static final String MESSAGE_CONSTRAINTS_START = "Start time should be in the format DD-MM-YYYY HH:MM, "
+            + "e.g., 01-01-2023 09:45";
     public static final String MESSAGE_CONSTRAINTS_END = "End time should be in the format HH:MM, e.g., 20:30";
 
     /*
