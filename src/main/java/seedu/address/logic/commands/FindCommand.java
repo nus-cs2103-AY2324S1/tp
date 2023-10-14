@@ -38,7 +38,6 @@ public class FindCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        System.out.println(namePredicate.toString());
         if (!Status.isValidStatus(statusPredicate.toString())) {
             model.updateFilteredPersonList(namePredicate);
         } else {
@@ -60,7 +59,7 @@ public class FindCommand extends Command {
         }
 
         FindCommand otherFindCommand = (FindCommand) other;
-        if (statusPredicate != null) {
+        if (Status.isValidStatus(statusPredicate.toString())) {
             return namePredicate.equals(otherFindCommand.namePredicate)
                     && statusPredicate.equals(otherFindCommand.statusPredicate);
         }

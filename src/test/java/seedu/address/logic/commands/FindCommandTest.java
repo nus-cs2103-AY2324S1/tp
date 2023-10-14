@@ -30,19 +30,23 @@ public class FindCommandTest {
 
     @Test
     public void equals() {
-        NameContainsKeywordsPredicate firstPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("first"));
-        NameContainsKeywordsPredicate secondPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("second"));
+        NameContainsKeywordsPredicate firstNamePredicate =
+                new NameContainsKeywordsPredicate(Collections.singletonList("firstName"));
+        StatusContainsKeywordsPredicate firstStatusPredicate =
+                new StatusContainsKeywordsPredicate(Collections.singletonList("firstStatus"));
+        NameContainsKeywordsPredicate secondNamePredicate =
+                new NameContainsKeywordsPredicate(Collections.singletonList("secondName"));
+        StatusContainsKeywordsPredicate secondStatusPredicate =
+                new StatusContainsKeywordsPredicate(Collections.singletonList("secondStatus"));
 
-        FindCommand findFirstCommand = new FindCommand(firstPredicate, null);
-        FindCommand findSecondCommand = new FindCommand(secondPredicate, null);
+        FindCommand findFirstCommand = new FindCommand(firstNamePredicate, firstStatusPredicate);
+        FindCommand findSecondCommand = new FindCommand(secondNamePredicate, secondStatusPredicate);
 
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
 
         // same values -> returns true
-        FindCommand findFirstCommandCopy = new FindCommand(firstPredicate, null);
+        FindCommand findFirstCommandCopy = new FindCommand(firstNamePredicate, firstStatusPredicate);
         assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
         // different types -> returns false
