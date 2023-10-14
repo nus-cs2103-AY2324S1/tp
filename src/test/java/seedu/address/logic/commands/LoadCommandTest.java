@@ -36,7 +36,9 @@ public class LoadCommandTest {
         LoadCommand loadCommand = new LoadCommand(validFileName, validFilePath);
         Model expectedModel = new ModelManager();
         loadAddressBook(expectedModel, validFileName, validFilePath);
-        assertCommandSuccess(loadCommand, model, String.format(MESSAGE_SUCCESS, validFileName), expectedModel);
+        CommandResult expectedCommandResult = new CommandResult(
+                String.format(MESSAGE_SUCCESS, validFileName), false, false, true);
+        assertCommandSuccess(loadCommand, model, expectedCommandResult, expectedModel);
     }
 
     @Test
