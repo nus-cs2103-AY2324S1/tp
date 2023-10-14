@@ -218,7 +218,6 @@ public class AddCommandParserTest {
         assertParseFailure(parser, userInput,
                 Messages.getErrorMessageForDuplicatePrefixes(
                         CliSyntax.PREFIX_PHONE,
-                        CliSyntax.PREFIX_EMAIL,
                         CliSyntax.PREFIX_LINK));
 
         // multiple invalid values
@@ -230,7 +229,6 @@ public class AddCommandParserTest {
         assertParseFailure(parser, userInput,
                 Messages.getErrorMessageForDuplicatePrefixes(
                         CliSyntax.PREFIX_PHONE,
-                        CliSyntax.PREFIX_EMAIL,
                         CliSyntax.PREFIX_LINK));
     }
 }
