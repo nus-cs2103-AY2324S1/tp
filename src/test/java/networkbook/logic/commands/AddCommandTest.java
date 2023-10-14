@@ -62,6 +62,19 @@ public class AddCommandTest {
     }
 
     @Test
+    public void execute_addPriorityToPersonWithPriority_commandException() {
+        CommandTestUtil.showPersonAtIndex(model, TypicalIndexes.INDEX_FIRST_PERSON);
+
+        AddCommand addCommand = new AddCommand(TypicalIndexes.INDEX_FIRST_PERSON,
+                new EditPersonDescriptorBuilder().withPriority(CommandTestUtil.VALID_PRIORITY_AMY).build());
+
+        String expectedMessage = AddCommand.MESSAGE_MULTIPLE_UNIQUE_FIELD;
+
+        CommandTestUtil.assertCommandThrowsNothing(addCommand, model); // person would have priority
+        CommandTestUtil.assertCommandFailure(addCommand, model, expectedMessage); // add priority to the person again
+    }
+
+    @Test
     public void execute_filteredList_success() {
         CommandTestUtil.showPersonAtIndex(model, TypicalIndexes.INDEX_FIRST_PERSON);
 
