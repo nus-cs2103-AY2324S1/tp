@@ -1,7 +1,11 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.Iterator;
 import java.util.List;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.exceptions.CardNotFoundException;
@@ -9,8 +13,7 @@ import seedu.address.model.person.exceptions.DuplicateCardException;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
@@ -91,7 +94,7 @@ public class UniqueCardList implements Iterable<Card> {
      */
     public void setCards(List<Card> cards) {
         requireAllNonNull(cards);
-        if (!CardsAreUnique(cards)) {
+        if (!cardsAreUnique(cards)) {
             throw new DuplicatePersonException();
         }
 
@@ -138,7 +141,7 @@ public class UniqueCardList implements Iterable<Card> {
     /**
      * Returns true if {@code persons} contains only unique persons.
      */
-    private boolean CardsAreUnique(List<Card> persons) {
+    private boolean cardsAreUnique(List<Card> persons) {
         for (int i = 0; i < persons.size() - 1; i++) {
             for (int j = i + 1; j < persons.size(); j++) {
                 if (persons.get(i).isSameCard(persons.get(j))) {

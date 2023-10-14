@@ -32,7 +32,7 @@ public interface AddressBookStorage {
 
     /**
      * Saves the given {@link ReadOnlyAddressBook} to the storage.
-     * @param AddressBookStorageressBook cannot be null.
+     * @param addressBook cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
     void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;

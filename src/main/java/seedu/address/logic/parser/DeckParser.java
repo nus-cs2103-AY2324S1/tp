@@ -1,14 +1,25 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.*;
+import seedu.address.logic.commands.AddCommand2;
+import seedu.address.logic.commands.Command2;
+import seedu.address.logic.commands.DeleteCommand2;
+import seedu.address.logic.commands.EditCommand2;
+import seedu.address.logic.commands.ExitCommand2;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ListCommand2;
+import seedu.address.logic.commands.PractiseCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+
+
 
 /**
  * Parses user input.
@@ -56,7 +67,7 @@ public class DeckParser {
         case ListCommand2.COMMAND_WORD:
             return new ListCommand2();
 
-        case ExitCommand.COMMAND_WORD:
+        case ExitCommand2.COMMAND_WORD:
             return new ExitCommand2();
 
         case PractiseCommand.COMMAND_WORD:

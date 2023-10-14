@@ -7,7 +7,14 @@ import java.util.stream.Collectors;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Deck;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Answer;
+import seedu.address.model.person.Card;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Question;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -15,9 +22,8 @@ import seedu.address.model.tag.Tag;
  */
 public class SampleDataUtil {
     public static Card[] getSampleCard() {
-        return new Card[] {
-                new Card(new Question("What is 1 + 1"), new Answer("2")),
-                new Card(new Question("What is 1 + 3"), new Answer("4"))
+        return new Card[] {new Card(new Question("What is 1 + 1"),
+                new Answer("2")), new Card(new Question("What is 1 + 3"), new Answer("4"))
         };
     }
     public static Person[] getSamplePersons() {
