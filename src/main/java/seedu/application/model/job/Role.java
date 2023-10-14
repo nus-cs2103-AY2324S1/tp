@@ -10,6 +10,7 @@ import seedu.application.commons.util.AppUtil;
  */
 public class Role {
 
+    public static final String ROLE_FIND_SPECIFIER = "-r";
     public static final String MESSAGE_CONSTRAINTS =
             "Role descriptions should only contain alphanumeric characters and spaces, and it should not be blank";
 
