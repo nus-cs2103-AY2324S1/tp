@@ -1,4 +1,5 @@
-import seedu.address.model.appointment.DateTime;
+package seedu.address.model.appointment;
+
 import seedu.address.model.person.Person;
 
 /**
