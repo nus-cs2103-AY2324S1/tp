@@ -185,6 +185,11 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseEmails_collectionWithDuplicates_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseEmails(Arrays.asList(VALID_EMAIL, VALID_EMAIL)));
+    }
+
+    @Test
     public void parseEmails_emptyCollection_returnsEmptyListOfEmails() throws Exception {
         assertEquals(new UniqueList<Email>(), ParserUtil.parseEmails(Arrays.asList()));
     }
