@@ -24,7 +24,7 @@ public class Appointment {
      * @param description A description of the appointment.
      */
     public Appointment(DateTime dateTime, Person student, Description description) {
-        requireAllNonNull(dateTime, student,description);
+        requireAllNonNull(dateTime, student, description);
         this.dateTime = dateTime;
         this.student = student;
         this.description = description;
