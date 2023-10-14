@@ -56,12 +56,12 @@ public class InteractionCommand extends Command {
 
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        Set<Interaction> personToEditInteractions = personToEdit.getInteractions();
-        personToEditInteractions.add(interaction);
+        Set<Interaction> editInteractions = personToEdit.getInteractions();
+        editInteractions.add(interaction);
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getTags(), personToEdit.getTelegram(),
-                personToEdit.getProfession(), personToEdit.getIncome(), personToEdit.getDetails(),
-                personToEditInteractions);
+                personToEdit.getProfession(), personToEdit.getIncome(), personToEdit.getDetails());
+        editedPerson.addInteractions(editInteractions);
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

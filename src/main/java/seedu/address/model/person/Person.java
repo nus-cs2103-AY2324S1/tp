@@ -53,8 +53,7 @@ public class Person {
      * Same constructor but with optional fields.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-        TelegramHandle telegram, Profession profession, Income income, Details details,
-        Set<Interaction> interaction) {
+        TelegramHandle telegram, Profession profession, Income income, Details details) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -66,7 +65,6 @@ public class Person {
         this.profession = profession;
         this.income = income;
         this.details = details;
-        this.interactions.addAll(interaction);
     }
 
     public Name getName() {
@@ -102,6 +100,16 @@ public class Person {
     }
 
     public Set<Interaction> getInteractions() {
+        return interactions;
+    }
+
+    /**
+     * Adds an interaction to the person.
+     * @param interactions the set of interaction to be added
+     * @return the updated set of interactions
+     */
+    public Set<Interaction> addInteractions(Set<Interaction> interactions) {
+        interactions.addAll(interactions);
         return interactions;
     }
 
