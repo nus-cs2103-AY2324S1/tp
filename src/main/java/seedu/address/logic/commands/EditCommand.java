@@ -93,8 +93,26 @@ public class EditCommand extends Command {
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 
-    // A method to find the person to edit based on name or ID
+    /**
+     * Finds the person to edit based on the provided name and/or NRIC.
+     *
+     * @param persons A list of persons to search within.
+     * @return An Optional containing the person to edit, if found, or an empty Optional if not found.
+     */
     private Optional<Person> findPersonToEdit(List<Person> persons) {
+        if (name != null && nric != null) {
+            // Search for a person by name and NRIC
+            Optional<Person> personByName = persons.stream()
+                    .filter(person -> person.getName().equals(name))
+                    .findFirst();
+            Optional<Person> personByNric = persons.stream()
+                    .filter(person -> person.getNric().equals(nric))
+                    .findFirst();
+            // Check if both Optional instances are not empty, and return the one that represents the same person
+            if (personByName.isPresent() && personByNric.isPresent() && personByName.get() == personByNric.get()) {
+                return personByName;
+            }
+        }
         if (name != null) {
             return persons.stream()
                     .filter(person -> person.getName().equals(name))
