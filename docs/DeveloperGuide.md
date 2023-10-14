@@ -569,14 +569,15 @@ Use case ends.
     Use case ends.
 
 
-**Use case: UC12 Filter by tags.**
+**Use case: UC12 Filter by fields.**
 
 
 **MSS**
 
 
-1. User requests to list persons with specific tags
-2. UniMate displays persons with specified tags
+1. User requests to list persons with specific words in specific fields.
+2. UniMate displays persons matching all provided keywords in specified fields and the number of people matching all
+specified fields.
 
    Use case ends.
 
@@ -584,8 +585,8 @@ Use case ends.
 **Extensions**
 
 
-* 2a. There are no persons matching the specified tags
-    * UniMate displays a message indicating that no persons matched the specified tags.
+* 2a. There are no persons matching the specified keywords
+    * UniMate displays a message that 0 people have been displayed.
       Use case ends.
 
 

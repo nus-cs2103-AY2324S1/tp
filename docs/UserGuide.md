@@ -132,19 +132,20 @@ Examples:
 
 ### Locating persons by tag: `filter`
 
-Finds persons whose tags contain any of the given keywords.
+Finds persons whose fields contain any of the given keywords.
 
-Format: `filter TAG [MORE_TAGS]`
+Format: `filter [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 * Filter is case-insensitive. e.g. `cs2103` will match `CS2103`
-* The order of the tags does not matter.
-* Only tags are searched
+* The order of the fields does not matter.
+* All provided fields are searched
 * All tags containing the words will be matched e.g. `Ba` will return `Badminton` or `Basketball` or `Football` or `Backgammon`.
-* Only persons matching all keywords will be returned (i.e. `and` search).
+* Only persons matching all specified fields will be returned (i.e. `and` search).
 
 Examples:
-* `filter CS2103` - Displays all contacts with the CS2103 tag or tags containing CS2103 e.g. CS2103T
-* `filter MA2116 CS1010S` - Displays all contacts with the MA2116 and CS1010S tags or tags containing either
+* `filter t/CS2103` - Displays all contacts with the CS2103 tag or tags containing ``CS2103`` e.g. CS2103T
+* `filter t/MA2116 t/CS1010S n/John e/@u.nus.edu` - Displays all contacts with the ``MA2116`` and ``CS1010S`` tags as well as
+with a name containing ``John`` and an email address with the domain ``u.nus.edu``
 
 ### Deleting a person : `delete`
 
