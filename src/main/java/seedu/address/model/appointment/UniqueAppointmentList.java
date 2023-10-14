@@ -127,6 +127,11 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
         return internalList.hashCode();
     }
 
+    @Override
+    public String toString() {
+        return internalList.toString();
+    }
+
     /**
     * Returns true if {@code appointments} contains only unique appointments.
     */
