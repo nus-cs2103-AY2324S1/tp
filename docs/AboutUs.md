@@ -1,7 +1,9 @@
 ---
-layout: page
-title: About Us
+  layout: default.md
+  title: "About Us"
 ---
+
+# About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
@@ -34,7 +36,7 @@ This project was done by a team of 4 members.
 <img src="images/junhonglow.png" width="200px">
 
 [[github](http://github.com/junhonglow)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/junhonglow.md)]
 
 - Role: Developer
 - Responsibilities: TBD
