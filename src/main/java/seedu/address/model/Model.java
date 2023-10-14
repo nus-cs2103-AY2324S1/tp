@@ -96,6 +96,5 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Student> predicate);
 
-
-    void updateSortedPersonList(SortIn sequence);
+    void updateSortedPersonList(SortIn sortIn);
 }
