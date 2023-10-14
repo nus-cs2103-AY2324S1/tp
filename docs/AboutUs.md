@@ -11,10 +11,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Shah Saumya Snehal
 
-<img src="images/saumyashah.jpeg" width="200px">
+<img src="images/lordsaumya.png" width="200px">
 
 [[github](https://github.com/LordSaumya)]
-[[portfolio](team/saumyashah.md)]
+[[portfolio](team/lordsaumya.md)]
 
 * Role: Team Lead
 * Responsibilities: Model
@@ -54,7 +54,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/jasonray168.png" width="200px">
 
 [[github](https://github.com/JasonRay168)]
-[[portfolio](team/JasonRay168.md)]
+[[portfolio](team/jasonray168.md)]
 
 * Role: Testing
 * Responsibilities: Storage

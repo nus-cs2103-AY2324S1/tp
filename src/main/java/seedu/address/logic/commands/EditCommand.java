@@ -1,11 +1,12 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DEPARTMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EMPLOYEES;
 
 import java.util.Collections;
@@ -21,12 +22,13 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.employee.Address;
+import seedu.address.model.department.Department;
 import seedu.address.model.employee.Email;
 import seedu.address.model.employee.Employee;
+import seedu.address.model.employee.Id;
 import seedu.address.model.employee.Name;
 import seedu.address.model.employee.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.employee.Position;
 
 /**
  * Edits the details of an existing employee in the address book.
@@ -40,10 +42,11 @@ public class EditCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_POSITION + "POSITION] "
+            + "[" + PREFIX_ID + "ID] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_DEPARTMENT + "DEPARTMENT]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -97,12 +100,14 @@ public class EditCommand extends Command {
         assert employeeToEdit != null;
 
         Name updatedName = editEmployeeDescriptor.getName().orElse(employeeToEdit.getName());
+        Position updatedPosition = editEmployeeDescriptor.getPosition().orElse(employeeToEdit.getPosition());
+        Id updatedId = editEmployeeDescriptor.getId().orElse(employeeToEdit.getId());
         Phone updatedPhone = editEmployeeDescriptor.getPhone().orElse(employeeToEdit.getPhone());
         Email updatedEmail = editEmployeeDescriptor.getEmail().orElse(employeeToEdit.getEmail());
-        Address updatedAddress = editEmployeeDescriptor.getAddress().orElse(employeeToEdit.getAddress());
-        Set<Tag> updatedTags = editEmployeeDescriptor.getTags().orElse(employeeToEdit.getTags());
+        Set<Department> updatedDepartments = editEmployeeDescriptor.getDepartments()
+                .orElse(employeeToEdit.getDepartments());
 
-        return new Employee(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Employee(updatedName, updatedPosition, updatedId, updatedPhone, updatedEmail, updatedDepartments);
     }
 
     @Override
@@ -135,30 +140,32 @@ public class EditCommand extends Command {
      */
     public static class EditEmployeeDescriptor {
         private Name name;
+        private Position position;
+        private Id id;
         private Phone phone;
         private Email email;
-        private Address address;
-        private Set<Tag> tags;
+        private Set<Department> departments;
 
         public EditEmployeeDescriptor() {}
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
+         * A defensive copy of {@code departments} is used internally.
          */
         public EditEmployeeDescriptor(EditEmployeeDescriptor toCopy) {
             setName(toCopy.name);
+            setPosition(toCopy.position);
+            setId(toCopy.id);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
-            setAddress(toCopy.address);
-            setTags(toCopy.tags);
+            setDepartments(toCopy.departments);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, departments);
         }
 
         public void setName(Name name) {
@@ -185,29 +192,38 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
-        public void setAddress(Address address) {
-            this.address = address;
+        public void setPosition(Position position) {
+            this.position = position;
         }
 
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
+        public Optional<Position> getPosition() {
+            return Optional.ofNullable(position);
         }
+
+        public void setId(Id id) {
+            this.id = id;
+        }
+
+        public Optional<Id> getId() {
+            return Optional.ofNullable(id);
+        }
+
 
         /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
+         * Sets {@code departments} to this object's {@code departments}.
+         * A defensive copy of {@code departments} is used internally.
          */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        public void setDepartments(Set<Department> departments) {
+            this.departments = (departments != null) ? new HashSet<>(departments) : null;
         }
 
         /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * Returns an unmodifiable department set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
+         * Returns {@code Optional#empty()} if {@code departments} is null.
          */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        public Optional<Set<Department>> getDepartments() {
+            return (departments != null) ? Optional.of(Collections.unmodifiableSet(departments)) : Optional.empty();
         }
 
         @Override
@@ -223,20 +239,22 @@ public class EditCommand extends Command {
 
             EditEmployeeDescriptor otherEditEmployeeDescriptor = (EditEmployeeDescriptor) other;
             return Objects.equals(name, otherEditEmployeeDescriptor.name)
+                    && Objects.equals(position, otherEditEmployeeDescriptor.position)
+                    && Objects.equals(id, otherEditEmployeeDescriptor.id)
                     && Objects.equals(phone, otherEditEmployeeDescriptor.phone)
                     && Objects.equals(email, otherEditEmployeeDescriptor.email)
-                    && Objects.equals(address, otherEditEmployeeDescriptor.address)
-                    && Objects.equals(tags, otherEditEmployeeDescriptor.tags);
+                    && Objects.equals(departments, otherEditEmployeeDescriptor.departments);
         }
 
         @Override
         public String toString() {
             return new ToStringBuilder(this)
                     .add("name", name)
+                    .add("position", position)
+                    .add("id", id)
                     .add("phone", phone)
                     .add("email", email)
-                    .add("address", address)
-                    .add("tags", tags)
+                    .add("departments", departments)
                     .toString();
         }
     }

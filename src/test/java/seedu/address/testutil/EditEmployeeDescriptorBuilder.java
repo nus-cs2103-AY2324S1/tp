@@ -5,12 +5,13 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditEmployeeDescriptor;
-import seedu.address.model.employee.Address;
+import seedu.address.model.department.Department;
 import seedu.address.model.employee.Email;
 import seedu.address.model.employee.Employee;
+import seedu.address.model.employee.Id;
 import seedu.address.model.employee.Name;
 import seedu.address.model.employee.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.employee.Position;
 
 /**
  * A utility class to help with building EditEmployeeDescriptor objects.
@@ -33,10 +34,11 @@ public class EditEmployeeDescriptorBuilder {
     public EditEmployeeDescriptorBuilder(Employee employee) {
         descriptor = new EditEmployeeDescriptor();
         descriptor.setName(employee.getName());
+        descriptor.setPosition(employee.getPosition());
+        descriptor.setId(employee.getId());
         descriptor.setPhone(employee.getPhone());
         descriptor.setEmail(employee.getEmail());
-        descriptor.setAddress(employee.getAddress());
-        descriptor.setTags(employee.getTags());
+        descriptor.setDepartments(employee.getDepartments());
     }
 
     /**
@@ -44,6 +46,22 @@ public class EditEmployeeDescriptorBuilder {
      */
     public EditEmployeeDescriptorBuilder withName(String name) {
         descriptor.setName(new Name(name));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Position} of the {@code EditEmployeeDescriptor} that we are building.
+     */
+    public EditEmployeeDescriptorBuilder withPosition(String position) {
+        descriptor.setPosition(new Position(position));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Id} of the {@code EditEmployeeDescriptor} that we are building.
+     */
+    public EditEmployeeDescriptorBuilder withId(String id) {
+        descriptor.setId(new Id(id));
         return this;
     }
 
@@ -64,20 +82,12 @@ public class EditEmployeeDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code EditEmployeeDescriptor} that we are building.
-     */
-    public EditEmployeeDescriptorBuilder withAddress(String address) {
-        descriptor.setAddress(new Address(address));
-        return this;
-    }
-
-    /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditEmployeeDescriptor}
+     * Parses the {@code departments} into a {@code Set<DEPARTMENT>} and set it to the {@code EditEmployeeDescriptor}
      * that we are building.
      */
-    public EditEmployeeDescriptorBuilder withTags(String... tags) {
-        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
-        descriptor.setTags(tagSet);
+    public EditEmployeeDescriptorBuilder withDepartments(String... departments) {
+        Set<Department> departmentSet = Stream.of(departments).map(Department::new).collect(Collectors.toSet());
+        descriptor.setDepartments(departmentSet);
         return this;
     }
 

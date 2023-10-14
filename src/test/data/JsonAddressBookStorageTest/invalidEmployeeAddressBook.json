@@ -1,8 +1,11 @@
 {
-  "employees": [ {
-    "name": "Employee with invalid name field: Ha!ns Mu@ster",
-    "phone": "9482424",
-    "email": "hans@example.com",
-    "address": "4th street"
-  } ]
+  "employees": [
+    {
+      "name": "Employee with invalid name field: Ha!ns Mu@ster",
+      "position": "CEO",
+      "id": "EID1234-5678",
+      "phone": "9482424",
+      "email": "hans@example.com"
+    }
+  ]
 }

@@ -10,12 +10,13 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.employee.Address;
+import seedu.address.model.department.Department;
 import seedu.address.model.employee.Email;
 import seedu.address.model.employee.Employee;
+import seedu.address.model.employee.Id;
 import seedu.address.model.employee.Name;
 import seedu.address.model.employee.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.employee.Position;
 
 /**
  * Jackson-friendly version of {@link Employee}.
@@ -25,24 +26,26 @@ class JsonAdaptedEmployee {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Employee's %s field is missing!";
 
     private final String name;
+    private final String position;
+    private final String id;
     private final String phone;
     private final String email;
-    private final String address;
-    private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final List<JsonAdaptedDepartment> departments = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedEmployee} with the given employee details.
      */
     @JsonCreator
-    public JsonAdaptedEmployee(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+    public JsonAdaptedEmployee(@JsonProperty("name") String name, @JsonProperty("position") String position,
+            @JsonProperty("id") String id, @JsonProperty("phone") String phone,
+            @JsonProperty("email") String email, @JsonProperty("departments") List<JsonAdaptedDepartment> departments) {
         this.name = name;
+        this.position = position;
+        this.id = id;
         this.phone = phone;
         this.email = email;
-        this.address = address;
-        if (tags != null) {
-            this.tags.addAll(tags);
+        if (departments != null) {
+            this.departments.addAll(departments);
         }
     }
 
@@ -51,23 +54,26 @@ class JsonAdaptedEmployee {
      */
     public JsonAdaptedEmployee(Employee source) {
         name = source.getName().fullName;
+        position = source.getPosition().value;
+        id = source.getId().value;
         phone = source.getPhone().value;
         email = source.getEmail().value;
-        address = source.getAddress().value;
-        tags.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
+        departments.addAll(source.getDepartments().stream()
+                .map(JsonAdaptedDepartment::new)
                 .collect(Collectors.toList()));
     }
 
     /**
-     * Converts this Jackson-friendly adapted employee object into the model's {@code Employee} object.
+     * Converts this Jackson-friendly adapted employee object into the model's
+     * {@code Employee} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted employee.
+     * @throws IllegalValueException if there were any data constraints violated in
+     *                               the adapted employee.
      */
     public Employee toModelType() throws IllegalValueException {
-        final List<Tag> employeeTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tags) {
-            employeeTags.add(tag.toModelType());
+        final List<Department> employeeDepartments = new ArrayList<>();
+        for (JsonAdaptedDepartment department : departments) {
+            employeeDepartments.add(department.toModelType());
         }
 
         if (name == null) {
@@ -77,6 +83,23 @@ class JsonAdaptedEmployee {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
         final Name modelName = new Name(name);
+
+        if (position == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Position.class.getSimpleName()));
+        }
+        if (!Position.isValidPosition(position)) {
+            throw new IllegalValueException(Position.MESSAGE_CONSTRAINTS);
+        }
+        final Position modelPosition = new Position(position);
+
+        if (id == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Id.class.getSimpleName()));
+        }
+        if (!Id.isValidId(id)) {
+            throw new IllegalValueException(Id.MESSAGE_CONSTRAINTS);
+        }
+        final Id modelId = new Id(id);
 
         if (phone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
@@ -94,16 +117,8 @@ class JsonAdaptedEmployee {
         }
         final Email modelEmail = new Email(email);
 
-        if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
-        }
-        if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
-        }
-        final Address modelAddress = new Address(address);
-
-        final Set<Tag> modelTags = new HashSet<>(employeeTags);
-        return new Employee(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        final Set<Department> modelDepartments = new HashSet<>(employeeDepartments);
+        return new Employee(modelName, modelPosition, modelId, modelPhone, modelEmail, modelDepartments);
     }
 
 }

@@ -29,17 +29,19 @@ public class EmployeeCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
+    private Label id;
+    @FXML
     private Label name;
     @FXML
-    private Label id;
+    private Label position;
+    @FXML
+    private Label employeeId;
     @FXML
     private Label phone;
     @FXML
-    private Label address;
-    @FXML
     private Label email;
     @FXML
-    private FlowPane tags;
+    private FlowPane departments;
 
     /**
      * Creates a {@code EmployeeCode} with the given {@code EmployeeCode} and index to display.
@@ -49,11 +51,12 @@ public class EmployeeCard extends UiPart<Region> {
         this.employee = employee;
         id.setText(displayedIndex + ". ");
         name.setText(employee.getName().fullName);
+        position.setText(employee.getPosition().value);
+        employeeId.setText(employee.getId().value);
         phone.setText(employee.getPhone().value);
-        address.setText(employee.getAddress().value);
         email.setText(employee.getEmail().value);
-        employee.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        employee.getDepartments().stream()
+                .sorted(Comparator.comparing(department -> department.departmentName))
+                .forEach(department -> departments.getChildren().add(new Label(department.departmentName)));
     }
 }

@@ -37,14 +37,16 @@ public class Messages {
     public static String format(Employee employee) {
         final StringBuilder builder = new StringBuilder();
         builder.append(employee.getName())
+                .append("; Position: ")
+                .append(employee.getPosition())
+                .append("; Id: ")
+                .append(employee.getId())
                 .append("; Phone: ")
                 .append(employee.getPhone())
                 .append("; Email: ")
                 .append(employee.getEmail())
-                .append("; Address: ")
-                .append(employee.getAddress())
-                .append("; Tags: ");
-        employee.getTags().forEach(builder::append);
+                .append("; Departments: ");
+        employee.getDepartments().forEach(builder::append);
         return builder.toString();
     }
 

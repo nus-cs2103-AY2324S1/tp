@@ -18,7 +18,7 @@ public class Position {
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
-    public final String position;
+    public final String value;
 
     /**
      * Constructs a {@code Position}.
@@ -28,7 +28,7 @@ public class Position {
     public Position(String position) {
         requireNonNull(position);
         checkArgument(isValidPosition(position), MESSAGE_CONSTRAINTS);
-        this.position = position;
+        this.value = position;
     }
 
     /**
@@ -41,7 +41,7 @@ public class Position {
 
     @Override
     public String toString() {
-        return position;
+        return value;
     }
 
     @Override
@@ -56,12 +56,12 @@ public class Position {
         }
 
         Position otherPosition = (Position) other;
-        return position.equals(otherPosition.position);
+        return value.equals(otherPosition.value);
     }
 
     @Override
     public int hashCode() {
-        return position.hashCode();
+        return value.hashCode();
     }
 
 }
