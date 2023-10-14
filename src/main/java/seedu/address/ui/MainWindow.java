@@ -14,6 +14,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.ListTutorCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -42,7 +43,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane listPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -110,8 +111,10 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
+        scheduleListPanel = new ScheduleListPanel(logic.getFilteredScheduleList());
+
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        listPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -168,6 +171,20 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Shows list of person cards.
+     */
+    void showPersons() {
+        listPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+    }
+
+    /**
+     * Fills up all the placeholders of this window.
+     */
+    void showSchedules() {
+        listPanelPlaceholder.getChildren().add(scheduleListPanel.getRoot());
+    }
+
+    /**
      * Executes the command and returns the result.
      *
      * @see seedu.address.logic.Logic#execute(String)
@@ -184,6 +201,12 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.getFeedbackToUser().equals(ListTutorCommand.MESSAGE_SUCCESS)) {
+                showSchedules();
+            } else {
+                showPersons();
             }
 
             return commandResult;
