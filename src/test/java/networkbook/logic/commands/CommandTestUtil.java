@@ -3,6 +3,7 @@ package networkbook.logic.commands;
 import static networkbook.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -97,6 +98,17 @@ public class CommandTestUtil {
             Model expectedModel) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
+    }
+
+    /**
+     * Executes the given {@code Command}, confirms that the command does not throw any exception.
+     */
+    public static void assertCommandThrowsNothing(Command command, Model model) {
+        try {
+            command.execute(model);
+        } catch (Exception e) {
+            fail();
+        }
     }
 
     /**

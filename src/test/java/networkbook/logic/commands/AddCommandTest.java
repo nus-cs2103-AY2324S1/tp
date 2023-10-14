@@ -3,13 +3,11 @@ package networkbook.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
 import networkbook.commons.core.index.Index;
 import networkbook.logic.Messages;
-import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.model.Model;
 import networkbook.model.ModelManager;
 import networkbook.model.NetworkBook;
@@ -72,15 +70,8 @@ public class AddCommandTest {
 
         String expectedMessage = AddCommand.MESSAGE_MULTIPLE_UNIQUE_FIELD;
 
-        try {
-            addCommand.execute(model); // person would have priority
-            addCommand.execute(model); // add priority to the person again
-            fail();
-        } catch (CommandException e) {
-            assertEquals(expectedMessage, e.getMessage());
-        } catch (Exception e) {
-            fail();
-        }
+        CommandTestUtil.assertCommandThrowsNothing(addCommand, model); // person would have priority
+        CommandTestUtil.assertCommandFailure(addCommand, model, expectedMessage); // add priority to the person again
     }
 
     @Test
