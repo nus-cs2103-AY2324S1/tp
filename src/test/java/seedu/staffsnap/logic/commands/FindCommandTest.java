@@ -11,8 +11,6 @@ import static seedu.staffsnap.testutil.TypicalApplicants.DANIEL;
 import static seedu.staffsnap.testutil.TypicalApplicants.ELLE;
 import static seedu.staffsnap.testutil.TypicalApplicants.FIONA;
 import static seedu.staffsnap.testutil.TypicalApplicants.FLORENCE;
-import static seedu.staffsnap.testutil.TypicalApplicants.HOON;
-import static seedu.staffsnap.testutil.TypicalApplicants.IDA;
 import static seedu.staffsnap.testutil.TypicalApplicants.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -71,12 +69,12 @@ public class FindCommandTest {
 
     @Test
     public void execute_multipleKeywords_multipleApplicantsFound() {
-        String expectedMessage = String.format(MESSAGE_APPLICANTS_LISTED_OVERVIEW, 5);
+        String expectedMessage = String.format(MESSAGE_APPLICANTS_LISTED_OVERVIEW, 4);
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredApplicantList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, ELLE, FIONA, FLORENCE, IDA), model.getFilteredApplicantList());
+        assertEquals(Arrays.asList(CARL, ELLE, FIONA, FLORENCE), model.getFilteredApplicantList());
     }
 
     @Test
@@ -91,13 +89,13 @@ public class FindCommandTest {
 
     @Test
     public void execute_singleIncompleteKeyword_multipleApplicantsFound() {
-        String expectedMessage = String.format(MESSAGE_APPLICANTS_LISTED_OVERVIEW, 3);
+        String expectedMessage = String.format(MESSAGE_APPLICANTS_LISTED_OVERVIEW, 2);
         NameContainsKeywordsPredicate predicate = preparePredicate("Mei");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredApplicantList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         System.out.println(model.getFilteredApplicantList());
-        assertEquals(Arrays.asList(BENSON, DANIEL, HOON), model.getFilteredApplicantList());
+        assertEquals(Arrays.asList(BENSON, DANIEL), model.getFilteredApplicantList());
     }
 
 
