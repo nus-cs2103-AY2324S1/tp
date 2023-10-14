@@ -1,14 +1,20 @@
 {
   "persons": [ {
     "name": "Alice Pauline",
+    "nric": "T0111110E",
     "phone": "94351253",
     "email": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
+    "appointment": "10 AUG 2024 10AM- 11AM",
+    "MedicalHistories": [ "Diabetes" ],
     "tags": [ "friends" ]
   }, {
     "name": "Alice Pauline",
+    "nric": "T0111110E",
     "phone": "94351253",
     "email": "pauline@example.com",
+    "appointment": "10 AUG 2024 10AM- 11AM",
+    "MedicalHistories": [ "Diabetes" ],
     "address": "4th street"
   } ]
 }
