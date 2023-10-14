@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.LoadCommand.MESSAGE_FILE_CANNOT_LOAD;
@@ -69,5 +71,33 @@ public class LoadCommandTest {
         }
         expectedModel.setAddressBookFilePath(filePath);
         expectedModel.setAddressBook(tempData);
+    }
+
+    @Test
+    public void equals() {
+        String firstFileName = "validAddressBook";
+        Path firstFilePath = TEST_DATA_FOLDER.resolve(firstFileName + ".json");
+
+        String secondFileName = "addressBook";
+        Path secondFilePath = TEST_DATA_FOLDER.resolve(secondFileName + ".json");
+
+        LoadCommand loadFirstCommand = new LoadCommand(firstFileName, firstFilePath);
+        LoadCommand loadSecondCommand = new LoadCommand(secondFileName, secondFilePath);
+
+        // same object -> returns true
+        assertTrue(loadFirstCommand.equals(loadFirstCommand));
+
+        // same values -> returns true
+        LoadCommand loadFirstCommandCopy = new LoadCommand(firstFileName, firstFilePath);
+        assertTrue(loadFirstCommand.equals(loadFirstCommandCopy));
+
+        // different types -> returns false
+        assertFalse(loadFirstCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(loadFirstCommand.equals(null));
+
+        // different person -> returns false
+        assertFalse(loadFirstCommand.equals(loadSecondCommand));
     }
 }
