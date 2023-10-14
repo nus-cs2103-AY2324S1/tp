@@ -176,12 +176,15 @@ public class ParserUtil {
      * @return either Index object or Name object.
      * @throws ParseException
      */
-    public static Object parsePreamble(String preamble) throws ParseException{
+    public static Object parsePreamble(String preamble) throws ParseException {
         requireNonNull(preamble);
         preamble = preamble.trim();
         // Preamble, if exist, can either be index or student's name
         if (isInteger(preamble)) {
             return parseIndex(preamble);
+        }
+        if (!preamble.matches("^[a-zA-Z ]+$")) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return parseName(preamble);
     }
@@ -190,7 +193,7 @@ public class ParserUtil {
         try {
             Integer.parseInt(s);
             return true;
-        } catch(NumberFormatException e) {
+        } catch (NumberFormatException e) {
             return false;
         }
     }

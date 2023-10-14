@@ -1,14 +1,14 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.Student;
-import seedu.address.model.person.Name;
 import seedu.address.commons.core.index.Index;
-import java.util.Optional;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Student;
 
 /**
  * The API of the Model component.

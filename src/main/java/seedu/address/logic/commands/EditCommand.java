@@ -11,7 +11,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SEC_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.NoSuchElementException;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -72,6 +77,10 @@ public class EditCommand extends Command {
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
     }
 
+    /**
+     * @param name of the student in the filtered student list to edit
+     * @param editPersonDescriptor details to edit the student with
+     */
     public EditCommand(Name name, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(name);
         requireNonNull(editPersonDescriptor);
@@ -88,9 +97,9 @@ public class EditCommand extends Command {
         Student studentToEdit;
         try {
             // get the student from model filtered list by either name or index
-            studentToEdit = model.getStudentFromFilteredPersonListByName(name).orElseGet(
-                    () -> model.getStudentFromFilteredPersonListByIndex(index).get());
-        } catch(NoSuchElementException e) {
+            studentToEdit = model.getStudentFromFilteredPersonListByName(name).orElseGet(() ->
+                    model.getStudentFromFilteredPersonListByIndex(index).get());
+        } catch (NoSuchElementException e) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         Student editedStudent = createEditedPerson(studentToEdit, editPersonDescriptor);
