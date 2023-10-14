@@ -129,6 +129,13 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void updateFilteredPersonList(Predicate<Person> predicate1, Predicate<Person> predicate2) {
+        requireNonNull(predicate1);
+        requireNonNull(predicate2);;
+        filteredPersons.setPredicate(person -> predicate1.test(person) && predicate2.test(person));
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
