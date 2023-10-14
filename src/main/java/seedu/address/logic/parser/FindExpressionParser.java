@@ -140,11 +140,11 @@ public class FindExpressionParser {
             return tokens.get(pos++);
         }
         if (isAtEnd()) {
-            throw new ParseException("Find command received an invalid filter string: " +
-                    "Expected token of type " + type + " but reached end of input!");
+            throw new ParseException("Find command received an invalid filter string: "
+                    + "Expected token of type " + type + " but reached end of input!");
         }
-        throw new ParseException("Find command received an invalid filter string: " +
-                "Expected token of type " + type + " but found " + peek().type);
+        throw new ParseException("Find command received an invalid filter string: "
+                + "Expected token of type " + type + " but found " + peek().type);
     }
 
     private Token peek() {
