@@ -106,7 +106,7 @@ public class ParserUtil {
         requireNonNull(income);
         String trimmedIncome = income.trim();
         if (!Height.isValidHeight(trimmedIncome)) {
-            throw new ParseException(Height.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Income.MESSAGE_CONSTRAINTS);
         }
         return new Income(income);
     }

@@ -21,7 +21,6 @@ public class PersonBuilder {
     public static final String DEFAULT_AGE = "33";
     public static final String DEFAULT_GENDER = "F";
     public static final String DEFAULT_HEIGHT = "123";
-
     public static final String DEFAULT_INCOME = "3000";
 
     private Name name;
