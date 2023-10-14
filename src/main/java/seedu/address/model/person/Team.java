@@ -2,6 +2,8 @@ package seedu.address.model.person;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Represents a Team in the address book.
@@ -9,36 +11,55 @@ import java.util.List;
  */
 public class Team {
 
-    private final TeamLeader teamLeader;
-    private final List<Developer> developers;
+    private final int leaderHashCode;
+    private String TeamName = "unassigned";
+
+
+    //todo: set will ignore duplicated values, do we need to notify the user that he added a duplicate value or not?
+    //use the hash code for representing each developer. The hash code will be updated when there is a change
+    //to the developer's information.
+    private final Set<Integer> developerHashCode;
+
 
     /**
      * Constructs a new Team instance with the specified TeamLeader.
      *
-     * @param teamLeader The leader of the team.
+     * @param leader The leader of the team.
      */
-    public Team(TeamLeader teamLeader) {
-        this.teamLeader = teamLeader;
-        this.developers = new ArrayList<>();
-        //this.teamName = teamName;
+
+    public Team(TeamLeader leader) {
+        this.leaderHashCode = leader.hashCode();
+        this.developerHashCode = new HashSet<>();
     }
 
     /**
      * Adds a Developer to the team.
      *
-     * @param developer The developer to be added.
+     * @param developerHashCode The developer to be added.
      */
-    public void addDeveloper(Developer developer) {
-        this.developers.add(developer);
+    public void addDeveloper(int developerHashCode) {
+        this.developerHashCode.add(developerHashCode);
     }
+
+
+
+    /**
+     * Adds a Developer to the team.
+     *
+     * @param developerHashCode The developer to be removed.
+     */
+    public void removeDeveloper(int developerHashCode) {
+        this.developerHashCode.remove(developerHashCode);
+    }
+
 
     /**
      * Retrieves the TeamLeader of the team.
      *
      * @return The TeamLeader of the team.
      */
-    public TeamLeader getLeader() {
-        return teamLeader;
+    public int getLeaderHashCode() {
+        return leaderHashCode;
     }
 
     /**
@@ -46,7 +67,8 @@ public class Team {
      *
      * @return A list of Developers.
      */
-    public List<Developer> getDevelopers() {
-        return developers;
+    public Set<Integer> getDevelopers() {
+        return developerHashCode;
     }
+
 }
