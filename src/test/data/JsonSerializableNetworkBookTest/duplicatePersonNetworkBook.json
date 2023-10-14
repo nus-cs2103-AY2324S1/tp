@@ -3,12 +3,20 @@
     "name": "Alice Pauline",
     "phone": "94351253",
     "emails": ["alice@example.com"],
-    "address": "123, Jurong West Ave 6, #08-111",
+    "link": "paulice.sg",
+    "graduating year": "1975",
+    "course": "Computer Science",
+    "specialisation": "Software Engineering",
     "tags": [ "friends" ]
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
     "emails": ["pauline@example.com"],
-    "address": "4th street"
+    "address": "4th street",
+    "link": "paulice.sg",
+    "graduating year": "1975",
+    "course": "Computer Science",
+    "specialisation": "Software Engineering",
+    "tags": [ "friends" ]
   } ]
 }

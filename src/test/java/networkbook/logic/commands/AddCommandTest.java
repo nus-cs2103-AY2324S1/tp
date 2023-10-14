@@ -68,9 +68,9 @@ public class AddCommandTest {
         Person personInFilteredList = model.getFilteredPersonList()
                 .get(TypicalIndexes.INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(personInFilteredList)
-                .withAddress(CommandTestUtil.VALID_ADDRESS_BOB).build();
+                .withLink(CommandTestUtil.VALID_LINK_BOB).build();
         AddCommand addCommand = new AddCommand(TypicalIndexes.INDEX_FIRST_PERSON,
-                new EditPersonDescriptorBuilder().withAddress(CommandTestUtil.VALID_ADDRESS_BOB).build());
+                new EditPersonDescriptorBuilder().withLink(CommandTestUtil.VALID_LINK_BOB).build());
 
         String expectedMessage = String.format(AddCommand.MESSAGE_ADD_INFO_SUCCESS, Messages.format(editedPerson));
 
