@@ -19,7 +19,9 @@ public class FindCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all jobs whose field contains any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: FIELD_SPECIFIER KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + "-r software database network";
+            + "Example: " + COMMAND_WORD + " -r software database network";
+
+    public static final String MESSAGE_INVALID_SPECIFIER = "Field specifier is invalid.";
 
     private final FieldContainsKeywordsPredicate predicate;
 

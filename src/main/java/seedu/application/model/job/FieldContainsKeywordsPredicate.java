@@ -14,7 +14,6 @@ import seedu.application.logic.parser.exceptions.ParseException;
  * Tests that a {@code Job}'s field matches any of the keywords given.
  */
 public class FieldContainsKeywordsPredicate implements Predicate<Job> {
-    public static final String INVALID_SPECIFIER = "No such specifier found";
     private final String specifier;
     private final List<String> keywords;
 
@@ -44,11 +43,12 @@ public class FieldContainsKeywordsPredicate implements Predicate<Job> {
      * @param specifier The user String input.
      * @throws ParseException if the specifer is invalid.
      */
-    public static void isValidSpecifier(String specifier) throws ParseException {
-        if (!(specifier.equals(COMPANY_FIND_SPECIFIER)
-            || specifier.equals(ROLE_FIND_SPECIFIER))) {
-            throw new ParseException(INVALID_SPECIFIER);
+    public static boolean isValidSpecifier(String specifier) {
+        if (specifier.equals(COMPANY_FIND_SPECIFIER)
+                || specifier.equals(ROLE_FIND_SPECIFIER)) {
+            return true;
         }
+        return false;
     }
 
     @Override

@@ -3,6 +3,7 @@ package seedu.application.logic.parser;
 import static seedu.application.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.application.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.application.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.application.model.job.FieldContainsKeywordsPredicateTest.INVALID_SPECIFIER;
 import static seedu.application.model.job.Role.ROLE_FIND_SPECIFIER;
 
 import java.util.Arrays;
@@ -19,6 +20,12 @@ public class FindCommandParserTest {
     @Test
     public void parse_emptyArg_throwsParseException() {
         assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_invalidSpecifier_throwsParseException() {
+        assertParseFailure(parser, INVALID_SPECIFIER,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_INVALID_SPECIFIER));
     }
 
     @Test
