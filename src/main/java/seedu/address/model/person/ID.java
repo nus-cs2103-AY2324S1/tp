@@ -9,8 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class ID {
 
-    public static final String MESSAGE_CONSTRAINTS = "IDs should only contain alphanumeric characters, with no "
-            + "special characters or space, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Please enter the full ID! IDs should only contain alphanumeric "
+            + "characters, with no special characters or space, and it should not be blank";
 
     /*
      * The ID format is A followed by 7 digits and ending with a letter.

@@ -24,6 +24,7 @@ public class FindCommandParser implements Parser<FindCommand> {
      */
     public FindCommand parse(String args) throws ParseException {
         String identifier;
+        String[] keywords;
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ID);
 
@@ -35,18 +36,12 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            identifier = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()).fullName;
+            keywords = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()).fullName.split("\\s+");
+            identifier = "name";
         } else {
-            identifier = ParserUtil.parseId(argMultimap.getValue(PREFIX_ID).get()).value;
+            keywords = ParserUtil.parseId(argMultimap.getValue(PREFIX_ID).get()).value.split("\\s+");
+            identifier = "id";
         }
-
-        String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-        }
-
-        String[] keywords = trimmedArgs.split("\\s+");
 
         return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(keywords), identifier));
     }
