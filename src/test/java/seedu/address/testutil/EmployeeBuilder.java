@@ -30,8 +30,8 @@ public class EmployeeBuilder {
     private Id id;
     private Phone phone;
     private Email email;
-    private Set<Department> departments;
     private Salary salary;
+    private Set<Department> departments;
 
     /**
      * Creates a {@code EmployeeBuilder} with the default details.
@@ -42,8 +42,8 @@ public class EmployeeBuilder {
         id = new Id(DEFAULT_ID);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
-        departments = new HashSet<>();
         salary = new Salary(DEFAULT_SALARY);
+        departments = new HashSet<>();
     }
 
     /**
@@ -55,8 +55,8 @@ public class EmployeeBuilder {
         id = employeeToCopy.getId();
         phone = employeeToCopy.getPhone();
         email = employeeToCopy.getEmail();
-        departments = new HashSet<>(employeeToCopy.getDepartments());
         salary = employeeToCopy.getSalary();
+        departments = new HashSet<>(employeeToCopy.getDepartments());
     }
 
     /**
@@ -117,7 +117,7 @@ public class EmployeeBuilder {
     }
 
     public Employee build() {
-        return new Employee(name, position, id, phone, email, departments, salary);
+        return new Employee(name, position, id, phone, email, salary, departments);
     }
 
 }

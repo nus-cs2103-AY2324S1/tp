@@ -24,22 +24,22 @@ public class Employee {
     private final Email email;
 
     // Data fields
-    private final Set<Department> departments = new HashSet<>();
     private final Salary salary;
+    private final Set<Department> departments = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Employee(Name name, Position position, Id id, Phone phone, Email email, Set<Department> departments,
-                    Salary salary) {
-        requireAllNonNull(name, position, id, phone, email, departments, salary);
+    public Employee(Name name, Position position, Id id, Phone phone, Email email, Salary salary,
+                    Set<Department> departments) {
+        requireAllNonNull(name, position, id, phone, email, salary, departments);
         this.name = name;
         this.position = position;
         this.id = id;
         this.phone = phone;
         this.email = email;
-        this.departments.addAll(departments);
         this.salary = salary;
+        this.departments.addAll(departments);
     }
 
     public Name getName() {
@@ -109,14 +109,14 @@ public class Employee {
                 && id.equals(otherEmployee.id)
                 && phone.equals(otherEmployee.phone)
                 && email.equals(otherEmployee.email)
-                && departments.equals(otherEmployee.departments)
-                && salary.equals(otherEmployee.salary);
+                && salary.equals(otherEmployee.salary)
+                && departments.equals(otherEmployee.departments);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, position, id, phone, email, departments, salary);
+        return Objects.hash(name, position, id, phone, email, salary, departments);
     }
 
     @Override
@@ -127,8 +127,8 @@ public class Employee {
                 .add("id", id)
                 .add("phone", phone)
                 .add("email", email)
-                .add("departments", departments)
                 .add("salary", salary)
+                .add("departments", departments)
                 .toString();
     }
 
