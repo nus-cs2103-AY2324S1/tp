@@ -32,7 +32,6 @@ public class Indices {
      * Creates a new {@code Indices} using zero-based indices.
      */
     public static Indices fromZeroBased(int[] zeroBasedIndices) {
-        Arrays.sort(zeroBasedIndices);
         SortedSet<Index> result = new TreeSet<>();
 
         for (int index : zeroBasedIndices) {
@@ -46,7 +45,6 @@ public class Indices {
      * Creates a new {@code Indices} using one-based indices.
      */
     public static Indices fromOneBased(int[] oneBasedIndices) {
-        Arrays.sort(oneBasedIndices);
         SortedSet<Index> result = new TreeSet<>();
 
         for (int index : oneBasedIndices) {
