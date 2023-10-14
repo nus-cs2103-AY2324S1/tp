@@ -76,7 +76,7 @@ public class Booking {
         }
 
         return otherBooking != null
-                && otherBooking.getName().equals(getName());
+                && otherBooking.getRoom().equals(getRoom());
     }
 
     /**
