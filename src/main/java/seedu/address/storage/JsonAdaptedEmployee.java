@@ -17,6 +17,7 @@ import seedu.address.model.employee.Id;
 import seedu.address.model.employee.Name;
 import seedu.address.model.employee.Phone;
 import seedu.address.model.employee.Position;
+import seedu.address.model.employee.Salary;
 
 /**
  * Jackson-friendly version of {@link Employee}.
@@ -31,6 +32,7 @@ class JsonAdaptedEmployee {
     private final String phone;
     private final String email;
     private final List<JsonAdaptedDepartment> departments = new ArrayList<>();
+    private final String salary;
 
     /**
      * Constructs a {@code JsonAdaptedEmployee} with the given employee details.
@@ -38,12 +40,14 @@ class JsonAdaptedEmployee {
     @JsonCreator
     public JsonAdaptedEmployee(@JsonProperty("name") String name, @JsonProperty("position") String position,
             @JsonProperty("id") String id, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("departments") List<JsonAdaptedDepartment> departments) {
+            @JsonProperty("email") String email, @JsonProperty("departments") List<JsonAdaptedDepartment> departments,
+            @JsonProperty("salary") String salary) {
         this.name = name;
         this.position = position;
         this.id = id;
         this.phone = phone;
         this.email = email;
+        this.salary = salary;
         if (departments != null) {
             this.departments.addAll(departments);
         }
@@ -58,6 +62,7 @@ class JsonAdaptedEmployee {
         id = source.getId().value;
         phone = source.getPhone().value;
         email = source.getEmail().value;
+        salary = source.getSalary().value;
         departments.addAll(source.getDepartments().stream()
                 .map(JsonAdaptedDepartment::new)
                 .collect(Collectors.toList()));
@@ -117,8 +122,16 @@ class JsonAdaptedEmployee {
         }
         final Email modelEmail = new Email(email);
 
+        if (salary == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Salary.class.getSimpleName()));
+        }
+        if (!Salary.isValidSalary(salary)) {
+            throw new IllegalValueException(Salary.MESSAGE_CONSTRAINTS);
+        }
+        final Salary modelSalary = new Salary(salary);
+
         final Set<Department> modelDepartments = new HashSet<>(employeeDepartments);
-        return new Employee(modelName, modelPosition, modelId, modelPhone, modelEmail, modelDepartments);
+        return new Employee(modelName, modelPosition, modelId, modelPhone, modelEmail, modelDepartments, modelSalary);
     }
 
 }

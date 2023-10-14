@@ -10,6 +10,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_POSITION_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SALARY_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showEmployeeAtIndex;
@@ -62,12 +63,15 @@ public class EditCommandTest {
         Employee editedEmployee = employeeInlist.withName(VALID_NAME_BOB).withPosition(VALID_POSITION_BOB)
                 .withId(VALID_ID_BOB)
                 .withPhone(VALID_PHONE_BOB)
-                .withDepartments(VALID_DEPARTMENT_HUSBAND).build();
+                .withDepartments(VALID_DEPARTMENT_HUSBAND)
+                .withSalary(VALID_SALARY_BOB).build();
 
         EditEmployeeDescriptor descriptor = new EditEmployeeDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withId(VALID_ID_BOB)
                 .withPosition(VALID_POSITION_BOB)
-                .withPhone(VALID_PHONE_BOB).withDepartments(VALID_DEPARTMENT_HUSBAND).build();
+                .withPhone(VALID_PHONE_BOB)
+                .withDepartments(VALID_DEPARTMENT_HUSBAND)
+                .withSalary(VALID_SALARY_BOB).build();
         EditCommand editCommand = new EditCommand(indexLastEmployee, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_EMPLOYEE_SUCCESS,

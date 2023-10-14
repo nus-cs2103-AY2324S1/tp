@@ -11,6 +11,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_POSITION_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SALARY_BOB;
 
 import org.junit.jupiter.api.Test;
 
@@ -60,6 +61,10 @@ public class EditEmployeeDescriptorTest {
         // different departments -> returns false
         editedAmy = new EditEmployeeDescriptorBuilder(DESC_AMY).withDepartments(VALID_DEPARTMENT_HUSBAND).build();
         assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different salary -> returns false
+        editedAmy = new EditEmployeeDescriptorBuilder(DESC_AMY).withSalary(VALID_SALARY_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
     }
 
     @Test
@@ -71,7 +76,8 @@ public class EditEmployeeDescriptorTest {
                 + editEmployeeDescriptor.getId().orElse(null) + ", phone="
                 + editEmployeeDescriptor.getPhone().orElse(null) + ", email="
                 + editEmployeeDescriptor.getEmail().orElse(null) + ", departments="
-                + editEmployeeDescriptor.getDepartments().orElse(null) + "}";
+                + editEmployeeDescriptor.getDepartments().orElse(null) + ", salary="
+                + editEmployeeDescriptor.getSalary().orElse(null) + "}";
         assertEquals(expected, editEmployeeDescriptor.toString());
     }
 }

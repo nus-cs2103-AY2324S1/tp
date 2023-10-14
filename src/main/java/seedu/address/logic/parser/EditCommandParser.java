@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -35,7 +36,7 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_POSITION, PREFIX_ID,
-                PREFIX_PHONE, PREFIX_EMAIL, PREFIX_DEPARTMENT);
+                PREFIX_PHONE, PREFIX_EMAIL, PREFIX_DEPARTMENT, PREFIX_SALARY);
 
         Index index;
 
@@ -45,7 +46,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_POSITION, PREFIX_ID, PREFIX_PHONE, PREFIX_EMAIL);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_POSITION, PREFIX_ID, PREFIX_PHONE, PREFIX_EMAIL,
+                PREFIX_SALARY);
 
         EditEmployeeDescriptor editEmployeeDescriptor = new EditEmployeeDescriptor();
 
@@ -64,8 +66,13 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
             editEmployeeDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
         }
-        parseDepartmentsForEdit(argMultimap.getAllValues(PREFIX_DEPARTMENT))
-                .ifPresent(editEmployeeDescriptor::setDepartments);
+        if (argMultimap.getValue(PREFIX_SALARY).isPresent()) {
+            editEmployeeDescriptor.setSalary(ParserUtil.parseSalary(argMultimap.getValue(PREFIX_SALARY).get()));
+        }
+        if (argMultimap.getValue(PREFIX_DEPARTMENT).isPresent()) {
+            parseDepartmentsForEdit(argMultimap.getAllValues(PREFIX_DEPARTMENT))
+                    .ifPresent(editEmployeeDescriptor::setDepartments);
+        }
 
         if (!editEmployeeDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);

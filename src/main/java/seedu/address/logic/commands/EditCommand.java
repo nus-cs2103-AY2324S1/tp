@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EMPLOYEES;
 
 import java.util.Collections;
@@ -29,6 +30,7 @@ import seedu.address.model.employee.Id;
 import seedu.address.model.employee.Name;
 import seedu.address.model.employee.Phone;
 import seedu.address.model.employee.Position;
+import seedu.address.model.employee.Salary;
 
 /**
  * Edits the details of an existing employee in the address book.
@@ -46,6 +48,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_ID + "ID] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_SALARY + "SALARY] "
             + "[" + PREFIX_DEPARTMENT + "DEPARTMENT]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -106,8 +109,10 @@ public class EditCommand extends Command {
         Email updatedEmail = editEmployeeDescriptor.getEmail().orElse(employeeToEdit.getEmail());
         Set<Department> updatedDepartments = editEmployeeDescriptor.getDepartments()
                 .orElse(employeeToEdit.getDepartments());
+        Salary updatedSalary = editEmployeeDescriptor.getSalary().orElse(employeeToEdit.getSalary());
 
-        return new Employee(updatedName, updatedPosition, updatedId, updatedPhone, updatedEmail, updatedDepartments);
+        return new Employee(updatedName, updatedPosition, updatedId, updatedPhone, updatedEmail, updatedDepartments,
+                updatedSalary);
     }
 
     @Override
@@ -145,6 +150,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Set<Department> departments;
+        private Salary salary;
 
         public EditEmployeeDescriptor() {}
 
@@ -159,6 +165,7 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setDepartments(toCopy.departments);
+            setSalary(toCopy.salary);
         }
 
         /**
@@ -208,6 +215,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(id);
         }
 
+        public void setSalary(Salary salary) {
+            this.salary = salary;
+        }
+
+        public Optional<Salary> getSalary() {
+            return Optional.ofNullable(salary);
+        }
+
 
         /**
          * Sets {@code departments} to this object's {@code departments}.
@@ -243,7 +258,8 @@ public class EditCommand extends Command {
                     && Objects.equals(id, otherEditEmployeeDescriptor.id)
                     && Objects.equals(phone, otherEditEmployeeDescriptor.phone)
                     && Objects.equals(email, otherEditEmployeeDescriptor.email)
-                    && Objects.equals(departments, otherEditEmployeeDescriptor.departments);
+                    && Objects.equals(departments, otherEditEmployeeDescriptor.departments)
+                    && Objects.equals(salary, otherEditEmployeeDescriptor.salary);
         }
 
         @Override
@@ -255,6 +271,7 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("departments", departments)
+                    .add("salary", salary)
                     .toString();
         }
     }
