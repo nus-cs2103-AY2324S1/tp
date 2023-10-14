@@ -12,7 +12,6 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import networkbook.logic.parser.exceptions.ParseException;
-import networkbook.model.person.Address;
 import networkbook.model.person.Email;
 import networkbook.model.person.Name;
 import networkbook.model.person.Phone;
@@ -23,14 +22,20 @@ import networkbook.testutil.TypicalIndexes;
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
-    private static final String INVALID_ADDRESS = " ";
+    private static final String INVALID_LINK = "facebookcom";
+    private static final String INVALID_GRADUATING_YEAR = "123a";
+    private static final String INVALID_COURSE = "";
+    private static final String INVALID_SPECIALISATION = "";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_PRIORITY = "hi";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
-    private static final String VALID_ADDRESS = "123 Main Street #0505";
+    private static final String VALID_LINK = "www.facebook.com/alice";
+    private static final String VALID_GRADUATING_YEAR = "2000";
+    private static final String VALID_COURSE = "Computer Science";
+    private static final String VALID_SPECIALISATION = "Game Development";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
@@ -105,26 +110,43 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseAddress_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseAddress((String) null));
+    public void parseLink_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseLink((String) null));
     }
 
     @Test
-    public void parseAddress_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseAddress(INVALID_ADDRESS));
+    public void parseLink_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseLink(INVALID_LINK));
     }
 
     @Test
-    public void parseAddress_validValueWithoutWhitespace_returnsAddress() throws Exception {
-        Address expectedAddress = new Address(VALID_ADDRESS);
-        assertEquals(expectedAddress, ParserUtil.parseAddress(VALID_ADDRESS));
+    public void parseGraduatingYear_null_throwsParseException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseGraduatingYear((String) null));
     }
 
     @Test
-    public void parseAddress_validValueWithWhitespace_returnsTrimmedAddress() throws Exception {
-        String addressWithWhitespace = WHITESPACE + VALID_ADDRESS + WHITESPACE;
-        Address expectedAddress = new Address(VALID_ADDRESS);
-        assertEquals(expectedAddress, ParserUtil.parseAddress(addressWithWhitespace));
+    public void parseGraduatingYear_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseGraduatingYear(INVALID_GRADUATING_YEAR));
+    }
+
+    @Test
+    public void parseCourse_null_throwsParseException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseCourse((String) null));
+    }
+
+    @Test
+    public void parseCourse_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseCourse(INVALID_COURSE));
+    }
+
+    @Test
+    public void parseSpecialisation_null_throwsParseException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseSpecialisation((String) null));
+    }
+
+    @Test
+    public void parseSpecialisation_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseSpecialisation(INVALID_COURSE));
     }
 
     @Test

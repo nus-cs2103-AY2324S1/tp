@@ -35,7 +35,10 @@ public class EditCommandParser implements Parser<EditCommand> {
                         CliSyntax.PREFIX_NAME,
                         CliSyntax.PREFIX_PHONE,
                         CliSyntax.PREFIX_EMAIL,
-                        CliSyntax.PREFIX_ADDRESS,
+                        CliSyntax.PREFIX_LINK,
+                        CliSyntax.PREFIX_GRADUATING_YEAR,
+                        CliSyntax.PREFIX_COURSE,
+                        CliSyntax.PREFIX_SPECIALISATION,
                         CliSyntax.PREFIX_TAG
                 );
 
@@ -57,7 +60,10 @@ public class EditCommandParser implements Parser<EditCommand> {
                 CliSyntax.PREFIX_NAME,
                 CliSyntax.PREFIX_PHONE,
                 CliSyntax.PREFIX_EMAIL,
-                CliSyntax.PREFIX_ADDRESS
+                CliSyntax.PREFIX_LINK,
+                CliSyntax.PREFIX_GRADUATING_YEAR,
+                CliSyntax.PREFIX_COURSE,
+                CliSyntax.PREFIX_SPECIALISATION
         );
 
         EditPersonDescriptor editPersonDescriptor = generateEditPersonDescriptor(argMultimap);
@@ -89,9 +95,21 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setEmails(new UniqueList<Email>().setItems(List.of(
                     ParserUtil.parseEmail(argMultimap.getValue(CliSyntax.PREFIX_EMAIL).get()))));
         }
-        if (argMultimap.getValue(CliSyntax.PREFIX_ADDRESS).isPresent()) {
-            editPersonDescriptor.setAddress(
-                    ParserUtil.parseAddress(argMultimap.getValue(CliSyntax.PREFIX_ADDRESS).get()));
+        if (argMultimap.getValue(CliSyntax.PREFIX_LINK).isPresent()) {
+            editPersonDescriptor.setLink(
+                    ParserUtil.parseLink(argMultimap.getValue(CliSyntax.PREFIX_LINK).get()));
+        }
+        if (argMultimap.getValue(CliSyntax.PREFIX_GRADUATING_YEAR).isPresent()) {
+            editPersonDescriptor.setGraduatingYear(
+                    ParserUtil.parseGraduatingYear(argMultimap.getValue(CliSyntax.PREFIX_GRADUATING_YEAR).get()));
+        }
+        if (argMultimap.getValue(CliSyntax.PREFIX_COURSE).isPresent()) {
+            editPersonDescriptor.setCourse(
+                    ParserUtil.parseCourse(argMultimap.getValue(CliSyntax.PREFIX_COURSE).get()));
+        }
+        if (argMultimap.getValue(CliSyntax.PREFIX_SPECIALISATION).isPresent()) {
+            editPersonDescriptor.setSpecialisation(
+                    ParserUtil.parseSpecialisation(argMultimap.getValue(CliSyntax.PREFIX_SPECIALISATION).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(CliSyntax.PREFIX_TAG))
                 .ifPresent(editPersonDescriptor::setTags);
