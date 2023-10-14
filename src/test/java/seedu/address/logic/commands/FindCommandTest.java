@@ -59,7 +59,8 @@ public class FindCommandTest {
     public void execute_zeroKeywords_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         NameContainsKeywordsPredicate namePredicate = prepareNamePredicate(" ");
-        FindCommand command = new FindCommand(namePredicate, null);
+        StatusContainsKeywordsPredicate statusPredicate = prepareStatusPredicate("");
+        FindCommand command = new FindCommand(namePredicate, statusPredicate);
         expectedModel.updateFilteredPersonList(namePredicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
@@ -69,8 +70,10 @@ public class FindCommandTest {
     public void execute_multipleKeywords_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         NameContainsKeywordsPredicate namePredicate = prepareNamePredicate("Kurz Elle Kunz");
-        FindCommand command = new FindCommand(namePredicate, null);
-        expectedModel.updateFilteredPersonList(namePredicate);
+        StatusContainsKeywordsPredicate statusPredicate = prepareStatusPredicate("Preliminary");
+        FindCommand command = new FindCommand(namePredicate, statusPredicate);
+        expectedModel.updateFilteredPersonList(namePredicate, statusPredicate);
+        System.out.println(expectedModel.getAddressBook());
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
     }
