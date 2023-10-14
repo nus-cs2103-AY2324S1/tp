@@ -6,9 +6,8 @@ import java.util.Arrays;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.MarkAttendanceCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.ContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -32,7 +31,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                 || (argMultimap.getValue(PREFIX_NAME).isEmpty() && argMultimap.getValue(PREFIX_ID).isEmpty())
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAttendanceCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
@@ -43,7 +42,7 @@ public class FindCommandParser implements Parser<FindCommand> {
             identifier = "id";
         }
 
-        return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(keywords), identifier));
+        return new FindCommand(new ContainsKeywordsPredicate(Arrays.asList(keywords), identifier));
     }
 
     /**

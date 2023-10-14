@@ -9,11 +9,27 @@ import seedu.address.commons.util.ToStringBuilder;
 /**
  * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
  */
-public class NameContainsKeywordsPredicate implements Predicate<Person> {
+public class ContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
     private final String identifier;
 
-    public NameContainsKeywordsPredicate(List<String> keywords, String identifier) {
+    /**
+     * Constructor a {@code ContainsKeywordsPredicate} with only keywords.
+     *
+     * @param keywords Keywords to filter the contact list for.
+     */
+    public ContainsKeywordsPredicate(List<String> keywords) {
+        this.keywords = keywords;
+        this.identifier = "name";
+    }
+
+    /**
+     * Constructor a {@code ContainsKeywordsPredicate} with keywords and specific identifier.
+     *
+     * @param keywords Keywords to filter the contact list for.
+     * @param identifier Identifier to determine whether to filter contact list by name or ID.
+     */
+    public ContainsKeywordsPredicate(List<String> keywords, String identifier) {
         this.keywords = keywords;
         this.identifier = identifier;
     }
@@ -36,11 +52,11 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof NameContainsKeywordsPredicate)) {
+        if (!(other instanceof ContainsKeywordsPredicate)) {
             return false;
         }
 
-        NameContainsKeywordsPredicate otherNameContainsKeywordsPredicate = (NameContainsKeywordsPredicate) other;
+        ContainsKeywordsPredicate otherNameContainsKeywordsPredicate = (ContainsKeywordsPredicate) other;
         return keywords.equals(otherNameContainsKeywordsPredicate.keywords);
     }
 
