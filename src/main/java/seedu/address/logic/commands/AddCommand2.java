@@ -1,16 +1,19 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_QUESTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ANSWER;
+
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
+
 import seedu.address.logic.Messages2;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
+
 import seedu.address.model.Model2;
 import seedu.address.model.person.Card;
-import seedu.address.model.person.Person;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+
+
 
 /**
  * Adds a person to the address book.

@@ -7,18 +7,18 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.Command;
+
 import seedu.address.logic.commands.Command2;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.DeckParser;
-import seedu.address.logic.parser.DeckParser;
+
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.Model;
+
 import seedu.address.model.Model2;
 import seedu.address.model.ReadOnlyDeck;
 import seedu.address.model.person.Card;
-import seedu.address.storage.Storage;
+
 import seedu.address.storage.Storage2;
 
 /**

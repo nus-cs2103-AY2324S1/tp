@@ -1,16 +1,21 @@
 package seedu.address.logic.commands;
 
 import java.util.*;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages2;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model2;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Card;
+import seedu.address.model.person.Question;
+import seedu.address.model.person.Answer;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_QUESTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ANSWER;
+
 
 import static seedu.address.model.Model2.PREDICATE_SHOW_ALL_CARDS;
 
