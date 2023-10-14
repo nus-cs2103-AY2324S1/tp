@@ -8,8 +8,8 @@ import java.util.stream.Stream;
 
 import seedu.flashlingo.logic.commands.AddCommand;
 import seedu.flashlingo.logic.parser.exceptions.ParseException;
-import seedu.flashlingo.model.flashcard.OriginalWord;
-import seedu.flashlingo.model.flashcard.Translation;
+import seedu.flashlingo.model.flashcard.words.OriginalWord;
+import seedu.flashlingo.model.flashcard.words.TranslatedWord;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -32,7 +32,7 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ORIGINAL_WORD, PREFIX_TRANSLATED_WORD);
         OriginalWord word = ParserUtil.parseWord(argMultimap.getValue(PREFIX_ORIGINAL_WORD).get());
-        Translation translation = ParserUtil.parseTranslation(argMultimap.getValue(PREFIX_TRANSLATED_WORD).get());
+        TranslatedWord translation = ParserUtil.parseTranslation(argMultimap.getValue(PREFIX_TRANSLATED_WORD).get());
 
         return new AddCommand(word, translation);
     }

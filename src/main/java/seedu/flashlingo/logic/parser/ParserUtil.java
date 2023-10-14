@@ -9,8 +9,8 @@ import java.util.Set;
 import seedu.flashlingo.commons.core.index.Index;
 import seedu.flashlingo.commons.util.StringUtil;
 import seedu.flashlingo.logic.parser.exceptions.ParseException;
-import seedu.flashlingo.model.flashcard.OriginalWord;
-import seedu.flashlingo.model.flashcard.Translation;
+import seedu.flashlingo.model.flashcard.words.OriginalWord;
+import seedu.flashlingo.model.flashcard.words.TranslatedWord;
 import seedu.flashlingo.model.person.Address;
 import seedu.flashlingo.model.person.Email;
 import seedu.flashlingo.model.person.Name;
@@ -136,9 +136,9 @@ public class ParserUtil {
     /**
      * Parses {@code String word} into a {@code Translation}.
      */
-    public static Translation parseTranslation(String word) {
+    public static TranslatedWord parseTranslation(String word) {
         requireNonNull(word);
-        final Translation tarWord = new Translation(word);
+        final TranslatedWord tarWord = new TranslatedWord(word);
         return tarWord;
     }
 }

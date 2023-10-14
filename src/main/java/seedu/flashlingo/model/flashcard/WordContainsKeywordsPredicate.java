@@ -18,8 +18,9 @@ public class WordContainsKeywordsPredicate implements Predicate<FlashCard> {
     @Override
     public boolean test(FlashCard flashCard) {
         return keywords.stream()
-          .anyMatch(keyword -> flashCard.getOriginalWord().getWord().toLowerCase().contains(keyword.toLowerCase())
-            || flashCard.getTranslatedWord().getWord().toLowerCase().contains(keyword.toLowerCase()));
+          .anyMatch(flashCard::hasKeyword);
+        //getOriginalWord().getWord().toLowerCase().contains(keyword.toLowerCase())
+            //|| flashCard.getTranslatedWord().getWord().toLowerCase().contains(keyword.toLowerCase()));
     }
 
     @Override
