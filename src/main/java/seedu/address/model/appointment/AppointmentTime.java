@@ -57,18 +57,17 @@ public class AppointmentTime {
      * @return True if the appointment is valid, false otherwise.
      */
     public static Boolean isValidTimeSlot(ObservableList<Appointment> appointmentList, Appointment appointment) {
-        LocalDateTime startDate = appointment.getStartTime();
-        LocalDateTime endDate = appointment.getEndTime();
+        LocalDateTime start = appointment.getStartTime();
+        LocalDateTime end = appointment.getEndTime();
 
         for (Appointment currentAppointment : appointmentList) {
-            LocalDateTime currentStartDate = currentAppointment.getStartTime();
-            LocalDateTime currentEndDate = currentAppointment.getEndTime();
-            // startDate or endDate is in between currentAppointment slot
-            // current Appointment slot is within new appointment slot
-            if (startDate.isEqual(currentStartDate) || endDate.isEqual(currentEndDate)
-                    || startDate.isAfter(currentStartDate) && startDate.isBefore(currentEndDate)
-                    || endDate.isAfter(currentStartDate) && endDate.isBefore(currentEndDate)
-                    || startDate.isBefore(currentStartDate) && endDate.isAfter(currentEndDate)) {
+            LocalDateTime currentStart = currentAppointment.getStartTime();
+            LocalDateTime currentEnd = currentAppointment.getEndTime();
+
+            if (start.isEqual(currentStart) || end.isEqual(currentEnd)
+                    || start.isAfter(currentStart) && start.isBefore(currentEnd)
+                    || end.isAfter(currentStart) && end.isBefore(currentEnd)
+                    || start.isBefore(currentStart) && end.isAfter(currentEnd)) {
                 return false;
             }
         }
@@ -85,7 +84,7 @@ public class AppointmentTime {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
+        return other == this
                 || (other instanceof AppointmentTime // instanceof handles nulls
                 && getStart().isEqual(((AppointmentTime) other).getStart()) // check same data fields
                 && getEnd().isEqual(((AppointmentTime) other).getEnd()));
@@ -98,7 +97,7 @@ public class AppointmentTime {
 
     @Override
     public String toString() {
-        return "START TIME: " + start + "\n END TIME: " + end;
+        return "START: " + start + "\n END: " + end;
     }
 
 }

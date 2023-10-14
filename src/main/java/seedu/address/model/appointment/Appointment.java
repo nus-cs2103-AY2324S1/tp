@@ -3,11 +3,10 @@ package seedu.address.model.appointment;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Objects;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
-import seedu.address.model.tag.Tag;
 
 /**
  * Represents an Appointment in the address book.
@@ -17,29 +16,17 @@ import seedu.address.model.tag.Tag;
 public class Appointment {
     private AppointmentTime appointmentTime;
     private Person patient;
-    private String patientString;
-    private Set<Tag> tags = new HashSet<>();
-    private Boolean isCompleted;
-    private Boolean isMissed;
 
     /**
      * Constructs an {@code Appointment}.
      *
      * @param appointmentTime The scheduled time for the appointment.
-     * @param patientString A string representation of the patient.
-     * @param tags A set of tags associated with the appointment.
-     * @param isCompleted Whether the appointment has been completed.
-     * @param isMissed Whether the appointment was missed by the patient.
+     * @param patient The patient whom the appointment is for.
      */
-    public Appointment(AppointmentTime appointmentTime, String patientString, Set<Tag> tags,
-                       Boolean isCompleted, Boolean isMissed) {
-        requireAllNonNull(appointmentTime, patientString, tags, isCompleted, isMissed);
+    public Appointment(AppointmentTime appointmentTime, Person patient) {
+        requireAllNonNull(appointmentTime);
         this.appointmentTime = appointmentTime;
         this.patient = null;
-        this.patientString = patientString;
-        this.isCompleted = isCompleted;
-        this.isMissed = isMissed;
-        this.tags.addAll(tags);
     }
 
     public AppointmentTime getAppointmentTime() {
@@ -58,15 +45,37 @@ public class Appointment {
         return this.patient;
     }
 
-    public String getPatientString() {
-        return this.patientString;
+    public String getPatientName() {
+        return this.patient.getName().fullName;
     }
 
-    public Boolean isMissed() {
-        return this.isMissed;
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Appointment)) {
+            return false;
+        }
+
+        Appointment otherAppointment = (Appointment) other;
+        return patient.equals(otherAppointment.patient)
+                && appointmentTime.equals(otherAppointment.appointmentTime);
     }
 
-    public Boolean isCompleted() {
-        return this.isCompleted;
+    @Override
+    public int hashCode() {
+        // use this method for custom fields hashing instead of implementing your own
+        return Objects.hash(patient, appointmentTime);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("patient", patient)
+                .add("appointmentTime", appointmentTime)
+                .toString();
     }
 }
