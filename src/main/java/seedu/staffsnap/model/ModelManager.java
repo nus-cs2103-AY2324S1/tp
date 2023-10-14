@@ -132,7 +132,7 @@ public class ModelManager implements Model {
 
     @Override
     public void updateSortedApplicantList(Descriptor descriptor) {
-        Applicant.setComparisonField(descriptor);
+        Applicant.setDescriptor(descriptor);
     }
 
     @Override

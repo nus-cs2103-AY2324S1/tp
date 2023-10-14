@@ -5,7 +5,6 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.staffsnap.commons.core.GuiSettings;
-import seedu.staffsnap.logic.commands.exceptions.CommandException;
 import seedu.staffsnap.model.applicant.Applicant;
 import seedu.staffsnap.model.applicant.Descriptor;
 
@@ -92,7 +91,6 @@ public interface Model {
     void updateFilteredApplicantList(Predicate<Applicant> predicate);
     /**
      * Updates the Descriptor for sorting Applicants.
-     * @ throws CommandException if an invalid field is given.
      */
-    void updateSortedApplicantList(Descriptor descriptor) throws CommandException;
+    void updateSortedApplicantList(Descriptor descriptor);
 }

@@ -120,7 +120,7 @@ public class Applicant implements Comparable<Applicant> {
      * Update the descriptor for all Applicants.
      * @param newDescriptor the new descriptor to sort Applicants by
      */
-    public static void setComparisonField(Descriptor newDescriptor) {
+    public static void setDescriptor(Descriptor newDescriptor) {
         descriptor = newDescriptor;
     }
 
