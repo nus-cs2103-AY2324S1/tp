@@ -135,7 +135,7 @@ public class ParserUtil {
     public static EventDescription parseEventDescription(String description) throws ParseException {
         requireNonNull(description);
         String trimmedDescription = description.trim();
-        if (trimmedDescription.isEmpty()) {
+        if (!EventDescription.isValid(description)) {
             throw new ParseException(EventDescription.MESSAGE_CONSTRAINTS);
         }
         return new EventDescription(trimmedDescription);

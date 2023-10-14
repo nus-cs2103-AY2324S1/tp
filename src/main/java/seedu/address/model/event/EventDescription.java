@@ -34,6 +34,17 @@ public class EventDescription {
     }
 
     /**
+     * Checks if the given string is a valid description for creating a EventDescription object.
+     *
+     * @param description description String to be checked.
+     * @return true if description is non-empty, false if it is empty.
+     */
+    public static boolean isValid(String description) {
+        requireNonNull(description);
+        return !description.isEmpty();
+    }
+
+    /**
      * Retrieve the underlying String of the description.
      *
      * @return String of the description.
@@ -41,6 +52,7 @@ public class EventDescription {
     public String getDescription() {
         return this.description;
     }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

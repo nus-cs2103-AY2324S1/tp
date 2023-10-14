@@ -38,7 +38,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        this.calendar = new Calendar();
+        calendar = new Calendar();
     }
 
     public ModelManager() {
@@ -121,14 +121,14 @@ public class ModelManager implements Model {
     //=========== Calendar ===================================================================================
     @Override
    public boolean canAddEvent(Event event) {
-        return this.calendar.canAddEvent(event);
+        return calendar.canAddEvent(event);
     }
 
     @Override
     public void addEvent(Event event) {
         requireAllNonNull(event);
 
-        this.calendar.addEvent(event);
+        calendar.addEvent(event);
     }
 
     //=========== Filtered Person List Accessors =============================================================

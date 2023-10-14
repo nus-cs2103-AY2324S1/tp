@@ -39,7 +39,7 @@ public class LogicManager implements Logic {
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        this.uniMateParser = new UniMateParser();
+        uniMateParser = new UniMateParser();
     }
 
     @Override

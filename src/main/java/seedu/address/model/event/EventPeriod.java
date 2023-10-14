@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Represents a period in time when an event will occur.
  */
-public class EventPeriod {
+public class EventPeriod implements Comparable<EventPeriod> {
     public static final String MESSAGE_CONSTRAINTS = "The start date and time and end date and time should "
             + "be in the format 'yyyy-MM-dd HH:mm' where:\n"
             + "    -'yyyy' is the year.\n"
@@ -91,6 +91,7 @@ public class EventPeriod {
      * @param other The EventPeriod to compare with.
      * @return 1 if this EventPeriod is after the other, -1 if it's before, 0 if they are the same.
      */
+    @Override
     public int compareTo(EventPeriod other) {
         requireNonNull(other);
         if (this.start.isBefore(other.start)) {

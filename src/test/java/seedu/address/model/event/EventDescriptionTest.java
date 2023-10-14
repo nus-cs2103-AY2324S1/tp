@@ -23,6 +23,17 @@ public class EventDescriptionTest {
     }
 
     @Test
+    public void isValidTest() {
+        assertThrows(NullPointerException.class, () -> EventDescription.isValid(null));
+
+        assertFalse(EventDescription.isValid(INVALID_DESCRIPTION));
+
+        assertTrue(EventDescription.isValid(VALID_DESCRIPTION));
+
+        assertTrue(EventDescription.isValid(VALID_UNUSED_DESCRIPTION));
+    }
+
+    @Test
     public void createUnusedDescriptionTest() {
         assertEquals(EventDescription.createUnusedDescription().getDescription(), VALID_UNUSED_DESCRIPTION);
 

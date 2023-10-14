@@ -21,9 +21,9 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses user input for address book component of application.
+ * Parses user input for UniMate.
  */
-public class UniMateParser extends ComponentParser {
+public class UniMateParser {
 
     /**
      * Used for initial separation of command word and args.
@@ -31,7 +31,13 @@ public class UniMateParser extends ComponentParser {
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
     private static final Logger logger = LogsCenter.getLogger(UniMateParser.class);
 
-    @Override
+    /**
+     * Parses a user input string into the appropriate command object.
+     *
+     * @param userInput The user input string to be parsed.
+     * @return A command object corresponding to the user's command.
+     * @throws ParseException If the user input cannot be parsed successfully.
+     */
     public Command parseCommand(String userInput) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
@@ -80,5 +86,4 @@ public class UniMateParser extends ComponentParser {
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-
 }
