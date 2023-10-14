@@ -99,7 +99,7 @@ public class UniquePersonList implements Iterable<Person> {
 
 
     //todo: more data protection. Maybe have two function. One for displaying and one for editing.
-    public Person getPersonByHashCode (int targetHashCode) {
+    public Person getPersonByHashCode(int targetHashCode) {
         Person foundPerson = null;
         for (Person p : internalList) {
             if (p.hashCode() == targetHashCode) {

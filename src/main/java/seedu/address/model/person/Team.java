@@ -1,18 +1,18 @@
 package seedu.address.model.person;
 
-import java.util.ArrayList;
-import java.util.List;
+//import java.util.ArrayList;
 import java.util.HashSet;
+//import java.util.List;
 import java.util.Set;
 
 /**
  * Represents a Team in the address book.
- * A Team consists of a TeamLeader and multiple Developers.
+ * An instance of Team consists of a TeamLeader and multiple Developers.
  */
 public class Team {
 
     private final int leaderHashCode;
-    private String TeamName = "unassigned";
+    private String teamName = "unassigned";
 
 
     //todo: set will ignore duplicated values, do we need to notify the user that he added a duplicate value or not?
