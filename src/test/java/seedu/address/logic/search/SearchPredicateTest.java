@@ -44,7 +44,7 @@ class SearchPredicateTest {
         FieldRanges expected = get(() -> {
             FieldRanges fr = new FieldRanges();
             fr.put("field A", new Range(0, 4));
-            fr.put("field B", new Range(0, 2));
+            fr.put("field B", new Range(0, 1));
             return fr;
         });
         FieldRanges actual = joinTest("lorem", "ut", "and");

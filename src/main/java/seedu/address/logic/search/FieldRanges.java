@@ -2,6 +2,7 @@ package seedu.address.logic.search;
 
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Set;
 
 
@@ -27,13 +28,15 @@ class FieldRanges extends HashMap<String, Range> {
     }
 
     public static FieldRanges union(FieldRanges a, FieldRanges b) {
-        if (a == null) {
-            return b;
+        if (a == null && b == null) {
+            return null;
+        } else if (a == null) {
+            return (FieldRanges) b.clone();
         } else if (b == null) {
-            return a;
+            return (FieldRanges) a.clone();
         }
         FieldRanges ranges = new FieldRanges();
-        Set<String> keys = a.keySet();
+        Set<String> keys = new HashSet<>(a.keySet());
         keys.addAll(b.keySet());
         for (String key : keys) {
             ranges.put(key, Range.union(a.get(key), b.get(key)));
@@ -63,7 +66,7 @@ class FieldRanges extends HashMap<String, Range> {
     @Override
     public int hashCode() {
         int result = super.hashCode();
-        result = 31 * result + (isMatch ? 1 : 0);
+        result = 3 * result + (isMatch ? 1 : 0);
         return result;
     }
 }

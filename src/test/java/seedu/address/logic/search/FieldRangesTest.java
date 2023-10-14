@@ -2,6 +2,9 @@ package seedu.address.logic.search;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class FieldRangesTest {
@@ -49,7 +52,6 @@ class FieldRangesTest {
         FieldRanges frB = new FieldRanges();
         frA.put("a", new Range(1,5));
         frB.put("b", new Range(3,8));
-        FieldRanges.union(frA, frB);
         FieldRanges actual = FieldRanges.union(frA, frB);
 
         FieldRanges expected = new FieldRanges();
@@ -61,7 +63,13 @@ class FieldRangesTest {
 
     @Test
     public void test_unionNulls() {
+        assertNull(FieldRanges.union(null, null));
 
+        FieldRanges fr = new FieldRanges();
+        fr.put("a", new Range(1,5));
+
+        assertEquals(FieldRanges.union(fr, null), FieldRanges.union(null, fr));
+        assertEquals(FieldRanges.union(fr, null), FieldRanges.union(null, fr));
     }
 
     @Test
@@ -85,6 +93,40 @@ class FieldRangesTest {
         expected.setIsMatch(true);
 
         assertEquals(expected, actual);
+    }
+
+    @Test
+    public void test_union_deepCopy() {
+        FieldRanges frA = new FieldRanges();
+        FieldRanges frB = new FieldRanges();
+        frA.put("a", new Range(1,5));
+        frB.put("a", new Range(1,5));
+        FieldRanges.union(frA, frB);
+        FieldRanges actual = FieldRanges.union(frA, frB);
+        actual.put("x", new Range(6, 10));
+        assertEquals(frA, frB);
+        assertNotEquals(frA, actual);
+        assertTrue(frA != frB && actual != frA && actual != frB);
+
+        actual = FieldRanges.union(null, frA);
+        assertTrue(actual != frA && actual != null);
+
+        actual = FieldRanges.union(frA, null);
+        assertTrue(actual != frA && actual != null);
+    }
+
+    @Test
+    public void test_hashCode() {
+        HashSet<Integer> hashSet = new HashSet<>();
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                FieldRanges newFr = new FieldRanges();
+                newFr.put("a", new Range(i, i+j));
+                int hash = newFr.hashCode();
+                assertFalse(hashSet.contains(hash));
+                hashSet.add(hash);
+            }
+        }
     }
 
 }
