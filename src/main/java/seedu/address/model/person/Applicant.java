@@ -1,14 +1,9 @@
-package seedu.address.model.applicant;
+package seedu.address.model.person;
 
 import java.util.HashSet;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
 
 /**
  * Represents an Applicant in the address book.

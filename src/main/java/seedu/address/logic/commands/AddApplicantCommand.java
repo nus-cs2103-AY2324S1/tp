@@ -8,7 +8,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.applicant.Applicant;
+import seedu.address.model.person.Applicant;
 
 /**
  * Adds an applicant to the address book.

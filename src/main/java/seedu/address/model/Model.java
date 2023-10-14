@@ -5,8 +5,8 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.applicant.Applicant;
-import seedu.address.model.member.Member;
+import seedu.address.model.person.Applicant;
+import seedu.address.model.person.Member;
 import seedu.address.model.person.Person;
 
 /**
