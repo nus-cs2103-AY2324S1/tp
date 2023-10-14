@@ -6,6 +6,8 @@ import static networkbook.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static networkbook.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static networkbook.logic.commands.CommandTestUtil.VALID_GRADUATING_YEAR_AMY;
 import static networkbook.logic.commands.CommandTestUtil.VALID_GRADUATING_YEAR_BOB;
+import static networkbook.logic.commands.CommandTestUtil.VALID_LINK_AMY;
+import static networkbook.logic.commands.CommandTestUtil.VALID_LINK_BOB;
 import static networkbook.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static networkbook.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static networkbook.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
@@ -14,8 +16,6 @@ import static networkbook.logic.commands.CommandTestUtil.VALID_SPECIALISATION_AM
 import static networkbook.logic.commands.CommandTestUtil.VALID_SPECIALISATION_BOB;
 import static networkbook.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static networkbook.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static networkbook.logic.commands.CommandTestUtil.VALID_LINK_AMY;
-import static networkbook.logic.commands.CommandTestUtil.VALID_LINK_BOB;
 
 import java.util.ArrayList;
 import java.util.Arrays;
