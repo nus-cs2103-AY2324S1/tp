@@ -3,7 +3,7 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.student.ClassNumber;
+import seedu.address.model.student.ClassDetails;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
@@ -28,7 +28,7 @@ public class StudentBuilder {
     private Email email;
 
     private StudentNumber studentNumber;
-    private ClassNumber classNumber;
+    private ClassDetails classDetails;
     private Set<Tag> tags;
 
     /**
@@ -39,7 +39,7 @@ public class StudentBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         studentNumber = new StudentNumber(DEFAULT_STUDENT_NUMBER);
-        classNumber = new ClassNumber(DEFAULT_CLASS_NUMBER);
+        classDetails = new ClassDetails(DEFAULT_CLASS_NUMBER);
         tags = new HashSet<>();
     }
 
@@ -51,7 +51,7 @@ public class StudentBuilder {
         phone = studentToCopy.getPhone();
         email = studentToCopy.getEmail();
         studentNumber = studentToCopy.getStudentNumber();
-        classNumber = studentToCopy.getClassNumber();
+        classDetails = studentToCopy.getClassDetails();
         tags = new HashSet<>(studentToCopy.getTags());
     }
 
@@ -80,10 +80,10 @@ public class StudentBuilder {
     }
 
     /**
-     * Sets the {@code ClassNumber} of the {@code Student} that we are building.
+     * Sets the {@code ClassDetails} of the {@code Student} that we are building.
      */
-    public StudentBuilder withClassNumber(String classNumber) {
-        this.classNumber = new ClassNumber(classNumber);
+    public StudentBuilder withClassDetails(String classDetails) {
+        this.classDetails = new ClassDetails(classDetails);
         return this;
     }
 
@@ -104,7 +104,7 @@ public class StudentBuilder {
     }
 
     public Student build() {
-        return new Student(name, phone, email, studentNumber, classNumber, tags);
+        return new Student(name, phone, email, studentNumber, classDetails, tags);
     }
 
 }

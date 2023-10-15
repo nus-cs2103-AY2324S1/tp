@@ -6,9 +6,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 /**
  * Represents a Student's Class Number
  * in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidClassNumber(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidClassDetails(String)}
  */
-public class ClassNumber {
+public class ClassDetails {
 
     public static final String MESSAGE_CONSTRAINTS = "Class number can take any values, and it should not be blank";
 
@@ -22,19 +22,19 @@ public class ClassNumber {
     /**
      * Constructs an {@code Class Number}.
      *
-     * @param classNumber A valid Class Number
+     * @param classDetails A valid Class Number
      *
      */
-    public ClassNumber(String classNumber) {
-        requireNonNull(classNumber);
-        checkArgument(isValidClassNumber(classNumber), MESSAGE_CONSTRAINTS);
-        value = classNumber;
+    public ClassDetails(String classDetails) {
+        requireNonNull(classDetails);
+        checkArgument(isValidClassDetails(classDetails), MESSAGE_CONSTRAINTS);
+        value = classDetails;
     }
 
     /**
      * Returns true if a given string is a valid class number.
      */
-    public static boolean isValidClassNumber(String test) {
+    public static boolean isValidClassDetails(String test) {
         return (test.matches(VALIDATION_REGEX));
     }
 
@@ -50,11 +50,11 @@ public class ClassNumber {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof ClassNumber)) {
+        if (!(other instanceof ClassDetails)) {
             return false;
         }
 
-        ClassNumber otherAddress = (ClassNumber) other;
+        ClassDetails otherAddress = (ClassDetails) other;
         return value.equals(otherAddress.value);
     }
 
