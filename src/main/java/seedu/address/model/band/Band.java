@@ -23,6 +23,9 @@ public class Band {
 
     private final Set<Musician> musicians = new HashSet<>();
 
+    /**
+     * Every field must be present and not null.
+     */
     public Band(Name name, Set<Tag> genreTags, Set<Musician> musicians) {
         requireAllNonNull(name, genreTags, musicians);
         this.name = name;
