@@ -18,13 +18,13 @@ public class ColoredTextEntry extends StackPane {
      */
     public ColoredTextEntry(String text, String color) {
         Text textNode = new Text(text);
-        textNode.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
-        Rectangle rectangle = new Rectangle(textNode.getLayoutBounds().getWidth() + 10,
+        textNode.setFont(Font.font("Segoe UI Semibold", FontWeight.BOLD, 10));
+        textNode.setFill(Color.WHITE);
+        Rectangle rectangle = new Rectangle(textNode.getLayoutBounds().getWidth() + 15,
                 textNode.getLayoutBounds().getHeight() + 10);
         rectangle.setArcWidth(20); // Customize the arc width to make it curved.
         rectangle.setArcHeight(20); // Customize the arc height to make it curved.
         rectangle.setFill(Color.web(color));
-
         getChildren().addAll(rectangle, textNode);
     }
 
