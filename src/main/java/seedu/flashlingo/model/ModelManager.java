@@ -22,6 +22,8 @@ public class ModelManager implements Model {
     private final Flashlingo flashlingo;
     private final UserPrefs userPrefs;
     private final FilteredList<FlashCard> filteredFlashCards;
+    private int numberOfFlashCards;
+    private int numberOfRememberedWords;
 
     /**
      * Initializes a ModelManager with the given flashlingo and userPrefs.
@@ -96,11 +98,13 @@ public class ModelManager implements Model {
     @Override
     public void deleteFlashCard(FlashCard target) {
         flashlingo.removeFlashCard(target);
+        this.numberOfFlashCards--;
     }
 
     @Override
     public void addFlashCard(FlashCard flashCard) {
         flashlingo.addFlashCard(flashCard);
+        this.numberOfFlashCards++;
         updateFilteredFlashCardList(PREDICATE_SHOW_ALL_FLASHCARDS);
     }
 
@@ -110,7 +114,18 @@ public class ModelManager implements Model {
 
         flashlingo.setFlashCard(target, editedFlashCard);
     }
-
+    @Override
+    public int getNumberOfFlashCards() {
+        return this.numberOfFlashCards;
+    }
+    @Override
+    public int getNumberOfRememberedWords(){
+        return this.numberOfRememberedWords;
+    }
+    @Override
+    public void incrementRememberedWords() {
+        this.numberOfRememberedWords++;
+    }
     //=========== Filtered Person List Accessors =============================================================
 
     /**

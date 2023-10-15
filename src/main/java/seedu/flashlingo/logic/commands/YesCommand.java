@@ -30,6 +30,7 @@ public class YesCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        model.incrementRememberedWords();
         return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
 
