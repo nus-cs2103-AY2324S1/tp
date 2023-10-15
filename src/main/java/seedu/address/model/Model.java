@@ -84,4 +84,10 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Updates the filter of the filtered person list to filter by the given {@code predicates}.
+     * @throws NullPointerException if any of the {@code predicates} is null.
+     */
+    void updateFilteredPersonList(Predicate<Person> predicate1, Predicate<Person> predicate2);
 }
