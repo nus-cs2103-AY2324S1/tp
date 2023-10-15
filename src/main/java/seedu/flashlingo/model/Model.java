@@ -85,4 +85,7 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredFlashCardList(Predicate<FlashCard> predicate);
+    int getNumberOfFlashCards();
+    int getNumberOfRememberedWords();
+    void incrementRememberedWords();
 }
