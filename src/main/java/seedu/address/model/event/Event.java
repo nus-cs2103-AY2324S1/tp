@@ -21,20 +21,29 @@ public abstract class Event {
 
     private final EventName name;
 
+    private final EventType eventType;
+
     /**
      * Constructor for the event with optional start and end time
+     * @param eventType type of the event
      * @param name name of the event
      * @param startDate start date of the event
      * @param startTime start time of the event
      * @param endDate end date of the event
      * @param endTime end time of the event
      */
-    public Event(EventName name, EventDate startDate, EventTime startTime, EventDate endDate, EventTime endTime) {
+    public Event(EventType eventType, EventName name, EventDate startDate, EventTime startTime,
+                 EventDate endDate, EventTime endTime) {
+        this.eventType = eventType;
         this.name = name;
         this.startDate = startDate;
         this.startTime = startTime;
         this.endDate = endDate;
         this.endTime = endTime;
+    }
+
+    public EventType getEventType() {
+        return this.eventType;
     }
 
     /**

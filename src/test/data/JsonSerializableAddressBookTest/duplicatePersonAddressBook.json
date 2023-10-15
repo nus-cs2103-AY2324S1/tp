@@ -10,5 +10,12 @@
     "phone": "94351253",
     "email": "pauline@example.com",
     "address": "4th street"
+  } ],
+  "events" : [ {
+    "eventType": "meeting",
+    "name" : "tp",
+    "date" : "2023-10-30",
+    "startTime" : "1300",
+    "endTime" : "1400"
   } ]
 }

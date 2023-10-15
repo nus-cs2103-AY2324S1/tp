@@ -23,7 +23,7 @@ class JsonSerializableAddressBook {
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
-    private final List<JsonAdaptedMeeting> events = new ArrayList<>();
+    private final List<JsonAdaptedEvent> events = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given persons and meetings.
@@ -31,7 +31,7 @@ class JsonSerializableAddressBook {
      */
     @JsonCreator
     public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
-                                       @JsonProperty("events") List<JsonAdaptedMeeting> meetings) {
+                                       @JsonProperty("events") List<JsonAdaptedEvent> meetings) {
         this.persons.addAll(persons);
         this.events.addAll(meetings);
     }
@@ -43,7 +43,7 @@ class JsonSerializableAddressBook {
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
-        events.addAll(source.getEventList().stream().map(JsonAdaptedMeeting::new).collect(Collectors.toList()));
+        events.addAll(source.getEventList().stream().map(JsonAdaptedEvent::new).collect(Collectors.toList()));
     }
 
     /**
@@ -60,8 +60,8 @@ class JsonSerializableAddressBook {
             }
             addressBook.addPerson(person);
         }
-        for (JsonAdaptedMeeting jsonAdaptedMeeting : events) {
-            Event event = jsonAdaptedMeeting.toModelType();
+        for (JsonAdaptedEvent jsonAdaptedEvent : events) {
+            Event event = jsonAdaptedEvent.toModelType();
             addressBook.addEvent(event);
         }
         return addressBook;

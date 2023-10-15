@@ -4,5 +4,12 @@
     "phone": "9482424",
     "email": "invalid@email!3e",
     "address": "4th street"
+  } ],
+  "events" : [ {
+    "eventType": "meeting",
+    "name" : "tp",
+    "date" : "2023-10-30",
+    "startTime" : "1300",
+    "endTime" : "1400"
   } ]
 }

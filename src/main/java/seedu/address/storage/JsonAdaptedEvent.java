@@ -9,14 +9,17 @@ import seedu.address.model.event.Event;
 import seedu.address.model.event.EventDate;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.EventTime;
+import seedu.address.model.event.EventType;
 import seedu.address.model.event.Meeting;
 import seedu.address.model.person.Name;
 
 /**
- * Json-friendly version of {@link Meeting}.
+ * Json-friendly version of {@link Event}.
  */
-public class JsonAdaptedMeeting {
+public class JsonAdaptedEvent {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
+
+    private final String eventType;
 
     private final String name;
     private final String date;
@@ -27,8 +30,10 @@ public class JsonAdaptedMeeting {
      * Constructs a {@code JsonAdaptedMeeting} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedMeeting(@JsonProperty("name") String name, @JsonProperty("date") String date,
-                             @JsonProperty("startTime") String startTime, @JsonProperty("endTime") String endTime) {
+    public JsonAdaptedEvent(@JsonProperty("eventType") String eventType, @JsonProperty("name") String name,
+                            @JsonProperty("date") String date, @JsonProperty("startTime") String startTime,
+                            @JsonProperty("endTime") String endTime) {
+        this.eventType = eventType;
         this.name = name;
         this.date = date;
         this.startTime = startTime;
@@ -38,7 +43,8 @@ public class JsonAdaptedMeeting {
     /**
      * Converts a given {@code Meeting} into this class for Json use.
      */
-    public JsonAdaptedMeeting(Event source) {
+    public JsonAdaptedEvent(Event source) {
+        this.eventType = source.getEventType().toString();
         this.name = source.getName().name;
         this.date = source.getStartDate().toString();
         this.startTime = source.getStartTime().toString();
@@ -50,7 +56,7 @@ public class JsonAdaptedMeeting {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
-    public Meeting toModelType() throws IllegalValueException {
+    public Event toModelType() throws IllegalValueException {
 
         if (this.name == null) {
             throw new IllegalValueException(
@@ -80,12 +86,14 @@ public class JsonAdaptedMeeting {
         }
         final EventTime modelEventEndTime = new EventTime(this.endTime); // Accept null and a valid time
 
-        return new Meeting(modelName, modelEventDate, modelEventStartTime, modelEventEndTime);
+        // no other events for now
+        return new Meeting(new EventType("meeting"), modelName, modelEventDate, modelEventStartTime, modelEventEndTime);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
+                .add("event_type", this.eventType)
                 .add("name", this.name)
                 .add("date", this.date)
                 .add("start_time", this.startTime == null ? "" : this.startTime)

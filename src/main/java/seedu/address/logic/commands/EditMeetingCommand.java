@@ -18,6 +18,7 @@ import seedu.address.model.event.Event;
 import seedu.address.model.event.EventDate;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.EventTime;
+import seedu.address.model.event.EventType;
 import seedu.address.model.event.Meeting;
 
 
@@ -26,6 +27,8 @@ import seedu.address.model.event.Meeting;
  */
 public class EditMeetingCommand extends Command {
     public static final String COMMAND_WORD = "edit_meeting";
+
+    public static final String EVENT_TYPE = "meeting";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the meeting identified "
             + "by the index number used in the displayed meeting list. "
@@ -88,7 +91,7 @@ public class EditMeetingCommand extends Command {
         EventTime updatedStartTime = editMeetingDescriptor.getStartTime().orElse(meetingToEdit.getStartTime());
         EventTime updatedEndTime = editMeetingDescriptor.getEndTime().orElse(meetingToEdit.getEndTime());
 
-        return new Meeting(updatedName, updatedDate, updatedStartTime, updatedEndTime);
+        return new Meeting(new EventType(EVENT_TYPE), updatedName, updatedDate, updatedStartTime, updatedEndTime);
     }
 
     /**

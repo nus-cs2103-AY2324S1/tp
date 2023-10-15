@@ -5,14 +5,16 @@ package seedu.address.model.event;
  */
 public class Meeting extends Event {
 
+    private static final String EVENT_TYPE = "meeting";
+
     /**
      * Constructor for the meeting with optional start and end time
      * @param date date of the meeting
      * @param startTime start time of the meeting
      * @param endTime end time of the meeting
      */
-    public Meeting(EventName name, EventDate date, EventTime startTime, EventTime endTime) {
-        super(name, date, startTime, date, endTime);
+    public Meeting(EventType eventType, EventName name, EventDate date, EventTime startTime, EventTime endTime) {
+        super(eventType, name, date, startTime, date, endTime);
     }
 
     @Override
