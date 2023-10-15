@@ -30,7 +30,7 @@ Tutorium is a **desktop application for tuition centre staff** to obtain data an
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/12345678 e/johnd@example.com a/John street, block 123, #01-01 g/M l/2 m/KR mrt s/English` : Adds a contact named `John Doe` to the Address Book.
 
    * `delete John Doe` : Deletes the contact with matching name in the current list.
 
@@ -79,7 +79,7 @@ Format: `help`
 
 Adds a student's data to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS g/GENDER l/SEC_LEVEL m/MRT STATION [s/SUBJECT]…​`
 
 <box type="tip" seamless>
 
@@ -87,8 +87,8 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 </box>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/Chemistry`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/Mathematics`
+* `add n/John Doe p/12345678 e/johnd@example.com a/John street, block 123, #01-01 g/M l/2 m/KR mrt s/Chemistry`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 g/F l/2 m/KR mrt s/Mathematics`
   ![result for 'add n/Joe p/32101234 e/joe@example.com a/John street, block 123, #01-01 t/Math'](images/ug_images/addedJoeResult.png)
 
 ### Editing a student's data : `edit`
@@ -127,15 +127,13 @@ Examples:
 
 Deletes data of a specified student.
 
-Format: `delete n/[NAME]` or `delete e/[EMAIL]`
+Format: `delete n/[NAME]`
 
-* Deletes the student with the specified `NAME` or `EMAIL`.
-* `NAME`: The deletion is case-insensitive. e.g `joe` will match `Joe`.
-* `EMAIL`: username@domain
+* Deletes the student with the specified `NAME`.
+* `NAME`: The deletion is case-sensitive.
 
 Examples:
 * `delete n/John Doe`
-* `delete e/johndoe@gmail.com`
 <br></br>
 * `delete n/Chuan Yuan` deletes student data that contains name `Chuan Yuan`
   ![result for 'delete Chuan Yuan'](images/ug_images/deleteJoeResult.png)

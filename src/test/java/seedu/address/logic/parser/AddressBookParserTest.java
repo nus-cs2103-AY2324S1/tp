@@ -44,9 +44,10 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_delete() throws Exception {
+        Student person = new PersonBuilder().build();
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+                DeleteCommand.COMMAND_WORD + " " + PersonBuilder.DEFAULT_NAME);
+        assertEquals(new DeleteCommand(person.getName()), command);
     }
 
     @Test
