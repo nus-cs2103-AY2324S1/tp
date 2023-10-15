@@ -52,6 +52,19 @@ public class Messages {
      */
 
     public static String format(Transaction transaction) {
-        return "";
+        final StringBuilder builder = new StringBuilder();
+        builder.append(transaction.getTransactionId())
+                // TODO add back in when we have type, date, and have a reference to person
+                // .append("; Type: ")
+                // .append(transaction.getType())
+                .append("; Description: ")
+                .append(transaction.getDescription())
+                .append("; Amount: ")
+                .append(transaction.getAmount());
+        // .append("; Date: ")
+        // .append(transaction.getDate())
+        // .append("; Staff: ")
+        // .append(transaction.getPerson().getName());
+        return builder.toString();
     }
 }

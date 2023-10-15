@@ -3,6 +3,7 @@ package transact.logic.commands;
 import static transact.logic.commands.CommandTestUtil.assertCommandFailure;
 import static transact.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static transact.testutil.TypicalPersons.getTypicalAddressBook;
+import static transact.testutil.TypicalTransactions.getTypicalTransactionBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,14 +25,14 @@ public class AddStaffCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalAddressBook(), getTypicalTransactionBook(), new UserPrefs());
     }
 
     @Test
     public void execute_newPerson_success() {
         Person validPerson = new PersonBuilder().build();
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), model.getTransactionBook(), new UserPrefs());
         expectedModel.addPerson(validPerson);
 
         assertCommandSuccess(new AddStaffCommand(validPerson), model,

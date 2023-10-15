@@ -4,6 +4,7 @@ import static transact.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static transact.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static transact.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static transact.testutil.TypicalPersons.getTypicalAddressBook;
+import static transact.testutil.TypicalTransactions.getTypicalTransactionBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,8 +24,8 @@ public class ViewCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalAddressBook(), getTypicalTransactionBook(), new UserPrefs());
+        expectedModel = new ModelManager(model.getAddressBook(), model.getTransactionBook(), new UserPrefs());
     }
 
     @Test

@@ -21,6 +21,7 @@ import transact.logic.commands.exceptions.CommandException;
 import transact.model.AddressBook;
 import transact.model.Model;
 import transact.model.ReadOnlyAddressBook;
+import transact.model.ReadOnlyTransactionBook;
 import transact.model.ReadOnlyUserPrefs;
 import transact.model.person.Person;
 import transact.model.transaction.Transaction;
@@ -135,6 +136,21 @@ public class AddStaffCommandTest {
         }
 
         @Override
+        public Path getTransactionBookFilePath() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setTransactionBookFilePath(Path transactionBookFilePath) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setTransactionBook(ReadOnlyTransactionBook transactionBook) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
@@ -151,22 +167,27 @@ public class AddStaffCommandTest {
 
         @Override
         public boolean hasTransaction(Transaction transaction) {
-            return false;
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void deleteTransaction(Transaction transaction) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void addTransaction(Transaction transaction) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void setTransaction(Transaction target, Transaction editedTransaction) {
+            throw new AssertionError("This method should not be called.");
+        }
 
+        @Override
+        public ReadOnlyTransactionBook getTransactionBook() {
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -203,7 +224,7 @@ public class AddStaffCommandTest {
         @Override
         public boolean hasPerson(Person person) {
             requireNonNull(person);
-            return this.person.isSamePerson(person);
+            return this.person.isSameEntry(person);
         }
     }
 
@@ -216,7 +237,7 @@ public class AddStaffCommandTest {
         @Override
         public boolean hasPerson(Person person) {
             requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSamePerson);
+            return personsAdded.stream().anyMatch(person::isSameEntry);
         }
 
         @Override
