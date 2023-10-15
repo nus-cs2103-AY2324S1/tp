@@ -7,7 +7,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.LookupCommand;
-import seedu.address.model.person.PersonContainsKeywordsPredicate;
+import seedu.address.model.student.StudentContainsKeywordsPredicate;
 
 public class LookupCommandParserTest {
 
@@ -22,7 +22,7 @@ public class LookupCommandParserTest {
     @Test
     public void parse_validArgs_returnsLookupCommand() {
         LookupCommand expectedLookupCommand =
-                new LookupCommand(new PersonContainsKeywordsPredicate(null,
+                new LookupCommand(new StudentContainsKeywordsPredicate(null,
                         null, "alice", "12345", null, null));
 
         // different ordering

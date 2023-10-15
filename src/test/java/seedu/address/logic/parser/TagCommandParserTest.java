@@ -16,10 +16,10 @@ import java.util.HashSet;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.TagCommand;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.StudentNumber;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentNumber;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.StudentBuilder;
 
 public class TagCommandParserTest {
 
@@ -59,7 +59,7 @@ public class TagCommandParserTest {
         assertParseFailure(parser, VALID_STUDENT_NUMBER_AMY
             + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
 
-        // while parsing {@code PREFIX_TAGS} alone will reset the tags of the {@code Person} being edited,
+        // while parsing {@code PREFIX_TAGS} alone will reset the tags of the {@code Student} being edited,
         // parsing it together with a valid tag results in error
         assertParseFailure(parser, VALID_STUDENT_NUMBER_AMY
                 + TAG_DESC_FRIEND + TAG_DESC_HUSBAND + TAG_EMPTY,
@@ -76,9 +76,9 @@ public class TagCommandParserTest {
     public void parse_allFieldsSpecified_success() {
         String userInput = VALID_STUDENT_NUMBER_AMY + TAG_DESC_HUSBAND + TAG_DESC_FRIEND;
 
-        Person person = new PersonBuilder().withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        Student student = new StudentBuilder().withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
         TagCommand expectedCommand = new TagCommand(
-            new StudentNumber(VALID_STUDENT_NUMBER_AMY), person.getTags());
+            new StudentNumber(VALID_STUDENT_NUMBER_AMY), student.getTags());
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }

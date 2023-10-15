@@ -8,7 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIENDS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_SMART;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
 
 import java.util.Set;
 
@@ -19,12 +19,12 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.StudentNumber;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentNumber;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.TypicalPersons;
+import seedu.address.testutil.StudentBuilder;
+import seedu.address.testutil.TypicalStudents;
 
 
 public class AddTagCommandTest {
@@ -33,20 +33,20 @@ public class AddTagCommandTest {
 
     @Test
     public void execute_addTag_success() {
-        Person taggedStudent = new PersonBuilder(TypicalPersons.ALICE)
+        Student taggedStudent = new StudentBuilder(TypicalStudents.ALICE)
             .withTags(VALID_TAG_FRIENDS, VALID_TAG_SMART).build();
         Set<Tag> tagToAdd = SampleDataUtil.getTagSet(VALID_TAG_SMART);
-        AddTagCommand addTagCommand = new AddTagCommand(TypicalPersons.ALICE.getStudentNumber(),
+        AddTagCommand addTagCommand = new AddTagCommand(TypicalStudents.ALICE.getStudentNumber(),
             tagToAdd);
 
         String expectedMessage = String.format(TagCommand.MESSAGE_ADD_TAG_SUCCESS,
             taggedStudent.getName()) + tagToAdd;
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), taggedStudent);
+        expectedModel.setStudent(model.getFilteredStudentList().get(0), taggedStudent);
 
         assertCommandSuccess(addTagCommand, model, expectedMessage, expectedModel);
-        assertEquals(taggedStudent.getTags(), model.getFilteredPersonList().get(0).getTags());
+        assertEquals(taggedStudent.getTags(), model.getFilteredStudentList().get(0).getTags());
     }
 
     @Test
@@ -59,10 +59,10 @@ public class AddTagCommandTest {
 
     @Test
     public void equals() {
-        final AddTagCommand standardCommand = new AddTagCommand(TypicalPersons.ALICE.getStudentNumber(),
-            TypicalPersons.ALICE.getTags());
+        final AddTagCommand standardCommand = new AddTagCommand(TypicalStudents.ALICE.getStudentNumber(),
+            TypicalStudents.ALICE.getTags());
 
-        AddTagCommand commandWithSameValue = new AddTagCommand(TypicalPersons.ALICE.getStudentNumber(),
+        AddTagCommand commandWithSameValue = new AddTagCommand(TypicalStudents.ALICE.getStudentNumber(),
             SampleDataUtil.getTagSet(VALID_TAG_FRIENDS));
 
         assertTrue(standardCommand.equals(commandWithSameValue));
@@ -77,9 +77,9 @@ public class AddTagCommandTest {
     @Test
     public void toStringMethod() {
         AddTagCommand addTagCommand = new AddTagCommand(
-            TypicalPersons.ALICE.getStudentNumber(),
-            TypicalPersons.ALICE.getTags());
-        String expected = AddTagCommand.class.getCanonicalName() + "{tags=" + TypicalPersons.ALICE.getTags() + "}";
+            TypicalStudents.ALICE.getStudentNumber(),
+            TypicalStudents.ALICE.getTags());
+        String expected = AddTagCommand.class.getCanonicalName() + "{tags=" + TypicalStudents.ALICE.getTags() + "}";
         assertEquals(expected, addTagCommand.toString());
     }
 }

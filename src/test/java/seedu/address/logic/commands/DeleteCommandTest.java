@@ -14,9 +14,9 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.StudentNumber;
-import seedu.address.testutil.TypicalPersons;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentNumber;
+import seedu.address.testutil.TypicalStudents;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -24,18 +24,18 @@ import seedu.address.testutil.TypicalPersons;
  */
 public class DeleteCommandTest {
 
-    private Model model = new ModelManager(TypicalPersons.getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(TypicalStudents.getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_validStudentNumber_success() {
-        Person personToDelete = TypicalPersons.getTypicalPersons().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(personToDelete.getStudentNumber());
+        Student studentToDelete = TypicalStudents.getTypicalPersons().get(INDEX_FIRST_PERSON.getZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(studentToDelete.getStudentNumber());
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-                Messages.format(personToDelete));
+                Messages.format(studentToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deletePerson(personToDelete);
+        expectedModel.deleteStudent(studentToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
@@ -50,8 +50,8 @@ public class DeleteCommandTest {
 
     @Test
     public void equals() {
-        Person first = TypicalPersons.getTypicalPersons().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person second = TypicalPersons.getTypicalPersons().get(INDEX_SECOND_PERSON.getZeroBased());
+        Student first = TypicalStudents.getTypicalPersons().get(INDEX_FIRST_PERSON.getZeroBased());
+        Student second = TypicalStudents.getTypicalPersons().get(INDEX_SECOND_PERSON.getZeroBased());
         DeleteCommand deleteFirstCommand = new DeleteCommand(first.getStudentNumber());
         DeleteCommand deleteSecondCommand = new DeleteCommand(second.getStudentNumber());
 
@@ -68,13 +68,13 @@ public class DeleteCommandTest {
         // null -> returns false
         assertFalse(deleteFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different student -> returns false
         assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
     }
 
     @Test
     public void toStringMethod() {
-        Person target = TypicalPersons.getTypicalPersons().get(INDEX_FIRST_PERSON.getZeroBased());
+        Student target = TypicalStudents.getTypicalPersons().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(target.getStudentNumber());
         String expected = DeleteCommand.class.getCanonicalName() + "{targetStudentNumber="
                 + target.getStudentNumber() + "}";

@@ -9,8 +9,8 @@ import java.util.Set;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.StudentNumber;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentNumber;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -49,21 +49,21 @@ public class TagCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Student> lastShownList = model.getFilteredStudentList();
 
-        Person studentToTag;
+        Student studentToTag;
         try {
             studentToTag = getStudentByStudentNumber(lastShownList, studentNumber);
         } catch (NullPointerException ive) {
             throw new CommandException(MESSAGE_STUDENT_DOES_NOT_EXIST);
         }
 
-        Person editedStudent = new Person(
+        Student editedStudent = new Student(
                 studentToTag.getName(), studentToTag.getPhone(), studentToTag.getEmail(),
                 studentToTag.getStudentNumber(), studentToTag.getClassNumber(), this.tags);
 
-        model.setPerson(studentToTag, editedStudent);
-        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        model.setStudent(studentToTag, editedStudent);
+        model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(generateSuccessMessage(editedStudent));
     }
@@ -73,12 +73,12 @@ public class TagCommand extends Command {
      * the tag is added to or removed from
      * {@code studentToTag}.
      */
-    private String generateSuccessMessage(Person studentToTag) {
+    private String generateSuccessMessage(Student studentToTag) {
         String message = !tags.isEmpty() ? MESSAGE_REPLACE_ALL_TAG_SUCCESS : MESSAGE_DELETE_ALL_TAG_SUCCESS;
         return String.format(message, studentToTag.getName()) + studentToTag.getTags();
     }
 
-    protected Person getStudentByStudentNumber(List<Person> list, StudentNumber studentNumber) {
+    protected Student getStudentByStudentNumber(List<Student> list, StudentNumber studentNumber) {
         return list.stream()
             .filter(student -> student.getStudentNumber().equals(studentNumber))
             .findAny().orElseThrow(NullPointerException::new);

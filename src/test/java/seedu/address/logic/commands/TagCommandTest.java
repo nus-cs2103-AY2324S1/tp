@@ -8,7 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIENDS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_SMART;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,12 +20,12 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.StudentNumber;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentNumber;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.TypicalPersons;
+import seedu.address.testutil.StudentBuilder;
+import seedu.address.testutil.TypicalStudents;
 
 
 /**
@@ -37,7 +37,7 @@ public class TagCommandTest {
 
     @Test
     public void execute_replaceAllTag_success() {
-        Person studentToTag = new PersonBuilder(TypicalPersons.ALICE)
+        Student studentToTag = new StudentBuilder(TypicalStudents.ALICE)
             .withTags(VALID_TAG_SMART, VALID_TAG_FRIENDS).build();
         Set<Tag> replacedTags = SampleDataUtil.getTagSet(VALID_TAG_SMART, VALID_TAG_FRIENDS);
         TagCommand tagCommand = new TagCommand(
@@ -48,14 +48,14 @@ public class TagCommandTest {
                 studentToTag.getName()) + replacedTags;
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), studentToTag);
+        expectedModel.setStudent(model.getFilteredStudentList().get(0), studentToTag);
 
         assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_deleteAllTag_success() {
-        Person studentToRemoveTag = new PersonBuilder(TypicalPersons.CARL).build();
+        Student studentToRemoveTag = new StudentBuilder(TypicalStudents.CARL).build();
         Set<Tag> emptyTag = new HashSet<>();
         TagCommand tagCommand = new TagCommand(
             studentToRemoveTag.getStudentNumber(),
@@ -65,7 +65,7 @@ public class TagCommandTest {
                 studentToRemoveTag.getName()) + emptyTag;
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(2), studentToRemoveTag);
+        expectedModel.setStudent(model.getFilteredStudentList().get(2), studentToRemoveTag);
 
         assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel);
     }
@@ -74,7 +74,7 @@ public class TagCommandTest {
     public void execute_noStudentWithStudentNumber_failure() {
         TagCommand tagCommand = new TagCommand(
             new StudentNumber(VALID_STUDENT_NUMBER_AMY),
-            TypicalPersons.ALICE.getTags());
+            TypicalStudents.ALICE.getTags());
 
         assertCommandFailure(tagCommand, model, Messages.MESSAGE_STUDENT_DOES_NOT_EXIST);
     }
@@ -82,11 +82,11 @@ public class TagCommandTest {
     @Test
     public void equals() {
         final TagCommand standardCommand = new TagCommand(
-            TypicalPersons.ALICE.getStudentNumber(),
-            TypicalPersons.ALICE.getTags());
+            TypicalStudents.ALICE.getStudentNumber(),
+            TypicalStudents.ALICE.getTags());
 
         TagCommand commandWithSameValue = new TagCommand(
-            TypicalPersons.ALICE.getStudentNumber(),
+            TypicalStudents.ALICE.getStudentNumber(),
             SampleDataUtil.getTagSet(VALID_TAG_FRIENDS));
 
         assertTrue(standardCommand.equals(commandWithSameValue));
@@ -101,9 +101,9 @@ public class TagCommandTest {
     @Test
     public void toStringMethod() {
         TagCommand tagCommand = new TagCommand(
-            TypicalPersons.ALICE.getStudentNumber(),
-            TypicalPersons.ALICE.getTags());
-        String expected = TagCommand.class.getCanonicalName() + "{tags=" + TypicalPersons.ALICE.getTags() + "}";
+            TypicalStudents.ALICE.getStudentNumber(),
+            TypicalStudents.ALICE.getTags());
+        String expected = TagCommand.class.getCanonicalName() + "{tags=" + TypicalStudents.ALICE.getTags() + "}";
         assertEquals(expected, tagCommand.toString());
     }
 }
