@@ -1,16 +1,16 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages2.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteCommand2;
 import seedu.address.logic.commands.PractiseCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 
 
 /**
- * Parses input arguments and creates a new DeleteCommand object
+ * Parses input arguments and creates a new ParserCommand object
  */
 public class PractiseCommandParser implements Parser2<PractiseCommand> {
 
@@ -25,7 +25,7 @@ public class PractiseCommandParser implements Parser2<PractiseCommand> {
             return new PractiseCommand(index);
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand2.MESSAGE_USAGE), pe);
         }
     }
 

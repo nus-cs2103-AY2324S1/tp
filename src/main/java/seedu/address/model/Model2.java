@@ -46,7 +46,9 @@ public interface Model2 {
     void setDeckFilePath(Path cardFilePath);
 
 
-    /** Returns the Deck */
+    /**
+     * Returns the Deck
+     */
     ReadOnlyDeck getDeck();
 
     /**

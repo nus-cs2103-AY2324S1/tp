@@ -8,14 +8,14 @@ public class UserPrefsTest {
 
     @Test
     public void setGuiSettings_nullGuiSettings_throwsNullPointerException() {
-        UserPrefs userPref = new UserPrefs();
+        UserPrefs2 userPref = new UserPrefs2();
         assertThrows(NullPointerException.class, () -> userPref.setGuiSettings(null));
     }
 
     @Test
     public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
-        UserPrefs userPrefs = new UserPrefs();
-        assertThrows(NullPointerException.class, () -> userPrefs.setAddressBookFilePath(null));
+        UserPrefs2 userPrefs = new UserPrefs2();
+        assertThrows(NullPointerException.class, () -> userPrefs.setDeckFilePath(null));
     }
 
 }
