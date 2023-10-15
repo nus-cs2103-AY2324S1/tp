@@ -55,8 +55,8 @@ public class StudentNumber {
             return false;
         }
 
-        StudentNumber otherAddress = (StudentNumber) other;
-        return value.equals(otherAddress.value);
+        StudentNumber otherStudentNumber = (StudentNumber) other;
+        return value.equals(otherStudentNumber.value);
     }
 
     @Override
