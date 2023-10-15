@@ -23,6 +23,7 @@ import seedu.staffsnap.model.Model;
 import seedu.staffsnap.model.ReadOnlyApplicantBook;
 import seedu.staffsnap.model.ReadOnlyUserPrefs;
 import seedu.staffsnap.model.applicant.Applicant;
+import seedu.staffsnap.model.applicant.Descriptor;
 import seedu.staffsnap.testutil.ApplicantBuilder;
 
 public class AddCommandTest {
@@ -156,6 +157,11 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredApplicantList(Predicate<Applicant> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateSortedApplicantList(Descriptor descriptor) {
             throw new AssertionError("This method should not be called.");
         }
     }

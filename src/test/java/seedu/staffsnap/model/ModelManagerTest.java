@@ -15,6 +15,8 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.staffsnap.commons.core.GuiSettings;
+import seedu.staffsnap.model.applicant.Applicant;
+import seedu.staffsnap.model.applicant.Descriptor;
 import seedu.staffsnap.model.applicant.NameContainsKeywordsPredicate;
 import seedu.staffsnap.testutil.ApplicantBookBuilder;
 
@@ -93,6 +95,11 @@ public class ModelManagerTest {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredApplicantList().remove(0));
     }
 
+    @Test
+    public void updateSortedApplicantList_setDescriptor_changesDescriptor() {
+        modelManager.updateSortedApplicantList(Descriptor.PHONE);
+        assert(Applicant.getDescriptor() == Descriptor.PHONE);
+    }
     @Test
     public void equals() {
         ApplicantBook applicantBook = new ApplicantBookBuilder().withApplicant(ALICE).withApplicant(BENSON).build();

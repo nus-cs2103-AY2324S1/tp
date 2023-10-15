@@ -14,6 +14,7 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.staffsnap.logic.parser.exceptions.ParseException;
+import seedu.staffsnap.model.applicant.Descriptor;
 import seedu.staffsnap.model.applicant.Email;
 import seedu.staffsnap.model.applicant.Name;
 import seedu.staffsnap.model.applicant.Phone;
@@ -26,6 +27,7 @@ public class ParserUtilTest {
     private static final String INVALID_POSITION = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_INTERVIEW = "#friend";
+    private static final String INVALID_DESCRIPTOR = "nam";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -33,6 +35,7 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_INTERVIEW_1 = "friend";
     private static final String VALID_INTERVIEW_2 = "neighbour";
+    private static final String VALID_DESCRIPTOR = "name";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -195,5 +198,28 @@ public class ParserUtilTest {
                 Arrays.asList(new Interview(VALID_INTERVIEW_1), new Interview(VALID_INTERVIEW_2)));
 
         assertEquals(expectedInterviewSet, actualInterviewSet);
+    }
+
+    @Test
+    public void parseDescriptor_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDescriptor((String) null));
+    }
+
+    @Test
+    public void parseDescriptor_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDescriptor(INVALID_DESCRIPTOR));
+    }
+
+    @Test
+    public void parseDescriptor_validValueWithoutWhitespace_returnsName() throws Exception {
+        Descriptor expectedDescriptor = Descriptor.NAME;
+        assertEquals(expectedDescriptor, ParserUtil.parseDescriptor(VALID_DESCRIPTOR));
+    }
+
+    @Test
+    public void parseDescriptor_validValueWithWhitespace_returnsTrimmedName() throws Exception {
+        String descriptorWithWhitespace = WHITESPACE + VALID_DESCRIPTOR + WHITESPACE;
+        Descriptor expectedDescriptor = Descriptor.NAME;
+        assertEquals(expectedDescriptor, ParserUtil.parseDescriptor(descriptorWithWhitespace));
     }
 }

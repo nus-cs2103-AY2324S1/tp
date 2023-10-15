@@ -7,7 +7,7 @@ import static seedu.staffsnap.commons.util.AppUtil.checkArgument;
  * Represents an Applicant's name in the applicant book.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
-public class Name {
+public class Name implements Comparable<Name> {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Names should only contain alphanumeric characters and spaces, and it should not be blank";
@@ -64,4 +64,14 @@ public class Name {
         return fullName.hashCode();
     }
 
+    /**
+     * @param o the object to be compared.
+     * @return the value 0 if the argument Name is equal to this Name; a value less than 0 if this Name is
+     *      lexicographically less than the Name argument; and a value greater than 0 if this string is
+     *      lexicographically greater than the Name argument.
+     */
+    @Override
+    public int compareTo(Name o) {
+        return this.fullName.compareTo(o.fullName);
+    }
 }

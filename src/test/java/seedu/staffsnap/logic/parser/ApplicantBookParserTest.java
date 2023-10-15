@@ -22,6 +22,7 @@ import seedu.staffsnap.logic.commands.ExitCommand;
 import seedu.staffsnap.logic.commands.FindCommand;
 import seedu.staffsnap.logic.commands.HelpCommand;
 import seedu.staffsnap.logic.commands.ListCommand;
+import seedu.staffsnap.logic.commands.SortCommand;
 import seedu.staffsnap.logic.parser.exceptions.ParseException;
 import seedu.staffsnap.model.applicant.Applicant;
 import seedu.staffsnap.model.applicant.NameContainsKeywordsPredicate;
@@ -92,9 +93,14 @@ public class ApplicantBookParserTest {
     }
 
     @Test
+    public void parseCommand_sort() throws Exception {
+        assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD + " " + "d/ name") instanceof SortCommand);
+    }
+
+    @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand(""));
+                -> parser.parseCommand(""));
     }
 
     @Test

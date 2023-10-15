@@ -6,13 +6,16 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.staffsnap.commons.core.GuiSettings;
 import seedu.staffsnap.model.applicant.Applicant;
-
+import seedu.staffsnap.model.applicant.Descriptor;
 /**
  * The API of the Model component.
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Applicant> PREDICATE_SHOW_ALL_APPLICANTS = unused -> true;
+
+    /** {@code Predicate} that always evaluate to false */
+    Predicate<Applicant> PREDICATE_HIDE_ALL_APPLICANTS = unused -> false;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -85,4 +88,8 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredApplicantList(Predicate<Applicant> predicate);
+    /**
+     * Updates the Descriptor for sorting Applicants.
+     */
+    void updateSortedApplicantList(Descriptor descriptor);
 }
