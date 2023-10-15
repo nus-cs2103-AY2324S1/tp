@@ -13,9 +13,9 @@ import seedu.flashlingo.model.person.Person;
 /**
  * Panel containing the list of persons.
  */
-public class PersonListPanel extends UiPart<Region> {
-    private static final String FXML = "PersonListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+public class FlashcardListPanel extends UiPart<Region> {
+    private static final String FXML = "FlashcardListPanel.fxml";
+    private final Logger logger = LogsCenter.getLogger(FlashcardListPanel.class);
 
     @FXML
     private ListView<Person> personListView;
@@ -23,7 +23,7 @@ public class PersonListPanel extends UiPart<Region> {
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public PersonListPanel(ObservableList<Person> personList) {
+    public FlashcardListPanel(ObservableList<Person> personList) {
         super(FXML);
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
@@ -41,7 +41,7 @@ public class PersonListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
+                setGraphic(new FlashcardBox(person, getIndex() + 1).getRoot());
             }
         }
     }
