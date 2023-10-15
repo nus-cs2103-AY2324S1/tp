@@ -1,6 +1,5 @@
 package seedu.address.ui;
 
-import java.util.Objects;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -223,10 +222,8 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
-            System.out.println("panel is " + commandResult.getPanel());
             if (commandResult.getPanel() != "") {
                 String newPanel = commandResult.getPanel();
-                System.out.println("show panel '" + newPanel+"'");
                 if (!newPanel.equals(activePanel)) {
                     hidePanels();
                     switch (newPanel) {
