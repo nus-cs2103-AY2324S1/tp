@@ -18,7 +18,6 @@ import seedu.address.model.event.Event;
 import seedu.address.model.event.EventDate;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.EventTime;
-import seedu.address.model.event.EventType;
 import seedu.address.model.event.Meeting;
 
 
@@ -91,7 +90,8 @@ public class EditMeetingCommand extends Command {
         EventTime updatedStartTime = editMeetingDescriptor.getStartTime().orElse(meetingToEdit.getStartTime());
         EventTime updatedEndTime = editMeetingDescriptor.getEndTime().orElse(meetingToEdit.getEndTime());
 
-        return new Meeting(new EventType(EVENT_TYPE), updatedName, updatedDate, updatedStartTime, updatedEndTime);
+        return new Meeting(updatedName, updatedDate,
+                Optional.of(updatedStartTime), Optional.of(updatedEndTime));
     }
 
     /**
@@ -100,7 +100,7 @@ public class EditMeetingCommand extends Command {
      * @return String containing the success message
      */
     private String generateSuccessMessage(Event meetingToEdit) {
-        return String.format(MESSAGE_EDIT_SUCCESS, meetingToEdit);
+        return String.format(MESSAGE_EDIT_SUCCESS, Messages.formatEvent(meetingToEdit));
     }
 
     @Override

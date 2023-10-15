@@ -1,5 +1,7 @@
 package seedu.address.model.event;
 
+import java.util.Optional;
+
 /**
  * Represents a Meeting in the address book.
  */
@@ -9,17 +11,44 @@ public class Meeting extends Event {
 
     /**
      * Constructor for the meeting with optional start and end time
+     * @param name name of the meeting
      * @param date date of the meeting
      * @param startTime start time of the meeting
      * @param endTime end time of the meeting
      */
-    public Meeting(EventType eventType, EventName name, EventDate date, EventTime startTime, EventTime endTime) {
-        super(eventType, name, date, startTime, date, endTime);
+
+    public Meeting(EventName name, EventDate date, Optional<EventTime> startTime, Optional<EventTime> endTime) {
+        super(new EventType("meeting"), name, date, startTime, date, endTime);
     }
 
+
+
+    /**
+     * ToString for the meeting
+     */
     @Override
     public String toString() {
-        return String.format("%s; Date: %s; Start_Time: %s; End_Time: %s",
-                this.getName(), this.getStartDate(), this.getStartTime(), this.getEndTime());
+        return "Meeting: " + super.getStartDate().toString();
     }
+
+    /**
+     * Checks if the meeting is the same as another meeting
+     * @param other the other meeting to be compared to
+     * @return true if the meetings have the same name.
+     *
+     */
+    @Override
+    public boolean isSameEvent(Event other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Meeting)) {
+            return false;
+        }
+
+        return other.getName().equals(getName());
+    }
+
+
 }

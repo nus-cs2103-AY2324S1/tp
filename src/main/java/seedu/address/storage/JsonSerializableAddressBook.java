@@ -60,6 +60,7 @@ class JsonSerializableAddressBook {
             }
             addressBook.addPerson(person);
         }
+
         for (JsonAdaptedEvent jsonAdaptedEvent : events) {
             Event event = jsonAdaptedEvent.toModelType();
             addressBook.addEvent(event);

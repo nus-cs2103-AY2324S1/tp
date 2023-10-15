@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventDate;
 import seedu.address.model.event.EventName;
@@ -16,13 +15,10 @@ import seedu.address.model.person.Name;
 
 
 /**
- * Json-friendly version of {@link Event}.
+ * Jackson-friendly version of {@link Meeting}.
  */
-public class JsonAdaptedEvent {
+public class JsonAdaptedMeeting {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
-    public static final String UNKNOWN_EVENT_TYPE = "Unknown event type!";
-
-    private final String eventType;
 
     private final String name;
     private final String date;
@@ -33,10 +29,9 @@ public class JsonAdaptedEvent {
      * Constructs a {@code JsonAdaptedMeeting} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedEvent(@JsonProperty("eventType") String eventType, @JsonProperty("name") String name,
-                            @JsonProperty("date") String date, @JsonProperty("startTime") String startTime,
-                            @JsonProperty("endTime") String endTime) {
-        this.eventType = eventType;
+    public JsonAdaptedMeeting(@JsonProperty("name") String name,
+                              @JsonProperty("date") String date, @JsonProperty("startTime") String startTime,
+                              @JsonProperty("endTime") String endTime) {
         this.name = name;
         this.date = date;
         this.startTime = startTime;
@@ -44,26 +39,26 @@ public class JsonAdaptedEvent {
     }
 
     /**
-     * Converts a given {@code Meeting} into this class for Json use.
+     * Converts a given {@code Event} into this class for Jackson use.
      */
-    public JsonAdaptedEvent(Event source) {
-        this.eventType = source.getEventType().toString();
+    public JsonAdaptedMeeting(Event source) {
         this.name = source.getName().name;
         this.date = source.getStartDate().toString();
         this.startTime = source.hasStartTime() ? source.getStartTime().toString() : "";
         this.endTime = source.hasEndTime() ? source.getEndTime().toString() : "";
     }
 
+
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
+     * Converts this Jackson-friendly adapted meeting object into the model's {@code Meeting} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
-    public Event toModelType() throws IllegalValueException {
+    public Meeting toModelType() throws IllegalValueException {
 
         if (this.name == null) {
             throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, EventName.class.getSimpleName()));
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
         if (!Name.isValidName(name)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
@@ -97,34 +92,12 @@ public class JsonAdaptedEvent {
         }
         final EventTime modelEventEndTime = EventTime.of(this.endTime);
 
-        // no other events for now
-        return checkEventType(modelName, modelEventDate,
+        return new Meeting(modelName, modelEventDate,
                 Optional.of(modelEventStartTime), Optional.of(modelEventEndTime));
-    }
-
-
-    private Event checkEventType(EventName eventName,
-                                 EventDate eventDate,
-                                 Optional<EventTime> startTime,
-                                 Optional<EventTime> endTime) throws IllegalValueException {
-
-        switch (this.eventType) {
-        case "meeting":
-            return new Meeting(eventName, eventDate, startTime, endTime);
-        default:
-            throw new IllegalValueException(UNKNOWN_EVENT_TYPE);
-        }
-
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("event_type", this.eventType)
-                .add("name", this.name)
-                .add("date", this.date)
-                .add("start_time", this.startTime == null ? "" : this.startTime)
-                .add("end_time", this.endTime == null ? "" : this.endTime)
-                .toString();
+        return "Name: " + name + " Date: " + date + " Start Time: " + startTime + " End Time: " + endTime;
     }
 }

@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 
+
 /**
  * Unmodifiable view of an address book
  */

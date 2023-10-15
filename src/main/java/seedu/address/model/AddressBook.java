@@ -14,7 +14,7 @@ import seedu.address.model.person.UniquePersonList;
 
 /**
  * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Duplicates are not allowed for persons (by .isSamePerson comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
@@ -56,10 +56,10 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Replaces the contents of the event list with {@code events}.
-     * @param events ArrayList of events to replace the existing list with.
+     * @param newEvents the list of events to be replaced with.
      */
-    public void setEvents(ArrayList<Event> events) {
-        this.events.setEvents(events);
+    public void setEvents(ArrayList<Event> newEvents) {
+        this.events.setEvents(newEvents);
     }
 
     /**
@@ -81,6 +81,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(person);
         return persons.contains(person);
     }
+
+
 
     /**
      * Adds a person to the address book.
@@ -125,7 +127,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * @param event Event to be added.
      */
     public void addEvent(Event event) {
-        events.add(event);
+        events.addEvent(event);
     }
 
 

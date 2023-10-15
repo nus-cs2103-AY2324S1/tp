@@ -1,5 +1,6 @@
 package seedu.address.model.event;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
@@ -25,18 +26,11 @@ public class EventList {
      * Adds an event to the list of events.
      * @param event Event to be added.
      */
-    public void add(Event event) {
-        requireAllNonNull(event);
+    public void addEvent(Event event) {
+        requireNonNull(event);
         this.events.add(event);
     }
 
-    /**
-     * Replaces the current events list with the given {@code events}.
-     * @param events ArrayList of events to replace with.
-     */
-    public void setEvents(ArrayList<Event> events) {
-        this.events = events;
-    }
 
     /**
      * Deletes an event from the list of events.
@@ -60,5 +54,13 @@ public class EventList {
         }
 
         this.events.set(index, editedEvent);
+    }
+
+    public void setEvents(ArrayList<Event> newEvents) {
+        this.events = newEvents;
+    }
+
+    public ArrayList<Event> getEventsList() {
+        return this.events;
     }
 }

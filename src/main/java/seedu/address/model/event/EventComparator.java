@@ -17,6 +17,10 @@ public class EventComparator implements Comparator<Event> {
             return 1;
         } else if (event1.getStartDate().getDate().isAfter(event2.getStartDate().getDate())) {
             return -1;
+        } else if (event1.getStartTime().getEventTime().isBefore(event2.getStartTime().getEventTime())) {
+            return 1;
+        } else if (event1.getStartTime().getEventTime().isAfter(event2.getStartTime().getEventTime())) {
+            return -1;
         } else {
             return 0;
         }

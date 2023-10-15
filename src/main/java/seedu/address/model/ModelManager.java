@@ -151,6 +151,16 @@ public class ModelManager implements Model {
         this.filteredPersons.setPredicate(predicate);
     }
 
+    /**
+     * Adds an event to the address book.
+     * @param toAdd Event to be added.
+     */
+    @Override
+    public void addEvent(Event toAdd) {
+        addressBook.addEvent(toAdd);
+
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -167,5 +177,7 @@ public class ModelManager implements Model {
                 && this.userPrefs.equals(otherModelManager.userPrefs)
                 && this.filteredPersons.equals(otherModelManager.filteredPersons);
     }
+
+
 
 }
