@@ -6,8 +6,8 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.member.Member;
-import seedu.address.model.member.UniqueMemberList;
+import seedu.address.model.person.Applicant;
+import seedu.address.model.person.Member;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -17,8 +17,9 @@ import seedu.address.model.person.UniquePersonList;
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
-    private final UniquePersonList persons;
-    private final UniqueMemberList memberList;
+    private final UniquePersonList<Person> persons;
+    private final UniquePersonList<Member> memberList;
+    private final UniquePersonList<Applicant> applicants;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -28,8 +29,9 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
-        persons = new UniquePersonList();
-        memberList = new UniqueMemberList();
+        persons = new UniquePersonList<>();
+        memberList = new UniquePersonList<>();
+        applicants = new UniquePersonList<>();
     }
 
     public AddressBook() {}
@@ -123,8 +125,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setMember(Member target, Member editedMember) {
         requireNonNull(editedMember);
-
-        memberList.setMember(target, editedMember);
+        memberList.setPerson(target, editedMember);
     }
 
     /**
@@ -135,12 +136,51 @@ public class AddressBook implements ReadOnlyAddressBook {
         memberList.remove(key);
     }
 
+    //// applicant-level methods
+
+    /**
+     * Returns true if a applicant with the same identity as {@code applicant} exists in the address book.
+     */
+    public boolean hasApplicant(Applicant applicant) {
+        requireNonNull(applicant);
+        return applicants.contains(applicant);
+    }
+
+    /**
+     * Adds a applicant to the address book.
+     * The applicant must not already exist in the address book.
+     */
+    public void addApplicant(Applicant a) {
+        applicants.add(a);
+    }
+
+    /**
+     * Replaces the given applicant {@code target} in the list with {@code editedApplicant}.
+     * {@code target} must exist in the address book.
+     * The applicant identity of {@code editedApplicant} must not be the same as another existing applicant in the
+     * address book.
+     */
+    public void setApplicant(Applicant target, Applicant editedApplicant) {
+        requireNonNull(editedApplicant);
+        applicants.setPerson(target, editedApplicant);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeApplicant(Applicant key) {
+        applicants.remove(key);
+    }
+
     //// util methods
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("persons", persons)
+                .add("members", memberList)
+                .add("applicants", applicants)
                 .toString();
     }
 
@@ -155,6 +195,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
+    public ObservableList<Applicant> getApplicantList() {
+        return applicants.asUnmodifiableObservableList();
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
@@ -166,7 +211,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         AddressBook otherAddressBook = (AddressBook) other;
-        return persons.equals(otherAddressBook.persons);
+        return persons.equals(otherAddressBook.persons)
+                && memberList.equals(otherAddressBook.memberList)
+                && applicants.equals(otherAddressBook.applicants);
     }
 
     @Override

@@ -18,7 +18,8 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.member.Member;
+import seedu.address.model.person.Applicant;
+import seedu.address.model.person.Member;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.PersonBuilder;
@@ -86,7 +87,11 @@ public class AddressBookTest {
 
     @Test
     public void toStringMethod() {
-        String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList() + "}";
+        String expected = AddressBook.class.getCanonicalName()
+                + "{persons=" + addressBook.getPersonList() + ", "
+                + "members=" + addressBook.getMemberList() + ", "
+                + "applicants=" + addressBook.getApplicantList() + "}";
+
         assertEquals(expected, addressBook.toString());
     }
 
@@ -95,6 +100,9 @@ public class AddressBookTest {
      */
     private class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableList<Member> memberList = FXCollections.observableArrayList();
+        private final ObservableList<Applicant> applicants = FXCollections.observableArrayList();
+
 
         AddressBookStub(Collection<Person> persons) {
             this.persons.setAll(persons);
@@ -107,7 +115,12 @@ public class AddressBookTest {
 
         @Override
         public ObservableList<Member> getMemberList() {
-            return null;
+            return memberList;
+        }
+
+        @Override
+        public ObservableList<Applicant> getApplicantList() {
+            return applicants;
         }
     }
 

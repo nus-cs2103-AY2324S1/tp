@@ -1,4 +1,8 @@
-/* package seedu.address.logic.commands;
+package seedu.address.logic.commands;
+
+import static java.util.Objects.requireNonNull;
+
+import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
@@ -7,23 +11,19 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Applicant;
 
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
-
 /**
  * Deletes an applicant identified using it's displayed index from the address book.
-
+ */
 public class DeleteApplicantCommand extends Command {
 
     public static final String COMMAND_WORD = "deleteApplicant";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the applicant identified by the index number used in the applicant list.\n"
+            + ": Deletes the applicant identified by the index number used in the displayed applicant list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_APPLICANT_SUCCESS = "Deleted Applicant: %1$s";
+    public static final String MESSAGE_DELETE_APPLICANT_SUCCESS = "Deleted Applicant: %1$s";
 
     private final Index targetIndex;
 
@@ -66,4 +66,4 @@ public class DeleteApplicantCommand extends Command {
                 .add("targetIndex", targetIndex)
                 .toString();
     }
-} */
+}

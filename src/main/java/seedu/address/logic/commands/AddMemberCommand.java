@@ -11,7 +11,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.member.Member;
+import seedu.address.model.person.Member;
 
 /**
  * Adds a member to the address book.
@@ -32,7 +32,7 @@ public class AddMemberCommand extends Command {
             + PREFIX_PHONE + " 98765432 "
             + PREFIX_EMAIL + " johnd@example.com "
             + PREFIX_TELEGRAM + " @johndoe "
-            + PREFIX_TAG + "WelfareHead ";
+            + PREFIX_TAG + " WelfareHead";
 
     public static final String MESSAGE_SUCCESS = "New member added: %1$s";
     public static final String MESSAGE_DUPLICATE_MEMBER = "This member already exists in the member list";
