@@ -8,6 +8,9 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.exceptions.ImpossibleIndexException;
+import seedu.address.logic.parser.exceptions.MissingIndexException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
@@ -27,17 +30,31 @@ public class DeleteCommand extends Command {
 
     private final Index targetIndex;
 
+    private ParseException pe = null;
+
     public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
+    public DeleteCommand(Index targetIndex, ParseException pe) {
+        this.targetIndex = targetIndex;
+        this.pe = pe;
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        if (pe != null) {
+            if (pe instanceof MissingIndexException) {
+                return new CommandResult(Messages.MESSAGE_MISSING_INDEX);
+            } else {
+                return new CommandResult(Messages.MESSAGE_IMPOSSIBLE_INDEX);
+            }
+        }
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            return new CommandResult(Messages.MESSAGE_NOT_FOUND_INDEX);
         }
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
