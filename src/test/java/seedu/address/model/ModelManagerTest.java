@@ -5,8 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalInterviews.STANDARD_INTERVIEW;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -79,13 +81,29 @@ public class ModelManagerTest {
 
     @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(modelManager.hasPerson(ALICE));
+        assertFalse(modelManager.hasInterview(STANDARD_INTERVIEW));
     }
 
     @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
         modelManager.addPerson(ALICE);
         assertTrue(modelManager.hasPerson(ALICE));
+    }
+
+    @Test
+    public void hasInterview_interviewInAddressBook_returnsTrue() {
+        modelManager.addInterview(STANDARD_INTERVIEW);
+        assertTrue(modelManager.hasInterview(STANDARD_INTERVIEW));
+    }
+
+    @Test
+    public void hasInterview_nullInterview_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasInterview(null));
+    }
+
+    @Test
+    public void hasInterview_interviewNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasInterview(STANDARD_INTERVIEW));
     }
 
     @Test

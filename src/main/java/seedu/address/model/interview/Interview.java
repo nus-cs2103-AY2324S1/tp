@@ -51,4 +51,26 @@ public class Interview {
         return interviewTiming;
     }
 
+    /**
+     * Returns true if both interviews have the same identity and data fields.
+     * This defines a stronger notion of equality between two interviews
+     * Mostly used for testing purposes
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Interview)) {
+            return false;
+        }
+
+        Interview otherInterview = (Interview) other;
+        return applicant.equals(otherInterview.applicant)
+                && jobRole.equals(otherInterview.jobRole)
+                && interviewTiming.equals(otherInterview.interviewTiming);
+    }
+
 }
