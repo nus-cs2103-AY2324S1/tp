@@ -45,8 +45,14 @@ public class Messages {
                 .append(person.getEmail())
                 .append("; Address: ")
                 .append(person.getAddress())
-                .append("; Tags: ");
-        person.getTags().forEach(builder::append);
+                .append("; Bank Account: ")
+                .append(person.getBankAccount())
+                .append("; Join Date: ")
+                .append(person.getJoinDate())
+                .append("; Salary: ")
+                .append(person.getSalary())
+                .append("; Annual Leave: ")
+                .append(person.getAnnualLeave());
         return builder.toString();
     }
 

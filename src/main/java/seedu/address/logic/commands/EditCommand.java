@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -21,12 +20,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.*;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -43,7 +37,6 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -99,9 +92,13 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        BankAccount updatedBankAccount = editPersonDescriptor.getBankAccount().orElse(personToEdit.getBankAccount());
+        JoinDate updatedJoinDate = editPersonDescriptor.getJoinDate().orElse(personToEdit.getJoinDate());
+        Salary updatedSalary = editPersonDescriptor.getSalary().orElse(personToEdit.getSalary());
+        AnnualLeave updatedAnnualLeave = editPersonDescriptor.getAnnualLeave().orElse(personToEdit.getAnnualLeave());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedBankAccount, updatedJoinDate, updatedSalary, updatedAnnualLeave);
     }
 
     @Override
@@ -137,7 +134,10 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
-        private Set<Tag> tags;
+        private BankAccount bankAccount;
+        private JoinDate joinDate;
+        private Salary salary;
+        private AnnualLeave annualLeave;
 
         public EditPersonDescriptor() {}
 
@@ -150,14 +150,17 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
-            setTags(toCopy.tags);
+            setBankAccount(toCopy.bankAccount);
+            setJoinDate(toCopy.joinDate);
+            setSalary(toCopy.salary);
+            setAnnualLeave(toCopy.annualLeave);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, bankAccount, joinDate, salary, annualLeave);
         }
 
         public void setName(Name name) {
@@ -192,21 +195,36 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
-        /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        public void setBankAccount(BankAccount bankAccount) {
+            this.bankAccount = bankAccount;
         }
 
-        /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
-         */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        public Optional<BankAccount> getBankAccount() {
+            return Optional.ofNullable(bankAccount);
+        }
+
+        public void setJoinDate(JoinDate joinDate) {
+            this.joinDate = joinDate;
+        }
+
+        public Optional<JoinDate> getJoinDate() {
+            return Optional.ofNullable(joinDate);
+        }
+
+        public void setSalary(Salary salary) {
+            this.salary = salary;
+        }
+
+        public Optional<Salary> getSalary() {
+            return Optional.ofNullable(salary);
+        }
+
+        public void setAnnualLeave(AnnualLeave annualLeave) {
+            this.annualLeave = annualLeave;
+        }
+
+        public Optional<AnnualLeave> getAnnualLeave() {
+            return Optional.ofNullable(annualLeave);
         }
 
         @Override
@@ -225,7 +243,10 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(bankAccount, otherEditPersonDescriptor.bankAccount)
+                    && Objects.equals(joinDate, otherEditPersonDescriptor.joinDate)
+                    && Objects.equals(salary, otherEditPersonDescriptor.salary)
+                    && Objects.equals(annualLeave, otherEditPersonDescriptor.annualLeave);
         }
 
         @Override
@@ -235,7 +256,10 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
-                    .add("tags", tags)
+                    .add("bankAccount", bankAccount)
+                    .add("joinDate", joinDate)
+                    .add("salary", salary)
+                    .add("annualLeave", annualLeave)
                     .toString();
         }
     }

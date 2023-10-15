@@ -72,7 +72,7 @@ public class ReadCommand extends Command {
         } else if(field.equals("a")) {
             return person.getAddress().value;
         } else if(field.equals("e")) {
-            return  person.getEmail().value;
+            return person.getEmail().value;
         } else {
             throw new CommandException(Messages.MESSAGE_INVALID_FIELD_TO_READ);
         }

@@ -5,11 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -36,7 +32,10 @@ public class EditPersonDescriptorBuilder {
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
-        descriptor.setTags(person.getTags());
+        descriptor.setBankAccount(person.getBankAccount());
+        descriptor.setJoinDate(person.getJoinDate());
+        descriptor.setSalary(person.getSalary());
+        descriptor.setAnnualLeave(person.getAnnualLeave());
     }
 
     /**
@@ -72,14 +71,39 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
-     * that we are building.
+     * Sets the {@code BankAccount} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withTags(String... tags) {
-        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
-        descriptor.setTags(tagSet);
+    public EditPersonDescriptorBuilder withBankAccount(String bankAccount) {
+        descriptor.setBankAccount(new BankAccount(bankAccount));
         return this;
     }
+
+    /**
+     * Sets the {@code JoinDate} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withJoinDate(String joinDate) {
+        descriptor.setJoinDate(new JoinDate(joinDate));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Salary} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withSalary(String salary) {
+        descriptor.setSalary(new Salary(salary));
+        return this;
+    }
+
+    /**
+     * Sets the {@code AnnualLeave} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withAnnualLeave(String annualLeave) {
+        descriptor.setAnnualLeave(new AnnualLeave(annualLeave));
+        return this;
+    }
+
+
+
 
     public EditPersonDescriptor build() {
         return descriptor;

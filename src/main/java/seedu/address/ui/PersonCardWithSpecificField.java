@@ -34,8 +34,7 @@ public class PersonCardWithSpecificField extends UiPart<Region> {
     private Label id;
     @FXML
     private Label fieldLabel;
-    @FXML
-    private FlowPane tags;
+
 
 
     /**
@@ -47,9 +46,6 @@ public class PersonCardWithSpecificField extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         fieldLabel.setText(fieldToRead);
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
 }
