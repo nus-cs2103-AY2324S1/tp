@@ -1,6 +1,20 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
@@ -12,13 +26,6 @@ import seedu.address.model.person.Ic;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.logic.commands.CommandTestUtil.*;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
-
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
@@ -82,7 +89,8 @@ public class EditCommandTest {
     public void execute_filteredList_success() {
         Ic nricOfFirstPerson = model.getFilteredPersonList().get(0).getIc();
 
-        Person personInFilteredList = model.getFilteredPersonList().stream().filter(p -> p.getIc().equals(nricOfFirstPerson)).findFirst().orElse(null);
+        Person personInFilteredList = model.getFilteredPersonList().stream().filter(p ->
+                p.getIc().equals(nricOfFirstPerson)).findFirst().orElse(null);
         Person editedPerson = new PersonBuilder(personInFilteredList).withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(nricOfFirstPerson,
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
@@ -98,7 +106,8 @@ public class EditCommandTest {
     @Test
     public void execute_duplicatePersonUnfilteredList_failure() {
         Ic nricOfFirstPerson = model.getFilteredPersonList().get(0).getIc();
-        Person firstPerson = model.getFilteredPersonList().stream().filter(p -> p.getIc().equals(nricOfFirstPerson)).findFirst().orElse(null);
+        Person firstPerson = model.getFilteredPersonList().stream().filter(p ->
+                p.getIc().equals(nricOfFirstPerson)).findFirst().orElse(null);
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(firstPerson).build();
         Ic nricOfSecondPerson = model.getFilteredPersonList().get(1).getIc();
         EditCommand editCommand = new EditCommand(nricOfSecondPerson, descriptor);
@@ -112,7 +121,7 @@ public class EditCommandTest {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(invalidNric, descriptor);
 
-        assertCommandFailure(editCommand, model, "This person hasn't been saved"); // Use the same error message as in your EditCommand class
+        assertCommandFailure(editCommand, model, "This person hasn't been saved");
     }
 
     /**
@@ -153,7 +162,7 @@ public class EditCommandTest {
         Ic nric = model.getFilteredPersonList().get(0).getIc();
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         EditCommand editCommand = new EditCommand(nric, editPersonDescriptor);
-        String expected = EditCommand.class.getCanonicalName() + "{index=" + nric + ", editPersonDescriptor="
+        String expected = EditCommand.class.getCanonicalName() + "{nric=" + nric + ", editPersonDescriptor="
                 + editPersonDescriptor + "}";
         assertEquals(expected, editCommand.toString());
     }

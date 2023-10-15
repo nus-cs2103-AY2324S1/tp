@@ -2,11 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-<<<<<<< HEAD
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BLOODTYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONDITION;
-=======
->>>>>>> 7d66bfb1d0b96bd6f957ab359108d81eeae69b3d
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -236,7 +233,7 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, email, address,
-                    gender, ic, tags);
+                    gender, ic, tags, bloodType, condition, remark);
         }
 
         public void setName(Name name) {
@@ -346,22 +343,23 @@ public class EditCommand extends Command {
                     && Objects.equals(ic, otherEditPersonDescriptor.ic)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags)
                     && Objects.equals(condition, otherEditPersonDescriptor.condition)
-                    && Objects.equals(bloodType, otherEditPersonDescriptor.bloodType);
+                    && Objects.equals(bloodType, otherEditPersonDescriptor.bloodType)
+                    && Objects.equals(remark, otherEditPersonDescriptor.remark);
         }
 
         @Override
         public String toString() {
             return new ToStringBuilder(this)
-                .add("name", name)
-                .add("phone", phone)
-                .add("email", email)
-                .add("address", address)
-                .add("gender", gender)
-                .add("nric", ic)
-                .add("tags", tags)
-                .add("condition", condition)
-                .add("blood type", bloodType)
-                .toString();
+                    .add("name", name)
+                    .add("phone", phone)
+                    .add("email", email)
+                    .add("address", address)
+                    .add("gender", gender)
+                    .add("nric", ic)
+                    .add("tags", tags)
+                    .add("condition", condition)
+                    .add("blood type", bloodType)
+                    .toString();
         }
     }
 }

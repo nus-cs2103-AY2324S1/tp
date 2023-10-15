@@ -23,9 +23,8 @@ import java.util.Set;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.tag.Tag;
-
 import seedu.address.model.person.Ic;
+import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -41,7 +40,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_REMARK,
-                        PREFIX_GENDER, PREFIX_NRIC, PREFIX_TAG);
+                        PREFIX_GENDER, PREFIX_NRIC, PREFIX_TAG, PREFIX_BLOODTYPE, PREFIX_CONDITION);
 
         Ic nric;
 
@@ -77,10 +76,13 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setIc(ParserUtil.parseIc(argMultimap.getValue(PREFIX_NRIC).get()));
         }
         if (argMultimap.getValue(PREFIX_CONDITION).isPresent()) {
-            editPersonDescriptor.setIc(ParserUtil.parseIc(argMultimap.getValue(PREFIX_CONDITION).get()));
+            editPersonDescriptor.setCondition(ParserUtil.parseCondition(argMultimap.getValue(PREFIX_CONDITION).get()));
         }
         if (argMultimap.getValue(PREFIX_BLOODTYPE).isPresent()) {
-            editPersonDescriptor.setIc(ParserUtil.parseIc(argMultimap.getValue(PREFIX_BLOODTYPE).get()));
+            editPersonDescriptor.setBloodType(ParserUtil.parseBloodType(argMultimap.getValue(PREFIX_BLOODTYPE).get()));
+        }
+        if (argMultimap.getValue(PREFIX_REMARK).isPresent()) {
+            editPersonDescriptor.setRemark(ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get()));
         }
 
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
