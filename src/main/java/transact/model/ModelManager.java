@@ -41,11 +41,12 @@ public class ModelManager implements Model {
         ObservableList<Transaction> tmpTransactions = FXCollections.observableArrayList();
 
         // Placeholder transaction objects (x5)
+        /*tmpTransactions.add(new Transaction());
         tmpTransactions.add(new Transaction());
         tmpTransactions.add(new Transaction());
         tmpTransactions.add(new Transaction());
-        tmpTransactions.add(new Transaction());
-        tmpTransactions.add(new Transaction());
+        tmpTransactions.add(new Transaction());*/
+
 
         filteredTransactions = new FilteredList<>(tmpTransactions);
 
