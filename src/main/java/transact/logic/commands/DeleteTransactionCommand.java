@@ -10,9 +10,11 @@ import transact.logic.Messages;
 import transact.logic.commands.exceptions.CommandException;
 import transact.model.Model;
 import transact.model.transaction.Transaction;
+import transact.ui.MainWindow.TabWindow;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes a transaction identified using it's displayed index from the
+ * transaction book.
  */
 public class DeleteTransactionCommand extends Command {
 
@@ -42,7 +44,9 @@ public class DeleteTransactionCommand extends Command {
 
         Transaction transactionToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteTransaction(transactionToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_TRANSACTION_SUCCESS, Messages.format(transactionToDelete)), 2);
+        return new CommandResult(
+                String.format(MESSAGE_DELETE_TRANSACTION_SUCCESS, Messages.format(transactionToDelete)),
+                TabWindow.TRANSACTIONS);
     }
 
     @Override
