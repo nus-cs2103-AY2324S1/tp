@@ -3,6 +3,7 @@ package seedu.address.logic;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -53,6 +54,16 @@ public class LogicManager implements Logic {
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
+
+        // Set displayFieldsList if there is a list of params specified
+        // But not updating UI?
+        String[] displayParams = commandResult.getDisplayParams(); // array of strings eg. ["phone", "subjects"]
+        // String[] array = new String[] {"phone", "email", "address", "tags", "subjects"};
+        System.out.println(Arrays.toString(displayParams));
+        setDisplayedFieldsList(displayParams);
+        if (displayParams.length != 0) {
+            setDisplayedFieldsList(displayParams);
+        }
 
         try {
             storage.saveAddressBook(model.getAddressBook());
