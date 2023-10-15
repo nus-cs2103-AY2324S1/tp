@@ -5,6 +5,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.event.Event;
+import seedu.address.model.event.EventTime;
+import seedu.address.model.event.Meeting;
 import seedu.address.model.person.Person;
 
 /**
@@ -45,6 +48,25 @@ public class Messages {
                 .append(person.getAddress())
                 .append("; Groups: ");
         person.getGroups().forEach(builder::append);
+        return builder.toString();
+    }
+
+    public static String formatMeeting(Meeting meeting) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(meeting.getName())
+                .append("; Date: ")
+                .append(meeting.getStartDate().toString());
+
+        if (meeting.hasStartTime()) {
+            builder.append("; Start Time: ")
+                    .append(meeting.getStartTime().toString());
+        }
+
+        if (meeting.hasEndTime()) {
+            builder.append("; End Time: ")
+                    .append(meeting.getEndTime().toString());
+        }
+
         return builder.toString();
     }
 

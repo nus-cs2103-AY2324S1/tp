@@ -11,6 +11,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.event.Event;
+import seedu.address.model.event.Meeting;
 import seedu.address.model.person.Person;
 
 /**
@@ -128,6 +130,16 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    /**
+     * Adds an event to the address book.
+     * @param toAdd Event to be added.
+     */
+    @Override
+    public void addEvent(Event toAdd) {
+        addressBook.addEvent(toAdd);
+
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -144,5 +156,7 @@ public class ModelManager implements Model {
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
+
+
 
 }

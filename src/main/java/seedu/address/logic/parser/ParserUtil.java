@@ -9,6 +9,9 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.event.EventDate;
+import seedu.address.model.event.EventName;
+import seedu.address.model.event.EventTime;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -120,5 +123,29 @@ public class ParserUtil {
             groupSet.add(parseGroup(groupName));
         }
         return groupSet;
+    }
+
+    public static EventName parseEventName(String name) throws ParseException {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        if (!EventName.isValidName(trimmedName)) {
+            throw new ParseException(EventName.MESSAGE_CONSTRAINTS);
+        }
+        return new EventName(trimmedName);
+    }
+
+    public static EventDate parseEventDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        if (!EventDate.isValidDate(trimmedDate)) {
+            throw new ParseException(EventDate.MESSAGE_CONSTRAINTS);
+        }
+        return new EventDate(trimmedDate);
+    }
+
+    public static EventTime parseEventTime(String time) throws ParseException {
+        requireNonNull(time);
+        String trimmedTime = time.trim();
+        return EventTime.of(trimmedTime);
     }
 }

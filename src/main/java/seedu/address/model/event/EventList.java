@@ -1,5 +1,7 @@
 package seedu.address.model.event;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.ArrayList;
 
 /**
@@ -14,7 +16,8 @@ public class EventList {
      * @param event Event to be added.
      */
     public void addEvent(Event event) {
-        return;
+        requireNonNull(event);
+        this.events.add(event);
     }
 
     /**
@@ -32,4 +35,5 @@ public class EventList {
     public void editEvent(int index) {
         return;
     }
+
 }

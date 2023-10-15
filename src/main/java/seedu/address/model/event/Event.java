@@ -1,9 +1,10 @@
 package seedu.address.model.event;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Optional;
 
 import seedu.address.model.person.Person;
+import static seedu.address.model.event.EventTime.NULL_EVENT_TIME;
 
 /**
  * Represents an Event in the address book.
@@ -12,43 +13,89 @@ public abstract class Event {
 
     private ArrayList<Person> persons = new ArrayList<>();
 
-    private LocalDateTime startDateTime;
-    private LocalDateTime endDateTime;
+    private EventDate startDate;
 
-    private Name name;
+    private Optional<EventTime> startTime;
+    private EventDate endDate;
+
+    private Optional<EventTime> endTime;
+
+    private EventName name;
 
     /**
-     * Constructor for the event with start datetime and end datetime
-     * @param startDateTime start date and time of the event
-     * @param endDateTime end date and time of the event
+     * Constructor for eventS with optional start and end time
+     * @param name name of the event
+     * @param startDate start date of the event
+     * @param endDate  end date of the event
      */
-    public Event(Name name, LocalDateTime startDateTime, LocalDateTime endDateTime) {
+    public Event(EventName name, EventDate startDate, EventDate endDate) {
         this.name = name;
-        this.startDateTime = startDateTime;
-        this.endDateTime = endDateTime;
+        this.startDate = startDate;
+        this.endDate = endDate;
+
+    }
+
+    public Event(EventName name, EventDate startDate, Optional<EventTime> startTime, EventDate endDate, Optional<EventTime> endTime) {
+        this.name = name;
+        this.startDate = startDate;
+        this.startTime = startTime;
+        this.endDate = endDate;
+        this.endTime = endTime;
+
     }
 
     /**
      * Gets the start date time of the event
      * @return start date time of the event
      */
-    public LocalDateTime getStartDateTime() {
-        return this.startDateTime;
+    public EventDate getStartDate() {
+        return this.startDate;
+    }
+
+    public EventTime getStartTime() {
+        return this.startTime.get();
     }
 
     /**
-     * Gets the end date time of the event
-     * @return  end date time of the event
+     * Returns true if the event has a start time.
      */
-    public LocalDateTime getEndDateTime() {
-        return this.endDateTime;
+    public boolean hasStartTime() {
+        return !(this.startTime.get() == NULL_EVENT_TIME);
+    }
+
+
+    /**
+     * Returns true if the event has an end time.
+     * @return true if the event has an end time
+     */
+    public boolean hasEndTime() {
+        return !(this.endTime.get() == NULL_EVENT_TIME);
+    }
+
+    public EventDate getEndDate() {
+        return this.endDate;
+    }
+
+    public EventTime getEndTime() {
+        return this.endTime.get();
     }
 
     /**
      * Gets the name of the event
      * @return name of the event
      */
-    public Name getName() {
+    public EventName getName() {
         return this.name;
     }
+
+    /**
+     * Returns true if both events are of the same type and have the same name.
+     * @param event event to be compared
+     * @return true if both events are of the same type and have the same name
+     */
+    public abstract boolean isSameEvent(Event event);
+
+
+
+
 }
