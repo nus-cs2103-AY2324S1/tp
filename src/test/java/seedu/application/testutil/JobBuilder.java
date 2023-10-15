@@ -1,9 +1,6 @@
 package seedu.application.testutil;
 
-import seedu.application.model.job.Company;
-import seedu.application.model.job.Deadline;
-import seedu.application.model.job.Job;
-import seedu.application.model.job.Role;
+import seedu.application.model.job.*;
 
 /**
  * A utility class to help with building Job objects.
@@ -12,10 +9,13 @@ public class JobBuilder {
 
     public static final String DEFAULT_ROLE = "Student";
     public static final String DEFAULT_COMPANY = "Sparkletots";
+    public static final String DEFAULT_STATUS = Status.IN_PROGRESS;
     public static final String DEFAULT_DEADLINE = Deadline.TO_ADD_DEADLINE;
 
     private Role role;
     private Company company;
+
+    private Status status;
     private Deadline deadline;
 
     /**
@@ -24,6 +24,7 @@ public class JobBuilder {
     public JobBuilder() {
         role = new Role(DEFAULT_ROLE);
         company = new Company(DEFAULT_COMPANY);
+        status = new Status(DEFAULT_STATUS);
         deadline = new Deadline(DEFAULT_DEADLINE);
     }
 
@@ -33,6 +34,7 @@ public class JobBuilder {
     public JobBuilder(Job jobToCopy) {
         role = jobToCopy.getRole();
         company = jobToCopy.getCompany();
+        status = jobToCopy.getStatus();
         deadline = jobToCopy.getDeadline();
     }
 
@@ -53,6 +55,14 @@ public class JobBuilder {
     }
 
     /**
+     * Sets the {@code Company} of the {@code Job} that we are building.
+     */
+    public JobBuilder withStatus(String status) {
+        this.status = new Status(status);
+        return this;
+    }
+
+    /**
      * Sets the {@code Deadline} of the {@code Job} that we are building.
      */
     public JobBuilder withDeadline(String deadline) {
@@ -61,7 +71,7 @@ public class JobBuilder {
     }
 
     public Job build() {
-        return new Job(role, company, deadline);
+        return new Job(role, company, status, deadline);
     }
 
 }
