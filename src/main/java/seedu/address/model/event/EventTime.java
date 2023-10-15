@@ -21,6 +21,11 @@ public class EventTime {
     }
 
     public static boolean isValidTime(String trimmedTime) {
+        //to represent the case of optional time.
+        if (trimmedTime.isBlank()) {
+            return true;
+        }
+
         try {
             LocalTime parsedTime = LocalTime.parse(trimmedTime, TIME_FORMATTER);
             return true;
@@ -58,14 +63,26 @@ public class EventTime {
      * @throws ParseException if the given eventTime does not follow the format.
      */
     public static EventTime of(String eventTime) throws ParseException {
+        if (eventTime.isBlank()) {
+            return NULL_EVENT_TIME;
+        }
         if (!isValidTime(eventTime)) {
             throw new ParseException(MESSAGE_CONSTRAINTS);
         }
         return new EventTime(eventTime);
     }
 
+
+    /**
+     * ToString for the event time.
+     * Kept as the same format as the input for json storage.
+     */
     @Override
     public String toString() {
+        return eventTime.format(DateTimeFormatter.ofPattern("HHmm"));
+    }
+
+    public String forDisplay() {
         return eventTime.format(DateTimeFormatter.ofPattern("HH:mm"));
     }
 }

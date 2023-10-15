@@ -53,6 +53,14 @@ public class EventDate {
 
     @Override
     public String toString() {
+        return this.date.format(DATE_FORMATTER);
+    }
+
+    /**
+     * Returns a string representation of the date in a format for display.
+     * @return a string representation of the date in a format for display.
+     */
+    public String forDisplay() {
         return this.date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
     }
 }

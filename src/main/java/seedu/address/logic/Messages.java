@@ -55,16 +55,16 @@ public class Messages {
         final StringBuilder builder = new StringBuilder();
         builder.append(meeting.getName())
                 .append("; Date: ")
-                .append(meeting.getStartDate().toString());
+                .append(meeting.getStartDate().forDisplay());
 
         if (meeting.hasStartTime()) {
             builder.append("; Start Time: ")
-                    .append(meeting.getStartTime().toString());
+                    .append(meeting.getStartTime().forDisplay());
         }
 
         if (meeting.hasEndTime()) {
             builder.append("; End Time: ")
-                    .append(meeting.getEndTime().toString());
+                    .append(meeting.getEndTime().forDisplay());
         }
 
         return builder.toString();
