@@ -8,8 +8,8 @@ import java.util.Set;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.StudentNumber;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentNumber;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -23,21 +23,21 @@ public class AddTagCommand extends TagCommand {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Student> lastShownList = model.getFilteredStudentList();
 
-        Person studentToTag;
+        Student studentToTag;
         try {
             studentToTag = getStudentByStudentNumber(lastShownList, studentNumber);
         } catch (NullPointerException ive) {
             throw new CommandException(MESSAGE_STUDENT_DOES_NOT_EXIST);
         }
         Set<Tag> newTags = addTags(studentToTag.getTags(), super.tags);
-        Person editedStudent = new Person(
+        Student editedStudent = new Student(
                 studentToTag.getName(), studentToTag.getPhone(), studentToTag.getEmail(),
                 studentToTag.getStudentNumber(), studentToTag.getClassNumber(), newTags);
 
-        model.setPerson(studentToTag, editedStudent);
-        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        model.setStudent(studentToTag, editedStudent);
+        model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(generateSuccessMessage(editedStudent));
     }
@@ -48,7 +48,7 @@ public class AddTagCommand extends TagCommand {
         return newTags;
     }
 
-    private String generateSuccessMessage(Person personToEdit) {
-        return String.format(MESSAGE_ADD_TAG_SUCCESS, personToEdit.getName()) + tags;
+    private String generateSuccessMessage(Student studentToEdit) {
+        return String.format(MESSAGE_ADD_TAG_SUCCESS, studentToEdit.getName()) + tags;
     }
 }

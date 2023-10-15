@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.student;
 
 import java.util.Optional;
 import java.util.function.Predicate;
@@ -7,9 +7,9 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Tests that a {@code Person}'s detail matches any of the keywords given.
+ * Tests that a {@code Student}'s detail matches any of the keywords given.
  */
-public class PersonContainsKeywordsPredicate implements Predicate<Person> {
+public class StudentContainsKeywordsPredicate implements Predicate<Student> {
 
     private final Optional<String> classNumber;
     private final Optional<String> email;
@@ -19,10 +19,10 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
     private final Optional<String> tag;
 
     /**
-     * Constructs a {@code PersonContainsKeywordsPredicate} with the given keywords.
+     * Constructs a {@code StudentContainsKeywordsPredicate} with the given keywords.
      */
-    public PersonContainsKeywordsPredicate(String classNumber, String email, String name,
-                                           String phone, String studentNumber, String tag) {
+    public StudentContainsKeywordsPredicate(String classNumber, String email, String name,
+                                            String phone, String studentNumber, String tag) {
         this.classNumber = Optional.ofNullable(classNumber);
         this.email = Optional.ofNullable(email);
         this.name = Optional.ofNullable(name);
@@ -32,28 +32,28 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
     }
 
     @Override
-    public boolean test(Person person) {
+    public boolean test(Student student) {
         boolean isClassNumberMatch = classNumber.map(classNumber -> StringUtil
-                        .containsWordIgnoreCase(person.getClassNumber().value, classNumber))
+                        .containsWordIgnoreCase(student.getClassNumber().value, classNumber))
                 .orElse(true);
 
         boolean isEmailMatch = email.map(email -> StringUtil
-                        .containsWordIgnoreCase(person.getEmail().value, email))
+                        .containsWordIgnoreCase(student.getEmail().value, email))
                 .orElse(true);
 
         boolean isNameMatch = name.map(name -> StringUtil
-                        .containsWordIgnoreCase(person.getName().fullName, name))
+                        .containsWordIgnoreCase(student.getName().fullName, name))
                 .orElse(true);
 
         boolean isPhoneMatch = phone.map(phone -> StringUtil
-                        .containsWordIgnoreCase(person.getPhone().value, phone))
+                        .containsWordIgnoreCase(student.getPhone().value, phone))
                 .orElse(true);
 
         boolean isStudentNumberMatch = studentNumber.map(studentNumber -> StringUtil
-                        .containsWordIgnoreCase(person.getStudentNumber().value, studentNumber))
+                        .containsWordIgnoreCase(student.getStudentNumber().value, studentNumber))
                 .orElse(true);
 
-        boolean isTagMatch = tag.map(tag -> person.getTags().stream()
+        boolean isTagMatch = tag.map(tag -> student.getTags().stream()
                     .anyMatch(t -> StringUtil.containsWordIgnoreCase(t.tagName, tag)))
                 .orElse(true);
 
@@ -72,11 +72,11 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof PersonContainsKeywordsPredicate)) {
+        if (!(other instanceof StudentContainsKeywordsPredicate)) {
             return false;
         }
 
-        PersonContainsKeywordsPredicate otherPredicate = (PersonContainsKeywordsPredicate) other;
+        StudentContainsKeywordsPredicate otherPredicate = (StudentContainsKeywordsPredicate) other;
         return otherPredicate.classNumber.equals(classNumber)
                 && otherPredicate.email.equals(email)
                 && otherPredicate.name.equals(name)

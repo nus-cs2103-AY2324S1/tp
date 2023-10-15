@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.LookupCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.PersonContainsKeywordsPredicate;
+import seedu.address.model.student.StudentContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new LookupCommand object
@@ -60,7 +60,7 @@ public class LookupCommandParser implements Parser<LookupCommand> {
         String tag = argMultimap.getValue(PREFIX_TAG)
                 .filter(s -> !s.isEmpty()).orElse(null);
 
-        PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(classNumber,
+        StudentContainsKeywordsPredicate predicate = new StudentContainsKeywordsPredicate(classNumber,
                 email, name, phone, studentNumber, tag);
         return new LookupCommand(predicate);
     }

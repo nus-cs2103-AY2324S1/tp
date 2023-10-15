@@ -11,7 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.PersonContainsKeywordsPredicate;
+import seedu.address.model.student.StudentContainsKeywordsPredicate;
 
 /**
  * Lookup all persons in class manager whose details contain any of
@@ -40,21 +40,21 @@ public class LookupCommand extends Command {
     public static final String MESSAGE_NO_MATCH = "No match found!";
     public static final String MESSAGE_ADDITIONAL_KEYWORDS = "Only one keyword is allowed for each prefix.";
 
-    private final PersonContainsKeywordsPredicate predicate;
+    private final StudentContainsKeywordsPredicate predicate;
 
-    public LookupCommand(PersonContainsKeywordsPredicate predicate) {
+    public LookupCommand(StudentContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
-        if (model.getFilteredPersonList().isEmpty()) {
+        model.updateFilteredStudentList(predicate);
+        if (model.getFilteredStudentList().isEmpty()) {
             return new CommandResult(MESSAGE_NO_MATCH);
         }
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredStudentList().size()));
     }
 
     @Override

@@ -1,10 +1,10 @@
-package seedu.address.model.person;
+package seedu.address.model.student;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's Class Number
+ * Represents a Student's Class Number
  * in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidClassNumber(String)}
  */

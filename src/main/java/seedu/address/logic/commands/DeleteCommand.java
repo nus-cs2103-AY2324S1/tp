@@ -7,23 +7,23 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.StudentNumber;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentNumber;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes a student identified using it's displayed index from the address book.
  */
 public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a person."
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a student."
             + "Parameters: "
             + PREFIX_STUDENT_NUMBER + "STUDENT NUMBER\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_STUDENT_NUMBER + "A0245234A";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Student: %1$s";
 
     private final StudentNumber targetStudentNumber;
 
@@ -35,14 +35,14 @@ public class DeleteCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (!model.hasPerson(new Person(targetStudentNumber))) {
+        if (!model.hasStudent(new Student(targetStudentNumber))) {
             throw new CommandException(Messages.MESSAGE_NONEXISTENT_STUDENT_NUMBER);
         }
 
-        Person personToDelete = model.getPerson(targetStudentNumber);
+        Student studentToDelete = model.getStudent(targetStudentNumber);
 
-        model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
+        model.deleteStudent(studentToDelete);
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(studentToDelete)));
     }
 
     @Override

@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.student;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -11,10 +11,10 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Person in the address book.
+ * Represents a Student in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public class Student {
 
     // Identity fields
     private final Name name;
@@ -32,7 +32,7 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(StudentNumber studentNumber) {
+    public Student(StudentNumber studentNumber) {
         requireAllNonNull(studentNumber);
         this.name = null;
         this.studentNumber = studentNumber;
@@ -44,8 +44,8 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, StudentNumber studentNumber,
-                  ClassNumber classNumber , Set<Tag> tags) {
+    public Student(Name name, Phone phone, Email email, StudentNumber studentNumber,
+                   ClassNumber classNumber , Set<Tag> tags) {
         requireAllNonNull(name, phone, email, studentNumber, classNumber, tags);
         this.name = name;
         this.phone = phone;
@@ -87,13 +87,13 @@ public class Person {
      * Returns true if both persons have the same student number.
      * This defines a weaker notion of equality between two persons.
      */
-    public boolean isSamePerson(Person otherPerson) {
-        if (otherPerson == this) {
+    public boolean isSamePerson(Student otherStudent) {
+        if (otherStudent == this) {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getStudentNumber().equals(getStudentNumber());
+        return otherStudent != null
+                && otherStudent.getStudentNumber().equals(getStudentNumber());
     }
 
     /**
@@ -107,13 +107,13 @@ public class Person {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Person)) {
+        if (!(other instanceof Student)) {
             return false;
         }
 
-        Person otherPerson = (Person) other;
+        Student otherStudent = (Student) other;
 
-        return studentNumber.equals(otherPerson.studentNumber);
+        return studentNumber.equals(otherStudent.studentNumber);
     }
 
     @Override

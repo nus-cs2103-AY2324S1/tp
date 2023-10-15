@@ -7,7 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.LoadCommand.MESSAGE_FILE_CANNOT_LOAD;
 import static seedu.address.logic.commands.LoadCommand.MESSAGE_FILE_NOT_FOUND;
 import static seedu.address.logic.commands.LoadCommand.MESSAGE_SUCCESS;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -97,7 +97,7 @@ public class LoadCommandTest {
         // null -> returns false
         assertFalse(loadFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different student -> returns false
         assertFalse(loadFirstCommand.equals(loadSecondCommand));
     }
 }

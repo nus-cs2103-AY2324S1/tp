@@ -10,7 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.StudentNumber;
+import seedu.address.model.student.StudentNumber;
 
 /**
  * Parses input arguments and creates a new DeleteCommand object
