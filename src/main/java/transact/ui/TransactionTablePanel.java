@@ -1,7 +1,5 @@
 package transact.ui;
 
-import java.util.Date;
-
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
@@ -27,24 +25,25 @@ public class TransactionTablePanel extends UiPart<Region> {
     public TransactionTablePanel(ObservableList<Transaction> transactionList) {
         super(FXML);
 
-        TableColumn<Transaction, Integer> idCol = new TableColumn<>("Id");
-        idCol.setCellValueFactory(new PropertyValueFactory<Transaction, Integer>("id"));
+        TableColumn<Transaction, String> idCol = new TableColumn<>("Id");
+        idCol.setCellValueFactory(new PropertyValueFactory<Transaction, String>("transactionId"));
         // TODO Switch to enum when transaction class is implemented
-        TableColumn<Transaction, String> typeCol = new TableColumn<>("Type");
-        typeCol.setCellValueFactory(new PropertyValueFactory<Transaction, String>("type"));
+        // TableColumn<Transaction, String> typeCol = new TableColumn<>("Type");
+        // typeCol.setCellValueFactory(new PropertyValueFactory<Transaction, String>("type"));
 
-        TableColumn<Transaction, Date> dateCol = new TableColumn<>("Date");
-        dateCol.setCellValueFactory(new PropertyValueFactory<Transaction, Date>("id"));
+        // TODO Need add date to transaction class
+        // TableColumn<Transaction, Date> dateCol = new TableColumn<>("Date");
+        // dateCol.setCellValueFactory(new PropertyValueFactory<Transaction, Date>("id"));
 
         TableColumn<Transaction, String> descCol = new TableColumn<>("Description");
-        descCol.setCellValueFactory(new PropertyValueFactory<Transaction, String>("id"));
+        descCol.setCellValueFactory(new PropertyValueFactory<Transaction, String>("description"));
 
         TableColumn<Transaction, Integer> amtCol = new TableColumn<>("Amount");
-        amtCol.setCellValueFactory(new PropertyValueFactory<Transaction, Integer>("id"));
+        amtCol.setCellValueFactory(new PropertyValueFactory<Transaction, Integer>("amount"));
 
         // TableColumn<Transaction, Integer> staffCol = new TableColumn<>("Staff");
 
-        transactionTable.getColumns().setAll(idCol, typeCol, dateCol, descCol, amtCol);
+        transactionTable.getColumns().setAll(idCol, descCol, amtCol);
 
         transactionTable.setItems(transactionList);
     }

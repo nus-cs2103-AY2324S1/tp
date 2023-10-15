@@ -10,58 +10,58 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 
 import javafx.collections.ObservableList;
 import transact.commons.exceptions.IllegalValueException;
-import transact.model.ReadOnlyTransactionLog;
-import transact.model.TransactionLog;
+import transact.model.ReadOnlyTransactionBook;
+import transact.model.TransactionBook;
 import transact.model.transaction.Transaction;
 
 /**
- * An Immutable TransactionLog that is serializable to JSON format.
+ * An Immutable TransactionBook that is serializable to JSON format.
  */
-@JsonRootName(value = "transactionlog")
-public class JsonSerializableTransactionLog {
+@JsonRootName(value = "transactionBook")
+public class JsonSerializableTransactionBook {
 
     public static final String MESSAGE_DUPLICATE_TRANSACTION = "Transaction log contains duplicate transactions.";
 
     private final List<JsonAdaptedTransaction> transactions = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableTransactionLog} with the given
+     * Constructs a {@code JsonSerializableTransactionBook} with the given
      * transactions.
      */
     @JsonCreator
-    public JsonSerializableTransactionLog(
+    public JsonSerializableTransactionBook(
             @JsonProperty("transactions") ObservableList<JsonAdaptedTransaction> transactions) {
         this.transactions.addAll(transactions);
     }
 
     /**
-     * Converts a given {@code TransactionLog} into this class for Jackson use.
+     * Converts a given {@code TransactionBook} into this class for Jackson use.
      *
      * @param source
      *            future changes to this will not affect the created
-     *            {@code JsonSerializableTransactionLog}.
+     *            {@code JsonSerializableTransactionBook}.
      */
-    public JsonSerializableTransactionLog(ReadOnlyTransactionLog source) {
+    public JsonSerializableTransactionBook(ReadOnlyTransactionBook source) {
         transactions.addAll(source.getTransactionList().stream()
                 .map(JsonAdaptedTransaction::new)
                 .collect(Collectors.toList()));
     }
 
     /**
-     * Converts this transaction log into the model's {@code TransactionLog} object.
+     * Converts this transaction log into the model's {@code TransactionBook} object.
      *
      * @throws IllegalValueException
      *             if there were any data constraints violated.
      */
-    public TransactionLog toModelType() throws IllegalValueException {
-        TransactionLog transactionLog = new TransactionLog();
+    public TransactionBook toModelType() throws IllegalValueException {
+        TransactionBook transactionBook = new TransactionBook();
         for (JsonAdaptedTransaction jsonAdaptedTransaction : transactions) {
             Transaction transaction = jsonAdaptedTransaction.toModelType();
-            if (transactionLog.hasTransaction(transaction)) {
+            if (transactionBook.hasTransaction(transaction)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_TRANSACTION);
             }
-            transactionLog.addTransaction(transaction);
+            transactionBook.addTransaction(transaction);
         }
-        return transactionLog;
+        return transactionBook;
     }
 }

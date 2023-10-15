@@ -7,7 +7,6 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import transact.commons.core.GuiSettings;
@@ -22,6 +21,7 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
+    private final TransactionBook transactionBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Transaction> filteredTransactions;
@@ -29,33 +29,21 @@ public class ModelManager implements Model {
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyTransactionBook transactionBook,
+                        ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
+        this.transactionBook = new TransactionBook(transactionBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-
-        ObservableList<Transaction> tmpTransactions = FXCollections.observableArrayList();
-
-        // Placeholder transaction objects (x5)
-        /*tmpTransactions.add(new Transaction());
-        tmpTransactions.add(new Transaction());
-        tmpTransactions.add(new Transaction());
-        tmpTransactions.add(new Transaction());
-        tmpTransactions.add(new Transaction());*/
-
-
-        filteredTransactions = new FilteredList<>(tmpTransactions);
-
-        // This line is required to pass test's, needs further debugging
-        updateFilteredTransactionList(PREDICATE_HIDE_ALL_TRANSACTIONS);
+        filteredTransactions = new FilteredList<>(this.transactionBook.getTransactionList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new TransactionBook(), new UserPrefs());
     }
 
     // =========== UserPrefs
@@ -92,6 +80,17 @@ public class ModelManager implements Model {
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         userPrefs.setAddressBookFilePath(addressBookFilePath);
+    }
+
+    @Override
+    public Path getTransactionBookFilePath() {
+        return userPrefs.getTransactionBookFilePath();
+    }
+
+    @Override
+    public void setTransactionBookFilePath(Path transactionBookFilePath) {
+        requireNonNull(transactionBookFilePath);
+        userPrefs.setTransactionBookFilePath(transactionBookFilePath);
     }
 
     // =========== AddressBook
@@ -131,28 +130,43 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
-    // =========== Filtered Person List Accessors
-    // =============================================================
+    // =========== TransactionBook
+    // ================================================================================
+
+    @Override
+    public void setTransactionBook(ReadOnlyTransactionBook transactionBook) {
+        this.transactionBook.resetData(transactionBook);
+    }
+
+    @Override
+    public TransactionBook getTransactionBook() {
+        return transactionBook;
+    }
 
     @Override
     public boolean hasTransaction(Transaction transaction) {
-        return false;
+        return transactionBook.hasTransaction(transaction);
     }
 
     @Override
     public void deleteTransaction(Transaction transaction) {
+        transactionBook.removeTransaction(transaction);
     }
 
     @Override
     public void addTransaction(Transaction transaction) {
-
+        requireNonNull(transaction);
+        transactionBook.addTransaction(transaction);
     }
 
     public void setTransaction(Transaction transaction, Transaction editedTransaction) {
         requireAllNonNull(transaction, editedTransaction);
-
-
+        transactionBook.setTransaction(transaction, editedTransaction);
     }
+
+    // =========== Filtered Person List Accessors
+    // =============================================================
+
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the
      * internal list of
@@ -200,6 +214,7 @@ public class ModelManager implements Model {
 
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
+                && transactionBook.equals(otherModelManager.transactionBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons)
                 && filteredTransactions.equals(otherModelManager.filteredTransactions);

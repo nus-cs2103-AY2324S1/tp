@@ -6,6 +6,7 @@ import transact.commons.util.ToStringBuilder;
 import transact.logic.Messages;
 import transact.model.Model;
 import transact.model.person.NameContainsKeywordsPredicate;
+import transact.ui.MainWindow.TabWindow;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the
@@ -32,7 +33,8 @@ public class FindCommand extends Command {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()), 2);
+                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()),
+                TabWindow.ADDRESSBOOK);
     }
 
     @Override

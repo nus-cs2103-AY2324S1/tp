@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import transact.model.AddressBook;
 import transact.model.Model;
+import transact.ui.MainWindow.TabWindow;
 
 /**
  * Clears the address book.
@@ -17,6 +18,6 @@ public class ClearCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.setAddressBook(new AddressBook());
-        return new CommandResult(MESSAGE_SUCCESS, 2);
+        return new CommandResult(MESSAGE_SUCCESS, TabWindow.ADDRESSBOOK);
     }
 }

@@ -2,29 +2,31 @@ package transact.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.List;
+
 import javafx.collections.ObservableList;
 import transact.commons.util.ToStringBuilder;
 import transact.model.transaction.Transaction;
-import transact.model.transaction.UniqueTransactionList;
 
 /**
- * Wraps all data at the transaction log level.
+ * Wraps transaction data at the transaction-book level
+ * Duplicates are not allowed (by .isSameEntry comparison)
  */
-public class TransactionLog implements ReadOnlyTransactionLog {
+public class TransactionBook implements ReadOnlyTransactionBook {
 
-    private final UniqueTransactionList transactions;
+    private final UniqueEntryList<Transaction> transactions;
 
     {
-        transactions = new UniqueTransactionList();
+        transactions = new UniqueEntryList<>();
     }
 
-    public TransactionLog() {
+    public TransactionBook() {
     }
 
     /**
-     * Creates a TransactionLog using the transactions in the {@code toBeCopied}.
+     * Creates a TransactionBook using the Transactions in the {@code toBeCopied}
      */
-    public TransactionLog(ReadOnlyTransactionLog toBeCopied) {
+    public TransactionBook(ReadOnlyTransactionBook toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -35,15 +37,16 @@ public class TransactionLog implements ReadOnlyTransactionLog {
      * Replaces the contents of the transaction list with {@code transactions}.
      * {@code transactions} must not contain duplicate transactions.
      */
-    public void setTransactions(ObservableList<Transaction> transactions) {
-        this.transactions.setTransactions(transactions);
+    public void setTransactions(List<Transaction> transactions) {
+        this.transactions.setEntries(transactions);
     }
 
     /**
-     * Resets the existing data of this {@code TransactionLog} with {@code newData}.
+     * Resets the existing data of this {@code TransactionBook} with {@code newData}.
      */
-    public void resetData(ReadOnlyTransactionLog newData) {
+    public void resetData(ReadOnlyTransactionBook newData) {
         requireNonNull(newData);
+
         setTransactions(newData.getTransactionList());
     }
 
@@ -51,7 +54,7 @@ public class TransactionLog implements ReadOnlyTransactionLog {
 
     /**
      * Returns true if a transaction with the same identity as {@code transaction}
-     * exists in the transaction log.
+     * exists in the transaction book.
      */
     public boolean hasTransaction(Transaction transaction) {
         requireNonNull(transaction);
@@ -59,8 +62,8 @@ public class TransactionLog implements ReadOnlyTransactionLog {
     }
 
     /**
-     * Adds a transaction to the transaction log.
-     * The transaction must not already exist in the transaction log.
+     * Adds a transaction to the transaction book.
+     * The transaction must not already exist in the transaction book.
      */
     public void addTransaction(Transaction t) {
         transactions.add(t);
@@ -69,19 +72,19 @@ public class TransactionLog implements ReadOnlyTransactionLog {
     /**
      * Replaces the given transaction {@code target} in the list with
      * {@code editedTransaction}.
-     * {@code target} must exist in the transaction log.
-     * The transaction identity of {@code editedTransaction} must not be the same as
-     * another
-     * existing transaction in the transaction log.
+     * {@code target} must exist in the transaction book.
+     * The transaction identity of {@code editedTransaction} must not be the
+     * same as another existing transaction in the transaction book.
      */
     public void setTransaction(Transaction target, Transaction editedTransaction) {
         requireNonNull(editedTransaction);
-        transactions.setTransaction(target, editedTransaction);
+
+        transactions.setEntry(target, editedTransaction);
     }
 
     /**
-     * Removes {@code key} from this {@code TransactionLog}.
-     * {@code key} must exist in the transaction log.
+     * Removes {@code key} from this {@code TransactionBook}.
+     * {@code key} must exist in the transaction book.
      */
     public void removeTransaction(Transaction key) {
         transactions.remove(key);
@@ -107,12 +110,13 @@ public class TransactionLog implements ReadOnlyTransactionLog {
             return true;
         }
 
-        if (!(other instanceof TransactionLog)) {
+        // instanceof handles nulls
+        if (!(other instanceof TransactionBook)) {
             return false;
         }
 
-        TransactionLog otherTransactionLog = (TransactionLog) other;
-        return transactions.equals(otherTransactionLog.transactions);
+        TransactionBook otherTransactionBook = (TransactionBook) other;
+        return transactions.equals(otherTransactionBook.transactions);
     }
 
     @Override

@@ -5,6 +5,7 @@ import static transact.commons.util.AppUtil.checkArgument;
 import java.util.Objects;
 
 import transact.commons.util.ToStringBuilder;
+import transact.model.entry.Entry;
 import transact.model.person.Person;
 import transact.model.transaction.info.Amount;
 import transact.model.transaction.info.Description;
@@ -13,7 +14,7 @@ import transact.model.transaction.info.TransactionId;
 /**
  * Represents a Transaction in the address book.
  */
-public class Transaction {
+public class Transaction implements Entry {
 
     public static final String MESSAGE_CONSTRAINTS = "This Transaction does not contain information about people involved";
 
@@ -109,5 +110,20 @@ public class Transaction {
                 .add("description", description)
                 .add("amount", amount)
                 .toString();
+    }
+
+    @Override
+    public boolean isSameEntry(Entry otherEntry) {
+        if (otherEntry == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(otherEntry instanceof Transaction)) {
+            return false;
+        }
+
+        Transaction otherTransaction = (Transaction) otherEntry;
+        return transactionId == otherTransaction.transactionId;
     }
 }

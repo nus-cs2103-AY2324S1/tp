@@ -10,6 +10,7 @@ import transact.logic.Messages;
 import transact.logic.commands.exceptions.CommandException;
 import transact.model.Model;
 import transact.model.person.Person;
+import transact.ui.MainWindow.TabWindow;
 
 /**
  * Deletes a person identified using it's displayed index from the address book.
@@ -42,7 +43,8 @@ public class DeleteStaffCommand extends Command {
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)), 2);
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)),
+                TabWindow.ADDRESSBOOK);
     }
 
     @Override

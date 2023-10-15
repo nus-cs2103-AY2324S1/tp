@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import transact.commons.util.ToStringBuilder;
+import transact.model.entry.Entry;
 import transact.model.tag.Tag;
 
 /**
@@ -15,7 +16,7 @@ import transact.model.tag.Tag;
  * Guarantees: details are present and not null, field values are validated,
  * immutable.
  */
-public class Person {
+public class Person implements Entry {
 
     // Identity fields
     private final Name name;
@@ -67,13 +68,17 @@ public class Person {
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
-    public boolean isSamePerson(Person otherPerson) {
-        if (otherPerson == this) {
+    public boolean isSameEntry(Entry otherEntry) {
+        if (otherEntry == this) {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getName().equals(getName());
+        if (!(otherEntry instanceof Person)) {
+            return false;
+        }
+
+        Person otherPerson = (Person) otherEntry;
+        return otherPerson.getName().equals(getName());
     }
 
     /**
