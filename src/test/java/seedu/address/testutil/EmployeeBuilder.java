@@ -10,6 +10,7 @@ import seedu.address.model.employee.Id;
 import seedu.address.model.employee.Name;
 import seedu.address.model.employee.Phone;
 import seedu.address.model.employee.Position;
+import seedu.address.model.employee.Salary;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -22,12 +23,14 @@ public class EmployeeBuilder {
     public static final String DEFAULT_ID = "EID1234-5678";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
+    public static final String DEFAULT_SALARY = "$12,000";
 
     private Name name;
     private Position position;
     private Id id;
     private Phone phone;
     private Email email;
+    private Salary salary;
     private Set<Department> departments;
 
     /**
@@ -39,6 +42,7 @@ public class EmployeeBuilder {
         id = new Id(DEFAULT_ID);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
+        salary = new Salary(DEFAULT_SALARY);
         departments = new HashSet<>();
     }
 
@@ -51,6 +55,7 @@ public class EmployeeBuilder {
         id = employeeToCopy.getId();
         phone = employeeToCopy.getPhone();
         email = employeeToCopy.getEmail();
+        salary = employeeToCopy.getSalary();
         departments = new HashSet<>(employeeToCopy.getDepartments());
     }
 
@@ -103,8 +108,16 @@ public class EmployeeBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Salary} of the {@code employee} that we are building.
+     */
+    public EmployeeBuilder withSalary(String salary) {
+        this.salary = new Salary(salary);
+        return this;
+    }
+
     public Employee build() {
-        return new Employee(name, position, id, phone, email, departments);
+        return new Employee(name, position, id, phone, email, salary, departments);
     }
 
 }

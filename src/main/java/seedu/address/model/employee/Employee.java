@@ -24,18 +24,21 @@ public class Employee {
     private final Email email;
 
     // Data fields
+    private final Salary salary;
     private final Set<Department> departments = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Employee(Name name, Position position, Id id, Phone phone, Email email, Set<Department> departments) {
-        requireAllNonNull(name, phone, email, departments);
+    public Employee(Name name, Position position, Id id, Phone phone, Email email, Salary salary,
+                    Set<Department> departments) {
+        requireAllNonNull(name, position, id, phone, email, salary, departments);
         this.name = name;
         this.position = position;
         this.id = id;
         this.phone = phone;
         this.email = email;
+        this.salary = salary;
         this.departments.addAll(departments);
     }
 
@@ -57,6 +60,10 @@ public class Employee {
 
     public Email getEmail() {
         return email;
+    }
+
+    public Salary getSalary() {
+        return salary;
     }
 
 
@@ -102,13 +109,14 @@ public class Employee {
                 && id.equals(otherEmployee.id)
                 && phone.equals(otherEmployee.phone)
                 && email.equals(otherEmployee.email)
+                && salary.equals(otherEmployee.salary)
                 && departments.equals(otherEmployee.departments);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, position, id, phone, email, departments);
+        return Objects.hash(name, position, id, phone, email, salary, departments);
     }
 
     @Override
@@ -119,6 +127,7 @@ public class Employee {
                 .add("id", id)
                 .add("phone", phone)
                 .add("email", email)
+                .add("salary", salary)
                 .add("departments", departments)
                 .toString();
     }

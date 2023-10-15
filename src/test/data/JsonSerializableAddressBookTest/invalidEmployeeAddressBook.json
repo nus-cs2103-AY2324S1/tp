@@ -5,7 +5,8 @@
       "position": "CEO",
       "id": "EID1234-5678",
       "phone": "9482424",
-      "email": "invalid@email!3e"
+      "email": "invalid@email!3e",
+      "salary": "$14,000"
     }
   ]
 }
