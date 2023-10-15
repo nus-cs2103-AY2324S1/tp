@@ -37,7 +37,7 @@ public class ApplicantCard extends UiPart<Region> {
     @FXML
     private Label position;
     @FXML
-    private Label department;
+    private Label email;
     @FXML
     private FlowPane interviews;
 
@@ -51,7 +51,7 @@ public class ApplicantCard extends UiPart<Region> {
         name.setText(applicant.getName().fullName);
         phone.setText(applicant.getPhone().value);
         position.setText(applicant.getPosition().value);
-        department.setText(applicant.getDepartment().value);
+        email.setText(applicant.getEmail().value);
         applicant.getInterviews().stream()
                 .sorted(Comparator.comparing(interview -> interview.type))
                 .forEach(interview -> interviews.getChildren().add(new Label(interview.type)));

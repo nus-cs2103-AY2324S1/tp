@@ -1,7 +1,7 @@
 package seedu.staffsnap.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_DEPARTMENT;
+import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_INTERVIEW;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -22,7 +22,7 @@ import seedu.staffsnap.logic.Messages;
 import seedu.staffsnap.logic.commands.exceptions.CommandException;
 import seedu.staffsnap.model.Model;
 import seedu.staffsnap.model.applicant.Applicant;
-import seedu.staffsnap.model.applicant.Department;
+import seedu.staffsnap.model.applicant.Email;
 import seedu.staffsnap.model.applicant.Name;
 import seedu.staffsnap.model.applicant.Phone;
 import seedu.staffsnap.model.applicant.Position;
@@ -41,12 +41,12 @@ public class EditCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_DEPARTMENT + "DEPARTMENT] "
+            + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_POSITION + "POSITION] "
             + "[" + PREFIX_INTERVIEW + "INTERVIEW]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_DEPARTMENT + "johndoe@example.com";
+            + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_APPLICANT_SUCCESS = "Edited Applicant: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -98,12 +98,12 @@ public class EditCommand extends Command {
 
         Name updatedName = editApplicantDescriptor.getName().orElse(applicantToEdit.getName());
         Phone updatedPhone = editApplicantDescriptor.getPhone().orElse(applicantToEdit.getPhone());
-        Department updatedDepartment = editApplicantDescriptor.getDepartment().orElse(applicantToEdit.getDepartment());
+        Email updatedEmail = editApplicantDescriptor.getEmail().orElse(applicantToEdit.getEmail());
         Position updatedPosition = editApplicantDescriptor.getPosition().orElse(applicantToEdit.getPosition());
         Set<Interview> updatedInterviews = editApplicantDescriptor
                 .getInterviews().orElse(applicantToEdit.getInterviews());
 
-        return new Applicant(updatedName, updatedPhone, updatedDepartment, updatedPosition, updatedInterviews);
+        return new Applicant(updatedName, updatedPhone, updatedEmail, updatedPosition, updatedInterviews);
     }
 
     @Override
@@ -137,7 +137,7 @@ public class EditCommand extends Command {
     public static class EditApplicantDescriptor {
         private Name name;
         private Phone phone;
-        private Department department;
+        private Email email;
         private Position position;
         private Set<Interview> interviews;
 
@@ -150,7 +150,7 @@ public class EditCommand extends Command {
         public EditApplicantDescriptor(EditApplicantDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
-            setDepartment(toCopy.department);
+            setEmail(toCopy.email);
             setPosition(toCopy.position);
             setInterviews(toCopy.interviews);
         }
@@ -159,7 +159,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, department, position, interviews);
+            return CollectionUtil.isAnyNonNull(name, phone, email, position, interviews);
         }
 
         public void setName(Name name) {
@@ -178,12 +178,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(phone);
         }
 
-        public void setDepartment(Department department) {
-            this.department = department;
+        public void setEmail(Email email) {
+            this.email = email;
         }
 
-        public Optional<Department> getDepartment() {
-            return Optional.ofNullable(department);
+        public Optional<Email> getEmail() {
+            return Optional.ofNullable(email);
         }
 
         public void setPosition(Position position) {
@@ -225,7 +225,7 @@ public class EditCommand extends Command {
             EditApplicantDescriptor otherEditApplicantDescriptor = (EditApplicantDescriptor) other;
             return Objects.equals(name, otherEditApplicantDescriptor.name)
                     && Objects.equals(phone, otherEditApplicantDescriptor.phone)
-                    && Objects.equals(department, otherEditApplicantDescriptor.department)
+                    && Objects.equals(email, otherEditApplicantDescriptor.email)
                     && Objects.equals(position, otherEditApplicantDescriptor.position)
                     && Objects.equals(interviews, otherEditApplicantDescriptor.interviews);
         }
@@ -235,7 +235,7 @@ public class EditCommand extends Command {
             return new ToStringBuilder(this)
                     .add("name", name)
                     .add("phone", phone)
-                    .add("department", department)
+                    .add("email", email)
                     .add("position", position)
                     .add("interviews", interviews)
                     .toString();

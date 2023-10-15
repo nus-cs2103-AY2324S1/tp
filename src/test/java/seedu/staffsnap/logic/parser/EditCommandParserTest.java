@@ -1,11 +1,11 @@
 package seedu.staffsnap.logic.parser;
 
 import static seedu.staffsnap.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.staffsnap.logic.commands.CommandTestUtil.DEPARTMENT_DESC_AMY;
-import static seedu.staffsnap.logic.commands.CommandTestUtil.DEPARTMENT_DESC_BOB;
+import static seedu.staffsnap.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
+import static seedu.staffsnap.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.INTERVIEW_DESC_FRIEND;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.INTERVIEW_DESC_HUSBAND;
-import static seedu.staffsnap.logic.commands.CommandTestUtil.INVALID_DEPARTMENT_DESC;
+import static seedu.staffsnap.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.INVALID_INTERVIEW_DESC;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
@@ -15,14 +15,14 @@ import static seedu.staffsnap.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.POSITION_DESC_AMY;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.POSITION_DESC_BOB;
-import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_DEPARTMENT_AMY;
+import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_INTERVIEW_FRIEND;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_INTERVIEW_HUSBAND;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_POSITION_AMY;
-import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_DEPARTMENT;
+import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_INTERVIEW;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_POSITION;
@@ -38,7 +38,7 @@ import seedu.staffsnap.commons.core.index.Index;
 import seedu.staffsnap.logic.Messages;
 import seedu.staffsnap.logic.commands.EditCommand;
 import seedu.staffsnap.logic.commands.EditCommand.EditApplicantDescriptor;
-import seedu.staffsnap.model.applicant.Department;
+import seedu.staffsnap.model.applicant.Email;
 import seedu.staffsnap.model.applicant.Name;
 import seedu.staffsnap.model.applicant.Phone;
 import seedu.staffsnap.model.applicant.Position;
@@ -85,12 +85,12 @@ public class EditCommandParserTest {
     public void parse_invalidValue_failure() {
         assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone
-        assertParseFailure(parser, "1" + INVALID_DEPARTMENT_DESC, Department.MESSAGE_CONSTRAINTS); // invalid email
+        assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
         assertParseFailure(parser, "1" + INVALID_POSITION_DESC, Position.MESSAGE_CONSTRAINTS); // invalid position
         assertParseFailure(parser, "1" + INVALID_INTERVIEW_DESC, Interview.MESSAGE_CONSTRAINTS); // invalid interview
 
-        // invalid phone followed by valid department
-        assertParseFailure(parser, "1" + INVALID_PHONE_DESC + DEPARTMENT_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
+        // invalid phone followed by valid email
+        assertParseFailure(parser, "1" + INVALID_PHONE_DESC + EMAIL_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
 
         // while parsing {@code PREFIX_INTERVIEW} alone will reset the interviews of the {@code Applicant} being edited,
         // parsing it together with a valid interview results in error
@@ -102,7 +102,7 @@ public class EditCommandParserTest {
                 + INTERVIEW_EMPTY + INTERVIEW_DESC_FRIEND + INTERVIEW_DESC_HUSBAND, Interview.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
-        assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_DEPARTMENT_DESC
+        assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC
                         + VALID_POSITION_AMY + VALID_PHONE_AMY, Name.MESSAGE_CONSTRAINTS);
     }
 
@@ -110,10 +110,10 @@ public class EditCommandParserTest {
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_APPLICANT;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + INTERVIEW_DESC_HUSBAND
-                + DEPARTMENT_DESC_AMY + POSITION_DESC_AMY + NAME_DESC_AMY + INTERVIEW_DESC_FRIEND;
+                + EMAIL_DESC_AMY + POSITION_DESC_AMY + NAME_DESC_AMY + INTERVIEW_DESC_FRIEND;
 
         EditApplicantDescriptor descriptor = new EditApplicantDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_BOB).withDepartment(VALID_DEPARTMENT_AMY).withPosition(VALID_POSITION_AMY)
+                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withPosition(VALID_POSITION_AMY)
                 .withInterviews(VALID_INTERVIEW_HUSBAND, VALID_INTERVIEW_FRIEND).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
@@ -123,10 +123,10 @@ public class EditCommandParserTest {
     @Test
     public void parse_someFieldsSpecified_success() {
         Index targetIndex = INDEX_FIRST_APPLICANT;
-        String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + DEPARTMENT_DESC_AMY;
+        String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + EMAIL_DESC_AMY;
 
         EditApplicantDescriptor descriptor = new EditApplicantDescriptorBuilder().withPhone(VALID_PHONE_BOB)
-                .withDepartment(VALID_DEPARTMENT_AMY).build();
+                .withEmail(VALID_EMAIL_AMY).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -147,9 +147,9 @@ public class EditCommandParserTest {
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // department
-        userInput = targetIndex.getOneBased() + DEPARTMENT_DESC_AMY;
-        descriptor = new EditApplicantDescriptorBuilder().withDepartment(VALID_DEPARTMENT_AMY).build();
+        // email
+        userInput = targetIndex.getOneBased() + EMAIL_DESC_AMY;
+        descriptor = new EditApplicantDescriptorBuilder().withEmail(VALID_EMAIL_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -183,20 +183,20 @@ public class EditCommandParserTest {
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
         // mulltiple valid fields repeated
-        userInput = targetIndex.getOneBased() + PHONE_DESC_AMY + POSITION_DESC_AMY + DEPARTMENT_DESC_AMY
-                + INTERVIEW_DESC_FRIEND + PHONE_DESC_AMY + POSITION_DESC_AMY + DEPARTMENT_DESC_AMY
-                + INTERVIEW_DESC_FRIEND + PHONE_DESC_BOB + POSITION_DESC_BOB + DEPARTMENT_DESC_BOB
+        userInput = targetIndex.getOneBased() + PHONE_DESC_AMY + POSITION_DESC_AMY + EMAIL_DESC_AMY
+                + INTERVIEW_DESC_FRIEND + PHONE_DESC_AMY + POSITION_DESC_AMY + EMAIL_DESC_AMY
+                + INTERVIEW_DESC_FRIEND + PHONE_DESC_BOB + POSITION_DESC_BOB + EMAIL_DESC_BOB
                 + INTERVIEW_DESC_HUSBAND;
 
         assertParseFailure(parser, userInput,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_DEPARTMENT, PREFIX_POSITION));
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_POSITION));
 
         // multiple invalid values
-        userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + INVALID_POSITION_DESC + INVALID_DEPARTMENT_DESC
-                + INVALID_PHONE_DESC + INVALID_POSITION_DESC + INVALID_DEPARTMENT_DESC;
+        userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + INVALID_POSITION_DESC + INVALID_EMAIL_DESC
+                + INVALID_PHONE_DESC + INVALID_POSITION_DESC + INVALID_EMAIL_DESC;
 
         assertParseFailure(parser, userInput,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_DEPARTMENT, PREFIX_POSITION));
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_POSITION));
     }
 
     @Test

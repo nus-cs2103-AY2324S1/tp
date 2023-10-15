@@ -9,7 +9,7 @@ import java.util.Set;
 import seedu.staffsnap.commons.core.index.Index;
 import seedu.staffsnap.commons.util.StringUtil;
 import seedu.staffsnap.logic.parser.exceptions.ParseException;
-import seedu.staffsnap.model.applicant.Department;
+import seedu.staffsnap.model.applicant.Email;
 import seedu.staffsnap.model.applicant.Name;
 import seedu.staffsnap.model.applicant.Phone;
 import seedu.staffsnap.model.applicant.Position;
@@ -81,18 +81,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String department} into an {@code Department}.
+     * Parses a {@code String email} into an {@code Email}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code department} is invalid.
+     * @throws ParseException if the given {@code email} is invalid.
      */
-    public static Department parseDepartment(String department) throws ParseException {
-        requireNonNull(department);
-        String trimmedDepartment = department.trim();
-        if (!Department.isValidDepartment(trimmedDepartment)) {
-            throw new ParseException(Department.MESSAGE_CONSTRAINTS);
+    public static Email parseEmail(String email) throws ParseException {
+        requireNonNull(email);
+        String trimmedEmail = email.trim();
+        if (!Email.isValidEmail(trimmedEmail)) {
+            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
-        return new Department(trimmedDepartment);
+        return new Email(trimmedEmail);
     }
 
     /**

@@ -3,7 +3,7 @@ package seedu.staffsnap.model.applicant;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_DEPARTMENT_BOB;
+import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_INTERVIEW_HUSBAND;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -34,7 +34,7 @@ public class ApplicantTest {
 
         // same name, all other attributes different -> returns true
         Applicant editedAlice = new ApplicantBuilder(ALICE).withPhone(VALID_PHONE_BOB)
-                .withDepartment(VALID_DEPARTMENT_BOB).withPosition(VALID_POSITION_BOB)
+                .withEmail(VALID_EMAIL_BOB).withPosition(VALID_POSITION_BOB)
                 .withInterviews(VALID_INTERVIEW_HUSBAND).build();
         assertTrue(ALICE.isSameApplicant(editedAlice));
 
@@ -78,8 +78,8 @@ public class ApplicantTest {
         editedAlice = new ApplicantBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different department -> returns false
-        editedAlice = new ApplicantBuilder(ALICE).withDepartment(VALID_DEPARTMENT_BOB).build();
+        // different email -> returns false
+        editedAlice = new ApplicantBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different position -> returns false
@@ -94,7 +94,7 @@ public class ApplicantTest {
     @Test
     public void toStringMethod() {
         String expected = Applicant.class.getCanonicalName() + "{name=" + ALICE.getName()
-                + ", phone=" + ALICE.getPhone() + ", department=" + ALICE.getDepartment()
+                + ", phone=" + ALICE.getPhone() + ", email=" + ALICE.getEmail()
                 + ", position=" + ALICE.getPosition() + ", interviews=" + ALICE.getInterviews() + "}";
         assertEquals(expected, ALICE.toString());
     }

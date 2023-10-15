@@ -1,7 +1,7 @@
 package seedu.staffsnap.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_DEPARTMENT;
+import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_INTERVIEW;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -24,13 +24,13 @@ public class AddCommand extends Command {
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
-            + PREFIX_DEPARTMENT + "DEPARTMENT "
+            + PREFIX_EMAIL + "EMAIL "
             + PREFIX_POSITION + "POSITION "
             + "[" + PREFIX_INTERVIEW + "INTERVIEW]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
-            + PREFIX_DEPARTMENT + "johnd@example.com "
+            + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_POSITION + "311, Clementi Ave 2, #02-25 "
             + PREFIX_INTERVIEW + "friends "
             + PREFIX_INTERVIEW + "owesMoney";
