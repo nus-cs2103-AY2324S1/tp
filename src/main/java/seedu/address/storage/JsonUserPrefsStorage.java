@@ -21,18 +21,8 @@ public class JsonUserPrefsStorage implements UserPrefsStorage2 {
     }
 
     @Override
-    public Path getUserPrefsFilePath() {
-        return filePath;
-    }
-
-    @Override
     public Optional<UserPrefs2> readUserPrefs() throws DataLoadingException {
         return readUserPrefs(filePath);
-    }
-
-    @Override
-    public void saveUserPrefs(ReadOnlyUserPrefs2 userPrefs) throws IOException {
-
     }
 
     /**
@@ -43,6 +33,17 @@ public class JsonUserPrefsStorage implements UserPrefsStorage2 {
     public Optional<UserPrefs2> readUserPrefs(Path prefsFilePath) throws DataLoadingException {
         return JsonUtil.readJsonFile(prefsFilePath, UserPrefs2.class);
     }
+
+    @Override
+    public Path getUserPrefsFilePath() {
+        return filePath;
+    }
+
+    @Override
+    public void saveUserPrefs(ReadOnlyUserPrefs2 userPrefs) throws IOException {
+
+    }
+
 
 
 }
