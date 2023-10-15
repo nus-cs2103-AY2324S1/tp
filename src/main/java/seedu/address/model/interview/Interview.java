@@ -6,15 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
  * Represents an Interview in the address book.
  */
 public class Interview {
-    /**
-     * Static counter of how many Interview objects have been globally created.
-     * Used as the unique ID (until int limit 2,147,483,647) for Interview objects.
-     * Limit is presumed to not feasibly be reached ever since the application is constrained to
-     * 'no remote server, single user'
-     */
-    private static int globalInterviewId = 0;
 
-    private int interviewId;
     /** TODO Change from 'String' to 'Applicant' once Applicant is on master*/
     private String applicant;
     private String jobRole;
@@ -27,8 +19,6 @@ public class Interview {
      */
     public Interview(String app, String role, String timing) {
         requireAllNonNull(app, role, timing);
-        incrementGlobalInterviewId();
-        interviewId = getGlobalInterviewId();
         applicant = app;
         jobRole = role;
         interviewTiming = timing;
@@ -44,12 +34,8 @@ public class Interview {
         }
 
         return otherInterview != null
-                && otherInterview.getInterviewTiming() == getInterviewTiming()
+                && otherInterview.getInterviewTiming().equals(getInterviewTiming())
                 && otherInterview.getInterviewApplicant().equals(getInterviewApplicant());
-    }
-
-    public int getInterviewId() {
-        return interviewId;
     }
 
     /* TODO Update return type from String to Applicant */
@@ -63,17 +49,6 @@ public class Interview {
 
     public String getInterviewTiming() {
         return interviewTiming;
-    }
-
-    public static int getGlobalInterviewId() {
-        return globalInterviewId;
-    }
-
-    /**
-     * Increments the interviewId counter by 1.
-     */
-    public static void incrementGlobalInterviewId() {
-        globalInterviewId += 1;
     }
 
 }
