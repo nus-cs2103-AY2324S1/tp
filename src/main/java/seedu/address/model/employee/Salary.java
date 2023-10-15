@@ -9,9 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Salary {
 
-    public static final String MESSAGE_CONSTRAINTS =
-            "Salary should begin with '$' and contain numbers. \n" +
-                    "Numbers should have commas for thousands separators and may or may not have decimal places.";
+    public static final String MESSAGE_CONSTRAINTS = "Salary should begin with '$' and contain numbers. \n"
+        + "Numbers should have commas for thousands separators and may or may not have decimal places.";
 
     public static final String VALIDATION_REGEX = "\\$\\d{1,3}(,\\d{3})*(\\.\\d{2})?";
 
