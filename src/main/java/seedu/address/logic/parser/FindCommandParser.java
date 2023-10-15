@@ -46,19 +46,19 @@ public class FindCommandParser implements Parser<FindCommand> {
                 PREFIX_TAG, PREFIX_NRIC, PREFIX_LICENCE_PLATE, PREFIX_POLICY_NUMBER, PREFIX_POLICY_ISSUE_DATE,
                 PREFIX_POLICY_EXPIRY_DATE);
 
-        String[] nameKeywords = {""};
-        String[] licenceKeywords = {""};
+        String[] nameKeyword = {""};
+        String[] licenceKeyword = {""};
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            nameKeywords[0] = argMultimap.getValue(PREFIX_NAME).get();
+            nameKeyword[0] = argMultimap.getValue(PREFIX_NAME).get();
         }
 
         if (argMultimap.getValue(PREFIX_LICENCE_PLATE).isPresent()) {
-            licenceKeywords[0] = argMultimap.getValue(PREFIX_LICENCE_PLATE).get();
+            licenceKeyword[0] = argMultimap.getValue(PREFIX_LICENCE_PLATE).get();
         }
 
-        return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)),
-                new LicenceContainsKeywordsPredicate(Arrays.asList(licenceKeywords)));
+        return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeyword)),
+                new LicenceContainsKeywordsPredicate(Arrays.asList(licenceKeyword)));
     }
 
 }

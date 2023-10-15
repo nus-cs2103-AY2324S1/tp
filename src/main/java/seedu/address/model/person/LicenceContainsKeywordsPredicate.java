@@ -42,6 +42,11 @@ public class LicenceContainsKeywordsPredicate implements Predicate<Person> {
         return new ToStringBuilder(this).add("keywords", keywords).toString();
     }
 
+    /**
+     * Checks if the list of keywords contain an empty string.
+     *
+     * @return true if the list of keywords contain an empty string, false otherwise.
+     */
     public boolean isEmpty() {
         return keywords.contains("");
     }
