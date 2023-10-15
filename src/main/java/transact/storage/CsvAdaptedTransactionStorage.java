@@ -55,12 +55,12 @@ public class CsvAdaptedTransactionStorage implements TransactionBookStorage {
             TransactionBook transactions = new TransactionBook();
 
             try (CSVReader reader = new CSVReader(new FileReader(path.toFile()))) {
-                String[] header = reader.readNext();
+                // String[] header = reader.readNext();
                 String[] row;
                 while ((row = reader.readNext()) != null) {
                     String transactionId = row[0];
                     String category = row[1];
-                    String person = row[2];
+                    // String person = row[2];
                     String description = row[3];
                     BigDecimal amount = new BigDecimal(row[4]).setScale(2, RoundingMode.HALF_UP);
 
@@ -116,9 +116,11 @@ public class CsvAdaptedTransactionStorage implements TransactionBookStorage {
     }
 
     /**
-     * Similar to {@link #saveTransactionBook(ReadOnlyTransactionBook)} (ReadOnlyTransactionBook)}.
+     * Similar to {@link #saveTransactionBook(ReadOnlyTransactionBook)}
+     * (ReadOnlyTransactionBook)}.
      *
-     * @param filePath location of the data. Cannot be null.
+     * @param filePath
+     *            location of the data. Cannot be null.
      */
     public void saveTransactionBook(ReadOnlyTransactionBook transactionBook, Path filePath) throws IOException {
         List<Transaction> transactions = transactionBook.getTransactionList();
