@@ -39,7 +39,7 @@ public class Person {
         this.address = address;
         this.subjects.addAll(subjects);
         this.tags.addAll(tags);
-        this.schedule = schedule;
+        this.schedule = schedule; // can be null
     }
 
     public Name getName() {

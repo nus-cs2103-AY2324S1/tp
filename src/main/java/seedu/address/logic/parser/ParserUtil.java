@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -160,6 +161,13 @@ public class ParserUtil {
     public static Schedule parseSchedule(String schedule) throws ParseException {
         // TODO
         requireNonNull(schedule);
-        return new Schedule(schedule);
+        if (!Schedule.isValidSchedule(schedule)) {
+            throw new ParseException(Schedule.MESSAGE_CONSTRAINTS);
+        }
+        if (!Objects.equals(schedule, "")) {
+            return new Schedule(schedule);
+        } else {
+            return new Schedule();
+        }
     }
 }
