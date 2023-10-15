@@ -9,53 +9,53 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.staffsnap.commons.exceptions.IllegalValueException;
-import seedu.staffsnap.model.AddressBook;
-import seedu.staffsnap.model.ReadOnlyAddressBook;
+import seedu.staffsnap.model.ApplicantBook;
+import seedu.staffsnap.model.ReadOnlyApplicantBook;
 import seedu.staffsnap.model.applicant.Applicant;
 
 /**
- * An Immutable AddressBook that is serializable to JSON format.
+ * An Immutable ApplicantBook that is serializable to JSON format.
  */
-@JsonRootName(value = "addressbook")
-class JsonSerializableAddressBook {
+@JsonRootName(value = "applicantBook")
+class JsonSerializableApplicantBook {
 
     public static final String MESSAGE_DUPLICATE_APPLICANT = "Applicants list contains duplicate Applicant(s).";
 
     private final List<JsonAdaptedApplicant> applicants = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given applicants.
+     * Constructs a {@code JsonSerializableApplicantBook} with the given applicants.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("applicants") List<JsonAdaptedApplicant> applicants) {
+    public JsonSerializableApplicantBook(@JsonProperty("applicants") List<JsonAdaptedApplicant> applicants) {
         this.applicants.addAll(applicants);
     }
 
     /**
-     * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
+     * Converts a given {@code ReadOnlyApplicantBook} into this class for Jackson use.
      *
-     * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
+     * @param source future changes to this will not affect the created {@code JsonSerializableApplicantBook}.
      */
-    public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
+    public JsonSerializableApplicantBook(ReadOnlyApplicantBook source) {
         applicants.addAll(source.getApplicantList().stream()
                 .map(JsonAdaptedApplicant::new).collect(Collectors.toList()));
     }
 
     /**
-     * Converts this address book into the model's {@code AddressBook} object.
+     * Converts this applicant book into the model's {@code ApplicantBook} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public AddressBook toModelType() throws IllegalValueException {
-        AddressBook addressBook = new AddressBook();
+    public ApplicantBook toModelType() throws IllegalValueException {
+        ApplicantBook applicantBook = new ApplicantBook();
         for (JsonAdaptedApplicant jsonAdaptedApplicant : applicants) {
             Applicant applicant = jsonAdaptedApplicant.toModelType();
-            if (addressBook.hasApplicant(applicant)) {
+            if (applicantBook.hasApplicant(applicant)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_APPLICANT);
             }
-            addressBook.addApplicant(applicant);
+            applicantBook.addApplicant(applicant);
         }
-        return addressBook;
+        return applicantBook;
     }
 
 }

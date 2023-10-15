@@ -11,7 +11,7 @@ import seedu.staffsnap.commons.util.ToStringBuilder;
 import seedu.staffsnap.model.interview.Interview;
 
 /**
- * Represents an Applicant in the address book.
+ * Represents an Applicant in the applicant book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Applicant implements Comparable<Applicant> {
@@ -21,20 +21,20 @@ public class Applicant implements Comparable<Applicant> {
 
     // Identity fields
     private final Name name;
-    private final Phone phone; // to be changed to identifier
+    private final Phone phone;
     // Data fields
-    private final Department department;
+    private final Email email;
     private final Position position;
     private final Set<Interview> interviews = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Applicant(Name name, Phone phone, Department department, Position position, Set<Interview> interviews) {
-        requireAllNonNull(name, phone, department, position, interviews);
+    public Applicant(Name name, Phone phone, Email email, Position position, Set<Interview> interviews) {
+        requireAllNonNull(name, phone, email, position, interviews);
         this.name = name;
         this.phone = phone;
-        this.department = department;
+        this.email = email;
         this.position = position;
         this.interviews.addAll(interviews);
     }
@@ -47,8 +47,8 @@ public class Applicant implements Comparable<Applicant> {
         return phone;
     }
 
-    public Department getDepartment() {
-        return department;
+    public Email getEmail() {
+        return email;
     }
 
     public Position getPosition() {
@@ -94,7 +94,7 @@ public class Applicant implements Comparable<Applicant> {
         Applicant otherApplicant = (Applicant) other;
         return name.equals(otherApplicant.name)
                 && phone.equals(otherApplicant.phone)
-                && department.equals(otherApplicant.department)
+                && email.equals(otherApplicant.email)
                 && position.equals(otherApplicant.position)
                 && interviews.equals(otherApplicant.interviews);
     }
@@ -102,7 +102,7 @@ public class Applicant implements Comparable<Applicant> {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, department, position, interviews);
+        return Objects.hash(name, phone, email, position, interviews);
     }
 
     @Override
@@ -110,7 +110,7 @@ public class Applicant implements Comparable<Applicant> {
         return new ToStringBuilder(this)
                 .add("name", name)
                 .add("phone", phone)
-                .add("department", department)
+                .add("email", email)
                 .add("position", position)
                 .add("interviews", interviews)
                 .toString();

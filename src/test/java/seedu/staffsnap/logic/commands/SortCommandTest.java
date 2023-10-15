@@ -2,7 +2,7 @@ package seedu.staffsnap.logic.commands;
 
 import static seedu.staffsnap.testutil.TypicalApplicants.getApplicantsSortedByName;
 import static seedu.staffsnap.testutil.TypicalApplicants.getApplicantsSortedByPhone;
-import static seedu.staffsnap.testutil.TypicalApplicants.getUnsortedAddressBook;
+import static seedu.staffsnap.testutil.TypicalApplicants.getUnsortedApplicantBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +18,7 @@ class SortCommandTest {
 
     @Test
     void execute_sortName() {
-        model = new ModelManager(getUnsortedAddressBook(), new UserPrefs());
+        model = new ModelManager(getUnsortedApplicantBook(), new UserPrefs());
         try {
             new SortCommand(Descriptor.NAME).execute(model);
         } catch (CommandException e) {
@@ -29,7 +29,7 @@ class SortCommandTest {
 
     @Test
     void execute_sortPhone() {
-        model = new ModelManager(getUnsortedAddressBook(), new UserPrefs());
+        model = new ModelManager(getUnsortedApplicantBook(), new UserPrefs());
         try {
             new SortCommand(Descriptor.PHONE).execute(model);
         } catch (CommandException e) {

@@ -1,7 +1,7 @@
 package seedu.staffsnap.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_DEPARTMENT;
+import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_INTERVIEW;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -14,29 +14,29 @@ import seedu.staffsnap.model.Model;
 import seedu.staffsnap.model.applicant.Applicant;
 
 /**
- * Adds an applicant to the address book.
+ * Adds an applicant to the applicant book.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an applicant to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an applicant to the applicant book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
-            + PREFIX_DEPARTMENT + "DEPARTMENT "
+            + PREFIX_EMAIL + "EMAIL "
             + PREFIX_POSITION + "POSITION "
             + "[" + PREFIX_INTERVIEW + "INTERVIEW]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
-            + PREFIX_DEPARTMENT + "johnd@example.com "
+            + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_POSITION + "311, Clementi Ave 2, #02-25 "
             + PREFIX_INTERVIEW + "friends "
             + PREFIX_INTERVIEW + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New applicant added: %1$s";
-    public static final String MESSAGE_DUPLICATE_APPLICANT = "This applicant already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_APPLICANT = "This applicant already exists in the applicant book";
 
     private final Applicant toAdd;
 

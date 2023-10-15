@@ -6,7 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.staffsnap.logic.commands.EditCommand.EditApplicantDescriptor;
 import seedu.staffsnap.model.applicant.Applicant;
-import seedu.staffsnap.model.applicant.Department;
+import seedu.staffsnap.model.applicant.Email;
 import seedu.staffsnap.model.applicant.Name;
 import seedu.staffsnap.model.applicant.Phone;
 import seedu.staffsnap.model.applicant.Position;
@@ -34,7 +34,7 @@ public class EditApplicantDescriptorBuilder {
         descriptor = new EditApplicantDescriptor();
         descriptor.setName(applicant.getName());
         descriptor.setPhone(applicant.getPhone());
-        descriptor.setDepartment(applicant.getDepartment());
+        descriptor.setEmail(applicant.getEmail());
         descriptor.setPosition(applicant.getPosition());
         descriptor.setInterviews(applicant.getInterviews());
     }
@@ -56,10 +56,10 @@ public class EditApplicantDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Department} of the {@code EditApplicantDescriptor} that we are building.
+     * Sets the {@code Email} of the {@code EditApplicantDescriptor} that we are building.
      */
-    public EditApplicantDescriptorBuilder withDepartment(String department) {
-        descriptor.setDepartment(new Department(department));
+    public EditApplicantDescriptorBuilder withEmail(String email) {
+        descriptor.setEmail(new Email(email));
         return this;
     }
 

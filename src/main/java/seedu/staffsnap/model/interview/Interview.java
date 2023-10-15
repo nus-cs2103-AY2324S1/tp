@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.staffsnap.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents an Interview in the address book.
+ * Represents an Interview in the applicant book.
  * Guarantees: immutable; type is valid as declared in {@link #isValidType(String)}
  */
 public class Interview {

@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.DESC_BOB;
-import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_DEPARTMENT_BOB;
+import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_INTERVIEW_HUSBAND;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -45,8 +45,8 @@ public class EditApplicantDescriptorTest {
         editedAmy = new EditApplicantDescriptorBuilder(DESC_AMY).withPhone(VALID_PHONE_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
-        // different department -> returns false
-        editedAmy = new EditApplicantDescriptorBuilder(DESC_AMY).withDepartment(VALID_DEPARTMENT_BOB).build();
+        // different email -> returns false
+        editedAmy = new EditApplicantDescriptorBuilder(DESC_AMY).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different position -> returns false
@@ -63,8 +63,8 @@ public class EditApplicantDescriptorTest {
         EditApplicantDescriptor editApplicantDescriptor = new EditApplicantDescriptor();
         String expected = EditApplicantDescriptor.class.getCanonicalName() + "{name="
                 + editApplicantDescriptor.getName().orElse(null) + ", phone="
-                + editApplicantDescriptor.getPhone().orElse(null) + ", department="
-                + editApplicantDescriptor.getDepartment().orElse(null) + ", position="
+                + editApplicantDescriptor.getPhone().orElse(null) + ", email="
+                + editApplicantDescriptor.getEmail().orElse(null) + ", position="
                 + editApplicantDescriptor.getPosition().orElse(null) + ", interviews="
                 + editApplicantDescriptor.getInterviews().orElse(null) + "}";
         assertEquals(expected, editApplicantDescriptor.toString());

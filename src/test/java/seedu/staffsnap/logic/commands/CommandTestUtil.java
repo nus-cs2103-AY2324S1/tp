@@ -2,7 +2,7 @@ package seedu.staffsnap.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_DEPARTMENT;
+import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_INTERVIEW;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -15,7 +15,7 @@ import java.util.List;
 
 import seedu.staffsnap.commons.core.index.Index;
 import seedu.staffsnap.logic.commands.exceptions.CommandException;
-import seedu.staffsnap.model.AddressBook;
+import seedu.staffsnap.model.ApplicantBook;
 import seedu.staffsnap.model.Model;
 import seedu.staffsnap.model.applicant.Applicant;
 import seedu.staffsnap.model.applicant.NameContainsKeywordsPredicate;
@@ -30,8 +30,8 @@ public class CommandTestUtil {
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_BOB = "22222222";
-    public static final String VALID_DEPARTMENT_AMY = "amy@example.com";
-    public static final String VALID_DEPARTMENT_BOB = "bob@example.com";
+    public static final String VALID_EMAIL_AMY = "amy@example.com";
+    public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_POSITION_AMY = "Block 312, Amy Street 1";
     public static final String VALID_POSITION_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_INTERVIEW_HUSBAND = "husband";
@@ -41,8 +41,8 @@ public class CommandTestUtil {
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
-    public static final String DEPARTMENT_DESC_AMY = " " + PREFIX_DEPARTMENT + VALID_DEPARTMENT_AMY;
-    public static final String DEPARTMENT_DESC_BOB = " " + PREFIX_DEPARTMENT + VALID_DEPARTMENT_BOB;
+    public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
+    public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
     public static final String POSITION_DESC_AMY = " " + PREFIX_POSITION + VALID_POSITION_AMY;
     public static final String POSITION_DESC_BOB = " " + PREFIX_POSITION + VALID_POSITION_BOB;
     public static final String INTERVIEW_DESC_FRIEND = " " + PREFIX_INTERVIEW + VALID_INTERVIEW_FRIEND;
@@ -50,7 +50,7 @@ public class CommandTestUtil {
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
-    public static final String INVALID_DEPARTMENT_DESC = " " + PREFIX_DEPARTMENT + "bob!yahoo"; // missing '@' symbol
+    public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_POSITION_DESC = " "
             + PREFIX_POSITION; // empty string not allowed for positions
     public static final String INVALID_INTERVIEW_DESC = " "
@@ -64,10 +64,10 @@ public class CommandTestUtil {
 
     static {
         DESC_AMY = new EditApplicantDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_AMY).withDepartment(VALID_DEPARTMENT_AMY).withPosition(VALID_POSITION_AMY)
+                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withPosition(VALID_POSITION_AMY)
                 .withInterviews(VALID_INTERVIEW_FRIEND).build();
         DESC_BOB = new EditApplicantDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withDepartment(VALID_DEPARTMENT_BOB).withPosition(VALID_POSITION_BOB)
+                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withPosition(VALID_POSITION_BOB)
                 .withInterviews(VALID_INTERVIEW_HUSBAND, VALID_INTERVIEW_FRIEND).build();
     }
 
@@ -101,21 +101,21 @@ public class CommandTestUtil {
      * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
-     * - the address book, filtered applicant list and selected applicant in {@code actualModel} remain unchanged
+     * - the applicant book, filtered applicant list and selected applicant in {@code actualModel} remain unchanged
      */
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
+        ApplicantBook expectedApplicantBook = new ApplicantBook(actualModel.getApplicantBook());
         List<Applicant> expectedFilteredList = new ArrayList<>(actualModel.getFilteredApplicantList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
-        assertEquals(expectedAddressBook, actualModel.getAddressBook());
+        assertEquals(expectedApplicantBook, actualModel.getApplicantBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredApplicantList());
     }
     /**
      * Updates {@code model}'s filtered list to show only the applicant at the given {@code targetIndex} in the
-     * {@code model}'s address book.
+     * {@code model}'s applicant book.
      */
     public static void showApplicantAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredApplicantList().size());

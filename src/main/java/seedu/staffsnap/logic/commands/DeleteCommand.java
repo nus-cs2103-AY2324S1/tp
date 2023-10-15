@@ -12,7 +12,7 @@ import seedu.staffsnap.model.Model;
 import seedu.staffsnap.model.applicant.Applicant;
 
 /**
- * Deletes a applicant identified using it's displayed index from the address book.
+ * Deletes a applicant identified using it's displayed index from the applicant book.
  */
 public class DeleteCommand extends Command {
 

@@ -15,15 +15,15 @@ import seedu.staffsnap.commons.util.ConfigUtil;
 import seedu.staffsnap.commons.util.StringUtil;
 import seedu.staffsnap.logic.Logic;
 import seedu.staffsnap.logic.LogicManager;
-import seedu.staffsnap.model.AddressBook;
+import seedu.staffsnap.model.ApplicantBook;
 import seedu.staffsnap.model.Model;
 import seedu.staffsnap.model.ModelManager;
-import seedu.staffsnap.model.ReadOnlyAddressBook;
+import seedu.staffsnap.model.ReadOnlyApplicantBook;
 import seedu.staffsnap.model.ReadOnlyUserPrefs;
 import seedu.staffsnap.model.UserPrefs;
 import seedu.staffsnap.model.util.SampleDataUtil;
-import seedu.staffsnap.storage.AddressBookStorage;
-import seedu.staffsnap.storage.JsonAddressBookStorage;
+import seedu.staffsnap.storage.ApplicantBookStorage;
+import seedu.staffsnap.storage.JsonApplicantBookStorage;
 import seedu.staffsnap.storage.JsonUserPrefsStorage;
 import seedu.staffsnap.storage.Storage;
 import seedu.staffsnap.storage.StorageManager;
@@ -48,7 +48,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing Staff-Snap ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -57,8 +57,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        ApplicantBookStorage applicantBookStorage = new JsonApplicantBookStorage(userPrefs.getApplicantBookFilePath());
+        storage = new StorageManager(applicantBookStorage, userPrefsStorage);
 
         model = initModelManager(storage, userPrefs);
 
@@ -68,26 +68,26 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
-     * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
-     * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
+     * Returns a {@code ModelManager} with the data from {@code storage}'s applicant book and {@code userPrefs}. <br>
+     * The data from the sample applicant book will be used instead if {@code storage}'s applicant book is not found,
+     * or an empty applicant book will be used instead if errors occur when reading {@code storage}'s applicant book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        logger.info("Using data file : " + storage.getAddressBookFilePath());
+        logger.info("Using data file : " + storage.getApplicantBookFilePath());
 
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        Optional<ReadOnlyApplicantBook> applicantBookOptional;
+        ReadOnlyApplicantBook initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("Creating a new data file " + storage.getAddressBookFilePath()
-                        + " populated with a sample AddressBook.");
+            applicantBookOptional = storage.readApplicantBook();
+            if (!applicantBookOptional.isPresent()) {
+                logger.info("Creating a new data file " + storage.getApplicantBookFilePath()
+                        + " populated with a sample ApplicantBook.");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = applicantBookOptional.orElseGet(SampleDataUtil::getSampleApplicantBook);
         } catch (DataLoadingException e) {
-            logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
-                    + " Will be starting with an empty AddressBook.");
-            initialData = new AddressBook();
+            logger.warning("Data file at " + storage.getApplicantBookFilePath() + " could not be loaded."
+                    + " Will be starting with an empty ApplicantBook.");
+            initialData = new ApplicantBook();
         }
 
         return new ModelManager(initialData, userPrefs);
@@ -170,13 +170,13 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting AddressBook " + MainApp.VERSION);
+        logger.info("Starting ApplicantBook " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping Address Book ] =============================");
+        logger.info("============================ [ Stopping Staff-Snap ] =============================");
         try {
             storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {

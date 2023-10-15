@@ -13,7 +13,7 @@ import seedu.staffsnap.model.applicant.UniqueApplicantList;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSameApplicant comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class ApplicantBook implements ReadOnlyApplicantBook {
 
     private final UniqueApplicantList applicants;
 
@@ -28,12 +28,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         applicants = new UniqueApplicantList();
     }
 
-    public AddressBook() {}
+    public ApplicantBook() {}
 
     /**
-     * Creates an AddressBook using the Applicants in the {@code toBeCopied}
+     * Creates an ApplicantBook using the Applicants in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public ApplicantBook(ReadOnlyApplicantBook toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -49,9 +49,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code ApplicantBook} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyApplicantBook newData) {
         requireNonNull(newData);
 
         setApplicants(newData.getApplicantList());
@@ -60,7 +60,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// applicant-level operations
 
     /**
-     * Returns true if a applicant with the same identity as {@code applicant} exists in the address book.
+     * Returns true if a applicant with the same identity as {@code applicant} exists in the applicant book.
      */
     public boolean hasApplicant(Applicant applicant) {
         requireNonNull(applicant);
@@ -68,8 +68,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds an applicant to the address book.
-     * The applicant must not already exist in the address book.
+     * Adds an applicant to the applicant book.
+     * The applicant must not already exist in the applicant book.
      */
     public void addApplicant(Applicant e) {
         applicants.add(e);
@@ -77,9 +77,9 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Replaces the given applicant {@code target} in the list with {@code editedApplicant}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in the applicant book.
      * The applicant identity of {@code editedApplicant} must not be the same as another existing applicant in the
-     * address book.
+     * applicant book.
      */
     public void setApplicant(Applicant target, Applicant editedApplicant) {
         requireNonNull(editedApplicant);
@@ -88,8 +88,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes {@code key} from this {@code ApplicantBook}.
+     * {@code key} must exist in the applicant book.
      */
     public void removeApplicant(Applicant key) {
         applicants.remove(key);
@@ -116,12 +116,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddressBook)) {
+        if (!(other instanceof ApplicantBook)) {
             return false;
         }
 
-        AddressBook otherAddressBook = (AddressBook) other;
-        return applicants.equals(otherAddressBook.applicants);
+        ApplicantBook otherApplicantBook = (ApplicantBook) other;
+        return applicants.equals(otherApplicantBook.applicants);
     }
 
     @Override

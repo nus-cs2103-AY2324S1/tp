@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.staffsnap.model.applicant.Applicant;
-import seedu.staffsnap.model.applicant.Department;
+import seedu.staffsnap.model.applicant.Email;
 import seedu.staffsnap.model.applicant.Name;
 import seedu.staffsnap.model.applicant.Phone;
 import seedu.staffsnap.model.applicant.Position;
@@ -18,12 +18,12 @@ public class ApplicantBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
-    public static final String DEFAULT_DEPARTMENT = "amy@gmail.com";
+    public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_POSITION = "123, Jurong West Ave 6, #08-111";
 
     private Name name;
     private Phone phone;
-    private Department department;
+    private Email email;
     private Position position;
     private Set<Interview> interviews;
 
@@ -33,7 +33,7 @@ public class ApplicantBuilder {
     public ApplicantBuilder() {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
-        department = new Department(DEFAULT_DEPARTMENT);
+        email = new Email(DEFAULT_EMAIL);
         position = new Position(DEFAULT_POSITION);
         interviews = new HashSet<>();
     }
@@ -44,7 +44,7 @@ public class ApplicantBuilder {
     public ApplicantBuilder(Applicant applicantToCopy) {
         name = applicantToCopy.getName();
         phone = applicantToCopy.getPhone();
-        department = applicantToCopy.getDepartment();
+        email = applicantToCopy.getEmail();
         position = applicantToCopy.getPosition();
         interviews = new HashSet<>(applicantToCopy.getInterviews());
     }
@@ -83,15 +83,15 @@ public class ApplicantBuilder {
     }
 
     /**
-     * Sets the {@code Department} of the {@code Applicant} that we are building.
+     * Sets the {@code Email} of the {@code Applicant} that we are building.
      */
-    public ApplicantBuilder withDepartment(String department) {
-        this.department = new Department(department);
+    public ApplicantBuilder withEmail(String email) {
+        this.email = new Email(email);
         return this;
     }
 
     public Applicant build() {
-        return new Applicant(name, phone, department, position, interviews);
+        return new Applicant(name, phone, email, position, interviews);
     }
 
 }

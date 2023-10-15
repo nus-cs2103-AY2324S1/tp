@@ -30,9 +30,9 @@ import seedu.staffsnap.testutil.ApplicantBuilder;
 import seedu.staffsnap.testutil.ApplicantUtil;
 import seedu.staffsnap.testutil.EditApplicantDescriptorBuilder;
 
-public class AddressBookParserTest {
+public class ApplicantBookParserTest {
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final ApplicantBookParser parser = new ApplicantBookParser();
 
     @Test
     public void parseCommand_add() throws Exception {

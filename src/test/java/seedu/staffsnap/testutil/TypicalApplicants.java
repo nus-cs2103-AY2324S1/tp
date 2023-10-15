@@ -1,7 +1,7 @@
 package seedu.staffsnap.testutil;
 
-import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_DEPARTMENT_AMY;
-import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_DEPARTMENT_BOB;
+import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
+import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_INTERVIEW_FRIEND;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_INTERVIEW_HUSBAND;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_NAME_AMY;
@@ -16,7 +16,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import seedu.staffsnap.model.AddressBook;
+import seedu.staffsnap.model.ApplicantBook;
 import seedu.staffsnap.model.applicant.Applicant;
 
 /**
@@ -25,36 +25,36 @@ import seedu.staffsnap.model.applicant.Applicant;
 public class TypicalApplicants {
 
     public static final Applicant ALICE = new ApplicantBuilder().withName("Alice Pauline")
-            .withPosition("123, Jurong West Ave 6, #08-111").withDepartment("alice@example.com")
+            .withPosition("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253")
             .withInterviews("friends").build();
     public static final Applicant BENSON = new ApplicantBuilder().withName("Benson Meier")
             .withPosition("311, Clementi Ave 2, #02-25")
-            .withDepartment("johnd@example.com").withPhone("98765432")
+            .withEmail("johnd@example.com").withPhone("98765432")
             .withInterviews("owesMoney", "friends").build();
     public static final Applicant CARL = new ApplicantBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withDepartment("heinz@example.com").withPosition("wall street").build();
+            .withEmail("heinz@example.com").withPosition("wall street").build();
     public static final Applicant DANIEL = new ApplicantBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withDepartment("cornelia@example.com").withPosition("10th street").withInterviews("friends").build();
+            .withEmail("cornelia@example.com").withPosition("10th street").withInterviews("friends").build();
     public static final Applicant ELLE = new ApplicantBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withDepartment("werner@example.com").withPosition("michegan ave").build();
+            .withEmail("werner@example.com").withPosition("michegan ave").build();
     public static final Applicant FIONA = new ApplicantBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withDepartment("lydia@example.com").withPosition("little tokyo").build();
+            .withEmail("lydia@example.com").withPosition("little tokyo").build();
     public static final Applicant GEORGE = new ApplicantBuilder().withName("George Best").withPhone("9482442")
-            .withDepartment("anna@example.com").withPosition("4th street").build();
+            .withEmail("anna@example.com").withPosition("4th street").build();
 
     // Manually added
     public static final Applicant HOON = new ApplicantBuilder().withName("Hoon Meier").withPhone("8482424")
-            .withDepartment("stefan@example.com").withPosition("little india").build();
+            .withEmail("stefan@example.com").withPosition("little india").build();
     public static final Applicant IDA = new ApplicantBuilder().withName("Ida Mueller").withPhone("8482131")
-            .withDepartment("hans@example.com").withPosition("chicago ave").build();
+            .withEmail("hans@example.com").withPosition("chicago ave").build();
 
     // Manually added - Applicant's details found in {@code CommandTestUtil}
     public static final Applicant AMY = new ApplicantBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-            .withDepartment(VALID_DEPARTMENT_AMY).withPosition(VALID_POSITION_AMY)
+            .withEmail(VALID_EMAIL_AMY).withPosition(VALID_POSITION_AMY)
             .withInterviews(VALID_INTERVIEW_FRIEND).build();
     public static final Applicant BOB = new ApplicantBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-            .withDepartment(VALID_DEPARTMENT_BOB).withPosition(VALID_POSITION_BOB)
+            .withEmail(VALID_EMAIL_BOB).withPosition(VALID_POSITION_BOB)
             .withInterviews(VALID_INTERVIEW_HUSBAND, VALID_INTERVIEW_FRIEND).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
@@ -62,10 +62,10 @@ public class TypicalApplicants {
     private TypicalApplicants() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical applicants.
+     * Returns an {@code ApplicantBook} with all the typical applicants.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static ApplicantBook getTypicalApplicantBook() {
+        ApplicantBook ab = new ApplicantBook();
         for (Applicant applicant : getTypicalApplicants()) {
             ab.addApplicant(applicant);
         }
@@ -73,10 +73,10 @@ public class TypicalApplicants {
     }
 
     /**
-     * Returns an {@code AddressBook} with all the typical applicants in non-alphabetical order.
+     * Returns an {@code ApplicantBook} with all the typical applicants in non-alphabetical order.
      */
-    public static AddressBook getUnsortedAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static ApplicantBook getUnsortedApplicantBook() {
+        ApplicantBook ab = new ApplicantBook();
         List<Applicant> unsorted = getTypicalApplicants();
         Collections.reverse(unsorted);
         for (Applicant applicant : unsorted) {
@@ -86,10 +86,10 @@ public class TypicalApplicants {
     }
 
     /**
-     * Returns an {@code AddressBook} with all the typical applicants sorted by Name.
+     * Returns an {@code ApplicantBook} with all the typical applicants sorted by Name.
      */
-    public static AddressBook getSortedByNameAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static ApplicantBook getSortedByNameApplicantBook() {
+        ApplicantBook ab = new ApplicantBook();
         for (Applicant applicant : getApplicantsSortedByName()) {
             ab.addApplicant(applicant);
         }
@@ -97,10 +97,10 @@ public class TypicalApplicants {
     }
 
     /**
-     * Returns an {@code AddressBook} with all the typical applicants sorted by Phone.
+     * Returns an {@code ApplicantBook} with all the typical applicants sorted by Phone.
      */
-    public static AddressBook getSortedByPhoneAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static ApplicantBook getSortedByPhoneApplicantBook() {
+        ApplicantBook ab = new ApplicantBook();
         for (Applicant applicant : getApplicantsSortedByPhone()) {
             ab.addApplicant(applicant);
         }
