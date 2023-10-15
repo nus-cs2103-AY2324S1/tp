@@ -13,15 +13,15 @@ public class JsonAdaptedNote {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Notes's %s field is missing!";
 
     private final String title;
-    private final String body;
+    private final String content;
 
     /**
      * Constructs a {@code JsonAdaptedNote} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedNote(@JsonProperty("title") String title, @JsonProperty("body") String body) {
+    public JsonAdaptedNote(@JsonProperty("title") String title, @JsonProperty("content") String content) {
         this.title = title;
-        this.body = body;
+        this.content = content;
     }
 
     /**
@@ -29,7 +29,7 @@ public class JsonAdaptedNote {
      */
     public JsonAdaptedNote(Note source) {
         title = source.getTitle();
-        body = source.getBody();
+        content = source.getContent();
 
     }
 
@@ -46,10 +46,10 @@ public class JsonAdaptedNote {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "title"));
         }
 
-        if (body == null) {
+        if (content == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "body"));
         }
 
-        return new Note(title, body);
+        return new Note(title, content);
     }
 }

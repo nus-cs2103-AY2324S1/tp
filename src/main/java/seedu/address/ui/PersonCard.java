@@ -9,6 +9,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import seedu.address.model.event.Event;
+import seedu.address.model.note.Note;
 import seedu.address.model.person.Person;
 
 /**
@@ -43,6 +44,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
+    private ListView<Note> notes;
+    @FXML
     private ListView<Event> events;
 
     /**
@@ -56,8 +59,24 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+        notes.setItems(person.getNotes());
+        notes.setCellFactory(cell -> new NoteCell());
         events.setItems(person.getEvents());
         events.setCellFactory(cell -> new EventCell());
+    }
+
+    private class NoteCell extends ListCell<Note> {
+        @Override
+        protected void updateItem(Note note, boolean empty) {
+            super.updateItem(note, empty);
+            if (empty || note == null) {
+                setGraphic(null);
+                setText(null);
+            } else {
+                setText("Note " + (getIndex() + 1) + ". " + note.getUiText());
+                setTextFill(Color.WHITE);
+            }
+        }
     }
 
     private class EventCell extends ListCell<Event> {

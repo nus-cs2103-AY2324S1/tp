@@ -4,6 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddEventCommand;
+import seedu.address.logic.commands.AddNoteCommand;
 import seedu.address.logic.commands.AddPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -21,6 +22,8 @@ public class AddCommandParser implements Parser<AddCommand> {
             return new AddPersonCommandParser().parse(args);
         case AddEventCommand.SECONDARY_COMMAND_WORD:
             return new AddEventCommandParser().parse(args);
+        case AddNoteCommand.SECONDARY_COMMAND_WORD:
+            return new AddNoteCommandParser().parse(args);
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }

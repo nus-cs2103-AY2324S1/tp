@@ -2,7 +2,6 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -31,7 +30,7 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-    private final List<Note> notes = new ArrayList<>();
+    private final ObservableList<Note> notes = FXCollections.observableArrayList();
     private final ObservableList<Event> events = FXCollections.observableArrayList();
 
     /**
@@ -79,8 +78,8 @@ public class Person {
      * {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public List<Note> getNotes() {
-        return Collections.unmodifiableList(notes);
+    public ObservableList<Note> getNotes() {
+        return FXCollections.unmodifiableObservableList(notes);
     }
 
     /**
@@ -92,6 +91,38 @@ public class Person {
         return FXCollections.unmodifiableObservableList(events);
     }
 
+    /**
+     * Adds a note to this person
+     * @param note The note to be added.
+     */
+    public void addNote(Note note) {
+        this.notes.add(note);
+    }
+
+    /**
+     * Remove a note by its user-friendly id
+     * @param id The id of the note you want to remove
+     * @return {@code true} if the operation is successful and {@code false} if the note with this id does not exist
+     */
+    public boolean removeNoteByUserFriendlyId(int id) {
+        return this.removeNoteByIndex(id - 1);
+    }
+
+    private boolean removeNoteByIndex(int index) {
+        if (index < 0 || index >= this.notes.size()) {
+            return false;
+        }
+        this.notes.remove(index);
+        return true;
+    }
+
+    /**
+     * Adds an event to this person.
+     * @param event The event to be added.
+     */
+    public void addEvent(Event event) {
+        this.events.add(event);
+    }
 
     /**
      * Remove an event by its user-friendly id
@@ -162,12 +193,4 @@ public class Person {
                 .add("tags", tags)
                 .toString();
     }
-
-    /**
-     * Add an event to this person
-     */
-    public void addEvent(Event event) {
-        this.events.add(event);
-    }
-
 }
