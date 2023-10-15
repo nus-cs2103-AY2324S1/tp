@@ -122,6 +122,10 @@ public class ModelManager implements Model {
         updateFilteredApplicantList(PREDICATE_SHOW_ALL_APPLICANTS);
     }
 
+    public void deleteMember(Member memberIndex) {
+        addressBook.removeMember(memberIndex);
+    }
+
     @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
