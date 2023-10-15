@@ -7,6 +7,12 @@ import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Represents the time of an event.
+=======
+import java.util.Optional;
+
+/**
+ * Represents the time of the event
+>>>>>>> branch-meetings-main
  */
 public class EventTime {
 
@@ -46,6 +52,8 @@ public class EventTime {
     public LocalTime getEventTime() {
         return this.eventTime;
     }
+
+
 
     @Override
     public boolean equals(Object other) {

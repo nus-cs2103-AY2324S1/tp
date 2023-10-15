@@ -1,12 +1,13 @@
 package seedu.address.model.event;
 
-
 import java.util.Optional;
 
 /**
  * Represents a Meeting in the address book.
  */
 public class Meeting extends Event {
+
+    private static final String EVENT_TYPE = "meeting";
 
     /**
      * Constructor for the meeting with optional start and end time
@@ -15,8 +16,9 @@ public class Meeting extends Event {
      * @param startTime start time of the meeting
      * @param endTime end time of the meeting
      */
+
     public Meeting(EventName name, EventDate date, Optional<EventTime> startTime, Optional<EventTime> endTime) {
-        super(name, date, startTime, date, endTime);
+        super(new EventType("meeting"), name, date, startTime, date, endTime);
     }
 
 

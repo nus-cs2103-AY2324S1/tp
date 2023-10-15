@@ -11,15 +11,11 @@
     "email": "pauline@example.com",
     "address": "4th street"
   } ],
-  "meetings" : [ {
-    "name" : "John Doe",
-    "date" : "2020-10-10",
-    "startTime" : "1000",
-    "endTime" : ""
-  }, {
-    "name" : "John Doe",
-    "date" : "2020-10-10",
-    "startTime" : "1000",
-    "endTime" : "1200"
+  "events" : [ {
+    "eventType": "meeting",
+    "name" : "tp",
+    "date" : "2023-10-30",
+    "startTime" : "1300",
+    "endTime" : "1400"
   } ]
 }

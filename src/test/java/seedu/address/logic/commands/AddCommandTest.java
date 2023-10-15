@@ -160,7 +160,17 @@ public class AddCommandTest {
         }
 
         @Override
+
         public void addEvent(Event toAdd) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        public void setEvent(Event target, Event editedEvent) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ArrayList<Event> getEventList() {
             throw new AssertionError("This method should not be called.");
         }
     }

@@ -51,7 +51,7 @@ public class AddMeetingCommand extends Command {
 
         model.addEvent(toAdd);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.formatMeeting(toAdd)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.formatEvent(toAdd)));
 
     }
 

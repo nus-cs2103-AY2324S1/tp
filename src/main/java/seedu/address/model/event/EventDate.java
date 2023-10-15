@@ -5,12 +5,10 @@ import java.time.format.DateTimeFormatter;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 
-
 /**
  * DateTime class to represent the date and time of an event.
  */
 public class EventDate {
-
     public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     public static final String MESSAGE_CONSTRAINTS =
@@ -44,8 +42,8 @@ public class EventDate {
     }
 
     /**
-     * Returns the date.
-     * @return date.
+     * Gets the date of the event
+     * @return date of the event
      */
     public LocalDate getDate() {
         return this.date;
@@ -76,5 +74,6 @@ public class EventDate {
      */
     public String forDisplay() {
         return this.date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
+
     }
 }

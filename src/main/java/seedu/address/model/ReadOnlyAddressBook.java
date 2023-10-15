@@ -18,6 +18,6 @@ public interface ReadOnlyAddressBook {
      */
     ObservableList<Person> getPersonList();
 
-    ArrayList<Event> getEventsList();
+    ArrayList<Event> getEventList();
 
 }

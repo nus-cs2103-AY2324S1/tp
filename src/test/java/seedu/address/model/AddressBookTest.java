@@ -97,6 +97,8 @@ public class AddressBookTest {
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
 
+        private final ArrayList<Event> events = new ArrayList<>();
+
         AddressBookStub(Collection<Person> persons) {
             this.persons.setAll(persons);
         }
@@ -106,11 +108,10 @@ public class AddressBookTest {
             return persons;
         }
 
-
-        //TODO
+        //TODO: Implement this method
         @Override
-        public ArrayList<Event> getEventsList() {
-            return null;
+        public ArrayList<Event> getEventList() {
+            return events;
         }
     }
 
