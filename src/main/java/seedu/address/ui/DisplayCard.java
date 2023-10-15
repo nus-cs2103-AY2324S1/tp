@@ -1,20 +1,15 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Card;
-import seedu.address.model.person.Person;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * DisplayCard class to showcase the question and the answr
  */
-public class PersonCard extends UiPart<Region> {
-
+public class DisplayCard extends UiPart<Region> {
     private static final String FXML = "DisplayListCard.fxml";
 
     /**
@@ -25,20 +20,13 @@ public class PersonCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Person person;
+    public final Card card;
 
-    @FXML
+    @javafx.fxml.FXML
     private HBox cardPane;
     @FXML
     private Label id;
-    @FXML
-    private Label phone;
-    @FXML
-    private Label address;
-    @FXML
-    private Label email;
-    @FXML
-    private FlowPane tags;
+
 
     @FXML
     private Label answer;
@@ -49,17 +37,13 @@ public class PersonCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public PersonCard(Person person, int displayedIndex, Card card) {
+
+    public DisplayCard(Card card, int displayedIndex) {
         super(FXML);
-        this.person = person;
+        this.card = card;
         id.setText(displayedIndex + ". ");
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
         question.setText(card.getQuestion().question);
         answer.setText(card.getAnswer().answer);
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
     }
 }

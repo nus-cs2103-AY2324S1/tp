@@ -34,6 +34,7 @@ public interface Logic2 {
     /** Returns an unmodifiable view of the filtered list of cards */
     ObservableList<Card> getFilteredCardList();
 
+
     /**
      * Returns the user prefs' deck file path.
      */

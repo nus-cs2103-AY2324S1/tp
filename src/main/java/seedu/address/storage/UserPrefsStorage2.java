@@ -5,13 +5,11 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataLoadingException;
-import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.ReadOnlyUserPrefs2;
-import seedu.address.model.UserPrefs;
 import seedu.address.model.UserPrefs2;
 
 /**
- * Represents a storage for {@link UserPrefs}.
+ * Represents a storage for {@link UserPrefs2}.
  */
 public interface UserPrefsStorage2 {
 
@@ -29,7 +27,7 @@ public interface UserPrefsStorage2 {
     Optional<UserPrefs2> readUserPrefs() throws DataLoadingException;
 
     /**
-     * Saves the given {@link ReadOnlyUserPrefs} to the storage.
+     * Saves the given {@link ReadOnlyUserPrefs2} to the storage.
      * @param userPrefs cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
