@@ -29,7 +29,7 @@ This project was done by a team of 4 members.
 [[portfolio](team/fallman2.md)]
 
 - Role: Team Member
-- Responsibilities: Filtering by Tags
+- Responsibilities: TBD
 
 ### Low Jun Hong
 
