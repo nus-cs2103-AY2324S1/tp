@@ -133,14 +133,14 @@ UI mockup:
 ![Help UI Mockup](./images/help.png)
 
 ---
-### exit : Exiting the program
+### `exit` : Exiting the program
 
 Exits the program.
 
 Format: `exit`
 
 ---
-### `filter`: Filtering applicants by descriptor criteria [coming soon in v1.3]
+### `filter`: Filtering applicants by descriptor criteria [coming soon]
 
 Details coming soon...
 
