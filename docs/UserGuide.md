@@ -122,11 +122,11 @@ Examples:
 
 Adds a note to a contact from the contact list.
 
-Format: `add note -n NAME -t NOTE_TITLE -c NOTE_CONTENT`
+Format: `add note -id CONTACT_ID -tit NOTE_TITLE -con NOTE_CONTENT`
 
 Examples:
-* `add note -n Aaron -t Meeting Topics -c The topic is about the framework design of the project`
-* `add note -n Daniel -t Open Position -e Applications for SWE full-time positions will open soon`
+* `add note -id 1 -tit Meeting Topics -con The topic is about the framework design of the project`
+* `add note -id 2 -tit Open Position -con Applications for SWE full-time positions will open soon`
 
 ### Listing all notes : `list notes`
 
@@ -138,12 +138,12 @@ Format: `list notes`
 
 Deletes the specified note from the contact list.
 
-Format: `delete note -n NAME -t NOTE_TITLE`
+Format: `delete note -id CONTACT_ID -nid NOTE_ID`
 
-* Deletes the note with title `NOTE_TITLE` from the contact with name `NAME`.
+* Deletes the note with the id `NOTE_ID` from the contact with id `CONTACT_ID`.
 
 Examples:
-* `list note` followed by `delete note -n Aaron -t Meeting Topics` deletes the note with title Meeting Topics from the contact with name Aaron.
+* `list note` followed by `delete note -id 1 -nid 1` deletes the note with title Meeting Topics from the contact with name Aaron.
 
 ### Adding events: `add event`
 
