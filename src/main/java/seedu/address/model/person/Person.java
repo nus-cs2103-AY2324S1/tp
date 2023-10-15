@@ -26,7 +26,7 @@ public class Person {
     private final NextOfKinName nextOfKinName;
     private final NextOfKinPhone nextOfKinPhone;
     private final Set<Tag> tags = new HashSet<>();
-
+    private final Set<Appointment> appointments = new HashSet<>();
     /**
      * Every field must be present and not null.
      */
@@ -107,7 +107,8 @@ public class Person {
                 && address.equals(otherPerson.address)
                 && nextOfKinName.equals(otherPerson.nextOfKinName)
                 && nextOfKinPhone.equals(otherPerson.nextOfKinPhone)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && appointments.equals(otherPerson.appointments);
     }
 
     @Override
@@ -126,6 +127,7 @@ public class Person {
                 .add("nextOfKinName", nextOfKinName)
                 .add("nextOfKinPhone", nextOfKinPhone)
                 .add("tags", tags)
+                .add("appointment", appointments)
                 .toString();
     }
 
