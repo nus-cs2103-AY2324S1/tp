@@ -142,6 +142,16 @@ public class UniqueList<T extends Identifiable<T>> implements Iterable<T> {
         return internalList.iterator();
     }
 
+    /**
+     * Creates a copy of this list.
+     * This copy can be used to avoid modifying this list.
+     */
+    public UniqueList<T> copy() {
+        UniqueList<T> newUniqueList = new UniqueList<>();
+        newUniqueList.addAll(this);
+        return newUniqueList;
+    }
+
     @Override
     public boolean equals(Object another) {
         if (another == this) {

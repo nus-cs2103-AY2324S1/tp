@@ -216,9 +216,7 @@ public class AddCommandParserTest {
                 + CommandTestUtil.TAG_DESC_HUSBAND;
 
         assertParseFailure(parser, userInput,
-                Messages.getErrorMessageForDuplicatePrefixes(
-                        CliSyntax.PREFIX_PHONE,
-                        CliSyntax.PREFIX_LINK));
+                Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_PHONE));
 
         // multiple invalid values
         userInput = targetIndex.getOneBased()
@@ -227,8 +225,6 @@ public class AddCommandParserTest {
                 + CommandTestUtil.INVALID_LINK_DESC + CommandTestUtil.INVALID_EMAIL_DESC;
 
         assertParseFailure(parser, userInput,
-                Messages.getErrorMessageForDuplicatePrefixes(
-                        CliSyntax.PREFIX_PHONE,
-                        CliSyntax.PREFIX_LINK));
+                Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_PHONE));
     }
 }

@@ -89,6 +89,10 @@ public class ParserUtil {
         return new Link(trimmedLink);
     }
 
+    /**
+     * Parses a {@code Collection<String>} of links into {@code UniqueList<Link>}.
+     * @throws ParseException if at least one link in {@code Collection<Link>} is invalid.
+     */
     public static UniqueList<Link> parseLinks(Collection<String> links) throws ParseException {
         requireNonNull(links);
 

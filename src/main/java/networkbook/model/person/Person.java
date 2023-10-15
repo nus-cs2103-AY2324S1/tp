@@ -49,8 +49,8 @@ public class Person implements Identifiable<Person> {
         requireAllNonNull(name);
         this.name = name;
         this.phone = phone;
-        this.emails = emails;
-        this.links = links;
+        this.emails = emails.copy();
+        this.links = links.copy();
         this.graduatingYear = graduatingYear;
         this.course = course;
         this.specialisation = specialisation;

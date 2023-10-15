@@ -6,6 +6,7 @@ import networkbook.logic.commands.CreateCommand;
 import networkbook.logic.commands.EditCommand;
 import networkbook.logic.parser.CliSyntax;
 import networkbook.model.person.Email;
+import networkbook.model.person.Link;
 import networkbook.model.person.Person;
 import networkbook.model.tag.Tag;
 import networkbook.model.util.UniqueList;
@@ -32,7 +33,9 @@ public class PersonUtil {
         person.getEmails().stream().forEach(
                 e -> sb.append(CliSyntax.PREFIX_EMAIL + " " + e.toString() + " ")
         );
-        sb.append(CliSyntax.PREFIX_LINK + " " + person.getLink().getValue() + " ");
+        person.getLinks().stream().forEach(
+                e -> sb.append(CliSyntax.PREFIX_LINK + " " + e.toString() + " ")
+        );
         sb.append(CliSyntax.PREFIX_GRADUATING_YEAR + " " + person.getGraduatingYear().value + " ");
         sb.append(CliSyntax.PREFIX_COURSE + " " + person.getCourse().value + " ");
         sb.append(CliSyntax.PREFIX_SPECIALISATION + " " + person.getSpecialisation().value + " ");
@@ -60,8 +63,14 @@ public class PersonUtil {
                                                     .append(e.toString()).append(" "));
             }
         }
-        descriptor.getLink().ifPresent(link -> sb.append(CliSyntax.PREFIX_LINK).append(" ")
-                                                    .append(link.getValue()).append(" "));
+        if (descriptor.getLinks().isPresent()) {
+            UniqueList<Link> links = descriptor.getLinks().get();
+            if (links.isEmpty()) {
+                sb.append(CliSyntax.PREFIX_LINK).append(" ");
+            } else {
+                links.forEach(e -> sb.append(CliSyntax.PREFIX_LINK).append(" ").append(e.toString()).append(" "));
+            }
+        }
         descriptor.getGraduatingYear().ifPresent(graduatingYear -> sb.append(CliSyntax.PREFIX_GRADUATING_YEAR)
                 .append(" ").append(graduatingYear.value).append(" "));
         descriptor.getCourse().ifPresent(course -> sb.append(CliSyntax.PREFIX_COURSE).append(" ")
