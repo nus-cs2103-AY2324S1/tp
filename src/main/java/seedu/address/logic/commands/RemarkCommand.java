@@ -11,7 +11,6 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Remark;
 
-
 /**
  * The RemarkCommand class represents a command in a software application for editing remarks associated with persons.
  * This command allows the user to add or update a remark for a person identified by their index number in the last
@@ -32,8 +31,6 @@ public class RemarkCommand extends Command {
 
     public static final String MESSAGE_ADD_REMARK_SUCCESS = "Added remark to Person: %1$s";
     public static final String MESSAGE_DELETE_REMARK_SUCCESS = "Removed remark from Person: %1$s";
-
-    public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Remark: %2$s";
 
     private final Index index;
     private final Remark remark;
