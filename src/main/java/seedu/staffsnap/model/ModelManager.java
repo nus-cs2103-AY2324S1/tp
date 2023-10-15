@@ -9,9 +9,11 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.staffsnap.commons.core.GuiSettings;
 import seedu.staffsnap.commons.core.LogsCenter;
 import seedu.staffsnap.model.applicant.Applicant;
+import seedu.staffsnap.model.applicant.Descriptor;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -119,13 +121,18 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Applicant> getFilteredApplicantList() {
-        return filteredApplicants;
+        return new SortedList<>(filteredApplicants).sorted();
     }
 
     @Override
     public void updateFilteredApplicantList(Predicate<Applicant> predicate) {
         requireNonNull(predicate);
         filteredApplicants.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateSortedApplicantList(Descriptor descriptor) {
+        Applicant.setDescriptor(descriptor);
     }
 
     @Override

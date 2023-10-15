@@ -13,6 +13,7 @@ import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_POSITION_BOB;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import seedu.staffsnap.model.AddressBook;
@@ -71,7 +72,50 @@ public class TypicalApplicants {
         return ab;
     }
 
+    /**
+     * Returns an {@code AddressBook} with all the typical applicants in non-alphabetical order.
+     */
+    public static AddressBook getUnsortedAddressBook() {
+        AddressBook ab = new AddressBook();
+        List<Applicant> unsorted = getTypicalApplicants();
+        Collections.reverse(unsorted);
+        for (Applicant applicant : unsorted) {
+            ab.addApplicant(applicant);
+        }
+        return ab;
+    }
+
+    /**
+     * Returns an {@code AddressBook} with all the typical applicants sorted by Name.
+     */
+    public static AddressBook getSortedByNameAddressBook() {
+        AddressBook ab = new AddressBook();
+        for (Applicant applicant : getApplicantsSortedByName()) {
+            ab.addApplicant(applicant);
+        }
+        return ab;
+    }
+
+    /**
+     * Returns an {@code AddressBook} with all the typical applicants sorted by Phone.
+     */
+    public static AddressBook getSortedByPhoneAddressBook() {
+        AddressBook ab = new AddressBook();
+        for (Applicant applicant : getApplicantsSortedByPhone()) {
+            ab.addApplicant(applicant);
+        }
+        return ab;
+    }
+
     public static List<Applicant> getTypicalApplicants() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    }
+
+    public static List<Applicant> getApplicantsSortedByName() {
+        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    }
+
+    public static List<Applicant> getApplicantsSortedByPhone() {
+        return new ArrayList<>(Arrays.asList(DANIEL, ALICE, ELLE, FIONA, GEORGE, CARL, BENSON));
     }
 }

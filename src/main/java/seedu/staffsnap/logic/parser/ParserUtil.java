@@ -10,6 +10,7 @@ import seedu.staffsnap.commons.core.index.Index;
 import seedu.staffsnap.commons.util.StringUtil;
 import seedu.staffsnap.logic.parser.exceptions.ParseException;
 import seedu.staffsnap.model.applicant.Department;
+import seedu.staffsnap.model.applicant.Descriptor;
 import seedu.staffsnap.model.applicant.Name;
 import seedu.staffsnap.model.applicant.Phone;
 import seedu.staffsnap.model.applicant.Position;
@@ -120,5 +121,22 @@ public class ParserUtil {
             interviewSet.add(parseInterview(interviewName));
         }
         return interviewSet;
+    }
+
+    /**
+     * Parses a {@code String descriptor} into a {@code Name}.
+     * Leading and trailing whitespaces will be trimmed.
+     * Case-insensitive
+     *
+     * @throws ParseException if the given {@code descriptor} is invalid.
+     */
+    public static Descriptor parseDescriptor(String descriptor) throws ParseException {
+        requireNonNull(descriptor);
+        String trimmedDescriptor = descriptor.trim();
+        Descriptor result = Descriptor.findByName(trimmedDescriptor);
+        if (result == null) {
+            throw new ParseException(Descriptor.MESSAGE_CONSTRAINTS);
+        }
+        return result;
     }
 }

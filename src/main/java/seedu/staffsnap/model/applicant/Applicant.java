@@ -14,7 +14,10 @@ import seedu.staffsnap.model.interview.Interview;
  * Represents an Applicant in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Applicant {
+public class Applicant implements Comparable<Applicant> {
+
+    // Field to compare by, default to Name
+    private static Descriptor descriptor = Descriptor.NAME;
 
     // Identity fields
     private final Name name;
@@ -111,6 +114,56 @@ public class Applicant {
                 .add("position", position)
                 .add("interviews", interviews)
                 .toString();
+    }
+
+    /**
+     * Update the descriptor for all Applicants.
+     * @param newDescriptor the new descriptor to sort Applicants by
+     */
+    public static void setDescriptor(Descriptor newDescriptor) {
+        descriptor = newDescriptor;
+    }
+
+    public static Descriptor getDescriptor() {
+        return descriptor;
+    }
+
+    /**
+     * @param o the Applicant to be compared.
+     * @return the value 0 if the argument Name is equal to this Name; a value less than 0 if this Name is
+     *      lexicographically less than the Name argument; and a value greater than 0 if this string is
+     *      lexicographically greater than the Name argument.
+     */
+    public int compareByName(Applicant o) {
+        return this.name.compareTo(o.name);
+    }
+
+    /**
+     * @param o the Applicant to be compared.
+     * @return the value 0 if the argument Phone is equal to this Phone; a value less than 0 if this Phone is
+     *      lexicographically less than the Phone argument; and a value greater than 0 if this Phone is
+     *      lexicographically greater than the Phone argument.
+     */
+    public int compareByPhone(Applicant o) {
+        return this.phone.compareTo(o.phone);
+    }
+
+    /**
+     * @param o the object to be compared.
+     * @return the value 0 if the argument Applicant is equal to this Applicant;
+     *      a value less than 0 if this Applicant is lexicographically less than the Applicant argument;
+     *      and a value greater than 0 if this Applicant is lexicographically greater than the Applicant argument.
+     */
+    @Override
+    public int compareTo(Applicant o) {
+        switch (descriptor) {
+        case NAME:
+            return compareByName(o);
+        case PHONE:
+            return compareByPhone(o);
+        default:
+            return 0;
+        }
     }
 
 }
