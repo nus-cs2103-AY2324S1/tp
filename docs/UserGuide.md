@@ -15,11 +15,15 @@
 
 ## Features
 
-<box type="tip" theme="info" header="##### Notation Guide :rocket:" seamless>
+<box type="tip" seamless>
+
+**Notation Guide** :rocket:<br>
+
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.
-* Items in square brackets are optional.
-* Parameters can be in any order.
+* Items in square brackets are optional. 
+* Parameters can be in any order. 
 * Extraneous parameters for commands that do not take in parameters such as `help`, `list`, `clear`, `exit` will be ignored.
+
 </box>
 
 ---
