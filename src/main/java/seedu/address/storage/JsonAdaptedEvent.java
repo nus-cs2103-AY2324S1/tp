@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import java.util.Optional;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -9,11 +11,9 @@ import seedu.address.model.event.Event;
 import seedu.address.model.event.EventDate;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.EventTime;
-import seedu.address.model.event.EventType;
 import seedu.address.model.event.Meeting;
 import seedu.address.model.person.Name;
 
-import java.util.Optional;
 
 /**
  * Json-friendly version of {@link Event}.
@@ -102,8 +102,11 @@ public class JsonAdaptedEvent {
                 Optional.of(modelEventStartTime), Optional.of(modelEventEndTime));
     }
 
-    public Event checkEventType(EventName eventName, EventDate eventDate,
-                                Optional<EventTime> startTime, Optional<EventTime> endTime) throws IllegalValueException {
+
+    private Event checkEventType(EventName eventName,
+                                 EventDate eventDate,
+                                 Optional<EventTime> startTime,
+                                 Optional<EventTime> endTime) throws IllegalValueException {
 
         switch (this.eventType) {
         case "meeting":

@@ -6,13 +6,7 @@ import java.time.format.DateTimeFormatter;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Represents the time of an event.
-=======
-import java.util.Optional;
-
-/**
- * Represents the time of the event
->>>>>>> branch-meetings-main
+ * Represents the time of the event.
  */
 public class EventTime {
 
