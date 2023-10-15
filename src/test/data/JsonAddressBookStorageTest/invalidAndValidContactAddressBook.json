@@ -1,0 +1,13 @@
+{
+  "contacts": [{
+    "name": "Valid Contact",
+    "phone": "9482424",
+    "email": "hans@example.com",
+    "note": "My note."
+  }, {
+    "name": "Contact With Invalid Phone Field",
+    "phone": "948asdf2424",
+    "email": "hans@example.com",
+    "note": ""
+  }]
+}

@@ -13,20 +13,20 @@ import java.util.List;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.model.AddressBook;
-import seedu.address.model.person.Person;
+import seedu.address.model.contact.Contact;
 
 /**
  * Holds all data used by test cases.
  */
 public class TestData {
 
-    // These are used for default values during {@code PersonBuilder} initialisation.
+    // These are used for default values during {@code ContactBuilder} initialisation.
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_NOTE = "I forgot where this contact came from...";
 
-    // These are used for testing commands as well creating of {@code Person} objects
+    // These are used for testing commands as well creating of {@code Contact} objects
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_PHONE_AMY = "11111111";
@@ -62,22 +62,22 @@ public class TestData {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditPersonDescriptor DESC_AMY;
-    public static final EditCommand.EditPersonDescriptor DESC_BOB;
+    public static final EditCommand.EditContactDescriptor DESC_AMY;
+    public static final EditCommand.EditContactDescriptor DESC_BOB;
 
     static {
-        DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
+        DESC_AMY = new EditContactDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withNote(VALID_NOTE_AMY)
                 .withTags(VALID_TAG_FRIEND).build();
-        DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
+        DESC_BOB = new EditContactDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withNote(VALID_NOTE_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 
     // These contain {@code Index} objects that are used in test cases
-    public static final Index INDEX_FIRST_PERSON = Index.fromOneBased(1);
-    public static final Index INDEX_SECOND_PERSON = Index.fromOneBased(2);
-    public static final Index INDEX_THIRD_PERSON = Index.fromOneBased(3);
+    public static final Index INDEX_FIRST_CONTACT = Index.fromOneBased(1);
+    public static final Index INDEX_SECOND_CONTACT = Index.fromOneBased(2);
+    public static final Index INDEX_THIRD_CONTACT = Index.fromOneBased(3);
 
     // These are used for JsonUtilTest test cases
     public static final String JSON_STRING_REPRESENTATION = String.format("{%n"
@@ -94,53 +94,53 @@ public class TestData {
 
     public static final String NAME_TEST_VALUE = "This is a test class";
 
-    // These contain {@code Person} objects that are used in test cases.
-    public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
+    // These contain {@code Contact} objects that are used in test cases.
+    public static final Contact ALICE = new ContactBuilder().withName("Alice Pauline")
             .withNote("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253")
             .withTags("friends").build();
-    public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
+    public static final Contact BENSON = new ContactBuilder().withName("Benson Meier")
             .withNote("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withTags("owesMoney", "friends").build();
-    public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
+    public static final Contact CARL = new ContactBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withNote("wall street").build();
-    public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
+    public static final Contact DANIEL = new ContactBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withNote("10th street").withTags("friends").build();
-    public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
+    public static final Contact ELLE = new ContactBuilder().withName("Elle Meyer").withPhone("9482224")
             .withEmail("werner@example.com").withNote("michegan ave").build();
-    public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
+    public static final Contact FIONA = new ContactBuilder().withName("Fiona Kunz").withPhone("9482427")
             .withEmail("lydia@example.com").withNote("little tokyo").build();
-    public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
+    public static final Contact GEORGE = new ContactBuilder().withName("George Best").withPhone("9482442")
             .withEmail("anna@example.com").withNote("4th street").build();
 
     // Manually added
-    public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
+    public static final Contact HOON = new ContactBuilder().withName("Hoon Meier").withPhone("8482424")
             .withEmail("stefan@example.com").withNote("little india").build();
-    public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
+    public static final Contact IDA = new ContactBuilder().withName("Ida Mueller").withPhone("8482131")
             .withEmail("hans@example.com").withNote("chicago ave").build();
 
-    // Manually added - Person's details found in {@code CommandTestUtil}
-    public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
+    // Manually added - Contact's details found in {@code CommandTestUtil}
+    public static final Contact AMY = new ContactBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withEmail(VALID_EMAIL_AMY).withNote(VALID_NOTE_AMY).withTags(VALID_TAG_FRIEND).build();
-    public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+    public static final Contact BOB = new ContactBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withNote(VALID_NOTE_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .build();
 
     private TestData() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code AddressBook} with all the typical contacts.
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
-        for (Person person : getTypicalPersons()) {
-            ab.addPerson(person);
+        for (Contact contact : getTypicalContacts()) {
+            ab.addContact(contact);
         }
         return ab;
     }
 
-    public static List<Person> getTypicalPersons() {
+    public static List<Contact> getTypicalContacts() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 
