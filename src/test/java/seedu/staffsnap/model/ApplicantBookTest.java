@@ -7,7 +7,7 @@ import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_INTERVIEW_HUS
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_POSITION_BOB;
 import static seedu.staffsnap.testutil.Assert.assertThrows;
 import static seedu.staffsnap.testutil.TypicalApplicants.ALICE;
-import static seedu.staffsnap.testutil.TypicalApplicants.getTypicalAddressBook;
+import static seedu.staffsnap.testutil.TypicalApplicants.getTypicalApplicantBook;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -22,25 +22,25 @@ import seedu.staffsnap.model.applicant.Applicant;
 import seedu.staffsnap.model.applicant.exceptions.DuplicateApplicantException;
 import seedu.staffsnap.testutil.ApplicantBuilder;
 
-public class AddressBookTest {
+public class ApplicantBookTest {
 
-    private final AddressBook addressBook = new AddressBook();
+    private final ApplicantBook applicantBook = new ApplicantBook();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getApplicantList());
+        assertEquals(Collections.emptyList(), applicantBook.getApplicantList());
     }
 
     @Test
     public void resetData_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.resetData(null));
+        assertThrows(NullPointerException.class, () -> applicantBook.resetData(null));
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = getTypicalAddressBook();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+    public void resetData_withValidReadOnlyApplicantBook_replacesData() {
+        ApplicantBook newData = getTypicalApplicantBook();
+        applicantBook.resetData(newData);
+        assertEquals(newData, applicantBook);
     }
 
     @Test
@@ -49,53 +49,54 @@ public class AddressBookTest {
         Applicant editedAlice = new ApplicantBuilder(ALICE)
                 .withPosition(VALID_POSITION_BOB).withInterviews(VALID_INTERVIEW_HUSBAND).build();
         List<Applicant> newApplicants = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newApplicants);
+        ApplicantBookStub newData = new ApplicantBookStub(newApplicants);
 
-        assertThrows(DuplicateApplicantException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicateApplicantException.class, () -> applicantBook.resetData(newData));
     }
 
     @Test
     public void hasApplicant_nullApplicant_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasApplicant(null));
+        assertThrows(NullPointerException.class, () -> applicantBook.hasApplicant(null));
     }
 
     @Test
-    public void hasApplicant_applicantNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasApplicant(ALICE));
+    public void hasApplicant_applicantNotInApplicantBook_returnsFalse() {
+        assertFalse(applicantBook.hasApplicant(ALICE));
     }
 
     @Test
-    public void hasApplicant_applicantInAddressBook_returnsTrue() {
-        addressBook.addApplicant(ALICE);
-        assertTrue(addressBook.hasApplicant(ALICE));
+    public void hasApplicant_applicantInApplicantBook_returnsTrue() {
+        applicantBook.addApplicant(ALICE);
+        assertTrue(applicantBook.hasApplicant(ALICE));
     }
 
     @Test
-    public void hasApplicant_applicantWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addApplicant(ALICE);
+    public void hasApplicant_applicantWithSameIdentityFieldsInApplicantBook_returnsTrue() {
+        applicantBook.addApplicant(ALICE);
         Applicant editedAlice = new ApplicantBuilder(ALICE)
                 .withPosition(VALID_POSITION_BOB).withInterviews(VALID_INTERVIEW_HUSBAND).build();
-        assertTrue(addressBook.hasApplicant(editedAlice));
+        assertTrue(applicantBook.hasApplicant(editedAlice));
     }
 
     @Test
     public void getApplicantList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getApplicantList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> applicantBook.getApplicantList().remove(0));
     }
 
     @Test
     public void toStringMethod() {
-        String expected = AddressBook.class.getCanonicalName() + "{applicants=" + addressBook.getApplicantList() + "}";
-        assertEquals(expected, addressBook.toString());
+        String expected = ApplicantBook.class.getCanonicalName()
+                + "{applicants=" + applicantBook.getApplicantList() + "}";
+        assertEquals(expected, applicantBook.toString());
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose applicants list can violate interface constraints.
+     * A stub ReadOnlyApplicantBook whose applicants list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class ApplicantBookStub implements ReadOnlyApplicantBook {
         private final ObservableList<Applicant> applicants = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Applicant> applicants) {
+        ApplicantBookStub(Collection<Applicant> applicants) {
             this.applicants.setAll(applicants);
         }
 

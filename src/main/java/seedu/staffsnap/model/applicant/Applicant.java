@@ -11,7 +11,7 @@ import seedu.staffsnap.commons.util.ToStringBuilder;
 import seedu.staffsnap.model.interview.Interview;
 
 /**
- * Represents an Applicant in the address book.
+ * Represents an Applicant in the applicant book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Applicant {

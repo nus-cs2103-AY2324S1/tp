@@ -7,24 +7,24 @@ import java.util.logging.Logger;
 
 import seedu.staffsnap.commons.core.LogsCenter;
 import seedu.staffsnap.commons.exceptions.DataLoadingException;
-import seedu.staffsnap.model.ReadOnlyAddressBook;
+import seedu.staffsnap.model.ReadOnlyApplicantBook;
 import seedu.staffsnap.model.ReadOnlyUserPrefs;
 import seedu.staffsnap.model.UserPrefs;
 
 /**
- * Manages storage of AddressBook data in local storage.
+ * Manages storage of ApplicantBook data in local storage.
  */
 public class StorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private AddressBookStorage addressBookStorage;
+    private ApplicantBookStorage applicantBookStorage;
     private UserPrefsStorage userPrefsStorage;
 
     /**
-     * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
+     * Creates a {@code StorageManager} with the given {@code ApplicantBookStorage} and {@code UserPrefStorage}.
      */
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
-        this.addressBookStorage = addressBookStorage;
+    public StorageManager(ApplicantBookStorage applicantBookStorage, UserPrefsStorage userPrefsStorage) {
+        this.applicantBookStorage = applicantBookStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
@@ -46,33 +46,33 @@ public class StorageManager implements Storage {
     }
 
 
-    // ================ AddressBook methods ==============================
+    // ================ ApplicantBook methods ==============================
 
     @Override
-    public Path getAddressBookFilePath() {
-        return addressBookStorage.getAddressBookFilePath();
+    public Path getApplicantBookFilePath() {
+        return applicantBookStorage.getApplicantBookFilePath();
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook() throws DataLoadingException {
-        return readAddressBook(addressBookStorage.getAddressBookFilePath());
+    public Optional<ReadOnlyApplicantBook> readApplicantBook() throws DataLoadingException {
+        return readApplicantBook(applicantBookStorage.getApplicantBookFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataLoadingException {
+    public Optional<ReadOnlyApplicantBook> readApplicantBook(Path filePath) throws DataLoadingException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return addressBookStorage.readAddressBook(filePath);
+        return applicantBookStorage.readApplicantBook(filePath);
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
-        saveAddressBook(addressBook, addressBookStorage.getAddressBookFilePath());
+    public void saveApplicantBook(ReadOnlyApplicantBook applicantBook) throws IOException {
+        saveApplicantBook(applicantBook, applicantBookStorage.getApplicantBookFilePath());
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+    public void saveApplicantBook(ReadOnlyApplicantBook applicantBook, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        addressBookStorage.saveAddressBook(addressBook, filePath);
+        applicantBookStorage.saveApplicantBook(applicantBook, filePath);
     }
 
 }

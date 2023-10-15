@@ -6,7 +6,7 @@ import static seedu.staffsnap.model.Model.PREDICATE_SHOW_ALL_APPLICANTS;
 import seedu.staffsnap.model.Model;
 
 /**
- * Lists all applicants in the address book to the user.
+ * Lists all applicants in the applicant book to the user.
  */
 public class ListCommand extends Command {
 

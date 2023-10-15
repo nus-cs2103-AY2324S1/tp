@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.staffsnap.model.AddressBook;
-import seedu.staffsnap.model.ReadOnlyAddressBook;
+import seedu.staffsnap.model.ApplicantBook;
+import seedu.staffsnap.model.ReadOnlyApplicantBook;
 import seedu.staffsnap.model.applicant.Applicant;
 import seedu.staffsnap.model.applicant.Email;
 import seedu.staffsnap.model.applicant.Name;
@@ -14,7 +14,7 @@ import seedu.staffsnap.model.applicant.Position;
 import seedu.staffsnap.model.interview.Interview;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code ApplicantBook} with sample data.
  */
 public class SampleDataUtil {
     public static Applicant[] getSampleApplicants() {
@@ -40,8 +40,8 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
+    public static ReadOnlyApplicantBook getSampleApplicantBook() {
+        ApplicantBook sampleAb = new ApplicantBook();
         for (Applicant sampleApplicant : getSampleApplicants()) {
             sampleAb.addApplicant(sampleApplicant);
         }

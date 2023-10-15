@@ -18,9 +18,9 @@ import javafx.collections.ObservableList;
 import seedu.staffsnap.commons.core.GuiSettings;
 import seedu.staffsnap.logic.Messages;
 import seedu.staffsnap.logic.commands.exceptions.CommandException;
-import seedu.staffsnap.model.AddressBook;
+import seedu.staffsnap.model.ApplicantBook;
 import seedu.staffsnap.model.Model;
-import seedu.staffsnap.model.ReadOnlyAddressBook;
+import seedu.staffsnap.model.ReadOnlyApplicantBook;
 import seedu.staffsnap.model.ReadOnlyUserPrefs;
 import seedu.staffsnap.model.applicant.Applicant;
 import seedu.staffsnap.testutil.ApplicantBuilder;
@@ -110,12 +110,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getApplicantBookFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setApplicantBookFilePath(Path applicantBookFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -125,12 +125,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void setApplicantBook(ReadOnlyApplicantBook newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyApplicantBook getApplicantBook() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -197,8 +197,8 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyApplicantBook getApplicantBook() {
+            return new ApplicantBook();
         }
     }
 

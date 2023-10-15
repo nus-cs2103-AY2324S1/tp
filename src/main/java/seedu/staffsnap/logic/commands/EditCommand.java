@@ -29,7 +29,7 @@ import seedu.staffsnap.model.applicant.Position;
 import seedu.staffsnap.model.interview.Interview;
 
 /**
- * Edits the details of an existing applicant in the address book.
+ * Edits the details of an existing applicant in the applicant book.
  */
 public class EditCommand extends Command {
 
@@ -50,7 +50,7 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_APPLICANT_SUCCESS = "Edited Applicant: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_APPLICANT = "This applicant already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_APPLICANT = "This applicant already exists in the applicant book.";
 
     private final Index index;
     private final EditApplicantDescriptor editApplicantDescriptor;

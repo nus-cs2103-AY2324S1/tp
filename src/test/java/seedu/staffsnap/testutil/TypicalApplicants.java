@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.staffsnap.model.AddressBook;
+import seedu.staffsnap.model.ApplicantBook;
 import seedu.staffsnap.model.applicant.Applicant;
 
 /**
@@ -61,10 +61,10 @@ public class TypicalApplicants {
     private TypicalApplicants() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical applicants.
+     * Returns an {@code ApplicantBook} with all the typical applicants.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static ApplicantBook getTypicalApplicantBook() {
+        ApplicantBook ab = new ApplicantBook();
         for (Applicant applicant : getTypicalApplicants()) {
             ab.addApplicant(applicant);
         }

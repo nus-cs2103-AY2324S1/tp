@@ -4,9 +4,9 @@ import javafx.collections.ObservableList;
 import seedu.staffsnap.model.applicant.Applicant;
 
 /**
- * Unmodifiable view of an address book
+ * Unmodifiable view of an applicant book
  */
-public interface ReadOnlyAddressBook {
+public interface ReadOnlyApplicantBook {
 
     /**
      * Returns an unmodifiable view of the persons list.

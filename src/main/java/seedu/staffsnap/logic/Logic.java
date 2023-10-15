@@ -7,7 +7,7 @@ import seedu.staffsnap.commons.core.GuiSettings;
 import seedu.staffsnap.logic.commands.CommandResult;
 import seedu.staffsnap.logic.commands.exceptions.CommandException;
 import seedu.staffsnap.logic.parser.exceptions.ParseException;
-import seedu.staffsnap.model.ReadOnlyAddressBook;
+import seedu.staffsnap.model.ReadOnlyApplicantBook;
 import seedu.staffsnap.model.applicant.Applicant;
 
 /**
@@ -24,19 +24,19 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
-     * Returns the AddressBook.
+     * Returns the ApplicantBook.
      *
-     * @see seedu.staffsnap.model.Model#getAddressBook()
+     * @see seedu.staffsnap.model.Model#getApplicantBook()
      */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyApplicantBook getApplicantBook();
 
     /** Returns an unmodifiable view of the filtered list of applicants */
     ObservableList<Applicant> getFilteredApplicantList();
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' applicant book file path.
      */
-    Path getAddressBookFilePath();
+    Path getApplicantBookFilePath();
 
     /**
      * Returns the user prefs' GUI settings.

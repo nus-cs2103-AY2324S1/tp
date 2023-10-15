@@ -15,7 +15,7 @@ import java.util.List;
 
 import seedu.staffsnap.commons.core.index.Index;
 import seedu.staffsnap.logic.commands.exceptions.CommandException;
-import seedu.staffsnap.model.AddressBook;
+import seedu.staffsnap.model.ApplicantBook;
 import seedu.staffsnap.model.Model;
 import seedu.staffsnap.model.applicant.Applicant;
 import seedu.staffsnap.model.applicant.NameContainsKeywordsPredicate;
@@ -101,21 +101,21 @@ public class CommandTestUtil {
      * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
-     * - the address book, filtered applicant list and selected applicant in {@code actualModel} remain unchanged
+     * - the applicant book, filtered applicant list and selected applicant in {@code actualModel} remain unchanged
      */
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
+        ApplicantBook expectedApplicantBook = new ApplicantBook(actualModel.getApplicantBook());
         List<Applicant> expectedFilteredList = new ArrayList<>(actualModel.getFilteredApplicantList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
-        assertEquals(expectedAddressBook, actualModel.getAddressBook());
+        assertEquals(expectedApplicantBook, actualModel.getApplicantBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredApplicantList());
     }
     /**
      * Updates {@code model}'s filtered list to show only the applicant at the given {@code targetIndex} in the
-     * {@code model}'s address book.
+     * {@code model}'s applicant book.
      */
     public static void showApplicantAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredApplicantList().size());

@@ -14,13 +14,13 @@ import seedu.staffsnap.model.Model;
 import seedu.staffsnap.model.applicant.Applicant;
 
 /**
- * Adds an applicant to the address book.
+ * Adds an applicant to the applicant book.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an applicant to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an applicant to the applicant book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -36,7 +36,7 @@ public class AddCommand extends Command {
             + PREFIX_INTERVIEW + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New applicant added: %1$s";
-    public static final String MESSAGE_DUPLICATE_APPLICANT = "This applicant already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_APPLICANT = "This applicant already exists in the applicant book";
 
     private final Applicant toAdd;
 
