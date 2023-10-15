@@ -8,6 +8,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -17,6 +18,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -36,6 +38,10 @@ public class MainWindow extends UiPart<Stage> {
     private TaskListPanel taskListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private ShowPersonWindow showPersonWindow;
+
+    @FXML
+    private AnchorPane showPersonPanelPlaceholder;
 
     /** Panel currently displayed, default is students panel**/
     private String activePanel = "STUDENTS";
@@ -78,6 +84,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        showPersonWindow = new ShowPersonWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -138,6 +145,7 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
     }
 
     void hidePanels() {
@@ -248,6 +256,20 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("An error occurred while executing command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
+        }
+    }
+
+    /**
+     * Opens the Person Details window or focuses on it if it's already opened.
+     *
+     * @param person The person to show the details of.
+     */
+    public void handleShowPerson(Person person) {
+        showPersonWindow.setPersonDetails(person);
+        if (!showPersonWindow.isShowing()) {
+            showPersonWindow.show();
+        } else {
+            showPersonWindow.focus();
         }
     }
 }
