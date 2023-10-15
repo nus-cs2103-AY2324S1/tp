@@ -29,7 +29,7 @@ Flashlingo is a **desktop app for learning words by flashcard, optimized for use
 
    * `list` : Shows the list of cards.
 
-   * `add w/WORD t/TRANSLATION` :Adds a word to the flashcard with its translation.
+   * `add w/WORD wl/WORD LANGUAGE t/TRANSLATION tl/TRANSLATION LANGUAGE` :Adds a word to the flashcard with its translation.
 
    * `del index` : Deletes a words and its related information at the given index.
    
@@ -44,6 +44,7 @@ Flashlingo is a **desktop app for learning words by flashcard, optimized for use
    * `yes` :  Indicates user has memorized the word.
 
    * `no` :  Indicates user has forgotten the word.
+   * `stats` : Displays learning statistics for current user.
 
    * `stop` :  Stops the current flashcard session.
 
@@ -78,9 +79,7 @@ Format: `help`
 
 Shows the list of cards with both the original word and the corresponding translation.
 
-Format: `list`
-
-Format: `list`
+Format: `list`  
 
 Output:
 * `There are no words in the list! Add your flashcards now!`
@@ -96,14 +95,14 @@ Output:
 
 Adds a word to the flashcard with its translation.
 * Creates a wild card.
-* Works to add a word with its translation in the expected language.
+* Works to add a word with its translation in their respective languages.
 * The already saved translation can be overridden with a new translation in a different language.
 
-Format: `add w/WORD t/TRANSLATION`
+Format: `add w/WORD wl/WORD LANGUAGE t/TRANSLATION tl/TRANSLATION LANGUAGE`
 
 Examples:
-* `add w/regarder t/look` saves the translation of regarder as look
-* `add w/entschuldigung t/sorry` saves the translation of entschuldigung as sorry
+* `add w/regarder wl/French t/look tl/English` saves the translation of regarder as look
+* `add w/entschuldigung wl/Deutsch t/sorry tl/English` saves the translation of entschuldigung as sorry
 
 
 ### Deleting a word card : `delete`
@@ -171,6 +170,11 @@ Marks the word as not grasped and leaves it in its current retention stage.
 
 Format: `no`
 
+### Show learning statistics : `stats`
+
+Displays learning statistics, i.e, the total number of flashcards and the number of words remembered.
+
+Format: `stats`
 
 ### Stopping the current flashcard session : `stop`
 
@@ -234,5 +238,6 @@ Action | Format, Examples
 **Flip** | `flip`/`f`
 **Yes** | `yes`
 **No** | `no`
+**Learning Statistics** | `stats`
 **Stop** | `stop`
 **Exit** | `exit`

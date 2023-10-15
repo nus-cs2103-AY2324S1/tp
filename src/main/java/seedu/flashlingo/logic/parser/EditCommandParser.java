@@ -2,8 +2,7 @@ package seedu.flashlingo.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.flashlingo.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_ORIGINAL_WORD;
-import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_TRANSLATED_WORD;
+import static seedu.flashlingo.logic.parser.CliSyntax.*;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -15,8 +14,8 @@ import seedu.flashlingo.commons.core.index.Index;
 import seedu.flashlingo.logic.commands.EditCommand;
 import seedu.flashlingo.logic.parser.exceptions.ParseException;
 import seedu.flashlingo.model.flashcard.FlashCard;
-import seedu.flashlingo.model.flashcard.OriginalWord;
-import seedu.flashlingo.model.flashcard.Translation;
+import seedu.flashlingo.model.flashcard.words.OriginalWord;
+import seedu.flashlingo.model.flashcard.words.TranslatedWord;
 import seedu.flashlingo.model.tag.Tag;
 
 /**
@@ -32,7 +31,8 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(args, PREFIX_ORIGINAL_WORD, PREFIX_TRANSLATED_WORD);
+            ArgumentTokenizer.tokenize(args, PREFIX_ORIGINAL_WORD, PREFIX_ORIGINAL_WORD_LANGUAGE,
+                    PREFIX_TRANSLATED_WORD, PREFIX_TRANSLATED_WORD_LANGUAGE);
 
         Index index;
 
@@ -42,10 +42,13 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ORIGINAL_WORD, PREFIX_TRANSLATED_WORD);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ORIGINAL_WORD, PREFIX_ORIGINAL_WORD_LANGUAGE,
+                PREFIX_TRANSLATED_WORD, PREFIX_TRANSLATED_WORD_LANGUAGE);
 
-        OriginalWord word = new OriginalWord(argMultimap.getValue(PREFIX_ORIGINAL_WORD).get());
-        Translation translation = new Translation(argMultimap.getValue(PREFIX_TRANSLATED_WORD).get());
+        OriginalWord word = new OriginalWord(argMultimap.getValue(PREFIX_ORIGINAL_WORD).get(),
+                argMultimap.getValue(PREFIX_ORIGINAL_WORD_LANGUAGE).get());
+        TranslatedWord translation = new TranslatedWord(argMultimap.getValue(PREFIX_TRANSLATED_WORD).get(),
+                argMultimap.getValue(PREFIX_TRANSLATED_WORD_LANGUAGE).get());
         return new EditCommand(index, new FlashCard(word, translation, new Date(), 1));
     }
 

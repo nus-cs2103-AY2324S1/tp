@@ -10,8 +10,8 @@ import seedu.flashlingo.commons.util.ToStringBuilder;
 import seedu.flashlingo.logic.commands.exceptions.CommandException;
 import seedu.flashlingo.model.Model;
 import seedu.flashlingo.model.flashcard.FlashCard;
-import seedu.flashlingo.model.flashcard.OriginalWord;
-import seedu.flashlingo.model.flashcard.Translation;
+import seedu.flashlingo.model.flashcard.words.OriginalWord;
+import seedu.flashlingo.model.flashcard.words.TranslatedWord;
 
 /**
  * Adds a flashcard to Flashlingo.
@@ -34,12 +34,12 @@ public class AddCommand extends Command {
 
     private final FlashCard toAdd;
     private OriginalWord original;
-    private Translation translated;
+    private TranslatedWord translated;
 
     /**
      * Creates an AddCommand to add the specified {@code FlashCard}
      */
-    public AddCommand(OriginalWord original, Translation translated) {
+    public AddCommand(OriginalWord original, TranslatedWord translated) {
         this.original = original;
         this.translated = translated;
         this.toAdd = new FlashCard(original, translated, new Date(), 1);

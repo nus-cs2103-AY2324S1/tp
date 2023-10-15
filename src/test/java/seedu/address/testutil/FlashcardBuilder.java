@@ -3,8 +3,8 @@ package seedu.address.testutil;
 import java.util.Date;
 
 import seedu.flashlingo.model.flashcard.FlashCard;
-import seedu.flashlingo.model.flashcard.OriginalWord;
-import seedu.flashlingo.model.flashcard.Translation;
+import seedu.flashlingo.model.flashcard.words.OriginalWord;
+import seedu.flashlingo.model.flashcard.words.TranslatedWord;
 
 /**
  * A utility class to help with building Person objects.
@@ -12,16 +12,18 @@ import seedu.flashlingo.model.flashcard.Translation;
 public class FlashcardBuilder {
 
     public static final String DEFAULT_ORIGINAL_WORD = "Hello";
+    public static final String DEFAULT_ORIGINAL_WORD_LANGUAGE = "English";
     public static final String DEFAULT_TRANSLATION = "你好";
+    public static final String DEFAULT_TRANSLATION_LANGUAGE = "Mandarin";
     private OriginalWord originalWord;
-    private Translation translation;
+    private TranslatedWord translation;
 
     /**
      * Creates a {@code FlashcardBuilder} with the default details.
      */
     public FlashcardBuilder() {
-        originalWord = new OriginalWord(DEFAULT_ORIGINAL_WORD);
-        translation = new Translation(DEFAULT_TRANSLATION);
+        originalWord = new OriginalWord(DEFAULT_ORIGINAL_WORD, DEFAULT_ORIGINAL_WORD_LANGUAGE);
+        translation = new TranslatedWord(DEFAULT_TRANSLATION, DEFAULT_TRANSLATION_LANGUAGE);
     }
 
     /**
@@ -35,16 +37,16 @@ public class FlashcardBuilder {
     /**
      * Sets the {@code originalWord} of the {@code flashcard} that we are building.
      */
-    public FlashcardBuilder withOriginalWord(String word) {
-        this.originalWord = new OriginalWord(word);
+    public FlashcardBuilder withOriginalWord(String word, String language) {
+        this.originalWord = new OriginalWord(word, language);
         return this;
     }
 
     /**
      * Sets the {@code translation} of the {@code flashcard} that we are building.
      */
-    public FlashcardBuilder withTranslation(String translation) {
-        this.translation = new Translation(translation);
+    public FlashcardBuilder withTranslation(String translation, String language) {
+        this.translation = new TranslatedWord(translation, language);
         return this;
     }
 
