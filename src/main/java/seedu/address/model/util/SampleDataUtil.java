@@ -43,7 +43,7 @@ public class SampleDataUtil {
 
     public static Interview[] getSampleInterviews() {
         return new Interview[] {
-                new Interview("Jason", "SWE", "Sample Time")
+            new Interview("Jason", "SWE", "Sample Time")
         };
     }
 

@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.interview.Interview;
 
@@ -43,7 +44,8 @@ class JsonAdaptedInterview {
     /**
      * Converts this Jackson-friendly adapted person object into the model's {@code Interview} object.
      *
-     * @throws seedu.address.commons.exceptions.IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws seedu.address.commons.exceptions.IllegalValueException if there were any data constraints 
+     * violated in the adapted person.
      */
     public Interview toModelType() throws IllegalValueException {
 
