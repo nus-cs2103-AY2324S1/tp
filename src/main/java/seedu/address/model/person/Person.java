@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.lessons.Schedule;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -26,10 +27,12 @@ public class Person {
     private final Set<Subject> subjects = new HashSet<>();
     private final Set<Tag> tags = new HashSet<>();
 
+    private final Schedule schedule;
+
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Subject> subjects, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<Subject> subjects, Set<Tag> tags, Schedule schedule) {
         requireAllNonNull(name, phone, email, address, subjects, tags);
         this.name = name;
         this.phone = phone;
@@ -37,6 +40,7 @@ public class Person {
         this.address = address;
         this.subjects.addAll(subjects);
         this.tags.addAll(tags);
+        this.schedule = schedule;
     }
 
     public Name getName() {
@@ -68,6 +72,10 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public Schedule getSchedule() {
+        return schedule;
     }
 
     /**
@@ -104,13 +112,14 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && subjects.equals(otherPerson.subjects)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && schedule.equals(otherPerson.schedule);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, subjects, tags);
+        return Objects.hash(name, phone, email, address, subjects, tags, schedule);
     }
 
     @Override
@@ -122,6 +131,7 @@ public class Person {
                 .add("address", address)
                 .add("subjects", subjects)
                 .add("tags", tags)
+                .add("schedule", schedule)
                 .toString();
     }
 
