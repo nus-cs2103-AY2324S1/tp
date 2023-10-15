@@ -53,7 +53,7 @@ public class EditStudentDescriptorTest {
         editedAmy = new EditStudentDescriptorBuilder(DESC_AMY).withStudentNumber(VALID_STUDENT_NUMBER_BOB).build();
 
         // different class number -> returns false
-        editedAmy = new EditStudentDescriptorBuilder(DESC_AMY).withClassNumber(VALID_CLASS_NUMBER_BOB).build();
+        editedAmy = new EditStudentDescriptorBuilder(DESC_AMY).withClassDetails(VALID_CLASS_NUMBER_BOB).build();
 
         // different tags -> returns false
         editedAmy = new EditStudentDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
@@ -68,7 +68,7 @@ public class EditStudentDescriptorTest {
                 + editStudentDescriptor.getPhone().orElse(null) + ", email="
                 + editStudentDescriptor.getEmail().orElse(null) + ", student number="
                 + editStudentDescriptor.getStudentNumber().orElse(null) + ", class number="
-                + editStudentDescriptor.getClassNumber().orElse(null) + ", tags="
+                + editStudentDescriptor.getClassDetails().orElse(null) + ", tags="
                 + editStudentDescriptor.getTags().orElse(null) + "}";
         assertEquals(expected, editStudentDescriptor.toString());
     }

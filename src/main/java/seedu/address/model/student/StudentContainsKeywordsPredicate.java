@@ -11,7 +11,7 @@ import seedu.address.commons.util.ToStringBuilder;
  */
 public class StudentContainsKeywordsPredicate implements Predicate<Student> {
 
-    private final Optional<String> classNumber;
+    private final Optional<String> classDetails;
     private final Optional<String> email;
     private final Optional<String> name;
     private final Optional<String> phone;
@@ -21,9 +21,9 @@ public class StudentContainsKeywordsPredicate implements Predicate<Student> {
     /**
      * Constructs a {@code StudentContainsKeywordsPredicate} with the given keywords.
      */
-    public StudentContainsKeywordsPredicate(String classNumber, String email, String name,
+    public StudentContainsKeywordsPredicate(String classDetails, String email, String name,
                                             String phone, String studentNumber, String tag) {
-        this.classNumber = Optional.ofNullable(classNumber);
+        this.classDetails = Optional.ofNullable(classDetails);
         this.email = Optional.ofNullable(email);
         this.name = Optional.ofNullable(name);
         this.phone = Optional.ofNullable(phone);
@@ -33,8 +33,8 @@ public class StudentContainsKeywordsPredicate implements Predicate<Student> {
 
     @Override
     public boolean test(Student student) {
-        boolean isClassNumberMatch = classNumber.map(classNumber -> StringUtil
-                        .containsWordIgnoreCase(student.getClassNumber().value, classNumber))
+        boolean isClassDetailsMatch = classDetails.map(classDetails -> StringUtil
+                        .containsWordIgnoreCase(student.getClassDetails().value, classDetails))
                 .orElse(true);
 
         boolean isEmailMatch = email.map(email -> StringUtil
@@ -57,7 +57,7 @@ public class StudentContainsKeywordsPredicate implements Predicate<Student> {
                     .anyMatch(t -> StringUtil.containsWordIgnoreCase(t.tagName, tag)))
                 .orElse(true);
 
-        return isClassNumberMatch
+        return isClassDetailsMatch
                 && isEmailMatch
                 && isNameMatch
                 && isPhoneMatch
@@ -77,7 +77,7 @@ public class StudentContainsKeywordsPredicate implements Predicate<Student> {
         }
 
         StudentContainsKeywordsPredicate otherPredicate = (StudentContainsKeywordsPredicate) other;
-        return otherPredicate.classNumber.equals(classNumber)
+        return otherPredicate.classDetails.equals(classDetails)
                 && otherPredicate.email.equals(email)
                 && otherPredicate.name.equals(name)
                 && otherPredicate.phone.equals(phone)
@@ -88,7 +88,7 @@ public class StudentContainsKeywordsPredicate implements Predicate<Student> {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("classNumber", classNumber)
+                .add("classDetails", classDetails)
                 .add("email", email)
                 .add("name", name)
                 .add("phone", phone)

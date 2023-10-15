@@ -47,7 +47,7 @@ public class StudentContainsKeywordsPredicateTest {
         assertTrue(predicate.test(new StudentBuilder().withName("Alice Bob").build()));
         predicate = new StudentContainsKeywordsPredicate("T100",
                 null, null, null, null, null);
-        assertTrue(predicate.test(new StudentBuilder().withClassNumber("T100").build()));
+        assertTrue(predicate.test(new StudentBuilder().withClassDetails("T100").build()));
 
         // Multiple keywords
         predicate = new StudentContainsKeywordsPredicate(StudentBuilder.DEFAULT_CLASS_NUMBER,
@@ -80,7 +80,7 @@ public class StudentContainsKeywordsPredicateTest {
                 "Carol", "12345", "A02481972A", "testTag");
         assertFalse(predicate.test(new StudentBuilder().withName("Alice").withPhone("12345")
                 .withEmail("alice@email.com").withStudentNumber("A02481972A")
-                .withClassNumber("T11").withTags("testTag").build()));
+                .withClassDetails("T11").withTags("testTag").build()));
     }
 
     @Test
@@ -89,7 +89,7 @@ public class StudentContainsKeywordsPredicateTest {
                 null, "keyword2", "keyword3");
 
         String expected = StudentContainsKeywordsPredicate.class.getCanonicalName()
-                + "{classNumber=Optional.empty, email=Optional.empty, name=Optional[keyword1], "
+                + "{classDetails=Optional.empty, email=Optional.empty, name=Optional[keyword1], "
                 + "phone=Optional.empty, studentNumber=Optional[keyword2], tag=Optional[keyword3]}";
         assertEquals(expected, predicate.toString());
     }

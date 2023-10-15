@@ -22,7 +22,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.student.ClassNumber;
+import seedu.address.model.student.ClassDetails;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
@@ -103,12 +103,12 @@ public class EditCommand extends Command {
         Email updatedEmail = editStudentDescriptor.getEmail().orElse(studentToEdit.getEmail());
         StudentNumber updatedStudentNumber = editStudentDescriptor.getStudentNumber()
                         .orElse(studentToEdit.getStudentNumber());
-        ClassNumber updatedClassNumber = editStudentDescriptor.getClassNumber()
-                        .orElse(studentToEdit.getClassNumber());
+        ClassDetails updatedClassDetails = editStudentDescriptor.getClassDetails()
+                        .orElse(studentToEdit.getClassDetails());
         Set<Tag> updatedTags = editStudentDescriptor.getTags().orElse(studentToEdit.getTags());
 
         return new Student(updatedName, updatedPhone, updatedEmail, updatedStudentNumber,
-                updatedClassNumber, updatedTags);
+                updatedClassDetails, updatedTags);
     }
 
     @Override
@@ -144,7 +144,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private StudentNumber studentNumber;
-        private ClassNumber classNumber;
+        private ClassDetails classDetails;
         private Set<Tag> tags;
 
         public EditStudentDescriptor() {}
@@ -158,7 +158,7 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setStudentNumber(toCopy.studentNumber);
-            setClassNumber(toCopy.classNumber);
+            setClassDetails(toCopy.classDetails);
             setTags(toCopy.tags);
         }
 
@@ -166,7 +166,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, studentNumber, classNumber, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, studentNumber, classDetails, tags);
         }
 
         public void setName(Name name) {
@@ -200,12 +200,12 @@ public class EditCommand extends Command {
         public Optional<StudentNumber> getStudentNumber() {
             return Optional.ofNullable(studentNumber);
         }
-        public void setClassNumber(ClassNumber classNumber) {
-            this.classNumber = classNumber;
+        public void setClassDetails(ClassDetails classDetails) {
+            this.classDetails = classDetails;
         }
 
-        public Optional<ClassNumber> getClassNumber() {
-            return Optional.ofNullable(classNumber);
+        public Optional<ClassDetails> getClassDetails() {
+            return Optional.ofNullable(classDetails);
         }
 
 
@@ -243,7 +243,7 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditStudentDescriptor.phone)
                     && Objects.equals(email, otherEditStudentDescriptor.email)
                     && Objects.equals(studentNumber, otherEditStudentDescriptor.studentNumber)
-                    && Objects.equals(classNumber, otherEditStudentDescriptor.classNumber)
+                    && Objects.equals(classDetails, otherEditStudentDescriptor.classDetails)
                     && Objects.equals(tags, otherEditStudentDescriptor.tags);
         }
 
@@ -254,7 +254,7 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("student number", studentNumber)
-                    .add("class number", classNumber)
+                    .add("class number", classDetails)
                     .add("tags", tags)
                     .toString();
         }

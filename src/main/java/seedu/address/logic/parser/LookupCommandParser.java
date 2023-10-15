@@ -47,7 +47,7 @@ public class LookupCommandParser implements Parser<LookupCommand> {
             }
         }
 
-        String classNumber = argMultimap.getValue(PREFIX_CLASS_NUMBER)
+        String classDetails = argMultimap.getValue(PREFIX_CLASS_NUMBER)
                 .filter(s -> !s.isEmpty()).orElse(null);
         String email = argMultimap.getValue(PREFIX_EMAIL)
                 .filter(s -> !s.isEmpty()).orElse(null);
@@ -60,7 +60,7 @@ public class LookupCommandParser implements Parser<LookupCommand> {
         String tag = argMultimap.getValue(PREFIX_TAG)
                 .filter(s -> !s.isEmpty()).orElse(null);
 
-        StudentContainsKeywordsPredicate predicate = new StudentContainsKeywordsPredicate(classNumber,
+        StudentContainsKeywordsPredicate predicate = new StudentContainsKeywordsPredicate(classDetails,
                 email, name, phone, studentNumber, tag);
         return new LookupCommand(predicate);
     }

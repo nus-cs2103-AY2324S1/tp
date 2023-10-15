@@ -60,7 +60,7 @@ public class TagCommand extends Command {
 
         Student editedStudent = new Student(
                 studentToTag.getName(), studentToTag.getPhone(), studentToTag.getEmail(),
-                studentToTag.getStudentNumber(), studentToTag.getClassNumber(), this.tags);
+                studentToTag.getStudentNumber(), studentToTag.getClassDetails(), this.tags);
 
         model.setStudent(studentToTag, editedStudent);
         model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_PERSONS);
