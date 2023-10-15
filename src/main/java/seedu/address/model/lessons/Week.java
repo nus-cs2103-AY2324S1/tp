@@ -18,5 +18,8 @@ public class Week {
     private ArrayList<LessonTiming> sunday = new ArrayList<>();
 
 
-
+    @Override
+    public String toString() {
+        return "Monday 12:00 - 14:00"; // todo
+    }
 }
