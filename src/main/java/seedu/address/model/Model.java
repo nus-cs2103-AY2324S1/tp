@@ -15,6 +15,7 @@ import seedu.address.model.person.Team;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Team> PREDICATE_SHOW_ALL_TEAMS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -56,6 +57,8 @@ public interface Model {
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
 
+    //Person related function----------------------------------------------------------------------------------------
+    
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
@@ -88,4 +91,39 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+    
+    //Team related functions-----------------------------------------------------------------------------------------
+
+    /**
+     * Returns true if a Team with the same identity as {@code Team} exists in the address book.
+     */
+    boolean hasTeam(Team team);
+
+    /**
+     * Deletes the given Team.
+     * The Team must exist in the address book.
+     */
+    void deleteTeam(Team target);
+
+    /**
+     * Adds the given Team.
+     * {@code Team} must not already exist in the address book.
+     */
+    void addTeam(Team team);
+
+    /**
+     * Replaces the given Team {@code target} with {@code editedTeam}.
+     * {@code target} must exist in the address book.
+     * The Team identity of {@code editedTeam} must not be the same as another existing Team in the address book.
+     */
+    void setTeam(Team target, Team editedTeam);
+
+    /** Returns an unmodifiable view of the filtered Team list */
+    ObservableList<Team> getFilteredTeamList();
+
+    /**
+     * Updates the filter of the filtered Team list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredTeamList(Predicate<Team> predicate);
 }
