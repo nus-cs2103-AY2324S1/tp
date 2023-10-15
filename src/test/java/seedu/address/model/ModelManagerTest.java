@@ -5,7 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.*;
+import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -31,7 +33,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void getStudentByEitherNameOrIndex_Success() {
+    public void getStudentByEitherNameOrIndex_success() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
         Student lastStudent = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
