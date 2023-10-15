@@ -98,14 +98,14 @@ public class AddCommand extends Command {
         Name updatedName = personToAddInfo.getName(); // name cannot be added
         Phone updatedPhone = addPhone(personToAddInfo, editPersonDescriptor);
         UniqueList<Email> updatedEmails = addEmails(personToAddInfo, editPersonDescriptor);
-        Link updatedLink = addLinks(personToAddInfo, editPersonDescriptor);
+        UniqueList<Link> updatedLinks = addLinks(personToAddInfo, editPersonDescriptor);
         GraduatingYear updatedGraduatingYear = addGraduatingYear(personToAddInfo, editPersonDescriptor);
         Course updatedCourse = addCourse(personToAddInfo, editPersonDescriptor);
         Specialisation updatedSpecialisation = addSpecialisation(personToAddInfo, editPersonDescriptor);
         Set<Tag> updatedTags = addTags(personToAddInfo, editPersonDescriptor);
         Priority updatedPriority = addPriority(personToAddInfo, editPersonDescriptor);
 
-        return new Person(updatedName, updatedPhone, updatedEmails, updatedLink, updatedGraduatingYear,
+        return new Person(updatedName, updatedPhone, updatedEmails, updatedLinks, updatedGraduatingYear,
                 updatedCourse, updatedSpecialisation, updatedTags, updatedPriority);
     }
 
@@ -119,8 +119,10 @@ public class AddCommand extends Command {
         editPersonDescriptor.getEmails().ifPresent(emails::addAll);
         return emails;
     }
-    private Link addLinks(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor) {
-        return editPersonDescriptor.getLink().orElse(personToAddInfo.getLink());
+    private UniqueList<Link> addLinks(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor) {
+        UniqueList<Link> links = personToAddInfo.getLinks();
+        editPersonDescriptor.getLinks().ifPresent(links::addAll);
+        return links;
     }
     private GraduatingYear addGraduatingYear(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor) {
         return editPersonDescriptor.getGraduatingYear().orElse(personToAddInfo.getGraduatingYear());

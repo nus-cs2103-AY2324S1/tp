@@ -13,6 +13,7 @@ import networkbook.logic.commands.EditCommand;
 import networkbook.logic.commands.EditCommand.EditPersonDescriptor;
 import networkbook.logic.parser.exceptions.ParseException;
 import networkbook.model.person.Email;
+import networkbook.model.person.Link;
 import networkbook.model.tag.Tag;
 import networkbook.model.util.UniqueList;
 
@@ -92,10 +93,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         parseEmailsForEdit(argMultimap.getAllValues(CliSyntax.PREFIX_EMAIL))
                 .ifPresent(editPersonDescriptor::setEmails);
-        if (argMultimap.getValue(CliSyntax.PREFIX_LINK).isPresent()) {
-            editPersonDescriptor.setLink(
-                    ParserUtil.parseLink(argMultimap.getValue(CliSyntax.PREFIX_LINK).get()));
-        }
+        parseLinksForEdit(argMultimap.getAllValues(CliSyntax.PREFIX_LINK))
+                .ifPresent(editPersonDescriptor::setLinks);
         if (argMultimap.getValue(CliSyntax.PREFIX_GRADUATING_YEAR).isPresent()) {
             editPersonDescriptor.setGraduatingYear(
                     ParserUtil.parseGraduatingYear(argMultimap.getValue(CliSyntax.PREFIX_GRADUATING_YEAR).get()));
@@ -119,7 +118,7 @@ public class EditCommandParser implements Parser<EditCommand> {
     }
 
     /**
-     * Parses {@code Collection<String> emails} into a {@code UniqueList<Email>}.
+     * Parses {@code Collection<String> emails} into a {@code UniqueList<Email>} wrapped in an {@code Optional}.
      */
     private static Optional<UniqueList<Email>> parseEmailsForEdit(Collection<String> emails) throws ParseException {
         requireNonNull(emails);
@@ -128,6 +127,18 @@ public class EditCommandParser implements Parser<EditCommand> {
             return Optional.empty();
         }
         return Optional.of(ParserUtil.parseEmails(emails));
+    }
+
+    /**
+     * Parses {@code Collection<String> links} into a {@code UniqueList<Link>} wrapped in an {@code Optional}.
+     */
+    private static Optional<UniqueList<Link>> parseLinksForEdit(Collection<String> links) throws ParseException {
+        requireNonNull(links);
+
+        if (links.isEmpty()) {
+            return Optional.empty();
+        }
+        return Optional.of(ParserUtil.parseLinks(links));
     }
 
     /**

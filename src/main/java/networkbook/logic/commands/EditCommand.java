@@ -103,7 +103,7 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         UniqueList<Email> updatedEmails = editPersonDescriptor.getEmails().orElse(personToEdit.getEmails());
-        Link updatedLink = editPersonDescriptor.getLink().orElse(personToEdit.getLink());
+        UniqueList<Link> updatedLink = editPersonDescriptor.getLinks().orElse(personToEdit.getLinks());
         GraduatingYear updatedGraduatingYear = editPersonDescriptor.getGraduatingYear()
                     .orElse(personToEdit.getGraduatingYear());
         Course updatedCourse = editPersonDescriptor.getCourse().orElse(personToEdit.getCourse());
@@ -149,7 +149,7 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private UniqueList<Email> emails;
-        private Link link;
+        private UniqueList<Link> links;
         private GraduatingYear graduatingYear;
         private Course course;
         private Specialisation specialisation;
@@ -166,7 +166,7 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmails(toCopy.emails);
-            setLink(toCopy.link);
+            setLinks(toCopy.links);
             setGraduatingYear(toCopy.graduatingYear);
             setCourse(toCopy.course);
             setSpecialisation(toCopy.specialisation);
@@ -178,7 +178,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, emails, link, graduatingYear, course,
+            return CollectionUtil.isAnyNonNull(name, phone, emails, links, graduatingYear, course,
                         specialisation, tags, priority);
         }
 
@@ -206,12 +206,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(emails);
         }
 
-        public void setLink(Link link) {
-            this.link = link;
+        public void setLinks(UniqueList<Link> links) {
+            this.links = links;
         }
 
-        public Optional<Link> getLink() {
-            return Optional.ofNullable(link);
+        public Optional<UniqueList<Link>> getLinks() {
+            return Optional.ofNullable(links);
         }
 
         public void setGraduatingYear(GraduatingYear graduatingYear) {
@@ -278,7 +278,7 @@ public class EditCommand extends Command {
             return Objects.equals(name, otherEditPersonDescriptor.name)
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(emails, otherEditPersonDescriptor.emails)
-                    && Objects.equals(link, otherEditPersonDescriptor.link)
+                    && Objects.equals(links, otherEditPersonDescriptor.links)
                     && Objects.equals(graduatingYear, otherEditPersonDescriptor.graduatingYear)
                     && Objects.equals(course, otherEditPersonDescriptor.course)
                     && Objects.equals(specialisation, otherEditPersonDescriptor.specialisation)
@@ -292,7 +292,7 @@ public class EditCommand extends Command {
                     .add("name", name)
                     .add("phone", phone)
                     .add("email", emails)
-                    .add("link", link)
+                    .add("links", links)
                     .add("graduating year", graduatingYear)
                     .add("course", course)
                     .add("specialisation", specialisation)
