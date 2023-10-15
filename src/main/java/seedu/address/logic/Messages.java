@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 
 /**
@@ -18,6 +19,10 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_INDEX_OUT_OF_BOUNDS = "Event index is out of bounds!";
+    public static final String MESSAGE_DATE_CHANGE_SUCCESSFUL = "Successfully changed!";
+    private static final String MESSAGE_EVENT_ADDED_SUCCESSFULLY = "Event added successfully!";
+    private static final String MESSAGE_EVENT_TIMING_CONFLICT = "Conflicting timing!";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -48,4 +53,17 @@ public class Messages {
         return builder.toString();
     }
 
+    /**
+     * Formats the event for display to the user.
+     *
+     * @param event event to be displayed.
+     * @return String of appropriate format.
+     */
+    public static String format(Event event) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(event.getDescription())
+                .append("; ")
+                .append(event.getEventPeriod());
+        return builder.toString();
+    }
 }
