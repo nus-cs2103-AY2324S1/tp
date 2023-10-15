@@ -216,6 +216,33 @@ public class UniqueListTest {
     }
 
     @Test
+    public void equals() {
+        UniqueList<UniqueNumber> uniqueList = new UniqueList<>();
+        UniqueNumber uniqueNumber = new UniqueNumber(1, 0);
+        UniqueNumber sameUniqueNumber = new UniqueNumber(1, 0);
+        UniqueNumber differentUniqueNumber = new UniqueNumber(1, 10);
+
+        // same reference
+        assertTrue(uniqueList.equals(uniqueList));
+
+        // different class
+        assertFalse(uniqueList.equals(uniqueNumber));
+
+        // same list
+        assertTrue(uniqueList.equals(new UniqueList<UniqueNumber>()));
+        uniqueList.add(uniqueNumber);
+        UniqueList<UniqueNumber> sameUniqueList = new UniqueList<>();
+        sameUniqueList.add(sameUniqueNumber);
+        assertTrue(uniqueList.equals(sameUniqueList));
+
+        // different list
+        assertFalse(uniqueList.equals(new UniqueList<UniqueNumber>()));
+        UniqueList<UniqueNumber> differentUniqueList = new UniqueList<>();
+        differentUniqueList.add(differentUniqueNumber);
+        assertFalse(uniqueList.equals(differentUniqueList));
+    }
+
+    @Test
     public void toStringMethod() {
         UniqueList<UniqueNumber> uniqueList = new UniqueList<>();
         uniqueList.setItems(List.of(new UniqueNumber(1, 0)));
