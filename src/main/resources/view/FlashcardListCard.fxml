@@ -27,24 +27,17 @@
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
         </Label>
-        <Label fx:id="original" styleClass="cell_big_label" text="\$original" />
-         <Label fx:id="translation" styleClass="cell_small_label" text="\$translation" />
-            <padding>
-               <Insets bottom="3.0" />
-            </padding>
+        <Label fx:id="originalWord" styleClass="cell_big_label" text="\$originalWord" />
       </HBox>
       <FlowPane fx:id="tags" />
-      <Label fx:id="level" styleClass="cell_small_label" text="\$level" />
+      <Label fx:id="translation" styleClass="cell_small_label" text="\$translation" />
+      <Label fx:id="proficiency" styleClass="cell_small_label" text="\$proficiency" />
          <HBox alignment="CENTER_LEFT" spacing="5">
-            <padding>
-               <Insets bottom="3.0" />
-            </padding>
             <children>
-               <Button fx:id="success" mnemonicParsing="false" onAction="#success" text="Yes" />
-               <Button fx:id="failure" mnemonicParsing="false" onAction="#failure" text="No" />
-               <Button mnemonicParsing="false" onAction="#undo" text="Undo" />
-               <Region prefHeight="10.0" prefWidth="300.0" />
-               <Button fx:id="reveal" mnemonicParsing="false" onAction="#toggleReveal" text="Reveal" HBox.hgrow="NEVER" />
+               <Button fx:id="flip" mnemonicParsing="false" onAction="#flipTranslation" text="Flip" />
+               <Button fx:id="yes" mnemonicParsing="false" onAction="#success" text="Yes" />
+               <Button fx:id="no" mnemonicParsing="false" onAction="#failure" text="No" />
+               <Button fx:id="undo" mnemonicParsing="false" onAction="#undo" text="Undo" />
             </children>
          </HBox>
     </VBox>

@@ -1,13 +1,11 @@
 package seedu.flashlingo.ui;
 
-import java.util.Comparator;
-
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.flashlingo.model.person.Person;
+import seedu.flashlingo.model.flashcard.FlashCard;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -24,36 +22,64 @@ public class FlashcardBox extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Person person;
+    public final FlashCard flashCard;
 
     @FXML
     private HBox cardPane;
     @FXML
-    private Label name;
-    @FXML
     private Label id;
     @FXML
-    private Label phone;
+    private Label original;
     @FXML
-    private Label address;
+    private Label translation;
     @FXML
-    private Label email;
+    private Label level;
+
     @FXML
-    private FlowPane tags;
+    private Button reveal;
+
+    private boolean isRevealed = false;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public FlashcardBox(Person person, int displayedIndex) {
+    public FlashcardBox(FlashCard fc, int displayedIndex) {
         super(FXML);
-        this.person = person;
-        id.setText(displayedIndex + ". ");
-        name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        this.flashCard = fc;
+        id.setText(displayedIndex + ") ");
+        original.setText(fc.getOriginalWord().toString() + ": ");
+        translation.setText("");
+        level.setText("Current Level: " + fc.getProficiencyLevel().getLevel());
     }
+
+    @FXML
+    public void success() {
+        flashCard.handleUserInput(true);
+        level.setText("Current Level: " + flashCard.getProficiencyLevel().getLevel());
+    }
+
+    @FXML
+    public void failure() {
+        flashCard.handleUserInput(false);
+        level.setText("Current Level: " + flashCard.getProficiencyLevel().getLevel());
+    }
+
+    @FXML
+    public void toggleReveal() {
+        if (isRevealed) {
+            translation.setText("");
+            reveal.setText("Reveal");
+        } else {
+            translation.setText(flashCard.getTranslatedWord().toString());
+            reveal.setText("Hide");
+        }
+        isRevealed = !isRevealed;
+    }
+
+    @FXML
+    public void undo() {
+        flashCard.undo();
+        level.setText("Current Level: " + flashCard.getProficiencyLevel().getLevel());
+    }
+
 }
