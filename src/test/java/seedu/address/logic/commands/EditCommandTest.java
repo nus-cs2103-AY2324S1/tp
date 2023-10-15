@@ -64,7 +64,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_filteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_FLASHCARD);
+        showFlashCardAtIndex(model, INDEX_FIRST_FLASHCARD);
 
         FlashCard flashCardInFilteredList = model.getFilteredFlashCardList().get(INDEX_FIRST_FLASHCARD.getZeroBased());
         FlashCard editedFlashcard = new FlashcardBuilder(flashCardInFilteredList)
@@ -92,7 +92,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_duplicatePersonFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST_FLASHCARD);
+        showFlashCardAtIndex(model, INDEX_FIRST_FLASHCARD);
 
         // edit person in filtered list into a duplicate in address book
         FlashCard flashCardInList = model.getFlashlingo().getFlashCardList().get(INDEX_SECOND_FLASHCARD.getZeroBased());
@@ -118,7 +118,7 @@ public class EditCommandTest {
      */
     @Test
     public void execute_invalidPersonIndexFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST_FLASHCARD);
+        showFlashCardAtIndex(model, INDEX_FIRST_FLASHCARD);
         Index outOfBoundIndex = INDEX_SECOND_FLASHCARD;
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getFlashlingo().getFlashCardList().size());

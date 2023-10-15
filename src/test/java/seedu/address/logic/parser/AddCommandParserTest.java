@@ -15,12 +15,6 @@ import seedu.flashlingo.logic.Messages;
 import seedu.flashlingo.logic.commands.AddCommand;
 import seedu.flashlingo.logic.parser.AddCommandParser;
 import seedu.flashlingo.model.flashcard.FlashCard;
-import seedu.flashlingo.model.person.Address;
-import seedu.flashlingo.model.person.Email;
-import seedu.flashlingo.model.person.Name;
-import seedu.flashlingo.model.person.Person;
-import seedu.flashlingo.model.person.Phone;
-import seedu.flashlingo.model.tag.Tag;
 import seedu.address.testutil.FlashcardBuilder;
 
 public class AddCommandParserTest {
@@ -36,12 +30,11 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_repeatedNonTagValue_failure() {
-        String validExpectedPersonString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND;
+        String validExpectedPersonString = WORD_DESC_BOB + TRANSLATION_DESC_BOB;
 
         // multiple names
-        assertParseFailure(parser, NAME_DESC_AMY + validExpectedPersonString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
+        assertParseFailure(parser, WORD_DESC_AMY + validExpectedPersonString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_WO));
 
         // multiple phones
         assertParseFailure(parser, PHONE_DESC_AMY + validExpectedPersonString,
