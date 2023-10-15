@@ -10,16 +10,29 @@
 
 ![User Interface Guide Example](./images/userInterfaceGuide.png)
 
-## Notation Guide
-Here are some conventions used in this guide when describing the commands:
+
+
+
+## Features
+
+<box type="tip" theme="info" header="##### Notation Guide :rocket:" seamless>
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.
 * Items in square brackets are optional.
 * Parameters can be in any order.
 * Extraneous parameters for commands that do not take in parameters such as `help`, `list`, `clear`, `exit` will be ignored.
+</box>
 
-## Features
 ---
+### `help` : Viewing help
 
+Displays a message explaining how to access the help page.
+
+Format: `help`
+
+UI mockup:
+![Help UI Mockup](./images/help.png)
+
+---
 ### `add` : Adding a new applicant
 
 Adds a new applicant to the current list.
@@ -121,16 +134,6 @@ Format: `clear`
 
 UI mockup:
 ![Clear UI Mockup](./images/clear.png)
-
----
-### `help` : Listing all commands
-
-Displays a message explaining how to access the help page.
-
-Format: `help`
-
-UI mockup:
-![Help UI Mockup](./images/help.png)
 
 ---
 ### `exit` : Exiting the program
