@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.Objects;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -9,6 +10,7 @@ import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -32,8 +34,12 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private TaskListPanel taskListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+
+    /** Panel currently displayed, default is students panel**/
+    private String activePanel = "STUDENTS";
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -42,7 +48,14 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
+    private VBox personList;
+    @FXML
     private StackPane personListPanelPlaceholder;
+
+    @FXML
+    private VBox taskList;
+    @FXML
+    private StackPane taskListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -113,6 +126,11 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic);
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
+        taskListPanel = new TaskListPanel(logic);
+        taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
+        taskList.setVisible(false);
+        taskList.setManaged(false);
+
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -121,6 +139,25 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    }
+
+    void hidePanels() {
+        personList.setVisible(false);
+        personList.setManaged(false);
+        taskList.setVisible(false);
+        taskList.setManaged(false);
+    }
+
+    void setTaskListPanel() {
+        taskList.setVisible(true);
+        taskList.setManaged(true);
+        activePanel = "TASKS";
+    }
+
+    void setPersonListPanel() {
+        personList.setVisible(true);
+        personList.setManaged(true);
+        activePanel = "STUDENTS";
     }
 
     /**
@@ -184,6 +221,29 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            System.out.println("panel is " + commandResult.getPanel());
+            if (commandResult.getPanel() != "") {
+                String newPanel = commandResult.getPanel();
+                System.out.println("show panel '" + newPanel+"'");
+                if (!newPanel.equals(activePanel)) {
+                    hidePanels();
+                    switch (newPanel) {
+                    case "TASKS":
+                        setTaskListPanel();
+                        break;
+                    case "STUDENTS":
+                        setPersonListPanel();
+                        break;
+                    default:
+                        System.out.println("unknown panel asked for");
+                        break;
+                    }
+
+                }
+            } else {
+                System.out.println("empty chosen panel");
             }
 
             return commandResult;
