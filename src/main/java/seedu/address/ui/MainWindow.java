@@ -12,10 +12,12 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -35,6 +37,8 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
+    private PersonInformationPanel personInformationPanel;
+
     @FXML
     private StackPane commandBoxPlaceholder;
 
@@ -46,6 +50,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane resultDisplayPlaceholder;
+
+    @FXML
+    private StackPane personInformationPanelPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
@@ -110,6 +117,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
+
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
@@ -163,6 +171,18 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    /**
+     * Updates the personListPanel based on last View Command entered
+     */
+    @FXML
+    private void handleView() {
+        Index index = logic.getLastViewedPersonIndex();
+        Person personToView = logic.getFilteredPersonList().get(index.getZeroBased());
+
+        personInformationPanel = new PersonInformationPanel(personToView);
+        personInformationPanelPlaceholder.getChildren().add(personInformationPanel.getRoot());
+    }
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
     }
@@ -184,6 +204,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isView()) {
+                handleView();
             }
 
             return commandResult;

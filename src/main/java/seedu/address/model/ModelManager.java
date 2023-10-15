@@ -14,6 +14,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.Person;
 
 /**
@@ -25,6 +26,9 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+
+    private Index lastViewedPersonIndex;
+
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -150,6 +154,19 @@ public class ModelManager implements Model {
         requireNonNull(predicate2);;
         filteredPersons.setPredicate(person -> predicate1.test(person) && predicate2.test(person));
     }
+
+    @Override
+    public void setLastViewedPersonIndex(Index index) {
+        requireNonNull(index);
+        lastViewedPersonIndex = index;
+    }
+
+    @Override
+    public Index getLastViewedPersonIndex() {
+        return lastViewedPersonIndex;
+    }
+
+
 
     @Override
     public boolean equals(Object other) {
