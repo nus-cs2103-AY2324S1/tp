@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 
 /**
@@ -23,6 +25,8 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
 
+    private final ArrayList<Event> events;
+
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -33,7 +37,8 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.events = this.addressBook.getEventList();
     }
 
     public ModelManager() {
@@ -111,6 +116,15 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    // ========== Event ======================================================================================
+
+    @Override
+    public void setEvent(Event target, Event editedEvent) {
+        requireAllNonNull(target, editedEvent);
+
+        this.addressBook.setEvent(target, editedEvent);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -119,13 +133,22 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+        return this.filteredPersons;
+    }
+
+    /**
+     * Returns the list of events
+     * @return
+     */
+    @Override
+    public ArrayList<Event> getEventList() {
+        return this.events;
     }
 
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        this.filteredPersons.setPredicate(predicate);
     }
 
     @Override
@@ -140,9 +163,9 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook)
-                && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+        return this.addressBook.equals(otherModelManager.addressBook)
+                && this.userPrefs.equals(otherModelManager.userPrefs)
+                && this.filteredPersons.equals(otherModelManager.filteredPersons);
     }
 
 }

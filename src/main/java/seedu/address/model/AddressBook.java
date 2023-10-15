@@ -2,10 +2,13 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.event.Event;
+import seedu.address.model.event.EventList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -17,6 +20,8 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
 
+    private final EventList events;
+
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
@@ -26,6 +31,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        events = new EventList();
     }
 
     public AddressBook() {}
@@ -38,7 +44,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         resetData(toBeCopied);
     }
 
-    //// list overwrite operations
+    //=========== List overwrite operations ===========================================================
 
     /**
      * Replaces the contents of the person list with {@code persons}.
@@ -49,15 +55,24 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the event list with {@code events}.
+     * @param events ArrayList of events to replace the existing list with.
+     */
+    public void setEvents(ArrayList<Event> events) {
+        this.events.setEvents(events);
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setEvents(newData.getEventList());
     }
 
-    //// person-level operations
+    //=========== person-level operations ===========================================================
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
@@ -82,7 +97,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setPerson(Person target, Person editedPerson) {
         requireNonNull(editedPerson);
-
         persons.setPerson(target, editedPerson);
     }
 
@@ -94,7 +108,28 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
-    //// util methods
+    //=========== event-level operations ===========================================================
+
+    /**
+     * Replaces the given event {@code target} in the list with {@code editedEvent}.
+     * @param target event to be edited. {@code target} must exist in the address book.
+     * @param editedEvent event with the edited details.
+     */
+    public void setEvent(Event target, Event editedEvent) {
+        requireNonNull(editedEvent);
+        this.events.setEvent(target, editedEvent);
+    }
+
+    /**
+     * Adds an event to the address book.
+     * @param event Event to be added.
+     */
+    public void addEvent(Event event) {
+        events.add(event);
+    }
+
+
+    //=========== util methods ===========================================================
 
     @Override
     public String toString() {
@@ -106,6 +141,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ArrayList<Event> getEventList() {
+        return events.getEventList();
     }
 
     @Override

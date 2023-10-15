@@ -9,6 +9,9 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.event.EventDate;
+import seedu.address.model.event.EventName;
+import seedu.address.model.event.EventTime;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -48,6 +51,52 @@ public class ParserUtil {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
         return new Name(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String eventName} into a {@code EventName}.
+     * @param name String to be parsed
+     * @return EventName object
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static EventName parseEventName(String name) throws ParseException {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        if (!EventName.isValidName(trimmedName)) {
+            throw new ParseException(EventName.MESSAGE_CONSTRAINTS);
+        }
+        return new EventName(trimmedName);
+    }
+
+
+    /**
+     * Parses a {@code String date} into a {@code EventDate}.
+     * @param date String to be parsed
+     * @return EventDate object
+     * @throws ParseException if the given {@code date} is invalid.
+     */
+    public static EventDate parseEventDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        if (!EventDate.isValidDate(trimmedDate)) {
+            throw new ParseException(EventDate.MESSAGE_CONSTRAINTS);
+        }
+        return new EventDate(trimmedDate);
+    }
+
+    /**
+     * Parses a {@code String time} into a {@code EventTime}.
+     * @param time String to be parsed
+     * @return EventTime object
+     * @throws ParseException if the given {@code time} is invalid.
+     */
+    public static EventTime parseEventTime(String time) throws ParseException {
+        requireNonNull(time);
+        String trimmedTime = time.trim();
+        if (!EventTime.isValidTime(trimmedTime)) {
+            throw new ParseException(EventTime.MESSAGE_CONSTRAINTS);
+        }
+        return new EventTime(trimmedTime);
     }
 
     /**
