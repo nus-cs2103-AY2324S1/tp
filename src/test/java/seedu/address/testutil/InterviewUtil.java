@@ -1,11 +1,11 @@
 package seedu.address.testutil;
 
-import seedu.address.logic.commands.AddInterviewCommand;
-import seedu.address.model.interview.Interview;
-
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPLICANT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMING;
+
+import seedu.address.logic.commands.AddInterviewCommand;
+import seedu.address.model.interview.Interview;
 
 /**
  * A utility class for Interviews.

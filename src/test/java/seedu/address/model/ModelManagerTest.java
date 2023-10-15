@@ -9,7 +9,6 @@ import static seedu.address.testutil.TypicalInterviews.STANDARD_INTERVIEW;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
-
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
