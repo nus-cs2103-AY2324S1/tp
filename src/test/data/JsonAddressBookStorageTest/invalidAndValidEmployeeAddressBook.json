@@ -5,14 +5,24 @@
       "position": "Valid Position",
       "id": "EID1234-5678",
       "phone": "9482424",
-      "email": "hans@example.com"
+      "email": "hans@example.com",
+      "salary": "$1,000,000"
     },
     {
       "name": "Employee With Invalid Phone Field",
       "position": "Valid Position",
       "id": "EID1234-5678",
       "phone": "948asdf2424",
-      "email": "hans@example.com"
+      "email": "hans@example.com",
+      "salary": "$1,000"
+    },
+    {
+      "name": "Employee With Invalid Salary Field",
+      "position": "Valid Position",
+      "id": "EID1234-5678",
+      "phone": "94832424",
+      "email": "hans@example.com",
+      "salary": "$1000"
     }
   ]
 }

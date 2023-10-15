@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
 
 import java.util.Set;
 
@@ -36,6 +37,7 @@ public class EmployeeUtil {
         sb.append(PREFIX_ID + employee.getId().value + " ");
         sb.append(PREFIX_PHONE + employee.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + employee.getEmail().value + " ");
+        sb.append(PREFIX_SALARY + employee.getSalary().value + " ");
         employee.getDepartments().stream().forEach(
             s -> sb.append(PREFIX_DEPARTMENT + s.departmentName + " ")
         );
@@ -52,6 +54,7 @@ public class EmployeeUtil {
         descriptor.getId().ifPresent(id -> sb.append(PREFIX_ID).append(id.value).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
+        descriptor.getSalary().ifPresent(salary -> sb.append(PREFIX_SALARY).append(salary.value).append(" "));
         if (descriptor.getDepartments().isPresent()) {
             Set<Department> departments = descriptor.getDepartments().get();
             if (departments.isEmpty()) {

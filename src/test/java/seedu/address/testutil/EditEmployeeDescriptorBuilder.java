@@ -12,6 +12,7 @@ import seedu.address.model.employee.Id;
 import seedu.address.model.employee.Name;
 import seedu.address.model.employee.Phone;
 import seedu.address.model.employee.Position;
+import seedu.address.model.employee.Salary;
 
 /**
  * A utility class to help with building EditEmployeeDescriptor objects.
@@ -39,6 +40,7 @@ public class EditEmployeeDescriptorBuilder {
         descriptor.setPhone(employee.getPhone());
         descriptor.setEmail(employee.getEmail());
         descriptor.setDepartments(employee.getDepartments());
+        descriptor.setSalary(employee.getSalary());
     }
 
     /**
@@ -88,6 +90,14 @@ public class EditEmployeeDescriptorBuilder {
     public EditEmployeeDescriptorBuilder withDepartments(String... departments) {
         Set<Department> departmentSet = Stream.of(departments).map(Department::new).collect(Collectors.toSet());
         descriptor.setDepartments(departmentSet);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Salary} of the {@code EditEmployeeDescriptor} that we are building.
+     */
+    public EditEmployeeDescriptorBuilder withSalary(String salary) {
+        descriptor.setSalary(new Salary(salary));
         return this;
     }
 

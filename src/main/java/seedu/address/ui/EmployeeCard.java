@@ -10,7 +10,7 @@ import javafx.scene.layout.Region;
 import seedu.address.model.employee.Employee;
 
 /**
- * An UI component that displays information of a {@code Employee}.
+ * A UI component that displays information of a {@code Employee}.
  */
 public class EmployeeCard extends UiPart<Region> {
 
@@ -41,6 +41,8 @@ public class EmployeeCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label salary;
+    @FXML
     private FlowPane departments;
 
     /**
@@ -55,6 +57,7 @@ public class EmployeeCard extends UiPart<Region> {
         employeeId.setText(employee.getId().value);
         phone.setText(employee.getPhone().value);
         email.setText(employee.getEmail().value);
+        salary.setText(employee.getSalary().value);
         employee.getDepartments().stream()
                 .sorted(Comparator.comparing(department -> department.departmentName))
                 .forEach(department -> departments.getChildren().add(new Label(department.departmentName)));
