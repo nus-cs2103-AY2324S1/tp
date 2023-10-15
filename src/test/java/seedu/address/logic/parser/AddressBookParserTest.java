@@ -4,12 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import org.junit.jupiter.api.Test;
 
@@ -17,19 +17,20 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditCommand.EditStudentDescriptor;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.LoadCommand;
+import seedu.address.logic.commands.LookupCommand;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentContainsKeywordsPredicate;
+import seedu.address.testutil.EditStudentDescriptorBuilder;
 import seedu.address.testutil.PersonUtil;
-import seedu.address.testutil.TypicalPersons;
+import seedu.address.testutil.StudentBuilder;
+import seedu.address.testutil.TypicalStudents;
 
 public class AddressBookParserTest {
 
@@ -37,9 +38,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Person person = new PersonBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
-        assertEquals(new AddCommand(person), command);
+        Student student = new StudentBuilder().build();
+        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(student));
+        assertEquals(new AddCommand(student), command);
     }
 
     @Test
@@ -50,15 +51,15 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_delete() throws Exception {
-        DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+        Student student = new StudentBuilder().build();
+        DeleteCommand command = (DeleteCommand) parser.parseCommand(PersonUtil.getDeleteCommand(student));
+        assertEquals(new DeleteCommand(student.getStudentNumber()), command);
     }
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Person person = new PersonBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
+        Student student = new StudentBuilder().build();
+        EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder(student).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
@@ -66,9 +67,13 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_tag() throws Exception {
-        TagCommand command = (TagCommand) parser.parseCommand(TagCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getTagDetails(TypicalPersons.ALICE));
-        assertEquals(new TagCommand(INDEX_FIRST_PERSON, TypicalPersons.ALICE.getTags()), command);
+        TagCommand command = (TagCommand) parser.parseCommand(TagCommand.COMMAND_WORD
+            + " "
+            + TypicalStudents.ALICE.getStudentNumber()
+            + " "
+            + PersonUtil.getTagDetails(TypicalStudents.ALICE));
+        assertEquals(new TagCommand(TypicalStudents.ALICE.getStudentNumber(), TypicalStudents.ALICE.getTags()),
+            command);
     }
 
     @Test
@@ -78,11 +83,10 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+    public void parseCommand_lookup() throws Exception {
+        LookupCommand command = (LookupCommand) parser.parseCommand(LookupCommand.COMMAND_WORD + " c/t11 n/alice");
+        assertEquals(new LookupCommand(new StudentContainsKeywordsPredicate("t11", null,
+                "alice", null, null, null)), command);
     }
 
     @Test
@@ -95,6 +99,14 @@ public class AddressBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_load() throws Exception {
+        LoadCommand command = (LoadCommand) parser.parseCommand(
+                LoadCommand.COMMAND_WORD + " " + PREFIX_FILE + "export-v1");
+        Path path = Paths.get("data", "export-v1.json");
+        assertEquals(new LoadCommand("export-v1", path), command);
     }
 
     @Test

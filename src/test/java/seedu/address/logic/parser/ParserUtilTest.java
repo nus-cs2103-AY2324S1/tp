@@ -14,25 +14,25 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.ClassNumber;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.StudentNumber;
+import seedu.address.model.student.ClassNumber;
+import seedu.address.model.student.Email;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.Phone;
+import seedu.address.model.student.StudentNumber;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
-    private static final String INVALID_STUDENTNUMBER = "T010821J";
-    private static final String INVALID_CLASSNUMBER = "12";
+    private static final String INVALID_STUDENT_NUMBER = "T010821J";
+    private static final String INVALID_CLASS_NUMBER = "12";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
-    private static final String VALID_STUDENTNUMBER = "A0128571A";
-    private static final String VALID_CLASSNUMBER = "T11";
+    private static final String VALID_STUDENT_NUMBER = "A0128571A";
+    private static final String VALID_CLASS_NUMBER = "T11";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
@@ -112,37 +112,37 @@ public class ParserUtilTest {
 
     @Test
     public void parseStudentNumber_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseStudentNumber(INVALID_STUDENTNUMBER));
+        assertThrows(ParseException.class, () -> ParserUtil.parseStudentNumber(INVALID_STUDENT_NUMBER));
     }
 
     @Test
     public void parseStudentNumber_validValueWithoutWhitespace_returnsStudentNumber() throws Exception {
-        StudentNumber expectedStudentNumber = new StudentNumber(VALID_STUDENTNUMBER);
-        assertEquals(expectedStudentNumber, ParserUtil.parseStudentNumber(VALID_STUDENTNUMBER));
+        StudentNumber expectedStudentNumber = new StudentNumber(VALID_STUDENT_NUMBER);
+        assertEquals(expectedStudentNumber, ParserUtil.parseStudentNumber(VALID_STUDENT_NUMBER));
     }
 
     @Test
     public void parseStudentNumber_validValueWithWhitespace_returnsTrimmedStudentNumber() throws Exception {
-        String studentNumberWithWhitespace = WHITESPACE + VALID_STUDENTNUMBER + WHITESPACE;
-        StudentNumber expectedStudentNumber = new StudentNumber(VALID_STUDENTNUMBER);
+        String studentNumberWithWhitespace = WHITESPACE + VALID_STUDENT_NUMBER + WHITESPACE;
+        StudentNumber expectedStudentNumber = new StudentNumber(VALID_STUDENT_NUMBER);
         assertEquals(expectedStudentNumber, ParserUtil.parseStudentNumber(studentNumberWithWhitespace));
     }
 
     @Test
     public void parseClassNumber_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseClassNumber(INVALID_CLASSNUMBER));
+        assertThrows(ParseException.class, () -> ParserUtil.parseClassNumber(INVALID_CLASS_NUMBER));
     }
 
     @Test
     public void parseClassNumber_validValueWithoutWhitespace_returnsClassNumber() throws Exception {
-        ClassNumber expectedClassNumber = new ClassNumber(VALID_CLASSNUMBER);
-        assertEquals(expectedClassNumber, ParserUtil.parseClassNumber(VALID_CLASSNUMBER));
+        ClassNumber expectedClassNumber = new ClassNumber(VALID_CLASS_NUMBER);
+        assertEquals(expectedClassNumber, ParserUtil.parseClassNumber(VALID_CLASS_NUMBER));
     }
 
     @Test
     public void parseClassNumber_validValueWithWhitespace_returnsTrimmedClassNumber() throws Exception {
-        String classNumberWithWhitespace = WHITESPACE + VALID_CLASSNUMBER + WHITESPACE;
-        ClassNumber expectedClassNumber = new ClassNumber(VALID_CLASSNUMBER);
+        String classNumberWithWhitespace = WHITESPACE + VALID_CLASS_NUMBER + WHITESPACE;
+        ClassNumber expectedClassNumber = new ClassNumber(VALID_CLASS_NUMBER);
         assertEquals(expectedClassNumber, ParserUtil.parseClassNumber(classNumberWithWhitespace));
     }
 
