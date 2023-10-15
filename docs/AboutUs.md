@@ -1,6 +1,6 @@
 ---
   layout: default.md
-  title: "About Us"
+    title: "About Us"
 ---
 
 # About Us
@@ -16,7 +16,7 @@ This project was done by a team of 4 members.
 <img src="images/lihongguang00.png" width="200px">
 
 [[github](https://github.com/lihongguang00)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/lihongguang00.md)]
 
 - Role: Team Member
 - Responsibilities: TBD
@@ -29,7 +29,7 @@ This project was done by a team of 4 members.
 [[portfolio](team/fallman2.md)]
 
 - Role: Team Member
-- Responsibilities: Filtering by Tags
+- Responsibilities: TBD
 
 ### Low Jun Hong
 

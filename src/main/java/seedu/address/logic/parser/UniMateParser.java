@@ -15,6 +15,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -32,11 +33,11 @@ public class UniMateParser {
     private static final Logger logger = LogsCenter.getLogger(UniMateParser.class);
 
     /**
-     * Parses a user input string into the appropriate command object.
+     * Parses user input into command for execution.
      *
-     * @param userInput The user input string to be parsed.
-     * @return A command object corresponding to the user's command.
-     * @throws ParseException If the user input cannot be parsed successfully.
+     * @param userInput full user input string
+     * @return the command based on the user input
+     * @throws ParseException if the user input does not conform the expected format
      */
     public Command parseCommand(String userInput) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
@@ -77,6 +78,9 @@ public class UniMateParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case FilterCommand.COMMAND_WORD:
+            return new FilterCommandParser().parse(arguments);
 
         case AddEventCommand.COMMAND_WORD:
             return new AddEventCommandParser().parse(arguments);
