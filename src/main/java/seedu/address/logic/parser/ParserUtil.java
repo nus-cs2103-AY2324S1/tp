@@ -125,6 +125,9 @@ public class ParserUtil {
         return groupSet;
     }
 
+    /**
+     * Parses a {@code String name} into an {@code EventName}.
+     */
     public static EventName parseEventName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
@@ -134,6 +137,9 @@ public class ParserUtil {
         return new EventName(trimmedName);
     }
 
+    /**
+     * Parses a {@code String date} into an {@code EventDate}.
+     */
     public static EventDate parseEventDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
@@ -143,6 +149,9 @@ public class ParserUtil {
         return new EventDate(trimmedDate);
     }
 
+    /**
+     * Parses a {@code String time} into an {@code EventTime}.
+     */
     public static EventTime parseEventTime(String time) throws ParseException {
         requireNonNull(time);
         String trimmedTime = time.trim();

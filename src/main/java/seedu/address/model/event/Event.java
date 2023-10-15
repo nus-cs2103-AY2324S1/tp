@@ -1,10 +1,11 @@
 package seedu.address.model.event;
 
+import static seedu.address.model.event.EventTime.NULL_EVENT_TIME;
+
 import java.util.ArrayList;
 import java.util.Optional;
 
 import seedu.address.model.person.Person;
-import static seedu.address.model.event.EventTime.NULL_EVENT_TIME;
 
 /**
  * Represents an Event in the address book.
@@ -35,7 +36,16 @@ public abstract class Event {
 
     }
 
-    public Event(EventName name, EventDate startDate, Optional<EventTime> startTime, EventDate endDate, Optional<EventTime> endTime) {
+    /**
+     * Constructor for eventS with optional start and end time
+     * @param name name of the event
+     * @param startDate start date of the event
+     * @param startTime start time of the event
+     * @param endDate  end date of the event
+     * @param endTime end time of the event
+     */
+    public Event(EventName name, EventDate startDate, Optional<EventTime> startTime,
+                 EventDate endDate, Optional<EventTime> endTime) {
         this.name = name;
         this.startDate = startDate;
         this.startTime = startTime;
@@ -94,8 +104,5 @@ public abstract class Event {
      * @return true if both events are of the same type and have the same name
      */
     public abstract boolean isSameEvent(Event event);
-
-
-
 
 }

@@ -2,16 +2,14 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 
-import seedu.address.commons.util.CollectionUtil;
-import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.event.EventDate;
-import seedu.address.model.event.EventName;
-import seedu.address.model.event.EventTime;
 import seedu.address.model.event.Meeting;
 
 
@@ -19,7 +17,7 @@ import seedu.address.model.event.Meeting;
  * Adds a meeting.
  * @author Yuheng
  */
-public class AddMeetingCommand extends Command{
+public class AddMeetingCommand extends Command {
 
     public static final String COMMAND_WORD = "add_meeting";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a meeting to the address book. "

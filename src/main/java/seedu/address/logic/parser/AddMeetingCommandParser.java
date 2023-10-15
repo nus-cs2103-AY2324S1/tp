@@ -1,19 +1,20 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.AddCommandParser.arePrefixesPresent;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
+
+import java.util.Optional;
+
 import seedu.address.logic.commands.AddMeetingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.EventDate;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.EventTime;
 import seedu.address.model.event.Meeting;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.AddCommandParser.arePrefixesPresent;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
-
-import java.util.Optional;
 
 /**
  * Parses input arguments and creates a new AddMeetingCommand object
@@ -47,7 +48,7 @@ public class AddMeetingCommandParser implements Parser<AddMeetingCommand> {
         }
 
         Meeting meeting = new Meeting(meetingName, eventDate,
-                Optional.of(meetingStartTime),Optional.of(meetingEndTime));
+                Optional.of(meetingStartTime), Optional.of(meetingEndTime));
 
         return new AddMeetingCommand(meeting);
     }

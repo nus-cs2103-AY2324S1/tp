@@ -1,21 +1,28 @@
 package seedu.address.model.event;
 
-import seedu.address.logic.parser.exceptions.ParseException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
+import seedu.address.logic.parser.exceptions.ParseException;
+
 
 /**
  * DateTime class to represent the date and time of an event.
  */
 public class EventDate {
 
-    private LocalDate date;
     public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     public static final String MESSAGE_CONSTRAINTS =
             "Date should be in YYYY-mm-yy format, i.e. 2023-09-30, and it should not be blank";
 
+    private LocalDate date;
+
+    /**
+     * Constructs an EventDate object.
+     * @param date
+     * @throws ParseException if the date is invalid.
+     */
     public EventDate(String date) throws ParseException {
         try {
             this.date = LocalDate.parse(date, DATE_FORMATTER);
@@ -24,6 +31,9 @@ public class EventDate {
         }
     }
 
+    /**
+     * Returns true if a given string is a valid date.
+     */
     public static boolean isValidDate(String trimmedDate) {
         try {
             LocalDate parsedDate = LocalDate.parse(trimmedDate, DATE_FORMATTER);
@@ -33,6 +43,10 @@ public class EventDate {
         }
     }
 
+    /**
+     * Returns the date.
+     * @return date.
+     */
     public LocalDate getDate() {
         return this.date;
     }

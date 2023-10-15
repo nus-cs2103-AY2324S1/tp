@@ -5,8 +5,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
-import seedu.address.model.event.Event;
-import seedu.address.model.event.EventTime;
 import seedu.address.model.event.Meeting;
 import seedu.address.model.person.Person;
 
@@ -51,6 +49,9 @@ public class Messages {
         return builder.toString();
     }
 
+    /**
+     * Formats the {@code meeting} for display to the user.
+     */
     public static String formatMeeting(Meeting meeting) {
         final StringBuilder builder = new StringBuilder();
         builder.append(meeting.getName())

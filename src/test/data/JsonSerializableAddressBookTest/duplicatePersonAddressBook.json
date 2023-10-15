@@ -10,5 +10,16 @@
     "phone": "94351253",
     "email": "pauline@example.com",
     "address": "4th street"
+  } ],
+  "meetings" : [ {
+    "name" : "John Doe",
+    "date" : "2020-10-10",
+    "startTime" : "1000",
+    "endTime" : ""
+  }, {
+    "name" : "John Doe",
+    "date" : "2020-10-10",
+    "startTime" : "1000",
+    "endTime" : "1200"
   } ]
 }

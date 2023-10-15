@@ -1,17 +1,22 @@
 package seedu.address.storage;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.event.*;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-
-import javax.swing.text.html.Option;
 import java.util.Optional;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.event.Event;
+import seedu.address.model.event.EventDate;
+import seedu.address.model.event.EventName;
+import seedu.address.model.event.EventTime;
+import seedu.address.model.event.Meeting;
+import seedu.address.model.person.Name;
+
+
+/**
+ * Jackson-friendly version of {@link Meeting}.
+ */
 public class JsonAdaptedMeeting {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
 
@@ -24,8 +29,9 @@ public class JsonAdaptedMeeting {
      * Constructs a {@code JsonAdaptedMeeting} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedMeeting(@JsonProperty("name") String name, @JsonProperty("date") String date,
-                              @JsonProperty("startTime") String startTime, @JsonProperty("endTime") String endTime) {
+    public JsonAdaptedMeeting(@JsonProperty("name") String name,
+                              @JsonProperty("date") String date, @JsonProperty("startTime") String startTime,
+                              @JsonProperty("endTime") String endTime) {
         this.name = name;
         this.date = date;
         this.startTime = startTime;
@@ -51,7 +57,8 @@ public class JsonAdaptedMeeting {
     public Meeting toModelType() throws IllegalValueException {
 
         if (this.name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
         if (!Name.isValidName(name)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
@@ -59,7 +66,8 @@ public class JsonAdaptedMeeting {
         final EventName modelName = new EventName(name);
 
         if (this.date == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, EventDate.class.getSimpleName()));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, EventDate.class.getSimpleName()));
         }
         if (!EventDate.isValidDate(this.date)) {
             throw new IllegalValueException(EventDate.MESSAGE_CONSTRAINTS);
@@ -67,7 +75,8 @@ public class JsonAdaptedMeeting {
         final EventDate modelEventDate = new EventDate(this.date);
 
         if (this.startTime == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, EventTime.class.getSimpleName()));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, EventTime.class.getSimpleName()));
         }
         if (!EventTime.isValidTime(this.startTime)) {
             throw new IllegalValueException(EventTime.MESSAGE_CONSTRAINTS);
@@ -75,7 +84,8 @@ public class JsonAdaptedMeeting {
         final EventTime modelEventStartTime = EventTime.of(this.startTime);
 
         if (this.endTime == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, EventTime.class.getSimpleName()));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, EventTime.class.getSimpleName()));
         }
         if (!EventTime.isValidTime(this.endTime)) {
             throw new IllegalValueException(EventTime.MESSAGE_CONSTRAINTS);

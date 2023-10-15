@@ -1,11 +1,13 @@
 package seedu.address.model.event;
 
-import seedu.address.logic.parser.exceptions.ParseException;
-
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
+import seedu.address.logic.parser.exceptions.ParseException;
+
+/**
+ * Represents the time of an event.
+ */
 public class EventTime {
 
     public static final String MESSAGE_CONSTRAINTS =
@@ -15,11 +17,14 @@ public class EventTime {
     public static final EventTime NULL_EVENT_TIME = new EventTime("0000");
     private LocalTime eventTime;
 
-
     private EventTime(String eventTime) {
         this.eventTime = LocalTime.parse(eventTime, TIME_FORMATTER);
     }
 
+    /**
+     * Returns true if a given string is a valid time.
+     * Because time is optional, a blank string is considered valid.
+     */
     public static boolean isValidTime(String trimmedTime) {
         //to represent the case of optional time.
         if (trimmedTime.isBlank()) {
@@ -82,6 +87,9 @@ public class EventTime {
         return eventTime.format(DateTimeFormatter.ofPattern("HHmm"));
     }
 
+    /**
+     * For display in the UI.
+     */
     public String forDisplay() {
         return eventTime.format(DateTimeFormatter.ofPattern("HH:mm"));
     }

@@ -24,8 +24,6 @@ class JsonSerializableAddressBook {
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
 
-
-    //the name of the list of meetings in the json file
     private final List<JsonAdaptedMeeting> meetings = new ArrayList<>();
 
     /**

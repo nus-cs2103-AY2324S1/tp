@@ -3,7 +3,6 @@ package seedu.address.model.event;
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Represents a list of events in the address book. Operations for managing the list of events are implemented here.
