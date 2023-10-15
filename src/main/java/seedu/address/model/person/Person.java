@@ -26,7 +26,8 @@ public class Person {
 
     private final Remark remark;
     private final Set<Tag> tags = new HashSet<>();
-
+    private final LinkedIn linkedIn = new LinkedIn("");
+    private final Github github = new Github("");
     private final Status currentStatus = new Status();
 
     /**
@@ -79,6 +80,14 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
+    public LinkedIn getLinkedIn() {
+        return linkedIn;
+    }
+
+    public Github getGithub() {
+        return github;
+    }
+
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
@@ -125,15 +134,24 @@ public class Person {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("name", name)
+        ToStringBuilder builder = new ToStringBuilder(this);
+        builder.add("name", name)
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
                 .add("remark", remark)
-                .add("status", currentStatus)
-                .toString();
+                .add("status", currentStatus);
+
+        if (!linkedIn.value.isEmpty()) {
+            builder.add("linkedin", linkedIn);
+        }
+
+        if (!github.value.isEmpty()) {
+            builder.add("github", github);
+        }
+
+        return builder.toString();
     }
 
 }
