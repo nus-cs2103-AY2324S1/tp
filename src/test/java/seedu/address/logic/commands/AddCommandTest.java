@@ -42,7 +42,7 @@ public class AddCommandTest {
         CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
 
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
-                commandResult.getFeedbackToUser());
+            commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
     }
 
@@ -129,6 +129,7 @@ public class AddCommandTest {
         public void addMember(Member member) {
             throw new AssertionError("This method should not be called.");
         }
+
         @Override
         public void addApplicant(Applicant applicant) {
             throw new AssertionError("This method should not be called.");
@@ -200,12 +201,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void updateFilteredMembersList(Predicate<Member> predicate) {
+        public void updateFilteredMembersList(Predicate<? super Member> predicate) {
 
         }
 
         @Override
-        public void updateFilteredApplicantList(Predicate<Applicant> predicate) {
+        public void updateFilteredApplicantList(Predicate<? super Applicant> predicate) {
 
         }
     }
