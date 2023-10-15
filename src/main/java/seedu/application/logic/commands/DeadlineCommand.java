@@ -56,7 +56,7 @@ public class DeadlineCommand extends Command {
 
         Job jobToEdit = lastShownList.get(index.getZeroBased());
         Job editJob = new Job(
-                jobToEdit.getRole(), jobToEdit.getCompany(), deadline);
+                jobToEdit.getRole(), jobToEdit.getCompany(), jobToEdit.getStatus(), deadline);
 
         model.setJob(jobToEdit, editJob);
         model.updateFilteredJobList(Model.PREDICATE_SHOW_ALL_JOBS);
