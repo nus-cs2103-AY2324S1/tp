@@ -156,5 +156,5 @@ Automatically saves the data to a local storage whenever there is a change to th
     Editing the data file directly may result in unexpected behaviour.
 </box>
 
-StaffSnap applicant data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+Staff-Snap applicant data are saved automatically as a JSON file `[JAR file location]/data/applicantBook.json`. Advanced users are welcome to update data directly by editing that data file.
 
