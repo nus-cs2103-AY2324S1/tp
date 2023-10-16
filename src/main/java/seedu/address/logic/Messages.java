@@ -51,9 +51,11 @@ public class Messages {
             + "    - end with a domain label at least 2 characters long\n"
             + "    - have each domain label start and end with alphanumeric characters\n"
             + "    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.";
-    // alphanumeric and special characters
-    public static final String MESSAGE_TAG_CONSTRAINTS = "Tag names should be alphanumeric.";
+
     // Messages associated with Storage
     public static final String MESSAGE_FIELD_MISSING = "Contact's %s field is missing.";
     public static final String MESSAGE_CONTAIN_DUPLICATE_CONTACT = "Contact list contains duplicate contact(s).";
+
+    // Tag
+    public static final String UNFORMATTED_TAG_INVALID = "\"%s\" is not a valid tag. Tags must be alphanumeric (spaces allowed).";
 }
