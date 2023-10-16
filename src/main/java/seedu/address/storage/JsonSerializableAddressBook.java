@@ -54,13 +54,15 @@ class JsonSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
             addressBook.addPerson(person);
+            System.out.println(person.getGroups());
 
             person.getGroups().toStream().map(group -> {
                 try {
                     if (addressBook.hasGroup(group)) {
                         group.addPerson(person);
                     } else {
-                        addressBook.addGroup(group, person);
+                        addressBook.addGroup(group);
+                        group.addPerson(person);
                     }
                 } catch (CommandException e) {
                     System.out.println("error");

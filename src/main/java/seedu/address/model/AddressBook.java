@@ -131,9 +131,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         groups.add(g);
     }
 
-    public void addGroup(Group g, Person toAdd) throws CommandException {
-        groups.add(g, toAdd);
-    }
+//    public void addGroup(Group g, Person toAdd) throws CommandException {
+//        groups.add(g, toAdd);
+//    }
 
     /**
      * Removes {@code key} from this {@code AddressBook}.
