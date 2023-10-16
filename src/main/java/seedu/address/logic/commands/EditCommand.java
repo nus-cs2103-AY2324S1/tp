@@ -76,10 +76,6 @@ public class EditCommand extends Command {
         // Find the person to edit based on name or ID
         Optional<Person> personOptional = findPersonToEdit(lastShownList);
 
-        if (personOptional.isEmpty()) {
-            throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
-        }
-
         Person personToEdit = personOptional.get();
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 

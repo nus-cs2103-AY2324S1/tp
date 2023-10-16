@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -20,9 +21,29 @@ public class AppointmentTest {
     }
 
     @Test
-    public void constructorTwo_invalidAppointment_throwsIllegalArgumentException() {
-        String invalidAppointment = "";
-        assertThrows(IllegalArgumentException.class, () -> new Appointment(invalidAppointment, invalidAppointment));
+    public void constructor_validAppointment_success() {
+        String validStart = "01-10-2021 10:00";
+        String validEnd = "11:00";
+
+        Appointment appointment = new Appointment(validStart, validEnd);
+
+        assertEquals(appointment.toString(), validStart + " - " + validEnd);
+    }
+
+    @Test
+    public void constructor_invalidStart_throwsIllegalArgumentException() {
+        String invalidStart = "InvalidStart";
+        String validEnd = "11:00";
+
+        assertThrows(IllegalArgumentException.class, () -> new Appointment(invalidStart, validEnd));
+    }
+
+    @Test
+    public void constructor_invalidEnd_throwsIllegalArgumentException() {
+        String validStart = "01-10-2021 10:00";
+        String invalidEnd = "InvalidEnd";
+
+        assertThrows(IllegalArgumentException.class, () -> new Appointment(validStart, invalidEnd));
     }
 
     @Test
