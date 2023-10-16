@@ -3,6 +3,7 @@ package seedu.address.storage;
 import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Optional;
@@ -52,12 +53,21 @@ public class JsonDeckStorage implements DeckStorage {
         if (!Files.exists(filePath)) {
             try {
                 Files.createDirectories(filePath.getParent());
-                Files.createFile(filePath); // Create the 'deck.json' file
-                // You might want to initialize deck.json with some default content,
-                // but for the purpose of this example, I'm simply creating an empty file.
+                Files.createFile(filePath);
+                Files.write(filePath, "{}".getBytes());// Create the 'deck.json' file with empty JSON content
             } catch (IOException e) {
                 throw new DataLoadingException(e);
             }
+        }
+
+        // Check if the file is empty or contains only whitespace
+        try {
+            String content = new String(Files.readAllBytes(filePath), StandardCharsets.UTF_8);
+            if (content.trim().isEmpty()) {
+                return Optional.empty();
+            }
+        } catch (IOException e) {
+            throw new DataLoadingException(e);
         }
 
         Optional<JsonSerializableDeck> jsonDeck = JsonUtil.readJsonFile(
