@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
 
 /**
@@ -21,7 +22,7 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Patient> filteredPatients;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -33,7 +34,7 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredPatients = new FilteredList<>(this.addressBook.getPatientList());
     }
 
     public ModelManager() {
@@ -90,42 +91,51 @@ public class ModelManager implements Model {
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
-        return addressBook.hasPerson(person);
+        if (person instanceof Patient) {
+            return addressBook.hasPatient((Patient) person);
+        } else {
+            return false;
+        }
     }
 
     @Override
     public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+        if (target instanceof Patient) {
+            addressBook.removePatient((Patient) target);
+        }
     }
 
     @Override
     public void addPerson(Person person) {
-        addressBook.addPerson(person);
+        if (person instanceof Patient) {
+            addressBook.addPatient((Patient) person);
+        }
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
-        addressBook.setPerson(target, editedPerson);
+        if (target instanceof Patient && editedPerson instanceof Patient) {
+            addressBook.setPatient((Patient) target, (Patient) editedPerson);
+        }
     }
 
     //=========== Filtered Person List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Patient} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Patient> getFilteredPatientList() {
+        return filteredPatients;
     }
 
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredPatients.setPredicate(predicate);
     }
 
     @Override
@@ -141,8 +151,8 @@ public class ModelManager implements Model {
 
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
-                && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+            && userPrefs.equals(otherModelManager.userPrefs)
+            && filteredPatients.equals(otherModelManager.filteredPatients);
     }
 
 }

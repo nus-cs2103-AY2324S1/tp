@@ -32,6 +32,7 @@ public class ParserUtil {
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -161,7 +162,25 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code String condition} into a {@code Condition}.
+     * Parses a {@code String bloodtype} into a {@code BloodType}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code bloodtype} is invalid.
+     */
+    public static BloodType parseBloodType(String bloodType) throws ParseException {
+        requireNonNull(bloodType);
+        String trimmedTag = bloodType.trim();
+        if (!BloodType.isValidBloodType(trimmedTag)) {
+            throw new ParseException(BloodType.MESSAGE_CONSTRAINTS);
+        }
+        return new BloodType(trimmedTag);
+    }
+
+    /**
+     * Parses a {@code String condition} into a {@code Condition}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code condition} is invalid.
      */
     public static Condition parseCondition(String condition) throws ParseException {
         requireNonNull(condition);
@@ -172,22 +191,12 @@ public class ParserUtil {
         return new Condition(trimmedCondition);
     }
 
-    /**
-     * Parses {@code String bloodType} into a {@code BloodType}.
-     */
-    public static BloodType parseBloodType(String bloodType) throws ParseException {
-        requireNonNull(bloodType);
-        String cleanedBloodType = bloodType.trim().toUpperCase();
-        if (!BloodType.isValidBloodType(cleanedBloodType)) {
-            throw new ParseException(BloodType.MESSAGE_CONSTRAINTS);
-        }
-        return new BloodType(cleanedBloodType);
-    }
 
     /**
      * Parses {@code String remark} into a {@code Remark}.
+     * Leading and trailing whitespaces will be trimmed.
      */
-    public static Remark parseRemark(String remark) throws ParseException {
+    public static Remark parseRemark(String remark) {
         requireNonNull(remark);
         String trimmedRemark = remark.trim();
         return new Remark(trimmedRemark);

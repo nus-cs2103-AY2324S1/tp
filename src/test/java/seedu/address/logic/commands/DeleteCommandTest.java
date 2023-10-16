@@ -10,7 +10,7 @@ import static seedu.address.testutil.TypicalIcs.FIRST_NRIC;
 import static seedu.address.testutil.TypicalIcs.SECOND_NRIC;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPatient.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -31,7 +31,7 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validNricUnfilteredList_success() {
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personToDelete = model.getFilteredPatientList().get(INDEX_FIRST_PERSON.getZeroBased());
         Ic personToDeleteIc = personToDelete.getIc();
         DeleteCommand deleteCommand = new DeleteCommand(personToDeleteIc);
 
@@ -55,7 +55,7 @@ public class DeleteCommandTest {
     public void execute_validNricFilteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personToDelete = model.getFilteredPatientList().get(INDEX_FIRST_PERSON.getZeroBased());
         Ic personToDeleteIc = personToDelete.getIc();
         DeleteCommand deleteCommand = new DeleteCommand(personToDeleteIc);
 
@@ -71,7 +71,7 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_invalidNricFilteredList_throwsCommandException() {
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        Person personToDelete = model.getFilteredPatientList().get(INDEX_SECOND_PERSON.getZeroBased());
         Ic personToDeleteIc = personToDelete.getIc();
 
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
@@ -117,6 +117,6 @@ public class DeleteCommandTest {
     private void showNoPerson(Model model) {
         model.updateFilteredPersonList(p -> false);
 
-        assertTrue(model.getFilteredPersonList().isEmpty());
+        assertTrue(model.getFilteredPatientList().isEmpty());
     }
 }
