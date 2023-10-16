@@ -191,30 +191,6 @@ public class CreateCommandParserTest {
                         + CommandTestUtil.SPECIALISATION_DESC_BOB,
                 expectedMessage);
 
-        // missing phone prefix
-        CommandParserTestUtil.assertParseFailure(parser,
-                CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.VALID_PHONE_BOB
-                        + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.LINK_DESC_BOB
-                        + CommandTestUtil.GRADUATING_YEAR_DESC_BOB + CommandTestUtil.COURSE_DESC_BOB
-                        + CommandTestUtil.SPECIALISATION_DESC_BOB,
-                expectedMessage);
-
-        // missing email prefix
-        CommandParserTestUtil.assertParseFailure(parser,
-                CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.PHONE_DESC_BOB
-                        + CommandTestUtil.VALID_EMAIL_BOB + CommandTestUtil.LINK_DESC_BOB
-                        + CommandTestUtil.GRADUATING_YEAR_DESC_BOB + CommandTestUtil.COURSE_DESC_BOB
-                        + CommandTestUtil.SPECIALISATION_DESC_BOB,
-                expectedMessage);
-
-        // missing link prefix
-        CommandParserTestUtil.assertParseFailure(parser,
-                CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.PHONE_DESC_BOB
-                        + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.VALID_LINK_BOB
-                        + CommandTestUtil.GRADUATING_YEAR_DESC_BOB + CommandTestUtil.COURSE_DESC_BOB
-                        + CommandTestUtil.SPECIALISATION_DESC_BOB,
-                expectedMessage);
-
         // all prefixes missing
         CommandParserTestUtil.assertParseFailure(parser,
                 CommandTestUtil.VALID_NAME_BOB + CommandTestUtil.VALID_PHONE_BOB

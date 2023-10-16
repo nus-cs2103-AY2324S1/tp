@@ -115,7 +115,7 @@ public class PersonTest {
     @Test
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + TypicalPersons.AMY.getName()
-                + ", phone=" + TypicalPersons.AMY.getPhone() + ", email=" + TypicalPersons.AMY.getEmails()
+                + ", phone=" + TypicalPersons.AMY.getPhone() + ", emails=" + TypicalPersons.AMY.getEmails()
                 + ", link=" + TypicalPersons.AMY.getLink()
                 + ", graduating year=" + TypicalPersons.AMY.getGraduatingYear()
                 + ", course=" + TypicalPersons.AMY.getCourse()

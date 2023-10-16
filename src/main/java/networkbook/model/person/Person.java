@@ -124,8 +124,6 @@ public class Person implements Identifiable<Person> {
             return false;
         }
 
-        // TODO: nullable fields should use Objects.equals
-
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
                 && Objects.equals(phone, otherPerson.phone)
@@ -147,14 +145,28 @@ public class Person implements Identifiable<Person> {
     @Override
     public String toString() {
         ToStringBuilder tsb = new ToStringBuilder(this)
-                .add("name", name)
-                .add("phone", phone)
-                .add("email", emails)
-                .add("link", link)
-                .add("graduating year", graduatingYear)
-                .add("course", course)
-                .add("specialisation", specialisation)
-                .add("tags", tags);
+                .add("name", name);
+        if (phone != null) {
+            tsb.add("phone", phone);
+        }
+        if (!Objects.equals(emails, new UniqueList<Email>())) {
+            tsb.add("emails", emails);
+        }
+        if (link != null) {
+            tsb.add("link", link);
+        }
+        if (graduatingYear != null) {
+            tsb.add("graduating year", graduatingYear);
+        }
+        if (course != null) {
+            tsb.add("course", course);
+        }
+        if (specialisation != null) {
+            tsb.add("specialisation", specialisation);
+        }
+        if (!tags.equals(Collections.emptySet())) {
+            tsb.add("tags", tags);
+        }
         if (priority != null) {
             tsb.add("priority", priority);
         }
