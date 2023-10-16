@@ -15,7 +15,7 @@ import seedu.address.model.tag.Tag;
  * The data it contains may be invalid if the instance was deserialized from
  * JSON. Checks are done when converting to model type.
  */
-class JsonTag {
+public final class JsonTag {
     private final String name;
 
     /**

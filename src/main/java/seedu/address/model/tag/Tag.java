@@ -9,7 +9,7 @@ import seedu.address.model.contact.Contact;
  *
  * A Tag must be an alphanumeric string but may contain spaces.
  */
-public class Tag {
+public final class Tag {
     public final String name;
 
     /**
