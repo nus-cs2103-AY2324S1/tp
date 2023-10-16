@@ -2,13 +2,20 @@ package seedu.address.logic;
 
 import seedu.address.model.contact.Email;
 
+
+
+//TODO we could avoid static imports, and instead refer to strings as Messages.FOO. Then we can remove the MESSAGE_ prefix for everything
+//TODO prefix messages containing format specifiers with UNFORMATTED_
 /**
- * Utility class with some useful static properties and methods related to
- * user-facing messages.
+ * Holds message strings used by the logic for display to the user.
  *
- * //NOTE this class can probably be absorbed into other related classes.
+ * Some messages do not need formatting and can be used directly after import.
+ *
+ * Others are unformatted and have the prefix {@code UNFORMATTED_}. These
+ * contain raw format specifiers (e.g. {@code %s}) that should be populated
+ * appropriately via {@link String#format}.
  */
-public class Messages {
+public final class Messages {
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format!\n%s";
     public static final String MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX = "The contact index provided is invalid";
@@ -58,4 +65,8 @@ public class Messages {
 
     // Tag
     public static final String UNFORMATTED_TAG_INVALID = "\"%s\" is not a valid tag. Tags must be alphanumeric (spaces allowed).";
+
+    private Messages() {
+        // No instantiation
+    }
 }
