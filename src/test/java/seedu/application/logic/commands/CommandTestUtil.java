@@ -36,7 +36,7 @@ public class CommandTestUtil {
     public static final String COMPANY_DESC_CLEANER = " " + PREFIX_COMPANY + VALID_COMPANY_CLEANER;
 
     public static final String INVALID_ROLE_DESC = " " + PREFIX_ROLE + "&"; // '&' not allowed in roles
-    public static final String INVALID_COMPANY_DESC = " " + PREFIX_COMPANY + "#"; // '#' not allowed in companies
+    public static final String INVALID_COMPANY_DESC = " " + PREFIX_COMPANY + "    "; // company cannot be blank
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
