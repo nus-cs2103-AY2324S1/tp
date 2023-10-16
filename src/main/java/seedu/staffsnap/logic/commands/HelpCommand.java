@@ -11,15 +11,19 @@ public class HelpCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n"
             + "Example: " + COMMAND_WORD;
 
-    public static final String SHOWING_HELP_MESSAGE = "Opened help window. "
-            + "\nBut here are a few basic commands to get you started."
+    public static final String SHOWING_HELP_MESSAGE = "Here are a few basic commands to get you started."
             + "\nAdd"
             + "\nEdit"
             + "\nList"
-            + "\nDelete";
+            + "\nDelete"
+            + "\nFind"
+            + "\nSort"
+            + "\nClear"
+            + "\nExit"
+            + "\nFilter";
 
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(SHOWING_HELP_MESSAGE, true, false);
+        return new CommandResult(SHOWING_HELP_MESSAGE, false, false);
     }
 }
