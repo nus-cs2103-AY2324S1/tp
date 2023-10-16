@@ -124,12 +124,10 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code TeamLeader} is invalid.
      */
-    public static TeamLeader parseTeamLeader(String teamLeader) throws ParseException {
+    public static Name parseTeamLeader(String teamLeader) throws ParseException {
         requireNonNull(teamLeader);
         String trimmedTeamLeader = teamLeader.trim();
-        if (//this developer does not exist in the list) {
-            throw new ParseException(//Does not exist);
-        }
-        return new TeamLeader(teamLeader);  //after checking that this developer exists, create a new TeamLeader using this developer
+        Name teamLeaderName = parseName(trimmedTeamLeader);
+        return teamLeaderName;
     }
 }

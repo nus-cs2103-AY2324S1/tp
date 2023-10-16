@@ -4,13 +4,12 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.TreeMap;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.UniquePersonList;
-import seedu.address.model.person.Team;
+import seedu.address.model.person.*;
 
 /**
  * Wraps all data at the address-book level
@@ -21,6 +20,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     private final UniquePersonList persons;
 
     private List<Team> teams;
+
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
@@ -86,6 +86,19 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.contains(person);
     }
 
+    public boolean invalidAddToTeam(Name teamToAddTo, Name devToAdd) {
+        requireNonNull(teamToAddTo);
+        requireNonNull(devToAdd);
+
+        Team team = getTeam(teamToAddTo);
+        if (team == null) {
+            return false;
+        } else {
+            return !team.containsDev(devToAdd);  //if true, then you can add this dev. Else he alr exists.
+        }
+
+    }
+
     /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
@@ -116,13 +129,29 @@ public class AddressBook implements ReadOnlyAddressBook {
     public Person getPersonByHashCode(int hash) {
         return persons.getPersonByHashCode(hash);
     }
+    public Person getPerson(Name name) {
+        return persons.getPerson(name);
+    }
 
 
     //// teams-level operations----------------------------------------------------------------------------------------
 
-    public boolean hasTeam(Team team) {
-        requireNonNull(team);
-        return teams.contains(team);
+    public boolean hasTeam(Name teamName) {
+        requireNonNull(teamName);
+        String teamNameInString = teamName.toString();
+        boolean teamNameExists = teams.stream()
+                .anyMatch(teamNames -> teamNames.getTeamName().equals(teamNameInString));
+        return teamNameExists;
+    }
+    public Team getTeam(Name teamName) {
+        requireNonNull(teamName);
+        String teamNameInString = teamName.toString();
+
+        Optional<Team> matchingTeam = teams.stream()
+                .filter(team -> team.getTeamName().equals(teamNameInString))
+                .findFirst();
+
+        return matchingTeam.orElse(null);
     }
 
     /**

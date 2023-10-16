@@ -12,6 +12,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.person.Developer;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Team;
 
@@ -90,6 +92,10 @@ public class ModelManager implements Model {
         this.addressBook.clear();
     }
 
+    public AddressBook getWritableAddressBook() {
+        return addressBook;
+    }
+
     @Override
     public ReadOnlyAddressBook getAddressBook() {
         return addressBook;
@@ -154,9 +160,13 @@ public class ModelManager implements Model {
     }
 
     //team level operations
-    public boolean hasTeam(Team team) {
-        requireNonNull(team);
-        return addressBook.hasTeam(team);
+    public boolean hasTeam(Name teamName) {
+        requireNonNull(teamName);
+        return addressBook.hasTeam(teamName);
+    }
+
+    public boolean invalidAddToTeam(Name teamToAddTo, Name devToAdd) {
+        return addressBook.invalidAddToTeam(teamToAddTo, devToAdd);
     }
 
     /**
@@ -164,6 +174,10 @@ public class ModelManager implements Model {
      * The team must not already exist in the address book.
      */
     public void addTeam(Team team) {
+        addressBook.addTeam(team);
+    }
+    public void addTeam(Name teamName, Person teamLeader) {
+        Team team = new Team(teamName, teamLeader);
         addressBook.addTeam(team);
     }
 
@@ -188,8 +202,18 @@ public class ModelManager implements Model {
         addressBook.setTeams(target, editedTeam);
 
     }
-    public void addToTeam() {
 
+
+
+    public Team getTeam(Name teamName) {
+        requireNonNull(teamName);
+        return addressBook.getTeam(teamName);
+    }
+    //only run when you know that team exists
+    public void addToTeam(Name teamToAddTo, Name devToAdd) {
+        Team team = getTeam(teamToAddTo);
+        Developer developer = (Developer) addressBook.getPerson(devToAdd);
+        team.addDev(developer);
     }
 
 }

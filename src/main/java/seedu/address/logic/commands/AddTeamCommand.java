@@ -8,6 +8,9 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Developer;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.Team;
 
 /**
@@ -27,15 +30,19 @@ public class AddTeamCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New team added: %1$s";
     public static final String MESSAGE_DUPLICATE_TEAM = "This team already exists in the project. Choose a new name!";
+    public static final String MESSAGE_INVALID_PERSON = "This person does not exist!";
 
-    private Team teamToAdd;
+    private Name teamToAdd;
+    private Name leaderToAdd;
 
     /**
      * Creates an AddTeamCommand to add the specified {@code Team}
      */
-    public AddTeamCommand(Team team) {
-        requireNonNull(team);
-        teamToAdd = team;
+    public AddTeamCommand(Name teamName, Name teamLeader) {
+        requireNonNull(teamName);
+        requireNonNull(teamLeader);
+        teamToAdd = teamName;
+        leaderToAdd = teamLeader;
     }
     //execute method WILL NOT RUN because the "team" attribute is not configured to return a formatted string.
     //update that class and then this will run
@@ -46,9 +53,17 @@ public class AddTeamCommand extends Command {
         if (model.hasTeam(teamToAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_TEAM);
         }
+        Name teamName = teamToAdd;
+        //Person teamLeader = model.getWritableAddressBook().getPerson(leaderToAdd);
+        model.updateFilteredPersonList(person -> person.getName().equals(leaderToAdd));
+        Person teamLeader = model.getFilteredPersonList().stream().findFirst().orElse(null);
 
-        model.addTeam(teamToAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(teamToAdd)));
+        if (teamLeader == null) {
+            throw new CommandException(MESSAGE_INVALID_PERSON);
+        }
+        model.addTeam(teamName, teamLeader);
+        Team team = new Team(teamName, teamLeader);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(team)));
     }
 
     @Override

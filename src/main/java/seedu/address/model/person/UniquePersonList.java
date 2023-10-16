@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,7 +25,7 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
  */
 public class UniquePersonList implements Iterable<Person> {
 
-    private final ObservableList<Person> internalList = FXCollections.observableArrayList();
+    private final ObservableList<Person> internalList = FXCollections.observableArrayList();    //creates a FXCollections observable array list
     private final ObservableList<Person> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
@@ -115,6 +116,11 @@ public class UniquePersonList implements Iterable<Person> {
             System.out.println("Value not found in the list.");
             return foundPerson;
         }
+    }
+    //bypasses the hashcode methods for now
+    public Person getPerson(Name name) {
+        Optional<Person> foundPerson = internalList.filtered(person -> person.getName().equals(name)).stream().findFirst();
+        return foundPerson.orElse(null);
     }
 
     /**

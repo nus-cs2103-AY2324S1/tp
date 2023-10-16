@@ -6,6 +6,8 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.person.Developer;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Team;
 
@@ -63,6 +65,8 @@ public interface Model {
      */
     boolean hasPerson(Person person);
 
+    boolean invalidAddToTeam(Name teamToAddTo, Name devToAdd);
+
     /**
      * Deletes the given person.
      * The person must exist in the address book.
@@ -92,13 +96,14 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     //team level functions to model
-    boolean hasTeam(Team team);
+    boolean hasTeam(Name teamName);
 
     /**
      * Adds a team to the team structure.
      * The team must not already exist in the address book.
      */
-    void addTeam(Team team);
+    void addTeam(Name teamName, Person teamLeader);
+    void addToTeam(Name teamToAddTo, Name devToAdd);
 
     /**
      * Removes {@code key} from team structure.
@@ -106,6 +111,7 @@ public interface Model {
      */
     void removeTeam(Team key);
 
+    Team getTeam(Name teamName);
 
     /**
      * Replaces the given team {@code target} in the list with {@code editedTeam}.
@@ -113,4 +119,6 @@ public interface Model {
      * The team identity of {@code editedTeam} must not be the same as another existing team in the address book.
      */
     void setTeams(Team target, Team editedTeam);
+
+    AddressBook getWritableAddressBook();
 }

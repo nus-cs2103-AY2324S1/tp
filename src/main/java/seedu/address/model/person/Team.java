@@ -10,50 +10,55 @@ import java.util.Set;
  * A Team consists of a TeamLeader and multiple Developers.
  */
 public class Team {
-
-    private final int leaderHashCode;
     private Name teamName;
-
-    private TeamLeader teamLeader;
+    private int leaderHashCode;
+    //private HashSet<> developerHashCodeSet;
+    private Person teamLeader;
+    private Name teamLeaderName;
+    private ArrayList<Developer> developers;
 
     //todo: set will ignore duplicated values, do we need to notify the user that he added a duplicate value or not?
     //use the hash code for representing each developer. The hash code will be updated when there is a change
     //to the developer's information.
-    private final Set<Integer> developerHashCodeSet;
+    //private final Set<Integer> developerHashCodeSet;
 
 
     /**
      * Constructs a new Team instance with the specified TeamLeader.
      *
-     * @param leader The leader of the team.
+     * @param leaderName The leader of the team.
      */
 
-    public Team(Name teamName, TeamLeader leader) {
+    public Team(Name teamName, Name leaderName) {
         this.teamName = teamName;
-        this.leaderHashCode = leader.hashCode();
-        this.developerHashCodeSet = new HashSet<>();
+        //this.leaderHashCode = leader.hashCode();
+        //this.developerHashCodeSet = new HashSet<>();
+        this.teamLeaderName = leaderName;
+    }
+
+    public Team(Name teamName, Person teamLeader) {
+        this.teamName = teamName;
         this.teamLeader = teamLeader;
+        this.teamLeaderName = teamLeader.getName();
     }
 
     /**
      * Adds a Developer to the team.
      *
-     * @param developerHashCode The developer to be added.
+     * @param developer The developer to be added.
      */
-    public void addDeveloper(int developerHashCode) {
-        this.developerHashCodeSet.add(developerHashCode);
-    }
-
-
+//    public void addDeveloper(int developer) {
+//        this.developerHashCodeSet.add(developer.hashCode());
+//    }
 
     /**
      * Adds a Developer to the team.
      *
      * @param developerHashCode The developer to be removed.
      */
-    public void removeDeveloper(int developerHashCode) {
-        this.developerHashCodeSet.remove(developerHashCode);
-    }
+//    public void removeDeveloper(int developerHashCode) {
+//        this.developerHashCodeSet.remove(developerHashCode);
+//    }
 
 
     /**
@@ -70,12 +75,24 @@ public class Team {
      *
      * @return A list of Developers.
      */
-    public Set<Integer> getDevelopers() {
-        return developerHashCodeSet;
-    }
+//    public Set<Integer> getDevelopers() {
+//        return developerHashCodeSet;
+//    }
 
     public Name getTeamName() {
         return teamName;
+    }
+    public Name getTeamLeaderName() {
+        return teamLeaderName;
+    }
+
+    public boolean containsDev(Name name) {
+        boolean devExistsInTeam = developers.stream()
+                .anyMatch(devNames -> devNames.getName().equals(name));
+        return devExistsInTeam;
+    }
+    public void addDev(Developer developer) {
+        developers.add(developer);
     }
 
 }
