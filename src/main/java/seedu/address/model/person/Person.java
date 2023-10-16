@@ -30,6 +30,7 @@ public class Person {
     private Optional<Email> secondaryEmail;
     private Optional<Telegram> telegram;
     private final Set<Tag> tags = new HashSet<>();
+    private Optional<Integer> id;
 
     /**
      * Every field must be present and not null.
@@ -45,6 +46,7 @@ public class Person {
         this.secondaryEmail = Optional.empty();
         this.telegram = Optional.empty();
         this.tags.addAll(tags);
+        this.id = Optional.empty();
     }
 
     /**
@@ -52,7 +54,7 @@ public class Person {
      */
     public Person(Name name, Phone phone, Email email, Address address, Optional<Birthday> birthday,
                   Optional<Linkedin> linkedin, Optional<Email> secondaryEmail,
-                  Optional<Telegram> telegram, Set<Tag> tags) {
+                  Optional<Telegram> telegram, Set<Tag> tags, Optional<Integer> id) {
         requireAllNonNull(name, phone, email, address, birthday, tags);
         this.name = name;
         this.phone = phone;
@@ -63,6 +65,7 @@ public class Person {
         this.secondaryEmail = secondaryEmail;
         this.telegram = telegram;
         this.tags.addAll(tags);
+        this.id = id;
     }
 
     public Name getName() {
@@ -128,6 +131,13 @@ public class Person {
             .filter(tag -> Tag.EmergencyTags.isEmergencyTag(tag.tagName))
             .collect(Collectors.toSet());
     }
+    public Optional<Integer> getId() {
+        return id;
+    }
+    public int setId(int id) {
+        this.id = Optional.of(id);
+        return id;
+    }
 
     /**
      * Returns true if both persons have the same name.
@@ -141,6 +151,7 @@ public class Person {
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
     }
+
 
     /**
      * Returns true if both persons have the same identity and data fields.

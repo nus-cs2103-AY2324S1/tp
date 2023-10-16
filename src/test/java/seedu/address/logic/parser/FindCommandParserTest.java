@@ -141,8 +141,6 @@ public class FindCommandParserTest {
         assertTrue(parser.parse(" (n/Alice && (t/friends || t/colleagues))") instanceof FindCommand);
         assertDoesNotThrow(() -> parser.parse(" (n/Alice && ((((t/friends || t/colleagues)))))"));
         assertTrue(parser.parse(" (n/Alice && ((((t/friends || t/colleagues)))))") instanceof FindCommand);
-
-
     }
 
 }
