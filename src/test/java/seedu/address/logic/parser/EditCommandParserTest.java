@@ -142,7 +142,7 @@ public class EditCommandParserTest {
         // email
         userInput = "edit " + "id/" + VALID_NRIC + EMAIL_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withEmail(VALID_EMAIL_AMY).build();
-        expectedCommand = new EditCommand(null,  new Nric(VALID_NRIC), descriptor);
+        expectedCommand = new EditCommand(null, new Nric(VALID_NRIC), descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
     }

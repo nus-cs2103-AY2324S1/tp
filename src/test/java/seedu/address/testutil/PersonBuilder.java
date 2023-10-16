@@ -98,7 +98,8 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code medicalHistory} into a {@code Set<MedicalHistory>} and set it to the {@code Person} that we are building.
+     * Parses the {@code medicalHistory} into a {@code Set<MedicalHistory>}
+     * and set it to the {@code Person} that we are building.
      */
     public PersonBuilder withMedicalHistories(String ... medicalHistories) {
         this.medicalHistories = SampleDataUtil.getMedicalHistorySet(medicalHistories);
@@ -129,6 +130,9 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * @return the person.
+     */
     public Person build() {
         return new Person(name, nric, phone, email, address,
                 appointment, medicalHistories, tags);
