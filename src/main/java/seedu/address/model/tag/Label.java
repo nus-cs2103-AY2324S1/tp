@@ -12,19 +12,11 @@ public abstract class Label {
     }
 
 
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof Label)) {
-            return false;
-        }
-
-        Label otherLabel = (Label) other;
-        return name.equals(otherLabel.name);
+    /**
+     * Returns true if a given string matches the name of this label.
+     */
+    public boolean matchName(String name) {
+        return this.name.equals(name);
     }
 
     @Override
