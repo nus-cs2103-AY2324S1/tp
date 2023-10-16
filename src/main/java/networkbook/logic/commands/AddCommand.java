@@ -115,12 +115,12 @@ public class AddCommand extends Command {
         return editPersonDescriptor.getPhone().orElse(personToAddInfo.getPhone());
     }
     private UniqueList<Email> addEmails(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor) {
-        UniqueList<Email> emails = personToAddInfo.getEmails().copy();
+        UniqueList<Email> emails = personToAddInfo.getEmails();
         editPersonDescriptor.getEmails().ifPresent(emails::addAll);
         return emails;
     }
     private UniqueList<Link> addLinks(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor) {
-        UniqueList<Link> links = personToAddInfo.getLinks().copy();
+        UniqueList<Link> links = personToAddInfo.getLinks();
         editPersonDescriptor.getLinks().ifPresent(links::addAll);
         return links;
     }

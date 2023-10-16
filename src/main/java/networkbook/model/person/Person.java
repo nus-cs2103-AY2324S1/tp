@@ -67,10 +67,10 @@ public class Person implements Identifiable<Person> {
     }
 
     public UniqueList<Email> getEmails() {
-        return emails;
+        return emails.copy();
     }
     public UniqueList<Link> getLinks() {
-        return links;
+        return links.copy();
     }
     public GraduatingYear getGraduatingYear() {
         return graduatingYear;

@@ -25,7 +25,11 @@ public class Link implements Identifiable<Link> {
             "^(http://|https://)?(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]";
     private static final String PATH_REGEX = "(/[\\w_-]*)*"; // Valid URI path
 
-    public static final String VALIDATION_REGEX = DOMAIN_NAME_REGEX + "(" + PATH_REGEX + ")?$";
+    // regex reused from https://stackoverflow.com/questions/23959352/validate-url-query-string-with-regex
+    private static final String QUERY_REGEX = "\\?([\\w-]+(=[\\w-]*)?(&[\\w-]+(=[\\w-]*)?)*)?";
+
+    public static final String VALIDATION_REGEX = DOMAIN_NAME_REGEX
+            + "(" + PATH_REGEX + ")?" + "(" + QUERY_REGEX + ")?$";
 
     private final String value;
 

@@ -63,8 +63,8 @@ public class PersonBuilder {
     public PersonBuilder(Person personToCopy) {
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
-        emails = personToCopy.getEmails().copy();
-        links = personToCopy.getLinks().copy();
+        emails = personToCopy.getEmails();
+        links = personToCopy.getLinks();
         graduatingYear = personToCopy.getGraduatingYear();
         course = personToCopy.getCourse();
         specialisation = personToCopy.getSpecialisation();

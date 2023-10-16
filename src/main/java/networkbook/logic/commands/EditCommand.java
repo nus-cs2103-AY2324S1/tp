@@ -88,7 +88,6 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        System.out.println(editedPerson);
         model.setItem(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
@@ -103,8 +102,8 @@ public class EditCommand extends Command {
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        UniqueList<Email> updatedEmails = editPersonDescriptor.getEmails().orElse(personToEdit.getEmails().copy());
-        UniqueList<Link> updatedLink = editPersonDescriptor.getLinks().orElse(personToEdit.getLinks().copy());
+        UniqueList<Email> updatedEmails = editPersonDescriptor.getEmails().orElse(personToEdit.getEmails());
+        UniqueList<Link> updatedLink = editPersonDescriptor.getLinks().orElse(personToEdit.getLinks());
         GraduatingYear updatedGraduatingYear = editPersonDescriptor.getGraduatingYear()
                     .orElse(personToEdit.getGraduatingYear());
         Course updatedCourse = editPersonDescriptor.getCourse().orElse(personToEdit.getCourse());

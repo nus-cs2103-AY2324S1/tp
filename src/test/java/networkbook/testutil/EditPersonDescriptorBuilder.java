@@ -38,8 +38,8 @@ public class EditPersonDescriptorBuilder {
         descriptor = new EditCommand.EditPersonDescriptor();
         descriptor.setName(person.getName());
         descriptor.setPhone(person.getPhone());
-        descriptor.setEmails(person.getEmails().copy());
-        descriptor.setLinks(person.getLinks().copy());
+        descriptor.setEmails(person.getEmails());
+        descriptor.setLinks(person.getLinks());
         descriptor.setGraduatingYear(person.getGraduatingYear());
         descriptor.setCourse(person.getCourse());
         descriptor.setSpecialisation(person.getSpecialisation());
