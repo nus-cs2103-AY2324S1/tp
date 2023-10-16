@@ -31,7 +31,7 @@ public class TransactionId {
      */
     public TransactionId(Integer id) {
         requireNonNull(id);
-        checkArgument(!usedIds.contains(id), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidTransactionId(id), MESSAGE_CONSTRAINTS);
         value = id;
         usedIds.add(value);
     }
@@ -52,7 +52,7 @@ public class TransactionId {
     }
 
     /**
-     * Returns true if a given string is a valid transaction ID.
+     * Returns true if a given integer is a valid transaction ID.
      */
     public static boolean isValidTransactionId(Integer test) {
         return !usedIds.contains(test);
