@@ -1,10 +1,7 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +12,10 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.BankAccount;
+import seedu.address.model.person.JoinDate;
+import seedu.address.model.person.Salary;
+import seedu.address.model.person.AnnualLeave;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -29,6 +29,10 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final String bankAccount;
+    private final String joinDate;
+    private final String salary;
+    private final String annualLeave;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -36,14 +40,16 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("bankAccount") String bankAccount, @JsonProperty("joinDate") String joinDate,
+            @JsonProperty("salary") String salary, @JsonProperty("annualLeave") String annualLeave) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        if (tags != null) {
-            this.tags.addAll(tags);
-        }
+        this.bankAccount = bankAccount;
+        this.joinDate = joinDate;
+        this.salary = salary;
+        this.annualLeave = annualLeave;
     }
 
     /**
@@ -54,21 +60,20 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        tags.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
-                .collect(Collectors.toList()));
+        bankAccount = source.getBankAccount().value;
+        joinDate = source.getJoinDate().value;
+        salary = source.getSalary().value;
+        annualLeave = source.getAnnualLeave().value;
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
+     * Converts this Jackson-friendly adapted person object into the model's
+     * {@code Person} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws IllegalValueException if there were any data constraints violated in
+     *                               the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tags) {
-            personTags.add(tag.toModelType());
-        }
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
@@ -102,8 +107,28 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        if (!BankAccount.isValidBankAccount(bankAccount)) {
+            throw new IllegalValueException(BankAccount.MESSAGE_CONSTRAINTS);
+        }
+        final BankAccount modelBankAccount = new BankAccount(bankAccount);
+
+        if (!JoinDate.isValidJoinDate(joinDate)) {
+            throw new IllegalValueException(JoinDate.MESSAGE_CONSTRAINTS);
+        }
+        final JoinDate modelJoinDate = new JoinDate(joinDate);
+
+        if (!Salary.isValidSalary(salary)) {
+            throw new IllegalValueException(Salary.MESSAGE_CONSTRAINTS);
+        }
+        final Salary modelSalary = new Salary(salary);
+
+        if (!AnnualLeave.isValidAnnualLeave(annualLeave)) {
+            throw new IllegalValueException(AnnualLeave.MESSAGE_CONSTRAINTS);
+        }
+        final AnnualLeave modelAnnualLeave = new AnnualLeave(annualLeave);
+
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelBankAccount, modelJoinDate, modelSalary,
+                modelAnnualLeave);
     }
 
 }
