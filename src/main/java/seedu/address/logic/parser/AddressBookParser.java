@@ -29,15 +29,15 @@ import seedu.address.model.person.PersonType;
 public class AddressBookParser {
 
     /**
-     * Used for initial separation of command word and args.
+     * Used for initial separation of command word and args. Basic commands do not require a person type tag.
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile(
             "(?<commandWord>\\S+)(?<arguments>.*)");
     /**
-     * Used for initial separation of command word, person type and args.
+     * Used for initial separation of command word, person type and args. Complex commands require a person type tag.
      */
-    private static final Pattern PERSON_TYPE_COMMAND_FORMAT = Pattern.compile(
-            "(?<commandWord>\\S+)\\s(?<personType>\\S+)(?<arguments>.*)");
+    private static final Pattern COMPLEX_COMMAND_FORMAT = Pattern.compile(
+            "(?<commandWord>\\S+)\\s(?<personType>-\\S+)(?<arguments>.*)");
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
 
     /**
@@ -49,7 +49,7 @@ public class AddressBookParser {
      */
     public Command parseCommand(String userInput) throws ParseException {
         final Matcher matcherBasic = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
-        final Matcher matcherPersonType = PERSON_TYPE_COMMAND_FORMAT.matcher(userInput.trim());
+        final Matcher matcherPersonType = COMPLEX_COMMAND_FORMAT.matcher(userInput.trim());
 
         if (matcherPersonType.matches()) {
             final String commandWord = matcherPersonType.group("commandWord");
@@ -80,14 +80,11 @@ public class AddressBookParser {
             case EditCommand.COMMAND_WORD:
                 return new EditCommandParser().parse(personType, arguments);
 
-            case DeleteCommand.COMMAND_WORD:
-                return new DeleteCommandParser().parse(personType, arguments);
-
             case FindCommand.COMMAND_WORD:
                 return new FindCommandParser().parse(personType, arguments);
 
             case ListCommand.COMMAND_WORD:
-                return new ListCommand();
+                return new ListCommand(personType);
 
             default:
                 logger.finer("This user input caused a ParseException: " + userInput);
@@ -105,6 +102,9 @@ public class AddressBookParser {
             logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
 
             switch (commandWord) {
+
+            case DeleteCommand.COMMAND_WORD:
+                return new DeleteCommandParser().parse(arguments);
 
             case ClearCommand.COMMAND_WORD:
                 return new ClearCommand();

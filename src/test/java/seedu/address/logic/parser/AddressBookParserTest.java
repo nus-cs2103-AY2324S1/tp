@@ -4,11 +4,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalPersons.getTypicalPersons;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -24,10 +28,11 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Patient;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonType;
 import seedu.address.model.person.Specialist;
+import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
 import seedu.address.testutil.EditPatientDescriptorBuilder;
 import seedu.address.testutil.EditSpecialistDescriptorBuilder;
 import seedu.address.testutil.PatientBuilder;
@@ -61,16 +66,14 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_delete_patient() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + CliSyntax.SPECIALIST_TAG
-                        + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON, PersonType.SPECIALIST), command);
+                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
     }
     @Test
     public void parseCommand_delete_specialist() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + CliSyntax.SPECIALIST_TAG
-                        + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON, PersonType.SPECIALIST), command);
+                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
     }
 
     @Test
@@ -104,8 +107,18 @@ public class AddressBookParserTest {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + CliSyntax.PATIENT_TAG + " "
+                        + PREFIX_NAME
                         + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords), PersonType.PATIENT), command);
+        List<Person> testPersons = getTypicalPersons();
+        List<Predicate<Person>> predicateList = new ArrayList<>();
+        predicateList.add(PersonType.PATIENT.getSearchPredicate());
+        predicateList.add(new NameContainsKeywordsPredicate(keywords));
+        Predicate<Person> combinedPredicate = person -> predicateList.stream().map(p -> p.test(person))
+                .reduce(true, (x, y) -> x && y);
+        for (Person currPerson : testPersons) {
+            assertEquals(combinedPredicate.test(currPerson), command.getPredicate().test(currPerson));
+        }
+        assertEquals(PersonType.PATIENT, command.getPersonType());
     }
 
     @Test
@@ -113,8 +126,18 @@ public class AddressBookParserTest {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + CliSyntax.SPECIALIST_TAG + " "
+                        + PREFIX_NAME
                         + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords), PersonType.SPECIALIST), command);
+        List<Person> testPersons = getTypicalPersons();
+        List<Predicate<Person>> predicateList = new ArrayList<>();
+        predicateList.add(PersonType.SPECIALIST.getSearchPredicate());
+        predicateList.add(new NameContainsKeywordsPredicate(keywords));
+        Predicate<Person> combinedPredicate = person -> predicateList.stream().map(p -> p.test(person))
+                .reduce(true, (x, y) -> x && y);
+        for (Person currPerson : testPersons) {
+            assertEquals(combinedPredicate.test(currPerson), command.getPredicate().test(currPerson));
+        }
+        assertEquals(PersonType.SPECIALIST, command.getPersonType());
     }
 
     @Test
@@ -130,12 +153,13 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
-        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand(""));
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                HelpCommand.MESSAGE_USAGE), () -> parser.parseCommand(""));
     }
 
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, ()
+                -> parser.parseCommand("unknownCommand"));
     }
 }

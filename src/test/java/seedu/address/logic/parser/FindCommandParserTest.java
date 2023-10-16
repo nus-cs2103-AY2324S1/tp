@@ -1,16 +1,22 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseComplexFailure;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFindSuccess;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonType;
+import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
+
 
 public class FindCommandParserTest {
 
@@ -18,19 +24,24 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        assertParseComplexFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 FindCommand.MESSAGE_USAGE), PersonType.PATIENT);
     }
 
     @Test
-    public void parse_validArgs_returnsFindCommand() {
+    public void parse_validNameArgs_returnsFindCommand() {
+
+        List<String> keywords = Arrays.asList("Alice", "Bob");
+        List<Predicate<Person>> predicateList = new ArrayList<>();
+        predicateList.add(PersonType.PATIENT.getSearchPredicate());
+        predicateList.add(new NameContainsKeywordsPredicate(keywords));
+        Predicate<Person> expectedPredicate = person -> predicateList.stream().map(p -> p.test(person))
+                .reduce(true, (x, y) -> x && y);
+;
         // no leading and trailing whitespaces
-        FindCommand expectedFindCommand =
-                new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")), PersonType.PATIENT);
-        assertParseSuccess(parser, "Alice Bob", expectedFindCommand, PersonType.PATIENT);
-
+        assertParseFindSuccess(parser, " " + PREFIX_NAME + " Alice Bob", expectedPredicate, PersonType.PATIENT);
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n Alice \n \t Bob  \t", expectedFindCommand, PersonType.PATIENT);
+        assertParseFindSuccess(parser, " " + PREFIX_NAME + " \n Alice \n \t Bob  \t",
+                expectedPredicate, PersonType.PATIENT);
     }
-
 }
