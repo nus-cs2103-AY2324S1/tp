@@ -46,9 +46,13 @@ public class CommandResult {
         this.fieldToRead = null;
     }
 
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
+     * {@code read} and {@code fieldToRead}, and other fields set to their default value.
+     */
     public CommandResult(String feedbackToUser, boolean read, String fieldToRead) {
         this.feedbackToUser = feedbackToUser;
-        this.exit =false;
+        this.exit = false;
         this.showHelp = false;
         this.read = read;
         this.fieldToRead = fieldToRead;

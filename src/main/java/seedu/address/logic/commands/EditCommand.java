@@ -21,10 +21,6 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.employee.AnnualLeave;
-import seedu.address.model.employee.BankAccount;
-import seedu.address.model.employee.JoinDate;
-import seedu.address.model.employee.Salary;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.AnnualLeave;
 import seedu.address.model.person.BankAccount;
@@ -109,14 +105,14 @@ public class EditCommand extends Command {
         Phone updatedPhone = editEmployeeDescriptor.getPhone().orElse(employeeToEdit.getPhone());
         Email updatedEmail = editEmployeeDescriptor.getEmail().orElse(employeeToEdit.getEmail());
         Address updatedAddress = editEmployeeDescriptor.getAddress().orElse(employeeToEdit.getAddress());
-        BankAccount updatedBankAccount = editEmployeeDescriptor.getBankAccount().
-            orElse(employeeToEdit.getBankAccount());
-        JoinDate updatedJoinDate = editEmployeeDescriptor.getJoinDate().
-            orElse(employeeToEdit.getJoinDate());
-        Salary updatedSalary = editEmployeeDescriptor.getSalary().
-            orElse(employeeToEdit.getSalary());
-        AnnualLeave updatedAnnualLeave = editEmployeeDescriptor.getAnnualLeave().
-            orElse(employeeToEdit.getAnnualLeave());
+        BankAccount updatedBankAccount = editEmployeeDescriptor.getBankAccount()
+            .orElse(employeeToEdit.getBankAccount());
+        JoinDate updatedJoinDate = editEmployeeDescriptor.getJoinDate()
+            .orElse(employeeToEdit.getJoinDate());
+        Salary updatedSalary = editEmployeeDescriptor.getSalary()
+            .orElse(employeeToEdit.getSalary());
+        AnnualLeave updatedAnnualLeave = editEmployeeDescriptor.getAnnualLeave()
+            .orElse(employeeToEdit.getAnnualLeave());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedBankAccount, updatedJoinDate,
             updatedSalary, updatedAnnualLeave);

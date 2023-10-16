@@ -3,9 +3,14 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents a Person's salary in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidSalary(String)}
+ */
 public class Salary {
     public static final String MESSAGE_CONSTRAINTS =
-            "Salary should only contain numerical digits. It should not contain dashes or spaces.";
+            "Salary should only contain numerical digits. It should not contain dashes or spaces."
+                + "It should be in the format of XXXXX.XX, i.e. 2 decimal places";
 
     /*
      * The first character of the salary must not be a whitespace,
