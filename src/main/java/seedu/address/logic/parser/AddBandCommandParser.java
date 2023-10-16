@@ -5,6 +5,7 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.band.*;
 
+import java.util.HashSet;
 import java.util.stream.Stream;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -31,7 +32,7 @@ public class AddBandCommandParser {
         BandName name = ParserUtil.parseBandName(argMultimap.getValue(PREFIX_NAME).get());
 
         // tags and musicians to be implemented later on
-        Band band = new Band(name, null, null);
+        Band band = new Band(name, new HashSet<>(), new HashSet<>());
 
         return new AddBandCommand(band);
     }
