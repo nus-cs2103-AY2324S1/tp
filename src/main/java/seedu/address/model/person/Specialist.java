@@ -16,8 +16,8 @@ public class Specialist extends Person {
     /**
      * Every field must be present and not null.
      */
-    public Specialist(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Specialty specialty) {
-        super(name, phone, email, address, tags);
+    public Specialist(Name name, Phone phone, Email email, Location location, Set<Tag> tags, Specialty specialty) {
+        super(name, phone, email, location, tags);
         this.specialty = specialty;
     }
 
@@ -46,8 +46,9 @@ public class Specialist extends Person {
         return super.getName().equals(otherSpecialist.getName())
                 && super.getPhone().equals(otherSpecialist.getPhone())
                 && super.getEmail().equals(otherSpecialist.getEmail())
-                && super.getAddress().equals(otherSpecialist.getAddress())
-                && super.getTags().equals(otherSpecialist.getTags());
+                && super.getLocation().equals(otherSpecialist.getLocation())
+                && super.getTags().equals(otherSpecialist.getTags())
+                && this.specialty.equals(otherSpecialist.specialty);
     }
 
     public Specialty getSpecialty() {

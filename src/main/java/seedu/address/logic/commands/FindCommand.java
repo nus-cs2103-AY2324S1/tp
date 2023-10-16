@@ -2,8 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PATIENT_TAG;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICALHISTORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -35,7 +35,7 @@ public class FindCommand extends Command {
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_ADDRESS + "ADDRESS "
+            + PREFIX_LOCATION + "ADDRESS "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "If the person is a patient, find by their medical history by using the "
             + PREFIX_MEDICALHISTORY + " prefix. \n"
@@ -46,7 +46,7 @@ public class FindCommand extends Command {
             + PREFIX_NAME + "Gawain Von Doofenshmirtz "
             + PREFIX_PHONE + "98765433 "
             + PREFIX_EMAIL + "gawainvdoo@example.com "
-            + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
+            + PREFIX_LOCATION + "311, Clementi Ave 2, #02-25 "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney"
             + PREFIX_MEDICALHISTORY + "ADHD";

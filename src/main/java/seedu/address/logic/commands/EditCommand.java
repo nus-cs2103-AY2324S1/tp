@@ -2,8 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PATIENT_TAG;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICALHISTORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -25,8 +25,8 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Location;
 import seedu.address.model.person.MedicalHistory;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Patient;
@@ -52,7 +52,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_LOCATION + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "If the person is a patient, edit their medical history by using the "
             + PREFIX_MEDICALHISTORY + " prefix. \n"
@@ -129,11 +129,12 @@ public class EditCommand extends Command {
         Name updatedName = editPatientDescriptor.getName().orElse(patientToEdit.getName());
         Phone updatedPhone = editPatientDescriptor.getPhone().orElse(patientToEdit.getPhone());
         Email updatedEmail = editPatientDescriptor.getEmail().orElse(patientToEdit.getEmail());
-        Address updatedAddress = editPatientDescriptor.getAddress().orElse(patientToEdit.getAddress());
+        Location updatedLocation = editPatientDescriptor.getLocation().orElse(patientToEdit.getLocation());
         Set<Tag> updatedTags = editPatientDescriptor.getTags().orElse(patientToEdit.getTags());
         MedicalHistory updatedMedicalHistory = editPatientDescriptor.getMedicalHistory()
                 .orElse(patientToEdit.getMedicalHistory());
-        return new Patient(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedMedicalHistory);
+        return new Patient(updatedName, updatedPhone,
+                updatedEmail, updatedLocation, updatedTags, updatedMedicalHistory);
     }
 
     /**
@@ -147,12 +148,12 @@ public class EditCommand extends Command {
         Name updatedName = editSpecialistDescriptor.getName().orElse(specialistToEdit.getName());
         Phone updatedPhone = editSpecialistDescriptor.getPhone().orElse(specialistToEdit.getPhone());
         Email updatedEmail = editSpecialistDescriptor.getEmail().orElse(specialistToEdit.getEmail());
-        Address updatedAddress = editSpecialistDescriptor.getAddress().orElse(specialistToEdit.getAddress());
+        Location updatedLocation = editSpecialistDescriptor.getLocation().orElse(specialistToEdit.getLocation());
         Set<Tag> updatedTags = editSpecialistDescriptor.getTags().orElse(specialistToEdit.getTags());
         Specialty updatedSpecialty = editSpecialistDescriptor.getSpecialty().orElse(specialistToEdit.getSpecialty());
 
 
-        return new Specialist(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedSpecialty);
+        return new Specialist(updatedName, updatedPhone, updatedEmail, updatedLocation, updatedTags, updatedSpecialty);
     }
 
     @Override
@@ -187,7 +188,7 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
-        private Address address;
+        private Location location;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -200,7 +201,7 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
-            setAddress(toCopy.address);
+            setLocation(toCopy.location);
             setTags(toCopy.tags);
         }
 
@@ -208,7 +209,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, location, tags);
         }
 
         public void setName(Name name) {
@@ -235,12 +236,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
-        public void setAddress(Address address) {
-            this.address = address;
+        public void setLocation(Location location) {
+            this.location = location;
         }
 
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
+        public Optional<Location> getLocation() {
+            return Optional.ofNullable(location);
         }
 
         /**
@@ -275,7 +276,7 @@ public class EditCommand extends Command {
             return Objects.equals(name, otherEditPersonDescriptor.name)
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
-                    && Objects.equals(address, otherEditPersonDescriptor.address)
+                    && Objects.equals(location, otherEditPersonDescriptor.location)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
@@ -285,7 +286,7 @@ public class EditCommand extends Command {
                     .add("name", name)
                     .add("phone", phone)
                     .add("email", email)
-                    .add("address", address)
+                    .add("location", location)
                     .add("tags", tags)
                     .toString();
         }

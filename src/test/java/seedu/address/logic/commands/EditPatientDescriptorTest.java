@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LOCATION_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -53,7 +53,7 @@ public class EditPatientDescriptorTest {
 
         // different address -> returns false
         editedAmy = (EditPatientDescriptor) new EditPatientDescriptorBuilder(DESC_AMY)
-                .withAddress(VALID_ADDRESS_BOB).build();
+                .withLocation(VALID_LOCATION_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different tags -> returns false
@@ -68,8 +68,8 @@ public class EditPatientDescriptorTest {
         String expected = EditPatientDescriptor.class.getCanonicalName() + "{name="
                 + editPatientDescriptor.getName().orElse(null) + ", phone="
                 + editPatientDescriptor.getPhone().orElse(null) + ", email="
-                + editPatientDescriptor.getEmail().orElse(null) + ", address="
-                + editPatientDescriptor.getAddress().orElse(null) + ", tags="
+                + editPatientDescriptor.getEmail().orElse(null) + ", location="
+                + editPatientDescriptor.getLocation().orElse(null) + ", tags="
                 + editPatientDescriptor.getTags().orElse(null) + ", medical history="
                 + editPatientDescriptor.getMedicalHistory().orElse(null) + "}";
         assertEquals(expected, editPatientDescriptor.toString());

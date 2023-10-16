@@ -43,7 +43,7 @@ public class SpecialistBuilder extends PersonBuilder {
 
     @Override
     public Specialist build() {
-        return new Specialist(getName(), getPhone(), getEmail(), getAddress(), getTags(), getSpecialty());
+        return new Specialist(getName(), getPhone(), getEmail(), getLocation(), getTags(), getSpecialty());
     }
 
 }

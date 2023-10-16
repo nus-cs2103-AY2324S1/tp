@@ -8,8 +8,8 @@ import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Location;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Specialist;
@@ -23,10 +23,10 @@ class JsonAdaptedSpecialist extends JsonAdaptedPerson {
         specialty = source.getSpecialty().value;
     }
     public JsonAdaptedSpecialist(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                                 @JsonProperty("email") String email, @JsonProperty("address") String address,
+                                 @JsonProperty("email") String email, @JsonProperty("location") String location,
                                  @JsonProperty("tags") List<JsonAdaptedTag> tags,
                                  @JsonProperty("Specialty") String specialty) {
-        super(name, phone, email, address, tags);
+        super(name, phone, email, location, tags);
         this.specialty = specialty;
     }
 
@@ -51,10 +51,10 @@ class JsonAdaptedSpecialist extends JsonAdaptedPerson {
         final Name modelName = new Name(getName());
         final Phone modelPhone = new Phone(getPhone());
         final Email modelEmail = new Email(getEmail());
-        final Address modelAddress = new Address(getAddress());
+        final Location modelLocation = new Location(getLocation());
         final Set<Tag> modelTags = new HashSet<>(personTags);
         final Specialty modelSpecialty = new Specialty(getSpecialty());
 
-        return new Specialist(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelSpecialty);
+        return new Specialist(modelName, modelPhone, modelEmail, modelLocation, modelTags, modelSpecialty);
     }
 }

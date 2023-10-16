@@ -24,7 +24,7 @@ public class JsonAdaptedSpecialistTest {
     private static final String VALID_NAME = GEORGE.getName().toString();
     private static final String VALID_PHONE = GEORGE.getPhone().toString();
     private static final String VALID_EMAIL = GEORGE.getEmail().toString();
-    private static final String VALID_ADDRESS = GEORGE.getAddress().toString();
+    private static final String VALID_ADDRESS = GEORGE.getLocation().toString();
     private static final String VALID_SPECIALTY = GEORGE.getSpecialty().toString();
     private static final List<JsonAdaptedTag> VALID_TAGS = GEORGE.getTags().stream()
             .map(JsonAdaptedTag::new)

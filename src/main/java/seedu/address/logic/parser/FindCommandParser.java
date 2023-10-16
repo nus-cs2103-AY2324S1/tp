@@ -1,8 +1,8 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICALHISTORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -51,11 +51,11 @@ public class FindCommandParser implements ParserComplex<FindCommand> {
 
     private FindCommand parsePatient(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_LOCATION,
                         PREFIX_TAG, PREFIX_MEDICALHISTORY);
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_ADDRESS, PREFIX_MEDICALHISTORY);
+                PREFIX_LOCATION, PREFIX_MEDICALHISTORY);
 
         List<Predicate<Person>> predicateList = setupPersonPredicates(argMultimap);
         predicateList.add(PersonType.PATIENT.getSearchPredicate());
@@ -73,11 +73,11 @@ public class FindCommandParser implements ParserComplex<FindCommand> {
 
     private FindCommand parseSpecialist(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_LOCATION,
                         PREFIX_TAG, PREFIX_SPECIALTY);
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_ADDRESS, PREFIX_SPECIALTY);
+                PREFIX_LOCATION, PREFIX_SPECIALTY);
         List<Predicate<Person>> predicateList = setupPersonPredicates(argMultimap);
         predicateList.add(PersonType.SPECIALIST.getSearchPredicate());
 
@@ -116,8 +116,8 @@ public class FindCommandParser implements ParserComplex<FindCommand> {
             List<String> emailKeywords = splitKeywordsByWhitespace(argMultimap, PREFIX_EMAIL);
             predicateList.add(new EmailContainsKeywordsPredicate(emailKeywords));
         }
-        if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            List<String> addressKeywords = splitKeywordsByWhitespace(argMultimap, PREFIX_ADDRESS);
+        if (argMultimap.getValue(PREFIX_LOCATION).isPresent()) {
+            List<String> addressKeywords = splitKeywordsByWhitespace(argMultimap, PREFIX_LOCATION);
             predicateList.add(new AddressContainsKeywordsPredicate(addressKeywords));
         }
         if (!argMultimap.getAllValues(PREFIX_TAG).isEmpty()) {
