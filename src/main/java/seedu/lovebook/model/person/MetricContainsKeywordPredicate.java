@@ -6,22 +6,24 @@ import seedu.lovebook.commons.util.StringUtil;
 import seedu.lovebook.commons.util.ToStringBuilder;
 import seedu.lovebook.logic.parser.Prefix;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.lovebook.logic.parser.CliSyntax.*;
 
 /**
  * Tests that a {@code Date}'s {@code Name} matches any of the keywords given.
  */
-public class MetricContainsKeywordsPredicate implements Predicate<Date> {
+public class MetricContainsKeywordPredicate implements Predicate<Date> {
     private final String keyword;
     private final Prefix metric;
 
-    public MetricContainsKeywordsPredicate(String keyword, Prefix metric) {
+    public MetricContainsKeywordPredicate(String keyword, Prefix metric) {
         this.keyword = keyword;
         this.metric = metric;
     }
 
     @Override
     public boolean test(Date date) {
+        requireNonNull(metric);
         if (metric.equals(PREFIX_NAME)) {
             return StringUtil.containsWordIgnoreCase(date.getName().fullName, keyword);
         }
@@ -44,11 +46,11 @@ public class MetricContainsKeywordsPredicate implements Predicate<Date> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof MetricContainsKeywordsPredicate)) {
+        if (!(other instanceof MetricContainsKeywordPredicate)) {
             return false;
         }
 
-        MetricContainsKeywordsPredicate otherMetricContainsKeywordsPredicate = (MetricContainsKeywordsPredicate) other;
+        MetricContainsKeywordPredicate otherMetricContainsKeywordsPredicate = (MetricContainsKeywordPredicate) other;
         return keyword.equals(otherMetricContainsKeywordsPredicate.keyword);
     }
 

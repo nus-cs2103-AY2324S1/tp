@@ -1,10 +1,11 @@
 package seedu.lovebook.logic.commands;
 
+import seedu.lovebook.commons.util.ToStringBuilder;
 import seedu.lovebook.logic.Messages;
 import seedu.lovebook.logic.commands.exceptions.CommandException;
 import seedu.lovebook.logic.parser.Prefix;
 import seedu.lovebook.model.Model;
-import seedu.lovebook.model.person.MetricContainsKeywordsPredicate;
+import seedu.lovebook.model.person.MetricContainsKeywordPredicate;
 import seedu.lovebook.model.person.NameContainsKeywordsPredicate;
 
 import static java.util.Objects.requireNonNull;
@@ -18,19 +19,39 @@ public class FilterCommand extends Command {
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: /METRIC KEYWORD (METRIC in the form of initial alphabet) \n"
             + "Example: " + COMMAND_WORD + PREFIX_NAME + " Bob (AKA find dates whose name that match Bob";
-    private final MetricContainsKeywordsPredicate predicate;
+    private final MetricContainsKeywordPredicate predicate;
 
 
-    public FilterCommand(MetricContainsKeywordsPredicate predicate) {
+    public FilterCommand(MetricContainsKeywordPredicate predicate) {
         this.predicate = predicate;
     }
 
     @Override
     public CommandResult execute(Model model) {
-        System.out.println("hi");
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+    }
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof FilterCommand)) {
+            return false;
+        }
+
+        FilterCommand otherFilterCommand = (FilterCommand) other;
+        return predicate.equals(otherFilterCommand.predicate);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("predicate", predicate)
+                .toString();
     }
 }
