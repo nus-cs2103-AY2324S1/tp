@@ -6,7 +6,6 @@ import static seedu.address.testutil.TestData.BENSON;
 import static seedu.address.testutil.TestData.INVALID_EMAIL;
 import static seedu.address.testutil.TestData.INVALID_NAME;
 import static seedu.address.testutil.TestData.INVALID_PHONE;
-import static seedu.address.testutil.TestData.INVALID_TAG;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +19,7 @@ import seedu.address.model.contact.Email;
 import seedu.address.model.contact.Name;
 import seedu.address.model.contact.Note;
 import seedu.address.model.contact.Phone;
+import seedu.address.testutil.TestData;
 
 public class JsonAdaptedContactTest {
 
@@ -92,7 +92,7 @@ public class JsonAdaptedContactTest {
     @Test
     public void toModelType_invalidTags_throwsIllegalValueException() {
         List<JsonTag> invalidTags = new ArrayList<>(VALID_TAGS);
-        invalidTags.add(new JsonTag(INVALID_TAG));
+        invalidTags.add(new JsonTag(TestData.Invalid.Tag.UNDERSCORE_DASH));
         JsonAdaptedContact contact =
                 new JsonAdaptedContact(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_NOTE, invalidTags);
         assertThrows(IllegalValueException.class, contact::toModelType);

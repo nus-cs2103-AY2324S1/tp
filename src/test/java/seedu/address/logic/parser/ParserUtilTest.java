@@ -8,7 +8,6 @@ import static seedu.address.testutil.TestData.INDEX_FIRST_CONTACT;
 import static seedu.address.testutil.TestData.INVALID_EMAIL;
 import static seedu.address.testutil.TestData.INVALID_NAME;
 import static seedu.address.testutil.TestData.INVALID_PHONE;
-import static seedu.address.testutil.TestData.INVALID_TAG;
 import static seedu.address.testutil.TestData.VALID_EMAIL_AMY;
 import static seedu.address.testutil.TestData.VALID_NAME_AMY;
 import static seedu.address.testutil.TestData.VALID_NOTE_BOB;
@@ -147,7 +146,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseTag_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTag(INVALID_TAG));
+        assertThrows(ParseException.class, () -> ParserUtil.parseTag(TestData.Invalid.Tag.UNDERSCORE_DASH));
     }
 
     @Test
@@ -172,7 +171,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseTags_collectionWithInvalidTags_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTags(Arrays.asList(TestData.Valid.Tag.ALPHANUMERIC, INVALID_TAG)));
+        assertThrows(ParseException.class, () -> ParserUtil.parseTags(Arrays.asList(TestData.Valid.Tag.ALPHANUMERIC, TestData.Invalid.Tag.HASHTAG)));
     }
 
     @Test
