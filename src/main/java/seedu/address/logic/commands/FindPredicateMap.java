@@ -18,7 +18,7 @@ import seedu.address.model.person.Person;
 public class FindPredicateMap {
 
     /** Prefixes mapped to their respective predicates **/
-    private final Map<String, Predicate<Person>> map = new HashMap<>();
+    private final Map<Prefix, Predicate<Person>> map = new HashMap<>();
 
     /**
      * Associates the specified predicate value with {@code prefix} key in this map.
@@ -26,14 +26,14 @@ public class FindPredicateMap {
      * @param prefix prefix key with which the specified argument value is to be associated
      * @param predicateValue predicate value to be associated with the specified prefix key
      */
-    public void put(String prefix, Predicate<Person> predicateValue) {
+    public void put(Prefix prefix, Predicate<Person> predicateValue) {
         map.put(prefix, predicateValue);
     }
 
     /**
      * Returns the predicate value of {@code prefix}.
      */
-    public Optional<Predicate<Person>> getPredicateValue(String prefix) {
+    public Optional<Predicate<Person>> getPredicateValue(Prefix prefix) {
         return Optional.ofNullable(map.get(prefix));
     }
 
@@ -59,6 +59,15 @@ public class FindPredicateMap {
         }
 
         FindPredicateMap otherFindPredicateMap = (FindPredicateMap) other;
-        return this.map.equals(otherFindPredicateMap.map);
+
+        if (this.map.size() != otherFindPredicateMap.map.size()) {
+            return false;
+        }
+
+        boolean isHashMapEquals = this.map.equals(otherFindPredicateMap.map);
+        boolean isKeyValueEquals = this.map.keySet().stream()
+                .map(key -> otherFindPredicateMap.getPredicateValue(key).equals(this.getPredicateValue(key)))
+                .reduce(true, (x, y) -> x && y);
+        return isHashMapEquals || isKeyValueEquals;
     }
 }

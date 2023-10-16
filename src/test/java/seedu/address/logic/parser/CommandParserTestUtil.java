@@ -7,6 +7,7 @@ import java.util.function.Predicate;
 
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindPredicateMap;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonType;
@@ -79,17 +80,12 @@ public class CommandParserTestUtil {
      *
      */
     public static void assertParseFindSuccess(FindCommandParser parser,
-                                              String userInputArgs, Predicate<Person> expectedPredicate,
+                                              String userInputArgs, FindPredicateMap findPredicateMap,
                                               PersonType personType) {
         try {
             FindCommand command = parser.parse(personType, userInputArgs);
             assertEquals(command.getPersonType(), personType);
-            List<Person> testPersons = TypicalPersons.getTypicalPersons();
-            for (Person currPerson : testPersons) {
-                boolean actualRes = command.getPredicate().test(currPerson);
-                boolean expectedRes = expectedPredicate.test(currPerson);
-                assertEquals(expectedRes, actualRes);
-            }
+            assertEquals(command.getPredicate(), findPredicateMap);
         } catch (ParseException pe) {
             throw new IllegalArgumentException("Invalid userInput.", pe);
         }
