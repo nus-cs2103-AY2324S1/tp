@@ -8,13 +8,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Nric {
 
-    public static final String MESSAGE_CONSTRAINTS = "NRIC can take any values, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "NRIC must be in the format LNNNNNNNL, where L represents a letter and N represents a number.";
 
     /*
-     * The first character of the NRIC must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
+     * Validation regex for NRIC in the format LNNNNNNNL, where L represents a letter and N represents a number.
      */
-    public static final String VALIDATION_REGEX = "[^\\s].*";
+    public static final String VALIDATION_REGEX = "^[A-Za-z]\\d{6}[A-Za-z]$";
 
     public final String value;
 
@@ -55,7 +54,7 @@ public class Nric {
         }
 
         Nric otherNric = (Nric) other;
-        return value.equals(otherNric.value);
+        return value.equalsIgnoreCase((otherNric.value));
     }
 
     @Override
