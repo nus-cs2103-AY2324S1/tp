@@ -15,6 +15,9 @@ public class Tag {
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
+    /*
+     * Hashmap for keeping track of unique tags
+     */
     public static final Map<String, Tag> TAGS = new HashMap<>();
 
     public final String tagName;
@@ -32,11 +35,11 @@ public class Tag {
 
     /**
      * Factory method for creating {@code Tag},
-     * 
+     *
      * @param tagName A valid tag name.
      */
     public static Tag of(String tagName) {
-        if(TAGS.containsKey(tagName)) {
+        if (TAGS.containsKey(tagName)) {
             return TAGS.get(tagName);
         }
 

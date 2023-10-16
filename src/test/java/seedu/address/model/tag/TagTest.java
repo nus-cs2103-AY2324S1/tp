@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 public class TagTest {
     @Test
     public void factory_sameValue_sameInstance() {
-        boolean equal = Tag.of("tag") == Tag.of("tag"); 
+        boolean equal = Tag.of("tag") == Tag.of("tag");
         assertEquals(true, equal);
     }
 
