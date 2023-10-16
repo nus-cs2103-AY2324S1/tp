@@ -3,6 +3,7 @@ package seedu.staffsnap.model.applicant;
 import java.util.List;
 import java.util.function.Predicate;
 
+import seedu.staffsnap.commons.util.StringUtil;
 import seedu.staffsnap.commons.util.ToStringBuilder;
 
 /**
@@ -18,7 +19,7 @@ public class NameContainsKeywordsPredicate implements Predicate<Applicant> {
     @Override
     public boolean test(Applicant applicant) {
         return keywords.stream()
-                .anyMatch(keyword -> applicant.getName().fullName.toLowerCase().contains(keyword.toLowerCase()));
+                       .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(applicant.getName().fullName, keyword));
     }
 
     @Override
