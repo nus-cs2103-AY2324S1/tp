@@ -389,6 +389,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     1. Each team member must have their own appropriately named lowercase page file, as specified in the admin info.
     1. The page must be written to account for paged PDF conversion.
 1. Documentation must be built using Jekyll or MarkBind, then hosted via GitHub Pages, such that they are compatible with CS2103 grading scripts.
+1. Branches must not be deleted after their associated PRs have been merged, so that CS2103 grading scripts can detect that the correct workflow was used.
 
 ### Glossary
 
