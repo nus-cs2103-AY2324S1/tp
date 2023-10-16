@@ -155,8 +155,8 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
-            // Allowing this method to be called due to changes in implementation of AddCommand.execute();
-            return;
+            throw new AssertionError("This method should not be called.");
+
         }
     }
 
@@ -194,6 +194,11 @@ public class AddCommandTest {
         public void addPerson(Person person) {
             requireNonNull(person);
             personsAdded.add(person);
+        }
+        @Override
+        public void updateFilteredPersonList(Predicate<Person> predicate) {
+            // Allow this method to be called as AddCommand::execute now affects the filtered list.
+            return;
         }
 
         @Override
