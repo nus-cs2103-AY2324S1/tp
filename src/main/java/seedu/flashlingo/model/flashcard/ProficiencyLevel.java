@@ -62,4 +62,8 @@ public class ProficiencyLevel {
         return String.valueOf(this.level);
     }
 
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
 }
