@@ -18,7 +18,7 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList<Person> persons;
-    private final UniquePersonList<Member> memberList;
+    private final UniquePersonList<Member> members;
     private final UniquePersonList<Applicant> applicants;
 
     /*
@@ -28,13 +28,15 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
      *   among constructors.
      */
+
     {
         persons = new UniquePersonList<>();
-        memberList = new UniquePersonList<>();
+        members = new UniquePersonList<>();
         applicants = new UniquePersonList<>();
     }
 
-    public AddressBook() {}
+    public AddressBook() {
+    }
 
     /**
      * Creates an AddressBook using the Persons in the {@code toBeCopied}
@@ -107,7 +109,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public boolean hasMember(Member member) {
         requireNonNull(member);
-        return memberList.contains(member);
+        return members.contains(member);
     }
 
     /**
@@ -115,7 +117,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * The member must not already exist in the address book.
      */
     public void addMember(Member m) {
-        memberList.add(m);
+        members.add(m);
     }
 
     /**
@@ -125,7 +127,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setMember(Member target, Member editedMember) {
         requireNonNull(editedMember);
-        memberList.setPerson(target, editedMember);
+        members.setPerson(target, editedMember);
     }
 
     /**
@@ -133,13 +135,13 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code key} must exist in the address book.
      */
     public void removeMember(Member key) {
-        memberList.remove(key);
+        members.remove(key);
     }
 
     //// applicant-level methods
 
     /**
-     * Returns true if a applicant with the same identity as {@code applicant} exists in the address book.
+     * Returns true if an applicant with the same identity as {@code applicant} exists in the address book.
      */
     public boolean hasApplicant(Applicant applicant) {
         requireNonNull(applicant);
@@ -147,7 +149,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a applicant to the address book.
+     * Adds an applicant to the address book.
      * The applicant must not already exist in the address book.
      */
     public void addApplicant(Applicant a) {
@@ -179,7 +181,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("persons", persons)
-                .add("members", memberList)
+                .add("members", members)
                 .add("applicants", applicants)
                 .toString();
     }
@@ -191,7 +193,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public ObservableList<Member> getMemberList() {
-        return memberList.asUnmodifiableObservableList();
+        return members.asUnmodifiableObservableList();
     }
 
     @Override
@@ -212,7 +214,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         AddressBook otherAddressBook = (AddressBook) other;
         return persons.equals(otherAddressBook.persons)
-                && memberList.equals(otherAddressBook.memberList)
+                && members.equals(otherAddressBook.members)
                 && applicants.equals(otherAddressBook.applicants);
     }
 
