@@ -24,7 +24,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Creates an AddressBook using the Contacts in the {@code toBeCopied}
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
-        this();
         resetData(toBeCopied);
     }
 
