@@ -104,6 +104,7 @@ Format: `delete <INDEX>`
     - Numerical characters only
 
 
+
 ### Tag student to risk level 
 Tags a student with a risk level based on their current mental health status, categorizing them as high, medium, low tag_student <index> <RISK_LEVEL>
    
