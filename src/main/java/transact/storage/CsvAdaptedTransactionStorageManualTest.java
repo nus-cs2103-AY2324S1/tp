@@ -8,12 +8,13 @@ import java.util.Optional;
 import transact.commons.exceptions.DataLoadingException;
 import transact.model.ReadOnlyTransactionBook;
 import transact.model.TransactionBook;
-import transact.model.transaction.Expense;
-import transact.model.transaction.Revenue;
 import transact.model.transaction.Transaction;
 import transact.model.transaction.info.Amount;
+import transact.model.transaction.info.Date;
 import transact.model.transaction.info.Description;
 import transact.model.transaction.info.TransactionId;
+import transact.model.transaction.info.TransactionType;
+
 
 public class CsvAdaptedTransactionStorageManualTest {
     public static void main(String[] args) {
@@ -43,18 +44,18 @@ public class CsvAdaptedTransactionStorageManualTest {
     }
 
     private static ReadOnlyTransactionBook createTestTransactionBook() {
-        Transaction transaction1 = new Expense(new TransactionId("11111111"), new Description("Expense 1"),
-                new Amount(new BigDecimal("10.50")));
-        Transaction transaction2 = new Revenue(new TransactionId("22222222"), new Description("Revenue 1"),
-                new Amount(new BigDecimal("20.75")));
-        Transaction transaction3 = new Revenue(new TransactionId("2222222A"), new Description("Revenue 1"),
-                new Amount(new BigDecimal("20.75")));
-        Transaction transaction4 = new Expense(new TransactionId("22222E22"), new Description("E"),
-                new Amount(new BigDecimal("20.75")));
-        Transaction transaction5 = new Revenue(new TransactionId("22223E22"), new Description("Revenue 1"),
-                new Amount(new BigDecimal("20.75")));
-        Transaction transaction6 = new Expense(new TransactionId("23232R22"), new Description("E"),
-                new Amount(new BigDecimal("20.75")));
+        Transaction transaction1 = new Transaction(new TransactionId("11111111"), TransactionType.Revenue, new Description("Revenue 1"),
+                new Amount(new BigDecimal("10.50")), new Date());
+        Transaction transaction2 = new Transaction(new TransactionId("222222"), TransactionType.Expense, new Description("Expense 1"),
+                new Amount(new BigDecimal("21.50")), new Date());
+        Transaction transaction3 = new Transaction(new TransactionId("3333"), TransactionType.Revenue, new Description("Revenue 2"),
+                new Amount(new BigDecimal("10.50")), new Date());
+        Transaction transaction4 = new Transaction(new TransactionId("44444"), TransactionType.Expense, new Description("Expense 2"),
+                new Amount(new BigDecimal("25.21")), new Date());
+        Transaction transaction5 = new Transaction(new TransactionId("412312"), TransactionType.Revenue, new Description("Revenue 3"),
+                new Amount(new BigDecimal("31.1")), new Date());
+        Transaction transaction6 = new Transaction(new TransactionId("55555"), TransactionType.Expense, new Description("Expense 3"),
+                new Amount(new BigDecimal("21.02")), new Date());
 
         TransactionBook transactionBook = new TransactionBook();
         transactionBook.addTransaction(transaction1);

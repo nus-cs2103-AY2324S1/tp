@@ -24,7 +24,7 @@ import transact.model.transaction.info.Amount;
 import transact.model.transaction.info.Date;
 import transact.model.transaction.info.Description;
 import transact.model.transaction.info.TransactionId;
-import transact.model.transaction.info.Type;
+import transact.model.transaction.info.TransactionType;
 import transact.ui.MainWindow.TabWindow;
 
 
@@ -99,12 +99,12 @@ public class EditTransactionCommand extends Command {
     private static Transaction createEditedTransaction(Transaction transactionToEdit,
                                                   EditTransactionDescriptor editTransactionDescriptor) {
         assert transactionToEdit != null;
-        Type updatedType = editTransactionDescriptor.getType().orElse(transactionToEdit.getType());
+        TransactionType updatedTransactionType = editTransactionDescriptor.getType().orElse(transactionToEdit.getType());
         Description updatedDescription = editTransactionDescriptor.getDescription().orElse(transactionToEdit.getDescription());
         Amount updatedAmount = editTransactionDescriptor.getAmount().orElse(transactionToEdit.getAmount());
         Date updatedDate = editTransactionDescriptor.getDate().orElse(transactionToEdit.getDate());
         Person updatedStaff = editTransactionDescriptor.getStaff().orElse(transactionToEdit.getPerson());
-        return new Transaction(new TransactionId(), updatedType, updatedDescription,
+        return new Transaction(new TransactionId(), updatedTransactionType, updatedDescription,
                 updatedAmount, updatedDate, updatedStaff);
     }
 
@@ -139,7 +139,7 @@ public class EditTransactionCommand extends Command {
      */
     public static class EditTransactionDescriptor {
 
-        private Type type;
+        private TransactionType transactionType;
         private Description description;
         private Amount amount;
         private Date date;
@@ -153,7 +153,7 @@ public class EditTransactionCommand extends Command {
          * A defensive copy of {@code tags} is used internally.
          */
         public EditTransactionDescriptor(EditTransactionDescriptor toCopy) {
-            setType(toCopy.type);
+            setType(toCopy.transactionType);
             setDescription(toCopy.description);
             setAmount(toCopy.amount);
             setDate(toCopy.date);
@@ -164,16 +164,16 @@ public class EditTransactionCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(type, description, amount, date, staff);
+            return CollectionUtil.isAnyNonNull(transactionType, description, amount, date, staff);
         }
 
-        // Getter and Setter for 'type'
-        public Optional<Type> getType() {
-            return Optional.ofNullable(type);
+        // Getter and Setter for 'transactionType'
+        public Optional<TransactionType> getType() {
+            return Optional.ofNullable(transactionType);
         }
 
-        public void setType(Type type) {
-            this.type = type;
+        public void setType(TransactionType transactionType) {
+            this.transactionType = transactionType;
         }
 
         // Getter and Setter for 'description'
@@ -223,7 +223,7 @@ public class EditTransactionCommand extends Command {
             }
 
             EditTransactionDescriptor otherEditPersonDescriptor = (EditTransactionDescriptor) other;
-            return Objects.equals(type, otherEditPersonDescriptor.type)
+            return Objects.equals(transactionType, otherEditPersonDescriptor.transactionType)
                     && Objects.equals(description, otherEditPersonDescriptor.description)
                     && Objects.equals(amount, otherEditPersonDescriptor.amount)
                     && Objects.equals(date, otherEditPersonDescriptor.date)
@@ -233,7 +233,7 @@ public class EditTransactionCommand extends Command {
         @Override
         public String toString() {
             return new ToStringBuilder(this)
-                    .add("type", type)
+                    .add("type", transactionType)
                     .add("description", description)
                     .add("amount", amount)
                     .add("date", date)

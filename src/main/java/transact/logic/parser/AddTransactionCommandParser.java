@@ -17,7 +17,7 @@ import transact.model.transaction.info.Amount;
 import transact.model.transaction.info.Date;
 import transact.model.transaction.info.Description;
 import transact.model.transaction.info.TransactionId;
-import transact.model.transaction.info.Type;
+import transact.model.transaction.info.TransactionType;
 
 /**
  * Parses input arguments and creates a new AddStaffCommand object
@@ -57,7 +57,7 @@ public class AddTransactionCommandParser implements Parser<AddTransactionCommand
          * ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
          */
 
-        Transaction transaction = new Transaction(new TransactionId(), Type.R, new Description("Test Description"),
+        Transaction transaction = new Transaction(new TransactionId(), TransactionType.Revenue, new Description("Test Description"),
                 new Amount(10), new Date(), new Person(null, null, null, null, null));
 
         return new AddTransactionCommand(transaction);

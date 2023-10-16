@@ -8,7 +8,7 @@ import transact.model.transaction.info.Amount;
 import transact.model.transaction.info.Date;
 import transact.model.transaction.info.Description;
 import transact.model.transaction.info.TransactionId;
-import transact.model.transaction.info.Type;
+import transact.model.transaction.info.TransactionType;
 
 /**
  * A utility class to help with building Transaction objects.
@@ -78,6 +78,6 @@ public class TransactionBuilder {
     }
 
     public Transaction build() {
-        return new Transaction(id, Type.E, description, amount, new Date(), person);
+        return new Transaction(id, TransactionType.Expense, description, amount, new Date(), person);
     }
 }

@@ -11,7 +11,7 @@ import transact.model.transaction.info.Amount;
 import transact.model.transaction.info.Date;
 import transact.model.transaction.info.Description;
 import transact.model.transaction.info.TransactionId;
-import transact.model.transaction.info.Type;
+import transact.model.transaction.info.TransactionType;
 
 
 /**
@@ -25,7 +25,7 @@ public class Transaction implements Entry {
     private final Person person;
     private final Description description;
     private final Amount amount;
-    private final Type type;
+    private final TransactionType transactionType;
     private final Date date;
 
     /**
@@ -40,13 +40,13 @@ public class Transaction implements Entry {
      * @param amount
      *            The amount of the transaction.
      */
-    public Transaction(TransactionId transactionId, Type type, Description description, Amount amount, Date date,
+    public Transaction(TransactionId transactionId, TransactionType transactionType, Description description, Amount amount, Date date,
                        Person person) {
         this.transactionId = transactionId;
         this.person = person;
         this.description = description;
         this.amount = amount;
-        this.type = type;
+        this.transactionType = transactionType;
         this.date = date;
     }
 
@@ -60,13 +60,13 @@ public class Transaction implements Entry {
      * @param amount
      *            The amount of the transaction.
      */
-    public Transaction(TransactionId transactionId, Type type, Description description, Amount amount, Date date) {
+    public Transaction(TransactionId transactionId, TransactionType transactionType, Description description, Amount amount, Date date) {
         this.transactionId = transactionId;
         this.description = description;
         this.amount = amount;
         this.person = null;
         this.date = date;
-        this.type = type;
+        this.transactionType = transactionType;
     }
 
     public TransactionId getTransactionId() {
@@ -94,8 +94,8 @@ public class Transaction implements Entry {
         return new Date();
     }
 
-    public Type getType() {
-        return type;
+    public TransactionType getType() {
+        return transactionType;
     }
     @Override
     public boolean equals(Object o) {

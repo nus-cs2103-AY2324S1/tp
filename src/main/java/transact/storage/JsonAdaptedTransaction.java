@@ -12,7 +12,7 @@ import transact.model.transaction.info.Amount;
 import transact.model.transaction.info.Date;
 import transact.model.transaction.info.Description;
 import transact.model.transaction.info.TransactionId;
-import transact.model.transaction.info.Type;
+import transact.model.transaction.info.TransactionType;
 
 
 /**
@@ -54,11 +54,11 @@ class JsonAdaptedTransaction {
             final Person modelPerson = person.toModelType();
             final Description modelDescription = new Description(description);
             final Amount modelAmount = new Amount(amount);
-            return new Transaction(modelTransactionId, Type.I, modelDescription, modelAmount, new Date(), modelPerson);
+            return new Transaction(modelTransactionId, TransactionType.Revenue, modelDescription, modelAmount, new Date(), modelPerson);
         } else {
             final Description modelDescription = new Description(description);
             final Amount modelAmount = new Amount(amount);
-            return new Transaction(modelTransactionId, Type.I, modelDescription, modelAmount, new Date());
+            return new Transaction(modelTransactionId, TransactionType.Expense, modelDescription, modelAmount, new Date());
         }
     }
 }

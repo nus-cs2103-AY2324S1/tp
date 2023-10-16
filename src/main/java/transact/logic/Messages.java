@@ -56,7 +56,7 @@ public class Messages {
         final StringBuilder builder = new StringBuilder();
         builder.append(transaction.getTransactionId())
                 // TODO add back in when we have type, date, and have a reference to person
-                // .append("; Type: ")
+                // .append("; TransactionType: ")
                 // .append(transaction.getType())
                 .append("; Description: ")
                 .append(transaction.getDescription())

@@ -7,7 +7,7 @@ import transact.model.transaction.info.Amount;
 import transact.model.transaction.info.Date;
 import transact.model.transaction.info.Description;
 import transact.model.transaction.info.TransactionId;
-import transact.model.transaction.info.Type;
+import transact.model.transaction.info.TransactionType;
 
 public class TransactionManualTest {
     public static void main(String[] args) {
@@ -27,7 +27,7 @@ public class TransactionManualTest {
         System.out.print("Enter Address: ");
         String addressInput = scanner.nextLine();
 
-        System.out.print("Enter Type: ");
+        System.out.print("Enter TransactionType: ");
         String typeInput = scanner.nextLine();
 
         System.out.print("Enter Description: ");
@@ -49,10 +49,10 @@ public class TransactionManualTest {
                 new java.util.HashSet<>());
         Description description = new Description(descriptionInput);
         Amount amount = new Amount(amountInput);
-        Type type = Type.getType(typeInput);
+        TransactionType transactionType = TransactionType.getType(typeInput);
 
         // Create a Transaction object
-        Transaction transaction = new Transaction(transactionId, type, description, amount, new Date(), person);
+        Transaction transaction = new Transaction(transactionId, transactionType, description, amount, new Date(), person);
 
         // Print Transaction information for verification
         System.out.println("\nTransaction Information:");

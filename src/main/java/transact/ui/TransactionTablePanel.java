@@ -28,7 +28,7 @@ public class TransactionTablePanel extends UiPart<Region> {
         TableColumn<Transaction, String> idCol = new TableColumn<>("Id");
         idCol.setCellValueFactory(new PropertyValueFactory<Transaction, String>("transactionId"));
         // TODO Switch to enum when transaction class is implemented
-        // TableColumn<Transaction, String> typeCol = new TableColumn<>("Type");
+        // TableColumn<Transaction, String> typeCol = new TableColumn<>("TransactionType");
         // typeCol.setCellValueFactory(new PropertyValueFactory<Transaction, String>("type"));
 
         // TODO Need add date to transaction class

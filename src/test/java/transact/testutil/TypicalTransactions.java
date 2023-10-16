@@ -8,24 +8,24 @@ import transact.model.transaction.info.Amount;
 import transact.model.transaction.info.Date;
 import transact.model.transaction.info.Description;
 import transact.model.transaction.info.TransactionId;
-import transact.model.transaction.info.Type;
+import transact.model.transaction.info.TransactionType;
 
 /**
  * A utility class containing a list of {@code Transaction} objects to be used in
  * tests.
  */
 public class TypicalTransactions {
-    public static final Transaction APPLES = new Transaction(new TransactionId(), Type.E, new Description("Apples"),
+    public static final Transaction APPLES = new Transaction(new TransactionId(), TransactionType.Expense, new Description("Apples"),
             new Amount(1.50), new Date(), ALICE);
-    public static final Transaction BANANAS = new Transaction(new TransactionId(), Type.E, new Description("Bananas"),
+    public static final Transaction BANANAS = new Transaction(new TransactionId(), TransactionType.Expense, new Description("Bananas"),
             new Amount(1.50), new Date());
-    public static final Transaction CARROTS = new Transaction(new TransactionId(), Type.E, new Description("Carrots"),
+    public static final Transaction CARROTS = new Transaction(new TransactionId(), TransactionType.Expense, new Description("Carrots"),
             new Amount(1.50), new Date());
-    public static final Transaction DATES = new Transaction(new TransactionId(), Type.E, new Description("Dates"),
+    public static final Transaction DATES = new Transaction(new TransactionId(), TransactionType.Expense, new Description("Dates"),
             new Amount(4.50), new Date());
-    public static final Transaction EGGS = new Transaction(new TransactionId(), Type.E, new Description("Eggs"),
+    public static final Transaction EGGS = new Transaction(new TransactionId(), TransactionType.Expense, new Description("Eggs"),
             new Amount(5.00), new Date());
-    public static final Transaction FISH = new Transaction(new TransactionId(), Type.I, new Description("Fish"),
+    public static final Transaction FISH = new Transaction(new TransactionId(), TransactionType.Revenue, new Description("Fish"),
             new Amount(6.50), new Date());
 
     /**

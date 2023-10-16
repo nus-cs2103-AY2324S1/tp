@@ -18,7 +18,7 @@ import transact.model.tag.Tag;
 import transact.model.transaction.info.Amount;
 import transact.model.transaction.info.Date;
 import transact.model.transaction.info.Description;
-import transact.model.transaction.info.Type;
+import transact.model.transaction.info.TransactionType;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser
@@ -138,19 +138,19 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String type} into a {@code Type}.
+     * Parses a {@code String type} into a {@code TransactionType}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException
      *             if the given {@code type} is invalid.
      */
-    public static Type parseType(String type) throws ParseException {
+    public static TransactionType parseType(String type) throws ParseException {
         requireNonNull(type);
         String trimmedType = type.trim();
-        if (!Type.isValidType(trimmedType)) {
-            throw new ParseException(Type.MESSAGE_CONSTRAINTS);
+        if (!TransactionType.isValidType(trimmedType)) {
+            throw new ParseException(TransactionType.MESSAGE_CONSTRAINTS);
         }
-        return Type.getType(trimmedType);
+        return TransactionType.getType(trimmedType);
     }
 
     /**
