@@ -17,13 +17,13 @@ import transact.model.transaction.info.TransactionId;
  */
 class JsonAdaptedTransaction {
 
-    private final String transactionId;
+    private final Integer transactionId;
     private final JsonAdaptedPerson person;
     private final String description;
     private final BigDecimal amount;
 
     @JsonCreator
-    public JsonAdaptedTransaction(@JsonProperty("transactionId") String transactionId,
+    public JsonAdaptedTransaction(@JsonProperty("transactionId") Integer transactionId,
             @JsonProperty("person") JsonAdaptedPerson person,
             @JsonProperty("description") String description,
             @JsonProperty("amount") BigDecimal amount) {

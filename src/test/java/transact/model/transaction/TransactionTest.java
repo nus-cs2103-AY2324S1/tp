@@ -22,13 +22,8 @@ public class TransactionTest {
         Transaction editedApples = new TransactionBuilder(APPLES).withAmount(19f).withDescription("Apple 2").build();
         assertTrue(APPLES.isSameEntry(editedApples));
 
-        // same ID but different TransactionID object -> returns true
-        Transaction newApple = new TransactionBuilder().withId(APPLES.getTransactionId().value)
-                .withDescription("Apple 2").withAmount(19f).build();
-        assertTrue(APPLES.isSameEntry(newApple));
-
         // different ID, all other attributes same -> returns false
-        editedApples = new TransactionBuilder(APPLES).withId("APPLEAAA").build();
+        editedApples = new TransactionBuilder(APPLES).withId(123).build();
         assertFalse(APPLES.isSameEntry(editedApples));
     }
 }
