@@ -9,7 +9,7 @@ import static transact.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.Set;
 
 import transact.logic.commands.AddStaffCommand;
-import transact.logic.commands.EditCommand.EditPersonDescriptor;
+import transact.logic.commands.EditStaffCommand.EditPersonDescriptor;
 import transact.model.person.Person;
 import transact.model.tag.Tag;
 

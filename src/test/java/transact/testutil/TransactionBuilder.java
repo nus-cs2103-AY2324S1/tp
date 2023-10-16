@@ -5,15 +5,17 @@ import static transact.testutil.TypicalPersons.ALICE;
 import transact.model.person.Person;
 import transact.model.transaction.Transaction;
 import transact.model.transaction.info.Amount;
+import transact.model.transaction.info.Date;
 import transact.model.transaction.info.Description;
 import transact.model.transaction.info.TransactionId;
+import transact.model.transaction.info.TransactionType;
 
 /**
  * A utility class to help with building Transaction objects.
  */
 public class TransactionBuilder {
 
-    public static final String DEFAULT_ID = "AAAAAAAA";
+    public static final Integer DEFAULT_ID = 0;
     public static final String DEFAULT_DESC = "Shibas";
     public static final float DEFAULT_AMOUNT = 10.34f;
     public static final Person DEFAULT_PERSON = ALICE;
@@ -34,7 +36,8 @@ public class TransactionBuilder {
     }
 
     /**
-     * Initializes the TransactionBuilder with the data of {@code transactionToCopy}.
+     * Initializes the TransactionBuilder with the data of
+     * {@code transactionToCopy}.
      */
     public TransactionBuilder(Transaction transactionToCopy) {
         id = transactionToCopy.getTransactionId();
@@ -50,7 +53,7 @@ public class TransactionBuilder {
     /**
      * Sets the {@code id} of the {@code Transaction} that we are building.
      */
-    public TransactionBuilder withId(String id) {
+    public TransactionBuilder withId(Integer id) {
         this.id = new TransactionId(id);
         return this;
     }
@@ -76,6 +79,6 @@ public class TransactionBuilder {
     }
 
     public Transaction build() {
-        return new Transaction(id, person, description, amount);
+        return new Transaction(id, TransactionType.EXPENSE, description, amount, new Date(), person);
     }
 }

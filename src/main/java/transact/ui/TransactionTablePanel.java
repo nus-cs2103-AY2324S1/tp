@@ -7,6 +7,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Region;
 import transact.model.transaction.Transaction;
+import transact.model.transaction.info.Amount;
+import transact.model.transaction.info.Date;
+import transact.model.transaction.info.Description;
+import transact.model.transaction.info.TransactionType;
 
 /**
  * Panel containing the table of transactions.
@@ -25,25 +29,24 @@ public class TransactionTablePanel extends UiPart<Region> {
     public TransactionTablePanel(ObservableList<Transaction> transactionList) {
         super(FXML);
 
-        TableColumn<Transaction, String> idCol = new TableColumn<>("Id");
-        idCol.setCellValueFactory(new PropertyValueFactory<Transaction, String>("transactionId"));
-        // TODO Switch to enum when transaction class is implemented
-        // TableColumn<Transaction, String> typeCol = new TableColumn<>("Type");
-        // typeCol.setCellValueFactory(new PropertyValueFactory<Transaction, String>("type"));
+        TableColumn<Transaction, Integer> idCol = new TableColumn<>("Id");
+        idCol.setCellValueFactory(new PropertyValueFactory<Transaction, Integer>("transactionId"));
 
-        // TODO Need add date to transaction class
-        // TableColumn<Transaction, Date> dateCol = new TableColumn<>("Date");
-        // dateCol.setCellValueFactory(new PropertyValueFactory<Transaction, Date>("id"));
+        TableColumn<Transaction, TransactionType> typeCol = new TableColumn<>("Type");
+        typeCol.setCellValueFactory(new PropertyValueFactory<Transaction, TransactionType>("transactionType"));
 
-        TableColumn<Transaction, String> descCol = new TableColumn<>("Description");
-        descCol.setCellValueFactory(new PropertyValueFactory<Transaction, String>("description"));
+        TableColumn<Transaction, Date> dateCol = new TableColumn<>("Date");
+        dateCol.setCellValueFactory(new PropertyValueFactory<Transaction, Date>("date"));
 
-        TableColumn<Transaction, Integer> amtCol = new TableColumn<>("Amount");
-        amtCol.setCellValueFactory(new PropertyValueFactory<Transaction, Integer>("amount"));
+        TableColumn<Transaction, Description> descCol = new TableColumn<>("Description");
+        descCol.setCellValueFactory(new PropertyValueFactory<Transaction, Description>("description"));
+
+        TableColumn<Transaction, Amount> amtCol = new TableColumn<>("Amount");
+        amtCol.setCellValueFactory(new PropertyValueFactory<Transaction, Amount>("amount"));
 
         // TableColumn<Transaction, Integer> staffCol = new TableColumn<>("Staff");
 
-        transactionTable.getColumns().setAll(idCol, descCol, amtCol);
+        transactionTable.getColumns().setAll(idCol, typeCol, dateCol, descCol, amtCol);
 
         transactionTable.setItems(transactionList);
     }

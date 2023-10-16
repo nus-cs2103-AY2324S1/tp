@@ -17,12 +17,15 @@ import com.opencsv.exceptions.CsvValidationException;
 import transact.commons.exceptions.DataLoadingException;
 import transact.model.ReadOnlyTransactionBook;
 import transact.model.TransactionBook;
-import transact.model.transaction.Expense;
-import transact.model.transaction.Revenue;
 import transact.model.transaction.Transaction;
+
+/*
 import transact.model.transaction.info.Amount;
 import transact.model.transaction.info.Description;
 import transact.model.transaction.info.TransactionId;
+import transact.model.transaction.info.TransactionType;
+ */
+
 
 /**
  * A class to access TransactionBook data stored as a csv file on the hard disk.
@@ -64,23 +67,12 @@ public class CsvAdaptedTransactionStorage implements TransactionBookStorage {
                     String description = row[3];
                     BigDecimal amount = new BigDecimal(row[4]).setScale(2, RoundingMode.HALF_UP);
 
-                    // TODO Read in optional staff when ready
-                    Transaction transaction;
-                    switch (category) {
-                    case "Expense":
-                        transaction = new Expense(new TransactionId(transactionId), new Description(description),
-                                new Amount(amount));
-                        break;
-                    case "Revenue":
-                        transaction = new Revenue(new TransactionId(transactionId), new Description(description),
-                                new Amount(amount));
-                        break;
-                    default:
-                        // TODO Throw/Print an error
-                        continue;
+                    /* TODO Read in optional staff when ready
+                    Transaction transaction = new Transaction(transactionId, TransactionType.R, )
                     }
 
                     transactions.addTransaction(transaction);
+                     */
                 }
             } catch (CsvValidationException e) {
                 throw new RuntimeException(e);
@@ -103,7 +95,7 @@ public class CsvAdaptedTransactionStorage implements TransactionBookStorage {
 
             for (Transaction transaction : transactions) {
                 String transactionId = transaction.getTransactionId().toString();
-                String category = (transaction instanceof Expense) ? "Expense" : "Revenue";
+                String category = (transaction instanceof Transaction) ? "Expense" : "Revenue";
                 String person = (transaction.hasPersonInfo()) ? transaction.getPerson().toString() : "";
                 String description = transaction.getDescription().toString();
                 String amount = transaction.getAmount().toString();
@@ -130,7 +122,7 @@ public class CsvAdaptedTransactionStorage implements TransactionBookStorage {
 
             for (Transaction transaction : transactions) {
                 String transactionId = transaction.getTransactionId().toString();
-                String category = (transaction instanceof Expense) ? "Expense" : "Revenue";
+                String category = (transaction instanceof Transaction) ? "Expense" : "Revenue";
                 String person = (transaction.hasPersonInfo()) ? transaction.getPerson().toString() : "";
                 String description = transaction.getDescription().toString();
                 String amount = transaction.getAmount().toString();

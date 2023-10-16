@@ -4,8 +4,10 @@ import java.util.Scanner;
 
 import transact.model.person.Person;
 import transact.model.transaction.info.Amount;
+import transact.model.transaction.info.Date;
 import transact.model.transaction.info.Description;
 import transact.model.transaction.info.TransactionId;
+import transact.model.transaction.info.TransactionType;
 
 public class TransactionManualTest {
     public static void main(String[] args) {
@@ -25,11 +27,19 @@ public class TransactionManualTest {
         System.out.print("Enter Address: ");
         String addressInput = scanner.nextLine();
 
+        System.out.print("Enter TransactionType: ");
+        String typeInput = scanner.nextLine();
+
         System.out.print("Enter Description: ");
         String descriptionInput = scanner.nextLine();
 
         System.out.print("Enter Amount: ");
         double amountInput = Double.parseDouble(scanner.nextLine());
+
+        System.out.print("Enter Date: ");
+        String dateInput = scanner.nextLine();
+
+
 
         TransactionId transactionId = new TransactionId();
         Person person = new Person(new transact.model.person.Name(personNameInput),
@@ -39,9 +49,10 @@ public class TransactionManualTest {
                 new java.util.HashSet<>());
         Description description = new Description(descriptionInput);
         Amount amount = new Amount(amountInput);
+        TransactionType transactionType = TransactionType.getType(typeInput);
 
         // Create a Transaction object
-        Transaction transaction = new Transaction(transactionId, person, description, amount);
+        Transaction transaction = new Transaction(transactionId, transactionType, description, amount, new Date(), person);
 
         // Print Transaction information for verification
         System.out.println("\nTransaction Information:");

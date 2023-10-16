@@ -3,53 +3,79 @@ package transact.model.transaction.info;
 import static java.util.Objects.requireNonNull;
 import static transact.commons.util.AppUtil.checkArgument;
 
-import transact.commons.util.StringUtil;
+import java.util.TreeSet;
 
 /**
  * Represents a unique transaction ID in the system.
- * Guarantees: immutable; is valid as declared in
- * {@link #isValidTransactionId(String)}
+ * Guarantees: immutable; is valid as declared in constructors
  */
 public class TransactionId {
 
-    public static final String MESSAGE_CONSTRAINTS = "Transaction ID should be an 8-character alphanumeric string";
-    public static final String VALIDATION_REGEX = "[A-Za-z0-9]{8}";
-    public final String value;
-    public final int transactionIdLength = 8;
+    public static final String MESSAGE_CONSTRAINTS = "Transaction ID should be a unique number";
+    public static final String VALIDATION_REGEX = "^\\d+$";
+
+    private static TreeSet<Integer> usedIds = new TreeSet<>();
+
+    public final Integer value;
 
     /**
      * Constructs a {@code TransactionId}.
      *
      */
     public TransactionId() {
-        value = StringUtil.generateRandomString(transactionIdLength);
-        requireNonNull(value);
-        checkArgument(isValidTransactionId(value), MESSAGE_CONSTRAINTS);
+        this(usedIds.isEmpty() ? 0 : usedIds.last() + 1);
+    }
+
+    /**
+     * Constructs a {@code TransactionId} with specified {@code id}
+     */
+    public TransactionId(Integer id) {
+        requireNonNull(id);
+        checkArgument(isValidTransactionId(id), MESSAGE_CONSTRAINTS);
+        value = id;
+        usedIds.add(value);
     }
 
     /**
      * Constructs a {@code TransactionId} with specified {@code id}
      */
     public TransactionId(String id) {
-        requireNonNull(id);
-        checkArgument(isValidTransactionId(id), MESSAGE_CONSTRAINTS);
-        value = id;
+        this(parseTransactionId(id));
     }
 
     /**
-     * Returns true if a given string is a valid transaction ID.
+     * Parse transaction ID from string.
      */
-    public static boolean isValidTransactionId(String test) {
-        return test.matches(VALIDATION_REGEX);
+    public static Integer parseTransactionId(String test) {
+        checkArgument(test.matches(VALIDATION_REGEX), MESSAGE_CONSTRAINTS);
+        return Integer.parseInt(test);
+    }
+
+    /**
+     * Returns true if a given integer is a valid transaction ID.
+     */
+    public static boolean isValidTransactionId(Integer test) {
+        return !usedIds.contains(test);
+    }
+
+    /**
+     * Free up {@code usedId}, allowing it to be used when transaction object is
+     * deleted
+     *
+     * @param usedId
+     *            Id that will not be used anymore
+     */
+    public static void freeUsedTransactionIds(Integer usedId) {
+        usedIds.remove(usedId);
+    }
+
+    public Integer getValue() {
+        return value;
     }
 
     @Override
     public String toString() {
-        return value;
-    }
-
-    public String getValue() {
-        return value;
+        return value.toString();
     }
 
     @Override

@@ -6,7 +6,17 @@ import static java.util.Objects.requireNonNull;
  * Description can be changed.
  */
 public class Description {
+
+    /*
+     * The first character of the address must not be a whitespace,
+     * otherwise " " (a blank string) becomes a valid input.
+     */
+    public static final String VALIDATION_REGEX = "[^\\s].*";
+
+    public static final String MESSAGE_CONSTRAINTS = "Descriptions can take any values, and it should not be blank";
     private final String value;
+
+
 
     /**
      * Constructs a {@code Description}.
@@ -45,6 +55,10 @@ public class Description {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    public static boolean isValidDescription(String description) {
+        return description.matches(VALIDATION_REGEX);
     }
 }
 
