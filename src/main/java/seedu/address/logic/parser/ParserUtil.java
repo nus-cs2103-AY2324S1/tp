@@ -99,7 +99,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String bankAccount} into a {@code BankAccount}.
+     * Parses a {@code String bankAccount} into an {@code BankAccount}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code bankAccount} is invalid.
@@ -114,7 +114,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String joinDate} into a {@code JoinDate}.
+     * Parses a {@code String joinDate} into an {@code JoinDate}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code joinDate} is invalid.
@@ -122,14 +122,14 @@ public class ParserUtil {
     public static JoinDate parseJoinDate(String joinDate) throws ParseException {
         requireNonNull(joinDate);
         String trimmedJoinDate = joinDate.trim();
-        if (!Name.isValidName(trimmedJoinDate)) {
+        if (!JoinDate.isValidJoinDate(trimmedJoinDate)) {
             throw new ParseException(JoinDate.MESSAGE_CONSTRAINTS);
         }
         return new JoinDate(trimmedJoinDate);
     }
 
     /**
-     * Parses a {@code String salary} into a {@code Salary}.
+     * Parses a {@code String salary} into an {@code Salary}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code salary} is invalid.
@@ -138,13 +138,13 @@ public class ParserUtil {
         requireNonNull(salary);
         String trimmedSalary = salary.trim();
         if (!Salary.isValidSalary(trimmedSalary)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Salary.MESSAGE_CONSTRAINTS);
         }
         return new Salary(trimmedSalary);
     }
 
     /**
-     * Parses a {@code String annualLeave} into a {@code AnnualLeave}.
+     * Parses a {@code String annualLeave} into an {@code AnnualLeave}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code annualLeave} is invalid.
@@ -152,8 +152,8 @@ public class ParserUtil {
     public static AnnualLeave parseAnnualLeave(String annualLeave) throws ParseException {
         requireNonNull(annualLeave);
         String trimmedAnnualLeave = annualLeave.trim();
-        if (!Name.isValidName(trimmedAnnualLeave)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        if (!AnnualLeave.isValidAnnualLeave(trimmedAnnualLeave)) {
+            throw new ParseException(AnnualLeave.MESSAGE_CONSTRAINTS);
         }
         return new AnnualLeave(trimmedAnnualLeave);
     }

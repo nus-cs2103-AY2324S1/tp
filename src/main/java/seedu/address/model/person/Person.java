@@ -73,6 +73,7 @@ public class Person {
         return annualLeave;
     }
 
+
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
@@ -83,7 +84,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+            && otherPerson.getName().equals(getName());
     }
 
     /**
@@ -131,5 +132,4 @@ public class Person {
                 .add("annualLeave", annualLeave)
                 .toString();
     }
-
 }

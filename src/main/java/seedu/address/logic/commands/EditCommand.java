@@ -2,9 +2,13 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ANNUAL_LEAVE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BANK_ACCOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_JOIN_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
@@ -17,6 +21,10 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.employee.AnnualLeave;
+import seedu.address.model.employee.BankAccount;
+import seedu.address.model.employee.JoinDate;
+import seedu.address.model.employee.Salary;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.AnnualLeave;
 import seedu.address.model.person.BankAccount;
@@ -28,41 +36,45 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Salary;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing employee in the list.
  */
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the employee identified "
+            + "by the index number used in the displayed employee list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_BANK_ACCOUNT + "BANK_ACCOUNT]"
+            + "[" + PREFIX_JOIN_DATE + "JOIN_DATE]"
+            + "[" + PREFIX_SALARY + "SALARY]"
+            + "[" + PREFIX_ANNUAL_LEAVE + "ANNUAL_LEAVE]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Employee: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This employee already exists in the list.";
 
     private final Index index;
-    private final EditPersonDescriptor editPersonDescriptor;
+    private final EditEmployeeDescriptor editEmployeeDescriptor;
 
     /**
-     * @param index                of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param index of the employee in the filtered employee list to edit
+     * @param editEmployeeDescriptor details to edit the employee with
      */
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+    public EditCommand(Index index, EditEmployeeDescriptor editEmployeeDescriptor) {
         requireNonNull(index);
-        requireNonNull(editPersonDescriptor);
+        requireNonNull(editEmployeeDescriptor);
 
         this.index = index;
-        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.editEmployeeDescriptor = new EditEmployeeDescriptor(editEmployeeDescriptor);
     }
 
     @Override
@@ -74,36 +86,40 @@ public class EditCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        Person employeeToEdit = lastShownList.get(index.getZeroBased());
+        Person editedEmployee = createEditedEmployee(employeeToEdit, editEmployeeDescriptor);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+        if (!employeeToEdit.isSamePerson(editedEmployee) && model.hasPerson(editedEmployee)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.setPerson(personToEdit, editedPerson);
+        model.setPerson(employeeToEdit, editedEmployee);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedEmployee)));
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns an {@code Employee} with the details of {@code employeeToEdit}
+     * edited with {@code editEmployeeDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
-        assert personToEdit != null;
+    private static Person createEditedEmployee(Person employeeToEdit, EditEmployeeDescriptor editEmployeeDescriptor) {
+        assert employeeToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        BankAccount updatedBankAccount = editPersonDescriptor.getBankAccount().orElse(personToEdit.getBankAccount());
-        JoinDate updatedJoinDate = editPersonDescriptor.getJoinDate().orElse(personToEdit.getJoinDate());
-        Salary updatedSalary = editPersonDescriptor.getSalary().orElse(personToEdit.getSalary());
-        AnnualLeave updatedAnnualLeave = editPersonDescriptor.getAnnualLeave().orElse(personToEdit.getAnnualLeave());
+        Name updatedName = editEmployeeDescriptor.getName().orElse(employeeToEdit.getName());
+        Phone updatedPhone = editEmployeeDescriptor.getPhone().orElse(employeeToEdit.getPhone());
+        Email updatedEmail = editEmployeeDescriptor.getEmail().orElse(employeeToEdit.getEmail());
+        Address updatedAddress = editEmployeeDescriptor.getAddress().orElse(employeeToEdit.getAddress());
+        BankAccount updatedBankAccount = editEmployeeDescriptor.getBankAccount().
+            orElse(employeeToEdit.getBankAccount());
+        JoinDate updatedJoinDate = editEmployeeDescriptor.getJoinDate().
+            orElse(employeeToEdit.getJoinDate());
+        Salary updatedSalary = editEmployeeDescriptor.getSalary().
+            orElse(employeeToEdit.getSalary());
+        AnnualLeave updatedAnnualLeave = editEmployeeDescriptor.getAnnualLeave().
+            orElse(employeeToEdit.getAnnualLeave());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedBankAccount, updatedJoinDate,
-                updatedSalary, updatedAnnualLeave);
+            updatedSalary, updatedAnnualLeave);
     }
 
     @Override
@@ -119,55 +135,52 @@ public class EditCommand extends Command {
 
         EditCommand otherEditCommand = (EditCommand) other;
         return index.equals(otherEditCommand.index)
-                && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
+                && editEmployeeDescriptor.equals(otherEditCommand.editEmployeeDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("index", index)
-                .add("editPersonDescriptor", editPersonDescriptor)
+                .add("editEmployeeDescriptor", editEmployeeDescriptor)
                 .toString();
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will
-     * replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the employee with. Each non-empty field value will replace the
+     * corresponding field value of the employee.
      */
-    public static class EditPersonDescriptor {
+    public static class EditEmployeeDescriptor {
         private Name name;
         private Phone phone;
         private Email email;
         private Address address;
+        private AnnualLeave annualLeave;
         private BankAccount bankAccount;
         private JoinDate joinDate;
         private Salary salary;
-        private AnnualLeave annualLeave;
 
-        public EditPersonDescriptor() {
-        }
+        public EditEmployeeDescriptor() {}
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
          */
-        public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+        public EditEmployeeDescriptor(EditEmployeeDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
+            setAnnualLeave(toCopy.annualLeave);
             setBankAccount(toCopy.bankAccount);
             setJoinDate(toCopy.joinDate);
             setSalary(toCopy.salary);
-            setAnnualLeave(toCopy.annualLeave);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, bankAccount, joinDate, salary, annualLeave);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, annualLeave, bankAccount, joinDate, salary);
         }
 
         public void setName(Name name) {
@@ -241,19 +254,19 @@ public class EditCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditPersonDescriptor)) {
+            if (!(other instanceof EditEmployeeDescriptor)) {
                 return false;
             }
 
-            EditPersonDescriptor otherEditPersonDescriptor = (EditPersonDescriptor) other;
-            return Objects.equals(name, otherEditPersonDescriptor.name)
-                    && Objects.equals(phone, otherEditPersonDescriptor.phone)
-                    && Objects.equals(email, otherEditPersonDescriptor.email)
-                    && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(bankAccount, otherEditPersonDescriptor.bankAccount)
-                    && Objects.equals(joinDate, otherEditPersonDescriptor.joinDate)
-                    && Objects.equals(salary, otherEditPersonDescriptor.salary)
-                    && Objects.equals(annualLeave, otherEditPersonDescriptor.annualLeave);
+            EditEmployeeDescriptor otherEditEmployeeDescriptor = (EditEmployeeDescriptor) other;
+            return Objects.equals(name, otherEditEmployeeDescriptor.name)
+                    && Objects.equals(phone, otherEditEmployeeDescriptor.phone)
+                    && Objects.equals(email, otherEditEmployeeDescriptor.email)
+                    && Objects.equals(address, otherEditEmployeeDescriptor.address)
+                    && Objects.equals(bankAccount, otherEditEmployeeDescriptor.bankAccount)
+                    && Objects.equals(joinDate, otherEditEmployeeDescriptor.joinDate)
+                    && Objects.equals(salary, otherEditEmployeeDescriptor.salary)
+                    && Objects.equals(annualLeave, otherEditEmployeeDescriptor.annualLeave);
         }
 
         @Override
