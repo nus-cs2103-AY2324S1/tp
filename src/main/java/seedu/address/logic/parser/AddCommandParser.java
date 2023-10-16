@@ -2,10 +2,10 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ANNUALLEAVE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_BANKACCOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ANNUAL_LEAVE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BANK_ACCOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_JOINDATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_JOIN_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
@@ -32,12 +32,11 @@ public class AddCommandParser implements Parser<AddCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
-     * 
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_ADDRESS, PREFIX_BANKACCOUNT, PREFIX_JOINDATE, PREFIX_SALARY, PREFIX_SALARY);
+                PREFIX_ADDRESS, PREFIX_BANK_ACCOUNT, PREFIX_JOIN_DATE, PREFIX_SALARY, PREFIX_SALARY);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -49,10 +48,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        BankAccount bankAccount = ParserUtil.parseBankAccount(argMultimap.getValue(PREFIX_BANKACCOUNT).get());
-        JoinDate joinDate = ParserUtil.parseJoinDate(argMultimap.getValue(PREFIX_JOINDATE).get());
+        BankAccount bankAccount = ParserUtil.parseBankAccount(argMultimap.getValue(PREFIX_BANK_ACCOUNT).get());
+        JoinDate joinDate = ParserUtil.parseJoinDate(argMultimap.getValue(PREFIX_JOIN_DATE).get());
         Salary salary = ParserUtil.parseSalary(argMultimap.getValue(PREFIX_SALARY).get());
-        AnnualLeave annualLeave = ParserUtil.parseAnnualLeave(argMultimap.getValue(PREFIX_ANNUALLEAVE).get());
+        AnnualLeave annualLeave = ParserUtil.parseAnnualLeave(argMultimap.getValue(PREFIX_ANNUAL_LEAVE).get());
 
         Person person = new Person(name, phone, email, address, bankAccount, joinDate, salary, annualLeave);
 

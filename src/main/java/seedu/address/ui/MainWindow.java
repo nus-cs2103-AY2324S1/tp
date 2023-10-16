@@ -169,6 +169,7 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList(), fieldToRead);
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
     }
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
     }

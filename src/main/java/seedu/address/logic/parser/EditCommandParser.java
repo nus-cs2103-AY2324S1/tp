@@ -3,10 +3,10 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ANNUALLEAVE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_BANKACCOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ANNUAL_LEAVE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BANK_ACCOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_JOINDATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_JOIN_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
@@ -25,7 +25,6 @@ public class EditCommandParser implements Parser<EditCommand> {
      * Parses the given {@code String} of arguments in the context of the
      * EditCommand
      * and returns an EditCommand object for execution.
-     * 
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditCommand parse(String args) throws ParseException {
@@ -74,10 +73,10 @@ public class EditCommandParser implements Parser<EditCommand> {
                 ParserUtil.parseAnnualLeave(argMultimap.getValue(PREFIX_ANNUAL_LEAVE).get()));
         }
 
-        if (!EditEmployeeDescriptor.isAnyFieldEdited()) {
+        if (!editEmployeeDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditCommand(index, editPersonDescriptor);
+        return new EditCommand(index, editEmployeeDescriptor);
     }
 }
