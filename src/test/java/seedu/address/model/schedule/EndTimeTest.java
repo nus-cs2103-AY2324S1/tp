@@ -75,7 +75,7 @@ class EndTimeTest {
     @Test
     public void toStringMethod() {
         EndTime endTime = new EndTime(LocalDateTime.of(2023, 1, 1, 0, 0, 0));
-        String expectedString = "Jan 01 2023 00:00";
+        String expectedString = "Jan 1 2023 00:00";
         assertEquals(expectedString, endTime.toString());
     }
 }
