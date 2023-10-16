@@ -63,6 +63,8 @@ public final class Messages {
     public static final String MESSAGE_FIELD_MISSING = "Contact's %s field is missing.";
     public static final String MESSAGE_CONTAIN_DUPLICATE_CONTACT = "Contact list contains duplicate contact(s).";
 
+	//TODO refine the messages above this line
+
     // Tag
     private static final String UNFORMATTED_TAG_INVALID = "\"%s\" is not a valid tag. Tags must be alphanumeric (spaces allowed).";
 
