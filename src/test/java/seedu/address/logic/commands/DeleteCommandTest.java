@@ -7,17 +7,19 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showEmployeeAtIndex;
 import static seedu.address.testutil.TypicalEmployees.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalIds.*;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EMPLOYEE;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_EMPLOYEE;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.employee.Employee;
+import seedu.address.model.employee.Id;
+
+import java.util.List;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -29,8 +31,16 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Employee employeeToDelete = model.getFilteredEmployeeList().get(INDEX_FIRST_EMPLOYEE.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_EMPLOYEE);
+        Employee employeeToDelete = null;
+        List<Employee> lastShownList = model.getFilteredEmployeeList();
+        for (Employee employee : lastShownList) {
+            if (employee.getId().equals(ID_FIRST_EMPLOYEE)) {
+                employeeToDelete = employee;
+                break;
+            }
+        }
+
+        DeleteCommand deleteCommand = new DeleteCommand(ID_FIRST_EMPLOYEE);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_EMPLOYEE_SUCCESS,
                 Messages.format(employeeToDelete));
@@ -43,18 +53,18 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredEmployeeList().size() + 1);
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
+        DeleteCommand deleteCommand = new DeleteCommand(ID_EMPLOYEE_NOT_EXISTS);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_EMPLOYEE_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_EMPLOYEE_DISPLAYED_ID);
     }
 
     @Test
     public void execute_validIndexFilteredList_success() {
+        // Delete first employee
         showEmployeeAtIndex(model, INDEX_FIRST_EMPLOYEE);
 
         Employee employeeToDelete = model.getFilteredEmployeeList().get(INDEX_FIRST_EMPLOYEE.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_EMPLOYEE);
+        DeleteCommand deleteCommand = new DeleteCommand(ID_FIRST_EMPLOYEE);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_EMPLOYEE_SUCCESS,
                 Messages.format(employeeToDelete));
@@ -70,25 +80,23 @@ public class DeleteCommandTest {
     public void execute_invalidIndexFilteredList_throwsCommandException() {
         showEmployeeAtIndex(model, INDEX_FIRST_EMPLOYEE);
 
-        Index outOfBoundIndex = INDEX_SECOND_EMPLOYEE;
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getEmployeeList().size());
+        Id invalidId = ID_SECOND_EMPLOYEE;
 
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
+        DeleteCommand deleteCommand = new DeleteCommand(invalidId);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_EMPLOYEE_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_EMPLOYEE_DISPLAYED_ID);
     }
 
     @Test
     public void equals() {
-        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_EMPLOYEE);
-        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_EMPLOYEE);
+        DeleteCommand deleteFirstCommand = new DeleteCommand(ID_FIRST_EMPLOYEE);
+        DeleteCommand deleteSecondCommand = new DeleteCommand(ID_SECOND_EMPLOYEE);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST_EMPLOYEE);
+        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(ID_FIRST_EMPLOYEE);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
@@ -103,9 +111,9 @@ public class DeleteCommandTest {
 
     @Test
     public void toStringMethod() {
-        Index targetIndex = Index.fromOneBased(1);
-        DeleteCommand deleteCommand = new DeleteCommand(targetIndex);
-        String expected = DeleteCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
+        //Index targetIndex = Index.fromOneBased(1);
+        DeleteCommand deleteCommand = new DeleteCommand(ID_FIRST_EMPLOYEE);
+        String expected = DeleteCommand.class.getCanonicalName() + "{targetId=" + ID_FIRST_EMPLOYEE + "}";
         assertEquals(expected, deleteCommand.toString());
     }
 
