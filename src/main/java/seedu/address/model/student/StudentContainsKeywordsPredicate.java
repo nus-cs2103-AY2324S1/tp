@@ -105,11 +105,11 @@ public class StudentContainsKeywordsPredicate implements Predicate<Student> {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("classDetails", classDetails)
-                .add("email", emails)
-                .add("name", names)
-                .add("phone", phones)
-                .add("studentNumber", studentNumbers)
-                .add("tag", tags)
+                .add("emails", emails)
+                .add("names", names)
+                .add("phones", phones)
+                .add("studentNumbers", studentNumbers)
+                .add("tags", tags)
                 .toString();
     }
 }
