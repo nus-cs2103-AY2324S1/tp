@@ -10,7 +10,6 @@ import static seedu.staffsnap.testutil.TypicalApplicants.CARL;
 import static seedu.staffsnap.testutil.TypicalApplicants.DANIEL;
 import static seedu.staffsnap.testutil.TypicalApplicants.ELLE;
 import static seedu.staffsnap.testutil.TypicalApplicants.FIONA;
-
 import static seedu.staffsnap.testutil.TypicalApplicants.getTypicalApplicantBook;
 
 import java.util.Arrays;
