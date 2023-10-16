@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -67,14 +68,14 @@ public class AddScheduleCommand extends Command {
         Schedule toAdd = new Schedule(tutor, startTime, endTime);
 
         boolean hasScheduleClash =
-                model.getAddressBook().getPersonList().stream().anyMatch(schedule -> schedule.isClashing(toAdd));
+                model.getAddressBook().getScheduleList().stream().anyMatch(schedule -> schedule.isClashing(toAdd));
 
 
         if (model.hasSchedule(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_SCHEDULE);
         }
 
-        if (model.hasScheduleClash(toAdd)) {
+        if (hasScheduleClash) {
             throw new CommandException(MESSAGE_CLASHING_SCHEDULE);
         }
 
@@ -99,4 +100,12 @@ public class AddScheduleCommand extends Command {
                 && endTime.equals(otherAddScheduleCommand.endTime);
     }
 
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("index", index)
+                .add("startTime", startTime)
+                .add("endTime", endTime)
+                .toString();
+    }
 }
