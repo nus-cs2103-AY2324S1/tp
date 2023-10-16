@@ -15,13 +15,16 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Appointment;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.MedicalHistory;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
+    private static final String INVALID_NRIC = "R@chel";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_START = "23/12";
     private static final String INVALID_END = "12AM";
@@ -32,9 +35,14 @@ public class ParserUtilTest {
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
+    private static final String VALID_APPOINTMENT = "08-04-2023 10:00 - 12:00";
+    private static final String VALID_START = "08-04-2023 10:00";
+    private static final String VALID_END = "12:00";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_MEDICAL_HISTORY_1 = "cancer";
+    private static final String VALID_MEDICAL_HISTORY_2 = "fever";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -56,6 +64,16 @@ public class ParserUtilTest {
 
         // Leading and trailing whitespaces
         assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  "));
+    }
+
+    @Test
+    public void parseNric_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseNric((String) null));
+    }
+
+    @Test
+    public void parseNric_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseName(INVALID_NRIC));
     }
 
     @Test
@@ -91,6 +109,11 @@ public class ParserUtilTest {
         assertThrows(ParseException.class, () -> ParserUtil.parseAppointment(INVALID_START, INVALID_END));
     }
 
+    @Test
+    public void parseAppointment_validValue_returnsAppointment() throws Exception {
+        Appointment expectedAppointment = new Appointment(VALID_APPOINTMENT);
+        assertEquals(expectedAppointment, ParserUtil.parseAppointment(VALID_START, VALID_END));
+    }
 
     @Test
     public void parsePhone_null_throwsNullPointerException() {
@@ -159,6 +182,24 @@ public class ParserUtilTest {
         String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
         Email expectedEmail = new Email(VALID_EMAIL);
         assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
+    }
+    @Test
+    public void parseMedicalHistory_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseMedicalHistories(null));
+    }
+
+    @Test
+    public void parseMedicalHistory_validValueWithoutWhitespace_returnsTag() throws Exception {
+        MedicalHistory expectedMedicalHistory = new MedicalHistory(VALID_MEDICAL_HISTORY_1);
+        assertEquals(expectedMedicalHistory, ParserUtil.parseMedicalHistory(VALID_MEDICAL_HISTORY_1));
+    }
+
+    @Test
+    public void parseMedicalHistory_collectionWithValidTags_returnsMedicalHistorySet() throws Exception{
+        Set<MedicalHistory> actualMedicalHistorySet = ParserUtil.parseMedicalHistories(Arrays.asList(VALID_MEDICAL_HISTORY_1, VALID_MEDICAL_HISTORY_2));
+        Set<MedicalHistory> expectedMedicalHistorySet = new HashSet<>(Arrays.asList(
+                new MedicalHistory(VALID_MEDICAL_HISTORY_1), new MedicalHistory(VALID_MEDICAL_HISTORY_2)));
+        assertEquals(actualMedicalHistorySet, expectedMedicalHistorySet);
     }
 
     @Test

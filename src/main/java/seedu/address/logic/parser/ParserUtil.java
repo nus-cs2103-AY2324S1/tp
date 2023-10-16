@@ -167,6 +167,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String medicalHistory} into a {@code medicalHistory}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code tag} is invalid.
+     */
+    public static MedicalHistory parseMedicalHistory(String medicalHistory) throws ParseException {
+        requireNonNull(medicalHistory);
+        String trimmedMedicalHistory = medicalHistory.trim();
+        if (!MedicalHistory.isValidMedicalHistory(medicalHistory)) {
+            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+        }
+        return new MedicalHistory(trimmedMedicalHistory);
+    }
+
+    /**
      * Parses a collection of medical history strings and returns a Set of MedicalHistory objects.
      * @param medicalHistoryStrings The collection of medical history strings.
      * @return A Set of MedicalHistory.
