@@ -7,8 +7,12 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showEmployeeAtIndex;
 import static seedu.address.testutil.TypicalEmployees.getTypicalAddressBook;
-import static seedu.address.testutil.TypicalIds.*;
+import static seedu.address.testutil.TypicalIds.ID_EMPLOYEE_NOT_EXISTS;
+import static seedu.address.testutil.TypicalIds.ID_FIRST_EMPLOYEE;
+import static seedu.address.testutil.TypicalIds.ID_SECOND_EMPLOYEE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EMPLOYEE;
+
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +23,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.employee.Employee;
 import seedu.address.model.employee.Id;
 
-import java.util.List;
+
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
