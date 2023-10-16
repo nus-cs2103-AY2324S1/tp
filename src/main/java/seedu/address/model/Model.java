@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.Person;
 
 /**
@@ -86,12 +87,26 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
-    void sortPersonList(Comparator<Person> comparator);
-
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicates}.
      * @throws NullPointerException if any of the {@code predicates} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate1, Predicate<Person> predicate2);
+
+    /**
+     * Sorts the filtered person list by the given {@code comparator}.
+     * @param comparator  The comparator to sort the list by.
+     */
+    void sortPersonList(Comparator<Person> comparator);
+
+    /**
+     * Returns the Index of the last view command called.
+     */
+    Index getLastViewedPersonIndex();
+
+    /**
+     * Sets the Index of the last view command called.
+     */
+    void setLastViewedPersonIndex(Index index);
 
 }
