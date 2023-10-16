@@ -11,7 +11,7 @@ public class SpecialistBuilder extends PersonBuilder {
     private Specialty specialty;
 
     /**
-     * Constructor that assigns a default specialty
+     * Creates a {@code SpecialistBuilder} with the default details.
      */
     public SpecialistBuilder() {
         super();
@@ -19,8 +19,7 @@ public class SpecialistBuilder extends PersonBuilder {
     }
 
     /**
-     * Constructor to copy a specific specialist
-     * @param specialistToCopy
+     * Initializes the SpecialistBuilder with the data of {@code specialistToCopy}.
      */
     public SpecialistBuilder(Specialist specialistToCopy) {
         super(specialistToCopy);
@@ -36,7 +35,7 @@ public class SpecialistBuilder extends PersonBuilder {
      * @param specialty
      * @return PersonBuilder with specialty
      */
-    public PersonBuilder withSpecialty(String specialty) {
+    public SpecialistBuilder withSpecialty(String specialty) {
         this.specialty = new Specialty(specialty);
         return this;
     }

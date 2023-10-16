@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.GEORGE;
 
@@ -14,12 +15,7 @@ import seedu.address.model.person.Specialty;
 
 
 public class JsonAdaptedSpecialistTest {
-    private static final String INVALID_NAME = "R@chel";
-    private static final String INVALID_PHONE = "+651234";
-    private static final String INVALID_ADDRESS = " ";
-    private static final String INVALID_EMAIL = "example.com";
-    private static final String INVALID_TAG = "#friend";
-    private static final String INVALID_SPECIALTY = "";
+    private static final String INVALID_SPECIALTY = " ";
 
     private static final String VALID_NAME = GEORGE.getName().toString();
     private static final String VALID_PHONE = GEORGE.getPhone().toString();
@@ -41,6 +37,14 @@ public class JsonAdaptedSpecialistTest {
                 new JsonAdaptedSpecialist(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS,
                         INVALID_SPECIALTY);
         String expectedMessage = Specialty.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullSpeciality_throwsIllegalValueException() {
+        JsonAdaptedPerson person = new JsonAdaptedSpecialist(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                VALID_TAGS, null);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Specialty.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 }

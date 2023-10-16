@@ -2,6 +2,7 @@ package seedu.address.testutil;
 
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPatientDescriptor;
+import seedu.address.model.person.Age;
 import seedu.address.model.person.MedicalHistory;
 import seedu.address.model.person.Patient;
 
@@ -25,6 +26,18 @@ public class EditPatientDescriptorBuilder extends EditPersonDescriptorBuilder {
         EditPatientDescriptor editPatientDescriptor = new EditPatientDescriptor();
         setDescriptor(editPatientDescriptor);
         editPersonDescriptorSetFields(patient);
+        editPatientDescriptor.setAge(patient.getAge());
+        editPatientDescriptor.setMedicalHistory(patient.getMedicalHistory());
+    }
+
+    /**
+     * Sets the {@code Age} of the {@code EditAgeDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withAge(String age) {
+        EditCommand.EditPatientDescriptor editPatientDescriptor =
+                (EditCommand.EditPatientDescriptor) super.getDescriptor();
+        editPatientDescriptor.setAge(new Age(age));
+        return this;
     }
 
     /**
