@@ -40,6 +40,9 @@ public class TypicalApplicants {
             .withEmail("werner@example.com").withPosition("michegan ave").build();
     public static final Applicant FIONA = new ApplicantBuilder().withName("Fiona Kunz").withPhone("9482427")
             .withEmail("lydia@example.com").withPosition("little tokyo").build();
+    public static final Applicant FLORENCE = new ApplicantBuilder().withName("Florence Kunz").withPhone("9482427")
+            .withEmail("florence@example.com").withPosition("little tokyo").build();
+
     public static final Applicant GEORGE = new ApplicantBuilder().withName("George Best").withPhone("9482442")
             .withEmail("anna@example.com").withPosition("4th street").build();
 

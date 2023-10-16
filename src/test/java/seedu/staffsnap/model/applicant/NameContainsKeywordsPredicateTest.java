@@ -49,6 +49,14 @@ public class NameContainsKeywordsPredicateTest {
         predicate = new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob"));
         assertTrue(predicate.test(new ApplicantBuilder().withName("Alice Bob").build()));
 
+        // Name contains single keyword
+        predicate = new NameContainsKeywordsPredicate(Arrays.asList("A"));
+        assertTrue(predicate.test(new ApplicantBuilder().withName("Alice Bob").build()));
+
+        // Name contains multiple keywords
+        predicate = new NameContainsKeywordsPredicate(Arrays.asList("bo", "ali"));
+        assertTrue(predicate.test(new ApplicantBuilder().withName("Alice Bob").build()));
+
         // Only one matching keyword
         predicate = new NameContainsKeywordsPredicate(Arrays.asList("Bob", "Carol"));
         assertTrue(predicate.test(new ApplicantBuilder().withName("Alice Carol").build()));
