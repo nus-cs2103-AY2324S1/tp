@@ -37,8 +37,9 @@ public class ApplicantContainsKeywordsPredicate implements Predicate<Applicant> 
             return false;
         }
 
-        ApplicantContainsKeywordsPredicate otherMemberContainsKeywordsPredicate = (ApplicantContainsKeywordsPredicate) other;
-        return keywords.equals(otherMemberContainsKeywordsPredicate.keywords);
+        ApplicantContainsKeywordsPredicate otherApplicantContainsKeywordsPredicate =
+                (ApplicantContainsKeywordsPredicate) other;
+        return keywords.equals(otherApplicantContainsKeywordsPredicate.keywords);
     }
 
     @Override

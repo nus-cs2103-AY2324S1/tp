@@ -6,7 +6,6 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.ApplicantContainsKeywordsPredicate;
-import seedu.address.model.person.MemberContainsKeywordsPredicate;
 
 
 
