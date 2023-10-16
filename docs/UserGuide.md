@@ -243,6 +243,20 @@ Prints the associated error message.
 * `deadline 1 d/Nov 12 2022 1200`
   Sets deadline for application at index 1 to be Nov 12 2022 1200.
 
+### Asking for help: `help`
+
+Shows a list of commands and how they can be used.
+
+**Format:** `help`
+
+**Successful command:**
+A help window displaying the help message will pop up.
+
+**Failed command:**
+print “Error: ” and error message for:
+
+* Arguments passed after the help command: “Unexpected arguments.”
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
@@ -255,3 +269,4 @@ Prints the associated error message.
 | **Mark**     | `mark INDEX s/STATUS`                         |
 | **Deadline** | `deadline INDEX d/DEADLINE`                   |
 | **Find**     | `find -FIELD [KEYWORDS]`                      |
+| **Help**     | `help `                                       |
