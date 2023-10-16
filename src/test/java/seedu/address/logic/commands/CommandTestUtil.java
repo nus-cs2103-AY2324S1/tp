@@ -3,8 +3,10 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -23,7 +25,7 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
  * Contains helper methods for testing commands.
  */
 public class CommandTestUtil {
-
+    /* Tutor related */
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_PHONE_AMY = "11111111";
@@ -43,6 +45,26 @@ public class CommandTestUtil {
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
 
+    /* Schedule related */
+    public static final String VALID_TUTOR_INDEX_ONE = "1";
+    public static final String VALID_TUTOR_INDEX_TWO = "2";
+    public static final String VALID_START_TIME_ONE = "2023-01-01T09:00:00";
+    public static final String VALID_START_TIME_TWO = "2023-01-02T20:00:00";
+    public static final String VALID_END_TIME_ONE = "2023-01-01T11:00:00";
+    public static final String VALID_END_TIME_TWO = "2023-01-02T22:00:00";
+
+    public static final String TUTOR_INDEX_DESC_ONE = VALID_TUTOR_INDEX_ONE;
+    public static final String TUTOR_INDEX_DESC_TWO = VALID_TUTOR_INDEX_TWO;
+    public static final String START_TIME_DESC_ONE = " " + PREFIX_START_TIME + VALID_START_TIME_ONE;
+    public static final String START_TIME_DESC_TWO = " " + PREFIX_START_TIME + VALID_START_TIME_TWO;
+    public static final String END_TIME_DESC_ONE = " " + PREFIX_END_TIME + VALID_END_TIME_ONE;
+    public static final String END_TIME_DESC_TWO = " " + PREFIX_END_TIME + VALID_END_TIME_TWO;
+
+    public static final String INVALID_TUTOR_INDEX = "a";
+    public static final String INVALID_START_TIME = " " + PREFIX_START_TIME + "2023-01-01 09:00"; // missing 'T'
+    public static final String INVALID_END_TIME = " " + PREFIX_END_TIME + "2023-01-01T1100"; // missing ':'
+
+    /* Others */
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
@@ -98,6 +120,7 @@ public class CommandTestUtil {
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
     }
+
     /**
      * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
      * {@code model}'s address book.

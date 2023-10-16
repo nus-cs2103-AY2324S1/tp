@@ -8,8 +8,8 @@ import java.time.LocalDateTime;
  */
 public class EndTime extends Time {
     public static final String MESSAGE_CONSTRAINTS =
-            "EndTime should only contain a valid date and time in the format 2023-09-15T09:00:00, and it should not "
-                    + "be blank";
+            "EndTime should only contain a valid date and time in the format " + DATETIME_FORMAT
+                    + ", and it should not be blank";
 
     /**
      * Constructs a {@code EndTime}.
