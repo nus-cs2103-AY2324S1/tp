@@ -25,7 +25,7 @@ public class FindCommandParserTest {
     @Test
     public void parse_emptyArg_throwsParseException() {
         assertParseComplexFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                FindCommand.MESSAGE_USAGE), PersonType.PATIENT);
+                FindCommand.MESSAGE_USAGE_PATIENT), PersonType.PATIENT);
     }
 
     @Test
