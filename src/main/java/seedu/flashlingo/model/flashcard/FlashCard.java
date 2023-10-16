@@ -17,6 +17,9 @@ public class FlashCard {
     private final TranslatedWord translatedWord;
     private Date whenToReview; // Date the flashcard was needs to be reviewed
     private ProficiencyLevel level; // How many times successfully remembered
+
+    private boolean isUpdated;
+    private int originalLevel; // For undo function
     /**
      * Constructor for Flashcard
      *
@@ -30,6 +33,8 @@ public class FlashCard {
         this.whenToReview = whenToReview;
         this.translatedWord = translatedWord;
         this.originalWord = originalWord;
+        this.isUpdated = false;
+        this.originalLevel = level;
     }
     public OriginalWord getOriginalWord() {
         return originalWord;
@@ -43,7 +48,7 @@ public class FlashCard {
         return whenToReview;
     }
 
-    public ProficiencyLevel getLevel() {
+    public ProficiencyLevel getProficiencyLevel() {
         return level;
     }
     /**
@@ -87,5 +92,35 @@ public class FlashCard {
 
     public boolean isOverdue() {
         return this.whenToReview.before(new Date());
+    }
+
+    /**
+     * Handles when user clicks yes/no
+     * @param isSuccess Whether user has successfully remembered the word
+     */
+    public void handleUserInput(boolean isSuccess) {
+        if (isUpdated) {
+            return;
+        }
+        if (isSuccess) {
+            getProficiencyLevel().upgradeLevel();
+            updateReviewDate(getProficiencyLevel().calculateNextReviewInterval());
+        } else {
+            getProficiencyLevel().downgradeLevel();
+            updateReviewDate(getProficiencyLevel().calculateNextReviewInterval());
+        }
+        isUpdated = true;
+    }
+
+    public void updateReviewDate(long timeInMs) {
+        this.whenToReview = new Date(new Date().getTime() + timeInMs);
+    }
+
+    public void undo() {
+        if (isUpdated) {
+            this.getProficiencyLevel().setLevel(originalLevel);
+            this.whenToReview = new Date(new Date().getTime() + getProficiencyLevel().calculateNextReviewInterval());
+            isUpdated = false;
+        }
     }
 }
