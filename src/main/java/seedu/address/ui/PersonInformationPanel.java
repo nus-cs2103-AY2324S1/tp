@@ -9,21 +9,18 @@ import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
 
+/**
+ * An UI component that displays information of a {@code Person}
+ */
 public class PersonInformationPanel extends UiPart<Region> {
-
     private static final String FXML = "PersonInformationPanel.fxml";
-
     private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+    private final Person person;
 
-
-    public final Person person;
-
-    @javafx.fxml.FXML
-    private Label remark;
     @FXML
     private Label name;
     @FXML
-    private Label id;
+    private FlowPane tags;
     @FXML
     private Label phone;
     @FXML
@@ -31,9 +28,13 @@ public class PersonInformationPanel extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private FlowPane tags;
+    private Label remark;
 
 
+    /**
+     * Creates a {@code PersonInformationPanel} with the given {@code Person}.
+     * @param person the person to display
+     */
     public PersonInformationPanel(Person person) {
         super(FXML);
         this.person = person;

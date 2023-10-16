@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 
@@ -10,6 +9,10 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+
+/**
+ * Views a person identified using it's last displayed index from the address book.
+ */
 public class ViewCommand extends Command {
     public static final String COMMAND_WORD = "view";
 
@@ -21,11 +24,10 @@ public class ViewCommand extends Command {
 
     public static final String MESSAGE_ARGUMENTS = "Index: %1$d";
     public static final String MESSAGE_SUCCESSFUL_VIEW = "Full-view shown for  Person: %1$s";
-
     private final Index index;
 
     /**
-     *
+     * Constructor for ViewCommand
      * @param index of the person in the filtered person list to view
      */
     public ViewCommand(Index index) {
