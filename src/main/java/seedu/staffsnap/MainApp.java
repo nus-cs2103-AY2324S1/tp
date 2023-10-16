@@ -29,7 +29,6 @@ import seedu.staffsnap.storage.JsonUserPrefsStorage;
 import seedu.staffsnap.storage.Storage;
 import seedu.staffsnap.storage.StorageManager;
 import seedu.staffsnap.storage.UserPrefsStorage;
-import seedu.staffsnap.ui.HelpWindow;
 import seedu.staffsnap.ui.Ui;
 import seedu.staffsnap.ui.UiManager;
 

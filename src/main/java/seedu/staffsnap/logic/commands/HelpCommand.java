@@ -1,8 +1,6 @@
 package seedu.staffsnap.logic.commands;
 
-import javafx.application.HostServices;
 import seedu.staffsnap.model.Model;
-import seedu.staffsnap.ui.HelpWindow;
 
 /**
  * Format full help instructions for every command for display.
