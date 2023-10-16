@@ -5,11 +5,15 @@ import static seedu.staffsnap.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.staffsnap.commons.core.LogsCenter;
+import seedu.staffsnap.commons.util.StringUtil;
 import seedu.staffsnap.model.applicant.exceptions.ApplicantNotFoundException;
 import seedu.staffsnap.model.applicant.exceptions.DuplicateApplicantException;
+
 
 /**
  * A list of applicants that enforces uniqueness between its elements and does not allow nulls.
@@ -23,6 +27,8 @@ import seedu.staffsnap.model.applicant.exceptions.DuplicateApplicantException;
  * @see Applicant#isSameApplicant(Applicant)
  */
 public class UniqueApplicantList implements Iterable<Applicant> {
+
+    private static final Logger logger = LogsCenter.getLogger(UniqueApplicantList.class);
 
     private final ObservableList<Applicant> internalList = FXCollections.observableArrayList();
     private final ObservableList<Applicant> internalUnmodifiableList =
@@ -45,7 +51,11 @@ public class UniqueApplicantList implements Iterable<Applicant> {
         if (contains(toAdd)) {
             throw new DuplicateApplicantException();
         }
-        internalList.add(toAdd);
+        try {
+            internalList.add(toAdd);
+        } catch (Exception e) {
+            logger.info("Error adding applicant: " + StringUtil.getDetails(e));
+        }
     }
 
     /**
@@ -65,7 +75,11 @@ public class UniqueApplicantList implements Iterable<Applicant> {
             throw new DuplicateApplicantException();
         }
 
-        internalList.set(index, editedApplicant);
+        try {
+            internalList.set(index, editedApplicant);
+        } catch (Exception e) {
+            logger.info("Error editing applicant: " + target.getName() + " " + StringUtil.getDetails(e));
+        }
     }
 
     /**
@@ -94,7 +108,11 @@ public class UniqueApplicantList implements Iterable<Applicant> {
             throw new DuplicateApplicantException();
         }
 
-        internalList.setAll(applicants);
+        try {
+            internalList.setAll(applicants);
+        } catch (Exception e) {
+            logger.info("Error setting applicants: " + StringUtil.getDetails(e));
+        }
     }
 
     /**
