@@ -19,15 +19,19 @@ class JsonAdaptedCard {
 
     private final String question;
     private final String answer;
+    private final String diffculty;
 
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedCard(@JsonProperty("question") String question, @JsonProperty("answer") String answer) {
+    public JsonAdaptedCard(@JsonProperty("question") String question, @JsonProperty("answer") String answer,
+                           @JsonProperty("difficulty") String difficulty) {
         this.question = question;
         this.answer = answer;
+        this.diffculty = difficulty;
+
 
     }
 
@@ -37,6 +41,7 @@ class JsonAdaptedCard {
     public JsonAdaptedCard(Card source) {
         question = source.getQuestion().question;
         answer = source.getAnswer().answer;
+        diffculty = source.getDifficulty();
     }
 
     /**
@@ -62,10 +67,11 @@ class JsonAdaptedCard {
         if (!Answer.isValidAnswer(answer)) {
             throw new IllegalValueException(Answer.MESSAGE_CONSTRAINTS);
         }
+
         final Answer modelAnswer = new Answer(answer);
 
 
-        return new Card(modelQuestion, modelAnswer);
+        return new Card(modelQuestion, modelAnswer, diffculty);
     }
 
 }

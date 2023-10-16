@@ -36,7 +36,7 @@ public class AddCommandParser2 implements Parser2<AddCommand2> {
         Question question = ParserUtil.parseQuestion(argMultimap.getValue(PREFIX_QUESTION).get());
         Answer answer = ParserUtil.parseAnswer(argMultimap.getValue(PREFIX_ANSWER).get());
 
-        Card card = new Card(question, answer);
+        Card card = new Card(question, answer, "new");
 
         return new AddCommand2(card);
     }
