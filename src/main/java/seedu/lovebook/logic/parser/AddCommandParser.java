@@ -6,9 +6,7 @@ import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_INCOME;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.lovebook.logic.commands.AddCommand;
@@ -19,7 +17,6 @@ import seedu.lovebook.model.person.Gender;
 import seedu.lovebook.model.person.Height;
 import seedu.lovebook.model.person.Income;
 import seedu.lovebook.model.person.Name;
-import seedu.lovebook.model.tag.Tag;
 
 
 /**
@@ -34,8 +31,7 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_AGE, PREFIX_GENDER, PREFIX_HEIGHT, PREFIX_INCOME,
-                        PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_AGE, PREFIX_GENDER, PREFIX_HEIGHT, PREFIX_INCOME);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_HEIGHT, PREFIX_AGE, PREFIX_GENDER, PREFIX_INCOME)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -48,9 +44,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         Gender gender = ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get());
         Height height = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_HEIGHT).get());
         Income income = ParserUtil.parseIncome(argMultimap.getValue(PREFIX_INCOME).get());
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Date date = new Date(name, age, gender, height, income, tagList);
+        Date date = new Date(name, age, gender, height, income);
 
         return new AddCommand(date);
     }

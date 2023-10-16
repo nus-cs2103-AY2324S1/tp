@@ -12,6 +12,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_HEIGHT = new Prefix("a/");
 
     public static final Prefix PREFIX_INCOME = new Prefix("income/");
-    public static final Prefix PREFIX_TAG = new Prefix("t/");
 
 }

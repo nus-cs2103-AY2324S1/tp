@@ -6,15 +6,11 @@ import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_INCOME;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.lovebook.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 
 import seedu.lovebook.commons.core.index.Index;
 import seedu.lovebook.commons.util.CollectionUtil;
@@ -28,7 +24,6 @@ import seedu.lovebook.model.person.Gender;
 import seedu.lovebook.model.person.Height;
 import seedu.lovebook.model.person.Income;
 import seedu.lovebook.model.person.Name;
-import seedu.lovebook.model.tag.Tag;
 
 /**
  * Edits the details of an existing date in the lovebook book.
@@ -46,7 +41,6 @@ public class EditCommand extends Command {
             + "[" + PREFIX_GENDER + "GENDER] "
             + "[" + PREFIX_HEIGHT + "HEIGHT] "
             + "[" + PREFIX_INCOME + "INCOME] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_AGE + "91234567 "
             + PREFIX_GENDER + "johndoe@example.com";
@@ -103,9 +97,8 @@ public class EditCommand extends Command {
         Gender updatedGender = editPersonDescriptor.getGender().orElse(dateToEdit.getGender());
         Height updatedHeight = editPersonDescriptor.getHeight().orElse(dateToEdit.getHeight());
         Income updatedIncome = editPersonDescriptor.getIncome().orElse(dateToEdit.getIncome());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(dateToEdit.getTags());
 
-        return new Date(updatedName, updatedAge, updatedGender, updatedHeight, updatedIncome, updatedTags);
+        return new Date(updatedName, updatedAge, updatedGender, updatedHeight, updatedIncome);
     }
 
     @Override
@@ -142,7 +135,6 @@ public class EditCommand extends Command {
         private Gender gender;
         private Height height;
         private Income income;
-        private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
 
@@ -156,14 +148,13 @@ public class EditCommand extends Command {
             setGender(toCopy.gender);
             setHeight(toCopy.height);
             setIncome(toCopy.income);
-            setTags(toCopy.tags);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, age, gender, height, tags);
+            return CollectionUtil.isAnyNonNull(name, age, gender, height);
         }
 
         public void setName(Name name) {
@@ -206,23 +197,6 @@ public class EditCommand extends Command {
             return Optional.ofNullable(income);
         }
 
-        /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
-        }
-
-        /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
-         */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
-        }
-
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -239,8 +213,7 @@ public class EditCommand extends Command {
                     && Objects.equals(age, otherEditPersonDescriptor.age)
                     && Objects.equals(gender, otherEditPersonDescriptor.gender)
                     && Objects.equals(height, otherEditPersonDescriptor.height)
-                    && Objects.equals(income, otherEditPersonDescriptor.income)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(income, otherEditPersonDescriptor.income);
         }
 
         @Override
@@ -251,7 +224,6 @@ public class EditCommand extends Command {
                     .add("gender", gender)
                     .add("height", height)
                     .add("income", income)
-                    .add("tags", tags)
                     .toString();
         }
     }

@@ -7,8 +7,6 @@ import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_AGE_BOB;
 import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_GENDER_BOB;
 import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_HEIGHT_BOB;
 import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.lovebook.testutil.Assert.assertThrows;
 import static seedu.lovebook.testutil.TypicalPersons.ALICE;
 import static seedu.lovebook.testutil.TypicalPersons.BOB;
 
@@ -17,13 +15,6 @@ import org.junit.jupiter.api.Test;
 import seedu.lovebook.testutil.PersonBuilder;
 
 public class DateTest {
-
-    @Test
-    public void asObservableList_modifyList_throwsUnsupportedOperationException() {
-        Date date = new PersonBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> date.getTags().remove(0));
-    }
-
     @Test
     public void isSamePerson() {
         // same object -> returns true
@@ -34,7 +25,7 @@ public class DateTest {
 
         // same name, all other attributes different -> returns true
         Date editedAlice = new PersonBuilder(ALICE).withAge(VALID_AGE_BOB).withGender(VALID_GENDER_BOB)
-                .withHeight(VALID_HEIGHT_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withHeight(VALID_HEIGHT_BOB).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // different name, all other attributes same -> returns false
@@ -84,17 +75,12 @@ public class DateTest {
         // different lovebook -> returns false
         editedAlice = new PersonBuilder(ALICE).withHeight(VALID_HEIGHT_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
-
-        // different tags -> returns false
-        editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
-        assertFalse(ALICE.equals(editedAlice));
     }
 
     @Test
     public void toStringMethod() {
         String expected = Date.class.getCanonicalName() + "{name=" + ALICE.getName() + ", age=" + ALICE.getAge()
                 + ", gender=" + ALICE.getGender() + ", height=" + ALICE.getHeight() + ", income=" + ALICE.getIncome()
-                + ", tags=" + ALICE.getTags()
                 + "}";
         assertEquals(expected, ALICE.toString());
     }

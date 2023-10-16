@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_HEIGHT_BOB;
-import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.lovebook.testutil.Assert.assertThrows;
 import static seedu.lovebook.testutil.TypicalPersons.ALICE;
 import static seedu.lovebook.testutil.TypicalPersons.getTypicalLoveBook;
@@ -46,7 +45,7 @@ public class LoveBookTest {
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two dates with the same identity fields
-        Date editedAlice = new PersonBuilder(ALICE).withHeight(VALID_HEIGHT_BOB).withTags(VALID_TAG_HUSBAND)
+        Date editedAlice = new PersonBuilder(ALICE).withHeight(VALID_HEIGHT_BOB)
                 .build();
         List<Date> newDates = Arrays.asList(ALICE, editedAlice);
         LoveBookStub newData = new LoveBookStub(newDates);
@@ -73,7 +72,7 @@ public class LoveBookTest {
     @Test
     public void hasPerson_personWithSameIdentityFieldsInLoveBook_returnsTrue() {
         loveBook.addPerson(ALICE);
-        Date editedAlice = new PersonBuilder(ALICE).withHeight(VALID_HEIGHT_BOB).withTags(VALID_TAG_HUSBAND)
+        Date editedAlice = new PersonBuilder(ALICE).withHeight(VALID_HEIGHT_BOB)
                 .build();
         assertTrue(loveBook.hasPerson(editedAlice));
     }

@@ -2,13 +2,9 @@ package seedu.lovebook.model.person;
 
 import static seedu.lovebook.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 import seedu.lovebook.commons.util.ToStringBuilder;
-import seedu.lovebook.model.tag.Tag;
 
 /**
  * Represents a Date in the lovebook book.
@@ -25,19 +21,17 @@ public class Date {
     private final Height height;
 
     private final Income income;
-    private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Date(Name name, Age age, Gender gender, Height height, Income income, Set<Tag> tags) {
-        requireAllNonNull(name, age, gender, height, tags);
+    public Date(Name name, Age age, Gender gender, Height height, Income income) {
+        requireAllNonNull(name, age, gender, height);
         this.name = name;
         this.age = age;
         this.gender = gender;
         this.height = height;
         this.income = income;
-        this.tags.addAll(tags);
     }
 
     /**
@@ -69,14 +63,6 @@ public class Date {
 
     public Income getIncome() {
         return income;
-    }
-
-    /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
     }
 
     /**
@@ -112,14 +98,13 @@ public class Date {
                 && age.equals(otherDate.age)
                 && gender.equals(otherDate.gender)
                 && height.equals(otherDate.height)
-                && income.equals(otherDate.income)
-                && tags.equals(otherDate.tags);
+                && income.equals(otherDate.income);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, age, gender, height, income, tags);
+        return Objects.hash(name, age, gender, height, income);
     }
 
     @Override
@@ -130,7 +115,6 @@ public class Date {
                 .add("gender", gender)
                 .add("height", height)
                 .add("income", income)
-                .add("tags", tags)
                 .toString();
     }
 
