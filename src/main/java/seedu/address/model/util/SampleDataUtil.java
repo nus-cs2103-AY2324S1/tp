@@ -6,13 +6,19 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyTeamBook;
+import seedu.address.model.TeamBook;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.IdentityCode;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
+import seedu.address.model.person.Team;
 import seedu.address.model.tag.Tag;
+
+
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
@@ -61,4 +67,32 @@ public class SampleDataUtil {
                 .collect(Collectors.toSet());
     }
 
+    // Additions for TeamBook
+    public static Team[] getSampleTeams() {
+        Team teamAlpha = new Team(new IdentityCode("1"), "Team Alpha");
+        teamAlpha.addDeveloper(new IdentityCode("1"));
+        teamAlpha.addDeveloper(new IdentityCode("2"));
+
+        Team teamBeta = new Team(new IdentityCode("2"), "Team Beta");
+        teamBeta.addDeveloper(new IdentityCode("3"));
+        teamBeta.addDeveloper(new IdentityCode("4"));
+
+        Team teamGamma = new Team(new IdentityCode("3"), "Team Gamma");
+        teamGamma.addDeveloper(new IdentityCode("5"));
+        teamGamma.addDeveloper(new IdentityCode("6"));
+
+        Team teamDelta = new Team(new IdentityCode("4"), "Team Delta");
+        teamDelta.addDeveloper(new IdentityCode("7"));
+        teamDelta.addDeveloper(new IdentityCode("8"));
+
+        return new Team[] {teamAlpha, teamBeta, teamGamma, teamDelta};
+    }
+
+    public static ReadOnlyTeamBook getSampleTeamBook() {
+        TeamBook sampleTb = new TeamBook();
+        for (Team sampleTeam : getSampleTeams()) {
+            sampleTb.addTeam(sampleTeam);
+        }
+        return sampleTb;
+    }
 }

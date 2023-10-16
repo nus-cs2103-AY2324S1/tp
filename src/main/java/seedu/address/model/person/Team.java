@@ -1,72 +1,92 @@
 package seedu.address.model.person;
 
-//import java.util.ArrayList;
 import java.util.HashSet;
-//import java.util.List;
 import java.util.Set;
+
+import seedu.address.commons.util.ToStringBuilder;
 
 /**
  * Represents a Team in the address book.
- * An instance of Team consists of a TeamLeader and multiple Developers.
+ * Each team consists of one TeamLeader and multiple Developers.
  */
 public class Team {
-
-    private final int leaderHashCode;
-    private String teamName = "unassigned";
-
-
-    //todo: set will ignore duplicated values, do we need to notify the user that he added a duplicate value or not?
-    //use the hash code for representing each developer. The hash code will be updated when there is a change
-    //to the developer's information.
-    private final Set<Integer> developerHashCode;
+    private IdentityCode leaderIdentityCode;
+    private String teamName;
+    private final Set<IdentityCode> developerIdentityCodes;
 
     /**
-     * Constructs a new Team instance with the specified TeamLeader.
+     * Constructs a new Team instance with the specified TeamLeader and team name.
      *
-     * @param leader The leader of the team.
+     * @param leaderIdentityCode The IdentityCode of the team leader.
+     * @param teamName The name of the team.
      */
-    public Team(TeamLeader leader) {
-        this.leaderHashCode = leader.hashCode();
-        this.developerHashCode = new HashSet<>();
+    public Team(IdentityCode leaderIdentityCode, String teamName) {
+        this.leaderIdentityCode = leaderIdentityCode;
+        this.teamName = teamName;
+        this.developerIdentityCodes = new HashSet<>();
     }
 
     /**
-     * Adds a Developer to the team.
+     * Adds a Developer's IdentityCode to the team.
      *
-     * @param developerHashCode The developer to be added.
+     * @param developerIdentityCode The IdentityCode of the developer to be added.
      */
-    public void addDeveloper(int developerHashCode) {
-        this.developerHashCode.add(developerHashCode);
-    }
-
-
-
-    /**
-     * Adds a Developer to the team.
-     *
-     * @param developerHashCode The developer to be removed.
-     */
-    public void removeDeveloper(int developerHashCode) {
-        this.developerHashCode.remove(developerHashCode);
-    }
-
-
-    /**
-     * Retrieves the TeamLeader of the team.
-     *
-     * @return The TeamLeader of the team.
-     */
-    public int getLeaderHashCode() {
-        return leaderHashCode;
+    public void addDeveloper(IdentityCode developerIdentityCode) {
+        developerIdentityCodes.add(developerIdentityCode);
     }
 
     /**
-     * Retrieves the list of Developers in the team.
+     * Removes a Developer's IdentityCode from the team.
      *
-     * @return A list of Developers.
+     * @param developerIdentityCode The IdentityCode of the developer to be removed.
+     * @return true if the developer was part of the team and was removed, false otherwise.
      */
-    public Set<Integer> getDevelopers() {
-        return developerHashCode;
+    public boolean removeDeveloper(IdentityCode developerIdentityCode) {
+        return developerIdentityCodes.remove(developerIdentityCode);
     }
 
+    /**
+     * Updates the TeamLeader of the team.
+     *
+     * @param leaderIdentityCode The new TeamLeader's IdentityCode.
+     */
+    public void setTeamLeader(IdentityCode leaderIdentityCode) {
+        this.leaderIdentityCode = leaderIdentityCode;
+    }
+
+    /**
+     * Retrieves the TeamLeader's IdentityCode of the team.
+     *
+     * @return The TeamLeader's IdentityCode.
+     */
+    public IdentityCode getTeamLeaderIdentityCode() {
+        return this.leaderIdentityCode;
+    }
+
+    /**
+     * Retrieves the set of Developers' IdentityCodes in the team.
+     *
+     * @return A set of Developers' IdentityCodes.
+     */
+    public Set<IdentityCode> getDeveloperIdentityCodes() {
+        return developerIdentityCodes;
+    }
+
+    /**
+     * Retrieves the name of the team.
+     *
+     * @return The team's name.
+     */
+    public String getTeamName() {
+        return this.teamName;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("Team Name", teamName)
+                .add("Team Leader", leaderIdentityCode)
+                .add("Developer List", developerIdentityCodes)
+                .toString();
+    }
 }

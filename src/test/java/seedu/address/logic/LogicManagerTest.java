@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddTeamCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -26,17 +27,23 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyTeamBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Team;
 import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.JsonTeamBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.TeamBuilder;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy IO exception");
     private static final IOException DUMMY_AD_EXCEPTION = new AccessDeniedException("dummy access denied exception");
-
+    private static final Team SAMPLE_TEAM = new TeamBuilder().build();
+    private static final String TEAM_NAME_DESC_SAMPLE = " TeamName: " + SAMPLE_TEAM.getName();
+    private static final String ADD_TEAM_COMMAND = "addTeam" + TEAM_NAME_DESC_SAMPLE;
     @TempDir
     public Path temporaryFolder;
 
@@ -47,8 +54,9 @@ public class LogicManagerTest {
     public void setUp() {
         JsonAddressBookStorage addressBookStorage =
                 new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonTeamBookStorage teamBookStorage = new JsonTeamBookStorage(temporaryFolder.resolve("teamBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(addressBookStorage, teamBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -58,6 +66,43 @@ public class LogicManagerTest {
         assertParseException(invalidCommand, MESSAGE_UNKNOWN_COMMAND);
     }
 
+    @Test
+    public void execute_addTeamCommand_teamAdded() throws Exception {
+        Model expectedModel = new ModelManager();
+        expectedModel.addTeam(SAMPLE_TEAM);
+        assertCommandSuccess(ADD_TEAM_COMMAND, String.format(AddTeamCommand.MESSAGE_SUCCESS, SAMPLE_TEAM), expectedModel);
+    }
+    @Test
+    public void execute_storageThrowsIoExceptionWhileSavingTeamBook_throwsCommandException() {
+        assertCommandFailureForExceptionFromTeamBookStorage(DUMMY_IO_EXCEPTION, String.format(
+                LogicManager.FILE_OPS_ERROR_FORMAT, DUMMY_IO_EXCEPTION.getMessage()));
+    }
+
+    @Test
+    public void getFilteredTeamList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredTeamList().remove(0));
+    }
+
+    // This is a new method to specifically simulate an exception when saving the teambook.
+    private void assertCommandFailureForExceptionFromTeamBookStorage(IOException e, String expectedMessage) {
+        Path prefPath = temporaryFolder.resolve("ExceptionTeamBook.json");
+
+        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonTeamBookStorage teamBookStorage = new JsonTeamBookStorage(prefPath) {
+            @Override
+            public void saveTeamBook(ReadOnlyTeamBook teamBook, Path filePath) throws IOException {
+                throw e;
+            }
+        };
+
+        JsonUserPrefsStorage userPrefsStorage =
+                new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
+        StorageManager storage = new StorageManager(addressBookStorage, teamBookStorage, userPrefsStorage);
+
+        logic = new LogicManager(model, storage);
+
+        assertCommandFailure(ADD_TEAM_COMMAND, CommandException.class, expectedMessage, new ModelManager());
+    }
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "delete 9";
@@ -123,7 +168,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), model.getTeamBook(), new UserPrefs());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
@@ -158,9 +203,11 @@ public class LogicManagerTest {
             }
         };
 
+        JsonTeamBookStorage teamBookStorage =
+                new JsonTeamBookStorage(temporaryFolder.resolve("teamBook.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(addressBookStorage, teamBookStorage, userPrefsStorage);
 
         logic = new LogicManager(model, storage);
 
