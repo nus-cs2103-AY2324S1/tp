@@ -43,24 +43,29 @@ public class CsvAdaptedTransactionStorageManualTest {
     }
 
     private static ReadOnlyTransactionBook createTestTransactionBook() {
-        Transaction transaction1 = new Transaction(new TransactionId("11111111"), TransactionType.REVENUE,
+        Transaction transaction1 = new Transaction(new TransactionId(100), TransactionType.REVENUE,
                 new Description("Revenue 1"),
-                new Amount(new BigDecimal("10.50")), new Date());
-        Transaction transaction2 = new Transaction(new TransactionId("222222"), TransactionType.EXPENSE,
+                new Amount(new BigDecimal("10.50")), new Date(), null);
+
+        Transaction transaction2 = new Transaction(new TransactionId(101), TransactionType.EXPENSE,
                 new Description("Expense 1"),
-                new Amount(new BigDecimal("21.50")), new Date());
-        Transaction transaction3 = new Transaction(new TransactionId("3333"), TransactionType.REVENUE,
+                new Amount(new BigDecimal("21.50")), new Date(), null);
+
+        Transaction transaction3 = new Transaction(new TransactionId(102), TransactionType.REVENUE,
                 new Description("Revenue 2"),
-                new Amount(new BigDecimal("10.50")), new Date());
-        Transaction transaction4 = new Transaction(new TransactionId("44444"), TransactionType.EXPENSE,
+                new Amount(new BigDecimal("10.50")), new Date(), null);
+
+        Transaction transaction4 = new Transaction(new TransactionId(103), TransactionType.EXPENSE,
                 new Description("Expense 2"),
-                new Amount(new BigDecimal("25.21")), new Date());
-        Transaction transaction5 = new Transaction(new TransactionId("412312"), TransactionType.REVENUE,
+                new Amount(new BigDecimal("25.21")), new Date(), null);
+
+        Transaction transaction5 = new Transaction(new TransactionId(104), TransactionType.REVENUE,
                 new Description("Revenue 3"),
-                new Amount(new BigDecimal("31.1")), new Date());
-        Transaction transaction6 = new Transaction(new TransactionId("55555"), TransactionType.EXPENSE,
+                new Amount(new BigDecimal("31.1")), new Date(), null);
+
+        Transaction transaction6 = new Transaction(new TransactionId(105), TransactionType.EXPENSE,
                 new Description("Expense 3"),
-                new Amount(new BigDecimal("21.02")), new Date());
+                new Amount(new BigDecimal("21.02")), new Date(), null);
 
         TransactionBook transactionBook = new TransactionBook();
         transactionBook.addTransaction(transaction1);

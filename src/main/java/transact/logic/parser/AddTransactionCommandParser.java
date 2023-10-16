@@ -15,7 +15,6 @@ import transact.model.transaction.Transaction;
 import transact.model.transaction.info.Amount;
 import transact.model.transaction.info.Date;
 import transact.model.transaction.info.Description;
-import transact.model.transaction.info.TransactionId;
 import transact.model.transaction.info.TransactionType;
 
 /**
@@ -53,8 +52,7 @@ public class AddTransactionCommandParser implements Parser<AddTransactionCommand
         // TODO Parse Optional Staff
         // Person staff = ParserUtil.parsePerson(args);
 
-        Transaction transaction = new Transaction(new TransactionId(), transactionType, description, amount,
-                new Date());
+        Transaction transaction = new Transaction(transactionType, description, amount, new Date(), null);
 
         return new AddTransactionCommand(transaction);
     }

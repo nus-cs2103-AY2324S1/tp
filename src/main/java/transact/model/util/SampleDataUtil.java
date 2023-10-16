@@ -14,12 +14,11 @@ import transact.model.person.Name;
 import transact.model.person.Person;
 import transact.model.person.Phone;
 import transact.model.tag.Tag;
-import transact.model.transaction.Expense;
-import transact.model.transaction.Revenue;
 import transact.model.transaction.Transaction;
 import transact.model.transaction.info.Amount;
+import transact.model.transaction.info.Date;
 import transact.model.transaction.info.Description;
-import transact.model.transaction.info.TransactionId;
+import transact.model.transaction.info.TransactionType;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
@@ -58,13 +57,12 @@ public class SampleDataUtil {
     }
 
     public static Transaction[] getSampleTransactions() {
-        // TODO Add more fields
         return new Transaction[] {
-            new Expense(new TransactionId("00000001"), new Description("Expense 1"), new Amount(100)),
-            new Expense(new TransactionId("00000002"), new Description("Expense 2"), new Amount(200)),
-            new Expense(new TransactionId("00000003"), new Description("Expense 3"), new Amount(300)),
-            new Revenue(new TransactionId("00000004"), new Description("Revenue 1"), new Amount(1000)),
-            new Revenue(new TransactionId("00000005"), new Description("Revenue 2"), new Amount(500)),
+            new Transaction(TransactionType.EXPENSE, new Description("Expense 1"), new Amount(100), new Date(), null),
+            new Transaction(TransactionType.EXPENSE, new Description("Expense 2"), new Amount(200), new Date(), null),
+            new Transaction(TransactionType.EXPENSE, new Description("Expense 3"), new Amount(300), new Date(), null),
+            new Transaction(TransactionType.REVENUE, new Description("Revenue 1"), new Amount(1000), new Date(), null),
+            new Transaction(TransactionType.REVENUE, new Description("Revenue 2"), new Amount(1200), new Date(), null),
         };
     }
 
