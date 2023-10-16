@@ -72,6 +72,9 @@ public class AddressBook implements ReadOnlyAddressBook {
      * The person must not already exist in the address book.
      */
     public void addPerson(Person p) {
+        if (p.getId().isEmpty()) {
+            p.setId(getNextID());
+        }
         persons.add(p);
     }
 
@@ -127,12 +130,16 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.hashCode();
     }
 
-    public int getNextID() {
+    private int getNextID() {
         //TODO: works for now, change later to something more efficient.
         int maxID = 0;
         for (Person p : persons) {
-            if (p.getId() > maxID) {
-                maxID = p.getId();
+            if (p.getId().isEmpty()) {
+                continue;
+            }
+            int id = p.getId().get();
+            if (id > maxID) {
+                maxID = id;
             }
         }
         return maxID + 1;

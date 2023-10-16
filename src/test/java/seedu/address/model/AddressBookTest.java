@@ -87,39 +87,27 @@ public class AddressBookTest {
     }
 
     @Test
-    public void getNextID_emptyAddressBook_returnsUniqueID() {
-        addressBook.resetData(new AddressBookStub(Collections.emptyList()));
-        //calling getNextID() should not throw any exceptions
-        assertDoesNotThrow(() -> addressBook.getNextID());
-    }
-
-    @Test
     public void randomOperations_ensureUniqueIDs() {
         addressBook.resetData(new AddressBookStub(Collections.emptyList()));
         Random random = new Random();
         HashSet<Integer> ids = new HashSet<>();
         for (int i = 0; i < 200; i++) {
             if (addressBook.getPersonList().isEmpty() || random.nextBoolean()) {
-                int newID = addressBook.getNextID();
-
-                assertFalse(ids.contains(newID));
-                ids.add(newID);
-                //generate random name via UUID
                 String name = java.util.UUID.randomUUID().toString().replace("-", "");
-
-                Person newPerson = new PersonBuilder().withName(name).withId(newID).build();
+                Person newPerson = new PersonBuilder().withName(name).build();
                 addressBook.addPerson(newPerson);
+                ids.add(newPerson.getId().get());
             } else {
                 int randomIndex = random.nextInt(addressBook.getPersonList().size());
                 Person personToRemove = addressBook.getPersonList().get(randomIndex);
-                ids.remove(personToRemove.getId());
+                ids.remove(personToRemove.getId().get());
                 addressBook.removePerson(personToRemove);
             }
         }
 
         for (Person person : addressBook.getPersonList()) {
-            assertTrue(ids.contains(person.getId()));
-            ids.remove(person.getId());
+            assertTrue(ids.contains(person.getId().get()));
+            ids.remove(person.getId().get());
         }
         assertTrue(ids.isEmpty());
     }

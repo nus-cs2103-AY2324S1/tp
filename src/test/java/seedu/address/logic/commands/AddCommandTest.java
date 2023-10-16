@@ -170,10 +170,6 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-        @Override
-        public int getNextID() {
-            throw new AssertionError("This method should not be called.");
-        }
     }
 
     /**
@@ -218,10 +214,6 @@ public class AddCommandTest {
             return new AddressBook();
         }
 
-        @Override
-        public int getNextID() {
-            return ++id;
-        }
     }
 
 }
