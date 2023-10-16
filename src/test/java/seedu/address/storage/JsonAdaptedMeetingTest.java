@@ -25,6 +25,7 @@ public class JsonAdaptedMeetingTest {
     private static final String INVALID_START = "99.99.9999 9999";
     private static final String INVALID_END = "88.88.8888 8888";
     private static final String INVALID_ATTENDEE = " ";
+    private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_TITLE = MEETING1.getTitle().toString();
     private static final String VALID_LOCATION = MEETING1.getLocation().toString();
@@ -114,6 +115,15 @@ public class JsonAdaptedMeetingTest {
         JsonAdaptedMeeting meeting = new JsonAdaptedMeeting(VALID_TITLE, VALID_LOCATION, VALID_START, VALID_END,
                 invalidAttendees, VALID_TAGS);
         assertThrows(IllegalValueException.class, meeting::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidTags_throwsIllegalValueException() {
+        List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
+        invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_TITLE, VALID_LOCATION, VALID_START, VALID_END, invalidTags);
+        assertThrows(IllegalValueException.class, person::toModelType);
     }
 
 }

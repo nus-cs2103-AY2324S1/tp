@@ -5,11 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalMeetings.MEETING1;
-import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.MeetingBuilder;
 
 public class MeetingTest {
@@ -71,12 +69,14 @@ public class MeetingTest {
 
         // different email -> returns false
         editedMeeting1 = new MeetingBuilder(MEETING1).withStart("20.09.2023 1100").build();
-        assertFalse(ALICE.equals(editedMeeting1));
+        assertFalse(MEETING1.equals(editedMeeting1));
 
-        AddressBookBuilder test = new AddressBookBuilder();
-        test.withPerson(ALICE);
-        // different tags -> returns false
+        // different attendees -> returns false
         editedMeeting1 = new MeetingBuilder(MEETING1).withAttendees("Alice Pauline").build();
+        assertFalse(MEETING1.equals(editedMeeting1));
+
+        // different tags -> returns false
+        editedMeeting1 = new MeetingBuilder(MEETING1).withTags("other").build();
         assertFalse(MEETING1.equals(editedMeeting1));
     }
 
