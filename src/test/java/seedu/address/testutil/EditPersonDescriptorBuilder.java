@@ -1,16 +1,15 @@
 package seedu.address.testutil;
 
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 import seedu.address.logic.commands.EditCommand.EditEmployeeDescriptor;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.AnnualLeave;
+import seedu.address.model.person.BankAccount;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.JoinDate;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.Salary;
 
 /**
  * A utility class to help with building EditEmployeeDescriptor objects.
@@ -36,7 +35,10 @@ public class EditEmployeeDescriptorBuilder {
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
-        descriptor.setTags(person.getTags());
+        descriptor.setBankAccount(person.getBankAccount());
+        descriptor.setJoinDate(person.getJoinDate());
+        descriptor.setSalary(person.getSalary());
+        descriptor.setAnnualLeave(person.getAnnualLeave());
     }
 
     /**
@@ -72,12 +74,38 @@ public class EditEmployeeDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditEmployeeDescriptor}
-     * that we are building.
+     * Sets the {@code BankAccount} of the {@code EditEmployeeDescriptor} that we are
+     * building.
      */
-    public EditEmployeeDescriptorBuilder withTags(String... tags) {
-        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
-        descriptor.setTags(tagSet);
+    public EditEmployeeDescriptorBuilder withBankAccount(String bankAccount) {
+        descriptor.setBankAccount(new BankAccount(bankAccount));
+        return this;
+    }
+
+    /**
+     * Sets the {@code JoinDate} of the {@code EditEmployeeDescriptor} that we are
+     * building.
+     */
+    public EditEmployeeDescriptorBuilder withJoinDate(String joinDate) {
+        descriptor.setJoinDate(new JoinDate(joinDate));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Salary} of the {@code EditEmployeeDescriptor} that we are
+     * building.
+     */
+    public EditEmployeeDescriptorBuilder withSalary(String salary) {
+        descriptor.setSalary(new Salary(salary));
+        return this;
+    }
+
+    /**
+     * Sets the {@code AnnualLeave} of the {@code EditEmployeeDescriptor} that we are
+     * building.
+     */
+    public EditEmployeeDescriptorBuilder withAnnualLeave(String annualLeave) {
+        descriptor.setAnnualLeave(new AnnualLeave(annualLeave));
         return this;
     }
 

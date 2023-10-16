@@ -8,7 +8,8 @@ import seedu.address.commons.util.ToStringBuilder;
 
 /**
  * Represents a Person in the address book.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Guarantees: details are present and not null, field values are validated,
+ * immutable.
  */
 public class Person {
 
@@ -27,8 +28,8 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address,
-                  BankAccount bankAccount, JoinDate joinDate, Salary salary, AnnualLeave annualLeave) {
+    public Person(Name name, Phone phone, Email email, Address address, BankAccount bankAccount, JoinDate joinDate,
+            Salary salary, AnnualLeave annualLeave) {
         requireAllNonNull(name, phone, email, address, bankAccount, joinDate, salary, annualLeave);
         this.name = name;
         this.phone = phone;
@@ -103,13 +104,13 @@ public class Person {
 
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
-            && phone.equals(otherPerson.phone)
-            && email.equals(otherPerson.email)
-            && address.equals(otherPerson.address)
-            && bankAccount.equals(otherPerson.bankAccount)
-            && joinDate.equals(otherPerson.joinDate)
-            && salary.equals(otherPerson.salary)
-            && annualLeave.equals(otherPerson.annualLeave);
+                && phone.equals(otherPerson.phone)
+                && email.equals(otherPerson.email)
+                && address.equals(otherPerson.address)
+                && bankAccount.equals(otherPerson.bankAccount)
+                && joinDate.equals(otherPerson.joinDate)
+                && salary.equals(otherPerson.salary)
+                && annualLeave.equals(otherPerson.annualLeave);
     }
 
     @Override
@@ -121,15 +122,14 @@ public class Person {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-            .add("name", name)
-            .add("phone", phone)
-            .add("email", email)
-            .add("address", address)
-            .add("bankAccount", bankAccount)
-            .add("joinDate", joinDate)
-            .add("salary", salary)
-            .add("annualLeave", annualLeave)
-            .toString();
+                .add("name", name)
+                .add("phone", phone)
+                .add("email", email)
+                .add("address", address)
+                .add("bankAccount", bankAccount)
+                .add("joinDate", joinDate)
+                .add("salary", salary)
+                .add("annualLeave", annualLeave)
+                .toString();
     }
-
 }

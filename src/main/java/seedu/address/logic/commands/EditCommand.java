@@ -26,10 +26,14 @@ import seedu.address.model.employee.BankAccount;
 import seedu.address.model.employee.JoinDate;
 import seedu.address.model.employee.Salary;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.AnnualLeave;
+import seedu.address.model.person.BankAccount;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.JoinDate;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Salary;
 
 /**
  * Edits the details of an existing employee in the list.
