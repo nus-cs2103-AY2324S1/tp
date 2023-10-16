@@ -16,7 +16,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses user input while in the fosterer profile view page.
  */
-public class ViewModeParser {
+public class ViewModeParser implements Parser {
     /**
      * Used for initial separation of command word and args.
      */

@@ -37,7 +37,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonProfile personProfile;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
-
+    private boolean isInViewMode = false;
     @FXML
     private StackPane commandBoxPlaceholder;
 
@@ -46,6 +46,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane personListPanelPlaceholder;
+
+    @FXML
+    private StackPane personProfilePlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -173,15 +176,19 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private void handleView(Person personToView) {
-        personProfile = new PersonProfile(personToView);
-        personListPanelPlaceholder.getChildren().remove(personListPanel.getRoot());
-        personListPanelPlaceholder.getChildren().add(personProfile.getRoot());
+        if (personListPanelPlaceholder.isVisible()) {
+            personProfile = new PersonProfile(personToView);
+            personProfilePlaceholder.getChildren().add(personProfile.getRoot());
+            personProfilePlaceholder.setVisible(true);
+            personListPanelPlaceholder.setVisible(false);
+        }
     }
+
     @FXML
     private void handleViewExit() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().remove(personProfile.getRoot());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        personListPanelPlaceholder.setVisible(true);
+        personProfilePlaceholder.getChildren().remove(personProfile.getRoot());
+        personProfilePlaceholder.setVisible(false);
     }
 
     /**
@@ -203,11 +210,11 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
-            if (commandResult.isShowView()) {
+            if (logic.getIsViewCommand()) {
                 handleView(commandResult.getPersonToView());
             }
 
-            if (commandResult.isViewExit()) {
+            if (logic.getIsViewExitCommand()) {
                 handleViewExit();
             }
 
@@ -219,4 +226,10 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Returns the boolean value that checks whether the current UI is in profile view page or normal foster list page.
+     */
+    public boolean getIsInViewMode() {
+        return this.isInViewMode;
+    }
 }

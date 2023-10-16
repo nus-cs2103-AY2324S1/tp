@@ -14,6 +14,7 @@ import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.commands.ViewExitCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
+import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ViewModeParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -33,10 +34,11 @@ public class LogicManager implements Logic {
 
     private final Model model;
     private final Storage storage;
+    private Parser parser;
     private final AddressBookParser addressBookParser;
     private final ViewModeParser viewModeParser;
-
-    private boolean isInViewMode = false;
+    private boolean isViewCommand = false;
+    private boolean isViewExitCommand = false;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -46,6 +48,7 @@ public class LogicManager implements Logic {
         this.storage = storage;
         addressBookParser = new AddressBookParser();
         viewModeParser = new ViewModeParser();
+        this.parser = addressBookParser;
     }
 
     @Override
@@ -54,21 +57,20 @@ public class LogicManager implements Logic {
         Command command;
         CommandResult commandResult;
 
-        if (!isInViewMode) {
-            command = addressBookParser.parseCommand(commandText);
-
-        } else {
-            command = viewModeParser.parseCommand(commandText);
-        }
-
+        command = parser.parseCommand(commandText);
         commandResult = command.execute(model);
 
         if (command instanceof ViewCommand) {
-            isInViewMode = true;
-        }
-
-        if (command instanceof ViewExitCommand) {
-            isInViewMode = false;
+            isViewCommand = true;
+            isViewExitCommand = false;
+            this.setParser(viewModeParser);
+        } else if (command instanceof ViewExitCommand) {
+            isViewExitCommand = true;
+            isViewCommand = false;
+            this.setParser(addressBookParser);
+        } else {
+            isViewCommand = false;
+            isViewExitCommand = false;
         }
 
         try {
@@ -80,10 +82,6 @@ public class LogicManager implements Logic {
         }
 
         return commandResult;
-    }
-
-    public void setIsInViewMode(boolean isInViewMode) {
-        this.isInViewMode = isInViewMode;
     }
     @Override
     public ReadOnlyAddressBook getAddressBook() {
@@ -108,5 +106,17 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    public boolean getIsViewCommand() {
+        return isViewCommand;
+    }
+
+    public boolean getIsViewExitCommand() {
+        return isViewExitCommand;
+    }
+
+    public void setParser(Parser parser) {
+        this.parser = parser;
     }
 }

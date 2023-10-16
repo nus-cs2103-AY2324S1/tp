@@ -111,7 +111,6 @@ public class LogicManagerTest {
 
     private void assertAddressBookCommandSuccess(String inputCommand, String expectedMessage,
             Model expectedModel) throws CommandException, ParseException {
-        logic.setIsInViewMode(false);
         CommandResult result = logic.execute(inputCommand);
         assertEquals(expectedMessage, result.getFeedbackToUser());
         assertEquals(expectedModel, model);
