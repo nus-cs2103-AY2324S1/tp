@@ -98,8 +98,4 @@ public interface Model {
      * @return List of events.
      */
     List<Event> getEventList();
-
-    /**
-     * Returns the next ID to be used for a new person.
-     */
 }
