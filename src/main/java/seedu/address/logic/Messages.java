@@ -4,7 +4,8 @@ import seedu.address.model.contact.Email;
 
 
 
-//TODO we could avoid static imports, and instead refer to strings as Messages.FOO. Then we can remove the MESSAGE_ prefix for everything
+//TODO we could avoid static imports, and instead refer to strings as
+// Messages.FOO. Then we can remove the MESSAGE_ prefix for everything
 //TODO prefix messages containing format specifiers with UNFORMATTED_
 /**
  * Holds message strings used by the logic for display to the user.
@@ -63,7 +64,7 @@ public final class Messages {
     public static final String MESSAGE_FIELD_MISSING = "Contact's %s field is missing.";
     public static final String MESSAGE_CONTAIN_DUPLICATE_CONTACT = "Contact list contains duplicate contact(s).";
 
-	//TODO refine the messages above this line
+    //TODO refine the messages above this line
 
     // Tag
     private static final String UNFORMATTED_TAG_INVALID = "\"%s\" is not a valid tag. Tags must be alphanumeric (spaces allowed).";
