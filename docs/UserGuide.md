@@ -4,7 +4,7 @@ title: User Guide
 ---
 
 WellNUS is a **desktop application used by NUS Counsellors to manage and schedule appointments with their student clients**
-It is optimised for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). 
+It is optimised for use via a **Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). 
 If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
@@ -191,15 +191,15 @@ _Details coming soon ..._
 
 
 
-| Action                          | Format, Examples                                                                                                                          |
-|---------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add a student**               | `add student n/<NAME> p/<PHONE_NUMBER> e/<EMAIL> a/<ADDRESS>` <br> e.g., `add student n/John c/81349705 a/Yishun Street 56 Blk 21 #05-07` |
-| **View all students**           | `view students`                                                                                                                           |
-| **Delete a student**            | `delete student <INDEX>`<br> e.g., `delete student 3`                                                                                     |
-| **Tag a student to risk level** | `tag_student <INDEX> <RISK_LEVEL>`<br> e.g.,`tag_student 4 HIGH`                                                                          |
-| **Add an appointment**          | `add appointment d/<DATETIME_OF_APPOINMENT> n/<NAME_OF_STUDENT>`<br> e.g., `add appointment d/2023-12-31 16:30 n/Jon`                     |
-| **View all appointments**       | `view appointments`                                                                                                                       |
-| **Delete an appointment**       | `delete appointment <INDEX>`<br> e.g., `delete appointment 3`                                                                             |
-| **Help**                        | `help`                                                                                                                                    |
-| **Exit**                        | `exit`                                                                                                                                    |
+| Action                          | Format, Examples                                                                                                                |
+|---------------------------------|---------------------------------------------------------------------------------------------------------------------------------|
+| **Add a student**               | `add student n/<NAME> c/<PHONE_NUMBER> a/<ADDRESS>` <br> e.g., `add student n/John c/81349705 a/Yishun Street 56 Blk 21 #05-07` |
+| **View all students**           | `view students`                                                                                                                 |
+| **Delete a student**            | `delete student <INDEX>`<br> e.g., `delete student 3`                                                                           |
+| **Tag a student to risk level** | `tag_student <INDEX> <RISK_LEVEL>`<br> e.g.,`tag_student 4 HIGH`                                                                |
+| **Add an appointment**          | `add appointment d/<DATETIME_OF_APPOINMENT> n/<NAME_OF_STUDENT>`<br> e.g., `add appointment d/2023-12-31 16:30 n/Jon`           |
+| **View all appointments**       | `view appointments`                                                                                                             |
+| **Delete an appointment**       | `delete appointment <INDEX>`<br> e.g., `delete appointment 3`                                                                   |
+| **Help**                        | `help`                                                                                                                          |
+| **Exit**                        | `exit`                                                                                                                          |
 
