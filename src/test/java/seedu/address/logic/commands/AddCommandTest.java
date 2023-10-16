@@ -216,6 +216,12 @@ public class AddCommandTest {
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
         }
+
+        @Override
+        public int getNextID() {
+            return ++id;
+        }
+        private int id = 0;
     }
 
 }

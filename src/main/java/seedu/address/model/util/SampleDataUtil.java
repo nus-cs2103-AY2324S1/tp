@@ -40,7 +40,7 @@ public class SampleDataUtil {
                 Optional.empty(),
                 Optional.empty(),
                 Optional.empty(),
-                getTagSet("classmates")),
+                getTagSet("classmates"), 0),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"),
                 getTagSet("colleagues"))

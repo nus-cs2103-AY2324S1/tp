@@ -161,8 +161,9 @@ public class ModelManager implements Model {
     }
 
     /*
-        * Returns the next ID to be used for a new person.
+     * Returns the next ID to be used for a new person.
      */
+    @Override
     public int getNextID() {
         return addressBook.getNextID();
     }

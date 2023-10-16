@@ -132,9 +132,10 @@ class JsonAdaptedPerson {
         final Optional<Telegram> modelTelegram = telegram.map(telegram -> new Telegram(telegram));
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
+        final int modelID = 0;
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelBirthday, modelLinkedin,
-                modelSecondaryEmail, modelTelegram, modelTags);
+                modelSecondaryEmail, modelTelegram, modelTags, modelID);
     }
 
 }

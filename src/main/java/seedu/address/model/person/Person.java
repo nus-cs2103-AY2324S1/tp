@@ -53,7 +53,7 @@ public class Person {
      */
     public Person(Name name, Phone phone, Email email, Address address, Optional<Birthday> birthday,
                   Optional<Linkedin> linkedin, Optional<Email> secondaryEmail,
-                  Optional<Telegram> telegram, Set<Tag> tags) {
+                  Optional<Telegram> telegram, Set<Tag> tags, int id) {
         requireAllNonNull(name, phone, email, address, birthday, tags);
         this.name = name;
         this.phone = phone;
@@ -64,6 +64,7 @@ public class Person {
         this.secondaryEmail = secondaryEmail;
         this.telegram = telegram;
         this.tags.addAll(tags);
+        this.id = id;
     }
 
     public Name getName() {
