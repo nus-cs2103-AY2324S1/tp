@@ -102,5 +102,4 @@ public interface Model {
     /**
      * Returns the next ID to be used for a new person.
      */
-    int getNextID();
 }

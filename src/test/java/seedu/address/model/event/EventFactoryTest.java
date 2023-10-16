@@ -31,7 +31,7 @@ public class EventFactoryTest {
                 Optional.empty(),
                 Optional.empty(),
                 new HashSet<>(),
-            0
+                Optional.empty()
         ));
 
         assertTrue(EventFactory.createEvents(modelManager).size() > 0);

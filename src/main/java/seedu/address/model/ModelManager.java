@@ -159,13 +159,4 @@ public class ModelManager implements Model {
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
-
-    /*
-     * Returns the next ID to be used for a new person.
-     */
-    @Override
-    public int getNextID() {
-        return addressBook.getNextID();
-    }
-
 }

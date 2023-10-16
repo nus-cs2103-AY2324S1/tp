@@ -73,7 +73,7 @@ public class PersonCard extends UiPart<Region> {
         person.getNonEmergencyTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        uniqueId.setText(Integer.toString(person.getId()));
+        uniqueId.setText(person.getId().map(x -> Integer.toString(x)).orElse("NONE"));
 
     }
 }

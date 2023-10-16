@@ -93,7 +93,7 @@ public class AddAltCommand extends Command {
         Email updatedSecondaryEmail = personToEdit.getSecondaryEmail()
                         .orElse(addAltPersonDescriptor.getSecondaryEmail());
         Telegram updatedTelegram = personToEdit.getTelegram().orElse(addAltPersonDescriptor.getTelegram());
-        int id = personToEdit.getId();
+        Optional<Integer> id = personToEdit.getId();
 
         return new Person(name, phone, email, address, birthday, Optional.ofNullable(updatedLinkedin),
                 Optional.ofNullable(updatedSecondaryEmail), Optional.ofNullable(updatedTelegram), tags, id);

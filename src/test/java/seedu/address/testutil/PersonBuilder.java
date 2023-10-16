@@ -34,7 +34,7 @@ public class PersonBuilder {
     private Optional<Linkedin> linkedin;
     private Optional<Email> secondaryEmail;
     private Optional<Telegram> telegram;
-    private int id;
+    private Optional<Integer> id;
     private Set<Tag> tags;
 
     /**
@@ -50,6 +50,7 @@ public class PersonBuilder {
         secondaryEmail = Optional.empty(); // No secondaryEmail by default
         telegram = Optional.empty(); // No telegram by default
         tags = new HashSet<>();
+        id = Optional.empty();
     }
 
     /**
@@ -145,7 +146,7 @@ public class PersonBuilder {
      * Sets the {@code ID} of the {@code Person} that we are building.
      */
     public PersonBuilder withId(int id) {
-        this.id = id;
+        this.id = Optional.of(id);
         return this;
     }
 
