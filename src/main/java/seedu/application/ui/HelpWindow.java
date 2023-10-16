@@ -25,7 +25,8 @@ public class HelpWindow extends UiPart<Stage> {
             + "5. To set a deadline for an application: deadline INDEX d/DEADLINE \n"
             + "6. To find an application by company: find -c [KEYWORDS] \n"
             + "7. To find an application by role: find -r [KEYWORDS] \n";
-    public static final String HELP_MESSAGE = HELP_MESSAGE_COMMANDS + "\n" + "Refer to the user guide for additional optional inputs: " + USERGUIDE_URL;
+    public static final String HELP_MESSAGE = HELP_MESSAGE_COMMANDS + "\n"
+            + "Refer to the user guide for additional optional inputs: " + USERGUIDE_URL;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
