@@ -1,9 +1,9 @@
 package seedu.address.model.person;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 public class TutorialGroup {
+
     public static final String MESSAGE_CONSTRAINTS = "Tutorial group should only contain alphanumeric "
             + "characters, with no special characters or space, and it should not be blank";
     public static final String VALIDATION_REGEX = "^[a-zA-Z0-9]*$";

@@ -113,6 +113,12 @@ public class ParserUtil {
         return trimmedAttendance.equals("1");
     }
 
+    /**
+     * Parses a {@code String tutorialGroup} into a TutorialGroup.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code tutorialGroup} is invalid.
+     */
     public static TutorialGroup parseTutorialGroup(String tg) throws ParseException {
         requireNonNull(tg);
         String trimmedTutorialGroup = tg.trim();

@@ -1,12 +1,10 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.isNull;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALGROUP;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.model.Model.PREDICATE_SHOW_NO_PERSONS;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.person.ContainsTutorialGroupPredicate;
 import seedu.address.model.person.TutorialGroup;
@@ -24,12 +22,16 @@ public class ListCommand extends Command {
             + PREFIX_TUTORIALGROUP + " TUTORIALGROUPID "
             + "Example: " + COMMAND_WORD + " students" + " tg/ G01";
     public static final String MESSAGE_SUCCESS_STUDENTS = "Listed all specified students";
-    public static final String MESSAGE_SUCCESS_ATTENDANCE = "Listed attendance records \n a\n a\n a\n a\n a\n a\n a";
+    public static final String MESSAGE_SUCCESS_ATTENDANCE = "Listed attendance records";
     private final String type;
     private final TutorialGroup tg;
     private final ContainsTutorialGroupPredicate predicate;
 
-
+    /**
+     * @param type Type of list command
+     * @param tg Tutorial group to list
+     * @param predicate Predicate used to filter for students in the tutorial group
+     */
     public ListCommand(String type, TutorialGroup tg, ContainsTutorialGroupPredicate predicate) {
         requireNonNull(type);
         this.type = type;

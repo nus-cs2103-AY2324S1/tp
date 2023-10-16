@@ -2,33 +2,17 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALGROUP;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Optional;
-import java.util.Set;
-
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.ContainsTutorialGroupPredicate;
 import seedu.address.model.person.TutorialGroup;
-import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new ListCommand object
  */
 public class ListCommandParser implements Parser<ListCommand> {
-
-    String tgValue;
-    String type;
-    TutorialGroup tg;
 
     /**
      * Parses the given {@code String} of arguments in the context of the ListCommand
@@ -37,11 +21,14 @@ public class ListCommandParser implements Parser<ListCommand> {
      */
     public ListCommand parse(String args) throws ParseException {
         requireNonNull(args);
+
+        String type;
+        TutorialGroup tg = new TutorialGroup("PLACEHOLDER");
+
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_TUTORIALGROUP);
 
         String trimmedArgs = args.trim();
-        tg = new TutorialGroup("PLACEHOLDER");
         if (trimmedArgs.startsWith("students")) {
             type = "students";
         } else if (trimmedArgs.startsWith("attendance")) {
@@ -51,8 +38,8 @@ public class ListCommandParser implements Parser<ListCommand> {
         }
 
         if (argMultimap.getValue(PREFIX_TUTORIALGROUP).isPresent()) {
-            tgValue = argMultimap.getValue(PREFIX_TUTORIALGROUP).get();
-            tg = new TutorialGroup(tgValue);
+            String tgValue = argMultimap.getValue(PREFIX_TUTORIALGROUP).get();
+            tg = ParserUtil.parseTutorialGroup(tgValue);
         }
 
         return new ListCommand(type, tg, new ContainsTutorialGroupPredicate(tg));
