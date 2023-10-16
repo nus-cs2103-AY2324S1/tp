@@ -162,7 +162,6 @@ public class AddCommandTest {
         public void setSpecificPersonToDisplay(Person targetPerson) {
             throw new AssertionError("This method should not be called.");
         }
-
     }
 
     /**

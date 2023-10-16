@@ -48,7 +48,7 @@ public class CommandResult {
 
     /**
      * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
-     * {@code read} and {@code fieldToRead}, and other fields set to their default value.
+     * ,store read field and set read to true to display a different person card.
      */
     public CommandResult(String feedbackToUser, boolean read, String fieldToRead) {
         this.feedbackToUser = feedbackToUser;

@@ -40,8 +40,13 @@ public class ReadCommand extends Command {
      *              email).
      */
     public ReadCommand(Index index, String field) {
+        requireNonNull(index, field);
         this.targetIndex = index;
         this.field = field;
+    }
+
+    public String getField() {
+        return this.field;
     }
 
     @Override
@@ -54,7 +59,9 @@ public class ReadCommand extends Command {
         }
 
         Person personToRead = lastShownList.get(targetIndex.getZeroBased());
-        String fieldStr = fieldToString(personToRead);
+
+        String fieldStr = fieldValueToString(personToRead);
+
         model.setSpecificPersonToDisplay(personToRead);
 
         return new CommandResult(String.format(MESSAGE_READ_PERSON_SUCCESS, field), true, fieldStr);
@@ -67,15 +74,31 @@ public class ReadCommand extends Command {
      * @return The information specified by the field.
      * @throws CommandException if the field is invalid.
      */
-    public String fieldToString(Person person) throws CommandException {
-        if (field.equals("p")) {
+
+    public String fieldValueToString(Person person) throws CommandException {
+        if (field.equals("phone")) {
             return person.getPhone().value;
-        } else if (field.equals("a")) {
+        } else if (field.equals("address")) {
             return person.getAddress().value;
-        } else if (field.equals("e")) {
+        } else if (field.equals("email")) {
             return person.getEmail().value;
         } else {
             throw new CommandException(Messages.MESSAGE_INVALID_FIELD_TO_READ);
         }
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ReadCommand)) {
+            return false;
+        }
+
+        ReadCommand otherReadCommand = (ReadCommand) other;
+        return targetIndex.equals(otherReadCommand.targetIndex) && field.equals(otherReadCommand.getField());
     }
 }
