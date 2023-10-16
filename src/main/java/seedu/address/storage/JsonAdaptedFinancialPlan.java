@@ -2,9 +2,14 @@ package seedu.address.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.financialPlan.FinancialPlan;
+import seedu.address.model.tag.Tag;
 
+/**
+ * Jackson-friendly version of {@link FinancialPlan}.
+ */
 public class JsonAdaptedFinancialPlan {
 
     private final String financialPlanName;

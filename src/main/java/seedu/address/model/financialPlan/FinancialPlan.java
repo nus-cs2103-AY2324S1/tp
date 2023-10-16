@@ -3,7 +3,8 @@ package seedu.address.model.financialPlan;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-public class FinancialPlan {    public static final String MESSAGE_CONSTRAINTS = "Financial plan names should be alphanumeric or space characters";
+public class FinancialPlan {
+    public static final String MESSAGE_CONSTRAINTS = "Financial plan names should be alphanumeric or space characters";
     public static final String VALIDATION_REGEX = "^[a-zA-Z0-9\\s]+$";
 
     public final String financialPlanName;

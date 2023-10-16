@@ -3,11 +3,11 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FINANCIAL_PLAN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXT_OF_KIN_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXT_OF_KIN_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FINANCIAL_PLAN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
@@ -55,7 +55,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         NextOfKinName nokName = ParserUtil.parseNextOfKinName(argMultimap.getValue(PREFIX_NEXT_OF_KIN_NAME).get());
         NextOfKinPhone nokPhone = ParserUtil
                 .parseNextOfKinPhone((argMultimap.getValue(PREFIX_NEXT_OF_KIN_PHONE)).get());
-        Set<FinancialPlan> financialPlanList = ParserUtil.parseFinancialPlans(argMultimap.getAllValues(PREFIX_FINANCIAL_PLAN));
+        Set<FinancialPlan> financialPlanList = ParserUtil.parseFinancialPlans(
+                argMultimap.getAllValues(PREFIX_FINANCIAL_PLAN));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Person person = new Person(name, phone, email, address, nokName, nokPhone, financialPlanList, tagList);
         return new AddCommand(person);

@@ -2,7 +2,14 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FINANCIAL_PLAN;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXT_OF_KIN_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXT_OF_KIN_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -68,7 +75,8 @@ public class EditCommandParser implements Parser<EditCommand> {
                     .get()));
         }
 
-        parseFinancialPlansForEdit(argMultimap.getAllValues(PREFIX_FINANCIAL_PLAN)).ifPresent(editPersonDescriptor::setFinancialPlans);
+        parseFinancialPlansForEdit(argMultimap.getAllValues(PREFIX_FINANCIAL_PLAN))
+                .ifPresent(editPersonDescriptor::setFinancialPlans);
 
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 
@@ -80,9 +88,10 @@ public class EditCommandParser implements Parser<EditCommand> {
     }
 
     /**
-     * Parses {@code Collection<String> financialPlans} into a {@code Set<FinancialPlan>} if {@code financialPlans} is non-empty.
+     * Parses {@code Collection<String> financialPlans} into a {@code Set<FinancialPlan>}
+     * if {@code financialPlans} is non-empty.
      * If {@code financialPlans} contain only one element which is an empty string, it will be parsed into a
-     * {@code Set<FinancialPlan>} containing zero tags.
+     * {@code Set<FinancialPlan>} containing zero financial plans.
      */
     private Optional<Set<FinancialPlan>> parseFinancialPlansForEdit(Collection<String> financialPlans) throws ParseException {
         assert financialPlans != null;
@@ -90,7 +99,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (financialPlans.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> financialPlanSet = financialPlans.size() == 1 && financialPlans.contains("") ? Collections.emptySet() : financialPlans;
+        Collection<String> financialPlanSet = financialPlans.size() == 1 && financialPlans.contains("")
+                ? Collections.emptySet() : financialPlans;
         return Optional.of(ParserUtil.parseFinancialPlans(financialPlanSet));
     }
 

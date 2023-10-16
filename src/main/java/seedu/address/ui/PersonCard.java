@@ -72,7 +72,6 @@ public class PersonCard extends UiPart<Region> {
         person.getFinancialPlans().stream()
                 .sorted(Comparator.comparing(financialPlan -> financialPlan.financialPlanName))
                 .forEach(financialPlan -> financialPlans.getChildren().add(new Label(financialPlan.financialPlanName)));
-//        tagsTitle.setText("Tags(s): ");
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

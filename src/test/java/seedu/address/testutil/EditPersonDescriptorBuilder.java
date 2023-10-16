@@ -41,6 +41,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setAddress(person.getAddress());
         descriptor.setNextOfKinName(person.getNextOfKinName());
         descriptor.setNextOfKinPhone(person.getNextOfKinPhone());
+        descriptor.setFinancialPlans(person.getFinancialPlans());
         descriptor.setTags(person.getTags());
     }
 
