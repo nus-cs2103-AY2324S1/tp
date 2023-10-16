@@ -50,6 +50,6 @@ public class TeamTest {
                         BOB.getAddress(), BOB.getRemark(), BOB.getTags());
 
         aliceTeam.addDeveloper(bobDeveloper);
-        assertTrue(aliceTeam.getDevelopers().contains(bobDeveloper));
+        assertTrue(aliceTeam.getDevelopers().contains(bobDeveloper.hashCode()));
     }
 }

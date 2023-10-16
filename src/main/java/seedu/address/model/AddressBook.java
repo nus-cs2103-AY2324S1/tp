@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 //import java.util.TreeMap;
 
 import javafx.collections.ObservableList;
@@ -11,6 +12,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Team;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.person.UniqueTeamList;
 
 /**
  * Wraps all data at the address-book level
@@ -20,7 +22,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
 
-    private List<Team> teams;
+    private final UniqueTeamList teams;
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
@@ -30,7 +32,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
-        teams = new ArrayList<>();
+        teams = new UniqueTeamList();
     }
 
     public AddressBook() {}
@@ -53,7 +55,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.persons.setPersons(persons);
     }
     public void setTeamsStructure(List<Team> teams) {
-        this.teams = teams;
+        this.teams.setTeams(teams);
     }
 
     /**
@@ -62,7 +64,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void clear() {
         AddressBook empty = new AddressBook();
         setPersons(empty.getPersonList());
-        setTeamsStructure(empty.getTeamsList());
+        setTeamsStructure(empty.getTeamList());
     }
 
     /**
@@ -122,7 +124,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * @param team TODO(I added to pass checkstyle but im not sure what it is)
-     * @return a boolean indicating whether there is any existing team
+     * @return a boolean indicating whether there is any existing team in the teams of address book
      */
     public boolean hasTeam(Team team) {
         requireNonNull(team);
@@ -131,7 +133,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Adds a team to the team structure.
-     * The team must not already exist in the address book.
+     * The team must not already exist in the teams of address book.
      */
     public void addTeam(Team t) {
         teams.add(t);
@@ -139,7 +141,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Removes {@code key} from team structure.
-     * {@code key} must exist in the address book.
+     * {@code key} must exist in the teams of address book.
      */
     public void removeTeam(Team key) {
         teams.remove(key);
@@ -148,15 +150,16 @@ public class AddressBook implements ReadOnlyAddressBook {
 
 
     /**
-     * Replaces the given person {@code target} in the list with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * Replaces the given team {@code target} in the list with {@code editedTeam}.
+     * {@code target} must exist in the teams of address book.
+     * The team identity of {@code editedTeam} must not be the same as another existing Team in the
+     * teams of address book.
      */
-    public void setTeams(Team target, Team editedTeam) {
+    public void setTeam(Team target, Team editedTeam) {
         requireNonNull(editedTeam);
 
-        //todo: more data protection
-        teams.set(teams.indexOf(target), editedTeam);
+        teams.setTeam(target, editedTeam);
+
 
     }
 
@@ -176,9 +179,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
 
-    //todo: need override? data protection will be implemented later
-    public List<Team> getTeamsList() {
-        return teams;
+    @Override
+    public ObservableList<Team> getTeamList() {
+        return teams.asUnmodifiableObservableList();
     }
 
     @Override
@@ -200,6 +203,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     //todo: see if we need to incorporate the hash code of teams
     @Override
     public int hashCode() {
-        return persons.hashCode();
+
+        //return persons.hashCode();
+        return Objects.hash(persons, teams);
     }
 }

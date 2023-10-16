@@ -24,6 +24,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Team> filteredTeams;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -36,6 +37,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook, teamStructure);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredTeams = new FilteredList<>(this.addressBook.getTeamList());
     }
 
     /**
@@ -45,6 +47,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook();
         this.userPrefs = new UserPrefs();
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredTeams = new FilteredList<>(this.addressBook.getTeamList());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -98,6 +101,7 @@ public class ModelManager implements Model {
         return addressBook;
     }
 
+    // Person related functions-------------------------------------------------------------------------------------
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
@@ -139,6 +143,48 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    // Team related functions-------------------------------------------------------------------------------------
+    @Override
+    public boolean hasTeam(Team team) {
+        requireNonNull(team);
+        return addressBook.hasTeam(team);
+    }
+
+    @Override
+    public void deleteTeam(Team target) {
+        addressBook.removeTeam(target);
+    }
+
+    @Override
+    public void addTeam(Team Team) {
+        addressBook.addTeam(Team);
+        updateFilteredTeamList(PREDICATE_SHOW_ALL_TEAMS);
+    }
+
+    @Override
+    public void setTeam(Team target, Team editedTeam) {
+        requireAllNonNull(target, editedTeam);
+
+        addressBook.setTeam(target, editedTeam);
+    }
+
+    //=========== Filtered Team List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Team} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Team> getFilteredTeamList() {
+        return filteredTeams;
+    }
+
+    @Override
+    public void updateFilteredTeamList(Predicate<Team> predicate) {
+        requireNonNull(predicate);
+        filteredTeams.setPredicate(predicate);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -153,7 +199,8 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && filteredTeams.equals(otherModelManager.filteredTeams);
     }
 
 }
