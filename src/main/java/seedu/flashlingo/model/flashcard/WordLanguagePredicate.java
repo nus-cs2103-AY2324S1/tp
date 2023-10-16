@@ -5,7 +5,7 @@ import seedu.flashlingo.commons.util.ToStringBuilder;
 import java.util.function.Predicate;
 
 /**
- * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
+ * Tests that a {@code FlashCard} is the language given.
  */
 public class WordLanguagePredicate implements Predicate<FlashCard> {
     private final String language;
@@ -26,7 +26,7 @@ public class WordLanguagePredicate implements Predicate<FlashCard> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof WordContainsKeywordsPredicate)) {
+        if (!(other instanceof WordLanguagePredicate)) {
             return false;
         }
 
