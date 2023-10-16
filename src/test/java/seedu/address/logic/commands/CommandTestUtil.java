@@ -69,10 +69,13 @@ public class CommandTestUtil {
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
-    public static final String INVALID_BANKACCOUNT_DESC = " " + PREFIX_BANK_ACCOUNT + "a91721"; // 'a' not allowed in bankaccount
+    public static final String INVALID_BANKACCOUNT_DESC = " " + PREFIX_BANK_ACCOUNT
+        + "a91721"; // 'a' not allowed in bankAccount
     public static final String INVALID_JOINDATE_DESC = " " + PREFIX_JOIN_DATE + "10-923-10"; // wrong date format
-    public static final String INVALID_SALARY_DESC = " " + PREFIX_SALARY + "a291"; // 'a' not allowed in salary
-    public static final String INVALID_ANNUALLEAVE_DESC = " " + PREFIX_ANNUAL_LEAVE + "a19"; // 'a' not allowed in annual leave
+    public static final String INVALID_SALARY_DESC = " " + PREFIX_SALARY
+        + "a291"; // 'a' not allowed in salary
+    public static final String INVALID_ANNUALLEAVE_DESC = " " + PREFIX_ANNUAL_LEAVE
+        + "a19"; // 'a' not allowed in annual leave
     //todo add invalid bank account, join date and salary
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
