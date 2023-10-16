@@ -45,6 +45,8 @@ public class Messages {
                 .append(date.getGender())
                 .append("; Height: ")
                 .append(date.getHeight())
+                .append("; Income: ")
+                .append(date.getIncome())
                 .append("; Tags: ");
         date.getTags().forEach(builder::append);
         return builder.toString();

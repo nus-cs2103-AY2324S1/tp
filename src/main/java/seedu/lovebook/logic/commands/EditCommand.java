@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HEIGHT;
+import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_INCOME;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.lovebook.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -25,6 +26,7 @@ import seedu.lovebook.model.person.Age;
 import seedu.lovebook.model.person.Date;
 import seedu.lovebook.model.person.Gender;
 import seedu.lovebook.model.person.Height;
+import seedu.lovebook.model.person.Income;
 import seedu.lovebook.model.person.Name;
 import seedu.lovebook.model.tag.Tag;
 
@@ -43,6 +45,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_AGE + "AGE] "
             + "[" + PREFIX_GENDER + "GENDER] "
             + "[" + PREFIX_HEIGHT + "HEIGHT] "
+            + "[" + PREFIX_INCOME + "INCOME] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_AGE + "91234567 "
@@ -99,9 +102,10 @@ public class EditCommand extends Command {
         Age updatedAge = editPersonDescriptor.getAge().orElse(dateToEdit.getAge());
         Gender updatedGender = editPersonDescriptor.getGender().orElse(dateToEdit.getGender());
         Height updatedHeight = editPersonDescriptor.getHeight().orElse(dateToEdit.getHeight());
+        Income updatedIncome = editPersonDescriptor.getIncome().orElse(dateToEdit.getIncome());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(dateToEdit.getTags());
 
-        return new Date(updatedName, updatedAge, updatedGender, updatedHeight, updatedTags);
+        return new Date(updatedName, updatedAge, updatedGender, updatedHeight, updatedIncome, updatedTags);
     }
 
     @Override
@@ -137,6 +141,7 @@ public class EditCommand extends Command {
         private Age age;
         private Gender gender;
         private Height height;
+        private Income income;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -150,6 +155,7 @@ public class EditCommand extends Command {
             setAge(toCopy.age);
             setGender(toCopy.gender);
             setHeight(toCopy.height);
+            setIncome(toCopy.income);
             setTags(toCopy.tags);
         }
 
@@ -188,8 +194,16 @@ public class EditCommand extends Command {
             this.height = height;
         }
 
+        public void setIncome(Income income) {
+            this.income = income;
+        }
+
         public Optional<Height> getHeight() {
             return Optional.ofNullable(height);
+        }
+
+        public Optional<Income> getIncome() {
+            return Optional.ofNullable(income);
         }
 
         /**
@@ -225,6 +239,7 @@ public class EditCommand extends Command {
                     && Objects.equals(age, otherEditPersonDescriptor.age)
                     && Objects.equals(gender, otherEditPersonDescriptor.gender)
                     && Objects.equals(height, otherEditPersonDescriptor.height)
+                    && Objects.equals(income, otherEditPersonDescriptor.income)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
@@ -235,6 +250,7 @@ public class EditCommand extends Command {
                     .add("age", age)
                     .add("gender", gender)
                     .add("height", height)
+                    .add("income", income)
                     .add("tags", tags)
                     .toString();
         }
