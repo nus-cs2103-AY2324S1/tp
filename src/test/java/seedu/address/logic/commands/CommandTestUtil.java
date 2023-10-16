@@ -70,7 +70,7 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_SPECIALTY_DESC = " " + PREFIX_SPECIALTY; // empty string invalid for specialty
-    public static final String INVALID_AGE_DESC = " " + PREFIX_PHONE + "67Y"; // 'Y' not allowed in ages
+    public static final String INVALID_AGE_DESC = " " + PREFIX_AGE + "67Y"; // 'Y' not allowed in ages
     public static final String INVALID_MEDICAL_HISTORY_DESC = " "
             + PREFIX_MEDICALHISTORY; // empty string invalid for medical history
 

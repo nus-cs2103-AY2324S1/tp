@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.AGE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_AGE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_MEDICAL_HISTORY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
@@ -24,12 +25,15 @@ import static seedu.address.logic.commands.CommandTestUtil.SPECIALTY_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_AGE_THIRTY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SPECIALTY_DERMATOLOGY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICALHISTORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -45,11 +49,14 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Age;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.MedicalHistory;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonType;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Specialty;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PatientBuilder;
 import seedu.address.testutil.SpecialistBuilder;
@@ -119,6 +126,10 @@ public class AddCommandParserTest {
         assertParseComplexFailure(parser, ADDRESS_DESC_AMY + validExpectedSpecialistString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS), PersonType.SPECIALIST);
 
+        // multiple ages
+        assertParseComplexFailure(parser, AGE_DESC_AMY + validExpectedPatientString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_AGE), PersonType.PATIENT);
+
         // multiple fields repeated
         assertParseComplexFailure(parser,
                 validExpectedSpecialistString + PHONE_DESC_AMY + EMAIL_DESC_AMY
@@ -145,6 +156,17 @@ public class AddCommandParserTest {
         assertParseComplexFailure(parser, INVALID_ADDRESS_DESC + validExpectedSpecialistString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS), PersonType.SPECIALIST);
 
+        // invalid specialty
+        assertParseComplexFailure(parser, INVALID_SPECIALTY_DESC + validExpectedSpecialistString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_SPECIALTY), PersonType.SPECIALIST);
+
+        // invalid medical history
+        assertParseComplexFailure(parser, INVALID_MEDICAL_HISTORY_DESC + validExpectedPatientString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_MEDICALHISTORY), PersonType.PATIENT);
+
+        // invalid age
+        assertParseComplexFailure(parser, INVALID_AGE_DESC + validExpectedPatientString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_AGE), PersonType.PATIENT);
         // valid value followed by invalid value
 
         // invalid name
@@ -170,6 +192,10 @@ public class AddCommandParserTest {
         // invalid medical history
         assertParseComplexFailure(parser, validExpectedPatientString + INVALID_MEDICAL_HISTORY_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_MEDICALHISTORY), PersonType.PATIENT);
+
+        // invalid age
+        assertParseComplexFailure(parser, validExpectedPatientString + INVALID_AGE_DESC,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_AGE), PersonType.PATIENT);
     }
 
     @Test
@@ -187,19 +213,27 @@ public class AddCommandParserTest {
 
         // missing name prefix
         assertParseComplexFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                        + ADDRESS_DESC_BOB, expectedMessage, PersonType.PATIENT);
+                        + ADDRESS_DESC_BOB + SPECIALTY_DESC_BOB, expectedMessage, PersonType.SPECIALIST);
 
         // missing phone prefix
         assertParseComplexFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB
-                        + ADDRESS_DESC_BOB, expectedMessage, PersonType.PATIENT);
+                        + ADDRESS_DESC_BOB + SPECIALTY_DESC_BOB, expectedMessage, PersonType.SPECIALIST);
 
         // missing email prefix
         assertParseComplexFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB
-                        + ADDRESS_DESC_BOB, expectedMessage, PersonType.PATIENT);
+                        + ADDRESS_DESC_BOB + SPECIALTY_DESC_BOB, expectedMessage, PersonType.SPECIALIST);
 
         // missing address prefix
         assertParseComplexFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                        + VALID_ADDRESS_BOB, expectedMessage, PersonType.PATIENT);
+                        + VALID_ADDRESS_BOB + SPECIALTY_DESC_BOB, expectedMessage, PersonType.SPECIALIST);
+
+        // missing specialty prefix
+        assertParseComplexFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                + ADDRESS_DESC_BOB + VALID_SPECIALTY_DERMATOLOGY, expectedMessage, PersonType.SPECIALIST);
+
+        // missing age prefix
+        assertParseComplexFailure(parser, VALID_AGE_THIRTY + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
+                        + ADDRESS_DESC_AMY, expectedMessage, PersonType.PATIENT);
 
         // all prefixes missing
         assertParseComplexFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB
@@ -232,6 +266,23 @@ public class AddCommandParserTest {
         assertParseComplexFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                         + ADDRESS_DESC_BOB + INVALID_TAG_DESC + VALID_TAG_FRIEND + SPECIALTY_DESC_BOB,
                 Tag.MESSAGE_CONSTRAINTS, PersonType.SPECIALIST);
+
+        // invalid specialty
+        assertParseComplexFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                        + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + INVALID_SPECIALTY_DESC,
+                Specialty.MESSAGE_CONSTRAINTS, PersonType.SPECIALIST);
+
+        // invalid age
+        assertParseComplexFailure(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
+                        + ADDRESS_DESC_AMY + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + INVALID_AGE_DESC
+                        + MEDICAL_HISTORY_DESC_AMY,
+                Age.MESSAGE_CONSTRAINTS, PersonType.PATIENT);
+
+        // invalid age
+        assertParseComplexFailure(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
+                        + ADDRESS_DESC_AMY + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + AGE_DESC_AMY
+                        + INVALID_MEDICAL_HISTORY_DESC,
+                MedicalHistory.MESSAGE_CONSTRAINTS, PersonType.PATIENT);
 
         // two invalid values, only first invalid value reported
         assertParseComplexFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB
