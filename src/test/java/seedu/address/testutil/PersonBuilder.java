@@ -34,6 +34,7 @@ public class PersonBuilder {
     private Optional<Linkedin> linkedin;
     private Optional<Email> secondaryEmail;
     private Optional<Telegram> telegram;
+    private Optional<Integer> id;
     private Set<Tag> tags;
 
     /**
@@ -49,6 +50,7 @@ public class PersonBuilder {
         secondaryEmail = Optional.empty(); // No secondaryEmail by default
         telegram = Optional.empty(); // No telegram by default
         tags = new HashSet<>();
+        id = Optional.empty();
     }
 
     /**
@@ -64,6 +66,7 @@ public class PersonBuilder {
         secondaryEmail = personToCopy.getSecondaryEmail();
         telegram = personToCopy.getTelegram();
         tags = new HashSet<>(personToCopy.getTags());
+        id = personToCopy.getId();
     }
 
     /**
@@ -140,10 +143,18 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code ID} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withId(int id) {
+        this.id = Optional.of(id);
+        return this;
+    }
+
+    /**
      * Builds a {@code Person}.
      */
     public Person build() {
-        return new Person(name, phone, email, address, birthday, linkedin, secondaryEmail, telegram, tags);
+        return new Person(name, phone, email, address, birthday, linkedin, secondaryEmail, telegram, tags, id);
     }
 
 }
