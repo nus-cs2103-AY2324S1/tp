@@ -39,6 +39,10 @@ public class Tag {
      * @param tagName A valid tag name.
      */
     public static Tag of(String tagName) {
+        if (tagName == null) {
+            return null;
+        }
+
         if (TAGS.containsKey(tagName)) {
             return TAGS.get(tagName);
         }
