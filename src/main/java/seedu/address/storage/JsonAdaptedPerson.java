@@ -120,6 +120,8 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
         final Set<Subject> modelSubjects = new HashSet<>(personSubjects);
         final Set<Tag> modelTags = new HashSet<>(personTags);
+
+        // construct a schedule from the stored input
         final Schedule modelSchedule = new Schedule(schedule);
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelSubjects, modelTags, modelSchedule);
     }
