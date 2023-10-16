@@ -2,11 +2,13 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MOD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -28,6 +30,8 @@ public class AddCommand extends Command {
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_TELEGRAM + "TELEGRAM "
+            + "[" + PREFIX_FROM + "FROM "
+            + PREFIX_TO + "TO] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "[" + PREFIX_MOD + "MOD]...\n"
             + "Example: " + COMMAND_WORD + " "
@@ -35,6 +39,8 @@ public class AddCommand extends Command {
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_TELEGRAM + "@johnd "
+            + PREFIX_FROM + "10:00 "
+            + PREFIX_TO + "12:00 "
             + PREFIX_TAG + "fulltime "
             + PREFIX_MOD + "CS1231S ";
 

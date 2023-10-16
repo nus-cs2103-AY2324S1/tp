@@ -3,11 +3,13 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MOD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -36,7 +38,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TELEGRAM,
-                        PREFIX_TAG, PREFIX_MOD);
+                        PREFIX_TAG, PREFIX_MOD, PREFIX_FROM, PREFIX_TO);
 
         Index index;
 
@@ -64,6 +66,10 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         Set<Tag> tags = parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).orElse(null);
         editPersonDescriptor.setTags(tags);
+        if (argMultimap.getValue(PREFIX_FROM).isPresent() && argMultimap.getValue(PREFIX_TO).isPresent()) {
+            editPersonDescriptor.setFreeTime(ParserUtil.parseFreeTime(argMultimap.getValue(PREFIX_FROM).get(),
+                    argMultimap.getValue(PREFIX_TO).get()));
+        }
         Set<Mod> mods = parseModsForEdit(argMultimap.getAllValues(PREFIX_MOD)).orElse(null);
         editPersonDescriptor.setMods(mods);
 

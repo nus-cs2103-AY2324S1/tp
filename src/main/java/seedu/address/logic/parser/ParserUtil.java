@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -10,6 +12,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.FreeTime;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Telegram;
@@ -123,6 +126,21 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses {@code String from} and {@code String to} into a {@code FreeTime}.
+     */
+    public static FreeTime parseFreeTime(String from, String to) throws DateTimeParseException, ParseException {
+        if (from == null || to == null) {
+            return FreeTime.EMPTY_FREE_TIME;
+        }
+        LocalTime start = LocalTime.parse(from);
+        LocalTime end = LocalTime.parse(to);
+        if (!FreeTime.isValidFreeTime(start, end)) {
+            throw new ParseException(FreeTime.MESSAGE_CONSTRAINTS);
+        }
+        return new FreeTime(start, end);
     }
 
     /**

@@ -1,5 +1,6 @@
 package seedu.address.storage;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -11,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.FreeTime;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -30,6 +32,8 @@ class JsonAdaptedPerson {
     private final String email;
     private final String telegram;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final String from;
+    private final String to;
 
     private final List<JsonAdaptedMod> mods = new ArrayList<>();
 
@@ -38,9 +42,10 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                             @JsonProperty("email") String email, @JsonProperty("telegram") String telegram,
-                             @JsonProperty("tags") List<JsonAdaptedTag> tags,
-                             @JsonProperty("mods") List<JsonAdaptedMod> mods) {
+            @JsonProperty("email") String email, @JsonProperty("telegram") String telegram,
+            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("from") String from,
+            @JsonProperty("to") String to,
+            @JsonProperty("mods") List<JsonAdaptedMod> mods) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -48,6 +53,8 @@ class JsonAdaptedPerson {
         if (tags != null) {
             this.tags.addAll(tags);
         }
+        this.from = from;
+        this.to = to;
         if (mods != null) {
             this.mods.addAll(mods);
         }
@@ -64,15 +71,19 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        from = source.getFreeTime().getFrom();
+        to = source.getFreeTime().getTo();
         mods.addAll(source.getMods().stream()
                 .map(JsonAdaptedMod::new)
                 .collect(Collectors.toList()));
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
+     * Converts this Jackson-friendly adapted person object into the model's
+     * {@code Person} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws IllegalValueException if there were any data constraints violated in
+     *                               the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
@@ -119,8 +130,20 @@ class JsonAdaptedPerson {
         final Telegram modelTelegram = new Telegram(telegram);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
+
+        FreeTime modelFreeTime = FreeTime.EMPTY_FREE_TIME;
+        if (from != null && to != null) {
+            LocalTime start = LocalTime.parse(from);
+            LocalTime end = LocalTime.parse(to);
+            if (!FreeTime.isValidFreeTime(start, end)) {
+                throw new IllegalValueException(FreeTime.MESSAGE_CONSTRAINTS);
+            } else {
+                modelFreeTime = new FreeTime(start, end);
+            }
+        }
+
         final Set<Mod> modelMods = new HashSet<>(personMods);
-        return new Person(modelName, modelPhone, modelEmail, modelTelegram, modelTags, modelMods);
+        return new Person(modelName, modelPhone, modelEmail, modelTelegram, modelTags, modelFreeTime, modelMods);
     }
 
 }

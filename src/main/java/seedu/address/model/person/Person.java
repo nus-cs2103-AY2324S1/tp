@@ -25,19 +25,21 @@ public class Person {
     // Data fields
     private final Telegram telegram;
     private final Set<Tag> tags = new HashSet<>();
-
+    private final FreeTime freeTime;
     private final Set<Mod> mods = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Telegram telegram, Set<Tag> tags, Set<Mod> mods) {
-        requireAllNonNull(name, phone, email, telegram, tags, mods);
+    public Person(Name name, Phone phone, Email email, Telegram telegram, Set<Tag> tags,
+                  FreeTime freeTime, Set<Mod> mods) {
+        requireAllNonNull(name, phone, email, telegram, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.telegram = telegram;
         this.tags.addAll(tags);
+        this.freeTime = freeTime == null ? FreeTime.EMPTY_FREE_TIME : freeTime;
         this.mods.addAll(mods);
     }
 
@@ -63,6 +65,10 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public FreeTime getFreeTime() {
+        return freeTime;
     }
 
     /**
@@ -107,6 +113,7 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && telegram.equals(otherPerson.telegram)
                 && tags.equals(otherPerson.tags)
+                && freeTime.equals(otherPerson.freeTime)
                 && mods.equals(otherPerson.mods);
     }
 
@@ -124,8 +131,8 @@ public class Person {
                 .add("email", email)
                 .add("telegram", telegram)
                 .add("tags", tags)
+                .add("free time", freeTime)
                 .add("mods", mods)
                 .toString();
     }
-
 }

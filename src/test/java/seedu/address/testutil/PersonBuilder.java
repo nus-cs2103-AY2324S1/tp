@@ -1,9 +1,11 @@
 package seedu.address.testutil;
 
+import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.person.Email;
+import seedu.address.model.person.FreeTime;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -26,6 +28,7 @@ public class PersonBuilder {
     private Email email;
     private Telegram telegram;
     private Set<Tag> tags;
+    private FreeTime freeTime;
     private Set<Mod> mods;
 
     /**
@@ -37,6 +40,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         telegram = new Telegram(DEFAULT_TELEGRAM);
         tags = new HashSet<>();
+        freeTime = FreeTime.EMPTY_FREE_TIME;
         mods = new HashSet<>();
     }
 
@@ -49,6 +53,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         telegram = personToCopy.getTelegram();
         tags = new HashSet<>(personToCopy.getTags());
+        freeTime = personToCopy.getFreeTime();
         mods = new HashSet<>(personToCopy.getMods());
     }
 
@@ -63,7 +68,7 @@ public class PersonBuilder {
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
+    public PersonBuilder withTags(String... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
@@ -100,8 +105,20 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code FreeTime} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withFreeTime(String from, String to) {
+        if (from == null || to == null) {
+            this.freeTime = FreeTime.EMPTY_FREE_TIME;
+        } else {
+            this.freeTime = new FreeTime(LocalTime.parse(from), LocalTime.parse(to));
+        }
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, telegram, tags, mods);
+        return new Person(name, phone, email, telegram, tags, freeTime, mods);
     }
 
 }

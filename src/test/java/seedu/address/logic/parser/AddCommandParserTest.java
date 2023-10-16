@@ -4,6 +4,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.FROM_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_MOD_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
@@ -22,6 +23,7 @@ import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.TELEGRAM_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.TELEGRAM_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.TO_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MOD_CS1231;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MOD_CS2103T;
@@ -61,7 +63,8 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + TELEGRAM_DESC_BOB + TAG_DESC_FRIEND + MOD_DESC_CS1231, new AddCommand(expectedPerson));
+                + TELEGRAM_DESC_BOB + FROM_DESC_BOB + TO_DESC_BOB + TAG_DESC_FRIEND
+                + MOD_DESC_CS1231, new AddCommand(expectedPerson));
 
 
         // multiple tags and mods - all accepted
@@ -69,8 +72,8 @@ public class AddCommandParserTest {
                 .withMods(VALID_MOD_CS1231, VALID_MOD_CS2103T)
                 .build();
         assertParseSuccess(parser,
-                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + TELEGRAM_DESC_BOB + TAG_DESC_HUSBAND
-                        + TAG_DESC_FRIEND + MOD_DESC_CS1231 + MOD_DESC_CS2103T,
+                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + TELEGRAM_DESC_BOB + FROM_DESC_BOB + TO_DESC_BOB
+                        + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + MOD_DESC_CS1231 + MOD_DESC_CS2103T,
                 new AddCommand(expectedPersonMultipleTags));
     }
 
@@ -140,8 +143,8 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_optionalFieldsMissing_success() {
-        // zero tags and mods
-        Person expectedPerson = new PersonBuilder(AMY).withTags().withMods().build();
+        // zero tags and no free time
+        Person expectedPerson = new PersonBuilder(AMY).withTags().withFreeTime(null, null).withMods().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + TELEGRAM_DESC_AMY,
                 new AddCommand(expectedPerson));
     }
@@ -203,7 +206,7 @@ public class AddCommandParserTest {
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + TELEGRAM_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                        + TELEGRAM_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 }

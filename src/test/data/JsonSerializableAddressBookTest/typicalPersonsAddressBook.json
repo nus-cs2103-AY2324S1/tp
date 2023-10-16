@@ -13,6 +13,8 @@
     "email" : "johnd@example.com",
     "telegram": "@bensonnn123",
     "tags" : [ "owesMoney", "friends" ],
+    "from": "21:15",
+    "to": "22:30",
     "mods" : [ "CS1231", "CS2103T" ]
   }, {
     "name" : "Carl Kurz",
@@ -27,6 +29,8 @@
     "email" : "cornelia@example.com",
     "telegram": "@danielmeier",
     "tags" : [ "friends" ],
+    "from": "10:45",
+    "to": "11:30",
     "mods" : [ ]
   }, {
     "name" : "Elle Meyer",
@@ -41,6 +45,8 @@
     "email" : "lydia@example.com",
     "telegram": "@imfionaa",
     "tags" : [ ],
+    "from": "21:10",
+    "to": "23:15",
     "mods" : [ ]
   }, {
     "name" : "George Best",
@@ -48,6 +54,8 @@
     "email" : "anna@example.com",
     "telegram": "@georgiey",
     "tags" : [ ],
+    "from": "07:00",
+    "to": "09:00",
     "mods" : [ ]
   } ]
 }

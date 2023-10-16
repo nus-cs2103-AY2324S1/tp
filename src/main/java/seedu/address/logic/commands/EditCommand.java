@@ -2,11 +2,13 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MOD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -23,6 +25,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.FreeTime;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -46,6 +49,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_TELEGRAM + "TELEGRAM] "
+            + "[" + PREFIX_FROM + "FROM "
+            + PREFIX_TO + "TO] "
             + "[" + PREFIX_TAG + "TAG] "
             + "[" + PREFIX_MOD + "MOD]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
@@ -104,9 +109,11 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Telegram updatedTelegram = editPersonDescriptor.getTelegram().orElse(personToEdit.getTelegram());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        FreeTime updatedFreeTime = editPersonDescriptor.getFreeTime().orElse(personToEdit.getFreeTime());
         Set<Mod> updatedMods = editPersonDescriptor.getMods().orElse(personToEdit.getMods());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedTelegram, updatedTags, updatedMods);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedTelegram, updatedTags, updatedFreeTime,
+                updatedMods);
     }
 
     @Override
@@ -134,7 +141,8 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
+     * Stores the details to edit the person with. Each non-empty field value will
+     * replace the
      * corresponding field value of the person.
      */
     public static class EditPersonDescriptor {
@@ -143,7 +151,7 @@ public class EditCommand extends Command {
         private Email email;
         private Telegram telegram;
         private Set<Tag> tags;
-
+        private FreeTime freeTime;
         private Set<Mod> mods;
 
         public EditPersonDescriptor() {
@@ -159,6 +167,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setTelegram(toCopy.telegram);
             setTags(toCopy.tags);
+            setFreeTime(toCopy.freeTime);
             setMods(toCopy.mods);
         }
 
@@ -166,7 +175,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, telegram, tags, mods);
+            return CollectionUtil.isAnyNonNull(name, phone, email, telegram, tags, mods, freeTime);
         }
 
         public void setName(Name name) {
@@ -208,13 +217,25 @@ public class EditCommand extends Command {
         public void setTags(Set<Tag> tags) {
             this.tags = (tags != null) ? new HashSet<>(tags) : null;
         }
+
         /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * Returns an unmodifiable tag set, which throws
+         * {@code UnsupportedOperationException}
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code tags} is null.
          */
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        }
+
+        public void setFreeTime(FreeTime freeTime) {
+            if (freeTime != FreeTime.EMPTY_FREE_TIME) {
+                this.freeTime = freeTime;
+            }
+        }
+
+        public Optional<FreeTime> getFreeTime() {
+            return Optional.ofNullable(freeTime);
         }
 
         /**
@@ -224,15 +245,16 @@ public class EditCommand extends Command {
         public void setMods(Set<Mod> mods) {
             this.mods = (mods != null) ? new HashSet<>(mods) : null;
         }
+
         /**
-         * Returns an unmodifiable mod set, which throws {@code UnsupportedOperationException}
+         * Returns an unmodifiable mod set, which throws
+         * {@code UnsupportedOperationException}
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code mods} is null.
          */
         public Optional<Set<Mod>> getMods() {
             return (mods != null) ? Optional.of(Collections.unmodifiableSet(mods)) : Optional.empty();
         }
-
 
         @Override
         public boolean equals(Object other) {
@@ -251,6 +273,7 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(telegram, otherEditPersonDescriptor.telegram)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags)
+                    && Objects.equals(freeTime, otherEditPersonDescriptor.freeTime)
                     && Objects.equals(mods, otherEditPersonDescriptor.mods);
         }
 
@@ -262,6 +285,7 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("telegram", telegram)
                     .add("tags", tags)
+                    .add("free time", freeTime)
                     .add("mods", mods)
                     .toString();
         }
