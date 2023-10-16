@@ -15,7 +15,7 @@ public class Deadline {
 
     public static final String MESSAGE_CONSTRAINTS =
         "Deadline should be in valid DateTime format: "
-            + "MMMM dd yyyy HHmm\n"
+            + "MMM dd yyyy HHmm\n"
             + "Eg. Dec 31 2030 1200";
 
     public static final String TO_ADD_DEADLINE = "TO_ADD_DEADLINE";
@@ -59,10 +59,7 @@ public class Deadline {
     }
 
     private static boolean isEmptyDeadline(String test) {
-        if (test.equals(TO_ADD_DEADLINE)) {
-            return true;
-        }
-        return false;
+        return test.equals(TO_ADD_DEADLINE);
     }
 
     @Override
