@@ -3,12 +3,16 @@ package seedu.address.model.student;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import seedu.address.model.student.grades.AssignmentTracker;
+
 /**
  * Represents a Student's Class Number
  * in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidClassDetails(String)}
  */
 public class ClassDetails {
+
+    public static final int TEMP_LENGTH = 10;
 
     public static final String MESSAGE_CONSTRAINTS = "Class number can take any values, and it should not be blank";
 
@@ -18,6 +22,8 @@ public class ClassDetails {
     public static final String VALIDATION_REGEX = "T.*";
 
     public final String value;
+
+    public final AssignmentTracker assignmentTracker;
 
     /**
      * Constructs an {@code Class Number}.
@@ -29,6 +35,7 @@ public class ClassDetails {
         requireNonNull(classDetails);
         checkArgument(isValidClassDetails(classDetails), MESSAGE_CONSTRAINTS);
         value = classDetails;
+        assignmentTracker = new AssignmentTracker(TEMP_LENGTH);
     }
 
     /**
