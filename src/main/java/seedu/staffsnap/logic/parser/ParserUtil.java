@@ -37,6 +37,24 @@ public class ParserUtil {
     }
 
     /**
+     * Capitalizes the first letter of each word.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @return the new content with the first letter of each word capitalized.
+     */
+    public static String standardizeCapitalization(String content) {
+        String[] tokens = content.split(" ");
+        StringBuilder newContent = new StringBuilder();
+        for (String token : tokens) {
+            char capLetter = Character.toUpperCase(token.charAt(0));
+            newContent.append(" ");
+            newContent.append(capLetter);
+            newContent.append(token.substring(1).toLowerCase());
+        }
+        return newContent.toString().trim();
+    }
+
+    /**
      * Parses a {@code String name} into a {@code Name}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -48,6 +66,7 @@ public class ParserUtil {
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
+        trimmedName = standardizeCapitalization(trimmedName);
         return new Name(trimmedName);
     }
 
@@ -78,6 +97,7 @@ public class ParserUtil {
         if (!Position.isValidPosition(trimmedPosition)) {
             throw new ParseException(Position.MESSAGE_CONSTRAINTS);
         }
+        trimmedPosition = standardizeCapitalization(trimmedPosition);
         return new Position(trimmedPosition);
     }
 
@@ -93,7 +113,7 @@ public class ParserUtil {
         if (!Email.isValidEmail(trimmedEmail)) {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
-        return new Email(trimmedEmail);
+        return new Email(trimmedEmail.toLowerCase());
     }
 
     /**
