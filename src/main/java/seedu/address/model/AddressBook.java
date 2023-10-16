@@ -57,12 +57,30 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the person list with {@code persons}.
+     * {@code persons} must not contain duplicate persons.
+     */
+    public void setMembers(List<Member> members) {
+        this.members.setPersons(members);
+    }
+
+    /**
+     * Replaces the contents of the person list with {@code persons}.
+     * {@code persons} must not contain duplicate persons.
+     */
+    public void setApplicants(List<Applicant> applicants) {
+        this.applicants.setPersons(applicants);
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setMembers(newData.getMemberList());
+        setApplicants(newData.getApplicantList());
     }
 
     //// person-level operations
