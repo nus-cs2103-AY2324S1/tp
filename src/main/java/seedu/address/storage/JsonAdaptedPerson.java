@@ -85,16 +85,11 @@ class JsonAdaptedPerson {
         final Email modelEmail = new Email(email);
 
         final List<Group> personGroups = new ArrayList<>();
-//        for (JsonAdaptedGroup group : groupList) {
-//            personGroups.add(group.toModelType());
-//        }
-//        GroupList gL = new GroupList();
-//        personGroups.forEach(gL::add);
-
-        final GroupList groups = new GroupList();
         for (JsonAdaptedGroup group : groupList) {
-            groups.add(group.toModelType());
+            personGroups.add(group.toModelType());
         }
+        GroupList gL = new GroupList();
+        personGroups.forEach(gL::add);
 
         return new Person(modelName, modelPhone, modelEmail, gL);
     }
