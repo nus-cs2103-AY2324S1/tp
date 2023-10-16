@@ -8,6 +8,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.Messages;
 import seedu.address.logic.parser.exceptions.ImpossibleIndexException;
 import seedu.address.logic.parser.exceptions.MissingIndexException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -22,8 +23,6 @@ import seedu.address.model.tag.Tag;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
@@ -32,10 +31,10 @@ public class ParserUtil {
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
         if (trimmedIndex.isEmpty()) {
-            throw new MissingIndexException("MISSING");
+            throw new MissingIndexException(Messages.MESSAGE_MISSING_INDEX);
         }
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
-            throw new ImpossibleIndexException("IMPOSSIBLE");
+            throw new ImpossibleIndexException(Messages.MESSAGE_IMPOSSIBLE_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }

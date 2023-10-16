@@ -1,7 +1,10 @@
 package seedu.address.logic.parser;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.parser.exceptions.ImpossibleIndexException;
+import seedu.address.logic.parser.exceptions.MissingIndexException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -14,13 +17,16 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      * and returns a DeleteCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public DeleteCommand parse(String args) {
+    public DeleteCommand parse(String args) throws ParseException {
         try {
             Index index = ParserUtil.parseIndex(args);
             return new DeleteCommand(index);
-        } catch (ParseException pe) {
-            Index placeholderIndex = null;
-            return new DeleteCommand(placeholderIndex, pe);
+        } catch (ImpossibleIndexException pe) {
+            throw new ImpossibleIndexException(
+                    Messages.MESSAGE_IMPOSSIBLE_INDEX, pe);
+        } catch (MissingIndexException pe) {
+            throw new MissingIndexException(
+                    Messages.MESSAGE_MISSING_INDEX, pe);
         }
     }
 
