@@ -196,7 +196,7 @@ public class FindExpressionParser {
     /**
      * Abstract class representing a node in the expression tree.
      */
-    abstract static class ExprNode {
+    abstract private static class ExprNode {
 
         /**
          * Converts the expression node into a predicate for filtering persons.
