@@ -19,11 +19,11 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a job to the application book. "
             + "Parameters: "
-            + PREFIX_ROLE + "ROLE\n"
             + PREFIX_COMPANY + "COMPANY "
+            + PREFIX_ROLE + "ROLE\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_ROLE + "Software Engineer "
-            + PREFIX_COMPANY + "Google";
+            + PREFIX_COMPANY + "Google"
+            + PREFIX_ROLE + "Software Engineer ";
 
     public static final String MESSAGE_SUCCESS = "New job added: %1$s";
     public static final String MESSAGE_DUPLICATE_JOB = "This job already exists in the application book";
