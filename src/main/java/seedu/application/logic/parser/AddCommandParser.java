@@ -8,10 +8,7 @@ import java.util.stream.Stream;
 
 import seedu.application.logic.commands.AddCommand;
 import seedu.application.logic.parser.exceptions.ParseException;
-import seedu.application.model.job.Company;
-import seedu.application.model.job.Deadline;
-import seedu.application.model.job.Job;
-import seedu.application.model.job.Role;
+import seedu.application.model.job.*;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -36,9 +33,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ROLE, PREFIX_COMPANY);
         Role role = ParserUtil.parseRole(argMultimap.getValue(PREFIX_ROLE).get());
         Company company = ParserUtil.parseCompany(argMultimap.getValue(PREFIX_COMPANY).get());
+        Status status = Status.DEFAULT_STATUS; // Add command does not add status
         Deadline deadline = Deadline.EMPTY_DEADLINE; // Add command does not adding deadline
 
-        Job job = new Job(role, company, deadline);
+        Job job = new Job(role, company, status, deadline);
 
         return new AddCommand(job);
     }

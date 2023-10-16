@@ -2,8 +2,8 @@ package seedu.application.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.application.logic.commands.CommandTestUtil.VALID_DEADLINE_CHEF;
-import static seedu.application.logic.commands.CommandTestUtil.VALID_DEADLINE_CLEANER;
+import static seedu.application.logic.commands.CommandTestUtil.VALID_STATUS_CHEF;
+import static seedu.application.logic.commands.CommandTestUtil.VALID_STATUS_CLEANER;
 import static seedu.application.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.application.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.application.logic.commands.CommandTestUtil.showJobAtIndex;
@@ -19,31 +19,30 @@ import seedu.application.model.ApplicationBook;
 import seedu.application.model.Model;
 import seedu.application.model.ModelManager;
 import seedu.application.model.UserPrefs;
-import seedu.application.model.job.Deadline;
 import seedu.application.model.job.Job;
+import seedu.application.model.job.Status;
 import seedu.application.testutil.JobBuilder;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for DeadlineCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for MarkCommand.
  */
-public class DeadlineCommandTest {
-    private static final String DEADLINE_STUB = "Dec 31 2030 1200";
+public class MarkCommandTest {
     private Model model = new ModelManager(getTypicalApplicationBook(), new UserPrefs());
 
     @Test
-    public void execute_setDeadlineUnfilteredList_success() {
+    public void execute_markStatusUnfilteredList_success() {
         Job firstJob = model.getFilteredJobList().get(INDEX_FIRST_JOB.getZeroBased());
-        Job editedJob = new JobBuilder(firstJob).withDeadline(DEADLINE_STUB).build();
+        Job editedJob = new JobBuilder(firstJob).withStatus(Status.JobStatus.PENDING.toString()).build();
 
-        DeadlineCommand deadlineCommand = new DeadlineCommand(INDEX_FIRST_JOB,
-            new Deadline(editedJob.getDeadline().deadline));
+        MarkCommand markCommand = new MarkCommand(INDEX_FIRST_JOB,
+                new Status(editedJob.getStatus().status));
 
-        String expectedMessage = String.format(DeadlineCommand.MESSAGE_SET_DEADLINE_SUCCESS, editedJob);
+        String expectedMessage = String.format(MarkCommand.MESSAGE_MARK_JOB_SUCCESS, editedJob);
 
         Model expectedModel = new ModelManager(new ApplicationBook(model.getApplicationBook()), new UserPrefs());
         expectedModel.setJob(firstJob, editedJob);
 
-        assertCommandSuccess(deadlineCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(markCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -52,25 +51,25 @@ public class DeadlineCommandTest {
 
         Job firstJob = model.getFilteredJobList().get(INDEX_FIRST_JOB.getZeroBased());
         Job editedJob = new JobBuilder(model.getFilteredJobList().get(INDEX_FIRST_JOB.getZeroBased()))
-            .withDeadline(DEADLINE_STUB).build();
+                .withStatus(Status.IN_PROGRESS).build();
 
-        DeadlineCommand deadlineCommand = new DeadlineCommand(INDEX_FIRST_JOB,
-            new Deadline(editedJob.getDeadline().deadline));
+        MarkCommand markCommand = new MarkCommand(INDEX_FIRST_JOB,
+                new Status(editedJob.getStatus().status));
 
-        String expectedMessage = String.format(DeadlineCommand.MESSAGE_SET_DEADLINE_SUCCESS, editedJob);
+        String expectedMessage = String.format(MarkCommand.MESSAGE_MARK_JOB_SUCCESS, editedJob);
 
         Model expectedModel = new ModelManager(new ApplicationBook(model.getApplicationBook()), new UserPrefs());
         expectedModel.setJob(firstJob, editedJob);
 
-        assertCommandSuccess(deadlineCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(markCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_invalidPersonIndexUnfilteredList_failure() {
+    public void execute_invalidJobIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredJobList().size() + 1);
-        DeadlineCommand deadlineCommand = new DeadlineCommand(outOfBoundIndex, new Deadline(VALID_DEADLINE_CLEANER));
+        MarkCommand markCommand = new MarkCommand(outOfBoundIndex, new Status(VALID_STATUS_CLEANER));
 
-        assertCommandFailure(deadlineCommand, model, Messages.MESSAGE_INVALID_JOB_DISPLAYED_INDEX);
+        assertCommandFailure(markCommand, model, Messages.MESSAGE_INVALID_JOB_DISPLAYED_INDEX);
     }
 
     /**
@@ -84,17 +83,18 @@ public class DeadlineCommandTest {
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getApplicationBook().getJobList().size());
 
-        DeadlineCommand deadlineCommand = new DeadlineCommand(outOfBoundIndex, new Deadline(VALID_DEADLINE_CLEANER));
+        MarkCommand markCommand = new MarkCommand(outOfBoundIndex, new Status(VALID_STATUS_CLEANER));
 
-        assertCommandFailure(deadlineCommand, model, Messages.MESSAGE_INVALID_JOB_DISPLAYED_INDEX);
+        assertCommandFailure(markCommand, model, Messages.MESSAGE_INVALID_JOB_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        final DeadlineCommand standardCommand = new DeadlineCommand(INDEX_FIRST_JOB, new Deadline(VALID_DEADLINE_CHEF));
+        System.out.println(VALID_STATUS_CHEF + " " + VALID_STATUS_CLEANER);
+        final MarkCommand standardCommand = new MarkCommand(INDEX_FIRST_JOB, new Status(VALID_STATUS_CHEF));
 
         // same values -> returns true
-        DeadlineCommand commandWithSameValues = new DeadlineCommand(INDEX_FIRST_JOB, new Deadline(VALID_DEADLINE_CHEF));
+        MarkCommand commandWithSameValues = new MarkCommand(INDEX_FIRST_JOB, new Status(VALID_STATUS_CHEF));
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -107,9 +107,9 @@ public class DeadlineCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new DeadlineCommand(INDEX_SECOND_JOB, new Deadline(VALID_DEADLINE_CHEF))));
+        assertFalse(standardCommand.equals(new MarkCommand(INDEX_SECOND_JOB, new Status(VALID_STATUS_CHEF))));
 
-        // different deadline -> returns false
-        assertFalse(standardCommand.equals(new DeadlineCommand(INDEX_FIRST_JOB, new Deadline(VALID_DEADLINE_CLEANER))));
+        // different status -> returns false
+        assertFalse(standardCommand.equals(new MarkCommand(INDEX_FIRST_JOB, new Status(VALID_STATUS_CLEANER))));
     }
 }
