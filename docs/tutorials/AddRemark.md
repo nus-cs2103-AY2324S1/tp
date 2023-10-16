@@ -341,25 +341,25 @@ save it with `Model#setPerson()`.
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = new Person(
-                personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), remark, personToEdit.getTags());
+        Person employeeToEdit = lastShownList.get(index.getZeroBased());
+        Person editedEmployee = new Person(
+                employeeToEdit.getName(), employeeToEdit.getPhone(), employeeToEdit.getEmail(),
+                employeeToEdit.getAddress(), remark, employeeToEdit.getTags());
 
-        model.setPerson(personToEdit, editedPerson);
+        model.setPerson(employeeToEdit, editedEmployee);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(generateSuccessMessage(editedPerson));
+        return new CommandResult(generateSuccessMessage(editedEmployee));
     }
 
     /**
      * Generates a command execution success message based on whether
      * the remark is added to or removed from
-     * {@code personToEdit}.
+     * {@code employeeToEdit}.
      */
-    private String generateSuccessMessage(Person personToEdit) {
+    private String generateSuccessMessage(Person employeeToEdit) {
         String message = !remark.value.isEmpty() ? MESSAGE_ADD_REMARK_SUCCESS : MESSAGE_DELETE_REMARK_SUCCESS;
-        return String.format(message, personToEdit);
+        return String.format(message, employeeToEdit);
     }
 ```
 

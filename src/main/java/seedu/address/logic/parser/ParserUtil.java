@@ -2,10 +2,6 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -13,7 +9,6 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -96,29 +91,62 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code String bankAccount} into an {@code BankAccount}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @throws ParseException if the given {@code bankAccount} is invalid.
      */
-    public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+    public static BankAccount parseBankAccount(String bankAccount) throws ParseException {
+        requireNonNull(bankAccount);
+        String trimmedBankAccount = bankAccount.trim();
+        if (!BankAccount.isValidBankAccount(trimmedBankAccount)) {
+            throw new ParseException(BankAccount.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+        return new BankAccount(trimmedBankAccount);
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses a {@code String joinDate} into an {@code JoinDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code joinDate} is invalid.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+    public static JoinDate parseJoinDate(String joinDate) throws ParseException {
+        requireNonNull(joinDate);
+        String trimmedJoinDate = joinDate.trim();
+        if (!JoinDate.isValidJoinDate(trimmedJoinDate)) {
+            throw new ParseException(JoinDate.MESSAGE_CONSTRAINTS);
         }
-        return tagSet;
+        return new JoinDate(trimmedJoinDate);
+    }
+
+    /**
+     * Parses a {@code String salary} into an {@code Salary}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code salary} is invalid.
+     */
+    public static Salary parseSalary(String salary) throws ParseException {
+        requireNonNull(salary);
+        String trimmedSalary = salary.trim();
+        if (!Salary.isValidSalary(trimmedSalary)) {
+            throw new ParseException(Salary.MESSAGE_CONSTRAINTS);
+        }
+        return new Salary(trimmedSalary);
+    }
+
+    /**
+     * Parses a {@code String annualLeave} into an {@code AnnualLeave}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code annualLeave} is invalid.
+     */
+    public static AnnualLeave parseAnnualLeave(String annualLeave) throws ParseException {
+        requireNonNull(annualLeave);
+        String trimmedAnnualLeave = annualLeave.trim();
+        if (!AnnualLeave.isValidAnnualLeave(trimmedAnnualLeave)) {
+            throw new ParseException(AnnualLeave.MESSAGE_CONSTRAINTS);
+        }
+        return new AnnualLeave(trimmedAnnualLeave);
     }
 }
