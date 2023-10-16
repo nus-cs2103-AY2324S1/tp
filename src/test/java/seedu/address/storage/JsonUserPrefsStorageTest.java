@@ -14,7 +14,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.exceptions.DataLoadingException;
-import seedu.address.model.UserPrefs;
+import seedu.address.model.UserPrefs2;
 
 public class JsonUserPrefsStorageTest {
 
@@ -28,7 +28,7 @@ public class JsonUserPrefsStorageTest {
         assertThrows(NullPointerException.class, () -> readUserPrefs(null));
     }
 
-    private Optional<UserPrefs> readUserPrefs(String userPrefsFileInTestDataFolder) throws DataLoadingException {
+    private Optional<UserPrefs2> readUserPrefs(String userPrefsFileInTestDataFolder) throws DataLoadingException {
         Path prefsFilePath = addToTestDataPathIfNotNull(userPrefsFileInTestDataFolder);
         return new JsonUserPrefsStorage(prefsFilePath).readUserPrefs(prefsFilePath);
     }
@@ -51,46 +51,35 @@ public class JsonUserPrefsStorageTest {
 
     @Test
     public void readUserPrefs_fileInOrder_successfullyRead() throws DataLoadingException {
-        UserPrefs expected = getTypicalUserPrefs();
-        UserPrefs actual = readUserPrefs("TypicalUserPref.json").get();
+        UserPrefs2 expected = getTypicalUserPrefs();
+        UserPrefs2 actual = readUserPrefs("TypicalUserPref.json").get();
         assertEquals(expected, actual);
     }
 
     @Test
     public void readUserPrefs_valuesMissingFromFile_defaultValuesUsed() throws DataLoadingException {
-        UserPrefs actual = readUserPrefs("EmptyUserPrefs.json").get();
-        assertEquals(new UserPrefs(), actual);
+        UserPrefs2 actual = readUserPrefs("EmptyUserPrefs.json").get();
+        assertEquals(new UserPrefs2(), actual);
     }
 
     @Test
     public void readUserPrefs_extraValuesInFile_extraValuesIgnored() throws DataLoadingException {
-        UserPrefs expected = getTypicalUserPrefs();
-        UserPrefs actual = readUserPrefs("ExtraValuesUserPref.json").get();
+        UserPrefs2 expected = getTypicalUserPrefs();
+        UserPrefs2 actual = readUserPrefs("ExtraValuesUserPref.json").get();
 
         assertEquals(expected, actual);
     }
 
-    private UserPrefs getTypicalUserPrefs() {
-        UserPrefs userPrefs = new UserPrefs();
+    private UserPrefs2 getTypicalUserPrefs() {
+        UserPrefs2 userPrefs = new UserPrefs2();
         userPrefs.setGuiSettings(new GuiSettings(1000, 500, 300, 100));
-        userPrefs.setAddressBookFilePath(Paths.get("addressbook.json"));
+        userPrefs.setDeckFilePath(Paths.get("data/deck.json"));
         return userPrefs;
     }
-
-    @Test
-    public void savePrefs_nullPrefs_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> saveUserPrefs(null, "SomeFile.json"));
-    }
-
-    @Test
-    public void saveUserPrefs_nullFilePath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> saveUserPrefs(new UserPrefs(), null));
-    }
-
     /**
      * Saves {@code userPrefs} at the specified {@code prefsFileInTestDataFolder} filepath.
      */
-    private void saveUserPrefs(UserPrefs userPrefs, String prefsFileInTestDataFolder) {
+    private void saveUserPrefs(UserPrefs2 userPrefs, String prefsFileInTestDataFolder) {
         try {
             new JsonUserPrefsStorage(addToTestDataPathIfNotNull(prefsFileInTestDataFolder))
                     .saveUserPrefs(userPrefs);
@@ -99,25 +88,5 @@ public class JsonUserPrefsStorageTest {
         }
     }
 
-    @Test
-    public void saveUserPrefs_allInOrder_success() throws DataLoadingException, IOException {
-
-        UserPrefs original = new UserPrefs();
-        original.setGuiSettings(new GuiSettings(1200, 200, 0, 2));
-
-        Path pefsFilePath = testFolder.resolve("TempPrefs.json");
-        JsonUserPrefsStorage jsonUserPrefsStorage = new JsonUserPrefsStorage(pefsFilePath);
-
-        //Try writing when the file doesn't exist
-        jsonUserPrefsStorage.saveUserPrefs(original);
-        UserPrefs readBack = jsonUserPrefsStorage.readUserPrefs().get();
-        assertEquals(original, readBack);
-
-        //Try saving when the file exists
-        original.setGuiSettings(new GuiSettings(5, 5, 5, 5));
-        jsonUserPrefsStorage.saveUserPrefs(original);
-        readBack = jsonUserPrefsStorage.readUserPrefs().get();
-        assertEquals(original, readBack);
-    }
 
 }

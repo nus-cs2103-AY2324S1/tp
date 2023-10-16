@@ -6,7 +6,7 @@ title: Wee Yeow's Project Portfolio Page
 ### Project: lesSON
 
 lesSON is a desktop flashcard application for Computing students in University who struggle with
-memorisation and consolidation of knowledge. The user interacts with it using a CLI, and it has a 
+memorisation and consolidation of knowledge. The user interacts with it using a CLI, and it has a
 GUI created with JavaFX. It is written in Java.
 
 Given below are my contributions to the project.
