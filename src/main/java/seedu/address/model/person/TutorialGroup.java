@@ -2,6 +2,10 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents a student's TutorialGroup.
+ * Guarantees: immutable; is valid as declared in {@link #isValidTG(String)}
+ */
 public class TutorialGroup {
 
     public static final String MESSAGE_CONSTRAINTS = "Tutorial group should only contain alphanumeric "
