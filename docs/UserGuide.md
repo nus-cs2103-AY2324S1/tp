@@ -49,7 +49,7 @@ Display all your stored contacts.
 
 ### Deleting a Contact: `delete`
 
-Remove a contact based on the index. The index refers to the index number shown in the displayed person list.
+Remove a contact based on the index. The index refers to the index number shown in the displayed contact list.
 
 **Format:**
 `delete INDEX`
@@ -57,7 +57,7 @@ Remove a contact based on the index. The index refers to the index number shown 
 **Examples:**
 - `delete n/John Doe`
 
-Deletes the person at the specified `INDEX`.
+Deletes the contact at the specified `INDEX`.
 The index **must be a positive integer** 1, 2, 3, …​
 
 ---
