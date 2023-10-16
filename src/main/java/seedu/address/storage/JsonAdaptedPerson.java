@@ -108,7 +108,16 @@ class JsonAdaptedPerson {
         final ID modelId = new ID(id);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
+
+        if (tutorialGroup == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    TutorialGroup.class.getSimpleName()));
+        }
+        if (!TutorialGroup.isValidTG(tutorialGroup)) {
+            throw new IllegalValueException(TutorialGroup.MESSAGE_CONSTRAINTS);
+        }
         final TutorialGroup modelTutorialGroup = new TutorialGroup(tutorialGroup);
+
         return new Person(modelName, modelPhone, modelEmail, modelId, modelTags, modelTutorialGroup);
     }
 
