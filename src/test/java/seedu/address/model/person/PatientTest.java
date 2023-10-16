@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_BLOOD_TYPE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_BLOODTYPE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CONDITION_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMERGENCY_CONTACT_BOB;
@@ -40,7 +40,7 @@ public class PatientTest {
         // same ic, all other attributes different -> returns true
         Patient editedAlice = new PatientBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).withName(VALID_NAME_BOB)
-                .withGender(VALID_GENDER_MALE).withCondition(VALID_CONDITION_BOB).withBloodType(VALID_BLOOD_TYPE_BOB)
+                .withGender(VALID_GENDER_MALE).withCondition(VALID_CONDITION_BOB).withBloodType(VALID_BLOODTYPE_BOB)
                 .withEmergencyContact(VALID_CONDITION_BOB).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
@@ -96,7 +96,7 @@ public class PatientTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different blood type -> return false
-        editedAlice = new PatientBuilder(ALICE).withBloodType(VALID_BLOOD_TYPE_BOB).build();
+        editedAlice = new PatientBuilder(ALICE).withBloodType(VALID_BLOODTYPE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 

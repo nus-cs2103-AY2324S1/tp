@@ -2,7 +2,7 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_BLOOD_TYPE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_BLOODTYPE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CONDITION_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CONDITION_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
@@ -72,7 +72,7 @@ public class TypicalPatient {
     public static final Patient AMY = new PatientBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withEmergencyContact(VALID_EMERGENCY_CONTACT_AMY).withEmail(VALID_EMAIL_AMY)
             .withAddress(VALID_ADDRESS_AMY).withIc(VALID_NRIC_AMY).withGender(VALID_GENDER_FEMALE)
-            .withRemark(VALID_REMARK_AMY).withCondition(VALID_CONDITION_AMY).withBloodType(VALID_BLOOD_TYPE_AMY)
+            .withRemark(VALID_REMARK_AMY).withCondition(VALID_CONDITION_AMY).withBloodType(VALID_BLOODTYPE_AMY)
             .withTags(VALID_TAG_FRIEND).build();
     public static final Patient BOB = new PatientBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmergencyContact(VALID_EMERGENCY_CONTACT_BOB).withEmail(VALID_EMAIL_BOB)

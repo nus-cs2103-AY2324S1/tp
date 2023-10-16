@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BLOODTYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONDITION;
@@ -15,11 +16,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
@@ -44,12 +48,13 @@ public class CommandTestUtil {
     public static final String VALID_GENDER_FEMALE = "F";
     public static final String VALID_NRIC_AMY = "S8643226I";
     public static final String VALID_NRIC_BOB = "S8192320E";
+    public static final String VALID_NRIC_ALICE = "T0131267K";
     public static final String VALID_REMARK_AMY = "She likes aardvarks.";
     public static final String VALID_REMARK_BOB = "He likes football.";
-    public static final String VALID_CONDITION_AMY = "Kidney Failure";
     public static final String VALID_CONDITION_BOB = "Pneumothorax";
-    public static final String VALID_BLOOD_TYPE_AMY = "O+";
-    public static final String VALID_BLOOD_TYPE_BOB = "A+";
+    public static final String VALID_BLOODTYPE_BOB = "A+";
+    public static final String VALID_BLOODTYPE_AMY = "A+";
+    public static final String VALID_CONDITION_AMY = "Diabetes";
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
@@ -70,8 +75,8 @@ public class CommandTestUtil {
     public static final String REMARK_DESC_BOB = " " + PREFIX_REMARK + VALID_REMARK_BOB;
     public static final String CONDITION_DESC_AMY = " " + PREFIX_CONDITION + VALID_CONDITION_AMY;
     public static final String CONDITION_DESC_BOB = " " + PREFIX_CONDITION + VALID_CONDITION_BOB;
-    public static final String BLOOD_TYPE_DESC_AMY = " " + PREFIX_BLOODTYPE + VALID_BLOOD_TYPE_AMY;
-    public static final String BLOOD_TYPE_DESC_BOB = " " + PREFIX_BLOODTYPE + VALID_BLOOD_TYPE_BOB;
+    public static final String BLOOD_TYPE_DESC_AMY = " " + PREFIX_BLOODTYPE + VALID_BLOODTYPE_AMY;
+    public static final String BLOOD_TYPE_DESC_BOB = " " + PREFIX_BLOODTYPE + VALID_BLOODTYPE_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
@@ -79,19 +84,26 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
-
+    public static final String INVALID_BLOODTYPE_DESC = " " + PREFIX_BLOODTYPE + "Z+";
+    public static final String INVALID_CONDITION_DESC = " " + PREFIX_CONDITION + " ";
+    public static final String INVALID_NRIC = "A1234567G";
+    public static final String INVALID_GENDER_DESC = " " + PREFIX_GENDER + "Alien";
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
-
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
+                .withBloodType(VALID_BLOODTYPE_AMY).withCondition(VALID_CONDITION_AMY)
+                .withGender(VALID_GENDER_FEMALE).withIc(VALID_NRIC_AMY)
+                .withTags(VALID_TAG_FRIEND).withBloodType(VALID_BLOODTYPE_AMY)
+                .build();
+
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
+                .withGender(VALID_GENDER_MALE).withIc(VALID_NRIC_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 
@@ -136,6 +148,20 @@ public class CommandTestUtil {
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredPatientList());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showPersonAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredPatientList().size());
+
+        Person person = model.getFilteredPatientList().get(targetIndex.getZeroBased());
+        final String[] splitName = person.getName().fullName.split("\\s+");
+        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Collections.singletonList(splitName[0])));
+
+        assertEquals(1, model.getFilteredPatientList().size());
     }
 
 }

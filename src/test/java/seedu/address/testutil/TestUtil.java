@@ -39,6 +39,7 @@ public class TestUtil {
         return Index.fromOneBased(model.getFilteredPatientList().size() / 2);
     }
 
+
     /**
      * Returns the last index of the patient in the {@code model}'s patient list.
      */

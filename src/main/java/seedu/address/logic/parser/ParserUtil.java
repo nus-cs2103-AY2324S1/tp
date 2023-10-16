@@ -17,6 +17,7 @@ import seedu.address.model.person.Gender;
 import seedu.address.model.person.Ic;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -25,6 +26,8 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_NRIC = "Invalid NRIC.";
+    public static final int SG_NRIC_LENGTH = 9;
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -39,6 +42,7 @@ public class ParserUtil {
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
+
 
     /**
      * Parses a {@code String name} into a {@code Name}.
@@ -108,7 +112,7 @@ public class ParserUtil {
      */
     public static Ic parseIc(String ic) throws ParseException {
         requireNonNull(ic);
-        String trimmedIc = ic.trim();
+        String trimmedIc = ic.trim().toUpperCase();
         if (!Ic.isValidIc(trimmedIc)) {
             throw new ParseException(Ic.MESSAGE_CONSTRAINTS);
         }
@@ -176,15 +180,25 @@ public class ParserUtil {
      * Parses a {@code String condition} into a {@code Condition}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @throws ParseException if the given {@code condition} is invalid.
      */
     public static Condition parseCondition(String condition) throws ParseException {
         requireNonNull(condition);
-        String trimmedTag = condition.trim();
-        if (!Condition.isValidCondition(trimmedTag)) {
+        String trimmedCondition = condition.trim();
+        if (!Condition.isValidCondition(trimmedCondition)) {
             throw new ParseException(Condition.MESSAGE_CONSTRAINTS);
         }
-        return new Condition(trimmedTag);
+        return new Condition(trimmedCondition);
     }
 
+
+    /**
+     * Parses {@code String remark} into a {@code Remark}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static Remark parseRemark(String remark) {
+        requireNonNull(remark);
+        String trimmedRemark = remark.trim();
+        return new Remark(trimmedRemark);
+    }
 }
