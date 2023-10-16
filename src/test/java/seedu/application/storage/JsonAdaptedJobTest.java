@@ -15,7 +15,7 @@ import seedu.application.model.job.Status;
 
 public class JsonAdaptedJobTest {
     private static final String INVALID_ROLE = "Softw@re";
-    private static final String INVALID_COMPANY = "+651234";
+    private static final String INVALID_COMPANY = "      ";
     private static final String INVALID_STATUS = "submitted";
     private static final String INVALID_DEADLINE = "Nov 12 2023";
 

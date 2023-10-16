@@ -78,7 +78,7 @@ public class DeadlineCommandTest {
      * but smaller than size of address book
      */
     @Test
-    public void execute_invalidPersonIndexFilteredList_failure() {
+    public void execute_invalidJobIndexFilteredList_failure() {
         showJobAtIndex(model, INDEX_FIRST_JOB);
         Index outOfBoundIndex = INDEX_SECOND_JOB;
         // ensures that outOfBoundIndex is still in bounds of address book list

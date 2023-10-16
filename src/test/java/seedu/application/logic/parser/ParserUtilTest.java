@@ -13,7 +13,7 @@ import seedu.application.model.job.Role;
 
 public class ParserUtilTest {
     private static final String INVALID_ROLE = "Softw@re Engineer";
-    private static final String INVALID_COMPANY = "+Google";
+    private static final String INVALID_COMPANY = "      ";
     private static final String VALID_ROLE = "Software Engineer";
     private static final String VALID_COMPANY = "Google";
     private static final String WHITESPACE = " \t\r\n";
