@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
@@ -52,22 +53,22 @@ public class EditEmployeeDescriptorTest {
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different bank account -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withBankAccount(VALID_BANKACCOUNT_BOB).build();
+        editedAmy = new EditEmployeeDescriptorBuilder(DESC_AMY).withBankAccount(VALID_BANKACCOUNT_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 
     @Test
     public void toStringMethod() {
-        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
-        String expected = EditPersonDescriptor.class.getCanonicalName() + "{name="
-                + editPersonDescriptor.getName().orElse(null) + ", phone="
-                + editPersonDescriptor.getPhone().orElse(null) + ", email="
-                + editPersonDescriptor.getEmail().orElse(null) + ", address="
-                + editPersonDescriptor.getAddress().orElse(null) + ", bankAccount="
-                + editPersonDescriptor.getBankAccount().orElse(null) + ", joinDate="
-                + editPersonDescriptor.getJoinDate().orElse(null) + ", salary="
-                + editPersonDescriptor.getSalary().orElse(null) + ", annualLeave="
-                + editPersonDescriptor.getAnnualLeave().orElse(null) + "}";
-        assertEquals(expected, editPersonDescriptor.toString());
+        EditEmployeeDescriptor editEmployeeDescriptor = new EditEmployeeDescriptor();
+        String expected = EditEmployeeDescriptor.class.getCanonicalName() + "{name="
+                + editEmployeeDescriptor.getName().orElse(null) + ", phone="
+                + editEmployeeDescriptor.getPhone().orElse(null) + ", email="
+                + editEmployeeDescriptor.getEmail().orElse(null) + ", address="
+                + editEmployeeDescriptor.getAddress().orElse(null) + ", bankAccount="
+                + editEmployeeDescriptor.getBankAccount().orElse(null) + ", joinDate="
+                + editEmployeeDescriptor.getJoinDate().orElse(null) + ", salary="
+                + editEmployeeDescriptor.getSalary().orElse(null) + ", annualLeave="
+                + editEmployeeDescriptor.getAnnualLeave().orElse(null) + "}";
+        assertEquals(expected, editEmployeeDescriptor.toString());
     }
 }
