@@ -2,11 +2,9 @@ package seedu.address.ui;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Comparator;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.meeting.Meeting;
@@ -44,8 +42,6 @@ public class MeetingCard extends UiPart<Region> {
     private Label spacer;
     @FXML
     private Label end;
-    @FXML
-    private FlowPane attendees;
 
     /**
      * Creates a {@code MeetingCode} with the given {@code Meeting} and index to display.
@@ -61,8 +57,5 @@ public class MeetingCard extends UiPart<Region> {
         start.setText(temp.format(DateTimeFormatter.ofPattern("HHmm")));
         spacer.setText("-");
         end.setText(meeting.getEnd().format(DateTimeFormatter.ofPattern("HHmm")));
-        meeting.getAttendees().stream()
-                .sorted(Comparator.comparing(attendee -> attendee.getAttendeeName()))
-                .forEach(attendee -> attendees.getChildren().add(new Label(attendee.getAttendeeName())));
     }
 }
