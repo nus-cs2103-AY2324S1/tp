@@ -1,14 +1,15 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.tag.Tag;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupList;
+import seedu.address.model.group.exceptions.DuplicateGroupException;
 
 /**
  * Represents a Person in the address book.
@@ -21,20 +22,20 @@ public class Person {
     private final Phone phone;
     private final Email email;
 
+
     // Data fields
-    private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
+    private GroupList personGroups;
+
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, GroupList personGroups) {
+        requireAllNonNull(name, phone, email, personGroups);
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
+        this.personGroups = personGroups;
     }
 
     public Name getName() {
@@ -49,29 +50,92 @@ public class Person {
         return email;
     }
 
-    public Address getAddress() {
-        return address;
+    public GroupList getGroups() {
+        return personGroups;
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
+     * Adds group to persons existing groupList
+     * @param group to be added to person groupList
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public void addGroup(Group group) throws CommandException {
+        requireNonNull(group);
+        if (this.personGroups.contains(group)) {
+            throw new CommandException(String.format("%s is already in this group: %s", this.name.fullName, group.getGroupName()));
+        }
+        this.personGroups.add(group);
+    }
+
+    /**
+     * Removes group from persons existing groupList
+     * @param group to be removed from person groupList
+     */
+    public void removeGroup(Group group) throws CommandException {
+        requireNonNull(group);
+        if (!this.personGroups.contains(group)) {
+            throw new CommandException(String.format("%s is not in this group: %s", this.name.fullName, group.getGroupName()));
+        }
+        this.personGroups.remove(group);
+    }
+
+    /**
+     * Check whether person is part of group
+     * @param group group to check
+     * @return boolean depending on whether person is in group
+     */
+    public boolean containsGroup(Group group) {
+        return personGroups.contains(group);
+    }
+
+    /**
+     * Returns true if both persons have an identical field.
+     * This defines a weaker notion of equality between two persons.
+     */
+    public boolean isSamePerson(Person otherPerson) {
+        return isSameName(otherPerson) && isSamePhone(otherPerson)
+                && isSameEmail(otherPerson);
     }
 
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
-    public boolean isSamePerson(Person otherPerson) {
+    public boolean isSameName(Person otherPerson) {
         if (otherPerson == this) {
             return true;
         }
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
+    }
+
+    /**
+     * Returns true if both persons have the same number.
+     * This defines a weaker notion of equality between two persons.
+     */
+    public boolean isSamePhone(Person otherPerson) {
+        if (otherPerson == this) {
+            return true;
+        }
+
+        return otherPerson != null
+                && otherPerson.getPhone().equals(getPhone());
+    }
+
+    /**
+     * Returns true if both persons have the same email.
+     * This defines a weaker notion of equality between two persons.
+     */
+    public boolean isSameEmail(Person otherPerson) {
+        if (otherPerson == this) {
+            return true;
+        }
+        return otherPerson != null
+                && otherPerson.getEmail().equals(getEmail());
+    }
+
+    public boolean nameEquals(String personName) {
+        return name.nameEquals(personName);
     }
 
     /**
@@ -93,14 +157,13 @@ public class Person {
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && personGroups.equals(otherPerson.personGroups);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, personGroups);
     }
 
     @Override
@@ -109,8 +172,7 @@ public class Person {
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
-                .add("address", address)
-                .add("tags", tags)
+                .add("groups", personGroups)
                 .toString();
     }
 

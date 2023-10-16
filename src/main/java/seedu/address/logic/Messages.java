@@ -5,8 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
-import seedu.address.model.Group;
-import seedu.address.model.GroupList;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
 /**
@@ -43,10 +42,8 @@ public class Messages {
                 .append(person.getPhone())
                 .append("; Email: ")
                 .append(person.getEmail())
-                .append("; Address: ")
-                .append(person.getAddress())
-                .append("; Tags: ");
-        person.getTags().forEach(builder::append);
+                .append("; Groups: ");
+        person.getGroups().toStream().map(Group::getGroupName).forEach(builder::append);
         return builder.toString();
     }
 

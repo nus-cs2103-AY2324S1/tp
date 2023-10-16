@@ -9,8 +9,11 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.util.Pair;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
 /**
@@ -22,6 +25,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Group> filteredGroups;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -30,10 +34,10 @@ public class ModelManager implements Model {
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
-
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredGroups = new FilteredList<>(this.addressBook.getGroupList());
     }
 
     public ModelManager() {
@@ -94,6 +98,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean[] usedFields(Person person) {
+        requireNonNull(person);
+        return addressBook.usedFields(person);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }
@@ -146,10 +156,90 @@ public class ModelManager implements Model {
         return filteredPersons;
     }
 
+    /**
+     * Returns an unmodifiable view of the list of {@code Group} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Group> getFilteredGroupList() {
+        return filteredGroups;
+    };
+
+
+
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    public void updateFilteredGroupList(Predicate<Group> predicate) {
+        requireNonNull(predicate);
+        filteredGroups.setPredicate(predicate);
+    }
+
+    // in GroupPersonCommand call model.groupPerson(person, group) note that these are simply strings!
+    // groupPerson(person, group)
+    // calls addressbook.groupPerson(person, group)
+    // addressbook -> personlist grouplist
+    // method in addressbook referencing method in personList groupList (oop) set person to group and group to person
+    // get
+    // get
+    // person.setgroup(group)
+    // person already in group throw exception also
+    // group.setperson(person)
+    // group already contain person
+    // exactPersonExist exactGroupExist
+    // better to retrieve both person and group object first then set else error prone
+    // for loop all things once name exact match for person / group
+    // this methods throws command exception, yes it works
+    @Override
+    public Pair<Person, Group> groupPerson(String personName, String groupName) throws CommandException {
+        // both throw exception if not exists exact match
+        Person person =addressBook.getPerson(personName);
+        Group group = addressBook.getGroup(groupName);
+        this.assignGroup(person, group);
+        forceUpdateList();
+        Pair<Person, Group> output = new Pair<>(person, group);
+        return output;
+    }
+
+    /**
+     * Assign person to group
+     * @param person person to be grouped
+     * @param group group in consideration
+     * @throws CommandException if person has already been assigned to group
+     */
+    private void assignGroup(Person person, Group group) throws CommandException {
+       group.addPerson(person);
+       person.addGroup(group);
+    }
+
+    @Override
+    public Pair<Person, Group> ungroupPerson(String personName, String groupName) throws CommandException {
+        // both throw exception if not exists exact match
+        Person person = addressBook.getPerson(personName);
+        Group group = addressBook.getGroup(groupName);
+        this.unassignGroup(person, group);
+        forceUpdateList();
+        Pair<Person, Group> output = new Pair<>(person, group);
+        return output;
+    }
+
+    /**
+     * Assign person to group
+     * @param person person to be grouped
+     * @param group group in consideration
+     * @throws CommandException if person has already been assigned to group
+     */
+    private void unassignGroup(Person person, Group group) throws CommandException {
+        group.removePerson(person);
+        person.removeGroup(group);
+    }
+
+    private void forceUpdateList() {
+        updateFilteredPersonList(user -> false);
+        updateFilteredPersonList(user -> true);
     }
 
     @Override

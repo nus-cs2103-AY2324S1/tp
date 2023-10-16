@@ -268,8 +268,8 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* University students often spend a lot of time coordinating project meetup 
-* sessions and waiting for replies and they are not aware of one another’s schedules. 
+* University students often spend a lot of time coordinating project meetup
+* sessions and waiting for replies and they are not aware of one another’s schedules.
 * This app can help to save time by listing available time slots of individuals in a team.
 
 
