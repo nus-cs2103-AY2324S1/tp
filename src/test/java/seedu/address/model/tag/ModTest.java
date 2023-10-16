@@ -7,13 +7,13 @@ import org.junit.jupiter.api.Test;
 public class ModTest {
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Mod(null));
+        assertThrows(NullPointerException.class, () -> Mod.of(null));
     }
 
     @Test
     public void constructor_invalidModName_throwsIllegalArgumentException() {
         String invalidModName = "";
-        assertThrows(IllegalArgumentException.class, () -> new Mod(invalidModName));
+        assertThrows(IllegalArgumentException.class, () -> Mod.of(invalidModName));
     }
 
     @Test
