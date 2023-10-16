@@ -49,8 +49,7 @@ public class Name {
         if (other == this) {
             return true;
         }
-
-        // instanceof handles nulls
+        
         if (!(other instanceof Name)) {
             return false;
         }
