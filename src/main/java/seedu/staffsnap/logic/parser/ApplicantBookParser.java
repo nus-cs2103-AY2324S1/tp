@@ -8,15 +8,25 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.staffsnap.commons.core.LogsCenter;
-import seedu.staffsnap.logic.commands.*;
+import seedu.staffsnap.logic.commands.AddCommand;
+import seedu.staffsnap.logic.commands.ClearCommand;
+import seedu.staffsnap.logic.commands.Command;
+import seedu.staffsnap.logic.commands.ConfirmationCommand;
+import seedu.staffsnap.logic.commands.DeleteCommand;
+import seedu.staffsnap.logic.commands.EditCommand;
+import seedu.staffsnap.logic.commands.ExitCommand;
+import seedu.staffsnap.logic.commands.FindCommand;
+import seedu.staffsnap.logic.commands.HelpCommand;
+import seedu.staffsnap.logic.commands.ListCommand;
+import seedu.staffsnap.logic.commands.SortCommand;
 import seedu.staffsnap.logic.parser.exceptions.ParseException;
 
 /**
  * Parses user input.
  */
 public class ApplicantBookParser {
-    Boolean IsConfirmedNext = false;
-    Boolean IsConfirmed = false;
+    private Boolean IsConfirmedNext = false;
+    private Boolean IsConfirmed = false;
 
     /**
      * Used for initial separation of command word and args.
