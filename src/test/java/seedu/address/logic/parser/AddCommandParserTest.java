@@ -62,14 +62,14 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseComplexSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_AMY + PHONE_DESC_AMY
-                + EMAIL_DESC_AMY + LOCATION_DESC_AMY + TAG_DESC_FRIEND + MEDICAL_HISTORY_DESC_AMY,
+                + EMAIL_DESC_AMY + TAG_DESC_FRIEND + MEDICAL_HISTORY_DESC_AMY,
                 new AddCommand(expectedPatient), PersonType.PATIENT);
 
         // multiple tags - all accepted
         Person expectedPatientMultipleTags = new PatientBuilder(AMY).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
         assertParseComplexSuccess(parser,
-                NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + LOCATION_DESC_AMY
+                NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
                         + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + MEDICAL_HISTORY_DESC_AMY,
                 new AddCommand(expectedPatientMultipleTags), PersonType.PATIENT);
     }
@@ -176,7 +176,7 @@ public class AddCommandParserTest {
         // zero tags
         Person expectedPerson = new PatientBuilder(AMY).withTags().build();
         assertParseComplexSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                        + LOCATION_DESC_AMY + MEDICAL_HISTORY_DESC_AMY,
+                        + MEDICAL_HISTORY_DESC_AMY,
                 new AddCommand(expectedPerson), PersonType.PATIENT);
     }
 
@@ -186,19 +186,15 @@ public class AddCommandParserTest {
 
         // missing name prefix
         assertParseComplexFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                        + LOCATION_DESC_BOB, expectedMessage, PersonType.PATIENT);
+                        , expectedMessage, PersonType.PATIENT);
 
         // missing phone prefix
         assertParseComplexFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB
-                        + LOCATION_DESC_BOB, expectedMessage, PersonType.PATIENT);
+                        , expectedMessage, PersonType.PATIENT);
 
         // missing email prefix
         assertParseComplexFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB
-                        + LOCATION_DESC_BOB, expectedMessage, PersonType.PATIENT);
-
-        // missing address prefix
-        assertParseComplexFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                        + VALID_LOCATION_BOB, expectedMessage, PersonType.PATIENT);
+                        , expectedMessage, PersonType.PATIENT);
 
         // all prefixes missing
         assertParseComplexFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB

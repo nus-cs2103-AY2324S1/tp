@@ -15,7 +15,7 @@ public class SpecialistTest {
     @Test
     public void toStringMethod() {
         String expected = Specialist.class.getCanonicalName() + "{name=" + BOB.getName() + ", phone=" + BOB.getPhone()
-                + ", email=" + BOB.getEmail() + ", location=" + BOB.getLocation() + ", tags=" + BOB.getTags()
+                + ", email=" + BOB.getEmail() + ", tags=" + BOB.getTags() + ", location=" + BOB.getLocation()
                 + ", specialty=" + BOB.getSpecialty() + "}";
         assertEquals(expected, BOB.toString());
     }

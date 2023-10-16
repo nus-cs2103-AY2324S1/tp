@@ -129,12 +129,11 @@ public class EditCommand extends Command {
         Name updatedName = editPatientDescriptor.getName().orElse(patientToEdit.getName());
         Phone updatedPhone = editPatientDescriptor.getPhone().orElse(patientToEdit.getPhone());
         Email updatedEmail = editPatientDescriptor.getEmail().orElse(patientToEdit.getEmail());
-        Location updatedLocation = editPatientDescriptor.getLocation().orElse(patientToEdit.getLocation());
         Set<Tag> updatedTags = editPatientDescriptor.getTags().orElse(patientToEdit.getTags());
         MedicalHistory updatedMedicalHistory = editPatientDescriptor.getMedicalHistory()
                 .orElse(patientToEdit.getMedicalHistory());
         return new Patient(updatedName, updatedPhone,
-                updatedEmail, updatedLocation, updatedTags, updatedMedicalHistory);
+                updatedEmail, updatedTags, updatedMedicalHistory);
     }
 
     /**
@@ -188,7 +187,6 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
-        private Location location;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -201,7 +199,6 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
-            setLocation(toCopy.location);
             setTags(toCopy.tags);
         }
 
@@ -209,7 +206,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, location, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, tags);
         }
 
         public void setName(Name name) {
@@ -236,13 +233,6 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
-        public void setLocation(Location location) {
-            this.location = location;
-        }
-
-        public Optional<Location> getLocation() {
-            return Optional.ofNullable(location);
-        }
 
         /**
          * Sets {@code tags} to this object's {@code tags}.
@@ -276,7 +266,6 @@ public class EditCommand extends Command {
             return Objects.equals(name, otherEditPersonDescriptor.name)
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
-                    && Objects.equals(location, otherEditPersonDescriptor.location)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
@@ -286,7 +275,6 @@ public class EditCommand extends Command {
                     .add("name", name)
                     .add("phone", phone)
                     .add("email", email)
-                    .add("location", location)
                     .add("tags", tags)
                     .toString();
         }
@@ -352,15 +340,25 @@ public class EditCommand extends Command {
      */
     public static class EditSpecialistDescriptor extends EditPersonDescriptor {
         private Specialty specialty;
+        private Location location;
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
         public EditSpecialistDescriptor(EditSpecialistDescriptor toCopy) {
             super(toCopy);
+            setLocation(toCopy.location);
             setSpecialty(toCopy.specialty);
         }
         public EditSpecialistDescriptor() {}
+
+        public void setLocation(Location location) {
+            this.location = location;
+        }
+
+        public Optional<Location> getLocation() {
+            return Optional.ofNullable(location);
+        }
         public void setSpecialty(Specialty specialty) {
             this.specialty = specialty;
         }
@@ -369,18 +367,20 @@ public class EditCommand extends Command {
             return Optional.ofNullable(specialty);
         }
 
+
         @Override
         public boolean equals(Object other) {
             if (super.equals(other) && other instanceof EditSpecialistDescriptor) {
                 EditSpecialistDescriptor otherEditSpecialistDescriptor = (EditSpecialistDescriptor) other;
-                return Objects.equals(specialty, otherEditSpecialistDescriptor.specialty);
+                return Objects.equals(specialty, otherEditSpecialistDescriptor.specialty)
+                        && Objects.equals(location, otherEditSpecialistDescriptor.location);
             }
             return false;
         }
 
         @Override
         public String toString() {
-            String stringToAdd = ", specialty=" + specialty;
+            String stringToAdd = ", location=" + location + ", specialty=" + specialty;
             return StringUtil.addFieldToPersonToString(stringToAdd, super.toString());
         }
 

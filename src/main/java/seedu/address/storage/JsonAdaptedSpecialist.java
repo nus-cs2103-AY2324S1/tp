@@ -18,16 +18,30 @@ import seedu.address.model.tag.Tag;
 
 class JsonAdaptedSpecialist extends JsonAdaptedPerson {
     private final String specialty;
+    private final String location;
+
     public JsonAdaptedSpecialist(Specialist source) {
         super(source);
         specialty = source.getSpecialty().value;
+        location = source.getLocation().value;
     }
     public JsonAdaptedSpecialist(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                                  @JsonProperty("email") String email, @JsonProperty("location") String location,
                                  @JsonProperty("tags") List<JsonAdaptedTag> tags,
                                  @JsonProperty("Specialty") String specialty) {
-        super(name, phone, email, location, tags);
+        super(name, phone, email, tags);
+        this.location = location;
         this.specialty = specialty;
+    }
+    public String getLocation() throws IllegalValueException {
+        if (location == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Location.class.getSimpleName()));
+        }
+        if (!Location.isValidLocation(location)) {
+            throw new IllegalValueException(Location.MESSAGE_CONSTRAINTS);
+        }
+        return location;
     }
 
     public String getSpecialty() throws IllegalValueException {

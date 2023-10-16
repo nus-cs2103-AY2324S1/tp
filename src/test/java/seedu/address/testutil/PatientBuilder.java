@@ -43,7 +43,7 @@ public class PatientBuilder extends PersonBuilder {
 
     @Override
     public Patient build() {
-        return new Patient(getName(), getPhone(), getEmail(), getLocation(), getTags(), getMedicalHistory());
+        return new Patient(getName(), getPhone(), getEmail(), getTags(), getMedicalHistory());
     }
 
 }

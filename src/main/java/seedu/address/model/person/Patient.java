@@ -17,8 +17,8 @@ public class Patient extends Person {
      * Every field must be present and not null.
      */
     public Patient(Name name, Phone phone, Email email,
-                   Location location, Set<Tag> tags, MedicalHistory medicalHistory) {
-        super(name, phone, email, location, tags);
+                   Set<Tag> tags, MedicalHistory medicalHistory) {
+        super(name, phone, email, tags);
         this.medicalHistory = medicalHistory;
     }
 
@@ -45,7 +45,6 @@ public class Patient extends Person {
         return super.getName().equals(otherPatient.getName())
                 && super.getPhone().equals(otherPatient.getPhone())
                 && super.getEmail().equals(otherPatient.getEmail())
-                && super.getLocation().equals(otherPatient.getLocation())
                 && super.getTags().equals(otherPatient.getTags())
                 && medicalHistory.equals(otherPatient.medicalHistory);
     }

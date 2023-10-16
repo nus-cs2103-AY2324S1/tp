@@ -13,17 +13,20 @@ import seedu.address.model.tag.Tag;
 public class Specialist extends Person {
     private final Specialty specialty;
 
+    private final Location location;
+
     /**
      * Every field must be present and not null.
      */
     public Specialist(Name name, Phone phone, Email email, Location location, Set<Tag> tags, Specialty specialty) {
-        super(name, phone, email, location, tags);
+        super(name, phone, email, tags);
+        this.location = location;
         this.specialty = specialty;
     }
 
     @Override
     public String toString() {
-        String stringToAdd = ", specialty=" + specialty;
+        String stringToAdd = ", location=" + location + ", specialty=" + specialty;
         return StringUtil.addFieldToPersonToString(stringToAdd, super.toString());
     }
 
@@ -46,11 +49,14 @@ public class Specialist extends Person {
         return super.getName().equals(otherSpecialist.getName())
                 && super.getPhone().equals(otherSpecialist.getPhone())
                 && super.getEmail().equals(otherSpecialist.getEmail())
-                && super.getLocation().equals(otherSpecialist.getLocation())
                 && super.getTags().equals(otherSpecialist.getTags())
+                && this.location.equals(otherSpecialist.location)
                 && this.specialty.equals(otherSpecialist.specialty);
     }
 
+    public Location getLocation() {
+        return location;
+    }
     public Specialty getSpecialty() {
         return specialty;
     }

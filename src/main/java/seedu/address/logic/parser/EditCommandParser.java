@@ -69,9 +69,6 @@ public class EditCommandParser implements ParserComplex<EditCommand> {
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
             editPatientDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
         }
-        if (argMultimap.getValue(PREFIX_LOCATION).isPresent()) {
-            editPatientDescriptor.setLocation(ParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).get()));
-        }
         if (argMultimap.getValue(PREFIX_MEDICALHISTORY).isPresent()) {
             editPatientDescriptor.setMedicalHistory(ParserUtil.parseMedicalHistory(argMultimap
                     .getValue(PREFIX_MEDICALHISTORY).get()));

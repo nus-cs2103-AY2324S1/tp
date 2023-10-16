@@ -29,7 +29,7 @@ public class PatientTest {
     @Test
     public void toStringMethod() {
         String expected = Patient.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
-                + ", email=" + ALICE.getEmail() + ", location=" + ALICE.getLocation() + ", tags=" + ALICE.getTags()
+                + ", email=" + ALICE.getEmail() + ", tags=" + ALICE.getTags()
                 + ", medical history=" + ALICE.getMedicalHistory() + "}";
         assertEquals(expected, ALICE.toString());
     }

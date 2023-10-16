@@ -18,8 +18,8 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonType;
-import seedu.address.model.person.predicates.AddressContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.EmailContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.LocationContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.MedHistoryContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.PhoneContainsKeywordsPredicate;
@@ -118,7 +118,7 @@ public class FindCommandParser implements ParserComplex<FindCommand> {
         }
         if (argMultimap.getValue(PREFIX_LOCATION).isPresent()) {
             List<String> addressKeywords = splitKeywordsByWhitespace(argMultimap, PREFIX_LOCATION);
-            predicateList.add(new AddressContainsKeywordsPredicate(addressKeywords));
+            predicateList.add(new LocationContainsKeywordsPredicate(addressKeywords));
         }
         if (!argMultimap.getAllValues(PREFIX_TAG).isEmpty()) {
             predicateList.add(new TagsContainsKeywordsPredicate(argMultimap.getAllValues(PREFIX_TAG)));

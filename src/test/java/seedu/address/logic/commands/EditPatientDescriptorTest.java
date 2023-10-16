@@ -51,11 +51,6 @@ public class EditPatientDescriptorTest {
                 .withEmail(VALID_EMAIL_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
-        // different address -> returns false
-        editedAmy = (EditPatientDescriptor) new EditPatientDescriptorBuilder(DESC_AMY)
-                .withLocation(VALID_LOCATION_BOB).build();
-        assertFalse(DESC_AMY.equals(editedAmy));
-
         // different tags -> returns false
         editedAmy = (EditPatientDescriptor) new EditPatientDescriptorBuilder(DESC_AMY)
                 .withTags(VALID_TAG_HUSBAND).build();
@@ -68,8 +63,7 @@ public class EditPatientDescriptorTest {
         String expected = EditPatientDescriptor.class.getCanonicalName() + "{name="
                 + editPatientDescriptor.getName().orElse(null) + ", phone="
                 + editPatientDescriptor.getPhone().orElse(null) + ", email="
-                + editPatientDescriptor.getEmail().orElse(null) + ", location="
-                + editPatientDescriptor.getLocation().orElse(null) + ", tags="
+                + editPatientDescriptor.getEmail().orElse(null) + ", tags="
                 + editPatientDescriptor.getTags().orElse(null) + ", medical history="
                 + editPatientDescriptor.getMedicalHistory().orElse(null) + "}";
         assertEquals(expected, editPatientDescriptor.toString());

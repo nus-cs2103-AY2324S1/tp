@@ -51,7 +51,7 @@ public class EditSpecialistDescriptorTest {
                 .withEmail(VALID_EMAIL_AMY).build();
         assertFalse(DESC_BOB.equals(editedBob));
 
-        // different address -> returns false
+        // different location -> returns false
         editedBob = (EditSpecialistDescriptor) new EditSpecialistDescriptorBuilder(DESC_BOB)
                 .withLocation(VALID_LOCATION_AMY).build();
         assertFalse(DESC_BOB.equals(editedBob));
@@ -67,9 +67,9 @@ public class EditSpecialistDescriptorTest {
         String expected = EditSpecialistDescriptor.class.getCanonicalName() + "{name="
                 + editSpecialistDescriptor.getName().orElse(null) + ", phone="
                 + editSpecialistDescriptor.getPhone().orElse(null) + ", email="
-                + editSpecialistDescriptor.getEmail().orElse(null) + ", location="
-                + editSpecialistDescriptor.getLocation().orElse(null) + ", tags="
-                + editSpecialistDescriptor.getTags().orElse(null) + ", specialty="
+                + editSpecialistDescriptor.getEmail().orElse(null) + ", tags="
+                + editSpecialistDescriptor.getTags().orElse(null) +  ", location="
+                + editSpecialistDescriptor.getLocation().orElse(null) + ", specialty="
                 + editSpecialistDescriptor.getSpecialty().orElse(null) + "}";
         assertEquals(expected, editSpecialistDescriptor.toString());
     }

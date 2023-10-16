@@ -19,7 +19,6 @@ public abstract class PersonBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_LOCATION = "123, Jurong West Ave 6, #08-111";
 
     private Name name;
     private Phone phone;
@@ -34,7 +33,6 @@ public abstract class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
-        location = new Location(DEFAULT_LOCATION);
         tags = new HashSet<>();
     }
 
@@ -45,7 +43,6 @@ public abstract class PersonBuilder {
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
-        location = personToCopy.getLocation();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -65,13 +62,6 @@ public abstract class PersonBuilder {
         return this;
     }
 
-    /**
-     * Sets the {@code Location} of the {@code Person} that we are building.
-     */
-    public PersonBuilder withAddress(String address) {
-        this.location = new Location(address);
-        return this;
-    }
 
     /**
      * Sets the {@code Phone} of the {@code Person} that we are building.

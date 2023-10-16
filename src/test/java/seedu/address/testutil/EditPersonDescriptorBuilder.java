@@ -27,7 +27,6 @@ public abstract class EditPersonDescriptorBuilder {
         descriptor.setName(person.getName());
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
-        descriptor.setLocation(person.getLocation());
         descriptor.setTags(person.getTags());
     }
 
@@ -53,14 +52,6 @@ public abstract class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withEmail(String email) {
         descriptor.setEmail(new Email(email));
-        return this;
-    }
-
-    /**
-     * Sets the {@code Location} of the {@code EditPersonDescriptor} that we are building.
-     */
-    public EditPersonDescriptorBuilder withLocation(String location) {
-        descriptor.setLocation(new Location(location));
         return this;
     }
 

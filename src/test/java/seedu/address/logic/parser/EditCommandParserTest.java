@@ -93,8 +93,6 @@ public class EditCommandParserTest {
                 PersonType.PATIENT); // invalid phone
         assertParseComplexFailure(parser, "1" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS,
                 PersonType.PATIENT); // invalid email
-        assertParseComplexFailure(parser, "1" + INVALID_LOCATION_DESC, Location.MESSAGE_CONSTRAINTS,
-                PersonType.PATIENT); // invalid address
         assertParseComplexFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS,
                 PersonType.PATIENT); // invalid tag
 
@@ -113,7 +111,7 @@ public class EditCommandParserTest {
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseComplexFailure(parser,
-                "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_LOCATION_AMY + VALID_PHONE_AMY,
+                "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_PHONE_AMY,
                 Name.MESSAGE_CONSTRAINTS, PersonType.PATIENT);
     }
 
@@ -124,8 +122,9 @@ public class EditCommandParserTest {
                 + EMAIL_DESC_AMY + LOCATION_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND + SPECIALTY_DESC_BOB;
 
         EditPersonDescriptor descriptor = new EditSpecialistDescriptorBuilder()
-                .withSpecialty(VALID_SPECIALTY_DERMATOLOGY).withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withLocation(VALID_LOCATION_AMY)
+                .withSpecialty(VALID_SPECIALTY_DERMATOLOGY).withLocation(VALID_LOCATION_AMY)
+                .withName(VALID_NAME_AMY)
+                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
@@ -162,12 +161,6 @@ public class EditCommandParserTest {
         // email
         userInput = targetIndex.getOneBased() + EMAIL_DESC_AMY;
         descriptor = new EditPatientDescriptorBuilder().withEmail(VALID_EMAIL_AMY).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor);
-        assertParseComplexSuccess(parser, userInput, expectedCommand, PersonType.PATIENT);
-
-        // address
-        userInput = targetIndex.getOneBased() + LOCATION_DESC_AMY;
-        descriptor = new EditPatientDescriptorBuilder().withLocation(VALID_LOCATION_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseComplexSuccess(parser, userInput, expectedCommand, PersonType.PATIENT);
 
