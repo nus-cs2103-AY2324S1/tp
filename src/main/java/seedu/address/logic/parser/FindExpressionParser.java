@@ -62,7 +62,7 @@ public class FindExpressionParser {
     private ExprNode expression() throws ParseException {
         ExprNode node = term();
 
-        while (match(Token.Type.OR)) {
+        while (isNextTokenType(Token.Type.OR)) {
             Token op = consume(Token.Type.OR);
             ExprNode right = term();
             node = new BinaryOpNode(node, FindExpressionOperator.OR, right);
@@ -84,7 +84,7 @@ public class FindExpressionParser {
     private ExprNode term() throws ParseException {
         ExprNode node = factor();
 
-        while (match(Token.Type.AND)) {
+        while (isNextTokenType(Token.Type.AND)) {
             Token op = consume(Token.Type.AND);
             ExprNode right = factor();
             node = new BinaryOpNode(node, FindExpressionOperator.AND, right);
@@ -103,11 +103,11 @@ public class FindExpressionParser {
      * @return The parsed factor node.
      */
     private ExprNode factor() throws ParseException {
-        if (match(Token.Type.NOT)) {
+        if (isNextTokenType(Token.Type.NOT)) {
             consume(Token.Type.NOT);
             ExprNode node = factor();
             return new NotNode(node);
-        } else if (match(Token.Type.LPAREN)) {
+        } else if (isNextTokenType(Token.Type.LPAREN)) {
             consume(Token.Type.LPAREN);
             ExprNode node = expression();
             consume(Token.Type.RPAREN);
@@ -125,11 +125,7 @@ public class FindExpressionParser {
         }
     }
 
-    private boolean match(Token.Type type) {
-        return check(type);
-    }
-
-    private boolean check(Token.Type type) {
+    private boolean isNextTokenType(Token.Type type) {
         if (isAtEnd()) {
             return false;
         }
@@ -137,7 +133,7 @@ public class FindExpressionParser {
     }
 
     private Token consume(Token.Type type) throws ParseException {
-        if (check(type)) {
+        if (isNextTokenType(type)) {
             return tokens.get(pos++);
         }
         if (isAtEnd()) {
