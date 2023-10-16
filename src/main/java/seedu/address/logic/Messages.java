@@ -67,7 +67,8 @@ public final class Messages {
     //TODO refine the messages above this line
 
     // Tag
-    private static final String UNFORMATTED_TAG_INVALID = "\"%s\" is not a valid tag. Tags must be alphanumeric (spaces allowed).";
+    private static final String UNFORMATTED_TAG_INVALID =
+            "\"%s\" is not a valid tag. Tags must be alphanumeric (spaces allowed).";
 
     private Messages() {
         // No instantiation
@@ -81,7 +82,7 @@ public final class Messages {
     public static String tagInvalid(String invalidName) {
         return String.format(
             UNFORMATTED_TAG_INVALID,
-			invalidName
+            invalidName
         );
     }
 }

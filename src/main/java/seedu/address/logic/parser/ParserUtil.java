@@ -107,7 +107,7 @@ public class ParserUtil {
 
         if (!Tag.isValidName(trimmed)) {
             throw new ParseException(
-				Messages.tagInvalid(trimmed)
+                Messages.tagInvalid(trimmed)
             );
         }
 
