@@ -40,7 +40,6 @@ public final class TestData {
     public static final String INVALID_PHONE = "+651234";
     public static final String INVALID_EMAIL = "example.com";
     public static final String INVALID_TAG = "#friend";
-    public static final String WHITESPACE = " \t\r\n";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -55,9 +54,6 @@ public final class TestData {
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
-
-    public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
-    public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
     // These contain {@code Index} objects that are used in test cases
     public static final Index INDEX_FIRST_CONTACT = Index.fromOneBased(1);
@@ -125,9 +121,8 @@ public final class TestData {
             public static final String ALPHANUMERIC = "Friend1";
             public static final String ALPHANUMERIC_SPACES = "2023 tutorial classmate";
 
-
-            public static final String FLAG_ALPHANUMERIC = PREFIX_TAG + Tag.ALPHANUMERIC;
-            public static final String FLAG_ALPHANUMERIC_SPACES = PREFIX_TAG + Tag.ALPHANUMERIC_SPACES;
+            public static final String FLAG_ALPHANUMERIC = " " + PREFIX_TAG + Tag.ALPHANUMERIC;
+            public static final String FLAG_ALPHANUMERIC_SPACES = " " + PREFIX_TAG + Tag.ALPHANUMERIC_SPACES;
         }
 
         public static final class Contact {
@@ -173,8 +168,13 @@ public final class TestData {
         public static final class Tag {
             public static final String HASHTAG = "#WrongKindOfTag";
             public static final String UNDERSCORE_DASH = "kebab-snake_case";
+
+            public static final String FLAG_HASHTAG = " " + PREFIX_TAG + Tag.HASHTAG;
         }
     }
+
+    public static final String WHITESPACE = "\t  \r  \n";
+    public static final String EXTRA_WORDS = "extra words here";
 
     private TestData() {
         // No instantiation

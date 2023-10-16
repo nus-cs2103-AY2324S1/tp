@@ -35,7 +35,7 @@ public class ContactUtil {
         sb.append(PREFIX_EMAIL + contact.getEmail().value + " ");
         sb.append(PREFIX_NOTE + contact.getNote().text + " ");
         contact.getTags().stream().forEach(
-            s -> sb.append(PREFIX_TAG + s.tagName + " ")
+            s -> sb.append(PREFIX_TAG + s.name + " ")
         );
         return sb.toString();
     }
@@ -54,7 +54,7 @@ public class ContactUtil {
             if (tags.isEmpty()) {
                 sb.append(PREFIX_TAG);
             } else {
-                tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
+                tags.forEach(s -> sb.append(PREFIX_TAG).append(s.name).append(" "));
             }
         }
         return sb.toString();

@@ -27,8 +27,8 @@ public class JsonAdaptedContactTest {
     private static final String VALID_PHONE = BENSON.getPhone().toString();
     private static final String VALID_EMAIL = BENSON.getEmail().toString();
     private static final String VALID_NOTE = BENSON.getNote().toString();
-    private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
-            .map(JsonAdaptedTag::new)
+    private static final List<JsonTag> VALID_TAGS = BENSON.getTags().stream()
+            .map(JsonTag::new)
             .collect(Collectors.toList());
 
     @Test
@@ -91,8 +91,8 @@ public class JsonAdaptedContactTest {
 
     @Test
     public void toModelType_invalidTags_throwsIllegalValueException() {
-        List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
-        invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
+        List<JsonTag> invalidTags = new ArrayList<>(VALID_TAGS);
+        invalidTags.add(new JsonTag(INVALID_TAG));
         JsonAdaptedContact contact =
                 new JsonAdaptedContact(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_NOTE, invalidTags);
         assertThrows(IllegalValueException.class, contact::toModelType);
