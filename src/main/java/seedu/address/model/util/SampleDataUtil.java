@@ -25,7 +25,7 @@ public class SampleDataUtil {
     public static Person[] getSamplePersons() {
 
         ArrayList<Note> sampleNotes = new ArrayList<Note>();
-        sampleNotes.add(new Note("Hello", "Sample body"));
+        sampleNotes.add(new Note("Hello", "Sample content"));
 
         ArrayList<Event> sampleEvents = new ArrayList<Event>();
         sampleEvents.add(new Event("Sample event", LocalDateTime.now()

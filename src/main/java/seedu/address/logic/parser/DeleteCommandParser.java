@@ -4,6 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteEventCommand;
+import seedu.address.logic.commands.DeleteNoteCommand;
 import seedu.address.logic.commands.DeletePersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -18,6 +19,8 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         switch (secondaryCommandWord) {
         case DeletePersonCommand.SECONDARY_COMMAND_WORD:
             return new DeletePersonCommandParser().parse(args);
+        case DeleteNoteCommand.SECONDARY_COMMAND_WORD:
+            return new DeleteNoteCommandParser().parse(args);
         case DeleteEventCommand.SECONDARY_COMMAND_WORD:
             return new DeleteEventCommandParser().parse(args);
         default:
