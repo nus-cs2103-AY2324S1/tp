@@ -28,8 +28,8 @@ public class PatientBuilder {
     public static final String DEFAULT_REMARK = "She likes aardvarks.";
     public static final String DEFAULT_GENDER = "F";
     public static final String DEFAULT_NRIC = "T0000000Z";
-    public static final String DEFAULT_CONDITION = "85355255";
-    public static final String DEFAULT_BLOOD_TYPE = "85355255";
+    public static final String DEFAULT_CONDITION = "Default condition";
+    public static final String DEFAULT_BLOODTYPE = "O+";
 
     private Name name;
     private Phone phone;
@@ -57,7 +57,7 @@ public class PatientBuilder {
         gender = new Gender(DEFAULT_GENDER);
         ic = new Ic(DEFAULT_NRIC);
         condition = new Condition(DEFAULT_CONDITION);
-        bloodType = new BloodType(DEFAULT_BLOOD_TYPE);
+        bloodType = new BloodType(DEFAULT_BLOODTYPE);
         tags = new HashSet<>();
     }
 
