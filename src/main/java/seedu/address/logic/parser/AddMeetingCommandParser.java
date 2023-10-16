@@ -40,7 +40,7 @@ public class AddMeetingCommandParser implements Parser<AddMeetingCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddMeetingCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TITLE, PREFIX_LOCATION, PREFIX_START, PREFIX_END, PREFIX_TAG);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TITLE, PREFIX_LOCATION, PREFIX_START, PREFIX_END);
         Title title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_TITLE).get());
         Location location = ParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).get());
         LocalDateTime start = ParserUtil.parseTime(argMultimap.getValue(PREFIX_START).get());
