@@ -31,9 +31,10 @@ public class ApplicantBookParser {
      * Used for initial separation of command word and args.
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+    private static final Logger logger = LogsCenter.getLogger(ApplicantBookParser.class);
     private Boolean IsConfirmedNext = false;
     private Boolean IsConfirmed = false;
-    private static final Logger logger = LogsCenter.getLogger(ApplicantBookParser.class);
+
 
     /**
      * Parses user input into command for execution.
