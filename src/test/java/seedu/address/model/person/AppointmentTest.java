@@ -35,26 +35,6 @@ public class AppointmentTest {
     }
 
     @Test
-    public void isValidStart() {
-
-        // invalid Start
-        assertFalse(Appointment.isValidStart("")); // empty string
-
-        // valid start
-        assertTrue(Appointment.isValidAppointment("12 AUG 2023 10:00"));
-    }
-
-    @Test
-    public void isValidEnd() {
-
-        // invalid Start
-        assertFalse(Appointment.isValidEnd("")); // empty string
-
-        // valid start
-        assertTrue(Appointment.isValidAppointment("15:00"));
-    }
-
-    @Test
     public void equals() {
         Appointment appointment = new Appointment("Valid Appointment");
 

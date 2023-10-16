@@ -10,11 +10,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Appointment;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.MedicalHistory;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Nric;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -54,21 +51,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String nric} into a {@code Nric}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code name} is invalid.
-     */
-    public static Nric parseNric(String nric) throws ParseException {
-        requireNonNull(nric);
-        String trimmedNric = nric.trim();
-        if (!Nric.isValidNric(trimmedNric)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
-        }
-        return new Nric(trimmedNric);
-    }
-
-    /**
      * Parses a {@code String phone} into a {@code Phone}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -81,22 +63,6 @@ public class ParserUtil {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
         }
         return new Phone(trimmedPhone);
-    }
-
-    /**
-     * Parses a {@code String email} into a {@code Email}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code email} is invalid.
-     */
-
-    public static Email parseEmail(String email) throws ParseException {
-        requireNonNull(email);
-        String trimmedEmail = email.trim();
-        if (!Email.isValidEmail(trimmedEmail)) {
-            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
-        }
-        return new Email(trimmedEmail);
     }
 
     /**
@@ -115,28 +81,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String appointment} into an {@code Appoitment}.
+     * Parses a {@code String email} into an {@code Email}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code start} is invalid.
+     * @throws ParseException if the given {@code email} is invalid.
      */
-    public static Appointment parseAppointment(String start, String end) throws ParseException {
-        String trimmedStart = start.trim();
-        String trimmedEnd = end.trim();
-
-        if (!Appointment.isValidStart(trimmedStart)) {
-            throw new ParseException(Appointment.MESSAGE_CONSTRAINTS_START);
+    public static Email parseEmail(String email) throws ParseException {
+        requireNonNull(email);
+        String trimmedEmail = email.trim();
+        if (!Email.isValidEmail(trimmedEmail)) {
+            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
-
-        if (!Appointment.isValidEnd(trimmedEnd)) {
-            throw new ParseException(Appointment.MESSAGE_CONSTRAINTS_END);
-        }
-
-        String appointment = start + " - " + end;
-
-        requireNonNull(appointment);
-        String trimmedAppointment = appointment.trim();
-        return new Appointment(trimmedAppointment);
+        return new Email(trimmedEmail);
     }
 
     /**
@@ -164,40 +120,5 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
-    }
-
-    /**
-     * Parses a {@code String medicalHistory} into a {@code medicalHistory}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code tag} is invalid.
-     */
-    public static MedicalHistory parseMedicalHistory(String medicalHistory) throws ParseException {
-        requireNonNull(medicalHistory);
-        String trimmedMedicalHistory = medicalHistory.trim();
-        if (!MedicalHistory.isValidMedicalHistory(medicalHistory)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
-        }
-        return new MedicalHistory(trimmedMedicalHistory);
-    }
-
-    /**
-     * Parses a collection of medical history strings and returns a Set of MedicalHistory objects.
-     * @param medicalHistoryStrings The collection of medical history strings.
-     * @return A Set of MedicalHistory.
-     * @throws ParseException if any medical history format is invalid.
-     */
-    public static Set<MedicalHistory> parseMedicalHistories(Collection<String> medicalHistoryStrings)
-            throws ParseException {
-        requireNonNull(medicalHistoryStrings);
-
-        final Set<MedicalHistory> medicalHistories = new HashSet<>();
-        for (String medicalHistoryString : medicalHistoryStrings) {
-            if (medicalHistoryString.isBlank()) {
-                throw new ParseException("Medical history cannot be empty.");
-            }
-            medicalHistories.add(new MedicalHistory(medicalHistoryString));
-        }
-        return medicalHistories;
     }
 }

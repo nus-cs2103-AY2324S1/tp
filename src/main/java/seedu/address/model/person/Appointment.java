@@ -10,9 +10,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Appointment {
 
     public static final String MESSAGE_CONSTRAINTS = "Appointment can take any values, and it should not be blank";
-    public static final String MESSAGE_CONSTRAINTS_START =
-            "Start time should be in the format DD-MM-YYYY HH:MM, ze.g., 01-01-2023 09:45";
-    public static final String MESSAGE_CONSTRAINTS_END = "End time should be in the format HH:MM, e.g., 20:30";
 
     /*
      * The first character of the address must not be a whitespace,
@@ -38,14 +35,6 @@ public class Appointment {
      */
     public static boolean isValidAppointment(String test) {
         return test.matches(VALIDATION_REGEX);
-    }
-
-    public static boolean isValidStart(String start) {
-        return start.matches("\\d{2}-\\d{2}-\\d{4} \\d{2}:\\d{2}");
-    }
-
-    public static boolean isValidEnd(String end) {
-        return end.matches("\\d{2}:\\d{2}");
     }
 
     @Override
