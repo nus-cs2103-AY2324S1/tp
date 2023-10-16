@@ -124,6 +124,6 @@ public class Transaction implements Entry {
         }
 
         Transaction otherTransaction = (Transaction) otherEntry;
-        return transactionId == otherTransaction.transactionId;
+        return Objects.equals(transactionId, otherTransaction.transactionId);
     }
 }
