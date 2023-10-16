@@ -33,13 +33,16 @@ public class AddressBook implements ReadOnlyAddressBook {
         groups = new GroupList();
     }
 
-    public AddressBook() {}
+    public AddressBook() {
+
+    }
 
     /**
      * Creates an AddressBook using the Persons in the {@code toBeCopied}
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
+        toBeCopied.getGroupList().stream().forEach(groups::add);
         resetData(toBeCopied);
     }
 
