@@ -119,6 +119,14 @@ public class FindCommandParserTest {
         assertDoesNotThrow(() -> parser.parse(" (n/Alice)"));
         assertTrue(parser.parse(" (n/Alice)") instanceof FindCommand);
 
+        // alters precedence
+        assertDoesNotThrow(() -> parser.parse(" (n/Alice || t/friends) && a/street"));
+        assertTrue(parser.parse(" (n/Alice || t/friends) && a/street") instanceof FindCommand);
+
+        // does not alter precedence
+        assertDoesNotThrow(() -> parser.parse(" (n/Alice && t/friends) && a/street"));
+        assertTrue(parser.parse(" (n/Alice && t/friends) && a/street") instanceof FindCommand);
+
         // with space after parens
         assertDoesNotThrow(() -> parser.parse(" ( t/friends )"));
         assertTrue(parser.parse(" ( t/friends )") instanceof FindCommand);
