@@ -20,4 +20,10 @@ public interface ReadOnlyAddressBook {
      */
     String eventListToString();
 
+    /**
+     * Convert the note list to a human-readable string
+     * @return The note list as string
+     */
+    String noteListToString();
+
 }

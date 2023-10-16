@@ -108,6 +108,11 @@ public class AddressBookTest {
         public String eventListToString() {
             return "";
         }
+
+        @Override
+        public String noteListToString() {
+            return "";
+        }
     }
 
 }

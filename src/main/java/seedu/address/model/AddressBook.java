@@ -6,6 +6,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.note.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -104,6 +105,25 @@ public class AddressBook implements ReadOnlyAddressBook {
                                 .append(event.getUiText()).append("\n")
                 )
         );
+        return str.toString();
+    }
+
+    @Override
+    public String noteListToString() {
+        StringBuilder str = new StringBuilder();
+
+        for (Person person : persons) {
+            if (!person.getNotes().isEmpty()) {
+                str.append("[" + person.getName().toString() + "]\n");
+            }
+
+            int noteId = 1;
+            for (Note note : person.getNotes()) {
+                str.append(noteId + ". " + note.getUiText()).append("\n");
+                noteId += 1;
+            };
+        }
+
         return str.toString();
     }
 
