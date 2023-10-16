@@ -86,7 +86,7 @@ public class AddressBookTest {
     }
 
     @Test
-    public void randomOperations_ensureUniqueIDs() {
+    public void randomOperations_ensureUniqueIds() {
         addressBook.resetData(new AddressBookStub(Collections.emptyList()));
         Random random = new Random();
         HashSet<Integer> ids = new HashSet<>();

@@ -131,7 +131,6 @@ public class Person {
             .filter(tag -> Tag.EmergencyTags.isEmergencyTag(tag.tagName))
             .collect(Collectors.toSet());
     }
-
     public Optional<Integer> getId() {
         return id;
     }

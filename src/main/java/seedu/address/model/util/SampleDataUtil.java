@@ -46,7 +46,7 @@ public class SampleDataUtil {
                 getTagSet("colleagues"))
         };
         for (int i = 0; i < samplePersons.length; i++) {
-            samplePersons[i].setId(i+1);
+            samplePersons[i].setId(i + 1);
         }
         return samplePersons;
     }
