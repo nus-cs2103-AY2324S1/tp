@@ -17,9 +17,11 @@ public class Patient extends Person {
     /**
      * Every field must be present and not null.
      */
-    public Patient(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Age age,
+
+
+    public Patient(Name name, Phone phone, Email email, Set<Tag> tags, Age age,
                    MedicalHistory medicalHistory) {
-        super(name, phone, email, address, tags);
+        super(name, phone, email, tags);
         this.age = age;
         this.medicalHistory = medicalHistory;
     }
