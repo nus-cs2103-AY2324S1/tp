@@ -30,12 +30,13 @@ public class FindExpressionParser {
     private int pos = 0;
 
     /**
-     * Parses a list of tokens into an expression tree.
+     * Parses a list of tokens into an expression tree, and returns
+     * the final predicate that the ast resolves to.
      *
      * @param tokens The list of tokens to be parsed.
-     * @return The root of the expression tree representing the parsed tokens.
+     * @return The predicate representing the tokens when parsed into an expression tree.
      */
-    public ExprNode parse(List<Token> tokens) throws ParseException {
+    public Predicate<Person> parseToPredicate(List<Token> tokens) throws ParseException {
         if (tokens.isEmpty()) {
             throw new ParseException("Expression is empty!");
         }
@@ -44,7 +45,7 @@ public class FindExpressionParser {
         if (!isAtEnd()) {
             throw new ParseException("Find command received an invalid filter string!");
         }
-        return completedAst;
+        return completedAst.toPredicate();
     }
 
     /**

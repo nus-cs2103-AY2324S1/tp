@@ -31,9 +31,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         List<Token> tokens = tokenizer.tokenize();
 
         FindExpressionParser parser = new FindExpressionParser();
-        FindExpressionParser.ExprNode filterStringAst = parser.parse(tokens);
-
-        Predicate<Person> checkAllFields = filterStringAst.toPredicate();
+        Predicate<Person> checkAllFields = parser.parseToPredicate(tokens);
 
         return new FindCommand(checkAllFields);
     }

@@ -27,7 +27,7 @@ public class FindExpressionParserTest {
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertThrows(ParseException.class, () -> parser.parse(new ArrayList<>()));
+        assertThrows(ParseException.class, () -> parser.parseToPredicate(new ArrayList<>()));
     }
 
     @Test
