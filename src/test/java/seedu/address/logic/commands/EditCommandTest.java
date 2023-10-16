@@ -6,13 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showContactAtIndex;
-import static seedu.address.testutil.TestData.DESC_AMY;
-import static seedu.address.testutil.TestData.DESC_BOB;
 import static seedu.address.testutil.TestData.INDEX_FIRST_CONTACT;
 import static seedu.address.testutil.TestData.INDEX_SECOND_CONTACT;
 import static seedu.address.testutil.TestData.VALID_NAME_BOB;
 import static seedu.address.testutil.TestData.VALID_PHONE_BOB;
-import static seedu.address.testutil.TestData.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.TestData.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -27,12 +24,14 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.contact.Contact;
 import seedu.address.testutil.ContactBuilder;
 import seedu.address.testutil.EditContactDescriptorBuilder;
+import seedu.address.testutil.TestData;
+
+
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
  */
 public class EditCommandTest {
-
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
@@ -56,10 +55,10 @@ public class EditCommandTest {
 
         ContactBuilder contactInList = new ContactBuilder(lastContact);
         Contact editedContact = contactInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+                .withTags(TestData.Valid.Tag.ALPHANUMERIC_SPACES).build();
 
         EditContactDescriptor descriptor = new EditContactDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withPhone(VALID_PHONE_BOB).withTags(TestData.Valid.Tag.ALPHANUMERIC_SPACES).build();
         EditCommand editCommand = new EditCommand(indexLastContact, descriptor);
 
         String expectedMessage = String.format(Messages.MESSAGE_EDIT_COMMAND_SUCCESS, Contact.format(editedContact));
@@ -148,10 +147,10 @@ public class EditCommandTest {
 
     @Test
     public void equals() {
-        final EditCommand standardCommand = new EditCommand(INDEX_FIRST_CONTACT, DESC_AMY);
+        final EditCommand standardCommand = new EditCommand(INDEX_FIRST_CONTACT, TestData.Valid.EditDescriptor.AMY);
 
         // same values -> returns true
-        EditContactDescriptor copyDescriptor = new EditContactDescriptor(DESC_AMY);
+        EditContactDescriptor copyDescriptor = new EditContactDescriptor(TestData.Valid.EditDescriptor.AMY);
         EditCommand commandWithSameValues = new EditCommand(INDEX_FIRST_CONTACT, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
@@ -165,10 +164,10 @@ public class EditCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(INDEX_SECOND_CONTACT, DESC_AMY)));
+        assertFalse(standardCommand.equals(new EditCommand(INDEX_SECOND_CONTACT, TestData.Valid.EditDescriptor.AMY)));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_CONTACT, DESC_BOB)));
+        assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_CONTACT, TestData.Valid.EditDescriptor.BOB)));
     }
 
     @Test
@@ -180,5 +179,4 @@ public class EditCommandTest {
                 + editContactDescriptor + "}";
         assertEquals(expected, editCommand.toString());
     }
-
 }
