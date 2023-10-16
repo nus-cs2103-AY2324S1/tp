@@ -195,8 +195,9 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseMedicalHistory_collectionWithValidTags_returnsMedicalHistorySet() throws Exception{
-        Set<MedicalHistory> actualMedicalHistorySet = ParserUtil.parseMedicalHistories(Arrays.asList(VALID_MEDICAL_HISTORY_1, VALID_MEDICAL_HISTORY_2));
+    public void parseMedicalHistory_collectionWithValidTags_returnsMedicalHistorySet() throws Exception {
+        Set<MedicalHistory> actualMedicalHistorySet = ParserUtil.parseMedicalHistories(
+                Arrays.asList(VALID_MEDICAL_HISTORY_1, VALID_MEDICAL_HISTORY_2));
         Set<MedicalHistory> expectedMedicalHistorySet = new HashSet<>(Arrays.asList(
                 new MedicalHistory(VALID_MEDICAL_HISTORY_1), new MedicalHistory(VALID_MEDICAL_HISTORY_2)));
         assertEquals(actualMedicalHistorySet, expectedMedicalHistorySet);
