@@ -13,7 +13,7 @@ import static transact.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
 import org.junit.jupiter.api.Test;
 
-import transact.logic.commands.EditCommand.EditPersonDescriptor;
+import transact.logic.commands.EditStaffCommand.EditPersonDescriptor;
 import transact.testutil.EditPersonDescriptorBuilder;
 
 public class EditPersonDescriptorTest {

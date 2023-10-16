@@ -12,8 +12,13 @@ import transact.logic.parser.exceptions.ParseException;
 import transact.model.person.Address;
 import transact.model.person.Email;
 import transact.model.person.Name;
+import transact.model.person.Person;
 import transact.model.person.Phone;
 import transact.model.tag.Tag;
+import transact.model.transaction.info.Amount;
+import transact.model.transaction.info.Date;
+import transact.model.transaction.info.Description;
+import transact.model.transaction.info.Type;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser
@@ -130,5 +135,82 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String type} into a {@code Type}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException
+     *             if the given {@code type} is invalid.
+     */
+    public static Type parseType(String type) throws ParseException {
+        requireNonNull(type);
+        String trimmedType = type.trim();
+        if (!Type.isValidType(trimmedType)) {
+            throw new ParseException(Type.MESSAGE_CONSTRAINTS);
+        }
+        return Type.getType(trimmedType);
+    }
+
+    /**
+     * Parses a {@code String description} into a {@code Description}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException
+     *             if the given {@code description} is invalid.
+     */
+    public static Description parseDescription(String description) throws ParseException {
+        requireNonNull(description);
+        String trimmedDescription = description.trim();
+        if (!Description.isValidDescription(trimmedDescription)) {
+            throw new ParseException(Description.MESSAGE_CONSTRAINTS);
+        }
+        return new Description(trimmedDescription);
+    }
+
+    /**
+     * Parses a {@code String amount} into a {@code Amount}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException
+     *             if the given {@code amount} is invalid.
+     */
+    public static Amount parseAmount(String amount) throws ParseException {
+        requireNonNull(amount);
+        String trimmedAmount = amount.trim();
+        if (!Amount.isValidAmount(trimmedAmount)) {
+            throw new ParseException(Amount.MESSAGE_CONSTRAINTS);
+        }
+        return new Amount(Double.parseDouble(trimmedAmount));
+    }
+
+    /**
+     * Parses a {@code String Date} into a {@code Date}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException
+     *             if the given {@code Date} is invalid.
+     */
+    public static Date parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        if (!Date.isValidDate(trimmedDate)) {
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+        }
+        return new Date();
+    }
+
+    /**
+     * Parses a {@code String id} into a {@code Person}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException
+     *             if the given {@code Pesrson} is invalid.
+     */
+    public static Person parsePerson(String id) throws ParseException {
+        requireNonNull(id);
+        String trimmedID = id.trim();
+        return new Person(null, null, null, null, null);
     }
 }

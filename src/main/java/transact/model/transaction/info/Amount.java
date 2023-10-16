@@ -1,5 +1,7 @@
 package transact.model.transaction.info;
 
+import transact.logic.parser.exceptions.ParseException;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
@@ -72,5 +74,17 @@ public class Amount {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    /**
+     * Returns true if a given string is a valid amount.
+     */
+    public static boolean isValidAmount(String amount) {
+        try {
+            double amt = Double.parseDouble(amount);
+            return amt > 0;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 }

@@ -1,9 +1,7 @@
 package transact.model.transaction;
 
 import transact.model.person.Person;
-import transact.model.transaction.info.Amount;
-import transact.model.transaction.info.Description;
-import transact.model.transaction.info.TransactionId;
+import transact.model.transaction.info.*;
 
 /**
  * Expense class
@@ -21,10 +19,10 @@ public class Expense extends Transaction {
      *            The amount of the expense.
      */
     public Expense(TransactionId transactionId, Description description, Amount amount) {
-        super(transactionId, description, amount);
+        super(transactionId, Type.I, description, amount, new Date());
     }
 
     public Expense(TransactionId transactionId, Person person, Description description, Amount amount) {
-        super(transactionId, person, description, amount);
+        super(transactionId, Type.I, description, amount, new Date(), person);
     }
 }

@@ -2,8 +2,11 @@ package transact.model.transaction;
 
 import transact.model.person.Person;
 import transact.model.transaction.info.Amount;
+import transact.model.transaction.info.Date;
 import transact.model.transaction.info.Description;
 import transact.model.transaction.info.TransactionId;
+import transact.model.transaction.info.Type;
+
 
 /**
  * Revenue Class
@@ -23,10 +26,10 @@ public class Revenue extends Transaction {
      *            The amount of the revenue.
      */
     public Revenue(TransactionId transactionId, Person person, Description description, Amount amount) {
-        super(transactionId, person, description, amount);
+        super(transactionId, Type.I, description, amount, new Date(), person);
     }
 
     public Revenue(TransactionId transactionId, Description description, Amount amount) {
-        super(transactionId, description, amount);
+        super(transactionId, Type.I, description, amount, new Date());
     }
 }

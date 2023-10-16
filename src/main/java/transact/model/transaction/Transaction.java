@@ -8,8 +8,11 @@ import transact.commons.util.ToStringBuilder;
 import transact.model.entry.Entry;
 import transact.model.person.Person;
 import transact.model.transaction.info.Amount;
+import transact.model.transaction.info.Date;
 import transact.model.transaction.info.Description;
 import transact.model.transaction.info.TransactionId;
+import transact.model.transaction.info.Type;
+
 
 /**
  * Represents a Transaction in the address book.
@@ -22,6 +25,8 @@ public class Transaction implements Entry {
     private final Person person;
     private final Description description;
     private final Amount amount;
+    private final Type type;
+    private final Date date;
 
     /**
      * Creates a new Transaction.
@@ -35,11 +40,14 @@ public class Transaction implements Entry {
      * @param amount
      *            The amount of the transaction.
      */
-    public Transaction(TransactionId transactionId, Person person, Description description, Amount amount) {
+    public Transaction(TransactionId transactionId, Type type, Description description, Amount amount, Date date,
+                       Person person) {
         this.transactionId = transactionId;
         this.person = person;
         this.description = description;
         this.amount = amount;
+        this.type = type;
+        this.date = date;
     }
 
     /**
@@ -52,11 +60,13 @@ public class Transaction implements Entry {
      * @param amount
      *            The amount of the transaction.
      */
-    public Transaction(TransactionId transactionId, Description description, Amount amount) {
+    public Transaction(TransactionId transactionId, Type type, Description description, Amount amount, Date date) {
         this.transactionId = transactionId;
         this.description = description;
         this.amount = amount;
         this.person = null;
+        this.date = date;
+        this.type = type;
     }
 
     public TransactionId getTransactionId() {
@@ -80,6 +90,13 @@ public class Transaction implements Entry {
         return amount;
     }
 
+    public Date getDate() {
+        return new Date();
+    }
+
+    public Type getType() {
+        return type;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) {

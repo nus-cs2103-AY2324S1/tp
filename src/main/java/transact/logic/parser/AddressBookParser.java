@@ -14,7 +14,8 @@ import transact.logic.commands.ClearCommand;
 import transact.logic.commands.Command;
 import transact.logic.commands.DeleteStaffCommand;
 import transact.logic.commands.DeleteTransactionCommand;
-import transact.logic.commands.EditCommand;
+import transact.logic.commands.EditStaffCommand;
+import transact.logic.commands.EditTransactionCommand;
 import transact.logic.commands.ExitCommand;
 import transact.logic.commands.FindCommand;
 import transact.logic.commands.HelpCommand;
@@ -66,8 +67,11 @@ public class AddressBookParser {
         case DeleteTransactionCommand.COMMAND_WORD:
             return new DeleteTransactionCommandParser().parse(arguments);
 
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+        case EditTransactionCommand.COMMAND_WORD:
+            return new EditTransactionCommandParser().parse(arguments);
+
+        case EditStaffCommand.COMMAND_WORD:
+            return new EditStaffCommandParser().parse(arguments);
 
         case DeleteStaffCommand.COMMAND_WORD:
             return new DeleteStaffCommandParser().parse(arguments);

@@ -4,7 +4,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import transact.logic.commands.EditCommand.EditPersonDescriptor;
+import transact.logic.commands.EditStaffCommand.EditPersonDescriptor;
 import transact.model.person.Address;
 import transact.model.person.Email;
 import transact.model.person.Name;

@@ -13,15 +13,9 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import transact.logic.commands.AddStaffCommand;
-import transact.logic.commands.ClearCommand;
-import transact.logic.commands.DeleteStaffCommand;
-import transact.logic.commands.EditCommand;
-import transact.logic.commands.EditCommand.EditPersonDescriptor;
-import transact.logic.commands.ExitCommand;
-import transact.logic.commands.FindCommand;
-import transact.logic.commands.HelpCommand;
-import transact.logic.commands.ViewCommand;
+import transact.logic.commands.*;
+import transact.logic.commands.EditStaffCommand;
+import transact.logic.commands.EditStaffCommand.EditPersonDescriptor;
 import transact.logic.parser.exceptions.ParseException;
 import transact.model.person.NameContainsKeywordsPredicate;
 import transact.model.person.Person;
@@ -57,9 +51,9 @@ public class AddressBookParserTest {
     public void parseCommand_edit() throws Exception {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
-        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
+        EditStaffCommand command = (EditStaffCommand) parser.parseCommand(EditStaffCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+        assertEquals(new EditStaffCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 
     @Test
