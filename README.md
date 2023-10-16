@@ -1,4 +1,4 @@
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
+[![CI Status](https://github.com/AY2324S1-CS2103T-W17-4/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2324S1-CS2103T-W17-4/tp/actions)
 
 ![Ui](docs/images/Ui.png)
 
@@ -8,7 +8,7 @@ lesSON is a flashcard software aimed to help individuals with their memory work 
 
 
 Some of the functions of lesSON includes:
-  * Customise flashcard
+  * Customise flashcards
   * Managing existing flashcards
   * Practice using the existing flashcard deck
 
