@@ -2,13 +2,15 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+
 /**
  * Represents a Person's NRIC in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidNric(String)}
  */
 public class Nric {
 
-    public static final String MESSAGE_CONSTRAINTS = "NRIC must be in the format LNNNNNNNL, where L represents a letter and N represents a number.";
+    public static final String MESSAGE_CONSTRAINTS = "NRIC must be in the format LNNNNNNNL,"
+            + " where L represents a letter and N represents a number.";
 
     /*
      * Validation regex for NRIC in the format LNNNNNNNL, where L represents a letter and N represents a number.
@@ -61,5 +63,4 @@ public class Nric {
     public int hashCode() {
         return value.hashCode();
     }
-
 }

@@ -72,5 +72,4 @@ public class Appointment {
     public int hashCode() {
         return value.hashCode();
     }
-
 }
