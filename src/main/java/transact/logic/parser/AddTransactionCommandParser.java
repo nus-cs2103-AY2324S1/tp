@@ -45,7 +45,7 @@ public class AddTransactionCommandParser implements Parser<AddTransactionCommand
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TYPE, PREFIX_DESCRIPTION, PREFIX_AMOUNT, PREFIX_DATE);
         /*
-         * Edit this when Transaction class is done.
+         * TODO add this when Transaction class is done.
          * Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_TYPE).get());
          * Phone phone =
          * ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
