@@ -26,7 +26,6 @@ public class StorageManagerTest {
     public void setUp() {
         JsonLoveBookStorage loveBookStorage = new JsonLoveBookStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-//        JsonDatePrefsStorageTest datePrefsStorage = new JsonDatePrefsStorageTest();
         storageManager = new StorageManager(loveBookStorage, userPrefsStorage);
     }
 

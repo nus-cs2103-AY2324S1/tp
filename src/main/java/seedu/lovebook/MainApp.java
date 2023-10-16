@@ -201,6 +201,7 @@ public class MainApp extends Application {
         logger.info("============================ [ Stopping Height Book ] =============================");
         try {
             storage.saveUserPrefs(model.getUserPrefs());
+            storage.saveDatePrefs(model.getDatePrefs());
         } catch (IOException e) {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         }

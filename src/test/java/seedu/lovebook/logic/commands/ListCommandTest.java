@@ -2,6 +2,7 @@ package seedu.lovebook.logic.commands;
 
 import static seedu.lovebook.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.lovebook.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.lovebook.testutil.TypicalDatePrefs.getTypicalDatePrefs;
 import static seedu.lovebook.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.lovebook.testutil.TypicalPersons.getTypicalLoveBook;
 
@@ -22,8 +23,8 @@ public class ListCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalLoveBook(), new UserPrefs());
-        expectedModel = new ModelManager(model.getLoveBook(), new UserPrefs());
+        model = new ModelManager(getTypicalLoveBook(), new UserPrefs(), getTypicalDatePrefs());
+        expectedModel = new ModelManager(model.getLoveBook(), new UserPrefs(), getTypicalDatePrefs());
     }
 
     @Test

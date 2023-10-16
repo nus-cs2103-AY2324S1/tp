@@ -2,10 +2,7 @@ package seedu.lovebook.model;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Date;
-import java.util.List;
 import java.util.Objects;
-import java.util.prefs.Preferences;
 
 import seedu.lovebook.commons.util.ToStringBuilder;
 import seedu.lovebook.model.person.Age;
@@ -13,12 +10,18 @@ import seedu.lovebook.model.person.Gender;
 import seedu.lovebook.model.person.Height;
 import seedu.lovebook.model.person.Income;
 
+/**
+ * Represents the preferences of the user for a date.
+ */
 public class DatePrefs implements ReadOnlyDatePrefs {
     private Age age;
     private Gender gender;
     private Height height;
     private Income income;
 
+    /**
+     * Creates a {@code DatePrefs} with default values.
+     */
     public DatePrefs() {
         this.age = new Age("21");
         this.gender = new Gender("F");
@@ -26,6 +29,9 @@ public class DatePrefs implements ReadOnlyDatePrefs {
         this.income = new Income("10000");
     }
 
+    /**
+     * Creates a {@code DatePrefs} with the given values.
+     */
     public DatePrefs(Age age, Gender gender, Height height, Income income) {
         this.age = age;
         this.gender = gender;
@@ -33,6 +39,9 @@ public class DatePrefs implements ReadOnlyDatePrefs {
         this.income = income;
     }
 
+    /**
+     * Creates a {@code DatePrefs} with the given values.
+     */
     public DatePrefs(ReadOnlyDatePrefs toBeCopied) {
         this();
         resetData(toBeCopied);

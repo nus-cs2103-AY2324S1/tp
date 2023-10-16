@@ -23,14 +23,19 @@ public class StorageManager implements Storage {
     private DatePrefsStorage datePrefsStorage;
 
     /**
-     * Creates a {@code StorageManager} with the given {@code LoveBookStorage} and {@code UserPrefStorage}.
+     * Creates a {@code StorageManager} with the given {@code LoveBookStorage} and {@code UserPrefStorage}
+     * and {@code DatePrefsStorage}.
      */
-    public StorageManager(LoveBookStorage loveBookStorage, UserPrefsStorage userPrefsStorage, DatePrefsStorage datePrefsStorage) {
+    public StorageManager(LoveBookStorage loveBookStorage, UserPrefsStorage userPrefsStorage,
+                            DatePrefsStorage datePrefsStorage) {
         this.loveBookStorage = loveBookStorage;
         this.userPrefsStorage = userPrefsStorage;
         this.datePrefsStorage = datePrefsStorage;
     }
 
+    /**
+     * Creates a {@code StorageManager} with the given {@code LoveBookStorage} and {@code UserPrefStorage}.
+     */
     public StorageManager(LoveBookStorage loveBookStorage, UserPrefsStorage userPrefsStorage) {
         this.loveBookStorage = loveBookStorage;
         this.userPrefsStorage = userPrefsStorage;
@@ -86,7 +91,7 @@ public class StorageManager implements Storage {
     // ================ DatePrefs Methods ==============================
     @Override
     public Path getDatePrefsFilePath() {
-        return loveBookStorage.getLoveBookFilePath();
+        return datePrefsStorage.getDatePrefsFilePath();
     }
 
     @Override
@@ -102,7 +107,7 @@ public class StorageManager implements Storage {
 
     @Override
     public void saveDatePrefs(ReadOnlyDatePrefs loveBook) throws IOException {
-        saveDatePrefs(loveBook, loveBookStorage.getLoveBookFilePath());
+        saveDatePrefs(loveBook, getDatePrefsFilePath());
     }
 
     @Override

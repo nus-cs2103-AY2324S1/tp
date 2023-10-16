@@ -6,6 +6,9 @@ import seedu.lovebook.model.person.Gender;
 import seedu.lovebook.model.person.Height;
 import seedu.lovebook.model.person.Income;
 
+/**
+ * A utility class containing a sample {@code DatePrefs} to be used in tests.
+ */
 public class SampleDatePrefUtil {
     public static DatePrefs getSamplePreferences() {
         Age age = new Age("20");

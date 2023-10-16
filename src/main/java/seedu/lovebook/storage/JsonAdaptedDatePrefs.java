@@ -4,13 +4,16 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.lovebook.commons.exceptions.IllegalValueException;
+import seedu.lovebook.model.DatePrefs;
 import seedu.lovebook.model.person.Age;
 import seedu.lovebook.model.person.Date;
 import seedu.lovebook.model.person.Gender;
 import seedu.lovebook.model.person.Height;
 import seedu.lovebook.model.person.Income;
-import seedu.lovebook.model.DatePrefs;
 
+/**
+ * Jackson-friendly version of {@link DatePrefs}.
+ */
 public class JsonAdaptedDatePrefs {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Date's %s field is missing!";
     private String age;

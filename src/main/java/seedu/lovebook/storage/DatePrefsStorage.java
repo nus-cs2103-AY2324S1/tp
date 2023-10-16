@@ -7,6 +7,9 @@ import java.util.Optional;
 import seedu.lovebook.commons.exceptions.DataLoadingException;
 import seedu.lovebook.model.ReadOnlyDatePrefs;
 
+/**
+ * Represents a storage for {@link seedu.lovebook.model.DatePrefs}.
+ */
 public interface DatePrefsStorage {
     /**
      * Returns the file path of the data file.

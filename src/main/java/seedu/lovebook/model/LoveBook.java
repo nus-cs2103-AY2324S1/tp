@@ -53,7 +53,6 @@ public class LoveBook implements ReadOnlyLoveBook {
      */
     public void resetData(ReadOnlyLoveBook newData) {
         requireNonNull(newData);
-
         setPersons(newData.getPersonList());
     }
 
@@ -82,7 +81,6 @@ public class LoveBook implements ReadOnlyLoveBook {
      */
     public void setPerson(Date target, Date editedDate) {
         requireNonNull(editedDate);
-
         dates.setPerson(target, editedDate);
     }
 
