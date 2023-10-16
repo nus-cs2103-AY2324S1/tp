@@ -54,7 +54,7 @@ public class JsonDeckStorage implements DeckStorage {
             try {
                 Files.createDirectories(filePath.getParent());
                 Files.createFile(filePath);
-                Files.write(filePath, "{}".getBytes());// Create the 'deck.json' file with empty JSON content
+                Files.write(filePath, "{}".getBytes()); // Create the 'deck.json' file with empty JSON content
             } catch (IOException e) {
                 throw new DataLoadingException(e);
             }
