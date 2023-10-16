@@ -10,7 +10,7 @@ import seedu.staffsnap.model.Model;
  */
 public class ClearCommand extends Command {
 
-    public static final String COMMAND_WORD = "clear";
+    public static final String COMMAND_WORD = "yes";
     public static final String MESSAGE_SUCCESS = "Staff-Snap has been successfully cleared!";
 
 
