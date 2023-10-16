@@ -1,12 +1,14 @@
 {
-  "cards" : [ {
-    "question" : "How many types of numerical representation is covered in CS2100",
-    "answer" : "3"
-  },
+  "cards" : [
+    {
+      "question" : "How many types of numerical representation is covered in CS2100",
+      "answer" : "3"
+    },
     {
       "question" : "How many types of numerical representation is covered in CS2100",
       "answer" : "3"
     }
+
   ]
 
 }
