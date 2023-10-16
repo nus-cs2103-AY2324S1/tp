@@ -22,6 +22,7 @@ class JsonSerializableAddressBook {
     public static final String MESSAGE_DUPLICATE_MUSICIAN = "Persons list contains duplicate musician(s).";
 
     private final List<JsonAdaptedMusician> musicians = new ArrayList<>();
+    private final List<JsonAdaptedBand> bands = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given musicians.

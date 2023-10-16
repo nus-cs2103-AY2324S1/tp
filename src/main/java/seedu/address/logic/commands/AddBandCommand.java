@@ -12,7 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.band.Band;
 
 public class AddBandCommand extends Command {
-    public static final String COMMAND_WORD = "band";
+    public static final String COMMAND_WORD = "addb";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a band to the address book. "
             + "Parameters: "
