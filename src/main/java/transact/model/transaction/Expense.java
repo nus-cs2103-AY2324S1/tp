@@ -1,7 +1,12 @@
 package transact.model.transaction;
 
 import transact.model.person.Person;
-import transact.model.transaction.info.*;
+import transact.model.transaction.info.Amount;
+import transact.model.transaction.info.Date;
+import transact.model.transaction.info.Description;
+import transact.model.transaction.info.TransactionId;
+import transact.model.transaction.info.Type;
+
 
 /**
  * Expense class

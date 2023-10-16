@@ -1,11 +1,10 @@
 package transact.model.transaction.info;
 
-import transact.logic.parser.exceptions.ParseException;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+
 
 /**
  * Represents an amount of money in the system.
