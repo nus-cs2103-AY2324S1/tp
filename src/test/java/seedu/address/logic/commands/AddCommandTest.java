@@ -181,6 +181,7 @@ public class AddCommandTest {
      */
     private class ModelStubWithPerson extends ModelStub {
         private final Person person;
+        private int id = 0;
 
         ModelStubWithPerson(Person person) {
             requireNonNull(person);
@@ -221,7 +222,6 @@ public class AddCommandTest {
         public int getNextID() {
             return ++id;
         }
-        private int id = 0;
     }
 
 }
