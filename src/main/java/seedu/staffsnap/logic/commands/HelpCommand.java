@@ -1,12 +1,13 @@
 package seedu.staffsnap.logic.commands;
 
+import javafx.application.HostServices;
 import seedu.staffsnap.model.Model;
+import seedu.staffsnap.ui.HelpWindow;
 
 /**
  * Format full help instructions for every command for display.
  */
 public class HelpCommand extends Command {
-
     public static final String COMMAND_WORD = "help";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n"

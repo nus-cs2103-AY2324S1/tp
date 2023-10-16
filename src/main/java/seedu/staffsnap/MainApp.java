@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.application.Application;
+import javafx.application.HostServices;
 import javafx.stage.Stage;
 import seedu.staffsnap.commons.core.Config;
 import seedu.staffsnap.commons.core.LogsCenter;
@@ -28,6 +29,7 @@ import seedu.staffsnap.storage.JsonUserPrefsStorage;
 import seedu.staffsnap.storage.Storage;
 import seedu.staffsnap.storage.StorageManager;
 import seedu.staffsnap.storage.UserPrefsStorage;
+import seedu.staffsnap.ui.HelpWindow;
 import seedu.staffsnap.ui.Ui;
 import seedu.staffsnap.ui.UiManager;
 
@@ -45,6 +47,7 @@ public class MainApp extends Application {
     protected Storage storage;
     protected Model model;
     protected Config config;
+    protected HostServices hostServices = getHostServices();
 
     @Override
     public void init() throws Exception {
@@ -64,7 +67,7 @@ public class MainApp extends Application {
 
         logic = new LogicManager(model, storage);
 
-        ui = new UiManager(logic);
+        ui = new UiManager(logic, hostServices);
     }
 
     /**
