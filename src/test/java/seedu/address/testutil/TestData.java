@@ -12,7 +12,7 @@ import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.model.AddressBook;
+import seedu.address.model.ConText;
 import seedu.address.model.contact.Contact;
 
 /**
@@ -130,10 +130,10 @@ public class TestData {
     private TestData() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical contacts.
+     * Returns an {@code ConText} with all the typical contacts.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static ConText getTypicalConText() {
+        ConText ab = new ConText();
         for (Contact contact : getTypicalContacts()) {
             ab.addContact(contact);
         }

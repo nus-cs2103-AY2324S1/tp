@@ -13,7 +13,7 @@ import seedu.address.model.contact.UniqueContactList;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSameContact comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class ConText implements ReadOnlyConText {
 
     private final UniqueContactList contacts;
 
@@ -28,12 +28,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         contacts = new UniqueContactList();
     }
 
-    public AddressBook() {}
+    public ConText() {}
 
     /**
-     * Creates an AddressBook using the Contacts in the {@code toBeCopied}
+     * Creates an ConText using the Contacts in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public ConText(ReadOnlyConText toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -49,9 +49,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code ConText} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyConText newData) {
         requireNonNull(newData);
 
         setContacts(newData.getContactList());
@@ -88,7 +88,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
+     * Removes {@code key} from this {@code ConText}.
      * {@code key} must exist in the address book.
      */
     public void removeContact(Contact key) {
@@ -116,12 +116,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddressBook)) {
+        if (!(other instanceof ConText)) {
             return false;
         }
 
-        AddressBook otherAddressBook = (AddressBook) other;
-        return contacts.equals(otherAddressBook.contacts);
+        ConText otherConText = (ConText) other;
+        return contacts.equals(otherConText.contacts);
     }
 
     @Override

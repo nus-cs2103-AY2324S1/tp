@@ -7,7 +7,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TestData.ALICE;
 import static seedu.address.testutil.TestData.VALID_NOTE_BOB;
 import static seedu.address.testutil.TestData.VALID_TAG_HUSBAND;
-import static seedu.address.testutil.TestData.getTypicalAddressBook;
+import static seedu.address.testutil.TestData.getTypicalConText;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -22,25 +22,25 @@ import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.exceptions.DuplicateContactException;
 import seedu.address.testutil.ContactBuilder;
 
-public class AddressBookTest {
+public class ConTextTest {
 
-    private final AddressBook addressBook = new AddressBook();
+    private final ConText ConText = new ConText();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getContactList());
+        assertEquals(Collections.emptyList(), ConText.getContactList());
     }
 
     @Test
     public void resetData_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.resetData(null));
+        assertThrows(NullPointerException.class, () -> ConText.resetData(null));
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = getTypicalAddressBook();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+    public void resetData_withValidReadOnlyConText_replacesData() {
+        ConText newData = getTypicalConText();
+        ConText.resetData(newData);
+        assertEquals(newData, ConText);
     }
 
     @Test
@@ -49,53 +49,53 @@ public class AddressBookTest {
         Contact editedAlice = new ContactBuilder(ALICE).withNote(VALID_NOTE_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Contact> newContacts = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newContacts);
+        ConTextStub newData = new ConTextStub(newContacts);
 
-        assertThrows(DuplicateContactException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicateContactException.class, () -> ConText.resetData(newData));
     }
 
     @Test
     public void hasContact_nullContact_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasContact(null));
+        assertThrows(NullPointerException.class, () -> ConText.hasContact(null));
     }
 
     @Test
-    public void hasContact_contactNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasContact(ALICE));
+    public void hasContact_contactNotInConText_returnsFalse() {
+        assertFalse(ConText.hasContact(ALICE));
     }
 
     @Test
-    public void hasContact_contactInAddressBook_returnsTrue() {
-        addressBook.addContact(ALICE);
-        assertTrue(addressBook.hasContact(ALICE));
+    public void hasContact_contactInConText_returnsTrue() {
+        ConText.addContact(ALICE);
+        assertTrue(ConText.hasContact(ALICE));
     }
 
     @Test
-    public void hasContact_contactWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addContact(ALICE);
+    public void hasContact_contactWithSameIdentityFieldsInConText_returnsTrue() {
+        ConText.addContact(ALICE);
         Contact editedAlice = new ContactBuilder(ALICE).withNote(VALID_NOTE_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(addressBook.hasContact(editedAlice));
+        assertTrue(ConText.hasContact(editedAlice));
     }
 
     @Test
     public void getContactList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getContactList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> ConText.getContactList().remove(0));
     }
 
     @Test
     public void toStringMethod() {
-        String expected = AddressBook.class.getCanonicalName() + "{contacts=" + addressBook.getContactList() + "}";
-        assertEquals(expected, addressBook.toString());
+        String expected = ConText.class.getCanonicalName() + "{contacts=" + ConText.getContactList() + "}";
+        assertEquals(expected, ConText.toString());
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose contacts list can violate interface constraints.
+     * A stub ReadOnlyConText whose contacts list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class ConTextStub implements ReadOnlyConText {
         private final ObservableList<Contact> contacts = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Contact> contacts) {
+        ConTextStub(Collection<Contact> contacts) {
             this.contacts.setAll(contacts);
         }
 

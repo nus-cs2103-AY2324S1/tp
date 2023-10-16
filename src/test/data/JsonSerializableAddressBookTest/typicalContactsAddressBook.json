@@ -1,5 +1,5 @@
 {
-  "_comment": "AddressBook save file which contains the same Contact values as in TypicalContacts#getTypicalAddressBook()",
+  "_comment": "ConText save file which contains the same Contact values as in TypicalContacts#getTypicalConText()",
   "contacts" : [{
     "name" : "Alice Pauline",
     "phone" : "94351253",

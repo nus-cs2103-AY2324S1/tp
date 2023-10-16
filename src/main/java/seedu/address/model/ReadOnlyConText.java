@@ -6,7 +6,7 @@ import seedu.address.model.contact.Contact;
 /**
  * Unmodifiable view of an address book
  */
-public interface ReadOnlyAddressBook {
+public interface ReadOnlyConText {
 
     /**
      * Returns an unmodifiable view of the contacts list.
