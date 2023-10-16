@@ -120,7 +120,7 @@ public class FindExpressionParser {
             }
             // split by slash but include slash in substrings
             String[] parts = token.text.split("(?<=/)");
-            FindSupportedField field = FindSupportedField.fromPrefix(parts[0].trim().toLowerCase());
+            FindSupportedField field = FindSupportedField.createFromPrefix(parts[0].trim().toLowerCase());
             return new ConditionNode(field, parts[1].trim());
         }
     }
@@ -183,7 +183,7 @@ public class FindExpressionParser {
          * @return The supported field corresponding to the given prefix.
          * @throws ParseException if the prefix is not supported.
          */
-        public static FindSupportedField fromPrefix(String prefix) throws ParseException {
+        public static FindSupportedField createFromPrefix(String prefix) throws ParseException {
             for (FindSupportedField field : FindSupportedField.values()) {
                 if (field.prefix.equals(prefix)) {
                     return field;

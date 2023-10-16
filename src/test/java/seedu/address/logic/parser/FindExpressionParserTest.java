@@ -16,13 +16,13 @@ public class FindExpressionParserTest {
 
     @Test
     public void fromPrefix_invalidPrefix_throwsParseException() {
-        assertThrows(ParseException.class, () -> FindExpressionParser.FindSupportedField.fromPrefix(" "));
-        assertThrows(ParseException.class, () -> FindExpressionParser.FindSupportedField.fromPrefix("asdf"));
+        assertThrows(ParseException.class, () -> FindExpressionParser.FindSupportedField.createFromPrefix(" "));
+        assertThrows(ParseException.class, () -> FindExpressionParser.FindSupportedField.createFromPrefix("asdf"));
 
         // existent but unsupported fields
-        assertThrows(ParseException.class, () -> FindExpressionParser.FindSupportedField.fromPrefix("tg/"));
-        assertThrows(ParseException.class, () -> FindExpressionParser.FindSupportedField.fromPrefix("e2/"));
-        assertThrows(ParseException.class, () -> FindExpressionParser.FindSupportedField.fromPrefix("li/"));
+        assertThrows(ParseException.class, () -> FindExpressionParser.FindSupportedField.createFromPrefix("tg/"));
+        assertThrows(ParseException.class, () -> FindExpressionParser.FindSupportedField.createFromPrefix("e2/"));
+        assertThrows(ParseException.class, () -> FindExpressionParser.FindSupportedField.createFromPrefix("li/"));
     }
 
     @Test
