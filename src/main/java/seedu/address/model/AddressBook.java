@@ -87,6 +87,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         employees.setEmployee(target, editedEmployee);
     }
 
+    public void sortEmployees(String attribute) {
+        requireNonNull(attribute);
+        employees.sortEmployees(attribute);
+    }
+
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.

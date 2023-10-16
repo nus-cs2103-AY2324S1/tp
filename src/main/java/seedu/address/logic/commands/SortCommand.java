@@ -1,11 +1,12 @@
 package seedu.address.logic.commands;
 
-import seedu.address.logic.Messages;
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
+/** Sorts the current list by the desired attribute */
 public class SortCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
@@ -14,14 +15,10 @@ public class SortCommand extends Command {
             + ": Sorts the list of employees from the last listing by the specified attribute. "
             + "Parameters: by/ [ATTRIBUTE]\n"
             + "Example: " + COMMAND_WORD + " by/ salary";
-//            + "by the index number used in the last person listing. "
-//            + "Existing remark will be overwritten by the input.\n"
-//            + "Parameters: INDEX (must be a positive integer) "
-//            + "r/ [REMARK]\n"
-//            + "Example: " + COMMAND_WORD + " 1 "
-//            + "r/ Likes to swim.";
 
-    public static final String MESSAGE_ARGUMENTS = "Attribute: %1$s";
+    public static final String MESSAGE_SUCCESS = "Successfully sorted employees by %1$s. ";
+    public static final String MESSAGE_NO_PARAM = "There needs to be an attribute to sort the list by. ";
+    public static final String MESSAGE_WRONG_PARAM = "Attribute %1$s cannot be used to sort the list. ";
 
     private final String attribute;
 
@@ -33,8 +30,16 @@ public class SortCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        throw new CommandException(
-                String.format(MESSAGE_ARGUMENTS, attribute));
+        requireNonNull(model);
+        if (attribute.toLowerCase().equals("salary")) {
+            model.updateSortedEmployeeList("salary");
+        } else if (attribute.equals("")) {
+            throw new CommandException(String.format(MESSAGE_NO_PARAM, attribute));
+        } else {
+            throw new CommandException(String.format(MESSAGE_WRONG_PARAM, attribute));
+        }
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, attribute.toLowerCase()));
     }
 
     @Override

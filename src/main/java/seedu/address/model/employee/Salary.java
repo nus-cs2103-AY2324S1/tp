@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents an Employee's salary in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidSalary(String)}
  */
-public class Salary {
+public class Salary implements Comparable<Salary> {
 
     public static final String MESSAGE_CONSTRAINTS = "Salary should begin with '$' and contain numbers. \n"
         + "Numbers should have commas for thousands separators and may or may not have decimal places.";
@@ -59,4 +59,8 @@ public class Salary {
         return value.hashCode();
     }
 
+    @Override
+    public int compareTo(Salary other) {
+        return value.compareTo(other.value);
+    }
 }

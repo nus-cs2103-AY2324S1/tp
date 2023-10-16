@@ -80,7 +80,7 @@ public class AddressBookParser {
             return new HelpCommand();
 
         case SortCommand.COMMAND_WORD:
-                return new SortCommandParser().parse(arguments);
+            return new SortCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

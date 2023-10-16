@@ -85,4 +85,10 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredEmployeeList(Predicate<Employee> predicate);
+
+    /**
+     * Updates the {@code attribute} by which the employee list is sorted.
+     * @throws NullPointerException if {@code attribute} is null.
+     */
+    void updateSortedEmployeeList(String attribute);
 }
