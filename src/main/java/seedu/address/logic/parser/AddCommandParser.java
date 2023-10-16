@@ -51,13 +51,13 @@ public class AddCommandParser implements Parser<AddCommand> {
             }
 
             if (argMultimap.getValue(PREFIX_AVAILABILITY).isPresent() && argMultimap.getValue(PREFIX_AVAILABILITY).get().equals("Available")) {
-                throw new ParseException("Availability cannot be 'Available' when an animal name is provided.");
+                throw new ParseException("Availability cannot be 'Available' when an animal name is provided; animal name should be 'nil'.");
             }
         }
 
         if (argMultimap.getValue(PREFIX_ANIMAL_TYPE).isPresent() && !argMultimap.getValue(PREFIX_ANIMAL_TYPE).get().equals("nil")) {
             if (argMultimap.getValue(PREFIX_AVAILABILITY).isPresent() && argMultimap.getValue(PREFIX_AVAILABILITY).get().equals("nil")) {
-                throw new ParseException("Availability cannot be 'nil' when an animal type is provided.");
+                throw new ParseException("Availability cannot be 'nil' when an animal type is provided; animal type should be 'nil'.");
             }
         }
 

@@ -3,11 +3,7 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -20,12 +16,20 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_ANIMAL_NAME = "Lalaland";
+    public static final String DEFAULT_AVAILABILITY = "NotAvailable";
+    public static final String DEFAULT_ANIMAL_TYPE = "current.Dog";
+    public static final String DEFAULT_HOUSING = "Landed";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
     private Set<Tag> tags;
+    private Name animalName;
+    private Availability availability;
+    private AnimalType animalType;
+    private Housing housing;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -36,6 +40,10 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        animalName = new Name(DEFAULT_ANIMAL_NAME);
+        availability = new Availability(DEFAULT_AVAILABILITY);
+        animalType = new AnimalType(DEFAULT_ANIMAL_TYPE, DEFAULT_AVAILABILITY);
+        housing = new Housing(DEFAULT_HOUSING);
     }
 
     /**
@@ -47,6 +55,10 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
+        animalName = personToCopy.getAnimalName();
+        availability = personToCopy.getAvailability();
+        animalType = personToCopy.getAnimalType();
+        housing = personToCopy.getHousing();
     }
 
     /**
@@ -89,8 +101,28 @@ public class PersonBuilder {
         return this;
     }
 
+    public PersonBuilder withAnimalName(String animalName) {
+        this.animalName = new Name(animalName);
+        return this;
+    }
+
+    public PersonBuilder withAvailability(String availability) {
+        this.availability = new Availability(availability);
+        return this;
+    }
+
+    public PersonBuilder withAnimalType(String animalType, String availability) {
+        this.animalType = new AnimalType(animalType, availability);
+        return this;
+    }
+
+    public PersonBuilder withHousing(String housing) {
+        this.housing = new Housing(housing);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        return new Person(name, phone, email, address, housing, availability, animalName, animalType, tags);
     }
 
 }
