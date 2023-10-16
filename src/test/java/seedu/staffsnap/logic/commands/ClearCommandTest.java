@@ -11,7 +11,7 @@ import seedu.staffsnap.model.ModelManager;
 import seedu.staffsnap.model.UserPrefs;
 
 public class ClearCommandTest {
-    /*
+
 
     @Test
     public void execute_emptyApplicantBook_success() {
@@ -20,7 +20,7 @@ public class ClearCommandTest {
 
         assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
     }
-
+    /*
     @Test
     public void execute_nonEmptyApplicantBook_success() {
         Model model = new ModelManager(getTypicalApplicantBook(), new UserPrefs());
@@ -30,6 +30,8 @@ public class ClearCommandTest {
         assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
     }
     */
+
+
 
 
 }

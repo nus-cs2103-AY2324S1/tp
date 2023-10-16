@@ -40,14 +40,14 @@ public class ApplicantBookParserTest {
         AddCommand command = (AddCommand) parser.parseCommand(ApplicantUtil.getAddCommand(applicant));
         assertEquals(new AddCommand(applicant), command);
     }
-/*
+    /*
     @Test
     public void parseCommand_clear() throws Exception {
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
     }
 
- */
+    */
 
     @Test
     public void parseCommand_delete() throws Exception {
