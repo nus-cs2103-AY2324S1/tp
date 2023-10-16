@@ -27,10 +27,10 @@ public class FindCommandParserTest {
         FindCommand expectedFindCommand =
                 new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")),
                         new StatusContainsKeywordsPredicate(Arrays.asList("Interviewed")));
-        assertParseSuccess(parser, " n/Alice Bob s/Interviewed", expectedFindCommand);
+        assertParseSuccess(parser, " n/Alice Bob st/Interviewed", expectedFindCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " n/ \n Alice \n \t Bob  \t s/Interviewed", expectedFindCommand);
+        assertParseSuccess(parser, " n/ \n Alice \n \t Bob  \t st/Interviewed", expectedFindCommand);
     }
 
     @Test
