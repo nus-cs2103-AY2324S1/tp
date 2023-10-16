@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
+import seedu.address.model.person.ApplicantContainsKeywordsPredicate;
 import seedu.address.model.person.MemberContainsKeywordsPredicate;
 
 
@@ -13,27 +14,27 @@ import seedu.address.model.person.MemberContainsKeywordsPredicate;
  * Finds and lists all members in address book whose fields contains any of the argument keywords.
  * Keyword matching is case-insensitive.
  */
-public class FindMemberCommand extends Command {
+public class FindApplicantCommand extends Command {
 
-    public static final String COMMAND_WORD = "findMember";
+    public static final String COMMAND_WORD = "findApplicant";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all members whose information contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all applicants whose information contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alice 91119111 design";
 
-    private final MemberContainsKeywordsPredicate predicate;
+    private final ApplicantContainsKeywordsPredicate predicate;
 
-    public FindMemberCommand(MemberContainsKeywordsPredicate predicate) {
+    public FindApplicantCommand(ApplicantContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredMembersList(predicate);
+        model.updateFilteredApplicantList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_MEMBERS_LISTED_OVERVIEW, model.getFilteredMemberList().size()));
+                String.format(Messages.MESSAGE_APPLICANTS_LISTED_OVERVIEW, model.getFilteredApplicantList().size()));
     }
 
     @Override
@@ -43,11 +44,11 @@ public class FindMemberCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof FindMemberCommand)) {
+        if (!(other instanceof FindApplicantCommand)) {
             return false;
         }
 
-        FindMemberCommand otherFindCommand = (FindMemberCommand) other;
+        FindApplicantCommand otherFindCommand = (FindApplicantCommand) other;
         return predicate.equals(otherFindCommand.predicate);
     }
 
