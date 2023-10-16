@@ -18,6 +18,23 @@ public class CommandResult {
 
     /** The application should exit. */
     private final boolean exit;
+    /** Whether the command can be changed later on */
+    private final boolean isChangeable;
+
+    /**
+     * Overloaded constructor for {@code CommandResult} for commands that can be changed later on
+     * @param feedbackToUser
+     * @param showHelp
+     * @param exit
+     * @param isChangeable
+     */
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean isChangeable) {
+        requireNonNull(feedbackToUser);
+        this.feedbackToUser = feedbackToUser;
+        this.showHelp = showHelp;
+        this.exit = exit;
+        this.isChangeable = isChangeable;
+    }
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
@@ -26,6 +43,7 @@ public class CommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.isChangeable = false;
     }
 
     /**

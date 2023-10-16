@@ -3,6 +3,7 @@ package seedu.address.model.appointment;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -16,6 +17,7 @@ import seedu.address.model.person.Person;
 public class Appointment {
     private AppointmentTime appointmentTime;
     private Person patient;
+    private String patientName;
 
     /**
      * Constructs an {@code Appointment}.
@@ -48,6 +50,17 @@ public class Appointment {
     public String getPatientName() {
         return this.patient.getName().fullName;
     }
+
+    /**
+     * Retrieves the patient from the Patient ArrayList provided with respect to the input index
+     * @param arr Patient Array List input through the AddAppointment Command
+     * @param index Index of the patient of interest in the Patient ArrayList
+     */
+    public void parsePatient(ArrayList<Person> arr, int index) {
+        patient = arr.get(index - 1);
+        patientName = this.getPatientName();
+    }
+
 
     @Override
     public boolean equals(Object other) {
