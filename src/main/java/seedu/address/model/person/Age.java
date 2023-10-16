@@ -9,7 +9,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Age {
 
-
     public static final String MESSAGE_CONSTRAINTS =
             "Age should only contain numbers between 0 and 149 both inclusive.";
     public static final String VALIDATION_REGEX = "\\b[0-9]|[1-9][0-9]|1[0-4][0-9]\\b";
@@ -18,7 +17,7 @@ public class Age {
     /**
      * Constructs a {@code Age}.
      *
-     * @param age A valid phone number.
+     * @param age A valid age.
      */
     public Age(String age) {
         requireNonNull(age);
@@ -27,7 +26,7 @@ public class Age {
     }
 
     /**
-     * Returns true if a given string is a valid phone number.
+     * Returns true if a given string is a valid age.
      */
     public static boolean isValidAge(String test) {
         return test.matches(VALIDATION_REGEX);
