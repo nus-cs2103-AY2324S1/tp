@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -18,6 +17,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.ContainsTutorialGroupPredicate;
+import seedu.address.model.person.TutorialGroup;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -25,8 +26,9 @@ import seedu.address.model.tag.Tag;
  */
 public class ListCommandParser implements Parser<ListCommand> {
 
-    String tg;
+    String tgValue;
     String type;
+    TutorialGroup tg;
 
     /**
      * Parses the given {@code String} of arguments in the context of the ListCommand
@@ -39,6 +41,7 @@ public class ListCommandParser implements Parser<ListCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_TUTORIALGROUP);
 
         String trimmedArgs = args.trim();
+        tg = new TutorialGroup("PLACEHOLDER");
         if (trimmedArgs.startsWith("students")) {
             type = "students";
         } else if (trimmedArgs.startsWith("attendance")) {
@@ -48,10 +51,11 @@ public class ListCommandParser implements Parser<ListCommand> {
         }
 
         if (argMultimap.getValue(PREFIX_TUTORIALGROUP).isPresent()) {
-            tg = argMultimap.getValue(PREFIX_NAME).get();
+            tgValue = argMultimap.getValue(PREFIX_TUTORIALGROUP).get();
+            tg = new TutorialGroup(tgValue);
         }
 
-        return new ListCommand(type, tg);
+        return new ListCommand(type, tg, new ContainsTutorialGroupPredicate(tg));
     }
 
 }

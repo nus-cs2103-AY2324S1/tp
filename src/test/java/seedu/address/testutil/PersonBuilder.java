@@ -8,6 +8,7 @@ import seedu.address.model.person.ID;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.TutorialGroup;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -19,14 +20,15 @@ public class PersonBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_ID = "A1234567E";
+    public static final String DEFAULT_TG = "T01";
 
     private Name name;
     private Phone phone;
     private Email email;
     private ID id;
     private Set<Tag> tags;
+    private TutorialGroup tutorialGroup;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -37,6 +39,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         id = new ID(DEFAULT_ID);
         tags = new HashSet<>();
+        tutorialGroup = new TutorialGroup(DEFAULT_TG);
     }
 
     /**
@@ -48,6 +51,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         id = personToCopy.getId();
         tags = new HashSet<>(personToCopy.getTags());
+        tutorialGroup = personToCopy.getTutorialGroup();
     }
 
     /**
@@ -90,8 +94,13 @@ public class PersonBuilder {
         return this;
     }
 
+    public PersonBuilder withTutorialGroup(String tutorialGroup) {
+        this.tutorialGroup = new TutorialGroup(tutorialGroup);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, id, tags);
+        return new Person(name, phone, email, id, tags, tutorialGroup);
     }
 
 }

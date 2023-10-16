@@ -11,6 +11,7 @@ import seedu.address.model.person.ID;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.TutorialGroup;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -20,17 +21,17 @@ public class SampleDataUtil {
     public static Person[] getSamplePersons() {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                new ID("A1234567E"), getTagSet("CS2103T")),
+                new ID("A1234567E"), getTagSet("CS2103T"), new TutorialGroup("T01")),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                new ID("A1234567B"), getTagSet("CS2103T")),
+                new ID("A1234567B"), getTagSet("CS2103T"), new TutorialGroup("T01")),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                new ID("A1234567X"), getTagSet("CS2103T")),
+                new ID("A1234567X"), getTagSet("CS2103T"), new TutorialGroup("T01")),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                new ID("A1234567F"), getTagSet("CS2030S")),
+                new ID("A1234567F"), getTagSet("CS2030S"), new TutorialGroup("T02")),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                new ID("A1234567K"), getTagSet("CS2030S")),
+                new ID("A1234567K"), getTagSet("CS2030S"), new TutorialGroup("T03")),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                new ID("A1234567A"), getTagSet("CS2030S"))
+                new ID("A1234567A"), getTagSet("CS2030S"), new TutorialGroup("T01"))
         };
     }
 
