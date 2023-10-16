@@ -93,7 +93,8 @@ public class EditCommandParser implements Parser<EditCommand> {
      * If {@code financialPlans} contain only one element which is an empty string, it will be parsed into a
      * {@code Set<FinancialPlan>} containing zero financial plans.
      */
-    private Optional<Set<FinancialPlan>> parseFinancialPlansForEdit(Collection<String> financialPlans) throws ParseException {
+    private Optional<Set<FinancialPlan>> parseFinancialPlansForEdit(
+            Collection<String> financialPlans) throws ParseException {
         assert financialPlans != null;
 
         if (financialPlans.isEmpty()) {
