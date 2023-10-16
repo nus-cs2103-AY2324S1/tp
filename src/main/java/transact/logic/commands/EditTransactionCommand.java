@@ -87,7 +87,7 @@ public class EditTransactionCommand extends Command {
         }
 
         model.setTransaction(transactionToEdit, editedTransaction);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredTransactionList(PREDICATE_SHOW_ALL_TRANSACTIONS);
         return new CommandResult(String.format(MESSAGE_EDIT_TRANSACTION_SUCCESS, Messages.format(editedTransaction)),
                 TabWindow.ADDRESSBOOK);
     }
