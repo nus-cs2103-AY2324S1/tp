@@ -11,7 +11,7 @@ import seedu.address.model.Model;
 public class ViewMembersCommand extends Command {
     public static final String COMMAND_WORD = "viewMembers";
 
-    public static final String MESSAGE_SUCCESS = "Listed all applicants";
+    public static final String MESSAGE_SUCCESS = "Listed all members";
 
     @Override
     public CommandResult execute(Model model) {
