@@ -8,4 +8,11 @@ public class DataLoadingException extends Exception {
         super(cause);
     }
 
+    /**
+     * @param message contains relevant information about the error
+     */
+    public DataLoadingException(String message) {
+        super(message);
+    }
+
 }
