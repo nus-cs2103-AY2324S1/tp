@@ -1,5 +1,9 @@
 package seedu.address.testutil;
 
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPatientDescriptor;
 import seedu.address.model.person.Age;
@@ -30,6 +34,7 @@ public class EditPatientDescriptorBuilder extends EditPersonDescriptorBuilder {
         editPatientDescriptor.setMedicalHistory(patient.getMedicalHistory());
     }
 
+
     /**
      * Sets the {@code Age} of the {@code EditAgeDescriptor} that we are building.
      */
@@ -43,10 +48,11 @@ public class EditPatientDescriptorBuilder extends EditPersonDescriptorBuilder {
     /**
      * Sets the {@code MedicalHistory} of the {@code EditMedicalHistoryDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withMedicalHistory(String medicalHistory) {
+    public EditPersonDescriptorBuilder withMedicalHistory(String... medicalHistory) {
         EditCommand.EditPatientDescriptor editPatientDescriptor =
                 (EditCommand.EditPatientDescriptor) super.getDescriptor();
-        editPatientDescriptor.setMedicalHistory(new MedicalHistory(medicalHistory));
+        Set<MedicalHistory> medHistSet = Stream.of(medicalHistory).map(MedicalHistory::new).collect(Collectors.toSet());
+        editPatientDescriptor.setMedicalHistory(medHistSet);
         return this;
     }
 

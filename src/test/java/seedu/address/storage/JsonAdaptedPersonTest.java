@@ -28,7 +28,10 @@ public class JsonAdaptedPersonTest {
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
     private static final String VALID_AGE = BENSON.getAge().toString();
-    private static final String VALID_MEDICAL_HISTORY = BENSON.getMedicalHistory().toString();
+    private static final List<JsonAdaptedMedicalHistory> VALID_MEDICAL_HISTORY = BENSON.getMedicalHistory()
+            .stream()
+            .map(JsonAdaptedMedicalHistory::new)
+            .collect(Collectors.toList());;
 
     @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
@@ -36,6 +39,7 @@ public class JsonAdaptedPersonTest {
                 new JsonAdaptedPatient(INVALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_TAGS,
                         VALID_AGE, VALID_MEDICAL_HISTORY);
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
     @Test

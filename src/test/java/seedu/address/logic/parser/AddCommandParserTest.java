@@ -160,10 +160,6 @@ public class AddCommandParserTest {
         assertParseComplexFailure(parser, INVALID_SPECIALTY_DESC + validExpectedSpecialistString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_SPECIALTY), PersonType.SPECIALIST);
 
-        // invalid medical history
-        assertParseComplexFailure(parser, INVALID_MEDICAL_HISTORY_DESC + validExpectedPatientString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_MEDICALHISTORY), PersonType.PATIENT);
-
         // invalid age
         assertParseComplexFailure(parser, INVALID_AGE_DESC + validExpectedPatientString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_AGE), PersonType.PATIENT);
@@ -188,10 +184,6 @@ public class AddCommandParserTest {
         // invalid specialty
         assertParseComplexFailure(parser, validExpectedSpecialistString + INVALID_SPECIALTY_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_SPECIALTY), PersonType.SPECIALIST);
-
-        // invalid medical history
-        assertParseComplexFailure(parser, validExpectedPatientString + INVALID_MEDICAL_HISTORY_DESC,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_MEDICALHISTORY), PersonType.PATIENT);
 
         // invalid age
         assertParseComplexFailure(parser, validExpectedPatientString + INVALID_AGE_DESC,

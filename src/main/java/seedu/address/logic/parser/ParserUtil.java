@@ -84,6 +84,17 @@ public class ParserUtil {
     }
 
     /**
+     * Parses {@code Collection<String> medicalHistories} into a {@code Set<MedicalHistory>}.
+     */
+    public static Set<MedicalHistory> parseMedicalHistories(Collection<String> medicalHistories) throws ParseException {
+        requireNonNull(medicalHistories);
+        final Set<MedicalHistory> medHistSet = new HashSet<>();
+        for (String medicalhistory : medicalHistories) {
+            medHistSet.add(parseMedicalHistory(medicalhistory));
+        }
+        return medHistSet;
+    }
+    /**
      * Parses a {@code String phone} into a {@code Phone}.
      * Leading and trailing whitespaces will be trimmed.
      *

@@ -5,13 +5,13 @@
     "email": "alice@example.com",
     "tags": [ "friends" ],
     "age": "30",
-    "medicalHistory": "Diabetes"
+    "medicalHistory": [ "Diabetes" ]
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "pauline@example.com",
     "age": "30",
-    "medicalHistory": "Diabetes"
+    "medicalHistory": [ "Diabetes" ]
   } ],
   "specialists": []
 }

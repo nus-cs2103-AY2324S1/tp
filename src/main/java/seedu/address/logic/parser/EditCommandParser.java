@@ -21,6 +21,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPatientDescriptor;
 import seedu.address.logic.commands.EditCommand.EditSpecialistDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.MedicalHistory;
 import seedu.address.model.person.PersonType;
 import seedu.address.model.tag.Tag;
 
@@ -52,7 +53,7 @@ public class EditCommandParser implements ParserComplex<EditCommand> {
                         PREFIX_TAG, PREFIX_AGE, PREFIX_MEDICALHISTORY);
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_AGE, PREFIX_MEDICALHISTORY);
+                PREFIX_AGE);
 
         Index index;
         try {
@@ -72,14 +73,13 @@ public class EditCommandParser implements ParserComplex<EditCommand> {
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
             editPatientDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
         }
-        if (argMultimap.getValue(PREFIX_MEDICALHISTORY).isPresent()) {
-            editPatientDescriptor.setMedicalHistory(ParserUtil.parseMedicalHistory(argMultimap
-                    .getValue(PREFIX_MEDICALHISTORY).get()));
-        }
+
         if (argMultimap.getValue(PREFIX_AGE).isPresent()) {
             editPatientDescriptor.setAge(ParserUtil.parseAge(argMultimap
                     .getValue(PREFIX_AGE).get()));
         }
+        parseMedicalHistoriesForEdit(argMultimap.getAllValues(PREFIX_MEDICALHISTORY))
+                .ifPresent(editPatientDescriptor::setMedicalHistory);
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPatientDescriptor::setTags);
 
         if (!editPatientDescriptor.isAnyFieldEdited()) {
@@ -143,4 +143,22 @@ public class EditCommandParser implements ParserComplex<EditCommand> {
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
 
+    /**
+     * Parses {@code Collection<String> medicalHistories} into a {@code Set<MedicalHistory>}
+     * if {@code medicalHistories} is non-empty.
+     * If {@code medicalHistories} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<MedicalHistories>} containing zero medical history.
+     */
+    private Optional<Set<MedicalHistory>> parseMedicalHistoriesForEdit(Collection<String> medicalHistories)
+            throws ParseException {
+        assert medicalHistories != null;
+
+        if (medicalHistories.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> medHistSet = medicalHistories.size() == 1 && medicalHistories.contains("")
+                ? Collections.emptySet()
+                : medicalHistories;
+        return Optional.of(ParserUtil.parseMedicalHistories(medHistSet));
+    }
 }

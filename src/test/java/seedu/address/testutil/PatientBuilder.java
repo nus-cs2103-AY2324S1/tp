@@ -1,17 +1,20 @@
 package seedu.address.testutil;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import seedu.address.model.person.Age;
 import seedu.address.model.person.MedicalHistory;
 import seedu.address.model.person.Patient;
+import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Patient objects.
  */
 public class PatientBuilder extends PersonBuilder {
-    public static final String DEFAULT_MEDICAL_HISTORY = "Anemia";
     public static final String DEFAULT_AGE = "30";
     private Age age;
-    private MedicalHistory medicalHistory;
+    private Set<MedicalHistory> medicalHistory;
 
     /**
      * Creates a {@code PatientBuilder} with the default details.
@@ -19,7 +22,7 @@ public class PatientBuilder extends PersonBuilder {
     public PatientBuilder() {
         super();
         age = new Age(DEFAULT_AGE);
-        medicalHistory = new MedicalHistory(DEFAULT_MEDICAL_HISTORY);
+        medicalHistory = new HashSet<>();
     }
 
     /**
@@ -34,7 +37,7 @@ public class PatientBuilder extends PersonBuilder {
     public Age getAge() {
         return age;
     }
-    public MedicalHistory getMedicalHistory() {
+    public Set<MedicalHistory> getMedicalHistory() {
         return medicalHistory;
     }
 
@@ -49,8 +52,8 @@ public class PatientBuilder extends PersonBuilder {
     /**
      * Sets the {@code MedicalHistory} of the {@code Patient} that we are building.
      */
-    public PatientBuilder withMedicalHistory(String medicalHistory) {
-        this.medicalHistory = new MedicalHistory(medicalHistory);
+    public PatientBuilder withMedicalHistory(String ... medicalHistory) {
+        this.medicalHistory = SampleDataUtil.getMedicalHistorySet(medicalHistory);
         return this;
     }
 

@@ -132,7 +132,7 @@ public class EditCommand extends Command {
         Email updatedEmail = editPatientDescriptor.getEmail().orElse(patientToEdit.getEmail());
         Set<Tag> updatedTags = editPatientDescriptor.getTags().orElse(patientToEdit.getTags());
         Age updatedAge = editPatientDescriptor.getAge().orElse(patientToEdit.getAge());
-        MedicalHistory updatedMedicalHistory = editPatientDescriptor.getMedicalHistory()
+        Set<MedicalHistory> updatedMedicalHistory = editPatientDescriptor.getMedicalHistory()
                 .orElse(patientToEdit.getMedicalHistory());
 
         return new Patient(updatedName, updatedPhone, updatedEmail, updatedTags, updatedAge,
@@ -289,7 +289,7 @@ public class EditCommand extends Command {
      */
     public static class EditPatientDescriptor extends EditPersonDescriptor {
         private Age age;
-        private MedicalHistory medicalHistory;
+        private Set<MedicalHistory> medicalHistory;
 
         /**
          * Copy constructor.
@@ -302,26 +302,24 @@ public class EditCommand extends Command {
         }
 
         public EditPatientDescriptor() {}
-        public void setMedicalHistory(MedicalHistory medicalHistory) {
-            this.medicalHistory = medicalHistory;
+        public void setMedicalHistory(Set<MedicalHistory> medicalHistory) {
+            this.medicalHistory = (medicalHistory != null) ? new HashSet<>(medicalHistory) : null;
         }
+
         public void setAge(Age age) {
             this.age = age;
         }
 
-        public Optional<MedicalHistory> getMedicalHistory() {
-            return Optional.ofNullable(medicalHistory);
+        public Optional<Set<MedicalHistory>> getMedicalHistory() {
+            return (medicalHistory != null)
+                    ? Optional.of(Collections.unmodifiableSet(medicalHistory))
+                    : Optional.empty();
+
         }
 
         public Optional<Age> getAge() {
             return Optional.ofNullable(age);
         }
-
-
-        /**
-         * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
-         */
 
         @Override
         public boolean equals(Object other) {

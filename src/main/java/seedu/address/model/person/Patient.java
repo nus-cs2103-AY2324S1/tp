@@ -12,7 +12,7 @@ import seedu.address.model.tag.Tag;
  */
 public class Patient extends Person {
     private final Age age;
-    private final MedicalHistory medicalHistory;
+    private final Set<MedicalHistory> medicalHistory;
 
     /**
      * Every field must be present and not null.
@@ -20,7 +20,7 @@ public class Patient extends Person {
 
 
     public Patient(Name name, Phone phone, Email email, Set<Tag> tags, Age age,
-                   MedicalHistory medicalHistory) {
+                   Set<MedicalHistory> medicalHistory) {
         super(name, phone, email, tags);
         this.age = age;
         this.medicalHistory = medicalHistory;
@@ -30,7 +30,7 @@ public class Patient extends Person {
         return age;
     }
 
-    public MedicalHistory getMedicalHistory() {
+    public Set<MedicalHistory> getMedicalHistory() {
         return medicalHistory;
     }
     @Override
