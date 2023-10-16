@@ -9,8 +9,8 @@ import transact.model.transaction.info.Description;
 import transact.model.transaction.info.TransactionId;
 
 /**
- * A utility class containing a list of {@code Transaction} objects to be used in
- * tests.
+ * A utility class containing a list of {@code Transaction} objects to be used
+ * in tests.
  */
 public class TypicalTransactions {
     public static final Transaction APPLES = new Transaction(new TransactionId(), ALICE, new Description("Apples"),
@@ -38,6 +38,6 @@ public class TypicalTransactions {
     }
 
     public static Transaction[] getTypicalTransactions() {
-        return new Transaction[] {APPLES, BANANAS, CARROTS, DATES, EGGS, FISH};
+        return new Transaction[] { APPLES, BANANAS, CARROTS, DATES, EGGS, FISH };
     }
 }

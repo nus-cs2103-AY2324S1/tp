@@ -14,10 +14,10 @@ import transact.model.transaction.info.TransactionId;
  */
 class JsonAdaptedTransactionId {
 
-    private final String id;
+    private final Integer id;
 
     @JsonCreator
-    public JsonAdaptedTransactionId(@JsonProperty("id") String id) {
+    public JsonAdaptedTransactionId(@JsonProperty("id") Integer id) {
         this.id = id;
     }
 
@@ -26,7 +26,7 @@ class JsonAdaptedTransactionId {
     }
 
     @JsonValue
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
