@@ -35,7 +35,7 @@ public interface Logic {
     ObservableList<Person> getFilteredPersonList();
 
     /** Returns an unmodifiable view of the filtered list of meetings */
-    public ObservableList<Meeting> getFilteredMeetingList();
+    ObservableList<Meeting> getFilteredMeetingList();
 
     /**
      * Returns the user prefs' address book file path.
@@ -52,9 +52,13 @@ public interface Logic {
      */
     void setGuiSettings(GuiSettings guiSettings);
 
-
     /**
-     * Current working method to forward Person to UI from Logic.
+     * Forwards viewed Person to UI from Logic.
      */
     Person getViewedPerson();
+
+    /**
+     * Forwards viewed Meeting to UI from Logic.
+     */
+    Meeting getViewedMeeting();
 }

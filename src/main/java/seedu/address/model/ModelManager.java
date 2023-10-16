@@ -25,6 +25,7 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Meeting> filteredMeetings;
     private Person viewedPerson;
+    private Meeting viewedMeeting;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -147,6 +148,26 @@ public class ModelManager implements Model {
         addressBook.setMeeting(target, editedMeeting);
     }
 
+    @Override
+    public void setViewedPerson(Person person) {
+        viewedPerson = person;
+    }
+
+    @Override
+    public Person getViewedPerson() {
+        return viewedPerson;
+    }
+
+    @Override
+    public void setViewedMeeting(Meeting meeting) {
+        viewedMeeting = meeting;
+    }
+
+    @Override
+    public Meeting getViewedMeeting() {
+        return viewedMeeting;
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -195,15 +216,5 @@ public class ModelManager implements Model {
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons)
                 && filteredMeetings.equals(otherModelManager.filteredMeetings);
-    }
-
-    @Override
-    public void setViewedPerson(Person person) {
-        viewedPerson = person;
-    }
-
-    @Override
-    public Person getViewedPerson() {
-        return viewedPerson;
     }
 }

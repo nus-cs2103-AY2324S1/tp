@@ -96,4 +96,9 @@ public class LogicManager implements Logic {
     public Person getViewedPerson() {
         return model.getViewedPerson();
     }
+
+    @Override
+    public Meeting getViewedMeeting() {
+        return model.getViewedMeeting();
+    }
 }

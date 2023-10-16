@@ -121,7 +121,6 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        // Nothing for now, will need list of all meetings for schedule
         meetingSchedulePanel = new MeetingSchedulePanel(logic.getFilteredMeetingList());
         meetingSchedulePanelPlaceholder.getChildren().add(meetingSchedulePanel.getRoot());
 

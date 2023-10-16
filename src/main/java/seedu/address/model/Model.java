@@ -122,14 +122,23 @@ public interface Model {
 
     boolean hasName(String attendeeName);
 
-
     /**
-     * Set current viewed person.
+     * Set current viewed person based on viewc command.
      */
     void setViewedPerson(Person person);
 
     /**
-     * Get current viewed person.
+     * Get current viewed person based on viewc command.
      */
     Person getViewedPerson();
+
+    /**
+     * Set current viewed meeting based on viewm command.
+     */
+    void setViewedMeeting(Meeting meeting);
+
+    /**
+     * Get current viewed meeting based on viewm command.
+     */
+    Meeting getViewedMeeting();
 }
