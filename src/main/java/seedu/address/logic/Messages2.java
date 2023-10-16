@@ -38,10 +38,10 @@ public class Messages2 {
      */
     public static String format(Card card) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(card.getQuestion())
-                        .append("; Question: ")
-                                .append(card.getAnswer())
-                                        .append("; Answer: ");
+        builder.append("Question: ")
+                .append(card.getQuestion())
+                    .append("; Answer: ")
+                     .append(card.getAnswer());
         return builder.toString();
     }
 
