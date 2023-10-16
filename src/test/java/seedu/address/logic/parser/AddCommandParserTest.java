@@ -167,8 +167,15 @@ public class AddCommandParserTest {
                 + TestData.Valid.Tag.FLAG_ALPHANUMERIC, Messages.MESSAGE_EMAIL_CONSTRAINTS);
 
         // invalid tag
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + NOTE_DESC_BOB
-                + TestData.Invalid.Tag.FLAG_HASHTAG, Messages.UNFORMATTED_TAG_INVALID);
+        assertParseFailure(
+            parser,
+            NAME_DESC_BOB
+                    + PHONE_DESC_BOB
+                    + EMAIL_DESC_BOB
+                    + NOTE_DESC_BOB
+                    + TestData.Invalid.Tag.FLAG_HASHTAG,
+			Messages.tagInvalid(TestData.Invalid.Tag.HASHTAG)
+        );
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + INVALID_PHONE_DESC + EMAIL_DESC_BOB + NOTE_DESC_BOB,

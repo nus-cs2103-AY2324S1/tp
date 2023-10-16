@@ -107,10 +107,7 @@ public class ParserUtil {
 
         if (!Tag.isValidName(trimmed)) {
             throw new ParseException(
-                String.format(
-                    Messages.UNFORMATTED_TAG_INVALID,
-                    trimmed
-                )
+				Messages.tagInvalid(trimmed)
             );
         }
 

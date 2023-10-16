@@ -9,11 +9,11 @@ import seedu.address.model.contact.Email;
 /**
  * Holds message strings used by the logic for display to the user.
  *
- * Some messages do not need formatting and can be used directly after import.
+ * Public messages do not need formatting and can be used directly after import.
  *
- * Others are unformatted and have the prefix {@code UNFORMATTED_}. These
- * contain raw format specifiers (e.g. {@code %s}) that should be populated
- * appropriately via {@link String#format}.
+ * Private messages need formatting and have the prefix {@code UNFORMATTED_}.
+ * These contain raw format specifiers (e.g. {@code %s}) that should be
+ * populated by calling their associated methods.
  */
 public final class Messages {
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
@@ -64,9 +64,21 @@ public final class Messages {
     public static final String MESSAGE_CONTAIN_DUPLICATE_CONTACT = "Contact list contains duplicate contact(s).";
 
     // Tag
-    public static final String UNFORMATTED_TAG_INVALID = "\"%s\" is not a valid tag. Tags must be alphanumeric (spaces allowed).";
+    private static final String UNFORMATTED_TAG_INVALID = "\"%s\" is not a valid tag. Tags must be alphanumeric (spaces allowed).";
 
     private Messages() {
         // No instantiation
+    }
+
+    /**
+     * Returns a formatted message for the specified invalid tag name.
+     *
+     * @param invalidName Invalid name.
+     */
+    public static String tagInvalid(String invalidName) {
+        return String.format(
+            UNFORMATTED_TAG_INVALID,
+			invalidName
+        );
     }
 }

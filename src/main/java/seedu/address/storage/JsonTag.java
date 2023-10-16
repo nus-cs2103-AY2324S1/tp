@@ -48,10 +48,7 @@ public final class JsonTag {
     public Tag toModelType() throws IllegalValueException {
         if (!Tag.isValidName(this.name)) {
             throw new IllegalValueException(
-                String.format(
-                    Messages.UNFORMATTED_TAG_INVALID,
-                    this.name
-                )
+                Messages.tagInvalid(this.name)
             );
         }
 
