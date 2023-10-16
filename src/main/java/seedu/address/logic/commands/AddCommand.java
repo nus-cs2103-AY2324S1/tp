@@ -33,7 +33,7 @@ public class AddCommand extends Command {
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_LOCATION + "ADDRESS "
+            + PREFIX_LOCATION + "LOCATION "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "If the person is a patient, add their medical history by using the "
             + PREFIX_MEDICALHISTORY + " prefix. \n"
