@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICALHISTORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -19,6 +20,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonType;
 import seedu.address.model.person.predicates.AddressContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.AgeContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.EmailContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.MedHistoryContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
@@ -52,13 +54,18 @@ public class FindCommandParser implements ParserComplex<FindCommand> {
     private FindCommand parsePatient(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_TAG, PREFIX_MEDICALHISTORY);
+                        PREFIX_TAG, PREFIX_AGE, PREFIX_MEDICALHISTORY);
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_ADDRESS, PREFIX_MEDICALHISTORY);
+                PREFIX_ADDRESS, PREFIX_AGE, PREFIX_MEDICALHISTORY);
 
         List<Predicate<Person>> predicateList = setupPersonPredicates(argMultimap);
         predicateList.add(PersonType.PATIENT.getSearchPredicate());
+
+        if (argMultimap.getValue(PREFIX_AGE).isPresent()) {
+            List<String> ageKeyWords = splitKeywordsByWhitespace(argMultimap, PREFIX_AGE);
+            predicateList.add(new AgeContainsKeywordsPredicate(ageKeyWords));
+        }
 
         if (argMultimap.getValue(PREFIX_MEDICALHISTORY).isPresent()) {
             List<String> medHistKeywords = splitKeywordsByWhitespace(argMultimap, PREFIX_MEDICALHISTORY);
