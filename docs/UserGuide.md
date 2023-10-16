@@ -154,14 +154,13 @@ _At least one_ of the optional fields must be provided. `lookup` alone is not al
 * The command is **case-insensitive**. e.g. `hans` will match `Hans`
 * Only **full words** will be matched e.g. `Han` will not match `Hans`
 * The order of the fields does **not** matter. e.g. `lookup n/li c/T11` will return the same result as `lookup c/T11 n/li`
-* Field with nothing will be **accepted** as a valid input. e.g. `lookup c/` will return all classes.
-* This command can only take one word per field. e.g. `lookup c/T11 T12` is _**not** allowed_.
-* Taking multiple words per field _coming soon_ in future versions.
+* Field with nothing will be ignored. e.g. `lookup n/ c/T11` will return the same result as `lookup c/T11`.
+* This command can take multiple words per field. e.g. `lookup c/T11 T12` will return all students in `T11` or `T12`.
 
 Examples:
 
-* `lookup n/li` returns `Alex Li`, `David Li`<br>
-  ![result for 'lookup n/li'](images/lookupLastNameResult.png) </br></br>
+* `lookup n/Alex David` returns `Alex Li`, `David Li`<br>
+  ![result for 'lookup n/Alex David'](images/lookupLastNameResult.png) </br></br>
 * `lookup c/T11` return all students in class number 111<br>
   ![result for 'lookup c/T11'](images/lookupClassResult.png)
 
