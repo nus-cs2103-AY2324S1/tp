@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.GEORGE;
 
@@ -33,11 +34,21 @@ public class JsonAdaptedSpecialistTest {
 
 
     @Test
-    public void toModelType_invalidAddress_throwsIllegalValueException() {
+    public void toModelType_invalidLocation_throwsIllegalValueException() {
         JsonAdaptedPerson person =
                 new JsonAdaptedSpecialist(VALID_NAME, VALID_PHONE, VALID_EMAIL, INVALID_LOCATION, VALID_TAGS,
                         VALID_SPECIALTY);
         String expectedMessage = Location.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullLocation_throwsIllegalValueException() {
+        JsonAdaptedPerson person =
+                new JsonAdaptedSpecialist(VALID_NAME, VALID_PHONE, VALID_EMAIL, null, VALID_TAGS,
+                        VALID_SPECIALTY);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                Location.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
