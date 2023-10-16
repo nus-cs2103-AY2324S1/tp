@@ -21,7 +21,7 @@ import seedu.address.model.tag.Tag;
  */
 public class SampleDataUtil {
     public static Person[] getSamplePersons() {
-        return new Person[] {
+        Person[] samplePersons = {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"),
                 getTagSet("friends")),
@@ -45,6 +45,10 @@ public class SampleDataUtil {
                 new Address("Blk 45 Aljunied Street 85, #11-31"),
                 getTagSet("colleagues"))
         };
+        for (int i = 0; i < samplePersons.length; i++) {
+            samplePersons[i].setId(i+1);
+        }
+        return samplePersons;
     }
 
     public static ReadOnlyAddressBook getSampleAddressBook() {
