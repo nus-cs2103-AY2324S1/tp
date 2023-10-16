@@ -49,7 +49,6 @@ public class Name {
         if (other == this) {
             return true;
         }
-        
         if (!(other instanceof Name)) {
             return false;
         }
