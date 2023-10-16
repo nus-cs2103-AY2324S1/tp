@@ -1,6 +1,12 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTE_A_PERSON_ID;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTE_B_PERSON_ID;
+import static seedu.address.testutil.TypicalNotes.NOTE_A;
+import static seedu.address.testutil.TypicalNotes.NOTE_B;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -60,5 +66,29 @@ public class AddNoteCommandTest {
             return;
         }
         throw new AssertionError("Execution of command should fail.");
+    }
+
+    @Test
+    public void equals() {
+        Note noteA = NOTE_A;
+        Note noteB = NOTE_B;
+        AddNoteCommand addNoteACommand = new AddNoteCommand(Integer.parseInt(VALID_NOTE_A_PERSON_ID), noteA);
+        AddNoteCommand addNoteBCommand = new AddNoteCommand(Integer.parseInt(VALID_NOTE_B_PERSON_ID), noteB);
+
+        // same object -> returns true
+        assertTrue(addNoteACommand.equals(addNoteACommand));
+
+        // same values -> returns true
+        AddNoteCommand addNoteACommandCopy = new AddNoteCommand(Integer.parseInt(VALID_NOTE_A_PERSON_ID), noteA);
+        assertTrue(addNoteACommand.equals(addNoteACommandCopy));
+
+        // different types -> returns false
+        assertFalse(addNoteACommand.equals(1));
+
+        // null -> returns false
+        assertFalse(addNoteACommand.equals(null));
+
+        // different person -> returns false
+        assertFalse(addNoteACommand.equals(addNoteBCommand));
     }
 }

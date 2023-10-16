@@ -1,6 +1,12 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTE_A_NOTE_ID;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTE_A_PERSON_ID;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTE_B_NOTE_ID;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTE_B_PERSON_ID;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -48,7 +54,6 @@ public class DeleteNoteCommandTest {
                 .execute(model), DeleteNoteCommand.MESSAGE_NOTE_NOT_FOUND + invalidNoteId);
     }
 
-
     private void assertCommandSuccessWithFeedback(ThrowingSupplier<CommandResult> function, String result) {
         try {
             assertEquals(function.get(), new CommandResult(result));
@@ -68,5 +73,30 @@ public class DeleteNoteCommandTest {
             return;
         }
         throw new AssertionError("Execution of command should fail.");
+    }
+
+    @Test
+    public void equals() {
+        DeleteNoteCommand deleteNoteACommand = new DeleteNoteCommand(Integer.parseInt(VALID_NOTE_A_PERSON_ID),
+                Integer.parseInt(VALID_NOTE_A_NOTE_ID));
+        DeleteNoteCommand deleteNoteBCommand = new DeleteNoteCommand(Integer.parseInt(VALID_NOTE_B_PERSON_ID),
+                Integer.parseInt(VALID_NOTE_B_NOTE_ID));
+
+        // same object -> returns true
+        assertTrue(deleteNoteACommand.equals(deleteNoteACommand));
+
+        // same values -> returns true
+        DeleteNoteCommand deleteNoteACommandCopy = new DeleteNoteCommand(Integer.parseInt(VALID_NOTE_A_PERSON_ID),
+                Integer.parseInt(VALID_NOTE_A_NOTE_ID));
+        assertTrue(deleteNoteACommand.equals(deleteNoteACommandCopy));
+
+        // different types -> returns false
+        assertFalse(deleteNoteACommand.equals(1));
+
+        // null -> returns false
+        assertFalse(deleteNoteACommand.equals(null));
+
+        // different person -> returns false
+        assertFalse(deleteNoteACommand.equals(deleteNoteBCommand));
     }
 }
