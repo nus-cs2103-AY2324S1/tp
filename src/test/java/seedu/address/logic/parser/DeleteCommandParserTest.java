@@ -26,6 +26,12 @@ public class DeleteCommandParserTest {
     }
 
     @Test
+    public void parse_emptyArg_throwsParseException() {
+        assertParseFailure(parser, "", String.format(Messages.MESSAGE_MISSING_INDEX, DeleteCommand.MESSAGE_USAGE));
+    }
+
+
+    @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "a", String.format(Messages.MESSAGE_IMPOSSIBLE_INDEX, DeleteCommand.MESSAGE_USAGE));
     }

@@ -48,6 +48,12 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseIndex_missingInput_throwsParseException() {
+        assertThrows(ParseException.class, Messages.MESSAGE_MISSING_INDEX, ()
+                -> ParserUtil.parseIndex(""));
+    }
+
+    @Test
     public void parseIndex_validInput_success() throws Exception {
         // No whitespaces
         assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("1"));
