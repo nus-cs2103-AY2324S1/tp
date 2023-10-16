@@ -57,4 +57,11 @@ public class SampleDataUtil {
                 .collect(Collectors.toSet());
     }
 
+    /**
+     * Returns a musician set containing the list of musicians given.
+     */
+    public static Set<Musician> getMusicianSet(Musician... musicians) {
+        return Arrays.stream(musicians).collect(Collectors.toSet());
+    }
+
 }
