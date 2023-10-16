@@ -42,7 +42,7 @@ public class ScheduleCard extends UiPart<Region> {
         this.schedule = schedule;
         id.setText(displayedIndex + ". ");
         name.setText(schedule.getTutor().getName().fullName);
-        startTime.setText(schedule.getStartTime().getTime().toString());
-        endTime.setText(schedule.getEndTime().getTime().toString());
+        startTime.setText(schedule.getStartTime().toString());
+        endTime.setText(schedule.getEndTime().toString());
     }
 }

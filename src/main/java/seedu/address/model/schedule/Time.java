@@ -3,6 +3,7 @@ package seedu.address.model.schedule;
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
@@ -10,7 +11,8 @@ import java.time.format.DateTimeParseException;
  * Guarantees: immutable; is valid as declared in {@link #isValidTimeString(String)}
  */
 public abstract class Time {
-    public static final String DATETIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss";
+    public static final String DATETIME_INPUT_FORMAT = "yyyy-MM-dd'T'HH:mm:ss";
+    public static final String DATETIME_OUTPUT_FORMAT = "MMM d yyyy HH:mm";
     public static final String VALIDATION_REGEX = "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}";
 
     public final LocalDateTime value;
@@ -64,5 +66,10 @@ public abstract class Time {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return value.format(DateTimeFormatter.ofPattern(DATETIME_OUTPUT_FORMAT));
     }
 }

@@ -1,5 +1,6 @@
 package seedu.address.model.schedule;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -69,5 +70,12 @@ class StartTimeTest {
 
         // different EndTime -> returns true
         assertFalse(startTime.equals(new EndTime(LocalDateTime.of(2024, 1, 1, 0, 0, 0))));
+    }
+
+    @Test
+    public void toStringMethod() {
+        StartTime startTime = new StartTime(LocalDateTime.of(2023, 1, 1, 0, 0, 0));
+        String expectedString = "Jan 1 2023 00:00";
+        assertEquals(expectedString, startTime.toString());
     }
 }

@@ -1,5 +1,6 @@
 package seedu.address.model.schedule;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -15,7 +16,7 @@ class EndTimeTest {
     }
 
     @Test
-    void isValidEndTime() {
+    public void isValidEndTime() {
         // null
         assertThrows(NullPointerException.class, () -> EndTime.isValidEndTime(null));
 
@@ -46,7 +47,7 @@ class EndTimeTest {
     }
 
     @Test
-    void testEquals() {
+    public void testEquals() {
         EndTime endTime = new EndTime(LocalDateTime.of(2023, 1, 1, 0, 0, 0));
 
         // same values -> returns true
@@ -69,5 +70,12 @@ class EndTimeTest {
 
         // different StartTime -> returns false
         assertFalse(endTime.equals(new StartTime(LocalDateTime.of(2024, 1, 1, 0, 0, 0))));
+    }
+
+    @Test
+    public void toStringMethod() {
+        EndTime endTime = new EndTime(LocalDateTime.of(2023, 1, 1, 0, 0, 0));
+        String expectedString = "Jan 01 2023 00:00";
+        assertEquals(expectedString, endTime.toString());
     }
 }
