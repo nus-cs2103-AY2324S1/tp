@@ -38,7 +38,7 @@ public class LookupCommand extends Command {
             + COMMAND_WORD + " " + PREFIX_TAG + "t11";
 
     public static final String MESSAGE_NO_MATCH = "No match found!";
-    public static final String MESSAGE_ADDITIONAL_KEYWORDS = "Only one keyword is allowed for each prefix.";
+    public static final String MESSAGE_NO_KEYWORDS = "No keyword is given for prefix: %1$s.";
 
     private final StudentContainsKeywordsPredicate predicate;
 
