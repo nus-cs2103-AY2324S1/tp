@@ -198,23 +198,12 @@ public class EditCommand extends Command {
             setTags(toCopy.tags);
         }
 
-        /**
-         * Returns true if at least one field is edited.
-         */
-        public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, nric, phone, email, address, appointment, medicalHistories, tags);
-        }
-
         public void setName(Name name) {
             this.name = name;
         }
 
         public Optional<Name> getName() {
             return Optional.ofNullable(name);
-        }
-
-        public void setNric(Nric nric) {
-            this.nric = nric;
         }
 
         public Optional<Nric> getNric() {
