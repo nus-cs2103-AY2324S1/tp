@@ -88,7 +88,8 @@ public class FindCommand extends Command {
         }
 
         FindCommand otherFindCommand = (FindCommand) other;
-        return findPredicateMap.equals(otherFindCommand.findPredicateMap) && personType.equals(otherFindCommand.personType);
+        return findPredicateMap.equals(otherFindCommand.findPredicateMap)
+                && personType.equals(otherFindCommand.personType);
     }
 
     @Override
