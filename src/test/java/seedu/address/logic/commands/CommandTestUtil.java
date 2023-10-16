@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTOR_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -54,14 +53,14 @@ public class CommandTestUtil {
     public static final String VALID_END_TIME_ONE = "2023-01-01T11:00:00";
     public static final String VALID_END_TIME_TWO = "2023-01-02T22:00:00";
 
-    public static final String TUTOR_INDEX_DESC_ONE = " " + PREFIX_TUTOR_INDEX + VALID_TUTOR_INDEX_ONE;
-    public static final String TUTOR_INDEX_DESC_TWO = " " + PREFIX_TUTOR_INDEX + VALID_TUTOR_INDEX_TWO;
+    public static final String TUTOR_INDEX_DESC_ONE = VALID_TUTOR_INDEX_ONE;
+    public static final String TUTOR_INDEX_DESC_TWO = VALID_TUTOR_INDEX_TWO;
     public static final String START_TIME_DESC_ONE = " " + PREFIX_START_TIME + VALID_START_TIME_ONE;
     public static final String START_TIME_DESC_TWO = " " + PREFIX_START_TIME + VALID_START_TIME_TWO;
     public static final String END_TIME_DESC_ONE = " " + PREFIX_END_TIME + VALID_END_TIME_ONE;
     public static final String END_TIME_DESC_TWO = " " + PREFIX_END_TIME + VALID_END_TIME_TWO;
 
-    public static final String INVALID_TUTOR_INDEX = " " + PREFIX_TUTOR_INDEX + "a";
+    public static final String INVALID_TUTOR_INDEX = "a";
     public static final String INVALID_START_TIME = " " + PREFIX_START_TIME + "2023-01-01 09:00"; // missing 'T'
     public static final String INVALID_END_TIME = " " + PREFIX_END_TIME + "2023-01-01T1100"; // missing ':'
 
@@ -85,7 +84,7 @@ public class CommandTestUtil {
      * - the {@code actualModel} matches {@code expectedModel}
      */
     public static void assertCommandSuccess(Command command, Model actualModel, CommandResult expectedCommandResult,
-                                            Model expectedModel) {
+            Model expectedModel) {
         try {
             CommandResult result = command.execute(actualModel);
             assertEquals(expectedCommandResult, result);
@@ -100,7 +99,7 @@ public class CommandTestUtil {
      * that takes a string {@code expectedMessage}.
      */
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
-                                            Model expectedModel) {
+            Model expectedModel) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }

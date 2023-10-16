@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.model.schedule.Schedule;
 
 /**
  * The API of the Model component.
@@ -13,6 +14,8 @@ import seedu.address.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+
+    Predicate<Schedule> PREDICATE_SHOW_ALL_SCHEDULES = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -84,4 +87,38 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Returns true if a schedule with the same fields as {@code schedule} exists in the address book.
+     */
+    boolean hasSchedule(Schedule schedule);
+
+    /**
+     * Deletes the given schedule.
+     * The schedule must exist in the address book.
+     */
+    void deleteSchedule(Schedule target);
+
+    /**
+     * Adds the given schedule.
+     * {@code schedule} must not already exist in the address book.
+     */
+    void addSchedule(Schedule schedule);
+
+    /**
+     * Replaces the given schedule {@code target} with {@code editedSchedule}.
+     * {@code target} must exist in the address book.
+     * The schedule fields of {@code editedSchedule} must not be the same as another existing schedule in the address
+     * book.
+     */
+    void setSchedule(Schedule target, Schedule editedSchedule);
+
+    /** Returns an unmodifiable view of the filtered schedule list */
+    ObservableList<Schedule> getFilteredScheduleList();
+
+    /**
+     * Updates the filter of the filtered schedule list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredScheduleList(Predicate<Schedule> predicate);
 }
