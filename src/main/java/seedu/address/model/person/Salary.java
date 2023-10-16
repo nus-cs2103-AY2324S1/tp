@@ -11,7 +11,7 @@ public class Salary {
      * The first character of the salary must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "\\d+";
+    public static final String VALIDATION_REGEX = "\\d+\\.\\d{2}";
 
     public final String value;
 

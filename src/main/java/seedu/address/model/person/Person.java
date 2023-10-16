@@ -2,20 +2,14 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.AnnualLeave;
-import seedu.address.model.person.BankAccount;
-import seedu.address.model.person.JoinDate;
-import seedu.address.model.person.Salary;
 
 /**
  * Represents a Person in the address book.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Guarantees: details are present and not null, field values are validated,
+ * immutable.
  */
 public class Person {
 
@@ -34,7 +28,8 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, BankAccount bankAccount, JoinDate joinDate, Salary salary, AnnualLeave annualLeave) {
+    public Person(Name name, Phone phone, Email email, Address address, BankAccount bankAccount, JoinDate joinDate,
+            Salary salary, AnnualLeave annualLeave) {
         requireAllNonNull(name, phone, email, address, bankAccount, joinDate, salary, annualLeave);
         this.name = name;
         this.phone = phone;
@@ -77,7 +72,6 @@ public class Person {
     public AnnualLeave getAnnualLeave() {
         return annualLeave;
     }
-
 
     /**
      * Returns true if both persons have the same name.

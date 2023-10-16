@@ -1,6 +1,5 @@
 package seedu.address.model.person;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
@@ -8,8 +7,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 public class JoinDate {
-    public static final String MESSAGE_CONSTRAINTS =
-            "Join date should be in the form of DD/MM/YYYY. Eg. 12/02/2023 represents 12th Feb 2023";
+    public static final String MESSAGE_CONSTRAINTS = "Join date should be in the form of DD/MM/YYYY. Eg. 12/02/2023 represents 12th Feb 2023";
 
     public final String value;
 
@@ -31,11 +29,10 @@ public class JoinDate {
         try {
             DateTimeFormatter.ofPattern("d/M/yyyy").parse(test);
             return true;
-        } catch (DateTimeParseException e){
+        } catch (DateTimeParseException e) {
             return false;
         }
     }
-
 
     @Override
     public String toString() {

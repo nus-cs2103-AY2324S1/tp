@@ -7,12 +7,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -20,7 +17,15 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.AnnualLeave;
+import seedu.address.model.person.BankAccount;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.JoinDate;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Salary;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -49,7 +54,7 @@ public class EditCommand extends Command {
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
+     * @param index                of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
     public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
@@ -97,8 +102,8 @@ public class EditCommand extends Command {
         Salary updatedSalary = editPersonDescriptor.getSalary().orElse(personToEdit.getSalary());
         AnnualLeave updatedAnnualLeave = editPersonDescriptor.getAnnualLeave().orElse(personToEdit.getAnnualLeave());
 
-
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedBankAccount, updatedJoinDate, updatedSalary, updatedAnnualLeave);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedBankAccount, updatedJoinDate,
+                updatedSalary, updatedAnnualLeave);
     }
 
     @Override
@@ -126,7 +131,8 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
+     * Stores the details to edit the person with. Each non-empty field value will
+     * replace the
      * corresponding field value of the person.
      */
     public static class EditPersonDescriptor {
@@ -139,7 +145,8 @@ public class EditCommand extends Command {
         private Salary salary;
         private AnnualLeave annualLeave;
 
-        public EditPersonDescriptor() {}
+        public EditPersonDescriptor() {
+        }
 
         /**
          * Copy constructor.

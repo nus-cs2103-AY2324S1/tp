@@ -1,10 +1,7 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -70,9 +67,11 @@ class JsonAdaptedPerson {
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
+     * Converts this Jackson-friendly adapted person object into the model's
+     * {@code Person} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws IllegalValueException if there were any data constraints violated in
+     *                               the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
 
@@ -128,8 +127,8 @@ class JsonAdaptedPerson {
         }
         final AnnualLeave modelAnnualLeave = new AnnualLeave(annualLeave);
 
-
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelBankAccount, modelJoinDate, modelSalary, modelAnnualLeave);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelBankAccount, modelJoinDate, modelSalary,
+                modelAnnualLeave);
     }
 
 }

@@ -1,12 +1,15 @@
 package seedu.address.testutil;
 
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.person.*;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.AnnualLeave;
+import seedu.address.model.person.BankAccount;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.JoinDate;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Salary;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.
@@ -24,7 +27,8 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Returns an {@code EditPersonDescriptor} with fields containing {@code person}'s details
+     * Returns an {@code EditPersonDescriptor} with fields containing
+     * {@code person}'s details
      */
     public EditPersonDescriptorBuilder(Person person) {
         descriptor = new EditPersonDescriptor();
@@ -39,7 +43,8 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Name} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Name} of the {@code EditPersonDescriptor} that we are
+     * building.
      */
     public EditPersonDescriptorBuilder withName(String name) {
         descriptor.setName(new Name(name));
@@ -47,7 +52,8 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Phone} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Phone} of the {@code EditPersonDescriptor} that we are
+     * building.
      */
     public EditPersonDescriptorBuilder withPhone(String phone) {
         descriptor.setPhone(new Phone(phone));
@@ -55,7 +61,8 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Email} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Email} of the {@code EditPersonDescriptor} that we are
+     * building.
      */
     public EditPersonDescriptorBuilder withEmail(String email) {
         descriptor.setEmail(new Email(email));
@@ -63,7 +70,8 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are
+     * building.
      */
     public EditPersonDescriptorBuilder withAddress(String address) {
         descriptor.setAddress(new Address(address));
@@ -71,7 +79,8 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code BankAccount} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code BankAccount} of the {@code EditPersonDescriptor} that we are
+     * building.
      */
     public EditPersonDescriptorBuilder withBankAccount(String bankAccount) {
         descriptor.setBankAccount(new BankAccount(bankAccount));
@@ -79,7 +88,8 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code JoinDate} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code JoinDate} of the {@code EditPersonDescriptor} that we are
+     * building.
      */
     public EditPersonDescriptorBuilder withJoinDate(String joinDate) {
         descriptor.setJoinDate(new JoinDate(joinDate));
@@ -87,7 +97,8 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Salary} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Salary} of the {@code EditPersonDescriptor} that we are
+     * building.
      */
     public EditPersonDescriptorBuilder withSalary(String salary) {
         descriptor.setSalary(new Salary(salary));
@@ -95,15 +106,13 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code AnnualLeave} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code AnnualLeave} of the {@code EditPersonDescriptor} that we are
+     * building.
      */
     public EditPersonDescriptorBuilder withAnnualLeave(String annualLeave) {
         descriptor.setAnnualLeave(new AnnualLeave(annualLeave));
         return this;
     }
-
-
-
 
     public EditPersonDescriptor build() {
         return descriptor;
