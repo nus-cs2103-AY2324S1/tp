@@ -12,6 +12,7 @@ import seedu.address.model.person.NextOfKinName;
 import seedu.address.model.person.NextOfKinPhone;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.financialPlan.FinancialPlan;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -88,6 +89,16 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withNextOfKinPhone(String nokPhone) {
         descriptor.setNextOfKinPhone(new NextOfKinPhone(nokPhone));
+        return this;
+    }
+
+    /**
+     * Parses the {@code financialPlans} into a {@code Set<FinancialPlan>} and set it to the {@code EditPersonDescriptor}
+     * that we are building.
+     */
+    public EditPersonDescriptorBuilder withFinancialPlans(String... financialPlans) {
+        Set<FinancialPlan> financialPlanSet = Stream.of(financialPlans).map(FinancialPlan::new).collect(Collectors.toSet());
+        descriptor.setFinancialPlans(financialPlanSet);
         return this;
     }
 

@@ -10,6 +10,7 @@ import seedu.address.model.person.NextOfKinName;
 import seedu.address.model.person.NextOfKinPhone;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.financialPlan.FinancialPlan;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -31,6 +32,7 @@ public class PersonBuilder {
     private Address address;
     private NextOfKinName nextOfKinName;
     private NextOfKinPhone nextOfKinPhone;
+    private Set<FinancialPlan> financialPlans;
     private Set<Tag> tags;
 
     /**
@@ -43,6 +45,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         nextOfKinName = new NextOfKinName(DEFAULT_NEXT_OF_KIN_NAME);
         nextOfKinPhone = new NextOfKinPhone(DEFAULT_NEXT_OF_KIN_PHONE);
+        financialPlans = new HashSet<>();
         tags = new HashSet<>();
     }
 
@@ -56,6 +59,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         nextOfKinName = personToCopy.getNextOfKinName();
         nextOfKinPhone = personToCopy.getNextOfKinPhone();
+        financialPlans = new HashSet<>(personToCopy.getFinancialPlans());
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -72,6 +76,14 @@ public class PersonBuilder {
      */
     public PersonBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
+    /**
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     */
+    public PersonBuilder withFinancialPlans(String ... financialPlans) {
+        this.financialPlans = SampleDataUtil.getFinancialPlanSet(financialPlans);
         return this;
     }
 
@@ -114,7 +126,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, nextOfKinName, nextOfKinPhone, tags);
+        return new Person(name, phone, email, address, nextOfKinName, nextOfKinPhone, financialPlans, tags);
     }
 
 }
