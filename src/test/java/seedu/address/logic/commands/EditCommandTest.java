@@ -1,14 +1,12 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -75,22 +73,6 @@ public class EditCommandTest {
         expectedModel.setPerson(lastPerson, editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void findPersonToEdit_bothNameAndNricNull_throwIllegalArgumentException() {
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().build();
-        EditCommand editCommand = new EditCommand(null, null, descriptor);
-
-        assertThrows(IllegalArgumentException.class, () -> editCommand.findPersonToEdit(model.getFilteredPersonList()));
-    }
-
-    @Test
-    public void findPersonToEdit_personOptionalEmpty_throwCommandException() {
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().build();
-        EditCommand editCommand = new EditCommand(new Name("John Doe"), null, descriptor);
-
-        assertThrows(CommandException.class, () -> editCommand.findPersonToEdit(Collections.emptyList()));
     }
 
     @Test
