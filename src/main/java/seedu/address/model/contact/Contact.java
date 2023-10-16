@@ -13,7 +13,7 @@ import seedu.address.model.tag.Tag;
 
 
 /**
- * Represents a Contact, i.e. a contact.
+ * Represents a Contact.
  *
  * Guarantees that all details are present and validated.
  */
