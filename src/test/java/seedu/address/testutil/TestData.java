@@ -121,8 +121,9 @@ public final class TestData {
             public static final String ALPHANUMERIC = "Friend1";
             public static final String ALPHANUMERIC_SPACES = "2023 tutorial classmate";
 
-            public static final String FLAG_ALPHANUMERIC = " " + PREFIX_TAG + Tag.ALPHANUMERIC;
-            public static final String FLAG_ALPHANUMERIC_SPACES = " " + PREFIX_TAG + Tag.ALPHANUMERIC_SPACES;
+            public static final String FLAG = " " + PREFIX_TAG;
+            public static final String FLAG_ALPHANUMERIC = Tag.FLAG + Tag.ALPHANUMERIC;
+            public static final String FLAG_ALPHANUMERIC_SPACES = Tag.FLAG + Tag.ALPHANUMERIC_SPACES;
         }
 
         public static final class Contact {
@@ -169,7 +170,7 @@ public final class TestData {
             public static final String HASHTAG = "#WrongKindOfTag";
             public static final String UNDERSCORE_DASH = "kebab-snake_case";
 
-            public static final String FLAG_HASHTAG = " " + PREFIX_TAG + Tag.HASHTAG;
+            public static final String FLAG_HASHTAG = TestData.Valid.Tag.FLAG + Tag.HASHTAG;
         }
     }
 
