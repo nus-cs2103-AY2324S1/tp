@@ -133,7 +133,7 @@ public class EditTransactionCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will
+     * Stores the details to edit the transaction with. Each non-empty field value will
      * replace the
      * corresponding field value of the person.
      */
