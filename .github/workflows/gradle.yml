@@ -42,6 +42,6 @@ jobs:
         if: runner.os == 'Linux'
         uses: codecov/codecov-action@v3
         env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+          CODECOV_TOKEN: 53d8156f-bd1e-43cd-9582-fa2b59f2f9dd
         with:
-          fail_ci_if_error: false
+          fail_ci_if_error: true
