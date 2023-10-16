@@ -6,6 +6,8 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.band.Band;
+import seedu.address.model.band.UniqueBandList;
 import seedu.address.model.musician.Musician;
 import seedu.address.model.musician.UniqueMusicianList;
 
@@ -16,10 +18,12 @@ import seedu.address.model.musician.UniqueMusicianList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniqueMusicianList musicians;
+    private final UniqueBandList bands;
 
 
     {
         musicians = new UniqueMusicianList();
+        bands = new UniqueBandList();
     }
 
     public AddressBook() {
@@ -89,6 +93,23 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void removeMusician(Musician key) {
         musicians.remove(key);
     }
+
+    /**
+     * Adds a band to the address book.
+     * The band must not already exist in the address book.
+     */
+    public void addBand(Band band) {
+        bands.add(band);
+    }
+
+    /**
+     * Returns true if a band with the same identity as {@code musician} exists in the address book.
+     */
+    public boolean hasBand(Band band) {
+        requireNonNull(band);
+        return bands.contains(band);
+    }
+
 
     //// util methods
 

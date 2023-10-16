@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.band.Band;
 import seedu.address.model.musician.Musician;
 
 /**
@@ -85,4 +86,15 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredMusicianList(Predicate<Musician> predicate);
+
+    /**
+     * Returns true if a band with the same identity as {@code band} exists in the address book.
+     */
+    boolean hasBand(Band band);
+
+    /**
+     * Adds the given band.
+     * {@code band} must not already exist in the address book.
+     */
+    void addBand(Band band);
 }

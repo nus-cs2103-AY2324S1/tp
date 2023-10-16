@@ -17,7 +17,7 @@ import seedu.address.model.tag.Tag;
  */
 public class Band {
 
-    private final Name name;
+    private final BandName name;
 
     private final Set<Tag> genres = new HashSet<>();
 
@@ -26,14 +26,14 @@ public class Band {
     /**
      * Every field must be present and not null.
      */
-    public Band(Name name, Set<Tag> genreTags, Set<Musician> musicians) {
+    public Band(BandName name, Set<Tag> genreTags, Set<Musician> musicians) {
         requireAllNonNull(name, genreTags, musicians);
         this.name = name;
         this.genres.addAll(genreTags);
         this.musicians.addAll(musicians);
     }
 
-    public Name getName() {
+    public BandName getName() {
         return name;
     }
 
@@ -43,6 +43,14 @@ public class Band {
 
     public Set<Musician> getMusicians() {
         return Collections.unmodifiableSet(musicians);
+    }
+
+    public boolean isSameBand(Band otherBand) {
+        if (otherBand == this) {
+            return true;
+        }
+        return otherBand != null
+                && otherBand.getName().equals(getName());
     }
 
     @Override
