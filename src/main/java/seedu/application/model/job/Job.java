@@ -14,7 +14,7 @@ public class Job {
     // Identity fields
     private final Role role;
     private final Company company;
-    private Deadline deadline;
+    private final Deadline deadline;
 
     /**
      * Not all fields are compulsory
