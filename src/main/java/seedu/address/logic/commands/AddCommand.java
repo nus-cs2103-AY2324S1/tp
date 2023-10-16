@@ -2,8 +2,9 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PATIENT_TAG;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICALHISTORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -15,7 +16,9 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonType;
 
 /**
  * Adds a person to the address book.
@@ -26,15 +29,15 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
             + "Specify whether the person is a patient or specialist using the "
-            + PATIENT_TAG + " or " + SPECIALIST_TAG + " tags. "
+            + PATIENT_TAG + " or " + SPECIALIST_TAG + " tags. \n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_ADDRESS + "ADDRESS "
+            + PREFIX_LOCATION + "LOCATION "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "If the person is a patient, add their medical history by using the "
-            + PREFIX_MEDICALHISTORY + " prefix. \n"
+            + "If the person is a patient, add their age and medical history by using the "
+            + PREFIX_AGE + " and " + PREFIX_MEDICALHISTORY + " prefix respectively. \n"
             + "If the person is a specialist, add their specialty by using the "
             + PREFIX_SPECIALTY + " prefix. \n"
             + "Example: " + COMMAND_WORD + " "
@@ -42,9 +45,10 @@ public class AddCommand extends Command {
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
+            + PREFIX_LOCATION + "311, Clementi Ave 2, #02-25 "
             + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney"
+            + PREFIX_TAG + "owesMoney "
+            + PREFIX_AGE + "30 "
             + PREFIX_MEDICALHISTORY + "Osteoporosis";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
@@ -69,6 +73,11 @@ public class AddCommand extends Command {
         }
 
         model.addPerson(toAdd);
+        if (toAdd instanceof Patient) {
+            model.updateFilteredPersonList(PersonType.PATIENT.getSearchPredicate());
+        } else {
+            model.updateFilteredPersonList(PersonType.SPECIALIST.getSearchPredicate());
+        }
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

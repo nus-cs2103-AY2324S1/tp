@@ -5,10 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LOCATION_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SPECIALTY_ORTHOPAEDIC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
 import org.junit.jupiter.api.Test;
@@ -51,14 +52,20 @@ public class EditSpecialistDescriptorTest {
                 .withEmail(VALID_EMAIL_AMY).build();
         assertFalse(DESC_BOB.equals(editedBob));
 
-        // different address -> returns false
-        editedBob = (EditSpecialistDescriptor) new EditSpecialistDescriptorBuilder(DESC_BOB)
-                .withAddress(VALID_ADDRESS_AMY).build();
+        // different location -> returns false
+        editedBob = new EditSpecialistDescriptorBuilder(DESC_BOB)
+                .withLocation(VALID_LOCATION_AMY).build();
+        assertFalse(DESC_BOB.equals(editedBob));
+
+        // different specialty -> returns false
+        editedBob = new EditSpecialistDescriptorBuilder(DESC_BOB)
+                .withSpecialty(VALID_SPECIALTY_ORTHOPAEDIC).build();
         assertFalse(DESC_BOB.equals(editedBob));
 
         // different tags -> returns false
         editedBob = (EditSpecialistDescriptor) new EditSpecialistDescriptorBuilder(DESC_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
+        assertFalse(DESC_BOB.equals(editedBob));
     }
 
     @Test
@@ -67,9 +74,9 @@ public class EditSpecialistDescriptorTest {
         String expected = EditSpecialistDescriptor.class.getCanonicalName() + "{name="
                 + editSpecialistDescriptor.getName().orElse(null) + ", phone="
                 + editSpecialistDescriptor.getPhone().orElse(null) + ", email="
-                + editSpecialistDescriptor.getEmail().orElse(null) + ", address="
-                + editSpecialistDescriptor.getAddress().orElse(null) + ", tags="
-                + editSpecialistDescriptor.getTags().orElse(null) + ", specialty="
+                + editSpecialistDescriptor.getEmail().orElse(null) + ", tags="
+                + editSpecialistDescriptor.getTags().orElse(null) + ", location="
+                + editSpecialistDescriptor.getLocation().orElse(null) + ", specialty="
                 + editSpecialistDescriptor.getSpecialty().orElse(null) + "}";
         assertEquals(expected, editSpecialistDescriptor.toString());
     }

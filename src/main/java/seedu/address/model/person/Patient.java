@@ -11,14 +11,23 @@ import seedu.address.model.tag.Tag;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Patient extends Person {
+    private final Age age;
     private final MedicalHistory medicalHistory;
 
     /**
      * Every field must be present and not null.
      */
-    public Patient(Name name, Phone phone, Email email, Address address, Set<Tag> tags, MedicalHistory medicalHistory) {
-        super(name, phone, email, address, tags);
+
+
+    public Patient(Name name, Phone phone, Email email, Set<Tag> tags, Age age,
+                   MedicalHistory medicalHistory) {
+        super(name, phone, email, tags);
+        this.age = age;
         this.medicalHistory = medicalHistory;
+    }
+
+    public Age getAge() {
+        return age;
     }
 
     public MedicalHistory getMedicalHistory() {
@@ -26,7 +35,7 @@ public class Patient extends Person {
     }
     @Override
     public String toString() {
-        String stringToAdd = ", medical history=" + medicalHistory;
+        String stringToAdd = ", age=" + age + ", medical history=" + medicalHistory;
         return StringUtil.addFieldToPersonToString(stringToAdd, super.toString());
     }
     @Override
@@ -41,11 +50,8 @@ public class Patient extends Person {
         }
 
         Patient otherPatient = (Patient) other;
-        return super.getName().equals(otherPatient.getName())
-                && super.getPhone().equals(otherPatient.getPhone())
-                && super.getEmail().equals(otherPatient.getEmail())
-                && super.getAddress().equals(otherPatient.getAddress())
-                && super.getTags().equals(otherPatient.getTags())
+        return super.equals(other)
+                && age.equals(otherPatient.getAge())
                 && medicalHistory.equals(otherPatient.medicalHistory);
     }
 }
