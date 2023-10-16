@@ -1,6 +1,7 @@
 package seedu.application.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_STATUS;
 
 import java.util.List;
 
@@ -10,30 +11,37 @@ import seedu.application.logic.Messages;
 import seedu.application.logic.commands.exceptions.CommandException;
 import seedu.application.model.Model;
 import seedu.application.model.job.Job;
+import seedu.application.model.job.Status;
 
 /**
- * Deletes a job identified using it's displayed index from the application book.
+ * Adds a person to the application book.
  */
-public class DeleteCommand extends Command {
+public class MarkCommand extends Command {
 
-    public static final String COMMAND_WORD = "delete";
+    public static final String COMMAND_WORD = "mark";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the job identified by the index number used in the displayed job list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + ": Marks the status of the job identified by the index number used in the displayed job list.\n"
+            + "Parameters: "
+            + "INDEX (must be a positive integer) "
+            + PREFIX_STATUS + "STATUS\n"
+            + "Example: " + COMMAND_WORD + " 1" + " s/pending.";
 
-    public static final String MESSAGE_DELETE_JOB_SUCCESS = "Deleted Job: %1$s";
+    public static final String MESSAGE_MARK_JOB_SUCCESS = "Marked job status of the specified application.";
+    public static final String MESSAGE_MARK_JOB_FAILURE = "Unable to mark the job status of the specified application.";
 
     private final Index targetIndex;
+
+    private final Status status;
 
     /**
      * Constructs a DeleteCommand with the specified target index.
      *
      * @param targetIndex The index of the job to be deleted.
      */
-    public DeleteCommand(Index targetIndex) {
+    public MarkCommand(Index targetIndex, Status status) {
         this.targetIndex = targetIndex;
+        this.status = status;
     }
 
     /**
@@ -52,9 +60,13 @@ public class DeleteCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_JOB_DISPLAYED_INDEX);
         }
 
-        Job jobToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deleteJob(jobToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_JOB_SUCCESS, Messages.format(jobToDelete)));
+        Job jobToMark = lastShownList.get(targetIndex.getZeroBased());
+        Job markedJob = new Job(
+                jobToMark.getRole(), jobToMark.getCompany(), status, jobToMark.getDeadline());
+
+        model.setJob(jobToMark, markedJob);
+        model.updateFilteredJobList(Model.PREDICATE_SHOW_ALL_JOBS);
+        return new CommandResult(String.format(MESSAGE_MARK_JOB_SUCCESS, Messages.format(markedJob)));
     }
 
     /**
@@ -70,12 +82,12 @@ public class DeleteCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeleteCommand)) {
+        if (!(other instanceof MarkCommand)) {
             return false;
         }
 
-        DeleteCommand otherDeleteCommand = (DeleteCommand) other;
-        return targetIndex.equals(otherDeleteCommand.targetIndex);
+        MarkCommand otherMarkCommand = (MarkCommand) other;
+        return targetIndex.equals(otherMarkCommand.targetIndex) && status.equals(otherMarkCommand.status);
     }
 
     /**

@@ -8,16 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.application.commons.core.LogsCenter;
-import seedu.application.logic.commands.AddCommand;
-import seedu.application.logic.commands.ClearCommand;
-import seedu.application.logic.commands.Command;
-import seedu.application.logic.commands.DeadlineCommand;
-import seedu.application.logic.commands.DeleteCommand;
-import seedu.application.logic.commands.EditCommand;
-import seedu.application.logic.commands.ExitCommand;
-import seedu.application.logic.commands.FindCommand;
-import seedu.application.logic.commands.HelpCommand;
-import seedu.application.logic.commands.ListCommand;
+import seedu.application.logic.commands.*;
 import seedu.application.logic.parser.exceptions.ParseException;
 
 /**
@@ -80,6 +71,9 @@ public class ApplicationBookParser {
 
         case DeadlineCommand.COMMAND_WORD:
             return new DeadlineCommandParser().parse(arguments);
+
+        case MarkCommand.COMMAND_WORD:
+            return new MarkCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
