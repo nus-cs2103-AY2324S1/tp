@@ -96,4 +96,21 @@ public interface Model {
      * Links the Ui of the Application.
      */
     void linkUi(Ui ui);
+
+    /**
+     * Gets the current app state.
+     */
+    String getState();
+
+    /**
+     * Sets the app state.
+     * @param state New app state
+     */
+    void setState(String state);
+
+    /**
+     * Checks if the given state is the same as the current app state.
+     * @param state State to check against app
+     */
+    boolean sameState(String state);
 }

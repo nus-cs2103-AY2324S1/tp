@@ -32,9 +32,10 @@ public class PersonListPanel extends UiPart<Region> {
     public PersonListPanel(Logic logic) {
         super(FXML);
         this.logic = logic;
-        this.reRenderUi = logic.getRefreshListUi();
+        this.reRenderUi = logic.getRefreshListUi(); // Connect to the logic manager's boolean flag
         personListView.setItems(logic.getFilteredPersonList());
         personListView.setCellFactory(listView -> new PersonListViewCell());
+        // Listens for a change in reRenderUi value and updates UI, the actual value is irrelevant
         reRenderUi.addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {

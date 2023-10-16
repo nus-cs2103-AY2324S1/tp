@@ -42,6 +42,22 @@ public class ShowCommand extends Command {
 
         Person personToShow = lastShownList.get(targetIndex.getZeroBased());
         model.showPerson(personToShow);
+
+        // Handle different cases of show command based on app state
+        switch (model.getState()) {
+        case "STUDENTS":
+            // Show student details
+            System.out.println("in students state");
+            break;
+        case "SCHEDULE":
+            // Show lesson details
+            System.out.println("in schedule state");
+            break;
+        default:
+            System.out.println("Unknown state");
+            break;
+        }
+
         return new CommandResult(String.format(MESSAGE_SHOW_PERSON_SUCCESS, Messages.format(personToShow)));
     }
 }

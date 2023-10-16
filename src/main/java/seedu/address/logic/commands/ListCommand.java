@@ -15,22 +15,24 @@ public class ListCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Showing list";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Displays the specified list, which can be a "
-            + "student list, schedule list, task list. Default command without "
-            + "keywords displays the student list.\n"
-            + "Parameters: [KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " tasks";
+            + "STUDENTS list or SCHEDULE list. Default command without "
+            + "specified list displays the schedule list. When specifying STUDENTS list,"
+            + "optional parameters can be used to specify what student details to display\n"
+            + "Parameters: [LIST] [KEYWORDS]...\n"
+            + "Example: " + COMMAND_WORD + " SCHEDULE\n"
+            + "Example: " + COMMAND_WORD + " STUDENTS phone email\n";
 
-    private final String panel;
+    private final String state;
     private final String[] displayParams;
 
     /**
      * Creates a list command.
      *
-     * @param panel Name of the panel to display.
+     * @param state Name of the state.
      * @param displayParams Array of strings specifying details to display for each student.
      */
-    public ListCommand(String panel, String[] displayParams) {
-        this.panel = panel;
+    public ListCommand(String state, String[] displayParams) {
+        this.state = state;
         this.displayParams = displayParams;
     }
 
@@ -38,18 +40,19 @@ public class ListCommand extends Command {
         this("", new String[0]);
     }
 
-    public ListCommand(String panel) {
-        this(panel, new String[0]);
+    public ListCommand(String state) {
+        this(state, new String[0]);
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        if (panel.equals("")) {
+        if (state.equals("") || model.sameState(state)) {
             return new CommandResult(MESSAGE_SUCCESS, displayParams);
         } else {
-            return new CommandResult(MESSAGE_SUCCESS, panel, displayParams);
+            model.setState(state); // Only can pass in "STUDENTS" or "SCHEDULE", has been filtered by parser
+            return new CommandResult(MESSAGE_SUCCESS, state, displayParams);
         }
     }
 }

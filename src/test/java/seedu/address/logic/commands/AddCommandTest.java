@@ -168,6 +168,21 @@ public class AddCommandTest {
         public void linkUi(Ui ui) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public String getState() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setState(String state) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean sameState(String state) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

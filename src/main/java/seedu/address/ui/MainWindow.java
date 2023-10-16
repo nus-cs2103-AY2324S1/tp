@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
@@ -35,16 +36,15 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
-    private TaskListPanel taskListPanel;
+    private ScheduleListPanel scheduleListPanel;
+    private StudentDetailListPanel studentDetailListPanel;
+    private LessonDetailListPanel lessonDetailListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private ShowPersonWindow showPersonWindow;
 
     @FXML
     private AnchorPane showPersonPanelPlaceholder;
-
-    /** Panel currently displayed, default is students panel**/
-    private String activePanel = "STUDENTS";
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -58,15 +58,28 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane personListPanelPlaceholder;
 
     @FXML
-    private VBox taskList;
+    private VBox scheduleList;
     @FXML
-    private StackPane taskListPanelPlaceholder;
+    private StackPane scheduleListPanelPlaceholder;
+
+    @FXML
+    private VBox studentDetailList;
+    @FXML
+    private StackPane studentDetailListPanelPlaceholder;
+
+    @FXML
+    private VBox lessonDetailList;
+    @FXML
+    private StackPane lessonDetailListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private SplitPane contentSplitPane;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -132,10 +145,14 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic);
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        taskListPanel = new TaskListPanel(logic);
-        taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
-        taskList.setVisible(false);
-        taskList.setManaged(false);
+        scheduleListPanel = new ScheduleListPanel(logic);
+        scheduleListPanelPlaceholder.getChildren().add(scheduleListPanel.getRoot());
+
+        studentDetailListPanel = new StudentDetailListPanel(logic);
+        studentDetailListPanelPlaceholder.getChildren().add(studentDetailListPanel.getRoot());
+
+        lessonDetailListPanel = new LessonDetailListPanel(logic);
+        lessonDetailListPanelPlaceholder.getChildren().add(lessonDetailListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -146,25 +163,7 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
-    }
-
-    void hidePanels() {
-        personList.setVisible(false);
-        personList.setManaged(false);
-        taskList.setVisible(false);
-        taskList.setManaged(false);
-    }
-
-    void setTaskListPanel() {
-        taskList.setVisible(true);
-        taskList.setManaged(true);
-        activePanel = "TASKS";
-    }
-
-    void setPersonListPanel() {
-        personList.setVisible(true);
-        personList.setManaged(true);
-        activePanel = "STUDENTS";
+        contentSplitPane.getItems().removeAll(personList, studentDetailList);
     }
 
     /**
@@ -230,25 +229,23 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
-            if (commandResult.getPanel() != "") {
-                String newPanel = commandResult.getPanel();
-                if (!newPanel.equals(activePanel)) {
-                    hidePanels();
-                    switch (newPanel) {
-                    case "TASKS":
-                        setTaskListPanel();
-                        break;
-                    case "STUDENTS":
-                        setPersonListPanel();
-                        break;
-                    default:
-                        System.out.println("unknown panel asked for");
-                        break;
-                    }
-
+            if (!commandResult.getState().equals("")) {
+                String state = commandResult.getState();
+                double[] dividerPositions = contentSplitPane.getDividerPositions();
+                switch (state) {
+                case "SCHEDULE":
+                    contentSplitPane.getItems().removeAll(personList, studentDetailList);
+                    contentSplitPane.getItems().addAll(scheduleList, lessonDetailList);
+                    break;
+                case "STUDENTS":
+                    contentSplitPane.getItems().removeAll(scheduleList, lessonDetailList);
+                    contentSplitPane.getItems().addAll(personList, studentDetailList);
+                    break;
+                default:
+                    System.out.println("unknown panel asked for");
+                    break;
                 }
-            } else {
-                System.out.println("empty chosen panel");
+                contentSplitPane.setDividerPositions(dividerPositions);
             }
 
             return commandResult;
