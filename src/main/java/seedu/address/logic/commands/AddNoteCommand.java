@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.note.Note;
@@ -41,5 +42,31 @@ public class AddNoteCommand extends AddCommand {
         person.addNote(this.toAdd);
 
         return new CommandResult(MESSAGE_SUCCESS + toAdd.getTitle());
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof AddNoteCommand)) {
+            return false;
+        }
+
+        AddNoteCommand otherAddNoteCommand = (AddNoteCommand) other;
+
+        boolean equalToAdd = toAdd.equals(otherAddNoteCommand.toAdd);
+        boolean equalContactId = (contactId == otherAddNoteCommand.contactId);
+        return equalToAdd && equalContactId;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("toAdd", toAdd)
+                .add("contactId", contactId)
+                .toString();
     }
 }

@@ -19,6 +19,21 @@ public class NoteTitle {
     }
 
     @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof NoteTitle)) {
+            return false;
+        }
+
+        NoteTitle otherNoteTitle = (NoteTitle) other;
+        return title.equals(otherNoteTitle.title);
+    }
+
+    @Override
     public String toString() {
         return this.title;
     }
