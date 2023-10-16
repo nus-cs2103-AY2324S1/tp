@@ -65,7 +65,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_find() throws Exception {
-        assertTrue(parser.parseCommand(FindCommand.COMMAND_WORD + " n/foo n/bar t/baz")
+        assertTrue(parser.parseCommand(FindCommand.COMMAND_WORD + " n/foo && n/bar || t/baz")
                 instanceof FindCommand);
     }
 
