@@ -134,16 +134,16 @@ public class EditCommandTest {
 
     @Test
     public void findPersonToEdit_inconsistentNameAndID_throwsCommandException() {
-        Person John = new PersonBuilder().withName("John Doe").withNric("S1234567A").build();
-        Person Jane = new PersonBuilder().withName("Jane Smith").withNric("S7654321B").build();
+        Person john = new PersonBuilder().withName("John Doe").withNric("S1234567A").build();
+        Person jane = new PersonBuilder().withName("Jane Smith").withNric("S7654321B").build();
 
         EditPersonDescriptor descriptor = new EditPersonDescriptor();
         EditCommand editCommand = new EditCommand(new Name("John Doe"), new Nric("S7654321B"), descriptor);
 
         // Add persons to a list
         List<Person> persons = new ArrayList<>();
-        persons.add(John);
-        persons.add(Jane);
+        persons.add(john);
+        persons.add(jane);
 
         String expectedMessage = EditCommand.MESSAGE_INCONSISTENT_NAME_AND_ID;
 
