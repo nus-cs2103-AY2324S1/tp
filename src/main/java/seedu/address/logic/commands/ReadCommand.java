@@ -7,7 +7,6 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 import java.util.List;
-import java.util.function.Predicate;
 
 import static java.util.Objects.requireNonNull;
 
@@ -33,10 +32,12 @@ public class ReadCommand extends Command {
     private final String field;
 
     /**
-     * Constructs a ReadCommand to read the information of the specified field from a person at the given index.
+     * Constructs a ReadCommand to read the information of the specified field from
+     * a person at the given index.
      *
      * @param index The index of the person in the last displayed list.
-     * @param field The field to read (e.g., "p" for phone, "a" for address, "e" for email).
+     * @param field The field to read (e.g., "p" for phone, "a" for address, "e" for
+     *              email).
      */
     public ReadCommand(Index index, String field) {
         this.targetIndex = index;
@@ -56,7 +57,7 @@ public class ReadCommand extends Command {
         String fieldStr = fieldToString(personToRead);
         model.setSpecificPersonToDisplay(personToRead);
 
-        return new CommandResult(String.format(MESSAGE_READ_PERSON_SUCCESS,field), true, fieldStr);
+        return new CommandResult(String.format(MESSAGE_READ_PERSON_SUCCESS, field), true, fieldStr);
     }
 
     /**
@@ -66,13 +67,13 @@ public class ReadCommand extends Command {
      * @return The information specified by the field.
      * @throws CommandException if the field is invalid.
      */
-    public String fieldToString( Person person) throws CommandException {
-        if(field.equals("p")) {
-           return person.getPhone().value;
-        } else if(field.equals("a")) {
+    public String fieldToString(Person person) throws CommandException {
+        if (field.equals("p")) {
+            return person.getPhone().value;
+        } else if (field.equals("a")) {
             return person.getAddress().value;
-        } else if(field.equals("e")) {
-            return  person.getEmail().value;
+        } else if (field.equals("e")) {
+            return person.getEmail().value;
         } else {
             throw new CommandException(Messages.MESSAGE_INVALID_FIELD_TO_READ);
         }
