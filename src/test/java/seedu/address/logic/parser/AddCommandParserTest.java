@@ -32,20 +32,23 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Person expectedPerson = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
+        Person expectedPerson = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND)
+                .withFinancialPlans(VALID_FINANCIAL_PLAN_1, VALID_FINANCIAL_PLAN_2).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + NEXT_OF_KIN_NAME_DESC_BOB + NEXT_OF_KIN_PHONE_DESC_BOB + TAG_DESC_FRIEND,
+                + ADDRESS_DESC_BOB + NEXT_OF_KIN_NAME_DESC_BOB + NEXT_OF_KIN_PHONE_DESC_BOB + FINANCIAL_PLAN_DESC_1
+                        + FINANCIAL_PLAN_DESC_2 + TAG_DESC_FRIEND,
                 new AddCommand(expectedPerson));
 
 
         // multiple tags - all accepted
         Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
-                .build();
+                .withFinancialPlans(VALID_FINANCIAL_PLAN_1, VALID_FINANCIAL_PLAN_2).build();
         assertParseSuccess(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + NEXT_OF_KIN_NAME_DESC_BOB
-                        + NEXT_OF_KIN_PHONE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                        + NEXT_OF_KIN_PHONE_DESC_BOB + TAG_DESC_HUSBAND + FINANCIAL_PLAN_DESC_1 + FINANCIAL_PLAN_DESC_2
+                        + TAG_DESC_FRIEND,
                 new AddCommand(expectedPersonMultipleTags));
     }
 
@@ -138,7 +141,7 @@ public class AddCommandParserTest {
         // zero tags
         Person expectedPerson = new PersonBuilder(AMY).withTags().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                + NEXT_OF_KIN_NAME_DESC_AMY + NEXT_OF_KIN_PHONE_DESC_AMY,
+                + NEXT_OF_KIN_NAME_DESC_AMY + FINANCIAL_PLAN_DESC_1 + NEXT_OF_KIN_PHONE_DESC_AMY,
                 new AddCommand(expectedPerson));
     }
 
