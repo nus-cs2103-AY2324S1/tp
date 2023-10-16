@@ -36,11 +36,13 @@ public class Tag {
      * @param tagName A valid tag name.
      */
     public static Tag of(String tagName) {
-        Tag foundTag = TAGS.get(tagName);
-        if(foundTag != null) {
-            return foundTag;
+        if(TAGS.containsKey(tagName)) {
+            return TAGS.get(tagName);
         }
-        return new Tag(tagName);
+
+        Tag newTag = new Tag(tagName);
+        TAGS.put(tagName, newTag);
+        return newTag;
     }
 
     /**
