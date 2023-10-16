@@ -159,4 +159,19 @@ public class ParserUtil {
         }
         return result;
     }
+
+    /**
+     * Parses a {@code String type} into a {@code String}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code type} is invalid.
+     */
+    public static String parseType(String type) throws ParseException {
+        requireNonNull(type);
+        String trimmedType = type.trim();
+        if (!Interview.isValidType(trimmedType)) {
+            throw new ParseException(Interview.MESSAGE_CONSTRAINTS);
+        }
+        return trimmedType.toLowerCase();
+    }
 }

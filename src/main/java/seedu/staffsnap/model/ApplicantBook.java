@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import seedu.staffsnap.commons.util.ToStringBuilder;
 import seedu.staffsnap.model.applicant.Applicant;
 import seedu.staffsnap.model.applicant.UniqueApplicantList;
+import seedu.staffsnap.model.interview.Interview;
 
 /**
  * Wraps all data at the address-book level

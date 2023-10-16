@@ -167,4 +167,7 @@ public class Applicant implements Comparable<Applicant> {
         }
     }
 
+    public void setInterview(Interview interviewToAdd) {
+        interviews.add(interviewToAdd);
+    }
 }

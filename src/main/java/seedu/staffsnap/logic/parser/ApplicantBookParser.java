@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 
 import seedu.staffsnap.commons.core.LogsCenter;
 import seedu.staffsnap.logic.commands.AddCommand;
+import seedu.staffsnap.logic.commands.AddInterviewCommand;
 import seedu.staffsnap.logic.commands.ClearCommand;
 import seedu.staffsnap.logic.commands.Command;
 import seedu.staffsnap.logic.commands.DeleteCommand;
@@ -39,7 +40,9 @@ public class ApplicantBookParser {
      * @throws ParseException if the user input does not conform the expected format
      */
     public Command parseCommand(String userInput) throws ParseException {
+
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
+
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
@@ -80,6 +83,9 @@ public class ApplicantBookParser {
 
         case SortCommand.COMMAND_WORD:
             return new SortCommandParser().parse(arguments);
+
+        case AddInterviewCommand.COMMAND_WORD:
+            return new AddInterviewCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
