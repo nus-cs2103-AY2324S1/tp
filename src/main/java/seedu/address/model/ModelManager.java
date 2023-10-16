@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.util.Pair;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.meeting.Meeting;
@@ -154,18 +155,13 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Person getViewedPerson() {
-        return viewedPerson;
-    }
-
-    @Override
     public void setViewedMeeting(Meeting meeting) {
         viewedMeeting = meeting;
     }
 
     @Override
-    public Meeting getViewedMeeting() {
-        return viewedMeeting;
+    public Pair<Person, Meeting> getViewedItems() {
+        return new Pair<>(viewedPerson, viewedMeeting);
     }
 
     //=========== Filtered Person List Accessors =============================================================

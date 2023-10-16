@@ -120,4 +120,12 @@ public class Meeting {
                 .add("attendees", attendees)
                 .toString();
     }
+
+    /**
+     * Returns detailed information of Meeting for viewm command.
+     */
+    public String toDisplayString() {
+        return String.format("Title: %s\nLocation: %s\nStart: %s\nEnd: %s\nAttendees: %s\n", title, location
+                , meetingTime.getStart(), meetingTime.getEnd(), attendees);
+    }
 }

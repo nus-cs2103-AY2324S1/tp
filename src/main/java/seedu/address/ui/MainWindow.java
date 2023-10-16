@@ -194,7 +194,7 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             // Insert Person object into infoDisplay for viewc
-            infoDisplayPanel.setViewedPerson(logic.getViewedPerson());
+            infoDisplayPanel.setViewedPerson(logic.getViewedItems());
 
             if (commandResult.isShowHelp()) {
                 handleHelp();

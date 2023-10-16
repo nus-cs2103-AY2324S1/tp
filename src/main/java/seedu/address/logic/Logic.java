@@ -3,6 +3,7 @@ package seedu.address.logic;
 import java.nio.file.Path;
 
 import javafx.collections.ObservableList;
+import javafx.util.Pair;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -53,12 +54,7 @@ public interface Logic {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Forwards viewed Person to UI from Logic.
+     * Forwards viewed Person and Meeting to UI from Logic.
      */
-    Person getViewedPerson();
-
-    /**
-     * Forwards viewed Meeting to UI from Logic.
-     */
-    Meeting getViewedMeeting();
+    Pair<Person, Meeting> getViewedItems();
 }
