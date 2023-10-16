@@ -41,4 +41,24 @@ public class Note {
         String result = this.getTitle() + " (content: " + this.getContent() + ")";
         return result;
     }
+
+    /**
+     * Returns true if both notes have the same identity and data fields.
+     * This defines a stronger notion of equality between two notes.
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Note)) {
+            return false;
+        }
+
+        Note otherNote = (Note) other;
+        return title.equals(otherNote.title)
+                && content.equals(otherNote.content);
+    }
 }
