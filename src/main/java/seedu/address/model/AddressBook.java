@@ -122,9 +122,19 @@ public class AddressBook implements ReadOnlyAddressBook {
         AddressBook otherAddressBook = (AddressBook) other;
         return persons.equals(otherAddressBook.persons);
     }
-
     @Override
     public int hashCode() {
         return persons.hashCode();
+    }
+
+    public int getNextID() {
+        //TODO: works for now, change later to something more efficient.
+        int maxID = 0;
+        for (Person p : persons) {
+            if (p.getId() > maxID) {
+                maxID = p.getId();
+            }
+        }
+        return maxID + 1;
     }
 }

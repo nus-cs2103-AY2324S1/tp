@@ -46,6 +46,8 @@ public class PersonCard extends UiPart<Region> {
     private Label telegram;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label uniqueId;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -71,5 +73,7 @@ public class PersonCard extends UiPart<Region> {
         person.getNonEmergencyTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        uniqueId.setText(Integer.toString(person.getId()));
+
     }
 }

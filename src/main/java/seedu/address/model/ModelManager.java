@@ -160,4 +160,11 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
 
+    /*
+        * Returns the next ID to be used for a new person.
+     */
+    public int getNextID() {
+        return addressBook.getNextID();
+    }
+
 }

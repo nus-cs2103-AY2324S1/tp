@@ -169,6 +169,11 @@ public class AddCommandTest {
         public List<Event> getEventList() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public int getNextID() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

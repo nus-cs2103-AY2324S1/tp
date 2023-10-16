@@ -30,6 +30,7 @@ public class Person {
     private Optional<Email> secondaryEmail;
     private Optional<Telegram> telegram;
     private final Set<Tag> tags = new HashSet<>();
+    private int id = 0;
 
     /**
      * Every field must be present and not null.
@@ -129,6 +130,14 @@ public class Person {
             .collect(Collectors.toSet());
     }
 
+    public int getId() {
+        return id;
+    }
+    public int setId(int id) {
+        this.id = id;
+        return id;
+    }
+
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
@@ -141,6 +150,7 @@ public class Person {
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
     }
+
 
     /**
      * Returns true if both persons have the same identity and data fields.
