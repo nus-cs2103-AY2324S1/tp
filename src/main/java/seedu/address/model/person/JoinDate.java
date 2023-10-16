@@ -1,13 +1,18 @@
 package seedu.address.model.person;
 
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
+/**
+ * Represents a Person's join date in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidJoinDate(String)}
+ */
 public class JoinDate {
-    public static final String MESSAGE_CONSTRAINTS = "Join date should be in the form of DD/MM/YYYY. Eg. 12/02/2023 represents 12th Feb 2023";
+    public static final String MESSAGE_CONSTRAINTS = "Join date should be in the form of DD/MM/YYYY. "
+        + "Eg. 12/02/2023 represents 12th Feb 2023";
 
     public final String value;
 

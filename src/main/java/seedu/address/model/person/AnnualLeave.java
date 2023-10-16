@@ -3,9 +3,14 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents a Person's annual leave in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidAnnualLeave(String)}
+ */
 public class AnnualLeave {
     public static final String MESSAGE_CONSTRAINTS =
-            "Number of days of annual leave remaining should only contain numerical digits. It should not contain dashes or spaces.";
+            "Number of days of annual leave remaining should only contain numerical digits. "
+                + "It should not contain dashes or spaces.";
 
     /*
      * The first character of the annual leave must not be a whitespace,
