@@ -1,0 +1,103 @@
+{
+  "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
+  "patients": [
+    {
+      "name": "Alice Pauline",
+      "phone": "94351253",
+      "email": "alice@example.com",
+      "address": "123, Jurong West Ave 6, #08-111",
+      "remark": "She likes aardvarks.",
+      "gender": "F",
+      "ic": "T0131267K",
+      "tags": [
+        "friends"
+      ],
+      "condition": "NA",
+      "bloodType": "O+",
+      "emergencyContact": "90234567"
+    },
+    {
+      "name": "Benson Meier",
+      "phone": "98765432",
+      "email": "johnd@example.com",
+      "address": "311, Clementi Ave 2, #02-25",
+      "remark": "He can't take beer!",
+      "gender": "M",
+      "ic": "T0131268K",
+      "tags": [
+        "owesMoney",
+        "friends"
+      ],
+      "condition": "Type 1 Diabetes",
+      "bloodType": "O-",
+      "emergencyContact": "92234567"
+    },
+    {
+      "name": "Carl Kurz",
+      "phone": "95352563",
+      "email": "heinz@example.com",
+      "address": "wall street",
+      "remark": "She likes aardvarks.",
+      "gender": "M",
+      "ic": "T0131269K",
+      "tags": [],
+      "condition": "Type 2 Diabetes",
+      "bloodType": "AB+",
+      "emergencyContact": "91334567"
+    },
+    {
+      "name": "Daniel Meier",
+      "phone": "87652533",
+      "email": "cornelia@example.com",
+      "address": "10th street",
+      "remark": "She likes aardvarks.",
+      "gender": "M",
+      "ic": "T0131260K",
+      "tags": [
+        "friends"
+      ],
+      "condition": "Kidney Failure",
+      "bloodType": "A+",
+      "emergencyContact": "91234567"
+    },
+    {
+      "name": "Elle Meyer",
+      "phone": "9482224",
+      "email": "werner@example.com",
+      "address": "michegan ave",
+      "remark": "She likes aardvarks.",
+      "gender": "F",
+      "ic": "T0131261K",
+      "tags": [],
+      "condition": "Brain Tumour",
+      "bloodType": "B+",
+      "emergencyContact": "91434567"
+    },
+    {
+      "name": "Fiona Kunz",
+      "phone": "9482427",
+      "email": "lydia@example.com",
+      "address": "little tokyo",
+      "remark": "She likes aardvarks.",
+      "gender": "F",
+      "ic": "T0131262K",
+      "tags": [],
+      "condition": "Lung Cancer",
+      "bloodType": "A-",
+      "emergencyContact": "95234567"
+    },
+    {
+      "name": "George Best",
+      "phone": "9482442",
+      "email": "anna@example.com",
+      "address": "4th street",
+      "remark": "She likes aardvarks.",
+      "gender": "M",
+      "ic": "T0131263K",
+      "tags": [],
+      "condition": "Unknown",
+      "bloodType": "B-",
+      "emergencyContact": "91634567"
+    }
+  ]
+}

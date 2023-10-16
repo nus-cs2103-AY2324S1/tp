@@ -22,7 +22,6 @@ import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.PatientBuilder;
-import seedu.address.testutil.PersonBuilder;
 
 public class AddressBookTest {
 
@@ -46,12 +45,12 @@ public class AddressBookTest {
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
+    public void resetData_withDuplicatePatient_throwsDuplicatePersonException() {
         // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Patient editedAlice = new PatientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newPersons);
+        List<Person> newPatients = Arrays.asList(ALICE, editedAlice);
+        AddressBookStub newData = new AddressBookStub(newPatients);
 
         assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
     }
@@ -87,7 +86,7 @@ public class AddressBookTest {
 
     @Test
     public void toStringMethod() {
-        String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPatientList() + "}";
+        String expected = AddressBook.class.getCanonicalName() + "{patients=" + addressBook.getPatientList() + "}";
         assertEquals(expected, addressBook.toString());
     }
 

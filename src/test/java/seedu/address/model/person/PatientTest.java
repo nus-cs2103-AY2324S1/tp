@@ -41,7 +41,7 @@ public class PatientTest {
         Patient editedAlice = new PatientBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).withName(VALID_NAME_BOB)
                 .withGender(VALID_GENDER_MALE).withCondition(VALID_CONDITION_BOB).withBloodType(VALID_BLOODTYPE_BOB)
-                .withEmergencyContact(VALID_CONDITION_BOB).build();
+                .withEmergencyContact(VALID_EMERGENCY_CONTACT_BOB).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // different ic, all other attributes same -> returns false
@@ -103,8 +103,10 @@ public class PatientTest {
     @Test
     public void toStringMethod() {
         String expected = Patient.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
-                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", remark=" + ALICE.getRemark()
-                + ", gender=" + ALICE.getGender() + ", nric=" + ALICE.getIc() + ", tags=" + ALICE.getTags() + "}";
+                + ", emergency contact=" + ALICE.getEmergencyContact() + ", email=" + ALICE.getEmail() + ", address="
+                + ALICE.getAddress() + ", remark=" + ALICE.getRemark() + ", gender=" + ALICE.getGender() + ", nric="
+                + ALICE.getIc() + ", condition=" + ALICE.getCondition() + ", bloodType=" + ALICE.getBloodType()
+                + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

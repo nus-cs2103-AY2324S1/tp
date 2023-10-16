@@ -41,7 +41,7 @@ public class JsonAdaptedPersonTest {
 
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {
-        JsonAdaptedPerson person = new JsonAdaptedPerson(BENSON);
+        JsonAdaptedPatient person = new JsonAdaptedPatient(BENSON);
         assertEquals(BENSON, person.toModelType());
     }
 
