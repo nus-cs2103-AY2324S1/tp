@@ -56,6 +56,7 @@ public class MetricContainsKeywordPredicate implements Predicate<Date> {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("keyword", keyword).toString();
+        return new ToStringBuilder(this).add("keyword", keyword).add("prefix", metric)
+                .toString();
     }
 }
