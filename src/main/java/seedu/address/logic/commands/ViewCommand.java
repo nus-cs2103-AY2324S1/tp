@@ -55,9 +55,6 @@ public class ViewCommand extends Command {
         return String.format(MESSAGE_SUCCESSFUL_VIEW, Messages.format(personToView));
     }
 
-    private void updateUI() {
-
-    }
 
     @Override
     public boolean equals(Object other) {
