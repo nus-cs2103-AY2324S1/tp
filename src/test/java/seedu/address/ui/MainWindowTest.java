@@ -17,10 +17,7 @@ public class MainWindowTest extends MainAppTest {
 
         // verifyThat("#statusbarPlaceholder #statusBarFooter", isVisible());
 
+        verifyThat("#commandBoxPlaceholder", NodeMatchers.isVisible());
 
-
-//        verifyThat("#commandBoxPlaceholder", NodeMatchers.isVisible());
-
-        verifyThat("#menuBar", NodeMatchers.isNotNull());
     }
 }

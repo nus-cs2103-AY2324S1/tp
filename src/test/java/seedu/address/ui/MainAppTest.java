@@ -1,20 +1,23 @@
 package seedu.address.ui;
 
-import javafx.scene.Node;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.MouseButton;
-import javafx.stage.Stage;
+import java.util.concurrent.TimeoutException;
+
+import static org.testfx.api.FxAssert.verifyThat;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
 import org.testfx.matcher.base.NodeMatchers;
+
+import javafx.scene.Node;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseButton;
+import javafx.stage.Stage;
+
 import seedu.address.MainApp;
 
-import java.util.concurrent.TimeoutException;
-
-import static org.testfx.api.FxAssert.verifyThat;
 
 public class MainAppTest extends ApplicationTest {
 
