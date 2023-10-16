@@ -88,7 +88,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS g/GENDER l/SEC_LEVEL m/MRT 
 
 Examples:
 * `add n/John Doe p/12345678 e/johnd@example.com a/John street, block 123, #01-01 g/M l/2 m/KR mrt s/Chemistry`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 g/F l/2 m/KR mrt s/Mathematics`
+* `add n/Betsy Crowe p/87654321 e/betsycrowe@example.com a/Newgate Prison g/F l/2 m/KR mrt s/Mathematics`
   ![result for 'add n/Joe p/32101234 e/joe@example.com a/John street, block 123, #01-01 t/Math'](images/ug_images/addedJoeResult.png)
 
 ### Editing a student's data : `edit`
@@ -127,15 +127,16 @@ Examples:
 
 Deletes data of a specified student.
 
-Format: `delete n/[NAME]`
+Format: `delete [NAME]` or `delete [INDEX]`
 
-* Deletes the student with the specified `NAME`.
-* `NAME`: The deletion is case-sensitive.
+* Deletes the student with the specified `NAME` or `[INDEX]`.
+* `NAME`: The deletion is case-insensitive, but it must be the full name of the student.
 
 Examples:
-* `delete n/John Doe`
+* `delete John Doe`
+* `delete 1`
 <br></br>
-* `delete n/Chuan Yuan` deletes student data that contains name `Chuan Yuan`
+* `delete Chuan Yuan` deletes student data that contains name `Chuan Yuan`
   ![result for 'delete Chuan Yuan'](images/ug_images/deleteJoeResult.png)
 
 ### Grouping data : `group`
