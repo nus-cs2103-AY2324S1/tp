@@ -41,7 +41,7 @@ class JsonTag {
     }
 
     /**
-     * Converts this to the model's {@code Tag} type.
+     * Attempts to convert this to the model's {@code Tag} type.
      *
      * @throws IllegalValueException If any data this contains is invalid.
      */

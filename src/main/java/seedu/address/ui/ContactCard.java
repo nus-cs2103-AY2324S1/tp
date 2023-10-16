@@ -50,7 +50,7 @@ public class ContactCard extends UiPart<Region> {
         note.setText(contact.getNote().text);
 
         contact.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .sorted(Comparator.comparing(tag -> tag.name))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.name)));
     }
 }

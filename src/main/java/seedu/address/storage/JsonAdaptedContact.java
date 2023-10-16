@@ -28,7 +28,7 @@ class JsonAdaptedContact {
     private final String phone;
     private final String email;
     private final String note;
-    private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final List<JsonTag> tags = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedContact} with the given contact details.
@@ -39,7 +39,7 @@ class JsonAdaptedContact {
         @JsonProperty("phone") String _phone,
         @JsonProperty("email") String _email,
         @JsonProperty("note") String _note,
-        @JsonProperty("tags") List<JsonAdaptedTag> _tags
+        @JsonProperty("tags") List<JsonTag> _tags
     ) {
         this.name = _name;
         this.phone = _phone;
@@ -59,7 +59,7 @@ class JsonAdaptedContact {
         email = contact.getEmail().value;
         note = contact.getNote().text;
         tags.addAll(contact.getTags().stream()
-                .map(JsonAdaptedTag::new)
+                .map(JsonTag::new)
                 .collect(Collectors.toList()));
     }
 
@@ -70,7 +70,7 @@ class JsonAdaptedContact {
      */
     public Contact toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tags) {
+        for (JsonTag tag : tags) {
             personTags.add(tag.toModelType());
         }
 
