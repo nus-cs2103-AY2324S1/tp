@@ -119,6 +119,11 @@ public class ModelManager implements Model {
     @Override
     public void deleteApplicant(Applicant target) {
         addressBook.removeApplicant(target);
+        updateFilteredApplicantList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    public void deleteMember(Member memberIndex) {
+        addressBook.removeMember(memberIndex);
     }
 
     @Override
@@ -213,8 +218,8 @@ public class ModelManager implements Model {
 
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
-            && userPrefs.equals(otherModelManager.userPrefs)
-            && filteredPersons.equals(otherModelManager.filteredPersons);
+                && userPrefs.equals(otherModelManager.userPrefs)
+                && filteredPersons.equals(otherModelManager.filteredPersons);
     }
 
 }

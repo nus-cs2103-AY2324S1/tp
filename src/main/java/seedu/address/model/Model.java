@@ -135,22 +135,25 @@ public interface Model {
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
-     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
      * Updates the filter of the filtered member list to filter by the given {@code predicate}.
-     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredMembersList(Predicate<? super Member> predicate);
 
     /**
      * Updates the filter of the filtered applicant list to filter by the given {@code predicate}.
-     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredApplicantList(Predicate<? super Applicant> predicate);
+
+    /**
+     * Deletes the member person.
+     * The member must exist in the address book.
+     */
+    void deleteMember(Member toDelete);
 }
