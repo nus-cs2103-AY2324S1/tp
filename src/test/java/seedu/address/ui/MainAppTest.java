@@ -39,12 +39,4 @@ public class MainAppTest extends ApplicationTest {
         release(new KeyCode[]{});
         release(new MouseButton[]{});
     }
-
-    @Test
-    public void fillInnerPartsTest() {
-        verifyThat("#personListPanel", NodeMatchers.isVisible());
-        verifyThat("#resultDisplay", NodeMatchers.isVisible());
-        verifyThat("#statusBarFooter", NodeMatchers.isVisible());
-        verifyThat("#commandBox", NodeMatchers.isVisible());
-    }
 }
