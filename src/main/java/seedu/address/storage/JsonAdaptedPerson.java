@@ -60,10 +60,6 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Group> personGroups = new ArrayList<>();
-        for (JsonAdaptedGroup group : groupList) {
-            personGroups.add(group.toModelType());
-        }
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -88,8 +84,18 @@ class JsonAdaptedPerson {
         }
         final Email modelEmail = new Email(email);
 
-        GroupList gL = new GroupList();
-        personGroups.forEach(gL::add);
+        final List<Group> personGroups = new ArrayList<>();
+//        for (JsonAdaptedGroup group : groupList) {
+//            personGroups.add(group.toModelType());
+//        }
+//        GroupList gL = new GroupList();
+//        personGroups.forEach(gL::add);
+
+        final GroupList groups = new GroupList();
+        for (JsonAdaptedGroup group : groupList) {
+            groups.add(group.toModelType());
+        }
+
         return new Person(modelName, modelPhone, modelEmail, gL);
     }
 
