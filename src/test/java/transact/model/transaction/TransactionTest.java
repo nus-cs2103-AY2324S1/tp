@@ -1,12 +1,12 @@
 package transact.model.transaction;
 
-import org.junit.jupiter.api.Test;
-import transact.testutil.TransactionBuilder;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static transact.testutil.TypicalTransactions.APPLES;
 
+import org.junit.jupiter.api.Test;
+
+import transact.testutil.TransactionBuilder;
 
 public class TransactionTest {
 
@@ -30,7 +30,5 @@ public class TransactionTest {
         // different ID, all other attributes same -> returns false
         editedApples = new TransactionBuilder(APPLES).withId("APPLEAAA").build();
         assertFalse(APPLES.isSameEntry(editedApples));
-
     }
-
 }
