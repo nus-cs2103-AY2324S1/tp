@@ -36,9 +36,9 @@ public class Messages {
      */
     public static String format(Job job) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(job.getRole())
-                .append("; Company: ")
-                .append(job.getCompany());
+        builder.append(job.getCompany())
+                .append("; Role: ")
+                .append(job.getRole());
         return builder.toString();
     }
 
