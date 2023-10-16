@@ -6,7 +6,7 @@ import static transact.logic.parser.CliSyntax.PREFIX_DATE;
 import static transact.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static transact.logic.parser.CliSyntax.PREFIX_STAFF;
 import static transact.logic.parser.CliSyntax.PREFIX_TYPE;
-import static transact.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static transact.model.Model.PREDICATE_SHOW_ALL_TRANSACTIONS;
 
 import java.util.List;
 import java.util.Objects;
