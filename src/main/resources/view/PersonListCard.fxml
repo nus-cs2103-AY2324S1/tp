@@ -28,7 +28,7 @@
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
       </HBox>
       <HBox spacing="5" alignment="CENTER_LEFT">
-        <Label text="uniqueID:" styleClass="cell_small_label" />
+        <Label text="id:" styleClass="cell_small_label" />
         <Label fx:id="uniqueId" styleClass="cell_small_label" />
       </HBox>
       <FlowPane fx:id="tags" />
