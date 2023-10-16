@@ -62,7 +62,7 @@ public class PersonUtil {
         if (descriptor.getFinancialPlans().isPresent()) {
             Set<FinancialPlan> financialPlans = descriptor.getFinancialPlans().get();
             if (financialPlans.isEmpty()) {
-                sb.append(PREFIX_FINANCIAL_PLAN);
+                sb.append(PREFIX_FINANCIAL_PLAN).append(" ");
             } else {
                 financialPlans.forEach(s -> sb.append(PREFIX_FINANCIAL_PLAN).append(s.financialPlanName).append(" "));
             }
@@ -70,7 +70,7 @@ public class PersonUtil {
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {
-                sb.append(PREFIX_TAG);
+                sb.append(PREFIX_TAG).append(" ");
             } else {
                 tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
             }
