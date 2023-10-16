@@ -85,20 +85,22 @@ public class Week {
     @Override
     public String toString() {
          // todo
+        return "Lessons on: " + this.serialize();
+
+    }
+    public String serialize() {
         StringBuilder result = new StringBuilder();
-        result.append("Lessons on: ");
         for (Map.Entry<Days, ArrayList<LessonTiming>> entry : this.lessons.entrySet()) {
             Days day = entry.getKey();
             ArrayList<LessonTiming> lessonTimings = entry.getValue();
             result.append(day.toString() + ": ");
             for (LessonTiming lessonTiming : lessonTimings) {
                 result.append(lessonTiming.toString());
-                result.append("\n");
+                result.append(",");
             }
 
         }
 
         return result.toString();
-
     }
 }

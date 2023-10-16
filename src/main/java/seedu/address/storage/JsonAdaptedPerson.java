@@ -69,7 +69,7 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        schedule = source.getSchedule().toString();
+        schedule = source.getSchedule().serialize();
     }
 
     /**

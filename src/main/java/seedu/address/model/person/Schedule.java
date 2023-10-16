@@ -108,4 +108,17 @@ public class Schedule {
         return this.recurringType.toString() + " classes on: \n" + week;
 
     }
+
+    /**
+     * Serializes the student's schedule
+     * TODO: make this override something
+     */
+    public String serialize() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(this.recurringType.toString()).append(",");
+        stringBuilder.append(this.week.serialize());
+
+        return stringBuilder.toString();
+
+    }
 }
