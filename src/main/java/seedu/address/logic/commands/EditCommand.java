@@ -103,7 +103,7 @@ public class EditCommand extends Command {
      * @return An Optional containing the person to edit, if found, or an empty Optional if not found.
      * @throws CommandException if there is inconsistency between the provided name and NRIC.
      */
-    private Optional<Person> findPersonToEdit(List<Person> persons) throws CommandException {
+    public Optional<Person> findPersonToEdit(List<Person> persons) throws CommandException {
         if (name != null && nric != null) {
             // Search for a person by name and NRIC
             Optional<Person> personByName = persons.stream()

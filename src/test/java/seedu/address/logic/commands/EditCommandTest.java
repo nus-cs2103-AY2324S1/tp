@@ -1,14 +1,22 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -17,6 +25,8 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
+
+
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
@@ -67,14 +77,41 @@ public class EditCommandTest {
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
-    //    @Test
-    //    public void toStringMethod() {
-    //        Index index = Index.fromOneBased(1);
-    //        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
-    //        EditCommand editCommand = new EditCommand(index, editPersonDescriptor);
-    //        String expected = EditCommand.class.getCanonicalName() + "{index=" + index + ", editPersonDescriptor="
-    //                + editPersonDescriptor + "}";
-    //        assertEquals(expected, editCommand.toString());
-    //    }
+    @Test
+    public void findPersonToEdit_bothNameAndNricNull_throwIllegalArgumentException() {
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().build();
+        EditCommand editCommand = new EditCommand(null, null, descriptor);
+
+        assertThrows(IllegalArgumentException.class, () -> editCommand.findPersonToEdit(model.getFilteredPersonList()));
+    }
+
+    @Test
+    public void findPersonToEdit_personOptionalEmpty_throwCommandException() {
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().build();
+        EditCommand editCommand = new EditCommand(new Name("John Doe"), null, descriptor);
+
+        assertThrows(CommandException.class, () -> editCommand.findPersonToEdit(Collections.emptyList()));
+    }
+
+    @Test
+    public void findPersonToEdit_personFoundByName_returnPersonOptional() throws CommandException {
+        List<Person> persons = new ArrayList<>();
+        Person person = new PersonBuilder().withName("John Doe").build();
+        persons.add(person);
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().build();
+        EditCommand editCommand = new EditCommand(new Name("John Doe"), null, descriptor);
+
+        Optional<Person> personOptional = editCommand.findPersonToEdit(persons);
+
+        assertEquals(person, personOptional.get());
+    }
+    @Test
+    public void toStringMethod() {
+        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
+        EditCommand editCommand = new EditCommand(new Name("Name"), null, editPersonDescriptor);
+        String expected = EditCommand.class.getCanonicalName() + "{name=Name, nric=null" + ", editPersonDescriptor="
+                + editPersonDescriptor + "}";
+        assertEquals(expected, editCommand.toString());
+    }
 
 }
