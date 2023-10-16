@@ -1,8 +1,8 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalFields.EMAIL_FIELD;
@@ -19,6 +19,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Person;
 
 class ReadCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -81,7 +82,7 @@ class ReadCommandTest {
 
         ReadCommand readCommandPhoneTest = new ReadCommand(INDEX_FIRST_PERSON, "phone");
         ReadCommand readCommandEmailTest = new ReadCommand(INDEX_FIRST_PERSON, "email");
-        ReadCommand readCommandAddressTest= new ReadCommand(INDEX_FIRST_PERSON, "address");
+        ReadCommand readCommandAddressTest = new ReadCommand(INDEX_FIRST_PERSON, "address");
 
         String phoneValue = readCommandPhoneTest.fieldValueToString(personToRead);
         String emailValue = readCommandEmailTest.fieldValueToString(personToRead);
