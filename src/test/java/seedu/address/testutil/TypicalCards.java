@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import seedu.address.model.Deck;
 import seedu.address.model.person.Card;
 
 /**
@@ -19,7 +20,18 @@ public class TypicalCards {
             .withAnswer("Source").build();
     private TypicalCards() {} // prevents instantiation
 
-    public static List<Card> getTypicalCard() {
+
+    /**
+     * Returns an {@code Deck} with all the typical card.
+     */
+    public static Deck getTypicalDeck() {
+        Deck ab = new Deck();
+        for (Card card : getTypicalCards()) {
+            ab.addCard(card);
+        }
+        return ab;
+    }
+    public static List<Card> getTypicalCards() {
         return new ArrayList<>(Arrays.asList(CS2100, CS1101S, CS1231S));
     }
 }
