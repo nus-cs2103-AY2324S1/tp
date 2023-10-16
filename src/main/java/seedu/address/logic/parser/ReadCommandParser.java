@@ -49,17 +49,17 @@ public class ReadCommandParser implements Parser<ReadCommand> {
         String fullFieldName;
 
         switch (fieldToRead) {
-            case "p":
-                fullFieldName = "phone";
-                break;
-            case "a":
-                fullFieldName = "address";
-                break;
-            case "e":
-                fullFieldName = "email";
-                break;
-            default:
-                throw new ParseException(Messages.MESSAGE_INVALID_FIELD_TO_READ);
+        case "p":
+            fullFieldName = "phone";
+            break;
+        case "a":
+            fullFieldName = "address";
+            break;
+        case "e":
+            fullFieldName = "email";
+            break;
+        default:
+            throw new ParseException(Messages.MESSAGE_INVALID_FIELD_TO_READ);
         }
         return fullFieldName;
     }
