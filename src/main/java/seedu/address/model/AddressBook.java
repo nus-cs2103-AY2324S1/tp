@@ -107,6 +107,19 @@ public class AddressBook implements ReadOnlyAddressBook {
         return str.toString();
     }
 
+    @Override
+    public String noteListToString() {
+        StringBuilder str = new StringBuilder();
+        persons.forEach(
+                person -> person.getNotes().forEach(
+                        note -> str.append("[").append(
+                                        person.getName().toString()).append("] ")
+                                .append(note.getUiText()).append("\n")
+                )
+        );
+        return str.toString();
+    }
+
     //// util methods
 
     @Override
