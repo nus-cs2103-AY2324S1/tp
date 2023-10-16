@@ -135,12 +135,17 @@ public class ParserUtil {
         if (from == null || to == null) {
             return FreeTime.EMPTY_FREE_TIME;
         }
-        LocalTime start = LocalTime.parse(from);
-        LocalTime end = LocalTime.parse(to);
-        if (!FreeTime.isValidFreeTime(start, end)) {
+        try {
+            LocalTime start = LocalTime.parse(from);
+            LocalTime end = LocalTime.parse(to);
+            if (!FreeTime.isValidFreeTime(start, end)) {
+                throw new ParseException(FreeTime.MESSAGE_CONSTRAINTS);
+            }
+            return new FreeTime(start, end);
+        } catch (DateTimeParseException e) {
             throw new ParseException(FreeTime.MESSAGE_CONSTRAINTS);
         }
-        return new FreeTime(start, end);
+
     }
 
     /**
