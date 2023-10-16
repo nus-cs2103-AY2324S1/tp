@@ -3,7 +3,6 @@ package seedu.address.model.musician;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalMusicians.ALICE;
@@ -42,7 +41,7 @@ public class UniqueMusicianListTest {
     @Test
     public void contains_musicianWithSameIdentityFieldsInList_returnsTrue() {
         uniqueMusicianList.add(ALICE);
-        Musician editedAlice = new MusicianBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Musician editedAlice = new MusicianBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(uniqueMusicianList.contains(editedAlice));
     }
@@ -85,7 +84,7 @@ public class UniqueMusicianListTest {
     @Test
     public void setMusician_editedMusicianHasSameIdentity_success() {
         uniqueMusicianList.add(ALICE);
-        Musician editedAlice = new MusicianBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Musician editedAlice = new MusicianBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
                 .build();
         uniqueMusicianList.setMusician(ALICE, editedAlice);
         UniqueMusicianList expectedUniqueMusicianList = new UniqueMusicianList();

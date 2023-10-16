@@ -22,7 +22,6 @@ public class Musician {
     private final Email email;
 
     // Data fields
-    private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final Set<Tag> instruments = new HashSet<>();
     private final Set<Tag> genres = new HashSet<>();
@@ -30,13 +29,12 @@ public class Musician {
     /**
      * Every field must be present and not null.
      */
-    public Musician(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Set<Tag> instrumentTags,
+    public Musician(Name name, Phone phone, Email email, Set<Tag> tags, Set<Tag> instrumentTags,
                     Set<Tag> genreTags) {
-        requireAllNonNull(name, phone, email, address, tags);
+        requireAllNonNull(name, phone, email, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
         this.tags.addAll(tags);
         this.instruments.addAll(instrumentTags);
         this.genres.addAll(genreTags);
@@ -54,9 +52,6 @@ public class Musician {
         return email;
     }
 
-    public Address getAddress() {
-        return address;
-    }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -106,7 +101,6 @@ public class Musician {
         return name.equals(otherMusician.name)
                 && phone.equals(otherMusician.phone)
                 && email.equals(otherMusician.email)
-                && address.equals(otherMusician.address)
                 && tags.equals(otherMusician.tags)
                 && instruments.equals(otherMusician.instruments)
                 && genres.equals(otherMusician.genres);
@@ -115,7 +109,7 @@ public class Musician {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, instruments, genres);
+        return Objects.hash(name, phone, email, tags, instruments, genres);
     }
 
     @Override
@@ -124,7 +118,6 @@ public class Musician {
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
-                .add("address", address)
                 .add("tags", tags)
                 .add("instruments", instruments)
                 .add("genres", genres)

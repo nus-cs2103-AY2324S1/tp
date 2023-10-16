@@ -3,7 +3,6 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.musician.Address;
 import seedu.address.model.musician.Email;
 import seedu.address.model.musician.Musician;
 import seedu.address.model.musician.Name;
@@ -19,12 +18,10 @@ public class MusicianBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
     private Name name;
     private Phone phone;
     private Email email;
-    private Address address;
     private Set<Tag> tags;
     private Set<Tag> instruments;
     private Set<Tag> genres;
@@ -36,7 +33,6 @@ public class MusicianBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
-        address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
         instruments = new HashSet<>();
         genres = new HashSet<>();
@@ -49,7 +45,6 @@ public class MusicianBuilder {
         name = musicianToCopy.getName();
         phone = musicianToCopy.getPhone();
         email = musicianToCopy.getEmail();
-        address = musicianToCopy.getAddress();
         tags = new HashSet<>(musicianToCopy.getTags());
         instruments = new HashSet<>(musicianToCopy.getInstruments());
         genres = new HashSet<>(musicianToCopy.getGenres());
@@ -87,13 +82,6 @@ public class MusicianBuilder {
         return this;
     }
 
-    /**
-     * Sets the {@code Address} of the {@code Musician} that we are building.
-     */
-    public MusicianBuilder withAddress(String address) {
-        this.address = new Address(address);
-        return this;
-    }
 
     /**
      * Sets the {@code Phone} of the {@code Musician} that we are building.
@@ -112,7 +100,7 @@ public class MusicianBuilder {
     }
 
     public Musician build() {
-        return new Musician(name, phone, email, address, tags, instruments, genres);
+        return new Musician(name, phone, email, tags, instruments, genres);
     }
 
 }

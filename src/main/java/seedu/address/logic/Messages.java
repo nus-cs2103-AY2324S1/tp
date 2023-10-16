@@ -42,7 +42,6 @@ public class Messages {
                 .append("; Email: ")
                 .append(musician.getEmail())
                 .append("; Address: ")
-                .append(musician.getAddress())
                 .append("; Tags: ");
         musician.getTags().forEach(builder::append);
         return builder.toString();
