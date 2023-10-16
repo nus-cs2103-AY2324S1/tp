@@ -21,7 +21,7 @@ import seedu.lovebook.model.tag.Tag;
 /**
  * Jackson-friendly version of {@link Date}.
  */
-class JsonAdaptedPerson {
+class JsonAdaptedDate {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Date's %s field is missing!";
 
@@ -33,13 +33,13 @@ class JsonAdaptedPerson {
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given date details.
+     * Constructs a {@code JsonAdaptedDate} with the given date details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("age") String age,
-            @JsonProperty("gender") String gender, @JsonProperty("height") String height,
-                             @JsonProperty("income") String income,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+    public JsonAdaptedDate(@JsonProperty("name") String name, @JsonProperty("age") String age,
+                           @JsonProperty("gender") String gender, @JsonProperty("height") String height,
+                           @JsonProperty("income") String income,
+                           @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.age = age;
         this.gender = gender;
@@ -53,7 +53,7 @@ class JsonAdaptedPerson {
     /**
      * Converts a given {@code Date} into this class for Jackson use.
      */
-    public JsonAdaptedPerson(Date source) {
+    public JsonAdaptedDate(Date source) {
         name = source.getName().fullName;
         age = source.getAge().value;
         gender = source.getGender().value;

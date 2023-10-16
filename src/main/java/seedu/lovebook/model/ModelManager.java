@@ -22,23 +22,26 @@ public class ModelManager implements Model {
 
     private final LoveBook loveBook;
     private final UserPrefs userPrefs;
+    private final DatePrefs datePrefs;
     private final FilteredList<Date> filteredDates;
 
     /**
      * Initializes a ModelManager with the given LoveBook and userPrefs.
      */
-    public ModelManager(ReadOnlyLoveBook loveBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(loveBook, userPrefs);
+    public ModelManager(ReadOnlyLoveBook loveBook, ReadOnlyUserPrefs userPrefs, ReadOnlyDatePrefs datePrefs) {
+        requireAllNonNull(loveBook, userPrefs, datePrefs);
 
-        logger.fine("Initializing with lovebook book: " + loveBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with lovebook book: " + loveBook + " and user prefs " + userPrefs
+                + " and date prefs " + datePrefs);
 
         this.loveBook = new LoveBook(loveBook);
         this.userPrefs = new UserPrefs(userPrefs);
+        this.datePrefs = new DatePrefs(datePrefs);
         filteredDates = new FilteredList<>(this.loveBook.getPersonList());
     }
 
     public ModelManager() {
-        this(new LoveBook(), new UserPrefs());
+        this(new LoveBook(), new UserPrefs(), new DatePrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -149,6 +152,27 @@ public class ModelManager implements Model {
         return loveBook.equals(otherModelManager.loveBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredDates.equals(otherModelManager.filteredDates);
+    }
+
+    //=========== DatePrefs ==================================================================================
+    @Override
+    public void setDatePrefs(ReadOnlyDatePrefs prefs) {
+        this.datePrefs.resetData(prefs);
+    }
+
+    @Override
+    public ReadOnlyDatePrefs getDatePrefs() {
+        return this.datePrefs.getPreferences();
+    }
+
+    @Override
+    public Path getDatePrefsFilePath() {
+        return this.userPrefs.getDatePrefsFilePath();
+    }
+
+    @Override
+    public void setDatePrefsFilePath(Path datePrefsFilePath) {
+        this.userPrefs.setDatePrefsFilePath(datePrefsFilePath);
     }
 
 }

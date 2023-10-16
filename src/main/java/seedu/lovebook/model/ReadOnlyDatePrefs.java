@@ -1,2 +1,5 @@
-package seedu.lovebook.model;public class ReadOnlyDatePrefs {
+package seedu.lovebook.model;
+
+public interface ReadOnlyDatePrefs {
+    DatePrefs getPreferences();
 }
