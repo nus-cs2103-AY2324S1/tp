@@ -76,6 +76,7 @@ public class FindCommandParserTest {
         assertThrows(ParseException.class, () -> parser.parse(" (n/Alice && t/friends"));
         assertThrows(ParseException.class, () -> parser.parse(" n/Alice && (t/friends || t/colleagues"));
         assertThrows(ParseException.class, () -> parser.parse(" )n/Alice && t/friends("));
+        assertThrows(ParseException.class, () -> parser.parse(" (n/Alice && t/friends))"));
     }
 
     @Test
