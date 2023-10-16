@@ -88,10 +88,6 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setAppointment(appointment);
         }
 
-        if (!editPersonDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
-        }
-
         return new EditCommand(name, nric, editPersonDescriptor);
     }
 

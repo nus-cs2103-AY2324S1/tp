@@ -63,10 +63,6 @@ public class EditCommand extends Command {
     public EditCommand(Name name, Nric nric, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(editPersonDescriptor);
 
-        if (name == null && nric == null) {
-            throw new IllegalArgumentException("Either 'name' or 'nric' must not be null");
-        }
-
         this.name = name;
         this.nric = nric;
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);

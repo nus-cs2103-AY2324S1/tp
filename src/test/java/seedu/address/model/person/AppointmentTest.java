@@ -20,6 +20,12 @@ public class AppointmentTest {
     }
 
     @Test
+    public void constructorTwo_invalidAppointment_throwsIllegalArgumentException() {
+        String invalidAppointment = "";
+        assertThrows(IllegalArgumentException.class, () -> new Appointment(invalidAppointment, invalidAppointment));
+    }
+
+    @Test
     public void isValidAppointment() {
         // null appoinment
         assertThrows(NullPointerException.class, () -> Appointment.isValidAppointment(null));

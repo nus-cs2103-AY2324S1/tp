@@ -226,6 +226,7 @@ public class ParserUtilTest {
         assertThrows(ParseException.class, () -> ParserUtil.parseMedicalHistory(INVALID_MEDICAL_HISTORY));
     }
 
+
     @Test
     public void parseTag_emptyValue_throwsParseException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseMedicalHistories(null));
@@ -234,6 +235,14 @@ public class ParserUtilTest {
     @Test
     public void parseTag_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseTag(null));
+    }
+
+    @Test
+    public void parseMedicalHistories_emptyHistory_exceptionThrown() {
+        // Input data with an empty medical history
+        String input = "History 1, , History 3";
+
+        assertThrows(ParseException.class, () -> ParserUtil.parseMedicalHistories(Arrays.asList(input.split(","))));
     }
 
     @Test
