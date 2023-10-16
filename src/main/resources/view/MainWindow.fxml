@@ -46,20 +46,18 @@
         </StackPane>
             <SplitPane fx:id="contentSplitPane" dividerPositions="0.5, 0.5, 0.5" prefHeight="160.0" prefWidth="200.0" style="-fx-background-color: 0;" VBox.vgrow="ALWAYS">
               <items>
-      
-                          <VBox fx:id="personList" minWidth="340" prefWidth="340" style="-fx-background-color: #231F31; -fx-border-width: 0px;" styleClass="pane-with-border">
-                <padding>
-                  <Insets bottom="10" left="10" right="10" top="10" />
-                </padding>
-                <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
-              </VBox>
-      
-                          <VBox fx:id="scheduleList" minWidth="340" prefWidth="340" style="-fx-background-color: #231F31; -fx-border-width: 0;" styleClass="pane-with-border">
-                <padding>
-                  <Insets bottom="10" left="10" right="10" top="10" />
-                </padding>
-                <StackPane fx:id="scheduleListPanelPlaceholder" VBox.vgrow="ALWAYS" />
-              </VBox>
+                <VBox fx:id="personList" minWidth="340" prefWidth="340" style="-fx-background-color: #231F31; -fx-border-width: 0px;" styleClass="pane-with-border">
+                  <padding>
+                    <Insets bottom="10" left="10" right="10" top="10" />
+                  </padding>
+                  <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+                </VBox>
+                <VBox fx:id="scheduleList" minWidth="340" prefWidth="340" style="-fx-background-color: #231F31; -fx-border-width: 0;" styleClass="pane-with-border">
+                  <padding>
+                    <Insets bottom="10" left="10" right="10" top="10" />
+                  </padding>
+                  <StackPane fx:id="scheduleListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+                </VBox>
 
                 <VBox fx:id="studentDetailList" minWidth="340" prefWidth="340" style="-fx-background-color: #231F31; -fx-border-width: 0;" styleClass="pane-with-border">
                   <padding>
