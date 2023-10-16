@@ -13,6 +13,8 @@ import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.model.person.Remark;
 
 public class RemarkCommandParserTest {
+    private static final String MESSAGE_INVALID_FORMAT =
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemarkCommand.MESSAGE_USAGE);
     private RemarkCommandParser parser = new RemarkCommandParser();
     private final String nonEmptyRemark = "Some remark.";
 
@@ -29,6 +31,26 @@ public class RemarkCommandParserTest {
         expectedCommand = new RemarkCommand(INDEX_FIRST_PERSON, new Remark(""));
         assertParseSuccess(parser, userInput, expectedCommand);
     }
+
+    @Test
+    public void parse_indexSpecified_failure() {
+        // Negative numbers
+        String userInput = " -5";
+        assertParseFailure(parser, userInput, MESSAGE_INVALID_FORMAT);
+
+        // Out of bounds check
+        String userInput2 = " 100000000000";
+        assertParseFailure(parser, userInput2, MESSAGE_INVALID_FORMAT);
+
+        // Blank field
+        assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
+
+        // no index
+        userInput = PREFIX_REMARK + nonEmptyRemark;
+        assertParseFailure(parser, userInput, MESSAGE_INVALID_FORMAT);
+    }
+
+
 
     @Test
     public void parse_missingCompulsoryField_failure() {
