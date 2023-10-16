@@ -5,6 +5,14 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.parser.CliSyntax.PATIENT_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICALHISTORY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SPECIALTY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.SPECIALIST_TAG;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.DANIEL;
 import static seedu.address.testutil.TypicalPersons.FIONA;
@@ -39,13 +47,16 @@ public class FindCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-    //TODO: Change equals method
+    //TODO: Change equals method, remember to do the tags.
     @Test
     public void equals() {
+        FindPredicateMap findPredicateMap1 = setupFirstFindPredicateMap();
+        FindPredicateMap findPredicateMap2 = setupSecondFindPredicateMap();
+
         NameContainsKeywordsPredicate firstPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("first"));
+                new NameContainsKeywordsPredicate(Collections.singletonList("Fabio"));
         NameContainsKeywordsPredicate secondPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("second"));
+                new NameContainsKeywordsPredicate(Collections.singletonList("Test2"));
 
         FindCommand findFirstCommand = new FindCommand(firstPredicate, PersonType.PATIENT);
         FindCommand findSecondCommand = new FindCommand(secondPredicate, PersonType.PATIENT);
@@ -71,11 +82,58 @@ public class FindCommandTest {
         assertFalse(findFirstCommand.equals(findFirstCommandSpecialist));
     }
 
+    private FindPredicateMap setupFirstFindPredicateMap() {
+        // Find Predicates for a Patient
+        NameContainsKeywordsPredicate nameContainsKeywordsPredicate =
+                new NameContainsKeywordsPredicate(Collections.singletonList("Fabio"));
+        PhoneContainsKeywordsPredicate phoneContainsKeywordsPredicate =
+                new PhoneContainsKeywordsPredicate(Collections.singletonList("89934991"));
+        EmailContainsKeywordsPredicate emailContainsKeywordsPredicate =
+                new EmailContainsKeywordsPredicate(Collections.singletonList("patient@gmail.com"));
+        TagsContainsKeywordsPredicate tagsContainsKeywordsPredicate =
+                new TagsContainsKeywordsPredicate(Arrays.asList("tag1", "tag2"));
+        MedHistoryContainsKeywordsPredicate medHistoryContainsKeywordsPredicate =
+                new MedHistoryContainsKeywordsPredicate(Arrays.asList("Osteoporosis", "Bronchitis"));
+
+        FindPredicateMap findPredicateMap = new FindPredicateMap();
+        findPredicateMap.put(PATIENT_TAG, PersonType.PATIENT.getSearchPredicate());
+        findPredicateMap.put(PREFIX_NAME.toString(), nameContainsKeywordsPredicate);
+        findPredicateMap.put(PREFIX_PHONE.toString(), phoneContainsKeywordsPredicate);
+        findPredicateMap.put(PREFIX_EMAIL.toString(), emailContainsKeywordsPredicate);
+        findPredicateMap.put(PREFIX_TAG.toString(), tagsContainsKeywordsPredicate);
+        findPredicateMap.put(PREFIX_MEDICALHISTORY.toString(), medHistoryContainsKeywordsPredicate);
+        return findPredicateMap;
+    }
+
+    private FindPredicateMap setupSecondFindPredicateMap() {
+        // Find Predicates for a Specialist
+        NameContainsKeywordsPredicate nameContainsKeywordsPredicate =
+                new NameContainsKeywordsPredicate(Collections.singletonList("Selena"));
+        PhoneContainsKeywordsPredicate phoneContainsKeywordsPredicate =
+                new PhoneContainsKeywordsPredicate(Collections.singletonList("90237753"));
+        EmailContainsKeywordsPredicate emailContainsKeywordsPredicate =
+                new EmailContainsKeywordsPredicate(Collections.singletonList("specialist@gmail.com"));
+        TagsContainsKeywordsPredicate tagsContainsKeywordsPredicate =
+                new TagsContainsKeywordsPredicate(Arrays.asList("tag2", "tag3"));
+        SpecialtyContainsKeywordsPredicate specialtyContainsKeywordsPredicate =
+                new SpecialtyContainsKeywordsPredicate(Arrays.asList("Surgery", "Haematology"));
+
+        FindPredicateMap findPredicateMap = new FindPredicateMap();
+        findPredicateMap.put(SPECIALIST_TAG, PersonType.SPECIALIST.getSearchPredicate());
+        findPredicateMap.put(PREFIX_NAME.toString(), nameContainsKeywordsPredicate);
+        findPredicateMap.put(PREFIX_PHONE.toString(), phoneContainsKeywordsPredicate);
+        findPredicateMap.put(PREFIX_EMAIL.toString(), emailContainsKeywordsPredicate);
+        findPredicateMap.put(PREFIX_TAG.toString(), tagsContainsKeywordsPredicate);
+        findPredicateMap.put(PREFIX_SPECIALTY.toString(), specialtyContainsKeywordsPredicate);
+        return findPredicateMap;
+    }
+
     @Test
     public void execute_zeroKeywords_allPatientsListed() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         NameContainsKeywordsPredicate namePredicate = prepareNamePredicate(" ");
         PhoneContainsKeywordsPredicate phonePredicate = preparePhonePredicate(" ");
+        // Add age predicate here
         EmailContainsKeywordsPredicate emailPredicate = prepareEmailPredicate(" ");
         TagsContainsKeywordsPredicate tagsPredicate = prepareTagsPredicate(" ");
         MedHistoryContainsKeywordsPredicate medHistPredicate = prepareMedHistPredicate(" ");
@@ -180,9 +238,9 @@ public class FindCommandTest {
     public void specialtyContainsKeywordsPredicateToStringMethod() {
         SpecialtyContainsKeywordsPredicate predicate =
                 new SpecialtyContainsKeywordsPredicate(Arrays.asList("keyword"));
-        FindCommand findCommand = new FindCommand(predicate, PersonType.PATIENT);
+        FindCommand findCommand = new FindCommand(predicate, PersonType.SPECIALIST);
         String expected = FindCommand.class.getCanonicalName() + "{predicate=" + predicate
-                + ", personType=" + PersonType.PATIENT + "}";
+                + ", personType=" + PersonType.SPECIALIST + "}";
         assertEquals(expected, findCommand.toString());
     }
 

@@ -18,29 +18,29 @@ import seedu.address.model.person.Person;
 public class FindPredicateMap {
 
     /** Prefixes mapped to their respective predicates **/
-    private final Map<Prefix, Predicate<Person>> map = new HashMap<>();
+    private final Map<String, Predicate<Person>> map = new HashMap<>();
 
     /**
      * Associates the specified predicate value with {@code prefix} key in this map.
      *
-     * @param prefix   Prefix key with which the specified argument value is to be associated
+     * @param prefix prefix key with which the specified argument value is to be associated
      * @param predicateValue predicate value to be associated with the specified prefix key
      */
-    public void put(Prefix prefix, Predicate<Person> predicateValue) {
+    public void put(String prefix, Predicate<Person> predicateValue) {
         map.put(prefix, predicateValue);
     }
 
     /**
      * Returns the predicate value of {@code prefix}.
      */
-    public Optional<Predicate<Person>> getPredicateValue(Prefix prefix) {
+    public Optional<Predicate<Person>> getPredicateValue(String prefix) {
         return Optional.ofNullable(map.get(prefix));
     }
 
     /**
      * Returns all predicate value of {@code prefix}.
      */
-    public List<Predicate<Person>> getAllPredicates(Prefix prefix) {
+    public List<Predicate<Person>> getAllPredicates() {
         if (map.isEmpty()) {
             return new ArrayList<>();
         }
@@ -54,7 +54,7 @@ public class FindPredicateMap {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof FindCommand)) {
+        if (!(other instanceof FindPredicateMap)) {
             return false;
         }
 
