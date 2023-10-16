@@ -39,6 +39,7 @@ public class TestUtil {
         return Index.fromOneBased(model.getFilteredPersonList().size() / 2);
     }
 
+
     /**
      * Returns the last index of the person in the {@code model}'s person list.
      */
