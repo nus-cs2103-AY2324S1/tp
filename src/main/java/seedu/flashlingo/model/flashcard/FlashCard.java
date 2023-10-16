@@ -63,9 +63,25 @@ public class FlashCard {
         return otherFlashCard != null
             && otherFlashCard.getOriginalWord().equals(getOriginalWord());
     }
+
+    /**
+     * Returns true if the original word or the translation contains the keyword.
+     * @param inputWord The keyword to check for
+     * @return True or False depending on whether the keyword is found
+     */
     public boolean hasKeyword(String inputWord) {
         return this.originalWord.hasSubpart(inputWord) || this.translatedWord.hasSubpart(inputWord);
     }
+
+    /**
+     * Returns true if the original word or the translation is of the language.
+     * @param language The language to check for
+     * @return True or False depending on whether the language is found
+     */
+    public boolean isSameLanguage(String language) {
+        return this.originalWord.isSameLanguage(language) || this.translatedWord.isSameLanguage(language);
+    }
+
     /**
      * Formats Flashcard for writing to textFile
      *
