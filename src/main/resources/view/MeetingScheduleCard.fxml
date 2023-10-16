@@ -19,7 +19,6 @@
       <padding>
         <Insets bottom="5" left="15" right="5" top="5" />
       </padding>
-      <FlowPane fx:id="attendees" />
      <Label fx:id="id" styleClass="cell_big_label" text="\$id">
        <minWidth>
          <!-- Ensures that the label text is never truncated -->
