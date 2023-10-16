@@ -15,6 +15,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
     private Path loveBookFilePath = Paths.get("data" , "LoveBook.json");
+    private Path datePrefsFilePath = Paths.get("data", "Preferences.json");
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -51,9 +52,18 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         return loveBookFilePath;
     }
 
+    public Path getDatePrefsFilePath() {
+        return datePrefsFilePath;
+    }
+
     public void setLoveBookFilePath(Path loveBookFilePath) {
         requireNonNull(loveBookFilePath);
         this.loveBookFilePath = loveBookFilePath;
+    }
+
+    public void setDatePrefsFilePath(Path datePrefsFilePath) {
+        requireNonNull(datePrefsFilePath);
+        this.datePrefsFilePath = datePrefsFilePath;
     }
 
     @Override

@@ -21,13 +21,13 @@ class JsonSerializableLoveBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate date(s).";
 
-    private final List<JsonAdaptedPerson> dates = new ArrayList<>();
+    private final List<JsonAdaptedDate> dates = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableLoveBook} with the given dates.
      */
     @JsonCreator
-    public JsonSerializableLoveBook(@JsonProperty("dates") List<JsonAdaptedPerson> dates) {
+    public JsonSerializableLoveBook(@JsonProperty("dates") List<JsonAdaptedDate> dates) {
         this.dates.addAll(dates);
     }
 
@@ -37,7 +37,7 @@ class JsonSerializableLoveBook {
      * @param source future changes to this will not affect the created {@code JsonSerializableLoveBook}.
      */
     public JsonSerializableLoveBook(ReadOnlyLoveBook source) {
-        dates.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        dates.addAll(source.getPersonList().stream().map(JsonAdaptedDate::new).collect(Collectors.toList()));
     }
 
     /**
@@ -47,8 +47,8 @@ class JsonSerializableLoveBook {
      */
     public LoveBook toModelType() throws IllegalValueException {
         LoveBook loveBook = new LoveBook();
-        for (JsonAdaptedPerson jsonAdaptedPerson : dates) {
-            Date date = jsonAdaptedPerson.toModelType();
+        for (JsonAdaptedDate jsonAdaptedDate : dates) {
+            Date date = jsonAdaptedDate.toModelType();
             if (loveBook.hasPerson(date)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
