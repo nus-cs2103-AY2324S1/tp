@@ -1,14 +1,20 @@
 package seedu.address.model.appointment;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.util.Objects;
+
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 
 /**
  * Represents an appointment with a date and time, a student, and a description.
  */
 public class Appointment {
-    private DateTime dateTime;
-    private Person student;
-    private Description description;
+
+    private final DateTime dateTime;
+    private final Person student;
+    private final Description description;
 
     /**
      * Constructs an Appointment object with the specified date and time, student, and description.
@@ -18,44 +24,56 @@ public class Appointment {
      * @param description A description of the appointment.
      */
     public Appointment(DateTime dateTime, Person student, Description description) {
+        requireAllNonNull(dateTime, student, description);
         this.dateTime = dateTime;
         this.student = student;
         this.description = description;
     }
 
-    /**
-     * Retrieves the date and time of the appointment.
-     *
-     * @return The date and time of the appointment.
-     */
     public DateTime getDateTime() {
         return dateTime;
     }
 
-    /**
-     * Sets the date and time of the appointment.
-     *
-     * @param dateTime The new date and time for the appointment.
-     */
-    public void setDateTime(DateTime dateTime) {
-        this.dateTime = dateTime;
-    }
-
-    /**
-     * Retrieves the student associated with the appointment.
-     *
-     * @return The student associated with the appointment.
-     */
     public Person getStudent() {
         return student;
     }
 
+    public Description getDescription() {
+        return description;
+    }
+
     /**
-     * Sets the student associated with the appointment.
-     *
-     * @param student The new student for the appointment.
+     * Returns true if both appointments have the same fields.
      */
-    public void setStudent(Person student) {
-        this.student = student;
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Appointment)) {
+            return false;
+        }
+
+        Appointment otherAppointment = (Appointment) other;
+        return student.equals(otherAppointment.student)
+                && description.equals(otherAppointment.description)
+                && dateTime.equals(otherAppointment.dateTime);
+    }
+
+    @Override
+    public int hashCode() {
+        // use this method for custom fields hashing instead of implementing your own
+        return Objects.hash(student, description, dateTime);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("student", student)
+                .add("description", description)
+                .add("dateTime", dateTime)
+                .toString();
     }
 }
