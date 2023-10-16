@@ -25,7 +25,7 @@ import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
-    private static final String INVALID_NRIC = "R@cdfael";
+    private static final String INVALID_NRIC = " ";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_START = "23/12";
     private static final String INVALID_END = "12AM";
@@ -76,7 +76,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseNric_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseName(INVALID_NRIC));
+        assertThrows(ParseException.class, () -> ParserUtil.parseNric(INVALID_NRIC));
     }
 
     @Test
@@ -224,6 +224,11 @@ public class ParserUtilTest {
     @Test
     public void parseMedicalHistory_invalidValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseMedicalHistory(INVALID_MEDICAL_HISTORY));
+    }
+
+    @Test
+    public void parseTag_emptyValue_throwsParseException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseMedicalHistories(null));
     }
 
     @Test

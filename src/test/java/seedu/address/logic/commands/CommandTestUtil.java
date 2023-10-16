@@ -38,8 +38,11 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
-    public static final String VALID_START = "8 Aug 2023 06:00";
+    public static final String VALID_START = "01-01-2023 06:00";
     public static final String VALID_END = "08:00";
+    public static final String VALID_APPOINTMENT = "01-01-2023 06:00 - 08:00";
+    public static final String VALID_MEDICALHISTORY = "cancer";
+    public static final String VALID_NRIC = "S2829102B";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;

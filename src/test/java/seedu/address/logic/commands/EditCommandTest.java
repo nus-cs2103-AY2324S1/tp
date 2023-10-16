@@ -20,6 +20,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -42,7 +43,8 @@ public class EditCommandTest {
         Person editedPerson = personInList.withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
-        EditCommand editCommand = new EditCommand(new Name(person.getName().toString()), null, descriptor);
+        EditCommand editCommand = new EditCommand(new Name(person.getName().toString()),
+                new Nric(person.getNric().toString()), descriptor);
 
         String expectedMessage =
                 String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
@@ -81,6 +83,19 @@ public class EditCommandTest {
         persons.add(person);
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().build();
         EditCommand editCommand = new EditCommand(new Name("John Doe"), null, descriptor);
+
+        Optional<Person> personOptional = editCommand.findPersonToEdit(persons);
+
+        assertEquals(person, personOptional.get());
+    }
+
+    @Test
+    public void findPersonToEdit_personFoundByNric_returnPersonOptional() throws CommandException {
+        List<Person> persons = new ArrayList<>();
+        Person person = new PersonBuilder().withNric("S1223111B").build();
+        persons.add(person);
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().build();
+        EditCommand editCommand = new EditCommand(null, new Nric("S1223111B"), descriptor);
 
         Optional<Person> personOptional = editCommand.findPersonToEdit(persons);
 

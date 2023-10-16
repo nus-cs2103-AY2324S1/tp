@@ -13,11 +13,16 @@ import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_END;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MEDICALHISTORY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_START;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
@@ -33,6 +38,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Nric;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 public class EditCommandParserTest {
@@ -111,6 +117,34 @@ public class EditCommandParserTest {
         descriptor = new EditPersonDescriptorBuilder().withTags(VALID_TAG_FRIEND).build();
         expectedCommand = new EditCommand(new Name(VALID_NAME_BOB), null, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
+
+        // medical
+        userInput = "edit " + "n/" + VALID_NAME_BOB + " m/cancer";
+        descriptor = new EditPersonDescriptorBuilder().withMedicalHistories(VALID_MEDICALHISTORY).build();
+        expectedCommand = new EditCommand(new Name(VALID_NAME_BOB), null, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // appointment
+        userInput = "edit " + "n/" + VALID_NAME_AMY + " start/" + VALID_START + " end/" + VALID_END;
+        descriptor = new EditPersonDescriptorBuilder().withAppointment(VALID_APPOINTMENT).build();
+        expectedCommand = new EditCommand(new Name(VALID_NAME_AMY), null, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_oneFieldSpecifiedUsingID_success() {
+        // phone
+        String userInput = "edit " + "id/" + VALID_NRIC + PHONE_DESC_AMY;
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_AMY).build();
+        EditCommand expectedCommand = new EditCommand(null, new Nric(VALID_NRIC), descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // email
+        userInput = "edit " + "id/" + VALID_NRIC + EMAIL_DESC_AMY;
+        descriptor = new EditPersonDescriptorBuilder().withEmail(VALID_EMAIL_AMY).build();
+        expectedCommand = new EditCommand(null,  new Nric(VALID_NRIC), descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
     }
 
     @Test

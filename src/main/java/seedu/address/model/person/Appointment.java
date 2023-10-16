@@ -34,6 +34,18 @@ public class Appointment {
     }
 
     /**
+     * Constructs an {@code Appointment}.
+     *
+     * @param start time of appointment
+     * @param end time of appointment
+     */
+    public Appointment(String start, String end) {
+        checkArgument(isValidStart(start), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidEnd(end), MESSAGE_CONSTRAINTS);
+        value = start + " - " + end;
+    }
+
+    /**
      * Returns true if a given string is a valid appointment.
      */
     public static boolean isValidAppointment(String test) {

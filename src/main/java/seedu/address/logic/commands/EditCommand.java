@@ -123,12 +123,11 @@ public class EditCommand extends Command {
             return persons.stream()
                     .filter(person -> person.getName().equals(name))
                     .findFirst();
-        } else if (nric != null) {
+        } else {
             return persons.stream()
                     .filter(person -> person.getNric().equals(nric))
                     .findFirst();
         }
-        return Optional.empty();
     }
 
     /**
