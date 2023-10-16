@@ -3,6 +3,10 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents a Person's banAccount in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidBankAccount(String)}
+ */
 public class BankAccount {
     public static final String MESSAGE_CONSTRAINTS =
             "Bank account should only contain numerical digits. It should not contain dashes or spaces.";
