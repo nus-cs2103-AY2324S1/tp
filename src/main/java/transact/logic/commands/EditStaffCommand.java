@@ -32,9 +32,9 @@ import transact.ui.MainWindow.TabWindow;
 /**
  * Edits the details of an existing person in the address book.
  */
-public class EditCommand extends Command {
+public class EditStaffCommand extends Command {
 
-    public static final String COMMAND_WORD = "edit";
+    public static final String COMMAND_WORD = "editstaff";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
             + "by the index number used in the displayed person list. "
@@ -62,7 +62,7 @@ public class EditCommand extends Command {
      * @param editPersonDescriptor
      *            details to edit the person with
      */
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+    public EditStaffCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(index);
         requireNonNull(editPersonDescriptor);
 
@@ -115,13 +115,13 @@ public class EditCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditCommand)) {
+        if (!(other instanceof EditStaffCommand)) {
             return false;
         }
 
-        EditCommand otherEditCommand = (EditCommand) other;
-        return index.equals(otherEditCommand.index)
-                && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
+        EditStaffCommand otherEditStaffCommand = (EditStaffCommand) other;
+        return index.equals(otherEditStaffCommand.index)
+                && editPersonDescriptor.equals(otherEditStaffCommand.editPersonDescriptor);
     }
 
     @Override

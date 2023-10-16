@@ -13,8 +13,10 @@ import transact.logic.commands.AddTransactionCommand;
 import transact.logic.parser.exceptions.ParseException;
 import transact.model.transaction.Transaction;
 import transact.model.transaction.info.Amount;
+import transact.model.transaction.info.Date;
 import transact.model.transaction.info.Description;
 import transact.model.transaction.info.TransactionId;
+import transact.model.transaction.info.TransactionType;
 
 /**
  * Parses input arguments and creates a new AddStaffCommand object
@@ -33,29 +35,26 @@ public class AddTransactionCommandParser implements Parser<AddTransactionCommand
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TYPE, PREFIX_DESCRIPTION,
                 PREFIX_AMOUNT, PREFIX_DATE, PREFIX_STAFF);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_TYPE, PREFIX_DESCRIPTION, PREFIX_AMOUNT, PREFIX_DATE,
-                PREFIX_STAFF)
+        if (!arePrefixesPresent(argMultimap, PREFIX_TYPE, PREFIX_DESCRIPTION, PREFIX_AMOUNT, PREFIX_DATE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddTransactionCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TYPE, PREFIX_DESCRIPTION, PREFIX_AMOUNT, PREFIX_DATE);
-        /*
-         * TODO add this when Transaction class is done.
-         * Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_TYPE).get());
-         * Phone phone =
-         * ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-         * Email email =
-         * ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-         * Address address =
-         * ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-         * Set<Tag> tagList =
-         * ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-         */
 
-        Transaction transaction = new Transaction(new TransactionId(), new Description("Test Description"),
-                new Amount(10));
+        TransactionType transactionType = ParserUtil.parseType(argMultimap.getValue(PREFIX_TYPE).get());
+        Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
+        Amount amount = ParserUtil.parseAmount(argMultimap.getValue(PREFIX_AMOUNT).get());
+
+        // TODO Parse data when date class ready
+        // Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+
+        // TODO Parse Optional Staff
+        // Person staff = ParserUtil.parsePerson(args);
+
+        Transaction transaction = new Transaction(new TransactionId(), transactionType, description, amount,
+                new Date());
 
         return new AddTransactionCommand(transaction);
     }

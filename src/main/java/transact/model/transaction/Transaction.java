@@ -8,20 +8,24 @@ import transact.commons.util.ToStringBuilder;
 import transact.model.entry.Entry;
 import transact.model.person.Person;
 import transact.model.transaction.info.Amount;
+import transact.model.transaction.info.Date;
 import transact.model.transaction.info.Description;
 import transact.model.transaction.info.TransactionId;
+import transact.model.transaction.info.TransactionType;
 
 /**
  * Represents a Transaction in the address book.
  */
 public class Transaction implements Entry {
 
-    public static final String MESSAGE_CONSTRAINTS = "This Transaction does not contain information about people involved";
+    public static final String MESSAGE_CONSTRAINTS = "This Transaction does not have a linked staff";
 
     private final TransactionId transactionId;
-    private final Person person;
+    private final TransactionType transactionType;
     private final Description description;
     private final Amount amount;
+    private final Date date;
+    private final Person person;
 
     /**
      * Creates a new Transaction.
@@ -35,11 +39,15 @@ public class Transaction implements Entry {
      * @param amount
      *            The amount of the transaction.
      */
-    public Transaction(TransactionId transactionId, Person person, Description description, Amount amount) {
+    public Transaction(TransactionId transactionId, TransactionType transactionType, Description description,
+            Amount amount, Date date,
+            Person person) {
         this.transactionId = transactionId;
         this.person = person;
         this.description = description;
         this.amount = amount;
+        this.transactionType = transactionType;
+        this.date = date;
     }
 
     /**
@@ -52,11 +60,14 @@ public class Transaction implements Entry {
      * @param amount
      *            The amount of the transaction.
      */
-    public Transaction(TransactionId transactionId, Description description, Amount amount) {
+    public Transaction(TransactionId transactionId, TransactionType transactionType, Description description,
+            Amount amount, Date date) {
         this.transactionId = transactionId;
         this.description = description;
         this.amount = amount;
         this.person = null;
+        this.date = date;
+        this.transactionType = transactionType;
     }
 
     public TransactionId getTransactionId() {
@@ -80,6 +91,14 @@ public class Transaction implements Entry {
         return amount;
     }
 
+    public Date getDate() {
+        return new Date();
+    }
+
+    public TransactionType getTransactionType() {
+        return transactionType;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -92,23 +111,25 @@ public class Transaction implements Entry {
 
         Transaction that = (Transaction) o;
         return Objects.equals(transactionId, that.transactionId)
-                && Objects.equals(person, that.person)
+                && Objects.equals(transactionType, that.transactionType)
                 && Objects.equals(description, that.description)
-                && Objects.equals(amount, that.amount);
+                && Objects.equals(amount, that.amount)
+                && Objects.equals(person, that.person);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(transactionId, person, description, amount);
+        return Objects.hash(transactionId, transactionType, description, amount, person);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("transactionId", transactionId)
-                .add("person", person)
+                .add("type", transactionType)
                 .add("description", description)
                 .add("amount", amount)
+                .add("person", person)
                 .toString();
     }
 

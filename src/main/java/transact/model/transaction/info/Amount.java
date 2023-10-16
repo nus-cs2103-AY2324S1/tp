@@ -5,6 +5,7 @@ import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
+
 /**
  * Represents an amount of money in the system.
  * Guarantees: immutable; amount is non-null and non-negative.
@@ -72,5 +73,17 @@ public class Amount {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    /**
+     * Returns true if a given string is a valid amount.
+     */
+    public static boolean isValidAmount(String amount) {
+        try {
+            double amt = Double.parseDouble(amount);
+            return amt > 0;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 }

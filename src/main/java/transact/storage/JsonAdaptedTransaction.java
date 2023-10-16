@@ -9,8 +9,10 @@ import transact.commons.exceptions.IllegalValueException;
 import transact.model.person.Person;
 import transact.model.transaction.Transaction;
 import transact.model.transaction.info.Amount;
+import transact.model.transaction.info.Date;
 import transact.model.transaction.info.Description;
 import transact.model.transaction.info.TransactionId;
+import transact.model.transaction.info.TransactionType;
 
 /**
  * Jackson-friendly version of {@link Transaction}.
@@ -51,11 +53,13 @@ class JsonAdaptedTransaction {
             final Person modelPerson = person.toModelType();
             final Description modelDescription = new Description(description);
             final Amount modelAmount = new Amount(amount);
-            return new Transaction(modelTransactionId, modelPerson, modelDescription, modelAmount);
+            return new Transaction(modelTransactionId, TransactionType.REVENUE, modelDescription, modelAmount,
+                    new Date(), modelPerson);
         } else {
             final Description modelDescription = new Description(description);
             final Amount modelAmount = new Amount(amount);
-            return new Transaction(modelTransactionId, modelDescription, modelAmount);
+            return new Transaction(modelTransactionId, TransactionType.EXPENSE, modelDescription, modelAmount,
+                    new Date());
         }
     }
 }

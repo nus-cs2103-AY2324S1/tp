@@ -5,8 +5,10 @@ import static transact.testutil.TypicalPersons.ALICE;
 import transact.model.person.Person;
 import transact.model.transaction.Transaction;
 import transact.model.transaction.info.Amount;
+import transact.model.transaction.info.Date;
 import transact.model.transaction.info.Description;
 import transact.model.transaction.info.TransactionId;
+import transact.model.transaction.info.TransactionType;
 
 /**
  * A utility class to help with building Transaction objects.
@@ -77,6 +79,6 @@ public class TransactionBuilder {
     }
 
     public Transaction build() {
-        return new Transaction(id, person, description, amount);
+        return new Transaction(id, TransactionType.EXPENSE, description, amount, new Date(), person);
     }
 }
