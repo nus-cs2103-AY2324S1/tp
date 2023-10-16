@@ -47,6 +47,8 @@ class ScheduleTest {
 
     @Test
     public void testIsClashing() {
+        final LocalDateTime aliceStartDateTime = SCHEDULE_ALICE_FIRST_JAN.getStartTime().getTime();
+        final LocalDateTime aliceEndDateTime = SCHEDULE_ALICE_FIRST_JAN.getEndTime().getTime();
         // null -> throws NullPointerException
         assertThrows(NullPointerException.class, () -> SCHEDULE_ALICE_FIRST_JAN.isClashing((Schedule) null));
 
@@ -68,46 +70,61 @@ class ScheduleTest {
 
         // same tutor, non-clashing schedules -> returns false
         Schedule beforeSchedule = new ScheduleBuilder(SCHEDULE_ALICE_FIRST_JAN)
-                .withStartTime(LocalDateTime.of(2023, 1, 2, 6, 0, 0))
-                .withEndTime(LocalDateTime.of(2023, 1, 2, 8, 0, 0))
+                .withStartTime(aliceStartDateTime.minusHours(2))
+                .withEndTime(aliceStartDateTime.minusHours(1))
                 .build();
         assertFalse(SCHEDULE_ALICE_FIRST_JAN.isClashing(beforeSchedule));
         assertFalse(beforeSchedule.isClashing(SCHEDULE_ALICE_FIRST_JAN));
 
         Schedule afterSchedule = new ScheduleBuilder(SCHEDULE_ALICE_FIRST_JAN)
-                .withStartTime(LocalDateTime.of(2023, 1, 2, 12, 0, 0))
-                .withEndTime(LocalDateTime.of(2023, 1, 2, 14, 0, 0))
+                .withStartTime(aliceEndDateTime.plusHours(1))
+                .withEndTime(aliceEndDateTime.plusHours(2))
                 .build();
         assertFalse(SCHEDULE_ALICE_FIRST_JAN.isClashing(afterSchedule));
         assertFalse(afterSchedule.isClashing(SCHEDULE_ALICE_FIRST_JAN));
 
+        Schedule nextDaySchedule = new ScheduleBuilder(SCHEDULE_ALICE_FIRST_JAN)
+                .withStartTime(aliceStartDateTime.plusDays(1))
+                .withEndTime(aliceEndDateTime.plusDays(1))
+                .build();
+        assertFalse(SCHEDULE_ALICE_FIRST_JAN.isClashing(nextDaySchedule));
+        assertFalse(nextDaySchedule.isClashing(SCHEDULE_ALICE_FIRST_JAN));
+
         // same tutor, adjacent times -> return false
         beforeSchedule = new ScheduleBuilder(SCHEDULE_ALICE_FIRST_JAN)
-                .withStartTime(LocalDateTime.of(2023, 1, 2, 7, 0, 0))
-                .withEndTime(LocalDateTime.of(2023, 1, 2, 9, 0, 0))
+                .withStartTime(aliceStartDateTime.minusHours(2))
+                .withEndTime(aliceStartDateTime)
                 .build();
         assertFalse(SCHEDULE_ALICE_FIRST_JAN.isClashing(beforeSchedule));
         assertFalse(beforeSchedule.isClashing(SCHEDULE_ALICE_FIRST_JAN));
 
         afterSchedule = new ScheduleBuilder(SCHEDULE_ALICE_FIRST_JAN)
-                .withStartTime(LocalDateTime.of(2023, 1, 2, 11, 0, 0))
-                .withEndTime(LocalDateTime.of(2023, 1, 2, 13, 0, 0))
+                .withStartTime(aliceEndDateTime)
+                .withEndTime(aliceEndDateTime.plusHours(2))
                 .build();
         assertFalse(SCHEDULE_ALICE_FIRST_JAN.isClashing(afterSchedule));
         assertFalse(afterSchedule.isClashing(SCHEDULE_ALICE_FIRST_JAN));
 
         // same tutor, end time overlapping -> return true
         Schedule otherSchedule = new ScheduleBuilder(SCHEDULE_ALICE_FIRST_JAN)
-                .withStartTime(LocalDateTime.of(2023, 1, 2, 8, 0, 0))
-                .withEndTime(LocalDateTime.of(2023, 1, 2, 10, 0, 0))
+                .withStartTime(aliceStartDateTime.minusHours(1))
+                .withEndTime(aliceStartDateTime.plusSeconds(1))
                 .build();
         assertTrue(SCHEDULE_ALICE_FIRST_JAN.isClashing(otherSchedule));
         assertTrue(otherSchedule.isClashing(SCHEDULE_ALICE_FIRST_JAN));
 
         // same tutor, start time overlapping -> return true
         otherSchedule = new ScheduleBuilder(SCHEDULE_ALICE_FIRST_JAN)
-                .withStartTime(LocalDateTime.of(2023, 1, 2, 10, 0, 0))
-                .withEndTime(LocalDateTime.of(2023, 1, 2, 12, 0, 0))
+                .withStartTime(aliceEndDateTime.minusSeconds(1))
+                .withEndTime(aliceEndDateTime.plusHours(2))
+                .build();
+        assertTrue(SCHEDULE_ALICE_FIRST_JAN.isClashing(otherSchedule));
+        assertTrue(otherSchedule.isClashing(SCHEDULE_ALICE_FIRST_JAN));
+
+        // same tutor, both times overlapping -> return true
+        otherSchedule = new ScheduleBuilder(SCHEDULE_ALICE_FIRST_JAN)
+                .withStartTime(aliceStartDateTime.plusSeconds(1))
+                .withEndTime(aliceEndDateTime.minusSeconds(1))
                 .build();
         assertTrue(SCHEDULE_ALICE_FIRST_JAN.isClashing(otherSchedule));
         assertTrue(otherSchedule.isClashing(SCHEDULE_ALICE_FIRST_JAN));
