@@ -181,7 +181,6 @@ public class AddCommandTest {
      */
     private class ModelStubWithPerson extends ModelStub {
         private final Person person;
-        private int id = 0;
 
         ModelStubWithPerson(Person person) {
             requireNonNull(person);
@@ -200,6 +199,7 @@ public class AddCommandTest {
      */
     private class ModelStubAcceptingPersonAdded extends ModelStub {
         final ArrayList<Person> personsAdded = new ArrayList<>();
+        private int id = 0;
 
         @Override
         public boolean hasPerson(Person person) {
