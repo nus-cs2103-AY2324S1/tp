@@ -19,7 +19,7 @@ public class ScheduleUtil {
     private static final DateTimeFormatter endTimeFormatter = DateTimeFormatter.ofPattern(EndTime.DATETIME_FORMAT);
 
     /**
-     * Returns an add command string for adding the {@code schedule}.
+     * Returns an add schedule command string for adding the {@code schedule}.
      */
     public static String getAddScheduleCommand(Schedule schedule) {
         return AddScheduleCommand.COMMAND_WORD + " " + getScheduleDetails(schedule);
