@@ -47,6 +47,8 @@ public class Messages {
                 .append(person.getNextOfKinName())
                 .append("; Next-of-kin Phone: ")
                 .append(person.getNextOfKinPhone())
+                .append("; Appointment: ")
+                .append(person.getAppointment())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
         return builder.toString();

@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -26,12 +27,12 @@ public class Person {
     private final NextOfKinName nextOfKinName;
     private final NextOfKinPhone nextOfKinPhone;
     private final Set<Tag> tags = new HashSet<>();
-    private final Set<Appointment> appointments = new HashSet<>();
+    private final Appointment appointment;
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, NextOfKinName nextOfKinName,
-                  NextOfKinPhone nextOfKinPhone, Set<Tag> tags) {
+                  NextOfKinPhone nextOfKinPhone, Set<Tag> tags, Appointment appointment) {
         requireAllNonNull(name, phone, email, address, nextOfKinName, nextOfKinPhone, tags);
         this.name = name;
         this.phone = phone;
@@ -40,6 +41,7 @@ public class Person {
         this.nextOfKinName = nextOfKinName;
         this.nextOfKinPhone = nextOfKinPhone;
         this.tags.addAll(tags);
+        this.appointment = appointment;
     }
 
     public Name getName() {
@@ -64,6 +66,9 @@ public class Person {
         return nextOfKinPhone;
     }
 
+    public Appointment getAppointment() {
+        return appointment;
+    }
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -108,7 +113,7 @@ public class Person {
                 && nextOfKinName.equals(otherPerson.nextOfKinName)
                 && nextOfKinPhone.equals(otherPerson.nextOfKinPhone)
                 && tags.equals(otherPerson.tags)
-                && appointments.equals(otherPerson.appointments);
+                && appointment.equals(otherPerson.appointment);
     }
 
     @Override
@@ -127,7 +132,7 @@ public class Person {
                 .add("nextOfKinName", nextOfKinName)
                 .add("nextOfKinPhone", nextOfKinPhone)
                 .add("tags", tags)
-                .add("appointment", appointments)
+                .add("appointment", appointment)
                 .toString();
     }
 

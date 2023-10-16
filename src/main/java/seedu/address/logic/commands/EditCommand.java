@@ -23,6 +23,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -57,7 +58,6 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
-
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
 
@@ -109,8 +109,9 @@ public class EditCommand extends Command {
         NextOfKinPhone updatedNokPhone = editPersonDescriptor.getNextOfKinPhone()
                 .orElse(personToEdit.getNextOfKinPhone());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Appointment appointment = editPersonDescriptor.getAppointment().orElse(personToEdit.getAppointment());
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedNokName,
-                updatedNokPhone, updatedTags);
+                updatedNokPhone, updatedTags, appointment);
     }
 
     @Override
@@ -149,6 +150,7 @@ public class EditCommand extends Command {
         private NextOfKinName nextOfKinName;
         private NextOfKinPhone nextOfKinPhone;
         private Set<Tag> tags;
+        private Appointment appointment;
 
         public EditPersonDescriptor() {}
 
@@ -218,6 +220,14 @@ public class EditCommand extends Command {
 
         public Optional<NextOfKinPhone> getNextOfKinPhone() {
             return Optional.ofNullable(nextOfKinPhone);
+        }
+
+        public void setAppointment(Appointment appointment) {
+            this.appointment = appointment;
+        }
+
+        public Optional<Appointment> getAppointment() {
+            return Optional.ofNullable(appointment);
         }
 
         /**

@@ -5,6 +5,7 @@
     "email": "hans@example.com",
     "address": "4th street",
     "nextOfKinName": "Person Dad",
-    "nextOfKinPhone": "9482111"
+    "nextOfKinPhone": "9482111",
+    "appointment": "No Appointment made!"
   } ]
 }
