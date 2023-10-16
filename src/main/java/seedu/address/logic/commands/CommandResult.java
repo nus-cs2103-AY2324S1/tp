@@ -46,9 +46,13 @@ public class CommandResult {
         this.fieldToRead = null;
     }
 
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
+     * ,store read field and set read to true to display a different person card.
+     */
     public CommandResult(String feedbackToUser, boolean read, String fieldToRead) {
         this.feedbackToUser = feedbackToUser;
-        this.exit =false;
+        this.exit = false;
         this.showHelp = false;
         this.read = read;
         this.fieldToRead = fieldToRead;

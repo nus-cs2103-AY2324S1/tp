@@ -59,7 +59,8 @@ public class PersonListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCardWithSpecificField}.
+     * Custom {@code ListCell} that displays the graphics of
+     * a {@code Person} using a {@code PersonCardWithSpecificField}.
      */
     class SpecifyPersonListViewCell extends ListCell<Person> {
         @Override

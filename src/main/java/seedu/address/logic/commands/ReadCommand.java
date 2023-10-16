@@ -1,15 +1,14 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.List;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-
-import java.util.List;
-import java.util.function.Predicate;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Reads a specific piece of information of a particular employee
@@ -56,7 +55,7 @@ public class ReadCommand extends Command {
         String fieldStr = fieldToString(personToRead);
         model.setSpecificPersonToDisplay(personToRead);
 
-        return new CommandResult(String.format(MESSAGE_READ_PERSON_SUCCESS,field), true, fieldStr);
+        return new CommandResult(String.format(MESSAGE_READ_PERSON_SUCCESS, field), true, fieldStr);
     }
 
     /**
@@ -66,13 +65,13 @@ public class ReadCommand extends Command {
      * @return The information specified by the field.
      * @throws CommandException if the field is invalid.
      */
-    public String fieldToString( Person person) throws CommandException {
-        if(field.equals("p")) {
-           return person.getPhone().value;
-        } else if(field.equals("a")) {
+    public String fieldToString(Person person) throws CommandException {
+        if (field.equals("p")) {
+            return person.getPhone().value;
+        } else if (field.equals("a")) {
             return person.getAddress().value;
-        } else if(field.equals("e")) {
-            return  person.getEmail().value;
+        } else if (field.equals("e")) {
+            return person.getEmail().value;
         } else {
             throw new CommandException(Messages.MESSAGE_INVALID_FIELD_TO_READ);
         }
