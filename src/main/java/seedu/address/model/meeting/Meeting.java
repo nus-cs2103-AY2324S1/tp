@@ -91,7 +91,8 @@ public class Meeting {
         return otherMeeting != null
                 && otherMeeting.getTitle().equals(getTitle())
                 && otherMeeting.getLocation().equals(getLocation())
-                && otherMeeting.getMeetingTime().equals(getMeetingTime());
+                && otherMeeting.getMeetingTime().equals(getMeetingTime())
+                && otherMeeting.getTags().equals(getTags());
     }
 
     /**

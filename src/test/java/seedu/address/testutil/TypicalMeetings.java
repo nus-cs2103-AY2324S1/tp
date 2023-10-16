@@ -16,6 +16,7 @@ public class TypicalMeetings {
             .withLocation("Zoom call url")
             .withStart("20.09.2023 1000").withEnd("20.09.2023 1200")
             .withAttendees(TypicalPersons.getTypicalAttendees())
+            // .withTags("work", "important")
             .build();
 
     public static final Meeting MEETING2 = new MeetingBuilder().withTitle("CS2101 meeting")

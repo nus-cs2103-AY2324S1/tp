@@ -30,9 +30,7 @@ public class MeetingTest {
 
         // same title, all other attributes different -> returns false
         Meeting editedMeeting1 = new MeetingBuilder(MEETING1).withLocation("Not a zoom call url")
-                .withStart("23.09.2023 1000")
-                .withEnd("23.09.2023 1000")
-                .withAttendees().build();
+                .withStart("23.09.2023 1000").withEnd("23.09.2023 1000").withAttendees().build();
         assertFalse(MEETING1.isSameMeeting(editedMeeting1));
 
         // different title, all other attributes same -> returns false
@@ -84,9 +82,9 @@ public class MeetingTest {
 
     @Test
     public void toStringMethod() {
-        String expected = Meeting.class.getCanonicalName() + "{title=" + MEETING1.getTitle()
-                + ", location=" + MEETING1.getLocation() + ", start=" + MEETING1.getStart()
-                + ", end=" + MEETING1.getEnd() + ", attendees=" + MEETING1.getAttendees() + "}";
+        String expected = Meeting.class.getCanonicalName() + "{title=" + MEETING1.getTitle() + ", location="
+                + MEETING1.getLocation() + ", start=" + MEETING1.getStart() + ", end=" + MEETING1.getEnd()
+                + ", attendees=" + MEETING1.getAttendees() + ", tags=" + MEETING1.getTags() + "}";
         assertEquals(expected, MEETING1.toString());
     }
 }
