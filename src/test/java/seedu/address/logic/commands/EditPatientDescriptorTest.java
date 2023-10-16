@@ -69,7 +69,8 @@ public class EditPatientDescriptorTest {
                 + editPatientDescriptor.getName().orElse(null) + ", phone="
                 + editPatientDescriptor.getPhone().orElse(null) + ", email="
                 + editPatientDescriptor.getEmail().orElse(null) + ", tags="
-                + editPatientDescriptor.getTags().orElse(null) + ", medical history="
+                + editPatientDescriptor.getTags().orElse(null) + ", age="
+                + editPatientDescriptor.getAge().orElse(null) + ", medical history="
                 + editPatientDescriptor.getMedicalHistory().orElse(null) + "}";
         assertEquals(expected, editPatientDescriptor.toString());
     }

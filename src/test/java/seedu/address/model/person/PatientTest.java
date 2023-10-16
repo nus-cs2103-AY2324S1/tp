@@ -3,6 +3,8 @@ package seedu.address.model.person;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_AGE_THIRTY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MEDICAL_HISTORY_OSTEOPOROSIS;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import org.junit.jupiter.api.Test;
@@ -13,23 +15,20 @@ public class PatientTest {
     @Test
     public void equals() {
         assertTrue(true);
-        // TODO: Add tests for patient equals method based on fields
-        Person aliceCopy = new PatientBuilder(ALICE).build();
-        assertTrue(ALICE.equals(aliceCopy));
 
-        // same object -> returns true
-        assertTrue(ALICE.equals(ALICE));
+        // different age -> returns false
+        Person editedAlice = new PatientBuilder(ALICE).withAge(VALID_AGE_THIRTY).build();
+        assertFalse(ALICE.equals(editedAlice));
 
-        // null -> returns false
-        assertFalse(ALICE.equals(null));
-
-        // different type -> returns false
-        assertFalse(ALICE.equals(5));
+        // different medical history -> returns false
+        editedAlice = new PatientBuilder(ALICE).withMedicalHistory(VALID_MEDICAL_HISTORY_OSTEOPOROSIS).build();
+        assertFalse(ALICE.equals(editedAlice));
     }
     @Test
     public void toStringMethod() {
         String expected = Patient.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", tags=" + ALICE.getTags()
+                + ", age=" + ALICE.getAge()
                 + ", medical history=" + ALICE.getMedicalHistory() + "}";
         assertEquals(expected, ALICE.toString());
     }

@@ -1,8 +1,12 @@
 package seedu.address.testutil;
 
+
+
+import static seedu.address.logic.commands.CommandTestUtil.VALID_AGE_THIRTY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LOCATION_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MEDICAL_HISTORY_ANEMIA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
@@ -25,18 +29,20 @@ import seedu.address.model.person.Specialist;
  */
 public class TypicalPersons {
 
-    public static final Patient ALICE = (Patient) new PatientBuilder().withMedicalHistory("Anemia")
+    public static final Patient ALICE = (Patient) new PatientBuilder().withAge("17").withMedicalHistory("Anemia")
             .withName("Alice Pauline")
             .withEmail("alice@example.com")
             .withPhone("94351253")
             .withTags("friends").build();
-    public static final Patient BENSON = (Patient) new PatientBuilder().withMedicalHistory("Osteoporosis")
+    public static final Patient BENSON = (Patient) new PatientBuilder().withAge("29").withMedicalHistory("Osteoporosis")
             .withName("Benson Meier")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withTags("owesMoney", "friends").build();
-    public static final Patient CARL = (Patient) new PatientBuilder().withMedicalHistory("Diabetes")
-            .withName("Carl Kurz").withPhone("95352563").withEmail("heinz@example.com").build();
-    public static final Patient DANIEL = (Patient) new PatientBuilder().withMedicalHistory("Asthma")
+
+    public static final Patient CARL = (Patient) new PatientBuilder().withAge("47").withMedicalHistory("Diabetes")
+            .withName("Carl Kurz").withPhone("95352563").withEmail("heinz@example.com")
+            .build();
+    public static final Patient DANIEL = (Patient) new PatientBuilder().withAge("78").withMedicalHistory("Asthma")
             .withName("Daniel Meier").withPhone("87652533").withEmail("cornelia@example.com")
             .withTags("friends").build();
     public static final Specialist ELLE = (Specialist) new SpecialistBuilder().withSpecialty("Dermatology")
@@ -50,15 +56,21 @@ public class TypicalPersons {
             .withEmail("anna@example.com").build();
 
     // Manually added
-    public static final Patient HOON = (Patient) new PatientBuilder().withName("Hoon Meier").withPhone("8482424")
+    public static final Patient HOON = (Patient) new PatientBuilder()
+            .withAge("79").withMedicalHistory("Diabetes")
+            .withName("Hoon Meier").withPhone("8482424")
             .withEmail("stefan@example.com").build();
+
     public static final Specialist IDA = (Specialist) new SpecialistBuilder()
+            .withSpecialty("Gynaecology")
             .withName("Ida Mueller").withPhone("8482131")
             .withEmail("hans@example.com").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
-    public static final Patient AMY = (Patient) new PatientBuilder().withName(VALID_NAME_AMY)
-            .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY)
+    public static final Patient AMY = (Patient) new PatientBuilder()
+            .withAge(VALID_AGE_THIRTY).withMedicalHistory(VALID_MEDICAL_HISTORY_ANEMIA)
+            .withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
+            .withEmail(VALID_EMAIL_AMY)
             .withTags(VALID_TAG_FRIEND).build();
     public static final Specialist BOB = (Specialist) new SpecialistBuilder()
             .withLocation(VALID_LOCATION_BOB).withSpecialty(VALID_SPECIALTY_DERMATOLOGY)

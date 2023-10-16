@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PATIENT_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICALHISTORY;
@@ -37,8 +38,9 @@ public class FindCommand extends Command {
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_LOCATION + "LOCATION "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "If the person is a patient, find by their medical history by using the "
-            + PREFIX_MEDICALHISTORY + " prefix. \n"
+            + "If the person is a patient, find their age and medical history by using the "
+            + PREFIX_AGE + " and "
+            + PREFIX_MEDICALHISTORY + " prefixes respectively. \n"
             + "If the person is a specialist, find by their specialty by using the "
             + PREFIX_SPECIALTY + " prefix. \n"
             + "Example: " + COMMAND_WORD + " "

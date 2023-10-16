@@ -25,6 +25,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Age;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Location;
 import seedu.address.model.person.MedicalHistory;
@@ -130,10 +131,12 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPatientDescriptor.getPhone().orElse(patientToEdit.getPhone());
         Email updatedEmail = editPatientDescriptor.getEmail().orElse(patientToEdit.getEmail());
         Set<Tag> updatedTags = editPatientDescriptor.getTags().orElse(patientToEdit.getTags());
+        Age updatedAge = editPatientDescriptor.getAge().orElse(patientToEdit.getAge());
         MedicalHistory updatedMedicalHistory = editPatientDescriptor.getMedicalHistory()
                 .orElse(patientToEdit.getMedicalHistory());
-        return new Patient(updatedName, updatedPhone,
-                updatedEmail, updatedTags, updatedMedicalHistory);
+
+        return new Patient(updatedName, updatedPhone, updatedEmail, updatedTags, updatedAge,
+                updatedMedicalHistory);
     }
 
     /**
@@ -285,6 +288,7 @@ public class EditCommand extends Command {
      * corresponding field value of the patient.
      */
     public static class EditPatientDescriptor extends EditPersonDescriptor {
+        private Age age;
         private MedicalHistory medicalHistory;
 
         /**
@@ -294,15 +298,23 @@ public class EditCommand extends Command {
         public EditPatientDescriptor(EditPatientDescriptor toCopy) {
             super(toCopy);
             setMedicalHistory(toCopy.medicalHistory);
+            setAge(toCopy.age);
         }
 
         public EditPatientDescriptor() {}
         public void setMedicalHistory(MedicalHistory medicalHistory) {
             this.medicalHistory = medicalHistory;
         }
+        public void setAge(Age age) {
+            this.age = age;
+        }
 
         public Optional<MedicalHistory> getMedicalHistory() {
             return Optional.ofNullable(medicalHistory);
+        }
+
+        public Optional<Age> getAge() {
+            return Optional.ofNullable(age);
         }
 
 
@@ -315,13 +327,14 @@ public class EditCommand extends Command {
         public boolean equals(Object other) {
             if (super.equals(other) && other instanceof EditPatientDescriptor) {
                 EditPatientDescriptor otherEditPatientDescriptor = (EditPatientDescriptor) other;
-                return Objects.equals(medicalHistory, otherEditPatientDescriptor.medicalHistory);
+                return Objects.equals(age, otherEditPatientDescriptor.age)
+                        && Objects.equals(medicalHistory, otherEditPatientDescriptor.medicalHistory);
             }
             return false;
         }
         @Override
         public String toString() {
-            String stringToAdd = ", medical history=" + medicalHistory;
+            String stringToAdd = ", age=" + age + ", medical history=" + medicalHistory;
             return StringUtil.addFieldToPersonToString(stringToAdd, super.toString());
         }
         /**
@@ -329,7 +342,7 @@ public class EditCommand extends Command {
          */
         @Override
         public boolean isAnyFieldEdited() {
-            return super.isAnyFieldEdited() || CollectionUtil.isAnyNonNull(medicalHistory);
+            return super.isAnyFieldEdited() || CollectionUtil.isAnyNonNull(age, medicalHistory);
         }
 
     }

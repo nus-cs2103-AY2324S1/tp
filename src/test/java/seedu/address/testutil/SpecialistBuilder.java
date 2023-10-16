@@ -16,7 +16,7 @@ public class SpecialistBuilder extends PersonBuilder {
     private Location location;
 
     /**
-     * Constructor that assigns a default specialty
+     * Creates a {@code SpecialistBuilder} with the default details.
      */
     public SpecialistBuilder() {
         super();
@@ -25,8 +25,7 @@ public class SpecialistBuilder extends PersonBuilder {
     }
 
     /**
-     * Constructor to copy a specific specialist
-     * @param specialistToCopy
+     * Initializes the SpecialistBuilder with the data of {@code specialistToCopy}.
      */
     public SpecialistBuilder(Specialist specialistToCopy) {
         super(specialistToCopy);

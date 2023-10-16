@@ -24,6 +24,7 @@ public class EditSpecialistDescriptorBuilder extends EditPersonDescriptorBuilder
         EditSpecialistDescriptor editSpecialistDescriptor = new EditSpecialistDescriptor();
         setDescriptor(editSpecialistDescriptor);
         editPersonDescriptorSetFields(specialist);
+        editSpecialistDescriptor.setSpecialty(specialist.getSpecialty());
     }
 
     /**
