@@ -1,6 +1,7 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_UNAVAILABLE_COMMAND_IN_VIEW_MODE;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
@@ -89,6 +90,22 @@ public class LogicManagerTest {
     public void execute_viewModeParserCommand_success() throws Exception {
         String viewExitCommand = ViewExitCommand.COMMAND_WORD;
         assertViewModeCommandSuccess(viewExitCommand, ViewExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT, model);
+    }
+
+    @Test
+    public void execute_getIsViewCommandMethod_success() throws CommandException, ParseException {
+        String viewCommand = "view 1";
+        CommandResult parsedCommand = logic.execute(viewCommand);
+        assertTrue(logic.getIsViewCommand());
+    }
+
+    @Test
+    public void execute_getIsViewExitCommandMethod_success() throws CommandException, ParseException {
+        String viewCommand = "view 1";
+        String viewExitCommand = "exit";
+        CommandResult parsedViewCommand = logic.execute(viewCommand);
+        CommandResult parsedViewExitCommand = logic.execute(viewExitCommand);
+        assertTrue(logic.getIsViewExitCommand());
     }
 
 
