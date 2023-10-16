@@ -94,6 +94,9 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code TutorialGroup} of the {@code Person} that we are building.
+     */
     public PersonBuilder withTutorialGroup(String tutorialGroup) {
         this.tutorialGroup = new TutorialGroup(tutorialGroup);
         return this;
