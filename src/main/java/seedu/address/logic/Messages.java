@@ -53,6 +53,8 @@ public class Messages {
                 .append(person.getEmail())
                 .append("; Address: ")
                 .append(person.getAddress())
+                .append("; Birthday: ")
+                .append(person.getBirthday())
                 .append("; Groups: ");
         person.getGroups().forEach(builder::append);
         return builder.toString();
