@@ -1,5 +1,7 @@
 package seedu.application.logic.commands;
+
 import static seedu.application.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_DEADLINE;
 
 import java.util.List;
 
@@ -22,8 +24,8 @@ public class DeadlineCommand extends Command {
             + ": Sets submission deadline for an existing application in the list. \n"
             + "by the index number used in the last Job listing. "
             + "Existing deadline will be overwritten by the input.\n"
-            + "Parameters: INDEX (must be a positive integer) d/[DEADLINE]\n"
-            + "Example: " + COMMAND_WORD + " 1 " + "d/Dec 31 2030 1200.";
+            + "Parameters: INDEX (must be a positive integer) " + PREFIX_DEADLINE + "[DEADLINE]\n"
+            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_DEADLINE + "Dec 31 2030 1200.";
 
     public static final String MESSAGE_SET_DEADLINE_SUCCESS = "Set deadline to specified application.";
     private static final String MESSAGE_SET_DEADLINE_FAILURE = "Failure to set deadline.";
