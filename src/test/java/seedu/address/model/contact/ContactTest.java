@@ -33,7 +33,9 @@ public class ContactTest {
         assertFalse(ALICE.isSameContact(editedAlice));
 
         // name differs in case, all other attributes same -> returns false
-        Contact editedBob = new ContactBuilder(TestData.Valid.Contact.BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
+        Contact editedBob = new ContactBuilder(TestData.Valid.Contact.BOB)
+                .withName(VALID_NAME_BOB.toLowerCase())
+                .build();
         assertFalse(TestData.Valid.Contact.BOB.isSameContact(editedBob));
 
         // name has trailing spaces, all other attributes same -> returns false
@@ -77,7 +79,9 @@ public class ContactTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false
-        editedAlice = new ContactBuilder(ALICE).withTags(TestData.Valid.Tag.ALPHANUMERIC, TestData.Valid.Tag.ALPHANUMERIC_SPACES).build();
+        editedAlice = new ContactBuilder(ALICE)
+                .withTags(TestData.Valid.Tag.ALPHANUMERIC, TestData.Valid.Tag.ALPHANUMERIC_SPACES)
+                .build();
         assertFalse(ALICE.equals(editedAlice));
     }
 

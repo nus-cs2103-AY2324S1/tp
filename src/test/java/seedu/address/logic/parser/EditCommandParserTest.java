@@ -74,7 +74,12 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_NAME_DESC, Messages.MESSAGE_NAME_CONSTRAINTS); // invalid name
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC, Messages.MESSAGE_PHONE_CONSTRAINTS); // invalid phone
         assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, Messages.MESSAGE_EMAIL_CONSTRAINTS); // invalid email
-        assertParseFailure(parser, "1" + TestData.Invalid.Tag.FLAG_HASHTAG, Messages.tagInvalid(TestData.Invalid.Tag.HASHTAG)); // invalid tag
+        // Invalid tag
+        assertParseFailure(
+            parser,
+            "1" + TestData.Invalid.Tag.FLAG_HASHTAG,
+            Messages.tagInvalid(TestData.Invalid.Tag.HASHTAG)
+        );
 
         // invalid phone followed by valid email
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC + EMAIL_DESC_AMY, Messages.MESSAGE_PHONE_CONSTRAINTS);
@@ -87,7 +92,7 @@ public class EditCommandParserTest {
                     + TestData.Valid.Tag.FLAG
                     + TestData.Valid.Tag.FLAG_ALPHANUMERIC
                     + TestData.Valid.Tag.FLAG_ALPHANUMERIC_SPACES,
-			Messages.tagInvalid("")
+            Messages.tagInvalid("")
         );
         assertParseFailure(
             parser,
@@ -95,7 +100,7 @@ public class EditCommandParserTest {
                     + TestData.Valid.Tag.FLAG_ALPHANUMERIC
                     + TestData.Valid.Tag.FLAG
                     + TestData.Valid.Tag.FLAG_ALPHANUMERIC_SPACES,
-			Messages.tagInvalid("")
+            Messages.tagInvalid("")
         );
         assertParseFailure(
             parser,
@@ -103,7 +108,7 @@ public class EditCommandParserTest {
                     + TestData.Valid.Tag.FLAG_ALPHANUMERIC
                     + TestData.Valid.Tag.FLAG_ALPHANUMERIC_SPACES
                     + TestData.Valid.Tag.FLAG,
-			Messages.tagInvalid("")
+            Messages.tagInvalid("")
         );
 
         // multiple invalid values, but only the first invalid value is captured

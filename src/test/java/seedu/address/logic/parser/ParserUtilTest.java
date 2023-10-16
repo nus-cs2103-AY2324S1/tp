@@ -171,7 +171,14 @@ public class ParserUtilTest {
 
     @Test
     public void parseTags_collectionWithInvalidTags_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTags(Arrays.asList(TestData.Valid.Tag.ALPHANUMERIC, TestData.Invalid.Tag.HASHTAG)));
+        assertThrows(
+            ParseException.class,
+            () -> {
+                ParserUtil.parseTags(
+                    Arrays.asList(TestData.Valid.Tag.ALPHANUMERIC, TestData.Invalid.Tag.HASHTAG)
+                );
+            }
+        );
     }
 
     @Test
@@ -181,9 +188,15 @@ public class ParserUtilTest {
 
     @Test
     public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
-        Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(TestData.Valid.Tag.ALPHANUMERIC, TestData.Valid.Tag.ALPHANUMERIC_SPACES));
-        Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(TestData.Valid.Tag.ALPHANUMERIC),
-                new Tag(TestData.Valid.Tag.ALPHANUMERIC_SPACES)));
+        Set<Tag> actualTagSet = ParserUtil.parseTags(
+            Arrays.asList(TestData.Valid.Tag.ALPHANUMERIC, TestData.Valid.Tag.ALPHANUMERIC_SPACES)
+        );
+        Set<Tag> expectedTagSet = new HashSet<Tag>(
+            Arrays.asList(
+                new Tag(TestData.Valid.Tag.ALPHANUMERIC),
+                new Tag(TestData.Valid.Tag.ALPHANUMERIC_SPACES)
+            )
+        );
 
         assertEquals(expectedTagSet, actualTagSet);
     }

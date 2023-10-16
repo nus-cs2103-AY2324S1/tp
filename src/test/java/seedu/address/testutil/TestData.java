@@ -114,8 +114,14 @@ public final class TestData {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 
-	//TODO Refine the various test data above this line
+    //TODO Refine the various test data above this line
+    /**
+     * Holds valid test data.
+     */
     public static final class Valid {
+        /**
+         * Holds tag-related data.
+         */
         public static final class Tag {
             public static final String ALPHANUMERIC = "Friend1";
             public static final String ALPHANUMERIC_SPACES = "2023 tutorial classmate";
@@ -125,6 +131,9 @@ public final class TestData {
             public static final String FLAG_ALPHANUMERIC_SPACES = Tag.FLAG + Tag.ALPHANUMERIC_SPACES;
         }
 
+        /**
+         * Holds {@link Contact}s.
+         */
         public static final class Contact {
             public static final seedu.address.model.contact.Contact AMY =
                     new ContactBuilder()
@@ -144,6 +153,9 @@ public final class TestData {
                             .build();
         }
 
+        /**
+         * Holds {@link EditContactDescriptor}s.
+         */
         public static final class EditDescriptor {
             public static final EditContactDescriptor AMY =
                 new EditContactDescriptorBuilder()
@@ -164,7 +176,13 @@ public final class TestData {
         }
     }
 
+    /**
+     * Holds invalid test data.
+     */
     public static final class Invalid {
+        /**
+         * Holds tag-related data.
+         */
         public static final class Tag {
             public static final String HASHTAG = "#WrongKindOfTag";
             public static final String UNDERSCORE_DASH = "kebab-snake_case";

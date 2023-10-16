@@ -174,7 +174,7 @@ public class AddCommandParserTest {
                     + EMAIL_DESC_BOB
                     + NOTE_DESC_BOB
                     + TestData.Invalid.Tag.FLAG_HASHTAG,
-			Messages.tagInvalid(TestData.Invalid.Tag.HASHTAG)
+            Messages.tagInvalid(TestData.Invalid.Tag.HASHTAG)
         );
 
         // two invalid values, only first invalid value reported

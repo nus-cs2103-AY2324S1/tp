@@ -36,23 +36,38 @@ public class EditContactDescriptorTest {
         assertFalse(TestData.Valid.EditDescriptor.AMY.equals(TestData.Valid.EditDescriptor.BOB));
 
         // different name -> returns false
-        EditContactDescriptor editedAmy = new EditContactDescriptorBuilder(TestData.Valid.EditDescriptor.AMY).withName(VALID_NAME_BOB).build();
+        EditContactDescriptor editedAmy =
+                new EditContactDescriptorBuilder(TestData.Valid.EditDescriptor.AMY)
+                .withName(VALID_NAME_BOB)
+                .build();
         assertFalse(TestData.Valid.EditDescriptor.AMY.equals(editedAmy));
 
         // different phone -> returns false
-        editedAmy = new EditContactDescriptorBuilder(TestData.Valid.EditDescriptor.AMY).withPhone(VALID_PHONE_BOB).build();
+        editedAmy =
+                new EditContactDescriptorBuilder(TestData.Valid.EditDescriptor.AMY)
+                .withPhone(VALID_PHONE_BOB)
+                .build();
         assertFalse(TestData.Valid.EditDescriptor.AMY.equals(editedAmy));
 
         // different email -> returns false
-        editedAmy = new EditContactDescriptorBuilder(TestData.Valid.EditDescriptor.AMY).withEmail(VALID_EMAIL_BOB).build();
+        editedAmy =
+                new EditContactDescriptorBuilder(TestData.Valid.EditDescriptor.AMY)
+                .withEmail(VALID_EMAIL_BOB)
+                .build();
         assertFalse(TestData.Valid.EditDescriptor.AMY.equals(editedAmy));
 
         // different address -> returns false
-        editedAmy = new EditContactDescriptorBuilder(TestData.Valid.EditDescriptor.AMY).withNote(VALID_NOTE_BOB).build();
+        editedAmy =
+                new EditContactDescriptorBuilder(TestData.Valid.EditDescriptor.AMY)
+                .withNote(VALID_NOTE_BOB)
+                .build();
         assertFalse(TestData.Valid.EditDescriptor.AMY.equals(editedAmy));
 
         // different tags -> returns false
-        editedAmy = new EditContactDescriptorBuilder(TestData.Valid.EditDescriptor.AMY).withTags(TestData.Valid.Tag.ALPHANUMERIC_SPACES).build();
+        editedAmy =
+                new EditContactDescriptorBuilder(TestData.Valid.EditDescriptor.AMY)
+                .withTags(TestData.Valid.Tag.ALPHANUMERIC_SPACES)
+                .build();
         assertFalse(TestData.Valid.EditDescriptor.AMY.equals(editedAmy));
     }
 

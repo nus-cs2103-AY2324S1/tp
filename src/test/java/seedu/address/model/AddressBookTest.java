@@ -46,7 +46,9 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicateContacts_throwsDuplicateContactException() {
         // Two contacts with the same identity fields
-        Contact editedAlice = new ContactBuilder(ALICE).withNote(VALID_NOTE_BOB).withTags(TestData.Valid.Tag.ALPHANUMERIC_SPACES)
+        Contact editedAlice = new ContactBuilder(ALICE)
+                .withNote(VALID_NOTE_BOB)
+                .withTags(TestData.Valid.Tag.ALPHANUMERIC_SPACES)
                 .build();
         List<Contact> newContacts = Arrays.asList(ALICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newContacts);
@@ -73,14 +75,19 @@ public class AddressBookTest {
     @Test
     public void hasContact_contactWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addContact(ALICE);
-        Contact editedAlice = new ContactBuilder(ALICE).withNote(VALID_NOTE_BOB).withTags(TestData.Valid.Tag.ALPHANUMERIC_SPACES)
+        Contact editedAlice = new ContactBuilder(ALICE)
+                .withNote(VALID_NOTE_BOB)
+                .withTags(TestData.Valid.Tag.ALPHANUMERIC_SPACES)
                 .build();
         assertTrue(addressBook.hasContact(editedAlice));
     }
 
     @Test
     public void getContactList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getContactList().remove(0));
+        assertThrows(
+            UnsupportedOperationException.class,
+            () -> addressBook.getContactList().remove(0)
+        );
     }
 
     @Test

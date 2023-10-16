@@ -41,7 +41,9 @@ public class UniqueContactListTest {
     @Test
     public void contains_contactWithSameIdentityFieldsInList_returnsTrue() {
         uniqueContactList.add(ALICE);
-        Contact editedAlice = new ContactBuilder(ALICE).withNote(VALID_NOTE_BOB).withTags(TestData.Valid.Tag.ALPHANUMERIC_SPACES)
+        Contact editedAlice = new ContactBuilder(ALICE)
+                .withNote(VALID_NOTE_BOB)
+                .withTags(TestData.Valid.Tag.ALPHANUMERIC_SPACES)
                 .build();
         assertTrue(uniqueContactList.contains(editedAlice));
     }
@@ -84,7 +86,9 @@ public class UniqueContactListTest {
     @Test
     public void setContact_editedContactHasSameIdentity_success() {
         uniqueContactList.add(ALICE);
-        Contact editedAlice = new ContactBuilder(ALICE).withNote(VALID_NOTE_BOB).withTags(TestData.Valid.Tag.ALPHANUMERIC_SPACES)
+        Contact editedAlice = new ContactBuilder(ALICE)
+                .withNote(VALID_NOTE_BOB)
+                .withTags(TestData.Valid.Tag.ALPHANUMERIC_SPACES)
                 .build();
         uniqueContactList.setContact(ALICE, editedAlice);
         UniqueContactList expectedUniqueContactList = new UniqueContactList();
@@ -105,7 +109,10 @@ public class UniqueContactListTest {
     public void setContact_editedContactHasNonUniqueIdentity_throwsDuplicateContactException() {
         uniqueContactList.add(ALICE);
         uniqueContactList.add(TestData.Valid.Contact.BOB);
-        assertThrows(DuplicateContactException.class, () -> uniqueContactList.setContact(ALICE, TestData.Valid.Contact.BOB));
+        assertThrows(
+            DuplicateContactException.class,
+            () -> uniqueContactList.setContact(ALICE, TestData.Valid.Contact.BOB)
+        );
     }
 
     @Test
