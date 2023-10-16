@@ -9,8 +9,12 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.event.EventDate;
+import seedu.address.model.event.EventName;
+import seedu.address.model.event.EventTime;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -50,6 +54,7 @@ public class ParserUtil {
         return new Name(trimmedName);
     }
 
+
     /**
      * Parses a {@code String phone} into a {@code Phone}.
      * Leading and trailing whitespaces will be trimmed.
@@ -78,6 +83,21 @@ public class ParserUtil {
             throw new ParseException(Address.MESSAGE_CONSTRAINTS);
         }
         return new Address(trimmedAddress);
+    }
+
+    /**
+     * Parses a {@code String birthday} into an {@code Birthday}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if a given {@code birthday} is invalid.
+     */
+    public static Birthday parseBirthday(String birthday) throws ParseException {
+        requireNonNull(birthday);
+        String trimmedBirthday = birthday.trim();
+        if (!Birthday.isValidBirthday(trimmedBirthday)) {
+            throw new ParseException(Birthday.MESSAGE_CONSTRAINTS);
+        }
+        return new Birthday(trimmedBirthday);
     }
 
     /**
@@ -120,5 +140,38 @@ public class ParserUtil {
             groupSet.add(parseGroup(groupName));
         }
         return groupSet;
+    }
+
+    /**
+     * Parses a {@code String name} into an {@code EventName}.
+     */
+    public static EventName parseEventName(String name) throws ParseException {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        if (!EventName.isValidName(trimmedName)) {
+            throw new ParseException(EventName.MESSAGE_CONSTRAINTS);
+        }
+        return new EventName(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String date} into an {@code EventDate}.
+     */
+    public static EventDate parseEventDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        if (!EventDate.isValidDate(trimmedDate)) {
+            throw new ParseException(EventDate.MESSAGE_CONSTRAINTS);
+        }
+        return new EventDate(trimmedDate);
+    }
+
+    /**
+     * Parses a {@code String time} into an {@code EventTime}.
+     */
+    public static EventTime parseEventTime(String time) throws ParseException {
+        requireNonNull(time);
+        String trimmedTime = time.trim();
+        return EventTime.of(trimmedTime);
     }
 }

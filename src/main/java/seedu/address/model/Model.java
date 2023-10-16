@@ -1,10 +1,12 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 
 /**
@@ -79,9 +81,25 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
+    /** Returns a view of the event list */
+    ArrayList<Event> getEventList();
+
+    /**
+     * Replaces the given person {@code target} with {@code editedPerson} in the address book
+     * @param target event to be edited. {@code target} must exist in the address book.
+     * @param editedEvent event with the edited details.
+     */
+    void setEvent(Event target, Event editedEvent);
+
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Adds an event to the list of events.
+     * @param toAdd Event to be added.
+     */
+    void addEvent(Event toAdd);
 }
