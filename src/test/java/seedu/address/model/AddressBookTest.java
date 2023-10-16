@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -12,7 +13,9 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
 
 import org.junit.jupiter.api.Test;
 
@@ -84,10 +87,52 @@ public class AddressBookTest {
     }
 
     @Test
+    public void getNextID_emptyAddressBook_returnsUniqueID() {
+        addressBook.resetData(new AddressBookStub(Collections.emptyList()));
+        //calling getNextID() should not throw any exceptions
+        assertDoesNotThrow(() -> addressBook.getNextID());
+    }
+
+    @Test
+    public void randomOperations_ensureUniqueIDs() {
+        addressBook.resetData(new AddressBookStub(Collections.emptyList()));
+        Random random = new Random();
+        HashSet<Integer> ids = new HashSet<>();
+        for (int i = 0; i < 200; i++) {
+            if (addressBook.getPersonList().isEmpty() || random.nextBoolean()) {
+                int newID = addressBook.getNextID();
+
+                assertFalse(ids.contains(newID));
+                ids.add(newID);
+                //generate random name via UUID
+                String name = java.util.UUID.randomUUID().toString().replace("-", "");
+
+                Person newPerson = new PersonBuilder().withName(name).withId(newID).build();
+                addressBook.addPerson(newPerson);
+            } else {
+                int randomIndex = random.nextInt(addressBook.getPersonList().size());
+                Person personToRemove = addressBook.getPersonList().get(randomIndex);
+                ids.remove(personToRemove.getId());
+                addressBook.removePerson(personToRemove);
+            }
+        }
+
+        for (Person person : addressBook.getPersonList()) {
+            assertTrue(ids.contains(person.getId()));
+            ids.remove(person.getId());
+        }
+        assertTrue(ids.isEmpty());
+    }
+    @Test
     public void toStringMethod() {
         String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList() + "}";
         assertEquals(expected, addressBook.toString());
     }
+
+
+
+
+
 
     /**
      * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
