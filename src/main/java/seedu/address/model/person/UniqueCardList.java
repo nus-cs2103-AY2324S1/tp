@@ -10,7 +10,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.exceptions.CardNotFoundException;
 import seedu.address.model.person.exceptions.DuplicateCardException;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
 
 
 
@@ -66,7 +65,7 @@ public class UniqueCardList implements Iterable<Card> {
         }
 
         if (!target.isSameCard(editedCard) && contains(editedCard)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateCardException();
         }
 
         internalList.set(index, editedCard);
@@ -95,7 +94,7 @@ public class UniqueCardList implements Iterable<Card> {
     public void setCards(List<Card> cards) {
         requireAllNonNull(cards);
         if (!cardsAreUnique(cards)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateCardException();
         }
 
         internalList.setAll(cards);
