@@ -18,7 +18,7 @@ public class Tag {
     /*
      * Hashmap for keeping track of unique tags
      */
-    public static final Map<String, Tag> TAGS = new HashMap<>();
+    private static final Map<String, Tag> TAGS = new HashMap<>();
 
     public final String tagName;
 
