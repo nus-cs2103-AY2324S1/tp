@@ -12,6 +12,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
 /**
@@ -54,9 +55,8 @@ class JsonSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
             addressBook.addPerson(person);
-            System.out.println(person.getGroups());
 
-            person.getGroups().toStream().map(group -> {
+            person.getGroups().toStream().forEach(group -> {
                 try {
                     if (addressBook.hasGroup(group)) {
                         group.addPerson(person);
@@ -68,7 +68,6 @@ class JsonSerializableAddressBook {
                     System.out.println("error");
                     throw new RuntimeException(e);
                 }
-                return group; // return the group
             });
 
         }
