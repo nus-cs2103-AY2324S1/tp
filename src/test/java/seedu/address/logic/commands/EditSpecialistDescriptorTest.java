@@ -9,6 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LOCATION_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SPECIALTY_ORTHOPAEDIC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
 import org.junit.jupiter.api.Test;
@@ -52,13 +53,19 @@ public class EditSpecialistDescriptorTest {
         assertFalse(DESC_BOB.equals(editedBob));
 
         // different location -> returns false
-        editedBob = (EditSpecialistDescriptor) new EditSpecialistDescriptorBuilder(DESC_BOB)
+        editedBob = new EditSpecialistDescriptorBuilder(DESC_BOB)
                 .withLocation(VALID_LOCATION_AMY).build();
+        assertFalse(DESC_BOB.equals(editedBob));
+
+        // different specialty -> returns false
+        editedBob = new EditSpecialistDescriptorBuilder(DESC_BOB)
+                .withSpecialty(VALID_SPECIALTY_ORTHOPAEDIC).build();
         assertFalse(DESC_BOB.equals(editedBob));
 
         // different tags -> returns false
         editedBob = (EditSpecialistDescriptor) new EditSpecialistDescriptorBuilder(DESC_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
+        assertFalse(DESC_BOB.equals(editedBob));
     }
 
     @Test
@@ -68,7 +75,7 @@ public class EditSpecialistDescriptorTest {
                 + editSpecialistDescriptor.getName().orElse(null) + ", phone="
                 + editSpecialistDescriptor.getPhone().orElse(null) + ", email="
                 + editSpecialistDescriptor.getEmail().orElse(null) + ", tags="
-                + editSpecialistDescriptor.getTags().orElse(null) +  ", location="
+                + editSpecialistDescriptor.getTags().orElse(null) + ", location="
                 + editSpecialistDescriptor.getLocation().orElse(null) + ", specialty="
                 + editSpecialistDescriptor.getSpecialty().orElse(null) + "}";
         assertEquals(expected, editSpecialistDescriptor.toString());

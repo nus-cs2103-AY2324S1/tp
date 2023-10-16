@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_LOCATION_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MEDICAL_HISTORY_OSTEOPOROSIS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -49,6 +49,11 @@ public class EditPatientDescriptorTest {
         // different email -> returns false
         editedAmy = (EditPatientDescriptor) new EditPatientDescriptorBuilder(DESC_AMY)
                 .withEmail(VALID_EMAIL_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different medical history -> returns false
+        editedAmy = (EditPatientDescriptor) new EditPatientDescriptorBuilder(DESC_AMY)
+                .withMedicalHistory(VALID_MEDICAL_HISTORY_OSTEOPOROSIS).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different tags -> returns false

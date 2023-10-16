@@ -15,7 +15,9 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonType;
 
 /**
  * Adds a person to the address book.
@@ -69,6 +71,11 @@ public class AddCommand extends Command {
         }
 
         model.addPerson(toAdd);
+        if (toAdd instanceof Patient) {
+            model.updateFilteredPersonList(PersonType.PATIENT.getSearchPredicate());
+        } else {
+            model.updateFilteredPersonList(PersonType.SPECIALIST.getSearchPredicate());
+        }
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

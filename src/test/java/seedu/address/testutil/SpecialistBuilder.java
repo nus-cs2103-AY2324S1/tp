@@ -33,7 +33,10 @@ public class SpecialistBuilder extends PersonBuilder {
         specialty = specialistToCopy.getSpecialty();
         location = specialistToCopy.getLocation();
     }
-    public Location getLocation() {return location;}
+
+    public Location getLocation() {
+        return location;
+    }
     public Specialty getSpecialty() {
         return specialty;
     }

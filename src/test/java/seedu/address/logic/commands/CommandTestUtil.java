@@ -79,10 +79,15 @@ public class CommandTestUtil {
     public static final EditCommand.EditSpecialistDescriptor DESC_BOB;
 
     static {
-        DESC_AMY = (EditCommand.EditPatientDescriptor) new EditPatientDescriptorBuilder().withName(VALID_NAME_AMY)
+        DESC_AMY = (EditCommand.EditPatientDescriptor) new EditPatientDescriptorBuilder()
+                .withMedicalHistory(VALID_MEDICAL_HISTORY_ANEMIA)
+                .withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY)
                 .withTags(VALID_TAG_FRIEND).build();
-        DESC_BOB = (EditCommand.EditSpecialistDescriptor) new EditSpecialistDescriptorBuilder().withName(VALID_NAME_BOB)
+        DESC_BOB = (EditCommand.EditSpecialistDescriptor) new EditSpecialistDescriptorBuilder()
+                .withLocation(VALID_LOCATION_BOB)
+                .withSpecialty(VALID_SPECIALTY_DERMATOLOGY)
+                .withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }

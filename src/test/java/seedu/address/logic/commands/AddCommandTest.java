@@ -155,7 +155,8 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
-            throw new AssertionError("This method should not be called.");
+            // Allowing this method to be called due to changes in implementation of AddCommand.execute();
+            return;
         }
     }
 
