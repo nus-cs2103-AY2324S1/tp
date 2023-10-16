@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.staffsnap.logic.commands.AddCommand;
-import seedu.staffsnap.logic.commands.ClearCommand;
+//import seedu.staffsnap.logic.commands.ClearCommand;
 import seedu.staffsnap.logic.commands.DeleteCommand;
 import seedu.staffsnap.logic.commands.EditCommand;
 import seedu.staffsnap.logic.commands.EditCommand.EditApplicantDescriptor;
