@@ -13,9 +13,10 @@ public class TransactionId {
 
     public static final String MESSAGE_CONSTRAINTS = "Transaction ID should be a unique number";
     public static final String VALIDATION_REGEX = "^\\d+$";
-    public final Integer value;
 
-    private static final TreeSet<Integer> usedIds = new TreeSet<>();
+    private static TreeSet<Integer> usedIds = new TreeSet<>();
+
+    public final Integer value;
 
     /**
      * Constructs a {@code TransactionId}.
