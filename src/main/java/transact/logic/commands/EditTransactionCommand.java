@@ -83,7 +83,7 @@ public class EditTransactionCommand extends Command {
         Transaction editedTransaction = createEditedTransaction(transactionToEdit, editTransactionDescriptor);
 
         if (!transactionToEdit.isSameEntry(editedTransaction) && model.hasTransaction(editedTransaction)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_TRANSACTION);
         }
 
         model.setTransaction(transactionToEdit, editedTransaction);
