@@ -55,8 +55,8 @@ public interface Logic {
      */
     void setGuiSettings(GuiSettings guiSettings);
 
-    BooleanProperty getReRenderUi();
+    BooleanProperty getRefreshListUi();
 
-    void reRenderUi();
+    void refreshListUi();
 
 }

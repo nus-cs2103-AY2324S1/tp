@@ -40,7 +40,7 @@ public class LogicManager implements Logic {
 
     private String[] displayedFieldsList = new String[0];
 
-    private BooleanProperty reRenderUi = new SimpleBooleanProperty(false);
+    private BooleanProperty refreshListUi = new SimpleBooleanProperty(false);
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -112,16 +112,14 @@ public class LogicManager implements Logic {
     // list command should validate the fields, make sure they are valid
     public void setDisplayedFieldsList(String[] displayedFieldsList) {
         this.displayedFieldsList = displayedFieldsList;
-        System.out.println("setDisplayedList is called");
-        reRenderUi();
+        refreshListUi();
     }
 
-    public BooleanProperty getReRenderUi() {
-        return reRenderUi;
+    public BooleanProperty getRefreshListUi() {
+        return refreshListUi;
     }
 
-    public void reRenderUi() {
-        reRenderUi.setValue(!reRenderUi.getValue());
-        System.out.println("reRenderUi is called");
+    public void refreshListUi() {
+        refreshListUi.setValue(!refreshListUi.getValue());
     }
 }
