@@ -2,6 +2,7 @@ package seedu.address.logic;
 
 import java.nio.file.Path;
 
+import javafx.beans.property.BooleanProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
@@ -42,6 +43,8 @@ public interface Logic {
      * Returns the list of attributes that is to be displayed on the list in gui.
      */
     String[] getDisplayedFieldsList();
+
+    void setDisplayedFieldsList(String[] displayedFieldsList);
     /**
      * Returns the user prefs' GUI settings.
      */
@@ -51,4 +54,9 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    BooleanProperty getRefreshListUi();
+
+    void refreshListUi();
+
 }
