@@ -3,13 +3,16 @@ package seedu.staffsnap.model.applicant;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_INTERVIEW_HUSBAND;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_POSITION_BOB;
 import static seedu.staffsnap.testutil.Assert.assertThrows;
 import static seedu.staffsnap.testutil.TypicalApplicants.ALICE;
+import static seedu.staffsnap.testutil.TypicalApplicants.AMY;
 import static seedu.staffsnap.testutil.TypicalApplicants.BOB;
 
 import org.junit.jupiter.api.Test;
@@ -27,29 +30,32 @@ public class ApplicantTest {
     @Test
     public void isSameApplicant() {
         // same object -> returns true
-        assertTrue(ALICE.isSameApplicant(ALICE));
+        assertTrue(AMY.isSameApplicant(AMY));
 
         // null -> returns false
-        assertFalse(ALICE.isSameApplicant(null));
+        assertFalse(AMY.isSameApplicant(null));
 
-        // same name, all other attributes different -> returns true
-        Applicant editedAlice = new ApplicantBuilder(ALICE).withPhone(VALID_PHONE_BOB)
-                .withEmail(VALID_EMAIL_BOB).withPosition(VALID_POSITION_BOB)
-                .withInterviews(VALID_INTERVIEW_HUSBAND).build();
-        assertTrue(ALICE.isSameApplicant(editedAlice));
+        // same email, all other attributes different -> returns true
+        Applicant editedAmy = new ApplicantBuilder(BOB).withEmail(VALID_EMAIL_AMY).build();
+        assertTrue(AMY.isSameApplicant(editedAmy));
 
-        // different name, all other attributes same -> returns false
-        editedAlice = new ApplicantBuilder(ALICE).withName(VALID_NAME_BOB).build();
-        assertFalse(ALICE.isSameApplicant(editedAlice));
+        // same phone number, all other attributes different -> returns true
+        editedAmy = new ApplicantBuilder(BOB).withPhone(VALID_PHONE_AMY).build();
+        assertTrue(AMY.isSameApplicant(editedAmy));
 
-        // name differs in case, all other attributes same -> returns false
-        Applicant editedBob = new ApplicantBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
-        assertFalse(BOB.isSameApplicant(editedBob));
+        // different email and phone number, all other attributes same -> returns false
+        editedAmy = new ApplicantBuilder(AMY).withEmail(VALID_EMAIL_BOB)
+                .withPhone(VALID_PHONE_BOB).build();
+        assertFalse(AMY.isSameApplicant(editedAmy));
 
-        // name has trailing spaces, all other attributes same -> returns false
+        // email differs in case, all other attributes same -> returns true
+        Applicant editedBob = new ApplicantBuilder(BOB).withEmail(VALID_EMAIL_BOB.toUpperCase()).build();
+        assertTrue(BOB.isSameApplicant(editedBob));
+
+        // name has trailing spaces, all other attributes same -> returns true
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new ApplicantBuilder(BOB).withName(nameWithTrailingSpaces).build();
-        assertFalse(BOB.isSameApplicant(editedBob));
+        assertTrue(BOB.isSameApplicant(editedBob));
     }
 
     @Test

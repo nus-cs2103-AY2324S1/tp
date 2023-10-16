@@ -31,11 +31,13 @@ public class ParserUtilTest {
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
-    private static final String VALID_POSITION = "123 Main Street #0505";
+    private static final String VALID_POSITION = "Software Engineer";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_INTERVIEW_1 = "friend";
     private static final String VALID_INTERVIEW_2 = "neighbour";
     private static final String VALID_DESCRIPTOR = "name";
+
+    private static final String CAPITALIZED_NAME = "RACHEL WALKER";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -221,5 +223,10 @@ public class ParserUtilTest {
         String descriptorWithWhitespace = WHITESPACE + VALID_DESCRIPTOR + WHITESPACE;
         Descriptor expectedDescriptor = Descriptor.NAME;
         assertEquals(expectedDescriptor, ParserUtil.parseDescriptor(descriptorWithWhitespace));
+    }
+
+    @Test
+    public void standardizeCapitalization_validValueWithCapitalization_returnsCapitalizedString() {
+        assertEquals(VALID_NAME, ParserUtil.standardizeCapitalization(CAPITALIZED_NAME));
     }
 }
