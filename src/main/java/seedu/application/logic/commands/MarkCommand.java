@@ -1,7 +1,6 @@
 package seedu.application.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.application.logic.commands.EditCommand.*;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_STATUS;
 
 import java.util.List;
@@ -28,7 +27,8 @@ public class MarkCommand extends Command {
             + PREFIX_STATUS + "STATUS\n"
             + "Example: " + COMMAND_WORD + " 1" + " s/pending.";
 
-    public static final String MESSAGE_MARK_JOB_SUCCESS = "Job status marked as: %1$s";
+    public static final String MESSAGE_MARK_JOB_SUCCESS = "Marked job status of the specified application.";
+    public static final String MESSAGE_MARK_JOB_FAILURE = "Unable to mark the job status of the specified application.";
 
     private final Index targetIndex;
 
@@ -66,7 +66,7 @@ public class MarkCommand extends Command {
 
         model.setJob(jobToMark, markedJob);
         model.updateFilteredJobList(Model.PREDICATE_SHOW_ALL_JOBS);
-        return new CommandResult(String.format(MESSAGE_EDIT_JOB_SUCCESS, Messages.format(markedJob)));
+        return new CommandResult(String.format(MESSAGE_MARK_JOB_SUCCESS, Messages.format(markedJob)));
     }
 
     /**
@@ -87,7 +87,7 @@ public class MarkCommand extends Command {
         }
 
         MarkCommand otherMarkCommand = (MarkCommand) other;
-        return targetIndex.equals(otherMarkCommand.targetIndex);
+        return targetIndex.equals(otherMarkCommand.targetIndex) && status.equals(otherMarkCommand.status);
     }
 
     /**
