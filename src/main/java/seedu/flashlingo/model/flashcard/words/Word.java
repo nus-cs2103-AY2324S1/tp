@@ -56,6 +56,10 @@ abstract public class Word {
         return this.word.toLowerCase().contains(subpart.toLowerCase());
     }
 
+    public boolean isSameLanguage(String language) {
+        return this.language.equals(language);
+    }
+
     /**
      * Checks whether this word is equal to the passed object
      * @param other Passed object to check equality against
