@@ -8,6 +8,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalSchedules.SCHEDULE_ALICE_FIRST_JAN;
+import static seedu.address.testutil.TypicalSchedules.SCHEDULE_BOB_SECOND_JAN;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -114,6 +115,27 @@ public class ModelManagerTest {
     public void getFilteredScheduleList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredScheduleList().remove(0));
     }
+
+    @Test
+    public void setSchedule_nullSchedule_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setSchedule(null, null));
+    }
+
+    @Test
+    public void setSchedule_success() {
+        modelManager.addSchedule(SCHEDULE_ALICE_FIRST_JAN);
+        modelManager.setSchedule(SCHEDULE_ALICE_FIRST_JAN, SCHEDULE_BOB_SECOND_JAN);
+        assertTrue(modelManager.hasSchedule(SCHEDULE_BOB_SECOND_JAN));
+    }
+
+    @Test
+    public void removeSchedule_success() {
+        modelManager.addSchedule(SCHEDULE_ALICE_FIRST_JAN);
+        assertTrue(modelManager.hasSchedule(SCHEDULE_ALICE_FIRST_JAN));
+        modelManager.deleteSchedule(SCHEDULE_ALICE_FIRST_JAN);
+        assertFalse(modelManager.hasSchedule(SCHEDULE_BOB_SECOND_JAN));
+    }
+
 
     @Test
     public void equals() {
