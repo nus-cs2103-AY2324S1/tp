@@ -31,7 +31,7 @@ title: User Guide
 
 * ?: Optional Field
 * <description>: Any string
-* <transactionType>: [Revenue (R), Expense (E)]
+* <type>: [Revenue (R), Expense (E)]
 * <amount>: Any number
 * <date>: In dd/mm/yy format
 * <staff>: Name of staff
@@ -39,7 +39,7 @@ title: User Guide
 
 ### Adding transaction : `add`
 
-Format: `add <transactionType> <description> a/<amount> <date> <?staff>`
+Format: `add <type> <description> a/<amount> <date> <?staff>`
 
 Examples:
 * `add R Sold 1 Mug a/10 10/10/23 John`
@@ -119,7 +119,7 @@ transact data are saved in the hard disk automatically after any command that ch
 
 Action | Format, Examples
 --------|------------------
-**Add transaction** | `add <transactionType> <description> a/<amount> <date> <?staff>`
+**Add transaction** | `add <type> <description> a/<amount> <date> <?staff>`
 **Remove transaction** | `del <id>`
 **View transaction** | `view t` or `view transaction`
 **Add staff** | `addstaff n/<name> p/<phone no> e/<email> a/<address> [t/<tag>]`

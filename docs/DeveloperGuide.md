@@ -267,7 +267,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 
 - has a need to manage a significant number of transactions
-- can transactionType fast
+- can type fast
 - prefers typing to mouse interactions
 - is reasonably comfortable using CLI apps
 
@@ -319,7 +319,7 @@ Tran$act is specifically tailored for accountants and finance professionals in s
 
 1. **Adding a Transaction**
     - As an accountant, I want to add a new financial transaction quickly.
-    - I should be able to specify the amount, transactionType (income or expense), date, and optionally, the associated person for the transaction.
+    - I should be able to specify the amount, type (revenue or expense), date, and optionally, the associated person for the transaction.
 
 2. **Removing a Transaction**
     - As an accountant, I want to delete a transaction when necessary.
@@ -394,7 +394,7 @@ Tran$act is specifically tailored for accountants and finance professionals in s
 **Preconditions:** The accountant is logged into the Tran$act application.
 
 **Description:**
-1. The accountant specifies the transaction details, including the amount, transactionType (income or expense), date, and optionally, the associated person.
+1. The accountant specifies the transaction details, including the amount, type (revenue or expense), date, and optionally, the associated person.
 2. The system validates the input data.
 3. The system records the transaction in the database.
 
