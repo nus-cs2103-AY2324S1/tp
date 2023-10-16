@@ -3,7 +3,9 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.ReadCommand;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -16,7 +18,7 @@ public class ReadCommandParser implements Parser<ReadCommand> {
      * and returns a ReadCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public ReadCommand parse(String args) throws ParseException {
+    public ReadCommand parse(String args) throws ParseException{
         String trimmedArgs = args.trim();
 
         if (trimmedArgs.isEmpty()) {
@@ -32,7 +34,34 @@ public class ReadCommandParser implements Parser<ReadCommand> {
         }
 
         Index index = ParserUtil.parseIndex(fields[0].trim());
-        return new ReadCommand(index, fields[1]);
+        String fieldName = fieldNameToString(fields[1]);
+        return new ReadCommand(index, fieldName);
+    }
+
+    /**
+     * Returns a string representation of the specific field name of a person.
+     *
+     * @param fieldToRead The field name.
+     * @return The information specified by the field.
+     * @throws CommandException if the field is invalid.
+     */
+    public String fieldNameToString(String fieldToRead) throws ParseException {
+        String fullFieldName;
+
+        switch (fieldToRead) {
+            case "p":
+                fullFieldName = "phone";
+                break;
+            case "a":
+                fullFieldName = "address";
+                break;
+            case "e":
+                fullFieldName = "email";
+                break;
+            default:
+                throw new ParseException(Messages.MESSAGE_INVALID_FIELD_TO_READ);
+        }
+        return fullFieldName;
     }
 }
 
