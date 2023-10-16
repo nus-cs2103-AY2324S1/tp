@@ -113,12 +113,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         StringBuilder str = new StringBuilder();
 
         for (Person person : persons) {
-            if (!person.getNotes().isEmpty()) str.append("[" + person.getName().toString() + "]\n");
+            if (!person.getNotes().isEmpty()) {
+                str.append("[" + person.getName().toString() + "]\n");
+            }
 
-            int note_id = 1;
+            int noteId = 1;
             for (Note note : person.getNotes()) {
-                str.append(note_id + ". " + note.getUiText()).append("\n");
-                note_id += 1;
+                str.append(noteId + ". " + note.getUiText()).append("\n");
+                noteId += 1;
             };
         }
 
