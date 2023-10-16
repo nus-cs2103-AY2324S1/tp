@@ -79,6 +79,6 @@ public class TransactionBuilder {
     }
 
     public Transaction build() {
-        return new Transaction(id, TransactionType.Expense, description, amount, new Date(), person);
+        return new Transaction(id, TransactionType.EXPENSE, description, amount, new Date(), person);
     }
 }

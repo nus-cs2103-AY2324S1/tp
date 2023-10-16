@@ -15,7 +15,6 @@ import transact.model.transaction.info.Description;
 import transact.model.transaction.info.TransactionId;
 import transact.model.transaction.info.TransactionType;
 
-
 public class CsvAdaptedTransactionStorageManualTest {
     public static void main(String[] args) {
         Path filePath = Path.of("transactions.csv");
@@ -44,17 +43,23 @@ public class CsvAdaptedTransactionStorageManualTest {
     }
 
     private static ReadOnlyTransactionBook createTestTransactionBook() {
-        Transaction transaction1 = new Transaction(new TransactionId("11111111"), TransactionType.Revenue, new Description("Revenue 1"),
+        Transaction transaction1 = new Transaction(new TransactionId("11111111"), TransactionType.REVENUE,
+                new Description("Revenue 1"),
                 new Amount(new BigDecimal("10.50")), new Date());
-        Transaction transaction2 = new Transaction(new TransactionId("222222"), TransactionType.Expense, new Description("Expense 1"),
+        Transaction transaction2 = new Transaction(new TransactionId("222222"), TransactionType.EXPENSE,
+                new Description("Expense 1"),
                 new Amount(new BigDecimal("21.50")), new Date());
-        Transaction transaction3 = new Transaction(new TransactionId("3333"), TransactionType.Revenue, new Description("Revenue 2"),
+        Transaction transaction3 = new Transaction(new TransactionId("3333"), TransactionType.REVENUE,
+                new Description("Revenue 2"),
                 new Amount(new BigDecimal("10.50")), new Date());
-        Transaction transaction4 = new Transaction(new TransactionId("44444"), TransactionType.Expense, new Description("Expense 2"),
+        Transaction transaction4 = new Transaction(new TransactionId("44444"), TransactionType.EXPENSE,
+                new Description("Expense 2"),
                 new Amount(new BigDecimal("25.21")), new Date());
-        Transaction transaction5 = new Transaction(new TransactionId("412312"), TransactionType.Revenue, new Description("Revenue 3"),
+        Transaction transaction5 = new Transaction(new TransactionId("412312"), TransactionType.REVENUE,
+                new Description("Revenue 3"),
                 new Amount(new BigDecimal("31.1")), new Date());
-        Transaction transaction6 = new Transaction(new TransactionId("55555"), TransactionType.Expense, new Description("Expense 3"),
+        Transaction transaction6 = new Transaction(new TransactionId("55555"), TransactionType.EXPENSE,
+                new Description("Expense 3"),
                 new Amount(new BigDecimal("21.02")), new Date());
 
         TransactionBook transactionBook = new TransactionBook();

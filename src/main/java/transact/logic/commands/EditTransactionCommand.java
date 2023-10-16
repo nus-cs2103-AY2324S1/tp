@@ -27,9 +27,6 @@ import transact.model.transaction.info.TransactionId;
 import transact.model.transaction.info.TransactionType;
 import transact.ui.MainWindow.TabWindow;
 
-
-
-
 /**
  * Edits the details of an existing person in the address book.
  */
@@ -97,10 +94,12 @@ public class EditTransactionCommand extends Command {
      * edited with {@code editPersonDescriptor}.
      */
     private static Transaction createEditedTransaction(Transaction transactionToEdit,
-                                                  EditTransactionDescriptor editTransactionDescriptor) {
+            EditTransactionDescriptor editTransactionDescriptor) {
         assert transactionToEdit != null;
-        TransactionType updatedTransactionType = editTransactionDescriptor.getType().orElse(transactionToEdit.getType());
-        Description updatedDescription = editTransactionDescriptor.getDescription().orElse(transactionToEdit.getDescription());
+        TransactionType updatedTransactionType = editTransactionDescriptor.getType()
+                .orElse(transactionToEdit.getTransactionType());
+        Description updatedDescription = editTransactionDescriptor.getDescription()
+                .orElse(transactionToEdit.getDescription());
         Amount updatedAmount = editTransactionDescriptor.getAmount().orElse(transactionToEdit.getAmount());
         Date updatedDate = editTransactionDescriptor.getDate().orElse(transactionToEdit.getDate());
         Person updatedStaff = editTransactionDescriptor.getStaff().orElse(transactionToEdit.getPerson());
@@ -133,7 +132,8 @@ public class EditTransactionCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the transaction with. Each non-empty field value will
+     * Stores the details to edit the transaction with. Each non-empty field value
+     * will
      * replace the
      * corresponding field value of the person.
      */

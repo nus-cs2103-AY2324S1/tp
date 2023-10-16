@@ -15,17 +15,23 @@ import transact.model.transaction.info.TransactionType;
  * in tests.
  */
 public class TypicalTransactions {
-    public static final Transaction APPLES = new Transaction(new TransactionId(), TransactionType.Expense, new Description("Apples"),
+    public static final Transaction APPLES = new Transaction(new TransactionId(), TransactionType.EXPENSE,
+            new Description("Apples"),
             new Amount(1.50), new Date(), ALICE);
-    public static final Transaction BANANAS = new Transaction(new TransactionId(), TransactionType.Expense, new Description("Bananas"),
+    public static final Transaction BANANAS = new Transaction(new TransactionId(), TransactionType.EXPENSE,
+            new Description("Bananas"),
             new Amount(1.50), new Date());
-    public static final Transaction CARROTS = new Transaction(new TransactionId(), TransactionType.Expense, new Description("Carrots"),
+    public static final Transaction CARROTS = new Transaction(new TransactionId(), TransactionType.EXPENSE,
+            new Description("Carrots"),
             new Amount(1.50), new Date());
-    public static final Transaction DATES = new Transaction(new TransactionId(), TransactionType.Expense, new Description("Dates"),
+    public static final Transaction DATES = new Transaction(new TransactionId(), TransactionType.EXPENSE,
+            new Description("Dates"),
             new Amount(4.50), new Date());
-    public static final Transaction EGGS = new Transaction(new TransactionId(), TransactionType.Expense, new Description("Eggs"),
+    public static final Transaction EGGS = new Transaction(new TransactionId(), TransactionType.EXPENSE,
+            new Description("Eggs"),
             new Amount(5.00), new Date());
-    public static final Transaction FISH = new Transaction(new TransactionId(), TransactionType.Revenue, new Description("Fish"),
+    public static final Transaction FISH = new Transaction(new TransactionId(), TransactionType.REVENUE,
+            new Description("Fish"),
             new Amount(6.50), new Date());
 
     /**

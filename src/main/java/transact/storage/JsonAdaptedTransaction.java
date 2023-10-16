@@ -14,7 +14,6 @@ import transact.model.transaction.info.Description;
 import transact.model.transaction.info.TransactionId;
 import transact.model.transaction.info.TransactionType;
 
-
 /**
  * Jackson-friendly version of {@link Transaction}.
  */
@@ -54,11 +53,13 @@ class JsonAdaptedTransaction {
             final Person modelPerson = person.toModelType();
             final Description modelDescription = new Description(description);
             final Amount modelAmount = new Amount(amount);
-            return new Transaction(modelTransactionId, TransactionType.Revenue, modelDescription, modelAmount, new Date(), modelPerson);
+            return new Transaction(modelTransactionId, TransactionType.REVENUE, modelDescription, modelAmount,
+                    new Date(), modelPerson);
         } else {
             final Description modelDescription = new Description(description);
             final Amount modelAmount = new Amount(amount);
-            return new Transaction(modelTransactionId, TransactionType.Expense, modelDescription, modelAmount, new Date());
+            return new Transaction(modelTransactionId, TransactionType.EXPENSE, modelDescription, modelAmount,
+                    new Date());
         }
     }
 }
