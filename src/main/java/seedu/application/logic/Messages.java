@@ -33,13 +33,15 @@ public class Messages {
     }
 
     /**
-     * Formats the {@code person} for display to the user.
+     * Formats the {@code job} for display to the user.
      */
     public static String format(Job job) {
         final StringBuilder builder = new StringBuilder();
         builder.append(job.getCompany())
                 .append("; Role: ")
-                .append(job.getRole());
+                .append(job.getRole())
+                .append("; Status: ")
+                .append(job.getStatus());
         return builder.toString();
     }
 

@@ -3,9 +3,7 @@ package seedu.application.model.job;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.application.logic.commands.CommandTestUtil.VALID_COMPANY_CHEF;
-import static seedu.application.logic.commands.CommandTestUtil.VALID_COMPANY_CLEANER;
-import static seedu.application.logic.commands.CommandTestUtil.VALID_ROLE_CLEANER;
+import static seedu.application.logic.commands.CommandTestUtil.*;
 import static seedu.application.testutil.TypicalJobs.CHEF;
 import static seedu.application.testutil.TypicalJobs.CLEANER;
 
@@ -67,12 +65,16 @@ public class JobTest {
         // different company -> returns false
         editedChef = new JobBuilder(CHEF).withCompany(VALID_COMPANY_CLEANER).build();
         assertFalse(CHEF.equals(editedChef));
+
+        // different status -> returns false
+        editedChef = new JobBuilder(CHEF).withStatus(VALID_STATUS_CLEANER).build();
+        assertFalse(CHEF.equals(editedChef));
     }
 
     @Test
     public void toStringMethod() {
         String expected = Job.class.getCanonicalName() + "{role=" + CHEF.getRole() + ", company="
-                + CHEF.getCompany() + ", deadline=" + CHEF.getDeadline() + "}";
+                + CHEF.getCompany() + ", status=" + CHEF.getStatus() + ", deadline=" + CHEF.getDeadline() + "}";
         assertEquals(expected, CHEF.toString());
     }
 }

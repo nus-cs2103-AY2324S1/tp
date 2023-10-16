@@ -4,10 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.application.commons.exceptions.IllegalValueException;
-import seedu.application.model.job.Company;
-import seedu.application.model.job.Deadline;
-import seedu.application.model.job.Job;
-import seedu.application.model.job.Role;
+import seedu.application.model.job.*;
 
 /**
  * Jackson-friendly version of {@link Job}.
@@ -18,6 +15,7 @@ class JsonAdaptedJob {
 
     private final String role;
     private final String company;
+    private final String status;
     private final String deadline;
 
     /**
@@ -25,9 +23,10 @@ class JsonAdaptedJob {
      */
     @JsonCreator
     public JsonAdaptedJob(@JsonProperty("role") String role, @JsonProperty("company") String company,
-                          @JsonProperty("deadline") String deadline) {
+                          @JsonProperty("status") String status, @JsonProperty("deadline") String deadline) {
         this.role = role;
         this.company = company;
+        this.status = status;
         this.deadline = deadline;
     }
 
@@ -37,6 +36,7 @@ class JsonAdaptedJob {
     public JsonAdaptedJob(Job source) {
         role = source.getRole().description;
         company = source.getCompany().name;
+        status = source.getStatus().status;
         deadline = source.getDeadline().deadline;
     }
 
@@ -64,6 +64,15 @@ class JsonAdaptedJob {
         }
         final Company modelCompany = new Company(company);
 
+        if (status == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Status.class.getSimpleName()));
+        }
+        if (!Status.isValidStatus(status)) {
+            throw new IllegalValueException(Status.MESSAGE_CONSTRAINTS);
+        }
+        final Status modelStatus = new Status(status);
+
         if (deadline == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Deadline.class.getSimpleName()));
@@ -73,7 +82,7 @@ class JsonAdaptedJob {
         }
         final Deadline modelDeadline = new Deadline(deadline);
 
-        return new Job(modelRole, modelCompany, modelDeadline);
+        return new Job(modelRole, modelCompany, modelStatus, modelDeadline);
     }
 
 }
