@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalSchedules.SCHEDULE_ALICE_FIRST_JAN;
+import static seedu.address.testutil.TypicalSchedules.SCHEDULE_BOB_SECOND_JAN;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -24,6 +26,7 @@ import seedu.address.model.schedule.Schedule;
 import seedu.address.model.schedule.StartTime;
 import seedu.address.model.schedule.exceptions.DuplicateScheduleException;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.ScheduleBuilder;
 
 public class AddressBookTest {
 
@@ -73,12 +76,7 @@ public class AddressBookTest {
 
     @Test
     public void hasSchedule_scheduleNotInAddressBook_returnsFalse() {
-        StartTime startTime = new StartTime(LocalDateTime.of(2023, 1,
-                1, 0, 0, 0));
-        EndTime endTime = new EndTime(LocalDateTime.of(2023, 1,
-                1, 1, 0, 0));
-        Schedule schedule = new Schedule(ALICE, startTime, endTime);
-        assertFalse(addressBook.hasSchedule(schedule));
+        assertFalse(addressBook.hasSchedule(SCHEDULE_ALICE_FIRST_JAN));
     }
 
     @Test
@@ -89,13 +87,8 @@ public class AddressBookTest {
 
     @Test
     public void hasSchedule_scheduleInAddressBook_returnsTrue() {
-        StartTime startTime = new StartTime(LocalDateTime.of(2023, 1,
-                1, 0, 0, 0));
-        EndTime endTime = new EndTime(LocalDateTime.of(2023, 1,
-                1, 1, 0, 0));
-        Schedule schedule = new Schedule(ALICE, startTime, endTime);
-        addressBook.addSchedule(schedule);
-        assertTrue(addressBook.hasSchedule(schedule));
+        addressBook.addSchedule(SCHEDULE_ALICE_FIRST_JAN);
+        assertTrue(addressBook.hasSchedule(SCHEDULE_ALICE_FIRST_JAN));
     }
 
     @Test
@@ -107,13 +100,8 @@ public class AddressBookTest {
 
     @Test
     public void hasSchedule_scheduleWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        StartTime startTime = new StartTime(LocalDateTime.of(2023, 2,
-                1, 0, 0, 0));
-        EndTime endTime = new EndTime(LocalDateTime.of(2023, 2,
-                1, 1, 0, 0));
-        Schedule schedule = new Schedule(ALICE, startTime, endTime);
-        addressBook.addSchedule(schedule);
-        Schedule editedSchedule = new Schedule(ALICE, startTime, endTime);
+        addressBook.addSchedule(SCHEDULE_ALICE_FIRST_JAN);
+        Schedule editedSchedule = new ScheduleBuilder(SCHEDULE_ALICE_FIRST_JAN).build();
         assertTrue(addressBook.hasSchedule(editedSchedule));
     }
 
@@ -130,34 +118,18 @@ public class AddressBookTest {
 
     @Test
     public void setSchedule_scheduleInAddressBook_updatesSchedule() {
-        StartTime startTime = new StartTime(LocalDateTime.of(2023, 3,
-                1, 0, 0, 0));
-        EndTime endTime = new EndTime(LocalDateTime.of(2023, 3,
-                1, 1, 0, 0));
-        Schedule schedule = new Schedule(ALICE, startTime, endTime);
-        addressBook.addSchedule(schedule);
+        addressBook.addSchedule(SCHEDULE_ALICE_FIRST_JAN);
+        addressBook.setSchedule(SCHEDULE_ALICE_FIRST_JAN, SCHEDULE_BOB_SECOND_JAN);
 
-        StartTime editedStartTime = new StartTime(LocalDateTime.of(2023, 4,
-                1, 0, 0, 0));
-        EndTime editedEndTime = new EndTime(LocalDateTime.of(2023, 4,
-                1, 1, 0, 0));
-        Schedule editedSchedule = new Schedule(ALICE, editedStartTime, editedEndTime);
-        addressBook.setSchedule(schedule, editedSchedule);
-
-        assertTrue(addressBook.hasSchedule(editedSchedule));
-        assertFalse(addressBook.hasSchedule(schedule));
+        assertTrue(addressBook.hasSchedule(SCHEDULE_BOB_SECOND_JAN));
+        assertFalse(addressBook.hasSchedule(SCHEDULE_ALICE_FIRST_JAN));
     }
 
     @Test
     public void removeSchedule_scheduleInAddressBook_removesSchedule() {
-        StartTime startTime = new StartTime(LocalDateTime.of(2023, 5,
-                1, 0, 0, 0));
-        EndTime endTime = new EndTime(LocalDateTime.of(2023, 5,
-                1, 1, 0, 0));
-        Schedule schedule = new Schedule(ALICE, startTime, endTime);
-        addressBook.addSchedule(schedule);
-        addressBook.removeSchedule(schedule);
-        assertFalse(addressBook.hasSchedule(schedule));
+        addressBook.addSchedule(SCHEDULE_ALICE_FIRST_JAN);
+        addressBook.removeSchedule(SCHEDULE_ALICE_FIRST_JAN);
+        assertFalse(addressBook.hasSchedule(SCHEDULE_ALICE_FIRST_JAN));
     }
 
     @Test
