@@ -41,6 +41,8 @@ public class PersonCard extends UiPart<Region> {
      */
     public PersonCard(Person person, int displayedIndex, String[] displayFields) {
         super(FXML);
+        System.out.println("PersonCard is called");
+        System.out.println(displayFields.length);
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);

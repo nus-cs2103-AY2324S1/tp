@@ -6,6 +6,8 @@ import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.logging.Logger;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -37,6 +39,8 @@ public class LogicManager implements Logic {
     private final AddressBookParser addressBookParser;
 
     private String[] displayedFieldsList = new String[0];
+
+    private BooleanProperty reRenderUi = new SimpleBooleanProperty(false);
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -108,5 +112,16 @@ public class LogicManager implements Logic {
     // list command should validate the fields, make sure they are valid
     public void setDisplayedFieldsList(String[] displayedFieldsList) {
         this.displayedFieldsList = displayedFieldsList;
+        System.out.println("setDisplayedList is called");
+        reRenderUi();
+    }
+
+    public BooleanProperty getReRenderUi() {
+        return reRenderUi;
+    }
+
+    public void reRenderUi() {
+        reRenderUi.setValue(!reRenderUi.getValue());
+        System.out.println("reRenderUi is called");
     }
 }
