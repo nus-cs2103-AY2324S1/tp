@@ -8,6 +8,6 @@ import seedu.address.logic.Messages;
  */
 public class DuplicateContactException extends RuntimeException {
     public DuplicateContactException() {
-        super(Messages.MESSAGE_Duplicate_Contact_Exception);
+        super(Messages.MESSAGE_DUPLICATE_CONTACT_EXCEPTION);
     }
 }

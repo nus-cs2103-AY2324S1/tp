@@ -32,7 +32,7 @@ public class Messages {
     public static final String FILE_OPS_ERROR_FORMAT = "Could not save data due to the following error: %s";
     public static final String FILE_OPS_PERMISSION_ERROR_FORMAT =
             "Could not save data to file %s due to insufficient permissions to write to the file or the folder.";
-    public static final String MESSAGE_Duplicate_Contact_Exception = "Operation would result in duplicate contacts";
+    public static final String MESSAGE_DUPLICATE_CONTACT_EXCEPTION = "Operation would result in duplicate contacts";
 
     // Messages associated with Attributes constraints
     public static final String MESSAGE_NAME_CONSTRAINTS =
