@@ -39,7 +39,7 @@ class JsonAdaptedMeeting {
     @JsonCreator
     public JsonAdaptedMeeting(@JsonProperty("title") String title, @JsonProperty("location") String location,
                              @JsonProperty("start") String start, @JsonProperty("end") String end,
-                             @JsonProperty("attendees") List<JsonAdaptedAttendee> attendees, 
+                             @JsonProperty("attendees") List<JsonAdaptedAttendee> attendees,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
 
         this.title = title;
@@ -119,7 +119,7 @@ class JsonAdaptedMeeting {
         final LocalDateTime modelEnd = LocalDateTime.parse(end);
 
         final Set<Attendee> modelAttendees = new HashSet<>(meetingAttendees);
-        
+
         final Set<Tag> modelTags = new HashSet<>(meetingTags);
         return new Meeting(modelTitle, modelLocation, modelStart, modelEnd, modelAttendees, modelTags);
     }

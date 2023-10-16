@@ -8,15 +8,13 @@ import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Meeting in the address book.
- * Guarantees: details are present and not null, field values are validated,
- * immutable.
+ * Represents a Meeting in the address book. Guarantees: details are present and
+ * not null, field values are validated, immutable.
  */
 public class Meeting {
     private final Title title;
@@ -28,7 +26,8 @@ public class Meeting {
     /**
      * Every field must be present and not null.
      */
-    public Meeting(Title title, Location location, LocalDateTime start, LocalDateTime end, Set<Attendee> attendees, Set<Tag> tags) {
+    public Meeting(Title title, Location location, LocalDateTime start, LocalDateTime end, Set<Attendee> attendees,
+            Set<Tag> tags) {
         this.title = title;
         this.location = location;
         this.meetingTime = new MeetingTime(start, end);
@@ -58,8 +57,7 @@ public class Meeting {
 
     /**
      * Returns an immutable attendee set, which throws
-     * {@code UnsupportedOperationException}
-     * if modification is attempted.
+     * {@code UnsupportedOperationException} if modification is attempted.
      */
     public Set<Attendee> getAttendees() {
         return Collections.unmodifiableSet(attendees);
@@ -73,8 +71,8 @@ public class Meeting {
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
+     * Returns an immutable tag set, which throws
+     * {@code UnsupportedOperationException} if modification is attempted.
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
@@ -88,16 +86,14 @@ public class Meeting {
             return true;
         }
 
-        return otherMeeting != null
-                && otherMeeting.getTitle().equals(getTitle())
+        return otherMeeting != null && otherMeeting.getTitle().equals(getTitle())
                 && otherMeeting.getLocation().equals(getLocation())
-                && otherMeeting.getMeetingTime().equals(getMeetingTime())
-                && otherMeeting.getTags().equals(getTags());
+                && otherMeeting.getMeetingTime().equals(getMeetingTime()) && otherMeeting.getTags().equals(getTags());
     }
 
     /**
-     * Returns true if both meetings have the same title and data fields.
-     * This defines a stronger notion of equality between two meetings.
+     * Returns true if both meetings have the same title and data fields. This
+     * defines a stronger notion of equality between two meetings.
      */
     @Override
     public boolean equals(Object other) {
@@ -111,10 +107,8 @@ public class Meeting {
         }
 
         Meeting otherMeeting = (Meeting) other;
-        return title.equals(otherMeeting.title)
-                && location.equals(otherMeeting.location)
-                && meetingTime.equals(otherMeeting.meetingTime)
-                && attendees.equals(otherMeeting.attendees)
+        return title.equals(otherMeeting.title) && location.equals(otherMeeting.location)
+                && meetingTime.equals(otherMeeting.meetingTime) && attendees.equals(otherMeeting.attendees)
                 && tags.equals(otherMeeting.tags);
     }
 
@@ -126,13 +120,8 @@ public class Meeting {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("title", title)
-                .add("location", location)
-                .add("start", meetingTime.getStart())
-                .add("end", meetingTime.getEnd())
-                .add("attendees", attendees)
-                .add("tags", tags)
-                .toString();
+        return new ToStringBuilder(this).add("title", title).add("location", location)
+                .add("start", meetingTime.getStart()).add("end", meetingTime.getEnd()).add("attendees", attendees)
+                .add("tags", tags).toString();
     }
 }
