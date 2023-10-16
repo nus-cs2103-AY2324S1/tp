@@ -6,6 +6,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.note.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -110,13 +111,17 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public String noteListToString() {
         StringBuilder str = new StringBuilder();
-        persons.forEach(
-                person -> person.getNotes().forEach(
-                        note -> str.append("[").append(
-                                        person.getName().toString()).append("] ")
-                                .append(note.getUiText()).append("\n")
-                )
-        );
+
+        for (Person person : persons) {
+            if (!person.getNotes().isEmpty()) str.append("[" + person.getName().toString() + "]\n");
+
+            int note_id = 1;
+            for (Note note : person.getNotes()) {
+                str.append(note_id + ". " + note.getUiText()).append("\n");
+                note_id += 1;
+            };
+        }
+
         return str.toString();
     }
 
