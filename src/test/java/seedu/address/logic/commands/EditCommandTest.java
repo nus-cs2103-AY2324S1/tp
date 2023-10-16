@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -115,7 +116,8 @@ public class EditCommandTest {
 
     @Test
     public void equals_sameObject_returnsTrue() {
-        EditPersonDescriptor descriptor = new EditPersonDescriptor();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
         EditCommand editCommand = new EditCommand(new Name("John Doe"), null, descriptor);
 
         assertTrue(editCommand.equals(editCommand));
@@ -123,10 +125,30 @@ public class EditCommandTest {
 
     @Test
     public void equals_differentTypes_returnsFalse() {
-        EditPersonDescriptor descriptor = new EditPersonDescriptor();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
         EditCommand editCommand = new EditCommand(new Name("John Doe"), null, descriptor);
 
         assertFalse(editCommand.equals(5)); // Different type
+    }
+
+    @Test
+    public void findPersonToEdit_inconsistentNameAndID_throwsCommandException() {
+        Person John = new PersonBuilder().withName("John Doe").withNric("S1234567A").build();
+        Person Jane = new PersonBuilder().withName("Jane Smith").withNric("S7654321B").build();
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptor();
+        EditCommand editCommand = new EditCommand(new Name("John Doe"), new Nric("S7654321B"), descriptor);
+
+        // Add persons to a list
+        List<Person> persons = new ArrayList<>();
+        persons.add(John);
+        persons.add(Jane);
+
+        String expectedMessage = EditCommand.MESSAGE_INCONSISTENT_NAME_AND_ID;
+
+        CommandException exception = assertThrows(CommandException.class, () -> editCommand.findPersonToEdit(persons));
+        assertEquals(expectedMessage, exception.getMessage());
     }
 }
 
