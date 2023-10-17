@@ -79,7 +79,7 @@ public class Graduation {
     public static int parseAcadYearStart(String gradString) {
         String match = matchGroup(gradString, 1);
         int shortYear = Integer.parseInt(match);
-        int addedPart = (shortYear >= YEAR_THRESHOLD || shortYear == 0) ? YEAR_PART_HI : YEAR_PART_LO;
+        int addedPart = (shortYear < YEAR_THRESHOLD) ? YEAR_PART_HI : YEAR_PART_LO;
         return Integer.parseInt(match) + addedPart;
     }
 
@@ -93,7 +93,7 @@ public class Graduation {
     public static int parseAcadYearEnd(String gradString) {
         String match = matchGroup(gradString, 2);
         int shortYear = Integer.parseInt(match);
-        int addedPart = (shortYear >= YEAR_THRESHOLD || shortYear == 0) ? YEAR_PART_HI : YEAR_PART_LO;
+        int addedPart = (shortYear < YEAR_THRESHOLD) ? YEAR_PART_HI : YEAR_PART_LO;
         return Integer.parseInt(match) + addedPart;
     }
 
@@ -123,6 +123,7 @@ public class Graduation {
         if (gradString.matches(AY_REGEX)) {
             int year1 = parseAcadYearStart(gradString);
             int year2 = parseAcadYearEnd(gradString);
+            System.out.println("" + year1 + " " + year2);
             Semester sem = parseSemester(gradString);
             return isValidGraduationYear(year1, year2) && isValidGraduationSemester(sem);
         } else {
