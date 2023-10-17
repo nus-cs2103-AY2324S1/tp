@@ -43,6 +43,7 @@ public class Appointment {
     }
     public String getName() {return getStudent().getName().fullName; }
 
+
     public Description getDescription() {
         return description;
     }
