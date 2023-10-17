@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_HEIGHT_BOB;
-import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.lovebook.testutil.Assert.assertThrows;
 import static seedu.lovebook.testutil.TypicalPersons.ALICE;
 import static seedu.lovebook.testutil.TypicalPersons.BOB;
@@ -42,7 +41,7 @@ public class UniqueDateListTest {
     @Test
     public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
         uniquePersonList.add(ALICE);
-        Date editedAlice = new PersonBuilder(ALICE).withHeight(VALID_HEIGHT_BOB).withTags(VALID_TAG_HUSBAND)
+        Date editedAlice = new PersonBuilder(ALICE).withHeight(VALID_HEIGHT_BOB)
                 .build();
         assertTrue(uniquePersonList.contains(editedAlice));
     }
@@ -85,7 +84,7 @@ public class UniqueDateListTest {
     @Test
     public void setPerson_editedPersonHasSameIdentity_success() {
         uniquePersonList.add(ALICE);
-        Date editedAlice = new PersonBuilder(ALICE).withHeight(VALID_HEIGHT_BOB).withTags(VALID_TAG_HUSBAND)
+        Date editedAlice = new PersonBuilder(ALICE).withHeight(VALID_HEIGHT_BOB)
                 .build();
         uniquePersonList.setPerson(ALICE, editedAlice);
         UniquePersonList expectedUniquePersonList = new UniquePersonList();

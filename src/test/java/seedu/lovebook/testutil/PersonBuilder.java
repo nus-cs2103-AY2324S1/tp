@@ -1,16 +1,11 @@
 package seedu.lovebook.testutil;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import seedu.lovebook.model.person.Age;
 import seedu.lovebook.model.person.Date;
 import seedu.lovebook.model.person.Gender;
 import seedu.lovebook.model.person.Height;
 import seedu.lovebook.model.person.Income;
 import seedu.lovebook.model.person.Name;
-import seedu.lovebook.model.tag.Tag;
-import seedu.lovebook.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Date objects.
@@ -29,7 +24,6 @@ public class PersonBuilder {
     private Height height;
 
     private Income income;
-    private Set<Tag> tags;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -40,7 +34,6 @@ public class PersonBuilder {
         gender = new Gender(DEFAULT_GENDER);
         height = new Height(DEFAULT_HEIGHT);
         income = new Income(DEFAULT_INCOME);
-        tags = new HashSet<>();
     }
 
     /**
@@ -52,7 +45,6 @@ public class PersonBuilder {
         gender = dateToCopy.getGender();
         height = dateToCopy.getHeight();
         income = dateToCopy.getIncome();
-        tags = new HashSet<>(dateToCopy.getTags());
     }
 
     /**
@@ -60,14 +52,6 @@ public class PersonBuilder {
      */
     public PersonBuilder withName(String name) {
         this.name = new Name(name);
-        return this;
-    }
-
-    /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Date} that we are building.
-     */
-    public PersonBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
 
@@ -104,7 +88,7 @@ public class PersonBuilder {
     }
 
     public Date build() {
-        return new Date(name, age, gender, height, income, tags);
+        return new Date(name, age, gender, height, income);
     }
 
 }

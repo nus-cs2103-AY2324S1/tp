@@ -7,7 +7,6 @@ import static seedu.lovebook.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.lovebook.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_AGE_BOB;
 import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.lovebook.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.lovebook.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.lovebook.logic.commands.CommandTestUtil.showPersonAtIndex;
@@ -57,11 +56,10 @@ public class EditCommandTest {
         Date lastDate = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
 
         PersonBuilder personInList = new PersonBuilder(lastDate);
-        Date editedDate = personInList.withName(VALID_NAME_BOB).withAge(VALID_AGE_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+        Date editedDate = personInList.withName(VALID_NAME_BOB).withAge(VALID_AGE_BOB).build();
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withAge(VALID_AGE_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withAge(VALID_AGE_BOB).build();
         EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedDate));
