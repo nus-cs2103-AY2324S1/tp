@@ -5,6 +5,8 @@ import java.util.Set;
 
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Github;
+import seedu.address.model.person.LinkedIn;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -24,6 +26,8 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_REMARK = "";
+    public static final String DEFAULT_LINKEDIN = "";
+    public static final String DEFAULT_GITHUB = "";
 
 
     private Name name;
@@ -34,6 +38,8 @@ public class PersonBuilder {
 
     private Set<Tag> tags;
     private Status status;
+    private LinkedIn linkedIn;
+    private Github github;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -46,6 +52,7 @@ public class PersonBuilder {
         remark = new Remark(DEFAULT_REMARK);
         tags = new HashSet<>();
         status = new Status(); // default status is preliminary
+        linkedIn = new LinkedIn(DEFAULT_LINKEDIN);
     }
 
     /**
@@ -58,6 +65,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         remark = personToCopy.getRemark();
         tags = new HashSet<>(personToCopy.getTags());
+        linkedIn = personToCopy.getLinkedIn();
     }
 
     /**
@@ -107,6 +115,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code LinkedIn} of the {@code Person} that we are building.
+     * @param username
+     * @return
+     */
+    public PersonBuilder withLinkedIn(String username) {
+        this.linkedIn = new LinkedIn(username);
+        return this;
+    }
+
 
     /**
      * Sets the {@code Status} of the {@code Person} that we are building.
@@ -136,4 +154,13 @@ public class PersonBuilder {
         return new Person(name, phone, email, address, remark, tags);
     }
 
+    /**
+     * Sets the {@code Github} of the {@code Person} that we are building.
+     * @param username
+     * @return
+     */
+    public PersonBuilder withGithub(String username) {
+        this.github = new Github(username);
+        return this;
+    }
 }
