@@ -27,10 +27,6 @@ public class DisplayCard extends UiPart<Region> {
     @FXML
     private Label id;
 
-
-    @FXML
-    private Label answer;
-
     @FXML
     private Label question;
 
@@ -43,7 +39,6 @@ public class DisplayCard extends UiPart<Region> {
         this.card = card;
         id.setText(displayedIndex + ". ");
         question.setText(card.getQuestion().question);
-        answer.setText(card.getAnswer().answer);
 
     }
 }
