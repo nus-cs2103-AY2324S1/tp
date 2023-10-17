@@ -19,8 +19,8 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
-    /** The panel to be active **/
-    private final String panel;
+    /** The state to be set **/
+    private final String state;
 
     /** The parameters on what to display for student details **/
     private final String[] displayParams;
@@ -28,11 +28,11 @@ public class CommandResult {
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, String panel, String[] displayParams) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, String state, String[] displayParams) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
-        this.panel = panel;
+        this.state = state;
         this.displayParams = displayParams;
     }
 
@@ -52,12 +52,12 @@ public class CommandResult {
         this(feedbackToUser, false, false, "", displayParams);
     }
 
-    public CommandResult(String feedbackToUser, String panel) {
-        this(feedbackToUser, false, false, panel, new String[0]);
+    public CommandResult(String feedbackToUser, String state) {
+        this(feedbackToUser, false, false, state, new String[0]);
     }
 
-    public CommandResult(String feedbackToUser, String panel, String[] displayParams) {
-        this(feedbackToUser, false, false, panel, displayParams);
+    public CommandResult(String feedbackToUser, String state, String[] displayParams) {
+        this(feedbackToUser, false, false, state, displayParams);
     }
 
     public String getFeedbackToUser() {
@@ -72,8 +72,8 @@ public class CommandResult {
         return exit;
     }
 
-    public String getPanel() {
-        return panel;
+    public String getState() {
+        return state;
     }
 
     public String[] getDisplayParams() {

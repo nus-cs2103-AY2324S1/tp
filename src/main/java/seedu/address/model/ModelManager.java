@@ -24,6 +24,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private Ui ui = null;
+    private String state = "SCHEDULE"; // Default state of app. Can be either SCHEDULE or STUDENTS
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -164,5 +165,21 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
 
+    //=========== App State Changing =============================================================
+
+    @Override
+    public String getState() {
+        return state;
+    }
+
+    @Override
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    @Override
+    public boolean sameState(String state) {
+        return this.state.equals(state);
+    }
 
 }

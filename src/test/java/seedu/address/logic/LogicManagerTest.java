@@ -24,6 +24,7 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.ListCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -98,7 +99,7 @@ public class LogicManagerTest {
         assertEquals(0, fieldsNames.length);
         logicManager.setDisplayedFieldsList(new String[] {"phone"});
         assertEquals(1, logic.getDisplayedFieldsList().length);
-        assertEquals(5, LogicManager.DISPLAYABLE_FIELDS.length);
+        assertEquals(6, ListCommandParser.DISPLAYABLE_FIELDS.size());
     }
 
     /**
