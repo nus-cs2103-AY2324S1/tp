@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.ui.Ui;
 
 /**
  * The API of the Model component.
@@ -84,4 +85,32 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Shows the details of the given person.
+     * The person must exist in the address book.
+     */
+    void showPerson(Person personToShow);
+
+    /**
+     * Links the Ui of the Application.
+     */
+    void linkUi(Ui ui);
+
+    /**
+     * Gets the current app state.
+     */
+    String getState();
+
+    /**
+     * Sets the app state.
+     * @param state New app state
+     */
+    void setState(String state);
+
+    /**
+     * Checks if the given state is the same as the current app state.
+     * @param state State to check against app
+     */
+    boolean sameState(String state);
 }

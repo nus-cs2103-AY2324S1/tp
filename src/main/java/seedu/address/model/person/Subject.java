@@ -19,11 +19,11 @@ public class Subject {
     private String colour;
     // useful resource: https://www.w3schools.com/tags/ref_colornames.asp for colours
     private HashMap<String, String> subjectToColourMap = new HashMap<String, String>() {{
-            put("MATHEMATICS", "red");
-            put("PHYSICS", "yellow");
-            put("BIOLOGY", "green");
-            put("CHEMISTRY", "lightBlue");
-            put("ENGLISH", "orange");
+            put("MATHEMATICS", "FireBrick");
+            put("PHYSICS", "Chocolate");
+            put("BIOLOGY", "ForestGreen");
+            put("CHEMISTRY", "DarkCyan");
+            put("ENGLISH", "SaddleBrown");
             put("NONE", "invalid");
         }};
 

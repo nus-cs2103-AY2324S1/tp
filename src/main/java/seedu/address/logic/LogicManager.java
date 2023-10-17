@@ -5,6 +5,8 @@ import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -24,8 +26,6 @@ import seedu.address.storage.Storage;
 public class LogicManager implements Logic {
     public static final String FILE_OPS_ERROR_FORMAT = "Could not save data due to the following error: %s";
 
-    public static final String[] DISPLAYABLE_FIELDS = {"phone", "email", "address", "tags", "subjects"};
-
     public static final String FILE_OPS_PERMISSION_ERROR_FORMAT =
             "Could not save data to file %s due to insufficient permissions to write to the file or the folder.";
 
@@ -36,6 +36,9 @@ public class LogicManager implements Logic {
     private final AddressBookParser addressBookParser;
 
     private String[] displayedFieldsList = new String[0];
+
+    // Boolean property to track changes to ListUI to indicate a refresh
+    private BooleanProperty refreshListUi = new SimpleBooleanProperty(false);
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -53,6 +56,16 @@ public class LogicManager implements Logic {
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
+
+        // Set displayFieldsList if there is a list of params specified
+        String[] displayParams = commandResult.getDisplayParams(); // array of strings eg. ["phone", "subjects"]
+        if (displayParams.length != 0) {
+            if (displayParams[0].equals("none")) {
+                setDisplayedFieldsList(new String[0]);
+            } else {
+                setDisplayedFieldsList(displayParams);
+            }
+        }
 
         try {
             storage.saveAddressBook(model.getAddressBook());
@@ -97,5 +110,14 @@ public class LogicManager implements Logic {
     // list command should validate the fields, make sure they are valid
     public void setDisplayedFieldsList(String[] displayedFieldsList) {
         this.displayedFieldsList = displayedFieldsList;
+        refreshListUi();
+    }
+
+    public BooleanProperty getRefreshListUi() {
+        return refreshListUi;
+    }
+
+    public void refreshListUi() {
+        refreshListUi.setValue(!refreshListUi.getValue());
     }
 }

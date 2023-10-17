@@ -32,15 +32,15 @@ class SubjectTest {
             Subject none = new Subject("NONE");
             assertEquals(none.getColour(), "invalid");
             Subject maths = new Subject("MATHEMATICS");
-            assertEquals(maths.getColour(), "red");
+            assertEquals(maths.getColour(), "FireBrick");
             Subject physics = new Subject("PHYSICS");
-            assertEquals(physics.getColour(), "yellow");
+            assertEquals(physics.getColour(), "Chocolate");
             Subject biology = new Subject("BIOLOGY");
-            assertEquals(biology.getColour(), "green");
+            assertEquals(biology.getColour(), "ForestGreen");
             Subject chemistry = new Subject("CHEMISTRY");
-            assertEquals(chemistry.getColour(), "lightBlue");
+            assertEquals(chemistry.getColour(), "DarkCyan");
             Subject english = new Subject("ENGLISH");
-            assertEquals(english.getColour(), "orange");
+            assertEquals(english.getColour(), "SaddleBrown");
         } catch (Exception e) {
             assert false;
         }

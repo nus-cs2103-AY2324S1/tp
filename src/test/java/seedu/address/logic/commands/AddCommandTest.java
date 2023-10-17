@@ -24,6 +24,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.ui.Ui;
 
 public class AddCommandTest {
 
@@ -155,6 +156,31 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void showPerson(Person personToShow) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void linkUi(Ui ui) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String getState() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setState(String state) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean sameState(String state) {
             throw new AssertionError("This method should not be called.");
         }
     }

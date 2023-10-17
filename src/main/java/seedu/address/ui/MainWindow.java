@@ -5,10 +5,13 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -16,6 +19,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -32,8 +36,15 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private ScheduleListPanel scheduleListPanel;
+    private StudentDetailListPanel studentDetailListPanel;
+    private LessonDetailListPanel lessonDetailListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private ShowPersonWindow showPersonWindow;
+
+    @FXML
+    private AnchorPane showPersonPanelPlaceholder;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -42,13 +53,33 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
+    private VBox personList;
+    @FXML
     private StackPane personListPanelPlaceholder;
+
+    @FXML
+    private VBox scheduleList;
+    @FXML
+    private StackPane scheduleListPanelPlaceholder;
+
+    @FXML
+    private VBox studentDetailList;
+    @FXML
+    private StackPane studentDetailListPanelPlaceholder;
+
+    @FXML
+    private VBox lessonDetailList;
+    @FXML
+    private StackPane lessonDetailListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private SplitPane contentSplitPane;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -66,6 +97,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        showPersonWindow = new ShowPersonWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -113,6 +145,15 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic);
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
+        scheduleListPanel = new ScheduleListPanel(logic);
+        scheduleListPanelPlaceholder.getChildren().add(scheduleListPanel.getRoot());
+
+        studentDetailListPanel = new StudentDetailListPanel(logic);
+        studentDetailListPanelPlaceholder.getChildren().add(studentDetailListPanel.getRoot());
+
+        lessonDetailListPanel = new LessonDetailListPanel(logic);
+        lessonDetailListPanelPlaceholder.getChildren().add(lessonDetailListPanel.getRoot());
+
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -121,6 +162,8 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        contentSplitPane.getItems().removeAll(personList, studentDetailList);
     }
 
     /**
@@ -186,11 +229,44 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            if (!commandResult.getState().equals("")) {
+                String state = commandResult.getState();
+                double[] dividerPositions = contentSplitPane.getDividerPositions();
+                switch (state) {
+                case "SCHEDULE":
+                    contentSplitPane.getItems().removeAll(personList, studentDetailList);
+                    contentSplitPane.getItems().addAll(scheduleList, lessonDetailList);
+                    break;
+                case "STUDENTS":
+                    contentSplitPane.getItems().removeAll(scheduleList, lessonDetailList);
+                    contentSplitPane.getItems().addAll(personList, studentDetailList);
+                    break;
+                default:
+                    System.out.println("unknown panel asked for");
+                    break;
+                }
+                contentSplitPane.setDividerPositions(dividerPositions);
+            }
+
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
+        }
+    }
+
+    /**
+     * Opens the Person Details window or focuses on it if it's already opened.
+     *
+     * @param person The person to show the details of.
+     */
+    public void handleShowPerson(Person person) {
+        showPersonWindow.setPersonDetails(person);
+        if (!showPersonWindow.isShowing()) {
+            showPersonWindow.show();
+        } else {
+            showPersonWindow.focus();
         }
     }
 }

@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.ui.Ui;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,6 +23,8 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private Ui ui = null;
+    private String state = "SCHEDULE"; // Default state of app. Can be either SCHEDULE or STUDENTS
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -111,6 +114,8 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -128,6 +133,21 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    //=========== Ui Changing =============================================================
+
+    public void linkUi(Ui ui) {
+        this.ui = ui;
+    }
+
+    @Override
+    public void showPerson(Person person) {
+        requireNonNull(person);
+        if (ui != null) {
+            ui.showPersonDetails(person);
+        }
+
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -143,6 +163,23 @@ public class ModelManager implements Model {
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
+    }
+
+    //=========== App State Changing =============================================================
+
+    @Override
+    public String getState() {
+        return state;
+    }
+
+    @Override
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    @Override
+    public boolean sameState(String state) {
+        return this.state.equals(state);
     }
 
 }
