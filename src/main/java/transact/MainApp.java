@@ -64,7 +64,8 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        TransactionBookStorage transactionBookStorage = new CsvAdaptedTransactionStorage(userPrefs.getTransactionBookFilePath());
+        TransactionBookStorage transactionBookStorage = new CsvAdaptedTransactionStorage(
+                userPrefs.getTransactionBookFilePath());
         storage = new StorageManager(addressBookStorage, transactionBookStorage, userPrefsStorage);
 
         model = initModelManager(storage, userPrefs);
@@ -109,14 +110,12 @@ public class MainApp extends Application {
         try {
             transactionBookOptional = storage.readTransactionBook();
             if (!transactionBookOptional.isPresent()) {
-                logger.info("Creating a new data file " + storage.getAddressBookFilePath()
+                logger.info("Creating a new data file " + storage.getTransactionBookFilePath()
                         + " populated with a sample TransactionBook.");
             }
-            // TODO replace with actual sample data
-            // initialTransactionData = transactionBookOptional.orElseGet(SampleDataUtil::getSampleTransactionBook);
-            initialTransactionData = transactionBookOptional.orElse(new TransactionBook());
+            initialTransactionData = transactionBookOptional.orElseGet(SampleDataUtil::getSampleTransactionBook);
         } catch (DataLoadingException e) {
-            logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
+            logger.warning("Data file at " + storage.getTransactionBookFilePath() + " could not be loaded."
                     + " Will be starting with an empty TransactionBook.");
             initialTransactionData = new TransactionBook();
         }

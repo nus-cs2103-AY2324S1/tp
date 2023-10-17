@@ -69,6 +69,7 @@ public class CsvAdaptedTransactionStorageManualTest {
                 new Description("Expense 3"),
                 new Amount(new BigDecimal("21.02")), new Date("01/05/2023"));
 
+
         TransactionBook transactionBook = new TransactionBook();
         transactionBook.addTransaction(transaction1);
         transactionBook.addTransaction(transaction2);

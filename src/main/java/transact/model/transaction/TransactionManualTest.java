@@ -65,6 +65,7 @@ public class TransactionManualTest {
         // Create a Transaction object
         Transaction transaction = new Transaction(transactionId, transactionType, description, amount, date, person);
 
+
         // Print Transaction information for verification
         System.out.println("\nTransaction Information:");
         System.out.println("Transaction ID: " + transaction.getTransactionId());

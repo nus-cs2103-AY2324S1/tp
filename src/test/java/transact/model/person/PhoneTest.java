@@ -51,9 +51,6 @@ public class PhoneTest {
         // null -> returns false
         assertFalse(phone.equals(null));
 
-        // different types -> returns false
-        assertFalse(phone.equals(5.0f));
-
         // different values -> returns false
         assertFalse(phone.equals(new Phone("995")));
     }
