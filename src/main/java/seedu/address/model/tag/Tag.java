@@ -20,6 +20,7 @@ public class Tag {
     public enum EmergencyTags {
         RA,
         SOS;
+
         /**
          * Returns true if a given string is a valid emergency tag name.
          */

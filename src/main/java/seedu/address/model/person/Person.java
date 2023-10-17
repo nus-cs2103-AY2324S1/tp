@@ -131,9 +131,11 @@ public class Person {
             .filter(tag -> Tag.EmergencyTags.isEmergencyTag(tag.tagName))
             .collect(Collectors.toSet());
     }
+
     public Optional<Integer> getId() {
         return id;
     }
+
     public int setId(int id) {
         this.id = Optional.of(id);
         return id;
