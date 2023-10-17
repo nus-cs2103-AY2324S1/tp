@@ -5,7 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.Student;
+import seedu.address.model.student.Student;
 
 /**
  * Represents an appointment with a date and time, a student, and a description.
