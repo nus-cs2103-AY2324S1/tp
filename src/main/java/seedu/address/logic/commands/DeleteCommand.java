@@ -83,7 +83,7 @@ public class DeleteCommand extends Command {
                 .toString();
     }
 
-    public CommandResult deleteByIndex( Model model) throws CommandException {
+    public CommandResult deleteByIndex(Model model) throws CommandException {
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         List<Person> lastShownList = model.getFilteredPersonList();
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
@@ -95,7 +95,7 @@ public class DeleteCommand extends Command {
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(employeeToDelete)));
     }
 
-    public CommandResult deleteByName( Model model) throws CommandException {
+    public CommandResult deleteByName(Model model) throws CommandException {
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         List<Person> fullList = model.getFilteredPersonList();
         List<Integer> indexes = model.getIndexOfFilteredPersonList(this.name);
