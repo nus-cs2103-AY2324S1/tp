@@ -44,14 +44,17 @@ import seedu.address.model.tag.Tag;
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
-    public static final String MESSAGE_USAGE_GENERAL = "Parameters: "
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    private static final String MESSAGE_USAGE_GENERAL = "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_LOCATION + "LOCATION "
             + "[" + PREFIX_TAG + "TAG]... ";
 
-    public static final String PERSON_EXAMPLE =
+    private static final String PERSON_EXAMPLE =
             PREFIX_NAME + "John Doe "
                     + PREFIX_PHONE + "98765432 "
                     + PREFIX_EMAIL + "johnd@example.com "
@@ -81,10 +84,6 @@ public class EditCommand extends Command {
             + SPECIALIST_TAG + " "
             + PERSON_EXAMPLE
             + PREFIX_SPECIALTY + "Physiotherapist ";
-
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;

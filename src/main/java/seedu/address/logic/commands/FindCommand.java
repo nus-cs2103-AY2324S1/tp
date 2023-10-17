@@ -26,14 +26,14 @@ import seedu.address.model.person.PersonType;
  */
 public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
-    public static final String MESSAGE_USAGE_GENERAL = "Parameters: "
+    private static final String MESSAGE_USAGE_GENERAL = "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_LOCATION + "LOCATION "
             + "[" + PREFIX_TAG + "TAG]... ";
 
-    public static final String PERSON_EXAMPLE =
+    private static final String PERSON_EXAMPLE =
             PREFIX_NAME + "John Doe "
                     + PREFIX_PHONE + "98765432 "
                     + PREFIX_EMAIL + "johnd@example.com "
