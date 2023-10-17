@@ -26,6 +26,11 @@ public class RemoveNoteCommand extends Command {
     private final Index indexPerson;
     private final Index indexNote;
 
+    /**
+     * Creates a RemoveNoteCommand to remove the specified {@code Note} from the {@code Person}
+     * @param indexPerson
+     * @param indexNote
+     */
     public RemoveNoteCommand(Index indexPerson, Index indexNote) {
         requireAllNonNull(indexPerson, indexNote);
 

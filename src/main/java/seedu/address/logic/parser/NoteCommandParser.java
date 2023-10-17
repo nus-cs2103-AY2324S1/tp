@@ -10,7 +10,7 @@ import seedu.address.model.person.Note;
 /**
  * Parses input arguments and creates a new NoteCommand object.
  */
-public class NoteCommandParser implements Parser<NoteCommand>{
+public class NoteCommandParser implements Parser<NoteCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the NoteCommand

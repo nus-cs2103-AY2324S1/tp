@@ -22,7 +22,8 @@ public class RemoveNoteCommandParser {
             String[] splitArgs = args.trim().split("\\s");
 
             if (splitArgs.length != 2) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemoveNoteCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    RemoveNoteCommand.MESSAGE_USAGE));
             }
 
             Index indexPerson = ParserUtil.parseIndex(splitArgs[0]);
@@ -30,7 +31,8 @@ public class RemoveNoteCommandParser {
 
             return new RemoveNoteCommand(indexPerson, indexNote);
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemoveNoteCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                RemoveNoteCommand.MESSAGE_USAGE), pe);
         }
     }
 }
