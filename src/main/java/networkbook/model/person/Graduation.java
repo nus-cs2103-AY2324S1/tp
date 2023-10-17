@@ -123,7 +123,6 @@ public class Graduation {
         if (gradString.matches(AY_REGEX)) {
             int year1 = parseAcadYearStart(gradString);
             int year2 = parseAcadYearEnd(gradString);
-            System.out.println("" + year1 + " " + year2);
             Semester sem = parseSemester(gradString);
             return isValidGraduationYear(year1, year2) && isValidGraduationSemester(sem);
         } else {
