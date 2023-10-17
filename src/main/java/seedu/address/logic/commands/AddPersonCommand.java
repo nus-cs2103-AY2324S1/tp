@@ -32,6 +32,7 @@ public class AddPersonCommand extends AddCommand {
             + PREFIX_PHONE + " 98765432 "
             + PREFIX_EMAIL + " johnd@example.com "
             + PREFIX_ADDRESS + " 311, Clementi Ave 2, #02-25 ";
+    
 
     public static final String MESSAGE_SUCCESS = "New contact added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This contact already exists in the contact list";

@@ -15,6 +15,9 @@ public class ListEventCommand extends ListCommand {
     public static final String SECONDARY_COMMAND_WORD = "events";
     public static final String MESSAGE = "Here are all the events in this address book:\n";
 
+    public static final String MESSAGE_USAGE = COMMAND_WORD + SECONDARY_COMMAND_WORD  
+        + ": Lists all events in the address book";
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
