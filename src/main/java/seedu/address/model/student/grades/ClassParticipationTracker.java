@@ -3,9 +3,9 @@ package seedu.address.model.student.grades;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import seedu.address.commons.core.index.Index;
-
 import java.util.Arrays;
+
+import seedu.address.commons.core.index.Index;
 
 /**
  * Represents a Student's class participation grades
@@ -77,7 +77,7 @@ public class ClassParticipationTracker {
         }
 
         ClassParticipationTracker otherClassParticipationTracker = (ClassParticipationTracker) other;
-        return Arrays.equals(classPartList,otherClassParticipationTracker.classPartList);
+        return Arrays.equals(classPartList, otherClassParticipationTracker.classPartList);
     }
 
     @Override
