@@ -129,6 +129,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void updateSortedEmployeeList(String attribute) {
+        requireNonNull(attribute);
+        addressBook.sortEmployees(attribute);
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;

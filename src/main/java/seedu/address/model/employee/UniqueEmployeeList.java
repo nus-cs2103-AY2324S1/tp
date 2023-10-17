@@ -3,6 +3,7 @@ package seedu.address.model.employee;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -67,6 +68,13 @@ public class UniqueEmployeeList implements Iterable<Employee> {
         }
 
         internalList.set(index, editedEmployee);
+    }
+
+    /** Sorts the list of employees by the specified attribute */
+    public void sortEmployees(String attribute) {
+        requireNonNull(attribute);
+
+        internalList.sort(Comparator.comparing(Employee::getSalary));
     }
 
     /**
