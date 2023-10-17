@@ -3,6 +3,12 @@ package seedu.address.logic.commands;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_APPOINTMENTS;
+
+/**
+ * Lists all persons in the address book to the user.
+ */
 public class ViewCommand extends Command {
 
     public static final String COMMAND_WORD = "view";
@@ -13,6 +19,7 @@ public class ViewCommand extends Command {
             + "g/ [DATA_CATEGORY]\n"
             + "Example: " + COMMAND_WORD + " g/appointments ";
 
+    public static final String MESSAGE_SUCCESS = "Listed all appointments";
     public static final String MESSAGE_ARGUMENTS = "Data chosen: %1$s";
 
     private final String category;
@@ -23,7 +30,10 @@ public class ViewCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        throw new CommandException(String.format(MESSAGE_ARGUMENTS, category));
+        requireNonNull(model);
+        model.updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
+        return new CommandResult(MESSAGE_SUCCESS);
+        // throw new CommandException(String.format(MESSAGE_ARGUMENTS, category));
     }
 
     @Override

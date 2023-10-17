@@ -9,7 +9,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyWellNus;
 import seedu.address.model.person.Person;
 
 /**
@@ -25,7 +25,7 @@ public class LogicStub implements Logic {
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
+    public ReadOnlyWellNus getAddressBook() {
         throw new AssertionError("This method should not be called.");
     }
 

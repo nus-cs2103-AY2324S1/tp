@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyWellNus;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
 
@@ -50,12 +50,12 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook newData) {
+    public void setAddressBook(ReadOnlyWellNus newData) {
         throw new AssertionError("This method should not be called.");
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
+    public ReadOnlyWellNus getAddressBook() {
         throw new AssertionError("This method should not be called.");
     }
 
