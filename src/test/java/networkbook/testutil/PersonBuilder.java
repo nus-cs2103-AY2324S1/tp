@@ -33,7 +33,7 @@ public class PersonBuilder {
     public static final String DEFAULT_PRIORITY = null;
 
     private Name name;
-    private Phone phone;
+    private UniqueList<Phone> phones;
     private UniqueList<Email> emails;
     private UniqueList<Link> links;
     private GraduatingYear graduatingYear;
@@ -47,7 +47,7 @@ public class PersonBuilder {
      */
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
-        phone = new Phone(DEFAULT_PHONE);
+        phones = new UniqueList<Phone>().setItems(List.of(new Phone(DEFAULT_PHONE)));
         emails = new UniqueList<Email>().setItems(List.of(new Email(DEFAULT_EMAIL)));
         links = new UniqueList<Link>().setItems(List.of(new Link(DEFAULT_LINK)));
         graduatingYear = new GraduatingYear(DEFAULT_GRADUATING_YEAR);
@@ -62,7 +62,7 @@ public class PersonBuilder {
      */
     public PersonBuilder(Person personToCopy) {
         name = personToCopy.getName();
-        phone = personToCopy.getPhone().orElse(null);
+        phones = personToCopy.getPhones();
         emails = personToCopy.getEmails();
         links = personToCopy.getLinks();
         graduatingYear = personToCopy.getGraduatingYear().orElse(null);
@@ -131,8 +131,8 @@ public class PersonBuilder {
     /**
      * Sets the {@code Phone} of the {@code Person} that we are building.
      */
-    public PersonBuilder withPhone(String phone) {
-        this.phone = new Phone(phone);
+    public PersonBuilder withPhones(List<String> phones) {
+        this.phones = new UniqueList<Phone>().setItems(phones.stream().map(Phone::new).collect(Collectors.toList()));
         return this;
     }
 
@@ -156,7 +156,7 @@ public class PersonBuilder {
      * Sets all fields of the {@code Person} that we are building to null.
      */
     public PersonBuilder withoutOptionalFields() {
-        this.phone = null;
+        this.phones = new UniqueList<>();
         this.emails = new UniqueList<>();
         this.links = new UniqueList<>();
         this.graduatingYear = null;
@@ -168,7 +168,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, emails, links, graduatingYear, course, specialisation, tags, priority);
+        return new Person(name, phones, emails, links, graduatingYear, course, specialisation, tags, priority);
     }
 
 }

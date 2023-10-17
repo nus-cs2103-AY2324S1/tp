@@ -96,7 +96,7 @@ public class AddCommand extends Command {
         assert personToAddInfo != null;
 
         Name updatedName = personToAddInfo.getName(); // name cannot be added
-        Phone updatedPhone = addPhone(personToAddInfo, editPersonDescriptor);
+        UniqueList<Phone> updatedPhones = addPhones(personToAddInfo, editPersonDescriptor);
         UniqueList<Email> updatedEmails = addEmails(personToAddInfo, editPersonDescriptor);
         UniqueList<Link> updatedLinks = addLinks(personToAddInfo, editPersonDescriptor);
         GraduatingYear updatedGraduatingYear = addGraduatingYear(personToAddInfo, editPersonDescriptor);
@@ -105,20 +105,16 @@ public class AddCommand extends Command {
         Set<Tag> updatedTags = addTags(personToAddInfo, editPersonDescriptor);
         Priority updatedPriority = addPriority(personToAddInfo, editPersonDescriptor);
 
-        return new Person(updatedName, updatedPhone, updatedEmails, updatedLinks, updatedGraduatingYear,
+        return new Person(updatedName, updatedPhones, updatedEmails, updatedLinks, updatedGraduatingYear,
                 updatedCourse, updatedSpecialisation, updatedTags, updatedPriority);
     }
 
     // TODO: for non-unique fields, change respective model to use list and append to the list
     // TODO: now it just replaces the old value
-    private Phone addPhone(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor)
-            throws CommandException {
-        Optional<Phone> oldPhone = personToAddInfo.getPhone();
-        Optional<Phone> newPhone = editPersonDescriptor.getPhone();
-        if (oldPhone.isPresent() && newPhone.isPresent()) {
-            throw new CommandException(MESSAGE_MULTIPLE_UNIQUE_FIELD);
-        }
-        return newPhone.orElse(oldPhone.orElse(null));
+    private UniqueList<Phone> addPhones(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor) {
+        UniqueList<Phone> phones = personToAddInfo.getPhones();
+        editPersonDescriptor.getPhones().ifPresent(phones::addAll);
+        return phones;
     }
     private UniqueList<Email> addEmails(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor) {
         UniqueList<Email> emails = personToAddInfo.getEmails();

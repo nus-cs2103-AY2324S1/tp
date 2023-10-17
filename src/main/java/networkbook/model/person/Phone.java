@@ -3,11 +3,13 @@ package networkbook.model.person;
 import static java.util.Objects.requireNonNull;
 import static networkbook.commons.util.AppUtil.checkArgument;
 
+import networkbook.model.util.Identifiable;
+
 /**
  * Represents a Person's phone number in the network book.
  * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
  */
-public class Phone {
+public class Phone implements Identifiable<Phone> {
 
 
     public static final String MESSAGE_CONSTRAINTS =
@@ -33,6 +35,14 @@ public class Phone {
         return test.matches(VALIDATION_REGEX);
     }
 
+    @Override
+    public boolean isSame(Phone another) {
+        return this.value.equals(another.value);
+    }
+    @Override
+    public String getValue() {
+        return this.value;
+    }
     @Override
     public String toString() {
         return value;

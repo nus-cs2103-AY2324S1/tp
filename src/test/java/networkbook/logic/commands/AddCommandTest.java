@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import networkbook.commons.core.index.Index;
@@ -28,32 +30,6 @@ public class AddCommandTest {
     private Model model = new ModelManager(TypicalPersons.getTypicalNetworkBook(), new UserPrefs());
 
     // TODO: Alter addCommand tests (the 4 right below). Note to self: reinstate the removed method (Whatsapp)
-    @Test
-    public void execute_multiplePhonesBeingAdded_assertionError() {
-        // modified, but essence should be kept
-        Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
-        Person lastPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
-
-        PersonBuilder personInList = new PersonBuilder(lastPerson);
-        Person editedPerson = personInList.withPhone(CommandTestUtil.VALID_PHONE_BOB)
-                .withTags(CommandTestUtil.VALID_TAG_HUSBAND).build();
-
-        EditCommand.EditPersonDescriptor descriptor =
-                new EditPersonDescriptorBuilder().withPhone(CommandTestUtil.VALID_PHONE_BOB)
-                        .withTags(CommandTestUtil.VALID_TAG_HUSBAND).build();
-        AddCommand addCommand = new AddCommand(indexLastPerson, descriptor);
-
-        String expectedMessage = String.format(AddCommand.MESSAGE_ADD_INFO_SUCCESS, Messages.format(editedPerson));
-
-        Model expectedModel = new ModelManager(new NetworkBook(model.getNetworkBook()), new UserPrefs());
-        expectedModel.setItem(lastPerson, editedPerson);
-        try {
-            CommandTestUtil.assertCommandSuccess(addCommand, model, expectedMessage, expectedModel);
-            fail();
-        } catch (AssertionError e) {
-            assertEquals(e.getMessage(), "Execution of command should not fail.");
-        }
-    }
     @Test
     public void execute_multipleGradYearsBeingAdded_assertionError() {
         Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
