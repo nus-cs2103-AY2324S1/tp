@@ -16,10 +16,10 @@ import seedu.address.model.interview.Interview;
  */
 public class AddInterviewCommand extends Command {
 
-    public static final String COMMAND_WORD = "addinterview";
+    public static final String COMMAND_WORD = "add-interview";
 
     /* TODO Update format with intended final format accepted*/
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an interview to the address book. "
             + "Parameters: "
             + PREFIX_APPLICANT + "APPLICANT_ID "
             + PREFIX_JOB_ROLE + "ROLE "
