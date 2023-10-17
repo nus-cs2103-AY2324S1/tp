@@ -28,7 +28,7 @@ public class DeleteCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_USAGE_FOR_NAME = COMMAND_WORD
-            + ": Deletes the employee identified by the index number used in the displayed employee list.\n"
+            + ": Deletes the employee identified by the name used in the displayed employee list.\n"
             + "Parameters: n/NAME (must be present)\n"
             + "Example: " + COMMAND_WORD + " n/John";
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Employee: %1$s";
@@ -104,7 +104,7 @@ public class DeleteCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME);
         }
         if (indexes.size() == 1) {
-            Person employeeToDelete = fullList.get(indexes.get(0));
+            Person employeeToDelete = fullList.get(indexes.get(0) - 1);
             model.deletePerson(employeeToDelete);
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(employeeToDelete)));
         }

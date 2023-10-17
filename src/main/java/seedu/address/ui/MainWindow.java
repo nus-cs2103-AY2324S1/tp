@@ -35,6 +35,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private boolean isRead;
 
     private List<Integer> indexes = null;
 
@@ -166,8 +167,25 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    private void handleRead(String fieldToRead) {
+        personListPanelPlaceholder.getChildren().clear();
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), fieldToRead);
+        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+    }
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
+    }
+
+    /**
+     * Reset the MainWindow after displaying PersonCardWithSpecificField
+     *
+     * @see seedu.address.logic.Logic#execute(String)
+     */
+    private void resetMainWindow() {
+        personListPanelPlaceholder.getChildren().clear();
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
     }
 
     /**
@@ -177,6 +195,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
+            resetMainWindow();
             CommandResult commandResult = logic.execute(commandText);
             this.indexes = commandResult.getIndexes();
             this.personListPanel.indexesSetter(this.indexes);
@@ -189,6 +208,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isRead()) {
+                handleRead(commandResult.getFieldToRead());
             }
 
             return commandResult;

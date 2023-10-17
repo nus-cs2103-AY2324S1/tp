@@ -144,7 +144,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setPerson(Person target, Person editedPerson) {
+        public void setPerson(Person target, Person editedEmployee) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -155,6 +155,11 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setSpecificPersonToDisplay(Person targetPerson) {
             throw new AssertionError("This method should not be called.");
         }
     }

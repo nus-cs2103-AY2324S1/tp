@@ -17,6 +17,7 @@ import seedu.address.model.person.Person;
 public class PersonListPanel extends UiPart<Region> {
     private static final String FXML = "PersonListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+    private final String fieldToRead;
 
     @FXML
     private ListView<Person> personListView;
@@ -24,7 +25,7 @@ public class PersonListPanel extends UiPart<Region> {
     private List<Integer> indexes;
 
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Creates a {@code PersonListPanel} with the given {@code ObservableList} and list of indexes.
      */
     public PersonListPanel(ObservableList<Person> personList, List<Integer> indexes) {
         super(FXML);
@@ -34,6 +35,27 @@ public class PersonListPanel extends UiPart<Region> {
         } else {
             personListView.setCellFactory(listView -> new PersonListViewCell());
         }
+        this.fieldToRead = "";
+    }
+
+    /**
+     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     */
+    public PersonListPanel(ObservableList<Person> personList) {
+        super(FXML);
+        personListView.setItems(personList);
+        personListView.setCellFactory(listView -> new PersonListViewCell());
+        this.fieldToRead = "";
+    }
+
+    /**
+     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     */
+    public PersonListPanel(ObservableList<Person> personList, String fieldToRead) {
+        super(FXML);
+        personListView.setItems(personList);
+        personListView.setCellFactory(listView -> new SpecifyPersonListViewCell());
+        this.fieldToRead = fieldToRead;
     }
 
     /**
@@ -75,4 +97,21 @@ public class PersonListPanel extends UiPart<Region> {
         personListView.requestLayout();
     }
 
+    /**
+     * Custom {@code ListCell} that displays the graphics of
+     * a {@code Person} using a {@code PersonCardWithSpecificField}.
+     */
+    class SpecifyPersonListViewCell extends ListCell<Person> {
+        @Override
+        protected void updateItem(Person person, boolean empty) {
+            super.updateItem(person, empty);
+
+            if (empty || person == null) {
+                setGraphic(null);
+                setText(null);
+            } else {
+                setGraphic(new PersonCardWithSpecificField(person, getIndex() + 1, fieldToRead).getRoot());
+            }
+        }
+    }
 }

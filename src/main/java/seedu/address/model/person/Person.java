@@ -2,39 +2,43 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Person in the address book.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Guarantees: details are present and not null, field values are validated,
+ * immutable.
  */
 public class Person {
 
     // Identity fields
+    private final Email email;
     private final Name name;
     private final Phone phone;
-    private final Email email;
 
     // Data fields
     private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
+    private final AnnualLeave annualLeave;
+    private final BankAccount bankAccount;
+    private final JoinDate joinDate;
+    private final Salary salary;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, BankAccount bankAccount, JoinDate joinDate,
+            Salary salary, AnnualLeave annualLeave) {
+        requireAllNonNull(name, phone, email, address, bankAccount, joinDate, salary, annualLeave);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.tags.addAll(tags);
+        this.bankAccount = bankAccount;
+        this.joinDate = joinDate;
+        this.salary = salary;
+        this.annualLeave = annualLeave;
     }
 
     public Name getName() {
@@ -53,13 +57,22 @@ public class Person {
         return address;
     }
 
-    /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public BankAccount getBankAccount() {
+        return bankAccount;
     }
+
+    public JoinDate getJoinDate() {
+        return joinDate;
+    }
+
+    public Salary getSalary() {
+        return salary;
+    }
+
+    public AnnualLeave getAnnualLeave() {
+        return annualLeave;
+    }
+
 
     /**
      * Returns true if both persons have the same name.
@@ -71,7 +84,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+            && otherPerson.getName().equals(getName());
     }
 
     /**
@@ -94,13 +107,16 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && bankAccount.equals(otherPerson.bankAccount)
+                && joinDate.equals(otherPerson.joinDate)
+                && salary.equals(otherPerson.salary)
+                && annualLeave.equals(otherPerson.annualLeave);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, bankAccount, joinDate, salary, annualLeave);
     }
 
     @Override
@@ -110,8 +126,10 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
-                .add("tags", tags)
+                .add("bankAccount", bankAccount)
+                .add("joinDate", joinDate)
+                .add("salary", salary)
+                .add("annualLeave", annualLeave)
                 .toString();
     }
-
 }

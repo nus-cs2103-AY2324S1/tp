@@ -17,10 +17,12 @@ public class Messages {
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The employee index provided is invalid";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_NAME = "The employee name provided is invalid";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d employees listed!";
+
+    public static final String MESSAGE_INVALID_FIELD_TO_READ = "The field to read provided is invalid";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW_DELETE =
-            "%1$d employees listed! Refer to their indexes for deletion";
+            "%1$d employees found! Refer to their indexes for deletion";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -46,8 +48,14 @@ public class Messages {
                 .append(person.getEmail())
                 .append("; Address: ")
                 .append(person.getAddress())
-                .append("; Tags: ");
-        person.getTags().forEach(builder::append);
+                .append("; Bank Account: ")
+                .append(person.getBankAccount())
+                .append("; Join Date: ")
+                .append(person.getJoinDate())
+                .append("; Salary: ")
+                .append(person.getSalary())
+                .append("; Annual Leave: ")
+                .append(person.getAnnualLeave());
         return builder.toString();
     }
 

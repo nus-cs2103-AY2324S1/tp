@@ -19,8 +19,10 @@ public class CommandResult {
 
     /** The application should exit. */
     private final boolean exit;
-
     private final List<Integer> indexes;
+    /** The application should read a specific field of a particular employee. */
+    private final boolean read;
+    private final String fieldToRead;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
@@ -30,6 +32,8 @@ public class CommandResult {
         this.showHelp = showHelp;
         this.exit = exit;
         this.indexes = null;
+        this.read = false;
+        this.fieldToRead = null;
     }
 
     /**
@@ -37,7 +41,25 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.showHelp = false;
+        this.indexes = null;
+        this.exit = false;
+        this.read = false;
+        this.fieldToRead = null;
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser}
+     * To store read field and set read to true to display a different person card.
+     */
+    public CommandResult(String feedbackToUser, boolean read, String fieldToRead) {
+        this.feedbackToUser = feedbackToUser;
+        this.indexes = null;
+        this.exit = false;
+        this.showHelp = false;
+        this.read = read;
+        this.fieldToRead = fieldToRead;
     }
 
     /**
@@ -48,10 +70,16 @@ public class CommandResult {
         this.showHelp = false;
         this.exit = false;
         this.indexes = indexes;
+        this.read = false;
+        this.fieldToRead = null;
     }
 
     public String getFeedbackToUser() {
         return feedbackToUser;
+    }
+
+    public String getFieldToRead() {
+        return fieldToRead;
     }
 
     public boolean isShowHelp() {
@@ -60,6 +88,10 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public boolean isRead() {
+        return read;
     }
 
     @Override
