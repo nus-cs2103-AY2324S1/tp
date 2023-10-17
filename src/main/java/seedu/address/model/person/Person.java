@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -50,7 +51,7 @@ public class Person {
         this.telegram = Optional.empty();
         this.tags.addAll(tags);
         this.id = Optional.empty();
-        this.notes = Collections.emptyList();
+        this.notes = new LinkedList<>();
     }
 
     /**
