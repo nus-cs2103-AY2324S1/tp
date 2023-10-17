@@ -52,6 +52,7 @@ public class FlashCard {
     public ProficiencyLevel getProficiencyLevel() {
         return level;
     }
+
     /**
      * Returns true if both flashcards have the same originalWord and translatedWord.
      * This defines a weaker notion of equality between two flashcards.
@@ -62,7 +63,8 @@ public class FlashCard {
         }
 
         return otherFlashCard != null
-            && otherFlashCard.getOriginalWord().equals(getOriginalWord());
+            && otherFlashCard.getOriginalWord().equals(getOriginalWord())
+            && otherFlashCard.getTranslatedWord().equals(getTranslatedWord());
     }
 
     /**
@@ -102,19 +104,6 @@ public class FlashCard {
                 + originalWord.getLanguage() + " | " + whenToReview.toString() + " | " + level + "\n";
         return sb;
     }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (!(obj instanceof FlashCard)) {
-            return false;
-        }
-        FlashCard fc = (FlashCard) obj;
-        if (fc.originalWord.equals(this.originalWord) && fc.translatedWord.equals(this.translatedWord)) {
-            return true;
-        }
-        return false;
-    }
-
 
     /**
      * Handles when user clicks yes/no
