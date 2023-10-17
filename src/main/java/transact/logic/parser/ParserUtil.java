@@ -192,13 +192,13 @@ public class ParserUtil {
      * @throws ParseException
      *             if the given {@code Date} is invalid.
      */
-    public static Date parseDate(String date) throws ParseException {
+    public static Date parseDate(String date) throws ParseException{
         requireNonNull(date);
         String trimmedDate = date.trim();
         if (!Date.isValidDate(trimmedDate)) {
             throw new ParseException(Date.MESSAGE_CONSTRAINTS);
         }
-        return new Date();
+        return new Date(trimmedDate);
     }
 
     /**

@@ -92,7 +92,7 @@ public class Transaction implements Entry {
     }
 
     public Date getDate() {
-        return new Date();
+        return date;
     }
 
     public TransactionType getTransactionType() {
