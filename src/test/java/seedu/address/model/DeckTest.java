@@ -1,16 +1,16 @@
 package seedu.address.model;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.model.person.Card;
-import seedu.address.model.person.exceptions.CardNotFoundException;
-import seedu.address.testutil.DeckBuilder;
-
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalCards.*;
+import static seedu.address.testutil.TypicalCards.CS1101S;
+import static seedu.address.testutil.TypicalCards.CS1231S;
+import static seedu.address.testutil.TypicalCards.CS2100;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.model.person.exceptions.CardNotFoundException;
+import seedu.address.testutil.DeckBuilder;
 
 public class DeckTest {
 
