@@ -50,7 +50,7 @@ public class Tag {
         }
 
         Tag otherTag = (Tag) other;
-        return courseCode.equals(otherTag.courseCode) && tutorialGroup.equals(otherTag.tutorialGroup);
+        return tagName.equals(otherTag.tagName);
     }
 
     @Override
