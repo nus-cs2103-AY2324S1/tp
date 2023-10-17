@@ -87,6 +87,9 @@ public class PersonListPanel extends UiPart<Region> {
         }
     }
 
+    /**
+     * Sets the list of indexes to be displayed.
+     */
     public void indexesSetter(List<Integer> indexes) {
         this.indexes = indexes;
         if (indexes != null) {

@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.util.List;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -65,6 +66,10 @@ public class PersonCard extends UiPart<Region> {
         annualLeave.setText(person.getAnnualLeave().value);
     }
 
+    /**
+     * Creates a {@code PersonCode} with the given {@code Person}, index to
+     * display and list of indexes.
+     */
     public PersonCard(Person person, int displayedIndex, List<Integer> indexes) {
         super(FXML);
         this.person = person;
