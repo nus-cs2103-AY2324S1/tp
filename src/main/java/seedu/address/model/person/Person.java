@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
@@ -118,8 +119,8 @@ public class Person {
      */
     public Set<Tag> getNonEmergencyTags() {
         return tags.stream()
-            .filter(tag -> !Tag.EmergencyTags.isEmergencyTag(tag.tagName))
-            .collect(Collectors.toSet());
+                .filter(tag -> !Tag.EmergencyTags.isEmergencyTag(tag.tagName))
+                .collect(Collectors.toSet());
     }
 
     /**
@@ -128,14 +129,12 @@ public class Person {
      */
     public Set<Tag> getEmergencyTags() {
         return tags.stream()
-            .filter(tag -> Tag.EmergencyTags.isEmergencyTag(tag.tagName))
-            .collect(Collectors.toSet());
+                .filter(tag -> Tag.EmergencyTags.isEmergencyTag(tag.tagName))
+                .collect(Collectors.toSet());
     }
-
     public Optional<Integer> getId() {
         return id;
     }
-
     public int setId(int id) {
         this.id = Optional.of(id);
         return id;
@@ -178,6 +177,41 @@ public class Person {
                 && tags.equals(otherPerson.tags);
     }
 
+    /**
+     * Returns true if birthday has a value.
+     */
+    public boolean hasValidBirthday() {
+        return !birthday.equals(Optional.empty());
+    }
+
+    /**
+     * Returns true if linkedin has a value.
+     */
+    public boolean hasValidLinkedin() {
+        return !linkedin.equals(Optional.empty());
+    }
+
+    /**
+     * Returns true if secondaryEmail has a value.
+     */
+    public boolean hasValidSecondaryEmail() {
+        return !secondaryEmail.equals(Optional.empty());
+    }
+
+    /**
+     * Returns true if telegram has a value.
+     */
+    public boolean hasValidTelegram() {
+        return !telegram.equals(Optional.empty());
+    }
+
+    /**
+     * Returns true if the person has same primary and secondary email.
+     */
+    public boolean hasSameEmail(Email secondaryEmail) {
+        return email.equals(secondaryEmail);
+    }
+
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
@@ -194,5 +228,4 @@ public class Person {
                 .add("tags", tags)
                 .toString();
     }
-
 }

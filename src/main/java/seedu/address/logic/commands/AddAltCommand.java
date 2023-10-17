@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LINKEDIN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SECONDARY_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
@@ -39,13 +40,18 @@ public class AddAltCommand extends Command {
             + "by the index number used in the last person listing. "
             + "Existing alternative contact will be overwritten by the input.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_TELEGRAM + "[TELEGRAM]"
-            + PREFIX_SECONDARY_EMAIL + "[SECONDARY_EMAIL]"
+            + PREFIX_BIRTHDAY + "[BIRTHDAY] "
+            + PREFIX_TELEGRAM + "[TELEGRAM] "
+            + PREFIX_SECONDARY_EMAIL + "[SECONDARY_EMAIL] "
             + PREFIX_LINKEDIN + "[LINKEDIN]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_TELEGRAM + "johndoe_telegram"
             + PREFIX_SECONDARY_EMAIL + "johndoe2@example.com";
     public static final String MESSAGE_ADDALT_SUCCESS = "Added alternative contact to Person: %1$s";
+    public static final String MESSAGE_ADDALT_DUPLICATE_EMAIL = "Secondary email is same as primary email "
+            + "for Person: %1$s";
+    public static final String MESSAGE_ADDALT_FAILURE = "There is existing alternative contact to Person: %1$s. "
+            + "To change the corresponding field, use the edit command.";
     private final Index index;
     private final AddAltPersonDescriptor addAltPersonDescriptor;
 
@@ -79,8 +85,10 @@ public class AddAltCommand extends Command {
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
+     * @throws CommandException if the alternative contact information added to the person is not empty or invalid.
      */
-    private static Person createAddAltPerson(Person personToEdit, AddAltPersonDescriptor addAltPersonDescriptor) {
+    private static Person createAddAltPerson(Person personToEdit, AddAltPersonDescriptor addAltPersonDescriptor)
+            throws CommandException {
         assert personToEdit != null;
 
         Name name = personToEdit.getName();
@@ -88,15 +96,27 @@ public class AddAltCommand extends Command {
         Email email = personToEdit.getEmail();
         Address address = personToEdit.getAddress();
         Set<Tag> tags = personToEdit.getTags();
-        Optional<Birthday> birthday = personToEdit.getBirthday();
+        Birthday birthday = personToEdit.getBirthday().orElse(addAltPersonDescriptor.getBirthday());
         Linkedin updatedLinkedin = personToEdit.getLinkedin().orElse(addAltPersonDescriptor.getLinkedin());
         Email updatedSecondaryEmail = personToEdit.getSecondaryEmail()
-                        .orElse(addAltPersonDescriptor.getSecondaryEmail());
+                .orElse(addAltPersonDescriptor.getSecondaryEmail());
         Telegram updatedTelegram = personToEdit.getTelegram().orElse(addAltPersonDescriptor.getTelegram());
         Optional<Integer> id = personToEdit.getId();
 
-        return new Person(name, phone, email, address, birthday, Optional.ofNullable(updatedLinkedin),
-                Optional.ofNullable(updatedSecondaryEmail), Optional.ofNullable(updatedTelegram), tags, id);
+        Person updatedPerson = new Person(name, phone, email, address, Optional.ofNullable(birthday),
+                Optional.ofNullable(updatedLinkedin), Optional.ofNullable(updatedSecondaryEmail),
+                Optional.ofNullable(updatedTelegram), tags, id);
+
+        if ((personToEdit.hasValidLinkedin() && addAltPersonDescriptor.hasValidLinkedin())
+                || (personToEdit.hasValidBirthday() && addAltPersonDescriptor.hasValidBirthday())
+                || (personToEdit.hasValidSecondaryEmail() && addAltPersonDescriptor.hasValidSecondaryEmail())
+                || (personToEdit.hasValidTelegram() && addAltPersonDescriptor.hasValidTelegram())) {
+            throw new CommandException(String.format(MESSAGE_ADDALT_FAILURE, name));
+        } else if (updatedPerson.hasSameEmail(updatedSecondaryEmail)) {
+            throw new CommandException(String.format(MESSAGE_ADDALT_DUPLICATE_EMAIL, name));
+        } else {
+            return updatedPerson;
+        }
     }
     @Override
     public boolean equals(Object other) {
@@ -124,6 +144,7 @@ public class AddAltCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
+        private Birthday birthday;
 
         private Linkedin linkedin;
         private Email secondaryEmail;
@@ -140,6 +161,7 @@ public class AddAltCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
+            setBirthday(toCopy.birthday);
             setLinkedin(toCopy.linkedin);
             setSecondaryEmail(toCopy.secondaryEmail);
             setTelegram(toCopy.telegram);
@@ -178,12 +200,27 @@ public class AddAltCommand extends Command {
             return Optional.ofNullable(address);
         }
 
+        public void setBirthday(Birthday birthday) {
+            this.birthday = birthday;
+        }
+
+        public Birthday getBirthday() {
+            return birthday;
+        }
+
+        public boolean hasValidBirthday() {
+            return birthday != null;
+        }
+
         public void setLinkedin(Linkedin linkedin) {
             this.linkedin = linkedin;
         }
 
         public Linkedin getLinkedin() {
             return linkedin;
+        }
+        public boolean hasValidLinkedin() {
+            return linkedin != null;
         }
 
         public void setSecondaryEmail(Email email) {
@@ -194,12 +231,20 @@ public class AddAltCommand extends Command {
             return secondaryEmail;
         }
 
+        public boolean hasValidSecondaryEmail() {
+            return secondaryEmail != null;
+        }
+
         public void setTelegram(Telegram telegram) {
             this.telegram = telegram;
         }
 
         public Telegram getTelegram() {
             return telegram;
+        }
+
+        public boolean hasValidTelegram() {
+            return telegram != null;
         }
 
         /**
@@ -235,6 +280,7 @@ public class AddAltCommand extends Command {
                     && Objects.equals(phone, otherAddAltPersonDescriptor.phone)
                     && Objects.equals(email, otherAddAltPersonDescriptor.email)
                     && Objects.equals(address, otherAddAltPersonDescriptor.address)
+                    && Objects.equals(birthday, otherAddAltPersonDescriptor.birthday)
                     && Objects.equals(tags, otherAddAltPersonDescriptor.tags)
                     && Objects.equals(linkedin, otherAddAltPersonDescriptor.linkedin)
                     && Objects.equals(telegram, otherAddAltPersonDescriptor.telegram)
@@ -248,6 +294,7 @@ public class AddAltCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
+                    .add("birthday", birthday)
                     .add("tags", tags)
                     .add("linkedin", linkedin)
                     .add("secondaryEmail", secondaryEmail)

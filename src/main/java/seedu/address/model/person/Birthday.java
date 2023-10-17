@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 
 import java.time.MonthDay;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a Person's birthday in the address book.
@@ -10,6 +11,9 @@ import java.time.MonthDay;
  */
 public class Birthday {
     public final MonthDay birthday;
+    public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy");
+    public static final String MESSAGE_INVALID = "Birthday should not be in the future.";
+    public static final String MESSAGE_CONSTRAINT = "Birthday should be in the format of DD/MM/YY.";
 
     /**
      * Constructs a {@code Birthday}.
@@ -18,6 +22,13 @@ public class Birthday {
     public Birthday(MonthDay birthday) {
         requireNonNull(birthday);
         this.birthday = birthday;
+    }
+
+    /**
+     * Returns true if a given MonthDay is valid.
+     */
+    public static boolean isValidBirthday(MonthDay test) {
+        return test.isBefore(MonthDay.now());
     }
 
     @Override

@@ -61,4 +61,3 @@ public class Linkedin {
         return value.hashCode();
     }
 }
-
