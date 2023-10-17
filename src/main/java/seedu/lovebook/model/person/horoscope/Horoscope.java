@@ -1,7 +1,6 @@
-package seedu.lovebook.model.person;
+package seedu.lovebook.model.person.horoscope;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.lovebook.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents the date's horoscope in the lovebook book.
@@ -9,7 +8,6 @@ import static seedu.lovebook.commons.util.AppUtil.checkArgument;
 public class Horoscope {
     public static final String MESSAGE_CONSTRAINTS =
             "Horoscope should only contain valid horoscope signs.";
-    public static final String VALIDATION_REGEX = "[A-Za-z]{1,}";
     public final String value;
 
     /**
@@ -19,15 +17,19 @@ public class Horoscope {
      */
     public Horoscope(String horoscope) {
         requireNonNull(horoscope);
-        checkArgument(isValidHoroscope(horoscope), MESSAGE_CONSTRAINTS);
         value = horoscope;
     }
 
     /**
-     * Returns true if a given string is a valid age.
+     * Returns true if a given string is a valid horoscope.
      */
     public static boolean isValidHoroscope(String test) {
-        return test.matches(VALIDATION_REGEX);
+        try {
+            HoroscopeEnum.valueOf(test);
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -46,8 +48,8 @@ public class Horoscope {
             return false;
         }
 
-        Horoscope otherAge = (Horoscope) other;
-        return value.equals(otherAge.value);
+        Horoscope otherHoroscope = (Horoscope) other;
+        return value.equals(otherHoroscope.value);
     }
 
     @Override

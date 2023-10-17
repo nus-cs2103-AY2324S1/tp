@@ -24,6 +24,7 @@ import seedu.lovebook.model.person.Gender;
 import seedu.lovebook.model.person.Height;
 import seedu.lovebook.model.person.Income;
 import seedu.lovebook.model.person.Name;
+import seedu.lovebook.model.person.horoscope.Horoscope;
 
 /**
  * Edits the details of an existing date in the lovebook book.
@@ -97,8 +98,9 @@ public class EditCommand extends Command {
         Gender updatedGender = editPersonDescriptor.getGender().orElse(dateToEdit.getGender());
         Height updatedHeight = editPersonDescriptor.getHeight().orElse(dateToEdit.getHeight());
         Income updatedIncome = editPersonDescriptor.getIncome().orElse(dateToEdit.getIncome());
+        Horoscope updatedHoroscope = editPersonDescriptor.getHoroscope().orElse(dateToEdit.getHoroscope());
 
-        return new Date(updatedName, updatedAge, updatedGender, updatedHeight, updatedIncome);
+        return new Date(updatedName, updatedAge, updatedGender, updatedHeight, updatedIncome, updatedHoroscope);
     }
 
     @Override
@@ -135,6 +137,7 @@ public class EditCommand extends Command {
         private Gender gender;
         private Height height;
         private Income income;
+        private Horoscope horoscope;
 
         public EditPersonDescriptor() {}
 
@@ -148,6 +151,7 @@ public class EditCommand extends Command {
             setGender(toCopy.gender);
             setHeight(toCopy.height);
             setIncome(toCopy.income);
+            setHoroscope(toCopy.horoscope);
         }
 
         /**
@@ -195,6 +199,13 @@ public class EditCommand extends Command {
 
         public Optional<Income> getIncome() {
             return Optional.ofNullable(income);
+        }
+
+        public void setHoroscope(Horoscope horoscope) {
+            this.horoscope = horoscope;
+        }
+        public Optional<Horoscope> getHoroscope() {
+            return Optional.ofNullable(horoscope);
         }
 
         @Override

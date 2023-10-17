@@ -9,9 +9,11 @@ public class CliSyntax {
     public static final Prefix PREFIX_NAME = new Prefix("name/");
 
     public static final Prefix PREFIX_AGE = new Prefix("age/");
-    public static final Prefix PREFIX_GENDER = new Prefix("gender/");
-    public static final Prefix PREFIX_HEIGHT = new Prefix("height/");
 
+    public static final Prefix PREFIX_GENDER = new Prefix("gender/");
+
+    public static final Prefix PREFIX_HEIGHT = new Prefix("height/");
     public static final Prefix PREFIX_INCOME = new Prefix("income/");
+    public static final Prefix PREFIX_HOROSCOPE = new Prefix("horoscope/");
 
 }

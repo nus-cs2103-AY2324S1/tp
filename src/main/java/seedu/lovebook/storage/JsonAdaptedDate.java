@@ -10,6 +10,7 @@ import seedu.lovebook.model.person.Gender;
 import seedu.lovebook.model.person.Height;
 import seedu.lovebook.model.person.Income;
 import seedu.lovebook.model.person.Name;
+import seedu.lovebook.model.person.horoscope.Horoscope;
 
 /**
  * Jackson-friendly version of {@link Date}.
@@ -23,6 +24,7 @@ class JsonAdaptedDate {
     private final String gender;
     private final String height;
     private final String income;
+    private final String horoscope;
 
     /**
      * Constructs a {@code JsonAdaptedDate} with the given date details.
@@ -30,12 +32,13 @@ class JsonAdaptedDate {
     @JsonCreator
     public JsonAdaptedDate(@JsonProperty("name") String name, @JsonProperty("age") String age,
             @JsonProperty("gender") String gender, @JsonProperty("height") String height,
-             @JsonProperty("income") String income) {
+             @JsonProperty("income") String income, @JsonProperty("horoscope") String horoscope) {
         this.name = name;
         this.age = age;
         this.gender = gender;
         this.height = height;
         this.income = income;
+        this.horoscope = horoscope;
     }
 
     /**
@@ -47,6 +50,7 @@ class JsonAdaptedDate {
         gender = source.getGender().value;
         height = source.getHeight().value;
         income = source.getIncome().value;
+        horoscope = source.getHoroscope().value;
     }
 
     /**
@@ -95,7 +99,16 @@ class JsonAdaptedDate {
         }
         final Income modelIncome = new Income(income);
 
-        return new Date(modelName, modelAge, modelGender, modelHeight, modelIncome);
+        if (horoscope == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Horoscope.class.getSimpleName()));
+        }
+        if (!Horoscope.isValidHoroscope(horoscope)) {
+            throw new IllegalValueException(Horoscope.MESSAGE_CONSTRAINTS);
+        }
+        final Horoscope modelHoroscope = new Horoscope(horoscope);
+
+        return new Date(modelName, modelAge, modelGender, modelHeight, modelIncome, modelHoroscope);
     }
 
 }

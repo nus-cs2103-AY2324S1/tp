@@ -2,7 +2,6 @@ package seedu.lovebook.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.lovebook.model.person.Date;
@@ -40,7 +39,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label gender;
     @FXML
-    private FlowPane tags;
+    private Label horoscope;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Date} and index to display.
@@ -54,5 +53,6 @@ public class PersonCard extends UiPart<Region> {
         gender.setText(date.getGender().value);
         height.setText(date.getHeight().value);
         income.setText(date.getIncome().value);
+        horoscope.setText(date.getHoroscope().value);
     }
 }

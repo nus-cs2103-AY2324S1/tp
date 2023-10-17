@@ -81,7 +81,7 @@ public class DateTest {
     public void toStringMethod() {
         String expected = Date.class.getCanonicalName() + "{name=" + ALICE.getName() + ", age=" + ALICE.getAge()
                 + ", gender=" + ALICE.getGender() + ", height=" + ALICE.getHeight() + ", income=" + ALICE.getIncome()
-                + "}";
+                + ", horoscope=" + ALICE.getHoroscope() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

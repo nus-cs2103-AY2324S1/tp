@@ -10,6 +10,7 @@ import seedu.lovebook.model.person.Gender;
 import seedu.lovebook.model.person.Height;
 import seedu.lovebook.model.person.Income;
 import seedu.lovebook.model.person.Name;
+import seedu.lovebook.model.person.horoscope.Horoscope;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -77,10 +78,10 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String lovebook} into an {@code Height}.
+     * Parses a {@code String height} into an {@code Height}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code lovebook} is invalid.
+     * @throws ParseException if the given {@code height} is invalid.
      */
     public static Height parseAddress(String height) throws ParseException {
         requireNonNull(height);
@@ -95,7 +96,7 @@ public class ParserUtil {
      * Parses a {@code String income} into an {@code Income}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code lovebook} is invalid.
+     * @throws ParseException if the given {@code income} is invalid.
      */
     public static Income parseIncome(String income) throws ParseException {
         requireNonNull(income);
@@ -104,5 +105,20 @@ public class ParserUtil {
             throw new ParseException(Income.MESSAGE_CONSTRAINTS);
         }
         return new Income(income);
+    }
+
+    /**
+     * Parses a {@code String horoscope} into an {@code Horoscope}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code horoscope} is invalid.
+     */
+    public static Horoscope parseHoroscope(String horoscope) throws ParseException {
+        requireNonNull(horoscope);
+        String upperHoroscope = horoscope.trim().toUpperCase();
+        if (!Horoscope.isValidHoroscope(upperHoroscope)) {
+            throw new ParseException(Horoscope.MESSAGE_CONSTRAINTS);
+        }
+        return new Horoscope(upperHoroscope);
     }
 }

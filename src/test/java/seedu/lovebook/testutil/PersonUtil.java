@@ -3,6 +3,7 @@ package seedu.lovebook.testutil;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HEIGHT;
+import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HOROSCOPE;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_INCOME;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_NAME;
 
@@ -32,6 +33,7 @@ public class PersonUtil {
         sb.append(PREFIX_GENDER + date.getGender().value + " ");
         sb.append(PREFIX_HEIGHT + date.getHeight().value + " ");
         sb.append(PREFIX_INCOME + date.getIncome().value + " ");
+        sb.append(PREFIX_HOROSCOPE + date.getHoroscope().value + " ");
         return sb.toString();
     }
 
