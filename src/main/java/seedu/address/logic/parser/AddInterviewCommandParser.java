@@ -5,15 +5,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_APPLICANT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMING;
 
-import java.util.List;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddInterviewCommand;
-import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.applicant.Applicant;
-import seedu.address.model.interview.Interview;
 
 /**
  * Parses input arguments and creates a new AddCommand object

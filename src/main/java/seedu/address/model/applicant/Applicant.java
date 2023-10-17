@@ -11,7 +11,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Person in the address book.
+ * Represents an applicant in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Applicant {
@@ -27,6 +27,7 @@ public class Applicant {
     private boolean hasInterview = false;
 
     /**
+     * Default constructor for Applicant object.
      * Every field must be present and not null.
      */
     public Applicant(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
@@ -37,6 +38,11 @@ public class Applicant {
         this.address = address;
         this.tags.addAll(tags);
     }
+
+    /**
+     * Alternative constructor for creating Applicant objects from storage
+     * Every field must be present and not null.
+     */
     public Applicant(Name name, Phone phone, Email email, Address address, Set<Tag> tags, boolean hasInterview) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;

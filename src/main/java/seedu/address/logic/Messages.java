@@ -5,8 +5,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
-import seedu.address.model.interview.Interview;
 import seedu.address.model.applicant.Applicant;
+import seedu.address.model.interview.Interview;
 
 /**
  * Container for user visible messages.

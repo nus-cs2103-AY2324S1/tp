@@ -18,7 +18,6 @@ public class Interview {
 
     /**
      * Default constructor for Interview object.
-     * Increments the `globalInterviewId` and uses it as the unique `interviewId` for this instance
      */
     public Interview(Applicant app, String role, String timing) {
         requireAllNonNull(app, role, timing);
@@ -28,6 +27,9 @@ public class Interview {
         app.setInterview();
     }
 
+    /**
+     * Alternative constructor for creating Interview object from storage.
+     */
     public Interview(Applicant app, String role, String timing, boolean isDone) {
         requireAllNonNull(app, role, timing, isDone);
         applicant = app;

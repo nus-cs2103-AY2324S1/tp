@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPLICANT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMING;
@@ -46,9 +47,7 @@ public class AddInterviewCommand extends Command {
      * Creates an AddInterviewCommand to add the specified {@code Interview}
      */
     public AddInterviewCommand(Index applicantIndex, String jobRole, String timing) {
-        requireNonNull(applicantIndex);
-        requireNonNull(jobRole);
-        requireNonNull(timing);
+        requireAllNonNull(applicantIndex, jobRole, timing);
 
         this.applicantIndex = applicantIndex;
         this.jobRole = jobRole;
@@ -83,9 +82,9 @@ public class AddInterviewCommand extends Command {
 
     @Override
     public String toString() {
-        return "AddInterviewCommand{" +
-                "jobRole='" + jobRole + '\'' +
-                '}';
+        return "AddInterviewCommand{"
+                + "jobRole='" + jobRole + '\''
+                + '}';
     }
 
     @Override
