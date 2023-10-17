@@ -54,6 +54,18 @@
             <FlowPane fx:id="tags" />
         </HBox>
 
+        <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS" spacing="10" >
+            <Label text="LinkedIn: " styleClass="cell_big_label" wrapText="true" />
+            <Label fx:id="linkedIn" styleClass="text-field" text="\$linkedIn" wrapText="true" prefWidth="300"
+            alignment="CENTER"/>
+        </HBox>
+
+        <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS" spacing="10" >
+            <Label text="Github: " styleClass="cell_big_label" wrapText="true" />
+            <Label fx:id="github" styleClass="text-field" text="\$github" wrapText="true" prefWidth="300"
+                   alignment="CENTER"/>
+        </HBox>
+
         <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS" GridPane.columnIndex="0" spacing="0">
             <padding>
                 <Insets left="10" />

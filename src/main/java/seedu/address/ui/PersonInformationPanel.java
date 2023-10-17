@@ -38,6 +38,11 @@ public class PersonInformationPanel extends UiPart<Region> {
     private ToggleButton interviewed;
     @FXML
     private ToggleButton status;
+    @FXML
+    private Label linkedIn;
+    @FXML
+    private Label github;
+
 
     /**
      * Creates a {@code PersonInformationPanel} with the given {@code Person}.
@@ -54,9 +59,12 @@ public class PersonInformationPanel extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(java.util.Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        linkedIn.setText(person.getLinkedIn().value);
+        github.setText(person.getGithub().value);
         setResultButton(person.getStatus(), status);
         setButton(person.getStatus());
     }
+
 
     private static void setResultButton(Status status, ToggleButton statusButton) {
         StatusTypes statusType = status.getStatusType();
