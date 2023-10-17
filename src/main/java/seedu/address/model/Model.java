@@ -1,7 +1,6 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
-import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -41,24 +40,28 @@ public interface Model {
      * Returns the user prefs' address book file path.
      */
     Path getAddressBookFilePath();
-
+    /**
+     * Returns the user prefs' Team book file path.
+     */
+    Path getTeamBookFilePath();
     /**
      * Sets the user prefs' address book file path.
      */
     void setAddressBookFilePath(Path addressBookFilePath);
+    /**
+     * Sets the user prefs' team book file path.
+     */
+    void setTeamBookFilePath(Path teamBookFilePath);
 
     /**
      * Replaces address book data with the data in {@code addressBook}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook, List<Team> teamStructure);
+    void setAddressBook(ReadOnlyAddressBook addressBook);
 
     void clearAddressBook();
 
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
-
-    //Person related function----------------------------------------------------------------------------------------
-    
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
@@ -91,39 +94,42 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
-    
-    //Team related functions-----------------------------------------------------------------------------------------
+
+    //=========== TeamBook related methods =================================================================
 
     /**
-     * Returns true if a Team with the same identity as {@code Team} exists in the address book.
+     * Replaces team book data with the data in {@code teamBook}.
      */
-    boolean hasTeam(Team team);
+    void setTeamBook(ReadOnlyTeamBook teamBook);
+
+    /** Returns the TeamBook */
+    ReadOnlyTeamBook getTeamBook();
 
     /**
-     * Deletes the given Team.
-     * The Team must exist in the address book.
+     * Returns true if a team with the same identity as {@code teamName} exists in the team book.
      */
-    void deleteTeam(Team target);
+    boolean hasTeam(String teamName);
 
     /**
-     * Adds the given Team.
-     * {@code Team} must not already exist in the address book.
+     * Deletes the given team.
+     * The team must exist in the team book.
+     */
+    void deleteTeam(String teamName);
+
+    /**
+     * Adds the given team.
+     * {@code team} must not already exist in the team book.
      */
     void addTeam(Team team);
 
-    /**
-     * Replaces the given Team {@code target} with {@code editedTeam}.
-     * {@code target} must exist in the address book.
-     * The Team identity of {@code editedTeam} must not be the same as another existing Team in the address book.
-     */
-    void setTeam(Team target, Team editedTeam);
 
-    /** Returns an unmodifiable view of the filtered Team list */
+    /** Returns an unmodifiable view of the filtered team list */
     ObservableList<Team> getFilteredTeamList();
 
     /**
-     * Updates the filter of the filtered Team list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered team list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredTeamList(Predicate<Team> predicate);
+
 }

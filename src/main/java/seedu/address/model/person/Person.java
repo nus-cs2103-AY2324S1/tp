@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.IdentityCodeManager;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -24,6 +25,8 @@ public class Person {
 
     // Data fields
     private final Address address;
+
+    private final IdentityCode identitycode;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -37,6 +40,7 @@ public class Person {
         this.address = address;
         this.tags.addAll(tags);
         this.remark = remark;
+        this.identitycode = new IdentityCode(String.valueOf(IdentityCodeManager.getNextIdentityCode()));
     }
 
     public Name getName() {
@@ -57,6 +61,10 @@ public class Person {
 
     public Remark getRemark() {
         return remark;
+    }
+
+    public IdentityCode getIdentityCode() {
+        return this.identitycode;
     }
 
     /**
@@ -119,6 +127,7 @@ public class Person {
                 .add("address", address)
                 .add("remark", remark)
                 .add("tags", tags)
+                .add("identitycode", identitycode)
                 .toString();
     }
 }
