@@ -16,7 +16,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses input arguments and creates a new AddAltCommand object
  */
-public class AddAltCommandParser {
+public class AddAltCommandParser implements Parser<AddAltCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
