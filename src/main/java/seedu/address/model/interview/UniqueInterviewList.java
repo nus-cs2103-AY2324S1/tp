@@ -32,7 +32,7 @@ public class UniqueInterviewList implements Iterable<Interview> {
      */
     public boolean contains(Interview toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isValidInterview);
+        return internalList.stream().anyMatch(toCheck::isValidAndNewInterview);
     }
 
     /**
@@ -60,7 +60,7 @@ public class UniqueInterviewList implements Iterable<Interview> {
             throw new InterviewNotFoundException();
         }
 
-        if (!target.isValidInterview(editedInterview) && contains(editedInterview)) {
+        if (!target.isValidAndNewInterview(editedInterview) && contains(editedInterview)) {
             throw new DuplicateInterviewException();
         }
 
@@ -139,7 +139,7 @@ public class UniqueInterviewList implements Iterable<Interview> {
     private boolean interviewsAreUnique(List<Interview> interviews) {
         for (int i = 0; i < interviews.size() - 1; i++) {
             for (int j = i + 1; j < interviews.size(); j++) {
-                if (interviews.get(i).isValidInterview(interviews.get(j))) {
+                if (interviews.get(i).isValidAndNewInterview(interviews.get(j))) {
                     return false;
                 }
             }
