@@ -12,6 +12,7 @@ import seedu.staffsnap.logic.commands.AddCommand;
 import seedu.staffsnap.logic.commands.AddInterviewCommand;
 import seedu.staffsnap.logic.commands.ClearCommand;
 import seedu.staffsnap.logic.commands.Command;
+import seedu.staffsnap.logic.commands.ConfirmationCommand;
 import seedu.staffsnap.logic.commands.DeleteCommand;
 import seedu.staffsnap.logic.commands.EditCommand;
 import seedu.staffsnap.logic.commands.ExitCommand;
@@ -26,11 +27,15 @@ import seedu.staffsnap.logic.parser.exceptions.ParseException;
  */
 public class ApplicantBookParser {
 
+
     /**
      * Used for initial separation of command word and args.
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
     private static final Logger logger = LogsCenter.getLogger(ApplicantBookParser.class);
+    private Boolean IsConfirmedNext = false;
+    private Boolean IsConfirmed = false;
+
 
     /**
      * Parses user input into command for execution.
@@ -55,6 +60,9 @@ public class ApplicantBookParser {
         // Lower level log messages are used sparingly to minimize noise in the code.
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
 
+        IsConfirmed = IsConfirmedNext;
+        IsConfirmedNext = false;
+
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
@@ -67,7 +75,15 @@ public class ApplicantBookParser {
             return new DeleteCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
+            if (IsConfirmed) {
+                return new ClearCommand();
+            } else {
+                logger.finer("This user input caused a ParseException: " + userInput);
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            }
+        case ConfirmationCommand.COMMAND_WORD:
+            IsConfirmedNext = true;
+            return new ConfirmationCommand();
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
