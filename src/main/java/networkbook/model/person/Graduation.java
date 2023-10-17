@@ -40,7 +40,7 @@ public class Graduation implements Comparable<Graduation> {
      * Constructs a {@code Graduation}.
      *
      * @param gradString A valid String representation of a graduation year and semester,
-     * e.g. {@code AY2526-S2}.
+     *     e.g. {@code AY2526-S2}.
      */
     public Graduation(String gradString) {
         requireNonNull(gradString);
@@ -74,7 +74,7 @@ public class Graduation implements Comparable<Graduation> {
     /**
      * Parses user input {@code gradString} into an int representing the first calendar year of the academic year.
      *
-     * @param graduation provided in user command
+     * @param gradString provided in user command
      * @return corresponding first calendar year
      */
     public static int parseAcadYearStart(String gradString) {
@@ -161,7 +161,7 @@ public class Graduation implements Comparable<Graduation> {
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder("AY");
-        s.append(String.format("%02d", acadYearStart % 100));// Get last 2 digits
+        s.append(String.format("%02d", acadYearStart % 100)); // Get last 2 digits
         s.append(String.format("%02d", acadYearEnd % 100));
         s.append("-S");
         s.append(semester.value);
