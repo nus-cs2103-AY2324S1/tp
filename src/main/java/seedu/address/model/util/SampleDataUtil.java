@@ -20,6 +20,7 @@ public class SampleDataUtil {
                 "easy")
         };
     }
+
     public static Deck getSampleDeck() {
         Deck sampleAb = new Deck();
         for (Card sampleCard : getSampleCard()) {

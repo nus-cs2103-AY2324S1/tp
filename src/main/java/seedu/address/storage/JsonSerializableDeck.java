@@ -13,7 +13,6 @@ import seedu.address.model.Deck;
 import seedu.address.model.ReadOnlyDeck;
 import seedu.address.model.person.Card;
 
-
 /**
  * An Immutable AddressBook that is serializable to JSON format.
  */
@@ -48,6 +47,7 @@ class JsonSerializableDeck {
      */
     public Deck toModelType() throws IllegalValueException {
         Deck deck = new Deck();
+
         for (JsonAdaptedCard jsonAdaptedCard : cards) {
             Card card = jsonAdaptedCard.toModelType();
             if (deck.hasCard(card)) {
@@ -55,6 +55,7 @@ class JsonSerializableDeck {
             }
             deck.addCard(card);
         }
+
         return deck;
     }
 

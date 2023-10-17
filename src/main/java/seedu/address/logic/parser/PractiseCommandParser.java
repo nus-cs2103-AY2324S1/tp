@@ -1,6 +1,6 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages2.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DIFFICULTY;
 
 import java.util.stream.Stream;
@@ -9,12 +9,10 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.PractiseCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-
-
 /**
  * Parses input arguments and creates a new ParserCommand object
  */
-public class PractiseCommandParser implements Parser2<PractiseCommand> {
+public class PractiseCommandParser implements Parser<PractiseCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteCommand

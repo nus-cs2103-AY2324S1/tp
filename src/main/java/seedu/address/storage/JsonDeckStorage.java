@@ -16,8 +16,6 @@ import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.ReadOnlyDeck;
 
-
-
 /**
  * A class to access Deck data stored as a json file on the hard disk.
  */
@@ -37,7 +35,6 @@ public class JsonDeckStorage implements DeckStorage {
 
     @Override
     public Optional<ReadOnlyDeck> readDeck() throws DataLoadingException {
-
         return readDeck(filePath);
     }
 

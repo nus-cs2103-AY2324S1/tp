@@ -16,12 +16,12 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.Messages2;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Deck;
-import seedu.address.model.Model2;
+import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyDeck;
-import seedu.address.model.ReadOnlyUserPrefs2;
+import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Card;
 import seedu.address.testutil.CardBuilder;
 
@@ -29,7 +29,7 @@ public class AddCommandTest {
 
     @Test
     public void constructor_nullCard_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand2(null));
+        assertThrows(NullPointerException.class, () -> new AddCommand(null));
     }
 
     @Test
@@ -37,9 +37,9 @@ public class AddCommandTest {
         ModelStubAcceptingCardAdded modelStub = new ModelStubAcceptingCardAdded();
         Card validCard = new CardBuilder().build();
 
-        CommandResult commandResult = new AddCommand2(validCard).execute(modelStub);
+        CommandResult commandResult = new AddCommand(validCard).execute(modelStub);
 
-        assertEquals(String.format(AddCommand2.MESSAGE_SUCCESS, Messages2.format(validCard)),
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validCard)),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validCard), modelStub.cardsAdded);
     }
@@ -47,23 +47,23 @@ public class AddCommandTest {
     @Test
     public void execute_duplicateCard_throwsCommandException() {
         Card validCard = new CardBuilder().build();
-        AddCommand2 addCommand = new AddCommand2(validCard);
+        AddCommand addCommand = new AddCommand(validCard);
         ModelStub modelStub = new ModelStubWithCard(validCard);
-        assertThrows(CommandException.class, AddCommand2.MESSAGE_DUPLICATE_CARD, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_CARD, () -> addCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
         Card cs2100 = new CardBuilder().withQuestion("What colour is the sky").build();
         Card cs1101s = new CardBuilder().withQuestion("what colour is the grass").build();
-        AddCommand2 addcs2100Command = new AddCommand2(cs2100);
-        AddCommand2 addcs1101sCommand = new AddCommand2(cs1101s);
+        AddCommand addcs2100Command = new AddCommand(cs2100);
+        AddCommand addcs1101sCommand = new AddCommand(cs1101s);
 
         // same object -> returns true
         assertTrue(addcs2100Command.equals(addcs2100Command));
 
         // same values -> returns true
-        AddCommand2 addcs2100CommandCopy = new AddCommand2(cs2100);
+        AddCommand addcs2100CommandCopy = new AddCommand(cs2100);
         assertTrue(addcs2100Command.equals(addcs2100CommandCopy));
 
         // different types -> returns false
@@ -78,22 +78,22 @@ public class AddCommandTest {
 
     @Test
     public void toStringMethod() {
-        AddCommand2 addCommand = new AddCommand2(CS2100);
-        String expected = AddCommand2.class.getCanonicalName() + "{toAdd=" + CS2100 + "}";
+        AddCommand addCommand = new AddCommand(CS2100);
+        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + CS2100 + "}";
         assertEquals(expected, addCommand.toString());
     }
 
     /**
      * A default model stub that have all of the methods failing.
      */
-    private class ModelStub implements Model2 {
+    private class ModelStub implements Model {
         @Override
-        public void setUserPrefs(ReadOnlyUserPrefs2 userPrefs) {
+        public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyUserPrefs2 getUserPrefs() {
+        public ReadOnlyUserPrefs getUserPrefs() {
             throw new AssertionError("This method should not be called.");
         }
 

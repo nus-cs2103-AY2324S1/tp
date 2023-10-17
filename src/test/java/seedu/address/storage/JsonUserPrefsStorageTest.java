@@ -14,7 +14,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.exceptions.DataLoadingException;
-import seedu.address.model.UserPrefs2;
+import seedu.address.model.UserPrefs;
 
 public class JsonUserPrefsStorageTest {
 
@@ -28,7 +28,7 @@ public class JsonUserPrefsStorageTest {
         assertThrows(NullPointerException.class, () -> readUserPrefs(null));
     }
 
-    private Optional<UserPrefs2> readUserPrefs(String userPrefsFileInTestDataFolder) throws DataLoadingException {
+    private Optional<UserPrefs> readUserPrefs(String userPrefsFileInTestDataFolder) throws DataLoadingException {
         Path prefsFilePath = addToTestDataPathIfNotNull(userPrefsFileInTestDataFolder);
         return new JsonUserPrefsStorage(prefsFilePath).readUserPrefs(prefsFilePath);
     }
@@ -51,27 +51,27 @@ public class JsonUserPrefsStorageTest {
 
     @Test
     public void readUserPrefs_fileInOrder_successfullyRead() throws DataLoadingException {
-        UserPrefs2 expected = getTypicalUserPrefs();
-        UserPrefs2 actual = readUserPrefs("TypicalUserPref.json").get();
+        UserPrefs expected = getTypicalUserPrefs();
+        UserPrefs actual = readUserPrefs("TypicalUserPref.json").get();
         assertEquals(expected, actual);
     }
 
     @Test
     public void readUserPrefs_valuesMissingFromFile_defaultValuesUsed() throws DataLoadingException {
-        UserPrefs2 actual = readUserPrefs("EmptyUserPrefs.json").get();
-        assertEquals(new UserPrefs2(), actual);
+        UserPrefs actual = readUserPrefs("EmptyUserPrefs.json").get();
+        assertEquals(new UserPrefs(), actual);
     }
 
     @Test
     public void readUserPrefs_extraValuesInFile_extraValuesIgnored() throws DataLoadingException {
-        UserPrefs2 expected = getTypicalUserPrefs();
-        UserPrefs2 actual = readUserPrefs("ExtraValuesUserPref.json").get();
+        UserPrefs expected = getTypicalUserPrefs();
+        UserPrefs actual = readUserPrefs("ExtraValuesUserPref.json").get();
 
         assertEquals(expected, actual);
     }
 
-    private UserPrefs2 getTypicalUserPrefs() {
-        UserPrefs2 userPrefs = new UserPrefs2();
+    private UserPrefs getTypicalUserPrefs() {
+        UserPrefs userPrefs = new UserPrefs();
         userPrefs.setGuiSettings(new GuiSettings(1000, 500, 300, 100));
         userPrefs.setDeckFilePath(Paths.get("data/deck.json"));
         return userPrefs;
@@ -79,7 +79,7 @@ public class JsonUserPrefsStorageTest {
     /**
      * Saves {@code userPrefs} at the specified {@code prefsFileInTestDataFolder} filepath.
      */
-    private void saveUserPrefs(UserPrefs2 userPrefs, String prefsFileInTestDataFolder) {
+    private void saveUserPrefs(UserPrefs userPrefs, String prefsFileInTestDataFolder) {
         try {
             new JsonUserPrefsStorage(addToTestDataPathIfNotNull(prefsFileInTestDataFolder))
                     .saveUserPrefs(userPrefs);

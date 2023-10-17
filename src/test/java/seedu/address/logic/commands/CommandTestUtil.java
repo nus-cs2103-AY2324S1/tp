@@ -10,7 +10,7 @@ import java.util.List;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Deck;
-import seedu.address.model.Model2;
+import seedu.address.model.Model;
 import seedu.address.model.person.Card;
 import seedu.address.testutil.EditCardDescriptorBuilder;
 
@@ -42,8 +42,8 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand2.EditCardDescriptor DESC_CS2100;
-    public static final EditCommand2.EditCardDescriptor DESC_CS1101S;
+    public static final EditCommand.EditCardDescriptor DESC_CS2100;
+    public static final EditCommand.EditCardDescriptor DESC_CS1101S;
 
     static {
         DESC_CS2100 = new EditCardDescriptorBuilder().withQuestion(VALID_QUESTION_CS2100)
@@ -57,8 +57,8 @@ public class CommandTestUtil {
      * - the returned {@link CommandResult} matches {@code expectedCommandResult} <br>
      * - the {@code actualModel} matches {@code expectedModel}
      */
-    public static void assertCommandSuccess(Command2 command, Model2 actualModel, CommandResult expectedCommandResult,
-            Model2 expectedModel) {
+    public static void assertCommandSuccess(Command command, Model actualModel, CommandResult expectedCommandResult,
+                                            Model expectedModel) {
         try {
             CommandResult result = command.execute(actualModel);
             assertEquals(expectedCommandResult, result);
@@ -69,11 +69,11 @@ public class CommandTestUtil {
     }
 
     /**
-     * Convenience wrapper to {@link #assertCommandSuccess(Command2, Model2, CommandResult, Model2)}
+     * Convenience wrapper to {@link #assertCommandSuccess(Command, Model, CommandResult, Model)}
      * that takes a string {@code expectedMessage}.
      */
-    public static void assertCommandSuccess(Command2 command, Model2 actualModel, String expectedMessage,
-            Model2 expectedModel) {
+    public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
+                                            Model expectedModel) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
@@ -84,7 +84,7 @@ public class CommandTestUtil {
      * - the CommandException message matches {@code expectedMessage} <br>
      * - the address book, filtered Card list and selected Card in {@code actualModel} remain unchanged
      */
-    public static void assertCommandFailure(Command2 command, Model2 actualModel, String expectedMessage) {
+    public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         Deck expectedDeck = new Deck(actualModel.getDeck());
@@ -99,7 +99,7 @@ public class CommandTestUtil {
      * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
      * {@code model}'s address book.
      */
-    public static void showCardAtIndex(Model2 model, Index targetIndex) {
+    public static void showCardAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredCardList().size());
 
         Card card = model.getFilteredCardList().get(targetIndex.getZeroBased());
