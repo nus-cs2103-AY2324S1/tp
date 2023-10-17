@@ -31,14 +31,14 @@ public class PersonUtil {
      */
     public static String getPersonDetails(Person person) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_NAME + person.getName().fullName + " ");
-        sb.append(PREFIX_PHONE + person.getPhone().value + " ");
-        sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
-        sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
-        sb.append(PREFIX_BANK_ACCOUNT + person.getBankAccount().value + " ");
-        sb.append(PREFIX_ANNUAL_LEAVE + person.getAnnualLeave().value + " ");
-        sb.append(PREFIX_JOIN_DATE + person.getJoinDate().value + " ");
-        sb.append(PREFIX_ANNUAL_LEAVE + person.getAnnualLeave().value + " ");
+        sb.append(PREFIX_NAME + " " + person.getName().fullName + " ");
+        sb.append(PREFIX_PHONE + " " + person.getPhone().value + " ");
+        sb.append(PREFIX_EMAIL + " " + person.getEmail().value + " ");
+        sb.append(PREFIX_ADDRESS + " " + person.getAddress().value + " ");
+        sb.append(PREFIX_BANK_ACCOUNT + " " + person.getBankAccount().value + " ");
+        sb.append(PREFIX_ANNUAL_LEAVE + " "+ person.getAnnualLeave().value + " ");
+        sb.append(PREFIX_JOIN_DATE + " " + person.getJoinDate().value + " ");
+        sb.append(PREFIX_ANNUAL_LEAVE + " " + person.getAnnualLeave().value + " ");
 
         return sb.toString();
     }
