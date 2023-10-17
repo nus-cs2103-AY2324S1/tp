@@ -17,7 +17,13 @@ import transact.model.tag.Tag;
  * immutable.
  */
 public class Person implements Entry {
-
+    public static final Person PERSON_UNSTATED = new Person(
+            new Name("Unstated"),
+            new Phone("Unstated"),
+            new Email("Unstated"),
+            new Address("Unstated"),
+            Collections.emptySet()
+    );
     // Identity fields
     private final Name name;
     private final Phone phone;
@@ -26,14 +32,17 @@ public class Person implements Entry {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-    public static final Person PERSON_UNSTATED = new Person(
-            new Name("Unstated"),
-            new Phone("Unstated"),
-            new Email("Unstated"),
-            new Address("Unstated"),
-            Collections.emptySet()
-    );
-
+    /**
+     * Every field must be present and not null.
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+    }
     /**
      * Checks if a given Person object represents an "Unstated" person.
      *
@@ -56,18 +65,6 @@ public class Person implements Entry {
             return false;
         }
     }
-    /**
-     * Every field must be present and not null.
-     */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
-    }
-
     public Name getName() {
         return name;
     }
