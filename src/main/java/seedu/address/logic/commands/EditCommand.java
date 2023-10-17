@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PATIENT_TAG;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
@@ -44,19 +43,19 @@ import seedu.address.model.tag.Tag;
  */
 public class EditCommand extends Command {
 
-   public static final String COMMAND_WORD = "edit";
+    public static final String COMMAND_WORD = "edit";
     public static final String MESSAGE_USAGE_GENERAL = "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_ADDRESS + "ADDRESS "
+            + PREFIX_LOCATION + "LOCATION "
             + "[" + PREFIX_TAG + "TAG]... ";
 
     public static final String PERSON_EXAMPLE =
             PREFIX_NAME + "John Doe "
                     + PREFIX_PHONE + "98765432 "
                     + PREFIX_EMAIL + "johnd@example.com "
-                    + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
+                    + PREFIX_LOCATION + "311, Clementi Ave 2, #02-25 "
                     + PREFIX_TAG + "friends "
                     + PREFIX_TAG + "owesMoney ";
 

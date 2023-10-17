@@ -217,31 +217,31 @@ public class AddCommandParserTest {
 
         // missing name prefix
         assertParseComplexFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                        + ADDRESS_DESC_BOB + SPECIALTY_DESC_BOB, expectedMessageSpecialist, PersonType.SPECIALIST);
+                        + LOCATION_DESC_BOB + SPECIALTY_DESC_BOB, expectedMessageSpecialist, PersonType.SPECIALIST);
 
         // missing phone prefix
         assertParseComplexFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB
-                        + ADDRESS_DESC_BOB + SPECIALTY_DESC_BOB, expectedMessageSpecialist, PersonType.SPECIALIST);
+                        + LOCATION_DESC_BOB + SPECIALTY_DESC_BOB, expectedMessageSpecialist, PersonType.SPECIALIST);
 
         // missing email prefix
         assertParseComplexFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB
-                        + ADDRESS_DESC_BOB + SPECIALTY_DESC_BOB, expectedMessageSpecialist, PersonType.SPECIALIST);
+                        + LOCATION_DESC_BOB + SPECIALTY_DESC_BOB, expectedMessageSpecialist, PersonType.SPECIALIST);
 
         // missing address prefix
         assertParseComplexFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                        + VALID_ADDRESS_BOB + SPECIALTY_DESC_BOB, expectedMessageSpecialist, PersonType.SPECIALIST);
+                        + VALID_LOCATION_BOB + SPECIALTY_DESC_BOB, expectedMessageSpecialist, PersonType.SPECIALIST);
 
         // missing specialty prefix
         assertParseComplexFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + VALID_SPECIALTY_DERMATOLOGY, expectedMessageSpecialist, PersonType.SPECIALIST);
+                + LOCATION_DESC_BOB + VALID_SPECIALTY_DERMATOLOGY, expectedMessageSpecialist, PersonType.SPECIALIST);
 
         // missing age prefix
         assertParseComplexFailure(parser, VALID_AGE_THIRTY + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                        + ADDRESS_DESC_AMY, expectedMessagePatient, PersonType.PATIENT);
+                        + LOCATION_DESC_AMY, expectedMessagePatient, PersonType.PATIENT);
 
         // all prefixes missing
         assertParseComplexFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB
-                        + VALID_ADDRESS_BOB, expectedMessagePatient, PersonType.PATIENT);
+                        + VALID_LOCATION_BOB, expectedMessagePatient, PersonType.PATIENT);
     }
 
     @Test
