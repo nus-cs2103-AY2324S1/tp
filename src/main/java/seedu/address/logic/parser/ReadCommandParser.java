@@ -18,7 +18,7 @@ public class ReadCommandParser implements Parser<ReadCommand> {
      * and returns a ReadCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public ReadCommand parse(String args) throws ParseException{
+    public ReadCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
 
         if (trimmedArgs.isEmpty()) {
