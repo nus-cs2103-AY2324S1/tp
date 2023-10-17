@@ -1,6 +1,7 @@
 package transact.model.transaction.info;
 
 import static java.util.Objects.requireNonNull;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 /**

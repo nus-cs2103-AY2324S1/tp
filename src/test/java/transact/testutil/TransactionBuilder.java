@@ -20,10 +20,12 @@ public class TransactionBuilder {
     public static final float DEFAULT_AMOUNT = 10.34f;
     public static final Person DEFAULT_PERSON = ALICE;
 
+    public static final String DEFAULT_DATE = "11/11/2023";
     private TransactionId id;
     private Description description;
     private Amount amount;
     private Person person;
+    private Date date;
 
     /**
      * Creates a {@code TransactionBuilder} with the default details.
@@ -33,6 +35,7 @@ public class TransactionBuilder {
         description = new Description(DEFAULT_DESC);
         amount = new Amount(DEFAULT_AMOUNT);
         person = DEFAULT_PERSON;
+        date = new Date(DEFAULT_DATE);
     }
 
     /**
@@ -43,6 +46,7 @@ public class TransactionBuilder {
         id = transactionToCopy.getTransactionId();
         description = transactionToCopy.getDescription();
         amount = transactionToCopy.getAmount();
+        date = new Date(DEFAULT_DATE);
         if (transactionToCopy.hasPersonInfo()) {
             person = transactionToCopy.getPerson();
         } else {
@@ -72,6 +76,12 @@ public class TransactionBuilder {
         return this;
     }
 
+    /** Sets the {@code Date} of the {@code Transaction} that we are building. */
+    public TransactionBuilder withDate(String date) {
+        this.date = new Date(date);
+        return this;
+    }
+
     /** Sets the {@code Person} of the {@code Transaction} that we are building. */
     public TransactionBuilder withPerson(Person person) {
         this.person = person;
@@ -79,6 +89,6 @@ public class TransactionBuilder {
     }
 
     public Transaction build() {
-        return new Transaction(id, TransactionType.EXPENSE, description, amount, new Date(), person);
+        return new Transaction(id, TransactionType.EXPENSE, description, amount, date, person);
     }
 }

@@ -2,6 +2,7 @@ package transact.model.transaction;
 
 import java.text.ParseException;
 import java.util.Scanner;
+
 import transact.model.person.Person;
 import transact.model.transaction.info.Amount;
 import transact.model.transaction.info.Date;

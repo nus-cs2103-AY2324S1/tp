@@ -111,7 +111,7 @@ public class CsvAdaptedTransactionStorage implements TransactionBookStorage {
     public void saveTransactionBook(ReadOnlyTransactionBook transactionBook, Path filePath) throws IOException {
         List<Transaction> transactions = transactionBook.getTransactionList();
         try (CSVWriter writer = new CSVWriter(new FileWriter(filePath.toFile()))) {
-            String[] header = { "TransactionId", "Category", "Description", "Amount","Date", "Person" };
+            String[] header = { "TransactionId", "Category", "Description", "Amount", "Date", "Person" };
             writer.writeNext(header);
 
             for (Transaction transaction : transactions) {
