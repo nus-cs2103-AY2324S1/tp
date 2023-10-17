@@ -26,6 +26,7 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
 
     // Optional fields
+    Lead lead;
     private final TelegramHandle telegram;
     private final Profession profession;
     private final Income income;
@@ -83,6 +84,10 @@ public class Person {
         return address;
     }
 
+    public Lead getLead() {
+        return lead;
+    }
+
     public TelegramHandle getTelegram() {
         return telegram;
     }
@@ -104,13 +109,12 @@ public class Person {
     }
 
     /**
-     * Adds an interaction to the person.
-     * @param interactions the set of interaction to be added
-     * @return the updated set of interactions
+     * Changes the lead of the client.
+     *
+     * @param newLead the new lead of the client.
      */
-    public Set<Interaction> addInteractions(Set<Interaction> interactions) {
-        interactions.addAll(interactions);
-        return interactions;
+    public void setLead(Lead newLead) {
+        lead = newLead;
     }
 
     /**
@@ -119,6 +123,15 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Adds a set of interactions to the person.
+     *
+     * @param interactions the set of interaction to be added
+     */
+    public void addInteractions(Set<Interaction> interactions) {
+        this.interactions.addAll(interactions);
     }
 
     /**
