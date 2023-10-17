@@ -5,6 +5,7 @@ import static seedu.lovebook.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Objects;
 
 import seedu.lovebook.commons.util.ToStringBuilder;
+import seedu.lovebook.model.person.horoscope.Horoscope;
 
 /**
  * Represents a Date in the lovebook book.
@@ -21,17 +22,19 @@ public class Date {
     private final Height height;
 
     private final Income income;
+    private final Horoscope horoscope;
 
     /**
      * Every field must be present and not null.
      */
-    public Date(Name name, Age age, Gender gender, Height height, Income income) {
+    public Date(Name name, Age age, Gender gender, Height height, Income income, Horoscope horoscope) {
         requireAllNonNull(name, age, gender, height);
         this.name = name;
         this.age = age;
         this.gender = gender;
         this.height = height;
         this.income = income;
+        this.horoscope = horoscope;
     }
 
     /**
@@ -43,6 +46,7 @@ public class Date {
         this.gender = null;
         this.height = null;
         this.income = null;
+        this.horoscope = null;
     }
 
     public Name getName() {
@@ -63,6 +67,10 @@ public class Date {
 
     public Income getIncome() {
         return income;
+    }
+
+    public Horoscope getHoroscope() {
+        return horoscope;
     }
 
     /**
@@ -98,13 +106,14 @@ public class Date {
                 && age.equals(otherDate.age)
                 && gender.equals(otherDate.gender)
                 && height.equals(otherDate.height)
-                && income.equals(otherDate.income);
+                && income.equals(otherDate.income)
+                && horoscope.equals(otherDate.horoscope);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, age, gender, height, income);
+        return Objects.hash(name, age, gender, height, income, horoscope);
     }
 
     @Override
@@ -115,6 +124,7 @@ public class Date {
                 .add("gender", gender)
                 .add("height", height)
                 .add("income", income)
+                .add("horoscope", horoscope)
                 .toString();
     }
 

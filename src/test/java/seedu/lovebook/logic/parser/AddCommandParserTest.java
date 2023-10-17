@@ -7,11 +7,14 @@ import static seedu.lovebook.logic.commands.CommandTestUtil.GENDER_DESC_AMY;
 import static seedu.lovebook.logic.commands.CommandTestUtil.GENDER_DESC_BOB;
 import static seedu.lovebook.logic.commands.CommandTestUtil.HEIGHT_DESC_AMY;
 import static seedu.lovebook.logic.commands.CommandTestUtil.HEIGHT_DESC_BOB;
+import static seedu.lovebook.logic.commands.CommandTestUtil.HOROSCOPE_DESC_AMY;
+import static seedu.lovebook.logic.commands.CommandTestUtil.HOROSCOPE_DESC_BOB;
 import static seedu.lovebook.logic.commands.CommandTestUtil.INCOME_DESC_AMY;
 import static seedu.lovebook.logic.commands.CommandTestUtil.INCOME_DESC_BOB;
 import static seedu.lovebook.logic.commands.CommandTestUtil.INVALID_AGE_DESC;
 import static seedu.lovebook.logic.commands.CommandTestUtil.INVALID_GENDER_DESC;
 import static seedu.lovebook.logic.commands.CommandTestUtil.INVALID_HEIGHT_DESC;
+import static seedu.lovebook.logic.commands.CommandTestUtil.INVALID_HOROSCOPE_DESC;
 import static seedu.lovebook.logic.commands.CommandTestUtil.INVALID_INCOME_DESC;
 import static seedu.lovebook.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.lovebook.logic.commands.CommandTestUtil.NAME_DESC_AMY;
@@ -21,10 +24,12 @@ import static seedu.lovebook.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_AGE_BOB;
 import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_GENDER_BOB;
 import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_HEIGHT_BOB;
+import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_HOROSCOPE_BOB;
 import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HEIGHT;
+import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HOROSCOPE;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_INCOME;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.lovebook.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -42,6 +47,7 @@ import seedu.lovebook.model.person.Gender;
 import seedu.lovebook.model.person.Height;
 import seedu.lovebook.model.person.Income;
 import seedu.lovebook.model.person.Name;
+import seedu.lovebook.model.person.horoscope.Horoscope;
 import seedu.lovebook.testutil.PersonBuilder;
 
 public class AddCommandParserTest {
@@ -53,13 +59,13 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + AGE_DESC_BOB + GENDER_DESC_BOB
-                + HEIGHT_DESC_BOB + INCOME_DESC_BOB, new AddCommand(expectedDate));
+                + HEIGHT_DESC_BOB + INCOME_DESC_BOB + HOROSCOPE_DESC_BOB, new AddCommand(expectedDate));
     }
 
     @Test
     public void parse_repeatedNonTagValue_failure() {
         String validExpectedPersonString = NAME_DESC_BOB + AGE_DESC_BOB + GENDER_DESC_BOB
-                + HEIGHT_DESC_BOB + INCOME_DESC_BOB;
+                + HEIGHT_DESC_BOB + INCOME_DESC_BOB + HOROSCOPE_DESC_AMY;
 
         // multiple names
         assertParseFailure(parser, NAME_DESC_AMY + validExpectedPersonString,
@@ -81,12 +87,16 @@ public class AddCommandParserTest {
         assertParseFailure(parser, INCOME_DESC_AMY + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_INCOME));
 
+        // multiple HOROSCOPE
+        assertParseFailure(parser, HOROSCOPE_DESC_AMY + validExpectedPersonString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_HOROSCOPE));
+
         // multiple fields repeated
         assertParseFailure(parser,
                 validExpectedPersonString + AGE_DESC_AMY + GENDER_DESC_AMY + NAME_DESC_AMY + HEIGHT_DESC_AMY
-                        + INCOME_DESC_AMY + validExpectedPersonString,
+                        + INCOME_DESC_AMY + HOROSCOPE_DESC_AMY + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_HEIGHT, PREFIX_INCOME, PREFIX_GENDER,
-                        PREFIX_AGE));
+                        PREFIX_AGE, PREFIX_HOROSCOPE));
 
         // invalid value followed by valid value
 
@@ -110,6 +120,10 @@ public class AddCommandParserTest {
         assertParseFailure(parser, INVALID_INCOME_DESC + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_INCOME));
 
+        // invalid HOROSCOPE
+        assertParseFailure(parser, INVALID_HOROSCOPE_DESC + validExpectedPersonString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_HOROSCOPE));
+
         // valid value followed by invalid value
 
         // invalid name
@@ -131,14 +145,18 @@ public class AddCommandParserTest {
         // invalid INCOME
         assertParseFailure(parser, validExpectedPersonString + INVALID_INCOME_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_INCOME));
+
+        // invalid INCOME
+        assertParseFailure(parser, validExpectedPersonString + INVALID_HOROSCOPE_DESC,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_HOROSCOPE));
     }
 
     @Test
     public void parse_optionalFieldsMissing_success() {
-        // zero tags
+        // zero horoscope
         Date expectedDate = new PersonBuilder(AMY).build();
         assertParseSuccess(parser, NAME_DESC_AMY + AGE_DESC_AMY + GENDER_DESC_AMY + HEIGHT_DESC_AMY
-                + INCOME_DESC_AMY, new AddCommand(expectedDate));
+                + INCOME_DESC_AMY + HOROSCOPE_DESC_AMY, new AddCommand(expectedDate));
     }
 
     @Test
@@ -170,31 +188,35 @@ public class AddCommandParserTest {
     public void parse_invalidValue_failure() {
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + AGE_DESC_BOB + GENDER_DESC_BOB + HEIGHT_DESC_BOB
-                + INCOME_DESC_BOB, Name.MESSAGE_CONSTRAINTS);
+                + INCOME_DESC_BOB + HOROSCOPE_DESC_BOB, Name.MESSAGE_CONSTRAINTS);
 
         // invalid age
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_AGE_DESC + GENDER_DESC_BOB + HEIGHT_DESC_BOB
-                + INCOME_DESC_BOB, Age.MESSAGE_CONSTRAINTS);
+                + INCOME_DESC_BOB + HOROSCOPE_DESC_BOB, Age.MESSAGE_CONSTRAINTS);
 
         // invalid gender
         assertParseFailure(parser, NAME_DESC_BOB + AGE_DESC_BOB + INVALID_GENDER_DESC + HEIGHT_DESC_BOB
-                + INCOME_DESC_BOB, Gender.MESSAGE_CONSTRAINTS);
+                + INCOME_DESC_BOB + HOROSCOPE_DESC_BOB, Gender.MESSAGE_CONSTRAINTS);
 
         // invalid lovebook
         assertParseFailure(parser, NAME_DESC_BOB + AGE_DESC_BOB + GENDER_DESC_BOB + INVALID_HEIGHT_DESC
-                + INCOME_DESC_BOB, Height.MESSAGE_CONSTRAINTS);
+                + INCOME_DESC_BOB + HOROSCOPE_DESC_BOB, Height.MESSAGE_CONSTRAINTS);
 
         // invalid INCOME
         assertParseFailure(parser, NAME_DESC_BOB + AGE_DESC_BOB + GENDER_DESC_BOB + HEIGHT_DESC_BOB
-                + INVALID_INCOME_DESC, Income.MESSAGE_CONSTRAINTS);
+                + INVALID_INCOME_DESC + HOROSCOPE_DESC_BOB, Income.MESSAGE_CONSTRAINTS);
+
+        // invalid HOROSCOPE
+        assertParseFailure(parser, NAME_DESC_BOB + AGE_DESC_BOB + GENDER_DESC_BOB + HEIGHT_DESC_BOB
+                + INCOME_DESC_BOB + INVALID_HOROSCOPE_DESC, Horoscope.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + AGE_DESC_BOB + GENDER_DESC_BOB + INVALID_HEIGHT_DESC
-                + INCOME_DESC_BOB, Name.MESSAGE_CONSTRAINTS);
+                + INCOME_DESC_BOB + HOROSCOPE_DESC_BOB, Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + AGE_DESC_BOB + GENDER_DESC_BOB
-                + HEIGHT_DESC_BOB + INCOME_DESC_BOB,
+                + HEIGHT_DESC_BOB + INCOME_DESC_BOB + VALID_HOROSCOPE_BOB,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 }

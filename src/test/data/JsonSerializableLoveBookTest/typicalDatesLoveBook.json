@@ -6,48 +6,48 @@
     "gender" : "F",
     "height" : "123",
     "income" : "1000",
-    "tags" : [ "friends" ]
+    "horoscope": "TAURUS"
   }, {
     "name" : "Benson Meier",
     "age" : "22",
     "gender" : "M",
     "height" : "23124",
     "income" : "2000",
-    "tags" : [ "owesMoney", "friends" ]
+    "horoscope" : "LIBRA"
   }, {
     "name" : "Carl Kurz",
     "age" : "23",
     "gender" : "M",
     "height" : "54321",
     "income" : "3000",
-    "tags" : [ ]
+    "horoscope" : "ARIES"
   }, {
     "name" : "Daniel Meier",
     "age" : "25",
     "gender" : "M",
     "height" : "10",
     "income" : "4000",
-    "tags" : [ "friends" ]
+    "horoscope" : "LIBRA"
   }, {
     "name" : "Elle Meyer",
     "age" : "34",
     "gender" : "F",
     "height" : "1023",
     "income" : "5000",
-    "tags" : [ ]
+    "horoscope" : "GEMINI"
   }, {
     "name" : "Fiona Kunz",
     "age" : "24",
     "gender" : "F",
     "height" : "3444",
     "income" : "6000",
-    "tags" : [ ]
+    "horoscope" : "GEMINI"
   }, {
     "name" : "George Best",
     "age" : "94",
     "gender" : "M",
     "height" : "23245",
     "income" : "7000",
-    "tags" : [ ]
+    "horoscope" : "TAURUS"
   } ]
 }
