@@ -75,4 +75,11 @@ public class ArgumentMultimap {
             throw new ParseException(Messages.getErrorMessageForDuplicatePrefixes(duplicatedPrefixes));
         }
     }
+
+    /**
+     * Returns true if the {@code prefix} exists in this ArgumentMultimap.
+     */
+    public boolean prefixExist(Prefix prefix) {
+        return argMultimap.containsKey(prefix);
+    }
 }

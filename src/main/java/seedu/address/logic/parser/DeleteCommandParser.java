@@ -3,16 +3,14 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICAL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteCommand.DeletePersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -34,36 +32,59 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
     public DeleteCommand parse(String args) throws ParseException {
         try {
             requireNonNull(args);
+
             ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_NRIC, PREFIX_PHONE,
-                    PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_START, PREFIX_END, PREFIX_MEDICAL, PREFIX_TAG);
+                    PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_APPOINTMENT, PREFIX_MEDICAL, PREFIX_TAG);
 
             boolean hasNamePrefix = argMultimap.getValue(PREFIX_NAME).isPresent();
             boolean hasNricPrefix = argMultimap.getValue(PREFIX_NRIC).isPresent();
 
             if (!hasNamePrefix && !hasNricPrefix) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        DeleteCommand.MESSAGE_USAGE));
             }
 
             argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_NRIC, PREFIX_PHONE, PREFIX_EMAIL,
-                    PREFIX_ADDRESS, PREFIX_START, PREFIX_END, PREFIX_MEDICAL, PREFIX_TAG);
+                    PREFIX_ADDRESS, PREFIX_APPOINTMENT, PREFIX_MEDICAL, PREFIX_TAG);
 
             Name name = null;
             Nric nric = null;
-
-            Index index = ParserUtil.parseIndex(args);
 
             if (hasNamePrefix) {
                 name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
             } else if (hasNricPrefix) {
                 nric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
+            } else {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        DeleteCommand.MESSAGE_USAGE));
             }
 
             DeletePersonDescriptor deletePersonDescriptor = new DeletePersonDescriptor();
 
-            return new DeleteCommand(index);
+            if (argMultimap.prefixExist(PREFIX_PHONE)) {
+                deletePersonDescriptor.setPhone();
+            }
+            if (argMultimap.prefixExist(PREFIX_EMAIL)) {
+                deletePersonDescriptor.setEmail();
+            }
+            if (argMultimap.prefixExist(PREFIX_ADDRESS)) {
+                deletePersonDescriptor.setAddress();
+            }
+            if (argMultimap.prefixExist(PREFIX_APPOINTMENT)) {
+                deletePersonDescriptor.setAppointment();
+            }
+            if (argMultimap.prefixExist(PREFIX_MEDICAL)) {
+                deletePersonDescriptor.setMedicalHistory();
+            }
+            if (argMultimap.prefixExist(PREFIX_TAG)) {
+                deletePersonDescriptor.setTags();
+            }
+
+            return new DeleteCommand(nric, name, deletePersonDescriptor);
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE),
+                    pe);
         }
     }
 

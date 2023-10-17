@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -8,9 +9,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -20,6 +21,8 @@ import seedu.address.model.person.Appointment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.MedicalHistory;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -32,23 +35,23 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + ": Deletes the patient identified by the name or nric of the patient.\n"
+            + "Parameters: n/Name or id/Nric (must be valid)\n"
+            + "Example: " + COMMAND_WORD + " n/John Doe or " + COMMAND_WORD + " id/S1234567A";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
-    private final Index targetIndex;
+    public static final String MESSAGE_DELETE_PERSON_FIELD_SUCCESS = "Deleted Person's field: %1$s";
 
     private final DeletePersonDescriptor deletePersonDescriptor;
 
-    public DeleteCommand(Index targetIndex) {
-        this.targetIndex = targetIndex;
-        this.deletePersonDescriptor = null;
-    }
+    private final Nric nric;
 
-    public DeleteCommand(DeletePersonDescriptor deletePersonDescriptor) {
-        this.targetIndex = null;
+    private final Name name;
+
+    public DeleteCommand(Nric nric, Name name, DeletePersonDescriptor deletePersonDescriptor) {
+        this.nric = nric;
+        this.name = name;
         this.deletePersonDescriptor = deletePersonDescriptor;
     }
 
@@ -57,13 +60,37 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        Optional<Person> findPersonToDelete = null;
+
+        if (name != null) {
+            Stream<Person> personbyName = lastShownList.stream()
+                    .filter(person -> person.getName().equals(name));
+            List<Person> personByNameList = personbyName.collect(Collectors.toList());
+            if (personByNameList.size() > 1) {
+                List<String> keyWords = Collections.singletonList(name.toString());
+                NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(keyWords);
+                FindCommand fc = new FindCommand(predicate);
+                return fc.execute(model);
+            } else {
+                findPersonToDelete = findPersonToDeleteName(personByNameList.stream());
+            }
+        } else if (nric != null) {
+            findPersonToDelete = findPersonToDeleteIc(lastShownList);
+        } else {
+            throw new CommandException(Messages.MESSAGE_INVALID_NRIC_AND_NAME);
         }
 
-        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
+        Person personToDelete = findPersonToDelete.get();
+
+        if (deletePersonDescriptor.isAllFalse()) {
+            model.deletePerson(personToDelete);
+            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
+        } else {
+            Person editedPerson = createEditedPerson(personToDelete, deletePersonDescriptor);
+            model.setPerson(personToDelete, editedPerson);
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_FIELD_SUCCESS, Messages.format(editedPerson)));
+        }
     }
 
     @Override
@@ -78,14 +105,79 @@ public class DeleteCommand extends Command {
         }
 
         DeleteCommand otherDeleteCommand = (DeleteCommand) other;
-        return targetIndex.equals(otherDeleteCommand.targetIndex);
+        return nric.equals(otherDeleteCommand.nric);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("targetIndex", targetIndex)
+                .add("NRIC", nric)
                 .toString();
+    }
+
+    public Optional<Person> findPersonToDeleteIc(List<Person> persons)
+            throws CommandException {
+        Optional<Person> personbyNric = persons.stream()
+                .filter(person -> person.getNric().equals(nric))
+                .findFirst();
+        if (personbyNric.isPresent()) {
+            return personbyNric;
+        } else {
+            throw new CommandException(Messages.MESSAGE_INVALID_NRIC);
+        }
+    }
+
+    public Optional<Person> findPersonToDeleteName(Stream<Person> persons)
+            throws CommandException {
+        Optional<Person> personbyName = persons.findFirst();
+        if (personbyName.isPresent()) {
+            return personbyName;
+        } else {
+            throw new CommandException(Messages.MESSAGE_INVALID_NAME);
+        }
+    }
+
+    /**
+     * Creates and returns a {@code Person} with the details of {@code personToEdit}
+     * edited with {@code editPersonDescriptor}.
+     */
+    private static Person createEditedPerson(Person personToEdit, DeletePersonDescriptor deletePersonDescriptor) {
+        assert personToEdit != null;
+
+        Name updatedName = personToEdit.getName();
+        Nric updatedNric = personToEdit.getNric();
+        Phone updatedPhone = personToEdit.getPhone();
+        Email updatedEmail = personToEdit.getEmail();
+        Address updatedAddress = personToEdit.getAddress();
+        Set<Tag> updatedTags = personToEdit.getTags();
+        Set<MedicalHistory> updatedMedicalHistories = personToEdit.getMedicalHistories();
+        Appointment updatedAppointment = personToEdit.getAppointment();
+
+        if (deletePersonDescriptor.getPhone()) {
+            System.out.println("error here");
+            boolean isNull = "" == null;
+            System.out.println(isNull);
+            updatedPhone = new Phone("");
+            System.out.println("error after here");
+        }
+        if (deletePersonDescriptor.getEmail()) {
+            updatedEmail = new Email("");
+        }
+        if (deletePersonDescriptor.getAddress()) {
+            updatedAddress = new Address("");
+        }
+        if (deletePersonDescriptor.getTags()) {
+            updatedTags = new HashSet<>();
+        }
+        if (deletePersonDescriptor.getMedicalHistory()) {
+            updatedMedicalHistories = new HashSet<>();
+        }
+        if (deletePersonDescriptor.getAppointment()) {
+            updatedAppointment = new Appointment("");
+        }
+
+        return new Person(updatedName, updatedNric, updatedPhone, updatedEmail, updatedAddress, updatedAppointment,
+                updatedMedicalHistories, updatedTags);
     }
 
     /**
@@ -102,32 +194,55 @@ public class DeleteCommand extends Command {
         public DeletePersonDescriptor() {
         }
 
-        public void setPhone(Phone phone) {
+        public void setPhone() {
             this.phone = true;
         }
 
-        public void setEmail(Email email) {
+        public boolean getPhone() {
+            return this.phone;
+        }
+
+        public void setEmail() {
             this.email = true;
         }
 
-        public void setAddress(Address address) {
+        public boolean getEmail() {
+            return this.email;
+        }
+
+        public void setAddress() {
             this.address = true;
         }
 
-        public void setMedicalHistory(MedicalHistory medicalHistory) {
+        public boolean getAddress() {
+            return this.address;
+        }
+
+        public void setMedicalHistory() {
             this.medicalHistory = true;
         }
 
-        public void setAppointment(Appointment appointment) {
+        public boolean getMedicalHistory() {
+            return this.medicalHistory;
+        }
+
+        public void setAppointment() {
             this.appointment = true;
+        }
+
+        public boolean getAppointment() {
+            return this.appointment;
         }
 
         /**
          * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
          */
-        public void setTags(Set<Tag> tags) {
+        public void setTags() {
             this.tags = true;
+        }
+
+        public boolean getTags() {
+            return this.tags;
         }
 
         public boolean isAllFalse() {
