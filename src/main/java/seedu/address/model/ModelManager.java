@@ -6,7 +6,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -144,11 +143,14 @@ public class ModelManager implements Model {
         filteredMusicians.setPredicate(predicate);
     }
 
+    /**
+     * Updates the {@code FilteredMusicianList} to contain all musicians in the {@code FilteredBands}.
+     */
     public void updateFilteredMusicianListFromBands() {
         requireNonNull(filteredBands);
-        filteredMusicians.setAll((Musician) filteredBands.stream()
-            .map(Band::getMusicians)
-            .collect(Collectors.toList()));
+        for (Band b : filteredBands) {
+            filteredMusicians.addAll(b.getMusicians());
+        }
     }
 
     //=========== Filtered Band List Accessors =============================================================
