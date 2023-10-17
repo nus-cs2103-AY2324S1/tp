@@ -45,7 +45,6 @@ public class Person implements Identifiable<Person> {
                   Specialisation specialisation,
                   Set<Tag> tags,
                   Priority priority) {
-        // TODO: review requireAllNonNull
         requireAllNonNull(name);
         this.name = name;
         this.phone = phone;
@@ -62,8 +61,8 @@ public class Person implements Identifiable<Person> {
         return name;
     }
 
-    public Phone getPhone() {
-        return phone;
+    public Optional<Phone> getPhone() {
+        return Optional.ofNullable(phone);
     }
 
     public UniqueList<Email> getEmails() {
@@ -72,14 +71,14 @@ public class Person implements Identifiable<Person> {
     public UniqueList<Link> getLinks() {
         return links.copy();
     }
-    public GraduatingYear getGraduatingYear() {
-        return graduatingYear;
+    public Optional<GraduatingYear> getGraduatingYear() {
+        return Optional.ofNullable(graduatingYear);
     }
-    public Course getCourse() {
-        return course;
+    public Optional<Course> getCourse() {
+        return Optional.ofNullable(course);
     }
-    public Specialisation getSpecialisation() {
-        return specialisation;
+    public Optional<Specialisation> getSpecialisation() {
+        return Optional.ofNullable(specialisation);
     }
 
     /**
@@ -159,7 +158,7 @@ public class Person implements Identifiable<Person> {
         if (!Objects.equals(emails, new UniqueList<Email>())) {
             tsb.add("emails", emails);
         }
-        if (links != null) {
+        if (!Objects.equals(links, new UniqueList<Link>())) {
             tsb.add("links", links);
         }
         if (graduatingYear != null) {

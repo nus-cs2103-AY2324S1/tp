@@ -15,7 +15,7 @@ import networkbook.model.util.UniqueList;
  * A utility class for Person.
  */
 public class PersonUtil {
-
+    //TODO: Add priority
     /**
      * Returns an add command string for adding the {@code person}.
      */
@@ -29,16 +29,20 @@ public class PersonUtil {
     public static String getPersonDetails(Person person) {
         StringBuilder sb = new StringBuilder();
         sb.append(CliSyntax.PREFIX_NAME + " " + person.getName().fullName + " ");
-        sb.append(CliSyntax.PREFIX_PHONE + " " + person.getPhone().value + " ");
+        person.getPhone().ifPresent(phone -> sb.append(CliSyntax.PREFIX_PHONE).append(" ")
+                .append(phone.value).append(" "));
         person.getEmails().stream().forEach(
                 e -> sb.append(CliSyntax.PREFIX_EMAIL + " " + e.toString() + " ")
         );
         person.getLinks().stream().forEach(
                 e -> sb.append(CliSyntax.PREFIX_LINK + " " + e.toString() + " ")
         );
-        sb.append(CliSyntax.PREFIX_GRADUATING_YEAR + " " + person.getGraduatingYear().value + " ");
-        sb.append(CliSyntax.PREFIX_COURSE + " " + person.getCourse().value + " ");
-        sb.append(CliSyntax.PREFIX_SPECIALISATION + " " + person.getSpecialisation().value + " ");
+        person.getGraduatingYear().ifPresent(graduatingYear -> sb.append(CliSyntax.PREFIX_GRADUATING_YEAR)
+                .append(" ").append(graduatingYear.value).append(" "));
+        person.getCourse().ifPresent(course -> sb.append(CliSyntax.PREFIX_COURSE).append(" ")
+                .append(course.value).append(" "));
+        person.getSpecialisation().ifPresent(specialisation -> sb.append(CliSyntax.PREFIX_SPECIALISATION)
+                .append(" ").append(specialisation.value).append(" "));
         person.getTags().stream().forEach(
             s -> sb.append(CliSyntax.PREFIX_TAG + " " + s.tagName + " ")
         );

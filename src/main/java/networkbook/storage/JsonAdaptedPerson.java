@@ -74,16 +74,16 @@ class JsonAdaptedPerson {
      */
     public JsonAdaptedPerson(Person source) {
         name = source.getName().fullName;
-        phone = source.getPhone().value;
+        phone = source.getPhone().map(Phone::toString).orElse(null);
         emails.addAll(source.getEmails().stream()
                 .map(JsonAdaptedProperty::new)
                 .collect(Collectors.toList()));
         links.addAll(source.getLinks().stream()
                 .map(JsonAdaptedProperty::new)
                 .collect(Collectors.toList()));
-        graduatingYear = source.getGraduatingYear().value;
-        course = source.getCourse().value;
-        specialisation = source.getSpecialisation().value;
+        graduatingYear = source.getGraduatingYear().map(GraduatingYear::toString).orElse(null);
+        course = source.getCourse().map(Course::toString).orElse(null);
+        specialisation = source.getSpecialisation().map(Specialisation::toString).orElse(null);
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedProperty::new)
                 .collect(Collectors.toList()));
@@ -109,13 +109,13 @@ class JsonAdaptedPerson {
         }
         final Name modelName = new Name(name);
 
-        if (phone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
+        Phone modelPhone = null;
+        if (phone != null) {
+            if (!Phone.isValidPhone(phone)) {
+                throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
+            }
+            modelPhone = new Phone(phone);
         }
-        if (!Phone.isValidPhone(phone)) {
-            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
-        }
-        final Phone modelPhone = new Phone(phone);
 
         if (!emails.stream()
                 .map(JsonAdaptedProperty::getName)
@@ -133,31 +133,29 @@ class JsonAdaptedPerson {
         final UniqueList<Link> modelLinks = new UniqueList<>();
         links.forEach(link -> modelLinks.add(new Link(link.getName())));
 
-        if (graduatingYear == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                        GraduatingYear.class.getSimpleName()));
+        GraduatingYear modelGraduatingYear = null;
+        if (graduatingYear != null) {
+            if (!GraduatingYear.isValidGraduatingYear(graduatingYear)) {
+                throw new IllegalValueException(GraduatingYear.MESSAGE_CONSTRAINTS);
+            }
+            modelGraduatingYear = new GraduatingYear(graduatingYear);
         }
-        if (!GraduatingYear.isValidGraduatingYear(graduatingYear)) {
-            throw new IllegalValueException(GraduatingYear.MESSAGE_CONSTRAINTS);
-        }
-        final GraduatingYear modelGraduatingYear = new GraduatingYear(graduatingYear);
 
-        if (course == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Course.class.getSimpleName()));
+        Course modelCourse = null;
+        if (course != null) {
+            if (!Course.isValidCourse(course)) {
+                throw new IllegalValueException(Course.MESSAGE_CONSTRAINTS);
+            }
+            modelCourse = new Course(course);
         }
-        if (!Course.isValidCourse(course)) {
-            throw new IllegalValueException(Course.MESSAGE_CONSTRAINTS);
-        }
-        final Course modelCourse = new Course(course);
 
-        if (specialisation == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                        Specialisation.class.getSimpleName()));
+        Specialisation modelSpecialisation = null;
+        if (specialisation != null) {
+            if (!Specialisation.isValidSpecialisation(specialisation)) {
+                throw new IllegalValueException(Specialisation.MESSAGE_CONSTRAINTS);
+            }
+            modelSpecialisation = new Specialisation(specialisation);
         }
-        if (!Specialisation.isValidSpecialisation(specialisation)) {
-            throw new IllegalValueException(Specialisation.MESSAGE_CONSTRAINTS);
-        }
-        final Specialisation modelSpecialisation = new Specialisation(specialisation);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 

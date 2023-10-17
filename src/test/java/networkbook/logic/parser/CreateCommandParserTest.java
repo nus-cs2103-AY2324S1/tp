@@ -1,5 +1,16 @@
 package networkbook.logic.parser;
 
+import static networkbook.logic.commands.CommandTestUtil.VALID_COURSE_AMY;
+import static networkbook.logic.commands.CommandTestUtil.VALID_COURSE_BOB;
+import static networkbook.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
+import static networkbook.logic.commands.CommandTestUtil.VALID_GRADUATING_YEAR_AMY;
+import static networkbook.logic.commands.CommandTestUtil.VALID_LINK_AMY;
+import static networkbook.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
+import static networkbook.logic.commands.CommandTestUtil.VALID_PRIORITY_AMY;
+import static networkbook.logic.commands.CommandTestUtil.VALID_SPECIALISATION_AMY;
+
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import networkbook.logic.Messages;
@@ -169,14 +180,124 @@ public class CreateCommandParserTest {
 
     @Test
     public void parse_optionalFieldsMissing_success() {
+        // no phone
+        Person expectedPersonWithoutPhone = new PersonBuilder(TypicalPersons.AMY)
+                .withoutOptionalFields()
+                .withEmails(List.of(VALID_EMAIL_AMY))
+                .withLinks(List.of(VALID_LINK_AMY))
+                .withGraduatingYear(VALID_GRADUATING_YEAR_AMY)
+                .withCourse(VALID_COURSE_AMY)
+                .withSpecialisation(VALID_SPECIALISATION_AMY)
+                .withPriority(VALID_PRIORITY_AMY)
+                .build();
+        CommandParserTestUtil.assertParseSuccess(parser,
+                CommandTestUtil.NAME_DESC_AMY
+                        + CommandTestUtil.EMAIL_DESC_AMY + CommandTestUtil.LINK_DESC_AMY
+                        + CommandTestUtil.GRADUATING_YEAR_DESC_AMY + CommandTestUtil.COURSE_DESC_AMY
+                        + CommandTestUtil.SPECIALISATION_DESC_AMY + CommandTestUtil.PRIORITY_DESC_AMY,
+                new CreateCommand(expectedPersonWithoutPhone));
+
+        // no emails
+        Person expectedPersonWithoutEmails = new PersonBuilder(TypicalPersons.AMY)
+                .withoutOptionalFields()
+                .withPhone(VALID_PHONE_AMY)
+                .withLinks(List.of(VALID_LINK_AMY))
+                .withGraduatingYear(VALID_GRADUATING_YEAR_AMY)
+                .withCourse(VALID_COURSE_AMY)
+                .withSpecialisation(VALID_SPECIALISATION_AMY)
+                .withPriority(VALID_PRIORITY_AMY)
+                .build();
+        CommandParserTestUtil.assertParseSuccess(parser,
+                CommandTestUtil.NAME_DESC_AMY
+                        + CommandTestUtil.PHONE_DESC_AMY + CommandTestUtil.LINK_DESC_AMY
+                        + CommandTestUtil.GRADUATING_YEAR_DESC_AMY + CommandTestUtil.COURSE_DESC_AMY
+                        + CommandTestUtil.SPECIALISATION_DESC_AMY + CommandTestUtil.PRIORITY_DESC_AMY,
+                new CreateCommand(expectedPersonWithoutEmails));
+
+        // no links
+        Person expectedPersonWithoutLinks = new PersonBuilder(TypicalPersons.AMY)
+                .withoutOptionalFields()
+                .withPhone(VALID_PHONE_AMY)
+                .withEmails(List.of(VALID_EMAIL_AMY))
+                .withGraduatingYear(VALID_GRADUATING_YEAR_AMY)
+                .withCourse(VALID_COURSE_AMY)
+                .withSpecialisation(VALID_SPECIALISATION_AMY)
+                .withPriority(VALID_PRIORITY_AMY)
+                .build();
+        CommandParserTestUtil.assertParseSuccess(parser,
+                CommandTestUtil.NAME_DESC_AMY
+                        + CommandTestUtil.PHONE_DESC_AMY + CommandTestUtil.EMAIL_DESC_AMY
+                        + CommandTestUtil.GRADUATING_YEAR_DESC_AMY + CommandTestUtil.COURSE_DESC_AMY
+                        + CommandTestUtil.SPECIALISATION_DESC_AMY + CommandTestUtil.PRIORITY_DESC_AMY,
+                new CreateCommand(expectedPersonWithoutLinks));
+
+        // no graduating year
+        Person expectedPersonWithoutGraduatingYear = new PersonBuilder(TypicalPersons.AMY)
+                .withoutOptionalFields()
+                .withPhone(VALID_PHONE_AMY)
+                .withEmails(List.of(VALID_EMAIL_AMY))
+                .withLinks(List.of(VALID_LINK_AMY))
+                .withCourse(VALID_COURSE_AMY)
+                .withSpecialisation(VALID_SPECIALISATION_AMY)
+                .withPriority(VALID_PRIORITY_AMY)
+                .build();
+        CommandParserTestUtil.assertParseSuccess(parser,
+                CommandTestUtil.NAME_DESC_AMY
+                        + CommandTestUtil.PHONE_DESC_AMY + CommandTestUtil.EMAIL_DESC_AMY
+                        + CommandTestUtil.LINK_DESC_AMY + CommandTestUtil.COURSE_DESC_AMY
+                        + CommandTestUtil.SPECIALISATION_DESC_AMY + CommandTestUtil.PRIORITY_DESC_AMY,
+                new CreateCommand(expectedPersonWithoutGraduatingYear));
+
+        // no course
+        Person expectedPersonWithoutCourse = new PersonBuilder(TypicalPersons.AMY)
+                .withoutOptionalFields()
+                .withPhone(VALID_PHONE_AMY)
+                .withEmails(List.of(VALID_EMAIL_AMY))
+                .withLinks(List.of(VALID_LINK_AMY))
+                .withGraduatingYear(VALID_GRADUATING_YEAR_AMY)
+                .withSpecialisation(VALID_SPECIALISATION_AMY)
+                .withPriority(VALID_PRIORITY_AMY)
+                .build();
+        CommandParserTestUtil.assertParseSuccess(parser,
+                CommandTestUtil.NAME_DESC_AMY
+                        + CommandTestUtil.PHONE_DESC_AMY + CommandTestUtil.EMAIL_DESC_AMY
+                        + CommandTestUtil.LINK_DESC_AMY + CommandTestUtil.GRADUATING_YEAR_DESC_AMY
+                        + CommandTestUtil.SPECIALISATION_DESC_AMY + CommandTestUtil.PRIORITY_DESC_AMY,
+                new CreateCommand(expectedPersonWithoutCourse));
+
+        // no specialisation
+        Person expectedPersonWithoutSpecialisation = new PersonBuilder(TypicalPersons.AMY)
+                .withoutOptionalFields()
+                .withPhone(VALID_PHONE_AMY)
+                .withEmails(List.of(VALID_EMAIL_AMY))
+                .withLinks(List.of(VALID_LINK_AMY))
+                .withGraduatingYear(VALID_GRADUATING_YEAR_AMY)
+                .withCourse(VALID_COURSE_AMY)
+                .withPriority(VALID_PRIORITY_AMY)
+                .build();
+        CommandParserTestUtil.assertParseSuccess(parser,
+                CommandTestUtil.NAME_DESC_AMY
+                        + CommandTestUtil.PHONE_DESC_AMY + CommandTestUtil.EMAIL_DESC_AMY
+                        + CommandTestUtil.LINK_DESC_AMY + CommandTestUtil.GRADUATING_YEAR_DESC_AMY
+                        + CommandTestUtil.COURSE_DESC_AMY + CommandTestUtil.PRIORITY_DESC_AMY,
+                new CreateCommand(expectedPersonWithoutSpecialisation));
+
         // zero tags
-        Person expectedPerson = new PersonBuilder(TypicalPersons.AMY).withTags().build();
+        Person expectedPersonWithoutTags = new PersonBuilder(TypicalPersons.AMY).withTags().build();
         CommandParserTestUtil.assertParseSuccess(parser,
                 CommandTestUtil.NAME_DESC_AMY + CommandTestUtil.PHONE_DESC_AMY
                         + CommandTestUtil.EMAIL_DESC_AMY + CommandTestUtil.LINK_DESC_AMY
                         + CommandTestUtil.GRADUATING_YEAR_DESC_AMY + CommandTestUtil.COURSE_DESC_AMY
                         + CommandTestUtil.SPECIALISATION_DESC_AMY + CommandTestUtil.PRIORITY_DESC_AMY,
-                new CreateCommand(expectedPerson));
+                new CreateCommand(expectedPersonWithoutTags));
+
+        // no non-name fields
+        Person expectedPersonWithoutOptionalFields = new PersonBuilder(TypicalPersons.AMY)
+                .withoutOptionalFields()
+                .build();
+        CommandParserTestUtil.assertParseSuccess(parser,
+                CommandTestUtil.NAME_DESC_AMY,
+                new CreateCommand(expectedPersonWithoutOptionalFields));
     }
 
     @Test

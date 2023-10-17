@@ -37,7 +37,7 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_PRIORITY = "hi";
 
     private static final String VALID_NAME = TypicalPersons.BENSON.getName().toString();
-    private static final String VALID_PHONE = TypicalPersons.BENSON.getPhone().toString();
+    private static final String VALID_PHONE = TypicalPersons.BENSON.getPhone().map(Phone::toString).orElse(null);
     private static final List<JsonAdaptedProperty<Email>> VALID_EMAILS = TypicalPersons.BENSON.getEmails().stream()
             .map(JsonAdaptedProperty::new)
             .collect(Collectors.toList());
@@ -91,18 +91,6 @@ public class JsonAdaptedPersonTest {
     }
 
     @Test
-    public void toModelType_nullPhone_throwsIllegalValueException() {
-        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, null, VALID_EMAILS,
-                VALID_LINKS, VALID_GRADUATING_YEAR, VALID_COURSE,
-                VALID_SPECIALISATION, VALID_TAGS, VALID_PRIORITY);
-        String expectedMessage = String.format(
-                JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT,
-                Phone.class.getSimpleName()
-        );
-        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
-    }
-
-    @Test
     public void toModelType_invalidEmails_throwsIllegalValueException() {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, INVALID_EMAILS,
@@ -122,17 +110,6 @@ public class JsonAdaptedPersonTest {
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
-    @Test
-    public void toModelType_nullGraduatingYear_throwsIllegalValueException() {
-        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAILS,
-                VALID_LINKS, null, VALID_COURSE,
-                VALID_SPECIALISATION, VALID_TAGS, VALID_PRIORITY);
-        String expectedMessage = String.format(
-                JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT,
-                GraduatingYear.class.getSimpleName()
-        );
-        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
-    }
 
     @Test
     public void toModelType_invalidGraduatingYear_throwsIllegalValueException() {
@@ -144,29 +121,6 @@ public class JsonAdaptedPersonTest {
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
-    @Test
-    public void toModelType_nullCourse_throwsIllegalValueException() {
-        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAILS,
-                VALID_LINKS, VALID_GRADUATING_YEAR, null,
-                VALID_SPECIALISATION, VALID_TAGS, VALID_PRIORITY);
-        String expectedMessage = String.format(
-                JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT,
-                Course.class.getSimpleName()
-        );
-        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
-    }
-
-    @Test
-    public void toModelType_nullSpecialisation_throwsIllegalValueException() {
-        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAILS,
-                VALID_LINKS, VALID_GRADUATING_YEAR, VALID_COURSE,
-                null, VALID_TAGS, VALID_PRIORITY);
-        String expectedMessage = String.format(
-                JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT,
-                Specialisation.class.getSimpleName()
-        );
-        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
-    }
 
     @Test
     public void toModelType_invalidTags_throwsIllegalValueException() {

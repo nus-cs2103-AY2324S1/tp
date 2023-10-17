@@ -1,5 +1,6 @@
 package networkbook.ui;
 
+import static networkbook.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -33,6 +34,15 @@ public class PersonCardTest {
     public void setup() throws Exception {
         ApplicationTest.launch(MainApp.class);
     }
+
+//    @Test
+//    public void constructor_hasValidNumber_showsValidNumber() {
+//        Person person = new PersonBuilder().withName("Bob").withPhone(VALID_PHONE_BOB).build();
+//        PersonCard personCard = new PersonCard(person, 1);
+//        Label phone = personCard.getPhone();
+//        assertEquals("Phone: " + VALID_PHONE_BOB, phone.getText());
+//        assertTrue(phone.isVisible());
+//    }
 
     @Test
     public void constructor_hasHighPriority_showsHighPriority() {

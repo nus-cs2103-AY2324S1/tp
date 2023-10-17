@@ -62,7 +62,6 @@ public class CreateCommandParser implements Parser<CreateCommand> {
                 CliSyntax.PREFIX_PRIORITY
         );
 
-        // TODO: allow CreateCommand to allow these fields to be null
         Name name = ParserUtil.parseName(argMultimap.getValue(CliSyntax.PREFIX_NAME)
                     .orElseThrow(() -> new ParseException(String.format(Messages.MESSAGE_INVALID_CONTACT_NAME))));
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(CliSyntax.PREFIX_PHONE).orElse(null));

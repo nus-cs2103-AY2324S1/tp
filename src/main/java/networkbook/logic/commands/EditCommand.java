@@ -101,14 +101,15 @@ public class EditCommand extends Command {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
+        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone().orElse(null));
         UniqueList<Email> updatedEmails = editPersonDescriptor.getEmails().orElse(personToEdit.getEmails());
         UniqueList<Link> updatedLink = editPersonDescriptor.getLinks().orElse(personToEdit.getLinks());
         GraduatingYear updatedGraduatingYear = editPersonDescriptor.getGraduatingYear()
-                    .orElse(personToEdit.getGraduatingYear());
-        Course updatedCourse = editPersonDescriptor.getCourse().orElse(personToEdit.getCourse());
+                .orElse(personToEdit.getGraduatingYear().orElse(null));
+        Course updatedCourse = editPersonDescriptor.getCourse().orElse(personToEdit.getCourse()
+                .orElse(null));
         Specialisation updatedSpecialisation = editPersonDescriptor.getSpecialisation()
-                    .orElse(personToEdit.getSpecialisation());
+                .orElse(personToEdit.getSpecialisation().orElse(null));
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Priority updatedPriority = editPersonDescriptor.getPriority().orElse(personToEdit.getPriority()
                                                                      .orElse(null));
