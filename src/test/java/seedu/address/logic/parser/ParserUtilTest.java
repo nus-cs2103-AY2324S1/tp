@@ -36,7 +36,8 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
-    private static final String VALID_AVAILABILITY = "Available";
+    private static final String VALID_AVAILABILITY1 = "Available";
+    private static final String VALID_AVAILABILITY2 = "NotAvailable";
     private static final String VALID_ANIMAL_TYPE = "able.Dog";
     private static final String VALID_HOUSING = "HDB";
 
@@ -206,8 +207,13 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseAnimalType_invalidInput_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseAnimalType(INVALID_ANIMAL_TYPE, VALID_AVAILABILITY));
+    public void parseAnimalType_invalidInput_Available_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseAnimalType(INVALID_ANIMAL_TYPE, VALID_AVAILABILITY1));
+    }
+
+    @Test
+    public void parseAnimalType_invalidInput_NotAvailable_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseAnimalType(INVALID_ANIMAL_TYPE, VALID_AVAILABILITY2));
     }
 
     @Test
