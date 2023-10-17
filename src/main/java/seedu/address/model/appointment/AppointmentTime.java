@@ -74,6 +74,30 @@ public class AppointmentTime {
         return true;
     }
 
+    /**
+     * Returns true if the timings are ordered properly (start comes before the end time)
+     *
+     * @param appointment The appointment to check.
+     * @return True if the appointment is valid, false otherwise.
+     */
+    public static Boolean isValidOrderingOfTime(Appointment appointment) {
+        LocalDateTime start = appointment.getStartTime();
+        LocalDateTime end = appointment.getEndTime();
+
+        // Additional Check: Start time should not be at the same time as the End time
+        if (start.isEqual(end)) {
+            return false;
+        }
+
+        // Additional Check: Whether Start time is before End time
+        if (start.isAfter(end) || start.isEqual(end)) {
+            return false;
+        }
+
+        return true;
+    }
+
+
     public LocalDateTime getStart() {
         return start;
     }

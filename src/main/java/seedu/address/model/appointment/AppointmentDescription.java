@@ -20,8 +20,8 @@ public class AppointmentDescription {
 
     /**
      *
-     * @param appointmentDescription
-     * @return
+     * @param appointmentDescription string text by user input
+     * @return whether the string only contains alphanumeric characters, numbers and hyphens
      */
     public static boolean isValidAppointmentDescription(String appointmentDescription) {
         return appointmentDescription.matches("^[a-zA-Z0-9 -]+$");

@@ -70,6 +70,13 @@ public class AddAppointmentCommand extends Command {
         // Add the Person patient to the current appointment
         currAppointment.setPatient(personToAdd);
 
+        // Start time comes before End time
+        final String MESSAGE_APPOINTMENT_ORDERING = "Your start time is either before or on the same time as the End " +
+                "time. Start time should be before End time.";
+        if (!AppointmentTime.isValidOrderingOfTime(currAppointment)) {
+            throw new CommandException((MESSAGE_APPOINTMENT_ORDERING));
+        }
+
         // Clash in appointment slot
         final String MESSAGE_APPOINTMENT_CLASH = "Please choose another timing for the appointment. There " +
                 "already exists another appointment in this timing that clashes with the requested appointment.";
