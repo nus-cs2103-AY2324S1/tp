@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import networkbook.model.tag.Tag;
+import networkbook.model.util.UniqueList;
 import networkbook.testutil.EditPersonDescriptorBuilder;
 
 public class EditPersonDescriptorTest {
@@ -77,6 +79,15 @@ public class EditPersonDescriptorTest {
                 .withTags(CommandTestUtil.VALID_TAG_HUSBAND)
                 .build();
         assertFalse(CommandTestUtil.DESC_AMY.equals(editedAmy));
+    }
+
+    @Test
+    public void addTag_addNewTagWhenTagFieldIsNull_success() {
+        EditCommand.EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().build();
+        descriptor.addTag(new Tag(CommandTestUtil.VALID_TAG_FRIEND));
+        UniqueList<Tag> expectedTagList = new UniqueList<>();
+        expectedTagList.add(new Tag(CommandTestUtil.VALID_TAG_FRIEND));
+        assertEquals(expectedTagList, descriptor.getTags().get());
     }
 
     @Test

@@ -277,6 +277,7 @@ public class EditCommand extends Command {
 
         /**
          * Adds {@code tag} to the {@code UniqueList<tag>} of the descriptor.
+         * If the tags field is null, initialize it with an empty {@code UniqueList}.
          *
          * @param tag is the new tag to be added.
          */
