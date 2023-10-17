@@ -52,8 +52,8 @@ public class Graduation {
     /**
      * Matches input gradString using AY_REGEX and returns specific group within match.
      *
-     * @param gradString string to match (1-3)
-     * @param group number of group to match
+     * @param gradString string to match
+     * @param group number of group to match (1-3)
      * @return matched group
      */
     private static String matchGroup(String gradString, int group) {
@@ -63,6 +63,9 @@ public class Graduation {
         String normalizedGradString = gradString.trim().toUpperCase();
         Pattern pattern = Pattern.compile(AY_REGEX);
         Matcher matcher = pattern.matcher(normalizedGradString);
+        if (!matcher.matches()) {
+            return null;
+        }
         String match = matcher.group(group);
         return match;
     }
