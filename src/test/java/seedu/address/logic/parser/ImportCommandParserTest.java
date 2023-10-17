@@ -27,7 +27,7 @@ class ImportCommandParserTest {
         // Create a relative path to the ImportDataTest directory
         Path relativePath = Paths.get("src", "test", "data", "ImportDataTest");
 
-        String fileName1 = relativePath + "\\" + "test_data_successful.Csv";
+        String fileName1 = relativePath + "/" + "test_data_successful.Csv";
         List<Student> expectedList1 = new ArrayList<>();
         expectedList1.add(AMY);
         expectedList1.add(BOB);
@@ -35,7 +35,7 @@ class ImportCommandParserTest {
         // whitespace only preamble
         assertParseSuccess(parser, fileName1, new ImportCommand(expectedList1, fileName1));
 
-        String fileName2 = relativePath + "\\" + "test_data_no_subjects.Csv";
+        String fileName2 = relativePath + "/" + "test_data_no_subjects.Csv";
         List<Student> expectedList2 = new ArrayList<>();
         expectedList2.add(HOON);
         expectedList2.add(IDA);
@@ -50,10 +50,10 @@ class ImportCommandParserTest {
         Path relativePath = Paths.get("src", "test", "data", "ImportDataTest");
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCommand.MESSAGE_USAGE);
 
-        String fileName1 = relativePath + "\\" + "test_data_wrong_column.Csv";
+        String fileName1 = relativePath + "/" + "test_data_wrong_column.Csv";
         assertParseFailure(parser, fileName1, Phone.MESSAGE_CONSTRAINTS);
 
-        String fileName2 = relativePath + "\\" + "test_data_missing_attributes.Csv";
+        String fileName2 = relativePath + "/" + "test_data_missing_attributes.Csv";
         assertParseFailure(parser, fileName2, expectedMessage);
     }
 
