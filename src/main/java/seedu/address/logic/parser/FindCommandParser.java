@@ -13,11 +13,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Predicate;
 
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindPredicateMap;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonType;
 import seedu.address.model.person.predicates.AgeContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.EmailContainsKeywordsPredicate;
@@ -39,9 +38,6 @@ public class FindCommandParser implements ParserComplex<FindCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindCommand parse(PersonType personType, String args) throws ParseException {
-        if (args.isBlank()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-        }
         if (personType.equals(PersonType.PATIENT)) {
             return parsePatient(args);
         } else if (personType.equals(PersonType.SPECIALIST)) {
@@ -53,30 +49,24 @@ public class FindCommandParser implements ParserComplex<FindCommand> {
 
     private FindCommand parsePatient(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                         PREFIX_TAG, PREFIX_AGE, PREFIX_MEDICALHISTORY);
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                 PREFIX_AGE, PREFIX_MEDICALHISTORY);
 
-        List<Predicate<Person>> predicateList = setupPersonPredicates(argMultimap);
-        predicateList.add(PersonType.PATIENT.getSearchPredicate());
+        FindPredicateMap findPredicateMap = setupPersonPredicates(argMultimap);
 
         if (argMultimap.getValue(PREFIX_AGE).isPresent()) {
             List<String> ageKeyWords = splitKeywordsByWhitespace(argMultimap, PREFIX_AGE);
-            predicateList.add(new AgeContainsKeywordsPredicate(ageKeyWords));
+            findPredicateMap.put(PREFIX_AGE, new AgeContainsKeywordsPredicate(ageKeyWords));
         }
-
         if (argMultimap.getValue(PREFIX_MEDICALHISTORY).isPresent()) {
             List<String> medHistKeywords = splitKeywordsByWhitespace(argMultimap, PREFIX_MEDICALHISTORY);
-            predicateList.add(new MedHistoryContainsKeywordsPredicate(medHistKeywords));
+            findPredicateMap.put(PREFIX_MEDICALHISTORY,
+                    new MedHistoryContainsKeywordsPredicate(medHistKeywords));
         }
-
-        Predicate<Person> combinedPredicate = person -> predicateList.stream().map(p -> p.test(person))
-                .reduce(true, (x, y) -> x && y);
-
-        return new FindCommand(combinedPredicate, PersonType.PATIENT);
+        return new FindCommand(findPredicateMap, PersonType.PATIENT);
     }
 
     private FindCommand parseSpecialist(String args) throws ParseException {
@@ -86,23 +76,19 @@ public class FindCommandParser implements ParserComplex<FindCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                 PREFIX_LOCATION, PREFIX_SPECIALTY);
-        List<Predicate<Person>> predicateList = setupPersonPredicates(argMultimap);
-        predicateList.add(PersonType.SPECIALIST.getSearchPredicate());
+
+        FindPredicateMap findPredicateMap = setupPersonPredicates(argMultimap);
 
         if (argMultimap.getValue(PREFIX_LOCATION).isPresent()) {
             List<String> addressKeywords = splitKeywordsByWhitespace(argMultimap, PREFIX_LOCATION);
-            predicateList.add(new LocationContainsKeywordsPredicate(addressKeywords));
+            findPredicateMap.put(PREFIX_LOCATION, new LocationContainsKeywordsPredicate(addressKeywords));
         }
-
         if (argMultimap.getValue(PREFIX_SPECIALTY).isPresent()) {
             List<String> specialtyKeywords = splitKeywordsByWhitespace(argMultimap, PREFIX_SPECIALTY);
-            predicateList.add(new SpecialtyContainsKeywordsPredicate(specialtyKeywords));
+            findPredicateMap.put(PREFIX_SPECIALTY, new SpecialtyContainsKeywordsPredicate(specialtyKeywords));
         }
 
-        Predicate<Person> combinedPredicate = person -> predicateList.stream().map(p -> p.test(person))
-                .reduce(true, (x, y) -> x && y);
-
-        return new FindCommand(combinedPredicate, PersonType.SPECIALIST);
+        return new FindCommand(findPredicateMap, PersonType.SPECIALIST);
     }
 
     private List<String> splitKeywordsByWhitespace(ArgumentMultimap argMultimap, Prefix prefix) {
@@ -114,25 +100,24 @@ public class FindCommandParser implements ParserComplex<FindCommand> {
         return new ArrayList<>();
     }
 
-    private List<Predicate<Person>> setupPersonPredicates(ArgumentMultimap argMultimap) {
-        List<Predicate<Person>> predicateList = new ArrayList<>();
-
+    private FindPredicateMap setupPersonPredicates(ArgumentMultimap argMultimap) {
+        FindPredicateMap findPredicateMap = new FindPredicateMap();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             List<String> nameKeywords = splitKeywordsByWhitespace(argMultimap, PREFIX_NAME);
-            predicateList.add(new NameContainsKeywordsPredicate(nameKeywords));
+            findPredicateMap.put(PREFIX_NAME, new NameContainsKeywordsPredicate(nameKeywords));
         }
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
             List<String> phoneKeywords = splitKeywordsByWhitespace(argMultimap, PREFIX_PHONE);
-            predicateList.add(new PhoneContainsKeywordsPredicate(phoneKeywords));
+            findPredicateMap.put(PREFIX_PHONE, new PhoneContainsKeywordsPredicate(phoneKeywords));
         }
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
             List<String> emailKeywords = splitKeywordsByWhitespace(argMultimap, PREFIX_EMAIL);
-            predicateList.add(new EmailContainsKeywordsPredicate(emailKeywords));
+            findPredicateMap.put(PREFIX_EMAIL, new EmailContainsKeywordsPredicate(emailKeywords));
         }
-
-        if (!argMultimap.getAllValues(PREFIX_TAG).isEmpty()) {
-            predicateList.add(new TagsContainsKeywordsPredicate(argMultimap.getAllValues(PREFIX_TAG)));
+        if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
+            List<String> tagKeywords = splitKeywordsByWhitespace(argMultimap, PREFIX_TAG);
+            findPredicateMap.put(PREFIX_TAG, new TagsContainsKeywordsPredicate(tagKeywords));
         }
-        return predicateList;
+        return findPredicateMap;
     }
 }

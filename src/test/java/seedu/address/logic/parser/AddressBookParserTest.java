@@ -5,14 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalPersons;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -25,14 +23,15 @@ import seedu.address.logic.commands.EditCommand.EditPatientDescriptor;
 import seedu.address.logic.commands.EditCommand.EditSpecialistDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindPredicateMap;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Patient;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonType;
 import seedu.address.model.person.Specialist;
 import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.TagsContainsKeywordsPredicate;
 import seedu.address.testutil.EditPatientDescriptorBuilder;
 import seedu.address.testutil.EditSpecialistDescriptorBuilder;
 import seedu.address.testutil.PatientBuilder;
@@ -103,40 +102,33 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_find_patient() throws Exception {
+    public void parseCommand_find_patientByName() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + CliSyntax.PATIENT_TAG + " "
                         + PREFIX_NAME
                         + keywords.stream().collect(Collectors.joining(" ")));
-        List<Person> testPersons = getTypicalPersons();
-        List<Predicate<Person>> predicateList = new ArrayList<>();
-        predicateList.add(PersonType.PATIENT.getSearchPredicate());
-        predicateList.add(new NameContainsKeywordsPredicate(keywords));
-        Predicate<Person> combinedPredicate = person -> predicateList.stream().map(p -> p.test(person))
-                .reduce(true, (x, y) -> x && y);
-        for (Person currPerson : testPersons) {
-            assertEquals(combinedPredicate.test(currPerson), command.getPredicate().test(currPerson));
-        }
+        FindPredicateMap findPredicateMap = new FindPredicateMap();
+        findPredicateMap.put(PREFIX_NAME, new NameContainsKeywordsPredicate(keywords));
+        assertEquals(findPredicateMap, command.getPredicate());
         assertEquals(PersonType.PATIENT, command.getPersonType());
     }
 
     @Test
-    public void parseCommand_find_specialist() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+    public void parseCommand_find_specialistByNameAndTags() throws Exception {
+        List<String> nameKeywords = Arrays.asList("foo", "bar", "baz");
+        List<String> tagKeywords = Arrays.asList("tag1", "tag2");
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + CliSyntax.SPECIALIST_TAG + " "
                         + PREFIX_NAME
-                        + keywords.stream().collect(Collectors.joining(" ")));
-        List<Person> testPersons = getTypicalPersons();
-        List<Predicate<Person>> predicateList = new ArrayList<>();
-        predicateList.add(PersonType.SPECIALIST.getSearchPredicate());
-        predicateList.add(new NameContainsKeywordsPredicate(keywords));
-        Predicate<Person> combinedPredicate = person -> predicateList.stream().map(p -> p.test(person))
-                .reduce(true, (x, y) -> x && y);
-        for (Person currPerson : testPersons) {
-            assertEquals(combinedPredicate.test(currPerson), command.getPredicate().test(currPerson));
-        }
+                        + nameKeywords.stream().collect(Collectors.joining(" ")) + " "
+                        + PREFIX_TAG
+                        + tagKeywords.stream().collect(Collectors.joining(" ")));
+
+        FindPredicateMap findPredicateMap = new FindPredicateMap();
+        findPredicateMap.put(PREFIX_NAME, new NameContainsKeywordsPredicate(nameKeywords));
+        findPredicateMap.put(PREFIX_TAG, new TagsContainsKeywordsPredicate(tagKeywords));
+        assertEquals(findPredicateMap, command.getPredicate());
         assertEquals(PersonType.SPECIALIST, command.getPersonType());
     }
 
