@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.ELLE;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -15,6 +16,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.financialplan.FinancialPlan;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.testutil.PersonBuilder;
@@ -160,6 +162,21 @@ public class UniquePersonListTest {
     public void setPersons_listWithDuplicatePersons_throwsDuplicatePersonException() {
         List<Person> listWithDuplicatePersons = Arrays.asList(ALICE, ALICE);
         assertThrows(DuplicatePersonException.class, () -> uniquePersonList.setPersons(listWithDuplicatePersons));
+    }
+
+    @Test
+    public void gatherEmails_noPersonFound() {
+        uniquePersonList.add(ALICE);
+        String prompt = "Sample Financial Plan 3";
+        assertEquals(new String(), uniquePersonList.gatherEmails(prompt));
+    }
+
+    @Test
+    public void gatherEmails_personFound() {
+        uniquePersonList.add(ELLE);
+        FinancialPlan elleFinancialPlan = ELLE.getFinancialPlans().iterator().next();
+        String prompt = elleFinancialPlan.toString().replaceAll("[\\[\\]\\(\\)]", "");
+        assertEquals(ELLE.getEmail().toString(), uniquePersonList.gatherEmails(prompt));
     }
 
     @Test

@@ -13,9 +13,11 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.ELLE;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.financialplan.FinancialPlan;
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
@@ -99,6 +101,21 @@ public class PersonTest {
         // different tags -> returns false
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
+    }
+
+    @Test
+    public void gatherEmails_noPersonFound() {
+        String prompt = "Sample Financial Plan 3";
+        assertEquals(new String(), ALICE.compareFinancialPlan(prompt));
+    }
+
+    @Test
+    public void gatherEmails_personFound() {
+        FinancialPlan elleFinancialPlan = ELLE.getFinancialPlans().iterator().next();
+        String prompt = elleFinancialPlan.toString().replaceAll("[\\[\\]\\(\\)]", "");
+        String prompt2 = "Sample Financial Plan 2";
+        assertEquals(ELLE.getEmail().toString(), ELLE.compareFinancialPlan(prompt));
+        assertEquals(ELLE.getEmail().toString(), ELLE.compareFinancialPlan(prompt2));
     }
 
     @Test

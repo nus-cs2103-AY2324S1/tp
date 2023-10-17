@@ -85,7 +85,7 @@ Format: `help`
 
 Add a client’s contacts to address book (name, phone number, email, home address, next-of-kin name, next-of-kin phone number) into Address Book
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS nk/NEXT_KIN nkp/NEXT_KIN_PHONE [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS nk/NEXT_KIN nkp/NEXT_KIN_PHONE [fp/FINICIAL_PLAN] [t/TAG]…​`
 
 Acceptable Values: 
 1. NAME - any value is possible
@@ -96,6 +96,7 @@ Acceptable Values:
 6. NEXT_KIN_PHONE - Numbers (0-9), and symbols, no alphabets
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+A person can have any number of Financial Plans (including 0)
 A person can have any number of tags (including 0)
 </div>
 
@@ -118,9 +119,11 @@ Format: `edit ENTRY_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nk/NE
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* When editing financial plans or tags, the existing financial plans or tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
+* You can remove all the person’s financial plans by typing `fp/` without
+  specifying any tags after it.
 
 Acceptable Values:
 1. ENTRY_INDEX - Number (1 to current size of the address book)
@@ -130,6 +133,7 @@ Acceptable Values:
 5. ADDRESS - any value is possible
 6. NEXT_KIN - any value is possible
 7. NEXT_KIN_PHONE - Numbers (0-9), and symbols, no alphabets
+8. FINANCIAL_PLAN - Alphanumeric or Space characters
 
 Examples:
 *  `edit 1 n/john doe a/23 woodlands ave 123` Edits the name and address of the 1st person to be `john doe` and `woodlands ave 123` respectively.
@@ -160,6 +164,21 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+### Gathering clients' emails by financial plan: `gather`
+
+Gathers all the emails of persons with a desired financial plan.
+
+Format: `gather PROMPT`
+
+* The search is case-sensitive. e.g `fp` will not match `Fp`
+* Persons matching at least one financial plan will be returned (i.e. `OR` search).
+
+Examples:
+* `gather Financial Plan A`
+
+Successful Output:
+`lowjunyu@gmail.com johndoe@gmail.com`
 
 ### Deleting a client's contact : `delete`
 

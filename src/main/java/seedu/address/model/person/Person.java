@@ -97,6 +97,17 @@ public class Person {
     }
 
     /**
+     * Checks if the given {@code prompt} is in the {@code financialPlans} and returns the email if true.
+     */
+    public String compareFinancialPlan(String prompt) {
+        FinancialPlan fp = new FinancialPlan(prompt);
+        if (financialPlans.contains(fp)) {
+            return this.email.toString();
+        }
+        return new String();
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
