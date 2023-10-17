@@ -23,12 +23,12 @@ public class Graduation implements Comparable<Graduation> {
     private static final int YEAR_PART_LO = 1900;
     private static final int YEAR_THRESHOLD = 70;
 
-    /** 
+    /**
      * First calendar year of the academic year, e.g. 2022 for AY2022/2023.
     */
     private final int acadYearStart;
 
-    /** 
+    /**
      * Second calendar year of the academic year, e.g. 2023 for AY2022/2023.
     */
     private final int acadYearEnd;
@@ -160,7 +160,7 @@ public class Graduation implements Comparable<Graduation> {
 
     @Override
     public String toString() {
-        StringBuilder s = new StringBuilder("AY");  
+        StringBuilder s = new StringBuilder("AY");
         s.append(String.format("%02d", acadYearStart % 100));// Get last 2 digits
         s.append(String.format("%02d", acadYearEnd % 100));
         s.append("-S");
