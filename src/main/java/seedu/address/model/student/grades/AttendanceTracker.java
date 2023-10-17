@@ -9,7 +9,7 @@ import seedu.address.commons.core.index.Index;
 /**
  * Represents a Student's AttendanceTracker grades
  * in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidAttendanceTracker(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidAttendanceTracker(int)}
  */
 public class AttendanceTracker {
 

@@ -10,7 +10,7 @@ import seedu.address.commons.core.index.Index;
 /**
  * Represents a Student's class participation grades
  * in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidClassParticipationTracker(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidClassParticipationTracker(int)}
  */
 public class ClassParticipationTracker {
 
@@ -32,7 +32,7 @@ public class ClassParticipationTracker {
     }
 
     /**
-     * Returns true if a given string is a valid number of tutorials.
+     * Returns true if a given int is a valid number of tutorials.
      */
     public static boolean isValidClassPart(int numOfTut) {
         return numOfTut >= 0;
