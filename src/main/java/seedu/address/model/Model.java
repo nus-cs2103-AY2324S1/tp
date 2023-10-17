@@ -77,6 +77,12 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    /**
+     * Deletes the given appointment.
+     * The appointment must exist in the address book.
+     */
+    void deleteAppointment(Appointment target);
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
