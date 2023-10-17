@@ -121,7 +121,8 @@ public class Graduation implements Comparable<Graduation> {
      * a graduation year and semester is valid.
      */
     public static boolean isValidGraduation(String gradString) {
-        if (gradString.matches(AY_REGEX)) {
+        String normalizedGradString = gradString.trim().toUpperCase();
+        if (normalizedGradString.matches(AY_REGEX)) {
             int year1 = parseAcadYearStart(gradString);
             int year2 = parseAcadYearEnd(gradString);
             Semester sem = parseSemester(gradString);
