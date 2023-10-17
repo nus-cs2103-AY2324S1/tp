@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
 
+import seedu.address.commons.core.FilterSettings;
 import seedu.address.commons.core.GuiSettings;
 
 /**
@@ -14,6 +15,7 @@ import seedu.address.commons.core.GuiSettings;
 public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
+    private FilterSettings filterSettings = new FilterSettings();
     private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
 
     /**
@@ -35,6 +37,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     public void resetData(ReadOnlyUserPrefs newUserPrefs) {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
+        setFilterSettings(newUserPrefs.getFilterSettings());
         setAddressBookFilePath(newUserPrefs.getAddressBookFilePath());
     }
 
@@ -45,6 +48,15 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     public void setGuiSettings(GuiSettings guiSettings) {
         requireNonNull(guiSettings);
         this.guiSettings = guiSettings;
+    }
+
+    public FilterSettings getFilterSettings() {
+        return filterSettings;
+    }
+
+    public void setFilterSettings(FilterSettings filterSettings) {
+        requireNonNull(filterSettings);
+        this.filterSettings = filterSettings;
     }
 
     public Path getAddressBookFilePath() {
@@ -69,18 +81,20 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
         UserPrefs otherUserPrefs = (UserPrefs) other;
         return guiSettings.equals(otherUserPrefs.guiSettings)
+                && filterSettings.equals(otherUserPrefs.filterSettings)
                 && addressBookFilePath.equals(otherUserPrefs.addressBookFilePath);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(guiSettings, addressBookFilePath);
+        return Objects.hash(guiSettings, filterSettings, addressBookFilePath);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Gui Settings : " + guiSettings);
+        sb.append("\nFilter Settings : " + filterSettings);
         sb.append("\nLocal data file location : " + addressBookFilePath);
         return sb.toString();
     }

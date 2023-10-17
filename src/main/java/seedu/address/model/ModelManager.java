@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import seedu.address.commons.core.FilterSettings;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
@@ -65,6 +66,17 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public FilterSettings getFilterSettings() {
+        return userPrefs.getFilterSettings();
+    }
+
+    @Override
+    public void setFilterSettings(FilterSettings filterSettings) {
+        requireNonNull(filterSettings);
+        userPrefs.setFilterSettings(filterSettings);
+    }
+
+    @Override
     public Path getAddressBookFilePath() {
         return userPrefs.getAddressBookFilePath();
     }
@@ -101,6 +113,7 @@ public class ModelManager implements Model {
     @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
+        // TODO: Maybe change behaviour of this?
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
@@ -125,6 +138,7 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
+        // TODO: update this to use the new filtered list
         filteredPersons.setPredicate(predicate);
     }
 

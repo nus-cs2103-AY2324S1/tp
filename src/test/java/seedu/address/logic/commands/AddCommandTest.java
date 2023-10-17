@@ -15,6 +15,7 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.FilterSettings;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -105,6 +106,16 @@ public class AddCommandTest {
 
         @Override
         public void setGuiSettings(GuiSettings guiSettings) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public FilterSettings getFilterSettings() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setFilterSettings(FilterSettings filterSettings) {
             throw new AssertionError("This method should not be called.");
         }
 

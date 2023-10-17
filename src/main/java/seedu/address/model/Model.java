@@ -4,6 +4,7 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.FilterSettings;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
 
@@ -33,6 +34,16 @@ public interface Model {
      * Sets the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    /**
+     * Returns the user prefs' filter settings.
+     */
+    FilterSettings getFilterSettings();
+
+    /**
+     * Sets the user prefs' filter settings.
+     */
+    void setFilterSettings(FilterSettings filterSettings);
 
     /**
      * Returns the user prefs' address book file path.
