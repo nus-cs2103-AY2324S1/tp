@@ -100,11 +100,13 @@ Examples:
 * `list -pa` Lists all patients in records.
 * `list -sp` Lists all specialists in records.
 
-### Locating persons by name: `find`
+### Locating persons by their attributes: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds persons whose attributes contain any of the given keywords. 
+Multiple attributes can be searched at once, the result will display any person
+with all attributes containing any of the corresponding keywords in the command.
 
-Format: `find -PERSON_TYPE KEYWORD [MORE_KEYWORDS]`
+Format: `find -PERSON_TYPE [PREFIX/KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -113,8 +115,10 @@ Format: `find -PERSON_TYPE KEYWORD [MORE_KEYWORDS]`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find -pa John` returns the patient `john` and the patient `John Doe`
-* `find -sp alex david` returns the specialists `Alex Yeoh` and `David Li`<br>
+* `find -pa n/John` returns the patient `john` and the patient `John Doe`
+* `find -sp n/alex david` returns the specialists `Alex Yeoh` and `David Li` 
+* `find -sp n/Alex s/Orthopaedic` returns any specialists with the name `Alex` who has the `Orthopaedic` specialty
+<br>
 
 ### Deleting a patient or specialist : `delete`
 
@@ -128,7 +132,7 @@ Format: `delete INDEX`
 
 Examples:
 * `list -pa` followed by `delete 2` deletes the 2nd patient in the listed patients. 
-* `find -sp Betsy` followed by `delete 1` deletes the 1st specialist from the specialists listed in the `find` command.
+* `find -sp n/Betsy` followed by `delete 1` deletes the 1st specialist from the specialists listed in the `find` command.
 
 ### Clearing all entries : `clear`
 
@@ -181,6 +185,6 @@ Action | Format, Examples
 **Add (specialist)** | `add -sp n/NAME p/PHONE_NUMBER s/SPECIALISATION l/LOCATION` <br> e.g., `add -sp n/Jane p/73331515 s/Dermatologist l/Ang Mo Kio`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Find** | `find -PERSON_TYPE KEYWORD [MORE_KEYWORDS]`<br> e.g., `find -pa James Jake`
+**Find** | `find -PERSON_TYPE KEYWORD [MORE_KEYWORDS]`<br> e.g., `find -pa n/James Jake p/73281193`
 **List** | `list -pa`
 **Help** | `help`
