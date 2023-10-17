@@ -126,6 +126,7 @@ public class Meeting {
      */
     public String toDisplayString() {
         return String.format("Title: %s\nLocation: %s\nStart: %s\nEnd: %s\nAttendees: %s\n", title, location,
-                meetingTime.getStart(), meetingTime.getEnd(), attendees);
+                MeetingTime.toDisplayFormat(meetingTime.getStart()), MeetingTime.toDisplayFormat(meetingTime.getEnd()),
+                attendees);
     }
 }

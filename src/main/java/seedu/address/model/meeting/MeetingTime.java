@@ -3,6 +3,7 @@ package seedu.address.model.meeting;
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -12,9 +13,10 @@ import seedu.address.commons.util.ToStringBuilder;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class MeetingTime {
+
     public static final String MESSAGE_CONSTRAINTS = "MeetingTimes should be in LocalDateTime"
             + " and start cannot be after end";
-
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd MMMM yyyy, kkmm");
     private final LocalDateTime start;
     private final LocalDateTime end;
 
@@ -36,8 +38,12 @@ public class MeetingTime {
         return end;
     }
 
+    public static String toDisplayFormat(LocalDateTime dateTime) {
+        return dateTime.format(FORMATTER);
+    }
+
     public static boolean isValidMeetingTime(LocalDateTime start, LocalDateTime end) {
-        return start.isAfter(end) ? false : true;
+        return !start.isAfter(end);
     }
 
     @Override

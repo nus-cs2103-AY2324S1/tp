@@ -34,8 +34,8 @@ public class ViewMeetingCommandTest {
         String expectedMessage = String.format(Messages.MESSAGE_MEETING_VIEWED_OVERVIEW, meetingToView.getTitle());
         String expectedDisplayString = "Title: CS2103T meeting\n"
                 + "Location: Zoom call url\n"
-                + "Start: 2023-09-20T10:00\n"
-                + "End: 2023-09-20T12:00\n"
+                + "Start: 20 September 2023, 1000\n"
+                + "End: 20 September 2023, 1200\n"
                 + "Attendees: [Alice Pauline , Benson Meier , Carl Kurz , Daniel Meier , Elle Meyer , Fiona Kunz"
                 + " , George Best ]\n";
 
@@ -63,8 +63,8 @@ public class ViewMeetingCommandTest {
         String expectedMessage = String.format(Messages.MESSAGE_MEETING_VIEWED_OVERVIEW, meetingToView.getTitle());
         String expectedDisplayString = "Title: CS2103T meeting\n"
                 + "Location: Zoom call url\n"
-                + "Start: 2023-09-20T10:00\n"
-                + "End: 2023-09-20T12:00\n"
+                + "Start: 20 September 2023, 1000\n"
+                + "End: 20 September 2023, 1200\n"
                 + "Attendees: [Alice Pauline , Benson Meier , Carl Kurz , Daniel Meier , Elle Meyer , Fiona Kunz"
                 + " , George Best ]\n";
 
