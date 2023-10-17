@@ -95,6 +95,14 @@ public interface Model {
     void setApplicant(Applicant target, Applicant editedApplicant);
 
     /**
+     * Replaces the given member {@code target} with {@code editedMember}.
+     * {@code target} must exist in the address book.
+     * The applicant identity of {@code editedMember} must not be the same as another existing member in the
+     * address book.
+     */
+    void setMember(Member target, Member editedMember);
+
+    /**
      * Returns an unmodifiable view of the filtered person list
      */
     ObservableList<Member> getFilteredMemberList();
