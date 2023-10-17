@@ -9,6 +9,7 @@ import seedu.lovebook.model.person.Age;
 import seedu.lovebook.model.person.Gender;
 import seedu.lovebook.model.person.Height;
 import seedu.lovebook.model.person.Income;
+import seedu.lovebook.model.person.horoscope.Horoscope;
 
 /**
  * Represents the preferences of the user for a date.
@@ -18,6 +19,7 @@ public class DatePrefs implements ReadOnlyDatePrefs {
     private Gender gender;
     private Height height;
     private Income income;
+    private Horoscope horoscope;
 
     /**
      * Creates a {@code DatePrefs} with default values.
@@ -27,16 +29,18 @@ public class DatePrefs implements ReadOnlyDatePrefs {
         this.gender = new Gender("F");
         this.height = new Height("170");
         this.income = new Income("10000");
+        this.horoscope = new Horoscope("Aries");
     }
 
     /**
      * Creates a {@code DatePrefs} with the given values.
      */
-    public DatePrefs(Age age, Gender gender, Height height, Income income) {
+    public DatePrefs(Age age, Gender gender, Height height, Income income, Horoscope horoscope) {
         this.age = age;
         this.gender = gender;
         this.height = height;
         this.income = income;
+        this.horoscope = horoscope;
     }
 
     /**
@@ -65,6 +69,7 @@ public class DatePrefs implements ReadOnlyDatePrefs {
         this.gender = prefs.gender;
         this.height = prefs.height;
         this.income = prefs.income;
+        this.horoscope = prefs.horoscope;
     }
 
     @Override
@@ -82,12 +87,33 @@ public class DatePrefs implements ReadOnlyDatePrefs {
         return this.age == otherPrefs.age
                 && this.height == otherPrefs.height
                 && this.gender == otherPrefs.gender
-                && this.income == otherPrefs.income;
+                && this.income == otherPrefs.income
+                && this.horoscope == otherPrefs.horoscope;
+    }
+
+    public Age getAge() {
+        return age;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public Height getHeight() {
+        return height;
+    }
+
+    public Income getIncome() {
+        return income;
+    }
+
+    public Horoscope getHoroscope() {
+        return horoscope;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.age, this.gender, this.height, this.income);
+        return Objects.hash(this.age, this.gender, this.height, this.income, this.horoscope);
     }
 
     @Override
@@ -97,6 +123,7 @@ public class DatePrefs implements ReadOnlyDatePrefs {
                 .add("gender", gender)
                 .add("height", height)
                 .add("income", income)
+                .add("horoscope", horoscope)
                 .toString();
     }
 

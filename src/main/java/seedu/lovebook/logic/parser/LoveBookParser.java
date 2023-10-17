@@ -18,6 +18,7 @@ import seedu.lovebook.logic.commands.FilterCommand;
 import seedu.lovebook.logic.commands.FindCommand;
 import seedu.lovebook.logic.commands.HelpCommand;
 import seedu.lovebook.logic.commands.ListCommand;
+import seedu.lovebook.logic.commands.SetPrefCommand;
 import seedu.lovebook.logic.parser.exceptions.ParseException;
 
 /**
@@ -77,6 +78,9 @@ public class LoveBookParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case SetPrefCommand.COMMAND_WORD:
+            return new SetPrefCommandParser().parse(arguments);
 
         case FilterCommand.COMMAND_WORD:
             return new FilterCommandParser().parse(arguments);

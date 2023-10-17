@@ -21,7 +21,7 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a date to the lovebook book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a date to the LoveBook. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_AGE + "AGE "

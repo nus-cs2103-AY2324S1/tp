@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.lovebook.logic.parser.Prefix;
+import seedu.lovebook.model.DatePrefs;
 import seedu.lovebook.model.person.Date;
 
 /**
@@ -47,7 +48,26 @@ public class Messages {
                 .append(date.getHeight())
                 .append("; Income: ")
                 .append(date.getIncome())
-                .append("; Tags: ");
+                .append("; Horoscope: ")
+                .append(date.getHoroscope());
+        return builder.toString();
+    }
+
+    /**
+     * Formats the {@code datePrefs} for display to the user.
+     */
+    public static String format(DatePrefs datePrefs) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append("Age: ")
+                .append(datePrefs.getAge())
+                .append("; Gender: ")
+                .append(datePrefs.getGender())
+                .append("; Height: ")
+                .append(datePrefs.getHeight())
+                .append("; Income: ")
+                .append(datePrefs.getIncome())
+                .append("; Horoscope: ")
+                .append(datePrefs.getHoroscope());
         return builder.toString();
     }
 
