@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
  * Represents a Person's graduation year and semester in the network book.
  * Guarantees: immutable; is valid as declared in {@link #isValidGraduation(gradString)}
  */
-public class Graduation {
+public class Graduation implements Comparable<Graduation> {
 
     public static final String MESSAGE_CONSTRAINTS = "Graduation dates should be of the format AYxxxx-Sy where:\n"
             + "1. xxxx is the 4-digit representation of the 2 calendar years in the academic year,\n"
@@ -208,6 +208,23 @@ public class Graduation {
         public final int value;
         private Semester(int value) {
             this.value = value;
+        }
+    }
+
+    @Override
+    public int compareTo(Graduation o) {
+        if (acadYearStart < o.acadYearStart) {
+            return -1;
+        } else if (acadYearStart > o.acadYearStart) {
+            return 1;
+        } else {
+            if (semester.value < o.semester.value) {
+                return -1;
+            } else if (semester.value > o.semester.value) {
+                return 1;
+            } else {
+                return 0;
+            }
         }
     }
 }
