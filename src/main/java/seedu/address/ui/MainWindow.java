@@ -24,6 +24,9 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
+    private static final String WELCOME_MESSAGE = "Welcome to Class Manager 2023!\n"
+            + "Type 'help' and press enter to see the list of commands.\n\n"
+            + "If you are using Class Manager for the first time, enter 'config' to configure your module information.";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -113,7 +116,7 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        resultDisplay = new ResultDisplay();
+        resultDisplay = new ResultDisplay(WELCOME_MESSAGE);
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());

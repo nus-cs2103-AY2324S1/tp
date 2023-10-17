@@ -88,5 +88,4 @@ public class CommandResult {
                 .add("load", load)
                 .toString();
     }
-
 }

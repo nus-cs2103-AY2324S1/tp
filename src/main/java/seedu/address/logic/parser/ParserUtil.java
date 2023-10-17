@@ -17,7 +17,7 @@ import seedu.address.model.student.StudentNumber;
 import seedu.address.model.tag.Tag;
 
 /**
- * Contains utility methods used for parsing strings in the various *Parser classes.
+ * Contains utility methods used for parsing arguments in the various *Parser classes.
  */
 public class ParserUtil {
 
@@ -66,7 +66,6 @@ public class ParserUtil {
         return new Phone(trimmedPhone);
     }
 
-
     /**
      * Parses a {@code String email} into an {@code Email}.
      * Leading and trailing whitespaces will be trimmed.
@@ -112,8 +111,6 @@ public class ParserUtil {
         return new ClassDetails(trimmedClassDetails);
     }
 
-
-
     /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
@@ -140,6 +137,4 @@ public class ParserUtil {
         }
         return tagSet;
     }
-
-
 }

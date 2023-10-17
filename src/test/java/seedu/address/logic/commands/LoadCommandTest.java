@@ -6,7 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.LoadCommand.MESSAGE_FILE_CANNOT_LOAD;
 import static seedu.address.logic.commands.LoadCommand.MESSAGE_FILE_NOT_FOUND;
-import static seedu.address.logic.commands.LoadCommand.MESSAGE_SUCCESS;
+import static seedu.address.logic.commands.LoadCommand.MESSAGE_LOAD_SUCCESS;
 import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
 
 import java.nio.file.Path;
@@ -39,7 +39,7 @@ public class LoadCommandTest {
         Model expectedModel = new ModelManager();
         loadAddressBook(expectedModel, validFileName, validFilePath);
         CommandResult expectedCommandResult = new CommandResult(
-                String.format(MESSAGE_SUCCESS, validFileName), false, false, true);
+                String.format(MESSAGE_LOAD_SUCCESS, validFileName), false, false, true);
         assertCommandSuccess(loadCommand, model, expectedCommandResult, expectedModel);
     }
 

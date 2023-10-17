@@ -8,16 +8,15 @@ import seedu.address.model.student.grades.AttendanceTracker;
 import seedu.address.model.student.grades.ClassParticipationTracker;
 
 /**
- * Represents a Student's Class Number
- * in the address book.
+ * Represents a Student's Class Number in Class Manager.
  * Guarantees: immutable; is valid as declared in {@link #isValidClassDetails(String)}
  */
 public class ClassDetails {
 
-    public static final int TEMP_LENGTH = 10;
-
     public static final String MESSAGE_CONSTRAINTS = "Class number can take any values, and it should not be blank";
 
+    public static int TUTORIAL_COUNT;
+    public static int ASSIGNMENT_COUNT;
     /*
      * The class number should start with "T".
      */
@@ -39,9 +38,9 @@ public class ClassDetails {
         requireNonNull(classDetails);
         checkArgument(isValidClassDetails(classDetails), MESSAGE_CONSTRAINTS);
         value = classDetails;
-        attendanceTracker = new AttendanceTracker(TEMP_LENGTH);
-        classParticipationTracker = new ClassParticipationTracker(TEMP_LENGTH);
-        assignmentTracker = new AssignmentTracker(TEMP_LENGTH);
+        attendanceTracker = new AttendanceTracker(TUTORIAL_COUNT);
+        classParticipationTracker = new ClassParticipationTracker(TUTORIAL_COUNT);
+        assignmentTracker = new AssignmentTracker(ASSIGNMENT_COUNT);
     }
 
     /**

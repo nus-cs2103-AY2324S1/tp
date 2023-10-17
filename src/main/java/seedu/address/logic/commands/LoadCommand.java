@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE;
 
 import java.io.File;
 import java.nio.file.Path;
@@ -20,20 +21,15 @@ import seedu.address.storage.JsonAddressBookStorage;
 public class LoadCommand extends Command {
 
     public static final String COMMAND_WORD = "load";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Load student information from an existing JSON file in the data folder. "
             + "The file becomes the new default save file. "
-            + "Parameters: f/FILE_NAME\n"
-            + "Example: " + COMMAND_WORD + " "
-            + "f/export-v1";
-
-    public static final String MESSAGE_SUCCESS = "The file %1$s.json has successfully loaded!\n"
+            + "Parameters: " + PREFIX_FILE + "FILE_NAME\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_FILE + "export-v1";
+    public static final String MESSAGE_LOAD_SUCCESS = "The file %1$s.json has successfully loaded!\n"
             + "This will be the new default save file.\n";
-
     public static final String MESSAGE_FILE_NOT_FOUND = "The file %1$s.json cannot be found.\n"
             + "Please make sure the file is in the /data folder.\n";
-
     public static final String MESSAGE_FILE_CANNOT_LOAD = "The file %1$s.json cannot be loaded.\n"
             + "Please make sure the file is formatted correctly.\n";
 
@@ -74,7 +70,7 @@ public class LoadCommand extends Command {
         }
         model.setAddressBookFilePath(filePath);
         model.setAddressBook(newData);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, fileName), false, false, true);
+        return new CommandResult(String.format(MESSAGE_LOAD_SUCCESS, fileName), false, false, true);
     }
 
     /**

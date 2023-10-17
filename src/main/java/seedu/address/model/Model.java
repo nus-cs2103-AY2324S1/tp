@@ -46,6 +46,16 @@ public interface Model {
     void setAddressBookFilePath(Path addressBookFilePath);
 
     /**
+     * Returns true if the user has configured the module information.
+     */
+    boolean getConfigured();
+
+    /**
+     * User has configured the module information.
+     */
+    void setConfigured();
+
+    /**
      * Replaces address book data with the data in {@code addressBook}.
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);

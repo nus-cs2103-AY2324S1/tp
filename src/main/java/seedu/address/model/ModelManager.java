@@ -76,6 +76,22 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
+    /**
+     * Returns true if the user has configured the module information.
+     */
+    @Override
+    public boolean getConfigured() {
+        return userPrefs.getConfigured();
+    }
+
+    /**
+     * User has configured the module information.
+     */
+    @Override
+    public void setConfigured() {
+        userPrefs.setConfigured();
+    }
+
     //=========== AddressBook ================================================================================
 
     @Override
