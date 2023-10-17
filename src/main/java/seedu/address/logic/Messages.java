@@ -54,8 +54,7 @@ public class Messages {
      * Formats the {@code interview} for display to the user.
      */
     public static String formatInterview(Interview interview) {
-        return interview.getInterviewId()
-                + "; Applicant: "
+        return "Applicant: "
                 + interview.getInterviewApplicant()
                 + "; Role: "
                 + interview.getJobRole()

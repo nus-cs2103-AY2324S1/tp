@@ -23,11 +23,11 @@ public class AddInterviewCommand extends Command {
             + "Parameters: "
             + PREFIX_APPLICANT + "APPLICANT_ID "
             + PREFIX_JOB_ROLE + "ROLE "
-            + PREFIX_TIMING + "TIMING "
+            + PREFIX_TIMING + "TIMING"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_APPLICANT + "18 "
             + PREFIX_JOB_ROLE + "Junior Software Engineer "
-            + PREFIX_TIMING + "2023-10-24 18:00 ";
+            + PREFIX_TIMING + "2023-10-24 18:00";
 
     public static final String MESSAGE_SUCCESS = "New interview added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "Error: This is a duplicate interview";
@@ -35,7 +35,7 @@ public class AddInterviewCommand extends Command {
     private final Interview toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Interview}
+     * Creates an AddInterviewCommand to add the specified {@code Interview}
      */
     public AddInterviewCommand(Interview interview) {
         requireNonNull(interview);

@@ -13,8 +13,8 @@ import seedu.address.model.interview.exceptions.InterviewNotFoundException;
 
 /**
  * A list of interviews that enforces uniqueness between its elements and does not allow nulls.
- * A interview is considered unique by comparing using {@code Interview#isValidInterview(Interview)}.
- * As such, adding and updating of Interviews uses Interview#isValidInterview(Interview) for equality
+ * A interview is considered unique by comparing using {@code Interview#isNotValidOrNewInterview(Interview)}.
+ * As such, adding and updating of Interviews uses Interview#isNotValidOrNewInterview(Interview) for equality
  * so as to ensure that the interview being added or updated is unique in terms of identity in the UniqueInterviewList.
  * However, the removal of an interview uses Interview#equals(Object) so as to ensure that the interview
  * with exactly the same fields will be removed.
@@ -32,7 +32,7 @@ public class UniqueInterviewList implements Iterable<Interview> {
      */
     public boolean contains(Interview toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isValidInterview);
+        return internalList.stream().anyMatch(toCheck::isNotValidOrNewInterview);
     }
 
     /**
@@ -60,7 +60,7 @@ public class UniqueInterviewList implements Iterable<Interview> {
             throw new InterviewNotFoundException();
         }
 
-        if (!target.isValidInterview(editedInterview) && contains(editedInterview)) {
+        if (!target.isNotValidOrNewInterview(editedInterview) && contains(editedInterview)) {
             throw new DuplicateInterviewException();
         }
 
@@ -139,7 +139,7 @@ public class UniqueInterviewList implements Iterable<Interview> {
     private boolean interviewsAreUnique(List<Interview> interviews) {
         for (int i = 0; i < interviews.size() - 1; i++) {
             for (int j = i + 1; j < interviews.size(); j++) {
-                if (interviews.get(i).isValidInterview(interviews.get(j))) {
+                if (interviews.get(i).isNotValidOrNewInterview(interviews.get(j))) {
                     return false;
                 }
             }

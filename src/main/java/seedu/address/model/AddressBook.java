@@ -13,7 +13,7 @@ import seedu.address.model.person.UniquePersonList;
 
 /**
  * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Duplicates are not allowed (by .isSamePerson and .isNotValidOrNewInterview comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
@@ -53,12 +53,20 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the interview list with {@code interviews}.
+     * {@code interviews} must not contain duplicate persons.
+     */
+    public void setInterviews(List<Interview> interviews) {
+        this.interviews.setInterviews(interviews);
+    }
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setInterviews(newData.getInterviewList());
     }
 
     //// person-level operations

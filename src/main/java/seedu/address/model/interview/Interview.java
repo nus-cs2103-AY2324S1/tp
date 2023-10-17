@@ -6,15 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
  * Represents an Interview in the address book.
  */
 public class Interview {
-    /**
-     * Static counter of how many Interview objects have been globally created.
-     * Used as the unique ID (until int limit 2,147,483,647) for Interview objects.
-     * Limit is presumed to not feasibly be reached ever since the application is constrained to
-     * 'no remote server, single user'
-     */
-    private static int globalInterviewId = 0;
 
-    private int interviewId;
     /** TODO Change from 'String' to 'Applicant' once Applicant is on master*/
     private String applicant;
     private String jobRole;
@@ -27,8 +19,6 @@ public class Interview {
      */
     public Interview(String app, String role, String timing) {
         requireAllNonNull(app, role, timing);
-        incrementGlobalInterviewId();
-        interviewId = getGlobalInterviewId();
         applicant = app;
         jobRole = role;
         interviewTiming = timing;
@@ -38,18 +28,14 @@ public class Interview {
      * Returns true if both Interviews have the same Applicant & Timing or if both Interviews are the same object
      * Adapted from AB3's Person.isSamePerson() method
      */
-    public boolean isValidInterview(Interview otherInterview) {
+    public boolean isNotValidOrNewInterview(Interview otherInterview) {
         if (otherInterview == this) {
             return true;
         }
 
         return otherInterview != null
-                && otherInterview.getInterviewTiming() == getInterviewTiming()
+                && otherInterview.getInterviewTiming().equals(getInterviewTiming())
                 && otherInterview.getInterviewApplicant().equals(getInterviewApplicant());
-    }
-
-    public int getInterviewId() {
-        return interviewId;
     }
 
     /* TODO Update return type from String to Applicant */
@@ -65,15 +51,26 @@ public class Interview {
         return interviewTiming;
     }
 
-    public static int getGlobalInterviewId() {
-        return globalInterviewId;
-    }
-
     /**
-     * Increments the interviewId counter by 1.
+     * Returns true if both interviews have the same identity and data fields.
+     * This defines a stronger notion of equality between two interviews
+     * Mostly used for testing purposes
      */
-    public static void incrementGlobalInterviewId() {
-        globalInterviewId += 1;
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Interview)) {
+            return false;
+        }
+
+        Interview otherInterview = (Interview) other;
+        return applicant.equals(otherInterview.applicant)
+                && jobRole.equals(otherInterview.jobRole)
+                && interviewTiming.equals(otherInterview.interviewTiming);
     }
 
 }
