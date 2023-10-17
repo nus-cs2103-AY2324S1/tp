@@ -11,11 +11,13 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import networkbook.commons.exceptions.IllegalValueException;
+import networkbook.model.person.Course;
 import networkbook.model.person.Email;
 import networkbook.model.person.GraduatingYear;
 import networkbook.model.person.Link;
 import networkbook.model.person.Name;
 import networkbook.model.person.Phone;
+import networkbook.model.person.Specialisation;
 import networkbook.model.tag.Tag;
 import networkbook.testutil.TypicalPersons;
 
@@ -116,6 +118,25 @@ public class JsonAdaptedPersonTest {
                         VALID_LINKS, INVALID_GRADUATING_YEAR, VALID_COURSE,
                         VALID_SPECIALISATION, VALID_TAGS, VALID_PRIORITY);
         String expectedMessage = GraduatingYear.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+    @Test
+    public void toModelType_invalidCourse_throwsIllegalValueException() {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAILS,
+                        VALID_LINKS, VALID_GRADUATING_YEAR, INVALID_COURSE,
+                        VALID_SPECIALISATION, VALID_TAGS, VALID_PRIORITY);
+        String expectedMessage = Course.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidSpecialisation_throwsIllegalValueException() {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAILS,
+                        VALID_LINKS, VALID_GRADUATING_YEAR, VALID_COURSE,
+                        INVALID_SPECIALISATION, VALID_TAGS, VALID_PRIORITY);
+        String expectedMessage = Specialisation.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
