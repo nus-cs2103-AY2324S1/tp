@@ -45,7 +45,7 @@ public class UniqueApplicantList implements Iterable<Applicant> {
     /**
      * Adds a Applicant to the list.
      * The Applicant must not already exist in the list.
-     * catches RuntimeExceptions such as:
+     * catches {@code RuntimeException} such as:
      * ClassCastException, NullPointerException, IllegalArgumentException
      */
     public void add(Applicant toAdd) {
@@ -64,7 +64,7 @@ public class UniqueApplicantList implements Iterable<Applicant> {
      * Replaces the applicant {@code target} in the list with {@code editedApplicant}.
      * {@code target} must exist in the list.
      * The applicant identity of {@code editedApplicant} must not be the same as another existing applicant in the list.
-     * catches RuntimeExceptions such as:
+     * catches {@code RuntimeException} such as:
      * ClassCastException, NullPointerException, IllegalArgumentException, IndexOutOfBoundsException
      */
     public void setApplicant(Applicant target, Applicant editedApplicant) {
@@ -105,6 +105,7 @@ public class UniqueApplicantList implements Iterable<Applicant> {
     /**
      * Replaces the contents of this list with {@code applicants}.
      * {@code applicants} must not contain duplicate applicants.
+     * Catches {@code RuntimeException} such as NullPointerException
      */
     public void setApplicants(List<Applicant> applicants) {
         requireAllNonNull(applicants);
@@ -114,7 +115,7 @@ public class UniqueApplicantList implements Iterable<Applicant> {
 
         try {
             internalList.setAll(applicants);
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             logger.info("Error setting applicants: " + StringUtil.getDetails(e));
         }
     }
