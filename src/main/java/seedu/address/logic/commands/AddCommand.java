@@ -44,8 +44,8 @@ public class AddCommand extends Command {
             + PREFIX_AVAILABILITY + "NotAvailable "
             + PREFIX_ANIMAL_NAME + "Dexter "
             + PREFIX_ANIMAL_TYPE + "current.Dog "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_TAG + "Urgent "
+            + PREFIX_TAG + "goodWithDogs";
 
     public static final String MESSAGE_SUCCESS = "New fosterer added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
