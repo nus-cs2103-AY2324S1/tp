@@ -77,15 +77,15 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 
-### Adding a new contact: `new contact` [Coming Soon]
+### Adding a new contact: `add`
 
 Creates a new contact with the specified name and course code.
 
-Format: `new contact /name <Name> /course <Optional: Course Code> /grp <Optional: Tutorial Group Number>`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL id/STUDENT_ID [t/COURSE_CODE TUROTIAL_GROUP]...`
 
 Examples:
-* `new contact /name Fu Yiqiao`
-* `new contact /name Fu Yiqiao /course CS2103T /grp T09`
+* `add n/Fu Yiqiao p/91234567 e/fyq@gmail.com id/A1234567E`
+* `add n/Fu Yiqiao p/91234567 e/fyq@gmail.com id/A1234567E t/CS2103T G2`
 
 ### Marking attendance of student: `mark` [Coming Soon]
 
@@ -141,42 +141,21 @@ Examples:
 *  `list students` Shows a list of all students.
 *  `list students /tg T09` Shows a list of the students in tutorial group T09.
 
-### Editing a contact name : `edit name` [Coming Soon]
+### Editing a contact : `edit`
 
-Edits the contact name.
+Edits the contact details.
 
-Format: `edit name /oldname <oldName> /newname <newName>`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [id/STUDENT_ID] [t/COURSE_CODE TUROTIAL_GROUP]...`
 
-Examples:
-*  `edit name /oldname Fu Yiqiao /newname Tan Liyan` Edits the student with name Fu Yiqiao to Tan Liyan
-
-### Editing a contact course : `edit course`
-
-Edits the module associated with the contact.
-
-Format: `edit course <Name> /oldcourse <oldCourse> <newCourse>`
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-To remove a module, simply leave the newMod section empty
-</div>
+* Edits the person at the specified INDEX. The index refers to the index number shown in the displayed person list. The index must be a positive integer 1, 2, 3, …
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* You can remove all the person’s tags by typing t/ without specifying any tags after it.
 
 Examples:
-*  `edit mod Fu Yiqiao /oldmod CS2103T CS2101` Edits the module with code CS2103T to CS2101
-*  `edit mod Fu Yiqiao /oldmod CS2103T` Removes the module with code CS2103T from the contact
-
-### Editing tutorial group number : `edit grp` [Coming Soon]
-
-Edits the tutorial group number associated with the contact.
-
-Format: `edit grp <Name> /oldgrp <oldgrp> /newgrp <newgrp>`
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-To remove a group number, simply leave out the newgrp section
-</div>
-
-Examples:
-*  `edit grp Fu Yiqiao /oldgrp T09 /newgrp T10` Edits the group from T09 to T10
-*  `edit grp Fu Yiqiao /oldgrp T09` Removes the group number from the contact
+*  `edit 1 n/Tan Liyan` Edits the name of the first person to be Tan Liyan.
+*  `edit 2 p/92345678 t/` Edits the phone number of the second person and removes all tags.
 
 ### Adding a filter: `filter add` [Coming Soon]
 
@@ -270,12 +249,12 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `new contact /name <Name> /course <Optional: Course Code> /grp <Optional: Tutorial Group Number>` <br>
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit name /oldname <oldName> /newname <newName>`<br> `edit course <Name> /oldcourse <oldCourse> <newCourse>`<br> `edit grp <Name> /oldgrp <oldgrp> /newgrp <newgrp>`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+| Action     | Format, Examples                                                                                |
+|------------|-------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL id/STUDENT_ID [t/COURSE_CODE TUROTIAL_GROUP]...` <br>        |
+| **Clear**  | `clear`                                                                                         |
+| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                             |
+| **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [id/STUDENT_ID] [t/COURSE_CODE TUROTIAL_GROUP]...`<br> |
+| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                      |
+| **List**   | `list`                                                                                          |
+| **Help**   | `help`                                                                                          |

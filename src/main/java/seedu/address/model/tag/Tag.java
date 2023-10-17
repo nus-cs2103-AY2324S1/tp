@@ -10,19 +10,25 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Tag {
 
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
-
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
     public final String tagName;
+    public final String courseCode;
+    public final String tutorialGroup;
 
     /**
      * Constructs a {@code Tag}.
      *
-     * @param tagName A valid tag name.
+     * @param tagName A valid tagName.
      */
     public Tag(String tagName) {
         requireNonNull(tagName);
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
+        String[] str = tagName.split(" ", 1);
+        String courseCode = str[0];
+        String tutorialGroup = str.length == 2 ? str[1] : null;
         this.tagName = tagName;
+        this.courseCode = courseCode;
+        this.tutorialGroup = tutorialGroup;
     }
 
     public String getTagName() {
@@ -61,6 +67,14 @@ public class Tag {
      */
     public String toString() {
         return '[' + tagName + ']';
+    }
+
+    public String getCourseCode() {
+        return courseCode;
+    }
+
+    public String getTutorialGroup() {
+        return tutorialGroup;
     }
 
 }
