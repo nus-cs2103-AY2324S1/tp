@@ -2,7 +2,6 @@ package networkbook.ui;
 
 import static networkbook.logic.commands.CommandTestUtil.VALID_COURSE_BOB;
 import static networkbook.logic.commands.CommandTestUtil.VALID_GRADUATING_YEAR_BOB;
-import static networkbook.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static networkbook.logic.commands.CommandTestUtil.VALID_SPECIALISATION_BOB;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
