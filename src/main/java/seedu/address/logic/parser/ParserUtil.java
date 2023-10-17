@@ -9,6 +9,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.financialplan.FinancialPlan;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -123,6 +124,34 @@ public class ParserUtil {
             throw new ParseException(NextOfKinPhone.MESSAGE_CONSTRAINTS);
         }
         return new NextOfKinPhone(trimmedNokPhone);
+    }
+
+
+    /**
+     * Parses a {@code String financialPlan} into a {@code FinancialPlan}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code tag} is invalid.
+     */
+    public static FinancialPlan parseFinancialPlan(String financialPlan) throws ParseException {
+        requireNonNull(financialPlan);
+        String trimmedFinancialPlan = financialPlan.trim();
+        if (!FinancialPlan.isValidFinancialPlanName(trimmedFinancialPlan)) {
+            throw new ParseException(FinancialPlan.MESSAGE_CONSTRAINTS);
+        }
+        return new FinancialPlan(trimmedFinancialPlan);
+    }
+
+    /**
+     * Parses {@code Collection<String> financialPlans} into a {@code Set<FinancialPlan>}.
+     */
+    public static Set<FinancialPlan> parseFinancialPlans(Collection<String> financialPlans) throws ParseException {
+        requireNonNull(financialPlans);
+        final Set<FinancialPlan> financialPlanSet = new HashSet<>();
+        for (String financialPlanName : financialPlans) {
+            financialPlanSet.add(parseFinancialPlan(financialPlanName));
+        }
+        return financialPlanSet;
     }
 
     /**

@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.financialplan.FinancialPlan;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -25,20 +26,22 @@ public class Person {
     private final Address address;
     private final NextOfKinName nextOfKinName;
     private final NextOfKinPhone nextOfKinPhone;
+    private final Set<FinancialPlan> financialPlans = new HashSet<>();
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, NextOfKinName nextOfKinName,
-                  NextOfKinPhone nextOfKinPhone, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, nextOfKinName, nextOfKinPhone, tags);
+                  NextOfKinPhone nextOfKinPhone, Set<FinancialPlan> financialPlans, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, nextOfKinName, nextOfKinPhone, financialPlans, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.nextOfKinName = nextOfKinName;
         this.nextOfKinPhone = nextOfKinPhone;
+        this.financialPlans.addAll(financialPlans);
         this.tags.addAll(tags);
     }
 
@@ -62,6 +65,14 @@ public class Person {
     }
     public NextOfKinPhone getNextOfKinPhone() {
         return nextOfKinPhone;
+    }
+
+    /**
+     * Returns an immutable financial plan set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<FinancialPlan> getFinancialPlans() {
+        return Collections.unmodifiableSet(financialPlans);
     }
 
     /**
@@ -107,13 +118,14 @@ public class Person {
                 && address.equals(otherPerson.address)
                 && nextOfKinName.equals(otherPerson.nextOfKinName)
                 && nextOfKinPhone.equals(otherPerson.nextOfKinPhone)
+                && financialPlans.equals(otherPerson.financialPlans)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, nextOfKinName, nextOfKinPhone, tags);
+        return Objects.hash(name, phone, email, address, nextOfKinName, nextOfKinPhone, financialPlans, tags);
     }
 
     @Override
@@ -125,6 +137,7 @@ public class Person {
                 .add("address", address)
                 .add("nextOfKinName", nextOfKinName)
                 .add("nextOfKinPhone", nextOfKinPhone)
+                .add("financialPlans", financialPlans)
                 .add("tags", tags)
                 .toString();
     }
