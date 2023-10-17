@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TestData.ALICE;
 import static seedu.address.testutil.TestData.VALID_NOTE_BOB;
-import static seedu.address.testutil.TestData.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.TestData.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -21,6 +20,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.exceptions.DuplicateContactException;
 import seedu.address.testutil.ContactBuilder;
+import seedu.address.testutil.TestData;
 
 public class AddressBookTest {
 
@@ -46,7 +46,9 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicateContacts_throwsDuplicateContactException() {
         // Two contacts with the same identity fields
-        Contact editedAlice = new ContactBuilder(ALICE).withNote(VALID_NOTE_BOB).withTags(VALID_TAG_HUSBAND)
+        Contact editedAlice = new ContactBuilder(ALICE)
+                .withNote(VALID_NOTE_BOB)
+                .withTags(TestData.Valid.Tag.ALPHANUMERIC_SPACES)
                 .build();
         List<Contact> newContacts = Arrays.asList(ALICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newContacts);
@@ -73,14 +75,19 @@ public class AddressBookTest {
     @Test
     public void hasContact_contactWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addContact(ALICE);
-        Contact editedAlice = new ContactBuilder(ALICE).withNote(VALID_NOTE_BOB).withTags(VALID_TAG_HUSBAND)
+        Contact editedAlice = new ContactBuilder(ALICE)
+                .withNote(VALID_NOTE_BOB)
+                .withTags(TestData.Valid.Tag.ALPHANUMERIC_SPACES)
                 .build();
         assertTrue(addressBook.hasContact(editedAlice));
     }
 
     @Test
     public void getContactList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getContactList().remove(0));
+        assertThrows(
+            UnsupportedOperationException.class,
+            () -> addressBook.getContactList().remove(0)
+        );
     }
 
     @Test

@@ -8,13 +8,10 @@ import static seedu.address.testutil.TestData.INDEX_FIRST_CONTACT;
 import static seedu.address.testutil.TestData.INVALID_EMAIL;
 import static seedu.address.testutil.TestData.INVALID_NAME;
 import static seedu.address.testutil.TestData.INVALID_PHONE;
-import static seedu.address.testutil.TestData.INVALID_TAG;
 import static seedu.address.testutil.TestData.VALID_EMAIL_AMY;
 import static seedu.address.testutil.TestData.VALID_NAME_AMY;
 import static seedu.address.testutil.TestData.VALID_NOTE_BOB;
 import static seedu.address.testutil.TestData.VALID_PHONE_AMY;
-import static seedu.address.testutil.TestData.VALID_TAG_FRIEND;
-import static seedu.address.testutil.TestData.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.TestData.WHITESPACE;
 
 import java.util.Arrays;
@@ -30,6 +27,7 @@ import seedu.address.model.contact.Name;
 import seedu.address.model.contact.Note;
 import seedu.address.model.contact.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.testutil.TestData;
 
 
 public class ParserUtilTest {
@@ -148,19 +146,21 @@ public class ParserUtilTest {
 
     @Test
     public void parseTag_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTag(INVALID_TAG));
+        assertThrows(ParseException.class, () -> ParserUtil.parseTag(TestData.Invalid.Tag.UNDERSCORE_DASH));
     }
 
     @Test
     public void parseTag_validValueWithoutWhitespace_returnsTag() throws Exception {
-        Tag expectedTag = new Tag(VALID_TAG_FRIEND);
-        assertEquals(expectedTag, ParserUtil.parseTag(VALID_TAG_FRIEND));
+        assertEquals(
+            new Tag(TestData.Valid.Tag.ALPHANUMERIC),
+            ParserUtil.parseTag(TestData.Valid.Tag.ALPHANUMERIC)
+        );
     }
 
     @Test
     public void parseTag_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
-        String tagWithWhitespace = WHITESPACE + VALID_TAG_FRIEND + WHITESPACE;
-        Tag expectedTag = new Tag(VALID_TAG_FRIEND);
+        String tagWithWhitespace = WHITESPACE + TestData.Valid.Tag.ALPHANUMERIC + WHITESPACE;
+        Tag expectedTag = new Tag(TestData.Valid.Tag.ALPHANUMERIC);
         assertEquals(expectedTag, ParserUtil.parseTag(tagWithWhitespace));
     }
 
@@ -171,7 +171,14 @@ public class ParserUtilTest {
 
     @Test
     public void parseTags_collectionWithInvalidTags_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTags(Arrays.asList(VALID_TAG_FRIEND, INVALID_TAG)));
+        assertThrows(
+            ParseException.class,
+            () -> {
+                ParserUtil.parseTags(
+                    Arrays.asList(TestData.Valid.Tag.ALPHANUMERIC, TestData.Invalid.Tag.HASHTAG)
+                );
+            }
+        );
     }
 
     @Test
@@ -181,9 +188,15 @@ public class ParserUtilTest {
 
     @Test
     public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
-        Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_FRIEND, VALID_TAG_HUSBAND));
-        Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_FRIEND),
-                new Tag(VALID_TAG_HUSBAND)));
+        Set<Tag> actualTagSet = ParserUtil.parseTags(
+            Arrays.asList(TestData.Valid.Tag.ALPHANUMERIC, TestData.Valid.Tag.ALPHANUMERIC_SPACES)
+        );
+        Set<Tag> expectedTagSet = new HashSet<Tag>(
+            Arrays.asList(
+                new Tag(TestData.Valid.Tag.ALPHANUMERIC),
+                new Tag(TestData.Valid.Tag.ALPHANUMERIC_SPACES)
+            )
+        );
 
         assertEquals(expectedTagSet, actualTagSet);
     }

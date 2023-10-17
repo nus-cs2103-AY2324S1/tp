@@ -7,30 +7,21 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TestData.AMY;
-import static seedu.address.testutil.TestData.BOB;
 import static seedu.address.testutil.TestData.EMAIL_DESC_AMY;
 import static seedu.address.testutil.TestData.EMAIL_DESC_BOB;
 import static seedu.address.testutil.TestData.INVALID_EMAIL_DESC;
 import static seedu.address.testutil.TestData.INVALID_NAME_DESC;
 import static seedu.address.testutil.TestData.INVALID_PHONE_DESC;
-import static seedu.address.testutil.TestData.INVALID_TAG_DESC;
 import static seedu.address.testutil.TestData.NAME_DESC_AMY;
 import static seedu.address.testutil.TestData.NAME_DESC_BOB;
 import static seedu.address.testutil.TestData.NOTE_DESC_AMY;
 import static seedu.address.testutil.TestData.NOTE_DESC_BOB;
 import static seedu.address.testutil.TestData.PHONE_DESC_AMY;
 import static seedu.address.testutil.TestData.PHONE_DESC_BOB;
-import static seedu.address.testutil.TestData.PREAMBLE_NON_EMPTY;
-import static seedu.address.testutil.TestData.PREAMBLE_WHITESPACE;
-import static seedu.address.testutil.TestData.TAG_DESC_FRIEND;
-import static seedu.address.testutil.TestData.TAG_DESC_HUSBAND;
 import static seedu.address.testutil.TestData.VALID_EMAIL_BOB;
 import static seedu.address.testutil.TestData.VALID_NAME_BOB;
 import static seedu.address.testutil.TestData.VALID_NOTE_BOB;
 import static seedu.address.testutil.TestData.VALID_PHONE_BOB;
-import static seedu.address.testutil.TestData.VALID_TAG_FRIEND;
-import static seedu.address.testutil.TestData.VALID_TAG_HUSBAND;
 
 import org.junit.jupiter.api.Test;
 
@@ -38,31 +29,43 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.contact.Contact;
 import seedu.address.testutil.ContactBuilder;
+import seedu.address.testutil.TestData;
+
+
 
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Contact expectedContact = new ContactBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
+        // Various whitespace in front
+        assertParseSuccess(
+            parser,
+            TestData.WHITESPACE
+                    + NAME_DESC_AMY
+                    + PHONE_DESC_AMY
+                    + EMAIL_DESC_AMY
+                    + NOTE_DESC_AMY
+                    + TestData.Valid.Tag.FLAG_ALPHANUMERIC,
+            new AddCommand(TestData.Valid.Contact.AMY)
+        );
 
-        // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + NOTE_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedContact));
-
-
-        // multiple tags - all accepted
-        Contact expectedContactMultipleTags = new ContactBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
-                .build();
+        // Multiple tags, "different" specified order
         assertParseSuccess(parser,
-                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + NOTE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                new AddCommand(expectedContactMultipleTags));
+            NAME_DESC_BOB
+                    + PHONE_DESC_BOB
+                    + EMAIL_DESC_BOB
+                    + NOTE_DESC_BOB
+                    + TestData.Valid.Tag.FLAG_ALPHANUMERIC_SPACES
+                    + TestData.Valid.Tag.FLAG_ALPHANUMERIC,
+            new AddCommand(TestData.Valid.Contact.BOB)
+        );
     }
 
     @Test
     public void parse_repeatedNonTagValue_failure() {
         String validExpectedPersonString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + NOTE_DESC_BOB + TAG_DESC_FRIEND;
+                + NOTE_DESC_BOB + TestData.Valid.Tag.FLAG_ALPHANUMERIC;
 
         // multiple names
         assertParseFailure(parser, NAME_DESC_AMY + validExpectedPersonString,
@@ -119,7 +122,7 @@ public class AddCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Contact expectedContact = new ContactBuilder(AMY).withTags().build();
+        Contact expectedContact = new ContactBuilder(TestData.Valid.Contact.AMY).withTags().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + NOTE_DESC_AMY,
                 new AddCommand(expectedContact));
     }
@@ -153,27 +156,34 @@ public class AddCommandParserTest {
     public void parse_invalidValue_failure() {
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + NOTE_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Messages.MESSAGE_NAME_CONSTRAINTS);
+                + TestData.Valid.Tag.FLAG_ALPHANUMERIC, Messages.MESSAGE_NAME_CONSTRAINTS);
 
         // invalid phone
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC + EMAIL_DESC_BOB + NOTE_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Messages.MESSAGE_PHONE_CONSTRAINTS);
+                + TestData.Valid.Tag.FLAG_ALPHANUMERIC, Messages.MESSAGE_PHONE_CONSTRAINTS);
 
         // invalid email
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC + NOTE_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Messages.MESSAGE_EMAIL_CONSTRAINTS);
+                + TestData.Valid.Tag.FLAG_ALPHANUMERIC, Messages.MESSAGE_EMAIL_CONSTRAINTS);
 
         // invalid tag
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + NOTE_DESC_BOB
-                + INVALID_TAG_DESC + VALID_TAG_FRIEND, Messages.MESSAGE_TAG_CONSTRAINTS);
+        assertParseFailure(
+            parser,
+            NAME_DESC_BOB
+                    + PHONE_DESC_BOB
+                    + EMAIL_DESC_BOB
+                    + NOTE_DESC_BOB
+                    + TestData.Invalid.Tag.FLAG_HASHTAG,
+            Messages.tagInvalid(TestData.Invalid.Tag.HASHTAG)
+        );
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + INVALID_PHONE_DESC + EMAIL_DESC_BOB + NOTE_DESC_BOB,
                 Messages.MESSAGE_NAME_CONSTRAINTS);
 
         // non-empty preamble
-        assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + NOTE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+        assertParseFailure(parser, TestData.EXTRA_WORDS + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                + NOTE_DESC_BOB + TestData.Valid.Tag.FLAG_ALPHANUMERIC,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 }
