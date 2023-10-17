@@ -2,15 +2,18 @@ package seedu.address.model.appointment;
 
 import static java.util.Objects.requireNonNull;
 
+/**
+ * AppointmentDescription class to contain description.
+ */
 public class AppointmentDescription {
 
-    public static final String MESSAGE_CONSTRAINTS = "It is mandatory for the description to be filled. It should " +
-            "only consist of alphanumeric characters and spaces.";
+    public static final String MESSAGE_CONSTRAINTS = "It is mandatory for the description to be filled. It should "
+            + "only consist of alphanumeric characters and spaces.";
 
     private String description;
 
     /**
-     *
+     * Constructor method
      * @param description description to be included in the appointment
      */
     public AppointmentDescription(String description) {
@@ -19,6 +22,7 @@ public class AppointmentDescription {
     }
 
     /**
+     * Checks for validity of characters in appointment description
      *
      * @param appointmentDescription string text by user input
      * @return whether the string only contains alphanumeric characters, numbers and hyphens

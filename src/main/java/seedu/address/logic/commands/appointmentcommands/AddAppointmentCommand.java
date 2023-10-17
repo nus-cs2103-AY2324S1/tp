@@ -1,10 +1,10 @@
 package seedu.address.logic.commands.appointmentcommands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_END;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_PATIENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.List;
@@ -20,6 +20,9 @@ import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.AppointmentTime;
 import seedu.address.model.person.Person;
 
+/**
+ * AddAppointmentCommand class to create and add new appointment.
+ */
 public class AddAppointmentCommand extends Command {
 
     public static final String COMMAND_WORD = "schedule";
@@ -71,29 +74,29 @@ public class AddAppointmentCommand extends Command {
         currAppointment.setPatient(personToAdd);
 
         // Start time comes before End time
-        final String MESSAGE_APPOINTMENT_ORDERING = "Your start time is either before or on the same time as the End " +
-                "time. Start time should be before End time.";
+        String messageAppointmentOrdering = "Your start time is either before or on the same time as the End "
+                + "time. Start time should be before End time.";
         if (!AppointmentTime.isValidOrderingOfTime(currAppointment)) {
-            throw new CommandException((MESSAGE_APPOINTMENT_ORDERING));
+            throw new CommandException((messageAppointmentOrdering));
         }
 
         // Clash in appointment slot
-        final String MESSAGE_APPOINTMENT_CLASH = "Please choose another timing for the appointment. There " +
-                "already exists another appointment in this timing that clashes with the requested appointment.";
+        String messageAppointmentClash = "Please choose another timing for the appointment. There "
+                + "already exists another appointment in this timing that clashes with the requested appointment.";
         if (!AppointmentTime.isValidTimeSlot(appList, currAppointment)) {
-            throw new CommandException(MESSAGE_APPOINTMENT_CLASH);
+            throw new CommandException(messageAppointmentClash);
         }
 
         // Appointment already exists
-        final String MESSAGE_APPOINTMENT_ALREADY_EXISTS = "This appointment has already been" +
-                "created and we have taken note!";
+        String messageAppointmentAlreadyExists = "This appointment has already been"
+                + "created and we have taken note!";
         if (model.hasAppointment(currAppointment)) {
-            throw new CommandException(MESSAGE_APPOINTMENT_ALREADY_EXISTS);
+            throw new CommandException(messageAppointmentAlreadyExists);
         }
 
         model.addAppointment(currAppointment);
-        String APPOINTMENT_CONFIRMATION = "New appointment scheduled: %1$s.";
-        return new CommandResult(String.format(APPOINTMENT_CONFIRMATION, currAppointment),
+        String appointmentConfirmation = "New appointment scheduled: %1$s.";
+        return new CommandResult(String.format(appointmentConfirmation, currAppointment),
                 false, false, true);
     }
 
@@ -106,7 +109,8 @@ public class AddAppointmentCommand extends Command {
             return true;
         }
 
-        // if Object other is of type AddAppointmentCommand, cast it to type AddAppointmentCommand and compare the containing
+        // if Object other is of type AddAppointmentCommand, cast it to type AddAppointmentCommand and compare the
+        // containing
         // currAppointment
         if (other instanceof AddAppointmentCommand) {
             AddAppointmentCommand otherAppointment = (AddAppointmentCommand) other;

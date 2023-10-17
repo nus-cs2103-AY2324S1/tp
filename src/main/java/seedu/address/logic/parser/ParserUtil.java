@@ -12,7 +12,6 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.AppointmentDescription;
 import seedu.address.model.appointment.AppointmentTime;
 import seedu.address.model.person.Address;
@@ -180,6 +179,13 @@ public class ParserUtil {
         return localDateTime;
     }
 
+    /**
+     * Used in AddAppointmentCommandParser class to parse out the patient's index
+     *
+     * @param patientIndex string number containing patient's index
+     * @return integer that was conveyed in the string
+     * @throws ParseException input text does not contain a number
+     */
     public static int parsePatientIndex(String patientIndex) throws ParseException {
         requireNonNull(patientIndex);
         String trimmedDateTime = patientIndex.trim();

@@ -1,11 +1,10 @@
 package seedu.address.logic.parser.appointmentparser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_END;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_PATIENT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_START;
 
 import java.time.LocalDateTime;
 import java.util.stream.Stream;
@@ -38,7 +37,7 @@ public class AddAppointmentCommandParser implements Parser<AddAppointmentCommand
                 ArgumentTokenizer.tokenize(args, PREFIX_APPOINTMENT_PATIENT, PREFIX_APPOINTMENT_START,
                         PREFIX_APPOINTMENT_END, PREFIX_APPOINTMENT_DESCRIPTION);
 
-        if (!arePrefixesPresent(argMultimap,  PREFIX_APPOINTMENT_PATIENT, PREFIX_APPOINTMENT_START,
+        if (!arePrefixesPresent(argMultimap, PREFIX_APPOINTMENT_PATIENT, PREFIX_APPOINTMENT_START,
                 PREFIX_APPOINTMENT_END, PREFIX_APPOINTMENT_DESCRIPTION)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -50,8 +49,8 @@ public class AddAppointmentCommandParser implements Parser<AddAppointmentCommand
 
         LocalDateTime startTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_APPOINTMENT_START).get());
         LocalDateTime endTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_APPOINTMENT_END).get());
-        AppointmentDescription appointmentDescription = ParserUtil.parseDescription(argMultimap.
-                getValue(PREFIX_APPOINTMENT_DESCRIPTION).get());
+        AppointmentDescription appointmentDescription = ParserUtil.parseDescription(argMultimap
+                .getValue(PREFIX_APPOINTMENT_DESCRIPTION).get());
 
         AppointmentTime appointmentTime;
         try {
