@@ -1,158 +1,92 @@
 package seedu.address.model.person;
 
-
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
-
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
-
+import seedu.address.commons.util.ToStringBuilder;
 
 /**
  * Represents a Team in the address book.
- * An instance of Team consists of a TeamLeader and multiple Developers.
+ * Each team consists of one TeamLeader and multiple Developers.
  */
 public class Team {
-
-    private final int leaderHashCode;
-    private String teamName = "unassigned";
-
-
-    //todo: set will ignore duplicated values, do we need to notify the user that he added a duplicate value or not?
-    //use the hash code for representing each developer. The hash code will be updated when there is a change
-    //to the developer's information.
-    private final List<Integer> developerHashCodes;
-
-    /**
-     * Constructs a new Team instance with the specified TeamLeader.
-     *
-     * @param leader The leader of the team.
-     */
-    public Team(TeamLeader leader) {
-        this.leaderHashCode = leader.hashCode();
-        this.developerHashCodes = new ArrayList<>();
-    }
+    private IdentityCode leaderIdentityCode;
+    private String teamName;
+    private final Set<IdentityCode> developerIdentityCodes;
 
     /**
      * Constructs a new Team instance with the specified TeamLeader and team name.
      *
-     * @param leader The leader of the team.
+     * @param leaderIdentityCode The IdentityCode of the team leader.
      * @param teamName The name of the team.
      */
-    public Team(TeamLeader leader, String teamName) {
-        this.leaderHashCode = leader.hashCode();
-        this.developerHashCodes = new ArrayList<>();
+    public Team(IdentityCode leaderIdentityCode, String teamName) {
+        this.leaderIdentityCode = leaderIdentityCode;
         this.teamName = teamName;
-    }
-
-
-    public boolean hasDeveloper(int developerHashCode) {
-        return this.developerHashCodes.contains(developerHashCode);
+        this.developerIdentityCodes = new HashSet<>();
     }
 
     /**
-     * Adds a Developer to the team.
+     * Adds a Developer's IdentityCode to the team.
      *
-     * @param developerHashCode The developer hash code to be added.
+     * @param developerIdentityCode The IdentityCode of the developer to be added.
      */
-    public void addDeveloper(int developerHashCode) {
-        if (hasDeveloper(developerHashCode)) {
-            throw new DuplicatePersonException();
-        } else {
-            this.developerHashCodes.add(developerHashCode);
-        }
+    public void addDeveloper(IdentityCode developerIdentityCode) {
+        developerIdentityCodes.add(developerIdentityCode);
     }
 
     /**
-     * Adds a Developer to the team.
+     * Removes a Developer's IdentityCode from the team.
      *
-     * @param developer The developer to be added.
+     * @param developerIdentityCode The IdentityCode of the developer to be removed.
+     * @return true if the developer was part of the team and was removed, false otherwise.
      */
-    public void addDeveloper(Developer developer) {
-        addDeveloper(developer.hashCode());
-    }
-
-
-
-    /**
-     * Removes a Developer to the team.
-     *
-     * @param developerHashCode The developer to be removed.
-     */
-    public void removeDeveloper(int developerHashCode) {
-        if (hasDeveloper(developerHashCode)) {
-            this.developerHashCodes.remove(developerHashCode);
-        } else {
-            throw new PersonNotFoundException();
-        }
-    }
-
-
-    /**
-     * Retrieves the TeamLeader of the team.
-     *
-     * @return The TeamLeader of the team.
-     */
-    public int getLeaderHashCode() {
-        return leaderHashCode;
-    }
-
-
-    public boolean isSameTeam(Team team) {
-        //return hasSameTeamName(team) && hasSameTeamLeader(team) && hasSameDevelopers(team);
-        return hasSameTeamName(team);
-    }
-
-    public boolean hasSameTeamLeader(Team team) {
-        requireAllNonNull(team);
-        return leaderHashCode == team.getLeaderHashCode();
-    }
-
-    public boolean hasSameDevelopers(Team team) {
-        requireAllNonNull(team);
-
-        //todo: fix this warning
-        return developerHashCodes.equals(team.getLeaderHashCode());
-    }
-
-    public boolean hasSameTeamName(Team team) {
-        return this.teamName.equals(team.getTeamName());
+    public boolean removeDeveloper(IdentityCode developerIdentityCode) {
+        return developerIdentityCodes.remove(developerIdentityCode);
     }
 
     /**
-     * Retrieves the Set of Developers in the team.
+     * Updates the TeamLeader of the team.
      *
-     * @return A Set of Developers.
+     * @param leaderIdentityCode The new TeamLeader's IdentityCode.
      */
-    public List<Integer> getDevelopers() {
-        return developerHashCodes;
+    public void setTeamLeader(IdentityCode leaderIdentityCode) {
+        this.leaderIdentityCode = leaderIdentityCode;
     }
 
-    public void setTeamName(String teamName) {
-        this.teamName = teamName;
+    /**
+     * Retrieves the TeamLeader's IdentityCode of the team.
+     *
+     * @return The TeamLeader's IdentityCode.
+     */
+    public IdentityCode getTeamLeaderIdentityCode() {
+        return this.leaderIdentityCode;
     }
+
+    /**
+     * Retrieves the set of Developers' IdentityCodes in the team.
+     *
+     * @return A set of Developers' IdentityCodes.
+     */
+    public Set<IdentityCode> getDeveloperIdentityCodes() {
+        return developerIdentityCodes;
+    }
+
+    /**
+     * Retrieves the name of the team.
+     *
+     * @return The team's name.
+     */
     public String getTeamName() {
-        return teamName;
+        return this.teamName;
     }
 
     @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof Team)) {
-            return false;
-        }
-
-        Team otherTeam = (Team) other;
-        return isSameTeam(otherTeam);
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("Team Name", teamName)
+                .add("Team Leader", leaderIdentityCode)
+                .add("Developer List", developerIdentityCodes)
+                .toString();
     }
-
-
 }
