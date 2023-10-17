@@ -36,7 +36,7 @@ public class ConTextTest {
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
+    public void resetData_withValidReadOnlyConText_replacesData() {
         ConText newData = getTypicalConText();
         ConText.resetData(newData);
         assertEquals(newData, ConText);
@@ -61,18 +61,18 @@ public class ConTextTest {
     }
 
     @Test
-    public void hasContact_contactNotInAddressBook_returnsFalse() {
+    public void hasContact_contactNotInConText_returnsFalse() {
         assertFalse(ConText.hasContact(ALICE));
     }
 
     @Test
-    public void hasContact_contactInAddressBook_returnsTrue() {
+    public void hasContact_contactInConText_returnsTrue() {
         ConText.addContact(ALICE);
         assertTrue(ConText.hasContact(ALICE));
     }
 
     @Test
-    public void hasContact_contactWithSameIdentityFieldsInAddressBook_returnsTrue() {
+    public void hasContact_contactWithSameIdentityFieldsInConText_returnsTrue() {
         ConText.addContact(ALICE);
         Contact editedAlice = new ContactBuilder(ALICE)
                 .withNote(VALID_NOTE_BOB)
@@ -96,7 +96,7 @@ public class ConTextTest {
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose contacts list can violate interface constraints.
+     * A stub ReadOnlyConText whose contacts list can violate interface constraints.
      */
     private static class ConTextStub implements ReadOnlyConText {
         private final ObservableList<Contact> contacts = FXCollections.observableArrayList();
