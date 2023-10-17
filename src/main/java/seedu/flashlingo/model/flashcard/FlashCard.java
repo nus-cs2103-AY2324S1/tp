@@ -1,9 +1,10 @@
 package seedu.flashlingo.model.flashcard;
 
+import java.util.Date;
+
 import seedu.flashlingo.model.flashcard.words.OriginalWord;
 import seedu.flashlingo.model.flashcard.words.TranslatedWord;
 
-import java.util.Date;
 
 /**
  * Represents each flashcard
@@ -132,6 +133,10 @@ public class FlashCard {
         this.whenToReview = new Date(new Date().getTime() + timeInMs);
     }
 
+    /**
+     * Undo function to reset selection of "Yes" or "No" upon incorrect selection.
+     * Without undoing, should not be able to select "Yes" or "No" again
+     */
     public void undo() {
         if (isUpdated) {
             this.getProficiencyLevel().setLevel(originalLevel);

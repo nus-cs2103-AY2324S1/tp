@@ -3,11 +3,21 @@ package seedu.flashlingo.model.flashcard.words;
 /**
  * Encapsulates an input word
  */
-abstract public class Word {
+abstract class Word {
     /** The input word **/
     private final String word;
     /** The input word's language **/
     private final String language;
+
+    /**
+     * Constructs a new Word
+     * @param word The input word
+     * @param language The input Word's language
+     */
+    public Word(String word, String language) {
+        this.word = word;
+        this.language = language;
+    }
 
     /**
      * Evaluates whether this word is an original word
@@ -22,16 +32,6 @@ abstract public class Word {
     abstract boolean isTranslatedWord();
 
     /**
-     * Constructs a new Word
-     * @param word The input word
-     * @param language The input Word's language
-     */
-    public Word(String word, String language) {
-        this.word = word;
-        this.language = language;
-    }
-
-    /**
      * Evaluates and returns this word
      * @return The word encapsulated by this
      */
@@ -43,7 +43,7 @@ abstract public class Word {
      * Evaluates and returns this word's language
      * @return Language of this word
      */
-    public String getLanguage(){
+    public String getLanguage() {
         return language;
     }
 
