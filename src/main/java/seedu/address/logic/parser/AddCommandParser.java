@@ -63,15 +63,15 @@ public class AddCommandParser implements ParserComplex<AddCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE_PATIENT));
         }
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_AGE, PREFIX_MEDICALHISTORY);
+                PREFIX_AGE);
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Age age = ParserUtil.parseAge(argMultimap.getValue(PREFIX_AGE).get());
-        MedicalHistory medicalHistory = ParserUtil.parseMedicalHistory(argMultimap
-                .getValue(PREFIX_MEDICALHISTORY).get());
+        Set<MedicalHistory> medicalHistory = ParserUtil.parseMedicalHistories(argMultimap
+                .getAllValues(PREFIX_MEDICALHISTORY));
 
         Patient patient = new Patient(name, phone, email, tagList, age, medicalHistory);
         return patient;

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -19,32 +20,29 @@ import seedu.address.model.tag.Tag;
 
 class JsonAdaptedPatient extends JsonAdaptedPerson {
     private final String age;
-    private final String medicalHistory;
+    private final List<JsonAdaptedMedicalHistory> medicalHistory = new ArrayList<>();
     @JsonCreator
     public JsonAdaptedPatient(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
 
                              @JsonProperty("email") String email,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("age") String age,
-                              @JsonProperty("MedicalHistory") String medicalHistory) {
+                              @JsonProperty("MedicalHistory") List<JsonAdaptedMedicalHistory> medicalHistory) {
         super(name, phone, email, tags);
         this.age = age;
-        this.medicalHistory = medicalHistory;
+        if (medicalHistory != null) {
+            this.medicalHistory.addAll(medicalHistory);
+        }
     }
 
     public JsonAdaptedPatient(Patient source) {
         super(source);
         this.age = source.getAge().value;
-        this.medicalHistory = source.getMedicalHistory().value;
+        medicalHistory.addAll(source.getMedicalHistory().stream()
+                .map(JsonAdaptedMedicalHistory::new)
+                .collect(Collectors.toList()));
     }
 
-    public String getMedicalHistory() throws IllegalValueException {
-        if (medicalHistory == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    MedicalHistory.class.getSimpleName()));
-        }
-        if (!MedicalHistory.isValidMedicalHistory(medicalHistory)) {
-            throw new IllegalValueException(MedicalHistory.MESSAGE_CONSTRAINTS);
-        }
+    public List<JsonAdaptedMedicalHistory> getMedicalHistory() throws IllegalValueException {
         return medicalHistory;
     }
 
@@ -65,13 +63,17 @@ class JsonAdaptedPatient extends JsonAdaptedPerson {
         for (JsonAdaptedTag tag : getTags()) {
             personTags.add(tag.toModelType());
         }
+        final List<MedicalHistory> patientMedicalHistory = new ArrayList<>();
+        for (JsonAdaptedMedicalHistory medicalHistory: getMedicalHistory()) {
+            patientMedicalHistory.add(medicalHistory.toModelType());
+        }
 
         final Name modelName = new Name(getName());
         final Phone modelPhone = new Phone(getPhone());
         final Email modelEmail = new Email(getEmail());
         final Set<Tag> modelTags = new HashSet<>(personTags);
         final Age age = new Age(getAge());
-        final MedicalHistory medicalHistory = new MedicalHistory(getMedicalHistory());
+        final Set<MedicalHistory> medicalHistory = new HashSet<>(patientMedicalHistory);
 
         return new Patient(modelName, modelPhone, modelEmail, modelTags, age, medicalHistory);
 

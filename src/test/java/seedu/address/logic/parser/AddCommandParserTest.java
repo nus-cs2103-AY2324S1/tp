@@ -35,7 +35,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICALHISTORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SPECIALTY;
@@ -160,10 +159,6 @@ public class AddCommandParserTest {
         assertParseComplexFailure(parser, INVALID_SPECIALTY_DESC + validExpectedSpecialistString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_SPECIALTY), PersonType.SPECIALIST);
 
-        // invalid medical history
-        assertParseComplexFailure(parser, INVALID_MEDICAL_HISTORY_DESC + validExpectedPatientString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_MEDICALHISTORY), PersonType.PATIENT);
-
         // invalid age
         assertParseComplexFailure(parser, INVALID_AGE_DESC + validExpectedPatientString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_AGE), PersonType.PATIENT);
@@ -188,10 +183,6 @@ public class AddCommandParserTest {
         // invalid specialty
         assertParseComplexFailure(parser, validExpectedSpecialistString + INVALID_SPECIALTY_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_SPECIALTY), PersonType.SPECIALIST);
-
-        // invalid medical history
-        assertParseComplexFailure(parser, validExpectedPatientString + INVALID_MEDICAL_HISTORY_DESC,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_MEDICALHISTORY), PersonType.PATIENT);
 
         // invalid age
         assertParseComplexFailure(parser, validExpectedPatientString + INVALID_AGE_DESC,

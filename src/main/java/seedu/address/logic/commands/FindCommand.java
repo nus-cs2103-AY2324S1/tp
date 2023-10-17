@@ -35,11 +35,11 @@ public class FindCommand extends Command {
 
     private static final String PERSON_EXAMPLE =
             PREFIX_NAME + "John Doe "
-                    + PREFIX_PHONE + "98765432 "
-                    + PREFIX_EMAIL + "johnd@example.com "
-                    + PREFIX_LOCATION + "311, Clementi Ave 2, #02-25 "
-                    + PREFIX_TAG + "friends "
-                    + PREFIX_TAG + "owesMoney ";
+            + PREFIX_PHONE + "98765432 "
+            + PREFIX_EMAIL + "johnd@example.com "
+            + PREFIX_LOCATION + "311, Clementi Ave 2, #02-25 "
+            + PREFIX_TAG + "friends "
+            + PREFIX_TAG + "owesMoney ";
 
     public static final String MESSAGE_USAGE_PATIENT = COMMAND_WORD + " "
             + PATIENT_TAG
@@ -66,22 +66,26 @@ public class FindCommand extends Command {
             + PERSON_EXAMPLE
             + PREFIX_SPECIALTY + "Physiotherapist ";
 
-    private final Predicate<Person> predicate;
+
+    private final FindPredicateMap findPredicateMap;
     private final PersonType personType;
 
     /**
-     * @param predicate The predicate that describes the name being searched for
+     * @param findPredicateMap The predicate that describes the name being searched for
      * @param personType The type of person being searched for i.e. patient or specialist
      */
-    public FindCommand(Predicate<Person> predicate, PersonType personType) {
-        this.predicate = predicate;
+    public FindCommand(FindPredicateMap findPredicateMap, PersonType personType) {
+        this.findPredicateMap = findPredicateMap;
         this.personType = personType;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
+        Predicate<Person> predicate = person -> findPredicateMap.getAllPredicates().stream()
+                .map(pred -> pred.test(person))
+                .reduce(true, (x, y) -> x && y);
+        model.updateFilteredPersonList(predicate.and(personType.getSearchPredicate()));
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
@@ -98,13 +102,14 @@ public class FindCommand extends Command {
         }
 
         FindCommand otherFindCommand = (FindCommand) other;
-        return predicate.equals(otherFindCommand.predicate) && personType.equals(otherFindCommand.personType);
+        return findPredicateMap.equals(otherFindCommand.findPredicateMap)
+                && personType.equals(otherFindCommand.personType);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("predicate", predicate)
+                .add("predicate", findPredicateMap)
                 .add("personType", personType)
                 .toString();
     }
@@ -113,7 +118,7 @@ public class FindCommand extends Command {
         return personType;
     }
 
-    public Predicate<Person> getPredicate() {
-        return predicate;
+    public FindPredicateMap getPredicate() {
+        return findPredicateMap;
     }
 }
