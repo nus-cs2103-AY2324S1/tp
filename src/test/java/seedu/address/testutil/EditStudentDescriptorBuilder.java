@@ -6,11 +6,11 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditStudentDescriptor;
+import seedu.address.model.risklevel.RiskLevel;
 import seedu.address.model.student.Address;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
-import seedu.address.model.tag.Tag;
 
 /**
  * A utility class to help with building EditStudentDescriptor objects.
@@ -67,7 +67,7 @@ public class EditStudentDescriptorBuilder {
      * that we are building.
      */
     public EditStudentDescriptorBuilder withTags(String... tags) {
-        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
+        Set<RiskLevel> tagSet = Stream.of(tags).map(RiskLevel::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
         return this;
     }

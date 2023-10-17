@@ -1,6 +1,6 @@
 package seedu.address.testutil;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.WellNus;
 import seedu.address.model.student.Student;
 
 /**
@@ -10,25 +10,25 @@ import seedu.address.model.student.Student;
  */
 public class AddressBookBuilder {
 
-    private AddressBook addressBook;
+    private WellNus wellNus;
 
     public AddressBookBuilder() {
-        addressBook = new AddressBook();
+        wellNus = new WellNus();
     }
 
-    public AddressBookBuilder(AddressBook addressBook) {
-        this.addressBook = addressBook;
+    public AddressBookBuilder(WellNus wellNus) {
+        this.wellNus = wellNus;
     }
 
     /**
      * Adds a new {@code Student} to the {@code AddressBook} that we are building.
      */
     public AddressBookBuilder withStudent(Student student) {
-        addressBook.addStudent(student);
+        wellNus.addStudent(student);
         return this;
     }
 
-    public AddressBook build() {
-        return addressBook;
+    public WellNus build() {
+        return wellNus;
     }
 }

@@ -59,7 +59,7 @@ public class EditStudentDescriptorTest {
         String expected = EditCommand.EditStudentDescriptor.class.getCanonicalName() + "{name="
                 + editStudentDescriptor.getName().orElse(null) + ", phone="
                 + editStudentDescriptor.getPhone().orElse(null) + ", address="
-                + editStudentDescriptor.getAddress().orElse(null) + ", tags="
+                + editStudentDescriptor.getAddress().orElse(null) + ", risk level="
                 + editStudentDescriptor.getTags().orElse(null) + "}";
         assertEquals(expected, editStudentDescriptor.toString());
     }

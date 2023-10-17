@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.risklevel.RiskLevel;
 
 /**
  * Represents a Student in the address book.
@@ -22,17 +22,17 @@ public class Student {
 
     // Data fields
     private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Set<RiskLevel> riskLevel = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Student(Name name, Phone phone, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, address, tags);
+    public Student(Name name, Phone phone, Address address, Set<RiskLevel> riskLevel) {
+        requireAllNonNull(name, phone, address, riskLevel);
         this.name = name;
         this.phone = phone;
         this.address = address;
-        this.tags.addAll(tags);
+        this.riskLevel.addAll(riskLevel);
     }
 
     public Name getName() {
@@ -51,8 +51,8 @@ public class Student {
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Set<RiskLevel> getTags() {
+        return Collections.unmodifiableSet(riskLevel);
     }
 
     /**
@@ -87,13 +87,13 @@ public class Student {
         return name.equals(otherStudent.name)
                 && phone.equals(otherStudent.phone)
                 && address.equals(otherStudent.address)
-                && tags.equals(otherStudent.tags);
+                && riskLevel.equals(otherStudent.riskLevel);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, address, tags);
+        return Objects.hash(name, phone, address, riskLevel);
     }
 
     @Override
@@ -102,7 +102,7 @@ public class Student {
                 .add("name", name)
                 .add("phone", phone)
                 .add("address", address)
-                .add("tags", tags)
+                .add("tags", riskLevel)
                 .toString();
     }
 

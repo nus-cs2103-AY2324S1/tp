@@ -19,11 +19,11 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.risklevel.RiskLevel;
 import seedu.address.model.student.Address;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
-import seedu.address.model.tag.Tag;
 
 /**
  * Edits the details of an existing student in the address book.
@@ -88,11 +88,10 @@ public class EditCommand extends Command {
      */
     private static Student createEditedStudent(Student studentToEdit, EditStudentDescriptor editStudentDescriptor) {
         assert studentToEdit != null;
-
         Name updatedName = editStudentDescriptor.getName().orElse(studentToEdit.getName());
         Phone updatedPhone = editStudentDescriptor.getPhone().orElse(studentToEdit.getPhone());
         Address updatedAddress = editStudentDescriptor.getAddress().orElse(studentToEdit.getAddress());
-        Set<Tag> updatedTags = editStudentDescriptor.getTags().orElse(studentToEdit.getTags());
+        Set<RiskLevel> updatedTags = editStudentDescriptor.getTags().orElse(studentToEdit.getTags());
 
         return new Student(updatedName, updatedPhone, updatedAddress, updatedTags);
     }
@@ -129,7 +128,7 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Address address;
-        private Set<Tag> tags;
+        private Set<RiskLevel> riskLevel;
 
         public EditStudentDescriptor() {}
 
@@ -141,14 +140,14 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setAddress(toCopy.address);
-            setTags(toCopy.tags);
+            setTags(toCopy.riskLevel);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, address, riskLevel);
         }
 
         public void setName(Name name) {
@@ -179,8 +178,8 @@ public class EditCommand extends Command {
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
          */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        public void setTags(Set<RiskLevel> tags) {
+            this.riskLevel = (tags != null) ? new HashSet<>(tags) : null;
         }
 
         /**
@@ -188,8 +187,8 @@ public class EditCommand extends Command {
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code tags} is null.
          */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        public Optional<Set<RiskLevel>> getTags() {
+            return (riskLevel != null) ? Optional.of(Collections.unmodifiableSet(riskLevel)) : Optional.empty();
         }
 
         @Override
@@ -207,7 +206,7 @@ public class EditCommand extends Command {
             return Objects.equals(name, otherEditStudentDescriptor.name)
                     && Objects.equals(phone, otherEditStudentDescriptor.phone)
                     && Objects.equals(address, otherEditStudentDescriptor.address)
-                    && Objects.equals(tags, otherEditStudentDescriptor.tags);
+                    && Objects.equals(riskLevel, otherEditStudentDescriptor.riskLevel);
         }
 
         @Override
@@ -216,7 +215,7 @@ public class EditCommand extends Command {
                     .add("name", name)
                     .add("phone", phone)
                     .add("address", address)
-                    .add("tags", tags)
+                    .add("risk level", riskLevel)
                     .toString();
         }
     }

@@ -4,8 +4,11 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.appointment.Appointment;
+import seedu.address.model.appointment.UniqueAppointmentList;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.UniqueStudentList;
 
@@ -13,9 +16,10 @@ import seedu.address.model.student.UniqueStudentList;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSameStudent comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class WellNus implements ReadOnlyWellNus {
 
     private final UniqueStudentList students;
+    private final UniqueAppointmentList appointments;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -26,14 +30,15 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         students = new UniqueStudentList();
+        appointments = new UniqueAppointmentList();
     }
 
-    public AddressBook() {}
+    public WellNus() {}
 
     /**
      * Creates an AddressBook using the Students in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public WellNus(ReadOnlyWellNus toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -51,7 +56,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyWellNus newData) {
         requireNonNull(newData);
 
         setStudents(newData.getStudentList());
@@ -95,6 +100,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         students.remove(key);
     }
 
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeAppointment(Appointment key) {
+        appointments.remove(key);
+    }
     //// util methods
 
     @Override
@@ -109,6 +121,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         return students.asUnmodifiableObservableList();
     }
 
+    //TODO: make use of Appointment List class once created
+    @Override
+    public ObservableList<Appointment> getAppointmentList() {
+        return FXCollections.observableArrayList();
+    }
+
+
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -116,12 +136,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddressBook)) {
+        if (!(other instanceof WellNus)) {
             return false;
         }
 
-        AddressBook otherAddressBook = (AddressBook) other;
-        return students.equals(otherAddressBook.students);
+        WellNus otherWellNus = (WellNus) other;
+        return students.equals(otherWellNus.students);
     }
 
     @Override

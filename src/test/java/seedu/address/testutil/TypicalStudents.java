@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.WellNus;
 import seedu.address.model.student.Student;
 
 /**
@@ -60,8 +60,8 @@ public class TypicalStudents {
     /**
      * Returns an {@code AddressBook} with all the typical students.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static WellNus getTypicalAddressBook() {
+        WellNus ab = new WellNus();
         for (Student student : getTypicalStudents()) {
             ab.addStudent(student);
         }

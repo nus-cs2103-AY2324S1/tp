@@ -11,47 +11,46 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.student.Student;
+import seedu.address.model.appointment.Appointment;
 
 /**
  * Panel containing the list of students.
  */
-public class StudentListPanel extends UiPart<Region> {
-    private static final String FXML = "StudentListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(StudentListPanel.class);
+public class AppointmentListPanel extends UiPart<Region> {
+    private static final String FXML = "AppointmentListPanel.fxml";
+    private final Logger logger = LogsCenter.getLogger(AppointmentListPanel.class);
 
     @FXML
     private VBox columnContainer;
     @FXML
     private Label columnTitle;
     @FXML
-    private ListView<Student> studentListView;
+    private ListView<Appointment> appointmentListView;
 
     /**
      * Creates a {@code StudentListPanel} with the given {@code ObservableList}.
      */
-    public StudentListPanel(ObservableList<Student> studentList) {
+    public AppointmentListPanel(ObservableList<Appointment> appointmentList) {
         super(FXML);
         columnContainer.setAlignment(Pos.CENTER);
-        studentListView.setItems(studentList);
-        studentListView.setCellFactory(listView -> new StudentListViewCell());
+        appointmentListView.setItems(appointmentList);
+        appointmentListView.setCellFactory(listView -> new AppointmentListViewCell());
     }
 
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Student} using a {@code StudentCard}.
      */
-    class StudentListViewCell extends ListCell<Student> {
+    class AppointmentListViewCell extends ListCell<Appointment> {
         @Override
-        protected void updateItem(Student student, boolean empty) {
-            super.updateItem(student, empty);
+        protected void updateItem(Appointment appointment, boolean empty) {
+            super.updateItem(appointment, empty);
 
-            if (empty || student == null) {
+            if (empty || appointment == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new StudentCard(student, getIndex() + 1).getRoot());
+                setGraphic(new AppointmentCard(appointment, getIndex() + 1).getRoot());
             }
         }
     }
-
 }

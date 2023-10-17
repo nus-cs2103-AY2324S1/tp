@@ -3,11 +3,11 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.risklevel.RiskLevel;
 import seedu.address.model.student.Address;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -22,7 +22,7 @@ public class StudentBuilder {
     private Name name;
     private Phone phone;
     private Address address;
-    private Set<Tag> tags;
+    private Set<RiskLevel> riskLevel;
 
     /**
      * Creates a {@code StudentBuilder} with the default details.
@@ -31,7 +31,7 @@ public class StudentBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         address = new Address(DEFAULT_ADDRESS);
-        tags = new HashSet<>();
+        riskLevel = new HashSet<>();
     }
 
     /**
@@ -41,7 +41,7 @@ public class StudentBuilder {
         name = studentToCopy.getName();
         phone = studentToCopy.getPhone();
         address = studentToCopy.getAddress();
-        tags = new HashSet<>(studentToCopy.getTags());
+        riskLevel = new HashSet<>(studentToCopy.getTags());
     }
 
     /**
@@ -56,7 +56,7 @@ public class StudentBuilder {
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Student} that we are building.
      */
     public StudentBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
+        this.riskLevel = SampleDataUtil.getTagSet(tags);
         return this;
     }
 
@@ -77,7 +77,7 @@ public class StudentBuilder {
     }
 
     public Student build() {
-        return new Student(name, phone, address, tags);
+        return new Student(name, phone, address, riskLevel);
     }
 
 }
