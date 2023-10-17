@@ -4,6 +4,7 @@ import static seedu.staffsnap.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.staffsnap.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.staffsnap.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.staffsnap.testutil.TypicalIndexes.INDEX_FIRST_APPLICANT;
+import static seedu.staffsnap.testutil.TypicalIndexes.INDEX_SECOND_APPLICANT;
 
 import org.junit.jupiter.api.Test;
 
@@ -23,10 +24,21 @@ public class DeleteCommandParserTest {
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
         assertParseSuccess(parser, "1", new DeleteCommand(INDEX_FIRST_APPLICANT));
+        assertParseSuccess(parser, "2", new DeleteCommand(INDEX_SECOND_APPLICANT));
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        // input is not integer
+        assertParseFailure(parser, "a",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+
+        // input is whitespace
+        assertParseFailure(parser, " ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+
+        // input is empty string
+        assertParseFailure(parser, "",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
 }
