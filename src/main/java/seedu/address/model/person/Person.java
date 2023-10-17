@@ -172,10 +172,10 @@ public class Person {
      * @param idx
      * @throws Exception
      */
-    public void removeNote(int idx) throws Exception {
-        if (idx < 0 || idx >= notes.size()) {
-            throw new Exception("Invalid index");
-        }
+    public void removeNote(int idx) { //throws Exception {
+        //        if (idx < 0 || idx >= notes.size()) {
+        //            throw new Exception("Invalid index");
+        //        }
         notes.remove(idx);
     }
 
