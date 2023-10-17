@@ -1,18 +1,21 @@
 package seedu.address.logic.commands.appointmentcommands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_FROM_END;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_FROM_START;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_TO_END;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_TO_START;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_START;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_APPOINTMENTS;
+
+import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.commands.personcommands.AddCommand;
 import seedu.address.model.Model;
+import seedu.address.model.appointment.Appointment;
+import seedu.address.model.appointment.AppointmentTime;
+import seedu.address.model.person.Person;
 
 /**
  * Reschedules an existing appointment
@@ -25,35 +28,58 @@ public class RescheduleCommand extends Command {
             + "by the index number used in the displayed appointment list.\n"
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: " + PREFIX_ID + "(must be a positive integer) "
-            + "[" + PREFIX_APPOINTMENT_FROM_START + "FROM START DATE AND TIME] "
-            + "[" + PREFIX_APPOINTMENT_FROM_END + "FROM END DATE AND TIME] "
-            + "[" + PREFIX_APPOINTMENT_TO_START + "TO START DATE AND TIME] "
-            + "[" + PREFIX_APPOINTMENT_TO_END + "TO END DATE AND TIME]\n"
+            + "[" + PREFIX_START + "APPOINTMENT START DATE AND TIME] "
+            + "[" + PREFIX_END + "APPOINTMENT END DATE AND TIME]\n"
             + "Example: " + PREFIX_ID + " 1 "
-            + PREFIX_APPOINTMENT_FROM_START + "2020-02-05 09:00 "
-            + PREFIX_APPOINTMENT_FROM_END + "2020-02-05 11:00 "
-            + PREFIX_APPOINTMENT_TO_START + "2020-02-05 12:00 "
-            + PREFIX_APPOINTMENT_TO_END + "2020-02-05 14:00 ";
+            + PREFIX_START + "02/05/2023 09:00 "
+            + PREFIX_END + "02/05/2023 11:00 ";
 
     public static final String MESSAGE_SUCCESS = "Patient appointment rescheduled: %1$s";
     public static final String MESSAGE_NO_APPOINTMENT_FOUND = "No such appointment exists in the records";
+    public static final String MESSAGE_DUPLICATE_APPOINTMENT = "This appointment already exists in the records";
 
     private final Index index;
+
+    private final AppointmentTime appointmentTime;
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
-    public RescheduleCommand(Index index) {
+    public RescheduleCommand(Index index, AppointmentTime appointmentTime) {
         requireNonNull(index);
         this.index = index;
+        this.appointmentTime = appointmentTime;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        List<Appointment> lastShownList = model.getFilteredAppointmentList();
 
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(MESSAGE_NO_APPOINTMENT_FOUND);
+        }
+
+        Appointment appointmentToReschedule = lastShownList.get(index.getZeroBased());
+        Appointment rescheduledAppointment = createRescheduledAppointment(appointmentToReschedule, appointmentTime);
+
+        if (!appointmentToReschedule.isSameAppointment(rescheduledAppointment)
+                && model.hasAppointment(rescheduledAppointment)) {
+            throw new CommandException(MESSAGE_DUPLICATE_APPOINTMENT);
+        }
+
+        model.setAppointment(appointmentToReschedule, rescheduledAppointment);
+        model.updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
         return new CommandResult(MESSAGE_NO_APPOINTMENT_FOUND,
                 false, false);
+    }
+
+    private static Appointment createRescheduledAppointment(Appointment appointmentToReschedule,
+                                                             AppointmentTime newTime) {
+        assert appointmentToReschedule != null;
+
+        Person patient = appointmentToReschedule.getPerson();
+        return new Appointment(newTime, patient);
     }
     @Override
     public boolean equals(Object other) {
@@ -62,7 +88,7 @@ public class RescheduleCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddCommand)) {
+        if (!(other instanceof RescheduleCommand)) {
             return false;
         }
 
