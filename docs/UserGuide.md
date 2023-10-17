@@ -97,7 +97,7 @@ Edits an existing student's data in the address book.
 
 Format:
 1. `edit INDEX prefix/[field name] or edit NAME prefix/[field name]` (you can either specify the student you want to edit by index or his/her name)
-3. `edit INDEX prefix1/[field1] prefix2/[field2]`  or `edit NAME prefix/[field] prefix/[field] prefix/[field]` (change multiple fields)
+2. `edit INDEX prefix1/[field1] prefix2/[field2]`  or `edit NAME prefix/[field] prefix/[field] prefix/[field]` (change multiple fields)
 
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
@@ -111,7 +111,7 @@ Examples:
 
 Search for people whose names contain the given keyword.
 
-Format: `search [KEYWORD]`
+Format: `search KEYWORD`
 
 * The search is case-insensitive. e.g `joe` will match `Joe`
 * Only the name is searched.
@@ -139,24 +139,20 @@ Examples:
 * `delete Chuan Yuan` deletes student data that contains name `Chuan Yuan`
   ![result for 'delete Chuan Yuan'](images/ug_images/deleteJoeResult.png)
 
-### Grouping data : `group`
+### Filtering data : `filter`
 
-Shows the list of students data that holds a particular tag.
+Shows the list of students data that fulfills all given conditions.
 
-Format: `group /by [TAG_NAME]`
+Format: `filter prefix/FIELD_VALUE [MORE FIELDS]`
 
-* TAG_NAME: Case sensitive string
-* The student list shows only the students whose data is tagged with “SubjectA” tag.
-* Case couldn’t find any data with the tag
-  Example: `group /by QWERTY`
-  Shows error message: `Tag does not exist.`
-* Case using wrong format
-  Example: `group SubjectA` or `group by SubjectA`
-  Shows error message: `Group usage: group /by [TAG_NAME]`
+* FIELD_VALUE: Case-sensitive string.
+* The student list shows only the students whose data fulfills all given conditions.
+* At least one condition must be provided.
 
 Examples:
-* `group /by Maths` returns `Chuan Yuan`, `Li Yuan` and `Alfred` <br>
-  ![result for 'group Maths'](images/ug_images/groupMathsResult.png)
+* `filter g/F s/English s/Physics`
+* `filter s/Maths` returns `Chuan Yuan`, `Li Yuan` and `Alfred` <br>
+  ![result for 'filter Maths'](images/ug_images/filterMathsResult.png)
 
 ### Clearing all entries : `clear`
 
