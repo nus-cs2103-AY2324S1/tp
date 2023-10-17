@@ -286,7 +286,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                                             | I want to …​                                                                 | So that I can…​                                                                         |
+| Priority | As a …                                                              | I want to …                                                                  | So that I can…                                                                          |
 |----------|---------------------------------------------------------------------|------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------|
 | `* * *`  | NUS student                                                         | search for the contacts of other students within my university               | contact them for group projects                                                         |
 | `* * *`  | NUS student                                                         | search for a name in the contact                                             | easily find the person’s contact                                                        |

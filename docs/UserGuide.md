@@ -6,6 +6,10 @@
 
 UniMate is a desktop app for students to **manage contacts** and **manage schedules** optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, UniMate can get your contact management tasks done faster than traditional GUI apps.
 
+AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+
+<!-- * Table of Contents -->
+<page-nav-print />
 <!-- * Table of Contents -->
 <page-nav-print />
 
@@ -175,15 +179,14 @@ Format: `exit`
 
 ## Calendar System
 
-### Adding an event (Coming Soon)
+### Adding an event
 
 Adds an event to the user's calendar.
 
-Format: `addEvent DESCRIPTION d/DATE s/START_TIME e/END_TIME`
+Format: `addEvent d/DESCRIPTION ts/START_DATE_TIME ts/END_DATE_TIME`
 
-* Adds the event starting from `START_TIME` and ending at `END_TIME`
-* `START_TIME` and `END_TIME` must be in 24 hour notation
-* `DATE` must be in the format `DD/MM/YYYY`
+* Adds the event starting from `START_DATE_TIME` and ending at `END_DATE_TIME`
+* `START_DATE_TIME` and `END_DATE_TIME` must be in `yyyy-MM-dd HH:mm` format
 
 Example:
 * `addEvent Cry about deadlines d/12/12/2012 s/2200 e/2359`
@@ -263,6 +266,6 @@ Action     | Format, Examples
 **Filter** | `filter TAG [MORE_TAGS]` <br> e.g., `filter CSGOD CS2103`
 **List** | `list`
 **Help** | `help`
-**addEvent** | `addEvent DESCRIPTION d/DAY s/START_TIME e/END_TIME` <br> e.g., `addEvent Cry about deadlines d/MON s/2200 e/2359`
+**addEvent** | `addEvent d/DESCRIPTION ts/START_DATE_TIME te/END_DATE_TIME` <br> e.g., `addEvent d/Cry about deadlines ts/2023-01-01 00:01 te/2023-12-31 23:59`
 **deleteEvent** | `deleteEvent d/DATE s/START_TIME` <br> e.g., `deleteEvent d/12/12/2012 s/2200`
 **viewEvents** | `viewEvents`

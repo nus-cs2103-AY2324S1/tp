@@ -12,6 +12,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.calendar.Calendar;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 
 /**
@@ -24,6 +26,8 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
 
+    private final Calendar calendar;
+
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -35,6 +39,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        calendar = new Calendar();
     }
 
     public ModelManager() {
@@ -76,6 +81,8 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
+
+
     //=========== AddressBook ================================================================================
 
     @Override
@@ -110,6 +117,19 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+    }
+
+    //=========== Calendar ===================================================================================
+    @Override
+   public boolean canAddEvent(Event event) {
+        return calendar.canAddEvent(event);
+    }
+
+    @Override
+    public void addEvent(Event event) {
+        requireAllNonNull(event);
+
+        calendar.addEvent(event);
     }
 
     //=========== Filtered Person List Accessors =============================================================
