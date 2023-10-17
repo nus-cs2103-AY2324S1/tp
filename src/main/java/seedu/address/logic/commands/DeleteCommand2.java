@@ -22,7 +22,7 @@ public class DeleteCommand2 extends Command2 {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed card list.\n"
+            + ": Deletes the card identified by the index number used in the displayed card list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
