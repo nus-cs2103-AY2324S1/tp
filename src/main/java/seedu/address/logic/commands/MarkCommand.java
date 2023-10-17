@@ -47,7 +47,7 @@ public class MarkCommand extends Command {
                     Messages.formatInterview(interviewToMark)));
         }
 
-        interviewToMark.setDone();
+        model.markInterview(interviewToMark);
         return new CommandResult(
                 String.format(MESSAGE_MARK_INTERVIEW_SUCCESS, Messages.formatInterview(interviewToMark)));
     }

@@ -25,7 +25,7 @@ public class AddInterviewCommandTest {
 
     @Test
     public void equals() {
-        Index index = TypicalIndexes.INDEX_FIRST_PERSON;
+        Index index = TypicalIndexes.INDEX_FIRST;
         AddInterviewCommand addInterview1Cmd =
                 new AddInterviewCommand(index, STANDARD_INTERVIEW.getJobRole(),
                         STANDARD_INTERVIEW.getInterviewTiming());

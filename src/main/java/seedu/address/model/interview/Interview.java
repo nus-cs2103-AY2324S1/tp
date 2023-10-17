@@ -87,7 +87,8 @@ public class Interview {
         Interview otherInterview = (Interview) other;
         return applicant.equals(otherInterview.applicant)
                 && jobRole.equals(otherInterview.jobRole)
-                && interviewTiming.equals(otherInterview.interviewTiming);
+                && interviewTiming.equals(otherInterview.interviewTiming)
+                && isDone == otherInterview.isDone;
     }
 
     public void setDone() {

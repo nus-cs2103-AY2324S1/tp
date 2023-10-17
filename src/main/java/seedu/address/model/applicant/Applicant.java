@@ -116,7 +116,8 @@ public class Applicant {
                 && phone.equals(otherApplicant.phone)
                 && email.equals(otherApplicant.email)
                 && address.equals(otherApplicant.address)
-                && tags.equals(otherApplicant.tags);
+                && tags.equals(otherApplicant.tags)
+                && hasInterview == otherApplicant.hasInterview;
     }
 
     @Override

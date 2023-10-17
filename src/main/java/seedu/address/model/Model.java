@@ -102,6 +102,11 @@ public interface Model {
     void addInterview(Interview interview);
 
     /**
+     * Marks interview as done.
+     */
+    void markInterview(Interview interview);
+
+    /**
      * Updates the filter of the filtered interview list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
