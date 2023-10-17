@@ -6,16 +6,19 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.interview.Interview;
+import seedu.address.model.interview.UniqueInterviewList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
 /**
  * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Duplicates are not allowed (by .isSamePerson and .isNotValidOrNewInterview comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private final UniqueInterviewList interviews;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -26,6 +29,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        interviews = new UniqueInterviewList();
     }
 
     public AddressBook() {}
@@ -49,12 +53,20 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the interview list with {@code interviews}.
+     * {@code interviews} must not contain duplicate persons.
+     */
+    public void setInterviews(List<Interview> interviews) {
+        this.interviews.setInterviews(interviews);
+    }
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setInterviews(newData.getInterviewList());
     }
 
     //// person-level operations
@@ -94,6 +106,23 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    //// interview-level operations
+    /**
+     * Returns true if an interview with the same identity as {@code interview} exists in the address book.
+     */
+    public boolean hasInterview(Interview interview) {
+        requireNonNull(interview);
+        return interviews.contains(interview);
+    }
+
+    /**
+     * Adds an interview to the address book.
+     * The interview must not already exist in the address book.
+     */
+    public void addInterview(Interview i) {
+        interviews.add(i);
+    }
+
     //// util methods
 
     @Override
@@ -106,6 +135,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Interview> getInterviewList() {
+        return interviews.asUnmodifiableObservableList();
     }
 
     @Override
@@ -127,4 +161,5 @@ public class AddressBook implements ReadOnlyAddressBook {
     public int hashCode() {
         return persons.hashCode();
     }
+
 }

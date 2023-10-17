@@ -257,54 +257,207 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* is a hiring manager working in Technology/Engineering field
+* has a need to manage a significant number of job applicants and interviews
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: manage applicants and schedule interviews faster than a typical mouse/GUI driven contact and calendar app
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                                               | I want to …​                             | So that I can…​                                                        |
+|----------|-------------------------------------------------------|------------------------------------------|------------------------------------------------------------------------|
+| `* * *`  | New user of the app                                   | see usage instructions                   | refer to instructions when I first started to use the App              |
+| `* * *`  | Engineering Manager ready for job applicant           | add a new applicant                      | save their contact details into the App                                |
+| `* * *`  | Engineering Manager opening a job role                | add a new job role                       | keep track of the job role available for application                   |
+| `* * *`  | Engineering Manager ready to start an interview       | add a new interview slot                 | save the interview information into the App                            |
+| `* * *`  | Engineering Manager ready for next round of interview | delete an applicant                      | remove their contact details that I no longer need                     |
+| `* * *`  | Engineering Manager that finished an interview        | delete an interview                      | remove the interview that has already been completed                   |
+| `* * *`  | Busy Engineering Manager                              | find an applicant by name                | locate details of persons without having to go through the entire list |
+| `* * *`  | Busy Engineering Manager                              | find a job role by name                  | easily locate the job role which are still available                   |
+| `* *`    | Busy Engineering Manager                              | set reminder of interview                | stay organised and track upcoming interview                            |
+| `* *`    | Engineering Manager with sensitive information        | hide private contact details             | protect the privacy of the applicants information in the App           |
+| `* *`    | Engineering Manager with many applicants              | sort the applicants by skill             | prioritise and focus on the most promising candidates                  |
+| `* *`    | Engineering Manager with many applicants              | rank the applicants                      | keep track of the applicants who have performed well                   |
+| `* *`    | Engineering Manager                                   | update an applicant details              | easily update their information on the App                             |
+| `* *`    | Engineering Manager                                   | update a job role                        | easily change the details about the job role                           |
+| `* *`    | Engineering Manager with limited budget               | track the cost per hire                  | ensure that the company budget is not exceeded                         |
+| `* *`    | Team-Oriented Engineering Manager                     | add other interviewer                    | facililate collaboration and delegation of responsibilities            |
+| `*`      | Organised Engineering Manager                         | sort persons by name                     | locate an applicant easily                                             |
+| `*`      | Engineering Manager with many contacts                | import contacts from other file          | add multiple contacts into the App smoothly                            |
+| `*`      | Meticulous Engineering Manager                        | store the applicant's background         | make a more informed choice to benefit the company                     |
+| `*`      | Engineering Manager with multiple rounds of interview | track the progress of each candidate     | maintain a clear overview of our recruitment efforts                   |
+| `*`      | New Engineering Manager                               | analyse the performance of the interview | make improvements to my interview processes                            |
+| `*`      | Helpful Engineering Manager                           | provide feedback to the applicant        | offer constructive advice to help them improve their skills            |
+| `*`      | Long user of the app                                  | provide feedback to the developer        | suggest improvements and enhancements for the app                      |
+
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `InterviewHub` and the **Actor** is the `hiring manager`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 Add an interview**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. Hiring manager requests to add an interview.
+2. InterviewHub adds the interview.
+
+    Use case ends.
+
+**Extensions**
+* 1a. One of the user-provided parameters is invalid
+    * 1a1. InterviewHub shows an error message.
+
+      Use case resumes at step 1.
+
+**Use case: UC02 List all interview**
+
+**MSS**
+
+1. Hiring manager requests to list all interviews.
+2. InterviewHub displays all scheduled interviews.
+
+    Use case ends.
+
+**Extensions**
+* 1a. The list is empty
+  * 1a1. InterviewHub shows an error message.
+
+    Use case ends.
+
+**Use case: UC03 Delete an Interview**
+
+**MSS**
+
+1. Hiring manager <u> views the list of all interviews (UC02) </u>
+2. Hiring manager requests to delete a specific interview
+3. InterviewHub deletes the specified interview
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The provided index is invalid
+  * 2a1. InterviewHub shows an error message.
 
-  Use case ends.
+    Use case resumes at step 2.
 
-* 3a. The given index is invalid.
+**Use case: UC04 Add a job role**
 
-    * 3a1. AddressBook shows an error message.
+**MSS**
+
+1. Hiring manager requests to add a job role.
+2. InterviewHub adds the job role.
+
+    Use case ends.
+
+**Extensions**
+* 1a. One of the user-provided parameters is invalid
+  * 1a1. InterviewHub shows an error message.
+
+    Use case resumes at step 1.
+
+**Use case: UC05 List all job roles**
+
+**MSS**
+
+1. Hiring manager requests to list all job roles.
+2. InterviewHub displays all job roles.
+
+    Use case ends.
+
+**Extensions**
+* 1a. The list is empty
+  * 1a1. InterviewHub shows an error message.
+
+    Use case ends.
+
+**Use case: UC06 List all applicants for a job role**
+
+**MSS**
+
+1. Hiring manager <u> views the list of all job roles (UC05) </u>
+2. Hiring manager requests to view all applicants for a specific job role.
+3. InterviewHub displays all the applicants for the specific job role.
+
+    Use case ends.
+
+* 2a. The provided index is invalid
+  * 2a1. InterviewHub shows an error message.
+
+    Use case resumes at step 2.
+
+**Use case: UC07 Delete a job role**
+
+**MSS**
+
+1. Hiring manager <u> views the list of all job roles (UC02) </u>
+2. Hiring manager requests to delete a specific job role
+3. InterviewHub deletes the specified job role
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The provided index is invalid
+  * 2a1. InterviewHub shows an error message.
+
+    Use case resumes at step 2.
+
+
+**Use case: UC08 Add an applicant**
+
+**MSS**
+
+1. Hiring manager requests to add an applicant.
+2. InterviewHub adds the applicant.
+
+   Use case ends.
+
+**Extensions**
+* 1a. One of the user-provided parameters is invalid
+  * 1a1. InterviewHub shows an error message.
+
+    Use case resumes at step 1.
+
+**Use case: UC09 List all applicants**
+
+**MSS**
+
+1. Hiring manager requests to list all applicants.
+2. InterviewHub displays all scheduled applicants.
+
+   Use case ends.
+
+**Extensions**
+* 1a. The list is empty
+  * 1a1. InterviewHub shows an error message.
+
+      Use case ends.
+
+**Use case: UC010 Delete an applicant**
+
+**MSS**
+
+1. Hiring manager <u> views the list of all applicants (UC09) </u>
+2. Hiring manager requests to delete a specific applicant
+3. InterviewHub deletes the specified applicant
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The provided index is invalid
+    * 2a1. InterviewHub shows an error message.
 
       Use case resumes at step 2.
 
@@ -313,8 +466,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+2.  Should be able to handle as many applicants as the user is able to manage in their workday/workweek.
+3.  The app should be reasonably responsive to the entire set of user requests(i.e. within 1 second at maximum load).
+4.  The system should have an interface that is very easy to pick up for our target audience(i.e. Engineering Managers
+that have many years of programming experience).
 
 *{More to be added}*
 
@@ -322,6 +477,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Applicant**: The person applying to a particular job role.
+* **Hiring manager**: The manager interviewing the applicant.
+This manager is familiar with the technical aspects of the role. Also called engineering manager.
+* **MSS**: Main Success Scenario. It describes the most straightforward
+interaction in a use case where nothing goes wrong.
+* **Extensions**: In a use case, an extension describes an alternative flow of events
+that are different from the MSS.
 
 --------------------------------------------------------------------------------------------------------------------
 

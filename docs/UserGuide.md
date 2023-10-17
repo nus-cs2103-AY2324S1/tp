@@ -3,7 +3,9 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+Interview Hub (IH) is a **desktop app for scheduling job interviews and managing applicants,
+optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
+If you can type fast, IH can get your Interview management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -14,28 +16,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
-
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
-
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
-
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
-
-   * `list` : Lists all contacts.
-
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
-
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
-
-   * `clear` : Deletes all contacts.
-
-   * `exit` : Exits the app.
-
-1. Refer to the [Features](#features) below for details of each command.
+1. Placeholder TBD
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -71,49 +52,133 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
-### Adding an interviewee: `add`
+### Adding an applicant: `add-applicant`
 
-Adds a person to the address book.
+Adds an applicant to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]…​`
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
+Format: `add-applicant JOB_INDEX n/NAME t/INTERVIEW_DATETIME p/PHONE_NUMBER e/EMAIL a/ADDRESS`
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01, j/software engineer`
-* `add n/Betsy Crowe e/betsycrowe@example.com a/Street street p/1234567 t/good interviewee j/data analyst`
+* `add-applicant 1 n/John Doe t/12/03/2023 3pm p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 
-### Listing all interviewees : `list`
+### Adding a job: `add-job`
 
-Shows a list of all interviewees in the address book.
+Adds a job to the address book.
 
-Format: `list`
+Format: `add-job j/JOB_TITLE d/DESCRIPTION`
 
-### Editing an interviewee : `edit`
+Examples:
+* `add-job j/software engineer d/develop software`
 
-Edits an existing interviewee in the address book.
+### Listing all applicants : `list-applicants`
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [j/JOB] [t/TAG]…​`
+Shows a list of all applicants in the address book.
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+Format: `list-applicants`
+
+### Listing all jobs : `list-jobs`
+
+Shows a list of all jobs in the address book.
+
+Format: `list-jobs`
+
+### Editing an applicant : `edit-applicant`
+
+Edits an existing applicant in the address book.
+
+Format: `edit-applicant APPLICANT_INDEX [n/NAME] [t/INTERVIEW_DATETIME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
+
+* Edits the person at the specified `APPLICANT_INDEX`. The index refers to the index number shown in the displayed applicant list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* Job index is fixed and cannot be edited, to change the job of an applicant, delete the applicant and add a new one.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-*  `edit 3 j/product manager` Edits the job role of the 3rd person to be `product manager`.
+*  `edit-applicant 1 n/John Doe` Edits the name of the 1st person to be `John Doe`.
+*  `edit-applicant 2 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 2nd person to be `91234567` and `johndoe@example.com` respectively
 
-### Locating persons by name: `find`
+### Editing a job : `edit-job`
 
-Finds persons whose names contain any of the given keywords.
+Edit an existing job in the address book.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `edit-job JOB_INDEX [j/JOB_TITLE] [d/DESCRIPTION]`
+
+* Edits the job at the specified `JOB_INDEX`. The index refers to the index number shown in the displayed job list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+
+Examples:
+*  `edit-job 1 j/software engineer` Edits the job title of the 1st job to be `software engineer`.
+*  `edit-job 2 d/develop software` Edits the description of the 2nd job to be `develop software`.
+
+### Deleting an applicant : `delete-applicant`
+
+Deletes the specified applicant from the address book.
+
+Format: `delete-applicant INDEX`
+
+* Deletes the applicant at the specified `INDEX`.
+* The index refers to the index number shown in the displayed applicant list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `delete-applicant 1` deletes the 1st applicant in the address book.
+
+### Deleting a job : `delete-job`
+
+Deletes the specified job from the address book.
+
+Format: `delete-job INDEX`
+
+* Deletes the job at the specified `INDEX`.
+* The index refers to the index number shown in the displayed job list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* Deleting a job will also delete all applicants applying for the job.
+
+Examples:
+* `delete-job 1` deletes the 1st job in the address book, along with all applicants applying for the job.
+
+### Clearing all applicants : `clear-applicants`
+
+Clears all applicants from the address book.
+
+Format: `clear-applicants`
+
+### Clearing all jobs : `clear-jobs`
+
+Clears all jobs from the address book.
+
+Format: `clear-jobs`
+
+* Clearing all jobs will also clear all applicants.
+
+### Clearing all data : `nuke`
+
+Clears all data from the address book.
+
+Format: `nuke`
+
+* BOOM.
+
+### Find applicants for a given job: `find-applicants-for-job`
+
+Finds applicants applying for a job with the given job index.
+
+Format: `find-applicants-for-job JOB_INDEX`
+
+* The index refers to the index number shown in the displayed job list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `find-applicants-for-job 1` returns all applicants for the 1st job in the address book.
+
+### Finding applicants (and their index in address book) by name: `find-applicants`
+
+Finds applicants whose names contain any of the given keywords.
+
+Format: `find-applicants KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -127,11 +192,11 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Locating persons by job: `find-job`
+### Finding jobs (and their index in address book) by title: `find-jobs`
 
-Finds persons whose job descriptions contain any of the given keywords.
+Find jobs whose titles contain any of the given keywords.
 
-Format: `find-job KEYWORD [MORE_KEYWORDS]`
+Format: `find-jobs KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `ANALYST` will match `analyst`
 * The order of the keywords does not matter. e.g. `Software Engineer` will match `Engineer Software`
@@ -141,28 +206,7 @@ Format: `find-job KEYWORD [MORE_KEYWORDS]`
   e.g. `Software Engineer` will return `Software Developer`, `System Engineer`
 
 Examples:
-* `find-job software engineer` returns `Thomas<software engineer>` and `William<software engineer>`.
-* `find-job software engineer data analyst` returns `Thomas<software engineer>`, `William<software engineer>`, and `Robert<data analyst>`.
-
-### Deleting an interviewee : `delete`
-
-Deletes the specified interviewee from the address book.
-
-Format: `delete INDEX`
-
-* Deletes the interviewee at the specified `INDEX`.
-* The index refers to the index number shown in the displayed interviewee list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-
-### Clearing all entries : `clear`
-
-Clears all entries from the address book.
-
-Format: `clear`
+* `find-jobs software data` returns `Software Engineer` and `Data Analyst`.
 
 ### Exiting the program : `exit`
 
@@ -172,14 +216,14 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+InterviewHub data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+InterviewHub data are saved automatically as a JSON file `[JAR file location]/data/interviewhub.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
+If your changes to the data file makes its format invalid, InterviewHub will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
@@ -236,7 +280,7 @@ Other features:
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous InterviewHub home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -250,11 +294,19 @@ Other features:
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Find-Job**| `find-job KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-job Data Analyst`
-**List** | `list`
+**Add Applicant** | `add-applicant JOB_INDEX n/NAME t/INTERVIEW_DATETIME p/PHONE_NUMBER e/EMAIL a/ADDRESS` <br> e.g., `add-applicant 1 n/John Doe t/12/03/2023 3pm p/98765432
+**Add Job** | `add-job j/JOB_TITLE d/DESCRIPTION` <br> e.g., `add-job j/software engineer d/develop software`
+**Clear Applicants** | `clear-applicants`
+**Clear Jobs** | `clear-jobs`
+**Clear All** | `nuke`
+**Delete Applicant** | `delete-applicant INDEX`<br> e.g., `delete-applicant 3`
+**Delete Job** | `delete-job INDEX`<br> e.g., `delete-job 3`
+**Edit Applicant** | `edit-applicant APPLICANT_INDEX [n/NAME] [t/INTERVIEW_DATETIME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`<br> e.g.,`edit-applicant 2 n/John Doe
+**Edit Job** | `edit-job JOB_INDEX [j/JOB_TITLE] [d/DESCRIPTION]`<br> e.g.,`edit-job 2 j/software engineer`
+**Find Applicants** | `find-applicants KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-applicants John`
+**Find Applicants for Job** | `find-applicants-for-job JOB_INDEX`<br> e.g., `find-applicants-for-job 1`
+**Find Jobs** | `find-jobs KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-jobs software`
 **Help** | `help`
+**List Applicants** | `list-applicants`
+**List Jobs** | `list-jobs`
+**Exit** | `exit`
