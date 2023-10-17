@@ -6,7 +6,6 @@ import java.util.Set;
 import seedu.address.model.band.Band;
 import seedu.address.model.band.BandName;
 import seedu.address.model.musician.Musician;
-import seedu.address.model.musician.Name;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
