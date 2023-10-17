@@ -35,7 +35,9 @@ public class TypicalPersons {
             .withLinkedin("bensonmeier")
             .withSecondaryEmail("ben10@gmail.com")
             .withTelegram("@benson")
-            .withTags("owesMoney", "friends").build();
+            .withTags("owesMoney", "friends")
+            .withId(1)
+            .build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")

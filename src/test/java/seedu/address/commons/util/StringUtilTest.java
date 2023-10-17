@@ -123,6 +123,87 @@ public class StringUtilTest {
         assertTrue(StringUtil.containsWordIgnoreCase("AAA bBb ccc  bbb", "bbB"));
     }
 
+    //---------------- Tests for containsSubstringIgnoreCase --------------------------------------
+
+    /*
+     * Invalid equivalence partitions for substring: null, empty
+     * Invalid equivalence partitions for stringToCheck: null
+     * The three test cases below test one invalid input at a time.
+     */
+
+    @Test
+    public void containsSubstringIgnoreCase_nullSubstring_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> StringUtil.containsSubstringIgnoreCase("typical string", null));
+    }
+
+    @Test
+    public void containsSubstringIgnoreCase_emptySubstring_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, "Substring parameter cannot be empty", ()
+            -> StringUtil.containsSubstringIgnoreCase("typical string", "  "));
+    }
+
+    @Test
+    public void containsSubstringIgnoreCase_nullStringToCheck_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> StringUtil.containsSubstringIgnoreCase(null, "abc"));
+    }
+
+    /*
+     * Valid equivalence partitions for substring:
+     *   - any substring
+     *   - substring containing symbols/numbers
+     *   - substring with leading/trailing spaces
+     *
+     * Valid equivalence partitions for stringToCheck:
+     *   - empty string
+     *   - one word
+     *   - multiple words
+     *   - string with extra spaces
+     *
+     * Possible scenarios returning true:
+     *   - matches first word in stringToCheck
+     *   - last word in stringToCheck
+     *   - middle word in stringToCheck
+     *   - matches multiple words
+     *   - query substring matches part of a stringToCheck word
+     *
+     * Possible scenarios returning false:
+     *   - stringToCheck word matches part of the query substring
+     *
+     * The test method below tries to verify all above with a reasonably low number of test cases.
+     */
+
+    @Test
+    public void containsSubstringIgnoreCase_validInputs_correctResult() {
+
+        // Empty stringToCheck
+        assertFalse(StringUtil.containsSubstringIgnoreCase("", "abc")); // Boundary case
+        assertFalse(StringUtil.containsSubstringIgnoreCase("    ", "123"));
+
+        // Matches a partial substring
+        assertTrue(StringUtil.containsSubstringIgnoreCase("aaa bbb ccc",
+                "bb")); // stringToCheck word bigger than query substring
+        assertFalse(StringUtil.containsSubstringIgnoreCase("aaa bbb ccc",
+                "bbbb")); // Query substring bigger than stringToCheck word
+
+        // Matches substring in the stringToCheck, different upper/lower case letters
+        assertTrue(StringUtil.containsSubstringIgnoreCase("aaa bBb ccc",
+                "Bbb")); // First word (boundary case)
+        assertTrue(StringUtil.containsSubstringIgnoreCase("aaa bBb ccc@1",
+                "CCc@1")); // Last word (boundary case)
+        assertTrue(StringUtil.containsSubstringIgnoreCase("  AAA   bBb   ccc  ",
+                "aaa")); // stringToCheck has extra spaces
+        assertTrue(StringUtil.containsSubstringIgnoreCase("Aaa",
+                "aaa")); // Only one word in stringToCheck (boundary case)
+        assertTrue(StringUtil.containsSubstringIgnoreCase("aaa bbb ccc",
+                "  ccc  ")); // Leading/trailing spaces
+
+        // Matches multiple words in stringToCheck
+        assertTrue(StringUtil.containsSubstringIgnoreCase("AAA bBb ccc  bbb", "bbB"));
+
+        // Matches part of a stringToCheck word
+        assertTrue(StringUtil.containsSubstringIgnoreCase("aaa bbb ccc", "bb"));
+    }
+
     //---------------- Tests for getDetails --------------------------------------
 
     /*

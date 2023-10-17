@@ -169,6 +169,7 @@ public class AddCommandTest {
         public List<Event> getEventList() {
             throw new AssertionError("This method should not be called.");
         }
+
     }
 
     /**
@@ -194,6 +195,7 @@ public class AddCommandTest {
      */
     private class ModelStubAcceptingPersonAdded extends ModelStub {
         final ArrayList<Person> personsAdded = new ArrayList<>();
+        private int id = 0;
 
         @Override
         public boolean hasPerson(Person person) {
@@ -211,6 +213,7 @@ public class AddCommandTest {
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
         }
+
     }
 
 }

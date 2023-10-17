@@ -38,6 +38,7 @@ class JsonAdaptedPerson {
     private final Optional<String> secondaryEmail;
     private final Optional<String> telegram;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final Optional<Integer> id;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -48,7 +49,8 @@ class JsonAdaptedPerson {
             @JsonProperty("birthday") Optional<MonthDay> birthday, @JsonProperty("linkedin") Optional<String> linkedin,
             @JsonProperty("secondaryEmail") Optional<String> secondaryEmail,
             @JsonProperty("telegram") Optional<String> telegram,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags
+            @JsonProperty("tags") List<JsonAdaptedTag> tags,
+            @JsonProperty("id") Optional<Integer> id
     ) {
         this.name = name;
         this.phone = phone;
@@ -61,6 +63,7 @@ class JsonAdaptedPerson {
         if (tags != null) {
             this.tags.addAll(tags);
         }
+        this.id = id;
     }
 
     /**
@@ -78,6 +81,7 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        id = source.getId().map(x -> x.intValue());
     }
 
     /**
@@ -132,9 +136,10 @@ class JsonAdaptedPerson {
         final Optional<Telegram> modelTelegram = telegram.map(telegram -> new Telegram(telegram));
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
+        final Optional<Integer> modelID = id.map(x -> x.intValue());
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelBirthday, modelLinkedin,
-                modelSecondaryEmail, modelTelegram, modelTags);
+                modelSecondaryEmail, modelTelegram, modelTags, modelID);
     }
 
 }

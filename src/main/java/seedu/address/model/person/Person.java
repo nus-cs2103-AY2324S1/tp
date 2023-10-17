@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
@@ -29,6 +30,7 @@ public class Person {
     private Optional<Email> secondaryEmail;
     private Optional<Telegram> telegram;
     private final Set<Tag> tags = new HashSet<>();
+    private Optional<Integer> id;
 
     /**
      * Every field must be present and not null.
@@ -44,6 +46,7 @@ public class Person {
         this.secondaryEmail = Optional.empty();
         this.telegram = Optional.empty();
         this.tags.addAll(tags);
+        this.id = Optional.empty();
     }
 
     /**
@@ -51,7 +54,7 @@ public class Person {
      */
     public Person(Name name, Phone phone, Email email, Address address, Optional<Birthday> birthday,
                   Optional<Linkedin> linkedin, Optional<Email> secondaryEmail,
-                  Optional<Telegram> telegram, Set<Tag> tags) {
+                  Optional<Telegram> telegram, Set<Tag> tags, Optional<Integer> id) {
         requireAllNonNull(name, phone, email, address, birthday, tags);
         this.name = name;
         this.phone = phone;
@@ -62,6 +65,7 @@ public class Person {
         this.secondaryEmail = secondaryEmail;
         this.telegram = telegram;
         this.tags.addAll(tags);
+        this.id = id;
     }
 
     public Name getName() {
@@ -109,6 +113,33 @@ public class Person {
     }
 
     /**
+     * Returns a set of non-emergency tags.
+     * @return
+     */
+    public Set<Tag> getNonEmergencyTags() {
+        return tags.stream()
+            .filter(tag -> !Tag.EmergencyTags.isEmergencyTag(tag.tagName))
+            .collect(Collectors.toSet());
+    }
+
+    /**
+     * Returns a set of emergency tags.
+     * @return
+     */
+    public Set<Tag> getEmergencyTags() {
+        return tags.stream()
+            .filter(tag -> Tag.EmergencyTags.isEmergencyTag(tag.tagName))
+            .collect(Collectors.toSet());
+    }
+    public Optional<Integer> getId() {
+        return id;
+    }
+    public int setId(int id) {
+        this.id = Optional.of(id);
+        return id;
+    }
+
+    /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
@@ -120,6 +151,7 @@ public class Person {
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
     }
+
 
     /**
      * Returns true if both persons have the same identity and data fields.

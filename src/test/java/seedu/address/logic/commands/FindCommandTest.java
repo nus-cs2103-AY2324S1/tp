@@ -40,9 +40,9 @@ public class FindCommandTest {
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
 
-        // same values -> returns true
+        // same values -> returns false
         FindCommand findFirstCommandCopy = new FindCommand(firstPredicate);
-        assertTrue(findFirstCommand.equals(findFirstCommandCopy));
+        assertFalse(findFirstCommand.equals(findFirstCommandCopy));
 
         // different types -> returns false
         assertFalse(findFirstCommand.equals(1));

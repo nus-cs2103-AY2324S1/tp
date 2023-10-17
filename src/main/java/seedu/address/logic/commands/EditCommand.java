@@ -107,9 +107,10 @@ public class EditCommand extends Command {
         Optional<Email> secondaryEmail = personToEdit.getSecondaryEmail();
         Optional<Telegram> telegram = personToEdit.getTelegram();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Optional<Integer> id = personToEdit.getId();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedBirthday,
-                linkedin, secondaryEmail, telegram, updatedTags);
+                linkedin, secondaryEmail, telegram, updatedTags, id);
     }
 
     @Override
