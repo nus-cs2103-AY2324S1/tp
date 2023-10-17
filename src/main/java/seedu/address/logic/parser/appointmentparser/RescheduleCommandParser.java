@@ -2,7 +2,9 @@ package seedu.address.logic.parser.appointmentparser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_START;
 
 import java.time.LocalDateTime;
 
@@ -33,8 +35,8 @@ public class RescheduleCommandParser implements Parser<RescheduleCommand> {
 
         Index index;
 
-        if (argMultimap.getValue(PREFIX_ID).isEmpty() || argMultimap.getValue(PREFIX_ID).isEmpty() ||
-                argMultimap.getValue(PREFIX_ID).isEmpty()) {
+        if (argMultimap.getValue(PREFIX_ID).isEmpty() || argMultimap.getValue(PREFIX_ID).isEmpty()
+                || argMultimap.getValue(PREFIX_ID).isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RescheduleCommand.MESSAGE_USAGE));
         }
         index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_ID).get());

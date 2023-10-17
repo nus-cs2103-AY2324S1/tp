@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -11,6 +12,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.appointment.AppointmentTime;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Birthdate;
 import seedu.address.model.person.Email;
@@ -157,10 +159,19 @@ public class ParserUtil {
         return tagSet;
     }
 
-    public static LocalDateTime parseDateTime(String dateTime) {
-        requireNonNull(dateTime);
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        LocalDateTime localDateTime = LocalDateTime.parse(dateTime, format);
+    /**
+     * * Parses a {@code String dateAndTime} into a {@code LocalDateTime}.
+     * Leading and trailing whitespaces will be trimmed. *
+     * @throws ParseException if the given {@code dateAndTime} is invalid.
+     * */
+    public static LocalDateTime parseDateTime(String dateAndTime) throws ParseException {    requireNonNull(dateAndTime);
+        String trimmedDateTime = dateAndTime.trim();    LocalDateTime localDateTime = null;
+        DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("DD/MM/YYYY HH:mm");
+        try {
+            localDateTime = LocalDateTime.parse(trimmedDateTime, dateTimeFormat);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(AppointmentTime.MESSAGE_CONSTRAINTS);
+        }
         return localDateTime;
     }
 }
