@@ -61,7 +61,7 @@ public class UniqueList<T extends Identifiable<T>> implements Iterable<T> {
      * Replaces the element {@code target} in the list with {@code edited}.
      * {@code target} must exist in the list.
      * @param target The target to replace.
-     * @param edited The new value of the
+     * @param edited The new value of the element.
      */
     public void setItem(T target, T edited) {
         requireAllNonNull(target, edited);

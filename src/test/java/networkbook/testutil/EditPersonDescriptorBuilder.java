@@ -1,8 +1,5 @@
 package networkbook.testutil;
 
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import networkbook.logic.commands.EditCommand;
 import networkbook.model.person.Course;
@@ -15,6 +12,7 @@ import networkbook.model.person.Phone;
 import networkbook.model.person.Priority;
 import networkbook.model.person.Specialisation;
 import networkbook.model.tag.Tag;
+import networkbook.model.util.UniqueList;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.
@@ -108,8 +106,10 @@ public class EditPersonDescriptorBuilder {
      * that we are building.
      */
     public EditPersonDescriptorBuilder withTags(String... tags) {
-        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
-        descriptor.setTags(tagSet);
+        descriptor.setTags(new UniqueList<>());
+        for (String tag : tags) {
+            descriptor.addTag(new Tag(tag));
+        }
         return this;
     }
 

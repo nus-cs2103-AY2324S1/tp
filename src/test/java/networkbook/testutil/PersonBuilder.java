@@ -1,8 +1,6 @@
 package networkbook.testutil;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import networkbook.model.person.Course;
@@ -39,7 +37,7 @@ public class PersonBuilder {
     private GraduatingYear graduatingYear;
     private Course course;
     private Specialisation specialisation;
-    private Set<Tag> tags;
+    private UniqueList<Tag> tags;
     private Priority priority;
 
     /**
@@ -53,7 +51,7 @@ public class PersonBuilder {
         graduatingYear = new GraduatingYear(DEFAULT_GRADUATING_YEAR);
         course = new Course(DEFAULT_COURSE);
         specialisation = new Specialisation(DEFAULT_SPECIALISATION);
-        tags = new HashSet<>();
+        tags = new UniqueList<>();
         priority = null;
     }
 
@@ -68,7 +66,7 @@ public class PersonBuilder {
         graduatingYear = personToCopy.getGraduatingYear();
         course = personToCopy.getCourse();
         specialisation = personToCopy.getSpecialisation();
-        tags = new HashSet<>(personToCopy.getTags());
+        tags = personToCopy.getTags();
         priority = personToCopy.getPriority().orElse(null);
     }
 

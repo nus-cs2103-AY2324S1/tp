@@ -43,8 +43,8 @@ public class CreateCommandParserTest {
                 CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.PHONE_DESC_BOB
                         + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.LINK_DESC_BOB
                         + CommandTestUtil.GRADUATING_YEAR_DESC_BOB + CommandTestUtil.COURSE_DESC_BOB
-                        + CommandTestUtil.SPECIALISATION_DESC_BOB + CommandTestUtil.TAG_DESC_HUSBAND
-                        + CommandTestUtil.TAG_DESC_FRIEND,
+                        + CommandTestUtil.SPECIALISATION_DESC_BOB + CommandTestUtil.TAG_DESC_FRIEND
+                        + CommandTestUtil.TAG_DESC_HUSBAND,
                 new CreateCommand(expectedPersonMultipleTags));
     }
 

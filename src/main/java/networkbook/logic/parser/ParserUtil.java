@@ -3,8 +3,6 @@ package networkbook.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
 
 import networkbook.commons.core.index.Index;
 import networkbook.commons.util.StringUtil;
@@ -214,11 +212,11 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses {@code Collection<String> tags} into a {@code UniqueList<Tag>}.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
+    public static UniqueList<Tag> parseTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
+        final UniqueList<Tag> tagSet = new UniqueList<>();
         for (String tagName : tags) {
             tagSet.add(parseTag(tagName));
         }

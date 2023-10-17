@@ -23,12 +23,6 @@ import networkbook.testutil.TypicalPersons;
 public class PersonTest {
 
     @Test
-    public void asObservableList_modifyList_throwsUnsupportedOperationException() {
-        Person person = new PersonBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> person.getTags().remove(0));
-    }
-
-    @Test
     public void isSame() {
         // same object -> returns true
         assertTrue(TypicalPersons.AMY.isSame(TypicalPersons.AMY));

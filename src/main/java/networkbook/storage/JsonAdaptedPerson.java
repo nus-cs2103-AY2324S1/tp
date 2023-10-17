@@ -1,9 +1,7 @@
 package networkbook.storage;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -96,11 +94,6 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
-        for (JsonAdaptedProperty<Tag> tag : tags) {
-            personTags.add(tag.toModelType(Tag::isValidTagName, Tag.MESSAGE_CONSTRAINTS, Tag::new));
-        }
-
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -159,7 +152,10 @@ class JsonAdaptedPerson {
         }
         final Specialisation modelSpecialisation = new Specialisation(specialisation);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
+        final UniqueList<Tag> modelTags = new UniqueList<>();
+        for (JsonAdaptedProperty<Tag> tag : tags) {
+            modelTags.add(tag.toModelType(Tag::isValidTagName, Tag.MESSAGE_CONSTRAINTS, Tag::new));
+        }
 
         Priority modelPriority = null;
         if (priority != null) {

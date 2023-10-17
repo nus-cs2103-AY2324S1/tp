@@ -2,11 +2,8 @@ package networkbook.model.person;
 
 import static networkbook.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 
 import networkbook.commons.util.ToStringBuilder;
 import networkbook.model.tag.Tag;
@@ -29,7 +26,7 @@ public class Person implements Identifiable<Person> {
     private final GraduatingYear graduatingYear;
     private final Course course;
     private final Specialisation specialisation;
-    private final Set<Tag> tags = new HashSet<>();
+    private final UniqueList<Tag> tags;
     private final Priority priority;
 
     /**
@@ -43,7 +40,7 @@ public class Person implements Identifiable<Person> {
                   GraduatingYear graduatingYear,
                   Course course,
                   Specialisation specialisation,
-                  Set<Tag> tags,
+                  UniqueList<Tag> tags,
                   Priority priority) {
         // TODO: review requireAllNonNull
         requireAllNonNull(name);
@@ -54,7 +51,7 @@ public class Person implements Identifiable<Person> {
         this.graduatingYear = graduatingYear;
         this.course = course;
         this.specialisation = specialisation;
-        this.tags.addAll(tags);
+        this.tags = tags.copy();
         this.priority = priority;
     }
 
@@ -81,13 +78,8 @@ public class Person implements Identifiable<Person> {
     public Specialisation getSpecialisation() {
         return specialisation;
     }
-
-    /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public UniqueList<Tag> getTags() {
+        return this.tags.copy();
     }
 
     public Optional<Priority> getPriority() {
@@ -131,8 +123,6 @@ public class Person implements Identifiable<Person> {
             return false;
         }
 
-        // TODO: nullable fields should use Objects.equals
-
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
                 && Objects.equals(phone, otherPerson.phone)
@@ -141,7 +131,7 @@ public class Person implements Identifiable<Person> {
                 && Objects.equals(graduatingYear, otherPerson.graduatingYear)
                 && Objects.equals(course, otherPerson.course)
                 && Objects.equals(specialisation, otherPerson.specialisation)
-                && tags.equals(otherPerson.tags)
+                && Objects.equals(tags, otherPerson.tags)
                 && Objects.equals(priority, otherPerson.priority);
     }
 

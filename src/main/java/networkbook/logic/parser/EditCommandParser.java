@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Optional;
-import java.util.Set;
 
 import networkbook.commons.core.index.Index;
 import networkbook.logic.Messages;
@@ -142,11 +141,11 @@ public class EditCommandParser implements Parser<EditCommand> {
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>} if {@code tags} is non-empty.
+     * Parses {@code Collection<String> tags} into a {@code UniqueList<Tag>} if {@code tags} is non-empty.
      * If {@code tags} contain only one element which is an empty string, it will be parsed into a
-     * {@code Set<Tag>} containing zero tags.
+     * {@code UniqueList<Tag>} containing zero tags.
      */
-    private static Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
+    private static Optional<UniqueList<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
 
         if (tags.isEmpty()) {
