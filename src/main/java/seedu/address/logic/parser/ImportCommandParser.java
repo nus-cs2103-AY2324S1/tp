@@ -37,7 +37,7 @@ public class ImportCommandParser implements Parser<ImportCommand> {
         List<Student> students = new ArrayList<>();
 
         String projectPath = System.getProperty("user.dir");
-        String path = projectPath + "\\" + args.trim();
+        String path = projectPath + "/" + args.trim();
 
         File csvFile = new File(path);
         if (!csvFile.exists()) {
