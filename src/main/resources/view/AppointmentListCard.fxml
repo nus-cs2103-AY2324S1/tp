@@ -26,8 +26,7 @@
                 </Label>
                 <Label fx:id="patientName" text="\$patientName" styleClass="cell_big_label" />
             </HBox>
-            <Label fx:id="startDatetime" styleClass="cell_small_label" text="\$startDatetime" />
-            <Label fx:id="endDatetime" styleClass="cell_small_label" text="\$endDatetime" />
+            <Label fx:id="appointmentTime" styleClass="cell_small_label" text="\$appointmentTime" />
         </VBox>
     </GridPane>
 </HBox>

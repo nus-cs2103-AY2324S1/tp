@@ -4,6 +4,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 import javafx.collections.ObservableList;
@@ -25,6 +26,8 @@ public class AppointmentTime {
     // Data fields
     private final LocalDateTime start;
     private final LocalDateTime end;
+
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
     /**
      * Constructs an {@code AppointmentTime}.
@@ -121,7 +124,7 @@ public class AppointmentTime {
 
     @Override
     public String toString() {
-        return "START: " + start + "\n END: " + end;
+        return "START: " + start.format(formatter) + "\nEND: " + end.format(formatter);
     }
 
 }

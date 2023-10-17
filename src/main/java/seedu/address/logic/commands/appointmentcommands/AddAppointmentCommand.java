@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -26,7 +27,6 @@ import seedu.address.model.person.Person;
 public class AddAppointmentCommand extends Command {
 
     public static final String COMMAND_WORD = "schedule";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Schedules an appointment.\n"
             + "Parameters: "
             + PREFIX_APPOINTMENT_PATIENT + "PATIENT "
@@ -39,6 +39,7 @@ public class AddAppointmentCommand extends Command {
             + PREFIX_APPOINTMENT_END + "20/10/2023 13:00 "
             + PREFIX_APPOINTMENT_PATIENT + "1 "
             + PREFIX_APPOINTMENT_DESCRIPTION + "Follow up on Chest X-Ray ";
+    public static final String MESSAGE_SUCCESS = "New appointment scheduled: %1$s.";
 
     private final Appointment currAppointment;
 
@@ -73,31 +74,25 @@ public class AddAppointmentCommand extends Command {
         // Add the Person patient to the current appointment
         currAppointment.setPatient(personToAdd);
 
-        // Start time comes before End time
-        String messageAppointmentOrdering = "Your start time is either before or on the same time as the End "
-                + "time. Start time should be before End time.";
+        // Timeslot is invalid
         if (!AppointmentTime.isValidOrderingOfTime(currAppointment)) {
-            throw new CommandException((messageAppointmentOrdering));
+            throw new CommandException((Messages.MESSAGE_INVALID_START_AND_END_TIMES));
         }
 
         // Clash in appointment slot
-        String messageAppointmentClash = "Please choose another timing for the appointment. There "
-                + "already exists another appointment in this timing that clashes with the requested appointment.";
         if (!AppointmentTime.isValidTimeSlot(appList, currAppointment)) {
-            throw new CommandException(messageAppointmentClash);
+            throw new CommandException(Messages.MESSAGE_DUPLICATE_TIMESLOT);
         }
 
         // Appointment already exists
-        String messageAppointmentAlreadyExists = "This appointment has already been"
-                + "created and we have taken note!";
         if (model.hasAppointment(currAppointment)) {
-            throw new CommandException(messageAppointmentAlreadyExists);
+            throw new CommandException(Messages.MESSAGE_DUPLICATE_APPOINTMENT);
         }
 
         model.addAppointment(currAppointment);
-        String appointmentConfirmation = "New appointment scheduled: %1$s.";
-        return new CommandResult(String.format(appointmentConfirmation, currAppointment),
-                false, false, true);
+
+        return new CommandResult(
+                String.format(MESSAGE_SUCCESS, Messages.format(currAppointment)), false, false, true);
     }
 
 
@@ -118,5 +113,12 @@ public class AddAppointmentCommand extends Command {
             return currAppointment.equals(otherAppointment.currAppointment);
         }
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("toAdd", currAppointment)
+                .toString();
     }
 }
