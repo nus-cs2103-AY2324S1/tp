@@ -13,7 +13,7 @@ public class TypicalInterviews {
             "StandardJobRole2", "StandardTime2");
     public static final Interview STANDARD_INTERVIEW_DIFFERENT_ROLE = new Interview("ApplicantObject",
             "DifferentStandardJobRole", "StandardTime");
-    public static final Interview STANDARD_INTERVIEW_DIFFERENT_APPLICANT = 
+    public static final Interview STANDARD_INTERVIEW_DIFFERENT_APPLICANT =
             new Interview("DifferentApplicantObject","StandardJobRole", "StandardTime");
     public static final Interview STANDARD_INTERVIEW_DIFFERENT_TIME = new Interview("ApplicantObject",
             "StandardJobRole", "DifferentStandardTime");

@@ -29,7 +29,7 @@ public class InterviewTest {
 
         // different Applicant, all other attributes same -> returns false
         assertFalse(STANDARD_INTERVIEW.isValidAndNewInterview(STANDARD_INTERVIEW_DIFFERENT_APPLICANT));
-        
+
         // different Time, all other attributes same -> return false
         assertFalse(STANDARD_INTERVIEW.isValidAndNewInterview(STANDARD_INTERVIEW_DIFFERENT_TIME));
     }
@@ -37,7 +37,7 @@ public class InterviewTest {
     @Test
     public void equals() {
         // same values -> returns true
-        Interview standardInterviewCopy = new Interview(STANDARD_INTERVIEW.getInterviewApplicant(), 
+        Interview standardInterviewCopy = new Interview(STANDARD_INTERVIEW.getInterviewApplicant(),
                     STANDARD_INTERVIEW.getJobRole(), STANDARD_INTERVIEW.getInterviewTiming());
         assertTrue(STANDARD_INTERVIEW.equals(standardInterviewCopy));
 
