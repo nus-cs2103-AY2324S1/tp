@@ -3,7 +3,11 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ANIMAL_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ANIMAL_TYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AVAILABILITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUSING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -25,6 +29,10 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
  * Contains helper methods for testing commands.
  */
 public class CommandTestUtil {
+    public static final String ANIMAL_NAME_DESC_NIL = "nil";
+    public static final String AVAILABILITY_DESC_NIL = "nil";
+    public static final String ANIMAL_TYPE_DESC_NIL = "nil";
+    public static final String HOUSING_DESC_NIL = "nil";
 
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
@@ -36,6 +44,21 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_ANIMAL_NAME_BOB = "WOOF";
+    public static final String VALID_AVAILABILITY_BOB = "NotAvailable";
+    public static final String VALID_ANIMAL_TYPE_BOB = "current.Dog";
+    public static final String VALID_HOUSING_BOB = "HDB";
+    public static final String VALID_ANIMAL_NAME_AMY = "nil";
+    public static final String VALID_AVAILABILITY_AMY = "nil";
+    public static final String VALID_ANIMAL_TYPE_AMY = "nil";
+    public static final String VALID_HOUSING_AMY = "nil";
+    public static final String VALID_AVAILABILITY_AVALABLE = "Available";
+
+    public static final String ANIMAL_NAME_NIL_DESC_BOB = " " + PREFIX_ANIMAL_NAME + ANIMAL_NAME_DESC_NIL;
+    public static final String AVAILABILITY_NIL_DESC_BOB = " " + PREFIX_AVAILABILITY + AVAILABILITY_DESC_NIL;
+    public static final String ANIMAL_TYPE_NIL_DESC_BOB = " " + PREFIX_ANIMAL_TYPE + ANIMAL_TYPE_DESC_NIL;
+    public static final String HOUSING_NIL_DESC_BOB = " " + PREFIX_HOUSING + HOUSING_DESC_NIL;
+    public static final String AVAILABILITY_DESC_AVAILABLE = " " + PREFIX_AVAILABILITY + VALID_AVAILABILITY_AVALABLE;
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -43,8 +66,16 @@ public class CommandTestUtil {
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
+    public static final String ANIMAL_NAME_DESC_BOB = " " + PREFIX_ANIMAL_NAME + VALID_ANIMAL_NAME_BOB;
+    public static final String AVAILABILITY_DESC_BOB = " " + PREFIX_AVAILABILITY + VALID_AVAILABILITY_BOB;
+    public static final String ANIMAL_TYPE_DESC_BOB = " " + PREFIX_ANIMAL_TYPE + VALID_ANIMAL_TYPE_BOB;
+    public static final String HOUSING_DESC_BOB = " " + PREFIX_HOUSING + VALID_HOUSING_BOB;
     public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
+    public static final String ANIMAL_NAME_DESC_AMY = " " + PREFIX_ANIMAL_NAME + VALID_ANIMAL_NAME_AMY;
+    public static final String AVAILABILITY_DESC_AMY = " " + PREFIX_AVAILABILITY + VALID_AVAILABILITY_AMY;
+    public static final String ANIMAL_TYPE_DESC_AMY = " " + PREFIX_ANIMAL_TYPE + VALID_ANIMAL_TYPE_AMY;
+    public static final String HOUSING_DESC_AMY = " " + PREFIX_HOUSING + VALID_HOUSING_AMY;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 

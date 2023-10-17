@@ -4,7 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ANIMAL_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ANIMAL_TYPE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_AVAILABILITY_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_HOUSING_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -88,12 +92,36 @@ public class PersonTest {
         // different tags -> returns false
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
+
+        editedAlice = new PersonBuilder(ALICE).withAnimalName(VALID_ANIMAL_NAME_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different availability -> returns false
+        editedAlice = new PersonBuilder(ALICE).withAvailability(VALID_AVAILABILITY_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different animalType -> returns false
+        editedAlice = new PersonBuilder(ALICE).withAnimalType(VALID_ANIMAL_TYPE_BOB, VALID_AVAILABILITY_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different housing -> returns false
+        editedAlice = new PersonBuilder(ALICE).withHousing(VALID_HOUSING_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+    }
+
+    @Test
+    public void hashCode_samePersonObjects_haveEqualHashCodes() {
+        Person aliceCopy = new PersonBuilder(ALICE).build();
+        assertEquals(ALICE.hashCode(), aliceCopy.hashCode());
     }
 
     @Test
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
-                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags() + "}";
+                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags()
+                + ", animalName=" + ALICE.getAnimalName() + ", availability=" + ALICE.getAvailability()
+                + ", animalType=" + ALICE.getAnimalType() + ", housing=" + ALICE.getHousing() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }
