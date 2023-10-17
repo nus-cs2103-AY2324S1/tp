@@ -52,7 +52,7 @@ public class DeleteMemberCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeleteCommand)) {
+        if (!(other instanceof DeleteMemberCommand)) {
             return false;
         }
 
