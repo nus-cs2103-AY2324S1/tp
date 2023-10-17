@@ -29,6 +29,10 @@ public class PersonInformationPanel extends UiPart<Region> {
     private Label email;
     @FXML
     private Label remark;
+    @FXML
+    private Label linkedIn;
+    @FXML
+    private Label github;
 
 
     /**
@@ -46,6 +50,8 @@ public class PersonInformationPanel extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(java.util.Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        linkedIn.setText(person.getLinkedIn().value);
+        github.setText(person.getGithub().value);
 
     }
 
