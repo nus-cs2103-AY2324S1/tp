@@ -35,8 +35,10 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
    
    * `find Alex`: Lists all employees with the keyword `Alex`.
 
-   * `delete 3` : Deletes the 3rd employee shown in the current list.
+   * `delete EID1234-5678` : Deletes the employee with employee id EID1234-5678 shown in the list.
 
+   * `sort by/Salary`: Sorts the employees by their salaries in ascending order.
+   * 
    * `clear` : Deletes all employees.
 
    * `exit` : Exits the app.
@@ -53,6 +55,7 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
 - Edits an employee: `edit`
 - List all employees: `list`
 - Find employees by name: `find`
+- Sorts employees by attribute: `sort`
 - Clear all employees: `clear`
 - Exit the program: `exit`
 
@@ -100,7 +103,7 @@ Examples:
 
 ![add failure](images/addFailure.png)
 
-### Listing all persons : `list`
+### Listing all employees : `list`
 
 Shows a list of all employees in the employee list.
 
@@ -124,7 +127,7 @@ Examples:
 *  `edit 10 pos/Senior Software Engineer` is invalid because the index does not exist.
 ![edit failure](images/editFailure.png)
 
-### Locating persons by name: `find`
+### Locating employees by name: `find`
 
 Finds employees whose names contain any of the given keywords.
 
@@ -145,19 +148,37 @@ Examples:
 
 Deletes an employee from the employee list.
 
-Format: `delete INDEX`
+Format: `delete EMPLOYEE_ID`
 
-* Deletes the employee at the specified `INDEX`.
-* The index refers to the index number shown in the employee list.
-* The index **must be a positive integer** (1, 2, 3, …)
+* Deletes the employee at the specified `EMPLOYEE_ID`.
+* The employee id refers to each employee's unique employee id.
+* The employee id **must be follow the EID format** (EID[4 digits]-[4 digits])
 
 Examples:
-* `delete 1` deletes the 1st employee in the employee list.
+* `delete EID1234-5678` deletes the employee with employee id EID1234-5678 in the employee list.
  
 ![delete success](images/deleteSuccess.png)  
 
-* `delete 3` is invalid because the index is out of range.
+* `delete EID000-0000` is invalid because the id does not exist.
 ![delete failure](images/deleteFailure.png)
+
+### Sorting all employees : `sort`
+
+Sorts the employee list by a given attribute.
+
+Format: `sort by/ATTRIBUTE`
+
+* Sorts the employee list by the specified `ATTRIBUTE` in ascending order (by default).
+* The attribute has to be non-empty and exist (Position/ID/Phone/Email/Salary)
+
+Examples:
+* `sort by/Salary` deletes the employee with employee id EID1234-5678 in the employee list.
+
+![sort success](images/sortSuccess.png)
+
+* `sort by/blah` is invalid because it does not exist.
+
+![sort failure](images/sortFailure.png)
 
 ### Clearing all entries : `clear`
 
@@ -210,9 +231,10 @@ Action | Format, Examples
 --------|------------------
 **Add** | `add n/NAME pos/POSITION id/EMPLOYEE_ID p/PHONE_NUMBER e/EMAIL s/SALARY [d/DEPARTMENT]...` <br> e.g., `add n/James Ho pos/Auditor id/EID2023-0928 p/87651234 e/jamesho@example.com s/$8,000`
 **Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Delete** | `delete EMPLOYEE-ID`<br> e.g., `delete EID1234-5678`
 **Edit** | `edit INDEX [n/NAME] [p/POSITION] [id/EMPLOYEE_ID] [p/PHONE_NUMBER] [e/EMAIL] [s/SALARY] [d/DEPARTMENT]...`<br> e.g.,`edit 2 n/James Lee pos/Head Auditor`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
+**Sort** | `sort by/ATTRIBUTE`
 **Help** | `help`
 **Exit** | `exit`

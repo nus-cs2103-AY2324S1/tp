@@ -334,7 +334,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 3a. The given employee id is invalid.
 
     * 3a1. HouR shows an error message.
 
@@ -398,6 +398,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1b1. HouR shows an empty list. 
   
   Use case ends.
+
+**Use case: Sort employees**
+
+**MSS**
+
+1.  User requests to sort employees by given attribute
+2.  HouR returns the sorted list of employees by given attribute
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User leaves out keyword.
+    * 1a1. HouR shows an error message.
+
+  Use case returns back to step 1.
+
+* 1b. No attribute matches given attribute.
+    * 1b1. HouR shows an error message.
+
+  Use case returns back to step 1.
 
 **Use case: Clear employee book**
 
