@@ -13,9 +13,10 @@ import seedu.address.model.person.Person;
  * The API of the Model component.
  */
 public interface Model {
-    /** {@code Predicate} that always evaluate to true */
+    /**
+     * {@code Predicate} that always evaluate to true
+     */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
-    Predicate<Applicant> PREDICATE_SHOW_ALL_APPLICANTS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -52,7 +53,9 @@ public interface Model {
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);
 
-    /** Returns the AddressBook */
+    /**
+     * Returns the AddressBook
+     */
     ReadOnlyAddressBook getAddressBook();
 
     /**
@@ -115,13 +118,27 @@ public interface Model {
      */
     void setApplicant(Applicant target, Applicant editedApplicant);
 
-    /** Returns an unmodifiable view of the filtered person list */
+    /**
+     * Replaces the given member {@code target} with {@code editedMember}.
+     * {@code target} must exist in the address book.
+     * The applicant identity of {@code editedMember} must not be the same as another existing member in the
+     * address book.
+     */
+    void setMember(Member target, Member editedMember);
+
+    /**
+     * Returns an unmodifiable view of the filtered person list
+     */
     ObservableList<Person> getFilteredPersonList();
 
-    /** Returns an unmodifiable view of the filtered person list */
+    /**
+     * Returns an unmodifiable view of the filtered person list
+     */
     ObservableList<Member> getFilteredMemberList();
 
-    /** Returns an unmodifiable view of the filtered applicant list */
+    /**
+     * Returns an unmodifiable view of the filtered applicant list
+     */
     ObservableList<Applicant> getFilteredApplicantList();
 
     /**
@@ -134,13 +151,13 @@ public interface Model {
      * Updates the filter of the filtered member list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredMembersList(Predicate<Member> predicate);
+    void updateFilteredMembersList(Predicate<? super Member> predicate);
 
     /**
      * Updates the filter of the filtered applicant list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredApplicantList(Predicate<Applicant> predicate);
+    void updateFilteredApplicantList(Predicate<? super Applicant> predicate);
 
     /**
      * Deletes the member person.

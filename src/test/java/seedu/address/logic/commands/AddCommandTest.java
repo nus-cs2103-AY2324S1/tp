@@ -129,6 +129,7 @@ public class AddCommandTest {
         public void addMember(Member member) {
             throw new AssertionError("This method should not be called.");
         }
+
         @Override
         public void addApplicant(Applicant applicant) {
             throw new AssertionError("This method should not be called.");
@@ -185,6 +186,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void setMember(Member target, Member editedMember) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Person> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -205,12 +211,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void updateFilteredMembersList(Predicate<Member> predicate) {
+        public void updateFilteredMembersList(Predicate<? super Member> predicate) {
 
         }
 
         @Override
-        public void updateFilteredApplicantList(Predicate<Applicant> predicate) {
+        public void updateFilteredApplicantList(Predicate<? super Applicant> predicate) {
 
         }
     }

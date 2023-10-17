@@ -119,7 +119,7 @@ public class ModelManager implements Model {
     @Override
     public void deleteApplicant(Applicant target) {
         addressBook.removeApplicant(target);
-        updateFilteredApplicantList(PREDICATE_SHOW_ALL_APPLICANTS);
+        updateFilteredApplicantList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     public void deleteMember(Member memberIndex) {
@@ -141,7 +141,7 @@ public class ModelManager implements Model {
     @Override
     public void addApplicant(Applicant applicant) {
         addressBook.addApplicant(applicant);
-        updateFilteredApplicantList(PREDICATE_SHOW_ALL_APPLICANTS);
+        updateFilteredApplicantList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
@@ -156,6 +156,13 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedApplicant);
 
         addressBook.setApplicant(target, editedApplicant);
+    }
+
+    @Override
+    public void setMember(Member target, Member editedMember) {
+        requireAllNonNull(target, editedMember);
+
+        addressBook.setMember(target, editedMember);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -194,13 +201,13 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateFilteredMembersList(Predicate<Member> predicate) {
+    public void updateFilteredMembersList(Predicate<? super Member> predicate) {
         requireNonNull(predicate);
         filteredMembers.setPredicate(predicate);
     }
 
     @Override
-    public void updateFilteredApplicantList(Predicate<Applicant> predicate) {
+    public void updateFilteredApplicantList(Predicate<? super Applicant> predicate) {
         requireNonNull(predicate);
         filteredApplicants.setPredicate(predicate);
     }

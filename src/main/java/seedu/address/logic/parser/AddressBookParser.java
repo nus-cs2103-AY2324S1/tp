@@ -16,11 +16,17 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteApplicantCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteMemberCommand;
+import seedu.address.logic.commands.EditApplicantCommand;
 import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EditMemberCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindApplicantCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindMemberCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ViewApplicantsCommand;
+import seedu.address.logic.commands.ViewMembersCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -69,6 +75,12 @@ public class AddressBookParser {
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
+        case EditMemberCommand.COMMAND_WORD:
+            return new EditMemberCommandParser().parse(arguments);
+
+        case EditApplicantCommand.COMMAND_WORD:
+            return new EditApplicantCommandParser().parse(arguments);
+
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
@@ -84,8 +96,20 @@ public class AddressBookParser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
+        case FindMemberCommand.COMMAND_WORD:
+            return new FindMemberCommandParser().parse(arguments);
+
+        case FindApplicantCommand.COMMAND_WORD:
+            return new FindApplicantCommandParser().parse(arguments);
+
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
+
+        case ViewMembersCommand.COMMAND_WORD:
+            return new ViewMembersCommand();
+
+        case ViewApplicantsCommand.COMMAND_WORD:
+            return new ViewApplicantsCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
