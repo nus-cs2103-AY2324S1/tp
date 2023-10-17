@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditMusicianDescriptor;
-import seedu.address.model.musician.Address;
 import seedu.address.model.musician.Email;
 import seedu.address.model.musician.Musician;
 import seedu.address.model.musician.Name;
@@ -35,7 +34,6 @@ public class EditMusicianDescriptorBuilder {
         descriptor.setName(musician.getName());
         descriptor.setPhone(musician.getPhone());
         descriptor.setEmail(musician.getEmail());
-        descriptor.setAddress(musician.getAddress());
         descriptor.setTags(musician.getTags());
         descriptor.setInstruments(musician.getInstruments());
         descriptor.setGenres(musician.getGenres());
@@ -65,13 +63,6 @@ public class EditMusicianDescriptorBuilder {
         return this;
     }
 
-    /**
-     * Sets the {@code Address} of the {@code EditMusicianDescriptor} that we are building.
-     */
-    public EditMusicianDescriptorBuilder withAddress(String address) {
-        descriptor.setAddress(new Address(address));
-        return this;
-    }
 
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditMusicianDescriptor}

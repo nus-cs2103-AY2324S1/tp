@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -21,7 +20,6 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.musician.Address;
 import seedu.address.model.musician.Email;
 import seedu.address.model.musician.Musician;
 import seedu.address.model.musician.Name;
@@ -42,7 +40,6 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -99,13 +96,12 @@ public class EditCommand extends Command {
         Name updatedName = editMusicianDescriptor.getName().orElse(musicianToEdit.getName());
         Phone updatedPhone = editMusicianDescriptor.getPhone().orElse(musicianToEdit.getPhone());
         Email updatedEmail = editMusicianDescriptor.getEmail().orElse(musicianToEdit.getEmail());
-        Address updatedAddress = editMusicianDescriptor.getAddress().orElse(musicianToEdit.getAddress());
         Set<Tag> updatedTags = editMusicianDescriptor.getTags().orElse(musicianToEdit.getTags());
         Set<Tag> updatedInstrumentTags = editMusicianDescriptor.getInstruments()
                 .orElse(musicianToEdit.getInstruments());
         Set<Tag> updatedGenreTags = editMusicianDescriptor.getGenres().orElse(musicianToEdit.getGenres());
 
-        return new Musician(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
+        return new Musician(updatedName, updatedPhone, updatedEmail, updatedTags,
                 updatedInstrumentTags, updatedGenreTags);
     }
 
@@ -141,7 +137,6 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
-        private Address address;
         private Set<Tag> tags;
         private Set<Tag> instruments;
         private Set<Tag> genres;
@@ -156,7 +151,6 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
-            setAddress(toCopy.address);
             setTags(toCopy.tags);
             setInstruments(toCopy.instruments);
             setGenres(toCopy.genres);
@@ -166,7 +160,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, instruments, genres);
+            return CollectionUtil.isAnyNonNull(name, phone, email, tags, instruments, genres);
         }
 
         public void setName(Name name) {
@@ -193,13 +187,6 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
-        public void setAddress(Address address) {
-            this.address = address;
-        }
-
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
-        }
 
         /**
          * Sets {@code tags} to this object's {@code tags}.
@@ -253,7 +240,6 @@ public class EditCommand extends Command {
             return Objects.equals(name, otherEditMusicianDescriptor.name)
                     && Objects.equals(phone, otherEditMusicianDescriptor.phone)
                     && Objects.equals(email, otherEditMusicianDescriptor.email)
-                    && Objects.equals(address, otherEditMusicianDescriptor.address)
                     && Objects.equals(tags, otherEditMusicianDescriptor.tags)
                     && Objects.equals(instruments, otherEditMusicianDescriptor.instruments)
                     && Objects.equals(genres, otherEditMusicianDescriptor.genres);
@@ -265,7 +251,6 @@ public class EditCommand extends Command {
                     .add("name", name)
                     .add("phone", phone)
                     .add("email", email)
-                    .add("address", address)
                     .add("tags", tags)
                     .add("instruments", instruments)
                     .add("genres", genres)
