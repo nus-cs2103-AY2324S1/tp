@@ -60,9 +60,9 @@ public class Graduation {
         if (group < 1 || group > 3) {
             return null;
         }
-        gradString = gradString.toUpperCase();
+        String normalizedGradString = gradString.trim().toUpperCase();
         Pattern pattern = Pattern.compile(AY_REGEX);
-        Matcher matcher = pattern.matcher(gradString);
+        Matcher matcher = pattern.matcher(normalizedGradString);
         String match = matcher.group(group);
         return match;
     }
@@ -70,7 +70,7 @@ public class Graduation {
     /**
      * Parses user input {@code gradString} into an int representing the first calendar year of the academic year.
      *
-     * @param gradString provided in user command
+     * @param graduation provided in user command
      * @return corresponding first calendar year
      */
     public static int parseAcadYearStart(String gradString) {
