@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import networkbook.logic.parser.exceptions.ParseException;
 import networkbook.model.person.Email;
+import networkbook.model.person.Link;
 import networkbook.model.person.Name;
 import networkbook.model.person.Phone;
 import networkbook.model.person.Priority;
@@ -34,6 +35,7 @@ public class ParserUtilTest {
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_LINK = "www.facebook.com/alice";
+    private static final String VALID_LINK_2 = "https://www.google.com/?q=haha";
     private static final String VALID_GRADUATING_YEAR = "2000";
     private static final String VALID_COURSE = "Computer Science";
     private static final String VALID_SPECIALISATION = "Game Development";
@@ -89,8 +91,8 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parsePhone_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parsePhone((String) null));
+    public void parsePhone_null_returnsNull() throws Exception {
+        assertEquals(null, ParserUtil.parsePhone(null));
     }
 
     @Test
@@ -113,7 +115,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseLink_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseLink((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseLinks(null));
     }
 
     @Test
@@ -122,8 +124,36 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseGraduatingYear_null_throwsParseException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseGraduatingYear((String) null));
+    public void parseLinks_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseLinks(null));
+    }
+
+    @Test
+    public void parseLinks_collectionWithInvalidLinks_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseLinks(Arrays.asList(VALID_LINK, INVALID_LINK)));
+    }
+
+    @Test
+    public void parseLinks_collectionWithDuplicates_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseLinks(Arrays.asList(VALID_LINK, VALID_LINK)));
+    }
+
+    @Test
+    public void parseLinks_emptyCollection_returnsEmptyListOfEmails() throws Exception {
+        assertEquals(new UniqueList<Link>(), ParserUtil.parseLinks(Arrays.asList()));
+    }
+
+    @Test
+    public void parseLinks_collectionWithValidLinks_returnsLinkList() throws Exception {
+        UniqueList<Link> expectedList = new UniqueList<Link>()
+                .setItems(Arrays.asList(new Link(VALID_LINK), new Link(VALID_LINK_2)));
+        UniqueList<Link> actualList = ParserUtil.parseLinks(Arrays.asList(VALID_LINK, VALID_LINK_2));
+        assertEquals(expectedList, actualList);
+    }
+
+    @Test
+    public void parseGraduatingYear_null_returnsNull() throws Exception {
+        assertEquals(null, ParserUtil.parseGraduatingYear(null));
     }
 
     @Test
@@ -132,8 +162,8 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseCourse_null_throwsParseException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseCourse((String) null));
+    public void parseCourse_null_returnsNull() throws Exception {
+        assertEquals(null, ParserUtil.parseCourse(null));
     }
 
     @Test
@@ -142,8 +172,8 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseSpecialisation_null_throwsParseException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseSpecialisation((String) null));
+    public void parseSpecialisation_null_returnsNull() throws Exception {
+        assertEquals(null, ParserUtil.parseSpecialisation(null));
     }
 
     @Test

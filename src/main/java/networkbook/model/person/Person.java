@@ -25,7 +25,7 @@ public class Person implements Identifiable<Person> {
     private final UniqueList<Email> emails;
 
     // Data fields
-    private final Link link;
+    private final UniqueList<Link> links;
     private final GraduatingYear graduatingYear;
     private final Course course;
     private final Specialisation specialisation;
@@ -36,14 +36,20 @@ public class Person implements Identifiable<Person> {
      * Name must be present and not null.
      * Other fields are nullable.
      */
-    public Person(Name name, Phone phone, UniqueList<Email> emails, Link link, GraduatingYear graduatingYear,
-                  Course course, Specialisation specialisation, Set<Tag> tags, Priority priority) {
-        // TODO: review requireAllNonNull
+    public Person(Name name,
+                  Phone phone,
+                  UniqueList<Email> emails,
+                  UniqueList<Link> links,
+                  GraduatingYear graduatingYear,
+                  Course course,
+                  Specialisation specialisation,
+                  Set<Tag> tags,
+                  Priority priority) {
         requireAllNonNull(name);
         this.name = name;
         this.phone = phone;
-        this.emails = emails;
-        this.link = link;
+        this.emails = emails.copy();
+        this.links = links.copy();
         this.graduatingYear = graduatingYear;
         this.course = course;
         this.specialisation = specialisation;
@@ -55,24 +61,24 @@ public class Person implements Identifiable<Person> {
         return name;
     }
 
-    public Phone getPhone() {
-        return phone;
+    public Optional<Phone> getPhone() {
+        return Optional.ofNullable(phone);
     }
 
     public UniqueList<Email> getEmails() {
-        return emails;
+        return emails.copy();
     }
-    public Link getLink() {
-        return link;
+    public UniqueList<Link> getLinks() {
+        return links.copy();
     }
-    public GraduatingYear getGraduatingYear() {
-        return graduatingYear;
+    public Optional<GraduatingYear> getGraduatingYear() {
+        return Optional.ofNullable(graduatingYear);
     }
-    public Course getCourse() {
-        return course;
+    public Optional<Course> getCourse() {
+        return Optional.ofNullable(course);
     }
-    public Specialisation getSpecialisation() {
-        return specialisation;
+    public Optional<Specialisation> getSpecialisation() {
+        return Optional.ofNullable(specialisation);
     }
 
     /**
@@ -124,13 +130,11 @@ public class Person implements Identifiable<Person> {
             return false;
         }
 
-        // TODO: nullable fields should use Objects.equals
-
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
                 && Objects.equals(phone, otherPerson.phone)
                 && Objects.equals(emails, otherPerson.emails)
-                && Objects.equals(link, otherPerson.link)
+                && Objects.equals(links, otherPerson.links)
                 && Objects.equals(graduatingYear, otherPerson.graduatingYear)
                 && Objects.equals(course, otherPerson.course)
                 && Objects.equals(specialisation, otherPerson.specialisation)
@@ -141,20 +145,34 @@ public class Person implements Identifiable<Person> {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, emails, link, graduatingYear, course, specialisation, tags, priority);
+        return Objects.hash(name, phone, emails, links, graduatingYear, course, specialisation, tags, priority);
     }
 
     @Override
     public String toString() {
         ToStringBuilder tsb = new ToStringBuilder(this)
-                .add("name", name)
-                .add("phone", phone)
-                .add("email", emails)
-                .add("link", link)
-                .add("graduating year", graduatingYear)
-                .add("course", course)
-                .add("specialisation", specialisation)
-                .add("tags", tags);
+                .add("name", name);
+        if (phone != null) {
+            tsb.add("phone", phone);
+        }
+        if (!Objects.equals(emails, new UniqueList<Email>())) {
+            tsb.add("emails", emails);
+        }
+        if (!Objects.equals(links, new UniqueList<Link>())) {
+            tsb.add("links", links);
+        }
+        if (graduatingYear != null) {
+            tsb.add("graduating year", graduatingYear);
+        }
+        if (course != null) {
+            tsb.add("course", course);
+        }
+        if (specialisation != null) {
+            tsb.add("specialisation", specialisation);
+        }
+        if (!tags.equals(Collections.emptySet())) {
+            tsb.add("tags", tags);
+        }
         if (priority != null) {
             tsb.add("priority", priority);
         }

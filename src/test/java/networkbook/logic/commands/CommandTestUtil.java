@@ -71,7 +71,7 @@ public class CommandTestUtil {
                                                         + " " + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_LINK_DESC =
             " " + CliSyntax.PREFIX_LINK + " "
-            + "https://docs.google.com/viewform?edit_requested=true"; // '?' not allowed in link
+            + "https://docs.goo_gle.com";
     public static final String INVALID_GRADUATING_YEAR_DESC =
             " " + CliSyntax.PREFIX_GRADUATING_YEAR + " " + "123a"; // non-numerics not allowed for graduating year
     public static final String INVALID_COURSE_DESC =

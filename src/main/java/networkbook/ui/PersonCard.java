@@ -7,8 +7,12 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import networkbook.model.person.Course;
+import networkbook.model.person.GraduatingYear;
 import networkbook.model.person.Person;
+import networkbook.model.person.Phone;
 import networkbook.model.person.Priority;
+import networkbook.model.person.Specialisation;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -16,6 +20,12 @@ import networkbook.model.person.Priority;
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
+    private static final String PHONE_HEADER = "Phone: ";
+    private static final String EMAILS_HEADER = "Emails: ";
+    private static final String LINKS_HEADER = "Links: ";
+    private static final String GRADUATING_YEAR_HEADER = "Graduating Year: ";
+    private static final String COURSE_HEADER = "Course: ";
+    private static final String SPECIALISATION_HEADER = "Specialisation: ";
     private static final String PRIORITY_HEADER = "Priority: ";
 
     /**
@@ -37,7 +47,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label phone;
     @FXML
-    private Label link;
+    private Label links;
     @FXML
     private Label graduatingYear;
     @FXML
@@ -45,7 +55,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label specialisation;
     @FXML
-    private Label email;
+    private Label emails;
     @FXML
     private FlowPane tags;
     @FXML
@@ -59,10 +69,16 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        link.setText(person.getLink().getValue());
-        graduatingYear.setText(person.getGraduatingYear().value);
-        email.setText(person.getEmails().toString());
+        person.getPhone().ifPresentOrElse((Phone p) ->
+                phone.setText(PHONE_HEADER + p), () -> phone.setVisible(false));
+        emails.setText(person.getEmails().toString());
+        links.setText(person.getLinks().toString());
+        person.getGraduatingYear().ifPresentOrElse((GraduatingYear g) ->
+                graduatingYear.setText(GRADUATING_YEAR_HEADER + g), () -> graduatingYear.setVisible(false));
+        person.getCourse().ifPresentOrElse((Course c) ->
+                course.setText(COURSE_HEADER + c), () -> course.setVisible(false));
+        person.getSpecialisation().ifPresentOrElse((Specialisation s) ->
+                specialisation.setText(SPECIALISATION_HEADER + s), () -> specialisation.setVisible(false));
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
@@ -70,6 +86,18 @@ public class PersonCard extends UiPart<Region> {
                         priority.setText(PRIORITY_HEADER + p), () -> priority.setVisible(false));
     }
 
+    public Label getPhone() {
+        return phone;
+    }
+    public Label getGraduatingYear() {
+        return graduatingYear;
+    }
+    public Label getCourse() {
+        return course;
+    }
+    public Label getSpecialisation() {
+        return specialisation;
+    }
     public Label getPriority() {
         return priority; // getter method for testing
     }

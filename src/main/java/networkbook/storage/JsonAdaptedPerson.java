@@ -32,7 +32,7 @@ class JsonAdaptedPerson {
     private final String name;
     private final String phone;
     private final List<JsonAdaptedProperty<Email>> emails = new ArrayList<>();
-    private final String link;
+    private final List<JsonAdaptedProperty<Link>> links = new ArrayList<>();
     private final String graduatingYear;
     private final String course;
     private final String specialisation;
@@ -43,17 +43,23 @@ class JsonAdaptedPerson {
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") List<JsonAdaptedProperty<Email>> emails, @JsonProperty("link") String link,
-            @JsonProperty("graduating year") String graduatingYear, @JsonProperty("course") String course,
-            @JsonProperty("specialisation") String specialisation,
-            @JsonProperty("tags") List<JsonAdaptedProperty<Tag>> tags, @JsonProperty("priority") String priority) {
+    public JsonAdaptedPerson(@JsonProperty("name") String name,
+                             @JsonProperty("phone") String phone,
+                             @JsonProperty("emails") List<JsonAdaptedProperty<Email>> emails,
+                             @JsonProperty("links") List<JsonAdaptedProperty<Link>> links,
+                             @JsonProperty("graduating year") String graduatingYear,
+                             @JsonProperty("course") String course,
+                             @JsonProperty("specialisation") String specialisation,
+                             @JsonProperty("tags") List<JsonAdaptedProperty<Tag>> tags,
+                             @JsonProperty("priority") String priority) {
         this.name = name;
         this.phone = phone;
         if (emails != null) {
             this.emails.addAll(emails);
         }
-        this.link = link;
+        if (links != null) {
+            this.links.addAll(links);
+        }
         this.graduatingYear = graduatingYear;
         this.course = course;
         this.specialisation = specialisation;
@@ -68,14 +74,16 @@ class JsonAdaptedPerson {
      */
     public JsonAdaptedPerson(Person source) {
         name = source.getName().fullName;
-        phone = source.getPhone().value;
+        phone = source.getPhone().map(Phone::toString).orElse(null);
         emails.addAll(source.getEmails().stream()
                 .map(JsonAdaptedProperty::new)
                 .collect(Collectors.toList()));
-        link = source.getLink().getValue();
-        graduatingYear = source.getGraduatingYear().value;
-        course = source.getCourse().value;
-        specialisation = source.getSpecialisation().value;
+        links.addAll(source.getLinks().stream()
+                .map(JsonAdaptedProperty::new)
+                .collect(Collectors.toList()));
+        graduatingYear = source.getGraduatingYear().map(GraduatingYear::toString).orElse(null);
+        course = source.getCourse().map(Course::toString).orElse(null);
+        specialisation = source.getSpecialisation().map(Specialisation::toString).orElse(null);
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedProperty::new)
                 .collect(Collectors.toList()));
@@ -101,17 +109,14 @@ class JsonAdaptedPerson {
         }
         final Name modelName = new Name(name);
 
-        if (phone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
+        Phone modelPhone = null;
+        if (phone != null) {
+            if (!Phone.isValidPhone(phone)) {
+                throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
+            }
+            modelPhone = new Phone(phone);
         }
-        if (!Phone.isValidPhone(phone)) {
-            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
-        }
-        final Phone modelPhone = new Phone(phone);
 
-        if (emails == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
-        }
         if (!emails.stream()
                 .map(JsonAdaptedProperty::getName)
                 .allMatch(Email::isValidEmail)) {
@@ -120,39 +125,37 @@ class JsonAdaptedPerson {
         final UniqueList<Email> modelEmails = new UniqueList<>();
         emails.forEach(email -> modelEmails.add(new Email(email.getName())));
 
-        if (link == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Link.class.getSimpleName()));
-        }
-        if (!Link.isValidLink(link)) {
+        if (!links.stream()
+                .map(JsonAdaptedProperty::getName)
+                .allMatch(Link::isValidLink)) {
             throw new IllegalValueException(Link.MESSAGE_CONSTRAINTS);
         }
-        final Link modelLink = new Link(link);
+        final UniqueList<Link> modelLinks = new UniqueList<>();
+        links.forEach(link -> modelLinks.add(new Link(link.getName())));
 
-        if (graduatingYear == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                        GraduatingYear.class.getSimpleName()));
+        GraduatingYear modelGraduatingYear = null;
+        if (graduatingYear != null) {
+            if (!GraduatingYear.isValidGraduatingYear(graduatingYear)) {
+                throw new IllegalValueException(GraduatingYear.MESSAGE_CONSTRAINTS);
+            }
+            modelGraduatingYear = new GraduatingYear(graduatingYear);
         }
-        if (!GraduatingYear.isValidGraduatingYear(graduatingYear)) {
-            throw new IllegalValueException(GraduatingYear.MESSAGE_CONSTRAINTS);
-        }
-        final GraduatingYear modelGraduatingYear = new GraduatingYear(graduatingYear);
 
-        if (course == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Course.class.getSimpleName()));
+        Course modelCourse = null;
+        if (course != null) {
+            if (!Course.isValidCourse(course)) {
+                throw new IllegalValueException(Course.MESSAGE_CONSTRAINTS);
+            }
+            modelCourse = new Course(course);
         }
-        if (!Course.isValidCourse(course)) {
-            throw new IllegalValueException(Course.MESSAGE_CONSTRAINTS);
-        }
-        final Course modelCourse = new Course(course);
 
-        if (specialisation == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                        Specialisation.class.getSimpleName()));
+        Specialisation modelSpecialisation = null;
+        if (specialisation != null) {
+            if (!Specialisation.isValidSpecialisation(specialisation)) {
+                throw new IllegalValueException(Specialisation.MESSAGE_CONSTRAINTS);
+            }
+            modelSpecialisation = new Specialisation(specialisation);
         }
-        if (!Specialisation.isValidSpecialisation(specialisation)) {
-            throw new IllegalValueException(Specialisation.MESSAGE_CONSTRAINTS);
-        }
-        final Specialisation modelSpecialisation = new Specialisation(specialisation);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
@@ -164,7 +167,7 @@ class JsonAdaptedPerson {
             modelPriority = new Priority(priority);
         }
 
-        return new Person(modelName, modelPhone, modelEmails, modelLink, modelGraduatingYear, modelCourse,
+        return new Person(modelName, modelPhone, modelEmails, modelLinks, modelGraduatingYear, modelCourse,
                 modelSpecialisation, modelTags, modelPriority);
     }
 

@@ -1,6 +1,5 @@
 package networkbook.testutil;
 
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -16,7 +15,6 @@ import networkbook.model.person.Phone;
 import networkbook.model.person.Priority;
 import networkbook.model.person.Specialisation;
 import networkbook.model.tag.Tag;
-import networkbook.model.util.UniqueList;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.
@@ -39,12 +37,12 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder(Person person) {
         descriptor = new EditCommand.EditPersonDescriptor();
         descriptor.setName(person.getName());
-        descriptor.setPhone(person.getPhone());
+        person.getPhone().ifPresent((Phone p) -> descriptor.setPhone(p));
         descriptor.setEmails(person.getEmails());
-        descriptor.setLink(person.getLink());
-        descriptor.setGraduatingYear(person.getGraduatingYear());
-        descriptor.setCourse(person.getCourse());
-        descriptor.setSpecialisation(person.getSpecialisation());
+        descriptor.setLinks(person.getLinks());
+        person.getGraduatingYear().ifPresent((GraduatingYear g) -> descriptor.setGraduatingYear(g));
+        person.getCourse().ifPresent((Course c) -> descriptor.setCourse(c));
+        person.getSpecialisation().ifPresent((Specialisation s) -> descriptor.setSpecialisation(s));
         descriptor.setTags(person.getTags());
         person.getPriority().ifPresent((Priority p) -> descriptor.setPriority(p));
     }
@@ -69,7 +67,7 @@ public class EditPersonDescriptorBuilder {
      * Sets the {@code Email} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withEmail(String email) {
-        descriptor.setEmails(new UniqueList<Email>().setItems(List.of(new Email(email))));
+        descriptor.addEmail(new Email(email));
         return this;
     }
 
@@ -77,7 +75,7 @@ public class EditPersonDescriptorBuilder {
      * Sets the {@code Link} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withLink(String link) {
-        descriptor.setLink(new Link(link));
+        descriptor.addLink(new Link(link));
         return this;
     }
 

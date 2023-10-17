@@ -25,10 +25,12 @@ import networkbook.model.util.UniqueList;
  */
 public class ParserUtil {
 
+    // TODO: avoid returning null for optional fields
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-
     public static final String MESSAGE_EMAIL_DUPLICATE = "Your list of emails contains duplicates.\n"
             + "Please ensure that you do not input the same email more than once.";
+    public static final String MESSAGE_LINK_DUPLICATE = "Your list of links contains duplicates.\n"
+            + "Please ensure that you do not input the same link more than once.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -65,7 +67,9 @@ public class ParserUtil {
      * @throws ParseException if the given {@code phone} is invalid.
      */
     public static Phone parsePhone(String phone) throws ParseException {
-        requireNonNull(phone);
+        if (phone == null) {
+            return null;
+        }
         String trimmedPhone = phone.trim();
         if (!Phone.isValidPhone(trimmedPhone)) {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
@@ -89,13 +93,31 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code Collection<String>} of links into {@code UniqueList<Link>}.
+     * @throws ParseException if at least one link in {@code Collection<Link>} is invalid.
+     */
+    public static UniqueList<Link> parseLinks(Collection<String> links) throws ParseException {
+        requireNonNull(links);
+        if (!verifyNoDuplicates(links)) {
+            throw new ParseException(MESSAGE_LINK_DUPLICATE);
+        }
+        UniqueList<Link> result = new UniqueList<>();
+        for (String link: links) {
+            result.add(parseLink(link));
+        }
+        return result;
+    }
+
+    /**
      * Parses a {@code String graduatingYear} into an {@code GraduatingYear}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code graduatingYear} is invalid.
      */
     public static GraduatingYear parseGraduatingYear(String graduatingYear) throws ParseException {
-        requireNonNull(graduatingYear);
+        if (graduatingYear == null) {
+            return null;
+        }
         String trimmedGraduatingYear = graduatingYear.trim();
         if (!GraduatingYear.isValidGraduatingYear(trimmedGraduatingYear)) {
             throw new ParseException(GraduatingYear.MESSAGE_CONSTRAINTS);
@@ -110,7 +132,9 @@ public class ParserUtil {
      * @throws ParseException if the given {@code course} is invalid.
      */
     public static Course parseCourse(String course) throws ParseException {
-        requireNonNull(course);
+        if (course == null) {
+            return null;
+        }
         String trimmedCourse = course.trim();
         if (!Course.isValidCourse(trimmedCourse)) {
             throw new ParseException(Course.MESSAGE_CONSTRAINTS);
@@ -125,7 +149,9 @@ public class ParserUtil {
      * @throws ParseException if the given {@code specialisation} is invalid.
      */
     public static Specialisation parseSpecialisation(String specialisation) throws ParseException {
-        requireNonNull(specialisation);
+        if (specialisation == null) {
+            return null;
+        }
         String trimmedSpecialisation = specialisation.trim();
         if (!Specialisation.isValidSpecialisation(trimmedSpecialisation)) {
             throw new ParseException(Specialisation.MESSAGE_CONSTRAINTS);
@@ -155,7 +181,6 @@ public class ParserUtil {
      */
     public static UniqueList<Email> parseEmails(Collection<String> emails) throws ParseException {
         requireNonNull(emails);
-
         if (!verifyNoDuplicates(emails)) {
             throw new ParseException(MESSAGE_EMAIL_DUPLICATE);
         }

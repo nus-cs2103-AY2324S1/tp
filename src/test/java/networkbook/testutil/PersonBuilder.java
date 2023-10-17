@@ -3,6 +3,7 @@ package networkbook.testutil;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import networkbook.model.person.Course;
 import networkbook.model.person.Email;
@@ -34,7 +35,7 @@ public class PersonBuilder {
     private Name name;
     private Phone phone;
     private UniqueList<Email> emails;
-    private Link link;
+    private UniqueList<Link> links;
     private GraduatingYear graduatingYear;
     private Course course;
     private Specialisation specialisation;
@@ -48,7 +49,7 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         emails = new UniqueList<Email>().setItems(List.of(new Email(DEFAULT_EMAIL)));
-        link = new Link(DEFAULT_LINK);
+        links = new UniqueList<Link>().setItems(List.of(new Link(DEFAULT_LINK)));
         graduatingYear = new GraduatingYear(DEFAULT_GRADUATING_YEAR);
         course = new Course(DEFAULT_COURSE);
         specialisation = new Specialisation(DEFAULT_SPECIALISATION);
@@ -61,12 +62,12 @@ public class PersonBuilder {
      */
     public PersonBuilder(Person personToCopy) {
         name = personToCopy.getName();
-        phone = personToCopy.getPhone();
+        phone = personToCopy.getPhone().orElse(null);
         emails = personToCopy.getEmails();
-        link = personToCopy.getLink();
-        graduatingYear = personToCopy.getGraduatingYear();
-        course = personToCopy.getCourse();
-        specialisation = personToCopy.getSpecialisation();
+        links = personToCopy.getLinks();
+        graduatingYear = personToCopy.getGraduatingYear().orElse(null);
+        course = personToCopy.getCourse().orElse(null);
+        specialisation = personToCopy.getSpecialisation().orElse(null);
         tags = new HashSet<>(personToCopy.getTags());
         priority = personToCopy.getPriority().orElse(null);
     }
@@ -88,10 +89,18 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Link} of the {@code Person} that we are building.
+     * Adds a link to the person we are building.
      */
     public PersonBuilder withLink(String link) {
-        this.link = new Link(link);
+        this.links.add(new Link(link));
+        return this;
+    }
+
+    /**
+     * Sets the list of link of the person that we are building.
+     */
+    public PersonBuilder withLinks(List<String> links) {
+        this.links = new UniqueList<Link>().setItems(links.stream().map(Link::new).collect(Collectors.toList()));
         return this;
     }
 
@@ -128,23 +137,38 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Email} of the {@code Person} that we are building.
+     * Sets the emails of the person that we are building.
      */
-    public PersonBuilder withEmail(String email) {
-        this.emails = new UniqueList<Email>().setItems(List.of(new Email(email)));
+    public PersonBuilder withEmails(List<String> emails) {
+        this.emails = new UniqueList<Email>().setItems(emails.stream().map(Email::new).collect(Collectors.toList()));
         return this;
     }
 
     /**
-     * Sets the {@code Pmail} of the {@code Person} that we are building.
+     * Sets the {@code Priority} of the {@code Person} that we are building.
      */
     public PersonBuilder withPriority(String priority) {
         this.priority = new Priority(priority);
         return this;
     }
 
+    /**
+     * Sets all fields of the {@code Person} that we are building to null.
+     */
+    public PersonBuilder withoutOptionalFields() {
+        this.phone = null;
+        this.emails = new UniqueList<>();
+        this.links = new UniqueList<>();
+        this.graduatingYear = null;
+        this.course = null;
+        this.specialisation = null;
+        this.tags = new HashSet<>();
+        this.priority = null;
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, emails, link, graduatingYear, course, specialisation, tags, priority);
+        return new Person(name, phone, emails, links, graduatingYear, course, specialisation, tags, priority);
     }
 
 }
