@@ -1,6 +1,5 @@
 package networkbook.logic.parser;
 
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -62,16 +61,13 @@ public class CreateCommandParser implements Parser<CreateCommand> {
                 CliSyntax.PREFIX_SPECIALISATION,
                 CliSyntax.PREFIX_PRIORITY
         );
+
         // TODO: allow CreateCommand to allow these fields to be null
         Name name = ParserUtil.parseName(argMultimap.getValue(CliSyntax.PREFIX_NAME)
                     .orElseThrow(() -> new ParseException(String.format(Messages.MESSAGE_INVALID_CONTACT_NAME))));
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(CliSyntax.PREFIX_PHONE).orElse(null));
-        Email email = ParserUtil.parseEmail(argMultimap.getValue(CliSyntax.PREFIX_EMAIL).orElse(null));
-        UniqueList<Email> emails = new UniqueList<Email>();
-        if (email != null) {
-            emails.setItems(List.of(email));
-        }
-        Link link = ParserUtil.parseLink(argMultimap.getValue(CliSyntax.PREFIX_LINK).orElse(null));
+        UniqueList<Email> emails = ParserUtil.parseEmails(argMultimap.getAllValues(CliSyntax.PREFIX_EMAIL));
+        UniqueList<Link> links = ParserUtil.parseLinks(argMultimap.getAllValues(CliSyntax.PREFIX_LINK));
         GraduatingYear graduatingYear = ParserUtil.parseGraduatingYear(
                     argMultimap.getValue(CliSyntax.PREFIX_GRADUATING_YEAR).orElse(null));
         Course course = ParserUtil.parseCourse(argMultimap.getValue(CliSyntax.PREFIX_COURSE).orElse(null));
@@ -80,7 +76,7 @@ public class CreateCommandParser implements Parser<CreateCommand> {
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(CliSyntax.PREFIX_TAG));
         Priority priority = ParserUtil.parsePriority(argMultimap.getValue(CliSyntax.PREFIX_PRIORITY).orElse(null));
 
-        Person person = new Person(name, phone, emails, link, graduatingYear, course, specialisation,
+        Person person = new Person(name, phone, emails, links, graduatingYear, course, specialisation,
                     tagList, priority);
 
         return new CreateCommand(person);

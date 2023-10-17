@@ -13,20 +13,23 @@ public class Link implements Identifiable<Link> {
 
     public static final String MESSAGE_CONSTRAINTS = "Links should follow the format: domain/path "
             + "and adhere to the following constraints:\n"
-            + "1. The domain should adhere to these rules:\n"
-            + "    - It must end with a domain label of at least 2 characters.\n"
-            + "    - Each domain label should start and end with alphanumeric characters.\n"
-            + "    - Domain labels may consist of alphanumeric characters, "
+            + "1. The domain may start with protocol http:// or https://\n"
+            + "2. Except from the protocol, domain should only contain alphanumeric characters and dots\n"
             + "separated by hyphens if needed.\n"
-            + "2. The path, if included, should be a valid URI path.";
+            + "3. The domain must contain at least one dot.\n"
+            + "4. The path, if included, should be a valid URI path.";
     private static final String SPECIAL_CHARACTERS = "+_.-";
 
-    // alphanumeric and special characters
-
-    private static final String DOMAIN_NAME_REGEX = "^(http://|https://)?(www\\.)?[a-zA-Z0-9-]+\\.[a-z]{2,}";
+    // regex adapted from https://regexr.com/3au3g
+    private static final String DOMAIN_NAME_REGEX =
+            "^(http://|https://)?(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]";
     private static final String PATH_REGEX = "(/[\\w_-]*)*"; // Valid URI path
 
-    public static final String VALIDATION_REGEX = DOMAIN_NAME_REGEX + "(" + PATH_REGEX + ")?$";
+    // regex reused from https://stackoverflow.com/questions/23959352/validate-url-query-string-with-regex
+    private static final String QUERY_REGEX = "\\?([\\w-]+(=[\\w-]*)?(&[\\w-]+(=[\\w-]*)?)*)?";
+
+    public static final String VALIDATION_REGEX = DOMAIN_NAME_REGEX
+            + "(" + PATH_REGEX + ")?" + "(" + QUERY_REGEX + ")?$";
 
     private final String value;
 
