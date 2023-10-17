@@ -28,6 +28,15 @@ public class AddCommandTest {
     private Model model = new ModelManager(TypicalPersons.getTypicalNetworkBook(), new UserPrefs());
 
     @Test
+    public void execute_addAnotherNameToPerson_commandFailure() {
+        Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
+        EditCommand.EditPersonDescriptor descriptor =
+                new EditPersonDescriptorBuilder().withName(CommandTestUtil.VALID_NAME_AMY).build();
+        AddCommand addCommand = new AddCommand(indexLastPerson, descriptor);
+        String expectedMessage = AddCommand.MESSAGE_MULTIPLE_NAMES;
+        CommandTestUtil.assertCommandFailure(addCommand, model, expectedMessage);
+    }
+    @Test
     public void execute_callAddPhoneOnFilteredList_success() {
         CommandTestUtil.showPersonAtIndex(model, TypicalIndexes.INDEX_FIRST_PERSON);
 
@@ -82,56 +91,35 @@ public class AddCommandTest {
         CommandTestUtil.assertCommandSuccess(addCommand, model, expectedMessage, expectedModel);
     }
     @Test
-    public void execute_addGraduatingYearToPersonWithGraduatingYear_assertionError() {
-        CommandTestUtil.showPersonAtIndex(model, TypicalIndexes.INDEX_FIRST_PERSON);
-
-        AddCommand addCommand = new AddCommand(TypicalIndexes.INDEX_FIRST_PERSON,
-                new EditPersonDescriptorBuilder().withGraduatingYear(CommandTestUtil.VALID_GRADUATING_YEAR_AMY)
-                        .build());
-
+    public void execute_addAnotherGraduatingYearToPerson_assertionError() {
+        Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
+        EditCommand.EditPersonDescriptor descriptor =
+                new EditPersonDescriptorBuilder().withGraduatingYear(CommandTestUtil.VALID_GRADUATING_YEAR_AMY).build();
+        AddCommand addCommand = new AddCommand(indexLastPerson, descriptor);
         String expectedMessage = AddCommand.MESSAGE_MULTIPLE_UNIQUE_FIELD;
-        CommandTestUtil.assertCommandFailure(addCommand, model, expectedMessage); // add priority to the person again
+        CommandTestUtil.assertCommandFailure(addCommand, model, expectedMessage);
     }
 
-    // TODO: Alter addCommand tests (the 2 right below). See above method for inspiration.
+    // TODO: Update the two tests below when multiple
+    //  courses and specialisations can be added. See addLinkOnFilteredList for inspiration; will be similar.
     @Test
-    public void execute_multipleCoursesBeingAdded_assertionError() {
+    public void execute_addAnotherCourseToPerson_commandFailure() {
         Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
-        Person lastPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
-        PersonBuilder personInList = new PersonBuilder(lastPerson);
-        Person editedPerson = personInList.withCourse(CommandTestUtil.VALID_COURSE_AMY).build();
         EditCommand.EditPersonDescriptor descriptor =
                 new EditPersonDescriptorBuilder().withCourse(CommandTestUtil.VALID_COURSE_AMY).build();
         AddCommand addCommand = new AddCommand(indexLastPerson, descriptor);
-        String expectedMessage = String.format(AddCommand.MESSAGE_ADD_INFO_SUCCESS, Messages.format(editedPerson));
-        Model expectedModel = new ModelManager(new NetworkBook(model.getNetworkBook()), new UserPrefs());
-        expectedModel.setItem(lastPerson, editedPerson);
-        try {
-            CommandTestUtil.assertCommandSuccess(addCommand, model, expectedMessage, expectedModel);
-            fail();
-        } catch (AssertionError e) {
-            assertEquals(e.getMessage(), "Execution of command should not fail.");
-        }
+        String expectedMessage = AddCommand.MESSAGE_MULTIPLE_UNIQUE_FIELD;
+        CommandTestUtil.assertCommandFailure(addCommand, model, expectedMessage);
     }
 
     @Test
-    public void execute_multipleSpecialisationsBeingAdded_assertionError() {
+    public void execute_addAnotherSpecialisationToPerson_commandFailure() {
         Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
-        Person lastPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
-        PersonBuilder personInList = new PersonBuilder(lastPerson);
-        Person editedPerson = personInList.withSpecialisation(CommandTestUtil.VALID_SPECIALISATION_AMY).build();
         EditCommand.EditPersonDescriptor descriptor =
                 new EditPersonDescriptorBuilder().withSpecialisation(CommandTestUtil.VALID_SPECIALISATION_AMY).build();
         AddCommand addCommand = new AddCommand(indexLastPerson, descriptor);
-        String expectedMessage = String.format(AddCommand.MESSAGE_ADD_INFO_SUCCESS, Messages.format(editedPerson));
-        Model expectedModel = new ModelManager(new NetworkBook(model.getNetworkBook()), new UserPrefs());
-        expectedModel.setItem(lastPerson, editedPerson);
-        try {
-            CommandTestUtil.assertCommandSuccess(addCommand, model, expectedMessage, expectedModel);
-            fail();
-        } catch (AssertionError e) {
-            assertEquals(e.getMessage(), "Execution of command should not fail.");
-        }
+        String expectedMessage = AddCommand.MESSAGE_MULTIPLE_UNIQUE_FIELD;
+        CommandTestUtil.assertCommandFailure(addCommand, model, expectedMessage);
     }
 
     @Test
