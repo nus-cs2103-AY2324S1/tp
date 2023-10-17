@@ -70,6 +70,7 @@ public class UniqueEmployeeList implements Iterable<Employee> {
         internalList.set(index, editedEmployee);
     }
 
+    /** Sorts the list of employees by the specified attribute */
     public void sortEmployees(String attribute) {
         requireNonNull(attribute);
 

@@ -17,11 +17,12 @@ public class SortCommand extends Command {
             + "Example: " + COMMAND_WORD + " by/ salary";
 
     public static final String MESSAGE_SUCCESS = "Successfully sorted employees by %1$s. ";
-    public static final String MESSAGE_NO_PARAM = "There needs to be an attribute to sort the list by. ";
-    public static final String MESSAGE_WRONG_PARAM = "Attribute %1$s cannot be used to sort the list. ";
+    public static final String MESSAGE_NO_ATTR = "There needs to be an attribute to sort the list by. ";
+    public static final String MESSAGE_WRONG_ATTR = "Attribute %1$s cannot be used to sort the list. ";
 
     private final String attribute;
 
+    /** Constructs a new SortCommand obejct */
     public SortCommand(String attribute) {
         requireAllNonNull(attribute);
 
@@ -34,9 +35,9 @@ public class SortCommand extends Command {
         if (attribute.toLowerCase().equals("salary")) {
             model.updateSortedEmployeeList("salary");
         } else if (attribute.equals("")) {
-            throw new CommandException(String.format(MESSAGE_NO_PARAM, attribute));
+            throw new CommandException(String.format(MESSAGE_NO_ATTR, attribute));
         } else {
-            throw new CommandException(String.format(MESSAGE_WRONG_PARAM, attribute));
+            throw new CommandException(String.format(MESSAGE_WRONG_ATTR, attribute));
         }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, attribute.toLowerCase()));
