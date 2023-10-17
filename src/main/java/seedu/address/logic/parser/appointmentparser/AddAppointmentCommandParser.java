@@ -61,7 +61,7 @@ public class AddAppointmentCommandParser implements Parser<AddAppointmentCommand
 
         int patientIndex = ParserUtil.parsePatientIndex(argMultimap.getValue(PREFIX_APPOINTMENT_PATIENT).get());
 
-        Appointment appointment = new Appointment(appointmentTime, appointmentDescription, patientIndex);
+        Appointment appointment = new Appointment(appointmentTime, appointmentDescription);
 
         return new AddAppointmentCommand(appointment, patientIndex);
 

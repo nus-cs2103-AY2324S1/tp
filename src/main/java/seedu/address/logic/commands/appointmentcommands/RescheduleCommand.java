@@ -1,19 +1,21 @@
 package seedu.address.logic.commands.appointmentcommands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_END;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_END;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_START;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_APPOINTMENTS;
 
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.appointment.AppointmentDescription;
 import seedu.address.model.appointment.AppointmentTime;
 import seedu.address.model.person.Person;
 
@@ -28,11 +30,11 @@ public class RescheduleCommand extends Command {
             + "by the index number used in the displayed appointment list.\n"
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: " + PREFIX_ID + "(must be a positive integer) "
-            + "[" + PREFIX_START + "APPOINTMENT START DATE AND TIME] "
-            + "[" + PREFIX_END + "APPOINTMENT END DATE AND TIME]\n"
+            + "[" + PREFIX_APPOINTMENT_START + "APPOINTMENT START DATE AND TIME] "
+            + "[" + PREFIX_APPOINTMENT_END + "APPOINTMENT END DATE AND TIME]"
             + "Example: " + PREFIX_ID + " 1 "
-            + PREFIX_START + "02/05/2023 09:00 "
-            + PREFIX_END + "02/05/2023 11:00 ";
+            + PREFIX_APPOINTMENT_START + "02/05/2023 09:00 "
+            + PREFIX_APPOINTMENT_END + "02/05/2023 11:00 ";
 
     public static final String MESSAGE_SUCCESS = "Patient appointment rescheduled: %1$s";
     public static final String MESSAGE_NO_APPOINTMENT_FOUND = "No such appointment exists in the records";
@@ -70,8 +72,8 @@ public class RescheduleCommand extends Command {
 
         model.setAppointment(appointmentToReschedule, rescheduledAppointment);
         model.updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
-        return new CommandResult(MESSAGE_NO_APPOINTMENT_FOUND,
-                false, false);
+        return new CommandResult(
+                String.format(MESSAGE_SUCCESS, Messages.format(rescheduledAppointment)), false, false);
     }
 
     private static Appointment createRescheduledAppointment(Appointment appointmentToReschedule,
@@ -79,7 +81,8 @@ public class RescheduleCommand extends Command {
         assert appointmentToReschedule != null;
 
         Person patient = appointmentToReschedule.getPerson();
-        return new Appointment(newTime, patient);
+        AppointmentDescription description = appointmentToReschedule.getDescription();
+        return new Appointment(patient, newTime, description);
     }
     @Override
     public boolean equals(Object other) {

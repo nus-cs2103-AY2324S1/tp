@@ -2,9 +2,9 @@ package seedu.address.logic.parser.appointmentparser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_END;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_END;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_START;
 
 import java.time.LocalDateTime;
 
@@ -31,7 +31,7 @@ public class RescheduleCommandParser implements Parser<RescheduleCommand> {
     public RescheduleCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_ID, PREFIX_START, PREFIX_END);
+                ArgumentTokenizer.tokenize(args, PREFIX_ID, PREFIX_APPOINTMENT_START, PREFIX_APPOINTMENT_END);
 
         Index index;
 
@@ -41,11 +41,11 @@ public class RescheduleCommandParser implements Parser<RescheduleCommand> {
         }
         index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_ID).get());
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_START, PREFIX_END);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_APPOINTMENT_START, PREFIX_APPOINTMENT_END);
 
 
-        LocalDateTime startTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_START).get());
-        LocalDateTime endTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_END).get());
+        LocalDateTime startTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_APPOINTMENT_START).get());
+        LocalDateTime endTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_APPOINTMENT_END).get());
         AppointmentTime appointmentTime = new AppointmentTime(startTime, endTime);
 
         return new RescheduleCommand(index, appointmentTime);
