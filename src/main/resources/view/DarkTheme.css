@@ -22,7 +22,7 @@
     -fx-font-family: "Segoe UI Semibold";
     -fx-text-fill: white;
     -fx-opacity: 0.9;
-    -fx-padding: 4 0 10 10;
+    -fx-padding: 4 0 10 0;
 }
 
 .text-field {
