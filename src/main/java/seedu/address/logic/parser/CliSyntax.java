@@ -12,4 +12,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_ID = new Prefix("/id");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_TUTORIALGROUP = new Prefix("tg/");
+    public static final Prefix PREFIX_TUTORIALNUMBER = new Prefix("tn/");
+
 }

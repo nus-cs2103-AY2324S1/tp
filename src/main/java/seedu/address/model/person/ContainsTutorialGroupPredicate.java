@@ -12,7 +12,7 @@ public class ContainsTutorialGroupPredicate implements Predicate<Person> {
     /**
      * Constructor a {@code ContainsKeywordsPredicate} with only keywords.
      *
-     * @param tutorialGroup Tutorail group to filter the contact list for.
+     * @param tutorialGroup Tutorial group to filter the contact list for.
      */
     public ContainsTutorialGroupPredicate(TutorialGroup tutorialGroup) {
         this.tutorialGroup = tutorialGroup;
