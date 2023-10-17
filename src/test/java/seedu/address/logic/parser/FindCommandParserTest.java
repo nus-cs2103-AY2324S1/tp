@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICALHISTORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SPECIALTY;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseComplexFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseComplexSuccess;
 
 import java.util.Arrays;
@@ -17,7 +18,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindPredicateMap;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseComplexFailure;
 import seedu.address.model.person.PersonType;
 import seedu.address.model.person.predicates.AgeContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.EmailContainsKeywordsPredicate;
