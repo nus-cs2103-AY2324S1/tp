@@ -4,6 +4,7 @@ import static seedu.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORM
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,6 +17,7 @@ public class JsonAdaptedPatientTest {
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();
     private static final String VALID_EMAIL = BENSON.getEmail().toString();
+
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
@@ -24,7 +26,17 @@ public class JsonAdaptedPatientTest {
             .map(JsonAdaptedMedicalHistory::new)
             .collect(Collectors.toList());;
     private static final String VALID_AGE = BENSON.getAge().toString();
+    private static final String INVALID_MEDICAL_HISTORY = "#anemia";
     private static final String INVALID_AGE = "-1";
+    @Test
+    public void toModelType_invalidMedicalHistory_throwsIllegalValueException() {
+        List<JsonAdaptedMedicalHistory> invalidMedicalHistory = new ArrayList<>(VALID_MEDICAL_HISTORY);
+        invalidMedicalHistory.add(new JsonAdaptedMedicalHistory(INVALID_MEDICAL_HISTORY));
+        JsonAdaptedPerson person =
+                new JsonAdaptedPatient(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_TAGS,
+                        VALID_AGE, invalidMedicalHistory);
+        assertThrows(IllegalValueException.class, person::toModelType);
+    }
     @Test
     public void toModelType_invalidAge_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPatient(VALID_NAME, VALID_PHONE, VALID_EMAIL,
