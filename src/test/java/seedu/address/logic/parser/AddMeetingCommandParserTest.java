@@ -10,10 +10,12 @@ import static seedu.address.logic.commands.CommandTestUtil.LOCATION_DESC_MEETING
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.START_DESC_MEETING1;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_WORK;
 import static seedu.address.logic.commands.CommandTestUtil.TITLE_DESC_MEETING1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_END_MEETING1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LOCATION_MEETING1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_MEETING1;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_WORK;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TITLE_MEETING1;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
@@ -45,8 +47,15 @@ public class AddMeetingCommandParserTest {
                 + START_DESC_MEETING1 + END_DESC_MEETING1,
                 new AddMeetingCommand(expectedMeeting));
 
-        /*
         // multiple tags - all accepted
+        Meeting expectedMeetingMultipleTags = new MeetingBuilder(MEETING1).withAttendees().withTags(VALID_TAG_WORK)
+                .build();
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + TITLE_DESC_MEETING1 + LOCATION_DESC_MEETING1
+                + START_DESC_MEETING1 + END_DESC_MEETING1 + TAG_DESC_WORK,
+                new AddMeetingCommand(expectedMeetingMultipleTags));
+
+        /*
+        // multiple attendees - all accepted
         Meeting expectedMeetingMultipleAttendees = new MeetingBuilder(MEETING1)
                 .withAttendees("Alice Pauline", "Bob Choo").build();
         assertParseSuccess(parser, TITLE_DESC_MEETING1 + LOCATION_DESC_MEETING1

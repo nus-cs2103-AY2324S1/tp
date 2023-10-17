@@ -19,7 +19,7 @@ My contributions to the project are listed below.
 
 - **Enhancements to existing features**:
 
-  - to be added soon 
+  - Add Tag to meetings: logic and UI
 
 - **Documentation**:
 

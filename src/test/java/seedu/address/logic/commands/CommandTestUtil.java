@@ -46,6 +46,7 @@ public class CommandTestUtil {
     public static final String VALID_END_MEETING1 = "20.09.2023 1200";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_TAG_WORK = "work";
     public static final String VALID_ATTENDEE_ALICE = "Alice Pauline";
     public static final String VALID_ATTENDEE_BOB = "Bob Choo";
 
@@ -63,6 +64,7 @@ public class CommandTestUtil {
     public static final String END_DESC_MEETING1 = " " + PREFIX_END + VALID_END_MEETING1;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String TAG_DESC_WORK = " " + PREFIX_TAG + VALID_TAG_WORK;
     public static final String ATTENDEE_DESC_ALICE = " " + PREFIX_NAME + VALID_ATTENDEE_ALICE;
     public static final String ATTENDEE_DESC_BOB = " " + PREFIX_NAME + VALID_ATTENDEE_BOB;
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names

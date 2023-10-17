@@ -5,11 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalMeetings.MEETING1;
-import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.MeetingBuilder;
 
 public class MeetingTest {
@@ -30,9 +28,7 @@ public class MeetingTest {
 
         // same title, all other attributes different -> returns false
         Meeting editedMeeting1 = new MeetingBuilder(MEETING1).withLocation("Not a zoom call url")
-                .withStart("23.09.2023 1000")
-                .withEnd("23.09.2023 1000")
-                .withAttendees().build();
+                .withStart("23.09.2023 1000").withEnd("23.09.2023 1000").withAttendees().build();
         assertFalse(MEETING1.isSameMeeting(editedMeeting1));
 
         // different title, all other attributes same -> returns false
@@ -73,20 +69,22 @@ public class MeetingTest {
 
         // different email -> returns false
         editedMeeting1 = new MeetingBuilder(MEETING1).withStart("20.09.2023 1100").build();
-        assertFalse(ALICE.equals(editedMeeting1));
+        assertFalse(MEETING1.equals(editedMeeting1));
 
-        AddressBookBuilder test = new AddressBookBuilder();
-        test.withPerson(ALICE);
-        // different tags -> returns false
+        // different attendees -> returns false
         editedMeeting1 = new MeetingBuilder(MEETING1).withAttendees("Alice Pauline").build();
+        assertFalse(MEETING1.equals(editedMeeting1));
+
+        // different tags -> returns false
+        editedMeeting1 = new MeetingBuilder(MEETING1).withTags("other").build();
         assertFalse(MEETING1.equals(editedMeeting1));
     }
 
     @Test
     public void toStringMethod() {
-        String expected = Meeting.class.getCanonicalName() + "{title=" + MEETING1.getTitle()
-                + ", location=" + MEETING1.getLocation() + ", start=" + MEETING1.getStart()
-                + ", end=" + MEETING1.getEnd() + ", attendees=" + MEETING1.getAttendees() + "}";
+        String expected = Meeting.class.getCanonicalName() + "{title=" + MEETING1.getTitle() + ", location="
+                + MEETING1.getLocation() + ", start=" + MEETING1.getStart() + ", end=" + MEETING1.getEnd()
+                + ", attendees=" + MEETING1.getAttendees() + ", tags=" + MEETING1.getTags() + "}";
         assertEquals(expected, MEETING1.toString());
     }
 }

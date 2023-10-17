@@ -23,7 +23,7 @@ public class Person {
 
     // Data fields
     private final Remark remark;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Set<Tag> tags;
 
     /**
      * Every field must be present and not null.
@@ -34,7 +34,7 @@ public class Person {
         this.phone = phone;
         this.email = email;
         this.remark = remark;
-        this.tags.addAll(tags);
+        this.tags = new HashSet<>(tags);
     }
 
     public Name getName() {
