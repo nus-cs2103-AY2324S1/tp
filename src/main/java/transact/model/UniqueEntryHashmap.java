@@ -12,6 +12,9 @@ import transact.model.entry.Entry;
 import transact.model.entry.exceptions.DuplicateEntryException;
 import transact.model.entry.exceptions.EntryNotFoundException;
 
+/**
+ * UniqueEntryHashmap class
+ */
 public class UniqueEntryHashmap<K, V extends Entry> {
 
     private final ObservableMap<K, V> internalMap = FXCollections.observableMap(new TreeMap<>());
