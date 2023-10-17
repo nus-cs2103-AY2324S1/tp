@@ -21,7 +21,9 @@ public class UiManager implements Ui {
     public static final String ALERT_DIALOG_PANE_FIELD_ID = "alertDialogPane";
 
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
-    private static final String ICON_APPLICATION = "/images/address_book_32.png";
+    // Image credit to "https://www.freepik.com/free-vector/flat-design-ss-logo-template_21857773
+    // .htm#query=ss%20logo&position=4&from_view=keyword&track=ais"
+    private static final String ICON_APPLICATION = "/images/ss_logo.png";
 
     private Logic logic;
     private HostServices hostServices;

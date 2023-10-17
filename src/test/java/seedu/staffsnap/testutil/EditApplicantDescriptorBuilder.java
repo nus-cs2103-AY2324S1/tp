@@ -1,6 +1,6 @@
 package seedu.staffsnap.testutil;
 
-import java.util.Set;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -72,12 +72,12 @@ public class EditApplicantDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code interviews} into a {@code Set<Interview>} and set it to the {@code EditApplicantDescriptor}
+     * Parses the {@code interviews} into a {@code List<Interview>} and set it to the {@code EditApplicantDescriptor}
      * that we are building.
      */
     public EditApplicantDescriptorBuilder withInterviews(String... interviews) {
-        Set<Interview> interviewSet = Stream.of(interviews).map(Interview::new).collect(Collectors.toSet());
-        descriptor.setInterviews(interviewSet);
+        List<Interview> interviewList = Stream.of(interviews).map(Interview::new).collect(Collectors.toList());
+        descriptor.setInterviews(interviewList);
         return this;
     }
 
