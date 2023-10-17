@@ -123,6 +123,8 @@ public class ModelManager implements Model {
         addressBook.addBand(band);
     }
 
+
+
     //=========== Filtered Musician List Accessors =============================================================
 
     /**

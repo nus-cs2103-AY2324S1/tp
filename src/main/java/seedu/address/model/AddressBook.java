@@ -48,12 +48,21 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the band list with {@code bands}.
+     * {@code bands} must not contain duplicate bands.
+     */
+    public void setBands(List<Band> bands) {
+        this.bands.setBand(bands);
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
         setMusicians(newData.getMusicianList());
+        setBands(newData.getBandList());
     }
 
     //// musician-level operations
@@ -108,6 +117,18 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean hasBand(Band band) {
         requireNonNull(band);
         return bands.contains(band);
+    }
+
+    /**
+     * Replaces the given musician {@code target} in the list with {@code editedMusician}.
+     * {@code target} must exist in the address book.
+     * The musician identity of {@code editedMusician} must not be the same as another existing musician in the
+     * address book.
+     */
+    public void setBand(Band target, Band editedBand) {
+        requireNonNull(editedBand);
+
+        bands.setBand(target, editedBand);
     }
 
 
