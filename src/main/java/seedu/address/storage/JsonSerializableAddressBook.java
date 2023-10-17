@@ -30,7 +30,8 @@ class JsonSerializableAddressBook {
      * Constructs a {@code JsonSerializableAddressBook} with the given musicians.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("musicians") List<JsonAdaptedMusician> musicians, @JsonProperty("bands") List<JsonAdaptedBand> bands) {
+    public JsonSerializableAddressBook(@JsonProperty("musicians") List<JsonAdaptedMusician> musicians,
+                                       @JsonProperty("bands") List<JsonAdaptedBand> bands) {
         this.musicians.addAll(musicians);
         this.bands.addAll(bands);
     }

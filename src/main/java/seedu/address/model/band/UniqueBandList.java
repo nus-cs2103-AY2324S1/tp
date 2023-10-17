@@ -8,12 +8,22 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.band.exceptions.*;
-import seedu.address.model.musician.UniqueMusicianList;
-import seedu.address.model.musician.exceptions.DuplicateMusicianException;
+import seedu.address.model.band.exceptions.BandNotFoundException;
+import seedu.address.model.band.exceptions.DuplicateBandException;
 
-
-public class UniqueBandList implements Iterable<Band>{
+/**
+ * A list of bands that enforces uniqueness between its elements and does not allow nulls.
+ * A band is considered unique by comparing using {@code Band#isSameBand(Band)}.
+ * As such, adding and updating of persons uses Band#isSameBand(Band) for equality
+ * so as to ensure that the band being added or updated is unique in terms of identity in the UniqueBandList.
+ * However, the removal of a band uses Band#equals(Object) so as to ensure that
+ * the band with exactly the same fields will be removed.
+ *
+ * Supports a minimal set of list operations.
+ *
+ * @see Band#isSameBand(Band)
+ */
+public class UniqueBandList implements Iterable<Band> {
     private final ObservableList<Band> internalList = FXCollections.observableArrayList();
     private final ObservableList<Band> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
@@ -57,23 +67,10 @@ public class UniqueBandList implements Iterable<Band>{
 
         internalList.set(index, editedBand);
     }
-
-    /**
-     * Removes the equivalent musician from the list.
-     * The musician must exist in the list.
-     */
-    public void remove(Band toRemove) {
-        requireNonNull(toRemove);
-        if (!internalList.remove(toRemove)) {
-            throw new BandNotFoundException();
-        }
-    }
-
     public void setBand(UniqueBandList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
-
     /**
      * Replaces the contents of this list with {@code musicians}.
      * {@code musicians} must not contain duplicate musicians.
@@ -86,7 +83,16 @@ public class UniqueBandList implements Iterable<Band>{
 
         internalList.setAll(band);
     }
-
+    /**
+     * Removes the equivalent musician from the list.
+     * The musician must exist in the list.
+     */
+    public void remove(Band toRemove) {
+        requireNonNull(toRemove);
+        if (!internalList.remove(toRemove)) {
+            throw new BandNotFoundException();
+        }
+    }
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */

@@ -1,17 +1,20 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.commands.AddBandCommand;
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.band.*;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.HashSet;
 import java.util.stream.Stream;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import seedu.address.logic.commands.AddBandCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.band.Band;
+import seedu.address.model.band.BandName;
 
 
+/**
+ * Parses input arguments and creates a new AddBandCommand object
+ */
 public class AddBandCommandParser {
     /**
      * Parses the given {@code String} of arguments in the context of the AddBandCommand

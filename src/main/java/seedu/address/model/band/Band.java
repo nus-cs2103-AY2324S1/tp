@@ -8,7 +8,6 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.musician.Musician;
-import seedu.address.model.musician.Name;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -18,9 +17,7 @@ import seedu.address.model.tag.Tag;
 public class Band {
 
     private final BandName name;
-
     private final Set<Tag> genres = new HashSet<>();
-
     private final Set<Musician> musicians = new HashSet<>();
 
     /**
@@ -45,6 +42,10 @@ public class Band {
         return Collections.unmodifiableSet(musicians);
     }
 
+    /**
+     * Returns true if both bands have the same name.
+     * This defines a weaker notion of equality between two persons.
+     */
     public boolean isSameBand(Band otherBand) {
         if (otherBand == this) {
             return true;
