@@ -2,6 +2,9 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,6 +12,8 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.appointment.AppointmentDescription;
+import seedu.address.model.appointment.AppointmentTime;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Birthdate;
 import seedu.address.model.person.Email;
@@ -153,5 +158,53 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String dateAndTime} into a {@code LocalDateTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code dateAndTime} is invalid.
+     */
+    public static LocalDateTime parseDateTime(String dateAndTime) throws ParseException {
+        requireNonNull(dateAndTime);
+        String trimmedDateTime = dateAndTime.trim();
+        LocalDateTime localDateTime;
+        DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        try {
+            localDateTime = LocalDateTime.parse(trimmedDateTime, dateTimeFormat);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(AppointmentTime.MESSAGE_CONSTRAINTS);
+        }
+        return localDateTime;
+    }
+
+    public static int parsePatientIndex(String patientIndex) throws ParseException {
+        requireNonNull(patientIndex);
+        String trimmedDateTime = patientIndex.trim();
+        int index;
+        try {
+            index = Integer.parseInt(trimmedDateTime);
+        } catch (NumberFormatException e) {
+            throw new ParseException("Input Patient Index is not a number.");
+        }
+
+        return index;
+    }
+
+    /**
+     * Parses a {@code String description} into a {@code AppointmentDescription}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code dateAndTime} is invalid.
+     */
+    public static AppointmentDescription parseDescription(String description) throws ParseException {
+        requireNonNull(description);
+        String trimmedDescription = description.trim();
+
+        if (!AppointmentDescription.isValidAppointmentDescription(trimmedDescription)) {
+            throw new ParseException(Gender.MESSAGE_CONSTRAINTS);
+        }
+        return new AppointmentDescription(trimmedDescription);
     }
 }
