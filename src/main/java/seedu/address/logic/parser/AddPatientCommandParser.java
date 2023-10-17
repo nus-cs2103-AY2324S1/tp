@@ -65,7 +65,7 @@ public class AddPatientCommandParser implements Parser<AddPatientCommand> {
         Gender gender = ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get());
         Ic ic = ParserUtil.parseIc(argMultimap.getValue(PREFIX_NRIC).get());
         BloodType bloodType = ParserUtil.parseBloodType(argMultimap.getValue(PREFIX_BLOODTYPE).get());
-        Condition condition = ParserUtil.parseCondition(argMultimap.getValue(PREFIX_BLOODTYPE).get());
+        Condition condition = ParserUtil.parseCondition(argMultimap.getValue(PREFIX_CONDITION).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Patient patient =
                 new Patient(name, phone, emergencyContact, email, address, remark, gender, ic, condition, bloodType,
