@@ -90,11 +90,10 @@ public interface Model {
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicates}.
-     * @throws NullPointerException if any of the {@code predicates} is null.
+     * @throws NullPointerException if any of the {@code predicatesList} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate1, Predicate<Person> predicate2);
-
     void updateFilteredPersonList(List<Predicate<Person>> predicatesList);
+
     /**
      * Sorts the filtered person list by the given {@code comparator}.
      * @param comparator  The comparator to sort the list by.

@@ -10,7 +10,6 @@ import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.FIONA;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -83,8 +82,7 @@ public class FindCommandTest {
         NameContainsKeywordsPredicate namePredicate = prepareNamePredicate("Kurz Elle Kunz");
         StatusContainsKeywordsPredicate statusPredicate = prepareStatusPredicate("Preliminary");
         FindCommand command = new FindCommand(Arrays.asList(namePredicate, statusPredicate));
-        expectedModel.updateFilteredPersonList(namePredicate, statusPredicate);
-        System.out.println(expectedModel.getAddressBook());
+        expectedModel.updateFilteredPersonList(Arrays.asList(namePredicate, statusPredicate));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
     }

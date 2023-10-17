@@ -42,16 +42,17 @@ public class FindCommandParser implements Parser<FindCommand> {
         String[] statusKeywords = parseKeywordsList(argMultimap.getAllValues(PREFIX_STATUS));
 
         NameContainsKeywordsPredicate namePredicate = new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords));
-        StatusContainsKeywordsPredicate statusPredicate = new StatusContainsKeywordsPredicate(Arrays.asList(statusKeywords));
+        StatusContainsKeywordsPredicate statusPredicate = new StatusContainsKeywordsPredicate(
+                Arrays.asList(statusKeywords));
 
         List<Predicate<Person>> predicatesList = new ArrayList<>() {{
-            if (!nameKeywords[0].isEmpty()) {
-                add(namePredicate);
-            }
-            if (!statusKeywords[0].isEmpty()) {
-                add(statusPredicate);
-            }
-        }};
+                if (!nameKeywords[0].isEmpty()) {
+                    add(namePredicate);
+                }
+                if (!statusKeywords[0].isEmpty()) {
+                    add(statusPredicate);
+                }
+            }};
 
         return new FindCommand(predicatesList);
     }
