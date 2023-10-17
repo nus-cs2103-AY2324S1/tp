@@ -60,7 +60,7 @@ public class AddInterviewCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_INTERVIEW);
         }
 
-        applicantToEdit.setInterview(interviewToAdd);
+        applicantToEdit.addInterview(interviewToAdd);
         /*
          This is a workaround to javaFX not updating the list shown to the user unless the predicate is changed
          Possible fix in the future is to read the current predicate, then store it to be reused

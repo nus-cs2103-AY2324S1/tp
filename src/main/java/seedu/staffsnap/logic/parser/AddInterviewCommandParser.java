@@ -29,13 +29,9 @@ public class AddInterviewCommandParser implements Parser<AddInterviewCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddInterviewCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddInterviewCommand.MESSAGE_USAGE), pe);
         }
-
-//        if (!arePrefixesPresent(argMultimap, PREFIX_TYPE)
-//                || !argMultimap.getPreamble().isEmpty()) {
-//            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddInterviewCommand.MESSAGE_USAGE));
-//        }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TYPE);
         String type = ParserUtil.parseType(argMultimap.getValue(PREFIX_TYPE).get());

@@ -14,7 +14,6 @@ import seedu.staffsnap.commons.core.GuiSettings;
 import seedu.staffsnap.commons.core.LogsCenter;
 import seedu.staffsnap.model.applicant.Applicant;
 import seedu.staffsnap.model.applicant.Descriptor;
-import seedu.staffsnap.model.interview.Interview;
 
 /**
  * Represents the in-memory model of the applicant book data.
