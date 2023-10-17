@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import seedu.address.model.student.grades.AssignmentTracker;
+import seedu.address.model.student.grades.AttendanceTracker;
+import seedu.address.model.student.grades.ClassParticipationTracker;
 
 /**
  * Represents a Student's Class Number
@@ -23,7 +25,9 @@ public class ClassDetails {
 
     public final String value;
 
+    public final AttendanceTracker attendanceTracker;
     public final AssignmentTracker assignmentTracker;
+    public final ClassParticipationTracker classParticipationTracker;
 
     /**
      * Constructs an {@code Class Number}.
@@ -35,6 +39,8 @@ public class ClassDetails {
         requireNonNull(classDetails);
         checkArgument(isValidClassDetails(classDetails), MESSAGE_CONSTRAINTS);
         value = classDetails;
+        attendanceTracker = new AttendanceTracker(TEMP_LENGTH);
+        classParticipationTracker = new ClassParticipationTracker(TEMP_LENGTH);
         assignmentTracker = new AssignmentTracker(TEMP_LENGTH);
     }
 
