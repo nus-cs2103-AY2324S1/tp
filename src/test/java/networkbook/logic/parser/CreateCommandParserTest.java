@@ -1,7 +1,6 @@
 package networkbook.logic.parser;
 
 import static networkbook.logic.commands.CommandTestUtil.VALID_COURSE_AMY;
-import static networkbook.logic.commands.CommandTestUtil.VALID_COURSE_BOB;
 import static networkbook.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static networkbook.logic.commands.CommandTestUtil.VALID_GRADUATING_YEAR_AMY;
 import static networkbook.logic.commands.CommandTestUtil.VALID_LINK_AMY;
