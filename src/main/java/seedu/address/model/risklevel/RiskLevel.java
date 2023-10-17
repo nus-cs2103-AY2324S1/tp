@@ -1,5 +1,8 @@
 package seedu.address.model.risklevel;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -12,12 +15,19 @@ public class RiskLevel {
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
+    private static final Set<String> ALLOWED_VALUES = new HashSet<>();
+
+    static {
+        ALLOWED_VALUES.add("high");
+        ALLOWED_VALUES.add("medium");
+        ALLOWED_VALUES.add("low");
+    }
     public final String riskLevel;
 
     /**
      * Constructs a {@code RiskLevel}.
      *
-     * @param riskLevel A valid tag name.
+     * @param riskLevel A valid risk level.
      */
     public RiskLevel(String riskLevel) {
         requireNonNull(riskLevel);
