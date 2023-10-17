@@ -19,8 +19,8 @@ public class AddInterviewCommandTest {
 
     @Test
     public void constructor_nullInterview_throwsNullPointerException() {
-        assertThrows(NullPointerException.class,
-                () -> new AddInterviewCommand(null, null, null));
+        assertThrows(NullPointerException.class, () ->
+                new AddInterviewCommand(null, null, null));
     }
 
     @Test
