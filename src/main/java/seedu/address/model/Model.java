@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import java.nio.file.Path;
 import java.util.Comparator;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -93,6 +94,7 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate1, Predicate<Person> predicate2);
 
+    void updateFilteredPersonList(List<Predicate<Person>> predicatesList);
     /**
      * Sorts the filtered person list by the given {@code comparator}.
      * @param comparator  The comparator to sort the list by.

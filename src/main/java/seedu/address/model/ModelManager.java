@@ -142,6 +142,16 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(person -> predicate1.test(person) && predicate2.test(person));
     }
 
+    @Override
+    public void updateFilteredPersonList(List<Predicate<Person>> predicatesList) {
+
+        Predicate<Person> combinedPredicate = predicatesList.stream()
+                .reduce(Predicate::and)
+                .orElse(person -> true);
+        System.out.println(combinedPredicate);
+        filteredPersons.setPredicate(combinedPredicate);
+    }
+
     //  TODO: fix the sorting
     @Override
     public void sortPersonList(Comparator<Person> comparator) {
