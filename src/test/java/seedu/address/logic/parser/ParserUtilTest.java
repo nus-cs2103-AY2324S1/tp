@@ -148,11 +148,11 @@ public class ParserUtilTest {
         assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
     }
 
-    // Ambiguous method due overload
-//    @Test
-//    public void parseRiskLevel_null_throwsNullPointerException() {
-//        assertThrows(NullPointerException.class, () -> ParserUtil.parseRiskLevel(null));
-//    }
+    // Ambiguous method call because of overloaded method
+    //@Test
+    //public void parseRiskLevel_null_throwsNullPointerException() {
+    //    assertThrows(NullPointerException.class, () -> ParserUtil.parseRiskLevel(null));
+    //}
 
     @Test
     public void parseRiskLevel_invalidValue_throwsParseException() {
@@ -173,10 +173,10 @@ public class ParserUtilTest {
     }
 
     // Ambiguous method due overload
-//    @Test
-//    public void parseRiskLevel_null_throwsNullPointerException() {
-//        assertThrows(NullPointerException.class, () -> ParserUtil.parseRiskLevel(null));
-//    }
+    //@Test
+    //public void parseRiskLevel_null_throwsNullPointerException() {
+    //    assertThrows(NullPointerException.class, () -> ParserUtil.parseRiskLevel(null));
+    //}
 
     @Test
     public void parseRiskLevel_collectionWithInvalidTags_throwsParseException() {
@@ -191,7 +191,8 @@ public class ParserUtilTest {
     @Test
     public void parseRiskLevel_collectionWithValidTags_returnsTagSet() throws Exception {
         Set<RiskLevel> actualTagSet = ParserUtil.parseRiskLevel(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
-        Set<RiskLevel> expectedTagSet = new HashSet<RiskLevel>(Arrays.asList(new RiskLevel(VALID_TAG_1), new RiskLevel(VALID_TAG_2)));
+        Set<RiskLevel> expectedTagSet = new HashSet<RiskLevel>(Arrays.asList(
+                                                               new RiskLevel(VALID_TAG_1), new RiskLevel(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
     }
