@@ -18,7 +18,9 @@ public class Graduation {
             + "2. y is either 1 or 2.";
 
     private static final String AY_REGEX = "AY([0-9]{2})([0-9]{2})-S([12])";
-    private static final int MILLENNIUM = 2000;
+    private static final int YEAR_PART_HI = 2000;
+    private static final int YEAR_PART_LO = 1900;
+    private static final int YEAR_THRESHOLD = 70;
 
     /** 
      * First calendar year of the academic year, e.g. 2022 for AY2022/2023.
@@ -73,7 +75,9 @@ public class Graduation {
      */
     public static int parseAcadYearStart(String gradString) {
         String match = matchGroup(gradString, 1);
-        return Integer.parseInt(match) + MILLENNIUM;
+        int shortYear = Integer.parseInt(match);
+        int addedPart = (shortYear >= YEAR_THRESHOLD || shortYear == 0) ? YEAR_PART_HI : YEAR_PART_LO;
+        return Integer.parseInt(match) + addedPart;
     }
 
 
@@ -85,7 +89,9 @@ public class Graduation {
      */
     public static int parseAcadYearEnd(String gradString) {
         String match = matchGroup(gradString, 2);
-        return Integer.parseInt(match) + MILLENNIUM;
+        int shortYear = Integer.parseInt(match);
+        int addedPart = (shortYear >= YEAR_THRESHOLD || shortYear == 0) ? YEAR_PART_HI : YEAR_PART_LO;
+        return Integer.parseInt(match) + addedPart;
     }
 
     /**
@@ -151,8 +157,8 @@ public class Graduation {
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder("AY");
-        s.append(acadYearStart - MILLENNIUM);
-        s.append(acadYearEnd - MILLENNIUM);
+        s.append(acadYearStart % 100); // Get last 2 digits
+        s.append(acadYearEnd % 100);
         s.append("-S");
         s.append(semester.value);
         return s.toString();
