@@ -36,6 +36,9 @@ public class PersonCard extends UiPart<Region> {
     private Label age;
     @FXML
     private Label height;
+
+    @FXML
+    private Label income;
     @FXML
     private Label gender;
     @FXML
@@ -50,8 +53,9 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(date.getName().fullName);
         age.setText(date.getAge().value);
-        height.setText(date.getHeight().value);
         gender.setText(date.getGender().value);
+        height.setText(date.getHeight().value);
+        income.setText(date.getIncome().value);
         date.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

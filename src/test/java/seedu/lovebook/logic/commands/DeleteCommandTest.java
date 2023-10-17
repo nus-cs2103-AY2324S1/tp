@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.lovebook.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.lovebook.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.lovebook.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.lovebook.testutil.TypicalDatePrefs.getTypicalDatePrefs;
 import static seedu.lovebook.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.lovebook.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.lovebook.testutil.TypicalPersons.getTypicalLoveBook;
@@ -25,7 +26,7 @@ import seedu.lovebook.model.person.Date;
  */
 public class DeleteCommandTest {
 
-    private Model model = new ModelManager(getTypicalLoveBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalLoveBook(), new UserPrefs(), getTypicalDatePrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -35,7 +36,7 @@ public class DeleteCommandTest {
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.format(dateToDelete));
 
-        ModelManager expectedModel = new ModelManager(model.getLoveBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getLoveBook(), new UserPrefs(), model.getDatePrefs());
         expectedModel.deletePerson(dateToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
@@ -59,7 +60,7 @@ public class DeleteCommandTest {
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.format(dateToDelete));
 
-        Model expectedModel = new ModelManager(model.getLoveBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getLoveBook(), new UserPrefs(), model.getDatePrefs());
         expectedModel.deletePerson(dateToDelete);
         showNoPerson(expectedModel);
 

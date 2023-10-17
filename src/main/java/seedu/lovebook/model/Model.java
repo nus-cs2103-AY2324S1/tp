@@ -90,4 +90,12 @@ public interface Model {
      * Returns a String of welcome message.
      */
     String getWelcomeMessage();
+
+    Path getDatePrefsFilePath();
+
+    void setDatePrefsFilePath(Path datePrefsFilePath);
+
+    void setDatePrefs(ReadOnlyDatePrefs datePrefs);
+
+    ReadOnlyDatePrefs getDatePrefs();
 }

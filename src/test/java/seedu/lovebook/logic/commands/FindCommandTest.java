@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.lovebook.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.lovebook.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.lovebook.testutil.TypicalDatePrefs.getTypicalDatePrefs;
 import static seedu.lovebook.testutil.TypicalPersons.CARL;
 import static seedu.lovebook.testutil.TypicalPersons.ELLE;
 import static seedu.lovebook.testutil.TypicalPersons.FIONA;
@@ -24,8 +25,8 @@ import seedu.lovebook.model.person.NameContainsKeywordsPredicate;
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
-    private Model model = new ModelManager(getTypicalLoveBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalLoveBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalLoveBook(), new UserPrefs(), getTypicalDatePrefs());
+    private Model expectedModel = new ModelManager(getTypicalLoveBook(), new UserPrefs(), getTypicalDatePrefs());
 
     @Test
     public void equals() {

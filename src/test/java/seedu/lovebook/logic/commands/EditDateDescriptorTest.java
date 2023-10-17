@@ -64,7 +64,8 @@ public class EditDateDescriptorTest {
                 + editPersonDescriptor.getName().orElse(null) + ", age="
                 + editPersonDescriptor.getAge().orElse(null) + ", gender="
                 + editPersonDescriptor.getGender().orElse(null) + ", height="
-                + editPersonDescriptor.getHeight().orElse(null) + ", tags="
+                + editPersonDescriptor.getHeight().orElse(null) + ", income="
+                + editPersonDescriptor.getIncome().orElse(null) + ", tags="
                 + editPersonDescriptor.getTags().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());
     }

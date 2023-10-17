@@ -9,6 +9,7 @@ import seedu.lovebook.model.person.Age;
 import seedu.lovebook.model.person.Date;
 import seedu.lovebook.model.person.Gender;
 import seedu.lovebook.model.person.Height;
+import seedu.lovebook.model.person.Income;
 import seedu.lovebook.model.person.Name;
 import seedu.lovebook.model.tag.Tag;
 
@@ -36,6 +37,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setAge(date.getAge());
         descriptor.setGender(date.getGender());
         descriptor.setHeight(date.getHeight());
+        descriptor.setIncome(date.getIncome());
         descriptor.setTags(date.getTags());
     }
 
@@ -68,6 +70,14 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withHeight(String height) {
         descriptor.setHeight(new Height(height));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Income} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withIncome(String income) {
+        descriptor.setIncome(new Income(income));
         return this;
     }
 

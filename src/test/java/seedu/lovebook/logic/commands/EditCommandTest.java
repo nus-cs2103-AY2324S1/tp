@@ -11,6 +11,7 @@ import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.lovebook.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.lovebook.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.lovebook.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.lovebook.testutil.TypicalDatePrefs.getTypicalDatePrefs;
 import static seedu.lovebook.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.lovebook.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.lovebook.testutil.TypicalPersons.getTypicalLoveBook;
@@ -33,7 +34,7 @@ import seedu.lovebook.testutil.PersonBuilder;
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(getTypicalLoveBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalLoveBook(), new UserPrefs(), getTypicalDatePrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -43,7 +44,8 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedDate));
 
-        Model expectedModel = new ModelManager(new LoveBook(model.getLoveBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new LoveBook(model.getLoveBook()), new UserPrefs(),
+                model.getDatePrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedDate);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -64,7 +66,8 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedDate));
 
-        Model expectedModel = new ModelManager(new LoveBook(model.getLoveBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new LoveBook(model.getLoveBook()), new UserPrefs(),
+                model.getDatePrefs());
         expectedModel.setPerson(lastDate, editedDate);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -77,7 +80,8 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedDate));
 
-        Model expectedModel = new ModelManager(new LoveBook(model.getLoveBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new LoveBook(model.getLoveBook()), new UserPrefs(),
+                model.getDatePrefs());
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -93,7 +97,8 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedDate));
 
-        Model expectedModel = new ModelManager(new LoveBook(model.getLoveBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new LoveBook(model.getLoveBook()), new UserPrefs(),
+                model.getDatePrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedDate);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);

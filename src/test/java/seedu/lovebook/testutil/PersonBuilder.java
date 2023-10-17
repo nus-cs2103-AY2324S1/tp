@@ -7,6 +7,7 @@ import seedu.lovebook.model.person.Age;
 import seedu.lovebook.model.person.Date;
 import seedu.lovebook.model.person.Gender;
 import seedu.lovebook.model.person.Height;
+import seedu.lovebook.model.person.Income;
 import seedu.lovebook.model.person.Name;
 import seedu.lovebook.model.tag.Tag;
 import seedu.lovebook.model.util.SampleDataUtil;
@@ -20,11 +21,14 @@ public class PersonBuilder {
     public static final String DEFAULT_AGE = "33";
     public static final String DEFAULT_GENDER = "F";
     public static final String DEFAULT_HEIGHT = "123";
+    public static final String DEFAULT_INCOME = "3000";
 
     private Name name;
     private Age age;
     private Gender gender;
     private Height height;
+
+    private Income income;
     private Set<Tag> tags;
 
     /**
@@ -35,6 +39,7 @@ public class PersonBuilder {
         age = new Age(DEFAULT_AGE);
         gender = new Gender(DEFAULT_GENDER);
         height = new Height(DEFAULT_HEIGHT);
+        income = new Income(DEFAULT_INCOME);
         tags = new HashSet<>();
     }
 
@@ -46,6 +51,7 @@ public class PersonBuilder {
         age = dateToCopy.getAge();
         gender = dateToCopy.getGender();
         height = dateToCopy.getHeight();
+        income = dateToCopy.getIncome();
         tags = new HashSet<>(dateToCopy.getTags());
     }
 
@@ -89,8 +95,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Gender} of the {@code Date} that we are building.
+     */
+    public PersonBuilder withIncome(String income) {
+        this.income = new Income(income);
+        return this;
+    }
+
     public Date build() {
-        return new Date(name, age, gender, height, tags);
+        return new Date(name, age, gender, height, income, tags);
     }
 
 }

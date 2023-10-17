@@ -18,8 +18,10 @@ import javafx.collections.ObservableList;
 import seedu.lovebook.commons.core.GuiSettings;
 import seedu.lovebook.logic.Messages;
 import seedu.lovebook.logic.commands.exceptions.CommandException;
+import seedu.lovebook.model.DatePrefs;
 import seedu.lovebook.model.LoveBook;
 import seedu.lovebook.model.Model;
+import seedu.lovebook.model.ReadOnlyDatePrefs;
 import seedu.lovebook.model.ReadOnlyLoveBook;
 import seedu.lovebook.model.ReadOnlyUserPrefs;
 import seedu.lovebook.model.person.Date;
@@ -160,6 +162,26 @@ public class AddCommandTest {
 
         @Override
         public String getWelcomeMessage() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public DatePrefs getDatePrefs() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setDatePrefs(ReadOnlyDatePrefs datePrefs) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Path getDatePrefsFilePath() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setDatePrefsFilePath(Path datePrefsFilePath) {
             throw new AssertionError("This method should not be called.");
         }
     }
