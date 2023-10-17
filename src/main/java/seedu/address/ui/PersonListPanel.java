@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -20,6 +21,22 @@ public class PersonListPanel extends UiPart<Region> {
 
     @FXML
     private ListView<Person> personListView;
+
+    private List<Integer> indexes;
+
+    /**
+     * Creates a {@code PersonListPanel} with the given {@code ObservableList} and list of indexes.
+     */
+    public PersonListPanel(ObservableList<Person> personList, List<Integer> indexes) {
+        super(FXML);
+        personListView.setItems(personList);
+        if (indexes != null) {
+            personListView.setCellFactory(listView -> new PersonListViewCell(indexes));
+        } else {
+            personListView.setCellFactory(listView -> new PersonListViewCell());
+        }
+        this.fieldToRead = "";
+    }
 
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
@@ -45,6 +62,14 @@ public class PersonListPanel extends UiPart<Region> {
      * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
      */
     class PersonListViewCell extends ListCell<Person> {
+        private List<Integer> indexes;
+        public PersonListViewCell() {
+            this.indexes = null;
+        }
+
+        public PersonListViewCell(List<Integer> indexes) {
+            this.indexes = indexes;
+        }
         @Override
         protected void updateItem(Person person, boolean empty) {
             super.updateItem(person, empty);
@@ -53,9 +78,23 @@ public class PersonListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
+                if (indexes != null) {
+                    setGraphic(new PersonCard(person, getIndex() + 1, this.indexes).getRoot());
+                } else {
+                    setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
+                }
             }
         }
+    }
+
+    public void indexesSetter(List<Integer> indexes) {
+        this.indexes = indexes;
+        if (indexes != null) {
+            personListView.setCellFactory(listView -> new PersonListViewCell(indexes));
+        } else {
+            personListView.setCellFactory(listView -> new PersonListViewCell());
+        }
+        personListView.requestLayout();
     }
 
     /**

@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -35,6 +36,8 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private boolean isRead;
+
+    private List<Integer> indexes = null;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -111,7 +114,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), this.indexes);
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -194,6 +197,8 @@ public class MainWindow extends UiPart<Stage> {
         try {
             resetMainWindow();
             CommandResult commandResult = logic.execute(commandText);
+            this.indexes = commandResult.getIndexes();
+            this.personListPanel.indexesSetter(this.indexes);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 

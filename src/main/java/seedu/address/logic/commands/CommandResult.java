@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.List;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -18,7 +19,7 @@ public class CommandResult {
 
     /** The application should exit. */
     private final boolean exit;
-
+    private final List<Integer> indexes;
     /** The application should read a specific field of a particular employee. */
     private final boolean read;
     private final String fieldToRead;
@@ -30,6 +31,7 @@ public class CommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.indexes = null;
         this.read = false;
         this.fieldToRead = null;
     }
@@ -41,21 +43,35 @@ public class CommandResult {
     public CommandResult(String feedbackToUser) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = false;
+        this.indexes = null;
         this.exit = false;
         this.read = false;
         this.fieldToRead = null;
     }
 
     /**
-     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
-     * ,store read field and set read to true to display a different person card.
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser}
+     * To store read field and set read to true to display a different person card.
      */
     public CommandResult(String feedbackToUser, boolean read, String fieldToRead) {
         this.feedbackToUser = feedbackToUser;
+        this.indexes = null;
         this.exit = false;
         this.showHelp = false;
         this.read = read;
         this.fieldToRead = fieldToRead;
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified fields.
+     */
+    public CommandResult(String feedbackToUser, List<Integer> indexes) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.showHelp = false;
+        this.exit = false;
+        this.indexes = indexes;
+        this.read = false;
+        this.fieldToRead = null;
     }
 
     public String getFeedbackToUser() {
@@ -107,6 +123,10 @@ public class CommandResult {
                 .add("showHelp", showHelp)
                 .add("exit", exit)
                 .toString();
+    }
+
+    public List<Integer> getIndexes() {
+        return this.indexes;
     }
 
 }

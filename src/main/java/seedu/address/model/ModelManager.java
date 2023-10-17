@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -153,6 +155,17 @@ public class ModelManager implements Model {
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
+    }
+
+    @Override
+    public List<Integer> getIndexOfFilteredPersonList(Predicate<Person> predicate) {
+        List<Integer> indexes = new ArrayList<>();
+        for (int i = 0; i < filteredPersons.size(); i++) {
+            if (predicate.test(filteredPersons.get(i))) {
+                indexes.add(i + 1);
+            }
+        }
+        return indexes;
     }
 
 }

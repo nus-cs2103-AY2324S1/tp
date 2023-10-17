@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.List;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -54,6 +55,20 @@ public class PersonCard extends UiPart<Region> {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
+        name.setText(person.getName().fullName);
+        phone.setText(person.getPhone().value);
+        address.setText(person.getAddress().value);
+        email.setText(person.getEmail().value);
+        bankAccount.setText(person.getBankAccount().value);
+        joinDate.setText(person.getJoinDate().value);
+        salary.setText(person.getSalary().value);
+        annualLeave.setText(person.getAnnualLeave().value);
+    }
+
+    public PersonCard(Person person, int displayedIndex, List<Integer> indexes) {
+        super(FXML);
+        this.person = person;
+        id.setText(indexes.get(displayedIndex - 1) + ". ");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
