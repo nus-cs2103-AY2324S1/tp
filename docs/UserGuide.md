@@ -306,6 +306,36 @@ When the command fails:
 `OOPS, no matching contact with index 100000.`
 
 
+### Add graduation date to contact: `add /grad /index`
+
+You can set the graduation date (to the nearest semester) of an existing contact. No new contact will be created.
+
+Format: `add /grad [grad] /index [index]`
+
+Example usage:
+* `add /grad AY2223-S1 /index 1`
+* `add /grad AY2627-S2 /index 2`
+
+Parameters:
+* `[grad]` is a valid graduation date, in the format `AYxxxx-Sy`.
+    * `xxxx` is the 4-digit representation of the calendar years, e.g. `2223` for Academic Year 20`22`/20`23`.
+    * `y` is the semester of graduation. It can be either `1` for Semester 1, or `2` for Semester 2.
+* `[index]` is the index of the contact in the list.
+
+When the command succeeds:
+* `add /grad AY2223-S1 /index 1`
+
+`Noted, I have set the graduation date of AY2022/2023 Semester 1 to the contact at index 1 (Oreki).`
+
+When the command fails:
+* `add /grad AY2223-S1`
+
+`Oops, you did not provide the index of the contact to add to.`
+
+* `add /grad 2022 /index 1`
+
+`Oops, you did not provide a valid graduation date in the format AYxxxx-Sy, e.g. AY2223-S1.`
+
 
 ### <u>Category 2 - Edit contact details</u>
 
