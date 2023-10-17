@@ -6,7 +6,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.person.Address;
+import seedu.address.model.student.Address;
 
 public class DataTimeTest {
 
