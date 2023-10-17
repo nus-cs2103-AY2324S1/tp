@@ -2,6 +2,7 @@ package seedu.lovebook.logic.commands;
 
 import static seedu.lovebook.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.lovebook.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.lovebook.testutil.TypicalDatePrefs.getTypicalDatePrefs;
 import static seedu.lovebook.testutil.TypicalPersons.getTypicalLoveBook;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -23,14 +24,14 @@ public class AddCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalLoveBook(), new UserPrefs());
+        model = new ModelManager(getTypicalLoveBook(), new UserPrefs(), getTypicalDatePrefs());
     }
 
     @Test
     public void execute_newPerson_success() {
         Date validDate = new PersonBuilder().build();
 
-        Model expectedModel = new ModelManager(model.getLoveBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getLoveBook(), new UserPrefs(), model.getDatePrefs());
         expectedModel.addPerson(validDate);
 
         assertCommandSuccess(new AddCommand(validDate), model,

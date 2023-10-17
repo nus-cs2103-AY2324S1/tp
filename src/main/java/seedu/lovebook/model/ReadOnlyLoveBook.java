@@ -4,7 +4,7 @@ import javafx.collections.ObservableList;
 import seedu.lovebook.model.person.Date;
 
 /**
- * Unmodifiable view of an lovebook book
+ * Unmodifiable view of the LoveBook.
  */
 public interface ReadOnlyLoveBook {
 

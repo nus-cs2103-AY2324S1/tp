@@ -15,13 +15,18 @@ import seedu.lovebook.commons.util.ConfigUtil;
 import seedu.lovebook.commons.util.StringUtil;
 import seedu.lovebook.logic.Logic;
 import seedu.lovebook.logic.LogicManager;
+import seedu.lovebook.model.DatePrefs;
 import seedu.lovebook.model.LoveBook;
 import seedu.lovebook.model.Model;
 import seedu.lovebook.model.ModelManager;
+import seedu.lovebook.model.ReadOnlyDatePrefs;
 import seedu.lovebook.model.ReadOnlyLoveBook;
 import seedu.lovebook.model.ReadOnlyUserPrefs;
 import seedu.lovebook.model.UserPrefs;
 import seedu.lovebook.model.util.SampleDataUtil;
+import seedu.lovebook.model.util.SampleDatePrefUtil;
+import seedu.lovebook.storage.DatePrefsStorage;
+import seedu.lovebook.storage.JsonLoveBookDatePrefs;
 import seedu.lovebook.storage.JsonLoveBookStorage;
 import seedu.lovebook.storage.JsonUserPrefsStorage;
 import seedu.lovebook.storage.LoveBookStorage;
@@ -58,7 +63,8 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         LoveBookStorage loveBookStorage = new JsonLoveBookStorage(userPrefs.getLoveBookFilePath());
-        storage = new StorageManager(loveBookStorage, userPrefsStorage);
+        DatePrefsStorage datePrefsStorage = new JsonLoveBookDatePrefs(userPrefs.getDatePrefsFilePath());
+        storage = new StorageManager(loveBookStorage, userPrefsStorage, datePrefsStorage);
 
         model = initModelManager(storage, userPrefs);
 
@@ -76,7 +82,9 @@ public class MainApp extends Application {
         logger.info("Using data file : " + storage.getLoveBookFilePath());
 
         Optional<ReadOnlyLoveBook> loveBookOptional;
+        Optional<ReadOnlyDatePrefs> datePrefsOptional;
         ReadOnlyLoveBook initialData;
+        ReadOnlyDatePrefs initialDatePrefs;
         try {
             loveBookOptional = storage.readLoveBook();
             if (!loveBookOptional.isPresent()) {
@@ -90,7 +98,20 @@ public class MainApp extends Application {
             initialData = new LoveBook();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        try {
+            datePrefsOptional = storage.readDatePrefs();
+            if (!datePrefsOptional.isPresent()) {
+                logger.info("Creating a new data file " + storage.getDatePrefsFilePath()
+                        + " populated with a sample DatePrefs.");
+            }
+            initialDatePrefs = datePrefsOptional.orElseGet(SampleDatePrefUtil::getSamplePreferences);
+        } catch (DataLoadingException e) {
+            logger.warning("Data file at " + storage.getDatePrefsFilePath() + " could not be loaded."
+                    + " Will be starting with empty preferences.");
+            initialDatePrefs = new DatePrefs();
+        }
+
+        return new ModelManager(initialData, userPrefs, initialDatePrefs);
     }
 
     private void initLogging(Config config) {
@@ -180,6 +201,7 @@ public class MainApp extends Application {
         logger.info("============================ [ Stopping Height Book ] =============================");
         try {
             storage.saveUserPrefs(model.getUserPrefs());
+            storage.saveDatePrefs(model.getDatePrefs());
         } catch (IOException e) {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         }

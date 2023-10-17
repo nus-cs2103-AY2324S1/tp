@@ -1,6 +1,7 @@
 package seedu.lovebook.logic.commands;
 
 import static seedu.lovebook.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.lovebook.testutil.TypicalDatePrefs.getTypicalDatePrefs;
 import static seedu.lovebook.testutil.TypicalPersons.getTypicalLoveBook;
 
 import org.junit.jupiter.api.Test;
@@ -22,8 +23,8 @@ public class ClearCommandTest {
 
     @Test
     public void execute_nonEmptyLoveBook_success() {
-        Model model = new ModelManager(getTypicalLoveBook(), new UserPrefs());
-        Model expectedModel = new ModelManager(getTypicalLoveBook(), new UserPrefs());
+        Model model = new ModelManager(getTypicalLoveBook(), new UserPrefs(), getTypicalDatePrefs());
+        Model expectedModel = new ModelManager(getTypicalLoveBook(), new UserPrefs(), getTypicalDatePrefs());
         expectedModel.setLoveBook(new LoveBook());
 
         assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);

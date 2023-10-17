@@ -107,8 +107,8 @@ public class ModelManagerTest {
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(loveBook, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(loveBook, userPrefs);
+        modelManager = new ModelManager(loveBook, userPrefs, new DatePrefs());
+        ModelManager modelManagerCopy = new ModelManager(loveBook, userPrefs, new DatePrefs());
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -121,12 +121,12 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(5));
 
         // different LoveBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentLoveBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(differentLoveBook, userPrefs, new DatePrefs())));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(loveBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(loveBook, userPrefs, new DatePrefs())));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -134,6 +134,6 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setLoveBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(loveBook, differentUserPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(loveBook, differentUserPrefs, new DatePrefs())));
     }
 }

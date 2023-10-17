@@ -15,9 +15,9 @@ import seedu.lovebook.model.person.horoscope.Horoscope;
 /**
  * Jackson-friendly version of {@link Date}.
  */
-class JsonAdaptedPerson {
+class JsonAdaptedDate {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Date's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Date's %sg field is missing!";
 
     private final String name;
     private final String age;
@@ -27,10 +27,10 @@ class JsonAdaptedPerson {
     private final String horoscope;
 
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given date details.
+     * Constructs a {@code JsonAdaptedDate} with the given date details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("age") String age,
+    public JsonAdaptedDate(@JsonProperty("name") String name, @JsonProperty("age") String age,
             @JsonProperty("gender") String gender, @JsonProperty("height") String height,
              @JsonProperty("income") String income, @JsonProperty("horoscope") String horoscope) {
         this.name = name;
@@ -44,7 +44,7 @@ class JsonAdaptedPerson {
     /**
      * Converts a given {@code Date} into this class for Jackson use.
      */
-    public JsonAdaptedPerson(Date source) {
+    public JsonAdaptedDate(Date source) {
         name = source.getName().fullName;
         age = source.getAge().value;
         gender = source.getGender().value;

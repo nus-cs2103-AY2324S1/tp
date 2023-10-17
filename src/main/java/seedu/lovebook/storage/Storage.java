@@ -5,6 +5,7 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.lovebook.commons.exceptions.DataLoadingException;
+import seedu.lovebook.model.ReadOnlyDatePrefs;
 import seedu.lovebook.model.ReadOnlyLoveBook;
 import seedu.lovebook.model.ReadOnlyUserPrefs;
 import seedu.lovebook.model.UserPrefs;
@@ -12,7 +13,7 @@ import seedu.lovebook.model.UserPrefs;
 /**
  * API of the Storage component
  */
-public interface Storage extends LoveBookStorage, UserPrefsStorage {
+public interface Storage extends LoveBookStorage, UserPrefsStorage, DatePrefsStorage {
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataLoadingException;
@@ -28,5 +29,19 @@ public interface Storage extends LoveBookStorage, UserPrefsStorage {
 
     @Override
     void saveLoveBook(ReadOnlyLoveBook loveBook) throws IOException;
+
+    @Override
+    Path getUserPrefsFilePath();
+
+    @Override
+    Path getDatePrefsFilePath();
+
+    @Override
+    Optional<ReadOnlyDatePrefs> readDatePrefs(Path filePath) throws DataLoadingException;
+
+    @Override
+    void saveDatePrefs(ReadOnlyDatePrefs loveBook) throws IOException;
+
+
 
 }
