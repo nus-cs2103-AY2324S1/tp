@@ -36,4 +36,5 @@ public class SortCommandTest {
         assertEquals(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE), model.getFilteredPersonList());
     }
 
+
 }
