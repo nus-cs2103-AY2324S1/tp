@@ -11,6 +11,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.meeting.Meeting;
 
+/**
+ * Views detailed information of meeting identified using it's displayed index from the address book.
+ */
 public class ViewMeetingCommand extends Command {
 
     public static final String COMMAND_WORD = "viewm";

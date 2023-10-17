@@ -1,7 +1,10 @@
 package seedu.address.ui;
 
+import java.util.Comparator;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import javafx.util.Pair;
 import seedu.address.model.meeting.Meeting;
@@ -14,7 +17,11 @@ public class InfoDisplayPanel extends UiPart<Region> {
     private static final String FXML = "InfoDisplayPanel.fxml";
 
     @FXML
-    private Label infoDisplay;
+    private Label personDisplay;
+    @FXML
+    private FlowPane tags;
+    @FXML
+    private Label meetingDisplay;
 
     /**
      * Creates a text display with the given {@code person}.
@@ -26,17 +33,17 @@ public class InfoDisplayPanel extends UiPart<Region> {
     public void setViewedPerson(Pair<Person, Meeting> pair) {
         Person person = pair.getKey();
         Meeting meeting = pair.getValue();
-
-        String personDetails = "";
-        String meetingDetails = "";
+        tags.getChildren().clear();
 
         if (person != null) {
-            personDetails = person.toDisplayString();
-        }
-        if (meeting != null) {
-            meetingDetails = meeting.toDisplayString();
+            personDisplay.setText(person.toDisplayString());
+            person.getTags().stream()
+                    .sorted(Comparator.comparing(tag -> tag.tagName))
+                    .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         }
 
-        infoDisplay.setText(personDetails + "\n\n" + meetingDetails);
+        if (meeting != null) {
+            meetingDisplay.setText(meeting.toDisplayString());
+        }
     }
 }

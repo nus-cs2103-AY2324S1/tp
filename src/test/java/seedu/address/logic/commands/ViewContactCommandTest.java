@@ -35,8 +35,7 @@ public class ViewContactCommandTest {
         String expectedDisplayString = "Name: Alice Pauline\n"
                 + "Phone: 94351253\n"
                 + "Email: alice@example.com\n"
-                + "Remark: \n"
-                + "Tags: [friends]\n";
+                + "Remark: \n";
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
@@ -63,8 +62,7 @@ public class ViewContactCommandTest {
         String expectedDisplayString = "Name: Alice Pauline\n"
                 + "Phone: 94351253\n"
                 + "Email: alice@example.com\n"
-                + "Remark: \n"
-                + "Tags: [friends]\n";
+                + "Remark: \n";
 
         // Model displaying filtered list should not change
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
