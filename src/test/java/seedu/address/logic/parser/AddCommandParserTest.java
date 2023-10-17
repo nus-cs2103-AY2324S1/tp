@@ -118,23 +118,48 @@ public class AddCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
 
         // missing name prefix
-        assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
+        assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + BANKACCOUNT_DESC_BOB + JOINDATE_DESC_BOB + SALARY_DESC_BOB + ANNUALLEAVE_DESC_BOB,
                 expectedMessage);
 
         // missing phone prefix
-        assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
+        assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + BANKACCOUNT_DESC_BOB + JOINDATE_DESC_BOB + SALARY_DESC_BOB + ANNUALLEAVE_DESC_BOB,
                 expectedMessage);
 
         // missing email prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + ADDRESS_DESC_BOB,
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + ADDRESS_DESC_BOB
+                + BANKACCOUNT_DESC_BOB + JOINDATE_DESC_BOB + SALARY_DESC_BOB + ANNUALLEAVE_DESC_BOB,
                 expectedMessage);
 
         // missing address prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB,
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB
+                + BANKACCOUNT_DESC_BOB + JOINDATE_DESC_BOB + SALARY_DESC_BOB + ANNUALLEAVE_DESC_BOB,
+                expectedMessage);
+
+        // missing bank account
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB
+                + VALID_BANKACCOUNT_BOB + JOINDATE_DESC_BOB + SALARY_DESC_BOB + ANNUALLEAVE_DESC_BOB,
+                expectedMessage);
+
+        // missing join date
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB
+                + BANKACCOUNT_DESC_BOB + VALID_JOINDATE_BOB + SALARY_DESC_BOB + ANNUALLEAVE_DESC_BOB,
+                expectedMessage);
+
+        // missing salary
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB
+                + BANKACCOUNT_DESC_BOB + JOINDATE_DESC_BOB + VALID_SALARY_BOB + ANNUALLEAVE_DESC_BOB,
+                expectedMessage);
+
+        // missing annual leave
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB
+                + BANKACCOUNT_DESC_BOB + JOINDATE_DESC_BOB + SALARY_DESC_BOB + VALID_ANNUALLEAVE_BOB,
                 expectedMessage);
 
         // all prefixes missing
-        assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB,
+        assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB
+                + VALID_BANKACCOUNT_BOB + VALID_JOINDATE_BOB + VALID_SALARY_BOB + VALID_ANNUALLEAVE_BOB,
                 expectedMessage);
     }
 
