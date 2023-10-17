@@ -1,7 +1,5 @@
 package seedu.lovebook.ui;
 
-import java.util.Comparator;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -56,8 +54,5 @@ public class PersonCard extends UiPart<Region> {
         gender.setText(date.getGender().value);
         height.setText(date.getHeight().value);
         income.setText(date.getIncome().value);
-        date.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 }

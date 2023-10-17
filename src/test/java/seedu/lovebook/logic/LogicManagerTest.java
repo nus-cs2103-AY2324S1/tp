@@ -175,7 +175,7 @@ public class LogicManagerTest {
         // Triggers the saveLoveBook method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + AGE_DESC_AMY
                 + GENDER_DESC_AMY + HEIGHT_DESC_AMY + INCOME_DESC_AMY;
-        Date expectedDate = new PersonBuilder(AMY).withTags().build();
+        Date expectedDate = new PersonBuilder(AMY).build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedDate);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);

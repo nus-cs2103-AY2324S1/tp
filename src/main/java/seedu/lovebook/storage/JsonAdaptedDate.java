@@ -1,11 +1,5 @@
 package seedu.lovebook.storage;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -16,38 +10,32 @@ import seedu.lovebook.model.person.Gender;
 import seedu.lovebook.model.person.Height;
 import seedu.lovebook.model.person.Income;
 import seedu.lovebook.model.person.Name;
-import seedu.lovebook.model.tag.Tag;
 
 /**
  * Jackson-friendly version of {@link Date}.
  */
 class JsonAdaptedDate {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Date's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Date's %sg field is missing!";
 
     private final String name;
     private final String age;
     private final String gender;
     private final String height;
     private final String income;
-    private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedDate} with the given date details.
      */
     @JsonCreator
     public JsonAdaptedDate(@JsonProperty("name") String name, @JsonProperty("age") String age,
-                           @JsonProperty("gender") String gender, @JsonProperty("height") String height,
-                           @JsonProperty("income") String income,
-                           @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("gender") String gender, @JsonProperty("height") String height,
+             @JsonProperty("income") String income) {
         this.name = name;
         this.age = age;
         this.gender = gender;
         this.height = height;
         this.income = income;
-        if (tags != null) {
-            this.tags.addAll(tags);
-        }
     }
 
     /**
@@ -59,9 +47,6 @@ class JsonAdaptedDate {
         gender = source.getGender().value;
         height = source.getHeight().value;
         income = source.getIncome().value;
-        tags.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
-                .collect(Collectors.toList()));
     }
 
     /**
@@ -70,11 +55,6 @@ class JsonAdaptedDate {
      * @throws IllegalValueException if there were any data constraints violated in the adapted date.
      */
     public Date toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tags) {
-            personTags.add(tag.toModelType());
-        }
-
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -115,8 +95,7 @@ class JsonAdaptedDate {
         }
         final Income modelIncome = new Income(income);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Date(modelName, modelAge, modelGender, modelHeight, modelIncome, modelTags);
+        return new Date(modelName, modelAge, modelGender, modelHeight, modelIncome);
     }
 
 }
