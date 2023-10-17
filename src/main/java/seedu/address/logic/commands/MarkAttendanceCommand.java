@@ -53,7 +53,7 @@ public class MarkAttendanceCommand extends Command {
         }
 
         // TODO - Possibly implement module inclusion for attendance and modify UG appropriately
-        Attendance attendance = new Attendance(date, isPresent, null);
+        Attendance attendance = new Attendance(date, isPresent);
         targetPerson.addAttendance(attendance);
 
         return new CommandResult(String.format("Attendance marked for person: %s", targetPerson.getName()));
