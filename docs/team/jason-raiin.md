@@ -20,6 +20,7 @@ My contributions to the project are listed below.
 - **Enhancements to existing features**:
 
   - Add Tag to meetings: logic and UI
+  - Convert Tag to factory class with no duplicates
 
 - **Documentation**:
 
