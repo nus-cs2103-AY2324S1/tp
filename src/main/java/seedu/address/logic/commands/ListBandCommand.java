@@ -12,7 +12,7 @@ import seedu.address.model.band.BandNameContainsKeywordsPredicate;
  */
 public class ListBandCommand extends Command {
 
-    public static final String COMMAND_WORD = "list band";
+    public static final String COMMAND_WORD = "listb";
 
     public static final Object MESSAGE_USAGE = COMMAND_WORD + ": Finds all musicians who are part of "
         + "the specified band (case-insensitive) and displays them as a list with index numbers.\n"
