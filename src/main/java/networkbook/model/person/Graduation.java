@@ -160,9 +160,9 @@ public class Graduation {
 
     @Override
     public String toString() {
-        StringBuilder s = new StringBuilder("AY");
-        s.append(acadYearStart % 100); // Get last 2 digits
-        s.append(acadYearEnd % 100);
+        StringBuilder s = new StringBuilder("AY");  
+        s.append(String.format("%02d", acadYearStart % 100));// Get last 2 digits
+        s.append(String.format("%02d", acadYearEnd % 100));
         s.append("-S");
         s.append(semester.value);
         return s.toString();
