@@ -132,7 +132,7 @@ UI mockup:
 ---
 ### `addi` : Adding an interview to an applicant
 
-Adds a new interview to an applicant
+Adds a new interview to an applicant.
 
 Format: `addi INDEX t/TYPE`
 
