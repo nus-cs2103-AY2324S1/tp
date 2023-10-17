@@ -19,7 +19,7 @@ import seedu.address.model.person.fields.Name;
 import seedu.address.model.person.fields.Phone;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing applicant in the address book.
  */
 public class EditApplicantCommand extends Command {
 
@@ -113,8 +113,8 @@ public class EditApplicantCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the applicant with. Each non-empty field value will replace the
+     * corresponding field value of the applicant.
      */
     public static class EditApplicantDescriptor {
         private Name name;
