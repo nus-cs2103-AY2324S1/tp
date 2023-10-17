@@ -16,7 +16,8 @@ import seedu.address.model.tag.Tag;
 public class SampleDataUtil {
     public static Card[] getSampleCard() {
         return new Card[] {new Card(new Question("What is 1 + 1"),
-                new Answer("2")), new Card(new Question("What is 1 + 3"), new Answer("4"))
+                new Answer("2"), "new"), new Card(new Question("What is 1 + 3"), new Answer("4"),
+                "easy")
         };
     }
     public static Deck getSampleDeck() {

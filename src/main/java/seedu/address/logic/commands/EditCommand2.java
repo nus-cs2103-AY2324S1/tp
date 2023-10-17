@@ -86,7 +86,7 @@ public class EditCommand2 extends Command2 {
         Answer updatedAnswer = editCardDescriptor.getAnswer().orElse(cardToEdit.getAnswer());
 
 
-        return new Card(updatedQuestion, updatedAnswer);
+        return new Card(updatedQuestion, updatedAnswer, "new");
     }
 
     @Override
