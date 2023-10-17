@@ -1,13 +1,18 @@
 package seedu.lovebook.model.person;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_AGE;
+import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_GENDER;
+import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HEIGHT;
+import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_NAME;
+
 import java.util.function.Predicate;
 
 import seedu.lovebook.commons.util.StringUtil;
 import seedu.lovebook.commons.util.ToStringBuilder;
 import seedu.lovebook.logic.parser.Prefix;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.lovebook.logic.parser.CliSyntax.*;
+
 
 /**
  * Tests that a {@code Date}'s {@code Name} matches any of the keywords given.
@@ -15,7 +20,9 @@ import static seedu.lovebook.logic.parser.CliSyntax.*;
 public class MetricContainsKeywordPredicate implements Predicate<Date> {
     private final String keyword;
     private final Prefix metric;
-
+    /**
+     * Constructor that initialises the String keyword and Prefix metric
+    */
     public MetricContainsKeywordPredicate(String keyword, Prefix metric) {
         this.keyword = keyword;
         this.metric = metric;

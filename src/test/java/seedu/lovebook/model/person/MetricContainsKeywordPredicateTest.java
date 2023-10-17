@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_NAME;
 
-
 import org.junit.jupiter.api.Test;
 
 import seedu.lovebook.logic.parser.Prefix;
@@ -54,8 +53,8 @@ public class MetricContainsKeywordPredicateTest {
     @Test
     public void test_nameDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
-       // MetricContainsKeywordPredicate predicate = new MetricContainsKeywordPredicate(" ", PREFIX_NAME);
-     //   assertFalse(predicate.test(new PersonBuilder().withName("Alice").build()));
+        // MetricContainsKeywordPredicate predicate = new MetricContainsKeywordPredicate(" ", PREFIX_NAME);
+        //   assertFalse(predicate.test(new PersonBuilder().withName("Alice").build()));
 
         // Non-matching keyword
         MetricContainsKeywordPredicate predicate = new MetricContainsKeywordPredicate("Carol", PREFIX_NAME);
@@ -72,7 +71,8 @@ public class MetricContainsKeywordPredicateTest {
         String keyword = "Alice";
         Prefix metric = PREFIX_NAME;
         MetricContainsKeywordPredicate predicate = new MetricContainsKeywordPredicate(keyword, PREFIX_NAME);
-        String expected = MetricContainsKeywordPredicate.class.getCanonicalName() + "{keyword=" + keyword + ", prefix=" + metric
+        String expected = MetricContainsKeywordPredicate.class.getCanonicalName()
+                + "{keyword=" + keyword + ", prefix=" + metric
                 + "}";
         assertEquals(expected, predicate.toString());
     }

@@ -5,8 +5,16 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.lovebook.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.lovebook.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.lovebook.logic.parser.CliSyntax.*;
-import static seedu.lovebook.testutil.TypicalPersons.*;
+import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_AGE;
+import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_GENDER;
+import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HEIGHT;
+import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.lovebook.testutil.TypicalDatePrefs.getTypicalDatePrefs;
+import static seedu.lovebook.testutil.TypicalPersons.ALICE;
+import static seedu.lovebook.testutil.TypicalPersons.BENSON;
+import static seedu.lovebook.testutil.TypicalPersons.ELLE;
+import static seedu.lovebook.testutil.TypicalPersons.FIONA;
+import static seedu.lovebook.testutil.TypicalPersons.getTypicalLoveBook;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -18,19 +26,18 @@ import seedu.lovebook.model.Model;
 import seedu.lovebook.model.ModelManager;
 import seedu.lovebook.model.UserPrefs;
 import seedu.lovebook.model.person.MetricContainsKeywordPredicate;
-import seedu.lovebook.model.person.NameContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FilterCommand}.
  */
 public class FilterCommandTest {
-    private Model model = new ModelManager(getTypicalLoveBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalLoveBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalLoveBook(), new UserPrefs(), getTypicalDatePrefs());
+    private Model expectedModel = new ModelManager(getTypicalLoveBook(), new UserPrefs(), getTypicalDatePrefs());
 
     @Test
     public void equals() {
         MetricContainsKeywordPredicate firstPredicate =
-                new MetricContainsKeywordPredicate("John",PREFIX_NAME);
+                new MetricContainsKeywordPredicate("John", PREFIX_NAME);
         MetricContainsKeywordPredicate secondPredicate =
                 new MetricContainsKeywordPredicate("Mary", PREFIX_NAME);
 
@@ -44,7 +51,7 @@ public class FilterCommandTest {
         FilterCommand findFirstCommandCopy = new FilterCommand(firstPredicate);
         assertTrue(filterFirstCommand.equals(findFirstCommandCopy));
 
-       //  different types -> returns false
+        //  different types -> returns false
         assertFalse(filterFirstCommand.equals(1));
 
         // null -> returns false
@@ -116,7 +123,7 @@ public class FilterCommandTest {
         assertEquals(Arrays.asList(BENSON), model.getFilteredPersonList());
     }
     @Test
-    public void execute_filterByGender_PersonsFound() {
+    public void execute_filterByGender_personsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         MetricContainsKeywordPredicate predicate = preparePredicate("F", PREFIX_GENDER);
         System.out.println("predicate: " + predicate);

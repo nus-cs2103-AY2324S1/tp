@@ -1,16 +1,19 @@
 package seedu.lovebook.logic.commands;
 
-import seedu.lovebook.commons.util.ToStringBuilder;
-import seedu.lovebook.logic.Messages;
-import seedu.lovebook.logic.commands.exceptions.CommandException;
-import seedu.lovebook.logic.parser.Prefix;
-import seedu.lovebook.model.Model;
-import seedu.lovebook.model.person.MetricContainsKeywordPredicate;
-import seedu.lovebook.model.person.NameContainsKeywordsPredicate;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_NAME;
 
+import seedu.lovebook.commons.util.ToStringBuilder;
+import seedu.lovebook.logic.Messages;
+import seedu.lovebook.model.Model;
+import seedu.lovebook.model.person.MetricContainsKeywordPredicate;
+
+
+/**
+ * Filter based on a specific metric and list the dates whose metric contains the keyword.
+ * Keyword matching is case insensitive.
+ *
+ */
 public class FilterCommand extends Command {
 
     public static final String COMMAND_WORD = "filter";

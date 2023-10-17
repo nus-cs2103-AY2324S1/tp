@@ -5,8 +5,6 @@ import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.lovebook.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.lovebook.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
-import java.util.Arrays;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.lovebook.logic.commands.FilterCommand;

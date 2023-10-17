@@ -14,10 +14,10 @@ import seedu.lovebook.logic.commands.Command;
 import seedu.lovebook.logic.commands.DeleteCommand;
 import seedu.lovebook.logic.commands.EditCommand;
 import seedu.lovebook.logic.commands.ExitCommand;
+import seedu.lovebook.logic.commands.FilterCommand;
 import seedu.lovebook.logic.commands.FindCommand;
 import seedu.lovebook.logic.commands.HelpCommand;
 import seedu.lovebook.logic.commands.ListCommand;
-import seedu.lovebook.logic.commands.FilterCommand;
 import seedu.lovebook.logic.parser.exceptions.ParseException;
 
 /**
