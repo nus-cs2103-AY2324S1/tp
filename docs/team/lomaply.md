@@ -11,9 +11,12 @@ My contributions to the project are listed below.
 
 - **New Feature**:
 
-  - Add 2 new displays to UI for Meething schedule and view commands
-  - New Command "viewc"
-    - Command to view all details of a contact
+  - Add 2 new displays to UI for Meeting schedule and view commands
+  - New Commands + Test cases
+    - "viewc"
+      - Command to view all details of a contact
+    - "viewm"
+      - Command to view all details of a meeting, including listing all attendees
 
 - **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=lomaply&breakdown=true)
 
