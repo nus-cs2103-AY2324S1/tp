@@ -5,7 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import com.opencsv.CSVReader;
@@ -104,12 +104,12 @@ public class CsvAdaptedTransactionStorage implements TransactionBookStorage {
      *            location of the data. Cannot be null.
      */
     public void saveTransactionBook(ReadOnlyTransactionBook transactionBook, Path filePath) throws IOException {
-        List<Transaction> transactions = transactionBook.getTransactionList();
+        Map<TransactionId, Transaction> transactions = transactionBook.getTransactionMap();
         try (CSVWriter writer = new CSVWriter(new FileWriter(filePath.toFile()))) {
             String[] header = { "TransactionId", "Type", "Description", "Amount", "Date", "Person" };
             writer.writeNext(header);
 
-            for (Transaction transaction : transactions) {
+            for (Transaction transaction : transactions.values()) {
                 String transactionId = transaction.getTransactionId().toString();
                 String transactionType = transaction.getTransactionType().toString();
                 String description = transaction.getDescription().toString();

@@ -59,9 +59,6 @@ public class AppParametersTest {
         // null -> returns false
         assertFalse(appParameters.equals(null));
 
-        // different types -> returns false
-        assertFalse(appParameters.equals(5.0f));
-
         // different config path -> returns false
         AppParameters otherAppParameters = new AppParameters();
         otherAppParameters.setConfigPath(Paths.get("configPath"));

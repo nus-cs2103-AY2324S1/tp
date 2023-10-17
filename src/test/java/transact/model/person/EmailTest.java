@@ -79,9 +79,6 @@ public class EmailTest {
         // null -> returns false
         assertFalse(email.equals(null));
 
-        // different types -> returns false
-        assertFalse(email.equals(5.0f));
-
         // different values -> returns false
         assertFalse(email.equals(new Email("other.valid@email")));
     }

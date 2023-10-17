@@ -2,14 +2,12 @@ package transact.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.List;
-
-import transact.commons.core.index.Index;
 import transact.commons.util.ToStringBuilder;
 import transact.logic.Messages;
 import transact.logic.commands.exceptions.CommandException;
 import transact.model.Model;
 import transact.model.transaction.Transaction;
+import transact.model.transaction.info.TransactionId;
 import transact.ui.MainWindow.TabWindow;
 
 /**
@@ -26,26 +24,28 @@ public class DeleteTransactionCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_TRANSACTION_SUCCESS = "Deleted Transaction: %1$s";
+    public static final String MESSAGE_DELETE_TRANSACTION_FAILURE = "Cannot find transaction with id: %d";
 
-    private final Index targetIndex;
+    private final Integer transactionId;
 
-    public DeleteTransactionCommand(Index targetIndex) {
-        this.targetIndex = targetIndex;
+    public DeleteTransactionCommand(Integer transactionId) {
+        this.transactionId = transactionId;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Transaction> lastShownList = model.getFilteredTransactionList();
-
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_TRANSACTION_DISPLAYED_INDEX);
+        for (TransactionId id : model.getTransactionBook().getTransactionMap().keySet()) {
+            if (id.getValue() == transactionId) {
+                Transaction deletedTransaction = model.deleteTransaction(id);
+                return new CommandResult(
+                        String.format(MESSAGE_DELETE_TRANSACTION_SUCCESS, Messages.format(deletedTransaction)),
+                        TabWindow.TRANSACTIONS);
+            }
         }
 
-        Transaction transactionToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deleteTransaction(transactionToDelete);
         return new CommandResult(
-                String.format(MESSAGE_DELETE_TRANSACTION_SUCCESS, Messages.format(transactionToDelete)),
+                String.format(MESSAGE_DELETE_TRANSACTION_FAILURE, transactionId),
                 TabWindow.TRANSACTIONS);
     }
 
@@ -61,13 +61,13 @@ public class DeleteTransactionCommand extends Command {
         }
 
         DeleteTransactionCommand otherDeleteTransactionCommand = (DeleteTransactionCommand) other;
-        return targetIndex.equals(otherDeleteTransactionCommand.targetIndex);
+        return transactionId.equals(otherDeleteTransactionCommand.transactionId);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("targetIndex", targetIndex)
+                .add("transactionId", transactionId)
                 .toString();
     }
 }

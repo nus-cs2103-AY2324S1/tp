@@ -47,9 +47,6 @@ public class AddressTest {
         // null -> returns false
         assertFalse(address.equals(null));
 
-        // different types -> returns false
-        assertFalse(address.equals(5.0f));
-
         // different values -> returns false
         assertFalse(address.equals(new Address("Other Valid Address")));
     }

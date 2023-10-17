@@ -4,9 +4,11 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import transact.commons.core.GuiSettings;
 import transact.model.person.Person;
 import transact.model.transaction.Transaction;
+import transact.model.transaction.info.TransactionId;
 
 /**
  * The API of the Model component.
@@ -104,16 +106,16 @@ public interface Model {
     void setPerson(Person target, Person editedPerson);
 
     /**
-     * Returns true if a transaction with the same details as {@code transaction} exists in
-     * the transaction book.
+     * Returns true if a transaction with the same id as {@code transactionId}
+     * exists in the transaction book.
      */
-    boolean hasTransaction(Transaction transaction);
+    boolean hasTransaction(TransactionId transactionId);
 
     /**
-     * Deletes the given transaction.
+     * Deletes the given transaction with {@code transactionId}.
      * The transaction must exist in the transaction book.
      */
-    void deleteTransaction(Transaction transaction);
+    Transaction deleteTransaction(TransactionId transactionId);
 
     /**
      * Adds the given transaction.
@@ -124,10 +126,17 @@ public interface Model {
     /**
      * Replaces the given transaction {@code target} with {@code editedTransaction}.
      * {@code target} must exist in the transaction book.
-     * The person identity of {@code editedTransaction} must not be the same as another
+     * The person identity of {@code editedTransaction} must not be the same as
+     * another
      * existing transaction in the transaction book.
      */
-    void setTransaction(Transaction target, Transaction editedTransaction);
+    void setTransaction(TransactionId targetId, Transaction editedTransaction);
+
+    /**
+     * Returns the transaction with {@code transactionId}.
+     * {@code transactionId} must exist in the transaction book.
+     */
+    Transaction getTransaction(TransactionId transactionId);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
@@ -144,9 +153,15 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered transaction list */
     ObservableList<Transaction> getFilteredTransactionList();
 
+    /** Returns an unmodifiable view of the filtered transaction list */
+    ObservableMap<TransactionId, Transaction> getTransactionMap();
+
     /**
-     * Updates the filter of the filtered transaction list to filter by the given {@code predicate}.
-     * @throws NullPointerException if {@code predicate} is null.
+     * Updates the filter of the filtered transaction list to filter by the given
+     * {@code predicate}.
+     *
+     * @throws NullPointerException
+     *             if {@code predicate} is null.
      */
     void updateFilteredTransactionList(Predicate<Transaction> predicate);
 }

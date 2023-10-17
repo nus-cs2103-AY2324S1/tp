@@ -1,6 +1,7 @@
 package transact.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static transact.commons.util.CollectionUtil.requireAllNonNull;
 import static transact.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static transact.logic.parser.CliSyntax.PREFIX_DATE;
 import static transact.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
@@ -8,11 +9,9 @@ import static transact.logic.parser.CliSyntax.PREFIX_STAFF;
 import static transact.logic.parser.CliSyntax.PREFIX_TYPE;
 import static transact.model.Model.PREDICATE_SHOW_ALL_TRANSACTIONS;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-import transact.commons.core.index.Index;
 import transact.commons.util.CollectionUtil;
 import transact.commons.util.ToStringBuilder;
 import transact.logic.Messages;
@@ -49,8 +48,9 @@ public class EditTransactionCommand extends Command {
     public static final String MESSAGE_EDIT_TRANSACTION_SUCCESS = "Edited Transaction: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TRANSACTION = "This transaction already exists in the Transaction book.";
+    public static final String MESSAGE_TRANSACTION_ID_NOT_FOUND = "Cannot find transaction with id: %d";
 
-    private final Index index;
+    private final Integer transactionId;
     private final EditTransactionDescriptor editTransactionDescriptor;
 
     /**
@@ -59,34 +59,33 @@ public class EditTransactionCommand extends Command {
      * @param editTransactionDescriptor
      *            details to edit the person with
      */
-    public EditTransactionCommand(Index index, EditTransactionDescriptor editTransactionDescriptor) {
-        requireNonNull(index);
-        requireNonNull(editTransactionDescriptor);
+    public EditTransactionCommand(Integer transactionId, EditTransactionDescriptor editTransactionDescriptor) {
+        requireAllNonNull(transactionId, editTransactionDescriptor);
 
-        this.index = index;
+        this.transactionId = transactionId;
         this.editTransactionDescriptor = new EditTransactionDescriptor(editTransactionDescriptor);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Transaction> lastShownList = model.getFilteredTransactionList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_TRANSACTION_DISPLAYED_INDEX);
+        for (TransactionId id : model.getTransactionBook().getTransactionMap().keySet()) {
+            if (id.getValue() == transactionId) {
+                Transaction transactionToEdit = model.getTransaction(id);
+                Transaction editedTransaction = createEditedTransaction(transactionToEdit, editTransactionDescriptor);
+
+                model.setTransaction(id, editedTransaction);
+
+                model.updateFilteredTransactionList(PREDICATE_SHOW_ALL_TRANSACTIONS);
+                return new CommandResult(
+                        String.format(MESSAGE_EDIT_TRANSACTION_SUCCESS, Messages.format(editedTransaction)),
+                        TabWindow.TRANSACTIONS);
+            }
         }
-
-        Transaction transactionToEdit = lastShownList.get(index.getZeroBased());
-        Transaction editedTransaction = createEditedTransaction(transactionToEdit, editTransactionDescriptor);
-
-        if (!transactionToEdit.isSameEntry(editedTransaction) && model.hasTransaction(editedTransaction)) {
-            throw new CommandException(MESSAGE_DUPLICATE_TRANSACTION);
-        }
-
-        model.setTransaction(transactionToEdit, editedTransaction);
-        model.updateFilteredTransactionList(PREDICATE_SHOW_ALL_TRANSACTIONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_TRANSACTION_SUCCESS, Messages.format(editedTransaction)),
-                TabWindow.ADDRESSBOOK);
+        return new CommandResult(
+                String.format(MESSAGE_TRANSACTION_ID_NOT_FOUND, transactionId),
+                TabWindow.TRANSACTIONS);
     }
 
     /**
@@ -102,8 +101,9 @@ public class EditTransactionCommand extends Command {
                 .orElse(transactionToEdit.getDescription());
         Amount updatedAmount = editTransactionDescriptor.getAmount().orElse(transactionToEdit.getAmount());
         Date updatedDate = editTransactionDescriptor.getDate().orElse(transactionToEdit.getDate());
-        Person updatedStaff = editTransactionDescriptor.getStaff().orElse(transactionToEdit.getPerson());
-        return new Transaction(new TransactionId(), updatedTransactionType, updatedDescription,
+        Person updatedStaff = editTransactionDescriptor.getStaff()
+                .orElse(transactionToEdit.hasPersonInfo() ? transactionToEdit.getPerson() : null);
+        return new Transaction(transactionToEdit.getTransactionId(), updatedTransactionType, updatedDescription,
                 updatedAmount, updatedDate, updatedStaff);
     }
 
@@ -119,14 +119,14 @@ public class EditTransactionCommand extends Command {
         }
 
         EditTransactionCommand otherEditTransactionCommand = (EditTransactionCommand) other;
-        return index.equals(otherEditTransactionCommand.index)
+        return transactionId.equals(otherEditTransactionCommand.transactionId)
                 && editTransactionDescriptor.equals(otherEditTransactionCommand.editTransactionDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("index", index)
+                .add("transactionId", transactionId)
                 .add("editTransactionDescriptor", editTransactionDescriptor)
                 .toString();
     }

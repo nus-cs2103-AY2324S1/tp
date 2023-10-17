@@ -9,14 +9,14 @@ import java.util.TreeSet;
  * Represents a unique transaction ID in the system.
  * Guarantees: immutable; is valid as declared in constructors
  */
-public class TransactionId {
+public class TransactionId implements Comparable<TransactionId> {
 
     public static final String MESSAGE_CONSTRAINTS = "Transaction ID should be a unique number";
     public static final String VALIDATION_REGEX = "^\\d+$";
 
     private static TreeSet<Integer> usedIds = new TreeSet<>();
 
-    public final Integer value;
+    private final Integer value;
 
     /**
      * Constructs a {@code TransactionId}.
@@ -91,6 +91,11 @@ public class TransactionId {
 
         TransactionId otherId = (TransactionId) other;
         return value.equals(otherId.value);
+    }
+
+    @Override
+    public int compareTo(TransactionId otherId) {
+        return this.value.compareTo(otherId.getValue());
     }
 
     @Override
