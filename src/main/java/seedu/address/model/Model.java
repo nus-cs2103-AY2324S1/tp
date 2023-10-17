@@ -59,11 +59,6 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
-     */
-    boolean hasPerson(Person person);
-
-    /**
      * Returns true if a member with the same identity as {@code member} exists in the address book.
      */
     boolean hasMember(Member member);
@@ -74,22 +69,10 @@ public interface Model {
     boolean hasApplicant(Applicant applicant);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
-     */
-    void deletePerson(Person target);
-
-    /**
      * Deletes the given applicant.
      * The applicant must exist in the address book.
      */
     void deleteApplicant(Applicant target);
-
-    /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
-     */
-    void addPerson(Person person);
 
     /**
      * Adds the given member.
@@ -104,13 +87,6 @@ public interface Model {
     void addApplicant(Applicant toAdd);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
-     */
-    void setPerson(Person target, Person editedPerson);
-
-    /**
      * Replaces the given applicant {@code target} with {@code editedApplicant}.
      * {@code target} must exist in the address book.
      * The applicant identity of {@code editedApplicant} must not be the same as another existing applicant in the
@@ -121,23 +97,12 @@ public interface Model {
     /**
      * Returns an unmodifiable view of the filtered person list
      */
-    ObservableList<Person> getFilteredPersonList();
-
-    /**
-     * Returns an unmodifiable view of the filtered person list
-     */
     ObservableList<Member> getFilteredMemberList();
 
     /**
      * Returns an unmodifiable view of the filtered applicant list
      */
     ObservableList<Applicant> getFilteredApplicantList();
-
-    /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
-     * @throws NullPointerException if {@code predicate} is null.
-     */
-    void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
      * Updates the filter of the filtered member list to filter by the given {@code predicate}.
