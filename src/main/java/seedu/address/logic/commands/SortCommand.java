@@ -1,12 +1,17 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.SortByNameComparator;
 
-import static java.util.Objects.requireNonNull;
 
+
+/**
+ * Sorts all persons in the list by lexicographical order barring capitalisation.
+ */
 public class SortCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
@@ -18,9 +23,6 @@ public class SortCommand extends Command {
 
     private final SortByNameComparator comparator = new SortByNameComparator();
 
-
-    public SortCommand() {
-    }
 
     @Override
     public CommandResult execute(Model model) {

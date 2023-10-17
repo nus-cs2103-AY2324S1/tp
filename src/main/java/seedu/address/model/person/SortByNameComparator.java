@@ -5,12 +5,10 @@ import java.util.Comparator;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
+ * Compares a {@code Person}'s {@code Name} to another {@code Person}'s {@code Name} to determine
+ * lexicographical ordering of the names.
  */
 public class SortByNameComparator implements Comparator<Person> {
-
-    public SortByNameComparator() {
-    }
 
 
     @Override
@@ -18,19 +16,6 @@ public class SortByNameComparator implements Comparator<Person> {
         return o1.getName().compareTo(o2.getName());
     }
 
-//    public boolean equals(Object other) {
-//        if (other == this) {
-//            return true;
-//        }
-//
-//        // instanceof handles nulls
-//        if (!(other instanceof NameContainsKeywordsPredicate)) {
-//            return false;
-//        }
-//
-//        NameContainsKeywordsPredicate otherNameContainsKeywordsPredicate = (NameContainsKeywordsPredicate) other;
-//        return keywords.equals(otherNameContainsKeywordsPredicate.keywords);
-//    }
 
     @Override
     public String toString() {
