@@ -37,7 +37,8 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        sortedPersons = new SortedList<>(this.addressBook.getPersonList());
+        filteredPersons = new FilteredList<>(sortedPersons);
     }
 
     public ModelManager() {
@@ -132,15 +133,10 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
-    @Override
-    public ObservableList<Person> getSortedPersonList() {
-        return sortedPersons;
-    }
 
     @Override
     public void sortFilteredPersonList(Comparator<Person> comparator) {
         requireNonNull(comparator);
-        sortedPersons = filteredPersons.sorted();
         sortedPersons.setComparator(comparator);
     }
 
