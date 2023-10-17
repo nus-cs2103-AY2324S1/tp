@@ -130,7 +130,9 @@ public class ModelManager implements Model {
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Appointment> getFilteredAppointmentList() { return filteredAppointments; }
+    public ObservableList<Appointment> getFilteredAppointmentList() {
+        return filteredAppointments;
+    }
 
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {

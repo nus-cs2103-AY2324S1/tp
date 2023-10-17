@@ -112,7 +112,9 @@ public class WellNus implements ReadOnlyWellNus {
 
     //TODO: make use of Appointment List class once created
     @Override
-    public ObservableList<Appointment> getAppointmentList() { return FXCollections.observableArrayList(); }
+    public ObservableList<Appointment> getAppointmentList() {
+        return FXCollections.observableArrayList();
+    }
 
 
 

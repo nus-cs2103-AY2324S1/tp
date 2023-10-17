@@ -22,11 +22,6 @@ public class ViewCommandParserTest {
         String userInput = " " + PREFIX_CATEGORY + category;
         ViewCommand expectedCommand = new ViewCommand(category);
         assertParseSuccess(parser, userInput, expectedCommand);
-
-        // no remark
-        userInput = " " + PREFIX_CATEGORY + "";
-        expectedCommand = new ViewCommand("");
-        assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test
@@ -34,5 +29,9 @@ public class ViewCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE);
         // no parameters
         assertParseFailure(parser, "", expectedMessage);
+
+        // no remark
+        String userInput = " " + PREFIX_CATEGORY + "";
+        assertParseFailure(parser, userInput, expectedMessage);
     }
 }

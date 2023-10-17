@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CATEGORY_APPOINTMENT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CATEGORY_STUDENT;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.ViewCommand.MESSAGE_ARGUMENTS;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -16,13 +14,6 @@ import seedu.address.model.UserPrefs;
 
 public class ViewCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-
-    @Test
-    public void execute() {
-        final String category = "appointments";
-        assertCommandFailure(new ViewCommand(category), model,
-                String.format(MESSAGE_ARGUMENTS, category));
-    }
 
     @Test
     public void equals() {

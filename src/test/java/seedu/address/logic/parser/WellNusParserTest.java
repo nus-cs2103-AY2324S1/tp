@@ -91,9 +91,8 @@ public class WellNusParserTest {
     }
 
     @Test
-    public void parseCommand_remark() throws Exception {
-        assertTrue(parser.parseCommand(ViewCommand.COMMAND_WORD) instanceof ViewCommand);
-        final String category = "Some remark.";
+    public void parseCommand_view() throws Exception {
+        final String category = "appointments";
         ViewCommand command = (ViewCommand) parser.parseCommand(ViewCommand.COMMAND_WORD + " "
                 + PREFIX_CATEGORY + category);
         assertEquals(new ViewCommand(category), command);

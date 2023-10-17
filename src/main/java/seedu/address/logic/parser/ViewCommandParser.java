@@ -7,14 +7,19 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-import java.util.Arrays;
-
-
+/**
+ * Parses input arguments and creates a new ViewCommand object
+ */
 public class ViewCommandParser implements Parser<ViewCommand> {
 
     public static final String STUDENT_CATEGORY = "students";
     public static final String APPOINTMENT_CATEGORY = "appointments";
 
+    /**
+     * Parses the given {@code String} of arguments in the context of the ViewCommand
+     * and returns an ViewCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
     public ViewCommand parse(String args) throws ParseException {
         requireNonNull(args);
         String trimmedArgs = args.trim();
