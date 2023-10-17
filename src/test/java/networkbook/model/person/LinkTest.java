@@ -16,7 +16,7 @@ public class LinkTest {
     @Test
     public void constructor_invalidLink_throwsIllegalArgumentException() {
         String invalidLink = "";
-        assertThrows(IllegalArgumentException.class, () -> new Email(invalidLink));
+        assertThrows(IllegalArgumentException.class, () -> new Link(invalidLink));
     }
 
     @Test
@@ -31,13 +31,24 @@ public class LinkTest {
         // missing parts
         assertFalse(Link.isValidLink("example.")); // missing local part
         assertFalse(Link.isValidLink("peterjack@")); // missing domain label
+        assertFalse(Link.isValidLink("http://"));
 
         // invalid parts
         assertFalse(Link.isValidLink("peterjack@-.com")); // invalid domain name
         assertFalse(Link.isValidLink("exam_ple.com")); // underscore in domain name
 
         // valid link
+        assertTrue(Link.isValidLink("pythonanywhere.com/user/test"));
+        assertTrue(Link.isValidLink("example-dash.com"));
+        assertTrue(Link.isValidLink("example.com.sg"));
+        assertTrue(Link.isValidLink("http://xn--stackoverflow.com"));
+        assertTrue(Link.isValidLink("www.stackoverflow.xn--com"));
+        assertTrue(Link.isValidLink("example.com/test01"));
+        assertTrue(Link.isValidLink("www.example.com/test01/test02"));
         assertTrue(Link.isValidLink("https://www.pythonanywhere.com/user/test_underscore/"));
+        assertTrue(Link.isValidLink("https://www.google.com/?q=haha"));
+        assertTrue(Link.isValidLink("https://www.google.com?q=haha"));
+        assertTrue(Link.isValidLink("https://www.google.com/ncr?q=haha"));
     }
 
     @Test

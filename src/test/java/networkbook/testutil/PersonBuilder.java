@@ -3,6 +3,7 @@ package networkbook.testutil;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import networkbook.model.person.Course;
 import networkbook.model.person.Email;
@@ -34,7 +35,7 @@ public class PersonBuilder {
     private Name name;
     private Phone phone;
     private UniqueList<Email> emails;
-    private Link link;
+    private UniqueList<Link> links;
     private GraduatingYear graduatingYear;
     private Course course;
     private Specialisation specialisation;
@@ -48,7 +49,7 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         emails = new UniqueList<Email>().setItems(List.of(new Email(DEFAULT_EMAIL)));
-        link = new Link(DEFAULT_LINK);
+        links = new UniqueList<Link>().setItems(List.of(new Link(DEFAULT_LINK)));
         graduatingYear = new GraduatingYear(DEFAULT_GRADUATING_YEAR);
         course = new Course(DEFAULT_COURSE);
         specialisation = new Specialisation(DEFAULT_SPECIALISATION);
@@ -63,7 +64,7 @@ public class PersonBuilder {
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
         emails = personToCopy.getEmails();
-        link = personToCopy.getLink();
+        links = personToCopy.getLinks();
         graduatingYear = personToCopy.getGraduatingYear();
         course = personToCopy.getCourse();
         specialisation = personToCopy.getSpecialisation();
@@ -88,10 +89,18 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Link} of the {@code Person} that we are building.
+     * Adds a link to the person we are building.
      */
     public PersonBuilder withLink(String link) {
-        this.link = new Link(link);
+        this.links.add(new Link(link));
+        return this;
+    }
+
+    /**
+     * Sets the list of link of the person that we are building.
+     */
+    public PersonBuilder withLinks(List<String> links) {
+        this.links = new UniqueList<Link>().setItems(links.stream().map(Link::new).collect(Collectors.toList()));
         return this;
     }
 
@@ -128,10 +137,10 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Email} of the {@code Person} that we are building.
+     * Sets the emails of the person that we are building.
      */
-    public PersonBuilder withEmail(String email) {
-        this.emails = new UniqueList<Email>().setItems(List.of(new Email(email)));
+    public PersonBuilder withEmails(List<String> emails) {
+        this.emails = new UniqueList<Email>().setItems(emails.stream().map(Email::new).collect(Collectors.toList()));
         return this;
     }
 
@@ -144,7 +153,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, emails, link, graduatingYear, course, specialisation, tags, priority);
+        return new Person(name, phone, emails, links, graduatingYear, course, specialisation, tags, priority);
     }
 
 }

@@ -26,9 +26,10 @@ import networkbook.model.util.UniqueList;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-
     public static final String MESSAGE_EMAIL_DUPLICATE = "Your list of emails contains duplicates.\n"
             + "Please ensure that you do not input the same email more than once.";
+    public static final String MESSAGE_LINK_DUPLICATE = "Your list of links contains duplicates.\n"
+            + "Please ensure that you do not input the same link more than once.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -86,6 +87,24 @@ public class ParserUtil {
             throw new ParseException(Link.MESSAGE_CONSTRAINTS);
         }
         return new Link(trimmedLink);
+    }
+
+    /**
+     * Parses a {@code Collection<String>} of links into {@code UniqueList<Link>}.
+     * @throws ParseException if at least one link in {@code Collection<Link>} is invalid.
+     */
+    public static UniqueList<Link> parseLinks(Collection<String> links) throws ParseException {
+        requireNonNull(links);
+
+        if (!verifyNoDuplicates(links)) {
+            throw new ParseException(MESSAGE_LINK_DUPLICATE);
+        }
+
+        UniqueList<Link> result = new UniqueList<>();
+        for (String email: links) {
+            result.add(parseLink(email));
+        }
+        return result;
     }
 
     /**

@@ -1,6 +1,5 @@
 package networkbook.logic.parser;
 
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -70,9 +69,8 @@ public class CreateCommandParser implements Parser<CreateCommand> {
         );
         Name name = ParserUtil.parseName(argMultimap.getValue(CliSyntax.PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(CliSyntax.PREFIX_PHONE).get());
-        Email email = ParserUtil.parseEmail(argMultimap.getValue(CliSyntax.PREFIX_EMAIL).get());
-        UniqueList<Email> emails = new UniqueList<Email>().setItems(List.of(email));
-        Link link = ParserUtil.parseLink(argMultimap.getValue(CliSyntax.PREFIX_LINK).get());
+        UniqueList<Email> emails = ParserUtil.parseEmails(argMultimap.getAllValues(CliSyntax.PREFIX_EMAIL));
+        UniqueList<Link> links = ParserUtil.parseLinks(argMultimap.getAllValues(CliSyntax.PREFIX_LINK));
         GraduatingYear graduatingYear = ParserUtil.parseGraduatingYear(
                     argMultimap.getValue(CliSyntax.PREFIX_GRADUATING_YEAR).get());
         Course course = ParserUtil.parseCourse(argMultimap.getValue(CliSyntax.PREFIX_COURSE).get());
@@ -81,7 +79,7 @@ public class CreateCommandParser implements Parser<CreateCommand> {
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(CliSyntax.PREFIX_TAG));
         Priority priority = ParserUtil.parsePriority(argMultimap.getValue(CliSyntax.PREFIX_PRIORITY).orElse(null));
 
-        Person person = new Person(name, phone, emails, link, graduatingYear, course, specialisation,
+        Person person = new Person(name, phone, emails, links, graduatingYear, course, specialisation,
                     tagList, priority);
 
         return new CreateCommand(person);
