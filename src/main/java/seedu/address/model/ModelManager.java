@@ -131,7 +131,7 @@ public class ModelManager implements Model {
 
     //=========== Sorted Person List Accessors =============================================================
     @Override
-    public void sortExpenseList(Comparator<Person> expenseComparator) {
+    public void sortPersonList(Comparator<Person> expenseComparator) {
         addressBook.sortPersons(expenseComparator);
     }
 

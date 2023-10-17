@@ -90,5 +90,5 @@ public interface Model {
      * Sorts the filtered person list by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void sortExpenseList(Comparator<Person> expenseComparator);
+    void sortPersonList(Comparator<Person> expenseComparator);
 }
