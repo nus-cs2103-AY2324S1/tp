@@ -1,7 +1,6 @@
 package seedu.address.commons.core.index;
 
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
