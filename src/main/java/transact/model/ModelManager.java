@@ -8,11 +8,13 @@ import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import javafx.collections.transformation.FilteredList;
 import transact.commons.core.GuiSettings;
 import transact.commons.core.LogsCenter;
 import transact.model.person.Person;
 import transact.model.transaction.Transaction;
+import transact.model.transaction.info.TransactionId;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -30,7 +32,7 @@ public class ModelManager implements Model {
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyTransactionBook transactionBook,
-                        ReadOnlyUserPrefs userPrefs) {
+            ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
@@ -144,13 +146,18 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasTransaction(Transaction transaction) {
-        return transactionBook.hasTransaction(transaction);
+    public boolean hasTransaction(TransactionId transactionId) {
+        return transactionBook.hasTransaction(transactionId);
     }
 
     @Override
-    public void deleteTransaction(Transaction transaction) {
-        transactionBook.removeTransaction(transaction);
+    public Transaction deleteTransaction(TransactionId transactionId) {
+        return transactionBook.removeTransaction(transactionId);
+    }
+
+    @Override
+    public Transaction getTransaction(TransactionId transactionId) {
+        return transactionBook.getTransactionMap().get(transactionId);
     }
 
     @Override
@@ -159,9 +166,9 @@ public class ModelManager implements Model {
         transactionBook.addTransaction(transaction);
     }
 
-    public void setTransaction(Transaction transaction, Transaction editedTransaction) {
-        requireAllNonNull(transaction, editedTransaction);
-        transactionBook.setTransaction(transaction, editedTransaction);
+    public void setTransaction(TransactionId transactionId, Transaction editedTransaction) {
+        requireAllNonNull(transactionId, editedTransaction);
+        transactionBook.setTransaction(transactionId, editedTransaction);
     }
 
     // =========== Filtered Person List Accessors
@@ -191,6 +198,11 @@ public class ModelManager implements Model {
      * {@code versionedAddressBook}
      */
     @Override
+    public ObservableMap<TransactionId, Transaction> getTransactionMap() {
+        return transactionBook.getTransactionMap();
+    }
+
+    @Override
     public ObservableList<Transaction> getFilteredTransactionList() {
         return filteredTransactions;
     }
@@ -219,5 +231,4 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(otherModelManager.filteredPersons)
                 && filteredTransactions.equals(otherModelManager.filteredTransactions);
     }
-
 }

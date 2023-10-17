@@ -2,11 +2,15 @@ package transact.model;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.List;
+import java.util.Map;
 
+import javafx.collections.FXCollections;
+import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import transact.commons.util.ToStringBuilder;
 import transact.model.transaction.Transaction;
+import transact.model.transaction.info.TransactionId;
 
 /**
  * Wraps transaction data at the transaction-book level
@@ -14,10 +18,37 @@ import transact.model.transaction.Transaction;
  */
 public class TransactionBook implements ReadOnlyTransactionBook {
 
-    private final UniqueEntryList<Transaction> transactions;
+    private final UniqueEntryHashmap<TransactionId, Transaction> transactions;
+
+    private ObservableList<Transaction> transactionList;
 
     {
-        transactions = new UniqueEntryList<>();
+        transactions = new UniqueEntryHashmap<>();
+        transactionList = FXCollections.observableArrayList();
+
+        getTransactionMap()
+                .addListener((MapChangeListener.Change<? extends TransactionId, ? extends Transaction> change) -> {
+                    boolean removed = change.wasRemoved();
+                    if (removed != change.wasAdded()) {
+                        if (removed) {
+                            // no put for existing key
+                            // remove pair completely
+                            transactionList.remove(change.getValueRemoved());
+                        } else {
+                            // add new entry
+                            transactionList.add(change.getValueAdded());
+                        }
+                    } else {
+                        // replace existing entry
+                        Transaction entry = change.getValueAdded();
+
+                        for (int i = 0; i < transactionList.size(); i++) {
+                            if (transactionList.get(i).getTransactionId() == entry.getTransactionId()) {
+                                transactionList.set(i, entry);
+                            }
+                        }
+                    }
+                });
     }
 
     public TransactionBook() {
@@ -37,17 +68,18 @@ public class TransactionBook implements ReadOnlyTransactionBook {
      * Replaces the contents of the transaction list with {@code transactions}.
      * {@code transactions} must not contain duplicate transactions.
      */
-    public void setTransactions(List<Transaction> transactions) {
+    public void setTransactions(Map<TransactionId, Transaction> transactions) {
         this.transactions.setEntries(transactions);
     }
 
     /**
-     * Resets the existing data of this {@code TransactionBook} with {@code newData}.
+     * Resets the existing data of this {@code TransactionBook} with
+     * {@code newData}.
      */
     public void resetData(ReadOnlyTransactionBook newData) {
         requireNonNull(newData);
 
-        setTransactions(newData.getTransactionList());
+        setTransactions(newData.getTransactionMap());
     }
 
     //// transaction-level operations
@@ -56,9 +88,9 @@ public class TransactionBook implements ReadOnlyTransactionBook {
      * Returns true if a transaction with the same identity as {@code transaction}
      * exists in the transaction book.
      */
-    public boolean hasTransaction(Transaction transaction) {
-        requireNonNull(transaction);
-        return transactions.contains(transaction);
+    public boolean hasTransaction(TransactionId transactionId) {
+        requireNonNull(transactionId);
+        return transactions.contains(transactionId);
     }
 
     /**
@@ -66,7 +98,7 @@ public class TransactionBook implements ReadOnlyTransactionBook {
      * The transaction must not already exist in the transaction book.
      */
     public void addTransaction(Transaction t) {
-        transactions.add(t);
+        transactions.add(t.getTransactionId(), t);
     }
 
     /**
@@ -76,18 +108,18 @@ public class TransactionBook implements ReadOnlyTransactionBook {
      * The transaction identity of {@code editedTransaction} must not be the
      * same as another existing transaction in the transaction book.
      */
-    public void setTransaction(Transaction target, Transaction editedTransaction) {
+    public void setTransaction(TransactionId id, Transaction editedTransaction) {
         requireNonNull(editedTransaction);
 
-        transactions.setEntry(target, editedTransaction);
+        transactions.setEntry(id, editedTransaction);
     }
 
     /**
      * Removes {@code key} from this {@code TransactionBook}.
      * {@code key} must exist in the transaction book.
      */
-    public void removeTransaction(Transaction key) {
-        transactions.remove(key);
+    public Transaction removeTransaction(TransactionId key) {
+        return transactions.remove(key);
     }
 
     //// util methods
@@ -100,8 +132,13 @@ public class TransactionBook implements ReadOnlyTransactionBook {
     }
 
     @Override
+    public ObservableMap<TransactionId, Transaction> getTransactionMap() {
+        return transactions.asUnmodifiableObservableMap();
+    }
+
+    @Override
     public ObservableList<Transaction> getTransactionList() {
-        return transactions.asUnmodifiableObservableList();
+        return transactionList;
     }
 
     @Override

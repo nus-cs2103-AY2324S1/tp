@@ -52,7 +52,7 @@ public class AddTransactionCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasTransaction(toAdd)) {
+        if (model.hasTransaction(toAdd.getTransactionId())) {
             throw new CommandException(MESSAGE_DUPLICATE_TRANSACTION);
         }
 

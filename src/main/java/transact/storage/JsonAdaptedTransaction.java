@@ -59,7 +59,7 @@ class JsonAdaptedTransaction {
             final Description modelDescription = new Description(description);
             final Amount modelAmount = new Amount(amount);
             return new Transaction(modelTransactionId, TransactionType.EXPENSE, modelDescription, modelAmount,
-                    new Date());
+                    new Date(), null);
         }
     }
 }

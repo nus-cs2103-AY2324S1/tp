@@ -39,8 +39,6 @@ public class TransactionManualTest {
         System.out.print("Enter Date: ");
         String dateInput = scanner.nextLine();
 
-
-
         TransactionId transactionId = new TransactionId();
         Person person = new Person(new transact.model.person.Name(personNameInput),
                 new transact.model.person.Phone(phoneNumberInput),
@@ -52,7 +50,8 @@ public class TransactionManualTest {
         TransactionType transactionType = TransactionType.getType(typeInput);
 
         // Create a Transaction object
-        Transaction transaction = new Transaction(transactionId, transactionType, description, amount, new Date(), person);
+        Transaction transaction = new Transaction(transactionId, transactionType, description, amount, new Date(),
+                person);
 
         // Print Transaction information for verification
         System.out.println("\nTransaction Information:");

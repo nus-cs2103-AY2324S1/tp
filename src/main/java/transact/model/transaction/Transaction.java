@@ -30,24 +30,20 @@ public class Transaction implements Entry {
     /**
      * Creates a new Transaction.
      *
-     * @param transactionId
-     *            The unique transaction ID.
-     * @param person
-     *            The person associated with the transaction.
+     * @param transactionType
+     *            The transaction type of the transaction.
      * @param description
      *            The description of the transaction.
      * @param amount
      *            The amount of the transaction.
+     * @param date
+     *            The date of the transaction.
+     * @param person
+     *            The person associated with the transaction.
      */
-    public Transaction(TransactionId transactionId, TransactionType transactionType, Description description,
-            Amount amount, Date date,
+    public Transaction(TransactionType transactionType, Description description, Amount amount, Date date,
             Person person) {
-        this.transactionId = transactionId;
-        this.person = person;
-        this.description = description;
-        this.amount = amount;
-        this.transactionType = transactionType;
-        this.date = date;
+        this(new TransactionId(), transactionType, description, amount, date, person);
     }
 
     /**
@@ -55,19 +51,25 @@ public class Transaction implements Entry {
      *
      * @param transactionId
      *            The unique transaction ID.
+     * @param transactionType
+     *            The transaction type of the transaction.
      * @param description
      *            The description of the transaction.
      * @param amount
      *            The amount of the transaction.
+     * @param date
+     *            The date of the transaction.
+     * @param person
+     *            The person associated with the transaction.
      */
     public Transaction(TransactionId transactionId, TransactionType transactionType, Description description,
-            Amount amount, Date date) {
+            Amount amount, Date date, Person person) {
         this.transactionId = transactionId;
+        this.transactionType = transactionType;
         this.description = description;
         this.amount = amount;
-        this.person = null;
         this.date = date;
-        this.transactionType = transactionType;
+        this.person = person;
     }
 
     public TransactionId getTransactionId() {
