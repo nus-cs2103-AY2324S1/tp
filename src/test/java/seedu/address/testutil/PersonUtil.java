@@ -35,10 +35,11 @@ public class PersonUtil {
         sb.append(PREFIX_PHONE + " " + person.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + " " + person.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + " " + person.getAddress().value + " ");
-        sb.append(PREFIX_BANK_ACCOUNT + " " + person.getBankAccount().value + " ");
-        sb.append(PREFIX_ANNUAL_LEAVE + " "+ person.getAnnualLeave().value + " ");
-        sb.append(PREFIX_JOIN_DATE + " " + person.getJoinDate().value + " ");
         sb.append(PREFIX_ANNUAL_LEAVE + " " + person.getAnnualLeave().value + " ");
+        sb.append(PREFIX_BANK_ACCOUNT + " " + person.getBankAccount().value + " ");
+        sb.append(PREFIX_JOIN_DATE + " " + person.getJoinDate().value + " ");
+        sb.append(PREFIX_SALARY + " " + person.getSalary().value + " ");
+
 
         return sb.toString();
     }
