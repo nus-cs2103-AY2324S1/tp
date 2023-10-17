@@ -75,7 +75,7 @@ public class MedHistoryContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void test_nameDoesNotContainKeywords_returnsFalse() {
+    public void test_medicalHistoryDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         MedHistoryContainsKeywordsPredicate predicate =
                 new MedHistoryContainsKeywordsPredicate(Collections.emptyList());
