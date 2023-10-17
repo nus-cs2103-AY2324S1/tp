@@ -43,6 +43,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label nextOfKinPhone;
     @FXML
+    private Label appointment;
+    @FXML
     private FlowPane tags;
 
     /**
@@ -60,6 +62,8 @@ public class PersonCard extends UiPart<Region> {
         nextOfKinName.setText(nextOfKinNameText);
         String nextOfKinPhoneText = "Next-of-kin Phone: " + person.getNextOfKinPhone().value;
         nextOfKinPhone.setText(nextOfKinPhoneText);
+        String appointmentText = "Appointment: " + person.getAppointment().toString();
+        appointment.setText(appointmentText);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
