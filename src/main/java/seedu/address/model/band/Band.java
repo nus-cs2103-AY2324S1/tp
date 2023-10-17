@@ -45,6 +45,10 @@ public class Band {
         return Collections.unmodifiableSet(musicians);
     }
 
+    /**
+     * Returns true if both bands have the same name.
+     * This defines a weaker notion of equality between two persons.
+     */
     public boolean isSameBand(Band otherBand) {
         if (otherBand == this) {
             return true;

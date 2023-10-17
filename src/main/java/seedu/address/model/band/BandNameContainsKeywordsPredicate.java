@@ -5,6 +5,9 @@ import java.util.function.Predicate;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 
+/**
+ * Tests that a {@code Band}'s {@code Name} matches any of the keywords given.
+ */
 public class BandNameContainsKeywordsPredicate implements Predicate<Band> {
 
     private final String bandName;
