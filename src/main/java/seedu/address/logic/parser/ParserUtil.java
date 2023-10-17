@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.person.Birthday.formatter;
+import static seedu.address.model.person.Birthday.FORMATTER;
 
 import java.time.MonthDay;
 import java.time.format.DateTimeParseException;
@@ -93,13 +93,10 @@ public class ParserUtil {
      * @throws ParseException if the given {@code birthday} is invalid.
      * @throws DateTimeParseException if the given {@code birthday} doesn't follow the specified format.
      */
-    public static Birthday parseBirthday(String birthday) throws ParseException, DateTimeParseException {
+    public static Birthday parseBirthday(String birthday) throws DateTimeParseException {
         requireNonNull(birthday);
-        MonthDay trimmedBirthday = MonthDay.parse(birthday.trim(), formatter);
-        if (!Birthday.isValidBirthday(trimmedBirthday)) {
-            throw new ParseException(Birthday.MESSAGE_INVALID);
-        }
-        return new Birthday(trimmedBirthday);
+        String trimmedBirthday = birthday.trim();
+        return new Birthday(MonthDay.parse(trimmedBirthday, FORMATTER));
     }
 
     /**

@@ -122,7 +122,7 @@ public class EditCommand extends Command {
                 || (!personToEdit.hasValidTelegram() && !updatedTelegram.equals(Optional.empty()))
                 || (!personToEdit.hasValidSecondaryEmail() && !updatedSecondaryEmail.equals(Optional.empty()))) {
             throw new CommandException(MESSAGE_EDIT_ALTERNATIVE_FAIL);
-        } else if (updatedPerson.equals(personToEdit)){
+        } else if (updatedPerson.equals(personToEdit)) {
             throw new CommandException(String.format(MESSAGE_EDIT_FIELDS_SAME, updatedName));
         } else {
             return updatedPerson;
@@ -291,6 +291,10 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
+                    && Objects.equals(birthday, otherEditPersonDescriptor.birthday)
+                    && Objects.equals(linkedin, otherEditPersonDescriptor.linkedin)
+                    && Objects.equals(secondaryEmail, otherEditPersonDescriptor.secondaryEmail)
+                    && Objects.equals(telegram, otherEditPersonDescriptor.telegram)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
@@ -302,6 +306,10 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("tags", tags)
+                    .add("birthday", birthday)
+                    .add("linkedin", linkedin)
+                    .add("secondaryEmail", secondaryEmail)
+                    .add("telegram", telegram)
                     .toString();
         }
     }

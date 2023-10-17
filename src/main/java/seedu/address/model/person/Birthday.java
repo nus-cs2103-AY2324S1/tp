@@ -10,10 +10,9 @@ import java.time.format.DateTimeFormatter;
  * Guarantees: immutable;
  */
 public class Birthday {
+    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM");
+    public static final String MESSAGE_INVALID = "Birthday should be in the format of dd/MM and should be a valid day.";
     public final MonthDay birthday;
-    public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy");
-    public static final String MESSAGE_INVALID = "Birthday should not be in the future.";
-    public static final String MESSAGE_CONSTRAINT = "Birthday should be in the format of DD/MM/YY.";
 
     /**
      * Constructs a {@code Birthday}.
@@ -22,13 +21,6 @@ public class Birthday {
     public Birthday(MonthDay birthday) {
         requireNonNull(birthday);
         this.birthday = birthday;
-    }
-
-    /**
-     * Returns true if a given MonthDay is valid.
-     */
-    public static boolean isValidBirthday(MonthDay test) {
-        return test.isBefore(MonthDay.now());
     }
 
     @Override
