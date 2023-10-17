@@ -2,66 +2,66 @@
   "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
   "persons" : [ {
     "name" : "Alice Pauline",
-    "nric": "test",
+    "nric": "T7243948H",
     "phone" : "94351253",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
-    "appointment": "test",
-    "MedicalHistories": [ "Diabetes" ],
+    "appointment": "2023-12-12 12:00 15:00",
+    "medicalHistories": [ ],
     "tags" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
-    "nric": "test",
+    "nric": "S1234567B",
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
-    "appointment": "test",
-    "MedicalHistories": [ "Diabetes" ],
+    "appointment": "2023-12-12 12:00 15:00",
+    "medicalHistories": [ "diabetes", "high-risk" ],
     "tags" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
-    "nric": "test",
+    "nric": "S8765432B",
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "address" : "wall street",
-    "appointment": "test",
-    "MedicalHistories": [ "Diabetes" ],
+    "appointment": null,
+    "medicalHistories": [ "O= Blood Type" ],
     "tags" : [ ]
   }, {
     "name" : "Daniel Meier",
-    "nric": "test",
+    "nric": "T1234567I",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "address" : "10th street",
-    "appointment": "test",
-    "MedicalHistories": [ "Diabetes" ],
+    "appointment": null,
+    "medicalHistories": [ ],
     "tags" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
-    "nric": "test",
+    "nric": "T1111111Z",
     "phone" : "9482224",
     "email" : "werner@example.com",
     "address" : "michegan ave",
-    "appointment": "test",
-    "MedicalHistories": [ "Diabetes" ],
+    "appointment": null,
+    "medicalHistories": [ ],
     "tags" : [ ]
   }, {
     "name" : "Fiona Kunz",
-    "nric": "test",
+    "nric": "M2222222Z",
     "phone" : "9482427",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
-    "appointment": "test",
-    "MedicalHistories": [ "Diabetes" ],
+    "appointment": null,
+    "medicalHistories": [ ],
     "tags" : [ ]
   }, {
     "name" : "George Best",
-    "nric": "test",
+    "nric": "T7243948H",
     "phone" : "9482442",
     "email" : "anna@example.com",
     "address" : "4th street",
-    "appointment": "test",
-    "MedicalHistories": [ "Diabetes" ],
+    "appointment": "2023-12-12 12:00 15:00",
+    "medicalHistories": [ ],
     "tags" : [ ]
   } ]
 }

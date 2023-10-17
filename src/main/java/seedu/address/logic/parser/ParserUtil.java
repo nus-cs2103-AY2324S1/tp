@@ -4,14 +4,18 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Appointment;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.MedicalHistory;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -51,6 +55,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String nric} into a {@code Nric}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code nric} is invalid.
+     */
+    public static Nric parseNric(String nric) throws ParseException {
+        requireNonNull(nric);
+        String trimmedNric = nric.trim();
+        if (!Nric.isValidNric(trimmedNric)) {
+            throw new ParseException(Nric.MESSAGE_CONSTRAINTS);
+        }
+        return new Nric(trimmedNric);
+    }
+
+    /**
      * Parses a {@code String phone} into a {@code Phone}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -78,6 +97,34 @@ public class ParserUtil {
             throw new ParseException(Address.MESSAGE_CONSTRAINTS);
         }
         return new Address(trimmedAddress);
+    }
+
+    /**
+     * Parses a {@code String appointment} into an {@code Appointment}, if it exists.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code appointment} is invalid.
+     */
+    public static Appointment parseAppointmentIfExists(Optional<String> appointment) throws ParseException {
+        if (appointment.isEmpty()) {
+            return null;
+        }
+        return parseAppointment(appointment.get());
+    }
+
+    /**
+     * Parses a {@code String appointment} into an {@code Appointment}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code appointment} is invalid.
+     */
+    public static Appointment parseAppointment(String appointment) throws ParseException {
+        requireNonNull(appointment);
+        String trimmedAppointment = appointment.trim();
+        if (!Appointment.isValidAppointment(trimmedAppointment)) {
+            throw new ParseException(Appointment.MESSAGE_CONSTRAINTS);
+        }
+        return new Appointment(trimmedAppointment);
     }
 
     /**
@@ -120,5 +167,32 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String medHistory} into a {@code MedicalHistory}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code medHistory} is invalid.
+     */
+    public static MedicalHistory parseMedical(String medHistory) throws ParseException {
+        requireNonNull(medHistory);
+        String trimmedHistory = medHistory.trim();
+        if (!MedicalHistory.isValidMedicalHistory(trimmedHistory)) {
+            throw new ParseException(MedicalHistory.MESSAGE_CONSTRAINTS);
+        }
+        return new MedicalHistory(trimmedHistory);
+    }
+
+    /**
+     * Parses {@code Collection<String> medHistories} into {@code Set<MedicalHistory>}.
+     */
+    public static Set<MedicalHistory> parseMedicals(Collection<String> medHistories) throws ParseException {
+        requireNonNull(medHistories);
+        final Set<MedicalHistory> historiesSet = new HashSet<>();
+        for (String historyName : medHistories) {
+            historiesSet.add(parseMedical(historyName));
+        }
+        return historiesSet;
     }
 }
