@@ -11,8 +11,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.model.ConText;
 import seedu.address.logic.commands.EditCommand.EditContactDescriptor;
+import seedu.address.model.ConText;
 import seedu.address.model.contact.Contact;
 
 

@@ -12,7 +12,6 @@ import static seedu.address.testutil.TestData.VALID_NAME_BOB;
 import static seedu.address.testutil.TestData.VALID_PHONE_BOB;
 import static seedu.address.testutil.TestData.getTypicalConText;
 
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
