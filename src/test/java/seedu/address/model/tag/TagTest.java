@@ -11,9 +11,6 @@ public class TagTest {
         // same string returns same object
         boolean equal = Tag.of("tag") == Tag.of("tag");
         assertEquals(true, equal);
-
-        // null
-        assertEquals(null, Tag.of(null));
     }
 
     @Test
