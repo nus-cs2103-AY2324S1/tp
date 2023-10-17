@@ -5,6 +5,8 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -13,6 +15,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.event.Event;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
@@ -162,6 +165,30 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Set<Name> findInvalidNames(Set<Name> names) {
+        Set<Name> invalidNames = new HashSet<>();
+
+        for (Name name : names) {
+            boolean hasName = checkNameExists(name);
+
+            if (!hasName) {
+                invalidNames.add(name);
+            }
+        }
+
+        return invalidNames;
+    }
+
+    private boolean checkNameExists(Name name) {
+        for (Person person : this.filteredPersons) {
+            if (person.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
@@ -177,6 +204,8 @@ public class ModelManager implements Model {
                 && this.userPrefs.equals(otherModelManager.userPrefs)
                 && this.filteredPersons.equals(otherModelManager.filteredPersons);
     }
+
+
 
 
 

@@ -2,11 +2,13 @@ package seedu.address.model;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.event.Event;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
@@ -102,4 +104,13 @@ public interface Model {
      * @param toAdd Event to be added.
      */
     void addEvent(Event toAdd);
+
+    /**
+     * Returns a set of names that are not found in the address book.
+     * @param names Set of names to be checked.
+     * @return Set of names that are not found in the address book.
+     */
+    Set<Name> findInvalidNames(Set<Name> names);
+
+
 }

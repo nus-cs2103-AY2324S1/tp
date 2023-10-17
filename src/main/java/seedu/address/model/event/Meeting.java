@@ -1,6 +1,9 @@
 package seedu.address.model.event;
 
+import seedu.address.model.person.Name;
+
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * Represents a Meeting in the address book.
@@ -19,6 +22,11 @@ public class Meeting extends Event {
 
     public Meeting(EventName name, EventDate date, Optional<EventTime> startTime, Optional<EventTime> endTime) {
         super(new EventType("meeting"), name, date, startTime, date, endTime);
+    }
+
+    public Meeting(EventName name, EventDate date,
+                   Optional<EventTime> startTime, Optional<EventTime> endTime, Set<Name> names) {
+        super(new EventType("meeting"), name, date, startTime, date, endTime, names);
     }
 
 

@@ -29,6 +29,8 @@ public class Messages {
      */
     public static final String MESSAGE_INVALID_EVENT_DISPLAYED_INDEX = "The event index provided is invalid";
 
+    public static final String MESSAGE_INVALID_PERSON = "The person(s) provided(%s) does not exist!";
+
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
@@ -77,6 +79,11 @@ public class Messages {
         if (event.hasEndTime()) {
             builder.append("; End Time: ")
                     .append(event.getEndTime().forDisplay());
+        }
+
+        if (!event.getNames().isEmpty()) {
+            builder.append("; Persons involved: ");
+            event.getNames().forEach(builder::append);
         }
 
         return builder.toString();

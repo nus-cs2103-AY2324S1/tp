@@ -261,31 +261,31 @@ Expected output when the command fails:
 
 Assigns a person to a meeting.
 
-Format: `assign p/PERSON_INDEX m/MEETING_INDEX`
+Format: `assign MEETING_INDEX n/PERSON_NAME`
 
-* Assigns the person at the specified `PERSON_INDEX` to the meeting at the specified `MEETING_INDEX`.
+* Assigns the person with the specified `PERSON_NAME` to the meeting at the specified `MEETING_INDEX`.
 
 Examples:
-* `assign p/2 m/1` assigns the person at index 2 to the meeting at index 1.
+* `assign 1 n/Bob` assigns the person named Bob to the meeting at index 1.
 
 Acceptable values for each parameter:
-* `p/PERSON_INDEX`: A positive integer
-* `m/MEETING_INDEX`: A positive integer
+* `MEETING_INDEX`: A positive integer
+* `n/MEETING_NAME`: Name of the person to be assigned
 
 ### Unassign people from the meeting : `unassign`
 
 Unassigns a person from a meeting.
 
-Format: `unassign p/PERSON_INDEX m/MEETING_INDEX `
+Format: `unassign MEETING_INDEX n/PERSON_NAME`
 
-* Unassigns the person at the specified `PERSON_INDEX` from the meeting at the specified `MEETING_INDEX`.
+* Unassigns the person with the specified `PERSON_NAME` from the meeting at the specified `MEETING_INDEX`.
 
 Examples:
-* `unassign p/2 m/1` unassigns the person at index 2 from the meeting at index 1.
+* `unassign 1 n/Bob` unassigns the person named Bob from the meeting at index 1.
 
 Acceptable values for each parameter:
-* `m/PERSON_INDEX`: A positive integer
-* `m/MEETING_INDEX`: A positive integer
+* `PERSON_INDEX`: A positive integer
+* `n/MEETING_NAME`: Name of the person to be unassigned
 
 ## General commands
 

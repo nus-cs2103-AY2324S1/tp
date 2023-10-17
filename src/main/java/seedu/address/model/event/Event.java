@@ -3,17 +3,17 @@ package seedu.address.model.event;
 
 import static seedu.address.model.event.EventTime.NULL_EVENT_TIME;
 
-import java.util.ArrayList;
 import java.util.Optional;
+import java.util.Set;
 
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Name;
 
 /**
  * Represents an Event in the address book.
  */
 public abstract class Event {
 
-    private final ArrayList<Person> persons = new ArrayList<>();
+    private Set<Name> names;
 
     private EventDate startDate;
 
@@ -26,21 +26,10 @@ public abstract class Event {
 
     private EventType eventType;
 
-    /**
-     * Constructor for eventS with optional start and end time
-     * @param name name of the event
-     * @param startDate start date of the event
-     * @param endDate  end date of the event
-     */
-    public Event(EventName name, EventDate startDate, EventDate endDate) {
-        this.name = name;
-        this.startDate = startDate;
-        this.endDate = endDate;
 
-    }
 
     /**
-     * Constructor for eventS with optional start and end time
+     * Constructor for events with optional start and end time
      * @param name name of the event
      * @param startDate start date of the event
      * @param startTime start time of the event
@@ -56,6 +45,19 @@ public abstract class Event {
         this.startTime = startTime;
         this.endDate = endDate;
         this.endTime = endTime;
+
+    }
+
+    public Event(EventType eventType, EventName name, EventDate startDate, Optional<EventTime> startTime,
+                 EventDate endDate, Optional<EventTime> endTime, Set<Name> names) {
+
+        this.eventType = eventType;
+        this.name = name;
+        this.startDate = startDate;
+        this.startTime = startTime;
+        this.endDate = endDate;
+        this.endTime = endTime;
+        this.names = names;
 
     }
 
@@ -115,4 +117,8 @@ public abstract class Event {
      * @return true if both events are of the same type and have the same name
      */
     public abstract boolean isSameEvent(Event event);
+
+    public Set<Name> getNames() {
+        return this.names;
+    }
 }

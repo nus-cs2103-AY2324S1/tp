@@ -142,6 +142,15 @@ public class ParserUtil {
         return groupSet;
     }
 
+    public static Set<Name> parsePersonNames(Collection<String> names) throws ParseException {
+        requireNonNull(names);
+        final Set<Name> nameSet = new HashSet<>();
+        for (String name : names) {
+            nameSet.add(parseName(name));
+        }
+        return nameSet;
+    }
+
     /**
      * Parses a {@code String name} into an {@code EventName}.
      */
