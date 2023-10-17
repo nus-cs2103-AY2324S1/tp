@@ -2,6 +2,7 @@ package seedu.staffsnap.ui;
 
 import java.util.logging.Logger;
 
+import javafx.application.HostServices;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -29,6 +30,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private Stage primaryStage;
     private Logic logic;
+    private HostServices hostServices;
 
     // Independent Ui parts residing in this Ui container
     private ApplicantListPanel applicantListPanel;
@@ -53,12 +55,13 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
-    public MainWindow(Stage primaryStage, Logic logic) {
+    public MainWindow(Stage primaryStage, Logic logic, HostServices hostServices) {
         super(FXML, primaryStage);
 
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
+        this.hostServices = hostServices;
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
@@ -140,11 +143,16 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleHelp() {
+        hostServices.showDocument(HelpWindow.USERGUIDE_URL);
+        // The block below is commented out until a better design for
+        // Help command is decided on.
+        /*
         if (!helpWindow.isShowing()) {
             helpWindow.show();
         } else {
             helpWindow.focus();
         }
+        */
     }
 
     void show() {
