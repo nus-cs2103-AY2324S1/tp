@@ -8,7 +8,7 @@ import seedu.flashlingo.model.flashcard.WordLanguagePredicate;
 import static java.util.Objects.requireNonNull;
 
 /**
- * Finds and lists all flashcards in flashlingo whose original words contains any of the argument keywords.
+ * Finds and lists all flashcards in flashlingo whose original words or translation is a certain language.
  */
 public class LanguageCommand extends Command {
 
