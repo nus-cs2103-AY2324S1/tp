@@ -14,12 +14,15 @@ import networkbook.logic.commands.EditCommand.EditPersonDescriptor;
 import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.logic.parser.CliSyntax;
 import networkbook.model.Model;
-import networkbook.model.person.Address;
+import networkbook.model.person.Course;
 import networkbook.model.person.Email;
+import networkbook.model.person.GraduatingYear;
+import networkbook.model.person.Link;
 import networkbook.model.person.Name;
 import networkbook.model.person.Person;
 import networkbook.model.person.Phone;
 import networkbook.model.person.Priority;
+import networkbook.model.person.Specialisation;
 import networkbook.model.tag.Tag;
 import networkbook.model.util.UniqueList;
 
@@ -34,17 +37,18 @@ public class AddCommand extends Command {
             + "Parameters: "
             + "[" + CliSyntax.PREFIX_PHONE + " PHONE] "
             + "[" + CliSyntax.PREFIX_EMAIL + " EMAIL] "
-            + "[" + CliSyntax.PREFIX_ADDRESS + " ADDRESS] "
+            + "[" + CliSyntax.PREFIX_LINK + "LINK] "
+            + "[" + CliSyntax.PREFIX_GRADUATING_YEAR + "GRADUATING YEAR] "
+            + "[" + CliSyntax.PREFIX_COURSE + "COURSE OF STUDY] "
+            + "[" + CliSyntax.PREFIX_SPECIALISATION + "SPECIALISATION] "
             + "[" + CliSyntax.PREFIX_TAG + " TAG] "
             + "[" + CliSyntax.PREFIX_PRIORITY + " PRIORITY]...\n"
             + "Example: " + COMMAND_WORD + " "
             + CliSyntax.PREFIX_PHONE + " 98765432 "
             + CliSyntax.PREFIX_EMAIL + " johnd@example.com "
-            + CliSyntax.PREFIX_ADDRESS + " 311, Clementi Ave 2, #02-25 "
             + CliSyntax.PREFIX_TAG + " friends "
             + CliSyntax.PREFIX_TAG + " owesMoney";
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the network book.";
     public static final String MESSAGE_NO_INFO = "At least one field to add must be provided.";
     public static final String MESSAGE_MULTIPLE_UNIQUE_FIELD = "Some fields provided cannot have multiple values.\n"
             + "Please use the 'update' command instead.";
@@ -54,7 +58,7 @@ public class AddCommand extends Command {
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * Creates a CreateCommand to create the specified {@code Person}
+     * Creates an AddCommand to add information about the contact at {@code Index}
      *
      * @param index of the contact to add information about
      * @param editPersonDescriptor details to add to the contact
@@ -79,48 +83,54 @@ public class AddCommand extends Command {
         Person personToAddInfo = lastShownList.get(index.getZeroBased());
         Person personAfterAddingInfo = addInfoToPerson(personToAddInfo, editPersonDescriptor);
 
-        if (!personToAddInfo.isSame(personAfterAddingInfo) && model.hasPerson(personAfterAddingInfo)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
-
         model.setItem(personToAddInfo, personAfterAddingInfo);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_ADD_INFO_SUCCESS, Messages.format(personAfterAddingInfo)));
     }
 
     /**
-     * Creates and returns a {@code Person} with details in {@code editPersonDescriptor}
-     * added to {@code personToEdit}.
+     * Adds details from {@code editPersonDescriptor} and returns the {@code Person} after adding details.
      */
     private Person addInfoToPerson(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor)
             throws CommandException {
         assert personToAddInfo != null;
 
-        Name updatedName = personToAddInfo.getName();
+        Name updatedName = personToAddInfo.getName(); // name cannot be added
         Phone updatedPhone = addPhone(personToAddInfo, editPersonDescriptor);
         UniqueList<Email> updatedEmails = addEmails(personToAddInfo, editPersonDescriptor);
-        Address updatedAddress = addAddress(personToAddInfo, editPersonDescriptor);
+        Link updatedLink = addLinks(personToAddInfo, editPersonDescriptor);
+        GraduatingYear updatedGraduatingYear = addGraduatingYear(personToAddInfo, editPersonDescriptor);
+        Course updatedCourse = addCourse(personToAddInfo, editPersonDescriptor);
+        Specialisation updatedSpecialisation = addSpecialisation(personToAddInfo, editPersonDescriptor);
         Set<Tag> updatedTags = addTags(personToAddInfo, editPersonDescriptor);
         Priority updatedPriority = addPriority(personToAddInfo, editPersonDescriptor);
 
-        return new Person(updatedName, updatedPhone, updatedEmails, updatedAddress, updatedTags, updatedPriority);
+        return new Person(updatedName, updatedPhone, updatedEmails, updatedLink, updatedGraduatingYear,
+                updatedCourse, updatedSpecialisation, updatedTags, updatedPriority);
     }
 
     // TODO: for non-unique fields, change respective model to use list and append to the list
     // TODO: now it just replaces the old value
-
     private Phone addPhone(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor) {
         return editPersonDescriptor.getPhone().orElse(personToAddInfo.getPhone());
     }
-
     private UniqueList<Email> addEmails(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor) {
-        return editPersonDescriptor.getEmails().orElse(personToAddInfo.getEmails());
+        UniqueList<Email> emails = personToAddInfo.getEmails();
+        editPersonDescriptor.getEmails().ifPresent(emails::addAll);
+        return emails;
     }
-
-    private Address addAddress(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor) {
-        return editPersonDescriptor.getAddress().orElse(personToAddInfo.getAddress());
+    private Link addLinks(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor) {
+        return editPersonDescriptor.getLink().orElse(personToAddInfo.getLink());
     }
-
+    private GraduatingYear addGraduatingYear(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor) {
+        return editPersonDescriptor.getGraduatingYear().orElse(personToAddInfo.getGraduatingYear());
+    }
+    private Course addCourse(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor) {
+        return editPersonDescriptor.getCourse().orElse(personToAddInfo.getCourse());
+    }
+    private Specialisation addSpecialisation(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor) {
+        return editPersonDescriptor.getSpecialisation().orElse(personToAddInfo.getSpecialisation());
+    }
     private Set<Tag> addTags(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor) {
         return editPersonDescriptor.getTags().orElse(personToAddInfo.getTags());
     }
@@ -134,7 +144,6 @@ public class AddCommand extends Command {
         }
         return newPriority.orElse(oldPriority.orElse(null));
     }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {

@@ -53,6 +53,37 @@ public class UniqueListTest {
     }
 
     @Test
+    public void addAll_null_throwsNullPointerException() {
+        UniqueList<UniqueNumber> uniqueList = new UniqueList<>();
+        assertThrows(NullPointerException.class, () -> uniqueList.addAll(null));
+    }
+
+    @Test
+    public void addAll_duplicate_duplicateNotAdded() {
+        UniqueList<UniqueNumber> uniqueList = new UniqueList<>();
+        uniqueList.add(new UniqueNumber(1, 0));
+        UniqueList<UniqueNumber> duplicateUniqueList = new UniqueList<>();
+        duplicateUniqueList.add(new UniqueNumber(1, 10));
+        uniqueList.addAll(duplicateUniqueList);
+        UniqueList<UniqueNumber> expectedList = new UniqueList<>();
+        expectedList.add(new UniqueNumber(1, 0));
+        assertEquals(expectedList, uniqueList);
+    }
+
+    @Test
+    public void addAll_noDuplicate_success() {
+        UniqueList<UniqueNumber> uniqueList = new UniqueList<>();
+        uniqueList.add(new UniqueNumber(1, 0));
+        UniqueList<UniqueNumber> toAddList = new UniqueList<>();
+        toAddList.add(new UniqueNumber(2, 2));
+        uniqueList.addAll(toAddList);
+        UniqueList<UniqueNumber> expectedList = new UniqueList<>();
+        expectedList.add(new UniqueNumber(1, 0));
+        expectedList.add(new UniqueNumber(2, 2));
+        assertEquals(expectedList, uniqueList);
+    }
+
+    @Test
     public void setItem_nullTarget_throwsNullPointerException() {
         assertThrows(NullPointerException.class, ()
                 -> new UniqueList<UniqueNumber>().setItem(null, new UniqueNumber(5, 0)));

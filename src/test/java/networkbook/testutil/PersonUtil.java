@@ -32,7 +32,10 @@ public class PersonUtil {
         person.getEmails().stream().forEach(
                 e -> sb.append(CliSyntax.PREFIX_EMAIL + " " + e.toString() + " ")
         );
-        sb.append(CliSyntax.PREFIX_ADDRESS + " " + person.getAddress().value + " ");
+        sb.append(CliSyntax.PREFIX_LINK + " " + person.getLink().getValue() + " ");
+        sb.append(CliSyntax.PREFIX_GRADUATING_YEAR + " " + person.getGraduatingYear().value + " ");
+        sb.append(CliSyntax.PREFIX_COURSE + " " + person.getCourse().value + " ");
+        sb.append(CliSyntax.PREFIX_SPECIALISATION + " " + person.getSpecialisation().value + " ");
         person.getTags().stream().forEach(
             s -> sb.append(CliSyntax.PREFIX_TAG + " " + s.tagName + " ")
         );
@@ -57,8 +60,14 @@ public class PersonUtil {
                                                     .append(e.toString()).append(" "));
             }
         }
-        descriptor.getAddress().ifPresent(address -> sb.append(CliSyntax.PREFIX_ADDRESS).append(" ")
-                                                    .append(address.value).append(" "));
+        descriptor.getLink().ifPresent(link -> sb.append(CliSyntax.PREFIX_LINK).append(" ")
+                                                    .append(link.getValue()).append(" "));
+        descriptor.getGraduatingYear().ifPresent(graduatingYear -> sb.append(CliSyntax.PREFIX_GRADUATING_YEAR)
+                .append(" ").append(graduatingYear.value).append(" "));
+        descriptor.getCourse().ifPresent(course -> sb.append(CliSyntax.PREFIX_COURSE).append(" ")
+                .append(course.value).append(" "));
+        descriptor.getSpecialisation().ifPresent(specialisation -> sb.append(CliSyntax.PREFIX_SPECIALISATION)
+                .append(" ").append(specialisation.value).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {

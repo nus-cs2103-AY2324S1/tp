@@ -9,12 +9,16 @@ import java.util.Set;
 import networkbook.commons.core.index.Index;
 import networkbook.commons.util.StringUtil;
 import networkbook.logic.parser.exceptions.ParseException;
-import networkbook.model.person.Address;
+import networkbook.model.person.Course;
 import networkbook.model.person.Email;
+import networkbook.model.person.GraduatingYear;
+import networkbook.model.person.Link;
 import networkbook.model.person.Name;
 import networkbook.model.person.Phone;
 import networkbook.model.person.Priority;
+import networkbook.model.person.Specialisation;
 import networkbook.model.tag.Tag;
+import networkbook.model.util.UniqueList;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -22,6 +26,9 @@ import networkbook.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+
+    public static final String MESSAGE_EMAIL_DUPLICATE = "Your list of emails contains duplicates.\n"
+            + "Please ensure that you do not input the same email more than once.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -67,18 +74,63 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String address} into an {@code Address}.
+     * Parses a {@code String link} into an {@code Link}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code address} is invalid.
+     * @throws ParseException if the given {@code link} is invalid.
      */
-    public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+    public static Link parseLink(String link) throws ParseException {
+        requireNonNull(link);
+        String trimmedLink = link.trim();
+        if (!Link.isValidLink(trimmedLink)) {
+            throw new ParseException(Link.MESSAGE_CONSTRAINTS);
         }
-        return new Address(trimmedAddress);
+        return new Link(trimmedLink);
+    }
+
+    /**
+     * Parses a {@code String graduatingYear} into an {@code GraduatingYear}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code graduatingYear} is invalid.
+     */
+    public static GraduatingYear parseGraduatingYear(String graduatingYear) throws ParseException {
+        requireNonNull(graduatingYear);
+        String trimmedGraduatingYear = graduatingYear.trim();
+        if (!GraduatingYear.isValidGraduatingYear(trimmedGraduatingYear)) {
+            throw new ParseException(GraduatingYear.MESSAGE_CONSTRAINTS);
+        }
+        return new GraduatingYear(trimmedGraduatingYear);
+    }
+
+    /**
+     * Parses a {@code String course} into an {@code Course}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code course} is invalid.
+     */
+    public static Course parseCourse(String course) throws ParseException {
+        requireNonNull(course);
+        String trimmedCourse = course.trim();
+        if (!Course.isValidCourse(trimmedCourse)) {
+            throw new ParseException(Course.MESSAGE_CONSTRAINTS);
+        }
+        return new Course(trimmedCourse);
+    }
+
+    /**
+     * Parses a {@code String specialisation} into an {@code Specialisation}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code specialisation} is invalid.
+     */
+    public static Specialisation parseSpecialisation(String specialisation) throws ParseException {
+        requireNonNull(specialisation);
+        String trimmedSpecialisation = specialisation.trim();
+        if (!Specialisation.isValidSpecialisation(trimmedSpecialisation)) {
+            throw new ParseException(Specialisation.MESSAGE_CONSTRAINTS);
+        }
+        return new Specialisation(specialisation);
     }
 
     /**
@@ -94,6 +146,37 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code Collection<String>} of emails into {@code UniqueList<Email>}.
+     * Leading and trailing whitespaces will be trimmed.
+     * @throws ParseException if at least one email in {@code Collection<String>} is invalid.
+     */
+    public static UniqueList<Email> parseEmails(Collection<String> emails) throws ParseException {
+        requireNonNull(emails);
+
+        if (!verifyNoDuplicates(emails)) {
+            throw new ParseException(MESSAGE_EMAIL_DUPLICATE);
+        }
+
+        UniqueList<Email> result = new UniqueList<>();
+        for (String email: emails) {
+            result.add(parseEmail(email));
+        }
+        return result;
+    }
+
+    private static boolean verifyNoDuplicates(Collection<String> strings) {
+        Object[] stringArr = strings.toArray();
+        for (int i = 0; i < stringArr.length; i++) {
+            for (int j = i + 1; j < stringArr.length; j++) {
+                if (stringArr[i].equals(stringArr[j])) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     /**
