@@ -207,12 +207,12 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseAnimalType_invalidInput_Available_throwsParseException() {
+    public void parseAnimalType_invalidInputWhenAvailable_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseAnimalType(INVALID_ANIMAL_TYPE, VALID_AVAILABILITY1));
     }
 
     @Test
-    public void parseAnimalType_invalidInput_NotAvailable_throwsParseException() {
+    public void parseAnimalType_invalidInputWhenNotAvailable_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseAnimalType(INVALID_ANIMAL_TYPE, VALID_AVAILABILITY2));
     }
 
