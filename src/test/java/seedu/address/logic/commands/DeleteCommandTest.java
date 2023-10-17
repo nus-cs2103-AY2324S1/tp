@@ -34,7 +34,7 @@ public class DeleteCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_validIndexUnfilteredList_success() {
+    public void execute_validIdUnfilteredList_success() {
         Employee employeeToDelete = null;
         List<Employee> lastShownList = model.getFilteredEmployeeList();
         for (Employee employee : lastShownList) {
@@ -56,14 +56,15 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_invalidIndexUnfilteredList_throwsCommandException() {
+    public void execute_invalidIdUnfilteredList_throwsCommandException() {
         DeleteCommand deleteCommand = new DeleteCommand(ID_EMPLOYEE_NOT_EXISTS);
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_EMPLOYEE_DISPLAYED_ID);
     }
 
+
     @Test
-    public void execute_validIndexFilteredList_success() {
+    public void execute_validIdFilteredList_success() {
         // Delete first employee
         showEmployeeAtIndex(model, INDEX_FIRST_EMPLOYEE);
 
@@ -81,7 +82,7 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_invalidIndexFilteredList_throwsCommandException() {
+    public void execute_invalidIdFilteredList_throwsCommandException() {
         showEmployeeAtIndex(model, INDEX_FIRST_EMPLOYEE);
 
         Id invalidId = ID_SECOND_EMPLOYEE;
