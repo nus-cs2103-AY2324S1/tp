@@ -8,6 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.appointment.UniqueAppointmentList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -18,6 +19,7 @@ import seedu.address.model.person.UniquePersonList;
 public class WellNus implements ReadOnlyWellNus {
 
     private final UniquePersonList persons;
+    private final UniqueAppointmentList appointments;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -28,6 +30,7 @@ public class WellNus implements ReadOnlyWellNus {
      */
     {
         persons = new UniquePersonList();
+        appointments = new UniqueAppointmentList();
     }
 
     public WellNus() {}
@@ -96,6 +99,13 @@ public class WellNus implements ReadOnlyWellNus {
         persons.remove(key);
     }
 
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeAppointment(Appointment key) {
+        appointments.remove(key);
+    }
     //// util methods
 
     @Override

@@ -114,6 +114,11 @@ public class ModelManager implements Model {
         wellNus.setPerson(target, editedPerson);
     }
 
+    @Override
+    public void deleteAppointment(Appointment target) {
+        wellNus.removeAppointment(target);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
