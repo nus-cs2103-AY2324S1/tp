@@ -11,11 +11,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.band.Band;
 import seedu.address.model.band.BandName;
-import seedu.address.model.musician.Address;
-import seedu.address.model.musician.Email;
 import seedu.address.model.musician.Musician;
 import seedu.address.model.musician.Name;
-import seedu.address.model.musician.Phone;
 import seedu.address.model.tag.Tag;
 
 public class JsonAdaptedBand {
