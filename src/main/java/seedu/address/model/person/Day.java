@@ -52,4 +52,16 @@ public class Day {
             throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
         }
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof Day // instanceof handles nulls
+                && value.equals(((Day) other).value)); // state check
+    }
+
+    @Override
+    public int hashCode() {
+        return value.hashCode();
+    }
 }
