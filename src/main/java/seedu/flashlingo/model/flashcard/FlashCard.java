@@ -74,6 +74,14 @@ public class FlashCard {
     }
 
     /**
+     * Returns true if the review date is before the current date.
+     * @return True or False depending on whether the review date is before the current date
+     */
+    public boolean isOverdue() {
+        return this.whenToReview.before(new Date());
+    }
+
+    /**
      * Returns true if the original word or the translation is of the language.
      * @param language The language to check for
      * @return True or False depending on whether the language is found
@@ -106,9 +114,6 @@ public class FlashCard {
         return false;
     }
 
-    public boolean isOverdue() {
-        return this.whenToReview.before(new Date());
-    }
 
     /**
      * Handles when user clicks yes/no

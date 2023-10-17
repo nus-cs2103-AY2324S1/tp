@@ -6,7 +6,6 @@ import java.util.stream.Stream;
 
 import seedu.flashlingo.logic.parser.Prefix;
 import seedu.flashlingo.model.flashcard.FlashCard;
-//import seedu.flashlingo.model.person.Person;
 
 /**
  * Container for user visible messages.
