@@ -11,7 +11,10 @@ import seedu.address.commons.core.index.Indices;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.AnimalType;
+import seedu.address.model.person.Availability;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Housing;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -142,5 +145,59 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String availability} into an {@code Availability}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code availability} is invalid.
+     */
+    public static Availability parseAvailability(String availability) throws ParseException {
+        requireNonNull(availability);
+        String trimmedAvailability = availability.trim();
+        if (!Availability.isValidAvailability(trimmedAvailability)) {
+            throw new ParseException(Availability.MESSAGE_CONSTRAINTS);
+        }
+        return new Availability(trimmedAvailability);
+    }
+
+    /**
+     * Parses a {@code String animalType} into an {@code AnimalType}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code animalType} is invalid.
+     */
+    public static AnimalType parseAnimalType(String animalType, String availability) throws ParseException {
+        requireNonNull(animalType);
+        requireNonNull(availability);
+
+        String trimmedAnimalType = animalType.trim();
+        if (availability.equals("Available") && !AnimalType.isValidAnimalType(trimmedAnimalType,
+                AnimalType.VALIDATION_REGEX_AVAILABLE)) {
+            throw new ParseException(AnimalType.MESSAGE_CONSTRAINTS);
+        }
+
+        if (availability.equals("NotAvailable") && !AnimalType.isValidAnimalType(trimmedAnimalType,
+                AnimalType.VALIDATION_REGEX_NOT_AVAILABLE)) {
+            throw new ParseException(AnimalType.MESSAGE_CONSTRAINTS);
+        }
+
+        return new AnimalType(trimmedAnimalType, availability);
+    }
+
+    /**
+     * Parses a {@code String housing} into an {@code Housing}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code housing} is invalid.
+     */
+    public static Housing parseHousing(String housing) throws ParseException {
+        requireNonNull(housing);
+        String trimmedHousing = housing.trim();
+        if (!Housing.isValidHousing(trimmedHousing)) {
+            throw new ParseException(Housing.MESSAGE_CONSTRAINTS);
+        }
+        return new Housing(trimmedHousing);
     }
 }

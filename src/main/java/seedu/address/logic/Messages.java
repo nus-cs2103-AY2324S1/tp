@@ -43,10 +43,21 @@ public class Messages {
                 .append(person.getEmail())
                 .append("; Address: ")
                 .append(person.getAddress())
-                .append("; Tags: ");
+                .append("; Housing: ")
+                .append(person.getHousing())
+                .append("; Availability: ")
+                .append(person.getAvailability())
+                .append("; Animal name: ")
+                .append(person.getAnimalName())
+                .append("; Animal type: ")
+                .append(person.getAnimalType());
+
+        builder.append("; Tags: ");
         person.getTags().forEach(builder::append);
+
         return builder.toString();
     }
+
 
     /**
      * Formats the {@code people} for display to the user.
@@ -62,4 +73,5 @@ public class Messages {
         builder.append(format(people[size - 1]));
         return builder.toString();
     }
+
 }
