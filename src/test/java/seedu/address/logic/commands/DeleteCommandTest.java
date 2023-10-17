@@ -53,6 +53,11 @@ public class DeleteCommandTest {
         expectedModel.deleteEmployee(employeeToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+
+        // Test for delete same id
+        deleteCommand = new DeleteCommand(ID_FIRST_EMPLOYEE);
+
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_EMPLOYEE_DISPLAYED_ID);
     }
 
     @Test
@@ -61,7 +66,6 @@ public class DeleteCommandTest {
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_EMPLOYEE_DISPLAYED_ID);
     }
-
 
     @Test
     public void execute_validIdFilteredList_success() {
