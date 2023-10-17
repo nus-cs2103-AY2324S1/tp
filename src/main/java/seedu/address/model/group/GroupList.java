@@ -14,6 +14,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.group.exceptions.DuplicateGroupException;
 import seedu.address.model.group.exceptions.GroupNotFoundException;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.DuplicatePersonException;
 
 /**
  * A list containing groups
@@ -44,18 +45,18 @@ public class GroupList implements Iterable<Group> {
         internalList.add(toAdd);
     }
 
-//    /**
-//     * Adds a group to the list.
-//     * The group must not already exist in the list.
-//     */
-//    public void add(Group groupToAdd, Person personToAdd) throws CommandException {
-//        requireNonNull(groupToAdd);
-//        if (this.contains(groupToAdd)) {
-//            throw new DuplicateGroupException();
-//        }
-//        groupToAdd.addPerson(personToAdd);
-//        internalList.add(groupToAdd);
-//    }
+    /**
+     * Replaces the contents of this list with {@code persons}.
+     * {@code persons} must not contain duplicate persons.
+     */
+    public void setGroups(List<Group> groups) {
+        requireAllNonNull(groups);
+        if (!groupsAreUnique(groups)) {
+            throw new DuplicatePersonException();
+        }
+
+        internalList.setAll(groups);
+    }
 
 
     private boolean groupsAreUnique(List<Group> groups) {
