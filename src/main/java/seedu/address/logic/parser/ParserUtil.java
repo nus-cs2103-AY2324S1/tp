@@ -11,8 +11,12 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.LicencePlate;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Phone;
+import seedu.address.model.policy.PolicyDate;
+import seedu.address.model.policy.PolicyNumber;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -121,4 +125,95 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    /**
+     * Parses a {@code String nric} into an {@code Nric}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code nric} is invalid.
+     */
+    public static Nric parseNric(String nric) throws ParseException {
+        requireNonNull(nric);
+        String trimmedNric = nric.trim();
+        if (!Nric.isValidNric(trimmedNric)) {
+            throw new ParseException(Nric.MESSAGE_CONSTRAINTS);
+        }
+        return new Nric(trimmedNric);
+    }
+
+    /**
+     * Parses a {@code String licencePlate} into an {@code LicencePlate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code licencePlate} is invalid.
+     */
+    public static LicencePlate parseLicencePlate(String licencePlate) throws ParseException {
+        requireNonNull(licencePlate);
+        String trimmedLicencePlate = licencePlate.trim();
+        if (!LicencePlate.isValidLicencePlate(trimmedLicencePlate)) {
+            throw new ParseException(LicencePlate.MESSAGE_CONSTRAINTS);
+        }
+        return new LicencePlate(trimmedLicencePlate);
+    }
+
+    /**
+     * Parses a {@code String policyNumber} into an {@code PolicyNumber}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code policyNumber} is invalid.
+     */
+    public static PolicyNumber parsePolicyNumber(String policyNumber) throws ParseException {
+        requireNonNull(policyNumber);
+        String trimmedPolicyNumber = policyNumber.trim();
+        if (!PolicyNumber.isValidPolicyNumber(trimmedPolicyNumber)) {
+            throw new ParseException(PolicyNumber.MESSAGE_CONSTRAINTS);
+        }
+        return new PolicyNumber(trimmedPolicyNumber);
+    }
+
+    /**
+     * Parses a {@code String policyIssueDate} into an {@code PolicyIssueDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code policyIssueDate} is invalid.
+     */
+    public static PolicyDate parsePolicyIssueDate(String policyIssueDate) throws ParseException {
+        requireNonNull(policyIssueDate);
+        String trimmedPolicyIssueDate = policyIssueDate.trim();
+        if (!PolicyDate.isValidPolicyDate(trimmedPolicyIssueDate)) {
+            throw new ParseException(PolicyDate.MESSAGE_CONSTRAINTS);
+        }
+        return new PolicyDate(trimmedPolicyIssueDate);
+    }
+
+    /**
+     * Parses a {@code String policyExpiryDate} into an {@code PolicyExpiryDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code policyExpiryDate} is invalid.
+     */
+    public static PolicyDate parsePolicyExpiryDate(String policyExpiryDate) throws ParseException {
+        requireNonNull(policyExpiryDate);
+        String trimmedPolicyExpiryDate = policyExpiryDate.trim();
+        if (!PolicyDate.isValidPolicyDate(trimmedPolicyExpiryDate)) {
+            throw new ParseException(PolicyDate.MESSAGE_CONSTRAINTS);
+        }
+        return new PolicyDate(trimmedPolicyExpiryDate);
+    }
+
+    //    /**
+    //     * Parses a {@code String company} into an {@code Company}.
+    //     * Leading and trailing whitespaces will be trimmed.
+    //     *
+    //     * @throws ParseException if the given {@code company} is invalid.
+    //     */
+    //    public static Company parseCompany(String company) throws ParseException {
+    //        requireNonNull(company);
+    //        String trimmedCompany = company.trim();
+    //        if (!Company.isValidCompany(trimmedCompany)) {
+    //            throw new ParseException(Company.MESSAGE_CONSTRAINTS);
+    //        }
+    //        return new Company(trimmedCompany);
+    //    }
+
 }

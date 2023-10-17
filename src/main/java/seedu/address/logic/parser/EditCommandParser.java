@@ -3,9 +3,15 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LICENCE_PLATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_EXPIRY_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_ISSUE_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
@@ -32,7 +38,20 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(
+                        args,
+                        PREFIX_NAME,
+                        PREFIX_PHONE,
+                        PREFIX_EMAIL,
+                        PREFIX_ADDRESS,
+                        PREFIX_TAG,
+                        PREFIX_NRIC,
+                        PREFIX_LICENCE_PLATE,
+                        PREFIX_COMPANY,
+                        PREFIX_POLICY_NUMBER,
+                        PREFIX_POLICY_ISSUE_DATE,
+                        PREFIX_POLICY_EXPIRY_DATE
+                );
 
         Index index;
 
@@ -57,6 +76,31 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
+        }
+        if (argMultimap.getValue(PREFIX_NRIC).isPresent()) {
+            editPersonDescriptor.setNric(ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get()));
+        }
+        if (argMultimap.getValue(PREFIX_LICENCE_PLATE).isPresent()) {
+            editPersonDescriptor.setLicencePlate(
+                    ParserUtil.parseLicencePlate(argMultimap.getValue(PREFIX_LICENCE_PLATE).get()));
+        }
+
+        //        if (argMultimap.getValue(PREFIX_COMPANY).isPresent()) {
+        //            editPersonDescriptor.setCompany(
+        //            ParserUtil.parseCompany(argMultimap.getValue(PREFIX_COMPANY).get()));
+        //        }
+
+        if (argMultimap.getValue(PREFIX_POLICY_NUMBER).isPresent()) {
+            editPersonDescriptor.setPolicyNumber(
+                    ParserUtil.parsePolicyNumber(argMultimap.getValue(PREFIX_POLICY_NUMBER).get()));
+        }
+        if (argMultimap.getValue(PREFIX_POLICY_ISSUE_DATE).isPresent()) {
+            editPersonDescriptor.setPolicyIssueDate(
+                    ParserUtil.parsePolicyIssueDate(argMultimap.getValue(PREFIX_POLICY_ISSUE_DATE).get()));
+        }
+        if (argMultimap.getValue(PREFIX_POLICY_EXPIRY_DATE).isPresent()) {
+            editPersonDescriptor.setPolicyExpiryDate(
+                    ParserUtil.parsePolicyExpiryDate(argMultimap.getValue(PREFIX_POLICY_EXPIRY_DATE).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 
