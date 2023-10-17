@@ -48,7 +48,6 @@ Example:
 * `add n/Jane Greenwood p/Project Manager e/janeg@yahoo.com hp/91234567`
 
 UI mockup:
-
 ![Add UI Mockup](./images/add.png)
 
 ---
@@ -108,8 +107,8 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * Persons matching at least one keyword will be returned (i.e. OR search). e.g. `Ben Bobby` will return `Ben Yang`, `Bobby Chin`.
 
 Examples:
-* `find IVAN` finds any applicant whose name contains “ivan”
-* `find IVAN CHEW` finds any applicant whose name contains “ivan” or contains “chew”
+* `find IVAN` finds any applicant whose name contains “ivan”.
+* `find IVAN CHEW` finds any applicant whose name contains “ivan” or contains “chew”.
 
 UI mockup:
 ![Find UI Mockup](./images/find.png)
@@ -123,8 +122,8 @@ Format: `sort d/DESCRIPTOR`
 * `DESCRIPTOR` must be either `name` or `phone`.
 
 Examples:
-* `sort d/name` sorts the applicant list by name in alphabetical order
-* `sort d/phone` sorts the applicant list by phone numbers in ascending order
+* `sort d/name` sorts the applicant list by name in alphabetical order.
+* `sort d/phone` sorts the applicant list by phone numbers in ascending order.
 
 UI mockup:
 ![Sort UI Mockup](./images/sort.png)
@@ -137,7 +136,7 @@ Adds a new interview to an applicant.
 Format: `addi INDEX t/TYPE`
 
 Examples:
-* `addi 1 t/technical`
+* `addi 1 t/technical` adds a Technical interview to the 1st person in the displayed applicant list.
 * `addi 3 t/screening`
 
 ---
