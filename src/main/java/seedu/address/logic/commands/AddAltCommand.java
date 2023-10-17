@@ -189,6 +189,7 @@ public class AddAltCommand extends Command {
         public void setSecondaryEmail(Email email) {
             this.secondaryEmail = email;
         }
+
         public Email getSecondaryEmail() {
             return secondaryEmail;
         }
@@ -196,6 +197,7 @@ public class AddAltCommand extends Command {
         public void setTelegram(Telegram telegram) {
             this.telegram = telegram;
         }
+
         public Telegram getTelegram() {
             return telegram;
         }
