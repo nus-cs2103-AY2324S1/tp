@@ -81,7 +81,7 @@ Format: `help`
 
 Creates a new contact with the specified name and course code.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL id/STUDENT_ID [t/COURSE_CODE TUROTIAL_GROUP]...`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL id/STUDENT_ID [t/COURSE_CODE TUTORIAL_GROUP]...`
 
 Examples:
 * `add n/Fu Yiqiao p/91234567 e/fyq@gmail.com id/A1234567E`
@@ -145,7 +145,7 @@ Examples:
 
 Edits the contact details.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [id/STUDENT_ID] [t/COURSE_CODE TUROTIAL_GROUP]...`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [id/STUDENT_ID] [t/COURSE_CODE TUTORIAL_GROUP]...`
 
 * Edits the person at the specified INDEX. The index refers to the index number shown in the displayed person list. The index must be a positive integer 1, 2, 3, …
 * At least one of the optional fields must be provided.
@@ -251,10 +251,10 @@ _Details coming soon ..._
 
 | Action     | Format, Examples                                                                                |
 |------------|-------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL id/STUDENT_ID [t/COURSE_CODE TUROTIAL_GROUP]...` <br>        |
+| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL id/STUDENT_ID [t/COURSE_CODE TUTORIAL_GROUP]...` <br>        |
 | **Clear**  | `clear`                                                                                         |
 | **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                             |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [id/STUDENT_ID] [t/COURSE_CODE TUROTIAL_GROUP]...`<br> |
+| **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [id/STUDENT_ID] [t/COURSE_CODE TUTORIAL_GROUP]...`<br> |
 | **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                      |
 | **List**   | `list`                                                                                          |
 | **Help**   | `help`                                                                                          |
