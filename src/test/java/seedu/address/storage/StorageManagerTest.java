@@ -18,13 +18,13 @@ public class StorageManagerTest {
     @TempDir
     public Path testFolder;
 
-    private StorageManager2 storageManager;
+    private StorageManager storageManager;
 
     @BeforeEach
     public void setUp() {
         JsonDeckStorage deckStorage = new JsonDeckStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager2(deckStorage, userPrefsStorage);
+        storageManager = new StorageManager(deckStorage, userPrefsStorage);
     }
 
     private Path getTempFilePath(String fileName) {

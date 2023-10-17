@@ -17,11 +17,11 @@ import seedu.address.testutil.DeckBuilder;
 
 public class ModelManagerTest {
 
-    private ModelManager2 modelManager = new ModelManager2();
+    private ModelManager modelManager = new ModelManager();
 
     @Test
     public void constructor() {
-        assertEquals(new UserPrefs2(), modelManager.getUserPrefs());
+        assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
         assertEquals(new Deck(), new Deck(modelManager.getDeck()));
     }
@@ -33,14 +33,14 @@ public class ModelManagerTest {
 
     @Test
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
-        UserPrefs2 userPrefs = new UserPrefs2();
+        UserPrefs userPrefs = new UserPrefs();
         userPrefs.setDeckFilePath(Paths.get("address/book/file/path"));
         userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
 
         // Modifying userPrefs should not modify modelManager's userPrefs
-        UserPrefs2 oldUserPrefs = new UserPrefs2(userPrefs);
+        UserPrefs oldUserPrefs = new UserPrefs(userPrefs);
         userPrefs.setDeckFilePath(Paths.get("new/address/book/file/path"));
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
     }
@@ -94,11 +94,11 @@ public class ModelManagerTest {
     public void equals() {
         Deck deck = new DeckBuilder().withCard(CS2100).withCard(CS1101S).build();
         Deck diffDeck = new Deck();
-        UserPrefs2 userPrefs = new UserPrefs2();
+        UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager2(deck, userPrefs);
-        ModelManager2 modelManagerCopy = new ModelManager2(deck, userPrefs);
+        modelManager = new ModelManager(deck, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(deck, userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -111,6 +111,6 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(5));
 
         // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager2(diffDeck, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(diffDeck, userPrefs)));
     }
 }

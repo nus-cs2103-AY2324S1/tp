@@ -1,12 +1,12 @@
 package seedu.address.logic.commands;
 
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model2;
+import seedu.address.model.Model;
 
 /**
  * Format full help instructions for every command for display.
  */
-public class HelpCommand extends Command2 {
+public class HelpCommand extends Command {
 
     public static final String COMMAND_WORD = "help";
 
@@ -16,7 +16,7 @@ public class HelpCommand extends Command2 {
     public static final String SHOWING_HELP_MESSAGE = "Opened help window.";
 
     @Override
-    public CommandResult execute(Model2 model) throws CommandException {
+    public CommandResult execute(Model model) throws CommandException {
         return new CommandResult(SHOWING_HELP_MESSAGE, true, false);
     }
 

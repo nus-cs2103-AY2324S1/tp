@@ -10,7 +10,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_QUESTION_CS1101
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.EditCommand2.EditCardDescriptor;
+import seedu.address.logic.commands.EditCommand.EditCardDescriptor;
 import seedu.address.testutil.EditCardDescriptorBuilder;
 
 public class EditCardDescriptorTest {

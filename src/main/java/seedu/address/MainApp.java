@@ -13,21 +13,21 @@ import seedu.address.commons.core.Version;
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.Logic2;
-import seedu.address.logic.LogicManager2;
+import seedu.address.logic.Logic;
+import seedu.address.logic.LogicManager;
 import seedu.address.model.Deck;
-import seedu.address.model.Model2;
-import seedu.address.model.ModelManager2;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyDeck;
-import seedu.address.model.ReadOnlyUserPrefs2;
-import seedu.address.model.UserPrefs2;
+import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.DeckStorage;
 import seedu.address.storage.JsonDeckStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
-import seedu.address.storage.Storage2;
-import seedu.address.storage.StorageManager2;
-import seedu.address.storage.UserPrefsStorage2;
+import seedu.address.storage.Storage;
+import seedu.address.storage.StorageManager;
+import seedu.address.storage.UserPrefsStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
@@ -41,9 +41,9 @@ public class MainApp extends Application {
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
     protected Ui ui;
-    protected Logic2 logic;
-    protected Storage2 storage;
-    protected Model2 model;
+    protected Logic logic;
+    protected Storage storage;
+    protected Model model;
     protected Config config;
 
     @Override
@@ -55,14 +55,14 @@ public class MainApp extends Application {
         config = initConfig(appParameters.getConfigPath());
         initLogging(config);
 
-        UserPrefsStorage2 userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
-        UserPrefs2 userPrefs = initPrefs(userPrefsStorage);
+        UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
+        UserPrefs userPrefs = initPrefs(userPrefsStorage);
         DeckStorage deckStorage = new JsonDeckStorage((userPrefs.getDeckFilePath()));
-        storage = new StorageManager2((DeckStorage) deckStorage, userPrefsStorage);
+        storage = new StorageManager((DeckStorage) deckStorage, userPrefsStorage);
 
         model = initModelManager(storage, userPrefs);
 
-        logic = new LogicManager2(model, storage);
+        logic = new LogicManager(model, storage);
 
         ui = new UiManager(logic);
     }
@@ -72,7 +72,7 @@ public class MainApp extends Application {
      * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
-    private Model2 initModelManager(Storage2 storage, ReadOnlyUserPrefs2 userPrefs) {
+    private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         logger.info("Using data file : " + storage.getDeckFilePath());
 
         Optional<ReadOnlyDeck> addressBookOptional;
@@ -90,7 +90,7 @@ public class MainApp extends Application {
             initialData = new Deck();
         }
 
-        return new ModelManager2(initialData, userPrefs);
+        return new ModelManager(initialData, userPrefs);
     }
 
     private void initLogging(Config config) {
@@ -141,21 +141,21 @@ public class MainApp extends Application {
      * or a new {@code UserPrefs} with default configuration if errors occur when
      * reading from the file.
      */
-    protected UserPrefs2 initPrefs(UserPrefsStorage2 storage) {
+    protected UserPrefs initPrefs(UserPrefsStorage storage) {
         Path prefsFilePath = storage.getUserPrefsFilePath();
         logger.info("Using preference file : " + prefsFilePath);
 
-        UserPrefs2 initializedPrefs;
+        UserPrefs initializedPrefs;
         try {
-            Optional<UserPrefs2> prefsOptional = storage.readUserPrefs();
+            Optional<UserPrefs> prefsOptional = storage.readUserPrefs();
             if (!prefsOptional.isPresent()) {
                 logger.info("Creating new preference file " + prefsFilePath);
             }
-            initializedPrefs = prefsOptional.orElse(new UserPrefs2());
+            initializedPrefs = prefsOptional.orElse(new UserPrefs());
         } catch (DataLoadingException e) {
             logger.warning("Preference file at " + prefsFilePath + " could not be loaded."
                     + " Using default preferences.");
-            initializedPrefs = new UserPrefs2();
+            initializedPrefs = new UserPrefs();
         }
 
         //Update prefs file in case it was missing to begin with or there are new/unused fields
