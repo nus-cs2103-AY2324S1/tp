@@ -51,7 +51,6 @@
           <padding>
             <Insets top="10" right="10" bottom="10" left="10" />
           </padding>
-          <Label text="Students" minHeight="40" styleClass="list_header_label"/>
           <StackPane fx:id="studentListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
         </VBox>
 

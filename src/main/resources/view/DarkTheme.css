@@ -120,13 +120,6 @@
     -fx-text-fill: white;
 }
 
-.list_header_label {
-    -fx-font-family: "Segoe UI Semibold";
-    -fx-font-size: 25px;
-    -fx-font-weight: bold;
-    -fx-text-fill: white;
-}
-
 .cell_big_label {
     -fx-font-family: "Segoe UI Semibold";
     -fx-font-size: 16px;
@@ -137,6 +130,14 @@
     -fx-font-family: "Segoe UI";
     -fx-font-size: 13px;
     -fx-text-fill: #010504;
+}
+
+.column_title {
+    -fx-alignment: center;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 22px;
+    -fx-text-fill: white;
+    -fx-padding: 0 0 10;
 }
 
 .stack-pane {
