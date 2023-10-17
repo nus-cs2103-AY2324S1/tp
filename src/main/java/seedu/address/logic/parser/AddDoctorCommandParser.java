@@ -60,7 +60,7 @@ public class AddDoctorCommandParser implements Parser<AddDoctorCommand> {
         Ic ic = ParserUtil.parseIc(argMultimap.getValue(PREFIX_NRIC).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Doctor doctor = new Doctor(name, phone, email, address, remark, gender, ic, tagList, null);
+        Doctor doctor = new Doctor(name, phone, email, address, remark, gender, ic, tagList);
 
         return new AddDoctorCommand(doctor);
     }

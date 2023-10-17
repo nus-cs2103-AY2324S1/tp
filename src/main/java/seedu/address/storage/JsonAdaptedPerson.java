@@ -41,9 +41,9 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("remark") String remark, @JsonProperty("gender") String gender,
-            @JsonProperty("nric") String ic, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                             @JsonProperty("email") String email, @JsonProperty("address") String address,
+                             @JsonProperty("remark") String remark, @JsonProperty("gender") String gender,
+                             @JsonProperty("ic") String ic, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -82,63 +82,127 @@ class JsonAdaptedPerson {
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
         }
+        final Set<Tag> modelTags = new HashSet<>(personTags);
+        final Name modelName = checkName();
+        final Phone modelPhone = checkPhone();
+        final Email modelEmail = checkEmail();
+        final Address modelAddress = checkAddress();
+        final Remark modelRemark = checkRemark();
+        final Gender modelGender = checkGender();
+        final Ic modelIc = checkIc();
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRemark, modelGender, modelIc,
+                modelTags);
+    }
 
+    /**
+     * Checks the name given by storage.
+     *
+     * @return a valid name object.
+     * @throws IllegalValueException if name is not valid.
+     */
+    private Name checkName() throws IllegalValueException {
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
         if (!Name.isValidName(name)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
-        final Name modelName = new Name(name);
+        return new Name(name);
+    }
 
+    /**
+     * Checks the phone given by storage.
+     *
+     * @return a valid phone object.
+     * @throws IllegalValueException if phone is not valid.
+     */
+    private Phone checkPhone() throws IllegalValueException {
         if (phone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
         }
         if (!Phone.isValidPhone(phone)) {
             throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
         }
-        final Phone modelPhone = new Phone(phone);
+        return new Phone(phone);
+    }
 
+    /**
+     * Checks the email given by storage.
+     *
+     * @return a valid email object.
+     * @throws IllegalValueException if email is not valid.
+     */
+    private Email checkEmail() throws IllegalValueException {
         if (email == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
         }
         if (!Email.isValidEmail(email)) {
             throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
         }
-        final Email modelEmail = new Email(email);
+        return new Email(email);
+    }
 
+    /**
+     * Checks the address given by storage.
+     *
+     * @return a valid address
+     * @throws IllegalValueException if address is not valid.
+     */
+    private Address checkAddress() throws IllegalValueException {
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
         }
         if (!Address.isValidAddress(address)) {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
-        final Address modelAddress = new Address(address);
+        return new Address(address);
+    }
 
+    /**
+     * Checks the remark given by storage.
+     *
+     * @return a valid remark
+     * @throws IllegalValueException if remark is not valid.
+     */
+    private Remark checkRemark() throws IllegalValueException {
         if (remark == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
         }
-        final Remark modelRemark = new Remark(remark);
+        return new Remark(remark);
+    }
 
+    /**
+     * Checks the gender given by storage.
+     *
+     * @return a valid gender
+     * @throws IllegalValueException if gender is not valid.
+     */
+    private Gender checkGender() throws IllegalValueException {
         if (gender == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Gender.class.getSimpleName()));
         }
         if (!Gender.isValidGender(gender)) {
             throw new IllegalValueException(Gender.MESSAGE_CONSTRAINTS);
         }
-        final Gender modelGender = new Gender(gender);
+        return new Gender(gender);
+    }
 
+    /**
+     * Checks the ic given by storage.
+     *
+     * @return a valid ic
+     * @throws IllegalValueException if ic is not valid.
+     */
+    private Ic checkIc() throws IllegalValueException {
         if (ic == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Ic.class.getSimpleName()));
         }
         if (!Ic.isValidIc(ic)) {
             throw new IllegalValueException(Ic.MESSAGE_CONSTRAINTS);
         }
-        final Ic modelIc = new Ic(ic);
-
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRemark, modelGender, modelIc,
-                modelTags);
+        return new Ic(ic);
     }
-
 }
+
+
+

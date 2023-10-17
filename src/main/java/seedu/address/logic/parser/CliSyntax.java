@@ -1,4 +1,5 @@
 package seedu.address.logic.parser;
+
 /**
  * Contains Command Line Interface (CLI) syntax definitions common to multiple commands
  */
@@ -20,6 +21,7 @@ public class CliSyntax {
     //specific to patient
     public static final Prefix PREFIX_BLOODTYPE = new Prefix("b/");
     public static final Prefix PREFIX_CONDITION = new Prefix("c/");
+    public static final Prefix PREFIX_EMERGENCY_CONTACT = new Prefix("ec/");
     public static final Prefix PREFIX_DOCTOR = new Prefix("d/");
 
 

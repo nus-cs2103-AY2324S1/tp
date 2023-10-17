@@ -7,6 +7,7 @@ import static java.util.Objects.requireNonNull;
  * Guarantees: immutable; is always valid
  */
 public class Remark {
+    public static final String MESSAGE_CONSTRAINTS = "Remark should be non-empty";
     public final String value;
 
     /**
@@ -31,6 +32,7 @@ public class Remark {
                 || (other instanceof Remark // instanceof handles nulls
                 && value.equals(((Remark) other).value)); // state check
     }
+
 
     @Override
     public int hashCode() {
