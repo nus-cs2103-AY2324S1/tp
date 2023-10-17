@@ -1,4 +1,4 @@
-package seedu.address.model.financialPlan;
+package seedu.address.model.financialplan;
 
 import static seedu.address.testutil.Assert.assertThrows;
 

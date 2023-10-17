@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.financialPlan.FinancialPlan;
+import seedu.address.model.financialplan.FinancialPlan;
 import seedu.address.model.tag.Tag;
 
 /**
