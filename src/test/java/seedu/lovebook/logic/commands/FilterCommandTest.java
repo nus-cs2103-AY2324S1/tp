@@ -104,12 +104,12 @@ public class FilterCommandTest {
     @Test
     public void execute_filterByHeight_personsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
-        MetricContainsKeywordPredicate predicate = preparePredicate("170", PREFIX_HEIGHT);
+        MetricContainsKeywordPredicate predicate = preparePredicate("123", PREFIX_HEIGHT);
         System.out.println("predicate: " + predicate);
         FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ELLE), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(ALICE), model.getFilteredPersonList());
     }
 
     @Test
