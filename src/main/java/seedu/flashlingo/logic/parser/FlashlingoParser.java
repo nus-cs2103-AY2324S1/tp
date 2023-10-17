@@ -18,6 +18,7 @@ import seedu.flashlingo.logic.commands.HelpCommand;
 import seedu.flashlingo.logic.commands.LanguageCommand;
 import seedu.flashlingo.logic.commands.ListCommand;
 import seedu.flashlingo.logic.commands.NoCommand;
+import seedu.flashlingo.logic.commands.ReviewCommand;
 import seedu.flashlingo.logic.commands.StatsCommand;
 import seedu.flashlingo.logic.commands.YesCommand;
 import seedu.flashlingo.logic.parser.exceptions.ParseException;
@@ -67,12 +68,14 @@ public class FlashlingoParser {
             return new LanguageCommandParser().parse(arguments);
         case YesCommand.COMMAND_WORD:
             return new YesCommandParser().parse(arguments);
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+        case ListCommand.COMMAND_WORD:
+            return new ListCommand();
+        case ReviewCommand.COMMAND_WORD:
+            return new ReviewCommand();
         case StatsCommand.COMMAND_WORD:
             return new StatsCommand();
         default:
