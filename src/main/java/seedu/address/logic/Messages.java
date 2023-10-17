@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.event.Event;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
@@ -83,7 +84,12 @@ public class Messages {
 
         if (!event.getNames().isEmpty()) {
             builder.append("; Persons involved: ");
-            event.getNames().forEach(builder::append);
+
+            for (Name name : event.getNames()) {
+                builder.append(name.toString());
+                builder.append(", ");
+            }
+            builder.delete(builder.length() - 2, builder.length());  //removes the last comma
         }
 
         return builder.toString();
