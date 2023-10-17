@@ -11,6 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditEmployeeDescriptor;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
 
 /**
@@ -30,10 +31,15 @@ public class PersonUtil {
      */
     public static String getPersonDetails(Person person) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_NAME + person.getName().fullName + " ");
-        sb.append(PREFIX_PHONE + person.getPhone().value + " ");
-        sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
-        sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
+        sb.append(PREFIX_NAME + " " + person.getName().fullName + " ");
+        sb.append(PREFIX_PHONE + " " + person.getPhone().value + " ");
+        sb.append(PREFIX_EMAIL + " " + person.getEmail().value + " ");
+        sb.append(PREFIX_ADDRESS + " " + person.getAddress().value + " ");
+        sb.append(PREFIX_ANNUAL_LEAVE + " " + person.getAnnualLeave().value + " ");
+        sb.append(PREFIX_BANK_ACCOUNT + " " + person.getBankAccount().value + " ");
+        sb.append(PREFIX_JOIN_DATE + " " + person.getJoinDate().value + " ");
+        sb.append(PREFIX_SALARY + " " + person.getSalary().value + " ");
+
 
         return sb.toString();
     }
