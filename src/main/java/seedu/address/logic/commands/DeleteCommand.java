@@ -111,7 +111,6 @@ public class DeleteCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("NRIC", nric)
                 .toString();
     }
 
