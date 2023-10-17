@@ -97,6 +97,24 @@ public class UniquePersonList implements Iterable<Person> {
         internalList.setAll(persons);
     }
 
+
+    //todo: more data protection. Maybe have two functions. One for displaying and one for editing.
+    public Person getPersonByHashCode(int targetHashCode) {
+        Person foundPerson = null;
+        for (Person p : internalList) {
+            if (p.hashCode() == targetHashCode) {
+                foundPerson = p;
+                break;
+            }
+        }
+
+        if (foundPerson != null) {
+            return foundPerson;
+        } else {
+            throw new PersonNotFoundException();
+        }
+    }
+
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */

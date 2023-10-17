@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -12,6 +13,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Team;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,22 +24,30 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Team> filteredTeams;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, List<Team> teamStructure) {
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.addressBook = new AddressBook(addressBook, teamStructure);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredTeams = new FilteredList<>(this.addressBook.getTeamList());
     }
 
+    /**
+     * Constructor for ModelManager
+     */
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this.addressBook = new AddressBook();
+        this.userPrefs = new UserPrefs();
+        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredTeams = new FilteredList<>(this.addressBook.getTeamList());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -78,8 +88,12 @@ public class ModelManager implements Model {
     //=========== AddressBook ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+    public void setAddressBook(ReadOnlyAddressBook addressBook, List<Team> teamStructure) {
+        this.addressBook.resetData(addressBook, teamStructure);
+    }
+    @Override
+    public void clearAddressBook() {
+        this.addressBook.clear();
     }
 
     @Override
@@ -87,6 +101,7 @@ public class ModelManager implements Model {
         return addressBook;
     }
 
+    // Person related functions-------------------------------------------------------------------------------------
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
@@ -128,6 +143,48 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    // Team related functions-------------------------------------------------------------------------------------
+    @Override
+    public boolean hasTeam(Team team) {
+        requireNonNull(team);
+        return addressBook.hasTeam(team);
+    }
+
+    @Override
+    public void deleteTeam(Team target) {
+        addressBook.removeTeam(target);
+    }
+
+    @Override
+    public void addTeam(Team Team) {
+        addressBook.addTeam(Team);
+        updateFilteredTeamList(PREDICATE_SHOW_ALL_TEAMS);
+    }
+
+    @Override
+    public void setTeam(Team target, Team editedTeam) {
+        requireAllNonNull(target, editedTeam);
+
+        addressBook.setTeam(target, editedTeam);
+    }
+
+    //=========== Filtered Team List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Team} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Team> getFilteredTeamList() {
+        return filteredTeams;
+    }
+
+    @Override
+    public void updateFilteredTeamList(Predicate<Team> predicate) {
+        requireNonNull(predicate);
+        filteredTeams.setPredicate(predicate);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -142,7 +199,8 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && filteredTeams.equals(otherModelManager.filteredTeams);
     }
 
 }
