@@ -31,12 +31,11 @@ public class ViewContactCommandTest {
         Person personToView = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         ViewContactCommand viewContactCommand = new ViewContactCommand(INDEX_FIRST_PERSON);
 
-        String expectedMessage = Messages.MESSAGE_PERSON_VIEWED_OVERVIEW;
+        String expectedMessage = String.format(Messages.MESSAGE_PERSON_VIEWED_OVERVIEW, personToView.getName());
         String expectedDisplayString = "Name: Alice Pauline\n"
                 + "Phone: 94351253\n"
                 + "Email: alice@example.com\n"
-                + "Remark: \n"
-                + "Tags: [friends]";
+                + "Remark: \n";
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
@@ -59,12 +58,11 @@ public class ViewContactCommandTest {
         Person personToView = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         ViewContactCommand viewContactCommand = new ViewContactCommand(INDEX_FIRST_PERSON);
 
-        String expectedMessage = Messages.MESSAGE_PERSON_VIEWED_OVERVIEW;
+        String expectedMessage = String.format(Messages.MESSAGE_PERSON_VIEWED_OVERVIEW, personToView.getName());
         String expectedDisplayString = "Name: Alice Pauline\n"
                 + "Phone: 94351253\n"
                 + "Email: alice@example.com\n"
-                + "Remark: \n"
-                + "Tags: [friends]";
+                + "Remark: \n";
 
         // Model displaying filtered list should not change
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());

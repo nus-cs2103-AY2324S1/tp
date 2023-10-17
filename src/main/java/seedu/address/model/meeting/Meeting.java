@@ -124,4 +124,13 @@ public class Meeting {
                 .add("start", meetingTime.getStart()).add("end", meetingTime.getEnd()).add("attendees", attendees)
                 .add("tags", tags).toString();
     }
+
+    /**
+     * Returns detailed information of Meeting for viewm command.
+     */
+    public String toDisplayString() {
+        return String.format("Title: %s\nLocation: %s\nStart: %s\nEnd: %s\nAttendees: %s\n", title, location,
+                MeetingTime.toDisplayFormat(meetingTime.getStart()), MeetingTime.toDisplayFormat(meetingTime.getEnd()),
+                attendees);
+    }
 }

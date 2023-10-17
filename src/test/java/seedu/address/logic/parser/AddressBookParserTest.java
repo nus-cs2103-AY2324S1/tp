@@ -24,6 +24,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RemoveMeetingContactCommand;
 import seedu.address.logic.commands.ViewContactCommand;
+import seedu.address.logic.commands.ViewMeetingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -93,7 +94,12 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_viewc() throws Exception {
-        assertTrue((parser.parseCommand(ViewContactCommand.COMMAND_WORD + " 3") instanceof ViewContactCommand));
+        assertTrue(parser.parseCommand(ViewContactCommand.COMMAND_WORD + " 3") instanceof ViewContactCommand);
+    }
+
+    @Test
+    public void parseCommand_viewm() throws Exception {
+        assertTrue(parser.parseCommand(ViewMeetingCommand.COMMAND_WORD + " 3") instanceof ViewMeetingCommand);
     }
 
     @Test

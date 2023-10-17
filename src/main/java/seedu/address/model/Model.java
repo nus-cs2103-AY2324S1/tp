@@ -4,6 +4,7 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import javafx.util.Pair;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.meeting.Meeting;
 import seedu.address.model.person.Person;
@@ -122,14 +123,18 @@ public interface Model {
 
     boolean hasName(String attendeeName);
 
-
     /**
-     * Set current viewed person.
+     * Set current viewed person based on viewc command.
      */
     void setViewedPerson(Person person);
 
     /**
-     * Get current viewed person.
+     * Set current viewed meeting based on viewm command.
      */
-    Person getViewedPerson();
+    void setViewedMeeting(Meeting meeting);
+
+    /**
+     * Get current viewed person and meeting as a pair based on both view commands.
+     */
+    Pair<Person, Meeting> getViewedItems();
 }
