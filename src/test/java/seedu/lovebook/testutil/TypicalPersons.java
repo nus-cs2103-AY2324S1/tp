@@ -35,6 +35,7 @@ public class TypicalPersons {
             .withGender("M").withIncome("4000").withHeight("10").build();
     public static final Date ELLE = new PersonBuilder().withName("Elle Meyer").withAge("34")
             .withGender("F").withIncome("5000").withHeight("1023").build();
+
     public static final Date FIONA = new PersonBuilder().withName("Fiona Kunz").withAge("24")
             .withGender("F").withIncome("6000").withHeight("3444").build();
     public static final Date GEORGE = new PersonBuilder().withName("George Best").withAge("94")
