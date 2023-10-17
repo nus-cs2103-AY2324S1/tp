@@ -62,6 +62,5 @@ public class PersonCard extends UiPart<Region> {
         joinDate.setText(person.getJoinDate().value);
         salary.setText(person.getSalary().value);
         annualLeave.setText(person.getAnnualLeave().value);
-
     }
 }

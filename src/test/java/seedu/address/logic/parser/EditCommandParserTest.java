@@ -43,6 +43,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EditCommand.EditEmployeeDescriptor;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.AnnualLeave;
 import seedu.address.model.person.BankAccount;
@@ -51,6 +52,7 @@ import seedu.address.model.person.JoinDate;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Salary;
+import seedu.address.testutil.EditEmployeeDescriptorBuilder;
 
 public class EditCommandParserTest {
 
@@ -113,7 +115,7 @@ public class EditCommandParserTest {
                 String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB
                                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY;
 
-                EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
+                EditEmployeeDescriptor descriptor = new EditEmployeeDescriptorBuilder().withName(VALID_NAME_AMY)
                                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                                 .build();
                 EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
@@ -126,7 +128,7 @@ public class EditCommandParserTest {
                 Index targetIndex = INDEX_FIRST_PERSON;
                 String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + EMAIL_DESC_AMY;
 
-                EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB)
+                EditEmployeeDescriptor descriptor = new EditEmployeeDescriptorBuilder().withPhone(VALID_PHONE_BOB)
                                 .withEmail(VALID_EMAIL_AMY).build();
                 EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
@@ -138,49 +140,49 @@ public class EditCommandParserTest {
                 // name
                 Index targetIndex = INDEX_THIRD_PERSON;
                 String userInput = targetIndex.getOneBased() + NAME_DESC_AMY;
-                EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY).build();
+                EditEmployeeDescriptor descriptor = new EditEmployeeDescriptorBuilder().withName(VALID_NAME_AMY).build();
                 EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
                 assertParseSuccess(parser, userInput, expectedCommand);
 
                 // phone
                 userInput = targetIndex.getOneBased() + PHONE_DESC_AMY;
-                descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_AMY).build();
+                descriptor = new EditEmployeeDescriptorBuilder().withPhone(VALID_PHONE_AMY).build();
                 expectedCommand = new EditCommand(targetIndex, descriptor);
                 assertParseSuccess(parser, userInput, expectedCommand);
 
                 // email
                 userInput = targetIndex.getOneBased() + EMAIL_DESC_AMY;
-                descriptor = new EditPersonDescriptorBuilder().withEmail(VALID_EMAIL_AMY).build();
+                descriptor = new EditEmployeeDescriptorBuilder().withEmail(VALID_EMAIL_AMY).build();
                 expectedCommand = new EditCommand(targetIndex, descriptor);
                 assertParseSuccess(parser, userInput, expectedCommand);
 
                 // address
                 userInput = targetIndex.getOneBased() + ADDRESS_DESC_AMY;
-                descriptor = new EditPersonDescriptorBuilder().withAddress(VALID_ADDRESS_AMY).build();
+                descriptor = new EditEmployeeDescriptorBuilder().withAddress(VALID_ADDRESS_AMY).build();
                 expectedCommand = new EditCommand(targetIndex, descriptor);
                 assertParseSuccess(parser, userInput, expectedCommand);
 
                 // bank account
                 userInput = targetIndex.getOneBased() + BANKACCOUNT_DESC_AMY;
-                descriptor = new EditPersonDescriptorBuilder().withBankAccount(VALID_BANKACCOUNT_AMY).build();
+                descriptor = new EditEmployeeDescriptorBuilder().withBankAccount(VALID_BANKACCOUNT_AMY).build();
                 expectedCommand = new EditCommand(targetIndex, descriptor);
                 assertParseSuccess(parser, userInput, expectedCommand);
 
                 // join date
                 userInput = targetIndex.getOneBased() + JOINDATE_DESC_AMY;
-                descriptor = new EditPersonDescriptorBuilder().withJoinDate(VALID_JOINDATE_AMY).build();
+                descriptor = new EditEmployeeDescriptorBuilder().withJoinDate(VALID_JOINDATE_AMY).build();
                 expectedCommand = new EditCommand(targetIndex, descriptor);
                 assertParseSuccess(parser, userInput, expectedCommand);
 
                 // salary
                 userInput = targetIndex.getOneBased() + SALARY_DESC_AMY;
-                descriptor = new EditPersonDescriptorBuilder().withSalary(VALID_SALARY_AMY).build();
+                descriptor = new EditEmployeeDescriptorBuilder().withSalary(VALID_SALARY_AMY).build();
                 expectedCommand = new EditCommand(targetIndex, descriptor);
                 assertParseSuccess(parser, userInput, expectedCommand);
 
                 // address
                 userInput = targetIndex.getOneBased() + ANNUALLEAVE_DESC_AMY;
-                descriptor = new EditPersonDescriptorBuilder().withAnnualLeave(VALID_ANNUALLEAVE_AMY).build();
+                descriptor = new EditEmployeeDescriptorBuilder().withAnnualLeave(VALID_ANNUALLEAVE_AMY).build();
                 expectedCommand = new EditCommand(targetIndex, descriptor);
                 assertParseSuccess(parser, userInput, expectedCommand);
         }
