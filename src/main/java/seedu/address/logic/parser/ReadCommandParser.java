@@ -61,7 +61,7 @@ public class ReadCommandParser implements Parser<ReadCommand> {
         case "b":
             fullFieldName = "bank account";
             break;
-        case "al":
+        case "l":
             fullFieldName = "annual leave";
             break;
         case "j":

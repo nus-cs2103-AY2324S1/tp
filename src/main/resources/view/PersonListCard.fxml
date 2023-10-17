@@ -29,10 +29,10 @@
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
-      <Label fx:id="bankAccount" styleClass="cell_small_label" text="\$email" />
-      <Label fx:id="salary" styleClass="cell_small_label" text="\$email" />
-      <Label fx:id="annualLeave" styleClass="cell_small_label" text="\$email" />
-      <Label fx:id="joinDate" styleClass="cell_small_label" text="\$email" />
+      <Label fx:id="bankAccount" styleClass="cell_small_label" text="\$bankAccount" />
+      <Label fx:id="salary" styleClass="cell_small_label" text="\$salary" />
+      <Label fx:id="annualLeave" styleClass="cell_small_label" text="\$annualLeave" />
+      <Label fx:id="joinDate" styleClass="cell_small_label" text="\$joinDate" />
     </VBox>
   </GridPane>
 </HBox>
