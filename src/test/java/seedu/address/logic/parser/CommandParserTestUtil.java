@@ -72,7 +72,8 @@ public class CommandParserTestUtil {
     }
 
     /**
-     *
+     * Asserts that the parsing of {@code userInputArgs} by {@code findCommandParser} is
+     * successful and the command created has equal {@code personType} and {@code findPredicateMap}
      */
     public static void assertParseFindSuccess(FindCommandParser parser,
                                               String userInputArgs, FindPredicateMap findPredicateMap,

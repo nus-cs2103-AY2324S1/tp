@@ -51,7 +51,7 @@ public class FindCommandTest {
 
     //TODO: Change equals method, remember to do the tags.
     @Test
-    public void equals() {
+    public void findCommandEquals() {
         FindPredicateMap findPredicateMap1 = setupPatientFindPredicateMap();
         FindPredicateMap findPredicateMap2 = setupSpecialistFindPredicateMap();
 
@@ -73,6 +73,31 @@ public class FindCommandTest {
 
         // different person type -> returns false
         assertFalse(findCommand1.equals(findCommand2));
+    }
+
+    @Test
+    public void findPredicateMapEquals() {
+        FindPredicateMap findPredicateMap = setupPatientFindPredicateMap();
+        FindPredicateMap smallerFindPredicateMap = new FindPredicateMap();
+        smallerFindPredicateMap.put(PREFIX_NAME,
+                new NameContainsKeywordsPredicate(Collections.singletonList("Lopez")));
+
+        // same object -> returns true
+        assertTrue(findPredicateMap.equals(findPredicateMap));
+
+        // same values -> return true;
+        FindPredicateMap findPredicateMapCopy = setupPatientFindPredicateMap();
+        assertTrue(findPredicateMap.equals(findPredicateMapCopy));
+
+        // different types -> returns false
+        assertFalse(findPredicateMap.equals(1));
+
+        // null -> returns false
+        assertFalse(findPredicateMap.equals(null));
+
+        // different size -> short circuits and returns false
+        assertFalse(findPredicateMap.equals(smallerFindPredicateMap));
+
     }
 
     private FindPredicateMap setupPatientFindPredicateMap() {
@@ -136,15 +161,6 @@ public class FindCommandTest {
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
-    }
-
-    private FindPredicateMap setupPersonZeroKeywordsPredicateMap() {
-        FindPredicateMap findPredicateMap = new FindPredicateMap();
-        findPredicateMap.put(PREFIX_NAME, prepareNamePredicate(" "));
-        findPredicateMap.put(PREFIX_PHONE, preparePhonePredicate(" "));
-        findPredicateMap.put(PREFIX_EMAIL, prepareEmailPredicate(" "));
-        findPredicateMap.put(PREFIX_TAG, prepareTagsPredicate(" "));
-        return findPredicateMap;
     }
 
     @Test
@@ -306,5 +322,14 @@ public class FindCommandTest {
                 .map(pred -> pred.test(person))
                 .reduce(true, (x, y) -> x && y);
         return predicate.and(personType.getSearchPredicate());
+    }
+
+    private FindPredicateMap setupPersonZeroKeywordsPredicateMap() {
+        FindPredicateMap findPredicateMap = new FindPredicateMap();
+        findPredicateMap.put(PREFIX_NAME, prepareNamePredicate(" "));
+        findPredicateMap.put(PREFIX_PHONE, preparePhonePredicate(" "));
+        findPredicateMap.put(PREFIX_EMAIL, prepareEmailPredicate(" "));
+        findPredicateMap.put(PREFIX_TAG, prepareTagsPredicate(" "));
+        return findPredicateMap;
     }
 }
