@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LINKEDIN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SECONDARY_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
-import static seedu.address.model.person.Birthday.MESSAGE_CONSTRAINT;
 
 import java.time.format.DateTimeParseException;
 import java.util.stream.Stream;
@@ -14,6 +13,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddAltCommand;
 import seedu.address.logic.commands.AddAltCommand.AddAltPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Birthday;
 
 /**
  * Parses input arguments and creates a new AddAltCommand object
@@ -26,8 +26,8 @@ public class AddAltCommandParser implements Parser<AddAltCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddAltCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_LINKEDIN, PREFIX_SECONDARY_EMAIL, PREFIX_TELEGRAM, PREFIX_BIRTHDAY);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_LINKEDIN, PREFIX_SECONDARY_EMAIL,
+                        PREFIX_TELEGRAM, PREFIX_BIRTHDAY);
 
         Index index;
 
@@ -39,7 +39,7 @@ public class AddAltCommandParser implements Parser<AddAltCommand> {
 
         if (!arePrefixesPresent(argMultimap, PREFIX_LINKEDIN, PREFIX_SECONDARY_EMAIL,
                 PREFIX_TELEGRAM, PREFIX_BIRTHDAY)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAltCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(AddAltCommand.MESSAGE_NO_ADDALT));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_LINKEDIN, PREFIX_SECONDARY_EMAIL,
@@ -58,9 +58,10 @@ public class AddAltCommandParser implements Parser<AddAltCommand> {
         }
         if (argMultimap.getValue(PREFIX_BIRTHDAY).isPresent()) {
             try {
-                addAltPersonDescriptor.setBirthday(ParserUtil.parseBirthday(argMultimap.getValue(PREFIX_BIRTHDAY).get()));
+                addAltPersonDescriptor.setBirthday(ParserUtil.parseBirthday(argMultimap
+                        .getValue(PREFIX_BIRTHDAY).get()));
             } catch (DateTimeParseException e) {
-                throw new ParseException(MESSAGE_CONSTRAINT);
+                throw new ParseException(Birthday.MESSAGE_INVALID);
             }
         }
         return new AddAltCommand(index, addAltPersonDescriptor);
