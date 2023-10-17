@@ -122,7 +122,7 @@ class JsonAdaptedPerson {
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
         // construct a schedule from the stored input
-        final Schedule modelSchedule = new Schedule(schedule);
+        final Schedule modelSchedule = Schedule.de
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelSubjects, modelTags, modelSchedule);
     }
 
