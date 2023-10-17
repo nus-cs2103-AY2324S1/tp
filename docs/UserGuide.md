@@ -136,7 +136,7 @@ Adds a new interview to an applicant
 
 Format: `addi INDEX t/TYPE`
 
-Example:
+Examples:
 * `addi 1 t/technical`
 * `addi 3 t/screening`
 
