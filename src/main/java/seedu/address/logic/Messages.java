@@ -53,7 +53,7 @@ public class Messages {
      */
     public static String format(Person[] people) {
         int size = people.length;
-        final StringBuilder builder = new StringBuilder().append("\n");
+        final StringBuilder builder = new StringBuilder();
 
         for (int i = 0; i < size - 1; i++) {
             builder.append(format(people[i]))
