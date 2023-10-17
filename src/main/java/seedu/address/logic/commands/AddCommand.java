@@ -5,22 +5,19 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ANSWER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUESTION;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages2;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model2;
+import seedu.address.model.Model;
 import seedu.address.model.person.Card;
-
-
-
 
 /**
  * Adds a person to the address book.
  */
-public class AddCommand2 extends Command2 {
+public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a card to the deck. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
             + "Parameters: "
             + PREFIX_QUESTION + "QUESTION "
             + PREFIX_ANSWER + "ANSWER ";
@@ -33,13 +30,13 @@ public class AddCommand2 extends Command2 {
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
-    public AddCommand2(Card card) {
+    public AddCommand(Card card) {
         requireNonNull(card);
         toAdd = card;
     }
 
     @Override
-    public CommandResult execute(Model2 model) throws CommandException {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
         if (model.hasCard(toAdd)) {
@@ -47,7 +44,7 @@ public class AddCommand2 extends Command2 {
         }
 
         model.addCard(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages2.format(toAdd)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
     @Override
@@ -57,11 +54,11 @@ public class AddCommand2 extends Command2 {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddCommand2)) {
+        if (!(other instanceof AddCommand)) {
             return false;
         }
 
-        AddCommand2 otherAddCommand = (AddCommand2) other;
+        AddCommand otherAddCommand = (AddCommand) other;
         return toAdd.equals(otherAddCommand.toAdd);
     }
 
@@ -71,4 +68,5 @@ public class AddCommand2 extends Command2 {
                 .add("toAdd", toAdd)
                 .toString();
     }
+
 }

@@ -7,11 +7,10 @@ import java.util.stream.Stream;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Card;
 
-
 /**
  * Container for user visible messages.
  */
-public class Messages2 {
+public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
@@ -41,35 +40,35 @@ public class Messages2 {
      * Formats the {@code card} for display to the user.
      */
     public static String format(Card card) {
-        final StringBuilder builder = new StringBuilder();
-        builder.append("Question: ")
+        final StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Question: ")
                 .append(card.getQuestion())
                     .append("; Answer: ")
                      .append(card.getAnswer());
-        return builder.toString();
+        return stringBuilder.toString();
     }
 
     /**
      * Formats the {@code card} for display to the user as an Answer.
      */
     public static String formatAnswer(Card card) {
-        final StringBuilder builder = new StringBuilder();
-        builder.append("Answer: ")
+        final StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Answer: ")
                 .append(card.getAnswer())
                 .append(" (Difficulty level: ")
                 .append(card.getDifficulty())
                 .append(")");
-        return builder.toString();
+        return stringBuilder.toString();
     }
 
     /**
      * Formats the {@code card} for display to the user as a Question.
      */
     public static String formatQuestion(Card card) {
-        final StringBuilder builder = new StringBuilder();
-        builder.append("Question: ")
+        final StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Question: ")
                 .append(card.getQuestion());
-        return builder.toString();
+        return stringBuilder.toString();
     }
 
 }

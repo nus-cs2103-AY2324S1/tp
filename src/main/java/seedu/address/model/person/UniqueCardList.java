@@ -11,9 +11,6 @@ import javafx.collections.ObservableList;
 import seedu.address.model.person.exceptions.CardNotFoundException;
 import seedu.address.model.person.exceptions.DuplicateCardException;
 
-
-
-
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
  * A person is considered unique by comparing using {@code Person#isSamePerson(Person)}. As such, adding and updating of
@@ -141,13 +138,17 @@ public class UniqueCardList implements Iterable<Card> {
      * Returns true if {@code persons} contains only unique persons.
      */
     private boolean cardsAreUnique(List<Card> persons) {
+        boolean isUnique = true;
+
         for (int i = 0; i < persons.size() - 1; i++) {
             for (int j = i + 1; j < persons.size(); j++) {
                 if (persons.get(i).isSameCard(persons.get(j))) {
-                    return false;
+                    isUnique = false;
                 }
             }
         }
-        return true;
+
+        return isUnique;
     }
+
 }

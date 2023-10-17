@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ANSWER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUESTION;
-import static seedu.address.model.Model2.PREDICATE_SHOW_ALL_CARDS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CARDS;
 
 import java.util.List;
 import java.util.Objects;
@@ -12,24 +12,22 @@ import java.util.Optional;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages2;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model2;
+import seedu.address.model.Model;
 import seedu.address.model.person.Answer;
 import seedu.address.model.person.Card;
 import seedu.address.model.person.Question;
 
-
-
 /**
  * Edits the details of an existing person in the address book.
  */
-public class EditCommand2 extends Command2 {
+public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the card identified "
-            + "by the index number used in the displayed card list. "
+            + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_QUESTION + "QUESTION] "
@@ -46,7 +44,7 @@ public class EditCommand2 extends Command2 {
      * @param index of the person in the filtered person list to edit
      * @param editCardDescriptor details to edit the person with
      */
-    public EditCommand2(Index index, EditCardDescriptor editCardDescriptor) {
+    public EditCommand(Index index, EditCardDescriptor editCardDescriptor) {
         requireNonNull(index);
         requireNonNull(editCardDescriptor);
 
@@ -55,12 +53,12 @@ public class EditCommand2 extends Command2 {
     }
 
     @Override
-    public CommandResult execute(Model2 model) throws CommandException {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Card> lastShownList = model.getFilteredCardList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages2.MESSAGE_INVALID_CARD_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_CARD_DISPLAYED_INDEX);
         }
 
         Card personToEdit = lastShownList.get(index.getZeroBased());
@@ -72,7 +70,7 @@ public class EditCommand2 extends Command2 {
 
         model.setCard(personToEdit, editedCard);
         model.updateFilteredCardList(PREDICATE_SHOW_ALL_CARDS);
-        return new CommandResult(String.format(MESSAGE_EDIT_CARD_SUCCESS, Messages2.format(editedCard)));
+        return new CommandResult(String.format(MESSAGE_EDIT_CARD_SUCCESS, Messages.format(editedCard)));
     }
 
     /**
@@ -85,7 +83,6 @@ public class EditCommand2 extends Command2 {
         Question updatedQuestion = editCardDescriptor.getQuestion().orElse(cardToEdit.getQuestion());
         Answer updatedAnswer = editCardDescriptor.getAnswer().orElse(cardToEdit.getAnswer());
 
-
         return new Card(updatedQuestion, updatedAnswer, "new");
     }
 
@@ -96,11 +93,11 @@ public class EditCommand2 extends Command2 {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditCommand2)) {
+        if (!(other instanceof EditCommand)) {
             return false;
         }
 
-        EditCommand2 otherEditCommand = (EditCommand2) other;
+        EditCommand otherEditCommand = (EditCommand) other;
         return index.equals(otherEditCommand.index)
                 && editCardDescriptor.equals(otherEditCommand.editCardDescriptor);
     }
@@ -120,7 +117,6 @@ public class EditCommand2 extends Command2 {
     public static class EditCardDescriptor {
         private Question question;
         private Answer answer;
-
 
         public EditCardDescriptor() {}
 
@@ -156,7 +152,6 @@ public class EditCommand2 extends Command2 {
             return Optional.ofNullable(answer);
         }
 
-
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -182,4 +177,5 @@ public class EditCommand2 extends Command2 {
                     .toString();
         }
     }
+
 }
