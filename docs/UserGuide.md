@@ -137,8 +137,8 @@ Adds a new interview to an applicant
 Format: `addi INDEX t/TYPE`
 
 Example:
-* `add 1 t/technical`
-* `add 3 t/screening`
+* `addi 1 t/technical`
+* `addi 3 t/screening`
 
 ---
 ### `clear` : Clearing all applicant entries

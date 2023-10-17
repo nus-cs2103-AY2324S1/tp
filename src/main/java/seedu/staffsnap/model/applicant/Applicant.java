@@ -169,6 +169,7 @@ public class Applicant implements Comparable<Applicant> {
 
     /**
      * Add an interview to an Applicant.
+     *
      * @param interviewToAdd the new interview to add to the Applicant
      */
     public void addInterview(Interview interviewToAdd) {
