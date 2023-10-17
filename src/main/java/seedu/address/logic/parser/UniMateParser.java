@@ -25,7 +25,6 @@ import seedu.address.logic.commands.ListCommand;
 <<<<<<< HEAD:src/main/java/seedu/address/logic/parser/UniMateParser.java
 import seedu.address.logic.commands.SortCommand;
 =======
-import seedu.address.logic.commands.RemarkCommand;
 >>>>>>> parent of 8b84f56e (Add Sort Command):src/main/java/seedu/address/logic/parser/AddressBookParser.java
 import seedu.address.logic.parser.exceptions.ParseException;
 

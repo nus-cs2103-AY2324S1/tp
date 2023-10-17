@@ -1,16 +1,13 @@
 package seedu.address.logic.commands;
 
-import seedu.address.model.Model;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.SortKeyComparator;
+import static java.util.Objects.requireNonNull;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import seedu.address.model.Model;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.SortKeyComparator;
 
 /**
  * Changes the remark of an existing person in the address book.
