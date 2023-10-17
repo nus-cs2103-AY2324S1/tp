@@ -22,30 +22,38 @@ public class RemoveNoteCommandParserTest {
     @Test
     public void parse_invalidArgs_throwsParseException() {
         // empty string
-        assertParseFailure(parser, "", String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemoveNoteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "",
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemoveNoteCommand.MESSAGE_USAGE));
 
         // single number
-        assertParseFailure(parser, "1", String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemoveNoteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "1",
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemoveNoteCommand.MESSAGE_USAGE));
 
         // two numbers separated by multiple spaces
-        assertParseFailure(parser, "1   2", String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemoveNoteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "1   2",
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemoveNoteCommand.MESSAGE_USAGE));
 
         // non-numeric characters
-        assertParseFailure(parser, "a b", String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemoveNoteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "a b",
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemoveNoteCommand.MESSAGE_USAGE));
 
         // more than two numbers
-        assertParseFailure(parser, "1 2 3", String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemoveNoteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "1 2 3",
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemoveNoteCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_invalidFormat_throwsParseException() {
         // only one index
-        assertParseFailure(parser, "1", String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemoveNoteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "1",
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemoveNoteCommand.MESSAGE_USAGE));
 
         // no whitespace in between
-        assertParseFailure(parser, "12", String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemoveNoteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "12",
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemoveNoteCommand.MESSAGE_USAGE));
 
         // non-numeric characters
-        assertParseFailure(parser, "a b", String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemoveNoteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "a b",
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemoveNoteCommand.MESSAGE_USAGE));
     }
 }
