@@ -47,4 +47,3 @@ public class ListByDayCommand extends ListCommand {
                 .toString();
     }
 }
-
