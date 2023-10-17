@@ -5,8 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
 
 import networkbook.commons.core.index.Index;
@@ -29,29 +27,73 @@ public class AddCommandTest {
 
     private Model model = new ModelManager(TypicalPersons.getTypicalNetworkBook(), new UserPrefs());
 
-    // TODO: Alter addCommand tests (the 4 right below). Note to self: reinstate the removed method (Whatsapp)
     @Test
-    public void execute_multipleGradYearsBeingAdded_assertionError() {
-        Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
-        Person lastPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
-        PersonBuilder personInList = new PersonBuilder(lastPerson);
-        Person editedPerson = personInList.withGraduatingYear(CommandTestUtil.VALID_GRADUATING_YEAR_AMY).build();
-        EditCommand.EditPersonDescriptor descriptor =
-                new EditPersonDescriptorBuilder().withGraduatingYear(CommandTestUtil.VALID_GRADUATING_YEAR_AMY).build();
-        AddCommand addCommand = new AddCommand(indexLastPerson, descriptor);
+    public void execute_callAddPhoneOnFilteredList_success() {
+        CommandTestUtil.showPersonAtIndex(model, TypicalIndexes.INDEX_FIRST_PERSON);
+
+        Person personInFilteredList = model.getFilteredPersonList()
+                .get(TypicalIndexes.INDEX_FIRST_PERSON.getZeroBased());
+        Person editedPerson = new PersonBuilder(personInFilteredList)
+                .addPhone(CommandTestUtil.VALID_PHONE_BOB).build();
+        AddCommand addCommand = new AddCommand(TypicalIndexes.INDEX_FIRST_PERSON,
+                new EditPersonDescriptorBuilder().withPhone(CommandTestUtil.VALID_PHONE_BOB).build());
 
         String expectedMessage = String.format(AddCommand.MESSAGE_ADD_INFO_SUCCESS, Messages.format(editedPerson));
 
         Model expectedModel = new ModelManager(new NetworkBook(model.getNetworkBook()), new UserPrefs());
-        expectedModel.setItem(lastPerson, editedPerson);
-        try {
-            CommandTestUtil.assertCommandSuccess(addCommand, model, expectedMessage, expectedModel);
-            fail();
-        } catch (AssertionError e) {
-            assertEquals(e.getMessage(), "Execution of command should not fail.");
-        }
+        expectedModel.setItem(model.getFilteredPersonList().get(0), editedPerson);
+
+        CommandTestUtil.assertCommandSuccess(addCommand, model, expectedMessage, expectedModel);
+    }
+    @Test
+    public void execute_callAddEmailOnFilteredList_success() {
+        CommandTestUtil.showPersonAtIndex(model, TypicalIndexes.INDEX_FIRST_PERSON);
+
+        Person personInFilteredList = model.getFilteredPersonList()
+                .get(TypicalIndexes.INDEX_FIRST_PERSON.getZeroBased());
+        Person editedPerson = new PersonBuilder(personInFilteredList)
+                .addEmail(CommandTestUtil.VALID_EMAIL_BOB).build();
+        AddCommand addCommand = new AddCommand(TypicalIndexes.INDEX_FIRST_PERSON,
+                new EditPersonDescriptorBuilder().withEmail(CommandTestUtil.VALID_EMAIL_BOB).build());
+
+        String expectedMessage = String.format(AddCommand.MESSAGE_ADD_INFO_SUCCESS, Messages.format(editedPerson));
+
+        Model expectedModel = new ModelManager(new NetworkBook(model.getNetworkBook()), new UserPrefs());
+        expectedModel.setItem(model.getFilteredPersonList().get(0), editedPerson);
+
+        CommandTestUtil.assertCommandSuccess(addCommand, model, expectedMessage, expectedModel);
+    }
+    @Test
+    public void execute_callAddLinkOnFilteredList_success() {
+        CommandTestUtil.showPersonAtIndex(model, TypicalIndexes.INDEX_FIRST_PERSON);
+
+        Person personInFilteredList = model.getFilteredPersonList()
+                .get(TypicalIndexes.INDEX_FIRST_PERSON.getZeroBased());
+        Person editedPerson = new PersonBuilder(personInFilteredList)
+                .addLink(CommandTestUtil.VALID_LINK_BOB).build();
+        AddCommand addCommand = new AddCommand(TypicalIndexes.INDEX_FIRST_PERSON,
+                new EditPersonDescriptorBuilder().withLink(CommandTestUtil.VALID_LINK_BOB).build());
+
+        String expectedMessage = String.format(AddCommand.MESSAGE_ADD_INFO_SUCCESS, Messages.format(editedPerson));
+
+        Model expectedModel = new ModelManager(new NetworkBook(model.getNetworkBook()), new UserPrefs());
+        expectedModel.setItem(model.getFilteredPersonList().get(0), editedPerson);
+
+        CommandTestUtil.assertCommandSuccess(addCommand, model, expectedMessage, expectedModel);
+    }
+    @Test
+    public void execute_addGraduatingYearToPersonWithGraduatingYear_assertionError() {
+        CommandTestUtil.showPersonAtIndex(model, TypicalIndexes.INDEX_FIRST_PERSON);
+
+        AddCommand addCommand = new AddCommand(TypicalIndexes.INDEX_FIRST_PERSON,
+                new EditPersonDescriptorBuilder().withGraduatingYear(CommandTestUtil.VALID_GRADUATING_YEAR_AMY)
+                        .build());
+
+        String expectedMessage = AddCommand.MESSAGE_MULTIPLE_UNIQUE_FIELD;
+        CommandTestUtil.assertCommandFailure(addCommand, model, expectedMessage); // add priority to the person again
     }
 
+    // TODO: Alter addCommand tests (the 2 right below). See above method for inspiration.
     @Test
     public void execute_multipleCoursesBeingAdded_assertionError() {
         Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
@@ -93,7 +135,7 @@ public class AddCommandTest {
     }
 
     @Test
-    public void execute_noFieldSpecifiedUnfilteredList_success() {
+    public void execute_noFieldSpecifiedFilteredList_success() {
         AddCommand addCommand =
                 new AddCommand(TypicalIndexes.INDEX_FIRST_PERSON, new EditCommand.EditPersonDescriptor());
         Person editedPerson = model.getFilteredPersonList().get(TypicalIndexes.INDEX_FIRST_PERSON.getZeroBased());
@@ -106,7 +148,7 @@ public class AddCommandTest {
     }
 
     @Test
-    public void execute_addPriorityToPersonWithPriority_commandException() {
+    public void execute_addPriorityTwiceToPersonWithoutPriority_succeedsOnlyOnce() {
         CommandTestUtil.showPersonAtIndex(model, TypicalIndexes.INDEX_FIRST_PERSON);
 
         AddCommand addCommand = new AddCommand(TypicalIndexes.INDEX_FIRST_PERSON,
@@ -119,26 +161,7 @@ public class AddCommandTest {
     }
 
     @Test
-    public void execute_filteredList_success() {
-        CommandTestUtil.showPersonAtIndex(model, TypicalIndexes.INDEX_FIRST_PERSON);
-
-        Person personInFilteredList = model.getFilteredPersonList()
-                .get(TypicalIndexes.INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(personInFilteredList)
-                .withLink(CommandTestUtil.VALID_LINK_BOB).build();
-        AddCommand addCommand = new AddCommand(TypicalIndexes.INDEX_FIRST_PERSON,
-                new EditPersonDescriptorBuilder().withLink(CommandTestUtil.VALID_LINK_BOB).build());
-
-        String expectedMessage = String.format(AddCommand.MESSAGE_ADD_INFO_SUCCESS, Messages.format(editedPerson));
-
-        Model expectedModel = new ModelManager(new NetworkBook(model.getNetworkBook()), new UserPrefs());
-        expectedModel.setItem(model.getFilteredPersonList().get(0), editedPerson);
-
-        CommandTestUtil.assertCommandSuccess(addCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_invalidPersonIndexUnfilteredList_failure() {
+    public void execute_invalidPersonIndexUnfilteredList_commandFailure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         EditCommand.EditPersonDescriptor descriptor =
                 new EditPersonDescriptorBuilder().withName(CommandTestUtil.VALID_NAME_BOB).build();

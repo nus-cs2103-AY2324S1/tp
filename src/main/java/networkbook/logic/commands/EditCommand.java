@@ -147,7 +147,7 @@ public class EditCommand extends Command {
      * corresponding field value of the person.
      */
     public static class EditPersonDescriptor {
-        private Name name;
+        private Name name = null;
         private Optional<UniqueList<Phone>> phones = Optional.empty();
         private Optional<UniqueList<Email>> emails = Optional.empty();
         private Optional<UniqueList<Link>> links = Optional.empty();

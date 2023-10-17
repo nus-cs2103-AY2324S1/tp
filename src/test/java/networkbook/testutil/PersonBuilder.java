@@ -91,7 +91,7 @@ public class PersonBuilder {
     /**
      * Adds a link to the person we are building.
      */
-    public PersonBuilder withLink(String link) {
+    public PersonBuilder addLink(String link) {
         this.links.add(new Link(link));
         return this;
     }
@@ -129,6 +129,13 @@ public class PersonBuilder {
     }
 
     /**
+     * Adds a phone to the person we are building.
+     */
+    public PersonBuilder addPhone(String phone) {
+        this.phones.add(new Phone(phone));
+        return this;
+    }
+    /**
      * Sets the {@code Phone} of the {@code Person} that we are building.
      */
     public PersonBuilder withPhones(List<String> phones) {
@@ -136,6 +143,13 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Adds an email to the person we are building.
+     */
+    public PersonBuilder addEmail(String email) {
+        this.emails.add(new Email(email));
+        return this;
+    }
     /**
      * Sets the emails of the person that we are building.
      */
