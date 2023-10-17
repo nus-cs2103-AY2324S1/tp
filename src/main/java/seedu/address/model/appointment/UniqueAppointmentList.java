@@ -40,6 +40,7 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
             throw new DuplicateAppointmentException();
         }
         internalList.add(toAdd);
+        System.out.println(internalList.size());
     }
 
     /**

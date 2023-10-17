@@ -31,7 +31,7 @@ public class RescheduleCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: " + PREFIX_ID + "(must be a positive integer) "
             + "[" + PREFIX_APPOINTMENT_START + "APPOINTMENT START DATE AND TIME] "
-            + "[" + PREFIX_APPOINTMENT_END + "APPOINTMENT END DATE AND TIME]"
+            + "[" + PREFIX_APPOINTMENT_END + "APPOINTMENT END DATE AND TIME]\n"
             + "Example: " + PREFIX_ID + " 1 "
             + PREFIX_APPOINTMENT_START + "02/05/2023 09:00 "
             + PREFIX_APPOINTMENT_END + "02/05/2023 11:00 ";
@@ -81,7 +81,7 @@ public class RescheduleCommand extends Command {
         assert appointmentToReschedule != null;
 
         Person patient = appointmentToReschedule.getPerson();
-        AppointmentDescription description = appointmentToReschedule.getDescription();
+        AppointmentDescription description = appointmentToReschedule.getAppointmentDescription();
         return new Appointment(patient, newTime, description);
     }
     @Override

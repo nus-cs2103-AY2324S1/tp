@@ -14,5 +14,6 @@
     "email": "pauline@example.com",
     "birthdate": "12/01/1999",
     "address": "4th street"
-  } ]
+  } ],
+  "appointments": []
 }

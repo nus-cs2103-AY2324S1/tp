@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.AddressBook;
 import seedu.address.model.person.Person;
 
 /**
@@ -15,20 +16,22 @@ import seedu.address.model.person.Person;
 
 public class Appointment {
     private final AppointmentTime appointmentTime;
-    private final AppointmentDescription description;
+    private final AppointmentDescription appointmentDescription;
+    private int patientId;
     private Person patient;
 
     /**
      * Constructs an {@code Appointment}.
      *
      * @param appointmentTime The scheduled time for the appointment.
-     * @param description The description for the appointment.
+     * @param appointmentDescription The description for the appointment.
      */
-    public Appointment(AppointmentTime appointmentTime, AppointmentDescription description) {
+    public Appointment(int patientId, AppointmentTime appointmentTime, AppointmentDescription appointmentDescription) {
         requireAllNonNull(appointmentTime);
+        this.patientId = patientId;
         this.appointmentTime = appointmentTime;
         this.patient = null;
-        this.description = description;
+        this.appointmentDescription = appointmentDescription;
     }
 
     /**
@@ -36,21 +39,33 @@ public class Appointment {
      *
      * @param patient The patient associated with the appointment.
      * @param appointmentTime The scheduled time for the appointment.
-     * @param description The description for the appointment.
+     * @param appointmentDescription The description for the appointment.
      */
-    public Appointment(Person patient, AppointmentTime appointmentTime, AppointmentDescription description) {
+    public Appointment(Person patient, AppointmentTime appointmentTime, AppointmentDescription appointmentDescription) {
         requireAllNonNull(appointmentTime);
         this.appointmentTime = appointmentTime;
         this.patient = patient;
-        this.description = description;
+        this.appointmentDescription = appointmentDescription;
     }
 
     /**
      * Used in the AddAppointmentCommand
-     * @param patient sets the patient into the appointment
+     * @param patient The patient associated with the appointment.
      */
     public void setPatient(Person patient) {
         this.patient = patient;
+    }
+
+    /**
+     * Overloaded method to set patient when reading appointments from json file.
+     * @param addressBook The AddressBook model
+     */
+    public void setPatient(AddressBook addressBook) {
+        this.patient = addressBook.getPersonList().get(patientId);
+    }
+
+    public int getPatientId() {
+        return this.patientId;
     }
 
     public AppointmentTime getAppointmentTime() {
@@ -65,8 +80,8 @@ public class Appointment {
         return this.appointmentTime.getEnd();
     }
 
-    public AppointmentDescription getDescription() {
-        return this.description;
+    public AppointmentDescription getAppointmentDescription() {
+        return this.appointmentDescription;
     }
 
     public Person getPerson() {
@@ -104,12 +119,12 @@ public class Appointment {
         Appointment otherAppointment = (Appointment) other;
         return patient.equals(otherAppointment.patient)
                 && appointmentTime.equals(otherAppointment.appointmentTime)
-                && description.equals(otherAppointment.description);
+                && appointmentDescription.equals(otherAppointment.appointmentDescription);
     }
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(patient, appointmentTime, description);
+        return Objects.hash(patient, appointmentTime, appointmentDescription);
     }
 
     @Override
@@ -117,7 +132,7 @@ public class Appointment {
         return new ToStringBuilder(this)
                 .add("patient", patient)
                 .add("appointmentTime", appointmentTime)
-                .add("description", description)
+                .add("description", appointmentDescription)
                 .toString();
     }
 }

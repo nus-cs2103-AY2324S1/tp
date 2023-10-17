@@ -16,12 +16,12 @@ import javafx.collections.ObservableList;
 public class AppointmentTime {
     public static final String MESSAGE_CONSTRAINTS =
             "1. AppointmentTime start must be before AppointmentTime end.\n"
-                    + "2. AppointmentTime start and end should be at most 24 hours apart.\n"
-                    + "3. AppointmentTime must also not overlap with an existing Appointment's time.\n"
-                    + "* Note: Date indicated must be DD/MM/YYYY"
-                    + "(i.e. 2th Jan 2020 must be input as 02/01/2021 instead of 2020-01-01).\n"
-                    + "* Note: Time indicated must be XX:XX (i.e. 9AM must be input as 09:00 instead of 9:00).\n"
-                    + "Eg: start=13/10/2023 09:00 end=13/10/2023 12:00";
+            + "2. AppointmentTime start and end should be at most 24 hours apart.\n"
+            + "3. AppointmentTime must also not overlap with an existing Appointment's time.\n"
+            + "* Note: Date indicated must be DD/MM/YYYY"
+            + "(i.e. 2th Jan 2020 must be input as 02/01/2021 instead of 2020-01-01).\n"
+            + "* Note: Time indicated must be XX:XX (i.e. 9AM must be input as 09:00 instead of 9:00).\n"
+            + "Eg: start=13/10/2023 09:00 end=13/10/2023 12:00";
 
     // Data fields
     private final LocalDateTime start;
@@ -46,10 +46,7 @@ public class AppointmentTime {
      */
     public static boolean isValidAppointmentTime(LocalDateTime start, LocalDateTime end) {
         requireAllNonNull(start, end);
-        if (start.isAfter(end)) {
-            return false;
-        }
-        return true;
+        return !start.isAfter(end) && !start.isEqual(end);
     }
 
     /**
@@ -76,30 +73,6 @@ public class AppointmentTime {
         }
         return true;
     }
-
-    /**
-     * Returns true if the timings are ordered properly (start comes before the end time)
-     *
-     * @param appointment The appointment to check.
-     * @return True if the appointment is valid, false otherwise.
-     */
-    public static Boolean isValidOrderingOfTime(Appointment appointment) {
-        LocalDateTime start = appointment.getStartTime();
-        LocalDateTime end = appointment.getEndTime();
-
-        // Additional Check: Start time should not be at the same time as the End time
-        if (start.isEqual(end)) {
-            return false;
-        }
-
-        // Additional Check: Whether Start time is before End time
-        if (start.isAfter(end) || start.isEqual(end)) {
-            return false;
-        }
-
-        return true;
-    }
-
 
     public LocalDateTime getStart() {
         return start;
