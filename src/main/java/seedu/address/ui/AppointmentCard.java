@@ -33,6 +33,8 @@ public class AppointmentCard extends UiPart<Region> {
     private Label id;
     @FXML
     private Label appointmentTime;
+    @FXML
+    private Label appointmentDescription;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -42,7 +44,8 @@ public class AppointmentCard extends UiPart<Region> {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         this.appointment = appointment;
         id.setText(displayedIndex + ". ");
-        patientName.setText(appointment.getPatientName());
+        patientName.setText("PATIENT: " + appointment.getPatientName());
         appointmentTime.setText(appointment.getAppointmentTime().toString());
+        appointmentDescription.setText(appointment.getAppointmentDescription().value);
     }
 }

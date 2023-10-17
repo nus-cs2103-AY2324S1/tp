@@ -3,14 +3,15 @@ package seedu.address.model.appointment;
 import static java.util.Objects.requireNonNull;
 
 /**
- * AppointmentDescription class to contain description.
+ * Represents an Appointment's description in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidAppointmentDescription(String)}
  */
 public class AppointmentDescription {
 
-    public static final String MESSAGE_CONSTRAINTS = "It is mandatory for the description to be filled. It should "
-            + "only consist of alphanumeric characters and spaces.";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Description should only contain alphanumeric characters and spaces, and it should not be blank";
 
-    private String description;
+    public final String value;
 
     /**
      * Constructor method
@@ -18,7 +19,7 @@ public class AppointmentDescription {
      */
     public AppointmentDescription(String description) {
         requireNonNull(description);
-        this.description = description;
+        this.value = description;
     }
 
     /**
@@ -40,7 +41,7 @@ public class AppointmentDescription {
 
         if (other instanceof AppointmentDescription) {
             AppointmentDescription otherAppointmentDescription = (AppointmentDescription) other;
-            if (this.description.equals(otherAppointmentDescription.description)) {
+            if (this.value.equals(otherAppointmentDescription.value)) {
                 return true;
             }
         }
@@ -49,10 +50,10 @@ public class AppointmentDescription {
 
     @Override
     public int hashCode() {
-        return this.description.hashCode();
+        return this.value.hashCode();
     }
 
     public String toString() {
-        return this.description;
+        return this.value;
     }
 }

@@ -43,10 +43,14 @@ public class RescheduleCommandParser implements Parser<RescheduleCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_APPOINTMENT_START, PREFIX_APPOINTMENT_END);
 
-
         LocalDateTime startTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_APPOINTMENT_START).get());
         LocalDateTime endTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_APPOINTMENT_END).get());
-        AppointmentTime appointmentTime = new AppointmentTime(startTime, endTime);
+        AppointmentTime appointmentTime;
+        try {
+            appointmentTime = new AppointmentTime(startTime, endTime);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(AppointmentTime.MESSAGE_CONSTRAINTS);
+        }
 
         return new RescheduleCommand(index, appointmentTime);
     }

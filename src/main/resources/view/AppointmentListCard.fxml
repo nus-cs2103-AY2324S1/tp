@@ -24,8 +24,9 @@
                         <Region fx:constant="USE_PREF_SIZE" />
                     </minWidth>
                 </Label>
-                <Label fx:id="patientName" text="\$patientName" styleClass="cell_big_label" />
+                <Label fx:id="appointmentDescription" text="\$appointmentDescription" styleClass="cell_big_label" />
             </HBox>
+            <Label fx:id="patientName" styleClass="cell_small_label" text="\$patientName" />
             <Label fx:id="appointmentTime" styleClass="cell_small_label" text="\$appointmentTime" />
         </VBox>
     </GridPane>

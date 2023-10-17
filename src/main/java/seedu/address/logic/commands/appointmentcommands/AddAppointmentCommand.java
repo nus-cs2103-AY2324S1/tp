@@ -16,7 +16,6 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.AppointmentTime;
 import seedu.address.model.person.Person;
@@ -35,9 +34,9 @@ public class AddAppointmentCommand extends Command {
             + PREFIX_APPOINTMENT_DESCRIPTION + "DESCRIPTION "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
+            + PREFIX_APPOINTMENT_PATIENT + "1 "
             + PREFIX_APPOINTMENT_START + "20/10/2023 12:00 "
             + PREFIX_APPOINTMENT_END + "20/10/2023 13:00 "
-            + PREFIX_APPOINTMENT_PATIENT + "1 "
             + PREFIX_APPOINTMENT_DESCRIPTION + "Follow up on Chest X-Ray ";
     public static final String MESSAGE_SUCCESS = "New appointment scheduled: %1$s.";
 
@@ -59,9 +58,7 @@ public class AddAppointmentCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        ReadOnlyAddressBook addressBook = model.getAddressBook();
         List<Person> latestPersonList = model.getFilteredPersonList();
-        ObservableList<Appointment> appointmentList = addressBook.getAppointmentList();
         ObservableList<Appointment> appList = model.getFilteredAppointmentList();
 
 
@@ -75,7 +72,7 @@ public class AddAppointmentCommand extends Command {
         currAppointment.setPatient(personToAdd);
 
         // Timeslot is invalid
-        if (!AppointmentTime.isValidOrderingOfTime(currAppointment)) {
+        if (!AppointmentTime.isValidAppointmentTime(currAppointment.getStartTime(), currAppointment.getEndTime())) {
             throw new CommandException((Messages.MESSAGE_INVALID_START_AND_END_TIMES));
         }
 

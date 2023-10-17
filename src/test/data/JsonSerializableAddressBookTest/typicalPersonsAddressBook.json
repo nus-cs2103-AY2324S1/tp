@@ -56,5 +56,6 @@
     "birthdate": "08/23/1994",
     "address" : "4th street",
     "tags" : [ ]
-  } ]
+  } ],
+  "appointments": []
 }

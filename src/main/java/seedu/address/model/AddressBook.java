@@ -36,7 +36,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public AddressBook() {}
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an AddressBook using the Persons and Appointments in the {@code toBeCopied}
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
@@ -68,6 +68,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setAppointments(newData.getAppointmentList());
     }
 
     //// person-level operations
@@ -86,6 +87,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addPerson(Person p) {
         persons.add(p);
+        System.out.println("test2");
     }
 
     /**
@@ -123,6 +125,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addAppointment(Appointment a) {
         appointments.add(a);
+        System.out.println("test");
     }
 
     /**
