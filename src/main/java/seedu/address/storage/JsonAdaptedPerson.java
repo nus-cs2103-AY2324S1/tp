@@ -28,7 +28,6 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
-    private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final String bankAccount;
     private final String joinDate;
     private final String salary;

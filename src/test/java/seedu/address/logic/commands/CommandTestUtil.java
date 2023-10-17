@@ -39,10 +39,10 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_BANKACCOUNT_AMY = "1234567890234";
     public static final String VALID_BANKACCOUNT_BOB = "01823819";
-    public static final String VALID_JOINDATE_AMY = "10-05-2003";
-    public static final String VALID_JOINDATE_BOB = "20-08-2012";
-    public static final String VALID_SALARY_AMY = "4000";
-    public static final String VALID_SALARY_BOB = "2500";
+    public static final String VALID_JOINDATE_AMY = "10/05/2003";
+    public static final String VALID_JOINDATE_BOB = "20/08/2012";
+    public static final String VALID_SALARY_AMY = "4000.00";
+    public static final String VALID_SALARY_BOB = "2500.00";
     public static final String VALID_ANNUALLEAVE_AMY = "4";
     public static final String VALID_ANNUALLEAVE_BOB = "2";
 
@@ -76,7 +76,6 @@ public class CommandTestUtil {
         + "a291"; // 'a' not allowed in salary
     public static final String INVALID_ANNUALLEAVE_DESC = " " + PREFIX_ANNUAL_LEAVE
         + "a19"; // 'a' not allowed in annual leave
-    //todo add invalid bank account, join date and salary
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

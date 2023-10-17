@@ -4,11 +4,18 @@
     "phone": "94351253",
     "email": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
-    "tags": [ "friends" ]
+    "bankAccount": "123123123123",
+    "salary" : "1000.00",
+    "annualLeave" : "10",
+    "joinDate" : "15/08/2021"
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "pauline@example.com",
-    "address": "4th street"
+    "address": "4th street",
+    "bankAccount": "123123123123",
+    "salary" : "1500.00",
+    "annualLeave" : "11",
+    "joinDate" : "15/08/2021"
   } ]
 }

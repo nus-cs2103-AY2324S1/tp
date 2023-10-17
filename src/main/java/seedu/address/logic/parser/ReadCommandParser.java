@@ -58,6 +58,18 @@ public class ReadCommandParser implements Parser<ReadCommand> {
         case "e":
             fullFieldName = "email";
             break;
+        case "b":
+            fullFieldName = "bank account";
+            break;
+        case "al":
+            fullFieldName = "annual leave";
+            break;
+        case "j":
+            fullFieldName = "join date";
+            break;
+        case "s":
+            fullFieldName = "salary";
+            break;
         default:
             throw new ParseException(Messages.MESSAGE_INVALID_FIELD_TO_READ);
         }

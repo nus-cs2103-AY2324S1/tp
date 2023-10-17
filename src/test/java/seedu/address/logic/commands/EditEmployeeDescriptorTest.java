@@ -1,8 +1,9 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
@@ -59,16 +60,16 @@ public class EditEmployeeDescriptorTest {
 
     @Test
     public void toStringMethod() {
-        EditEmployeeDescriptor editEmployeeDescriptor = new EditEmployeeDescriptor();
+        EditEmployeeDescriptor editPersonDescriptor = new EditEmployeeDescriptor();
         String expected = EditEmployeeDescriptor.class.getCanonicalName() + "{name="
-                + editEmployeeDescriptor.getName().orElse(null) + ", phone="
-                + editEmployeeDescriptor.getPhone().orElse(null) + ", email="
-                + editEmployeeDescriptor.getEmail().orElse(null) + ", address="
-                + editEmployeeDescriptor.getAddress().orElse(null) + ", bankAccount="
-                + editEmployeeDescriptor.getBankAccount().orElse(null) + ", joinDate="
-                + editEmployeeDescriptor.getJoinDate().orElse(null) + ", salary="
-                + editEmployeeDescriptor.getSalary().orElse(null) + ", annualLeave="
-                + editEmployeeDescriptor.getAnnualLeave().orElse(null) + "}";
-        assertEquals(expected, editEmployeeDescriptor.toString());
+                + editPersonDescriptor.getName().orElse(null) + ", phone="
+                + editPersonDescriptor.getPhone().orElse(null) + ", email="
+                + editPersonDescriptor.getEmail().orElse(null) + ", address="
+                + editPersonDescriptor.getAddress().orElse(null) + ", bankAccount="
+                + editPersonDescriptor.getBankAccount().orElse(null) + ", joinDate="
+                + editPersonDescriptor.getJoinDate().orElse(null) + ", salary="
+                + editPersonDescriptor.getSalary().orElse(null) + ", annualLeave="
+                + editPersonDescriptor.getAnnualLeave().orElse(null) + "}";
+        assertEquals(expected, editPersonDescriptor.toString());
     }
 }

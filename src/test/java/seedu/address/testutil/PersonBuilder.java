@@ -20,8 +20,8 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_BANKACCOUNT = "12345678";
-    public static final String DEFAULT_JOINDATE = "12-02-2023";
-    public static final String DEFAULT_SALARY = "2000";
+    public static final String DEFAULT_JOINDATE = "12/02/2023";
+    public static final String DEFAULT_SALARY = "2000.00";
     public static final String DEFAULT_ANNUALLEAVE = "14";
 
     private Name name;
