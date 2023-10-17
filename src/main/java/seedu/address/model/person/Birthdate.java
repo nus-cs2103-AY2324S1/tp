@@ -1,10 +1,10 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Represents a Person's birthdate in the address book.
@@ -13,7 +13,7 @@ import static java.util.Objects.requireNonNull;
 public class Birthdate {
     public static final String MESSAGE_CONSTRAINTS = "Birthdates should be of the form DD/MM/YYYY";
 
-    public static final DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    public static final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public final String value;
 
@@ -32,7 +32,7 @@ public class Birthdate {
      */
     public static boolean isValidBirthdate(String test) {
         try {
-            LocalDate.parse(test, format);
+            LocalDate.parse(test, FORMAT);
             return true;
         } catch (DateTimeParseException e) {
             return false;
