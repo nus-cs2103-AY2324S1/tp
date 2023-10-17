@@ -3,17 +3,18 @@ package seedu.address.model.person;
 import seedu.address.commons.util.StringUtil;
 
 /**
- * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
+ * Tests that a {@code Person}'s {@code NRIC} matches any of the keywords given.
  */
-public class NameContainsKeywordsPredicate extends FieldPredicates {
-    public NameContainsKeywordsPredicate(String keyword) {
+public class NricContainsKeywordsPredicate extends FieldPredicates {
+
+    public NricContainsKeywordsPredicate(String keyword) {
         super(keyword);
     }
 
     @Override
     public boolean test(Person person) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword));
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getNric().value, keyword));
     }
 
     @Override
@@ -23,11 +24,11 @@ public class NameContainsKeywordsPredicate extends FieldPredicates {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof NameContainsKeywordsPredicate)) {
+        if (!(other instanceof NricContainsKeywordsPredicate)) {
             return false;
         }
 
-        NameContainsKeywordsPredicate otherNameContainsKeywordsPredicate = (NameContainsKeywordsPredicate) other;
+        NricContainsKeywordsPredicate otherNameContainsKeywordsPredicate = (NricContainsKeywordsPredicate) other;
         return keywords.equals(otherNameContainsKeywordsPredicate.keywords);
     }
 }
