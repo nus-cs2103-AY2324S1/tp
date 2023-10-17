@@ -69,7 +69,7 @@ public class ListAttendanceCommandTest {
         assertFalse(listAttendanceFirstCommand.equals(listAttendanceSecondCommand));
     }
     @Test
-    public void execute_listAttendance_success() {
+    public void execute_listAttendanceWithTag_success() {
         ALICE.addAttendance(new Attendance(LocalDate.now(), false, "CS2040S"));
 
         Tag tag = new Tag("CS2040S");
@@ -78,6 +78,24 @@ public class ListAttendanceCommandTest {
                 new ContainsCourseTutorialPredicate(tag), new AbsentFromTutorialNumPredicate(index, tag));
 
         String expectedSummary = String.format(Messages.MESSAGE_ATTENDANCE_SUMMARY_WITH_TAG, 0, 1, 1, tag.getTagName());
+
+        expectedModel.updateFilteredPersonList(new AbsentFromTutorialNumPredicate(index, tag));
+        CommandResult expectedCommandResult = new CommandResult(expectedSummary + MESSAGE_SUCCESS);
+
+        assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
+    }
+
+    @Test
+    public void execute_listAttendanceNoTag_success() {
+        ALICE.addAttendance(new Attendance(LocalDate.now(), false, "CS2040S"));
+
+        Tag tag = new Tag("PLACEHOLDER");
+        Index index = Index.fromOneBased(1);
+        ListAttendanceCommand command = new ListAttendanceCommand(tag, index,
+                new ContainsCourseTutorialPredicate(tag), new AbsentFromTutorialNumPredicate(index, tag));
+
+        int total = expectedModel.getFilteredPersonList().size();
+        String expectedSummary = String.format(Messages.MESSAGE_ATTENDANCE_SUMMARY_NO_TAG, total - 1, total, 1);
 
         expectedModel.updateFilteredPersonList(new AbsentFromTutorialNumPredicate(index, tag));
         CommandResult expectedCommandResult = new CommandResult(expectedSummary + MESSAGE_SUCCESS);
