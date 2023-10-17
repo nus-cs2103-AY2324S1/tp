@@ -6,6 +6,7 @@ import seedu.lovebook.model.person.Gender;
 import seedu.lovebook.model.person.Height;
 import seedu.lovebook.model.person.Income;
 import seedu.lovebook.model.person.Name;
+import seedu.lovebook.model.person.horoscope.Horoscope;
 
 /**
  * A utility class to help with building Date objects.
@@ -17,13 +18,14 @@ public class PersonBuilder {
     public static final String DEFAULT_GENDER = "F";
     public static final String DEFAULT_HEIGHT = "123";
     public static final String DEFAULT_INCOME = "3000";
+    public static final String DEFAULT_HOROSCOPE = "TAURUS";
 
     private Name name;
     private Age age;
     private Gender gender;
     private Height height;
-
     private Income income;
+    private Horoscope horoscope;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -34,6 +36,7 @@ public class PersonBuilder {
         gender = new Gender(DEFAULT_GENDER);
         height = new Height(DEFAULT_HEIGHT);
         income = new Income(DEFAULT_INCOME);
+        horoscope = new Horoscope(DEFAULT_HOROSCOPE);
     }
 
     /**
@@ -45,6 +48,7 @@ public class PersonBuilder {
         gender = dateToCopy.getGender();
         height = dateToCopy.getHeight();
         income = dateToCopy.getIncome();
+        horoscope = dateToCopy.getHoroscope();
     }
 
     /**
@@ -80,15 +84,23 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Gender} of the {@code Date} that we are building.
+     * Sets the {@code Income} of the {@code Date} that we are building.
      */
     public PersonBuilder withIncome(String income) {
         this.income = new Income(income);
         return this;
     }
 
+    /**
+     * Sets the {@code Horoscope} of the {@code Date} that we are building.
+     */
+    public PersonBuilder withHoroscope(String horoscope) {
+        this.horoscope = new Horoscope(horoscope);
+        return this;
+    }
+
     public Date build() {
-        return new Date(name, age, gender, height, income);
+        return new Date(name, age, gender, height, income, horoscope);
     }
 
 }
