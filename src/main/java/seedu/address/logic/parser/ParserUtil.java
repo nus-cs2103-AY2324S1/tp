@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -96,6 +97,19 @@ public class ParserUtil {
             throw new ParseException(Address.MESSAGE_CONSTRAINTS);
         }
         return new Address(trimmedAddress);
+    }
+
+    /**
+     * Parses a {@code String appointment} into an {@code Appointment}, if it exists.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code appointment} is invalid.
+     */
+    public static Appointment parseAppointmentIfExists(Optional<String> appointment) throws ParseException {
+        if (appointment.isEmpty()) {
+            return null;
+        }
+        return parseAppointment(appointment.get());
     }
 
     /**
