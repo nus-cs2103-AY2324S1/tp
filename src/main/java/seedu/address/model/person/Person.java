@@ -52,25 +52,6 @@ public class Person {
         this(name, phone, email, address, null, null, null, null, tags);
     }
 
-    /*
-
-    public Person(Name name, Phone phone, Email email, Address address,
-                  Housing housing, Availability availability, Set<Tag> tags) {
-        this(name, phone, email, address, housing, availability, null, null, tags);
-    }
-
-    public Person(Name name, Phone phone, Email email, Address address,
-                  Availability availability, Set<Tag> tags) {
-        this(name, phone, email, address, null, availability, null, null, tags);
-    }
-
-    public Person(Name name, Phone phone, Email email, Address address,
-                  Housing housing, Set<Tag> tags) {
-        this(name, phone, email, address, housing, null, null, null, tags);
-    }
-
-     */
-
     public Name getAnimalName() {
         return animalName;
     }
