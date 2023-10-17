@@ -65,7 +65,7 @@ public class Transaction implements Entry {
         this.transactionId = transactionId;
         this.description = description;
         this.amount = amount;
-        this.person = null;
+        this.person = Person.PERSON_UNSTATED;
         this.date = date;
         this.transactionType = transactionType;
     }
@@ -75,7 +75,7 @@ public class Transaction implements Entry {
     }
 
     public Boolean hasPersonInfo() {
-        return this.person != null;
+        return !Person.isPersonUnstated(this.person);
     }
 
     public Person getPerson() {
@@ -92,7 +92,7 @@ public class Transaction implements Entry {
     }
 
     public Date getDate() {
-        return new Date();
+        return date;
     }
 
     public TransactionType getTransactionType() {

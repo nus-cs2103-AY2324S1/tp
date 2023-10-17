@@ -17,7 +17,13 @@ import transact.model.tag.Tag;
  * immutable.
  */
 public class Person implements Entry {
-
+    public static final Person PERSON_UNSTATED = new Person(
+            new Name("Unstated"),
+            new Phone("Unstated"),
+            new Email("Unstated"),
+            new Address("Unstated"),
+            Collections.emptySet()
+    );
     // Identity fields
     private final Name name;
     private final Phone phone;
@@ -26,7 +32,6 @@ public class Person implements Entry {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-
     /**
      * Every field must be present and not null.
      */
@@ -38,7 +43,28 @@ public class Person implements Entry {
         this.address = address;
         this.tags.addAll(tags);
     }
-
+    /**
+     * Checks if a given Person object represents an "Unstated" person.
+     *
+     * @param person The Person object to check.
+     * @return True if the Person object represents an "Unstated" person, false otherwise.
+     */
+    public static Boolean isPersonUnstated(Person person) {
+        String name = person.getName().toString();
+        String phone = person.getPhone().toString();
+        String email = person.getEmail().toString();
+        String address = person.getAddress().toString();
+        Set<Tag> tag = person.getTags();
+        if (name.equalsIgnoreCase("Unstated")
+                && email.equalsIgnoreCase("Unstated")
+                && phone.equalsIgnoreCase("Unstated")
+                && address.equalsIgnoreCase("Unstated")
+                && tag.isEmpty()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     public Name getName() {
         return name;
     }
@@ -112,13 +138,17 @@ public class Person implements Entry {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("name", name)
-                .add("phone", phone)
-                .add("email", email)
-                .add("address", address)
-                .add("tags", tags)
-                .toString();
+        if (!Person.isPersonUnstated(this)) {
+            return new ToStringBuilder(this)
+                    .add("name", name)
+                    .add("phone", phone)
+                    .add("email", email)
+                    .add("address", address)
+                    .add("tags", tags)
+                    .toString();
+        } else {
+            return "PersonUnstated";
+        }
     }
 
 }

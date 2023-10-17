@@ -17,14 +17,9 @@ import com.opencsv.exceptions.CsvValidationException;
 import transact.commons.exceptions.DataLoadingException;
 import transact.model.ReadOnlyTransactionBook;
 import transact.model.TransactionBook;
+import transact.model.person.Person;
 import transact.model.transaction.Transaction;
 
-/*
-import transact.model.transaction.info.Amount;
-import transact.model.transaction.info.Description;
-import transact.model.transaction.info.TransactionId;
-import transact.model.transaction.info.TransactionType;
- */
 
 
 /**
@@ -63,9 +58,10 @@ public class CsvAdaptedTransactionStorage implements TransactionBookStorage {
                 while ((row = reader.readNext()) != null) {
                     String transactionId = row[0];
                     String category = row[1];
-                    String person = row[2];
-                    String description = row[3];
-                    BigDecimal amount = new BigDecimal(row[4]).setScale(2, RoundingMode.HALF_UP);
+                    String description = row[2];
+                    BigDecimal amount = new BigDecimal(row[3]).setScale(2, RoundingMode.HALF_UP);
+                    String date = row[4];
+                    String person = row[5];
 
                     /* TODO Read in optional staff when ready
                     Transaction transaction = new Transaction(transactionId, TransactionType.R, )
@@ -88,23 +84,7 @@ public class CsvAdaptedTransactionStorage implements TransactionBookStorage {
 
     @Override
     public void saveTransactionBook(ReadOnlyTransactionBook transactionBook) throws IOException {
-        List<Transaction> transactions = transactionBook.getTransactionList();
-        try (CSVWriter writer = new CSVWriter(new FileWriter(filePath.toFile()))) {
-            String[] header = { "TransactionId", "Category", "Person", "Description", "Amount" };
-            writer.writeNext(header);
-
-            for (Transaction transaction : transactions) {
-                String transactionId = transaction.getTransactionId().toString();
-                String category = (transaction instanceof Transaction) ? "Expense" : "Revenue";
-                String person = (transaction.hasPersonInfo()) ? transaction.getPerson().toString() : "";
-                String description = transaction.getDescription().toString();
-                String amount = transaction.getAmount().toString();
-
-                String[] row = { transactionId, category, person, description, amount };
-
-                writer.writeNext(row);
-            }
-        }
+        saveTransactionBook(transactionBook, filePath);
     }
 
     /**
@@ -115,17 +95,17 @@ public class CsvAdaptedTransactionStorage implements TransactionBookStorage {
     public void saveTransactionBook(ReadOnlyTransactionBook transactionBook, Path filePath) throws IOException {
         List<Transaction> transactions = transactionBook.getTransactionList();
         try (CSVWriter writer = new CSVWriter(new FileWriter(filePath.toFile()))) {
-            String[] header = { "TransactionId", "Category", "Person", "Description", "Amount" };
+            String[] header = { "TransactionId", "Category", "Description", "Amount", "Date", "Person" };
             writer.writeNext(header);
 
             for (Transaction transaction : transactions) {
                 String transactionId = transaction.getTransactionId().toString();
                 String category = (transaction instanceof Transaction) ? "Expense" : "Revenue";
-                String person = (transaction.hasPersonInfo()) ? transaction.getPerson().toString() : "";
+                String person = (transaction.hasPersonInfo()) ? transaction.getPerson().toString() : Person.PERSON_UNSTATED.toString();
                 String description = transaction.getDescription().toString();
                 String amount = transaction.getAmount().toString();
-
-                String[] row = { transactionId, category, person, description, amount };
+                String date = transaction.getDate().toString();
+                String[] row = { transactionId, category, description, amount, date, person };
 
                 writer.writeNext(row);
             }
