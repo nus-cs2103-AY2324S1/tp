@@ -315,7 +315,7 @@ public class EditCommand extends Command {
                     && Objects.equals(policyExpiryDate, otherEditPersonDescriptor.policyExpiryDate);
         }
 
-        private String getPolicy() {
+        protected String getPolicy() {
             return new ToStringBuilder(this)
                     .add("policyNumber", policyNumber)
                     .add("policyIssueDate", policyIssueDate)
