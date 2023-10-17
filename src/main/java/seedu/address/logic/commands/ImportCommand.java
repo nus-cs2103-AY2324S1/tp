@@ -2,17 +2,16 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Student;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.person.Student;
+
 /**
- * Adds a student to the address book.
+ * Import students data to the address book.
  */
 public class ImportCommand extends Command {
 
@@ -22,21 +21,24 @@ public class ImportCommand extends Command {
             COMMAND_WORD + ": Import a csv file with students details to the address book. "
             + "Parameters: File Path\n"
             + "Example: " + COMMAND_WORD + " StudentData.csv\n"
-            + "Note that subjects must be at the last column";
+            + "Note that the order of column should be "
+            + "\"Name\", \"Phone\", \"Email\", \"Address\", \"Gender\", \n"
+            + "\"Sec Level\", \"Nearest Mrt Station\", \"Subject\"";
 
     public static final String MESSAGE_SUCCESS = "All students data imported";
-    public static final String MESSAGE_DUPLICATE_PERSON = " are duplicated";
+    public static final String MESSAGE_DUPLICATE_PERSON = "has duplicates";
 
 
     private final String filePath;
     private final List<Student> students;
-    private final List<Name> duplicateStudents;
+    private final List<Student> duplicateStudents;
 
     /**
-     * Creates an AddCommand to add the specified {@code Student}
+     * Creates an ImportCommand to import all student details
      */
     public ImportCommand(List<Student> students, String filePath) {
         requireNonNull(students);
+        requireNonNull(filePath);
         this.students = students;
         this.filePath = filePath;
         this.duplicateStudents = new ArrayList<>();
@@ -49,13 +51,17 @@ public class ImportCommand extends Command {
         for (Student s : students) {
             if (!model.hasPerson(s)) {
                 model.addPerson(s);
-            } else if (model.hasPerson(s) && !duplicateStudents.contains(s.getName())) {
-                duplicateStudents.add(s.getName());
+            } else if (model.hasPerson(s) && !duplicateStudents.contains(s)) {
+                duplicateStudents.add(s);
             }
         }
 
         if (!duplicateStudents.isEmpty()) {
-            throw new CommandException(duplicateStudents + MESSAGE_DUPLICATE_PERSON);
+            StringBuilder duplicates = new StringBuilder();
+            for (Student s : duplicateStudents) {
+                duplicates.append(s.getName()).append(" (").append(s.getEmail()).append("), ");
+            }
+            throw new CommandException(duplicates + MESSAGE_DUPLICATE_PERSON);
         }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS));

@@ -2,6 +2,15 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
+
 import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
@@ -13,15 +22,6 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.SecLevel;
 import seedu.address.model.person.Student;
 import seedu.address.model.tag.Subject;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
 
 /**
  * Parses input arguments and creates a new ImportCommand object
@@ -37,7 +37,7 @@ public class ImportCommandParser implements Parser<ImportCommand> {
         List<Student> students = new ArrayList<>();
 
         String projectPath = System.getProperty("user.dir");
-        String path = projectPath + "\\data\\" + args.trim();
+        String path = projectPath + "\\" + args.trim();
 
         File csvFile = new File(path);
         if (!csvFile.exists()) {
@@ -47,12 +47,20 @@ public class ImportCommandParser implements Parser<ImportCommand> {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(csvFile));
             String header = reader.readLine();
-            String[] headers = header.split(",");
+            String[] expectedHeaders = {"Name", "Phone Number", "Email", "Address",
+                "Gender", "Sec level", "Nearest Mrt station", "Subject"};
+
+            String[] actualHeaders = header.split(",");
+
+            if (!(actualHeaders.length == expectedHeaders.length
+                    || actualHeaders.length == expectedHeaders.length - 1)) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCommand.MESSAGE_USAGE));
+            }
 
             String line = reader.readLine();
             while (line != null) {
                 String[] attributes = line.split(",");
-                Student student = parseStudentFromCSV(headers, attributes);
+                Student student = parseStudentFromCsv(attributes);
                 students.add(student);
                 line = reader.readLine();
             }
@@ -63,55 +71,16 @@ public class ImportCommandParser implements Parser<ImportCommand> {
         return new ImportCommand(students, args);
     }
 
-    private Student parseStudentFromCSV(String[] headers, String[] attributes) throws ParseException{
-//        int[] index = new int[headers.length];
-//        for (int i = 0; i < headers.length; i++) {
-//            String keyword = headers[i];
-//            switch (keyword) {
-//            case "Name":
-//                index[0] = i;
-//                break;
-//            case "Phone Number":
-//                index[1] = i;
-//                break;
-//            case "Email":
-//                index[2] = i;
-//                break;
-//            case "Address":
-//                index[3] = i;
-//                break;
-//            case "Gender":
-//                index[4] = i;
-//                break;
-//            case "Sec Level":
-//                index[5] = i;
-//                break;
-//            case "Nearest Mrt Station":
-//                index[6] = i;
-//                break;
-//            case "Subject":
-//                index[7] = 7;
-//                break;
-//            default:
-//                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCommand.MESSAGE_USAGE));
-//            }
-//        }
-
-//        Name name = ParserUtil.parseName(attributes[index[0]]);
-//        Phone phone = ParserUtil.parsePhone(attributes[index[1]]);
-//        Email email = ParserUtil.parseEmail(attributes[index[2]]);
-//        Address address = ParserUtil.parseAddress(attributes[index[3]]);
-//        Gender gender = ParserUtil.parseGender(attributes[index[4]]);
-//        SecLevel secLevel = ParserUtil.parseSecLevel(attributes[index[5]]);
-//        MrtStation nearestMrtStation = ParserUtil.parseMrtStation(attributes[index[6]]);
+    private Student parseStudentFromCsv(String[] attributes) throws ParseException {
         Name name = ParserUtil.parseName(attributes[0]);
         Phone phone = ParserUtil.parsePhone(attributes[1]);
         Email email = ParserUtil.parseEmail(attributes[2]);
 
         int count = 3;
-        StringBuilder addr = new StringBuilder(attributes[3]);
-        while (!(attributes[count].equals("M") || attributes[count].equals("F"))) {
-            addr.append(attributes[count]);
+        StringBuilder addr = new StringBuilder();
+        while (!(attributes[count].equalsIgnoreCase("M")
+                || attributes[count].equalsIgnoreCase("F"))) {
+            addr.append(", ").append(attributes[count]);
             count++;
         }
         Address address = ParserUtil.parseAddress(addr.toString());
@@ -128,5 +97,6 @@ public class ImportCommandParser implements Parser<ImportCommand> {
         return new Student(name, phone, email, address,
                 gender, secLevel, nearestMrtStation, subjectList);
     }
+
 
 }
