@@ -11,15 +11,16 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.model.ConText;
+import seedu.address.logic.commands.EditCommand.EditContactDescriptor;
 import seedu.address.model.contact.Contact;
 
-/**
- * Holds all data used by test cases.
- */
-public class TestData {
 
+
+/**
+ * Holds test data used by test cases, such as strings and {@link Contact}s.
+ */
+public final class TestData {
     // These are used for default values during {@code ContactBuilder} initialisation.
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
@@ -35,13 +36,9 @@ public class TestData {
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_NOTE_AMY = "";
     public static final String VALID_NOTE_BOB = "CS2013 tutorial mate.";
-    public static final String VALID_TAG_HUSBAND = "husband";
-    public static final String VALID_TAG_FRIEND = "friend";
     public static final String INVALID_NAME = "R@chel";
     public static final String INVALID_PHONE = "+651234";
     public static final String INVALID_EMAIL = "example.com";
-    public static final String INVALID_TAG = "#friend";
-    public static final String WHITESPACE = " \t\r\n";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -51,28 +48,10 @@ public class TestData {
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
     public static final String NOTE_DESC_AMY = " " + PREFIX_NOTE + VALID_NOTE_AMY;
     public static final String NOTE_DESC_BOB = " " + PREFIX_NOTE + VALID_NOTE_BOB;
-    public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
-    public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
-    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
-
-    public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
-    public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
-
-    public static final EditCommand.EditContactDescriptor DESC_AMY;
-    public static final EditCommand.EditContactDescriptor DESC_BOB;
-
-    static {
-        DESC_AMY = new EditContactDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withNote(VALID_NOTE_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
-        DESC_BOB = new EditContactDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withNote(VALID_NOTE_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
-    }
 
     // These contain {@code Index} objects that are used in test cases
     public static final Index INDEX_FIRST_CONTACT = Index.fromOneBased(1);
@@ -120,15 +99,6 @@ public class TestData {
     public static final Contact IDA = new ContactBuilder().withName("Ida Mueller").withPhone("8482131")
             .withEmail("hans@example.com").withNote("chicago ave").build();
 
-    // Manually added - Contact's details found in {@code CommandTestUtil}
-    public static final Contact AMY = new ContactBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-            .withEmail(VALID_EMAIL_AMY).withNote(VALID_NOTE_AMY).withTags(VALID_TAG_FRIEND).build();
-    public static final Contact BOB = new ContactBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-            .withEmail(VALID_EMAIL_BOB).withNote(VALID_NOTE_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
-            .build();
-
-    private TestData() {} // prevents instantiation
-
     /**
      * Returns an {@code ConText} with all the typical contacts.
      */
@@ -144,4 +114,87 @@ public class TestData {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 
+    //TODO Refine the various test data above this line
+    /**
+     * Holds valid test data.
+     */
+    public static final class Valid {
+        /**
+         * Holds tag-related data.
+         */
+        public static final class Tag {
+            public static final String ALPHANUMERIC = "Friend1";
+            public static final String ALPHANUMERIC_SPACES = "2023 tutorial classmate";
+
+            public static final String FLAG = " " + PREFIX_TAG;
+            public static final String FLAG_ALPHANUMERIC = Tag.FLAG + Tag.ALPHANUMERIC;
+            public static final String FLAG_ALPHANUMERIC_SPACES = Tag.FLAG + Tag.ALPHANUMERIC_SPACES;
+        }
+
+        /**
+         * Holds {@link Contact}s.
+         */
+        public static final class Contact {
+            public static final seedu.address.model.contact.Contact AMY =
+                    new ContactBuilder()
+                            .withName(VALID_NAME_AMY)
+                            .withPhone(VALID_PHONE_AMY)
+                            .withEmail(VALID_EMAIL_AMY)
+                            .withNote(VALID_NOTE_AMY)
+                            .withTags(TestData.Valid.Tag.ALPHANUMERIC)
+                            .build();
+            public static final seedu.address.model.contact.Contact BOB =
+                    new ContactBuilder()
+                            .withName(VALID_NAME_BOB)
+                            .withPhone(VALID_PHONE_BOB)
+                            .withEmail(VALID_EMAIL_BOB)
+                            .withNote(VALID_NOTE_BOB)
+                            .withTags(TestData.Valid.Tag.ALPHANUMERIC, TestData.Valid.Tag.ALPHANUMERIC_SPACES)
+                            .build();
+        }
+
+        /**
+         * Holds {@link EditContactDescriptor}s.
+         */
+        public static final class EditDescriptor {
+            public static final EditContactDescriptor AMY =
+                new EditContactDescriptorBuilder()
+                        .withName(VALID_NAME_AMY)
+                        .withPhone(VALID_PHONE_AMY)
+                        .withEmail(VALID_EMAIL_AMY)
+                        .withNote(VALID_NOTE_AMY)
+                        .withTags(TestData.Valid.Tag.ALPHANUMERIC)
+                        .build();
+            public static final EditContactDescriptor BOB =
+                    new EditContactDescriptorBuilder()
+                            .withName(VALID_NAME_BOB)
+                            .withPhone(VALID_PHONE_BOB)
+                            .withEmail(VALID_EMAIL_BOB)
+                            .withNote(VALID_NOTE_BOB)
+                            .withTags(TestData.Valid.Tag.ALPHANUMERIC, TestData.Valid.Tag.ALPHANUMERIC_SPACES)
+                            .build();
+        }
+    }
+
+    /**
+     * Holds invalid test data.
+     */
+    public static final class Invalid {
+        /**
+         * Holds tag-related data.
+         */
+        public static final class Tag {
+            public static final String HASHTAG = "#WrongKindOfTag";
+            public static final String UNDERSCORE_DASH = "kebab-snake_case";
+
+            public static final String FLAG_HASHTAG = TestData.Valid.Tag.FLAG + Tag.HASHTAG;
+        }
+    }
+
+    public static final String WHITESPACE = "\t  \r  \n";
+    public static final String EXTRA_WORDS = "extra words here";
+
+    private TestData() {
+        // No instantiation
+    }
 }

@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TestData.ALICE;
 import static seedu.address.testutil.TestData.VALID_NOTE_BOB;
-import static seedu.address.testutil.TestData.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.TestData.getTypicalConText;
 
 import java.util.Arrays;
@@ -21,11 +20,11 @@ import javafx.collections.ObservableList;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.exceptions.DuplicateContactException;
 import seedu.address.testutil.ContactBuilder;
+import seedu.address.testutil.TestData;
 
 public class ConTextTest {
 
     private final ConText ConText = new ConText();
-
     @Test
     public void constructor() {
         assertEquals(Collections.emptyList(), ConText.getContactList());
@@ -37,7 +36,7 @@ public class ConTextTest {
     }
 
     @Test
-    public void resetData_withValidReadOnlyConText_replacesData() {
+    public void resetData_withValidReadOnlyAddressBook_replacesData() {
         ConText newData = getTypicalConText();
         ConText.resetData(newData);
         assertEquals(newData, ConText);
@@ -46,7 +45,9 @@ public class ConTextTest {
     @Test
     public void resetData_withDuplicateContacts_throwsDuplicateContactException() {
         // Two contacts with the same identity fields
-        Contact editedAlice = new ContactBuilder(ALICE).withNote(VALID_NOTE_BOB).withTags(VALID_TAG_HUSBAND)
+        Contact editedAlice = new ContactBuilder(ALICE)
+                .withNote(VALID_NOTE_BOB)
+                .withTags(TestData.Valid.Tag.ALPHANUMERIC_SPACES)
                 .build();
         List<Contact> newContacts = Arrays.asList(ALICE, editedAlice);
         ConTextStub newData = new ConTextStub(newContacts);
@@ -60,27 +61,32 @@ public class ConTextTest {
     }
 
     @Test
-    public void hasContact_contactNotInConText_returnsFalse() {
+    public void hasContact_contactNotInAddressBook_returnsFalse() {
         assertFalse(ConText.hasContact(ALICE));
     }
 
     @Test
-    public void hasContact_contactInConText_returnsTrue() {
+    public void hasContact_contactInAddressBook_returnsTrue() {
         ConText.addContact(ALICE);
         assertTrue(ConText.hasContact(ALICE));
     }
 
     @Test
-    public void hasContact_contactWithSameIdentityFieldsInConText_returnsTrue() {
+    public void hasContact_contactWithSameIdentityFieldsInAddressBook_returnsTrue() {
         ConText.addContact(ALICE);
-        Contact editedAlice = new ContactBuilder(ALICE).withNote(VALID_NOTE_BOB).withTags(VALID_TAG_HUSBAND)
+        Contact editedAlice = new ContactBuilder(ALICE)
+                .withNote(VALID_NOTE_BOB)
+                .withTags(TestData.Valid.Tag.ALPHANUMERIC_SPACES)
                 .build();
         assertTrue(ConText.hasContact(editedAlice));
     }
 
     @Test
     public void getContactList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> ConText.getContactList().remove(0));
+        assertThrows(
+                UnsupportedOperationException.class,
+                () -> ConText.getContactList().remove(0)
+        );
     }
 
     @Test
@@ -90,7 +96,7 @@ public class ConTextTest {
     }
 
     /**
-     * A stub ReadOnlyConText whose contacts list can violate interface constraints.
+     * A stub ReadOnlyAddressBook whose contacts list can violate interface constraints.
      */
     private static class ConTextStub implements ReadOnlyConText {
         private final ObservableList<Contact> contacts = FXCollections.observableArrayList();

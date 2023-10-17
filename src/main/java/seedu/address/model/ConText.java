@@ -14,19 +14,7 @@ import seedu.address.model.contact.UniqueContactList;
  * Duplicates are not allowed (by .isSameContact comparison)
  */
 public class ConText implements ReadOnlyConText {
-
-    private final UniqueContactList contacts;
-
-    /*
-     * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
-     * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
-     *
-     * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
-     *   among constructors.
-     */
-    {
-        contacts = new UniqueContactList();
-    }
+    private final UniqueContactList contacts = new UniqueContactList();
 
     public ConText() {}
 
@@ -34,7 +22,6 @@ public class ConText implements ReadOnlyConText {
      * Creates an ConText using the Contacts in the {@code toBeCopied}
      */
     public ConText(ReadOnlyConText toBeCopied) {
-        this();
         resetData(toBeCopied);
     }
 
