@@ -5,6 +5,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICALHISTORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -20,9 +21,9 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonType;
-import seedu.address.model.person.predicates.AddressContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.AgeContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.EmailContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.LocationContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.MedHistoryContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.PhoneContainsKeywordsPredicate;
@@ -61,11 +62,12 @@ public class FindCommandParser implements ParserComplex<FindCommand> {
 
     private FindCommand parsePatient(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                         PREFIX_TAG, PREFIX_AGE, PREFIX_MEDICALHISTORY);
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_ADDRESS, PREFIX_AGE, PREFIX_MEDICALHISTORY);
+                PREFIX_AGE, PREFIX_MEDICALHISTORY);
 
         List<Predicate<Person>> predicateList = setupPersonPredicates(argMultimap);
         predicateList.add(PersonType.PATIENT.getSearchPredicate());
@@ -88,13 +90,18 @@ public class FindCommandParser implements ParserComplex<FindCommand> {
 
     private FindCommand parseSpecialist(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_LOCATION,
                         PREFIX_TAG, PREFIX_SPECIALTY);
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_ADDRESS, PREFIX_SPECIALTY);
+                PREFIX_LOCATION, PREFIX_SPECIALTY);
         List<Predicate<Person>> predicateList = setupPersonPredicates(argMultimap);
         predicateList.add(PersonType.SPECIALIST.getSearchPredicate());
+
+        if (argMultimap.getValue(PREFIX_LOCATION).isPresent()) {
+            List<String> addressKeywords = splitKeywordsByWhitespace(argMultimap, PREFIX_LOCATION);
+            predicateList.add(new LocationContainsKeywordsPredicate(addressKeywords));
+        }
 
         if (argMultimap.getValue(PREFIX_SPECIALTY).isPresent()) {
             List<String> specialtyKeywords = splitKeywordsByWhitespace(argMultimap, PREFIX_SPECIALTY);
@@ -131,10 +138,7 @@ public class FindCommandParser implements ParserComplex<FindCommand> {
             List<String> emailKeywords = splitKeywordsByWhitespace(argMultimap, PREFIX_EMAIL);
             predicateList.add(new EmailContainsKeywordsPredicate(emailKeywords));
         }
-        if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            List<String> addressKeywords = splitKeywordsByWhitespace(argMultimap, PREFIX_ADDRESS);
-            predicateList.add(new AddressContainsKeywordsPredicate(addressKeywords));
-        }
+
         if (!argMultimap.getAllValues(PREFIX_TAG).isEmpty()) {
             predicateList.add(new TagsContainsKeywordsPredicate(argMultimap.getAllValues(PREFIX_TAG)));
         }

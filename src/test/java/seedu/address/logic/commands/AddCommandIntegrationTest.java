@@ -12,7 +12,9 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonType;
 import seedu.address.testutil.PatientBuilder;
+import seedu.address.testutil.SpecialistBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code AddCommand}.
@@ -27,11 +29,24 @@ public class AddCommandIntegrationTest {
     }
 
     @Test
-    public void execute_newPerson_success() {
+    public void execute_newPatient_success() {
         Person validPerson = new PatientBuilder().build();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addPerson(validPerson);
+        expectedModel.updateFilteredPersonList(PersonType.PATIENT.getSearchPredicate());
+
+        assertCommandSuccess(new AddCommand(validPerson), model,
+                String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+                expectedModel);
+    }
+
+    @Test
+    public void execute_newSpecialist_success() {
+        Person validPerson = new SpecialistBuilder().build();
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.addPerson(validPerson);
+        expectedModel.updateFilteredPersonList(PersonType.SPECIALIST.getSearchPredicate());
 
         assertCommandSuccess(new AddCommand(validPerson), model,
                 String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),

@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Age;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.MedicalHistory;
@@ -23,10 +22,11 @@ class JsonAdaptedPatient extends JsonAdaptedPerson {
     private final String medicalHistory;
     @JsonCreator
     public JsonAdaptedPatient(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                             @JsonProperty("email") String email, @JsonProperty("address") String address,
+
+                             @JsonProperty("email") String email,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("age") String age,
                               @JsonProperty("MedicalHistory") String medicalHistory) {
-        super(name, phone, email, address, tags);
+        super(name, phone, email, tags);
         this.age = age;
         this.medicalHistory = medicalHistory;
     }
@@ -69,11 +69,11 @@ class JsonAdaptedPatient extends JsonAdaptedPerson {
         final Name modelName = new Name(getName());
         final Phone modelPhone = new Phone(getPhone());
         final Email modelEmail = new Email(getEmail());
-        final Address modelAddress = new Address(getAddress());
         final Set<Tag> modelTags = new HashSet<>(personTags);
         final Age age = new Age(getAge());
         final MedicalHistory medicalHistory = new MedicalHistory(getMedicalHistory());
 
-        return new Patient(modelName, modelPhone, modelEmail, modelAddress, modelTags, age, medicalHistory);
+        return new Patient(modelName, modelPhone, modelEmail, modelTags, age, medicalHistory);
+
     }
 }

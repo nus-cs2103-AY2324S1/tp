@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import seedu.address.logic.commands.EditCommand.EditSpecialistDescriptor;
+import seedu.address.model.person.Location;
 import seedu.address.model.person.Specialist;
 import seedu.address.model.person.Specialty;
 
@@ -26,11 +27,19 @@ public class EditSpecialistDescriptorBuilder extends EditPersonDescriptorBuilder
         editSpecialistDescriptor.setSpecialty(specialist.getSpecialty());
     }
 
+    /**
+     * Sets the {@code Location} of the {@code EditSpecialtyDescriptor} that we are building.
+     */
+    public EditSpecialistDescriptorBuilder withLocation(String location) {
+        EditSpecialistDescriptor editSpecialistDescriptor = (EditSpecialistDescriptor) super.getDescriptor();
+        editSpecialistDescriptor.setLocation(new Location(location));
+        return this;
+    }
 
     /**
      * Sets the {@code Specialty} of the {@code EditSpecialtyDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withSpecialty(String specialty) {
+    public EditSpecialistDescriptorBuilder withSpecialty(String specialty) {
         EditSpecialistDescriptor editSpecialistDescriptor = (EditSpecialistDescriptor) super.getDescriptor();
         editSpecialistDescriptor.setSpecialty(new Specialty(specialty));
         return this;

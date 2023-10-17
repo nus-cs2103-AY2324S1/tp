@@ -56,7 +56,7 @@ public class PatientBuilder extends PersonBuilder {
 
     @Override
     public Patient build() {
-        return new Patient(getName(), getPhone(), getEmail(), getAddress(), getTags(), getAge(), getMedicalHistory());
+        return new Patient(getName(), getPhone(), getEmail(), getTags(), getAge(), getMedicalHistory());
     }
 
 }
