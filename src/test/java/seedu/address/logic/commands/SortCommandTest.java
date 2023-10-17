@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.SortByNameComparator;
 
 public class SortCommandTest {
@@ -36,5 +37,12 @@ public class SortCommandTest {
         assertEquals(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE), model.getFilteredPersonList());
     }
 
+    @Test
+    public void toStringMethod() {
+        SortByNameComparator comparator = new SortByNameComparator();
+        SortCommand sortCommand = new SortCommand();
+        String expected = SortCommand.class.getCanonicalName() + "{comparator=" + comparator + "}";
+        assertEquals(expected, sortCommand.toString());
+    }
 
 }
