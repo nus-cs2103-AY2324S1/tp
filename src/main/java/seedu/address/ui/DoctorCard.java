@@ -54,13 +54,13 @@ public class DoctorCard extends UiPart<Region> {
         super(FXML);
         this.doctor = doctor;
         id.setText(displayedIndex + ". ");
-        name.setText(doctor.getName().fullName);
-        phone.setText(doctor.getPhone().value);
-        address.setText(doctor.getAddress().value);
-        email.setText(doctor.getEmail().value);
-        remark.setText(doctor.getRemark().value);
-        gender.setText(doctor.getGender().value);
-        nric.setText(doctor.getIc().value);
+        name.setText("Name: " + doctor.getName().fullName);
+        phone.setText("Phone Number: " + doctor.getPhone().value);
+        address.setText("Address: " + doctor.getAddress().value);
+        email.setText("Email: " + doctor.getEmail().value);
+        remark.setText("Remarks: " + doctor.getRemark().value);
+        gender.setText("Gender: " + doctor.getGender().value);
+        nric.setText("NRIC: " + doctor.getIc().value);
         doctor.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

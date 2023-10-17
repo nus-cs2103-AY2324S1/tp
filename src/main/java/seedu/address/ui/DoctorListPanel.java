@@ -41,7 +41,7 @@ public class DoctorListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new PersonCard(doctor, getIndex() + 1).getRoot());
+                setGraphic(new DoctorCard(doctor, getIndex() + 1).getRoot());
             }
         }
     }
