@@ -164,8 +164,10 @@ public class ParserUtil {
      * Leading and trailing whitespaces will be trimmed. *
      * @throws ParseException if the given {@code dateAndTime} is invalid.
      * */
-    public static LocalDateTime parseDateTime(String dateAndTime) throws ParseException {    requireNonNull(dateAndTime);
-        String trimmedDateTime = dateAndTime.trim();    LocalDateTime localDateTime = null;
+    public static LocalDateTime parseDateTime(String dateAndTime) throws ParseException {
+        requireNonNull(dateAndTime);
+        String trimmedDateTime = dateAndTime.trim();
+        LocalDateTime localDateTime = null;
         DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("DD/MM/YYYY HH:mm");
         try {
             localDateTime = LocalDateTime.parse(trimmedDateTime, dateTimeFormat);
