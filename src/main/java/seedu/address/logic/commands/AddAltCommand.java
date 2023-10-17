@@ -145,7 +145,6 @@ public class AddAltCommand extends Command {
         private Address address;
         private Set<Tag> tags;
         private Birthday birthday;
-
         private Linkedin linkedin;
         private Email secondaryEmail;
         private Telegram telegram;
