@@ -6,7 +6,6 @@ import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_INCOME;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.lovebook.commons.util.ToStringBuilder;
 import seedu.lovebook.logic.Messages;
@@ -28,15 +27,12 @@ public class AddCommand extends Command {
             + PREFIX_GENDER + "GENDER "
             + PREFIX_HEIGHT + "HEIGHT "
             + PREFIX_INCOME + "INCOME "
-            + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_AGE + "21 "
             + PREFIX_GENDER + "M "
             + PREFIX_HEIGHT + "23124 "
-            + PREFIX_INCOME + "3000 "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_INCOME + "3000 ";
 
     public static final String MESSAGE_SUCCESS = "New date added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This date already exists in the love book";
