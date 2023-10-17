@@ -43,6 +43,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label secondaryEmail;
     @FXML
+    private Label birthday;
+    @FXML
     private Label telegram;
     @FXML
     private FlowPane tags;
@@ -63,6 +65,7 @@ public class PersonCard extends UiPart<Region> {
         linkedin.setText(person.getLinkedin().map(l -> l.value).orElse(""));
         secondaryEmail.setText(person.getSecondaryEmail().map(e -> e.value).orElse(""));
         telegram.setText(person.getTelegram().map(t -> t.value).orElse(""));
+        birthday.setText(person.getBirthday().map(b -> b.toString()).orElse(""));
         person.getEmergencyTags().stream()
             .sorted(Comparator.comparing(tag -> tag.tagName))
             .forEach(tag -> {
