@@ -289,11 +289,6 @@ public class EditCommand extends Command {
             this.tags.add(tag);
         }
 
-        /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
-         */
         public Optional<UniqueList<Tag>> getTags() {
             return Optional.ofNullable(tags);
         }
