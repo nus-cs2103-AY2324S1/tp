@@ -224,13 +224,13 @@ Find applications by specifying a field and keywords.
 **Format:** `find -FIELD [KEYWORDS]`
 
 * Lists all applications whose field contains any of the provided keywords.
-* Applications are filtered by the specified `FIELD`. 
+* Applications are filtered by the specified `FIELD`.
 * The `FIELD` must be a valid specifier. `find` only supports searching by:
-  * Company: `-c`
-  * Role: `-r`
+    * Company: `-c`
+    * Role: `-r`
 
 **Successful command:**
-List is updated to contain applications meeting the search criteria. 
+List is updated to contain applications meeting the search criteria.
 
 **Failed command:**
 Prints the associated error message.
