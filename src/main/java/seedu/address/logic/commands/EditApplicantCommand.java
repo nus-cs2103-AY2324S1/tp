@@ -30,7 +30,7 @@ public class EditApplicantCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_NAME + " {applicantName} "
-            + PREFIX_PHONE + " {phoneNumber} "
+            + PREFIX_PHONE + " {phoneNumber} \n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_NAME + " Johnny Doe "
             + PREFIX_PHONE + " 91234567";

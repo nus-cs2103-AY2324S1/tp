@@ -18,7 +18,10 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Member;
-import seedu.address.model.person.fields.*;
+import seedu.address.model.person.fields.Email;
+import seedu.address.model.person.fields.Name;
+import seedu.address.model.person.fields.Phone;
+import seedu.address.model.person.fields.Telegram;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -43,7 +46,7 @@ public class EditMemberCommand extends Command {
 
     public static final String MESSAGE_EDIT_MEMBER_SUCCESS = "Edited member: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_MEMBER = "This member already exists in the address book.";
+    //public static final String MESSAGE_DUPLICATE_MEMBER = "This member already exists in the address book.";
 
     private final Index index;
     private final EditMemberDescriptor editMemberDescriptor;
@@ -72,9 +75,9 @@ public class EditMemberCommand extends Command {
         Member memberToEdit = lastShownList.get(index.getZeroBased());
         Member editedMember = createEditedMember(memberToEdit, editMemberDescriptor);
 
-        if (!memberToEdit.isSameMember(editedMember) && model.hasMember(editedMember)) {
+        /*if (!memberToEdit.isSameMember(editedMember) && model.hasMember(editedMember)) {
             throw new CommandException(MESSAGE_DUPLICATE_MEMBER);
-        }
+        }*/
 
         model.setMember(memberToEdit, editedMember);
         model.updateFilteredMembersList(PREDICATE_SHOW_ALL_PERSONS);
