@@ -13,9 +13,10 @@ import java.util.regex.Pattern;
  */
 public class Graduation {
 
-    public static final String MESSAGE_CONSTRAINTS = "Graduation dates should be of the format AYx1x2-Sy where:\n"
-            + "1. x1x2 is a 4-digit integer where x2 = x1 + 1.\n"
-            + "2. y is either 1 or 2.";
+    public static final String MESSAGE_CONSTRAINTS = "Graduation dates should be of the format AYxxxx-Sy where:\n"
+            + "1. xxxx is the 4-digit representation of the 2 calendar years in the academic year,\n"
+            + "    e.g. 2223 for Academic Year 2022/2023. Years must be between 1970-2069 (inclusive).\n"
+            + "2. y is either 1 or 2 for Semester 1 and Semester 2 respectively.";
 
     private static final String AY_REGEX = "AY([0-9]{2})([0-9]{2})-S([12])";
     private static final int YEAR_PART_HI = 2000;
