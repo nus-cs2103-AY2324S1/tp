@@ -111,6 +111,9 @@ public class DeleteCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
+                .add("nric", nric)
+                .add("name", name)
+                .add("deletePersonDescriptor", deletePersonDescriptor)
                 .toString();
     }
 
@@ -150,14 +153,11 @@ public class DeleteCommand extends Command {
         Address updatedAddress = personToEdit.getAddress();
         Set<Tag> updatedTags = personToEdit.getTags();
         Set<MedicalHistory> updatedMedicalHistories = personToEdit.getMedicalHistories();
-        Appointment updatedAppointment = personToEdit.getAppointment();
+        Appointment updatedAppointment = personToEdit.getAppointment().isPresent() ? personToEdit.getAppointment().get()
+                : null;
 
         if (deletePersonDescriptor.getPhone()) {
-            System.out.println("error here");
-            boolean isNull = "" == null;
-            System.out.println(isNull);
             updatedPhone = new Phone("");
-            System.out.println("error after here");
         }
         if (deletePersonDescriptor.getEmail()) {
             updatedEmail = new Email("");

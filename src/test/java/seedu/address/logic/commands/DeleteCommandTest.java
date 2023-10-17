@@ -3,14 +3,15 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.DeleteCommand.DeletePersonDescriptor;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -27,18 +28,18 @@ public class DeleteCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-    private Name name = new Name(PersonBuilder.DEFAULT_NAME);
+    private Name defaultName = new Name(PersonBuilder.DEFAULT_NAME);
 
-    private Nric nric = new Nric(PersonBuilder.DEFAULT_NRIC);
+    private Nric defaultNric = new Nric(PersonBuilder.DEFAULT_NRIC);
 
-    private DeletePersonDescriptor descriptor = new DeletePersonDescriptor();
+    private DeletePersonDescriptor defaultDescriptor = new DeletePersonDescriptor();
 
     @Test
     public void execute_ValidNameUnfilteredList_success() {
         Person personToDelete = new PersonBuilder().withName("Amy Bee").build();
         model.addPerson(personToDelete);
         Name name = personToDelete.getName();
-        DeleteCommand deleteCommand = new DeleteCommand(null, name, descriptor);
+        DeleteCommand deleteCommand = new DeleteCommand(null, name, defaultDescriptor);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.format(personToDelete));
@@ -54,7 +55,7 @@ public class DeleteCommandTest {
         Person personToDelete = new PersonBuilder().withNric("S1234567E").build();
         model.addPerson(personToDelete);
         Nric nric = personToDelete.getNric();
-        DeleteCommand deleteCommand = new DeleteCommand(nric, null, descriptor);
+        DeleteCommand deleteCommand = new DeleteCommand(nric, null, defaultDescriptor);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.format(personToDelete));
@@ -63,6 +64,96 @@ public class DeleteCommandTest {
         expectedModel.deletePerson(personToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_invalidName_throwsCommandException() {
+        Name invalidName = new Name("Does Not Exist");
+        DeleteCommand command = new DeleteCommand(null, invalidName, new DeletePersonDescriptor());
+
+        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_NAME, () -> command.execute(model));
+    }
+
+    @Test
+    public void execute_invalidNric_throwsCommandException() {
+        Nric invalidNric = new Nric("S000000X");
+        DeleteCommand command = new DeleteCommand(invalidNric, null, new DeletePersonDescriptor());
+
+        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_NRIC, () -> command.execute(model));
+    }
+
+    @Test
+    public void execute_missingNameAndNric_throwsException() {
+        DeleteCommand command = new DeleteCommand(null, null, new DeletePersonDescriptor());
+
+        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_NRIC_AND_NAME, () -> command.execute(model));
+    }
+
+    @Test
+    public void execute_deleteFields_success() throws CommandException {
+        Person firstPerson = model.getFilteredPersonList().get(0);
+
+        DeletePersonDescriptor descriptor = new DeletePersonDescriptor();
+        descriptor.setAppointment();
+
+        DeleteCommand command = new DeleteCommand(firstPerson.getNric(), null, descriptor);
+        command.execute(model);
+
+        Person editedPerson = model.getFilteredPersonList().get(0);
+        assertTrue(editedPerson.getAppointment().get().value.equals(""));
+    }
+
+    @Test
+    public void deletePersonDescriptor_setterMethods() {
+
+        DeletePersonDescriptor descriptor = new DeletePersonDescriptor();
+
+        descriptor.setAppointment();
+
+        assertTrue(descriptor.getAppointment());
+    }
+
+    @Test
+    public void deletePersonDescriptor_isAllFalse() {
+
+        DeletePersonDescriptor descriptor = new DeletePersonDescriptor();
+
+        assertTrue(descriptor.isAllFalse());
+
+        descriptor.setAppointment();
+
+        assertFalse(descriptor.isAllFalse());
+    }
+
+    @Test
+    public void equals() {
+        DeleteCommand deleteFirstCommand = new DeleteCommand(defaultNric, null, defaultDescriptor);
+        DeleteCommand deleteSecondCommand = new DeleteCommand(null, defaultName, defaultDescriptor);
+
+        // same object -> returns true
+        assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
+
+        // same values -> returns true
+        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(defaultNric, null, defaultDescriptor);
+        assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
+
+        // different types -> returns false
+        assertFalse(deleteFirstCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(deleteFirstCommand.equals(null));
+
+        // different person -> returns false
+        assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
+    }
+
+    @Test
+    public void toStringMethod() {
+        DeleteCommand deleteCommand = new DeleteCommand(defaultNric, defaultName, defaultDescriptor);
+        String expected = DeleteCommand.class.getCanonicalName() + "{nric=" + defaultNric + ", " + "name=" + defaultName
+                + ", "
+                + "deletePersonDescriptor=" + defaultDescriptor + "}";
+        assertEquals(expected, deleteCommand.toString());
     }
 
     /*
@@ -148,45 +239,4 @@ public class DeleteCommandTest {
      * Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
      * }
      */
-
-    @Test
-    public void equals() {
-        DeleteCommand deleteFirstCommand = new DeleteCommand(nric, null, descriptor);
-        DeleteCommand deleteSecondCommand = new DeleteCommand(null, name, descriptor);
-
-        // same object -> returns true
-        assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
-
-        // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(nric, null, descriptor);
-        assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
-
-
-        // different types -> returns false
-        assertFalse(deleteFirstCommand.equals(1));
-
-        // null -> returns false
-        assertFalse(deleteFirstCommand.equals(null));
-
-        // different person -> returns false
-        assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
-    }
-
-    @Test
-    public void toStringMethod() {
-        model.addPerson(new PersonBuilder().build());
-        DeleteCommand deleteCommand = new DeleteCommand(nric, name, descriptor);
-        System.out.println(deleteCommand.toString());
-        String expected = new PersonBuilder().build().toString();
-        assertEquals(expected, deleteCommand.toString());
-    }
-
-    /**
-     * Updates {@code model}'s filtered list to show no one.
-     */
-    private void showNoPerson(Model model) {
-        model.updateFilteredPersonList(p -> false);
-
-        assertTrue(model.getFilteredPersonList().isEmpty());
-    }
 }

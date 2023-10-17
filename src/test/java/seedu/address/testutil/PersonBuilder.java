@@ -24,7 +24,7 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final String DEFAULT_APPOINTMENT = "10 AUG 2023 10AM - 11AM";
+    public static final String DEFAULT_APPOINTMENT = "2023-08-10 10:00 11:00";
 
     private Name name;
     private Nric nric;
@@ -58,7 +58,7 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
-        appointment = personToCopy.getAppointment();
+        appointment = personToCopy.getAppointment().isPresent() ? personToCopy.getAppointment().get() : null;
         tags = new HashSet<>(personToCopy.getTags());
         medicalHistories = new HashSet<>(personToCopy.getMedicalHistories());
     }
