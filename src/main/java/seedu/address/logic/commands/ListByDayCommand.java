@@ -1,16 +1,16 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.DayPredicate;
 
-import static java.util.Objects.requireNonNull;
-
 /**
  * Lists all persons in the address book to the user by day.
  */
-public class ListByDayCommand extends ListCommand{
+public class ListByDayCommand extends ListCommand {
     private final DayPredicate predicate;
 
     public ListByDayCommand(DayPredicate predicate) {
@@ -47,3 +47,4 @@ public class ListByDayCommand extends ListCommand{
                 .toString();
     }
 }
+
