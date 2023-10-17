@@ -6,8 +6,21 @@ import static java.util.Objects.requireNonNull;
  * Represents the date's horoscope in the lovebook book.
  */
 public class Horoscope {
-    public static final String MESSAGE_CONSTRAINTS =
-            "Horoscope should only contain valid horoscope signs.";
+    public static final String MESSAGE_CONSTRAINTS = "Horoscope should only contain valid horoscope signs.\n"
+            + "If you aren't aware of Horoscope signs, please refer to the following list\n"
+            + "ARIES\n"
+            + "TAURUS\n"
+            + "GEMINI\n"
+            + "CANCER\n"
+            + "LEO\n"
+            + "VIRGO\n"
+            + "LIBRA\n"
+            + "SCORPIO\n"
+            + "SAGITTARIUS\n"
+            + "CAPRICORN\n"
+            + "AQUARIUS\n"
+            + "PISCES\n"
+            + "Please try again!";
     public final String value;
 
     /**
