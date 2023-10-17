@@ -88,15 +88,15 @@ Edits an existing applicant in the address book.
 
 Format: `edit-applicant APPLICANT_INDEX [n/NAME] [t/INTERVIEW_DATETIME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
 
-* Edits the person at the specified `APPLICANT_INDEX`. The index refers to the index number shown in the displayed applicant list.
+* Edits the applicant at the specified `APPLICANT_INDEX`. The index refers to the index number shown in the displayed applicant list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * Job index is fixed and cannot be edited, to change the job of an applicant, delete the applicant and add a new one.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
 Examples:
-*  `edit-applicant 1 n/John Doe` Edits the name of the 1st person to be `John Doe`.
-*  `edit-applicant 2 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 2nd person to be `91234567` and `johndoe@example.com` respectively
+*  `edit-applicant 1 n/John Doe` Edits the name of the 1st applicant to be `John Doe`.
+*  `edit-applicant 2 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 2nd applicant to be `91234567` and `johndoe@example.com` respectively
 
 ### Editing a job : `edit-job`
 
