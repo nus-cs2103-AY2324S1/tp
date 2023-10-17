@@ -14,7 +14,6 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.ID;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.TutorialGroup;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -111,21 +110,6 @@ public class ParserUtil {
             throw new ParseException(Attendance.MESSAGE_CONSTRAINTS);
         }
         return trimmedAttendance.equals("1");
-    }
-
-    /**
-     * Parses a {@code String tutorialGroup} into a TutorialGroup.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code tutorialGroup} is invalid.
-     */
-    public static TutorialGroup parseTutorialGroup(String tg) throws ParseException {
-        requireNonNull(tg);
-        String trimmedTutorialGroup = tg.trim();
-        if (!TutorialGroup.isValidTG(tg)) {
-            throw new ParseException(TutorialGroup.MESSAGE_CONSTRAINTS);
-        }
-        return new TutorialGroup(trimmedTutorialGroup);
     }
 
     /**

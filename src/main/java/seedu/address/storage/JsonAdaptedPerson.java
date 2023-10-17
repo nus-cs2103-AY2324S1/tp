@@ -15,7 +15,6 @@ import seedu.address.model.person.ID;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.TutorialGroup;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -29,7 +28,6 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String id;
-    private final String tutorialGroup;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -38,8 +36,7 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("id") String id,
-                             @JsonProperty("tags") List<JsonAdaptedTag> tags,
-                             @JsonProperty("tutorialGroup") String tutorialGroup) {
+                             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -47,7 +44,6 @@ class JsonAdaptedPerson {
         if (tags != null) {
             this.tags.addAll(tags);
         }
-        this.tutorialGroup = tutorialGroup;
     }
 
     /**
@@ -61,7 +57,6 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        tutorialGroup = source.getTutorialGroup().value;
     }
 
     /**
@@ -109,16 +104,7 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        if (tutorialGroup == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    TutorialGroup.class.getSimpleName()));
-        }
-        if (!TutorialGroup.isValidTG(tutorialGroup)) {
-            throw new IllegalValueException(TutorialGroup.MESSAGE_CONSTRAINTS);
-        }
-        final TutorialGroup modelTutorialGroup = new TutorialGroup(tutorialGroup);
-
-        return new Person(modelName, modelPhone, modelEmail, modelId, modelTags, modelTutorialGroup);
+        return new Person(modelName, modelPhone, modelEmail, modelId, modelTags);
     }
 
 }

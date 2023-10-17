@@ -1,14 +1,14 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALGROUP;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSETUTORIAL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALNUMBER;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.person.AbsentFromTutorialNumPredicate;
-import seedu.address.model.person.ContainsTutorialGroupPredicate;
-import seedu.address.model.person.TutorialGroup;
+import seedu.address.model.person.ContainsCourseTutorialPredicate;
+import seedu.address.model.tag.Tag;
 
 /**
  * Lists all persons in the address book to the user.
@@ -16,47 +16,51 @@ import seedu.address.model.person.TutorialGroup;
 public class ListAttendanceCommand extends ListCommand {
 
     public static final String COMMAND_WORD = "attendance";
-    public static final String MESSAGE_USAGE = COMMAND_WORD
+    public static final String MESSAGE_USAGE = "list " + COMMAND_WORD
             + ": Lists summary of attendance and absent students.\n"
             + "Parameters: "
-            + PREFIX_TUTORIALGROUP + " TUTORIALGROUPID "
-            + PREFIX_TUTORIALNUMBER + " TUTORIALNUMBER (must be a positive integer) "
-            + "Example: list " + COMMAND_WORD + " tg/ G01 " + "tn/1";
+            + PREFIX_COURSETUTORIAL + "TAG "
+            + PREFIX_TUTORIALNUMBER + "TUTORIALNUMBER (must be a positive integer)\n"
+            + "Example: list " + COMMAND_WORD + " coursetg/CS2103 " + "tn/1";
     public static final String MESSAGE_SUCCESS = "Listed all absent students";
 
     private final Index tn;
     private final AbsentFromTutorialNumPredicate absencePredicate;
+    private final Tag tag;
+    private final ContainsCourseTutorialPredicate courseTutorialPredicate;
 
     /**
-     * @param tg Tutorial group to list
+     * @param tag Tutorial group to list
      * @param tn Tutorial number to list
-     * @param tutorialGroupPredicate Predicate used to filter for students in the tutorial group
+     * @param courseTutorialPredicate Predicate used to filter for students in the tutorial group
      * @param absencePredicate Predicate used to filter for students absent
      */
-    public ListAttendanceCommand(TutorialGroup tg, Index tn,
-                                 ContainsTutorialGroupPredicate tutorialGroupPredicate,
+    public ListAttendanceCommand(Tag tag, Index tn,
+                                 ContainsCourseTutorialPredicate courseTutorialPredicate,
                                  AbsentFromTutorialNumPredicate absencePredicate) {
-        super(tg, tutorialGroupPredicate);
         requireNonNull(tn);
         this.tn = tn;
         this.absencePredicate = absencePredicate;
+        this.tag = tag;
+        this.courseTutorialPredicate = courseTutorialPredicate;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        TutorialGroup placeholder = new TutorialGroup("PLACEHOLDER");
+        Tag placeholder = new Tag("PLACEHOLDER");
         String tutorialStr = String.format(" for Tutorial #%d", tn.getOneBased());
 
-        if (!tg.equals(placeholder)) {
-            model.updateFilteredPersonList(tutorialGroupPredicate);
-            String tutorialGroupStr = String.format(" from Tutorial Group %s.", tg);
+        if (!tag.equals(placeholder)) {
+            model.updateFilteredPersonList(courseTutorialPredicate);
+            String tutorialGroupStr = String.format(" from %s.", tag.getTagName());
             tutorialStr += tutorialGroupStr;
         }
 
         int numberOfStudents = model.getFilteredPersonList().size();
 
         model.updateFilteredPersonList(absencePredicate);
+
         int numberOfAbsentees = model.getFilteredPersonList().size();
         int numberOfPresentees = numberOfStudents - numberOfAbsentees;
 

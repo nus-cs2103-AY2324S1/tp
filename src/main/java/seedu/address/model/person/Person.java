@@ -25,21 +25,19 @@ public class Person {
 
     // Data fields
     private final ID id;
-    private final TutorialGroup tg;
     private final Set<Tag> tags = new HashSet<>();
     private final List<Attendance> attendanceRecords = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, ID id, Set<Tag> tags, TutorialGroup tg) {
+    public Person(Name name, Phone phone, Email email, ID id, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, id, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.id = id;
         this.tags.addAll(tags);
-        this.tg = tg;
     }
 
     public Name getName() {
@@ -58,9 +56,7 @@ public class Person {
         return id;
     }
 
-    public TutorialGroup getTutorialGroup() {
-        return tg;
-    }
+
     public List<Attendance> getAttendanceRecords() {
         return attendanceRecords;
     }

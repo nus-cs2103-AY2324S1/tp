@@ -26,7 +26,6 @@ import seedu.address.model.person.ID;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.TutorialGroup;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -101,10 +100,8 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         ID updatedId = editPersonDescriptor.getId().orElse(personToEdit.getId());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        TutorialGroup updatedTutorialGroup = editPersonDescriptor.getTutorialGroup()
-                .orElse(personToEdit.getTutorialGroup());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedId, updatedTags, updatedTutorialGroup);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedId, updatedTags);
     }
 
     @Override
@@ -141,7 +138,6 @@ public class EditCommand extends Command {
         private Email email;
         private ID id;
         private Set<Tag> tags;
-        private TutorialGroup tutorialGroup;
 
         public EditPersonDescriptor() {}
 
@@ -155,7 +151,6 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setId(toCopy.id);
             setTags(toCopy.tags);
-            setTutorialGroup(toCopy.tutorialGroup);
         }
 
         /**
@@ -195,14 +190,6 @@ public class EditCommand extends Command {
 
         public Optional<ID> getId() {
             return Optional.ofNullable(id);
-        }
-
-        public void setTutorialGroup(TutorialGroup tutorialGroup) {
-            this.tutorialGroup = tutorialGroup;
-        }
-
-        public Optional<TutorialGroup> getTutorialGroup() {
-            return Optional.ofNullable(tutorialGroup);
         }
 
         /**
