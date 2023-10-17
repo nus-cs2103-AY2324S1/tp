@@ -53,7 +53,7 @@
           </padding>
           <HBox VBox.vgrow="ALWAYS">
             <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" />
-            <StackPane fx:id="schedulePanelPlaceholder" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS"/>
+            <StackPane fx:id="scheduleListPanelPlaceholder" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS"/>
           </HBox>
         </VBox>
 
