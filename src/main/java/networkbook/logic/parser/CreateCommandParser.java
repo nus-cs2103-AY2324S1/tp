@@ -45,13 +45,7 @@ public class CreateCommandParser implements Parser<CreateCommand> {
 
         if (!arePrefixesPresent(
                 argMultimap,
-                CliSyntax.PREFIX_NAME,
-                CliSyntax.PREFIX_LINK,
-                CliSyntax.PREFIX_GRADUATING_YEAR,
-                CliSyntax.PREFIX_COURSE,
-                CliSyntax.PREFIX_SPECIALISATION,
-                CliSyntax.PREFIX_PHONE,
-                CliSyntax.PREFIX_EMAIL
+                CliSyntax.PREFIX_NAME
         ) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
                                                     CreateCommand.MESSAGE_USAGE));
@@ -67,15 +61,17 @@ public class CreateCommandParser implements Parser<CreateCommand> {
                 CliSyntax.PREFIX_SPECIALISATION,
                 CliSyntax.PREFIX_PRIORITY
         );
-        Name name = ParserUtil.parseName(argMultimap.getValue(CliSyntax.PREFIX_NAME).get());
-        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(CliSyntax.PREFIX_PHONE).get());
+
+        Name name = ParserUtil.parseName(argMultimap.getValue(CliSyntax.PREFIX_NAME)
+                    .orElseThrow(() -> new ParseException(String.format(Messages.MESSAGE_INVALID_CONTACT_NAME))));
+        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(CliSyntax.PREFIX_PHONE).orElse(null));
         UniqueList<Email> emails = ParserUtil.parseEmails(argMultimap.getAllValues(CliSyntax.PREFIX_EMAIL));
         UniqueList<Link> links = ParserUtil.parseLinks(argMultimap.getAllValues(CliSyntax.PREFIX_LINK));
         GraduatingYear graduatingYear = ParserUtil.parseGraduatingYear(
-                    argMultimap.getValue(CliSyntax.PREFIX_GRADUATING_YEAR).get());
-        Course course = ParserUtil.parseCourse(argMultimap.getValue(CliSyntax.PREFIX_COURSE).get());
+                    argMultimap.getValue(CliSyntax.PREFIX_GRADUATING_YEAR).orElse(null));
+        Course course = ParserUtil.parseCourse(argMultimap.getValue(CliSyntax.PREFIX_COURSE).orElse(null));
         Specialisation specialisation = ParserUtil.parseSpecialisation(
-                    argMultimap.getValue(CliSyntax.PREFIX_SPECIALISATION).get());
+                    argMultimap.getValue(CliSyntax.PREFIX_SPECIALISATION).orElse(null));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(CliSyntax.PREFIX_TAG));
         Priority priority = ParserUtil.parsePriority(argMultimap.getValue(CliSyntax.PREFIX_PRIORITY).orElse(null));
 

@@ -62,12 +62,12 @@ public class PersonBuilder {
      */
     public PersonBuilder(Person personToCopy) {
         name = personToCopy.getName();
-        phone = personToCopy.getPhone();
+        phone = personToCopy.getPhone().orElse(null);
         emails = personToCopy.getEmails();
         links = personToCopy.getLinks();
-        graduatingYear = personToCopy.getGraduatingYear();
-        course = personToCopy.getCourse();
-        specialisation = personToCopy.getSpecialisation();
+        graduatingYear = personToCopy.getGraduatingYear().orElse(null);
+        course = personToCopy.getCourse().orElse(null);
+        specialisation = personToCopy.getSpecialisation().orElse(null);
         tags = new HashSet<>(personToCopy.getTags());
         priority = personToCopy.getPriority().orElse(null);
     }
@@ -145,10 +145,25 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Pmail} of the {@code Person} that we are building.
+     * Sets the {@code Priority} of the {@code Person} that we are building.
      */
     public PersonBuilder withPriority(String priority) {
         this.priority = new Priority(priority);
+        return this;
+    }
+
+    /**
+     * Sets all fields of the {@code Person} that we are building to null.
+     */
+    public PersonBuilder withoutOptionalFields() {
+        this.phone = null;
+        this.emails = new UniqueList<>();
+        this.links = new UniqueList<>();
+        this.graduatingYear = null;
+        this.course = null;
+        this.specialisation = null;
+        this.tags = new HashSet<>();
+        this.priority = null;
         return this;
     }
 

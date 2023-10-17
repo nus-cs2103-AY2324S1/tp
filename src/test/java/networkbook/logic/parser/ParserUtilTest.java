@@ -91,8 +91,8 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parsePhone_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parsePhone((String) null));
+    public void parsePhone_null_returnsNull() throws Exception {
+        assertEquals(null, ParserUtil.parsePhone(null));
     }
 
     @Test
@@ -115,7 +115,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseLink_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseLink((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseLinks(null));
     }
 
     @Test
@@ -152,8 +152,8 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseGraduatingYear_null_throwsParseException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseGraduatingYear((String) null));
+    public void parseGraduatingYear_null_returnsNull() throws Exception {
+        assertEquals(null, ParserUtil.parseGraduatingYear(null));
     }
 
     @Test
@@ -162,8 +162,8 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseCourse_null_throwsParseException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseCourse((String) null));
+    public void parseCourse_null_returnsNull() throws Exception {
+        assertEquals(null, ParserUtil.parseCourse(null));
     }
 
     @Test
@@ -172,8 +172,8 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseSpecialisation_null_throwsParseException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseSpecialisation((String) null));
+    public void parseSpecialisation_null_returnsNull() throws Exception {
+        assertEquals(null, ParserUtil.parseSpecialisation(null));
     }
 
     @Test
