@@ -8,7 +8,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import networkbook.model.person.Course;
-import networkbook.model.person.GraduatingYear;
+import networkbook.model.person.Graduation;
 import networkbook.model.person.Person;
 import networkbook.model.person.Phone;
 import networkbook.model.person.Priority;
@@ -23,7 +23,7 @@ public class PersonCard extends UiPart<Region> {
     private static final String PHONE_HEADER = "Phone: ";
     private static final String EMAILS_HEADER = "Emails: ";
     private static final String LINKS_HEADER = "Links: ";
-    private static final String GRADUATING_YEAR_HEADER = "Graduating Year: ";
+    private static final String GRADUATION_HEADER = "Graduation: ";
     private static final String COURSE_HEADER = "Course: ";
     private static final String SPECIALISATION_HEADER = "Specialisation: ";
     private static final String PRIORITY_HEADER = "Priority: ";
@@ -49,7 +49,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label links;
     @FXML
-    private Label graduatingYear;
+    private Label graduation;
     @FXML
     private Label course;
     @FXML
@@ -73,8 +73,8 @@ public class PersonCard extends UiPart<Region> {
                 phone.setText(PHONE_HEADER + p), () -> phone.setVisible(false));
         emails.setText(person.getEmails().toString());
         links.setText(person.getLinks().toString());
-        person.getGraduatingYear().ifPresentOrElse((GraduatingYear g) ->
-                graduatingYear.setText(GRADUATING_YEAR_HEADER + g), () -> graduatingYear.setVisible(false));
+        person.getGraduation().ifPresentOrElse((Graduation g) ->
+                graduation.setText(GRADUATION_HEADER + g.getFullString()), () -> graduation.setVisible(false));
         person.getCourse().ifPresentOrElse((Course c) ->
                 course.setText(COURSE_HEADER + c), () -> course.setVisible(false));
         person.getSpecialisation().ifPresentOrElse((Specialisation s) ->
@@ -89,8 +89,8 @@ public class PersonCard extends UiPart<Region> {
     public Label getPhone() {
         return phone;
     }
-    public Label getGraduatingYear() {
-        return graduatingYear;
+    public Label getGraduation() {
+        return graduation;
     }
     public Label getCourse() {
         return course;

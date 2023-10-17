@@ -37,8 +37,8 @@ public class PersonUtil {
         person.getLinks().stream().forEach(
                 e -> sb.append(CliSyntax.PREFIX_LINK + " " + e.toString() + " ")
         );
-        person.getGraduatingYear().ifPresent(graduatingYear -> sb.append(CliSyntax.PREFIX_GRADUATING_YEAR)
-                .append(" ").append(graduatingYear.value).append(" "));
+        person.getGraduation().ifPresent(graduation -> sb.append(CliSyntax.PREFIX_GRADUATION)
+                .append(" ").append(graduation).append(" "));
         person.getCourse().ifPresent(course -> sb.append(CliSyntax.PREFIX_COURSE).append(" ")
                 .append(course.value).append(" "));
         person.getSpecialisation().ifPresent(specialisation -> sb.append(CliSyntax.PREFIX_SPECIALISATION)
@@ -75,8 +75,8 @@ public class PersonUtil {
                 links.forEach(e -> sb.append(CliSyntax.PREFIX_LINK).append(" ").append(e.toString()).append(" "));
             }
         }
-        descriptor.getGraduatingYear().ifPresent(graduatingYear -> sb.append(CliSyntax.PREFIX_GRADUATING_YEAR)
-                .append(" ").append(graduatingYear.value).append(" "));
+        descriptor.getGraduation().ifPresent(graduation -> sb.append(CliSyntax.PREFIX_GRADUATION)
+                .append(" ").append(graduation).append(" "));
         descriptor.getCourse().ifPresent(course -> sb.append(CliSyntax.PREFIX_COURSE).append(" ")
                 .append(course.value).append(" "));
         descriptor.getSpecialisation().ifPresent(specialisation -> sb.append(CliSyntax.PREFIX_SPECIALISATION)

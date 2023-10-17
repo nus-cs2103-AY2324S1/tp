@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 import networkbook.model.person.Course;
 import networkbook.model.person.Email;
-import networkbook.model.person.GraduatingYear;
+import networkbook.model.person.Graduation;
 import networkbook.model.person.Link;
 import networkbook.model.person.Name;
 import networkbook.model.person.Person;
@@ -27,7 +27,7 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_LINK = "github.com/amybeez";
-    public static final String DEFAULT_GRADUATING_YEAR = "2000";
+    public static final String DEFAULT_GRADUATION = "2000";
     public static final String DEFAULT_COURSE = "Computer Science";
     public static final String DEFAULT_SPECIALISATION = "Game Development";
     public static final String DEFAULT_PRIORITY = null;
@@ -36,7 +36,7 @@ public class PersonBuilder {
     private Phone phone;
     private UniqueList<Email> emails;
     private UniqueList<Link> links;
-    private GraduatingYear graduatingYear;
+    private Graduation graduation;
     private Course course;
     private Specialisation specialisation;
     private Set<Tag> tags;
@@ -50,7 +50,7 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         emails = new UniqueList<Email>().setItems(List.of(new Email(DEFAULT_EMAIL)));
         links = new UniqueList<Link>().setItems(List.of(new Link(DEFAULT_LINK)));
-        graduatingYear = new GraduatingYear(DEFAULT_GRADUATING_YEAR);
+        graduation = new Graduation(DEFAULT_GRADUATION);
         course = new Course(DEFAULT_COURSE);
         specialisation = new Specialisation(DEFAULT_SPECIALISATION);
         tags = new HashSet<>();
@@ -65,7 +65,7 @@ public class PersonBuilder {
         phone = personToCopy.getPhone().orElse(null);
         emails = personToCopy.getEmails();
         links = personToCopy.getLinks();
-        graduatingYear = personToCopy.getGraduatingYear().orElse(null);
+        graduation = personToCopy.getGraduation().orElse(null);
         course = personToCopy.getCourse().orElse(null);
         specialisation = personToCopy.getSpecialisation().orElse(null);
         tags = new HashSet<>(personToCopy.getTags());
@@ -105,10 +105,10 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code GraduatingYear} of the {@code Person} that we are building.
+     * Sets the {@code Graduation} of the {@code Person} that we are building.
      */
-    public PersonBuilder withGraduatingYear(String graduatingYear) {
-        this.graduatingYear = new GraduatingYear(graduatingYear);
+    public PersonBuilder withGraduation(String graduation) {
+        this.graduation = new Graduation(graduation);
         return this;
     }
 
@@ -159,7 +159,7 @@ public class PersonBuilder {
         this.phone = null;
         this.emails = new UniqueList<>();
         this.links = new UniqueList<>();
-        this.graduatingYear = null;
+        this.graduation = null;
         this.course = null;
         this.specialisation = null;
         this.tags = new HashSet<>();
@@ -168,7 +168,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, emails, links, graduatingYear, course, specialisation, tags, priority);
+        return new Person(name, phone, emails, links, graduation, course, specialisation, tags, priority);
     }
 
 }

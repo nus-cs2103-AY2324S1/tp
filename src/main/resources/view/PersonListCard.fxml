@@ -31,7 +31,7 @@
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       <Label fx:id="emails" styleClass="cell_small_label" text="\$email" />
       <Label fx:id="links" styleClass="cell_small_label" text="\$link" />
-      <Label fx:id="graduatingYear" styleClass="cell_small_label" text="\$graduatingYear" />
+      <Label fx:id="graduation" styleClass="cell_small_label" text="\$graduation" />
       <Label fx:id="course" styleClass="cell_small_label" text="\$course" />
       <Label fx:id="specialisation" styleClass="cell_small_label" text="\$specialisation" />
       <Label fx:id="priority" styleClass="cell_small_label" text="\$priority" />

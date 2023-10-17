@@ -9,7 +9,7 @@ import networkbook.model.NetworkBook;
 import networkbook.model.ReadOnlyNetworkBook;
 import networkbook.model.person.Course;
 import networkbook.model.person.Email;
-import networkbook.model.person.GraduatingYear;
+import networkbook.model.person.Graduation;
 import networkbook.model.person.Link;
 import networkbook.model.person.Name;
 import networkbook.model.person.Person;
@@ -27,37 +27,37 @@ public class SampleDataUtil {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"),
                     new UniqueList<Email>().setItems(List.of(new Email("alexyeoh@example.com"))),
                     new UniqueList<Link>().setItems(List.of(new Link("www.alexyeoh.net"))),
-                    new GraduatingYear("2016"),
+                    new Graduation("AY1617-S1"),
                     new Course("Information Systems"), new Specialisation("Financial Technology"),
                     getTagSet("friends"), new Priority("low")),
             new Person(new Name("Bernice Yu"), new Phone("99272758"),
                     new UniqueList<Email>().setItems(List.of(new Email("berniceyu@example.com"))),
                     new UniqueList<Link>().setItems(List.of(new Link("github.com/bernfish"))),
-                    new GraduatingYear("2020"),
+                    new Graduation("AY2021-S1"),
                     new Course("Computer Science"), new Specialisation("Artificial Intelligence"),
                     getTagSet("colleagues", "friends"), new Priority("high")),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"),
                     new UniqueList<Email>().setItems(List.of(new Email("charlotte@example.com"))),
                     new UniqueList<Link>().setItems(List.of(new Link("facebook.com/Charlotte-Oliveiro"))),
-                    new GraduatingYear("2000"),
+                    new Graduation("AY9900-S2"),
                     new Course("Computer Science"), new Specialisation("Computer Security"),
                     getTagSet("neighbours"), new Priority("M")),
             new Person(new Name("David Li"), new Phone("91031282"),
                     new UniqueList<Email>().setItems(List.of(new Email("lidavid@example.com"))),
                     new UniqueList<Link>().setItems(List.of(new Link("wordpress.com/specialli-mine"))),
-                    new GraduatingYear("2024"),
+                    new Graduation("AY2425-S1"),
                     new Course("Computer Science"), new Specialisation("Database Systems"),
                     getTagSet("family"), new Priority("High")),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"),
                     new UniqueList<Email>().setItems(List.of(new Email("irfan@example.com"))),
                     new UniqueList<Link>().setItems(List.of(new Link("instagram.com/irfanny"))),
-                    new GraduatingYear("2025"),
+                    new Graduation("AY2425-S2"),
                     new Course("Computer Science"), new Specialisation("Parallel Computing"),
                     getTagSet("classmates"), new Priority("low")),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"),
                     new UniqueList<Email>().setItems(List.of(new Email("royb@example.com"))),
                     new UniqueList<Link>().setItems(List.of(new Link("incognito.com"))),
-                    new GraduatingYear("2026"),
+                    new Graduation("AY2627-S1"),
                     new Course("Computer Science"), new Specialisation("Computer Graphics"),
                     getTagSet("colleagues"), null)
         };

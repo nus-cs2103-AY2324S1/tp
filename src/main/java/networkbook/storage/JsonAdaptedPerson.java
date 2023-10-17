@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import networkbook.commons.exceptions.IllegalValueException;
 import networkbook.model.person.Course;
 import networkbook.model.person.Email;
-import networkbook.model.person.GraduatingYear;
+import networkbook.model.person.Graduation;
 import networkbook.model.person.Link;
 import networkbook.model.person.Name;
 import networkbook.model.person.Person;
@@ -33,7 +33,7 @@ class JsonAdaptedPerson {
     private final String phone;
     private final List<JsonAdaptedProperty<Email>> emails = new ArrayList<>();
     private final List<JsonAdaptedProperty<Link>> links = new ArrayList<>();
-    private final String graduatingYear;
+    private final String graduation;
     private final String course;
     private final String specialisation;
     private final List<JsonAdaptedProperty<Tag>> tags = new ArrayList<>();
@@ -47,7 +47,7 @@ class JsonAdaptedPerson {
                              @JsonProperty("phone") String phone,
                              @JsonProperty("emails") List<JsonAdaptedProperty<Email>> emails,
                              @JsonProperty("links") List<JsonAdaptedProperty<Link>> links,
-                             @JsonProperty("graduating year") String graduatingYear,
+                             @JsonProperty("graduation") String graduation,
                              @JsonProperty("course") String course,
                              @JsonProperty("specialisation") String specialisation,
                              @JsonProperty("tags") List<JsonAdaptedProperty<Tag>> tags,
@@ -60,7 +60,7 @@ class JsonAdaptedPerson {
         if (links != null) {
             this.links.addAll(links);
         }
-        this.graduatingYear = graduatingYear;
+        this.graduation = graduation;
         this.course = course;
         this.specialisation = specialisation;
         if (tags != null) {
@@ -81,7 +81,7 @@ class JsonAdaptedPerson {
         links.addAll(source.getLinks().stream()
                 .map(JsonAdaptedProperty::new)
                 .collect(Collectors.toList()));
-        graduatingYear = source.getGraduatingYear().map(GraduatingYear::toString).orElse(null);
+        graduation = source.getGraduation().map(Graduation::toString).orElse(null);
         course = source.getCourse().map(Course::toString).orElse(null);
         specialisation = source.getSpecialisation().map(Specialisation::toString).orElse(null);
         tags.addAll(source.getTags().stream()
@@ -133,12 +133,12 @@ class JsonAdaptedPerson {
         final UniqueList<Link> modelLinks = new UniqueList<>();
         links.forEach(link -> modelLinks.add(new Link(link.getName())));
 
-        GraduatingYear modelGraduatingYear = null;
-        if (graduatingYear != null) {
-            if (!GraduatingYear.isValidGraduatingYear(graduatingYear)) {
-                throw new IllegalValueException(GraduatingYear.MESSAGE_CONSTRAINTS);
+        Graduation modelGraduation = null;
+        if (graduation != null) {
+            if (!Graduation.isValidGraduation(graduation)) {
+                throw new IllegalValueException(Graduation.MESSAGE_CONSTRAINTS);
             }
-            modelGraduatingYear = new GraduatingYear(graduatingYear);
+            modelGraduation = new Graduation(graduation);
         }
 
         Course modelCourse = null;
@@ -167,7 +167,7 @@ class JsonAdaptedPerson {
             modelPriority = new Priority(priority);
         }
 
-        return new Person(modelName, modelPhone, modelEmails, modelLinks, modelGraduatingYear, modelCourse,
+        return new Person(modelName, modelPhone, modelEmails, modelLinks, modelGraduation, modelCourse,
                 modelSpecialisation, modelTags, modelPriority);
     }
 
