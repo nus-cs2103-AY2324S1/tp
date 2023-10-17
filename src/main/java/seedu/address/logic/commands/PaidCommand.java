@@ -11,6 +11,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
+/**
+ * Mark the tutee as paid.
+ */
 public class PaidCommand extends Command {
     public static final String COMMAND_WORD = "paid";
 

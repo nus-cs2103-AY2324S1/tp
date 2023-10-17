@@ -217,7 +217,7 @@ public class EditCommand extends Command {
             this.paid = paid;
         }
 
-        public Optional<Boolean> getPaid () {
+        public Optional<Boolean> getPaid() {
             return Optional.of(paid);
         }
 
