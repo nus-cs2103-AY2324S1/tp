@@ -101,18 +101,16 @@ Examples:
 * `mark /id A0123456E /attendance 1` Marks student with student ID, A0123456E, as present.
 * `mark /id A0123456E /attendance 0` Marks student with student ID, A0123456E, as absent.
 
-### Viewing summary of attendance : `list attendance` [Coming Soon]
+### Viewing summary of attendance : `list attendance`
 
-Shows a summary of attendance records.
+Shows a summary of attendance records including list of absentees.
 
-Format: `list attendance [/tg ID]`
-*  Shows a summary of the attendance records of the tutorial group corresponding to the specified ID.
-*  ID must be made up of **alphabetical characters and numbers** only, with no special characters.
-*  ID must correspond to an existing tutorial group.
+Format: `list attendance tn/TUTORIALNO [coursetg/TAG]`
+*  Shows a list of absentees and summary of the attendance records of students corresponding to the tag for the specified tutorial number.
 
 Examples:
-*  `list attendance` Shows a summary of attendance records of all students.
-*  `list attendance /tg T09` Shows a summary of attendance records of the students in tutorial group T09.
+*  `list attendance tn/1` Shows a summary of attendance records of all students for Tutorial #1.
+*  `list attendance tn/3 coursetg/CS2103T` Shows a summary of attendance records of the students in CS2103T for Tutorial #3.
 
 ### Searching for student's contact via keyword : `find` [Coming Soon]
 
@@ -128,18 +126,12 @@ Examples:
 *  `find /name Anthony` Finds all contacts with the name "Anthony".
 *  `find /id A0123456H` Finds all contacts with the student ID "A0123456H".
 
-### Listing students : `list students` [Coming Soon]
+### Listing students : `list students`
 
 Shows a list of students.
 
-Format: `list students [/tg ID]`
-*  Shows a list of students in the tutorial group corresponding to the specified ID.
-*  ID must be made up of **alphabetical characters and numbers** only, with no special characters.
-*  ID must correspond to an existing tutorial group.
-
-Examples:
-*  `list students` Shows a list of all students.
-*  `list students /tg T09` Shows a list of the students in tutorial group T09.
+Format: `list students`
+*  Shows a list of all students.
 
 ### Editing a contact name : `edit name` [Coming Soon]
 
@@ -277,5 +269,5 @@ Action | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit name /oldname <oldName> /newname <newName>`<br> `edit course <Name> /oldcourse <oldCourse> <newCourse>`<br> `edit grp <Name> /oldgrp <oldgrp> /newgrp <newgrp>`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
+**List** |`list attendance tn/TUTORIALNO [coursetg/TAG]` `list students`
 **Help** | `help`
