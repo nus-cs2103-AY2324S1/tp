@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import static seedu.address.model.schedule.Time.DATETIME_FORMAT;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -9,10 +11,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.schedule.EndTime;
 import seedu.address.model.schedule.Schedule;
@@ -29,7 +29,7 @@ class JsonAdaptedSchedule {
     private final String startTime;
     private final String endTime;
 
-    private final DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATETIME_FORMAT);
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -47,8 +47,8 @@ class JsonAdaptedSchedule {
      */
     public JsonAdaptedSchedule(Schedule source) {
         name = source.getTutor().getName().fullName;
-        startTime = source.getStartTime().toString();
-        endTime = source.getEndTime().toString();
+        startTime = source.getStartTime().getTime().format(formatter);
+        endTime = source.getEndTime().getTime().format(formatter);
     }
 
     /**
@@ -66,7 +66,8 @@ class JsonAdaptedSchedule {
         final Name modelName = new Name(name);
 
         if (startTime == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                StartTime.class.getSimpleName()));
         }
         if (!StartTime.isValidStartTime(startTime)) {
             throw new IllegalValueException(StartTime.MESSAGE_CONSTRAINTS);
@@ -74,7 +75,7 @@ class JsonAdaptedSchedule {
         final StartTime modelStartTime = new StartTime(LocalDateTime.parse(startTime, formatter));
 
         if (endTime == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, EndTime.class.getSimpleName()));
         }
         if (!EndTime.isValidEndTime(endTime)) {
             throw new IllegalValueException(EndTime.MESSAGE_CONSTRAINTS);

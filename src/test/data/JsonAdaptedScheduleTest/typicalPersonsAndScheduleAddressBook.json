@@ -33,5 +33,13 @@
     "phone" : "22222222",
     "email" : "bob@example.com"
   } ],
-  "schedules" : []
+  "schedules" : [ {
+    "name" : "Alice Pauline",
+    "startTime" : "2023-01-01T09:00:00",
+    "endTime" : "2023-01-01T11:00:00"
+  }, {
+      "name" : "Bob Choo",
+      "startTime" : "2023-01-02T20:00:00",
+      "endTime" : "2023-01-02T22:00:00"
+  } ]
 }
