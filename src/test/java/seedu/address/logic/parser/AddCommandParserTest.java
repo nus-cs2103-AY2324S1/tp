@@ -199,36 +199,40 @@ public class AddCommandParserTest {
     }
 
     @Test
-    public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+     public void parse_compulsoryFieldMissing_failure() {
+        String expectedMessageSpecialist = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AddCommand.MESSAGE_USAGE_SPECIALIST);
+
+        String expectedMessagePatient = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AddCommand.MESSAGE_USAGE_PATIENT);
 
         // missing name prefix
         assertParseComplexFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                        + SPECIALTY_DESC_BOB, expectedMessage, PersonType.SPECIALIST);
+                        + LOCATION_DESC_BOB + SPECIALTY_DESC_BOB, expectedMessageSpecialist, PersonType.SPECIALIST);
 
         // missing phone prefix
         assertParseComplexFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB
-                        + SPECIALTY_DESC_BOB, expectedMessage, PersonType.SPECIALIST);
+                        + LOCATION_DESC_BOB + SPECIALTY_DESC_BOB, expectedMessageSpecialist, PersonType.SPECIALIST);
 
         // missing email prefix
         assertParseComplexFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB
-                        + SPECIALTY_DESC_BOB, expectedMessage, PersonType.SPECIALIST);
+                        + LOCATION_DESC_BOB + SPECIALTY_DESC_BOB, expectedMessageSpecialist, PersonType.SPECIALIST);
 
         // missing address prefix
         assertParseComplexFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                        + SPECIALTY_DESC_BOB, expectedMessage, PersonType.SPECIALIST);
+                        + VALID_LOCATION_BOB + SPECIALTY_DESC_BOB, expectedMessageSpecialist, PersonType.SPECIALIST);
 
         // missing specialty prefix
         assertParseComplexFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + VALID_SPECIALTY_DERMATOLOGY, expectedMessage, PersonType.SPECIALIST);
+                + LOCATION_DESC_BOB + VALID_SPECIALTY_DERMATOLOGY, expectedMessageSpecialist, PersonType.SPECIALIST);
 
         // missing age prefix
-        assertParseComplexFailure(parser, VALID_AGE_THIRTY + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY,
-                expectedMessage, PersonType.PATIENT);
+        assertParseComplexFailure(parser, VALID_AGE_THIRTY + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
+                        + LOCATION_DESC_AMY, expectedMessagePatient, PersonType.PATIENT);
 
         // all prefixes missing
         assertParseComplexFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB
-                        + VALID_LOCATION_BOB, expectedMessage, PersonType.PATIENT);
+                        + VALID_LOCATION_BOB, expectedMessagePatient, PersonType.PATIENT);
     }
 
     @Test
@@ -284,7 +288,7 @@ public class AddCommandParserTest {
         assertParseComplexFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB
                         + EMAIL_DESC_BOB + LOCATION_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND
                         + SPECIALTY_DESC_BOB,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE),
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE_SPECIALIST),
                 PersonType.SPECIALIST);
     }
 }

@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PATIENT_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICALHISTORY;
@@ -43,31 +44,46 @@ import seedu.address.model.tag.Tag;
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Specify whether the person is a patient or specialist using the "
-            + PATIENT_TAG + " or " + SPECIALIST_TAG + " tags. "
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_LOCATION + "LOCATION] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "If the person is a patient, edit their medical history by using the "
-            + PREFIX_MEDICALHISTORY + " prefix. \n"
-            + "If the person is a specialist, edit their specialty by using the "
-            + PREFIX_SPECIALTY + " prefix. \n"
-            + "Example: " + COMMAND_WORD + " "
-            + PATIENT_TAG + " "
-            + "1 "
-            + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
-
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    private static final String MESSAGE_USAGE_GENERAL = "Parameters: "
+            + PREFIX_NAME + "NAME "
+            + PREFIX_PHONE + "PHONE "
+            + PREFIX_EMAIL + "EMAIL "
+            + PREFIX_LOCATION + "LOCATION "
+            + "[" + PREFIX_TAG + "TAG]... ";
+
+    private static final String PERSON_EXAMPLE =
+            PREFIX_NAME + "John Doe "
+                    + PREFIX_PHONE + "98765432 "
+                    + PREFIX_EMAIL + "johnd@example.com "
+                    + PREFIX_LOCATION + "311, Clementi Ave 2, #02-25 "
+                    + PREFIX_TAG + "friends "
+                    + PREFIX_TAG + "owesMoney ";
+
+    public static final String MESSAGE_USAGE_PATIENT = COMMAND_WORD + " "
+            + PATIENT_TAG
+            + ": Edit a patient in the address book. \n"
+            + MESSAGE_USAGE_GENERAL
+            + PREFIX_AGE + "AGE "
+            + PREFIX_MEDICALHISTORY + "MEDICAL HISTORY \n"
+            + "Example: " + COMMAND_WORD + " "
+            + PATIENT_TAG + " "
+            + PERSON_EXAMPLE
+            + PREFIX_TAG + "owesMoney "
+            + PREFIX_AGE + "30 "
+            + PREFIX_MEDICALHISTORY + "Osteoporosis";
+
+    public static final String MESSAGE_USAGE_SPECIALIST = COMMAND_WORD + " "
+            + SPECIALIST_TAG
+            + ": edit a specialist in the address book. \n"
+            + MESSAGE_USAGE_GENERAL
+            + PREFIX_SPECIALTY + "SPECIALTY \n"
+            + "Example: " + COMMAND_WORD + " "
+            + SPECIALIST_TAG + " "
+            + PERSON_EXAMPLE
+            + PREFIX_SPECIALTY + "Physiotherapist ";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;

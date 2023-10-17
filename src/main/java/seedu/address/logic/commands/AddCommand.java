@@ -26,33 +26,46 @@ import seedu.address.model.person.PersonType;
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
+    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
-            + "Specify whether the person is a patient or specialist using the "
-            + PATIENT_TAG + " or " + SPECIALIST_TAG + " tags. \n"
-            + "Parameters: "
+    private static final String MESSAGE_USAGE_GENERAL = "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_LOCATION + "LOCATION "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "If the person is a patient, add their age and medical history by using the "
-            + PREFIX_AGE + " and " + PREFIX_MEDICALHISTORY + " prefix respectively. \n"
-            + "If the person is a specialist, add their specialty by using the "
-            + PREFIX_SPECIALTY + " prefix. \n"
-            + "Example: " + COMMAND_WORD + " "
-            + PATIENT_TAG + " "
-            + PREFIX_NAME + "John Doe "
+            + "[" + PREFIX_TAG + "TAG]... ";
+
+    private static final String PERSON_EXAMPLE =
+            PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_LOCATION + "311, Clementi Ave 2, #02-25 "
             + PREFIX_TAG + "friends "
+            + PREFIX_TAG + "owesMoney ";
+
+    public static final String MESSAGE_USAGE_PATIENT = COMMAND_WORD + " "
+            + PATIENT_TAG
+            + ": Adds a patient to the address book. \n"
+            + MESSAGE_USAGE_GENERAL
+            + PREFIX_AGE + "AGE "
+            + PREFIX_MEDICALHISTORY + "MEDICAL HISTORY \n"
+            + "Example: " + COMMAND_WORD + " "
+            + PATIENT_TAG + " "
+            + PERSON_EXAMPLE
             + PREFIX_TAG + "owesMoney "
             + PREFIX_AGE + "30 "
             + PREFIX_MEDICALHISTORY + "Osteoporosis";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_USAGE_SPECIALIST = COMMAND_WORD + " "
+            + SPECIALIST_TAG
+            + ": Adds a specialist to the address book. \n"
+            + MESSAGE_USAGE_GENERAL
+            + PREFIX_SPECIALTY + "SPECIALTY \n"
+            + "Example: " + COMMAND_WORD + " "
+            + SPECIALIST_TAG + " "
+            + PERSON_EXAMPLE
+            + PREFIX_SPECIALTY + "Physiotherapist ";
 
     private final Person toAdd;
 

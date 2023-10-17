@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
@@ -38,12 +39,22 @@ public class FindCommandParser implements ParserComplex<FindCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindCommand parse(PersonType personType, String args) throws ParseException {
+        if (args.isBlank()) {
+            if (personType.equals(PersonType.PATIENT)) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        FindCommand.MESSAGE_USAGE_PATIENT));
+            }
+            if (personType.equals(PersonType.SPECIALIST)) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        FindCommand.MESSAGE_USAGE_SPECIALIST));
+            }
+        }
         if (personType.equals(PersonType.PATIENT)) {
             return parsePatient(args);
         } else if (personType.equals(PersonType.SPECIALIST)) {
             return parseSpecialist(args);
         } else {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_INVALID_PERSON_TYPE));
         }
     }
 
