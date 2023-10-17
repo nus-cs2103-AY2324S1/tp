@@ -1,7 +1,7 @@
 package seedu.staffsnap.testutil;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import seedu.staffsnap.model.applicant.Applicant;
 import seedu.staffsnap.model.applicant.Email;
@@ -25,7 +25,7 @@ public class ApplicantBuilder {
     private Phone phone;
     private Email email;
     private Position position;
-    private Set<Interview> interviews;
+    private List<Interview> interviews;
 
     /**
      * Creates a {@code ApplicantBuilder} with the default details.
@@ -35,7 +35,7 @@ public class ApplicantBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         position = new Position(DEFAULT_POSITION);
-        interviews = new HashSet<>();
+        interviews = new ArrayList<>();
     }
 
     /**
@@ -46,7 +46,7 @@ public class ApplicantBuilder {
         phone = applicantToCopy.getPhone();
         email = applicantToCopy.getEmail();
         position = applicantToCopy.getPosition();
-        interviews = new HashSet<>(applicantToCopy.getInterviews());
+        interviews = new ArrayList<>(applicantToCopy.getInterviews());
     }
 
     /**
@@ -58,11 +58,11 @@ public class ApplicantBuilder {
     }
 
     /**
-     * Parses the {@code interviews} into a {@code Set<Interview>} and set it to the {@code Applicant} that we are
+     * Parses the {@code interviews} into a {@code List<Interview>} and set it to the {@code Applicant} that we are
      * building.
      */
     public ApplicantBuilder withInterviews(String ... interviews) {
-        this.interviews = SampleDataUtil.getInterviewSet(interviews);
+        this.interviews = SampleDataUtil.getInterviewList(interviews);
         return this;
     }
 
