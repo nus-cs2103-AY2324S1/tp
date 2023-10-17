@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_BLOODTYPE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_BLOODTYPE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CONDITION_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CONDITION_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
@@ -77,7 +78,7 @@ public class TypicalPatient {
     public static final Patient BOB = new PatientBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmergencyContact(VALID_EMERGENCY_CONTACT_BOB).withEmail(VALID_EMAIL_BOB)
             .withAddress(VALID_ADDRESS_BOB).withIc(VALID_NRIC_BOB).withGender(VALID_GENDER_MALE)
-            .withRemark(VALID_REMARK_BOB).withCondition(VALID_CONDITION_BOB).withBloodType(VALID_CONDITION_BOB)
+            .withRemark(VALID_REMARK_BOB).withCondition(VALID_CONDITION_BOB).withBloodType(VALID_BLOODTYPE_BOB)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

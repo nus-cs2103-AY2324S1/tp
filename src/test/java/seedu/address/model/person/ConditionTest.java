@@ -15,8 +15,8 @@ public class ConditionTest {
 
     @Test
     public void constructor_invalidCondition_throwsIllegalArgumentException() {
-        String invalidCondition1 = "";  // empty string
-        String invalidCondition2 = " something";  // string with whitespace in front
+        String invalidCondition1 = ""; // empty string
+        String invalidCondition2 = " something"; // string with whitespace in front
         assertThrows(IllegalArgumentException.class, () -> new Condition(invalidCondition1));
         assertThrows(IllegalArgumentException.class, () -> new Condition(invalidCondition2));
     }
