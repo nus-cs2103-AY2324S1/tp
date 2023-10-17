@@ -11,21 +11,15 @@ import static seedu.lovebook.logic.commands.CommandTestUtil.INVALID_AGE_DESC;
 import static seedu.lovebook.logic.commands.CommandTestUtil.INVALID_GENDER_DESC;
 import static seedu.lovebook.logic.commands.CommandTestUtil.INVALID_HEIGHT_DESC;
 import static seedu.lovebook.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
-import static seedu.lovebook.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.lovebook.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.lovebook.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.lovebook.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_AGE_AMY;
 import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_AGE_BOB;
 import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_GENDER_AMY;
 import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_HEIGHT_AMY;
 import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HEIGHT;
-import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.lovebook.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.lovebook.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.lovebook.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -42,12 +36,9 @@ import seedu.lovebook.model.person.Age;
 import seedu.lovebook.model.person.Gender;
 import seedu.lovebook.model.person.Height;
 import seedu.lovebook.model.person.Name;
-import seedu.lovebook.model.tag.Tag;
 import seedu.lovebook.testutil.EditPersonDescriptorBuilder;
 
 public class EditCommandParserTest {
-
-    private static final String TAG_EMPTY = " " + PREFIX_TAG;
 
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
@@ -87,16 +78,9 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_AGE_DESC, Age.MESSAGE_CONSTRAINTS); // invalid age
         assertParseFailure(parser, "1" + INVALID_GENDER_DESC, Gender.MESSAGE_CONSTRAINTS); // invalid gender
         assertParseFailure(parser, "1" + INVALID_HEIGHT_DESC, Height.MESSAGE_CONSTRAINTS); // invalid lovebook
-        assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
 
         // invalid age followed by valid gender
         assertParseFailure(parser, "1" + INVALID_AGE_DESC + GENDER_DESC_AMY, Age.MESSAGE_CONSTRAINTS);
-
-        // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Date} being edited,
-        // parsing it together with a valid tag results in error
-        assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_DESC_HUSBAND + TAG_EMPTY, Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_EMPTY + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_GENDER_DESC + VALID_HEIGHT_AMY + VALID_AGE_AMY,
@@ -106,12 +90,12 @@ public class EditCommandParserTest {
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
-        String userInput = targetIndex.getOneBased() + AGE_DESC_BOB + TAG_DESC_HUSBAND
-                + GENDER_DESC_AMY + HEIGHT_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND;
+        String userInput = targetIndex.getOneBased() + AGE_DESC_BOB + GENDER_DESC_AMY
+                + HEIGHT_DESC_AMY + NAME_DESC_AMY;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withAge(VALID_AGE_BOB).withGender(VALID_GENDER_AMY).withHeight(VALID_HEIGHT_AMY)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -155,12 +139,6 @@ public class EditCommandParserTest {
         descriptor = new EditPersonDescriptorBuilder().withHeight(VALID_HEIGHT_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
-
-        // tags
-        userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND;
-        descriptor = new EditPersonDescriptorBuilder().withTags(VALID_TAG_FRIEND).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor);
-        assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test
@@ -181,8 +159,8 @@ public class EditCommandParserTest {
 
         // mulltiple valid fields repeated
         userInput = targetIndex.getOneBased() + AGE_DESC_AMY + HEIGHT_DESC_AMY + GENDER_DESC_AMY
-                + TAG_DESC_FRIEND + AGE_DESC_AMY + HEIGHT_DESC_AMY + GENDER_DESC_AMY + TAG_DESC_FRIEND
-                + AGE_DESC_BOB + HEIGHT_DESC_BOB + GENDER_DESC_BOB + TAG_DESC_HUSBAND;
+                + AGE_DESC_AMY + HEIGHT_DESC_AMY + GENDER_DESC_AMY
+                + AGE_DESC_BOB + HEIGHT_DESC_BOB + GENDER_DESC_BOB;
 
         assertParseFailure(parser, userInput,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_AGE, PREFIX_GENDER, PREFIX_HEIGHT));
@@ -193,16 +171,5 @@ public class EditCommandParserTest {
 
         assertParseFailure(parser, userInput,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_AGE, PREFIX_GENDER, PREFIX_HEIGHT));
-    }
-
-    @Test
-    public void parse_resetTags_success() {
-        Index targetIndex = INDEX_THIRD_PERSON;
-        String userInput = targetIndex.getOneBased() + TAG_EMPTY;
-
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withTags().build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
-
-        assertParseSuccess(parser, userInput, expectedCommand);
     }
 }
