@@ -2,6 +2,8 @@ package seedu.address.model.interview;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import seedu.address.model.applicant.Applicant;
+
 /**
  * Represents an Interview in the address book.
  */
@@ -16,22 +18,24 @@ public class Interview {
 
     private int interviewId;
     /** TODO Change from 'String' to 'Applicant' once Applicant is on master*/
-    private String applicant;
+    private Applicant applicant;
     private String jobRole;
     /** TODO Change from 'String' to proper 'Date/Time' once natural DT is implemented*/
     private String interviewTiming;
+    private boolean isDone = false;
 
     /**
      * Default constructor for Interview object.
      * Increments the `globalInterviewId` and uses it as the unique `interviewId` for this instance
      */
-    public Interview(String app, String role, String timing) {
-        requireAllNonNull(app, role, timing);
+    public Interview(Applicant app, String role, String timing) {
+        requireAllNonNull(app, timing);
         incrementGlobalInterviewId();
         interviewId = getGlobalInterviewId();
         applicant = app;
         jobRole = role;
         interviewTiming = timing;
+        app.setInterview();
     }
 
     /**
@@ -53,7 +57,7 @@ public class Interview {
     }
 
     /* TODO Update return type from String to Applicant */
-    public String getInterviewApplicant() {
+    public Applicant getInterviewApplicant() {
         return applicant;
     }
 
@@ -61,8 +65,13 @@ public class Interview {
         return jobRole;
     }
 
+
     public String getInterviewTiming() {
         return interviewTiming;
+    }
+
+    public boolean isDone() {
+        return isDone;
     }
 
     public static int getGlobalInterviewId() {
@@ -76,4 +85,11 @@ public class Interview {
         globalInterviewId += 1;
     }
 
+    public void setDone() {
+        isDone = true;
+    }
+
+    public void setUndone() {
+        isDone = false;
+    }
 }

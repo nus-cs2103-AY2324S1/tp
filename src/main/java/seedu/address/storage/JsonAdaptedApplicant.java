@@ -20,23 +20,25 @@ import seedu.address.model.tag.Tag;
 /**
  * Jackson-friendly version of {@link Applicant}.
  */
-class JsonAdaptedPerson {
+class JsonAdaptedApplicant {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Applicant's %s field is missing!";
 
     private final String name;
     private final String phone;
     private final String email;
     private final String address;
+    private boolean hasInterview;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given person details.
+     * Constructs a {@code JsonAdaptedApplicant} with the given applicant details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+    public JsonAdaptedApplicant(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
+                                @JsonProperty("email") String email, @JsonProperty("address") String address,
+                                @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                                @JsonProperty("hasInterview") boolean hasInterview) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -44,12 +46,13 @@ class JsonAdaptedPerson {
         if (tags != null) {
             this.tags.addAll(tags);
         }
+        this.hasInterview = hasInterview;
     }
 
     /**
-     * Converts a given {@code Person} into this class for Jackson use.
+     * Converts a given {@code Applicant} into this class for Jackson use.
      */
-    public JsonAdaptedPerson(Applicant source) {
+    public JsonAdaptedApplicant(Applicant source) {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
@@ -57,17 +60,18 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        hasInterview = source.hasInterview();
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
+     * Converts this Jackson-friendly adapted applicant object into the model's {@code Applicant} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted applicant.
      */
     public Applicant toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
+        final List<Tag> applicantTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
-            personTags.add(tag.toModelType());
+            applicantTags.add(tag.toModelType());
         }
 
         if (name == null) {
@@ -102,7 +106,7 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
+        final Set<Tag> modelTags = new HashSet<>(applicantTags);
         return new Applicant(modelName, modelPhone, modelEmail, modelAddress, modelTags);
     }
 

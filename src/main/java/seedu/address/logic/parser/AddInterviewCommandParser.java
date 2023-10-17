@@ -5,10 +5,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_APPLICANT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMING;
 
+import java.util.List;
 import java.util.stream.Stream;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddInterviewCommand;
+import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.applicant.Applicant;
 import seedu.address.model.interview.Interview;
 
 /**
@@ -33,13 +37,19 @@ public class AddInterviewCommandParser implements Parser<AddInterviewCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_APPLICANT, PREFIX_JOB_ROLE, PREFIX_TIMING);
-        String applicant = argMultimap.getValue(PREFIX_APPLICANT).get().trim();
+        String applicantArgs = argMultimap.getValue(PREFIX_APPLICANT).get().trim();
         String jobRole = argMultimap.getValue(PREFIX_JOB_ROLE).get().trim();
         String timing = argMultimap.getValue(PREFIX_TIMING).get().trim();
 
-        Interview interview = new Interview(applicant, jobRole, timing);
+        Index applicantIndex;
+        try {
+            applicantIndex = ParserUtil.parseIndex(applicantArgs);
+        } catch (ParseException pe) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddInterviewCommand.MESSAGE_USAGE), pe);
+        }
 
-        return new AddInterviewCommand(interview);
+        return new AddInterviewCommand(applicantIndex, jobRole, timing);
     }
 
     /**
@@ -49,5 +59,4 @@ public class AddInterviewCommandParser implements Parser<AddInterviewCommand> {
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
-
 }
