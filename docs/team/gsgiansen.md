@@ -12,7 +12,7 @@ GUI created with JavaFX. It is written in Java.
 Given below are my contributions to the project.
 
 
-* **New Feature**: Feature
+* **New Feature**: Displaying ui with updated card class
   * What it does: Description
   * Justification: Why it is needed
   * Highlights: Key things to note
@@ -21,8 +21,8 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=gsgiansen&breakdown=true)
 
 * **Project management**:
-  * Which releases were managed by me.
-  * e.g. Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+  * Release 1.2
+  * e.g. Managed releases `v1.2` - `v1.5rc` (3 releases) on GitHub
 
 * **Enhancements to existing features**:
   * Which enhancements were written by me (include PR number)
