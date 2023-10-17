@@ -7,13 +7,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICALHISTORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SPECIALTY;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFindSuccess;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseComplexSuccess;
 
 import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindPredicateMap;
 import seedu.address.model.person.PersonType;
 import seedu.address.model.person.predicates.AgeContainsKeywordsPredicate;
@@ -34,12 +35,13 @@ public class FindCommandParserTest {
         List<String> keywords = Arrays.asList("Alice", "Bob");
         FindPredicateMap findPredicateMap = new FindPredicateMap();
         findPredicateMap.put(PREFIX_NAME, new NameContainsKeywordsPredicate(keywords));
-;
+
+        FindCommand expectedCommand = new FindCommand(findPredicateMap, PersonType.PATIENT);
         // no leading and trailing whitespaces
-        assertParseFindSuccess(parser, " " + PREFIX_NAME + " Alice Bob", findPredicateMap, PersonType.PATIENT);
+        assertParseComplexSuccess(parser, " " + PREFIX_NAME + " Alice Bob", expectedCommand, PersonType.PATIENT);
         // multiple whitespaces between keywords
-        assertParseFindSuccess(parser, " " + PREFIX_NAME + " \n Alice \n \t Bob  \t",
-                findPredicateMap, PersonType.PATIENT);
+        assertParseComplexSuccess(parser, " " + PREFIX_NAME + " \n Alice \n \t Bob  \t",
+                expectedCommand, PersonType.PATIENT);
     }
 
     @Test
@@ -47,12 +49,14 @@ public class FindCommandParserTest {
         List<String> keywords = Arrays.asList("92773291", "88765321");
         FindPredicateMap findPredicateMap = new FindPredicateMap();
         findPredicateMap.put(PREFIX_PHONE, new PhoneContainsKeywordsPredicate(keywords));
-        ;
+
+        FindCommand expectedCommand = new FindCommand(findPredicateMap, PersonType.PATIENT);
         // no leading and trailing whitespaces
-        assertParseFindSuccess(parser, " " + PREFIX_PHONE + " 92773291 88765321", findPredicateMap, PersonType.PATIENT);
+        assertParseComplexSuccess(parser, " " + PREFIX_PHONE + " 92773291 88765321",
+                expectedCommand, PersonType.PATIENT);
         // multiple whitespaces between keywords
-        assertParseFindSuccess(parser, " " + PREFIX_PHONE + " \n 92773291 \n \t 88765321  \t",
-                findPredicateMap, PersonType.PATIENT);
+        assertParseComplexSuccess(parser, " " + PREFIX_PHONE + " \n 92773291 \n \t 88765321  \t",
+                expectedCommand, PersonType.PATIENT);
     }
 
     @Test
@@ -60,13 +64,13 @@ public class FindCommandParserTest {
         List<String> keywords = Arrays.asList("timothy@gmail.com", "neumann@hotmail.com");
         FindPredicateMap findPredicateMap = new FindPredicateMap();
         findPredicateMap.put(PREFIX_EMAIL, new EmailContainsKeywordsPredicate(keywords));
-        ;
+        FindCommand expectedCommand = new FindCommand(findPredicateMap, PersonType.PATIENT);
         // no leading and trailing whitespaces
-        assertParseFindSuccess(parser, " " + PREFIX_EMAIL + " timothy@gmail.com neumann@hotmail.com",
-                findPredicateMap, PersonType.PATIENT);
+        assertParseComplexSuccess(parser, " " + PREFIX_EMAIL + " timothy@gmail.com neumann@hotmail.com",
+                expectedCommand, PersonType.PATIENT);
         // multiple whitespaces between keywords
-        assertParseFindSuccess(parser, " " + PREFIX_EMAIL + " \n timothy@gmail.com \n \t neumann@hotmail.com  \t",
-                findPredicateMap, PersonType.PATIENT);
+        assertParseComplexSuccess(parser, " " + PREFIX_EMAIL + " \n timothy@gmail.com \n \t neumann@hotmail.com  \t",
+                expectedCommand, PersonType.PATIENT);
     }
 
     @Test
@@ -83,10 +87,12 @@ public class FindCommandParserTest {
         String userInputArgs2 = String.format(" %s 21 \n 37 \t %s Bronchitis \n ADHD \t Diabetes \t",
                 PREFIX_AGE, PREFIX_MEDICALHISTORY);
 
+        FindCommand expectedCommand = new FindCommand(findPredicateMap, PersonType.PATIENT);
+
         // no leading and trailing whitespaces
-        assertParseFindSuccess(parser, userInputArgs1, findPredicateMap, PersonType.PATIENT);
+        assertParseComplexSuccess(parser, userInputArgs1, expectedCommand, PersonType.PATIENT);
         // multiple whitespaces between keywords
-        assertParseFindSuccess(parser, userInputArgs2, findPredicateMap, PersonType.PATIENT);
+        assertParseComplexSuccess(parser, userInputArgs2, expectedCommand, PersonType.PATIENT);
     }
 
     @Test
@@ -103,9 +109,11 @@ public class FindCommandParserTest {
         String userInputArgs2 = String.format(" %s Orthopaedic \n Neurology \t %s Clementi \n Bukit \t Timah \t",
                 PREFIX_SPECIALTY, PREFIX_LOCATION);
 
+        FindCommand expectedCommand = new FindCommand(findPredicateMap, PersonType.SPECIALIST);
+
         // no leading and trailing whitespaces
-        assertParseFindSuccess(parser, userInputArgs1, findPredicateMap, PersonType.SPECIALIST);
+        assertParseComplexSuccess(parser, userInputArgs1, expectedCommand, PersonType.SPECIALIST);
         // multiple whitespaces between keywords
-        assertParseFindSuccess(parser, userInputArgs2, findPredicateMap, PersonType.SPECIALIST);
+        assertParseComplexSuccess(parser, userInputArgs2, expectedCommand, PersonType.SPECIALIST);
     }
 }
