@@ -7,7 +7,6 @@ import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_INCOME;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.lovebook.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -37,8 +36,6 @@ public class CommandTestUtil {
     public static final String VALID_HEIGHT_BOB = "10";
     public static final String VALID_INCOME_AMY = "3000";
     public static final String VALID_INCOME_BOB = "2000";
-    public static final String VALID_TAG_HUSBAND = "husband";
-    public static final String VALID_TAG_FRIEND = "friend";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -50,16 +47,11 @@ public class CommandTestUtil {
     public static final String HEIGHT_DESC_BOB = " " + PREFIX_HEIGHT + VALID_HEIGHT_BOB;
     public static final String INCOME_DESC_AMY = " " + PREFIX_INCOME + VALID_INCOME_AMY;
     public static final String INCOME_DESC_BOB = " " + PREFIX_INCOME + VALID_INCOME_BOB;
-    public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
-    public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
-
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_AGE_DESC = " " + PREFIX_AGE + "911a"; // 'a' not allowed in ages
     public static final String INVALID_GENDER_DESC = " " + PREFIX_GENDER + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_HEIGHT_DESC = " " + PREFIX_HEIGHT; // empty string not allowed for addresses
     public static final String INVALID_INCOME_DESC = " " + PREFIX_INCOME; // empty string not allowed for income
-    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
-
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
@@ -69,10 +61,10 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withAge(VALID_AGE_AMY).withGender(VALID_GENDER_AMY).withHeight(VALID_HEIGHT_AMY)
-                .withIncome(VALID_INCOME_AMY).withTags(VALID_TAG_FRIEND).build();
+                .withIncome(VALID_INCOME_AMY).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withAge(VALID_AGE_BOB).withGender(VALID_GENDER_BOB).withHeight(VALID_HEIGHT_BOB)
-                .withIncome(VALID_INCOME_AMY).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withIncome(VALID_INCOME_AMY).build();
     }
 
     /**
