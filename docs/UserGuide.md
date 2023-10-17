@@ -81,11 +81,11 @@ Format: `help`
 
 Creates a new contact with the specified name and course code.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL id/STUDENT_ID [t/TAG]...`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL id/STUDENT_ID [t/COURSE_CODE TUROTIAL_GROUP]...`
 
 Examples:
 * `add n/Fu Yiqiao p/91234567 e/fyq@gmail.com id/A1234567E`
-* `add n/Fu Yiqiao p/91234567 e/fyq@gmail.com id/A1234567E t/CS2103T Group 2`
+* `add n/Fu Yiqiao p/91234567 e/fyq@gmail.com id/A1234567E t/CS2103T G2`
 
 ### Marking attendance of student: `mark` [Coming Soon]
 
@@ -145,7 +145,7 @@ Examples:
 
 Edits the contact details.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [id/STUDENT_ID] [t/TAG]...`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [id/STUDENT_ID] [t/COURSE_CODE TUROTIAL_GROUP]...`
 
 * Edits the person at the specified INDEX. The index refers to the index number shown in the displayed person list. The index must be a positive integer 1, 2, 3, …
 * At least one of the optional fields must be provided.
@@ -249,12 +249,12 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action     | Format, Examples                                                         |
-|------------|--------------------------------------------------------------------------|
-| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL id/STUDENT_ID [t/TAG]...` <br>        |
-| **Clear**  | `clear`                                                                  |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                      |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [id/STUDENT_ID] [t/TAG]...`<br> |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`               |
-| **List**   | `list`                                                                   |
-| **Help**   | `help`                                                                   |
+| Action     | Format, Examples                                                                                |
+|------------|-------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL id/STUDENT_ID [t/COURSE_CODE TUROTIAL_GROUP]...` <br>        |
+| **Clear**  | `clear`                                                                                         |
+| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                             |
+| **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [id/STUDENT_ID] [t/COURSE_CODE TUROTIAL_GROUP]...`<br> |
+| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                      |
+| **List**   | `list`                                                                                          |
+| **Help**   | `help`                                                                                          |
