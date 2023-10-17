@@ -45,6 +45,14 @@ public class Band {
         return Collections.unmodifiableSet(musicians);
     }
 
+    public boolean isSameBand(Band otherBand) {
+        if (otherBand == this) {
+            return true;
+        }
+        return otherBand != null
+            && otherBand.getName().equals(getName());
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)

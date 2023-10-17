@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.band.Band;
 import seedu.address.model.musician.Musician;
 
 /**
@@ -77,12 +78,22 @@ public interface Model {
      */
     void setMusician(Musician target, Musician editedMusician);
 
+    boolean hasBand(Band band);
+
+    void addBand(Band band);
+
     /** Returns an unmodifiable view of the filtered musician list */
     ObservableList<Musician> getFilteredMusicianList();
+
+    ObservableList<Band> getFilteredBandList();
 
     /**
      * Updates the filter of the filtered musician list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredMusicianList(Predicate<Musician> predicate);
+
+    void updateFilteredBandList(Predicate<Band> predicate);
+
+    void updateFilteredMusicianListFromBands();
 }

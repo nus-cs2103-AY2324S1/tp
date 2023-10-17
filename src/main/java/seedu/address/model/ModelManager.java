@@ -6,11 +6,13 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.band.Band;
 import seedu.address.model.musician.Musician;
 
 /**
@@ -22,6 +24,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Musician> filteredMusicians;
+    private final FilteredList<Band> filteredBands;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,6 +37,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredMusicians = new FilteredList<>(this.addressBook.getMusicianList());
+        filteredBands = new FilteredList<>(this.addressBook.getBandList());
     }
 
     public ModelManager() {
@@ -111,6 +115,18 @@ public class ModelManager implements Model {
         addressBook.setMusician(target, editedMusician);
     }
 
+    @Override
+    public boolean hasBand(Band band) {
+        requireNonNull(band);
+        return addressBook.hasBand(band);
+    }
+
+    @Override
+    public void addBand(Band band) {
+        requireAllNonNull(band);
+        addressBook.addBand(band);
+    }
+
     //=========== Filtered Musician List Accessors =============================================================
 
     /**
@@ -126,6 +142,26 @@ public class ModelManager implements Model {
     public void updateFilteredMusicianList(Predicate<Musician> predicate) {
         requireNonNull(predicate);
         filteredMusicians.setPredicate(predicate);
+    }
+
+    public void updateFilteredMusicianListFromBands() {
+        requireNonNull(filteredBands);
+        filteredMusicians.setAll((Musician) filteredBands.stream()
+            .map(Band::getMusicians)
+            .collect(Collectors.toList()));
+    }
+
+    //=========== Filtered Band List Accessors =============================================================
+
+    @Override
+    public ObservableList<Band> getFilteredBandList() {
+        return filteredBands;
+    }
+
+    @Override
+    public void updateFilteredBandList(Predicate<Band> predicate) {
+        requireNonNull(predicate);
+        filteredBands.setPredicate(predicate);
     }
 
     @Override
