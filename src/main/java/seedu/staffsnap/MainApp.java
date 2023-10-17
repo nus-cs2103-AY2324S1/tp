@@ -82,7 +82,8 @@ public class MainApp extends Application {
         try {
             applicantBookOptional = storage.readApplicantBook();
             if (!applicantBookOptional.isPresent()) {
-                logger.info("Creating a new data file " + storage.getApplicantBookFilePath()
+                logger.info("No applicant book found at file path. A new data file will be created at"
+                        + storage.getApplicantBookFilePath()
                         + " populated with a sample ApplicantBook.");
             }
             initialData = applicantBookOptional.orElseGet(SampleDataUtil::getSampleApplicantBook);
@@ -120,12 +121,12 @@ public class MainApp extends Application {
         try {
             Optional<Config> configOptional = ConfigUtil.readConfig(configFilePathUsed);
             if (!configOptional.isPresent()) {
-                logger.info("Creating new config file " + configFilePathUsed);
+                logger.info("Creating new config file at" + configFilePathUsed);
             }
             initializedConfig = configOptional.orElse(new Config());
         } catch (DataLoadingException e) {
             logger.warning("Config file at " + configFilePathUsed + " could not be loaded."
-                    + " Using default config properties.");
+                    + " Using default config properties at " + Config.DEFAULT_CONFIG_FILE);
             initializedConfig = new Config();
         }
 
