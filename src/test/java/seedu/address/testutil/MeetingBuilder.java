@@ -4,12 +4,14 @@ import static seedu.address.model.meeting.MeetingTimeTest.FORMAT;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import seedu.address.model.meeting.Attendee;
 import seedu.address.model.meeting.Location;
 import seedu.address.model.meeting.Meeting;
 import seedu.address.model.meeting.Title;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -26,26 +28,30 @@ public class MeetingBuilder {
     private LocalDateTime start;
     private LocalDateTime end;
     private Set<Attendee> attendees;
+    private Set<Tag> tags;
+
     /**
      * Creates a {@code PersonBuilder} with the default details.
      */
     public MeetingBuilder() {
         title = new Title(DEFAULT_TITLE);
-        this.location = new Location(DEFAULT_LOCATION);
-        this.start = DEFAULT_START;
-        this.end = DEFAULT_END;
-        attendees = new HashSet<>();
+        location = new Location(DEFAULT_LOCATION);
+        start = DEFAULT_START;
+        end = DEFAULT_END;
+        attendees = new LinkedHashSet<>();
+        tags = new HashSet<>();
     }
 
     /**
      * Initializes the PersonBuilder with the data of {@code personToCopy}.
      */
-    public MeetingBuilder(Meeting personToCopy) {
-        title = personToCopy.getTitle();
-        location = personToCopy.getLocation();
-        start = personToCopy.getStart();
-        end = personToCopy.getEnd();
-        attendees = new HashSet<>(personToCopy.getAttendees());
+    public MeetingBuilder(Meeting meetingToCopy) {
+        title = meetingToCopy.getTitle();
+        location = meetingToCopy.getLocation();
+        start = meetingToCopy.getStart();
+        end = meetingToCopy.getEnd();
+        attendees = new LinkedHashSet<>(meetingToCopy.getAttendees());
+        tags = new HashSet<>(meetingToCopy.getTags());
     }
 
     /**
@@ -61,6 +67,14 @@ public class MeetingBuilder {
      */
     public MeetingBuilder withAttendees(String ... attendees) {
         this.attendees = SampleDataUtil.getAttendeeSet(attendees);
+        return this;
+    }
+
+    /**
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Meeting} that we are building.
+     */
+    public MeetingBuilder withTags(String ... tags) {
+        this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
 
@@ -89,6 +103,6 @@ public class MeetingBuilder {
     }
 
     public Meeting build() {
-        return new Meeting(title, location, start, end, attendees);
+        return new Meeting(title, location, start, end, attendees, tags);
     }
 }

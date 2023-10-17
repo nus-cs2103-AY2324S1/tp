@@ -17,10 +17,10 @@ import seedu.address.model.meeting.Location;
 import seedu.address.model.meeting.Meeting;
 import seedu.address.model.meeting.MeetingTime;
 import seedu.address.model.meeting.Title;
-import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 
 /**
- * Jackson-friendly version of {@link Person}.
+ * Jackson-friendly version of {@link Meeting}.
  */
 class JsonAdaptedMeeting {
 
@@ -31,6 +31,7 @@ class JsonAdaptedMeeting {
     private final String start;
     private final String end;
     private final List<JsonAdaptedAttendee> attendees = new ArrayList<>();
+    private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -38,7 +39,8 @@ class JsonAdaptedMeeting {
     @JsonCreator
     public JsonAdaptedMeeting(@JsonProperty("title") String title, @JsonProperty("location") String location,
                              @JsonProperty("start") String start, @JsonProperty("end") String end,
-                             @JsonProperty("attendees") List<JsonAdaptedAttendee> attendees) {
+                             @JsonProperty("attendees") List<JsonAdaptedAttendee> attendees,
+                             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
 
         this.title = title;
         this.location = location;
@@ -46,6 +48,9 @@ class JsonAdaptedMeeting {
         this.end = end;
         if (attendees != null) {
             this.attendees.addAll(attendees);
+        }
+        if (tags != null) {
+            this.tags.addAll(tags);
         }
     }
 
@@ -60,6 +65,9 @@ class JsonAdaptedMeeting {
         attendees.addAll(source.getAttendees().stream()
                 .map(JsonAdaptedAttendee::new)
                 .collect(Collectors.toList()));
+        tags.addAll(source.getTags().stream()
+                .map(JsonAdaptedTag::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -71,6 +79,11 @@ class JsonAdaptedMeeting {
         final List<Attendee> meetingAttendees = new ArrayList<>();
         for (JsonAdaptedAttendee person : attendees) {
             meetingAttendees.add(person.toModelType());
+        }
+
+        final List<Tag> meetingTags = new ArrayList<>();
+        for (JsonAdaptedTag tag : tags) {
+            meetingTags.add(tag.toModelType());
         }
 
         if (title == null) {
@@ -106,7 +119,9 @@ class JsonAdaptedMeeting {
         final LocalDateTime modelEnd = LocalDateTime.parse(end);
 
         final Set<Attendee> modelAttendees = new HashSet<>(meetingAttendees);
-        return new Meeting(modelTitle, modelLocation, modelStart, modelEnd, modelAttendees);
+
+        final Set<Tag> modelTags = new HashSet<>(meetingTags);
+        return new Meeting(modelTitle, modelLocation, modelStart, modelEnd, modelAttendees, modelTags);
     }
 
 }

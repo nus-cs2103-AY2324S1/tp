@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TITLE;
 
 import java.time.LocalDateTime;
@@ -18,6 +19,7 @@ import seedu.address.model.meeting.Location;
 import seedu.address.model.meeting.Meeting;
 import seedu.address.model.meeting.MeetingTime;
 import seedu.address.model.meeting.Title;
+import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -31,7 +33,7 @@ public class AddMeetingCommandParser implements Parser<AddMeetingCommand> {
      */
     public AddMeetingCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_TITLE, PREFIX_LOCATION, PREFIX_START, PREFIX_END);
+                ArgumentTokenizer.tokenize(args, PREFIX_TITLE, PREFIX_LOCATION, PREFIX_START, PREFIX_END, PREFIX_TAG);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_TITLE, PREFIX_LOCATION, PREFIX_START, PREFIX_END)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -47,8 +49,9 @@ public class AddMeetingCommandParser implements Parser<AddMeetingCommand> {
             throw new ParseException(MeetingTime.MESSAGE_CONSTRAINTS);
         }
         Set<Attendee> attendeeList = ParserUtil.parseAttendees(argMultimap.getAllValues(PREFIX_NAME));
+        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Meeting meeting = new Meeting(title, location, start, end, attendeeList);
+        Meeting meeting = new Meeting(title, location, start, end, attendeeList, tagList);
 
         return new AddMeetingCommand(meeting);
     }
