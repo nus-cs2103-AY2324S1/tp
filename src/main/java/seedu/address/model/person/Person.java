@@ -26,8 +26,8 @@ public class Person {
 
     private final Remark remark;
     private final Set<Tag> tags = new HashSet<>();
-    private final LinkedIn linkedIn = new LinkedIn("");
-    private final Github github = new Github("");
+    private LinkedIn linkedIn = new LinkedIn("");
+    private Github github = new Github("");
     private final Status currentStatus = new Status();
 
     /**
@@ -86,6 +86,14 @@ public class Person {
 
     public Github getGithub() {
         return github;
+    }
+
+    public void setLinkedIn(LinkedIn linkedIn) {
+        this.linkedIn = linkedIn;
+    }
+
+    public void setGithub(Github github) {
+        this.github = github;
     }
 
     /**
