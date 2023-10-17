@@ -62,6 +62,18 @@ public class Appointment {
         return this.patient.getName().fullName;
     }
 
+    /**
+     * Returns true if both persons have the same time.
+     * This defines a weaker notion of equality between two appointments.
+     */
+    public boolean isSameAppointment(Appointment otherAppointment) {
+        if (otherAppointment == this) {
+            return true;
+        }
+
+        return otherAppointment != null
+                && otherAppointment.getAppointmentTime().equals(getAppointmentTime());
+    }
 
     @Override
     public boolean equals(Object other) {
@@ -78,7 +90,6 @@ public class Appointment {
         return patient.equals(otherAppointment.patient)
                 && appointmentTime.equals(otherAppointment.appointmentTime);
     }
-
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
