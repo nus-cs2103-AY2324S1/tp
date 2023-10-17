@@ -58,7 +58,7 @@ public class CommandTestUtil {
     public static final String AVAILABILITY_NIL_DESC_BOB = " " + PREFIX_AVAILABILITY + AVAILABILITY_DESC_NIL;
     public static final String ANIMAL_TYPE_NIL_DESC_BOB = " " + PREFIX_ANIMAL_TYPE + ANIMAL_TYPE_DESC_NIL;
     public static final String HOUSING_NIL_DESC_BOB = " " + PREFIX_HOUSING + HOUSING_DESC_NIL;
-    public static final String AVAILABILITY_DESC_AVAILABLE = " " + PREFIX_AVAILABILITY +VALID_AVAILABILITY_AVALABLE;
+    public static final String AVAILABILITY_DESC_AVAILABLE = " " + PREFIX_AVAILABILITY + VALID_AVAILABILITY_AVALABLE;
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;

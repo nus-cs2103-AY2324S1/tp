@@ -5,22 +5,18 @@ import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.ANIMAL_NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ANIMAL_NAME_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.ANIMAL_NAME_DESC_NIL;
 import static seedu.address.logic.commands.CommandTestUtil.ANIMAL_NAME_NIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.ANIMAL_TYPE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ANIMAL_TYPE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.ANIMAL_TYPE_DESC_NIL;
 import static seedu.address.logic.commands.CommandTestUtil.ANIMAL_TYPE_NIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.AVAILABILITY_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.AVAILABILITY_DESC_AVAILABLE;
 import static seedu.address.logic.commands.CommandTestUtil.AVAILABILITY_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.AVAILABILITY_DESC_NIL;
 import static seedu.address.logic.commands.CommandTestUtil.AVAILABILITY_NIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.HOUSING_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.HOUSING_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.HOUSING_DESC_NIL;
 import static seedu.address.logic.commands.CommandTestUtil.HOUSING_NIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
@@ -143,10 +139,11 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_invalidAnimalNameWithAvailableAvailability_throwsParseException() {
-        String expectedMessage = "Availability cannot be 'Available' when an animal name is provided; animal name should be 'nil'.";
+        String expectedMessage = "Availability cannot be 'Available' when an animal name is provided; "
+                + "animal name should be 'nil'.";
 
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + TAG_DESC_FRIEND + ANIMAL_NAME_DESC_BOB + AVAILABILITY_DESC_AVAILABLE +ANIMAL_TYPE_DESC_BOB
+                + TAG_DESC_FRIEND + ANIMAL_NAME_DESC_BOB + AVAILABILITY_DESC_AVAILABLE + ANIMAL_TYPE_DESC_BOB
                 + HOUSING_DESC_BOB,
                 expectedMessage);
     }
@@ -156,7 +153,7 @@ public class AddCommandParserTest {
         String expectedMessage = "Animal name is required. Please indicate as 'nil' if information is not available.";
 
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                        + TAG_DESC_FRIEND + AVAILABILITY_DESC_BOB +ANIMAL_TYPE_DESC_BOB
+                        + TAG_DESC_FRIEND + AVAILABILITY_DESC_BOB + ANIMAL_TYPE_DESC_BOB
                         + HOUSING_DESC_BOB,
                 expectedMessage);
     }
@@ -186,7 +183,7 @@ public class AddCommandParserTest {
         String expectedMessage = "Housing is required. Please indicate as 'nil' if information is not available.";
 
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                        + TAG_DESC_FRIEND + ANIMAL_NAME_DESC_BOB +ANIMAL_TYPE_DESC_BOB
+                        + TAG_DESC_FRIEND + ANIMAL_NAME_DESC_BOB + ANIMAL_TYPE_DESC_BOB
                         + AVAILABILITY_DESC_BOB,
                 expectedMessage);
     }
