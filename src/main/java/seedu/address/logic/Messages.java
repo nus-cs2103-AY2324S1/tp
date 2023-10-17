@@ -43,34 +43,14 @@ public class Messages {
                 .append(person.getEmail())
                 .append("; Address: ")
                 .append(person.getAddress())
-                .append("; Housing: ");
-
-        if (!person.getHousing().equals(null)) {
-            builder.append(person.getHousing().value);
-        } else {
-            builder.append("nil");
-        }
-
-        builder.append("; Availability: ");
-        if (!person.getAvailability().equals(null)) {
-            builder.append(person.getAvailability().value);
-        } else {
-            builder.append("nil");
-        }
-
-        builder.append("; Animal name: ");
-        if (!person.getAnimalName().equals(null)) {
-            builder.append(person.getAnimalName().fullName);
-        } else {
-            builder.append("nil");
-        }
-
-        builder.append("; Animal type: ");
-        if (!person.getAnimalType().equals(null)) {
-            builder.append(person.getAnimalType().value);
-        } else {
-            builder.append("nil");
-        }
+                .append("; Housing: ")
+                .append(person.getHousing())
+                .append("; Availability: ")
+                .append(person.getAvailability())
+                .append("; Animal name: ")
+                .append(person.getAnimalName())
+                .append("; Animal type: ")
+                .append(person.getAnimalType());
 
         builder.append("; Tags: ");
         person.getTags().forEach(builder::append);

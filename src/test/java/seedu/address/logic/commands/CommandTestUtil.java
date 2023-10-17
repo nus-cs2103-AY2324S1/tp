@@ -29,6 +29,10 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
  * Contains helper methods for testing commands.
  */
 public class CommandTestUtil {
+    public static final String ANIMAL_NAME_DESC_NIL = "nil";
+    public static final String AVAILABILITY_DESC_NIL = "nil";
+    public static final String ANIMAL_TYPE_DESC_NIL = "nil";
+    public static final String HOUSING_DESC_NIL = "nil";
 
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
@@ -48,6 +52,13 @@ public class CommandTestUtil {
     public static final String VALID_AVAILABILITY_AMY = "nil";
     public static final String VALID_ANIMAL_TYPE_AMY = "nil";
     public static final String VALID_HOUSING_AMY = "nil";
+    public static final String VALID_AVAILABILITY_AVALABLE = "Available";
+
+    public static final String ANIMAL_NAME_NIL_DESC_BOB = " " + PREFIX_ANIMAL_NAME + ANIMAL_NAME_DESC_NIL;
+    public static final String AVAILABILITY_NIL_DESC_BOB = " " + PREFIX_AVAILABILITY + AVAILABILITY_DESC_NIL;
+    public static final String ANIMAL_TYPE_NIL_DESC_BOB = " " + PREFIX_ANIMAL_TYPE + ANIMAL_TYPE_DESC_NIL;
+    public static final String HOUSING_NIL_DESC_BOB = " " + PREFIX_HOUSING + HOUSING_DESC_NIL;
+    public static final String AVAILABILITY_DESC_AVAILABLE = " " + PREFIX_AVAILABILITY +VALID_AVAILABILITY_AVALABLE;
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
