@@ -13,6 +13,7 @@ import transact.logic.commands.AddTransactionCommand;
 import transact.logic.parser.exceptions.ParseException;
 import transact.model.transaction.Transaction;
 import transact.model.transaction.info.Amount;
+import transact.model.person.Person;
 import transact.model.transaction.info.Date;
 import transact.model.transaction.info.Description;
 import transact.model.transaction.info.TransactionType;
@@ -45,6 +46,7 @@ public class AddTransactionCommandParser implements Parser<AddTransactionCommand
         TransactionType transactionType = ParserUtil.parseType(argMultimap.getValue(PREFIX_TYPE).get());
         Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
         Amount amount = ParserUtil.parseAmount(argMultimap.getValue(PREFIX_AMOUNT).get());
+        Person staff = ParserUtil.parsePerson(argMultimap.getValue(PREFIX_STAFF).get());
 
         // TODO Parse data when date class ready
         // Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
