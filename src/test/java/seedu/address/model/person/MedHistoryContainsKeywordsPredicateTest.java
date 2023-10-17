@@ -1,16 +1,17 @@
 package seedu.address.model.person;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.model.person.predicates.MedHistoryContainsKeywordsPredicate;
-import seedu.address.testutil.PatientBuilder;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import seedu.address.model.person.predicates.MedHistoryContainsKeywordsPredicate;
+import seedu.address.testutil.PatientBuilder;
 
 
 public class MedHistoryContainsKeywordsPredicateTest {
@@ -19,14 +20,17 @@ public class MedHistoryContainsKeywordsPredicateTest {
         List<String> firstPredicateKeywordList = Collections.singletonList("first");
         List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
 
-        MedHistoryContainsKeywordsPredicate firstPredicate = new MedHistoryContainsKeywordsPredicate(firstPredicateKeywordList);
-        MedHistoryContainsKeywordsPredicate secondPredicate = new MedHistoryContainsKeywordsPredicate(secondPredicateKeywordList);
+        MedHistoryContainsKeywordsPredicate firstPredicate =
+                new MedHistoryContainsKeywordsPredicate(firstPredicateKeywordList);
+        MedHistoryContainsKeywordsPredicate secondPredicate =
+                new MedHistoryContainsKeywordsPredicate(secondPredicateKeywordList);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        MedHistoryContainsKeywordsPredicate firstPredicateCopy = new MedHistoryContainsKeywordsPredicate(firstPredicateKeywordList);
+        MedHistoryContainsKeywordsPredicate firstPredicateCopy =
+                new MedHistoryContainsKeywordsPredicate(firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -42,7 +46,8 @@ public class MedHistoryContainsKeywordsPredicateTest {
     @Test
     public void test_medicalHistoryContainsKeywords_returnsTrue() {
         // One keyword
-        MedHistoryContainsKeywordsPredicate predicate = new MedHistoryContainsKeywordsPredicate(Collections.singletonList("Osteoporosis"));
+        MedHistoryContainsKeywordsPredicate predicate =
+                new MedHistoryContainsKeywordsPredicate(Collections.singletonList("Osteoporosis"));
         assertTrue(predicate.test(new PatientBuilder().withMedicalHistory("Osteoporosis").build()));
 
         // Multiple keywords
@@ -55,29 +60,35 @@ public class MedHistoryContainsKeywordsPredicateTest {
 
         // Multiple Keyword with Multiple Medical History
         predicate = new MedHistoryContainsKeywordsPredicate(Arrays.asList("Osteoporosis", "Asthma"));
-        assertTrue(predicate.test(new PatientBuilder().withMedicalHistory("Diabetes", "Osteoporosis", "Asthma").build()));
+        assertTrue(predicate.test(new PatientBuilder()
+                .withMedicalHistory("Diabetes", "Osteoporosis", "Asthma").build()));
 
         // Only one matching keyword
         predicate = new MedHistoryContainsKeywordsPredicate(Arrays.asList("Osteoporosis", "Diabetes"));
-        assertTrue(predicate.test(new PatientBuilder().withMedicalHistory("Osteoporosis primary type 1").build()));
+        assertTrue(predicate.test(new PatientBuilder()
+                .withMedicalHistory("Osteoporosis primary type 1").build()));
 
         // Mixed-case keywords
         predicate = new MedHistoryContainsKeywordsPredicate(Arrays.asList("oSteOpoROsis", "dIaBeTeS"));
-        assertTrue(predicate.test(new PatientBuilder().withMedicalHistory("Osteoporosis", "Diabetes").build()));
+        assertTrue(predicate.test(new PatientBuilder()
+                .withMedicalHistory("Osteoporosis", "Diabetes").build()));
     }
 
     @Test
     public void test_nameDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
-        MedHistoryContainsKeywordsPredicate predicate = new MedHistoryContainsKeywordsPredicate(Collections.emptyList());
+        MedHistoryContainsKeywordsPredicate predicate =
+                new MedHistoryContainsKeywordsPredicate(Collections.emptyList());
         assertFalse(predicate.test(new PatientBuilder().withMedicalHistory("Osteoporosis").build()));
 
         // Non-matching keyword
-        predicate = new MedHistoryContainsKeywordsPredicate(Arrays.asList("Osteoporosis"));
+        predicate =
+                new MedHistoryContainsKeywordsPredicate(Arrays.asList("Osteoporosis"));
         assertFalse(predicate.test(new PatientBuilder().withMedicalHistory("Anemia").build()));
 
         // Keywords match phone, email and address, but does not match Medical History
-        predicate = new MedHistoryContainsKeywordsPredicate(Arrays.asList("12345", "alice@email.com", "Main", "Street"));
+        predicate =
+                new MedHistoryContainsKeywordsPredicate(Arrays.asList("12345", "alice@email.com", "Main", "Street"));
         assertFalse(predicate.test(new PatientBuilder().withMedicalHistory("Anemia").withPhone("12345")
                 .withEmail("alice@email.com").build()));
     }
