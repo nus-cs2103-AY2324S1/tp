@@ -61,8 +61,8 @@ public class CommandTestUtil {
     public static final String JOINDATE_DESC_BOB = " " + PREFIX_JOIN_DATE + VALID_JOINDATE_BOB;
     public static final String SALARY_DESC_AMY = " " + PREFIX_SALARY + VALID_SALARY_AMY;
     public static final String SALARY_DESC_BOB = " " + PREFIX_SALARY + VALID_SALARY_BOB;
-    public static final String ANNUALLEAVE_DESC_AMY = " " + PREFIX_SALARY + VALID_ANNUALLEAVE_AMY;
-    public static final String ANNUALLEAVE_DESC_BOB = " " + PREFIX_SALARY + VALID_ANNUALLEAVE_BOB;
+    public static final String ANNUALLEAVE_DESC_AMY = " " + PREFIX_ANNUAL_LEAVE + VALID_ANNUALLEAVE_AMY;
+    public static final String ANNUALLEAVE_DESC_BOB = " " + PREFIX_ANNUAL_LEAVE + VALID_ANNUALLEAVE_BOB;
 
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
