@@ -110,8 +110,14 @@ public class AddCommand extends Command {
 
     // TODO: for non-unique fields, change respective model to use list and append to the list
     // TODO: now it just replaces the old value
-    private Phone addPhone(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor) {
-        return editPersonDescriptor.getPhone().orElse(personToAddInfo.getPhone());
+    private Phone addPhone(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor)
+            throws CommandException {
+        Optional<Phone> oldPhone = personToAddInfo.getPhone();
+        Optional<Phone> newPhone = editPersonDescriptor.getPhone();
+        if (oldPhone.isPresent() && newPhone.isPresent()) {
+            throw new CommandException(MESSAGE_MULTIPLE_UNIQUE_FIELD);
+        }
+        return newPhone.orElse(oldPhone.orElse(null));
     }
     private UniqueList<Email> addEmails(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor) {
         UniqueList<Email> emails = personToAddInfo.getEmails();
@@ -123,14 +129,32 @@ public class AddCommand extends Command {
         editPersonDescriptor.getLinks().ifPresent(links::addAll);
         return links;
     }
-    private GraduatingYear addGraduatingYear(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor) {
-        return editPersonDescriptor.getGraduatingYear().orElse(personToAddInfo.getGraduatingYear());
+    private GraduatingYear addGraduatingYear(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor)
+            throws CommandException {
+        Optional<GraduatingYear> oldGraduatingYear = personToAddInfo.getGraduatingYear();
+        Optional<GraduatingYear> newGraduatingYear = editPersonDescriptor.getGraduatingYear();
+        if (oldGraduatingYear.isPresent() && newGraduatingYear.isPresent()) {
+            throw new CommandException(MESSAGE_MULTIPLE_UNIQUE_FIELD);
+        }
+        return newGraduatingYear.orElse(oldGraduatingYear.orElse(null));
     }
-    private Course addCourse(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor) {
-        return editPersonDescriptor.getCourse().orElse(personToAddInfo.getCourse());
+    private Course addCourse(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor)
+            throws CommandException {
+        Optional<Course> oldCourse = personToAddInfo.getCourse();
+        Optional<Course> newCourse = editPersonDescriptor.getCourse();
+        if (oldCourse.isPresent() && newCourse.isPresent()) {
+            throw new CommandException(MESSAGE_MULTIPLE_UNIQUE_FIELD);
+        }
+        return newCourse.orElse(oldCourse.orElse(null));
     }
-    private Specialisation addSpecialisation(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor) {
-        return editPersonDescriptor.getSpecialisation().orElse(personToAddInfo.getSpecialisation());
+    private Specialisation addSpecialisation(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor)
+            throws CommandException {
+        Optional<Specialisation> oldSpecialisation = personToAddInfo.getSpecialisation();
+        Optional<Specialisation> newSpecialisation = editPersonDescriptor.getSpecialisation();
+        if (oldSpecialisation.isPresent() && newSpecialisation.isPresent()) {
+            throw new CommandException(MESSAGE_MULTIPLE_UNIQUE_FIELD);
+        }
+        return newSpecialisation.orElse(oldSpecialisation.orElse(null));
     }
     private UniqueList<Tag> addTags(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor) {
         UniqueList<Tag> tags = personToAddInfo.getTags();

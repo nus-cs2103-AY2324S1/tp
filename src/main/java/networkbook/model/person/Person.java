@@ -42,7 +42,6 @@ public class Person implements Identifiable<Person> {
                   Specialisation specialisation,
                   UniqueList<Tag> tags,
                   Priority priority) {
-        // TODO: review requireAllNonNull
         requireAllNonNull(name);
         this.name = name;
         this.phone = phone;
@@ -59,8 +58,8 @@ public class Person implements Identifiable<Person> {
         return name;
     }
 
-    public Phone getPhone() {
-        return phone;
+    public Optional<Phone> getPhone() {
+        return Optional.ofNullable(phone);
     }
 
     public UniqueList<Email> getEmails() {
@@ -69,14 +68,14 @@ public class Person implements Identifiable<Person> {
     public UniqueList<Link> getLinks() {
         return links.copy();
     }
-    public GraduatingYear getGraduatingYear() {
-        return graduatingYear;
+    public Optional<GraduatingYear> getGraduatingYear() {
+        return Optional.ofNullable(graduatingYear);
     }
-    public Course getCourse() {
-        return course;
+    public Optional<Course> getCourse() {
+        return Optional.ofNullable(course);
     }
-    public Specialisation getSpecialisation() {
-        return specialisation;
+    public Optional<Specialisation> getSpecialisation() {
+        return Optional.ofNullable(specialisation);
     }
     public UniqueList<Tag> getTags() {
         return this.tags.copy();
@@ -144,14 +143,28 @@ public class Person implements Identifiable<Person> {
     @Override
     public String toString() {
         ToStringBuilder tsb = new ToStringBuilder(this)
-                .add("name", name)
-                .add("phone", phone)
-                .add("email", emails)
-                .add("links", links)
-                .add("graduating year", graduatingYear)
-                .add("course", course)
-                .add("specialisation", specialisation)
-                .add("tags", tags);
+                .add("name", name);
+        if (phone != null) {
+            tsb.add("phone", phone);
+        }
+        if (!Objects.equals(emails, new UniqueList<Email>())) {
+            tsb.add("emails", emails);
+        }
+        if (!Objects.equals(links, new UniqueList<Link>())) {
+            tsb.add("links", links);
+        }
+        if (graduatingYear != null) {
+            tsb.add("graduating year", graduatingYear);
+        }
+        if (course != null) {
+            tsb.add("course", course);
+        }
+        if (specialisation != null) {
+            tsb.add("specialisation", specialisation);
+        }
+        if (!Objects.equals(tags, new UniqueList<Tag>())) {
+            tsb.add("tags", tags);
+        }
         if (priority != null) {
             tsb.add("priority", priority);
         }

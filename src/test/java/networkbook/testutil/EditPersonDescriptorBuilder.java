@@ -35,12 +35,12 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder(Person person) {
         descriptor = new EditCommand.EditPersonDescriptor();
         descriptor.setName(person.getName());
-        descriptor.setPhone(person.getPhone());
+        person.getPhone().ifPresent((Phone p) -> descriptor.setPhone(p));
         descriptor.setEmails(person.getEmails());
         descriptor.setLinks(person.getLinks());
-        descriptor.setGraduatingYear(person.getGraduatingYear());
-        descriptor.setCourse(person.getCourse());
-        descriptor.setSpecialisation(person.getSpecialisation());
+        person.getGraduatingYear().ifPresent((GraduatingYear g) -> descriptor.setGraduatingYear(g));
+        person.getCourse().ifPresent((Course c) -> descriptor.setCourse(c));
+        person.getSpecialisation().ifPresent((Specialisation s) -> descriptor.setSpecialisation(s));
         descriptor.setTags(person.getTags());
         person.getPriority().ifPresent((Priority p) -> descriptor.setPriority(p));
     }

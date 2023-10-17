@@ -110,12 +110,14 @@ public class PersonTest {
 
     @Test
     public void toStringMethod() {
-        String expected = Person.class.getCanonicalName() + "{name=" + TypicalPersons.AMY.getName()
-                + ", phone=" + TypicalPersons.AMY.getPhone() + ", email=" + TypicalPersons.AMY.getEmails()
+        String expected = Person.class.getCanonicalName()
+                + "{name=" + TypicalPersons.AMY.getName()
+                + ", phone=" + TypicalPersons.AMY.getPhone().get()
+                + ", emails=" + TypicalPersons.AMY.getEmails()
                 + ", links=" + TypicalPersons.AMY.getLinks()
-                + ", graduating year=" + TypicalPersons.AMY.getGraduatingYear()
-                + ", course=" + TypicalPersons.AMY.getCourse()
-                + ", specialisation=" + TypicalPersons.AMY.getSpecialisation()
+                + ", graduating year=" + TypicalPersons.AMY.getGraduatingYear().get()
+                + ", course=" + TypicalPersons.AMY.getCourse().get()
+                + ", specialisation=" + TypicalPersons.AMY.getSpecialisation().get()
                 + ", tags=" + TypicalPersons.AMY.getTags() + ", priority=" + TypicalPersons.AMY.getPriority().get()
                 + "}";
         assertEquals(expected, TypicalPersons.AMY.toString());

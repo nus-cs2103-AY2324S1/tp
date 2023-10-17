@@ -1,5 +1,9 @@
 package networkbook.ui;
 
+import static networkbook.logic.commands.CommandTestUtil.VALID_COURSE_BOB;
+import static networkbook.logic.commands.CommandTestUtil.VALID_GRADUATING_YEAR_BOB;
+import static networkbook.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static networkbook.logic.commands.CommandTestUtil.VALID_SPECIALISATION_BOB;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -32,6 +36,42 @@ public class PersonCardTest {
     @BeforeEach
     public void setup() throws Exception {
         ApplicationTest.launch(MainApp.class);
+    }
+
+    @Test
+    public void constructor_hasValidNumber_showsValidNumber() {
+        Person person = new PersonBuilder().withName("Bob").withPhone(VALID_PHONE_BOB).build();
+        PersonCard personCard = new PersonCard(person, 1);
+        Label phone = personCard.getPhone();
+        assertEquals("Phone: " + VALID_PHONE_BOB, phone.getText());
+        assertTrue(phone.isVisible());
+    }
+
+    @Test
+    public void constructor_hasValidGraduatingYear_showsValidGraduatingYear() {
+        Person person = new PersonBuilder().withName("Bob").withGraduatingYear(VALID_GRADUATING_YEAR_BOB).build();
+        PersonCard personCard = new PersonCard(person, 1);
+        Label graduatingYear = personCard.getGraduatingYear();
+        assertEquals("Graduating Year: " + VALID_GRADUATING_YEAR_BOB, graduatingYear.getText());
+        assertTrue(graduatingYear.isVisible());
+    }
+
+    @Test
+    public void constructor_hasValidCourse_showsValidCourse() {
+        Person person = new PersonBuilder().withName("Bob").withCourse(VALID_COURSE_BOB).build();
+        PersonCard personCard = new PersonCard(person, 1);
+        Label course = personCard.getCourse();
+        assertEquals("Course: " + VALID_COURSE_BOB, course.getText());
+        assertTrue(course.isVisible());
+    }
+
+    @Test
+    public void constructor_hasValidSpecialisation_showsValidSpecialisation() {
+        Person person = new PersonBuilder().withName("Bob").withSpecialisation(VALID_SPECIALISATION_BOB).build();
+        PersonCard personCard = new PersonCard(person, 1);
+        Label specialisation = personCard.getSpecialisation();
+        assertEquals("Specialisation: " + VALID_SPECIALISATION_BOB, specialisation.getText());
+        assertTrue(specialisation.isVisible());
     }
 
     @Test
