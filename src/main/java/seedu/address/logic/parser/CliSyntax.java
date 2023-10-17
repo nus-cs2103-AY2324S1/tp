@@ -19,7 +19,10 @@ public class CliSyntax {
     public static final Prefix PREFIX_APPOINTMENT_FROM_END = new Prefix("fromend=");
     public static final Prefix PREFIX_APPOINTMENT_TO_START = new Prefix("tostart=");
     public static final Prefix PREFIX_APPOINTMENT_TO_END = new Prefix("toend=");
+  
     /* Appointment prefix definitions */
-    public static final Prefix PREFIX_START = new Prefix("start=");
-    public static final Prefix PREFIX_END = new Prefix("end=");
+    public static final Prefix PREFIX_APPOINTMENT_START = new Prefix("start=");
+    public static final Prefix PREFIX_APPOINTMENT_END = new Prefix("end=");
+    public static final Prefix PREFIX_APPOINTMENT_DESCRIPTION = new Prefix("description=");
+    public static final Prefix PREFIX_APPOINTMENT_PATIENT = new Prefix("patient=");
 }

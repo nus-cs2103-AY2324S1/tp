@@ -12,6 +12,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.appointment.AppointmentDescription;
 import seedu.address.model.appointment.AppointmentTime;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Birthdate;
@@ -160,20 +161,58 @@ public class ParserUtil {
     }
 
     /**
-     * * Parses a {@code String dateAndTime} into a {@code LocalDateTime}.
-     * Leading and trailing whitespaces will be trimmed. *
+     * Parses a {@code String dateAndTime} into a {@code LocalDateTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
      * @throws ParseException if the given {@code dateAndTime} is invalid.
-     * */
+     */
     public static LocalDateTime parseDateTime(String dateAndTime) throws ParseException {
         requireNonNull(dateAndTime);
         String trimmedDateTime = dateAndTime.trim();
-        LocalDateTime localDateTime = null;
-        DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("DD/MM/YYYY HH:mm");
+        LocalDateTime localDateTime;
+        DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         try {
             localDateTime = LocalDateTime.parse(trimmedDateTime, dateTimeFormat);
         } catch (DateTimeParseException e) {
             throw new ParseException(AppointmentTime.MESSAGE_CONSTRAINTS);
         }
         return localDateTime;
+    }
+
+    /**
+     * Used in AddAppointmentCommandParser class to parse out the patient's index
+     *
+     * @param patientIndex string number containing patient's index
+     * @return integer that was conveyed in the string
+     * @throws ParseException input text does not contain a number
+     */
+    public static int parsePatientIndex(String patientIndex) throws ParseException {
+        requireNonNull(patientIndex);
+        String trimmedDateTime = patientIndex.trim();
+        int index;
+        try {
+            index = Integer.parseInt(trimmedDateTime);
+        } catch (NumberFormatException e) {
+            throw new ParseException("Input Patient Index is not a number.");
+        }
+
+        return index;
+    }
+
+    /**
+     * Parses a {@code String description} into a {@code AppointmentDescription}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code dateAndTime} is invalid.
+     */
+    public static AppointmentDescription parseDescription(String description) throws ParseException {
+        requireNonNull(description);
+        String trimmedDescription = description.trim();
+
+        if (!AppointmentDescription.isValidAppointmentDescription(trimmedDescription)) {
+            System.out.println(AppointmentDescription.isValidAppointmentDescription(trimmedDescription));
+            throw new ParseException(AppointmentDescription.MESSAGE_CONSTRAINTS);
+        }
+        return new AppointmentDescription(trimmedDescription);
     }
 }

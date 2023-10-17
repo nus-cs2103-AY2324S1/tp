@@ -16,17 +16,30 @@ import seedu.address.model.person.Person;
 public class Appointment {
     private AppointmentTime appointmentTime;
     private Person patient;
+    private int index;
+
+    private AppointmentDescription description;
 
     /**
      * Constructs an {@code Appointment}.
      *
      * @param appointmentTime The scheduled time for the appointment.
-     * @param patient The patient whom the appointment is for.
+     * @param index patient index for whom we are setting appointment for.
      */
-    public Appointment(AppointmentTime appointmentTime, Person patient) {
+    public Appointment(AppointmentTime appointmentTime, AppointmentDescription description, int index) {
         requireAllNonNull(appointmentTime);
         this.appointmentTime = appointmentTime;
         this.patient = null;
+        this.index = index;
+        this.description = description;
+    }
+
+    /**
+     * Used in the AddAppointmentCommand
+     * @param patient sets the patient into the appointment
+     */
+    public void setPatient(Person patient) {
+        this.patient = patient;
     }
 
     public AppointmentTime getAppointmentTime() {
@@ -61,6 +74,7 @@ public class Appointment {
         return otherAppointment != null
                 && otherAppointment.getAppointmentTime().equals(getAppointmentTime());
     }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
