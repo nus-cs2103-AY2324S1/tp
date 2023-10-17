@@ -4,8 +4,8 @@ import static networkbook.logic.commands.CommandTestUtil.VALID_COURSE_AMY;
 import static networkbook.logic.commands.CommandTestUtil.VALID_COURSE_BOB;
 import static networkbook.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static networkbook.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static networkbook.logic.commands.CommandTestUtil.VALID_GRADUATING_YEAR_AMY;
-import static networkbook.logic.commands.CommandTestUtil.VALID_GRADUATING_YEAR_BOB;
+import static networkbook.logic.commands.CommandTestUtil.VALID_GRADUATION_AMY;
+import static networkbook.logic.commands.CommandTestUtil.VALID_GRADUATION_BOB;
 import static networkbook.logic.commands.CommandTestUtil.VALID_LINK_AMY;
 import static networkbook.logic.commands.CommandTestUtil.VALID_LINK_BOB;
 import static networkbook.logic.commands.CommandTestUtil.VALID_NAME_AMY;
@@ -59,12 +59,12 @@ public class TypicalPersons {
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withEmails(List.of(VALID_EMAIL_AMY)).withLinks(List.of(VALID_LINK_AMY))
-            .withGraduatingYear(VALID_GRADUATING_YEAR_AMY)
+            .withGraduation(VALID_GRADUATION_AMY)
             .withCourse(VALID_COURSE_AMY).withSpecialisation(VALID_SPECIALISATION_AMY).withTags(VALID_TAG_FRIEND)
             .withPriority("High").build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmails(List.of(VALID_EMAIL_BOB)).withLinks(List.of(VALID_LINK_BOB))
-            .withGraduatingYear(VALID_GRADUATING_YEAR_BOB)
+            .withGraduation(VALID_GRADUATION_BOB)
             .withCourse(VALID_COURSE_BOB).withSpecialisation(VALID_SPECIALISATION_BOB)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
 

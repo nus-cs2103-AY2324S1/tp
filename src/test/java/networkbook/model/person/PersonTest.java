@@ -2,7 +2,7 @@ package networkbook.model.person;
 
 import static networkbook.logic.commands.CommandTestUtil.VALID_COURSE_BOB;
 import static networkbook.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static networkbook.logic.commands.CommandTestUtil.VALID_GRADUATING_YEAR_BOB;
+import static networkbook.logic.commands.CommandTestUtil.VALID_GRADUATION_BOB;
 import static networkbook.logic.commands.CommandTestUtil.VALID_LINK_BOB;
 import static networkbook.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static networkbook.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -39,7 +39,7 @@ public class PersonTest {
         // same name, all other attributes different -> returns true
         Person editedAmy = new PersonBuilder(TypicalPersons.AMY)
                 .withPhone(VALID_PHONE_BOB).withEmails(List.of(VALID_EMAIL_BOB))
-                .withLinks(List.of(VALID_LINK_BOB)).withGraduatingYear(VALID_GRADUATING_YEAR_BOB)
+                .withLinks(List.of(VALID_LINK_BOB)).withGraduation(VALID_GRADUATION_BOB)
                 .withCourse(VALID_COURSE_BOB).withSpecialisation(VALID_SPECIALISATION_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
         assertTrue(TypicalPersons.AMY.isSame(editedAmy));
@@ -97,8 +97,8 @@ public class PersonTest {
         editedAmy = new PersonBuilder(TypicalPersons.AMY).withLinks(List.of(VALID_LINK_BOB)).build();
         assertFalse(TypicalPersons.AMY.equals(editedAmy));
 
-        // different graduating year -> returns false
-        editedAmy = new PersonBuilder(TypicalPersons.AMY).withGraduatingYear(VALID_GRADUATING_YEAR_BOB).build();
+        // different graduation date -> returns false
+        editedAmy = new PersonBuilder(TypicalPersons.AMY).withGraduation(VALID_GRADUATION_BOB).build();
         assertFalse(TypicalPersons.AMY.equals(editedAmy));
 
         // different course -> returns false
@@ -121,7 +121,7 @@ public class PersonTest {
                 + ", phone=" + TypicalPersons.AMY.getPhone().get()
                 + ", emails=" + TypicalPersons.AMY.getEmails()
                 + ", links=" + TypicalPersons.AMY.getLinks()
-                + ", graduating year=" + TypicalPersons.AMY.getGraduatingYear().get()
+                + ", graduation=" + TypicalPersons.AMY.getGraduation().get()
                 + ", course=" + TypicalPersons.AMY.getCourse().get()
                 + ", specialisation=" + TypicalPersons.AMY.getSpecialisation().get()
                 + ", tags=" + TypicalPersons.AMY.getTags() + ", priority=" + TypicalPersons.AMY.getPriority().get()

@@ -31,8 +31,10 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_LINK_AMY = "linkedin.com/in/Amy-beez";
     public static final String VALID_LINK_BOB = "github.com/bob2000";
-    public static final String VALID_GRADUATING_YEAR_AMY = "2000";
-    public static final String VALID_GRADUATING_YEAR_BOB = "2026";
+    public static final String VALID_GRADUATION_AMY = "AY9899-S2";
+    public static final String VALID_GRADUATION_FULL_AMY = "AY1998/1999 Semester 2";
+    public static final String VALID_GRADUATION_BOB = "AY2425-S1";
+    public static final String VALID_GRADUATION_FULL_BOB = "AY2024/2025 Semester 1";
     public static final String VALID_COURSE_AMY = "Computer Science";
     public static final String VALID_COURSE_BOB = "Computer Engineering";
     public static final String VALID_SPECIALISATION_AMY = "Game Development";
@@ -50,10 +52,10 @@ public class CommandTestUtil {
     // amend CliSyntax
     public static final String LINK_DESC_AMY = " " + CliSyntax.PREFIX_LINK + " " + VALID_LINK_AMY;
     public static final String LINK_DESC_BOB = " " + CliSyntax.PREFIX_LINK + " " + VALID_LINK_BOB;
-    public static final String GRADUATING_YEAR_DESC_AMY = " " + CliSyntax.PREFIX_GRADUATING_YEAR + " "
-            + VALID_GRADUATING_YEAR_AMY;
-    public static final String GRADUATING_YEAR_DESC_BOB = " " + CliSyntax.PREFIX_GRADUATING_YEAR + " "
-            + VALID_GRADUATING_YEAR_BOB;
+    public static final String GRADUATION_DESC_AMY = " " + CliSyntax.PREFIX_GRADUATION + " "
+            + VALID_GRADUATION_AMY;
+    public static final String GRADUATION_DESC_BOB = " " + CliSyntax.PREFIX_GRADUATION + " "
+            + VALID_GRADUATION_BOB;
     public static final String COURSE_DESC_AMY = " " + CliSyntax.PREFIX_COURSE + " " + VALID_COURSE_AMY;
     public static final String COURSE_DESC_BOB = " " + CliSyntax.PREFIX_COURSE + " " + VALID_COURSE_BOB;
     public static final String SPECIALISATION_DESC_AMY = " " + CliSyntax.PREFIX_SPECIALISATION + " "
@@ -72,8 +74,8 @@ public class CommandTestUtil {
     public static final String INVALID_LINK_DESC =
             " " + CliSyntax.PREFIX_LINK + " "
             + "https://docs.goo_gle.com";
-    public static final String INVALID_GRADUATING_YEAR_DESC =
-            " " + CliSyntax.PREFIX_GRADUATING_YEAR + " " + "123a"; // non-numerics not allowed for graduating year
+    public static final String INVALID_GRADUATION_DESC =
+            " " + CliSyntax.PREFIX_GRADUATION + " " + "2024/2025"; // graduation must follow format
     public static final String INVALID_COURSE_DESC =
             " " + CliSyntax.PREFIX_COURSE; // empty string not allowed for course
     public static final String INVALID_SPECIALISATION_DESC =
@@ -92,11 +94,11 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withLink(VALID_LINK_AMY)
-                .withGraduatingYear(VALID_GRADUATING_YEAR_AMY).withCourse(VALID_COURSE_AMY)
+                .withGraduation(VALID_GRADUATION_AMY).withCourse(VALID_COURSE_AMY)
                 .withSpecialisation(VALID_SPECIALISATION_AMY).withTags(VALID_TAG_FRIEND).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withLink(VALID_LINK_BOB)
-                .withGraduatingYear(VALID_GRADUATING_YEAR_BOB).withCourse(VALID_COURSE_BOB)
+                .withGraduation(VALID_GRADUATION_BOB).withCourse(VALID_COURSE_BOB)
                 .withSpecialisation(VALID_SPECIALISATION_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 

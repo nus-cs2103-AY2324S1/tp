@@ -55,13 +55,13 @@ public class AddCommandTest {
         }
     }
     @Test
-    public void execute_multipleGradYearsBeingAdded_assertionError() {
+    public void execute_multipleGradsBeingAdded_assertionError() {
         Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
         Person lastPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
         PersonBuilder personInList = new PersonBuilder(lastPerson);
-        Person editedPerson = personInList.withGraduatingYear(CommandTestUtil.VALID_GRADUATING_YEAR_AMY).build();
+        Person editedPerson = personInList.withGraduation(CommandTestUtil.VALID_GRADUATION_AMY).build();
         EditCommand.EditPersonDescriptor descriptor =
-                new EditPersonDescriptorBuilder().withGraduatingYear(CommandTestUtil.VALID_GRADUATING_YEAR_AMY).build();
+                new EditPersonDescriptorBuilder().withGraduation(CommandTestUtil.VALID_GRADUATION_AMY).build();
         AddCommand addCommand = new AddCommand(indexLastPerson, descriptor);
 
         String expectedMessage = String.format(AddCommand.MESSAGE_ADD_INFO_SUCCESS, Messages.format(editedPerson));
