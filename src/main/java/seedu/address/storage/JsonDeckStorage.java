@@ -3,6 +3,8 @@ package seedu.address.storage;
 import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -35,6 +37,7 @@ public class JsonDeckStorage implements DeckStorage {
 
     @Override
     public Optional<ReadOnlyDeck> readDeck() throws DataLoadingException {
+
         return readDeck(filePath);
     }
 
@@ -46,6 +49,26 @@ public class JsonDeckStorage implements DeckStorage {
      */
     public Optional<ReadOnlyDeck> readDeck(Path filePath) throws DataLoadingException {
         requireNonNull(filePath);
+
+        if (!Files.exists(filePath)) {
+            try {
+                Files.createDirectories(filePath.getParent());
+                Files.createFile(filePath);
+                Files.write(filePath, "{}".getBytes()); // Create the 'deck.json' file with empty JSON content
+            } catch (IOException e) {
+                throw new DataLoadingException(e);
+            }
+        }
+
+        // Check if the file is empty or contains only whitespace
+        try {
+            String content = new String(Files.readAllBytes(filePath), StandardCharsets.UTF_8);
+            if (content.trim().isEmpty()) {
+                return Optional.empty();
+            }
+        } catch (IOException e) {
+            throw new DataLoadingException(e);
+        }
 
         Optional<JsonSerializableDeck> jsonDeck = JsonUtil.readJsonFile(
                 filePath, JsonSerializableDeck.class);
@@ -60,6 +83,7 @@ public class JsonDeckStorage implements DeckStorage {
             throw new DataLoadingException(ive);
         }
     }
+
 
     @Override
     public void saveDeck(ReadOnlyDeck deck) throws IOException {

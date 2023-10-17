@@ -48,7 +48,7 @@ public class CardBuilder {
     }
 
     public Card build() {
-        return new Card(question, answer);
+        return new Card(question, answer, "new");
     }
 
 }
