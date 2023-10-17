@@ -37,8 +37,7 @@ public class AddScheduleCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New schedule %1$s has been added.";
     public static final String MESSAGE_DUPLICATE_SCHEDULE = "This schedule already exists in the address book";
-    public static final String MESSAGE_CLASHING_SCHEDULE = "This tutor already has a clashing schedule in the address "
-            + "book";
+    public static final String MESSAGE_CLASHING_SCHEDULE = "This tutor has a clashing schedule in the address book";
 
     private final Index index;
     private final StartTime startTime;
