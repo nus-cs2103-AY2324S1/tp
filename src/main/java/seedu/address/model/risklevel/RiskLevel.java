@@ -1,13 +1,13 @@
 package seedu.address.model.risklevel;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
- * Represents a Tag in the address book.
+ * Represents a RiskLevel in the address book.
  * Guarantees: immutable; name is valid as declared in {@link #isValidRiskLevel(String)}
  */
 public class RiskLevel {
