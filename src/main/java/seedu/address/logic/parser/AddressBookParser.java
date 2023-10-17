@@ -9,13 +9,17 @@ import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddGCommand;
+import seedu.address.logic.commands.AddLCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.GithubCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.LinkedInCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.commands.ViewCommand;
@@ -84,6 +88,18 @@ public class AddressBookParser {
 
         case ViewCommand.COMMAND_WORD:
             return new ViewCommandParser().parse(arguments);
+
+        case AddLCommand.COMMAND_WORD:
+            return new AddLCommandParser().parse(arguments);
+
+        case AddGCommand.COMMAND_WORD:
+            return new AddGCommandParser().parse(arguments);
+
+        case LinkedInCommand.COMMAND_WORD:
+            return new LinkedInCommandParser().parse(arguments);
+
+        case GithubCommand.COMMAND_WORD:
+            return new GithubCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

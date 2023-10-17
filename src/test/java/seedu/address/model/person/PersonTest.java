@@ -98,7 +98,9 @@ public class PersonTest {
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags()
-                + ", remark=" + ALICE.getRemark() + ", status=" + ALICE.getStatus() + "}";
+                + ", remark=" + ALICE.getRemark() + ", status=" + ALICE.getStatus()
+                + (!ALICE.getLinkedIn().value.isEmpty() ? ", linkedin=" + ALICE.getLinkedIn() : "")
+                + (!ALICE.getGithub().value.isEmpty() ? ", github=" + ALICE.getGithub() : "") + "}";
         assertEquals(expected, ALICE.toString());
     }
 }
