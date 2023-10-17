@@ -9,6 +9,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -49,7 +50,8 @@ public class AddressBookParserTest {
     public void parseCommand_addInterview() throws Exception {
         Interview interview = TypicalInterviews.STANDARD_INTERVIEW;
         Index index = INDEX_FIRST_PERSON;
-        AddInterviewCommand command = (AddInterviewCommand) parser.parseCommand(InterviewUtil.getAddCommand(interview));
+        AddInterviewCommand command =
+                (AddInterviewCommand) parser.parseCommand(InterviewUtil.getAddCommand(index, interview));
         System.out.print(command);
         assertEquals(new AddInterviewCommand(index, interview.getJobRole(), interview.getInterviewTiming()), command);
     }

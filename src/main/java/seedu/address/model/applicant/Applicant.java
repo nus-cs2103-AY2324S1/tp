@@ -37,6 +37,15 @@ public class Applicant {
         this.address = address;
         this.tags.addAll(tags);
     }
+    public Applicant(Name name, Phone phone, Email email, Address address, Set<Tag> tags, boolean hasInterview) {
+        requireAllNonNull(name, phone, email, address, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.hasInterview = hasInterview;
+    }
 
     public Name getName() {
         return name;

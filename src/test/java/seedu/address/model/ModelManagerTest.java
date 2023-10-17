@@ -74,17 +74,14 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
+    public void hasApplicant_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.hasApplicant(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-<<<<<<< HEAD
+    public void hasApplicant_personNotInAddressBook_returnsFalse() {
         assertFalse(modelManager.hasInterview(STANDARD_INTERVIEW));
-=======
         assertFalse(modelManager.hasApplicant(ALICE));
->>>>>>> applicant
     }
 
     @Test

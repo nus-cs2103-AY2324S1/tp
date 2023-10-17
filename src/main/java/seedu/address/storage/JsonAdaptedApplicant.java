@@ -28,7 +28,7 @@ class JsonAdaptedApplicant {
     private final String phone;
     private final String email;
     private final String address;
-    private boolean hasInterview;
+    private final boolean hasInterview;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -107,7 +107,9 @@ class JsonAdaptedApplicant {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(applicantTags);
-        return new Applicant(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+
+
+        return new Applicant(modelName, modelPhone, modelEmail, modelAddress, modelTags, hasInterview);
     }
 
 }

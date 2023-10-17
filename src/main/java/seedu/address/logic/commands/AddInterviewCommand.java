@@ -82,6 +82,13 @@ public class AddInterviewCommand extends Command {
     }
 
     @Override
+    public String toString() {
+        return "AddInterviewCommand{" +
+                "jobRole='" + jobRole + '\'' +
+                '}';
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;

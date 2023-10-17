@@ -28,6 +28,14 @@ public class Interview {
         app.setInterview();
     }
 
+    public Interview(Applicant app, String role, String timing, boolean isDone) {
+        requireAllNonNull(app, role, timing, isDone);
+        applicant = app;
+        jobRole = role;
+        interviewTiming = timing;
+        this.isDone = isDone;
+    }
+
     /**
      * Returns true if both Interviews have the same Applicant & Timing or if both Interviews are the same object
      * Adapted from AB3's Person.isSamePerson() method
