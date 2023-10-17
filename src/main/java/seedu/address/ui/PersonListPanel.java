@@ -21,9 +21,9 @@ public class PersonListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
 
     @FXML
-    private VBox studentContainer;
+    private VBox columnContainer;
     @FXML
-    private Label studentTitle;
+    private Label columnTitle;
     @FXML
     private ListView<Person> personListView;
 
@@ -32,7 +32,7 @@ public class PersonListPanel extends UiPart<Region> {
      */
     public PersonListPanel(ObservableList<Person> personList) {
         super(FXML);
-        studentContainer.setAlignment(Pos.CENTER);
+        columnContainer.setAlignment(Pos.CENTER);
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
     }

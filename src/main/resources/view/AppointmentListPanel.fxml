@@ -3,7 +3,9 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.scene.control.Label?>
+<VBox fx:id="columnContainer" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <Label fx:id="columnTitle" text="Appointments" styleClass="column_title"/>
     <ListView fx:id="appointmentListView" VBox.vgrow="ALWAYS" />
 </VBox>
 
