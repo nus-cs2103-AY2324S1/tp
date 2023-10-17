@@ -9,10 +9,8 @@ import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
-<<<<<<< HEAD:src/main/java/seedu/address/logic/parser/UniMateParser.java
 import seedu.address.logic.commands.AddEventCommand;
-=======
->>>>>>> parent of 8b84f56e (Add Sort Command):src/main/java/seedu/address/logic/parser/AddressBookParser.java
+
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
@@ -22,10 +20,8 @@ import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
-<<<<<<< HEAD:src/main/java/seedu/address/logic/parser/UniMateParser.java
+
 import seedu.address.logic.commands.SortCommand;
-=======
->>>>>>> parent of 8b84f56e (Add Sort Command):src/main/java/seedu/address/logic/parser/AddressBookParser.java
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -89,15 +85,12 @@ public class UniMateParser {
         case FilterCommand.COMMAND_WORD:
             return new FilterCommandParser().parse(arguments);
 
-<<<<<<< HEAD:src/main/java/seedu/address/logic/parser/UniMateParser.java
         case SortCommand.COMMAND_WORD:
             return new SortCommand();
 
         case AddEventCommand.COMMAND_WORD:
             return new AddEventCommandParser().parse(arguments);
 
-=======
->>>>>>> parent of 8b84f56e (Add Sort Command):src/main/java/seedu/address/logic/parser/AddressBookParser.java
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
