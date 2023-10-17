@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.HashSet;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -113,8 +114,8 @@ public class ModelManager implements Model {
     @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
-        // TODO: Maybe change behaviour of this?
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        // TODO: Revise if this is intended behaviour
+        clearFilters();
     }
 
     @Override
@@ -136,10 +137,27 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void addFilter(Predicate<Person> predicate) {
         requireNonNull(predicate);
-        // TODO: update this to use the new filtered list
-        filteredPersons.setPredicate(predicate);
+        HashSet<Predicate<Person>> currentFilters = this.getFilterSettings().getFilterSet();
+        currentFilters.add(predicate);
+        this.setFilterSettings(new FilterSettings(currentFilters));
+        filteredPersons.setPredicate(this.getFilterSettings().getComposedFilter());
+    }
+
+    @Override
+    public void deleteFilter(Predicate<Person> predicate) {
+        requireNonNull(predicate);
+        HashSet<Predicate<Person>> currentFilters = this.getFilterSettings().getFilterSet();
+        currentFilters.remove(predicate);
+        this.setFilterSettings(new FilterSettings(currentFilters));
+        filteredPersons.setPredicate(this.getFilterSettings().getComposedFilter());
+    }
+
+    @Override
+    public void clearFilters() {
+        this.setFilterSettings(new FilterSettings());
+        filteredPersons.setPredicate(this.getFilterSettings().getComposedFilter());
     }
 
     @Override

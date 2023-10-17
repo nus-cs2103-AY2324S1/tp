@@ -12,9 +12,6 @@ import seedu.address.model.person.Person;
  * The API of the Model component.
  */
 public interface Model {
-    /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
-
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
@@ -91,8 +88,19 @@ public interface Model {
     ObservableList<Person> getFilteredPersonList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
-     * @throws NullPointerException if {@code predicate} is null.
+     * Adds the given predicate to filter list.
+     * {@code predicate} must not already exist in the address book.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void addFilter(Predicate<Person> predicate);
+
+    /**
+     * Deletes the given predicate.
+     * The predicate must exist in the filter list.
+     */
+    void deleteFilter(Predicate<Person> predicate);
+
+    /**
+     * Clears all filters.
+     */
+    void clearFilters();
 }

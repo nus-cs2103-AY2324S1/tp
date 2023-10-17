@@ -3,11 +3,9 @@ package seedu.address.commons.core;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
@@ -15,41 +13,40 @@ import seedu.address.model.person.Person;
  * Guarantees: immutable.
  */
 public class FilterSettings implements Serializable {
-    
-    private static final HashSet<Predicate<Person>> DEFAULT_FILTER = new HashSet<>();
+    private static final HashSet<Predicate<Person>> DEFAULT_FILTERS = new HashSet<>();
 
-    private final HashSet<Predicate<Person>> filterList;
+    private final HashSet<Predicate<Person>> filterSet;
 
     /**
      * Constructs a {@code FilterSettings} with the default filter.
      */
     public FilterSettings() {
-        this.filterList = DEFAULT_FILTER;
+        this.filterSet = DEFAULT_FILTERS;
     }
 
     /**
      * Constructs a {@code FilterSettings} with the specified filter.
      */
-    public FilterSettings(HashSet<Predicate<Person>> filter) {
+    public FilterSettings(HashSet<Predicate<Person>> filterSet) {
         @SuppressWarnings("unchecked")
-        HashSet<Predicate<Person>> clonedFilter = (HashSet<Predicate<Person>>) filter.clone();
-        this.filterList = clonedFilter;
+        HashSet<Predicate<Person>> clonedFilter = (HashSet<Predicate<Person>>) filterSet.clone();
+        this.filterSet = clonedFilter;
     }
 
-    public Set<Predicate<Person>> getFilterList() {
+    public HashSet<Predicate<Person>> getFilterSet() {
         @SuppressWarnings("unchecked")
-        HashSet<Predicate<Person>> filterList = (HashSet<Predicate<Person>>) this.filterList.clone();
-        return filterList;
+        HashSet<Predicate<Person>> filters = (HashSet<Predicate<Person>>) this.filterSet.clone();
+        return filters;
     }
 
     public Predicate<Person> getComposedFilter() {
         Predicate<Person> composedFilter = unused -> true;
 
-        for (Predicate<Person> predicate : filterList) {
+        for (Predicate<Person> predicate : filterSet) {
             composedFilter = predicate.and(predicate);
         }
 
-        return composedFilter.or(Model.PREDICATE_SHOW_ALL_PERSONS);
+        return composedFilter;
     }
 
     @Override
@@ -64,18 +61,18 @@ public class FilterSettings implements Serializable {
         }
 
         FilterSettings otherFilterSettings = (FilterSettings) other;
-        return filterList.equals(otherFilterSettings.filterList);
+        return filterSet.equals(otherFilterSettings.filterSet);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(filterList);
+        return Objects.hash(filterSet);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("filterList", filterList)
+                .add("filterList", filterSet)
                 .toString();
     }
 }
