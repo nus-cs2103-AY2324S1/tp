@@ -166,7 +166,11 @@ public class PatientBuilder {
         return this;
     }
 
-
+    /**
+     * Creates the {@Code Patient} object with the values stored.
+     *
+     * @return a Patient object.
+     */
     public Patient build() {
         return new Patient(name, phone, emergencyContact, email, address, remark, gender, ic, condition, bloodType,
                 tags);

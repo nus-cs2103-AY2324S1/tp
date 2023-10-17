@@ -40,13 +40,13 @@ public class JsonSerializableAddressBookTest {
     }
 
     // Change from testing persons to testing patients and doctors separately
-//    @Test
-//    public void toModelType_duplicatePersons_throwsIllegalValueException() throws Exception {
-//        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(DUPLICATE_PERSON_FILE,
-//                JsonSerializableAddressBook.class).get();
-//        assertThrows(IllegalValueException.class, JsonSerializableAddressBook.MESSAGE_DUPLICATE_PERSON,
-//                dataFromFile::toModelType);
-//    }
+    //    @Test
+    //    public void toModelType_duplicatePersons_throwsIllegalValueException() throws Exception {
+    //        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(DUPLICATE_PERSON_FILE,
+    //                JsonSerializableAddressBook.class).get();
+    //        assertThrows(IllegalValueException.class, JsonSerializableAddressBook.MESSAGE_DUPLICATE_PERSON,
+    //                dataFromFile::toModelType);
+    //    }
 
     @Test
     public void toModelType_duplicatePatients_throwsIllegalValueException() throws Exception {
