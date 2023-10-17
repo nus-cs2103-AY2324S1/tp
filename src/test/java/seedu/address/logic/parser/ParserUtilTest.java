@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndices.ONEBASED_ONE_TO_THREE;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -61,6 +62,30 @@ public class ParserUtilTest {
 
         // Leading and trailing whitespaces
         assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  "));
+    }
+
+    @Test
+    public void parseIndices_invalidInput_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseIndex("1 2 a b 3 c"));
+    }
+
+    @Test
+    public void parseIndices_outOfRangeInput_throwsParseException() {
+        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
+                -> ParserUtil.parseIndices(Long.toString(Integer.MAX_VALUE + 1) + "2 3 1"));
+    }
+
+    @Test
+    public void parseIndices_validInput_success() throws Exception {
+
+        // Leading and trailing whitespaces
+        assertEquals(ONEBASED_ONE_TO_THREE, ParserUtil.parseIndices("  1  2  3  "));
+
+        // duplicates
+        assertEquals(ONEBASED_ONE_TO_THREE, ParserUtil.parseIndices("1 2 2 3 3 1 3 2 1 3"));
+
+        // white spaces and duplicates
+        assertEquals(ONEBASED_ONE_TO_THREE, ParserUtil.parseIndices("   1 2   3  2 3    1    3   1  2 "));
     }
 
     @Test

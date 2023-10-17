@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.core.index.Indices;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
@@ -28,6 +29,7 @@ public class ParserUtil {
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -36,6 +38,26 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses a string of {@code oneBasedIndices} into {@code Indices} and returns it.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if at least one specified index is invalid (not non-zero unsigned integer).
+     */
+    public static Indices parseIndices(String oneBasedIndices) throws ParseException {
+        String[] indices = oneBasedIndices.trim().split("\\s+");
+        int size = indices.length;
+        int[] trimmedIndices = new int[size];
+
+        for (int i = 0; i < size; i++) {
+            if (!StringUtil.isNonZeroUnsignedInteger(indices[i])) {
+                throw new ParseException(MESSAGE_INVALID_INDEX);
+            }
+            trimmedIndices[i] = Integer.parseInt(indices[i]);
+        }
+        return Indices.fromOneBased(trimmedIndices);
     }
 
     /**

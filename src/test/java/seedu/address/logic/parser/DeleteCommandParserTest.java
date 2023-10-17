@@ -3,7 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndices.ONEBASED_ONE_TO_THREE;
 
 import org.junit.jupiter.api.Test;
 
@@ -15,6 +15,8 @@ import seedu.address.logic.commands.DeleteCommand;
  * same path through the DeleteCommand, and therefore we test only one of them.
  * The path variation for those two cases occur inside the ParserUtil, and
  * therefore should be covered by the ParserUtilTest.
+ * These test cases just test whether the DeleteCommandParser can create DeleteCommand
+ * on valid input, or throw a parse exception.
  */
 public class DeleteCommandParserTest {
 
@@ -22,7 +24,7 @@ public class DeleteCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, "1", new DeleteCommand(INDEX_FIRST_PERSON));
+        assertParseSuccess(parser, "1 3 2 1 2 3", new DeleteCommand(ONEBASED_ONE_TO_THREE));
     }
 
     @Test
