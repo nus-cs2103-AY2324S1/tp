@@ -22,6 +22,7 @@ public class Messages {
     public static final String MESSAGE_PERSON_VIEWED_OVERVIEW = "Person listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS = "Multiple values specified for the following "
             + "single-valued field(s): ";
+    public static final String MESSAGE_MEETINGS_LISTED_OVERVIEW = "%1$d meetings listed!";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
