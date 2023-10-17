@@ -77,22 +77,22 @@ public class ReadCommand extends Command {
 
     public String fieldValueToString(Person person) throws CommandException {
         switch (field) {
-            case "phone":
-                return person.getPhone().value;
-            case "address":
-                return person.getAddress().value;
-            case "email":
-                return person.getEmail().value;
-            case "bank account":
-                return person.getBankAccount().value;
-            case "join date":
-                return person.getJoinDate().value;
-            case "salary":
-                return person.getSalary().value;
-            case "annual leave":
-                return person.getAnnualLeave().value;
-            default:
-                throw new CommandException(Messages.MESSAGE_INVALID_FIELD_TO_READ);
+        case "phone":
+            return person.getPhone().value;
+        case "address":
+            return person.getAddress().value;
+        case "email":
+            return person.getEmail().value;
+        case "bank account":
+            return person.getBankAccount().value;
+        case "join date":
+            return person.getJoinDate().value;
+        case "salary":
+            return person.getSalary().value;
+        case "annual leave":
+            return person.getAnnualLeave().value;
+        default:
+            throw new CommandException(Messages.MESSAGE_INVALID_FIELD_TO_READ);
         }
     }
 
