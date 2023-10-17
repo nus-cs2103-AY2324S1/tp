@@ -24,7 +24,7 @@ public class AppointmentDescription {
      * @return
      */
     public static boolean isValidAppointmentDescription(String appointmentDescription) {
-        return appointmentDescription.matches("^[a-zA-Z0-9 ]+$");
+        return appointmentDescription.matches("^[a-zA-Z0-9 -]+$");
     }
 
     @Override

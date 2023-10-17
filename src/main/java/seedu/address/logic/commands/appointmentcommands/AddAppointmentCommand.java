@@ -58,6 +58,7 @@ public class AddAppointmentCommand extends Command {
         ReadOnlyAddressBook addressBook = model.getAddressBook();
         List<Person> latestPersonList = model.getFilteredPersonList();
         ObservableList<Appointment> appointmentList = addressBook.getAppointmentList();
+        ObservableList<Appointment> appList = model.getFilteredAppointmentList();
 
 
         if ((patientIndex) >= latestPersonList.size()) {
@@ -68,12 +69,11 @@ public class AddAppointmentCommand extends Command {
 
         // Add the Person patient to the current appointment
         currAppointment.setPatient(personToAdd);
-        model.addAppointment(currAppointment);
 
         // Clash in appointment slot
         final String MESSAGE_APPOINTMENT_CLASH = "Please choose another timing for the appointment. There " +
                 "already exists another appointment in this timing that clashes with the requested appointment.";
-        if (!AppointmentTime.isValidTimeSlot(appointmentList, currAppointment)) {
+        if (!AppointmentTime.isValidTimeSlot(appList, currAppointment)) {
             throw new CommandException(MESSAGE_APPOINTMENT_CLASH);
         }
 
@@ -85,7 +85,6 @@ public class AddAppointmentCommand extends Command {
         }
 
         model.addAppointment(currAppointment);
-        model.getFilteredAppointmentList();
         String APPOINTMENT_CONFIRMATION = "New appointment scheduled: %1$s.";
         return new CommandResult(String.format(APPOINTMENT_CONFIRMATION, currAppointment),
                 false, false, true);

@@ -12,6 +12,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.AppointmentDescription;
 import seedu.address.model.appointment.AppointmentTime;
 import seedu.address.model.person.Address;
@@ -203,7 +204,8 @@ public class ParserUtil {
         String trimmedDescription = description.trim();
 
         if (!AppointmentDescription.isValidAppointmentDescription(trimmedDescription)) {
-            throw new ParseException(Gender.MESSAGE_CONSTRAINTS);
+            System.out.println(AppointmentDescription.isValidAppointmentDescription(trimmedDescription));
+            throw new ParseException(AppointmentDescription.MESSAGE_CONSTRAINTS);
         }
         return new AppointmentDescription(trimmedDescription);
     }
