@@ -54,25 +54,15 @@ public class Indices {
     }
 
     public int[] getZeroBased() {
-        int[] result = new int[size];
-        Iterator<Index> iterator = this.zeroBasedIndices.iterator();
-        int counter = 0;
-        while (iterator.hasNext()) {
-            result[counter] = iterator.next().getZeroBased();
-            counter++;
-        }
-        return result;
+        return zeroBasedIndices.stream()
+                .mapToInt(Index::getZeroBased)
+                .toArray();
     }
 
     public int[] getOneBased() {
-        int[] result = new int[size];
-        Iterator<Index> iterator = this.zeroBasedIndices.iterator();
-        int counter = 0;
-        while (iterator.hasNext()) {
-            result[counter] = iterator.next().getOneBased();
-            counter++;
-        }
-        return result;
+        return zeroBasedIndices.stream()
+                .mapToInt(Index::getOneBased)
+                .toArray();
     }
 
     /**
