@@ -17,6 +17,7 @@ import com.opencsv.exceptions.CsvValidationException;
 import transact.commons.exceptions.DataLoadingException;
 import transact.model.ReadOnlyTransactionBook;
 import transact.model.TransactionBook;
+import transact.model.person.Person;
 import transact.model.transaction.Transaction;
 
 
@@ -83,24 +84,7 @@ public class CsvAdaptedTransactionStorage implements TransactionBookStorage {
 
     @Override
     public void saveTransactionBook(ReadOnlyTransactionBook transactionBook) throws IOException {
-        List<Transaction> transactions = transactionBook.getTransactionList();
-        try (CSVWriter writer = new CSVWriter(new FileWriter(filePath.toFile()))) {
-            String[] header = { "TransactionId", "Category", "Description", "Amount", "Date", "Person"};
-            writer.writeNext(header);
-
-            for (Transaction transaction : transactions) {
-                String transactionId = transaction.getTransactionId().toString();
-                String category = (transaction instanceof Transaction) ? "Expense" : "Revenue";
-                String person = (transaction.hasPersonInfo()) ? transaction.getPerson().toString() : "";
-                String description = transaction.getDescription().toString();
-                String amount = transaction.getAmount().toString();
-                String date = transaction.getDate().toString();
-
-                String[] row = { transactionId, category, description, amount, date, person };
-
-                writer.writeNext(row);
-            }
-        }
+        saveTransactionBook(transactionBook, filePath);
     }
 
     /**
@@ -117,7 +101,7 @@ public class CsvAdaptedTransactionStorage implements TransactionBookStorage {
             for (Transaction transaction : transactions) {
                 String transactionId = transaction.getTransactionId().toString();
                 String category = (transaction instanceof Transaction) ? "Expense" : "Revenue";
-                String person = (transaction.hasPersonInfo()) ? transaction.getPerson().toString() : "";
+                String person = (transaction.hasPersonInfo()) ? transaction.getPerson().toString() : Person.PERSON_UNSTATED.toString();
                 String description = transaction.getDescription().toString();
                 String amount = transaction.getAmount().toString();
                 String date = transaction.getDate().toString();

@@ -3,11 +3,16 @@ package transact.storage;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.nio.file.Path;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Optional;
+import java.util.Set;
 
 import transact.commons.exceptions.DataLoadingException;
 import transact.model.ReadOnlyTransactionBook;
 import transact.model.TransactionBook;
+import transact.model.person.*;
+import transact.model.tag.Tag;
 import transact.model.transaction.Transaction;
 import transact.model.transaction.info.Amount;
 import transact.model.transaction.info.Date;
@@ -43,9 +48,10 @@ public class CsvAdaptedTransactionStorageManualTest {
     }
 
     private static ReadOnlyTransactionBook createTestTransactionBook() {
+        Person person1 = new Person(new Name("John"), new Phone("43124312"), new Email("SSS@gmail.com"), new Address("PGP"), Collections.emptySet());
         Transaction transaction1 = new Transaction(new TransactionId("111111112"), TransactionType.REVENUE,
                 new Description("Revenue 1"),
-                new Amount(new BigDecimal("10.50")), new Date("01/05/2023"));
+                new Amount(new BigDecimal("10.50")), new Date("01/05/2023"), person1);
         Transaction transaction2 = new Transaction(new TransactionId("2222222"), TransactionType.EXPENSE,
                 new Description("Expense 1"),
                 new Amount(new BigDecimal("21.50")), new Date("01/05/2023"));
