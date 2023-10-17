@@ -73,7 +73,7 @@ public class Appointment {
      * @return The LocaleDateTime object representing Appointment date.
      * @throws IllegalArgumentException If input date does not match specified format.
      */
-    public static LocalDateTime parseAptDate(String input) throws IllegalArgumentException {
+    public static LocalDateTime parseAppointmentDate(String input) throws IllegalArgumentException {
         return LocalDateTime.parse(input, DATE_FORMATTER);
     }
 
@@ -83,7 +83,7 @@ public class Appointment {
      * @param appointment The string representation of the appointment.
      * @return The Appointment object.
      */
-    public static Appointment parseAptDescription(String appointment) {
+    public static Appointment parseAppointmentDescription(String appointment) {
         Logger logger = Logger.getLogger(Appointment.class.getName());
         Pattern pattern = Pattern.compile(VALIDATION_APT_REGEX);
         Matcher matcher = pattern.matcher(appointment);
@@ -91,6 +91,6 @@ public class Appointment {
         String valueField = matcher.group(1).trim();
         String dateField = matcher.group(2).trim();
 
-        return new Appointment(valueField, parseAptDate(dateField));
+        return new Appointment(valueField, parseAppointmentDate(dateField));
     }
 }

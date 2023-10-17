@@ -146,7 +146,7 @@ public class ParserUtil {
 
         LocalDateTime aptDate;
         try {
-            aptDate = Appointment.parseAptDate(aptDateString);
+            aptDate = Appointment.parseAppointmentDate(aptDateString);
         } catch (IllegalArgumentException e) {
             throw new ParseException(Appointment.MESSAGE_DATE_CONSTRAINTS);
         }

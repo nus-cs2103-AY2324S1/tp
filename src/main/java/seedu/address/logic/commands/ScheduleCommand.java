@@ -50,7 +50,7 @@ public class ScheduleCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person personWithApt = createPersonWithApt(personToEdit);
+        Person personWithApt = createPersonWithAppointment(personToEdit);
 
         model.setPerson(personToEdit, personWithApt);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -79,7 +79,7 @@ public class ScheduleCommand extends Command {
      * @param personToEdit The Person the appointment is scheduled to.
      * @return The Person with scheduled appointment.
      */
-    private Person createPersonWithApt(Person personToEdit) {
+    private Person createPersonWithAppointment(Person personToEdit) {
         return new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getNextOfKinName(), personToEdit.getNextOfKinPhone(),
                 personToEdit.getTags(), toAdd);

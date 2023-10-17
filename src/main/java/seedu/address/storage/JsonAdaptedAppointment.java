@@ -51,7 +51,7 @@ class JsonAdaptedAppointment {
             throw new IllegalValueException(Appointment.MESSAGE_APT_CONSTRAINTS);
         }
 
-        return Appointment.parseAptDescription(appointment);
+        return Appointment.parseAppointmentDescription(appointment);
     }
 
 }

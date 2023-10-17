@@ -121,7 +121,7 @@ public class PersonBuilder {
      * Sets the {@code Appointment} of the {@code Person} that we are building.
      */
     public PersonBuilder withAppointment(String appointment) {
-        this.appointment = Appointment.parseAptDescription(appointment);
+        this.appointment = Appointment.parseAppointmentDescription(appointment);
         return this;
     }
 
