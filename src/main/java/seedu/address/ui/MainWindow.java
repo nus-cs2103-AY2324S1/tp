@@ -114,17 +114,9 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        System.out.println("Before: " + patientListPanel);
         patientListPanel = new PatientListPanel(logic.getFilteredPatientList());
-        System.out.println("After: " + patientListPanel);
-        System.out.println("Root: " + patientListPanel.getRoot());
-        System.out.println("patientListPanelPlaceholder: " + patientListPanelPlaceholder);
         patientListPanelPlaceholder.getChildren().add(patientListPanel.getRoot());
-
-        System.out.println("Before: dp " + doctorListPanel);
         doctorListPanel = new DoctorListPanel(logic.getFilteredDoctorList());
-        System.out.println("After: dp" + doctorListPanel);
-        System.out.println("Root: dp " + doctorListPanel.getRoot());
         doctorListPanelPlaceholder.getChildren().add(doctorListPanel.getRoot());
 
 

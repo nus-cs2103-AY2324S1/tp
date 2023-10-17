@@ -126,7 +126,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setDoctor(Doctor target, Doctor editedDoctor) {
         requireNonNull(editedDoctor);
 
-        doctors.setPerson(target, editedDoctor);
+        doctors.setDoctor(target, editedDoctor);
     }
 
     /**
@@ -144,7 +144,9 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code key} must exist in the address book.
      */
     public void removeDoctor(Doctor key) {
-        doctors.remove(key);
+        if (doctors.contains(key)) {
+            doctors.remove(key);
+        }
     }
 
     //// util methods

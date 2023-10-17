@@ -61,32 +61,10 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
-     * Returns true if a patient with the same identity as {@code patient} exists in the address book.
-     */
-    boolean hasPatient(Patient patient);
-
-    /**
-     * Returns true if a doctor with the same identity as {@code doctor} exists in the address book.
-     */
-    boolean hasDoctor(Doctor doctor);
-
-    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */
     void deletePerson(Person target);
-
-    /**
-     * Deletes the given patient.
-     * The person must exist in the address book.
-     */
-    void deletePatient(Patient target);
-
-    /**
-     * Deletes the given doctor.
-     * The doctor must exist in the address book.
-     */
-    void deleteDoctor(Doctor target);
 
     /**
      * Adds the given person.
@@ -95,37 +73,11 @@ public interface Model {
     void addPerson(Person person);
 
     /**
-     * Adds the given patient.
-     * {@code patient} must not already exist in the address book.
-     */
-    void addPatient(Patient patient);
-
-    /**
-     * Adds the given doctor.
-     * {@code doctor} must not already exist in the address book.
-     */
-    void addDoctor(Doctor doctor);
-
-    /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
     void setPerson(Person target, Person editedPerson);
-
-    /**
-     * Replaces the given patient {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
-     */
-    void setPatient(Patient target, Patient editedPerson);
-
-    /**
-     * Replaces the given doctor {@code target} with {@code editedDoctor}.
-     * {@code target} must exist in the address book.
-     * The doctor identity of {@code editedDoctor} must not be the same as another existing person in the address book.
-     */
-    void setDoctor(Doctor target, Doctor editedDoctor);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
@@ -143,16 +95,4 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
-
-    /**
-     * Updates the filter of the filtered patient list to filter by the given {@code predicate}.
-     * @throws NullPointerException if {@code predicate} is null.
-     */
-    void updateFilteredPatientList(Predicate<Patient> predicate);
-
-    /**
-     * Updates the filter of the filtered doctor list to filter by the given {@code predicate}.
-     * @throws NullPointerException if {@code predicate} is null.
-     */
-    void updateFilteredDoctorList(Predicate<Doctor> predicate);
 }

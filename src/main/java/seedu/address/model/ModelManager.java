@@ -95,57 +95,20 @@ public class ModelManager implements Model {
         requireNonNull(person);
         if (person instanceof Patient) {
             return addressBook.hasPatient((Patient) person);
+        } else if (person instanceof Doctor) {
+            return addressBook.hasDoctor((Doctor) person);
         } else {
             return false;
         }
-    }
-
-    /**
-     * Returns true if a patient with the same identity as {@code patient} exists in the address book.
-     *
-     * @param patient
-     */
-    @Override
-    public boolean hasPatient(Patient patient) {
-        return false;
-    }
-
-    /**
-     * Returns true if a doctor with the same identity as {@code doctor} exists in the address book.
-     *
-     * @param doctor
-     */
-    @Override
-    public boolean hasDoctor(Doctor doctor) {
-        return false;
     }
 
     @Override
     public void deletePerson(Person target) {
         if (target instanceof Patient) {
             addressBook.removePatient((Patient) target);
+        } else if (target instanceof Doctor) {
+            addressBook.removeDoctor((Doctor) target);
         }
-    }
-
-    /**
-     * Deletes the given patient.
-     * The person must exist in the address book.
-     *
-     * @param target
-     */
-    @Override
-    public void deletePatient(Patient target) {
-
-    }
-
-    /**
-     * Deletes the given doctor.
-     * The doctor must exist in the address book.
-     *
-     * @param target
-     */
-    @Override
-    public void deleteDoctor(Doctor target) {
 
     }
 
@@ -153,30 +116,10 @@ public class ModelManager implements Model {
     public void addPerson(Person person) {
         if (person instanceof Patient) {
             addressBook.addPatient((Patient) person);
+        } else if (person instanceof Doctor) {
+            addressBook.addDoctor((Doctor) person);
         }
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-    }
-
-    /**
-     * Adds the given patient.
-     * {@code patient} must not already exist in the address book.
-     *
-     * @param patient
-     */
-    @Override
-    public void addPatient(Patient patient) {
-
-    }
-
-    /**
-     * Adds the given doctor.
-     * {@code doctor} must not already exist in the address book.
-     *
-     * @param doctor
-     */
-    @Override
-    public void addDoctor(Doctor doctor) {
-
     }
 
     @Override
@@ -184,33 +127,9 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
         if (target instanceof Patient && editedPerson instanceof Patient) {
             addressBook.setPatient((Patient) target, (Patient) editedPerson);
+        } else if (target instanceof Doctor && editedPerson instanceof Doctor) {
+            addressBook.setDoctor((Doctor) target, (Doctor) editedPerson);
         }
-    }
-
-    /**
-     * Replaces the given patient {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
-     *
-     * @param target
-     * @param editedPerson
-     */
-    @Override
-    public void setPatient(Patient target, Patient editedPerson) {
-
-    }
-
-    /**
-     * Replaces the given doctor {@code target} with {@code editedDoctor}.
-     * {@code target} must exist in the address book.
-     * The doctor identity of {@code editedDoctor} must not be the same as another existing person in the address book.
-     *
-     * @param target
-     * @param editedDoctor
-     */
-    @Override
-    public void setDoctor(Doctor target, Doctor editedDoctor) {
-
     }
 
     /**
@@ -244,22 +163,6 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPatients.setPredicate(predicate);
-    }
-
-    /**
-     * Updates the filter of the filtered patient list to filter by the given {@code predicate}.
-     *
-     * @param predicate
-     * @throws NullPointerException if {@code predicate} is null.
-     */
-    @Override
-    public void updateFilteredPatientList(Predicate<Patient> predicate) {
-
-    }
-
-    @Override
-    public void updateFilteredDoctorList(Predicate<Doctor> predicate) {
-        requireNonNull(predicate);
         filteredDoctors.setPredicate(predicate);
     }
 

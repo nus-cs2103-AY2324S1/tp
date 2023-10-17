@@ -9,7 +9,6 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.HBox?>
 
 
@@ -48,7 +47,7 @@
                     </padding>
                 </StackPane>
 
-                <HBox styleClass="pane-with-border" minHeight="${Region.USE_COMPUTED_SIZE}" prefWidth="340" HBox.hgrow="ALWAYS">
+                <HBox styleClass="pane-with-border" minHeight="700" prefWidth="340" HBox.hgrow="ALWAYS">
                     <VBox fx:id="patientList" styleClass="pane-with-border" minWidth="340" prefWidth="340" HBox.hgrow="ALWAYS">
                         <padding>
                             <Insets top="10" right="10" bottom="10" left="10"/>
