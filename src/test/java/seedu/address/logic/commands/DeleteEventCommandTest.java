@@ -38,7 +38,7 @@ public class DeleteEventCommandTest {
     public void execute_personNotFound_fails() throws CommandException {
         int personId = 999;
         assertCommandFailWithFeedback(() -> new DeleteEventCommand(personId, 1)
-                .execute(model), DeleteEventCommand.MESSAGE_PERSON_NOT_FOUNT + personId);
+                .execute(model), DeleteEventCommand.MESSAGE_PERSON_NOT_FOUND + personId);
     }
 
     @Test
