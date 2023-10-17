@@ -5,8 +5,13 @@ title: User Guide
 # lesSON User Guide
 lesSON is a **flashcard software aimed to help individuals with their memory work in school, optimized for use via a Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you can type fast, lesSON can get your contact management tasks done faster than traditional GUI apps.
 
-* Table of Contents
-{:toc}
+# Table of Contents
+1. [Feature List](#feature-list)
+    - [Adding a FlashCard](#adding-a-flashcard-add)
+    - [Deleting a Flashcard](#deleting-a-flashcard--delete)
+    - [View All Flashcards](#view-all-flashcards--list)
+    - [Editing a Specific Flashcard](#editing-a-specific-flashcard--edit)
+    - [Practise Flashcards](#practise-flashcards-practise)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -45,7 +50,7 @@ Examples:
 
 
 ### Deleting a Flashcard : `delete`
-Deletes the flashcard in the deck
+Deletes a flashcard in the deck
 
 Format: `delete INDEX`
 Examples:
@@ -76,7 +81,7 @@ Shows a list of all flashcards in the deck.
 Format: `list`
 Examples:
 ```
-list shows the full list of flashcards.
+(list shows the full list of flashcards.)
 ```
 
 #### Acceptable values for each parameters:
@@ -94,20 +99,23 @@ No parameters are needed
 #### Mockup
 ![mock up of list command](./images/UserGuide/mockup_list.png)
 
-### Editing a specific Flashcard : `edit`
+### Editing a Specific Flashcard : `edit`
 Edits an existing person in the address book.
 
-Format: `edit index/(q/a) (question/answer)`
+Format: `edit INDEX (q/a)/ (question/answer)`
 
 Examples:
 ```
-1. edit 1/q What is the colour of the sun changes the question at index 1 to “What is the colour of the sun”
-2. edit 1/a Red changes the answer at index 1 to “Red”
+1. edit 1 q/ What is the colour of the sun?
+   (changes the question at index 1 to “What is the colour of the sun?”)
+   
+2. edit 1 a/ Red 
+   (changes the answer at index 1 to “Red”)
 ```
 #### Expected output:
 ```
 “Successfully edited flashcard” message will be returned to the user via the CLI
-“Invalid input - input (<input>) is not an accepted value. Please enter an integer between 0 and deck.length()” message will be displayed on error.
+“The card index provided is invalid"
 ```
 #### Mockup:
 ![mock up of edit command](./images/UserGuide/mockup_edit.png)
@@ -116,21 +124,25 @@ Examples:
 ### Practise Flashcards: `practise`
 Practise a single Flashcard in the deck
 
-Format: `practise INDEX`
+Format: `practise INDEX d/ DIFFICULTY`
 
 #### Acceptable values for each parameters:
 1. Index must be positive integer
 2. Index cannot exceed size of the deck
+3. Difficulty can only be `easy`, `medium` or `hard`
 
 #### Examples:
 ```
-practise 1 displays the question of the card of index 1, click enter to reveal the answer
-(Practise the Flashcard at the specified INDEX. The index refers to the index number shown in the displayed deck. ​))
+practise 1 d/ easy
+(displays the answer of the card of index 1)
 ```
 #### Expected outputs:
 ```
-displays the question of the card of index (<input>), click enter to reveal the answer
-“Invalid input - input (<input>) is not an accepted value. Please enter an integer between 0 and deck.length()” message will be displayed on error.
+practise 1 d/ easy
+"Answer: ans (Difficulty level: easy)"
+
+practise 10 d/ easy
+"The card index provided is invalid"
 ```
 
 #### Mockup:
