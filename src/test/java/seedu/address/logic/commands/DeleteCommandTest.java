@@ -17,7 +17,11 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+
+import java.util.Arrays;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -80,7 +84,7 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void equals() {
+    public void equalsForIndex() {
         DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_PERSON);
         DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_PERSON);
 
@@ -102,10 +106,48 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void toStringMethod() {
+    public void equalsForName() {
+        Person firstPersonToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person secondPersonToDelete = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        NameContainsKeywordsPredicate firstPersonName =
+                new NameContainsKeywordsPredicate(Arrays.asList(
+                        new String[] {firstPersonToDelete.getName().toString()}));
+        NameContainsKeywordsPredicate secondPersonName =
+                new NameContainsKeywordsPredicate(Arrays.asList(
+                        new String[] {secondPersonToDelete.getName().toString()}));
+        DeleteCommand deleteFirstCommand = new DeleteCommand(firstPersonName);
+        DeleteCommand deleteSecondCommand = new DeleteCommand(secondPersonName);
+        // same object -> returns true
+        assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
+
+        // same values -> returns true
+        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(firstPersonName);
+        assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
+
+        // different types -> returns false
+        assertFalse(deleteFirstCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(deleteFirstCommand.equals(null));
+
+        // different person -> returns false
+        assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
+    }
+
+    @Test
+    public void toStringMethodForIndex() {
         Index targetIndex = Index.fromOneBased(1);
         DeleteCommand deleteCommand = new DeleteCommand(targetIndex);
         String expected = DeleteCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
+        assertEquals(expected, deleteCommand.toString());
+    }
+
+    @Test
+    public void toStringMethodForName() {
+        NameContainsKeywordsPredicate targetName =
+                new NameContainsKeywordsPredicate(Arrays.asList(new String[] {"James"}));
+        DeleteCommand deleteCommand = new DeleteCommand(targetName);
+        String expected = DeleteCommand.class.getCanonicalName() + "{targetName=" + targetName.toString() + "}";
         assertEquals(expected, deleteCommand.toString());
     }
 
