@@ -11,7 +11,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditEmployeeDescriptor;
-import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
 
 /**

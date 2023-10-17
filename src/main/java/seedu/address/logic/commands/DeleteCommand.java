@@ -37,6 +37,10 @@ public class DeleteCommand extends Command {
     /* The name of the employee to be deleted*/
     private final NameContainsKeywordsPredicate name;
 
+    /**
+     * The constructor for DeleteCommand to take in index
+     * @param targetIndex The index of the employee to be deleted
+     */
     public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
         this.name = null;
@@ -49,7 +53,6 @@ public class DeleteCommand extends Command {
     public DeleteCommand(NameContainsKeywordsPredicate name) {
         this.targetIndex = null;
         this.name = name;
-
     }
 
     @Override
@@ -83,6 +86,12 @@ public class DeleteCommand extends Command {
                 .toString();
     }
 
+    /**
+     * Deletes the employee identified by the index number used in the displayed employee list.
+     * @param model {@code Model} which the command should operate on.
+     * @return A command result that contains the message to be displayed to the user.
+     * @throws CommandException If the index is invalid.
+     */
     public CommandResult deleteByIndex(Model model) throws CommandException {
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         List<Person> lastShownList = model.getFilteredPersonList();
@@ -95,6 +104,12 @@ public class DeleteCommand extends Command {
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(employeeToDelete)));
     }
 
+    /**
+     * Deletes the employee identified by the name used in the displayed employee list.
+     * @param model {@code Model} which the command should operate on.
+     * @return A command result that contains the message to be displayed to the user.
+     * @throws CommandException If the name is invalid.
+     */
     public CommandResult deleteByName(Model model) throws CommandException {
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         List<Person> fullList = model.getFilteredPersonList();
