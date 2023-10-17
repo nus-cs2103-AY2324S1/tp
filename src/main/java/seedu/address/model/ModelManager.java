@@ -13,45 +13,43 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Card;
 
-
-
 /**
  * Represents the in-memory model of the address book data.
  */
-public class ModelManager2 implements Model2 {
-    private static final Logger logger = LogsCenter.getLogger(ModelManager2.class);
+public class ModelManager implements Model {
+    private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final Deck deck;
-    private final UserPrefs2 userPrefs;
+    private final UserPrefs userPrefs;
     private final FilteredList<Card> filteredCards;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager2(ReadOnlyDeck deck, ReadOnlyUserPrefs2 userPrefs) {
+    public ModelManager(ReadOnlyDeck deck, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(deck, userPrefs);
 
         logger.fine("Initializing with address book: " + deck + " and user prefs " + userPrefs);
 
         this.deck = new Deck(deck);
-        this.userPrefs = new UserPrefs2(userPrefs);
+        this.userPrefs = new UserPrefs(userPrefs);
         filteredCards = new FilteredList<>(this.deck.getCardList());
     }
 
-    public ModelManager2() {
-        this(new Deck(), new UserPrefs2());
+    public ModelManager() {
+        this(new Deck(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
 
     @Override
-    public void setUserPrefs(ReadOnlyUserPrefs2 userPrefs) {
+    public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
         requireNonNull(userPrefs);
         this.userPrefs.resetData(userPrefs);
     }
 
     @Override
-    public ReadOnlyUserPrefs2 getUserPrefs() {
+    public ReadOnlyUserPrefs getUserPrefs() {
         return userPrefs;
     }
     @Override
@@ -136,11 +134,11 @@ public class ModelManager2 implements Model2 {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof ModelManager2)) {
+        if (!(other instanceof ModelManager)) {
             return false;
         }
 
-        ModelManager2 otherModelManager = (ModelManager2) other;
+        ModelManager otherModelManager = (ModelManager) other;
         return deck.equals(otherModelManager.deck)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredCards.equals(otherModelManager.filteredCards);

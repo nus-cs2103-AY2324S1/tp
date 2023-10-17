@@ -8,23 +8,22 @@ import java.util.logging.Logger;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.model.ReadOnlyDeck;
-import seedu.address.model.ReadOnlyUserPrefs2;
-import seedu.address.model.UserPrefs2;
-
+import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.UserPrefs;
 
 /**
  * Manages storage of Deck data in local storage.
  */
-public class StorageManager2 implements Storage2 {
+public class StorageManager implements Storage {
 
-    private static final Logger logger = LogsCenter.getLogger(StorageManager2.class);
+    private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private DeckStorage deckStorage;
-    private UserPrefsStorage2 userPrefsStorage;
+    private UserPrefsStorage userPrefsStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code DeckStorage} and {@code UserPrefStorage}.
      */
-    public StorageManager2(DeckStorage deckStorage, UserPrefsStorage2 userPrefsStorage) {
+    public StorageManager(DeckStorage deckStorage, UserPrefsStorage userPrefsStorage) {
         this.deckStorage = deckStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
@@ -37,12 +36,12 @@ public class StorageManager2 implements Storage2 {
     }
 
     @Override
-    public Optional<UserPrefs2> readUserPrefs() throws DataLoadingException {
+    public Optional<UserPrefs> readUserPrefs() throws DataLoadingException {
         return userPrefsStorage.readUserPrefs();
     }
 
     @Override
-    public void saveUserPrefs(ReadOnlyUserPrefs2 userPrefs) throws IOException {
+    public void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException {
         userPrefsStorage.saveUserPrefs(userPrefs);
     }
 

@@ -7,14 +7,15 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyDeck;
 import seedu.address.model.person.Card;
-
 
 /**
  * API of the Logic component
  */
-public interface Logic2 {
+public interface Logic {
+
     /**
      * Executes the command and returns the result.
      * @param commandText The command as entered by the user.
@@ -27,13 +28,12 @@ public interface Logic2 {
     /**
      * Returns the Deck.
      *
-     * @see seedu.address.model.Model2#getDeck()
+     * @see Model#getDeck()
      */
     ReadOnlyDeck getDeck();
 
     /** Returns an unmodifiable view of the filtered list of cards */
     ObservableList<Card> getFilteredCardList();
-
 
     /**
      * Returns the user prefs' deck file path.
@@ -49,4 +49,5 @@ public interface Logic2 {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
 }

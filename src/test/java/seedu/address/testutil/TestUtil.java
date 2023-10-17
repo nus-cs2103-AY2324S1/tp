@@ -6,7 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.model.Model2;
+import seedu.address.model.Model;
 import seedu.address.model.person.Card;
 
 
@@ -36,21 +36,21 @@ public class TestUtil {
     /**
      * Returns the middle index of the person in the {@code model}'s person list.
      */
-    public static Index getMidIndex(Model2 model) {
+    public static Index getMidIndex(Model model) {
         return Index.fromOneBased(model.getFilteredCardList().size() / 2);
     }
 
     /**
      * Returns the last index of the person in the {@code model}'s person list.
      */
-    public static Index getLastIndex(Model2 model) {
+    public static Index getLastIndex(Model model) {
         return Index.fromOneBased(model.getFilteredCardList().size());
     }
 
     /**
      * Returns the person in the {@code model}'s person list at {@code index}.
      */
-    public static Card getCard(Model2 model, Index index) {
+    public static Card getCard(Model model, Index index) {
         return model.getFilteredCardList().get(index.getZeroBased());
     }
 }

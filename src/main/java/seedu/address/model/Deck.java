@@ -9,8 +9,6 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Card;
 import seedu.address.model.person.UniqueCardList;
 
-
-
 /**
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSameCard comparison)
@@ -66,6 +64,7 @@ public class Deck implements ReadOnlyDeck {
      */
     public boolean hasCard(Card card) {
         requireNonNull(card);
+
         return cards.contains(card);
     }
 

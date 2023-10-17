@@ -57,7 +57,4 @@ public class Answer {
         return answer.hashCode();
     }
 
-
-
-
 }

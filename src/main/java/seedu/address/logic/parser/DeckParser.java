@@ -1,25 +1,22 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages2.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.Messages2.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.AddCommand2;
-import seedu.address.logic.commands.Command2;
-import seedu.address.logic.commands.DeleteCommand2;
-import seedu.address.logic.commands.EditCommand2;
-import seedu.address.logic.commands.ExitCommand2;
+import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCommand2;
+import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.PractiseCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-
-
-
 
 /**
  * Parses user input.
@@ -39,7 +36,7 @@ public class DeckParser {
      * @return the command based on the user input
      * @throws ParseException if the user input does not conform the expected format
      */
-    public Command2 parseCommand(String userInput) throws ParseException {
+    public Command parseCommand(String userInput) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -55,20 +52,20 @@ public class DeckParser {
 
         switch (commandWord) {
 
-        case AddCommand2.COMMAND_WORD:
-            return new AddCommandParser2().parse(arguments);
+        case AddCommand.COMMAND_WORD:
+            return new AddCommandParser().parse(arguments);
 
-        case EditCommand2.COMMAND_WORD:
-            return new EditCommandParser2().parse(arguments);
+        case EditCommand.COMMAND_WORD:
+            return new EditCommandParser().parse(arguments);
 
-        case DeleteCommand2.COMMAND_WORD:
-            return new DeleteCommandParser2().parse(arguments);
+        case DeleteCommand.COMMAND_WORD:
+            return new DeleteCommandParser().parse(arguments);
 
-        case ListCommand2.COMMAND_WORD:
-            return new ListCommand2();
+        case ListCommand.COMMAND_WORD:
+            return new ListCommand();
 
-        case ExitCommand2.COMMAND_WORD:
-            return new ExitCommand2();
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
 
         case PractiseCommand.COMMAND_WORD:
             return new PractiseCommandParser().parse(arguments);

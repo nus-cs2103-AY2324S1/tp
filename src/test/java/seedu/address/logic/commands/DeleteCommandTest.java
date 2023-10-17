@@ -12,10 +12,10 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CARD;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.Messages2;
-import seedu.address.model.Model2;
-import seedu.address.model.ModelManager2;
-import seedu.address.model.UserPrefs2;
+import seedu.address.logic.Messages;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Card;
 
 /**
@@ -24,17 +24,17 @@ import seedu.address.model.person.Card;
  */
 public class DeleteCommandTest {
 
-    private Model2 model = new ModelManager2(getTypicalDeck(), new UserPrefs2());
+    private Model model = new ModelManager(getTypicalDeck(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Card cardToDelete = model.getFilteredCardList().get(INDEX_FIRST_CARD.getZeroBased());
-        DeleteCommand2 deleteCommand = new DeleteCommand2(INDEX_FIRST_CARD);
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_CARD);
 
-        String expectedMessage = String.format(DeleteCommand2.MESSAGE_DELETE_CARD_SUCCESS,
-                Messages2.format(cardToDelete));
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_CARD_SUCCESS,
+                Messages.format(cardToDelete));
 
-        ModelManager2 expectedModel = new ModelManager2(model.getDeck(), new UserPrefs2());
+        ModelManager expectedModel = new ModelManager(model.getDeck(), new UserPrefs());
         expectedModel.deleteCard(cardToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
@@ -43,21 +43,21 @@ public class DeleteCommandTest {
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredCardList().size() + 1);
-        DeleteCommand2 deleteCommand = new DeleteCommand2(outOfBoundIndex);
+        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, Messages2.MESSAGE_INVALID_CARD_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_CARD_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        DeleteCommand2 deleteFirstCommand = new DeleteCommand2(INDEX_FIRST_CARD);
-        DeleteCommand2 deleteSecondCommand = new DeleteCommand2(INDEX_SECOND_CARD);
+        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_CARD);
+        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_CARD);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteCommand2 deleteFirstCommandCopy = new DeleteCommand2(INDEX_FIRST_CARD);
+        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST_CARD);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
@@ -73,15 +73,15 @@ public class DeleteCommandTest {
     @Test
     public void toStringMethod() {
         Index targetIndex = Index.fromOneBased(1);
-        DeleteCommand2 deleteCommand = new DeleteCommand2(targetIndex);
-        String expected = DeleteCommand2.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
+        DeleteCommand deleteCommand = new DeleteCommand(targetIndex);
+        String expected = DeleteCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
         assertEquals(expected, deleteCommand.toString());
     }
 
     /**
      * Updates {@code model}'s filtered list to show no one.
      */
-    private void showNoCard(Model2 model) {
+    private void showNoCard(Model model) {
         model.updateFilteredCardList(p -> false);
 
         assertTrue(model.getFilteredCardList().isEmpty());

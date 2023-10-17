@@ -8,12 +8,10 @@ import java.util.Objects;
 
 import seedu.address.commons.core.GuiSettings;
 
-
-
 /**
  * Represents User's preferences.
  */
-public class UserPrefs2 implements ReadOnlyUserPrefs2 {
+public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
     private Path deckFilePath = Paths.get("data" , "deck.json");
@@ -21,12 +19,12 @@ public class UserPrefs2 implements ReadOnlyUserPrefs2 {
     /**
      * Creates a {@code UserPrefs} with default values.
      */
-    public UserPrefs2() {}
+    public UserPrefs() {}
 
     /**
      * Creates a {@code UserPrefs} with the prefs in {@code userPrefs}.
      */
-    public UserPrefs2(ReadOnlyUserPrefs2 userPrefs) {
+    public UserPrefs(ReadOnlyUserPrefs userPrefs) {
         this();
         resetData(userPrefs);
     }
@@ -34,7 +32,7 @@ public class UserPrefs2 implements ReadOnlyUserPrefs2 {
     /**
      * Resets the existing data of this {@code UserPrefs} with {@code newUserPrefs}.
      */
-    public void resetData(ReadOnlyUserPrefs2 newUserPrefs) {
+    public void resetData(ReadOnlyUserPrefs newUserPrefs) {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
         setDeckFilePath(newUserPrefs.getDeckFilePath());
@@ -65,11 +63,11 @@ public class UserPrefs2 implements ReadOnlyUserPrefs2 {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof UserPrefs2)) {
+        if (!(other instanceof UserPrefs)) {
             return false;
         }
 
-        UserPrefs2 otherUserPrefs = (UserPrefs2) other;
+        UserPrefs otherUserPrefs = (UserPrefs) other;
         return guiSettings.equals(otherUserPrefs.guiSettings)
                 && deckFilePath.equals(otherUserPrefs.deckFilePath);
     }
@@ -81,10 +79,10 @@ public class UserPrefs2 implements ReadOnlyUserPrefs2 {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Gui Settings : " + guiSettings);
-        sb.append("\nLocal data file location : " + deckFilePath);
-        return sb.toString();
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Gui Settings : ").append(guiSettings);
+        stringBuilder.append("\nLocal data file location : ").append(deckFilePath);
+        return stringBuilder.toString();
     }
 
 }

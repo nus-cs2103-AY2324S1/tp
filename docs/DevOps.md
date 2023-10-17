@@ -3,8 +3,10 @@ layout: page
 title: DevOps guide
 ---
 
-* Table of Contents
-{:toc}
+# Table of Contents
+1. [Build automation](#build-automation)
+2. [Continuous integration (CI)](#continuous-integration-ci)
+3. [Making a release](#making-a-release)
 
 --------------------------------------------------------------------------------------------------------------------
 

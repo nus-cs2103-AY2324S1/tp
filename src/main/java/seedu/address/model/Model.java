@@ -7,23 +7,22 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Card;
 
-
 /**
  * The API of the Model component.
  */
-public interface Model2 {
+public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Card> PREDICATE_SHOW_ALL_CARDS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
-    void setUserPrefs(ReadOnlyUserPrefs2 userPrefs);
+    void setUserPrefs(ReadOnlyUserPrefs userPrefs);
 
     /**
      * Returns the user prefs.
      */
-    ReadOnlyUserPrefs2 getUserPrefs();
+    ReadOnlyUserPrefs getUserPrefs();
 
     /**
      * Returns the user prefs' GUI settings.
@@ -45,7 +44,6 @@ public interface Model2 {
      */
     void setDeckFilePath(Path cardFilePath);
 
-
     /**
      * Returns the Deck
      */
@@ -55,8 +53,6 @@ public interface Model2 {
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
     boolean hasCard(Card card);
-
-
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
@@ -88,4 +84,5 @@ public interface Model2 {
      * Replaces deck data with the data in {@code deck}.
      */
     public void setDeck(ReadOnlyDeck deck);
+
 }

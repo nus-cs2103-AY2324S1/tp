@@ -6,22 +6,19 @@ import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.model.ReadOnlyDeck;
-import seedu.address.model.ReadOnlyUserPrefs2;
-import seedu.address.model.UserPrefs2;
-
-
-
+import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.UserPrefs;
 
 /**
  * API of the Storage component
  */
-public interface Storage2 extends DeckStorage, UserPrefsStorage2 {
+public interface Storage extends DeckStorage, UserPrefsStorage {
 
     @Override
-    Optional<UserPrefs2> readUserPrefs() throws DataLoadingException;
+    Optional<UserPrefs> readUserPrefs() throws DataLoadingException;
 
     @Override
-    void saveUserPrefs(ReadOnlyUserPrefs2 userPrefs) throws IOException;
+    void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException;
 
     @Override
     Path getDeckFilePath();
