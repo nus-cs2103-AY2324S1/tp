@@ -37,4 +37,33 @@ public class Lesson {
 
     // TODO: Tasks
     // private TaskContainer tasks;
+
+    /**
+     * Serializes the start to a String
+     * @return stringified version
+     */
+    public String serializeStart() {
+        return this.start.toString();
+    }
+    /**
+     * Serializes the start to a String
+     * @return stringified version
+     */
+    public String serializeEnd() {
+        return this.end.toString();
+    }
+    /**
+     * Serializes the start to a String
+     * @return stringified version
+     */
+    public String serializeSubject() {
+        return this.subject.subjectName.toString(); // TODO public access
+    }
+    /**
+     * Serializes the start to a String
+     * @return stringified version
+     */
+    public String serializeStudents() {
+        return ""; // TODO: serialzie as string
+    }
 }

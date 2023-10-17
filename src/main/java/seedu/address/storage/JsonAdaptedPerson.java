@@ -32,7 +32,7 @@ class JsonAdaptedPerson {
     private final String address;
     private final List<JsonAdaptedSubject> subjects = new ArrayList<>();
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
-    private final String schedule;
+    private final JsonSerializableSchedule schedule;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -41,7 +41,7 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("subjects") List<JsonAdaptedSubject> subjects,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("schedule") String schedule) {
+            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("schedule") JsonSerializableSchedule schedule) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -69,7 +69,7 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        schedule = source.getSchedule().serialize();
+        schedule = null;
     }
 
     /**
@@ -122,7 +122,7 @@ class JsonAdaptedPerson {
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
         // construct a schedule from the stored input
-        final Schedule modelSchedule = Schedule.de
+        final Schedule modelSchedule = null; // todo
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelSubjects, modelTags, modelSchedule);
     }
 
