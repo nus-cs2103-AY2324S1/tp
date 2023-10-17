@@ -48,6 +48,8 @@ public class LogicManager2 implements Logic2 {
 
         CommandResult commandResult;
         Command2 command = deckParser.parseCommand(commandText);
+        String answer;
+
         commandResult = command.execute(model);
 
         try {

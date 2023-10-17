@@ -13,14 +13,24 @@ import seedu.address.commons.util.ToStringBuilder;
 public class Card {
     private final Question question;
     private final Answer answer;
+    private String diffculty;
 
     /**
      * Every field must be present and not null.
      */
-    public Card(Question question, Answer answer) {
+    public Card(Question question, Answer answer, String difficulty) {
         requireAllNonNull(question, answer);
         this.question = question;
         this.answer = answer;
+        this.diffculty = difficulty;
+    }
+
+    public void setDifficulty(String diffculty) {
+        this.diffculty = diffculty;
+    }
+
+    public String getDifficulty() {
+        return this.diffculty;
     }
 
     public Question getQuestion() {
@@ -76,5 +86,14 @@ public class Card {
                 .add("question", question)
                 .add("answer", answer)
                 .toString();
+    }
+
+    public String toQuestiontoString() {
+        return "Question: " + this.getQuestion().toString();
+    }
+
+
+    public String toAnswertoString() {
+        return "Question: " + this.getQuestion().toString();
     }
 }
