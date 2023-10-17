@@ -6,10 +6,10 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.interview.Interview;
-import seedu.address.model.interview.UniqueInterviewList;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.applicant.UniqueApplicantList;
+import seedu.address.model.interview.Interview;
+import seedu.address.model.interview.UniqueInterviewList;
 
 /**
  * Wraps all data at the address-book level

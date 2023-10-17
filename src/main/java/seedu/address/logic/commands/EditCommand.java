@@ -85,14 +85,16 @@ public class EditCommand extends Command {
 
         model.setApplicant(applicantToEdit, editedApplicant);
         model.updateFilteredApplicantList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_APPLICANT_SUCCESS, Messages.formatApplicant(editedApplicant)));
+        return new CommandResult(String.format(MESSAGE_EDIT_APPLICANT_SUCCESS,
+                Messages.formatApplicant(editedApplicant)));
     }
 
     /**
      * Creates and returns a {@code Applicant} with the details of {@code applicantToEdit}
      * edited with {@code editApplicantDescriptor}.
      */
-    private static Applicant createEditedApplicant(Applicant applicantToEdit, EditApplicantDescriptor editApplicantDescriptor) {
+    private static Applicant createEditedApplicant(Applicant applicantToEdit,
+                                                   EditApplicantDescriptor editApplicantDescriptor) {
         assert applicantToEdit != null;
 
         Name updatedName = editApplicantDescriptor.getName().orElse(applicantToEdit.getName());
