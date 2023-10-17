@@ -130,6 +130,17 @@ UI mockup:
 ![Sort UI Mockup](./images/sort.png)
 
 ---
+### `addi` : Adding an interview to an applicant
+
+Adds a new interview to an applicant
+
+Format: `addi INDEX t/TYPE`
+
+Example:
+* `add 1 t/technical`
+* `add 3 t/screening`
+
+---
 ### `clear` : Clearing all applicant entries
 
 Clears all the current data stored in the system.

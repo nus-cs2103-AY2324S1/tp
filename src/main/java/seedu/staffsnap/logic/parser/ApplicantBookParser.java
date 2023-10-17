@@ -33,8 +33,8 @@ public class ApplicantBookParser {
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
     private static final Logger logger = LogsCenter.getLogger(ApplicantBookParser.class);
-    private Boolean IsConfirmedNext = false;
-    private Boolean IsConfirmed = false;
+    private Boolean isConfirmedNext = false;
+    private Boolean isConfirmed = false;
 
 
     /**
@@ -60,8 +60,8 @@ public class ApplicantBookParser {
         // Lower level log messages are used sparingly to minimize noise in the code.
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
 
-        IsConfirmed = IsConfirmedNext;
-        IsConfirmedNext = false;
+        isConfirmed = isConfirmedNext;
+        isConfirmedNext = false;
 
         switch (commandWord) {
 
@@ -75,14 +75,14 @@ public class ApplicantBookParser {
             return new DeleteCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
-            if (IsConfirmed) {
+            if (isConfirmed) {
                 return new ClearCommand();
             } else {
                 logger.finer("This user input caused a ParseException: " + userInput);
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
             }
         case ConfirmationCommand.COMMAND_WORD:
-            IsConfirmedNext = true;
+            isConfirmedNext = true;
             return new ConfirmationCommand();
 
         case FindCommand.COMMAND_WORD:
@@ -108,5 +108,4 @@ public class ApplicantBookParser {
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-
 }
