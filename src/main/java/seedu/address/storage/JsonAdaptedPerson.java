@@ -122,10 +122,10 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        Name modelAnimalName = animalName != null ? new Name(animalName) : null;
-        Availability modelAvailability = availability != null ? new Availability(availability) : null;
-        AnimalType modelAnimaltype = animalType != null ? new AnimalType(animalType, availability) : null;
-        Housing modelHousing = housing != null ? new Housing(housing) : null;
+        Name modelAnimalName = new Name(animalName);
+        Availability modelAvailability = new Availability(availability);
+        AnimalType modelAnimaltype = new AnimalType(animalType, availability);
+        Housing modelHousing = new Housing(housing);
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelHousing,
                 modelAvailability, modelAnimalName, modelAnimaltype, modelTags);

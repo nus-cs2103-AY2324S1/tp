@@ -28,13 +28,10 @@ public class AnimalType {
         requireNonNull(availability);
         requireNonNull(value);
 
-        // Validate the availability
         if (availability.equals("Available")) {
             checkArgument(isValidAnimalType(value, VALIDATION_REGEX_AVAILABLE), MESSAGE_CONSTRAINTS);
         } else if (availability.equals("NotAvailable")) {
             checkArgument(isValidAnimalType(value, VALIDATION_REGEX_NOT_AVAILABLE), MESSAGE_CONSTRAINTS);
-        } else {
-            // Handle other availability values or raise an exception if needed
         }
 
         this.value = value;
