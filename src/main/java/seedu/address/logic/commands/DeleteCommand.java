@@ -4,12 +4,12 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.employee.Employee;
+import seedu.address.model.employee.Id;
 
 /**
  * Deletes an employee identified using its displayed index from the address book.
@@ -19,16 +19,16 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the employee identified by the index number used in the displayed employee list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + ": Deletes the employee identified by the unique ID in the displayed employee list.\n"
+            + "Parameters: ID (must be in the exact EID format)\n"
+            + "Example: " + COMMAND_WORD + " EID1234-5678";
 
     public static final String MESSAGE_DELETE_EMPLOYEE_SUCCESS = "Deleted employee: %1$s";
 
-    private final Index targetIndex;
+    private final Id targetId;
 
-    public DeleteCommand(Index targetIndex) {
-        this.targetIndex = targetIndex;
+    public DeleteCommand(Id targetId) {
+        this.targetId = targetId;
     }
 
     @Override
@@ -36,13 +36,13 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         List<Employee> lastShownList = model.getFilteredEmployeeList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_EMPLOYEE_DISPLAYED_INDEX);
+        for (Employee employee : lastShownList) {
+            if (employee.getId().equals(targetId)) {
+                model.deleteEmployee(employee);
+                return new CommandResult(String.format(MESSAGE_DELETE_EMPLOYEE_SUCCESS, Messages.format(employee)));
+            }
         }
-
-        Employee employeeToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deleteEmployee(employeeToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_EMPLOYEE_SUCCESS, Messages.format(employeeToDelete)));
+        throw new CommandException(Messages.MESSAGE_INVALID_EMPLOYEE_DISPLAYED_ID);
     }
 
     @Override
@@ -57,13 +57,13 @@ public class DeleteCommand extends Command {
         }
 
         DeleteCommand otherDeleteCommand = (DeleteCommand) other;
-        return targetIndex.equals(otherDeleteCommand.targetIndex);
+        return targetId.equals(otherDeleteCommand.targetId);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("targetIndex", targetIndex)
+                .add("targetId", targetId)
                 .toString();
     }
 }
