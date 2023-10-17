@@ -77,8 +77,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_edit_patient() throws Exception {
-        Patient specialist = new PatientBuilder().build();
-        EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder(specialist).build();
+        Patient patient = new PatientBuilder().build();
+        EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder(patient).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD
                 + " " + CliSyntax.PATIENT_TAG + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PatientUtil.getEditPatientDescriptorDetails(descriptor));

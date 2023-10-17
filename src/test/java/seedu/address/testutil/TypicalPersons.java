@@ -29,17 +29,19 @@ import seedu.address.model.person.Specialist;
  */
 public class TypicalPersons {
 
-    public static final Patient ALICE = (Patient) new PatientBuilder().withAge("17").withMedicalHistory("Anemia")
+    public static final Patient ALICE = (Patient) new PatientBuilder().withAge("17")
+            .withMedicalHistory("Anemia", "Osteoporosis")
             .withName("Alice Pauline")
             .withEmail("alice@example.com")
             .withPhone("94351253")
             .withTags("friends").build();
-    public static final Patient BENSON = (Patient) new PatientBuilder().withAge("29").withMedicalHistory("Osteoporosis")
+    public static final Patient BENSON = (Patient) new PatientBuilder().withAge("29")
+            .withMedicalHistory("Osteoporosis")
             .withName("Benson Meier")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withTags("owesMoney", "friends").build();
 
-    public static final Patient CARL = (Patient) new PatientBuilder().withAge("47").withMedicalHistory("Diabetes")
+    public static final Patient CARL = (Patient) new PatientBuilder().withAge("47")
             .withName("Carl Kurz").withPhone("95352563").withEmail("heinz@example.com")
             .build();
     public static final Patient DANIEL = (Patient) new PatientBuilder().withAge("78").withMedicalHistory("Asthma")

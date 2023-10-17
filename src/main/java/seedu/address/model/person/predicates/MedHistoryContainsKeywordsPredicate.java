@@ -27,11 +27,13 @@ public class MedHistoryContainsKeywordsPredicate implements Predicate<Person> {
 
         // It is safe to type cast Person to Patient due to the guard clause above.
         Patient patient = (Patient) person;
-
-        return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(patient.getMedicalHistory().value, keyword));
+        return patient.getMedicalHistory()
+                .stream()
+                .map(medicalHistory -> keywords
+                        .stream()
+                        .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(medicalHistory.value, keyword)))
+                .reduce(false, (x, y) -> x || y);
     }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
