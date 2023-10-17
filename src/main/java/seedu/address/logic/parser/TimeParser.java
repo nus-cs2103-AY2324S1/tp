@@ -64,10 +64,9 @@ public class TimeParser {
      *
      * @author Tan Kerway
      * @param time the String that contains the data for the date
-     * @param error the specific string to modify the DukeExceptions.InvalidTimeException
      * @return datetime object that represents the string
      */
-    public LocalDateTime parseDate(String time, String error)
+    public LocalDateTime parseDate(String time)
             throws seedu.address.logic.parser.exceptions.ParseException {
         int currentFormatID = -1;
         for (String formatString : dateFormats) { // find a date format string that matches the user pattern
@@ -81,7 +80,7 @@ public class TimeParser {
                         .toInstant()
                         .atZone(ZoneId.systemDefault())
                         .toLocalDateTime();
-                return addMissingDateFields(temp, currentFormatID, error);
+                return addMissingDateFields(temp, currentFormatID);
             } catch (ParseException ignored) {
                 String s = "";
             }
@@ -94,30 +93,32 @@ public class TimeParser {
      * @author Tan Kerway
      * @param temp the LocalDateTime object to modify
      * @param currentFormatID the given type of date object
-     * @param error the error String(if any)
      * @return a LocalDateTime object that has all the required information
      */
-    private LocalDateTime addMissingDateFields(LocalDateTime temp, int currentFormatID, String error)
+    private LocalDateTime addMissingDateFields(LocalDateTime temp, int currentFormatID)
             throws seedu.address.logic.parser.exceptions.ParseException {
-        if (currentFormatID == 0) { // case where the current format is a day(index 0)
+        switch (currentFormatID) {
+        case 0: // case where the current format is a day(index 0)
             // add the year, month, day, and time(default to 2359)
             temp = addDay(temp);
-        } else if (currentFormatID == 1) {
-            // case where the current format is not missing anything(index 1 to 7)
-            // keep the final date as is
-        } else if (currentFormatID == 2) { // case where the current format is missing time(index 8 to 11)
-            // add 2359 to the final date
+            break;
+        case 2: // case where the current format is missing time(index 8 to 11)
             temp = addTime(temp);
-        } else if (currentFormatID == 3) { // case where the current format is missing year(index 12 to 19)
+            break;
+        case 3: // case where the current format is missing year(index 12 to 19)
             // add the year to the final date
             temp = addYear(temp);
-        } else { // case where the current format is missing year and time(index 20 to 22)
+            break;
+        case 4: // case where the current format is missing year and time(index 20 to 22)
             // add the year and time to the final date
             temp = addYear(temp);
             temp = addTime(temp);
             if (temp.isBefore(LocalDateTime.now())) {
                 temp = temp.plusYears(1);
             }
+            break;
+        default: // case where the current format is not missing anything(index 1 to 7)
+            break; // keep the final date as is
         }
         // gc: the given date is before today's date even after parsing
         if (temp.isBefore(LocalDateTime.now())) {
