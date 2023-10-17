@@ -33,7 +33,7 @@ public class UniqueBandList implements Iterable<Band>{
     public void add(Band toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
-            throw new DuplicateMusicianException();
+            throw new DuplicateBandException();
         }
         internalList.add(toAdd);
     }
@@ -106,7 +106,7 @@ public class UniqueBandList implements Iterable<Band>{
         }
 
         // instanceof handles nulls
-        if (!(other instanceof UniqueMusicianList)) {
+        if (!(other instanceof UniqueBandList)) {
             return false;
         }
 

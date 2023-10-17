@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.band.Band;
 import seedu.address.model.musician.Musician;
 
 /**
@@ -20,6 +21,7 @@ import seedu.address.model.musician.Musician;
 class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_MUSICIAN = "Persons list contains duplicate musician(s).";
+    public static final String MESSAGE_DUPLICATE_BAND = "Band list contains duplicate band(s).";
 
     private final List<JsonAdaptedMusician> musicians = new ArrayList<>();
     private final List<JsonAdaptedBand> bands = new ArrayList<>();
@@ -28,8 +30,9 @@ class JsonSerializableAddressBook {
      * Constructs a {@code JsonSerializableAddressBook} with the given musicians.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("musicians") List<JsonAdaptedMusician> persons) {
-        this.musicians.addAll(persons);
+    public JsonSerializableAddressBook(@JsonProperty("musicians") List<JsonAdaptedMusician> musicians, @JsonProperty("bands") List<JsonAdaptedBand> bands) {
+        this.musicians.addAll(musicians);
+        this.bands.addAll(bands);
     }
 
     /**
@@ -39,6 +42,7 @@ class JsonSerializableAddressBook {
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         musicians.addAll(source.getMusicianList().stream().map(JsonAdaptedMusician::new).collect(Collectors.toList()));
+        bands.addAll(source.getBandList().stream().map(JsonAdaptedBand::new).collect(Collectors.toList()));
     }
 
     /**
@@ -55,6 +59,14 @@ class JsonSerializableAddressBook {
             }
             addressBook.addMusician(musician);
         }
+        for (JsonAdaptedBand jsonAdaptedBand : bands) {
+            Band band = jsonAdaptedBand.toModelType();
+            if (addressBook.hasBand(band)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_BAND);
+            }
+            addressBook.addBand(band);
+        }
+
         return addressBook;
     }
 
