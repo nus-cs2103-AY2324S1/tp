@@ -12,9 +12,13 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
+
 
 public class PersonTest {
 
@@ -95,5 +99,28 @@ public class PersonTest {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
+    }
+
+    @Test
+    public void getNonEmergencyTags() {
+        Person person = new PersonBuilder().withTags("RA", "SOS", "Friend", "Buddy").build();
+        Set<Tag> nonEmergencyTags = person.getNonEmergencyTags();
+        System.out.println(nonEmergencyTags);
+        assertEquals(nonEmergencyTags.size(), 2);
+        assertFalse(nonEmergencyTags.contains(new Tag("RA")));
+        assertFalse(nonEmergencyTags.contains(new Tag("SOS")));
+        assertTrue(nonEmergencyTags.contains(new Tag("Friend")));
+        assertTrue(nonEmergencyTags.contains(new Tag("Buddy")));
+    }
+
+    @Test
+    public void getEmergencyTags() {
+        Person person = new PersonBuilder().withTags("RA", "SOS", "Friend", "Buddy").build();
+        Set<Tag> emergencyTags = person.getEmergencyTags();
+        assertEquals(emergencyTags.size(), 2);
+        assertTrue(emergencyTags.contains(new Tag("RA")));
+        assertTrue(emergencyTags.contains(new Tag("SOS")));
+        assertFalse(emergencyTags.contains(new Tag("Friend")));
+        assertFalse(emergencyTags.contains(new Tag("Buddy")));
     }
 }
