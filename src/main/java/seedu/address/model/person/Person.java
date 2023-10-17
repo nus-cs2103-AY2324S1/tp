@@ -57,7 +57,7 @@ public class Person {
         this.address = address;
         this.tags.addAll(tags);
         // set new fields to null
-        this.nric = new Nric("test");
+        this.nric = new Nric("T7243948H");
         this.appointment = new Appointment("2023-12-12 12:00 15:00");
     }
 
