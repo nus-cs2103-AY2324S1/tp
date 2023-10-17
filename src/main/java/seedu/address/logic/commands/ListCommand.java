@@ -18,7 +18,7 @@ public class ListCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Listed all persons";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all persons. "
-            + "Parameters: [s/ATTRIBUTE]\n"
+            + "Parameters: [so/ATTRIBUTE]\n"
             + "Optional: ATTRIBUTE can be 'name' or other attributes for sorting.\n"
             + "Example: " + COMMAND_WORD + " s/name";
 
@@ -30,7 +30,7 @@ public class ListCommand extends Command {
      */
     public ListCommand() {
         // Default constructor for no sorting
-        this.sortingComparator = null;
+        this.sortingComparator = (person1, person2) -> 0; // A comparator that does nothing;
     }
 
     /**

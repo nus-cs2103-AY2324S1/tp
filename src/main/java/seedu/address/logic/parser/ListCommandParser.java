@@ -37,8 +37,7 @@ public class ListCommandParser implements Parser<ListCommand> {
         if ("name".equalsIgnoreCase(sortingAttribute)) {
             return Comparator.comparing(Person::getName);
         } else {
-            // Default: no sorting (you can change this behavior as needed)
-            return null;
+            return (person1, person2) -> 0; // A comparator that does nothing
         }
     }
 }
