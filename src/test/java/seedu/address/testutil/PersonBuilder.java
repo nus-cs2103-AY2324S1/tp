@@ -3,7 +3,14 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.AnimalType;
+import seedu.address.model.person.Availability;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Housing;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -101,21 +108,33 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the animal {@code Name} of the animal, which the {@code Person} that we are building is fostering.
+     */
     public PersonBuilder withAnimalName(String animalName) {
         this.animalName = new Name(animalName);
         return this;
     }
 
+    /**
+     * Sets the {@code Availability} of the {@code Person} that we are building.
+     */
     public PersonBuilder withAvailability(String availability) {
         this.availability = new Availability(availability);
         return this;
     }
 
+    /**
+     * Sets the {@code AnimalType} of the animal, which the {@code Person} that we are building is fostering.
+     */
     public PersonBuilder withAnimalType(String animalType, String availability) {
         this.animalType = new AnimalType(animalType, availability);
         return this;
     }
 
+    /**
+     * Sets the {@code Housing} of the {@code Person} that we are building.
+     */
     public PersonBuilder withHousing(String housing) {
         this.housing = new Housing(housing);
         return this;

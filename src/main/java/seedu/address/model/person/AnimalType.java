@@ -3,20 +3,30 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents a Person's type of animal fostered, if any, in the address book.
+ */
 public class AnimalType {
-    public final String value;
-    public final String availability; // New field for availability
-
-    public static final String MESSAGE_CONSTRAINTS = "If fosterer is available, animal type should be 'able.Dog' / 'able.Cat'.\n" +
-            "If fosterer is NOT available, animal type should be 'current.Dog' / 'current.Cat'.\n" +
-            "If animal type information is not available, it should be inputted as 'nil'.";
+    public static final String MESSAGE_CONSTRAINTS = "If fosterer is available, animal type should be "
+            + "'able.Dog' / 'able.Cat'.\n"
+            + "If fosterer is NOT available, animal type should be 'current.Dog' / 'current.Cat'.\n"
+            + "If animal type information is not available, it should be inputted as 'nil'.";
 
     public static final String VALIDATION_REGEX_AVAILABLE = "^(able\\.Dog|able\\.Cat|nil)$";
     public static final String VALIDATION_REGEX_NOT_AVAILABLE = "^(current\\.Dog|current\\.Cat|nil)$";
 
+    public final String availability;
+    public final String value;
+
+    /**
+     * Constructs an {@code AnimalType}.
+     *
+     * @param value A valid animal type.
+     * @param availability The availability of the fosterer.
+     */
     public AnimalType(String value, String availability) {
-        requireNonNull(value);
         requireNonNull(availability);
+        requireNonNull(value);
 
         // Validate the availability
         if (availability.equals("Available")) {

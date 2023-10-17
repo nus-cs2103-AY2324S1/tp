@@ -3,16 +3,16 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.ANIMAL_NAME_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.AVAILABILITY_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.ANIMAL_TYPE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.HOUSING_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.ANIMAL_NAME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.AVAILABILITY_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.ANIMAL_NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.ANIMAL_TYPE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.HOUSING_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.ANIMAL_TYPE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.AVAILABILITY_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.AVAILABILITY_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.HOUSING_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.HOUSING_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
@@ -78,12 +78,14 @@ public class AddCommandParserTest {
 
 
         // multiple tags - all accepted
-        Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND).withAnimalName(VALID_ANIMAL_NAME_BOB) // Add animalName
+        Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
+                .withAnimalName(VALID_ANIMAL_NAME_BOB) // Add animalName
                 .withAvailability(VALID_AVAILABILITY_BOB) // Add availability
                 .withAnimalType(VALID_ANIMAL_TYPE_BOB, VALID_AVAILABILITY_BOB) // Add animalType
                 .withHousing(VALID_HOUSING_BOB).build();
         assertParseSuccess(parser,
-                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + ANIMAL_NAME_DESC_BOB // Add animalName
+                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND
+                        + TAG_DESC_FRIEND + ANIMAL_NAME_DESC_BOB // Add animalName
                         + AVAILABILITY_DESC_BOB // Add availability
                         + ANIMAL_TYPE_DESC_BOB // Add animalType
                         + HOUSING_DESC_BOB,
@@ -158,7 +160,8 @@ public class AddCommandParserTest {
     public void parse_optionalFieldsMissing_success() {
         // zero tags
         Person expectedPerson = new PersonBuilder(AMY).withTags().build();
-        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + ANIMAL_NAME_DESC_AMY
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
+                        + ANIMAL_NAME_DESC_AMY
                         + AVAILABILITY_DESC_AMY
                         + ANIMAL_TYPE_DESC_AMY
                         + HOUSING_DESC_AMY,
