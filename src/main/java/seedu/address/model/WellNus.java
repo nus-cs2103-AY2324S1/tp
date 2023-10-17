@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.appointment.Appointment;
@@ -15,7 +16,7 @@ import seedu.address.model.person.UniquePersonList;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class WellNus implements ReadOnlyWellNus {
 
     private final UniquePersonList persons;
     private final UniqueAppointmentList appointments;
@@ -32,12 +33,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         appointments = new UniqueAppointmentList();
     }
 
-    public AddressBook() {}
+    public WellNus() {}
 
     /**
      * Creates an AddressBook using the Persons in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public WellNus(ReadOnlyWellNus toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -55,7 +56,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyWellNus newData) {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
@@ -105,7 +106,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void removeAppointment(Appointment key) {
         appointments.remove(key);
     }
-
     //// util methods
 
     @Override
@@ -120,10 +120,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.asUnmodifiableObservableList();
     }
 
+    //TODO: make use of Appointment List class once created
     @Override
     public ObservableList<Appointment> getAppointmentList() {
-        return appointments.asUnmodifiableObservableList();
+        return FXCollections.observableArrayList();
     }
+
+
 
     @Override
     public boolean equals(Object other) {
@@ -132,12 +135,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddressBook)) {
+        if (!(other instanceof WellNus)) {
             return false;
         }
 
-        AddressBook otherAddressBook = (AddressBook) other;
-        return persons.equals(otherAddressBook.persons);
+        WellNus otherWellNus = (WellNus) other;
+        return persons.equals(otherWellNus.persons);
     }
 
     @Override
