@@ -63,6 +63,22 @@ public class UniqueTeamList implements Iterable<Team> {
     }
 
     /**
+     * Gets a team from the list by its name.
+     *
+     * @param teamName The name of the team to retrieve.
+     * @return The Team object if found, or null if the team does not exist.
+     */
+    public Team getTeamByName(String teamName) {
+        for (Team team : internalList) {
+            if (team.getTeamName().equals(teamName)) {
+                return team;
+            }
+        }
+        throw new TeamNotFoundException();
+    }
+
+
+    /**
      * Removes the team with the given name from the list.
      * The team with the given name must exist in the list.
      */

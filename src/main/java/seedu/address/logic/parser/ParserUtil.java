@@ -137,4 +137,20 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    /**
+     * Parse team name string.
+     *
+     * @param name the name
+     * @return the string
+     * @throws ParseException the parse exception
+     */
+    public static String parseTeamName(String name) throws ParseException {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        if (!Name.isValidName(trimmedName)) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        }
+        return trimmedName;
+    }
 }

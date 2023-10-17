@@ -78,6 +78,17 @@ public class TeamBook implements ReadOnlyTeamBook {
     }
 
     /**
+     * Retrieves a team from the TeamBook by its name.
+     *
+     * @param teamName The name of the team to retrieve.
+     * @return The Team object if found, or null if the team does not exist.
+     */
+    public Team getTeam(String teamName) {
+        requireNonNull(teamName);
+        return teams.getTeamByName(teamName);
+    }
+
+    /**
      * Adds a new team to the TeamBook.
      *
      * @param team Team to be added.
