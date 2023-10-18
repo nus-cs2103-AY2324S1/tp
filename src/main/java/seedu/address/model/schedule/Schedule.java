@@ -13,7 +13,7 @@ import seedu.address.model.person.Person;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Schedule {
-    private static final String MESSAGE_CONSTRAINTS = "Schedules start time should be before its end time.";
+    public static final String MESSAGE_CONSTRAINTS = "Schedules start time should be before its end time.";
     private final Person tutor;
     private final StartTime startTime;
     private final EndTime endTime;

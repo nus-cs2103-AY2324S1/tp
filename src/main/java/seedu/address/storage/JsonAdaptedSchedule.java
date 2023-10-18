@@ -1,6 +1,6 @@
 package seedu.address.storage;
 
-import static seedu.address.model.schedule.Time.DATETIME_FORMAT;
+import static seedu.address.model.schedule.Time.DATETIME_INPUT_FORMAT;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -29,7 +29,7 @@ class JsonAdaptedSchedule {
     private final String startTime;
     private final String endTime;
 
-    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATETIME_FORMAT);
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATETIME_INPUT_FORMAT);
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
