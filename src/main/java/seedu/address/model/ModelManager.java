@@ -19,25 +19,25 @@ import seedu.address.model.contact.Contact;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final ContactsManager contactsManager;
     private final UserPrefs userPrefs;
     private final FilteredList<Contact> filteredContacts;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given ContactsManager and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
+    public ModelManager(ContactList contactList, ReadOnlyUserPrefs userPrefs) {
+        requireAllNonNull(contactList, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + contactList + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.contactsManager = new ContactsManager(contactList);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredContacts = new FilteredList<>(this.addressBook.getContactList());
+        filteredContacts = new FilteredList<>(this.contactsManager.getContactList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new ContactsManager(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -65,42 +65,42 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getConTextFilePath() {
+        return userPrefs.getConTextFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setContactsManagerFilePath(Path conTextFilePath) {
+        requireNonNull(conTextFilePath);
+        userPrefs.setContactsManagerFilePath(conTextFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== ContactsManager ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+    public void setContactsManager(ContactList contactList) {
+        this.contactsManager.resetData(contactsManager);
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public ContactList getContactList() {
+        return contactsManager;
     }
 
     @Override
     public boolean hasContact(Contact contact) {
         requireNonNull(contact);
-        return addressBook.hasContact(contact);
+        return contactsManager.hasContact(contact);
     }
 
     @Override
     public void deleteContact(Contact target) {
-        addressBook.removeContact(target);
+        contactsManager.removeContact(target);
     }
 
     @Override
     public void addContact(Contact contact) {
-        addressBook.addContact(contact);
+        contactsManager.addContact(contact);
         updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
     }
 
@@ -108,14 +108,14 @@ public class ModelManager implements Model {
     public void setContact(Contact target, Contact editedContact) {
         requireAllNonNull(target, editedContact);
 
-        addressBook.setContact(target, editedContact);
+        contactsManager.setContact(target, editedContact);
     }
 
     //=========== Filtered Contact List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Contact} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedConText}
      */
     @Override
     public ObservableList<Contact> getFilteredContactList() {
@@ -140,7 +140,7 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook)
+        return contactsManager.equals(otherModelManager.contactsManager)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredContacts.equals(otherModelManager.filteredContacts);
     }

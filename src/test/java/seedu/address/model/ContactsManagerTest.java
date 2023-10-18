@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TestData.ALICE;
 import static seedu.address.testutil.TestData.VALID_NOTE_BOB;
-import static seedu.address.testutil.TestData.getTypicalAddressBook;
+import static seedu.address.testutil.TestData.getTypicalContactsManager;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -22,25 +22,24 @@ import seedu.address.model.contact.exceptions.DuplicateContactException;
 import seedu.address.testutil.ContactBuilder;
 import seedu.address.testutil.TestData;
 
-public class AddressBookTest {
+public class ContactsManagerTest {
 
-    private final AddressBook addressBook = new AddressBook();
-
+    private final ContactsManager contactsManager = new ContactsManager();
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getContactList());
+        assertEquals(Collections.emptyList(), contactsManager.getContactList());
     }
 
     @Test
     public void resetData_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.resetData(null));
+        assertThrows(NullPointerException.class, () -> contactsManager.resetData(null));
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = getTypicalAddressBook();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+    public void resetData_withValidReadOnlyContactsManager_replacesData() {
+        ContactsManager newData = getTypicalContactsManager();
+        contactsManager.resetData(newData);
+        assertEquals(newData, contactsManager);
     }
 
     @Test
@@ -51,58 +50,59 @@ public class AddressBookTest {
                 .withTags(TestData.Valid.Tag.ALPHANUMERIC_SPACES)
                 .build();
         List<Contact> newContacts = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newContacts);
+        ContactListStub newData = new ContactListStub(newContacts);
 
-        assertThrows(DuplicateContactException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicateContactException.class, () -> contactsManager.resetData(newData));
     }
 
     @Test
     public void hasContact_nullContact_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasContact(null));
+        assertThrows(NullPointerException.class, () -> contactsManager.hasContact(null));
     }
 
     @Test
-    public void hasContact_contactNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasContact(ALICE));
+    public void hasContact_contactNotInContactsManager_returnsFalse() {
+        assertFalse(contactsManager.hasContact(ALICE));
     }
 
     @Test
-    public void hasContact_contactInAddressBook_returnsTrue() {
-        addressBook.addContact(ALICE);
-        assertTrue(addressBook.hasContact(ALICE));
+    public void hasContact_contactInContactsManager_returnsTrue() {
+        contactsManager.addContact(ALICE);
+        assertTrue(contactsManager.hasContact(ALICE));
     }
 
     @Test
-    public void hasContact_contactWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addContact(ALICE);
+    public void hasContact_contactWithSameIdentityFieldsInContactsManager_returnsTrue() {
+        contactsManager.addContact(ALICE);
         Contact editedAlice = new ContactBuilder(ALICE)
                 .withNote(VALID_NOTE_BOB)
                 .withTags(TestData.Valid.Tag.ALPHANUMERIC_SPACES)
                 .build();
-        assertTrue(addressBook.hasContact(editedAlice));
+        assertTrue(contactsManager.hasContact(editedAlice));
     }
 
     @Test
     public void getContactList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(
-            UnsupportedOperationException.class,
-            () -> addressBook.getContactList().remove(0)
+                UnsupportedOperationException.class,
+                () -> contactsManager.getContactList().remove(0)
         );
     }
 
     @Test
     public void toStringMethod() {
-        String expected = AddressBook.class.getCanonicalName() + "{contacts=" + addressBook.getContactList() + "}";
-        assertEquals(expected, addressBook.toString());
+        String expected = ContactsManager.class.getCanonicalName()
+                + "{contacts=" + contactsManager.getContactList() + "}";
+        assertEquals(expected, contactsManager.toString());
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose contacts list can violate interface constraints.
+     * A stub ContactList whose contacts list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class ContactListStub implements ContactList {
         private final ObservableList<Contact> contacts = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Contact> contacts) {
+        ContactListStub(Collection<Contact> contacts) {
             this.contacts.setAll(contacts);
         }
 

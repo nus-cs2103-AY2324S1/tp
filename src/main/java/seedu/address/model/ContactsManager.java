@@ -9,21 +9,19 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.UniqueContactList;
 
-
-
 /**
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSameContact comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class ContactsManager implements ContactList {
     private final UniqueContactList contacts = new UniqueContactList();
 
-    public AddressBook() {}
+    public ContactsManager() {}
 
     /**
-     * Creates an AddressBook using the Contacts in the {@code toBeCopied}
+     * Creates an ContactsManager using the Contacts in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public ContactsManager(ContactList toBeCopied) {
         resetData(toBeCopied);
     }
 
@@ -38,9 +36,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code ContactsManager} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ContactList newData) {
         requireNonNull(newData);
 
         setContacts(newData.getContactList());
@@ -77,7 +75,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
+     * Removes {@code key} from this {@code ContactsManager}.
      * {@code key} must exist in the address book.
      */
     public void removeContact(Contact key) {
@@ -105,12 +103,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddressBook)) {
+        if (!(other instanceof ContactsManager)) {
             return false;
         }
 
-        AddressBook otherAddressBook = (AddressBook) other;
-        return contacts.equals(otherAddressBook.contacts);
+        ContactsManager otherContactsManager = (ContactsManager) other;
+        return contacts.equals(otherContactsManager.contacts);
     }
 
     @Override
