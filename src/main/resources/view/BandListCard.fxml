@@ -28,21 +28,11 @@
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
       </HBox>
       <VBox spacing="5" fx:id="tagsDisplayBox">
-        <!-- Add conditional rendering to HBox containing tags FlowPane -->
-        <HBox fx:id="tagsBox" HBox.hgrow="ALWAYS">
-          <FlowPane fx:id="tags" />
-        </HBox>
-        <!-- Add conditional rendering to HBox containing instruments FlowPane -->
-        <HBox fx:id="instrumentsBox" HBox.hgrow="ALWAYS">
-          <FlowPane fx:id="instruments" />
-        </HBox>
         <!-- Add conditional rendering to HBox containing genres FlowPane -->
         <HBox fx:id="genresBox" HBox.hgrow="ALWAYS">
           <FlowPane fx:id="genres" />
         </HBox>
       </VBox>
-      <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
-      <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
     </VBox>
   </GridPane>
 </HBox>

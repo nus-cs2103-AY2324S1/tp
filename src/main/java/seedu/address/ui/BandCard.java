@@ -35,6 +35,7 @@ public class BandCard extends UiPart<Region> {
     @FXML
     private FlowPane genres;
 
+
     /**
      * Creates a {@code BandCode} with the given {@code Band} and index to display.
      */

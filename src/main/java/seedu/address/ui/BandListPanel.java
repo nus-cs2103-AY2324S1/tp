@@ -15,14 +15,14 @@ import java.util.logging.Logger;
  * Panel containing the list of persons.
  */
 public class BandListPanel extends UiPart<Region> {
-    private static final String FXML = "PersonListPanel.fxml";
+    private static final String FXML = "BandListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(BandListPanel.class);
 
     @FXML
     private ListView<Band> bandListView;
 
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Creates a {@code BandListPanel} with the given {@code ObservableList}.
      */
     public BandListPanel(ObservableList<Band> bandList) {
         super(FXML);
