@@ -1,7 +1,7 @@
 package seedu.lovebook.logic.parser;
 
 import static seedu.lovebook.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.lovebook.logic.parser.CliSyntax.*;
 import static seedu.lovebook.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.lovebook.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -23,10 +23,36 @@ public class FilterCommandParserTest {
     }
 
     @Test
-    public void parse_validArgs_returnsFindCommand() {
+    public void parse_invalidArgs_throwsParseException() {
+        assertParseFailure(parser, "filter name", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                FilterCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_emptyKeyword_throwsParseException() {
+        assertParseFailure(parser, "filter name/", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                FilterCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_validArgs_returnsFilterCommand() {
         predicateList.add(new MetricContainsKeywordPredicate("Alice", PREFIX_NAME));
-        FilterCommand expectedFilterCommand =
-                new FilterCommand(predicateList);
-        assertParseSuccess(parser, "filter name/ Alice", expectedFilterCommand);
+        predicateList.add(new MetricContainsKeywordPredicate("22", PREFIX_AGE));
+        FilterCommand expectedFilterCommand = new FilterCommand(predicateList);
+        assertParseSuccess(parser, "filter age/ 22 name/ Alice", expectedFilterCommand);
+    }
+    @Test
+    public void parse_validArgs_returnsFilterCommand2() {
+        predicateList.add(new MetricContainsKeywordPredicate("123", PREFIX_HEIGHT));
+        predicateList.add(new MetricContainsKeywordPredicate("3000", PREFIX_INCOME));
+        FilterCommand expectedFilterCommand = new FilterCommand(predicateList);
+        assertParseSuccess(parser, "filter income/ 3000 height/ 123", expectedFilterCommand);
+    }
+    @Test
+    public void parse_validArgs_returnsFilterCommand3() {
+        predicateList.add(new MetricContainsKeywordPredicate("F", PREFIX_GENDER));
+        predicateList.add(new MetricContainsKeywordPredicate("Libra", PREFIX_HOROSCOPE));
+        FilterCommand expectedFilterCommand = new FilterCommand(predicateList);
+        assertParseSuccess(parser, "filter horoscope/ Libra gender/ F", expectedFilterCommand);
     }
 }
