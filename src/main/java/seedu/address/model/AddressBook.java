@@ -90,7 +90,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Replaces the given applicant {@code target} in the list with {@code editedApplicant}.
      * {@code target} must exist in the address book.
-     * The applicant identity of {@code editedApplicant} must not be the same as another existing person in the address book.
+     * The applicant identity of {@code editedApplicant} must not be the
+     * same as another existing person in the address book.
      */
     public void setApplicant(Applicant target, Applicant editedApplicant) {
         requireNonNull(editedApplicant);
@@ -126,12 +127,37 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Replaces the given interview {@code target} in the list with {@code editedInterview}.
      * {@code target} must exist in the address book.
-     * The interview identity of {@code editedInterview} must not be the same as another existing person in the address book.
+     * The interview identity of {@code editedInterview} must not
+     * be the same as another existing person in the address book.
      */
     public void setInterview(Interview target, Interview editedInterview) {
         requireNonNull(editedInterview);
 
         interviews.setInterview(target, editedInterview);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeInterview(Interview key) {
+        interviews.remove(key);
+    }
+
+    /**
+     * Finds the interview that contains the applicant and returns it.
+     * Returns null if the applicant does not have an interview.
+     * {@code applicant} must exist in the address book.
+     */
+    public Interview findInterviewWithApplicant(Applicant applicant) {
+        requireNonNull(applicant);
+
+        for (Interview interview : getInterviewList()) {
+            if (interview.getInterviewApplicant().equals(applicant)) {
+                return interview;
+            }
+        }
+        return null;
     }
 
     //// util methods

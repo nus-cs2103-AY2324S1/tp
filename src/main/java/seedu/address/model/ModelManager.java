@@ -98,10 +98,12 @@ public class ModelManager implements Model {
 
     @Override
     public void deleteApplicant(Applicant target) {
-        addressBook.removePerson(target);
         if (target.hasInterview()) {
-
+            Interview interviewWithTarget = addressBook.findInterviewWithApplicant(target);
+            addressBook.removeInterview(interviewWithTarget);
         }
+
+        addressBook.removePerson(target);
     }
 
     @Override
@@ -115,7 +117,7 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedApplicant);
 
         if (target.hasInterview()) {
-            Interview interviewWithTarget = findInterviewWithApplicant(target);
+            Interview interviewWithTarget = addressBook.findInterviewWithApplicant(target);
             Interview interviewWithEditedApplicant = new Interview(
                     editedApplicant,
                     interviewWithTarget.getJobRole(),
@@ -125,18 +127,6 @@ public class ModelManager implements Model {
         }
 
         addressBook.setApplicant(target, editedApplicant);
-    }
-
-    @Override
-    public Interview findInterviewWithApplicant(Applicant applicant) {
-        requireNonNull(applicant);
-
-        for (Interview interview : addressBook.getInterviewList()) {
-            if (interview.getInterviewApplicant().equals(applicant)) {
-                return interview;
-            }
-        }
-        return null;
     }
 
     //=========== AddressBook Interviews ======================================================================

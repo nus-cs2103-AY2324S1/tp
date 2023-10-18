@@ -74,16 +74,10 @@ public interface Model {
     /**
      * Replaces the given applicant {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book.
-     * The applicant identity of {@code editedPerson} must not be the same as another existing applicant in the address book.
+     * The applicant identity of {@code editedPerson} must not be
+     * the same as another existing applicant in the address book.
      */
     void setApplicant(Applicant target, Applicant editedApplicant);
-
-    /**
-     * Finds the interview that contains the applicant and returns it.
-     * Returns null if the applicant does not have an interview.
-     * {@code applicant} must exist in the address book.
-     */
-    Interview findInterviewWithApplicant(Applicant applicant);
 
     /** Returns an unmodifiable view of the filtered applicant list */
     ObservableList<Applicant> getFilteredApplicantList();
