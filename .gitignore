@@ -1,26 +1,27 @@
-# Gradle build files
-/.gradle/
-/build/
-src/main/resources/docs/
+# macOS Finder files
+.DS_Store
 
 # IDEA files
-/.idea/
-/out/
-/*.iml
+.idea/
+out/
+*.iml
 
 # VSCode extension build files
 bin/
 
-# Storage/log files
-/data/
-/config.json
-/preferences.json
-/*.log.*
+# JVM crash logs
 hs_err_pid[0-9]*.log
+
+# Gradle build files
+.gradle/
+build/
+src/main/resources/docs/
 
 # Test sandbox files
 src/test/data/sandbox/
 
-# MacOS custom attributes files created by Finder
-.DS_Store
-docs/_site/
+# App data/log files
+data/
+config.json
+settings.json
+*.log.*
