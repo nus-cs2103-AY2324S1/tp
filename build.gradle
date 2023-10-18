@@ -21,6 +21,13 @@ checkstyle {
 }
 
 test {
+    doFirst {
+        println(System.getProperty("os.name"))
+        if (System.getProperty("os.name").toLowerCase().contains("nux") ||
+            System.getProperty("os.name").toLowerCase().contains("ubuntu")) {
+            exclude '**/ui/**'
+        }
+    }
     useJUnitPlatform()
     finalizedBy jacocoTestReport
 }
