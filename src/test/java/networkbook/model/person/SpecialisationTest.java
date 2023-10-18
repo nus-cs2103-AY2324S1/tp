@@ -27,11 +27,24 @@ public class SpecialisationTest {
         // invalid specialisations
         assertFalse(Specialisation.isValidSpecialisation("")); // empty string
         assertFalse(Specialisation.isValidSpecialisation(" ")); // spaces only
+        assertFalse(Specialisation
+                .isValidSpecialisation("I once saw a  balloon")); // more than one space between words
+        assertFalse(Specialisation.isValidSpecialisation("AIa")); // uppercase letters beyond the first character
+        assertFalse(Specialisation.isValidSpecialisation(", but")); // starting a word with comma, period, dash
+        assertFalse(Specialisation.isValidSpecialisation(".exe"));
+        assertFalse(Specialisation.isValidSpecialisation("-ish"));
 
         // valid specialisations
         assertTrue(Specialisation.isValidSpecialisation("Software Engineering"));
-        assertTrue(Specialisation.isValidSpecialisation("-")); // one character
+        assertTrue(Specialisation.isValidSpecialisation("AAA Gaming")); // all uppercase words (acronyms)
         assertTrue(Specialisation.isValidSpecialisation("Networking and Distributed Systems")); // long address
+        assertTrue(Specialisation
+                .isValidSpecialisation("Leader of the Multinational Party of Czechoslovakia and the " +
+                        "Associations Within the Umbrella of the Multinational Party.")); // very long address
+        assertTrue(Specialisation
+                .isValidSpecialisation("Industry 4.0 and AI planning, "
+                        + "decision-making")); // commas, periods, dashes not at the front
+        assertTrue(Specialisation.isValidSpecialisation("developed moon.exe"));
     }
 
     @Test
