@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+
 /**
  * Represents a Person's NRIC in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidNric(String)}
@@ -10,10 +11,6 @@ public class Nric {
 
     public static final String MESSAGE_CONSTRAINTS = "NRIC can take any values, and it should not be blank";
 
-    /*
-     * The first character of the NRIC must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
     public static final String VALIDATION_REGEX = "[^\\s].*";
 
     public final String value;
@@ -55,12 +52,11 @@ public class Nric {
         }
 
         Nric otherNric = (Nric) other;
-        return value.equals(otherNric.value);
+        return value.equalsIgnoreCase((otherNric.value));
     }
 
     @Override
     public int hashCode() {
         return value.hashCode();
     }
-
 }
