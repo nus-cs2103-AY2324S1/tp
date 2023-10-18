@@ -8,7 +8,6 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.event.exceptions.EventNotFoundException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
  * Represents a list of events in the address book. Operations for managing the list of events are implemented here.
