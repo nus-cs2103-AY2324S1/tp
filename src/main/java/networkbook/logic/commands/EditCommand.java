@@ -3,12 +3,9 @@ package networkbook.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static networkbook.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 
 import networkbook.commons.core.index.Index;
 import networkbook.commons.util.CollectionUtil;
@@ -110,7 +107,7 @@ public class EditCommand extends Command {
                 .orElse(null));
         Specialisation updatedSpecialisation = editPersonDescriptor.getSpecialisation()
                 .orElse(personToEdit.getSpecialisation().orElse(null));
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        UniqueList<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Priority updatedPriority = editPersonDescriptor.getPriority().orElse(personToEdit.getPriority()
                                                                      .orElse(null));
 
@@ -154,7 +151,7 @@ public class EditCommand extends Command {
         private GraduatingYear graduatingYear;
         private Course course;
         private Specialisation specialisation;
-        private Set<Tag> tags;
+        private UniqueList<Tag> tags;
         private Priority priority;
 
         public EditPersonDescriptor() {}
@@ -171,7 +168,7 @@ public class EditCommand extends Command {
             setGraduatingYear(toCopy.graduatingYear);
             setCourse(toCopy.course);
             setSpecialisation(toCopy.specialisation);
-            setTags(toCopy.tags);
+            setTags(toCopy.getTags().map(UniqueList::copy).orElse(null));
             setPriority(toCopy.priority);
         }
 
@@ -291,17 +288,25 @@ public class EditCommand extends Command {
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
          */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        public void setTags(UniqueList<Tag> tags) {
+            this.tags = tags;
         }
 
         /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
+         * Adds {@code tag} to the {@code UniqueList<tag>} of the descriptor.
+         * If the tags field is null, initialize it with an empty {@code UniqueList}.
+         *
+         * @param tag is the new tag to be added.
          */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        public void addTag(Tag tag) {
+            if (this.tags == null) {
+                this.tags = new UniqueList<>();
+            }
+            this.tags.add(tag);
+        }
+
+        public Optional<UniqueList<Tag>> getTags() {
+            return Optional.ofNullable(tags);
         }
 
         public void setPriority(Priority priority) {

@@ -6,7 +6,6 @@ import static networkbook.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 
 import networkbook.commons.core.index.Index;
 import networkbook.commons.util.ToStringBuilder;
@@ -104,7 +103,7 @@ public class AddCommand extends Command {
         GraduatingYear updatedGraduatingYear = addGraduatingYear(personToAddInfo, editPersonDescriptor);
         Course updatedCourse = addCourse(personToAddInfo, editPersonDescriptor);
         Specialisation updatedSpecialisation = addSpecialisation(personToAddInfo, editPersonDescriptor);
-        Set<Tag> updatedTags = addTags(personToAddInfo, editPersonDescriptor);
+        UniqueList<Tag> updatedTags = addTags(personToAddInfo, editPersonDescriptor);
         Priority updatedPriority = addPriority(personToAddInfo, editPersonDescriptor);
 
         return new Person(currentName, updatedPhones, updatedEmails, updatedLinks, updatedGraduatingYear,
@@ -155,8 +154,10 @@ public class AddCommand extends Command {
         }
         return newSpecialisation.orElse(oldSpecialisation.orElse(null));
     }
-    private Set<Tag> addTags(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor) {
-        return editPersonDescriptor.getTags().orElse(personToAddInfo.getTags());
+    private UniqueList<Tag> addTags(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor) {
+        UniqueList<Tag> tags = personToAddInfo.getTags();
+        editPersonDescriptor.getTags().ifPresent(tags::addAllFromList);
+        return tags;
     }
 
     private Priority addPriority(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor)

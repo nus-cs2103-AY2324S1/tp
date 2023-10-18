@@ -1,6 +1,5 @@
 package networkbook.testutil;
 
-import java.util.Set;
 
 import networkbook.logic.commands.CreateCommand;
 import networkbook.logic.commands.EditCommand;
@@ -9,7 +8,6 @@ import networkbook.model.person.Email;
 import networkbook.model.person.Link;
 import networkbook.model.person.Person;
 import networkbook.model.person.Phone;
-import networkbook.model.tag.Tag;
 import networkbook.model.util.UniqueList;
 
 /**
@@ -46,7 +44,7 @@ public class PersonUtil {
         person.getSpecialisation().ifPresent(specialisation -> sb.append(CliSyntax.PREFIX_SPECIALISATION)
                 .append(" ").append(specialisation.value).append(" "));
         person.getTags().stream().forEach(
-            s -> sb.append(CliSyntax.PREFIX_TAG + " " + s.tagName + " ")
+            s -> sb.append(CliSyntax.PREFIX_TAG + " " + s.getValue() + " ")
         );
         return sb.toString();
     }
@@ -90,15 +88,14 @@ public class PersonUtil {
                 .append(course.value).append(" "));
         descriptor.getSpecialisation().ifPresent(specialisation -> sb.append(CliSyntax.PREFIX_SPECIALISATION)
                 .append(" ").append(specialisation.value).append(" "));
-        if (descriptor.getTags().isPresent()) {
-            Set<Tag> tags = descriptor.getTags().get();
-            if (tags.isEmpty()) {
+        descriptor.getTags().ifPresent((tagList) -> {
+            if (tagList.isEmpty()) {
                 sb.append(CliSyntax.PREFIX_TAG).append(" ");
             } else {
-                tags.forEach(s -> sb.append(CliSyntax.PREFIX_TAG).append(" ")
-                                                    .append(s.tagName).append(" "));
+                tagList.forEach((t) ->
+                        sb.append(CliSyntax.PREFIX_TAG).append(" ").append(t.toString()).append(" "));
             }
-        }
+        });
         return sb.toString();
     }
 }

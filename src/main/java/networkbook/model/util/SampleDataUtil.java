@@ -1,9 +1,6 @@
 package networkbook.model.util;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import networkbook.model.NetworkBook;
 import networkbook.model.ReadOnlyNetworkBook;
@@ -30,42 +27,42 @@ public class SampleDataUtil {
                     new UniqueList<Link>().setItems(List.of(new Link("www.alexyeoh.net"))),
                     new GraduatingYear("2016"),
                     new Course("Information Systems"), new Specialisation("Financial Technology"),
-                    getTagSet("friends"), new Priority("low")),
+                    getTagList("friends"), new Priority("low")),
             new Person(new Name("Bernice Yu"),
                     new UniqueList<Phone>().setItems(List.of(new Phone("99272758"))),
                     new UniqueList<Email>().setItems(List.of(new Email("berniceyu@example.com"))),
                     new UniqueList<Link>().setItems(List.of(new Link("github.com/bernfish"))),
                     new GraduatingYear("2020"),
                     new Course("Computer Science"), new Specialisation("Artificial Intelligence"),
-                    getTagSet("colleagues", "friends"), new Priority("high")),
+                    getTagList("colleagues", "friends"), new Priority("high")),
             new Person(new Name("Charlotte Oliveiro"),
                     new UniqueList<Phone>().setItems(List.of(new Phone("93210283"))),
                     new UniqueList<Email>().setItems(List.of(new Email("charlotte@example.com"))),
                     new UniqueList<Link>().setItems(List.of(new Link("facebook.com/Charlotte-Oliveiro"))),
                     new GraduatingYear("2000"),
                     new Course("Computer Science"), new Specialisation("Computer Security"),
-                    getTagSet("neighbours"), new Priority("M")),
+                    getTagList("neighbours"), new Priority("M")),
             new Person(new Name("David Li"),
                     new UniqueList<Phone>().setItems(List.of(new Phone("91031282"))),
                     new UniqueList<Email>().setItems(List.of(new Email("lidavid@example.com"))),
                     new UniqueList<Link>().setItems(List.of(new Link("wordpress.com/specialli-mine"))),
                     new GraduatingYear("2024"),
                     new Course("Computer Science"), new Specialisation("Database Systems"),
-                    getTagSet("family"), new Priority("High")),
+                    getTagList("family"), new Priority("High")),
             new Person(new Name("Irfan Ibrahim"),
                     new UniqueList<Phone>().setItems(List.of(new Phone("92492021"))),
                     new UniqueList<Email>().setItems(List.of(new Email("irfan@example.com"))),
                     new UniqueList<Link>().setItems(List.of(new Link("instagram.com/irfanny"))),
                     new GraduatingYear("2025"),
                     new Course("Computer Science"), new Specialisation("Parallel Computing"),
-                    getTagSet("classmates"), new Priority("low")),
+                    getTagList("classmates"), new Priority("low")),
             new Person(new Name("Roy Balakrishnan"),
                     new UniqueList<Phone>().setItems(List.of(new Phone("92624417"))),
                     new UniqueList<Email>().setItems(List.of(new Email("royb@example.com"))),
                     new UniqueList<Link>().setItems(List.of(new Link("incognito.com"))),
                     new GraduatingYear("2026"),
                     new Course("Computer Science"), new Specialisation("Computer Graphics"),
-                    getTagSet("colleagues"), null)
+                    getTagList("colleagues"), null)
         };
     }
 
@@ -78,12 +75,14 @@ public class SampleDataUtil {
     }
 
     /**
-     * Returns a tag set containing the list of strings given.
+     * Returns a {@code UniqueList} of tags containing the list of strings given.
      */
-    public static Set<Tag> getTagSet(String... strings) {
-        return Arrays.stream(strings)
-                .map(Tag::new)
-                .collect(Collectors.toSet());
+    public static UniqueList<Tag> getTagList(String... strings) {
+        UniqueList<Tag> tagList = new UniqueList<>();
+        for (String s : strings) {
+            tagList.add(new Tag(s));
+        }
+        return tagList;
     }
 
 }
