@@ -32,7 +32,7 @@ public interface ConTextStorage {
 
     /**
      * Saves the given {@link ReadOnlyConText} to the storage.
-     * @param ConText cannot be null.
+     * @param conText cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
     void saveConText(ReadOnlyConText conText) throws IOException;
