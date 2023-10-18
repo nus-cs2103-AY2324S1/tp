@@ -66,4 +66,17 @@ public class SpecialisationTest {
         // different values -> returns false
         assertFalse(specialisation.equals(new Specialisation("Other valid specialisation")));
     }
+
+    @Test
+    public void hashcode() {
+        // roughly equivalent to equals
+        Specialisation specialisation = new Specialisation("Valid specialisation");
+
+        assertTrue(specialisation.hashCode() == new Specialisation("Valid specialisation").hashCode());
+        assertTrue(specialisation.hashCode() == specialisation.hashCode());
+
+        assertFalse(specialisation.hashCode() == new Specialisation("Other valid specialisation").hashCode());
+        assertFalse(specialisation.hashCode() == 5);
+        assertFalse(new Integer(specialisation.hashCode()).equals(null));
+    }
 }
