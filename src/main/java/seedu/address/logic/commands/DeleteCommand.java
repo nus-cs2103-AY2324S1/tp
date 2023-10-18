@@ -105,7 +105,16 @@ public class DeleteCommand extends Command {
         }
 
         DeleteCommand otherDeleteCommand = (DeleteCommand) other;
-        return nric.equals(otherDeleteCommand.nric);
+
+        if (name != null && !name.equals(otherDeleteCommand.name)) {
+            return false;
+        }
+
+        if (nric != null && !nric.equals(otherDeleteCommand.nric)) {
+            return false;
+        }
+
+        return deletePersonDescriptor.equals(otherDeleteCommand.deletePersonDescriptor);
     }
 
     @Override
