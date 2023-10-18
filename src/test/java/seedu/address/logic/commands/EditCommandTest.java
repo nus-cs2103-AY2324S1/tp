@@ -183,7 +183,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_cannotFindPerson_throwsCommandException() throws CommandException{
+    public void execute_cannotFindPerson_throwsCommandException() throws CommandException {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().build();
         EditCommand editCommand = new EditCommand(null, null, descriptor);
 
@@ -196,6 +196,6 @@ public class EditCommandTest {
 
         Optional<Person> person = editCommand.findPersonToEdit(personList);
         assertFalse(person.isPresent());
-        }
+    }
 }
 
