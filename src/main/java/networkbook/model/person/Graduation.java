@@ -78,10 +78,15 @@ public class Graduation implements Comparable<Graduation> {
      * @return corresponding first calendar year
      */
     public static int parseAcadYearStart(String gradString) {
-        String match = matchGroup(gradString, 1);
-        int shortYear = Integer.parseInt(match);
-        int addedPart = (shortYear < YEAR_THRESHOLD) ? YEAR_PART_HI : YEAR_PART_LO;
-        return Integer.parseInt(match) + addedPart;
+        String ayStart = matchGroup(gradString, 1);
+        String ayEnd = matchGroup(gradString, 2);
+        int ayStartShortInt = Integer.parseInt(ayStart);
+        int ayEndShortInt = Integer.parseInt(ayEnd);
+        int addedPart = (ayStartShortInt < YEAR_THRESHOLD) ? YEAR_PART_HI : YEAR_PART_LO;
+        int ayStartFull = ayStartShortInt + addedPart;
+        int ayEndFull = ayEndShortInt + addedPart;
+        assert ayStartFull + 1 == ayEndFull;
+        return ayStartFull;
     }
 
 
@@ -92,10 +97,15 @@ public class Graduation implements Comparable<Graduation> {
      * @return corresponding second calendar year
      */
     public static int parseAcadYearEnd(String gradString) {
-        String match = matchGroup(gradString, 2);
-        int shortYear = Integer.parseInt(match);
-        int addedPart = (shortYear < YEAR_THRESHOLD) ? YEAR_PART_HI : YEAR_PART_LO;
-        return Integer.parseInt(match) + addedPart;
+        String ayStart = matchGroup(gradString, 1);
+        String ayEnd = matchGroup(gradString, 2);
+        int ayStartShortInt = Integer.parseInt(ayStart);
+        int ayEndShortInt = Integer.parseInt(ayEnd);
+        int addedPart = (ayStartShortInt < YEAR_THRESHOLD) ? YEAR_PART_HI : YEAR_PART_LO;
+        int ayStartFull = ayStartShortInt + addedPart;
+        int ayEndFull = ayEndShortInt + addedPart;
+        assert ayStartFull + 1 == ayEndFull;
+        return ayEndFull;
     }
 
     /**

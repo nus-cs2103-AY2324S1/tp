@@ -318,7 +318,7 @@ Example usage:
 
 Parameters:
 * `[grad]` is a valid graduation date, in the format `AYxxxx-Sy`.
-    * `xxxx` is the 4-digit representation of the 2 calendar years, in the academic year e.g. `2223` for Academic Year 20`22`/20`23`. Years must be between 1970-2069 (inclusive).
+    * `xxxx` is the 4-digit representation of the 2 calendar years, in the academic year e.g. `2223` for Academic Year 20`22`/20`23`. Academic year must be between AY1970/1971 to AY2069/2070 (inclusive).
     * `y` is either `1` for Semester 1, or `2` for Semester 2.
 * `[index]` is the index of the contact in the list.
 
