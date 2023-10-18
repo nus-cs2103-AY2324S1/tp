@@ -53,8 +53,8 @@ public class CreateCommandParserTest {
                 CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.PHONE_DESC_BOB
                         + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.LINK_DESC_BOB
                         + CommandTestUtil.GRADUATING_YEAR_DESC_BOB + CommandTestUtil.COURSE_DESC_BOB
-                        + CommandTestUtil.SPECIALISATION_DESC_BOB + CommandTestUtil.TAG_DESC_HUSBAND
-                        + CommandTestUtil.TAG_DESC_FRIEND,
+                        + CommandTestUtil.SPECIALISATION_DESC_BOB + CommandTestUtil.TAG_DESC_FRIEND
+                        + CommandTestUtil.TAG_DESC_HUSBAND,
                 new CreateCommand(expectedPersonMultipleTags));
     }
 
@@ -199,7 +199,7 @@ public class CreateCommandParserTest {
         // no emails
         Person expectedPersonWithoutEmails = new PersonBuilder(TypicalPersons.AMY)
                 .withoutOptionalFields()
-                .withPhone(VALID_PHONE_AMY)
+                .withPhones(List.of(VALID_PHONE_AMY))
                 .withLinks(List.of(VALID_LINK_AMY))
                 .withGraduatingYear(VALID_GRADUATING_YEAR_AMY)
                 .withCourse(VALID_COURSE_AMY)
@@ -216,7 +216,7 @@ public class CreateCommandParserTest {
         // no links
         Person expectedPersonWithoutLinks = new PersonBuilder(TypicalPersons.AMY)
                 .withoutOptionalFields()
-                .withPhone(VALID_PHONE_AMY)
+                .withPhones(List.of(VALID_PHONE_AMY))
                 .withEmails(List.of(VALID_EMAIL_AMY))
                 .withGraduatingYear(VALID_GRADUATING_YEAR_AMY)
                 .withCourse(VALID_COURSE_AMY)
@@ -233,7 +233,7 @@ public class CreateCommandParserTest {
         // no graduating year
         Person expectedPersonWithoutGraduatingYear = new PersonBuilder(TypicalPersons.AMY)
                 .withoutOptionalFields()
-                .withPhone(VALID_PHONE_AMY)
+                .withPhones(List.of(VALID_PHONE_AMY))
                 .withEmails(List.of(VALID_EMAIL_AMY))
                 .withLinks(List.of(VALID_LINK_AMY))
                 .withCourse(VALID_COURSE_AMY)
@@ -250,7 +250,7 @@ public class CreateCommandParserTest {
         // no course
         Person expectedPersonWithoutCourse = new PersonBuilder(TypicalPersons.AMY)
                 .withoutOptionalFields()
-                .withPhone(VALID_PHONE_AMY)
+                .withPhones(List.of(VALID_PHONE_AMY))
                 .withEmails(List.of(VALID_EMAIL_AMY))
                 .withLinks(List.of(VALID_LINK_AMY))
                 .withGraduatingYear(VALID_GRADUATING_YEAR_AMY)
@@ -267,7 +267,7 @@ public class CreateCommandParserTest {
         // no specialisation
         Person expectedPersonWithoutSpecialisation = new PersonBuilder(TypicalPersons.AMY)
                 .withoutOptionalFields()
-                .withPhone(VALID_PHONE_AMY)
+                .withPhones(List.of(VALID_PHONE_AMY))
                 .withEmails(List.of(VALID_EMAIL_AMY))
                 .withLinks(List.of(VALID_LINK_AMY))
                 .withGraduatingYear(VALID_GRADUATING_YEAR_AMY)

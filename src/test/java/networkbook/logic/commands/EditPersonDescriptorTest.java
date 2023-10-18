@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import networkbook.model.tag.Tag;
+import networkbook.model.util.UniqueList;
 import networkbook.testutil.EditPersonDescriptorBuilder;
 
 public class EditPersonDescriptorTest {
@@ -80,11 +82,20 @@ public class EditPersonDescriptorTest {
     }
 
     @Test
+    public void addTag_addNewTagWhenTagFieldIsNull_success() {
+        EditCommand.EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().build();
+        descriptor.addTag(new Tag(CommandTestUtil.VALID_TAG_FRIEND));
+        UniqueList<Tag> expectedTagList = new UniqueList<>();
+        expectedTagList.add(new Tag(CommandTestUtil.VALID_TAG_FRIEND));
+        assertEquals(expectedTagList, descriptor.getTags().get());
+    }
+
+    @Test
     public void toStringMethod() {
         EditCommand.EditPersonDescriptor editPersonDescriptor = new EditCommand.EditPersonDescriptor();
         String expected = EditCommand.EditPersonDescriptor.class.getCanonicalName() + "{name="
-                + editPersonDescriptor.getName().orElse(null) + ", phone="
-                + editPersonDescriptor.getPhone().orElse(null) + ", emails="
+                + editPersonDescriptor.getName().orElse(null) + ", phones="
+                + editPersonDescriptor.getPhones().orElse(null) + ", emails="
                 + editPersonDescriptor.getEmails().orElse(null) + ", links="
                 + editPersonDescriptor.getLinks().orElse(null) + ", graduating year="
                 + editPersonDescriptor.getGraduatingYear().orElse(null) + ", course="

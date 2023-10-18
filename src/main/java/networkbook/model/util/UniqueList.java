@@ -48,9 +48,9 @@ public class UniqueList<T extends Identifiable<T>> implements Iterable<T> {
      * Adds all elements from the specified list to this list.
      * If there are items in the specified list that are already in this list, they are simply ignored.
      */
-    public void addAll(UniqueList<T> toAddList) {
-        requireNonNull(toAddList);
-        toAddList.internalList.forEach(toAdd -> {
+    public void addAllFromList(UniqueList<T> listToAddFrom) {
+        requireNonNull(listToAddFrom);
+        listToAddFrom.internalList.forEach(toAdd -> {
             if (!contains(toAdd)) {
                 internalList.add(toAdd);
             }
@@ -61,7 +61,7 @@ public class UniqueList<T extends Identifiable<T>> implements Iterable<T> {
      * Replaces the element {@code target} in the list with {@code edited}.
      * {@code target} must exist in the list.
      * @param target The target to replace.
-     * @param edited The new value of the
+     * @param edited The new value of the element.
      */
     public void setItem(T target, T edited) {
         requireAllNonNull(target, edited);
@@ -148,7 +148,7 @@ public class UniqueList<T extends Identifiable<T>> implements Iterable<T> {
      */
     public UniqueList<T> copy() {
         UniqueList<T> newUniqueList = new UniqueList<>();
-        newUniqueList.addAll(this);
+        newUniqueList.addAllFromList(this);
         return newUniqueList;
     }
 

@@ -2,11 +2,8 @@ package networkbook.model.person;
 
 import static networkbook.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 
 import networkbook.commons.util.ToStringBuilder;
 import networkbook.model.tag.Tag;
@@ -21,7 +18,7 @@ public class Person implements Identifiable<Person> {
 
     // Identity fields
     private final Name name;
-    private final Phone phone;
+    private final UniqueList<Phone> phones;
     private final UniqueList<Email> emails;
 
     // Data fields
@@ -29,7 +26,7 @@ public class Person implements Identifiable<Person> {
     private final GraduatingYear graduatingYear;
     private final Course course;
     private final Specialisation specialisation;
-    private final Set<Tag> tags = new HashSet<>();
+    private final UniqueList<Tag> tags;
     private final Priority priority;
 
     /**
@@ -37,23 +34,23 @@ public class Person implements Identifiable<Person> {
      * Other fields are nullable.
      */
     public Person(Name name,
-                  Phone phone,
+                  UniqueList<Phone> phones,
                   UniqueList<Email> emails,
                   UniqueList<Link> links,
                   GraduatingYear graduatingYear,
                   Course course,
                   Specialisation specialisation,
-                  Set<Tag> tags,
+                  UniqueList<Tag> tags,
                   Priority priority) {
         requireAllNonNull(name);
         this.name = name;
-        this.phone = phone;
+        this.phones = phones;
         this.emails = emails.copy();
         this.links = links.copy();
         this.graduatingYear = graduatingYear;
         this.course = course;
         this.specialisation = specialisation;
-        this.tags.addAll(tags);
+        this.tags = tags.copy();
         this.priority = priority;
     }
 
@@ -61,8 +58,8 @@ public class Person implements Identifiable<Person> {
         return name;
     }
 
-    public Optional<Phone> getPhone() {
-        return Optional.ofNullable(phone);
+    public UniqueList<Phone> getPhones() {
+        return phones.copy();
     }
 
     public UniqueList<Email> getEmails() {
@@ -80,13 +77,8 @@ public class Person implements Identifiable<Person> {
     public Optional<Specialisation> getSpecialisation() {
         return Optional.ofNullable(specialisation);
     }
-
-    /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public UniqueList<Tag> getTags() {
+        return this.tags.copy();
     }
 
     public Optional<Priority> getPriority() {
@@ -132,28 +124,28 @@ public class Person implements Identifiable<Person> {
 
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
-                && Objects.equals(phone, otherPerson.phone)
+                && Objects.equals(phones, otherPerson.phones)
                 && Objects.equals(emails, otherPerson.emails)
                 && Objects.equals(links, otherPerson.links)
                 && Objects.equals(graduatingYear, otherPerson.graduatingYear)
                 && Objects.equals(course, otherPerson.course)
                 && Objects.equals(specialisation, otherPerson.specialisation)
-                && tags.equals(otherPerson.tags)
+                && Objects.equals(tags, otherPerson.tags)
                 && Objects.equals(priority, otherPerson.priority);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, emails, links, graduatingYear, course, specialisation, tags, priority);
+        return Objects.hash(name, phones, emails, links, graduatingYear, course, specialisation, tags, priority);
     }
 
     @Override
     public String toString() {
         ToStringBuilder tsb = new ToStringBuilder(this)
                 .add("name", name);
-        if (phone != null) {
-            tsb.add("phone", phone);
+        if (!Objects.equals(phones, new UniqueList<Phone>())) {
+            tsb.add("phones", phones);
         }
         if (!Objects.equals(emails, new UniqueList<Email>())) {
             tsb.add("emails", emails);
@@ -170,7 +162,7 @@ public class Person implements Identifiable<Person> {
         if (specialisation != null) {
             tsb.add("specialisation", specialisation);
         }
-        if (!tags.equals(Collections.emptySet())) {
+        if (!Objects.equals(tags, new UniqueList<Tag>())) {
             tsb.add("tags", tags);
         }
         if (priority != null) {

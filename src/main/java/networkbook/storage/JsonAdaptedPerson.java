@@ -1,9 +1,7 @@
 package networkbook.storage;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -30,7 +28,7 @@ class JsonAdaptedPerson {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
 
     private final String name;
-    private final String phone;
+    private final List<JsonAdaptedProperty<Phone>> phones = new ArrayList<>();
     private final List<JsonAdaptedProperty<Email>> emails = new ArrayList<>();
     private final List<JsonAdaptedProperty<Link>> links = new ArrayList<>();
     private final String graduatingYear;
@@ -44,7 +42,7 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name,
-                             @JsonProperty("phone") String phone,
+                             @JsonProperty("phones") List<JsonAdaptedProperty<Phone>> phones,
                              @JsonProperty("emails") List<JsonAdaptedProperty<Email>> emails,
                              @JsonProperty("links") List<JsonAdaptedProperty<Link>> links,
                              @JsonProperty("graduating year") String graduatingYear,
@@ -53,7 +51,9 @@ class JsonAdaptedPerson {
                              @JsonProperty("tags") List<JsonAdaptedProperty<Tag>> tags,
                              @JsonProperty("priority") String priority) {
         this.name = name;
-        this.phone = phone;
+        if (phones != null) {
+            this.phones.addAll(phones);
+        }
         if (emails != null) {
             this.emails.addAll(emails);
         }
@@ -74,7 +74,9 @@ class JsonAdaptedPerson {
      */
     public JsonAdaptedPerson(Person source) {
         name = source.getName().fullName;
-        phone = source.getPhone().map(Phone::toString).orElse(null);
+        phones.addAll(source.getPhones().stream()
+                .map(JsonAdaptedProperty::new)
+                .collect(Collectors.toList()));
         emails.addAll(source.getEmails().stream()
                 .map(JsonAdaptedProperty::new)
                 .collect(Collectors.toList()));
@@ -96,11 +98,6 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
-        for (JsonAdaptedProperty<Tag> tag : tags) {
-            personTags.add(tag.toModelType(Tag::isValidTagName, Tag.MESSAGE_CONSTRAINTS, Tag::new));
-        }
-
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -109,13 +106,13 @@ class JsonAdaptedPerson {
         }
         final Name modelName = new Name(name);
 
-        Phone modelPhone = null;
-        if (phone != null) {
-            if (!Phone.isValidPhone(phone)) {
-                throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
-            }
-            modelPhone = new Phone(phone);
+        if (!phones.stream()
+                .map(JsonAdaptedProperty::getName)
+                .allMatch(Phone::isValidPhone)) {
+            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
         }
+        final UniqueList<Phone> modelPhones = new UniqueList<>();
+        phones.forEach(phone -> modelPhones.add(new Phone(phone.getName())));
 
         if (!emails.stream()
                 .map(JsonAdaptedProperty::getName)
@@ -157,7 +154,10 @@ class JsonAdaptedPerson {
             modelSpecialisation = new Specialisation(specialisation);
         }
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
+        final UniqueList<Tag> modelTags = new UniqueList<>();
+        for (JsonAdaptedProperty<Tag> tag : tags) {
+            modelTags.add(tag.toModelType(Tag::isValidTagName, Tag.MESSAGE_CONSTRAINTS, Tag::new));
+        }
 
         Priority modelPriority = null;
         if (priority != null) {
@@ -167,7 +167,7 @@ class JsonAdaptedPerson {
             modelPriority = new Priority(priority);
         }
 
-        return new Person(modelName, modelPhone, modelEmails, modelLinks, modelGraduatingYear, modelCourse,
+        return new Person(modelName, modelPhones, modelEmails, modelLinks, modelGraduatingYear, modelCourse,
                 modelSpecialisation, modelTags, modelPriority);
     }
 

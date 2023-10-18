@@ -1,8 +1,5 @@
 package networkbook.testutil;
 
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import networkbook.logic.commands.EditCommand;
 import networkbook.model.person.Course;
@@ -15,6 +12,7 @@ import networkbook.model.person.Phone;
 import networkbook.model.person.Priority;
 import networkbook.model.person.Specialisation;
 import networkbook.model.tag.Tag;
+import networkbook.model.util.UniqueList;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.
@@ -37,7 +35,7 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder(Person person) {
         descriptor = new EditCommand.EditPersonDescriptor();
         descriptor.setName(person.getName());
-        person.getPhone().ifPresent((Phone p) -> descriptor.setPhone(p));
+        descriptor.setPhones(person.getPhones());
         descriptor.setEmails(person.getEmails());
         descriptor.setLinks(person.getLinks());
         person.getGraduatingYear().ifPresent((GraduatingYear g) -> descriptor.setGraduatingYear(g));
@@ -59,7 +57,7 @@ public class EditPersonDescriptorBuilder {
      * Sets the {@code Phone} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withPhone(String phone) {
-        descriptor.setPhone(new Phone(phone));
+        descriptor.addPhone(new Phone(phone));
         return this;
     }
 
@@ -108,8 +106,10 @@ public class EditPersonDescriptorBuilder {
      * that we are building.
      */
     public EditPersonDescriptorBuilder withTags(String... tags) {
-        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
-        descriptor.setTags(tagSet);
+        descriptor.setTags(new UniqueList<>());
+        for (String tag : tags) {
+            descriptor.addTag(new Tag(tag));
+        }
         return this;
     }
 

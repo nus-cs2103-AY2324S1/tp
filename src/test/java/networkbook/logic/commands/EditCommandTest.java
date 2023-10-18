@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import networkbook.commons.core.index.Index;
@@ -47,7 +49,7 @@ public class EditCommandTest {
 
         PersonBuilder personInList = new PersonBuilder(lastPerson);
         Person editedPerson = personInList.withName(CommandTestUtil.VALID_NAME_BOB)
-                .withPhone(CommandTestUtil.VALID_PHONE_BOB)
+                .withPhones(List.of(CommandTestUtil.VALID_PHONE_BOB))
                 .withTags(CommandTestUtil.VALID_TAG_HUSBAND).build();
 
         EditCommand.EditPersonDescriptor descriptor =

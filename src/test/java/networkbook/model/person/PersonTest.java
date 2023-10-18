@@ -23,12 +23,6 @@ import networkbook.testutil.TypicalPersons;
 public class PersonTest {
 
     @Test
-    public void asObservableList_modifyList_throwsUnsupportedOperationException() {
-        Person person = new PersonBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> person.getTags().remove(0));
-    }
-
-    @Test
     public void isSame() {
         // same object -> returns true
         assertTrue(TypicalPersons.AMY.isSame(TypicalPersons.AMY));
@@ -38,7 +32,7 @@ public class PersonTest {
 
         // same name, all other attributes different -> returns true
         Person editedAmy = new PersonBuilder(TypicalPersons.AMY)
-                .withPhone(VALID_PHONE_BOB).withEmails(List.of(VALID_EMAIL_BOB))
+                .withPhones(List.of(VALID_PHONE_BOB)).withEmails(List.of(VALID_EMAIL_BOB))
                 .withLinks(List.of(VALID_LINK_BOB)).withGraduatingYear(VALID_GRADUATING_YEAR_BOB)
                 .withCourse(VALID_COURSE_BOB).withSpecialisation(VALID_SPECIALISATION_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
@@ -86,7 +80,7 @@ public class PersonTest {
         assertFalse(TypicalPersons.AMY.equals(editedAmy));
 
         // different phone -> returns false
-        editedAmy = new PersonBuilder(TypicalPersons.AMY).withPhone(VALID_PHONE_BOB).build();
+        editedAmy = new PersonBuilder(TypicalPersons.AMY).withPhones(List.of(VALID_PHONE_BOB)).build();
         assertFalse(TypicalPersons.AMY.equals(editedAmy));
 
         // different email -> returns false
@@ -118,7 +112,7 @@ public class PersonTest {
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName()
                 + "{name=" + TypicalPersons.AMY.getName()
-                + ", phone=" + TypicalPersons.AMY.getPhone().get()
+                + ", phones=" + TypicalPersons.AMY.getPhones()
                 + ", emails=" + TypicalPersons.AMY.getEmails()
                 + ", links=" + TypicalPersons.AMY.getLinks()
                 + ", graduating year=" + TypicalPersons.AMY.getGraduatingYear().get()

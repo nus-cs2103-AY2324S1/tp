@@ -148,7 +148,6 @@ public class CommandTestUtil {
         // only do so by copying its components.
         NetworkBook expectedNetworkBook = new NetworkBook(actualModel.getNetworkBook());
         List<Person> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
-
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
         assertEquals(expectedNetworkBook, actualModel.getNetworkBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());

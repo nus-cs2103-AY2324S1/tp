@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Optional;
-import java.util.Set;
 
 import networkbook.commons.core.index.Index;
 import networkbook.logic.Messages;
@@ -14,6 +13,7 @@ import networkbook.logic.commands.EditCommand.EditPersonDescriptor;
 import networkbook.logic.parser.exceptions.ParseException;
 import networkbook.model.person.Email;
 import networkbook.model.person.Link;
+import networkbook.model.person.Phone;
 import networkbook.model.tag.Tag;
 import networkbook.model.util.UniqueList;
 
@@ -87,10 +87,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setName(
                     ParserUtil.parseName(argMultimap.getValue(CliSyntax.PREFIX_NAME).get()));
         }
-        if (argMultimap.getValue(CliSyntax.PREFIX_PHONE).isPresent()) {
-            editPersonDescriptor.setPhone(
-                    ParserUtil.parsePhone(argMultimap.getValue(CliSyntax.PREFIX_PHONE).get()));
-        }
+        parsePhonesForEdit(argMultimap.getAllValues(CliSyntax.PREFIX_PHONE))
+                .ifPresent(editPersonDescriptor::setPhones);
         parseEmailsForEdit(argMultimap.getAllValues(CliSyntax.PREFIX_EMAIL))
                 .ifPresent(editPersonDescriptor::setEmails);
         parseLinksForEdit(argMultimap.getAllValues(CliSyntax.PREFIX_LINK))
@@ -118,6 +116,18 @@ public class EditCommandParser implements Parser<EditCommand> {
     }
 
     /**
+     * Parses {@code Collection<String> phones} into a {@code UniqueList<Phone>} wrapped in an {@code Optional}.
+     */
+    private static Optional<UniqueList<Phone>> parsePhonesForEdit(Collection<String> phones) throws ParseException {
+        requireNonNull(phones);
+
+        if (phones.isEmpty()) {
+            return Optional.empty();
+        }
+        return Optional.of(ParserUtil.parsePhones(phones));
+    }
+
+    /**
      * Parses {@code Collection<String> emails} into a {@code UniqueList<Email>} wrapped in an {@code Optional}.
      */
     private static Optional<UniqueList<Email>> parseEmailsForEdit(Collection<String> emails) throws ParseException {
@@ -142,11 +152,11 @@ public class EditCommandParser implements Parser<EditCommand> {
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>} if {@code tags} is non-empty.
+     * Parses {@code Collection<String> tags} into a {@code UniqueList<Tag>} if {@code tags} is non-empty.
      * If {@code tags} contain only one element which is an empty string, it will be parsed into a
-     * {@code Set<Tag>} containing zero tags.
+     * {@code UniqueList<Tag>} containing zero tags.
      */
-    private static Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
+    private static Optional<UniqueList<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
 
         if (tags.isEmpty()) {
