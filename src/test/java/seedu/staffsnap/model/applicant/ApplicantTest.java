@@ -3,13 +3,16 @@ package seedu.staffsnap.model.applicant;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_INTERVIEW_HUSBAND;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_POSITION_BOB;
 import static seedu.staffsnap.testutil.Assert.assertThrows;
 import static seedu.staffsnap.testutil.TypicalApplicants.ALICE;
+import static seedu.staffsnap.testutil.TypicalApplicants.AMY;
 import static seedu.staffsnap.testutil.TypicalApplicants.BOB;
 
 import org.junit.jupiter.api.Test;
@@ -27,10 +30,10 @@ public class ApplicantTest {
     @Test
     public void isSameApplicant() {
         // same object -> returns true
-        assertTrue(ALICE.isSameApplicant(ALICE));
+        assertTrue(AMY.isSameApplicant(AMY));
 
         // null -> returns false
-        assertFalse(ALICE.isSameApplicant(null));
+        assertFalse(AMY.isSameApplicant(null));
 
         // same phone number, all other attributes different -> returns true
         Applicant editedAlice = new ApplicantBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();

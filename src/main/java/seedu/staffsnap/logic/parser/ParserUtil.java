@@ -2,9 +2,9 @@ package seedu.staffsnap.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import seedu.staffsnap.commons.core.index.Index;
 import seedu.staffsnap.commons.util.StringUtil;
@@ -37,6 +37,24 @@ public class ParserUtil {
     }
 
     /**
+     * Capitalizes the first letter of each word.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @return the new content with the first letter of each word capitalized.
+     */
+    public static String standardizeCapitalization(String content) {
+        String[] tokens = content.split(" ");
+        StringBuilder newContent = new StringBuilder();
+        for (String token : tokens) {
+            char capLetter = Character.toUpperCase(token.charAt(0));
+            newContent.append(" ");
+            newContent.append(capLetter);
+            newContent.append(token.substring(1).toLowerCase());
+        }
+        return newContent.toString().trim();
+    }
+
+    /**
      * Parses a {@code String name} into a {@code Name}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -48,6 +66,7 @@ public class ParserUtil {
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
+        trimmedName = standardizeCapitalization(trimmedName);
         return new Name(trimmedName);
     }
 
@@ -78,6 +97,7 @@ public class ParserUtil {
         if (!Position.isValidPosition(trimmedPosition)) {
             throw new ParseException(Position.MESSAGE_CONSTRAINTS);
         }
+        trimmedPosition = standardizeCapitalization(trimmedPosition);
         return new Position(trimmedPosition);
     }
 
@@ -93,7 +113,7 @@ public class ParserUtil {
         if (!Email.isValidEmail(trimmedEmail)) {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
-        return new Email(trimmedEmail);
+        return new Email(trimmedEmail.toLowerCase());
     }
 
     /**
@@ -112,15 +132,15 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code Collection<String> interviews} into a {@code Set<Interview>}.
+     * Parses {@code Collection<String> interviews} into a {@code List<Interview>}.
      */
-    public static Set<Interview> parseInterviews(Collection<String> interviews) throws ParseException {
+    public static List<Interview> parseInterviews(Collection<String> interviews) throws ParseException {
         requireNonNull(interviews);
-        final Set<Interview> interviewSet = new HashSet<>();
-        for (String interviewName : interviews) {
-            interviewSet.add(parseInterview(interviewName));
+        final List<Interview> interviewList = new ArrayList<>();
+        for (String interviewType : interviews) {
+            interviewList.add(parseInterview(interviewType));
         }
-        return interviewSet;
+        return interviewList;
     }
 
     /**
@@ -138,5 +158,20 @@ public class ParserUtil {
             throw new ParseException(Descriptor.MESSAGE_CONSTRAINTS);
         }
         return result;
+    }
+
+    /**
+     * Parses a {@code String type} into a {@code String}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code type} is invalid.
+     */
+    public static String parseType(String type) throws ParseException {
+        requireNonNull(type);
+        String trimmedType = type.trim();
+        if (!Interview.isValidType(trimmedType)) {
+            throw new ParseException(Interview.MESSAGE_CONSTRAINTS);
+        }
+        return trimmedType.toLowerCase();
     }
 }

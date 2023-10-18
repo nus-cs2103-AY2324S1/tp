@@ -6,10 +6,10 @@ import static seedu.staffsnap.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.staffsnap.testutil.Assert.assertThrows;
 import static seedu.staffsnap.testutil.TypicalIndexes.INDEX_FIRST_APPLICANT;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -31,11 +31,13 @@ public class ParserUtilTest {
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
-    private static final String VALID_POSITION = "123 Main Street #0505";
+    private static final String VALID_POSITION = "Software Engineer";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_INTERVIEW_1 = "friend";
     private static final String VALID_INTERVIEW_2 = "neighbour";
     private static final String VALID_DESCRIPTOR = "name";
+
+    private static final String CAPITALIZED_NAME = "RACHEL WALKER";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -191,13 +193,13 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseInterviews_collectionWithValidInterviews_returnsInterviewSet() throws Exception {
-        Set<Interview> actualInterviewSet = ParserUtil
+    public void parseInterviews_collectionWithValidInterviews_returnsInterviewList() throws Exception {
+        List<Interview> actualInterviewList = ParserUtil
                 .parseInterviews(Arrays.asList(VALID_INTERVIEW_1, VALID_INTERVIEW_2));
-        Set<Interview> expectedInterviewSet = new HashSet<Interview>(
+        List<Interview> expectedInterviewList = new ArrayList<>(
                 Arrays.asList(new Interview(VALID_INTERVIEW_1), new Interview(VALID_INTERVIEW_2)));
 
-        assertEquals(expectedInterviewSet, actualInterviewSet);
+        assertEquals(expectedInterviewList, actualInterviewList);
     }
 
     @Test
@@ -221,5 +223,10 @@ public class ParserUtilTest {
         String descriptorWithWhitespace = WHITESPACE + VALID_DESCRIPTOR + WHITESPACE;
         Descriptor expectedDescriptor = Descriptor.NAME;
         assertEquals(expectedDescriptor, ParserUtil.parseDescriptor(descriptorWithWhitespace));
+    }
+
+    @Test
+    public void standardizeCapitalization_validValueWithCapitalization_returnsCapitalizedString() {
+        assertEquals(VALID_NAME, ParserUtil.standardizeCapitalization(CAPITALIZED_NAME));
     }
 }

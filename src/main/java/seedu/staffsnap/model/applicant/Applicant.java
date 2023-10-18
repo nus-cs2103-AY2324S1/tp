@@ -2,10 +2,10 @@ package seedu.staffsnap.model.applicant;
 
 import static seedu.staffsnap.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 import seedu.staffsnap.commons.util.ToStringBuilder;
 import seedu.staffsnap.model.interview.Interview;
@@ -25,12 +25,12 @@ public class Applicant implements Comparable<Applicant> {
     // Data fields
     private final Email email;
     private final Position position;
-    private final Set<Interview> interviews = new HashSet<>();
+    private final List<Interview> interviews = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Applicant(Name name, Phone phone, Email email, Position position, Set<Interview> interviews) {
+    public Applicant(Name name, Phone phone, Email email, Position position, List<Interview> interviews) {
         requireAllNonNull(name, phone, email, position, interviews);
         this.name = name;
         this.phone = phone;
@@ -56,11 +56,11 @@ public class Applicant implements Comparable<Applicant> {
     }
 
     /**
-     * Returns an immutable interview set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable interview list, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Interview> getInterviews() {
-        return Collections.unmodifiableSet(interviews);
+    public List<Interview> getInterviews() {
+        return Collections.unmodifiableList(interviews);
     }
 
     /**
@@ -73,8 +73,8 @@ public class Applicant implements Comparable<Applicant> {
         }
 
         return otherApplicant != null
-                && (otherApplicant.getEmail().equals(this.getEmail())
-                || otherApplicant.getPhone().equals(this.getPhone()));
+                && (otherApplicant.getEmail().equals(getEmail())
+                || otherApplicant.getPhone().equals(getPhone()));
     }
 
     /**
@@ -167,4 +167,13 @@ public class Applicant implements Comparable<Applicant> {
         }
     }
 
+    /**
+     * Add an interview to an Applicant.
+     *
+     * @param interviewToAdd the new interview to add to the Applicant
+     */
+    public void addInterview(Interview interviewToAdd) {
+        interviews.add(interviewToAdd);
+        Collections.sort(interviews);
+    }
 }

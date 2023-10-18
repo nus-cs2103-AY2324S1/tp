@@ -8,12 +8,11 @@ import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_POSITION;
 import static seedu.staffsnap.model.Model.PREDICATE_SHOW_ALL_APPLICANTS;
 
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 
 import seedu.staffsnap.commons.core.index.Index;
 import seedu.staffsnap.commons.util.CollectionUtil;
@@ -107,7 +106,7 @@ public class EditCommand extends Command {
         Phone updatedPhone = editApplicantDescriptor.getPhone().orElse(applicantToEdit.getPhone());
         Email updatedEmail = editApplicantDescriptor.getEmail().orElse(applicantToEdit.getEmail());
         Position updatedPosition = editApplicantDescriptor.getPosition().orElse(applicantToEdit.getPosition());
-        Set<Interview> updatedInterviews = editApplicantDescriptor
+        List<Interview> updatedInterviews = editApplicantDescriptor
                 .getInterviews().orElse(applicantToEdit.getInterviews());
 
         return new Applicant(updatedName, updatedPhone, updatedEmail, updatedPosition, updatedInterviews);
@@ -146,7 +145,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Position position;
-        private Set<Interview> interviews;
+        private List<Interview> interviews;
 
         public EditApplicantDescriptor() {}
 
@@ -205,8 +204,8 @@ public class EditCommand extends Command {
          * Sets {@code interviews} to this object's {@code interviews}.
          * A defensive copy of {@code interviews} is used internally.
          */
-        public void setInterviews(Set<Interview> interviews) {
-            this.interviews = (interviews != null) ? new HashSet<>(interviews) : null;
+        public void setInterviews(List<Interview> interviews) {
+            this.interviews = (interviews != null) ? new ArrayList<>(interviews) : null;
         }
 
         /**
@@ -214,8 +213,8 @@ public class EditCommand extends Command {
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code interviews} is null.
          */
-        public Optional<Set<Interview>> getInterviews() {
-            return (interviews != null) ? Optional.of(Collections.unmodifiableSet(interviews)) : Optional.empty();
+        public Optional<List<Interview>> getInterviews() {
+            return (interviews != null) ? Optional.of(Collections.unmodifiableList(interviews)) : Optional.empty();
         }
 
         @Override
