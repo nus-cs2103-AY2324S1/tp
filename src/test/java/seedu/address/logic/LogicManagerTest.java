@@ -152,7 +152,7 @@ public class LogicManagerTest {
         // Inject LogicManager with an contactsStorage that throws the IOException e when saving
         JsonContactsStorage contactsStorage = new JsonContactsStorage(prefPath) {
             @Override
-            public void saveConText(ContactList contactList, Path filePath)
+            public void saveContactsManager(ContactList contactList, Path filePath)
                     throws IOException {
                 throw e;
             }
@@ -164,7 +164,7 @@ public class LogicManagerTest {
 
         logic = new LogicManager(model, storage);
 
-        // Triggers the saveConText method by executing an add command
+        // Triggers the saveContactsManager method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
                 + EMAIL_DESC_AMY + NOTE_DESC_AMY;
         Contact expectedContact = new ContactBuilder(TestData.Valid.Contact.AMY).withTags().build();

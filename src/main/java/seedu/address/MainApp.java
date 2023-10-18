@@ -78,12 +78,12 @@ public class MainApp extends Application {
         Optional<ContactList> contactListOptional;
         ContactList initialData;
         try {
-            contactListOptional = storage.readConText();
+            contactListOptional = storage.readContactsManager();
             if (!contactListOptional.isPresent()) {
                 logger.info("Creating a new data file " + storage.getConTextFilePath()
                         + " populated with a sample ContactsManager.");
             }
-            initialData = contactListOptional.orElseGet(SampleDataUtil::getSampleConText);
+            initialData = contactListOptional.orElseGet(SampleDataUtil::getSampleContactsManager);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getConTextFilePath() + " could not be loaded."
                     + " Will be starting with an empty contactList.");

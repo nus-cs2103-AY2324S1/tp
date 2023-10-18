@@ -54,25 +54,25 @@ public class StorageManager implements Storage {
     }
 
     @Override
-    public Optional<ContactList> readConText() throws DataLoadingException {
-        return readConText(contactsStorage.getConTextFilePath());
+    public Optional<ContactList> readContactsManager() throws DataLoadingException {
+        return readContactsManager(contactsStorage.getConTextFilePath());
     }
 
     @Override
-    public Optional<ContactList> readConText(Path filePath) throws DataLoadingException {
+    public Optional<ContactList> readContactsManager(Path filePath) throws DataLoadingException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return contactsStorage.readConText(filePath);
+        return contactsStorage.readContactsManager(filePath);
     }
 
     @Override
-    public void saveConText(ContactList contactList) throws IOException {
-        saveConText(contactList, contactsStorage.getConTextFilePath());
+    public void saveContactsManager(ContactList contactList) throws IOException {
+        saveContactsManager(contactList, contactsStorage.getConTextFilePath());
     }
 
     @Override
-    public void saveConText(ContactList contactList, Path filePath) throws IOException {
+    public void saveContactsManager(ContactList contactList, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        contactsStorage.saveConText(contactList, filePath);
+        contactsStorage.saveContactsManager(contactList, filePath);
     }
 
 }

@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TestData.getTypicalConText;
+import static seedu.address.testutil.TestData.getTypicalContactsManager;
 
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +14,7 @@ import seedu.address.model.UserPrefs;
 public class ClearCommandTest {
 
     @Test
-    public void execute_emptyConText_success() {
+    public void execute_emptyContactsManager_success() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
 
@@ -23,9 +23,9 @@ public class ClearCommandTest {
 
     @Test
     public void execute_nonEmptyConText_success() {
-        Model model = new ModelManager(getTypicalConText(), new UserPrefs());
-        Model expectedModel = new ModelManager(getTypicalConText(), new UserPrefs());
-        expectedModel.setConText(new ContactsManager());
+        Model model = new ModelManager(getTypicalContactsManager(), new UserPrefs());
+        Model expectedModel = new ModelManager(getTypicalContactsManager(), new UserPrefs());
+        expectedModel.setContactsManager(new ContactsManager());
 
         assertCommandSuccess(new ClearCommand(), model, Messages.MESSAGE_CLEAR_COMMAND_SUCCESS, expectedModel);
     }

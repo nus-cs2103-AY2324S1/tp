@@ -6,7 +6,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TestData.ALICE;
 import static seedu.address.testutil.TestData.HOON;
 import static seedu.address.testutil.TestData.IDA;
-import static seedu.address.testutil.TestData.getTypicalConText;
+import static seedu.address.testutil.TestData.getTypicalContactsManager;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -26,12 +26,12 @@ public class JsonContactsStorageTest {
     public Path testFolder;
 
     @Test
-    public void readConText_nullFilePath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> readConText(null));
+    public void readContactsManager_nullFilePath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> readContactsManager(null));
     }
 
-    private java.util.Optional<ContactList> readConText(String filePath) throws Exception {
-        return new JsonContactsStorage(Paths.get(filePath)).readConText(addToTestDataPathIfNotNull(filePath));
+    private java.util.Optional<ContactList> readContactsManager(String filePath) throws Exception {
+        return new JsonContactsStorage(Paths.get(filePath)).readContactsManager(addToTestDataPathIfNotNull(filePath));
     }
 
     private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
@@ -42,69 +42,69 @@ public class JsonContactsStorageTest {
 
     @Test
     public void read_missingFile_emptyResult() throws Exception {
-        assertFalse(readConText("NonExistentFile.json").isPresent());
+        assertFalse(readContactsManager("NonExistentFile.json").isPresent());
     }
 
     @Test
     public void read_notJsonFormat_exceptionThrown() {
-        assertThrows(DataLoadingException.class, () -> readConText("notJsonFormatConText.json"));
+        assertThrows(DataLoadingException.class, () -> readContactsManager("notJsonFormatConText.json"));
     }
 
     @Test
-    public void readConText_invalidContactConText_throwDataLoadingException() {
-        assertThrows(DataLoadingException.class, () -> readConText("invalidContactConText.json"));
+    public void readContactsManager_invalidContactContactsManager_throwDataLoadingException() {
+        assertThrows(DataLoadingException.class, () -> readContactsManager("invalidContactConText.json"));
     }
 
     @Test
-    public void readConText_invalidAndValidContactConText_throwDataLoadingException() {
-        assertThrows(DataLoadingException.class, () -> readConText("invalidAndValidContactConText.json"));
+    public void readContactsManager_invalidAndValidContactContactsManager_throwDataLoadingException() {
+        assertThrows(DataLoadingException.class, () -> readContactsManager("invalidAndValidContactConText.json"));
     }
 
     @Test
-    public void readAndSaveConText_allInOrder_success() throws Exception {
+    public void readAndSaveContactsManager_allInOrder_success() throws Exception {
         Path filePath = testFolder.resolve("TempConText.json");
-        ContactsManager original = getTypicalConText();
+        ContactsManager original = getTypicalContactsManager();
         JsonContactsStorage jsonContactsStorage = new JsonContactsStorage(filePath);
 
         // Save in new file and read back
-        jsonContactsStorage.saveConText(original, filePath);
-        ContactList readBack = jsonContactsStorage.readConText(filePath).get();
+        jsonContactsStorage.saveContactsManager(original, filePath);
+        ContactList readBack = jsonContactsStorage.readContactsManager(filePath).get();
         assertEquals(original, new ContactsManager(readBack));
 
         // Modify data, overwrite exiting file, and read back
         original.addContact(HOON);
         original.removeContact(ALICE);
-        jsonContactsStorage.saveConText(original, filePath);
-        readBack = jsonContactsStorage.readConText(filePath).get();
+        jsonContactsStorage.saveContactsManager(original, filePath);
+        readBack = jsonContactsStorage.readContactsManager(filePath).get();
         assertEquals(original, new ContactsManager(readBack));
 
         // Save and read without specifying file path
         original.addContact(IDA);
-        jsonContactsStorage.saveConText(original); // file path not specified
-        readBack = jsonContactsStorage.readConText().get(); // file path not specified
+        jsonContactsStorage.saveContactsManager(original); // file path not specified
+        readBack = jsonContactsStorage.readContactsManager().get(); // file path not specified
         assertEquals(original, new ContactsManager(readBack));
 
     }
 
     @Test
-    public void saveConText_nullConText_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> saveConText(null, "SomeFile.json"));
+    public void saveContactsManager_nullContactsManager_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> saveContactsManager(null, "SomeFile.json"));
     }
 
     /**
      * Saves {@code ContactsManager} at the specified {@code filePath}.
      */
-    private void saveConText(ContactList contactList, String filePath) {
+    private void saveContactsManager(ContactList contactList, String filePath) {
         try {
             new JsonContactsStorage(Paths.get(filePath))
-                    .saveConText(contactList, addToTestDataPathIfNotNull(filePath));
+                    .saveContactsManager(contactList, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }
     }
 
     @Test
-    public void saveConText_nullFilePath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> saveConText(new ContactsManager(), null));
+    public void saveContactsManager_nullFilePath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> saveContactsManager(new ContactsManager(), null));
     }
 }

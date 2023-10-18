@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showContactAtIndex;
 import static seedu.address.testutil.TestData.INDEX_FIRST_CONTACT;
-import static seedu.address.testutil.TestData.getTypicalConText;
+import static seedu.address.testutil.TestData.getTypicalContactsManager;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,7 +23,7 @@ public class ListCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalConText(), new UserPrefs());
+        model = new ModelManager(getTypicalContactsManager(), new UserPrefs());
         expectedModel = new ModelManager(model.getContactList(), new UserPrefs());
     }
 

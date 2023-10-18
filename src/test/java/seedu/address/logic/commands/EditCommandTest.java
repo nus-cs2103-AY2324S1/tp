@@ -10,7 +10,7 @@ import static seedu.address.testutil.TestData.INDEX_FIRST_CONTACT;
 import static seedu.address.testutil.TestData.INDEX_SECOND_CONTACT;
 import static seedu.address.testutil.TestData.VALID_NAME_BOB;
 import static seedu.address.testutil.TestData.VALID_PHONE_BOB;
-import static seedu.address.testutil.TestData.getTypicalConText;
+import static seedu.address.testutil.TestData.getTypicalContactsManager;
 
 import org.junit.jupiter.api.Test;
 
@@ -33,7 +33,7 @@ import seedu.address.testutil.TestData;
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(getTypicalConText(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalContactsManager(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {

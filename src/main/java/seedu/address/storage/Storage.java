@@ -24,9 +24,9 @@ public interface Storage extends ContactsStorage, UserPrefsStorage {
     Path getConTextFilePath();
 
     @Override
-    Optional<ContactList> readConText() throws DataLoadingException;
+    Optional<ContactList> readContactsManager() throws DataLoadingException;
 
     @Override
-    void saveConText(ContactList contactList) throws IOException;
+    void saveContactsManager(ContactList contactList) throws IOException;
 
 }

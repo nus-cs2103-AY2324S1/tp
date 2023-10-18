@@ -35,7 +35,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     public void resetData(ReadOnlyUserPrefs newUserPrefs) {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
-        setConTextFilePath(newUserPrefs.getConTextFilePath());
+        setContactsManagerFilePath(newUserPrefs.getConTextFilePath());
     }
 
     public GuiSettings getGuiSettings() {
@@ -51,7 +51,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         return conTextFilePath;
     }
 
-    public void setConTextFilePath(Path conTextFilePath) {
+    public void setContactsManagerFilePath(Path conTextFilePath) {
         requireNonNull(conTextFilePath);
         this.conTextFilePath = conTextFilePath;
     }

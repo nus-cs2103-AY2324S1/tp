@@ -102,7 +102,7 @@ public final class TestData {
     /**
      * Returns an {@code ContactsManager} with all the typical contacts.
      */
-    public static ContactsManager getTypicalConText() {
+    public static ContactsManager getTypicalContactsManager() {
         ContactsManager ab = new ContactsManager();
         for (Contact contact : getTypicalContacts()) {
             ab.addContact(contact);

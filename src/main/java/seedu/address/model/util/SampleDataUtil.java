@@ -40,7 +40,7 @@ public class SampleDataUtil {
         };
     }
 
-    public static ContactList getSampleConText() {
+    public static ContactList getSampleContactsManager() {
         ContactsManager sampleAb = new ContactsManager();
         for (Contact sampleContact : getSampleContacts()) {
             sampleAb.addContact(sampleContact);

@@ -2,7 +2,7 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static seedu.address.testutil.TestData.getTypicalConText;
+import static seedu.address.testutil.TestData.getTypicalContactsManager;
 
 import java.nio.file.Path;
 
@@ -48,20 +48,20 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void conTextReadSave() throws Exception {
+    public void contactsManagerReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
          * {@link JsonContactsStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link JsonContactsStorageTest} class.
          */
-        ContactsManager original = getTypicalConText();
-        storageManager.saveConText(original);
-        ContactList retrieved = storageManager.readConText().get();
+        ContactsManager original = getTypicalContactsManager();
+        storageManager.saveContactsManager(original);
+        ContactList retrieved = storageManager.readContactsManager().get();
         assertEquals(original, new ContactsManager(retrieved));
     }
 
     @Test
-    public void getConTextFilePath() {
+    public void getContactsManagerFilePath() {
         assertNotNull(storageManager.getConTextFilePath());
     }
 

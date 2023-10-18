@@ -115,7 +115,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setConTextFilePath(Path conTextFilePath) {
+        public void setContactsManagerFilePath(Path conTextFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -125,7 +125,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setConText(ContactList newData) {
+        public void setContactsManager(ContactList newData) {
             throw new AssertionError("This method should not be called.");
         }
 

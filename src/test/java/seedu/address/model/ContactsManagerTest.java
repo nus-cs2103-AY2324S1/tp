@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TestData.ALICE;
 import static seedu.address.testutil.TestData.VALID_NOTE_BOB;
-import static seedu.address.testutil.TestData.getTypicalConText;
+import static seedu.address.testutil.TestData.getTypicalContactsManager;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -22,7 +22,7 @@ import seedu.address.model.contact.exceptions.DuplicateContactException;
 import seedu.address.testutil.ContactBuilder;
 import seedu.address.testutil.TestData;
 
-public class ConTextTest {
+public class ContactsManagerTest {
 
     private final ContactsManager contactsManager = new ContactsManager();
     @Test
@@ -37,7 +37,7 @@ public class ConTextTest {
 
     @Test
     public void resetData_withValidReadOnlyConText_replacesData() {
-        ContactsManager newData = getTypicalConText();
+        ContactsManager newData = getTypicalContactsManager();
         contactsManager.resetData(newData);
         assertEquals(newData, contactsManager);
     }

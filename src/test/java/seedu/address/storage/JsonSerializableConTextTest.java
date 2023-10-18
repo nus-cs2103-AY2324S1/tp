@@ -26,7 +26,7 @@ public class JsonSerializableConTextTest {
         JsonSerializableConText dataFromFile = JsonUtil.readJsonFile(TYPICAL_CONTACTS_FILE,
                 JsonSerializableConText.class).get();
         ContactsManager conTextFromFile = dataFromFile.toModelType();
-        ContactsManager typicalContactsConText = TestData.getTypicalConText();
+        ContactsManager typicalContactsConText = TestData.getTypicalContactsManager();
         assertEquals(conTextFromFile, typicalContactsConText);
     }
 

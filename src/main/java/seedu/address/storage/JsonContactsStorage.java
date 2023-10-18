@@ -32,17 +32,17 @@ public class JsonContactsStorage implements ContactsStorage {
     }
 
     @Override
-    public Optional<ContactList> readConText() throws DataLoadingException {
-        return readConText(filePath);
+    public Optional<ContactList> readContactsManager() throws DataLoadingException {
+        return readContactsManager(filePath);
     }
 
     /**
-     * Similar to {@link #readConText()}.
+     * Similar to {@link #readContactsManager()}.
      *
      * @param filePath location of the data. Cannot be null.
      * @throws DataLoadingException if loading the data from storage failed.
      */
-    public Optional<ContactList> readConText(Path filePath) throws DataLoadingException {
+    public Optional<ContactList> readContactsManager(Path filePath) throws DataLoadingException {
         requireNonNull(filePath);
 
         Optional<JsonSerializableConText> jsonConText = JsonUtil.readJsonFile(
@@ -60,16 +60,16 @@ public class JsonContactsStorage implements ContactsStorage {
     }
 
     @Override
-    public void saveConText(ContactList contactList) throws IOException {
-        saveConText(contactList, filePath);
+    public void saveContactsManager(ContactList contactList) throws IOException {
+        saveContactsManager(contactList, filePath);
     }
 
     /**
-     * Similar to {@link #saveConText(ContactList)}.
+     * Similar to {@link #saveContactsManager(ContactList)}.
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveConText(ContactList contactList, Path filePath) throws IOException {
+    public void saveContactsManager(ContactList contactList, Path filePath) throws IOException {
         requireNonNull(contactList);
         requireNonNull(filePath);
 

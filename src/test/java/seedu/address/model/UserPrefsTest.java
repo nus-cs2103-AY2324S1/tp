@@ -13,9 +13,9 @@ public class UserPrefsTest {
     }
 
     @Test
-    public void setConTextFilePath_nullPath_throwsNullPointerException() {
+    public void setContactsManagerFilePath_nullPath_throwsNullPointerException() {
         UserPrefs userPrefs = new UserPrefs();
-        assertThrows(NullPointerException.class, () -> userPrefs.setConTextFilePath(null));
+        assertThrows(NullPointerException.class, () -> userPrefs.setContactsManagerFilePath(null));
     }
 
 }

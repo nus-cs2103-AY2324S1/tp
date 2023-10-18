@@ -6,24 +6,24 @@ import seedu.address.model.contact.Contact;
 /**
  * A utility class to help with building ContactsManager objects.
  * Example usage: <br>
- *     {@code ContactsManager ab = new ConTextBuilder().withContact("John", "Doe").build();}
+ *     {@code ContactsManager ab = new ContactsManagerBuilder().withContact("John", "Doe").build();}
  */
-public class ConTextBuilder {
+public class ContactsManagerBuilder {
 
     private ContactsManager contactsManager;
 
-    public ConTextBuilder() {
+    public ContactsManagerBuilder() {
         contactsManager = new ContactsManager();
     }
 
-    public ConTextBuilder(ContactsManager contactsManager) {
+    public ContactsManagerBuilder(ContactsManager contactsManager) {
         this.contactsManager = contactsManager;
     }
 
     /**
      * Adds a new {@code Contact} to the {@code ContactsManager} that we are building.
      */
-    public ConTextBuilder withContact(Contact contact) {
+    public ContactsManagerBuilder withContact(Contact contact) {
         contactsManager.addContact(contact);
         return this;
     }

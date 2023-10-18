@@ -42,12 +42,12 @@ public interface Model {
     /**
      * Sets the user prefs' address book file path.
      */
-    void setConTextFilePath(Path conTextFilePath);
+    void setContactsManagerFilePath(Path conTextFilePath);
 
     /**
      * Replaces address book data with the data in {@code ContactsManager}.
      */
-    void setConText(ContactList contactList);
+    void setContactsManager(ContactList contactList);
 
     /** Returns the ContactsManager */
     ContactList getContactList();

@@ -23,23 +23,23 @@ public interface ContactsStorage {
      *
      * @throws DataLoadingException if loading the data from storage failed.
      */
-    Optional<ContactList> readConText() throws DataLoadingException;
+    Optional<ContactList> readContactsManager() throws DataLoadingException;
 
     /**
      * @see #getConTextFilePath()
      */
-    Optional<ContactList> readConText(Path filePath) throws DataLoadingException;
+    Optional<ContactList> readContactsManager(Path filePath) throws DataLoadingException;
 
     /**
      * Saves the given {@link ContactList} to the storage.
      * @param contactList cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveConText(ContactList contactList) throws IOException;
+    void saveContactsManager(ContactList contactList) throws IOException;
 
     /**
-     * @see #saveConText(ContactList)
+     * @see #saveContactsManager(ContactList)
      */
-    void saveConText(ContactList contactList, Path filePath) throws IOException;
+    void saveContactsManager(ContactList contactList, Path filePath) throws IOException;
 
 }

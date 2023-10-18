@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.contact.NameContainsKeywordsPredicate;
-import seedu.address.testutil.ConTextBuilder;
+import seedu.address.testutil.ContactsManagerBuilder;
 
 public class ModelManagerTest {
 
@@ -37,14 +37,14 @@ public class ModelManagerTest {
     @Test
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setConTextFilePath(Paths.get("address/book/file/path"));
+        userPrefs.setContactsManagerFilePath(Paths.get("address/book/file/path"));
         userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
 
         // Modifying userPrefs should not modify modelManager's userPrefs
         UserPrefs oldUserPrefs = new UserPrefs(userPrefs);
-        userPrefs.setConTextFilePath(Paths.get("new/address/book/file/path"));
+        userPrefs.setContactsManagerFilePath(Paths.get("new/address/book/file/path"));
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
     }
 
@@ -61,14 +61,14 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void setConTextFilePath_nullPath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.setConTextFilePath(null));
+    public void setContactsManagerFilePath_nullPath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setContactsManagerFilePath(null));
     }
 
     @Test
-    public void setConTextFilePath_validPath_setsConTextFilePath() {
+    public void setContactsManagerFilePath_validPath_setsConTextFilePath() {
         Path path = Paths.get("address/book/file/path");
-        modelManager.setConTextFilePath(path);
+        modelManager.setContactsManagerFilePath(path);
         assertEquals(path, modelManager.getConTextFilePath());
     }
 
@@ -78,12 +78,12 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasContact_contactNotInConText_returnsFalse() {
+    public void hasContact_contactNotInContactsManager_returnsFalse() {
         assertFalse(modelManager.hasContact(ALICE));
     }
 
     @Test
-    public void hasContact_contactInConText_returnsTrue() {
+    public void hasContact_contactInContactsManager_returnsTrue() {
         modelManager.addContact(ALICE);
         assertTrue(modelManager.hasContact(ALICE));
     }
@@ -95,8 +95,8 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        ContactsManager contactsManager = new ConTextBuilder().withContact(ALICE).withContact(BENSON).build();
-        ContactsManager differentConText = new ContactsManager();
+        ContactsManager contactsManager = new ContactsManagerBuilder().withContact(ALICE).withContact(BENSON).build();
+        ContactsManager differentContactsManager = new ContactsManager();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
@@ -114,7 +114,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(5));
 
         // different ContactsManager -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentConText, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(differentContactsManager, userPrefs)));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
@@ -126,7 +126,7 @@ public class ModelManagerTest {
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
-        differentUserPrefs.setConTextFilePath(Paths.get("differentFilePath"));
+        differentUserPrefs.setContactsManagerFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(contactsManager, differentUserPrefs)));
     }
 }

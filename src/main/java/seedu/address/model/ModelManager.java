@@ -70,15 +70,15 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setConTextFilePath(Path conTextFilePath) {
+    public void setContactsManagerFilePath(Path conTextFilePath) {
         requireNonNull(conTextFilePath);
-        userPrefs.setConTextFilePath(conTextFilePath);
+        userPrefs.setContactsManagerFilePath(conTextFilePath);
     }
 
     //=========== ContactsManager ================================================================================
 
     @Override
-    public void setConText(ContactList contactList) {
+    public void setContactsManager(ContactList contactList) {
         this.contactsManager.resetData(contactsManager);
     }
 
