@@ -106,6 +106,9 @@ public class Graduation implements Comparable<Graduation> {
      */
     public static Semester parseSemester(String gradString) {
         String match = matchGroup(gradString, 3);
+        if (match == null) {
+            return Semester.INVALID;
+        }
         switch (match) {
         case "1":
             return Semester.S1;
@@ -143,6 +146,7 @@ public class Graduation implements Comparable<Graduation> {
      * Returns true if a given graduation semester is valid.
      */
     public static boolean isValidGraduationSemester(Semester semester) {
+        requireNonNull(semester);
         return semester != Semester.INVALID;
     }
 
