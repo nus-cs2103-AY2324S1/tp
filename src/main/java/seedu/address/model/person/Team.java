@@ -14,9 +14,8 @@ public class Team {
     private String teamName;
     private final Set<IdentityCode> developerIdentityCodes;
 
+
     /**
-     * Constructs a new Team instance with the specified TeamLeader and team name.
-     *
      * @param leaderIdentityCode The IdentityCode of the team leader.
      * @param teamName The name of the team.
      */
@@ -26,9 +25,7 @@ public class Team {
         this.developerIdentityCodes = new HashSet<>();
     }
 
-    /**
-     * Adds a Developer's IdentityCode to the team.
-     *
+     /**
      * @param developerIdentityCode The IdentityCode of the developer to be added.
      */
     public void addDeveloper(IdentityCode developerIdentityCode) {
@@ -36,11 +33,18 @@ public class Team {
     }
 
     /**
-     * Removes a Developer's IdentityCode from the team.
+     * Retrieves the name of the team.
      *
-     * @param developerIdentityCode The IdentityCode of the developer to be removed.
-     * @return true if the developer was part of the team and was removed, false otherwise.
+     * @return The team's name.
      */
+    public String getTeamName() {
+        return this.teamName;
+    }
+
+    public boolean containsDev(IdentityCode developerID) {
+        return developerIdentityCodes.contains(developerID);
+    }
+
     public boolean removeDeveloper(IdentityCode developerIdentityCode) {
         return developerIdentityCodes.remove(developerIdentityCode);
     }
@@ -72,14 +76,7 @@ public class Team {
         return developerIdentityCodes;
     }
 
-    /**
-     * Retrieves the name of the team.
-     *
-     * @return The team's name.
-     */
-    public String getTeamName() {
-        return this.teamName;
-    }
+
 
     @Override
     public String toString() {
