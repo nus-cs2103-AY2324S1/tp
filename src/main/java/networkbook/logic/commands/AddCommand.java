@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static networkbook.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
@@ -50,6 +51,8 @@ public class AddCommand extends Command {
             + CliSyntax.PREFIX_TAG + " owesMoney";
 
     public static final String MESSAGE_NO_INFO = "At least one field to add must be provided.";
+    public static final String MESSAGE_MULTIPLE_NAMES = "Contact cannot have multiple names.\n"
+            + "Please use the 'update' command instead.";
     public static final String MESSAGE_MULTIPLE_UNIQUE_FIELD = "Some fields provided cannot have multiple values.\n"
             + "Please use the 'update' command instead.";
     public static final String MESSAGE_ADD_INFO_SUCCESS = "Added information to this contact: %1$s";
@@ -75,14 +78,14 @@ public class AddCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
-
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
-
         Person personToAddInfo = lastShownList.get(index.getZeroBased());
+        if (!Objects.isNull(editPersonDescriptor.getName().orElse(null))) {
+            throw new CommandException(MESSAGE_MULTIPLE_NAMES);
+        }
         Person personAfterAddingInfo = addInfoToPerson(personToAddInfo, editPersonDescriptor);
-
         model.setItem(personToAddInfo, personAfterAddingInfo);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_ADD_INFO_SUCCESS, Messages.format(personAfterAddingInfo)));
@@ -94,9 +97,8 @@ public class AddCommand extends Command {
     private Person addInfoToPerson(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor)
             throws CommandException {
         assert personToAddInfo != null;
-
-        Name updatedName = personToAddInfo.getName(); // name cannot be added
-        Phone updatedPhone = addPhone(personToAddInfo, editPersonDescriptor);
+        Name currentName = personToAddInfo.getName(); // name cannot be added
+        UniqueList<Phone> updatedPhones = addPhones(personToAddInfo, editPersonDescriptor);
         UniqueList<Email> updatedEmails = addEmails(personToAddInfo, editPersonDescriptor);
         UniqueList<Link> updatedLinks = addLinks(personToAddInfo, editPersonDescriptor);
         Graduation updatedGraduation = addGraduation(personToAddInfo, editPersonDescriptor);
@@ -105,29 +107,25 @@ public class AddCommand extends Command {
         Set<Tag> updatedTags = addTags(personToAddInfo, editPersonDescriptor);
         Priority updatedPriority = addPriority(personToAddInfo, editPersonDescriptor);
 
-        return new Person(updatedName, updatedPhone, updatedEmails, updatedLinks, updatedGraduation,
+        return new Person(currentName, updatedPhones, updatedEmails, updatedLinks, updatedGraduation,
                 updatedCourse, updatedSpecialisation, updatedTags, updatedPriority);
     }
 
     // TODO: for non-unique fields, change respective model to use list and append to the list
     // TODO: now it just replaces the old value
-    private Phone addPhone(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor)
-            throws CommandException {
-        Optional<Phone> oldPhone = personToAddInfo.getPhone();
-        Optional<Phone> newPhone = editPersonDescriptor.getPhone();
-        if (oldPhone.isPresent() && newPhone.isPresent()) {
-            throw new CommandException(MESSAGE_MULTIPLE_UNIQUE_FIELD);
-        }
-        return newPhone.orElse(oldPhone.orElse(null));
+    private UniqueList<Phone> addPhones(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor) {
+        UniqueList<Phone> phones = personToAddInfo.getPhones();
+        editPersonDescriptor.getPhones().ifPresent(phones::addAllFromList);
+        return phones;
     }
     private UniqueList<Email> addEmails(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor) {
         UniqueList<Email> emails = personToAddInfo.getEmails();
-        editPersonDescriptor.getEmails().ifPresent(emails::addAll);
+        editPersonDescriptor.getEmails().ifPresent(emails::addAllFromList);
         return emails;
     }
     private UniqueList<Link> addLinks(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor) {
         UniqueList<Link> links = personToAddInfo.getLinks();
-        editPersonDescriptor.getLinks().ifPresent(links::addAll);
+        editPersonDescriptor.getLinks().ifPresent(links::addAllFromList);
         return links;
     }
     private Graduation addGraduation(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor)

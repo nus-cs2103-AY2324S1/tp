@@ -42,14 +42,11 @@ public class Messages {
      */
     public static String format(Person person) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(person.getName());
-        person.getPhone().ifPresent((Phone p) -> {
-            builder.append("; Phone: ");
-            builder.append(p);
-        });
-        builder.append("; Emails: ").append(person.getEmails());
-        builder.append("; Links: ").append(person.getLinks());
-        person.getGraduation().ifPresent((Graduation g) -> {
+        builder.append(person.getName())
+                .append("; Phones: ").append(person.getPhones())
+                .append("; Emails: ").append(person.getEmails())
+                .append("; Links: ").append(person.getLinks());
+         person.getGraduation().ifPresent((Graduation g) -> {
             builder.append("; Graduation: ");
             builder.append(g.getFullString());
         });

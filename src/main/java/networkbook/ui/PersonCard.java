@@ -10,7 +10,6 @@ import javafx.scene.layout.Region;
 import networkbook.model.person.Course;
 import networkbook.model.person.Graduation;
 import networkbook.model.person.Person;
-import networkbook.model.person.Phone;
 import networkbook.model.person.Priority;
 import networkbook.model.person.Specialisation;
 
@@ -20,7 +19,7 @@ import networkbook.model.person.Specialisation;
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
-    private static final String PHONE_HEADER = "Phone: ";
+    private static final String PHONES_HEADER = "Phone: ";
     private static final String EMAILS_HEADER = "Emails: ";
     private static final String LINKS_HEADER = "Links: ";
     private static final String GRADUATION_HEADER = "Graduation: ";
@@ -45,7 +44,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label phone;
+    private Label phones;
     @FXML
     private Label links;
     @FXML
@@ -69,10 +68,9 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        person.getPhone().ifPresentOrElse((Phone p) ->
-                phone.setText(PHONE_HEADER + p), () -> phone.setVisible(false));
-        emails.setText(person.getEmails().toString());
-        links.setText(person.getLinks().toString());
+        phones.setText(PHONES_HEADER + person.getPhones().toString());
+        emails.setText(EMAILS_HEADER + person.getEmails().toString());
+        links.setText(LINKS_HEADER + person.getLinks().toString());
         person.getGraduation().ifPresentOrElse((Graduation g) ->
                 graduation.setText(GRADUATION_HEADER + g.getFullString()), () -> graduation.setVisible(false));
         person.getCourse().ifPresentOrElse((Course c) ->
@@ -86,8 +84,8 @@ public class PersonCard extends UiPart<Region> {
                         priority.setText(PRIORITY_HEADER + p), () -> priority.setVisible(false));
     }
 
-    public Label getPhone() {
-        return phone;
+    public Label getPhones() {
+        return phones;
     }
     public Label getGraduation() {
         return graduation;

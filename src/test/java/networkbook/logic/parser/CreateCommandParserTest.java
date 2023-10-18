@@ -199,7 +199,7 @@ public class CreateCommandParserTest {
         // no emails
         Person expectedPersonWithoutEmails = new PersonBuilder(TypicalPersons.AMY)
                 .withoutOptionalFields()
-                .withPhone(VALID_PHONE_AMY)
+                .withPhones(List.of(VALID_PHONE_AMY))
                 .withLinks(List.of(VALID_LINK_AMY))
                 .withGraduation(VALID_GRADUATION_AMY)
                 .withCourse(VALID_COURSE_AMY)
@@ -216,7 +216,7 @@ public class CreateCommandParserTest {
         // no links
         Person expectedPersonWithoutLinks = new PersonBuilder(TypicalPersons.AMY)
                 .withoutOptionalFields()
-                .withPhone(VALID_PHONE_AMY)
+                .withPhones(List.of(VALID_PHONE_AMY))
                 .withEmails(List.of(VALID_EMAIL_AMY))
                 .withGraduation(VALID_GRADUATION_AMY)
                 .withCourse(VALID_COURSE_AMY)
@@ -233,7 +233,7 @@ public class CreateCommandParserTest {
         // no graduation date
         Person expectedPersonWithoutGraduation = new PersonBuilder(TypicalPersons.AMY)
                 .withoutOptionalFields()
-                .withPhone(VALID_PHONE_AMY)
+                .withPhones(List.of(VALID_PHONE_AMY))
                 .withEmails(List.of(VALID_EMAIL_AMY))
                 .withLinks(List.of(VALID_LINK_AMY))
                 .withCourse(VALID_COURSE_AMY)
@@ -250,7 +250,7 @@ public class CreateCommandParserTest {
         // no course
         Person expectedPersonWithoutCourse = new PersonBuilder(TypicalPersons.AMY)
                 .withoutOptionalFields()
-                .withPhone(VALID_PHONE_AMY)
+                .withPhones(List.of(VALID_PHONE_AMY))
                 .withEmails(List.of(VALID_EMAIL_AMY))
                 .withLinks(List.of(VALID_LINK_AMY))
                 .withGraduation(VALID_GRADUATION_AMY)
@@ -267,7 +267,7 @@ public class CreateCommandParserTest {
         // no specialisation
         Person expectedPersonWithoutSpecialisation = new PersonBuilder(TypicalPersons.AMY)
                 .withoutOptionalFields()
-                .withPhone(VALID_PHONE_AMY)
+                .withPhones(List.of(VALID_PHONE_AMY))
                 .withEmails(List.of(VALID_EMAIL_AMY))
                 .withLinks(List.of(VALID_LINK_AMY))
                 .withGraduation(VALID_GRADUATION_AMY)
