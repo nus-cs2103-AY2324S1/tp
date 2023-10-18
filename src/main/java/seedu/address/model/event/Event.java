@@ -78,7 +78,6 @@ public abstract class Event {
         return this.endDate;
     }
 
-
     public EventTime getEndTime() {
         return this.endTime.get();
     }

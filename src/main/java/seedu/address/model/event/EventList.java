@@ -32,15 +32,6 @@ public class EventList {
         this.events.add(event);
     }
 
-
-    /**
-     * Deletes an event from the list of events.
-     * @param index index of the event to be deleted.
-     */
-    public void deleteEvent(int index) {
-        return;
-    }
-
     /**
      * Replaces the given event {@code target} in the list with {@code editedEvent}.
      * @param target event to be edited. {@code target} must exist in the address book.
@@ -57,14 +48,26 @@ public class EventList {
         this.events.set(index, editedEvent);
     }
 
+    /**
+     * Replaces the contents of this list with {@code newEvents}.
+     * @param newEvents ArrayList of events to replace the current list of events.
+     */
     public void setEvents(ArrayList<Event> newEvents) {
         this.events = newEvents;
     }
 
+    /**
+     * Returns the event List
+     * @return ArrayList of events.
+     */
     public ArrayList<Event> getEventsList() {
         return this.events;
     }
 
+    /**
+     * Removes the equivalent event from the list.
+     * @param target Event to be removed.
+     */
     public void remove(Event target) {
         requireNonNull(target);
         if (!this.events.remove(target)) {

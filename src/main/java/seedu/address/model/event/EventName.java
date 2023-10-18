@@ -15,7 +15,7 @@ public class EventName {
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = ".+";
+    public static final String VALIDATION_REGEX = ".*\\S+.*";
 
     public final String name;
 
@@ -55,10 +55,5 @@ public class EventName {
 
         EventName otherName = (EventName) other;
         return this.name.equals(otherName.name);
-    }
-
-    @Override
-    public int hashCode() {
-        return this.name.hashCode();
     }
 }
