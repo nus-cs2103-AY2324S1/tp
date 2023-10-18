@@ -98,7 +98,9 @@ public class BookingTest {
     @Test
     public void toStringMethod() {
         String expected = Booking.class.getCanonicalName() + "{room=" + ALICE.getRoom() + ", name=" + ALICE.getName()
-                + ", phone=" + ALICE.getPhone() + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress()
+                + ", phone=" + ALICE.getPhone()
+                + ", email=" + ALICE.getEmail()
+                + ", address=" + ALICE.getBookingPeriod()
                 + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
     }
