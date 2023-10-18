@@ -10,6 +10,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
+import seedu.address.model.student.grades.exceptions.InvalidTutorialIndexException;
 
 /**
  * Marks a student's attendance.
@@ -17,7 +18,7 @@ import seedu.address.model.student.StudentNumber;
 public class MarkCommand extends Command {
     public static final String COMMAND_WORD = "mark";
     public static final String MESSAGE_MARK_SUCCESS = "Successfully mark attendance.";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a student."
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks a student."
             + "Parameters: INDEX "
             + PREFIX_STUDENT_NUMBER + "STUDENT NUMBER\n"
             + "Example: " + COMMAND_WORD + " 1 "
@@ -26,6 +27,8 @@ public class MarkCommand extends Command {
     private final StudentNumber targetStudentNumber;
 
     /**
+     * Constructs a MarkCommand object.
+     *
      * @param index of the class.
      * @param targetStudentNumber of the student.
      */
@@ -45,7 +48,12 @@ public class MarkCommand extends Command {
         }
 
         Student student = model.getStudent(targetStudentNumber);
-        model.setStudent(student, student.markPresent(this.index));
+
+        try {
+            model.setStudent(student, student.markPresent(this.index));
+        } catch (InvalidTutorialIndexException e) {
+            throw new CommandException(e.getMessage());
+        }
 
         return new CommandResult(MESSAGE_MARK_SUCCESS);
     }

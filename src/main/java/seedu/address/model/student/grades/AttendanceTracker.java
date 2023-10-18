@@ -5,6 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.util.Arrays;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.model.student.grades.exceptions.InvalidTutorialIndexException;
 
 /**
  * Represents a Student's AttendanceTracker grades
@@ -41,7 +42,10 @@ public class AttendanceTracker {
      *
      * @param tutNum The tutorial number.
      */
-    public void markPresent(Index tutNum) {
+    public void markPresent(Index tutNum) throws InvalidTutorialIndexException {
+        if (tutNum.getZeroBased() >= attendanceList.length) {
+            throw new InvalidTutorialIndexException();
+        }
         attendanceList[tutNum.getZeroBased()].mark();
     }
 
@@ -52,6 +56,13 @@ public class AttendanceTracker {
      */
     public void markAbsent(Index tutNum) {
         attendanceList[tutNum.getZeroBased()].unmark();
+    }
+
+    /**
+     * Returns the total number of tutorials.
+     */
+    public int getNumOfTut() {
+        return this.attendanceList.length;
     }
 
     @Override
