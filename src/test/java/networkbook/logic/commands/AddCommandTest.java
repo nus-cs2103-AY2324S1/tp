@@ -90,6 +90,7 @@ public class AddCommandTest {
         CommandTestUtil.assertCommandSuccess(addCommand, model, expectedMessage, expectedModel);
     }
 
+    @Test
     public void execute_multipleGradsBeingAdded_assertionError() {
         Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
         EditCommand.EditPersonDescriptor descriptor =

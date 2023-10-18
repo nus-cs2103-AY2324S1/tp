@@ -91,17 +91,17 @@ public class GraduationTest {
     }
 
     @Test
-    public void parseSemester_validGraduationString_validGraduationSemester() {
-        assertTrue(Graduation.isValidGraduationSemester(Graduation.parseSemester("AY2021-S1")));
-        assertTrue(Graduation.isValidGraduationSemester(Graduation.parseSemester("ay2021-S2")));
+    public void parseSemester_validGraduationString_validSemesterEnum() {
+        assertEquals(Graduation.Semester.S1, Graduation.parseSemester("AY2021-S1"));
+        assertEquals(Graduation.Semester.S2, Graduation.parseSemester("AY2021-S2"));
     }
 
     @Test
     public void parseSemester_invalidGraduationString_invalidGraduationSemester() {
-        assertFalse(Graduation.isValidGraduationSemester(Graduation.parseSemester("AY2021-S3"))); // invalid sem
-        assertFalse(Graduation.isValidGraduationSemester(Graduation.parseSemester("AY2021-S0"))); // invalid sem
-        assertFalse(Graduation.isValidGraduationSemester(Graduation.parseSemester("sem 1"))); // invalid format
-        assertFalse(Graduation.isValidGraduationSemester(Graduation.parseSemester(""))); // empty
+        assertEquals(Graduation.Semester.INVALID, Graduation.parseSemester("AY2021-S3")); // invalid sem
+        assertEquals(Graduation.Semester.INVALID, Graduation.parseSemester("AY2021-S0")); // invalid sem
+        assertEquals(Graduation.Semester.INVALID, Graduation.parseSemester("sem 1")); // invalid format
+        assertEquals(Graduation.Semester.INVALID, Graduation.parseSemester("")); // empty
     }
 
     @Test
