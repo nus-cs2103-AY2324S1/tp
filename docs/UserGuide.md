@@ -123,8 +123,11 @@ Format: `edit INDEX [n/NAME] [pos/POSITION] [id/EMPLOYEE_ID] [p/PHONE_NUMBER] [e
 
 Examples:
 *  `edit 1 pos/Senior Software Engineer` edits the position of the 1st employee to be `Senior Software Engineer`.
+
 ![edit success](images/editSuccess.png)
+
 *  `edit 10 pos/Senior Software Engineer` is invalid because the index does not exist.
+
 ![edit failure](images/editFailure.png)
 
 ### Locating employees by name: `find`
@@ -142,6 +145,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 * `find Alex` returns `Alex Yeoh`
+
 * ![find sucess](images/findSuccess.png)
 
 ### Deleting an employee : `delete`
@@ -152,7 +156,7 @@ Format: `delete EMPLOYEE_ID`
 
 * Deletes the employee at the specified `EMPLOYEE_ID`.
 * The employee id refers to each employee's unique employee id.
-* The employee id **must be follow the EID format** (EID[4 digits]-[4 digits])
+* The employee id **must follow the EID format** (EID[4 digits]-[4 digits])
 
 Examples:
 * `delete EID1234-5678` deletes the employee with employee id EID1234-5678 in the employee list.
@@ -160,6 +164,7 @@ Examples:
 ![delete success](images/deleteSuccess.png)  
 
 * `delete EID000-0000` is invalid because the id does not exist.
+
 ![delete failure](images/deleteFailure.png)
 
 ### Sorting all employees : `sort`

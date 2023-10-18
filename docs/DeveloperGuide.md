@@ -273,28 +273,28 @@ HouR is a desktop app for human resources staff managing employee data, optimise
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                  | I want to …​                                    | So that I can…​                                                   |
-|----------|-------------------------| ---------------------------------------------- | ---------------------------------------------------------------- |
-| `* * *`  | new user                | add/delete dummy data                          | familiarise myself with the commands available                   |
-| `* * *`  | beginner user           | delete existing employee record                | remove ex-employees from database                                |
-| `* * *`  | beginner user           | see the list of all employee data              | easily view all the employee data in one place                   |
-| `* * *`  | beginner user           | add new employees to the database              | keep the records up-to-date                                      |
-| `* * *`  | new user                | see clear error messages when I enter incorrect or incomplete information   | correct mistakes efficiently        |
-| `* *`    | beginner user           | assign custom tags to employees                | organise them according to different criteria                    |
-| `* *`    | new user                | access a user guide                            |  know how to set up and launch the application                   |
-| `* *`    | new user                | access a quick tutorial or guided tour         | learn how to use basic features of the application               |
-| `* *`    | new user                | purge all current data                         | get rid of sample/experimental data I used for exploring the app |
-| `* *`    | forgetful beginner user | access a command summary                       | easily know which commands to use                                |
-| `* *`    | intermediate user       | modify existing records                        | update employees’ information and categories                     |
-| `* *`    | intermediate user       | filter and search certain employees based on criteria like department and job titles | look for the data I need   |
-| `* *`    | intermediate user       | batch delete records                           | keep my database organised and clutter-free                      |
-| `* *`    | intermediate user       | sort the data / records by date and categories | view relevant data in a more organised manner                    |
-| `* *`    | long-time user          | private individuals’ personal details          | minimise the chance of someone else seeing them by accident and violating PDPA. |
-| `*`      | intermediate user       | create keyboard shortcuts for tasks            | save time on frequently performed tasks                          |
-| `*`      | long-time user          | conduct advanced searches with multiple criteria | gain deeper insights into employee performance                 |
-| `*`      | long-time user          | access a knowledge base or community forum     | share best practices and learn from other experienced users      |
-| `*`      | long-time user          | share / collaborate with other colleagues in my department | distribute work with my colleagues                   |
-| `*`      | long-time user          | archive unused data                            | not distracted by irrelevant data                                |
+| Priority | As a …​                  | I want to …​                                                                       | So that I can…​                                                   |
+|----------|-------------------------|------------------------------------------------------------------------------------| ---------------------------------------------------------------- |
+| `* * *`  | new user                | add/delete dummy data                                                              | familiarise myself with the commands available                   |
+| `* * *`  | beginner user           | delete existing employee record                                                    | remove ex-employees from database                                |
+| `* * *`  | beginner user           | see the list of all employee data                                                  | easily view all the employee data in one place                   |
+| `* * *`  | beginner user           | add new employees to the database                                                  | keep the records up-to-date                                      |
+| `* * *`  | new user                | see clear error messages when I enter incorrect or incomplete information          | correct mistakes efficiently        |
+| `* *`    | beginner user           | assign custom tags to employees                                                    | organise them according to different criteria                    |
+| `* *`    | new user                | access a user guide                                                                |  know how to set up and launch the application                   |
+| `* *`    | new user                | access a quick tutorial or guided tour                                             | learn how to use basic features of the application               |
+| `* *`    | new user                | purge all current data                                                             | get rid of sample/experimental data I used for exploring the app |
+| `* *`    | forgetful beginner user | access a command summary                                                           | easily know which commands to use                                |
+| `* *`    | intermediate user       | modify existing records                                                            | update employees’ information and categories                     |
+| `* *`    | intermediate user       | filter and search certain employees based on criteria like department and salaries | look for the data I need   |
+| `* *`    | intermediate user       | batch delete records                                                               | keep my database organised and clutter-free                      |
+| `* *`    | intermediate user       | sort the data / records by date and categories                                     | view relevant data in a more organised manner                    |
+| `* *`    | long-time user          | private individuals’ personal details                                              | minimise the chance of someone else seeing them by accident and violating PDPA. |
+| `*`      | intermediate user       | create keyboard shortcuts for tasks                                                | save time on frequently performed tasks                          |
+| `*`      | long-time user          | conduct advanced searches with multiple criteria                                   | gain deeper insights into employee performance                 |
+| `*`      | long-time user          | access a knowledge base or community forum                                         | share best practices and learn from other experienced users      |
+| `*`      | long-time user          | share / collaborate with other colleagues in my department                         | distribute work with my colleagues                   |
+| `*`      | long-time user          | archive unused data                                                                | not distracted by irrelevant data                                |
 
 ### Use cases
 
