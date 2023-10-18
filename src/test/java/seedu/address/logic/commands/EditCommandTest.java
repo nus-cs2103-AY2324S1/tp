@@ -174,7 +174,7 @@ public class EditCommandTest {
     @Test
     public void toStringMethod() {
         Index index = Index.fromOneBased(1);
-        EditCommand.EditStudentDescriptor editStudentDescriptor = new EditCommand.EditStudentDescriptor();
+        EditCommand.EditStudentDescriptor editStudentDescriptor = new EditCommand.EditStudentDescriptor(DESC_AMY);
         EditCommand editCommand = new EditCommand(index, editStudentDescriptor);
         String expected = EditCommand.class.getCanonicalName() + "{index=" + index + ", editStudentDescriptor="
                 + editStudentDescriptor + "}";
