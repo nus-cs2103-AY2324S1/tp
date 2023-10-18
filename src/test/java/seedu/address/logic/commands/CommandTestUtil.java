@@ -47,35 +47,35 @@ public class CommandTestUtil {
     public static final String VALID_ANNUALLEAVE_BOB = "2";
 
 
-    public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
-    public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
-    public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
-    public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
-    public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
-    public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
-    public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
-    public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
-    public static final String BANKACCOUNT_DESC_AMY = " " + PREFIX_BANK_ACCOUNT + VALID_BANKACCOUNT_AMY;
-    public static final String BANKACCOUNT_DESC_BOB = " " + PREFIX_BANK_ACCOUNT + VALID_BANKACCOUNT_BOB;
-    public static final String JOINDATE_DESC_AMY = " " + PREFIX_JOIN_DATE + VALID_JOINDATE_AMY;
-    public static final String JOINDATE_DESC_BOB = " " + PREFIX_JOIN_DATE + VALID_JOINDATE_BOB;
-    public static final String SALARY_DESC_AMY = " " + PREFIX_SALARY + VALID_SALARY_AMY;
-    public static final String SALARY_DESC_BOB = " " + PREFIX_SALARY + VALID_SALARY_BOB;
-    public static final String ANNUALLEAVE_DESC_AMY = " " + PREFIX_ANNUAL_LEAVE + VALID_ANNUALLEAVE_AMY;
-    public static final String ANNUALLEAVE_DESC_BOB = " " + PREFIX_ANNUAL_LEAVE + VALID_ANNUALLEAVE_BOB;
+    public static final String NAME_DESC_AMY = " " + PREFIX_NAME + " " + VALID_NAME_AMY;
+    public static final String NAME_DESC_BOB = " " + PREFIX_NAME + " " + VALID_NAME_BOB;
+    public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + " " + VALID_PHONE_AMY;
+    public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + " " + VALID_PHONE_BOB;
+    public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + " " + VALID_EMAIL_AMY;
+    public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + " " + VALID_EMAIL_BOB;
+    public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + " " + VALID_ADDRESS_AMY;
+    public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + " " + VALID_ADDRESS_BOB;
+    public static final String BANKACCOUNT_DESC_AMY = " " + PREFIX_BANK_ACCOUNT + " " + VALID_BANKACCOUNT_AMY;
+    public static final String BANKACCOUNT_DESC_BOB = " " + PREFIX_BANK_ACCOUNT + " " + VALID_BANKACCOUNT_BOB;
+    public static final String JOINDATE_DESC_AMY = " " + PREFIX_JOIN_DATE + " " + VALID_JOINDATE_AMY;
+    public static final String JOINDATE_DESC_BOB = " " + PREFIX_JOIN_DATE + " " + VALID_JOINDATE_BOB;
+    public static final String SALARY_DESC_AMY = " " + PREFIX_SALARY + " " + VALID_SALARY_AMY;
+    public static final String SALARY_DESC_BOB = " " + PREFIX_SALARY + " " + VALID_SALARY_BOB;
+    public static final String ANNUALLEAVE_DESC_AMY = " " + PREFIX_ANNUAL_LEAVE + " " + VALID_ANNUALLEAVE_AMY;
+    public static final String ANNUALLEAVE_DESC_BOB = " " + PREFIX_ANNUAL_LEAVE + " " + VALID_ANNUALLEAVE_BOB;
 
 
-    public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
-    public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
-    public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
+    public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + " James&"; // '&' not allowed in names
+    public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + " 911a"; // 'a' not allowed in phones
+    public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + " bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_BANKACCOUNT_DESC = " " + PREFIX_BANK_ACCOUNT
-        + "a91721"; // 'a' not allowed in bankAccount
-    public static final String INVALID_JOINDATE_DESC = " " + PREFIX_JOIN_DATE + "10-923-10"; // wrong date format
+        + " a91721"; // 'a' not allowed in bankAccount
+    public static final String INVALID_JOINDATE_DESC = " " + PREFIX_JOIN_DATE + " 10-923-10"; // wrong date format
     public static final String INVALID_SALARY_DESC = " " + PREFIX_SALARY
-        + "a291"; // 'a' not allowed in salary
+        + " a291"; // 'a' not allowed in salary
     public static final String INVALID_ANNUALLEAVE_DESC = " " + PREFIX_ANNUAL_LEAVE
-        + "a19"; // 'a' not allowed in annual leave
+        + " a19"; // 'a' not allowed in annual leave
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
