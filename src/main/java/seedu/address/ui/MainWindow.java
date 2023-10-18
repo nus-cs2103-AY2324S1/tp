@@ -34,7 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
 
     // TODO: to be removed
-    private PersonListPanel filler;
+    private AppointmentListPanel appointmentListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -117,9 +117,9 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        filler = new PersonListPanel(logic.getFilteredPersonList());
+        appointmentListPanel = new AppointmentListPanel(logic.getFilteredAppointmentList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
-        appointmentListPanelPlaceholder.getChildren().add(filler.getRoot());
+        appointmentListPanelPlaceholder.getChildren().add(appointmentListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
