@@ -12,8 +12,6 @@ import seedu.lovebook.commons.util.StringUtil;
 import seedu.lovebook.commons.util.ToStringBuilder;
 import seedu.lovebook.logic.parser.Prefix;
 
-
-
 /**
  * Tests that a {@code Date}'s {@code Name} matches any of the keywords given.
  */
@@ -30,7 +28,7 @@ public class MetricContainsKeywordPredicate implements Predicate<Date> {
 
     @Override
     public boolean test(Date date) {
-        requireNonNull(metric);
+        requireNonNull(date);
         if (metric.equals(PREFIX_NAME)) {
             return StringUtil.containsWordIgnoreCase(date.getName().fullName, keyword);
         }
@@ -43,7 +41,7 @@ public class MetricContainsKeywordPredicate implements Predicate<Date> {
         if (metric.equals(PREFIX_HEIGHT)) {
             return StringUtil.containsWordIgnoreCase(date.getHeight().value, keyword);
         }
-        return false; // invalid metric
+        return false;
     }
 
     @Override
