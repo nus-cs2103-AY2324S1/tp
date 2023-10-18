@@ -10,6 +10,22 @@ import networkbook.commons.util.ToStringBuilder;
  * Provides an ordering for {@code Person} instances based on the values of a specific field.
  */
 public class PersonSortComparator implements Comparator<Person> {
+
+    /** Comparator that does nothing. */
+    public static final Comparator<Person> EMPTY_COMPARATOR = (Person o1, Person o2) -> 0;
+
+    /** Comparator that puts empty optionals at the end of the list. */
+    public static final Comparator<Optional<?>> OPTIONAL_COMPARATOR = (Optional<?> o1, Optional<?> o2) -> {
+        if (o1.isPresent() && o2.isEmpty()) {
+            return -1;
+        } else if (o1.isEmpty() && o2.isPresent()) {
+            return 1;
+        } else {
+            return 0;
+        } 
+    };
+
+
     private final Comparator<Person> comparator;
 
     public PersonSortComparator(SortField field, SortOrder order) {
@@ -41,7 +57,7 @@ public class PersonSortComparator implements Comparator<Person> {
             return generatePriorityComparator(isAsc);
         case NONE: // Fallthrough
         default:
-            return generateDummyComparator();
+            return EMPTY_COMPARATOR;
         }
     }
 
@@ -51,7 +67,8 @@ public class PersonSortComparator implements Comparator<Person> {
      * @return Comparator.
      */
     public static Comparator<Person> generateNameComparator(boolean isAsc) {
-        return (Person o1, Person o2) -> o1.getName().compareTo(o2.getName());
+        return (Person o1, Person o2) -> isAsc ?
+                o1.getName().compareTo(o2.getName()) : o2.getName().compareTo(o1.getName());
     }
 
     
@@ -64,18 +81,13 @@ public class PersonSortComparator implements Comparator<Person> {
         return (Person o1, Person o2) -> {
             Optional<GraduatingYear> g1 = o1.getGraduatingYear();
             Optional<GraduatingYear> g2 = o2.getGraduatingYear();
-            if (g1.isPresent() && g2.isEmpty()) {
-                return 1;
-            } else if (g1.isEmpty() && g2.isPresent()) {
-                return -1;
-            } else if (g1.isEmpty() && g2.isEmpty()) {
-                return 0;
-            } else if (g1.isPresent() && g2.isPresent()) {
+            if (g1.isPresent() && g2.isPresent()) {
                 return 0;
                 // TODO implement once graduation feature is merged
                 // return isAsc ? g1.get().compareTo(g2.get()) : g2.get().compareTo(g1.get());
+            } else {
+                return OPTIONAL_COMPARATOR.compare(g1, g2);
             }
-            return 0;
         };
     }
 
@@ -88,26 +100,14 @@ public class PersonSortComparator implements Comparator<Person> {
         return (Person o1, Person o2) -> {
             Optional<Priority> p1 = o1.getPriority();
             Optional<Priority> p2 = o2.getPriority();
-            if (p1.isPresent() && p2.isEmpty()) {
-                return 1;
-            } else if (p1.isEmpty() && p2.isPresent()) {
-                return -1;
-            } else if (p1.isEmpty() && p2.isEmpty()) {
-                return 0;
-            } else if (p1.isPresent() && p2.isPresent()) {
+            if (p1.isPresent() && p2.isPresent()) {
                 return isAsc ? p1.get().compareTo(p2.get()) : p2.get().compareTo(p1.get());
+            } else {
+                return OPTIONAL_COMPARATOR.compare(p1, p2);
             }
-            return 0;
         };
     }
 
-    /**
-     * Generates comparator that does nothing.
-     * @return Comparator.
-     */
-    public static Comparator<Person> generateDummyComparator() {
-        return (Person o1, Person o2) -> 0;
-    }
 
     @Override
     public boolean equals(Object other) {
