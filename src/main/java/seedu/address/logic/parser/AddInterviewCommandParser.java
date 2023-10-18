@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_APPLICANT_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPLICANT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_ROLE;
@@ -42,7 +43,7 @@ public class AddInterviewCommandParser implements Parser<AddInterviewCommand> {
             applicantIndex = ParserUtil.parseIndex(applicantArgs);
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddInterviewCommand.MESSAGE_USAGE), pe);
+                    MESSAGE_INVALID_APPLICANT_DISPLAYED_INDEX, pe);
         }
 
         return new AddInterviewCommand(applicantIndex, jobRole, timing);

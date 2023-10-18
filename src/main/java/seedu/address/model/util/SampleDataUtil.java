@@ -46,7 +46,13 @@ public class SampleDataUtil {
                 new Phone("92624417"), new Email("royb@example.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"),
                 getTagSet("colleagues"), true);
+
+        Applicant sampleApplicant2 =
+                new Applicant(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
+                new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
+                getTagSet("Example"));
         return new Interview[] {
+            new Interview(sampleApplicant, "SWE", "Sample Time"),
             new Interview(sampleApplicant, "SWE", "Sample Time")
         };
     }

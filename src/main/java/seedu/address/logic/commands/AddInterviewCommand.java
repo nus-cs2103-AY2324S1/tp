@@ -37,7 +37,7 @@ public class AddInterviewCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New interview added: %1$s";
     public static final String MESSAGE_DUPLICATE_INTERVIEW = "Error: This is a duplicate interview";
     public static final String MESSAGE_APPLICANT_HAS_INTERVIEW =
-            "Error: Applicant already has an interview scheduled";
+            "Applicant already has an interview scheduled";
 
     private final Index applicantIndex;
     private final String jobRole;
