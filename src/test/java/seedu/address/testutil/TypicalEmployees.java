@@ -57,20 +57,20 @@ public class TypicalEmployees {
     public static final Employee ELLE = new EmployeeBuilder().withName("Elle Meyer")
                 .withPosition("Junior Software Engineer")
                 .withId("EID2023-1234")
-                .withPhone("9482224")
+                .withPhone("94842224")
                 .withEmail("werner@example.com")
                 .withSalary("$4,000").build();
     public static final Employee FIONA = new EmployeeBuilder().withName("Fiona Kunz")
                 .withPosition("Senior Software Engineer")
                 .withId("EID2023-5678")
-                .withPhone("9482427")
+                .withPhone("94825427")
                 .withEmail("lydia@example.com")
                 .withSalary("$8,000").build();
 
     public static final Employee GEORGE = new EmployeeBuilder().withName("George Best")
                 .withPosition("Intern")
                 .withId("EID2023-9876")
-                .withPhone("9482442")
+                .withPhone("94824242")
                 .withEmail("anna@example.com")
                 .withSalary("$1,000").build();
 
@@ -78,14 +78,14 @@ public class TypicalEmployees {
     public static final Employee HOON = new EmployeeBuilder().withName("Hoon Meier")
                 .withPosition("Intern")
                 .withId("EID2023-2024")
-                .withPhone("8482424")
+                .withPhone("84824242")
                 .withEmail("stefan@example.com")
                 .withSalary("$1,000")
                 .build();
     public static final Employee IDA = new EmployeeBuilder().withName("Ida Mueller")
                 .withPosition("CEO")
                 .withId("EID2021-2022")
-                .withPhone("8482131")
+                .withPhone("84821311")
                 .withEmail("hans@example.com")
                 .withSalary("$10,000")
                 .build();
