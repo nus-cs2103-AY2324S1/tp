@@ -1,8 +1,13 @@
 package transact.model.transaction;
 
+import java.util.Collections;
 import java.util.Scanner;
 
+import transact.model.person.Address;
+import transact.model.person.Email;
+import transact.model.person.Name;
 import transact.model.person.Person;
+import transact.model.person.Phone;
 import transact.model.transaction.info.Amount;
 import transact.model.transaction.info.Date;
 import transact.model.transaction.info.Description;
@@ -43,11 +48,11 @@ public class TransactionManualTest {
         TransactionId transactionId = new TransactionId();
 
         // Create a Person object
-        Person person = new Person(new transact.model.person.Name(personNameInput),
-                new transact.model.person.Phone(phoneNumberInput),
-                new transact.model.person.Email(emailInput),
-                new transact.model.person.Address(addressInput),
-                new java.util.HashSet<>());
+        Person person = new Person(new Name(personNameInput),
+                new Phone(phoneNumberInput),
+                new Email(emailInput),
+                new Address(addressInput),
+                Collections.emptySet());
 
         // Create a Description object
         Description description = new Description(descriptionInput);
