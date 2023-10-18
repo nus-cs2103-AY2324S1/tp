@@ -40,12 +40,13 @@ public class AddMeetingCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Meeting expectedMeeting = new MeetingBuilder(MEETING1).withAttendees().build();
+        Meeting expectedMeeting = new MeetingBuilder(MEETING1).withAttendees().withTags().build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + TITLE_DESC_MEETING1 + LOCATION_DESC_MEETING1
                 + START_DESC_MEETING1 + END_DESC_MEETING1,
                 new AddMeetingCommand(expectedMeeting));
+
 
         // multiple tags - all accepted
         Meeting expectedMeetingMultipleTags = new MeetingBuilder(MEETING1).withAttendees().withTags(VALID_TAG_WORK)
@@ -130,7 +131,7 @@ public class AddMeetingCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero attendees
-        Meeting expectedMeeting = new MeetingBuilder(MEETING1).withAttendees().build();
+        Meeting expectedMeeting = new MeetingBuilder(MEETING1).withAttendees().withTags().build();
         assertParseSuccess(parser, TITLE_DESC_MEETING1 + LOCATION_DESC_MEETING1
                 + START_DESC_MEETING1 + END_DESC_MEETING1, new AddMeetingCommand(expectedMeeting));
     }

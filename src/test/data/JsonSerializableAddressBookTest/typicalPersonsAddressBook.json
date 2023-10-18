@@ -35,6 +35,11 @@
     "phone" : "9482442",
     "email" : "anna@example.com",
     "tags" : [ ]
+  }, {
+      "name": "Hoon Meier",
+      "phone": "8482424",
+      "email": "stefan@example.com",
+      "tags": []
   } ],
   "meetings" : [ ]
 }

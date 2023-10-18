@@ -56,7 +56,7 @@ public class Meeting {
     }
 
     public boolean withinSpecifiedTime(LocalDateTime start, LocalDateTime end) {
-        return meetingTime.getStart().isAfter(start) && meetingTime.getEnd().isBefore(end);
+        return !meetingTime.getStart().isBefore(start) && !meetingTime.getEnd().isAfter(end);
     }
 
     /**

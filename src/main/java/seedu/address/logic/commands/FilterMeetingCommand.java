@@ -22,8 +22,12 @@ public class FilterMeetingCommand extends Command {
 
     private final GeneralMeetingPredicate predicate;
 
-
+    /**
+     * Constructs a FilterMeetingCommand object.
+     * @param predicate The predicate that will be used by the FilterMeetingCommand object.
+     */
     public FilterMeetingCommand(GeneralMeetingPredicate predicate) {
+        requireNonNull(predicate);
         this.predicate = predicate;
     }
 

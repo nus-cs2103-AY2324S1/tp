@@ -16,7 +16,7 @@ public class TypicalMeetings {
             .withLocation("Zoom call url")
             .withStart("20.09.2023 1000").withEnd("20.09.2023 1200")
             .withAttendees(TypicalPersons.getTypicalAttendees())
-            // .withTags("work", "important")
+            .withTags("work", "important")
             .build();
 
     public static final Meeting MEETING2 = new MeetingBuilder().withTitle("CS2101 meeting")
@@ -31,6 +31,13 @@ public class TypicalMeetings {
             .withAttendees(TypicalPersons.getTypicalAttendees())
             .build();
 
+    public static final Meeting MEETING4 = new MeetingBuilder().withTitle("ABCDE meeting")
+            .withLocation("com 3")
+            .withStart("30.09.2023 1000").withEnd("30.09.2023 1200")
+            .withAttendees(TypicalPersons.getTypicalAttendees())
+            .withTags("work", "important")
+            .build();
+
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
         for (Meeting meeting : getTypicalMeetings()) {
@@ -41,6 +48,6 @@ public class TypicalMeetings {
     }
 
     public static List<Meeting> getTypicalMeetings() {
-        return new ArrayList<>(Arrays.asList(MEETING1, MEETING2, MEETING3));
+        return new ArrayList<>(Arrays.asList(MEETING1, MEETING2, MEETING3, MEETING4));
     }
 }

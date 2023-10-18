@@ -64,5 +64,4 @@ public class FilterMeetingCommandParser implements Parser<FilterMeetingCommand> 
 
         return new FilterMeetingCommand(generalMeetingPredicate);
     }
-
 }

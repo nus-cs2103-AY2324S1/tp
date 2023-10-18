@@ -53,7 +53,7 @@ public class RemoveMeetingContactCommandTest {
         assertEquals(expectedMessage, message);
 
         Meeting updatedMeeting = model.getFilteredMeetingList().get(INDEX_FIRST_MEETING.getZeroBased());
-        String[] expectedAttendees = Arrays.copyOfRange(TypicalPersons.getTypicalAttendees(), 1, 7);
+        String[] expectedAttendees = Arrays.copyOfRange(TypicalPersons.getTypicalAttendees(), 1, 8);
         Meeting expectedMeeting = new MeetingBuilder(meeting)
             .withAttendees(expectedAttendees)
             .build();
