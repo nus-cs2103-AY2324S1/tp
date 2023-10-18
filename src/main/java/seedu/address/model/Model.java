@@ -8,7 +8,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.contact.Contact;
 
 /**
- * The API of the Model component.
+ * API of the Model component.
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */

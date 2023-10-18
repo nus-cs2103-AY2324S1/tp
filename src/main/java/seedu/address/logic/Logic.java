@@ -11,7 +11,7 @@ import seedu.address.model.ContactList;
 import seedu.address.model.contact.Contact;
 
 /**
- * API of the Logic component
+ * API of the Logic component.
  */
 public interface Logic {
     /**
