@@ -45,8 +45,8 @@ public class JsonContactsStorage implements ContactsStorage {
     public Optional<ContactList> readContactsManager(Path filePath) throws DataLoadingException {
         requireNonNull(filePath);
 
-        Optional<JsonSerializableConText> jsonConText = JsonUtil.readJsonFile(
-                filePath, JsonSerializableConText.class);
+        Optional<JsonSerializableContacts> jsonConText = JsonUtil.readJsonFile(
+                filePath, JsonSerializableContacts.class);
         if (!jsonConText.isPresent()) {
             return Optional.empty();
         }
@@ -74,7 +74,7 @@ public class JsonContactsStorage implements ContactsStorage {
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableConText(contactList), filePath);
+        JsonUtil.saveJsonFile(new JsonSerializableContacts(contactList), filePath);
     }
 
 }

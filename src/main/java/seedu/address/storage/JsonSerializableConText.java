@@ -18,24 +18,24 @@ import seedu.address.model.contact.Contact;
  * An Immutable ContactsManager that is serializable to JSON format.
  */
 @JsonRootName(value = "ContactsManager")
-class JsonSerializableConText {
+class JsonSerializableContacts {
 
     private final List<JsonAdaptedContact> contacts = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableConText} with the given contacts.
+     * Constructs a {@code JsonSerializableContacts} with the given contacts.
      */
     @JsonCreator
-    public JsonSerializableConText(@JsonProperty("contacts") List<JsonAdaptedContact> contacts) {
+    public JsonSerializableContacts(@JsonProperty("contacts") List<JsonAdaptedContact> contacts) {
         this.contacts.addAll(contacts);
     }
 
     /**
      * Converts a given {@code ContactList} into this class for Jackson use.
      *
-     * @param source future changes to this will not affect the created {@code JsonSerializableConText}.
+     * @param source future changes to this will not affect the created {@code JsonSerializableContacts}.
      */
-    public JsonSerializableConText(ContactList source) {
+    public JsonSerializableContacts(ContactList source) {
         contacts.addAll(source.getContactList().stream().map(JsonAdaptedContact::new).collect(Collectors.toList()));
     }
 
