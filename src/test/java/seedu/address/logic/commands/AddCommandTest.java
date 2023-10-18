@@ -184,6 +184,16 @@ public class AddCommandTest {
         public void addBand(Band band) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public boolean hasMusicianInBand(int addInto, int toAdd) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addMusicianToBand(int addInto, int toAdd) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
