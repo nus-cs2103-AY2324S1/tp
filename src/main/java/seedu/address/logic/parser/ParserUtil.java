@@ -1,7 +1,10 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.person.Birthday.FORMATTER;
 
+import java.time.MonthDay;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -10,6 +13,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Linkedin;
 import seedu.address.model.person.Name;
@@ -80,6 +84,19 @@ public class ParserUtil {
             throw new ParseException(Address.MESSAGE_CONSTRAINTS);
         }
         return new Address(trimmedAddress);
+    }
+
+    /**
+     * Parses a {@code String birthday} into an {@code Birthday}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code birthday} is invalid.
+     * @throws DateTimeParseException if the given {@code birthday} doesn't follow the specified format.
+     */
+    public static Birthday parseBirthday(String birthday) throws DateTimeParseException {
+        requireNonNull(birthday);
+        String trimmedBirthday = birthday.trim();
+        return new Birthday(MonthDay.parse(trimmedBirthday, FORMATTER));
     }
 
     /**

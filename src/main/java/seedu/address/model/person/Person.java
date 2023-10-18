@@ -84,10 +84,6 @@ public class Person {
         return address;
     }
 
-    public void setBirthday(Birthday birthday) {
-        this.birthday = Optional.of(birthday);
-    }
-
     public Optional<Birthday> getBirthday() {
         return birthday;
     }
@@ -118,8 +114,8 @@ public class Person {
      */
     public Set<Tag> getNonEmergencyTags() {
         return tags.stream()
-            .filter(tag -> !Tag.EmergencyTags.isEmergencyTag(tag.tagName))
-            .collect(Collectors.toSet());
+                .filter(tag -> !Tag.EmergencyTags.isEmergencyTag(tag.tagName))
+                .collect(Collectors.toSet());
     }
 
     /**
@@ -128,14 +124,12 @@ public class Person {
      */
     public Set<Tag> getEmergencyTags() {
         return tags.stream()
-            .filter(tag -> Tag.EmergencyTags.isEmergencyTag(tag.tagName))
-            .collect(Collectors.toSet());
+                .filter(tag -> Tag.EmergencyTags.isEmergencyTag(tag.tagName))
+                .collect(Collectors.toSet());
     }
-
     public Optional<Integer> getId() {
         return id;
     }
-
     public int setId(int id) {
         this.id = Optional.of(id);
         return id;
@@ -175,7 +169,46 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
+                && telegram.equals(otherPerson.telegram)
+                && linkedin.equals(otherPerson.linkedin)
+                && birthday.equals(otherPerson.birthday)
+                && secondaryEmail.equals(otherPerson.secondaryEmail)
                 && tags.equals(otherPerson.tags);
+    }
+
+    /**
+     * Returns true if birthday has a value.
+     */
+    public boolean hasValidBirthday() {
+        return !birthday.equals(Optional.empty());
+    }
+
+    /**
+     * Returns true if linkedin has a value.
+     */
+    public boolean hasValidLinkedin() {
+        return !linkedin.equals(Optional.empty());
+    }
+
+    /**
+     * Returns true if secondaryEmail has a value.
+     */
+    public boolean hasValidSecondaryEmail() {
+        return !secondaryEmail.equals(Optional.empty());
+    }
+
+    /**
+     * Returns true if telegram has a value.
+     */
+    public boolean hasValidTelegram() {
+        return !telegram.equals(Optional.empty());
+    }
+
+    /**
+     * Returns true if the person has same primary and secondary email.
+     */
+    public boolean hasSameEmail(Email secondaryEmail) {
+        return email.equals(secondaryEmail);
     }
 
     @Override
@@ -194,5 +227,4 @@ public class Person {
                 .add("tags", tags)
                 .toString();
     }
-
 }

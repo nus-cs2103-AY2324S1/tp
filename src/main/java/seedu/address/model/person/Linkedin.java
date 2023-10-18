@@ -8,13 +8,14 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidLinkedin(String)}
  */
 public class Linkedin {
-    public static final String MESSAGE_CONSTRAINTS = "Linkedin can take any values, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Linkedin should not be blank and should be in the following form."
+            + "\ne.g. john-doe-b9a38128a, which is the unique username on the linkedin profile website.";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[^\\s].*";
+    public static final String VALIDATION_REGEX = "^(?!\\s)[a-zA-Z0-9_-][a-zA-Z0-9_-]*$";
 
     public final String value;
 
@@ -61,4 +62,3 @@ public class Linkedin {
         return value.hashCode();
     }
 }
-

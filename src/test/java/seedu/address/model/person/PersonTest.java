@@ -12,6 +12,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
+import java.time.MonthDay;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -92,6 +93,48 @@ public class PersonTest {
         // different tags -> returns false
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
+
+        // different birthday -> returns false
+        editedAlice = new PersonBuilder(ALICE).withBirthday(MonthDay.of(6, 9)).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different linkedin -> returns false
+        editedAlice = new PersonBuilder(ALICE).withLinkedin("linkedin").build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different secondaryEmail -> returns false
+        editedAlice = new PersonBuilder(ALICE).withSecondaryEmail("alice@hotmail.com").build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different telegram -> returns false
+        editedAlice = new PersonBuilder(ALICE).withTelegram("@telegram").build();
+        assertFalse(ALICE.equals(editedAlice));
+    }
+
+    @Test
+    public void hasValid() {
+        Person person = new PersonBuilder().build();
+        assertFalse(person.hasValidTelegram());
+        assertFalse(person.hasValidBirthday());
+        assertFalse(person.hasValidLinkedin());
+        assertFalse(person.hasValidSecondaryEmail());
+        person = new PersonBuilder()
+                .withBirthday(MonthDay.of(6, 9))
+                .withLinkedin("linkedin")
+                .withTelegram("@telegram")
+                .withSecondaryEmail("email@email.com")
+                .build();
+        assertTrue(person.hasValidTelegram());
+        assertTrue(person.hasValidBirthday());
+        assertTrue(person.hasValidLinkedin());
+        assertTrue(person.hasValidSecondaryEmail());
+    }
+
+    @Test
+    public void hasSameEmailMethod() {
+        Person person = new PersonBuilder().withEmail("email@email.com").build();
+        assertTrue(person.hasSameEmail(new Email("email@email.com")));
+        assertFalse(person.hasSameEmail(new Email("email@gmail.com")));
     }
 
     @Test
