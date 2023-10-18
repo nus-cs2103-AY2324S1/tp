@@ -16,7 +16,7 @@ public class GatherCommand extends Command {
             + "Parameters: FINANCIAL_PLAN\n"
             + "Example: " + COMMAND_WORD + " Sample Financial Plan 1";
 
-    public static final String MESSAGE_NO_PERSON_FOUND = "0 Person were found with ";
+    public static final String MESSAGE_NO_PERSON_FOUND = "0 persons were found with ";
 
     private final String prompt;
 
