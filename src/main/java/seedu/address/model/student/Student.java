@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 
@@ -94,6 +95,14 @@ public class Student {
 
         return otherStudent != null
                 && otherStudent.getStudentNumber().equals(getStudentNumber());
+    }
+
+    /**
+     * Marks the specific tutorial as present.
+     */
+    public Student markPresent(Index tutNum) {
+        return new Student(this.name, this.phone, this.email,
+                this.studentNumber, this.classDetails.markPresent(tutNum), this.tags);
     }
 
     /**
