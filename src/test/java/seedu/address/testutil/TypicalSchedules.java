@@ -22,8 +22,8 @@ public class TypicalSchedules {
 
     public static final Schedule SCHEDULE_BOB_SECOND_JAN = new ScheduleBuilder()
             .withTutor(TypicalPersons.BOB)
-            .withStartTime(LocalDateTime.of(2023, 1, 2, 20, 0))
-            .withEndTime(LocalDateTime.of(2023, 1, 2, 22, 0))
+            .withStartTime(LocalDateTime.of(2023, 1, 2, 20, 0, 0))
+            .withEndTime(LocalDateTime.of(2023, 1, 2, 22, 0, 0))
             .build();
 
     private TypicalSchedules() {} // prevents instantiation
