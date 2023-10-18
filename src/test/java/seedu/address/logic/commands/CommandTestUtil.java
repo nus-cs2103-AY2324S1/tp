@@ -3,7 +3,11 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ANIMAL_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ANIMAL_TYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AVAILABILITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUSING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -14,6 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.core.index.Indices;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -25,6 +30,10 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
  * Contains helper methods for testing commands.
  */
 public class CommandTestUtil {
+    public static final String ANIMAL_NAME_DESC_NIL = "nil";
+    public static final String AVAILABILITY_DESC_NIL = "nil";
+    public static final String ANIMAL_TYPE_DESC_NIL = "nil";
+    public static final String HOUSING_DESC_NIL = "nil";
 
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
@@ -36,6 +45,21 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_ANIMAL_NAME_BOB = "WOOF";
+    public static final String VALID_AVAILABILITY_BOB = "NotAvailable";
+    public static final String VALID_ANIMAL_TYPE_BOB = "current.Dog";
+    public static final String VALID_HOUSING_BOB = "HDB";
+    public static final String VALID_ANIMAL_NAME_AMY = "nil";
+    public static final String VALID_AVAILABILITY_AMY = "nil";
+    public static final String VALID_ANIMAL_TYPE_AMY = "nil";
+    public static final String VALID_HOUSING_AMY = "nil";
+    public static final String VALID_AVAILABILITY_AVALABLE = "Available";
+
+    public static final String ANIMAL_NAME_NIL_DESC_BOB = " " + PREFIX_ANIMAL_NAME + ANIMAL_NAME_DESC_NIL;
+    public static final String AVAILABILITY_NIL_DESC_BOB = " " + PREFIX_AVAILABILITY + AVAILABILITY_DESC_NIL;
+    public static final String ANIMAL_TYPE_NIL_DESC_BOB = " " + PREFIX_ANIMAL_TYPE + ANIMAL_TYPE_DESC_NIL;
+    public static final String HOUSING_NIL_DESC_BOB = " " + PREFIX_HOUSING + HOUSING_DESC_NIL;
+    public static final String AVAILABILITY_DESC_AVAILABLE = " " + PREFIX_AVAILABILITY + VALID_AVAILABILITY_AVALABLE;
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -43,8 +67,16 @@ public class CommandTestUtil {
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
+    public static final String ANIMAL_NAME_DESC_BOB = " " + PREFIX_ANIMAL_NAME + VALID_ANIMAL_NAME_BOB;
+    public static final String AVAILABILITY_DESC_BOB = " " + PREFIX_AVAILABILITY + VALID_AVAILABILITY_BOB;
+    public static final String ANIMAL_TYPE_DESC_BOB = " " + PREFIX_ANIMAL_TYPE + VALID_ANIMAL_TYPE_BOB;
+    public static final String HOUSING_DESC_BOB = " " + PREFIX_HOUSING + VALID_HOUSING_BOB;
     public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
+    public static final String ANIMAL_NAME_DESC_AMY = " " + PREFIX_ANIMAL_NAME + VALID_ANIMAL_NAME_AMY;
+    public static final String AVAILABILITY_DESC_AMY = " " + PREFIX_AVAILABILITY + VALID_AVAILABILITY_AMY;
+    public static final String ANIMAL_TYPE_DESC_AMY = " " + PREFIX_ANIMAL_TYPE + VALID_ANIMAL_TYPE_AMY;
+    public static final String HOUSING_DESC_AMY = " " + PREFIX_HOUSING + VALID_HOUSING_AMY;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
@@ -75,7 +107,7 @@ public class CommandTestUtil {
      * - the {@code actualModel} matches {@code expectedModel}
      */
     public static void assertCommandSuccess(Command command, Model actualModel, CommandResult expectedCommandResult,
-            Model expectedModel) {
+                                            Model expectedModel) {
         try {
             CommandResult result = command.execute(actualModel);
             assertEquals(expectedCommandResult, result);
@@ -90,7 +122,7 @@ public class CommandTestUtil {
      * that takes a string {@code expectedMessage}.
      */
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
-            Model expectedModel) {
+                                            Model expectedModel) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
@@ -111,6 +143,24 @@ public class CommandTestUtil {
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
     }
+
+    /**
+     * Returns the Persons at the specified indices.
+     */
+    public static Person[] getPeople(List<Person> list, Indices indices) {
+        assertTrue(indices.getSize() <= list.size());
+        assertTrue(indices.getZeroBasedMax() < list.size());
+
+        int number = indices.getSize();
+        Person[] people = new Person[number];
+        int[] zeroBasedIndices = indices.getZeroBased();
+
+        for (int i = 0; i < number; i++) {
+            people[i] = list.get(zeroBasedIndices[i]);
+        }
+        return people;
+    }
+
     /**
      * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
      * {@code model}'s address book.
@@ -125,4 +175,19 @@ public class CommandTestUtil {
         assertEquals(1, model.getFilteredPersonList().size());
     }
 
+    /**
+     * Updates {@code model}'s filtered list to show only the persons at the given {@code targetIndices} in the
+     * {@code model}'s address book.
+     */
+    public static void showPeopleAtIndices(Model model, Indices targetIndices) {
+
+        Person[] people = getPeople(model.getFilteredPersonList(), targetIndices);
+        ArrayList<String> keywords = new ArrayList<>();
+        for (Person person : people) {
+            final String[] splitName = person.getName().fullName.split("\\s+");
+            keywords.add(splitName[0]);
+        }
+        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(keywords));
+        assertEquals(targetIndices.getSize(), model.getFilteredPersonList().size());
+    }
 }

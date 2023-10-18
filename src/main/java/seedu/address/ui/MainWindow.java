@@ -16,6 +16,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -32,9 +33,11 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+
+    private PersonProfile personProfile;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
-
+    private boolean isInViewMode = false;
     @FXML
     private StackPane commandBoxPlaceholder;
 
@@ -43,6 +46,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane personListPanelPlaceholder;
+
+    @FXML
+    private StackPane personProfilePlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -66,6 +72,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+
     }
 
     public Stage getPrimaryStage() {
@@ -167,6 +174,23 @@ public class MainWindow extends UiPart<Stage> {
         return personListPanel;
     }
 
+    @FXML
+    private void handleView(Person personToView) {
+        if (personListPanelPlaceholder.isVisible()) {
+            personProfile = new PersonProfile(personToView);
+            personProfilePlaceholder.getChildren().add(personProfile.getRoot());
+            personProfilePlaceholder.setVisible(true);
+            personListPanelPlaceholder.setVisible(false);
+        }
+    }
+
+    @FXML
+    private void handleViewExit() {
+        personListPanelPlaceholder.setVisible(true);
+        personProfilePlaceholder.getChildren().remove(personProfile.getRoot());
+        personProfilePlaceholder.setVisible(false);
+    }
+
     /**
      * Executes the command and returns the result.
      *
@@ -186,11 +210,26 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            if (logic.getIsViewCommand()) {
+                handleView(commandResult.getPersonToView());
+            }
+
+            if (logic.getIsViewExitCommand()) {
+                handleViewExit();
+            }
+
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    /**
+     * Returns the boolean value that checks whether the current UI is in profile view page or normal foster list page.
+     */
+    public boolean getIsInViewMode() {
+        return this.isInViewMode;
     }
 }

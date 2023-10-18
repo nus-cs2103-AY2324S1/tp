@@ -10,8 +10,12 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.ViewCommand;
+import seedu.address.logic.commands.ViewExitCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
+import seedu.address.logic.parser.Parser;
+import seedu.address.logic.parser.ViewModeParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -26,12 +30,15 @@ public class LogicManager implements Logic {
 
     public static final String FILE_OPS_PERMISSION_ERROR_FORMAT =
             "Could not save data to file %s due to insufficient permissions to write to the file or the folder.";
-
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     private final Model model;
     private final Storage storage;
+    private Parser parser;
     private final AddressBookParser addressBookParser;
+    private final ViewModeParser viewModeParser;
+    private boolean isViewCommand = false;
+    private boolean isViewExitCommand = false;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -40,15 +47,31 @@ public class LogicManager implements Logic {
         this.model = model;
         this.storage = storage;
         addressBookParser = new AddressBookParser();
+        viewModeParser = new ViewModeParser();
+        this.parser = addressBookParser;
     }
 
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
-
+        Command command;
         CommandResult commandResult;
-        Command command = addressBookParser.parseCommand(commandText);
+
+        command = parser.parseCommand(commandText);
         commandResult = command.execute(model);
+
+        if (command instanceof ViewCommand) {
+            isViewCommand = true;
+            isViewExitCommand = false;
+            this.setParser(viewModeParser);
+        } else if (command instanceof ViewExitCommand) {
+            isViewExitCommand = true;
+            isViewCommand = false;
+            this.setParser(addressBookParser);
+        } else {
+            isViewCommand = false;
+            isViewExitCommand = false;
+        }
 
         try {
             storage.saveAddressBook(model.getAddressBook());
@@ -60,7 +83,6 @@ public class LogicManager implements Logic {
 
         return commandResult;
     }
-
     @Override
     public ReadOnlyAddressBook getAddressBook() {
         return model.getAddressBook();
@@ -84,5 +106,17 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    public boolean getIsViewCommand() {
+        return isViewCommand;
+    }
+
+    public boolean getIsViewExitCommand() {
+        return isViewExitCommand;
+    }
+
+    public void setParser(Parser parser) {
+        this.parser = parser;
     }
 }

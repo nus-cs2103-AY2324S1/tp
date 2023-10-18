@@ -7,7 +7,7 @@ import seedu.address.logic.search.FindCommandArgumentParser;
 /**
  * Parses input arguments and creates a new FindCommand object
  */
-public class FindCommandParser implements Parser<FindCommand> {
+public class FindCommandParser implements CommandParser<FindCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand

@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndices.ONEBASED_ONE_TO_THREE;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -26,6 +27,9 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_AVAILABILITY = "notavailable";
+    private static final String INVALID_ANIMAL_TYPE = "dog";
+    private static final String INVALID_HOUSING = "hdb";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -33,6 +37,10 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_AVAILABILITY1 = "Available";
+    private static final String VALID_AVAILABILITY2 = "NotAvailable";
+    private static final String VALID_ANIMAL_TYPE = "able.Dog";
+    private static final String VALID_HOUSING = "HDB";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -54,6 +62,30 @@ public class ParserUtilTest {
 
         // Leading and trailing whitespaces
         assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  "));
+    }
+
+    @Test
+    public void parseIndices_invalidInput_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseIndex("1 2 a b 3 c"));
+    }
+
+    @Test
+    public void parseIndices_outOfRangeInput_throwsParseException() {
+        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
+                -> ParserUtil.parseIndices(Long.toString(Integer.MAX_VALUE + 1) + "2 3 1"));
+    }
+
+    @Test
+    public void parseIndices_validInput_success() throws Exception {
+
+        // Leading and trailing whitespaces
+        assertEquals(ONEBASED_ONE_TO_THREE, ParserUtil.parseIndices("  1  2  3  "));
+
+        // duplicates
+        assertEquals(ONEBASED_ONE_TO_THREE, ParserUtil.parseIndices("1 2 2 3 3 1 3 2 1 3"));
+
+        // white spaces and duplicates
+        assertEquals(ONEBASED_ONE_TO_THREE, ParserUtil.parseIndices("   1 2   3  2 3    1    3   1  2 "));
     }
 
     @Test
@@ -193,4 +225,25 @@ public class ParserUtilTest {
 
         assertEquals(expectedTagSet, actualTagSet);
     }
+
+    @Test
+    public void parseAvailability_invalidInput_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseAvailability(INVALID_AVAILABILITY));
+    }
+
+    @Test
+    public void parseAnimalType_invalidInputWhenAvailable_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseAnimalType(INVALID_ANIMAL_TYPE, VALID_AVAILABILITY1));
+    }
+
+    @Test
+    public void parseAnimalType_invalidInputWhenNotAvailable_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseAnimalType(INVALID_ANIMAL_TYPE, VALID_AVAILABILITY2));
+    }
+
+    @Test
+    public void parseHousing_invalidInput_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseHousing(INVALID_HOUSING));
+    }
+
 }
