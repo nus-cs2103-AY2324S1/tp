@@ -113,4 +113,10 @@ public interface Model {
     Set<Name> findInvalidNames(Set<Name> names);
 
 
+    /**
+     * Updates any events where the person to edit is assigned to.
+     * @param personToEdit person to edit
+     * @param editedPerson person with the edited details
+     */
+    void updateAssignedPersons(Person personToEdit, Person editedPerson);
 }

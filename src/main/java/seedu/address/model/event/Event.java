@@ -3,6 +3,7 @@ package seedu.address.model.event;
 
 import static seedu.address.model.event.EventTime.NULL_EVENT_TIME;
 
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
@@ -120,5 +121,32 @@ public abstract class Event {
 
     public Set<Name> getNames() {
         return this.names;
+    }
+
+    /**
+     * Returns a set of updated person names when a person's name is edited.
+     * @param toEdit name of the person to be edited
+     * @param editedName edited name of the person
+     * @return set of updated person names
+     */
+    public Set<Name> getUpdatedNames(Name toEdit, Name editedName) {
+        if (!this.names.contains(toEdit)) {
+            return this.names;
+        }
+
+
+
+        Set<Name> newNames = new HashSet<>();
+
+        for (Name name : this.names) {
+            if (name.equals(toEdit)) {
+                newNames.add(editedName);
+            } else {
+                newNames.add(name);
+            }
+        }
+
+        return newNames;
+
     }
 }
