@@ -111,17 +111,30 @@ public class UniqueDoctorList implements Iterable<Doctor> {
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
+        if (this == other) {
             return true;
         }
 
         // instanceof handles nulls
-        if (!(other instanceof UniquePersonList)) {
+        if (!(other instanceof UniqueDoctorList)) {
             return false;
         }
 
-        UniqueDoctorList otherUniquePersonList = (UniqueDoctorList) other;
-        return internalList.equals(otherUniquePersonList.internalList);
+        UniqueDoctorList otherUniqueDoctorList = (UniqueDoctorList) other;
+
+        // Check if both lists are of the same size
+        if (this.internalList.size() != otherUniqueDoctorList.internalList.size()) {
+            return false;
+        }
+
+        // Compare individual doctors in the lists
+        for (int i = 0; i < this.internalList.size(); i++) {
+            if (!this.internalList.get(i).equals(otherUniqueDoctorList.internalList.get(i))) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     @Override
