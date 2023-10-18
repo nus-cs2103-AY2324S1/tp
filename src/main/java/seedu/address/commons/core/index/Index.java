@@ -1,5 +1,8 @@
 package seedu.address.commons.core.index;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
@@ -24,6 +27,12 @@ public class Index {
 
         this.zeroBasedIndex = zeroBasedIndex;
     }
+
+    @JsonCreator
+    public static Index create(@JsonProperty("zeroBasedIndex") int zeroBasedIndex) {
+        return new Index(zeroBasedIndex);
+    }
+
 
     public int getZeroBased() {
         return zeroBasedIndex;
