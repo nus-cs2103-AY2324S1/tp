@@ -5,7 +5,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.HashSet;
-import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -13,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.FilterSettings;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.filter.SerializablePredicate;
 import seedu.address.model.person.Person;
 
 /**
@@ -36,6 +36,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredPersons.setPredicate(this.userPrefs.getFilterSettings().getComposedFilter());
     }
 
     public ModelManager() {
@@ -137,18 +138,18 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addFilter(Predicate<Person> predicate) {
+    public void addFilter(SerializablePredicate predicate) {
         requireNonNull(predicate);
-        HashSet<Predicate<Person>> currentFilters = this.getFilterSettings().getFilterSet();
+        HashSet<SerializablePredicate> currentFilters = this.getFilterSettings().getFilters();
         currentFilters.add(predicate);
         this.setFilterSettings(new FilterSettings(currentFilters));
         filteredPersons.setPredicate(this.getFilterSettings().getComposedFilter());
     }
 
     @Override
-    public void deleteFilter(Predicate<Person> predicate) {
+    public void deleteFilter(SerializablePredicate predicate) {
         requireNonNull(predicate);
-        HashSet<Predicate<Person>> currentFilters = this.getFilterSettings().getFilterSet();
+        HashSet<SerializablePredicate> currentFilters = this.getFilterSettings().getFilters();
         currentFilters.remove(predicate);
         this.setFilterSettings(new FilterSettings(currentFilters));
         filteredPersons.setPredicate(this.getFilterSettings().getComposedFilter());

@@ -6,6 +6,7 @@ import java.util.Objects;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.filter.SerializablePredicate;
 import seedu.address.model.person.Person;
 
 /**
@@ -13,40 +14,40 @@ import seedu.address.model.person.Person;
  * Guarantees: immutable.
  */
 public class FilterSettings implements Serializable {
-    private static final HashSet<Predicate<Person>> DEFAULT_FILTERS = new HashSet<>();
+    private static final HashSet<SerializablePredicate> DEFAULT_FILTERS = new HashSet<>();
 
-    private final HashSet<Predicate<Person>> filterSet;
+    private final HashSet<SerializablePredicate> filters;
 
     /**
      * Constructs a {@code FilterSettings} with the default filter.
      */
     public FilterSettings() {
-        this.filterSet = DEFAULT_FILTERS;
+        this.filters = DEFAULT_FILTERS;
     }
 
     /**
      * Constructs a {@code FilterSettings} with the specified filter.
      */
-    public FilterSettings(HashSet<Predicate<Person>> filterSet) {
+    public FilterSettings(HashSet<SerializablePredicate> filters) {
         @SuppressWarnings("unchecked")
-        HashSet<Predicate<Person>> clonedFilter = (HashSet<Predicate<Person>>) filterSet.clone();
-        this.filterSet = clonedFilter;
+        HashSet<SerializablePredicate> clonedFilter = (HashSet<SerializablePredicate>) filters.clone();
+        this.filters = clonedFilter;
     }
 
-    public HashSet<Predicate<Person>> getFilterSet() {
+    public HashSet<SerializablePredicate> getFilters() {
         @SuppressWarnings("unchecked")
-        HashSet<Predicate<Person>> filters = (HashSet<Predicate<Person>>) this.filterSet.clone();
+        HashSet<SerializablePredicate> filters = (HashSet<SerializablePredicate>) this.filters.clone();
         return filters;
     }
 
     public Predicate<Person> getComposedFilter() {
-        Predicate<Person> composedFilter = unused -> true;
+        SerializablePredicate composedFilter = new SerializablePredicate(unused -> true);
 
-        for (Predicate<Person> predicate : filterSet) {
-            composedFilter = predicate.and(predicate);
+        for (SerializablePredicate predicate : filters) {
+            composedFilter = composedFilter.and(predicate);
         }
 
-        return composedFilter;
+        return composedFilter.getPredicate();
     }
 
     @Override
@@ -61,18 +62,18 @@ public class FilterSettings implements Serializable {
         }
 
         FilterSettings otherFilterSettings = (FilterSettings) other;
-        return filterSet.equals(otherFilterSettings.filterSet);
+        return filters.equals(otherFilterSettings.filters);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(filterSet);
+        return Objects.hash(filters);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("filterList", filterSet)
+                .add("filters", filters)
                 .toString();
     }
 }

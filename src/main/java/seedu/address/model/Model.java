@@ -1,11 +1,11 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
-import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.FilterSettings;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.filter.SerializablePredicate;
 import seedu.address.model.person.Person;
 
 /**
@@ -91,13 +91,13 @@ public interface Model {
      * Adds the given predicate to filter list.
      * {@code predicate} must not already exist in the address book.
      */
-    void addFilter(Predicate<Person> predicate);
+    void addFilter(SerializablePredicate predicate);
 
     /**
      * Deletes the given predicate.
      * The predicate must exist in the filter list.
      */
-    void deleteFilter(Predicate<Person> predicate);
+    void deleteFilter(SerializablePredicate predicate);
 
     /**
      * Clears all filters.

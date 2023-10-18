@@ -17,6 +17,7 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.filter.SerializablePredicate;
 import seedu.address.model.person.Person;
 
 /**
@@ -115,7 +116,7 @@ public class DeleteCommandTest {
      */
     private void showNoPerson(Model model) {
         model.clearFilters();
-        model.addFilter(unused -> false);
+        model.addFilter(new SerializablePredicate(unused -> false));
 
         assertTrue(model.getFilteredPersonList().isEmpty());
     }
