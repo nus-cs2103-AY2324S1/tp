@@ -50,7 +50,8 @@ public class NoteCommandTest {
 
         NoteCommand command = new NoteCommand(Index.fromZeroBased(1), noteToAdd);
 
-        assertThrows(CommandException.class, () -> command.execute(modelStub), Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertThrows(CommandException.class, () -> command.execute(modelStub),
+            Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
 
