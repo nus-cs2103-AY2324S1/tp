@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
@@ -94,14 +95,26 @@ public class AddressBookTest {
      * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
-        private final ObservableList<Patient> patients = FXCollections.observableArrayList();
+        private final ObservableList<Patient> patients = FXCollections.observableArrayList(); // I think this is wrong
+        private final ObservableList<Doctor> doctors = FXCollections.observableArrayList();
 
         AddressBookStub(Collection<Person> persons) {
             for (Person p : persons) {
                 if (p instanceof Patient) {
                     patients.add((Patient) p);
+                } else if (p instanceof Doctor) {
+                    doctors.add((Doctor) p);
                 }
             }
+        }
+
+        /**
+         * Returns an unmodifiable view of the doctors list.
+         * This list will not contain any duplicate persons.
+         */
+        @Override
+        public ObservableList<Doctor> getDoctorList() {
+            return doctors;
         }
 
         @Override
