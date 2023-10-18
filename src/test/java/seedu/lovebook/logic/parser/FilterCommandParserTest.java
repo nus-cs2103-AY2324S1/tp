@@ -1,7 +1,12 @@
 package seedu.lovebook.logic.parser;
 
 import static seedu.lovebook.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.lovebook.logic.parser.CliSyntax.*;
+import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_AGE;
+import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_GENDER;
+import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HEIGHT;
+import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HOROSCOPE;
+import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_INCOME;
+import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.lovebook.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.lovebook.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
