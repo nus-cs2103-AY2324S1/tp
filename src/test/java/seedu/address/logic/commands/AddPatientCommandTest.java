@@ -22,6 +22,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PatientBuilder;
@@ -149,9 +150,25 @@ public class AddPatientCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        /**
+         * Returns an unmodifiable view of the filtered person list
+         */
+        @Override
+        public ObservableList<Person> getFilteredPersonList() {
+            return null; // not sure abt this method
+        }
+
         @Override
         public ObservableList<Patient> getFilteredPatientList() {
             throw new AssertionError("This method should not be called.");
+        }
+
+        /**
+         * Returns an unmodifiable view of the filtered doctor list
+         */
+        @Override
+        public ObservableList<Doctor> getFilteredDoctorList() {
+            return null;
         }
 
         @Override

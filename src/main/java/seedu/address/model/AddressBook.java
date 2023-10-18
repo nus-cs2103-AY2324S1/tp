@@ -6,7 +6,9 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Patient;
+import seedu.address.model.person.UniqueDoctorList;
 import seedu.address.model.person.UniquePatientList;
 
 /**
@@ -14,8 +16,7 @@ import seedu.address.model.person.UniquePatientList;
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
-
-    // private final UniquePersonList persons;
+    private final UniqueDoctorList doctors;
     private final UniquePatientList patients;
 
     /*
@@ -26,6 +27,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
+        doctors = new UniqueDoctorList();
         patients = new UniquePatientList();
     }
 
@@ -51,11 +53,19 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the doctors list with {@code doctors}.
+     * {@code doctors} must not contain duplicate persons.
+     */
+    public void setDoctors(List<Doctor> doctors) {
+        this.doctors.setDoctors(doctors);
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
-
+        setDoctors(newData.getDoctorList());
         setPatients(newData.getPatientList());
     }
 
@@ -71,6 +81,16 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if a doctor with the same identity as {@code doctor} exists in the address book.
+     */
+    public boolean hasDoctor(Doctor doctor) {
+        requireNonNull(doctor);
+        return doctors.contains(doctor);
+    }
+
+    /**
+     * Adds a person to the address book.
+     * The person must not already exist in the address book.
      * Adds a patient to the address book.
      * The patient must not already exist in the address book.
      */
@@ -79,6 +99,15 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Adds a doctor to the address book.
+     * The doctor must not already exist in the address book.
+     */
+    public void addDoctor(Doctor d) {
+        doctors.add(d);
+    }
+
+    /**
+     * Replaces the given person {@code target} in the list with {@code editedPerson}.
      * Replaces the given patients {@code target} in the list with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
@@ -87,6 +116,17 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(editedPerson);
 
         patients.setPatient(target, editedPerson);
+    }
+
+    /**
+     * Replaces the given person {@code target} in the list with {@code editedPerson}.
+     * {@code target} must exist in the address book.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     */
+    public void setDoctor(Doctor target, Doctor editedDoctor) {
+        requireNonNull(editedDoctor);
+
+        doctors.setDoctor(target, editedDoctor);
     }
 
     /**
@@ -99,10 +139,20 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
     }
 
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeDoctor(Doctor key) {
+        if (doctors.contains(key)) {
+            doctors.remove(key);
+        }
+    }
+
     //// util methods
 
     @Override
-    public String toString() {
+    public String toString() { //not sure how to modify this
         return new ToStringBuilder(this)
                 .add("patients", patients)
                 .toString();
@@ -110,6 +160,11 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     public ObservableList<Patient> getPatientList() {
         return patients.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Doctor> getDoctorList() {
+        return doctors.asUnmodifiableObservableList();
     }
 
     @Override
@@ -124,8 +179,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         AddressBook otherAddressBook = (AddressBook) other;
-        // check for the list of doctors and patients
-        return patients.equals(otherAddressBook.patients);
+        return patients.equals(otherAddressBook.patients)
+                && doctors.equals((otherAddressBook.doctors));
     }
 
     @Override

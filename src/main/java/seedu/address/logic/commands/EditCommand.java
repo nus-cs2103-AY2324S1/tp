@@ -90,7 +90,9 @@ public class EditCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         // combine doctor list and patient list
-        List<Person> lastShownList = new ArrayList<>(model.getFilteredPatientList());
+        List<Person> lastShownList = new ArrayList<>();
+        lastShownList.addAll(model.getFilteredDoctorList());
+        lastShownList.addAll(model.getFilteredPatientList());
 
         List<Person> personToEditList = lastShownList.stream()
                 .filter(x -> x.getIc().equals(nric))

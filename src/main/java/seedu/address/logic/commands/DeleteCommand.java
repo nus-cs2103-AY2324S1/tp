@@ -36,7 +36,9 @@ public class DeleteCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         // combine doctor list and patient list
-        List<Person> lastShownList = new ArrayList<>(model.getFilteredPatientList());
+        List<Person> lastShownList = new ArrayList<>();
+        lastShownList.addAll(model.getFilteredDoctorList());
+        lastShownList.addAll(model.getFilteredPatientList());
 
         for (Person target : lastShownList) {
             if (targetIc.equals(target.getIc())) {

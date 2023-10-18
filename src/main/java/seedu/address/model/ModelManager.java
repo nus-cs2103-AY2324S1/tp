@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
 
@@ -19,9 +20,9 @@ import seedu.address.model.person.Person;
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
-
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
+    private final FilteredList<Doctor> filteredDoctors;
     private final FilteredList<Patient> filteredPatients;
 
     /**
@@ -34,6 +35,7 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
+        filteredDoctors = new FilteredList<>(this.addressBook.getDoctorList());
         filteredPatients = new FilteredList<>(this.addressBook.getPatientList());
     }
 
@@ -93,6 +95,8 @@ public class ModelManager implements Model {
         requireNonNull(person);
         if (person instanceof Patient) {
             return addressBook.hasPatient((Patient) person);
+        } else if (person instanceof Doctor) {
+            return addressBook.hasDoctor((Doctor) person);
         } else {
             return false;
         }
@@ -102,13 +106,18 @@ public class ModelManager implements Model {
     public void deletePerson(Person target) {
         if (target instanceof Patient) {
             addressBook.removePatient((Patient) target);
+        } else if (target instanceof Doctor) {
+            addressBook.removeDoctor((Doctor) target);
         }
+
     }
 
     @Override
     public void addPerson(Person person) {
         if (person instanceof Patient) {
             addressBook.addPatient((Patient) person);
+        } else if (person instanceof Doctor) {
+            addressBook.addDoctor((Doctor) person);
         }
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
@@ -118,7 +127,17 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
         if (target instanceof Patient && editedPerson instanceof Patient) {
             addressBook.setPatient((Patient) target, (Patient) editedPerson);
+        } else if (target instanceof Doctor && editedPerson instanceof Doctor) {
+            addressBook.setDoctor((Doctor) target, (Doctor) editedPerson);
         }
+    }
+
+    /**
+     * Returns an unmodifiable view of the filtered person list
+     */
+    @Override
+    public ObservableList<Person> getFilteredPersonList() {
+        return null;
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -132,10 +151,19 @@ public class ModelManager implements Model {
         return filteredPatients;
     }
 
+    /**
+     * Returns an unmodifiable view of the filtered doctor list
+     */
+    @Override
+    public ObservableList<Doctor> getFilteredDoctorList() {
+        return filteredDoctors;
+    }
+
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPatients.setPredicate(predicate);
+        filteredDoctors.setPredicate(predicate);
     }
 
     @Override
@@ -151,8 +179,9 @@ public class ModelManager implements Model {
 
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
-            && userPrefs.equals(otherModelManager.userPrefs)
-            && filteredPatients.equals(otherModelManager.filteredPatients);
+                && userPrefs.equals(otherModelManager.userPrefs)
+                && filteredDoctors.equals(otherModelManager.filteredDoctors)
+                && filteredPatients.equals(otherModelManager.filteredPatients);
     }
 
 }
