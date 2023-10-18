@@ -1,8 +1,11 @@
 package seedu.address.model.student.grades;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.IntStream;
 
 import seedu.address.commons.core.index.Index;
@@ -28,6 +31,13 @@ public class AssignmentTracker {
         IntStream.range(0, numOfAssignments).forEach(i -> assignments[i] = new Assignment());
     }
 
+    public AssignmentTracker(List<Integer> assignmentTracker) {
+        requireNonNull(assignmentTracker);
+        assignments = new Assignment[assignmentTracker.size()];
+        IntStream.range(0, assignmentTracker.size())
+                .forEach(i -> assignments[i] = new Assignment(assignmentTracker.get(i)));
+    }
+
     /**
      * Returns true if a given number is a valid amount of assignments
      */
@@ -42,6 +52,17 @@ public class AssignmentTracker {
      */
     public void editMarks(Index index, int marks) {
         assignments[index.getZeroBased()].setMarks(marks);
+    }
+
+    /**
+     * Returns a Json friendly version of the assignmentTracker.
+     */
+    public List<Integer> getJsonAssignmentTracker() {
+        List<Integer> assignmentTracker = new ArrayList<>();
+        for (Assignment assignment : assignments) {
+            assignmentTracker.add(assignment.getMarks());
+        }
+        return assignmentTracker;
     }
 
     @Override

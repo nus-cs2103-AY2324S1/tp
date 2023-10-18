@@ -11,6 +11,10 @@ public class ClassParticipation {
         isParticipated = false;
     }
 
+    public ClassParticipation(boolean isParticipated) {
+        this.isParticipated = isParticipated;
+    }
+
     public void mark() {
         isParticipated = true;
     }

@@ -1,8 +1,12 @@
 package seedu.address.model.student.grades;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.IntStream;
 
 import seedu.address.commons.core.index.Index;
 
@@ -26,7 +30,14 @@ public class AttendanceTracker {
     public AttendanceTracker(int numOfTut) {
         checkArgument(isValidAttendance(numOfTut), MESSAGE_CONSTRAINTS);
         attendanceList = new Attendance[numOfTut];
-        Arrays.fill(attendanceList, new Attendance());
+        IntStream.range(0, numOfTut).forEach(i -> attendanceList[i] = new Attendance());
+    }
+
+    public AttendanceTracker(List<Boolean> attendanceTracker) {
+        requireNonNull(attendanceTracker);
+        attendanceList = new Attendance[attendanceTracker.size()];
+        IntStream.range(0, attendanceTracker.size())
+                .forEach(i -> attendanceList[i] = new Attendance(attendanceTracker.get(i)));
     }
 
     /**
@@ -52,6 +63,17 @@ public class AttendanceTracker {
      */
     public void markAbsent(Index tutNum) {
         attendanceList[tutNum.getZeroBased()].unmark();
+    }
+
+    /**
+     * Returns a Json friendly version of the attendanceTracker.
+     */
+    public List<Boolean> getJsonAttendanceTracker() {
+        List<Boolean> attendanceTracker = new ArrayList<>();
+        for (Attendance attendance : this.attendanceList) {
+            attendanceTracker.add(attendance.getIsPresent());
+        }
+        return attendanceTracker;
     }
 
     @Override

@@ -9,6 +9,7 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
+import seedu.address.storage.JsonAdaptedClassDetails;
 
 /**
  * Represents a Student in the address book.
@@ -73,6 +74,10 @@ public class Student {
 
     public ClassDetails getClassDetails() {
         return classDetails;
+    }
+
+    public JsonAdaptedClassDetails getJsonAdaptedClassDetails() {
+        return classDetails.getJsonAdaptedClassDetails();
     }
 
     /**

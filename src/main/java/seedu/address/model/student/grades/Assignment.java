@@ -10,6 +10,10 @@ public class Assignment {
     public Assignment() {
     }
 
+    public Assignment(Integer marks) {
+        this.marks = marks;
+    }
+
     public void setMarks(int marks) {
         this.marks = marks;
     }

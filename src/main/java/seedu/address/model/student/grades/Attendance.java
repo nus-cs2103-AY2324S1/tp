@@ -11,6 +11,10 @@ public class Attendance {
         isPresent = false;
     }
 
+    public Attendance(boolean isPresent) {
+        this.isPresent = isPresent;
+    }
+
     public void mark() {
         isPresent = true;
     }

@@ -8,6 +8,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.student.grades.AssignmentTracker;
 import seedu.address.model.student.grades.AttendanceTracker;
 import seedu.address.model.student.grades.ClassParticipationTracker;
+import seedu.address.storage.JsonAdaptedClassDetails;
 
 /**
  * Represents a Student's Class Number
@@ -49,6 +50,16 @@ public class ClassDetails {
         attendanceTracker = new AttendanceTracker(TEMP_LENGTH);
         classParticipationTracker = new ClassParticipationTracker(TEMP_LENGTH);
         assignmentTracker = new AssignmentTracker(TEMP_LENGTH);
+    }
+
+    public ClassDetails(String classDetails, AttendanceTracker attendanceTracker,
+                        AssignmentTracker assignmentTracker, ClassParticipationTracker classParticipationTracker) {
+        requireNonNull(classDetails);
+        checkArgument(isValidClassDetails(classDetails), MESSAGE_CONSTRAINTS);
+        value = classDetails;
+        this.attendanceTracker = attendanceTracker;
+        this.classParticipationTracker = classParticipationTracker;
+        this.assignmentTracker = assignmentTracker;
     }
 
     /**
@@ -124,5 +135,12 @@ public class ClassDetails {
      */
     public String displayParticipations() {
         return classParticipationTracker.toString();
+    }
+
+    public JsonAdaptedClassDetails getJsonAdaptedClassDetails() {
+        return new JsonAdaptedClassDetails(value,
+                attendanceTracker.getJsonAttendanceTracker(),
+                assignmentTracker.getJsonAssignmentTracker(),
+                classParticipationTracker.getJsonClassParticipationTracker());
     }
 }

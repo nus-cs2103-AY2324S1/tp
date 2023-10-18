@@ -3,7 +3,9 @@ package seedu.address.model.student.grades;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.IntStream;
 
 import seedu.address.commons.core.index.Index;
@@ -30,6 +32,13 @@ public class ClassParticipationTracker {
         checkArgument(isValidClassPart(numOfTut), MESSAGE_CONSTRAINTS);
         classPartList = new ClassParticipation[numOfTut];
         IntStream.range(0, numOfTut).forEach(i -> classPartList[i] = new ClassParticipation());
+    }
+
+    public ClassParticipationTracker(List<Boolean> classParticipationTracker) {
+        requireNonNull(classParticipationTracker);
+        classPartList = new ClassParticipation[classParticipationTracker.size()];
+        IntStream.range(0, classParticipationTracker.size())
+                .forEach(i -> classPartList[i] = new ClassParticipation(classParticipationTracker.get(i)));
     }
 
     /**
@@ -69,6 +78,17 @@ public class ClassParticipationTracker {
         } else {
             markDidNotParticipate(tutNum);
         }
+    }
+
+    /**
+     * Returns a Json friendly version of the classParticipationTracker.
+     */
+    public List<Boolean> getJsonClassParticipationTracker() {
+        List<Boolean> classParticipationTracker = new ArrayList<>();
+        for (ClassParticipation classParticipation : classPartList) {
+            classParticipationTracker.add(classParticipation.getParticipated());
+        }
+        return classParticipationTracker;
     }
 
     @Override
