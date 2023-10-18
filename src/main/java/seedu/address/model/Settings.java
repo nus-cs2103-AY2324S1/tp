@@ -26,7 +26,9 @@ public class Settings implements ReadOnlySettings {
      * Constructs a clone of the specified {@link ReadOnlySettings}.
      */
     public Settings(ReadOnlySettings settings) {
-        this.overwrite(settings);
+        this.setContactsPath(settings.getContactsPath());
+
+        this.setGuiSettings(settings.getGuiSettings());
     }
 
     @Override
@@ -76,14 +78,5 @@ public class Settings implements ReadOnlySettings {
 
     public void setGuiSettings(GuiSettings newGuiSettings) {
         this.guiSettings = newGuiSettings;
-    }
-
-    /**
-     * Overwrites current settings with the specified {@link ReadOnlySettings}.
-     */
-    public void overwrite(ReadOnlySettings newSettings) {
-        this.setContactsPath(newSettings.getContactsPath());
-
-        this.setGuiSettings(newSettings.getGuiSettings());
     }
 }
