@@ -3,9 +3,10 @@ layout: page
 title: User Guide
 ---
 
-UNO FAs (One Financial Advisors app) is a **desktop app for Financial Advisors to manage client's contacts, 
-optimized for use via a Command Line Interface** (CLI) while still having the benefits of a 
-Graphical User Interface (GUI). If you can type fast, UNO FAs can help you manage and retrieve client's information better than traditional GUI apps.
+UNOFAS (One Financial Advisors app) is a **desktop app for Financial Advisors to manage client's contacts,
+optimized for use via a Command Line Interface** (CLI) while still having the benefits of a
+Graphical User Interface (GUI). If you can type fast, UNOFAS can help you manage and retrieve client's information
+better than traditional GUI apps.
 
 **Table of Contents**
 * Quick Start
@@ -64,7 +65,7 @@ Graphical User Interface (GUI). If you can type fast, UNO FAs can help you manag
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Any input parameters that do not adhere to the accepted values will result in the command **failing and not executing**. 
+* Any input parameters that do not adhere to the accepted values will result in the command **failing and not executing**.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -87,7 +88,7 @@ Add a client’s contacts to address book (name, phone number, email, home addre
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS nk/NEXT_KIN nkp/NEXT_KIN_PHONE [t/TAG]…​`
 
-Acceptable Values: 
+Acceptable Values:
 1. NAME - any value is possible
 2. PHONE_NUMBER - Numbers (0-9) and symbols, but no alphabets
 3. EMAIL - string in valid email format
@@ -194,11 +195,11 @@ Format: `exit`
 
 ### Saving the data
 
-UNO FAs data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+UNOFAS data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-UNO Fas data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+UNOFAS data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.

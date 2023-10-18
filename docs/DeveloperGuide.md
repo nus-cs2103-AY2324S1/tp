@@ -262,10 +262,10 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: 
-This tool functions as a digital address book suited to the needs of financial advisors. 
-It allows them to track, update, and manage their clients’ information efficiently. 
-This is facilitated through the use of a command line interface for efficient and effective querying and 
+**Value proposition**:
+This tool functions as a digital address book suited to the needs of financial advisors.
+It allows them to track, update, and manage their clients’ information efficiently.
+This is facilitated through the use of a command line interface for efficient and effective querying and
 modifying of clients’ data.
 
 
@@ -317,7 +317,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User request to add a client to the list 
+1.  User request to add a client to the list
 2.  AddressBook adds the client
 
     Use case ends.
@@ -349,7 +349,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list clients
-2.  AddressBook shows a list of clients 
+2.  AddressBook shows a list of clients
 3.  User request to edit client’s contacts from the list 
 4.  AddressBook changes the client’s contacts
 
