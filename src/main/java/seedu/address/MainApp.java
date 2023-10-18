@@ -193,7 +193,7 @@ public class MainApp extends Application {
 
         @Nullable ReadOnlyContacts contacts = null;
         try {
-            Optional<ReadOnlyContacts> contactsOptional = storage.readContacts();
+            Optional<? extends ReadOnlyContacts> contactsOptional = storage.readContacts();
             if (contactsOptional.isPresent()) {
                 contacts = contactsOptional.get();
             } else {
