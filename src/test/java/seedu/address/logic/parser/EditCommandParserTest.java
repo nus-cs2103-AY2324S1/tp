@@ -6,24 +6,24 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TestData.Valid.EMAIL_DESC_AMY;
-import static seedu.address.testutil.TestData.Valid.EMAIL_DESC_BOB;
 import static seedu.address.testutil.TestData.IndexContact.FIRST_CONTACT;
 import static seedu.address.testutil.TestData.IndexContact.SECOND_CONTACT;
 import static seedu.address.testutil.TestData.IndexContact.THIRD_CONTACT;
 import static seedu.address.testutil.TestData.Invalid.EMAIL_DESC;
 import static seedu.address.testutil.TestData.Invalid.NAME_DESC;
 import static seedu.address.testutil.TestData.Invalid.PHONE_DESC;
+import static seedu.address.testutil.TestData.Valid.EMAIL_AMY;
+import static seedu.address.testutil.TestData.Valid.EMAIL_DESC_AMY;
+import static seedu.address.testutil.TestData.Valid.EMAIL_DESC_BOB;
+import static seedu.address.testutil.TestData.Valid.NAME_AMY;
 import static seedu.address.testutil.TestData.Valid.NAME_DESC_AMY;
+import static seedu.address.testutil.TestData.Valid.NOTE_AMY;
 import static seedu.address.testutil.TestData.Valid.NOTE_DESC_AMY;
 import static seedu.address.testutil.TestData.Valid.NOTE_DESC_BOB;
-import static seedu.address.testutil.TestData.Valid.PHONE_DESC_AMY;
-import static seedu.address.testutil.TestData.Valid.PHONE_DESC_BOB;
-import static seedu.address.testutil.TestData.Valid.EMAIL_AMY;
-import static seedu.address.testutil.TestData.Valid.NAME_AMY;
-import static seedu.address.testutil.TestData.Valid.NOTE_AMY;
 import static seedu.address.testutil.TestData.Valid.PHONE_AMY;
 import static seedu.address.testutil.TestData.Valid.PHONE_BOB;
+import static seedu.address.testutil.TestData.Valid.PHONE_DESC_AMY;
+import static seedu.address.testutil.TestData.Valid.PHONE_DESC_BOB;
 
 import org.junit.jupiter.api.Test;
 
@@ -33,8 +33,6 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditContactDescriptor;
 import seedu.address.testutil.EditContactDescriptorBuilder;
 import seedu.address.testutil.TestData;
-
-
 
 public class EditCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =

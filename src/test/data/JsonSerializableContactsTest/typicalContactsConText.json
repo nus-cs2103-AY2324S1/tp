@@ -1,5 +1,5 @@
 {
-  "_comment": "AddressBook save file which contains the same Contact values as in TypicalContacts#getTypicalAddressBook()",
+  "_comment": "ContactsManager save file which contains the same Contact values as in TypicalContacts#getTypicalContactsManager()",
   "contacts" : [{
     "name" : "Alice Pauline",
     "phone" : "94351253",

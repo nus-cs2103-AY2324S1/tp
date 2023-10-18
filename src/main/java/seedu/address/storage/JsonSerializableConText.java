@@ -10,50 +10,50 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.Messages;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ContactList;
+import seedu.address.model.ContactsManager;
 import seedu.address.model.contact.Contact;
 
 /**
- * An Immutable AddressBook that is serializable to JSON format.
+ * An Immutable ContactsManager that is serializable to JSON format.
  */
-@JsonRootName(value = "addressbook")
-class JsonSerializableAddressBook {
+@JsonRootName(value = "ContactsManager")
+class JsonSerializableContacts {
 
     private final List<JsonAdaptedContact> contacts = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given contacts.
+     * Constructs a {@code JsonSerializableContacts} with the given contacts.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("contacts") List<JsonAdaptedContact> contacts) {
+    public JsonSerializableContacts(@JsonProperty("contacts") List<JsonAdaptedContact> contacts) {
         this.contacts.addAll(contacts);
     }
 
     /**
-     * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
+     * Converts a given {@code ContactList} into this class for Jackson use.
      *
-     * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
+     * @param source future changes to this will not affect the created {@code JsonSerializableContacts}.
      */
-    public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
+    public JsonSerializableContacts(ContactList source) {
         contacts.addAll(source.getContactList().stream().map(JsonAdaptedContact::new).collect(Collectors.toList()));
     }
 
     /**
-     * Converts this address book into the model's {@code AddressBook} object.
+     * Converts this address book into the model's {@code ContactsManager} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public AddressBook toModelType() throws IllegalValueException {
-        AddressBook addressBook = new AddressBook();
+    public ContactsManager toModelType() throws IllegalValueException {
+        ContactsManager contactsManager = new ContactsManager();
         for (JsonAdaptedContact jsonAdaptedContact : contacts) {
             Contact contact = jsonAdaptedContact.toModelType();
-            if (addressBook.hasContact(contact)) {
+            if (contactsManager.hasContact(contact)) {
                 throw new IllegalValueException(Messages.MESSAGE_CONTAIN_DUPLICATE_CONTACT);
             }
-            addressBook.addContact(contact);
+            contactsManager.addContact(contact);
         }
-        return addressBook;
+        return contactsManager;
     }
 
 }

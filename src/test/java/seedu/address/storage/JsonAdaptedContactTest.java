@@ -2,10 +2,10 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TestData.Valid.Contact.BENSON;
 import static seedu.address.testutil.TestData.Invalid.EMAIL;
 import static seedu.address.testutil.TestData.Invalid.NAME;
 import static seedu.address.testutil.TestData.Invalid.PHONE;
+import static seedu.address.testutil.TestData.Valid.Contact.BENSON;
 
 import java.util.ArrayList;
 import java.util.List;

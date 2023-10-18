@@ -29,7 +29,6 @@ import seedu.address.model.contact.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.TestData;
 
-
 public class ParserUtilTest {
 
     @Test
@@ -134,7 +133,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseNote_validValueWithWhitespace_returnsTrimmedNote() throws Exception {
-        String addressWithWhitespace = WHITESPACE +NOTE_BOB + WHITESPACE;
+        String addressWithWhitespace = WHITESPACE + NOTE_BOB + WHITESPACE;
         Note expectedAddress = new Note(NOTE_BOB);
         assertEquals(expectedAddress, ParserUtil.parseNote(addressWithWhitespace));
     }

@@ -12,10 +12,8 @@ import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand.EditContactDescriptor;
-import seedu.address.model.AddressBook;
+import seedu.address.model.ContactsManager;
 import seedu.address.model.contact.Contact;
-
-
 
 /**
  * Holds test data used by test cases, such as strings and {@link Contact}s.
@@ -56,8 +54,6 @@ public final class TestData {
         public static final String NAME_TEST_VALUE = "This is a test class";
     }
 
-
-    //TODO Refine the various test data above this line
     /**
      * Holds valid test data.
      */
@@ -79,6 +75,7 @@ public final class TestData {
         public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + EMAIL_BOB;
         public static final String NOTE_DESC_AMY = " " + PREFIX_NOTE + NOTE_AMY;
         public static final String NOTE_DESC_BOB = " " + PREFIX_NOTE + NOTE_BOB;
+
         /**
          * Holds tag-related data.
          */
@@ -167,10 +164,10 @@ public final class TestData {
                             .build();
 
             /**
-             * Returns an {@code AddressBook} with all the typical contacts.
+             * Returns an {@code ContactsManager} with all the typical contacts.
              */
-            public static AddressBook getTypicalAddressBook() {
-                AddressBook ab = new AddressBook();
+            public static ContactsManager getTypicalContactsManager() {
+                ContactsManager ab = new ContactsManager();
                 for (seedu.address.model.contact.Contact contact : getTypicalContacts()) {
                     ab.addContact(contact);
                 }

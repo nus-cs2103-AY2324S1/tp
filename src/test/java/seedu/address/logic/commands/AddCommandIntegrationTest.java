@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TestData.Valid.Contact.getTypicalAddressBook;
+import static seedu.address.testutil.TestData.Valid.Contact.getTypicalContactsManager;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,14 +23,14 @@ public class AddCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalContactsManager(), new UserPrefs());
     }
 
     @Test
     public void execute_newContact_success() {
         Contact validContact = new ContactBuilder().build();
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getContactList(), new UserPrefs());
         expectedModel.addContact(validContact);
 
         assertCommandSuccess(new AddCommand(validContact), model,
@@ -40,7 +40,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_duplicateContact_throwsCommandException() {
-        Contact contactInList = model.getAddressBook().getContactList().get(0);
+        Contact contactInList = model.getContactList().getContactList().get(0);
         assertCommandFailure(new AddCommand(contactInList), model,
                 Messages.MESSAGE_COMMAND_DUPLICATE_CONTACT);
     }
