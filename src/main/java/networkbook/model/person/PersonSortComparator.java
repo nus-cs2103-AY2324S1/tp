@@ -25,6 +25,10 @@ public class PersonSortComparator implements Comparator<Person> {
         }
     };
 
+    public static final String MESSAGE_CONSTRAINTS_FIELD = "Field should be one of the following: "
+            + "name, grad, course, spec, priority, none.";
+    public static final String MESSAGE_CONSTRAINTS_ORDER = "Order should be one of the following: asc, desc.";
+
     private final Comparator<Person> comparator;
     private final SortField field;
     private final SortOrder order;
@@ -197,6 +201,13 @@ public class PersonSortComparator implements Comparator<Person> {
     public static boolean isValidSortOrder(SortOrder order) {
         requireNonNull(order);
         return order != SortOrder.INVALID;
+    }
+
+    /**
+     * Returns true if the given sort field and order are both valid.
+     */
+    public static boolean isValidSortParams(SortField field, SortOrder order) {
+        return isValidSortField(field) && isValidSortOrder(order);
     }
 
     /**

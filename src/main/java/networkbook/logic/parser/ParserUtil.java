@@ -277,13 +277,11 @@ public class ParserUtil {
      * Leading and trailing whitespaces will be trimmed.
      */
     public static SortField parseSortField(String field) throws ParseException {
-        if (field == null) {
-            return null;
-        }
+        requireNonNull(field);
         String normalizedField = field.trim().toLowerCase();
         SortField sortField = PersonSortComparator.parseSortField(normalizedField);
         if (!PersonSortComparator.isValidSortField(sortField)) {
-            throw new ParseException("Field should be one of the following: name, grad, course, spec, priority, none.");
+            throw new ParseException(PersonSortComparator.MESSAGE_CONSTRAINTS_FIELD);
         }
         return sortField;
     }
@@ -293,13 +291,11 @@ public class ParserUtil {
      * Leading and trailing whitespaces will be trimmed.
      */
     public static SortOrder parseSortOrder(String order) throws ParseException {
-        if (order == null) {
-            return null;
-        }
+        requireNonNull(order);
         String normalizedOrder = order.trim().toLowerCase();
         SortOrder sortOrder = PersonSortComparator.parseSortOrder(normalizedOrder);
         if (!PersonSortComparator.isValidSortOrder(sortOrder)) {
-            throw new ParseException("Order should be one of the following: asc, desc.");
+            throw new ParseException(PersonSortComparator.MESSAGE_CONSTRAINTS_ORDER);
         }
         return sortOrder;
     }

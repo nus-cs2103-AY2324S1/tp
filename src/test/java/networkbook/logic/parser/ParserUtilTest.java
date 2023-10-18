@@ -370,6 +370,11 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseSortField_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseSortField(null));
+    }
+
+    @Test
     public void parseSortOrder_validValue_success() throws Exception {
         SortOrder expectedOrder = SortOrder.ASCENDING;
         assertEquals(expectedOrder, ParserUtil.parseSortOrder(VALID_SORT_ORDER));
@@ -384,5 +389,10 @@ public class ParserUtilTest {
     @Test
     public void parseSortOrder_invalidValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseSortOrder(INVALID_SORT_ORDER));
+    }
+
+    @Test
+    public void parseSortOrder_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseSortOrder(null));
     }
 }
