@@ -13,6 +13,8 @@ import networkbook.logic.parser.exceptions.ParseException;
 import networkbook.model.person.Email;
 import networkbook.model.person.Link;
 import networkbook.model.person.Name;
+import networkbook.model.person.PersonSortComparator.SortField;
+import networkbook.model.person.PersonSortComparator.SortOrder;
 import networkbook.model.person.Phone;
 import networkbook.model.person.Priority;
 import networkbook.model.tag.Tag;
@@ -29,6 +31,8 @@ public class ParserUtilTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_PRIORITY = "hi";
+    private static final String INVALID_SORT_FIELD = "";
+    private static final String INVALID_SORT_ORDER = "";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -44,6 +48,8 @@ public class ParserUtilTest {
     private static final String VALID_TAG_2 = "cs_god";
     private static final String VALID_TAG_3 = "hyphen-tag and space";
     private static final String VALID_PRIORITY = "meDIuM";
+    private static final String VALID_SORT_FIELD = "nAme";
+    private static final String VALID_SORT_ORDER = "asC";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -344,5 +350,39 @@ public class ParserUtilTest {
     @Test
     public void parsePriority_invalidValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parsePriority(INVALID_PRIORITY));
+    }
+
+    @Test
+    public void parseSortField_validValue_success() throws Exception {
+        SortField expectedField = SortField.NAME;
+        assertEquals(expectedField, ParserUtil.parseSortField(VALID_SORT_FIELD));
+    }
+
+    @Test
+    public void parseSortField_validValueWithWhitespace_success() throws Exception {
+        SortField expectedField = SortField.NAME;
+        assertEquals(expectedField, ParserUtil.parseSortField(WHITESPACE + VALID_SORT_FIELD + WHITESPACE));
+    }
+
+    @Test
+    public void parseSortField_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseSortField(INVALID_SORT_FIELD));
+    }
+
+    @Test
+    public void parseSortOrder_validValue_success() throws Exception {
+        SortOrder expectedOrder = SortOrder.ASCENDING;
+        assertEquals(expectedOrder, ParserUtil.parseSortOrder(VALID_SORT_ORDER));
+    }
+
+    @Test
+    public void parseSortOrder_validValueWithWhitespace_success() throws Exception {
+        SortOrder expectedOrder = SortOrder.ASCENDING;
+        assertEquals(expectedOrder, ParserUtil.parseSortOrder(WHITESPACE + VALID_SORT_ORDER + WHITESPACE));
+    }
+
+    @Test
+    public void parseSortOrder_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseSortOrder(INVALID_SORT_ORDER));
     }
 }
