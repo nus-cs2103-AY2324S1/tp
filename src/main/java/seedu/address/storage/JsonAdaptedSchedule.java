@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javafx.collections.ObservableList;
@@ -24,12 +25,12 @@ import seedu.address.model.schedule.StartTime;
 class JsonAdaptedSchedule {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Schedule's %s field is missing!";
-
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATETIME_INPUT_FORMAT);
     private final String name;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DATETIME_INPUT_FORMAT)
     private final String startTime;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DATETIME_INPUT_FORMAT)
     private final String endTime;
-
-    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATETIME_INPUT_FORMAT);
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
