@@ -85,7 +85,6 @@ public class Graduation implements Comparable<Graduation> {
         int addedPart = (ayStartShortInt < YEAR_THRESHOLD) ? YEAR_PART_HI : YEAR_PART_LO;
         int ayStartFull = ayStartShortInt + addedPart;
         int ayEndFull = ayEndShortInt + addedPart;
-        assert ayStartFull + 1 == ayEndFull;
         return ayStartFull;
     }
 
@@ -104,7 +103,6 @@ public class Graduation implements Comparable<Graduation> {
         int addedPart = (ayStartShortInt < YEAR_THRESHOLD) ? YEAR_PART_HI : YEAR_PART_LO;
         int ayStartFull = ayStartShortInt + addedPart;
         int ayEndFull = ayEndShortInt + addedPart;
-        assert ayStartFull + 1 == ayEndFull;
         return ayEndFull;
     }
 
