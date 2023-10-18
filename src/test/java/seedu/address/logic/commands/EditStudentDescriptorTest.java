@@ -12,10 +12,13 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_NUMBER_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
+import java.util.HashSet;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.EditCommand.EditStudentDescriptor;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
+
 
 public class EditStudentDescriptorTest {
 
@@ -69,7 +72,7 @@ public class EditStudentDescriptorTest {
                 + editStudentDescriptor.getEmail().orElse(null) + ", student number="
                 + editStudentDescriptor.getStudentNumber().orElse(null) + ", class number="
                 + editStudentDescriptor.getClassDetails().orElse(null) + ", tags="
-                + editStudentDescriptor.getTags().orElse(null) + "}";
+                + editStudentDescriptor.getTags().orElse(new HashSet<>()) + "}";
         assertEquals(expected, editStudentDescriptor.toString());
     }
 }

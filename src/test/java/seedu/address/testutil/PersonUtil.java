@@ -71,14 +71,6 @@ public class PersonUtil {
                         .append(studentNumber.value).append(" "));
         descriptor.getClassDetails().ifPresent(classDetails -> sb.append(PREFIX_CLASS_NUMBER)
                         .append(classDetails.value).append(" "));
-        if (descriptor.getTags().isPresent()) {
-            Set<Tag> tags = descriptor.getTags().get();
-            if (tags.isEmpty()) {
-                sb.append(PREFIX_TAG);
-            } else {
-                tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
-            }
-        }
         return sb.toString();
     }
     /**
