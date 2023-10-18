@@ -37,7 +37,8 @@ class JsonSerializableFlashlingo {
      * @param source future changes to this will not affect the created {@code JsonSerializableFlashlingo}.
      */
     public JsonSerializableFlashlingo(ReadOnlyFlashlingo source) {
-        flashcards.addAll(source.getFlashCardList().stream().map(JsonAdaptedFlashCard::new).collect(Collectors.toList()));
+        flashcards.addAll(source.getFlashCardList().stream().map(JsonAdaptedFlashCard::new)
+                .collect(Collectors.toList()));
     }
 
     /**

@@ -1,9 +1,10 @@
 package seedu.flashlingo.model.flashcard;
 
+import java.util.Date;
+
 import seedu.flashlingo.model.flashcard.words.OriginalWord;
 import seedu.flashlingo.model.flashcard.words.TranslatedWord;
 
-import java.util.Date;
 
 /**
  * Represents each flashcard
@@ -51,6 +52,7 @@ public class FlashCard {
     public ProficiencyLevel getProficiencyLevel() {
         return level;
     }
+
     /**
      * Returns true if both flashcards have the same originalWord and translatedWord.
      * This defines a weaker notion of equality between two flashcards.
@@ -61,7 +63,8 @@ public class FlashCard {
         }
 
         return otherFlashCard != null
-            && otherFlashCard.getOriginalWord().equals(getOriginalWord());
+            && otherFlashCard.getOriginalWord().equals(getOriginalWord())
+            && otherFlashCard.getTranslatedWord().equals(getTranslatedWord());
     }
 
     /**
@@ -102,19 +105,6 @@ public class FlashCard {
         return sb;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (!(obj instanceof FlashCard)) {
-            return false;
-        }
-        FlashCard fc = (FlashCard) obj;
-        if (fc.originalWord.equals(this.originalWord) && fc.translatedWord.equals(this.translatedWord)) {
-            return true;
-        }
-        return false;
-    }
-
-
     /**
      * Handles when user clicks yes/no
      * @param isSuccess Whether user has successfully remembered the word
@@ -137,6 +127,10 @@ public class FlashCard {
         this.whenToReview = new Date(new Date().getTime() + timeInMs);
     }
 
+    /**
+     * Undo function to reset selection of "Yes" or "No" upon incorrect selection.
+     * Without undoing, should not be able to select "Yes" or "No" again
+     */
     public void undo() {
         if (isUpdated) {
             this.getProficiencyLevel().setLevel(originalLevel);
