@@ -37,7 +37,7 @@ public class AttendanceTracker {
     }
 
     /**
-     * Marks attendanceTracker of student as present.
+     * Marks attendanceTracker of a student as present.
      *
      * @param tutNum The tutorial number.
      */
@@ -46,7 +46,7 @@ public class AttendanceTracker {
     }
 
     /**
-     * Marks attendanceTracker of student as absent.
+     * Marks attendanceTracker of a student as absent.
      *
      * @param tutNum The tutorial number.
      */

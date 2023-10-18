@@ -22,6 +22,8 @@ public class ClassDetails {
     public static final String MESSAGE_INVALID_GRADE = "Grade should be between 0 and 100";
     public static final String MESSAGE_INVALID_ASSIGNMENT_NUMBER = "Assignment number should "
             + "be between 1 and " + TEMP_LENGTH;
+    public static final String MESSAGE_INVALID_TUTORIAL_SESSION_NUMBER = "Tutorial session number should "
+            + "be between 1 and " + TEMP_LENGTH;
 
     /*
      * The class number should start with "T".
@@ -81,6 +83,12 @@ public class ClassDetails {
         return value.hashCode();
     }
 
+    /**
+     * Sets the grade of the student for a particular assignment number.
+     * @param assignmentNumber the assignment number
+     * @param grade the grade to be set
+     * @throws CommandException if the assignment number or grade is invalid
+     */
     public void setAssignGrade(int assignmentNumber, int grade) throws CommandException {
         if (assignmentNumber > TEMP_LENGTH || assignmentNumber <= 0) {
             throw new CommandException(MESSAGE_INVALID_ASSIGNMENT_NUMBER);
@@ -91,7 +99,30 @@ public class ClassDetails {
         assignmentTracker.editMarks(Index.fromOneBased(assignmentNumber), grade);
     }
 
+    /**
+     * Displays the list of assignments and their grades.
+     * @return the display message of the assignments and their grades.
+     */
     public String displayAssignments() {
         return assignmentTracker.toString();
+    }
+
+    /**
+     * Records the class participation of the student for a particular tutorial session.
+     */
+    public void recordClassPart(int sessionNumber, boolean participated) throws CommandException {
+        if (sessionNumber > TEMP_LENGTH || sessionNumber <= 0) {
+            throw new CommandException(MESSAGE_INVALID_TUTORIAL_SESSION_NUMBER);
+        }
+
+        classParticipationTracker.markParticipation(Index.fromOneBased(sessionNumber), participated);
+    }
+
+    /**
+     * Displays the list of tutorial sessions and their participation status.
+     * @return the display message of the tutorial sessions and their participation status.
+     */
+    public String displayParticipations() {
+        return classParticipationTracker.toString();
     }
 }

@@ -10,6 +10,9 @@ import seedu.address.logic.commands.SetGradeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.StudentNumber;
 
+/**
+ * Parses input arguments and creates a new SetGradeCommand object
+ */
 public class SetGradeCommandParser implements Parser<SetGradeCommand> {
 
     /**

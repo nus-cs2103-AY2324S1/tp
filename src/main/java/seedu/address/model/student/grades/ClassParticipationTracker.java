@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.Arrays;
+import java.util.stream.IntStream;
 
 import seedu.address.commons.core.index.Index;
 
@@ -28,7 +29,7 @@ public class ClassParticipationTracker {
         requireNonNull(numOfTut);
         checkArgument(isValidClassPart(numOfTut), MESSAGE_CONSTRAINTS);
         classPartList = new ClassParticipation[numOfTut];
-        Arrays.fill(classPartList, new ClassParticipation());
+        IntStream.range(0, numOfTut).forEach(i -> classPartList[i] = new ClassParticipation());
     }
 
     /**
@@ -39,7 +40,7 @@ public class ClassParticipationTracker {
     }
 
     /**
-     * Marks class participation of student.
+     * Marks the class participation of a student.
      *
      * @param tutNum The tutorial number.
      */
@@ -48,12 +49,26 @@ public class ClassParticipationTracker {
     }
 
     /**
-     * Unmarks class participation of student.
+     * Unmarks the class participation of a student.
      *
      * @param tutNum The tutorial number.
      */
     public void markDidNotParticipate(Index tutNum) {
         classPartList[tutNum.getZeroBased()].unmark();
+    }
+
+    /**
+     * Marks the class participation of a student.
+     *
+     * @param tutNum The tutorial number.
+     * @param participated Whether the student participated.
+     */
+    public void markParticipation(Index tutNum, boolean participated) {
+        if (participated) {
+            markParticipated(tutNum);
+        } else {
+            markDidNotParticipate(tutNum);
+        }
     }
 
     @Override

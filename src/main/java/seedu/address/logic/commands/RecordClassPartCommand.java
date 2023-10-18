@@ -1,9 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PARTICIPATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_SESSION;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -14,36 +14,36 @@ import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
 
 /**
- * Sets a specific assignment grade for a student.
+ * Records the class participation for a student in a specific tutorial session.
  */
-public class SetGradeCommand extends Command {
-    public static final String COMMAND_WORD = "set-grade";
+public class RecordClassPartCommand extends Command {
+    public static final String COMMAND_WORD = "record-part";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Set a specific assignment grade of for a student.\n"
+            + ": Records the class participation for a student in a specific tutorial session.\n"
             + "Parameters: \n"
             + PREFIX_STUDENT_NUMBER + "STUDENT_NUMBER "
-            + PREFIX_ASSIGNMENT + "ASSIGNMENT_NUMBER "
-            + PREFIX_GRADE + "GRADE\n"
+            + PREFIX_TUTORIAL_SESSION + "TUTORIAL_SESSION "
+            + PREFIX_PARTICIPATION + "PARTICIPATION\n"
             + "Example: \n"
             + COMMAND_WORD + " " + PREFIX_STUDENT_NUMBER + "A0299999X "
-            + PREFIX_ASSIGNMENT + "1 " + PREFIX_GRADE + "100";
+            + PREFIX_TUTORIAL_SESSION + "1 " + PREFIX_PARTICIPATION + "true";
 
-    public static final String MESSAGE_SUCCESS = "Grade set for student: %1$s, "
+    public static final String MESSAGE_SUCCESS = "Recorded participation for student: %1$s, "
             + "here are the details:\n";
 
 
     private final StudentNumber studentNumber;
-    private final int assignmentNumber;
-    private final int grade;
+    private final int sessionNumber;
+    private final boolean isParticipated;
 
     /**
-     * Creates an SetGradeCommand to set the specified {@code Student}'s grade
+     * Creates an RecordPartCommand to record the specified {@code Student}'s participation
      */
-    public SetGradeCommand(StudentNumber studentNumber, int assignmentNumber, int grade) {
+    public RecordClassPartCommand(StudentNumber studentNumber, int sessionNumber, boolean isParticipated) {
         this.studentNumber = studentNumber;
-        this.assignmentNumber = assignmentNumber;
-        this.grade = grade;
+        this.sessionNumber = sessionNumber;
+        this.isParticipated = isParticipated;
     }
 
     @Override
@@ -56,10 +56,10 @@ public class SetGradeCommand extends Command {
 
         Student studentToGrade = model.getStudent(studentNumber);
         ClassDetails classDetails = studentToGrade.getClassDetails();
-        classDetails.setAssignGrade(assignmentNumber, grade);
+        classDetails.recordClassPart(sessionNumber, isParticipated);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, studentNumber)
-                + classDetails.displayAssignments());
+                + classDetails.displayParticipations());
     }
 
 
@@ -70,22 +70,22 @@ public class SetGradeCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof SetGradeCommand)) {
+        if (!(other instanceof RecordClassPartCommand)) {
             return false;
         }
 
-        SetGradeCommand otherSetGradeCommand = (SetGradeCommand) other;
+        RecordClassPartCommand otherSetGradeCommand = (RecordClassPartCommand) other;
         return studentNumber.equals(otherSetGradeCommand.studentNumber)
-                && assignmentNumber == otherSetGradeCommand.assignmentNumber
-                && grade == otherSetGradeCommand.grade;
+                && sessionNumber == otherSetGradeCommand.sessionNumber
+                && isParticipated == otherSetGradeCommand.isParticipated;
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("studentNumber", studentNumber)
-                .add("assignmentNumber", assignmentNumber)
-                .add("grade", grade)
+                .add("sessionNumber", sessionNumber)
+                .add("isParticipated", isParticipated)
                 .toString();
     }
 }
