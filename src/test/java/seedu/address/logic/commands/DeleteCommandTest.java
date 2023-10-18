@@ -98,12 +98,21 @@ public class DeleteCommandTest {
 
     @Test
     public void deletePersonDescriptor_setterMethods() {
-
         DeletePersonDescriptor descriptor = new DeletePersonDescriptor();
 
         descriptor.setAppointment();
+        descriptor.setAddress();
+        descriptor.setEmail();
+        descriptor.setMedicalHistory();
+        descriptor.setPhone();
+        descriptor.setTags();
 
         assertTrue(descriptor.getAppointment());
+        assertTrue(descriptor.getAddress());
+        assertTrue(descriptor.getEmail());
+        assertTrue(descriptor.getMedicalHistory());
+        assertTrue(descriptor.getPhone());
+        assertTrue(descriptor.getTags());
     }
 
     @Test
@@ -119,7 +128,7 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void equals() {
+    public void equalsDeleteCommand() {
         DeleteCommand deleteFirstCommand = new DeleteCommand(defaultNric, null, defaultDescriptor);
         DeleteCommand deleteSecondCommand = new DeleteCommand(null, defaultName, defaultDescriptor);
 
@@ -138,6 +147,33 @@ public class DeleteCommandTest {
 
         // different person -> returns false
         assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
+
+        // different name -> returns false
+        DeleteCommand deleteThirdCommand = new DeleteCommand(null, new Name("Bob"), defaultDescriptor);
+        assertFalse(deleteSecondCommand.equals(deleteThirdCommand));
+    }
+
+    @Test
+    public void equalsDeletePersonDescriptor() {
+        DeletePersonDescriptor descriptor = new DeletePersonDescriptor();
+
+        // same object -> returns true
+        assertTrue(descriptor.equals(descriptor));
+
+        // same values -> returns true
+        DeletePersonDescriptor descriptorCopy = new DeletePersonDescriptor();
+        assertTrue(descriptor.equals(descriptorCopy));
+
+        // different types -> returns false
+        assertFalse(descriptor.equals(1));
+
+        // null -> returns false
+        assertFalse(descriptor.equals(null));
+
+        // different person -> returns false
+        DeletePersonDescriptor descriptorDifferent = new DeletePersonDescriptor();
+        descriptorDifferent.setAddress();
+        assertFalse(descriptor.equals(descriptorDifferent));
     }
 
     @Test
@@ -148,88 +184,4 @@ public class DeleteCommandTest {
                 + "deletePersonDescriptor=" + defaultDescriptor + "}";
         assertEquals(expected, deleteCommand.toString());
     }
-
-    /*
-     * @Test
-     * public void execute_deletePartial_success() {
-     * Person personToDelete = new
-     * PersonBuilder().withAddress("Kent Ridge").withNric("S1234567F").build();
-     * model.addPerson(personToDelete);
-     * DeletePersonDescriptor discriptorAddress = new DeletePersonDescriptor();
-     * discriptorAddress.setAddress();
-     *
-     *
-     * CommandResult result = new DeleteCommand(nric, null, descriptor)
-     * .execute(model);
-     *
-     * Person expectedPerson = new
-     * PersonBuilder().withAddress("").withNric("S1234567F").build();
-     *
-     * assertEquals(expectedPerson, model.getFilteredPersonList().get(0));
-     * }
-     */
-
-    /*
-     * @Test
-     * public void execute_validIndexUnfilteredList_success() {
-     * Person personToDelete =
-     * model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-     * DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
-     *
-     * String expectedMessage =
-     * String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-     * Messages.format(personToDelete));
-     *
-     * ModelManager expectedModel = new ModelManager(model.getAddressBook(), new
-     * UserPrefs());
-     * expectedModel.deletePerson(personToDelete);
-     *
-     * assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
-     * }
-     *
-     * @Test
-     * public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-     * Index outOfBoundIndex =
-     * Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-     * DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
-     *
-     * assertCommandFailure(deleteCommand, model,
-     * Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-     * }
-     *
-     * @Test
-     * public void execute_validIndexFilteredList_success() {
-     * showPersonAtIndex(model, INDEX_FIRST_PERSON);
-     *
-     * Person personToDelete =
-     * model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-     * DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
-     *
-     * String expectedMessage =
-     * String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-     * Messages.format(personToDelete));
-     *
-     * Model expectedModel = new ModelManager(model.getAddressBook(), new
-     * UserPrefs());
-     * expectedModel.deletePerson(personToDelete);
-     * showNoPerson(expectedModel);
-     *
-     * assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
-     * }
-     *
-     * @Test
-     * public void execute_invalidIndexFilteredList_throwsCommandException() {
-     * showPersonAtIndex(model, INDEX_FIRST_PERSON);
-     *
-     * Index outOfBoundIndex = INDEX_SECOND_PERSON;
-     * // ensures that outOfBoundIndex is still in bounds of address book list
-     * assertTrue(outOfBoundIndex.getZeroBased() <
-     * model.getAddressBook().getPersonList().size());
-     *
-     * DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
-     *
-     * assertCommandFailure(deleteCommand, model,
-     * Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-     * }
-     */
 }

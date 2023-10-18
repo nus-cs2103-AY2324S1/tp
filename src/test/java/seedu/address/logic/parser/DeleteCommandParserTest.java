@@ -31,13 +31,6 @@ public class DeleteCommandParserTest {
 
     private Nric defaultNric = new Nric(PersonBuilder.DEFAULT_NRIC);
 
-    /*
-     * @Test
-     * public void parse_validArgs_returnsDeleteCommand() {
-     * assertParseSuccess(parser, "1", new DeleteCommand(INDEX_FIRST_PERSON));
-     * }
-     */
-
     @Test
     public void test_parse_validName() {
         String userString = " n/" + PersonBuilder.DEFAULT_NAME;

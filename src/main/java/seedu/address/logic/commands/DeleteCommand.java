@@ -3,13 +3,10 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -21,7 +18,6 @@ import seedu.address.model.person.Appointment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.MedicalHistory;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -70,15 +66,7 @@ public class DeleteCommand extends Command {
         if (name != null) {
             Stream<Person> personbyName = lastShownList.stream()
                     .filter(person -> person.getName().equals(name));
-            List<Person> personByNameList = personbyName.collect(Collectors.toList());
-            if (personByNameList.size() > 1) {
-                List<String> keyWords = Collections.singletonList(name.toString());
-                NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(keyWords);
-                FindCommand fc = new FindCommand(predicate);
-                return fc.execute(model);
-            } else {
-                findPersonToDelete = findPersonToDeleteName(personByNameList.stream());
-            }
+            findPersonToDelete = findPersonToDeleteName(personbyName);
         } else if (nric != null) {
             findPersonToDelete = findPersonToDeleteIc(lastShownList);
         }
@@ -98,6 +86,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Finds the person to delete by NRIC.
+     *
      * @param persons list of persons in the address book.
      * @return the person to delete.
      * @throws CommandException if the person is not found.
@@ -116,6 +105,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Finds the person to delete by name.
+     *
      * @param persons list of persons in the address book.
      * @return the person to delete.
      * @throws CommandException if the person is not found.
@@ -167,7 +157,7 @@ public class DeleteCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code deletePersonDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, DeletePersonDescriptor deletePersonDescriptor) {
+    public static Person createEditedPerson(Person personToEdit, DeletePersonDescriptor deletePersonDescriptor) {
         assert personToEdit != null;
 
         Name updatedName = personToEdit.getName();
@@ -180,21 +170,6 @@ public class DeleteCommand extends Command {
         Appointment updatedAppointment = personToEdit.getAppointment().isPresent() ? personToEdit.getAppointment().get()
                 : null;
 
-        if (deletePersonDescriptor.getPhone()) {
-            updatedPhone = new Phone("");
-        }
-        if (deletePersonDescriptor.getEmail()) {
-            updatedEmail = new Email("");
-        }
-        if (deletePersonDescriptor.getAddress()) {
-            updatedAddress = new Address("");
-        }
-        if (deletePersonDescriptor.getTags()) {
-            updatedTags = new HashSet<>();
-        }
-        if (deletePersonDescriptor.getMedicalHistory()) {
-            updatedMedicalHistories = new HashSet<>();
-        }
         if (deletePersonDescriptor.getAppointment()) {
             updatedAppointment = new Appointment("");
         }
@@ -204,7 +179,8 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Stores the boolean value of the fields that is to be deleted from a person in the address book.
+     * Stores the boolean value of the fields that is to be deleted from a person in
+     * the address book.
      */
     public static class DeletePersonDescriptor {
         private boolean phone;

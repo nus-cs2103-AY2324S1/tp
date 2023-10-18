@@ -56,23 +56,8 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
 
             DeletePersonDescriptor deletePersonDescriptor = new DeletePersonDescriptor();
 
-            if (argMultimap.prefixExist(PREFIX_PHONE)) {
-                deletePersonDescriptor.setPhone();
-            }
-            if (argMultimap.prefixExist(PREFIX_EMAIL)) {
-                deletePersonDescriptor.setEmail();
-            }
-            if (argMultimap.prefixExist(PREFIX_ADDRESS)) {
-                deletePersonDescriptor.setAddress();
-            }
             if (argMultimap.prefixExist(PREFIX_APPOINTMENT)) {
                 deletePersonDescriptor.setAppointment();
-            }
-            if (argMultimap.prefixExist(PREFIX_MEDICAL)) {
-                deletePersonDescriptor.setMedicalHistory();
-            }
-            if (argMultimap.prefixExist(PREFIX_TAG)) {
-                deletePersonDescriptor.setTags();
             }
 
             return new DeleteCommand(nric, name, deletePersonDescriptor);
