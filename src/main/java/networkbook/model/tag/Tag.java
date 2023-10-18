@@ -12,9 +12,9 @@ import networkbook.model.util.Identifiable;
 public class Tag implements Identifiable<Tag> {
 
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String VALIDATION_REGEX = "^[a-zA-Z0-9\\-_ ]+$+";
 
-    public final String tagName;
+    private final String tagName;
 
     /**
      * Constructs a {@code Tag}.
@@ -56,6 +56,11 @@ public class Tag implements Identifiable<Tag> {
 
     @Override
     public boolean isSame(Tag toCheck) {
+        // handle null case
+        if (!(toCheck instanceof Tag)) {
+            return false;
+        }
+
         return this.tagName.equals(toCheck.tagName);
     }
 

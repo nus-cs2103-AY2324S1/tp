@@ -32,6 +32,9 @@ public class ParserUtil {
     public static final String MESSAGE_LINK_DUPLICATE = "Your list of links contains duplicates.\n"
             + "Please ensure that you do not input the same link more than once.";
 
+    public static final String MESSAGE_TAG_DUPLICATE = "Your list of tags contains duplicates. \n"
+            + "Please ensure that you do not input the same tag more than once.";
+
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
@@ -240,6 +243,9 @@ public class ParserUtil {
      */
     public static UniqueList<Tag> parseTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
+        if (!verifyNoDuplicates(tags)) {
+            throw new ParseException(MESSAGE_TAG_DUPLICATE);
+        }
         final UniqueList<Tag> tagSet = new UniqueList<>();
         for (String tagName : tags) {
             tagSet.add(parseTag(tagName));

@@ -44,7 +44,7 @@ public class PersonUtil {
         person.getSpecialisation().ifPresent(specialisation -> sb.append(CliSyntax.PREFIX_SPECIALISATION)
                 .append(" ").append(specialisation.value).append(" "));
         person.getTags().stream().forEach(
-            s -> sb.append(CliSyntax.PREFIX_TAG + " " + s.tagName + " ")
+            s -> sb.append(CliSyntax.PREFIX_TAG + " " + s.getValue() + " ")
         );
         return sb.toString();
     }
