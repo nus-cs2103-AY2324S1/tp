@@ -255,23 +255,6 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
-    //    @Override
-    //    public boolean equals(Object other) {
-    //        if (other == this) {
-    //            return true;
-    //        }
-    //
-    //        // instanceof handles nulls
-    //        if (!(other instanceof ModelManager)) {
-    //            return false;
-    //        }
-    //
-    //        ModelManager otherModelManager = (ModelManager) other;
-    //        return addressBook.equals(otherModelManager.addressBook)
-    //                && userPrefs.equals(otherModelManager.userPrefs)
-    //                && filteredPersons.equals(otherModelManager.filteredPersons);
-    //    }
-
     //=========== TeamBook ================================================================================
 
     /**

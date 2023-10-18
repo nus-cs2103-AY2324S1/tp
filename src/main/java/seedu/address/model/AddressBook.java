@@ -119,23 +119,6 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     //// teams-level operations----------------------------------------------------------------------------------------
 
-//    public boolean hasTeam(String teamName) {
-//        requireNonNull(teamName);
-//        //String teamNameInString = teamName.toString();
-//        boolean teamNameExists = teams.stream()
-//                .anyMatch(teamNames -> teamNames.getTeamName().equals(teamNameInString));
-//        return teamNameExists;
-//    }
-//    public Team getTeam(Name teamName) {
-//        requireNonNull(teamName);
-//        String teamNameInString = teamName.toString();
-//
-//        Optional<Team> matchingTeam = teams.stream()
-//                .filter(team -> team.getTeamName().equals(teamNameInString))
-//                .findFirst();
-//
-//        return matchingTeam.orElse(null);
-//    }
 
     //// util methods
 

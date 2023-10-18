@@ -42,9 +42,7 @@ public class Team {
     }
 
     public boolean containsDev(IdentityCode developerID) {
-        boolean devExistsInTeam = developerIdentityCodes.stream()
-                .anyMatch(dev -> dev.equals(developerID));
-        return devExistsInTeam;
+        return developerIdentityCodes.contains(developerID);
     }
 
     public boolean removeDeveloper(IdentityCode developerIdentityCode) {

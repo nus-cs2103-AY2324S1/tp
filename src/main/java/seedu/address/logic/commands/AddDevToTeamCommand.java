@@ -23,12 +23,13 @@ public class AddDevToTeamCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds this developer to the Team. "
             + "Parameters: "
-            + PREFIX_NAME + "Developer Name "
             + PREFIX_TEAMNAME + "Team Name "
+            + PREFIX_NAME + "Developer Name "
             + "\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John Doe "
-            + PREFIX_TEAMNAME + "ABC ";
+            + PREFIX_TEAMNAME + "ABC "
+            + PREFIX_NAME + "John Doe ";
+
 
     public static final String MESSAGE_SUCCESS = "New developer added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This developer already exists in this team!";
@@ -51,7 +52,7 @@ public class AddDevToTeamCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         //duplicate or team doesnt exist
-        if (model.invalidAddToTeam(teamToAddTo)) {
+        if (!model.invalidAddToTeam(teamToAddTo)) {
             throw new CommandException(MESSAGE_INVALID_TEAM);
         } else if (!model.hasPerson(devToAdd)) {
             throw new CommandException(MESSAGE_INVALID_PERSON);

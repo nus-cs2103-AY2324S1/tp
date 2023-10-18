@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -33,9 +34,14 @@ public class UniqueTeamList implements Iterable<Team> {
     public boolean teamContainsPerson(String teamToAddTo, IdentityCode devToAddIdentityCode) {
         requireNonNull(teamToAddTo);
         requireNonNull(devToAddIdentityCode);
-        boolean devExists = internalList.stream().anyMatch(team -> team.containsDev(devToAddIdentityCode));
-
-        return devExists;
+        Team teamBeingAddedTo = getTeamByName(teamToAddTo);
+        Set<IdentityCode> devSet = teamBeingAddedTo.getDeveloperIdentityCodes();
+        for (IdentityCode identityCode : devSet) {
+            if (identityCode.equals(devToAddIdentityCode)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private Team getTeamByName(String teamToAddTo) {
