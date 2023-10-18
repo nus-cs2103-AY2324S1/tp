@@ -10,8 +10,8 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.Messages;
-import seedu.address.model.ContactsManager;
 import seedu.address.model.ContactList;
+import seedu.address.model.ContactsManager;
 import seedu.address.model.contact.Contact;
 
 /**

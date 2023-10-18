@@ -16,8 +16,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.commons.exceptions.DataLoadingException;
-import seedu.address.model.ContactsManager;
 import seedu.address.model.ContactList;
+import seedu.address.model.ContactsManager;
 
 public class JsonContactsStorageTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonContactsStorageTest");

@@ -22,7 +22,7 @@ public class ClearCommandTest {
     }
 
     @Test
-    public void execute_nonEmptyConText_success() {
+    public void execute_nonEmptyContactsManager_success() {
         Model model = new ModelManager(getTypicalContactsManager(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalContactsManager(), new UserPrefs());
         expectedModel.setContactsManager(new ContactsManager());

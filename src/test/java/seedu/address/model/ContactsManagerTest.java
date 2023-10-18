@@ -36,7 +36,7 @@ public class ContactsManagerTest {
     }
 
     @Test
-    public void resetData_withValidReadOnlyConText_replacesData() {
+    public void resetData_withValidReadOnlyContactsManager_replacesData() {
         ContactsManager newData = getTypicalContactsManager();
         contactsManager.resetData(newData);
         assertEquals(newData, contactsManager);
@@ -50,7 +50,7 @@ public class ContactsManagerTest {
                 .withTags(TestData.Valid.Tag.ALPHANUMERIC_SPACES)
                 .build();
         List<Contact> newContacts = Arrays.asList(ALICE, editedAlice);
-        ConTextStub newData = new ConTextStub(newContacts);
+        ContactListStub newData = new ContactListStub(newContacts);
 
         assertThrows(DuplicateContactException.class, () -> contactsManager.resetData(newData));
     }
@@ -61,18 +61,18 @@ public class ContactsManagerTest {
     }
 
     @Test
-    public void hasContact_contactNotInConText_returnsFalse() {
+    public void hasContact_contactNotInContactsManager_returnsFalse() {
         assertFalse(contactsManager.hasContact(ALICE));
     }
 
     @Test
-    public void hasContact_contactInConText_returnsTrue() {
+    public void hasContact_contactInContactsManager_returnsTrue() {
         contactsManager.addContact(ALICE);
         assertTrue(contactsManager.hasContact(ALICE));
     }
 
     @Test
-    public void hasContact_contactWithSameIdentityFieldsInConText_returnsTrue() {
+    public void hasContact_contactWithSameIdentityFieldsInContactsManager_returnsTrue() {
         contactsManager.addContact(ALICE);
         Contact editedAlice = new ContactBuilder(ALICE)
                 .withNote(VALID_NOTE_BOB)
@@ -91,17 +91,18 @@ public class ContactsManagerTest {
 
     @Test
     public void toStringMethod() {
-        String expected = ContactsManager.class.getCanonicalName() + "{contacts=" + contactsManager.getContactList() + "}";
+        String expected = ContactsManager.class.getCanonicalName() 
+                + "{contacts=" + contactsManager.getContactList() + "}";
         assertEquals(expected, contactsManager.toString());
     }
 
     /**
      * A stub ContactList whose contacts list can violate interface constraints.
      */
-    private static class ConTextStub implements ContactList {
+    private static class ContactListStub implements ContactList {
         private final ObservableList<Contact> contacts = FXCollections.observableArrayList();
 
-        ConTextStub(Collection<Contact> contacts) {
+        ContactListStub(Collection<Contact> contacts) {
             this.contacts.setAll(contacts);
         }
 

@@ -107,8 +107,8 @@ public class ContactsManager implements ContactList {
             return false;
         }
 
-        ContactsManager otherConText = (ContactsManager) other;
-        return contacts.equals(otherConText.contacts);
+        ContactsManager otherContactsManager = (ContactsManager) other;
+        return contacts.equals(otherContactsManager.contacts);
     }
 
     @Override
