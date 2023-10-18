@@ -1,7 +1,7 @@
 package seedu.address.commons.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.testutil.TestData.JSON_STRING_REPRESENTATION;
+import static seedu.address.testutil.TestData.Json.JSON_STRING_REPRESENTATION;
 
 import java.io.IOException;
 import java.nio.file.Path;

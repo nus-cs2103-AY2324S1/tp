@@ -7,21 +7,21 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TestData.EMAIL_DESC_AMY;
-import static seedu.address.testutil.TestData.EMAIL_DESC_BOB;
-import static seedu.address.testutil.TestData.INVALID_EMAIL_DESC;
-import static seedu.address.testutil.TestData.INVALID_NAME_DESC;
-import static seedu.address.testutil.TestData.INVALID_PHONE_DESC;
-import static seedu.address.testutil.TestData.NAME_DESC_AMY;
-import static seedu.address.testutil.TestData.NAME_DESC_BOB;
-import static seedu.address.testutil.TestData.NOTE_DESC_AMY;
-import static seedu.address.testutil.TestData.NOTE_DESC_BOB;
-import static seedu.address.testutil.TestData.PHONE_DESC_AMY;
-import static seedu.address.testutil.TestData.PHONE_DESC_BOB;
-import static seedu.address.testutil.TestData.VALID_EMAIL_BOB;
-import static seedu.address.testutil.TestData.VALID_NAME_BOB;
-import static seedu.address.testutil.TestData.VALID_NOTE_BOB;
-import static seedu.address.testutil.TestData.VALID_PHONE_BOB;
+import static seedu.address.testutil.TestData.Valid.EMAIL_DESC_AMY;
+import static seedu.address.testutil.TestData.Valid.EMAIL_DESC_BOB;
+import static seedu.address.testutil.TestData.Invalid.EMAIL_DESC;
+import static seedu.address.testutil.TestData.Invalid.NAME_DESC;
+import static seedu.address.testutil.TestData.Invalid.PHONE_DESC;
+import static seedu.address.testutil.TestData.Valid.NAME_DESC_AMY;
+import static seedu.address.testutil.TestData.Valid.NAME_DESC_BOB;
+import static seedu.address.testutil.TestData.Valid.NOTE_DESC_AMY;
+import static seedu.address.testutil.TestData.Valid.NOTE_DESC_BOB;
+import static seedu.address.testutil.TestData.Valid.PHONE_DESC_AMY;
+import static seedu.address.testutil.TestData.Valid.PHONE_DESC_BOB;
+import static seedu.address.testutil.TestData.Valid.EMAIL_BOB;
+import static seedu.address.testutil.TestData.Valid.NAME_BOB;
+import static seedu.address.testutil.TestData.Valid.NOTE_BOB;
+import static seedu.address.testutil.TestData.Valid.PHONE_BOB;
 
 import org.junit.jupiter.api.Test;
 
@@ -93,29 +93,29 @@ public class AddCommandParserTest {
         // invalid value followed by valid value
 
         // invalid name
-        assertParseFailure(parser, INVALID_NAME_DESC + validExpectedPersonString,
+        assertParseFailure(parser, NAME_DESC + validExpectedPersonString,
                 ArgumentMultimap.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
 
         // invalid email
-        assertParseFailure(parser, INVALID_EMAIL_DESC + validExpectedPersonString,
+        assertParseFailure(parser, EMAIL_DESC + validExpectedPersonString,
                 ArgumentMultimap.getErrorMessageForDuplicatePrefixes(PREFIX_EMAIL));
 
         // invalid phone
-        assertParseFailure(parser, INVALID_PHONE_DESC + validExpectedPersonString,
+        assertParseFailure(parser, PHONE_DESC + validExpectedPersonString,
                 ArgumentMultimap.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
         // valid value followed by invalid value
 
         // invalid name
-        assertParseFailure(parser, validExpectedPersonString + INVALID_NAME_DESC,
+        assertParseFailure(parser, validExpectedPersonString + NAME_DESC,
                 ArgumentMultimap.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
 
         // invalid email
-        assertParseFailure(parser, validExpectedPersonString + INVALID_EMAIL_DESC,
+        assertParseFailure(parser, validExpectedPersonString + EMAIL_DESC,
                 ArgumentMultimap.getErrorMessageForDuplicatePrefixes(PREFIX_EMAIL));
 
         // invalid phone
-        assertParseFailure(parser, validExpectedPersonString + INVALID_PHONE_DESC,
+        assertParseFailure(parser, validExpectedPersonString + PHONE_DESC,
                 ArgumentMultimap.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
     }
 
@@ -132,38 +132,38 @@ public class AddCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
 
         // missing name prefix
-        assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + NOTE_DESC_BOB,
+        assertParseFailure(parser, NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + NOTE_DESC_BOB,
                 expectedMessage);
 
         // missing phone prefix
-        assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB + NOTE_DESC_BOB,
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_BOB + EMAIL_DESC_BOB + NOTE_DESC_BOB,
                 expectedMessage);
 
         // missing email prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + NOTE_DESC_BOB,
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_BOB + NOTE_DESC_BOB,
                 expectedMessage);
 
         // missing address prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_NOTE_BOB,
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + NOTE_BOB,
                 expectedMessage);
 
         // all prefixes missing
-        assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_NOTE_BOB,
+        assertParseFailure(parser, NAME_BOB + PHONE_BOB + EMAIL_BOB + NOTE_BOB,
                 expectedMessage);
     }
 
     @Test
     public void parse_invalidValue_failure() {
         // invalid name
-        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + NOTE_DESC_BOB
+        assertParseFailure(parser, NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + NOTE_DESC_BOB
                 + TestData.Valid.Tag.FLAG_ALPHANUMERIC, Messages.MESSAGE_NAME_CONSTRAINTS);
 
         // invalid phone
-        assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC + EMAIL_DESC_BOB + NOTE_DESC_BOB
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC + EMAIL_DESC_BOB + NOTE_DESC_BOB
                 + TestData.Valid.Tag.FLAG_ALPHANUMERIC, Messages.MESSAGE_PHONE_CONSTRAINTS);
 
         // invalid email
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC + NOTE_DESC_BOB
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC + NOTE_DESC_BOB
                 + TestData.Valid.Tag.FLAG_ALPHANUMERIC, Messages.MESSAGE_EMAIL_CONSTRAINTS);
 
         // invalid tag
@@ -178,7 +178,7 @@ public class AddCommandParserTest {
         );
 
         // two invalid values, only first invalid value reported
-        assertParseFailure(parser, INVALID_NAME_DESC + INVALID_PHONE_DESC + EMAIL_DESC_BOB + NOTE_DESC_BOB,
+        assertParseFailure(parser, NAME_DESC + PHONE_DESC + EMAIL_DESC_BOB + NOTE_DESC_BOB,
                 Messages.MESSAGE_NAME_CONSTRAINTS);
 
         // non-empty preamble

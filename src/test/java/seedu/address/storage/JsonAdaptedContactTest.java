@@ -2,10 +2,10 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TestData.BENSON;
-import static seedu.address.testutil.TestData.INVALID_EMAIL;
-import static seedu.address.testutil.TestData.INVALID_NAME;
-import static seedu.address.testutil.TestData.INVALID_PHONE;
+import static seedu.address.testutil.TestData.Valid.Contact.BENSON;
+import static seedu.address.testutil.TestData.Invalid.EMAIL;
+import static seedu.address.testutil.TestData.Invalid.NAME;
+import static seedu.address.testutil.TestData.Invalid.PHONE;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +40,7 @@ public class JsonAdaptedContactTest {
     @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
         JsonAdaptedContact contact =
-                new JsonAdaptedContact(INVALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_NOTE, VALID_TAGS);
+                new JsonAdaptedContact(NAME, VALID_PHONE, VALID_EMAIL, VALID_NOTE, VALID_TAGS);
         String expectedMessage = Messages.MESSAGE_NAME_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, contact::toModelType);
     }
@@ -55,7 +55,7 @@ public class JsonAdaptedContactTest {
     @Test
     public void toModelType_invalidPhone_throwsIllegalValueException() {
         JsonAdaptedContact contact =
-                new JsonAdaptedContact(VALID_NAME, INVALID_PHONE, VALID_EMAIL, VALID_NOTE, VALID_TAGS);
+                new JsonAdaptedContact(VALID_NAME, PHONE, VALID_EMAIL, VALID_NOTE, VALID_TAGS);
         String expectedMessage = Messages.MESSAGE_PHONE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, contact::toModelType);
     }
@@ -70,7 +70,7 @@ public class JsonAdaptedContactTest {
     @Test
     public void toModelType_invalidEmail_throwsIllegalValueException() {
         JsonAdaptedContact contact =
-                new JsonAdaptedContact(VALID_NAME, VALID_PHONE, INVALID_EMAIL, VALID_NOTE, VALID_TAGS);
+                new JsonAdaptedContact(VALID_NAME, VALID_PHONE, EMAIL, VALID_NOTE, VALID_TAGS);
         String expectedMessage = Messages.MESSAGE_EMAIL_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, contact::toModelType);
     }

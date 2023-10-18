@@ -4,10 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TestData.EMAIL_DESC_AMY;
-import static seedu.address.testutil.TestData.NAME_DESC_AMY;
-import static seedu.address.testutil.TestData.NOTE_DESC_AMY;
-import static seedu.address.testutil.TestData.PHONE_DESC_AMY;
+import static seedu.address.testutil.TestData.Valid.EMAIL_DESC_AMY;
+import static seedu.address.testutil.TestData.Valid.NAME_DESC_AMY;
+import static seedu.address.testutil.TestData.Valid.NOTE_DESC_AMY;
+import static seedu.address.testutil.TestData.Valid.PHONE_DESC_AMY;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;

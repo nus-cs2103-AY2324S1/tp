@@ -4,9 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TestData.ALICE;
-import static seedu.address.testutil.TestData.VALID_NOTE_BOB;
-import static seedu.address.testutil.TestData.getTypicalAddressBook;
+import static seedu.address.testutil.TestData.Valid.Contact.ALICE;
+import static seedu.address.testutil.TestData.Valid.NOTE_BOB;
+import static seedu.address.testutil.TestData.Valid.Contact.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -47,7 +47,7 @@ public class AddressBookTest {
     public void resetData_withDuplicateContacts_throwsDuplicateContactException() {
         // Two contacts with the same identity fields
         Contact editedAlice = new ContactBuilder(ALICE)
-                .withNote(VALID_NOTE_BOB)
+                .withNote(NOTE_BOB)
                 .withTags(TestData.Valid.Tag.ALPHANUMERIC_SPACES)
                 .build();
         List<Contact> newContacts = Arrays.asList(ALICE, editedAlice);
@@ -76,7 +76,7 @@ public class AddressBookTest {
     public void hasContact_contactWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addContact(ALICE);
         Contact editedAlice = new ContactBuilder(ALICE)
-                .withNote(VALID_NOTE_BOB)
+                .withNote(NOTE_BOB)
                 .withTags(TestData.Valid.Tag.ALPHANUMERIC_SPACES)
                 .build();
         assertTrue(addressBook.hasContact(editedAlice));

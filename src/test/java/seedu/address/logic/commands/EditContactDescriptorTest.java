@@ -3,10 +3,10 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.TestData.VALID_EMAIL_BOB;
-import static seedu.address.testutil.TestData.VALID_NAME_BOB;
-import static seedu.address.testutil.TestData.VALID_NOTE_BOB;
-import static seedu.address.testutil.TestData.VALID_PHONE_BOB;
+import static seedu.address.testutil.TestData.Valid.EMAIL_BOB;
+import static seedu.address.testutil.TestData.Valid.NAME_BOB;
+import static seedu.address.testutil.TestData.Valid.NOTE_BOB;
+import static seedu.address.testutil.TestData.Valid.PHONE_BOB;
 
 import org.junit.jupiter.api.Test;
 
@@ -38,28 +38,28 @@ public class EditContactDescriptorTest {
         // different name -> returns false
         EditContactDescriptor editedAmy =
                 new EditContactDescriptorBuilder(TestData.Valid.EditDescriptor.AMY)
-                .withName(VALID_NAME_BOB)
+                .withName(NAME_BOB)
                 .build();
         assertFalse(TestData.Valid.EditDescriptor.AMY.equals(editedAmy));
 
         // different phone -> returns false
         editedAmy =
                 new EditContactDescriptorBuilder(TestData.Valid.EditDescriptor.AMY)
-                .withPhone(VALID_PHONE_BOB)
+                .withPhone(PHONE_BOB)
                 .build();
         assertFalse(TestData.Valid.EditDescriptor.AMY.equals(editedAmy));
 
         // different email -> returns false
         editedAmy =
                 new EditContactDescriptorBuilder(TestData.Valid.EditDescriptor.AMY)
-                .withEmail(VALID_EMAIL_BOB)
+                .withEmail(EMAIL_BOB)
                 .build();
         assertFalse(TestData.Valid.EditDescriptor.AMY.equals(editedAmy));
 
         // different address -> returns false
         editedAmy =
                 new EditContactDescriptorBuilder(TestData.Valid.EditDescriptor.AMY)
-                .withNote(VALID_NOTE_BOB)
+                .withNote(NOTE_BOB)
                 .build();
         assertFalse(TestData.Valid.EditDescriptor.AMY.equals(editedAmy));
 

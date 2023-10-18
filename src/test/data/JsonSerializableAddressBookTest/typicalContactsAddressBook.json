@@ -4,13 +4,13 @@
     "name" : "Alice Pauline",
     "phone" : "94351253",
     "email" : "alice@example.com",
-    "note" : "123, Jurong West Ave 6, #08-111",
+    "note" : "Best Friend",
     "tags" : ["friends"]
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
     "email" : "johnd@example.com",
-    "note" : "311, Clementi Ave 2, #02-25",
+    "note" : "Address: 311, Clementi Ave 2, #02-25",
     "tags" : ["owesMoney", "friends"]
   }, {
     "name" : "Carl Kurz",
@@ -22,25 +22,25 @@
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
-    "note" : "10th street",
+    "note" : "Close Friend",
     "tags" : ["friends"]
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
     "email" : "werner@example.com",
-    "note" : "michegan ave",
+    "note" : "Groupmate",
     "tags" : []
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
     "email" : "lydia@example.com",
-    "note" : "little tokyo",
+    "note" : "Classmate",
     "tags" : []
   }, {
     "name" : "George Best",
     "phone" : "9482442",
     "email" : "anna@example.com",
-    "note" : "4th street",
+    "note" : "Tutor",
     "tags" : []
   }]
 }

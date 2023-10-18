@@ -1,6 +1,6 @@
 package seedu.address.testutil;
 
-import static seedu.address.testutil.TestData.NAME_TEST_VALUE;
+import static seedu.address.testutil.TestData.Json.NAME_TEST_VALUE;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
