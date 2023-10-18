@@ -37,6 +37,7 @@ public class RiskLevel {
      * Returns true if a given string is a valid tag name.
      */
     public static boolean isValidRiskLevel(String test) {
+        requireNonNull(test);
         return ALLOWED_VALUES.contains(test);
     }
 
