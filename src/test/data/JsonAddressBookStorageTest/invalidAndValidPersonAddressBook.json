@@ -3,7 +3,11 @@
     "name": "Valid Person",
     "phone": "9482424",
     "email": "hans@example.com",
-    "address": "4th street"
+    "address": "4th street",
+    "bankAccount" : "123123123123",
+    "joinDate" : "04/05/2021",
+    "salary" : "1500.00",
+    "annualLeave" : "2"
   }, {
     "name": "Person With Invalid Phone Field",
     "phone": "948asdf2424",
