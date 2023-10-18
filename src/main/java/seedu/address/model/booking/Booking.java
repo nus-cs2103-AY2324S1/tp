@@ -67,7 +67,7 @@ public class Booking {
     }
 
     /**
-     * Returns true if both persons have the same name.
+     * Returns true if both bookings have the same name and room.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSameBooking(Booking otherBooking) {
@@ -76,6 +76,7 @@ public class Booking {
         }
 
         return otherBooking != null
+                && otherBooking.getRoom().equals(getRoom())
                 && otherBooking.getName().equals(getName());
     }
 
