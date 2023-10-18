@@ -70,13 +70,13 @@ Parameters:
 * `HOUSING_TYPE` (case-sensitive) : HDB / Condo / Landed / nil
 * `AVAILABILITY` (case-sensitive) : Available / NotAvailable / nil
 * `ANIMAL_NAME`
-  * `ANIMAL_NAME (availability: NotAvailable)`: Name of animal fostered
-  * `ANIMAL_NAME (availability: nil)`: nil
-  * `ANIMAL_NAME (availability: Available)`: nil
+  * `ANIMAL_NAME` (if `availability/NotAvailable`) : Name of animal fostered
+  * `ANIMAL_NAME` (if `availability/nil`) : nil
+  * `ANIMAL_NAME` (if `availability/Available`) : nil
 * `TYPE_OF_ANIMAL_FOSTERED/WANTED` (case-sensitive) :
-  * `TYPE_OF_ANIMAL_FOSTERED (availability: NotAvailable)`: current.Dog / current.Cat / nil
-  * `TYPE_OF_ANIMAL_WANTED (availability: Available)`: able.Dog / able.Cat / nil
-  * `TYPE_OF_ANIMAL_FOSTERED/WANTED (availability: nil)`: nil
+  * `TYPE_OF_ANIMAL_FOSTERED` (if `availability/NotAvailable`) : current.Dog / current.Cat / nil
+  * `TYPE_OF_ANIMAL_WANTED` (if `availability/Available`) : able.Dog / able.Cat / nil
+  * `TYPE_OF_ANIMAL_FOSTERED/WANTED` (if `availability/nil`) : nil
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
  A person can have any number of tags (including 0). ‘nil’ can be indicated for HOUSING_TYPE, AVAILABILITY, ANIMAL_NAME and TYPE_OF_ANIMAL_FOSTERED/WANTED if information is not currently available.
@@ -87,6 +87,9 @@ Examples:
 adds a fosterer named Jerry Tan with the phone number 98765412 and email address jerry123@example.com; his address is Baker street, block 5, #27-01, housing type is HDB and he is fostering a cat named Dexter. An urgent visit is required.
 * `add n/Tom Lee p/98123456 e/tom@example.com a/Happy street, block 123, #01-01 t/Available t/HDB t/able.Dog`
 adds a fosterer named Pete Tay with the phone number 98765411 and email address pete@example.com; his address is Happy street, block 5, #01-01, housing type is Condo and currently he is not fostering any animal but looking to foster a cat.
+* In the case where duplicates are given, second/last one will be chosen:
+  * `add n/Jerry Tan p/98765412 e/jerry123@example.com a/Baker street, block 5, #27-01 housing/HDB housing/Condo availability/Available availability/NotAvailable animal/Dexter animal/Happy animalType/able.Dog animalType/current.Cat t/Urgent`
+    * Outcome will be: `New fosterer added: Jerry Tan; Phone: 98765412; Email: jerry123@example.com; Address: Baker street, block 5, #27-01; Housing: Condo; Availability: NotAvailable; Animal name: Happy; Animal type: current.Cat; Tags: [Urgent]`
 
 Expected output (success):
 ```agsl
@@ -102,9 +105,9 @@ Expected output (fail):
 | Without `availability/`                                                                                                | `Availability is required. Please indicate as 'nil' if information is not available.` |
 | Without `animal/`                                                                                                      | `Animal name is required. Please indicate as 'nil' if information is not available.` |
 | Without `animalType/`                                                                                                  | `Animal type is required. Please indicate as 'nil' if information is not available.` |
-| `availability/nil` and `animal/` not 'nil'                                                                             | `Animal name should be 'nil' when availability is 'nil'.` |
-| `availability/nil` and `animalType/` not 'nil'                                                                         | `Animal type should be 'nil' when availability is 'nil'.` |
-| `availability/Available` and `animal/` not 'nil'                                                                       | `Availability cannot be 'Available' when an animal name is provided; animal name should be 'nil'.` |
+| `availability/nil` but `animal/` is not 'nil'                                                                          | `Animal name should be 'nil' when availability is 'nil'.` |
+| `availability/nil` but `animalType/` is not 'nil'                                                                      | `Animal type should be 'nil' when availability is 'nil'.` |
+| `availability/Available` but `animal/` is not 'nil'                                                                    | `Availability cannot be 'Available' when an animal name is provided; animal name should be 'nil'.` |
 | `housing/` with values other than ‘HDB’, ‘Condo’, ‘Landed’, ‘nil’                                                      | `Housing type should be either 'HDB', 'Condo', 'Landed' or 'nil'`   |
 | `availability/` with values other than ‘Available’, ‘NotAvailable’, ‘nil’                                              | `Availability should be either 'Available', 'NotAvailable' or 'nil'` |
 | `availability/Available` with `animalType/` values set to other values which are NOT ‘able.Cat’ or ‘able.Dog’          | `If fosterer is available, animal type should be 'able.Dog' / 'able.Cat'. If fosterer is NOT available, animal type should be 'current.Dog' / 'current.Cat'. If animal type information is not available, it should be inputted as 'nil'.`                                                                     |
