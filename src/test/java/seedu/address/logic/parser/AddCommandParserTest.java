@@ -41,9 +41,10 @@ public class AddCommandParserTest {
     }
 
     @Test
-    public void parse_repeatedNonTagValue_failure() {
+    public void parse_repeatedValue_failure() {
         String validExpectedPersonString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB;
+                + ADDRESS_DESC_BOB + BANKACCOUNT_DESC_BOB + JOINDATE_DESC_BOB + SALARY_DESC_BOB
+                + ANNUALLEAVE_DESC_BOB;
 
         // multiple names
         assertParseFailure(parser, NAME_DESC_AMY + validExpectedPersonString,
@@ -166,28 +167,53 @@ public class AddCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         // invalid name
-        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
+        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + BANKACCOUNT_DESC_BOB + JOINDATE_DESC_BOB + SALARY_DESC_BOB + ANNUALLEAVE_DESC_BOB,
                 Name.MESSAGE_CONSTRAINTS);
 
         // invalid phone
-        assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
+        assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + BANKACCOUNT_DESC_BOB + JOINDATE_DESC_BOB + SALARY_DESC_BOB + ANNUALLEAVE_DESC_BOB,
                 Phone.MESSAGE_CONSTRAINTS);
 
         // invalid email
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC + ADDRESS_DESC_BOB,
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC + ADDRESS_DESC_BOB
+                + BANKACCOUNT_DESC_BOB + JOINDATE_DESC_BOB + SALARY_DESC_BOB + ANNUALLEAVE_DESC_BOB,
                 Email.MESSAGE_CONSTRAINTS);
 
         // invalid address
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC,
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
+                + BANKACCOUNT_DESC_BOB + JOINDATE_DESC_BOB + SALARY_DESC_BOB + ANNUALLEAVE_DESC_BOB,
                 Address.MESSAGE_CONSTRAINTS);
 
+        // invalid bank account
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + INVALID_BANKACCOUNT_DESC + JOINDATE_DESC_BOB + SALARY_DESC_BOB + ANNUALLEAVE_DESC_BOB,
+                BankAccount.MESSAGE_CONSTRAINTS);
+
+        // invalid join date
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + BANKACCOUNT_DESC_BOB + INVALID_JOINDATE_DESC + SALARY_DESC_BOB + ANNUALLEAVE_DESC_BOB,
+                JoinDate.MESSAGE_CONSTRAINTS);
+
+        // invalid salary
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + BANKACCOUNT_DESC_BOB + JOINDATE_DESC_BOB + INVALID_SALARY_DESC + ANNUALLEAVE_DESC_BOB,
+                Salary.MESSAGE_CONSTRAINTS);
+
+        // invalid annual leave
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + BANKACCOUNT_DESC_BOB + JOINDATE_DESC_BOB + SALARY_DESC_BOB + INVALID_ANNUALLEAVE_DESC,
+                AnnualLeave.MESSAGE_CONSTRAINTS);
+
         // two invalid values, only first invalid value reported
-        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC,
+        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
+                + BANKACCOUNT_DESC_BOB + JOINDATE_DESC_BOB + SALARY_DESC_BOB + ANNUALLEAVE_DESC_BOB,
                 Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB,
+                + ADDRESS_DESC_BOB + BANKACCOUNT_DESC_BOB + JOINDATE_DESC_BOB + SALARY_DESC_BOB + ANNUALLEAVE_DESC_BOB,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 }
