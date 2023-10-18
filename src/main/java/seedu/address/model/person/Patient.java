@@ -55,13 +55,14 @@ public class Patient extends Person {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Person)) {
+        if (!(other instanceof Patient)) {
             return false;
         }
 
         Patient otherPatient = (Patient) other;
         return name.equals(otherPatient.name)
                 && phone.equals(otherPatient.phone)
+                && emergencyContact.equals(otherPatient.emergencyContact)
                 && email.equals(otherPatient.email)
                 && address.equals(otherPatient.address)
                 && gender.equals(otherPatient.gender)
