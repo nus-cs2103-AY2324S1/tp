@@ -14,13 +14,12 @@ public class AddEventCommand extends AddCommand {
 
     public static final String SECONDARY_COMMAND_WORD = "event";
     public static final String MESSAGE_SUCCESS = "New event added: ";
+    public static final String MESSAGE_PERSON_NOT_FOUND = "Can not find the target contact with ID: ";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + SECONDARY_COMMAND_WORD
             + ": Adds an event to a contact.\n"
             + "Usage:  add event -n CONTACT_NAME -en EVENT_NAME -st "
             + "START_TIME [-et END_TIME] [-loc LOCATION] [-i INFORMATION]";
-    
-    public static final String MESSAGE_PERSON_NOT_FOUND = "Can not find the target contact with ID: ";
 
     private final Event toAdd;
     private final int contactId;

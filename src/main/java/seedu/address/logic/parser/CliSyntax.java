@@ -34,9 +34,9 @@ public class CliSyntax {
 
     public static final ArrayList<String> COMMAND_LIST = new ArrayList<String>(Arrays.asList(
         AddCommand.COMMAND_WORD,
-        EditCommand.COMMAND_WORD, 
-        DeleteCommand.COMMAND_WORD, 
-        ClearCommand.COMMAND_WORD, 
+        EditCommand.COMMAND_WORD,
+        DeleteCommand.COMMAND_WORD,
+        ClearCommand.COMMAND_WORD,
         FindCommand.COMMAND_WORD,
         ListCommand.COMMAND_WORD));
 }

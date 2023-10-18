@@ -139,12 +139,12 @@ public class ParserUtil {
      * Calculates the similarity score of objects, where 0.0 implies absolutely no
      * similarity
      * and 1.0 implies absolute similarity.
-     * 
+     *
      * @param first  The first string to compare.
      * @param second The second string to compare.
      * @return A number between 0.0 and 1.0.
      */
-	public static double score(String first, String second) {
+    public static double score(String first, String second) {
 	
 		// Create two sets of character bigrams, one for each string.
 		Set<String> s1 = splitIntoBigrams(first);
@@ -165,7 +165,7 @@ public class ParserUtil {
 		// D = ----------------------
 		//        | s1 | + | s2 |
 		// 
-		return (2.0 * (double)nt) / ((double)(n1 + n2));
+		return (2.0 * (double) nt) / ((double) (n1 + n2));
 		
 	}
 
@@ -179,7 +179,7 @@ public class ParserUtil {
 		else {
 			for (int i = 1; i < s.length(); i++) {
 				StringBuilder sb = new StringBuilder();
-				sb.append(s.charAt(i-1));
+				sb.append(s.charAt(i - 1));
 				sb.append(s.charAt(i));
 				bigrams.add(sb.toString());
 			}

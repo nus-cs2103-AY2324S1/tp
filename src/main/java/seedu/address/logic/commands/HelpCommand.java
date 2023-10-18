@@ -23,7 +23,7 @@ public class HelpCommand extends Command {
     public static final String SHOWING_ALL_MESSAGE_FOOTER = String.format(
         "Please type in \'help COMMAND_WORD\' to know more, or visit our website at %s", HelpWindow.USERGUIDE_URL);
 
-    public static final String PROPOSE_ALTERNATIVE_MESSAGE_FORMAT = 
+    public static final String PROPOSE_ALTERNATIVE_MESSAGE_FORMAT =
         "Do you mean: %s? \n Type in \'help\' to see a list of the commands available";
 
     private boolean willShowAll;
@@ -66,7 +66,7 @@ public class HelpCommand extends Command {
 
         switch (toShow) {
         case AddCommand.COMMAND_WORD:
-            return new CommandResult(String.format("%s \n\n %s \n\n %s", 
+            return new CommandResult(String.format("%s \n\n %s \n\n %s",
                 AddEventCommand.MESSAGE_USAGE,
                 AddNoteCommand.MESSAGE_USAGE,
                 AddPersonCommand.MESSAGE_USAGE));
@@ -75,7 +75,7 @@ public class HelpCommand extends Command {
             return new CommandResult(EditCommand.MESSAGE_USAGE);
 
         case DeleteCommand.COMMAND_WORD:
-            return new CommandResult(String.format("%s \n\n %s \n\n %s", 
+            return new CommandResult(String.format("%s \n\n %s \n\n %s",
                 DeleteEventCommand.MESSAGE_USAGE,
                 DeleteNoteCommand.MESSAGE_USAGE,
                 DeletePersonCommand.MESSAGE_USAGE));
@@ -87,13 +87,13 @@ public class HelpCommand extends Command {
             return new CommandResult(FindCommand.MESSAGE_USAGE);
 
         case ListCommand.COMMAND_WORD:
-            return new CommandResult(String.format("%s \n\n %s \n\n %s", 
+            return new CommandResult(String.format("%s \n\n %s \n\n %s",
                 ListEventCommand.MESSAGE_USAGE,
                 ListNoteCommand.MESSAGE_USAGE,
                 ListPersonCommand.MESSAGE_USAGE));
-        
+
         default:
             throw new CommandException("Unexpected input");
-        } 
+        }
     }
 }
