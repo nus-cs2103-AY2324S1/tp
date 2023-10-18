@@ -1,6 +1,5 @@
 package seedu.address.model.person;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
@@ -15,6 +14,7 @@ public class Birthday {
     public static final String MESSAGE_CONSTRAINTS =
             "Birthdays should only contain numbers, and it should be in yyyy-MM-dd format";
     public static final String VALIDATION_REGEX = "\\d{4}-\\d{2}-\\d{2}";
+    public static final Birthday NULL_BIRTHDAY = new Birthday("");
     public final String stringValue;
     public final LocalDate value;
     /**
@@ -23,9 +23,12 @@ public class Birthday {
      * @param birthday A valid birthday.
      */
     public Birthday(String birthday) {
-        requireNonNull(birthday);
         checkArgument(isValidBirthday(birthday), MESSAGE_CONSTRAINTS);
         this.stringValue = birthday;
+        if (birthday.trim().equals("")) {
+            this.value = null;
+            return;
+        }
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDate parsedDate = LocalDate.parse(birthday, formatter);
@@ -38,12 +41,15 @@ public class Birthday {
      * Returns true if a given string is a valid birthday.
      */
     public static boolean isValidBirthday(String test) {
+        if (test.trim().equals("")) {
+            return true;
+        }
         return test.matches(VALIDATION_REGEX);
     }
 
     @Override
     public String toString() {
-        return value.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return (value == null) ? "" : value.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 
     public String getStringValue() {

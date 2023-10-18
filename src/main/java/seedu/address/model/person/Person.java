@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -18,18 +19,36 @@ public class Person {
 
     // Identity fields
     private final Name name;
-    private final Phone phone;
-    private final Email email;
-
+    private final Optional<Phone> phone;
+    private final Optional<Email> email;
     // Data fields
-    private final Address address;
-    private final Birthday birthday;
+    private final Optional<Address> address;
+    private final Optional<Birthday> birthday;
     private final Set<Group> groups = new HashSet<>();
 
     /**
-     * Every field must be present and not null.
+     * Every field need not be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Birthday birthday, Set<Group> groups) {
+    public Person(Name name) {
+        requireAllNonNull(name);
+        this.name = name;
+        this.phone = Optional.empty();
+        this.email = Optional.empty();
+        this.address = Optional.empty();
+        this.birthday = Optional.empty();
+    }
+
+    /**
+     * Constructor for Person with all fields present.
+     * @param name
+     * @param phone
+     * @param email
+     * @param address
+     * @param birthday
+     * @param groups
+     */
+    public Person(Name name, Optional<Phone> phone, Optional<Email> email, Optional<Address> address,
+                  Optional<Birthday> birthday, Set<Group> groups) {
         requireAllNonNull(name, phone, email, address, birthday, groups);
         this.name = name;
         this.phone = phone;
@@ -44,19 +63,21 @@ public class Person {
     }
 
     public Phone getPhone() {
-        return phone;
+        return phone.orElse(null);
     }
 
     public Email getEmail() {
-        return email;
+        return email.orElse(null);
     }
 
     public Address getAddress() {
-        return address;
+        return address.orElse(null);
     }
+
     public Birthday getBirthday() {
-        return birthday;
+        return birthday.orElse(null);
     }
+
     /**
      * Returns an immutable group set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -112,10 +133,10 @@ public class Person {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
-                .add("phone", phone)
-                .add("email", email)
-                .add("address", address)
-                .add("birthday", birthday)
+                .add("phone", this.getPhone())
+                .add("email", this.getEmail())
+                .add("address", this.getAddress())
+                .add("birthday", this.getBirthday())
                 .add("groups", groups)
                 .toString();
     }
