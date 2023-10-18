@@ -87,6 +87,15 @@ public interface Model {
      */
     void updateFilteredMusicianList(Predicate<Musician> predicate);
 
+    /** Returns an unmodifiable view of the filtered band list */
+    ObservableList<Band> getFilteredBandList();
+
+    /**
+     * Updates the filter of the filtered band list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredBandList(Predicate<Band> predicate);
+
     /**
      * Returns true if a band with the same identity as {@code band} exists in the address book.
      */

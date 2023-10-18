@@ -23,6 +23,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Musician> filteredMusicians;
+    private final FilteredList<Band> filteredBands;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -35,6 +36,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredMusicians = new FilteredList<>(this.addressBook.getMusicianList());
+        filteredBands = new FilteredList<>(this.addressBook.getBandList());
     }
 
     public ModelManager() {
@@ -142,6 +144,20 @@ public class ModelManager implements Model {
         filteredMusicians.setPredicate(predicate);
     }
 
+    /**
+     * Returns an unmodifiable view of the list of {@code Musician} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Band> getFilteredBandList() {
+        return filteredBands;
+    }
+
+    @Override
+    public void updateFilteredBandList(Predicate<Band> predicate) {
+        requireNonNull(predicate);
+        filteredBands.setPredicate(predicate);
+    }
 
 
     @Override
