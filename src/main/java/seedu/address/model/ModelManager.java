@@ -123,7 +123,7 @@ public class ModelManager implements Model {
                     interviewWithTarget.getJobRole(),
                     interviewWithTarget.getInterviewTiming()
             );
-            setInterview(interviewWithTarget, interviewWithEditedApplicant);
+            addressBook.setInterview(interviewWithTarget, interviewWithEditedApplicant);
         }
 
         addressBook.setApplicant(target, editedApplicant);

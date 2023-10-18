@@ -153,7 +153,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(applicant);
 
         for (Interview interview : getInterviewList()) {
-            if (interview.getInterviewApplicant().equals(applicant)) {
+            if (interview.getInterviewApplicant().isSameApplicant(applicant)) {
                 return interview;
             }
         }
