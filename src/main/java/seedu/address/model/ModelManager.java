@@ -111,6 +111,11 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public String gatherEmails(String prompt) {
+        return addressBook.gatherEmails(prompt);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
