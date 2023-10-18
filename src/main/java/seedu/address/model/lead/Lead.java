@@ -23,10 +23,17 @@ public class Lead {
         this.leadType = lead;
     }
 
+    /**
+     * Determines whether a given string is a valid lead.
+     * A valid lead is either "hot", "warm" or "cold".
+     *
+     * @param lead the string to check
+     * @return true if the string is a valid lead, false otherwise
+     */
     public static boolean isValidLead(String lead) {
-        return lead.equalsIgnoreCase("HOT") ||
-               lead.equalsIgnoreCase("WARM") ||
-               lead.equalsIgnoreCase("COLD");
+        return lead.equalsIgnoreCase("HOT")
+                || lead.equalsIgnoreCase("WARM")
+                || lead.equalsIgnoreCase("COLD");
     }
 
     @Override

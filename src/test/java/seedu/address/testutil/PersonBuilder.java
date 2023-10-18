@@ -102,6 +102,11 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Creates the built {@code Person} after building.
+     *
+     * @return the built {@code Person}
+     */
     public Person build() {
         Person person = new Person(name, phone, email, address, tags);
         person.setLead(lead);
