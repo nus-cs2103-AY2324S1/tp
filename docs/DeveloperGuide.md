@@ -350,7 +350,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to list clients
 2.  AddressBook shows a list of clients
-3.  User request to edit client’s contacts from the list 
+3.  User request to edit client’s contacts from the list
 4.  AddressBook changes the client’s contacts
 
     Use case ends.
