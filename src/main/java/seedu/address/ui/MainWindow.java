@@ -80,6 +80,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the accelerator of a MenuItem.
+     *
      * @param keyCombination the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
@@ -167,6 +168,18 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    /**
+     * Displays either the list of schedules or tutors based on the command result
+     */
+    //TODO: Change ListTutorCommand to ListScheduleCommand
+    private void handleListDisplay(CommandResult commandResult) {
+        if (commandResult.getFeedbackToUser().equals(ListTutorCommand.MESSAGE_SUCCESS)) {
+            showSchedules();
+        } else if (commandResult.getFeedbackToUser().equals(ListTutorCommand.MESSAGE_SUCCESS)) {
+            showPersons();
+        }
+    }
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
     }
@@ -204,11 +217,7 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
-            if (commandResult.getFeedbackToUser().equals(ListTutorCommand.MESSAGE_SUCCESS)) {
-                showSchedules();
-            } else {
-                showPersons();
-            }
+            handleListDisplay(commandResult);
 
             return commandResult;
         } catch (CommandException | ParseException e) {
