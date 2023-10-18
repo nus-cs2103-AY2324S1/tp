@@ -35,6 +35,33 @@ public class Contacts implements ReadOnlyContacts {
         return this.uniqueList.asUnmodifiableObservableList();
     }
 
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("uniqueList", this.uniqueList)
+                .toString();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof also handles nulls
+        if (!(other instanceof Contacts)) {
+            return false;
+        }
+        Contacts otherContacts = (Contacts)other;
+
+        return this.uniqueList.equals(otherContacts.uniqueList);
+    }
+
+    @Override
+    public int hashCode() {
+        return uniqueList.hashCode();
+    }
+
     /**
      * Adds the specified {@link Contact}.
      *
@@ -71,32 +98,5 @@ public class Contacts implements ReadOnlyContacts {
      */
     public void remove(Contact contact) {
         this.uniqueList.remove(contact);
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .add("uniqueList", this.uniqueList)
-                .toString();
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof also handles nulls
-        if (!(other instanceof Contacts)) {
-            return false;
-        }
-        Contacts otherContacts = (Contacts)other;
-
-        return this.uniqueList.equals(otherContacts.uniqueList);
-    }
-
-    @Override
-    public int hashCode() {
-        return uniqueList.hashCode();
     }
 }

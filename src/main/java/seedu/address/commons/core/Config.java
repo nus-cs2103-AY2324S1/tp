@@ -18,22 +18,6 @@ public class Config {
     private Level logLevel = Level.INFO;
     private Path settingsPath = Paths.get("settings.json");
 
-    public Level getLogLevel() {
-        return this.logLevel;
-    }
-
-    public void setLogLevel(Level logLevel) {
-        this.logLevel = logLevel;
-    }
-
-    public Path getSettingsPath() {
-        return this.settingsPath;
-    }
-
-    public void setSettingsPath(Path settingsPath) {
-        this.settingsPath = settingsPath;
-    }
-
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -63,5 +47,21 @@ public class Config {
     @Override
     public int hashCode() {
         return Objects.hash(this.logLevel, this.settingsPath);
+    }
+
+    public Level getLogLevel() {
+        return this.logLevel;
+    }
+
+    public void setLogLevel(Level logLevel) {
+        this.logLevel = logLevel;
+    }
+
+    public Path getSettingsPath() {
+        return this.settingsPath;
+    }
+
+    public void setSettingsPath(Path settingsPath) {
+        this.settingsPath = settingsPath;
     }
 }
