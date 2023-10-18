@@ -168,7 +168,7 @@ public class AddCommandParserTest {
         // zero tags and no free time
         Person expectedPerson = new PersonBuilder(AMY).withTags().withFreeTime(null, null).withMods().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                        + TELEGRAM_DESC_AMY + HOUR_DESC_EMPTY,
+                        + TELEGRAM_DESC_AMY + HOUR_DESC_FIVE,
                 new AddCommand(expectedPerson));
     }
 
