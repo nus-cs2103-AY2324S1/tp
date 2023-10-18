@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BLOODTYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONDITION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
@@ -30,6 +31,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.BloodType;
 import seedu.address.model.person.Condition;
+import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Ic;
@@ -59,8 +61,9 @@ public class EditCommand extends Command {
             + "[" + PREFIX_CONDITION + "CONDITION] "
             + "[" + PREFIX_BLOODTYPE + "BLOOD TYPE] "
             + "[" + PREFIX_NRIC + "NRIC] "
+            + "[" + PREFIX_EMERGENCY_CONTACT + "EMAIL] "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
+            + "Example: " + COMMAND_WORD + " T0123456H "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com"
             + PREFIX_REMARK + "remarks";
@@ -75,7 +78,7 @@ public class EditCommand extends Command {
     private String personRole;
 
     /**
-     * @param nric                 of the person in the filtered person list to edit
+     * @param nric of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
     public EditCommand(Ic nric, EditPersonDescriptor editPersonDescriptor) {
@@ -112,19 +115,17 @@ public class EditCommand extends Command {
             personRole = "patient";
             editedPerson = createEditedPatient((Patient) personToEdit, editPersonDescriptor);
         } else {
-            //assert personToEdit instancof Doctor
+            assert personToEdit instanceof Doctor;
             if (editPersonDescriptor.getCondition().isPresent() || editPersonDescriptor.getBloodType().isPresent()) {
                 throw new CommandException("Doctors cannot have Condition or BloodType fields.");
             }
             personRole = "doctor";
-            editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+            editedPerson = createEditedDoctor(personToEdit, editPersonDescriptor);
         }
-
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
-
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
@@ -135,7 +136,7 @@ public class EditCommand extends Command {
      * edited with {@code editPersonDescriptor}.
      */
 
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+    private static Doctor createEditedDoctor(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
@@ -147,7 +148,7 @@ public class EditCommand extends Command {
         Ic updatedIc = editPersonDescriptor.getIc().orElse(personToEdit.getIc());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRemarks,
+        return new Doctor(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRemarks,
                 updatedGender, updatedIc, updatedTags);
     }
 

@@ -12,6 +12,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Ic;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
@@ -44,6 +45,12 @@ public class EditPersonDescriptorBuilder {
         descriptor.setGender(person.getGender());
         descriptor.setIc(person.getIc());
         descriptor.setTags(person.getTags());
+        if (person instanceof Patient) {
+            Patient patient = (Patient) person;
+            descriptor.setBloodType(patient.getBloodType());
+            descriptor.setCondition(patient.getCondition());
+            descriptor.setEmergencyContact(patient.getEmergencyContact());
+        }
     }
 
     /**

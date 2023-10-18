@@ -40,15 +40,15 @@ public class EditCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Person editedPerson = new PersonBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
-        Ic nricOfFirstPerson = model.getFilteredPatientList().get(0).getIc();
-        EditCommand editCommand = new EditCommand(nricOfFirstPerson, descriptor);
+        Person editedPatient = new PatientBuilder().build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPatient).build();
+        Ic nricOfFirstPatient = model.getFilteredPatientList().get(0).getIc();
+        EditCommand editCommand = new EditCommand(nricOfFirstPatient, descriptor);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPatient));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPatientList().get(0), editedPerson);
+        expectedModel.setPerson(model.getFilteredPatientList().get(0), editedPatient);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }

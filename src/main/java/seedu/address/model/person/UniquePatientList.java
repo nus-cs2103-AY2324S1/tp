@@ -121,7 +121,18 @@ public class UniquePatientList implements Iterable<Patient> {
         }
 
         UniquePatientList otherUniquePatientList = (UniquePatientList) other;
-        return internalList.equals(otherUniquePatientList.internalList);
+
+        if (this.internalList.size() != otherUniquePatientList.internalList.size()) {
+            return false;
+        }
+
+        // Compare individual patients in the lists
+        for (int i = 0; i < this.internalList.size(); i++) {
+            if (!this.internalList.get(i).equals(otherUniquePatientList.internalList.get(i))) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
