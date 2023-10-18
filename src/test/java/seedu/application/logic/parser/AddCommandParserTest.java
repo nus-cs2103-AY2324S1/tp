@@ -3,7 +3,10 @@ package seedu.application.logic.parser;
 import static seedu.application.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.application.logic.commands.CommandTestUtil.COMPANY_DESC_CHEF;
 import static seedu.application.logic.commands.CommandTestUtil.COMPANY_DESC_CLEANER;
+import static seedu.application.logic.commands.CommandTestUtil.DEADLINE_DESC_CHEF;
+import static seedu.application.logic.commands.CommandTestUtil.DEADLINE_DESC_CLEANER;
 import static seedu.application.logic.commands.CommandTestUtil.INVALID_COMPANY_DESC;
+import static seedu.application.logic.commands.CommandTestUtil.INVALID_DEADLINE_DESC;
 import static seedu.application.logic.commands.CommandTestUtil.INVALID_ROLE_DESC;
 import static seedu.application.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.application.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
@@ -12,6 +15,7 @@ import static seedu.application.logic.commands.CommandTestUtil.ROLE_DESC_CLEANER
 import static seedu.application.logic.commands.CommandTestUtil.VALID_COMPANY_CLEANER;
 import static seedu.application.logic.commands.CommandTestUtil.VALID_ROLE_CLEANER;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_COMPANY;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.application.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.application.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -34,46 +38,61 @@ public class AddCommandParserTest {
         Job expectedJob = new JobBuilder(CLEANER).build();
 
         // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + ROLE_DESC_CLEANER + COMPANY_DESC_CLEANER,
-                new AddCommand(expectedJob));
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + ROLE_DESC_CLEANER
+                + COMPANY_DESC_CLEANER + DEADLINE_DESC_CLEANER,
+            new AddCommand(expectedJob));
     }
 
     @Test
     public void parse_repeatedNonTagValue_failure() {
-        String validExpectedJobString = ROLE_DESC_CLEANER + COMPANY_DESC_CLEANER;
+        String validExpectedJobString = ROLE_DESC_CLEANER + COMPANY_DESC_CLEANER
+            + DEADLINE_DESC_CLEANER;
 
         // multiple roles
         assertParseFailure(parser, ROLE_DESC_CHEF + validExpectedJobString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ROLE));
+            Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ROLE));
 
         // multiple companies
         assertParseFailure(parser, COMPANY_DESC_CHEF + validExpectedJobString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_COMPANY));
+            Messages.getErrorMessageForDuplicatePrefixes(PREFIX_COMPANY));
+
+        // multiple deadlines
+        assertParseFailure(parser, DEADLINE_DESC_CHEF + validExpectedJobString,
+            Messages.getErrorMessageForDuplicatePrefixes(PREFIX_DEADLINE));
 
         // multiple fields repeated
         assertParseFailure(parser,
-                validExpectedJobString + COMPANY_DESC_CHEF + ROLE_DESC_CHEF + validExpectedJobString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ROLE, PREFIX_COMPANY));
+            validExpectedJobString + COMPANY_DESC_CHEF + ROLE_DESC_CHEF + DEADLINE_DESC_CLEANER
+                + validExpectedJobString,
+            Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ROLE, PREFIX_COMPANY, PREFIX_DEADLINE));
 
         // invalid value followed by valid value
 
         // invalid role
         assertParseFailure(parser, INVALID_ROLE_DESC + validExpectedJobString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ROLE));
+            Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ROLE));
 
         // invalid company
         assertParseFailure(parser, INVALID_COMPANY_DESC + validExpectedJobString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_COMPANY));
+            Messages.getErrorMessageForDuplicatePrefixes(PREFIX_COMPANY));
+
+        // invalid company
+        assertParseFailure(parser, INVALID_DEADLINE_DESC + validExpectedJobString,
+            Messages.getErrorMessageForDuplicatePrefixes(PREFIX_DEADLINE));
 
         // valid value followed by invalid value
 
         // invalid role
         assertParseFailure(parser, validExpectedJobString + INVALID_ROLE_DESC,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ROLE));
+            Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ROLE));
 
         // invalid company
         assertParseFailure(parser, validExpectedJobString + INVALID_COMPANY_DESC,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_COMPANY));
+            Messages.getErrorMessageForDuplicatePrefixes(PREFIX_COMPANY));
+
+        // invalid deadline
+        assertParseFailure(parser, validExpectedJobString + INVALID_DEADLINE_DESC,
+            Messages.getErrorMessageForDuplicatePrefixes(PREFIX_DEADLINE));
     }
 
     @Test
@@ -103,6 +122,6 @@ public class AddCommandParserTest {
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + ROLE_DESC_CLEANER + COMPANY_DESC_CLEANER,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 }
