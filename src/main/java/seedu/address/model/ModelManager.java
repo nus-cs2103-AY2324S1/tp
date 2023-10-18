@@ -49,6 +49,11 @@ public class ModelManager implements Model {
         return this.contacts;
     }
 
+    /**
+     * Adds the specified {@link Contact}.
+     *
+     * Also resets the contacts filter.
+     */
     @Override
     public void addContact(Contact contact) {
         this.contacts.add(contact);
@@ -69,6 +74,11 @@ public class ModelManager implements Model {
     @Override
     public void removeContact(Contact contact) {
         this.contacts.remove(contact);
+    }
+
+    @Override
+    public void removeAllContacts() {
+        this.contacts.removeAll();
     }
 
     @Override

@@ -1,5 +1,7 @@
 package seedu.address.model;
 
+import java.util.ArrayList;
+
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.contact.Contact;
@@ -98,5 +100,12 @@ public class Contacts implements ReadOnlyContacts {
      */
     public void remove(Contact contact) {
         this.uniqueList.remove(contact);
+    }
+
+    /**
+     * Removes all {@link Contact}s.
+     */
+    public void removeAll() {
+        this.uniqueList.setContacts(new ArrayList<>());
     }
 }

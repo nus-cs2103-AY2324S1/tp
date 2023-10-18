@@ -25,6 +25,7 @@ import seedu.address.model.contact.exceptions.DuplicateContactException;
 public class UniqueContactList implements Iterable<Contact> {
 
     private final ObservableList<Contact> internalList = FXCollections.observableArrayList();
+    //FIXME this never changes - where is it used?
     private final ObservableList<Contact> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
@@ -77,11 +78,6 @@ public class UniqueContactList implements Iterable<Contact> {
         if (!internalList.remove(toRemove)) {
             throw new ContactNotFoundException();
         }
-    }
-
-    public void setContacts(UniqueContactList replacement) {
-        requireNonNull(replacement);
-        internalList.setAll(replacement.internalList);
     }
 
     /**

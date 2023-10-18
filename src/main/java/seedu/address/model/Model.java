@@ -18,6 +18,7 @@ public interface Model {
     public boolean containsContact(Contact contact);
     public void updateContact(Contact old, Contact updated);
     public void removeContact(Contact contact);
+    public void removeAllContacts();
 
     public Settings getSettings();
 
