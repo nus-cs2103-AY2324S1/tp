@@ -96,4 +96,13 @@ public class UiManager implements Ui {
         mainWindow.handleShowPerson(person);
     }
 
+    /**
+     * Shows the details of the selected lesson.
+     *
+     * @param lesson The specified lesson to show the details of.
+     */
+    public void showLessonDetails(Person lesson) {
+        mainWindow.handleShowLesson(lesson); //TODO
+    }
+
 }
