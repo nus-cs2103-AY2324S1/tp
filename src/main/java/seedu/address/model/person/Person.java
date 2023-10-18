@@ -23,6 +23,7 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private final Day day;
     private final Set<Tag> tags = new HashSet<>();
 
     private boolean paid;
@@ -30,12 +31,13 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, boolean paid) {
+    public Person(Name name, Phone phone, Email email, Address address, Day day, Set<Tag> tags, boolean paid) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.day = day;
         this.tags.addAll(tags);
         this.paid = paid;
     }
@@ -51,19 +53,22 @@ public class Person {
     public Email getEmail() {
         return email;
     }
-
+    
     public Address getAddress() {
         return address;
     }
-
+  
+    public Day getDay() {
+        return day;
+    }
+  
     public boolean getPaid() {
         return paid;
     }
 
     public void setPaid() {
         this.paid = true;
-    }
-
+      
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -121,6 +126,7 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("day", day)
                 .add("tags", tags)
                 .add("paid", paid)
                 .toString();
