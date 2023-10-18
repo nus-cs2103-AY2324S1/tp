@@ -15,10 +15,19 @@ dependencies {
     String versionJUnit = '5.10.0'
     /* NOTE
      * Upgrading Jackson to 2.15.2 causes some tests to fail, as saving Config's
-     * Path results in a full path instead of the original relative one
+     * Path results in a full path instead of the original relative one.
     */
     String versionJackson = '2.7.0'
-    String versionJavaFx = '21'
+    /* NOTE
+     * We stay on JavaFX 17 instead of 21, for better Java 11 compatibility in
+     * general.
+     *
+     * The documentation states that Java 17 is required for either, but Gluon's
+     * download page states otherwise:
+     * • https://openjfx.io/openjfx-docs/
+     * • https://gluonhq.com/products/javafx/
+    */
+    String versionJavaFx = '17.0.9'
 
     implementation group: 'org.openjfx', name: 'javafx-base', version: versionJavaFx, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-base', version: versionJavaFx, classifier: 'mac'
@@ -84,5 +93,5 @@ checkstyle {
 }
 
 shadowJar {
-    archiveFileName = 'context.jar'
+    archiveFileName = 'ConText.jar'
 }

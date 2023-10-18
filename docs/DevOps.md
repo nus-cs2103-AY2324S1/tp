@@ -19,7 +19,7 @@ Given below are how to use Gradle for some important project tasks.
 * **`clean`**: Deletes the files created during the previous build tasks (e.g. files in the `build` folder).<br>
   e.g. `./gradlew clean`
 
-* **`shadowJar`**: Uses the ShadowJar plugin to creat a fat JAR file in the `build/lib` folder, *if the current file is outdated*.<br>
+* **`shadowJar`**: Uses the ShadowJar plugin to create a fat JAR file in the `build/lib` folder, *if the current file is outdated*.<br>
   e.g. `./gradlew shadowJar`.
 
 * **`run`**: Builds and runs the application.<br>
@@ -52,7 +52,7 @@ In addition to running Gradle checks, CI includes some repository-wide checks. U
 
 These checks are implemented as POSIX shell scripts, and thus can only be run on POSIX-compliant operating systems such as macOS and Linux. To run all checks locally on these operating systems, execute the following in the repository root directory:
 
-`./config/travis/run-checks.sh`
+`./.github/run-checks.sh`
 
 Any warnings or errors will be printed out to the console.
 

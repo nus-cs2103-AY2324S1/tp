@@ -8,11 +8,12 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.Messages;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Note;
-import seedu.address.model.person.Phone;
+import seedu.address.model.contact.Email;
+import seedu.address.model.contact.Name;
+import seedu.address.model.contact.Note;
+import seedu.address.model.contact.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -45,7 +46,7 @@ public class ParserUtil {
         requireNonNull(name);
         String trimmedName = name.trim();
         if (!Name.isValidName(trimmedName)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Messages.MESSAGE_NAME_CONSTRAINTS);
         }
         return new Name(trimmedName);
     }
@@ -60,7 +61,7 @@ public class ParserUtil {
         requireNonNull(phone);
         String trimmedPhone = phone.trim();
         if (!Phone.isValidPhone(trimmedPhone)) {
-            throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Messages.MESSAGE_PHONE_CONSTRAINTS);
         }
         return new Phone(trimmedPhone);
     }
@@ -75,7 +76,7 @@ public class ParserUtil {
         requireNonNull(email);
         String trimmedEmail = email.trim();
         if (!Email.isValidEmail(trimmedEmail)) {
-            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Messages.MESSAGE_EMAIL_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
     }
@@ -94,29 +95,37 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Attempts to parse the specified string as a {@link Tag}.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * Trims the specified string as part of parsing.
+     *
+     * @param tagName Tag name.
+     * @throws ParseException If the specified string is not a valid tag.
      */
-    public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+    public static Tag parseTag(String tagName) throws ParseException {
+        String trimmed = tagName.trim();
+
+        if (!Tag.isValidName(trimmed)) {
+            throw new ParseException(
+                Messages.tagInvalid(trimmed)
+            );
         }
-        return new Tag(trimmedTag);
+
+        return new Tag(trimmed);
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Attempts to parse the specified strings as {@link Tag}s.
+     *
+     * @param tagNames Tag names.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+    public static Set<Tag> parseTags(Collection<String> tagNames) throws ParseException {
+        Set<Tag> tags = new HashSet<>();
+        for (String tagName : tagNames) {
+            tags.add(
+                parseTag(tagName)
+            );
         }
-        return tagSet;
+        return tags;
     }
 }
