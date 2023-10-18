@@ -49,6 +49,11 @@ public class DeleteCommand extends Command {
 
     private final Name name;
 
+    /**
+     * @param nric of the person in the filtered person list to edit
+     * @param name of the person in the filtered person list to edit
+     * @param deletePersonDescriptor details to delete the person with
+     */
     public DeleteCommand(Nric nric, Name name, DeletePersonDescriptor deletePersonDescriptor) {
         this.nric = nric;
         this.name = name;
@@ -93,6 +98,40 @@ public class DeleteCommand extends Command {
         }
     }
 
+    /**
+     * Finds the person to delete by NRIC.
+     * @param persons list of persons in the address book.
+     * @return the person to delete.
+     * @throws CommandException if the person is not found.
+     */
+    public Optional<Person> findPersonToDeleteIc(List<Person> persons)
+            throws CommandException {
+        Optional<Person> personbyNric = persons.stream()
+                .filter(person -> person.getNric().equals(nric))
+                .findFirst();
+        if (personbyNric.isPresent()) {
+            return personbyNric;
+        } else {
+            throw new CommandException(Messages.MESSAGE_INVALID_NRIC);
+        }
+    }
+
+    /**
+     * Finds the person to delete by name.
+     * @param persons list of persons in the address book.
+     * @return the person to delete.
+     * @throws CommandException if the person is not found.
+     */
+    public Optional<Person> findPersonToDeleteName(Stream<Person> persons)
+            throws CommandException {
+        Optional<Person> personbyName = persons.findFirst();
+        if (personbyName.isPresent()) {
+            return personbyName;
+        } else {
+            throw new CommandException(Messages.MESSAGE_INVALID_NAME);
+        }
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -126,31 +165,9 @@ public class DeleteCommand extends Command {
                 .toString();
     }
 
-    public Optional<Person> findPersonToDeleteIc(List<Person> persons)
-            throws CommandException {
-        Optional<Person> personbyNric = persons.stream()
-                .filter(person -> person.getNric().equals(nric))
-                .findFirst();
-        if (personbyNric.isPresent()) {
-            return personbyNric;
-        } else {
-            throw new CommandException(Messages.MESSAGE_INVALID_NRIC);
-        }
-    }
-
-    public Optional<Person> findPersonToDeleteName(Stream<Person> persons)
-            throws CommandException {
-        Optional<Person> personbyName = persons.findFirst();
-        if (personbyName.isPresent()) {
-            return personbyName;
-        } else {
-            throw new CommandException(Messages.MESSAGE_INVALID_NAME);
-        }
-    }
-
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * edited with {@code deletePersonDescriptor}.
      */
     private static Person createEditedPerson(Person personToEdit, DeletePersonDescriptor deletePersonDescriptor) {
         assert personToEdit != null;
@@ -189,7 +206,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Stores the fields that is to be deleted from a person in the address book.
+     * Stores the boolean value of the fields that is to be deleted from a person in the address book.
      */
     public static class DeletePersonDescriptor {
         private boolean phone;
@@ -242,9 +259,6 @@ public class DeleteCommand extends Command {
             return this.appointment;
         }
 
-        /**
-         * Sets {@code tags} to this object's {@code tags}.
-         */
         public void setTags() {
             this.tags = true;
         }
@@ -253,6 +267,9 @@ public class DeleteCommand extends Command {
             return this.tags;
         }
 
+        /**
+         * Returns true if all fields are false.
+         */
         public boolean isAllFalse() {
             return !(phone || email || address || tags || medicalHistory || appointment);
         }

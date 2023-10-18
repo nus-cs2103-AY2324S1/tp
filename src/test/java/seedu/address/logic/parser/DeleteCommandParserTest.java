@@ -61,7 +61,6 @@ public class DeleteCommandParserTest {
         assertParseSuccess(parser, userString, deleteCommand);
     }
 
-
     @Test
     public void test_parse_missingNameAndNric() {
         assertParseFailure(parser, "", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));

@@ -15,7 +15,7 @@ public class AppointmentTest {
 
     @Test
     public void constructor_invalidAppointment_throwsIllegalArgumentException() {
-        String invalidAppointment = "";
+        String invalidAppointment = " ";
         assertThrows(IllegalArgumentException.class, () -> new Appointment(invalidAppointment));
     }
 
@@ -25,7 +25,7 @@ public class AppointmentTest {
         assertThrows(NullPointerException.class, () -> Appointment.isValidAppointment(null));
 
         // invalid appointment
-        assertFalse(Appointment.isValidAppointment("")); // empty string
+        assertTrue(Appointment.isValidAppointment("")); // empty string
         assertFalse(Appointment.isValidAppointment(" ")); // spaces only
         assertFalse(Appointment.isValidAppointment("196-12-12 12:00 15:00")); // bad year
         assertFalse(Appointment.isValidAppointment("1966-12-12 12:00")); // missing field

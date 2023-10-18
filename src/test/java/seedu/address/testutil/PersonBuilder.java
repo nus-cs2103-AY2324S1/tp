@@ -20,7 +20,7 @@ import seedu.address.model.util.SampleDataUtil;
 public class PersonBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
-    public static final String DEFAULT_NRIC = "S1234567E";
+    public static final String DEFAULT_NRIC = "T7243948H";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
@@ -30,10 +30,10 @@ public class PersonBuilder {
     private Nric nric;
     private Phone phone;
     private Email email;
-    private Appointment appointment;
-    private Set<MedicalHistory> medicalHistories;
     private Address address;
+    private Appointment appointment;
     private Set<Tag> tags;
+    private Set<MedicalHistory> medicalHistories;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -44,7 +44,7 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        appointment = new Appointment(DEFAULT_APPOINTMENT);
+        appointment = null;
         tags = new HashSet<>();
         medicalHistories = new HashSet<>();
     }
