@@ -7,6 +7,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
@@ -46,7 +47,7 @@ public class EventList {
 
         int index = this.internalList.indexOf(target);
         if (index == -1) {
-            throw new PersonNotFoundException(); // Change to event exception
+            throw new EventNotFoundException(); // Change to event exception
         }
 
         this.internalList.set(index, editedEvent);

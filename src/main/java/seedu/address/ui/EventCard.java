@@ -1,7 +1,10 @@
 package seedu.address.ui;
 
+import java.util.Comparator;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.event.Event;
@@ -33,6 +36,8 @@ public class EventCard extends UiPart<Region> {
     private Label date;
     @FXML
     private Label timeDuration;
+    @FXML
+    private FlowPane names;
 
     /**
      * Creates an {@code EventCode} with the given {@code Event} and index to display.
@@ -46,5 +51,8 @@ public class EventCard extends UiPart<Region> {
         timeDuration.setText(String.format("%s - %s",
                 event.getStartTime().forDisplay(),
                 event.getEndTime().forDisplay()));
+        event.getNames().stream()
+                .sorted(Comparator.comparing(name -> name.fullName))
+                .forEach(name -> names.getChildren().add(new Label(name.fullName)));
     }
 }
