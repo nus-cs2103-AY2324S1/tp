@@ -3,11 +3,9 @@ package transact.storage;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import com.opencsv.CSVReader;
@@ -15,12 +13,15 @@ import com.opencsv.CSVWriter;
 import com.opencsv.exceptions.CsvValidationException;
 
 import transact.commons.exceptions.DataLoadingException;
+import transact.logic.parser.ParserUtil;
 import transact.model.ReadOnlyTransactionBook;
 import transact.model.TransactionBook;
-import transact.model.person.Person;
 import transact.model.transaction.Transaction;
-
-
+import transact.model.transaction.info.Amount;
+import transact.model.transaction.info.Date;
+import transact.model.transaction.info.Description;
+import transact.model.transaction.info.TransactionId;
+import transact.model.transaction.info.TransactionType;
 
 /**
  * A class to access TransactionBook data stored as a csv file on the hard disk.
@@ -52,26 +53,30 @@ public class CsvAdaptedTransactionStorage implements TransactionBookStorage {
 
             TransactionBook transactions = new TransactionBook();
 
-            try (CSVReader reader = new CSVReader(new FileReader(path.toFile()))) {
-                String[] header = reader.readNext();
-                String[] row;
-                while ((row = reader.readNext()) != null) {
-                    String transactionId = row[0];
-                    String category = row[1];
-                    String description = row[2];
-                    BigDecimal amount = new BigDecimal(row[3]).setScale(2, RoundingMode.HALF_UP);
-                    String date = row[4];
-                    String person = row[5];
+            CSVReader reader = new CSVReader(new FileReader(path.toFile()));
 
-                    /* TODO Read in optional staff when ready
-                    Transaction transaction = new Transaction(transactionId, TransactionType.R, )
-                    }
+            reader.readNext(); // Skip the header
 
-                    transactions.addTransaction(transaction);
-                     */
+            String[] row;
+            while ((row = reader.readNext()) != null) {
+                try {
+                    TransactionId transactionId = new TransactionId(row[0]);
+                    TransactionType transactionType = ParserUtil.parseType(row[1]);
+                    Description description = ParserUtil.parseDescription(row[2]);
+                    Amount amount = ParserUtil.parseAmount(row[3]);
+                    Date date = ParserUtil.parseDate(row[4]);
+
+                    // TODO Read in optional staff when ready
+                    // Person person = ParserUtil.parsePerson(null);
+
+                    Transaction t = new Transaction(transactionId, transactionType, description, amount, date);
+
+                    transactions.addTransaction(t);
+
+                } catch (Exception e) {
+                    // Skip if error with a line
+                    // TODO Warn user of malformed data
                 }
-            } catch (CsvValidationException e) {
-                throw new RuntimeException(e);
             }
 
             ReadOnlyTransactionBook transactionBook = new TransactionBook(transactions);
@@ -79,6 +84,8 @@ public class CsvAdaptedTransactionStorage implements TransactionBookStorage {
             return Optional.of(transactionBook);
         } catch (IOException e) {
             throw new DataLoadingException(e);
+        } catch (CsvValidationException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -88,24 +95,27 @@ public class CsvAdaptedTransactionStorage implements TransactionBookStorage {
     }
 
     /**
-     * Similar to {@link #saveTransactionBook(ReadOnlyTransactionBook)} (ReadOnlyTransactionBook)}.
+     * Similar to {@link #saveTransactionBook(ReadOnlyTransactionBook)}
+     * (ReadOnlyTransactionBook)}.
      *
-     * @param filePath location of the data. Cannot be null.
+     * @param filePath
+     *            location of the data. Cannot be null.
      */
     public void saveTransactionBook(ReadOnlyTransactionBook transactionBook, Path filePath) throws IOException {
-        List<Transaction> transactions = transactionBook.getTransactionList();
+        Map<TransactionId, Transaction> transactions = transactionBook.getTransactionMap();
         try (CSVWriter writer = new CSVWriter(new FileWriter(filePath.toFile()))) {
-            String[] header = { "TransactionId", "Category", "Description", "Amount", "Date", "Person" };
+            String[] header = { "TransactionId", "Type", "Description", "Amount", "Date", "Person" };
             writer.writeNext(header);
 
-            for (Transaction transaction : transactions) {
+            for (Transaction transaction : transactions.values()) {
                 String transactionId = transaction.getTransactionId().toString();
-                String category = (transaction instanceof Transaction) ? "Expense" : "Revenue";
-                String person = (transaction.hasPersonInfo()) ? transaction.getPerson().toString() : Person.PERSON_UNSTATED.toString();
+                String transactionType = transaction.getTransactionType().toString();
                 String description = transaction.getDescription().toString();
                 String amount = transaction.getAmount().toString();
                 String date = transaction.getDate().toString();
-                String[] row = { transactionId, category, description, amount, date, person };
+                String person = (transaction.hasPersonInfo()) ? transaction.getPerson().toString() : "";
+
+                String[] row = { transactionId, transactionType, description, amount, date, person };
 
                 writer.writeNext(row);
             }

@@ -20,7 +20,7 @@ class JsonAdaptedDate {
     }
 
     public JsonAdaptedDate(Date source) {
-        this.date = source.getValue();
+        this.date = source.toString();
     }
 
     @JsonValue

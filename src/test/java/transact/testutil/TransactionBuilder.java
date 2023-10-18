@@ -16,26 +16,29 @@ import transact.model.transaction.info.TransactionType;
 public class TransactionBuilder {
 
     public static final Integer DEFAULT_ID = 0;
+    public static final String DEFAULT_TYPE = "Expense";
     public static final String DEFAULT_DESC = "Shibas";
     public static final float DEFAULT_AMOUNT = 10.34f;
+    public static final String DEFAULT_DATE = "11/11/2023";
     public static final Person DEFAULT_PERSON = ALICE;
 
-    public static final String DEFAULT_DATE = "11/11/2023";
     private TransactionId id;
+    private TransactionType transactionType;
     private Description description;
     private Amount amount;
-    private Person person;
     private Date date;
+    private Person person;
 
     /**
      * Creates a {@code TransactionBuilder} with the default details.
      */
     public TransactionBuilder() {
         id = new TransactionId(DEFAULT_ID);
+        transactionType = TransactionType.getType(DEFAULT_TYPE);
         description = new Description(DEFAULT_DESC);
         amount = new Amount(DEFAULT_AMOUNT);
-        person = DEFAULT_PERSON;
         date = new Date(DEFAULT_DATE);
+        person = DEFAULT_PERSON;
     }
 
     /**
@@ -44,14 +47,20 @@ public class TransactionBuilder {
      */
     public TransactionBuilder(Transaction transactionToCopy) {
         id = transactionToCopy.getTransactionId();
+        transactionType = transactionToCopy.getTransactionType();
         description = transactionToCopy.getDescription();
         amount = transactionToCopy.getAmount();
         date = new Date(DEFAULT_DATE);
-        if (transactionToCopy.hasPersonInfo()) {
-            person = transactionToCopy.getPerson();
-        } else {
-            person = null;
-        }
+        person = transactionToCopy.getPerson();
+    }
+
+    /**
+     * Sets the {@code transactionType} of the {@code Transaction} that we are
+     * building.
+     */
+    public TransactionBuilder withType(String transactionType) {
+        this.transactionType = TransactionType.getType(transactionType);
+        return this;
     }
 
     /**
@@ -89,6 +98,6 @@ public class TransactionBuilder {
     }
 
     public Transaction build() {
-        return new Transaction(id, TransactionType.EXPENSE, description, amount, date, person);
+        return new Transaction(id, transactionType, description, amount, date, person);
     }
 }

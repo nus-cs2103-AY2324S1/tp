@@ -47,9 +47,6 @@ public class AddTransactionCommandParser implements Parser<AddTransactionCommand
         Amount amount = ParserUtil.parseAmount(argMultimap.getValue(PREFIX_AMOUNT).get());
         Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
 
-        // TODO Parse data when date class ready
-        // Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
-
         // TODO Parse Optional Staff
         // Person staff = ParserUtil.parsePerson(args);
 

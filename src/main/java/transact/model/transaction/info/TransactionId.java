@@ -52,7 +52,7 @@ public class TransactionId implements Comparable<TransactionId> {
     }
 
     /**
-     * Returns true if a given integer is a valid transaction ID.
+     * Returns true if a given integer can be a new transaction ID.
      */
     public static boolean isValidTransactionId(Integer test) {
         return !usedIds.contains(test);

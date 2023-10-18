@@ -50,7 +50,7 @@ class JsonAdaptedTransaction {
         description = source.getDescription().getValue();
         type = source.getTransactionType();
         amount = source.getAmount().getValue();
-        date = source.getDate().getValue();
+        date = source.getDate().toString();
     }
 
     public Transaction toModelType() throws IllegalValueException {

@@ -1,6 +1,5 @@
 package transact.model.transaction;
 
-import java.text.ParseException;
 import java.util.Scanner;
 
 import transact.model.person.Person;
@@ -11,7 +10,7 @@ import transact.model.transaction.info.TransactionId;
 import transact.model.transaction.info.TransactionType;
 
 public class TransactionManualTest {
-    public static void main(String[] args) throws ParseException {
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Manual Transaction Test");
@@ -65,14 +64,14 @@ public class TransactionManualTest {
         // Create a Transaction object
         Transaction transaction = new Transaction(transactionId, transactionType, description, amount, date, person);
 
-
         // Print Transaction information for verification
         System.out.println("\nTransaction Information:");
         System.out.println("Transaction ID: " + transaction.getTransactionId());
-        System.out.println("Person: " + transaction.getPerson());
+        System.out.println("Transaction Type: " + transaction.getTransactionType());
         System.out.println("Description: " + transaction.getDescription());
         System.out.println("Amount: " + transaction.getAmount());
         System.out.println("Date: " + transaction.getDate());
+        System.out.println("Person: " + transaction.getPerson());
 
         scanner.close();
     }
