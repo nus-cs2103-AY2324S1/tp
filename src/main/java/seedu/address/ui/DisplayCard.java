@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.person.Card;
+import seedu.address.model.card.Card;
 
 /**
  * DisplayCard class to showcase the question and the answr

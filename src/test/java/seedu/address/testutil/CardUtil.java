@@ -5,7 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_QUESTION;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditCardDescriptor;
-import seedu.address.model.person.Card;
+import seedu.address.model.card.Card;
 
 /**
  * A utility class for Card.
