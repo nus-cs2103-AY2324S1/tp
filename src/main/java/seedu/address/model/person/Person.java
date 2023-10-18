@@ -23,7 +23,7 @@ public class Person {
 
     // Data fields
     private final Remark remark;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Set<Tag> tags;
 
     /**
      * Every field must be present and not null.
@@ -34,7 +34,7 @@ public class Person {
         this.phone = phone;
         this.email = email;
         this.remark = remark;
-        this.tags.addAll(tags);
+        this.tags = new HashSet<>(tags);
     }
 
     public Name getName() {
@@ -115,11 +115,9 @@ public class Person {
     }
 
     /**
-     * Returns detailed information of Person for display.
+     * Returns detailed information of Person for viewc command.
      */
     public String toDisplayString() {
-        return String.format("Name: %s\nPhone: %s\nEmail: %s\nRemark: %s\nTags: %s", name, phone, email,
-                remark, tags.stream().map(Tag::toString).reduce("", (total, tag) -> total + tag));
+        return String.format("Name: %s\nPhone: %s\nEmail: %s\nRemark: %s\n", name, phone, email, remark);
     }
-
 }

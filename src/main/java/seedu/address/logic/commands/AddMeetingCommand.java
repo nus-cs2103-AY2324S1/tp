@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TITLE;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -26,11 +27,14 @@ public class AddMeetingCommand extends Command {
             + PREFIX_LOCATION + "LOCATION "
             + PREFIX_START + "START "
             + PREFIX_END + "END "
+            + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TITLE + "Meeting with friends "
             + PREFIX_LOCATION + "Starbucks "
             + PREFIX_START + "18.10.2023 1200 "
-            + PREFIX_END + "18.10.2023 1400 ";
+            + PREFIX_END + "18.10.2023 1400 "
+            + PREFIX_TAG + "work "
+            + PREFIX_TAG + "impt ";
 
     public static final String MESSAGE_SUCCESS = "New meeting added: %1$s";
     public static final String MESSAGE_DUPLICATE_MEETING = "This meeting already exists in the address book";

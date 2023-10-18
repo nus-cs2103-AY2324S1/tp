@@ -121,11 +121,10 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        // Nothing for now, will need list of all meetings for schedule
         meetingSchedulePanel = new MeetingSchedulePanel(logic.getFilteredMeetingList());
         meetingSchedulePanelPlaceholder.getChildren().add(meetingSchedulePanel.getRoot());
 
-        // For now Person object is forwarded here in executeCommand below
+        // Viewed Person/Meeting are forwarded here in executeCommand below
         infoDisplayPanel = new InfoDisplayPanel();
         infoDisplayPanelPlaceholder.getChildren().add(infoDisplayPanel.getRoot());
 
@@ -194,8 +193,8 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
-            // Insert Person object into infoDisplay for viewc
-            infoDisplayPanel.setViewedPerson(logic.getViewedPerson());
+            // Insert Person object into infoDisplay for view commands
+            infoDisplayPanel.setViewedPerson(logic.getViewedItems());
 
             if (commandResult.isShowHelp()) {
                 handleHelp();

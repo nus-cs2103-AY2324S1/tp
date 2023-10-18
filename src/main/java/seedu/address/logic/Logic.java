@@ -3,6 +3,7 @@ package seedu.address.logic;
 import java.nio.file.Path;
 
 import javafx.collections.ObservableList;
+import javafx.util.Pair;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -35,7 +36,7 @@ public interface Logic {
     ObservableList<Person> getFilteredPersonList();
 
     /** Returns an unmodifiable view of the filtered list of meetings */
-    public ObservableList<Meeting> getFilteredMeetingList();
+    ObservableList<Meeting> getFilteredMeetingList();
 
     /**
      * Returns the user prefs' address book file path.
@@ -52,9 +53,8 @@ public interface Logic {
      */
     void setGuiSettings(GuiSettings guiSettings);
 
-
     /**
-     * Current working method to forward Person to UI from Logic.
+     * Forwards viewed Person and Meeting to UI from Logic.
      */
-    Person getViewedPerson();
+    Pair<Person, Meeting> getViewedItems();
 }

@@ -53,11 +53,11 @@ public class SampleDataUtil {
             new Meeting(new Title("Test Meeting 1"), new Location("Room 1"),
                     LocalDateTime.parse("02.10.2023 1000", FORMAT),
                     LocalDateTime.parse("03.10.2023 1000", FORMAT),
-                    getAttendeeSet("Alex Yeoh")),
+                    getAttendeeSet("Alex Yeoh"), getTagSet("work")),
             new Meeting(new Title("Test Meeting 2"), new Location("Room 2"),
                     LocalDateTime.parse("02.10.2023 1000", FORMAT),
                     LocalDateTime.parse("02.10.2023 1000", FORMAT),
-                    getAttendeeSet()),
+                    getAttendeeSet(), getTagSet()),
         };
     }
 
@@ -77,7 +77,7 @@ public class SampleDataUtil {
      */
     public static Set<Tag> getTagSet(String... strings) {
         return Arrays.stream(strings)
-                .map(Tag::new)
+                .map(Tag::of)
                 .collect(Collectors.toSet());
     }
 
