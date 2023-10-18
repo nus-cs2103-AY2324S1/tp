@@ -52,14 +52,18 @@ public class FlashlingoParser {
                 return new FindCommandParser().parse(arguments);
             case NoCommand.COMMAND_WORD:
                 return new NoCommandParser().parse(arguments);
+            case LanguageCommand.COMMAND_WORD:
+                return new LanguageCommandParser().parse(arguments);
             case YesCommand.COMMAND_WORD:
                 return new YesCommandParser().parse(arguments);
-            case ListCommand.COMMAND_WORD:
-                return new ListCommand();
             case ExitCommand.COMMAND_WORD:
                 return new ExitCommand();
             case HelpCommand.COMMAND_WORD:
                 return new HelpCommand();
+            case ListCommand.COMMAND_WORD:
+                return new ListCommand();
+            case ReviewCommand.COMMAND_WORD:
+                return new ReviewCommand();
             case StatsCommand.COMMAND_WORD:
                 return new StatsCommand();
             default:
