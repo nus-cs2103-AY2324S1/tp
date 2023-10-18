@@ -11,16 +11,18 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.lessons.Lesson;
 import seedu.address.model.person.Person;
 import seedu.address.ui.Ui;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the address book and schedule list data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
+    private final ScheduleList scheduleList;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private Ui ui = null;
@@ -29,18 +31,21 @@ public class ModelManager implements Model {
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, ReadOnlySchedule scheduleList) {
+        requireAllNonNull(addressBook, userPrefs, scheduleList);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + addressBook + " , schedule list: " + scheduleList
+                + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
+        this.scheduleList = new ScheduleList(scheduleList);
+        // to add: filtered list of lessons
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new UserPrefs(), new ScheduleList());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -76,6 +81,17 @@ public class ModelManager implements Model {
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         userPrefs.setAddressBookFilePath(addressBookFilePath);
+    }
+
+    @Override
+    public Path getScheduleListFilePath() {
+        return userPrefs.getScheduleListFilePath();
+    }
+
+    @Override
+    public void setScheduleListFilePath(Path scheduleListPath) {
+        requireNonNull(scheduleListPath);
+        userPrefs.setScheduleListFilePath(scheduleListPath);
     }
 
     //=========== AddressBook ================================================================================
@@ -131,6 +147,42 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    //=========== ScheduleList ================================================================================
+
+    @Override
+    public void setScheduleList(ReadOnlySchedule scheduleList) {
+        this.scheduleList.resetData(scheduleList);
+    }
+
+    @Override
+    public ReadOnlySchedule getScheduleList() {
+        return scheduleList;
+    }
+
+    @Override
+    public boolean hasLesson(Lesson lesson) {
+        requireNonNull(lesson);
+        return scheduleList.hasLesson(lesson);
+    }
+
+    @Override
+    public void deleteLesson(Lesson target) {
+        scheduleList.removeLesson(target);
+    }
+
+    @Override
+    public void addLesson(Lesson lesson) {
+        scheduleList.addLesson(lesson);
+        //updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
+    }
+
+    @Override
+    public void setLesson(Lesson target, Lesson editedLesson) {
+        requireAllNonNull(target, editedLesson);
+
+        scheduleList.setLesson(target, editedLesson);
     }
 
     //=========== Ui Changing =============================================================

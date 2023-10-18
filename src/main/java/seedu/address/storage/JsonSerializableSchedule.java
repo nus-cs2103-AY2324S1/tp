@@ -10,7 +10,8 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.ReadOnlySchedule;
-import seedu.address.model.lessons.Schedule;
+import seedu.address.model.ScheduleList;
+import seedu.address.model.lessons.Lesson;
 
 
 /**
@@ -18,6 +19,8 @@ import seedu.address.model.lessons.Schedule;
  */
 @JsonRootName(value = "schedule")
 public class JsonSerializableSchedule {
+    public static final String MESSAGE_DUPLICATE_LESSON = "Lessons list contains duplicate lesson(s).";
+
     private final List<JsonAdaptedLesson> lessons = new ArrayList<>();
 
     /**
@@ -41,13 +44,20 @@ public class JsonSerializableSchedule {
     }
 
     /**
-     * Converts this Jackson-friendly adapted lesson schedule into the model's {@code Schedule} object.
+     * Converts this Jackson-friendly adapted lesson schedule into the model's {@code ScheduleList} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted lesson.
      */
-    public Schedule toModelType() throws IllegalValueException {
+    public ScheduleList toModelType() throws IllegalValueException {
         // TODO implementation
-
-        return new Schedule();
+        ScheduleList scheduleList = new ScheduleList();
+        for (JsonAdaptedLesson jsonAdaptedLesson: lessons) {
+            Lesson lesson = jsonAdaptedLesson.toModelType();
+            if (scheduleList.hasLesson(lesson)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_LESSON);
+            }
+            scheduleList.addLesson(lesson);
+        }
+        return scheduleList;
     }
 }
