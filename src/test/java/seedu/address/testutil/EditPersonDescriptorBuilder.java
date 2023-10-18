@@ -45,6 +45,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setBegin(person.getBegin());
         descriptor.setEnd(person.getEnd());
         descriptor.setTags(person.getTags());
+        descriptor.setPaid(null);
     }
 
     /**

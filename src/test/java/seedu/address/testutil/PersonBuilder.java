@@ -39,6 +39,8 @@ public class PersonBuilder {
     private End end;
     private Set<Tag> tags;
 
+    private boolean paid;
+
     /**
      * Creates a {@code PersonBuilder} with the default details.
      */
@@ -52,6 +54,7 @@ public class PersonBuilder {
         begin = new Begin(DEFAULT_BEGIN);
         end = new End(DEFAULT_END);
         tags = new HashSet<>();
+        paid = false;
     }
 
     /**
@@ -67,6 +70,7 @@ public class PersonBuilder {
         begin = personToCopy.getBegin();
         end = personToCopy.getEnd();
         tags = new HashSet<>(personToCopy.getTags());
+        paid = false;
     }
 
     /**
@@ -130,7 +134,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, subject, day, begin, end, tags);
+        return new Person(name, phone, email, address, subject, day, begin, end, tags, paid);
     }
 
 }

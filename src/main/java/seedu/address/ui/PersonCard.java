@@ -49,6 +49,9 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
+    @FXML
+    private Label ispaid;
+
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
@@ -59,11 +62,13 @@ public class PersonCard extends UiPart<Region> {
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
+        day.setText(person.getDay().value.toString());
         email.setText(person.getEmail().value);
         subject.setText(person.getSubject().value);
         day.setText(person.getDay().value);
         begin.setText(person.getBegin().value);
         end.setText(person.getEnd().value);
+        //ispaid.setText("1");
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

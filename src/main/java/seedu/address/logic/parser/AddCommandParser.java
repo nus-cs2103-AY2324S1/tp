@@ -40,7 +40,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_DAY);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
@@ -50,8 +50,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         Begin begin = ParserUtil.parseBegin(argMultimap.getValue(PREFIX_BEGIN).get());
         End end = ParserUtil.parseEnd(argMultimap.getValue(PREFIX_END).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        boolean paid = false;
 
-        Person person = new Person(name, phone, email, address, subject, day, begin, end, tagList);
+
+        Person person = new Person(name, phone, email, address, subject, day, begin, end, tagList, paid);
 
         return new AddCommand(person);
     }

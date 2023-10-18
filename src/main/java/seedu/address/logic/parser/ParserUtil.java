@@ -99,6 +99,27 @@ public class ParserUtil {
         return new Email(trimmedEmail);
     }
 
+
+    /**
+     * Parses a {@code String day} into an {@code Day}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code day} is invalid.
+     */
+    public static Day parseDay(String day) throws ParseException {
+        requireNonNull(day);
+        String trimmedDay = day.trim();
+        Day initialisedDay;
+
+        try {
+            initialisedDay = new Day(trimmedDay);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(Day.MESSAGE_CONSTRAINTS);
+        }
+
+        return initialisedDay;
+    }
+
     /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.

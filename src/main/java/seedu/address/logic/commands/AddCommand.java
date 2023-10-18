@@ -33,6 +33,7 @@ public class AddCommand extends Command {
             + PREFIX_DAY + "Mon "
             + PREFIX_BEGIN + "1200 "
             + PREFIX_END + "1300 "
+            + PREFIX_DAY + "Monday "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 

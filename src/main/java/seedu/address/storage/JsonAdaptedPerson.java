@@ -20,7 +20,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Subject;
 import seedu.address.model.tag.Tag;
-
 /**
  * Jackson-friendly version of {@link Person}.
  */
@@ -38,6 +37,8 @@ class JsonAdaptedPerson {
     private final String end;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
+    private final boolean paid;
+
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
@@ -46,7 +47,7 @@ class JsonAdaptedPerson {
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("subject") String subject, @JsonProperty("day") String day,
             @JsonProperty("begin") String begin, @JsonProperty("end") String end,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("tags") List<JsonAdaptedTag> tags,  @JsonProperty("paid") Boolean paid) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -58,6 +59,7 @@ class JsonAdaptedPerson {
         if (tags != null) {
             this.tags.addAll(tags);
         }
+        this.paid = paid;
     }
 
     /**
@@ -75,6 +77,7 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        paid = source.getPaid();
     }
 
     /**
@@ -154,7 +157,7 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelSubject, modelDay,
-                modelBegin, modelEnd, modelTags);
+                modelBegin, modelEnd, modelTags, paid);
     }
 
 }

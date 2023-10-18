@@ -29,12 +29,16 @@ public class Person {
     private final End end;
     private final Set<Tag> tags = new HashSet<>();
 
+    private boolean paid;
+
     /**
      * Every field must be present and not null.
      */
+
     public Person(Name name, Phone phone, Email email, Address address, Subject subject, Day day,
-                  Begin begin, End end, Set<Tag> tags) {
+                  Begin begin, End end, Set<Tag> tags, boolean paid) {
         requireAllNonNull(name, phone, email, address, subject, day, begin, end, tags);
+
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -43,7 +47,9 @@ public class Person {
         this.day = day;
         this.begin = begin;
         this.end = end;
+
         this.tags.addAll(tags);
+        this.paid = paid;
     }
 
     public Name getName() {
@@ -70,6 +76,7 @@ public class Person {
         return day;
     }
 
+
     public Begin getBegin() {
         return begin;
     }
@@ -84,6 +91,14 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public boolean getPaid() {
+        return paid;
+    }
+
+    public void setPaid() {
+        this.paid = true;
     }
 
     /**
@@ -129,7 +144,8 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, subject, day, begin, end, tags);
+        return Objects.hash(name, phone, email, address, subject, day, begin, end, tags, paid);
+        return Objects.hash(name, phone, email, address, tags, paid);
     }
 
     @Override
@@ -144,6 +160,7 @@ public class Person {
                 .add("begin", begin)
                 .add("end", end)
                 .add("tags", tags)
+                .add("paid", paid)
                 .toString();
     }
 
