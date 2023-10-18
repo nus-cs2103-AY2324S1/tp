@@ -17,14 +17,14 @@ import seedu.address.model.UserPrefs;
 public class StorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private ConTextStorage ConTextStorage;
+    private ConTextStorage conTextStorage;
     private UserPrefsStorage userPrefsStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code ConTextStorage} and {@code UserPrefStorage}.
      */
-    public StorageManager(ConTextStorage ConTextStorage, UserPrefsStorage userPrefsStorage) {
-        this.ConTextStorage = ConTextStorage;
+    public StorageManager(ConTextStorage conTextStorage, UserPrefsStorage userPrefsStorage) {
+        this.conTextStorage = conTextStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
@@ -50,29 +50,29 @@ public class StorageManager implements Storage {
 
     @Override
     public Path getConTextFilePath() {
-        return ConTextStorage.getConTextFilePath();
+        return conTextStorage.getConTextFilePath();
     }
 
     @Override
     public Optional<ReadOnlyConText> readConText() throws DataLoadingException {
-        return readConText(ConTextStorage.getConTextFilePath());
+        return readConText(conTextStorage.getConTextFilePath());
     }
 
     @Override
     public Optional<ReadOnlyConText> readConText(Path filePath) throws DataLoadingException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return ConTextStorage.readConText(filePath);
+        return conTextStorage.readConText(filePath);
     }
 
     @Override
-    public void saveConText(ReadOnlyConText ConText) throws IOException {
-        saveConText(ConText, ConTextStorage.getConTextFilePath());
+    public void saveConText(ReadOnlyConText conText) throws IOException {
+        saveConText(conText, conTextStorage.getConTextFilePath());
     }
 
     @Override
-    public void saveConText(ReadOnlyConText ConText, Path filePath) throws IOException {
+    public void saveConText(ReadOnlyConText conText, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        ConTextStorage.saveConText(ConText, filePath);
+        conTextStorage.saveConText(conText, filePath);
     }
 
 }

@@ -19,21 +19,21 @@ import seedu.address.model.contact.Contact;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final ConText ConText;
+    private final ConText conText;
     private final UserPrefs userPrefs;
     private final FilteredList<Contact> filteredContacts;
 
     /**
-     * Initializes a ModelManager with the given ConText and userPrefs.
+     * Initializes a ModelManager with the given conText and userPrefs.
      */
-    public ModelManager(ReadOnlyConText ConText, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(ConText, userPrefs);
+    public ModelManager(ReadOnlyConText conText, ReadOnlyUserPrefs userPrefs) {
+        requireAllNonNull(conText, userPrefs);
 
-        logger.fine("Initializing with address book: " + ConText + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + conText + " and user prefs " + userPrefs);
 
-        this.ConText = new ConText(ConText);
+        this.conText = new ConText(conText);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredContacts = new FilteredList<>(this.ConText.getContactList());
+        filteredContacts = new FilteredList<>(this.conText.getContactList());
     }
 
     public ModelManager() {
@@ -70,37 +70,37 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setConTextFilePath(Path ConTextFilePath) {
-        requireNonNull(ConTextFilePath);
-        userPrefs.setConTextFilePath(ConTextFilePath);
+    public void setConTextFilePath(Path conTextFilePath) {
+        requireNonNull(conTextFilePath);
+        userPrefs.setConTextFilePath(conTextFilePath);
     }
 
     //=========== ConText ================================================================================
 
     @Override
-    public void setConText(ReadOnlyConText ConText) {
-        this.ConText.resetData(ConText);
+    public void setConText(ReadOnlyConText conText) {
+        this.conText.resetData(conText);
     }
 
     @Override
     public ReadOnlyConText getConText() {
-        return ConText;
+        return conText;
     }
 
     @Override
     public boolean hasContact(Contact contact) {
         requireNonNull(contact);
-        return ConText.hasContact(contact);
+        return conText.hasContact(contact);
     }
 
     @Override
     public void deleteContact(Contact target) {
-        ConText.removeContact(target);
+        conText.removeContact(target);
     }
 
     @Override
     public void addContact(Contact contact) {
-        ConText.addContact(contact);
+        conText.addContact(contact);
         updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
     }
 
@@ -108,7 +108,7 @@ public class ModelManager implements Model {
     public void setContact(Contact target, Contact editedContact) {
         requireAllNonNull(target, editedContact);
 
-        ConText.setContact(target, editedContact);
+        conText.setContact(target, editedContact);
     }
 
     //=========== Filtered Contact List Accessors =============================================================
@@ -140,7 +140,7 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return ConText.equals(otherModelManager.ConText)
+        return conText.equals(otherModelManager.conText)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredContacts.equals(otherModelManager.filteredContacts);
     }

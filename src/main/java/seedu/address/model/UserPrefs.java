@@ -14,7 +14,7 @@ import seedu.address.commons.core.GuiSettings;
 public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
-    private Path ConTextFilePath = Paths.get("data" , "ConText.json");
+    private Path conTextFilePath = Paths.get("data" , "ConText.json");
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -48,12 +48,12 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     }
 
     public Path getConTextFilePath() {
-        return ConTextFilePath;
+        return conTextFilePath;
     }
 
-    public void setConTextFilePath(Path ConTextFilePath) {
-        requireNonNull(ConTextFilePath);
-        this.ConTextFilePath = ConTextFilePath;
+    public void setConTextFilePath(Path conTextFilePath) {
+        requireNonNull(conTextFilePath);
+        this.conTextFilePath = conTextFilePath;
     }
 
     @Override
@@ -69,19 +69,19 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
         UserPrefs otherUserPrefs = (UserPrefs) other;
         return guiSettings.equals(otherUserPrefs.guiSettings)
-                && ConTextFilePath.equals(otherUserPrefs.ConTextFilePath);
+                && conTextFilePath.equals(otherUserPrefs.conTextFilePath);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(guiSettings, ConTextFilePath);
+        return Objects.hash(guiSettings, conTextFilePath);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Gui Settings : " + guiSettings);
-        sb.append("\nLocal data file location : " + ConTextFilePath);
+        sb.append("\nLocal data file location : " + conTextFilePath);
         return sb.toString();
     }
 

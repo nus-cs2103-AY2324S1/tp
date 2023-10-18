@@ -24,22 +24,22 @@ import seedu.address.testutil.TestData;
 
 public class ConTextTest {
 
-    private final ConText ConText = new ConText();
+    private final ConText conText = new ConText();
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), ConText.getContactList());
+        assertEquals(Collections.emptyList(), conText.getContactList());
     }
 
     @Test
     public void resetData_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ConText.resetData(null));
+        assertThrows(NullPointerException.class, () -> conText.resetData(null));
     }
 
     @Test
     public void resetData_withValidReadOnlyConText_replacesData() {
         ConText newData = getTypicalConText();
-        ConText.resetData(newData);
-        assertEquals(newData, ConText);
+        conText.resetData(newData);
+        assertEquals(newData, conText);
     }
 
     @Test
@@ -52,47 +52,47 @@ public class ConTextTest {
         List<Contact> newContacts = Arrays.asList(ALICE, editedAlice);
         ConTextStub newData = new ConTextStub(newContacts);
 
-        assertThrows(DuplicateContactException.class, () -> ConText.resetData(newData));
+        assertThrows(DuplicateContactException.class, () -> conText.resetData(newData));
     }
 
     @Test
     public void hasContact_nullContact_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ConText.hasContact(null));
+        assertThrows(NullPointerException.class, () -> conText.hasContact(null));
     }
 
     @Test
     public void hasContact_contactNotInConText_returnsFalse() {
-        assertFalse(ConText.hasContact(ALICE));
+        assertFalse(conText.hasContact(ALICE));
     }
 
     @Test
     public void hasContact_contactInConText_returnsTrue() {
-        ConText.addContact(ALICE);
-        assertTrue(ConText.hasContact(ALICE));
+        conText.addContact(ALICE);
+        assertTrue(conText.hasContact(ALICE));
     }
 
     @Test
     public void hasContact_contactWithSameIdentityFieldsInConText_returnsTrue() {
-        ConText.addContact(ALICE);
+        conText.addContact(ALICE);
         Contact editedAlice = new ContactBuilder(ALICE)
                 .withNote(VALID_NOTE_BOB)
                 .withTags(TestData.Valid.Tag.ALPHANUMERIC_SPACES)
                 .build();
-        assertTrue(ConText.hasContact(editedAlice));
+        assertTrue(conText.hasContact(editedAlice));
     }
 
     @Test
     public void getContactList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(
                 UnsupportedOperationException.class,
-                () -> ConText.getContactList().remove(0)
+                () -> conText.getContactList().remove(0)
         );
     }
 
     @Test
     public void toStringMethod() {
-        String expected = ConText.class.getCanonicalName() + "{contacts=" + ConText.getContactList() + "}";
-        assertEquals(expected, ConText.toString());
+        String expected = ConText.class.getCanonicalName() + "{contacts=" + conText.getContactList() + "}";
+        assertEquals(expected, conText.toString());
     }
 
     /**

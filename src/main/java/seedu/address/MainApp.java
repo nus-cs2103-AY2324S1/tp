@@ -57,8 +57,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        ConTextStorage ConTextStorage = new JsonConTextStorage(userPrefs.getConTextFilePath());
-        storage = new StorageManager(ConTextStorage, userPrefsStorage);
+        ConTextStorage conTextStorage = new JsonConTextStorage(userPrefs.getConTextFilePath());
+        storage = new StorageManager(conTextStorage, userPrefsStorage);
 
         model = initModelManager(storage, userPrefs);
 
@@ -75,15 +75,15 @@ public class MainApp extends Application {
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         logger.info("Using data file : " + storage.getConTextFilePath());
 
-        Optional<ReadOnlyConText> ConTextOptional;
+        Optional<ReadOnlyConText> conTextOptional;
         ReadOnlyConText initialData;
         try {
-            ConTextOptional = storage.readConText();
-            if (!ConTextOptional.isPresent()) {
+            conTextOptional = storage.readConText();
+            if (!conTextOptional.isPresent()) {
                 logger.info("Creating a new data file " + storage.getConTextFilePath()
                         + " populated with a sample ConText.");
             }
-            initialData = ConTextOptional.orElseGet(SampleDataUtil::getSampleConText);
+            initialData = conTextOptional.orElseGet(SampleDataUtil::getSampleConText);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getConTextFilePath() + " could not be loaded."
                     + " Will be starting with an empty ConText.");

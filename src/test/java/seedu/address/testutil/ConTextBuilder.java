@@ -10,25 +10,25 @@ import seedu.address.model.contact.Contact;
  */
 public class ConTextBuilder {
 
-    private ConText ConText;
+    private ConText conText;
 
     public ConTextBuilder() {
-        ConText = new ConText();
+        conText = new ConText();
     }
 
-    public ConTextBuilder(ConText ConText) {
-        this.ConText = ConText;
+    public ConTextBuilder(ConText conText) {
+        this.conText = conText;
     }
 
     /**
      * Adds a new {@code Contact} to the {@code ConText} that we are building.
      */
     public ConTextBuilder withContact(Contact contact) {
-        ConText.addContact(contact);
+        conText.addContact(contact);
         return this;
     }
 
     public ConText build() {
-        return ConText;
+        return conText;
     }
 }

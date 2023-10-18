@@ -35,11 +35,11 @@ public interface ConTextStorage {
      * @param ConText cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveConText(ReadOnlyConText ConText) throws IOException;
+    void saveConText(ReadOnlyConText conText) throws IOException;
 
     /**
      * @see #saveConText(ReadOnlyConText)
      */
-    void saveConText(ReadOnlyConText ConText, Path filePath) throws IOException;
+    void saveConText(ReadOnlyConText conText, Path filePath) throws IOException;
 
 }

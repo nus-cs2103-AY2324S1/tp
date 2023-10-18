@@ -60,8 +60,8 @@ public class JsonConTextStorage implements ConTextStorage {
     }
 
     @Override
-    public void saveConText(ReadOnlyConText ConText) throws IOException {
-        saveConText(ConText, filePath);
+    public void saveConText(ReadOnlyConText conText) throws IOException {
+        saveConText(conText, filePath);
     }
 
     /**
@@ -69,12 +69,12 @@ public class JsonConTextStorage implements ConTextStorage {
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveConText(ReadOnlyConText ConText, Path filePath) throws IOException {
-        requireNonNull(ConText);
+    public void saveConText(ReadOnlyConText conText, Path filePath) throws IOException {
+        requireNonNull(conText);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableConText(ConText), filePath);
+        JsonUtil.saveJsonFile(new JsonSerializableConText(conText), filePath);
     }
 
 }

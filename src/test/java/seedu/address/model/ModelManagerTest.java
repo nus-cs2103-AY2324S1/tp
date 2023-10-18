@@ -95,13 +95,13 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        ConText ConText = new ConTextBuilder().withContact(ALICE).withContact(BENSON).build();
+        ConText conText = new ConTextBuilder().withContact(ALICE).withContact(BENSON).build();
         ConText differentConText = new ConText();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(ConText, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(ConText, userPrefs);
+        modelManager = new ModelManager(conText, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(conText, userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -119,7 +119,7 @@ public class ModelManagerTest {
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredContactList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(ConText, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(conText, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
@@ -127,6 +127,6 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setConTextFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(ConText, differentUserPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(conText, differentUserPrefs)));
     }
 }

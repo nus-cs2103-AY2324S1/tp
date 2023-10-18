@@ -25,9 +25,9 @@ public class JsonSerializableConTextTest {
     public void toModelType_typicalContactsFile_success() throws Exception {
         JsonSerializableConText dataFromFile = JsonUtil.readJsonFile(TYPICAL_CONTACTS_FILE,
                 JsonSerializableConText.class).get();
-        ConText ConTextFromFile = dataFromFile.toModelType();
+        ConText conTextFromFile = dataFromFile.toModelType();
         ConText typicalContactsConText = TestData.getTypicalConText();
-        assertEquals(ConTextFromFile, typicalContactsConText);
+        assertEquals(conTextFromFile, typicalContactsConText);
     }
 
     @Test

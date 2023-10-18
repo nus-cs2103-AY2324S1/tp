@@ -42,12 +42,12 @@ public interface Model {
     /**
      * Sets the user prefs' address book file path.
      */
-    void setConTextFilePath(Path ConTextFilePath);
+    void setConTextFilePath(Path conTextFilePath);
 
     /**
      * Replaces address book data with the data in {@code ConText}.
      */
-    void setConText(ReadOnlyConText ConText);
+    void setConText(ReadOnlyConText conText);
 
     /** Returns the ConText */
     ReadOnlyConText getConText();

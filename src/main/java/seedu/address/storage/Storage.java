@@ -27,6 +27,6 @@ public interface Storage extends ConTextStorage, UserPrefsStorage {
     Optional<ReadOnlyConText> readConText() throws DataLoadingException;
 
     @Override
-    void saveConText(ReadOnlyConText ConText) throws IOException;
+    void saveConText(ReadOnlyConText conText) throws IOException;
 
 }

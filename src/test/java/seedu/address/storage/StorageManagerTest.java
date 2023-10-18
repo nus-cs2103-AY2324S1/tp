@@ -24,9 +24,9 @@ public class StorageManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonConTextStorage ConTextStorage = new JsonConTextStorage(getTempFilePath("ab"));
+        JsonConTextStorage conTextStorage = new JsonConTextStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(ConTextStorage, userPrefsStorage);
+        storageManager = new StorageManager(conTextStorage, userPrefsStorage);
     }
 
     private Path getTempFilePath(String fileName) {

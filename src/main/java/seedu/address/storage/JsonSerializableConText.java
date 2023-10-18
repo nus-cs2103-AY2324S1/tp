@@ -45,15 +45,15 @@ class JsonSerializableConText {
      * @throws IllegalValueException if there were any data constraints violated.
      */
     public ConText toModelType() throws IllegalValueException {
-        ConText ConText = new ConText();
+        ConText conText = new ConText();
         for (JsonAdaptedContact jsonAdaptedContact : contacts) {
             Contact contact = jsonAdaptedContact.toModelType();
             if (ConText.hasContact(contact)) {
                 throw new IllegalValueException(Messages.MESSAGE_CONTAIN_DUPLICATE_CONTACT);
             }
-            ConText.addContact(contact);
+            conText.addContact(contact);
         }
-        return ConText;
+        return conText;
     }
 
 }

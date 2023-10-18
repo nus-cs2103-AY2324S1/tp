@@ -115,7 +115,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setConTextFilePath(Path ConTextFilePath) {
+        public void setConTextFilePath(Path conTextFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 

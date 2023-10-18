@@ -94,10 +94,10 @@ public class JsonConTextStorageTest {
     /**
      * Saves {@code ConText} at the specified {@code filePath}.
      */
-    private void saveConText(ReadOnlyConText ConText, String filePath) {
+    private void saveConText(ReadOnlyConText conText, String filePath) {
         try {
             new JsonConTextStorage(Paths.get(filePath))
-                    .saveConText(ConText, addToTestDataPathIfNotNull(filePath));
+                    .saveConText(conText, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }

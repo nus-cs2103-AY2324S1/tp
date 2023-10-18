@@ -45,10 +45,10 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonConTextStorage ConTextStorage =
+        JsonConTextStorage conTextStorage =
                 new JsonConTextStorage(temporaryFolder.resolve("ConText.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(ConTextStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(conTextStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -150,9 +150,9 @@ public class LogicManagerTest {
         Path prefPath = temporaryFolder.resolve("ExceptionUserPrefs.json");
 
         // Inject LogicManager with an ConTextStorage that throws the IOException e when saving
-        JsonConTextStorage ConTextStorage = new JsonConTextStorage(prefPath) {
+        JsonConTextStorage conTextStorage = new JsonConTextStorage(prefPath) {
             @Override
-            public void saveConText(ReadOnlyConText ConText, Path filePath)
+            public void saveConText(ReadOnlyConText conText, Path filePath)
                     throws IOException {
                 throw e;
             }
@@ -160,7 +160,7 @@ public class LogicManagerTest {
 
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(ConTextStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(conTextStorage, userPrefsStorage);
 
         logic = new LogicManager(model, storage);
 
