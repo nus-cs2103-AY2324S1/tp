@@ -1,6 +1,7 @@
 package networkbook.model.person;
 
 import static networkbook.testutil.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -14,7 +15,7 @@ public class GraduationTest {
     }
 
     @Test
-    public void isValidYear() {
+    public void isValidGraduation() {
         // null graduation string
         assertThrows(NullPointerException.class, () -> Graduation.isValidGraduation(null));
 
@@ -31,6 +32,7 @@ public class GraduationTest {
         assertFalse(Graduation.isValidGraduation("AY0110-S1")); // years not consecutive
         assertFalse(Graduation.isValidGraduation("AY6970-S1")); // years not consecutive
         assertFalse(Graduation.isValidGraduation("AY2423-S1")); // years in wrong order
+        assertFalse(Graduation.isValidGraduation("AY2423-S3")); // invalid year and sem
 
 
         // valid graduation strings
@@ -59,5 +61,63 @@ public class GraduationTest {
         // different values -> returns false
         assertFalse(graduation.equals(new Graduation("AY2122-S1")));
         assertFalse(graduation.equals(new Graduation("AY2324-S2")));
+    }
+
+
+    @Test
+    public void isValidGraduationYear() {
+        // invalid
+        assertFalse(Graduation.isValidGraduationYear(2001, 2000)); // reversed
+        assertFalse(Graduation.isValidGraduationYear(2020, 2020)); // difference == 0
+        assertFalse(Graduation.isValidGraduationYear(2025, 2030)); // difference > 1
+
+        // valid
+        assertTrue(Graduation.isValidGraduationYear(1999, 2000));
+        assertTrue(Graduation.isValidGraduationYear(1997, 1998));
+    }
+
+    @Test
+    public void isValidGraduationSemester() {
+        // null
+        assertThrows(NullPointerException.class, () -> Graduation.isValidGraduationSemester(null));
+
+        // invalid
+        assertFalse(Graduation.isValidGraduationSemester(Graduation.Semester.INVALID));
+
+        // valid
+        assertTrue(Graduation.isValidGraduationSemester(Graduation.Semester.S1));
+        assertTrue(Graduation.isValidGraduationSemester(Graduation.Semester.S2));
+    }
+
+    @Test
+    public void parseSemester_validGraduationString_validGraduationSemester() {
+        assertTrue(Graduation.isValidGraduationSemester(Graduation.parseSemester("AY2021-S1")));
+        assertTrue(Graduation.isValidGraduationSemester(Graduation.parseSemester("ay2021-S2")));
+    }
+
+    @Test
+    public void parseSemester_invalidGraduationString_invalidGraduationSemester() {
+        assertFalse(Graduation.isValidGraduationSemester(Graduation.parseSemester("AY2021-S3"))); // invalid sem
+        assertFalse(Graduation.isValidGraduationSemester(Graduation.parseSemester("AY2021-S0"))); // invalid sem
+        assertFalse(Graduation.isValidGraduationSemester(Graduation.parseSemester("sem 1"))); // invalid format
+        assertFalse(Graduation.isValidGraduationSemester(Graduation.parseSemester(""))); // empty
+    }
+
+    @Test
+    public void compareTo() {
+        // earlier AY
+        assertEquals(-1, new Graduation("AY7071-S1").compareTo(new Graduation("AY2324-S1")));
+
+        // later AY
+        assertEquals(1, new Graduation("AY2425-S1").compareTo(new Graduation("AY2324-S1")));
+
+        // same AY earlier sem
+        assertEquals(-1, new Graduation("AY2324-S1").compareTo(new Graduation("AY2324-S2")));
+
+        // same AY later sem
+        assertEquals(1, new Graduation("AY2324-S2").compareTo(new Graduation("AY2324-S1")));
+
+        // same AY same sem
+        assertEquals(0, new Graduation("AY2324-S1").compareTo(new Graduation("AY2324-S1")));
     }
 }
