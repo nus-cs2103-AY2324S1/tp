@@ -26,6 +26,8 @@ public class PersonSortComparator implements Comparator<Person> {
     };
 
     private final Comparator<Person> comparator;
+    private final SortField field;
+    private final SortOrder order;
 
     /**
      * Constructs a PersonSortComparator with the specified field and sort order.
@@ -33,6 +35,8 @@ public class PersonSortComparator implements Comparator<Person> {
     public PersonSortComparator(SortField field, SortOrder order) {
         requireNonNull(field);
         requireNonNull(order);
+        this.field = field;
+        this.order = order;
         this.comparator = generateComparator(field, order);
     }
 
@@ -123,7 +127,7 @@ public class PersonSortComparator implements Comparator<Person> {
         }
 
         PersonSortComparator otherPersonSortComparator = (PersonSortComparator) other;
-        return comparator.equals(otherPersonSortComparator.comparator);
+        return field.equals(otherPersonSortComparator.field) && order.equals(otherPersonSortComparator.order);
     }
 
     @Override
