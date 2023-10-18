@@ -43,7 +43,12 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label nextOfKinPhone;
     @FXML
+    private FlowPane financialPlans;
+    @FXML
+    private Label tagsTitle;
+    @FXML
     private FlowPane tags;
+
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -51,6 +56,7 @@ public class PersonCard extends UiPart<Region> {
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
         this.person = person;
+
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
@@ -60,6 +66,9 @@ public class PersonCard extends UiPart<Region> {
         nextOfKinName.setText(nextOfKinNameText);
         String nextOfKinPhoneText = "Next-of-kin Phone: " + person.getNextOfKinPhone().value;
         nextOfKinPhone.setText(nextOfKinPhoneText);
+        person.getFinancialPlans().stream()
+                .sorted(Comparator.comparing(financialPlan -> financialPlan.financialPlanName))
+                .forEach(financialPlan -> financialPlans.getChildren().add(new Label(financialPlan.financialPlanName)));
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

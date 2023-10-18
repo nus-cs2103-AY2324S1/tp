@@ -311,9 +311,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `UNOFAS` and the **Actor** is the `financial advisor`, unless specified otherwise)
 
-**Use case: Add a client**
+
+
+**U1: Add a client** \
+**Precondition:** NIL
 
 **MSS**
 
@@ -324,17 +327,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. The format is Invalid
-    * 1a1. AddressBook shows an error message.
+* 1a. Client details are invalid.
+    * 1a1. System shows an error message.
 
       Use case resumes at step 1.
 
-**Use case: View list of clients**
+**U2: View list of clients** \
+**Precondition:** NIL
 
 **MSS**
 
 1.  User requests to list clients
-2.  AddressBook shows a list of clients
+2.  System shows a list of clients
 
     Use case ends.
 
@@ -344,7 +348,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: Edit a client's contacts**
+**U3: Edit a client's contacts** \
+**Precondition:** NIL
 
 **MSS**
 
@@ -357,30 +362,45 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The list is empty.
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 1b. User enters the wrong details.
 
-    * 3a1. AddressBook shows an error message.
+    * 1b1. System shows an error message.
 
-      Use case resumes at step 2.
-  
-* 3b. The format is Invalid.
+      Use case resumes at step 1.
 
-  * 3b1. AddressBook shows an error message.
-
-    Use case resumes at step 2.
-
-**Use case: Delete a client**
+**U4: Delete a client** \
+**Precondition:** NIL
 
 **MSS**
 
-1.  User requests to list clients
-2.  AddressBook shows a list of clients
-3.  User requests to delete a specific client in the list
-4.  AddressBook deletes the client
+1. User requests to delete a specific client in the list
+2. System deletes the client
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+* 1b. The specified client is non-existent.
+
+    * 1b1. System shows an error message.
+
+      Use case resumes at step 1.
+
+**U5: Find a client** \
+**Precondition:** NIL
+
+**MSS**
+
+1.  User requests to find client
+2.  System shows a list of clients which match search query
 
     Use case ends.
 
@@ -390,19 +410,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given index is invalid.
-
-    * 3a1. AddressBook shows an error message.
-
-      Use case resumes at step 2.
-
 *{More to be added}*
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+3.  A user with typing speed of above 80WPM for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  A user should be able to have up to 2000 clients.
+5.  The product is offered as a free offline service.
+6.  The codebase should be well-documented to aid in future maintenance and updates.
+7.  Should continue working despite invalid commands and error messages should be shown to the user.
+8.  All features added to the code should be tested.
+9.  All commands should be able to be executed by a financial advisor with little technical knowledge.
+
 
 *{More to be added}*
 
