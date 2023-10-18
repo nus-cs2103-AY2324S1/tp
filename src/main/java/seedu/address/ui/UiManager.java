@@ -13,7 +13,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 
 /**
- * The manager of the UI component.
+ * Implementation of the UI component.
  */
 public class UiManager implements Ui {
 
@@ -41,7 +41,7 @@ public class UiManager implements Ui {
 
         try {
             mainWindow = new MainWindow(primaryStage, logic);
-            mainWindow.show(); //This should be called before creating other UI parts
+            mainWindow.show(); // This should be called before creating other UI parts
             mainWindow.fillInnerParts();
 
         } catch (Throwable e) {

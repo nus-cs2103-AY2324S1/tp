@@ -35,5 +35,5 @@ public interface ContactsStorage {
      *
      * @throws IOException If writing data to the file fails.
      */
-    public void saveContacts(ReadOnlyContacts contactList) throws IOException;
+    public void saveContacts(ReadOnlyContacts contacts) throws IOException;
 }

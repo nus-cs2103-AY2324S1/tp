@@ -22,10 +22,12 @@ public class Contacts implements ReadOnlyContacts {
     public Contacts() {}
 
     /**
-     * Constructs a shallow clone of the specified {@link Contacts}.
+     * Constructs a shallow clone of the specified {@link ReadOnlyContacts}.
      */
-    public Contacts(Contacts contacts) {
-        this.uniqueList.setContacts(contacts.uniqueList);
+    public Contacts(ReadOnlyContacts contacts) {
+        this.uniqueList.setContacts(
+            contacts.getUnmodifiableList()
+        );
     }
 
     @Override

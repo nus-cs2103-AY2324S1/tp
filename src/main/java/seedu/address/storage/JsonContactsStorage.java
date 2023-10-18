@@ -22,7 +22,7 @@ import seedu.address.model.ReadOnlyContacts;
 public class JsonContactsStorage implements ContactsStorage {
     private static final Logger logger = LogsCenter.getLogger(JsonContactsStorage.class);
 
-    private Path path;
+    private final Path path;
 
     public JsonContactsStorage(Path path) {
         this.path = path;

@@ -16,7 +16,7 @@ import seedu.address.model.Settings;
  * JSON file.
  */
 public class JsonSettingsStorage implements SettingsStorage {
-    private Path path;
+    private final Path path;
 
     public JsonSettingsStorage(Path path) {
         this.path = path;

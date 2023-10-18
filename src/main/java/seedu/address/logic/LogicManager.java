@@ -12,7 +12,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.InputParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyContacts;
 import seedu.address.model.contact.Contact;
 import seedu.address.storage.Storage;
 
@@ -31,6 +30,26 @@ public class LogicManager implements Logic {
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
+    }
+
+    @Override
+    public GuiSettings getGuiSettings() {
+        return this.model.getGuiSettings();
+    }
+
+    @Override
+    public void setGuiSettings(GuiSettings guiSettings) {
+        this.model.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public ObservableList<Contact> getFilteredContactList() {
+        return this.model.getFilteredContactList();
+    }
+
+    @Override
+    public Path getContactsPath() {
+        return this.storage.getContactsPath();
     }
 
     @Override
@@ -62,29 +81,4 @@ public class LogicManager implements Logic {
 
         return result;
     }
-
-    // @Override
-    // public ReadOnlyContacts getContactList() {
-    //     return model.getContacts();
-    // }
-
-    // @Override
-    // public ObservableList<Contact> getFilteredContactList() {
-    //     return model.getFilteredContactList();
-    // }
-
-    // @Override
-    // public Path getConTextFilePath() {
-    //     return model.getContactsPath();
-    // }
-
-    // @Override
-    // public GuiSettings getGuiSettings() {
-    //     return model.getGuiSettings();
-    // }
-
-    // @Override
-    // public void setGuiSettings(GuiSettings guiSettings) {
-    //     model.setGuiSettings(guiSettings);
-    // }
 }

@@ -7,7 +7,6 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.ReadOnlyContacts;
 import seedu.address.model.contact.Contact;
 
 
@@ -16,6 +15,13 @@ import seedu.address.model.contact.Contact;
  * API of the Logic component.
  */
 public interface Logic {
+    public GuiSettings getGuiSettings();
+    public void setGuiSettings(GuiSettings guiSettings);
+
+    public ObservableList<Contact> getFilteredContactList();
+
+    public Path getContactsPath();
+
     /**
      * Returns the {@link CommandResult} of executing the specified command
      * text.
@@ -23,30 +29,7 @@ public interface Logic {
      * @throws ParseException If an error occurs during parsing.
      * @throws CommandException If an error occurs during command execution.
      */
-    CommandResult execute(String commandText) throws ParseException, CommandException;
-
-    /**
-     * Returns the ContactList.
-     *
-     * @see seedu.address.model.Model#getContacts()
-     */
-    // ReadOnlyContacts getContactList();
-
-    /** Returns an unmodifiable view of the filtered list of contacts */
-    // ObservableList<Contact> getFilteredContactList();
-
-    /**
-     * Returns the user prefs' address book file path.
-     */
-    // Path getConTextFilePath();
-
-    /**
-     * Returns the user prefs' GUI settings.
-     */
-    // GuiSettings getGuiSettings();
-
-    /**
-     * Set the user prefs' GUI settings.
-     */
-    // void setGuiSettings(GuiSettings guiSettings);
+    public CommandResult execute(
+        String commandText
+    ) throws ParseException, CommandException;
 }

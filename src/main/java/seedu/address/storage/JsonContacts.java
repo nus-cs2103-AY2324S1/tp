@@ -14,6 +14,9 @@ import seedu.address.model.ReadOnlyContacts;
 import seedu.address.model.Contacts;
 import seedu.address.model.contact.Contact;
 
+
+
+//TODO is there a simpler way to get Jackson to automatically map these?
 /**
  * An Immutable ContactsManager that is serializable to JSON format.
  */

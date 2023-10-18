@@ -45,15 +45,30 @@ public class ModelManager implements Model {
         this.filteredContacts = new FilteredList<>(this.contacts.getUnmodifiableList());
     }
 
-    // @Override
-    // public void setContacts(ReadOnlyContacts contactList) {
-    //     this.contacts.overwrite(contacts);
-    // }
+    @Override
+    public ReadOnlyContacts getContacts() {
+        return this.contacts;
+    }
 
-    // @Override
-    // public ReadOnlyContacts getContacts() {
-    //     return contacts;
-    // }
+    @Override
+    public Settings getSettings() {
+        return this.settings;
+    }
+
+    @Override
+    public GuiSettings getGuiSettings() {
+        return this.settings.getGuiSettings();
+    }
+
+    @Override
+    public void setGuiSettings(GuiSettings guiSettings) {
+        this.settings.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public ObservableList<Contact> getFilteredContactList() {
+        return this.filteredContacts;
+    }
 
     // @Override
     // public boolean containsContact(Contact contact) {
@@ -77,48 +92,6 @@ public class ModelManager implements Model {
     //     requireAllNonNull(target, editedContact);
 
     //     contacts.update(target, editedContact);
-    // }
-
-    // @Override
-    // public void setSettings(ReadOnlySettings userPrefs) {
-    //     requireNonNull(userPrefs);
-    //     this.settings.overwrite(userPrefs);
-    // }
-
-    // @Override
-    // public ReadOnlySettings getSettings() {
-    //     return settings;
-    // }
-
-    // @Override
-    // public GuiSettings getGuiSettings() {
-    //     return settings.getGuiSettings();
-    // }
-
-    // @Override
-    // public void setGuiSettings(GuiSettings guiSettings) {
-    //     requireNonNull(guiSettings);
-    //     settings.setGuiSettings(guiSettings);
-    // }
-
-    // @Override
-    // public Path getContactsPath() {
-    //     return settings.getContactsPath();
-    // }
-
-    // @Override
-    // public void setContactsPath(Path conTextFilePath) {
-    //     requireNonNull(conTextFilePath);
-    //     settings.setContactsPath(conTextFilePath);
-    // }
-
-    // /**
-    //  * Returns an unmodifiable view of the list of {@code Contact} backed by the internal list of
-    //  * {@code versionedConText}
-    //  */
-    // @Override
-    // public ObservableList<Contact> getFilteredContactList() {
-    //     return filteredContacts;
     // }
 
     // @Override
