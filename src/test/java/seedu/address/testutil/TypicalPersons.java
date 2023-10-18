@@ -34,7 +34,8 @@ public class TypicalPersons {
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withTelegram("@bensonnn123")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withTags("owesMoney", "friends").withFreeTime("21:15", "22:30").withMods("CS1231", "CS2103T").withHour("6").build();
+            .withTags("owesMoney", "friends").withFreeTime("21:15", "22:30").withMods("CS1231", "CS2103T")
+            .withHour("6").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withTelegram("@carlkurz").withHour("14").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
@@ -45,7 +46,8 @@ public class TypicalPersons {
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
             .withEmail("lydia@example.com").withTelegram("@imfionaa").withFreeTime("21:10", "23:15").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
-            .withEmail("anna@example.com").withTelegram("@georgiey").withFreeTime("07:00", "09:00").withHour("12").build();
+            .withEmail("anna@example.com").withTelegram("@georgiey").withFreeTime("07:00", "09:00")
+            .withHour("12").build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
