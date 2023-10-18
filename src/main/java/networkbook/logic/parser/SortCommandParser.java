@@ -22,7 +22,7 @@ public class SortCommandParser implements Parser<SortCommand> {
     public SortCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(
-                        args, 
+                        args,
                         CliSyntax.PREFIX_SORT_FIELD,
                         CliSyntax.PREFIX_SORT_ORDER
                 );

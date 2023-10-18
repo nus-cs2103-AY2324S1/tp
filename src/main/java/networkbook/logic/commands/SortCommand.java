@@ -3,8 +3,8 @@ package networkbook.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import networkbook.commons.util.ToStringBuilder;
-import networkbook.logic.parser.CliSyntax;
 import networkbook.logic.Messages;
+import networkbook.logic.parser.CliSyntax;
 import networkbook.model.Model;
 import networkbook.model.person.PersonSortComparator;
 

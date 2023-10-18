@@ -22,12 +22,14 @@ public class PersonSortComparator implements Comparator<Person> {
             return 1;
         } else {
             return 0;
-        } 
+        }
     };
-
 
     private final Comparator<Person> comparator;
 
+    /**
+     * Constructs a PersonSortComparator with the specified field and sort order.
+     */
     public PersonSortComparator(SortField field, SortOrder order) {
         requireNonNull(field);
         requireNonNull(order);
@@ -67,11 +69,11 @@ public class PersonSortComparator implements Comparator<Person> {
      * @return Comparator.
      */
     public static Comparator<Person> generateNameComparator(boolean isAsc) {
-        return (Person o1, Person o2) -> isAsc ?
-                o1.getName().compareTo(o2.getName()) : o2.getName().compareTo(o1.getName());
+        return (Person o1, Person o2) -> isAsc
+                ? o1.getName().compareTo(o2.getName())
+                : o2.getName().compareTo(o1.getName());
     }
 
-    
     /**
      * Generates comparator based on graduation date and specified order.
      * @param isAsc True if order is ascending, false otherwise.
@@ -171,7 +173,6 @@ public class PersonSortComparator implements Comparator<Person> {
         requireNonNull(field);
         return field != SortField.INVALID;
     }
-    
 
     /**
      * Parses user input {@code order} into a {@code SortOrder}
