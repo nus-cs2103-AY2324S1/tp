@@ -12,9 +12,7 @@ import java.util.Set;
  */
 public class RiskLevel {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
-
+    public static final String MESSAGE_CONSTRAINTS = "Risk level should be one of the following three: high/medium/low";
     private static final Set<String> ALLOWED_VALUES = new HashSet<>();
 
     static {
@@ -39,7 +37,7 @@ public class RiskLevel {
      * Returns true if a given string is a valid tag name.
      */
     public static boolean isValidRiskLevel(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return ALLOWED_VALUES.contains(test);
     }
 
     @Override
