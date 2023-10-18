@@ -1,17 +1,16 @@
 package seedu.address.commons.core;
 
 import java.awt.Point;
-import java.io.Serializable;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
 
-/**
- * A Serializable class that contains the GUI settings.
- * Guarantees: immutable.
- */
-public class GuiSettings implements Serializable {
 
+
+/**
+ * Represents an immutable snapshot of GUI settings.
+ */
+public class GuiSettings {
     private static final double DEFAULT_HEIGHT = 600;
     private static final double DEFAULT_WIDTH = 740;
 
