@@ -12,7 +12,7 @@ import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand.EditContactDescriptor;
-import seedu.address.model.ContactsManager;
+import seedu.address.model.Contacts;
 import seedu.address.model.contact.Contact;
 
 
@@ -102,10 +102,10 @@ public final class TestData {
     /**
      * Returns an {@code ContactsManager} with all the typical contacts.
      */
-    public static ContactsManager getTypicalContactsManager() {
-        ContactsManager ab = new ContactsManager();
+    public static Contacts getTypicalContactsManager() {
+        Contacts ab = new Contacts();
         for (Contact contact : getTypicalContacts()) {
-            ab.addContact(contact);
+            ab.add(contact);
         }
         return ab;
     }
@@ -114,7 +114,6 @@ public final class TestData {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 
-    //TODO Refine the various test data above this line
     /**
      * Holds valid test data.
      */
