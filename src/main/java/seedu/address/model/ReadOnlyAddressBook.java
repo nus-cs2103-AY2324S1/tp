@@ -1,7 +1,5 @@
 package seedu.address.model;
 
-import java.util.ArrayList;
-
 import javafx.collections.ObservableList;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
@@ -18,6 +16,6 @@ public interface ReadOnlyAddressBook {
      */
     ObservableList<Person> getPersonList();
 
-    ArrayList<Event> getEventList();
+    ObservableList<Event> getEventList();
 
 }

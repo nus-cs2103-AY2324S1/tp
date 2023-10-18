@@ -162,7 +162,6 @@ public class AddCommandTest {
         }
 
         @Override
-
         public void addEvent(Event toAdd) {
             throw new AssertionError("This method should not be called.");
         }
@@ -182,7 +181,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public ArrayList<Event> getEventList() {
+        public ObservableList<Event> getEventList() {
             throw new AssertionError("This method should not be called.");
         }
     }

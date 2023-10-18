@@ -9,7 +9,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -97,7 +96,7 @@ public class AddressBookTest {
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
 
-        private final ArrayList<Event> events = new ArrayList<>();
+        private final ObservableList<Event> events = FXCollections.observableArrayList();
 
         AddressBookStub(Collection<Person> persons) {
             this.persons.setAll(persons);
@@ -110,7 +109,7 @@ public class AddressBookTest {
 
         //TODO: Implement this method
         @Override
-        public ArrayList<Event> getEventList() {
+        public ObservableList<Event> getEventList() {
             return events;
         }
     }

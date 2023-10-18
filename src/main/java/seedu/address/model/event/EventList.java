@@ -3,24 +3,20 @@ package seedu.address.model.event;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.ArrayList;
+import java.util.List;
 
-import seedu.address.model.person.exceptions.PersonNotFoundException;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import seedu.address.model.event.exceptions.EventNotFoundException;
 
 /**
  * Represents a list of events in the address book. Operations for managing the list of events are implemented here.
  */
 public class EventList {
 
-    private ArrayList<Event> events = new ArrayList<>();
-
-    /**
-     * Returns the list of events.
-     * @return ArrayList of events.
-     */
-    public ArrayList<Event> getEventList() {
-        return this.events;
-    }
+    private final ObservableList<Event> internalList = FXCollections.observableArrayList();
+    private final ObservableList<Event> internalUnmodifiableList =
+            FXCollections.unmodifiableObservableList(internalList);
 
     /**
      * Adds an event to the list of events.
@@ -28,7 +24,7 @@ public class EventList {
      */
     public void addEvent(Event event) {
         requireNonNull(event);
-        this.events.add(event);
+        this.internalList.add(event);
     }
 
 
@@ -48,19 +44,19 @@ public class EventList {
     public void setEvent(Event target, Event editedEvent) {
         requireAllNonNull(target, editedEvent);
 
-        int index = this.events.indexOf(target);
+        int index = this.internalList.indexOf(target);
         if (index == -1) {
-            throw new PersonNotFoundException(); // Change to event exception
+            throw new EventNotFoundException(); // Change to event exception
         }
 
-        this.events.set(index, editedEvent);
+        this.internalList.set(index, editedEvent);
     }
 
-    public void setEvents(ArrayList<Event> newEvents) {
-        this.events = newEvents;
+    public void setEvents(List<Event> newEvents) {
+        this.internalList.setAll(newEvents);
     }
 
-    public ArrayList<Event> getEventsList() {
-        return this.events;
+    public ObservableList<Event> asUnmodifiableObservableList() {
+        return internalUnmodifiableList;
     }
 }

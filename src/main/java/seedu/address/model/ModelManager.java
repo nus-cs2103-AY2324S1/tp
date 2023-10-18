@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -30,7 +29,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
 
-    private final ArrayList<Event> events;
+    private final FilteredList<Event> events;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -43,7 +42,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         this.filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        this.events = this.addressBook.getEventList();
+        this.events = new FilteredList<>(this.addressBook.getEventList());
     }
 
     public ModelManager() {
@@ -146,7 +145,7 @@ public class ModelManager implements Model {
      * @return
      */
     @Override
-    public ArrayList<Event> getEventList() {
+    public ObservableList<Event> getEventList() {
         return this.events;
     }
 
@@ -227,9 +226,4 @@ public class ModelManager implements Model {
                 && this.userPrefs.equals(otherModelManager.userPrefs)
                 && this.filteredPersons.equals(otherModelManager.filteredPersons);
     }
-
-
-
-
-
 }
