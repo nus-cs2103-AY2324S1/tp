@@ -23,7 +23,7 @@ public class Settings implements ReadOnlySettings {
     public Settings() {}
 
     /**
-     * Constructs a clone of the specified settings.
+     * Constructs a clone of the specified {@link ReadOnlySettings}.
      */
     public Settings(ReadOnlySettings newSettings) {
         overwrite(newSettings);
@@ -79,7 +79,7 @@ public class Settings implements ReadOnlySettings {
     }
 
     /**
-     * Overwrites current settings with the specified settings.
+     * Overwrites current settings with the specified {@link ReadOnlySettings}.
      */
     public void overwrite(ReadOnlySettings newSettings) {
         setContactsPath(newSettings.getContactsPath());

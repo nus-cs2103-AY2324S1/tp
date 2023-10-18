@@ -10,7 +10,7 @@ import seedu.address.commons.core.GuiSettings;
  * Read-only view of settings.
  */
 public interface ReadOnlySettings {
-    Path getContactsFilePath();
+    public Path getContactsPath();
 
-    GuiSettings getGuiSettings();
+    public GuiSettings getGuiSettings();
 }
