@@ -1,10 +1,12 @@
 package seedu.address.model.lessons;
 
+import static seedu.address.model.lessons.LessonTiming.getMinutesFromTime;
+
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.Map;
 
-import static seedu.address.model.lessons.LessonTiming.getMinutesFromTime;
+
 
 /**
  * Encapsulates a week in which a student has lessons.
@@ -84,10 +86,14 @@ public class Week {
 
     @Override
     public String toString() {
-         // todo
+        // todo
         return "Lessons on: " + this.serialize();
 
     }
+    /**
+     * Serialize Week to a string
+     * @return stringified version of week
+     */
     public String serialize() {
         StringBuilder result = new StringBuilder();
         for (Map.Entry<Days, ArrayList<LessonTiming>> entry : this.lessons.entrySet()) {

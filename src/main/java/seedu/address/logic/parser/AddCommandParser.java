@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Schedule;
+import seedu.address.model.lessons.Schedule;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -52,7 +52,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Schedule schedule = null; // Todo @yiwen
 
-        Person person = new Person(name, phone, email, address, subjectList, tagList, schedule);
+        Person person = new Person(name, phone, email, address, subjectList, tagList);
 
         return new AddCommand(person);
     }

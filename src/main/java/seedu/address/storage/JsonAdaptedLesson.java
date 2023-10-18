@@ -1,14 +1,15 @@
 package seedu.address.storage;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.lessons.Lesson;
 import seedu.address.model.person.Subject;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Jackson-friendly version of {@link seedu.address.model.lessons.Lesson}
@@ -25,10 +26,10 @@ public class JsonAdaptedLesson {
     @JsonCreator
     public JsonAdaptedLesson(@JsonProperty("start") String start, @JsonProperty("end") String end,
                              @JsonProperty("subject") String subject, @JsonProperty("students") String students) {
-       this.start = start;
-       this.end = end;
-       this.subject = subject;
-       this.students = students;
+        this.start = start;
+        this.end = end;
+        this.subject = subject;
+        this.students = students;
 
     }
 
@@ -41,7 +42,11 @@ public class JsonAdaptedLesson {
         subject = source.serializeSubject();
         students = source.serializeStudents();
     }
-
+    /**
+     * Converts this Jackson-friendly adapted lesson object into the model's {@code Lesson} object.
+     *
+     * @throws IllegalValueException if there were any data constraints violated in the adapted lesson.
+     */
     public Lesson toModelType() throws IllegalValueException {
         LocalDateTime start = Lesson.deserializeDate(this.start);
         LocalDateTime end = Lesson.deserializeDate(this.end);

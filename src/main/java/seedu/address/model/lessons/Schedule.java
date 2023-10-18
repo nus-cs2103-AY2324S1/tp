@@ -1,12 +1,10 @@
-package seedu.address.model.person;
-
-import seedu.address.model.lessons.Lesson;
+package seedu.address.model.lessons;
 
 import java.util.ArrayList;
 
 
 /**
- * Encaspulates a student's tutoring schedule.
+ * Encapsulates a student's tutoring schedule.
  */
 public class Schedule {
 
@@ -40,7 +38,10 @@ public class Schedule {
 
     }
 
-
+    /**
+     * Deserialize to a schedule
+     * @return stringified version of schedule
+     */
     public Schedule deserialize() {
         // TODO
         return new Schedule();
