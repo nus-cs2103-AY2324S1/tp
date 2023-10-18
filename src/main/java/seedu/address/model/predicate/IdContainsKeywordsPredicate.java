@@ -1,5 +1,6 @@
 package seedu.address.model.predicate;
 
+import java.util.HashSet;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -27,6 +28,23 @@ public class IdContainsKeywordsPredicate extends SerializablePredicate {
     @JsonCreator
     public static IdContainsKeywordsPredicate create(@JsonProperty("keywords") List<String> keywords) {
         return new IdContainsKeywordsPredicate(keywords);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof IdContainsKeywordsPredicate)) {
+            return false;
+        }
+
+        IdContainsKeywordsPredicate otherPredicate = (IdContainsKeywordsPredicate) other;
+        HashSet<String> keywords = new HashSet<String>(this.keywords);
+        HashSet<String> otherKeywords = new HashSet<String>(otherPredicate.keywords);
+        return keywords.equals(otherKeywords);
     }
 
     @Override

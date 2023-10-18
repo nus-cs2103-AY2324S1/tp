@@ -30,6 +30,21 @@ public class ContainsTagPredicate extends SerializablePredicate {
     }
 
     @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ContainsTagPredicate)) {
+            return false;
+        }
+
+        ContainsTagPredicate otherPredicate = (ContainsTagPredicate) other;
+        return tag.equals(otherPredicate.tag);
+    }
+
+    @Override
     public String toString() {
         return "Tag Filter: " + tag.getTagName();
     }

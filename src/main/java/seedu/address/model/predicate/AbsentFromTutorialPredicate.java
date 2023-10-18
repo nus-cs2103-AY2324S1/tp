@@ -46,6 +46,23 @@ public class AbsentFromTutorialPredicate extends SerializablePredicate {
     }
 
     @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof AbsentFromTutorialPredicate)) {
+            return false;
+        }
+
+        AbsentFromTutorialPredicate otherPredicate = (AbsentFromTutorialPredicate) other;
+        return index.equals(otherPredicate.index)
+                && tag.equals(otherPredicate.tag);
+    }
+
+
+    @Override
     public String toString() {
         return "Attendance Filter: " + index + " " + tag.getTagName();
     }
