@@ -12,7 +12,7 @@ import networkbook.logic.commands.CommandTestUtil;
 import networkbook.logic.commands.EditCommand;
 import networkbook.model.person.Course;
 import networkbook.model.person.Email;
-import networkbook.model.person.GraduatingYear;
+import networkbook.model.person.Graduation;
 import networkbook.model.person.Link;
 import networkbook.model.person.Name;
 import networkbook.model.person.Phone;
@@ -71,8 +71,8 @@ public class AddCommandParserTest {
                 "1" + CommandTestUtil.INVALID_LINK_DESC,
                 Link.MESSAGE_CONSTRAINTS); // invalid link
         assertParseFailure(parser,
-                "1" + CommandTestUtil.INVALID_GRADUATING_YEAR_DESC,
-                GraduatingYear.MESSAGE_CONSTRAINTS); // invalid Graduating Year
+                "1" + CommandTestUtil.INVALID_GRADUATION_DESC,
+                Graduation.MESSAGE_CONSTRAINTS); // invalid Graduating Year
         assertParseFailure(parser,
                 "1" + CommandTestUtil.INVALID_COURSE_DESC,
                 Course.MESSAGE_CONSTRAINTS); // invalid Course
@@ -103,7 +103,7 @@ public class AddCommandParserTest {
         Index targetIndex = TypicalIndexes.INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.TAG_DESC_HUSBAND
                 + CommandTestUtil.EMAIL_DESC_AMY + CommandTestUtil.LINK_DESC_AMY
-                + CommandTestUtil.GRADUATING_YEAR_DESC_AMY + CommandTestUtil.COURSE_DESC_AMY
+                + CommandTestUtil.GRADUATION_DESC_AMY + CommandTestUtil.COURSE_DESC_AMY
                 + CommandTestUtil.SPECIALISATION_DESC_AMY
                 + CommandTestUtil.NAME_DESC_AMY + CommandTestUtil.TAG_DESC_FRIEND;
 
@@ -112,7 +112,7 @@ public class AddCommandParserTest {
                 .withPhone(CommandTestUtil.VALID_PHONE_BOB)
                 .withEmail(CommandTestUtil.VALID_EMAIL_AMY)
                 .withLink(CommandTestUtil.VALID_LINK_AMY)
-                .withGraduatingYear(CommandTestUtil.VALID_GRADUATING_YEAR_AMY)
+                .withGraduation(CommandTestUtil.VALID_GRADUATION_AMY)
                 .withCourse(CommandTestUtil.VALID_COURSE_AMY)
                 .withSpecialisation(CommandTestUtil.VALID_SPECIALISATION_AMY)
                 .withTags(CommandTestUtil.VALID_TAG_HUSBAND, CommandTestUtil.VALID_TAG_FRIEND)
@@ -164,9 +164,9 @@ public class AddCommandParserTest {
         expectedCommand = new AddCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // graduating year
-        userInput = targetIndex.getOneBased() + CommandTestUtil.GRADUATING_YEAR_DESC_AMY;
-        descriptor = new EditPersonDescriptorBuilder().withGraduatingYear(CommandTestUtil.VALID_GRADUATING_YEAR_AMY)
+        // graduation date
+        userInput = targetIndex.getOneBased() + CommandTestUtil.GRADUATION_DESC_AMY;
+        descriptor = new EditPersonDescriptorBuilder().withGraduation(CommandTestUtil.VALID_GRADUATION_AMY)
                     .build();
         expectedCommand = new AddCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);

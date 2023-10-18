@@ -58,7 +58,7 @@ public class EditPersonDescriptorTest {
 
         // different graduating year -> returns false
         editedAmy = new EditPersonDescriptorBuilder(CommandTestUtil.DESC_AMY)
-                .withGraduatingYear(CommandTestUtil.VALID_GRADUATING_YEAR_BOB)
+                .withGraduation(CommandTestUtil.VALID_GRADUATION_BOB)
                 .build();
         assertFalse(CommandTestUtil.DESC_AMY.equals(editedAmy));
 
@@ -97,8 +97,8 @@ public class EditPersonDescriptorTest {
                 + editPersonDescriptor.getName().orElse(null) + ", phones="
                 + editPersonDescriptor.getPhones().orElse(null) + ", emails="
                 + editPersonDescriptor.getEmails().orElse(null) + ", links="
-                + editPersonDescriptor.getLinks().orElse(null) + ", graduating year="
-                + editPersonDescriptor.getGraduatingYear().orElse(null) + ", course="
+                + editPersonDescriptor.getLinks().orElse(null) + ", graduation="
+                + editPersonDescriptor.getGraduation().orElse(null) + ", course="
                 + editPersonDescriptor.getCourse().orElse(null) + ", specialisation="
                 + editPersonDescriptor.getSpecialisation().orElse(null) + ", tags="
                 + editPersonDescriptor.getTags().orElse(null) + "}";

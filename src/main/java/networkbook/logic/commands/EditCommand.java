@@ -16,7 +16,7 @@ import networkbook.logic.parser.CliSyntax;
 import networkbook.model.Model;
 import networkbook.model.person.Course;
 import networkbook.model.person.Email;
-import networkbook.model.person.GraduatingYear;
+import networkbook.model.person.Graduation;
 import networkbook.model.person.Link;
 import networkbook.model.person.Name;
 import networkbook.model.person.Person;
@@ -41,7 +41,7 @@ public class EditCommand extends Command {
             + "[" + CliSyntax.PREFIX_PHONE + "PHONE] "
             + "[" + CliSyntax.PREFIX_EMAIL + "EMAIL] "
             + "[" + CliSyntax.PREFIX_LINK + "LINK] "
-            + "[" + CliSyntax.PREFIX_GRADUATING_YEAR + "GRADUATING YEAR] "
+            + "[" + CliSyntax.PREFIX_GRADUATION + " GRADUATION DATE] "
             + "[" + CliSyntax.PREFIX_COURSE + "COURSE OF STUDY] "
             + "[" + CliSyntax.PREFIX_SPECIALISATION + "SPECIALISATION] "
             + "[" + CliSyntax.PREFIX_TAG + "TAG] "
@@ -101,8 +101,8 @@ public class EditCommand extends Command {
         UniqueList<Phone> updatedPhones = editPersonDescriptor.getPhones().orElse(personToEdit.getPhones());
         UniqueList<Email> updatedEmails = editPersonDescriptor.getEmails().orElse(personToEdit.getEmails());
         UniqueList<Link> updatedLink = editPersonDescriptor.getLinks().orElse(personToEdit.getLinks());
-        GraduatingYear updatedGraduatingYear = editPersonDescriptor.getGraduatingYear()
-                .orElse(personToEdit.getGraduatingYear().orElse(null));
+        Graduation updatedGraduation = editPersonDescriptor.getGraduation()
+                .orElse(personToEdit.getGraduation().orElse(null));
         Course updatedCourse = editPersonDescriptor.getCourse().orElse(personToEdit.getCourse()
                 .orElse(null));
         Specialisation updatedSpecialisation = editPersonDescriptor.getSpecialisation()
@@ -111,7 +111,7 @@ public class EditCommand extends Command {
         Priority updatedPriority = editPersonDescriptor.getPriority().orElse(personToEdit.getPriority()
                                                                      .orElse(null));
 
-        return new Person(updatedName, updatedPhones, updatedEmails, updatedLink, updatedGraduatingYear,
+        return new Person(updatedName, updatedPhones, updatedEmails, updatedLink, updatedGraduation,
                 updatedCourse, updatedSpecialisation, updatedTags, updatedPriority);
     }
 
@@ -148,7 +148,7 @@ public class EditCommand extends Command {
         private Optional<UniqueList<Phone>> phones = Optional.empty();
         private Optional<UniqueList<Email>> emails = Optional.empty();
         private Optional<UniqueList<Link>> links = Optional.empty();
-        private GraduatingYear graduatingYear;
+        private Graduation graduation;
         private Course course;
         private Specialisation specialisation;
         private UniqueList<Tag> tags;
@@ -165,7 +165,7 @@ public class EditCommand extends Command {
             setPhones(toCopy.phones.map(UniqueList::copy).orElse(null));
             setEmails(toCopy.emails.map(UniqueList::copy).orElse(null));
             setLinks(toCopy.links.map(UniqueList::copy).orElse(null));
-            setGraduatingYear(toCopy.graduatingYear);
+            setGraduation(toCopy.graduation);
             setCourse(toCopy.course);
             setSpecialisation(toCopy.specialisation);
             setTags(toCopy.getTags().map(UniqueList::copy).orElse(null));
@@ -176,7 +176,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, graduatingYear, course,
+            return CollectionUtil.isAnyNonNull(name, graduation, course,
                         specialisation, tags, priority)
                     || (phones.isPresent() && !phones.get().isEmpty())
                     || (emails.isPresent() && !emails.get().isEmpty())
@@ -260,12 +260,12 @@ public class EditCommand extends Command {
             return links;
         }
 
-        public void setGraduatingYear(GraduatingYear graduatingYear) {
-            this.graduatingYear = graduatingYear;
+        public void setGraduation(Graduation graduation) {
+            this.graduation = graduation;
         }
 
-        public Optional<GraduatingYear> getGraduatingYear() {
-            return Optional.ofNullable(graduatingYear);
+        public Optional<Graduation> getGraduation() {
+            return Optional.ofNullable(graduation);
         }
 
         public void setCourse(Course course) {
@@ -333,7 +333,7 @@ public class EditCommand extends Command {
                     && Objects.equals(phones, otherEditPersonDescriptor.phones)
                     && Objects.equals(emails, otherEditPersonDescriptor.emails)
                     && Objects.equals(links, otherEditPersonDescriptor.links)
-                    && Objects.equals(graduatingYear, otherEditPersonDescriptor.graduatingYear)
+                    && Objects.equals(graduation, otherEditPersonDescriptor.graduation)
                     && Objects.equals(course, otherEditPersonDescriptor.course)
                     && Objects.equals(specialisation, otherEditPersonDescriptor.specialisation)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags)
@@ -347,7 +347,7 @@ public class EditCommand extends Command {
                     .add("phones", phones.orElse(null))
                     .add("emails", emails.orElse(null))
                     .add("links", links.orElse(null))
-                    .add("graduating year", graduatingYear)
+                    .add("graduation", graduation)
                     .add("course", course)
                     .add("specialisation", specialisation)
                     .add("tags", tags);
