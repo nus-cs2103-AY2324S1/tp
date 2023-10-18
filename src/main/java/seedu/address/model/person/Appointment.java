@@ -17,7 +17,7 @@ public class Appointment {
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "(\\d{4}-(0?[1-9]|1[0-2])-(0?[1-9]|[1-2]\\d|3[0-1])"
-            + " (2[0-3]:[0-5]?\\d|[0-1]?\\d:[0-5]?\\d) (2[0-3]:[0-5]?\\d|[0-1]?\\d:[0-5]?\\d))|";
+            + " (2[0-3]:[0-5]?\\d|[0-1]?\\d:[0-5]?\\d) (2[0-3]:[0-5]?\\d|[0-1]?\\d:[0-5]?\\d))";
 
     public final String value;
 
@@ -37,14 +37,6 @@ public class Appointment {
      */
     public static boolean isValidAppointment(String test) {
         return test.matches(VALIDATION_REGEX);
-    }
-
-    public static boolean isValidStart(String start) {
-        return start.matches("\\d{2}-\\d{2}-\\d{4} \\d{2}:\\d{2}");
-    }
-
-    public static boolean isValidEnd(String end) {
-        return end.matches("\\d{2}:\\d{2}");
     }
 
     @Override

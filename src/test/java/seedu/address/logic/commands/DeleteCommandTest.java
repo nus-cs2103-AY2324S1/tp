@@ -93,7 +93,7 @@ public class DeleteCommandTest {
         command.execute(model);
 
         Person editedPerson = model.getFilteredPersonList().get(0);
-        assertTrue(editedPerson.getAppointment().get().value.equals(""));
+        assertTrue(editedPerson.getAppointment().isEmpty());
     }
 
     @Test

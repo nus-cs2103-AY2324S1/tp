@@ -133,15 +133,9 @@ public class DeleteCommand extends Command {
 
         DeleteCommand otherDeleteCommand = (DeleteCommand) other;
 
-        if (name != null && !name.equals(otherDeleteCommand.name)) {
-            return false;
-        }
-
-        if (nric != null && !nric.equals(otherDeleteCommand.nric)) {
-            return false;
-        }
-
-        return deletePersonDescriptor.equals(otherDeleteCommand.deletePersonDescriptor);
+        return Objects.equals(nric, otherDeleteCommand.nric)
+                && Objects.equals(name, otherDeleteCommand.name)
+                && Objects.equals(deletePersonDescriptor, otherDeleteCommand.deletePersonDescriptor);
     }
 
     @Override
@@ -171,7 +165,7 @@ public class DeleteCommand extends Command {
                 : null;
 
         if (deletePersonDescriptor.getAppointment()) {
-            updatedAppointment = new Appointment("");
+            updatedAppointment = null;
         }
 
         return new Person(updatedName, updatedNric, updatedPhone, updatedEmail, updatedAddress, updatedAppointment,
