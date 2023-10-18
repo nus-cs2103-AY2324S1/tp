@@ -523,7 +523,7 @@ based on an identifier
 * **ObservableList**: A list implementation that allows other objects to observe and be notified when there is changes
 * **JSON**: Stands for JavaScript Object Notation, it is a lightweight data interchange format
 * **Classes**: Defines an object in the application
-* **CLI**: Stands for Command-Line Interface, it is a text-based interface for interaction with computer system or software applications through use of commands 
+* **CLI**: Stands for Command-Line Interface, it is a text-based interface for interaction with computer system or software applications through use of commands
 * **IC**: Stands for Identity Card
 * **Database**: A structured collection of data organized and stored in computer system
 * **Latency**: The time delay between user's action or request and the system's response
