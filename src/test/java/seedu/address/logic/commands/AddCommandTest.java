@@ -156,12 +156,27 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Band> getFilteredBandList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredMusicianList(Predicate<Musician> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
+        public void updateFilteredBandList(Predicate<Band> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasBand(Band band) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredMusicianListFromBands() {
             throw new AssertionError("This method should not be called.");
         }
 

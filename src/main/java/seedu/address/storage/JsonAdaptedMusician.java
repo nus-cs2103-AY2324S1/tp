@@ -27,8 +27,8 @@ class JsonAdaptedMusician {
     private final String phone;
     private final String email;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
-    private final List<JsonAdaptedTag> instruments = new ArrayList<>();
-    private final List<JsonAdaptedTag> genres = new ArrayList<>();
+    private final List<JsonAdaptedInstrument> instruments = new ArrayList<>();
+    private final List<JsonAdaptedGenre> genres = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedMusician} with the given musician details.
@@ -37,8 +37,8 @@ class JsonAdaptedMusician {
     public JsonAdaptedMusician(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                                @JsonProperty("email") String email,
                                @JsonProperty("tags") List<JsonAdaptedTag> tags,
-                               @JsonProperty("instruments") List<JsonAdaptedTag> instruments,
-                               @JsonProperty("genres") List<JsonAdaptedTag> genres) {
+                               @JsonProperty("instruments") List<JsonAdaptedInstrument> instruments,
+                               @JsonProperty("genres") List<JsonAdaptedGenre> genres) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -64,10 +64,10 @@ class JsonAdaptedMusician {
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
         instruments.addAll(source.getInstruments().stream()
-                .map(JsonAdaptedTag::new)
+                .map(JsonAdaptedInstrument::new)
                 .collect(Collectors.toList()));
         genres.addAll(source.getGenres().stream()
-                .map(JsonAdaptedTag::new)
+                .map(JsonAdaptedGenre::new)
                 .collect(Collectors.toList()));
     }
 
@@ -114,8 +114,6 @@ class JsonAdaptedMusician {
             throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
         }
         final Email modelEmail = new Email(email);
-
-
 
         final Set<Tag> modelTags = new HashSet<>(musicianTags);
         final Set<Tag> modelInstruments = new HashSet<>(musicianInstruments);

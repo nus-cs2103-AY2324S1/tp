@@ -145,7 +145,19 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Returns an unmodifiable view of the list of {@code Musician} backed by the internal list of
+     * Updates the {@code FilteredMusicianList} to contain all musicians in the {@code FilteredBands}.
+     */
+    public void updateFilteredMusicianListFromBands() {
+        requireNonNull(filteredBands);
+        for (Band b : filteredBands) {
+            filteredMusicians.addAll(b.getMusicians());
+        }
+    }
+
+    //=========== Filtered Band List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Band} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
@@ -158,7 +170,6 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredBands.setPredicate(predicate);
     }
-
 
     @Override
     public boolean equals(Object other) {
