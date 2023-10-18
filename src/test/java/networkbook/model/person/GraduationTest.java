@@ -36,7 +36,8 @@ public class GraduationTest {
 
         // valid graduation strings
         assertTrue(Graduation.isValidGraduation("AY2324-S1")); // follows format
-        assertTrue(Graduation.isValidGraduation("AY6970-S1")); // follows fomat
+        assertTrue(Graduation.isValidGraduation("AY6970-S1")); // follows format
+        assertTrue(Graduation.isValidGraduation("AY9900-S1")); // follows format
         assertTrue(Graduation.isValidGraduation("AY0001-S1")); // follows format
         assertTrue(Graduation.isValidGraduation("aY7071-s2")); // follows format, case insensitive
         assertTrue(Graduation.isValidGraduation(" AY6869-S1 ")); // follows format, leading/trailing whitespace

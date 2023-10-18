@@ -82,7 +82,7 @@ public class Graduation implements Comparable<Graduation> {
         String ayEnd = matchGroup(gradString, 2);
         int ayStartShortInt = Integer.parseInt(ayStart);
         int ayEndShortInt = Integer.parseInt(ayEnd);
-        int addedPart = (ayStartShortInt < YEAR_THRESHOLD) ? YEAR_PART_HI : YEAR_PART_LO;
+        int addedPart = (ayStartShortInt < YEAR_THRESHOLD) ? YEAR_PART_HI : YEAR_PART_LO; // 1970 - 2069
         int ayStartFull = ayStartShortInt + addedPart;
         int ayEndFull = ayEndShortInt + addedPart;
         return ayStartFull;
@@ -100,7 +100,7 @@ public class Graduation implements Comparable<Graduation> {
         String ayEnd = matchGroup(gradString, 2);
         int ayStartShortInt = Integer.parseInt(ayStart);
         int ayEndShortInt = Integer.parseInt(ayEnd);
-        int addedPart = (ayStartShortInt < YEAR_THRESHOLD) ? YEAR_PART_HI : YEAR_PART_LO;
+        int addedPart = (ayEndShortInt <= YEAR_THRESHOLD) ? YEAR_PART_HI : YEAR_PART_LO; // 1971 - 2070
         int ayStartFull = ayStartShortInt + addedPart;
         int ayEndFull = ayEndShortInt + addedPart;
         return ayEndFull;
