@@ -112,9 +112,6 @@ class JsonAdaptedStudent {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     ClassDetails.class.getSimpleName()));
         }
-        if (!ClassDetails.isValidClassDetails(classDetails.toModelType().value)) {
-            throw new IllegalValueException(ClassDetails.MESSAGE_CONSTRAINTS);
-        }
         final ClassDetails modelClassDetails = classDetails.toModelType();
 
         final Set<Tag> modelTags = new HashSet<>(personTags);

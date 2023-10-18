@@ -34,6 +34,11 @@ public class ClassParticipationTracker {
         IntStream.range(0, numOfTut).forEach(i -> classPartList[i] = new ClassParticipation());
     }
 
+    /**
+     * Constructs an {@code ClassParticipationTracker}. With a given class participation tracker list.
+     *
+     * @param classParticipationTracker A list of booleans representing the class participation.
+     */
     public ClassParticipationTracker(List<Boolean> classParticipationTracker) {
         requireNonNull(classParticipationTracker);
         classPartList = new ClassParticipation[classParticipationTracker.size()];

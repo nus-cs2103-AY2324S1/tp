@@ -11,6 +11,9 @@ public class ClassParticipation {
         isParticipated = false;
     }
 
+    /**
+     * Constructs a {@code ClassParticipation} with the given isParticipated value.
+     */
     public ClassParticipation(boolean isParticipated) {
         this.isParticipated = isParticipated;
     }

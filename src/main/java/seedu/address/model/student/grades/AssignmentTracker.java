@@ -9,9 +9,10 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
- * Represents an array of assignments to track the students grades.
+ * Represents an array of assignments to track the student's grades.
  */
 public class AssignmentTracker {
 
@@ -31,11 +32,17 @@ public class AssignmentTracker {
         IntStream.range(0, numOfAssignments).forEach(i -> assignments[i] = new Assignment());
     }
 
-    public AssignmentTracker(List<Integer> assignmentTracker) {
+    /**
+     * Constructs an {@code AssignmentTracker}. With the given assignment tracker list.
+     *
+     * @param assignmentTracker A list of integer to represent marks for the assignments.
+     */
+    public AssignmentTracker(List<Integer> assignmentTracker) throws IllegalValueException {
         requireNonNull(assignmentTracker);
         assignments = new Assignment[assignmentTracker.size()];
-        IntStream.range(0, assignmentTracker.size())
-                .forEach(i -> assignments[i] = new Assignment(assignmentTracker.get(i)));
+        for (int i = 0; i < assignmentTracker.size(); i++) {
+            assignments[i] = new Assignment(assignmentTracker.get(i));
+        }
     }
 
     /**

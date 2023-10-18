@@ -25,6 +25,8 @@ public class ClassDetails {
             + "be between 1 and " + TEMP_LENGTH;
     public static final String MESSAGE_INVALID_TUTORIAL_SESSION_NUMBER = "Tutorial session number should "
             + "be between 1 and " + TEMP_LENGTH;
+    public static final String MESSAGE_UNEQUAL_LENGTH = "The number of tutorial sessions and "
+            + "attendance records should be equal to " + TEMP_LENGTH;
 
     /*
      * The class number should start with "T".
@@ -38,25 +40,29 @@ public class ClassDetails {
     public final ClassParticipationTracker classParticipationTracker;
 
     /**
-     * Constructs an {@code Class Number}.
+     * Constructs an {@code ClassDetails}.
      *
-     * @param classDetails A valid Class Number
+     * @param classNumber A valid Class Number
      *
      */
-    public ClassDetails(String classDetails) {
-        requireNonNull(classDetails);
-        checkArgument(isValidClassDetails(classDetails), MESSAGE_CONSTRAINTS);
-        value = classDetails;
+    public ClassDetails(String classNumber) {
+        requireNonNull(classNumber);
+        checkArgument(isValidClassDetails(classNumber), MESSAGE_CONSTRAINTS);
+        value = classNumber;
         attendanceTracker = new AttendanceTracker(TEMP_LENGTH);
         classParticipationTracker = new ClassParticipationTracker(TEMP_LENGTH);
         assignmentTracker = new AssignmentTracker(TEMP_LENGTH);
     }
 
-    public ClassDetails(String classDetails, AttendanceTracker attendanceTracker,
+    /**
+     * Constructs an {@code ClassDetails}, with the given class number, attendance tracker,
+     * assignment tracker and class participation tracker.
+     */
+    public ClassDetails(String classNumber, AttendanceTracker attendanceTracker,
                         AssignmentTracker assignmentTracker, ClassParticipationTracker classParticipationTracker) {
-        requireNonNull(classDetails);
-        checkArgument(isValidClassDetails(classDetails), MESSAGE_CONSTRAINTS);
-        value = classDetails;
+        requireNonNull(classNumber);
+        checkArgument(isValidClassDetails(classNumber), MESSAGE_CONSTRAINTS);
+        value = classNumber;
         this.attendanceTracker = attendanceTracker;
         this.classParticipationTracker = classParticipationTracker;
         this.assignmentTracker = assignmentTracker;

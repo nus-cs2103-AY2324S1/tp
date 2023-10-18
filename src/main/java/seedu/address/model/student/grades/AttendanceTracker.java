@@ -33,6 +33,11 @@ public class AttendanceTracker {
         IntStream.range(0, numOfTut).forEach(i -> attendanceList[i] = new Attendance());
     }
 
+    /**
+     * Constructs an {@code AttendanceTracker}. With a given attendance tracker list.
+     *
+     * @param attendanceTracker A list of booleans to represent attendance.
+     */
     public AttendanceTracker(List<Boolean> attendanceTracker) {
         requireNonNull(attendanceTracker);
         attendanceList = new Attendance[attendanceTracker.size()];
