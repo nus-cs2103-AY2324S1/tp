@@ -32,24 +32,30 @@ public class ApplicantTest {
         // null -> returns false
         assertFalse(ALICE.isSameApplicant(null));
 
-        // same name, all other attributes different -> returns true
-        Applicant editedAlice = new ApplicantBuilder(ALICE).withPhone(VALID_PHONE_BOB)
-                .withEmail(VALID_EMAIL_BOB).withPosition(VALID_POSITION_BOB)
-                .withInterviews(VALID_INTERVIEW_HUSBAND).build();
-        assertTrue(ALICE.isSameApplicant(editedAlice));
+        // same phone number, all other attributes different -> returns true
+        Applicant editedAlice = new ApplicantBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
+        assertTrue(BOB.isSameApplicant(editedAlice));
 
-        // different name, all other attributes same -> returns false
-        editedAlice = new ApplicantBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        // same email, all other attributes different -> returns true
+        editedAlice = new ApplicantBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
+        assertTrue(BOB.isSameApplicant(editedAlice));
+
+        // same email and same phone number, all other attributes different -> returns true
+        editedAlice = new ApplicantBuilder(ALICE).withEmail(VALID_EMAIL_BOB).withPhone(VALID_PHONE_BOB).build();
+        assertTrue(BOB.isSameApplicant(editedAlice));
+
+        // different phone number and email, all other attributes same -> returns false
+        editedAlice = new ApplicantBuilder(ALICE).withEmail(VALID_EMAIL_BOB).withPhone(VALID_PHONE_BOB).build();
         assertFalse(ALICE.isSameApplicant(editedAlice));
 
-        // name differs in case, all other attributes same -> returns false
-        Applicant editedBob = new ApplicantBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
-        assertFalse(BOB.isSameApplicant(editedBob));
+        // email differs in case, all other attributes same -> returns true
+        Applicant editedBob = new ApplicantBuilder(BOB).withEmail(VALID_EMAIL_BOB.toUpperCase()).build();
+        assertTrue(BOB.isSameApplicant(editedBob));
 
-        // name has trailing spaces, all other attributes same -> returns false
+        // name has trailing spaces, all other attributes same -> returns true
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new ApplicantBuilder(BOB).withName(nameWithTrailingSpaces).build();
-        assertFalse(BOB.isSameApplicant(editedBob));
+        assertTrue(BOB.isSameApplicant(editedBob));
     }
 
     @Test

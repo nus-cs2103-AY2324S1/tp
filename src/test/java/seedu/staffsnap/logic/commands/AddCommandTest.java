@@ -141,6 +141,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean isDuplicateApplicant(Applicant applicant) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deleteApplicant(Applicant target) {
             throw new AssertionError("This method should not be called.");
         }
