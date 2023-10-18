@@ -1,6 +1,6 @@
 package seedu.address.ui;
 
-import static java.util.Objects.requireNonNull;
+import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,8 +10,10 @@ import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
 
-import java.util.logging.Logger;
 
+/**
+ * Panel containing the list of persons' schedules.
+ */
 public class ScheduleListPanel extends UiPart<Region> {
 
     private static final String FXML = "ScheduleListPanel.fxml";
@@ -21,17 +23,19 @@ public class ScheduleListPanel extends UiPart<Region> {
 
     private final Logger logger = LogsCenter.getLogger(ScheduleListPanel.class);
 
-
+    /**
+     * Creates a {@code ScheduleListPanel} with the given {@code ObservableList}.
+     */
     public ScheduleListPanel(ObservableList<Person> personList) {
         super(FXML);
         scheduleListView.setItems(personList);
-        scheduleListView.setCellFactory(listView -> new scheduleListViewCell());
+        scheduleListView.setCellFactory(listView -> new ScheduleListViewCell());
     }
 
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
      */
-    class scheduleListViewCell extends ListCell<Person> {
+    class ScheduleListViewCell extends ListCell<Person> {
         @Override
         protected void updateItem(Person person, boolean empty) {
             super.updateItem(person, empty);

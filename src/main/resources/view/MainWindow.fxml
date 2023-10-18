@@ -52,7 +52,7 @@
             <Insets top="10" right="10" bottom="10" left="10" />
           </padding>
           <HBox VBox.vgrow="ALWAYS">
-            <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" />
+            <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" minWidth="500" />
             <StackPane fx:id="scheduleListPanelPlaceholder" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS"/>
           </HBox>
         </VBox>
