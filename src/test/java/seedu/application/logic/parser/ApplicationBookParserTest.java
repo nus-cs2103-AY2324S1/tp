@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.application.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.application.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.application.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.application.model.job.Role.ROLE_FIND_SPECIFIER;
 import static seedu.application.testutil.Assert.assertThrows;
 import static seedu.application.testutil.TypicalIndexes.INDEX_FIRST_JOB;
@@ -17,7 +16,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.application.logic.commands.AddCommand;
 import seedu.application.logic.commands.ClearCommand;
-import seedu.application.logic.commands.DeadlineCommand;
 import seedu.application.logic.commands.DeleteCommand;
 import seedu.application.logic.commands.EditCommand;
 import seedu.application.logic.commands.EditCommand.EditJobDescriptor;
@@ -26,7 +24,6 @@ import seedu.application.logic.commands.FindCommand;
 import seedu.application.logic.commands.HelpCommand;
 import seedu.application.logic.commands.ListCommand;
 import seedu.application.logic.parser.exceptions.ParseException;
-import seedu.application.model.job.Deadline;
 import seedu.application.model.job.FieldContainsKeywordsPredicate;
 import seedu.application.model.job.Job;
 import seedu.application.testutil.EditJobDescriptorBuilder;
@@ -53,7 +50,7 @@ public class ApplicationBookParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_JOB.getOneBased());
+            DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_JOB.getOneBased());
         assertEquals(new DeleteCommand(INDEX_FIRST_JOB), command);
     }
 
@@ -62,7 +59,7 @@ public class ApplicationBookParserTest {
         Job job = new JobBuilder().build();
         EditJobDescriptor descriptor = new EditJobDescriptorBuilder(job).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_JOB.getOneBased() + " " + JobUtil.getEditJobDescriptorDetails(descriptor));
+            + INDEX_FIRST_JOB.getOneBased() + " " + JobUtil.getEditJobDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_JOB, descriptor), command);
     }
 
@@ -76,8 +73,8 @@ public class ApplicationBookParserTest {
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + ROLE_FIND_SPECIFIER
-                        + " " + keywords.stream().collect(Collectors.joining(" ")));
+            FindCommand.COMMAND_WORD + " " + ROLE_FIND_SPECIFIER
+                + " " + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindCommand(new FieldContainsKeywordsPredicate(ROLE_FIND_SPECIFIER, keywords)), command);
     }
 
@@ -94,17 +91,9 @@ public class ApplicationBookParserTest {
     }
 
     @Test
-    public void parseCommand_deadline() throws Exception {
-        final String deadline = "Dec 31 2030 1200";
-        DeadlineCommand command = (DeadlineCommand) parser.parseCommand(DeadlineCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_JOB.getOneBased() + " " + PREFIX_DEADLINE + deadline);
-        assertEquals(new DeadlineCommand(INDEX_FIRST_JOB, new Deadline(deadline)), command);
-    }
-
-    @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-                -> parser.parseCommand(""));
+            -> parser.parseCommand(""));
     }
 
     @Test

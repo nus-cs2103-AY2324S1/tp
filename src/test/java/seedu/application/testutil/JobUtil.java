@@ -1,6 +1,7 @@
 package seedu.application.testutil;
 
 import static seedu.application.logic.parser.CliSyntax.PREFIX_COMPANY;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_ROLE;
 
 import seedu.application.logic.commands.AddCommand;
@@ -35,7 +36,10 @@ public class JobUtil {
     public static String getEditJobDescriptorDetails(EditJobDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getRole().ifPresent(role -> sb.append(PREFIX_ROLE).append(role.description).append(" "));
-        descriptor.getCompany().ifPresent(company -> sb.append(PREFIX_COMPANY).append(company.name).append(" "));
+        descriptor.getCompany()
+            .ifPresent(company -> sb.append(PREFIX_COMPANY).append(company.name).append(" "));
+        descriptor.getDeadline()
+            .ifPresent(deadline -> sb.append(PREFIX_DEADLINE).append(deadline.deadline).append(" "));
         return sb.toString();
     }
 }

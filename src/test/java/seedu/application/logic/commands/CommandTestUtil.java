@@ -2,7 +2,10 @@ package seedu.application.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.application.logic.parser.CliSyntax.*;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_COMPANY;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_DEADLINE;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.application.model.job.Role.ROLE_FIND_SPECIFIER;
 import static seedu.application.testutil.Assert.assertThrows;
 
@@ -37,11 +40,13 @@ public class CommandTestUtil {
     public static final String COMPANY_DESC_CLEANER = " " + PREFIX_COMPANY + VALID_COMPANY_CLEANER;
     public static final String STATUS_DESC_CHEF = " " + PREFIX_STATUS + VALID_STATUS_CHEF;
     public static final String STATUS_DESC_CLEANER = " " + PREFIX_STATUS + VALID_STATUS_CLEANER;
-
+    public static final String DEADLINE_DESC_CHEF = " " + PREFIX_DEADLINE + VALID_DEADLINE_CHEF;
+    public static final String DEADLINE_DESC_CLEANER = " " + PREFIX_DEADLINE + VALID_DEADLINE_CLEANER;
     public static final String INVALID_ROLE_DESC = " " + PREFIX_ROLE + "&"; // '&' not allowed in roles
     public static final String INVALID_COMPANY_DESC = " " + PREFIX_COMPANY + "    "; // company cannot be blank
     public static final String INVALID_STATUS_DESC = " " + PREFIX_STATUS + "SUBMITTED";
-
+    public static final String INVALID_DEADLINE_DESC =
+        " " + PREFIX_DEADLINE + "Nov 12 2023"; // deadline must be in the future
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
@@ -50,9 +55,9 @@ public class CommandTestUtil {
 
     static {
         DESC_CHEF = new EditJobDescriptorBuilder().withRole(VALID_ROLE_CHEF)
-                .withCompany(VALID_COMPANY_CHEF).build();
+            .withCompany(VALID_COMPANY_CHEF).build();
         DESC_CLEANER = new EditJobDescriptorBuilder().withRole(VALID_ROLE_CLEANER)
-                .withCompany(VALID_COMPANY_CLEANER).build();
+            .withCompany(VALID_COMPANY_CLEANER).build();
     }
 
     /**
@@ -108,7 +113,7 @@ public class CommandTestUtil {
         Job job = model.getFilteredJobList().get(targetIndex.getZeroBased());
         final String[] splitRole = job.getRole().description.split("\\s+");
         model.updateFilteredJobList(
-                new FieldContainsKeywordsPredicate(ROLE_FIND_SPECIFIER, Arrays.asList(splitRole[0])));
+            new FieldContainsKeywordsPredicate(ROLE_FIND_SPECIFIER, Arrays.asList(splitRole[0])));
 
         assertEquals(1, model.getFilteredJobList().size());
     }
