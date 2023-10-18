@@ -48,7 +48,7 @@ class JsonSerializableConText {
         ConText conText = new ConText();
         for (JsonAdaptedContact jsonAdaptedContact : contacts) {
             Contact contact = jsonAdaptedContact.toModelType();
-            if (ConText.hasContact(contact)) {
+            if (conText.hasContact(contact)) {
                 throw new IllegalValueException(Messages.MESSAGE_CONTAIN_DUPLICATE_CONTACT);
             }
             conText.addContact(contact);
