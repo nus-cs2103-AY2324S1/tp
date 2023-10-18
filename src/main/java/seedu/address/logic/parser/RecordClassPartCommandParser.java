@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_SESSION;
 
 import seedu.address.logic.commands.RecordClassPartCommand;
-import seedu.address.logic.commands.SetGradeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.StudentNumber;
 
@@ -37,13 +36,20 @@ public class RecordClassPartCommandParser implements Parser<RecordClassPartComma
         StudentNumber studentNumber = ParserUtil.parseStudentNumber(
                 argMultimap.getValue(PREFIX_STUDENT_NUMBER).get());
         int sessionNumber;
-        boolean isParticipated;
         try {
             sessionNumber = Integer.parseInt(argMultimap.getValue(PREFIX_TUTORIAL_SESSION).get());
-            isParticipated = Boolean.parseBoolean(argMultimap.getValue(PREFIX_PARTICIPATION).get());
         } catch (NumberFormatException e) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetGradeCommand.MESSAGE_USAGE));
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, RecordClassPartCommand.MESSAGE_USAGE));
         }
+
+        String participation = argMultimap.getValue(PREFIX_PARTICIPATION).get();
+        if (!participation.equalsIgnoreCase("true")
+                && !participation.equalsIgnoreCase("false")) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    RecordClassPartCommand.MESSAGE_USAGE));
+        }
+        boolean isParticipated = Boolean.parseBoolean(participation);
         return new RecordClassPartCommand(studentNumber, sessionNumber, isParticipated);
     }
 
