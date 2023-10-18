@@ -3,7 +3,6 @@ package seedu.address.logic.search;
 import seedu.address.model.person.Person;
 
 import java.util.Map;
-import java.util.Objects;
 import java.util.function.Predicate;
 
 /**
@@ -14,7 +13,6 @@ public class SearchTest implements Predicate<Person> {
     private final SearchPredicate predicate;
 
     SearchTest(SearchPredicate predicate) {
-        Objects.requireNonNull(predicate);
         this.predicate = predicate;
     }
 
@@ -27,6 +25,9 @@ public class SearchTest implements Predicate<Person> {
      */
     @Override
     public boolean test(Person p) {
+        if (predicate == null) {
+            return true;
+        }
         Map<String, String> map = p.getFieldsAndAttributes();
         return FieldRanges.isMatch(this.predicate.test(map));
     }

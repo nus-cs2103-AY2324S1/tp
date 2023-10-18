@@ -1,6 +1,7 @@
 package seedu.address.logic.search;
 
 import org.junit.jupiter.api.Test;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
@@ -28,7 +29,7 @@ class FindCommandArgumentParserTest {
     }
 
     @Test
-    void test_basicQuery() {
+    void test_basicQuery() throws ParseException {
         SearchTest queryA = new FindCommandArgumentParser().parse("Tom");
         assertTrue(queryA.test(testPerson));
         SearchTest queryB = new FindCommandArgumentParser().parse("Sam");
@@ -36,7 +37,7 @@ class FindCommandArgumentParserTest {
     }
 
     @Test
-    void test_implicitAndQuery() {
+    void test_implicitAndQuery() throws ParseException {
         SearchTest queryA = new FindCommandArgumentParser().parse("Tom Harry");
         assertFalse(queryA.test(testPerson));
         SearchTest queryB = new FindCommandArgumentParser().parse("whee twee");
@@ -44,7 +45,7 @@ class FindCommandArgumentParserTest {
     }
 
     @Test
-    void test_explicitOrQuery() {
+    void test_explicitOrQuery() throws ParseException {
         SearchTest queryA = new FindCommandArgumentParser().parse("Tom | Harry");
         assertTrue(queryA.test(testPerson));
         SearchTest queryB = new FindCommandArgumentParser().parse("Cat | Boy");
@@ -52,7 +53,7 @@ class FindCommandArgumentParserTest {
     }
 
     @Test
-    void test_explicitAndQuery() {
+    void test_explicitAndQuery() throws ParseException {
         SearchTest queryA = new FindCommandArgumentParser().parse("Tom & Harry");
         assertFalse(queryA.test(testPerson));
         SearchTest queryB = new FindCommandArgumentParser().parse("whee & twee");
@@ -62,7 +63,7 @@ class FindCommandArgumentParserTest {
     }
 
     @Test
-    void test_operatorPrecedence() {
+    void test_operatorPrecedence() throws ParseException {
         // TRUE: Tom whee twee
         // FALSE: Harry Cat ree
         SearchTest query;
@@ -115,7 +116,7 @@ class FindCommandArgumentParserTest {
     }
 
     @Test
-    void test_parentheses() {
+    void test_parentheses() throws ParseException {
         // TRUE: Tom whee twee
         // FALSE: Harry Cat ree
         SearchTest query;
@@ -126,6 +127,23 @@ class FindCommandArgumentParserTest {
         query = new FindCommandArgumentParser().parse("(ree & whee) | twee");
         assertTrue(query.test(testPerson));
         query = new FindCommandArgumentParser().parse("twee | (whee & Tom) ree");
+        assertTrue(query.test(testPerson));
+    }
+
+    @Test
+    void test_unexpectedInputs() throws ParseException {
+        SearchTest query;
+        query = new FindCommandArgumentParser().parse("#");
+        assertFalse(query.test(testPerson));
+        query = new FindCommandArgumentParser().parse(";");
+        assertFalse(query.test(testPerson));
+        query = new FindCommandArgumentParser().parse("\\");
+        assertFalse(query.test(testPerson));
+        query = new FindCommandArgumentParser().parse("-");
+        assertFalse(query.test(testPerson));
+        query = new FindCommandArgumentParser().parse("");
+        assertTrue(query.test(testPerson));
+        query = new FindCommandArgumentParser().parse("abc&123");
         assertTrue(query.test(testPerson));
     }
 

@@ -1,5 +1,7 @@
 package seedu.address.logic.search;
 
+import seedu.address.logic.parser.exceptions.ParseException;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
@@ -58,6 +60,9 @@ public class FindCommandArgumentParser {
 
         SearchPredicate collapse() throws UnexpectedTokenException {
             sanityCheckElseThrow();
+            if (joiners.isEmpty() && predicates.isEmpty()) {
+                return null;
+            }
             while (!joiners.isEmpty()) {
                 Joiner joiner = joiners.pop();
                 SearchPredicate newPredicate = joiner.apply(
@@ -176,7 +181,7 @@ public class FindCommandArgumentParser {
             if (!hasChar()) {
                 return;
             }
-            if (isNextCharJoiner()) {
+            if (isCharJoiner()) {
                 dualStack.append(Joiner.get(getChar()));
                 incrementCharIndex();
             } else {
@@ -191,36 +196,36 @@ public class FindCommandArgumentParser {
                 return;
             }
             int startIndexOfPredicate = index;
-            incrementIndexWhileAlphanumeric();
+            incrementIndexWhileNotReservedChar();
             dualStack.append(new SingleTextSearchPredicate(search.substring(startIndexOfPredicate, index)));
         }
 
     }
 
-    private boolean isNextCharJoiner() {
-        return Joiner.set.containsKey(search.charAt(index));
+    private boolean isCharJoiner() {
+        return Joiner.set.containsKey(getChar());
     }
 
     private String search;
     private int index;
 
-    public SearchTest parse(String query) {
+    public SearchTest parse(String query) throws ParseException {
         if (query == null) {
-            return null;
+            return new SearchTest(null);
         }
-        search = query.trim();
         try {
+            search = query.trim();
             SearchPredicate predicate = parse();
             return new SearchTest(predicate);
         } catch (ParserDualStack.UnexpectedTokenException e) {
-            throw new RuntimeException(e);
+            throw new ParseException("Unexpected find command argument: " + e.getMessage());
         }
     }
 
     private SearchPredicate parse() throws ParserDualStack.UnexpectedTokenException {
         index = 0;
         SearchPredicate predicate = new RecursiveParseHelper().parse();
-        while (index < search.length()) {
+        while (hasChar()) {
             incrementIndexWhileSpace();
             predicate = new RecursiveParseHelper(predicate).parse();
         }
@@ -233,9 +238,19 @@ public class FindCommandArgumentParser {
         }
     }
 
-    private void incrementIndexWhileAlphanumeric() {
-        while (hasChar() && Character.isLetterOrDigit(getChar())) {
-            incrementCharIndex();
+    private void incrementIndexWhileNotReservedChar() {
+        while (hasChar()) {
+            char c = getChar();
+            if (Character.isWhitespace(c) || isCharJoiner()) {
+                break;
+            }
+            switch(c) {
+            case '(':
+            case ')':
+                break;
+            default:
+                incrementCharIndex();
+            }
         }
     }
 

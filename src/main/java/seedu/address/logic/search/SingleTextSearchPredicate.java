@@ -37,7 +37,7 @@ class SingleTextSearchPredicate extends SearchPredicate {
             return null;
         }
         return new AbstractMap.SimpleEntry<>(entry.getKey(), range);
-    };
+    }
 
     private Range getRangeIfMatchElseNull(String target) {
         int index;
