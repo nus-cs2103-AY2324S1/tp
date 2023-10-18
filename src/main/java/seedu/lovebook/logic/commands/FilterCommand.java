@@ -3,12 +3,12 @@ package seedu.lovebook.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.util.ArrayList;
+
 import seedu.lovebook.commons.util.ToStringBuilder;
 import seedu.lovebook.logic.Messages;
 import seedu.lovebook.model.Model;
 import seedu.lovebook.model.person.MetricContainsKeywordPredicate;
-
-import java.util.ArrayList;
 
 
 /**
@@ -24,19 +24,24 @@ public class FilterCommand extends Command {
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: /METRIC KEYWORD (METRIC in the form of initial alphabet) \n"
             + "Example: " + COMMAND_WORD + PREFIX_NAME + " Bob (AKA find dates whose name that match Bob";
-    private final ArrayList<MetricContainsKeywordPredicate> predicates;
+    private final ArrayList<MetricContainsKeywordPredicate> predicateList;
 
 
-    public FilterCommand(ArrayList<MetricContainsKeywordPredicate> predicates) {
-        this.predicates = predicates;
+    public FilterCommand(ArrayList<MetricContainsKeywordPredicate> predicateList) {
+        this.predicateList = predicateList;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        for (MetricContainsKeywordPredicate predicate : predicates) {
-            model.updateFilteredPersonList(predicate);
-        }
+        model.updateFilteredPersonList((person) -> {
+            for (MetricContainsKeywordPredicate predicate : predicateList) {
+                if (!predicate.test(person)) {
+                    return false;
+                }
+            }
+            return true;
+        });
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
@@ -52,13 +57,13 @@ public class FilterCommand extends Command {
         }
 
         FilterCommand otherFilterCommand = (FilterCommand) other;
-        return predicates.equals(otherFilterCommand.predicates);
+        return predicateList.equals(otherFilterCommand.predicateList);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("predicates", predicates)
+                .add("predicateList", predicateList)
                 .toString();
     }
 }

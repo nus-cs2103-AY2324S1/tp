@@ -1,15 +1,18 @@
 package seedu.lovebook.logic.parser;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.lovebook.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.lovebook.logic.parser.CliSyntax.*;
+import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_AGE;
+import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_GENDER;
+import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HOROSCOPE;
+import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_INCOME;
+import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_NAME;
+
+import java.util.ArrayList;
 
 import seedu.lovebook.logic.commands.FilterCommand;
 import seedu.lovebook.logic.parser.exceptions.ParseException;
 import seedu.lovebook.model.person.MetricContainsKeywordPredicate;
-
-import java.util.ArrayList;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -69,9 +72,8 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             metric = new Prefix("horoscope/");
             predicates.add(new MetricContainsKeywordPredicate(keyword, metric));
         }
-        if (metric == null || keyword.isEmpty()){
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+        if (metric == null || keyword.isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
         return new FilterCommand(predicates);
     }

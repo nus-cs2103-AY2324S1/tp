@@ -1,20 +1,16 @@
 package seedu.lovebook.model.person;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.lovebook.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_NAME;
 
-import java.util.ArrayList;
 import java.util.function.Predicate;
 
 import seedu.lovebook.commons.util.StringUtil;
 import seedu.lovebook.commons.util.ToStringBuilder;
 import seedu.lovebook.logic.parser.Prefix;
-
-
 
 /**
  * Tests that a {@code Date}'s {@code Name} matches any of the keywords given.
