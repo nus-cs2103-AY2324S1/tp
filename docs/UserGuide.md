@@ -212,6 +212,17 @@ Format: `load f/FILE_NAME`
 Examples:
 * `load f/export-v1` loads the export-v1.json file in the data folder.
 
+### Configuring Class Manager: `config`
+
+Configures Class Manager 2023 with the module information, such as tutorial count and assignment count. 
+
+Format: `config #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT`
+* Parameters can be in any order.
+* Parameters must be zero or greater.
+
+Examples:
+* `config #t/2 #a/3` sets the tutorial count to 2 and assignment count to 3.
+
 ### Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
