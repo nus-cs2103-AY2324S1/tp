@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_UNASSIGN_PERSONS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -36,19 +37,22 @@ public class EditMeetingCommand extends Command {
     public static final String EVENT_TYPE = "meeting";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the meeting identified "
-            + "by the index number used in the displayed meeting list. "
-            + "Existing values will be overwritten by the input values, except for"
+            + "by the index number used in the displayed meeting list.\n"
+            + "Existing values will be overwritten by the input values, except for "
             + "the list of assigned persons, which will be appended to the existing list.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_MEETING_NAME + "MEETING_DETAILS] "
             + "[" + PREFIX_DATE + "DATE] "
             + "[" + PREFIX_START_TIME + "START_TIME] "
-            + "[" + PREFIX_END_TIME + "END_TIME] \n"
-            + "[" + PREFIX_NAME + "NAME]...\n"
+            + "[" + PREFIX_END_TIME + "END_TIME] "
+            + "[" + PREFIX_NAME + "NAME]... "
+            + "[" + PREFIX_UNASSIGN_PERSONS + "NAME]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_MEETING_NAME + "TP WEEK 8 MEETING "
             + PREFIX_DATE + "2023-10-13 "
-            + PREFIX_NAME + "Alice ";
+            + PREFIX_NAME + "Alice "
+            + PREFIX_UNASSIGN_PERSONS + "Bob "
+            + PREFIX_UNASSIGN_PERSONS + "Charlie ";
 
     public static final String MESSAGE_EDIT_SUCCESS = "Edited meeting: %1$s";
 
@@ -105,9 +109,9 @@ public class EditMeetingCommand extends Command {
 
         Set<Name> updatedPersonNames;
 
-        if (editMeetingDescriptor.getPersonNames().isPresent()) {
+        if (editMeetingDescriptor.getAssignedPersons().isPresent()) {
 
-            Set<Name> invalidNames = model.findInvalidNames(editMeetingDescriptor.getPersonNames().get());
+            Set<Name> invalidNames = model.findInvalidNames(editMeetingDescriptor.getAssignedPersons().get());
 
             if (!invalidNames.isEmpty()) {
                 throw new CommandException(String.format(Messages.MESSAGE_INVALID_PERSON,
@@ -115,16 +119,54 @@ public class EditMeetingCommand extends Command {
             }
 
             //add the new persons to the existing list of persons
-            meetingToEdit.getNames().addAll(editMeetingDescriptor.getPersonNames().get());
+            meetingToEdit.getNames().addAll(editMeetingDescriptor.getAssignedPersons().get());
             updatedPersonNames = meetingToEdit.getNames();
         } else {
             updatedPersonNames = meetingToEdit.getNames();
+        }
+
+        if (editMeetingDescriptor.getUnassignedPersons().isPresent()) {
+            Set<Name> invalidNames = model.findInvalidNames(editMeetingDescriptor.getUnassignedPersons().get());
+
+            if (!invalidNames.isEmpty()) {
+                throw new CommandException(String.format(Messages.MESSAGE_INVALID_PERSON,
+                        listInvalidNames(invalidNames)));
+            } else if (!meetingToEdit.getNames().containsAll(editMeetingDescriptor.getUnassignedPersons().get())) {
+                //case where the persons to be unassigned have not even been previously assigned
+
+                Set <Name> invalidUnassignNames = findInvalidUnassignNames(meetingToEdit,
+                        editMeetingDescriptor.getUnassignedPersons().get());
+
+                throw new CommandException(String.format(Messages.MESSAGE_INVALID_UNASSIGN_PERSON,
+                        listInvalidNames(invalidUnassignNames)));
+            }
+
+            //remove the persons from the new list of persons
+            updatedPersonNames.removeAll(editMeetingDescriptor.getUnassignedPersons().get());
+        } else {
+            // no persons to be unassigned, do nothing
         }
 
         return new Meeting(updatedName, updatedDate,
                 Optional.of(updatedStartTime), Optional.of(updatedEndTime), updatedPersonNames);
     }
 
+    private static Set<Name> findInvalidUnassignNames(Event meetingToEdit, Set<Name> unassignNames) {
+        Set<Name> invalidUnassignNames = new HashSet<>();
+
+        for (Name name : unassignNames) {
+            if (!meetingToEdit.getNames().contains(name)) {
+                invalidUnassignNames.add(name);
+            }
+        }
+
+        return invalidUnassignNames;
+    }
+
+
+    /**
+     * generates a string of invalid names for display.
+     */
     private static String listInvalidNames(Set<Name> invalidNames) {
         StringBuilder builder = new StringBuilder();
         for (Name name : invalidNames) {
@@ -172,7 +214,8 @@ public class EditMeetingCommand extends Command {
         private EventTime startTime;
         private EventTime endTime;
 
-        private Set<Name> names;
+        private Set<Name> assignPersons;
+        private Set<Name> unassignPersons;
 
         public EditMeetingDescriptor() {
         }
@@ -214,7 +257,8 @@ public class EditMeetingCommand extends Command {
          * @return true if at least one field is edited
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(this.name, this.date, this.startTime, this.endTime, this.names);
+            return CollectionUtil.isAnyNonNull(this.name, this.date, this.startTime,
+                    this.endTime, this.assignPersons, this.unassignPersons);
         }
 
         @Override
@@ -246,11 +290,19 @@ public class EditMeetingCommand extends Command {
         }
 
         public void setPersonNames(Set<Name> names) {
-            this.names = (names != null) ? new HashSet<>(names) : null;
+            this.assignPersons = (names != null) ? new HashSet<>(names) : null;
         }
 
-        public Optional<Set<Name>> getPersonNames() {
-            return (this.names != null) ? Optional.of(Collections.unmodifiableSet(this.names)) : Optional.empty();
+        public void setUnassignPersons(Set<Name> names) {
+            this.unassignPersons = (names != null) ? new HashSet<>(names) : null;
+        }
+
+        public Optional<Set<Name>> getAssignedPersons() {
+            return (this.assignPersons != null) ? Optional.of(Collections.unmodifiableSet(this.assignPersons)) : Optional.empty();
+        }
+
+        public Optional<Set<Name>> getUnassignedPersons() {
+            return (this.unassignPersons != null) ? Optional.of(Collections.unmodifiableSet(this.unassignPersons)) : Optional.empty();
         }
     }
 }

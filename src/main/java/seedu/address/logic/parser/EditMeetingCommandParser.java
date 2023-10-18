@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_UNASSIGN_PERSONS;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -30,7 +31,7 @@ public class EditMeetingCommandParser implements Parser<EditMeetingCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_MEETING_NAME, PREFIX_DATE,
-                        PREFIX_START_TIME, PREFIX_END_TIME, PREFIX_NAME);
+                        PREFIX_START_TIME, PREFIX_END_TIME, PREFIX_NAME, PREFIX_UNASSIGN_PERSONS);
 
         Index index;
 
@@ -61,6 +62,8 @@ public class EditMeetingCommandParser implements Parser<EditMeetingCommand> {
         }
 
         parseNamesForEdit(argMultimap.getAllValues(PREFIX_NAME)).ifPresent(editMeetingDescriptor::setPersonNames);
+        parseNamesForEdit(argMultimap.getAllValues(PREFIX_UNASSIGN_PERSONS))
+                .ifPresent(editMeetingDescriptor::setUnassignPersons);
 
         if (!editMeetingDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
