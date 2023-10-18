@@ -7,8 +7,8 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.filter.IdContainsKeywordsPredicate;
-import seedu.address.model.filter.NameContainsKeywordsPredicate;
+import seedu.address.model.predicate.IdContainsKeywordsPredicate;
+import seedu.address.model.predicate.NameContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object

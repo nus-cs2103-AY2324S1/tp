@@ -1,4 +1,4 @@
-package seedu.address.model.filter;
+package seedu.address.model.predicate;
 
 import java.util.HashSet;
 import java.util.List;

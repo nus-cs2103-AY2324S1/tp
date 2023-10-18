@@ -5,8 +5,8 @@ import java.nio.file.Path;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.FilterSettings;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.filter.SerializablePredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.predicate.SerializablePredicate;
 
 /**
  * The API of the Model component.

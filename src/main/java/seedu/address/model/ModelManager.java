@@ -12,8 +12,8 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.FilterSettings;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.filter.SerializablePredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.predicate.SerializablePredicate;
 
 /**
  * Represents the in-memory model of the address book data.

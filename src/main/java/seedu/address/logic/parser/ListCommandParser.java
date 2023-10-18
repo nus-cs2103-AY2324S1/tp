@@ -13,8 +13,8 @@ import seedu.address.logic.commands.ListAttendanceCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListStudentsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.filter.AbsentFromTutorialPredicate;
-import seedu.address.model.filter.ContainsTagPredicate;
+import seedu.address.model.predicate.AbsentFromTutorialPredicate;
+import seedu.address.model.predicate.ContainsTagPredicate;
 import seedu.address.model.tag.Tag;
 
 /**

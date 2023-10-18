@@ -1,4 +1,4 @@
-package seedu.address.model.filter;
+package seedu.address.model.predicate;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

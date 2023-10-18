@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.filter.SerializablePredicate;
+import seedu.address.model.predicate.SerializablePredicate;
 
 /**
  * Finds and lists all student in contact list whose name or ID contains any of the argument keywords.

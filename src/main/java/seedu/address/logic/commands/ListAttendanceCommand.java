@@ -6,8 +6,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALNUMBER;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
-import seedu.address.model.filter.AbsentFromTutorialPredicate;
-import seedu.address.model.filter.ContainsTagPredicate;
+import seedu.address.model.predicate.AbsentFromTutorialPredicate;
+import seedu.address.model.predicate.ContainsTagPredicate;
 import seedu.address.model.tag.Tag;
 
 /**

@@ -6,8 +6,8 @@ import java.util.Objects;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.filter.SerializablePredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.predicate.SerializablePredicate;
 
 /**
  * A Serializable class that contains the filter settings.

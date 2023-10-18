@@ -8,7 +8,7 @@ import java.util.Optional;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.ParserUtil.FilterOperation;
 import seedu.address.model.Model;
-import seedu.address.model.filter.ContainsTagPredicate;
+import seedu.address.model.predicate.ContainsTagPredicate;
 import seedu.address.model.tag.Tag;
 
 /**
