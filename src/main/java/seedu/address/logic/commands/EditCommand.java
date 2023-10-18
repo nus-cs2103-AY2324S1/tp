@@ -134,7 +134,7 @@ public class EditCommand extends Command {
                 || (!personToEdit.hasValidSecondaryEmail() && !updatedSecondaryEmail.equals(Optional.empty()))) {
             throw new CommandException(MESSAGE_EDIT_ALTERNATIVE_FAIL);
         } else if (updatedPerson.equals(personToEdit)) {
-                throw new CommandException(String.format(MESSAGE_EDIT_FIELDS_SAME, updatedName));
+            throw new CommandException(String.format(MESSAGE_EDIT_FIELDS_SAME, updatedName));
         } else if (updatedPerson.hasValidSecondaryEmail()) {
             if (updatedPerson.hasRepeatedEmail()) {
                 throw new CommandException(String.format(MESSAGE_EDIT_DUPLICATE_EMAIL, updatedName));
