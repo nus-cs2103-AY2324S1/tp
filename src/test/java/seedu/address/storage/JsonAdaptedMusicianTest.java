@@ -30,11 +30,11 @@ public class JsonAdaptedMusicianTest {
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
-    private static final List<JsonAdaptedTag> VALID_INSTRUMENTS = BENSON.getInstruments().stream()
-            .map(JsonAdaptedTag::new)
+    private static final List<JsonAdaptedInstrument> VALID_INSTRUMENTS = BENSON.getInstruments().stream()
+            .map(JsonAdaptedInstrument::new)
             .collect(Collectors.toList());
-    private static final List<JsonAdaptedTag> VALID_GENRES = BENSON.getGenres().stream()
-            .map(JsonAdaptedTag::new)
+    private static final List<JsonAdaptedGenre> VALID_GENRES = BENSON.getGenres().stream()
+            .map(JsonAdaptedGenre::new)
             .collect(Collectors.toList());
 
     @Test
@@ -94,8 +94,6 @@ public class JsonAdaptedMusicianTest {
         assertThrows(IllegalValueException.class, expectedMessage, musician::toModelType);
     }
 
-
-
     @Test
     public void toModelType_invalidTags_throwsIllegalValueException() {
         List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
@@ -103,6 +101,26 @@ public class JsonAdaptedMusicianTest {
         JsonAdaptedMusician musician =
                 new JsonAdaptedMusician(VALID_NAME, VALID_PHONE, VALID_EMAIL,
                         invalidTags, VALID_INSTRUMENTS, VALID_GENRES);
+        assertThrows(IllegalValueException.class, musician::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidInstruments_throwsIllegalValueException() {
+        List<JsonAdaptedInstrument> invalidInstruments = new ArrayList<>(VALID_INSTRUMENTS);
+        invalidInstruments.add(new JsonAdaptedInstrument(INVALID_INSTRUMENT));
+        JsonAdaptedMusician musician =
+                new JsonAdaptedMusician(VALID_NAME, VALID_PHONE, VALID_EMAIL,
+                        VALID_TAGS, invalidInstruments, VALID_GENRES);
+        assertThrows(IllegalValueException.class, musician::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidGenres_throwsIllegalValueException() {
+        List<JsonAdaptedGenre> invalidGenres = new ArrayList<>(VALID_GENRES);
+        invalidGenres.add(new JsonAdaptedGenre(INVALID_GENRE));
+        JsonAdaptedMusician musician =
+                new JsonAdaptedMusician(VALID_NAME, VALID_PHONE, VALID_EMAIL,
+                        VALID_TAGS, VALID_INSTRUMENTS, invalidGenres);
         assertThrows(IllegalValueException.class, musician::toModelType);
     }
 }
