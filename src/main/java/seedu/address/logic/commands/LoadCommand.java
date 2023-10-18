@@ -61,11 +61,7 @@ public class LoadCommand extends Command {
         if (!f.isFile()) {
             throw new CommandException(String.format(MESSAGE_FILE_NOT_FOUND, fileName));
         }
-        try {
-            requireNonNull(model);
-        } catch (NullPointerException e) {
-            throw new CommandException(String.format(MESSAGE_FILE_CANNOT_LOAD, fileName));
-        }
+        requireNonNull(model);
         AddressBookStorage tempAddressBookStorage = new JsonAddressBookStorage(filePath);
         Optional<ReadOnlyAddressBook> addressBookOptional;
         ReadOnlyAddressBook newData;

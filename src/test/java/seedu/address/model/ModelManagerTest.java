@@ -129,4 +129,41 @@ public class ModelManagerTest {
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
     }
+
+    @Test
+    public void test_hashCode() {
+        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        AddressBook differentAddressBook = new AddressBook();
+        UserPrefs userPrefs = new UserPrefs();
+
+        // same values -> returns true
+        modelManager = new ModelManager(addressBook, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs);
+        assertTrue(modelManager.hashCode() == modelManagerCopy.hashCode());
+
+        // same object -> returns true
+        assertTrue(modelManager.hashCode() == modelManager.hashCode());
+
+        // null -> returns false
+        assertFalse(modelManager.hashCode() == 0);
+
+        // different types -> returns false
+        assertFalse(modelManager.hashCode() == 5);
+
+        // different addressBook -> returns false
+        assertFalse(modelManager.hashCode() == (new ModelManager(differentAddressBook, userPrefs)).hashCode());
+
+        // different filteredList -> returns false
+        String[] keywords = ALICE.getName().fullName.split("\\s+");
+        modelManager.updateFilteredStudentList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        assertFalse(modelManager.hashCode() == (new ModelManager(addressBook, userPrefs)).hashCode());
+
+        // resets modelManager to initial state for upcoming tests
+        modelManager.updateFilteredStudentList(PREDICATE_SHOW_ALL_PERSONS);
+
+        // different userPrefs -> returns false
+        UserPrefs differentUserPrefs = new UserPrefs();
+        differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
+        assertFalse(modelManager.hashCode() == (new ModelManager(addressBook, differentUserPrefs)).hashCode());
+    }
 }

@@ -114,16 +114,28 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_config() throws Exception {
+    public void parseCommandNotConfigured_config() throws Exception {
         ConfigCommand command = (ConfigCommand) parser.parseCommand(ConfigCommand.COMMAND_WORD + " "
                 + PREFIX_TUTORIAL_COUNT + "5" + " " + PREFIX_ASSIGNMENT_COUNT + 2, false);
         assertEquals(new ConfigCommand(5, 2), command);
     }
 
     @Test
+    public void parseCommandNotConfigured_help() throws Exception {
+        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD, false) instanceof HelpCommand);
+        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3", false) instanceof HelpCommand);
+    }
+
+    @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
             -> parser.parseCommand("", true));
+    }
+
+    @Test
+    public void parseCommandNotConfigured_unrecognisedInput_throwsParseException() {
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
+                -> parser.parseCommand("", false));
     }
 
     @Test

@@ -52,4 +52,21 @@ public class ClassParticipationTrackerTest {
                 + "Tutorial 2: Did not Participate\n"
                 + "Tutorial 3: Did not Participate\n", classParticipationTracker.toString());
     }
+
+    @Test
+    public void test_hashCode() {
+        ClassParticipationTracker classParticipationTracker = new ClassParticipationTracker(13);
+
+        // same values -> returns true
+        assertTrue(classParticipationTracker.hashCode() == new ClassParticipationTracker(13).hashCode());
+
+        // same object -> returns true
+        assertTrue(classParticipationTracker.hashCode() == classParticipationTracker.hashCode());
+
+        // null -> returns false
+        assertFalse(classParticipationTracker.hashCode() == 0);
+
+        // different values -> returns false
+        assertFalse(classParticipationTracker.hashCode() == new ClassParticipationTracker(26).hashCode());
+    }
 }

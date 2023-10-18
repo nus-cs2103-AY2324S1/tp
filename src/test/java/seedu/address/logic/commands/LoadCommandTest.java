@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -70,6 +71,15 @@ public class LoadCommandTest {
         }
         expectedModel.setAddressBookFilePath(filePath);
         expectedModel.setAddressBook(tempData);
+    }
+
+    @Test
+    public void loadString() {
+        String fileName = "validAddressBook";
+        Path filePath = TEST_DATA_FOLDER.resolve(fileName + ".json");
+        LoadCommand loadCommand = new LoadCommand(fileName, filePath);
+        String expectedString = "seedu.address.logic.commands.LoadCommand{load=" + fileName + "}";
+        assertEquals(loadCommand.toString(), expectedString);
     }
 
     @Test

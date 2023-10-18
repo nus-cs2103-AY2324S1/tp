@@ -3,6 +3,8 @@ package seedu.address.model.student;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.Objects;
+
 import seedu.address.model.student.grades.AssignmentTracker;
 import seedu.address.model.student.grades.AttendanceTracker;
 import seedu.address.model.student.grades.ClassParticipationTracker;
@@ -14,9 +16,8 @@ import seedu.address.model.student.grades.ClassParticipationTracker;
 public class ClassDetails {
 
     public static final String MESSAGE_CONSTRAINTS = "Class number can take any values, and it should not be blank";
-    /*
-     * The class number should start with "T".
-     */
+
+    // The class number should start with "T".
     public static final String VALIDATION_REGEX = "T.*";
 
     private static int tutorialCount;
@@ -82,6 +83,6 @@ public class ClassDetails {
 
     @Override
     public int hashCode() {
-        return classDetails.hashCode();
+        return Objects.hash(classDetails, attendanceTracker, classParticipationTracker, assignmentTracker);
     }
 }

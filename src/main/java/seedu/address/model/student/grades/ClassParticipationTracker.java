@@ -81,5 +81,4 @@ public class ClassParticipationTracker {
     public int hashCode() {
         return Arrays.hashCode(classPartList);
     }
-
 }

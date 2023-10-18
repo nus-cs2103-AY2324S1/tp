@@ -58,7 +58,29 @@ public class AttendanceTest {
 
         // absentAttendance should return Absent
         assertEquals("Absent", absentAttendance.toString());
+    }
 
+    @Test
+    public void test_hashCode() {
+        Attendance attendance = new Attendance();
+        Attendance presentAttendance = new Attendance();
+        presentAttendance.mark();
+        Attendance absentAttendance = new Attendance();
+        absentAttendance.unmark();
 
+        // same values -> returns true
+        assertTrue(attendance.hashCode() == (new Attendance()).hashCode());
+
+        // same object -> returns true
+        assertTrue(attendance.hashCode() == attendance.hashCode());
+
+        // null -> returns false
+        assertFalse(attendance.hashCode() == 1);
+
+        // different values -> returns false
+        assertFalse(presentAttendance.hashCode() == (absentAttendance.hashCode()));
+
+        // different values -> returns false
+        assertFalse(presentAttendance.hashCode() == (attendance.hashCode()));
     }
 }
