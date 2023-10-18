@@ -74,6 +74,7 @@ public class Person implements Entry {
         phone = null;
         email = null;
         address = null;
+        personId = null;
     }
 
     /**
