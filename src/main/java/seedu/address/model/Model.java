@@ -93,6 +93,12 @@ public interface Model {
     void setEvent(Event target, Event editedEvent);
 
     /**
+     * Deletes the given event.
+     * @param target event to be deleted. {@code target} must exist in the address book.
+     */
+    void deleteEvent(Event target);
+
+    /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */

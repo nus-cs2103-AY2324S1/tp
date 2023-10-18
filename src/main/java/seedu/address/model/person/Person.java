@@ -108,12 +108,10 @@ public class Person {
         if (other == this) {
             return true;
         }
-
         // instanceof handles nulls
         if (!(other instanceof Person)) {
             return false;
         }
-
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)

@@ -75,4 +75,9 @@ public class SampleDataUtil {
                 .collect(Collectors.toSet());
     }
 
+    public static Set<Name> getNameSet(String... strings) {
+        return Arrays.stream(strings)
+                .map(Name::new)
+                .collect(Collectors.toSet());
+    }
 }

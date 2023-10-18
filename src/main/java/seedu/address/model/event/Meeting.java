@@ -34,7 +34,10 @@ public class Meeting extends Event {
      */
     @Override
     public String toString() {
-        return "Meeting: " + super.getStartDate().toString();
+        return String.format(
+                "%1$s; Date: %2$s; Start_Time: %3$s; End_Time: %4$s; Assigned_Persons: %5$s",
+                super.getName().toString(), super.getStartDate().toString(),
+                super.getStartTime().toString(), super.getEndTime().toString(), super.getNames());
     }
 
     /**
@@ -48,13 +51,9 @@ public class Meeting extends Event {
         if (other == this) {
             return true;
         }
-
         if (!(other instanceof Meeting)) {
             return false;
         }
-
         return other.getName().equals(getName());
     }
-
-
 }

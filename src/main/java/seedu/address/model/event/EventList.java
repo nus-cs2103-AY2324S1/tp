@@ -27,15 +27,6 @@ public class EventList {
         this.internalList.add(event);
     }
 
-
-    /**
-     * Deletes an event from the list of events.
-     * @param index index of the event to be deleted.
-     */
-    public void deleteEvent(int index) {
-        return;
-    }
-
     /**
      * Replaces the given event {@code target} in the list with {@code editedEvent}.
      * @param target event to be edited. {@code target} must exist in the address book.
@@ -52,11 +43,30 @@ public class EventList {
         this.internalList.set(index, editedEvent);
     }
 
+    /**
+     * Returns the event List
+     * @return ArrayList of events.
+     */
+    public List<Event> getEventsList() {
+        return this.internalList;
+    }
+
     public void setEvents(List<Event> newEvents) {
         this.internalList.setAll(newEvents);
     }
 
     public ObservableList<Event> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
+    }
+
+    /**
+     * Removes the equivalent event from the list.
+     * @param target Event to be removed.
+     */
+    public void remove(Event target) {
+        requireNonNull(target);
+        if (!this.internalList.remove(target)) {
+            throw new EventNotFoundException();
+        }
     }
 }

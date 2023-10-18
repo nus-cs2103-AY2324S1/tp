@@ -129,6 +129,11 @@ public class ModelManager implements Model {
         this.addressBook.setEvent(target, editedEvent);
     }
 
+    @Override
+    public void deleteEvent(Event target) {
+        this.addressBook.deleteEvent(target);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -142,7 +147,7 @@ public class ModelManager implements Model {
 
     /**
      * Returns the list of events
-     * @return
+     * @return ArrayList of events
      */
     @Override
     public ObservableList<Event> getEventList() {

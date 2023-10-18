@@ -88,8 +88,6 @@ public class EditMeetingCommand extends Command {
         return new CommandResult(generateSuccessMessage(editedMeeting));
     }
 
-
-
     /**
      * Creates and returns a {@code Meeting} with the details of {@code meetingToEdit}
      * @param meetingToEdit meeting to edit
@@ -146,7 +144,6 @@ public class EditMeetingCommand extends Command {
         } else {
             // no persons to be unassigned, do nothing
         }
-
         return new Meeting(updatedName, updatedDate,
                 Optional.of(updatedStartTime), Optional.of(updatedEndTime), updatedPersonNames);
     }
@@ -159,7 +156,6 @@ public class EditMeetingCommand extends Command {
                 invalidUnassignNames.add(name);
             }
         }
-
         return invalidUnassignNames;
     }
 
