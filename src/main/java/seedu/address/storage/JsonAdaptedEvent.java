@@ -1,6 +1,11 @@
 package seedu.address.storage;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -29,18 +34,27 @@ public class JsonAdaptedEvent {
     private final String startTime;
     private final String endTime;
 
+    private final List<JsonAdaptedName> assignedPersons = new ArrayList<>();
+
     /**
      * Constructs a {@code JsonAdaptedMeeting} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedEvent(@JsonProperty("eventType") String eventType, @JsonProperty("name") String name,
-                            @JsonProperty("date") String date, @JsonProperty("startTime") String startTime,
-                            @JsonProperty("endTime") String endTime) {
+    public JsonAdaptedEvent(@JsonProperty("eventType") String eventType,
+                            @JsonProperty("name") String name,
+                            @JsonProperty("date") String date,
+                            @JsonProperty("startTime") String startTime,
+                            @JsonProperty("endTime") String endTime,
+                            @JsonProperty("assignedPersons") List<JsonAdaptedName> assignedPersons) {
         this.eventType = eventType;
         this.name = name;
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
+
+        if (assignedPersons != null) {
+            this.assignedPersons.addAll(assignedPersons);
+        }
     }
 
     /**
@@ -52,6 +66,10 @@ public class JsonAdaptedEvent {
         this.date = source.getStartDate().toString();
         this.startTime = source.hasStartTime() ? source.getStartTime().toString() : "";
         this.endTime = source.hasEndTime() ? source.getEndTime().toString() : "";
+
+        this.assignedPersons.addAll(source.getNames().stream()
+                .map(JsonAdaptedName::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -60,6 +78,12 @@ public class JsonAdaptedEvent {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Event toModelType() throws IllegalValueException {
+
+        final List<Name> personNames = new ArrayList<>();
+
+        for (JsonAdaptedName name : assignedPersons) {
+            personNames.add(name.toModelType());
+        }
 
         if (this.name == null) {
             throw new IllegalValueException(
@@ -97,20 +121,23 @@ public class JsonAdaptedEvent {
         }
         final EventTime modelEventEndTime = EventTime.of(this.endTime);
 
+        final Set<Name> modelNames = new HashSet<>(personNames);
+
         // no other events for now
         return checkEventType(modelName, modelEventDate,
-                Optional.of(modelEventStartTime), Optional.of(modelEventEndTime));
+                Optional.of(modelEventStartTime), Optional.of(modelEventEndTime), modelNames);
     }
 
 
     private Event checkEventType(EventName eventName,
                                  EventDate eventDate,
                                  Optional<EventTime> startTime,
-                                 Optional<EventTime> endTime) throws IllegalValueException {
+                                 Optional<EventTime> endTime,
+                                 Set<Name> personNames) throws IllegalValueException {
 
         switch (this.eventType) {
         case "meeting":
-            return new Meeting(eventName, eventDate, startTime, endTime);
+            return new Meeting(eventName, eventDate, startTime, endTime, personNames);
         default:
             throw new IllegalValueException(UNKNOWN_EVENT_TYPE);
         }
