@@ -3,8 +3,6 @@ package networkbook.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
 
 import networkbook.commons.core.index.Index;
 import networkbook.commons.util.StringUtil;
@@ -33,6 +31,9 @@ public class ParserUtil {
             + "Please ensure that you do not input the same email more than once.";
     public static final String MESSAGE_LINK_DUPLICATE = "Your list of links contains duplicates.\n"
             + "Please ensure that you do not input the same link more than once.";
+
+    public static final String MESSAGE_TAG_DUPLICATE = "Your list of tags contains duplicates. \n"
+            + "Please ensure that you do not input the same tag more than once.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -238,11 +239,14 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses {@code Collection<String> tags} into a {@code UniqueList<Tag>}.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
+    public static UniqueList<Tag> parseTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
+        if (!verifyNoDuplicates(tags)) {
+            throw new ParseException(MESSAGE_TAG_DUPLICATE);
+        }
+        final UniqueList<Tag> tagSet = new UniqueList<>();
         for (String tagName : tags) {
             tagSet.add(parseTag(tagName));
         }

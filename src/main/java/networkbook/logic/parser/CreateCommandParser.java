@@ -1,6 +1,5 @@
 package networkbook.logic.parser;
 
-import java.util.Set;
 import java.util.stream.Stream;
 
 import networkbook.logic.Messages;
@@ -71,8 +70,8 @@ public class CreateCommandParser implements Parser<CreateCommand> {
                     argMultimap.getValue(CliSyntax.PREFIX_GRADUATION).orElse(null));
         Course course = ParserUtil.parseCourse(argMultimap.getValue(CliSyntax.PREFIX_COURSE).orElse(null));
         Specialisation specialisation = ParserUtil.parseSpecialisation(
-                    argMultimap.getValue(CliSyntax.PREFIX_SPECIALISATION).orElse(null));
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(CliSyntax.PREFIX_TAG));
+                argMultimap.getValue(CliSyntax.PREFIX_SPECIALISATION).orElse(null));
+        UniqueList<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(CliSyntax.PREFIX_TAG));
         Priority priority = ParserUtil.parsePriority(argMultimap.getValue(CliSyntax.PREFIX_PRIORITY).orElse(null));
 
         Person person = new Person(name, phones, emails, links, graduation, course, specialisation,
