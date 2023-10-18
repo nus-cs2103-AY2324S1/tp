@@ -1,11 +1,41 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.*;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.ANNUALLEAVE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.ANNUALLEAVE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.BANKACCOUNT_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.BANKACCOUNT_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.JOINDATE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.JOINDATE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ANNUALLEAVE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_BANKACCOUNT_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_JOINDATE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_SALARY_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.SALARY_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.SALARY_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
+import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ANNUALLEAVE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_BANKACCOUNT_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_JOINDATE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SALARY_BOB;
+import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalPersons.AMY;
@@ -15,7 +45,15 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.AnnualLeave;
+import seedu.address.model.person.BankAccount;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.JoinDate;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Salary;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandParserTest {
@@ -29,15 +67,6 @@ public class AddCommandParserTest {
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + BANKACCOUNT_DESC_BOB + JOINDATE_DESC_BOB + SALARY_DESC_BOB
                 + ANNUALLEAVE_DESC_BOB, new AddCommand(expectedPerson));
-
-
-        // multiple tags - all accepted
-        Person expectedPersonMultipleTags = new PersonBuilder(BOB)
-                .build();
-        assertParseSuccess(parser,
-                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                        + BANKACCOUNT_DESC_BOB + JOINDATE_DESC_BOB + SALARY_DESC_BOB
-                        + ANNUALLEAVE_DESC_BOB, new AddCommand(expectedPersonMultipleTags));
     }
 
     @Test
@@ -62,11 +91,29 @@ public class AddCommandParserTest {
         assertParseFailure(parser, ADDRESS_DESC_AMY + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
 
+        // multiple bank account
+        assertParseFailure(parser, BANKACCOUNT_DESC_AMY + validExpectedPersonString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_BANK_ACCOUNT));
+
+        // multiple join date
+        assertParseFailure(parser, JOINDATE_DESC_AMY + validExpectedPersonString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_JOIN_DATE));
+
+        // multiple salary
+        assertParseFailure(parser, SALARY_DESC_AMY + validExpectedPersonString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_SALARY));
+
+        // multiple annual leave
+        assertParseFailure(parser, ANNUALLEAVE_DESC_AMY + validExpectedPersonString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ANNUAL_LEAVE));
+
         // multiple fields repeated
         assertParseFailure(parser,
                 validExpectedPersonString + PHONE_DESC_AMY + EMAIL_DESC_AMY + NAME_DESC_AMY + ADDRESS_DESC_AMY
+                        + BANKACCOUNT_DESC_AMY + ANNUALLEAVE_DESC_AMY + SALARY_DESC_AMY + JOINDATE_DESC_AMY
                         + validExpectedPersonString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_ADDRESS, PREFIX_EMAIL, PREFIX_PHONE));
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_ADDRESS, PREFIX_EMAIL, PREFIX_PHONE,
+                        PREFIX_BANK_ACCOUNT, PREFIX_ANNUAL_LEAVE, PREFIX_JOIN_DATE, PREFIX_SALARY));
 
         // invalid value followed by valid value
 
@@ -86,6 +133,22 @@ public class AddCommandParserTest {
         assertParseFailure(parser, INVALID_ADDRESS_DESC + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
 
+        // invalid bank account
+        assertParseFailure(parser, INVALID_BANKACCOUNT_DESC + validExpectedPersonString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_BANK_ACCOUNT));
+
+        // invalid join date
+        assertParseFailure(parser, INVALID_JOINDATE_DESC + validExpectedPersonString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_JOIN_DATE));
+
+        // invalid salary
+        assertParseFailure(parser, INVALID_SALARY_DESC + validExpectedPersonString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_SALARY));
+
+        // invalid annual leave
+        assertParseFailure(parser, INVALID_ANNUALLEAVE_DESC + validExpectedPersonString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ANNUAL_LEAVE));
+
         // valid value followed by invalid value
 
         // invalid name
@@ -103,6 +166,22 @@ public class AddCommandParserTest {
         // invalid address
         assertParseFailure(parser, validExpectedPersonString + INVALID_ADDRESS_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
+
+        // invalid bank account
+        assertParseFailure(parser, validExpectedPersonString + INVALID_BANKACCOUNT_DESC,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_BANK_ACCOUNT));
+
+        // invalid join date
+        assertParseFailure(parser, validExpectedPersonString + INVALID_JOINDATE_DESC,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_JOIN_DATE));
+
+        // invalid salary
+        assertParseFailure(parser, validExpectedPersonString + INVALID_SALARY_DESC,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_SALARY));
+
+        // invalid annual leave
+        assertParseFailure(parser, validExpectedPersonString + INVALID_ANNUALLEAVE_DESC,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ANNUAL_LEAVE));
     }
 
     // This test case can be either deleted or kept. Keep this if we have any other fields that are optional.
@@ -138,22 +217,22 @@ public class AddCommandParserTest {
                 + BANKACCOUNT_DESC_BOB + JOINDATE_DESC_BOB + SALARY_DESC_BOB + ANNUALLEAVE_DESC_BOB,
                 expectedMessage);
 
-        // missing bank account
+        // missing bank prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB
                 + VALID_BANKACCOUNT_BOB + JOINDATE_DESC_BOB + SALARY_DESC_BOB + ANNUALLEAVE_DESC_BOB,
                 expectedMessage);
 
-        // missing join date
+        // missing join date prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB
                 + BANKACCOUNT_DESC_BOB + VALID_JOINDATE_BOB + SALARY_DESC_BOB + ANNUALLEAVE_DESC_BOB,
                 expectedMessage);
 
-        // missing salary
+        // missing salary prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB
                 + BANKACCOUNT_DESC_BOB + JOINDATE_DESC_BOB + VALID_SALARY_BOB + ANNUALLEAVE_DESC_BOB,
                 expectedMessage);
 
-        // missing annual leave
+        // missing annual leave prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB
                 + BANKACCOUNT_DESC_BOB + JOINDATE_DESC_BOB + SALARY_DESC_BOB + VALID_ANNUALLEAVE_BOB,
                 expectedMessage);
