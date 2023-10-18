@@ -20,11 +20,11 @@ import seedu.address.model.util.SampleDataUtil;
 public class PersonBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
-    public static final String DEFAULT_NRIC = "S1234567E";
+    public static final String DEFAULT_NRIC = "T7243948H";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final String DEFAULT_APPOINTMENT = "2023-01-1 10:00 12:00";
+    public static final String DEFAULT_APPOINTMENT = "2023-01-10 10:00 12:00";
 
     private Name name;
     private Nric nric;
@@ -58,8 +58,8 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
-        appointment = personToCopy.getAppointment();
         medicalHistories = new HashSet<>(personToCopy.getMedicalHistories());
+        appointment = personToCopy.getAppointment().isPresent() ? personToCopy.getAppointment().get() : null;
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -78,7 +78,6 @@ public class PersonBuilder {
         this.nric = new Nric(nric);
         return this;
     }
-
 
     /**
      * Sets the {@code Appointment} of the {@code Person} that we are building.
@@ -136,6 +135,19 @@ public class PersonBuilder {
     public Person build() {
         return new Person(name, nric, phone, email, address,
                 appointment, medicalHistories, tags);
+      
+    }
+
+    /**
+     * Sets the {@code MedicalHistory} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withMedical(String... medicalHistories) {
+        this.medicalHistories = SampleDataUtil.getMedicalHistorySet(medicalHistories);
+        return this;
+    }
+
+    public Person build() {
+        return new Person(name, nric, phone, email, address, appointment, medicalHistories, tags);
     }
 
 }
