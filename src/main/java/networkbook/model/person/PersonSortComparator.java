@@ -85,12 +85,10 @@ public class PersonSortComparator implements Comparator<Person> {
      */
     public static Comparator<Person> generateGradComparator(boolean isAsc) {
         return (Person o1, Person o2) -> {
-            Optional<GraduatingYear> g1 = o1.getGraduatingYear();
-            Optional<GraduatingYear> g2 = o2.getGraduatingYear();
+            Optional<Graduation> g1 = o1.getGraduation();
+            Optional<Graduation> g2 = o2.getGraduation();
             if (g1.isPresent() && g2.isPresent()) {
-                return 0;
-                // TODO implement once graduation feature is merged
-                // return isAsc ? g1.get().compareTo(g2.get()) : g2.get().compareTo(g1.get());
+                return isAsc ? g1.get().compareTo(g2.get()) : g2.get().compareTo(g1.get());
             } else {
                 return OPTIONAL_COMPARATOR.compare(g1, g2);
             }
