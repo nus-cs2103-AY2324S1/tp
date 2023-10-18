@@ -22,7 +22,7 @@ public class PersonBuilder {
     public static final String DEFAULT_GENDER = "FEMALE";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_BIRTHDATE = "20/10/2000";
+    public static final String DEFAULT_BIRTHDATE = "2000/10/20";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
     private Name name;

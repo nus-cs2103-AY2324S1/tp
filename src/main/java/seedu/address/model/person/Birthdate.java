@@ -11,9 +11,9 @@ import java.time.format.DateTimeParseException;
  * Guarantees: immutable; is valid as declared in {@link #isValidBirthdate(String)}
  */
 public class Birthdate {
-    public static final String MESSAGE_CONSTRAINTS = "Birthdates should be of the form DD/MM/YYYY";
+    public static final String MESSAGE_CONSTRAINTS = "Birthdates should be of the form YYYY/MM/DD";
 
-    public static final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    public static final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 
     public final String value;
 
