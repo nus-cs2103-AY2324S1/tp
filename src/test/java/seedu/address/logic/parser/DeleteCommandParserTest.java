@@ -26,7 +26,7 @@ public class DeleteCommandParserTest {
     private DeleteCommandParser parser = new DeleteCommandParser();
 
     private DeletePersonDescriptor defaultDescriptor = new DeletePersonDescriptor();
-        
+
     private Name defaultName = new Name(PersonBuilder.DEFAULT_NAME);
 
     private Nric defaultNric = new Nric(PersonBuilder.DEFAULT_NRIC);
