@@ -160,7 +160,7 @@ public class EditCommand extends Command {
 
         EditCommand otherEditCommand = (EditCommand) other;
 
-        // Check if both the name and nric fields are equal for equality check
+        // Check if both the name and nric are equal for equality check
         boolean isNameEqual = (name == null && otherEditCommand.name == null)
                 || (name != null && name.equals(otherEditCommand.name));
 
