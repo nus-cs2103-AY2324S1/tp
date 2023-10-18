@@ -5,6 +5,9 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
+import seedu.address.model.meeting.AttendeeContainsKeywordsPredicate;
+import seedu.address.model.meeting.LocationContainsKeywordsPredicate;
+import seedu.address.model.meeting.MeetingTimeContainsPredicate;
 import seedu.address.model.meeting.TitleContainsKeywordsPredicate;
 
 /**
@@ -22,7 +25,7 @@ public class FilterMeetingCommand extends Command {
 
     private final TitleContainsKeywordsPredicate predicate;
 
-    public FilterMeetingCommand(TitleContainsKeywordsPredicate predicate) {
+    public FilterMeetingCommand(TitleContainsKeywordsPredicate predicate, LocationContainsKeywordsPredicate predicate1, MeetingTimeContainsPredicate predicate2, AttendeeContainsKeywordsPredicate predicate3, ) {
         this.predicate = predicate;
     }
 

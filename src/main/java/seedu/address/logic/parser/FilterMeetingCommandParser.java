@@ -20,8 +20,11 @@ import seedu.address.logic.commands.FilterMeetingCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.meeting.Attendee;
+import seedu.address.model.meeting.AttendeeContainsKeywordsPredicate;
 import seedu.address.model.meeting.Location;
+import seedu.address.model.meeting.LocationContainsKeywordsPredicate;
 import seedu.address.model.meeting.MeetingTime;
+import seedu.address.model.meeting.MeetingTimeContainsPredicate;
 import seedu.address.model.meeting.Title;
 import seedu.address.model.meeting.TitleContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -59,9 +62,12 @@ public class FilterMeetingCommandParser implements Parser<FilterMeetingCommand> 
         }
         String[] attendeeKeyWords = argMultimap.getValue(PREFIX_NAME).get().split("\\s+");
         String[] tagKeyWords = argMultimap.getValue(PREFIX_TAG).get().split("\\s+");
-        
+        // CREATE PREDICATE BASED ON ALL FIELDS
 
-        return new FilterMeetingCommand(new TitleContainsKeywordsPredicate(Arrays.asList(titleKeyWords)));
+        return new FilterMeetingCommand(new TitleContainsKeywordsPredicate(Arrays.asList(titleKeyWords)),
+                new LocationContainsKeywordsPredicate(Arrays.asList(locationKeyWords)),
+                new MeetingTimeContainsPredicate(start, end),
+                new AttendeeContainsKeywordsPredicate(Arrays.asList(titleKeyWords)));
     }
 
 }

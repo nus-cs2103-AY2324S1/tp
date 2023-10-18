@@ -51,6 +51,10 @@ public class Meeting {
         return meetingTime;
     }
 
+    public boolean withinSpecifiedTime(LocalDateTime start, LocalDateTime end) {
+        return meetingTime.getStart().isAfter(start) && meetingTime.getEnd().isBefore(end);
+    }
+
     /**
      * Returns an immutable attendee set, which throws
      * {@code UnsupportedOperationException}
