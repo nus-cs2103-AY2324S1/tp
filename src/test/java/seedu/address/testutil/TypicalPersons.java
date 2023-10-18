@@ -70,7 +70,19 @@ public class TypicalPersons {
         return ab;
     }
 
+    public static AddressBook getTypicalUnsortedAddressBook() {
+        AddressBook ab = new AddressBook();
+        for (Person person : getTypicalUnsortedPersons()) {
+            ab.addPerson(person);
+        }
+        return ab;
+    }
+
     public static List<Person> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    }
+
+    public static List<Person> getTypicalUnsortedPersons() {
+        return new ArrayList<>(Arrays.asList(CARL, GEORGE, ALICE, FIONA, DANIEL, ELLE, BENSON));
     }
 }
