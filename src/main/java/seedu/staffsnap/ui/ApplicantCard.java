@@ -56,6 +56,4 @@ public class ApplicantCard extends UiPart<Region> {
                             + ". " + interview.type));
                 });
     }
-
-
 }

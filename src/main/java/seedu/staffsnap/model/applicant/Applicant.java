@@ -37,6 +37,7 @@ public class Applicant implements Comparable<Applicant> {
         this.email = email;
         this.position = position;
         this.interviews.addAll(interviews);
+        Collections.sort(this.interviews);
     }
 
     public Name getName() {
