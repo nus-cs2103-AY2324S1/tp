@@ -34,24 +34,15 @@ public class EmployeeTest {
         // null -> returns false
         assertFalse(ALICE.isSameEmployee(null));
 
-        // same name, all other attributes different -> returns true
-        Employee editedAlice = new EmployeeBuilder(ALICE).withPosition(VALID_POSITION_BOB).withId(VALID_ID_BOB)
+        // same id, all other attributes different -> returns true
+        Employee editedAlice = new EmployeeBuilder(ALICE).withName(VALID_NAME_BOB).withPosition(VALID_POSITION_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withDepartments(VALID_DEPARTMENT_HUSBAND).build();
         assertTrue(ALICE.isSameEmployee(editedAlice));
 
-        // different name, all other attributes same -> returns false
-        editedAlice = new EmployeeBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        // different id, all other attributes same -> returns false
+        editedAlice = new EmployeeBuilder(ALICE).withId(VALID_ID_BOB).build();
         assertFalse(ALICE.isSameEmployee(editedAlice));
-
-        // name differs in case, all other attributes same -> returns false
-        Employee editedBob = new EmployeeBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
-        assertFalse(BOB.isSameEmployee(editedBob));
-
-        // name has trailing spaces, all other attributes same -> returns false
-        String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
-        editedBob = new EmployeeBuilder(BOB).withName(nameWithTrailingSpaces).build();
-        assertFalse(BOB.isSameEmployee(editedBob));
     }
 
     @Test

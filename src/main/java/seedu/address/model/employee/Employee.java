@@ -85,7 +85,7 @@ public class Employee {
         }
 
         return otherEmployee != null
-                && otherEmployee.getName().equals(getName());
+                && otherEmployee.getId().equals(getId());
     }
 
     /**
