@@ -119,7 +119,7 @@ public class ModelManager implements Model {
         return this.numberOfFlashCards;
     }
     @Override
-    public int getNumberOfRememberedWords(){
+    public int getNumberOfRememberedWords() {
         return this.numberOfRememberedWords;
     }
     @Override

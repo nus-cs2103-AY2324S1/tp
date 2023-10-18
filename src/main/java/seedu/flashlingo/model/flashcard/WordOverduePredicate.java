@@ -1,8 +1,8 @@
 package seedu.flashlingo.model.flashcard;
 
-import seedu.flashlingo.commons.util.ToStringBuilder;
-
 import java.util.function.Predicate;
+
+import seedu.flashlingo.commons.util.ToStringBuilder;
 
 /**
  * Tests that a {@code FlashCard} is overdue or not.
