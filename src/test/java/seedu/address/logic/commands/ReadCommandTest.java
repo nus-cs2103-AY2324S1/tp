@@ -76,21 +76,33 @@ class ReadCommandTest {
     }
 
     @Test
-    public void fieldValueToString_validPhoneField_success() throws CommandException {
-        // Create a sample Person object with a valid phone field
+    public void fieldValueToString_validFields_success() throws CommandException {
+        // Create a sample Person object with valid fields
         Person personToRead = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
         ReadCommand readCommandPhoneTest = new ReadCommand(INDEX_FIRST_PERSON, "phone");
         ReadCommand readCommandEmailTest = new ReadCommand(INDEX_FIRST_PERSON, "email");
         ReadCommand readCommandAddressTest = new ReadCommand(INDEX_FIRST_PERSON, "address");
+        ReadCommand readCommandBankAccountTest = new ReadCommand(INDEX_FIRST_PERSON, "bank account");
+        ReadCommand readCommandJoinDateTest = new ReadCommand(INDEX_FIRST_PERSON, "join date");
+        ReadCommand readCommandSalaryTest = new ReadCommand(INDEX_FIRST_PERSON, "salary");
+        ReadCommand readCommandAnnualLeaveTest = new ReadCommand(INDEX_FIRST_PERSON, "annual leave");
 
         String phoneValue = readCommandPhoneTest.fieldValueToString(personToRead);
         String emailValue = readCommandEmailTest.fieldValueToString(personToRead);
         String addressValue = readCommandAddressTest.fieldValueToString(personToRead);
+        String bankAccountValue = readCommandBankAccountTest.fieldValueToString(personToRead);
+        String joinDateValue = readCommandJoinDateTest.fieldValueToString(personToRead);
+        String salaryValue = readCommandSalaryTest.fieldValueToString(personToRead);
+        String annualLeaveValue = readCommandAnnualLeaveTest.fieldValueToString(personToRead);
 
         assertEquals("94351253", phoneValue);
         assertEquals("alice@example.com", emailValue);
         assertEquals("123, Jurong West Ave 6, #08-111", addressValue);
+        assertEquals("123123123123", bankAccountValue);
+        assertEquals("04/05/2021", joinDateValue);
+        assertEquals("1500.00", salaryValue);
+        assertEquals("2", annualLeaveValue);
     }
 
 }
