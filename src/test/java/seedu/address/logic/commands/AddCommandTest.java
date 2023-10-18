@@ -150,11 +150,6 @@ public class AddCommandTest {
         }
 
         @Override
-        public Interview findInterviewWithApplicant(Applicant applicant) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public ObservableList<Applicant> getFilteredApplicantList() {
             throw new AssertionError("This method should not be called.");
         }

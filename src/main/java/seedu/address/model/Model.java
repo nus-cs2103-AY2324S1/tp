@@ -79,13 +79,6 @@ public interface Model {
      */
     void setApplicant(Applicant target, Applicant editedApplicant);
 
-    /**
-     * Finds the interview that contains the applicant and returns it.
-     * Returns null if the applicant does not have an interview.
-     * {@code applicant} must exist in the address book.
-     */
-    Interview findInterviewWithApplicant(Applicant applicant);
-
     /** Returns an unmodifiable view of the filtered applicant list */
     ObservableList<Applicant> getFilteredApplicantList();
 
