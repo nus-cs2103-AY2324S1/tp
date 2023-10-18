@@ -1,11 +1,13 @@
 package seedu.lovebook.model.person;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.lovebook.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.util.ArrayList;
 import java.util.function.Predicate;
 
 import seedu.lovebook.commons.util.StringUtil;
@@ -30,7 +32,7 @@ public class MetricContainsKeywordPredicate implements Predicate<Date> {
 
     @Override
     public boolean test(Date date) {
-        requireNonNull(metric);
+        requireNonNull(date);
         if (metric.equals(PREFIX_NAME)) {
             return StringUtil.containsWordIgnoreCase(date.getName().fullName, keyword);
         }
@@ -43,7 +45,7 @@ public class MetricContainsKeywordPredicate implements Predicate<Date> {
         if (metric.equals(PREFIX_HEIGHT)) {
             return StringUtil.containsWordIgnoreCase(date.getHeight().value, keyword);
         }
-        return false; // invalid metric
+        return false;
     }
 
     @Override

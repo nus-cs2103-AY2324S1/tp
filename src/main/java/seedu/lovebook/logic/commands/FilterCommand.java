@@ -8,6 +8,8 @@ import seedu.lovebook.logic.Messages;
 import seedu.lovebook.model.Model;
 import seedu.lovebook.model.person.MetricContainsKeywordPredicate;
 
+import java.util.ArrayList;
+
 
 /**
  * Filter based on a specific metric and list the dates whose metric contains the keyword.
@@ -22,17 +24,19 @@ public class FilterCommand extends Command {
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: /METRIC KEYWORD (METRIC in the form of initial alphabet) \n"
             + "Example: " + COMMAND_WORD + PREFIX_NAME + " Bob (AKA find dates whose name that match Bob";
-    private final MetricContainsKeywordPredicate predicate;
+    private final ArrayList<MetricContainsKeywordPredicate> predicates;
 
 
-    public FilterCommand(MetricContainsKeywordPredicate predicate) {
-        this.predicate = predicate;
+    public FilterCommand(ArrayList<MetricContainsKeywordPredicate> predicates) {
+        this.predicates = predicates;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
+        for (MetricContainsKeywordPredicate predicate : predicates) {
+            model.updateFilteredPersonList(predicate);
+        }
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
@@ -48,13 +52,13 @@ public class FilterCommand extends Command {
         }
 
         FilterCommand otherFilterCommand = (FilterCommand) other;
-        return predicate.equals(otherFilterCommand.predicate);
+        return predicates.equals(otherFilterCommand.predicates);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("predicate", predicate)
+                .add("predicates", predicates)
                 .toString();
     }
 }
