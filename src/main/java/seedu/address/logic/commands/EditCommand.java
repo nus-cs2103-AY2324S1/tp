@@ -139,7 +139,7 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Appointment updatedAppointment = editPersonDescriptor.getAppointment()
-                .orElse(personToEdit.getAppointment().get());
+                .orElse(personToEdit.getAppointment().orElse(null));
         Set<MedicalHistory> updatedMedicalHistories =
                 editPersonDescriptor.getMedicalHistories().orElse((personToEdit.getMedicalHistories()));
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
@@ -162,11 +162,10 @@ public class EditCommand extends Command {
         EditCommand otherEditCommand = (EditCommand) other;
 
         // Check if both the name and nric are equal for equality check
-        boolean isNameEqual = (name == null && otherEditCommand.name == null)
-                || (name != null && name.equals(otherEditCommand.name));
+        boolean isNameEqual = Objects.equals(name, otherEditCommand.name);
 
-        boolean isNricEqual = (nric == null && otherEditCommand.nric == null)
-                || (nric != null && nric.equals(otherEditCommand.nric));
+        boolean isNricEqual = Objects.equals(nric, otherEditCommand.nric);
+
 
         return isNameEqual && isNricEqual;
     }

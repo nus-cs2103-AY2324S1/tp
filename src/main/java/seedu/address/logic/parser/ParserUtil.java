@@ -180,7 +180,7 @@ public class ParserUtil {
         requireNonNull(medicalHistory);
         String trimmedMedicalHistory = medicalHistory.trim();
         if (!MedicalHistory.isValidMedicalHistory(medicalHistory)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+            throw new ParseException(MedicalHistory.MESSAGE_CONSTRAINTS);
         }
         return new MedicalHistory(trimmedMedicalHistory);
     }
@@ -227,9 +227,6 @@ public class ParserUtil {
         requireNonNull(medHistories);
         final Set<MedicalHistory> historiesSet = new HashSet<>();
         for (String historyName : medHistories) {
-            if (!MedicalHistory.isValidMedicalHistory(historyName)) {
-                throw new ParseException(MedicalHistory.MESSAGE_CONSTRAINTS);
-            }
             historiesSet.add(parseMedical(historyName));
         }
         return historiesSet;
