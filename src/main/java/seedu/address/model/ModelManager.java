@@ -113,7 +113,7 @@ public class ModelManager implements Model {
 
     @Override
     public String gatherEmails(String prompt) {
-        return addressBook.gatherPersons(prompt);
+        return addressBook.gatherEmails(prompt);
     }
 
     //=========== Filtered Person List Accessors =============================================================

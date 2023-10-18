@@ -106,7 +106,7 @@ public class PersonTest {
     @Test
     public void gatherEmails_noPersonFound() {
         String prompt = "Sample Financial Plan 3";
-        assertEquals(new String(), ALICE.compareFinancialPlan(prompt));
+        assertEquals(new String(), ALICE.gatherEmailsContainsFinancialPlan(prompt));
     }
 
     @Test
@@ -114,8 +114,8 @@ public class PersonTest {
         FinancialPlan elleFinancialPlan = ELLE.getFinancialPlans().iterator().next();
         String prompt = elleFinancialPlan.toString().replaceAll("[\\[\\]\\(\\)]", "");
         String prompt2 = "Sample Financial Plan 2";
-        assertEquals(ELLE.getEmail().toString(), ELLE.compareFinancialPlan(prompt));
-        assertEquals(ELLE.getEmail().toString(), ELLE.compareFinancialPlan(prompt2));
+        assertEquals(ELLE.getEmail().toString(), ELLE.gatherEmailsContainsFinancialPlan(prompt));
+        assertEquals(ELLE.getEmail().toString(), ELLE.gatherEmailsContainsFinancialPlan(prompt2));
     }
 
     @Test

@@ -99,7 +99,7 @@ public class Person {
     /**
      * Checks if the given {@code prompt} is in the {@code financialPlans} and returns the email if true.
      */
-    public String compareFinancialPlan(String prompt) {
+    public String gatherEmailsContainsFinancialPlan(String prompt) {
         FinancialPlan fp = new FinancialPlan(prompt);
         if (financialPlans.contains(fp)) {
             return this.email.toString();

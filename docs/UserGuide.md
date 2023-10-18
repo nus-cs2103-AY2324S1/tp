@@ -85,7 +85,7 @@ Format: `help`
 
 Add a client’s contacts to address book (name, phone number, email, home address, next-of-kin name, next-of-kin phone number) into Address Book
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS nk/NEXT_KIN nkp/NEXT_KIN_PHONE [fp/FINICIAL_PLAN] [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS nk/NEXT_KIN nkp/NEXT_KIN_PHONE [fp/FINANCIAL_PLAN] [t/TAG]…​`
 
 Acceptable Values: 
 1. NAME - any value is possible
