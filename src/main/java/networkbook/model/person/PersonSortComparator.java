@@ -1,6 +1,7 @@
 package networkbook.model.person;
 
 import static java.util.Objects.requireNonNull;
+import static networkbook.commons.util.AppUtil.checkArgument;
 
 import java.util.Comparator;
 import java.util.Optional;
@@ -28,6 +29,7 @@ public class PersonSortComparator implements Comparator<Person> {
     public static final String MESSAGE_CONSTRAINTS_FIELD = "Field should be one of the following: "
             + "name, grad, course, spec, priority, none.";
     public static final String MESSAGE_CONSTRAINTS_ORDER = "Order should be one of the following: asc, desc.";
+    public static final String MESSAGE_CONSTRAINTS = MESSAGE_CONSTRAINTS_FIELD + "\n" + MESSAGE_CONSTRAINTS_ORDER;
 
     private final Comparator<Person> comparator;
     private final SortField field;
@@ -39,6 +41,7 @@ public class PersonSortComparator implements Comparator<Person> {
     public PersonSortComparator(SortField field, SortOrder order) {
         requireNonNull(field);
         requireNonNull(order);
+        checkArgument(isValidSortParams(field, order), MESSAGE_CONSTRAINTS);
         this.field = field;
         this.order = order;
         this.comparator = generateComparator(field, order);

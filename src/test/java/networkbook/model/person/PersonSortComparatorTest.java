@@ -252,6 +252,7 @@ public class PersonSortComparatorTest {
         assertTrue(PersonSortComparator.isValidSortField(SortField.GRAD));
         assertTrue(PersonSortComparator.isValidSortField(SortField.PRIORITY));
         assertTrue(PersonSortComparator.isValidSortField(SortField.NONE));
+
         assertFalse(PersonSortComparator.isValidSortField(SortField.INVALID));
     }
 
@@ -259,7 +260,22 @@ public class PersonSortComparatorTest {
     public void isValidSortOrder() {
         assertTrue(PersonSortComparator.isValidSortOrder(SortOrder.ASCENDING));
         assertTrue(PersonSortComparator.isValidSortOrder(SortOrder.DESCENDING));
+
         assertFalse(PersonSortComparator.isValidSortOrder(SortOrder.INVALID));
+    }
+
+    @Test
+    public void isValidSortParams() {
+        // valid
+        assertTrue(PersonSortComparator.isValidSortParams(SortField.NONE, SortOrder.ASCENDING));
+        assertTrue(PersonSortComparator.isValidSortParams(SortField.NAME, SortOrder.DESCENDING));
+        assertTrue(PersonSortComparator.isValidSortParams(SortField.GRAD, SortOrder.DESCENDING));
+        assertTrue(PersonSortComparator.isValidSortParams(SortField.PRIORITY, SortOrder.ASCENDING));
+
+        // invalid
+        assertFalse(PersonSortComparator.isValidSortParams(SortField.INVALID, SortOrder.INVALID));
+        assertFalse(PersonSortComparator.isValidSortParams(SortField.NONE, SortOrder.INVALID));
+        assertFalse(PersonSortComparator.isValidSortParams(SortField.INVALID, SortOrder.ASCENDING));
     }
 
 }
