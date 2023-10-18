@@ -2,6 +2,7 @@ package seedu.address.model.schedule;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -70,6 +71,17 @@ class StartTimeTest {
 
         // different EndTime -> returns true
         assertFalse(startTime.equals(new EndTime(LocalDateTime.of(2024, 1, 1, 0, 0, 0))));
+    }
+
+    @Test
+    public void hashcode() {
+        StartTime startTime = new StartTime(LocalDateTime.of(2023, 1, 1, 0, 0, 0));
+
+        // same values -> returns same hashcode
+        assertEquals(startTime.hashCode(), new StartTime(LocalDateTime.of(2023, 1, 1, 0, 0, 0)).hashCode());
+
+        // different value -> returns different hashcode
+        assertNotEquals(startTime.hashCode(), new StartTime(LocalDateTime.of(2024, 1, 1, 0, 0, 0)).hashCode());
     }
 
     @Test
