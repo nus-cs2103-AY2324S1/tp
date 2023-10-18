@@ -92,7 +92,6 @@ public interface Model {
     void updateFilteredBandList(Predicate<Band> predicate);
 
     void updateFilteredMusicianListFromBands();
-  
     /**
      * Returns true if a band with the same identity as {@code band} exists in the address book.
      */
