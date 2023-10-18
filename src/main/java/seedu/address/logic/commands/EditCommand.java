@@ -117,43 +117,31 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Optional<Birthday> updatedBirthday = editPersonDescriptor.getBirthday();
-        Optional<Linkedin> updatedLinkedin = editPersonDescriptor.getLinkedin();
-        Optional<Email> updatedSecondaryEmail = editPersonDescriptor.getSecondaryEmail();
-        Optional<Telegram> updatedTelegram = editPersonDescriptor.getTelegram();
+        Optional<Birthday> updatedBirthday = editPersonDescriptor.getBirthday().or(() -> personToEdit.getBirthday());
+        Optional<Linkedin> updatedLinkedin = editPersonDescriptor.getLinkedin().or(() -> personToEdit.getLinkedin());
+        Optional<Email> updatedSecondaryEmail = editPersonDescriptor.getSecondaryEmail()
+                .or(() -> personToEdit.getSecondaryEmail());
+        Optional<Telegram> updatedTelegram = editPersonDescriptor.getTelegram().or(() -> personToEdit.getTelegram());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Optional<Integer> id = personToEdit.getId();
+
+        Person updatedPerson = new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedBirthday,
+                updatedLinkedin, updatedSecondaryEmail, updatedTelegram, updatedTags, id);
 
         if ((!personToEdit.hasValidBirthday() && !updatedBirthday.equals(Optional.empty()))
                 || (!personToEdit.hasValidLinkedin() && !updatedLinkedin.equals(Optional.empty()))
                 || (!personToEdit.hasValidTelegram() && !updatedTelegram.equals(Optional.empty()))
                 || (!personToEdit.hasValidSecondaryEmail() && !updatedSecondaryEmail.equals(Optional.empty()))) {
             throw new CommandException(MESSAGE_EDIT_ALTERNATIVE_FAIL);
-        } else {
-            if (personToEdit.hasValidBirthday() && updatedBirthday.equals(Optional.empty())) {
-                updatedBirthday = personToEdit.getBirthday();
-            }
-            if (personToEdit.hasValidTelegram() && updatedTelegram.equals(Optional.empty())) {
-                updatedTelegram = personToEdit.getTelegram();
-            }
-            if (personToEdit.hasValidSecondaryEmail() && updatedSecondaryEmail.equals(Optional.empty())) {
-                updatedSecondaryEmail = personToEdit.getSecondaryEmail();
-            }
-            if (personToEdit.hasValidLinkedin() && updatedLinkedin.equals(Optional.empty())) {
-                updatedLinkedin = personToEdit.getLinkedin();
-            }
-            Person updatedPerson = new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedBirthday,
-                    updatedLinkedin, updatedSecondaryEmail, updatedTelegram, updatedTags, id);
-            if (updatedPerson.equals(personToEdit)) {
+        } else if (updatedPerson.equals(personToEdit)) {
                 throw new CommandException(String.format(MESSAGE_EDIT_FIELDS_SAME, updatedName));
+        } else if (updatedPerson.hasValidSecondaryEmail()) {
+            if (updatedPerson.hasRepeatedEmail()) {
+                throw new CommandException(String.format(MESSAGE_EDIT_DUPLICATE_EMAIL, updatedName));
             }
-            if (!updatedSecondaryEmail.equals(Optional.empty())) {
-                if (updatedPerson.hasSameEmail()) {
-                    throw new CommandException(String.format(MESSAGE_EDIT_DUPLICATE_EMAIL, updatedName));
-                }
-            }
-            return updatedPerson;
         }
+
+        return updatedPerson;
     }
 
     @Override
