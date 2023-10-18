@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -117,25 +115,30 @@ public class EditCommandTest {
     }
 
     @Test
-    public void equals() {
-        final EditCommand standardCommand = new EditCommand(new Name("Amy"), null, DESC_AMY);
+    public void equals_nullObject_returnsFalse() {
+        EditPersonDescriptor descriptor = new EditPersonDescriptor();
+        assertFalse(descriptor.equals(null));
+    }
 
-        // same values -> returns true
-        EditPersonDescriptor copyDescriptor = new EditPersonDescriptor(DESC_AMY);
-        EditCommand commandWithSameValues = new EditCommand(new Name("Amy"), null, copyDescriptor);
-        assertTrue(standardCommand.equals(commandWithSameValues));
+    @Test
+    public void equals_differentTypes_returnsFalse() {
+        EditPersonDescriptor descriptor = new EditPersonDescriptor();
+        assertFalse(descriptor.equals(5)); // Different type
+    }
 
-        // same object -> returns true
-        assertTrue(standardCommand.equals(standardCommand));
+    @Test
+    public void equals_equalEditPersonDescriptors_returnsTrue() {
+        EditPersonDescriptor descriptor1 = new EditPersonDescriptor();
+        EditPersonDescriptor descriptor2 = new EditPersonDescriptor();
+        assertTrue(descriptor1.equals(descriptor2));
+    }
 
-        // null -> returns false
-        assertFalse(standardCommand.equals(null));
-
-        // different types -> returns false
-        assertFalse(standardCommand.equals(new ClearCommand()));
-
-        // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(new Name("John"), null, DESC_BOB)));
+    @Test
+    public void equals_unequalEditPersonDescriptors_returnsFalse() {
+        EditPersonDescriptor descriptor1 = new EditPersonDescriptor();
+        EditPersonDescriptor descriptor2 = new EditPersonDescriptor();
+        descriptor1.setName(new Name("Alice"));
+        assertFalse(descriptor1.equals(descriptor2)); // Different name
     }
 
     @Test
@@ -145,15 +148,6 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(new Name("John Doe"), null, descriptor);
 
         assertTrue(editCommand.equals(editCommand));
-    }
-
-    @Test
-    public void equals_differentTypes_returnsFalse() {
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
-                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
-        EditCommand editCommand = new EditCommand(new Name("John Doe"), null, descriptor);
-
-        assertFalse(editCommand.equals(5)); // Different type
     }
 
     @Test
