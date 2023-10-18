@@ -12,7 +12,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.FilterMeetingCommand;
+import seedu.address.logic.commands.FindMeetingCommand;
 import seedu.address.model.meeting.AttendeeContainsKeywordsPredicate;
 import seedu.address.model.meeting.GeneralMeetingPredicate;
 import seedu.address.model.meeting.LocationContainsKeywordsPredicate;
@@ -21,71 +21,71 @@ import seedu.address.model.meeting.MeetingTimeContainsPredicate;
 import seedu.address.model.meeting.TagContainsKeywordsPredicate;
 import seedu.address.model.meeting.TitleContainsKeywordsPredicate;
 
-public class FilterMeetingCommandParserTest {
+public class FindMeetingCommandParserTest {
 
-    private FilterMeetingCommandParser parser = new FilterMeetingCommandParser();
+    private FindMeetingCommandParser parser = new FindMeetingCommandParser();
     private LocalDateTime start = LocalDateTime.of(LocalDate.of(0001, 01, 01), LocalTime.of(00, 00));
     private LocalDateTime end = LocalDateTime.of(LocalDate.of(9999, 12, 31), LocalTime.of(23, 59));
     @Test
     public void parse_nonEmptyPreambleArg_throwsParseException() {
         assertParseFailure(parser, " dfvuv m/CS2103T",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterMeetingCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindMeetingCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_validArgsTitle_returnsFilterMeetingCommand() {
-        FilterMeetingCommand expectedFilterMeetingCommand =
-                new FilterMeetingCommand(preparePredicate(new String[]{"CS2103T", "", "", ""}, start, end));
-        assertParseSuccess(parser, " m/CS2103T", expectedFilterMeetingCommand);
+        FindMeetingCommand expectedFindMeetingCommand =
+                new FindMeetingCommand(preparePredicate(new String[]{"CS2103T", "", "", ""}, start, end));
+        assertParseSuccess(parser, " m/CS2103T", expectedFindMeetingCommand);
     }
 
     @Test
     public void parse_validArgsLocation_returnsFilterMeetingCommand() {
-        FilterMeetingCommand expectedFilterMeetingCommand =
-                new FilterMeetingCommand(preparePredicate(new String[]{"", "Zoom", "", ""}, start, end));
-        assertParseSuccess(parser, " a/Zoom", expectedFilterMeetingCommand);
+        FindMeetingCommand expectedFindMeetingCommand =
+                new FindMeetingCommand(preparePredicate(new String[]{"", "Zoom", "", ""}, start, end));
+        assertParseSuccess(parser, " a/Zoom", expectedFindMeetingCommand);
     }
 
     @Test
     public void parse_validArgsTime_returnsFilterMeetingCommand() {
         LocalDateTime start = LocalDateTime.parse("20.09.2023 1000", FORMAT);
         LocalDateTime end = LocalDateTime.parse("20.09.2023 1200", FORMAT);
-        FilterMeetingCommand expectedFilterMeetingCommand =
-                new FilterMeetingCommand(preparePredicate(new String[]{"", "", "", ""}, start, end));
-        assertParseSuccess(parser, " s/20.09.2023 1000 e/20.09.2023 1200", expectedFilterMeetingCommand);
+        FindMeetingCommand expectedFindMeetingCommand =
+                new FindMeetingCommand(preparePredicate(new String[]{"", "", "", ""}, start, end));
+        assertParseSuccess(parser, " s/20.09.2023 1000 e/20.09.2023 1200", expectedFindMeetingCommand);
     }
 
     @Test
     public void parse_validArgsAttendee_returnsFilterMeetingCommand() {
-        FilterMeetingCommand expectedFilterMeetingCommand =
-                new FilterMeetingCommand(preparePredicate(new String[]{"", "", "Alice Bob", ""}, start, end));
-        assertParseSuccess(parser, " n/Alice Bob", expectedFilterMeetingCommand);
+        FindMeetingCommand expectedFindMeetingCommand =
+                new FindMeetingCommand(preparePredicate(new String[]{"", "", "Alice Bob", ""}, start, end));
+        assertParseSuccess(parser, " n/Alice Bob", expectedFindMeetingCommand);
     }
 
     @Test
     public void parse_validArgsTag_returnsFilterMeetingCommand() {
-        FilterMeetingCommand expectedFilterMeetingCommand =
-                new FilterMeetingCommand(preparePredicate(new String[]{"", "", "", "friend"}, start, end));
-        assertParseSuccess(parser, " t/friend", expectedFilterMeetingCommand);
+        FindMeetingCommand expectedFindMeetingCommand =
+                new FindMeetingCommand(preparePredicate(new String[]{"", "", "", "friend"}, start, end));
+        assertParseSuccess(parser, " t/friend", expectedFindMeetingCommand);
     }
 
     @Test
     public void parse_validArgs_returnsFilterMeetingCommand() {
         LocalDateTime start = LocalDateTime.parse("20.09.2023 1000", FORMAT);
         LocalDateTime end = LocalDateTime.parse("20.09.2023 1200", FORMAT);
-        FilterMeetingCommand expectedFilterMeetingCommand =
-                new FilterMeetingCommand(preparePredicate(new String[]{"CS2103T", "Zoom", "Alice Bob", "friend"},
+        FindMeetingCommand expectedFindMeetingCommand =
+                new FindMeetingCommand(preparePredicate(new String[]{"CS2103T", "Zoom", "Alice Bob", "friend"},
                         start, end));
         assertParseSuccess(parser, " m/CS2103T a/Zoom s/20.09.2023 1000 e/20.09.2023 1200 n/Alice Bob t/friend",
-                expectedFilterMeetingCommand);
+                expectedFindMeetingCommand);
     }
 
     @Test
     public void parse_inValidArgsTime_throwsParseException() {
         LocalDateTime start = LocalDateTime.parse("20.09.2023 1000", FORMAT);
         LocalDateTime end = LocalDateTime.parse("20.09.2023 1200", FORMAT);
-        FilterMeetingCommand expectedFilterMeetingCommand =
-                new FilterMeetingCommand(preparePredicate(new String[]{"", "", "", ""},
+        FindMeetingCommand expectedFindMeetingCommand =
+                new FindMeetingCommand(preparePredicate(new String[]{"", "", "", ""},
                         end, start));
         assertParseFailure(parser, " e/20.09.2023 1000 s/20.09.2023 1200",
                 String.format(MeetingTime.MESSAGE_CONSTRAINTS));

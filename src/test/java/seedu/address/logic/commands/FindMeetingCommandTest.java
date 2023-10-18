@@ -32,7 +32,7 @@ import seedu.address.testutil.TypicalMeetings;
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
-public class FilterMeetingCommandTest {
+public class FindMeetingCommandTest {
     private Model model = new ModelManager(TypicalMeetings.getTypicalAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(TypicalMeetings.getTypicalAddressBook(), new UserPrefs());
     private LocalDateTime start = LocalDateTime.of(LocalDate.of(0001, 01, 01), LocalTime.of(00, 00));
@@ -55,14 +55,14 @@ public class FilterMeetingCommandTest {
                         new AttendeeContainsKeywordsPredicate(List.of("")),
                         new TagContainsKeywordsPredicate(List.of("")));
 
-        FilterMeetingCommand filterFirstCommand = new FilterMeetingCommand(firstPredicate);
-        FilterMeetingCommand filterSecondCommand = new FilterMeetingCommand(secondPredicate);
+        FindMeetingCommand filterFirstCommand = new FindMeetingCommand(firstPredicate);
+        FindMeetingCommand filterSecondCommand = new FindMeetingCommand(secondPredicate);
 
         // same object -> returns true
         assertTrue(filterFirstCommand.equals(filterFirstCommand));
 
         // same values -> returns true
-        FilterMeetingCommand filterFirstCommandCopy = new FilterMeetingCommand(firstPredicate);
+        FindMeetingCommand filterFirstCommandCopy = new FindMeetingCommand(firstPredicate);
         assertTrue(filterFirstCommand.equals(filterFirstCommandCopy));
 
         // different types -> returns false
@@ -82,7 +82,7 @@ public class FilterMeetingCommandTest {
         GeneralMeetingPredicate predicate =
                 preparePredicate(new String[]{"", "", "", ""},
                         start, end);
-        FilterMeetingCommand command = new FilterMeetingCommand(predicate);
+        FindMeetingCommand command = new FindMeetingCommand(predicate);
         expectedModel.updateFilteredMeetingList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(MEETING1, MEETING2, MEETING3, MEETING4), model.getFilteredMeetingList());
@@ -94,7 +94,7 @@ public class FilterMeetingCommandTest {
         GeneralMeetingPredicate predicate =
                 preparePredicate(new String[]{"ABCDE", "", "", ""},
                         start, end);
-        FilterMeetingCommand command = new FilterMeetingCommand(predicate);
+        FindMeetingCommand command = new FindMeetingCommand(predicate);
         expectedModel.updateFilteredMeetingList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(MEETING4), model.getFilteredMeetingList());
@@ -106,7 +106,7 @@ public class FilterMeetingCommandTest {
         GeneralMeetingPredicate predicate =
                 preparePredicate(new String[]{"ABCDE CS2101", "", "", ""},
                         start, end);
-        FilterMeetingCommand command = new FilterMeetingCommand(predicate);
+        FindMeetingCommand command = new FindMeetingCommand(predicate);
         expectedModel.updateFilteredMeetingList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(MEETING2, MEETING3, MEETING4), model.getFilteredMeetingList());
@@ -118,7 +118,7 @@ public class FilterMeetingCommandTest {
         GeneralMeetingPredicate predicate =
                 preparePredicate(new String[]{"ABCDE CS2101", "Zoom", "", ""},
                         start, end);
-        FilterMeetingCommand command = new FilterMeetingCommand(predicate);
+        FindMeetingCommand command = new FindMeetingCommand(predicate);
         expectedModel.updateFilteredMeetingList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(MEETING2), model.getFilteredMeetingList());
@@ -130,7 +130,7 @@ public class FilterMeetingCommandTest {
         GeneralMeetingPredicate predicate =
                 preparePredicate(new String[]{"ABCDE CS2101", "Zoom com", "", ""},
                         start, end);
-        FilterMeetingCommand command = new FilterMeetingCommand(predicate);
+        FindMeetingCommand command = new FindMeetingCommand(predicate);
         expectedModel.updateFilteredMeetingList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(MEETING2, MEETING3, MEETING4), model.getFilteredMeetingList());
@@ -142,7 +142,7 @@ public class FilterMeetingCommandTest {
         GeneralMeetingPredicate predicate =
                 preparePredicate(new String[]{"ABCDE CS2101", "Zoom com", "Hoon", ""},
                         start, end);
-        FilterMeetingCommand command = new FilterMeetingCommand(predicate);
+        FindMeetingCommand command = new FindMeetingCommand(predicate);
         expectedModel.updateFilteredMeetingList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(MEETING3, MEETING4), model.getFilteredMeetingList());
@@ -154,7 +154,7 @@ public class FilterMeetingCommandTest {
         GeneralMeetingPredicate predicate =
                 preparePredicate(new String[]{"ABCDE CS2101", "Zoom com", "Alice Benson", ""},
                         start, end);
-        FilterMeetingCommand command = new FilterMeetingCommand(predicate);
+        FindMeetingCommand command = new FindMeetingCommand(predicate);
         expectedModel.updateFilteredMeetingList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(MEETING2, MEETING3, MEETING4), model.getFilteredMeetingList());
@@ -166,7 +166,7 @@ public class FilterMeetingCommandTest {
         GeneralMeetingPredicate predicate =
                 preparePredicate(new String[]{"ABCDE CS2101", "Zoom com", "Alice Benson", "work"},
                         start, end);
-        FilterMeetingCommand command = new FilterMeetingCommand(predicate);
+        FindMeetingCommand command = new FindMeetingCommand(predicate);
         expectedModel.updateFilteredMeetingList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(MEETING4), model.getFilteredMeetingList());
@@ -178,7 +178,7 @@ public class FilterMeetingCommandTest {
         GeneralMeetingPredicate predicate =
                 preparePredicate(new String[]{"ABCDE CS2101", "Zoom com", "Alice Benson", "work important"},
                         start, end);
-        FilterMeetingCommand command = new FilterMeetingCommand(predicate);
+        FindMeetingCommand command = new FindMeetingCommand(predicate);
         expectedModel.updateFilteredMeetingList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(MEETING4), model.getFilteredMeetingList());
@@ -190,7 +190,7 @@ public class FilterMeetingCommandTest {
         GeneralMeetingPredicate predicate =
                 preparePredicate(new String[]{"ABCDE CS2101", "Zoom com", "Alice Benson", "work important"},
                         startOn30, endOn30);
-        FilterMeetingCommand command = new FilterMeetingCommand(predicate);
+        FindMeetingCommand command = new FindMeetingCommand(predicate);
         expectedModel.updateFilteredMeetingList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(MEETING4), model.getFilteredMeetingList());
@@ -204,9 +204,9 @@ public class FilterMeetingCommandTest {
                 new MeetingTimeContainsPredicate(start, end),
                 new AttendeeContainsKeywordsPredicate(List.of("Keywords")),
                 new TagContainsKeywordsPredicate(List.of("Keywords")));
-        FilterMeetingCommand filterMeetingCommand = new FilterMeetingCommand(predicate);
-        String expected = FilterMeetingCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
-        assertEquals(expected, filterMeetingCommand.toString());
+        FindMeetingCommand findMeetingCommand = new FindMeetingCommand(predicate);
+        String expected = FindMeetingCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
+        assertEquals(expected, findMeetingCommand.toString());
     }
 
     /**

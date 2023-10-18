@@ -22,8 +22,8 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FilterMeetingCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindMeetingCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListMeetingCommand;
@@ -105,10 +105,10 @@ public class AddressBookParserTest {
     public void parseCommand_filterm() throws Exception {
         LocalDateTime start = LocalDateTime.parse("20.09.2023 1000", FORMAT);
         LocalDateTime end = LocalDateTime.parse("20.09.2023 1200", FORMAT);
-        FilterMeetingCommand command = (FilterMeetingCommand) parser
-                .parseCommand(FilterMeetingCommand.COMMAND_WORD
+        FindMeetingCommand command = (FindMeetingCommand) parser
+                .parseCommand(seedu.address.logic.commands.FindMeetingCommand.COMMAND_WORD
                         + " m/CS2103T a/Zoom s/20.09.2023 1000 e/20.09.2023 1200 n/Alice Bob t/friend");
-        assertEquals(new FilterMeetingCommand(preparePredicate(new String[] {"CS2103T", "Zoom", "Alice Bob", "friend"},
+        assertEquals(new FindMeetingCommand(preparePredicate(new String[] {"CS2103T", "Zoom", "Alice Bob", "friend"},
                 start, end)),
                 command);
     }
