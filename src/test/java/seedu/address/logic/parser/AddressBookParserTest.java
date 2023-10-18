@@ -22,6 +22,7 @@ import seedu.address.logic.commands.EditTutorCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ListScheduleCommand;
 import seedu.address.logic.commands.ListTutorCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -100,6 +101,11 @@ public class AddressBookParserTest {
                 (AddScheduleCommand) parser.parseCommand(ScheduleUtil.getAddScheduleCommand(schedule));
         assertEquals(new AddScheduleCommand(INDEX_FIRST_PERSON, schedule.getStartTime(), schedule.getEndTime()),
                 command);
+    }
+
+    @Test
+    public void parseCommand_listSchedule() throws Exception {
+        assertTrue(parser.parseCommand(ListScheduleCommand.COMMAND_WORD) instanceof ListScheduleCommand);
     }
 
     @Test
