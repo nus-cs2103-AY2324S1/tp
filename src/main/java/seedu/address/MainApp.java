@@ -91,14 +91,11 @@ public class MainApp extends Application {
         logger.info("Using data file : " + storage.getAddressBookFilePath());
 
         Optional<ReadOnlyAddressBook> addressBookOptional;
-<<<<<<< HEAD
-        ReadOnlyAddressBook initialData;
-        ArrayList<Team> teamStructure = new ArrayList<>();
-=======
+
         Optional<ReadOnlyTeamBook> teamBookOptional;
         ReadOnlyAddressBook initialAddressData;
         ReadOnlyTeamBook initialTeamData;
->>>>>>> e9887cf66f0e80ae78f2757fa443272bdedeec16
+
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
@@ -121,11 +118,8 @@ public class MainApp extends Application {
             initialTeamData = new TeamBook();
         }
 
-<<<<<<< HEAD
-        return new ModelManager(initialData, userPrefs, teamStructure);
-=======
         return new ModelManager(initialAddressData, initialTeamData, userPrefs);
->>>>>>> e9887cf66f0e80ae78f2757fa443272bdedeec16
+
     }
 
     private void initLogging(Config config) {

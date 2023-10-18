@@ -3,21 +3,17 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
-<<<<<<< HEAD
-import java.util.Optional;
-import java.util.TreeMap;
+
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.*;
-=======
 
-import javafx.collections.ObservableList;
-import seedu.address.commons.util.ToStringBuilder;
+
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Team;
 import seedu.address.model.person.UniquePersonList;
->>>>>>> e9887cf66f0e80ae78f2757fa443272bdedeec16
+
 
 /**
  * Wraps all data at the address-book level
@@ -87,18 +83,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.getPerson(name);
     }
 
-    public boolean invalidAddToTeam(Name teamToAddTo, Name devToAdd) {
-        requireNonNull(teamToAddTo);
-        requireNonNull(devToAdd);
-
-        Team team = getTeam(teamToAddTo);
-        if (team == null) {
-            return false;
-        } else {
-            return !team.containsDev(devToAdd);  //if true, then you can add this dev. Else he alr exists.
-        }
-
-    }
 
     /**
      * Adds a person to the address book.
@@ -124,6 +108,9 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+    }
+    public void clear() {
+
     }
 
 

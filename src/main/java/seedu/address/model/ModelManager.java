@@ -11,10 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Developer;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Team;
+import seedu.address.model.person.*;
 
 /**
  * Represents the management model for address and team books.
@@ -151,18 +148,17 @@ public class ModelManager implements Model {
         this.addressBook.resetData(addressBook);
     }
 
-<<<<<<< HEAD
     public AddressBook getWritableAddressBook() {
         return addressBook;
     }
 
-=======
+
     /**
      * Returns the current address book.
      *
      * @return the address book.
      */
->>>>>>> e9887cf66f0e80ae78f2757fa443272bdedeec16
+
     @Override
     public ReadOnlyAddressBook getAddressBook() {
         return addressBook;
@@ -231,6 +227,11 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+    }
+
+    @Override
+    public IdentityCode getIdentityCodeByName(Name devName) {
+        return addressBook.getPersonByName(devName).getIdentityCode();
     }
     //=========== Filtered Person List Accessors =============================================================
 
@@ -320,6 +321,12 @@ public class ModelManager implements Model {
         updateFilteredTeamList(PREDICATE_SHOW_ALL_TEAMS);
     }
 
+    @Override
+    public boolean personAlreadyInTeam(String teamToAddTo, Name devToAdd) {
+        IdentityCode devToAddIdentityCode = getIdentityCodeByName(devToAdd);
+        return teamBook.personAlreadyInTeam(teamToAddTo, devToAddIdentityCode);
+    }
+
 
     //=========== Filtered Team List Accessors =============================================================
 
@@ -368,51 +375,20 @@ public class ModelManager implements Model {
                 && filteredTeams.equals(otherModelManager.filteredTeams);
     }
 
-<<<<<<< HEAD
     //team level operations
     public boolean hasTeam(String teamName) {
         requireNonNull(teamName);
         return teamBook.hasTeam(teamName);
     }
 
-    public boolean invalidAddToTeam(String teamToAddTo, Name devToAdd) {
-        return teamBook.invalidAddToTeam(teamToAddTo, devToAdd);
+    public boolean invalidAddToTeam(String teamToAddTo) {
+        return teamBook.invalidAddToTeam(teamToAddTo);
     }
 
-
-    /**
-     * Removes {@code key} from team structure.
-     * {@code key} must exist in the address book.
-     */
-    public void removeTeam(Team key) {
-        addressBook.removeTeam(key);
-    }
-
-
-    /**
-     * Replaces the given team {@code target} in the list with {@code editedTeam}.
-     * {@code target} must exist in the address book.
-     * The team identity of {@code editedTeam} must not be the same as another existing team in the address book.
-     */
-    public void setTeams(Team target, Team editedTeam) {
-        requireNonNull(editedTeam);
-
-        //todo: more data protection
-        addressBook.setTeams(target, editedTeam);
-
-    }
-
-
-
-    public Team getTeam(Name teamName) {
-        requireNonNull(teamName);
-        return addressBook.getTeam(teamName);
-    }
     //only run when you know that team exists
-    public void addToTeam(Name teamToAddTo, Name devToAdd) {
-        Team team = getTeam(teamToAddTo);
-        Developer developer = (Developer) addressBook.getPersonByName(devToAdd);
-        team.addDev(developer);
+    public void addToTeam(String teamToAddTo, Name devToAdd) {
+        IdentityCode devToAddIdentityCode = getIdentityCodeByName(devToAdd);
+        teamBook.addDevToTeam(teamToAddTo, devToAddIdentityCode);
     }
 
 }

@@ -30,6 +30,19 @@ public class UniqueTeamList implements Iterable<Team> {
         requireNonNull(teamName);
         return internalList.stream().anyMatch(team -> team.getTeamName().equals(teamName));
     }
+    public boolean teamContainsPerson(String teamToAddTo, IdentityCode devToAddIdentityCode) {
+        requireNonNull(teamToAddTo);
+        requireNonNull(devToAddIdentityCode);
+        boolean devExists = internalList.stream().anyMatch(team -> team.containsDev(devToAddIdentityCode));
+
+        return devExists;
+    }
+
+    private Team getTeamByName(String teamToAddTo) {
+        requireNonNull(teamToAddTo);
+        Team teamToAdd = internalList.filtered(team -> team.getTeamName().equals(teamToAddTo)).get(0);
+        return teamToAdd;
+    }
 
     /**
      * Adds a team to the list.
@@ -41,6 +54,11 @@ public class UniqueTeamList implements Iterable<Team> {
             throw new DuplicateTeamException();
         }
         internalList.add(toAdd);
+    }
+
+    public void addDevToTeam(String teamToAddTo, IdentityCode devToAddIdentityCode) {
+        Team team = getTeamByName(teamToAddTo);
+        team.addDeveloper(devToAddIdentityCode);
     }
 
     /**
@@ -141,4 +159,6 @@ public class UniqueTeamList implements Iterable<Team> {
         }
         return true;
     }
+
+
 }

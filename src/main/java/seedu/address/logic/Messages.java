@@ -65,7 +65,7 @@ public class Messages {
         return builder.toString();
     }
 
-    public static String format(Name teamToAddTo, Name devToAddTo) {
+    public static String format(String teamToAddTo, Name devToAddTo) {
         final StringBuilder builder = new StringBuilder();
         builder.append(teamToAddTo)
                 .append("got a new member! Hello ")

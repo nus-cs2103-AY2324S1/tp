@@ -5,10 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.Developer;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Team;
+import seedu.address.model.person.*;
 
 import static java.util.Objects.requireNonNull;
 
@@ -71,7 +68,7 @@ public interface Model {
      */
     boolean hasPerson(Person person);
 
-    boolean invalidAddToTeam(Name teamToAddTo, Name devToAdd);
+    boolean invalidAddToTeam(String teamToAddTo);
 
     boolean hasPerson(Name name);
 
@@ -96,6 +93,8 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    IdentityCode getIdentityCodeByName(Name devName);
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
@@ -105,27 +104,21 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
-<<<<<<< HEAD
 
-    void addToTeam(Name teamToAddTo, Name devToAdd);
+    void addToTeam(String teamToAddTo, Name devToAdd);
 
-    /**
-     * Removes {@code key} from team structure.
-     * {@code key} must exist in the address book.
-     */
-    void removeTeam(Team key);
 
-    Team getTeam(Name teamName);
+
 
     /**
      * Replaces the given team {@code target} in the list with {@code editedTeam}.
      * {@code target} must exist in the address book.
      * The team identity of {@code editedTeam} must not be the same as another existing team in the address book.
      */
-    void setTeams(Team target, Team editedTeam);
+    //void setTeams(Team target, Team editedTeam);
 
     AddressBook getWritableAddressBook();
-=======
+
     //=========== TeamBook related methods =================================================================
 
     /**
@@ -154,6 +147,8 @@ public interface Model {
     void addTeam(Team team);
 
 
+    boolean personAlreadyInTeam(String teamToAddTo, Name devToAdd);
+
     /** Returns an unmodifiable view of the filtered team list */
     ObservableList<Team> getFilteredTeamList();
 
@@ -163,5 +158,4 @@ public interface Model {
      */
     void updateFilteredTeamList(Predicate<Team> predicate);
 
->>>>>>> e9887cf66f0e80ae78f2757fa443272bdedeec16
 }

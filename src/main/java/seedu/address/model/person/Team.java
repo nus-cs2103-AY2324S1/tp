@@ -46,12 +46,9 @@ public class Team {
                 .anyMatch(dev -> dev.equals(developerID));
         return devExistsInTeam;
     }
-    public void addDev(Developer developer) {
-        developers.add(developer);
-=======
+
     public boolean removeDeveloper(IdentityCode developerIdentityCode) {
         return developerIdentityCodes.remove(developerIdentityCode);
->>>>>>> e9887cf66f0e80ae78f2757fa443272bdedeec16
     }
 
     /**

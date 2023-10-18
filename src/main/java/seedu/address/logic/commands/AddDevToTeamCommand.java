@@ -2,6 +2,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.commands.AddTeamCommand.MESSAGE_INVALID_PERSON;
 import static seedu.address.logic.parser.CliSyntax.*;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -30,7 +31,8 @@ public class AddDevToTeamCommand extends Command {
             + PREFIX_TEAMNAME + "ABC ";
 
     public static final String MESSAGE_SUCCESS = "New developer added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This developer already exists in this team/team doesnt exist";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This developer already exists in this team!";
+    public static final String MESSAGE_INVALID_TEAM = "This team already exists!";
 
     private final Name devToAdd;
     private final String teamToAddTo;
@@ -49,9 +51,9 @@ public class AddDevToTeamCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         //duplicate or team doesnt exist
-        if (model.invalidAddToTeam(teamToAddTo, devToAdd)) {
+        if (model.invalidAddToTeam(teamToAddTo)) {
             throw new CommandException(MESSAGE_INVALID_TEAM);
-        } else if (model.getPerson(devToAdd) == null) {
+        } else if (!model.hasPerson(devToAdd)) {
             throw new CommandException(MESSAGE_INVALID_PERSON);
         } else if (model.personAlreadyInTeam(teamToAddTo, devToAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
