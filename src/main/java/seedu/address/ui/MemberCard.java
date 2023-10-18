@@ -33,6 +33,8 @@ public class MemberCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
+    private Label gender;
+    @FXML
     private Label phone;
     @FXML
     private Label address;
@@ -49,6 +51,7 @@ public class MemberCard extends UiPart<Region> {
         this.member = member;
         id.setText(displayedIndex + ". ");
         name.setText(member.getName().name);
+        gender.setText(member.getGender().value);
         phone.setText(member.getPhone().value);
         address.setText(member.getAddress().value);
         email.setText(member.getEmail().value);

@@ -23,6 +23,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.member.Address;
 import seedu.address.model.member.Email;
+import seedu.address.model.member.Gender;
 import seedu.address.model.member.Member;
 import seedu.address.model.member.Phone;
 import seedu.address.model.shared.Name;
@@ -96,12 +97,13 @@ public class EditCommand extends Command {
         assert memberToEdit != null;
 
         Name updatedName = editMemberDescriptor.getName().orElse(memberToEdit.getName());
+        Gender updatedGender = editMemberDescriptor.getGender().orElse(memberToEdit.getGender());
         Phone updatedPhone = editMemberDescriptor.getPhone().orElse(memberToEdit.getPhone());
         Email updatedEmail = editMemberDescriptor.getEmail().orElse(memberToEdit.getEmail());
         Address updatedAddress = editMemberDescriptor.getAddress().orElse(memberToEdit.getAddress());
         Set<Tag> updatedTags = editMemberDescriptor.getTags().orElse(memberToEdit.getTags());
 
-        return new Member(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Member(updatedName, updatedGender, updatedPhone, updatedEmail, updatedAddress, updatedTags);
     }
 
     @Override
@@ -134,6 +136,7 @@ public class EditCommand extends Command {
      */
     public static class EditMemberDescriptor {
         private Name name;
+        private Gender gender;
         private Phone phone;
         private Email email;
         private Address address;
@@ -147,6 +150,7 @@ public class EditCommand extends Command {
          */
         public EditMemberDescriptor(EditMemberDescriptor toCopy) {
             setName(toCopy.name);
+            setGender(toCopy.gender);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
@@ -166,6 +170,14 @@ public class EditCommand extends Command {
 
         public Optional<Name> getName() {
             return Optional.ofNullable(name);
+        }
+
+        public void setGender(Gender gender) {
+            this.gender = gender;
+        }
+
+        public Optional<Gender> getGender() {
+            return Optional.ofNullable(gender);
         }
 
         public void setPhone(Phone phone) {
@@ -232,6 +244,7 @@ public class EditCommand extends Command {
         public String toString() {
             return new ToStringBuilder(this)
                     .add("name", name)
+                    .add("gender", gender)
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)

@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.member.Address;
 import seedu.address.model.member.Email;
+import seedu.address.model.member.Gender;
 import seedu.address.model.member.Member;
 import seedu.address.model.member.Phone;
 import seedu.address.model.shared.Name;
@@ -25,6 +26,7 @@ class JsonAdaptedMember {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Member's %s field is missing!";
 
     private final String name;
+    private final String gender;
     private final String phone;
     private final String email;
     private final String address;
@@ -34,10 +36,11 @@ class JsonAdaptedMember {
      * Constructs a {@code JsonAdaptedMember} with the given member details.
      */
     @JsonCreator
-    public JsonAdaptedMember(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                             @JsonProperty("email") String email, @JsonProperty("address") String address,
-                             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+    public JsonAdaptedMember(@JsonProperty("name") String name, @JsonProperty("gender") String gender,
+                             @JsonProperty("phone") String phone, @JsonProperty("email") String email,
+                             @JsonProperty("address") String address, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
+        this.gender = gender;
         this.phone = phone;
         this.email = email;
         this.address = address;
@@ -51,6 +54,7 @@ class JsonAdaptedMember {
      */
     public JsonAdaptedMember(Member source) {
         name = source.getName().name;
+        gender = source.getGender().value;
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
@@ -78,6 +82,14 @@ class JsonAdaptedMember {
         }
         final Name modelName = new Name(name);
 
+        if (gender == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Gender.class.getSimpleName()));
+        }
+        if (!Gender.isValidGender(gender)) {
+            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+        }
+        final Gender modelGender = new Gender(gender);
+
         if (phone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
         }
@@ -103,7 +115,7 @@ class JsonAdaptedMember {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(memberTags);
-        return new Member(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Member(modelName, modelGender, modelPhone, modelEmail, modelAddress, modelTags);
     }
 
 }

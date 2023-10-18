@@ -61,6 +61,7 @@ public class EditMemberDescriptorTest {
     public void toStringMethod() {
         EditCommand.EditMemberDescriptor editMemberDescriptor = new EditCommand.EditMemberDescriptor();
         String expected = EditCommand.EditMemberDescriptor.class.getCanonicalName() + "{name="
+                + editMemberDescriptor.getGender().orElse(null) + ", gender="
                 + editMemberDescriptor.getName().orElse(null) + ", phone="
                 + editMemberDescriptor.getPhone().orElse(null) + ", email="
                 + editMemberDescriptor.getEmail().orElse(null) + ", address="
