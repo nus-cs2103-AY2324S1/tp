@@ -53,7 +53,7 @@ public class JsonAdaptedFlashCard {
         translatedWord = source.getTranslatedWord().toString();
         translatedWordLanguage = source.getTranslatedWord().getLanguage();
         whenToReview = source.getWhenToReview().toString();
-        level = source.getLevel().getLevel();
+        level = source.getProficiencyLevel().getLevel();
     }
 
     /**
