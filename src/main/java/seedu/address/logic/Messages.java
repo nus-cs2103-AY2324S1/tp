@@ -29,7 +29,6 @@ public final class Messages {
     // Messages associated with various Commands
     public static final String MESSAGE_ADD_COMMAND_SUCCESS = "New contact added: %1$s";
     public static final String MESSAGE_COMMAND_DUPLICATE_CONTACT = "This contact is already in your contact list.";
-    public static final String MESSAGE_CLEAR_COMMAND_SUCCESS = "All contacts have been deleted!";
     public static final String MESSAGE_DELETE_COMMAND_SUCCESS = "Deleted Contact: %1$s";
     public static final String MESSAGE_EDIT_COMMAND_SUCCESS = "Edited Contact: %1$s";
     public static final String MESSAGE_EDIT_COMMAND_NOT_EDITED = "At least one field to edit must be provided.";
@@ -65,6 +64,10 @@ public final class Messages {
     public static final String MESSAGE_CONTAIN_DUPLICATE_CONTACT = "Contact list contains duplicate contact(s).";
 
     //TODO refine the messages above this line
+
+    // Commands
+    public static final String CLEAR_COMMAND_SUCCESS = "All contacts have been removed!";
+    public static final String EXIT_COMMAND_SUCCESS = "Exiting app...";
 
     // Tag
     private static final String UNFORMATTED_TAG_INVALID =
