@@ -7,82 +7,37 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.contact.Contact;
 
+
+
 /**
  * API of the Model component.
  */
 public interface Model {
-    /** {@code Predicate} that always evaluate to true */
-    Predicate<Contact> PREDICATE_SHOW_ALL_CONTACTS = unused -> true;
+    public Path getContactsPath();
+    public void setContactsPath(Path contactsPath);
+
+    public ReadOnlySettings getSettings();
+    public void setSettings(ReadOnlySettings settings);
+
+    public GuiSettings getGuiSettings();
+    public void setGuiSettings(GuiSettings guiSettings);
+
+    public ReadOnlyContacts getContacts();
+    public void setContacts(ReadOnlyContacts contacts);
+
+    public void addContact(Contact contact);
+    public boolean containsContact(Contact contact);
+    public void updateContact(Contact old, Contact updated);
+    public void removeContact(Contact contact);
 
     /**
-     * Replaces user prefs data with the data in {@code userPrefs}.
+     * Filters the filtered contact list by the specified {@link Predicate}.
      */
-    void setUserPrefs(ReadOnlyUserPrefs userPrefs);
+    public void setContactsFilter(Predicate<Contact> predicate);
 
     /**
-     * Returns the user prefs.
+     * Returns an unmodifiable {@link ObservableList} of currently filtered
+     * {@link Contact}s.
      */
-    ReadOnlyUserPrefs getUserPrefs();
-
-    /**
-     * Returns the user prefs' GUI settings.
-     */
-    GuiSettings getGuiSettings();
-
-    /**
-     * Sets the user prefs' GUI settings.
-     */
-    void setGuiSettings(GuiSettings guiSettings);
-
-    /**
-     * Returns the user prefs' address book file path.
-     */
-    Path getConTextFilePath();
-
-    /**
-     * Sets the user prefs' address book file path.
-     */
-    void setContactsManagerFilePath(Path conTextFilePath);
-
-    /**
-     * Replaces address book data with the data in {@code ContactsManager}.
-     */
-    void setContactsManager(ContactList contactList);
-
-    /** Returns the ContactsManager */
-    ContactList getContactList();
-
-    /**
-     * Returns true if a contact with the same identity as {@code contact} exists in the address book.
-     */
-    boolean hasContact(Contact contact);
-
-    /**
-     * Deletes the given contact.
-     * The contact must exist in the address book.
-     */
-    void deleteContact(Contact target);
-
-    /**
-     * Adds the given contact.
-     * {@code contact} must not already exist in the address book.
-     */
-    void addContact(Contact contact);
-
-    /**
-     * Replaces the given contact {@code target} with {@code editedContact}.
-     * {@code target} must exist in the address book.
-     * The contact identity of {@code editedContact} must not be the same as another existing contact
-     * in the address book.
-     */
-    void setContact(Contact target, Contact editedContact);
-
-    /** Returns an unmodifiable view of the filtered contact list */
-    ObservableList<Contact> getFilteredContactList();
-
-    /**
-     * Updates the filter of the filtered contact list to filter by the given {@code predicate}.
-     * @throws NullPointerException if {@code predicate} is null.
-     */
-    void updateFilteredContactList(Predicate<Contact> predicate);
+    public ObservableList<Contact> getFilteredContactList();
 }
