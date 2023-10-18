@@ -298,11 +298,15 @@ public class EditMeetingCommand extends Command {
         }
 
         public Optional<Set<Name>> getAssignedPersons() {
-            return (this.assignPersons != null) ? Optional.of(Collections.unmodifiableSet(this.assignPersons)) : Optional.empty();
+            return (this.assignPersons != null)
+                    ? Optional.of(Collections.unmodifiableSet(this.assignPersons))
+                    : Optional.empty();
         }
 
         public Optional<Set<Name>> getUnassignedPersons() {
-            return (this.unassignPersons != null) ? Optional.of(Collections.unmodifiableSet(this.unassignPersons)) : Optional.empty();
+            return (this.unassignPersons != null)
+                    ? Optional.of(Collections.unmodifiableSet(this.unassignPersons))
+                    : Optional.empty();
         }
     }
 }
