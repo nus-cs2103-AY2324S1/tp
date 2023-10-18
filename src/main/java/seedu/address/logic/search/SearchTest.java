@@ -4,12 +4,16 @@ import seedu.address.model.person.Person;
 
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.Predicate;
 
-public class SearchPredicateApplier {
+/**
+ * A layer of abstraction around {@link SearchPredicate} that gives it {@link Predicate} behaviour.
+ */
+public class SearchTest implements Predicate<Person> {
 
     private final SearchPredicate predicate;
 
-    public SearchPredicateApplier(SearchPredicate predicate) {
+    SearchTest(SearchPredicate predicate) {
         Objects.requireNonNull(predicate);
         this.predicate = predicate;
     }
@@ -21,7 +25,8 @@ public class SearchPredicateApplier {
      * @return {@code true} if the person matches the predicate,
      *          {@code false} otherwise.
      */
-    public boolean apply(Person p) {
+    @Override
+    public boolean test(Person p) {
         Map<String, String> map = p.getFieldsAndAttributes();
         return FieldRanges.isMatch(this.predicate.test(map));
     }

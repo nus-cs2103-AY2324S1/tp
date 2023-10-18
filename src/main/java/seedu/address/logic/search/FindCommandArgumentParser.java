@@ -6,7 +6,7 @@ import java.util.Stack;
 import java.util.function.BiFunction;
 
 /**
- * Utility class that parses search strings recursively.
+ * Utility class that parses search strings accepted by the Find/List command.
  */
 public class FindCommandArgumentParser {
 
@@ -15,7 +15,7 @@ public class FindCommandArgumentParser {
         EXPLICIT_OR('|', 1, SearchPredicate::or),
         EXPLICIT_AND('&', 0, SearchPredicate::and);
 
-        static Map<Character, Joiner> set = new HashMap<>();
+        private static final Map<Character, Joiner> set = new HashMap<>();
 
         private final char symbol;
         private final int precedence;
@@ -26,8 +26,12 @@ public class FindCommandArgumentParser {
             this.join = join;
         }
 
+        static Joiner get(Character c) {
+            return set.get(c);
+        }
+
         boolean isLeqPrecedenceThan(Joiner other) {
-            return this.precedence >= other.precedence;
+            return this.precedence <= other.precedence;
         }
 
         @Override
@@ -43,13 +47,53 @@ public class FindCommandArgumentParser {
     }
 
     private static class ParserDualStack {
+        void sanityCheckElseThrow() throws UnexpectedTokenException {
+            if (
+                    predicates.size() + (nextInput == NextInput.PREDICATE? 1:0)
+                    != joiners.size() + 1
+            ) {
+                throw new UnexpectedTokenException(nextInput.getOther(), nextInput);
+            }
+        }
+
+        SearchPredicate collapse() throws UnexpectedTokenException {
+            sanityCheckElseThrow();
+            while (!joiners.isEmpty()) {
+                Joiner joiner = joiners.pop();
+                SearchPredicate newPredicate = joiner.apply(
+                        predicates.pop(),
+                        predicates.pop()
+                );
+                predicates.push(newPredicate);
+            }
+            assert predicates.size() == 1;
+            return predicates.pop();
+        }
+
         enum NextInput {
-            PREDICATE, JOINER
+            PREDICATE, JOINER;
+
+            NextInput getOther() {
+                return NextInput.getOther(this);
+            }
+
+            private static NextInput getOther(NextInput input) {
+                switch (input) {
+                case PREDICATE:
+                    return JOINER;
+                case JOINER:
+                    return PREDICATE;
+                default:
+                    assert false: "Unexpected NextInput value: " + input;
+                    return input;
+                }
+            }
         }
 
         private static class UnexpectedTokenException extends Exception {
             UnexpectedTokenException(NextInput expected, NextInput actual) {
                 //todo log
+                System.out.println("expected: " + expected + " actual: " + actual);
             }
         }
         Stack<SearchPredicate> predicates;
@@ -65,12 +109,14 @@ public class FindCommandArgumentParser {
         void append(SearchPredicate predicate) throws UnexpectedTokenException {
             throwIfUnexpectedNextInput(NextInput.PREDICATE);
             predicates.push(predicate);
+            nextInput = NextInput.JOINER;
         }
 
         void append(Joiner joiner) throws UnexpectedTokenException {
             throwIfUnexpectedNextInput(NextInput.JOINER);
             resolveOperationsBeforeAppending(joiner);
             joiners.push(joiner);
+            nextInput = NextInput.PREDICATE;
         }
 
         void throwIfUnexpectedNextInput(NextInput actualInput) throws UnexpectedTokenException {
@@ -80,7 +126,7 @@ public class FindCommandArgumentParser {
         }
 
         void resolveOperationsBeforeAppending(Joiner joiner) {
-            while (joiner.isLeqPrecedenceThan(joiners.peek())) {
+            while (!joiners.isEmpty() && joiner.isLeqPrecedenceThan(joiners.peek())) {
                 predicates.push(joiners.pop().apply(predicates.pop(), predicates.pop()));
             }
         }
@@ -88,7 +134,7 @@ public class FindCommandArgumentParser {
 
     private class RecursiveParseHelper {
 
-        private ParserDualStack dualStack = new ParserDualStack();
+        private final ParserDualStack dualStack = new ParserDualStack();
 
         RecursiveParseHelper() {}
 
@@ -97,38 +143,57 @@ public class FindCommandArgumentParser {
         }
 
         SearchPredicate parse() throws ParserDualStack.UnexpectedTokenException {
-            while (index < search.length()) {
-                if (nextChar() == '(') {
-
+            while (hasChar()) {
+                if (getChar() == '(') {
+                    incrementCharIndex();
+                    dualStack.append(new RecursiveParseHelper().parse());
+                    dualStack.sanityCheckElseThrow();
+                } else if (getChar() == ')') {
+                    incrementCharIndex(); //consume ')'
+                    break;
                 }
                 getAndAppendNextToken();
             }
+            return collapse();
         }
 
-        SearchPredicate collapse() {
-            // apply all the predicates and joiners in the dualstack
+        SearchPredicate collapse() throws ParserDualStack.UnexpectedTokenException {
+            return dualStack.collapse();
         }
 
         void getAndAppendNextToken() throws ParserDualStack.UnexpectedTokenException {
             if (dualStack.nextInput == ParserDualStack.NextInput.JOINER) {
-                appendNextJoiner();
+                findAndAppendNextJoiner();
             } else if (dualStack.nextInput == ParserDualStack.NextInput.PREDICATE) {
-
+                findAndAppendNextPredicate();
             } else {
                 assert false; //error has occurred
             }
         }
 
-        void appendNextJoiner() throws ParserDualStack.UnexpectedTokenException {
+        void findAndAppendNextJoiner() throws ParserDualStack.UnexpectedTokenException {
             incrementIndexWhileSpace();
-            if (isNextCharJoiner()) {
-                dualStack.append(Joiner.set.get(nextChar()));
-            } else {
-                dualStack.append(Joiner.set.get(' '));
+            if (!hasChar()) {
+                return;
             }
+            if (isNextCharJoiner()) {
+                dualStack.append(Joiner.get(getChar()));
+                incrementCharIndex();
+            } else {
+                dualStack.append(Joiner.get(' '));
+            }
+            incrementIndexWhileSpace();
         }
 
-        void appendNextPredicate
+        void findAndAppendNextPredicate() throws ParserDualStack.UnexpectedTokenException {
+            incrementIndexWhileSpace();
+            if (!hasChar()) {
+                return;
+            }
+            int startIndexOfPredicate = index;
+            incrementIndexWhileAlphanumeric();
+            dualStack.append(new SingleTextSearchPredicate(search.substring(startIndexOfPredicate, index)));
+        }
 
     }
 
@@ -139,14 +204,14 @@ public class FindCommandArgumentParser {
     private String search;
     private int index;
 
-    public SearchPredicateApplier parse(String stringToSearch) {
-        if (stringToSearch == null) {
+    public SearchTest parse(String query) {
+        if (query == null) {
             return null;
         }
-        search = stringToSearch.trim();
+        search = query.trim();
         try {
             SearchPredicate predicate = parse();
-            return new SearchPredicateApplier(predicate);
+            return new SearchTest(predicate);
         } catch (ParserDualStack.UnexpectedTokenException e) {
             throw new RuntimeException(e);
         }
@@ -163,12 +228,28 @@ public class FindCommandArgumentParser {
     }
 
     private void incrementIndexWhileSpace() {
-        while(nextChar() == ' ') {
+        while(hasChar() && Character.isSpaceChar(getChar())) {
+            incrementCharIndex();
+        }
+    }
+
+    private void incrementIndexWhileAlphanumeric() {
+        while (hasChar() && Character.isLetterOrDigit(getChar())) {
+            incrementCharIndex();
+        }
+    }
+
+    private void incrementCharIndex() {
+        if (hasChar()) {
             index++;
         }
     }
 
-    private char nextChar() {
+    private boolean hasChar() {
+        return index < search.length();
+    }
+
+    private char getChar() {
         return search.charAt(index);
     }
 

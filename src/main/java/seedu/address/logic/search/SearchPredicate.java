@@ -4,15 +4,17 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.Predicate;
 
 /**
  * Represents a predicate (boolean-valued function) of a Map representing a person,
  * meant for use in filtering a list of persons.
  * Capable of dealing with arbitrary fields.
  *
- * <p>Adapted with minimal changes from {@link java.util.function.Predicate}.
+ * <p>Adapted from {@link java.util.function.Predicate}, which could not be used because
+ * it does not support returning information other than a boolean.
  */
-abstract class SearchPredicate{
+abstract class SearchPredicate {
 
     enum Flag {
         CASE_SENSITIVITY,
@@ -53,17 +55,18 @@ abstract class SearchPredicate{
      */
     SearchPredicate and(SearchPredicate other) {
         Objects.requireNonNull(other);
-        SearchPredicate old = this;
-        return new BinarySearchPredicate() {
+        return new BinarySearchPredicate(this, other, '&') {
             @Override
             FieldRanges test(Map<String, String> p) {
-                this.a = old;
-                this.b = other;
-                FieldRanges ranges = a.test(p);
-                if (!FieldRanges.isMatch(ranges)) {
+                FieldRanges rangeA = a.test(p);
+                if (!FieldRanges.isMatch(rangeA)) {
                     return null;
                 }
-                return FieldRanges.union(ranges, b.test(p));
+                FieldRanges rangeB = b.test(p);
+                if (!FieldRanges.isMatch(rangeB)) {
+                    return null;
+                }
+                return FieldRanges.union(rangeA, rangeB);
             }
         };
     }
@@ -109,12 +112,9 @@ abstract class SearchPredicate{
      */
     SearchPredicate or(SearchPredicate other) {
         Objects.requireNonNull(other);
-        SearchPredicate old = this;
-        return new BinarySearchPredicate() {
+        return new BinarySearchPredicate(this, other, '|') {
             @Override
             FieldRanges test(Map<String, String> p) {
-                this.a = old;
-                this.b = other;
                 return FieldRanges.union(a.test(p), b.test(p));
             }
         };

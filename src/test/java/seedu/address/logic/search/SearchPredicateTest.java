@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
@@ -22,7 +23,7 @@ class SearchPredicateTest {
     }
 
     private static SearchPredicate generatePredicate(String str) {
-        return new SingleTextSearchPredicate(str, true);
+        return new SingleTextSearchPredicate(str);
     }
 
     private static <T> T get(Supplier<T> supplier) {
@@ -31,16 +32,19 @@ class SearchPredicateTest {
 
     private static FieldRanges joinTest(
             String predicateA, String predicateB, String method
-    ) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    ) {
         SearchPredicate a = generatePredicate(predicateA);
         SearchPredicate b = generatePredicate(predicateB);
-        return ((SearchPredicate) a.getClass().getMethod(method, SearchPredicate.class)
-                .invoke(a,b)).test(TEST_PERSON);
+        try {
+            return ((SearchPredicate) SearchPredicate.class.getDeclaredMethod(method, SearchPredicate.class).invoke(a, b)).test(TEST_PERSON);
+        } catch (Exception ignored) {
+            assert false: "Unexpected Exception";
+            return null;
+        }
     }
 
     @Test
-    public void test_andJoiner_success()
-            throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
+    public void test_andJoiner_success() {
         FieldRanges expected = get(() -> {
             FieldRanges fr = new FieldRanges();
             fr.put("field A", new Range(0, 4));
@@ -53,41 +57,15 @@ class SearchPredicateTest {
 
     @Test
     public void test_orJoiner_success() {
-        SearchPredicate noMatch = generatePredicate("abcdef");
-        SearchPredicate match = generatePredicate("lorem");
-        SearchPredicate orPredicate = noMatch.or(match);
-        FieldRanges actual = orPredicate.test(TEST_PERSON);
         FieldRanges expected = get(() -> {
             FieldRanges fr = new FieldRanges();
             fr.put("field A", new Range(0, 4));
             return fr;
         });
+        FieldRanges actual = joinTest("abcdef", "lorem", "or");
         assertEquals(expected, actual);
     }
 
-    @Test
-    public void test_andJoiner_fail() {
-
-    }
-
-    @Test public void test_orJoiner_fail() {
-
-    }
-
-    @Test
-    public void test_negate() {}
-
-    @Test
-    public void test_lazyAndJoiner() {}
-
-    @Test
-    public void test_notLazyOrJoiner() {}
-
-    @Test
-    public void test_close_doNothing() {}
-
-    @Test
-    public void test_open_doNothing() {}
-
+    // further testing included in FindCommandArgumentParserTest
 
 }

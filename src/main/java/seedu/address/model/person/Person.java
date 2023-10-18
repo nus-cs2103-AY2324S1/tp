@@ -57,7 +57,7 @@ public class Person {
 
     /**
      * Returns a map of fields and their existing attributes as strings.
-     * Intended for use with {@link seedu.address.logic.search.SearchPredicateApplier}.
+     * Intended for use with predicates generated through the find command.
      *
      * @return a Map; keys include all publicly gettable fields as well as all tags,
      *         and values are values of the respective fields, or {@code null} for tags.

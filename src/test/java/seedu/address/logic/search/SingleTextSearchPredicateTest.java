@@ -17,18 +17,25 @@ public class SingleTextSearchPredicateTest {
         TEST_PERSON = new HashMap<>();
         TEST_PERSON.put("field A", "Lorem ipsum, dolor sit amet.");
         TEST_PERSON.put("field B", "Ut enim; ad@minim veNiam!");
+        TEST_PERSON.put("tagABC", null);
+        TEST_PERSON.put("tag123", null);
     }
 
     private static String testMatchString(String str, boolean isCaseIgnored) {
-        SearchPredicate ignoreCasePredicate =
-                new SingleTextSearchPredicate(str, isCaseIgnored);
-        FieldRanges result = ignoreCasePredicate.test(TEST_PERSON);
+        SearchPredicate predicate =
+                new SingleTextSearchPredicate(str);
+        predicate.setFlag(SearchPredicate.Flag.CASE_SENSITIVITY, !isCaseIgnored);
+        FieldRanges result = predicate.test(TEST_PERSON);
         if (result.isEmpty()) {
             return null;
         }
         Map.Entry<String, Range> match = result.entrySet().iterator().next();
         Range range = match.getValue();
-        return range.getSubstring(TEST_PERSON.get(match.getKey()));
+        String strToMatch = TEST_PERSON.get(match.getKey());
+        if (strToMatch == null) {
+            strToMatch = match.getKey();
+        }
+        return range.getSubstring(strToMatch);
     }
 
     @Test
@@ -87,6 +94,14 @@ public class SingleTextSearchPredicateTest {
         assertNull(testMatchString("ven", false));
         assertNull(testMatchString("ipSum", false));
         assertNull(testMatchString("eniM", false));
+    }
+
+    @Test
+    public void test_withTagMatch() {
+        assertEquals("ABC", testMatchString("ABC", true));
+        assertNull(testMatchString("abc", false));
+        assertEquals("12", testMatchString("12", true));
+        assertEquals("12", testMatchString("12", false));
     }
 
 }

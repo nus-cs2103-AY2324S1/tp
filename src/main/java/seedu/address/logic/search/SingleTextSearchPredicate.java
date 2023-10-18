@@ -1,6 +1,6 @@
 package seedu.address.logic.search;
 
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,26 +16,41 @@ class SingleTextSearchPredicate extends SearchPredicate {
 
     @Override
     public FieldRanges test(Map<String, String> p) {
+
+        Optional<Map.Entry<String, Range>> optionalMatch = p.entrySet().stream()
+                .map(this::getFieldRangeEntryElseNull).filter(Objects::nonNull).findAny();
+
         FieldRanges fieldRanges = new FieldRanges();
-
-        for (Map.Entry<String, String> entry : p.entrySet()) {
-            String key = entry.getKey();
-            String value = entry.getValue();
-            int index;
-            if (isFlagApplied(Flag.FULL_WORD_MATCHING_ONLY)) {
-                index = index(value, textToFind);
-            } else {
-                String regex = "\\b" + textToFind + "\\b";
-                index = index(value, regex);
-            }
-
-            if (index != -1) {
-                fieldRanges.put(key, new Range(index, index + textToFind.length() - 1));
-                break;
-            }
-        }
-
+        optionalMatch.ifPresent(entry -> fieldRanges.put(entry.getKey(), entry.getValue()));
         return fieldRanges;
+    }
+
+    private Map.Entry<String, Range> getFieldRangeEntryElseNull(Map.Entry<String, String> entry) {
+        String strToSearch;
+        if (entry.getValue() == null) {
+            strToSearch = entry.getKey();
+        } else {
+            strToSearch = entry.getValue();
+        }
+        Range range = getRangeIfMatchElseNull(strToSearch);
+        if (range == null) {
+            return null;
+        }
+        return new AbstractMap.SimpleEntry<>(entry.getKey(), range);
+    };
+
+    private Range getRangeIfMatchElseNull(String target) {
+        int index;
+        if (isFlagApplied(Flag.FULL_WORD_MATCHING_ONLY)) {
+            String regex = "\\b" + Pattern.quote(textToFind) + "\\b";
+            index = index(target, regex);
+        } else {
+            index = index(target, Pattern.quote(textToFind));
+        }
+        if (index == -1) {
+            return null;
+        }
+        return new Range(index, index + textToFind.length() - 1);
     }
 
     public int index(String toSearch, String regex) {
@@ -50,5 +65,10 @@ class SingleTextSearchPredicate extends SearchPredicate {
         } else {
             return -1;
         }
+    }
+
+    @Override
+    public String toString() {
+        return textToFind;
     }
 }
