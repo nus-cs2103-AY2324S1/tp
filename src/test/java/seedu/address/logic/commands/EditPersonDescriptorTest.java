@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMPTY_HOUR;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FROM_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_HOUR_FIVE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HOUR_SIXTY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -64,7 +64,7 @@ public class EditPersonDescriptorTest {
         assertNotEquals(DESC_AMY, editedAmy);
 
         // different hours -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withHour(VALID_HOUR_FIVE).build();
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withHour(VALID_EMPTY_HOUR).build();
         assertNotEquals(DESC_AMY, editedAmy);
 
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withHour(VALID_HOUR_SIXTY).build();
