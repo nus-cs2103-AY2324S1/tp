@@ -8,17 +8,17 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_COUNT;
 import seedu.address.logic.commands.ConfigCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * Parses input arguments and creates a new ConfigCommand object
+ */
 public class ConfigCommandParser {
     private static final String MESSAGE_INVALID_COUNT_VALUE = "Invalid count values! The count value of %1$s cannot "
             + "be less than 0.";
 
-    private int tutorialCount;
-    private int assignmentCount;
-
     /**
      * Parses the given {@code String} of arguments in the context of the ConfigCommand
      * @param args Arguments to be parsed
-     * @return ConfigCommand object for execution
+     * @return {@code ConfigCommand} object for execution
      * @throws ParseException if the user input does not conform to the expected format
      */
     public ConfigCommand parse(String args) throws ParseException {
@@ -29,6 +29,9 @@ public class ConfigCommandParser {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ConfigCommand.MESSAGE_USAGE));
         }
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TUTORIAL_COUNT, PREFIX_ASSIGNMENT_COUNT);
+
+        int tutorialCount;
+        int assignmentCount;
         try {
             tutorialCount = Integer.parseInt(argMultimap.getValue(PREFIX_TUTORIAL_COUNT).get());
             assignmentCount = Integer.parseInt(argMultimap.getValue(PREFIX_ASSIGNMENT_COUNT).get());
@@ -46,7 +49,7 @@ public class ConfigCommandParser {
      * @param count Count value of tutorials or assignments
      * @throws ParseException if the count value is less than 0
      */
-    private void validCountParser(int count, String attribute) throws ParseException{
+    private void validCountParser(int count, String attribute) throws ParseException {
         if (count < 0) {
             throw new ParseException(String.format(MESSAGE_INVALID_COUNT_VALUE, attribute));
         }

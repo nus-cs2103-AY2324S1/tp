@@ -16,6 +16,10 @@ public class ResultDisplay extends UiPart<Region> {
     @FXML
     private TextArea resultDisplay;
 
+    /**
+     * Display the welcome message when Class Manager opens.
+     * @param welcomeMessage String representation of welcome message.
+     */
     public ResultDisplay(String welcomeMessage) {
         super(FXML);
         this.resultDisplay.setText(welcomeMessage);

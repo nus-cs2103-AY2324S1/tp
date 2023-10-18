@@ -53,6 +53,7 @@ public class LogicManager implements Logic {
         //TODO: run the following code only if command is load
         try {
             storage.saveAddressBook(model.getAddressBook(), model.getAddressBookFilePath());
+            storage.saveUserPrefs(model.getUserPrefs());
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {

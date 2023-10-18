@@ -24,7 +24,11 @@ public class LoadCommandParser implements Parser<LoadCommand> {
      * @throws ParseException if the user input for file name does not conform the expected format
      */
     public LoadCommand parse(String args) throws ParseException {
-        requireNonNull(args);
+        try {
+            requireNonNull(args);
+        } catch (NullPointerException e) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LoadCommand.MESSAGE_USAGE));
+        }
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_FILE);
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_FILE);
         String fileName = argMultimap.getValue(PREFIX_FILE).orElse("");

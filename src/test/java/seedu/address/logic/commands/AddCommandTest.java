@@ -120,6 +120,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean getConfigured() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setConfigured() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addStudent(Student student) {
             throw new AssertionError("This method should not be called.");
         }

@@ -1,6 +1,5 @@
 package seedu.address.model.student.grades;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.Arrays;

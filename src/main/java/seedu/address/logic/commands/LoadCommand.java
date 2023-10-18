@@ -5,9 +5,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE;
 
 import java.io.File;
 import java.nio.file.Path;
+import java.util.Objects;
 import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataLoadingException;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -37,6 +39,7 @@ public class LoadCommand extends Command {
     private final Path filePath;
 
     /**
+     * Constructor for {@code LoadCommand}
      * @param fileName New save file
      * @param filePath Relative path of the new save file
      */
@@ -49,7 +52,7 @@ public class LoadCommand extends Command {
      * Checks if the file exists and loads the file into the address book.
      * If the file cannot be loaded or does not exist, an exception is thrown.
      * @param  model {@code Model} which the command should operate on.
-     * @return A command result with the success message.
+     * @return A {@code CommandResult} with the success message.
      * @throws CommandException If the file cannot be loaded or does not exist.
      */
     @Override
@@ -91,5 +94,17 @@ public class LoadCommand extends Command {
 
         LoadCommand e = (LoadCommand) other;
         return filePath.equals(e.filePath) && fileName.equals(e.fileName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(fileName, filePath);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("load", fileName)
+                .toString();
     }
 }

@@ -58,11 +58,16 @@ public class AddressBookParser {
 
         // Prevents user from using Class Manager before configuring it
         if (!isConfigured) {
-            if (commandWord.equals(ConfigCommand.COMMAND_WORD)) {
+            switch (commandWord) {
+
+            case ConfigCommand.COMMAND_WORD:
                 return new ConfigCommandParser().parse(arguments);
-            } else if(commandWord.equals(HelpCommand.COMMAND_WORD)) {
+
+            case HelpCommand.COMMAND_WORD:
                 return new HelpCommand();
-            } else {
+
+            default:
+                logger.finer("This user input caused a ParseException: " + userInput);
                 throw new ParseException(MESSAGE_CLASS_MANAGER_NOT_CONFIGURED);
             }
         }

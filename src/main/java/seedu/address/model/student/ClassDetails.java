@@ -14,16 +14,15 @@ import seedu.address.model.student.grades.ClassParticipationTracker;
 public class ClassDetails {
 
     public static final String MESSAGE_CONSTRAINTS = "Class number can take any values, and it should not be blank";
-
-    public static int TUTORIAL_COUNT;
-    public static int ASSIGNMENT_COUNT;
     /*
      * The class number should start with "T".
      */
     public static final String VALIDATION_REGEX = "T.*";
 
-    public final String value;
+    private static int tutorialCount;
+    private static int assignmentCount;
 
+    public final String classDetails;
     public final AttendanceTracker attendanceTracker;
     public final AssignmentTracker assignmentTracker;
     public final ClassParticipationTracker classParticipationTracker;
@@ -37,10 +36,10 @@ public class ClassDetails {
     public ClassDetails(String classDetails) {
         requireNonNull(classDetails);
         checkArgument(isValidClassDetails(classDetails), MESSAGE_CONSTRAINTS);
-        value = classDetails;
-        attendanceTracker = new AttendanceTracker(TUTORIAL_COUNT);
-        classParticipationTracker = new ClassParticipationTracker(TUTORIAL_COUNT);
-        assignmentTracker = new AssignmentTracker(ASSIGNMENT_COUNT);
+        this.classDetails = classDetails;
+        attendanceTracker = new AttendanceTracker(tutorialCount);
+        classParticipationTracker = new ClassParticipationTracker(tutorialCount);
+        assignmentTracker = new AssignmentTracker(assignmentCount);
     }
 
     /**
@@ -50,9 +49,17 @@ public class ClassDetails {
         return (test.matches(VALIDATION_REGEX));
     }
 
+    public static void setTutorialCount(int tutorialCount) {
+        ClassDetails.tutorialCount = tutorialCount;
+    }
+
+    public static void setAssignmentCount(int assignmentCount) {
+        ClassDetails.assignmentCount = assignmentCount;
+    }
+
     @Override
     public String toString() {
-        return value;
+        return classDetails;
     }
 
     @Override
@@ -67,12 +74,14 @@ public class ClassDetails {
         }
 
         ClassDetails otherAddress = (ClassDetails) other;
-        return value.equals(otherAddress.value);
+        return classDetails.equals(otherAddress.classDetails)
+                && attendanceTracker.equals(otherAddress.attendanceTracker)
+                && classParticipationTracker.equals(otherAddress.classParticipationTracker)
+                && assignmentTracker.equals(otherAddress.assignmentTracker);
     }
 
     @Override
-    public int hashCode() {
-        return value.hashCode();
+return predicate.hashCode();return predicate.hashCode();    public int hashCode() {
+        return classDetails.hashCode();
     }
-
 }

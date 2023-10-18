@@ -90,9 +90,9 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Gui Settings : " + guiSettings);
-        sb.append("\nLocal data file location : " + addressBookFilePath);
-        sb.append("\nModule information configured : " + isConfigured);
+        sb.append("Gui Settings : ").append(guiSettings);
+        sb.append("\nLocal data file location : ").append(addressBookFilePath);
+        sb.append("\nModule information configured : ").append(isConfigured);
         return sb.toString();
     }
 
