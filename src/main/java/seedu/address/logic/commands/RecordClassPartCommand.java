@@ -51,7 +51,7 @@ public class RecordClassPartCommand extends Command {
         requireNonNull(model);
 
         if (!model.hasStudent(new Student(studentNumber))) {
-            return new CommandResult(Messages.MESSAGE_STUDENT_DOES_NOT_EXIST);
+            throw new CommandException(Messages.MESSAGE_NONEXISTENT_STUDENT_NUMBER);
         }
 
         Student studentToGrade = model.getStudent(studentNumber);
