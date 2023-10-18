@@ -3,12 +3,15 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 
 import java.time.MonthDay;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a Person's birthday in the address book.
  * Guarantees: immutable;
  */
 public class Birthday {
+    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM");
+    public static final String MESSAGE_INVALID = "Birthday should be in the format of dd/MM and should be a valid day.";
     public final MonthDay birthday;
 
     /**

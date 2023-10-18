@@ -39,6 +39,7 @@
       <Label fx:id="linkedin" styleClass="cell_small_label" text="\$linkedin" />
       <Label fx:id="secondaryEmail" styleClass="cell_small_label" text="\$secondaryEmail" />
       <Label fx:id="telegram" styleClass="cell_small_label" text="\$telegram" />
+      <Label fx:id="birthday" styleClass="cell_small_label" text="\$birthday" />
       <HBox spacing="5" alignment="CENTER_RIGHT">
         <Button fx:id="notesButton" onAction="#handleNotesButtonClick" text="Notes (0)" />
       </HBox>
