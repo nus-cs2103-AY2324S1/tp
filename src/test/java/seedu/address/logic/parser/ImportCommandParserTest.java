@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.logic.parser.ImportCommandParser.MESSAGE_ERROR_READING_FILE;
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.HOON;
@@ -55,6 +56,10 @@ class ImportCommandParserTest {
 
         String fileName2 = relativePath + "/" + "test_data_missing_attributes.csv";
         assertParseFailure(parser, fileName2, expectedMessage);
+
+        String fileName3 = relativePath + "/" + "test_data_doesnt_exists.csv";
+        assertParseFailure(parser, fileName3, MESSAGE_ERROR_READING_FILE + fileName3);
+
     }
 
 }

@@ -34,8 +34,21 @@ class ImportCommandTest {
 
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new ImportCommand(null, null));
+        assertThrows(NullPointerException.class, () -> new ImportCommand(null, "test_data.csv"));
+        assertThrows(NullPointerException.class, () -> new ImportCommand(new ArrayList<>(), null));
     }
+
+    @Test
+    public void execute_nullModel_throwsNullPointerException() {
+        Path relativePath = Paths.get("src", "test", "data", "ImportDataTest");
+        String fileName1 = relativePath + "\\" + "test_data_successful.csv";
+        List<Student> expectedList1 = new ArrayList<>();
+        expectedList1.add(AMY);
+        expectedList1.add(BOB);
+
+        assertThrows(NullPointerException.class, () -> new ImportCommand(expectedList1, fileName1).execute(null));
+    }
+
     @Test
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
@@ -68,7 +81,6 @@ class ImportCommandTest {
                         + ImportCommand.MESSAGE_DUPLICATE_PERSON, () -> importCommand.execute(modelStub)
         );
     }
-
 
     @Test
     public void equals() {

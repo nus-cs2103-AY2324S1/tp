@@ -16,18 +16,26 @@ import seedu.address.model.person.Student;
 public class ImportCommand extends Command {
 
     public static final String COMMAND_WORD = "import";
+    public static final String MESSAGE_NAME = "Name";
+    public static final String MESSAGE_PHONE = "Phone";
+    public static final String MESSAGE_EMAIL = "Email";
+    public static final String MESSAGE_ADDRESS = "Address";
+    public static final String MESSAGE_GENDER = "Gender";
+    public static final String MESSAGE_SEC_LEVEL = "Sec Level";
+    public static final String MESSAGE_MRT_STATION = "Nearest MRT Station";
+    public static final String MESSAGE_SUBJECT = "Subject";
 
     public static final String MESSAGE_USAGE =
             COMMAND_WORD + ": Import a csv file with students details to the address book. "
             + "Parameters: File Path\n"
             + "Example: " + COMMAND_WORD + " StudentData.csv\n"
             + "Note that the order of column should be "
-            + "\"Name\", \"Phone\", \"Email\", \"Address\", \"Gender\", \n"
-            + "\"Sec Level\", \"Nearest Mrt Station\", \"Subject\"";
+            + "\"" + MESSAGE_NAME + "\" , \"" + MESSAGE_PHONE + "\" , \"" + MESSAGE_EMAIL
+            + "\" , \"" + MESSAGE_ADDRESS + "\" , \"" + MESSAGE_GENDER + "\" , \""
+            + MESSAGE_SEC_LEVEL + "\" , \"" + MESSAGE_MRT_STATION + "\" , \"" + MESSAGE_SUBJECT + "\"";
 
     public static final String MESSAGE_SUCCESS = "All students data imported";
     public static final String MESSAGE_DUPLICATE_PERSON = "has duplicates";
-
 
     private final String filePath;
     private final List<Student> students;

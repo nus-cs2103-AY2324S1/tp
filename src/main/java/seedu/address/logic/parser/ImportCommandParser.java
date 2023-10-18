@@ -1,6 +1,14 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.ImportCommand.MESSAGE_ADDRESS;
+import static seedu.address.logic.commands.ImportCommand.MESSAGE_EMAIL;
+import static seedu.address.logic.commands.ImportCommand.MESSAGE_GENDER;
+import static seedu.address.logic.commands.ImportCommand.MESSAGE_MRT_STATION;
+import static seedu.address.logic.commands.ImportCommand.MESSAGE_NAME;
+import static seedu.address.logic.commands.ImportCommand.MESSAGE_PHONE;
+import static seedu.address.logic.commands.ImportCommand.MESSAGE_SEC_LEVEL;
+import static seedu.address.logic.commands.ImportCommand.MESSAGE_SUBJECT;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -28,6 +36,8 @@ import seedu.address.model.tag.Subject;
  */
 public class ImportCommandParser implements Parser<ImportCommand> {
 
+    public static final String MESSAGE_ERROR_READING_FILE = "Error reading CSV file: ";
+
     /**
      * Parses the given {@code String} of arguments in the context of the ImportCommand
      * and returns a ImportCommand object for execution.
@@ -40,15 +50,12 @@ public class ImportCommandParser implements Parser<ImportCommand> {
         String path = projectPath + "/" + args.trim();
 
         File csvFile = new File(path);
-        if (!csvFile.exists()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCommand.MESSAGE_USAGE));
-        }
 
         try {
             BufferedReader reader = new BufferedReader(new FileReader(csvFile));
             String header = reader.readLine();
-            String[] expectedHeaders = {"Name", "Phone Number", "Email", "Address",
-                "Gender", "Sec level", "Nearest Mrt station", "Subject"};
+            String[] expectedHeaders = {MESSAGE_NAME, MESSAGE_PHONE, MESSAGE_EMAIL, MESSAGE_ADDRESS, MESSAGE_GENDER,
+                MESSAGE_SEC_LEVEL, MESSAGE_MRT_STATION, MESSAGE_SUBJECT};
 
             String[] actualHeaders = header.split(",");
 
@@ -65,7 +72,7 @@ public class ImportCommandParser implements Parser<ImportCommand> {
                 line = reader.readLine();
             }
         } catch (IOException e) {
-            throw new ParseException("Error reading CSV file: " + e.getMessage());
+            throw new ParseException(MESSAGE_ERROR_READING_FILE + args);
         }
 
         return new ImportCommand(students, args);
