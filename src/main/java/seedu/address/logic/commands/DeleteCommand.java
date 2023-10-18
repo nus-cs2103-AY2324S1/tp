@@ -76,11 +76,30 @@ public class DeleteCommand extends Command {
         }
 
         DeleteCommand otherDeleteCommand = (DeleteCommand) other;
-        return targetIndex.equals(otherDeleteCommand.targetIndex);
+
+        if ((this.targetIndex == null && otherDeleteCommand.targetIndex != null)
+                || (this.targetIndex != null && otherDeleteCommand.targetIndex == null)) {
+            return false;
+        }
+
+        if ((this.name == null && otherDeleteCommand.name != null)
+                || (this.name != null && otherDeleteCommand.name == null)) {
+            return false;
+        }
+
+        if (this.targetIndex != null) {
+            return targetIndex.equals(otherDeleteCommand.targetIndex);
+        }
+        return this.name.equals(otherDeleteCommand.name);
     }
 
     @Override
     public String toString() {
+        if (name != null) {
+            return new ToStringBuilder(this)
+                    .add("targetName",  name)
+                    .toString();
+        }
         return new ToStringBuilder(this)
                 .add("targetIndex", targetIndex)
                 .toString();
