@@ -5,10 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.meeting.AttendeeContainsKeywordsPredicate;
-import seedu.address.model.meeting.LocationContainsKeywordsPredicate;
-import seedu.address.model.meeting.MeetingTimeContainsPredicate;
-import seedu.address.model.meeting.TitleContainsKeywordsPredicate;
+import seedu.address.model.meeting.GeneralMeetingPredicate;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
@@ -23,9 +20,10 @@ public class FilterMeetingCommand extends Command {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " CS2103T Meeting";
 
-    private final TitleContainsKeywordsPredicate predicate;
+    private final GeneralMeetingPredicate predicate;
 
-    public FilterMeetingCommand(TitleContainsKeywordsPredicate predicate, LocationContainsKeywordsPredicate predicate1, MeetingTimeContainsPredicate predicate2, AttendeeContainsKeywordsPredicate predicate3, ) {
+
+    public FilterMeetingCommand(GeneralMeetingPredicate predicate) {
         this.predicate = predicate;
     }
 

@@ -19,7 +19,8 @@ public class TitleContainsKeywordsPredicate implements Predicate<Meeting> {
     @Override
     public boolean test(Meeting meeting) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(meeting.getTitle().toString(), keyword));
+                .anyMatch(keyword -> keyword.isEmpty()
+                        || StringUtil.containsWordIgnoreCase(meeting.getTitle().toString(), keyword));
     }
 
     @Override

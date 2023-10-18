@@ -3,19 +3,22 @@ package seedu.address.model.meeting;
 import static seedu.address.logic.parser.ParserUtil.FORMAT;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.function.Predicate;
 
-import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Tests that a {@code Meetings}'s {@code Title} matches any of the keywords given.
+ * Tests that a {@code Meetings}'s {@code MeetingTime} duration within the given start and end.
  */
 public class MeetingTimeContainsPredicate implements Predicate<Meeting> {
     private final LocalDateTime start;
     private final LocalDateTime end;
 
+    /**
+     * Constructs a predicate with the given start and end times.
+     * @param start start of the duration to be checked.
+     * @param end end of the duration to be checked.
+     */
     public MeetingTimeContainsPredicate(LocalDateTime start, LocalDateTime end) {
         this.start = start;
         this.end = end;
@@ -39,8 +42,10 @@ public class MeetingTimeContainsPredicate implements Predicate<Meeting> {
             return false;
         }
 
-        MeetingTimeContainsPredicate otherMeetingTimeContainsPredicate = (MeetingTimeContainsPredicate) other;
-        return this.start.equals(otherMeetingTimeContainsPredicate.start) && this.end.equals(otherMeetingTimeContainsPredicate.end);
+        MeetingTimeContainsPredicate otherMeetingTimeContainsPredicate =
+                (MeetingTimeContainsPredicate) other;
+        return this.start.equals(otherMeetingTimeContainsPredicate.start)
+                && this.end.equals(otherMeetingTimeContainsPredicate.end);
     }
 
     @Override

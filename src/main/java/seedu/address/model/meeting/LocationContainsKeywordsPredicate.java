@@ -19,7 +19,8 @@ public class LocationContainsKeywordsPredicate implements Predicate<Meeting> {
     @Override
     public boolean test(Meeting meeting) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(meeting.getLocation().toString(), keyword));
+                .anyMatch(keyword -> keyword.isEmpty()
+                        || StringUtil.containsWordIgnoreCase(meeting.getLocation().toString(), keyword));
     }
 
     @Override
@@ -33,7 +34,8 @@ public class LocationContainsKeywordsPredicate implements Predicate<Meeting> {
             return false;
         }
 
-        LocationContainsKeywordsPredicate otherLocationContainsKeywordsPredicate = (LocationContainsKeywordsPredicate) other;
+        LocationContainsKeywordsPredicate otherLocationContainsKeywordsPredicate =
+                (LocationContainsKeywordsPredicate) other;
         return keywords.equals(otherLocationContainsKeywordsPredicate.keywords);
     }
 
