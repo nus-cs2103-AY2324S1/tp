@@ -5,6 +5,8 @@ import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.FINANCIAL_PLAN_DESC_1;
+import static seedu.address.logic.commands.CommandTestUtil.FINANCIAL_PLAN_DESC_2;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
@@ -26,6 +28,8 @@ import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_FINANCIAL_PLAN_1;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_FINANCIAL_PLAN_2;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NEXT_OF_KIN_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NEXT_OF_KIN_PHONE_BOB;
@@ -62,20 +66,23 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Person expectedPerson = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
+        Person expectedPerson = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND)
+                .withFinancialPlans(VALID_FINANCIAL_PLAN_1, VALID_FINANCIAL_PLAN_2).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + NEXT_OF_KIN_NAME_DESC_BOB + NEXT_OF_KIN_PHONE_DESC_BOB + TAG_DESC_FRIEND,
+                + ADDRESS_DESC_BOB + NEXT_OF_KIN_NAME_DESC_BOB + NEXT_OF_KIN_PHONE_DESC_BOB + FINANCIAL_PLAN_DESC_1
+                        + FINANCIAL_PLAN_DESC_2 + TAG_DESC_FRIEND,
                 new AddCommand(expectedPerson));
 
 
         // multiple tags - all accepted
         Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
-                .build();
+                .withFinancialPlans(VALID_FINANCIAL_PLAN_1, VALID_FINANCIAL_PLAN_2).build();
         assertParseSuccess(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + NEXT_OF_KIN_NAME_DESC_BOB
-                        + NEXT_OF_KIN_PHONE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                        + NEXT_OF_KIN_PHONE_DESC_BOB + TAG_DESC_HUSBAND + FINANCIAL_PLAN_DESC_1 + FINANCIAL_PLAN_DESC_2
+                        + TAG_DESC_FRIEND,
                 new AddCommand(expectedPersonMultipleTags));
     }
 
@@ -168,7 +175,7 @@ public class AddCommandParserTest {
         // zero tags
         Person expectedPerson = new PersonBuilder(AMY).withTags().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                + NEXT_OF_KIN_NAME_DESC_AMY + NEXT_OF_KIN_PHONE_DESC_AMY,
+                + NEXT_OF_KIN_NAME_DESC_AMY + FINANCIAL_PLAN_DESC_1 + NEXT_OF_KIN_PHONE_DESC_AMY,
                 new AddCommand(expectedPerson));
     }
 
@@ -245,7 +252,7 @@ public class AddCommandParserTest {
 
         // invalid tag
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + NEXT_OF_KIN_NAME_DESC_BOB + NEXT_OF_KIN_PHONE_DESC_BOB
+                + NEXT_OF_KIN_NAME_DESC_BOB + NEXT_OF_KIN_PHONE_DESC_BOB + FINANCIAL_PLAN_DESC_1
                 + INVALID_TAG_DESC + VALID_TAG_FRIEND, Tag.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported

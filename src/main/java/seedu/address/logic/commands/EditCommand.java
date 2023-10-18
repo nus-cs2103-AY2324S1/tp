@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FINANCIAL_PLAN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXT_OF_KIN_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXT_OF_KIN_PHONE;
@@ -23,6 +24,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.financialplan.FinancialPlan;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -49,6 +51,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_NEXT_OF_KIN_NAME + "NOK_NAME] "
             + "[" + PREFIX_NEXT_OF_KIN_PHONE + "NOK_PHONE] "
+            + "[" + PREFIX_FINANCIAL_PLAN + "FINANCIAL_PLAN]...\n"
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -108,9 +111,11 @@ public class EditCommand extends Command {
         NextOfKinName updatedNokName = editPersonDescriptor.getNextOfKinName().orElse(personToEdit.getNextOfKinName());
         NextOfKinPhone updatedNokPhone = editPersonDescriptor.getNextOfKinPhone()
                 .orElse(personToEdit.getNextOfKinPhone());
+        Set<FinancialPlan> updatedFinancialPlans = editPersonDescriptor.getFinancialPlans()
+                .orElse(personToEdit.getFinancialPlans());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedNokName,
-                updatedNokPhone, updatedTags);
+                updatedNokPhone, updatedFinancialPlans, updatedTags);
     }
 
     @Override
@@ -148,6 +153,7 @@ public class EditCommand extends Command {
         private Address address;
         private NextOfKinName nextOfKinName;
         private NextOfKinPhone nextOfKinPhone;
+        private Set<FinancialPlan> financialPlans;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -163,6 +169,7 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setNextOfKinName(toCopy.nextOfKinName);
             setNextOfKinPhone(toCopy.nextOfKinPhone);
+            setFinancialPlans(toCopy.financialPlans);
             setTags(toCopy.tags);
         }
 
@@ -170,7 +177,8 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, nextOfKinName, nextOfKinPhone, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, nextOfKinName,
+                    nextOfKinPhone, financialPlans, tags);
         }
 
         public void setName(Name name) {
@@ -221,6 +229,24 @@ public class EditCommand extends Command {
         }
 
         /**
+         * Sets {@code financialPlans} to this object's {@code financialPlans}.
+         * A defensive copy of {@code financialPlans} is used internally.
+         */
+        public void setFinancialPlans(Set<FinancialPlan> financialPlans) {
+            this.financialPlans = (financialPlans != null) ? new HashSet<>(financialPlans) : null;
+        }
+
+        /**
+         * Returns an unmodifiable financial plan set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code financialPlans} is null.
+         */
+        public Optional<Set<FinancialPlan>> getFinancialPlans() {
+            return (financialPlans != null)
+                    ? Optional.of(Collections.unmodifiableSet(financialPlans)) : Optional.empty();
+        }
+
+        /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
          */
@@ -255,6 +281,7 @@ public class EditCommand extends Command {
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(nextOfKinName, otherEditPersonDescriptor.nextOfKinName)
                     && Objects.equals(nextOfKinPhone, otherEditPersonDescriptor.nextOfKinPhone)
+                    && Objects.equals(financialPlans, otherEditPersonDescriptor.financialPlans)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
@@ -267,6 +294,7 @@ public class EditCommand extends Command {
                     .add("address", address)
                     .add("nextOfKinName", nextOfKinName)
                     .add("nextOfKinPhone", nextOfKinPhone)
+                    .add("financialPlans", financialPlans)
                     .add("tags", tags)
                     .toString();
         }

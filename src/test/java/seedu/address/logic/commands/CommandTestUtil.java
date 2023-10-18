@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FINANCIAL_PLAN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXT_OF_KIN_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXT_OF_KIN_PHONE;
@@ -44,6 +45,9 @@ public class CommandTestUtil {
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
+    public static final String VALID_FINANCIAL_PLAN_1 = "financial plan 1";
+    public static final String VALID_FINANCIAL_PLAN_2 = "financial plan 2";
+
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
@@ -63,6 +67,8 @@ public class CommandTestUtil {
             + VALID_NEXT_OF_KIN_PHONE_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String FINANCIAL_PLAN_DESC_1 = " " + PREFIX_FINANCIAL_PLAN + VALID_FINANCIAL_PLAN_1;
+    public static final String FINANCIAL_PLAN_DESC_2 = " " + PREFIX_FINANCIAL_PLAN + VALID_FINANCIAL_PLAN_2;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -73,6 +79,8 @@ public class CommandTestUtil {
     public static final String INVALID_NEXT_OF_KIN_PHONE_DESC = " " + PREFIX_NEXT_OF_KIN_PHONE
             + "911a"; // 'a' not allowed in phones
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_FINANCIAL_PLAN_DESC = " " + PREFIX_FINANCIAL_PLAN
+            + "financial_plan"; // '_' not allowed in financial plan names
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -84,11 +92,12 @@ public class CommandTestUtil {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withNextOfKinName(VALID_NEXT_OF_KIN_NAME_AMY).withNextOfKinPhone(VALID_NEXT_OF_KIN_PHONE_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
+                .withTags(VALID_TAG_FRIEND).withFinancialPlans(VALID_FINANCIAL_PLAN_1).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withNextOfKinName(VALID_NEXT_OF_KIN_NAME_BOB).withNextOfKinPhone(VALID_NEXT_OF_KIN_PHONE_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+                .withFinancialPlans(VALID_FINANCIAL_PLAN_1, VALID_FINANCIAL_PLAN_2).build();
     }
 
     /**

@@ -7,6 +7,7 @@
     "address" : "123, Jurong West Ave 6, #08-111",
     "nextOfKinName": "Alice Dad",
     "nextOfKinPhone": "94351111",
+    "financialPlans" : ["Sample Financial Plan 1", "Sample Financial Plan 2"],
     "tags" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
@@ -15,6 +16,7 @@
     "address" : "311, Clementi Ave 2, #02-25",
     "nextOfKinName": "Benson Dad",
     "nextOfKinPhone": "98761111",
+    "financialPlans" : ["Sample Financial Plan 1", "Sample Financial Plan 2"],
     "tags" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
@@ -23,6 +25,7 @@
     "address" : "wall street",
     "nextOfKinName": "Carl Dad",
     "nextOfKinPhone": "95351111",
+    "financialPlans" : [ ],
     "tags" : [ ]
   }, {
     "name" : "Daniel Meier",
@@ -39,6 +42,7 @@
     "address" : "michegan ave",
     "nextOfKinName": "Elle Dad",
     "nextOfKinPhone": "94821113",
+    "financialPlans" : ["Sample Financial Plan 2"],
     "tags" : [ ]
   }, {
     "name" : "Fiona Kunz",
@@ -47,6 +51,7 @@
     "address" : "little tokyo",
     "nextOfKinName": "Fiona Dad",
     "nextOfKinPhone": "94821111",
+    "financialPlans" : [ ],
     "tags" : [ ]
   }, {
     "name" : "George Best",
@@ -55,6 +60,7 @@
     "address" : "4th street",
     "nextOfKinName": "George Dad",
     "nextOfKinPhone": "94821112",
+    "financialPlans" : ["Sample Financial Plan 1", "Sample Financial Plan 2"],
     "tags" : [ ]
   } ]
 }
