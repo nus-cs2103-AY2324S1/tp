@@ -451,6 +451,7 @@ Parameters
     * `course` - Sort alphabetically by course taken
     * `spec`/`specialization` - Sort alphabetically by specialization
     * `priority` - Sort by priority
+    * `none` - Return to default sorting
 
 * `[order]` (optional) is the order to sort in. If not specified, defaults to ascending.
 
