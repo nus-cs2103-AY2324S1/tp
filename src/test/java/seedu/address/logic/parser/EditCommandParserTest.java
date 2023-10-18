@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
@@ -35,6 +36,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -185,4 +187,15 @@ public class EditCommandParserTest {
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
+
+    @Test
+    public void parse_emptyInput_throwsParseException() {
+        EditCommandParser parser = new EditCommandParser();
+
+        String emptyInput = "";
+
+        assertThrows(ParseException.class, () -> parser.parse(emptyInput), EditCommand.MESSAGE_NOT_EDITED);
+    }
+
+
 }

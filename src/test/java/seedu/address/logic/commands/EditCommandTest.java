@@ -174,5 +174,25 @@ public class EditCommandTest {
         CommandException exception = assertThrows(CommandException.class, () -> editCommand.findPersonToEdit(persons));
         assertEquals(expectedMessage, exception.getMessage());
     }
+
+
+    @Test
+    public void execute_personNotFound_throwsCommandException() {
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName("NonExistentName").build();
+        EditCommand editCommand = new EditCommand(new Name("NonExistentName"), null, descriptor);
+
+        // The expected CommandException should be thrown with the specified message
+        assertThrows(CommandException.class, () -> editCommand.execute(model), EditCommand.MESSAGE_PERSON_NOT_FOUND);
+    }
+
+    @Test
+    public void execute_duplicatePerson_throwsCommandException() {
+        // Assume two persons with the same name and different NRICs
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName("Name").build();
+        EditCommand editCommand = new EditCommand(new Name("Name"), null, descriptor);
+
+        assertThrows(CommandException.class, () -> editCommand.execute(model), EditCommand.MESSAGE_DUPLICATE_PERSON);
+    }
+
 }
 

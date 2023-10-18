@@ -2,10 +2,16 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 public class AppointmentTest {
 
@@ -48,6 +54,12 @@ public class AppointmentTest {
         assertTrue(Appointment.isValidAppointment("2005-01-03 10:00 12:00"));
         assertTrue(Appointment.isValidAppointment("1966-03-12 12:00 15:00"));
         assertTrue(Appointment.isValidAppointment("2023-3-2 00:00 4:59")); // truncated month/hour
+    }
+
+    @Test
+    public void parseAppointmentIfExists_emptyOptional_returnsNull() throws ParseException {
+        Optional<String> emptyAppointment = Optional.empty();
+        assertNull(ParserUtil.parseAppointmentIfExists(emptyAppointment));
     }
 
     @Test
