@@ -44,11 +44,8 @@ public class FieldContainsKeywordsPredicate implements Predicate<Job> {
      * @throws ParseException if the specifer is invalid.
      */
     public static boolean isValidSpecifier(String specifier) {
-        if (specifier.equals(COMPANY_FIND_SPECIFIER)
-                || specifier.equals(ROLE_FIND_SPECIFIER)) {
-            return true;
-        }
-        return false;
+        return specifier.equals(COMPANY_FIND_SPECIFIER)
+                || specifier.equals(ROLE_FIND_SPECIFIER);
     }
 
     @Override

@@ -12,7 +12,9 @@ public class Role {
 
     public static final String ROLE_FIND_SPECIFIER = "-r";
     public static final String MESSAGE_CONSTRAINTS =
-            "Role descriptions should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Role descriptions should adhere to the following constraints:\n"
+                    + "1. Only contain alphanumeric characters and spaces\n"
+                    + "2. Should not be blank";
 
     /*
      * The first character of the role must not be a whitespace,
