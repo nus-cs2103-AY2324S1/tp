@@ -29,7 +29,6 @@ import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PatientBuilder;
-import seedu.address.testutil.PersonBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
@@ -40,15 +39,15 @@ public class EditCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Person editedPerson = new PersonBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
-        Ic nricOfFirstPerson = model.getFilteredPatientList().get(0).getIc();
-        EditCommand editCommand = new EditCommand(nricOfFirstPerson, descriptor);
+        Person editedPatient = new PatientBuilder().build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPatient).build();
+        Ic nricOfFirstPatient = model.getFilteredPatientList().get(0).getIc();
+        EditCommand editCommand = new EditCommand(nricOfFirstPatient, descriptor);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPatient));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPatientList().get(0), editedPerson);
+        expectedModel.setPerson(model.getFilteredPatientList().get(0), editedPatient);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -93,9 +92,9 @@ public class EditCommandTest {
     public void execute_filteredList_success() {
         Ic nricOfFirstPerson = model.getFilteredPatientList().get(0).getIc();
 
-        Person personInFilteredList = model.getFilteredPatientList().stream().filter(p ->
+        Patient personInFilteredList = model.getFilteredPatientList().stream().filter(p ->
                 p.getIc().equals(nricOfFirstPerson)).findFirst().orElse(null);
-        Person editedPerson = new PersonBuilder(personInFilteredList).withName(VALID_NAME_BOB).build();
+        Patient editedPerson = new PatientBuilder(personInFilteredList).withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(nricOfFirstPerson,
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 

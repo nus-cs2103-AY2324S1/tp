@@ -179,9 +179,8 @@ public class ModelManager implements Model {
 
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
-                && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredDoctors.equals(otherModelManager.filteredDoctors)
-                && filteredPatients.equals(otherModelManager.filteredPatients);
+            && userPrefs.equals(otherModelManager.userPrefs)
+            && filteredDoctors.equals(otherModelManager.filteredDoctors)
+            && filteredPatients.equals(otherModelManager.filteredPatients);
     }
-
 }

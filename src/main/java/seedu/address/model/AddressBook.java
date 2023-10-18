@@ -155,6 +155,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public String toString() { //not sure how to modify this
         return new ToStringBuilder(this)
                 .add("patients", patients)
+                .add("doctors", doctors)
                 .toString();
     }
 
