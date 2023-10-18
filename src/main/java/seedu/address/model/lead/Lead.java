@@ -10,13 +10,6 @@ public class Lead {
     private final LeadType leadType;
 
     /**
-     * Returns an empty lead. Used as a default, or when no leads are tagged.
-     */
-    public Lead() {
-        this.leadType = null;
-    }
-
-    /**
      * Returns a lead given a string. Checks if the string is a valid lead;
      *
      * @param lead the string representation for the lead.
@@ -28,6 +21,12 @@ public class Lead {
 
     public Lead(LeadType lead) {
         this.leadType = lead;
+    }
+
+    public static boolean isValidLead(String lead) {
+        return lead.equalsIgnoreCase("HOT") ||
+               lead.equalsIgnoreCase("WARM") ||
+               lead.equalsIgnoreCase("COLD");
     }
 
     @Override
@@ -53,9 +52,5 @@ public class Lead {
     @Override
     public int hashCode() {
         return leadType.hashCode();
-    }
-
-    private boolean isValidLead(String lead) {
-        return lead.equals("HOT") || lead.equals("WARM") || lead.equals("COLD");
     }
 }

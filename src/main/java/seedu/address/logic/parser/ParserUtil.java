@@ -212,6 +212,10 @@ public class ParserUtil {
      */
     public static Lead parseLead(String lead) {
         requireNonNull(lead);
-        return new Lead(lead);
+        if (!Lead.isValidLead(lead)) {
+            return null;
+        } else {
+            return new Lead(lead);
+        }
     }
 }

@@ -60,7 +60,11 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        lead = source.getLead().toString().toLowerCase();
+        if (source.getLead() == null) {
+            lead = "";
+        } else {
+            lead = source.getLead().toString().toLowerCase();
+        }
     }
 
     /**
@@ -109,7 +113,7 @@ class JsonAdaptedPerson {
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
         Person person = new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
-        if (lead != null) {
+        if (lead != null && !lead.isEmpty()) {
             person.setLead(new Lead(lead));
         }
         return person;
