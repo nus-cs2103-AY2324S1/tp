@@ -73,6 +73,9 @@ public class Team {
         return developerIdentityCodes;
     }
 
+    public boolean containsDevloperIdentityCode(IdentityCode identityCodeToCheck) {
+        return developerIdentityCodes.contains(identityCodeToCheck);
+    }
     /**
      * Retrieves the name of the team.
      *

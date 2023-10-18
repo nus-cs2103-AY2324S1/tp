@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -46,6 +47,11 @@ public class UniquePersonList implements Iterable<Person> {
             throw new DuplicatePersonException();
         }
         internalList.add(toAdd);
+    }
+
+    public Person getPerson(Name name) {
+        Optional<Person> foundPerson = internalList.filtered(person -> person.getName().equals(name)).stream().findFirst();
+        return foundPerson.orElse(null);
     }
 
     /**

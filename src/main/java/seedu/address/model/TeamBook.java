@@ -5,8 +5,10 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.person.IdentityCode;
 import seedu.address.model.team.Team;
 import seedu.address.model.team.UniqueTeamList;
+import seedu.address.model.team.exceptions.TeamNotFoundException;
 
 /**
  * Represents a TeamBook in the address book.
@@ -104,6 +106,14 @@ public class TeamBook implements ReadOnlyTeamBook {
      */
     public void removeTeamByName(String teamName) {
         teams.removeTeamByName(teamName);
+    }
+
+    public void removeDeveloperFromTeam(String teamName, IdentityCode developerIdentityCode) {
+        if (teams.containsTeamByName(teamName)) {
+            teams.removeDeveloperFromTeam(teamName, developerIdentityCode);
+        } else {
+            throw new TeamNotFoundException();
+        }
     }
 
     /**

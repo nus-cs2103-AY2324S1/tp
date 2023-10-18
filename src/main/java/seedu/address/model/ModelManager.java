@@ -11,6 +11,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.person.IdentityCode;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.team.Team;
 
@@ -180,6 +182,11 @@ public class ModelManager implements Model {
         return addressBook.hasPerson(person);
     }
 
+    @Override
+    public IdentityCode getIdentityCodeByName(Name developerName) {
+        return addressBook.getPersonByName(developerName).getIdentityCode();
+    }
+
     /**
      * Deletes the specified person from the address book.
      *
@@ -311,10 +318,19 @@ public class ModelManager implements Model {
      * The developer and team must exist in the model.
      */
     @Override
-    public void deleteDeveloperFromTeam(String developerName, String teamName) {
-        teamBook.deleteDeveloperFromTeam(developerName, teamName);
+    public void deleteDeveloperFromTeam(String teamName, IdentityCode developerIdentityCode) {
+        teamBook.removeDeveloperFromTeam(teamName, developerIdentityCode);
     }
 
+    @Override
+    public void addDeveloperToTeam(String developerName, String teamName) {
+        return;
+    }
+
+    @Override
+    public boolean isDeveloperInTeam(String developerName, String teamName) {
+        return false;
+    }
     //=========== Filtered Team List Accessors =============================================================
 
     /**

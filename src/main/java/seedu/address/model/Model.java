@@ -5,7 +5,8 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.Developer;
+import seedu.address.model.person.IdentityCode;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.team.Team;
 
@@ -68,6 +69,8 @@ public interface Model {
      */
     boolean hasPerson(Person person);
 
+    IdentityCode getIdentityCodeByName(Name developerName);
+
     /**
      * Deletes the given person.
      * The person must exist in the address book.
@@ -127,7 +130,7 @@ public interface Model {
      * Deletes the given developer from the specified team.
      * The developer and team must exist in the model.
      */
-    void deleteDeveloperFromTeam(String developerName, String teamName);
+    void deleteDeveloperFromTeam(String teamName, IdentityCode developerIdentityCOde);
 
     /**
      * Adds the given developer to the specified team.

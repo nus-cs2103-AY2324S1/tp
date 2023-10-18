@@ -8,6 +8,8 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.person.IdentityCode;
+import seedu.address.model.team.exceptions.DeveloperNotFoundException;
 import seedu.address.model.team.exceptions.DuplicateTeamException;
 import seedu.address.model.team.exceptions.TeamNotFoundException;
 
@@ -87,6 +89,18 @@ public class UniqueTeamList implements Iterable<Team> {
 
         if (!internalList.remove(this.getTeamByName(teamName))) {
             throw new TeamNotFoundException();
+        }
+    }
+
+    public void removeDeveloperFromTeam(String teamName, IdentityCode developerIdentityCode) {
+        requireNonNull(teamName);
+        requireNonNull(developerIdentityCode);
+
+        Team team = getTeamByName(teamName);
+        if (team.containsDevloperIdentityCode(developerIdentityCode)) {
+            team.removeDeveloper(developerIdentityCode);
+        } else {
+            throw new DeveloperNotFoundException();
         }
     }
 
