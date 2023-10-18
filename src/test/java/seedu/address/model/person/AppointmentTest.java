@@ -56,11 +56,6 @@ public class AppointmentTest {
 
         // same values -> returns true
         assertTrue(appointment.equals(new Appointment("2023-01-01 11:00 12:00")));
-      
-        Appointment appointment = new Appointment("2023-03-12 12:00 15:00");
-
-        // same values -> returns true
-        assertTrue(appointment.equals(new Appointment("2023-03-12 12:00 15:00")));
 
         // same object -> returns true
         assertTrue(appointment.equals(appointment));

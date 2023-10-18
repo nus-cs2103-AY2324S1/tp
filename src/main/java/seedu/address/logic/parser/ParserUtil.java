@@ -203,6 +203,7 @@ public class ParserUtil {
             medicalHistories.add(new MedicalHistory(medicalHistoryString));
         }
         return medicalHistories;
+    }
 
     /**
      * Parses a {@code String medHistory} into a {@code MedicalHistory}.
@@ -226,6 +227,9 @@ public class ParserUtil {
         requireNonNull(medHistories);
         final Set<MedicalHistory> historiesSet = new HashSet<>();
         for (String historyName : medHistories) {
+            if (!MedicalHistory.isValidMedicalHistory(historyName)) {
+                throw new ParseException(MedicalHistory.MESSAGE_CONSTRAINTS);
+            }
             historiesSet.add(parseMedical(historyName));
         }
         return historiesSet;
