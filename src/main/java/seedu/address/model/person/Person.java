@@ -46,19 +46,6 @@ public class Person {
         this.tags.addAll(tags);
     }
 
-    /**
-     * Every field must be present and not null.
-     */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
-        this.nric = new Nric("T7243948H");
-        this.appointment = new Appointment("2023-12-12 12:00 15:00");
-    }
 
     public Name getName() {
         return name;
