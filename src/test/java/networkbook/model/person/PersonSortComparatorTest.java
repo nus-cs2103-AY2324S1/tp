@@ -120,18 +120,21 @@ public class PersonSortComparatorTest {
     public void test_compareOptional_comparesCorrectly() {
         Person h = new PersonBuilder(TypicalPersons.ALICE)
                 .withPriority("h")
+                .withGraduation("AY5051-S1")
                 .build();
         Person h2 = new PersonBuilder(TypicalPersons.DANIEL)
                 .withPriority("h")
+                .withGraduation("AY5051-S1")
                 .build();
         Person m = new PersonBuilder(TypicalPersons.CARL)
                 .withPriority("m")
+                .withGraduation("AY4950-S1")
                 .build();
         Person n = new Person(new Name("Nile"),
                 new UniqueList<Phone>().setItems(List.of(new Phone("87438807"))),
                 new UniqueList<Email>().setItems(List.of(new Email("alexyeoh@example.com"))),
                 new UniqueList<Link>().setItems(List.of(new Link("www.alexyeoh.net"))),
-                new Graduation("AY3233-S2"),
+                null,
                 new Course("Information Systems"),
                 new Specialisation("Financial Technology"),
                 SampleDataUtil.getTagList("friends"),
@@ -140,29 +143,47 @@ public class PersonSortComparatorTest {
                 new UniqueList<Phone>().setItems(List.of(new Phone("87438807"))),
                 new UniqueList<Email>().setItems(List.of(new Email("alexyeoh@example.com"))),
                 new UniqueList<Link>().setItems(List.of(new Link("www.alexyeoh.net"))),
-                new Graduation("AY3233-S2"),
+                null,
                 new Course("Information Systems"),
                 new Specialisation("Financial Technology"),
                 SampleDataUtil.getTagList("friends"),
                 null);
 
-        // Ascending
-        PersonSortComparator ascCmp = new PersonSortComparator(SortField.PRIORITY, SortOrder.ASCENDING);
-        assertEquals(0, ascCmp.compare(h, h2));
-        assertEquals(0, ascCmp.compare(n, n2));
-        assertEquals(1, ascCmp.compare(n, m));
-        assertEquals(-1, ascCmp.compare(m, n));
-        assertEquals(1, ascCmp.compare(h, m));
-        assertEquals(-1, ascCmp.compare(m, h));
+        // Ascending priority
+        PersonSortComparator ascPriority = new PersonSortComparator(SortField.PRIORITY, SortOrder.ASCENDING);
+        assertEquals(0, ascPriority.compare(h, h2));
+        assertEquals(0, ascPriority.compare(n, n2));
+        assertEquals(1, ascPriority.compare(n, m));
+        assertEquals(-1, ascPriority.compare(m, n));
+        assertEquals(1, ascPriority.compare(h, m));
+        assertEquals(-1, ascPriority.compare(m, h));
 
-        // Descending
-        PersonSortComparator descCmp = new PersonSortComparator(SortField.PRIORITY, SortOrder.DESCENDING);
-        assertEquals(0, descCmp.compare(h, h2));
-        assertEquals(0, descCmp.compare(n, n2));
-        assertEquals(1, descCmp.compare(n, m));
-        assertEquals(-1, descCmp.compare(m, n));
-        assertEquals(1, descCmp.compare(m, h));
-        assertEquals(-1, descCmp.compare(h, m));
+        // Descending priority
+        PersonSortComparator descPriority = new PersonSortComparator(SortField.PRIORITY, SortOrder.DESCENDING);
+        assertEquals(0, descPriority.compare(h, h2));
+        assertEquals(0, descPriority.compare(n, n2));
+        assertEquals(1, descPriority.compare(n, m));
+        assertEquals(-1, descPriority.compare(m, n));
+        assertEquals(1, descPriority.compare(m, h));
+        assertEquals(-1, descPriority.compare(h, m));
+
+        // Ascending grad
+        PersonSortComparator ascGrad = new PersonSortComparator(SortField.GRAD, SortOrder.ASCENDING);
+        assertEquals(0, ascGrad.compare(h, h2));
+        assertEquals(0, ascGrad.compare(n, n2));
+        assertEquals(1, ascGrad.compare(n, m));
+        assertEquals(-1, ascGrad.compare(m, n));
+        assertEquals(1, ascGrad.compare(h, m));
+        assertEquals(-1, ascGrad.compare(m, h));
+
+        // Descending grad
+        PersonSortComparator descGrad = new PersonSortComparator(SortField.GRAD, SortOrder.DESCENDING);
+        assertEquals(0, descGrad.compare(h, h2));
+        assertEquals(0, descGrad.compare(n, n2));
+        assertEquals(1, descGrad.compare(n, m));
+        assertEquals(-1, descGrad.compare(m, n));
+        assertEquals(1, descGrad.compare(m, h));
+        assertEquals(-1, descGrad.compare(h, m));
     }
 
     @Test
