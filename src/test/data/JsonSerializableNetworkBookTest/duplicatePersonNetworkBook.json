@@ -4,7 +4,7 @@
     "phone": "94351253",
     "emails": ["alice@example.com"],
     "link": "paulice.sg",
-    "graduation": "1975",
+    "graduation": "AY2324-S1",
     "course": "Computer Science",
     "specialisation": "Software Engineering",
     "tags": [ "friends" ]
@@ -14,7 +14,7 @@
     "emails": ["pauline@example.com"],
     "address": "4th street",
     "link": "paulice.sg",
-    "graduation": "1975",
+    "graduation": "AY2324-S1",
     "course": "Computer Science",
     "specialisation": "Software Engineering",
     "tags": [ "friends" ]

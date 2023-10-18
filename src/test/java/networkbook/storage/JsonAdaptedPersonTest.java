@@ -28,7 +28,7 @@ public class JsonAdaptedPersonTest {
     private static final List<JsonAdaptedProperty<Link>> INVALID_LINKS = List.of(
             new JsonAdaptedProperty<Link>("facebookcom")
     );
-    private static final String INVALID_GRADUATION = "123a";
+    private static final String INVALID_GRADUATION = "2024";
     private static final String INVALID_COURSE = "";
     private static final String INVALID_SPECIALISATION = "";
     private static final List<JsonAdaptedProperty<Email>> INVALID_EMAILS =
@@ -44,7 +44,8 @@ public class JsonAdaptedPersonTest {
     private static final List<JsonAdaptedProperty<Link>> VALID_LINKS = TypicalPersons.BENSON.getLinks().stream()
             .map(JsonAdaptedProperty::new)
             .collect(Collectors.toList());
-    private static final String VALID_GRADUATION = "2000";
+    private static final String VALID_GRADUATION = TypicalPersons.BENSON.getGraduation()
+            .map(Graduation::toString).orElse(null);
     private static final String VALID_COURSE = "Computer Science";
     private static final String VALID_SPECIALISATION = "Game Development";
     private static final List<JsonAdaptedProperty<Tag>> VALID_TAGS = TypicalPersons.BENSON.getTags().stream()

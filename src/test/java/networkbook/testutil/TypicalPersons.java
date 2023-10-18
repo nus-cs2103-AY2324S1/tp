@@ -32,23 +32,36 @@ public class TypicalPersons {
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withEmails(List.of("alice@example.com"))
             .withPhone("94351253")
+            .withGraduation("AY2324-S1")
             .withTags("friends").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withEmails(List.of("johnd@example.com"))
             .withPhone("98765432")
             .withLinks(List.of("www.facebook.com/john-d"))
-            .withTags("owesMoney", "friends").build();
+            .withTags("owesMoney", "friends")
+            .withGraduation("AY0001-S1")
+            .build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withEmails(List.of("heinz@example.com")).build();
+            .withEmails(List.of("heinz@example.com"))
+            .withGraduation("AY3031-S2")
+            .build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmails(List.of("cornelia@example.com"))
-            .withTags("friends").build();
+            .withTags("friends")
+            .withGraduation("AY9899-S1")
+            .build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withEmails(List.of("werner@example.com")).build();
+            .withEmails(List.of("werner@example.com"))
+            .withGraduation("AY8990-S1")
+            .build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withEmails(List.of("lydia@example.com")).build();
+            .withEmails(List.of("lydia@example.com"))
+            .withGraduation("AY2122-S2")
+            .build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
-            .withEmails(List.of("anna@example.com")).build();
+            .withEmails(List.of("anna@example.com"))
+            .withGraduation("AY2324-S2")
+            .build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
