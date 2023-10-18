@@ -43,4 +43,9 @@ public class Attendance {
         Attendance otherAttendance = (Attendance) other;
         return isPresent == otherAttendance.isPresent;
     }
+
+    @Override
+    public int hashCode() {
+        return Boolean.hashCode(isPresent);
+    }
 }

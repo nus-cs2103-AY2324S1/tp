@@ -198,6 +198,7 @@ public class EditCommand extends Command {
         public Optional<StudentNumber> getStudentNumber() {
             return Optional.ofNullable(studentNumber);
         }
+
         public void setClassDetails(ClassDetails classDetails) {
             this.classDetails = classDetails;
         }

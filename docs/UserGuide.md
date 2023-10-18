@@ -76,7 +76,7 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-### Adding a student: `add`
+### Adding a student : `add`
 
 This feature in Class Manager 2023 is a robust tool that empowers CS2103T TAs to add new student information according
 to the specified parameters (FIRST NAME, LAST NAME, SCHOOL EMAIL, CLASS NUMBER, and STUDENT NUMBER, TAG[Optional]).
@@ -116,7 +116,7 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower` Edits the name of the 2nd student to be `Betsy Crower`.
 
-### Tagging a student: `tag`
+### Tagging a student : `tag`
 
 Tags the existing student in the address book.
 
@@ -133,7 +133,7 @@ Examples:
 * `tag A1234567N /delete t/shy` removes the shy tag from the specified student.
 * `tag A1234567N t/` clear all tags from the specified student.
 
-### Lookup students: `lookup`
+### Lookup students : `lookup`
 
 **TL;DR:** Lookup student details containing any of the given fields.
 
@@ -161,7 +161,7 @@ Examples:
 
 * `lookup n/Alex David` returns `Alex Li`, `David Li`<br>
   ![result for 'lookup n/Alex David'](images/lookupLastNameResult.png) </br></br>
-* `lookup c/T11` return all students in class number 111<br>
+* `lookup c/T11` returns all students in class number T11<br>
   ![result for 'lookup c/T11'](images/lookupClassResult.png)
 
 ### Deleting a student : `delete`

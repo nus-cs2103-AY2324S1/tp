@@ -24,7 +24,7 @@ public class TagCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Edits the tags of the student identified by the student number.\n"
             + "Existing tags will be overwritten by the input.\n"
-            + "Use /add or /delete to add/delete tags without overwriting all tags.\n"
+            + "Use /add to add or /delete to delete tags without overwriting all tags.\n"
             + "Parameters: Student number (must be exist in address book) [/add] [/delete] t/[TAG]\n"
             + "Example: " + COMMAND_WORD + " A1234567N /add t/smart.";
     public static final String MESSAGE_ADD_TAG_SUCCESS = "Added following tags to Student %1$s:\n";

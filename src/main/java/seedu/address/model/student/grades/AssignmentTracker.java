@@ -47,7 +47,7 @@ public class AssignmentTracker {
     public String toString() {
         StringBuilder ret = new StringBuilder("Assignments and marks:\n");
         for (int i = 0; i < assignments.length; i++) {
-            ret.append("Assignment " + (i + 1) + ": " + assignments[i].toString() + "\n");
+            ret.append("Assignment ").append(i + 1).append(": ").append(assignments[i].toString()).append("\n");
         }
         return ret.toString();
     }
@@ -69,6 +69,6 @@ public class AssignmentTracker {
 
     @Override
     public int hashCode() {
-        return assignments.hashCode();
+        return Arrays.hashCode(assignments);
     }
 }

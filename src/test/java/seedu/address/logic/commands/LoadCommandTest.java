@@ -1,12 +1,13 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.LoadCommand.MESSAGE_FILE_CANNOT_LOAD;
 import static seedu.address.logic.commands.LoadCommand.MESSAGE_FILE_NOT_FOUND;
-import static seedu.address.logic.commands.LoadCommand.MESSAGE_SUCCESS;
+import static seedu.address.logic.commands.LoadCommand.MESSAGE_LOAD_SUCCESS;
 import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
 
 import java.nio.file.Path;
@@ -30,7 +31,6 @@ public class LoadCommandTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonLoadCommandTest");
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-
     @Test
     public void load_validFile_success() throws CommandException {
         String validFileName = "validAddressBook";
@@ -39,7 +39,7 @@ public class LoadCommandTest {
         Model expectedModel = new ModelManager();
         loadAddressBook(expectedModel, validFileName, validFilePath);
         CommandResult expectedCommandResult = new CommandResult(
-                String.format(MESSAGE_SUCCESS, validFileName), false, false, true);
+                String.format(MESSAGE_LOAD_SUCCESS, validFileName), false, false, true);
         assertCommandSuccess(loadCommand, model, expectedCommandResult, expectedModel);
     }
 
@@ -53,7 +53,7 @@ public class LoadCommandTest {
 
     @Test
     public void load_corruptFile_throwsCommandException() {
-        String corruptFileName = "corruptAddressBook";
+        String corruptFileName = "NotJsonFormatAddressBook";
         Path corruptFilePath = TEST_DATA_FOLDER.resolve(corruptFileName + ".json");
         LoadCommand loadCommand = new LoadCommand(corruptFileName, corruptFilePath);
         assertCommandFailure(loadCommand, model, String.format(MESSAGE_FILE_CANNOT_LOAD, corruptFileName));
@@ -71,6 +71,15 @@ public class LoadCommandTest {
         }
         expectedModel.setAddressBookFilePath(filePath);
         expectedModel.setAddressBook(tempData);
+    }
+
+    @Test
+    public void loadString() {
+        String fileName = "validAddressBook";
+        Path filePath = TEST_DATA_FOLDER.resolve(fileName + ".json");
+        LoadCommand loadCommand = new LoadCommand(fileName, filePath);
+        String expectedString = "seedu.address.logic.commands.LoadCommand{load=" + fileName + "}";
+        assertEquals(loadCommand.toString(), expectedString);
     }
 
     @Test
@@ -99,5 +108,33 @@ public class LoadCommandTest {
 
         // different student -> returns false
         assertFalse(loadFirstCommand.equals(loadSecondCommand));
+    }
+
+    @Test
+    public void test_hashCode() {
+        String firstFileName = "validAddressBook";
+        Path firstFilePath = TEST_DATA_FOLDER.resolve(firstFileName + ".json");
+
+        String secondFileName = "addressBook";
+        Path secondFilePath = TEST_DATA_FOLDER.resolve(secondFileName + ".json");
+
+        LoadCommand loadFirstCommand = new LoadCommand(firstFileName, firstFilePath);
+        LoadCommand loadSecondCommand = new LoadCommand(secondFileName, secondFilePath);
+
+        // same object -> returns true
+        assertTrue(loadFirstCommand.hashCode() == loadFirstCommand.hashCode());
+
+        // same values -> returns true
+        LoadCommand loadFirstCommandCopy = new LoadCommand(firstFileName, firstFilePath);
+        assertTrue(loadFirstCommand.hashCode() == loadFirstCommandCopy.hashCode());
+
+        // different types -> returns false
+        assertFalse(loadFirstCommand.hashCode() == 1);
+
+        // null -> returns false
+        assertFalse(loadFirstCommand.hashCode() == 0);
+
+        // different student -> returns false
+        assertFalse(loadFirstCommand.hashCode() == loadSecondCommand.hashCode());
     }
 }

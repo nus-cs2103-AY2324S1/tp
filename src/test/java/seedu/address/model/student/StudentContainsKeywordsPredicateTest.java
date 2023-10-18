@@ -92,4 +92,31 @@ public class StudentContainsKeywordsPredicateTest {
                 + "tags=Optional[[keyword6]]}";
         assertEquals(expected, predicate.toString());
     }
+
+    @Test
+    public void test_hashCode() {
+        StudentContainsKeywordsPredicate predicate = new StudentContainsKeywordsPredicate(
+                null, "keyword1 keyword2", null,
+                "keyword3 keyword4 keyword5", null, "keyword6");
+        StudentContainsKeywordsPredicate predicateCopy = new StudentContainsKeywordsPredicate(
+                null, "keyword1 keyword2", null,
+                "keyword3 keyword4 keyword5", null, "keyword6");
+
+        // same values -> returns true
+        assertTrue(predicate.hashCode() == predicateCopy.hashCode());
+
+        // same object -> returns true
+        assertTrue(predicate.hashCode() == predicate.hashCode());
+
+        // null -> returns false
+        assertFalse(predicate.hashCode() == 0);
+
+        // different types -> returns false
+        assertFalse(predicate.hashCode() == 1);
+
+        // different values -> returns false
+        assertFalse(predicate.hashCode() == new StudentContainsKeywordsPredicate(
+                null, "keyword1 keyword2", null,
+                "keyword3 keyword4 keyword5", null, "keyword7").hashCode());
+    }
 }

@@ -57,6 +57,16 @@ public class CommandResult {
     }
 
     @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("feedbackToUser", feedbackToUser)
+                .add("showHelp", showHelp)
+                .add("exit", exit)
+                .add("load", load)
+                .toString();
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
@@ -78,15 +88,4 @@ public class CommandResult {
     public int hashCode() {
         return Objects.hash(feedbackToUser, showHelp, exit, load);
     }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .add("feedbackToUser", feedbackToUser)
-                .add("showHelp", showHelp)
-                .add("exit", exit)
-                .add("load", load)
-                .toString();
-    }
-
 }

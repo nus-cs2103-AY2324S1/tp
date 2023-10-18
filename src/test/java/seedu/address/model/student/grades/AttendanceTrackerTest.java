@@ -52,4 +52,21 @@ public class AttendanceTrackerTest {
                 + "Tutorial 2: Absent\n"
                 + "Tutorial 3: Absent\n", attendanceTracker.toString());
     }
+
+    @Test
+    public void test_hashCode() {
+        AttendanceTracker attendanceTracker = new AttendanceTracker(13);
+
+        // same values -> returns true
+        assertTrue(attendanceTracker.hashCode() == new AttendanceTracker(13).hashCode());
+
+        // same object -> returns true
+        assertTrue(attendanceTracker.hashCode() == attendanceTracker.hashCode());
+
+        // null -> returns false
+        assertFalse(attendanceTracker.hashCode() == 0);
+
+        // different values -> returns false
+        assertFalse(attendanceTracker.hashCode() == new AttendanceTracker(26).hashCode());
+    }
 }
