@@ -1,7 +1,7 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.model.schedule.Time.DATETIME_FORMAT;
+import static seedu.address.model.schedule.Time.DATETIME_INPUT_FORMAT;
 import static seedu.address.storage.JsonAdaptedSchedule.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalSchedules.SCHEDULE_ALICE_FIRST_JAN;
@@ -19,7 +19,7 @@ import seedu.address.testutil.TypicalSchedules;
 
 public class JsonAdaptedScheduleTest {
 
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATETIME_FORMAT);
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATETIME_INPUT_FORMAT);
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_STARTTIME = "15/02/2023 6pm";
     private static final String INVALID_ENDTIME = "14/02/2023 6pm";
