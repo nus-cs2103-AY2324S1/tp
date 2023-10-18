@@ -67,8 +67,6 @@ public class AddressBookParser implements Parser {
             return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
-
         case ListCommand.COMMAND_WORD:
             if (arguments.isEmpty()) {
                 return new ListCommand();

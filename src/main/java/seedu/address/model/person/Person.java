@@ -3,7 +3,9 @@ package seedu.address.model.person;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
@@ -82,6 +84,36 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    /**
+     * Returns a map of fields and their existing attributes as strings.
+     * Intended for use with predicates generated through the find command.
+     *
+     * @return a Map; keys include all publicly gettable fields as well as all tags,
+     *         and values are values of the respective fields, or {@code null} for tags.
+     */
+    public Map<String, String> getFieldsAndAttributes() {
+        HashMap<String, String> map = new HashMap<>();
+        tryPut(map, "name", getName());
+        tryPut(map, "phone", getPhone());
+        tryPut(map, "email", getEmail());
+        tryPut(map, "address", getAddress());
+        tryPut(map, "housing", getHousing());
+        tryPut(map, "availability", getAvailability());
+        tryPut(map, "animal name", getAnimalName());
+        tryPut(map, "animal type", getAnimalType());
+        for (Tag tag : getTags()) {
+            map.put(tag.tagName, null);
+        }
+        return map;
+    }
+
+    private void tryPut(Map<String, String> map, String key, Object value) {
+        if (Objects.isNull(value)) {
+            return;
+        }
+        map.put(key, value.toString());
     }
 
     /**
