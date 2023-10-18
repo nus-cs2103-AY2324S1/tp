@@ -9,18 +9,18 @@ import seedu.address.commons.util.ToStringBuilder;
 /**
  * Tests that a {@code Meetings}'s {@code Title} matches any of the keywords given.
  */
-public class TitleContainsKeywordsPredicate implements Predicate<Meeting> {
+public class TagContainsKeywordsPredicate implements Predicate<Meeting> {
     private final List<String> keywords;
 
-    public TitleContainsKeywordsPredicate(List<String> keywords) {
+    public TagContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
 
     @Override
     public boolean test(Meeting meeting) {
         return keywords.stream()
-                .anyMatch(keyword -> keyword.isEmpty()
-                        || StringUtil.containsWordIgnoreCase(meeting.getTitle().toString(), keyword));
+                .anyMatch(keyword -> keyword.isEmpty() || meeting.getTags().stream()
+                        .anyMatch(tag -> StringUtil.containsWordIgnoreCase(tag.tagName, keyword)));
     }
 
     @Override
@@ -30,12 +30,12 @@ public class TitleContainsKeywordsPredicate implements Predicate<Meeting> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof TitleContainsKeywordsPredicate)) {
+        if (!(other instanceof TagContainsKeywordsPredicate)) {
             return false;
         }
 
-        TitleContainsKeywordsPredicate otherTitleContainsKeywordsPredicate = (TitleContainsKeywordsPredicate) other;
-        return keywords.equals(otherTitleContainsKeywordsPredicate.keywords);
+        TagContainsKeywordsPredicate otherTagContainsKeywordsPredicate = (TagContainsKeywordsPredicate) other;
+        return keywords.equals(otherTagContainsKeywordsPredicate.keywords);
     }
 
     @Override

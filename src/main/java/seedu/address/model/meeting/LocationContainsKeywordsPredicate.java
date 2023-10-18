@@ -9,10 +9,10 @@ import seedu.address.commons.util.ToStringBuilder;
 /**
  * Tests that a {@code Meetings}'s {@code Title} matches any of the keywords given.
  */
-public class TitleContainsKeywordsPredicate implements Predicate<Meeting> {
+public class LocationContainsKeywordsPredicate implements Predicate<Meeting> {
     private final List<String> keywords;
 
-    public TitleContainsKeywordsPredicate(List<String> keywords) {
+    public LocationContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
 
@@ -20,7 +20,7 @@ public class TitleContainsKeywordsPredicate implements Predicate<Meeting> {
     public boolean test(Meeting meeting) {
         return keywords.stream()
                 .anyMatch(keyword -> keyword.isEmpty()
-                        || StringUtil.containsWordIgnoreCase(meeting.getTitle().toString(), keyword));
+                        || StringUtil.containsWordIgnoreCase(meeting.getLocation().toString(), keyword));
     }
 
     @Override
@@ -30,12 +30,13 @@ public class TitleContainsKeywordsPredicate implements Predicate<Meeting> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof TitleContainsKeywordsPredicate)) {
+        if (!(other instanceof LocationContainsKeywordsPredicate)) {
             return false;
         }
 
-        TitleContainsKeywordsPredicate otherTitleContainsKeywordsPredicate = (TitleContainsKeywordsPredicate) other;
-        return keywords.equals(otherTitleContainsKeywordsPredicate.keywords);
+        LocationContainsKeywordsPredicate otherLocationContainsKeywordsPredicate =
+                (LocationContainsKeywordsPredicate) other;
+        return keywords.equals(otherLocationContainsKeywordsPredicate.keywords);
     }
 
     @Override

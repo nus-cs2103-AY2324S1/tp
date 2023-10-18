@@ -37,7 +37,7 @@ public class ViewMeetingCommandTest {
                 + "Start: 20 September 2023, 1000\n"
                 + "End: 20 September 2023, 1200\n"
                 + "Attendees: [Alice Pauline , Benson Meier , Carl Kurz , Daniel Meier , Elle Meyer , Fiona Kunz"
-                + " , George Best ]\n";
+                + " , George Best , Hoon Meier ]\n";
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
@@ -66,7 +66,7 @@ public class ViewMeetingCommandTest {
                 + "Start: 20 September 2023, 1000\n"
                 + "End: 20 September 2023, 1200\n"
                 + "Attendees: [Alice Pauline , Benson Meier , Carl Kurz , Daniel Meier , Elle Meyer , Fiona Kunz"
-                + " , George Best ]\n";
+                + " , George Best , Hoon Meier ]\n";
 
         // Model displaying filtered list should not change
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
