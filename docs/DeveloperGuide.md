@@ -334,7 +334,36 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
+* 3a. The given employee id is invalid.
+
+    * 3a1. HouR shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Edit an employee**
+
+**MSS**
+
+1.  User requests to list employees
+2.  HouR shows a list of employees
+3.  User requests to edit a specific employee in the list
+4.  HouR edits the employee
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
 * 3a. The given index is invalid.
+
+    * 3a1. HouR shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. Missing field to edit.
 
     * 3a1. HouR shows an error message.
 
@@ -346,6 +375,57 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to list employees
 2.  HouR display a list of every employee that has been added
+
+    Use case ends.
+
+**Use case: Find employees**
+
+**MSS**
+
+1.  User requests to find employees with keyword
+2.  HouR returns list of employees with keyword
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User leaves out keyword.
+    * 1a1. HouR shows an error message.
+
+  Use case returns back to step 1.
+
+* 1b. No employee matches given keyword.
+    * 1b1. HouR shows an empty list. 
+  
+  Use case ends.
+
+**Use case: Sort employees**
+
+**MSS**
+
+1.  User requests to sort employees by given attribute
+2.  HouR returns the sorted list of employees by given attribute
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User leaves out keyword.
+    * 1a1. HouR shows an error message.
+
+  Use case returns back to step 1.
+
+* 1b. No attribute matches given attribute.
+    * 1b1. HouR shows an error message.
+
+  Use case returns back to step 1.
+
+**Use case: Clear employee book**
+
+**MSS**
+
+1.  User requests to clear employee book
+2.  HouR clears employee book
 
     Use case ends.
 
