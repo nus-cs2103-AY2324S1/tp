@@ -151,12 +151,6 @@ public class PersonSortComparator implements Comparator<Person> {
         case "graduation": // Fallthrough
         case "grad":
             return SortField.GRAD;
-        case "course":
-            return SortField.COURSE;
-        case "specialisation": // Fallthrough
-        case "specialization": // Fallthrough
-        case "spec":
-            return SortField.SPEC;
         case "priority":
             return SortField.PRIORITY;
         case "none":
@@ -209,8 +203,6 @@ public class PersonSortComparator implements Comparator<Person> {
     public enum SortField {
         NAME,
         GRAD,
-        COURSE,
-        SPEC,
         PRIORITY,
         NONE,
         INVALID
