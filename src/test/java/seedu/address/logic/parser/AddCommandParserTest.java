@@ -4,7 +4,6 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.FROM_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.HOUR_DESC_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.HOUR_DESC_FIVE;
 import static seedu.address.logic.commands.CommandTestUtil.HOUR_DESC_SIXTY;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
