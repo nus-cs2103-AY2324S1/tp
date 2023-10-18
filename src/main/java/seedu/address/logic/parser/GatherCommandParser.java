@@ -9,6 +9,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Parses input arguments and creates a new GatherCommand object
  */
 public class GatherCommandParser implements Parser<GatherCommand> {
+    public static final String VALIDATION_REGEX = "^[a-zA-Z0-9\\s]+";
+    public static final String MESSAGE_CONSTRAINTS = "PROMPT should be alphanumeric or space characters";
 
     /**
      * Parses the given {@code String} of arguments in the context of the GatherCommand
@@ -20,6 +22,11 @@ public class GatherCommandParser implements Parser<GatherCommand> {
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, GatherCommand.MESSAGE_USAGE));
+        }
+
+        if (!trimmedArgs.matches(VALIDATION_REGEX)) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_CONSTRAINTS));
         }
 
         return new GatherCommand(trimmedArgs);

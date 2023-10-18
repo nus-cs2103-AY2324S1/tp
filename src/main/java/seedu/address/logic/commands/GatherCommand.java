@@ -11,7 +11,7 @@ public class GatherCommand extends Command {
 
     public static final String COMMAND_WORD = "gather";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Gathers all the persons emails whose financial "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Gathers all emails of person whose financial "
             + "plan matches the desired financial plan and display it on the output.\n"
             + "Parameters: FINANCIAL_PLAN\n"
             + "Example: " + COMMAND_WORD + " Sample Financial Plan 1";

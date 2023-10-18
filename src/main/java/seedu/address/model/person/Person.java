@@ -101,6 +101,10 @@ public class Person {
      */
     public String gatherEmailsContainsFinancialPlan(String prompt) {
         FinancialPlan fp = new FinancialPlan(prompt);
+        /*
+         .contains() method checks if the hashcode of objects in the Hashset
+         and the object passed as argument corresponds.
+         */
         if (financialPlans.contains(fp)) {
             return this.email.toString();
         }
