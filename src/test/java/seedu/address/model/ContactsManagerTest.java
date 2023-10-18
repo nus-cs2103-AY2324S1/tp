@@ -84,8 +84,8 @@ public class ContactsManagerTest {
     @Test
     public void getContactList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(
-                UnsupportedOperationException.class,
-                () -> contactsManager.getContactList().remove(0)
+            UnsupportedOperationException.class,
+            () -> contactsManager.getContactList().remove(0)
         );
     }
 
