@@ -7,11 +7,6 @@ import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.ClearCommand;
@@ -23,9 +18,16 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.EmailContainsKeywordsPredicate;
 import seedu.address.model.person.LicenceContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.NricContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PhoneContainsKeywordsPredicate;
+import seedu.address.model.person.PolicyExpiryContainsKeywordsPredicate;
+import seedu.address.model.person.PolicyIssueContainsKeywordsPredicate;
+import seedu.address.model.person.PolicyNumberContainsKeywordsPredicate;
+import seedu.address.model.person.TagContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -73,11 +75,15 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo bar fun");
+        String keywords = "foo bar fun";
         FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " n/" + keywords.stream().collect(Collectors.joining(" ")));
+                FindCommand.COMMAND_WORD + " n/" + keywords);
         assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords),
-                new LicenceContainsKeywordsPredicate(Collections.singletonList(""))), command);
+                new LicenceContainsKeywordsPredicate(""),
+                new NricContainsKeywordsPredicate(""),
+                new PhoneContainsKeywordsPredicate(""), new PolicyNumberContainsKeywordsPredicate(""),
+                new TagContainsKeywordsPredicate(""), new PolicyExpiryContainsKeywordsPredicate(""),
+                new EmailContainsKeywordsPredicate(""), new PolicyIssueContainsKeywordsPredicate("")), command);
     }
 
     @Test

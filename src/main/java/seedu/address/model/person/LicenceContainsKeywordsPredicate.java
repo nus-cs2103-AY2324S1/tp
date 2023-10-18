@@ -1,19 +1,13 @@
 package seedu.address.model.person;
 
-import java.util.List;
-import java.util.function.Predicate;
-
 import seedu.address.commons.util.StringUtil;
-import seedu.address.commons.util.ToStringBuilder;
 
 /**
  * Tests that a {@code Person}'s {@code Licence Plate} matches any of the keywords given.
  */
-public class LicenceContainsKeywordsPredicate implements Predicate<Person> {
-    private final List<String> keywords;
-
-    public LicenceContainsKeywordsPredicate(List<String> keywords) {
-        this.keywords = keywords;
+public class LicenceContainsKeywordsPredicate extends FieldPredicates {
+    public LicenceContainsKeywordsPredicate(String keyword) {
+        super(keyword);
     }
 
     @Override
@@ -35,19 +29,5 @@ public class LicenceContainsKeywordsPredicate implements Predicate<Person> {
 
         LicenceContainsKeywordsPredicate otherNameContainsKeywordsPredicate = (LicenceContainsKeywordsPredicate) other;
         return keywords.equals(otherNameContainsKeywordsPredicate.keywords);
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this).add("keywords", keywords).toString();
-    }
-
-    /**
-     * Checks if the list of keywords contain an empty string.
-     *
-     * @return true if the list of keywords contain an empty string, false otherwise.
-     */
-    public boolean isEmpty() {
-        return keywords.contains("");
     }
 }
