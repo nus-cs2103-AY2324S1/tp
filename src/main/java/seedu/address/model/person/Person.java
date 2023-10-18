@@ -84,10 +84,6 @@ public class Person {
         return address;
     }
 
-    public void setBirthday(Birthday birthday) {
-        this.birthday = Optional.of(birthday);
-    }
-
     public Optional<Birthday> getBirthday() {
         return birthday;
     }

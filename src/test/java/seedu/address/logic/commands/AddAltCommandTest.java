@@ -119,15 +119,78 @@ public class AddAltCommandTest {
     }
 
     @Test
-    public void execute_someFieldsSpecifiedInitiallyNotEmpty_exceptionThrown() {
+    public void execute_telegramNotEmpty_exceptionThrown() {
         Person personA = new PersonBuilder().withName("A")
-                .withTelegram("@telegram")
+                .withTelegram("@telegram").build();
+
+        AddAltCommand.AddAltPersonDescriptor descriptor = new AddAltCommand.AddAltPersonDescriptor();
+        descriptor.setLinkedin(new Linkedin("LINKEDIN_A"));
+        descriptor.setSecondaryEmail(new Email("personA@email.com"));
+        descriptor.setTelegram(new Telegram("@telegrama"));
+
+        ModelStubSetPerson modelStub = new ModelStubSetPerson(personA, p -> {});
+
+        try {
+            new AddAltCommand(Index.fromZeroBased(0), descriptor).execute(modelStub);
+            fail();
+        } catch (CommandException e) {
+            String expectedMessage = String.format(AddAltCommand.MESSAGE_ADDALT_FAILURE, "A");
+            assertEquals(e.getMessage(), expectedMessage);
+        }
+    }
+
+    @Test
+    public void execute_linkedinNotEmpty_exceptionThrown() {
+        Person personA = new PersonBuilder().withName("A")
+                .withLinkedin("linkedin").build();
+
+        AddAltCommand.AddAltPersonDescriptor descriptor = new AddAltCommand.AddAltPersonDescriptor();
+        descriptor.setLinkedin(new Linkedin("LINKEDIN_A"));
+        descriptor.setSecondaryEmail(new Email("personA@email.com"));
+        descriptor.setTelegram(new Telegram("@telegrama"));
+
+        ModelStubSetPerson modelStub = new ModelStubSetPerson(personA, p -> {});
+
+        try {
+            new AddAltCommand(Index.fromZeroBased(0), descriptor).execute(modelStub);
+            fail();
+        } catch (CommandException e) {
+            String expectedMessage = String.format(AddAltCommand.MESSAGE_ADDALT_FAILURE, "A");
+            assertEquals(e.getMessage(), expectedMessage);
+        }
+    }
+
+    @Test
+    public void execute_secondaryEmailNotEmpty_exceptionThrown() {
+        Person personA = new PersonBuilder().withName("A")
+                .withSecondaryEmail("example@email.com").build();
+
+        AddAltCommand.AddAltPersonDescriptor descriptor = new AddAltCommand.AddAltPersonDescriptor();
+        descriptor.setLinkedin(new Linkedin("LINKEDIN_A"));
+        descriptor.setSecondaryEmail(new Email("personA@email.com"));
+        descriptor.setTelegram(new Telegram("@telegrama"));
+
+        ModelStubSetPerson modelStub = new ModelStubSetPerson(personA, p -> {});
+
+        try {
+            new AddAltCommand(Index.fromZeroBased(0), descriptor).execute(modelStub);
+            fail();
+        } catch (CommandException e) {
+            String expectedMessage = String.format(AddAltCommand.MESSAGE_ADDALT_FAILURE, "A");
+            assertEquals(e.getMessage(), expectedMessage);
+        }
+    }
+
+    @Test
+    public void execute_birthdayNotEmpty_exceptionThrown() {
+        Person personA = new PersonBuilder().withName("A")
                 .withBirthday(MonthDay.of(6, 9)).build();
 
         AddAltCommand.AddAltPersonDescriptor descriptor = new AddAltCommand.AddAltPersonDescriptor();
         descriptor.setLinkedin(new Linkedin("LINKEDIN_A"));
         descriptor.setSecondaryEmail(new Email("personA@email.com"));
         descriptor.setTelegram(new Telegram("@telegrama"));
+        descriptor.setBirthday(new Birthday(MonthDay.of(6, 10)));
 
         ModelStubSetPerson modelStub = new ModelStubSetPerson(personA, p -> {});
 
@@ -154,6 +217,21 @@ public class AddAltCommandTest {
             fail();
         } catch (CommandException e) {
             String expectedMessage = String.format(AddAltCommand.MESSAGE_ADDALT_DUPLICATE_EMAIL, "A");
+            assertEquals(e.getMessage(), expectedMessage);
+        }
+    }
+
+    @Test
+    public void execute_invalidPersonIndex_failure() {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+        Person personA = new PersonBuilder().withName("A").build();
+        modelStub.addPerson(personA);
+        AddAltCommand.AddAltPersonDescriptor descriptor = new AddAltCommand.AddAltPersonDescriptor();
+        try {
+            new AddAltCommand(Index.fromZeroBased(2), descriptor).execute(modelStub);
+            fail();
+        } catch (CommandException e) {
+            String expectedMessage = Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
             assertEquals(e.getMessage(), expectedMessage);
         }
     }
@@ -289,6 +367,11 @@ public class AddAltCommandTest {
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
+        }
+
+        @Override
+        public ObservableList<Person> getFilteredPersonList() {
+            return FXCollections.observableArrayList(personsAdded);
         }
 
     }

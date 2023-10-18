@@ -154,6 +154,11 @@ public class EditCommandTest {
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_EDIT_ALTERNATIVE_FAIL);
 
         descriptor = new EditCommand.EditPersonDescriptor();
+        descriptor.setLinkedin(new Linkedin("alice"));
+        editCommand = new EditCommand(Index.fromOneBased(3), descriptor);
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_EDIT_ALTERNATIVE_FAIL);
+
+        descriptor = new EditCommand.EditPersonDescriptor();
         descriptor.setSecondaryEmail(new Email("alice@email.com"));
         editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_EDIT_ALTERNATIVE_FAIL);
