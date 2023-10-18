@@ -16,7 +16,7 @@ import seedu.address.model.contact.Contact;
 
 
 /**
- * Adds a contact to the address book.
+ * Adds a {@link Contact}.
  */
 public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
