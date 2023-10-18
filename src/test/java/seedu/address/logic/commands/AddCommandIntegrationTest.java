@@ -30,7 +30,7 @@ public class AddCommandIntegrationTest {
     public void execute_newContact_success() {
         Contact validContact = new ContactBuilder().build();
 
-        Model expectedModel = new ModelManager(model.getConText(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getContactList(), new UserPrefs());
         expectedModel.addContact(validContact);
 
         assertCommandSuccess(new AddCommand(validContact), model,
@@ -40,7 +40,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_duplicateContact_throwsCommandException() {
-        Contact contactInList = model.getConText().getContactList().get(0);
+        Contact contactInList = model.getContactList().getContactList().get(0);
         assertCommandFailure(new AddCommand(contactInList), model,
                 Messages.MESSAGE_COMMAND_DUPLICATE_CONTACT);
     }

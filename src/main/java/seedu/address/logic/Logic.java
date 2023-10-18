@@ -7,7 +7,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.ReadOnlyConText;
+import seedu.address.model.ContactList;
 import seedu.address.model.contact.Contact;
 
 /**
@@ -24,11 +24,11 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
-     * Returns the ConText.
+     * Returns the ContactList.
      *
-     * @see seedu.address.model.Model#getConText()
+     * @see seedu.address.model.Model#getContactList()
      */
-    ReadOnlyConText getConText();
+    ContactList getContactList();
 
     /** Returns an unmodifiable view of the filtered list of contacts */
     ObservableList<Contact> getFilteredContactList();

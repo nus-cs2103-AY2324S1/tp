@@ -17,7 +17,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.model.ConText;
-import seedu.address.model.ReadOnlyConText;
+import seedu.address.model.ContactList;
 
 public class JsonContactsStorageTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonContactsStorageTest");
@@ -30,7 +30,7 @@ public class JsonContactsStorageTest {
         assertThrows(NullPointerException.class, () -> readConText(null));
     }
 
-    private java.util.Optional<ReadOnlyConText> readConText(String filePath) throws Exception {
+    private java.util.Optional<ContactList> readConText(String filePath) throws Exception {
         return new JsonContactsStorage(Paths.get(filePath)).readConText(addToTestDataPathIfNotNull(filePath));
     }
 
@@ -68,7 +68,7 @@ public class JsonContactsStorageTest {
 
         // Save in new file and read back
         jsonContactsStorage.saveConText(original, filePath);
-        ReadOnlyConText readBack = jsonContactsStorage.readConText(filePath).get();
+        ContactList readBack = jsonContactsStorage.readConText(filePath).get();
         assertEquals(original, new ConText(readBack));
 
         // Modify data, overwrite exiting file, and read back
@@ -94,10 +94,10 @@ public class JsonContactsStorageTest {
     /**
      * Saves {@code ConText} at the specified {@code filePath}.
      */
-    private void saveConText(ReadOnlyConText conText, String filePath) {
+    private void saveConText(ContactList contactList, String filePath) {
         try {
             new JsonContactsStorage(Paths.get(filePath))
-                    .saveConText(conText, addToTestDataPathIfNotNull(filePath));
+                    .saveConText(contactList, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }

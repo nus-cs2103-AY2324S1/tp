@@ -26,12 +26,12 @@ public class ModelManager implements Model {
     /**
      * Initializes a ModelManager with the given conText and userPrefs.
      */
-    public ModelManager(ReadOnlyConText conText, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(conText, userPrefs);
+    public ModelManager(ContactList contactList, ReadOnlyUserPrefs userPrefs) {
+        requireAllNonNull(contactList, userPrefs);
 
-        logger.fine("Initializing with address book: " + conText + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + contactList + " and user prefs " + userPrefs);
 
-        this.conText = new ConText(conText);
+        this.conText = new ConText(contactList);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredContacts = new FilteredList<>(this.conText.getContactList());
     }
@@ -78,12 +78,12 @@ public class ModelManager implements Model {
     //=========== ConText ================================================================================
 
     @Override
-    public void setConText(ReadOnlyConText conText) {
+    public void setConText(ContactList contactList) {
         this.conText.resetData(conText);
     }
 
     @Override
-    public ReadOnlyConText getConText() {
+    public ContactList getContactList() {
         return conText;
     }
 

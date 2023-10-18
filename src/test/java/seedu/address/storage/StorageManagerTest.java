@@ -12,7 +12,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.ConText;
-import seedu.address.model.ReadOnlyConText;
+import seedu.address.model.ContactList;
 import seedu.address.model.UserPrefs;
 
 public class StorageManagerTest {
@@ -56,7 +56,7 @@ public class StorageManagerTest {
          */
         ConText original = getTypicalConText();
         storageManager.saveConText(original);
-        ReadOnlyConText retrieved = storageManager.readConText().get();
+        ContactList retrieved = storageManager.readConText().get();
         assertEquals(original, new ConText(retrieved));
     }
 

@@ -5,7 +5,7 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataLoadingException;
-import seedu.address.model.ReadOnlyConText;
+import seedu.address.model.ContactList;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 
@@ -24,9 +24,9 @@ public interface Storage extends ContactsStorage, UserPrefsStorage {
     Path getConTextFilePath();
 
     @Override
-    Optional<ReadOnlyConText> readConText() throws DataLoadingException;
+    Optional<ContactList> readConText() throws DataLoadingException;
 
     @Override
-    void saveConText(ReadOnlyConText conText) throws IOException;
+    void saveConText(ContactList contactList) throws IOException;
 
 }

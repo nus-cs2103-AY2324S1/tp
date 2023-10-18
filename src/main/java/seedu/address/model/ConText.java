@@ -13,7 +13,7 @@ import seedu.address.model.contact.UniqueContactList;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSameContact comparison)
  */
-public class ConText implements ReadOnlyConText {
+public class ConText implements ContactList {
     private final UniqueContactList contacts = new UniqueContactList();
 
     public ConText() {}
@@ -21,7 +21,7 @@ public class ConText implements ReadOnlyConText {
     /**
      * Creates an ConText using the Contacts in the {@code toBeCopied}
      */
-    public ConText(ReadOnlyConText toBeCopied) {
+    public ConText(ContactList toBeCopied) {
         resetData(toBeCopied);
     }
 
@@ -38,7 +38,7 @@ public class ConText implements ReadOnlyConText {
     /**
      * Resets the existing data of this {@code ConText} with {@code newData}.
      */
-    public void resetData(ReadOnlyConText newData) {
+    public void resetData(ContactList newData) {
         requireNonNull(newData);
 
         setContacts(newData.getContactList());

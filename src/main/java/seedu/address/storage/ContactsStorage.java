@@ -5,7 +5,7 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataLoadingException;
-import seedu.address.model.ReadOnlyConText;
+import seedu.address.model.ContactList;
 
 /**
  * Represents a storage for {@link seedu.address.model.ConText}.
@@ -18,28 +18,28 @@ public interface ContactsStorage {
     Path getConTextFilePath();
 
     /**
-     * Returns ConText data as a {@link ReadOnlyConText}.
+     * Returns ConText data as a {@link ContactList}.
      * Returns {@code Optional.empty()} if storage file is not found.
      *
      * @throws DataLoadingException if loading the data from storage failed.
      */
-    Optional<ReadOnlyConText> readConText() throws DataLoadingException;
+    Optional<ContactList> readConText() throws DataLoadingException;
 
     /**
      * @see #getConTextFilePath()
      */
-    Optional<ReadOnlyConText> readConText(Path filePath) throws DataLoadingException;
+    Optional<ContactList> readConText(Path filePath) throws DataLoadingException;
 
     /**
-     * Saves the given {@link ReadOnlyConText} to the storage.
+     * Saves the given {@link ContactList} to the storage.
      * @param conText cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveConText(ReadOnlyConText conText) throws IOException;
+    void saveConText(ContactList contactList) throws IOException;
 
     /**
-     * @see #saveConText(ReadOnlyConText)
+     * @see #saveConText(ContactList)
      */
-    void saveConText(ReadOnlyConText conText, Path filePath) throws IOException;
+    void saveConText(ContactList contactList, Path filePath) throws IOException;
 
 }

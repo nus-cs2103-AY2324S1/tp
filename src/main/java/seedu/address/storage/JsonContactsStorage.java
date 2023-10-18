@@ -12,7 +12,7 @@ import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.JsonUtil;
-import seedu.address.model.ReadOnlyConText;
+import seedu.address.model.ContactList;
 
 /**
  * A class to access ConText data stored as a json file on the hard disk.
@@ -32,7 +32,7 @@ public class JsonContactsStorage implements ContactsStorage {
     }
 
     @Override
-    public Optional<ReadOnlyConText> readConText() throws DataLoadingException {
+    public Optional<ContactList> readConText() throws DataLoadingException {
         return readConText(filePath);
     }
 
@@ -42,7 +42,7 @@ public class JsonContactsStorage implements ContactsStorage {
      * @param filePath location of the data. Cannot be null.
      * @throws DataLoadingException if loading the data from storage failed.
      */
-    public Optional<ReadOnlyConText> readConText(Path filePath) throws DataLoadingException {
+    public Optional<ContactList> readConText(Path filePath) throws DataLoadingException {
         requireNonNull(filePath);
 
         Optional<JsonSerializableConText> jsonConText = JsonUtil.readJsonFile(
@@ -60,21 +60,21 @@ public class JsonContactsStorage implements ContactsStorage {
     }
 
     @Override
-    public void saveConText(ReadOnlyConText conText) throws IOException {
-        saveConText(conText, filePath);
+    public void saveConText(ContactList contactList) throws IOException {
+        saveConText(contactList, filePath);
     }
 
     /**
-     * Similar to {@link #saveConText(ReadOnlyConText)}.
+     * Similar to {@link #saveConText(ContactList)}.
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveConText(ReadOnlyConText conText, Path filePath) throws IOException {
-        requireNonNull(conText);
+    public void saveConText(ContactList contactList, Path filePath) throws IOException {
+        requireNonNull(contactList);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableConText(conText), filePath);
+        JsonUtil.saveJsonFile(new JsonSerializableConText(contactList), filePath);
     }
 
 }

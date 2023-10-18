@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataLoadingException;
-import seedu.address.model.ReadOnlyConText;
+import seedu.address.model.ContactList;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 
@@ -54,25 +54,25 @@ public class StorageManager implements Storage {
     }
 
     @Override
-    public Optional<ReadOnlyConText> readConText() throws DataLoadingException {
+    public Optional<ContactList> readConText() throws DataLoadingException {
         return readConText(contactsStorage.getConTextFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyConText> readConText(Path filePath) throws DataLoadingException {
+    public Optional<ContactList> readConText(Path filePath) throws DataLoadingException {
         logger.fine("Attempting to read data from file: " + filePath);
         return contactsStorage.readConText(filePath);
     }
 
     @Override
-    public void saveConText(ReadOnlyConText conText) throws IOException {
-        saveConText(conText, contactsStorage.getConTextFilePath());
+    public void saveConText(ContactList contactList) throws IOException {
+        saveConText(contactList, contactsStorage.getConTextFilePath());
     }
 
     @Override
-    public void saveConText(ReadOnlyConText conText, Path filePath) throws IOException {
+    public void saveConText(ContactList contactList, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        contactsStorage.saveConText(conText, filePath);
+        contactsStorage.saveConText(contactList, filePath);
     }
 
 }

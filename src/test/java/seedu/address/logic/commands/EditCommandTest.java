@@ -43,7 +43,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(Messages.MESSAGE_EDIT_COMMAND_SUCCESS, Contact.format(editedContact));
 
-        Model expectedModel = new ModelManager(new ConText(model.getConText()), new UserPrefs());
+        Model expectedModel = new ModelManager(new ConText(model.getContactList()), new UserPrefs());
         expectedModel.setContact(model.getFilteredContactList().get(0), editedContact);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -64,7 +64,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(Messages.MESSAGE_EDIT_COMMAND_SUCCESS, Contact.format(editedContact));
 
-        Model expectedModel = new ModelManager(new ConText(model.getConText()), new UserPrefs());
+        Model expectedModel = new ModelManager(new ConText(model.getContactList()), new UserPrefs());
         expectedModel.setContact(lastContact, editedContact);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -77,7 +77,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(Messages.MESSAGE_EDIT_COMMAND_SUCCESS, Contact.format(editedContact));
 
-        Model expectedModel = new ModelManager(new ConText(model.getConText()), new UserPrefs());
+        Model expectedModel = new ModelManager(new ConText(model.getContactList()), new UserPrefs());
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -93,7 +93,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(Messages.MESSAGE_EDIT_COMMAND_SUCCESS, Contact.format(editedContact));
 
-        Model expectedModel = new ModelManager(new ConText(model.getConText()), new UserPrefs());
+        Model expectedModel = new ModelManager(new ConText(model.getContactList()), new UserPrefs());
         expectedModel.setContact(model.getFilteredContactList().get(0), editedContact);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -113,7 +113,7 @@ public class EditCommandTest {
         showContactAtIndex(model, INDEX_FIRST_CONTACT);
 
         // edit contact in filtered list into a duplicate in address book
-        Contact contactInList = model.getConText().getContactList().get(INDEX_SECOND_CONTACT.getZeroBased());
+        Contact contactInList = model.getContactList().getContactList().get(INDEX_SECOND_CONTACT.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_CONTACT,
                 new EditContactDescriptorBuilder(contactInList).build());
 
@@ -138,7 +138,7 @@ public class EditCommandTest {
         showContactAtIndex(model, INDEX_FIRST_CONTACT);
         Index outOfBoundIndex = INDEX_SECOND_CONTACT;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getConText().getContactList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getContactList().getContactList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
                 new EditContactDescriptorBuilder().withName(VALID_NAME_BOB).build());

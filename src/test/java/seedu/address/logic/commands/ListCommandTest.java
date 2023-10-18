@@ -24,7 +24,7 @@ public class ListCommandTest {
     @BeforeEach
     public void setUp() {
         model = new ModelManager(getTypicalConText(), new UserPrefs());
-        expectedModel = new ModelManager(model.getConText(), new UserPrefs());
+        expectedModel = new ModelManager(model.getContactList(), new UserPrefs());
     }
 
     @Test

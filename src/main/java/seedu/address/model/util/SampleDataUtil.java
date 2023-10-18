@@ -5,7 +5,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.ConText;
-import seedu.address.model.ReadOnlyConText;
+import seedu.address.model.ContactList;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.Email;
 import seedu.address.model.contact.Name;
@@ -40,7 +40,7 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyConText getSampleConText() {
+    public static ContactList getSampleConText() {
         ConText sampleAb = new ConText();
         for (Contact sampleContact : getSampleContacts()) {
             sampleAb.addContact(sampleContact);

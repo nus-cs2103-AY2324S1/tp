@@ -24,7 +24,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyConText;
+import seedu.address.model.ContactList;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.contact.Contact;
 import seedu.address.storage.JsonContactsStorage;
@@ -123,7 +123,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getConText(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getContactList(), new UserPrefs());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
@@ -152,7 +152,7 @@ public class LogicManagerTest {
         // Inject LogicManager with an contactsStorage that throws the IOException e when saving
         JsonContactsStorage contactsStorage = new JsonContactsStorage(prefPath) {
             @Override
-            public void saveConText(ReadOnlyConText conText, Path filePath)
+            public void saveConText(ContactList contactList, Path filePath)
                     throws IOException {
                 throw e;
             }

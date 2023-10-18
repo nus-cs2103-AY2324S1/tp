@@ -96,9 +96,9 @@ public class ConTextTest {
     }
 
     /**
-     * A stub ReadOnlyConText whose contacts list can violate interface constraints.
+     * A stub ContactList whose contacts list can violate interface constraints.
      */
-    private static class ConTextStub implements ReadOnlyConText {
+    private static class ConTextStub implements ContactList {
         private final ObservableList<Contact> contacts = FXCollections.observableArrayList();
 
         ConTextStub(Collection<Contact> contacts) {

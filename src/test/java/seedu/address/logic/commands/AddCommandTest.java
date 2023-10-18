@@ -20,7 +20,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.ConText;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyConText;
+import seedu.address.model.ContactList;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.contact.Contact;
 import seedu.address.testutil.ContactBuilder;
@@ -125,12 +125,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setConText(ReadOnlyConText newData) {
+        public void setConText(ContactList newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyConText getConText() {
+        public ContactList getContactList() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -197,7 +197,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyConText getConText() {
+        public ContactList getContactList() {
             return new ConText();
         }
     }

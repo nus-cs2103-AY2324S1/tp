@@ -18,7 +18,7 @@ import seedu.address.logic.LogicManager;
 import seedu.address.model.ConText;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyConText;
+import seedu.address.model.ContactList;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
@@ -75,18 +75,18 @@ public class MainApp extends Application {
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         logger.info("Using data file : " + storage.getConTextFilePath());
 
-        Optional<ReadOnlyConText> conTextOptional;
-        ReadOnlyConText initialData;
+        Optional<ContactList> contactListOptional;
+        ContactList initialData;
         try {
-            conTextOptional = storage.readConText();
-            if (!conTextOptional.isPresent()) {
+            contactListOptional = storage.readConText();
+            if (!contactListOptional.isPresent()) {
                 logger.info("Creating a new data file " + storage.getConTextFilePath()
                         + " populated with a sample ConText.");
             }
-            initialData = conTextOptional.orElseGet(SampleDataUtil::getSampleConText);
+            initialData = contactListOptional.orElseGet(SampleDataUtil::getSampleConText);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getConTextFilePath() + " could not be loaded."
-                    + " Will be starting with an empty ConText.");
+                    + " Will be starting with an empty contactList.");
             initialData = new ConText();
         }
 

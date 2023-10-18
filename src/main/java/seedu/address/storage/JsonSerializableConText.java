@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.Messages;
 import seedu.address.model.ConText;
-import seedu.address.model.ReadOnlyConText;
+import seedu.address.model.ContactList;
 import seedu.address.model.contact.Contact;
 
 /**
@@ -31,11 +31,11 @@ class JsonSerializableConText {
     }
 
     /**
-     * Converts a given {@code ReadOnlyConText} into this class for Jackson use.
+     * Converts a given {@code ContactList} into this class for Jackson use.
      *
      * @param source future changes to this will not affect the created {@code JsonSerializableConText}.
      */
-    public JsonSerializableConText(ReadOnlyConText source) {
+    public JsonSerializableConText(ContactList source) {
         contacts.addAll(source.getContactList().stream().map(JsonAdaptedContact::new).collect(Collectors.toList()));
     }
 

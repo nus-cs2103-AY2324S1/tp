@@ -14,7 +14,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.InputParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyConText;
+import seedu.address.model.ContactList;
 import seedu.address.model.contact.Contact;
 import seedu.address.storage.Storage;
 
@@ -46,7 +46,7 @@ public class LogicManager implements Logic {
         commandResult = command.execute(model);
 
         try {
-            storage.saveConText(model.getConText());
+            storage.saveConText(model.getContactList());
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(Messages.FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
@@ -57,8 +57,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyConText getConText() {
-        return model.getConText();
+    public ContactList getContactList() {
+        return model.getContactList();
     }
 
     @Override

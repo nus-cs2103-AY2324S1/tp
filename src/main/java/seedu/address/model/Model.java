@@ -47,10 +47,10 @@ public interface Model {
     /**
      * Replaces address book data with the data in {@code ConText}.
      */
-    void setConText(ReadOnlyConText conText);
+    void setConText(ContactList contactList);
 
     /** Returns the ConText */
-    ReadOnlyConText getConText();
+    ContactList getContactList();
 
     /**
      * Returns true if a contact with the same identity as {@code contact} exists in the address book.
