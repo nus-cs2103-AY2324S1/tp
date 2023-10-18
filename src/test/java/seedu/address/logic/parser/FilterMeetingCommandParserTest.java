@@ -16,6 +16,7 @@ import seedu.address.logic.commands.FilterMeetingCommand;
 import seedu.address.model.meeting.AttendeeContainsKeywordsPredicate;
 import seedu.address.model.meeting.GeneralMeetingPredicate;
 import seedu.address.model.meeting.LocationContainsKeywordsPredicate;
+import seedu.address.model.meeting.MeetingTime;
 import seedu.address.model.meeting.MeetingTimeContainsPredicate;
 import seedu.address.model.meeting.TagContainsKeywordsPredicate;
 import seedu.address.model.meeting.TitleContainsKeywordsPredicate;
@@ -77,6 +78,17 @@ public class FilterMeetingCommandParserTest {
                         start, end));
         assertParseSuccess(parser, " m/CS2103T a/Zoom s/20.09.2023 1000 e/20.09.2023 1200 n/Alice Bob t/friend",
                 expectedFilterMeetingCommand);
+    }
+
+    @Test
+    public void parse_inValidArgsTime_throwsParseException() {
+        LocalDateTime start = LocalDateTime.parse("20.09.2023 1000", FORMAT);
+        LocalDateTime end = LocalDateTime.parse("20.09.2023 1200", FORMAT);
+        FilterMeetingCommand expectedFilterMeetingCommand =
+                new FilterMeetingCommand(preparePredicate(new String[]{"", "", "", ""},
+                        end, start));
+        assertParseFailure(parser, " e/20.09.2023 1000 s/20.09.2023 1200",
+                String.format(MeetingTime.MESSAGE_CONSTRAINTS));
     }
 
     /**

@@ -4,9 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.ParserUtil.FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,27 +16,46 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddMeetingCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FilterMeetingCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListMeetingCommand;
 import seedu.address.logic.commands.RemoveMeetingContactCommand;
 import seedu.address.logic.commands.ViewContactCommand;
 import seedu.address.logic.commands.ViewMeetingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.meeting.AttendeeContainsKeywordsPredicate;
+import seedu.address.model.meeting.GeneralMeetingPredicate;
+import seedu.address.model.meeting.LocationContainsKeywordsPredicate;
+import seedu.address.model.meeting.Meeting;
+import seedu.address.model.meeting.MeetingTimeContainsPredicate;
+import seedu.address.model.meeting.TagContainsKeywordsPredicate;
+import seedu.address.model.meeting.TitleContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.MeetingBuilder;
+import seedu.address.testutil.MeetingUtil;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 
 public class AddressBookParserTest {
 
     private final AddressBookParser parser = new AddressBookParser();
+
+    @Test
+    public void parseCommand_addm() throws Exception {
+        Meeting meeting = new MeetingBuilder().build();
+        AddMeetingCommand command = (AddMeetingCommand) parser.parseCommand(MeetingUtil.getAddMeetingCommand(meeting));
+        assertEquals(new AddMeetingCommand(meeting), command);
+    }
 
     @Test
     public void parseCommand_addc() throws Exception {
@@ -81,6 +102,18 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_filterm() throws Exception {
+        LocalDateTime start = LocalDateTime.parse("20.09.2023 1000", FORMAT);
+        LocalDateTime end = LocalDateTime.parse("20.09.2023 1200", FORMAT);
+        FilterMeetingCommand command = (FilterMeetingCommand) parser
+                .parseCommand(FilterMeetingCommand.COMMAND_WORD
+                        + " m/CS2103T a/Zoom s/20.09.2023 1000 e/20.09.2023 1200 n/Alice Bob t/friend");
+        assertEquals(new FilterMeetingCommand(preparePredicate(new String[] {"CS2103T", "Zoom", "Alice Bob", "friend"},
+                start, end)),
+                command);
+    }
+
+    @Test
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
@@ -90,6 +123,12 @@ public class AddressBookParserTest {
     public void parseCommand_listc() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_listm() throws Exception {
+        assertTrue(parser.parseCommand(ListMeetingCommand.COMMAND_WORD) instanceof ListMeetingCommand);
+        assertTrue(parser.parseCommand(ListMeetingCommand.COMMAND_WORD + " 3") instanceof ListMeetingCommand);
     }
 
     @Test
@@ -117,5 +156,16 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+    }
+
+    /**
+     * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
+     */
+    private GeneralMeetingPredicate preparePredicate(String[] userInput, LocalDateTime start, LocalDateTime end) {
+        return new GeneralMeetingPredicate(new TitleContainsKeywordsPredicate(List.of(userInput[0].split("\\s+"))),
+                new LocationContainsKeywordsPredicate(List.of(userInput[1].split("\\s+"))),
+                new MeetingTimeContainsPredicate(start, end),
+                new AttendeeContainsKeywordsPredicate(List.of(userInput[2].split("\\s+"))),
+                new TagContainsKeywordsPredicate(List.of(userInput[3].split("\\s+"))));
     }
 }

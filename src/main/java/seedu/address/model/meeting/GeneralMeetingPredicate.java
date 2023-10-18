@@ -2,6 +2,7 @@ package seedu.address.model.meeting;
 
 import java.util.function.Predicate;
 
+
 /**
  * The predicate class that brings together of all the other predicate class.
  */
@@ -59,4 +60,5 @@ public class GeneralMeetingPredicate implements Predicate<Meeting> {
                 && attendeePredicate.equals(otherGeneralMeetingPredicate.attendeePredicate)
                 && tagPredicate.equals(otherGeneralMeetingPredicate.tagPredicate);
     }
+
 }
