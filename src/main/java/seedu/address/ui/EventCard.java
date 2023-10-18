@@ -30,13 +30,9 @@ public class EventCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label startDate;
+    private Label date;
     @FXML
-    private Label startTime;
-    @FXML
-    private Label endDate;
-    @FXML
-    private Label endTime;
+    private Label timeDuration;
 
     /**
      * Creates an {@code EventCode} with the given {@code Event} and index to display.
@@ -46,9 +42,9 @@ public class EventCard extends UiPart<Region> {
         this.event = event;
         id.setText(displayedIndex + ". ");
         name.setText(event.getName().name);
-        startDate.setText(event.getStartDate().forDisplay());
-        startTime.setText(event.getStartTime().forDisplay());
-        endDate.setText(event.getEndDate().forDisplay());
-        endTime.setText(event.getEndTime().forDisplay());
+        date.setText(event.getStartDate().forDisplay());
+        timeDuration.setText(String.format("%s - %s",
+                event.getStartTime().forDisplay(),
+                event.getEndTime().forDisplay()));
     }
 }
