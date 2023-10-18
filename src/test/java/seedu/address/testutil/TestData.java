@@ -158,13 +158,13 @@ public final class TestData {
          */
         public static final class EditDescriptor {
             public static final EditContactDescriptor AMY =
-                new EditContactDescriptorBuilder()
-                        .withName(VALID_NAME_AMY)
-                        .withPhone(VALID_PHONE_AMY)
-                        .withEmail(VALID_EMAIL_AMY)
-                        .withNote(VALID_NOTE_AMY)
-                        .withTags(TestData.Valid.Tag.ALPHANUMERIC)
-                        .build();
+                    new EditContactDescriptorBuilder()
+                            .withName(VALID_NAME_AMY)
+                            .withPhone(VALID_PHONE_AMY)
+                            .withEmail(VALID_EMAIL_AMY)
+                            .withNote(VALID_NOTE_AMY)
+                            .withTags(TestData.Valid.Tag.ALPHANUMERIC)
+                            .build();
             public static final EditContactDescriptor BOB =
                     new EditContactDescriptorBuilder()
                             .withName(VALID_NAME_BOB)
