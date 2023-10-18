@@ -40,6 +40,7 @@ public class Appointment {
         return test.matches(VALIDATION_REGEX);
     }
 
+
     @Override
     public String toString() {
         return value;
@@ -64,5 +65,4 @@ public class Appointment {
     public int hashCode() {
         return value.hashCode();
     }
-
 }

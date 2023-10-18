@@ -2,6 +2,7 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
@@ -33,10 +34,12 @@ public class TypicalPersons {
             .withEmail("johnd@example.com").withPhone("98765432").withMedical("diabetes", "high-risk")
             .withTags("owesMoney", "friends").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withNric("S8765432B")
-            .withPhone("95352563").withEmail("heinz@example.com").withAddress("wall street")
+            .withPhone("95352563").withEmail("heinz@example.com")
+            .withAddress("wall street").withAppointment("2023-01-01 10:00 12:00")
             .withMedical("O= Blood Type").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withNric("T1234567I")
-            .withPhone("87652533").withEmail("cornelia@example.com").withAddress("10th street")
+            .withPhone("87652533").withEmail("cornelia@example.com")
+            .withAddress("10th street").withAppointment("2023-01-01 10:00 12:00")
             .withTags("friends").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withNric("T1111111Z")
             .withPhone("9482224").withEmail("werner@example.com").withAddress("michegan ave").build();
@@ -55,12 +58,13 @@ public class TypicalPersons {
             .withEmail("hans@example.com").withAddress("chicago ave").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
-    public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withNric(VALID_NRIC_AMY)
-            .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-            .withTags(VALID_TAG_FRIEND).build();
-    public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withNric(VALID_NRIC_BOB)
-            .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-            .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+    public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
+            .withAppointment(VALID_APPOINTMENT).withNric(VALID_NRIC_AMY).withEmail(VALID_EMAIL_AMY)
+            .withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND).build();
+    public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+            .withAppointment(VALID_APPOINTMENT).withNric(VALID_NRIC_BOB).withEmail(VALID_EMAIL_BOB)
+            .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+            .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

@@ -24,7 +24,7 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final String DEFAULT_APPOINTMENT = "2023-08-10 10:00 11:00";
+    public static final String DEFAULT_APPOINTMENT = "2023-01-10 10:00 12:00";
 
     private Name name;
     private Nric nric;
@@ -32,8 +32,8 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Appointment appointment;
-    private Set<Tag> tags;
     private Set<MedicalHistory> medicalHistories;
+    private Set<Tag> tags;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -44,9 +44,9 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        appointment = null;
-        tags = new HashSet<>();
+        appointment = new Appointment(DEFAULT_APPOINTMENT);
         medicalHistories = new HashSet<>();
+        tags = new HashSet<>();
     }
 
     /**
@@ -58,9 +58,9 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
+        medicalHistories = new HashSet<>(personToCopy.getMedicalHistories());
         appointment = personToCopy.getAppointment().isPresent() ? personToCopy.getAppointment().get() : null;
         tags = new HashSet<>(personToCopy.getTags());
-        medicalHistories = new HashSet<>(personToCopy.getMedicalHistories());
     }
 
     /**
@@ -80,11 +80,28 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the
-     * {@code Person} that we are building.
+     * Sets the {@code Appointment} of the {@code Person} that we are building.
+     */
+
+    public PersonBuilder withAppointment(String appointment) {
+        this.appointment = new Appointment(appointment);
+        return this;
+    }
+
+    /**
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
      */
     public PersonBuilder withTags(String... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
+    /**
+     * Parses the {@code medicalHistory} into a {@code Set<MedicalHistory>}
+     * and set it to the {@code Person} that we are building.
+     */
+    public PersonBuilder withMedicalHistories(String ... medicalHistories) {
+        this.medicalHistories = SampleDataUtil.getMedicalHistorySet(medicalHistories);
         return this;
     }
 
@@ -113,11 +130,11 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Appointment} of the {@code Person} that we are building.
+     * @return the person.
      */
-    public PersonBuilder withAppointment(String appointment) {
-        this.appointment = new Appointment(appointment);
-        return this;
+    public Person build() {
+        return new Person(name, nric, phone, email, address,
+                appointment, medicalHistories, tags);
     }
 
     /**
@@ -127,9 +144,4 @@ public class PersonBuilder {
         this.medicalHistories = SampleDataUtil.getMedicalHistorySet(medicalHistories);
         return this;
     }
-
-    public Person build() {
-        return new Person(name, nric, phone, email, address, appointment, medicalHistories, tags);
-    }
-
 }

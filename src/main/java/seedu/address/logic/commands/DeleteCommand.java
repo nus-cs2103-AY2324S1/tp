@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Stream;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -64,9 +63,7 @@ public class DeleteCommand extends Command {
         Optional<Person> findPersonToDelete = null;
 
         if (name != null) {
-            Stream<Person> personbyName = lastShownList.stream()
-                    .filter(person -> person.getName().equals(name));
-            findPersonToDelete = findPersonToDeleteName(personbyName);
+            findPersonToDelete = findPersonToDeleteName(lastShownList);
         } else if (nric != null) {
             findPersonToDelete = findPersonToDeleteIc(lastShownList);
         }
@@ -77,7 +74,7 @@ public class DeleteCommand extends Command {
             model.deletePerson(personToDelete);
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
         } else {
-            Person editedPerson = createEditedPerson(personToDelete, deletePersonDescriptor);
+            Person editedPerson = createDeletePerson(personToDelete, deletePersonDescriptor);
             model.setPerson(personToDelete, editedPerson);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_FIELD_SUCCESS, Messages.format(editedPerson)));
@@ -110,9 +107,11 @@ public class DeleteCommand extends Command {
      * @return the person to delete.
      * @throws CommandException if the person is not found.
      */
-    public Optional<Person> findPersonToDeleteName(Stream<Person> persons)
+    public Optional<Person> findPersonToDeleteName(List<Person> persons)
             throws CommandException {
-        Optional<Person> personbyName = persons.findFirst();
+        Optional<Person> personbyName = persons.stream()
+                .filter(person -> person.getName().equals(name))
+                .findFirst();
         if (personbyName.isPresent()) {
             return personbyName;
         } else {
@@ -151,7 +150,7 @@ public class DeleteCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code deletePersonDescriptor}.
      */
-    public static Person createEditedPerson(Person personToEdit, DeletePersonDescriptor deletePersonDescriptor) {
+    public static Person createDeletePerson(Person personToEdit, DeletePersonDescriptor deletePersonDescriptor) {
         assert personToEdit != null;
 
         Name updatedName = personToEdit.getName();
