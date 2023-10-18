@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.lead.Lead;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -26,7 +27,7 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
 
     // Optional fields
-    Lead lead;
+    private final Lead lead;
     private final TelegramHandle telegram;
     private final Profession profession;
     private final Income income;
@@ -44,6 +45,7 @@ public class Person {
         this.address = address;
         this.tags.addAll(tags);
 
+        this.lead = new Lead();
         this.telegram = null;
         this.profession = null;
         this.income = null;
@@ -54,7 +56,7 @@ public class Person {
      * Same constructor but with optional fields.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-        TelegramHandle telegram, Profession profession, Income income, Details details) {
+        TelegramHandle telegram, Profession profession, Income income, Details details, Lead lead) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -66,6 +68,7 @@ public class Person {
         this.profession = profession;
         this.income = income;
         this.details = details;
+        this.lead = lead;
     }
 
     public Name getName() {
@@ -108,14 +111,14 @@ public class Person {
         return interactions;
     }
 
-    /**
-     * Changes the lead of the client.
-     *
-     * @param newLead the new lead of the client.
-     */
-    public void setLead(Lead newLead) {
-        lead = newLead;
-    }
+//    /**
+//     * Changes the lead of the client.
+//     *
+//     * @param newLead the new lead of the client.
+//     */
+//    public void setLead(Lead newLead) {
+//        lead = newLead;
+//    }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
