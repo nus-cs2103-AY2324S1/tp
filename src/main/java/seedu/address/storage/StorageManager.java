@@ -3,76 +3,57 @@ package seedu.address.storage;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
-import java.util.logging.Logger;
 
-import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataLoadingException;
-import seedu.address.model.ContactList;
-import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.UserPrefs;
+import seedu.address.model.Contacts;
+import seedu.address.model.ReadOnlyContacts;
+import seedu.address.model.ReadOnlySettings;
+import seedu.address.model.Settings;
 
 
 
 /**
- * Manages storage of ContactsManager data in local storage.
+ * Implementation of the Storage component.
  */
 public class StorageManager implements Storage {
-    private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-
     private ContactsStorage contactsStorage;
-    private UserPrefsStorage userPrefsStorage;
+    private SettingsStorage settingsStorage;
 
-    /**
-     * Creates a {@code StorageManager} with the given {@code ContactsStorage} and {@code UserPrefStorage}.
-     */
-    public StorageManager(ContactsStorage contactsStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(
+        ContactsStorage contactsStorage,
+        SettingsStorage settingsStorage
+    ) {
         this.contactsStorage = contactsStorage;
-        this.userPrefsStorage = userPrefsStorage;
-    }
-
-    // [ContactsStorage]
-
-    @Override
-    public Path getConTextFilePath() {
-        return contactsStorage.getConTextFilePath();
+        this.settingsStorage = settingsStorage;
     }
 
     @Override
-    public Optional<ContactList> readContactsManager() throws DataLoadingException {
-        return readContactsManager(contactsStorage.getConTextFilePath());
+    public Path getContactsPath() {
+        return this.contactsStorage.getContactsPath();
     }
 
     @Override
-    public Optional<ContactList> readContactsManager(Path filePath) throws DataLoadingException {
-        logger.fine("Attempting to read data from file: " + filePath);
-        return contactsStorage.readContactsManager(filePath);
+    public Optional<Contacts> readContacts() throws DataLoadingException {
+        return this.contactsStorage.readContacts();
     }
 
     @Override
-    public void saveContactsManager(ContactList contactList) throws IOException {
-        saveContactsManager(contactList, contactsStorage.getConTextFilePath());
+    public void saveContacts(ReadOnlyContacts contacts) throws IOException {
+        this.contactsStorage.saveContacts(contacts);
     }
 
     @Override
-    public void saveContactsManager(ContactList contactList, Path filePath) throws IOException {
-        logger.fine("Attempting to write to data file: " + filePath);
-        contactsStorage.saveContactsManager(contactList, filePath);
-    }
-
-    // [UserPrefsStorage]
-
-    @Override
-    public Path getUserPrefsFilePath() {
-        return userPrefsStorage.getUserPrefsFilePath();
+    public Path getSettingsPath() {
+        return this.settingsStorage.getSettingsPath();
     }
 
     @Override
-    public Optional<UserPrefs> readUserPrefs() throws DataLoadingException {
-        return userPrefsStorage.readUserPrefs();
+    public Optional<Settings> readSettings() throws DataLoadingException {
+        return this.settingsStorage.readSettings();
     }
 
     @Override
-    public void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException {
-        userPrefsStorage.saveUserPrefs(userPrefs);
+    public void saveSettings(ReadOnlySettings settings) throws IOException {
+        this.settingsStorage.saveSettings(settings);
     }
 }
