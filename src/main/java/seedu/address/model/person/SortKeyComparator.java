@@ -2,6 +2,11 @@ package seedu.address.model.person;
 
 import java.util.Comparator;
 
+/**
+ * Represents a comparator that can be used to sort a list of persons based on a specific sort key.
+ * This is an abstract class that should be extended by concrete implementations that define the actual
+ * sort key and comparison logic.
+ */
 public abstract class SortKeyComparator implements Comparator<Person> {
 
     protected boolean sortActive;
