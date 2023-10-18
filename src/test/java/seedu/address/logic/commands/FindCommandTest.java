@@ -10,14 +10,17 @@ import static seedu.address.testutil.TypicalMusicians.ELLE;
 import static seedu.address.testutil.TypicalMusicians.FIONA;
 import static seedu.address.testutil.TypicalMusicians.getTypicalAddressBook;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.musician.Musician;
 import seedu.address.model.musician.NameContainsKeywordsPredicate;
 
 /**
@@ -34,14 +37,17 @@ public class FindCommandTest {
         NameContainsKeywordsPredicate secondPredicate =
                 new NameContainsKeywordsPredicate(Collections.singletonList("second"));
 
-        FindCommand findFirstCommand = new FindCommand(firstPredicate);
-        FindCommand findSecondCommand = new FindCommand(secondPredicate);
+        ArrayList<Predicate<Musician>> firstPredicates = new ArrayList<>(Arrays.asList(firstPredicate));
+        ArrayList<Predicate<Musician>> secondPredicates = new ArrayList<>(Arrays.asList(secondPredicate));
+
+        FindCommand findFirstCommand = new FindCommand(firstPredicates);
+        FindCommand findSecondCommand = new FindCommand(secondPredicates);
 
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
 
         // same values -> returns true
-        FindCommand findFirstCommandCopy = new FindCommand(firstPredicate);
+        FindCommand findFirstCommandCopy = new FindCommand(firstPredicates);
         assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
         // different types -> returns false
@@ -58,7 +64,8 @@ public class FindCommandTest {
     public void execute_zeroKeywords_noMusicianFound() {
         String expectedMessage = String.format(MESSAGE_MUSICIANS_LISTED_OVERVIEW, 0);
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
-        FindCommand command = new FindCommand(predicate);
+        ArrayList<Predicate<Musician>> predicates = new ArrayList<>(Arrays.asList(predicate));
+        FindCommand command = new FindCommand(predicates);
         expectedModel.updateFilteredMusicianList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredMusicianList());
@@ -68,7 +75,8 @@ public class FindCommandTest {
     public void execute_multipleKeywords_multipleMusiciansFound() {
         String expectedMessage = String.format(MESSAGE_MUSICIANS_LISTED_OVERVIEW, 3);
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
-        FindCommand command = new FindCommand(predicate);
+        ArrayList<Predicate<Musician>> predicates = new ArrayList<>(Arrays.asList(predicate));
+        FindCommand command = new FindCommand(predicates);
         expectedModel.updateFilteredMusicianList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredMusicianList());
@@ -77,8 +85,9 @@ public class FindCommandTest {
     @Test
     public void toStringMethod() {
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Arrays.asList("keyword"));
-        FindCommand findCommand = new FindCommand(predicate);
-        String expected = FindCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
+        ArrayList<Predicate<Musician>> predicates = new ArrayList<>(Arrays.asList(predicate));
+        FindCommand findCommand = new FindCommand(predicates);
+        String expected = FindCommand.class.getCanonicalName() + "{predicate=" + predicates + "}";
         assertEquals(expected, findCommand.toString());
     }
 
