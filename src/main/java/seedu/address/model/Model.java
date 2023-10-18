@@ -87,20 +87,20 @@ public interface Model {
     void addApplicant(Applicant toAdd);
 
     /**
+     * Replaces the given member {@code target} with {@code editedMember}.
+     * {@code target} must exist in the address book.
+     * The member identity of {@code editedMember} must not be the same as another existing member in the
+     * address book.
+     */
+    void setMember(Member target, Member editedMember);
+
+    /**
      * Replaces the given applicant {@code target} with {@code editedApplicant}.
      * {@code target} must exist in the address book.
      * The applicant identity of {@code editedApplicant} must not be the same as another existing applicant in the
      * address book.
      */
     void setApplicant(Applicant target, Applicant editedApplicant);
-
-    /**
-     * Replaces the given member {@code target} with {@code editedMember}.
-     * {@code target} must exist in the address book.
-     * The applicant identity of {@code editedMember} must not be the same as another existing member in the
-     * address book.
-     */
-    void setMember(Member target, Member editedMember);
 
     /**
      * Returns an unmodifiable view of the filtered person list
@@ -116,7 +116,7 @@ public interface Model {
      * Updates the filter of the filtered member list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredMembersList(Predicate<? super Member> predicate);
+    void updateFilteredMemberList(Predicate<? super Member> predicate);
 
     /**
      * Updates the filter of the filtered applicant list to filter by the given {@code predicate}.
