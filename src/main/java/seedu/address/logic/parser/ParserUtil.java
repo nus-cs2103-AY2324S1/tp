@@ -18,7 +18,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Mod;
 import seedu.address.model.tag.Tag;
-
+import seedu.address.model.person.Hour;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -172,5 +172,14 @@ public class ParserUtil {
             modSet.add(parseMod(modName));
         }
         return modSet;
+    }
+
+    public static Hour parseHour(String hour) throws ParseException {
+        requireNonNull(hour);
+        String trimmedHour = hour.trim();
+        if(!Hour.isValidHour(trimmedHour)) {
+            throw new ParseException(Hour.MESSAGE_CONSTRAINTS);
+        }
+        return new Hour(trimmedHour);
     }
 }
