@@ -375,8 +375,8 @@ public class ModelManager implements Model {
         return teamBook.hasTeam(teamName);
     }
 
-    public boolean invalidAddToTeam(Name teamToAddTo, Name devToAdd) {
-        return addressBook.invalidAddToTeam(teamToAddTo, devToAdd);
+    public boolean invalidAddToTeam(String teamToAddTo, Name devToAdd) {
+        return teamBook.invalidAddToTeam(teamToAddTo, devToAdd);
     }
 
 

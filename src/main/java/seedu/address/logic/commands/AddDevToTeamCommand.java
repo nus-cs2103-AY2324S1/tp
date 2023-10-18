@@ -49,12 +49,16 @@ public class AddDevToTeamCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         //duplicate or team doesnt exist
-        if (!model.invalidAddToTeam(teamToAddTo, devToAdd)) {
+        if (model.invalidAddToTeam(teamToAddTo, devToAdd)) {
+            throw new CommandException(MESSAGE_INVALID_TEAM);
+        } else if (model.getPerson(devToAdd) == null) {
+            throw new CommandException(MESSAGE_INVALID_PERSON);
+        } else if (model.personAlreadyInTeam(teamToAddTo, devToAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        } else {
+            model.addToTeam(teamToAddTo, devToAdd);
+            return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(teamToAddTo, devToAdd)));
         }
-
-        model.addToTeam(teamToAddTo, devToAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(teamToAddTo, devToAdd)));
     }
 
     @Override
