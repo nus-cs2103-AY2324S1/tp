@@ -64,6 +64,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_FIELDS_SAME = "The input fields of this person: %1$s you are editing"
             + " is the same.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_EDIT_DUPLICATE_EMAIL = "Both primary and secondary email are the same "
+            + "for Person: %1$s";
     public static final String MESSAGE_EDIT_ALTERNATIVE_FAIL = "The current alternative contact field is empty."
             + " Use the addalt command to fill in the alternative contact details.";
 
@@ -122,17 +124,34 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Optional<Integer> id = personToEdit.getId();
 
-        Person updatedPerson = new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedBirthday,
-                updatedLinkedin, updatedSecondaryEmail, updatedTelegram, updatedTags, id);
-
         if ((!personToEdit.hasValidBirthday() && !updatedBirthday.equals(Optional.empty()))
                 || (!personToEdit.hasValidLinkedin() && !updatedLinkedin.equals(Optional.empty()))
                 || (!personToEdit.hasValidTelegram() && !updatedTelegram.equals(Optional.empty()))
                 || (!personToEdit.hasValidSecondaryEmail() && !updatedSecondaryEmail.equals(Optional.empty()))) {
             throw new CommandException(MESSAGE_EDIT_ALTERNATIVE_FAIL);
-        } else if (updatedPerson.equals(personToEdit)) {
-            throw new CommandException(String.format(MESSAGE_EDIT_FIELDS_SAME, updatedName));
         } else {
+            if (personToEdit.hasValidBirthday() && updatedBirthday.equals(Optional.empty())) {
+                updatedBirthday = personToEdit.getBirthday();
+            }
+            if (personToEdit.hasValidTelegram() && updatedTelegram.equals(Optional.empty())) {
+                updatedTelegram = personToEdit.getTelegram();
+            }
+            if (personToEdit.hasValidSecondaryEmail() && updatedSecondaryEmail.equals(Optional.empty())) {
+                updatedSecondaryEmail = personToEdit.getSecondaryEmail();
+            }
+            if (personToEdit.hasValidLinkedin() && updatedLinkedin.equals(Optional.empty())) {
+                updatedLinkedin = personToEdit.getLinkedin();
+            }
+            Person updatedPerson = new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedBirthday,
+                    updatedLinkedin, updatedSecondaryEmail, updatedTelegram, updatedTags, id);
+            if (updatedPerson.equals(personToEdit)) {
+                throw new CommandException(String.format(MESSAGE_EDIT_FIELDS_SAME, updatedName));
+            }
+            if (!updatedSecondaryEmail.equals(Optional.empty())) {
+                if (updatedPerson.hasSameEmail()) {
+                    throw new CommandException(String.format(MESSAGE_EDIT_DUPLICATE_EMAIL, updatedName));
+                }
+            }
             return updatedPerson;
         }
     }
