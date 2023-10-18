@@ -107,7 +107,7 @@ public class EditCommand extends Command {
         Day updatedDay = editPersonDescriptor.getDay().orElse(personToEdit.getDay());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Boolean updatedPaid = editPersonDescriptor.getPaid().orElse(personToEdit.getPaid());
-      
+
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedDay, updatedTags, updatedPaid);
     }
 
@@ -254,7 +254,7 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(day, otherEditPersonDescriptor.day)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
                     && Objects.equals(paid, otherEditPersonDescriptor.paid);
         }
 

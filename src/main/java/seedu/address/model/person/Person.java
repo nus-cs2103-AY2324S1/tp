@@ -53,28 +53,29 @@ public class Person {
     public Email getEmail() {
         return email;
     }
-    
+
     public Address getAddress() {
         return address;
     }
-  
+
     public Day getDay() {
         return day;
     }
-  
-    public boolean getPaid() {
-        return paid;
-    }
 
-    public void setPaid() {
-        this.paid = true;
-      
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public boolean getPaid() {
+        return paid;
+    }
+
+    public void setPaid() {
+        this.paid = true;
     }
 
     /**
