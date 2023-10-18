@@ -1,11 +1,11 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+
 import seedu.address.logic.commands.AddApplicantCommand;
 import seedu.address.logic.commands.EditApplicantCommand;
 import seedu.address.model.person.Applicant;
-
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
 /**
  * A utility class for Applicant.
