@@ -30,6 +30,8 @@ public class PersonBuilder {
     private Day day;
     private Set<Tag> tags;
 
+    private boolean paid;
+
     /**
      * Creates a {@code PersonBuilder} with the default details.
      */
@@ -40,6 +42,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         day = new Day(DEFAULT_DAY);
         tags = new HashSet<>();
+        paid = false;
     }
 
     /**
@@ -52,6 +55,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         day = personToCopy.getDay();
         tags = new HashSet<>(personToCopy.getTags());
+        paid = false;
     }
 
     /**
@@ -103,7 +107,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, day, tags);
+        return new Person(name, phone, email, address, day, tags, paid);
     }
 
 }

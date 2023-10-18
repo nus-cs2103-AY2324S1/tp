@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -46,7 +47,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_DAY + "DAY] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TAG + "TAG] "
+            + "[" + PREFIX_PAID + "PAID]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -104,8 +106,10 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Day updatedDay = editPersonDescriptor.getDay().orElse(personToEdit.getDay());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Boolean updatedPaid = editPersonDescriptor.getPaid().orElse(personToEdit.getPaid());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedDay, updatedTags);
+        return new Person(updatedName, updatedPhone,
+                updatedEmail, updatedAddress, updatedDay, updatedTags, updatedPaid);
     }
 
     @Override
@@ -144,6 +148,8 @@ public class EditCommand extends Command {
         private Day day;
         private Set<Tag> tags;
 
+        private Boolean paid;
+
         public EditPersonDescriptor() {}
 
         /**
@@ -157,13 +163,14 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setDay(toCopy.day);
             setTags(toCopy.tags);
+            setPaid(toCopy.paid);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, day, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, day, tags, paid);
         }
 
         public void setName(Name name) {
@@ -223,6 +230,14 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        public void setPaid(Boolean paid) {
+            this.paid = paid;
+        }
+
+        public Optional<Boolean> getPaid() {
+            return Optional.ofNullable(paid);
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -240,7 +255,8 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(day, otherEditPersonDescriptor.day)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
+                    && Objects.equals(paid, otherEditPersonDescriptor.paid);
         }
 
         @Override
@@ -252,6 +268,7 @@ public class EditCommand extends Command {
                     .add("address", address)
                     .add("day", day)
                     .add("tags", tags)
+                    .add("paid", paid)
                     .toString();
         }
     }

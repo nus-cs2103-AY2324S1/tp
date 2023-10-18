@@ -96,6 +96,7 @@ public class ParserUtil {
         return new Email(trimmedEmail);
     }
 
+
     /**
      * Parses a {@code String day} into an {@code Day}.
      * Leading and trailing whitespaces will be trimmed.
@@ -142,4 +143,6 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+
 }
