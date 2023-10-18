@@ -23,7 +23,7 @@ import seedu.address.model.tag.Tag;
 /**
  * Jackson-friendly version of {@link Contact}.
  */
-class JsonAdaptedContact {
+class JsonContact {
     private final String name;
     private final String phone;
     private final String email;
@@ -34,7 +34,7 @@ class JsonAdaptedContact {
      * Constructs a {@code JsonAdaptedContact} with the given contact details.
      */
     @JsonCreator
-    public JsonAdaptedContact(
+    public JsonContact(
         @JsonProperty("name") String _name,
         @JsonProperty("phone") String _phone,
         @JsonProperty("email") String _email,
@@ -53,7 +53,7 @@ class JsonAdaptedContact {
     /**
      * Converts a given {@code Contact} into this class for Jackson use.
      */
-    public JsonAdaptedContact(Contact contact) {
+    public JsonContact(Contact contact) {
         name = contact.getName().fullName;
         phone = contact.getPhone().value;
         email = contact.getEmail().value;

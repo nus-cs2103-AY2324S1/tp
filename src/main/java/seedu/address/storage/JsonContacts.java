@@ -10,23 +10,23 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.Messages;
-import seedu.address.model.ContactList;
-import seedu.address.model.ContactsManager;
+import seedu.address.model.ReadOnlyContacts;
+import seedu.address.model.Contacts;
 import seedu.address.model.contact.Contact;
 
 /**
  * An Immutable ContactsManager that is serializable to JSON format.
  */
 @JsonRootName(value = "ContactsManager")
-class JsonSerializableContacts {
+class JsonContacts {
 
-    private final List<JsonAdaptedContact> contacts = new ArrayList<>();
+    private final List<JsonContact> contacts = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableContacts} with the given contacts.
      */
     @JsonCreator
-    public JsonSerializableContacts(@JsonProperty("contacts") List<JsonAdaptedContact> contacts) {
+    public JsonContacts(@JsonProperty("contacts") List<JsonContact> contacts) {
         this.contacts.addAll(contacts);
     }
 
@@ -35,8 +35,8 @@ class JsonSerializableContacts {
      *
      * @param source future changes to this will not affect the created {@code JsonSerializableContacts}.
      */
-    public JsonSerializableContacts(ContactList source) {
-        contacts.addAll(source.getContactList().stream().map(JsonAdaptedContact::new).collect(Collectors.toList()));
+    public JsonContacts(ReadOnlyContacts source) {
+        contacts.addAll(source.getUnmodifiableList().stream().map(JsonContact::new).collect(Collectors.toList()));
     }
 
     /**
@@ -44,14 +44,14 @@ class JsonSerializableContacts {
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public ContactsManager toModelType() throws IllegalValueException {
-        ContactsManager contactsManager = new ContactsManager();
-        for (JsonAdaptedContact jsonAdaptedContact : contacts) {
+    public Contacts toModelType() throws IllegalValueException {
+        Contacts contactsManager = new Contacts();
+        for (JsonContact jsonAdaptedContact : contacts) {
             Contact contact = jsonAdaptedContact.toModelType();
-            if (contactsManager.hasContact(contact)) {
+            if (contactsManager.contains(contact)) {
                 throw new IllegalValueException(Messages.MESSAGE_CONTAIN_DUPLICATE_CONTACT);
             }
-            contactsManager.addContact(contact);
+            contactsManager.add(contact);
         }
         return contactsManager;
     }
