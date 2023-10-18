@@ -76,6 +76,15 @@ public class NameContainsKeywordsPredicateTest {
     }
 
     @Test
+    public void create() {
+        List<String> keywords = List.of("keyword1", "keyword2");
+        NameContainsKeywordsPredicate predicate = NameContainsKeywordsPredicate.create(keywords);
+
+        NameContainsKeywordsPredicate expected = new NameContainsKeywordsPredicate(keywords);
+        assertEquals(expected, predicate);
+    }
+
+    @Test
     public void toStringMethod() {
         List<String> keywords = List.of("keyword1", "keyword2");
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(keywords);
