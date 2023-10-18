@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
          title="BandConnect++" minWidth="900" minHeight="600" onCloseRequest="#handleExit">
   <icons>
@@ -49,6 +50,7 @@
         <HBox alignment="CENTER" spacing="0" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
           <VBox fx:id="musicianList" styleClass="pane-with-border" minWidth="400" prefWidth="400"
                 HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+            <Label text="My Musicians" style="-fx-font-size: 20px;" />
             <padding>
               <Insets top="10" right="10" bottom="10" left="10" />
             </padding>
@@ -56,6 +58,7 @@
           </VBox>
           <VBox fx:id="bandList" styleClass="pane-with-border" minWidth="400" prefWidth="400"
                 HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+            <Label text="My Bands" style="-fx-font-size: 22px;"/>
             <padding>
               <Insets top="10" right="10" bottom="10" left="10" />
             </padding>
