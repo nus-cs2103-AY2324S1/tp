@@ -111,7 +111,7 @@ public class Transaction implements Entry {
     }
 
     public Boolean hasPersonInfo() {
-        return !person.equals(Person.NullPerson);
+        return person != Person.NullPerson;
     }
 
     public Person getPerson() {
