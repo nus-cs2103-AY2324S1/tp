@@ -13,6 +13,8 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.ModelStub;
@@ -38,6 +40,19 @@ public class NoteCommandTest {
         CommandResult commandResult = new NoteCommand(Index.fromZeroBased(0), noteToAdd).execute(modelStub);
 
     }
+    @Test
+    public void execute_invalidIndex_throwsCommandException() {
+        Person personA = new PersonBuilder().withName("A").build();
+
+        Note noteToAdd = new Note("Sample note for person A");
+
+        ModelStubWithNote modelStub = new ModelStubWithNote(personA, note -> {});
+
+        NoteCommand command = new NoteCommand(Index.fromZeroBased(1), noteToAdd);
+
+        assertThrows(CommandException.class, () -> command.execute(modelStub), Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
 
     @Test
     public void equals() {
