@@ -58,8 +58,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             editMusicianDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editMusicianDescriptor::setTags);
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_INSTRUMENT)).ifPresent(editMusicianDescriptor::setInstruments);
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_GENRE)).ifPresent(editMusicianDescriptor::setGenres);
+        parseInstrumentsForEdit(argMultimap.getAllValues(PREFIX_INSTRUMENT)).ifPresent(editMusicianDescriptor::setInstruments);
+        parseGenresForEdit(argMultimap.getAllValues(PREFIX_GENRE)).ifPresent(editMusicianDescriptor::setGenres);
 
         if (!editMusicianDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
@@ -83,4 +83,36 @@ public class EditCommandParser implements Parser<EditCommand> {
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
 
+    /**
+     * Parses {@code Collection<String> instruments} into a {@code Set<Tag>} if {@code instruments} is a valid
+     * collection of instruments.
+     * If {@code instruments} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<Tag>} containing zero instruments.
+     */
+    private Optional<Set<Tag>> parseInstrumentsForEdit(Collection<String> instruments) throws ParseException {
+        assert instruments != null;
+
+        if (instruments.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> instrumentSet = instruments.size() == 1 && instruments.contains("")
+                ? Collections.emptySet() : instruments;
+        return Optional.of(ParserUtil.parseInstruments(instrumentSet));
+    }
+
+    /**
+     * Parses {@code Collection<String> genres} into a {@code Set<Tag>} if {@code genres} is a valid collection of
+     * genres.
+     * If {@code genres} contain only one element which is an empty string, it will be parsed into a {@code Set<Tag>}
+     * containing zero genres.
+     */
+    private Optional<Set<Tag>> parseGenresForEdit(Collection<String> genres) throws ParseException {
+        assert genres != null;
+
+        if (genres.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> genreSet = genres.size() == 1 && genres.contains("") ? Collections.emptySet() : genres;
+        return Optional.of(ParserUtil.parseGenres(genreSet));
+    }
 }

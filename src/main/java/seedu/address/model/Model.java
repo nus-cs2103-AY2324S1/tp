@@ -78,10 +78,6 @@ public interface Model {
      */
     void setMusician(Musician target, Musician editedMusician);
 
-    boolean hasBand(Band band);
-
-    void addBand(Band band);
-
     /** Returns an unmodifiable view of the filtered musician list */
     ObservableList<Musician> getFilteredMusicianList();
 
