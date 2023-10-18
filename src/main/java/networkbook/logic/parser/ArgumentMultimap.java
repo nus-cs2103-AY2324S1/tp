@@ -75,4 +75,32 @@ public class ArgumentMultimap {
             throw new ParseException(Messages.getErrorMessageForDuplicatePrefixes(duplicatedPrefixes));
         }
     }
+
+    /**
+     * Verify that the total number of corresponding values to {@code prefixesIfPresent} prefixes,
+     * must be equal to the number of values corresponding to {@code prefixThenPresent}.
+     * If that is not true, throw a {@code ParseException}.
+     */
+    public void verifyNecessaryPrefixesArePresent(Prefix[] prefixesIfPresent, Prefix prefixThenPresent)
+            throws ParseException {
+        int totalCount = Stream.of(prefixesIfPresent)
+                .map(prefix -> {
+                    if (argMultimap.containsKey(prefix)) {
+                        return argMultimap.get(prefix).size();
+                    } else {
+                        return 0;
+                    }
+                })
+                .reduce(0, Integer::sum);
+        int necessaryCount;
+        if (argMultimap.containsKey(prefixThenPresent)) {
+            necessaryCount = argMultimap.get(prefixThenPresent).size();
+        } else {
+            necessaryCount = 0;
+        }
+        if (totalCount != necessaryCount) {
+            throw new ParseException(
+                    Messages.getErrorMessageForPrefixMustBePresent(prefixesIfPresent, prefixThenPresent, totalCount));
+        }
+    }
 }

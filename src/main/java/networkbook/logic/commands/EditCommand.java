@@ -148,9 +148,9 @@ public class EditCommand extends Command {
      */
     public static class EditPersonDescriptor {
         private Name name = null;
-        private Optional<UniqueList<Phone>> phones = Optional.empty();
-        private Optional<UniqueList<Email>> emails = Optional.empty();
-        private Optional<UniqueList<Link>> links = Optional.empty();
+        private UniqueList<Phone> phones;
+        private UniqueList<Email> emails;
+        private UniqueList<Link> links;
         private GraduatingYear graduatingYear;
         private Course course;
         private Specialisation specialisation;
@@ -161,13 +161,12 @@ public class EditCommand extends Command {
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
-            setPhones(toCopy.phones.map(UniqueList::copy).orElse(null));
-            setEmails(toCopy.emails.map(UniqueList::copy).orElse(null));
-            setLinks(toCopy.links.map(UniqueList::copy).orElse(null));
+            setPhones(Optional.ofNullable(toCopy.phones).map(UniqueList::copy).orElse(null));
+            setEmails(Optional.ofNullable(toCopy.emails).map(UniqueList::copy).orElse(null));
+            setLinks(Optional.of(toCopy.links).map(UniqueList::copy).orElse(null));
             setGraduatingYear(toCopy.graduatingYear);
             setCourse(toCopy.course);
             setSpecialisation(toCopy.specialisation);
@@ -181,9 +180,9 @@ public class EditCommand extends Command {
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, graduatingYear, course,
                         specialisation, tags, priority)
-                    || (phones.isPresent() && !phones.get().isEmpty())
-                    || (emails.isPresent() && !emails.get().isEmpty())
-                    || (links.isPresent() && !links.get().isEmpty());
+                    || (phones != null && !phones.isEmpty())
+                    || (emails != null && !emails.isEmpty())
+                    || (links != null && !links.isEmpty());
         }
 
         public void setName(Name name) {
@@ -195,72 +194,69 @@ public class EditCommand extends Command {
         }
 
         public void setPhones(UniqueList<Phone> phones) {
-            this.phones = Optional.ofNullable(phones);
+            this.phones = phones;
         }
 
         /**
          * Adds {@code phone} to the list of {@code Phone}s.
-         * @param phone
          */
         public void addPhone(Phone phone) {
-            this.phones = this.phones.map(phones -> {
+            this.phones = Optional.ofNullable(this.phones).map(phones -> {
                 phones.add(phone);
                 return phones;
             }).or(() -> {
                 UniqueList<Phone> uniqueList = new UniqueList<>();
                 uniqueList.add(phone);
                 return Optional.of(uniqueList);
-            });
+            }).get();
         }
 
         public Optional<UniqueList<Phone>> getPhones() {
-            return phones;
+            return Optional.ofNullable(phones);
         }
 
         public void setEmails(UniqueList<Email> emails) {
-            this.emails = Optional.ofNullable(emails);
+            this.emails = emails;
         }
 
         /**
          * Adds {@code email} to the list of {@code emails}
-         * @param email
          */
         public void addEmail(Email email) {
-            this.emails = this.emails.map(emails -> {
+            this.emails = Optional.ofNullable(this.emails).map(emails -> {
                 emails.add(email);
                 return emails;
             }).or(() -> {
                 UniqueList<Email> uniqueList = new UniqueList<>();
                 uniqueList.add(email);
                 return Optional.of(uniqueList);
-            });
+            }).get();
         }
 
         public Optional<UniqueList<Email>> getEmails() {
-            return emails;
+            return Optional.ofNullable(emails);
         }
 
         public void setLinks(UniqueList<Link> links) {
-            this.links = Optional.ofNullable(links);
+            this.links = links;
         }
 
         /**
          * Adds {@code link} to the list of {@code links}.
-         * @param link
          */
         public void addLink(Link link) {
-            this.links = this.links.map(links -> {
+            this.links = Optional.ofNullable(this.links).map(links -> {
                 links.add(link);
                 return links;
             }).or(() -> {
                 UniqueList<Link> uniqueList = new UniqueList<>();
                 uniqueList.add(link);
                 return Optional.of(uniqueList);
-            });
+            }).get();
         }
 
         public Optional<UniqueList<Link>> getLinks() {
-            return links;
+            return Optional.ofNullable(links);
         }
 
         public void setGraduatingYear(GraduatingYear graduatingYear) {
@@ -339,9 +335,9 @@ public class EditCommand extends Command {
         public String toString() {
             ToStringBuilder tsb = new ToStringBuilder(this)
                     .add("name", name)
-                    .add("phones", phones.orElse(null))
-                    .add("emails", emails.orElse(null))
-                    .add("links", links.orElse(null))
+                    .add("phones", phones)
+                    .add("emails", emails)
+                    .add("links", links)
                     .add("graduating year", graduatingYear)
                     .add("course", course)
                     .add("specialisation", specialisation)

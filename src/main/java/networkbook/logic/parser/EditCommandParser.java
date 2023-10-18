@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -40,7 +41,8 @@ public class EditCommandParser implements Parser<EditCommand> {
                         CliSyntax.PREFIX_GRADUATING_YEAR,
                         CliSyntax.PREFIX_COURSE,
                         CliSyntax.PREFIX_SPECIALISATION,
-                        CliSyntax.PREFIX_TAG
+                        CliSyntax.PREFIX_TAG,
+                        CliSyntax.PREFIX_INDEX
                 );
 
         Index index;
@@ -59,12 +61,18 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(
                 CliSyntax.PREFIX_NAME,
-                CliSyntax.PREFIX_PHONE,
-                CliSyntax.PREFIX_EMAIL,
-                CliSyntax.PREFIX_LINK,
                 CliSyntax.PREFIX_GRADUATING_YEAR,
                 CliSyntax.PREFIX_COURSE,
                 CliSyntax.PREFIX_SPECIALISATION
+        );
+
+        argMultimap.verifyNecessaryPrefixesArePresent(
+                new Prefix[] {
+                        CliSyntax.PREFIX_PHONE,
+                        CliSyntax.PREFIX_EMAIL,
+                        CliSyntax.PREFIX_LINK
+                },
+                CliSyntax.PREFIX_INDEX
         );
 
         EditPersonDescriptor editPersonDescriptor = generateEditPersonDescriptor(argMultimap);
@@ -165,6 +173,15 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
+    }
+
+    private static Optional<List<Index>> parseIndicesForEdit(Collection<String> indices) throws ParseException {
+        requireNonNull(indices);
+
+        if (indices.isEmpty()) {
+            return Optional.empty();
+        }
+        return Optional.of(ParserUtil.parseIndices(indices));
     }
 
 }

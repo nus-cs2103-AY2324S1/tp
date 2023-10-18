@@ -15,5 +15,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_SPECIALISATION = new Prefix("/spec");
     public static final Prefix PREFIX_TAG = new Prefix("/tag");
     public static final Prefix PREFIX_PRIORITY = new Prefix("/priority");
+    public static final Prefix PREFIX_INDEX = new Prefix("/index");
 
 }

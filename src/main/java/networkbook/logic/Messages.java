@@ -22,7 +22,9 @@ public class Messages {
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
-                "Multiple values specified for the following single-valued field(s): ";
+            "Multiple values specified for the following single-valued field(s): ";
+    private static final String MESSAGE_FIELDS_MUST_BE_PRESENT =
+            "The total number of fields of %s, which is %d, must match the number of fields of %s";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -34,6 +36,13 @@ public class Messages {
                 Stream.of(duplicatePrefixes).map(Prefix::toString).collect(Collectors.toSet());
 
         return MESSAGE_DUPLICATE_FIELDS + String.join(" ", duplicateFields);
+    }
+
+    public static String getErrorMessageForPrefixMustBePresent(
+            Prefix[] prefixesIfPresent, Prefix prefixThenPresent, int totalCount) {
+        String prefixesString = Stream.of(prefixesIfPresent).map(Prefix::toString).reduce("", (u, v) -> u + " " + v);
+        return String.format(MESSAGE_FIELDS_MUST_BE_PRESENT,
+                String.join(" ", prefixesString), totalCount, prefixThenPresent.toString());
     }
 
     /**
