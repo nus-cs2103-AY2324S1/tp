@@ -67,10 +67,12 @@ public class UniqueBandList implements Iterable<Band> {
 
         internalList.set(index, editedBand);
     }
+  
     public void setBand(UniqueBandList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
+  
     /**
      * Replaces the contents of this list with {@code musicians}.
      * {@code musicians} must not contain duplicate musicians.
@@ -83,6 +85,7 @@ public class UniqueBandList implements Iterable<Band> {
 
         internalList.setAll(band);
     }
+  
     /**
      * Removes the equivalent musician from the list.
      * The musician must exist in the list.
@@ -93,6 +96,7 @@ public class UniqueBandList implements Iterable<Band> {
             throw new BandNotFoundException();
         }
     }
+  
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
