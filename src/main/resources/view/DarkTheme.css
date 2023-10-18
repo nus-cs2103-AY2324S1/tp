@@ -320,7 +320,7 @@
 #commandTextField {
     -fx-background-color: #ecededff; /* command line box bg color */
     -fx-background-insets: 0;
-    -fx-border-color: #ecededff; /* command box outline */
+    -fx-border-color: white; /* command box outline */
     -fx-border-insets: 0;
     -fx-border-width: 1;
     -fx-font-family: "Segoe UI Light";
