@@ -16,22 +16,23 @@ import transact.model.transaction.info.TransactionType;
 public class TypicalTransactions {
     public static final Transaction APPLES = new Transaction(TransactionType.EXPENSE,
             new Description("Apples"),
-            new Amount(1.50), new Date(), ALICE);
+            new Amount(1.50), new Date("15/11/2018"), ALICE);
     public static final Transaction BANANAS = new Transaction(TransactionType.EXPENSE,
             new Description("Bananas"),
-            new Amount(1.50), new Date(), null);
+            new Amount(1.50), new Date("15/11/2018"));
     public static final Transaction CARROTS = new Transaction(TransactionType.EXPENSE,
             new Description("Carrots"),
-            new Amount(1.50), new Date(), null);
+            new Amount(1.50), new Date("15/11/2018"));
     public static final Transaction DATES = new Transaction(TransactionType.EXPENSE,
             new Description("Dates"),
-            new Amount(4.50), new Date(), null);
+            new Amount(4.50), new Date("15/11/2018"));
     public static final Transaction EGGS = new Transaction(TransactionType.EXPENSE,
             new Description("Eggs"),
-            new Amount(5.00), new Date(), null);
+            new Amount(5.00), new Date("15/11/2018"));
     public static final Transaction FISH = new Transaction(TransactionType.REVENUE,
             new Description("Fish"),
-            new Amount(6.50), new Date(), null);
+            new Amount(6.50), new Date("15/11/2018"));
+
 
     /**
      * Returns a {@code TransactionBook} with all the typical transactions.

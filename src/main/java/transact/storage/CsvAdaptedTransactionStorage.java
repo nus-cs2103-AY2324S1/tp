@@ -14,7 +14,6 @@ import com.opencsv.exceptions.CsvValidationException;
 
 import transact.commons.exceptions.DataLoadingException;
 import transact.logic.parser.ParserUtil;
-import transact.logic.parser.exceptions.ParseException;
 import transact.model.ReadOnlyTransactionBook;
 import transact.model.TransactionBook;
 import transact.model.transaction.Transaction;
@@ -65,18 +64,17 @@ public class CsvAdaptedTransactionStorage implements TransactionBookStorage {
                     TransactionType transactionType = ParserUtil.parseType(row[1]);
                     Description description = ParserUtil.parseDescription(row[2]);
                     Amount amount = ParserUtil.parseAmount(row[3]);
-                    // TODO Read in date when ready
-                    // Date date = ParserUtil.parseDate(row[4]);
+                    Date date = ParserUtil.parseDate(row[4]);
 
                     // TODO Read in optional staff when ready
                     // Person person = ParserUtil.parsePerson(null);
 
-                    Transaction t = new Transaction(transactionId, transactionType, description, amount, new Date(),
-                            null);
+                    Transaction t = new Transaction(transactionId, transactionType, description, amount, date);
 
                     transactions.addTransaction(t);
 
-                } catch (ParseException e) {
+                } catch (Exception e) {
+                    // Skip if error with a line
                     // TODO Warn user of malformed data
                 }
             }

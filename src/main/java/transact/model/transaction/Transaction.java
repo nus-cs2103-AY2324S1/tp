@@ -1,7 +1,5 @@
 package transact.model.transaction;
 
-import static transact.commons.util.AppUtil.checkArgument;
-
 import java.util.Objects;
 
 import transact.commons.util.ToStringBuilder;
@@ -59,6 +57,42 @@ public class Transaction implements Entry {
      *            The amount of the transaction.
      * @param date
      *            The date of the transaction.
+     */
+    public Transaction(TransactionId transactionId, TransactionType transactionType, Description description,
+            Amount amount, Date date) {
+        this(transactionId, transactionType, description, amount, date, Person.NullPerson);
+    }
+
+    /**
+     * Creates a new Transaction.
+     *
+     * @param transactionType
+     *            The transaction type of the transaction.
+     * @param description
+     *            The description of the transaction.
+     * @param amount
+     *            The amount of the transaction.
+     * @param date
+     *            The date of the transaction.
+     */
+    public Transaction(TransactionType transactionType, Description description,
+            Amount amount, Date date) {
+        this(new TransactionId(), transactionType, description, amount, date);
+    }
+
+    /**
+     * Creates a new Transaction.
+     *
+     * @param transactionId
+     *            The unique transaction ID.
+     * @param transactionType
+     *            The transaction type of the transaction.
+     * @param description
+     *            The description of the transaction.
+     * @param amount
+     *            The amount of the transaction.
+     * @param date
+     *            The date of the transaction.
      * @param person
      *            The person associated with the transaction.
      */
@@ -77,11 +111,11 @@ public class Transaction implements Entry {
     }
 
     public Boolean hasPersonInfo() {
-        return this.person != null;
+        return person != Person.NullPerson;
     }
 
     public Person getPerson() {
-        checkArgument(hasPersonInfo(), MESSAGE_CONSTRAINTS);
+        // checkArgument(hasPersonInfo(), MESSAGE_CONSTRAINTS);
         return person;
     }
 
@@ -94,7 +128,7 @@ public class Transaction implements Entry {
     }
 
     public Date getDate() {
-        return new Date();
+        return date;
     }
 
     public TransactionType getTransactionType() {

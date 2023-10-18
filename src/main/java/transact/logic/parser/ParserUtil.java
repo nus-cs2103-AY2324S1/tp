@@ -198,7 +198,7 @@ public class ParserUtil {
         if (!Date.isValidDate(trimmedDate)) {
             throw new ParseException(Date.MESSAGE_CONSTRAINTS);
         }
-        return new Date();
+        return new Date(trimmedDate);
     }
 
     /**
@@ -211,6 +211,7 @@ public class ParserUtil {
     public static Person parsePerson(String id) throws ParseException {
         requireNonNull(id);
         String trimmedID = id.trim();
+        // TODO Parse Correctly
         return new Person(null, null, null, null, null);
     }
 }
