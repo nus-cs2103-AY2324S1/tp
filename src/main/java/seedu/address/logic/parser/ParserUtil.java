@@ -142,6 +142,9 @@ public class ParserUtil {
         return groupSet;
     }
 
+    /**
+     * Parses {@code Collection<String> names} into a {@code Set<Name>}.
+     */
     public static Set<Name> parsePersonNames(Collection<String> names) throws ParseException {
         requireNonNull(names);
         final Set<Name> nameSet = new HashSet<>();

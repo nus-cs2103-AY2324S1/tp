@@ -1,6 +1,10 @@
 package seedu.address.storage;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -30,23 +34,26 @@ public class JsonAdaptedEvent {
     private final String startTime;
     private final String endTime;
 
-    private final List<JsonAdaptedName> names = new ArrayList<>();
+    private final List<JsonAdaptedName> assignedPersons = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedMeeting} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedEvent(@JsonProperty("eventType") String eventType, @JsonProperty("name") String name,
-                            @JsonProperty("date") String date, @JsonProperty("startTime") String startTime,
-                            @JsonProperty("endTime") String endTime, @JsonProperty("names") List<JsonAdaptedName> names) {
+    public JsonAdaptedEvent(@JsonProperty("eventType") String eventType,
+                            @JsonProperty("name") String name,
+                            @JsonProperty("date") String date,
+                            @JsonProperty("startTime") String startTime,
+                            @JsonProperty("endTime") String endTime,
+                            @JsonProperty("assignedPersons") List<JsonAdaptedName> assignedPersons) {
         this.eventType = eventType;
         this.name = name;
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
 
-        if (names != null) {
-            this.names.addAll(names);
+        if (assignedPersons != null) {
+            this.assignedPersons.addAll(assignedPersons);
         }
     }
 
@@ -60,7 +67,7 @@ public class JsonAdaptedEvent {
         this.startTime = source.hasStartTime() ? source.getStartTime().toString() : "";
         this.endTime = source.hasEndTime() ? source.getEndTime().toString() : "";
 
-        this.names.addAll(source.getNames().stream()
+        this.assignedPersons.addAll(source.getNames().stream()
                 .map(JsonAdaptedName::new)
                 .collect(Collectors.toList()));
     }
@@ -74,7 +81,7 @@ public class JsonAdaptedEvent {
 
         final List<Name> personNames = new ArrayList<>();
 
-        for (JsonAdaptedName name : names) {
+        for (JsonAdaptedName name : assignedPersons) {
             personNames.add(name.toModelType());
         }
 

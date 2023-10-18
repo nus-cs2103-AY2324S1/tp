@@ -36,19 +36,8 @@ public abstract class Event {
      * @param startTime start time of the event
      * @param endDate  end date of the event
      * @param endTime end time of the event
+     * @param names names of the people attending the event
      */
-    public Event(EventType eventType, EventName name, EventDate startDate, Optional<EventTime> startTime,
-                 EventDate endDate, Optional<EventTime> endTime) {
-
-        this.eventType = eventType;
-        this.name = name;
-        this.startDate = startDate;
-        this.startTime = startTime;
-        this.endDate = endDate;
-        this.endTime = endTime;
-
-    }
-
     public Event(EventType eventType, EventName name, EventDate startDate, Optional<EventTime> startTime,
                  EventDate endDate, Optional<EventTime> endTime, Set<Name> names) {
 

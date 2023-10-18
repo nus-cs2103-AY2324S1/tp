@@ -89,7 +89,7 @@ public class Messages {
                 builder.append(name.toString());
                 builder.append(", ");
             }
-            builder.delete(builder.length() - 2, builder.length());  //removes the last comma
+            builder.delete(builder.length() - 2, builder.length()); //removes the last comma
         }
 
         return builder.toString();

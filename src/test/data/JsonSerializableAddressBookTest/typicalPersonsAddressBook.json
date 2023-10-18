@@ -55,6 +55,7 @@
     "name" : "tp",
     "date" : "2023-10-30",
     "startTime" : "1300",
-    "endTime" : "1400"
+    "endTime" : "1400",
+    "assignedPersons" : [ "Alice Pauline", "Benson Meier" ]
   } ]
 }

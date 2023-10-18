@@ -1,6 +1,16 @@
 package seedu.address.logic.commands;
 
-import java.util.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
+
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -14,7 +24,7 @@ import seedu.address.model.event.EventName;
 import seedu.address.model.event.EventTime;
 import seedu.address.model.event.Meeting;
 import seedu.address.model.person.Name;
-import static seedu.address.logic.parser.CliSyntax.*;
+
 
 
 /**
@@ -83,7 +93,8 @@ public class EditMeetingCommand extends Command {
      * @return meeting with the appropriate details edited
      */
     private static Event createEditedMeeting(Event meetingToEdit,
-                                               EditMeetingDescriptor editMeetingDescriptor, Model model) throws CommandException {
+                                             EditMeetingDescriptor editMeetingDescriptor,
+                                             Model model) throws CommandException {
         assert meetingToEdit != null;
 
         EventName updatedName = editMeetingDescriptor.getName().orElse(meetingToEdit.getName());
@@ -120,7 +131,8 @@ public class EditMeetingCommand extends Command {
             builder.append(name.toString());
             builder.append(", ");
         }
-        builder.delete(builder.length() - 2, builder.length());  //removes the last comma
+
+        builder.delete(builder.length() - 2, builder.length()); //removes the last comma
         return builder.toString();
     }
 
@@ -234,7 +246,7 @@ public class EditMeetingCommand extends Command {
         }
 
         public void setPersonNames(Set<Name> names) {
-            this.names = (names!= null) ? new HashSet<>(names) : null;
+            this.names = (names != null) ? new HashSet<>(names) : null;
         }
 
         public Optional<Set<Name>> getPersonNames() {
