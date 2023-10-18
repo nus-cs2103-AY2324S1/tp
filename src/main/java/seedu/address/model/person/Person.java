@@ -169,6 +169,10 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
+                && telegram.equals(otherPerson.telegram)
+                && linkedin.equals(otherPerson.linkedin)
+                && birthday.equals(otherPerson.birthday)
+                && secondaryEmail.equals(otherPerson.secondaryEmail)
                 && tags.equals(otherPerson.tags);
     }
 

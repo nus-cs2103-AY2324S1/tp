@@ -93,6 +93,22 @@ public class PersonTest {
         // different tags -> returns false
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
+
+        // different birthday -> returns false
+        editedAlice = new PersonBuilder(ALICE).withBirthday(MonthDay.of(6, 9)).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different linkedin -> returns false
+        editedAlice = new PersonBuilder(ALICE).withLinkedin("linkedin").build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different secondaryEmail -> returns false
+        editedAlice = new PersonBuilder(ALICE).withSecondaryEmail("alice@hotmail.com").build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different telegram -> returns false
+        editedAlice = new PersonBuilder(ALICE).withTelegram("@telegram").build();
+        assertFalse(ALICE.equals(editedAlice));
     }
 
     @Test
