@@ -113,43 +113,6 @@ Expected output (fail):
 | `availability/Available` with `animalType/` values set to other values which are NOT ‘able.Cat’ or ‘able.Dog’          | `If fosterer is available, animal type should be 'able.Dog' / 'able.Cat'. If fosterer is NOT available, animal type should be 'current.Dog' / 'current.Cat'. If animal type information is not available, it should be inputted as 'nil'.`                                                                     |
 | `availability/NotAvailable` with `animalType/` values set to other values which are NOT ‘current.Cat’ or ‘current.Dog' | `If fosterer is available, animal type should be 'able.Dog' / 'able.Cat'. If fosterer is NOT available, animal type should be 'current.Dog' / 'current.Cat'. If animal type information is not available, it should be inputted as 'nil'.`                                                                     |
 
-### Editing a fosterer's detail : `edit`
-
-Edits the details of a fosterer stored in the address book.
-
-**Format**: `edit INDEX`
-
-**Alias: `view`**
-
-**Parameter**: `INDEX`
-
-* Index of a fosterer to be edited is shown in the list obtained by the find/list command.
-
-**Examples**:
-*  `list` followed by `edit 3` or `view 3` generates the edit-window for the 3rd fosterer in the address book.
-
-**How to Edit**:
-1. Type in `list` command to see the list of fosterers in the address book.
-2. Type `edit INDEX` to edit the details of the fosterer with the corresponding INDEX in the list. 
-3. Type in the command line to search the list of fields, and press enter to edit the first match. This creates a text field around the detail corresponding to the chosen field.
-4. Edit the content of the detail and press enter to confirm the changes, or the esc key to cancel them. 
-5. Repeat step 4-5 until you made all your edits. 
-6. While the command line is empty, press enter to save all applied changes to all fields, or the esc key to revert them to before the edit command. Both will send you back to the home window.
-
-**Expected Output (success)**:
-```
-Edit Success! 
-```
-
-**Expected Output (failure)**:
-1. Compulsory fields are not filled in
-```
-Edit failed: Compulsory fields are not filled in!
-```
-2. System Error
-```
-Edit failed: There seems to be an error, please check your fields again.
-```
 ### Listing fosterers: `list`
 
 Lists fosterers that match a particular description or search, or all fosterers if the search is blank.
@@ -179,6 +142,92 @@ UI also updates with a list of fosterers matching the query.
 Expected output (fail):
 ```agsl
 Oops! Invalid search expression, please check again.
+```
+
+### Viewing a fosterer's detail : `view`
+
+Views a fosterer's full details in the profile page. 
+
+Format: `view INDEX`
+
+Parameters:
+* `INDEX`: Index of a fosterer to view their details shown in the list obtained by the find/list command
+
+<div markdown="span" class="alert alert-primary">
+  :exclamation: <b>Important:</b>
+Some commands are not available while on profile view page. 
+The list of available commands are: 
+<ul>
+  <li> <code>help</code> </li>
+  <li> <code>edit</code> </li>
+  <li> <code>exit</code> command to <b>exit the profile view page</b> </li>
+</ul>
+</div> 
+
+Example:
+* `list` followed by `view 2` to view the profile of the 2nd fosterer in the address book.
+
+Expected output (success):
+```agsl
+Viewing Person: Jerry Tan; Phone: 98765412; Email: jerry123@example.com; Address: Baker street, block 5, #27-01; Housing: HDB; Availability: NotAvailable; Animal name: Dexter; Animal type: current.Cat; Tags: [Urgent]
+```
+Expected output (fail):
+```agsl
+Oops! Invalid fosterer index provided, please check again.
+```
+### Editing a fosterer's detail : `edit`
+
+Edits or views the details of a fosterer stored in the address book.
+
+Format 1: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [housing/HOUSING_TYPE] [availability/AVAILABILITY] [animal/ANIMAL_NAME] [animalType/TYPE_OF_ANIMAL_FOSTERED/WANTED] [t/TAG…]`
+
+Format 2: `edit INDEX`
+
+Parameters:
+* `INDEX`: Index of a fosterer to be edited shown in the list obtained by the find/list command
+* `NAME`: New name of the fosterer 
+* `PHONE_NUMBER`: New phone number of the fosterer
+* `EMAIL`: New email of the fosterer
+* `ADDRESS`: New address of the foster family
+* `HOUSING_TYPE` (case-sensitive) : HDB / Condo / Landed / nil
+* `AVAILABILITY` (case-sensitive) : Available / NotAvailable / nil
+* `ANIMAL_NAME`
+  * `ANIMAL_NAME` (if `availability/NotAvailable`) : New name of animal fostered
+  * `ANIMAL_NAME` (if `availability/nil`) : nil
+  * `ANIMAL_NAME` (if `availability/Available`) : nil
+* `TYPE_OF_ANIMAL_FOSTERED/WANTED` (case-sensitive) :
+  * `TYPE_OF_ANIMAL_FOSTERED` (if `availability/NotAvailable`) : current.Dog / current.Cat / nil
+  * `TYPE_OF_ANIMAL_WANTED` (if `availability/Available`) : able.Dog / able.Cat / nil
+  * `TYPE_OF_ANIMAL_FOSTERED/WANTED` (if `availability/nil`) : nil
+
+<div markdown="span" class="alert alert-primary">
+  :bulb: <b>Tip:</b>
+The index of the fosterer has to be provided, however the number of parameters to be edited can vary from zero to all fields.
+</div> <br>
+<div markdown="span" class="alert alert-primary">
+  :exclamation: <b>Important:</b>
+If the parameters are not provided, <b><code>edit INDEX</code> operates the same way as <code>view INDEX</code></b>, leading you to the profile page of the person at index <code>INDEX</code> in the addressbook. 
+</div> 
+<br>
+
+Examples:
+*  `list` followed by `edit 3 n/John` edits the name of the 3rd fosterer in the address book to John.
+*  `list` followed by `edit 1 p/12345678 animal/Bob` edits the phone number and the pet name of the 1st fosterer in the address book to 12345678 and Bob respectively.
+*  `list` followed by `edit 2` changes the view to the profile page of the 2nd fosterer in the address book since parameters are not provided.
+
+Expected Output (success):
+```
+Foster family details successfully edited!
+```
+
+Expected Output (failure):
+1. Compulsory fields are not filled in
+```
+Oops! Compulsory fields are not filled in!
+```
+2. System Error
+```
+Oops! There seems to be an error, please check your fields again.
 ```
 
 ### Deleting a fosterer : `delete`
@@ -218,6 +267,11 @@ Format: `reset`
 Exits the program.
 
 Format: `exit`
+
+<div markdown="span" class="alert alert-primary">
+  :bulb: <b>Tip:</b>
+  As mentioned in the <code>view</code>, <code>exit</code> exits the program when executed on the normal foster family list view, while on the profile view page you are exited out of the page back to the list view. 
+</div>
 
 ### Saving the data
 
