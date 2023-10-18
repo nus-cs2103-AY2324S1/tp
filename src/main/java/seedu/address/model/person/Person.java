@@ -207,7 +207,7 @@ public class Person {
     /**
      * Returns true if the person has same primary and secondary email.
      */
-    public boolean hasSameEmail() {
+    public boolean hasRepeatedEmail() {
         if (secondaryEmail.equals(Optional.empty())) {
             return false;
         }

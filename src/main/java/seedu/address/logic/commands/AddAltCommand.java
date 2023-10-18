@@ -110,7 +110,7 @@ public class AddAltCommand extends Command {
                 || (personToEdit.hasValidSecondaryEmail() && addAltPersonDescriptor.hasValidSecondaryEmail())
                 || (personToEdit.hasValidTelegram() && addAltPersonDescriptor.hasValidTelegram())) {
             throw new CommandException(String.format(MESSAGE_ADDALT_FAILURE, name));
-        } else if (updatedPerson.hasSameEmail()) {
+        } else if (updatedPerson.hasRepeatedEmail()) {
             throw new CommandException(String.format(MESSAGE_ADDALT_DUPLICATE_EMAIL, name));
         } else {
             return updatedPerson;
