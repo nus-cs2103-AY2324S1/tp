@@ -18,7 +18,7 @@ import java.util.List;
 import seedu.address.model.applicant.Applicant;
 
 /**
- * A utility class containing a list of {@code Person} objects to be used in tests.
+ * A utility class containing a list of {@code Applicant} objects to be used in tests.
  */
 public class TypicalApplicants {
 
@@ -51,7 +51,7 @@ public class TypicalApplicants {
     public static final Applicant IDA = new ApplicantBuilder().withName("Ida Mueller").withPhone("8482131")
             .withEmail("hans@example.com").withAddress("chicago ave").build();
 
-    // Manually added - Person's details found in {@code CommandTestUtil}
+    // Manually added - Applicant's details found in {@code CommandTestUtil}
     public static final Applicant AMY = new ApplicantBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND).build();
     public static final Applicant BOB = new ApplicantBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)

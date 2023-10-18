@@ -1,7 +1,6 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
@@ -19,7 +18,8 @@ public class JsonSerializableAddressBookTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonSerializableAddressBookTest");
     private static final Path TYPICAL_APPLICANTS_FILE = TEST_DATA_FOLDER.resolve("typicalAddressBook.json");
     private static final Path INVALID_APPLICANTS_FILE = TEST_DATA_FOLDER.resolve("invalidApplicantAddressBook.json");
-    private static final Path DUPLICATE_APPLICANTS_FILE = TEST_DATA_FOLDER.resolve("duplicateApplicantAddressBook.json");
+    private static final Path DUPLICATE_APPLICANTS_FILE =
+            TEST_DATA_FOLDER.resolve("duplicateApplicantAddressBook.json");
 
     @Test
     public void toModelType_typicalAddressBookFile_success() throws Exception {
