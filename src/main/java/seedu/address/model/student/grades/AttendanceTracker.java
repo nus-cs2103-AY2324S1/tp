@@ -82,5 +82,4 @@ public class AttendanceTracker {
     public int hashCode() {
         return Arrays.hashCode(attendanceList);
     }
-
 }
