@@ -2,6 +2,7 @@ package seedu.application.testutil;
 
 import seedu.application.logic.commands.EditCommand.EditJobDescriptor;
 import seedu.application.model.job.Company;
+import seedu.application.model.job.Deadline;
 import seedu.application.model.job.Job;
 import seedu.application.model.job.Role;
 
@@ -27,6 +28,7 @@ public class EditJobDescriptorBuilder {
         descriptor = new EditJobDescriptor();
         descriptor.setRole(job.getRole());
         descriptor.setCompany(job.getCompany());
+        descriptor.setDeadline(job.getDeadline());
     }
 
     /**
@@ -42,6 +44,14 @@ public class EditJobDescriptorBuilder {
      */
     public EditJobDescriptorBuilder withCompany(String company) {
         descriptor.setCompany(new Company(company));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Deadline} of the {@code EditJobDescriptor} that we are building.
+     */
+    public EditJobDescriptorBuilder withDeadline(String deadline) {
+        descriptor.setDeadline(new Deadline(deadline));
         return this;
     }
 

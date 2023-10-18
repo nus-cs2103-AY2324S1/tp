@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.application.logic.commands.CommandTestUtil.DESC_CHEF;
 import static seedu.application.logic.commands.CommandTestUtil.DESC_CLEANER;
 import static seedu.application.logic.commands.CommandTestUtil.VALID_COMPANY_CLEANER;
+import static seedu.application.logic.commands.CommandTestUtil.VALID_DEADLINE_CLEANER;
 import static seedu.application.logic.commands.CommandTestUtil.VALID_ROLE_CLEANER;
 
 import org.junit.jupiter.api.Test;
@@ -40,14 +41,19 @@ public class EditJobDescriptorTest {
         // different company -> returns false
         editedChef = new EditJobDescriptorBuilder(DESC_CHEF).withCompany(VALID_COMPANY_CLEANER).build();
         assertFalse(DESC_CHEF.equals(editedChef));
+
+        // different deadline -> returns false
+        editedChef = new EditJobDescriptorBuilder(DESC_CHEF).withDeadline(VALID_DEADLINE_CLEANER).build();
+        assertFalse(DESC_CHEF.equals(editedChef));
     }
 
     @Test
     public void toStringMethod() {
         EditJobDescriptor editJobDescriptor = new EditJobDescriptor();
         String expected = EditJobDescriptor.class.getCanonicalName() + "{company="
-                + editJobDescriptor.getCompany().orElse(null) + ", role="
-                + editJobDescriptor.getRole().orElse(null) + "}";
+            + editJobDescriptor.getCompany().orElse(null) + ", role="
+            + editJobDescriptor.getRole().orElse(null) + ", deadline="
+            + editJobDescriptor.getDeadline().orElse(null) + "}";
         assertEquals(expected, editJobDescriptor.toString());
     }
 }

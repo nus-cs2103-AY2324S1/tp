@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.application.logic.commands.CommandTestUtil.DESC_CHEF;
 import static seedu.application.logic.commands.CommandTestUtil.DESC_CLEANER;
 import static seedu.application.logic.commands.CommandTestUtil.VALID_COMPANY_CLEANER;
+import static seedu.application.logic.commands.CommandTestUtil.VALID_DEADLINE_CLEANER;
 import static seedu.application.logic.commands.CommandTestUtil.VALID_ROLE_CLEANER;
 import static seedu.application.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.application.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -54,10 +55,10 @@ public class EditCommandTest {
         Job lastJob = model.getFilteredJobList().get(indexLastJob.getZeroBased());
 
         JobBuilder jobInList = new JobBuilder(lastJob);
-        Job editedJob = jobInList.withRole(VALID_ROLE_CLEANER).withCompany(VALID_COMPANY_CLEANER).build();
+        Job editedJob = jobInList.withRole(VALID_ROLE_CLEANER).withCompany(VALID_COMPANY_CLEANER).withDeadline(VALID_DEADLINE_CLEANER).build();
 
         EditJobDescriptor descriptor = new EditJobDescriptorBuilder().withRole(VALID_ROLE_CLEANER)
-                .withCompany(VALID_COMPANY_CLEANER).build();
+            .withCompany(VALID_COMPANY_CLEANER).withDeadline(VALID_DEADLINE_CLEANER).build();
         EditCommand editCommand = new EditCommand(indexLastJob, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_JOB_SUCCESS, Messages.format(editedJob));
@@ -87,7 +88,7 @@ public class EditCommandTest {
         Job jobInFilteredList = model.getFilteredJobList().get(INDEX_FIRST_JOB.getZeroBased());
         Job editedJob = new JobBuilder(jobInFilteredList).withRole(VALID_ROLE_CLEANER).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_JOB,
-                new EditJobDescriptorBuilder().withRole(VALID_ROLE_CLEANER).build());
+            new EditJobDescriptorBuilder().withRole(VALID_ROLE_CLEANER).build());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_JOB_SUCCESS, Messages.format(editedJob));
 
@@ -113,7 +114,7 @@ public class EditCommandTest {
         // edit job in filtered list into a duplicate in application book
         Job jobInList = model.getApplicationBook().getJobList().get(INDEX_SECOND_JOB.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_JOB,
-                new EditJobDescriptorBuilder(jobInList).build());
+            new EditJobDescriptorBuilder(jobInList).build());
 
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_JOB);
     }
@@ -139,7 +140,7 @@ public class EditCommandTest {
         assertTrue(outOfBoundIndex.getZeroBased() < model.getApplicationBook().getJobList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
-                new EditJobDescriptorBuilder().withRole(VALID_ROLE_CLEANER).build());
+            new EditJobDescriptorBuilder().withRole(VALID_ROLE_CLEANER).build());
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_JOB_DISPLAYED_INDEX);
     }
@@ -175,7 +176,7 @@ public class EditCommandTest {
         EditJobDescriptor editJobDescriptor = new EditJobDescriptor();
         EditCommand editCommand = new EditCommand(index, editJobDescriptor);
         String expected = EditCommand.class.getCanonicalName() + "{index=" + index + ", editJobDescriptor="
-                + editJobDescriptor + "}";
+            + editJobDescriptor + "}";
         assertEquals(expected, editCommand.toString());
     }
 
