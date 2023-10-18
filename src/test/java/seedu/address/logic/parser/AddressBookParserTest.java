@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.Messages.MESSAGE_CLASS_MANAGER_ALREADY_CONFIGURED;
+import static seedu.address.logic.Messages.MESSAGE_CLASS_MANAGER_NOT_CONFIGURED;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_COUNT;
@@ -114,6 +116,12 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_config_throwsParseException() throws Exception {
+        assertThrows(ParseException.class, MESSAGE_CLASS_MANAGER_ALREADY_CONFIGURED, ()
+                -> parser.parseCommand("config", true));
+    }
+
+    @Test
     public void parseCommandNotConfigured_config() throws Exception {
         ConfigCommand command = (ConfigCommand) parser.parseCommand(ConfigCommand.COMMAND_WORD + " "
                 + PREFIX_TUTORIAL_COUNT + "5" + " " + PREFIX_ASSIGNMENT_COUNT + 2, false);
@@ -133,13 +141,13 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommandNotConfigured_unrecognisedInput_throwsParseException() {
-        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-                -> parser.parseCommand("", false));
+    public void parseCommand_unknownCommand_throwsParseException() {
+        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand", true));
     }
 
     @Test
-    public void parseCommand_unknownCommand_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand", true));
+    public void parseCommandNotConfigured_unknownCommand_throwsParseException() {
+        assertThrows(ParseException.class, MESSAGE_CLASS_MANAGER_NOT_CONFIGURED, ()
+                -> parser.parseCommand("unknownCommand", false));
     }
 }
