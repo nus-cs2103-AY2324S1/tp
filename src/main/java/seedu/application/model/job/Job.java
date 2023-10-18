@@ -21,7 +21,7 @@ public class Job {
      * Not all fields are compulsory
      */
     public Job(Role role, Company company, Status status, Deadline deadline) {
-        CollectionUtil.requireAllNonNull(role, company, deadline);
+        CollectionUtil.requireAllNonNull(role, company);
         this.role = role;
         this.company = company;
         this.status = status;
@@ -54,8 +54,8 @@ public class Job {
         }
 
         return otherJob != null
-                && otherJob.getRole().equals(getRole())
-                && otherJob.getCompany().equals(getCompany());
+            && otherJob.getRole().equals(getRole())
+            && otherJob.getCompany().equals(getCompany());
     }
 
     /**
@@ -75,9 +75,9 @@ public class Job {
 
         Job otherJob = (Job) other;
         return role.equals(otherJob.role)
-                && company.equals(otherJob.company)
-                && status.equals(otherJob.status)
-                && deadline.equals(otherJob.deadline);
+            && company.equals(otherJob.company)
+            && status.equals(otherJob.status)
+            && deadline.equals(otherJob.deadline);
     }
 
     @Override
@@ -89,10 +89,10 @@ public class Job {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("role", role)
-                .add("company", company)
-                .add("status", status)
-                .add("deadline", deadline)
-                .toString();
+            .add("role", role)
+            .add("company", company)
+            .add("status", status)
+            .add("deadline", deadline)
+            .toString();
     }
 }

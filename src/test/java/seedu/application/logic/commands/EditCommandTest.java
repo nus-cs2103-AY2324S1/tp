@@ -55,10 +55,30 @@ public class EditCommandTest {
         Job lastJob = model.getFilteredJobList().get(indexLastJob.getZeroBased());
 
         JobBuilder jobInList = new JobBuilder(lastJob);
-        Job editedJob = jobInList.withRole(VALID_ROLE_CLEANER).withCompany(VALID_COMPANY_CLEANER).withDeadline(VALID_DEADLINE_CLEANER).build();
+        Job editedJob = jobInList.withRole(VALID_ROLE_CLEANER)
+            .withCompany(VALID_COMPANY_CLEANER).withDeadline(VALID_DEADLINE_CLEANER).build();
 
         EditJobDescriptor descriptor = new EditJobDescriptorBuilder().withRole(VALID_ROLE_CLEANER)
             .withCompany(VALID_COMPANY_CLEANER).withDeadline(VALID_DEADLINE_CLEANER).build();
+        EditCommand editCommand = new EditCommand(indexLastJob, descriptor);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_JOB_SUCCESS, Messages.format(editedJob));
+
+        Model expectedModel = new ModelManager(new ApplicationBook(model.getApplicationBook()), new UserPrefs());
+        expectedModel.setJob(lastJob, editedJob);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_onlyNonCompulsoryFieldsSpecifiedUnfilteredList_success() {
+        Index indexLastJob = Index.fromOneBased(model.getFilteredJobList().size());
+        Job lastJob = model.getFilteredJobList().get(indexLastJob.getZeroBased());
+
+        JobBuilder jobInList = new JobBuilder(lastJob);
+        Job editedJob = jobInList.withDeadline(VALID_DEADLINE_CLEANER).build();
+
+        EditJobDescriptor descriptor = new EditJobDescriptorBuilder().withDeadline(VALID_DEADLINE_CLEANER).build();
         EditCommand editCommand = new EditCommand(indexLastJob, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_JOB_SUCCESS, Messages.format(editedJob));

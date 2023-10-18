@@ -41,7 +41,11 @@ public class EditCommand extends Command {
         + PREFIX_DEADLINE + "Dec 31 2023 1200";
 
     public static final String MESSAGE_EDIT_JOB_SUCCESS = "Edited Job: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided. \n"
+        + "c/ for Company\n"
+        + "r/ for Role\n"
+        + "s/ for Status"
+        + "d/ for Deadline\n";
     public static final String MESSAGE_DUPLICATE_JOB = "This job already exists in the application book.";
 
     private final Index index;
