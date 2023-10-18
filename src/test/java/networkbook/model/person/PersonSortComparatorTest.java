@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Comparator;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -160,10 +161,53 @@ public class PersonSortComparatorTest {
 
     @Test
     public void toStringMethod() {
-        List<String> keywords = List.of("keyword1", "keyword2");
-        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(keywords);
-
-        String expected = NameContainsKeywordsPredicate.class.getCanonicalName() + "{keywords=" + keywords + "}";
-        assertEquals(expected, predicate.toString());
+        PersonSortComparator cmp = new PersonSortComparator(SortField.NONE, SortOrder.ASCENDING);
+        Comparator<Person> comparator = PersonSortComparator.EMPTY_COMPARATOR;
+        String expected = PersonSortComparator.class.getCanonicalName() + "{comparator=" + comparator.toString() + "}";
+        assertEquals(expected, cmp.toString());
     }
+
+    @Test
+    public void parseSortField() {
+        assertEquals(SortField.NAME, PersonSortComparator.parseSortField("name"));
+
+        assertEquals(SortField.GRAD, PersonSortComparator.parseSortField("grad"));
+        assertEquals(SortField.GRAD, PersonSortComparator.parseSortField("graduation"));
+
+        assertEquals(SortField.PRIORITY, PersonSortComparator.parseSortField("priority"));
+
+        assertEquals(SortField.NONE, PersonSortComparator.parseSortField("none"));
+
+        assertEquals(SortField.INVALID, PersonSortComparator.parseSortField("sfdsfsdf"));
+        assertEquals(SortField.INVALID, PersonSortComparator.parseSortField(""));
+    }
+
+    @Test
+    public void parseSortOrder() {
+        assertEquals(SortOrder.ASCENDING, PersonSortComparator.parseSortOrder("ascending"));
+        assertEquals(SortOrder.ASCENDING, PersonSortComparator.parseSortOrder("asc"));
+
+        assertEquals(SortOrder.DESCENDING, PersonSortComparator.parseSortOrder("descending"));
+        assertEquals(SortOrder.DESCENDING, PersonSortComparator.parseSortOrder("desc"));
+
+        assertEquals(SortOrder.INVALID, PersonSortComparator.parseSortOrder("alksdjkld"));
+        assertEquals(SortOrder.INVALID, PersonSortComparator.parseSortOrder(""));
+    }
+
+    @Test
+    public void isValidSortField() {
+        assertTrue(PersonSortComparator.isValidSortField(SortField.NAME));
+        assertTrue(PersonSortComparator.isValidSortField(SortField.GRAD));
+        assertTrue(PersonSortComparator.isValidSortField(SortField.PRIORITY));
+        assertTrue(PersonSortComparator.isValidSortField(SortField.NONE));
+        assertFalse(PersonSortComparator.isValidSortField(SortField.INVALID));
+    }
+
+    @Test
+    public void isValidSortOrder() {
+        assertTrue(PersonSortComparator.isValidSortOrder(SortOrder.ASCENDING));
+        assertTrue(PersonSortComparator.isValidSortOrder(SortOrder.DESCENDING));
+        assertFalse(PersonSortComparator.isValidSortOrder(SortOrder.INVALID));
+    }
+
 }
