@@ -146,7 +146,7 @@ Oops! Invalid search expression, please check again.
 
 ### Viewing a fosterer's detail : `view`
 
-Views a fosterer's details by shifting the foster family list view page to a fosterer's profile view page.
+Views a fosterer's full details in the profile page. 
 
 Format: `view INDEX`
 
@@ -169,7 +169,7 @@ Example:
 
 Expected output (success):
 ```agsl
-Viewing the profile of a fosterer...
+Viewing Person: Jerry Tan; Phone: 98765412; Email: jerry123@example.com; Address: Baker street, block 5, #27-01; Housing: HDB; Availability: NotAvailable; Animal name: Dexter; Animal type: current.Cat; Tags: [Urgent]
 ```
 Expected output (fail):
 ```agsl
@@ -213,7 +213,7 @@ If the parameters are not provided, <b><code>edit INDEX</code> operates the same
 Examples:
 *  `list` followed by `edit 3 n/John` edits the name of the 3rd fosterer in the address book to John.
 *  `list` followed by `edit 1 p/12345678 animal/Bob` edits the phone number and the pet name of the 1st fosterer in the address book to 12345678 and Bob respectively.
-*  `list` followed by `edit 2` changes the view to the profile page of the 2nd fosterer in the address book.
+*  `list` followed by `edit 2` changes the view to the profile page of the 2nd fosterer in the address book since parameters are not provided.
 
 Expected Output (success):
 ```
