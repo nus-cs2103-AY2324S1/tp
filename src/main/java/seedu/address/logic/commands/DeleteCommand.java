@@ -97,7 +97,7 @@ public class DeleteCommand extends Command {
     public String toString() {
         if (name != null) {
             return new ToStringBuilder(this)
-                    .add("targetName",  name)
+                    .add("targetName", name)
                     .toString();
         }
         return new ToStringBuilder(this)
