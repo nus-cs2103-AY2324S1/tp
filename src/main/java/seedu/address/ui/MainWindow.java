@@ -172,7 +172,6 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Displays either the list of schedules or tutors based on the command result
      */
-    //TODO: Change ListTutorCommand to ListScheduleCommand
     private void handleListDisplay(CommandResult commandResult) {
         if (commandResult.getFeedbackToUser().equals(ListScheduleCommand.MESSAGE_SUCCESS)) {
             showSchedules();
