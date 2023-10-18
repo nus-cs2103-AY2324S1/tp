@@ -17,14 +17,14 @@ import seedu.address.model.UserPrefs;
 public class StorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private ConTextStorage conTextStorage;
+    private ContactsStorage contactsStorage;
     private UserPrefsStorage userPrefsStorage;
 
     /**
-     * Creates a {@code StorageManager} with the given {@code ConTextStorage} and {@code UserPrefStorage}.
+     * Creates a {@code StorageManager} with the given {@code ContactsStorage} and {@code UserPrefStorage}.
      */
-    public StorageManager(ConTextStorage conTextStorage, UserPrefsStorage userPrefsStorage) {
-        this.conTextStorage = conTextStorage;
+    public StorageManager(ContactsStorage contactsStorage, UserPrefsStorage userPrefsStorage) {
+        this.contactsStorage = contactsStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
@@ -50,29 +50,29 @@ public class StorageManager implements Storage {
 
     @Override
     public Path getConTextFilePath() {
-        return conTextStorage.getConTextFilePath();
+        return contactsStorage.getConTextFilePath();
     }
 
     @Override
     public Optional<ReadOnlyConText> readConText() throws DataLoadingException {
-        return readConText(conTextStorage.getConTextFilePath());
+        return readConText(contactsStorage.getConTextFilePath());
     }
 
     @Override
     public Optional<ReadOnlyConText> readConText(Path filePath) throws DataLoadingException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return conTextStorage.readConText(filePath);
+        return contactsStorage.readConText(filePath);
     }
 
     @Override
     public void saveConText(ReadOnlyConText conText) throws IOException {
-        saveConText(conText, conTextStorage.getConTextFilePath());
+        saveConText(conText, contactsStorage.getConTextFilePath());
     }
 
     @Override
     public void saveConText(ReadOnlyConText conText, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        conTextStorage.saveConText(conText, filePath);
+        contactsStorage.saveConText(conText, filePath);
     }
 
 }

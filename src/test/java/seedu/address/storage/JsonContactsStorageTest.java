@@ -19,8 +19,8 @@ import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.model.ConText;
 import seedu.address.model.ReadOnlyConText;
 
-public class JsonConTextStorageTest {
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonConTextStorageTest");
+public class JsonContactsStorageTest {
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonContactsStorageTest");
 
     @TempDir
     public Path testFolder;
@@ -31,7 +31,7 @@ public class JsonConTextStorageTest {
     }
 
     private java.util.Optional<ReadOnlyConText> readConText(String filePath) throws Exception {
-        return new JsonConTextStorage(Paths.get(filePath)).readConText(addToTestDataPathIfNotNull(filePath));
+        return new JsonContactsStorage(Paths.get(filePath)).readConText(addToTestDataPathIfNotNull(filePath));
     }
 
     private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
@@ -64,24 +64,24 @@ public class JsonConTextStorageTest {
     public void readAndSaveConText_allInOrder_success() throws Exception {
         Path filePath = testFolder.resolve("TempConText.json");
         ConText original = getTypicalConText();
-        JsonConTextStorage jsonConTextStorage = new JsonConTextStorage(filePath);
+        JsonContactsStorage jsonContactsStorage = new JsonContactsStorage(filePath);
 
         // Save in new file and read back
-        jsonConTextStorage.saveConText(original, filePath);
-        ReadOnlyConText readBack = jsonConTextStorage.readConText(filePath).get();
+        jsonContactsStorage.saveConText(original, filePath);
+        ReadOnlyConText readBack = jsonContactsStorage.readConText(filePath).get();
         assertEquals(original, new ConText(readBack));
 
         // Modify data, overwrite exiting file, and read back
         original.addContact(HOON);
         original.removeContact(ALICE);
-        jsonConTextStorage.saveConText(original, filePath);
-        readBack = jsonConTextStorage.readConText(filePath).get();
+        jsonContactsStorage.saveConText(original, filePath);
+        readBack = jsonContactsStorage.readConText(filePath).get();
         assertEquals(original, new ConText(readBack));
 
         // Save and read without specifying file path
         original.addContact(IDA);
-        jsonConTextStorage.saveConText(original); // file path not specified
-        readBack = jsonConTextStorage.readConText().get(); // file path not specified
+        jsonContactsStorage.saveConText(original); // file path not specified
+        readBack = jsonContactsStorage.readConText().get(); // file path not specified
         assertEquals(original, new ConText(readBack));
 
     }
@@ -96,7 +96,7 @@ public class JsonConTextStorageTest {
      */
     private void saveConText(ReadOnlyConText conText, String filePath) {
         try {
-            new JsonConTextStorage(Paths.get(filePath))
+            new JsonContactsStorage(Paths.get(filePath))
                     .saveConText(conText, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);

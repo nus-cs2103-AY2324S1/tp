@@ -10,7 +10,7 @@ import seedu.address.model.ReadOnlyConText;
 /**
  * Represents a storage for {@link seedu.address.model.ConText}.
  */
-public interface ConTextStorage {
+public interface ContactsStorage {
 
     /**
      * Returns the file path of the data file.

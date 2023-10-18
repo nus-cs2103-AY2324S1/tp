@@ -17,13 +17,13 @@ import seedu.address.model.ReadOnlyConText;
 /**
  * A class to access ConText data stored as a json file on the hard disk.
  */
-public class JsonConTextStorage implements ConTextStorage {
+public class JsonContactsStorage implements ContactsStorage {
 
-    private static final Logger logger = LogsCenter.getLogger(JsonConTextStorage.class);
+    private static final Logger logger = LogsCenter.getLogger(JsonContactsStorage.class);
 
     private Path filePath;
 
-    public JsonConTextStorage(Path filePath) {
+    public JsonContactsStorage(Path filePath) {
         this.filePath = filePath;
     }
 

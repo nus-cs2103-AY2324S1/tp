@@ -24,9 +24,9 @@ public class StorageManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonConTextStorage conTextStorage = new JsonConTextStorage(getTempFilePath("ab"));
+        JsonContactsStorage contactsStorage = new JsonContactsStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(conTextStorage, userPrefsStorage);
+        storageManager = new StorageManager(contactsStorage, userPrefsStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -51,8 +51,8 @@ public class StorageManagerTest {
     public void conTextReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
-         * {@link JsonConTextStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link JsonConTextStorageTest} class.
+         * {@link JsonContactsStorage} class.
+         * More extensive testing of UserPref saving/reading is done in {@link JsonContactsStorageTest} class.
          */
         ConText original = getTypicalConText();
         storageManager.saveConText(original);

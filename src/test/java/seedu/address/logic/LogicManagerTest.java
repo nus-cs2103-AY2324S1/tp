@@ -27,7 +27,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyConText;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.contact.Contact;
-import seedu.address.storage.JsonConTextStorage;
+import seedu.address.storage.JsonContactsStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
 import seedu.address.testutil.ContactBuilder;
@@ -45,10 +45,10 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonConTextStorage conTextStorage =
-                new JsonConTextStorage(temporaryFolder.resolve("ConText.json"));
+        JsonContactsStorage contactsStorage =
+                new JsonContactsStorage(temporaryFolder.resolve("ConText.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(conTextStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(contactsStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -149,8 +149,8 @@ public class LogicManagerTest {
     private void assertCommandFailureForExceptionFromStorage(IOException e, String expectedMessage) {
         Path prefPath = temporaryFolder.resolve("ExceptionUserPrefs.json");
 
-        // Inject LogicManager with an ConTextStorage that throws the IOException e when saving
-        JsonConTextStorage conTextStorage = new JsonConTextStorage(prefPath) {
+        // Inject LogicManager with an contactsStorage that throws the IOException e when saving
+        JsonContactsStorage contactsStorage = new JsonContactsStorage(prefPath) {
             @Override
             public void saveConText(ReadOnlyConText conText, Path filePath)
                     throws IOException {
@@ -160,7 +160,7 @@ public class LogicManagerTest {
 
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(conTextStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(contactsStorage, userPrefsStorage);
 
         logic = new LogicManager(model, storage);
 
