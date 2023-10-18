@@ -124,6 +124,20 @@ public class ModelManager implements Model {
         requireAllNonNull(band);
         addressBook.addBand(band);
     }
+    @Override
+    public boolean hasMusicianInBand(int bandIndex, int musicianIndex) {
+        requireNonNull(bandIndex);
+        requireNonNull(musicianIndex);
+        return addressBook.hasMusicianInBand(bandIndex, musicianIndex);
+    }
+    @Override
+    public void addMusicianToBand(int bandIndex, int musicianIndex) {
+        requireNonNull(bandIndex);
+        requireNonNull(musicianIndex);
+        addressBook.addMusicianToBand(bandIndex, filteredMusicians.get(musicianIndex));
+    }
+
+
     //=========== Filtered Musician List Accessors =============================================================
 
     /**

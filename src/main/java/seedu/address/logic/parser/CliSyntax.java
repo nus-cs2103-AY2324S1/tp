@@ -12,5 +12,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_INSTRUMENT = new Prefix("i/");
     public static final Prefix PREFIX_GENRE = new Prefix("g/");
+    public static final Prefix PREFIX_BINDEX = new Prefix("bin/");
+    public static final Prefix PREFIX_MINDEX = new Prefix("min/");
 
 }

@@ -10,6 +10,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.band.exceptions.BandNotFoundException;
 import seedu.address.model.band.exceptions.DuplicateBandException;
+import seedu.address.model.musician.Musician;
+import seedu.address.model.musician.exceptions.DuplicateMusicianException;
 
 /**
  * A list of bands that enforces uniqueness between its elements and does not allow nulls.
@@ -84,14 +86,33 @@ public class UniqueBandList implements Iterable<Band> {
         internalList.setAll(band);
     }
     /**
-     * Removes the equivalent musician from the list.
-     * The musician must exist in the list.
+     * Removes the equivalent band from the list.
+     * The band must exist in the list.
      */
     public void remove(Band toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
             throw new BandNotFoundException();
         }
+    }
+    /**
+     * Returns true if musician already exists in the band.
+     */
+    public boolean hasMusician(int bandIndex, Musician musician) {
+        requireNonNull(bandIndex);
+        requireNonNull(musician);
+        return internalList.get(bandIndex).hasMusician(musician);
+    }
+    /**
+     * Adds a musician to a band.
+     */
+    public void addMusician(int bandIndex, Musician musician) {
+        requireNonNull(bandIndex);
+        requireNonNull(musician);
+        if (internalList.get(bandIndex).getModifiableMusicianList().contains((musician))) {
+            throw new DuplicateMusicianException();
+        }
+        internalList.get(bandIndex).getModifiableMusicianList().add(musician);
     }
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
