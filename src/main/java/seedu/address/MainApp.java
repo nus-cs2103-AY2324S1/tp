@@ -16,8 +16,8 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
+import seedu.address.model.ReadOnlyContacts;
 import seedu.address.model.Contacts;
-import seedu.address.model.ContactsManager;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlySettings;
@@ -175,7 +175,7 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@link Model} with the {@link Contacts} from reading via the
+     * Returns a {@link Model} with the {@link ReadOnlyContacts} from reading via the
      * specified {@link Storage}, and with the specified
      * {@link ReadOnlySettings}.
      *
@@ -191,9 +191,9 @@ public class MainApp extends Application {
             storage.getContactsPath()
         ));
 
-        @Nullable Contacts contacts = null;
+        @Nullable ReadOnlyContacts contacts = null;
         try {
-            Optional<Contacts> contactsOptional = storage.readContacts();
+            Optional<ReadOnlyContacts> contactsOptional = storage.readContacts();
             if (contactsOptional.isPresent()) {
                 contacts = contactsOptional.get();
             } else {
@@ -202,7 +202,7 @@ public class MainApp extends Application {
             }
         } catch (DataLoadingException e) {
             logger.warning("Failed to read contacts file.");
-            contacts = new ContactsManager();
+            contacts = new Contacts();
         }
 
         return new ModelManager(contacts, settings);

@@ -12,5 +12,5 @@ public interface ReadOnlyContacts {
     /**
      * Returns an unmodifiable {@link ObservableList} of all {@link Contact}s.
      */
-    public ObservableList<Contact> getContactList();
+    public ObservableList<Contact> getUnmodifiableList();
 }
