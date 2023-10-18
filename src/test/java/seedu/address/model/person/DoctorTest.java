@@ -24,7 +24,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.testutil.DoctorBuilder;
 
 
-
 //@Disabled("Disabled since we will be moving Person class to abstract in the future")
 public class DoctorTest {
 
@@ -95,7 +94,8 @@ public class DoctorTest {
     public void toStringMethod() {
         String expected = Doctor.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", remark=" + ALICE.getRemark()
-                + ", gender=" + ALICE.getGender() + ", nric=" + ALICE.getIc() + ", patients=" + ALICE.getPatients() + ", tags=" + ALICE.getTags() + "}";
+                + ", gender=" + ALICE.getGender() + ", nric=" + ALICE.getIc() + ", patients=" + ALICE.getPatients()
+                + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }
