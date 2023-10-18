@@ -5,7 +5,6 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataLoadingException;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyDeck;
 
 /**
@@ -19,7 +18,7 @@ public interface DeckStorage {
     Path getDeckFilePath();
 
     /**
-     * Returns AddressBook data as a {@link ReadOnlyAddressBook}.
+     * Returns Deck data as a {@link ReadOnlyDeck}.
      * Returns {@code Optional.empty()} if storage file is not found.
      *
      * @throws DataLoadingException if loading the data from storage failed.
@@ -32,7 +31,7 @@ public interface DeckStorage {
     Optional<ReadOnlyDeck> readDeck(Path filePath) throws DataLoadingException;
 
     /**
-     * Saves the given {@link ReadOnlyAddressBook} to the storage.
+     * Saves the given {@link ReadOnlyDeck} to the storage.
      * @param deck cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */

@@ -5,9 +5,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.Deck;
-import seedu.address.model.person.Answer;
-import seedu.address.model.person.Card;
-import seedu.address.model.person.Question;
+import seedu.address.model.card.Answer;
+import seedu.address.model.card.Card;
+import seedu.address.model.card.Question;
 import seedu.address.model.tag.Tag;
 
 /**

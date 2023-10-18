@@ -1,6 +1,6 @@
 package seedu.address.testutil;
 import seedu.address.model.Deck;
-import seedu.address.model.person.Card;
+import seedu.address.model.card.Card;
 
 /**
  * A utility class to help with building Deck objects.
