@@ -37,6 +37,14 @@ public class UniqueApplicantList implements Iterable<Applicant> {
     }
 
     /**
+     * Returns the number of applicants with the same phone number or email as {@code toCheck}.
+     */
+    public long numberOfDuplicates(Applicant toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().filter(applicant -> applicant.isSameApplicant(toCheck)).count();
+    }
+
+    /**
      * Adds a Applicant to the list.
      * The Applicant must not already exist in the list.
      */

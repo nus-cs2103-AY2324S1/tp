@@ -64,7 +64,7 @@ public class Applicant implements Comparable<Applicant> {
     }
 
     /**
-     * Returns true if both applicants have the same name.
+     * Returns true if both applicants have the same email or phone number.
      * This defines a weaker notion of equality between two applicants.
      */
     public boolean isSameApplicant(Applicant otherApplicant) {
@@ -73,7 +73,8 @@ public class Applicant implements Comparable<Applicant> {
         }
 
         return otherApplicant != null
-                && otherApplicant.getName().equals(getName());
+                && (otherApplicant.getEmail().equals(this.getEmail())
+                || otherApplicant.getPhone().equals(this.getPhone()));
     }
 
     /**

@@ -79,7 +79,14 @@ public class EditCommand extends Command {
         Applicant applicantToEdit = lastShownList.get(index.getZeroBased());
         Applicant editedApplicant = createEditedApplicant(applicantToEdit, editApplicantDescriptor);
 
+        // Check if edited applicant has the identity as another existing applicant
         if (!applicantToEdit.isSameApplicant(editedApplicant) && model.hasApplicant(editedApplicant)) {
+            throw new CommandException(MESSAGE_DUPLICATE_APPLICANT);
+        }
+
+        // Check if edited applicant has the same email or phone number as the original
+        // applicant and another existing applicant
+        if (model.isDuplicateApplicant(editedApplicant)) {
             throw new CommandException(MESSAGE_DUPLICATE_APPLICANT);
         }
 
