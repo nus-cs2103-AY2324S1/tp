@@ -36,7 +36,7 @@ class RemarkCommandTest {
 
         Person editedPerson = new Person(
                 lastPerson.getName(), lastPerson.getPhone(), lastPerson.getEmail(),
-                remark, lastPerson.getTags());
+                lastPerson.getStatus(), remark, lastPerson.getTags());
 
         CommandResult commandResult = new CommandResult(String.format(RemarkCommand.MESSAGE_ADD_REMARK_SUCCESS,
                 Messages.format(editedPerson)));
@@ -54,7 +54,7 @@ class RemarkCommandTest {
 
         Person editedPerson = new Person(
                 lastPerson.getName(), lastPerson.getPhone(), lastPerson.getEmail(),
-                remark, lastPerson.getTags());
+                lastPerson.getStatus(), remark, lastPerson.getTags());
 
         CommandResult commandResult = new CommandResult(String.format(RemarkCommand.MESSAGE_DELETE_REMARK_SUCCESS,
                 Messages.format(editedPerson)));

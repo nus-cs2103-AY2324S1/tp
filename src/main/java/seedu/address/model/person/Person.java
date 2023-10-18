@@ -23,16 +23,18 @@ public class Person {
 
     // Data fields
     private final Remark remark;
+    private final Status status;
     private final Set<Tag> tags;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Remark remark, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, remark, tags);
+    public Person(Name name, Phone phone, Email email, Status status, Remark remark, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, status, remark, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.status = status;
         this.remark = remark;
         this.tags = new HashSet<>(tags);
     }
@@ -52,6 +54,8 @@ public class Person {
     public Remark getRemark() {
         return remark;
     }
+
+    public Status getStatus() { return status; }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -93,6 +97,7 @@ public class Person {
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
+                && status.equals(otherPerson.status)
                 && remark.equals(otherPerson.remark)
                 && tags.equals(otherPerson.tags);
     }
@@ -100,7 +105,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, remark, tags);
+        return Objects.hash(name, phone, email, status, remark, tags);
     }
 
     @Override
@@ -109,6 +114,7 @@ public class Person {
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
+                .add("status", status)
                 .add("remark", remark)
                 .add("tags", tags)
                 .toString();
@@ -118,6 +124,7 @@ public class Person {
      * Returns detailed information of Person for viewc command.
      */
     public String toDisplayString() {
-        return String.format("Name: %s\nPhone: %s\nEmail: %s\nRemark: %s\n", name, phone, email, remark);
+        return String.format("Name: %s\nPhone: %s\nEmail: %s\nStatus: %s\nRemark: %s",
+                name, phone, email, status, remark);
     }
 }
