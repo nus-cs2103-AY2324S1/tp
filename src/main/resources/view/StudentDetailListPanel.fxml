@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="340.0" prefWidth="340.0" style="-fx-background-color: grey; -fx-background-radius: 10;" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="340.0" prefWidth="340.0" style="-fx-background-color: #322D46; -fx-background-radius: 10;" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="10.0" layoutY="6.0" styleClass="panel-label" text="Student Details" />
+      <Label layoutX="10.0" layoutY="6.0" style="-fx-text-fill: white;" styleClass="panel-label" text="Student Details" />
       <VBox layoutX="10.0" layoutY="48.0" prefHeight="200.0" prefWidth="320.0" spacing="10.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="48.0">
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="21.0" prefWidth="200.0">
@@ -21,7 +21,7 @@
                         <Image url="@../images/user.png" />
                      </image>
                   </ImageView>
-                     <TextField fx:id="name" editable="false" prefHeight="25.0" prefWidth="184.0" style="-fx-background-color: transparent;" text="\$user" HBox.hgrow="ALWAYS" />
+                     <TextField fx:id="name" editable="false" prefHeight="25.0" prefWidth="184.0" style="-fx-background-color: transparent; -fx-text-fill: white;" text="\$user" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="120.0">
@@ -31,7 +31,7 @@
                            <Image url="@../images/phone.png" />
                         </image>
                      </ImageView>
-                     <TextField fx:id="phone" alignment="BOTTOM_LEFT" editable="false" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: transparent;" text="\$phone" HBox.hgrow="ALWAYS" />
+                     <TextField fx:id="phone" alignment="BOTTOM_LEFT" editable="false" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: transparent; -fx-text-fill: white;" text="\$phone" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="254.0">
@@ -41,7 +41,7 @@
                         <Image url="@../images/mail.png" />
                      </image>
                   </ImageView>
-                     <TextField fx:id="email" editable="false" style="-fx-background-color: transparent;" text="\$email" HBox.hgrow="ALWAYS" />
+                     <TextField fx:id="email" editable="false" style="-fx-background-color: transparent; -fx-text-fill: white;" text="\$email" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="80.0" prefHeight="25.0" prefWidth="254.0">
@@ -51,7 +51,7 @@
                         <Image url="@../images/map-pin.png" />
                      </image>
                   </ImageView>
-                  <TextField fx:id="address" editable="false" style="-fx-background-color: transparent;" text="\$address" HBox.hgrow="ALWAYS" />
+                  <TextField fx:id="address" editable="false" style="-fx-background-color: transparent; -fx-text-fill: white;" text="\$address" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
             <FlowPane fx:id="tags" prefHeight="55.0" prefWidth="320.0" />
