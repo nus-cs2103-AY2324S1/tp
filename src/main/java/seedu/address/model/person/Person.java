@@ -45,7 +45,7 @@ public class Person {
         this.address = address;
         this.tags.addAll(tags);
 
-        this.lead = new Lead();
+        this.lead = null;
         this.telegram = null;
         this.profession = null;
         this.income = null;
