@@ -54,7 +54,7 @@ public class DoctorCard extends UiPart<Region> {
         super(FXML);
         this.doctor = doctor;
         id.setText(displayedIndex + ". ");
-        name.setText("Name: " + doctor.getName().fullName);
+        name.setText(doctor.getName().fullName);
         phone.setText("Phone Number: " + doctor.getPhone().value);
         address.setText("Address: " + doctor.getAddress().value);
         email.setText("Email: " + doctor.getEmail().value);
