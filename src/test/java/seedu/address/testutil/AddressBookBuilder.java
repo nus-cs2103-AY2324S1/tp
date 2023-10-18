@@ -1,7 +1,9 @@
 package seedu.address.testutil;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Patient;
+import seedu.address.model.person.Person;
 
 /**
  * A utility class to help with building Addressbook objects.
@@ -23,8 +25,12 @@ public class AddressBookBuilder {
     /**
      * Adds a new {@code Patient} to the {@code AddressBook} that we are building.
      */
-    public AddressBookBuilder withPatient(Patient patient) {
-        addressBook.addPatient(patient);
+    public AddressBookBuilder withPerson(Person person) {
+        if (person instanceof Patient) {
+            addressBook.addPatient((Patient) person);
+        } else if (person instanceof Doctor) {
+            addressBook.addDoctor((Doctor) person);
+        }
         return this;
     }
 
