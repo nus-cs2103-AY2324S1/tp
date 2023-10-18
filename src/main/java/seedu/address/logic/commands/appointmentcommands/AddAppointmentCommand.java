@@ -35,8 +35,8 @@ public class AddAppointmentCommand extends Command {
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_APPOINTMENT_PATIENT + "1 "
-            + PREFIX_APPOINTMENT_START + "20/10/2023 12:00 "
-            + PREFIX_APPOINTMENT_END + "20/10/2023 13:00 "
+            + PREFIX_APPOINTMENT_START + "2023/10/20 12:00 "
+            + PREFIX_APPOINTMENT_END + "2023/10/20 13:00 "
             + PREFIX_APPOINTMENT_DESCRIPTION + "Follow up on Chest X-Ray ";
     public static final String MESSAGE_SUCCESS = "New appointment scheduled: %1$s.";
 

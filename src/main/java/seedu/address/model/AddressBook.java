@@ -87,7 +87,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addPerson(Person p) {
         persons.add(p);
-        System.out.println("test2");
     }
 
     /**
@@ -125,7 +124,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addAppointment(Appointment a) {
         appointments.add(a);
-        System.out.println("test");
     }
 
     /**

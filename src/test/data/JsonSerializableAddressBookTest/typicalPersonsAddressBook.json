@@ -5,7 +5,7 @@
     "gender" : "FEMALE",
     "phone" : "94351253",
     "email" : "alice@example.com",
-    "birthdate": "12/01/1999",
+    "birthdate": "1999/01/12",
     "address" : "123, Jurong West Ave 6, #08-111",
     "tags" : [ "friends" ]
   }, {
@@ -13,7 +13,7 @@
     "gender": "MALE",
     "phone" : "98765432",
     "email" : "johnd@example.com",
-    "birthdate": "20/10/2001",
+    "birthdate": "2001/10/20",
     "address" : "311, Clementi Ave 2, #02-25",
     "tags" : [ "owesMoney", "friends" ]
   }, {
@@ -21,7 +21,7 @@
     "gender": "MALE",
     "phone" : "95352563",
     "email" : "heinz@example.com",
-    "birthdate": "01/02/1987",
+    "birthdate": "1987/01/02",
     "address" : "wall street",
     "tags" : [ ]
   }, {
@@ -29,7 +29,7 @@
     "gender": "MALE",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
-    "birthdate": "28/03/2003",
+    "birthdate": "2003/03/28",
     "address" : "10th street",
     "tags" : [ "friends" ]
   }, {
@@ -37,7 +37,7 @@
     "gender": "FEMALE",
     "phone" : "9482224",
     "email" : "werner@example.com",
-    "birthdate": "19/05/1989",
+    "birthdate": "1989/05/19",
     "address" : "michegan ave",
     "tags" : [ ]
   }, {
@@ -45,7 +45,7 @@
     "gender": "FEMALE",
     "phone" : "9482427",
     "email" : "lydia@example.com",
-    "birthdate": "06/12/2002",
+    "birthdate": "2002/06/12",
     "address" : "little tokyo",
     "tags" : [ ]
   }, {
@@ -53,7 +53,7 @@
     "gender": "MALE",
     "phone" : "9482442",
     "email" : "anna@example.com",
-    "birthdate": "23/08/1994",
+    "birthdate": "1994/08/23",
     "address" : "4th street",
     "tags" : [ ]
   } ],

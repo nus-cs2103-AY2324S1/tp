@@ -170,7 +170,7 @@ public class ParserUtil {
         requireNonNull(dateAndTime);
         String trimmedDateTime = dateAndTime.trim();
         LocalDateTime localDateTime;
-        DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
         try {
             localDateTime = LocalDateTime.parse(trimmedDateTime, dateTimeFormat);
         } catch (DateTimeParseException e) {
@@ -210,7 +210,6 @@ public class ParserUtil {
         String trimmedDescription = description.trim();
 
         if (!AppointmentDescription.isValidAppointmentDescription(trimmedDescription)) {
-            System.out.println(AppointmentDescription.isValidAppointmentDescription(trimmedDescription));
             throw new ParseException(AppointmentDescription.MESSAGE_CONSTRAINTS);
         }
         return new AppointmentDescription(trimmedDescription);

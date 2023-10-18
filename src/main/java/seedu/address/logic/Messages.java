@@ -73,7 +73,7 @@ public class Messages {
      * Formats the {@code appointment} for display to the user.
      */
     public static String format(Appointment appointment) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
         final StringBuilder builder = new StringBuilder();
         builder.append("Patient: ")
                 .append(appointment.getPatientName())

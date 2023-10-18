@@ -33,8 +33,8 @@ public class RescheduleCommand extends Command {
             + "[" + PREFIX_APPOINTMENT_START + "APPOINTMENT START DATE AND TIME] "
             + "[" + PREFIX_APPOINTMENT_END + "APPOINTMENT END DATE AND TIME]\n"
             + "Example: " + PREFIX_ID + " 1 "
-            + PREFIX_APPOINTMENT_START + "02/05/2023 09:00 "
-            + PREFIX_APPOINTMENT_END + "02/05/2023 11:00 ";
+            + PREFIX_APPOINTMENT_START + "2023/05/02 09:00 "
+            + PREFIX_APPOINTMENT_END + "2023/05/02 11:00 ";
 
     public static final String MESSAGE_SUCCESS = "Patient appointment rescheduled: %1$s";
     public static final String MESSAGE_NO_APPOINTMENT_FOUND = "No such appointment exists in the records";
