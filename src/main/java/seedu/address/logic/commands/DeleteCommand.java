@@ -81,8 +81,6 @@ public class DeleteCommand extends Command {
             }
         } else if (nric != null) {
             findPersonToDelete = findPersonToDeleteIc(lastShownList);
-        } else {
-            throw new CommandException(Messages.MESSAGE_INVALID_NRIC_AND_NAME);
         }
 
         Person personToDelete = findPersonToDelete.get();

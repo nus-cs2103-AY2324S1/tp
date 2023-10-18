@@ -83,13 +83,6 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_missingNameAndNric_throwsException() {
-        DeleteCommand command = new DeleteCommand(null, null, new DeletePersonDescriptor());
-
-        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_NRIC_AND_NAME, () -> command.execute(model));
-    }
-
-    @Test
     public void execute_deleteFields_success() throws CommandException {
         Person firstPerson = model.getFilteredPersonList().get(0);
 
