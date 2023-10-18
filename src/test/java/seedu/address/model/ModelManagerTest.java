@@ -16,8 +16,11 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.schedule.Schedule;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -91,6 +94,16 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void deletePerson_personWithSchedulesDeleted_success() {
+        modelManager.addPerson(ALICE);
+        modelManager.addSchedule(SCHEDULE_ALICE_FIRST_JAN);
+        assertTrue(modelManager.hasSchedule(SCHEDULE_ALICE_FIRST_JAN));
+        modelManager.deletePerson(ALICE);
+        assertFalse(modelManager.hasSchedule(SCHEDULE_ALICE_FIRST_JAN));
+        assertFalse(modelManager.hasPerson(ALICE));
+    }
+
+    @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
     }
@@ -109,11 +122,6 @@ public class ModelManagerTest {
     public void hasSchedule_scheduleInAddressBook_returnsTrue() {
         modelManager.addSchedule(SCHEDULE_ALICE_FIRST_JAN);
         assertTrue(modelManager.hasSchedule(SCHEDULE_ALICE_FIRST_JAN));
-    }
-
-    @Test
-    public void getFilteredScheduleList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredScheduleList().remove(0));
     }
 
     @Test
@@ -136,6 +144,37 @@ public class ModelManagerTest {
         assertFalse(modelManager.hasSchedule(SCHEDULE_BOB_SECOND_JAN));
     }
 
+    @Test
+    public void removeSchedules_success() {
+        modelManager.addSchedule(SCHEDULE_ALICE_FIRST_JAN);
+        modelManager.addSchedule(SCHEDULE_BOB_SECOND_JAN);
+        assertTrue(modelManager.hasSchedule(SCHEDULE_ALICE_FIRST_JAN));
+        assertTrue(modelManager.hasSchedule(SCHEDULE_BOB_SECOND_JAN));
+        modelManager.deleteSchedules(modelManager.getAddressBook().getScheduleList());
+        assertFalse(modelManager.hasSchedule(SCHEDULE_ALICE_FIRST_JAN));
+        assertFalse(modelManager.hasSchedule(SCHEDULE_BOB_SECOND_JAN));
+    }
+
+    @Test
+    public void getFilteredScheduleList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredScheduleList().remove(0));
+    }
+
+    @Test
+    public void getSchedulesFromTutor_success() {
+        modelManager.addPerson(ALICE);
+        modelManager.addSchedule(SCHEDULE_ALICE_FIRST_JAN);
+        assertTrue(modelManager.hasSchedule(SCHEDULE_ALICE_FIRST_JAN));
+        ObservableList<Schedule> foundSchedules = modelManager.getSchedulesFromTutor(ALICE);
+        assertTrue(foundSchedules.contains(SCHEDULE_ALICE_FIRST_JAN));
+    }
+
+    @Test
+    public void getSchedulesFromTutor_throwsPersonNotFoundException() {
+        modelManager.addSchedule(SCHEDULE_ALICE_FIRST_JAN);
+        assertTrue(modelManager.hasSchedule(SCHEDULE_ALICE_FIRST_JAN));
+        assertThrows(PersonNotFoundException.class, () -> modelManager.getSchedulesFromTutor(ALICE));
+    }
 
     @Test
     public void equals() {
