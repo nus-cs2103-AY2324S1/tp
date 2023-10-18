@@ -139,10 +139,10 @@ public class MainApp extends Application {
      * If no file is found for the {@link SettingsStorage} or an error occurs
      * while trying to read the file, default settings will be populated.
      *
-     * This always resaves the updated settings file.
+     * This always resaves the updated file.
      */
     private Settings initSettings(SettingsStorage settingsStorage) {
-        Path settingsPath = settingsStorage.getPath();
+        Path settingsPath = settingsStorage.getSettingsPath();
         logger.info(String.format(
             "Settings storage path: %s",
             settingsPath
@@ -182,8 +182,8 @@ public class MainApp extends Application {
      * If no contacts file is found for the {@link Storage}, sample contacts
      * will be populated.
      *
-     * If an error occurs while trying to read the contacts file, no contacts
-     * will be populated.
+     * If an error occurs while trying to read the file, no contacts will be
+     * populated.
      */
     private Model initModel(Storage storage, ReadOnlySettings settings) {
         logger.info(String.format(
