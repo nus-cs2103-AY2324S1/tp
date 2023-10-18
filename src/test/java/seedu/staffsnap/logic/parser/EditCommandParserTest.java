@@ -23,9 +23,9 @@ import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_POSITION_AMY;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_INTERVIEW;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_POSITION;
+import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_TYPE;
 import static seedu.staffsnap.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.staffsnap.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.staffsnap.testutil.TypicalIndexes.INDEX_FIRST_APPLICANT;
@@ -47,7 +47,7 @@ import seedu.staffsnap.testutil.EditApplicantDescriptorBuilder;
 
 public class EditCommandParserTest {
 
-    private static final String INTERVIEW_EMPTY = " " + PREFIX_INTERVIEW;
+    private static final String INTERVIEW_EMPTY = " " + PREFIX_TYPE;
 
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
@@ -92,7 +92,7 @@ public class EditCommandParserTest {
         // invalid phone followed by valid email
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC + EMAIL_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
 
-        // while parsing {@code PREFIX_INTERVIEW} alone will reset the interviews of the {@code Applicant} being edited,
+        // while parsing {@code PREFIX_TYPE} alone will reset the interviews of the {@code Applicant} being edited,
         // parsing it together with a valid interview results in error
         assertParseFailure(parser, "1"
                 + INTERVIEW_DESC_FRIEND + INTERVIEW_DESC_HUSBAND + INTERVIEW_EMPTY, Interview.MESSAGE_CONSTRAINTS);

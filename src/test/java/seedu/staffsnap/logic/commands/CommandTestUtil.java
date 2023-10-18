@@ -3,10 +3,10 @@ package seedu.staffsnap.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_INTERVIEW;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_POSITION;
+import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_TYPE;
 import static seedu.staffsnap.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -45,8 +45,8 @@ public class CommandTestUtil {
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
     public static final String POSITION_DESC_AMY = " " + PREFIX_POSITION + VALID_POSITION_AMY;
     public static final String POSITION_DESC_BOB = " " + PREFIX_POSITION + VALID_POSITION_BOB;
-    public static final String INTERVIEW_DESC_FRIEND = " " + PREFIX_INTERVIEW + VALID_INTERVIEW_FRIEND;
-    public static final String INTERVIEW_DESC_HUSBAND = " " + PREFIX_INTERVIEW + VALID_INTERVIEW_HUSBAND;
+    public static final String INTERVIEW_DESC_FRIEND = " " + PREFIX_TYPE + VALID_INTERVIEW_FRIEND;
+    public static final String INTERVIEW_DESC_HUSBAND = " " + PREFIX_TYPE + VALID_INTERVIEW_HUSBAND;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -54,7 +54,7 @@ public class CommandTestUtil {
     public static final String INVALID_POSITION_DESC = " "
             + PREFIX_POSITION; // empty string not allowed for positions
     public static final String INVALID_INTERVIEW_DESC = " "
-            + PREFIX_INTERVIEW + "hubby*"; // '*' not allowed in interviews
+            + PREFIX_TYPE + "hubby*"; // '*' not allowed in interviews
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

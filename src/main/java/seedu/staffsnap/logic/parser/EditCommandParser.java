@@ -3,10 +3,10 @@ package seedu.staffsnap.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.staffsnap.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_INTERVIEW;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_POSITION;
+import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -33,7 +33,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                        PREFIX_POSITION, PREFIX_INTERVIEW);
+                        PREFIX_POSITION, PREFIX_TYPE);
 
         Index index;
 
@@ -54,13 +54,12 @@ public class EditCommandParser implements Parser<EditCommand> {
             editApplicantDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
         }
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            editApplicantDescriptor.setEmail(ParserUtil.parseEmail(
-                    argMultimap.getValue(PREFIX_EMAIL).get()));
+            editApplicantDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
         }
         if (argMultimap.getValue(PREFIX_POSITION).isPresent()) {
             editApplicantDescriptor.setPosition(ParserUtil.parsePosition(argMultimap.getValue(PREFIX_POSITION).get()));
         }
-        parseInterviewsForEdit(argMultimap.getAllValues(PREFIX_INTERVIEW))
+        parseInterviewsForEdit(argMultimap.getAllValues(PREFIX_TYPE))
                 .ifPresent(editApplicantDescriptor::setInterviews);
 
         if (!editApplicantDescriptor.isAnyFieldEdited()) {

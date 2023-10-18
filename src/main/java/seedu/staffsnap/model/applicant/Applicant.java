@@ -176,4 +176,17 @@ public class Applicant implements Comparable<Applicant> {
         interviews.add(interviewToAdd);
         Collections.sort(interviews);
     }
+
+    /**
+     * Deletes an interview to an Applicant.
+     *
+     * @param interviewToDelete the interview to delete from the Applicant
+     */
+    public void deleteInterview(Interview interviewToDelete) {
+        interviews.remove(interviewToDelete);
+    }
+
+    public int getInterviewIndexForApplicantCard(Interview interview) {
+        return interviews.indexOf(interview) + 1;
+    }
 }

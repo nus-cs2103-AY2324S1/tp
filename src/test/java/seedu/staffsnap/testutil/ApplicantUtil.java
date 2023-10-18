@@ -1,10 +1,10 @@
 package seedu.staffsnap.testutil;
 
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_INTERVIEW;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_POSITION;
+import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import java.util.List;
 
@@ -35,7 +35,7 @@ public class ApplicantUtil {
         sb.append(PREFIX_EMAIL + applicant.getEmail().value + " ");
         sb.append(PREFIX_POSITION + applicant.getPosition().value + " ");
         applicant.getInterviews().stream().forEach(
-            s -> sb.append(PREFIX_INTERVIEW + s.type + " ")
+            s -> sb.append(PREFIX_TYPE + s.type + " ")
         );
         return sb.toString();
     }
@@ -53,9 +53,9 @@ public class ApplicantUtil {
         if (descriptor.getInterviews().isPresent()) {
             List<Interview> interviews = descriptor.getInterviews().get();
             if (interviews.isEmpty()) {
-                sb.append(PREFIX_INTERVIEW);
+                sb.append(PREFIX_TYPE);
             } else {
-                interviews.forEach(s -> sb.append(PREFIX_INTERVIEW).append(s.type).append(" "));
+                interviews.forEach(s -> sb.append(PREFIX_TYPE).append(s.type).append(" "));
             }
         }
         return sb.toString();
