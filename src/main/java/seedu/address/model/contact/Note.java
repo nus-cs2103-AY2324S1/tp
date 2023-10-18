@@ -19,15 +19,15 @@ public class Note {
 
     @Override
     public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
         // instanceof also handles nulls
         if (!(other instanceof Note)) {
             return false;
         }
         Note otherNote = (Note)other;
-
-        if (otherNote == this) {
-            return true;
-        }
 
         return this.text.equals(otherNote.text);
     }

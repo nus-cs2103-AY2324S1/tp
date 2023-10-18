@@ -39,15 +39,15 @@ public final class Tag {
 
     @Override
     public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
         // instanceof also handles nulls
         if (!(other instanceof Tag)) {
             return false;
         }
         Tag otherTag = (Tag)other;
-
-        if (otherTag == this) {
-            return true;
-        }
 
         return this.name.equals(otherTag.name);
     }
