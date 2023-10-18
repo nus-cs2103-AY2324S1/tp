@@ -279,7 +279,7 @@ public class ParserUtil {
         String normalizedField = field.trim().toLowerCase();
         SortField sortField = PersonSortComparator.parseSortField(normalizedField);
         if (!PersonSortComparator.isValidSortField(sortField)) {
-            throw new ParseException(PersonSortComparator.MESSAGE_CONSTRAINTS);
+            throw new ParseException("Field should be one of the following: name, grad, course, spec, priority, none.");
         }
         return sortField;
     }
@@ -295,7 +295,7 @@ public class ParserUtil {
         String normalizedOrder = order.trim().toLowerCase();
         SortOrder sortOrder = PersonSortComparator.parseSortOrder(normalizedOrder);
         if (!PersonSortComparator.isValidSortOrder(sortOrder)) {
-            throw new ParseException(PersonSortComparator.MESSAGE_CONSTRAINTS);
+            throw new ParseException("Order should be one of the following: asc, desc.");
         }
         return sortOrder;
     }
