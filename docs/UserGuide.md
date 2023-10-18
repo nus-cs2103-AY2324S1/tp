@@ -32,13 +32,9 @@ Flashlingo is a **desktop app for learning words by flashcard, optimized for use
    * `add w/WORD wl/WORD LANGUAGE t/TRANSLATION tl/TRANSLATION LANGUAGE` :Adds a word to the flashcard with its translation.
 
    * `del index` : Deletes a words and its related information at the given index.
-   
    * `edit index w/WORD t/TRANSALTION` : Edits the word and its translation at the given index.
-   
    * `find KEYWORD` : Finds words whose original word or translation contains the given keyword.
-   
    * `start` : Shows flashcard, starts today’s flashcard session.
-
    * `flip` : Shows the other side of the flash card.
 
    * `yes` :  Indicates user has memorized the word.
@@ -84,7 +80,7 @@ Format: `list`
 Output:
 * `There are no words in the list! Add your flashcards now!`
 * `Here are the words:`
-  `1. ORIGINAL_WORD - TRANSLATION`
+`1. ORIGINAL_WORD - TRANSLATION`
   `2. ORIGINAL_WORD - TRANSLATION`
   `3. ORIGINAL_WORD - TRANSLATION`
   `...`
