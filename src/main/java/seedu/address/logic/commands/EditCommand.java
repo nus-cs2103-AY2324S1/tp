@@ -105,7 +105,11 @@ public class EditCommand extends Command {
         Birthday updatedBirthday = editPersonDescriptor.getBirthday().orElse(personToEdit.getBirthday());
         Set<Group> updatedGroups = editPersonDescriptor.getGroups().orElse(personToEdit.getGroups());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedBirthday, updatedGroups);
+        Optional<Phone> phone = Optional.ofNullable(updatedPhone);
+        Optional<Email> email = Optional.ofNullable(updatedEmail);
+        Optional<Address> address = Optional.ofNullable(updatedAddress);
+        Optional<Birthday> birthday = Optional.ofNullable(updatedBirthday);
+        return new Person(updatedName, phone, email, address, birthday, updatedGroups);
     }
 
     @Override
