@@ -261,17 +261,6 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ## **Appendix: Requirements**
 
-### Product scope
-
-**Target user profile**:
-
-
-- has a need to manage a significant number of transactions
-- can type fast
-- prefers typing to mouse interactions
-- is reasonably comfortable using CLI apps
-
-
 # Developer Guide
 
 ## Introduction
@@ -288,9 +277,10 @@ Tran$act is specifically tailored for accountants and finance professionals in s
 
 - **Prefer CLI interactions**: Our users prefer command-line interactions over graphical user interfaces, as it allows for quicker data entry and navigation.
 
-
 - **Reasonably comfortable with CLI apps**: Users should have a basic understanding of using command-line applications.
 
+- **Required to produce financial reports**: Tran$act can automatically produce financial reports given the transactions that have been entered.
+- 
 ## User Stories
 | Priority                 | As a …​                                           | I want to …​                                               | So that I can…​                                                        |
 | ------------------------ | ------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------------------- |
@@ -451,7 +441,6 @@ Tran$act is specifically tailored for accountants and finance professionals in s
 
 ### Use Case 6: Dashboard Display
 
-
 **Actor:** Accountant
 
 **Preconditions:** The accountant is logged into the Tran$act application.
@@ -484,6 +473,17 @@ Case 7: Access to Financial Reports
 2. The system provides tools for the accountant to customize the report parameters.
 3. The system generates and displays the customized report in common formats (PDF, CSV, Excel).
 
+### Use Case 8: Customizable Reports
+
+**Actor:** Accountant
+
+**Preconditions:** The accountant is logged into the Tran$act application.
+
+**Description:**
+1. The accountant selects the option to generate customizable reports.
+2. The system provides tools for the accountant to customize the report parameters.
+3. The system generates and displays the customized report in common formats (PDF, CSV, Excel).
+
 ## Non-functional Requirements (NFR)
 
 - Tran$act should support the storage of at least 1000 transactions per month to accommodate the needs of small businesses.
@@ -493,17 +493,15 @@ Case 7: Access to Financial Reports
 
 ## Glossary
 
+- **Accountant**: A professional who is responsible for managing a company/institution's financial records. 
+- **Expense**: Costs incurred, including staff salaries and product costs.
+- **Mainstream OS**: Windows, Linux, Unix, OS-X.
+- **Private contact detail**: A contact detail that is not meant to be shared with others.
+- **Revenue**: Money received, such as sales revenue.
 - **Transaction**: An exchange of money, which includes buying and selling activities.
 - **Transactor/Party**: The person or entity that carried out the transaction or is related to it.
-- **Income**: Money received, such as sales revenue.
-- **Expense**: Costs incurred, including staff salaries and product costs.
-- **Mainstream OS**: Windows, Linux, Unix, OS-X
-- **Private contact detail**: A contact detail that is not meant to be shared with others
-- **Transaction**: An exchange of money (e.g. Buying, Selling)
-- **Transactor/Party**: Person that carried out the transaction or is related to the transaction
-- **Income**: Money received (e.g. Sales of product)
-- **Expense**: Costs incurred (e.g. Staff salary, cost of product)
-
+- **Transaction**: An exchange of money (e.g. Buying, Selling).
+- **Transactor/Party**: Person or group that carried out the transaction or is related to the transaction.
 
 ---
 
