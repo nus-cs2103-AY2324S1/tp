@@ -25,13 +25,21 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `help`: Shows help window with link to user guide.
 
-   * `add n/John Doe pos/Senior Software Enginner id/EID2023-7890 p/81239876 e/johndoe@test.com` : Adds an employee named `John Doe` to the employee list.
+   * `add n/John Doe pos/Senior Software Enginner id/EID2023-7890 p/81239876 e/johndoe@test.com s/$5,000` : Adds an employee named `John Doe` to the employee list.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `list` : Lists all employees.
+   
+   * `edit 1 n/Alex Yeoh`: Edits the name of the 1st employee shown in the current list to `Alex Yeoh`.
+   
+   * `find Alex`: Lists all employees with the keyword `Alex`.
 
-   * `clear` : Deletes all contacts.
+   * `delete EID1234-5678` : Deletes the employee with employee id EID1234-5678 shown in the list.
+
+   * `sort by/Salary`: Sorts the employees by their salaries in ascending order.
+   * 
+   * `clear` : Deletes all employees.
 
    * `exit` : Exits the app.
 
@@ -41,12 +49,14 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
 
 ## Features
 
-- List of commands (coming soon): `help`
+- List of commands: `help`
 - Add an employee: `add`
 - Delete an employee: `delete`
+- Edits an employee: `edit`
 - List all employees: `list`
-- Find employees by name (coming soon): `find`
-- Clear all employees (coming soon): `clear`
+- Find employees by name: `find`
+- Sorts employees by attribute: `sort`
+- Clear all employees: `clear`
 - Exit the program: `exit`
 
 <div markdown="block" class="alert alert-info">
@@ -57,7 +67,7 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `edit INDEX [n/NAME] [pos/POSITION] [id/EMPLOYEE_ID] [p/PHONE_NUMBER] [e/EMAIL] [d/DEPARTMENT]...` can be used as `edit 1 n/John Doe` or as `edit 1 pos/Software Engineer`.
+  e.g. `edit INDEX [n/NAME] [pos/POSITION] [id/EMPLOYEE_ID] [p/PHONE_NUMBER] [e/EMAIL] [s/SALARY] [d/DEPARTMENT]...` can be used as `edit 1 n/John Doe` or as `edit 1 pos/Software Engineer`.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/POSITION`, `p/POSITION n/NAME` is also acceptable.
@@ -81,41 +91,43 @@ Format: `help`
 
 Adds an employee to the employee list.
 
-Format: `add n/NAME pos/POSITION id/EMPLOYEE_ID p/PHONE_NUMBER e/EMAIL [d/DEPARTMENT]...`
+Format: `add n/NAME pos/POSITION id/EMPLOYEE_ID p/PHONE_NUMBER e/EMAIL s/SALARY [d/DEPARTMENT]...`
 
 Examples:
-* `add n/Jane Doe pos/Manager id/EID2023-7891 p/81234567 e/janedoe@test.com`
-* `add n/Alex Yeoh pos/Software Engineer id/EID2023-7890 p/97685243 e/alexyeoh@test.com d/IT`
+* `add n/Jane Doe pos/Manager id/EID2023-7891 p/81234567 e/janedoe@test.com s/$5,000`
+* `add n/Alex Yeoh pos/Software Engineer id/EID2023-1234 p/87428807 e/alexyeoh@example.com s/$8,500 d/IT`
 
 ![add success](images/addSuccess.png)
 
-* `add n/John Doe p/Software Engineer id/EID2023-7890` is invalid because `id` already exists in the records.
+* `add n/Alex Yeoh pos/Software Engineer id/EID2023-1234 p/98561234 e/alexyeoh2@example.com s/$9,500 d/IT` is invalid because `name` and `id` already exists in the records.
 
 ![add failure](images/addFailure.png)
 
-### Listing all persons : `list`
+### Listing all employees : `list`
 
 Shows a list of all employees in the employee list.
 
 Format: `list`
 
-### Editing an employee : `edit` [coming soon]
+![list success](images/list.png)
+
+### Editing an employee : `edit`
 
 Edits an existing employee in the employee list.
 
-Format: `edit INDEX [n/NAME] [pos/POSITION] [id/EMPLOYEE_ID] [p/PHONE_NUMBER] [e/EMAIL] [d/DEPARTMENT]...`
+Format: `edit INDEX [n/NAME] [pos/POSITION] [id/EMPLOYEE_ID] [p/PHONE_NUMBER] [e/EMAIL] [s/SALARY] [d/DEPARTMENT]...`
 
 * Edits the employee at the specified `INDEX`. The index refers to the index number shown in the displayed employee list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
 Examples:
-*  `edit 1 pos/Senior Software Engineer` Edits the position of the 1st person to be `Senior Software Engineer`.
+*  `edit 1 pos/Senior Software Engineer` edits the position of the 1st employee to be `Senior Software Engineer`.
 ![edit success](images/editSuccess.png)
 *  `edit 10 pos/Senior Software Engineer` is invalid because the index does not exist.
 ![edit failure](images/editFailure.png)
 
-### Locating persons by name: `find` [coming soon]
+### Locating employees by name: `find`
 
 Finds employees whose names contain any of the given keywords.
 
@@ -131,31 +143,46 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find Alex` returns `Alex Yeoh`
 * ![find sucess](images/findSuccess.png)
-* `find John` is invalid since no employee matches the keyword<br>
-  ![find failuer](images/findFailure.png)
 
 ### Deleting an employee : `delete`
 
 Deletes an employee from the employee list.
 
-Format: `delete INDEX`
+Format: `delete EMPLOYEE_ID`
 
-* Deletes the employee at the specified `INDEX`.
-* The index refers to the index number shown in the employee list.
-* The index **must be a positive integer** (1, 2, 3, …)
+* Deletes the employee at the specified `EMPLOYEE_ID`.
+* The employee id refers to each employee's unique employee id.
+* The employee id **must be follow the EID format** (EID[4 digits]-[4 digits])
 
 Examples:
-* `delete 3`
-
-Expected outcome of success:  
+* `delete EID1234-5678` deletes the employee with employee id EID1234-5678 in the employee list.
+ 
 ![delete success](images/deleteSuccess.png)  
 
-Expected outcome of failure:  
+* `delete EID000-0000` is invalid because the id does not exist.
 ![delete failure](images/deleteFailure.png)
 
-### Clearing all entries : `clear` [coming soon]
+### Sorting all employees : `sort`
 
-Clears all entries from the address book.
+Sorts the employee list by a given attribute.
+
+Format: `sort by/ATTRIBUTE`
+
+* Sorts the employee list by the specified `ATTRIBUTE` in ascending order (by default).
+* The attribute has to be non-empty and exist (Position/ID/Phone/Email/Salary)
+
+Examples:
+* `sort by/Salary` deletes the employee with employee id EID1234-5678 in the employee list.
+
+![sort success](images/sortSuccess.png)
+
+* `sort by/blah` is invalid because it does not exist.
+
+![sort failure](images/sortFailure.png)
+
+### Clearing all entries : `clear`
+
+Clears all entries from the employee book.
 
 Format: `clear`
 
@@ -166,8 +193,6 @@ Format: `clear`
 Exits the program.
 
 Format: `exit`
-
-![exit](images/exit.png)
 
 ### Saving the data
 
@@ -204,11 +229,12 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/POSITION id/EMPLOYEE_ID` <br> e.g., `add n/James Ho p/Auditor id/EID2023-0928`
+**Add** | `add n/NAME pos/POSITION id/EMPLOYEE_ID p/PHONE_NUMBER e/EMAIL s/SALARY [d/DEPARTMENT]...` <br> e.g., `add n/James Ho pos/Auditor id/EID2023-0928 p/87651234 e/jamesho@example.com s/$8,000`
 **Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/POSITION] [id/EMPLOYEE_ID]`<br> e.g.,`edit 2 n/James Lee p/Head Auditor`
+**Delete** | `delete EMPLOYEE-ID`<br> e.g., `delete EID1234-5678`
+**Edit** | `edit INDEX [n/NAME] [p/POSITION] [id/EMPLOYEE_ID] [p/PHONE_NUMBER] [e/EMAIL] [s/SALARY] [d/DEPARTMENT]...`<br> e.g.,`edit 2 n/James Lee pos/Head Auditor`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
+**Sort** | `sort by/ATTRIBUTE`
 **Help** | `help`
 **Exit** | `exit`
