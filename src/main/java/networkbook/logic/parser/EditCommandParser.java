@@ -14,6 +14,7 @@ import networkbook.logic.commands.EditCommand.EditPersonDescriptor;
 import networkbook.logic.parser.exceptions.ParseException;
 import networkbook.model.person.Email;
 import networkbook.model.person.Link;
+import networkbook.model.person.Phone;
 import networkbook.model.tag.Tag;
 import networkbook.model.util.UniqueList;
 
@@ -87,10 +88,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setName(
                     ParserUtil.parseName(argMultimap.getValue(CliSyntax.PREFIX_NAME).get()));
         }
-        if (argMultimap.getValue(CliSyntax.PREFIX_PHONE).isPresent()) {
-            editPersonDescriptor.setPhone(
-                    ParserUtil.parsePhone(argMultimap.getValue(CliSyntax.PREFIX_PHONE).get()));
-        }
+        parsePhonesForEdit(argMultimap.getAllValues(CliSyntax.PREFIX_PHONE))
+                .ifPresent(editPersonDescriptor::setPhones);
         parseEmailsForEdit(argMultimap.getAllValues(CliSyntax.PREFIX_EMAIL))
                 .ifPresent(editPersonDescriptor::setEmails);
         parseLinksForEdit(argMultimap.getAllValues(CliSyntax.PREFIX_LINK))
@@ -115,6 +114,18 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         return editPersonDescriptor;
+    }
+
+    /**
+     * Parses {@code Collection<String> phones} into a {@code UniqueList<Phone>} wrapped in an {@code Optional}.
+     */
+    private static Optional<UniqueList<Phone>> parsePhonesForEdit(Collection<String> phones) throws ParseException {
+        requireNonNull(phones);
+
+        if (phones.isEmpty()) {
+            return Optional.empty();
+        }
+        return Optional.of(ParserUtil.parsePhones(phones));
     }
 
     /**

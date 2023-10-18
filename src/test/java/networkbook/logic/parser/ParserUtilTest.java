@@ -34,6 +34,7 @@ public class ParserUtilTest {
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
+    private static final String VALID_PHONE_2 = "98765432";
     private static final String VALID_LINK = "www.facebook.com/alice";
     private static final String VALID_LINK_2 = "https://www.google.com/?q=haha";
     private static final String VALID_GRADUATING_YEAR = "2000";
@@ -46,6 +47,7 @@ public class ParserUtilTest {
     private static final String VALID_PRIORITY = "meDIuM";
 
     private static final String WHITESPACE = " \t\r\n";
+
 
     @Test
     public void parseIndex_invalidInput_throwsParseException() {
@@ -91,8 +93,8 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parsePhone_null_returnsNull() throws Exception {
-        assertEquals(null, ParserUtil.parsePhone(null));
+    public void parsePhone_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parsePhone(null));
     }
 
     @Test
@@ -101,26 +103,67 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parsePhone_validValueWithoutWhitespace_returnsPhone() throws Exception {
+    public void parsePhone_validValueWithoutWhitespace_returnsEmail() throws Exception {
         Phone expectedPhone = new Phone(VALID_PHONE);
         assertEquals(expectedPhone, ParserUtil.parsePhone(VALID_PHONE));
     }
 
     @Test
-    public void parsePhone_validValueWithWhitespace_returnsTrimmedPhone() throws Exception {
+    public void parsePhone_validValueWithWhitespace_returnsTrimmedEmail() throws Exception {
         String phoneWithWhitespace = WHITESPACE + VALID_PHONE + WHITESPACE;
         Phone expectedPhone = new Phone(VALID_PHONE);
         assertEquals(expectedPhone, ParserUtil.parsePhone(phoneWithWhitespace));
     }
 
     @Test
+    public void parsePhones_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parsePhones(null));
+    }
+
+    @Test
+    public void parsePhones_collectionWithInvalidPhones_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePhones(Arrays.asList(VALID_PHONE, INVALID_PHONE)));
+    }
+
+    @Test
+    public void parsePhones_collectionWithDuplicates_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePhones(Arrays.asList(VALID_PHONE, VALID_PHONE)));
+    }
+
+    @Test
+    public void parsePhones_emptyCollection_returnsEmptyListOfPhones() throws Exception {
+        assertEquals(new UniqueList<Phone>(), ParserUtil.parsePhones(Arrays.asList()));
+    }
+
+    @Test
+    public void parsePhones_collectionWithValidPhones_returnsPhoneList() throws Exception {
+        UniqueList<Phone> expectedList = new UniqueList<Phone>()
+                .setItems(Arrays.asList(new Phone(VALID_PHONE), new Phone(VALID_PHONE_2)));
+        UniqueList<Phone> actualList = ParserUtil.parsePhones(Arrays.asList(VALID_PHONE, VALID_PHONE_2));
+        assertEquals(expectedList, actualList);
+    }
+
+    @Test
     public void parseLink_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseLinks(null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseLink(null));
     }
 
     @Test
     public void parseLink_invalidValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseLink(INVALID_LINK));
+    }
+
+    @Test
+    public void parseLink_validValueWithoutWhitespace_returnsEmail() throws Exception {
+        Link expectedLink = new Link(VALID_LINK);
+        assertEquals(expectedLink, ParserUtil.parseLink(VALID_LINK));
+    }
+
+    @Test
+    public void parseLink_validValueWithWhitespace_returnsTrimmedEmail() throws Exception {
+        String linkWithWhitespace = WHITESPACE + VALID_LINK + WHITESPACE;
+        Link expectedLink = new Link(VALID_LINK);
+        assertEquals(expectedLink, ParserUtil.parseLink(linkWithWhitespace));
     }
 
     @Test
@@ -139,7 +182,7 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseLinks_emptyCollection_returnsEmptyListOfEmails() throws Exception {
+    public void parseLinks_emptyCollection_returnsEmptyListOfLinks() throws Exception {
         assertEquals(new UniqueList<Link>(), ParserUtil.parseLinks(Arrays.asList()));
     }
 

@@ -64,7 +64,7 @@ public class CreateCommandParser implements Parser<CreateCommand> {
 
         Name name = ParserUtil.parseName(argMultimap.getValue(CliSyntax.PREFIX_NAME)
                     .orElseThrow(() -> new ParseException(String.format(Messages.MESSAGE_INVALID_CONTACT_NAME))));
-        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(CliSyntax.PREFIX_PHONE).orElse(null));
+        UniqueList<Phone> phones = ParserUtil.parsePhones(argMultimap.getAllValues(CliSyntax.PREFIX_PHONE));
         UniqueList<Email> emails = ParserUtil.parseEmails(argMultimap.getAllValues(CliSyntax.PREFIX_EMAIL));
         UniqueList<Link> links = ParserUtil.parseLinks(argMultimap.getAllValues(CliSyntax.PREFIX_LINK));
         GraduatingYear graduatingYear = ParserUtil.parseGraduatingYear(
@@ -75,7 +75,7 @@ public class CreateCommandParser implements Parser<CreateCommand> {
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(CliSyntax.PREFIX_TAG));
         Priority priority = ParserUtil.parsePriority(argMultimap.getValue(CliSyntax.PREFIX_PRIORITY).orElse(null));
 
-        Person person = new Person(name, phone, emails, links, graduatingYear, course, specialisation,
+        Person person = new Person(name, phones, emails, links, graduatingYear, course, specialisation,
                     tagList, priority);
 
         return new CreateCommand(person);

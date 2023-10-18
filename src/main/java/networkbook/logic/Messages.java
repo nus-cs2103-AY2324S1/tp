@@ -8,7 +8,6 @@ import networkbook.logic.parser.Prefix;
 import networkbook.model.person.Course;
 import networkbook.model.person.GraduatingYear;
 import networkbook.model.person.Person;
-import networkbook.model.person.Phone;
 import networkbook.model.person.Priority;
 import networkbook.model.person.Specialisation;
 
@@ -42,13 +41,10 @@ public class Messages {
      */
     public static String format(Person person) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(person.getName());
-        person.getPhone().ifPresent((Phone p) -> {
-            builder.append("; Phone: ");
-            builder.append(p);
-        });
-        builder.append("; Emails: ").append(person.getEmails());
-        builder.append("; Links: ").append(person.getLinks());
+        builder.append(person.getName())
+                .append("; Phones: ").append(person.getPhones())
+                .append("; Emails: ").append(person.getEmails())
+                .append("; Links: ").append(person.getLinks());
         person.getGraduatingYear().ifPresent((GraduatingYear g) -> {
             builder.append("; Graduating Year: ");
             builder.append(g);
