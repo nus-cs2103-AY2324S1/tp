@@ -48,16 +48,15 @@ public class JsonUserPrefsStorageTest {
                 ? TEST_DATA_FOLDER.resolve(userPrefsFileInTestDataFolder)
                 : null;
     }
-/*
- * to be fixed
+    /*
+     * to be fixed
     @Test
     public void readUserPrefs_fileInOrder_successfullyRead() throws DataLoadingException {
         UserPrefs expected = getTypicalUserPrefs();
         UserPrefs actual = readUserPrefs("TypicalUserPref.json").get();
         assertEquals(expected, actual);
     }
- */
-
+     */
 
     @Test
     public void readUserPrefs_valuesMissingFromFile_defaultValuesUsed() throws DataLoadingException {
@@ -66,7 +65,7 @@ public class JsonUserPrefsStorageTest {
     }
 
     /*
- * to be fixed
+     * to be fixed
     @Test
     public void readUserPrefs_extraValuesInFile_extraValuesIgnored() throws DataLoadingException {
         UserPrefs expected = getTypicalUserPrefs();
@@ -74,7 +73,7 @@ public class JsonUserPrefsStorageTest {
 
         assertEquals(expected, actual);
     }
- */
+    */
 
     private UserPrefs getTypicalUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
