@@ -29,7 +29,7 @@ public class Tag {
     public Tag(String tagName) {
         requireNonNull(tagName);
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
-        String[] str = tagName.split(" ", 1);
+        String[] str = tagName.split(" ", 2);
         String courseCode = str[0];
         String tutorialGroup = str.length == 2 ? str[1] : null;
         this.tagName = tagName;
