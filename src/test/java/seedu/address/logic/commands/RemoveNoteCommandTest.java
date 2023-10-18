@@ -1,8 +1,11 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_NOTE_DISPLAYED_INDEX;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_NOTE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -47,15 +50,17 @@ public class RemoveNoteCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         RemoveNoteCommand removeNoteCommand = new RemoveNoteCommand(outOfBoundIndex, Index.fromOneBased(1));
 
-        assertThrows(CommandException.class, () -> removeNoteCommand.execute(model));
+        CommandException exception = assertThrows(CommandException.class, () -> removeNoteCommand.execute(model));
+        assertEquals(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, exception.getMessage());
     }
+
 
     @Test
     public void execute_invalidNoteIndex_throwsCommandException() {
-        RemoveNoteCommand removeNoteCommand = new RemoveNoteCommand(INDEX_FIRST_PERSON,
-            Index.fromOneBased(1000));
+        RemoveNoteCommand removeNoteCommand = new RemoveNoteCommand(INDEX_FIRST_PERSON, Index.fromOneBased(1000));
 
-        assertThrows(CommandException.class, () -> removeNoteCommand.execute(model));
+        CommandException exception = assertThrows(CommandException.class, () -> removeNoteCommand.execute(model));
+        assertEquals(MESSAGE_INVALID_NOTE_DISPLAYED_INDEX, exception.getMessage());
     }
 
     @Test
