@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.model.group.Group;
@@ -102,8 +103,13 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Builds a person with the given fields.
+     * @return
+     */
     public Person build() {
-        return new Person(name, phone, email, address, birthday, groups);
+        return new Person(name, Optional.of(phone), Optional.of(email), Optional.of(address), Optional.of(birthday),
+                groups);
     }
 
 }
