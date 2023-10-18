@@ -13,15 +13,15 @@ import seedu.address.model.contact.UniqueContactList;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSameContact comparison)
  */
-public class ConText implements ContactList {
+public class ContactsManager implements ContactList {
     private final UniqueContactList contacts = new UniqueContactList();
 
-    public ConText() {}
+    public ContactsManager() {}
 
     /**
-     * Creates an ConText using the Contacts in the {@code toBeCopied}
+     * Creates an ContactsManager using the Contacts in the {@code toBeCopied}
      */
-    public ConText(ContactList toBeCopied) {
+    public ContactsManager(ContactList toBeCopied) {
         resetData(toBeCopied);
     }
 
@@ -36,7 +36,7 @@ public class ConText implements ContactList {
     }
 
     /**
-     * Resets the existing data of this {@code ConText} with {@code newData}.
+     * Resets the existing data of this {@code ContactsManager} with {@code newData}.
      */
     public void resetData(ContactList newData) {
         requireNonNull(newData);
@@ -75,7 +75,7 @@ public class ConText implements ContactList {
     }
 
     /**
-     * Removes {@code key} from this {@code ConText}.
+     * Removes {@code key} from this {@code ContactsManager}.
      * {@code key} must exist in the address book.
      */
     public void removeContact(Contact key) {
@@ -103,11 +103,11 @@ public class ConText implements ContactList {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof ConText)) {
+        if (!(other instanceof ContactsManager)) {
             return false;
         }
 
-        ConText otherConText = (ConText) other;
+        ContactsManager otherConText = (ContactsManager) other;
         return contacts.equals(otherConText.contacts);
     }
 

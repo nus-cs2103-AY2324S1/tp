@@ -184,11 +184,11 @@
     -fx-background-color: derive(#1d1d1d, 30%);
 }
 
-.context-menu {
+.ContactsManager-menu {
     -fx-background-color: derive(#1d1d1d, 50%);
 }
 
-.context-menu .label {
+.ContactsManager-menu .label {
     -fx-text-fill: white;
 }
 

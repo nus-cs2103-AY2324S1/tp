@@ -26,7 +26,7 @@ public class ModelManagerTest {
     public void constructor() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
-        assertEquals(new ConText(), new ConText(modelManager.getContactList()));
+        assertEquals(new ContactsManager(), new ContactsManager(modelManager.getContactList()));
     }
 
     @Test
@@ -95,13 +95,13 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        ConText conText = new ConTextBuilder().withContact(ALICE).withContact(BENSON).build();
-        ConText differentConText = new ConText();
+        ContactsManager contactsManager = new ConTextBuilder().withContact(ALICE).withContact(BENSON).build();
+        ContactsManager differentConText = new ContactsManager();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(conText, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(conText, userPrefs);
+        modelManager = new ModelManager(contactsManager, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(contactsManager, userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -113,13 +113,13 @@ public class ModelManagerTest {
         // different types -> returns false
         assertFalse(modelManager.equals(5));
 
-        // different ConText -> returns false
+        // different ContactsManager -> returns false
         assertFalse(modelManager.equals(new ModelManager(differentConText, userPrefs)));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredContactList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(conText, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(contactsManager, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
@@ -127,6 +127,6 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setConTextFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(conText, differentUserPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(contactsManager, differentUserPrefs)));
     }
 }

@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.logic.Messages;
-import seedu.address.model.ConText;
+import seedu.address.model.ContactsManager;
 import seedu.address.testutil.TestData;
 
 public class JsonSerializableConTextTest {
@@ -25,8 +25,8 @@ public class JsonSerializableConTextTest {
     public void toModelType_typicalContactsFile_success() throws Exception {
         JsonSerializableConText dataFromFile = JsonUtil.readJsonFile(TYPICAL_CONTACTS_FILE,
                 JsonSerializableConText.class).get();
-        ConText conTextFromFile = dataFromFile.toModelType();
-        ConText typicalContactsConText = TestData.getTypicalConText();
+        ContactsManager conTextFromFile = dataFromFile.toModelType();
+        ContactsManager typicalContactsConText = TestData.getTypicalConText();
         assertEquals(conTextFromFile, typicalContactsConText);
     }
 

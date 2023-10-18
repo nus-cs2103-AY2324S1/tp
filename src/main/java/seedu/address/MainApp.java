@@ -13,9 +13,9 @@ import seedu.address.commons.core.Version;
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.model.ContactsManager;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
-import seedu.address.model.ConText;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ContactList;
@@ -48,7 +48,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing ConText ]===========================");
+        logger.info("=============================[ Initializing ContactsManager ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -81,13 +81,13 @@ public class MainApp extends Application {
             contactListOptional = storage.readConText();
             if (!contactListOptional.isPresent()) {
                 logger.info("Creating a new data file " + storage.getConTextFilePath()
-                        + " populated with a sample ConText.");
+                        + " populated with a sample ContactsManager.");
             }
             initialData = contactListOptional.orElseGet(SampleDataUtil::getSampleConText);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getConTextFilePath() + " could not be loaded."
                     + " Will be starting with an empty contactList.");
-            initialData = new ConText();
+            initialData = new ContactsManager();
         }
 
         return new ModelManager(initialData, userPrefs);
@@ -170,7 +170,7 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting ConText " + MainApp.VERSION);
+        logger.info("Starting ContactsManager " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 

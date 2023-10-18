@@ -13,8 +13,8 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.InputParser;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.Model;
 import seedu.address.model.ContactList;
+import seedu.address.model.Model;
 import seedu.address.model.contact.Contact;
 import seedu.address.storage.Storage;
 

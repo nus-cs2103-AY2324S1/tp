@@ -12,7 +12,7 @@ import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand.EditContactDescriptor;
-import seedu.address.model.ConText;
+import seedu.address.model.ContactsManager;
 import seedu.address.model.contact.Contact;
 
 
@@ -100,10 +100,10 @@ public final class TestData {
             .withEmail("hans@example.com").withNote("chicago ave").build();
 
     /**
-     * Returns an {@code ConText} with all the typical contacts.
+     * Returns an {@code ContactsManager} with all the typical contacts.
      */
-    public static ConText getTypicalConText() {
-        ConText ab = new ConText();
+    public static ContactsManager getTypicalConText() {
+        ContactsManager ab = new ContactsManager();
         for (Contact contact : getTypicalContacts()) {
             ab.addContact(contact);
         }

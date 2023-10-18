@@ -10,14 +10,14 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.Messages;
-import seedu.address.model.ConText;
+import seedu.address.model.ContactsManager;
 import seedu.address.model.ContactList;
 import seedu.address.model.contact.Contact;
 
 /**
- * An Immutable ConText that is serializable to JSON format.
+ * An Immutable ContactsManager that is serializable to JSON format.
  */
-@JsonRootName(value = "ConText")
+@JsonRootName(value = "ContactsManager")
 class JsonSerializableConText {
 
     private final List<JsonAdaptedContact> contacts = new ArrayList<>();
@@ -40,20 +40,20 @@ class JsonSerializableConText {
     }
 
     /**
-     * Converts this address book into the model's {@code ConText} object.
+     * Converts this address book into the model's {@code ContactsManager} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public ConText toModelType() throws IllegalValueException {
-        ConText conText = new ConText();
+    public ContactsManager toModelType() throws IllegalValueException {
+        ContactsManager contactsManager = new ContactsManager();
         for (JsonAdaptedContact jsonAdaptedContact : contacts) {
             Contact contact = jsonAdaptedContact.toModelType();
-            if (conText.hasContact(contact)) {
+            if (contactsManager.hasContact(contact)) {
                 throw new IllegalValueException(Messages.MESSAGE_CONTAIN_DUPLICATE_CONTACT);
             }
-            conText.addContact(contact);
+            contactsManager.addContact(contact);
         }
-        return conText;
+        return contactsManager;
     }
 
 }

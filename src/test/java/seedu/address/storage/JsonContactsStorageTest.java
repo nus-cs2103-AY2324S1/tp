@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.commons.exceptions.DataLoadingException;
-import seedu.address.model.ConText;
+import seedu.address.model.ContactsManager;
 import seedu.address.model.ContactList;
 
 public class JsonContactsStorageTest {
@@ -63,26 +63,26 @@ public class JsonContactsStorageTest {
     @Test
     public void readAndSaveConText_allInOrder_success() throws Exception {
         Path filePath = testFolder.resolve("TempConText.json");
-        ConText original = getTypicalConText();
+        ContactsManager original = getTypicalConText();
         JsonContactsStorage jsonContactsStorage = new JsonContactsStorage(filePath);
 
         // Save in new file and read back
         jsonContactsStorage.saveConText(original, filePath);
         ContactList readBack = jsonContactsStorage.readConText(filePath).get();
-        assertEquals(original, new ConText(readBack));
+        assertEquals(original, new ContactsManager(readBack));
 
         // Modify data, overwrite exiting file, and read back
         original.addContact(HOON);
         original.removeContact(ALICE);
         jsonContactsStorage.saveConText(original, filePath);
         readBack = jsonContactsStorage.readConText(filePath).get();
-        assertEquals(original, new ConText(readBack));
+        assertEquals(original, new ContactsManager(readBack));
 
         // Save and read without specifying file path
         original.addContact(IDA);
         jsonContactsStorage.saveConText(original); // file path not specified
         readBack = jsonContactsStorage.readConText().get(); // file path not specified
-        assertEquals(original, new ConText(readBack));
+        assertEquals(original, new ContactsManager(readBack));
 
     }
 
@@ -92,7 +92,7 @@ public class JsonContactsStorageTest {
     }
 
     /**
-     * Saves {@code ConText} at the specified {@code filePath}.
+     * Saves {@code ContactsManager} at the specified {@code filePath}.
      */
     private void saveConText(ContactList contactList, String filePath) {
         try {
@@ -105,6 +105,6 @@ public class JsonContactsStorageTest {
 
     @Test
     public void saveConText_nullFilePath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> saveConText(new ConText(), null));
+        assertThrows(NullPointerException.class, () -> saveConText(new ContactsManager(), null));
     }
 }

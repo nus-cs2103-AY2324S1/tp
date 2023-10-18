@@ -8,7 +8,7 @@ import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.model.ContactList;
 
 /**
- * Represents a storage for {@link seedu.address.model.ConText}.
+ * Represents a storage for {@link seedu.address.model.ContactsManager}.
  */
 public interface ContactsStorage {
 
@@ -18,7 +18,7 @@ public interface ContactsStorage {
     Path getConTextFilePath();
 
     /**
-     * Returns ConText data as a {@link ContactList}.
+     * Returns ContactsManager data as a {@link ContactList}.
      * Returns {@code Optional.empty()} if storage file is not found.
      *
      * @throws DataLoadingException if loading the data from storage failed.
@@ -32,7 +32,7 @@ public interface ContactsStorage {
 
     /**
      * Saves the given {@link ContactList} to the storage.
-     * @param conText cannot be null.
+     * @param contactList cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
     void saveConText(ContactList contactList) throws IOException;

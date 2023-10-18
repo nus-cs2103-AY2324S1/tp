@@ -45,11 +45,11 @@ public interface Model {
     void setConTextFilePath(Path conTextFilePath);
 
     /**
-     * Replaces address book data with the data in {@code ConText}.
+     * Replaces address book data with the data in {@code ContactsManager}.
      */
     void setConText(ContactList contactList);
 
-    /** Returns the ConText */
+    /** Returns the ContactsManager */
     ContactList getContactList();
 
     /**

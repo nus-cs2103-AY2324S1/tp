@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.address.model.ConText;
+import seedu.address.model.ContactsManager;
 import seedu.address.model.ContactList;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.Email;
@@ -14,7 +14,7 @@ import seedu.address.model.contact.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
- * Contains utility methods for populating {@code ConText} with sample data.
+ * Contains utility methods for populating {@code ContactsManager} with sample data.
  */
 public class SampleDataUtil {
     public static Contact[] getSampleContacts() {
@@ -41,7 +41,7 @@ public class SampleDataUtil {
     }
 
     public static ContactList getSampleConText() {
-        ConText sampleAb = new ConText();
+        ContactsManager sampleAb = new ContactsManager();
         for (Contact sampleContact : getSampleContacts()) {
             sampleAb.addContact(sampleContact);
         }

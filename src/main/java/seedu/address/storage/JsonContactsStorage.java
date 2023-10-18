@@ -15,7 +15,7 @@ import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.ContactList;
 
 /**
- * A class to access ConText data stored as a json file on the hard disk.
+ * A class to access ContactsManager data stored as a json file on the hard disk.
  */
 public class JsonContactsStorage implements ContactsStorage {
 

@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.ConText;
+import seedu.address.model.ContactsManager;
 import seedu.address.model.ContactList;
 import seedu.address.model.UserPrefs;
 
@@ -54,10 +54,10 @@ public class StorageManagerTest {
          * {@link JsonContactsStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link JsonContactsStorageTest} class.
          */
-        ConText original = getTypicalConText();
+        ContactsManager original = getTypicalConText();
         storageManager.saveConText(original);
         ContactList retrieved = storageManager.readConText().get();
-        assertEquals(original, new ConText(retrieved));
+        assertEquals(original, new ContactsManager(retrieved));
     }
 
     @Test

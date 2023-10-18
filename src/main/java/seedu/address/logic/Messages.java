@@ -28,7 +28,7 @@ public final class Messages {
 
     // Messages associated with various Commands
     public static final String MESSAGE_ADD_COMMAND_SUCCESS = "New contact added: %1$s";
-    public static final String MESSAGE_COMMAND_DUPLICATE_CONTACT = "This contact already exists in ConText";
+    public static final String MESSAGE_COMMAND_DUPLICATE_CONTACT = "This contact already exists in Context";
     public static final String MESSAGE_CLEAR_COMMAND_SUCCESS = "Address book has been cleared!";
     public static final String MESSAGE_DELETE_COMMAND_SUCCESS = "Deleted Contact: %1$s";
     public static final String MESSAGE_EDIT_COMMAND_SUCCESS = "Edited Contact: %1$s";

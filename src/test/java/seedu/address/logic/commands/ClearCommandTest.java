@@ -6,7 +6,7 @@ import static seedu.address.testutil.TestData.getTypicalConText;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
-import seedu.address.model.ConText;
+import seedu.address.model.ContactsManager;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -25,7 +25,7 @@ public class ClearCommandTest {
     public void execute_nonEmptyConText_success() {
         Model model = new ModelManager(getTypicalConText(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalConText(), new UserPrefs());
-        expectedModel.setConText(new ConText());
+        expectedModel.setConText(new ContactsManager());
 
         assertCommandSuccess(new ClearCommand(), model, Messages.MESSAGE_CLEAR_COMMAND_SUCCESS, expectedModel);
     }

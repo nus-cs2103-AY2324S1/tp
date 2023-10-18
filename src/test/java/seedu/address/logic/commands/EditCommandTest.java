@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand.EditContactDescriptor;
-import seedu.address.model.ConText;
+import seedu.address.model.ContactsManager;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -43,7 +43,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(Messages.MESSAGE_EDIT_COMMAND_SUCCESS, Contact.format(editedContact));
 
-        Model expectedModel = new ModelManager(new ConText(model.getContactList()), new UserPrefs());
+        Model expectedModel = new ModelManager(new ContactsManager(model.getContactList()), new UserPrefs());
         expectedModel.setContact(model.getFilteredContactList().get(0), editedContact);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -64,7 +64,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(Messages.MESSAGE_EDIT_COMMAND_SUCCESS, Contact.format(editedContact));
 
-        Model expectedModel = new ModelManager(new ConText(model.getContactList()), new UserPrefs());
+        Model expectedModel = new ModelManager(new ContactsManager(model.getContactList()), new UserPrefs());
         expectedModel.setContact(lastContact, editedContact);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -77,7 +77,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(Messages.MESSAGE_EDIT_COMMAND_SUCCESS, Contact.format(editedContact));
 
-        Model expectedModel = new ModelManager(new ConText(model.getContactList()), new UserPrefs());
+        Model expectedModel = new ModelManager(new ContactsManager(model.getContactList()), new UserPrefs());
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -93,7 +93,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(Messages.MESSAGE_EDIT_COMMAND_SUCCESS, Contact.format(editedContact));
 
-        Model expectedModel = new ModelManager(new ConText(model.getContactList()), new UserPrefs());
+        Model expectedModel = new ModelManager(new ContactsManager(model.getContactList()), new UserPrefs());
         expectedModel.setContact(model.getFilteredContactList().get(0), editedContact);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);

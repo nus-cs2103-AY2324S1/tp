@@ -19,25 +19,25 @@ import seedu.address.model.contact.Contact;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final ConText conText;
+    private final ContactsManager contactsManager;
     private final UserPrefs userPrefs;
     private final FilteredList<Contact> filteredContacts;
 
     /**
-     * Initializes a ModelManager with the given conText and userPrefs.
+     * Initializes a ModelManager with the given ContactsManager and userPrefs.
      */
     public ModelManager(ContactList contactList, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(contactList, userPrefs);
 
         logger.fine("Initializing with address book: " + contactList + " and user prefs " + userPrefs);
 
-        this.conText = new ConText(contactList);
+        this.contactsManager = new ContactsManager(contactList);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredContacts = new FilteredList<>(this.conText.getContactList());
+        filteredContacts = new FilteredList<>(this.contactsManager.getContactList());
     }
 
     public ModelManager() {
-        this(new ConText(), new UserPrefs());
+        this(new ContactsManager(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -75,32 +75,32 @@ public class ModelManager implements Model {
         userPrefs.setConTextFilePath(conTextFilePath);
     }
 
-    //=========== ConText ================================================================================
+    //=========== ContactsManager ================================================================================
 
     @Override
     public void setConText(ContactList contactList) {
-        this.conText.resetData(conText);
+        this.contactsManager.resetData(contactsManager);
     }
 
     @Override
     public ContactList getContactList() {
-        return conText;
+        return contactsManager;
     }
 
     @Override
     public boolean hasContact(Contact contact) {
         requireNonNull(contact);
-        return conText.hasContact(contact);
+        return contactsManager.hasContact(contact);
     }
 
     @Override
     public void deleteContact(Contact target) {
-        conText.removeContact(target);
+        contactsManager.removeContact(target);
     }
 
     @Override
     public void addContact(Contact contact) {
-        conText.addContact(contact);
+        contactsManager.addContact(contact);
         updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
     }
 
@@ -108,7 +108,7 @@ public class ModelManager implements Model {
     public void setContact(Contact target, Contact editedContact) {
         requireAllNonNull(target, editedContact);
 
-        conText.setContact(target, editedContact);
+        contactsManager.setContact(target, editedContact);
     }
 
     //=========== Filtered Contact List Accessors =============================================================
@@ -140,7 +140,7 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return conText.equals(otherModelManager.conText)
+        return contactsManager.equals(otherModelManager.contactsManager)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredContacts.equals(otherModelManager.filteredContacts);
     }
