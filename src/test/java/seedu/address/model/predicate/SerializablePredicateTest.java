@@ -4,10 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import seedu.address.model.person.Person;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
+
+import seedu.address.model.person.Person;
 
 public class SerializablePredicateTest {
     @Test
