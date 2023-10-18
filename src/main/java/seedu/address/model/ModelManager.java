@@ -124,7 +124,6 @@ public class ModelManager implements Model {
         requireAllNonNull(band);
         addressBook.addBand(band);
     }
-  
     //=========== Filtered Musician List Accessors =============================================================
 
     /**
