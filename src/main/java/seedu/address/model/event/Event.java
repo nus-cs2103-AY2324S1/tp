@@ -15,19 +15,12 @@ import seedu.address.model.person.Name;
 public abstract class Event {
 
     private Set<Name> names;
-
     private EventDate startDate;
-
     private Optional<EventTime> startTime;
     private EventDate endDate;
-
     private Optional<EventTime> endTime;
-
     private EventName name;
-
     private EventType eventType;
-
-
 
     /**
      * Constructor for events with optional start and end time
@@ -40,7 +33,6 @@ public abstract class Event {
      */
     public Event(EventType eventType, EventName name, EventDate startDate, Optional<EventTime> startTime,
                  EventDate endDate, Optional<EventTime> endTime, Set<Name> names) {
-
         this.eventType = eventType;
         this.name = name;
         this.startDate = startDate;
@@ -48,9 +40,7 @@ public abstract class Event {
         this.endDate = endDate;
         this.endTime = endTime;
         this.names = names;
-
     }
-
 
     public EventType getEventType() {
         return this.eventType;
@@ -122,11 +112,7 @@ public abstract class Event {
         if (!this.names.contains(toEdit)) {
             return this.names;
         }
-
-
-
         Set<Name> newNames = new HashSet<>();
-
         for (Name name : this.names) {
             if (name.equals(toEdit)) {
                 newNames.add(editedName);
@@ -134,7 +120,6 @@ public abstract class Event {
                 newNames.add(name);
             }
         }
-
         return newNames;
 
     }

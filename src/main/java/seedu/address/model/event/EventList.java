@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
 
+import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
@@ -62,5 +63,12 @@ public class EventList {
 
     public ArrayList<Event> getEventsList() {
         return this.events;
+    }
+
+    public void remove(Event target) {
+        requireNonNull(target);
+        if (!this.events.remove(target)) {
+            throw new EventNotFoundException();
+        }
     }
 }

@@ -127,9 +127,12 @@ public class AddressBook implements ReadOnlyAddressBook {
      * @param event Event to be added.
      */
     public void addEvent(Event event) {
-        events.addEvent(event);
+        this.events.addEvent(event);
     }
 
+    public void deleteEvent(Event event) {
+        this.events.remove(event);
+    }
 
     //=========== util methods ===========================================================
 
