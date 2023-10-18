@@ -4,13 +4,13 @@ import java.nio.file.Path;
 
 import seedu.address.commons.core.GuiSettings;
 
+
+
 /**
- * Unmodifiable view of user prefs.
+ * Read-only view of settings.
  */
-public interface ReadOnlyUserPrefs {
+public interface ReadOnlySettings {
+    Path getContactsFilePath();
 
     GuiSettings getGuiSettings();
-
-    Path getConTextFilePath();
-
 }
