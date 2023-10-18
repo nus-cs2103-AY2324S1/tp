@@ -91,13 +91,20 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_filter() throws Exception {
-        assertTrue(parser.parseCommand(FilterCommand.COMMAND_WORD + " add coursetg/CS2103T") instanceof FilterCommand);
-        assertTrue(parser.parseCommand(FilterCommand.COMMAND_WORD + " add coursetg/CS2103T") instanceof FilterCommand);
-        assertTrue(parser.parseCommand(FilterCommand.COMMAND_WORD + " add coursetg/CS2103T tn/1") instanceof FilterCommand);
-        assertTrue(parser.parseCommand(FilterCommand.COMMAND_WORD + " delete coursetg/CS2103T") instanceof FilterCommand);
-        assertTrue(parser.parseCommand(FilterCommand.COMMAND_WORD + " delete coursetg/CS2103T") instanceof FilterCommand);
-        assertTrue(parser.parseCommand(FilterCommand.COMMAND_WORD + " delete coursetg/CS2103T tn/1") instanceof FilterCommand);
-        assertTrue(parser.parseCommand(FilterCommand.COMMAND_WORD + " clear") instanceof FilterCommand);
+        assertTrue(parser.parseCommand(
+                FilterCommand.COMMAND_WORD + " add coursetg/CS2103T") instanceof FilterCommand);
+        assertTrue(parser.parseCommand(
+                FilterCommand.COMMAND_WORD + " add coursetg/CS2103T") instanceof FilterCommand);
+        assertTrue(parser.parseCommand(
+                FilterCommand.COMMAND_WORD + " add coursetg/CS2103T tn/1") instanceof FilterCommand);
+        assertTrue(parser.parseCommand(
+                FilterCommand.COMMAND_WORD + " delete coursetg/CS2103T") instanceof FilterCommand);
+        assertTrue(parser.parseCommand(
+                FilterCommand.COMMAND_WORD + " delete coursetg/CS2103T") instanceof FilterCommand);
+        assertTrue(parser.parseCommand(
+                FilterCommand.COMMAND_WORD + " delete coursetg/CS2103T tn/1") instanceof FilterCommand);
+        assertTrue(parser.parseCommand(
+                FilterCommand.COMMAND_WORD + " clear") instanceof FilterCommand);
     }
 
     @Test
