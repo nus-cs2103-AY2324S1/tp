@@ -2,9 +2,9 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -51,7 +51,7 @@ public class Person {
         this.telegram = Optional.empty();
         this.tags.addAll(tags);
         this.id = Optional.empty();
-        this.notes = new LinkedList<>();
+        this.notes = new ArrayList<>();
     }
 
     /**
@@ -173,10 +173,7 @@ public class Person {
      * @param idx
      * @throws Exception
      */
-    public void removeNote(int idx) { //throws Exception {
-        //        if (idx < 0 || idx >= notes.size()) {
-        //            throw new Exception("Invalid index");
-        //        }
+    public void removeNote(int idx) {
         notes.remove(idx);
     }
 

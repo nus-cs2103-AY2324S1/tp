@@ -91,24 +91,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     public void handleNotesButtonClick() {
         try {
-            /*
-            //can't get this to work lol
             NotesWindow notesWindow = new NotesWindow(person);
             notesWindow.show();
-             */
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Notes");
-            alert.setHeaderText("Notes for " + person.getName().fullName);
-            //format notes
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < person.getNotes().size(); i++) {
-                sb.append(i + 1);
-                sb.append(". ");
-                sb.append(person.getNotes().get(i).toString());
-                sb.append("\n");
-            }
-            alert.setContentText(sb.toString());
-            alert.showAndWait();
         } catch (Exception e) {
             e.printStackTrace();
         }

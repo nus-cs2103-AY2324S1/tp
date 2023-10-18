@@ -1,11 +1,17 @@
 package seedu.address.ui;
 
+import java.util.List;
 import java.util.logging.Logger;
 
+import com.sun.javafx.charts.Legend;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 
 /**
@@ -17,7 +23,7 @@ public class NotesWindow extends UiPart<Stage> {
     private static final String FXML = "NotesWindow.fxml";
 
     @FXML
-    private TextArea notesTextArea;
+    private ListView<String> notesListView;
 
     private final Person person;
 
@@ -29,7 +35,7 @@ public class NotesWindow extends UiPart<Stage> {
     public NotesWindow(Stage root, Person person) {
         super(FXML, root);
         this.person = person;
-        notesTextArea.setText(person.getNotes().toString());
+        populateListView(person.getNotes());
     }
 
     public NotesWindow(Person person) {
@@ -57,6 +63,17 @@ public class NotesWindow extends UiPart<Stage> {
         getRoot().requestFocus();
     }
 
-    // Other potential methods for interactions with notes (e.g., saving, deleting, etc.)
+    private void populateListView(List<Note> notes) {
+        ObservableList<String> notesObservableList = FXCollections.observableArrayList();
+        for (Note note : notes) {
+            notesObservableList.add(note.toString());
+        }
+        notesListView.setItems(notesObservableList);
+    }
+    @FXML
+    private void handleClose() {
+        Stage stage = (Stage) notesListView.getScene().getWindow();
+        stage.close();
+    }
 
 }
