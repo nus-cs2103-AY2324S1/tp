@@ -11,7 +11,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.testutil.TypicalApplicants.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 
@@ -180,7 +180,7 @@ public class EditCommandTest {
         Index index = Index.fromOneBased(1);
         EditCommand.EditApplicantDescriptor editApplicantDescriptor = new EditApplicantDescriptor();
         EditCommand editCommand = new EditCommand(index, editApplicantDescriptor);
-        String expected = EditCommand.class.getCanonicalName() + "{index=" + index + ", editPersonDescriptor="
+        String expected = EditCommand.class.getCanonicalName() + "{index=" + index + ", editApplicantDescriptor="
                 + editApplicantDescriptor + "}";
         assertEquals(expected, editCommand.toString());
     }

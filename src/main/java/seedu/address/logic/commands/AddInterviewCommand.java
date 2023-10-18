@@ -69,13 +69,22 @@ public class AddInterviewCommand extends Command {
             throw new CommandException(MESSAGE_APPLICANT_HAS_INTERVIEW);
         }
 
-        Interview toAdd = new Interview(applicant, jobRole, timing);
+        Applicant applicantWithInterview = new Applicant(
+                applicant.getName(),
+                applicant.getPhone(),
+                applicant.getEmail(),
+                applicant.getAddress(),
+                applicant.getTags(),
+                true
+        );
+
+        Interview toAdd = new Interview(applicantWithInterview, jobRole, timing);
 
         if (model.hasInterview(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_INTERVIEW);
         }
 
-
+        model.setApplicant(applicant, applicantWithInterview);
         model.addInterview(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.formatInterview(toAdd)));
     }

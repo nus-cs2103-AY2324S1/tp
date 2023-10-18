@@ -38,6 +38,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setEmail(applicant.getEmail());
         descriptor.setAddress(applicant.getAddress());
         descriptor.setTags(applicant.getTags());
+        descriptor.setHasInterview(applicant.hasInterview());
     }
 
     /**

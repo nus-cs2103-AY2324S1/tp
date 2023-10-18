@@ -99,19 +99,44 @@ public class ModelManager implements Model {
     @Override
     public void deleteApplicant(Applicant target) {
         addressBook.removePerson(target);
+        if (target.hasInterview()) {
+
+        }
     }
 
     @Override
     public void addApplicant(Applicant applicant) {
         addressBook.addPerson(applicant);
-        updateFilteredApplicantList(PREDICATE_SHOW_ALL_PERSONS);
+        updateFilteredApplicantList(PREDICATE_SHOW_ALL_APPLICANTS);
     }
 
     @Override
     public void setApplicant(Applicant target, Applicant editedApplicant) {
         requireAllNonNull(target, editedApplicant);
 
-        addressBook.setPerson(target, editedApplicant);
+        if (target.hasInterview()) {
+            Interview interviewWithTarget = findInterviewWithApplicant(target);
+            Interview interviewWithEditedApplicant = new Interview(
+                    editedApplicant,
+                    interviewWithTarget.getJobRole(),
+                    interviewWithTarget.getInterviewTiming()
+            );
+            setInterview(interviewWithTarget, interviewWithEditedApplicant);
+        }
+
+        addressBook.setApplicant(target, editedApplicant);
+    }
+
+    @Override
+    public Interview findInterviewWithApplicant(Applicant applicant) {
+        requireNonNull(applicant);
+
+        for (Interview interview : addressBook.getInterviewList()) {
+            if (interview.getInterviewApplicant().equals(applicant)) {
+                return interview;
+            }
+        }
+        return null;
     }
 
     //=========== AddressBook Interviews ======================================================================
@@ -128,8 +153,10 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void markInterview(Interview interview) {
-        interview.setDone();
+    public void setInterview(Interview target, Interview editedInterview) {
+        requireAllNonNull(target, editedInterview);
+
+        addressBook.setInterview(target, editedInterview);
     }
 
     //=========== Filtered Person List Accessors =============================================================

@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalApplicants.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 
 import org.junit.jupiter.api.Test;
@@ -26,7 +26,12 @@ public class MarkCommandTest {
                 Messages.formatInterview(interviewToMark));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.markInterview(interviewToMark);
+        Interview doneInterview = new Interview(
+                interviewToMark.getInterviewApplicant(),
+                interviewToMark.getJobRole(),
+                interviewToMark.getInterviewTiming(),
+                true);
+        expectedModel.setInterview(interviewToMark, doneInterview);
 
         assertCommandSuccess(markCommand, model, expectedMessage, expectedModel);
     }
@@ -35,6 +40,6 @@ public class MarkCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredApplicantList().size() + 1);
         MarkCommand markCommand = new MarkCommand(outOfBoundIndex);
 
-        assertCommandFailure(markCommand, model, Messages.MESSAGE_INVALID_APPLICANT_DISPLAYED_INDEX);
+        assertCommandFailure(markCommand, model, Messages.MESSAGE_INVALID_INTERVIEW_DISPLAYED_INDEX);
     }
 }

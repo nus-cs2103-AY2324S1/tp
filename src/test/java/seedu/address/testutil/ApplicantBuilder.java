@@ -20,12 +20,14 @@ public class ApplicantBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final boolean DEFAULT_HAS_INTERVIEW = false;
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
     private Set<Tag> tags;
+    private boolean hasInterview;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -36,6 +38,7 @@ public class ApplicantBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        hasInterview = DEFAULT_HAS_INTERVIEW;
     }
 
     /**
@@ -47,6 +50,7 @@ public class ApplicantBuilder {
         email = applicantToCopy.getEmail();
         address = applicantToCopy.getAddress();
         tags = new HashSet<>(applicantToCopy.getTags());
+        hasInterview = applicantToCopy.hasInterview();
     }
 
     /**
@@ -89,8 +93,13 @@ public class ApplicantBuilder {
         return this;
     }
 
+    public ApplicantBuilder withHasInterview(boolean hasInterview) {
+        this.hasInterview = hasInterview;
+        return this;
+    }
+
     public Applicant build() {
-        return new Applicant(name, phone, email, address, tags);
+        return new Applicant(name, phone, email, address, tags, hasInterview);
     }
 
 }

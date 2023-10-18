@@ -25,7 +25,7 @@ public class ApplicantTest {
     }
 
     @Test
-    public void isSamePerson() {
+    public void isSameApplicant() {
         // same object -> returns true
         assertTrue(ALICE.isSameApplicant(ALICE));
 
@@ -94,7 +94,8 @@ public class ApplicantTest {
     public void toStringMethod() {
         String expected = Applicant.class.getCanonicalName()
                 + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
-                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags() + "}";
+                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress()
+                + ", tags=" + ALICE.getTags() + ", hasInterview=" + ALICE.hasInterview() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

@@ -17,7 +17,7 @@ import seedu.address.model.interview.UniqueInterviewList;
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
-    private final UniqueApplicantList persons;
+    private final UniqueApplicantList applicants;
     private final UniqueInterviewList interviews;
 
     /*
@@ -28,7 +28,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
-        persons = new UniqueApplicantList();
+        applicants = new UniqueApplicantList();
         interviews = new UniqueInterviewList();
     }
 
@@ -48,8 +48,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Replaces the contents of the person list with {@code persons}.
      * {@code persons} must not contain duplicate persons.
      */
-    public void setPersons(List<Applicant> applicants) {
-        this.persons.setPersons(applicants);
+    public void setApplicants(List<Applicant> applicants) {
+        this.applicants.setPersons(applicants);
     }
 
     /**
@@ -65,7 +65,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
-        setPersons(newData.getPersonList());
+        setApplicants(newData.getPersonList());
         setInterviews(newData.getInterviewList());
     }
 
@@ -76,7 +76,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public boolean hasPerson(Applicant applicant) {
         requireNonNull(applicant);
-        return persons.contains(applicant);
+        return applicants.contains(applicant);
     }
 
     /**
@@ -84,18 +84,18 @@ public class AddressBook implements ReadOnlyAddressBook {
      * The person must not already exist in the address book.
      */
     public void addPerson(Applicant p) {
-        persons.add(p);
+        applicants.add(p);
     }
 
     /**
-     * Replaces the given person {@code target} in the list with {@code editedPerson}.
+     * Replaces the given applicant {@code target} in the list with {@code editedApplicant}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * The applicant identity of {@code editedApplicant} must not be the same as another existing person in the address book.
      */
-    public void setPerson(Applicant target, Applicant editedApplicant) {
+    public void setApplicant(Applicant target, Applicant editedApplicant) {
         requireNonNull(editedApplicant);
 
-        persons.setPerson(target, editedApplicant);
+        applicants.setApplicant(target, editedApplicant);
     }
 
     /**
@@ -103,7 +103,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code key} must exist in the address book.
      */
     public void removePerson(Applicant key) {
-        persons.remove(key);
+        applicants.remove(key);
     }
 
     //// interview-level operations
@@ -123,18 +123,29 @@ public class AddressBook implements ReadOnlyAddressBook {
         interviews.add(i);
     }
 
+    /**
+     * Replaces the given interview {@code target} in the list with {@code editedInterview}.
+     * {@code target} must exist in the address book.
+     * The interview identity of {@code editedInterview} must not be the same as another existing person in the address book.
+     */
+    public void setInterview(Interview target, Interview editedInterview) {
+        requireNonNull(editedInterview);
+
+        interviews.setInterview(target, editedInterview);
+    }
+
     //// util methods
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("persons", persons)
+                .add("persons", applicants)
                 .toString();
     }
 
     @Override
     public ObservableList<Applicant> getPersonList() {
-        return persons.asUnmodifiableObservableList();
+        return applicants.asUnmodifiableObservableList();
     }
 
     @Override
@@ -154,12 +165,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         AddressBook otherAddressBook = (AddressBook) other;
-        return persons.equals(otherAddressBook.persons);
+        return applicants.equals(otherAddressBook.applicants)
+                && interviews.equals(otherAddressBook.interviews);
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return applicants.hashCode();
     }
 
 }

@@ -10,11 +10,11 @@ import seedu.address.model.applicant.Applicant;
 public class Interview {
 
     /** TODO Change from 'String' to 'Applicant' once Applicant is on master*/
-    private Applicant applicant;
-    private String jobRole;
+    private final Applicant applicant;
+    private final String jobRole;
     /** TODO Change from 'String' to proper 'Date/Time' once natural DT is implemented*/
-    private String interviewTiming;
-    private boolean isDone = false;
+    private final String interviewTiming;
+    private final boolean isDone;
 
     /**
      * Default constructor for Interview object.
@@ -24,7 +24,7 @@ public class Interview {
         applicant = app;
         jobRole = role;
         interviewTiming = timing;
-        app.setInterview();
+        isDone = false;
     }
 
     /**
@@ -91,9 +91,5 @@ public class Interview {
                 && jobRole.equals(otherInterview.jobRole)
                 && interviewTiming.equals(otherInterview.interviewTiming)
                 && isDone == otherInterview.isDone;
-    }
-
-    public void setDone() {
-        isDone = true;
     }
 }

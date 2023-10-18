@@ -108,7 +108,6 @@ class JsonAdaptedApplicant {
 
         final Set<Tag> modelTags = new HashSet<>(applicantTags);
 
-
         return new Applicant(modelName, modelPhone, modelEmail, modelAddress, modelTags, hasInterview);
     }
 

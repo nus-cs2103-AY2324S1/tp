@@ -6,7 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_APPLICANTS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -57,7 +57,7 @@ public class EditCommand extends Command {
 
     /**
      * @param index of the applicant in the filtered applicant list to edit
-     * @param editapplicantdescriptor details to edit the applicant with
+     * @param editApplicantDescriptor details to edit the applicant with
      */
     public EditCommand(Index index, EditApplicantDescriptor editApplicantDescriptor) {
         requireNonNull(index);
@@ -84,7 +84,7 @@ public class EditCommand extends Command {
         }
 
         model.setApplicant(applicantToEdit, editedApplicant);
-        model.updateFilteredApplicantList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredApplicantList(PREDICATE_SHOW_ALL_APPLICANTS);
         return new CommandResult(String.format(MESSAGE_EDIT_APPLICANT_SUCCESS,
                 Messages.formatApplicant(editedApplicant)));
     }
@@ -102,8 +102,9 @@ public class EditCommand extends Command {
         Email updatedEmail = editApplicantDescriptor.getEmail().orElse(applicantToEdit.getEmail());
         Address updatedAddress = editApplicantDescriptor.getAddress().orElse(applicantToEdit.getAddress());
         Set<Tag> updatedTags = editApplicantDescriptor.getTags().orElse(applicantToEdit.getTags());
+        boolean updatedHasInterview = editApplicantDescriptor.hasInterview().orElse(applicantToEdit.hasInterview());
 
-        return new Applicant(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Applicant(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedHasInterview);
     }
 
     @Override
@@ -140,6 +141,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
+        private Boolean hasInterview;
 
         public EditApplicantDescriptor() {}
 
@@ -153,6 +155,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setHasInterview(toCopy.hasInterview);
         }
 
         /**
@@ -211,6 +214,14 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        public void setHasInterview(Boolean hasInterview) {
+            this.hasInterview = hasInterview;
+        }
+
+        public Optional<Boolean> hasInterview() {
+            return Optional.ofNullable(hasInterview);
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -238,6 +249,7 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("tags", tags)
+                    .add("hasInterview", hasInterview)
                     .toString();
         }
     }

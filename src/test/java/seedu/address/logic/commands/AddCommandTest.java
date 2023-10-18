@@ -150,6 +150,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public Interview findInterviewWithApplicant(Applicant applicant) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Applicant> getFilteredApplicantList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -175,7 +180,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void markInterview(Interview interview) {
+        public void setInterview(Interview target, Interview editedInterview) {
             throw new AssertionError("This method should not be called.");
         }
 

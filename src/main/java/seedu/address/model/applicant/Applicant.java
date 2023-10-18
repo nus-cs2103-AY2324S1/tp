@@ -24,7 +24,7 @@ public class Applicant {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-    private boolean hasInterview = false;
+    private final boolean hasInterview;
 
     /**
      * Default constructor for Applicant object.
@@ -37,6 +37,7 @@ public class Applicant {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.hasInterview = false;
     }
 
     /**
@@ -71,14 +72,6 @@ public class Applicant {
 
     public boolean hasInterview() {
         return hasInterview;
-    }
-
-    public void setInterview() {
-        hasInterview = true;
-    }
-
-    public void removeInterview() {
-        hasInterview = false;
     }
 
     /**
@@ -140,6 +133,7 @@ public class Applicant {
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
+                .add("hasInterview", hasInterview)
                 .toString();
     }
 

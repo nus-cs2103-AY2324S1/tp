@@ -13,7 +13,7 @@ import seedu.address.model.interview.Interview;
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Applicant> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Applicant> PREDICATE_SHOW_ALL_APPLICANTS = unused -> true;
     Predicate<Interview> PREDICATE_SHOW_ALL_INTERVIEWS = unused -> true;
 
     /**
@@ -55,28 +55,35 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a applicant with the same identity as {@code applicant} exists in the address book.
      */
     boolean hasApplicant(Applicant applicant);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Deletes the given applicant.
+     * The applicant must exist in the address book.
      */
     void deleteApplicant(Applicant target);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Adds the given applicant.
+     * {@code applicant} must not already exist in the address book.
      */
     void addApplicant(Applicant applicant);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
+     * Replaces the given applicant {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * The applicant identity of {@code editedPerson} must not be the same as another existing applicant in the address book.
      */
     void setApplicant(Applicant target, Applicant editedApplicant);
+
+    /**
+     * Finds the interview that contains the applicant and returns it.
+     * Returns null if the applicant does not have an interview.
+     * {@code applicant} must exist in the address book.
+     */
+    Interview findInterviewWithApplicant(Applicant applicant);
 
     /** Returns an unmodifiable view of the filtered applicant list */
     ObservableList<Applicant> getFilteredApplicantList();
@@ -85,7 +92,7 @@ public interface Model {
     ObservableList<Interview> getFilteredInterviewList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered applicant list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredApplicantList(Predicate<Applicant> predicate);
@@ -102,9 +109,12 @@ public interface Model {
     void addInterview(Interview interview);
 
     /**
-     * Marks interview as done.
+     * Replaces the given interview {@code target} with {@code editedInterview}.
+     * {@code target} must exist in the address book.
+     * The interview identity of {@code interview} must not be the
+     * same as another existing interview in the address book.
      */
-    void markInterview(Interview interview);
+    void setInterview(Interview target, Interview editedInterview);
 
     /**
      * Updates the filter of the filtered interview list to filter by the given {@code predicate}.
