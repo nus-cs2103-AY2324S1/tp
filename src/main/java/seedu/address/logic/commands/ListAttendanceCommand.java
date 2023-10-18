@@ -6,8 +6,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALNUMBER;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
-import seedu.address.model.person.AbsentFromTutorialNumPredicate;
-import seedu.address.model.person.ContainsCourseTutorialPredicate;
+import seedu.address.model.filter.AbsentFromTutorialPredicate;
+import seedu.address.model.filter.ContainsTagPredicate;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -25,9 +25,9 @@ public class ListAttendanceCommand extends ListCommand {
     public static final String MESSAGE_SUCCESS = "Listed all absent students";
 
     private final Index tn;
-    private final AbsentFromTutorialNumPredicate absencePredicate;
+    private final AbsentFromTutorialPredicate absencePredicate;
     private final Tag tag;
-    private final ContainsCourseTutorialPredicate courseTutorialPredicate;
+    private final ContainsTagPredicate courseTutorialPredicate;
 
     /**
      * @param tag Tutorial group to list
@@ -36,8 +36,8 @@ public class ListAttendanceCommand extends ListCommand {
      * @param absencePredicate Predicate used to filter for students absent
      */
     public ListAttendanceCommand(Tag tag, Index tn,
-                                 ContainsCourseTutorialPredicate courseTutorialPredicate,
-                                 AbsentFromTutorialNumPredicate absencePredicate) {
+                                 ContainsTagPredicate courseTutorialPredicate,
+                                 AbsentFromTutorialPredicate absencePredicate) {
         requireNonNull(tn);
         this.tn = tn;
         this.absencePredicate = absencePredicate;

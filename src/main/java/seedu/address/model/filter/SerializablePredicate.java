@@ -62,4 +62,9 @@ public class SerializablePredicate implements Predicate<Person> {
     public int hashCode() {
         return predicate.hashCode();
     }
+
+    @Override
+    public String toString() {
+        throw new UnsupportedOperationException(String.format("toString() was not overriden by %s.", this.getClass()));
+    }
 }

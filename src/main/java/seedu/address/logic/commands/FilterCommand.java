@@ -8,7 +8,7 @@ import java.util.Optional;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.ParserUtil.FilterOperation;
 import seedu.address.model.Model;
-import seedu.address.model.person.ContainsTagPredicate;
+import seedu.address.model.filter.ContainsTagPredicate;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -27,8 +27,8 @@ public class FilterCommand extends Command {
             + PREFIX_COURSETUTORIAL + "CS2103T"
             + PREFIX_TUTORIALNUMBER + "1";
 
-    private FilterOperation operation;
-    private ContainsTagPredicate predicate;
+    private final FilterOperation operation;
+    private final ContainsTagPredicate predicate;
 
     /**
      * Creates an FilterCommand to add, delete or clear the filter based on {@code FilterOperation}
@@ -59,10 +59,10 @@ public class FilterCommand extends Command {
         switch (operation) {
         case ADD:
             model.addFilter(predicate);
-            return new CommandResult("Added filter: " + predicate.getTagToCheck());
+            return new CommandResult("Added filter: " + predicate);
         case DELETE:
             model.deleteFilter(predicate);
-            return new CommandResult("Removed filter: " + predicate.getTagToCheck());
+            return new CommandResult("Removed filter: " + predicate);
         case CLEAR:
             model.clearFilters();
             return new CommandResult("Cleared all filters");
