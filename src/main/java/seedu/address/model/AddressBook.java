@@ -4,10 +4,16 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
+
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.*;
+
+
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Team;
 import seedu.address.model.person.UniquePersonList;
+
 
 /**
  * Wraps all data at the address-book level
@@ -24,6 +30,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
      *   among constructors.
      */
+
+
     {
         persons = new UniquePersonList();
     }
@@ -53,7 +61,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
-
         setPersons(newData.getPersonList());
     }
 
@@ -66,6 +73,16 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(person);
         return persons.contains(person);
     }
+
+    public boolean hasPerson(Name name) {
+        requireNonNull(name);
+        return persons.contains(name);
+    }
+
+    public Person getPersonByName(Name name) {
+        return persons.getPerson(name);
+    }
+
 
     /**
      * Adds a person to the address book.
@@ -82,7 +99,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setPerson(Person target, Person editedPerson) {
         requireNonNull(editedPerson);
-
         persons.setPerson(target, editedPerson);
     }
 
@@ -93,6 +109,16 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void removePerson(Person key) {
         persons.remove(key);
     }
+    public void clear() {
+
+    }
+
+
+
+
+
+    //// teams-level operations----------------------------------------------------------------------------------------
+
 
     //// util methods
 
@@ -106,6 +132,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Team> getTeamList() {
+        return null;
     }
 
     @Override

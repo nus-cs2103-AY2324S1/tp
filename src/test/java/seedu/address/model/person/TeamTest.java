@@ -1,55 +1,65 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
-import org.junit.jupiter.api.Test;
+import java.util.HashSet;
+import java.util.Set;
 
+import org.junit.jupiter.api.Test;
 
 public class TeamTest {
 
     @Test
     public void constructor_validParameters_createsTeam() {
-        TeamLeader aliceLeader =
-                new TeamLeader(ALICE.getName(), ALICE.getPhone(), ALICE.getEmail(),
-                        ALICE.getAddress(), ALICE.getRemark(), ALICE.getTags());
-        Team aliceTeam = new Team(aliceLeader);
+        Team aliceTeam = new Team(ALICE.getIdentityCode(), "Alice's Team");
 
         assertTrue(aliceTeam != null);
     }
 
     @Test
     public void equals() {
-        TeamLeader aliceLeader =
-                new TeamLeader(ALICE.getName(), ALICE.getPhone(), ALICE.getEmail(),
-                        ALICE.getAddress(), ALICE.getRemark(), ALICE.getTags());
-        Team aliceTeam = new Team(aliceLeader);
+        Team aliceTeam = new Team(ALICE.getIdentityCode(), "Alice's Team");
 
         // same object -> returns true
         assertTrue(aliceTeam.equals(aliceTeam));
 
         // different object -> returns false
-        TeamLeader bobLeader =
-                new TeamLeader(BOB.getName(), BOB.getPhone(), BOB.getEmail(),
-                        BOB.getAddress(), BOB.getRemark(), BOB.getTags());
-        Team bobTeam = new Team(bobLeader);
+        Team bobTeam = new Team(BOB.getIdentityCode(), "Bob's Team");
         assertFalse(aliceTeam.equals(bobTeam));
     }
 
     @Test
-    public void addDeveloper_addSingleDeveloper_successful() {
-        TeamLeader aliceLeader =
-                new TeamLeader(ALICE.getName(), ALICE.getPhone(), ALICE.getEmail(),
-                        ALICE.getAddress(), ALICE.getRemark(), ALICE.getTags());
-        Team aliceTeam = new Team(aliceLeader);
+    public void addAndRemoveDeveloper_addAndRemoveSingleDeveloper_successful() {
+        Team aliceTeam = new Team(ALICE.getIdentityCode(), "Alice's Team");
 
-        Developer bobDeveloper =
-                new Developer(BOB.getName(), BOB.getPhone(), BOB.getEmail(),
-                        BOB.getAddress(), BOB.getRemark(), BOB.getTags());
+        aliceTeam.addDeveloper(BOB.getIdentityCode());
+        assertTrue(aliceTeam.getDeveloperIdentityCodes().contains(BOB.getIdentityCode()));
 
-        aliceTeam.addDeveloper(bobDeveloper);
-        assertTrue(aliceTeam.getDevelopers().contains(bobDeveloper));
+        aliceTeam.removeDeveloper(BOB.getIdentityCode());
+        assertFalse(aliceTeam.getDeveloperIdentityCodes().contains(BOB.getIdentityCode()));
+    }
+
+    @Test
+    public void setTeamLeader_updateTeamLeader_successful() {
+        Team aliceTeam = new Team(ALICE.getIdentityCode(), "Alice's Team");
+
+        aliceTeam.setTeamLeader(BOB.getIdentityCode());
+        assertEquals(BOB.getIdentityCode(), aliceTeam.getTeamLeaderIdentityCode());
+    }
+
+    @Test
+    public void toStringMethod() {
+        Team aliceTeam = new Team(ALICE.getIdentityCode(), "Alice's Team");
+
+        Set<IdentityCode> developers = new HashSet<>();
+        developers.add(BOB.getIdentityCode());
+        aliceTeam.addDeveloper(BOB.getIdentityCode());
+
+        String expected = Team.class.getCanonicalName() + "{Team Name=Alice's Team, Team Leader=" + ALICE.getIdentityCode() + ", Developer List=" + developers + "}";
+        assertEquals(expected, aliceTeam.toString());
     }
 }
