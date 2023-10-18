@@ -65,6 +65,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_FIELDS_SAME = "The input fields of this person: %1$s you are editing"
             + " is the same.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_EDIT_DUPLICATE_EMAIL = "Both primary and secondary email are the same "
+            + "for Person: %1$s";
     public static final String MESSAGE_EDIT_ALTERNATIVE_FAIL = "The current alternative contact field is empty."
             + " Use the addalt command to fill in the alternative contact details.";
 
@@ -116,10 +118,11 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Optional<Birthday> updatedBirthday = editPersonDescriptor.getBirthday();
-        Optional<Linkedin> updatedLinkedin = editPersonDescriptor.getLinkedin();
-        Optional<Email> updatedSecondaryEmail = editPersonDescriptor.getSecondaryEmail();
-        Optional<Telegram> updatedTelegram = editPersonDescriptor.getTelegram();
+        Optional<Birthday> updatedBirthday = editPersonDescriptor.getBirthday().or(() -> personToEdit.getBirthday());
+        Optional<Linkedin> updatedLinkedin = editPersonDescriptor.getLinkedin().or(() -> personToEdit.getLinkedin());
+        Optional<Email> updatedSecondaryEmail = editPersonDescriptor.getSecondaryEmail()
+                .or(() -> personToEdit.getSecondaryEmail());
+        Optional<Telegram> updatedTelegram = editPersonDescriptor.getTelegram().or(() -> personToEdit.getTelegram());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Optional<Integer> id = personToEdit.getId();
         List<Note> notes = personToEdit.getNotes();
@@ -134,9 +137,13 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_EDIT_ALTERNATIVE_FAIL);
         } else if (updatedPerson.equals(personToEdit)) {
             throw new CommandException(String.format(MESSAGE_EDIT_FIELDS_SAME, updatedName));
-        } else {
-            return updatedPerson;
+        } else if (updatedPerson.hasValidSecondaryEmail()) {
+            if (updatedPerson.hasRepeatedEmail()) {
+                throw new CommandException(String.format(MESSAGE_EDIT_DUPLICATE_EMAIL, updatedName));
+            }
         }
+
+        return updatedPerson;
     }
 
     @Override

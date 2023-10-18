@@ -132,9 +132,12 @@ public class PersonTest {
 
     @Test
     public void hasSameEmailMethod() {
-        Person person = new PersonBuilder().withEmail("email@email.com").build();
-        assertTrue(person.hasSameEmail(new Email("email@email.com")));
-        assertFalse(person.hasSameEmail(new Email("email@gmail.com")));
+        Person person = new PersonBuilder().withEmail("email@email.com").withSecondaryEmail("email@email.com").build();
+        assertTrue(person.hasRepeatedEmail());
+        person = new PersonBuilder().withEmail("email@email.com").withSecondaryEmail("email@gmail.com").build();
+        assertFalse(person.hasRepeatedEmail());
+        person = new PersonBuilder().withEmail("email@email.com").build();
+        assertFalse(person.hasRepeatedEmail());
     }
 
     @Test

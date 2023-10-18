@@ -233,8 +233,11 @@ public class Person {
     /**
      * Returns true if the person has same primary and secondary email.
      */
-    public boolean hasSameEmail(Email secondaryEmail) {
-        return email.equals(secondaryEmail);
+    public boolean hasRepeatedEmail() {
+        if (secondaryEmail.equals(Optional.empty())) {
+            return false;
+        }
+        return email.equals(secondaryEmail.get());
     }
 
     @Override
