@@ -38,7 +38,6 @@ public class ModelManager implements Model {
     }
 
     public ModelManager(ReadOnlyContacts contacts, ReadOnlySettings settings) {
-        //TODO do we need to copy these objects? Eg Storage doesn't
         this.contacts = new Contacts(contacts);
         this.settings = new Settings(settings);
 
@@ -48,6 +47,28 @@ public class ModelManager implements Model {
     @Override
     public ReadOnlyContacts getContacts() {
         return this.contacts;
+    }
+
+    @Override
+    public void addContact(Contact contact) {
+        this.contacts.add(contact);
+
+        this.setContactsFilter(ModelManager.FILTER_NONE);
+    }
+
+    @Override
+    public boolean containsContact(Contact contact) {
+        return this.contacts.contains(contact);
+    }
+
+    @Override
+    public void updateContact(Contact old, Contact updated) {
+        this.contacts.update(old, updated);
+    }
+
+    @Override
+    public void removeContact(Contact contact) {
+        this.contacts.remove(contact);
     }
 
     @Override
@@ -66,39 +87,14 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void setContactsFilter(Predicate<Contact> predicate) {
+        this.filteredContacts.setPredicate(predicate);
+    }
+
+    @Override
     public ObservableList<Contact> getFilteredContactList() {
         return this.filteredContacts;
     }
-
-    // @Override
-    // public boolean containsContact(Contact contact) {
-    //     requireNonNull(contact);
-    //     return contacts.contains(contact);
-    // }
-
-    // @Override
-    // public void removeContact(Contact target) {
-    //     contacts.remove(target);
-    // }
-
-    // @Override
-    // public void addContact(Contact contact) {
-    //     contacts.add(contact);
-    //     setContactsFilter(ModelManager.FILTER_NONE);
-    // }
-
-    // @Override
-    // public void updateContact(Contact target, Contact editedContact) {
-    //     requireAllNonNull(target, editedContact);
-
-    //     contacts.update(target, editedContact);
-    // }
-
-    // @Override
-    // public void setContactsFilter(Predicate<Contact> predicate) {
-    //     requireNonNull(predicate);
-    //     filteredContacts.setPredicate(predicate);
-    // }
 
     @Override
     public boolean equals(Object other) {
