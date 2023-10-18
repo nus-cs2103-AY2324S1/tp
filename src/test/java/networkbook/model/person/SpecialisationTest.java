@@ -79,4 +79,21 @@ public class SpecialisationTest {
         assertFalse(specialisation.hashCode() == 5);
         assertFalse(new Integer(specialisation.hashCode()).equals(null));
     }
+
+    @Test
+    public void getSpecialisation() {
+        Specialisation specialisation = new Specialisation("Valid Specialisation");
+
+        // Should behave like the string that it was constructed from
+        assertTrue(specialisation.getSpecialisation().equals("Valid Specialisation"));
+        assertTrue(specialisation.getSpecialisation()
+                .equals(new Specialisation("Valid Specialisation").getSpecialisation()));
+        assertTrue(specialisation.getSpecialisation()
+                .equals(new Specialisation(specialisation.getSpecialisation()).getSpecialisation()));
+
+        assertFalse(specialisation.getSpecialisation().equals(null));
+        assertFalse(specialisation.getSpecialisation().equals("Some other text"));
+        assertFalse(specialisation.getSpecialisation()
+                .equals(new Specialisation("Other Valid Specialisation").getSpecialisation()));
+    }
 }

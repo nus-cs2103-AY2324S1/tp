@@ -25,7 +25,7 @@ public class Specialisation {
      */
     public static final String ALL_CAPITALIZED_REGEX = "^[A-Z]+$";
 
-    public final String specialisation;
+    private final String specialisation;
 
     /**
      * Constructs an {@code Course}.
@@ -78,4 +78,7 @@ public class Specialisation {
         return specialisation.hashCode();
     }
 
+    public String getSpecialisation() {
+        return specialisation;
+    }
 }

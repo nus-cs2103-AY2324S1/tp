@@ -42,7 +42,7 @@ public class PersonUtil {
         person.getCourse().ifPresent(course -> sb.append(CliSyntax.PREFIX_COURSE).append(" ")
                 .append(course.value).append(" "));
         person.getSpecialisation().ifPresent(specialisation -> sb.append(CliSyntax.PREFIX_SPECIALISATION)
-                .append(" ").append(specialisation.specialisation).append(" "));
+                .append(" ").append(specialisation.getSpecialisation()).append(" "));
         person.getTags().stream().forEach(
             s -> sb.append(CliSyntax.PREFIX_TAG + " " + s.tagName + " ")
         );
@@ -80,7 +80,7 @@ public class PersonUtil {
         descriptor.getCourse().ifPresent(course -> sb.append(CliSyntax.PREFIX_COURSE).append(" ")
                 .append(course.value).append(" "));
         descriptor.getSpecialisation().ifPresent(specialisation -> sb.append(CliSyntax.PREFIX_SPECIALISATION)
-                .append(" ").append(specialisation.specialisation).append(" "));
+                .append(" ").append(specialisation.getSpecialisation()).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {
