@@ -102,7 +102,7 @@ public class PersonSortComparatorTest {
                 new GraduatingYear("2016"),
                 new Course("Information Systems"),
                 new Specialisation("Financial Technology"),
-                SampleDataUtil.getTagSet("friends"),
+                SampleDataUtil.getTagList("friends"),
                 null);
         Person n2 = new Person(new Name("Nile Too"),
                 new UniqueList<Phone>().setItems(List.of(new Phone("87438807"))),
@@ -111,7 +111,7 @@ public class PersonSortComparatorTest {
                 new GraduatingYear("2016"),
                 new Course("Information Systems"),
                 new Specialisation("Financial Technology"),
-                SampleDataUtil.getTagSet("friends"),
+                SampleDataUtil.getTagList("friends"),
                 null);
 
         // Ascending
