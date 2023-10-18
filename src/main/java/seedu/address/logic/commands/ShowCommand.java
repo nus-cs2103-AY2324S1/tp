@@ -24,6 +24,7 @@ public class ShowCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 ";
 
     public static final String MESSAGE_SHOW_PERSON_SUCCESS = "Showing Person: %1$s";
+    public static final String MESSAGE_SHOW_LESSON_SUCCESS = "Showing Lesson: %1$s";
 
     private final Index targetIndex;
 
@@ -40,25 +41,28 @@ public class ShowCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToShow = lastShownList.get(targetIndex.getZeroBased());
-        model.showPerson(personToShow);
 
         // Handle different cases of show command based on app state
         switch (model.getState()) {
         case "STUDENTS":
             // Show student details
-            System.out.println("in students state");
-            break;
+            Person personToShow = lastShownList.get(targetIndex.getZeroBased());
+            model.showPerson(personToShow);
+            return new CommandResult(String.format(MESSAGE_SHOW_PERSON_SUCCESS, Messages.format(personToShow)));
         case "SCHEDULE":
             // Show lesson details
-            System.out.println("in schedule state");
-            break;
+            // Just a placeholder for now
+            Person lessonToShow = lastShownList.get(targetIndex.getZeroBased());
+            model.showLesson(lessonToShow);
+            // return new CommandResult(String.format(MESSAGE_SHOW_LESSON_SUCCESS, Messages.format(lessonToShow)));
+            return new CommandResult("Show Lesson");
+
         default:
-            System.out.println("Unknown state");
-            break;
+            // System.out.println("Unknown state");
+            // Message can be changed, just a placeholder for now
+            throw new CommandException(Messages.MESSAGE_UNKNOWN_COMMAND);
         }
 
-        return new CommandResult(String.format(MESSAGE_SHOW_PERSON_SUCCESS, Messages.format(personToShow)));
     }
 }
 

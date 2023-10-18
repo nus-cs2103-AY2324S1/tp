@@ -145,7 +145,14 @@ public class ModelManager implements Model {
         if (ui != null) {
             ui.showPersonDetails(person);
         }
+    }
 
+    @Override
+    public void showLesson(Person lesson) { //TODO
+        requireNonNull(lesson);
+        if (ui != null) {
+            ui.showLessonDetails(lesson);
+        }
     }
 
     @Override

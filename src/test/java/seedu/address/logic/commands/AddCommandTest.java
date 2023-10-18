@@ -165,6 +165,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void showLesson(Person lessonToShow) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void linkUi(Ui ui) {
             throw new AssertionError("This method should not be called.");
         }

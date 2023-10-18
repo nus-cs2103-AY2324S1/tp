@@ -93,6 +93,12 @@ public interface Model {
     void showPerson(Person personToShow);
 
     /**
+     * Shows the details of the given lesson.
+     * The lesson must exist in the application.
+     */
+    void showLesson(Person lessonToShow); //TODO
+
+    /**
      * Links the Ui of the Application.
      */
     void linkUi(Ui ui);
