@@ -33,14 +33,11 @@ public class SortCommand extends Command {
      */
     public SortCommand(SortKeyComparator... sortKeyComparators) {
         requireNonNull(sortKeyComparators);
-        this.personComparator = new Comparator<Person>() {
-            @Override
-            public int compare(Person o1, Person o2) {
-                if (o1.getName().fullName.equals(o2.getName().fullName)) {
-                    return 0;
-                }
-                return o1.getName().fullName.compareTo(o2.getName().fullName);
+        this.personComparator = (o1, o2) -> {
+            if (o1.getName().fullName.equals(o2.getName().fullName)) {
+                return 0;
             }
+            return o1.getName().fullName.compareTo(o2.getName().fullName);
         };
     }
 
