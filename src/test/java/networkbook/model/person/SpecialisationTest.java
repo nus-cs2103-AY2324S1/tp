@@ -39,8 +39,8 @@ public class SpecialisationTest {
         assertTrue(Specialisation.isValidSpecialisation("AAA Gaming")); // all uppercase words (acronyms)
         assertTrue(Specialisation.isValidSpecialisation("Networking and Distributed Systems")); // long address
         assertTrue(Specialisation
-                .isValidSpecialisation("Leader of the Multinational Party of Czechoslovakia and the " +
-                        "Associations Within the Umbrella of the Multinational Party.")); // very long address
+                .isValidSpecialisation("Leader of the Multinational Party of Czechoslovakia and the "
+                        + "Associations Within the Umbrella of the Multinational Party.")); // very long address
         assertTrue(Specialisation
                 .isValidSpecialisation("Industry 4.0 and AI planning, "
                         + "decision-making")); // commas, periods, dashes not at the front
