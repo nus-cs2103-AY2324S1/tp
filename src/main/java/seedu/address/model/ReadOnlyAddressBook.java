@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.band.Band;
 import seedu.address.model.musician.Musician;
 
 /**
@@ -13,5 +14,8 @@ public interface ReadOnlyAddressBook {
      * This list will not contain any duplicate persons.
      */
     ObservableList<Musician> getMusicianList();
+
+
+    ObservableList<Band> getBandList();
 
 }

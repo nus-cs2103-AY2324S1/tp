@@ -110,7 +110,6 @@ public class ModelManager implements Model {
     @Override
     public void setMusician(Musician target, Musician editedMusician) {
         requireAllNonNull(target, editedMusician);
-
         addressBook.setMusician(target, editedMusician);
     }
 
@@ -125,7 +124,7 @@ public class ModelManager implements Model {
         requireAllNonNull(band);
         addressBook.addBand(band);
     }
-
+  
     //=========== Filtered Musician List Accessors =============================================================
 
     /**

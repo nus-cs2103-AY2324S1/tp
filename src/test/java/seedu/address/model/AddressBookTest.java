@@ -3,7 +3,6 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalMusicians.ALICE;
@@ -18,6 +17,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.band.Band;
 import seedu.address.model.musician.Musician;
 import seedu.address.model.musician.exceptions.DuplicateMusicianException;
 import seedu.address.testutil.MusicianBuilder;
@@ -46,7 +46,7 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicateMusicians_throwsDuplicateMusicianException() {
         // Two musicians with the same identity fields
-        Musician editedAlice = new MusicianBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Musician editedAlice = new MusicianBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Musician> newMusicians = Arrays.asList(ALICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newMusicians);
@@ -73,7 +73,7 @@ public class AddressBookTest {
     @Test
     public void hasMusician_musicianWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addMusician(ALICE);
-        Musician editedAlice = new MusicianBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Musician editedAlice = new MusicianBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(addressBook.hasMusician(editedAlice));
     }
@@ -102,6 +102,11 @@ public class AddressBookTest {
         @Override
         public ObservableList<Musician> getMusicianList() {
             return musicians;
+        }
+
+        @Override
+        public ObservableList<Band> getBandList() {
+            return null; // to be implemented
         }
     }
 

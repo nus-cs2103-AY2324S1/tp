@@ -8,7 +8,6 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.musician.Musician;
-import seedu.address.model.musician.Name;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -17,23 +16,21 @@ import seedu.address.model.tag.Tag;
  */
 public class Band {
 
-    private final Name name;
-
+    private final BandName name;
     private final Set<Tag> genres = new HashSet<>();
-
     private final Set<Musician> musicians = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Band(Name name, Set<Tag> genreTags, Set<Musician> musicians) {
+    public Band(BandName name, Set<Tag> genreTags, Set<Musician> musicians) {
         requireAllNonNull(name, genreTags, musicians);
         this.name = name;
         this.genres.addAll(genreTags);
         this.musicians.addAll(musicians);
     }
 
-    public Name getName() {
+    public BandName getName() {
         return name;
     }
 
@@ -54,7 +51,7 @@ public class Band {
             return true;
         }
         return otherBand != null
-            && otherBand.getName().equals(getName());
+                && otherBand.getName().equals(getName());
     }
 
     @Override

@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -49,9 +48,6 @@ public class EditMusicianDescriptorTest {
         editedAmy = new EditMusicianDescriptorBuilder(DESC_AMY).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
-        // different address -> returns false
-        editedAmy = new EditMusicianDescriptorBuilder(DESC_AMY).withAddress(VALID_ADDRESS_BOB).build();
-        assertFalse(DESC_AMY.equals(editedAmy));
 
         // different tags -> returns false
         editedAmy = new EditMusicianDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
@@ -64,8 +60,7 @@ public class EditMusicianDescriptorTest {
         String expected = EditCommand.EditMusicianDescriptor.class.getCanonicalName() + "{name="
                 + editMusicianDescriptor.getName().orElse(null) + ", phone="
                 + editMusicianDescriptor.getPhone().orElse(null) + ", email="
-                + editMusicianDescriptor.getEmail().orElse(null) + ", address="
-                + editMusicianDescriptor.getAddress().orElse(null) + ", tags="
+                + editMusicianDescriptor.getEmail().orElse(null) + ", tags="
                 + editMusicianDescriptor.getTags().orElse(null) + ", instruments="
                 + editMusicianDescriptor.getInstruments().orElse(null) + ", genres="
                 + editMusicianDescriptor.getGenres().orElse(null) + "}";
