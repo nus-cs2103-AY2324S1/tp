@@ -259,7 +259,7 @@ Adds a schedule to a specified tutor.
     </div>
 
 **Expected output**:
-* `New schedule for John Doe starting from Sep 15 2023 09:00 to Sep 15  2023 11:00 has been added.`
+* `New schedule John Doe; Start Time Sep 15 2023 09:00; End Time: Sep 15  2023 11:00 has been added.`
 
 **Error messages**:
 * `Invalid command format!`: Invalid TUTOR_INDEX or some of the tags `s/`, `e/` is missing.
@@ -268,6 +268,8 @@ Adds a schedule to a specified tutor.
 * `StartTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm:ss", and it should not be blank`: The end time entered is not in the correct datetime format.
 * `Multiple values specified for the following single-valued field(s): s/`: More than 1 s/ was given in the command
 * `Multiple values specified for the following single-valued field(s): e/`: More than 1 e/ was given in the command
+* `This schedule already exists in the address book`: There is a schedule for the same tutor with the same start and end time in the address book.
+* `This tutor has a clashing schedule in the address book`: There is a schedule for the same tutor with overlapping times in the address book.
 
 ### List all schedules: `list-s`
 

@@ -118,6 +118,15 @@ class AddScheduleCommandTest {
     }
 
     @Test
+    public void execute_badSchedule_failure() {
+        AddScheduleCommand addScheduleCommand = new AddScheduleCommand(INDEX_FIRST_PERSON,
+                new StartTime(SCHEDULE_ALICE_FIRST_JAN.getEndTime().getTime()),
+                new EndTime(SCHEDULE_ALICE_FIRST_JAN.getStartTime().getTime()));
+
+        assertCommandFailure(addScheduleCommand, model, Schedule.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
     public void execute_clashingSchedule_failure() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Schedule baseSchedule = new ScheduleBuilder().withTutor(firstPerson).build();

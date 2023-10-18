@@ -15,8 +15,10 @@ import seedu.address.model.schedule.StartTime;
  * A utility class for Schedule.
  */
 public class ScheduleUtil {
-    private static final DateTimeFormatter startTimeFormatter = DateTimeFormatter.ofPattern(StartTime.DATETIME_FORMAT);
-    private static final DateTimeFormatter endTimeFormatter = DateTimeFormatter.ofPattern(EndTime.DATETIME_FORMAT);
+    private static final DateTimeFormatter startTimeFormatter =
+            DateTimeFormatter.ofPattern(StartTime.DATETIME_INPUT_FORMAT);
+    private static final DateTimeFormatter endTimeFormatter =
+            DateTimeFormatter.ofPattern(EndTime.DATETIME_INPUT_FORMAT);
 
     /**
      * Returns an add schedule command string for adding the {@code schedule}.

@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
+import static seedu.address.model.schedule.Schedule.MESSAGE_CONSTRAINTS;
 
 import java.util.List;
 
@@ -37,8 +38,7 @@ public class AddScheduleCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New schedule %1$s has been added.";
     public static final String MESSAGE_DUPLICATE_SCHEDULE = "This schedule already exists in the address book";
-    public static final String MESSAGE_CLASHING_SCHEDULE = "This tutor already has a clashing schedule in the address "
-            + "book";
+    public static final String MESSAGE_CLASHING_SCHEDULE = "This tutor has a clashing schedule in the address book";
 
     private final Index index;
     private final StartTime startTime;
@@ -57,6 +57,7 @@ public class AddScheduleCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        Schedule toAdd;
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
@@ -65,11 +66,15 @@ public class AddScheduleCommand extends Command {
         }
 
         Person tutor = lastShownList.get(index.getZeroBased());
-        Schedule toAdd = new Schedule(tutor, startTime, endTime);
+
+        try {
+            toAdd = new Schedule(tutor, startTime, endTime);
+        } catch (IllegalArgumentException e) {
+            throw new CommandException(MESSAGE_CONSTRAINTS);
+        }
 
         boolean hasScheduleClash =
                 model.getAddressBook().getScheduleList().stream().anyMatch(schedule -> schedule.isClashing(toAdd));
-
 
         if (model.hasSchedule(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_SCHEDULE);
