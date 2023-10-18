@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -122,8 +123,10 @@ public class EditCommandTest {
 
     @Test
     public void equals_differentTypes_returnsFalse() {
-        EditPersonDescriptor descriptor = new EditPersonDescriptor();
-        assertFalse(descriptor.equals(5)); // Different type
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
+        EditCommand editCommand = new EditCommand(new Name(VALID_NAME_BOB), null, descriptor);
+
+        assertFalse(editCommand.equals(5)); // Different type
     }
 
     @Test
@@ -180,13 +183,19 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        // Assume two persons with the same name and different NRICs
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName("Name").build();
-        EditCommand editCommand = new EditCommand(new Name("Name"), null, descriptor);
+    public void execute_cannotFindPerson_throwsCommandException() throws CommandException{
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().build();
+        EditCommand editCommand = new EditCommand(null, null, descriptor);
 
-        assertThrows(CommandException.class, () -> editCommand.execute(model), EditCommand.MESSAGE_DUPLICATE_PERSON);
-    }
+        Person john = new PersonBuilder().build();
+        Person jane = new PersonBuilder().build();
 
+        List<Person> personList = new ArrayList<>();
+        personList.add(john);
+        personList.add(jane);
+
+        Optional<Person> person = editCommand.findPersonToEdit(personList);
+        assertFalse(person.isPresent());
+        }
 }
 
