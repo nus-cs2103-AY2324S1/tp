@@ -18,14 +18,27 @@ public class CommandResult {
 
     /** The application should exit. */
     private final boolean exit;
+    /** Confirmation for clear command should be requested. */
+    private final boolean showClear;
 
     /**
-     * Constructs a {@code CommandResult} with the specified fields.
+     * Constructs a {@code CommandResult} with the specified fields, with showClear set to false.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.showClear = false;
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified fields.
+     */
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showClear) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.showHelp = showHelp;
+        this.exit = exit;
+        this.showClear = showClear;
     }
 
     /**
@@ -47,6 +60,9 @@ public class CommandResult {
     public boolean isExit() {
         return exit;
     }
+    public boolean isShowClear() {
+        return showClear;
+    }
 
     @Override
     public boolean equals(Object other) {
@@ -62,12 +78,13 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && exit == otherCommandResult.exit
+                && showClear == otherCommandResult.showClear;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, showHelp, exit, showClear);
     }
 
     @Override
@@ -76,6 +93,7 @@ public class CommandResult {
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", showHelp)
                 .add("exit", exit)
+                .add("showClear", showClear)
                 .toString();
     }
 
