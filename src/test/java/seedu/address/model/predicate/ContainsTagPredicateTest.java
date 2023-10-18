@@ -50,5 +50,4 @@ public class ContainsTagPredicateTest {
 
         assertEquals("Tag Filter: " + tag.getTagName(), predicate.toString());
     }
-
 }
