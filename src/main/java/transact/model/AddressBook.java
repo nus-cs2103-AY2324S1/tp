@@ -2,11 +2,15 @@ package transact.model;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.List;
+import java.util.Map;
 
+import javafx.collections.FXCollections;
+import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import transact.commons.util.ToStringBuilder;
 import transact.model.person.Person;
+import transact.model.person.PersonId;
 
 /**
  * Wraps person data at the address-book level
@@ -14,7 +18,8 @@ import transact.model.person.Person;
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
-    private final UniqueEntryList<Person> persons;
+    private final UniqueEntryHashmap<PersonId, Person> persons;
+    private ObservableList<Person> personList;
 
     /*
      * The 'unusual' code block below is a non-static initialization block,
@@ -27,7 +32,32 @@ public class AddressBook implements ReadOnlyAddressBook {
      * among constructors.
      */
     {
-        persons = new UniqueEntryList<>();
+        persons = new UniqueEntryHashmap<>();
+        personList = FXCollections.observableArrayList();
+
+        getPersonMap()
+                .addListener((MapChangeListener.Change<? extends PersonId, ? extends Person> change) -> {
+                    boolean removed = change.wasRemoved();
+                    if (removed != change.wasAdded()) {
+                        if (removed) {
+                            // no put for existing key
+                            // remove pair completely
+                            personList.remove(change.getValueRemoved());
+                        } else {
+                            // add new entry
+                            personList.add(change.getValueAdded());
+                        }
+                    } else {
+                        // replace existing entry
+                        Person entry = change.getValueAdded();
+
+                        for (int i = 0; i < personList.size(); i++) {
+                            if (personList.get(i).getPersonId() == entry.getPersonId()) {
+                                personList.set(i, entry);
+                            }
+                        }
+                    }
+                });
     }
 
     public AddressBook() {
@@ -47,7 +77,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Replaces the contents of the person list with {@code persons}.
      * {@code persons} must not contain duplicate persons.
      */
-    public void setPersons(List<Person> persons) {
+    public void setPersons(Map<PersonId, Person> persons) {
         this.persons.setEntries(persons);
     }
 
@@ -57,7 +87,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
-        setPersons(newData.getPersonList());
+        setPersons(newData.getPersonMap());
     }
 
     //// person-level operations
@@ -66,9 +96,9 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Returns true if a person with the same identity as {@code person} exists in
      * the address book.
      */
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return persons.contains(person);
+    public boolean hasPerson(PersonId personId) {
+        requireNonNull(personId);
+        return persons.contains(personId);
     }
 
     /**
@@ -76,7 +106,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * The person must not already exist in the address book.
      */
     public void addPerson(Person p) {
-        persons.add(p);
+        persons.add(p.getPersonId(), p);
     }
 
     /**
@@ -86,18 +116,18 @@ public class AddressBook implements ReadOnlyAddressBook {
      * The person identity of {@code editedPerson} must not be the same as another
      * existing person in the address book.
      */
-    public void setPerson(Person target, Person editedPerson) {
+    public void setPerson(PersonId targetId, Person editedPerson) {
         requireNonNull(editedPerson);
 
-        persons.setEntry(target, editedPerson);
+        persons.setEntry(targetId, editedPerson);
     }
 
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
-    public void removePerson(Person key) {
-        persons.remove(key);
+    public Person removePerson(PersonId key) {
+        return persons.remove(key);
     }
 
     //// util methods
@@ -110,8 +140,12 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
+    public ObservableMap<PersonId, Person> getPersonMap() {
+        return persons.asUnmodifiableObservableMap();
+    }
+    @Override
     public ObservableList<Person> getPersonList() {
-        return persons.asUnmodifiableObservableList();
+        return personList;
     }
 
     @Override

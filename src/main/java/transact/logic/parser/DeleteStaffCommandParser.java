@@ -2,7 +2,6 @@ package transact.logic.parser;
 
 import static transact.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import transact.commons.core.index.Index;
 import transact.logic.commands.DeleteStaffCommand;
 import transact.logic.parser.exceptions.ParseException;
 
@@ -21,9 +20,9 @@ public class DeleteStaffCommandParser implements Parser<DeleteStaffCommand> {
      */
     public DeleteStaffCommand parse(String args) throws ParseException {
         try {
-            Index index = ParserUtil.parseIndex(args);
-            return new DeleteStaffCommand(index);
-        } catch (ParseException pe) {
+            Integer personId = Integer.parseInt(args.trim());
+            return new DeleteStaffCommand(personId);
+        } catch (NumberFormatException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteStaffCommand.MESSAGE_USAGE), pe);
         }

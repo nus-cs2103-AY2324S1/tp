@@ -41,6 +41,19 @@ public class Person implements Entry {
         this.tags.addAll(tags);
     }
 
+    /**
+     * Creates mew Person
+     *
+     * @param name
+     * @param phone
+     * @param email
+     * @param address
+     * @param tags
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+        this(new PersonId(), name, phone, email, address, tags);
+    }
+
     public PersonId getPersonId() {
         return personId;
     }

@@ -11,9 +11,9 @@ import java.util.stream.Stream;
 
 import transact.logic.commands.AddTransactionCommand;
 import transact.logic.parser.exceptions.ParseException;
+import transact.model.person.Person;
 import transact.model.transaction.Transaction;
 import transact.model.transaction.info.Amount;
-import transact.model.person.Person;
 import transact.model.transaction.info.Date;
 import transact.model.transaction.info.Description;
 import transact.model.transaction.info.TransactionType;

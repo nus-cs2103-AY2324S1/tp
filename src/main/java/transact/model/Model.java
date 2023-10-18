@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
 import transact.commons.core.GuiSettings;
 import transact.model.person.Person;
+import transact.model.person.PersonId;
 import transact.model.transaction.Transaction;
 import transact.model.transaction.info.TransactionId;
 
@@ -80,16 +81,16 @@ public interface Model {
     ReadOnlyTransactionBook getTransactionBook();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in
+     * Returns true if a person with the same id as {@code personId} exists in
      * the address book.
      */
-    boolean hasPerson(Person person);
+    boolean hasPerson(PersonId personId);
 
     /**
-     * Deletes the given person.
+     * Deletes the given person with {@code personId}.
      * The person must exist in the address book.
      */
-    void deletePerson(Person target);
+    Person deletePerson(PersonId target);
 
     /**
      * Adds the given person.
@@ -98,12 +99,18 @@ public interface Model {
     void addPerson(Person person);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
+     * Replaces the given person {@code targetId} with {@code editedPerson}.
+     * {@code targetId} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another
      * existing person in the address book.
      */
-    void setPerson(Person target, Person editedPerson);
+    void setPerson(PersonId targetId, Person editedPerson);
+
+    /**
+     * Returns the person with {@code targetId}.
+     * {@code targetId} must exist in the address book.
+     */
+    Person getPerson(PersonId targetId);
 
     /**
      * Returns true if a transaction with the same id as {@code transactionId}
@@ -124,8 +131,8 @@ public interface Model {
     void addTransaction(Transaction transaction);
 
     /**
-     * Replaces the given transaction {@code target} with {@code editedTransaction}.
-     * {@code target} must exist in the transaction book.
+     * Replaces the given transaction {@code targetId} with {@code editedTransaction}.
+     * {@code targetId} must exist in the transaction book.
      * The person identity of {@code editedTransaction} must not be the same as
      * another
      * existing transaction in the transaction book.
@@ -140,6 +147,9 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered person map */
+    ObservableMap<PersonId, Person> getPersonMap();
+
 
     /**
      * Updates the filter of the filtered person list to filter by the given

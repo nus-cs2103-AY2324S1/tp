@@ -54,7 +54,7 @@ public class EditTransactionCommand extends Command {
     private final EditTransactionDescriptor editTransactionDescriptor;
 
     /**
-     * @param index
+     * @param transactionId
      *            of the person in the filtered person list to edit
      * @param editTransactionDescriptor
      *            details to edit the person with

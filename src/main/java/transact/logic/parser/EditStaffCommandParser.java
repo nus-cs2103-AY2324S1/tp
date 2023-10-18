@@ -13,7 +13,6 @@ import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 
-import transact.commons.core.index.Index;
 import transact.logic.commands.EditStaffCommand;
 import transact.logic.commands.EditStaffCommand.EditPersonDescriptor;
 import transact.logic.parser.exceptions.ParseException;
@@ -37,11 +36,11 @@ public class EditStaffCommandParser implements Parser<EditStaffCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                 PREFIX_ADDRESS, PREFIX_TAG);
 
-        Index index;
+        Integer personId;
 
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
+            personId = Integer.parseInt(argMultimap.getPreamble());
+        } catch (NumberFormatException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditStaffCommand.MESSAGE_USAGE), pe);
         }
 
@@ -67,7 +66,7 @@ public class EditStaffCommandParser implements Parser<EditStaffCommand> {
             throw new ParseException(EditStaffCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditStaffCommand(index, editPersonDescriptor);
+        return new EditStaffCommand(personId, editPersonDescriptor);
     }
 
     /**

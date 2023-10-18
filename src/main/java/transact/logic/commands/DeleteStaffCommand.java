@@ -2,14 +2,12 @@ package transact.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.List;
-
-import transact.commons.core.index.Index;
 import transact.commons.util.ToStringBuilder;
 import transact.logic.Messages;
 import transact.logic.commands.exceptions.CommandException;
 import transact.model.Model;
 import transact.model.person.Person;
+import transact.model.person.PersonId;
 import transact.ui.MainWindow.TabWindow;
 
 /**
@@ -25,25 +23,26 @@ public class DeleteStaffCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_PERSON_FAILURE = "Cannot find person with id: %d";
+    private final Integer personId;
 
-    private final Index targetIndex;
-
-    public DeleteStaffCommand(Index targetIndex) {
-        this.targetIndex = targetIndex;
+    public DeleteStaffCommand(Integer personId) {
+        this.personId = personId;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
-
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        for (PersonId id : model.getAddressBook().getPersonMap().keySet()) {
+            if (id.getValue() == personId) {
+                Person deletedPerson = model.deletePerson(id);
+                return new CommandResult(
+                        String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(deletedPerson)),
+                        TabWindow.ADDRESSBOOK);
+            }
         }
-
-        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)),
+        return new CommandResult(
+                String.format(MESSAGE_DELETE_PERSON_FAILURE, personId),
                 TabWindow.ADDRESSBOOK);
     }
 
@@ -59,13 +58,13 @@ public class DeleteStaffCommand extends Command {
         }
 
         DeleteStaffCommand otherDeleteStaffCommand = (DeleteStaffCommand) other;
-        return targetIndex.equals(otherDeleteStaffCommand.targetIndex);
+        return personId.equals(otherDeleteStaffCommand.personId);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("targetIndex", targetIndex)
+                .add("personId", personId)
                 .toString();
     }
 }

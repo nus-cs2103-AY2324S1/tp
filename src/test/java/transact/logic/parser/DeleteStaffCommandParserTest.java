@@ -3,7 +3,7 @@ package transact.logic.parser;
 import static transact.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static transact.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static transact.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static transact.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static transact.testutil.TypicalIndexes.ID_FIRST_PERSON;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +24,7 @@ public class DeleteStaffCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteStaffCommand() {
-        assertParseSuccess(parser, "1", new DeleteStaffCommand(INDEX_FIRST_PERSON));
+        assertParseSuccess(parser, "1", new DeleteStaffCommand(ID_FIRST_PERSON));
     }
 
     @Test

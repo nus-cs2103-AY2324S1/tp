@@ -84,13 +84,13 @@ public class ModelManagerTest {
 
     @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(modelManager.hasPerson(ALICE));
+        assertFalse(modelManager.hasPerson(ALICE.getPersonId()));
     }
 
     @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
         modelManager.addPerson(ALICE);
-        assertTrue(modelManager.hasPerson(ALICE));
+        assertTrue(modelManager.hasPerson(ALICE.getPersonId()));
     }
 
     @Test

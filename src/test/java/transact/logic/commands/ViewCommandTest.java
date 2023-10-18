@@ -1,8 +1,8 @@
 package transact.logic.commands;
 
 import static transact.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static transact.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static transact.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static transact.logic.commands.CommandTestUtil.showPersonAtId;
+import static transact.testutil.TypicalIndexes.ID_FIRST_PERSON;
 import static transact.testutil.TypicalPersons.getTypicalAddressBook;
 import static transact.testutil.TypicalTransactions.getTypicalTransactionBook;
 
@@ -36,7 +36,7 @@ public class ViewCommandTest {
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showPersonAtId(model, ID_FIRST_PERSON);
         assertCommandSuccess(new ViewCommand(ViewCommand.ViewType.STAFF), model, ViewCommand.MESSAGE_SUCCESS_STAFF,
                 expectedModel);
     }

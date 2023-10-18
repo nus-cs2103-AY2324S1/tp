@@ -18,12 +18,13 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import transact.model.entry.exceptions.DuplicateEntryException;
 import transact.model.person.Person;
+import transact.model.person.PersonId;
 import transact.testutil.PersonBuilder;
 
 public class AddressBookTest {
-
     private final AddressBook addressBook = new AddressBook();
 
     @Test
@@ -61,13 +62,13 @@ public class AddressBookTest {
 
     @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasPerson(ALICE));
+        assertFalse(addressBook.hasPerson(ALICE.getPersonId()));
     }
 
     @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
-        assertTrue(addressBook.hasPerson(ALICE));
+        assertTrue(addressBook.hasPerson(ALICE.getPersonId()));
     }
 
     @Test
@@ -75,7 +76,7 @@ public class AddressBookTest {
         addressBook.addPerson(ALICE);
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(addressBook.hasPerson(editedAlice));
+        assertTrue(addressBook.hasPerson(editedAlice.getPersonId()));
     }
 
     @Test
@@ -95,6 +96,7 @@ public class AddressBookTest {
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableMap<PersonId, Person> personMap = FXCollections.observableHashMap();
 
         AddressBookStub(Collection<Person> persons) {
             this.persons.setAll(persons);
@@ -104,6 +106,10 @@ public class AddressBookTest {
         public ObservableList<Person> getPersonList() {
             return persons;
         }
-    }
 
+        @Override
+        public ObservableMap<PersonId, Person> getPersonMap() {
+            return personMap;
+        }
+    }
 }

@@ -2,13 +2,14 @@ package transact.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static transact.commons.util.AppUtil.checkArgument;
+
 import java.util.TreeSet;
 
 /**
  * Represents a unique person ID in the system.
  * Guarantees: immutable; is valid as declared in constructors
  */
-public class PersonId {
+public class PersonId implements Comparable<PersonId> {
 
     public static final String MESSAGE_CONSTRAINTS = "Person ID should be a unique number";
     public static final String VALIDATION_REGEX = "^\\d+$";
@@ -90,6 +91,11 @@ public class PersonId {
 
         transact.model.person.PersonId otherId = (transact.model.person.PersonId) other;
         return value.equals(otherId.value);
+    }
+
+    @Override
+    public int compareTo(PersonId otherId) {
+        return this.value.compareTo(otherId.getValue());
     }
 
     @Override
