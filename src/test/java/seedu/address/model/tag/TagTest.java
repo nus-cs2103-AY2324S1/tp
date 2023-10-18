@@ -1,9 +1,14 @@
 package seedu.address.model.tag;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
+
+import seedu.address.commons.core.index.Index;
+import seedu.address.model.predicate.AbsentFromTutorialPredicate;
 
 public class TagTest {
 
@@ -43,6 +48,28 @@ public class TagTest {
         String validTagName = "CS2103T T02";
         Tag tag = new Tag(validTagName);
         assertEquals("T02", tag.getTutorialGroup());
+    }
+
+    @Test
+    public void equals() {
+        Tag firstTag = new Tag("first");
+        Tag secondTag = new Tag("second");
+
+        // same object -> returns true
+        assertTrue(firstTag.equals(firstTag));
+
+        // same values -> returns true
+        Tag firstTagCopy = new Tag("first");
+        assertTrue(firstTag.equals(firstTagCopy));
+
+        // different types -> returns false
+        assertFalse(firstTag.equals(1));
+
+        // null -> returns false
+        assertFalse(firstTag.equals(null));
+
+        // different person -> returns false
+        assertFalse(firstTag.equals(secondTag));
     }
 
     @Test
