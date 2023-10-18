@@ -47,7 +47,7 @@ public class EditCommandParser implements Parser<EditCommand> {
                         PREFIX_TAG,
                         PREFIX_NRIC,
                         PREFIX_LICENCE_PLATE,
-                        PREFIX_COMPANY,
+                        // PREFIX_COMPANY,
                         PREFIX_POLICY_NUMBER,
                         PREFIX_POLICY_ISSUE_DATE,
                         PREFIX_POLICY_EXPIRY_DATE
