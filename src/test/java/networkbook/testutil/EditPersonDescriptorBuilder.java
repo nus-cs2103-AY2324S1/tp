@@ -37,7 +37,7 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder(Person person) {
         descriptor = new EditCommand.EditPersonDescriptor();
         descriptor.setName(person.getName());
-        person.getPhone().ifPresent((Phone p) -> descriptor.setPhone(p));
+        descriptor.setPhones(person.getPhones());
         descriptor.setEmails(person.getEmails());
         descriptor.setLinks(person.getLinks());
         person.getGraduatingYear().ifPresent((GraduatingYear g) -> descriptor.setGraduatingYear(g));
@@ -59,7 +59,7 @@ public class EditPersonDescriptorBuilder {
      * Sets the {@code Phone} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withPhone(String phone) {
-        descriptor.setPhone(new Phone(phone));
+        descriptor.addPhone(new Phone(phone));
         return this;
     }
 

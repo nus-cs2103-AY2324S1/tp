@@ -2,7 +2,6 @@ package networkbook.ui;
 
 import static networkbook.logic.commands.CommandTestUtil.VALID_COURSE_BOB;
 import static networkbook.logic.commands.CommandTestUtil.VALID_GRADUATING_YEAR_BOB;
-import static networkbook.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static networkbook.logic.commands.CommandTestUtil.VALID_SPECIALISATION_BOB;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -36,15 +35,6 @@ public class PersonCardTest {
     @BeforeEach
     public void setup() throws Exception {
         ApplicationTest.launch(MainApp.class);
-    }
-
-    @Test
-    public void constructor_hasValidNumber_showsValidNumber() {
-        Person person = new PersonBuilder().withName("Bob").withPhone(VALID_PHONE_BOB).build();
-        PersonCard personCard = new PersonCard(person, 1);
-        Label phone = personCard.getPhone();
-        assertEquals("Phone: " + VALID_PHONE_BOB, phone.getText());
-        assertTrue(phone.isVisible());
     }
 
     @Test
