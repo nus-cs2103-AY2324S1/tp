@@ -27,7 +27,7 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
 
     // Optional fields
-    private final Lead lead;
+    private Lead lead;
     private final TelegramHandle telegram;
     private final Profession profession;
     private final Income income;
@@ -117,6 +117,13 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Changes the lead potential of the client.
+     */
+    public void setLead(Lead newLead) {
+        this.lead = newLead;
     }
 
     /**
