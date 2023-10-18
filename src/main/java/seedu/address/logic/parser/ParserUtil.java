@@ -153,8 +153,8 @@ public class ParserUtil {
      */
     public static FilterOperation parseFilterOperation(String operation) throws ParseException {
         requireNonNull(operation);
-
-        switch (operation) {
+        String trimmedOperation = operation.trim().toLowerCase();
+        switch (trimmedOperation) {
         case "add":
             return FilterOperation.ADD;
         case "delete":
