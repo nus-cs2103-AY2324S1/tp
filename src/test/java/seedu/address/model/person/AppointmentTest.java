@@ -22,29 +22,13 @@ public class AppointmentTest {
 
     @Test
     public void constructor_validAppointment_success() {
-        String validStart = "01-10-2021 10:00";
-        String validEnd = "11:00";
+        String validAppointment = "2021-01-01 10:00 11:30";
 
-        Appointment appointment = new Appointment(validStart, validEnd);
+        Appointment appointment = new Appointment(validAppointment);
 
-        assertEquals(appointment.toString(), validStart + " - " + validEnd);
+        assertEquals("2021-01-01 10:00 11:30", appointment.toString());
     }
 
-    @Test
-    public void constructor_invalidStart_throwsIllegalArgumentException() {
-        String invalidStart = "InvalidStart";
-        String validEnd = "11:00";
-
-        assertThrows(IllegalArgumentException.class, () -> new Appointment(invalidStart, validEnd));
-    }
-
-    @Test
-    public void constructor_invalidEnd_throwsIllegalArgumentException() {
-        String validStart = "01-10-2021 10:00";
-        String invalidEnd = "InvalidEnd";
-
-        assertThrows(IllegalArgumentException.class, () -> new Appointment(validStart, invalidEnd));
-    }
 
     @Test
     public void isValidAppointment() {
@@ -56,17 +40,16 @@ public class AppointmentTest {
         assertFalse(Appointment.isValidAppointment(" ")); // spaces only
 
         // valid appointment
-        assertTrue(Appointment.isValidAppointment("12 AUG 2023 10AM - 11AM"));
-        assertTrue(Appointment.isValidAppointment("-")); // one character
-        assertTrue(Appointment.isValidAppointment("11-05-2023 1500-1630")); // long address
+        assertTrue(Appointment.isValidAppointment("2023-01-01 11:00 12:00"));
+        assertTrue(Appointment.isValidAppointment("2005-01-03 10:00 12:00"));
     }
 
     @Test
     public void equals() {
-        Appointment appointment = new Appointment("Valid Appointment");
+        Appointment appointment = new Appointment("2023-01-01 11:00 12:00");
 
         // same values -> returns true
-        assertTrue(appointment.equals(new Appointment("Valid Appointment")));
+        assertTrue(appointment.equals(new Appointment("2023-01-01 11:00 12:00")));
 
         // same object -> returns true
         assertTrue(appointment.equals(appointment));
@@ -78,7 +61,7 @@ public class AppointmentTest {
         assertFalse(appointment.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(appointment.equals(new Appointment("Other Valid Appointment")));
+        assertFalse(appointment.equals(new Appointment("2019-01-01 11:00 12:00")));
     }
 
     @Test

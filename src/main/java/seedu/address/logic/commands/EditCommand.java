@@ -12,6 +12,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -34,7 +35,7 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the name or IC of the patient. "
+            + "by the name or IC of the patient.\n"
             + "Existing values will be overwritten by the input values.\n"
             + "Format: edit n/NAME or id/IC_NUMBER [Fields] ...\n"
             + "Example: " + COMMAND_WORD + " "
@@ -42,7 +43,7 @@ public class EditCommand extends Command {
             + PREFIX_PHONE + "91234567";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided. Example: p/98742122.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String MESSAGE_PERSON_NOT_FOUND = "This person does not exist in the address book.";
     public static final String MESSAGE_INCONSISTENT_NAME_AND_ID =
@@ -61,7 +62,6 @@ public class EditCommand extends Command {
      */
     public EditCommand(Name name, Nric nric, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(editPersonDescriptor);
-
         this.name = name;
         this.nric = nric;
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
@@ -72,11 +72,18 @@ public class EditCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        // Find the person to edit based on name or ID
         Optional<Person> personOptional = findPersonToEdit(lastShownList);
+
+        if (personOptional.isEmpty()) {
+            throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
+        }
 
         Person personToEdit = personOptional.get();
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+
+        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -110,10 +117,12 @@ public class EditCommand extends Command {
             return persons.stream()
                     .filter(person -> person.getName().equals(name))
                     .findFirst();
-        } else {
+        } else if (nric != null) {
             return persons.stream()
                     .filter(person -> person.getNric().equals(nric))
                     .findFirst();
+        } else {
+            return Optional.empty();
         }
     }
 
@@ -150,7 +159,15 @@ public class EditCommand extends Command {
         }
 
         EditCommand otherEditCommand = (EditCommand) other;
-        return editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
+
+        // Check if both the name and nric fields are equal for equality check
+        boolean isNameEqual = (name == null && otherEditCommand.name == null)
+                || (name != null && name.equals(otherEditCommand.name));
+
+        boolean isNricEqual = (nric == null && otherEditCommand.nric == null)
+                || (nric != null && nric.equals(otherEditCommand.nric));
+
+        return isNameEqual && isNricEqual;
     }
     @Override
     public String toString() {
@@ -193,18 +210,18 @@ public class EditCommand extends Command {
             setTags(toCopy.tags);
         }
 
-        public void setName(Name name) {
-            this.name = name;
-        }
 
         public Optional<Name> getName() {
             return Optional.ofNullable(name);
         }
 
+        public void setName(Name name) {
+            this.name = name;
+        }
+
         public Optional<Nric> getNric() {
             return Optional.ofNullable(nric);
         }
-
 
         public void setPhone(Phone phone) {
             this.phone = phone;
@@ -293,6 +310,13 @@ public class EditCommand extends Command {
                     && Objects.equals(appointment, otherEditPersonDescriptor.appointment)
                     && Objects.equals(medicalHistories, otherEditPersonDescriptor.medicalHistories)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
+        }
+
+        /**
+         * Returns true if at least one field is edited.
+         */
+        public boolean isAnyFieldEdited() {
+            return CollectionUtil.isAnyNonNull(phone, email, address, medicalHistories, tags, appointment);
         }
 
         @Override

@@ -63,7 +63,7 @@ public class ParserUtil {
         requireNonNull(nric);
         String trimmedNric = nric.trim();
         if (!Nric.isValidNric(trimmedNric)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Nric.MESSAGE_CONSTRAINTS);
         }
         return new Nric(trimmedNric);
     }
@@ -115,29 +115,23 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String appointment} into an {@code Appoitment}.
+     * Parses a {@code String appointment} into an {@code Appointment}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code start} is invalid.
      */
-    public static Appointment parseAppointment(String start, String end) throws ParseException {
-        String trimmedStart = start.trim();
-        String trimmedEnd = end.trim();
-
-        if (!Appointment.isValidStart(trimmedStart)) {
-            throw new ParseException(Appointment.MESSAGE_CONSTRAINTS_START);
-        }
-
-        if (!Appointment.isValidEnd(trimmedEnd)) {
-            throw new ParseException(Appointment.MESSAGE_CONSTRAINTS_END);
-        }
-
-        String appointment = start + " - " + end;
-
+    public static Appointment parseAppointment(String appointment) throws ParseException {
         requireNonNull(appointment);
+
         String trimmedAppointment = appointment.trim();
+
+        if (!Appointment.isValidAppointment(trimmedAppointment)) {
+            throw new ParseException(Appointment.MESSAGE_CONSTRAINTS);
+        }
+
         return new Appointment(trimmedAppointment);
     }
+
 
     /**
      * Parses a {@code String tag} into a {@code Tag}.

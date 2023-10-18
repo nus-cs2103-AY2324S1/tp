@@ -3,13 +3,12 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICAL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
@@ -41,7 +40,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_NRIC, PREFIX_PHONE, PREFIX_EMAIL,
-                        PREFIX_ADDRESS, PREFIX_START, PREFIX_END, PREFIX_MEDICAL, PREFIX_TAG);
+                        PREFIX_ADDRESS, PREFIX_APPOINTMENT, PREFIX_MEDICAL, PREFIX_TAG);
 
         boolean hasNamePrefix = argMultimap.getValue(PREFIX_NAME).isPresent();
         boolean hasNricPrefix = argMultimap.getValue(PREFIX_NRIC).isPresent();
@@ -51,7 +50,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_NRIC, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_ADDRESS, PREFIX_START, PREFIX_END, PREFIX_MEDICAL, PREFIX_TAG);
+                PREFIX_ADDRESS, PREFIX_APPOINTMENT, PREFIX_MEDICAL, PREFIX_TAG);
 
         Name name = null;
         Nric nric = null;
@@ -68,6 +67,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
             editPersonDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
         }
+
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
             editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
         }
@@ -75,17 +75,16 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
+        parseMedicalHistoriesForEdit(argMultimap.getAllValues(PREFIX_MEDICAL))
+                .ifPresent(editPersonDescriptor::setMedicalHistories);
 
-        if (argMultimap.getValue(PREFIX_MEDICAL).isPresent()) {
-            Collection<String> medicalHistoryValues = argMultimap.getAllValues(PREFIX_MEDICAL);
-            Set<MedicalHistory> medicalHistories = ParserUtil.parseMedicalHistories(medicalHistoryValues);
-            editPersonDescriptor.setMedicalHistories(medicalHistories);
+        if (argMultimap.getValue(PREFIX_APPOINTMENT).isPresent()) {
+            Appointment appointment = ParserUtil.parseAppointment(argMultimap.getValue(PREFIX_APPOINTMENT).get());
+            editPersonDescriptor.setAppointment(appointment);
         }
 
-        if (argMultimap.getValue(PREFIX_START).isPresent() && argMultimap.getValue(PREFIX_END).isPresent()) {
-            Appointment appointment = ParserUtil.parseAppointment(
-                    argMultimap.getValue(PREFIX_START).get(), argMultimap.getValue(PREFIX_END).get());
-            editPersonDescriptor.setAppointment(appointment);
+        if (!editPersonDescriptor.isAnyFieldEdited()) {
+            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
         return new EditCommand(name, nric, editPersonDescriptor);
@@ -105,4 +104,24 @@ public class EditCommandParser implements Parser<EditCommand> {
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
+
+
+    /**
+     * Parses {@code Collection<String> medicalHistories} into a {@code Set<MedicalHistory>}
+     * if {@code medicalHistories} is non-empty.
+     * If {@code tags} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<MedicalHistory>} containing zero tags.
+     */
+    private Optional<Set<MedicalHistory>> parseMedicalHistoriesForEdit(Collection<String> medicalHistories)
+            throws ParseException {
+        assert medicalHistories != null;
+
+        if (medicalHistories.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> medicalHistorySet = medicalHistories.size() == 1 && medicalHistories.contains("")
+                ? Collections.emptySet() : medicalHistories;
+        return Optional.of(ParserUtil.parseMedicalHistories(medicalHistorySet));
+    }
+
 }

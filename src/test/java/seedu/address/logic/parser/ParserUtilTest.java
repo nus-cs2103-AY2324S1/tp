@@ -38,9 +38,7 @@ public class ParserUtilTest {
     private static final String VALID_NRIC = "A023923S";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
-    private static final String VALID_APPOINTMENT = "08-04-2023 10:00 - 12:00";
-    private static final String VALID_START = "08-04-2023 10:00";
-    private static final String VALID_END = "12:00";
+    private static final String VALID_APPOINTMENT = "2023-01-23 10:00 12:00";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
@@ -110,22 +108,14 @@ public class ParserUtilTest {
 
     @Test
     public void parseAppointment_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseAppointment((String) null, (String) null));
-    }
-
-    @Test
-    public void parseAppointment_invalidStart_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseAppointment(INVALID_START, VALID_END));
-    }
-    @Test
-    public void parseAppointment_invalidEnd_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseAppointment(VALID_START, INVALID_END));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseAppointment((String) null));
     }
 
     @Test
     public void parseAppointment_validValue_returnsAppointment() throws Exception {
         Appointment expectedAppointment = new Appointment(VALID_APPOINTMENT);
-        assertEquals(expectedAppointment, ParserUtil.parseAppointment(VALID_START, VALID_END));
+        System.out.println(ParserUtil.parseAppointment(VALID_APPOINTMENT));
+        assertEquals(expectedAppointment, ParserUtil.parseAppointment(VALID_APPOINTMENT));
     }
 
     @Test

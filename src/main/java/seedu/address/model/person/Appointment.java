@@ -9,16 +9,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Appointment {
 
-    public static final String MESSAGE_CONSTRAINTS = "Appointment can take any values, and it should not be blank";
-    public static final String MESSAGE_CONSTRAINTS_START =
-            "Start time should be in the format DD-MM-YYYY HH:MM, ze.g., 01-01-2023 09:45";
-    public static final String MESSAGE_CONSTRAINTS_END = "End time should be in the format HH:MM, e.g., 20:30";
+    public static final String MESSAGE_CONSTRAINTS = "Appointment should be in the format YYYY-MM-DD HH:MM HH:MM";
 
-    /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String VALIDATION_REGEX = "[^\\s].*";
+    public static final String VALIDATION_REGEX =
+            "\\d{4}-(0?[1-9]|1[0-2])-(0?[1-9]|[1-2]\\d|3[0-1]) "
+                    + "(2[0-3]:[0-5]\\d|[0-1]\\d:[0-5]\\d) "
+                    + "(2[0-3]:[0-5]\\d|[0-1]?\\d:[0-5]?\\d)";
 
     public final String value;
 
@@ -34,31 +30,12 @@ public class Appointment {
     }
 
     /**
-     * Constructs an {@code Appointment}.
-     *
-     * @param start time of appointment
-     * @param end time of appointment
-     */
-    public Appointment(String start, String end) {
-        checkArgument(isValidStart(start), MESSAGE_CONSTRAINTS);
-        checkArgument(isValidEnd(end), MESSAGE_CONSTRAINTS);
-        value = start + " - " + end;
-    }
-
-    /**
      * Returns true if a given string is a valid appointment.
      */
     public static boolean isValidAppointment(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
-    public static boolean isValidStart(String start) {
-        return start.matches("\\d{2}-\\d{2}-\\d{4} \\d{2}:\\d{2}");
-    }
-
-    public static boolean isValidEnd(String end) {
-        return end.matches("\\d{2}:\\d{2}");
-    }
 
     @Override
     public String toString() {
