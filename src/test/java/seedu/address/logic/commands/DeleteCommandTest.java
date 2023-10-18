@@ -35,7 +35,7 @@ public class DeleteCommandTest {
     private DeletePersonDescriptor defaultDescriptor = new DeletePersonDescriptor();
 
     @Test
-    public void execute_ValidNameUnfilteredList_success() {
+    public void execute_validNameUnfilteredList_success() {
         Person personToDelete = new PersonBuilder().withName("Amy Bee").build();
         model.addPerson(personToDelete);
         Name name = personToDelete.getName();
@@ -51,7 +51,7 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_ValidNricUnfilteredList_success() {
+    public void execute_validNricUnfilteredList_success() {
         Person personToDelete = new PersonBuilder().withNric("S1234567E").build();
         model.addPerson(personToDelete);
         Nric nric = personToDelete.getNric();

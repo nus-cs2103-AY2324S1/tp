@@ -16,13 +16,13 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteCommand.DeletePersonDescriptor;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.DeleteCommand.DeletePersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -52,7 +52,8 @@ public class AddressBookParserTest {
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " n/" + PersonBuilder.DEFAULT_NAME);
-        assertEquals(new DeleteCommand(null, new Name(PersonBuilder.DEFAULT_NAME), new DeletePersonDescriptor()), command);
+        assertEquals(new DeleteCommand(null,
+                new Name(PersonBuilder.DEFAULT_NAME), new DeletePersonDescriptor()), command);
     }
 
     @Test
@@ -92,8 +93,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
-        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand(""));
+        String expectedString = String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE);
+        assertThrows(ParseException.class, expectedString, () -> parser.parseCommand(""));
     }
 
     @Test
