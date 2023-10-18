@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import seedu.address.annotation.Nullable;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Version;
@@ -15,26 +16,26 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
-import seedu.address.model.ContactList;
+import seedu.address.model.Contacts;
 import seedu.address.model.ContactsManager;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.UserPrefs;
-import seedu.address.model.util.SampleDataUtil;
+import seedu.address.model.ReadOnlySettings;
+import seedu.address.model.Settings;
+import seedu.address.model.util.SampleContactsUtil;
 import seedu.address.storage.ContactsStorage;
 import seedu.address.storage.JsonContactsStorage;
-import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.JsonSettingsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
-import seedu.address.storage.UserPrefsStorage;
+import seedu.address.storage.SettingsStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
 
 
 /**
- * Runs the application.
+ * Runs as a JavaFX application.
  */
 public class MainApp extends Application {
     public static final String NAME = "ConText";
@@ -42,67 +43,50 @@ public class MainApp extends Application {
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
-    protected Ui ui;
-    protected Logic logic;
-    protected Storage storage;
-    protected Model model;
-    protected Config config;
+    private Config config;
+
+    private Ui ui;
+    private Logic logic;
+    private Model model;
+    private Storage storage;
 
     @Override
     public void init() throws Exception {
-        logger.info(
-            String.format(
-                "==============================[ Initializing %s ]==============================",
-                MainApp.NAME
-            )
-        );
-
         super.init();
 
-        AppParameters appParameters = AppParameters.parse(getParameters());
-        config = initConfig(appParameters.getConfigPath());
-        initLogging(config);
+        AppParameters appParameters = AppParameters.parse(this.getParameters());
+        config = this.initConfig(appParameters.getConfigPath());
 
-        UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
-        UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        ContactsStorage contactsStorage = new JsonContactsStorage(userPrefs.getConTextFilePath());
-        storage = new StorageManager(contactsStorage, userPrefsStorage);
+        this.initLogging(config);
 
-        model = initModelManager(storage, userPrefs);
+        SettingsStorage settingsStorage = new JsonSettingsStorage(config.getSettingsPath());
+        ReadOnlySettings settings = this.initSettings(settingsStorage);
+
+        ContactsStorage contactsStorage = new JsonContactsStorage(settings.getContactsPath());
+        storage = new StorageManager(contactsStorage, settingsStorage);
+
+        model = this.initModel(storage, settings);
 
         logic = new LogicManager(model, storage);
 
         ui = new UiManager(logic);
     }
 
-    /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
-     * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
-     * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
-     */
-    private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        logger.info("Using data file : " + storage.getConTextFilePath());
-
-        Optional<ContactList> contactListOptional;
-        ContactList initialData;
-        try {
-            contactListOptional = storage.readContactsManager();
-            if (!contactListOptional.isPresent()) {
-                logger.info("Creating a new data file " + storage.getConTextFilePath()
-                        + " populated with a sample ContactsManager.");
-            }
-            initialData = contactListOptional.orElseGet(SampleDataUtil::getSampleContactsManager);
-        } catch (DataLoadingException e) {
-            logger.warning("Data file at " + storage.getConTextFilePath() + " could not be loaded."
-                    + " Will be starting with an empty contactList.");
-            initialData = new ContactsManager();
-        }
-
-        return new ModelManager(initialData, userPrefs);
+    @Override
+    public void start(Stage primaryStage) {
+        ui.start(primaryStage);
     }
 
-    private void initLogging(Config config) {
-        LogsCenter.init(config);
+    @Override
+    public void stop() {
+        try {
+            storage.saveSettings(model.getSettings());
+        } catch (IOException e) {
+            logger.severe(String.format(
+                "Failed to save settings: %s",
+                StringUtil.getDetails(e)
+            ));
+        }
     }
 
     /**
@@ -110,7 +94,7 @@ public class MainApp extends Application {
      * The default file path {@code Config#DEFAULT_CONFIG_FILE} will be used instead
      * if {@code configFilePath} is null.
      */
-    protected Config initConfig(Path configFilePath) {
+    private Config initConfig(@Nullable Path configFilePath) {
         Config initializedConfig;
         Path configFilePathUsed;
 
@@ -135,7 +119,7 @@ public class MainApp extends Application {
             initializedConfig = new Config();
         }
 
-        //Update config file in case it was missing to begin with or there are new/unused fields
+        // Update config file in case it was missing to begin with or there are new/unused fields
         try {
             ConfigUtil.saveConfig(initializedConfig, configFilePathUsed);
         } catch (IOException e) {
@@ -144,64 +128,83 @@ public class MainApp extends Application {
         return initializedConfig;
     }
 
+    private void initLogging(Config config) {
+        LogsCenter.init(config);
+    }
+
     /**
-     * Returns a {@code UserPrefs} using the file at {@code storage}'s user prefs file path,
-     * or a new {@code UserPrefs} with default configuration if errors occur when
-     * reading from the file.
+     * Returns {@link Settings} from reading via the specified
+     * {@link SettingsStorage}.
+     *
+     * If no file is found for the {@link SettingsStorage} or an error occurs
+     * while trying to read the file, default settings will be populated.
+     *
+     * This always resaves the updated settings file.
      */
-    protected UserPrefs initPrefs(UserPrefsStorage storage) {
-        Path prefsFilePath = storage.getUserPrefsFilePath();
-        logger.info("Using preference file : " + prefsFilePath);
+    private Settings initSettings(SettingsStorage settingsStorage) {
+        Path settingsPath = settingsStorage.getPath();
+        logger.info(String.format(
+            "Settings storage path: %s",
+            settingsPath
+        ));
 
-        UserPrefs initializedPrefs;
+        @Nullable Settings settings = null;
         try {
-            Optional<UserPrefs> prefsOptional = storage.readUserPrefs();
-            if (!prefsOptional.isPresent()) {
-                logger.info("Creating new preference file " + prefsFilePath);
+            Optional<Settings> settingsOptional = settingsStorage.readSettings();
+            if (settingsOptional.isPresent()) {
+                settings = settingsOptional.get();
+            } else {
+                logger.info("No settings file found, populating with default settings.");
+                settings = new Settings();
             }
-            initializedPrefs = prefsOptional.orElse(new UserPrefs());
         } catch (DataLoadingException e) {
-            logger.warning("Preference file at " + prefsFilePath + " could not be loaded."
-                    + " Using default preferences.");
-            initializedPrefs = new UserPrefs();
+            logger.warning("Failed to read settings file, populating with default settings.");
+            settings = new Settings();
         }
-
-        //Update prefs file in case it was missing to begin with or there are new/unused fields
-        try {
-            storage.saveUserPrefs(initializedPrefs);
-        } catch (IOException e) {
-            logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
-        }
-
-        return initializedPrefs;
-    }
-
-    @Override
-    public void start(Stage primaryStage) {
-        logger.info(
-            String.format(
-                "Starting %s %s",
-                MainApp.NAME,
-                MainApp.VERSION
-            )
-        );
-
-        ui.start(primaryStage);
-    }
-
-    @Override
-    public void stop() {
-        logger.info(
-            String.format(
-                "==============================[ Stopping %s ]==============================",
-                MainApp.NAME
-            )
-        );
 
         try {
-            storage.saveUserPrefs(model.getUserPrefs());
+            settingsStorage.saveSettings(settings);
         } catch (IOException e) {
-            logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
+            logger.severe(String.format(
+                "Failed to save settings: %s",
+                StringUtil.getDetails(e)
+            ));
         }
+
+        return settings;
+    }
+
+    /**
+     * Returns a {@link Model} with the {@link Contacts} from reading via the
+     * specified {@link Storage}, and with the specified
+     * {@link ReadOnlySettings}.
+     *
+     * If no contacts file is found for the {@link Storage}, sample contacts
+     * will be populated.
+     *
+     * If an error occurs while trying to read the contacts file, no contacts
+     * will be populated.
+     */
+    private Model initModel(Storage storage, ReadOnlySettings settings) {
+        logger.info(String.format(
+            "Storage contacts path: %s",
+            storage.getContactsPath()
+        ));
+
+        @Nullable Contacts contacts = null;
+        try {
+            Optional<Contacts> contactsOptional = storage.readContacts();
+            if (contactsOptional.isPresent()) {
+                contacts = contactsOptional.get();
+            } else {
+                logger.info("No contacts file found, populating with sample contacts.");
+                contacts = SampleContactsUtil.getSampleContacts();
+            }
+        } catch (DataLoadingException e) {
+            logger.warning("Failed to read contacts file.");
+            contacts = new ContactsManager();
+        }
+
+        return new ModelManager(contacts, settings);
     }
 }
