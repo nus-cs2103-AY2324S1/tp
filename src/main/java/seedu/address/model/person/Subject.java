@@ -68,6 +68,13 @@ public class Subject {
     }
 
     /**
+     * Returns the subject parsed from a string.
+     */
+    public static Subject parseSubject(String test) throws IllegalArgumentException {
+        return new Subject(test);
+    }
+
+    /**
      * Format state as text for viewing.
      */
     public String toString() {

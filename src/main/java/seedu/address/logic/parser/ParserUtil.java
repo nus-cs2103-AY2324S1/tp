@@ -152,22 +152,4 @@ public class ParserUtil {
         return tagSet;
     }
 
-    /**
-     * Parses a {@code String schedule} into a {@code Schedule}.
-     * @param schedule
-     * @return
-     * @throws ParseException
-     */
-    public static Schedule parseSchedule(String schedule) throws ParseException {
-        // TODO
-        requireNonNull(schedule);
-        if (!Schedule.isValidSchedule(schedule)) {
-            throw new ParseException(Schedule.MESSAGE_CONSTRAINTS);
-        }
-        if (!Objects.equals(schedule, "")) {
-            return new Schedule(schedule);
-        } else {
-            return new Schedule();
-        }
-    }
 }
