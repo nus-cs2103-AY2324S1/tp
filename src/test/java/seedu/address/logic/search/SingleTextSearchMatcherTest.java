@@ -1,21 +1,21 @@
 package seedu.address.logic.search;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import seedu.address.model.person.Person;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Predicate;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import seedu.address.model.person.Person;
 
 public class SingleTextSearchMatcherTest {
 
-    private static Map<String, String> TEST_PERSON;
+    private static final Map<String, String> TEST_PERSON;
 
-    @BeforeAll
-    public static void setUp() {
+    static {
         TEST_PERSON = new HashMap<>();
         TEST_PERSON.put("field A", "Lorem ipsum, dolor sit amet.");
         TEST_PERSON.put("field B", "Ut enim; ad@minim veNiam!");

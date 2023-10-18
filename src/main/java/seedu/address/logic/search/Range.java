@@ -27,7 +27,7 @@ class Range {
         if (a == null || b == null) {
             return false;
         }
-        return !(isBefore(a,b) || isAfter(a,b));
+        return !(isBefore(a, b) || isAfter(a, b));
     }
 
     static boolean isBefore(Range a, Range b) {
@@ -54,20 +54,26 @@ class Range {
     }
 
     public String getSubstring(String string) {
-        if (string.length() < this.end+1) {
+        if (string.length() < this.end + 1) {
             return null;
         }
-        return string.substring(this.start, this.end+1);
+        return string.substring(this.start, this.end + 1);
     }
 
     @Override
-    public boolean equals(Object o) { //IntelliJ generated
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Range range = (Range) o;
 
-        if (start != range.start) return false;
+        if (start != range.start) {
+            return false;
+        }
         return end == range.end;
     }
 

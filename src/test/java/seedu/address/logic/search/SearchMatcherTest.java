@@ -1,20 +1,18 @@
 package seedu.address.logic.search;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class SearchMatcherTest {
 
-    private static Map<String, String> TEST_PERSON;
+    private static final Map<String, String> TEST_PERSON;
 
-    @BeforeAll
-    public static void setUp() {
+    static {
         TEST_PERSON = new HashMap<>();
         TEST_PERSON.put("field A", "Lorem ipsum, dolor sit amet.");
         TEST_PERSON.put("field B", "Ut enim; ad@minim veNiam!");
@@ -34,9 +32,10 @@ class SearchMatcherTest {
         SearchMatcher a = generatePredicate(predicateA);
         SearchMatcher b = generatePredicate(predicateB);
         try {
-            return ((SearchMatcher) SearchMatcher.class.getDeclaredMethod(method, SearchMatcher.class).invoke(a, b)).test(TEST_PERSON);
+            return ((SearchMatcher) SearchMatcher.class.getDeclaredMethod(method, SearchMatcher.class).invoke(a, b))
+                    .test(TEST_PERSON);
         } catch (Exception ignored) {
-            assert false: "Unexpected Exception";
+            assert false : "Unexpected Exception";
             return null;
         }
     }

@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.search.SingleTextSearchMatcherTest;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;

@@ -1,11 +1,14 @@
 package seedu.address.logic.search;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class FieldRangesTest {
 
@@ -36,12 +39,12 @@ class FieldRangesTest {
     public void test_unionSameRange() {
         FieldRanges frA = new FieldRanges();
         FieldRanges frB = new FieldRanges();
-        frA.put("a", new Range(1,5));
-        frB.put("a", new Range(3,8));
+        frA.put("a", new Range(1, 5));
+        frB.put("a", new Range(3, 8));
         FieldRanges actual = FieldRanges.union(frA, frB);
 
         FieldRanges expected = new FieldRanges();
-        expected.put("a", new Range(1,8));
+        expected.put("a", new Range(1, 8));
 
         assertEquals(expected, actual);
     }
@@ -50,13 +53,13 @@ class FieldRangesTest {
     public void test_unionDifferentRange() {
         FieldRanges frA = new FieldRanges();
         FieldRanges frB = new FieldRanges();
-        frA.put("a", new Range(1,5));
-        frB.put("b", new Range(3,8));
+        frA.put("a", new Range(1, 5));
+        frB.put("b", new Range(3, 8));
         FieldRanges actual = FieldRanges.union(frA, frB);
 
         FieldRanges expected = new FieldRanges();
-        expected.put("a", new Range(1,5));
-        expected.put("b", new Range(3,8));
+        expected.put("a", new Range(1, 5));
+        expected.put("b", new Range(3, 8));
 
         assertEquals(expected, actual);
     }
@@ -66,7 +69,7 @@ class FieldRangesTest {
         assertNull(FieldRanges.union(null, null));
 
         FieldRanges fr = new FieldRanges();
-        fr.put("a", new Range(1,5));
+        fr.put("a", new Range(1, 5));
 
         assertEquals(FieldRanges.union(fr, null), FieldRanges.union(null, fr));
         assertEquals(FieldRanges.union(fr, null), FieldRanges.union(null, fr));
@@ -99,8 +102,8 @@ class FieldRangesTest {
     public void test_union_deepCopy() {
         FieldRanges frA = new FieldRanges();
         FieldRanges frB = new FieldRanges();
-        frA.put("a", new Range(1,5));
-        frB.put("a", new Range(1,5));
+        frA.put("a", new Range(1, 5));
+        frB.put("a", new Range(1, 5));
         FieldRanges.union(frA, frB);
         FieldRanges actual = FieldRanges.union(frA, frB);
         actual.put("x", new Range(6, 10));
@@ -121,12 +124,11 @@ class FieldRangesTest {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
                 FieldRanges newFr = new FieldRanges();
-                newFr.put("a", new Range(i, i+j));
+                newFr.put("a", new Range(i, i + j));
                 int hash = newFr.hashCode();
                 assertFalse(hashSet.contains(hash));
                 hashSet.add(hash);
             }
         }
     }
-
 }

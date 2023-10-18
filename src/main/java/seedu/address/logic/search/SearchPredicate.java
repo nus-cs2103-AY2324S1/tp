@@ -1,9 +1,9 @@
 package seedu.address.logic.search;
 
-import seedu.address.model.person.Person;
-
 import java.util.Map;
 import java.util.function.Predicate;
+
+import seedu.address.model.person.Person;
 
 /**
  * A layer of abstraction around {@link SearchMatcher} that gives it {@link Predicate} behaviour.

@@ -1,16 +1,19 @@
 package seedu.address.logic.search;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
 class RangeTest {
-    
     @Test
     void test_createWithFlippedLimits() {
         Range a = new Range(1, 5);
         Range b = new Range(5, 1);
-        
+
         assertEquals(a, b);
     }
 
@@ -115,6 +118,6 @@ class RangeTest {
         Range c = new Range(1, 6);
 
         assertEquals(a.hashCode(), b.hashCode());
-        assertNotEquals(a,c);
+        assertNotEquals(a, c);
     }
 }

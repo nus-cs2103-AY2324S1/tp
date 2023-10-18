@@ -1,25 +1,33 @@
 package seedu.address.logic.search;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.*;
-import seedu.address.model.tag.Tag;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.tag.Tag;
 
 class FindCommandArgumentParserTest {
 
-    static Person testPerson;
+    private static final Person TEST_PERSON;
 
     static {
         Set<Tag> tags = new HashSet<>();
         tags.add(new Tag("hasADogIGuess"));
         tags.add(new Tag("wouldReallyLikeASnake"));
-        testPerson = new Person(
+        TEST_PERSON = new Person(
                 new Name("Tom ABC Whee"),
                 new Phone("95728888"),
                 new Email("twee.123@company.org"),
@@ -31,35 +39,35 @@ class FindCommandArgumentParserTest {
     @Test
     void test_basicQuery() throws ParseException {
         SearchPredicate queryA = new FindCommandArgumentParser().parse("Tom");
-        assertTrue(queryA.test(testPerson));
+        assertTrue(queryA.test(TEST_PERSON));
         SearchPredicate queryB = new FindCommandArgumentParser().parse("Sam");
-        assertFalse(queryB.test(testPerson));
+        assertFalse(queryB.test(TEST_PERSON));
     }
 
     @Test
     void test_implicitAndQuery() throws ParseException {
         SearchPredicate queryA = new FindCommandArgumentParser().parse("Tom Harry");
-        assertFalse(queryA.test(testPerson));
+        assertFalse(queryA.test(TEST_PERSON));
         SearchPredicate queryB = new FindCommandArgumentParser().parse("whee twee");
-        assertTrue(queryB.test(testPerson));
+        assertTrue(queryB.test(TEST_PERSON));
     }
 
     @Test
     void test_explicitOrQuery() throws ParseException {
         SearchPredicate queryA = new FindCommandArgumentParser().parse("Tom | Harry");
-        assertTrue(queryA.test(testPerson));
+        assertTrue(queryA.test(TEST_PERSON));
         SearchPredicate queryB = new FindCommandArgumentParser().parse("Cat | Boy");
-        assertFalse(queryB.test(testPerson));
+        assertFalse(queryB.test(TEST_PERSON));
     }
 
     @Test
     void test_explicitAndQuery() throws ParseException {
         SearchPredicate queryA = new FindCommandArgumentParser().parse("Tom & Harry");
-        assertFalse(queryA.test(testPerson));
+        assertFalse(queryA.test(TEST_PERSON));
         SearchPredicate queryB = new FindCommandArgumentParser().parse("whee & twee");
-        assertTrue(queryB.test(testPerson));
+        assertTrue(queryB.test(TEST_PERSON));
         SearchPredicate queryC = new FindCommandArgumentParser().parse("ree & whee");
-        assertFalse(queryC.test(testPerson));
+        assertFalse(queryC.test(TEST_PERSON));
     }
 
     @Test
@@ -68,19 +76,19 @@ class FindCommandArgumentParserTest {
         // FALSE: Harry Cat ree
         SearchPredicate query;
         query = new FindCommandArgumentParser().parse("Harry Tom | whee twee");
-        assertTrue(query.test(testPerson));
+        assertTrue(query.test(TEST_PERSON));
         query = new FindCommandArgumentParser().parse("Tom | whee Harry twee");
-        assertTrue(query.test(testPerson));
+        assertTrue(query.test(TEST_PERSON));
         query = new FindCommandArgumentParser().parse("ree & whee | twee");
-        assertFalse(query.test(testPerson));
+        assertFalse(query.test(TEST_PERSON));
         query = new FindCommandArgumentParser().parse("whee & ree | twee");
-        assertTrue(query.test(testPerson));
+        assertTrue(query.test(TEST_PERSON));
         query = new FindCommandArgumentParser().parse("Tom whee & ree | twee");
-        assertTrue(query.test(testPerson));
+        assertTrue(query.test(TEST_PERSON));
         query = new FindCommandArgumentParser().parse("twee | ree & whee Tom");
-        assertTrue(query.test(testPerson));
+        assertTrue(query.test(TEST_PERSON));
         query = new FindCommandArgumentParser().parse("twee | whee & Tom ree");
-        assertFalse(query.test(testPerson));
+        assertFalse(query.test(TEST_PERSON));
     }
 
     @Test
@@ -96,7 +104,7 @@ class FindCommandArgumentParserTest {
                 new SingleTextSearchMatcher("Jerry")
                         .and(errorPredicate)
         );
-        assertFalse(query.test(testPerson));
+        assertFalse(query.test(TEST_PERSON));
     }
 
     @Test
@@ -112,7 +120,7 @@ class FindCommandArgumentParserTest {
                 new SingleTextSearchMatcher("Tom")
                         .or(errorPredicate)
         );
-        assertThrows(AssertionError.class, () -> query.test(testPerson));
+        assertThrows(AssertionError.class, () -> query.test(TEST_PERSON));
     }
 
     @Test
@@ -121,28 +129,28 @@ class FindCommandArgumentParserTest {
         // FALSE: Harry Cat ree
         SearchPredicate query;
         query = new FindCommandArgumentParser().parse("Harry (Tom | whee) twee");
-        assertFalse(query.test(testPerson));
+        assertFalse(query.test(TEST_PERSON));
         query = new FindCommandArgumentParser().parse("(Tom | whee) Harry twee");
-        assertFalse(query.test(testPerson));
+        assertFalse(query.test(TEST_PERSON));
         query = new FindCommandArgumentParser().parse("(ree & whee) | twee");
-        assertTrue(query.test(testPerson));
+        assertTrue(query.test(TEST_PERSON));
         query = new FindCommandArgumentParser().parse("twee | (whee & Tom) ree");
-        assertTrue(query.test(testPerson));
+        assertTrue(query.test(TEST_PERSON));
     }
 
     @Test
     void test_nonStandardAcceptableInputs() throws ParseException {
         SearchPredicate query;
         query = new FindCommandArgumentParser().parse("#");
-        assertFalse(query.test(testPerson));
+        assertFalse(query.test(TEST_PERSON));
         query = new FindCommandArgumentParser().parse(";");
-        assertFalse(query.test(testPerson));
+        assertFalse(query.test(TEST_PERSON));
         query = new FindCommandArgumentParser().parse("\\");
-        assertFalse(query.test(testPerson));
+        assertFalse(query.test(TEST_PERSON));
         query = new FindCommandArgumentParser().parse("-");
-        assertFalse(query.test(testPerson));
+        assertFalse(query.test(TEST_PERSON));
         query = new FindCommandArgumentParser().parse("abc&123");
-        assertTrue(query.test(testPerson));
+        assertTrue(query.test(TEST_PERSON));
     }
 
     @Test

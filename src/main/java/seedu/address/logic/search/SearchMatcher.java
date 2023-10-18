@@ -49,7 +49,7 @@ abstract class SearchMatcher {
      * @param other a predicate that will be logically-ANDed with this
      *              predicate
      * @return a composed predicate that represents the short-circuiting logical
-     * AND of this predicate and the {@code other} predicate
+     *         AND of this predicate and the {@code other} predicate
      * @throws NullPointerException if other is null
      */
     SearchMatcher and(SearchMatcher other) {
@@ -75,7 +75,7 @@ abstract class SearchMatcher {
      * predicate.
      *
      * @return a predicate that represents the logical negation of this
-     * predicate.
+     *         predicate.
      */
     SearchMatcher negate() {
         SearchMatcher old = this;
@@ -106,7 +106,7 @@ abstract class SearchMatcher {
      * @param other a predicate that will be logically-ORed with this
      *              predicate
      * @return a composed predicate that represents the logical
-     * OR of this predicate and the {@code other} predicate
+     *         OR of this predicate and the {@code other} predicate
      * @throws NullPointerException if other is null
      */
     SearchMatcher or(SearchMatcher other) {
