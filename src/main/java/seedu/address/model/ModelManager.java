@@ -16,121 +16,116 @@ import seedu.address.model.contact.Contact;
 
 
 /**
- * Represents the in-memory model of the address book data.
+ * Implementation of the Model component.
  */
 public class ModelManager implements Model {
-    private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
+    /**
+     * {@link Predicate} that always evaluates to true. Using this as the filter
+     * for the filtered contact list will not filter out any {@link Contact}s.
+    */
+    public static final Predicate<Contact> FILTER_NONE = (_contact) -> true;
 
-    private final ContactsManager contactsManager;
-    private final UserPrefs userPrefs;
+    private final Contacts contacts;
+    private final Settings settings;
+
     private final FilteredList<Contact> filteredContacts;
 
     /**
-     * Initializes a ModelManager with the given ContactsManager and userPrefs.
+     * Constructs with default values.
      */
-    public ModelManager(ContactList contactList, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(contactList, userPrefs);
-
-        logger.fine("Initializing with address book: " + contactList + " and user prefs " + userPrefs);
-
-        this.contactsManager = new ContactsManager(contactList);
-        this.userPrefs = new UserPrefs(userPrefs);
-        filteredContacts = new FilteredList<>(this.contactsManager.getContactList());
-    }
-
     public ModelManager() {
-        this(new ContactsManager(), new UserPrefs());
+        this(new Contacts(), new Settings());
     }
 
-    // [ContactsManager]
+    public ModelManager(ReadOnlyContacts contacts, ReadOnlySettings settings) {
+        //TODO do we need to copy these objects? Eg Storage doesn't
+        this.contacts = new Contacts(contacts);
+        this.settings = new Settings(settings);
 
-    @Override
-    public void setContactsManager(ContactList contactList) {
-        this.contactsManager.resetData(contactsManager);
+        this.filteredContacts = new FilteredList<>(this.contacts.getUnmodifiableList());
     }
 
-    @Override
-    public ContactList getContactList() {
-        return contactsManager;
-    }
+    // @Override
+    // public void setContacts(ReadOnlyContacts contactList) {
+    //     this.contacts.overwrite(contacts);
+    // }
 
-    @Override
-    public boolean hasContact(Contact contact) {
-        requireNonNull(contact);
-        return contactsManager.hasContact(contact);
-    }
+    // @Override
+    // public ReadOnlyContacts getContacts() {
+    //     return contacts;
+    // }
 
-    @Override
-    public void deleteContact(Contact target) {
-        contactsManager.removeContact(target);
-    }
+    // @Override
+    // public boolean containsContact(Contact contact) {
+    //     requireNonNull(contact);
+    //     return contacts.contains(contact);
+    // }
 
-    @Override
-    public void addContact(Contact contact) {
-        contactsManager.addContact(contact);
-        updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
-    }
+    // @Override
+    // public void removeContact(Contact target) {
+    //     contacts.remove(target);
+    // }
 
-    @Override
-    public void setContact(Contact target, Contact editedContact) {
-        requireAllNonNull(target, editedContact);
+    // @Override
+    // public void addContact(Contact contact) {
+    //     contacts.add(contact);
+    //     setContactsFilter(ModelManager.FILTER_NONE);
+    // }
 
-        contactsManager.setContact(target, editedContact);
-    }
+    // @Override
+    // public void updateContact(Contact target, Contact editedContact) {
+    //     requireAllNonNull(target, editedContact);
 
-    // [UserPrefs]
+    //     contacts.update(target, editedContact);
+    // }
 
-    @Override
-    public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
-        requireNonNull(userPrefs);
-        this.userPrefs.resetData(userPrefs);
-    }
+    // @Override
+    // public void setSettings(ReadOnlySettings userPrefs) {
+    //     requireNonNull(userPrefs);
+    //     this.settings.overwrite(userPrefs);
+    // }
 
-    @Override
-    public ReadOnlyUserPrefs getUserPrefs() {
-        return userPrefs;
-    }
+    // @Override
+    // public ReadOnlySettings getSettings() {
+    //     return settings;
+    // }
 
-    @Override
-    public GuiSettings getGuiSettings() {
-        return userPrefs.getGuiSettings();
-    }
+    // @Override
+    // public GuiSettings getGuiSettings() {
+    //     return settings.getGuiSettings();
+    // }
 
-    @Override
-    public void setGuiSettings(GuiSettings guiSettings) {
-        requireNonNull(guiSettings);
-        userPrefs.setGuiSettings(guiSettings);
-    }
+    // @Override
+    // public void setGuiSettings(GuiSettings guiSettings) {
+    //     requireNonNull(guiSettings);
+    //     settings.setGuiSettings(guiSettings);
+    // }
 
-    @Override
-    public Path getConTextFilePath() {
-        return userPrefs.getConTextFilePath();
-    }
+    // @Override
+    // public Path getContactsPath() {
+    //     return settings.getContactsPath();
+    // }
 
-    @Override
-    public void setContactsManagerFilePath(Path conTextFilePath) {
-        requireNonNull(conTextFilePath);
-        userPrefs.setContactsManagerFilePath(conTextFilePath);
-    }
+    // @Override
+    // public void setContactsPath(Path conTextFilePath) {
+    //     requireNonNull(conTextFilePath);
+    //     settings.setContactsPath(conTextFilePath);
+    // }
 
-    // [filteredContacts Accessors]
+    // /**
+    //  * Returns an unmodifiable view of the list of {@code Contact} backed by the internal list of
+    //  * {@code versionedConText}
+    //  */
+    // @Override
+    // public ObservableList<Contact> getFilteredContactList() {
+    //     return filteredContacts;
+    // }
 
-    /**
-     * Returns an unmodifiable view of the list of {@code Contact} backed by the internal list of
-     * {@code versionedConText}
-     */
-    @Override
-    public ObservableList<Contact> getFilteredContactList() {
-        return filteredContacts;
-    }
-
-    @Override
-    public void updateFilteredContactList(Predicate<Contact> predicate) {
-        requireNonNull(predicate);
-        filteredContacts.setPredicate(predicate);
-    }
-
-    // [Other]
+    // @Override
+    // public void setContactsFilter(Predicate<Contact> predicate) {
+    //     requireNonNull(predicate);
+    //     filteredContacts.setPredicate(predicate);
+    // }
 
     @Override
     public boolean equals(Object other) {
@@ -138,14 +133,16 @@ public class ModelManager implements Model {
             return true;
         }
 
-        // instanceof handles nulls
+        // instanceof also handles nulls
         if (!(other instanceof ModelManager)) {
             return false;
         }
+        ModelManager otherManager = (ModelManager)other;
 
-        ModelManager otherModelManager = (ModelManager) other;
-        return contactsManager.equals(otherModelManager.contactsManager)
-                && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredContacts.equals(otherModelManager.filteredContacts);
+        return (
+            this.contacts.equals(otherManager.contacts)
+            && this.settings.equals(otherManager.settings)
+            && this.filteredContacts.equals(otherManager.filteredContacts)
+        );
     }
 }

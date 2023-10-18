@@ -13,6 +13,7 @@ import seedu.address.model.contact.Contact;
  * API of the Model component.
  */
 public interface Model {
+    //TODO do we need to duplicate and expose all these?
     public Path getContactsPath();
     public void setContactsPath(Path contactsPath);
 
