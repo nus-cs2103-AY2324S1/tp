@@ -35,11 +35,11 @@ This page is designed to closely follow the format required by grading scripts.
 
 <img src="./images/bwangpj.png" width="200px">
 
-[[github](http://github.com/bwangpj)] 
+[[github](http://github.com/bwangpj)]
 [[portfolio](./team/bwangpj.md)]
 
 - Role: Developer
-- Responsibilities: Documentation 
+- Responsibilities: Documentation
 
 ### rayshawntan
 

@@ -30,7 +30,7 @@ Any feedback, including errors, will appear directly below the input box.
 
 Easily add a new contact to your list with the `add` command.
 
-**Format:**   
+**Format:**
 `add n/FULL_NAME p/PHONE_NUMBER e/EMAIL`
 
 **Examples:**
@@ -42,22 +42,22 @@ Easily add a new contact to your list with the `add` command.
 
 Display all your stored contacts.
 
-**Format:**   
+**Format:**
 `list`
 
 ---
 
 ### Deleting a Contact: `delete`
 
-Remove a contact based on the index. The index refers to the index number shown in the displayed person list.
+Remove a contact based on the index. The index refers to the index number shown in the displayed contact list.
 
-**Format:**   
+**Format:**
 `delete INDEX`
 
 **Examples:**
 - `delete n/John Doe`
 
-Deletes the person at the specified `INDEX`.
+Deletes the contact at the specified `INDEX`.
 The index **must be a positive integer** 1, 2, 3, …​
 
 ---
@@ -68,14 +68,14 @@ Click the help button on the top to navigate to a comprehensive help manual.
 
 ---
 
-### Locating Persons by Name: `find`
+### Locating Contacts by Name: `find`
 
 Search and display contacts with names containing any of the given keywords.
 
-**Format:**   
+**Format:**
 `find KEYWORD [MORE_KEYWORDS]`
 
-**Example:**   
+**Example:**
 `find John Alice`
 
 ---
@@ -84,7 +84,7 @@ Search and display contacts with names containing any of the given keywords.
 
 Remove all contacts from your list. Apply with caution!
 
-**Format:**   
+**Format:**
 `clear`
 
 ---
@@ -93,19 +93,19 @@ Remove all contacts from your list. Apply with caution!
 
 Close the ConText application.
 
-**Format:**   
+**Format:**
 `exit`
 
 ---
 
-### Editing a Person: `edit`
+### Editing a Contact: `edit`
 
 Modify an existing contact's details in your list.
 
-**Format:**   
+**Format:**
 `edit INDEX n/FULL_NAME p/PHONE_NUMBER e/EMAIL`
 
-**Example:**   
+**Example:**
 `edit 2 n/John Doe p/98765432 e/john.doe@email.com`
 
 ---
