@@ -1,7 +1,10 @@
 package seedu.flashlingo.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.flashlingo.logic.parser.CliSyntax.*;
+import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_ORIGINAL_WORD;
+import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_ORIGINAL_WORD_LANGUAGE;
+import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_TRANSLATED_WORD;
+import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_TRANSLATED_WORD_LANGUAGE;
 
 import java.util.Date;
 
