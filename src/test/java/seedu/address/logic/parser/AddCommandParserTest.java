@@ -3,8 +3,21 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.ANIMAL_NAME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.ANIMAL_NAME_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.ANIMAL_NAME_NIL_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.ANIMAL_TYPE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.ANIMAL_TYPE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.ANIMAL_TYPE_NIL_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.AVAILABILITY_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.AVAILABILITY_DESC_AVAILABLE;
+import static seedu.address.logic.commands.CommandTestUtil.AVAILABILITY_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.AVAILABILITY_NIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.HOUSING_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.HOUSING_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.HOUSING_NIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
@@ -19,7 +32,11 @@ import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ANIMAL_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ANIMAL_TYPE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_AVAILABILITY_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_HOUSING_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
@@ -50,19 +67,125 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Person expectedPerson = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
+        Person expectedPerson = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND)
+                .withAnimalName(VALID_ANIMAL_NAME_BOB)
+                .withAvailability(VALID_AVAILABILITY_BOB)
+                .withAnimalType(VALID_ANIMAL_TYPE_BOB, VALID_AVAILABILITY_BOB)
+                .withHousing(VALID_HOUSING_BOB)
+                .build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + ANIMAL_NAME_DESC_BOB
+                + AVAILABILITY_DESC_BOB
+                + ANIMAL_TYPE_DESC_BOB
+                + HOUSING_DESC_BOB, new AddCommand(expectedPerson));
 
 
         // multiple tags - all accepted
         Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
-                .build();
+                .withAnimalName(VALID_ANIMAL_NAME_BOB)
+                .withAvailability(VALID_AVAILABILITY_BOB)
+                .withAnimalType(VALID_ANIMAL_TYPE_BOB, VALID_AVAILABILITY_BOB)
+                .withHousing(VALID_HOUSING_BOB).build();
         assertParseSuccess(parser,
-                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND
+                        + TAG_DESC_FRIEND + ANIMAL_NAME_DESC_BOB
+                        + AVAILABILITY_DESC_BOB
+                        + ANIMAL_TYPE_DESC_BOB
+                        + HOUSING_DESC_BOB,
                 new AddCommand(expectedPersonMultipleTags));
+    }
+
+    @Test
+    public void parse_allAdditionalFieldsNil_success() {
+        Person expectedPerson = new PersonBuilder()
+                .withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB)
+                .withEmail(VALID_EMAIL_BOB)
+                .withAddress(VALID_ADDRESS_BOB)
+                .withAnimalName("nil")
+                .withAvailability("nil")
+                .withAnimalType("nil", "nil")
+                .withHousing("nil")
+                .withTags()
+                .build();
+
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                        + ANIMAL_NAME_NIL_DESC_BOB + AVAILABILITY_NIL_DESC_BOB + ANIMAL_TYPE_NIL_DESC_BOB
+                        + HOUSING_NIL_DESC_BOB,
+                new AddCommand(expectedPerson));
+    }
+
+    @Test
+    public void parse_animalNameWithNilAvailability_throwsParseException() {
+        String expectedMessage = "Animal name should be 'nil' when availability is 'nil'.";
+
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                        + TAG_DESC_FRIEND + ANIMAL_NAME_DESC_BOB + AVAILABILITY_NIL_DESC_BOB + HOUSING_DESC_BOB
+                        + ANIMAL_TYPE_DESC_BOB,
+                expectedMessage);
+    }
+
+    @Test
+    public void parse_animalTypeWithNilAvailability_throwsParseException() {
+        String expectedMessage = "Animal type should be 'nil' when availability is 'nil'.";
+
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + TAG_DESC_FRIEND + ANIMAL_NAME_NIL_DESC_BOB + ANIMAL_TYPE_DESC_BOB + AVAILABILITY_NIL_DESC_BOB
+                + HOUSING_DESC_BOB,
+                expectedMessage);
+    }
+
+    @Test
+    public void parse_invalidAnimalNameWithAvailableAvailability_throwsParseException() {
+        String expectedMessage = "Availability cannot be 'Available' when an animal name is provided; "
+                + "animal name should be 'nil'.";
+
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + TAG_DESC_FRIEND + ANIMAL_NAME_DESC_BOB + AVAILABILITY_DESC_AVAILABLE + ANIMAL_TYPE_DESC_BOB
+                + HOUSING_DESC_BOB,
+                expectedMessage);
+    }
+
+    @Test
+    public void parse_missingAnimalName_throwsParseException() {
+        String expectedMessage = "Animal name is required. Please indicate as 'nil' if information is not available.";
+
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                        + TAG_DESC_FRIEND + AVAILABILITY_DESC_BOB + ANIMAL_TYPE_DESC_BOB
+                        + HOUSING_DESC_BOB,
+                expectedMessage);
+    }
+
+    @Test
+    public void parse_missingAvailability_throwsParseException() {
+        String expectedMessage = "Availability is required. Please indicate as 'nil' if information is not available.";
+
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                        + TAG_DESC_FRIEND + ANIMAL_NAME_DESC_BOB + ANIMAL_TYPE_DESC_BOB
+                        + HOUSING_DESC_BOB,
+                expectedMessage);
+    }
+
+    @Test
+    public void parse_missingAnimalType_throwsParseException() {
+        String expectedMessage = "Animal type is required. Please indicate as 'nil' if information is not available.";
+
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                        + TAG_DESC_FRIEND + ANIMAL_NAME_DESC_BOB + AVAILABILITY_DESC_BOB
+                        + HOUSING_DESC_BOB,
+                expectedMessage);
+    }
+
+    @Test
+    public void parse_missingHousing_throwsParseException() {
+        String expectedMessage = "Housing is required. Please indicate as 'nil' if information is not available.";
+
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                        + TAG_DESC_FRIEND + ANIMAL_NAME_DESC_BOB + ANIMAL_TYPE_DESC_BOB
+                        + AVAILABILITY_DESC_BOB,
+                expectedMessage);
     }
 
     @Test
@@ -133,7 +256,11 @@ public class AddCommandParserTest {
     public void parse_optionalFieldsMissing_success() {
         // zero tags
         Person expectedPerson = new PersonBuilder(AMY).withTags().build();
-        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY,
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
+                        + ANIMAL_NAME_DESC_AMY
+                        + AVAILABILITY_DESC_AMY
+                        + ANIMAL_TYPE_DESC_AMY
+                        + HOUSING_DESC_AMY,
                 new AddCommand(expectedPerson));
     }
 

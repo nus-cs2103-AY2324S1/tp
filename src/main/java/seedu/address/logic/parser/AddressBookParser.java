@@ -70,7 +70,11 @@ public class AddressBookParser implements Parser {
             return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+            if (arguments.isEmpty()) {
+                return new ListCommand();
+            } else {
+                return new FindCommandParser().parse(arguments);
+            }
 
         case ViewCommand.COMMAND_WORD:
             return new ViewCommandParser().parse(arguments);
