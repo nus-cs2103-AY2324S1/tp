@@ -2,7 +2,6 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javafx.collections.ObservableList;
@@ -58,7 +57,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Replaces the contents of the event list with {@code events}.
      * @param newEvents the list of events to be replaced with.
      */
-    public void setEvents(ArrayList<Event> newEvents) {
+    public void setEvents(List<Event> newEvents) {
         this.events.setEvents(newEvents);
     }
 
@@ -149,8 +148,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public ArrayList<Event> getEventList() {
-        return events.getEventList();
+    public ObservableList<Event> getEventList() {
+        return events.asUnmodifiableObservableList();
     }
 
     @Override

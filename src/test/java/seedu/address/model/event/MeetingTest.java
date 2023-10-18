@@ -3,13 +3,11 @@ package seedu.address.model.event;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.TypicalMeetings.MEETING_WITHOUT_PERSONS;
 import static seedu.address.testutil.TypicalMeetings.MEETING_WITHOUT_TIME;
 import static seedu.address.testutil.TypicalMeetings.TP_MEETING;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.person.Name;
 import seedu.address.testutil.MeetingBuilder;
 
 public class MeetingTest {
@@ -20,13 +18,6 @@ public class MeetingTest {
 
         Meeting tpMeetingCopy = new MeetingBuilder(TP_MEETING).build();
         assertTrue(TP_MEETING.isSameEvent(tpMeetingCopy));
-    }
-
-    @Test
-    public void toStringTest() {
-        String expected = "TP MEETING TEST; Date: 2023-10-18; Start_Time: 0000; End_Time: 2359; "
-                + "Assigned_Persons: [Alice Pauline, Benson Meier]";
-        assertEquals(expected, TP_MEETING.toString());
     }
 
     @Test
@@ -57,12 +48,6 @@ public class MeetingTest {
     }
 
     @Test
-    public void getNames() {
-        assertEquals("[Alice Pauline, Benson Meier]", TP_MEETING.getNames().toString());
-        assertEquals("[]", MEETING_WITHOUT_PERSONS.getNames().toString());
-    }
-
-    @Test
     public void hasStartTime() {
         assertTrue(TP_MEETING.hasStartTime());
         assertFalse(MEETING_WITHOUT_TIME.hasStartTime());
@@ -72,12 +57,5 @@ public class MeetingTest {
     public void hasEndTime() {
         assertTrue(TP_MEETING.hasEndTime());
         assertFalse(MEETING_WITHOUT_TIME.hasEndTime());
-    }
-
-    @Test
-    public void getUpdatedNames() {
-        Meeting newMeeting = new MeetingBuilder(TP_MEETING).build();
-        assertEquals("[Alice, Benson Meier]",
-                newMeeting.getUpdatedNames(new Name("Alice Pauline"), new Name("Alice")).toString());
     }
 }

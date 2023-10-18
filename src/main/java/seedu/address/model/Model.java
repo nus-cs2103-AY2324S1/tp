@@ -1,7 +1,6 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.Set;
 import java.util.function.Predicate;
 
@@ -84,7 +83,7 @@ public interface Model {
     ObservableList<Person> getFilteredPersonList();
 
     /** Returns a view of the event list */
-    ArrayList<Event> getEventList();
+    ObservableList<Event> getEventList();
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson} in the address book

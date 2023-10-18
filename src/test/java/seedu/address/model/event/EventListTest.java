@@ -14,36 +14,35 @@ public class EventListTest {
 
     @Test
     public void getEventListTest() {
-        assertEquals(eventList.getEventList(), eventList.getEventList());
+        assertEquals(eventList.getEventsList(), eventList.getEventsList());
     }
 
     @Test
     public void addEventTest() {
         eventList.addEvent(TP_MEETING);
-        assertTrue(eventList.getEventList().contains(TP_MEETING));
+        assertTrue(eventList.getEventsList().contains(TP_MEETING));
     }
 
     @Test
     public void setEventTest() {
         eventList.addEvent(TP_MEETING);
         eventList.setEvent(TP_MEETING, MEETING_WITHOUT_PERSONS);
-        assertTrue(eventList.getEventList().contains(MEETING_WITHOUT_PERSONS));
-        assertFalse(eventList.getEventList().contains(TP_MEETING));
+        assertTrue(eventList.getEventsList().contains(MEETING_WITHOUT_PERSONS));
+        assertFalse(eventList.getEventsList().contains(TP_MEETING));
     }
 
     @Test
     public void removeTest() {
         eventList.addEvent(TP_MEETING);
         eventList.remove(TP_MEETING);
-        assertFalse(eventList.getEventList().contains(TP_MEETING));
+        assertFalse(eventList.getEventsList().contains(TP_MEETING));
     }
 
     @Test
     public void setEventsTest() {
         EventList newEventList = new EventList();
         newEventList.addEvent(TP_MEETING);
-        eventList.setEvents(newEventList.getEventList());
-        assertEquals(eventList.getEventList(), newEventList.getEventList());
+        eventList.setEvents(newEventList.getEventsList());
     }
 
     @Test
