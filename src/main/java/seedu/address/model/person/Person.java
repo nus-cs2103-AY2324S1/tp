@@ -23,18 +23,33 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private final Subject subject;
+    private final Day day;
+    private final Begin begin;
+    private final End end;
     private final Set<Tag> tags = new HashSet<>();
+
+    private boolean paid;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+
+    public Person(Name name, Phone phone, Email email, Address address, Subject subject, Day day,
+                  Begin begin, End end, Set<Tag> tags, boolean paid) {
+        requireAllNonNull(name, phone, email, address, subject, day, begin, end, tags);
+
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.subject = subject;
+        this.day = day;
+        this.begin = begin;
+        this.end = end;
+
         this.tags.addAll(tags);
+        this.paid = paid;
     }
 
     public Name getName() {
@@ -53,12 +68,37 @@ public class Person {
         return address;
     }
 
+    public Subject getSubject(){
+        return subject;
+    }
+
+    public Day getDay() {
+        return day;
+    }
+
+
+    public Begin getBegin() {
+        return begin;
+    }
+
+    public End getEnd(){
+        return end;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public boolean getPaid() {
+        return paid;
+    }
+
+    public void setPaid() {
+        this.paid = true;
     }
 
     /**
@@ -94,13 +134,18 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
+                && subject.equals(otherPerson.subject)
+                && day.equals(otherPerson.day)
+                && begin.equals(otherPerson.begin)
+                && end.equals(otherPerson.end)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, subject, day, begin, end, tags, paid);
+        return Objects.hash(name, phone, email, address, tags, paid);
     }
 
     @Override
@@ -110,7 +155,12 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("subject", subject)
+                .add("day", day)
+                .add("begin", begin)
+                .add("end", end)
                 .add("tags", tags)
+                .add("paid", paid)
                 .toString();
     }
 
