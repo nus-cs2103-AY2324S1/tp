@@ -35,7 +35,7 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds new information about a contact. "
-            + "Parameters: "
+            + "Parameters: [LIST INDEX OF CONTACT]"
             + "[" + CliSyntax.PREFIX_PHONE + " PHONE] "
             + "[" + CliSyntax.PREFIX_EMAIL + " EMAIL] "
             + "[" + CliSyntax.PREFIX_LINK + "LINK] "
@@ -44,7 +44,7 @@ public class AddCommand extends Command {
             + "[" + CliSyntax.PREFIX_SPECIALISATION + "SPECIALISATION] "
             + "[" + CliSyntax.PREFIX_TAG + " TAG] "
             + "[" + CliSyntax.PREFIX_PRIORITY + " PRIORITY]...\n"
-            + "Example: " + COMMAND_WORD + " "
+            + "Example: " + COMMAND_WORD + " 1 "
             + CliSyntax.PREFIX_PHONE + " 98765432 "
             + CliSyntax.PREFIX_EMAIL + " johnd@example.com "
             + CliSyntax.PREFIX_TAG + " friends "
