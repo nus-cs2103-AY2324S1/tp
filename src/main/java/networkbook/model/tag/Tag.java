@@ -11,7 +11,8 @@ import networkbook.model.util.Identifiable;
  */
 public class Tag implements Identifiable<Tag> {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
+    public static final String MESSAGE_CONSTRAINTS = "Tags names should only contain alphanumeric characters, "
+            + "white space, hyphen or underscore.";
     public static final String VALIDATION_REGEX = "^[a-zA-Z0-9\\-_ ]+$+";
 
     private final String tagName;
@@ -57,7 +58,7 @@ public class Tag implements Identifiable<Tag> {
     @Override
     public boolean isSame(Tag toCheck) {
         // handle null case
-        if (!(toCheck instanceof Tag)) {
+        if (toCheck == null) {
             return false;
         }
 
