@@ -37,7 +37,7 @@ public class TagCommandParser implements Parser<TagCommand> {
 
         if (!StudentNumber.isValidStudentNumber(argMultimap.getPreamble())) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                TagCommand.MESSAGE_USAGE));
+                    TagCommand.MESSAGE_USAGE));
         }
 
         StudentNumber studentNumber = new StudentNumber(argMultimap.getPreamble());
