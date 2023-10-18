@@ -21,7 +21,8 @@ import seedu.address.model.schedule.Schedule;
 class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
-    public static final String MESSAGE_DUPLICATE_SCHEDULE = "Persons list contains duplicate schedule(s).";
+    public static final String MESSAGE_DUPLICATE_SCHEDULE = "Schedules list contains duplicate schedule(s).";
+    public static final String MESSAGE_CLASHING_SCHEDULE = "There are conflicts between schedule(s).";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
     private final List<JsonAdaptedSchedule> schedules = new ArrayList<>();
@@ -64,6 +65,11 @@ class JsonSerializableAddressBook {
             Schedule schedule = jsonAdaptedSchedule.toModelType(addressBook);
             if (addressBook.hasSchedule(schedule)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_SCHEDULE);
+            }
+            for (Schedule existingSchedule : addressBook.getScheduleList()) {
+                if (schedule.isClashing(existingSchedule)) {
+                    throw new IllegalValueException(MESSAGE_CLASHING_SCHEDULE);
+                }
             }
             addressBook.addSchedule(schedule);
         }
