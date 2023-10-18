@@ -9,24 +9,14 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.UniqueContactList;
 
+
+
 /**
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSameContact comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
-
-    private final UniqueContactList contacts;
-
-    /*
-     * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
-     * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
-     *
-     * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
-     *   among constructors.
-     */
-    {
-        contacts = new UniqueContactList();
-    }
+    private final UniqueContactList contacts = new UniqueContactList();
 
     public AddressBook() {}
 
@@ -34,7 +24,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Creates an AddressBook using the Contacts in the {@code toBeCopied}
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
-        this();
         resetData(toBeCopied);
     }
 

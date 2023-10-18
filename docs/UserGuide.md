@@ -68,7 +68,7 @@ Click the help button on the top to navigate to a comprehensive help manual.
 
 ---
 
-### Locating Persons by Name: `find`
+### Locating Contacts by Name: `find`
 
 Search and display contacts with names containing any of the given keywords.
 
@@ -98,7 +98,7 @@ Close the ConText application.
 
 ---
 
-### Editing a Person: `edit`
+### Editing a Contact: `edit`
 
 Modify an existing contact's details in your list.
 

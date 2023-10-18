@@ -4,7 +4,6 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TestData.EMAIL_DESC_AMY;
@@ -15,21 +14,16 @@ import static seedu.address.testutil.TestData.INDEX_THIRD_CONTACT;
 import static seedu.address.testutil.TestData.INVALID_EMAIL_DESC;
 import static seedu.address.testutil.TestData.INVALID_NAME_DESC;
 import static seedu.address.testutil.TestData.INVALID_PHONE_DESC;
-import static seedu.address.testutil.TestData.INVALID_TAG_DESC;
 import static seedu.address.testutil.TestData.NAME_DESC_AMY;
 import static seedu.address.testutil.TestData.NOTE_DESC_AMY;
 import static seedu.address.testutil.TestData.NOTE_DESC_BOB;
 import static seedu.address.testutil.TestData.PHONE_DESC_AMY;
 import static seedu.address.testutil.TestData.PHONE_DESC_BOB;
-import static seedu.address.testutil.TestData.TAG_DESC_FRIEND;
-import static seedu.address.testutil.TestData.TAG_DESC_HUSBAND;
 import static seedu.address.testutil.TestData.VALID_EMAIL_AMY;
 import static seedu.address.testutil.TestData.VALID_NAME_AMY;
 import static seedu.address.testutil.TestData.VALID_NOTE_AMY;
 import static seedu.address.testutil.TestData.VALID_PHONE_AMY;
 import static seedu.address.testutil.TestData.VALID_PHONE_BOB;
-import static seedu.address.testutil.TestData.VALID_TAG_FRIEND;
-import static seedu.address.testutil.TestData.VALID_TAG_HUSBAND;
 
 import org.junit.jupiter.api.Test;
 
@@ -38,11 +32,11 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditContactDescriptor;
 import seedu.address.testutil.EditContactDescriptorBuilder;
+import seedu.address.testutil.TestData;
+
+
 
 public class EditCommandParserTest {
-
-    private static final String TAG_EMPTY = " " + PREFIX_TAG;
-
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
 
@@ -80,19 +74,42 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_NAME_DESC, Messages.MESSAGE_NAME_CONSTRAINTS); // invalid name
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC, Messages.MESSAGE_PHONE_CONSTRAINTS); // invalid phone
         assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, Messages.MESSAGE_EMAIL_CONSTRAINTS); // invalid email
-        assertParseFailure(parser, "1" + INVALID_TAG_DESC, Messages.MESSAGE_TAG_CONSTRAINTS); // invalid tag
+        // Invalid tag
+        assertParseFailure(
+            parser,
+            "1" + TestData.Invalid.Tag.FLAG_HASHTAG,
+            Messages.tagInvalid(TestData.Invalid.Tag.HASHTAG)
+        );
 
         // invalid phone followed by valid email
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC + EMAIL_DESC_AMY, Messages.MESSAGE_PHONE_CONSTRAINTS);
 
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Contact} being edited,
         // parsing it together with a valid tag results in error
-        assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_DESC_HUSBAND + TAG_EMPTY,
-                Messages.MESSAGE_TAG_CONSTRAINTS);
-        assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_EMPTY + TAG_DESC_HUSBAND,
-                Messages.MESSAGE_TAG_CONSTRAINTS);
-        assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND,
-                Messages.MESSAGE_TAG_CONSTRAINTS);
+        assertParseFailure(
+            parser,
+            "1"
+                    + TestData.Valid.Tag.FLAG
+                    + TestData.Valid.Tag.FLAG_ALPHANUMERIC
+                    + TestData.Valid.Tag.FLAG_ALPHANUMERIC_SPACES,
+            Messages.tagInvalid("")
+        );
+        assertParseFailure(
+            parser,
+            "1"
+                    + TestData.Valid.Tag.FLAG_ALPHANUMERIC
+                    + TestData.Valid.Tag.FLAG
+                    + TestData.Valid.Tag.FLAG_ALPHANUMERIC_SPACES,
+            Messages.tagInvalid("")
+        );
+        assertParseFailure(
+            parser,
+            "1"
+                    + TestData.Valid.Tag.FLAG_ALPHANUMERIC
+                    + TestData.Valid.Tag.FLAG_ALPHANUMERIC_SPACES
+                    + TestData.Valid.Tag.FLAG,
+            Messages.tagInvalid("")
+        );
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_NOTE_AMY + VALID_PHONE_AMY,
@@ -102,12 +119,12 @@ public class EditCommandParserTest {
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_CONTACT;
-        String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + TAG_DESC_HUSBAND
-                + EMAIL_DESC_AMY + NOTE_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND;
+        String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + TestData.Valid.Tag.FLAG_ALPHANUMERIC
+                + EMAIL_DESC_AMY + NOTE_DESC_AMY + NAME_DESC_AMY + TestData.Valid.Tag.FLAG_ALPHANUMERIC_SPACES;
 
         EditContactDescriptor descriptor = new EditContactDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withNote(VALID_NOTE_AMY)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withTags(TestData.Valid.Tag.ALPHANUMERIC, TestData.Valid.Tag.ALPHANUMERIC_SPACES).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -153,8 +170,8 @@ public class EditCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // tags
-        userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND;
-        descriptor = new EditContactDescriptorBuilder().withTags(VALID_TAG_FRIEND).build();
+        userInput = targetIndex.getOneBased() + TestData.Valid.Tag.FLAG_ALPHANUMERIC;
+        descriptor = new EditContactDescriptorBuilder().withTags(TestData.Valid.Tag.ALPHANUMERIC).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -175,10 +192,20 @@ public class EditCommandParserTest {
 
         assertParseFailure(parser, userInput, ArgumentMultimap.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
-        // mulltiple valid fields repeated
-        userInput = targetIndex.getOneBased() + PHONE_DESC_AMY + NOTE_DESC_AMY + EMAIL_DESC_AMY
-                + TAG_DESC_FRIEND + PHONE_DESC_AMY + NOTE_DESC_AMY + EMAIL_DESC_AMY + TAG_DESC_FRIEND
-                + PHONE_DESC_BOB + NOTE_DESC_BOB + EMAIL_DESC_BOB + TAG_DESC_HUSBAND;
+        // Duplicated valid tag
+        userInput = targetIndex.getOneBased()
+                + PHONE_DESC_AMY
+                + NOTE_DESC_AMY
+                + EMAIL_DESC_AMY
+                + TestData.Valid.Tag.FLAG_ALPHANUMERIC
+                + PHONE_DESC_AMY
+                + NOTE_DESC_AMY
+                + EMAIL_DESC_AMY
+                + TestData.Valid.Tag.FLAG_ALPHANUMERIC
+                + PHONE_DESC_BOB
+                + NOTE_DESC_BOB
+                + EMAIL_DESC_BOB
+                + TestData.Valid.Tag.FLAG_ALPHANUMERIC_SPACES;
 
         assertParseFailure(parser, userInput,
             ArgumentMultimap.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_NOTE));
@@ -194,7 +221,7 @@ public class EditCommandParserTest {
     @Test
     public void parse_resetTags_success() {
         Index targetIndex = INDEX_THIRD_CONTACT;
-        String userInput = targetIndex.getOneBased() + TAG_EMPTY;
+        String userInput = targetIndex.getOneBased() + TestData.Valid.Tag.FLAG;
 
         EditContactDescriptor descriptor = new EditContactDescriptorBuilder().withTags().build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);

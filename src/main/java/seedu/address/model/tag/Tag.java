@@ -1,62 +1,59 @@
 package seedu.address.model.tag;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
+import seedu.address.model.contact.Contact;
 
-import seedu.address.logic.Messages;
+
 
 /**
- * Represents a Tag in the address book.
- * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
+ * Represents a {@link Contact}'s Tag.
+ *
+ * A Tag must be an alphanumeric string but may contain spaces.
  */
-public class Tag {
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
-
-    public final String tagName;
+public final class Tag {
+    public final String name;
 
     /**
-     * Constructs a {@code Tag}.
+     * Returns whether the specified name is valid for constructing a Tag.
      *
-     * @param tagName A valid tag name.
+     * @param name Name to check.
      */
-    public Tag(String tagName) {
-        requireNonNull(tagName);
-        checkArgument(isValidTagName(tagName), Messages.MESSAGE_TAG_CONSTRAINTS);
-        this.tagName = tagName;
+    public static boolean isValidName(String name) {
+        return name.matches("[a-zA-Z\\d ]+");
     }
 
     /**
-     * Returns true if a given string is a valid tag name.
+     * Constructs a Tag with the specified name.
+     *
+     * The provided name must already be valid.
+     *
+     * @param _name Valid name.
      */
-    public static boolean isValidTagName(String test) {
-        return test.matches(VALIDATION_REGEX);
+    public Tag(String _name) {
+        this.name = _name;
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
     }
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
+        // instanceof also handles nulls
         if (!(other instanceof Tag)) {
             return false;
         }
+        Tag otherTag = (Tag)other;
 
-        Tag otherTag = (Tag) other;
-        return tagName.equals(otherTag.tagName);
+        if (otherTag == this) {
+            return true;
+        }
+
+        return this.name.equals(otherTag.name);
     }
 
     @Override
     public int hashCode() {
-        return tagName.hashCode();
+        return this.name.hashCode();
     }
-
-    /**
-     * Format state as text for viewing.
-     */
-    public String toString() {
-        return '[' + tagName + ']';
-    }
-
 }
