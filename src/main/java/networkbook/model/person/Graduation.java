@@ -154,6 +154,7 @@ public class Graduation implements Comparable<Graduation> {
      * Returns human-readable representation of graduation year, e.g. "AY2022/2023 Semester 1".
      */
     public String getFullString() {
+        assert isValidGraduationSemester(semester);
         StringBuilder s = new StringBuilder("AY");
         s.append(acadYearStart);
         s.append("/");
@@ -165,6 +166,7 @@ public class Graduation implements Comparable<Graduation> {
 
     @Override
     public String toString() {
+        assert isValidGraduationSemester(semester);
         StringBuilder s = new StringBuilder("AY");
         s.append(String.format("%02d", acadYearStart % 100)); // Get last 2 digits
         s.append(String.format("%02d", acadYearEnd % 100));
