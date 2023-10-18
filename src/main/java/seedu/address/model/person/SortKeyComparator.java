@@ -8,7 +8,6 @@ import java.util.Comparator;
  * sort key and comparison logic.
  */
 public abstract class SortKeyComparator implements Comparator<Person> {
-
     protected boolean sortActive;
     protected boolean reverse;
     protected int index;

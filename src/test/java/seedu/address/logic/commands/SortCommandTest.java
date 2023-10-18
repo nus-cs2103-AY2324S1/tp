@@ -17,7 +17,6 @@ import seedu.address.model.UserPrefs;
  * Contains integration tests (interaction with the Model) and unit tests for SortCommand.
  */
 public class SortCommandTest {
-
     private Model model;
     private Model expectedModel;
     private Model unsortedModel;
