@@ -78,8 +78,8 @@ public class PersonCard extends UiPart<Region> {
         person.getSpecialisation().ifPresentOrElse((Specialisation s) ->
                 specialisation.setText(SPECIALISATION_HEADER + s), () -> specialisation.setVisible(false));
         person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .sorted(Comparator.comparing(tag -> tag.getValue()))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.getValue())));
         person.getPriority().ifPresentOrElse((Priority p) ->
                         priority.setText(PRIORITY_HEADER + p), () -> priority.setVisible(false));
     }
