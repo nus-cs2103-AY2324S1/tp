@@ -145,34 +145,32 @@ public class ParserUtil {
      * @return A number between 0.0 and 1.0.
      */
     public static double score(String first, String second) {
-	
 		// Create two sets of character bigrams, one for each string.
 		Set<String> s1 = splitIntoBigrams(first);
 		Set<String> s2 = splitIntoBigrams(second);
-	
+
 		// Get the number of elements in each set.
 		int n1 = s1.size();
 		int n2 = s2.size();
-		
+
 		// Find the intersection, and get the number of elements in that set.
 		s1.retainAll(s2);
 		int nt = s1.size();
-		
-		
+
 		// The coefficient is:
-		// 
+		//
 		//        2 ∙ | s1 ⋂ s2 |
 		// D = ----------------------
 		//        | s1 | + | s2 |
-		// 
+		//
 		return (2.0 * (double) nt) / ((double) (n1 + n2));
-		
+
 	}
 
 	//@author rrice-reused
 	private static Set<String> splitIntoBigrams(String s) {
 		ArrayList<String> bigrams = new ArrayList<String>();
-	
+
 		if (s.length() < 2) {
 			bigrams.add(s);
 		}
