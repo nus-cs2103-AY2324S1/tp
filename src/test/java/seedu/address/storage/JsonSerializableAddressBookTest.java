@@ -19,6 +19,9 @@ public class JsonSerializableAddressBookTest {
     private static final Path TYPICAL_PERSONS_FILE = TEST_DATA_FOLDER.resolve("typicalPersonsAddressBook.json");
     private static final Path INVALID_PERSON_FILE = TEST_DATA_FOLDER.resolve("invalidPersonAddressBook.json");
     private static final Path DUPLICATE_PERSON_FILE = TEST_DATA_FOLDER.resolve("duplicatePersonAddressBook.json");
+    private static final Path CLASHING_SCHEDULE_FILE = TEST_DATA_FOLDER.resolve("clashingScheduleAddressBook.json");
+    private static final Path INVALID_SCHEDULE_FILE = TEST_DATA_FOLDER.resolve("invalidScheduleAddressBook.json");
+    private static final String MESSAGE_CONSTRAINTS = "Schedules start time should be before its end time.";
 
     @Test
     public void toModelType_typicalPersonsFile_success() throws Exception {
@@ -42,6 +45,22 @@ public class JsonSerializableAddressBookTest {
                 JsonSerializableAddressBook.class).get();
         assertThrows(IllegalValueException.class, JsonSerializableAddressBook.MESSAGE_DUPLICATE_PERSON,
                 dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_clashingSchedules_throwsIllegalValueException() throws Exception {
+        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(CLASHING_SCHEDULE_FILE,
+            JsonSerializableAddressBook.class).get();
+        assertThrows(IllegalValueException.class, JsonSerializableAddressBook.MESSAGE_CLASHING_SCHEDULE,
+            dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidScheduleFile_throwsIllegalValueException() throws Exception {
+        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(INVALID_SCHEDULE_FILE,
+            JsonSerializableAddressBook.class).get();
+        assertThrows(IllegalArgumentException.class, MESSAGE_CONSTRAINTS,
+            dataFromFile::toModelType);
     }
 
 }
