@@ -18,7 +18,7 @@ import seedu.address.logic.LogicManager;
 import seedu.address.model.ManageHr;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyManageHR;
+import seedu.address.model.ReadOnlyManageHr;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
@@ -75,15 +75,15 @@ public class MainApp extends Application {
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         logger.info("Using data file : " + storage.getManageHrFilePath());
 
-        Optional<ReadOnlyManageHR> addressBookOptional;
-        ReadOnlyManageHR initialData;
+        Optional<ReadOnlyManageHr> manageHrOptional;
+        ReadOnlyManageHr initialData;
         try {
-            addressBookOptional = storage.readManageHR();
-            if (!addressBookOptional.isPresent()) {
+            manageHrOptional = storage.readManageHr();
+            if (!manageHrOptional.isPresent()) {
                 logger.info("Creating a new data file " + storage.getManageHrFilePath()
                         + " populated with a sample AddressBook.");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = manageHrOptional.orElseGet(SampleDataUtil::getSampleManageHr);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getManageHrFilePath() + " could not be loaded."
                     + " Will be starting with an empty AddressBook.");

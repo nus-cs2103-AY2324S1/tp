@@ -19,21 +19,21 @@ import seedu.address.model.person.Person;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final ManageHr manageHR;
+    private final ManageHr manageHr;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given manageHr and userPrefs.
      */
-    public ModelManager(ReadOnlyManageHR addressBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
+    public ModelManager(ReadOnlyManageHr manageHr, ReadOnlyUserPrefs userPrefs) {
+        requireAllNonNull(manageHr, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + manageHr + " and user prefs " + userPrefs);
 
-        this.manageHR = new ManageHr(addressBook);
+        this.manageHr = new ManageHr(manageHr);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.manageHR.getPersonList());
+        filteredPersons = new FilteredList<>(this.manageHr.getPersonList());
     }
 
     public ModelManager() {
@@ -78,29 +78,29 @@ public class ModelManager implements Model {
     //=========== AddressBook ================================================================================
 
     @Override
-    public void setManageHR(ReadOnlyManageHR manageHR) {
-        this.manageHR.resetData(manageHR);
+    public void setManageHr(ReadOnlyManageHr manageHr) {
+        this.manageHr.resetData(manageHr);
     }
 
     @Override
-    public ReadOnlyManageHR getManageHR() {
-        return manageHR;
+    public ReadOnlyManageHr getManageHr() {
+        return manageHr;
     }
 
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
-        return manageHR.hasPerson(person);
+        return manageHr.hasPerson(person);
     }
 
     @Override
     public void deletePerson(Person target) {
-        manageHR.removePerson(target);
+        manageHr.removePerson(target);
     }
 
     @Override
     public void addPerson(Person person) {
-        manageHR.addPerson(person);
+        manageHr.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
@@ -108,7 +108,7 @@ public class ModelManager implements Model {
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
-        manageHR.setPerson(target, editedPerson);
+        manageHr.setPerson(target, editedPerson);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -140,7 +140,7 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return manageHR.equals(otherModelManager.manageHR)
+        return manageHr.equals(otherModelManager.manageHr)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }

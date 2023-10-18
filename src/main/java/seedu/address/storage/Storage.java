@@ -5,7 +5,7 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataLoadingException;
-import seedu.address.model.ReadOnlyManageHR;
+import seedu.address.model.ReadOnlyManageHr;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 
@@ -24,9 +24,9 @@ public interface Storage extends ManageHrStorage, UserPrefsStorage {
     Path getManageHrFilePath();
 
     @Override
-    Optional<ReadOnlyManageHR> readManageHR() throws DataLoadingException;
+    Optional<ReadOnlyManageHr> readManageHr() throws DataLoadingException;
 
     @Override
-    void saveManageHR(ReadOnlyManageHR manageHR) throws IOException;
+    void saveManageHr(ReadOnlyManageHr manageHr) throws IOException;
 
 }

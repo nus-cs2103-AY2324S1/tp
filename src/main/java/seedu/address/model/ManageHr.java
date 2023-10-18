@@ -13,7 +13,7 @@ import seedu.address.model.person.UniquePersonList;
  * Wraps all data at the ManageHR level
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
-public class ManageHr implements ReadOnlyManageHR {
+public class ManageHr implements ReadOnlyManageHr {
 
     private final UniquePersonList persons;
 
@@ -33,7 +33,7 @@ public class ManageHr implements ReadOnlyManageHR {
     /**
      * Creates a ManageHR instance using the Persons in the {@code toBeCopied}
      */
-    public ManageHr(ReadOnlyManageHR toBeCopied) {
+    public ManageHr(ReadOnlyManageHr toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -51,7 +51,7 @@ public class ManageHr implements ReadOnlyManageHR {
     /**
      * Resets the existing data of this {@code ManageHR} with {@code newData}.
      */
-    public void resetData(ReadOnlyManageHR newData) {
+    public void resetData(ReadOnlyManageHr newData) {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());

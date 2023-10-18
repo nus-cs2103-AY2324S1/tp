@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataLoadingException;
-import seedu.address.model.ReadOnlyManageHR;
+import seedu.address.model.ReadOnlyManageHr;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 
@@ -54,25 +54,25 @@ public class StorageManager implements Storage {
     }
 
     @Override
-    public Optional<ReadOnlyManageHR> readManageHR() throws DataLoadingException {
-        return readManageHR(manageHrStorage.getManageHrFilePath());
+    public Optional<ReadOnlyManageHr> readManageHr() throws DataLoadingException {
+        return readManageHr(manageHrStorage.getManageHrFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyManageHR> readManageHR(Path filePath) throws DataLoadingException {
+    public Optional<ReadOnlyManageHr> readManageHr(Path filePath) throws DataLoadingException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return manageHrStorage.readManageHR(filePath);
+        return manageHrStorage.readManageHr(filePath);
     }
 
     @Override
-    public void saveManageHR(ReadOnlyManageHR manageHR) throws IOException {
-        saveManageHR(manageHR, manageHrStorage.getManageHrFilePath());
+    public void saveManageHr(ReadOnlyManageHr manageHr) throws IOException {
+        saveManageHr(manageHr, manageHrStorage.getManageHrFilePath());
     }
 
     @Override
-    public void saveManageHR(ReadOnlyManageHR manageHR, Path filePath) throws IOException {
+    public void saveManageHr(ReadOnlyManageHr manageHr, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        manageHrStorage.saveManageHR(manageHR, filePath);
+        manageHrStorage.saveManageHr(manageHr, filePath);
     }
 
 }

@@ -6,7 +6,7 @@ import seedu.address.model.person.Person;
 /**
  * Unmodifiable view of ManageHR
  */
-public interface ReadOnlyManageHR {
+public interface ReadOnlyManageHr {
 
     /**
      * Returns an unmodifiable view of the persons list.

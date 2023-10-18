@@ -5,7 +5,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.ManageHr;
-import seedu.address.model.ReadOnlyManageHR;
+import seedu.address.model.ReadOnlyManageHr;
 import seedu.address.model.department.Department;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -40,7 +40,7 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyManageHR getSampleAddressBook() {
+    public static ReadOnlyManageHr getSampleManageHr() {
         ManageHr sampleAb = new ManageHr();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);

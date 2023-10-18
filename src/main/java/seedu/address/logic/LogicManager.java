@@ -14,7 +14,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.ManageHrParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyManageHR;
+import seedu.address.model.ReadOnlyManageHr;
 import seedu.address.model.person.Person;
 import seedu.address.storage.Storage;
 
@@ -51,7 +51,7 @@ public class LogicManager implements Logic {
         commandResult = command.execute(model);
 
         try {
-            storage.saveManageHR(model.getManageHR());
+            storage.saveManageHr(model.getManageHr());
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
@@ -62,8 +62,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyManageHR getManageHR() {
-        return model.getManageHR();
+    public ReadOnlyManageHr getManageHr() {
+        return model.getManageHr();
     }
 
     @Override

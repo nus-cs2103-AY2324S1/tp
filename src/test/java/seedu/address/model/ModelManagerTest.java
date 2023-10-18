@@ -26,7 +26,7 @@ public class ModelManagerTest {
     public void constructor() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
-        assertEquals(new ManageHr(), new ManageHr(modelManager.getManageHR()));
+        assertEquals(new ManageHr(), new ManageHr(modelManager.getManageHr()));
     }
 
     @Test

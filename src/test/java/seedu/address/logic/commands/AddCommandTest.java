@@ -20,7 +20,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.ManageHr;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyManageHR;
+import seedu.address.model.ReadOnlyManageHr;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
@@ -124,12 +124,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setManageHR(ReadOnlyManageHR newData) {
+        public void setManageHr(ReadOnlyManageHr newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyManageHR getManageHR() {
+        public ReadOnlyManageHr getManageHr() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -196,7 +196,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyManageHR getManageHR() {
+        public ReadOnlyManageHr getManageHr() {
             return new ManageHr();
         }
     }

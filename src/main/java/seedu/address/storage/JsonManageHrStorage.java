@@ -12,7 +12,7 @@ import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.JsonUtil;
-import seedu.address.model.ReadOnlyManageHR;
+import seedu.address.model.ReadOnlyManageHr;
 
 /**
  * A class to access AddressBook data stored as a json file on the hard disk.
@@ -32,21 +32,21 @@ public class JsonManageHrStorage implements ManageHrStorage {
     }
 
     @Override
-    public Optional<ReadOnlyManageHR> readManageHR() throws DataLoadingException {
-        return readManageHR(filePath);
+    public Optional<ReadOnlyManageHr> readManageHr() throws DataLoadingException {
+        return readManageHr(filePath);
     }
 
     /**
-     * Similar to {@link #readManageHR()}.
+     * Similar to {@link #readManageHr()}.
      *
      * @param filePath location of the data. Cannot be null.
      * @throws DataLoadingException if loading the data from storage failed.
      */
-    public Optional<ReadOnlyManageHR> readManageHR(Path filePath) throws DataLoadingException {
+    public Optional<ReadOnlyManageHr> readManageHr(Path filePath) throws DataLoadingException {
         requireNonNull(filePath);
 
-        Optional<JsonSerializableManageHR> jsonManageHR = JsonUtil.readJsonFile(
-                filePath, JsonSerializableManageHR.class);
+        Optional<JsonSerializableManageHr> jsonManageHR = JsonUtil.readJsonFile(
+                filePath, JsonSerializableManageHr.class);
         if (!jsonManageHR.isPresent()) {
             return Optional.empty();
         }
@@ -60,21 +60,21 @@ public class JsonManageHrStorage implements ManageHrStorage {
     }
 
     @Override
-    public void saveManageHR(ReadOnlyManageHR manageHR) throws IOException {
-        saveManageHR(manageHR, filePath);
+    public void saveManageHr(ReadOnlyManageHr manageHr) throws IOException {
+        saveManageHr(manageHr, filePath);
     }
 
     /**
-     * Similar to {@link #saveManageHR(ReadOnlyManageHR)}.
+     * Similar to {@link #saveManageHr(ReadOnlyManageHr)}.
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveManageHR(ReadOnlyManageHR manageHR, Path filePath) throws IOException {
-        requireNonNull(manageHR);
+    public void saveManageHr(ReadOnlyManageHr manageHr, Path filePath) throws IOException {
+        requireNonNull(manageHr);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableManageHR(manageHR), filePath);
+        JsonUtil.saveJsonFile(new JsonSerializableManageHr(manageHr), filePath);
     }
 
 }

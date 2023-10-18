@@ -12,7 +12,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.ManageHr;
-import seedu.address.model.ReadOnlyManageHR;
+import seedu.address.model.ReadOnlyManageHr;
 import seedu.address.model.UserPrefs;
 
 public class StorageManagerTest {
@@ -55,8 +55,8 @@ public class StorageManagerTest {
          * More extensive testing of UserPref saving/reading is done in {@link JsonAddressBookStorageTest} class.
          */
         ManageHr original = getTypicalAddressBook();
-        storageManager.saveManageHR(original);
-        ReadOnlyManageHR retrieved = storageManager.readManageHR().get();
+        storageManager.saveManageHr(original);
+        ReadOnlyManageHr retrieved = storageManager.readManageHr().get();
         assertEquals(original, new ManageHr(retrieved));
     }
 

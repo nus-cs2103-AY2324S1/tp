@@ -10,25 +10,25 @@ import seedu.address.model.person.Person;
  */
 public class AddressBookBuilder {
 
-    private ManageHr manageHR;
+    private ManageHr manageHr;
 
     public AddressBookBuilder() {
-        manageHR = new ManageHr();
+        manageHr = new ManageHr();
     }
 
-    public AddressBookBuilder(ManageHr manageHR) {
-        this.manageHR = manageHR;
+    public AddressBookBuilder(ManageHr manageHr) {
+        this.manageHr = manageHr;
     }
 
     /**
      * Adds a new {@code Person} to the {@code AddressBook} that we are building.
      */
     public AddressBookBuilder withPerson(Person person) {
-        manageHR.addPerson(person);
+        manageHr.addPerson(person);
         return this;
     }
 
     public ManageHr build() {
-        return manageHR;
+        return manageHr;
     }
 }

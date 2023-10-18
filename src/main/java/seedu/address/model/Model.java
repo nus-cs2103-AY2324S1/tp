@@ -47,10 +47,10 @@ public interface Model {
     /**
      * Replaces address book data with the data in {@code manageHR}.
      */
-    void setManageHR(ReadOnlyManageHR manageHR);
+    void setManageHr(ReadOnlyManageHr manageHr);
 
     /** Returns ManageHR */
-    ReadOnlyManageHR getManageHR();
+    ReadOnlyManageHr getManageHr();
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in ManageHR.

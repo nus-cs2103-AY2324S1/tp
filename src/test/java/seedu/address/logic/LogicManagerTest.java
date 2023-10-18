@@ -25,7 +25,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyManageHR;
+import seedu.address.model.ReadOnlyManageHr;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.storage.JsonManageHrStorage;
@@ -123,7 +123,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getManageHR(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getManageHr(), new UserPrefs());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
@@ -152,7 +152,7 @@ public class LogicManagerTest {
         // Inject LogicManager with an AddressBookStorage that throws the IOException e when saving
         JsonManageHrStorage addressBookStorage = new JsonManageHrStorage(prefPath) {
             @Override
-            public void saveManageHR(ReadOnlyManageHR addressBook, Path filePath)
+            public void saveManageHr(ReadOnlyManageHr manageHr, Path filePath)
                     throws IOException {
                 throw e;
             }

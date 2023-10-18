@@ -10,14 +10,14 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.ManageHr;
-import seedu.address.model.ReadOnlyManageHR;
+import seedu.address.model.ReadOnlyManageHr;
 import seedu.address.model.person.Person;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
  */
 @JsonRootName(value = "managehr")
-class JsonSerializableManageHR {
+class JsonSerializableManageHr {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
 
@@ -27,7 +27,7 @@ class JsonSerializableManageHR {
      * Constructs a {@code JsonSerializableManageHR} with the given persons.
      */
     @JsonCreator
-    public JsonSerializableManageHR(@JsonProperty("persons") List<JsonAdaptedPerson> persons) {
+    public JsonSerializableManageHr(@JsonProperty("persons") List<JsonAdaptedPerson> persons) {
         this.persons.addAll(persons);
     }
 
@@ -36,7 +36,7 @@ class JsonSerializableManageHR {
      *
      * @param source future changes to this will not affect the created {@code JsonSerializableManageHR}.
      */
-    public JsonSerializableManageHR(ReadOnlyManageHR source) {
+    public JsonSerializableManageHr(ReadOnlyManageHr source) {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
     }
 
