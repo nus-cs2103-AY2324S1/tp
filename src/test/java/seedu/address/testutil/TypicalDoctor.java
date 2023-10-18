@@ -31,7 +31,7 @@ public class TypicalDoctor {
             .withEmail("werner@example.com").withAddress("michegan ave").withGender("F").withIc("S7231261K").build();
     public static final Doctor FELICIA = new DoctorBuilder().withName("Felicia Kunz").withPhone("9482427")
             .withEmail("felbel@example.com").withAddress("little tokyo").withGender("F").withIc("S9431262K").build();
-    public static final Doctor GREG = new DoctorBuilder().withName("George Best").withPhone("9482442")
+    public static final Doctor GREG = new DoctorBuilder().withName("Greg Best").withPhone("9482442")
             .withEmail("anna@example.com").withAddress("4th street").withGender("M").withIc("S9531263K").build();
 
     // Manually added
@@ -50,7 +50,7 @@ public class TypicalDoctor {
             .withEmail(VALID_EMAIL_DEREK)
             .withAddress(VALID_ADDRESS_DEREK).withIc(VALID_NRIC_DEREK).withGender(VALID_GENDER_MALE).build();
 
-    public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
+    public static final String KEYWORD_MATCHING_DAVID = "Beckham"; // A keyword that matches MEIER
 
     private TypicalDoctor() {
     } // prevents instantiation
