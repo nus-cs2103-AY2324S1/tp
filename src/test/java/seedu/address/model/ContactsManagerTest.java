@@ -91,7 +91,7 @@ public class ContactsManagerTest {
 
     @Test
     public void toStringMethod() {
-        String expected = ContactsManager.class.getCanonicalName() 
+        String expected = ContactsManager.class.getCanonicalName()
                 + "{contacts=" + contactsManager.getContactList() + "}";
         assertEquals(expected, contactsManager.toString());
     }
