@@ -111,15 +111,6 @@ public class Person {
         return interactions;
     }
 
-//    /**
-//     * Changes the lead of the client.
-//     *
-//     * @param newLead the new lead of the client.
-//     */
-//    public void setLead(Lead newLead) {
-//        lead = newLead;
-//    }
-
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.

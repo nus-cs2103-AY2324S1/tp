@@ -7,8 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Lead {
     public static final String MESSAGE_CONSTRAINTS = "Lead should only take values hot|warm|cold";
-
-    final private LeadType leadType;
+    private final LeadType leadType;
 
     /**
      * Returns an empty lead. Used as a default, or when no leads are tagged.
@@ -29,10 +28,6 @@ public class Lead {
 
     public Lead(LeadType lead) {
         this.leadType = lead;
-    }
-
-    private boolean isValidLead(String lead) {
-        return lead.equals("HOT") || lead.equals("WARM") || lead.equals("COLD");
     }
 
     @Override
@@ -58,5 +53,9 @@ public class Lead {
     @Override
     public int hashCode() {
         return leadType.hashCode();
+    }
+
+    private boolean isValidLead(String lead) {
+        return lead.equals("HOT") || lead.equals("WARM") || lead.equals("COLD");
     }
 }

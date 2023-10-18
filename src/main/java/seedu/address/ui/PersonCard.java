@@ -58,7 +58,9 @@ public class PersonCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         if (person.getLead() != null) {
-            lead.getChildren().add(new Label(person.getLead().toString()));
+            Label leadLabel = new Label(person.getLead().toString());
+            leadLabel.setId(person.getLead().toString().toLowerCase() + "-lead");
+            lead.getChildren().add(leadLabel);
         }
     }
 }
