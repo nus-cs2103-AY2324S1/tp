@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.band.Band;
 import seedu.address.model.musician.Musician;
 
 /**
@@ -107,9 +108,22 @@ public class ModelManager implements Model {
     @Override
     public void setMusician(Musician target, Musician editedMusician) {
         requireAllNonNull(target, editedMusician);
-
         addressBook.setMusician(target, editedMusician);
     }
+
+    @Override
+    public boolean hasBand(Band band) {
+        requireNonNull(band);
+        return addressBook.hasBand(band);
+    }
+
+    @Override
+    public void addBand(Band band) {
+        requireAllNonNull(band);
+        addressBook.addBand(band);
+    }
+
+
 
     //=========== Filtered Musician List Accessors =============================================================
 
@@ -127,6 +141,8 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredMusicians.setPredicate(predicate);
     }
+
+
 
     @Override
     public boolean equals(Object other) {

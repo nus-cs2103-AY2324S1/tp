@@ -9,6 +9,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.band.BandName;
 import seedu.address.model.musician.Email;
 import seedu.address.model.musician.Name;
 import seedu.address.model.musician.Phone;
@@ -53,6 +54,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String name} into a {@code Name}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static BandName parseBandName(String name) throws ParseException {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        if (!Name.isValidName(trimmedName)) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        }
+        return new BandName(trimmedName);
+    }
+
+    /**
      * Parses a {@code String phone} into a {@code Phone}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -66,7 +82,6 @@ public class ParserUtil {
         }
         return new Phone(trimmedPhone);
     }
-
 
     /**
      * Parses a {@code String email} into an {@code Email}.

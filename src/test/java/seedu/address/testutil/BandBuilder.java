@@ -4,8 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.band.Band;
+import seedu.address.model.band.BandName;
 import seedu.address.model.musician.Musician;
-import seedu.address.model.musician.Name;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -16,7 +16,7 @@ public class BandBuilder {
 
     public static final String DEFAULT_NAME = "Ace Jazz";
 
-    private Name name;
+    private BandName name;
     private Set<Tag> genres;
     private Set<Musician> musicians;
 
@@ -24,7 +24,7 @@ public class BandBuilder {
      * Creates a {@code BandBuilder} with the default details.
      */
     public BandBuilder() {
-        name = new Name(DEFAULT_NAME);
+        name = new BandName(DEFAULT_NAME);
         genres = new HashSet<>();
         musicians = new HashSet<>();
     }
@@ -42,7 +42,7 @@ public class BandBuilder {
      * Sets the {@code Name} of the {@code Band} that we are building.
      */
     public BandBuilder withName(String name) {
-        this.name = new Name(name);
+        this.name = new BandName(name);
         return this;
     }
 

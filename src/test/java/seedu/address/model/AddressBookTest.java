@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.band.Band;
 import seedu.address.model.musician.Musician;
 import seedu.address.model.musician.exceptions.DuplicateMusicianException;
 import seedu.address.testutil.MusicianBuilder;
@@ -101,6 +102,11 @@ public class AddressBookTest {
         @Override
         public ObservableList<Musician> getMusicianList() {
             return musicians;
+        }
+
+        @Override
+        public ObservableList<Band> getBandList() {
+            return null; // to be implemented
         }
     }
 
