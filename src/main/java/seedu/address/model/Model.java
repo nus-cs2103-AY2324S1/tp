@@ -5,8 +5,9 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.person.Developer;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Team;
+import seedu.address.model.team.Team;
 
 /**
  * The API of the Model component.
@@ -122,6 +123,23 @@ public interface Model {
      */
     void addTeam(Team team);
 
+    /**
+     * Deletes the given developer from the specified team.
+     * The developer and team must exist in the model.
+     */
+    void deleteDeveloperFromTeam(String developerName, String teamName);
+
+    /**
+     * Adds the given developer to the specified team.
+     * The developer and team must exist in the model.
+     */
+    void addDeveloperToTeam(String developerName, String teamName);
+
+    /**
+     * Checks if the given developer is part of the specified team.
+     * Both the developer and team must exist in the model.
+     */
+    boolean isDeveloperInTeam(String developerName, String teamName);
 
     /** Returns an unmodifiable view of the filtered team list */
     ObservableList<Team> getFilteredTeamList();

@@ -5,8 +5,8 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Team;
-import seedu.address.model.person.UniqueTeamList;
+import seedu.address.model.team.Team;
+import seedu.address.model.team.UniqueTeamList;
 
 /**
  * Represents a TeamBook in the address book.

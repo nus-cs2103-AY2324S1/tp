@@ -1,7 +1,7 @@
 package seedu.address.model;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Team;
+import seedu.address.model.team.Team;
 
 /**
  * Unmodifiable view of a team book

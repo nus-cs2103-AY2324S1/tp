@@ -12,7 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Team;
+import seedu.address.model.team.Team;
 
 /**
  * Represents the management model for address and team books.
@@ -135,8 +135,9 @@ public class ModelManager implements Model {
     @Override
     public void setTeamBookFilePath(Path teamBookFilePath) {
         requireNonNull(teamBookFilePath);
-        userPrefs.setAddressBookFilePath(teamBookFilePath);
+        userPrefs.setTeamBookFilePath(teamBookFilePath); // Corrected this line
     }
+
     //=========== AddressBook ================================================================================
 
     /**
@@ -305,7 +306,14 @@ public class ModelManager implements Model {
         teamBook.addTeam(team);
         updateFilteredTeamList(PREDICATE_SHOW_ALL_TEAMS);
     }
-
+    /**
+     * Deletes the given developer from the specified team.
+     * The developer and team must exist in the model.
+     */
+    @Override
+    public void deleteDeveloperFromTeam(String developerName, String teamName) {
+        teamBook.deleteDeveloperFromTeam(developerName, teamName);
+    }
 
     //=========== Filtered Team List Accessors =============================================================
 

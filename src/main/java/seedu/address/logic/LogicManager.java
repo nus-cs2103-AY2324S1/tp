@@ -17,7 +17,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyTeamBook;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Team;
+import seedu.address.model.team.Team;
 import seedu.address.storage.Storage;
 
 /**
