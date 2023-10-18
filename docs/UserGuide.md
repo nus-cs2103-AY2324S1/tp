@@ -156,8 +156,6 @@ Displays a list of all tutors in the address book in a table format.
 
 **Expected Output**:
 * `Listed all tutors`
-* If there are no tutors in the address book, displays a message telling the user
-  to add a tutor with add-t: `There are no tutors in the address book. Please use add-t to add a tutor.`
 
     <div markdown="block" class="alert alert-info">
 
@@ -225,7 +223,8 @@ Deletes a tutor in the address book based on their index number in the table.
   Email: alexyeoh@example.com; Address: Blk 30 Geylang Street 29, #06-40`
 
 **Error messages**:
-* `Index number given is out of range`: Given index is out of range.
+* `Invalid command format!`: No tutor index provided.
+* `Index number given is out of range`: Given tutor index is out of range.
 * `Invalid parameter given`: Parameter given is not a numerical value.
 
 ### Adding a schedule: `add-s`
