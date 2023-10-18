@@ -54,9 +54,11 @@ public class EditStudentDescriptorTest {
 
         // different student number -> returns false
         editedAmy = new EditStudentDescriptorBuilder(DESC_AMY).withStudentNumber(VALID_STUDENT_NUMBER_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
 
         // different class number -> returns false
         editedAmy = new EditStudentDescriptorBuilder(DESC_AMY).withClassDetails(VALID_CLASS_NUMBER_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
 
         // different tags -> returns false
         editedAmy = new EditStudentDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
