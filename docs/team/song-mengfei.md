@@ -10,7 +10,7 @@ FlashLingo is a desktop application to facilitate the learning of new languages 
 Given below are my contributions to the project.
 
 * **New Feature**:
-    * What it does: 
+    * What it does:
     * Justification: *
     * Highlights: *
     * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
@@ -21,7 +21,7 @@ Given below are my contributions to the project.
     * Change the `Model` and `ReadOnlyFlashlingo` interface and `ModelManger`for our project
     * Change the `FlashlingoParser` and add/update delete, find and add parsers
     * Update delete, find and add commands
-    * Update `TypicalFlashCard` test file and 
+    * Update `TypicalFlashCard` test file and
     * Fix checkstyle issues
 
 * **Documentation**:

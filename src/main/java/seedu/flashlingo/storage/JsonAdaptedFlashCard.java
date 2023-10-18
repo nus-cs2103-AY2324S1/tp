@@ -63,13 +63,15 @@ public class JsonAdaptedFlashCard {
      */
     public FlashCard toModelType() throws IllegalValueException {
         if (originalWord == null || originalWordLanguage == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, OriginalWord.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                OriginalWord.class.getSimpleName()));
         }
         final String modelOriginalWord = originalWord;
         final String modelOriginalWordLanguage = originalWordLanguage;
 
         if (translatedWord == null || translatedWordLanguage == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, TranslatedWord.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                TranslatedWord.class.getSimpleName()));
         }
         final String modelTranslatedWord = translatedWord;
         final String modelTranslatedWordLanguage = translatedWordLanguage;

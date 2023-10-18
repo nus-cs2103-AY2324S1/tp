@@ -1,15 +1,13 @@
 package seedu.flashlingo.model.person;
 
-import static seedu.flashlingo.commons.util.CollectionUtil.requireAllNonNull;
-
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.flashlingo.commons.util.CollectionUtil;
 import seedu.flashlingo.commons.util.ToStringBuilder;
 import seedu.flashlingo.model.tag.Tag;
-import seedu.flashlingo.commons.util.CollectionUtil;
 
 /**
  * Represents a Person in the address book.
