@@ -29,7 +29,6 @@ import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PatientBuilder;
-import seedu.address.testutil.PersonBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
@@ -93,9 +92,9 @@ public class EditCommandTest {
     public void execute_filteredList_success() {
         Ic nricOfFirstPerson = model.getFilteredPatientList().get(0).getIc();
 
-        Person personInFilteredList = model.getFilteredPatientList().stream().filter(p ->
+        Patient personInFilteredList = model.getFilteredPatientList().stream().filter(p ->
                 p.getIc().equals(nricOfFirstPerson)).findFirst().orElse(null);
-        Person editedPerson = new PersonBuilder(personInFilteredList).withName(VALID_NAME_BOB).build();
+        Patient editedPerson = new PatientBuilder(personInFilteredList).withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(nricOfFirstPerson,
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 

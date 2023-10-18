@@ -183,5 +183,4 @@ public class ModelManager implements Model {
             && filteredDoctors.equals(otherModelManager.filteredDoctors)
             && filteredPatients.equals(otherModelManager.filteredPatients);
     }
-
 }
