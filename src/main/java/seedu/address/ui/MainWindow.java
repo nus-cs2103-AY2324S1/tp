@@ -192,7 +192,6 @@ public class MainWindow extends UiPart<Stage> {
         try {
             CommandResult commandResult = logic.execute(commandText);
             handleCommandResult(commandResult);
-
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
@@ -219,6 +218,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Logs command result, sends feedback to user and shows windows depending on the command result.
+     *
      * @param commandResult Command result to handle.
      */
     private void handleCommandResult(CommandResult commandResult) {

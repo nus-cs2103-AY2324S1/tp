@@ -105,7 +105,7 @@ public class ClearWindow extends UiPart<Stage> {
         try {
             commandExecutor.execute(clearCommand);
         } catch (CommandException e) {
-            // do nothing for now
+            // nothing to do in this window if there's an error.
         }
         hide();
     }
