@@ -4,14 +4,19 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.schedule.Schedule;
 
 /**
@@ -98,6 +103,8 @@ public class ModelManager implements Model {
 
     @Override
     public void deletePerson(Person target) {
+        ObservableList<Schedule> associatedSchedules = this.getSchedulesFromTutor(target);
+        this.deleteSchedules(associatedSchedules);
         addressBook.removePerson(target);
     }
 
@@ -123,6 +130,14 @@ public class ModelManager implements Model {
     @Override
     public void deleteSchedule(Schedule target) {
         addressBook.removeSchedule(target);
+    }
+
+    @Override
+    public void deleteSchedules(ObservableList<Schedule> targets) {
+        List<Schedule> copyOfTargets = new ArrayList<>(targets);
+        for (Schedule target : copyOfTargets) {
+            this.deleteSchedule(target);
+        }
     }
 
     @Override
@@ -168,6 +183,16 @@ public class ModelManager implements Model {
     public void updateFilteredScheduleList(Predicate<Schedule> predicate) {
         requireNonNull(predicate);
         filteredSchedules.setPredicate(predicate);
+    }
+
+    @Override
+    public ObservableList<Schedule> getSchedulesFromTutor(Person tutor) throws PersonNotFoundException {
+        if (!hasPerson(tutor)) {
+            throw new PersonNotFoundException();
+        }
+        ObservableList<Schedule> schedules = this.addressBook.getScheduleList();
+        return schedules.stream().filter(schedule -> schedule.getTutor().equals(tutor))
+            .collect(Collectors.toCollection(FXCollections::observableArrayList));
     }
 
     @Override

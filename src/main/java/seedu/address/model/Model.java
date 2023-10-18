@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.schedule.Schedule;
 
 /**
@@ -100,6 +101,13 @@ public interface Model {
     void deleteSchedule(Schedule target);
 
     /**
+     * Deletes the given list of schedules.
+     * The schedules must exist in the address book.
+     * @targets the list of schedules to delete.
+     */
+    void deleteSchedules(ObservableList<Schedule> targets);
+
+    /**
      * Adds the given schedule.
      * {@code schedule} must not already exist in the address book.
      */
@@ -121,4 +129,11 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredScheduleList(Predicate<Schedule> predicate);
+
+    /**
+     * Returns the list of schedules associated with given tutor.
+     * @param tutor the given tutor to find associated schedules.
+     * @throws PersonNotFoundException if {@code tutor} is null.
+     */
+    ObservableList<Schedule> getSchedulesFromTutor(Person tutor);
 }
