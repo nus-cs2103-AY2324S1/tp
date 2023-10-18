@@ -83,7 +83,38 @@ public class PersonSortComparatorTest {
         assertEquals(-1, descCmp.compare(h, m));
     }
 
-    // TODO: test grad
+
+    @Test
+    public void test_compareGrad_comparesCorrectly() {
+        Person a1 = new PersonBuilder(TypicalPersons.ALICE)
+                .withGraduation("AY2223-S1")
+                .build();
+        Person a2 = new PersonBuilder(TypicalPersons.BOB)
+                .withGraduation("AY2223-S1")
+                .build();
+        Person b = new PersonBuilder(TypicalPersons.BENSON)
+                .withGraduation("AY2223-S2")
+                .build();
+        Person c = new PersonBuilder(TypicalPersons.CARL)
+                .withGraduation("AY2324-S2")
+                .build();
+
+        // Ascending
+        PersonSortComparator ascCmp = new PersonSortComparator(SortField.GRAD, SortOrder.ASCENDING);
+        assertEquals(0, ascCmp.compare(a1, a2));
+        assertEquals(1, ascCmp.compare(c, b));
+        assertEquals(1, ascCmp.compare(b, a1));
+        assertEquals(-1, ascCmp.compare(b, c));
+        assertEquals(-1, ascCmp.compare(a2, b));
+
+        // Descending
+        PersonSortComparator descCmp = new PersonSortComparator(SortField.GRAD, SortOrder.DESCENDING);
+        assertEquals(0, descCmp.compare(a1, a2));
+        assertEquals(1, descCmp.compare(b, c));
+        assertEquals(1, descCmp.compare(a2, b));
+        assertEquals(-1, descCmp.compare(c, b));
+        assertEquals(-1, descCmp.compare(b, a1));
+    }
 
     @Test
     public void test_compareOptional_comparesCorrectly() {
@@ -100,7 +131,7 @@ public class PersonSortComparatorTest {
                 new UniqueList<Phone>().setItems(List.of(new Phone("87438807"))),
                 new UniqueList<Email>().setItems(List.of(new Email("alexyeoh@example.com"))),
                 new UniqueList<Link>().setItems(List.of(new Link("www.alexyeoh.net"))),
-                new GraduatingYear("2016"),
+                new Graduation("AY3233-S2"),
                 new Course("Information Systems"),
                 new Specialisation("Financial Technology"),
                 SampleDataUtil.getTagList("friends"),
@@ -109,7 +140,7 @@ public class PersonSortComparatorTest {
                 new UniqueList<Phone>().setItems(List.of(new Phone("87438807"))),
                 new UniqueList<Email>().setItems(List.of(new Email("alexyeoh@example.com"))),
                 new UniqueList<Link>().setItems(List.of(new Link("www.alexyeoh.net"))),
-                new GraduatingYear("2016"),
+                new Graduation("AY3233-S2"),
                 new Course("Information Systems"),
                 new Specialisation("Financial Technology"),
                 SampleDataUtil.getTagList("friends"),
