@@ -112,7 +112,6 @@ public class DeleteCommand extends Command {
      * @throws CommandException If the index is invalid.
      */
     public CommandResult deleteByIndex(Model model) throws CommandException {
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         List<Person> lastShownList = model.getFilteredPersonList();
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
