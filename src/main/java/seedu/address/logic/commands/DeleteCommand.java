@@ -39,7 +39,7 @@ public class DeleteCommand extends Command {
         }
 
         Contact contactToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deleteContact(contactToDelete);
+        model.removeContact(contactToDelete);
         return new CommandResult(String.format(Messages.MESSAGE_DELETE_COMMAND_SUCCESS,
                 Contact.format(contactToDelete)));
     }

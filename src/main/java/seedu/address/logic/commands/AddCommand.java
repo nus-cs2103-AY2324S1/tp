@@ -13,11 +13,12 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.contact.Contact;
 
+
+
 /**
  * Adds a contact to the address book.
  */
 public class AddCommand extends Command {
-
     public static final String COMMAND_WORD = "add";
 
     //TODO values like these could be in some kind of ProductionData, which
@@ -48,9 +49,7 @@ public class AddCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
-
-        if (model.hasContact(toAdd)) {
+        if (model.containsContact(toAdd)) {
             throw new CommandException(Messages.MESSAGE_COMMAND_DUPLICATE_CONTACT);
         }
 

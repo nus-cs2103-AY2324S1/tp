@@ -1,10 +1,10 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CONTACTS;
 
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 
 /**
  * Lists all contacts in the address book to the user.
@@ -17,7 +17,7 @@ public class ListCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
+        model.setContactsFilter(ModelManager.FILTER_NONE);
         return new CommandResult(Messages.MESSAGE_LIST_COMMAND_SUCCESS);
     }
 }
