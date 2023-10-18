@@ -12,6 +12,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
+import seedu.address.model.schedule.Schedule;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
@@ -20,15 +21,20 @@ import seedu.address.model.person.Person;
 class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_SCHEDULE = "Schedules list contains duplicate schedule(s).";
+    public static final String MESSAGE_CLASHING_SCHEDULE = "There are conflicts between schedule(s).";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
+    private final List<JsonAdaptedSchedule> schedules = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given persons.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons) {
+    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
+                                       @JsonProperty("schedules") List<JsonAdaptedSchedule> schedules) {
         this.persons.addAll(persons);
+        this.schedules.addAll(schedules);
     }
 
     /**
@@ -38,6 +44,7 @@ class JsonSerializableAddressBook {
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        schedules.addAll(source.getScheduleList().stream().map(JsonAdaptedSchedule::new).collect(Collectors.toList()));
     }
 
     /**
@@ -53,6 +60,18 @@ class JsonSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
             addressBook.addPerson(person);
+        }
+        for (JsonAdaptedSchedule jsonAdaptedSchedule : schedules) {
+            Schedule schedule = jsonAdaptedSchedule.toModelType(addressBook);
+            if (addressBook.hasSchedule(schedule)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_SCHEDULE);
+            }
+            for (Schedule existingSchedule : addressBook.getScheduleList()) {
+                if (schedule.isClashing(existingSchedule)) {
+                    throw new IllegalValueException(MESSAGE_CLASHING_SCHEDULE);
+                }
+            }
+            addressBook.addSchedule(schedule);
         }
         return addressBook;
     }
