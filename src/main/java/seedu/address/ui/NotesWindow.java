@@ -69,9 +69,13 @@ public class NotesWindow extends UiPart<Stage> {
         notesListView.setItems(notesObservableList);
     }
     @FXML
-    private void handleClose() {
+    void handleClose() {
         Stage stage = (Stage) notesListView.getScene().getWindow();
         stage.close();
+    }
+
+    public ListView<String> getNotesListView() {
+        return notesListView;
     }
 
 }
