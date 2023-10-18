@@ -11,12 +11,14 @@ import seedu.address.model.ContactList;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 
+
+
 /**
  * Manages storage of ContactsManager data in local storage.
  */
 public class StorageManager implements Storage {
-
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
+
     private ContactsStorage contactsStorage;
     private UserPrefsStorage userPrefsStorage;
 
@@ -28,25 +30,7 @@ public class StorageManager implements Storage {
         this.userPrefsStorage = userPrefsStorage;
     }
 
-    // ================ UserPrefs methods ==============================
-
-    @Override
-    public Path getUserPrefsFilePath() {
-        return userPrefsStorage.getUserPrefsFilePath();
-    }
-
-    @Override
-    public Optional<UserPrefs> readUserPrefs() throws DataLoadingException {
-        return userPrefsStorage.readUserPrefs();
-    }
-
-    @Override
-    public void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException {
-        userPrefsStorage.saveUserPrefs(userPrefs);
-    }
-
-
-    // ================ ContactsManager methods ==============================
+    // [ContactsStorage]
 
     @Override
     public Path getConTextFilePath() {
@@ -75,4 +59,20 @@ public class StorageManager implements Storage {
         contactsStorage.saveContactsManager(contactList, filePath);
     }
 
+    // [UserPrefsStorage]
+
+    @Override
+    public Path getUserPrefsFilePath() {
+        return userPrefsStorage.getUserPrefsFilePath();
+    }
+
+    @Override
+    public Optional<UserPrefs> readUserPrefs() throws DataLoadingException {
+        return userPrefsStorage.readUserPrefs();
+    }
+
+    @Override
+    public void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException {
+        userPrefsStorage.saveUserPrefs(userPrefs);
+    }
 }

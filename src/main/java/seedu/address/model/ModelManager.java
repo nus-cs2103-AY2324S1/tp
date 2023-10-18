@@ -13,6 +13,8 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.contact.Contact;
 
+
+
 /**
  * Represents the in-memory model of the address book data.
  */
@@ -40,42 +42,7 @@ public class ModelManager implements Model {
         this(new ContactsManager(), new UserPrefs());
     }
 
-    //=========== UserPrefs ==================================================================================
-
-    @Override
-    public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
-        requireNonNull(userPrefs);
-        this.userPrefs.resetData(userPrefs);
-    }
-
-    @Override
-    public ReadOnlyUserPrefs getUserPrefs() {
-        return userPrefs;
-    }
-
-    @Override
-    public GuiSettings getGuiSettings() {
-        return userPrefs.getGuiSettings();
-    }
-
-    @Override
-    public void setGuiSettings(GuiSettings guiSettings) {
-        requireNonNull(guiSettings);
-        userPrefs.setGuiSettings(guiSettings);
-    }
-
-    @Override
-    public Path getConTextFilePath() {
-        return userPrefs.getConTextFilePath();
-    }
-
-    @Override
-    public void setContactsManagerFilePath(Path conTextFilePath) {
-        requireNonNull(conTextFilePath);
-        userPrefs.setContactsManagerFilePath(conTextFilePath);
-    }
-
-    //=========== ContactsManager ================================================================================
+    // [ContactsManager]
 
     @Override
     public void setContactsManager(ContactList contactList) {
@@ -111,7 +78,42 @@ public class ModelManager implements Model {
         contactsManager.setContact(target, editedContact);
     }
 
-    //=========== Filtered Contact List Accessors =============================================================
+    // [UserPrefs]
+
+    @Override
+    public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
+        requireNonNull(userPrefs);
+        this.userPrefs.resetData(userPrefs);
+    }
+
+    @Override
+    public ReadOnlyUserPrefs getUserPrefs() {
+        return userPrefs;
+    }
+
+    @Override
+    public GuiSettings getGuiSettings() {
+        return userPrefs.getGuiSettings();
+    }
+
+    @Override
+    public void setGuiSettings(GuiSettings guiSettings) {
+        requireNonNull(guiSettings);
+        userPrefs.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public Path getConTextFilePath() {
+        return userPrefs.getConTextFilePath();
+    }
+
+    @Override
+    public void setContactsManagerFilePath(Path conTextFilePath) {
+        requireNonNull(conTextFilePath);
+        userPrefs.setContactsManagerFilePath(conTextFilePath);
+    }
+
+    // [filteredContacts Accessors]
 
     /**
      * Returns an unmodifiable view of the list of {@code Contact} backed by the internal list of
@@ -127,6 +129,8 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredContacts.setPredicate(predicate);
     }
+
+    // [Other]
 
     @Override
     public boolean equals(Object other) {
@@ -144,5 +148,4 @@ public class ModelManager implements Model {
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredContacts.equals(otherModelManager.filteredContacts);
     }
-
 }

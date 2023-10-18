@@ -37,6 +37,7 @@ import seedu.address.ui.UiManager;
  * Runs the application.
  */
 public class MainApp extends Application {
+    public static final String NAME = "ConText";
     public static final Version VERSION = new Version(1, 2, 0, false);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
@@ -49,7 +50,13 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing ContactsManager ]===========================");
+        logger.info(
+            String.format(
+                "==============================[ Initializing %s ]==============================",
+                MainApp.NAME
+            )
+        );
+
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -171,13 +178,26 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting ContactsManager " + MainApp.VERSION);
+        logger.info(
+            String.format(
+                "Starting %s %s",
+                MainApp.NAME,
+                MainApp.VERSION
+            )
+        );
+
         ui.start(primaryStage);
     }
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping Address Book ] =============================");
+        logger.info(
+            String.format(
+                "==============================[ Stopping %s ]==============================",
+                MainApp.NAME
+            )
+        );
+
         try {
             storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {
