@@ -63,10 +63,10 @@ Adds a fosterer to the address book.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS housing/HOUSING_TYPE availability/AVAILABILITY animal/ANIMAL_NAME animalType/TYPE_OF_ANIMAL_FOSTERED/WANTED t/TAG…`
 
 Parameters:
-* `NAME`: Name of fosterer
-* `PHONE_NUMBER`: Phone number of fosterer
-* `EMAIL`: Email of fosterer
-* `ADDRESS`: Address of foster family
+* `NAME`: Name of the fosterer
+* `PHONE_NUMBER`: Phone number of the fosterer
+* `EMAIL`: Email of the fosterer
+* `ADDRESS`: Address of the foster family
 * `HOUSING_TYPE` (case-sensitive) : HDB / Condo / Landed / nil
 * `AVAILABILITY` (case-sensitive) : Available / NotAvailable / nil
 * `ANIMAL_NAME`
