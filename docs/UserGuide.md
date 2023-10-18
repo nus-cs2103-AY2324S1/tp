@@ -306,6 +306,36 @@ When the command fails:
 `OOPS, no matching contact with index 100000.`
 
 
+### Add graduation date to contact: `add /grad /index`
+
+You can set the graduation date (to the nearest semester) of an existing contact. No new contact will be created.
+
+Format: `add /grad [grad] /index [index]`
+
+Example usage:
+* `add /grad AY2223-S1 /index 1`
+* `add /grad AY2627-S2 /index 2`
+
+Parameters:
+* `[grad]` is a valid graduation date, in the format `AYxxxx-Sy`.
+    * `xxxx` is the 4-digit representation of the 2 calendar years, in the academic year e.g. `2223` for Academic Year 20`22`/20`23`. Academic year must be between AY1970/1971 to AY2069/2070 (inclusive).
+    * `y` is either `1` for Semester 1, or `2` for Semester 2.
+* `[index]` is the index of the contact in the list.
+
+When the command succeeds:
+* `add /grad AY2223-S1 /index 1`
+
+`Noted, I have set the graduation date of AY2022/2023 Semester 1 to the contact at index 1 (Oreki).`
+
+When the command fails:
+* `add /grad AY2223-S1`
+
+`Oops, you did not provide the index of the contact to add to.`
+
+* `add /grad 2022 /index 1`
+
+`Oops, you did not provide a valid graduation date in the format AYxxxx-Sy, e.g. AY2223-S1.`
+
 
 ### <u>Category 2 - Edit contact details</u>
 
@@ -497,7 +527,7 @@ name, grad, course, spec/specialization, priority.`
 
 | Category | Format, Examples                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 |----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**  | `create /name [name] [/phone /email /link /grad /course /spec /priority /tag]` <br> e.g., `create /name Oreki /phone +6598765432 /grad AY2526-S2`<br><br>`add /phone [phone] /index [index]` <br> e.g., `add /phone +6591234567 /index 1`<br><br>`add /email [email] /index [index]` <br> e.g., `add /email test@example.com /index 2`<br><br>`add /link [link] [note] /index [index]`<br>e.g., `add /link https://nknguyenhc.github.io/ website /index 1`<br><br>`add /course [course code] /index [index] /date [start date] [end date]`<br>e.g., `add /course CS1101S /index 1 /date 01-08-2022 07-12-2022`<br><br>`add /spec [specialisation] /index [index]`<br>e.g., `add /spec Robotics & AI /index 1`<br><br>`add /priority [priority level] /index [index]`<br>e.g., `add /priority high /index 1`<br><br>`add /tag [tag name] /index [index]`<br>e.g., `add /index 1 /tag data analytics`|                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |  
+| **Add**  | `create /name [name] [/phone /email /link /grad /course /spec /priority /tag]` <br> e.g., `create /name Oreki /phone +6598765432 /grad AY2526-S2`<br><br>`add /phone [phone] /index [index]` <br> e.g., `add /phone +6591234567 /index 1`<br><br>`add /email [email] /index [index]` <br> e.g., `add /email test@example.com /index 2`<br><br>`add /link [link] [note] /index [index]`<br>e.g., `add /link https://nknguyenhc.github.io/ website /index 1`<br><br>`add /course [course code] /index [index] /date [start date] [end date]`<br>e.g., `add /course CS1101S /index 1 /date 01-08-2022 07-12-2022`<br><br>`add /spec [specialisation] /index [index]`<br>e.g., `add /spec Robotics & AI /index 1`<br><br>`add /grad [graduation date] /index [index]`<br>e.g., `add /grad AY2223-S1 /index 1`<br><br>`add /priority [priority level] /index [index]`<br>e.g., `add /priority high /index 1`<br><br>`add /tag [tag name] /index [index]`<br>e.g., `add /index 1 /tag data analytics`|                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |  
 | **Edit** | `update /[parameter name] [new parameter value] /index [index]`<br> e.g.,`update /name nkn /index 1`<br><br>`delete [index]`<br>e.g., `delete 1`     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | **Find** | `search /name [name]` <br> e.g., `search /name Ness`<br><br>`sort /by [field] /order [order]`<br>e.g., `sort /by name /order asc`                    |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |  
 
