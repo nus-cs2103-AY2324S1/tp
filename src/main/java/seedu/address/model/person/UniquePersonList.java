@@ -38,6 +38,14 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Returns true if the list contains an equivalent person as the given argument.
+     */
+    public boolean contains(Name toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(person -> person.getName() == toCheck);
+    }
+
+    /**
      * Adds a person to the list.
      * The person must not already exist in the list.
      */
@@ -99,24 +107,6 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
 
-    //todo: more data protection. Maybe have two function. One for displaying and one for editing.
-    public Person getPersonByHashCode (int targetHashCode) {
-        Person foundPerson = null;
-        for (Person p : internalList) {
-            if (p.hashCode() == targetHashCode) {
-                foundPerson = p;
-                break;
-            }
-        }
-
-        if (foundPerson != null) {
-            return foundPerson;
-        } else {
-            //todo: make this an exception
-            System.out.println("Value not found in the list.");
-            return foundPerson;
-        }
-    }
     //bypasses the hashcode methods for now
     public Person getPerson(Name name) {
         Optional<Person> foundPerson = internalList.filtered(person -> person.getName().equals(name)).stream().findFirst();

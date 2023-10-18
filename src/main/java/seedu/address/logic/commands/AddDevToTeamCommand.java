@@ -33,16 +33,16 @@ public class AddDevToTeamCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSON = "This developer already exists in this team/team doesnt exist";
 
     private final Name devToAdd;
-    private final Name teamToAddTo;
+    private final String teamToAddTo;
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
-    public AddDevToTeamCommand(Name teamName, Name developer) {
+    public AddDevToTeamCommand(String teamName, Name developer) {
         requireNonNull(teamName);
         requireNonNull(developer);
-        devToAdd = developer;
-        teamToAddTo = teamName;
+        this.devToAdd = developer;
+        this.teamToAddTo = teamName;
     }
 
     @Override

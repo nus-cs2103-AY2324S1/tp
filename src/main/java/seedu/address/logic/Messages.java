@@ -57,11 +57,11 @@ public class Messages {
         /**
          * Formats the {@code team} for display to the user.
          */
-    public static String format(Team team) {
+    public static String format(Team team, Name leaderToAdd) {
         final StringBuilder builder = new StringBuilder();
         builder.append(team.getTeamName())
                 .append("; LeaderName ")
-                .append(team.getTeamLeaderName()); //get leader name
+                .append(leaderToAdd); //get leader name
         return builder.toString();
     }
 

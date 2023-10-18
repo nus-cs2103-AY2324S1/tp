@@ -8,10 +8,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Developer;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Team;
+import seedu.address.model.person.*;
 
 /**
  * Adds a person to the address book.
@@ -32,13 +29,14 @@ public class AddTeamCommand extends Command {
     public static final String MESSAGE_DUPLICATE_TEAM = "This team already exists in the project. Choose a new name!";
     public static final String MESSAGE_INVALID_PERSON = "This person does not exist!";
 
-    private Name teamToAdd;
+    private String teamToAdd;
     private Name leaderToAdd;
+    private IdentityCode teamLeaderIdentityCode;
 
     /**
      * Creates an AddTeamCommand to add the specified {@code Team}
      */
-    public AddTeamCommand(Name teamName, Name teamLeader) {
+    public AddTeamCommand(String teamName, Name teamLeader) {
         requireNonNull(teamName);
         requireNonNull(teamLeader);
         teamToAdd = teamName;
@@ -49,21 +47,22 @@ public class AddTeamCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
+        //if person doesn't exist in the persons list, throw invalid person message
+        if (!model.hasPerson(leaderToAdd)) {
+            throw new CommandException(MESSAGE_INVALID_PERSON);
+        }
         if (model.hasTeam(teamToAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_TEAM);
         }
-        Name teamName = teamToAdd;
-        //Person teamLeader = model.getWritableAddressBook().getPerson(leaderToAdd);
-        model.updateFilteredPersonList(person -> person.getName().equals(leaderToAdd));
-        Person teamLeader = model.getFilteredPersonList().stream().findFirst().orElse(null);
+        //gets the Person object of leader, then his identity code
+        IdentityCode teamLeaderIdentityCode = model.getPersonByName(leaderToAdd).getIdentityCode();
 
-        if (teamLeader == null) {
-            throw new CommandException(MESSAGE_INVALID_PERSON);
-        }
-        model.addTeam(teamName, teamLeader);
-        Team team = new Team(teamName, teamLeader);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(team)));
+        //model.updateFilteredPersonList(person -> person.getName().equals(leaderToAdd));
+        //Person teamLeader = model.getFilteredPersonList().stream().findFirst().orElse(null);
+        Team team = new Team(teamLeaderIdentityCode, teamToAdd);
+        model.addTeam(team);
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(team, leaderToAdd)));
     }
 
     @Override
