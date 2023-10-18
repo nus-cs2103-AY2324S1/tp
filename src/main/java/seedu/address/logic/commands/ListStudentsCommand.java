@@ -17,6 +17,11 @@ public class ListStudentsCommand extends ListCommand {
     public static final String MESSAGE_SUCCESS = "Listed all students!";
 
     @Override
+    public boolean equals(Object other) {
+        return other instanceof ListStudentsCommand;
+    }
+
+    @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

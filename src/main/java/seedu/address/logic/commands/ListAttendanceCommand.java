@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSETUTORIAL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALNUMBER;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.AbsentFromTutorialNumPredicate;
 import seedu.address.model.person.ContainsCourseTutorialPredicate;
@@ -22,7 +23,7 @@ public class ListAttendanceCommand extends ListCommand {
             + PREFIX_COURSETUTORIAL + "TAG "
             + PREFIX_TUTORIALNUMBER + "TUTORIALNUMBER (must be a positive integer)\n"
             + "Example: list " + COMMAND_WORD + " coursetg/CS2103 " + "tn/1";
-    public static final String MESSAGE_SUCCESS = "Listed all absent students";
+    public static final String MESSAGE_SUCCESS = "Listed all absent students:";
 
     private final Index tn;
     private final AbsentFromTutorialNumPredicate absencePredicate;
@@ -46,27 +47,49 @@ public class ListAttendanceCommand extends ListCommand {
     }
 
     @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ListAttendanceCommand)) {
+            return false;
+        }
+
+        ListAttendanceCommand otherListAttendanceCommand = (ListAttendanceCommand) other;
+        return tag.equals(otherListAttendanceCommand.tag) && tn.equals(otherListAttendanceCommand.tn);
+    }
+
+    @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
         Tag placeholder = new Tag("PLACEHOLDER");
-        String tutorialStr = String.format(" for Tutorial #%d", tn.getOneBased());
+
+        String attendanceSummary;
+        int numberOfStudents = model.getFilteredPersonList().size();
+
 
         if (!tag.equals(placeholder)) {
             model.updateFilteredPersonList(courseTutorialPredicate);
-            String tutorialGroupStr = String.format(" from %s.", tag.getTagName());
-            tutorialStr += tutorialGroupStr;
+            numberOfStudents = model.getFilteredPersonList().size();
+            model.updateFilteredPersonList(absencePredicate);
+            int numberOfAbsentees = model.getFilteredPersonList().size();
+            int numberOfPresentees = numberOfStudents - numberOfAbsentees;
+
+            attendanceSummary = String.format(Messages.MESSAGE_ATTENDANCE_SUMMARY_WITH_TAG, numberOfPresentees,
+                    numberOfStudents, tn.getOneBased(), tag.getTagName());
+            return new CommandResult(attendanceSummary + MESSAGE_SUCCESS);
         }
 
-        int numberOfStudents = model.getFilteredPersonList().size();
 
         model.updateFilteredPersonList(absencePredicate);
-
         int numberOfAbsentees = model.getFilteredPersonList().size();
         int numberOfPresentees = numberOfStudents - numberOfAbsentees;
 
-        String attendanceNumberStr = String.format("%d of %d students present.\n",
-                numberOfPresentees, numberOfStudents);
+        attendanceSummary = String.format(Messages.MESSAGE_ATTENDANCE_SUMMARY_NO_TAG, numberOfPresentees,
+                numberOfStudents, tn.getOneBased());
 
-        return new CommandResult(attendanceNumberStr + MESSAGE_SUCCESS + tutorialStr);
+        return new CommandResult(attendanceSummary + MESSAGE_SUCCESS);
     }
 }
