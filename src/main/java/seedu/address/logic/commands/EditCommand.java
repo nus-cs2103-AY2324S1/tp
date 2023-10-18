@@ -202,6 +202,8 @@ public class EditCommand extends Command {
          * A defensive copy of {@code tags} is used internally.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+            setName(toCopy.name);
+            setNric(toCopy.nric);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
@@ -221,6 +223,9 @@ public class EditCommand extends Command {
 
         public Optional<Nric> getNric() {
             return Optional.ofNullable(nric);
+        }
+        public void setNric(Nric nric) {
+            this.nric = nric;
         }
 
         public void setPhone(Phone phone) {
