@@ -3,6 +3,8 @@ package seedu.address.model.student;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.student.grades.AssignmentTracker;
 import seedu.address.model.student.grades.AttendanceTracker;
 import seedu.address.model.student.grades.ClassParticipationTracker;
@@ -17,6 +19,9 @@ public class ClassDetails {
     public static final int TEMP_LENGTH = 10;
 
     public static final String MESSAGE_CONSTRAINTS = "Class number can take any values, and it should not be blank";
+    public static final String MESSAGE_INVALID_GRADE = "Grade should be between 0 and 100";
+    public static final String MESSAGE_INVALID_ASSIGNMENT_NUMBER = "Assignment number should "
+            + "be between 1 and " + TEMP_LENGTH;
 
     /*
      * The class number should start with "T".
@@ -76,4 +81,17 @@ public class ClassDetails {
         return value.hashCode();
     }
 
+    public void setAssignGrade(int assignmentNumber, int grade) throws CommandException {
+        if (assignmentNumber > TEMP_LENGTH || assignmentNumber <= 0) {
+            throw new CommandException(MESSAGE_INVALID_ASSIGNMENT_NUMBER);
+        }
+        if (grade < 0 || grade > 100) {
+            throw new CommandException(MESSAGE_INVALID_GRADE);
+        }
+        assignmentTracker.editMarks(Index.fromOneBased(assignmentNumber), grade);
+    }
+
+    public String displayAssignments() {
+        return assignmentTracker.toString();
+    }
 }

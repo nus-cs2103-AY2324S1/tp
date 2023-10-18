@@ -3,6 +3,7 @@ package seedu.address.model.student.grades;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.Arrays;
+import java.util.stream.IntStream;
 
 import seedu.address.commons.core.index.Index;
 
@@ -24,7 +25,7 @@ public class AssignmentTracker {
     public AssignmentTracker(int numOfAssignments) {
         checkArgument(isValidAssignments(numOfAssignments), MESSAGE_CONSTRAINTS);
         assignments = new Assignment[numOfAssignments];
-        Arrays.fill(assignments, new Assignment());
+        IntStream.range(0, numOfAssignments).forEach(i -> assignments[i] = new Assignment());
     }
 
     /**
@@ -71,4 +72,5 @@ public class AssignmentTracker {
     public int hashCode() {
         return assignments.hashCode();
     }
+
 }
