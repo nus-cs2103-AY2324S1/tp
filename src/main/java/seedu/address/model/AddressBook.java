@@ -90,13 +90,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Replaces the given applicant {@code target} in the list with {@code editedApplicant}.
      * {@code target} must exist in the address book.
-<<<<<<< HEAD
      * The applicant identity of {@code editedApplicant} must not
      * be the same as another existing person in the address book.
-=======
-     * The applicant identity of {@code editedApplicant} must not be the
-     * same as another existing person in the address book.
->>>>>>> master
      */
     public void setApplicant(Applicant target, Applicant editedApplicant) {
         requireNonNull(editedApplicant);
