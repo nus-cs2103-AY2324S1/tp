@@ -11,7 +11,7 @@ You can reach us at the email `jason.lee.jia.xuan[at]u.nus.edu`
 
 ### Gian Sen
 
-<img src="images/team/gsgiansen.png" width="200px">
+<img src="images/gsgiansen.png" width="200px">
 
 [[github](https://github.com/GSgiansen)]
 [[portfolio](team/gsgiansen.md)]
@@ -20,7 +20,7 @@ You can reach us at the email `jason.lee.jia.xuan[at]u.nus.edu`
 
 ### Jason
 
-<img src="images/team/dioclei.png" width="200px">
+<img src="images/dioclei.png" width="200px">
 
 [[github](http://github.com/Dioclei)]
 [[portfolio](team/dioclei.md)]
@@ -30,7 +30,7 @@ You can reach us at the email `jason.lee.jia.xuan[at]u.nus.edu`
 
 ### Jin Yuan
 
-<img src="images/team/jinyuan0425.png" width="200px">
+<img src="images/jinyuan0425.png" width="200px">
 
 [[github](http://github.com/jinyuan0425)] [[portfolio](team/jinyuan0425.md)]
 
@@ -39,7 +39,7 @@ You can reach us at the email `jason.lee.jia.xuan[at]u.nus.edu`
 
 ### Wee Yeow
 
-<img src="images/team/weeweh.png" width="200px">
+<img src="images/weeweh.png" width="200px">
 
 [[github](http://github.com/weeweh)]
 [[portfolio](team/weeweh.md)]
@@ -49,7 +49,7 @@ You can reach us at the email `jason.lee.jia.xuan[at]u.nus.edu`
 
 ### Winson
 
-<img src="images/team/winson8222.png" width="200px">
+<img src="images/winson8222.png" width="200px">
 
 [[github](http://github.com/winson8222)]
 [[portfolio](team/winson8222.md)]
