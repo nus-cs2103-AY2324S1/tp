@@ -104,7 +104,6 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         ObservableList<Schedule> associatedSchedules = this.getSchedulesFromTutor(target);
-        System.out.println(associatedSchedules);
         this.deleteSchedules(associatedSchedules);
         addressBook.removePerson(target);
     }
