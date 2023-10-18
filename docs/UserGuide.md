@@ -27,7 +27,7 @@ MediLink Contacts(MLC) is a **desktop app for managing patients and doctors deta
 
    * `list` : Lists all contacts.
 
-   * `add Doctor n/John Doe ic/S9851386G g/Male p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pt/T0123456H` : Adds a doctor named `John Doe` to the Address Book.
+   * `add Doctor n/John Doe ic/S9851386G g/M p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pt/T0123456H` : Adds a doctor named `John Doe` to the Address Book.
 
    * `delete ic/S9851386G` : Deletes the person with ic S9851386G.
 
@@ -94,15 +94,15 @@ A person can have any number of tags (including 0)
 - PATIENT must contain the valid IC of a Patient in the Database.
 
 Examples:
-* `add Doctor n/John Doe ic/S9851386G g/Male p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pt/T0123456H`
-* `add Doctor n/Betsy Crowe ic/S9851586G g/Female p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/Surgeon pt/T0123556H`
+* `add Doctor n/John Doe ic/S9851386G g/M p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pt/T0123456H`
+* `add Doctor n/Betsy Crowe ic/S9851586G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/Surgeon pt/T0123556H`
 
 
 ### Adding a Patient: `add Patient`
 
 Adds a Patient to the hospital database.
 
-Format: `add Patient n/NAME ic/IC g/GENDER p/PHONE_NUMBER ec/EMERGENCY_CONTACT e/EMAIL a/ADDRESS [t/TAG] [d/DOCTOR] [c/CONDITION] [b/BLOODTYPE] …​`
+Format: `add-patient n/NAME ic/IC g/GENDER p/PHONE_NUMBER ec/EMERGENCY_CONTACT e/EMAIL a/ADDRESS [t/TAG] [d/DOCTOR] [c/CONDITION] [b/BLOODTYPE] …​`
 
 <div markdown="span" class="alert alert-primary">:note:
 **Take Note:**
@@ -116,8 +116,8 @@ Format: `add Patient n/NAME ic/IC g/GENDER p/PHONE_NUMBER ec/EMERGENCY_CONTACT e
 - Blood type must be a combination of A/B/AB/O and +/-
 
 Examples:
-* `add Patient n/John Doe ic/S9851386G g/Male p/98765432 ec/90123456 e/johnd@example.com a/John street, block 123, #01-01 d/T0123456H c/pneumothorax b/O+`
-* `add Patient n/Betsy Crowe ic/S9851586G g/Female p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/High Priority pt/T0123556H`
+* `add-patient n/John Doe ic/S9851386G g/M p/98765432 ec/90123456 e/johnd@example.com a/John street, block 123, #01-01 d/T0123456H c/pneumothorax b/O+`  
+* `add-patient n/Betsy Crowe ic/S9851586G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/High Priority pt/T0123556H`
 
 ### Listing all persons : `list`
 
@@ -140,7 +140,7 @@ Format: `edit NRIC [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
     specifying any tags after it.
 
 Examples:
-*  `edit T0123456A p/91234567 e/johndoe@example.com g/Female` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+*  `edit T0123456A p/91234567 e/johndoe@example.com g/F` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit S9876543B pt/T0123456A n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
 ### Locating persons by name: `find`
@@ -221,8 +221,8 @@ _Details coming soon ..._
 
 | Action          | Format, Examples                                                                                                                                                                                                                                                                                                |
 |-----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **New Doctor**  | `add Doctor n/NAME ic/IC g/GENDER p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ pt/PATIENT_1 …​` <br> e.g., `add Doctor n/John Doe ic/S9851386G g/Male p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pt/T0123456H`                                                                               |
-| **New Patient** | `add Patient n/NAME ic/IC g/GENDER p/PHONE_NUMBER ec/EMERGENCY_CONTACT e/EMAIL a/ADDRESS [t/TAG] [d/DOCTOR] [c/CONDITION] [b/BLOODTYPE] …​` <br> e.g., `add Patient n/John Doe ic/S9851386G g/Male p/98765432 ec/90123456 e/johnd@example.com a/John street, block 123, #01-01 d/T0123456H c/pneumothorax b/O+` |
+| **New Doctor**  | `add Doctor n/NAME ic/IC g/GENDER p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ pt/PATIENT_1 …​` <br> e.g., `add Doctor n/John Doe ic/S9851386G g/M p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pt/T0123456H`                                                                               |
+| **New Patient** | `add Patient n/NAME ic/IC g/GENDER p/PHONE_NUMBER ec/EMERGENCY_CONTACT e/EMAIL a/ADDRESS [t/TAG] [d/DOCTOR] [c/CONDITION] [b/BLOODTYPE] …​` <br> e.g., `add Patient n/John Doe ic/S9851386G g/M p/98765432 ec/90123456 e/johnd@example.com a/John street, block 123, #01-01 d/T0123456H c/pneumothorax b/O+` |
 | **Clear**       | `clear`                                                                                                                                                                                                                                                                                                         |
 | **Delete**      | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                                                                                                             |
 | **Edit**        | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                                                                                                                     |

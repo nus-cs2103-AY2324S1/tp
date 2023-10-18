@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -34,7 +35,10 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        // combine doctor list and patient list
+        List<Person> lastShownList = new ArrayList<>();
+        lastShownList.addAll(model.getFilteredDoctorList());
+        lastShownList.addAll(model.getFilteredPatientList());
 
         for (Person target : lastShownList) {
             if (targetIc.equals(target.getIc())) {

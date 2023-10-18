@@ -18,16 +18,18 @@ public class Patient extends Person {
     private final Condition condition;
     private final BloodType bloodType;
     //private final Doctor doctor;    to be implemented after Doctor class created
+    private Phone emergencyContact;
 
     /**
      * Every field must be present and not null.
      */
-    public Patient(Name name, Phone phone, Email email, Address address, Remark remark, Gender gender, Ic ic,
-                  Condition condition, BloodType bloodType, Set<Tag> tags) {
+    public Patient(Name name, Phone phone, Phone emergencyContact, Email email, Address address, Remark remark,
+                   Gender gender, Ic ic, Condition condition, BloodType bloodType, Set<Tag> tags) {
         super(name, phone, email, address, remark, gender, ic, tags);
         requireAllNonNull(condition, bloodType);
         this.condition = condition;
         this.bloodType = bloodType;
+        this.emergencyContact = emergencyContact;
     }
 
     public Condition getCondition() {
@@ -36,6 +38,10 @@ public class Patient extends Person {
 
     public BloodType getBloodType() {
         return bloodType;
+    }
+
+    public Phone getEmergencyContact() {
+        return emergencyContact;
     }
 
     /**
@@ -49,13 +55,14 @@ public class Patient extends Person {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Person)) {
+        if (!(other instanceof Patient)) {
             return false;
         }
 
         Patient otherPatient = (Patient) other;
         return name.equals(otherPatient.name)
                 && phone.equals(otherPatient.phone)
+                && emergencyContact.equals(otherPatient.emergencyContact)
                 && email.equals(otherPatient.email)
                 && address.equals(otherPatient.address)
                 && gender.equals(otherPatient.gender)
@@ -76,6 +83,7 @@ public class Patient extends Person {
         return new ToStringBuilder(this)
                 .add("name", name)
                 .add("phone", phone)
+                .add("emergency contact", emergencyContact)
                 .add("email", email)
                 .add("address", address)
                 .add("remark", remark)

@@ -10,8 +10,10 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalPatient.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -23,8 +25,10 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Ic;
+import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.PatientBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 /**
@@ -38,45 +42,45 @@ public class EditCommandTest {
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Person editedPerson = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
-        Ic nricOfFirstPerson = model.getFilteredPersonList().get(0).getIc();
+        Ic nricOfFirstPerson = model.getFilteredPatientList().get(0).getIc();
         EditCommand editCommand = new EditCommand(nricOfFirstPerson, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
+        expectedModel.setPerson(model.getFilteredPatientList().get(0), editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
-        Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
-        Person lastPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
+        Index indexLastPerson = Index.fromOneBased(model.getFilteredPatientList().size());
+        Patient lastPatient = model.getFilteredPatientList().get(indexLastPerson.getZeroBased());
 
-        PersonBuilder personInList = new PersonBuilder(lastPerson);
-        Person editedPerson = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+        PatientBuilder patientInList = new PatientBuilder(lastPatient);
+        Patient editedPatient = patientInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
-        Ic nricLastPerson = lastPerson.getIc();
+        Ic nricLastPerson = lastPatient.getIc();
         EditCommand editCommand = new EditCommand(nricLastPerson, descriptor);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPatient));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(lastPerson, editedPerson);
+        expectedModel.setPerson(lastPatient, editedPatient);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
-        Person firstPerson = model.getFilteredPersonList().get(0);
-        Ic nricFirstPerson = firstPerson.getIc();
+        Patient firstPatient = model.getFilteredPatientList().get(0);
+        Ic nricFirstPerson = firstPatient.getIc();
         EditCommand editCommand = new EditCommand(nricFirstPerson, new EditPersonDescriptor());
-        Person editedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person editedPerson = model.getFilteredPatientList().get(INDEX_FIRST_PERSON.getZeroBased());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
@@ -87,9 +91,9 @@ public class EditCommandTest {
 
     @Test
     public void execute_filteredList_success() {
-        Ic nricOfFirstPerson = model.getFilteredPersonList().get(0).getIc();
+        Ic nricOfFirstPerson = model.getFilteredPatientList().get(0).getIc();
 
-        Person personInFilteredList = model.getFilteredPersonList().stream().filter(p ->
+        Person personInFilteredList = model.getFilteredPatientList().stream().filter(p ->
                 p.getIc().equals(nricOfFirstPerson)).findFirst().orElse(null);
         Person editedPerson = new PersonBuilder(personInFilteredList).withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(nricOfFirstPerson,
@@ -105,12 +109,25 @@ public class EditCommandTest {
 
     @Test
     public void execute_duplicatePersonUnfilteredList_failure() {
-        Ic nricOfFirstPerson = model.getFilteredPersonList().get(0).getIc();
-        Person firstPerson = model.getFilteredPersonList().stream().filter(p ->
+        Ic nricOfFirstPerson = model.getFilteredPatientList().get(0).getIc();
+        Person firstPerson = model.getFilteredPatientList().stream().filter(p ->
                 p.getIc().equals(nricOfFirstPerson)).findFirst().orElse(null);
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(firstPerson).build();
-        Ic nricOfSecondPerson = model.getFilteredPersonList().get(1).getIc();
+        Ic nricOfSecondPerson = model.getFilteredPatientList().get(1).getIc();
         EditCommand editCommand = new EditCommand(nricOfSecondPerson, descriptor);
+
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
+    }
+
+    @Test
+    public void execute_duplicatePersonFilteredList_failure() {
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+
+        // edit person in filtered list into a duplicate in address book
+        Patient patientInList = model.getAddressBook().getPatientList().get(INDEX_SECOND_PERSON.getZeroBased());
+        Ic nricOfFirstPerson = model.getFilteredPatientList().get(INDEX_FIRST_PERSON.getZeroBased()).getIc();
+        EditCommand editCommand = new EditCommand(nricOfFirstPerson,
+                new EditPersonDescriptorBuilder(patientInList).build());
 
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
     }
@@ -124,15 +141,9 @@ public class EditCommandTest {
         assertCommandFailure(editCommand, model, "This person hasn't been saved");
     }
 
-    /**
-     * Edit filtered list where index is larger than size of filtered list,
-     * but smaller than size of address book
-     */
-
-
     @Test
     public void equals() {
-        final Ic nricOfFirstPerson = model.getFilteredPersonList().get(0).getIc();
+        final Ic nricOfFirstPerson = model.getFilteredPatientList().get(0).getIc();
         final EditCommand standardCommand = new EditCommand(nricOfFirstPerson, DESC_AMY);
 
         // same values -> returns true
@@ -149,7 +160,7 @@ public class EditCommandTest {
         // different types -> returns false
         assertFalse(standardCommand.equals(new ClearCommand()));
 
-        final Ic nricOfSecondPerson = model.getFilteredPersonList().get(1).getIc();
+        final Ic nricOfSecondPerson = model.getFilteredPatientList().get(1).getIc();
         // different index -> returns false
         assertFalse(standardCommand.equals(new EditCommand(nricOfSecondPerson, DESC_AMY)));
 
@@ -159,7 +170,7 @@ public class EditCommandTest {
 
     @Test
     public void toStringMethod() {
-        Ic nric = model.getFilteredPersonList().get(0).getIc();
+        Ic nric = model.getFilteredPatientList().get(0).getIc();
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         EditCommand editCommand = new EditCommand(nric, editPersonDescriptor);
         String expected = EditCommand.class.getCanonicalName() + "{nric=" + nric + ", editPersonDescriptor="

@@ -13,6 +13,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -74,7 +75,7 @@ public class EditCommand extends Command {
     private String personRole;
 
     /**
-     * @param nric of the person in the filtered person list to edit
+     * @param nric                 of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
     public EditCommand(Ic nric, EditPersonDescriptor editPersonDescriptor) {
@@ -88,7 +89,10 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        // combine doctor list and patient list
+        List<Person> lastShownList = new ArrayList<>();
+        lastShownList.addAll(model.getFilteredDoctorList());
+        lastShownList.addAll(model.getFilteredPatientList());
 
         List<Person> personToEditList = lastShownList.stream()
                 .filter(x -> x.getIc().equals(nric))
@@ -148,11 +152,12 @@ public class EditCommand extends Command {
     }
 
 
-
     private static Patient createEditedPatient(Patient personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
+        Phone updatedEmergencyContact =
+                editPersonDescriptor.getEmergencyContact().orElse(personToEdit.getEmergencyContact());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Remark updatedRemarks = editPersonDescriptor.getRemark().orElse(personToEdit.getRemark());
@@ -161,8 +166,8 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         BloodType updatedBloodType = editPersonDescriptor.getBloodType().orElse(personToEdit.getBloodType());
         Condition updatedCondition = editPersonDescriptor.getCondition().orElse(personToEdit.getCondition());
-        return new Patient(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRemarks,
-                updatedGender, updatedIc, updatedCondition, updatedBloodType, updatedTags);
+        return new Patient(updatedName, updatedPhone, updatedEmergencyContact, updatedEmail, updatedAddress,
+                updatedRemarks, updatedGender, updatedIc, updatedCondition, updatedBloodType, updatedTags);
     }
 
     @Override
@@ -190,7 +195,6 @@ public class EditCommand extends Command {
     }
 
 
-
     /**
      * Stores the details to edit the person with. Each non-empty field value will replace the
      * corresponding field value of the person.
@@ -198,6 +202,7 @@ public class EditCommand extends Command {
     public static class EditPersonDescriptor {
         private Name name;
         private Phone phone;
+        private Phone emergencyContact;
         private Email email;
         private Address address;
         private Remark remark;
@@ -207,16 +212,17 @@ public class EditCommand extends Command {
         private Condition condition;
         private BloodType bloodType;
 
-        public EditPersonDescriptor() {}
+        public EditPersonDescriptor() {
+        }
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
+            setEmergencyContact(toCopy.emergencyContact);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setRemark(toCopy.remark);
@@ -231,7 +237,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address,
+            return CollectionUtil.isAnyNonNull(name, phone, emergencyContact, address,
                     gender, ic, tags, bloodType, condition, remark);
         }
 
@@ -249,6 +255,14 @@ public class EditCommand extends Command {
 
         public Optional<Phone> getPhone() {
             return Optional.ofNullable(phone);
+        }
+
+        public void setEmergencyContact(Phone phone) {
+            this.emergencyContact = phone;
+        }
+
+        public Optional<Phone> getEmergencyContact() {
+            return Optional.ofNullable(emergencyContact);
         }
 
         public void setEmail(Email email) {
@@ -294,12 +308,15 @@ public class EditCommand extends Command {
         public void setCondition(Condition condition) {
             this.condition = condition;
         }
+
         public Optional<Condition> getCondition() {
             return Optional.ofNullable(condition);
         }
+
         public void setBloodType(BloodType bloodType) {
             this.bloodType = bloodType;
         }
+
         public Optional<BloodType> getBloodType() {
             return Optional.ofNullable(bloodType);
         }
