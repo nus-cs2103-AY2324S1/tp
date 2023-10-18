@@ -94,18 +94,26 @@ public class Person {
      *         and values are values of the respective fields, or {@code null} for tags.
      */
     public Map<String, String> getFieldsAndAttributes() {
-        // note: this can be dynamically done using java.lang.reflect,
-        // but I can't guarantee its security/safety/suitability for this project
-        // (pretty sure it's overkill)
         HashMap<String, String> map = new HashMap<>();
-        map.put("name", getName().toString());
-        map.put("phone", getPhone().toString());
-        map.put("email", getEmail().toString());
-        map.put("address", getAddress().toString());
+        tryPut(map, "name", getName());
+        tryPut(map, "phone", getPhone());
+        tryPut(map, "email", getEmail());
+        tryPut(map, "address", getAddress());
+        tryPut(map, "housing", getHousing());
+        tryPut(map, "availability", getAvailability());
+        tryPut(map, "animal name", getAnimalName());
+        tryPut(map, "animal type", getAnimalType());
         for (Tag tag : getTags()) {
             map.put(tag.tagName, null);
         }
         return map;
+    }
+
+    private void tryPut(Map<String, String> map, String key, Object value) {
+        if (Objects.isNull(value)) {
+            return;
+        }
+        map.put(key, value.toString());
     }
 
     /**

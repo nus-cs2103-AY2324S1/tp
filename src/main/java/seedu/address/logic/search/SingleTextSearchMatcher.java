@@ -7,10 +7,10 @@ import java.util.regex.Pattern;
 /**
  * Searches for a single string of text
  */
-class SingleTextSearchPredicate extends SearchPredicate {
+class SingleTextSearchMatcher extends SearchMatcher {
     private final String textToFind;
 
-    public SingleTextSearchPredicate(String search) {
+    public SingleTextSearchMatcher(String search) {
         textToFind = search;
     }
 

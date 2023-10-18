@@ -1,12 +1,12 @@
 package seedu.address.logic.search;
 
-abstract class BinarySearchPredicate extends SearchPredicate{
+abstract class BinarySearchMatcher extends SearchMatcher {
 
-    protected SearchPredicate a;
-    protected SearchPredicate b;
+    protected SearchMatcher a;
+    protected SearchMatcher b;
     protected char operation;
 
-    BinarySearchPredicate(SearchPredicate a, SearchPredicate b, char operation) {
+    BinarySearchMatcher(SearchMatcher a, SearchMatcher b, char operation) {
         this.a = a;
         this.b = b;
         this.operation = operation;
@@ -14,7 +14,7 @@ abstract class BinarySearchPredicate extends SearchPredicate{
 
 
     @Override
-    void setFlag(SearchPredicate.Flag flag, boolean isFlagApplied) {
+    void setFlag(SearchMatcher.Flag flag, boolean isFlagApplied) {
         super.setFlag(flag, isFlagApplied);
         a.setFlag(flag, isFlagApplied);
         b.setFlag(flag, isFlagApplied);

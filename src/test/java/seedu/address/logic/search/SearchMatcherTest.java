@@ -9,7 +9,7 @@ import java.util.function.Supplier;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class SearchPredicateTest {
+class SearchMatcherTest {
 
     private static Map<String, String> TEST_PERSON;
 
@@ -20,8 +20,8 @@ class SearchPredicateTest {
         TEST_PERSON.put("field B", "Ut enim; ad@minim veNiam!");
     }
 
-    private static SearchPredicate generatePredicate(String str) {
-        return new SingleTextSearchPredicate(str);
+    private static SearchMatcher generatePredicate(String str) {
+        return new SingleTextSearchMatcher(str);
     }
 
     private static <T> T get(Supplier<T> supplier) {
@@ -31,10 +31,10 @@ class SearchPredicateTest {
     private static FieldRanges joinTest(
             String predicateA, String predicateB, String method
     ) {
-        SearchPredicate a = generatePredicate(predicateA);
-        SearchPredicate b = generatePredicate(predicateB);
+        SearchMatcher a = generatePredicate(predicateA);
+        SearchMatcher b = generatePredicate(predicateB);
         try {
-            return ((SearchPredicate) SearchPredicate.class.getDeclaredMethod(method, SearchPredicate.class).invoke(a, b)).test(TEST_PERSON);
+            return ((SearchMatcher) SearchMatcher.class.getDeclaredMethod(method, SearchMatcher.class).invoke(a, b)).test(TEST_PERSON);
         } catch (Exception ignored) {
             assert false: "Unexpected Exception";
             return null;

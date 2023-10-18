@@ -30,35 +30,35 @@ class FindCommandArgumentParserTest {
 
     @Test
     void test_basicQuery() throws ParseException {
-        SearchTest queryA = new FindCommandArgumentParser().parse("Tom");
+        SearchPredicate queryA = new FindCommandArgumentParser().parse("Tom");
         assertTrue(queryA.test(testPerson));
-        SearchTest queryB = new FindCommandArgumentParser().parse("Sam");
+        SearchPredicate queryB = new FindCommandArgumentParser().parse("Sam");
         assertFalse(queryB.test(testPerson));
     }
 
     @Test
     void test_implicitAndQuery() throws ParseException {
-        SearchTest queryA = new FindCommandArgumentParser().parse("Tom Harry");
+        SearchPredicate queryA = new FindCommandArgumentParser().parse("Tom Harry");
         assertFalse(queryA.test(testPerson));
-        SearchTest queryB = new FindCommandArgumentParser().parse("whee twee");
+        SearchPredicate queryB = new FindCommandArgumentParser().parse("whee twee");
         assertTrue(queryB.test(testPerson));
     }
 
     @Test
     void test_explicitOrQuery() throws ParseException {
-        SearchTest queryA = new FindCommandArgumentParser().parse("Tom | Harry");
+        SearchPredicate queryA = new FindCommandArgumentParser().parse("Tom | Harry");
         assertTrue(queryA.test(testPerson));
-        SearchTest queryB = new FindCommandArgumentParser().parse("Cat | Boy");
+        SearchPredicate queryB = new FindCommandArgumentParser().parse("Cat | Boy");
         assertFalse(queryB.test(testPerson));
     }
 
     @Test
     void test_explicitAndQuery() throws ParseException {
-        SearchTest queryA = new FindCommandArgumentParser().parse("Tom & Harry");
+        SearchPredicate queryA = new FindCommandArgumentParser().parse("Tom & Harry");
         assertFalse(queryA.test(testPerson));
-        SearchTest queryB = new FindCommandArgumentParser().parse("whee & twee");
+        SearchPredicate queryB = new FindCommandArgumentParser().parse("whee & twee");
         assertTrue(queryB.test(testPerson));
-        SearchTest queryC = new FindCommandArgumentParser().parse("ree & whee");
+        SearchPredicate queryC = new FindCommandArgumentParser().parse("ree & whee");
         assertFalse(queryC.test(testPerson));
     }
 
@@ -66,7 +66,7 @@ class FindCommandArgumentParserTest {
     void test_operatorPrecedence() throws ParseException {
         // TRUE: Tom whee twee
         // FALSE: Harry Cat ree
-        SearchTest query;
+        SearchPredicate query;
         query = new FindCommandArgumentParser().parse("Harry Tom | whee twee");
         assertTrue(query.test(testPerson));
         query = new FindCommandArgumentParser().parse("Tom | whee Harry twee");
@@ -85,15 +85,15 @@ class FindCommandArgumentParserTest {
 
     @Test
     void test_shortCircuitAnd() {
-        SearchPredicate errorPredicate = new SearchPredicate() {
+        SearchMatcher errorPredicate = new SearchMatcher() {
             @Override
             FieldRanges test(Map<String, String> p) {
                 assert false;
                 return null;
             }
         };
-        SearchTest query = new SearchTest(
-                new SingleTextSearchPredicate("Jerry")
+        SearchPredicate query = new SearchPredicate(
+                new SingleTextSearchMatcher("Jerry")
                         .and(errorPredicate)
         );
         assertFalse(query.test(testPerson));
@@ -101,15 +101,15 @@ class FindCommandArgumentParserTest {
 
     @Test
     void test_nonShortCircuitOr() {
-        SearchPredicate errorPredicate = new SearchPredicate() {
+        SearchMatcher errorPredicate = new SearchMatcher() {
             @Override
             FieldRanges test(Map<String, String> p) {
                 assert false;
                 return null;
             }
         };
-        SearchTest query = new SearchTest(
-                new SingleTextSearchPredicate("Tom")
+        SearchPredicate query = new SearchPredicate(
+                new SingleTextSearchMatcher("Tom")
                         .or(errorPredicate)
         );
         assertThrows(AssertionError.class, () -> query.test(testPerson));
@@ -119,7 +119,7 @@ class FindCommandArgumentParserTest {
     void test_parentheses() throws ParseException {
         // TRUE: Tom whee twee
         // FALSE: Harry Cat ree
-        SearchTest query;
+        SearchPredicate query;
         query = new FindCommandArgumentParser().parse("Harry (Tom | whee) twee");
         assertFalse(query.test(testPerson));
         query = new FindCommandArgumentParser().parse("(Tom | whee) Harry twee");
@@ -131,8 +131,8 @@ class FindCommandArgumentParserTest {
     }
 
     @Test
-    void test_unexpectedInputs() throws ParseException {
-        SearchTest query;
+    void test_nonStandardAcceptableInputs() throws ParseException {
+        SearchPredicate query;
         query = new FindCommandArgumentParser().parse("#");
         assertFalse(query.test(testPerson));
         query = new FindCommandArgumentParser().parse(";");
@@ -141,10 +141,18 @@ class FindCommandArgumentParserTest {
         assertFalse(query.test(testPerson));
         query = new FindCommandArgumentParser().parse("-");
         assertFalse(query.test(testPerson));
-        query = new FindCommandArgumentParser().parse("");
-        assertTrue(query.test(testPerson));
         query = new FindCommandArgumentParser().parse("abc&123");
         assertTrue(query.test(testPerson));
+    }
+
+    @Test
+    void test_nullConstructor() {
+        assertDoesNotThrow(() -> new FindCommandArgumentParser().parse(null));
+    }
+
+    @Test
+    void test_consecutiveJoiners_throw() {
+        assertThrows(ParseException.class, () -> new FindCommandArgumentParser().parse("&&"));
     }
 
 }

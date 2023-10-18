@@ -5,8 +5,8 @@ import static java.lang.Math.min;
 
 /**
  * Attached to a String representation of the value of a field,
- * represents the start and end of a SearchPredicate match on that field.
- * Intended for use by {@link SearchPredicate#test}, to enable certain features such as order and non-overlap.
+ * represents the start and end of a SearchMatcher match on that field.
+ * Intended for use by {@link SearchMatcher#test}, to enable certain features such as order and non-overlap.
  * or enabling/disabling overlaps.
  */
 class Range {

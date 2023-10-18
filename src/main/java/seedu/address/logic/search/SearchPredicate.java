@@ -1,135 +1,35 @@
 package seedu.address.logic.search;
 
-import java.util.Arrays;
-import java.util.HashMap;
+import seedu.address.model.person.Person;
+
 import java.util.Map;
-import java.util.Objects;
+import java.util.function.Predicate;
 
 /**
- * Represents a predicate (boolean-valued function) of a Map representing a person,
- * meant for use in filtering a list of persons.
- * Capable of dealing with arbitrary fields.
- *
- * <p>Adapted from {@link java.util.function.Predicate}, which could not be used because
- * it does not support returning information other than a boolean.
+ * A layer of abstraction around {@link SearchMatcher} that gives it {@link Predicate} behaviour.
  */
-abstract class SearchPredicate {
+public class SearchPredicate implements Predicate<Person> {
 
-    enum Flag {
-        CASE_SENSITIVITY,
-        FULL_WORD_MATCHING_ONLY
-    }
+    private final SearchMatcher predicate;
 
-    private Map<Flag, Boolean> flags;
-
-    SearchPredicate() {
-        initFlags();
+    SearchPredicate(SearchMatcher predicate) {
+        this.predicate = predicate;
     }
 
     /**
-     * Evaluates this predicate on the given argument,
-     * which is expected to be a Map representation of a {@link seedu.address.model.person.Person}.
+     * Applies the predicate to the provided person.
      *
-     * @param p the person's attributes, as a Map.
-     * @return {@link FieldRanges} of all {@code null} values if no match,
-     *      otherwise contains at least one {@link Range} that specifies the location(s) of the match.
+     * @param p person to apply a predicate to.
+     * @return {@code true} if the person matches the predicate,
+     *          {@code false} otherwise.
      */
-    abstract FieldRanges test(Map<String, String> p);
-
-    /**
-     * Returns a composed predicate that represents a short-circuiting logical
-     * AND of this predicate and another.  When evaluating the composed
-     * predicate, if this predicate is {@code false}, then the {@code other}
-     * predicate is not evaluated.
-     *
-     * <p>Any exceptions thrown during evaluation of either predicate are relayed
-     * to the caller; if evaluation of this predicate throws an exception, the
-     * {@code other} predicate will not be evaluated.
-     *
-     * @param other a predicate that will be logically-ANDed with this
-     *              predicate
-     * @return a composed predicate that represents the short-circuiting logical
-     * AND of this predicate and the {@code other} predicate
-     * @throws NullPointerException if other is null
-     */
-    SearchPredicate and(SearchPredicate other) {
-        Objects.requireNonNull(other);
-        return new BinarySearchPredicate(this, other, '&') {
-            @Override
-            FieldRanges test(Map<String, String> p) {
-                FieldRanges rangeA = a.test(p);
-                if (!FieldRanges.isMatch(rangeA)) {
-                    return null;
-                }
-                FieldRanges rangeB = b.test(p);
-                if (!FieldRanges.isMatch(rangeB)) {
-                    return null;
-                }
-                return FieldRanges.union(rangeA, rangeB);
-            }
-        };
-    }
-
-    /**
-     * Returns a predicate that represents the logical negation of this
-     * predicate.
-     *
-     * @return a predicate that represents the logical negation of this
-     * predicate.
-     */
-    SearchPredicate negate() {
-        SearchPredicate old = this;
-        return new SearchPredicate() {
-            @Override
-            FieldRanges test(Map<String, String> p) {
-                FieldRanges ranges = old.test(p);
-                if (!FieldRanges.isMatch(ranges)) {
-                    ranges = new FieldRanges();
-                    ranges.setIsMatch(true);
-                } else {
-                    ranges = null;
-                }
-                return ranges;
-            }
-        };
-    }
-
-    /**
-     * Returns a composed predicate that represents a logical OR of this predicate and another.
-     * When evaluating the composed predicate, no short-circuiting occurs;
-     * this is due to needing an accurate representation of the matching range.
-     *
-     * <p>Any exceptions thrown during evaluation of either predicate are relayed
-     * to the caller; if evaluation of this predicate throws an exception, the
-     * {@code other} predicate will not be evaluated.
-     *
-     * @param other a predicate that will be logically-ORed with this
-     *              predicate
-     * @return a composed predicate that represents the logical
-     * OR of this predicate and the {@code other} predicate
-     * @throws NullPointerException if other is null
-     */
-    SearchPredicate or(SearchPredicate other) {
-        Objects.requireNonNull(other);
-        return new BinarySearchPredicate(this, other, '|') {
-            @Override
-            FieldRanges test(Map<String, String> p) {
-                return FieldRanges.union(a.test(p), b.test(p));
-            }
-        };
-    }
-
-    protected void initFlags() {
-        flags = new HashMap<>();
-        Arrays.stream(Flag.values()).forEach(flag -> flags.put(flag, false));
-    }
-
-    void setFlag(Flag flag, boolean isFlagApplied) {
-        flags.put(flag, isFlagApplied);
-    }
-
-    boolean isFlagApplied(Flag flag) {
-        return flags.get(flag);
+    @Override
+    public boolean test(Person p) {
+        if (predicate == null) {
+            return true;
+        }
+        Map<String, String> map = p.getFieldsAndAttributes();
+        return FieldRanges.isMatch(this.predicate.test(map));
     }
 
 }

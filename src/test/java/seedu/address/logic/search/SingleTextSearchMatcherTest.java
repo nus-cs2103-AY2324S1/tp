@@ -2,13 +2,15 @@ package seedu.address.logic.search;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import seedu.address.model.person.Person;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Predicate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class SingleTextSearchPredicateTest {
+public class SingleTextSearchMatcherTest {
 
     private static Map<String, String> TEST_PERSON;
 
@@ -22,9 +24,9 @@ public class SingleTextSearchPredicateTest {
     }
 
     private static String testMatchString(String str, boolean isCaseIgnored) {
-        SearchPredicate predicate =
-                new SingleTextSearchPredicate(str);
-        predicate.setFlag(SearchPredicate.Flag.CASE_SENSITIVITY, !isCaseIgnored);
+        SearchMatcher predicate =
+                new SingleTextSearchMatcher(str);
+        predicate.setFlag(SearchMatcher.Flag.CASE_SENSITIVITY, !isCaseIgnored);
         FieldRanges result = predicate.test(TEST_PERSON);
         if (result.isEmpty()) {
             return null;
@@ -36,6 +38,10 @@ public class SingleTextSearchPredicateTest {
             strToMatch = match.getKey();
         }
         return range.getSubstring(strToMatch);
+    }
+
+    public static Predicate<Person> createPredicate(String s) {
+        return new SearchPredicate(new SingleTextSearchMatcher(s));
     }
 
     @Test

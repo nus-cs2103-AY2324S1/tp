@@ -7,7 +7,7 @@ import java.util.Set;
 
 
 /**
- * Used to represent a SearchPredicate match,
+ * Used to represent a SearchMatcher match,
  * determines the fields and corresponding sections of the fields where a match occurs.
  */
 class FieldRanges extends HashMap<String, Range> {

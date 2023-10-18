@@ -1,5 +1,6 @@
 package seedu.address.logic.search;
 
+import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 import java.util.HashMap;
@@ -7,22 +8,24 @@ import java.util.Map;
 import java.util.Stack;
 import java.util.function.BiFunction;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 /**
  * Utility class that parses search strings accepted by the Find/List command.
  */
 public class FindCommandArgumentParser {
 
-    private enum Joiner implements BiFunction<SearchPredicate, SearchPredicate, SearchPredicate> {
-        IMPLICIT_AND(' ', 2, SearchPredicate::and),
-        EXPLICIT_OR('|', 1, SearchPredicate::or),
-        EXPLICIT_AND('&', 0, SearchPredicate::and);
+    private enum Joiner implements BiFunction<SearchMatcher, SearchMatcher, SearchMatcher> {
+        IMPLICIT_AND(' ', 2, SearchMatcher::and),
+        EXPLICIT_OR('|', 1, SearchMatcher::or),
+        EXPLICIT_AND('&', 0, SearchMatcher::and);
 
         private static final Map<Character, Joiner> set = new HashMap<>();
 
         private final char symbol;
         private final int precedence;
-        private final BiFunction<SearchPredicate, SearchPredicate, SearchPredicate> join;
-        Joiner(char symbol, int precedence, BiFunction<SearchPredicate, SearchPredicate, SearchPredicate> join) {
+        private final BiFunction<SearchMatcher, SearchMatcher, SearchMatcher> join;
+        Joiner(char symbol, int precedence, BiFunction<SearchMatcher, SearchMatcher, SearchMatcher> join) {
             this.symbol = symbol;
             this.precedence = precedence;
             this.join = join;
@@ -37,7 +40,7 @@ public class FindCommandArgumentParser {
         }
 
         @Override
-        public SearchPredicate apply(SearchPredicate a, SearchPredicate b) {
+        public SearchMatcher apply(SearchMatcher a, SearchMatcher b) {
             return join.apply(a,b);
         }
 
@@ -58,14 +61,17 @@ public class FindCommandArgumentParser {
             }
         }
 
-        SearchPredicate collapse() throws UnexpectedTokenException {
+        SearchMatcher collapse() throws UnexpectedTokenException {
             sanityCheckElseThrow();
+            if (nextInput == NextInput.PREDICATE) {
+                throw new UnexpectedTokenException(NextInput.JOINER, nextInput);
+            }
             if (joiners.isEmpty() && predicates.isEmpty()) {
                 return null;
             }
             while (!joiners.isEmpty()) {
                 Joiner joiner = joiners.pop();
-                SearchPredicate newPredicate = joiner.apply(
+                SearchMatcher newPredicate = joiner.apply(
                         predicates.pop(),
                         predicates.pop()
                 );
@@ -101,7 +107,7 @@ public class FindCommandArgumentParser {
                 System.out.println("expected: " + expected + " actual: " + actual);
             }
         }
-        Stack<SearchPredicate> predicates;
+        Stack<SearchMatcher> predicates;
         Stack<Joiner> joiners;
         NextInput nextInput;
 
@@ -111,7 +117,7 @@ public class FindCommandArgumentParser {
             nextInput = NextInput.PREDICATE;
         }
 
-        void append(SearchPredicate predicate) throws UnexpectedTokenException {
+        void append(SearchMatcher predicate) throws UnexpectedTokenException {
             throwIfUnexpectedNextInput(NextInput.PREDICATE);
             predicates.push(predicate);
             nextInput = NextInput.JOINER;
@@ -143,11 +149,11 @@ public class FindCommandArgumentParser {
 
         RecursiveParseHelper() {}
 
-        RecursiveParseHelper(SearchPredicate predicate) throws ParserDualStack.UnexpectedTokenException {
+        RecursiveParseHelper(SearchMatcher predicate) throws ParserDualStack.UnexpectedTokenException {
             dualStack.append(predicate);
         }
 
-        SearchPredicate parse() throws ParserDualStack.UnexpectedTokenException {
+        SearchMatcher parse() throws ParserDualStack.UnexpectedTokenException {
             while (hasChar()) {
                 if (getChar() == '(') {
                     incrementCharIndex();
@@ -162,7 +168,7 @@ public class FindCommandArgumentParser {
             return collapse();
         }
 
-        SearchPredicate collapse() throws ParserDualStack.UnexpectedTokenException {
+        SearchMatcher collapse() throws ParserDualStack.UnexpectedTokenException {
             return dualStack.collapse();
         }
 
@@ -197,7 +203,7 @@ public class FindCommandArgumentParser {
             }
             int startIndexOfPredicate = index;
             incrementIndexWhileNotReservedChar();
-            dualStack.append(new SingleTextSearchPredicate(search.substring(startIndexOfPredicate, index)));
+            dualStack.append(new SingleTextSearchMatcher(search.substring(startIndexOfPredicate, index)));
         }
 
     }
@@ -209,22 +215,22 @@ public class FindCommandArgumentParser {
     private String search;
     private int index;
 
-    public SearchTest parse(String query) throws ParseException {
+    public SearchPredicate parse(String query) throws ParseException {
         if (query == null) {
-            return new SearchTest(null);
+            return new SearchPredicate(null);
         }
         try {
             search = query.trim();
-            SearchPredicate predicate = parse();
-            return new SearchTest(predicate);
+            SearchMatcher predicate = parse();
+            return new SearchPredicate(predicate);
         } catch (ParserDualStack.UnexpectedTokenException e) {
-            throw new ParseException("Unexpected find command argument: " + e.getMessage());
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
     }
 
-    private SearchPredicate parse() throws ParserDualStack.UnexpectedTokenException {
+    private SearchMatcher parse() throws ParserDualStack.UnexpectedTokenException {
         index = 0;
-        SearchPredicate predicate = new RecursiveParseHelper().parse();
+        SearchMatcher predicate = new RecursiveParseHelper().parse();
         while (hasChar()) {
             incrementIndexWhileSpace();
             predicate = new RecursiveParseHelper(predicate).parse();
@@ -247,7 +253,7 @@ public class FindCommandArgumentParser {
             switch(c) {
             case '(':
             case ')':
-                break;
+                return;
             default:
                 incrementCharIndex();
             }
