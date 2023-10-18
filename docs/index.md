@@ -4,6 +4,7 @@ title: ConText
 ---
 
 [![CI Status](https://github.com/AY2324S1-CS2103-W14-3/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2324S1-CS2103-W14-3/tp/actions)
+[![codecov](https://codecov.io/gh/AY2324S1-CS2103-W14-3/tp/graph/badge.svg?token=KT7MNHKALX)](https://codecov.io/gh/AY2324S1-CS2103-W14-3/tp)
 
 ![Ui](images/Ui.png)
 
