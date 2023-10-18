@@ -61,7 +61,11 @@ public class LoadCommand extends Command {
         if (!f.isFile()) {
             throw new CommandException(String.format(MESSAGE_FILE_NOT_FOUND, fileName));
         }
-        requireNonNull(model);
+        try {
+            requireNonNull(model);
+        } catch (NullPointerException e) {
+            throw new CommandException(String.format(MESSAGE_FILE_CANNOT_LOAD, fileName));
+        }
         AddressBookStorage tempAddressBookStorage = new JsonAddressBookStorage(filePath);
         Optional<ReadOnlyAddressBook> addressBookOptional;
         ReadOnlyAddressBook newData;
@@ -74,6 +78,17 @@ public class LoadCommand extends Command {
         model.setAddressBookFilePath(filePath);
         model.setAddressBook(newData);
         return new CommandResult(String.format(MESSAGE_LOAD_SUCCESS, fileName), false, false, true);
+    }
+
+    /**
+     * Returns the string representation of the file path and file name.
+     * @return String representation of the file path and file name.
+     */
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("load", fileName)
+                .toString();
     }
 
     /**
@@ -96,15 +111,12 @@ public class LoadCommand extends Command {
         return filePath.equals(e.filePath) && fileName.equals(e.fileName);
     }
 
+    /**
+     * Returns the hashcode of the file path and file name.
+     * @return
+     */
     @Override
     public int hashCode() {
         return Objects.hash(fileName, filePath);
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .add("load", fileName)
-                .toString();
     }
 }

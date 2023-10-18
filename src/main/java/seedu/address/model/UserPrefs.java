@@ -37,6 +37,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
         setAddressBookFilePath(newUserPrefs.getAddressBookFilePath());
+        setConfigured(newUserPrefs.getConfigured());
     }
 
     public GuiSettings getGuiSettings() {
@@ -56,8 +57,8 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         return isConfigured;
     }
 
-    public void setConfigured() {
-        this.isConfigured = true;
+    public void setConfigured(boolean isConfigured) {
+        this.isConfigured = isConfigured;
     }
 
     public void setAddressBookFilePath(Path addressBookFilePath) {

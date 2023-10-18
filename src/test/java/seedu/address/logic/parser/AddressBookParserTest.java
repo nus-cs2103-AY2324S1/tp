@@ -116,7 +116,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_config() throws Exception {
         ConfigCommand command = (ConfigCommand) parser.parseCommand(ConfigCommand.COMMAND_WORD + " "
-                + PREFIX_TUTORIAL_COUNT + "5" + PREFIX_ASSIGNMENT_COUNT + 2, false);
+                + PREFIX_TUTORIAL_COUNT + "5" + " " + PREFIX_ASSIGNMENT_COUNT + 2, false);
         assertEquals(new ConfigCommand(5, 2), command);
     }
 

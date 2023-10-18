@@ -81,7 +81,7 @@ public class ClassDetails {
     }
 
     @Override
-return predicate.hashCode();return predicate.hashCode();    public int hashCode() {
+    public int hashCode() {
         return classDetails.hashCode();
     }
 }

@@ -26,6 +26,7 @@ public class Messages {
             + "Please enter config to configure Class Manager.";
     public static final String MESSAGE_CLASS_MANAGER_ALREADY_CONFIGURED = "Class Manager has been configured "
             + "previously. You are not allowed to configure it again.";
+    public static final String MESSAGE_USER_PREFS_CANNOT_LOAD = "Unable to load user preferences from preferences.json";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

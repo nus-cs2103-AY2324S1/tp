@@ -125,7 +125,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setConfigured() {
+        public void setConfigured(boolean isConfigured) {
             throw new AssertionError("This method should not be called.");
         }
 

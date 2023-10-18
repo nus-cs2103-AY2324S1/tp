@@ -4,6 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_COUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_COUNT;
 
+import java.util.Objects;
+
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.Model;
 import seedu.address.model.student.ClassDetails;
 
@@ -53,15 +56,48 @@ public class ConfigCommand extends Command {
             requireNonNull(model);
             ClassDetails.setTutorialCount(tutorialCount);
             ClassDetails.setAssignmentCount(assignmentCount);
-            model.setConfigured();
+            model.setConfigured(true);
             return new CommandResult(String.format(MESSAGE_CONFIG_SUCCESS, tutorialCount, assignmentCount));
         } catch (Exception e) {
             return new CommandResult(MESSAGE_CONFIG_FAILED);
         }
     }
 
+    /**
+     * Checks if two {@code ConfigCommand}s are equal.
+     * @return True if two {@code ConfigCommand}s are equal.
+     */
     @Override
     public String toString() {
+        return new ToStringBuilder(this)
+                .add("tutorialCount", tutorialCount)
+                .add("assignmentCount", assignmentCount)
+                .toString();
+    }
 
+    /**
+     * Checks if two {@code ConfigCommand}s are equal.
+     * @param other Object to compare with.
+     * @return True if two {@code ConfigCommand}s are equal.
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ConfigCommand)) {
+            return false;
+        }
+
+        ConfigCommand e = (ConfigCommand) other;
+        return tutorialCount == e.tutorialCount
+                && assignmentCount == e.assignmentCount;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(tutorialCount, assignmentCount);
     }
 }

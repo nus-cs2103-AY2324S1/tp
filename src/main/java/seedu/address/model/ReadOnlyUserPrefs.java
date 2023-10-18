@@ -14,6 +14,4 @@ public interface ReadOnlyUserPrefs {
     Path getAddressBookFilePath();
 
     boolean getConfigured();
-
-    void setConfigured();
 }

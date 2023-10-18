@@ -11,8 +11,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses input arguments and creates a new ConfigCommand object
  */
-public class ConfigCommandParser {
-    private static final String MESSAGE_INVALID_COUNT_VALUE = "Invalid count values! The count value of %1$s cannot "
+public class ConfigCommandParser implements Parser<ConfigCommand> {
+    public static final String MESSAGE_INVALID_COUNT_VALUE = "Invalid count values! The count value of %1$s cannot "
             + "be less than 0.";
 
     /**

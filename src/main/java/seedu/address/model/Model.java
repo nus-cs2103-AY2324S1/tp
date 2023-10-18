@@ -53,7 +53,7 @@ public interface Model {
     /**
      * User has configured the module information.
      */
-    void setConfigured();
+    void setConfigured(boolean isConfigured);
 
     /**
      * Replaces address book data with the data in {@code addressBook}.

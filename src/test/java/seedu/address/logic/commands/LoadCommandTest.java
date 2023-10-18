@@ -30,7 +30,6 @@ public class LoadCommandTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonLoadCommandTest");
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-
     @Test
     public void load_validFile_success() throws CommandException {
         String validFileName = "validAddressBook";
@@ -53,7 +52,7 @@ public class LoadCommandTest {
 
     @Test
     public void load_corruptFile_throwsCommandException() {
-        String corruptFileName = "corruptAddressBook";
+        String corruptFileName = "NotJsonFormatAddressBook";
         Path corruptFilePath = TEST_DATA_FOLDER.resolve(corruptFileName + ".json");
         LoadCommand loadCommand = new LoadCommand(corruptFileName, corruptFilePath);
         assertCommandFailure(loadCommand, model, String.format(MESSAGE_FILE_CANNOT_LOAD, corruptFileName));
@@ -99,5 +98,33 @@ public class LoadCommandTest {
 
         // different student -> returns false
         assertFalse(loadFirstCommand.equals(loadSecondCommand));
+    }
+
+    @Test
+    public void test_hashCode() {
+        String firstFileName = "validAddressBook";
+        Path firstFilePath = TEST_DATA_FOLDER.resolve(firstFileName + ".json");
+
+        String secondFileName = "addressBook";
+        Path secondFilePath = TEST_DATA_FOLDER.resolve(secondFileName + ".json");
+
+        LoadCommand loadFirstCommand = new LoadCommand(firstFileName, firstFilePath);
+        LoadCommand loadSecondCommand = new LoadCommand(secondFileName, secondFilePath);
+
+        // same object -> returns true
+        assertTrue(loadFirstCommand.hashCode() == loadFirstCommand.hashCode());
+
+        // same values -> returns true
+        LoadCommand loadFirstCommandCopy = new LoadCommand(firstFileName, firstFilePath);
+        assertTrue(loadFirstCommand.hashCode() == loadFirstCommandCopy.hashCode());
+
+        // different types -> returns false
+        assertFalse(loadFirstCommand.hashCode() == 1);
+
+        // null -> returns false
+        assertFalse(loadFirstCommand.hashCode() == 0);
+
+        // different student -> returns false
+        assertFalse(loadFirstCommand.hashCode() == loadSecondCommand.hashCode());
     }
 }
