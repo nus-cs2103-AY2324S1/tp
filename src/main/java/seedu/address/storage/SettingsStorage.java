@@ -17,7 +17,7 @@ public interface SettingsStorage {
     /**
      * Returns the {@link Path} of the settings storage file.
      */
-    Path getSettingsPath();
+    public Path getSettingsPath();
 
     /**
      * Returns {@link Optional} {@link Settings} by reading the settings
@@ -27,7 +27,7 @@ public interface SettingsStorage {
      *
      * @throws DataLoadingException If loading data from the file fails.
      */
-    Optional<Settings> readSettings() throws DataLoadingException;
+    public Optional<Settings> readSettings() throws DataLoadingException;
 
     /**
      * Saves the specified {@link ReadOnlySettings} to the settings storage
@@ -35,5 +35,5 @@ public interface SettingsStorage {
      *
      * @throws IOException If writing data to the file fails.
      */
-    void saveSettings(ReadOnlySettings settings) throws IOException;
+    public void saveSettings(ReadOnlySettings settings) throws IOException;
 }
