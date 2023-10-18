@@ -3,6 +3,7 @@ package seedu.address.model.event;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.MonthDay;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Optional;
 
@@ -22,16 +23,17 @@ public class EventFactoryTest {
     void createEvents_hasBirthdays_success() {
         ModelManager modelManager = new ModelManager();
         modelManager.addPerson(new Person(
-                new Name("Some Name"),
-                new Phone("1235"),
-                new Email("email@email.com"),
-                new Address("Some address"),
-                Optional.of(new Birthday(MonthDay.of(1, 20))),
-                Optional.empty(),
-                Optional.empty(),
-                Optional.empty(),
-                new HashSet<>(),
-                Optional.empty()
+            new Name("Some Name"),
+            new Phone("1235"),
+            new Email("email@email.com"),
+            new Address("Some address"),
+            Optional.of(new Birthday(MonthDay.of(1, 20))),
+            Optional.empty(),
+            Optional.empty(),
+            Optional.empty(),
+            new HashSet<>(),
+            Optional.empty(),
+            new ArrayList<>()
         ));
 
         assertTrue(EventFactory.createEvents(modelManager).size() > 0);

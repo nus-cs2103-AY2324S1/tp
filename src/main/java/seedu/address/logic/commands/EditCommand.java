@@ -30,6 +30,7 @@ import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Linkedin;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Telegram;
@@ -121,9 +122,10 @@ public class EditCommand extends Command {
         Optional<Telegram> updatedTelegram = editPersonDescriptor.getTelegram();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Optional<Integer> id = personToEdit.getId();
+        List<Note> notes = personToEdit.getNotes();
 
         Person updatedPerson = new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedBirthday,
-                updatedLinkedin, updatedSecondaryEmail, updatedTelegram, updatedTags, id);
+                updatedLinkedin, updatedSecondaryEmail, updatedTelegram, updatedTags, id, notes);
 
         if ((!personToEdit.hasValidBirthday() && !updatedBirthday.equals(Optional.empty()))
                 || (!personToEdit.hasValidLinkedin() && !updatedLinkedin.equals(Optional.empty()))

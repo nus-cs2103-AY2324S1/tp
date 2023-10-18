@@ -2,8 +2,10 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
@@ -32,6 +34,8 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
     private Optional<Integer> id;
 
+    private List<Note> notes;
+
     /**
      * Every field must be present and not null.
      */
@@ -47,6 +51,7 @@ public class Person {
         this.telegram = Optional.empty();
         this.tags.addAll(tags);
         this.id = Optional.empty();
+        this.notes = new ArrayList<>();
     }
 
     /**
@@ -54,7 +59,7 @@ public class Person {
      */
     public Person(Name name, Phone phone, Email email, Address address, Optional<Birthday> birthday,
                   Optional<Linkedin> linkedin, Optional<Email> secondaryEmail,
-                  Optional<Telegram> telegram, Set<Tag> tags, Optional<Integer> id) {
+                  Optional<Telegram> telegram, Set<Tag> tags, Optional<Integer> id, List<Note> notes) {
         requireAllNonNull(name, phone, email, address, birthday, tags);
         this.name = name;
         this.phone = phone;
@@ -66,6 +71,7 @@ public class Person {
         this.telegram = telegram;
         this.tags.addAll(tags);
         this.id = id;
+        this.notes = notes;
     }
 
     public Name getName() {
@@ -148,6 +154,22 @@ public class Person {
                 && otherPerson.getName().equals(getName());
     }
 
+    /**
+     * Adds a note to the person.
+     * @param note
+     */
+    public void addNote(Note note) {
+        notes.add(note);
+    }
+
+    /**
+     * Removes a note from the person.
+     * @param idx
+     * @throws Exception
+     */
+    public void removeNote(int idx) {
+        notes.remove(idx);
+    }
 
     /**
      * Returns true if both persons have the same identity and data fields.
@@ -174,6 +196,10 @@ public class Person {
                 && birthday.equals(otherPerson.birthday)
                 && secondaryEmail.equals(otherPerson.secondaryEmail)
                 && tags.equals(otherPerson.tags);
+    }
+
+    public List<Note> getNotes() {
+        return notes;
     }
 
     /**

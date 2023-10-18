@@ -3,6 +3,7 @@ package seedu.address.ui;
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
@@ -10,7 +11,7 @@ import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * A UI component that displays information of a {@code Person}.
  */
 public class PersonCard extends UiPart<Region> {
 
@@ -50,6 +51,9 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private Label uniqueId;
+    @FXML
+    private Button notesButton;
+
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -78,5 +82,21 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         uniqueId.setText(person.getId().map(x -> Integer.toString(x)).orElse("NONE"));
 
+        int numberOfNotes = person.getNotes().size();
+        notesButton.setText("Notes (" + numberOfNotes + ")");
+
+    }
+
+    /**
+     * Opens a new window to display the notes of the person.
+     */
+    @FXML
+    public void handleNotesButtonClick() {
+        try {
+            NotesWindow notesWindow = new NotesWindow(person);
+            notesWindow.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
