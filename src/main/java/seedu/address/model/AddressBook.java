@@ -33,7 +33,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         groups = new GroupList();
     }
 
-    public AddressBook() {}
+    public AddressBook() {
+
+    }
 
     /**
      * Creates an AddressBook using the Persons in the {@code toBeCopied}
@@ -54,11 +56,19 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the group list with {@code groups}.
+     * {@code groups} must not contain duplicate groups.
+     */
+    public void setGroups(List<Group> groups) {
+        this.groups.setGroups(groups);
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
-
+        setGroups(newData.getGroupList());
         setPersons(newData.getPersonList());
     }
 
@@ -130,6 +140,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void addGroup(Group g) {
         groups.add(g);
     }
+
+//    public void addGroup(Group g, Person toAdd) throws CommandException {
+//        groups.add(g, toAdd);
+//    }
 
     /**
      * Removes {@code key} from this {@code AddressBook}.

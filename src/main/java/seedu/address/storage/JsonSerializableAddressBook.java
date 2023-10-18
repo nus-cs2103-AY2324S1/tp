@@ -9,8 +9,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
 /**
@@ -53,6 +55,21 @@ class JsonSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
             addressBook.addPerson(person);
+
+            person.getGroups().toStream().forEach(group -> {
+                try {
+                    if (addressBook.hasGroup(group)) {
+                        group.addPerson(person);
+                    } else {
+                        addressBook.addGroup(group);
+                        group.addPerson(person);
+                    }
+                } catch (CommandException e) {
+                    System.out.println("error");
+                    throw new RuntimeException(e);
+                }
+            });
+
         }
         return addressBook;
     }
