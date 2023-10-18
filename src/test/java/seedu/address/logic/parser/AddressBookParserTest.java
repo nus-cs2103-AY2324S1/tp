@@ -9,7 +9,6 @@ import static seedu.address.testutil.TypicalIcs.FIRST_NRIC;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddPatientCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;

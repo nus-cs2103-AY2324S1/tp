@@ -1,0 +1,101 @@
+{
+  "_comment": "AddressBook save file which contains the same Person values as in TypicalPatients#getTypicalAddressBook()",
+  "patients": [],
+  "doctors": [
+    {
+      "name": "Alice Pauline",
+      "phone": "94351253",
+      "email": "alice@example.com",
+      "address": "123, Jurong West Ave 6, #08-111",
+      "remark": "She wants to become a Surgeon.",
+      "gender": "F",
+      "ic": "S9631267K",
+      "tags": [
+        "friends"
+      ]
+    },
+    {
+      "name": "Boyd Anders",
+      "phone": "98765432",
+      "email": "boyda@example.com",
+      "address": "311, Clementi Ave 2, #02-25",
+      "remark": "His weakness is being a Perfectionist!",
+      "gender": "M",
+      "ic": "S9331268K",
+      "tags": [
+        "owesMoney",
+        "friends"
+      ]
+    },
+    {
+      "name": "Carlos Sainz",
+      "phone": "95352563",
+      "email": "smoothoperator@example.com",
+      "address": "wall street",
+      "remark": "She hated Medical School",
+      "gender": "M",
+      "ic": "S9831269K",
+      "tags": []
+    },
+    {
+      "name": "David Beckham",
+      "phone": "87652533",
+      "email": "cornelia@example.com",
+      "address": "10th street",
+      "remark": "She hated Medical School.",
+      "gender": "M",
+      "ic": "S7531260K",
+      "tags": []
+    },
+    {
+      "name": "Edith Meyer",
+      "phone": "9482224",
+      "email": "werner@example.com",
+      "address": "michegan ave",
+      "remark": "She hated Medical School.",
+      "gender": "F",
+      "ic": "S7231261K",
+      "tags": []
+    },
+    {
+      "name": "Felicia Kunz",
+      "phone": "9482427",
+      "email": "felbel@example.com",
+      "address": "little tokyo",
+      "remark": "She hated Medical School.",
+      "gender": "F",
+      "ic": "S9431262K",
+      "tags": []
+    },
+    {
+      "name": "Greg Best",
+      "phone": "9482442",
+      "email": "anna@example.com",
+      "address": "4th street",
+      "remark": "She hated Medical School.",
+      "gender": "M",
+      "ic": "S9531263K",
+      "tags": []
+    },
+    {
+      "name": "Barry Allen",
+      "phone": "8482424",
+      "email": "flash@example.com",
+      "address": "Central City",
+      "remark": "She hated Medical School.",
+      "gender": "M",
+      "ic": "S9831263J",
+      "tags": []
+    },
+    {
+      "name": "Bruce Wayne",
+      "phone": "8482131",
+      "email": "bats@example.com",
+      "address": "Gotham City",
+      "remark": "She hated Medical School.",
+      "gender": "F",
+      "ic": "S8931263P",
+      "tags": []
+    }
+  ]
+}
