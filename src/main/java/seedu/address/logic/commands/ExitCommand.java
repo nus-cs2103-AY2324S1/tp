@@ -6,7 +6,7 @@ import seedu.address.model.Model;
 
 
 /**
- * Terminates the program.
+ * Exits the app.
  */
 public class ExitCommand extends Command {
     public static final String COMMAND_WORD = "exit";

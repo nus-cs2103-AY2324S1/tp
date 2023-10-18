@@ -153,13 +153,20 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Closes the application.
+     * Exits the app.
      */
     @FXML
     private void handleExit() {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
+
+        /* NOTE
+         * We don't explicitly call Platform.exit() or System.exit(), as it
+         * makes testing the exit command hard. Instead, we close all windows,
+         * and rely on JavaFX to automatically begin the shutdown process and
+         * call Application#stop().
+        */
         helpWindow.hide();
         primaryStage.hide();
     }
