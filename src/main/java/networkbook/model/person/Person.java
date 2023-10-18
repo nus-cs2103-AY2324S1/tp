@@ -18,7 +18,7 @@ public class Person implements Identifiable<Person> {
 
     // Identity fields
     private final Name name;
-    private final Phone phone;
+    private final UniqueList<Phone> phones;
     private final UniqueList<Email> emails;
 
     // Data fields
@@ -34,7 +34,7 @@ public class Person implements Identifiable<Person> {
      * Other fields are nullable.
      */
     public Person(Name name,
-                  Phone phone,
+                  UniqueList<Phone> phones,
                   UniqueList<Email> emails,
                   UniqueList<Link> links,
                   GraduatingYear graduatingYear,
@@ -44,7 +44,7 @@ public class Person implements Identifiable<Person> {
                   Priority priority) {
         requireAllNonNull(name);
         this.name = name;
-        this.phone = phone;
+        this.phones = phones;
         this.emails = emails.copy();
         this.links = links.copy();
         this.graduatingYear = graduatingYear;
@@ -58,8 +58,8 @@ public class Person implements Identifiable<Person> {
         return name;
     }
 
-    public Optional<Phone> getPhone() {
-        return Optional.ofNullable(phone);
+    public UniqueList<Phone> getPhones() {
+        return phones.copy();
     }
 
     public UniqueList<Email> getEmails() {
@@ -124,7 +124,7 @@ public class Person implements Identifiable<Person> {
 
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
-                && Objects.equals(phone, otherPerson.phone)
+                && Objects.equals(phones, otherPerson.phones)
                 && Objects.equals(emails, otherPerson.emails)
                 && Objects.equals(links, otherPerson.links)
                 && Objects.equals(graduatingYear, otherPerson.graduatingYear)
@@ -137,15 +137,15 @@ public class Person implements Identifiable<Person> {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, emails, links, graduatingYear, course, specialisation, tags, priority);
+        return Objects.hash(name, phones, emails, links, graduatingYear, course, specialisation, tags, priority);
     }
 
     @Override
     public String toString() {
         ToStringBuilder tsb = new ToStringBuilder(this)
                 .add("name", name);
-        if (phone != null) {
-            tsb.add("phone", phone);
+        if (!Objects.equals(phones, new UniqueList<Phone>())) {
+            tsb.add("phones", phones);
         }
         if (!Objects.equals(emails, new UniqueList<Email>())) {
             tsb.add("emails", emails);

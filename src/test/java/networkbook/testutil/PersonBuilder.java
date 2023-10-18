@@ -31,7 +31,7 @@ public class PersonBuilder {
     public static final String DEFAULT_PRIORITY = null;
 
     private Name name;
-    private Phone phone;
+    private UniqueList<Phone> phones;
     private UniqueList<Email> emails;
     private UniqueList<Link> links;
     private GraduatingYear graduatingYear;
@@ -45,7 +45,7 @@ public class PersonBuilder {
      */
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
-        phone = new Phone(DEFAULT_PHONE);
+        phones = new UniqueList<Phone>().setItems(List.of(new Phone(DEFAULT_PHONE)));
         emails = new UniqueList<Email>().setItems(List.of(new Email(DEFAULT_EMAIL)));
         links = new UniqueList<Link>().setItems(List.of(new Link(DEFAULT_LINK)));
         graduatingYear = new GraduatingYear(DEFAULT_GRADUATING_YEAR);
@@ -60,7 +60,7 @@ public class PersonBuilder {
      */
     public PersonBuilder(Person personToCopy) {
         name = personToCopy.getName();
-        phone = personToCopy.getPhone().orElse(null);
+        phones = personToCopy.getPhones();
         emails = personToCopy.getEmails();
         links = personToCopy.getLinks();
         graduatingYear = personToCopy.getGraduatingYear().orElse(null);
@@ -89,7 +89,7 @@ public class PersonBuilder {
     /**
      * Adds a link to the person we are building.
      */
-    public PersonBuilder withLink(String link) {
+    public PersonBuilder addLink(String link) {
         this.links.add(new Link(link));
         return this;
     }
@@ -127,13 +127,27 @@ public class PersonBuilder {
     }
 
     /**
+     * Adds a phone to the person we are building.
+     */
+    public PersonBuilder addPhone(String phone) {
+        this.phones.add(new Phone(phone));
+        return this;
+    }
+    /**
      * Sets the {@code Phone} of the {@code Person} that we are building.
      */
-    public PersonBuilder withPhone(String phone) {
-        this.phone = new Phone(phone);
+    public PersonBuilder withPhones(List<String> phones) {
+        this.phones = new UniqueList<Phone>().setItems(phones.stream().map(Phone::new).collect(Collectors.toList()));
         return this;
     }
 
+    /**
+     * Adds an email to the person we are building.
+     */
+    public PersonBuilder addEmail(String email) {
+        this.emails.add(new Email(email));
+        return this;
+    }
     /**
      * Sets the emails of the person that we are building.
      */
@@ -154,7 +168,7 @@ public class PersonBuilder {
      * Sets all fields of the {@code Person} that we are building to null.
      */
     public PersonBuilder withoutOptionalFields() {
-        this.phone = null;
+        this.phones = new UniqueList<>();
         this.emails = new UniqueList<>();
         this.links = new UniqueList<>();
         this.graduatingYear = null;
@@ -166,7 +180,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, emails, links, graduatingYear, course, specialisation, tags, priority);
+        return new Person(name, phones, emails, links, graduatingYear, course, specialisation, tags, priority);
     }
 
 }

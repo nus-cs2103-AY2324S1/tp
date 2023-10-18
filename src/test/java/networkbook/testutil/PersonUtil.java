@@ -7,6 +7,7 @@ import networkbook.logic.parser.CliSyntax;
 import networkbook.model.person.Email;
 import networkbook.model.person.Link;
 import networkbook.model.person.Person;
+import networkbook.model.person.Phone;
 import networkbook.model.util.UniqueList;
 
 /**
@@ -27,8 +28,9 @@ public class PersonUtil {
     public static String getPersonDetails(Person person) {
         StringBuilder sb = new StringBuilder();
         sb.append(CliSyntax.PREFIX_NAME + " " + person.getName().fullName + " ");
-        person.getPhone().ifPresent(phone -> sb.append(CliSyntax.PREFIX_PHONE).append(" ")
-                .append(phone.value).append(" "));
+        person.getPhones().stream().forEach(
+                e -> sb.append(CliSyntax.PREFIX_PHONE + " " + e.toString() + " ")
+        );
         person.getEmails().stream().forEach(
                 e -> sb.append(CliSyntax.PREFIX_EMAIL + " " + e.toString() + " ")
         );
@@ -54,8 +56,15 @@ public class PersonUtil {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(CliSyntax.PREFIX_NAME).append(" ")
                                                     .append(name.fullName).append(" "));
-        descriptor.getPhone().ifPresent(phone -> sb.append(CliSyntax.PREFIX_PHONE).append(" ")
-                                                    .append(phone.value).append(" "));
+        if (descriptor.getPhones().isPresent()) {
+            UniqueList<Phone> phones = descriptor.getPhones().get();
+            if (phones.isEmpty()) {
+                sb.append(CliSyntax.PREFIX_PHONE).append(" ");
+            } else {
+                phones.forEach(e -> sb.append(CliSyntax.PREFIX_PHONE).append(" ")
+                        .append(e.toString()).append(" "));
+            }
+        }
         if (descriptor.getEmails().isPresent()) {
             UniqueList<Email> emails = descriptor.getEmails().get();
             if (emails.isEmpty()) {

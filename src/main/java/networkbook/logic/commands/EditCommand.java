@@ -98,7 +98,7 @@ public class EditCommand extends Command {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone().orElse(null));
+        UniqueList<Phone> updatedPhones = editPersonDescriptor.getPhones().orElse(personToEdit.getPhones());
         UniqueList<Email> updatedEmails = editPersonDescriptor.getEmails().orElse(personToEdit.getEmails());
         UniqueList<Link> updatedLink = editPersonDescriptor.getLinks().orElse(personToEdit.getLinks());
         GraduatingYear updatedGraduatingYear = editPersonDescriptor.getGraduatingYear()
@@ -111,7 +111,7 @@ public class EditCommand extends Command {
         Priority updatedPriority = editPersonDescriptor.getPriority().orElse(personToEdit.getPriority()
                                                                      .orElse(null));
 
-        return new Person(updatedName, updatedPhone, updatedEmails, updatedLink, updatedGraduatingYear,
+        return new Person(updatedName, updatedPhones, updatedEmails, updatedLink, updatedGraduatingYear,
                 updatedCourse, updatedSpecialisation, updatedTags, updatedPriority);
     }
 
@@ -144,8 +144,8 @@ public class EditCommand extends Command {
      * corresponding field value of the person.
      */
     public static class EditPersonDescriptor {
-        private Name name;
-        private Phone phone;
+        private Name name = null;
+        private Optional<UniqueList<Phone>> phones = Optional.empty();
         private Optional<UniqueList<Email>> emails = Optional.empty();
         private Optional<UniqueList<Link>> links = Optional.empty();
         private GraduatingYear graduatingYear;
@@ -162,7 +162,7 @@ public class EditCommand extends Command {
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
-            setPhone(toCopy.phone);
+            setPhones(toCopy.phones.map(UniqueList::copy).orElse(null));
             setEmails(toCopy.emails.map(UniqueList::copy).orElse(null));
             setLinks(toCopy.links.map(UniqueList::copy).orElse(null));
             setGraduatingYear(toCopy.graduatingYear);
@@ -176,8 +176,9 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, graduatingYear, course,
+            return CollectionUtil.isAnyNonNull(name, graduatingYear, course,
                         specialisation, tags, priority)
+                    || (phones.isPresent() && !phones.get().isEmpty())
                     || (emails.isPresent() && !emails.get().isEmpty())
                     || (links.isPresent() && !links.get().isEmpty());
         }
@@ -190,12 +191,27 @@ public class EditCommand extends Command {
             return Optional.ofNullable(name);
         }
 
-        public void setPhone(Phone phone) {
-            this.phone = phone;
+        public void setPhones(UniqueList<Phone> phones) {
+            this.phones = Optional.ofNullable(phones);
         }
 
-        public Optional<Phone> getPhone() {
-            return Optional.ofNullable(phone);
+        /**
+         * Adds {@code phone} to the list of {@code Phone}s.
+         * @param phone
+         */
+        public void addPhone(Phone phone) {
+            this.phones = this.phones.map(phones -> {
+                phones.add(phone);
+                return phones;
+            }).or(() -> {
+                UniqueList<Phone> uniqueList = new UniqueList<>();
+                uniqueList.add(phone);
+                return Optional.of(uniqueList);
+            });
+        }
+
+        public Optional<UniqueList<Phone>> getPhones() {
+            return phones;
         }
 
         public void setEmails(UniqueList<Email> emails) {
@@ -314,7 +330,7 @@ public class EditCommand extends Command {
 
             EditPersonDescriptor otherEditPersonDescriptor = (EditPersonDescriptor) other;
             return Objects.equals(name, otherEditPersonDescriptor.name)
-                    && Objects.equals(phone, otherEditPersonDescriptor.phone)
+                    && Objects.equals(phones, otherEditPersonDescriptor.phones)
                     && Objects.equals(emails, otherEditPersonDescriptor.emails)
                     && Objects.equals(links, otherEditPersonDescriptor.links)
                     && Objects.equals(graduatingYear, otherEditPersonDescriptor.graduatingYear)
@@ -328,7 +344,7 @@ public class EditCommand extends Command {
         public String toString() {
             ToStringBuilder tsb = new ToStringBuilder(this)
                     .add("name", name)
-                    .add("phone", phone)
+                    .add("phones", phones.orElse(null))
                     .add("emails", emails.orElse(null))
                     .add("links", links.orElse(null))
                     .add("graduating year", graduatingYear)

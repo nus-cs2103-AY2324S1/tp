@@ -25,6 +25,8 @@ public class ParserUtil {
 
     // TODO: avoid returning null for optional fields
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_PHONE_DUPLICATE = "Your list of phones contains duplicates.\n"
+            + "Please ensure that you do not input the same phone more than once.";
     public static final String MESSAGE_EMAIL_DUPLICATE = "Your list of emails contains duplicates.\n"
             + "Please ensure that you do not input the same email more than once.";
     public static final String MESSAGE_LINK_DUPLICATE = "Your list of links contains duplicates.\n"
@@ -59,20 +61,69 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String phone} into a {@code Phone}.
+     * Parses a {@code String phone} into an {@code Phone}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code phone} is invalid.
      */
     public static Phone parsePhone(String phone) throws ParseException {
-        if (phone == null) {
-            return null;
-        }
+        requireNonNull(phone);
         String trimmedPhone = phone.trim();
         if (!Phone.isValidPhone(trimmedPhone)) {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
         }
         return new Phone(trimmedPhone);
+    }
+
+    /**
+     * Parses a {@code Collection<String>} of phones into {@code UniqueList<Phone>}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if at least one phone in {@code Collection<String>} is invalid.
+     */
+    public static UniqueList<Phone> parsePhones(Collection<String> phones) throws ParseException {
+        requireNonNull(phones);
+        if (!verifyNoDuplicates(phones)) {
+            throw new ParseException(MESSAGE_PHONE_DUPLICATE);
+        }
+        UniqueList<Phone> result = new UniqueList<>();
+        for (String phone: phones) {
+            result.add(parsePhone(phone));
+        }
+        return result;
+    }
+
+    /**
+     * Parses a {@code String email} into an {@code Email}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code email} is invalid.
+     */
+    public static Email parseEmail(String email) throws ParseException {
+        requireNonNull(email);
+        String trimmedEmail = email.trim();
+        if (!Email.isValidEmail(trimmedEmail)) {
+            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+        }
+        return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code Collection<String>} of emails into {@code UniqueList<Email>}.
+     * Leading and trailing whitespaces will be trimmed.
+     * @throws ParseException if at least one email in {@code Collection<String>} is invalid.
+     */
+    public static UniqueList<Email> parseEmails(Collection<String> emails) throws ParseException {
+        requireNonNull(emails);
+        if (!verifyNoDuplicates(emails)) {
+            throw new ParseException(MESSAGE_EMAIL_DUPLICATE);
+        }
+
+        UniqueList<Email> result = new UniqueList<>();
+        for (String email: emails) {
+            result.add(parseEmail(email));
+        }
+        return result;
     }
 
     /**
@@ -155,39 +206,6 @@ public class ParserUtil {
             throw new ParseException(Specialisation.MESSAGE_CONSTRAINTS);
         }
         return new Specialisation(specialisation);
-    }
-
-    /**
-     * Parses a {@code String email} into an {@code Email}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code email} is invalid.
-     */
-    public static Email parseEmail(String email) throws ParseException {
-        requireNonNull(email);
-        String trimmedEmail = email.trim();
-        if (!Email.isValidEmail(trimmedEmail)) {
-            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
-        }
-        return new Email(trimmedEmail);
-    }
-
-    /**
-     * Parses a {@code Collection<String>} of emails into {@code UniqueList<Email>}.
-     * Leading and trailing whitespaces will be trimmed.
-     * @throws ParseException if at least one email in {@code Collection<String>} is invalid.
-     */
-    public static UniqueList<Email> parseEmails(Collection<String> emails) throws ParseException {
-        requireNonNull(emails);
-        if (!verifyNoDuplicates(emails)) {
-            throw new ParseException(MESSAGE_EMAIL_DUPLICATE);
-        }
-
-        UniqueList<Email> result = new UniqueList<>();
-        for (String email: emails) {
-            result.add(parseEmail(email));
-        }
-        return result;
     }
 
     private static boolean verifyNoDuplicates(Collection<String> strings) {
