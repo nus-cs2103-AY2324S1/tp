@@ -18,7 +18,6 @@ import transact.model.ReadOnlyTransactionBook;
  * A class to access TransactionBook data stored as a json file on the hard disk.
  */
 public class JsonAdaptedTransactionBookStorage implements TransactionBookStorage {
-
     private static final Logger logger = LogsCenter.getLogger(JsonAdaptedTransactionBookStorage.class);
 
     private Path filePath;

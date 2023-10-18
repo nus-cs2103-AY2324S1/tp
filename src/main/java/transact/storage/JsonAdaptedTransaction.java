@@ -21,18 +21,23 @@ class JsonAdaptedTransaction {
 
     private final Integer transactionId;
     private final JsonAdaptedPerson person;
+    private final TransactionType type;
     private final String description;
     private final BigDecimal amount;
+    private final String date;
 
     @JsonCreator
     public JsonAdaptedTransaction(@JsonProperty("transactionId") Integer transactionId,
+            @JsonProperty("TransactionType") TransactionType type,
             @JsonProperty("person") JsonAdaptedPerson person,
             @JsonProperty("description") String description,
-            @JsonProperty("amount") BigDecimal amount) {
+            @JsonProperty("amount") BigDecimal amount, @JsonProperty("date") String date) {
         this.transactionId = transactionId;
+        this.type = type;
         this.person = person;
         this.description = description;
         this.amount = amount;
+        this.date = date;
     }
 
     public JsonAdaptedTransaction(Transaction source) {
@@ -43,23 +48,24 @@ class JsonAdaptedTransaction {
             person = null;
         }
         description = source.getDescription().getValue();
+        type = source.getTransactionType();
         amount = source.getAmount().getValue();
+        date = source.getDate().toString();
     }
 
     public Transaction toModelType() throws IllegalValueException {
         final TransactionId modelTransactionId = new TransactionId(transactionId);
-
+        final Amount modelAmount = new Amount(amount);
+        final Date modelDate = new Date(date);
+        final Description modelDescription = new Description(description);
+        final TransactionType modelType = type;
         if (person != null) {
             final Person modelPerson = person.toModelType();
-            final Description modelDescription = new Description(description);
-            final Amount modelAmount = new Amount(amount);
-            return new Transaction(modelTransactionId, TransactionType.REVENUE, modelDescription, modelAmount,
-                    new Date(), modelPerson);
+            return new Transaction(modelTransactionId, modelType, modelDescription, modelAmount,
+                    modelDate, modelPerson);
         } else {
-            final Description modelDescription = new Description(description);
-            final Amount modelAmount = new Amount(amount);
-            return new Transaction(modelTransactionId, TransactionType.EXPENSE, modelDescription, modelAmount,
-                    new Date(), null);
+            return new Transaction(modelTransactionId, modelType, modelDescription, modelAmount,
+                    modelDate);
         }
     }
 }

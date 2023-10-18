@@ -49,7 +49,7 @@ public class AddTransactionCommandParser implements Parser<AddTransactionCommand
         Person staff = ParserUtil.parsePerson(argMultimap.getValue(PREFIX_STAFF).get());
         Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
 
-        Transaction transaction = new Transaction(transactionType, description, amount, new Date(), null);
+        Transaction transaction = new Transaction(transactionType, description, amount, date);
 
         return new AddTransactionCommand(transaction);
     }

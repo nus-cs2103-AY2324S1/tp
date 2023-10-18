@@ -18,6 +18,44 @@ import transact.model.tag.Tag;
  */
 public class Person implements Entry {
 
+    public static final Person NullPerson = new Person() {
+
+        @Override
+        public Name getName() {
+            throw new AssertionError("Method should not be called");
+        }
+
+        @Override
+        public Address getAddress() {
+            throw new AssertionError("Method should not be called");
+        }
+
+        @Override
+        public Phone getPhone() {
+            throw new AssertionError("Method should not be called");
+        }
+
+        @Override
+        public Email getEmail() {
+            throw new AssertionError("Method should not be called");
+        }
+
+        @Override
+        public Set<Tag> getTags() {
+            throw new AssertionError("Method should not be called");
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            return other == this;
+        }
+
+        @Override
+        public String toString() {
+            return "";
+        }
+    };
+
     // Identity fields
     private final PersonId personId;
     private final Name name;
@@ -27,6 +65,16 @@ public class Person implements Entry {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+
+    /**
+     * For empty or null person.
+     */
+    private Person() {
+        name = null;
+        phone = null;
+        email = null;
+        address = null;
+    }
 
     /**
      * Every field must be present and not null.
@@ -141,5 +189,4 @@ public class Person implements Entry {
                 .add("tags", tags)
                 .toString();
     }
-
 }
