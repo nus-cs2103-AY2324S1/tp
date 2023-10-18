@@ -1,13 +1,24 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_CHERYL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_DEREK;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_CHERYL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_DEREK;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_FEMALE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_MALE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_CHERYL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DEREK;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_CHERYL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_DEREK;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_CHERYL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_DEREK;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.person.Doctor;
-
-import static seedu.address.logic.commands.CommandTestUtil.*;
 
 /**
  * A utility class containing a list of {@code Patient} objects to be used in tests.
