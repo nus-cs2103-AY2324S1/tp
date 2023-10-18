@@ -25,7 +25,7 @@ public class SortCommandParser implements Parser<SortCommand> {
 
         if (!arePrefixesPresent(argMultimap, PREFIX_DESCRIPTOR)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_FAILURE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_DESCRIPTOR);

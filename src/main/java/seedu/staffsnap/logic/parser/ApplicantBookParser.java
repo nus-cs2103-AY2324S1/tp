@@ -16,6 +16,7 @@ import seedu.staffsnap.logic.commands.DeleteCommand;
 import seedu.staffsnap.logic.commands.EditCommand;
 import seedu.staffsnap.logic.commands.ExitCommand;
 import seedu.staffsnap.logic.commands.FindCommand;
+import seedu.staffsnap.logic.commands.FilterCommand;
 import seedu.staffsnap.logic.commands.HelpCommand;
 import seedu.staffsnap.logic.commands.ListCommand;
 import seedu.staffsnap.logic.commands.SortCommand;
@@ -60,7 +61,7 @@ public class ApplicantBookParser {
         IsConfirmed = IsConfirmedNext;
         IsConfirmedNext = false;
 
-        switch (commandWord) {
+        switch (commandWord.toLowerCase()) {
 
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
@@ -96,6 +97,10 @@ public class ApplicantBookParser {
 
         case SortCommand.COMMAND_WORD:
             return new SortCommandParser().parse(arguments);
+
+        case FilterCommand.COMMAND_WORD:
+            return new FilterCommandParser().parse(arguments);
+
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

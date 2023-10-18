@@ -20,6 +20,7 @@ public class SortCommand extends Command {
             + "Parameters: "
             + PREFIX_DESCRIPTOR + "DESCRIPTOR ";
     public static final String MESSAGE_SUCCESS = "Sorted all Applicants";
+    public static final String MESSAGE_FAILURE = "Please add a descriptor with d/ [name/phone].";
 
     private final Descriptor descriptor;
 
