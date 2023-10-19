@@ -1,11 +1,11 @@
 package seedu.address.testutil;
 
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_UNUSED_DESCRIPTION;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_EARLIER;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_LATER;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_EARLIER;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_LATER;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_EARLIER;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_LATER;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_UNUSED_DESCRIPTION;
 
 import java.util.ArrayList;
 import java.util.Arrays;

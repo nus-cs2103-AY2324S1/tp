@@ -1,9 +1,7 @@
 package seedu.address.testutil;
 
-import seedu.address.model.AddressBook;
 import seedu.address.model.calendar.Calendar;
 import seedu.address.model.event.Event;
-import seedu.address.model.person.Person;
 
 /**
  * A utility class to help with building Calendar objects.

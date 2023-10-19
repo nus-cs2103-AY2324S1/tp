@@ -97,6 +97,9 @@ public class AllDaysEventListManager {
         return this.dayToEventListMap.isEmpty();
     }
 
+    /**
+     * Returns the event list as an unmodifiable {@code ObservableList}.
+     */
     public ObservableList<Event> asUnmodifiableObservableList() {
         List<Event> list = dayToEventListMap.values().stream()
                 .flatMap(singleDayEventList -> singleDayEventList.getDayEventList().stream())

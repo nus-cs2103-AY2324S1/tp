@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventDescription;
@@ -43,7 +44,9 @@ class JsonAdaptedEvent {
      */
     public Event toModelType() throws IllegalValueException {
         if (description == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, EventDescription.class.getSimpleName()));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                            EventDescription.class.getSimpleName()));
         }
         if (!EventDescription.isValid(description)) {
             throw new IllegalValueException(EventDescription.MESSAGE_CONSTRAINTS);
@@ -51,9 +54,12 @@ class JsonAdaptedEvent {
         final EventDescription modelDescription = new EventDescription(description);
 
         // Event Periods are expected to be saved in this format yyyy-MM-dd HH:mm - yyyy-MM-dd HH:mm
-        String start, end;
+        String start;
+        String end;
         if (eventPeriod == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, EventPeriod.class.getSimpleName()));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                            EventPeriod.class.getSimpleName()));
         }
         String[] parts = eventPeriod.split(" - ");
         if (parts.length == 2) {
