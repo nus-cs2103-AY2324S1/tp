@@ -47,10 +47,11 @@ public class AddLCommand extends Command {
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
         personToEdit.setLinkedIn(username);
+        model.setLastViewedPersonIndex(index);
         model.setPerson(personToEdit, personToEdit);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(generateSuccessMessage(personToEdit));
+        return new CommandResult(generateSuccessMessage(personToEdit), true);
     }
 
     /**
