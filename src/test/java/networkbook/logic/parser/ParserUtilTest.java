@@ -6,8 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -25,7 +23,7 @@ public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_LINK = "facebookcom";
-    private static final String INVALID_GRADUATING_YEAR = "123a";
+    private static final String INVALID_GRADUATION = "2024";
     private static final String INVALID_COURSE = "";
     private static final String INVALID_SPECIALISATION = "";
     private static final String INVALID_EMAIL = "example.com";
@@ -37,13 +35,14 @@ public class ParserUtilTest {
     private static final String VALID_PHONE_2 = "98765432";
     private static final String VALID_LINK = "www.facebook.com/alice";
     private static final String VALID_LINK_2 = "https://www.google.com/?q=haha";
-    private static final String VALID_GRADUATING_YEAR = "2000";
+    private static final String VALID_GRADUATION = "AY9900-S2";
     private static final String VALID_COURSE = "Computer Science";
     private static final String VALID_SPECIALISATION = "Game Development";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_EMAIL_2 = "nkn@what.com";
     private static final String VALID_TAG_1 = "friend";
-    private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_TAG_2 = "cs_god";
+    private static final String VALID_TAG_3 = "hyphen-tag and space";
     private static final String VALID_PRIORITY = "meDIuM";
 
     private static final String WHITESPACE = " \t\r\n";
@@ -195,13 +194,13 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseGraduatingYear_null_returnsNull() throws Exception {
-        assertEquals(null, ParserUtil.parseGraduatingYear(null));
+    public void parseGraduation_null_returnsNull() throws Exception {
+        assertEquals(null, ParserUtil.parseGraduation(null));
     }
 
     @Test
-    public void parseGraduatingYear_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseGraduatingYear(INVALID_GRADUATING_YEAR));
+    public void parseGraduation_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseGraduation(INVALID_GRADUATION));
     }
 
     @Test
@@ -315,10 +314,19 @@ public class ParserUtilTest {
 
     @Test
     public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
-        Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
-        Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
+        UniqueList<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2, VALID_TAG_3));
+        UniqueList<Tag> expectedTagSet = new UniqueList<>();
+        expectedTagSet.add(new Tag(VALID_TAG_1));
+        expectedTagSet.add(new Tag(VALID_TAG_2));
+        expectedTagSet.add(new Tag(VALID_TAG_3));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseTags_collectionWithDuplicateTags_parseException() {
+        assertThrows(ParseException.class, () ->
+                ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2, VALID_TAG_1)));
     }
 
     @Test

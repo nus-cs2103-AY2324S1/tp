@@ -2,11 +2,8 @@ package networkbook.model.person;
 
 import static networkbook.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 
 import networkbook.commons.util.ToStringBuilder;
 import networkbook.model.tag.Tag;
@@ -26,10 +23,10 @@ public class Person implements Identifiable<Person> {
 
     // Data fields
     private final UniqueList<Link> links;
-    private final GraduatingYear graduatingYear;
+    private final Graduation graduation;
     private final Course course;
     private final Specialisation specialisation;
-    private final Set<Tag> tags = new HashSet<>();
+    private final UniqueList<Tag> tags;
     private final Priority priority;
 
     /**
@@ -40,20 +37,20 @@ public class Person implements Identifiable<Person> {
                   UniqueList<Phone> phones,
                   UniqueList<Email> emails,
                   UniqueList<Link> links,
-                  GraduatingYear graduatingYear,
+                  Graduation graduation,
                   Course course,
                   Specialisation specialisation,
-                  Set<Tag> tags,
+                  UniqueList<Tag> tags,
                   Priority priority) {
         requireAllNonNull(name);
         this.name = name;
         this.phones = phones;
         this.emails = emails.copy();
         this.links = links.copy();
-        this.graduatingYear = graduatingYear;
+        this.graduation = graduation;
         this.course = course;
         this.specialisation = specialisation;
-        this.tags.addAll(tags);
+        this.tags = tags.copy();
         this.priority = priority;
     }
 
@@ -71,8 +68,8 @@ public class Person implements Identifiable<Person> {
     public UniqueList<Link> getLinks() {
         return links.copy();
     }
-    public Optional<GraduatingYear> getGraduatingYear() {
-        return Optional.ofNullable(graduatingYear);
+    public Optional<Graduation> getGraduation() {
+        return Optional.ofNullable(graduation);
     }
     public Optional<Course> getCourse() {
         return Optional.ofNullable(course);
@@ -80,13 +77,8 @@ public class Person implements Identifiable<Person> {
     public Optional<Specialisation> getSpecialisation() {
         return Optional.ofNullable(specialisation);
     }
-
-    /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public UniqueList<Tag> getTags() {
+        return this.tags.copy();
     }
 
     public Optional<Priority> getPriority() {
@@ -135,17 +127,17 @@ public class Person implements Identifiable<Person> {
                 && Objects.equals(phones, otherPerson.phones)
                 && Objects.equals(emails, otherPerson.emails)
                 && Objects.equals(links, otherPerson.links)
-                && Objects.equals(graduatingYear, otherPerson.graduatingYear)
+                && Objects.equals(graduation, otherPerson.graduation)
                 && Objects.equals(course, otherPerson.course)
                 && Objects.equals(specialisation, otherPerson.specialisation)
-                && tags.equals(otherPerson.tags)
+                && Objects.equals(tags, otherPerson.tags)
                 && Objects.equals(priority, otherPerson.priority);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phones, emails, links, graduatingYear, course, specialisation, tags, priority);
+        return Objects.hash(name, phones, emails, links, graduation, course, specialisation, tags, priority);
     }
 
     @Override
@@ -161,8 +153,8 @@ public class Person implements Identifiable<Person> {
         if (!Objects.equals(links, new UniqueList<Link>())) {
             tsb.add("links", links);
         }
-        if (graduatingYear != null) {
-            tsb.add("graduating year", graduatingYear);
+        if (graduation != null) {
+            tsb.add("graduation", graduation);
         }
         if (course != null) {
             tsb.add("course", course);
@@ -170,7 +162,7 @@ public class Person implements Identifiable<Person> {
         if (specialisation != null) {
             tsb.add("specialisation", specialisation);
         }
-        if (!tags.equals(Collections.emptySet())) {
+        if (!Objects.equals(tags, new UniqueList<Tag>())) {
             tsb.add("tags", tags);
         }
         if (priority != null) {

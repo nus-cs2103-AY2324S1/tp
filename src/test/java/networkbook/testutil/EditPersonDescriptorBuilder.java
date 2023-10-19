@@ -1,13 +1,10 @@
 package networkbook.testutil;
 
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import networkbook.logic.commands.EditCommand;
 import networkbook.model.person.Course;
 import networkbook.model.person.Email;
-import networkbook.model.person.GraduatingYear;
+import networkbook.model.person.Graduation;
 import networkbook.model.person.Link;
 import networkbook.model.person.Name;
 import networkbook.model.person.Person;
@@ -15,6 +12,7 @@ import networkbook.model.person.Phone;
 import networkbook.model.person.Priority;
 import networkbook.model.person.Specialisation;
 import networkbook.model.tag.Tag;
+import networkbook.model.util.UniqueList;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.
@@ -40,7 +38,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setPhones(person.getPhones());
         descriptor.setEmails(person.getEmails());
         descriptor.setLinks(person.getLinks());
-        person.getGraduatingYear().ifPresent((GraduatingYear g) -> descriptor.setGraduatingYear(g));
+        person.getGraduation().ifPresent((Graduation g) -> descriptor.setGraduation(g));
         person.getCourse().ifPresent((Course c) -> descriptor.setCourse(c));
         person.getSpecialisation().ifPresent((Specialisation s) -> descriptor.setSpecialisation(s));
         descriptor.setTags(person.getTags());
@@ -80,10 +78,10 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code GraduatingYear} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Graduation} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withGraduatingYear(String graduatingYear) {
-        descriptor.setGraduatingYear(new GraduatingYear(graduatingYear));
+    public EditPersonDescriptorBuilder withGraduation(String graduation) {
+        descriptor.setGraduation(new Graduation(graduation));
         return this;
     }
 
@@ -108,8 +106,10 @@ public class EditPersonDescriptorBuilder {
      * that we are building.
      */
     public EditPersonDescriptorBuilder withTags(String... tags) {
-        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
-        descriptor.setTags(tagSet);
+        descriptor.setTags(new UniqueList<>());
+        for (String tag : tags) {
+            descriptor.addTag(new Tag(tag));
+        }
         return this;
     }
 

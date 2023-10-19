@@ -3,15 +3,13 @@ package networkbook.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
 
 import networkbook.commons.core.index.Index;
 import networkbook.commons.util.StringUtil;
 import networkbook.logic.parser.exceptions.ParseException;
 import networkbook.model.person.Course;
 import networkbook.model.person.Email;
-import networkbook.model.person.GraduatingYear;
+import networkbook.model.person.Graduation;
 import networkbook.model.person.Link;
 import networkbook.model.person.Name;
 import networkbook.model.person.Phone;
@@ -33,6 +31,9 @@ public class ParserUtil {
             + "Please ensure that you do not input the same email more than once.";
     public static final String MESSAGE_LINK_DUPLICATE = "Your list of links contains duplicates.\n"
             + "Please ensure that you do not input the same link more than once.";
+
+    public static final String MESSAGE_TAG_DUPLICATE = "Your list of tags contains duplicates. \n"
+            + "Please ensure that you do not input the same tag more than once.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -160,20 +161,20 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String graduatingYear} into an {@code GraduatingYear}.
+     * Parses a {@code String graduation} into a {@code Graduation}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code graduatingYear} is invalid.
+     * @throws ParseException if the given {@code graduation} is invalid.
      */
-    public static GraduatingYear parseGraduatingYear(String graduatingYear) throws ParseException {
-        if (graduatingYear == null) {
+    public static Graduation parseGraduation(String graduation) throws ParseException {
+        if (graduation == null) {
             return null;
         }
-        String trimmedGraduatingYear = graduatingYear.trim();
-        if (!GraduatingYear.isValidGraduatingYear(trimmedGraduatingYear)) {
-            throw new ParseException(GraduatingYear.MESSAGE_CONSTRAINTS);
+        String normalizedGraduation = graduation.trim().toUpperCase();
+        if (!Graduation.isValidGraduation(normalizedGraduation)) {
+            throw new ParseException(Graduation.MESSAGE_CONSTRAINTS);
         }
-        return new GraduatingYear(trimmedGraduatingYear);
+        return new Graduation(normalizedGraduation);
     }
 
     /**
@@ -238,11 +239,14 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses {@code Collection<String> tags} into a {@code UniqueList<Tag>}.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
+    public static UniqueList<Tag> parseTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
+        if (!verifyNoDuplicates(tags)) {
+            throw new ParseException(MESSAGE_TAG_DUPLICATE);
+        }
+        final UniqueList<Tag> tagSet = new UniqueList<>();
         for (String tagName : tags) {
             tagSet.add(parseTag(tagName));
         }

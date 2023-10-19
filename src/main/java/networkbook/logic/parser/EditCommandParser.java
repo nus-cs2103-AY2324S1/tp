@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Optional;
-import java.util.Set;
 
 import networkbook.commons.core.index.Index;
 import networkbook.logic.Messages;
@@ -37,7 +36,7 @@ public class EditCommandParser implements Parser<EditCommand> {
                         CliSyntax.PREFIX_PHONE,
                         CliSyntax.PREFIX_EMAIL,
                         CliSyntax.PREFIX_LINK,
-                        CliSyntax.PREFIX_GRADUATING_YEAR,
+                        CliSyntax.PREFIX_GRADUATION,
                         CliSyntax.PREFIX_COURSE,
                         CliSyntax.PREFIX_SPECIALISATION,
                         CliSyntax.PREFIX_TAG
@@ -62,7 +61,7 @@ public class EditCommandParser implements Parser<EditCommand> {
                 CliSyntax.PREFIX_PHONE,
                 CliSyntax.PREFIX_EMAIL,
                 CliSyntax.PREFIX_LINK,
-                CliSyntax.PREFIX_GRADUATING_YEAR,
+                CliSyntax.PREFIX_GRADUATION,
                 CliSyntax.PREFIX_COURSE,
                 CliSyntax.PREFIX_SPECIALISATION
         );
@@ -94,9 +93,9 @@ public class EditCommandParser implements Parser<EditCommand> {
                 .ifPresent(editPersonDescriptor::setEmails);
         parseLinksForEdit(argMultimap.getAllValues(CliSyntax.PREFIX_LINK))
                 .ifPresent(editPersonDescriptor::setLinks);
-        if (argMultimap.getValue(CliSyntax.PREFIX_GRADUATING_YEAR).isPresent()) {
-            editPersonDescriptor.setGraduatingYear(
-                    ParserUtil.parseGraduatingYear(argMultimap.getValue(CliSyntax.PREFIX_GRADUATING_YEAR).get()));
+        if (argMultimap.getValue(CliSyntax.PREFIX_GRADUATION).isPresent()) {
+            editPersonDescriptor.setGraduation(
+                    ParserUtil.parseGraduation(argMultimap.getValue(CliSyntax.PREFIX_GRADUATION).get()));
         }
         if (argMultimap.getValue(CliSyntax.PREFIX_COURSE).isPresent()) {
             editPersonDescriptor.setCourse(
@@ -153,11 +152,11 @@ public class EditCommandParser implements Parser<EditCommand> {
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>} if {@code tags} is non-empty.
+     * Parses {@code Collection<String> tags} into a {@code UniqueList<Tag>} if {@code tags} is non-empty.
      * If {@code tags} contain only one element which is an empty string, it will be parsed into a
-     * {@code Set<Tag>} containing zero tags.
+     * {@code UniqueList<Tag>} containing zero tags.
      */
-    private static Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
+    private static Optional<UniqueList<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
 
         if (tags.isEmpty()) {
