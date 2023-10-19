@@ -11,7 +11,7 @@ public class Specialisation {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Specialisations can take any value, but should not be blank.\n"
-            + "Additionally, the specialisation cannot start with spaces or have more than 1 space between words.";
+            + "Additionally, the specialisation cannot have more than 1 space between words.";
 
     private final String specialisation;
 
@@ -21,6 +21,7 @@ public class Specialisation {
      * @param specialisation A valid specialisation.
      */
     public Specialisation(String specialisation) {
+        specialisation = specialisation.trim();
         requireNonNull(specialisation);
         checkArgument(isValidSpecialisation(specialisation), MESSAGE_CONSTRAINTS);
         this.specialisation = specialisation;
@@ -30,9 +31,12 @@ public class Specialisation {
      * Returns true if a given string is a valid course.
      */
     public static boolean isValidSpecialisation(String test) {
+        // This if statement doesn't matter in actual execution but will be kept for testing/validation purposes.
+        // i.e A Specialisation with text "  Computer Science " should not be allowed to exist.
         if (test.startsWith(" ")) {
             return false;
         }
+        // Ensure there is not more than 1 trailing space between words
         for (String word : test.split(" ")) {
             if ((word.equals(""))) {
                 return false;

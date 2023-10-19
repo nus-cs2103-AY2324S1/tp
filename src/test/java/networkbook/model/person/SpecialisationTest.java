@@ -1,9 +1,12 @@
 package networkbook.model.person;
 
 import static networkbook.testutil.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class SpecialisationTest {
@@ -17,6 +20,18 @@ public class SpecialisationTest {
     public void constructor_invalidSpecialisation_throwsIllegalArgumentException() {
         String invalidSpecialisation = "";
         assertThrows(IllegalArgumentException.class, () -> new Specialisation(invalidSpecialisation));
+    }
+
+    /**
+     * The constructor should automatically remove leading and trailing spaces when constructing a specialisation
+     */
+    @Test
+    public void constructor_removalOfSpaces_success() {
+        try {
+            Specialisation spec = new Specialisation("  Computer Science   ");
+        } catch (IllegalArgumentException e) {
+            Assertions.fail();
+        }
     }
 
     @Test
@@ -52,19 +67,22 @@ public class SpecialisationTest {
         Specialisation specialisation = new Specialisation("Valid specialisation");
 
         // same values -> returns true
-        assertTrue(specialisation.equals(new Specialisation("Valid specialisation")));
+        assertEquals(specialisation, new Specialisation("Valid specialisation"));
 
         // same object -> returns true
-        assertTrue(specialisation.equals(specialisation));
+        assertEquals(specialisation, specialisation);
 
         // null -> returns false
         assertFalse(specialisation.equals(null));
 
         // different types -> returns false
-        assertFalse(specialisation.equals(5.0f));
+        assertNotEquals(5.0f, specialisation);
 
         // different values -> returns false
-        assertFalse(specialisation.equals(new Specialisation("Other valid specialisation")));
+        assertNotEquals(specialisation, new Specialisation("Other valid specialisation"));
+
+        // same specialisation but with leading/trailing spaces -> returns true
+        assertEquals(specialisation, new Specialisation("  Valid specialisation    "));
     }
 
     @Test
@@ -95,5 +113,9 @@ public class SpecialisationTest {
         assertFalse(specialisation.getSpecialisation().equals("Some other text"));
         assertFalse(specialisation.getSpecialisation()
                 .equals(new Specialisation("Other Valid Specialisation").getSpecialisation()));
+
+        // leading and trailing spaces removed
+        assertEquals(new Specialisation("   Valid specialisation    ").getSpecialisation(),
+                "Valid specialisation");
     }
 }
