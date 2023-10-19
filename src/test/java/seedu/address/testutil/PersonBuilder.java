@@ -113,21 +113,33 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Subject} of the {@code Person} that we are building.
+     */
     public PersonBuilder withSubject(String subject) {
         this.subject = new Subject(subject);
         return this;
     }
 
+    /**
+     * Sets the {@code Day} of the {@code Person} that we are building.
+     */
     public PersonBuilder withDay(String day) {
         this.day = new Day(day);
         return this;
     }
 
+    /**
+     * Sets the {@code Begin} of the {@code Person} that we are building.
+     */
     public PersonBuilder withBegin(String begin) {
         this.begin = new Begin(begin);
         return this;
     }
 
+    /**
+     * Sets the {@code End} of the {@code Person} that we are building.
+     */
     public PersonBuilder withEnd(String end) {
         this.end = new End(end);
         return this;
