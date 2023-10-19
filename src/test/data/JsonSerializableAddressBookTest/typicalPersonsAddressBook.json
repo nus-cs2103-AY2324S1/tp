@@ -7,6 +7,7 @@
     "address" : "123, Jurong West Ave 6, #08-111",
     "nextOfKinName": "Alice Dad",
     "nextOfKinPhone": "94351111",
+    "financialPlans" : ["Sample Financial Plan 1", "Sample Financial Plan 2"],
     "tags" : [ "friends" ],
     "appointment" : "No Appointment made!"
   }, {
@@ -16,6 +17,7 @@
     "address" : "311, Clementi Ave 2, #02-25",
     "nextOfKinName": "Benson Dad",
     "nextOfKinPhone": "98761111",
+    "financialPlans" : ["Sample Financial Plan 1", "Sample Financial Plan 2"],
     "tags" : [ "owesMoney", "friends" ],
     "appointment" : "Review insurance, 01-05-2023 18:00"
   }, {
@@ -25,6 +27,7 @@
     "address" : "wall street",
     "nextOfKinName": "Carl Dad",
     "nextOfKinPhone": "95351111",
+    "financialPlans" : [ ],
     "tags" : [ ],
     "appointment" : "No Appointment made!"
   }, {
@@ -43,6 +46,7 @@
     "address" : "michegan ave",
     "nextOfKinName": "Elle Dad",
     "nextOfKinPhone": "94821113",
+    "financialPlans" : ["Sample Financial Plan 2"],
     "tags" : [ ],
     "appointment" : "No Appointment made!"
   }, {
@@ -52,6 +56,7 @@
     "address" : "little tokyo",
     "nextOfKinName": "Fiona Dad",
     "nextOfKinPhone": "94821111",
+    "financialPlans" : [ ],
     "tags" : [ ],
     "appointment" : "No Appointment made!"
   }, {
@@ -61,6 +66,7 @@
     "address" : "4th street",
     "nextOfKinName": "George Dad",
     "nextOfKinPhone": "94821112",
+    "financialPlans" : ["Sample Financial Plan 1", "Sample Financial Plan 2"],
     "tags" : [ ],
     "appointment" : "No Appointment made!"
   } ]

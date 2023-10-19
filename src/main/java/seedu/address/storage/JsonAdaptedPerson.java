@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.financialplan.FinancialPlan;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -33,6 +34,8 @@ class JsonAdaptedPerson {
     private final String address;
     private final String nextOfKinName;
     private final String nextOfKinPhone;
+
+    private final List<JsonAdaptedFinancialPlan> financialPlans = new ArrayList<>();
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final JsonAdaptedAppointment appointment;
 
@@ -44,14 +47,19 @@ class JsonAdaptedPerson {
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
                              @JsonProperty("nextOfKinName") String nextOfKinName,
                              @JsonProperty("nextOfKinPhone") String nextOfKinPhone,
+                             @JsonProperty("financialPlans") List<JsonAdaptedFinancialPlan> financialPlans,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags,
                              @JsonProperty("appointment") JsonAdaptedAppointment appointment) {
+      
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.nextOfKinName = nextOfKinName;
         this.nextOfKinPhone = nextOfKinPhone;
+        if (financialPlans != null) {
+            this.financialPlans.addAll(financialPlans);
+        }
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -68,6 +76,9 @@ class JsonAdaptedPerson {
         address = source.getAddress().value;
         nextOfKinName = source.getNextOfKinName().fullName;
         nextOfKinPhone = source.getNextOfKinPhone().value;
+        financialPlans.addAll(source.getFinancialPlans().stream()
+                .map(JsonAdaptedFinancialPlan::new)
+                .collect(Collectors.toList()));
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -80,6 +91,10 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
+        final List<FinancialPlan> personFinancialPlans = new ArrayList<>();
+        for (JsonAdaptedFinancialPlan plan : financialPlans) {
+            personFinancialPlans.add(plan.toModelType());
+        }
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
@@ -136,6 +151,8 @@ class JsonAdaptedPerson {
         final NextOfKinPhone modelNextOfKinPhone = new NextOfKinPhone(nextOfKinPhone);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
+      
+        final Set<FinancialPlan> modelFinancialPlans = new HashSet<>(personFinancialPlans);
 
         if (appointment == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -145,7 +162,8 @@ class JsonAdaptedPerson {
         final Appointment modelAppointment = appointment.toModelType();
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelNextOfKinName, modelNextOfKinPhone,
-                modelTags, modelAppointment);
+                modelFinancialPlans, modelTags, modelAppointment);
+
     }
 
 }

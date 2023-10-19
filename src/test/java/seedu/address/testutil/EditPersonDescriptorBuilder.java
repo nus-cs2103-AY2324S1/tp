@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.model.financialplan.FinancialPlan;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -40,6 +41,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setAddress(person.getAddress());
         descriptor.setNextOfKinName(person.getNextOfKinName());
         descriptor.setNextOfKinPhone(person.getNextOfKinPhone());
+        descriptor.setFinancialPlans(person.getFinancialPlans());
         descriptor.setTags(person.getTags());
     }
 
@@ -88,6 +90,17 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withNextOfKinPhone(String nokPhone) {
         descriptor.setNextOfKinPhone(new NextOfKinPhone(nokPhone));
+        return this;
+    }
+
+    /**
+     * Parses the {@code financialPlans} into a {@code Set<FinancialPlan>} and set it to
+     * the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withFinancialPlans(String... financialPlans) {
+        Set<FinancialPlan> financialPlanSet = Stream.of(financialPlans)
+                .map(FinancialPlan::new).collect(Collectors.toSet());
+        descriptor.setFinancialPlans(financialPlanSet);
         return this;
     }
 

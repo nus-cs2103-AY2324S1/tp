@@ -5,6 +5,7 @@ import java.util.Set;
 
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.NullAppointment;
+import seedu.address.model.financialplan.FinancialPlan;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -32,6 +33,7 @@ public class PersonBuilder {
     private Address address;
     private NextOfKinName nextOfKinName;
     private NextOfKinPhone nextOfKinPhone;
+    private Set<FinancialPlan> financialPlans;
     private Set<Tag> tags;
     private Appointment appointment;
 
@@ -45,6 +47,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         nextOfKinName = new NextOfKinName(DEFAULT_NEXT_OF_KIN_NAME);
         nextOfKinPhone = new NextOfKinPhone(DEFAULT_NEXT_OF_KIN_PHONE);
+        financialPlans = new HashSet<>();
         tags = new HashSet<>();
         appointment = new NullAppointment();
     }
@@ -59,6 +62,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         nextOfKinName = personToCopy.getNextOfKinName();
         nextOfKinPhone = personToCopy.getNextOfKinPhone();
+        financialPlans = new HashSet<>(personToCopy.getFinancialPlans());
         tags = new HashSet<>(personToCopy.getTags());
         appointment = personToCopy.getAppointment();
     }
@@ -76,6 +80,14 @@ public class PersonBuilder {
      */
     public PersonBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
+    /**
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     */
+    public PersonBuilder withFinancialPlans(String ... financialPlans) {
+        this.financialPlans = SampleDataUtil.getFinancialPlanSet(financialPlans);
         return this;
     }
 
@@ -134,7 +146,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, nextOfKinName, nextOfKinPhone, tags, appointment);
+        return new Person(name, phone, email, address, nextOfKinName, nextOfKinPhone, financialPlans, tags, appointment);
     }
 
 }

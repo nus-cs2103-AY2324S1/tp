@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -18,6 +19,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.financialplan.FinancialPlan;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.PersonBuilder;
@@ -52,6 +54,21 @@ public class AddressBookTest {
         AddressBookStub newData = new AddressBookStub(newPersons);
 
         assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
+    }
+
+    @Test
+    public void gather_noPersonFound() {
+        addressBook.addPerson(ALICE);
+        String prompt = "Sample Financial Plan 3";
+        assertEquals(new String(), addressBook.gatherEmails(prompt));
+    }
+
+    @Test
+    public void gather_personFound() {
+        addressBook.addPerson(ELLE);
+        FinancialPlan elleFinancialPlan = ELLE.getFinancialPlans().iterator().next();
+        String prompt = elleFinancialPlan.toString().replaceAll("[\\[\\]\\(\\)]", "");
+        assertEquals(ELLE.getEmail().toString(), addressBook.gatherEmails(prompt));
     }
 
     @Test

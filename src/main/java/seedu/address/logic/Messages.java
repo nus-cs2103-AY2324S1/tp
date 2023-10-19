@@ -49,8 +49,11 @@ public class Messages {
                 .append(person.getNextOfKinPhone())
                 .append("; Appointment: ")
                 .append(person.getAppointment())
-                .append("; Tags: ");
+                .append("; Financial Plans: ");
+        person.getFinancialPlans().forEach(builder::append);
+        builder.append("; Tags: ");
         person.getTags().forEach(builder::append);
+      
         return builder.toString();
     }
 

@@ -98,6 +98,22 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Gathers the persons emails with {@code prompt} from this {@code persons}.
+     */
+    public String gatherEmails(String prompt) {
+        StringBuilder emails = new StringBuilder();
+
+        for (Person person : internalList) {
+            String email = person.gatherEmailsContainsFinancialPlan(prompt);
+            if (!email.isEmpty()) {
+                emails.append(email).append(" ");
+            }
+        }
+
+        return emails.toString().trim();
+    };
+
+    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Person> asUnmodifiableObservableList() {
