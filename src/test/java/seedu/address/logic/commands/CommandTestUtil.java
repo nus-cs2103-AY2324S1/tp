@@ -41,13 +41,13 @@ public class CommandTestUtil {
     public static final String VALID_NEXT_OF_KIN_NAME_BOB = "Bob Dad";
     public static final String VALID_NEXT_OF_KIN_PHONE_AMY = "33333333";
     public static final String VALID_NEXT_OF_KIN_PHONE_BOB = "44444444";
-
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
-
     public static final String VALID_FINANCIAL_PLAN_1 = "financial plan 1";
     public static final String VALID_FINANCIAL_PLAN_2 = "financial plan 2";
-
+    public static final String VALID_APPOINTMENT_NAME = "Review Insurance";
+    public static final String VALID_APPOINTMENT_DATE = "01-01-2023 20:00";
+    public static final String VALID_APPOINTMENT = VALID_APPOINTMENT_NAME + ", " + VALID_APPOINTMENT_DATE;
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
@@ -69,7 +69,6 @@ public class CommandTestUtil {
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String FINANCIAL_PLAN_DESC_1 = " " + PREFIX_FINANCIAL_PLAN + VALID_FINANCIAL_PLAN_1;
     public static final String FINANCIAL_PLAN_DESC_2 = " " + PREFIX_FINANCIAL_PLAN + VALID_FINANCIAL_PLAN_2;
-
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
@@ -81,7 +80,8 @@ public class CommandTestUtil {
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_FINANCIAL_PLAN_DESC = " " + PREFIX_FINANCIAL_PLAN
             + "financial_plan"; // '_' not allowed in financial plan names
-
+    public static final String INVALID_APPOINTMENT_TIME_FORMAT = "01-01-2023 12pm";
+    public static final String INVALID_APPOINTMENT_DATE_FORMAT = "1 Jan 2023 18:00";
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
