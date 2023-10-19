@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -74,6 +75,22 @@ public class ModelManager implements Model {
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         userPrefs.setAddressBookFilePath(addressBookFilePath);
+    }
+
+    /**
+     * Returns true if the user has configured the module information.
+     */
+    @Override
+    public boolean getConfigured() {
+        return userPrefs.getConfigured();
+    }
+
+    /**
+     * User has configured the module information.
+     */
+    @Override
+    public void setConfigured(boolean isConfigured) {
+        userPrefs.setConfigured(isConfigured);
     }
 
     //=========== AddressBook ================================================================================
@@ -151,4 +168,8 @@ public class ModelManager implements Model {
                 && filteredStudents.equals(otherModelManager.filteredStudents);
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(addressBook, userPrefs, filteredStudents);
+    }
 }

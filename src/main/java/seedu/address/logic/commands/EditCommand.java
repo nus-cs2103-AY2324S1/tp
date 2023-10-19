@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -44,9 +43,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_STUDENT_NUMBER + "STUDENT NUMBER] "
-            + "[" + PREFIX_CLASS_NUMBER + "CLASS NUMBER] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_STUDENT_NUMBER + "STUDENT_NUMBER] "
+            + "[" + PREFIX_CLASS_NUMBER + "CLASS_NUMBER]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -145,7 +143,7 @@ public class EditCommand extends Command {
         private Email email;
         private StudentNumber studentNumber;
         private ClassDetails classDetails;
-        private Set<Tag> tags;
+        private Set<Tag> tags = new HashSet<>();
 
         public EditStudentDescriptor() {}
 
@@ -166,7 +164,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, studentNumber, classDetails, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, studentNumber, classDetails);
         }
 
         public void setName(Name name) {
@@ -200,6 +198,7 @@ public class EditCommand extends Command {
         public Optional<StudentNumber> getStudentNumber() {
             return Optional.ofNullable(studentNumber);
         }
+
         public void setClassDetails(ClassDetails classDetails) {
             this.classDetails = classDetails;
         }
@@ -207,8 +206,6 @@ public class EditCommand extends Command {
         public Optional<ClassDetails> getClassDetails() {
             return Optional.ofNullable(classDetails);
         }
-
-
 
         /**
          * Sets {@code tags} to this object's {@code tags}.
@@ -224,7 +221,7 @@ public class EditCommand extends Command {
          * Returns {@code Optional#empty()} if {@code tags} is null.
          */
         public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+            return (!tags.isEmpty()) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
         @Override

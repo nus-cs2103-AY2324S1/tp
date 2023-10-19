@@ -53,4 +53,24 @@ public class ClassDetailsTest {
         // different values -> returns false
         assertFalse(classDetails.equals(new ClassDetails("T12")));
     }
+
+    @Test
+    public void test_hashCode() {
+        ClassDetails classDetails = new ClassDetails("T11");
+
+        // same values -> returns true
+        assertTrue(classDetails.hashCode() == (new ClassDetails("T11")).hashCode());
+
+        // same object -> returns true
+        assertTrue(classDetails.hashCode() == classDetails.hashCode());
+
+        // null -> returns false
+        assertFalse(classDetails.hashCode() == 0);
+
+        // different types -> returns false
+        assertFalse(classDetails.hashCode() == (5.0f));
+
+        // different values -> returns false
+        assertFalse(classDetails.hashCode() == (new ClassDetails("T12")).hashCode());
+    }
 }

@@ -3,6 +3,7 @@ package seedu.address.model.student;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -44,7 +45,7 @@ public class StudentContainsKeywordsPredicate implements Predicate<Student> {
     public boolean test(Student student) {
         boolean isClassDetailsMatch = classDetails.map(Collection::stream)
                 .map(stream -> stream.anyMatch(classDetail -> StringUtil
-                        .containsWordIgnoreCase(student.getClassDetails().value, classDetail)))
+                        .containsWordIgnoreCase(student.getClassDetails().classDetails, classDetail)))
                 .orElse(true);
 
         boolean isEmailMatch = emails.map(Collection::stream)
@@ -99,6 +100,11 @@ public class StudentContainsKeywordsPredicate implements Predicate<Student> {
                 && otherPredicate.phones.equals(phones)
                 && otherPredicate.studentNumbers.equals(studentNumbers)
                 && otherPredicate.tags.equals(tags);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(classDetails, emails, names, phones, studentNumbers, tags);
     }
 
     @Override

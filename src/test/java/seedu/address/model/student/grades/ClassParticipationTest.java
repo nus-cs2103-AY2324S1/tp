@@ -56,8 +56,19 @@ public class ClassParticipationTest {
         classParticipation.mark();
         // presentAttendance should return Participated when true
         assertEquals("Participated", classParticipation.toString());
+    }
 
+    @Test
+    public void test_hashCode() {
+        ClassParticipation classParticipation = new ClassParticipation();
 
+        // same values -> returns true
+        assertTrue(classParticipation.hashCode() == (new ClassParticipation()).hashCode());
 
+        // same object -> returns true
+        assertTrue(classParticipation.hashCode() == classParticipation.hashCode());
+
+        // null -> returns false
+        assertFalse(classParticipation.hashCode() == 0);
     }
 }

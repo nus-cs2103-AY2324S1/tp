@@ -45,5 +45,24 @@ public class AssignmentTest {
         // assignment should print 100 / 100 after change
         assertEquals("100 / 100", assignment.toString());
     }
+
+    @Test
+    public void test_hashCode() {
+        Assignment assignment = new Assignment();
+        Assignment diffAssignment = new Assignment();
+        diffAssignment.setMarks(100);
+
+        // same values -> returns true
+        assertTrue(assignment.hashCode() == new Assignment().hashCode());
+
+        // same object -> returns true
+        assertTrue(assignment.hashCode() == assignment.hashCode());
+
+        // null -> returns false
+        assertFalse(assignment.hashCode() == 3);
+
+        // different values -> returns false
+        assertFalse(assignment.hashCode() == diffAssignment.hashCode());
+    }
 }
 

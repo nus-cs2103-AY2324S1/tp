@@ -3,29 +3,28 @@ package seedu.address.model.student;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.Objects;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.student.grades.AssignmentTracker;
 import seedu.address.model.student.grades.AttendanceTracker;
 import seedu.address.model.student.grades.ClassParticipationTracker;
 
 /**
- * Represents a Student's Class Number
- * in the address book.
+ * Represents a Student's Class Number in Class Manager.
  * Guarantees: immutable; is valid as declared in {@link #isValidClassDetails(String)}
  */
 public class ClassDetails {
 
-    public static final int TEMP_LENGTH = 10;
-
     public static final String MESSAGE_CONSTRAINTS = "Class number can take any values, and it should not be blank";
 
-    /*
-     * The class number should start with "T".
-     */
+    // The class number should start with "T".
     public static final String VALIDATION_REGEX = "T.*";
 
-    public final String value;
+    private static int tutorialCount;
+    private static int assignmentCount;
 
+    public final String classDetails;
     public final AttendanceTracker attendanceTracker;
     public final AssignmentTracker assignmentTracker;
     public final ClassParticipationTracker classParticipationTracker;
@@ -39,18 +38,18 @@ public class ClassDetails {
     public ClassDetails(String classDetails) {
         requireNonNull(classDetails);
         checkArgument(isValidClassDetails(classDetails), MESSAGE_CONSTRAINTS);
-        value = classDetails;
-        attendanceTracker = new AttendanceTracker(TEMP_LENGTH);
-        classParticipationTracker = new ClassParticipationTracker(TEMP_LENGTH);
-        assignmentTracker = new AssignmentTracker(TEMP_LENGTH);
+        this.classDetails = classDetails;
+        attendanceTracker = new AttendanceTracker(tutorialCount);
+        classParticipationTracker = new ClassParticipationTracker(tutorialCount);
+        assignmentTracker = new AssignmentTracker(assignmentCount);
     }
 
     /**
      * Constructs a ClassDetails object.
      */
-    public ClassDetails(String value, AttendanceTracker attendanceTracker,
+    public ClassDetails(String classDetails, AttendanceTracker attendanceTracker,
                         AssignmentTracker assignmentTracker, ClassParticipationTracker classParticipationTracker) {
-        this.value = value;
+        this.classDetails = classDetails;
         this.attendanceTracker = attendanceTracker;
         this.assignmentTracker = assignmentTracker;
         this.classParticipationTracker = classParticipationTracker;
@@ -71,9 +70,17 @@ public class ClassDetails {
         return (test.matches(VALIDATION_REGEX));
     }
 
+    public static void setTutorialCount(int tutorialCount) {
+        ClassDetails.tutorialCount = tutorialCount;
+    }
+
+    public static void setAssignmentCount(int assignmentCount) {
+        ClassDetails.assignmentCount = assignmentCount;
+    }
+
     @Override
     public String toString() {
-        return value;
+        return classDetails;
     }
 
     @Override
@@ -88,12 +95,14 @@ public class ClassDetails {
         }
 
         ClassDetails otherAddress = (ClassDetails) other;
-        return value.equals(otherAddress.value);
+        return classDetails.equals(otherAddress.classDetails)
+                && attendanceTracker.equals(otherAddress.attendanceTracker)
+                && classParticipationTracker.equals(otherAddress.classParticipationTracker)
+                && assignmentTracker.equals(otherAddress.assignmentTracker);
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return Objects.hash(classDetails, attendanceTracker, classParticipationTracker, assignmentTracker);
     }
-
 }
