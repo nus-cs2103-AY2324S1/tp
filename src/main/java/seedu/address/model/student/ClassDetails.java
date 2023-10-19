@@ -5,6 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.Objects;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.student.grades.AssignmentTracker;
 import seedu.address.model.student.grades.AttendanceTracker;
 import seedu.address.model.student.grades.ClassParticipationTracker;
@@ -41,6 +42,25 @@ public class ClassDetails {
         attendanceTracker = new AttendanceTracker(tutorialCount);
         classParticipationTracker = new ClassParticipationTracker(tutorialCount);
         assignmentTracker = new AssignmentTracker(assignmentCount);
+    }
+
+    /**
+     * Constructs a ClassDetails object.
+     */
+    public ClassDetails(String classDetails, AttendanceTracker attendanceTracker,
+                        AssignmentTracker assignmentTracker, ClassParticipationTracker classParticipationTracker) {
+        this.classDetails = classDetails;
+        this.attendanceTracker = attendanceTracker;
+        this.assignmentTracker = assignmentTracker;
+        this.classParticipationTracker = classParticipationTracker;
+    }
+
+    /**
+     * Marks the specific tutorial as present.
+     */
+    public ClassDetails markPresent(Index tutNum) {
+        this.attendanceTracker.markPresent(tutNum);
+        return this;
     }
 
     /**
