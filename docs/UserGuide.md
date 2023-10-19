@@ -262,3 +262,4 @@ _Details coming soon ..._
 | **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                      |
 | **List**   | `list attendance tn/TUTORIALNO [coursetg/TAG]` `list students`                                  |                                                           |
 | **Help**   | `help`                                                                                          |
+| **Filter**   | `filter [add/delete/clear] [coursetg/COURSECODE] [tn/TUTORIALGROUPID]`                                                                                          |
