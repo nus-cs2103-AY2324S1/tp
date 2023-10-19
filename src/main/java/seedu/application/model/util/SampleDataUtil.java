@@ -13,11 +13,11 @@ public class SampleDataUtil {
     public static Job[] getSampleJobs() {
         return new Job[]{
             new Job(new Role("Software Engineer"), new Company("Google"),
-                    Status.DEFAULT_STATUS, Deadline.EMPTY_DEADLINE),
+                    Deadline.EMPTY_DEADLINE, Status.DEFAULT_STATUS),
             new Job(new Role("Cleaner"), new Company("NUS"),
-                    Status.DEFAULT_STATUS, Deadline.EMPTY_DEADLINE),
+                    Deadline.EMPTY_DEADLINE, Status.DEFAULT_STATUS),
             new Job(new Role("Chef"), new Company("McDonalds"),
-                    Status.DEFAULT_STATUS, Deadline.EMPTY_DEADLINE)
+                    Deadline.EMPTY_DEADLINE, Status.DEFAULT_STATUS),
         };
     }
 

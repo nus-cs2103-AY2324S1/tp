@@ -45,7 +45,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             deadline = ParserUtil.parseDeadline(argMultimap.getValue(PREFIX_DEADLINE).get());
         }
 
-        Job job = new Job(role, company, status, deadline);
+        Job job = new Job(role, company, deadline, status);
 
         return new AddCommand(job);
     }
