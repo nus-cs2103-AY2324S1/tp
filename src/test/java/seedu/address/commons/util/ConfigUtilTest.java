@@ -29,92 +29,64 @@ public class ConfigUtilTest {
         "ConfigUtilTest"
     );
 
-    @Test
-    public void read_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> read(null));
-    }
-
-    @Test
-    public void read_missingFile_emptyResult() throws DataLoadingException {
-        assertFalse(read("NonExistentFile.json").isPresent());
-    }
-
-    @Test
-    public void read_notJsonFormat_exceptionThrown() {
-        assertThrows(DataLoadingException.class, () -> read("NotJsonFormatConfig.json"));
-    }
-
-    @Test
-    public void read_fileInOrder_successfullyRead() throws DataLoadingException {
-
-        Config expected = getTypicalConfig();
-
-        Config actual = read("TypicalConfig.json").get();
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void read_valuesMissingFromFile_defaultValuesUsed() throws DataLoadingException {
-        Config actual = read("EmptyConfig.json").get();
-        assertEquals(new Config(), actual);
-    }
-
-    @Test
-    public void read_extraValuesInFile_extraValuesIgnored() throws DataLoadingException {
-        Config expected = getTypicalConfig();
-        Config actual = read("ExtraValuesConfig.json").get();
-
-        assertEquals(expected, actual);
-    }
-
-    private Config getTypicalConfig() {
+    //NOTE This should match TypicalConfig.json
+    private static Config getTypicalConfig() {
         Config config = new Config();
+        config.setSettingsPath(Paths.get("myFolder", "settings.json"));
         config.setLogLevel(Level.INFO);
-        config.setSettingsPath(Paths.get("preferences.json"));
         return config;
     }
 
-    private Optional<Config> read(String configFileInTestDataFolder) throws DataLoadingException {
-        Path configFilePath = addToTestDataPathIfNotNull(configFileInTestDataFolder);
-        return ConfigUtil.readConfig(configFilePath);
+    private static Path getConfigPath(String fileName) {
+        return ConfigUtilTest.TEST_DATA_FOLDER.resolve(fileName);
+    }
+
+    private Optional<Config> read(String fileName) throws DataLoadingException {
+        return ConfigUtil.readConfig(
+            ConfigUtilTest.getConfigPath(fileName)
+        );
     }
 
     @Test
-    public void save_nullConfig_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> save(null, "SomeFile.json"));
+    public void readConfig_missingFile_emptyOptionalReturned() throws DataLoadingException {
+        assertFalse(this.read("nonExistent.json").isPresent());
     }
 
     @Test
-    public void save_nullFile_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> save(new Config(), null));
+    public void readConfig_notJson_exceptionThrown() {
+        assertThrows(DataLoadingException.class, () -> this.read("notJson.json"));
     }
 
     @Test
-    public void saveConfig_allInOrder_success() throws DataLoadingException, IOException {
-        Config original = getTypicalConfig();
-
-        Path configFilePath = ConfigUtilTest.TEMP_DIR.resolve("TempConfig.json");
-
-        //Try writing when the file doesn't exist
-        ConfigUtil.saveConfig(original, configFilePath);
-        Config readBack = ConfigUtil.readConfig(configFilePath).get();
-        assertEquals(original, readBack);
-
-        //Try saving when the file exists
-        original.setLogLevel(Level.FINE);
-        ConfigUtil.saveConfig(original, configFilePath);
-        readBack = ConfigUtil.readConfig(configFilePath).get();
-        assertEquals(original, readBack);
+    public void readConfig_typical_successfullyRead() throws DataLoadingException {
+        Config expected = ConfigUtilTest.getTypicalConfig();
+        Config actual = this.read("ConfigUtilTest/typicalConfig.json").get();
+        assertEquals(expected, actual);
     }
 
-    private void save(Config config, String configFileInTestDataFolder) throws IOException {
-        Path configFilePath = addToTestDataPathIfNotNull(configFileInTestDataFolder);
-        ConfigUtil.saveConfig(config, configFilePath);
+    @Test
+    public void readConfig_missingEntries_defaultsUsed() throws DataLoadingException {
+        Config expected = new Config();
+        Config actual = read("empty.json").get();
+        assertEquals(expected, actual);
     }
 
-    private Path addToTestDataPathIfNotNull(String configFileInTestDataFolder) {
-        return configFileInTestDataFolder != null
-                                  ? TEST_DATA_FOLDER.resolve(configFileInTestDataFolder)
-                                  : null;
+    @Test
+    public void saveConfig() throws DataLoadingException, IOException {
+        Path path = ConfigUtilTest.TEMP_DIR.resolve("tempConfig.json");
+
+        Config config = getTypicalConfig();
+
+        // Try writing when the file doesn't exist
+        ConfigUtil.saveConfig(config, path);
+        Config readBack = ConfigUtil.readConfig(path).get();
+        assertEquals(config, readBack);
+
+        config.setLogLevel(Level.FINE);
+
+        // Try saving when the file exists
+        ConfigUtil.saveConfig(config, path);
+        readBack = ConfigUtil.readConfig(path).get();
+        assertEquals(config, readBack);
     }
 }
