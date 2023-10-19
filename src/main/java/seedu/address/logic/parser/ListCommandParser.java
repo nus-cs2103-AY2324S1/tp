@@ -22,6 +22,7 @@ public class ListCommandParser implements Parser<ListCommand> {
         }
 
         String sortingAttribute = argMultimap.getValue(CliSyntax.PREFIX_SORT).orElse(null);
+        System.out.println("sortingAttribute: " + sortingAttribute);
 
         if (sortingAttribute == null) {
             return new ListCommand();
@@ -30,11 +31,13 @@ public class ListCommandParser implements Parser<ListCommand> {
         // Create the sorting comparator based on the sorting attribute
         Comparator<Person> sortingComparator = createSortingComparator(sortingAttribute);
 
+
         return new ListCommand(sortingComparator);
     }
 
     private Comparator<Person> createSortingComparator(String sortingAttribute) {
         if ("name".equalsIgnoreCase(sortingAttribute)) {
+            System.out.println("Sorting by name");
             return Comparator.comparing(Person::getName);
         } else {
             // Default: no sorting (you can change this behavior as needed)
