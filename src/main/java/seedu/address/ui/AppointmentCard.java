@@ -22,9 +22,9 @@ public class AppointmentCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label date;
+    private Label dateTime;
     @FXML
-    private Label time;
+    private Label description;
 
     /**
      * Creates a {@code StudentCode} with the given {@code Student} and index to display.
@@ -33,8 +33,8 @@ public class AppointmentCard extends UiPart<Region> {
         super(FXML);
         this.appointment = appointment;
         id.setText(displayedIndex + ". ");
-        name.setText(appointment.getName());
-        date.setText(appointment.getDate());
-        time.setText(appointment.getTime());
+        name.setText(appointment.getName().fullName);
+        dateTime.setText(appointment.getDateTime().value);
+        description.setText(appointment.getDescription().value);
     }
 }
