@@ -5,8 +5,10 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.SortByNameComparator;
 
+import java.util.Comparator;
 
 
 /**
@@ -20,9 +22,13 @@ public class SortCommand extends Command {
             + "order and displays the sorted list back.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie";
+    public static final Object INVALID_COMMAND = COMMAND_WORD + ": MESSAGE TO BE WRITTEN LATER";
 
-    private final SortByNameComparator comparator = new SortByNameComparator();
+    private Comparator<Person> comparator;
 
+    public SortCommand(Comparator<Person> comparator) {
+        this.comparator = comparator;
+    }
 
     @Override
     public CommandResult execute(Model model) {

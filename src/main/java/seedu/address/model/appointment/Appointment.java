@@ -93,4 +93,8 @@ public class Appointment {
 
         return new Appointment(valueField, parseAppointmentDate(dateField));
     }
+
+    public int compareTo(Appointment appointment) {
+        return this.date.compareTo(appointment.date);
+    }
 }
