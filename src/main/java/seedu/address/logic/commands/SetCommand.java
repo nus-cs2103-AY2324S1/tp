@@ -64,7 +64,9 @@ public class SetCommand extends Command {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("targetIndex", index).add("newStatus", newStatus).toString();
+        return new ToStringBuilder(this).
+                add("targetIndex", index).
+                add("newStatus", newStatus).toString();
     }
 
     public boolean equals(SetCommand this, SetCommand other) {
