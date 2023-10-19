@@ -1,12 +1,5 @@
 package seedu.application.testutil;
 
-import static seedu.application.logic.commands.CommandTestUtil.VALID_COMPANY_CHEF;
-import static seedu.application.logic.commands.CommandTestUtil.VALID_COMPANY_CLEANER;
-import static seedu.application.logic.commands.CommandTestUtil.VALID_DEADLINE_CHEF;
-import static seedu.application.logic.commands.CommandTestUtil.VALID_DEADLINE_CLEANER;
-import static seedu.application.logic.commands.CommandTestUtil.VALID_ROLE_CHEF;
-import static seedu.application.logic.commands.CommandTestUtil.VALID_ROLE_CLEANER;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -15,6 +8,8 @@ import seedu.application.model.ApplicationBook;
 import seedu.application.model.job.Deadline;
 import seedu.application.model.job.Job;
 import seedu.application.model.job.Status;
+
+import static seedu.application.logic.commands.CommandTestUtil.*;
 
 /**
  * A utility class containing a list of {@code Job} objects to be used in tests.
@@ -50,10 +45,10 @@ public class TypicalJobs {
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Job CHEF = new JobBuilder().withRole(VALID_ROLE_CHEF)
-        .withCompany(VALID_COMPANY_CHEF).withStatus(Status.IN_PROGRESS)
+        .withCompany(VALID_COMPANY_CHEF).withStatus(VALID_STATUS_CHEF)
         .withDeadline(VALID_DEADLINE_CHEF).build();
     public static final Job CLEANER = new JobBuilder().withRole(VALID_ROLE_CLEANER)
-        .withCompany(VALID_COMPANY_CLEANER).withStatus(Status.IN_PROGRESS)
+        .withCompany(VALID_COMPANY_CLEANER).withStatus(VALID_STATUS_CLEANER)
         .withDeadline(VALID_DEADLINE_CLEANER).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

@@ -3,9 +3,7 @@ package seedu.application.logic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.application.logic.Messages.MESSAGE_INVALID_JOB_DISPLAYED_INDEX;
 import static seedu.application.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.application.logic.commands.CommandTestUtil.COMPANY_DESC_CHEF;
-import static seedu.application.logic.commands.CommandTestUtil.DEADLINE_DESC_CHEF;
-import static seedu.application.logic.commands.CommandTestUtil.ROLE_DESC_CHEF;
+import static seedu.application.logic.commands.CommandTestUtil.*;
 import static seedu.application.testutil.Assert.assertThrows;
 import static seedu.application.testutil.TypicalJobs.CHEF;
 
@@ -169,7 +167,8 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Triggers the saveApplicationBook method by executing an add command
-        String addCommand = AddCommand.COMMAND_WORD + ROLE_DESC_CHEF + COMPANY_DESC_CHEF + DEADLINE_DESC_CHEF;
+        String addCommand = AddCommand.COMMAND_WORD + ROLE_DESC_CHEF + COMPANY_DESC_CHEF
+            + DEADLINE_DESC_CHEF + STATUS_DESC_CHEF;
         Job expectedJob = new JobBuilder(CHEF).build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addJob(expectedJob);
