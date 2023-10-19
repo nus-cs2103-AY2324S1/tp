@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.Messages.MESSAGE_TUTEES_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -26,13 +25,13 @@ class ListByDayCommandTest {
 
     @Test
     public void execute_validDay_multipleTuteesFound() {
-        String expectedMessage = String.format(MESSAGE_TUTEES_LISTED_OVERVIEW, 2);
-        Day day = new Day("Monday");
+        String expectedMessage = String.format(MESSAGE_TUTEES_LISTED_OVERVIEW, 1);
+        Day day = new Day("Mon");
         DayPredicate predicate = new DayPredicate(day);
         ListByDayCommand command = new ListByDayCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ALICE, BENSON), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(ALICE), model.getFilteredPersonList());
     }
 
     @Test
@@ -48,7 +47,7 @@ class ListByDayCommandTest {
 
     @Test
     public void equals() {
-        Day firstDay = new Day("Monday");
+        Day firstDay = new Day("Mon");
         Day secondDay = new Day("Mon");
 
         DayPredicate firstPredicate = new DayPredicate(firstDay);

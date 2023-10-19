@@ -25,7 +25,7 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_SUBJECT = "Maths";
-    public static final String DEFAULT_DAY = "Monday";
+    public static final String DEFAULT_DAY = "Mon";
     public static final String DEFAULT_BEGIN = "1000";
     public static final String DEFAULT_END = "1200";
 
@@ -113,21 +113,33 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Subject} of the {@code Person} that we are building.
+     */
     public PersonBuilder withSubject(String subject) {
         this.subject = new Subject(subject);
         return this;
     }
 
+    /**
+     * Sets the {@code Day} of the {@code Person} that we are building.
+     */
     public PersonBuilder withDay(String day) {
         this.day = new Day(day);
         return this;
     }
 
+    /**
+     * Sets the {@code Begin} of the {@code Person} that we are building.
+     */
     public PersonBuilder withBegin(String begin) {
         this.begin = new Begin(begin);
         return this;
     }
 
+    /**
+     * Sets the {@code End} of the {@code Person} that we are building.
+     */
     public PersonBuilder withEnd(String end) {
         this.end = new End(end);
         return this;
