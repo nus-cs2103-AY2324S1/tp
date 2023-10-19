@@ -137,7 +137,6 @@ public class ParserUtil {
         }
         return tagSet;
     }
-
     /**
      * Parse team name string.
      *
@@ -152,5 +151,17 @@ public class ParserUtil {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
         return trimmedName;
+    }
+    /**
+     * Parses a {@code String teamLeader} into an {@code TeamLeader}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code TeamLeader} is invalid.
+     */
+    public static Name parseTeamLeader(String teamLeader) throws ParseException {
+        requireNonNull(teamLeader);
+        String trimmedTeamLeader = teamLeader.trim();
+        Name teamLeaderName = parseName(trimmedTeamLeader);
+        return teamLeaderName;
     }
 }

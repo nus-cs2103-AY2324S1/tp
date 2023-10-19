@@ -22,7 +22,7 @@ public class DeleteTeamCommand extends Command {
             + ": Deletes the team identified by the team name used in the displayed team list.\n"
             + "Parameters: "
             + PREFIX_TEAMNAME + "Team Name \n"
-            + "Example: " + COMMAND_WORD + PREFIX_TEAMNAME + "Team Alpha";
+            + "Example: " + COMMAND_WORD + PREFIX_TEAMNAME + " Team Alpha";
 
     public static final String MESSAGE_DELETE_TEAM_SUCCESS = "Deleted Team: %1$s";
 

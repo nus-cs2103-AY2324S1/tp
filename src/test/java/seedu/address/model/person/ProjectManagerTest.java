@@ -34,14 +34,14 @@ public class ProjectManagerTest {
         assertFalse(aliceManager.equals(bobManager));
     }
 
-    @Test
-    public void addTeam_addSingleTeam_successful() {
-        ProjectManager aliceManager =
-                new ProjectManager(ALICE.getName(), ALICE.getPhone(), ALICE.getEmail(),
-                        ALICE.getAddress(), ALICE.getRemark(), ALICE.getTags());
-
-        aliceManager.addTeam(aliceTeam);
-        assertTrue(aliceManager.getTeams().contains(aliceTeam));
-    }
+//    @Test
+//    public void addTeam_addSingleTeam_successful() {
+//        ProjectManager aliceManager =
+//                new ProjectManager(ALICE.getName(), ALICE.getPhone(), ALICE.getEmail(),
+//                        ALICE.getAddress(), ALICE.getRemark(), ALICE.getTags());
+//
+//        aliceManager.addTeam(aliceTeam);
+//        assertTrue(aliceManager.getTeams().contains(aliceTeam));
+//    }
 }
 

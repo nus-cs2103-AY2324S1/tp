@@ -6,11 +6,11 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.IdentityCode;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.team.Team;
+
 
 /**
  * Wraps all data at the address-book level
@@ -19,6 +19,15 @@ import seedu.address.model.team.Team;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+
+    /*
+     * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
+     * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
+     *
+     * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
+     *   among constructors.
+     */
+
 
     {
         persons = new UniquePersonList();
@@ -61,11 +70,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(person);
         return persons.contains(person);
     }
-
+    public boolean hasPerson(Name name) {
+        requireNonNull(name);
+        return persons.contains(name);
+    }
     public Person getPersonByName(Name name) {
         return persons.getPerson(name);
     }
-
     /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
@@ -91,14 +102,17 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void removePerson(Person key) {
         persons.remove(key);
     }
-
-    /**
-     * Clears all existing data in the address book.
-     */
     public void clear() {
-        AddressBook empty = new AddressBook();
-        setPersons(empty.getPersonList());
+
     }
+
+
+
+
+
+    //// teams-level operations----------------------------------------------------------------------------------------
+
+
     //// util methods
 
     @Override

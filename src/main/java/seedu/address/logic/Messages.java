@@ -5,7 +5,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.team.Team;
 
 /**
  * Container for user visible messages.
@@ -15,7 +17,10 @@ public class Messages {
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
-    public static final String MESSAGE_INVALID_TEAM_NAME_DISPLAYED = "The team name provided is invalid";
+    public static final String MESSAGE_INVALID_PERSON = "This person does not exist!";
+
+    public static final String MESSAGE_INVALID_TEAM_NAME_DISPLAYED = "The team name provided is invalid!";
+    public static final String MESSAGE_INVALID_PERSON_IN_TEAM = "The team does not have the developer you mentioned!";
 
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
@@ -49,4 +54,26 @@ public class Messages {
         person.getTags().forEach(builder::append);
         return builder.toString();
     }
+    //Update this after the uniqueteamlist class is implemented. Need a way to retrieve leader
+    //name from the hashcode(which should be done in the new uniqueTeamList class)
+    //Need to format a team to hold teamname, leadername and developer set for the structure.
+    /**
+     * Formats the {@code team} for display to the user.
+     */
+    public static String format(Team team, Name leaderToAdd) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(team.getTeamName())
+                .append("; LeaderName ")
+                .append(leaderToAdd); //get leader name
+        return builder.toString();
+    }
+
+    public static String format(String teamToAddTo, Name devToAddTo) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(teamToAddTo)
+                .append(" got a new member! Hello ")
+                .append(devToAddTo);
+        return builder.toString();
+    }
+
 }

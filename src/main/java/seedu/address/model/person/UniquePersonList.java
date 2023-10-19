@@ -25,7 +25,7 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
  */
 public class UniquePersonList implements Iterable<Person> {
 
-    private final ObservableList<Person> internalList = FXCollections.observableArrayList();
+    private final ObservableList<Person> internalList = FXCollections.observableArrayList();    //creates a FXCollections observable array list
     private final ObservableList<Person> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
@@ -38,6 +38,14 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Returns true if the list contains an equivalent person as the given argument.
+     */
+    public boolean contains(Name toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(person -> person.getName().equals(toCheck));
+    }
+
+    /**
      * Adds a person to the list.
      * The person must not already exist in the list.
      */
@@ -47,11 +55,6 @@ public class UniquePersonList implements Iterable<Person> {
             throw new DuplicatePersonException();
         }
         internalList.add(toAdd);
-    }
-
-    public Person getPerson(Name name) {
-        Optional<Person> foundPerson = internalList.filtered(person -> person.getName().equals(name)).stream().findFirst();
-        return foundPerson.orElse(null);
     }
 
     /**
@@ -104,21 +107,11 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
 
-    //todo: more data protection. Maybe have two functions. One for displaying and one for editing.
-    public Person getPersonByHashCode(int targetHashCode) {
-        Person foundPerson = null;
-        for (Person p : internalList) {
-            if (p.hashCode() == targetHashCode) {
-                foundPerson = p;
-                break;
-            }
-        }
-
-        if (foundPerson != null) {
-            return foundPerson;
-        } else {
-            throw new PersonNotFoundException();
-        }
+    //bypasses the hashcode methods for now
+    public Person getPerson(Name name) {
+        Optional<Person> foundPerson = internalList.filtered(
+                person -> person.getName().equals(name)).stream().findFirst();
+        return foundPerson.orElse(null);
     }
 
     /**

@@ -1,7 +1,8 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TEAMNAME;
 
 import java.util.stream.Stream;
 
@@ -40,7 +41,7 @@ public class DeleteDeveloperFromTeamParser implements Parser<DeleteDeveloperFrom
             return new DeleteDeveloperFromTeamCommand(teamName, developerName);
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTeamCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteDeveloperFromTeamCommand.MESSAGE_USAGE), pe);
         }
     }
 

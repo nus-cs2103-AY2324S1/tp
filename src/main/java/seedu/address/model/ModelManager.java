@@ -152,11 +152,17 @@ public class ModelManager implements Model {
         this.addressBook.resetData(addressBook);
     }
 
+    public AddressBook getWritableAddressBook() {
+        return addressBook;
+    }
+
+
     /**
      * Returns the current address book.
      *
      * @return the address book.
      */
+
     @Override
     public ReadOnlyAddressBook getAddressBook() {
         return addressBook;
@@ -180,6 +186,16 @@ public class ModelManager implements Model {
     public boolean hasPerson(Person person) {
         requireNonNull(person);
         return addressBook.hasPerson(person);
+    }
+    @Override
+    public boolean hasPerson(Name name) {
+        requireNonNull(name);
+        return addressBook.hasPerson(name);
+    }
+
+    @Override
+    public Person getPersonByName(Name name) {
+        return addressBook.getPersonByName(name);
     }
 
     @Override
@@ -243,23 +259,6 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
-    //    @Override
-    //    public boolean equals(Object other) {
-    //        if (other == this) {
-    //            return true;
-    //        }
-    //
-    //        // instanceof handles nulls
-    //        if (!(other instanceof ModelManager)) {
-    //            return false;
-    //        }
-    //
-    //        ModelManager otherModelManager = (ModelManager) other;
-    //        return addressBook.equals(otherModelManager.addressBook)
-    //                && userPrefs.equals(otherModelManager.userPrefs)
-    //                && filteredPersons.equals(otherModelManager.filteredPersons);
-    //    }
-
     //=========== TeamBook ================================================================================
 
     /**
@@ -280,18 +279,6 @@ public class ModelManager implements Model {
     @Override
     public ReadOnlyTeamBook getTeamBook() {
         return teamBook;
-    }
-
-    /**
-     * Checks if a team with the given team name exists in the team book.
-     *
-     * @param teamName the name of the team to check.
-     * @return true if the team exists, false otherwise.
-     */
-    @Override
-    public boolean hasTeam(String teamName) {
-        requireNonNull(teamName);
-        return teamBook.hasTeam(teamName);
     }
 
     /**
@@ -321,15 +308,29 @@ public class ModelManager implements Model {
     public void deleteDeveloperFromTeam(String teamName, IdentityCode developerIdentityCode) {
         teamBook.removeDeveloperFromTeam(teamName, developerIdentityCode);
     }
-
-    @Override
-    public void addDeveloperToTeam(String developerName, String teamName) {
-        return;
+    public boolean personAlreadyInTeam(String teamToAddTo, Name devToAdd) {
+        IdentityCode devToAddIdentityCode = getIdentityCodeByName(devToAdd);
+        return teamBook.personAlreadyInTeam(teamToAddTo, devToAddIdentityCode);
+    }
+    /**
+     * Checks if a team with the given team name exists in the team book.
+     *
+     * @param teamName the name of the team to check.
+     * @return true if the team exists, false otherwise.
+     */
+    public boolean hasTeam(String teamName) {
+        requireNonNull(teamName);
+        return teamBook.hasTeam(teamName);
     }
 
-    @Override
-    public boolean isDeveloperInTeam(String developerName, String teamName) {
-        return false;
+    public boolean invalidAddToTeam(String teamToAddTo) {
+        return teamBook.invalidAddToTeam(teamToAddTo);
+    }
+
+    //only run when you know that team exists
+    public void addToTeam(String teamToAddTo, Name devToAdd) {
+        IdentityCode devToAddIdentityCode = getIdentityCodeByName(devToAdd);
+        teamBook.addDevToTeam(teamToAddTo, devToAddIdentityCode);
     }
     //=========== Filtered Team List Accessors =============================================================
 
@@ -377,6 +378,4 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(otherModelManager.filteredPersons)
                 && filteredTeams.equals(otherModelManager.filteredTeams);
     }
-
-
 }

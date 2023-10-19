@@ -3,6 +3,8 @@ package seedu.address;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -16,7 +18,6 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -88,9 +89,11 @@ public class MainApp extends Application {
         logger.info("Using data file : " + storage.getAddressBookFilePath());
 
         Optional<ReadOnlyAddressBook> addressBookOptional;
+
         Optional<ReadOnlyTeamBook> teamBookOptional;
         ReadOnlyAddressBook initialAddressData;
         ReadOnlyTeamBook initialTeamData;
+
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
@@ -114,6 +117,7 @@ public class MainApp extends Application {
         }
 
         return new ModelManager(initialAddressData, initialTeamData, userPrefs);
+
     }
 
     private void initLogging(Config config) {

@@ -50,7 +50,7 @@ public class LogicManager implements Logic {
 
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
-        commandResult = command.execute(model);
+        commandResult = command.execute(model); //command.execute() returns a CommandResult object
 
         try {
             storage.saveAddressBook(model.getAddressBook());
@@ -63,8 +63,6 @@ public class LogicManager implements Logic {
 
         return commandResult;
     }
-
-
     @Override
     public ReadOnlyAddressBook getAddressBook() {
         return model.getAddressBook();

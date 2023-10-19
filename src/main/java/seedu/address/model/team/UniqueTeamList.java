@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -33,6 +34,34 @@ public class UniqueTeamList implements Iterable<Team> {
         return internalList.stream().anyMatch(team -> team.getTeamName().equals(teamName));
     }
 
+    public boolean teamContainsPerson(String teamToAddTo, IdentityCode devToAddIdentityCode) {
+        requireNonNull(teamToAddTo);
+        requireNonNull(devToAddIdentityCode);
+        Team teamBeingAddedTo = getTeamByName(teamToAddTo);
+        Set<IdentityCode> devSet = teamBeingAddedTo.getDeveloperIdentityCodes();
+        for (IdentityCode identityCode : devSet) {
+            if (identityCode.equals(devToAddIdentityCode)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Gets a team from the list by its name.
+     *
+     * @param teamName The name of the team to retrieve.
+     * @return The Team object if found, or null if the team does not exist.
+     */
+    public Team getTeamByName(String teamName) {
+        for (Team team : internalList) {
+            if (team.getTeamName().equals(teamName)) {
+                return team;
+            }
+        }
+        throw new TeamNotFoundException();
+    }
+
     /**
      * Adds a team to the list.
      * The team must not already exist in the list.
@@ -44,6 +73,12 @@ public class UniqueTeamList implements Iterable<Team> {
         }
         internalList.add(toAdd);
     }
+
+    public void addDevToTeam(String teamToAddTo, IdentityCode devToAddIdentityCode) {
+        Team team = getTeamByName(teamToAddTo);
+        team.addDeveloper(devToAddIdentityCode);
+    }
+
 
     /**
      * Replaces the team with the given name in the list with {@code editedTeam}.
@@ -63,22 +98,6 @@ public class UniqueTeamList implements Iterable<Team> {
 
         internalList.set(index, editedTeam);
     }
-
-    /**
-     * Gets a team from the list by its name.
-     *
-     * @param teamName The name of the team to retrieve.
-     * @return The Team object if found, or null if the team does not exist.
-     */
-    public Team getTeamByName(String teamName) {
-        for (Team team : internalList) {
-            if (team.getTeamName().equals(teamName)) {
-                return team;
-            }
-        }
-        throw new TeamNotFoundException();
-    }
-
 
     /**
      * Removes the team with the given name from the list.

@@ -127,6 +127,22 @@ public class TeamBook implements ReadOnlyTeamBook {
         teams.setTeamByName(teamName, editedTeam);
     }
 
+    //handle the duplicate case
+    public boolean personAlreadyInTeam(String teamToAddTo, IdentityCode devToAddIdentityCode) {
+
+        return teams.teamContainsPerson(teamToAddTo, devToAddIdentityCode);
+    }
+
+    //handle case where team doesnt exist
+    public boolean invalidAddToTeam(String teamToAddTo) {
+        requireNonNull(teamToAddTo);
+        return teams.containsTeamByName(teamToAddTo);
+    }
+
+    public void addDevToTeam(String teamToAddTo, IdentityCode devToAddIdentityCode) {
+        teams.addDevToTeam(teamToAddTo, devToAddIdentityCode);
+    }
+
     @Override
     public ObservableList<Team> getTeamList() {
         return teams.asUnmodifiableObservableList();

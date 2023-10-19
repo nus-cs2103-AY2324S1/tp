@@ -68,9 +68,10 @@ public interface Model {
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
     boolean hasPerson(Person person);
-
+    boolean hasPerson(Name name);
+    Person getPersonByName(Name name);
     IdentityCode getIdentityCodeByName(Name developerName);
-
+    boolean invalidAddToTeam(String teamToAddTo);
     /**
      * Deletes the given person.
      * The person must exist in the address book.
@@ -98,6 +99,21 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+
+    void addToTeam(String teamToAddTo, Name devToAdd);
+
+
+
+
+    /**
+     * Replaces the given team {@code target} in the list with {@code editedTeam}.
+     * {@code target} must exist in the address book.
+     * The team identity of {@code editedTeam} must not be the same as another existing team in the address book.
+     */
+    //void setTeams(Team target, Team editedTeam);
+
+    AddressBook getWritableAddressBook();
 
     //=========== TeamBook related methods =================================================================
 
@@ -132,17 +148,7 @@ public interface Model {
      */
     void deleteDeveloperFromTeam(String teamName, IdentityCode developerIdentityCOde);
 
-    /**
-     * Adds the given developer to the specified team.
-     * The developer and team must exist in the model.
-     */
-    void addDeveloperToTeam(String developerName, String teamName);
-
-    /**
-     * Checks if the given developer is part of the specified team.
-     * Both the developer and team must exist in the model.
-     */
-    boolean isDeveloperInTeam(String developerName, String teamName);
+    boolean personAlreadyInTeam(String teamToAddTo, Name devToAdd);
 
     /** Returns an unmodifiable view of the filtered team list */
     ObservableList<Team> getFilteredTeamList();
