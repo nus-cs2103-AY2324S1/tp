@@ -9,7 +9,7 @@
     "nextOfKinPhone": "94351111",
     "financialPlans" : ["Sample Financial Plan 1", "Sample Financial Plan 2"],
     "tags" : [ "friends" ],
-    "appointment" : "No Appointment made!"
+    "appointment" : "test, 11-11-2023 00:00"
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
@@ -29,7 +29,7 @@
     "nextOfKinPhone": "95351111",
     "financialPlans" : [ ],
     "tags" : [ ],
-    "appointment" : "No Appointment made!"
+    "appointment" : "Review insurance, 01-05-2023 07:00"
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
