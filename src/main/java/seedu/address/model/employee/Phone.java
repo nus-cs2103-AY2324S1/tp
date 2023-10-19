@@ -11,8 +11,8 @@ public class Phone {
 
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Phone numbers should only contain numbers, and it should be 8 digits long";
-    public static final String VALIDATION_REGEX = "\\d{8}";
+            "Phone numbers should only contain numbers, be 8 digits long, and start with 8 or 9";
+    public static final String VALIDATION_REGEX = "[89]\\d{7}";
     public final String value;
 
     /**
@@ -33,9 +33,18 @@ public class Phone {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns true if a given string is a valid phone number with +65 prefix.
+     */
+    public static boolean isValidPhoneString(String test) {
+        String[] parts = test.split(" ", 2);
+        String number = parts[1];
+        return number.matches(VALIDATION_REGEX);
+    }
+
     @Override
     public String toString() {
-        return value;
+        return "+65 " + value;
     }
 
     @Override

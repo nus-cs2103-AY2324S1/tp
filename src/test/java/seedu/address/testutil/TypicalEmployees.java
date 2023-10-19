@@ -1,7 +1,7 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPARTMENT_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPARTMENT_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPARTMENT_FINANCE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPARTMENT_IT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_AMY;
@@ -96,7 +96,7 @@ public class TypicalEmployees {
                 .withId(VALID_ID_AMY)
                 .withPhone(VALID_PHONE_AMY)
                 .withEmail(VALID_EMAIL_AMY)
-                .withDepartments(VALID_DEPARTMENT_FRIEND)
+                .withDepartments(VALID_DEPARTMENT_FINANCE)
                 .withSalary(VALID_SALARY_AMY)
                 .build();
     public static final Employee BOB = new EmployeeBuilder().withName(VALID_NAME_BOB)
@@ -104,7 +104,7 @@ public class TypicalEmployees {
                 .withId(VALID_ID_BOB)
                 .withPhone(VALID_PHONE_BOB)
                 .withEmail(VALID_EMAIL_BOB)
-                .withDepartments(VALID_DEPARTMENT_HUSBAND, VALID_DEPARTMENT_FRIEND)
+                .withDepartments(VALID_DEPARTMENT_FINANCE, VALID_DEPARTMENT_IT)
                 .withSalary(VALID_SALARY_BOB)
                 .build();
 

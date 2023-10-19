@@ -31,7 +31,7 @@ public class JsonAdaptedEmployeeTest {
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_POSITION = BENSON.getPosition().toString();
     private static final String VALID_ID = BENSON.getId().toString();
-    private static final String VALID_PHONE = BENSON.getPhone().toString();
+    private static final String VALID_PHONE = BENSON.getPhone().toString().split(" ", 2)[1];
     private static final String VALID_EMAIL = BENSON.getEmail().toString();
     private static final List<JsonAdaptedDepartment> VALID_DEPARTMENTS = BENSON.getDepartments().stream()
             .map(JsonAdaptedDepartment::new)

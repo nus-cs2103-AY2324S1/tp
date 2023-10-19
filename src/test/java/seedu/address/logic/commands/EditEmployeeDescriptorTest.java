@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPARTMENT_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPARTMENT_IT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
@@ -59,7 +59,7 @@ public class EditEmployeeDescriptorTest {
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different departments -> returns false
-        editedAmy = new EditEmployeeDescriptorBuilder(DESC_AMY).withDepartments(VALID_DEPARTMENT_HUSBAND).build();
+        editedAmy = new EditEmployeeDescriptorBuilder(DESC_AMY).withDepartments(VALID_DEPARTMENT_IT).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different salary -> returns false

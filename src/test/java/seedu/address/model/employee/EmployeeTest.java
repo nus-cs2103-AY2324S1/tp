@@ -3,7 +3,7 @@ package seedu.address.model.employee;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPARTMENT_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPARTMENT_IT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
@@ -37,7 +37,7 @@ public class EmployeeTest {
         // same id, all other attributes different -> returns true
         Employee editedAlice = new EmployeeBuilder(ALICE).withName(VALID_NAME_BOB).withPosition(VALID_POSITION_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withDepartments(VALID_DEPARTMENT_HUSBAND).build();
+                .withDepartments(VALID_DEPARTMENT_IT).build();
         assertTrue(ALICE.isSameEmployee(editedAlice));
 
         // different id, all other attributes same -> returns false
@@ -84,7 +84,7 @@ public class EmployeeTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different departments -> returns false
-        editedAlice = new EmployeeBuilder(ALICE).withDepartments(VALID_DEPARTMENT_HUSBAND).build();
+        editedAlice = new EmployeeBuilder(ALICE).withDepartments(VALID_DEPARTMENT_IT).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different salary -> returns false

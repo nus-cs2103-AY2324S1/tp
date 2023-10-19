@@ -55,7 +55,7 @@ public class EmployeeCard extends UiPart<Region> {
         name.setText(employee.getName().fullName);
         position.setText(employee.getPosition().value);
         employeeId.setText(employee.getId().value);
-        phone.setText(employee.getPhone().value);
+        phone.setText(employee.getPhone().toString());
         email.setText(employee.getEmail().value);
         salary.setText(employee.getSalary().value);
         employee.getDepartments().stream()

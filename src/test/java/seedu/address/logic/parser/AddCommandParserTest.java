@@ -24,8 +24,8 @@ import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.SALARY_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.SALARY_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPARTMENT_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPARTMENT_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPARTMENT_FINANCE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPARTMENT_IT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
@@ -62,7 +62,7 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Employee expectedEmployee = new EmployeeBuilder(BOB).withDepartments(VALID_DEPARTMENT_FRIEND).build();
+        Employee expectedEmployee = new EmployeeBuilder(BOB).withDepartments(VALID_DEPARTMENT_FINANCE).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + POSITION_DESC_BOB + ID_DESC_BOB
@@ -71,7 +71,7 @@ public class AddCommandParserTest {
 
         // multiple departments - all accepted
         Employee expectedEmployeeMultipleDepartments = new EmployeeBuilder(BOB)
-                .withDepartments(VALID_DEPARTMENT_FRIEND, VALID_DEPARTMENT_HUSBAND)
+                .withDepartments(VALID_DEPARTMENT_FINANCE, VALID_DEPARTMENT_IT)
                 .build();
         assertParseSuccess(parser,
                 NAME_DESC_BOB + POSITION_DESC_BOB + ID_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
@@ -240,7 +240,7 @@ public class AddCommandParserTest {
 
         // invalid department
         assertParseFailure(parser, NAME_DESC_BOB + POSITION_DESC_BOB + ID_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + INVALID_DEPARTMENT_DESC + VALID_DEPARTMENT_FRIEND + SALARY_DESC_BOB, Department.MESSAGE_CONSTRAINTS);
+                + INVALID_DEPARTMENT_DESC + VALID_DEPARTMENT_FINANCE + SALARY_DESC_BOB, Department.MESSAGE_CONSTRAINTS);
 
         // invalid salary
         assertParseFailure(parser, NAME_DESC_BOB + POSITION_DESC_BOB + ID_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB

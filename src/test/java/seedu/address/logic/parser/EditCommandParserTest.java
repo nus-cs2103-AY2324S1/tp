@@ -12,8 +12,8 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPARTMENT_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPARTMENT_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPARTMENT_FINANCE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPARTMENT_IT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
@@ -107,7 +107,7 @@ public class EditCommandParserTest {
 
         EditEmployeeDescriptor descriptor = new EditEmployeeDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY)
-                .withDepartments(VALID_DEPARTMENT_HUSBAND, VALID_DEPARTMENT_FRIEND).build();
+                .withDepartments(VALID_DEPARTMENT_IT, VALID_DEPARTMENT_FINANCE).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -148,7 +148,7 @@ public class EditCommandParserTest {
 
         // departments
         userInput = targetIndex.getOneBased() + DEPARTMENT_DESC_FRIEND;
-        descriptor = new EditEmployeeDescriptorBuilder().withDepartments(VALID_DEPARTMENT_FRIEND).build();
+        descriptor = new EditEmployeeDescriptorBuilder().withDepartments(VALID_DEPARTMENT_FINANCE).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
