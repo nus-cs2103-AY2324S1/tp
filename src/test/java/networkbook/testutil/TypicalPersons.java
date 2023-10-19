@@ -78,12 +78,14 @@ public class TypicalPersons {
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhones(List.of(VALID_PHONE_AMY))
             .withEmails(List.of(VALID_EMAIL_AMY)).withLinks(List.of(VALID_LINK_AMY))
             .withGraduation(VALID_GRADUATION_AMY)
-            .withCourses(List.of(VALID_COURSE_AMY)).withSpecialisations(List.of(VALID_SPECIALISATION_AMY)).withTags(VALID_TAG_FRIEND)
+            .withCourses(List.of(VALID_COURSE_AMY))
+            .withSpecialisations(List.of(VALID_SPECIALISATION_AMY))
+            .withTags(VALID_TAG_FRIEND)
             .withPriority("High").build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhones(List.of(VALID_PHONE_BOB))
             .withEmails(List.of(VALID_EMAIL_BOB)).withLinks(List.of(VALID_LINK_BOB))
             .withGraduation(VALID_GRADUATION_BOB)
-            .withCourse(VALID_COURSE_BOB).withSpecialisation(VALID_SPECIALISATION_BOB)
+            .withCourses(List.of(VALID_COURSE_BOB)).withSpecialisations(List.of(VALID_SPECIALISATION_BOB))
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

@@ -176,11 +176,11 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, graduation, courses,
-                        specialisations, tags, priority)
+            return CollectionUtil.isAnyNonNull(name, graduation, tags, priority)
                     || (phones.isPresent() && !phones.get().isEmpty())
                     || (emails.isPresent() && !emails.get().isEmpty())
                     || (links.isPresent() && !links.get().isEmpty())
+                    || (courses.isPresent() && !courses.get().isEmpty())
                     || (specialisations.isPresent() && !specialisations.get().isEmpty());
         }
 
@@ -221,7 +221,6 @@ public class EditCommand extends Command {
 
         /**
          * Adds {@code email} to the list of {@code emails}
-         * @param email
          */
         public void addEmail(Email email) {
             this.emails = this.emails.map(emails -> {
@@ -244,7 +243,6 @@ public class EditCommand extends Command {
 
         /**
          * Adds {@code link} to the list of {@code links}.
-         * @param link
          */
         public void addLink(Link link) {
             this.links = this.links.map(links -> {
@@ -273,6 +271,20 @@ public class EditCommand extends Command {
             this.courses = Optional.ofNullable(courses);
         }
 
+        /**
+         * Adds {@code specialisations} to the list of {@code specialisations}.
+         */
+        public void addCourse(Course course) {
+            this.courses = this.courses.map(courses -> {
+                courses.add(course);
+                return courses;
+            }).or(() -> {
+                UniqueList<Course> uniqueList = new UniqueList<>();
+                uniqueList.add(course);
+                return Optional.of(uniqueList);
+            });
+        }
+
         public Optional<UniqueList<Course>> getCourses() {
             return courses;
         }
@@ -283,7 +295,6 @@ public class EditCommand extends Command {
 
         /**
          * Adds {@code specialisations} to the list of {@code specialisations}.
-         * @param specialisation
          */
         public void addSpecialisation(Specialisation specialisation) {
             this.specialisations = this.specialisations.map(specialisations -> {
@@ -364,8 +375,8 @@ public class EditCommand extends Command {
                     .add("emails", emails.orElse(null))
                     .add("links", links.orElse(null))
                     .add("graduation", graduation)
-                    .add("courses", courses)
-                    .add("specialisation", specialisations)
+                    .add("courses", courses.orElse(null))
+                    .add("specialisations", specialisations.orElse(null))
                     .add("tags", tags);
             if (priority != null) {
                 tsb.add("priority", priority);

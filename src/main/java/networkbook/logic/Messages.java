@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import networkbook.logic.parser.Prefix;
-import networkbook.model.person.Course;
 import networkbook.model.person.Graduation;
 import networkbook.model.person.Person;
 import networkbook.model.person.Priority;

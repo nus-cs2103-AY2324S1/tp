@@ -9,7 +9,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import networkbook.model.person.Course;
 import networkbook.model.person.Graduation;
 import networkbook.model.person.Person;
 import networkbook.model.person.Priority;
@@ -24,7 +23,7 @@ public class PersonCard extends UiPart<Region> {
     private static final String EMAILS_HEADER = "Emails: ";
     private static final String LINKS_HEADER = "Links: ";
     private static final String GRADUATION_HEADER = "Graduation: ";
-    private static final String COURSE_HEADER = "Course: ";
+    private static final String COURSE_HEADER = "Courses: ";
     private static final String SPECIALISATION_HEADER = "Specialisations: ";
     private static final String PRIORITY_HEADER = "Priority: ";
 

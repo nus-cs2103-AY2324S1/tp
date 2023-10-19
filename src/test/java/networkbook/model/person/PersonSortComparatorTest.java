@@ -135,8 +135,8 @@ public class PersonSortComparatorTest {
                 new UniqueList<Email>().setItems(List.of(new Email("alexyeoh@example.com"))),
                 new UniqueList<Link>().setItems(List.of(new Link("www.alexyeoh.net"))),
                 null,
-                new Course("Information Systems"),
-                new Specialisation("Financial Technology"),
+                new UniqueList<Course>().setItems(List.of(new Course("Information Systems"))),
+                new UniqueList<Specialisation>().setItems(List.of(new Specialisation("Financial Technology"))),
                 SampleDataUtil.getTagList("friends"),
                 null);
         Person n2 = new Person(new Name("Nile Too"),
@@ -144,8 +144,8 @@ public class PersonSortComparatorTest {
                 new UniqueList<Email>().setItems(List.of(new Email("alexyeoh@example.com"))),
                 new UniqueList<Link>().setItems(List.of(new Link("www.alexyeoh.net"))),
                 null,
-                new Course("Information Systems"),
-                new Specialisation("Financial Technology"),
+                new UniqueList<Course>().setItems(List.of(new Course("Information Systems"))),
+                new UniqueList<Specialisation>().setItems(List.of(new Specialisation("Financial Technology"))),
                 SampleDataUtil.getTagList("friends"),
                 null);
 

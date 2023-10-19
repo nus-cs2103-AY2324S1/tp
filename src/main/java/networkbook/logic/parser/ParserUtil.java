@@ -201,6 +201,10 @@ public class ParserUtil {
         return result;
     }
 
+    /**
+     * Parses a {@code course} from {@code String} into a {@code Course}.
+     * @throws ParseException When the {@code course} is invalid.
+     */
     public static Course parseCourse(String course) throws ParseException {
         requireNonNull(course);
         String trimmedCourse = course.trim();

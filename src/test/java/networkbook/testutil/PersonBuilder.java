@@ -35,7 +35,7 @@ public class PersonBuilder {
     private UniqueList<Email> emails;
     private UniqueList<Link> links;
     private Graduation graduation;
-    private Course course;
+    private UniqueList<Course> courses;
     private UniqueList<Specialisation> specialisations;
     private UniqueList<Tag> tags;
     private Priority priority;
@@ -49,7 +49,7 @@ public class PersonBuilder {
         emails = new UniqueList<Email>().setItems(List.of(new Email(DEFAULT_EMAIL)));
         links = new UniqueList<Link>().setItems(List.of(new Link(DEFAULT_LINK)));
         graduation = new Graduation(DEFAULT_GRADUATION);
-        course = new Course(DEFAULT_COURSE);
+        courses = new UniqueList<Course>().setItems(List.of(new Course(DEFAULT_COURSE)));
         specialisations = new UniqueList<Specialisation>()
                 .setItems(List.of(new Specialisation(DEFAULT_SPECIALISATION)));
         tags = new UniqueList<>();
@@ -65,7 +65,7 @@ public class PersonBuilder {
         emails = personToCopy.getEmails();
         links = personToCopy.getLinks();
         graduation = personToCopy.getGraduation().orElse(null);
-        course = personToCopy.getCourse().orElse(null);
+        courses = personToCopy.getCourses();
         specialisations = personToCopy.getSpecialisations();
         tags = personToCopy.getTags();
         priority = personToCopy.getPriority().orElse(null);
@@ -108,6 +108,14 @@ public class PersonBuilder {
      */
     public PersonBuilder withGraduation(String graduation) {
         this.graduation = new Graduation(graduation);
+        return this;
+    }
+
+    /**
+     * Adds a course to the person we are building.
+     */
+    public PersonBuilder addCourse(String course) {
+        this.courses.add(new Course(course));
         return this;
     }
 
@@ -183,7 +191,7 @@ public class PersonBuilder {
         this.emails = new UniqueList<>();
         this.links = new UniqueList<>();
         this.graduation = null;
-        this.course = null;
+        this.courses = new UniqueList<>();
         this.specialisations = new UniqueList<>();
         this.tags = new UniqueList<>();
         this.priority = null;

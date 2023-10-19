@@ -1,7 +1,5 @@
 package networkbook.model.person;
 
-import networkbook.model.util.Identifiable;
-
 import static java.util.Objects.requireNonNull;
 import static networkbook.commons.util.AppUtil.checkArgument;
 
@@ -10,6 +8,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 import java.util.Optional;
+
+import networkbook.model.util.Identifiable;
 
 /**
  * Represents a Person's course of study in the network book.

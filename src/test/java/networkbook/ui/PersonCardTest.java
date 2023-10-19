@@ -51,10 +51,10 @@ public class PersonCardTest {
 
     @Test
     public void constructor_hasValidCourse_showsValidCourse() {
-        Person person = new PersonBuilder().withName("Bob").withCourse(VALID_COURSE_BOB).build();
+        Person person = new PersonBuilder().withName("Bob").withCourses(List.of(VALID_COURSE_BOB)).build();
         PersonCard personCard = new PersonCard(person, 1);
         Label course = personCard.getCourse();
-        assertEquals("Course: " + VALID_COURSE_BOB, course.getText());
+        assertEquals("Courses: [" + VALID_COURSE_BOB + "]", course.getText());
         assertTrue(course.isVisible());
     }
 
@@ -65,7 +65,7 @@ public class PersonCardTest {
                 .build();
         PersonCard personCard = new PersonCard(person, 1);
         Label specialisations = personCard.getSpecialisations();
-        assertEquals("Specialisation: " + VALID_SPECIALISATION_BOB, specialisations.getText());
+        assertEquals("Specialisations: [" + VALID_SPECIALISATION_BOB + "]", specialisations.getText());
         assertTrue(specialisations.isVisible());
     }
 

@@ -39,7 +39,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setEmails(person.getEmails());
         descriptor.setLinks(person.getLinks());
         person.getGraduation().ifPresent((Graduation g) -> descriptor.setGraduation(g));
-        person.getCourse().ifPresent((Course c) -> descriptor.setCourse(c));
+        descriptor.setCourses(person.getCourses());
         descriptor.setSpecialisations(person.getSpecialisations());
         descriptor.setTags(person.getTags());
         person.getPriority().ifPresent((Priority p) -> descriptor.setPriority(p));
@@ -89,7 +89,7 @@ public class EditPersonDescriptorBuilder {
      * Sets the {@code Course} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withCourse(String course) {
-        descriptor.setCourse(new Course(course));
+        descriptor.addCourse(new Course(course));
         return this;
     }
 

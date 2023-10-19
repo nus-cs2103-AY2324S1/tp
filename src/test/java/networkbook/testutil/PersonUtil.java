@@ -4,6 +4,7 @@ package networkbook.testutil;
 import networkbook.logic.commands.CreateCommand;
 import networkbook.logic.commands.EditCommand;
 import networkbook.logic.parser.CliSyntax;
+import networkbook.model.person.Course;
 import networkbook.model.person.Email;
 import networkbook.model.person.Link;
 import networkbook.model.person.Person;
@@ -40,8 +41,9 @@ public class PersonUtil {
         );
         person.getGraduation().ifPresent(graduation -> sb.append(CliSyntax.PREFIX_GRADUATION)
                 .append(" ").append(graduation).append(" "));
-        person.getCourse().ifPresent(course -> sb.append(CliSyntax.PREFIX_COURSE).append(" ")
-                .append(course.getCourse()).append(" "));
+        person.getCourses().forEach(
+                e -> sb.append(CliSyntax.PREFIX_COURSE + " " + e.toString() + " ")
+        );
         person.getSpecialisations().stream().forEach(
                 e -> sb.append(CliSyntax.PREFIX_SPECIALISATION + " " + e.toString() + " ")
         );
@@ -86,8 +88,14 @@ public class PersonUtil {
         }
         descriptor.getGraduation().ifPresent(graduation -> sb.append(CliSyntax.PREFIX_GRADUATION)
                 .append(" ").append(graduation).append(" "));
-        descriptor.getCourse().ifPresent(course -> sb.append(CliSyntax.PREFIX_COURSE).append(" ")
-                .append(course.getCourse()).append(" "));
+        if (descriptor.getCourses().isPresent()) {
+            UniqueList<Course> courses = descriptor.getCourses().get();
+            if (courses.isEmpty()) {
+                sb.append(CliSyntax.PREFIX_COURSE).append(" ");
+            } else {
+                courses.forEach(e -> sb.append(CliSyntax.PREFIX_COURSE).append(" ").append(e.toString()).append(" "));
+            }
+        }
         if (descriptor.getSpecialisations().isPresent()) {
             UniqueList<Specialisation> specs = descriptor.getSpecialisations().get();
             if (specs.isEmpty()) {

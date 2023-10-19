@@ -210,11 +210,6 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseCourse_null_returnsNull() throws Exception {
-        assertEquals(null, ParserUtil.parseCourse(null));
-    }
-
-    @Test
     public void parseCourse_invalidValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseCourse(INVALID_COURSE));
     }
