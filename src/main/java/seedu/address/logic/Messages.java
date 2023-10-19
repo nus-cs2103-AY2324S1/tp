@@ -49,11 +49,23 @@ public class Messages {
     }
 
     /**
-     * Formats the {@code musician} for display to the user.
+     * Formats the {@code band} for display to the user.
      */
     public static String format(Band band) {
         final StringBuilder builder = new StringBuilder();
         builder.append(band.getName());
+        return builder.toString();
+    }
+
+    /**
+     * Formats the {@code band} for display to the user.
+     */
+    public static String format(int band, int musician) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append("Band Index: ")
+                .append(band)
+                .append("; Musician Index:")
+                .append(musician);
         return builder.toString();
     }
 

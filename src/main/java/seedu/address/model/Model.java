@@ -106,4 +106,16 @@ public interface Model {
      * {@code band} must not already exist in the address book.
      */
     void addBand(Band band);
+
+    /**
+     * Returns true if a band already contains the musician.
+     * {@code musician} must not already exist in the band.
+     */
+    boolean hasMusicianInBand(int addInto, int toAdd);
+
+    /**
+     * Adds the given musician into the band.
+     * {@code musician} must not already exist in the band.
+     */
+    void addMusicianToBand(int addInto, int toAdd);
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -27,31 +28,29 @@ public class JsonAdaptedBand {
     private final List<JsonAdaptedTag> genres = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonAdaptedMusician} with the given musician details.
+     * Constructs a {@code JsonAdaptedMusician} with the given band details.
      */
     @JsonCreator
     public JsonAdaptedBand(@JsonProperty("name") String name, @JsonProperty("genres") HashSet genres,
-                               @JsonProperty("musicians") HashSet<Musician> musicians) {
+                               @JsonProperty("musicians") List<JsonAdaptedMusician> musicians) {
         this.name = name;
-        //if (musicians != null) {
-        //    this.musicians.addAll(musicians);
-        //  }
+        if (musicians != null) {
+            this.musicians.addAll(musicians);
+        }
         // if (genres != null) {
         //    this.genres.addAll(genres);
         //}
     }
 
     /**
-     * Converts a given {@code Musician} into this class for Jackson use.
+     * Converts a given {@code Band} into this class for Jackson use.
      */
     public JsonAdaptedBand(Band source) {
         name = source.getName().fullName;
         //genres.addAll(source.getGenres().stream()
         //.map(JsonAdaptedTag::new)
         //.collect(Collectors.toList()));
-        //musicians.addAll(source.getMusicians().stream()
-        //.map(JsonAdaptedMusician::new)
-        //.collect(Collectors.toList()));
+        musicians.addAll(source.getMusicians().stream().map(JsonAdaptedMusician::new).collect(Collectors.toList()));
     }
 
     /**
@@ -61,13 +60,13 @@ public class JsonAdaptedBand {
      */
     public Band toModelType() throws IllegalValueException {
         // final List<Tag> bandGenres = new ArrayList<>();
-        // final List<Musician> bandMusicians = new ArrayList<>();
+        final HashSet<Musician> bandMusicians = new HashSet<>();
         // for (JsonAdaptedTag genre : genres) {
         //    bandGenres.add(genre.toModelType());
         // }
-        // for (JsonAdaptedMusician musician : musicians) {
-        //     bandMusicians.add(musician.toModelType());
-        //}
+        for (JsonAdaptedMusician musician : musicians) {
+            bandMusicians.add(musician.toModelType());
+        }
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
@@ -78,7 +77,6 @@ public class JsonAdaptedBand {
         final BandName modelName = new BandName(name);
 
         final Set<Tag> modelGenres = new HashSet<>(); // bandGenres
-        final Set<Musician> modelMusicians = new HashSet<Musician>(); //bandMusicians
-        return new Band(modelName, modelGenres, modelMusicians);
+        return new Band(modelName, modelGenres, bandMusicians);
     }
 }
