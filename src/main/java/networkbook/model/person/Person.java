@@ -23,7 +23,7 @@ public class Person implements Identifiable<Person> {
 
     // Data fields
     private final UniqueList<Link> links;
-    private final GraduatingYear graduatingYear;
+    private final Graduation graduation;
     private final UniqueList<Course> courses;
     private final UniqueList<Specialisation> specialisations;
     private final UniqueList<Tag> tags;
@@ -37,7 +37,7 @@ public class Person implements Identifiable<Person> {
                   UniqueList<Phone> phones,
                   UniqueList<Email> emails,
                   UniqueList<Link> links,
-                  GraduatingYear graduatingYear,
+                  Graduation graduation,
                   UniqueList<Course> courses,
                   UniqueList<Specialisation> specialisations,
                   UniqueList<Tag> tags,
@@ -47,7 +47,7 @@ public class Person implements Identifiable<Person> {
         this.phones = phones;
         this.emails = emails.copy();
         this.links = links.copy();
-        this.graduatingYear = graduatingYear;
+        this.graduation = graduation;
         this.courses = courses.copy();
         this.specialisations = specialisations.copy();
         this.tags = tags.copy();
@@ -68,8 +68,8 @@ public class Person implements Identifiable<Person> {
     public UniqueList<Link> getLinks() {
         return links.copy();
     }
-    public Optional<GraduatingYear> getGraduatingYear() {
-        return Optional.ofNullable(graduatingYear);
+    public Optional<Graduation> getGraduation() {
+        return Optional.ofNullable(graduation);
     }
     public UniqueList<Course> getCourses() {
         return courses.copy();
@@ -127,7 +127,7 @@ public class Person implements Identifiable<Person> {
                 && Objects.equals(phones, otherPerson.phones)
                 && Objects.equals(emails, otherPerson.emails)
                 && Objects.equals(links, otherPerson.links)
-                && Objects.equals(graduatingYear, otherPerson.graduatingYear)
+                && Objects.equals(graduation, otherPerson.graduation)
                 && Objects.equals(courses, otherPerson.courses)
                 && Objects.equals(specialisations, otherPerson.specialisations)
                 && Objects.equals(tags, otherPerson.tags)
@@ -137,7 +137,7 @@ public class Person implements Identifiable<Person> {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phones, emails, links, graduatingYear, courses, specialisations, tags, priority);
+        return Objects.hash(name, phones, emails, links, graduation, courses, specialisations, tags, priority);
     }
 
     @Override
@@ -153,8 +153,8 @@ public class Person implements Identifiable<Person> {
         if (!Objects.equals(links, new UniqueList<Link>())) {
             tsb.add("links", links);
         }
-        if (graduatingYear != null) {
-            tsb.add("graduating year", graduatingYear);
+        if (graduation != null) {
+            tsb.add("graduation", graduation);
         }
         if (courses != null) {
             tsb.add("courses", courses);

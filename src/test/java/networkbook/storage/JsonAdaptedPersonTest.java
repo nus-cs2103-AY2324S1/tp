@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 import networkbook.commons.exceptions.IllegalValueException;
 import networkbook.model.person.Course;
 import networkbook.model.person.Email;
-import networkbook.model.person.GraduatingYear;
+import networkbook.model.person.Graduation;
 import networkbook.model.person.Link;
 import networkbook.model.person.Name;
 import networkbook.model.person.Phone;
@@ -31,7 +31,7 @@ public class JsonAdaptedPersonTest {
     private static final List<JsonAdaptedProperty<Link>> INVALID_LINKS = List.of(
             new JsonAdaptedProperty<Link>("facebookcom")
     );
-    private static final String INVALID_GRADUATING_YEAR = "123a";
+    private static final String INVALID_GRADUATION = "2024";
     private static final String INVALID_COURSE = "";
     private static final List<JsonAdaptedProperty<Specialisation>> INVALID_SPECIALISATION = List.of(
             new JsonAdaptedProperty<Specialisation>("")
@@ -49,7 +49,8 @@ public class JsonAdaptedPersonTest {
     private static final List<JsonAdaptedProperty<Link>> VALID_LINKS = TypicalPersons.BENSON.getLinks().stream()
             .map(JsonAdaptedProperty::new)
             .collect(Collectors.toList());
-    private static final String VALID_GRADUATING_YEAR = "2000";
+    private static final String VALID_GRADUATION = TypicalPersons.BENSON.getGraduation()
+            .map(Graduation::toString).orElse(null);
     private static final String VALID_COURSE = "Computer Science";
     private static final List<JsonAdaptedProperty<Specialisation>> VALID_SPECIALISATION = List.of(
             new JsonAdaptedProperty<Specialisation>("Game Development")
@@ -69,7 +70,7 @@ public class JsonAdaptedPersonTest {
     public void toModelType_invalidName_throwsIllegalValueException() {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(INVALID_NAME, VALID_PHONES, VALID_EMAILS,
-                        VALID_LINKS, VALID_GRADUATING_YEAR, VALID_COURSE,
+                        VALID_LINKS, VALID_GRADUATION, VALID_COURSE,
                         VALID_SPECIALISATION, VALID_TAGS, VALID_PRIORITY);
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
@@ -78,7 +79,7 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(null, VALID_PHONES, VALID_EMAILS,
-                VALID_LINKS, VALID_GRADUATING_YEAR, VALID_COURSE,
+                VALID_LINKS, VALID_GRADUATION, VALID_COURSE,
                 VALID_SPECIALISATION, VALID_TAGS, VALID_PRIORITY);
         String expectedMessage = String.format(
                 JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT,
@@ -91,7 +92,7 @@ public class JsonAdaptedPersonTest {
     public void toModelType_invalidPhone_throwsIllegalValueException() {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, INVALID_PHONES, VALID_EMAILS,
-                        VALID_LINKS, VALID_GRADUATING_YEAR, VALID_COURSE,
+                        VALID_LINKS, VALID_GRADUATION, VALID_COURSE,
                         VALID_SPECIALISATION, VALID_TAGS, VALID_PRIORITY);
         String expectedMessage = Phone.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
@@ -101,7 +102,7 @@ public class JsonAdaptedPersonTest {
     public void toModelType_invalidEmails_throwsIllegalValueException() {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONES, INVALID_EMAILS,
-                        VALID_LINKS, VALID_GRADUATING_YEAR, VALID_COURSE,
+                        VALID_LINKS, VALID_GRADUATION, VALID_COURSE,
                         VALID_SPECIALISATION, VALID_TAGS, VALID_PRIORITY);
         String expectedMessage = Email.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
@@ -111,7 +112,7 @@ public class JsonAdaptedPersonTest {
     public void toModelType_invalidLink_throwsIllegalValueException() {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONES, VALID_EMAILS,
-                        INVALID_LINKS, VALID_GRADUATING_YEAR, VALID_COURSE,
+                        INVALID_LINKS, VALID_GRADUATION, VALID_COURSE,
                         VALID_SPECIALISATION, VALID_TAGS, VALID_PRIORITY);
         String expectedMessage = Link.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
@@ -119,19 +120,19 @@ public class JsonAdaptedPersonTest {
 
 
     @Test
-    public void toModelType_invalidGraduatingYear_throwsIllegalValueException() {
+    public void toModelType_invalidGraduation_throwsIllegalValueException() {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONES, VALID_EMAILS,
-                        VALID_LINKS, INVALID_GRADUATING_YEAR, VALID_COURSE,
+                        VALID_LINKS, INVALID_GRADUATION, VALID_COURSE,
                         VALID_SPECIALISATION, VALID_TAGS, VALID_PRIORITY);
-        String expectedMessage = GraduatingYear.MESSAGE_CONSTRAINTS;
+        String expectedMessage = Graduation.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
     @Test
     public void toModelType_invalidCourse_throwsIllegalValueException() {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONES, VALID_EMAILS,
-                        VALID_LINKS, VALID_GRADUATING_YEAR, INVALID_COURSE,
+                        VALID_LINKS, VALID_GRADUATION, INVALID_COURSE,
                         VALID_SPECIALISATION, VALID_TAGS, VALID_PRIORITY);
         String expectedMessage = Course.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
@@ -141,7 +142,7 @@ public class JsonAdaptedPersonTest {
     public void toModelType_invalidSpecialisation_throwsIllegalValueException() {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONES, VALID_EMAILS,
-                        VALID_LINKS, VALID_GRADUATING_YEAR, VALID_COURSE,
+                        VALID_LINKS, VALID_GRADUATION, VALID_COURSE,
                         INVALID_SPECIALISATION, VALID_TAGS, VALID_PRIORITY);
         String expectedMessage = Specialisation.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
@@ -154,7 +155,7 @@ public class JsonAdaptedPersonTest {
         invalidTags.add(new JsonAdaptedProperty<>(INVALID_TAG));
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONES, VALID_EMAILS,
-                        VALID_LINKS, VALID_GRADUATING_YEAR, VALID_COURSE,
+                        VALID_LINKS, VALID_GRADUATION, VALID_COURSE,
                         VALID_SPECIALISATION, invalidTags, VALID_PRIORITY);
         assertThrows(IllegalValueException.class, person::toModelType);
     }
@@ -162,7 +163,7 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_invalidPriority_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONES, VALID_EMAILS,
-                VALID_LINKS, VALID_GRADUATING_YEAR, VALID_COURSE,
+                VALID_LINKS, VALID_GRADUATION, VALID_COURSE,
                 VALID_SPECIALISATION, VALID_TAGS, INVALID_PRIORITY);
         assertThrows(IllegalValueException.class, person::toModelType);
     }
@@ -170,7 +171,7 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_nullPriority_success() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONES, VALID_EMAILS,
-                VALID_LINKS, VALID_GRADUATING_YEAR, VALID_COURSE,
+                VALID_LINKS, VALID_GRADUATION, VALID_COURSE,
                 VALID_SPECIALISATION, VALID_TAGS, null);
         try {
             assertEquals(TypicalPersons.BENSON, person.toModelType());

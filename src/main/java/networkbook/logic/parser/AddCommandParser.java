@@ -24,7 +24,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                         CliSyntax.PREFIX_PHONE,
                         CliSyntax.PREFIX_EMAIL,
                         CliSyntax.PREFIX_LINK,
-                        CliSyntax.PREFIX_GRADUATING_YEAR,
+                        CliSyntax.PREFIX_GRADUATION,
                         CliSyntax.PREFIX_COURSE,
                         CliSyntax.PREFIX_SPECIALISATION,
                         CliSyntax.PREFIX_TAG,
@@ -47,7 +47,7 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(
                 CliSyntax.PREFIX_NAME,
-                CliSyntax.PREFIX_GRADUATING_YEAR,
+                CliSyntax.PREFIX_GRADUATION,
                 CliSyntax.PREFIX_PRIORITY
         );
 

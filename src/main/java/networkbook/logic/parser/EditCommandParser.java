@@ -38,7 +38,7 @@ public class EditCommandParser implements Parser<EditCommand> {
                         CliSyntax.PREFIX_PHONE,
                         CliSyntax.PREFIX_EMAIL,
                         CliSyntax.PREFIX_LINK,
-                        CliSyntax.PREFIX_GRADUATING_YEAR,
+                        CliSyntax.PREFIX_GRADUATION,
                         CliSyntax.PREFIX_COURSE,
                         CliSyntax.PREFIX_SPECIALISATION,
                         CliSyntax.PREFIX_TAG
@@ -63,7 +63,7 @@ public class EditCommandParser implements Parser<EditCommand> {
                 CliSyntax.PREFIX_PHONE,
                 CliSyntax.PREFIX_EMAIL,
                 CliSyntax.PREFIX_LINK,
-                CliSyntax.PREFIX_GRADUATING_YEAR,
+                CliSyntax.PREFIX_GRADUATION,
                 CliSyntax.PREFIX_COURSE,
                 CliSyntax.PREFIX_SPECIALISATION
         );
@@ -95,9 +95,9 @@ public class EditCommandParser implements Parser<EditCommand> {
                 .ifPresent(editPersonDescriptor::setEmails);
         parseLinksForEdit(argMultimap.getAllValues(CliSyntax.PREFIX_LINK))
                 .ifPresent(editPersonDescriptor::setLinks);
-        if (argMultimap.getValue(CliSyntax.PREFIX_GRADUATING_YEAR).isPresent()) {
-            editPersonDescriptor.setGraduatingYear(
-                    ParserUtil.parseGraduatingYear(argMultimap.getValue(CliSyntax.PREFIX_GRADUATING_YEAR).get()));
+        if (argMultimap.getValue(CliSyntax.PREFIX_GRADUATION).isPresent()) {
+            editPersonDescriptor.setGraduation(
+                    ParserUtil.parseGraduation(argMultimap.getValue(CliSyntax.PREFIX_GRADUATION).get()));
         }
         parseCoursesForEdit(argMultimap.getAllValues(CliSyntax.PREFIX_COURSE))
                 .ifPresent(editPersonDescriptor::setCourses);

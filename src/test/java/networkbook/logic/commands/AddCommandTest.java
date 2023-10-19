@@ -89,11 +89,12 @@ public class AddCommandTest {
 
         CommandTestUtil.assertCommandSuccess(addCommand, model, expectedMessage, expectedModel);
     }
+
     @Test
-    public void execute_addAnotherGraduatingYearToPerson_assertionError() {
+    public void execute_multipleGradsBeingAdded_assertionError() {
         Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
         EditCommand.EditPersonDescriptor descriptor =
-                new EditPersonDescriptorBuilder().withGraduatingYear(CommandTestUtil.VALID_GRADUATING_YEAR_AMY).build();
+                new EditPersonDescriptorBuilder().withGraduation(CommandTestUtil.VALID_GRADUATION_AMY).build();
         AddCommand addCommand = new AddCommand(indexLastPerson, descriptor);
         String expectedMessage = AddCommand.MESSAGE_MULTIPLE_UNIQUE_FIELD;
         CommandTestUtil.assertCommandFailure(addCommand, model, expectedMessage);

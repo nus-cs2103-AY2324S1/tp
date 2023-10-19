@@ -8,11 +8,19 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import networkbook.commons.core.GuiSettings;
 import networkbook.model.person.NameContainsKeywordsPredicate;
+import networkbook.model.person.Person;
+import networkbook.model.person.PersonSortComparator;
+import networkbook.model.person.PersonSortComparator.SortField;
+import networkbook.model.person.PersonSortComparator.SortOrder;
 import networkbook.testutil.NetworkBookBuilder;
 import networkbook.testutil.TypicalPersons;
 
@@ -117,17 +125,41 @@ public class ModelManagerTest {
         // different networkBook -> returns false
         assertFalse(modelManager.equals(new ModelManager(differentNetworkBook, userPrefs)));
 
-        // different filteredList -> returns false
+        // different filter -> returns false
         String[] keywords = TypicalPersons.ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(networkBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        modelManager.updateSortedPersonList(PersonSortComparator.EMPTY_COMPARATOR);
+
+        // different sort -> returns false
+        modelManager.updateSortedPersonList(new PersonSortComparator(SortField.NAME, SortOrder.DESCENDING));
+        assertFalse(modelManager.equals(new ModelManager(networkBook, userPrefs)));
+
+        // resets modelManager to initial state for upcoming tests
+        modelManager.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        modelManager.updateSortedPersonList(PersonSortComparator.EMPTY_COMPARATOR);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setNetworkBookFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(networkBook, differentUserPrefs)));
     }
+
+    @Test
+    public void updateSortedPersonList_descendingNameSort_correctlySorted() {
+        PersonSortComparator comparator = new PersonSortComparator(SortField.NAME, SortOrder.DESCENDING);
+        Model model = new ModelManager(TypicalPersons.getTypicalNetworkBook(), new UserPrefs());
+        model.updateSortedPersonList(comparator);
+        List<Person> expectedPersons = TypicalPersons.getTypicalPersons();
+        Collections.reverse(expectedPersons);
+        ObservableList<Person> expectedList = FXCollections.observableList(expectedPersons);
+        assertEquals(
+                expectedList,
+                model.getFilteredPersonList()
+        );
+    }
+
 }

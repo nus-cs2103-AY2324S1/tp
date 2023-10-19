@@ -16,7 +16,7 @@ import networkbook.logic.parser.CliSyntax;
 import networkbook.model.Model;
 import networkbook.model.person.Course;
 import networkbook.model.person.Email;
-import networkbook.model.person.GraduatingYear;
+import networkbook.model.person.Graduation;
 import networkbook.model.person.Link;
 import networkbook.model.person.Name;
 import networkbook.model.person.Person;
@@ -38,7 +38,7 @@ public class AddCommand extends Command {
             + "[" + CliSyntax.PREFIX_PHONE + " PHONE] "
             + "[" + CliSyntax.PREFIX_EMAIL + " EMAIL] "
             + "[" + CliSyntax.PREFIX_LINK + "LINK] "
-            + "[" + CliSyntax.PREFIX_GRADUATING_YEAR + "GRADUATING YEAR] "
+            + "[" + CliSyntax.PREFIX_GRADUATION + " GRADUATION DATE] "
             + "[" + CliSyntax.PREFIX_COURSE + "COURSE OF STUDY] "
             + "[" + CliSyntax.PREFIX_SPECIALISATION + "SPECIALISATION] "
             + "[" + CliSyntax.PREFIX_TAG + " TAG] "
@@ -100,7 +100,7 @@ public class AddCommand extends Command {
         UniqueList<Phone> updatedPhones = addPhones(personToAddInfo, editPersonDescriptor);
         UniqueList<Email> updatedEmails = addEmails(personToAddInfo, editPersonDescriptor);
         UniqueList<Link> updatedLinks = addLinks(personToAddInfo, editPersonDescriptor);
-        GraduatingYear updatedGraduatingYear = addGraduatingYear(personToAddInfo, editPersonDescriptor);
+        Graduation updatedGraduatingYear = addGraduation(personToAddInfo, editPersonDescriptor);
         UniqueList<Course> updatedCourses = addCourses(personToAddInfo, editPersonDescriptor);
         UniqueList<Specialisation> updatedSpecialisations = addSpecialisations(personToAddInfo, editPersonDescriptor);
         UniqueList<Tag> updatedTags = addTags(personToAddInfo, editPersonDescriptor);
@@ -127,14 +127,14 @@ public class AddCommand extends Command {
         editPersonDescriptor.getLinks().ifPresent(links::addAllFromList);
         return links;
     }
-    private GraduatingYear addGraduatingYear(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor)
+    private Graduation addGraduation(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor)
             throws CommandException {
-        Optional<GraduatingYear> oldGraduatingYear = personToAddInfo.getGraduatingYear();
-        Optional<GraduatingYear> newGraduatingYear = editPersonDescriptor.getGraduatingYear();
-        if (oldGraduatingYear.isPresent() && newGraduatingYear.isPresent()) {
+        Optional<Graduation> oldGraduation = personToAddInfo.getGraduation();
+        Optional<Graduation> newGraduation = editPersonDescriptor.getGraduation();
+        if (oldGraduation.isPresent() && newGraduation.isPresent()) {
             throw new CommandException(MESSAGE_MULTIPLE_UNIQUE_FIELD);
         }
-        return newGraduatingYear.orElse(oldGraduatingYear.orElse(null));
+        return newGraduation.orElse(oldGraduation.orElse(null));
     }
     private UniqueList<Course> addCourses(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor) {
         UniqueList<Course> courses = personToAddInfo.getCourses();

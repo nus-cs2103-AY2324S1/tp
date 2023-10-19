@@ -6,7 +6,7 @@ import java.util.stream.Stream;
 
 import networkbook.logic.parser.Prefix;
 import networkbook.model.person.Course;
-import networkbook.model.person.GraduatingYear;
+import networkbook.model.person.Graduation;
 import networkbook.model.person.Person;
 import networkbook.model.person.Priority;
 
@@ -44,9 +44,9 @@ public class Messages {
                 .append("; Phones: ").append(person.getPhones())
                 .append("; Emails: ").append(person.getEmails())
                 .append("; Links: ").append(person.getLinks());
-        person.getGraduatingYear().ifPresent((GraduatingYear g) -> {
-            builder.append("; Graduating Year: ");
-            builder.append(g);
+        person.getGraduation().ifPresent((Graduation g) -> {
+            builder.append("; Graduation: ");
+            builder.append(g.getFullString());
         });
         builder.append("; Courses: ").append(person.getCourses());
         builder.append("; Specialisations ").append(person.getSpecialisations());

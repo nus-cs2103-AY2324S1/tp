@@ -61,6 +61,32 @@ public class FindCommandTest {
     }
 
     @Test
+    public void execute_singleUniqueKeyword_matchingPersonFound() {
+        String expectedMessage = String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        NameContainsKeywordsPredicate predicate = preparePredicate("Fiona");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        CommandTestUtil.assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(
+                Arrays.asList(TypicalPersons.FIONA),
+                model.getFilteredPersonList()
+        );
+    }
+
+    @Test
+    public void execute_multipleUniqueKeywords_matchingPersonFound() {
+        String expectedMessage = String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        NameContainsKeywordsPredicate predicate = preparePredicate("Fiona   Kunz");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        CommandTestUtil.assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(
+                Arrays.asList(TypicalPersons.FIONA),
+                model.getFilteredPersonList()
+        );
+    }
+
+    @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
         String expectedMessage = String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");

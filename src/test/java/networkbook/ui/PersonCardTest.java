@@ -1,7 +1,8 @@
 package networkbook.ui;
 
 import static networkbook.logic.commands.CommandTestUtil.VALID_COURSE_BOB;
-import static networkbook.logic.commands.CommandTestUtil.VALID_GRADUATING_YEAR_BOB;
+import static networkbook.logic.commands.CommandTestUtil.VALID_GRADUATION_BOB;
+import static networkbook.logic.commands.CommandTestUtil.VALID_GRADUATION_FULL_BOB;
 import static networkbook.logic.commands.CommandTestUtil.VALID_SPECIALISATION_BOB;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -40,12 +41,12 @@ public class PersonCardTest {
     }
 
     @Test
-    public void constructor_hasValidGraduatingYear_showsValidGraduatingYear() {
-        Person person = new PersonBuilder().withName("Bob").withGraduatingYear(VALID_GRADUATING_YEAR_BOB).build();
+    public void constructor_hasValidGraduation_showsValidGraduation() {
+        Person person = new PersonBuilder().withName("Bob").withGraduation(VALID_GRADUATION_BOB).build();
         PersonCard personCard = new PersonCard(person, 1);
-        Label graduatingYear = personCard.getGraduatingYear();
-        assertEquals("Graduating Year: " + VALID_GRADUATING_YEAR_BOB, graduatingYear.getText());
-        assertTrue(graduatingYear.isVisible());
+        Label graduation = personCard.getGraduation();
+        assertEquals("Graduation: " + VALID_GRADUATION_FULL_BOB, graduation.getText());
+        assertTrue(graduation.isVisible());
     }
 
     @Test
