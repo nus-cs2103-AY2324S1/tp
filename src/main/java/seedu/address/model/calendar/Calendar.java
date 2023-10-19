@@ -5,6 +5,9 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.model.event.AllDaysEventListManager;
 import seedu.address.model.event.Event;
 
+import java.time.LocalDateTime;
+import java.util.Optional;
+
 /**
  * Represents a calendar that stores and manages events.
  */
@@ -34,7 +37,7 @@ public class Calendar {
      * @return true if it can be added, false otherwise.
      */
     public boolean canAddEvent(Event event) {
-        return this.eventManager.canAddEvent(event);
+        return eventManager.canAddEvent(event);
     }
 
     /**
@@ -44,7 +47,21 @@ public class Calendar {
      */
     public void addEvent(Event event) {
         requireNonNull(event);
-        this.eventManager.addEvent(event);
+        eventManager.addEvent(event);
+    }
+
+    /**
+     * Checks if there is an event at specified time and deletes it if there is.
+     * @param dateTime the specified time
+     */
+    public void deleteEventAt(LocalDateTime dateTime) {
+        requireNonNull(dateTime);
+        eventManager.deleteEventAt(dateTime);
+    }
+
+    public Optional<Event> findEventAt(LocalDateTime dateTime) {
+        requireNonNull(dateTime);
+        return eventManager.eventAt(dateTime);
     }
 
     /**
