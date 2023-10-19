@@ -4,14 +4,16 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
-import java.util.function.Predicate;
+import java.util.HashSet;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import seedu.address.commons.core.FilterSettings;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.predicate.SerializablePredicate;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -34,6 +36,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredPersons.setPredicate(this.userPrefs.getFilterSettings().getComposedFilter());
     }
 
     public ModelManager() {
@@ -62,6 +65,17 @@ public class ModelManager implements Model {
     public void setGuiSettings(GuiSettings guiSettings) {
         requireNonNull(guiSettings);
         userPrefs.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public FilterSettings getFilterSettings() {
+        return userPrefs.getFilterSettings();
+    }
+
+    @Override
+    public void setFilterSettings(FilterSettings filterSettings) {
+        requireNonNull(filterSettings);
+        userPrefs.setFilterSettings(filterSettings);
     }
 
     @Override
@@ -101,7 +115,8 @@ public class ModelManager implements Model {
     @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        // TODO: Revise if this is intended behaviour
+        clearFilters();
     }
 
     @Override
@@ -123,9 +138,27 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void addFilter(SerializablePredicate predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        HashSet<SerializablePredicate> currentFilters = this.getFilterSettings().getFilters();
+        currentFilters.add(predicate);
+        this.setFilterSettings(new FilterSettings(currentFilters));
+        filteredPersons.setPredicate(this.getFilterSettings().getComposedFilter());
+    }
+
+    @Override
+    public void deleteFilter(SerializablePredicate predicate) {
+        requireNonNull(predicate);
+        HashSet<SerializablePredicate> currentFilters = this.getFilterSettings().getFilters();
+        currentFilters.remove(predicate);
+        this.setFilterSettings(new FilterSettings(currentFilters));
+        filteredPersons.setPredicate(this.getFilterSettings().getComposedFilter());
+    }
+
+    @Override
+    public void clearFilters() {
+        this.setFilterSettings(new FilterSettings());
+        filteredPersons.setPredicate(this.getFilterSettings().getComposedFilter());
     }
 
     @Override

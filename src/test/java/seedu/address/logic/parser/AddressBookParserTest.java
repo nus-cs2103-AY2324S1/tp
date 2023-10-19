@@ -19,12 +19,13 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.ContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.predicate.NameContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -73,7 +74,7 @@ public class AddressBookParserTest {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " /name " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new ContainsKeywordsPredicate(keywords)), command);
+        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
@@ -84,8 +85,26 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_list() throws Exception {
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " attendance tn/1") instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " students") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_filter() throws Exception {
+        assertTrue(parser.parseCommand(
+                FilterCommand.COMMAND_WORD + " add coursetg/CS2103T") instanceof FilterCommand);
+        assertTrue(parser.parseCommand(
+                FilterCommand.COMMAND_WORD + " add coursetg/CS2103T") instanceof FilterCommand);
+        assertTrue(parser.parseCommand(
+                FilterCommand.COMMAND_WORD + " add coursetg/CS2103T tn/1") instanceof FilterCommand);
+        assertTrue(parser.parseCommand(
+                FilterCommand.COMMAND_WORD + " delete coursetg/CS2103T") instanceof FilterCommand);
+        assertTrue(parser.parseCommand(
+                FilterCommand.COMMAND_WORD + " delete coursetg/CS2103T") instanceof FilterCommand);
+        assertTrue(parser.parseCommand(
+                FilterCommand.COMMAND_WORD + " delete coursetg/CS2103T tn/1") instanceof FilterCommand);
+        assertTrue(parser.parseCommand(
+                FilterCommand.COMMAND_WORD + " clear") instanceof FilterCommand);
     }
 
     @Test

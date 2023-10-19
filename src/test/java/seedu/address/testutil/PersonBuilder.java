@@ -19,7 +19,6 @@ public class PersonBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_ID = "A1234567E";
 
     private Name name;
@@ -89,6 +88,7 @@ public class PersonBuilder {
         this.id = new ID(id);
         return this;
     }
+
 
     public Person build() {
         return new Person(name, phone, email, id, tags);

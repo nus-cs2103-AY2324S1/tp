@@ -1,19 +1,17 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
-import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.FilterSettings;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.model.predicate.SerializablePredicate;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
-    /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
-
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
@@ -33,6 +31,16 @@ public interface Model {
      * Sets the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    /**
+     * Returns the user prefs' filter settings.
+     */
+    FilterSettings getFilterSettings();
+
+    /**
+     * Sets the user prefs' filter settings.
+     */
+    void setFilterSettings(FilterSettings filterSettings);
 
     /**
      * Returns the user prefs' address book file path.
@@ -80,8 +88,19 @@ public interface Model {
     ObservableList<Person> getFilteredPersonList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
-     * @throws NullPointerException if {@code predicate} is null.
+     * Adds the given predicate to filter list.
+     * {@code predicate} must not already exist in the address book.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void addFilter(SerializablePredicate predicate);
+
+    /**
+     * Deletes the given predicate.
+     * The predicate must exist in the filter list.
+     */
+    void deleteFilter(SerializablePredicate predicate);
+
+    /**
+     * Clears all filters.
+     */
+    void clearFilters();
 }
