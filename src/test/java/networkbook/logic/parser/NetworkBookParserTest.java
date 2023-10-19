@@ -20,7 +20,7 @@ import networkbook.logic.commands.FindCommand;
 import networkbook.logic.commands.HelpCommand;
 import networkbook.logic.commands.ListCommand;
 import networkbook.logic.parser.exceptions.ParseException;
-import networkbook.model.person.NameContainsKeywordsPredicate;
+import networkbook.model.person.NameContainsKeyTermsPredicate;
 import networkbook.model.person.Person;
 import networkbook.testutil.EditPersonDescriptorBuilder;
 import networkbook.testutil.PersonBuilder;
@@ -72,7 +72,7 @@ public class NetworkBookParserTest {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        assertEquals(new FindCommand(new NameContainsKeyTermsPredicate(keywords)), command);
     }
 
     @Test
