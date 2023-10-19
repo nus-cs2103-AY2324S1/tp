@@ -148,6 +148,47 @@ You will see a list of musicians as follows:
 Should you input `find` without any keyword, you will see a message like below:
 [insert image]
 
+### Creating a band: `addb`
+
+Creates a band with the specified band name.
+
+**Format:** `addb n/BANDNAME`
+
+Examples:
+* `addb n/My Garage Band`
+
+**Upon success:**
+
+You will see a message indicating successful addition of the band like below:
+[insert image]
+
+**Upon failure:**
+
+Should you input a band which is already in your contact book (ie. have the same name as an 
+existing band), you will see an error message showing the possible error. Please input a different name for the new 
+band or change the name of the existing band.
+[insert image]
+
+### Adding a musician to a band: `addm`
+
+Adds a musician to a specified band.
+
+**Format:** `addm bin/BANDINDEX min/MUSICIANINDEX`
+
+Examples:
+* `addm bin/1 min/2` adds the second musician in the contact list to the first band in the list of bands.
+
+**Upon success:**
+
+You will see a message indicating successful addition of the musician into the band like below:
+[insert image]
+
+**Upon failure:**
+
+Should you input an index that does not exist, you will see an error message showing the possible error. 
+Please input a different index as pointed out by the error message.
+[insert image]
+
 ### Exiting the program : `exit`
 
 Exits the program.
