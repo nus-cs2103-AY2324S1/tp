@@ -15,6 +15,12 @@ public class ListTeamCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Listed all teams";
 
 
+    /**
+     * Create a CommandResult instance, which the Ui will operate base on.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return a CommandResult instance, which the Ui will operate base on.
+     */
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);

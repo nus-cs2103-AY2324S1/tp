@@ -18,6 +18,8 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteDeveloperFromTeamCommand;
 import seedu.address.logic.commands.DeleteTeamCommand;
 import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EditTeamLeaderCommand;
+import seedu.address.logic.commands.EditTeamNameCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -121,5 +123,4 @@ public class AddressBookParser {
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-
 }
