@@ -1,9 +1,19 @@
 package seedu.staffsnap.ui;
 
 import java.util.Comparator;
+import java.util.concurrent.Flow;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
+import javafx.geometry.HPos;
+import javafx.geometry.Orientation;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -33,11 +43,11 @@ public class ApplicantCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label phone;
+    private HBox phone;
     @FXML
-    private Label position;
+    private HBox email;
     @FXML
-    private Label email;
+    private HBox position;
     @FXML
     private FlowPane interviews;
 
@@ -48,10 +58,30 @@ public class ApplicantCard extends UiPart<Region> {
         super(FXML);
         this.applicant = applicant;
         id.setText(displayedIndex + ". ");
+
         name.setText(applicant.getName().fullName);
-        phone.setText(applicant.getPhone().value);
-        position.setText(applicant.getPosition().value);
-        email.setText(applicant.getEmail().value);
+
+        Label phoneLabel = new Label(applicant.getPhone().value);
+        ImageView phoneIcon = new ImageView("/images/phone_white_icon.png");
+        phoneIcon.setFitHeight(13.5);
+        phoneIcon.setFitWidth(13.5);
+        phone.getChildren().add(phoneIcon);
+        phone.getChildren().add(phoneLabel);
+
+        Label emailLabel = new Label(applicant.getEmail().value);
+        ImageView emailIcon = new ImageView("/images/email_white_icon.png");
+        emailIcon.setFitHeight(13.5);
+        emailIcon.setFitWidth(13.5);
+        email.getChildren().add(emailIcon);
+        email.getChildren().add(emailLabel);
+
+        Label positionLabel = new Label(applicant.getPosition().value);
+        ImageView positionIcon = new ImageView("/images/position_white_icon.png");
+        positionIcon.setFitHeight(13.5);
+        positionIcon.setFitWidth(13.5);
+        position.getChildren().add(positionIcon);
+        position.getChildren().add(positionLabel);
+
         applicant.getInterviews().stream()
                 .sorted(Comparator.comparing(interview -> interview.type))
                 .forEach(interview -> interviews.getChildren().add(new Label(interview.type)));
