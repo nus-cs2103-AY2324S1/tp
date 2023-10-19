@@ -210,10 +210,9 @@ Format: `clear`
 
 Sorts all the entries in lexicographical order. After sorting the list, the ordering of the entries will be changed.
 As a result, performing delete operations that require indexing will reference the new ordering that is currently 
-displayed on the screen
+displayed on the screen.
 
 Format: `sort`
-
 
 ### Exiting the program : `exit`
 
