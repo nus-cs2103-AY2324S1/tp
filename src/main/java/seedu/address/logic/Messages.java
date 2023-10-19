@@ -1,7 +1,5 @@
 package seedu.address.logic;
 
-import seedu.address.model.contact.Email;
-
 
 
 //TODO we could avoid static imports, and instead refer to strings as
