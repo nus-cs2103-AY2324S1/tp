@@ -271,20 +271,26 @@ about musicians to potentially work with
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                          | I want to …​                                     | So that I can…​                                                        |
-|----------|--------------------------------------------------|--------------------------------------------------|------------------------------------------------------------------------|
-| `* * *`  | producer                                         | see usage instructions                           | refer to instructions when I forget how to use the App                 |
-| `* * *`  | producer                                         | add a new musician                                 | contact them to form a band                                            |
-| `* * *`  | producer                                         | delete a record for one musician                 | remove entries that I no longer need                                   |
-| `* * *`  | producer                                         | find a musician by name                            | locate details of musicians without having to go through the entire list |
-| `* *`    | producer                                         | tag a musician with an instrument they play      | know their potential role in a band                                    |
-| `* *`    | producer                                         | tag a musician with the genre they specialise in | find musicians suiting the song I am making                            |
-| `* *`    | producer                                         | edit a record for a musician                     | modify or update the information for a musician                        |
-| `* *`    | producer                                         | view all records of musicians I have stored      | easily see all the information I have                                  |
-| `* *`    | producer                                         | hide private contact details                     | minimize chance of someone else seeing them by accident                |
-| `*`      | producer who has worked with a musician before   | give a musician a rating                         | can keep track of my past experience with them                         |
-| `*`      | producer who is actively producing music         | check the availability of a musician             | I can avoid musicians with clashing schedules                          |
-| `*`      | producer with many musicians in the address book | sort musicians by name                             | locate a musician easily                                                 |
+| Priority | As a …​                                          | I want to …​                                     | So that I can…​                                                          |
+|--------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------------------------------|
+| `* * *` | producer                                         | see usage instructions                           | refer to instructions when I forget how to use the App                   |
+| `* * *` | producer                                         | add a new musician                               | contact them to form a band                                              |
+| `* * *` | producer                                         | delete a record for one musician                 | remove entries that I no longer need                                     |
+| `* * *` | producer                                         | find a musician by name                          | locate details of musicians without having to go through the entire list |
+| `* *`  | producer                                         | tag a musician with an instrument they play      | understand their potential role in a band                                |
+| `* *`  | producer                                         | create a band                                    |                                                                          |
+| `* *`  | producer                                         | add a musician to a band                         | group musicians together                                                 |
+| `* *`  | producer                                         | view the members of a specific band              | keep track of the band members in each band                              |
+| `* *`  | producer                                         | delete a band                                    |                                                                          |
+| `* *`  | producer                                         | tag a musician with the genre they specialise in | find musicians suiting the song I am making                              |
+| `* *`  | producer                                         | edit a record for a musician                     | modify or update the information for a musician                          |
+| `* *`  | producer                                         | view all records of musicians I have stored      | easily see all the information I have                                    |
+| `* *`  | producer                                         | hide private contact details                     | minimize chance of someone else seeing them by accident                  |
+| `*`    | producer                                         | tag a band with the genre it specialises in      | find the band suited to performing the song I wish                       |
+| `*`    | producer who has worked with a musician before   | give a musician a rating                         | keep track of my past experience with them                               |
+| `*`    | producer who has worked with a musician before   | give a musician a rating                         | keep track of my past experience with them                               |
+| `*`    | producer who is actively producing music         | check the availability of a musician             | avoid musicians with clashing schedules                                  |
+| `*`    | producer with many musicians in the address book | sort musicians by name                           | locate a musician easily                                                 |
 
 
 *{More to be added}*
@@ -397,6 +403,45 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
+**Use case: UC07 - Create a band**
+
+**MSS**
+
+1. User enters the band details
+2. User requests to create a new band with the specified name
+3. System creates and stores the new band
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. This band is already stored in the system
+* 2a1. System shows a message showing that the contact is already stored.
+
+* 2b. User enters input wrongly
+* 2b1. System shows a message showing the proper input format.
+
+  Use case ends.
+  
+**Use case: UC08 - Add a musician to a band**
+
+**MSS**
+
+1. User enters the band details and musician details
+2. User requests to add the specified musician to the band
+3. BandConnect++ adds the musician to the band
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The musician specified is already part of the band specified
+* 2a1. System shows a message showing that the musician is already part of the band.
+
+* 2b. User enters input wrongly
+* 2b1. System shows a message showing the proper input format.
+
+  Use case ends.
 *{More to be added}*
 
 
