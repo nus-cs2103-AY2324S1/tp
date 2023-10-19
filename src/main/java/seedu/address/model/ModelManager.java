@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
@@ -135,7 +134,6 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
-
     @Override
     public void updateFilteredPersonList(List<Predicate<Person>> predicatesList) {
         requireNonNull(predicatesList);
@@ -145,17 +143,10 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(combinedPredicate);
     }
 
-    //  TODO: fix the sorting
     @Override
     public void sortPersonList(Comparator<Person> comparator) {
         requireNonNull(comparator);
-
-        List<Person> sortedList = new ArrayList<>(getFilteredPersonList());
-        sortedList.sort(comparator);
-
-        // Update the filtered list
-        Predicate<Person> predicate = sortedList::contains;
-        updateFilteredPersonList(predicate);
+        return;
     }
 
 
