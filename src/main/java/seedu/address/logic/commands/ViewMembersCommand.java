@@ -15,9 +15,8 @@ public class ViewMembersCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
-        //TODO implement this
         requireNonNull(model);
-        model.updateFilteredMembersList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredMemberList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

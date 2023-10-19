@@ -1,11 +1,8 @@
 package seedu.address.model.person;
 
-import java.util.HashSet;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.fields.Address;
-import seedu.address.model.person.fields.Email;
 import seedu.address.model.person.fields.Name;
 import seedu.address.model.person.fields.Phone;
 
@@ -15,26 +12,38 @@ import seedu.address.model.person.fields.Phone;
  */
 public class Applicant extends Person {
 
+    private final Phone phone;
     /**
      * Every field must be present and not null.
      */
     public Applicant(Name name, Phone phone) {
-        // TODO: remove need to pass in stub fields
-        super(name, phone, new Email("sample@example.com"), new Address("sample"), new HashSet<>());
-
+        super(name);
+        this.phone = phone;
     }
 
     /**
-     * Returns true if both applicants have the same name.
+     * Returns true if both applicants have the same name and phone.
      * This defines a weaker notion of equality between two applicants.
      */
-    public boolean isSameApplicant(Applicant otherApplicant) {
-        if (otherApplicant == this) {
+    @Override
+    public boolean isSamePerson(Person other) {
+        if (other == this) {
             return true;
         }
 
-        return otherApplicant != null
-                && otherApplicant.getName().equals(getName());
+        // instanceof handles nulls
+        if (!(other instanceof Applicant)) {
+            return false;
+        }
+
+        Applicant otherApplicant = (Applicant) other;
+        // applicants are considered the same if they have the same name or phone
+        return getName().equals(otherApplicant.getName())
+                || this.phone.equals(otherApplicant.phone);
+    }
+
+    public Phone getPhone() {
+        return phone;
     }
 
     /**
@@ -54,20 +63,20 @@ public class Applicant extends Person {
 
         Applicant otherApplicant = (Applicant) other;
         return getName().equals(otherApplicant.getName())
-                && getPhone().equals(otherApplicant.getPhone());
+                && this.phone.equals(otherApplicant.phone);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(getName(), getPhone());
+        return Objects.hash(getName(), phone);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", getName())
-                .add("phone", getPhone())
+                .add("phone", phone)
                 .toString();
     }
 }
