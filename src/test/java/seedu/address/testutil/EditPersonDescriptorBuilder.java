@@ -10,6 +10,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
+import seedu.address.model.person.Status;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -60,6 +61,14 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withEmail(String email) {
         descriptor.setEmail(new Email(email));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Status} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withStatus(String status) {
+        descriptor.setStatus(new Status(status));
         return this;
     }
 
