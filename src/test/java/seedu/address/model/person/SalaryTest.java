@@ -21,7 +21,7 @@ public class SalaryTest {
 
     @Test
     public void isValidPhone() {
-        // null phone number
+        // null salary
         assertThrows(NullPointerException.class, () -> Salary.isValidSalary(null));
 
         // invalid salary
