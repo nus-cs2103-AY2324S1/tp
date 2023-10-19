@@ -177,11 +177,13 @@ public class UniqueCardListTest {
 
     @Test
     public void add_cardWithSamePriority() {
+        UniqueCardList otherList = new UniqueCardList();
+
         uniqueCardList.add(LOW);
         uniqueCardList.add(HIGH);
-        UniqueCardList otherList = new UniqueCardList();
         otherList.add(HIGH);
         otherList.add(LOW);
+
         assertFalse(uniqueCardList.equals(otherList));
     }
 }

@@ -2,13 +2,19 @@
   "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
 
   "cards" : [ {
+    "question" : "Low Priority?",
+    "answer" : "True"
+  }, {
     "question" : "R-Format instruction opcode",
     "answer" : "0"
   }, {
       "question" : "What is the language used for this mod?",
       "answer" : "Source"
-    }, {
+  }, {
     "question" : "Name the 3 relations",
     "answer" : "Reflexive, Symmetric, Transitive"
+  }, {
+    "question" : "High Priority?",
+    "answer" : "True"
   } ]
 }
