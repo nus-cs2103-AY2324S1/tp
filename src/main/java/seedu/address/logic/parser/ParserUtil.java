@@ -20,16 +20,20 @@ import seedu.address.model.person.SortIn;
 import seedu.address.model.tag.Subject;
 
 /**
- * Contains utility methods used for parsing strings in the various *Parser classes.
+ * Contains utility methods used for parsing strings in the various *Parser
+ * classes.
  */
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
     /**
-     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
+     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading
+     * and trailing whitespaces will be
      * trimmed.
-     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     * 
+     * @throws ParseException if the specified index is invalid (not non-zero
+     *                        unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
@@ -183,4 +187,33 @@ public class ParserUtil {
         return new SortIn(trimmedSortIn);
     }
 
+    /**
+     * Parses preamble of user input, preamble in edit command can either be index
+     * or student's name
+     * 
+     * @param preamble text before the first valid prefix in user input.
+     * @return either Index object or Name object.
+     * @throws ParseException
+     */
+    public static Object parsePreamble(String preamble) throws ParseException {
+        requireNonNull(preamble);
+        preamble = preamble.trim();
+        // Preamble, if exist, can either be index or student's name
+        if (isInteger(preamble)) {
+            return parseIndex(preamble);
+        }
+        if (!preamble.matches("^[a-zA-Z ]+$")) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+        return parseName(preamble);
+    }
+
+    private static boolean isInteger(String s) {
+        try {
+            Integer.parseInt(s);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
 }

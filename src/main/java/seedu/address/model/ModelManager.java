@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,6 +12,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.SortIn;
 import seedu.address.model.person.Student;
 
@@ -41,7 +44,8 @@ public class ModelManager implements Model {
         this(new AddressBook(), new UserPrefs());
     }
 
-    //=========== UserPrefs ==================================================================================
+    // =========== UserPrefs
+    // ==================================================================================
 
     @Override
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
@@ -76,7 +80,8 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    // =========== AddressBook
+    // ================================================================================
 
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
@@ -112,12 +117,12 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedStudent);
     }
 
-    //=========== Filtered Student List Accessors =============================================================
-
-
+    // =========== Filtered Student List Accessors
+    // =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Student} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Student} backed by the
+     * internal list of
      * {@code versionedAddressBook}
      */
     @Override
@@ -135,6 +140,27 @@ public class ModelManager implements Model {
     public void updateSortedPersonList(SortIn sequence) {
         requireNonNull(sequence);
         addressBook.sort(sequence);
+    }
+
+    @Override
+    public Optional<Student> getStudentFromFilteredPersonListByName(Name name) {
+        Optional<Student> targetStudent = Optional.ofNullable(null);
+        for (Student student : filteredStudents) {
+            if (student.getName().equals(name)) {
+                targetStudent = Optional.of(student);
+                break;
+            }
+        }
+        return targetStudent;
+    }
+
+    @Override
+    public Optional<Student> getStudentFromFilteredPersonListByIndex(Index index) {
+        int zerobasedIndex;
+        if (index == null || (zerobasedIndex = index.getZeroBased()) < 0 || zerobasedIndex >= filteredStudents.size()) {
+            return Optional.ofNullable(null);
+        }
+        return Optional.of(filteredStudents.get(zerobasedIndex));
     }
 
     @Override
