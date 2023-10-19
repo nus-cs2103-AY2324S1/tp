@@ -125,17 +125,20 @@ public class CommandTestUtil {
      * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
-     * - the address book, filtered member list and selected member in {@code actualModel} remain unchanged
+     * - the address book, filtered member list, filtered event list, selected member and selected event
+     *   in {@code actualModel} remain unchanged
      */
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
-        List<Member> expectedFilteredList = new ArrayList<>(actualModel.getFilteredMemberList());
+        List<Member> expectedMemberFilteredList = new ArrayList<>(actualModel.getFilteredMemberList());
+        List<Event> expectedFilteredEventList = new ArrayList<>(actualModel.getFilteredEventList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
-        assertEquals(expectedFilteredList, actualModel.getFilteredMemberList());
+        assertEquals(expectedMemberFilteredList, actualModel.getFilteredMemberList());
+        assertEquals(expectedFilteredEventList, actualModel.getFilteredEventList());
     }
     /**
      * Updates {@code model}'s filtered list to show only the member at the given {@code targetIndex} in the
