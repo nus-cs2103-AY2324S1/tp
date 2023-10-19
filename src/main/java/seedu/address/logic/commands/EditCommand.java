@@ -190,8 +190,13 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
-        public void setStatus(Status status) { this.status = status; }
-        public Optional<Status> getStatus() { return Optional.ofNullable(status); }
+        public void setStatus(Status status) {
+            this.status = status;
+        }
+
+        public Optional<Status> getStatus() {
+            return Optional.ofNullable(status);
+        }
 
         public void setRemark(Remark remark) {
             this.remark = remark;

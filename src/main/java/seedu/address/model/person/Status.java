@@ -10,7 +10,7 @@ public class Status {
     /**
      * Represents the available statuses that can be assigned to a Person.
      */
-    public static enum statusList {
+    protected enum StatusList {
         NIL,
         Prospective,
         Active,
@@ -44,7 +44,7 @@ public class Status {
         if (input == null || input.isEmpty()) {
             return true;
         }
-        for (statusList enumValue : statusList.class.getEnumConstants()) {
+        for (StatusList enumValue : StatusList.class.getEnumConstants()) {
             if (enumValue.name().equals(input)) {
                 return true;
             }

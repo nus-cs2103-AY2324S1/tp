@@ -121,8 +121,8 @@ public class JsonAdaptedMeetingTest {
     public void toModelType_invalidTags_throwsIllegalValueException() {
         List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
         invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
-        JsonAdaptedMeeting meeting =
-                new JsonAdaptedMeeting(VALID_TITLE, VALID_LOCATION, VALID_START, VALID_END, VALID_ATTENDEE, invalidTags);
+        JsonAdaptedMeeting meeting = new JsonAdaptedMeeting(VALID_TITLE, VALID_LOCATION, VALID_START, VALID_END,
+                VALID_ATTENDEE, invalidTags);
         assertThrows(IllegalValueException.class, meeting::toModelType);
     }
 
