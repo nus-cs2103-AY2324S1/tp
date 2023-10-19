@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
@@ -9,8 +11,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.StatusTypes;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Sets the status of a person in the address book.
