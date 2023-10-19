@@ -77,6 +77,18 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void setCalendarFilePath_nullPath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setCalendarFilePath(null));
+    }
+
+    @Test
+    public void setCalendarFilePath_validPath_setsAddressBookFilePath() {
+        Path path = Paths.get("calendar/file/path");
+        modelManager.setCalendarFilePath(path);
+        assertEquals(path, modelManager.getCalendarFilePath());
+    }
+
+    @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.hasPerson(null));
     }
