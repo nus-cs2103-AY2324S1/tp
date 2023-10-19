@@ -41,6 +41,9 @@ public class ParserUtil {
     public static final String MESSAGE_SPEC_DUPLICATE = "Your list of specialisations contains duplicates. \n"
             + "Please ensure that you do not input the same specialisation more than once.";
 
+    public static final String MESSAGE_COURSE_DUPLICATE = "Your list of courses contains duplicates. \n"
+            + "Please ensure that you do not input the same course more than once.";
+
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
@@ -192,7 +195,7 @@ public class ParserUtil {
     public static UniqueList<Course> parseCourses(Collection<String> courses) throws ParseException {
         requireNonNull(courses);
         if (!verifyNoDuplicates(courses)) {
-            throw new ParseException(MESSAGE_LINK_DUPLICATE);
+            throw new ParseException(MESSAGE_COURSE_DUPLICATE);
         }
         UniqueList<Course> result = new UniqueList<>();
         for (String link : courses) {

@@ -215,6 +215,21 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseCourses_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseCourses(null));
+    }
+
+    @Test
+    public void parseCourses_collectionWithInvalidLinks_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseCourses(Arrays.asList(VALID_COURSE, INVALID_COURSE)));
+    }
+
+    @Test
+    public void parseCourses_collectionWithDuplicates_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseCourses(Arrays.asList(VALID_COURSE, VALID_COURSE)));
+    }
+
+    @Test
     public void parseSpecialisation_null_returnsNull() throws Exception {
         assertEquals(null, ParserUtil.parseSpecialisation(null));
     }
@@ -222,6 +237,23 @@ public class ParserUtilTest {
     @Test
     public void parseSpecialisation_invalidValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseSpecialisation(INVALID_COURSE));
+    }
+
+    @Test
+    public void parseSpecialisations_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseSpecialisations(null));
+    }
+
+    @Test
+    public void parseSpecialisations_collectionWithInvalidLinks_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil
+                .parseSpecialisations(Arrays.asList(VALID_SPECIALISATION, INVALID_SPECIALISATION)));
+    }
+
+    @Test
+    public void parseSpecialisations_collectionWithDuplicates_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil
+                .parseSpecialisations(Arrays.asList(VALID_SPECIALISATION, VALID_SPECIALISATION)));
     }
 
     @Test
