@@ -9,7 +9,7 @@ import seedu.address.model.event.Event;
  * Represents a calendar that stores and manages events.
  */
 public class Calendar {
-    private AllDaysEventListManager eventManager;
+    private final AllDaysEventListManager eventManager;
 
     /**
      * Constructs a Calendar object with an empty event tree.

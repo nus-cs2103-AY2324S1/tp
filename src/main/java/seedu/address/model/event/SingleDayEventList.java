@@ -3,6 +3,8 @@ package seedu.address.model.event;
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Map;
 import java.util.NavigableMap;
 import java.util.Optional;
@@ -75,6 +77,22 @@ public class SingleDayEventList {
             }
         }
         return false;
+    }
+
+    /**
+     * Check if there is an event at specified time
+     *
+     * @param dateTime the specified time
+     * @return an {@code @Optional} containing the event if there is an event at the time, empty optional otherwise.
+     */
+    public Optional<Event> hasEventAtTime(LocalDateTime dateTime) {
+        requireNonNull(dateTime);
+        for (Event event : this.eventTree.values()) {
+            if (event.isDuring(dateTime)) {
+                return Optional.of(event);
+            }
+        }
+        return Optional.empty();
     }
 
     /**
