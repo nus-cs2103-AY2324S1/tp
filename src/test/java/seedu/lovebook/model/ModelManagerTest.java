@@ -101,6 +101,13 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void executeRandomPerson() {
+        modelManager.addPerson(ALICE);
+        modelManager.getRandomPerson();
+        assertTrue(modelManager.getFilteredPersonList().equals(Arrays.asList(ALICE)));
+    }
+
+    @Test
     public void equals() {
         LoveBook loveBook = new LoveBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         LoveBook differentLoveBook = new LoveBook();
