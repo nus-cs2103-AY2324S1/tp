@@ -2,9 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
@@ -126,17 +124,54 @@ public class ParserUtil {
     /**
      * Parses {@code Collection<String> status} into a {@code Set<String> of status}.
      */
-    public static Set<String> parseStatus(Collection<String> statusList) throws ParseException {
-        requireNonNull(statusList);
-        final Set<String> statusSet = new HashSet<>();
-        for (String status : statusList) {
+    public static List<String> parseSearchStatusParams(Collection<String> statuses) throws ParseException {
+        requireNonNull(statuses);
+        String[] statusArr = parseSearchParams(statuses);
+        final List<String> statusList = new ArrayList<>();
+        for (String status : statusArr) {
             status = status.trim();
             if (!Status.isValidStatus(status)) {
                 throw new ParseException(Status.MESSAGE_CONSTRAINTS);
             }
-            statusSet.add(status);
+            statusList.add(status);
         }
-        return statusSet;
+        return statusList;
     }
+
+    public static List<String> parseSearchNameParams(Collection<String> names) throws ParseException {
+        requireNonNull(names);
+        String[] nameArr = parseSearchParams(names);
+        final List<String> nameList = new ArrayList<>();
+        for (String name : nameArr) {
+            name = name.trim();
+            if (!Name.isValidName(name)) {
+                throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+            }
+            nameList.add(name);
+        }
+        return nameList;
+    }
+
+    /**
+     * Parses a list of keywords into an array of strings.
+     *
+     * @param keywordsList A list of keywords, where each element may contain multiple words.
+     * @return An array of strings where each element represents an individual keyword.
+     *
+     *     The method first converts the list of keywords into a string representation,
+     *     e.g., [Alex, Yeoh] (including square brackets). It then removes the square brackets
+     *     from the string representation, resulting in a cleaned string, e.g., Alex, Yeoh (no square brackets).
+     *     Finally, the cleaned string is split into an array of strings, where each word separated
+     *     by a whitespace or comma is considered a single element.
+     *
+     *     Example:
+     *     If keywordsList is ["John Doe"], the returned array will be ["John", "Doe"].
+     */
+    private static String[] parseSearchParams(Collection<String> keywordsList) {
+        String list = keywordsList.toString();
+        String cleanedList = list.replaceAll("[\\[\\]]", "");
+        return cleanedList.split("\\s+");
+    }
+
 
 }

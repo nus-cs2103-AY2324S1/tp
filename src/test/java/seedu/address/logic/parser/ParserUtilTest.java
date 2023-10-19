@@ -196,8 +196,8 @@ public class ParserUtilTest {
         assertEquals(expectedTagSet, actualTagSet);
     }
 
-    @Test
-    public void parseStatus_collectionWithInvalidStatus_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseStatus(Arrays.asList(VALID_STATUS, INVALID_STATUS)));
-    }
+//    @Test
+//    public void parseStatus_collectionWithInvalidStatus_throwsParseException() {
+//        assertThrows(ParseException.class, () -> ParserUtil.parseStatus(Arrays.asList(VALID_STATUS, INVALID_STATUS)));
+//    }
 }

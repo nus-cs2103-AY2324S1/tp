@@ -130,17 +130,14 @@ public class PersonBuilder {
      * Sets the {@code Status} of the {@code Person} that we are building.
      */
     public PersonBuilder withStatus(String status) {
-        switch (status) {
-        case "Preliminary":
-            this.status.setStatusType(StatusTypes.PRELIMINARY);
-            break;
-        case "Interviewed":
+        switch (status.toLowerCase()) {
+        case "interviewed":
             this.status.setStatusType(StatusTypes.INTERVIEWED);
             break;
-        case "Rejected":
+        case "rejected":
             this.status.setStatusType(StatusTypes.REJECTED);
             break;
-        case "Offered":
+        case "offered":
             this.status.setStatusType(StatusTypes.OFFERED);
             break;
         default:

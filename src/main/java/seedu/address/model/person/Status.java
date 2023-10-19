@@ -10,7 +10,7 @@ import seedu.address.commons.util.StringUtil;
  */
 public class Status {
     public static final String MESSAGE_CONSTRAINTS = "Status should be either one of the following: 'Preliminary',"
-            + "'Interviewed', 'Offered', 'Rejected'";
+            + "'Interviewed', 'Offered', 'Rejected' and it should not be blank";
     private StatusTypes statusType;
 
 
