@@ -9,6 +9,7 @@ import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -32,7 +33,11 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+
+    private TeamListPanel teamListPanel;
+    @FXML
     private ResultDisplay resultDisplay;
+
     private HelpWindow helpWindow;
 
     @FXML
@@ -45,10 +50,19 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane personListPanelPlaceholder;
 
     @FXML
+    private StackPane teamListPanelPlaceholder;
+
+    @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private VBox personList;
+
+    @FXML
+    private VBox teamList;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -108,10 +122,23 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Fills up all the placeholders of this window.
+     *
+     * @param whatToFill String that indicates what to fill in the inner parts
      */
+    void fillInnerParts(String whatToFill) {
+        if (whatToFill.equals("persons")) {
+            fillPersonList();
+        } else if (whatToFill.equals("teams")) {
+            fillTeamList();
+        }
+
+        switchToListPanel(whatToFill);
+    }
+
+
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        fillPersonList();
+        switchToListPanel("persons");
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -121,6 +148,57 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    }
+
+    /**
+     * Fills the Person list.
+     */
+    private void fillPersonList() {
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+    }
+
+    /**
+     * Fills the teams list.
+     */
+    private void fillTeamList() {
+        teamListPanel = new TeamListPanel(logic.getFilteredTeamList());
+        teamListPanelPlaceholder.getChildren().add(teamListPanel.getRoot());
+    }
+
+    /**
+     * Method to switch between panels.
+     *
+     * @param panelType String indicating which panel to display
+     */
+    public void switchToListPanel(String panelType) {
+        if ("persons".equals(panelType)) {
+            showPersonList();
+        } else if ("teams".equals(panelType)) {
+            showTeamList();
+        }
+    }
+
+    /**
+     *
+     * Set visibility of Vbox: personList -> visible, teamList -> not visible
+     */
+    public void showPersonList() {
+        personList.setVisible(true);
+        teamList.setVisible(false);
+        personListPanelPlaceholder.setVisible(true);
+        teamListPanelPlaceholder.setVisible(false);
+    }
+
+    /**
+     *
+     * Set visibility of Vbox: personList -> not visible, teamList -> visible
+     */
+    public void showTeamList() {
+        personList.setVisible(false);
+        teamList.setVisible(true);
+        personListPanelPlaceholder.setVisible(false);
+        teamListPanelPlaceholder.setVisible(true);
     }
 
     /**
@@ -147,6 +225,20 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Fill the panel with list of person.
+     */
+    public void handleListPerson() {
+        fillInnerParts("persons");
+    }
+
+    /**
+     * Fill the panel with list of teams instead of person.
+     */
+    public void handleListTeam() {
+        fillInnerParts("teams");
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -163,8 +255,20 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    /**
+     *
+     * @return the current personList Panel
+     */
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
+    }
+
+    /**
+     *
+     * @return the current teamList Panel
+     */
+    public TeamListPanel getTeamListPanel() {
+        return teamListPanel;
     }
 
     /**
@@ -184,6 +288,14 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isListTeam()) {
+                handleListTeam();
+            }
+
+            if (commandResult.isListPerson()) {
+                handleListPerson();
             }
 
             return commandResult;
