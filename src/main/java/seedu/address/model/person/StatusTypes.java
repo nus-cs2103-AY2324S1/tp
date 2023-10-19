@@ -19,4 +19,10 @@ public enum StatusTypes {
         return this.statusName;
     }
 
+    public static boolean isValidStatusType(String input){
+        return input.equals("offered") || input.equals("preliminary")
+                || input.equals("rejected")
+                || input.equals("offered");
+    }
+
 }
