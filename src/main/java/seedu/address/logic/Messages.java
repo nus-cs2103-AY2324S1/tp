@@ -18,7 +18,6 @@ import seedu.address.model.contact.Email;
  */
 public final class Messages {
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
-    public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format!\n%s";
     public static final String MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX = "The contact index provided is invalid";
     public static final String MESSAGE_CONTACTS_LISTED_OVERVIEW = "%d contacts listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
@@ -65,27 +64,39 @@ public final class Messages {
 
     //TODO refine the messages above this line
 
+    // Generic commands
+    private static final String UNFORMATTED_COMMAND_INVALID_FORMAT =
+            "Invalid command format.\n%s";
+
     // Commands
-    public static final String CLEAR_COMMAND_SUCCESS = "All contacts have been removed!";
-    public static final String EXIT_COMMAND_SUCCESS = "Exiting app...";
+    public static final String COMMAND_CLEAR_SUCCESS = "All contacts have been removed!";
+    public static final String COMMAND_EXIT_SUCCESS = "Exiting app...";
 
     // Tag
-    private static final String UNFORMATTED_TAG_INVALID =
-            "\"%s\" is not a valid tag. Tags must be alphanumeric (spaces allowed).";
+    private static final String UNFORMATTED_TAG_INVALID = "\"%s\" is not a valid tag. Tags must be alphanumeric (spaces allowed).";
 
-    private Messages() {
-        // No instantiation
+    /**
+     * Returns a formatted message about the command format being invalid, with
+     * the specified help text.
+     */
+    public static String commandInvalidFormat(String helpText) {
+        return String.format(
+            Messages.UNFORMATTED_COMMAND_INVALID_FORMAT,
+            helpText
+        );
     }
 
     /**
-     * Returns a formatted message for the specified invalid tag name.
-     *
-     * @param invalidName Invalid name.
+     * Returns a formatted message about the specified tag name being invalid.
      */
     public static String tagInvalid(String invalidName) {
         return String.format(
-            UNFORMATTED_TAG_INVALID,
+            Messages.UNFORMATTED_TAG_INVALID,
             invalidName
         );
+    }
+
+    private Messages() {
+        // No instantiation
     }
 }

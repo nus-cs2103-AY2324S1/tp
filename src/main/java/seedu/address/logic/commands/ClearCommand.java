@@ -15,6 +15,6 @@ public class ClearCommand extends Command {
     public CommandResult execute(Model model) {
         model.removeAllContacts();
 
-        return new CommandResult(Messages.CLEAR_COMMAND_SUCCESS);
+        return new CommandResult(Messages.COMMAND_CLEAR_SUCCESS);
     }
 }
