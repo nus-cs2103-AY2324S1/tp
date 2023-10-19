@@ -23,7 +23,7 @@ public class CustomFilterPredicate implements Predicate<Applicant> {
     @Override
     public boolean test(Applicant applicant) {
         if (this.name != null) {
-            if (!StringUtil.containsWordIgnoreCase(applicant.getName().toString(), this.name.toString())) {
+            if (!StringUtil.containsStringIgnoreCase(applicant.getName().toString(), this.name.toString())) {
                 return false;
             }
         }
