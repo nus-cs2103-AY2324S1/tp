@@ -4,36 +4,42 @@
     "phone" : "87438807",
     "email" : "alexyeoh@example.com",
     "address" : "Blk 30 Geylang Street 29, #06-40",
+    "salary" : "3000",
     "departments" : [ ]
   }, {
     "name" : "Bernice Yu",
     "phone" : "99272758",
     "email" : "berniceyu@example.com",
     "address" : "Blk 30 Lorong 3 Serangoon Gardens, #07-18",
+    "salary" : "3500",
     "departments" : [ ]
   }, {
     "name" : "Charlotte Oliveiro",
     "phone" : "93210283",
     "email" : "charlotte@example.com",
     "address" : "Blk 11 Ang Mo Kio Street 74, #11-04",
+    "salary" : "3200",
     "departments" : [ ]
   }, {
     "name" : "David Li",
     "phone" : "91031282",
     "email" : "lidavid@example.com",
     "address" : "Blk 436 Serangoon Gardens Street 26, #16-43",
+    "salary" : "3100",
     "departments" : [ ]
   }, {
     "name" : "Irfan Ibrahim",
     "phone" : "92492021",
     "email" : "irfan@example.com",
     "address" : "Blk 47 Tampines Street 20, #17-35",
+    "salary" : "2000",
     "departments" : [ ]
   }, {
     "name" : "Roy Balakrishnan",
     "phone" : "92624417",
     "email" : "royb@example.com",
     "address" : "Blk 45 Aljunied Street 85, #11-31",
+    "salary" : "13000",
     "departments" : [ "R&D", "Finance" ]
   } ]
 }
