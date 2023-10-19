@@ -183,7 +183,8 @@ Sort the list of students data that fulfills the given conditions.
 Format: `sort in/ [DESCRIPTION]`
 
 Examples:
-* `sort in/ ASC`
+* `sort in/ ASC` <br>
+  ![result for 'sort in/ ASC'](images/ug_images/sortedResult.png)
 
 ### Clearing all entries : `clear`
 
