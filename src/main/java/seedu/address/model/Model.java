@@ -108,6 +108,12 @@ public interface Model {
     void addBand(Band band);
 
     /**
+     * Deletes the given band.
+     * The band must exist in the address book.
+     */
+    void deleteBand(Band bandToDelete);
+
+    /**
      * Returns true if a band already contains the musician.
      * {@code musician} must not already exist in the band.
      */
