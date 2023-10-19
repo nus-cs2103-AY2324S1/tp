@@ -7,10 +7,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
-import seedu.address.logic.parser.UpdatePhotoCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ModelManager;
-import seedu.address.testutil.ModelStub;
 
 public class UpdatePhotoCommandTest {
 
@@ -29,6 +27,7 @@ public class UpdatePhotoCommandTest {
         }
     }
 }
+
 
 
 
