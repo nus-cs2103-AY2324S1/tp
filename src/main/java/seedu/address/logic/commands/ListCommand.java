@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT;
 
 import java.util.Comparator;
 
@@ -20,18 +21,10 @@ public class ListCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all persons. "
             + "Parameters: [so/ATTRIBUTE]\n"
             + "Optional: ATTRIBUTE can be 'name' or other attributes for sorting.\n"
-            + "Example: " + COMMAND_WORD + " s/name";
+            + "Example: " + COMMAND_WORD + " " + PREFIX_SORT + "name";
 
+    public static final Comparator<Person> DEFAULT_COMPARATOR = (person1, person2) -> 0; // Comparator that does nothing
     private final Comparator<Person> sortingComparator;
-
-
-    /**
-     * Creates a ListCommand with no sorting.
-     */
-    public ListCommand() {
-        // Default constructor for no sorting
-        this.sortingComparator = (person1, person2) -> 0; // A comparator that does nothing;
-    }
 
     /**
      * Creates a ListCommand with the specified sorting comparator.
@@ -45,13 +38,7 @@ public class ListCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-
-        if (sortingComparator != null) {
-            // If a sorting comparator is provided, sort the list using it
-            model.sortPersonList(sortingComparator);
-        }
-
-        System.out.println(model.getFilteredPersonList());
+        model.sortPersonList(sortingComparator);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(MESSAGE_SUCCESS);
     }

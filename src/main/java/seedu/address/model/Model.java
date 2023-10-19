@@ -86,6 +86,11 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
+    /**
+     * Sorts the list of persons using the provided comparator.
+     *
+     * @param comparator The comparator used to determine the sorting order.
+     */
     void sortPersonList(Comparator<Person> comparator);
 
     /**
