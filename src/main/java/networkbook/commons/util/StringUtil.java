@@ -29,13 +29,41 @@ public class StringUtil {
 
         String preppedWord = word.trim();
         checkArgument(!preppedWord.isEmpty(), "Word parameter cannot be empty");
-        checkArgument(preppedWord.split("\\s+").length == 1, "Word parameter should be a single word");
+        checkArgument(preppedWord.split("\\s+").length == 1,
+                "Word parameter should be a single word");
 
         String preppedSentence = sentence;
         String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
 
         return Arrays.stream(wordsInPreppedSentence)
                 .anyMatch(preppedWord::equalsIgnoreCase);
+    }
+
+    /**
+     * Returns true if the {@code sentence} contains the {@code term}.
+     *   Ignores case, a full word match is not required.
+     *   <br>examples:<pre>
+     *       containsWordIgnoreCase("ABc def", "ab") == true
+     *       containsWordIgnoreCase("ABc def", "EF") == true
+     *       containsWordIgnoreCase("ABc def", "cd") == false //term not contained in a single word
+     *       </pre>
+     * @param sentence cannot be null
+     * @param term cannot be null, cannot be empty, must be a single term/word
+     */
+    public static boolean containsTermIgnoreCase(String sentence, String term) {
+        requireNonNull(sentence);
+        requireNonNull(term);
+
+        String preppedTerm = term.trim();
+        checkArgument(!preppedTerm.isEmpty(), "Term parameter cannot be empty");
+        checkArgument(preppedTerm.split("\\s+").length == 1,
+                "Term parameter should be a single term");
+
+        String preppedSentence = sentence;
+        String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
+
+        return Arrays.stream(wordsInPreppedSentence)
+                .anyMatch((word) -> word.toLowerCase().contains(preppedTerm.toLowerCase()));
     }
 
     /**

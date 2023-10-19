@@ -6,7 +6,6 @@ import static networkbook.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 
 import networkbook.commons.core.index.Index;
 import networkbook.commons.util.ToStringBuilder;
@@ -17,7 +16,7 @@ import networkbook.logic.parser.CliSyntax;
 import networkbook.model.Model;
 import networkbook.model.person.Course;
 import networkbook.model.person.Email;
-import networkbook.model.person.GraduatingYear;
+import networkbook.model.person.Graduation;
 import networkbook.model.person.Link;
 import networkbook.model.person.Name;
 import networkbook.model.person.Person;
@@ -39,7 +38,7 @@ public class AddCommand extends Command {
             + "[" + CliSyntax.PREFIX_PHONE + " PHONE] "
             + "[" + CliSyntax.PREFIX_EMAIL + " EMAIL] "
             + "[" + CliSyntax.PREFIX_LINK + "LINK] "
-            + "[" + CliSyntax.PREFIX_GRADUATING_YEAR + "GRADUATING YEAR] "
+            + "[" + CliSyntax.PREFIX_GRADUATION + " GRADUATION DATE] "
             + "[" + CliSyntax.PREFIX_COURSE + "COURSE OF STUDY] "
             + "[" + CliSyntax.PREFIX_SPECIALISATION + "SPECIALISATION] "
             + "[" + CliSyntax.PREFIX_TAG + " TAG] "
@@ -101,14 +100,14 @@ public class AddCommand extends Command {
         UniqueList<Phone> updatedPhones = addPhones(personToAddInfo, editPersonDescriptor);
         UniqueList<Email> updatedEmails = addEmails(personToAddInfo, editPersonDescriptor);
         UniqueList<Link> updatedLinks = addLinks(personToAddInfo, editPersonDescriptor);
-        GraduatingYear updatedGraduatingYear = addGraduatingYear(personToAddInfo, editPersonDescriptor);
-        Course updatedCourse = addCourse(personToAddInfo, editPersonDescriptor);
-        Specialisation updatedSpecialisation = addSpecialisation(personToAddInfo, editPersonDescriptor);
-        Set<Tag> updatedTags = addTags(personToAddInfo, editPersonDescriptor);
+        Graduation updatedGraduatingYear = addGraduation(personToAddInfo, editPersonDescriptor);
+        UniqueList<Course> updatedCourses = addCourses(personToAddInfo, editPersonDescriptor);
+        UniqueList<Specialisation> updatedSpecialisations = addSpecialisations(personToAddInfo, editPersonDescriptor);
+        UniqueList<Tag> updatedTags = addTags(personToAddInfo, editPersonDescriptor);
         Priority updatedPriority = addPriority(personToAddInfo, editPersonDescriptor);
 
         return new Person(currentName, updatedPhones, updatedEmails, updatedLinks, updatedGraduatingYear,
-                updatedCourse, updatedSpecialisation, updatedTags, updatedPriority);
+                updatedCourses, updatedSpecialisations, updatedTags, updatedPriority);
     }
 
     // TODO: for non-unique fields, change respective model to use list and append to the list
@@ -128,35 +127,31 @@ public class AddCommand extends Command {
         editPersonDescriptor.getLinks().ifPresent(links::addAllFromList);
         return links;
     }
-    private GraduatingYear addGraduatingYear(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor)
+    private Graduation addGraduation(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor)
             throws CommandException {
-        Optional<GraduatingYear> oldGraduatingYear = personToAddInfo.getGraduatingYear();
-        Optional<GraduatingYear> newGraduatingYear = editPersonDescriptor.getGraduatingYear();
-        if (oldGraduatingYear.isPresent() && newGraduatingYear.isPresent()) {
+        Optional<Graduation> oldGraduation = personToAddInfo.getGraduation();
+        Optional<Graduation> newGraduation = editPersonDescriptor.getGraduation();
+        if (oldGraduation.isPresent() && newGraduation.isPresent()) {
             throw new CommandException(MESSAGE_MULTIPLE_UNIQUE_FIELD);
         }
-        return newGraduatingYear.orElse(oldGraduatingYear.orElse(null));
+        return newGraduation.orElse(oldGraduation.orElse(null));
     }
-    private Course addCourse(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor)
-            throws CommandException {
-        Optional<Course> oldCourse = personToAddInfo.getCourse();
-        Optional<Course> newCourse = editPersonDescriptor.getCourse();
-        if (oldCourse.isPresent() && newCourse.isPresent()) {
-            throw new CommandException(MESSAGE_MULTIPLE_UNIQUE_FIELD);
-        }
-        return newCourse.orElse(oldCourse.orElse(null));
+    private UniqueList<Course> addCourses(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor) {
+        UniqueList<Course> courses = personToAddInfo.getCourses();
+        editPersonDescriptor.getCourses().ifPresent(courses::addAllFromList);
+        return courses;
     }
-    private Specialisation addSpecialisation(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor)
-            throws CommandException {
-        Optional<Specialisation> oldSpecialisation = personToAddInfo.getSpecialisation();
-        Optional<Specialisation> newSpecialisation = editPersonDescriptor.getSpecialisation();
-        if (oldSpecialisation.isPresent() && newSpecialisation.isPresent()) {
-            throw new CommandException(MESSAGE_MULTIPLE_UNIQUE_FIELD);
-        }
-        return newSpecialisation.orElse(oldSpecialisation.orElse(null));
+    private UniqueList<Specialisation> addSpecialisations(Person personToAddInfo,
+                                                           EditPersonDescriptor editPersonDescriptor) {
+        UniqueList<Specialisation> specs = personToAddInfo.getSpecialisations();
+        editPersonDescriptor.getSpecialisations().ifPresent(specs::addAllFromList);
+        return specs;
+
     }
-    private Set<Tag> addTags(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor) {
-        return editPersonDescriptor.getTags().orElse(personToAddInfo.getTags());
+    private UniqueList<Tag> addTags(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor) {
+        UniqueList<Tag> tags = personToAddInfo.getTags();
+        editPersonDescriptor.getTags().ifPresent(tags::addAllFromList);
+        return tags;
     }
 
     private Priority addPriority(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor)

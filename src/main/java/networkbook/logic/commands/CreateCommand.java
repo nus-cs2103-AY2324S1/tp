@@ -22,7 +22,7 @@ public class CreateCommand extends Command {
             + "[" + CliSyntax.PREFIX_PHONE + " PHONE] "
             + "[" + CliSyntax.PREFIX_EMAIL + " EMAIL] "
             + "[" + CliSyntax.PREFIX_LINK + "LINK] "
-            + "[" + CliSyntax.PREFIX_GRADUATING_YEAR + "GRADUATING YEAR] "
+            + "[" + CliSyntax.PREFIX_GRADUATION + " GRADUATION DATE] "
             + "[" + CliSyntax.PREFIX_COURSE + "COURSE OF STUDY] "
             + "[" + CliSyntax.PREFIX_SPECIALISATION + "SPECIALISATION] "
             + "[" + CliSyntax.PREFIX_TAG + " TAG] "

@@ -3,17 +3,18 @@ package networkbook.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
 
 import networkbook.commons.core.index.Index;
 import networkbook.commons.util.StringUtil;
 import networkbook.logic.parser.exceptions.ParseException;
 import networkbook.model.person.Course;
 import networkbook.model.person.Email;
-import networkbook.model.person.GraduatingYear;
+import networkbook.model.person.Graduation;
 import networkbook.model.person.Link;
 import networkbook.model.person.Name;
+import networkbook.model.person.PersonSortComparator;
+import networkbook.model.person.PersonSortComparator.SortField;
+import networkbook.model.person.PersonSortComparator.SortOrder;
 import networkbook.model.person.Phone;
 import networkbook.model.person.Priority;
 import networkbook.model.person.Specialisation;
@@ -33,6 +34,15 @@ public class ParserUtil {
             + "Please ensure that you do not input the same email more than once.";
     public static final String MESSAGE_LINK_DUPLICATE = "Your list of links contains duplicates.\n"
             + "Please ensure that you do not input the same link more than once.";
+
+    public static final String MESSAGE_TAG_DUPLICATE = "Your list of tags contains duplicates. \n"
+            + "Please ensure that you do not input the same tag more than once.";
+
+    public static final String MESSAGE_SPEC_DUPLICATE = "Your list of specialisations contains duplicates. \n"
+            + "Please ensure that you do not input the same specialisation more than once.";
+
+    public static final String MESSAGE_COURSE_DUPLICATE = "Your list of courses contains duplicates. \n"
+            + "Please ensure that you do not input the same course more than once.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -160,32 +170,46 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String graduatingYear} into an {@code GraduatingYear}.
+     * Parses a {@code String graduation} into a {@code Graduation}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code graduatingYear} is invalid.
+     * @throws ParseException if the given {@code graduation} is invalid.
      */
-    public static GraduatingYear parseGraduatingYear(String graduatingYear) throws ParseException {
-        if (graduatingYear == null) {
+    public static Graduation parseGraduation(String graduation) throws ParseException {
+        if (graduation == null) {
             return null;
         }
-        String trimmedGraduatingYear = graduatingYear.trim();
-        if (!GraduatingYear.isValidGraduatingYear(trimmedGraduatingYear)) {
-            throw new ParseException(GraduatingYear.MESSAGE_CONSTRAINTS);
+        String normalizedGraduation = graduation.trim().toUpperCase();
+        if (!Graduation.isValidGraduation(normalizedGraduation)) {
+            throw new ParseException(Graduation.MESSAGE_CONSTRAINTS);
         }
-        return new GraduatingYear(trimmedGraduatingYear);
+        return new Graduation(normalizedGraduation);
     }
 
     /**
-     * Parses a {@code String course} into an {@code Course}.
+     * Parses {@code String courses} into {@code UniqueList<Course>}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code course} is invalid.
      */
-    public static Course parseCourse(String course) throws ParseException {
-        if (course == null) {
-            return null;
+    public static UniqueList<Course> parseCourses(Collection<String> courses) throws ParseException {
+        requireNonNull(courses);
+        if (!verifyNoDuplicates(courses)) {
+            throw new ParseException(MESSAGE_COURSE_DUPLICATE);
         }
+        UniqueList<Course> result = new UniqueList<>();
+        for (String link : courses) {
+            result.add(parseCourse(link));
+        }
+        return result;
+    }
+
+    /**
+     * Parses a {@code course} from {@code String} into a {@code Course}.
+     * @throws ParseException When the {@code course} is invalid.
+     */
+    public static Course parseCourse(String course) throws ParseException {
+        requireNonNull(course);
         String trimmedCourse = course.trim();
         if (!Course.isValidCourse(trimmedCourse)) {
             throw new ParseException(Course.MESSAGE_CONSTRAINTS);
@@ -208,6 +232,24 @@ public class ParserUtil {
             throw new ParseException(Specialisation.MESSAGE_CONSTRAINTS);
         }
         return new Specialisation(specialisation);
+    }
+
+    /**
+     * Parses a {@code Collection<String>} of specialisations into {@code UniqueList<Specialisation>}.
+     *
+     * @throws ParseException if at least one specialisation in {@code Collection<String>} is invalid.
+     */
+    public static UniqueList<Specialisation> parseSpecialisations(Collection<String> specialisations)
+            throws ParseException {
+        requireNonNull(specialisations);
+        if (!verifyNoDuplicates(specialisations)) {
+            throw new ParseException(MESSAGE_SPEC_DUPLICATE);
+        }
+        UniqueList<Specialisation> result = new UniqueList<>();
+        for (String spec : specialisations) {
+            result.add(parseSpecialisation(spec));
+        }
+        return result;
     }
 
     private static boolean verifyNoDuplicates(Collection<String> strings) {
@@ -238,11 +280,14 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses {@code Collection<String> tags} into a {@code UniqueList<Tag>}.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
+    public static UniqueList<Tag> parseTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
+        if (!verifyNoDuplicates(tags)) {
+            throw new ParseException(MESSAGE_TAG_DUPLICATE);
+        }
+        final UniqueList<Tag> tagSet = new UniqueList<>();
         for (String tagName : tags) {
             tagSet.add(parseTag(tagName));
         }
@@ -262,5 +307,34 @@ public class ParserUtil {
             throw new ParseException(Priority.MESSAGE_CONSTRAINTS);
         }
         return new Priority(trimmedPriority);
+    }
+
+
+    /**
+     * Parses a {@code String field} into a {@code SortField}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static SortField parseSortField(String field) throws ParseException {
+        requireNonNull(field);
+        String normalizedField = field.trim().toLowerCase();
+        SortField sortField = PersonSortComparator.parseSortField(normalizedField);
+        if (!PersonSortComparator.isValidSortField(sortField)) {
+            throw new ParseException(PersonSortComparator.MESSAGE_CONSTRAINTS_FIELD);
+        }
+        return sortField;
+    }
+
+    /**
+     * Parses a {@code String order} into a {@code SortOrder}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static SortOrder parseSortOrder(String order) throws ParseException {
+        requireNonNull(order);
+        String normalizedOrder = order.trim().toLowerCase();
+        SortOrder sortOrder = PersonSortComparator.parseSortOrder(normalizedOrder);
+        if (!PersonSortComparator.isValidSortOrder(sortOrder)) {
+            throw new ParseException(PersonSortComparator.MESSAGE_CONSTRAINTS_ORDER);
+        }
+        return sortOrder;
     }
 }

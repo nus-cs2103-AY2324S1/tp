@@ -2,7 +2,7 @@ package networkbook.model.person;
 
 import static networkbook.logic.commands.CommandTestUtil.VALID_COURSE_BOB;
 import static networkbook.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static networkbook.logic.commands.CommandTestUtil.VALID_GRADUATING_YEAR_BOB;
+import static networkbook.logic.commands.CommandTestUtil.VALID_GRADUATION_BOB;
 import static networkbook.logic.commands.CommandTestUtil.VALID_LINK_BOB;
 import static networkbook.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static networkbook.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -23,12 +23,6 @@ import networkbook.testutil.TypicalPersons;
 public class PersonTest {
 
     @Test
-    public void asObservableList_modifyList_throwsUnsupportedOperationException() {
-        Person person = new PersonBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> person.getTags().remove(0));
-    }
-
-    @Test
     public void isSame() {
         // same object -> returns true
         assertTrue(TypicalPersons.AMY.isSame(TypicalPersons.AMY));
@@ -38,10 +32,14 @@ public class PersonTest {
 
         // same name, all other attributes different -> returns true
         Person editedAmy = new PersonBuilder(TypicalPersons.AMY)
-                .withPhones(List.of(VALID_PHONE_BOB)).withEmails(List.of(VALID_EMAIL_BOB))
-                .withLinks(List.of(VALID_LINK_BOB)).withGraduatingYear(VALID_GRADUATING_YEAR_BOB)
-                .withCourse(VALID_COURSE_BOB).withSpecialisation(VALID_SPECIALISATION_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+                .withPhones(List.of(VALID_PHONE_BOB))
+                .withEmails(List.of(VALID_EMAIL_BOB))
+                .withLinks(List.of(VALID_LINK_BOB))
+                .withGraduation(VALID_GRADUATION_BOB)
+                .withCourses(List.of(VALID_COURSE_BOB))
+                .withSpecialisations(List.of(VALID_SPECIALISATION_BOB))
+                .withTags(VALID_TAG_HUSBAND)
+                .build();
         assertTrue(TypicalPersons.AMY.isSame(editedAmy));
 
         // different name, all other attributes same -> returns false
@@ -97,16 +95,18 @@ public class PersonTest {
         editedAmy = new PersonBuilder(TypicalPersons.AMY).withLinks(List.of(VALID_LINK_BOB)).build();
         assertFalse(TypicalPersons.AMY.equals(editedAmy));
 
-        // different graduating year -> returns false
-        editedAmy = new PersonBuilder(TypicalPersons.AMY).withGraduatingYear(VALID_GRADUATING_YEAR_BOB).build();
+        // different graduation date -> returns false
+        editedAmy = new PersonBuilder(TypicalPersons.AMY).withGraduation(VALID_GRADUATION_BOB).build();
         assertFalse(TypicalPersons.AMY.equals(editedAmy));
 
         // different course -> returns false
-        editedAmy = new PersonBuilder(TypicalPersons.AMY).withCourse(VALID_COURSE_BOB).build();
+        editedAmy = new PersonBuilder(TypicalPersons.AMY).withCourses(List.of(VALID_COURSE_BOB)).build();
         assertFalse(TypicalPersons.AMY.equals(editedAmy));
 
         // different specialisation -> returns false
-        editedAmy = new PersonBuilder(TypicalPersons.AMY).withSpecialisation(VALID_SPECIALISATION_BOB).build();
+        editedAmy = new PersonBuilder(TypicalPersons.AMY)
+                .withSpecialisations(List.of(VALID_SPECIALISATION_BOB))
+                .build();
         assertFalse(TypicalPersons.AMY.equals(editedAmy));
 
         // different tags -> returns false
@@ -121,9 +121,9 @@ public class PersonTest {
                 + ", phones=" + TypicalPersons.AMY.getPhones()
                 + ", emails=" + TypicalPersons.AMY.getEmails()
                 + ", links=" + TypicalPersons.AMY.getLinks()
-                + ", graduating year=" + TypicalPersons.AMY.getGraduatingYear().get()
-                + ", course=" + TypicalPersons.AMY.getCourse().get()
-                + ", specialisation=" + TypicalPersons.AMY.getSpecialisation().get()
+                + ", graduation=" + TypicalPersons.AMY.getGraduation().get()
+                + ", courses=" + TypicalPersons.AMY.getCourses()
+                + ", specialisations=" + TypicalPersons.AMY.getSpecialisations()
                 + ", tags=" + TypicalPersons.AMY.getTags() + ", priority=" + TypicalPersons.AMY.getPriority().get()
                 + "}";
         assertEquals(expected, TypicalPersons.AMY.toString());

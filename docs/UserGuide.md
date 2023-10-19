@@ -300,6 +300,36 @@ When the command fails:
 `OOPS, no matching contact with index 100000.`
 
 
+### Add graduation date to contact: `add /grad /index`
+
+You can set the graduation date (to the nearest semester) of an existing contact. No new contact will be created.
+
+Format: `add /grad [grad] /index [index]`
+
+Example usage:
+* `add /grad AY2223-S1 /index 1`
+* `add /grad AY2627-S2 /index 2`
+
+Parameters:
+* `[grad]` is a valid graduation date, in the format `AYxxxx-Sy`.
+    * `xxxx` is the 4-digit representation of the 2 calendar years, in the academic year e.g. `2223` for Academic Year 20`22`/20`23`. Academic year must be between AY1970/1971 to AY2069/2070 (inclusive).
+    * `y` is either `1` for Semester 1, or `2` for Semester 2.
+* `[index]` is the index of the contact in the list.
+
+When the command succeeds:
+* `add /grad AY2223-S1 /index 1`
+
+`Noted, I have set the graduation date of AY2022/2023 Semester 1 to the contact at index 1 (Oreki).`
+
+When the command fails:
+* `add /grad AY2223-S1`
+
+`Oops, you did not provide the index of the contact to add to.`
+
+* `add /grad 2022 /index 1`
+
+`Oops, you did not provide a valid graduation date in the format AYxxxx-Sy, e.g. AY2223-S1.`
+
 
 ### <u>Category 2 - Edit contact details</u>
 
@@ -434,7 +464,7 @@ Example usage:
 
 * `sort /by grad /order asc`
 * `sort /by name /order descending`
-* `sort /by course`
+* `sort /by name`
 
 Parameters
 
@@ -443,9 +473,8 @@ Parameters
     List of options:
     * `name` - Sort alphabetically by contact name
     * `grad` - Sort chronologically by graduation year
-    * `course` - Sort alphabetically by course taken
-    * `spec`/`specialization` - Sort alphabetically by specialization
     * `priority` - Sort by priority
+    * `none` - Return to default sorting
 
 * `[order]` (optional) is the order to sort in. If not specified, defaults to ascending.
 
@@ -455,11 +484,11 @@ Parameters
 
 When the command succeeds:
 
-* `sort /by course`
+* `sort /by grad`
 
 ```text
 Here’s your sorted list of contacts:
-[list of contacts, sorted in ascending order by course]
+[list of contacts, sorted in ascending order by graduation date]
 ```
 
 * `sort /by name /order desc`
@@ -489,10 +518,8 @@ name, grad, course, spec/specialization, priority.`
 
 ## Command summary
 
-
 | Category | Format, Examples                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 |----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**  | `create /name [name] [/phone /email /link /grad /course /spec /priority /tag]` <br> e.g., `create /name Oreki /phone +6598765432 /grad AY2526-S2`<br><br>`add [index] /phone [phone]` <br> e.g., `add 1 /phone +6591234567`<br><br>`add [index] /email [email]` <br> e.g., `add 2 /email test@example.com`<br><br>`add [index] /link [link] [note]`<br>e.g., `add 1 /link https://nknguyenhc.github.io/ website`<br><br>`add [index] /course [course code] /date [start date] [end date]`<br>e.g., `add 1 /course CS1101S /date 01-08-2022 07-12-2022`<br><br>`add [index] /spec [specialisation]`<br>e.g., `add 1 /spec Robotics & AI`<br><br>`add [index] /priority [priority level]`<br>e.g., `add 1 /priority high`<br><br>`add [index] /tag [tag name]`<br>e.g., `add 1 /tag friend` |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |  
 | **Edit** | `update [index] /[parameter name] [new parameter value]`<br> e.g.,`update /name nkn /index 1`<br><br>`delete [index]`<br>e.g., `delete 1`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | **Find** | `find [name]` <br> e.g., `find Ness`<br><br>`sort /by [field] /order [order]`<br>e.g., `sort /by name /order asc`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |  
-
