@@ -39,10 +39,6 @@ public class ProjectManagerTest {
         ProjectManager aliceManager =
                 new ProjectManager(ALICE.getName(), ALICE.getPhone(), ALICE.getEmail(),
                         ALICE.getAddress(), ALICE.getRemark(), ALICE.getTags());
-        TeamLeader aliceLeader =
-                new TeamLeader(ALICE.getName(), ALICE.getPhone(), ALICE.getEmail(),
-                        ALICE.getAddress(), ALICE.getRemark(), ALICE.getTags());
-        Team aliceTeam = new Team(aliceLeader);
 
         aliceManager.addTeam(aliceTeam);
         assertTrue(aliceManager.getTeams().contains(aliceTeam));
