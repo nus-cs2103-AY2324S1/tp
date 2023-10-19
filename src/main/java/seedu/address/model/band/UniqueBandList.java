@@ -12,6 +12,7 @@ import seedu.address.model.band.exceptions.BandNotFoundException;
 import seedu.address.model.band.exceptions.DuplicateBandException;
 import seedu.address.model.musician.Musician;
 import seedu.address.model.musician.exceptions.DuplicateMusicianException;
+import seedu.address.model.musician.exceptions.MusicianNotFoundException;
 
 /**
  * A list of bands that enforces uniqueness between its elements and does not allow nulls.
@@ -137,6 +138,17 @@ public class UniqueBandList implements Iterable<Band> {
         }
         internalList.get(bandIndex).getModifiableMusicianList().add(musician);
     }
+
+    /**
+     * Removes a musician from a band.
+     */
+    public void removeMusician(int bandIndex, Musician musician) {
+        if (!internalList.get(bandIndex).getModifiableMusicianList().contains(musician)) {
+            throw new MusicianNotFoundException();
+        }
+        internalList.get(bandIndex).getModifiableMusicianList().remove(musician);
+    }
+
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
