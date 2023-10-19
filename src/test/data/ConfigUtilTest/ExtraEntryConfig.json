@@ -1,5 +1,0 @@
-{
-  "logLevel" : "INFO",
-  "settingsPath" : "myFolder/settings.json",
-  "extraKey" : "Extra value."
-}
