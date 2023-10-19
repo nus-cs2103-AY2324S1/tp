@@ -34,7 +34,7 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parse_validIDArgs_returnsFindCommand() {
+    public void parse_validIdArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand =
                 new FindCommand(new IdContainsKeywordsPredicate(Arrays.asList("A1234567B", "A1234567E")));
