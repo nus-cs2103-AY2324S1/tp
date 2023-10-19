@@ -41,7 +41,7 @@ public class PersonUtil {
         person.getGraduatingYear().ifPresent(graduatingYear -> sb.append(CliSyntax.PREFIX_GRADUATING_YEAR)
                 .append(" ").append(graduatingYear.value).append(" "));
         person.getCourse().ifPresent(course -> sb.append(CliSyntax.PREFIX_COURSE).append(" ")
-                .append(course.value).append(" "));
+                .append(course.getCourse()).append(" "));
         person.getSpecialisations().stream().forEach(
                 e -> sb.append(CliSyntax.PREFIX_SPECIALISATION + " " + e.toString() + " ")
         );
@@ -87,7 +87,7 @@ public class PersonUtil {
         descriptor.getGraduatingYear().ifPresent(graduatingYear -> sb.append(CliSyntax.PREFIX_GRADUATING_YEAR)
                 .append(" ").append(graduatingYear.value).append(" "));
         descriptor.getCourse().ifPresent(course -> sb.append(CliSyntax.PREFIX_COURSE).append(" ")
-                .append(course.value).append(" "));
+                .append(course.getCourse()).append(" "));
         if (descriptor.getSpecialisations().isPresent()) {
             UniqueList<Specialisation> specs = descriptor.getSpecialisations().get();
             if (specs.isEmpty()) {
