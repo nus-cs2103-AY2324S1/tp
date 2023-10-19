@@ -12,7 +12,7 @@ import seedu.address.model.event.Event;
 /**
  * Represents a calendar that stores and manages events.
  */
-public class Calendar {
+public class Calendar implements ReadOnlyCalendar {
     private AllDaysEventListManager eventManager;
 
     /**
@@ -20,6 +20,33 @@ public class Calendar {
      */
     public Calendar() {
         this.eventManager = new AllDaysEventListManager();
+    }
+
+    /**
+     * Creates a Calendar using the Events in the {@code toBeCopied}
+     */
+    public Calendar(ReadOnlyCalendar toBeCopied) {
+        this();
+        resetData(toBeCopied);
+    }
+
+    //// overwrite operations
+
+    /**
+     * Replaces the contents of the person list with {@code persons}.
+     * {@code persons} must not contain duplicate persons.
+     */
+    public void setEvents(List<Event> events) {
+        events.forEach(this::addEvent);
+    }
+
+    /**
+     * Resets the existing data of this {@code Calendar} with {@code newData}.
+     */
+    public void resetData(ReadOnlyCalendar newData) {
+        requireNonNull(newData);
+
+        setEvents(newData.getEventList());
     }
 
     /**
