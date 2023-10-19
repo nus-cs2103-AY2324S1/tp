@@ -43,7 +43,7 @@ public class ViewMeetingCommand extends Command {
         }
 
         Meeting meetingToView = lastShownList.get(targetIndex.getZeroBased());
-        model.setViewedMeeting(meetingToView);
+        model.setViewedMeetingIndex(targetIndex);
         return new CommandResult(String.format(Messages.MESSAGE_MEETING_VIEWED_OVERVIEW, meetingToView.getTitle()));
     }
 

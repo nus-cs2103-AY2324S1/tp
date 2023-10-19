@@ -30,7 +30,7 @@ public class InfoDisplayPanel extends UiPart<Region> {
         super(FXML);
     }
 
-    public void setViewedPerson(Pair<Person, Meeting> pair) {
+    public void setViewedModel(Pair<Person, Meeting> pair) {
         Person person = pair.getKey();
         Meeting meeting = pair.getValue();
         tags.getChildren().clear();
@@ -40,10 +40,14 @@ public class InfoDisplayPanel extends UiPart<Region> {
             person.getTags().stream()
                     .sorted(Comparator.comparing(tag -> tag.tagName))
                     .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        } else {
+            personDisplay.setText("");
         }
 
         if (meeting != null) {
             meetingDisplay.setText(meeting.toDisplayString());
+        } else {
+            meetingDisplay.setText("");
         }
     }
 }
