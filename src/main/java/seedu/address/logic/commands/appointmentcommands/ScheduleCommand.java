@@ -21,9 +21,9 @@ import seedu.address.model.appointment.AppointmentTime;
 import seedu.address.model.person.Person;
 
 /**
- * AddAppointmentCommand class to create and add new appointment.
+ * Adds an appointment to the address book.
  */
-public class AddAppointmentCommand extends Command {
+public class ScheduleCommand extends Command {
 
     public static final String COMMAND_WORD = "schedule";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Schedules an appointment.\n"
@@ -43,10 +43,11 @@ public class AddAppointmentCommand extends Command {
     private final Appointment currAppointment;
 
     private int patientIndex;
+
     /**
-     * Constructor for the AddAppointmentCommand command to add the specified {@code Appointment}
+     * Creates a ScheduleCommand to add the specified {@code Appointment}
      */
-    public AddAppointmentCommand(Appointment appointment, int patientIndex) {
+    public ScheduleCommand(Appointment appointment, int patientIndex) {
 
         // Check that appointment is non-null.
         requireNonNull(appointment);
@@ -104,8 +105,8 @@ public class AddAppointmentCommand extends Command {
         // if Object other is of type AddAppointmentCommand, cast it to type AddAppointmentCommand and compare the
         // containing
         // currAppointment
-        if (other instanceof AddAppointmentCommand) {
-            AddAppointmentCommand otherAppointment = (AddAppointmentCommand) other;
+        if (other instanceof ScheduleCommand) {
+            ScheduleCommand otherAppointment = (ScheduleCommand) other;
 
             return currAppointment.equals(otherAppointment.currAppointment);
         }

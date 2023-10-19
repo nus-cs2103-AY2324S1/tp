@@ -9,7 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_START;
 import java.time.LocalDateTime;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.appointmentcommands.AddAppointmentCommand;
+import seedu.address.logic.commands.appointmentcommands.ScheduleCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
@@ -23,7 +23,7 @@ import seedu.address.model.appointment.AppointmentTime;
 /**
  * Parses input arguments and creates a new AddCommand object
  */
-public class AddAppointmentCommandParser implements Parser<AddAppointmentCommand> {
+public class AddAppointmentCommandParser implements Parser<ScheduleCommand> {
 
     /**
      * Parses {@code userInput} into a command and returns it.
@@ -32,7 +32,7 @@ public class AddAppointmentCommandParser implements Parser<AddAppointmentCommand
      * @throws ParseException if {@code userInput} does not conform the expected format
      */
     @Override
-    public AddAppointmentCommand parse(String args) throws ParseException {
+    public ScheduleCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_APPOINTMENT_PATIENT, PREFIX_APPOINTMENT_START,
                         PREFIX_APPOINTMENT_END, PREFIX_APPOINTMENT_DESCRIPTION);
@@ -41,7 +41,7 @@ public class AddAppointmentCommandParser implements Parser<AddAppointmentCommand
                 PREFIX_APPOINTMENT_END, PREFIX_APPOINTMENT_DESCRIPTION)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddAppointmentCommand.MESSAGE_USAGE));
+                    ScheduleCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_APPOINTMENT_PATIENT, PREFIX_APPOINTMENT_START,
@@ -63,7 +63,7 @@ public class AddAppointmentCommandParser implements Parser<AddAppointmentCommand
 
         Appointment appointment = new Appointment(patientIndex, appointmentTime, appointmentDescription);
 
-        return new AddAppointmentCommand(appointment, patientIndex);
+        return new ScheduleCommand(appointment, patientIndex);
 
     }
 

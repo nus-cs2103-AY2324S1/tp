@@ -46,7 +46,10 @@ public class RescheduleCommand extends Command {
     private final AppointmentTime appointmentTime;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates a RescheduleCommand to change the appointment time
+     * for the specified {@code Appointment}
+     * @param index of the appointment in the filtered appointment list to edit
+     * @param appointmentTime new appointment time
      */
     public RescheduleCommand(Index index, AppointmentTime appointmentTime) {
         requireNonNull(index);

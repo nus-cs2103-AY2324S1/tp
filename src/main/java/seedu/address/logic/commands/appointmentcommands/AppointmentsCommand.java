@@ -10,7 +10,7 @@ import seedu.address.model.Model;
 /**
  * Lists all appointments in the address book to the user.
  */
-public class ViewCommand extends Command {
+public class AppointmentsCommand extends Command {
     public static final String COMMAND_WORD = "appointments";
 
     public static final String MESSAGE_SUCCESS = "Listed all appointments";
