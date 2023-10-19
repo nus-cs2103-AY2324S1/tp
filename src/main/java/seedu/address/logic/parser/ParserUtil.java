@@ -159,6 +159,8 @@ public class ParserUtil {
      * @throws ParseException if the given {@code TeamLeader} is invalid.
      */
     public static Name parseTeamLeader(String teamLeader) throws ParseException {
+        //can just return parseName(teamLeader)
+        //other steps are duplicated.
         requireNonNull(teamLeader);
         String trimmedTeamLeader = teamLeader.trim();
         Name teamLeaderName = parseName(trimmedTeamLeader);

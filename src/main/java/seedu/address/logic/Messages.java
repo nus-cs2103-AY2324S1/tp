@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.AddressBook;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.team.Team;
@@ -73,6 +74,26 @@ public class Messages {
         builder.append(teamToAddTo)
                 .append(" got a new member! Hello ")
                 .append(devToAddTo);
+        return builder.toString();
+    }
+
+    public static String editTeamNameFormat(String originalTeamName, String newTeamName) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append("Original team: ")
+                .append(originalTeamName)
+                .append(" changed its Team Name to: ")
+                .append(newTeamName);
+        return builder.toString();
+    }
+
+    public static String editTeamLeaderFormat(String teamName, Name originalTeamLeader, Name newTeamLeader) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append("Team: ")
+                .append(teamName)
+                .append(" changed its Team Leader from: ")
+                .append(originalTeamLeader.toString())
+                .append(" to: ")
+                .append(newTeamLeader.toString());
         return builder.toString();
     }
 
