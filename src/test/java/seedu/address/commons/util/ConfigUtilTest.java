@@ -15,6 +15,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.commons.core.Config;
 import seedu.address.commons.exceptions.DataLoadingException;
+import seedu.address.testutil.TestData;
 
 
 
@@ -28,14 +29,6 @@ public class ConfigUtilTest {
         "data",
         "ConfigUtilTest"
     );
-
-    //NOTE This should match TypicalConfig.json
-    private static Config getTypicalConfig() {
-        Config config = new Config();
-        config.setSettingsPath(Paths.get("myFolder", "settings.json"));
-        config.setLogLevel(Level.INFO);
-        return config;
-    }
 
     private static Path getConfigPath(String fileName) {
         return ConfigUtilTest.TEST_DATA_FOLDER.resolve(fileName);
@@ -59,7 +52,7 @@ public class ConfigUtilTest {
 
     @Test
     public void readConfig_typical_successfullyRead() throws DataLoadingException {
-        Config expected = ConfigUtilTest.getTypicalConfig();
+        Config expected = TestData.getTypicalConfig();
         Config actual = this.read("ConfigUtilTest/typicalConfig.json").get();
         assertEquals(expected, actual);
     }
@@ -75,7 +68,7 @@ public class ConfigUtilTest {
     public void saveConfig() throws DataLoadingException, IOException {
         Path path = ConfigUtilTest.TEMP_DIR.resolve("tempConfig.json");
 
-        Config config = getTypicalConfig();
+        Config config = TestData.getTypicalConfig();
 
         // Try writing when the file doesn't exist
         ConfigUtil.saveConfig(config, path);

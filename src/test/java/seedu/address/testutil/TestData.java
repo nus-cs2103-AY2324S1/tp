@@ -6,13 +6,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.nio.file.Paths;
+import java.util.logging.Level;
 
+import seedu.address.commons.core.Config;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand.EditContactDescriptor;
 import seedu.address.model.Contacts;
+import seedu.address.model.ReadOnlyContacts;
 import seedu.address.model.contact.Contact;
 
 
@@ -83,21 +84,6 @@ public final class TestData {
             .withEmail("stefan@example.com").withNote("little india").build();
     public static final Contact IDA = new ContactBuilder().withName("Ida Mueller").withPhone("8482131")
             .withEmail("hans@example.com").withNote("chicago ave").build();
-
-    /**
-     * Returns an {@code ContactsManager} with all the typical contacts.
-     */
-    public static Contacts getTypicalContactsManager() {
-        Contacts ab = new Contacts();
-        for (Contact contact : getTypicalContacts()) {
-            ab.add(contact);
-        }
-        return ab;
-    }
-
-    public static List<Contact> getTypicalContacts() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
-    }
 
     /**
      * Holds valid test data.
@@ -177,6 +163,30 @@ public final class TestData {
 
     public static final String WHITESPACE = "\t  \r  \n";
     public static final String EXTRA_WORDS = "extra words here";
+
+    /**
+     * Returns {@link Config} matching typicalConfig.json.
+     */
+    public static Config getTypicalConfig() {
+        Config config = new Config();
+        config.setSettingsPath(Paths.get("myFolder", "settings.json"));
+        config.setLogLevel(Level.INFO);
+        return config;
+    }
+
+    /**
+     * Returns {@link ReadOnlyContacts} matching typicalContacts.json.
+     */
+    public static ReadOnlyContacts getTypicalContacts() {
+        Contacts contacts = new Contacts();
+        contacts.add(TestData.ALICE);
+        contacts.add(TestData.BENSON);
+        contacts.add(TestData.CARL);
+        contacts.add(TestData.ELLE);
+        contacts.add(TestData.FIONA);
+        contacts.add(TestData.GEORGE);
+        return contacts;
+    }
 
     private TestData() {
         // No instantiation

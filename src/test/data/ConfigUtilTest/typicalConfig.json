@@ -1,5 +1,5 @@
 {
-  "_comment": "//NOTE This should match ConfigUtilTest.getTypicalConfig().",
+  "_comment": "//NOTE This should match TestData.getTypicalConfig().",
   "settingsPath" : "myFolder/settings.json",
   "logLevel" : "INFO"
 }

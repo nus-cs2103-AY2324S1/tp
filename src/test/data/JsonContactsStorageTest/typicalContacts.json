@@ -1,5 +1,5 @@
 {
-  "_comment": "Contacts storage JSON file containing certain contacts that are the same as in TestData.java.",
+  "_comment": "//NOTE This should match TestData.getTypicalContacts().",
   "contacts" : [{
     "name" : "Alice Pauline",
     "phone" : "94351253",
