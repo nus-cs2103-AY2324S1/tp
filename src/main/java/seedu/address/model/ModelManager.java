@@ -11,7 +11,10 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.*;
+import seedu.address.model.person.IdentityCode;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.team.Team;
 
 /**
  * Represents the management model for address and team books.
@@ -134,8 +137,9 @@ public class ModelManager implements Model {
     @Override
     public void setTeamBookFilePath(Path teamBookFilePath) {
         requireNonNull(teamBookFilePath);
-        userPrefs.setAddressBookFilePath(teamBookFilePath);
+        userPrefs.setTeamBookFilePath(teamBookFilePath); // Corrected this line
     }
+
     //=========== AddressBook ================================================================================
 
     /**
@@ -194,6 +198,11 @@ public class ModelManager implements Model {
         return addressBook.getPersonByName(name);
     }
 
+    @Override
+    public IdentityCode getIdentityCodeByName(Name developerName) {
+        return addressBook.getPersonByName(developerName).getIdentityCode();
+    }
+
     /**
      * Deletes the specified person from the address book.
      *
@@ -227,11 +236,6 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
-    }
-
-    @Override
-    public IdentityCode getIdentityCodeByName(Name devName) {
-        return addressBook.getPersonByName(devName).getIdentityCode();
     }
     //=========== Filtered Person List Accessors =============================================================
 
@@ -278,13 +282,6 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Checks if a team with the given team name exists in the team book.
-     *
-     * @param teamName the name of the team to check.
-     * @return true if the team exists, false otherwise.
-     */
-
-    /**
      * Deletes a team with the specified team name from the team book.
      *
      * @param teamName the name of the team to be deleted.
@@ -303,14 +300,38 @@ public class ModelManager implements Model {
         teamBook.addTeam(team);
         updateFilteredTeamList(PREDICATE_SHOW_ALL_TEAMS);
     }
-
+    /**
+     * Deletes the given developer from the specified team.
+     * The developer and team must exist in the model.
+     */
     @Override
+    public void deleteDeveloperFromTeam(String teamName, IdentityCode developerIdentityCode) {
+        teamBook.removeDeveloperFromTeam(teamName, developerIdentityCode);
+    }
     public boolean personAlreadyInTeam(String teamToAddTo, Name devToAdd) {
         IdentityCode devToAddIdentityCode = getIdentityCodeByName(devToAdd);
         return teamBook.personAlreadyInTeam(teamToAddTo, devToAddIdentityCode);
     }
+    /**
+     * Checks if a team with the given team name exists in the team book.
+     *
+     * @param teamName the name of the team to check.
+     * @return true if the team exists, false otherwise.
+     */
+    public boolean hasTeam(String teamName) {
+        requireNonNull(teamName);
+        return teamBook.hasTeam(teamName);
+    }
 
+    public boolean invalidAddToTeam(String teamToAddTo) {
+        return teamBook.invalidAddToTeam(teamToAddTo);
+    }
 
+    //only run when you know that team exists
+    public void addToTeam(String teamToAddTo, Name devToAdd) {
+        IdentityCode devToAddIdentityCode = getIdentityCodeByName(devToAdd);
+        teamBook.addDevToTeam(teamToAddTo, devToAddIdentityCode);
+    }
     //=========== Filtered Team List Accessors =============================================================
 
     /**
@@ -357,21 +378,4 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(otherModelManager.filteredPersons)
                 && filteredTeams.equals(otherModelManager.filteredTeams);
     }
-
-    //team level operations
-    public boolean hasTeam(String teamName) {
-        requireNonNull(teamName);
-        return teamBook.hasTeam(teamName);
-    }
-
-    public boolean invalidAddToTeam(String teamToAddTo) {
-        return teamBook.invalidAddToTeam(teamToAddTo);
-    }
-
-    //only run when you know that team exists
-    public void addToTeam(String teamToAddTo, Name devToAdd) {
-        IdentityCode devToAddIdentityCode = getIdentityCodeByName(devToAdd);
-        teamBook.addDevToTeam(teamToAddTo, devToAddIdentityCode);
-    }
-
 }

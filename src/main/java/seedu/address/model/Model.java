@@ -5,9 +5,10 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.*;
-
-import static java.util.Objects.requireNonNull;
+import seedu.address.model.person.IdentityCode;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.team.Team;
 
 /**
  * The API of the Model component.
@@ -67,13 +68,10 @@ public interface Model {
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
     boolean hasPerson(Person person);
-
-    boolean invalidAddToTeam(String teamToAddTo);
-
     boolean hasPerson(Name name);
-
     Person getPersonByName(Name name);
-
+    IdentityCode getIdentityCodeByName(Name developerName);
+    boolean invalidAddToTeam(String teamToAddTo);
     /**
      * Deletes the given person.
      * The person must exist in the address book.
@@ -92,8 +90,6 @@ public interface Model {
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
     void setPerson(Person target, Person editedPerson);
-
-    IdentityCode getIdentityCodeByName(Name devName);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
@@ -146,6 +142,11 @@ public interface Model {
      */
     void addTeam(Team team);
 
+    /**
+     * Deletes the given developer from the specified team.
+     * The developer and team must exist in the model.
+     */
+    void deleteDeveloperFromTeam(String teamName, IdentityCode developerIdentityCOde);
 
     boolean personAlreadyInTeam(String teamToAddTo, Name devToAdd);
 

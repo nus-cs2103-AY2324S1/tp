@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.IdentityCode;
-import seedu.address.model.person.Team;
+import seedu.address.model.team.Team;
 
 /**
  * Jackson-friendly version of {@link Team}.
@@ -39,6 +39,7 @@ class JsonAdaptedTeam {
         }
         this.teamName = source.getTeamName();
     }
+
 
     /**
      * Converts this Jackson-friendly adapted team object into the model's {@code Team} object.
