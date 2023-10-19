@@ -110,6 +110,7 @@ public class CommandTestUtil {
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_BLOODTYPE_DESC = " " + PREFIX_BLOODTYPE + "Z+";
     public static final String INVALID_CONDITION_DESC = " " + PREFIX_CONDITION + " ";
+    public static final String INVALID_EMERGENCY_CONTACT_DESC = " " + PREFIX_EMERGENCY_CONTACT + "+6A";
     public static final String INVALID_NRIC = "A1234567G";
     public static final String INVALID_GENDER_DESC = " " + PREFIX_GENDER + "Alien";
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
