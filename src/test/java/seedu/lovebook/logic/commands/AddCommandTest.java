@@ -157,7 +157,7 @@ public class AddCommandTest {
 
         @Override
         public void getRandomPerson() {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
