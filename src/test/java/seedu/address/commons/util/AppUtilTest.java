@@ -11,7 +11,7 @@ import seedu.address.ui.UiManager;
 
 public class AppUtilTest {
     @Test
-    public void getImage_appIconNotNull() {
+    public void getImage_appIcon_notNull() {
         assertNotNull(AppUtil.getImage(UiManager.PATH_APP_ICON));
     }
 
