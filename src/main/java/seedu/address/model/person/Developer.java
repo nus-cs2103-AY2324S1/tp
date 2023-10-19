@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import java.util.Set;
 
+import seedu.address.model.IdentityCodeManager;
 import seedu.address.model.tag.Tag;
 
 /**
