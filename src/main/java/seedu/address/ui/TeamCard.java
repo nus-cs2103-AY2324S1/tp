@@ -35,6 +35,13 @@ public class TeamCard extends UiPart<Region> {
     @FXML
     private FlowPane teamMembers;
 
+    /**
+     * Constructor of the TeamCard class which creates a
+     * UI component that displays information of a {@code Team}.
+     *
+     * @param team On of the teams for display.
+     * @param displayedIndex Index of the team for display.
+     */
     public TeamCard(Team team, int displayedIndex) {
         super(FXML);
         this.team = team;
