@@ -3,7 +3,7 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPARTMENT_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPARTMENT_IT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalEmployees.ALICE;
 import static seedu.address.testutil.TypicalEmployees.getTypicalAddressBook;
@@ -45,7 +45,7 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicateEmployees_throwsDuplicateEmployeeException() {
         // Two employees with the same identity fields
-        Employee editedAlice = new EmployeeBuilder(ALICE).withDepartments(VALID_DEPARTMENT_HUSBAND)
+        Employee editedAlice = new EmployeeBuilder(ALICE).withDepartments(VALID_DEPARTMENT_IT)
                 .build();
         List<Employee> newEmployees = Arrays.asList(ALICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newEmployees);
@@ -72,7 +72,7 @@ public class AddressBookTest {
     @Test
     public void hasEmployee_employeeWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addEmployee(ALICE);
-        Employee editedAlice = new EmployeeBuilder(ALICE).withDepartments(VALID_DEPARTMENT_HUSBAND)
+        Employee editedAlice = new EmployeeBuilder(ALICE).withDepartments(VALID_DEPARTMENT_IT)
                 .build();
         assertTrue(addressBook.hasEmployee(editedAlice));
     }

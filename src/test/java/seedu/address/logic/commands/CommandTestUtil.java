@@ -34,12 +34,12 @@ public class CommandTestUtil {
     public static final String VALID_POSITION_BOB = "Junior Manager";
     public static final String VALID_ID_AMY = "EID8765-1234";
     public static final String VALID_ID_BOB = "EID4030-1020";
-    public static final String VALID_PHONE_AMY = "11111111";
-    public static final String VALID_PHONE_BOB = "22222222";
+    public static final String VALID_PHONE_AMY = "91234567";
+    public static final String VALID_PHONE_BOB = "92424242";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
-    public static final String VALID_DEPARTMENT_HUSBAND = "husband";
-    public static final String VALID_DEPARTMENT_FRIEND = "friend";
+    public static final String VALID_DEPARTMENT_FINANCE = "Finance";
+    public static final String VALID_DEPARTMENT_IT = "IT";
     public static final String VALID_SALARY_AMY = "$7,000";
     public static final String VALID_SALARY_BOB = "$5,000";
 
@@ -53,8 +53,8 @@ public class CommandTestUtil {
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
-    public static final String DEPARTMENT_DESC_FRIEND = " " + PREFIX_DEPARTMENT + VALID_DEPARTMENT_FRIEND;
-    public static final String DEPARTMENT_DESC_HUSBAND = " " + PREFIX_DEPARTMENT + VALID_DEPARTMENT_HUSBAND;
+    public static final String DEPARTMENT_DESC_FRIEND = " " + PREFIX_DEPARTMENT + VALID_DEPARTMENT_FINANCE;
+    public static final String DEPARTMENT_DESC_HUSBAND = " " + PREFIX_DEPARTMENT + VALID_DEPARTMENT_IT;
 
     public static final String SALARY_DESC_AMY = " " + PREFIX_SALARY + VALID_SALARY_AMY;
     public static final String SALARY_DESC_BOB = " " + PREFIX_SALARY + VALID_SALARY_BOB;
@@ -65,7 +65,7 @@ public class CommandTestUtil {
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_DEPARTMENT_DESC = " "
-            + PREFIX_DEPARTMENT + "hubby*"; // '*' not allowed in departments
+            + PREFIX_DEPARTMENT + "Finance*"; // '*' not allowed in departments
     public static final String INVALID_SALARY_DESC = " " + PREFIX_SALARY + "10,000"; // missing '$' symbol
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
@@ -78,12 +78,12 @@ public class CommandTestUtil {
         DESC_AMY = new EditEmployeeDescriptorBuilder().withName(VALID_NAME_AMY).withPosition(VALID_POSITION_AMY)
                 .withId(VALID_ID_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY)
-                .withDepartments(VALID_DEPARTMENT_FRIEND)
+                .withDepartments(VALID_DEPARTMENT_FINANCE)
                 .withSalary(VALID_SALARY_AMY).build();
         DESC_BOB = new EditEmployeeDescriptorBuilder().withName(VALID_NAME_BOB).withPosition(VALID_POSITION_BOB)
                 .withId(VALID_ID_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withDepartments(VALID_DEPARTMENT_HUSBAND, VALID_DEPARTMENT_FRIEND)
+                .withDepartments(VALID_DEPARTMENT_FINANCE, VALID_DEPARTMENT_IT)
                 .withSalary(VALID_SALARY_BOB).build();
     }
 

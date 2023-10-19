@@ -1,7 +1,7 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPARTMENT_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPARTMENT_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPARTMENT_FINANCE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPARTMENT_IT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_AMY;
@@ -57,20 +57,20 @@ public class TypicalEmployees {
     public static final Employee ELLE = new EmployeeBuilder().withName("Elle Meyer")
                 .withPosition("Junior Software Engineer")
                 .withId("EID2023-1234")
-                .withPhone("9482224")
+                .withPhone("94842224")
                 .withEmail("werner@example.com")
                 .withSalary("$4,000").build();
     public static final Employee FIONA = new EmployeeBuilder().withName("Fiona Kunz")
                 .withPosition("Senior Software Engineer")
                 .withId("EID2023-5678")
-                .withPhone("9482427")
+                .withPhone("94825427")
                 .withEmail("lydia@example.com")
                 .withSalary("$8,000").build();
 
     public static final Employee GEORGE = new EmployeeBuilder().withName("George Best")
                 .withPosition("Intern")
                 .withId("EID2023-9876")
-                .withPhone("9482442")
+                .withPhone("94824242")
                 .withEmail("anna@example.com")
                 .withSalary("$1,000").build();
 
@@ -78,14 +78,14 @@ public class TypicalEmployees {
     public static final Employee HOON = new EmployeeBuilder().withName("Hoon Meier")
                 .withPosition("Intern")
                 .withId("EID2023-2024")
-                .withPhone("8482424")
+                .withPhone("84824242")
                 .withEmail("stefan@example.com")
                 .withSalary("$1,000")
                 .build();
     public static final Employee IDA = new EmployeeBuilder().withName("Ida Mueller")
                 .withPosition("CEO")
                 .withId("EID2021-2022")
-                .withPhone("8482131")
+                .withPhone("84821311")
                 .withEmail("hans@example.com")
                 .withSalary("$10,000")
                 .build();
@@ -96,7 +96,7 @@ public class TypicalEmployees {
                 .withId(VALID_ID_AMY)
                 .withPhone(VALID_PHONE_AMY)
                 .withEmail(VALID_EMAIL_AMY)
-                .withDepartments(VALID_DEPARTMENT_FRIEND)
+                .withDepartments(VALID_DEPARTMENT_FINANCE)
                 .withSalary(VALID_SALARY_AMY)
                 .build();
     public static final Employee BOB = new EmployeeBuilder().withName(VALID_NAME_BOB)
@@ -104,7 +104,7 @@ public class TypicalEmployees {
                 .withId(VALID_ID_BOB)
                 .withPhone(VALID_PHONE_BOB)
                 .withEmail(VALID_EMAIL_BOB)
-                .withDepartments(VALID_DEPARTMENT_HUSBAND, VALID_DEPARTMENT_FRIEND)
+                .withDepartments(VALID_DEPARTMENT_FINANCE, VALID_DEPARTMENT_IT)
                 .withSalary(VALID_SALARY_BOB)
                 .build();
 
