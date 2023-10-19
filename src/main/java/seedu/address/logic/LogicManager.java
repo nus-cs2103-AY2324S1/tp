@@ -24,9 +24,6 @@ public class LogicManager implements Logic {
     private Model model;
     private Storage storage;
 
-    //TODO can the entire parser be static?
-    private InputParser inputParser = new InputParser();
-
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
@@ -56,7 +53,7 @@ public class LogicManager implements Logic {
     public CommandResult execute(
         String commandText
     ) throws ParseException, CommandException {
-        Command command = inputParser.parseCommand(commandText);
+        Command command = InputParser.parseCommand(commandText);
         CommandResult result = command.execute(model);
 
         try {

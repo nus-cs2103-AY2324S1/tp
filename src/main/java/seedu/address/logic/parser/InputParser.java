@@ -1,12 +1,10 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.annotation.Nullable;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
@@ -21,36 +19,31 @@ import seedu.address.logic.parser.exceptions.ParseException;
 
 
 /**
- * Parses user input.
+ * Contains methods for parsing user input.
  */
-public class InputParser {
+public final class InputParser {
     /**
-     * Used for initial separation of command word and args.
+     * Used for initial separation of command word and arguments.
      */
-    private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+    private static final Pattern REGEX_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
     /**
-     * Returns a parsed Command based on the specified user input.
+     * Returns a parsed {@link Command} based on the specified user input. The
+     * {@link Command} can then be used for execution.
      *
-     * The returned Command can then be used for execution.
-     *
-     * @param userInput Full user input string.
      * @throws ParseException If input doesn't conform to expected format.
      */
-    public Command parseCommand(String userInput) throws ParseException {
+    public static Command parseCommand(String userInput) throws ParseException {
         String trimmed = userInput.trim();
-        Matcher matcher = BASIC_COMMAND_FORMAT.matcher(trimmed);
+        Matcher matcher = REGEX_COMMAND_FORMAT.matcher(trimmed);
         if (!matcher.matches()) {
             throw new ParseException(
-                String.format(
-                    MESSAGE_INVALID_COMMAND_FORMAT,
-                    HelpCommand.MESSAGE_USAGE
-                )
+                Messages.commandInvalidFormat(HelpCommand.MESSAGE_USAGE)
             );
         }
 
-        final @Nullable String commandWord = matcher.group("commandWord");
-        final @Nullable String arguments = matcher.group("arguments");
+        @Nullable String commandWord = matcher.group("commandWord");
+        @Nullable String arguments = matcher.group("arguments");
 
         switch (commandWord) {
         case AddCommand.COMMAND_WORD:
@@ -70,7 +63,11 @@ public class InputParser {
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
         default:
-            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            throw new ParseException(Messages.COMMAND_UNKNOWN);
         }
+    }
+
+    private InputParser() {
+        // No instantiation
     }
 }

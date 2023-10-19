@@ -17,7 +17,6 @@ import seedu.address.model.contact.Email;
  * populated by calling their associated methods.
  */
 public final class Messages {
-    public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX = "The contact index provided is invalid";
     public static final String MESSAGE_CONTACTS_LISTED_OVERVIEW = "%d contacts listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
@@ -65,6 +64,7 @@ public final class Messages {
     //TODO refine the messages above this line
 
     // Generic commands
+    public static final String COMMAND_UNKNOWN = "Unknown command.";
     private static final String UNFORMATTED_COMMAND_INVALID_FORMAT =
             "Invalid command format.\n%s";
 
