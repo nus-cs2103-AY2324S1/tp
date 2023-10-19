@@ -14,6 +14,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupRemark;
 import seedu.address.model.person.Person;
 
 /**
@@ -236,6 +237,13 @@ public class ModelManager implements Model {
         group.removePerson(person);
         person.removeGroup(group);
     }
+
+    public Group addGroupRemark(String groupName, GroupRemark groupRemark) throws CommandException {
+        Group group = addressBook.getGroup(groupName);
+        group.setGroupRemark(groupRemark);
+        return group;
+    }
+
 
     private void forceUpdateList() {
         updateFilteredPersonList(user -> false);

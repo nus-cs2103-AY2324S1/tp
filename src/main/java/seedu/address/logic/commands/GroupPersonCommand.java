@@ -67,7 +67,7 @@ public class GroupPersonCommand extends Command {
 		System.out.println(person.toString());
 
 
-		return new CommandResult(java.lang.String.format(MESSAGE_SUCCESS, person.getName().fullName, group.getName()));
+		return new CommandResult(java.lang.String.format(MESSAGE_SUCCESS, person.getName().fullName, group.getGroupName()));
 	}
 
 	@Override

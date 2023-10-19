@@ -7,10 +7,9 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * Class representing a group
@@ -19,6 +18,7 @@ public class Group {
     public static final String MESSAGE_CONSTRAINTS = "Group names should be alphanumeric";
     private final ObservableList<Person> listOfGroupMates = FXCollections.observableArrayList();
     private final String groupName;
+    private GroupRemark groupRemark;
 
     /**
      * Name field must be present and not null.
@@ -136,7 +136,19 @@ public class Group {
         return this.groupName.equals(otherGroup.getGroupName());
     }
 
-    public String getName() {
-        return this.groupName;
+//    public String getName() {
+//        return this.groupName;
+//    }
+
+    public Stream<Person> grpMatesStream() {
+        return listOfGroupMates.stream();
+    }
+
+    public GroupRemark getGroupRemark() {
+        return this.groupRemark;
+    }
+
+    public void setGroupRemark(GroupRemark groupRemark) {
+        this.groupRemark = groupRemark;
     }
 }

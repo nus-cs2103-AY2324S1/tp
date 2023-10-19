@@ -8,6 +8,7 @@ import javafx.util.Pair;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupRemark;
 import seedu.address.model.person.Person;
 
 /**
@@ -129,6 +130,8 @@ public interface Model {
      * @return Pair representing Person and Group object of interest
      */
     Pair<Person, Group> ungroupPerson(String personName, String groupName) throws CommandException;
+
+    Group addGroupRemark(String groupName, GroupRemark groupRemark) throws CommandException;
 
     /**
      * Assign person to group
