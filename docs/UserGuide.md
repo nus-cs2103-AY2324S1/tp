@@ -469,7 +469,7 @@ Example usage:
 
 * `sort /by grad /order asc`
 * `sort /by name /order descending`
-* `sort /by course`
+* `sort /by name`
 
 Parameters
 
@@ -478,9 +478,8 @@ Parameters
     List of options:
     * `name` - Sort alphabetically by contact name
     * `grad` - Sort chronologically by graduation year
-    * `course` - Sort alphabetically by course taken
-    * `spec`/`specialization` - Sort alphabetically by specialization
     * `priority` - Sort by priority
+    * `none` - Return to default sorting
 
 * `[order]` (optional) is the order to sort in. If not specified, defaults to ascending.
 
@@ -490,11 +489,11 @@ Parameters
 
 When the command succeeds:
 
-* `sort /by course`
+* `sort /by grad`
 
 ```text
 Here’s your sorted list of contacts:
-[list of contacts, sorted in ascending order by course]
+[list of contacts, sorted in ascending order by graduation date]
 ```
 
 * `sort /by name /order desc`

@@ -12,6 +12,9 @@ import networkbook.model.person.Email;
 import networkbook.model.person.Graduation;
 import networkbook.model.person.Link;
 import networkbook.model.person.Name;
+import networkbook.model.person.PersonSortComparator;
+import networkbook.model.person.PersonSortComparator.SortField;
+import networkbook.model.person.PersonSortComparator.SortOrder;
 import networkbook.model.person.Phone;
 import networkbook.model.person.Priority;
 import networkbook.model.person.Specialisation;
@@ -266,5 +269,34 @@ public class ParserUtil {
             throw new ParseException(Priority.MESSAGE_CONSTRAINTS);
         }
         return new Priority(trimmedPriority);
+    }
+
+
+    /**
+     * Parses a {@code String field} into a {@code SortField}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static SortField parseSortField(String field) throws ParseException {
+        requireNonNull(field);
+        String normalizedField = field.trim().toLowerCase();
+        SortField sortField = PersonSortComparator.parseSortField(normalizedField);
+        if (!PersonSortComparator.isValidSortField(sortField)) {
+            throw new ParseException(PersonSortComparator.MESSAGE_CONSTRAINTS_FIELD);
+        }
+        return sortField;
+    }
+
+    /**
+     * Parses a {@code String order} into a {@code SortOrder}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static SortOrder parseSortOrder(String order) throws ParseException {
+        requireNonNull(order);
+        String normalizedOrder = order.trim().toLowerCase();
+        SortOrder sortOrder = PersonSortComparator.parseSortOrder(normalizedOrder);
+        if (!PersonSortComparator.isValidSortOrder(sortOrder)) {
+            throw new ParseException(PersonSortComparator.MESSAGE_CONSTRAINTS_ORDER);
+        }
+        return sortOrder;
     }
 }

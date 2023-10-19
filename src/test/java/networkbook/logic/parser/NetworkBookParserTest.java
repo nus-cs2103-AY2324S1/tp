@@ -19,9 +19,13 @@ import networkbook.logic.commands.ExitCommand;
 import networkbook.logic.commands.FindCommand;
 import networkbook.logic.commands.HelpCommand;
 import networkbook.logic.commands.ListCommand;
+import networkbook.logic.commands.SortCommand;
 import networkbook.logic.parser.exceptions.ParseException;
 import networkbook.model.person.NameContainsKeywordsPredicate;
 import networkbook.model.person.Person;
+import networkbook.model.person.PersonSortComparator;
+import networkbook.model.person.PersonSortComparator.SortField;
+import networkbook.model.person.PersonSortComparator.SortOrder;
 import networkbook.testutil.EditPersonDescriptorBuilder;
 import networkbook.testutil.PersonBuilder;
 import networkbook.testutil.PersonUtil;
@@ -73,6 +77,16 @@ public class NetworkBookParserTest {
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_sort() throws Exception {
+        SortCommand command = (SortCommand) parser.parseCommand(
+                SortCommand.COMMAND_WORD + " "
+                + CliSyntax.PREFIX_SORT_FIELD + " NAMe "
+                + CliSyntax.PREFIX_SORT_ORDER + " desCending");
+        PersonSortComparator expectedCmp = new PersonSortComparator(SortField.NAME, SortOrder.DESCENDING);
+        assertEquals(new SortCommand(expectedCmp), command);
     }
 
     @Test
