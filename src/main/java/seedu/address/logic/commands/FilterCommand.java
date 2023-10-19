@@ -59,10 +59,10 @@ public class FilterCommand extends Command {
         switch (operation) {
         case ADD:
             model.addFilter(predicate);
-            return new CommandResult("Added filter: " + predicate);
+            return new CommandResult("Added " + predicate);
         case DELETE:
             model.deleteFilter(predicate);
-            return new CommandResult("Removed filter: " + predicate);
+            return new CommandResult("Removed " + predicate);
         case CLEAR:
             model.clearFilters();
             return new CommandResult("Cleared all filters");
