@@ -81,6 +81,16 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
+    @Override
+    public Path getCalendarFilePath() {
+        return userPrefs.getCalendarFilePath();
+    }
+
+    @Override
+    public void setCalendarFilePath(Path calendarFilePath) {
+        requireNonNull(calendarFilePath);
+        userPrefs.setCalendarFilePath(calendarFilePath);
+    }
 
 
     //=========== AddressBook ================================================================================

@@ -56,6 +56,16 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
+     * Returns the user prefs' calendar file path.
+     */
+    Path getCalendarFilePath();
+
+    /**
+     * Sets the user prefs' calendar file path.
+     */
+    void setCalendarFilePath(Path calendarFilePath);
+
+    /**
      * Replaces calendar data with the data in {@code calendar}.
      */
     void setCalendar(ReadOnlyCalendar calendar);
