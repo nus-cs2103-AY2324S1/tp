@@ -141,6 +141,14 @@ public interface Model {
      * The lesson must exist in the application.
      */
     void showLesson(Lesson lessonToShow); //TODO
+    ObservableList<Lesson> getFilteredScheduleList();
+
+    /**
+     * Updates the filter of the filtered lesson list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredScheduleList(Predicate<Lesson> predicate);
+
     /**
      * Links the Ui of the Application.
      */

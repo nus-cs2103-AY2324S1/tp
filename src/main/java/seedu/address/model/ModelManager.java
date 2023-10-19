@@ -25,6 +25,7 @@ public class ModelManager implements Model {
     private final ScheduleList scheduleList;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Lesson> filteredLessons;
     private Ui ui = null;
     private String state = "SCHEDULE"; // Default state of app. Can be either SCHEDULE or STUDENTS
 
@@ -42,6 +43,7 @@ public class ModelManager implements Model {
         // to add: filtered list of lessons
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredLessons = new FilteredList<>(this.scheduleList.getLessonList());
     }
 
     public ModelManager() {
@@ -184,13 +186,22 @@ public class ModelManager implements Model {
 
         scheduleList.setLesson(target, editedLesson);
     }
+
+    //=========== Filtered Lesson List Accessors =============================================================
+
     /**
-     * Shows the details of the given lesson.
-     * The lesson must exist in the application.
+     * Returns an unmodifiable view of the list of {@code Lesson} backed by the internal list of
+     * {@code versionedScheduleList}
      */
     @Override
-    public void showLesson(Lesson lessonToShow) {
-        //TODO
+    public ObservableList<Lesson> getFilteredScheduleList() {
+        return filteredLessons;
+    }
+
+    @Override
+    public void updateFilteredScheduleList(Predicate<Lesson> predicate) {
+        requireNonNull(predicate);
+        filteredLessons.setPredicate(predicate);
     }
     //=========== Ui Changing =============================================================
 
@@ -207,7 +218,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void showLesson(Person lesson) { //TODO
+    public void showLesson(Lesson lesson) { //TODO
         requireNonNull(lesson);
         if (ui != null) {
             ui.showLessonDetails(lesson);

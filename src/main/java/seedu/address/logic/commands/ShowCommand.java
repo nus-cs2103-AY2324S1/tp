@@ -8,6 +8,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.lessons.Lesson;
 import seedu.address.model.person.Person;
 
 /**
@@ -36,6 +37,7 @@ public class ShowCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
+        List<Lesson> lastShownSchedule = model.getFilteredScheduleList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -52,7 +54,7 @@ public class ShowCommand extends Command {
         case "SCHEDULE":
             // Show lesson details
             // Just a placeholder for now
-            Person lessonToShow = lastShownList.get(targetIndex.getZeroBased());
+            Lesson lessonToShow = lastShownSchedule.get(targetIndex.getZeroBased());
             model.showLesson(lessonToShow);
             // return new CommandResult(String.format(MESSAGE_SHOW_LESSON_SUCCESS, Messages.format(lessonToShow)));
             return new CommandResult("Show Lesson");
