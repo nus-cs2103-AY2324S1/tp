@@ -60,6 +60,10 @@ public class CommandTestUtil {
     public static final String SUBJECT_DESC_BOB = " " + PREFIX_SUBJECT + VALID_SUBJECT_BOB;
     public static final String DAY_DESC_AMY = " " + PREFIX_DAY + VALID_DAY_AMY;
     public static final String DAY_DESC_BOB = " " + PREFIX_DAY + VALID_DAY_BOB;
+    public static final String BEGIN_DESC_AMY = " " + PREFIX_BEGIN + VALID_BEGIN_AMY;
+    public static final String BEGIN_DESC_BOB = " " + PREFIX_BEGIN + VALID_BEGIN_BOB;
+    public static final String END_DESC_AMY = " " + PREFIX_END + VALID_END_AMY;
+    public static final String END_DESC_BOB = " " + PREFIX_END + VALID_END_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 

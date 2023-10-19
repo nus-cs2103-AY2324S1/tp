@@ -5,7 +5,10 @@
     "phone" : "94351253",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
-    "day": "Monday",
+    "subject" : "Maths",
+    "day": "Mon",
+    "begin": "0800",
+    "end": "1000",
     "tags" : [ "friends" ],
     "paid": "false"
   }, {
@@ -13,7 +16,10 @@
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
-    "day": "Monday",
+    "subject" : "Chemistry",
+    "day": "Tues",
+    "begin": "0900",
+    "end": "1100",
     "tags" : [ "owesMoney", "friends" ],
     "paid": "false"
   }, {
@@ -21,7 +27,10 @@
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "address" : "wall street",
-    "day": "Monday",
+    "subject" : "Biology",
+    "day": "Thurs",
+    "begin": "1000",
+    "end": "1200",
     "tags" : [ ],
     "paid": "false"
   }, {
@@ -29,7 +38,10 @@
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "address" : "10th street",
-    "day": "Monday",
+    "subject" : "Physics",
+    "day": "Thurs",
+    "begin": "1100",
+    "end": "1300",
     "tags" : [ "friends" ],
     "paid": "false"
   }, {
@@ -37,7 +49,10 @@
     "phone" : "9482224",
     "email" : "werner@example.com",
     "address" : "michegan ave",
-    "day": "Monday",
+    "subject" : "Maths",
+    "day": "Fri",
+    "begin": "1200",
+    "end": "1400",
     "tags" : [ ],
     "paid": "false"
   }, {
@@ -45,7 +60,10 @@
     "phone" : "9482427",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
-    "day": "Monday",
+    "subject" : "English",
+    "day": "Sat",
+    "begin": "1300",
+    "end": "1500",
     "tags" : [ ],
     "paid": "false"
   }, {
@@ -53,7 +71,10 @@
     "phone" : "9482442",
     "email" : "anna@example.com",
     "address" : "4th street",
-    "day": "Monday",
+    "subject" : "Chinese",
+    "day": "Sun",
+    "begin": "1400",
+    "end": "1600",
     "tags" : [ ],
     "paid": "false"
   } ]

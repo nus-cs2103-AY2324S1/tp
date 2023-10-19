@@ -163,21 +163,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String day} into an {@code Day}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code day} is invalid.
-     */
-    public static Day parseDay(String day) throws ParseException {
-        requireNonNull(day);
-        String trimmedDay = day.trim();
-        if (!Day.isValidDay(trimmedDay)) {
-            throw new ParseException(Day.MESSAGE_CONSTRAINTS);
-        }
-        return new Day(trimmedDay);
-    }
-
-    /**
      * Parses a {@code String begin} into an {@code Begin}.
      * Leading and trailing whitespaces will be trimmed.
      *

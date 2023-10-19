@@ -45,7 +45,7 @@ public class TypicalPersons {
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street")
             .withSubject("Biology")
-            .withDay("Wed")
+            .withDay("Thurs")
             .withBegin("1000")
             .withEnd("1200")
             .build();
@@ -100,8 +100,9 @@ public class TypicalPersons {
             .withSubject(VALID_SUBJECT_AMY).withDay(VALID_DAY_AMY).withBegin(VALID_BEGIN_AMY)
             .withEnd(VALID_END_AMY).withTags(VALID_TAG_FRIEND).build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-            .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-            .withDay(VALID_DAY_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+            .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withSubject(VALID_SUBJECT_BOB)
+            .withDay(VALID_DAY_BOB).withBegin(VALID_BEGIN_BOB).withEnd(VALID_END_BOB)
+            .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

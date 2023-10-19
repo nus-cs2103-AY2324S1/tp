@@ -233,7 +233,7 @@ public class EditCommand extends Command {
         public Optional<Subject> getSubject() {
             return Optional.ofNullable(subject);
         }
-      
+
         public void setDay(Day day) {
             this.day = day;
         }
@@ -304,7 +304,7 @@ public class EditCommand extends Command {
                     && Objects.equals(day, otherEditPersonDescriptor.day)
                     && Objects.equals(begin, otherEditPersonDescriptor.begin)
                     && Objects.equals(end, otherEditPersonDescriptor.end)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
                     && Objects.equals(paid, otherEditPersonDescriptor.paid);
 
         }

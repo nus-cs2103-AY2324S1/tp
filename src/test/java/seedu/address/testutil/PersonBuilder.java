@@ -25,7 +25,7 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_SUBJECT = "Maths";
-    public static final String DEFAULT_DAY = "Monday";
+    public static final String DEFAULT_DAY = "Mon";
     public static final String DEFAULT_BEGIN = "1000";
     public static final String DEFAULT_END = "1200";
 

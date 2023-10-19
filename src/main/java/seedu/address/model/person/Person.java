@@ -68,7 +68,7 @@ public class Person {
         return address;
     }
 
-    public Subject getSubject(){
+    public Subject getSubject() {
         return subject;
     }
 
@@ -81,7 +81,7 @@ public class Person {
         return begin;
     }
 
-    public End getEnd(){
+    public End getEnd() {
         return end;
     }
 
@@ -145,7 +145,6 @@ public class Person {
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(name, phone, email, address, subject, day, begin, end, tags, paid);
-        return Objects.hash(name, phone, email, address, tags, paid);
     }
 
     @Override

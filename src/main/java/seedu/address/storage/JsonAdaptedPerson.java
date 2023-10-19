@@ -47,7 +47,7 @@ class JsonAdaptedPerson {
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("subject") String subject, @JsonProperty("day") String day,
             @JsonProperty("begin") String begin, @JsonProperty("end") String end,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags,  @JsonProperty("paid") Boolean paid) {
+            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("paid") Boolean paid) {
         this.name = name;
         this.phone = phone;
         this.email = email;
