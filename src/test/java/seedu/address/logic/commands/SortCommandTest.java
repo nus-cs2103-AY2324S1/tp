@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.testutil.TypicalEvents.getTypicalCalendar;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalUnsortedAddressBook;
@@ -25,10 +26,10 @@ public class SortCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        unsortedModel = new ModelManager(getTypicalUnsortedAddressBook(), new UserPrefs());
-        expectedSortedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalAddressBook(), getTypicalCalendar(), new UserPrefs());
+        expectedModel = new ModelManager(model.getAddressBook(), getTypicalCalendar(), new UserPrefs());
+        unsortedModel = new ModelManager(getTypicalUnsortedAddressBook(), getTypicalCalendar(), new UserPrefs());
+        expectedSortedModel = new ModelManager(model.getAddressBook(), getTypicalCalendar(), new UserPrefs());
     }
 
     @Test
