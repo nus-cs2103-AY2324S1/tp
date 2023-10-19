@@ -12,8 +12,8 @@ import seedu.address.model.event.EventPeriod;
  */
 class JsonAdaptedEvent {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Event's %s is missing!";
-    public static final String INVALID_FIELD_MESSAGE_FORMAT = "Event's %s is invalid!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Event's %s field is missing!";
+    public static final String INVALID_FIELD_MESSAGE_FORMAT = EventPeriod.MESSAGE_CONSTRAINTS;
 
     private final String description;
     private final String eventPeriod;
