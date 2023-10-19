@@ -23,8 +23,8 @@ public enum State {
      */
     public State state(String state) {
         requireNonNull(state);
-        checkArgument(isValidSubject(state.toUpperCase()), MESSAGE_CONSTRAINTS);
-        if (isValidSubject(state.toUpperCase())) {
+        checkArgument(isValidState(state.toUpperCase()), MESSAGE_CONSTRAINTS);
+        if (isValidState(state.toUpperCase())) {
             return State.valueOf(state.toUpperCase());
         } else {
             return State.NONE;
@@ -32,9 +32,9 @@ public enum State {
     }
 
     /**
-     * Returns true if a given string is a valid subject.
+     * Returns true if a given string is a valid state.
      */
-    public static boolean isValidSubject(String test) {
+    public static boolean isValidState(String test) {
         try {
             State state = State.valueOf(test);
             return true;
