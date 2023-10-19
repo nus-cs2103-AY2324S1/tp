@@ -50,21 +50,4 @@ public class ContactsTest {
             () -> TestData.getTypicalContacts().getUnmodifiableList().remove(0)
         );
     }
-
-    //FIXME scrap unused
-    /**
-     * Stub @{link Contacts} that can violate duplication constraints.
-     */
-    private static class ContactsStub implements ReadOnlyContacts {
-        private ObservableList<Contact> contacts = FXCollections.observableArrayList();
-
-        ContactsStub(Collection<Contact> contacts) {
-            this.contacts.setAll(contacts);
-        }
-
-        @Override
-        public ObservableList<Contact> getUnmodifiableList() {
-            return this.contacts;
-        }
-    }
 }
