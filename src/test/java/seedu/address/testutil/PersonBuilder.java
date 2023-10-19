@@ -3,6 +3,8 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.appointment.Appointment;
+import seedu.address.model.appointment.NullAppointment;
 import seedu.address.model.financialplan.FinancialPlan;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -25,7 +27,6 @@ public class PersonBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_NEXT_OF_KIN_NAME = "Adam Bee";
     public static final String DEFAULT_NEXT_OF_KIN_PHONE = "85555255";
-
     private Name name;
     private Phone phone;
     private Email email;
@@ -34,6 +35,7 @@ public class PersonBuilder {
     private NextOfKinPhone nextOfKinPhone;
     private Set<FinancialPlan> financialPlans;
     private Set<Tag> tags;
+    private Appointment appointment;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -47,6 +49,7 @@ public class PersonBuilder {
         nextOfKinPhone = new NextOfKinPhone(DEFAULT_NEXT_OF_KIN_PHONE);
         financialPlans = new HashSet<>();
         tags = new HashSet<>();
+        appointment = new NullAppointment();
     }
 
     /**
@@ -61,6 +64,7 @@ public class PersonBuilder {
         nextOfKinPhone = personToCopy.getNextOfKinPhone();
         financialPlans = new HashSet<>(personToCopy.getFinancialPlans());
         tags = new HashSet<>(personToCopy.getTags());
+        appointment = personToCopy.getAppointment();
     }
 
     /**
@@ -125,8 +129,29 @@ public class PersonBuilder {
         return this;
     }
 
-    public Person build() {
-        return new Person(name, phone, email, address, nextOfKinName, nextOfKinPhone, financialPlans, tags);
+    /**
+     * Sets the {@code Appointment} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withAppointment(String appointment) {
+        this.appointment = Appointment.parseAppointmentDescription(appointment);
+        return this;
     }
 
+    /**
+     * Sets the {@code NullAppointment} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withNullAppointment() {
+        this.appointment = new NullAppointment();
+        return this;
+    }
+
+    /**
+     * Builds a Person
+     *
+     * @return The Person built.
+     */
+    public Person build() {
+        return new Person(name, phone, email, address, nextOfKinName, nextOfKinPhone,
+                financialPlans, tags, appointment);
+    }
 }

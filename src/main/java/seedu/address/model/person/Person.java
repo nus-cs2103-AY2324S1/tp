@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.financialplan.FinancialPlan;
 import seedu.address.model.tag.Tag;
 
@@ -28,13 +29,17 @@ public class Person {
     private final NextOfKinPhone nextOfKinPhone;
     private final Set<FinancialPlan> financialPlans = new HashSet<>();
     private final Set<Tag> tags = new HashSet<>();
-
+    private final Appointment appointment;
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, NextOfKinName nextOfKinName,
-                  NextOfKinPhone nextOfKinPhone, Set<FinancialPlan> financialPlans, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, nextOfKinName, nextOfKinPhone, financialPlans, tags);
+                  NextOfKinPhone nextOfKinPhone, Set<FinancialPlan> financialPlans,
+                  Set<Tag> tags, Appointment appointment) {
+
+        requireAllNonNull(name, phone, email, address, nextOfKinName, nextOfKinPhone,
+                financialPlans, tags, appointment);
+
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -43,6 +48,7 @@ public class Person {
         this.nextOfKinPhone = nextOfKinPhone;
         this.financialPlans.addAll(financialPlans);
         this.tags.addAll(tags);
+        this.appointment = appointment;
     }
 
     public Name getName() {
@@ -67,6 +73,9 @@ public class Person {
         return nextOfKinPhone;
     }
 
+    public Appointment getAppointment() {
+        return appointment;
+    }
     /**
      * Returns an immutable financial plan set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -133,6 +142,8 @@ public class Person {
                 && address.equals(otherPerson.address)
                 && nextOfKinName.equals(otherPerson.nextOfKinName)
                 && nextOfKinPhone.equals(otherPerson.nextOfKinPhone)
+                && tags.equals(otherPerson.tags)
+                && appointment.equals(otherPerson.appointment)
                 && financialPlans.equals(otherPerson.financialPlans)
                 && tags.equals(otherPerson.tags);
     }
@@ -154,6 +165,7 @@ public class Person {
                 .add("nextOfKinPhone", nextOfKinPhone)
                 .add("financialPlans", financialPlans)
                 .add("tags", tags)
+                .add("appointment", appointment)
                 .toString();
     }
 

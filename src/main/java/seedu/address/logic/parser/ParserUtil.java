@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,6 +10,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.financialplan.FinancialPlan;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -22,7 +24,6 @@ import seedu.address.model.tag.Tag;
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
 public class ParserUtil {
-
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
     /**
@@ -152,6 +153,34 @@ public class ParserUtil {
             financialPlanSet.add(parseFinancialPlan(financialPlanName));
         }
         return financialPlanSet;
+    }
+
+    /**
+     * Parses a {@code String aptName} and {@code String aptDateString} into an {@code Appointment}.
+     *
+     * @param aptName The name of the appointment.
+     * @param aptDateString The appointment date and time.
+     * @return The Appointment.
+     * @throws ParseException If the given {@code aptName} or {@code aptDateString}.
+     */
+    public static Appointment parseAppointment(String aptName, String aptDateString) throws ParseException {
+        requireNonNull(aptName);
+        requireNonNull(aptDateString);
+
+        String trimmedAptName = aptName.trim();
+
+        if (!Appointment.isValidDate(aptDateString)) {
+            throw new ParseException(Appointment.MESSAGE_CONSTRAINTS);
+        }
+
+        LocalDateTime aptDate;
+        try {
+            aptDate = Appointment.parseAppointmentDate(aptDateString);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(Appointment.MESSAGE_DATE_CONSTRAINTS);
+        }
+
+        return new Appointment(trimmedAptName, aptDate);
     }
 
     /**
