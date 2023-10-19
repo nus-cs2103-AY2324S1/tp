@@ -58,21 +58,6 @@ public final class TestData {
     public static final Index INDEX_SECOND_CONTACT = Index.fromOneBased(2);
     public static final Index INDEX_THIRD_CONTACT = Index.fromOneBased(3);
 
-    // These are used for JsonUtilTest test cases
-    public static final String JSON_STRING_REPRESENTATION = String.format("{%n"
-            + "  \"name\" : \"This is a test class\",%n"
-            + "  \"listOfLocalDateTimes\" : "
-            + "[ \"-999999999-01-01T00:00:00\", \"+999999999-12-31T23:59:59.999999999\", "
-            + "\"0001-01-01T01:01:00\" ],%n"
-            + "  \"mapOfIntegerToString\" : {%n"
-            + "    \"1\" : \"One\",%n"
-            + "    \"2\" : \"Two\",%n"
-            + "    \"3\" : \"Three\"%n"
-            + "  }%n"
-            + "}");
-
-    public static final String NAME_TEST_VALUE = "This is a test class";
-
     // These contain {@code Contact} objects that are used in test cases.
     public static final Contact ALICE = new ContactBuilder().withName("Alice Pauline")
             .withNote("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
