@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DEPARTMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -27,6 +28,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Salary;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -43,6 +45,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_SALARY + "SALARY] "
             + "[" + PREFIX_DEPARTMENT + "DEPARTMENT]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -99,10 +102,11 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        Salary updatedSalary = editPersonDescriptor.getSalary().orElse(personToEdit.getSalary());
         Set<Department> updatedDepartments = editPersonDescriptor
                 .getDepartments().orElse(personToEdit.getDepartments());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedDepartments);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedSalary, updatedDepartments);
     }
 
     @Override
@@ -138,6 +142,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
+        private Salary salary;
         private Set<Department> departments;
 
         public EditPersonDescriptor() {}
@@ -151,6 +156,7 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
+            setSalary(toCopy.salary);
             setDepartments(toCopy.departments);
         }
 
@@ -158,7 +164,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, departments);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, salary, departments);
         }
 
         public void setName(Name name) {
@@ -191,6 +197,14 @@ public class EditCommand extends Command {
 
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
+        }
+
+        public void setSalary(Salary salary) {
+            this.salary = salary;
+        }
+
+        public Optional<Salary> getSalary() {
+            return Optional.ofNullable(salary);
         }
 
         /**
@@ -226,6 +240,7 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
+                    && Objects.equals(salary, otherEditPersonDescriptor.salary)
                     && Objects.equals(departments, otherEditPersonDescriptor.departments);
         }
 
@@ -236,6 +251,7 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
+                    .add("salary", salary)
                     .add("departments", departments)
                     .toString();
         }

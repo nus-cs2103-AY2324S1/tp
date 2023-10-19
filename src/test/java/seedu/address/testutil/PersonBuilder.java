@@ -9,6 +9,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Salary;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -20,11 +21,13 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_SALARY = "1234";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
+    private Salary salary;
     private Set<Department> departments;
 
     /**
@@ -35,6 +38,7 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        salary = new Salary(DEFAULT_SALARY);
         departments = new HashSet<>();
     }
 
@@ -46,6 +50,7 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
+        salary = personToCopy.getSalary();
         departments = new HashSet<>(personToCopy.getDepartments());
     }
 
@@ -90,8 +95,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Salary} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withSalary(String salary) {
+        this.salary = new Salary(salary);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, departments);
+        return new Person(name, phone, email, address, salary, departments);
     }
 
 }
