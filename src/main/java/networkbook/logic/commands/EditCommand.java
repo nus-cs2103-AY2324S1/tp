@@ -105,14 +105,15 @@ public class EditCommand extends Command {
                 .orElse(personToEdit.getGraduatingYear().orElse(null));
         Course updatedCourse = editPersonDescriptor.getCourse().orElse(personToEdit.getCourse()
                 .orElse(null));
-        Specialisation updatedSpecialisation = editPersonDescriptor.getSpecialisation()
-                .orElse(personToEdit.getSpecialisation().orElse(null));
+        UniqueList<Specialisation> updatedSpecialisations = editPersonDescriptor
+                .getSpecialisations()
+                .orElse(personToEdit.getSpecialisations());
         UniqueList<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Priority updatedPriority = editPersonDescriptor.getPriority().orElse(personToEdit.getPriority()
                                                                      .orElse(null));
 
         return new Person(updatedName, updatedPhones, updatedEmails, updatedLink, updatedGraduatingYear,
-                updatedCourse, updatedSpecialisation, updatedTags, updatedPriority);
+                updatedCourse, updatedSpecialisations, updatedTags, updatedPriority);
     }
 
     @Override
@@ -150,7 +151,7 @@ public class EditCommand extends Command {
         private Optional<UniqueList<Link>> links = Optional.empty();
         private GraduatingYear graduatingYear;
         private Course course;
-        private Specialisation specialisation;
+        private Optional<UniqueList<Specialisation>> specialisations = Optional.empty();
         private UniqueList<Tag> tags;
         private Priority priority;
 
@@ -167,7 +168,7 @@ public class EditCommand extends Command {
             setLinks(toCopy.links.map(UniqueList::copy).orElse(null));
             setGraduatingYear(toCopy.graduatingYear);
             setCourse(toCopy.course);
-            setSpecialisation(toCopy.specialisation);
+            setSpecialisations(toCopy.specialisations.map(UniqueList::copy).orElse(null));
             setTags(toCopy.getTags().map(UniqueList::copy).orElse(null));
             setPriority(toCopy.priority);
         }
@@ -177,10 +178,11 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, graduatingYear, course,
-                        specialisation, tags, priority)
+                        tags, priority)
                     || (phones.isPresent() && !phones.get().isEmpty())
                     || (emails.isPresent() && !emails.get().isEmpty())
-                    || (links.isPresent() && !links.get().isEmpty());
+                    || (links.isPresent() && !links.get().isEmpty())
+                    || (specialisations.isPresent() && !specialisations.get().isEmpty());
         }
 
         public void setName(Name name) {
@@ -276,12 +278,27 @@ public class EditCommand extends Command {
             return Optional.ofNullable(course);
         }
 
-        public void setSpecialisation(Specialisation specialisation) {
-            this.specialisation = specialisation;
+        public void setSpecialisations(UniqueList<Specialisation> specialisations) {
+            this.specialisations = Optional.ofNullable(specialisations);
         }
 
-        public Optional<Specialisation> getSpecialisation() {
-            return Optional.ofNullable(specialisation);
+        /**
+         * Adds {@code specialisations} to the list of {@code specialisations}.
+         * @param specialisation
+         */
+        public void addSpecialisation(Specialisation specialisation) {
+            this.specialisations = this.specialisations.map(specialisations -> {
+                specialisations.add(specialisation);
+                return specialisations;
+            }).or(() -> {
+                UniqueList<Specialisation> uniqueList = new UniqueList<>();
+                uniqueList.add(specialisation);
+                return Optional.of(uniqueList);
+            });
+        }
+
+        public Optional<UniqueList<Specialisation>> getSpecialisations() {
+            return specialisations;
         }
 
         /**
@@ -335,7 +352,7 @@ public class EditCommand extends Command {
                     && Objects.equals(links, otherEditPersonDescriptor.links)
                     && Objects.equals(graduatingYear, otherEditPersonDescriptor.graduatingYear)
                     && Objects.equals(course, otherEditPersonDescriptor.course)
-                    && Objects.equals(specialisation, otherEditPersonDescriptor.specialisation)
+                    && Objects.equals(specialisations, otherEditPersonDescriptor.specialisations)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags)
                     && Objects.equals(priority, otherEditPersonDescriptor.priority);
         }
@@ -349,7 +366,7 @@ public class EditCommand extends Command {
                     .add("links", links.orElse(null))
                     .add("graduating year", graduatingYear)
                     .add("course", course)
-                    .add("specialisation", specialisation)
+                    .add("specialisation", specialisations)
                     .add("tags", tags);
             if (priority != null) {
                 tsb.add("priority", priority);

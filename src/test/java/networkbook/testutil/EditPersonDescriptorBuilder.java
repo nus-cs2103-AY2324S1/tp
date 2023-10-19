@@ -40,7 +40,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setLinks(person.getLinks());
         person.getGraduatingYear().ifPresent((GraduatingYear g) -> descriptor.setGraduatingYear(g));
         person.getCourse().ifPresent((Course c) -> descriptor.setCourse(c));
-        person.getSpecialisation().ifPresent((Specialisation s) -> descriptor.setSpecialisation(s));
+        descriptor.setSpecialisations(person.getSpecialisations());
         descriptor.setTags(person.getTags());
         person.getPriority().ifPresent((Priority p) -> descriptor.setPriority(p));
     }
@@ -97,7 +97,7 @@ public class EditPersonDescriptorBuilder {
      * Sets the {@code Specialisation} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withSpecialisation(String specialisation) {
-        descriptor.setSpecialisation(new Specialisation(specialisation));
+        descriptor.addSpecialisation(new Specialisation(specialisation));
         return this;
     }
 

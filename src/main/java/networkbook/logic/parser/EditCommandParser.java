@@ -14,6 +14,7 @@ import networkbook.logic.parser.exceptions.ParseException;
 import networkbook.model.person.Email;
 import networkbook.model.person.Link;
 import networkbook.model.person.Phone;
+import networkbook.model.person.Specialisation;
 import networkbook.model.tag.Tag;
 import networkbook.model.util.UniqueList;
 
@@ -101,10 +102,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setCourse(
                     ParserUtil.parseCourse(argMultimap.getValue(CliSyntax.PREFIX_COURSE).get()));
         }
-        if (argMultimap.getValue(CliSyntax.PREFIX_SPECIALISATION).isPresent()) {
-            editPersonDescriptor.setSpecialisation(
-                    ParserUtil.parseSpecialisation(argMultimap.getValue(CliSyntax.PREFIX_SPECIALISATION).get()));
-        }
+        parseSpecialisationsForEdit(argMultimap.getAllValues(CliSyntax.PREFIX_SPECIALISATION))
+                .ifPresent(editPersonDescriptor::setSpecialisations);
         parseTagsForEdit(argMultimap.getAllValues(CliSyntax.PREFIX_TAG))
                 .ifPresent(editPersonDescriptor::setTags);
         if (argMultimap.getValue(CliSyntax.PREFIX_PRIORITY).isPresent()) {
@@ -166,4 +165,17 @@ public class EditCommandParser implements Parser<EditCommand> {
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
 
+    /**
+     * Parses {@code Coolection<String> specialisations} into a {@code UniqueList<Specialisation>} wrapped in an
+     * {@code Optional}.
+     */
+    private static Optional<UniqueList<Specialisation>> parseSpecialisationsForEdit(Collection<String> specisalisations)
+            throws ParseException {
+        requireNonNull(specisalisations);
+
+        if (specisalisations.isEmpty()) {
+            return Optional.empty();
+        }
+        return Optional.of(ParserUtil.parseSpecialisations(specisalisations));
+    }
 }

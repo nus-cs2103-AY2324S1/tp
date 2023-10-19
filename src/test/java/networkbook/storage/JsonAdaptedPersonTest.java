@@ -33,7 +33,9 @@ public class JsonAdaptedPersonTest {
     );
     private static final String INVALID_GRADUATING_YEAR = "123a";
     private static final String INVALID_COURSE = "";
-    private static final String INVALID_SPECIALISATION = "";
+    private static final List<JsonAdaptedProperty<Specialisation>> INVALID_SPECIALISATION = List.of(
+            new JsonAdaptedProperty<Specialisation>("")
+    );
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_PRIORITY = "hi";
 
@@ -49,7 +51,9 @@ public class JsonAdaptedPersonTest {
             .collect(Collectors.toList());
     private static final String VALID_GRADUATING_YEAR = "2000";
     private static final String VALID_COURSE = "Computer Science";
-    private static final String VALID_SPECIALISATION = "Game Development";
+    private static final List<JsonAdaptedProperty<Specialisation>> VALID_SPECIALISATION = List.of(
+            new JsonAdaptedProperty<Specialisation>("Game Development")
+    );
     private static final List<JsonAdaptedProperty<Tag>> VALID_TAGS = TypicalPersons.BENSON.getTags().stream()
             .map(JsonAdaptedProperty::new)
             .collect(Collectors.toList());

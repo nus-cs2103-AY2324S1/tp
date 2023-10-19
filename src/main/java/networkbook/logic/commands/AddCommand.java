@@ -102,12 +102,12 @@ public class AddCommand extends Command {
         UniqueList<Link> updatedLinks = addLinks(personToAddInfo, editPersonDescriptor);
         GraduatingYear updatedGraduatingYear = addGraduatingYear(personToAddInfo, editPersonDescriptor);
         Course updatedCourse = addCourse(personToAddInfo, editPersonDescriptor);
-        Specialisation updatedSpecialisation = addSpecialisation(personToAddInfo, editPersonDescriptor);
+        UniqueList<Specialisation> updatedSpecialisations = addSpecialisations(personToAddInfo, editPersonDescriptor);
         UniqueList<Tag> updatedTags = addTags(personToAddInfo, editPersonDescriptor);
         Priority updatedPriority = addPriority(personToAddInfo, editPersonDescriptor);
 
         return new Person(currentName, updatedPhones, updatedEmails, updatedLinks, updatedGraduatingYear,
-                updatedCourse, updatedSpecialisation, updatedTags, updatedPriority);
+                updatedCourse, updatedSpecialisations, updatedTags, updatedPriority);
     }
 
     // TODO: for non-unique fields, change respective model to use list and append to the list
@@ -145,14 +145,12 @@ public class AddCommand extends Command {
         }
         return newCourse.orElse(oldCourse.orElse(null));
     }
-    private Specialisation addSpecialisation(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor)
-            throws CommandException {
-        Optional<Specialisation> oldSpecialisation = personToAddInfo.getSpecialisation();
-        Optional<Specialisation> newSpecialisation = editPersonDescriptor.getSpecialisation();
-        if (oldSpecialisation.isPresent() && newSpecialisation.isPresent()) {
-            throw new CommandException(MESSAGE_MULTIPLE_UNIQUE_FIELD);
-        }
-        return newSpecialisation.orElse(oldSpecialisation.orElse(null));
+    private UniqueList<Specialisation> addSpecialisations(Person personToAddInfo,
+                                                           EditPersonDescriptor editPersonDescriptor) {
+        UniqueList<Specialisation> specs = personToAddInfo.getSpecialisations();
+        editPersonDescriptor.getSpecialisations().ifPresent(specs::addAllFromList);
+        return specs;
+
     }
     private UniqueList<Tag> addTags(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor) {
         UniqueList<Tag> tags = personToAddInfo.getTags();

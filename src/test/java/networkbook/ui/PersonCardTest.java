@@ -8,6 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -57,11 +59,13 @@ public class PersonCardTest {
 
     @Test
     public void constructor_hasValidSpecialisation_showsValidSpecialisation() {
-        Person person = new PersonBuilder().withName("Bob").withSpecialisation(VALID_SPECIALISATION_BOB).build();
+        Person person = new PersonBuilder().withName("Bob")
+                .withSpecialisations(List.of(VALID_SPECIALISATION_BOB))
+                .build();
         PersonCard personCard = new PersonCard(person, 1);
-        Label specialisation = personCard.getSpecialisation();
-        assertEquals("Specialisation: " + VALID_SPECIALISATION_BOB, specialisation.getText());
-        assertTrue(specialisation.isVisible());
+        Label specialisations = personCard.getSpecialisations();
+        assertEquals("Specialisation: " + VALID_SPECIALISATION_BOB, specialisations.getText());
+        assertTrue(specialisations.isVisible());
     }
 
     @Test

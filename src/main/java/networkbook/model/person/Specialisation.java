@@ -3,11 +3,13 @@ package networkbook.model.person;
 import static java.util.Objects.requireNonNull;
 import static networkbook.commons.util.AppUtil.checkArgument;
 
+import networkbook.model.util.Identifiable;
+
 /**
  * Represents a Person's specialisation in the network book.
  * Guarantees: immutable; is valid as declared in {@link #isValidSpecialisation(String)}
  */
-public class Specialisation {
+public class Specialisation implements Identifiable<Specialisation> {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Specialisations can take any value, but should not be blank.\n"
@@ -72,5 +74,15 @@ public class Specialisation {
 
     public String getSpecialisation() {
         return specialisation;
+    }
+
+    @Override
+    public boolean isSame(Specialisation otherSpec) {
+        return this.equals(otherSpec);
+    }
+
+    @Override
+    public String getValue() {
+        return getSpecialisation();
     }
 }

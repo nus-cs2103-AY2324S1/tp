@@ -33,7 +33,7 @@ class JsonAdaptedPerson {
     private final List<JsonAdaptedProperty<Link>> links = new ArrayList<>();
     private final String graduatingYear;
     private final String course;
-    private final String specialisation;
+    private final List<JsonAdaptedProperty<Specialisation>> specialisations = new ArrayList<>();
     private final List<JsonAdaptedProperty<Tag>> tags = new ArrayList<>();
     private final String priority;
 
@@ -47,7 +47,7 @@ class JsonAdaptedPerson {
                              @JsonProperty("links") List<JsonAdaptedProperty<Link>> links,
                              @JsonProperty("graduating year") String graduatingYear,
                              @JsonProperty("course") String course,
-                             @JsonProperty("specialisation") String specialisation,
+                             @JsonProperty("specialisations") List<JsonAdaptedProperty<Specialisation>> specialisations,
                              @JsonProperty("tags") List<JsonAdaptedProperty<Tag>> tags,
                              @JsonProperty("priority") String priority) {
         this.name = name;
@@ -62,7 +62,9 @@ class JsonAdaptedPerson {
         }
         this.graduatingYear = graduatingYear;
         this.course = course;
-        this.specialisation = specialisation;
+        if (specialisations != null) {
+            this.specialisations.addAll(specialisations);
+        }
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -85,7 +87,9 @@ class JsonAdaptedPerson {
                 .collect(Collectors.toList()));
         graduatingYear = source.getGraduatingYear().map(GraduatingYear::toString).orElse(null);
         course = source.getCourse().map(Course::toString).orElse(null);
-        specialisation = source.getSpecialisation().map(Specialisation::toString).orElse(null);
+        specialisations.addAll(source.getSpecialisations().stream()
+                .map(JsonAdaptedProperty::new)
+                .collect(Collectors.toList()));
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedProperty::new)
                 .collect(Collectors.toList()));
@@ -146,13 +150,13 @@ class JsonAdaptedPerson {
             modelCourse = new Course(course);
         }
 
-        Specialisation modelSpecialisation = null;
-        if (specialisation != null) {
-            if (!Specialisation.isValidSpecialisation(specialisation)) {
-                throw new IllegalValueException(Specialisation.MESSAGE_CONSTRAINTS);
-            }
-            modelSpecialisation = new Specialisation(specialisation);
+        if (!specialisations.stream()
+                .map(JsonAdaptedProperty::getName)
+                .allMatch(Specialisation::isValidSpecialisation)) {
+            throw new IllegalValueException(Specialisation.MESSAGE_CONSTRAINTS);
         }
+        final UniqueList<Specialisation> modelSpecs = new UniqueList<>();
+        specialisations.forEach(spec -> modelSpecs.add(new Specialisation(spec.getName())));
 
         final UniqueList<Tag> modelTags = new UniqueList<>();
         for (JsonAdaptedProperty<Tag> tag : tags) {
@@ -168,7 +172,7 @@ class JsonAdaptedPerson {
         }
 
         return new Person(modelName, modelPhones, modelEmails, modelLinks, modelGraduatingYear, modelCourse,
-                modelSpecialisation, modelTags, modelPriority);
+                modelSpecs, modelTags, modelPriority);
     }
 
 }

@@ -9,7 +9,6 @@ import networkbook.model.person.Course;
 import networkbook.model.person.GraduatingYear;
 import networkbook.model.person.Person;
 import networkbook.model.person.Priority;
-import networkbook.model.person.Specialisation;
 
 /**
  * Container for user visible messages.
@@ -53,10 +52,7 @@ public class Messages {
             builder.append("; Course: ");
             builder.append(c);
         });
-        person.getSpecialisation().ifPresent((Specialisation s) -> {
-            builder.append("; Specialisation: ");
-            builder.append(s);
-        });
+        builder.append("; Specialisations ").append(person.getSpecialisations());
         builder.append("; Tags: ");
         person.getTags().forEach(builder::append);
         person.getPriority().ifPresent((Priority p) -> {

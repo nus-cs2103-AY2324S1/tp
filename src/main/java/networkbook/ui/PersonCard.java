@@ -11,7 +11,6 @@ import networkbook.model.person.Course;
 import networkbook.model.person.GraduatingYear;
 import networkbook.model.person.Person;
 import networkbook.model.person.Priority;
-import networkbook.model.person.Specialisation;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -24,7 +23,7 @@ public class PersonCard extends UiPart<Region> {
     private static final String LINKS_HEADER = "Links: ";
     private static final String GRADUATING_YEAR_HEADER = "Graduating Year: ";
     private static final String COURSE_HEADER = "Course: ";
-    private static final String SPECIALISATION_HEADER = "Specialisation: ";
+    private static final String SPECIALISATION_HEADER = "Specialisations: ";
     private static final String PRIORITY_HEADER = "Priority: ";
 
     /**
@@ -52,7 +51,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label course;
     @FXML
-    private Label specialisation;
+    private Label specialisations;
     @FXML
     private Label emails;
     @FXML
@@ -75,8 +74,7 @@ public class PersonCard extends UiPart<Region> {
                 graduatingYear.setText(GRADUATING_YEAR_HEADER + g), () -> graduatingYear.setVisible(false));
         person.getCourse().ifPresentOrElse((Course c) ->
                 course.setText(COURSE_HEADER + c), () -> course.setVisible(false));
-        person.getSpecialisation().ifPresentOrElse((Specialisation s) ->
-                specialisation.setText(SPECIALISATION_HEADER + s), () -> specialisation.setVisible(false));
+        specialisations.setText(SPECIALISATION_HEADER + person.getSpecialisations().toString());
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.getValue()))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.getValue())));
@@ -93,8 +91,8 @@ public class PersonCard extends UiPart<Region> {
     public Label getCourse() {
         return course;
     }
-    public Label getSpecialisation() {
-        return specialisation;
+    public Label getSpecialisations() {
+        return specialisations;
     }
     public Label getPriority() {
         return priority; // getter method for testing

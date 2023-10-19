@@ -35,6 +35,9 @@ public class ParserUtil {
     public static final String MESSAGE_TAG_DUPLICATE = "Your list of tags contains duplicates. \n"
             + "Please ensure that you do not input the same tag more than once.";
 
+    public static final String MESSAGE_SPEC_DUPLICATE = "Your list of specialisations contains duplicats. \n"
+            + "Please ensure that you do not input the same specialisation more than once.";
+
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
@@ -209,6 +212,24 @@ public class ParserUtil {
             throw new ParseException(Specialisation.MESSAGE_CONSTRAINTS);
         }
         return new Specialisation(specialisation);
+    }
+
+    /**
+     * Parses a {@code Collection<String>} of specialisations into {@code UniqueList<Specialisation>}.
+     *
+     * @throws ParseException if at least one specialisation in {@code Collection<String>} is invalid.
+     */
+    public static UniqueList<Specialisation> parseSpecialisations(Collection<String> specialisations)
+            throws ParseException {
+        requireNonNull(specialisations);
+        if (!verifyNoDuplicates(specialisations)) {
+            throw new ParseException(MESSAGE_SPEC_DUPLICATE);
+        }
+        UniqueList<Specialisation> result = new UniqueList<>();
+        for (String spec : specialisations) {
+            result.add(parseSpecialisation(spec));
+        }
+        return result;
     }
 
     private static boolean verifyNoDuplicates(Collection<String> strings) {

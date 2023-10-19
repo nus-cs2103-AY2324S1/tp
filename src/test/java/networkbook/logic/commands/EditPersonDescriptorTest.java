@@ -100,7 +100,7 @@ public class EditPersonDescriptorTest {
                 + editPersonDescriptor.getLinks().orElse(null) + ", graduating year="
                 + editPersonDescriptor.getGraduatingYear().orElse(null) + ", course="
                 + editPersonDescriptor.getCourse().orElse(null) + ", specialisation="
-                + editPersonDescriptor.getSpecialisation().orElse(null) + ", tags="
+                + editPersonDescriptor.getSpecialisations().orElse(null) + ", tags="
                 + editPersonDescriptor.getTags().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());
     }

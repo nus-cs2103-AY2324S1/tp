@@ -36,7 +36,7 @@ public class PersonBuilder {
     private UniqueList<Link> links;
     private GraduatingYear graduatingYear;
     private Course course;
-    private Specialisation specialisation;
+    private UniqueList<Specialisation> specialisations;
     private UniqueList<Tag> tags;
     private Priority priority;
 
@@ -50,7 +50,8 @@ public class PersonBuilder {
         links = new UniqueList<Link>().setItems(List.of(new Link(DEFAULT_LINK)));
         graduatingYear = new GraduatingYear(DEFAULT_GRADUATING_YEAR);
         course = new Course(DEFAULT_COURSE);
-        specialisation = new Specialisation(DEFAULT_SPECIALISATION);
+        specialisations = new UniqueList<Specialisation>()
+                .setItems(List.of(new Specialisation(DEFAULT_SPECIALISATION)));
         tags = new UniqueList<>();
         priority = null;
     }
@@ -65,7 +66,7 @@ public class PersonBuilder {
         links = personToCopy.getLinks();
         graduatingYear = personToCopy.getGraduatingYear().orElse(null);
         course = personToCopy.getCourse().orElse(null);
-        specialisation = personToCopy.getSpecialisation().orElse(null);
+        specialisations = personToCopy.getSpecialisations();
         tags = personToCopy.getTags();
         priority = personToCopy.getPriority().orElse(null);
     }
@@ -119,10 +120,19 @@ public class PersonBuilder {
     }
 
     /**
+     * Adds a specialisation to the person we are building.
+     */
+    public PersonBuilder addSpecialisation(String specialisation) {
+        this.specialisations.add(new Specialisation(specialisation));
+        return this;
+    }
+
+    /**
      * Sets the {@code Specialisation} of the {@code Person} that we are building.
      */
-    public PersonBuilder withSpecialisation(String specialisation) {
-        this.specialisation = new Specialisation(specialisation);
+    public PersonBuilder withSpecialisations(List<String> specialisations) {
+        this.specialisations = new UniqueList<Specialisation>()
+                .setItems(specialisations.stream().map(Specialisation::new).collect(Collectors.toList()));
         return this;
     }
 
@@ -173,14 +183,14 @@ public class PersonBuilder {
         this.links = new UniqueList<>();
         this.graduatingYear = null;
         this.course = null;
-        this.specialisation = null;
+        this.specialisations = new UniqueList<>();
         this.tags = new UniqueList<>();
         this.priority = null;
         return this;
     }
 
     public Person build() {
-        return new Person(name, phones, emails, links, graduatingYear, course, specialisation, tags, priority);
+        return new Person(name, phones, emails, links, graduatingYear, course, specialisations, tags, priority);
     }
 
 }

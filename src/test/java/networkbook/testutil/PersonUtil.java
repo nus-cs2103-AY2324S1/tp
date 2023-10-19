@@ -8,6 +8,7 @@ import networkbook.model.person.Email;
 import networkbook.model.person.Link;
 import networkbook.model.person.Person;
 import networkbook.model.person.Phone;
+import networkbook.model.person.Specialisation;
 import networkbook.model.util.UniqueList;
 
 /**
@@ -41,8 +42,9 @@ public class PersonUtil {
                 .append(" ").append(graduatingYear.value).append(" "));
         person.getCourse().ifPresent(course -> sb.append(CliSyntax.PREFIX_COURSE).append(" ")
                 .append(course.value).append(" "));
-        person.getSpecialisation().ifPresent(specialisation -> sb.append(CliSyntax.PREFIX_SPECIALISATION)
-                .append(" ").append(specialisation.getSpecialisation()).append(" "));
+        person.getSpecialisations().stream().forEach(
+                e -> sb.append(CliSyntax.PREFIX_SPECIALISATION + " " + e.toString() + " ")
+        );
         person.getTags().stream().forEach(
             s -> sb.append(CliSyntax.PREFIX_TAG + " " + s.getValue() + " ")
         );
@@ -86,8 +88,15 @@ public class PersonUtil {
                 .append(" ").append(graduatingYear.value).append(" "));
         descriptor.getCourse().ifPresent(course -> sb.append(CliSyntax.PREFIX_COURSE).append(" ")
                 .append(course.value).append(" "));
-        descriptor.getSpecialisation().ifPresent(specialisation -> sb.append(CliSyntax.PREFIX_SPECIALISATION)
-                .append(" ").append(specialisation.getSpecialisation()).append(" "));
+        if (descriptor.getSpecialisations().isPresent()) {
+            UniqueList<Specialisation> specs = descriptor.getSpecialisations().get();
+            if (specs.isEmpty()) {
+                sb.append(CliSyntax.PREFIX_SPECIALISATION).append(" ");
+            } else {
+                specs.forEach(e -> sb.append(CliSyntax.PREFIX_SPECIALISATION)
+                        .append(" ").append(e.toString()).append(" "));
+            }
+        }
         descriptor.getTags().ifPresent((tagList) -> {
             if (tagList.isEmpty()) {
                 sb.append(CliSyntax.PREFIX_TAG).append(" ");
