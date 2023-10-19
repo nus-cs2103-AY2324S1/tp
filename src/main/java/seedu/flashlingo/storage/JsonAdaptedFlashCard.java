@@ -1,7 +1,6 @@
 package seedu.flashlingo.storage;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -48,12 +47,18 @@ public class JsonAdaptedFlashCard {
      * Converts a given {@code FlashCard} into this class for Jackson use.
      */
     public JsonAdaptedFlashCard(FlashCard source) {
-        originalWord = source.getOriginalWord().toString();
+        originalWord = source.getOriginalWord().getWord();
         originalWordLanguage = source.getOriginalWord().getLanguage();
-        translatedWord = source.getTranslatedWord().toString();
+        translatedWord = source.getTranslatedWord().getWord();
         translatedWordLanguage = source.getTranslatedWord().getLanguage();
-        whenToReview = source.getWhenToReview().toString();
         level = source.getProficiencyLevel().getLevel();
+        //TODO: getLevel redundant?
+
+        Date whenToReview = source.getWhenToReview();
+        ZonedDateTime zonedDateTime = ZonedDateTime.ofInstant(whenToReview.toInstant(), ZoneOffset.UTC);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssX");
+        String iso8601Date = formatter.format(zonedDateTime);
+        this.whenToReview = iso8601Date;
     }
 
     /**
@@ -80,11 +85,8 @@ public class JsonAdaptedFlashCard {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT));
         }
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE MMM dd HH:mm:ss zzz yyyy");
-
-        LocalDateTime localDateTime = LocalDateTime.parse(whenToReview, formatter);
-
-        ZonedDateTime zonedDateTime = localDateTime.atZone(ZoneId.of("Asia/Singapore"));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssX");
+        ZonedDateTime zonedDateTime = ZonedDateTime.parse(whenToReview, formatter);
         Date modelWhenToReview = Date.from(zonedDateTime.toInstant());
 
         final int modelLevel = level;
