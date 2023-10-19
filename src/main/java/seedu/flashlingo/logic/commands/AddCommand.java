@@ -12,6 +12,7 @@ import seedu.flashlingo.commons.util.ToStringBuilder;
 import seedu.flashlingo.logic.commands.exceptions.CommandException;
 import seedu.flashlingo.model.Model;
 import seedu.flashlingo.model.flashcard.FlashCard;
+import seedu.flashlingo.model.flashcard.ProficiencyLevel;
 import seedu.flashlingo.model.flashcard.words.OriginalWord;
 import seedu.flashlingo.model.flashcard.words.TranslatedWord;
 
@@ -19,7 +20,6 @@ import seedu.flashlingo.model.flashcard.words.TranslatedWord;
  * Adds a flashcard to Flashlingo.
  */
 public class AddCommand extends Command {
-
     public static final String COMMAND_WORD = "add";
 
     // For help function
@@ -36,6 +36,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New flashcard added: %s - %s";
     public static final String MESSAGE_DUPLICATE_CARD = "This flashcard already exists";
 
+    private static final ProficiencyLevel level = new ProficiencyLevel(1);
     private final FlashCard toAdd;
     private OriginalWord original;
     private TranslatedWord translated;
@@ -46,7 +47,7 @@ public class AddCommand extends Command {
     public AddCommand(OriginalWord original, TranslatedWord translated) {
         this.original = original;
         this.translated = translated;
-        this.toAdd = new FlashCard(original, translated, new Date(), 1);
+        this.toAdd = new FlashCard(original, translated, new Date(), level);
     }
 
     /**
