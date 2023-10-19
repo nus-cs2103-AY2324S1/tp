@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AVATAR;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
@@ -28,7 +29,16 @@ import seedu.address.model.tag.Tag;
 public class UpdatePhotoCommand extends Command {
 
     public static final String COMMAND_WORD = "updatephoto";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Updates photo of a contact by "
+            + "specifying his/her contact and path to the desired photo.\n"
+            + "Parameters: INDEX (must be a positive integer) "
+            + PREFIX_AVATAR + "[PATH]\n"
+            + "Example: " + COMMAND_WORD + " 1 "
+            + PREFIX_AVATAR + "D:/image/cute_cat.png";
+
     public static final String MESSAGE_SUCCESS = "Photo updated";
+
     private final int zeroBasedIdx;
     private final String path;
 
@@ -80,5 +90,7 @@ public class UpdatePhotoCommand extends Command {
                 linkedin, secondaryEmail, telegram, updatedTags, id, new Avatar(path), notes);
     }
 }
+
+
 
 

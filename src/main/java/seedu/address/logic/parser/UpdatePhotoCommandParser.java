@@ -1,9 +1,15 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AVATAR;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
 import java.util.Optional;
 
+import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.UpdatePhotoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -24,9 +30,15 @@ public class UpdatePhotoCommandParser implements Parser<UpdatePhotoCommand> {
         String index = commandElements.getPreamble();
         Optional<String> photoPath = commandElements.getValue(PREFIX_AVATAR);
 
+        if (photoPath.isEmpty() || index.isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdatePhotoCommand.MESSAGE_USAGE));
+        }
+
         return new UpdatePhotoCommand(Integer.parseInt(index), photoPath.get());
     }
 }
+
+
 
 
 
