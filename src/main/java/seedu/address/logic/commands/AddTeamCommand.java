@@ -14,7 +14,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.team.Team;
 
 /**
- * Adds a person to the address book.
+ * Represents an AddTeamCommand with the associated logic to create and add a new team.
  */
 public class AddTeamCommand extends Command {
 
@@ -37,7 +37,10 @@ public class AddTeamCommand extends Command {
     private IdentityCode teamLeaderIdentityCode;
 
     /**
-     * Creates an AddTeamCommand to add the specified {@code Team}
+     * Constructs an {@code AddTeamCommand} to add the specified team with a given team leader.
+     *
+     * @param teamName The name of the team to be added.
+     * @param teamLeader The name of the team leader for the team.
      */
     public AddTeamCommand(String teamName, Name teamLeader) {
         requireNonNull(teamName);
@@ -47,6 +50,13 @@ public class AddTeamCommand extends Command {
     }
     //execute method WILL NOT RUN because the "team" attribute is not configured to return a formatted string.
     //update that class and then this will run
+    /**
+     * Executes the AddTeamCommand by adding a new team to the model.
+     *
+     * @param model The current state of the application model.
+     * @return A CommandResult indicating the result of executing this command on the given model.
+     * @throws CommandException if the person does not exist in the model or if the team already exists.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -68,6 +78,12 @@ public class AddTeamCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(team, leaderToAdd)));
     }
 
+    /**
+     * Checks whether another object is equal to this AddTeamCommand.
+     *
+     * @param other The object to compare with.
+     * @return true if the other object is an AddTeamCommand with the same team name, false otherwise.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -83,6 +99,11 @@ public class AddTeamCommand extends Command {
         return teamToAdd.equals(otherAddCommand.teamToAdd);
     }
 
+    /**
+     * Returns a string representation of this AddTeamCommand, primarily the team's name.
+     *
+     * @return A string representing this command, including the team's name.
+     */
     @Override
     public String toString() {
         return new ToStringBuilder(this)

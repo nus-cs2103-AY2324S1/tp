@@ -12,7 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.team.Team;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Represents a DeleteTeamCommand with the associated logic to remove a team.
  */
 public class DeleteTeamCommand extends Command {
 
@@ -28,9 +28,21 @@ public class DeleteTeamCommand extends Command {
 
     private final String teamToDelete;
 
+    /**
+     * Constructs an {@code DeleteTeamCommand} to delete the team identified by the provided name.
+     *
+     * @param teamToDelete The name of the team to be deleted.
+     */
     public DeleteTeamCommand(String teamToDelete) {
         this.teamToDelete = teamToDelete;
     }
+    /**
+     * Executes the DeleteTeamCommand by removing the specified team from the model.
+     *
+     * @param model The current state of the application model.
+     * @return A CommandResult indicating the result of executing this command on the given model.
+     * @throws CommandException if the team name is invalid.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -43,6 +55,12 @@ public class DeleteTeamCommand extends Command {
         return new CommandResult(String.format(MESSAGE_DELETE_TEAM_SUCCESS, teamToDelete));
     }
 
+    /**
+     * Compares this command with another object for equality.
+     *
+     * @param other The object to compare with.
+     * @return true if the objects are the same or equal, false otherwise.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -58,6 +76,11 @@ public class DeleteTeamCommand extends Command {
         return teamToDelete.equals(otherDeleteTeamCommandCommand.teamToDelete);
     }
 
+    /**
+     * Generates a string representation of this command.
+     *
+     * @return A string representing the team name to delete.
+     */
     @Override
     public String toString() {
         return new ToStringBuilder(this)
