@@ -15,14 +15,14 @@ import seedu.address.commons.util.ToStringBuilder;
 public class Config {
     public static final Path DEFAULT_PATH = Paths.get("config.json");
 
-    private Level logLevel = Level.INFO;
     private Path settingsPath = Paths.get("settings.json");
+    private Level logLevel = Level.INFO;
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("logLevel", this.logLevel)
                 .add("settingsPath", this.settingsPath)
+                .add("logLevel", this.logLevel)
                 .toString();
     }
 
@@ -39,8 +39,8 @@ public class Config {
         Config otherConfig = (Config)other;
 
         return (
-            Objects.equals(this.logLevel, otherConfig.logLevel)
-            && Objects.equals(this.settingsPath, otherConfig.settingsPath)
+            Objects.equals(this.settingsPath, otherConfig.settingsPath)
+            && Objects.equals(this.logLevel, otherConfig.logLevel)
         );
     }
 
@@ -49,19 +49,19 @@ public class Config {
         return Objects.hash(this.logLevel, this.settingsPath);
     }
 
-    public Level getLogLevel() {
-        return this.logLevel;
-    }
-
-    public void setLogLevel(Level logLevel) {
-        this.logLevel = logLevel;
-    }
-
     public Path getSettingsPath() {
         return this.settingsPath;
     }
 
     public void setSettingsPath(Path settingsPath) {
         this.settingsPath = settingsPath;
+    }
+
+    public Level getLogLevel() {
+        return this.logLevel;
+    }
+
+    public void setLogLevel(Level logLevel) {
+        this.logLevel = logLevel;
     }
 }
