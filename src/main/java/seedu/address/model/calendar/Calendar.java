@@ -32,8 +32,8 @@ public class Calendar implements ReadOnlyCalendar {
     //// overwrite operations
 
     /**
-     * Replaces the contents of the person list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of the Calendar with {@code events}.
+     * {@code events} must not contain duplicate events.
      */
     public void setEvents(List<Event> events) {
         events.forEach(this::addEvent);

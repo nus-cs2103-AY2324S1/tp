@@ -15,7 +15,6 @@ import javafx.collections.ObservableList;
 public class AllDaysEventListManager {
     private final NavigableMap<String, SingleDayEventList> dayToEventListMap;
 
-
     /**
      * Creates a AllDaysEventListManager to manage the daily events.
      */

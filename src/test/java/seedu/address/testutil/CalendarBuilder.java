@@ -22,7 +22,7 @@ public class CalendarBuilder {
     }
 
     /**
-     * Adds a new {@code Person} to the {@code AddressBook} that we are building.
+     * Adds a new {@code Person} to the {@code Calendar} that we are building.
      */
     public CalendarBuilder withEvent(Event event) {
         calendar.addEvent(event);
