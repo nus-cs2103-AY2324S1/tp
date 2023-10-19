@@ -22,19 +22,18 @@ public class AddressBookBuilder {
     }
 
     /**
-     * Adds a new {@code Event} to the {@code AddressBook} that we are building.
-     */
-    public AddressBookBuilder withEvent(Event event) {
-        addressBook.createEvent(event);
-        return this;
-    }
-
-
-    /**
      * Adds a new {@code Member} to the {@code AddressBook} that we are building.
      */
     public AddressBookBuilder withMember(Member member) {
         addressBook.createMember(member);
+        return this;
+    }
+
+    /**
+     * Adds a new {@code Event} to the {@code AddressBook} that we are building.
+     */
+    public AddressBookBuilder withEvent(Event event) {
+        addressBook.createEvent(event);
         return this;
     }
 
