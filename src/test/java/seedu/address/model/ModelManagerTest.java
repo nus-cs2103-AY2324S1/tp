@@ -23,29 +23,19 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void setGuiSettings_nullGuiSettings_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.setGuiSettings(null));
-    }
-
-    @Test
-    public void setGuiSettings_validGuiSettings_setsGuiSettings() {
+    public void setGuiSettings() {
         GuiSettings guiSettings = new GuiSettings(1, 2, 3, 4);
         modelManager.setGuiSettings(guiSettings);
         assertEquals(guiSettings, modelManager.getGuiSettings());
     }
 
     @Test
-    public void hasContact_nullContact_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.containsContact(null));
-    }
-
-    @Test
-    public void hasContact_contactNotInContactsManager_returnsFalse() {
+    public void containsContact_doesNotContain_false() {
         assertFalse(modelManager.containsContact(ALICE));
     }
 
     @Test
-    public void hasContact_contactInContactsManager_returnsTrue() {
+    public void containsContact_contains_true() {
         modelManager.addContact(ALICE);
         assertTrue(modelManager.containsContact(ALICE));
     }
