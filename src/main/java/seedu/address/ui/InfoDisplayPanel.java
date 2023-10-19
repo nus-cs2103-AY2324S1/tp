@@ -40,10 +40,14 @@ public class InfoDisplayPanel extends UiPart<Region> {
             person.getTags().stream()
                     .sorted(Comparator.comparing(tag -> tag.tagName))
                     .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        } else {
+            personDisplay.setText("");
         }
 
         if (meeting != null) {
             meetingDisplay.setText(meeting.toDisplayString());
+        } else {
+            meetingDisplay.setText("");
         }
     }
 }
