@@ -181,15 +181,25 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String course} into an {@code Course}.
+     * Parses {@code String courses} into {@code UniqueList<Course>}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code course} is invalid.
      */
-    public static Course parseCourse(String course) throws ParseException {
-        if (course == null) {
-            return null;
+    public static UniqueList<Course> parseCourses(Collection<String> courses) throws ParseException {
+        requireNonNull(courses);
+        if (!verifyNoDuplicates(courses)) {
+            throw new ParseException(MESSAGE_LINK_DUPLICATE);
         }
+        UniqueList<Course> result = new UniqueList<>();
+        for (String link : courses) {
+            result.add(parseCourse(link));
+        }
+        return result;
+    }
+
+    public static Course parseCourse(String course) throws ParseException {
+        requireNonNull(course);
         String trimmedCourse = course.trim();
         if (!Course.isValidCourse(trimmedCourse)) {
             throw new ParseException(Course.MESSAGE_CONSTRAINTS);

@@ -1,5 +1,7 @@
 package networkbook.model.person;
 
+import networkbook.model.util.Identifiable;
+
 import static java.util.Objects.requireNonNull;
 import static networkbook.commons.util.AppUtil.checkArgument;
 
@@ -13,7 +15,7 @@ import java.util.Optional;
  * Represents a Person's course of study in the network book.
  * Guarantees: immutable; is valid as declared in {@link #isValidCourse(String)}
  */
-public class Course {
+public class Course implements Identifiable<Course> {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Courses can take any value, but should not be blank.\n"
@@ -74,6 +76,16 @@ public class Course {
         this.course = course;
         this.startDate = Optional.of(startDate);
         this.endDate = Optional.of(endDate);
+    }
+
+    @Override
+    public boolean isSame(Course another) {
+        return this.course.equals(another.course);
+    }
+
+    @Override
+    public String getValue() {
+        return this.course;
     }
 
     /**

@@ -26,7 +26,7 @@ public class SampleDataUtil {
                     new UniqueList<Email>().setItems(List.of(new Email("alexyeoh@example.com"))),
                     new UniqueList<Link>().setItems(List.of(new Link("www.alexyeoh.net"))),
                     new GraduatingYear("2016"),
-                    new Course("Information Systems"),
+                    new UniqueList<Course>().setItems(List.of(new Course("Information Systems"))),
                     new UniqueList<Specialisation>()
                             .setItems(List.of(
                                     new Specialisation("Financial Technology"),
@@ -37,7 +37,7 @@ public class SampleDataUtil {
                     new UniqueList<Email>().setItems(List.of(new Email("berniceyu@example.com"))),
                     new UniqueList<Link>().setItems(List.of(new Link("github.com/bernfish"))),
                     new GraduatingYear("2020"),
-                    new Course("Computer Science"),
+                    new UniqueList<Course>().setItems(List.of(new Course("Computer Science"))),
                     new UniqueList<Specialisation>()
                             .setItems(List.of(new Specialisation("Artificial Intelligence"))),
                     getTagList("colleagues", "friends"), new Priority("high")),
@@ -46,7 +46,7 @@ public class SampleDataUtil {
                     new UniqueList<Email>().setItems(List.of(new Email("charlotte@example.com"))),
                     new UniqueList<Link>().setItems(List.of(new Link("facebook.com/Charlotte-Oliveiro"))),
                     new GraduatingYear("2000"),
-                    new Course("Computer Science"),
+                    new UniqueList<Course>().setItems(List.of(new Course("Computer Science"))),
                     new UniqueList<Specialisation>()
                             .setItems(List.of(new Specialisation("Computer Security"))),
                     getTagList("neighbours"), new Priority("M")),
@@ -55,7 +55,7 @@ public class SampleDataUtil {
                     new UniqueList<Email>().setItems(List.of(new Email("lidavid@example.com"))),
                     new UniqueList<Link>().setItems(List.of(new Link("wordpress.com/specialli-mine"))),
                     new GraduatingYear("2024"),
-                    new Course("Computer Science"),
+                    new UniqueList<Course>().setItems(List.of(new Course("Computer Science"))),
                     new UniqueList<Specialisation>()
                             .setItems(List.of(new Specialisation("Database Systems"))),
                     getTagList("family"), new Priority("High")),
@@ -64,7 +64,7 @@ public class SampleDataUtil {
                     new UniqueList<Email>().setItems(List.of(new Email("irfan@example.com"))),
                     new UniqueList<Link>().setItems(List.of(new Link("instagram.com/irfanny"))),
                     new GraduatingYear("2025"),
-                    new Course("Computer Science"),
+                    new UniqueList<Course>().setItems(List.of(new Course("Computer Science"))),
                     new UniqueList<Specialisation>()
                             .setItems(List.of(new Specialisation("Parallel Computing"))),
                     getTagList("classmates"), new Priority("low")),
@@ -73,7 +73,7 @@ public class SampleDataUtil {
                     new UniqueList<Email>().setItems(List.of(new Email("royb@example.com"))),
                     new UniqueList<Link>().setItems(List.of(new Link("incognito.com"))),
                     new GraduatingYear("2026"),
-                    new Course("Computer Science"),
+                    new UniqueList<Course>().setItems(List.of(new Course("Computer Science"))),
                     new UniqueList<Specialisation>()
                             .setItems(List.of(new Specialisation("Computer Graphics"))),
                     getTagList("colleagues"), null)

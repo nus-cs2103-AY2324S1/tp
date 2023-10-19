@@ -103,8 +103,7 @@ public class EditCommand extends Command {
         UniqueList<Link> updatedLink = editPersonDescriptor.getLinks().orElse(personToEdit.getLinks());
         GraduatingYear updatedGraduatingYear = editPersonDescriptor.getGraduatingYear()
                 .orElse(personToEdit.getGraduatingYear().orElse(null));
-        Course updatedCourse = editPersonDescriptor.getCourse().orElse(personToEdit.getCourse()
-                .orElse(null));
+        UniqueList<Course> updatedCourses = editPersonDescriptor.getCourses().orElse(personToEdit.getCourses());
         UniqueList<Specialisation> updatedSpecialisations = editPersonDescriptor
                 .getSpecialisations()
                 .orElse(personToEdit.getSpecialisations());
@@ -113,7 +112,7 @@ public class EditCommand extends Command {
                                                                      .orElse(null));
 
         return new Person(updatedName, updatedPhones, updatedEmails, updatedLink, updatedGraduatingYear,
-                updatedCourse, updatedSpecialisations, updatedTags, updatedPriority);
+                updatedCourses, updatedSpecialisations, updatedTags, updatedPriority);
     }
 
     @Override
@@ -150,7 +149,7 @@ public class EditCommand extends Command {
         private Optional<UniqueList<Email>> emails = Optional.empty();
         private Optional<UniqueList<Link>> links = Optional.empty();
         private GraduatingYear graduatingYear;
-        private Course course;
+        private Optional<UniqueList<Course>> courses = Optional.empty();
         private Optional<UniqueList<Specialisation>> specialisations = Optional.empty();
         private UniqueList<Tag> tags;
         private Priority priority;
@@ -167,7 +166,7 @@ public class EditCommand extends Command {
             setEmails(toCopy.emails.map(UniqueList::copy).orElse(null));
             setLinks(toCopy.links.map(UniqueList::copy).orElse(null));
             setGraduatingYear(toCopy.graduatingYear);
-            setCourse(toCopy.course);
+            setCourses(toCopy.courses.map(UniqueList::copy).orElse(null));
             setSpecialisations(toCopy.specialisations.map(UniqueList::copy).orElse(null));
             setTags(toCopy.getTags().map(UniqueList::copy).orElse(null));
             setPriority(toCopy.priority);
@@ -177,7 +176,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, graduatingYear, course,
+            return CollectionUtil.isAnyNonNull(name, graduatingYear, courses,
                         tags, priority)
                     || (phones.isPresent() && !phones.get().isEmpty())
                     || (emails.isPresent() && !emails.get().isEmpty())
@@ -270,12 +269,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(graduatingYear);
         }
 
-        public void setCourse(Course course) {
-            this.course = course;
+        public void setCourses(UniqueList<Course> courses) {
+            this.courses = Optional.ofNullable(courses);
         }
 
-        public Optional<Course> getCourse() {
-            return Optional.ofNullable(course);
+        public Optional<UniqueList<Course>> getCourses() {
+            return courses;
         }
 
         public void setSpecialisations(UniqueList<Specialisation> specialisations) {
@@ -351,7 +350,7 @@ public class EditCommand extends Command {
                     && Objects.equals(emails, otherEditPersonDescriptor.emails)
                     && Objects.equals(links, otherEditPersonDescriptor.links)
                     && Objects.equals(graduatingYear, otherEditPersonDescriptor.graduatingYear)
-                    && Objects.equals(course, otherEditPersonDescriptor.course)
+                    && Objects.equals(courses, otherEditPersonDescriptor.courses)
                     && Objects.equals(specialisations, otherEditPersonDescriptor.specialisations)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags)
                     && Objects.equals(priority, otherEditPersonDescriptor.priority);
@@ -365,7 +364,7 @@ public class EditCommand extends Command {
                     .add("emails", emails.orElse(null))
                     .add("links", links.orElse(null))
                     .add("graduating year", graduatingYear)
-                    .add("course", course)
+                    .add("courses", courses)
                     .add("specialisation", specialisations)
                     .add("tags", tags);
             if (priority != null) {

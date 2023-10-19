@@ -48,10 +48,7 @@ public class Messages {
             builder.append("; Graduating Year: ");
             builder.append(g);
         });
-        person.getCourse().ifPresent((Course c) -> {
-            builder.append("; Course: ");
-            builder.append(c);
-        });
+        builder.append("; Courses: ").append(person.getCourses());
         builder.append("; Specialisations ").append(person.getSpecialisations());
         builder.append("; Tags: ");
         person.getTags().forEach(builder::append);

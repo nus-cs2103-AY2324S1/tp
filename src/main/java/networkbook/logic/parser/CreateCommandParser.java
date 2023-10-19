@@ -68,13 +68,13 @@ public class CreateCommandParser implements Parser<CreateCommand> {
         UniqueList<Link> links = ParserUtil.parseLinks(argMultimap.getAllValues(CliSyntax.PREFIX_LINK));
         GraduatingYear graduatingYear = ParserUtil.parseGraduatingYear(
                     argMultimap.getValue(CliSyntax.PREFIX_GRADUATING_YEAR).orElse(null));
-        Course course = ParserUtil.parseCourse(argMultimap.getValue(CliSyntax.PREFIX_COURSE).orElse(null));
+        UniqueList<Course> courses = ParserUtil.parseCourses(argMultimap.getAllValues(CliSyntax.PREFIX_COURSE));
         UniqueList<Specialisation> specialisations = ParserUtil
                 .parseSpecialisations(argMultimap.getAllValues(CliSyntax.PREFIX_SPECIALISATION));
         UniqueList<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(CliSyntax.PREFIX_TAG));
         Priority priority = ParserUtil.parsePriority(argMultimap.getValue(CliSyntax.PREFIX_PRIORITY).orElse(null));
 
-        Person person = new Person(name, phones, emails, links, graduatingYear, course, specialisations,
+        Person person = new Person(name, phones, emails, links, graduatingYear, courses, specialisations,
                     tagList, priority);
 
         return new CreateCommand(person);

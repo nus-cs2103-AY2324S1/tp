@@ -32,8 +32,8 @@
       <Label fx:id="emails" styleClass="cell_small_label" text="\$emails" />
       <Label fx:id="links" styleClass="cell_small_label" text="\$links" />
       <Label fx:id="graduatingYear" styleClass="cell_small_label" text="\$graduatingYear" />
-      <Label fx:id="course" styleClass="cell_small_label" text="\$course" />
-      <Label fx:id="specialisation" styleClass="cell_small_label" text="\$specialisation" />
+      <Label fx:id="courses" styleClass="cell_small_label" text="\$course" />
+      <Label fx:id="specialisations" styleClass="cell_small_label" text="\$specialisation" />
       <Label fx:id="priority" styleClass="cell_small_label" text="\$priority" />
     </VBox>
   </GridPane>

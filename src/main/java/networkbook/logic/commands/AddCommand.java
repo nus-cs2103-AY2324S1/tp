@@ -101,13 +101,13 @@ public class AddCommand extends Command {
         UniqueList<Email> updatedEmails = addEmails(personToAddInfo, editPersonDescriptor);
         UniqueList<Link> updatedLinks = addLinks(personToAddInfo, editPersonDescriptor);
         GraduatingYear updatedGraduatingYear = addGraduatingYear(personToAddInfo, editPersonDescriptor);
-        Course updatedCourse = addCourse(personToAddInfo, editPersonDescriptor);
+        UniqueList<Course> updatedCourses = addCourses(personToAddInfo, editPersonDescriptor);
         UniqueList<Specialisation> updatedSpecialisations = addSpecialisations(personToAddInfo, editPersonDescriptor);
         UniqueList<Tag> updatedTags = addTags(personToAddInfo, editPersonDescriptor);
         Priority updatedPriority = addPriority(personToAddInfo, editPersonDescriptor);
 
         return new Person(currentName, updatedPhones, updatedEmails, updatedLinks, updatedGraduatingYear,
-                updatedCourse, updatedSpecialisations, updatedTags, updatedPriority);
+                updatedCourses, updatedSpecialisations, updatedTags, updatedPriority);
     }
 
     // TODO: for non-unique fields, change respective model to use list and append to the list
@@ -136,14 +136,10 @@ public class AddCommand extends Command {
         }
         return newGraduatingYear.orElse(oldGraduatingYear.orElse(null));
     }
-    private Course addCourse(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor)
-            throws CommandException {
-        Optional<Course> oldCourse = personToAddInfo.getCourse();
-        Optional<Course> newCourse = editPersonDescriptor.getCourse();
-        if (oldCourse.isPresent() && newCourse.isPresent()) {
-            throw new CommandException(MESSAGE_MULTIPLE_UNIQUE_FIELD);
-        }
-        return newCourse.orElse(oldCourse.orElse(null));
+    private UniqueList<Course> addCourses(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor) {
+        UniqueList<Course> courses = personToAddInfo.getCourses();
+        editPersonDescriptor.getCourses().ifPresent(courses::addAllFromList);
+        return courses;
     }
     private UniqueList<Specialisation> addSpecialisations(Person personToAddInfo,
                                                            EditPersonDescriptor editPersonDescriptor) {

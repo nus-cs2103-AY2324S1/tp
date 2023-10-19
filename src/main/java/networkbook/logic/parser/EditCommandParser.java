@@ -11,6 +11,7 @@ import networkbook.logic.Messages;
 import networkbook.logic.commands.EditCommand;
 import networkbook.logic.commands.EditCommand.EditPersonDescriptor;
 import networkbook.logic.parser.exceptions.ParseException;
+import networkbook.model.person.Course;
 import networkbook.model.person.Email;
 import networkbook.model.person.Link;
 import networkbook.model.person.Phone;
@@ -98,10 +99,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setGraduatingYear(
                     ParserUtil.parseGraduatingYear(argMultimap.getValue(CliSyntax.PREFIX_GRADUATING_YEAR).get()));
         }
-        if (argMultimap.getValue(CliSyntax.PREFIX_COURSE).isPresent()) {
-            editPersonDescriptor.setCourse(
-                    ParserUtil.parseCourse(argMultimap.getValue(CliSyntax.PREFIX_COURSE).get()));
-        }
+        parseCoursesForEdit(argMultimap.getAllValues(CliSyntax.PREFIX_COURSE))
+                .ifPresent(editPersonDescriptor::setCourses);
         parseSpecialisationsForEdit(argMultimap.getAllValues(CliSyntax.PREFIX_SPECIALISATION))
                 .ifPresent(editPersonDescriptor::setSpecialisations);
         parseTagsForEdit(argMultimap.getAllValues(CliSyntax.PREFIX_TAG))
@@ -148,6 +147,18 @@ public class EditCommandParser implements Parser<EditCommand> {
             return Optional.empty();
         }
         return Optional.of(ParserUtil.parseLinks(links));
+    }
+
+    /**
+     * Parses {@code Collection<String> courses} into a {@code UniqueList<Course>} wrapped in an {@code Optional}.
+     */
+    private static Optional<UniqueList<Course>> parseCoursesForEdit(Collection<String> courses) throws ParseException {
+        requireNonNull(courses);
+
+        if (courses.isEmpty()) {
+            return Optional.empty();
+        }
+        return Optional.of(ParserUtil.parseCourses(courses));
     }
 
     /**

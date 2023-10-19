@@ -1,5 +1,7 @@
 package networkbook.ui;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
@@ -49,7 +51,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label graduatingYear;
     @FXML
-    private Label course;
+    private Label courses;
     @FXML
     private Label specialisations;
     @FXML
@@ -64,6 +66,7 @@ public class PersonCard extends UiPart<Region> {
      */
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
+        requireNonNull(person);
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
@@ -72,8 +75,7 @@ public class PersonCard extends UiPart<Region> {
         links.setText(LINKS_HEADER + person.getLinks().toString());
         person.getGraduatingYear().ifPresentOrElse((GraduatingYear g) ->
                 graduatingYear.setText(GRADUATING_YEAR_HEADER + g), () -> graduatingYear.setVisible(false));
-        person.getCourse().ifPresentOrElse((Course c) ->
-                course.setText(COURSE_HEADER + c), () -> course.setVisible(false));
+        courses.setText(COURSE_HEADER + person.getCourses().toString());
         specialisations.setText(SPECIALISATION_HEADER + person.getSpecialisations().toString());
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.getValue()))
@@ -89,7 +91,7 @@ public class PersonCard extends UiPart<Region> {
         return graduatingYear;
     }
     public Label getCourse() {
-        return course;
+        return courses;
     }
     public Label getSpecialisations() {
         return specialisations;
