@@ -45,6 +45,11 @@ public class ContainsTagPredicate extends SerializablePredicate {
     }
 
     @Override
+    public int hashCode() {
+        return tag.hashCode();
+    }
+
+    @Override
     public String toString() {
         return "Tag Filter: " + tag.getTagName();
     }

@@ -48,6 +48,11 @@ public class IdContainsKeywordsPredicate extends SerializablePredicate {
     }
 
     @Override
+    public int hashCode() {
+        return keywords.hashCode();
+    }
+
+    @Override
     public String toString() {
         return "ID Filter: " + keywords;
     }

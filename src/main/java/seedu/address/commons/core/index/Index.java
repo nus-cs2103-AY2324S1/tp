@@ -33,7 +33,6 @@ public class Index {
         return new Index(zeroBasedIndex);
     }
 
-
     public int getZeroBased() {
         return zeroBasedIndex;
     }

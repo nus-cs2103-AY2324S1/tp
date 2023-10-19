@@ -1,5 +1,7 @@
 package seedu.address.model.predicate;
 
+import java.util.Objects;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -61,6 +63,10 @@ public class AbsentFromTutorialPredicate extends SerializablePredicate {
                 && tag.equals(otherPredicate.tag);
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(index, tag);
+    }
 
     @Override
     public String toString() {
