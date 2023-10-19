@@ -16,6 +16,11 @@ public class Messages {
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
+    public static final String MESSAGE_ATTENDANCE_SUMMARY_WITH_TAG =
+            "%1$d of %2$d students present for Tutorial #%3$d from %4$s!\n";
+    public static final String MESSAGE_ATTENDANCE_SUMMARY_NO_TAG =
+            "%1$d of %2$d students present for Tutorial #%3$d!\n";
+
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
 
