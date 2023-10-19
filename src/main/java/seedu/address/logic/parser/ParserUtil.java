@@ -47,6 +47,12 @@ public class ParserUtil {
         return new Name(trimmedName);
     }
 
+    /**
+     * Parses a {@code String statusType} into a {@code StatusType}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code statusType} is invalid.
+     */
     public static StatusTypes parseStatusType(String statusType) throws ParseException {
         requireNonNull(statusType);
         String trimmedStatus = statusType.trim().toLowerCase();

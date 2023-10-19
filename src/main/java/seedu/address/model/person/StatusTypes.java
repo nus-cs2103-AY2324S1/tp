@@ -19,8 +19,14 @@ public enum StatusTypes {
         return this.statusName;
     }
 
+    /**
+     * Checks if the provided status is a valid status.
+     *
+     * @param input The string status to be checked for validity.
+     * @return {@code true} if the status is valid, {@code false} otherwise.
+     */
     public static boolean isValidStatusType(String input){
-        return input.equals("offered") || input.equals("preliminary")
+        return input.equals("interviewed") || input.equals("preliminary")
                 || input.equals("rejected")
                 || input.equals("offered");
     }
