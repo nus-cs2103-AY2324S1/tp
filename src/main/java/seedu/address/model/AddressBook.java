@@ -94,6 +94,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    /**
+     * Gathers the persons emails with {@code prompt} from this {@code AddressBook}.
+     */
+    public String gatherEmails(String prompt) {
+        return persons.gatherEmails(prompt);
+    };
+
     //// util methods
 
     @Override

@@ -92,4 +92,11 @@ public interface Model {
      */
     void sortFilteredPersonList(Comparator<Person> comparator);
 
+
+    /**
+     * Gathers the emails of person with the given prompt.
+     * @param prompt The user input for command
+     * @return The String representation of all the gathered emails.
+     */
+    String gatherEmails(String prompt);
 }

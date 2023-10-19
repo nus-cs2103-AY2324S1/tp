@@ -97,6 +97,21 @@ public class Person {
     }
 
     /**
+     * Checks if the given {@code prompt} is in the {@code financialPlans} and returns the email if true.
+     */
+    public String gatherEmailsContainsFinancialPlan(String prompt) {
+        FinancialPlan fp = new FinancialPlan(prompt);
+        /*
+         .contains() method checks if the hashcode of objects in the Hashset
+         and the object passed as argument corresponds.
+         */
+        if (financialPlans.contains(fp)) {
+            return this.email.toString();
+        }
+        return new String();
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
