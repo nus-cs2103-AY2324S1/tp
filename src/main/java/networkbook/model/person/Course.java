@@ -28,7 +28,7 @@ public class Course {
     private final Optional<String> endDate;
 
     /**
-     * Construct a {@code Course}.
+     * Constructs a {@code Course}.
      *
      * @param course A valid course description.
      */
@@ -41,7 +41,7 @@ public class Course {
     }
 
     /**
-     * Construct a {@code Course} with start date
+     * Constructs a {@code Course} with start date
      *
      * @param course A valid course description.
      * @param startDate The date when the contact started taking the course.
@@ -57,7 +57,7 @@ public class Course {
     }
 
     /**
-     * Construct a {@code Course} with start date and end date
+     * Constructs a {@code Course} with start date and end date
      *
      * @param course A valid course description.
      * @param startDate The date when the contact started taking the course.
@@ -77,7 +77,7 @@ public class Course {
     }
 
     /**
-     * Return true if a given string is a valid course.
+     * Returns true if a given string is a valid course.
      */
     public static boolean isValidCourse(String test) {
         if (test.startsWith(" ")) {
@@ -92,7 +92,7 @@ public class Course {
     }
 
     /**
-     * Return true if the given string is a valid date.
+     * Returns true if the given string is a valid date.
      * A valid date must follow the DD-MM-YYYY format to avoid ambiguity, and actually exist.
      *
      * @param date A given string to be tested for date validity and format.
@@ -109,7 +109,7 @@ public class Course {
     }
 
     /**
-     * Return true if the second given string corresponds with a date that is later than the first date.
+     * Returns true if the second given string corresponds with a date that is later than the first date.
      *
      * @param start A string representing an earlier date.
      * @param end A string representing a later date.
@@ -137,7 +137,7 @@ public class Course {
     }
 
     /**
-     * Return true if two Courses have the same 'course' field
+     * Returns true if two Courses have the same 'course' field
      *
      * @param other The object that is being compared to for equality
      * @return True if the other object is a Course with the same 'course' field
@@ -175,7 +175,7 @@ public class Course {
     }
 
     /*
-     * Check the existence of start and end dates.
+     * Checks the existence of start and end dates.
      */
     public boolean startDateExists() {
         return startDate.isPresent();
