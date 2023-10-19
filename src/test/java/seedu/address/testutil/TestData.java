@@ -195,6 +195,7 @@ public final class TestData {
         contacts.add(TestData.ALICE);
         contacts.add(TestData.BENSON);
         contacts.add(TestData.CARL);
+        contacts.add(TestData.DANIEL);
         contacts.add(TestData.ELLE);
         contacts.add(TestData.FIONA);
         contacts.add(TestData.GEORGE);
