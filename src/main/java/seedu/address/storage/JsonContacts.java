@@ -49,14 +49,14 @@ class JsonContacts {
      * @throws IllegalValueException If any data this contains is invalid.
      */
     public Contacts toModelType() throws IllegalValueException {
-        Contacts contactsManager = new Contacts();
-        for (JsonContact jsonAdaptedContact : contacts) {
-            Contact contact = jsonAdaptedContact.toModelType();
-            if (contactsManager.contains(contact)) {
+        Contacts contacts = new Contacts();
+        for (JsonContact jsonContact : this.contacts) {
+            Contact contact = jsonContact.toModelType();
+            if (contacts.contains(contact)) {
                 throw new IllegalValueException(Messages.CONVERT_CONTACTS_DUPLICATE);
             }
-            contactsManager.add(contact);
+            contacts.add(contact);
         }
-        return contactsManager;
+        return contacts;
     }
 }

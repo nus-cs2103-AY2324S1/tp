@@ -59,12 +59,12 @@ public class CommandTestUtil {
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        Contacts expectedContactsManager = new Contacts(actualModel.getContacts());
+        Contacts expectedContacts = new Contacts(actualModel.getContacts());
         List<Contact> expectedFilteredList = new ArrayList<>(actualModel.getFilteredContactList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
 
-        assertEquals(expectedContactsManager, actualModel.getContacts());
+        assertEquals(expectedContacts, actualModel.getContacts());
         assertEquals(expectedFilteredList, actualModel.getFilteredContactList());
     }
     /**
