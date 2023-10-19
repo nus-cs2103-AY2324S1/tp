@@ -2,10 +2,14 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.event.EventPeriod.DATE_TIME_STRING_FORMATTER;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.EventBuilder.DEFAULT_END_TIME_STRING;
 import static seedu.address.testutil.EventBuilder.DEFAULT_START_TIME_STRING;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 
 import java.nio.file.Path;
 import java.time.LocalDateTime;
@@ -28,6 +32,8 @@ import seedu.address.testutil.EventBuilder;
 
 
 class DeleteEventCommandTest {
+    private static LocalDateTime firstTime = LocalDateTime.parse(DEFAULT_START_TIME_STRING, DATE_TIME_STRING_FORMATTER);
+    private static LocalDateTime secondTime = LocalDateTime.parse(DEFAULT_END_TIME_STRING, DATE_TIME_STRING_FORMATTER);
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new DeleteEventCommand(null));
@@ -37,20 +43,47 @@ class DeleteEventCommandTest {
     public void constructor_eventDeletedFromModel_deleteSuccessful() throws Exception {
         Event validEvent = new EventBuilder().build();
         DeleteEventCommandTest.ModelStubWithEvent modelStub = new DeleteEventCommandTest.ModelStubWithEvent(validEvent);
-        LocalDateTime eventTime = LocalDateTime.parse(DEFAULT_START_TIME_STRING, DATE_TIME_STRING_FORMATTER);
-        CommandResult commandResult = new DeleteEventCommand(eventTime).execute(modelStub);
+        CommandResult commandResult = new DeleteEventCommand(firstTime).execute(modelStub);
         assertEquals(String.format(DeleteEventCommand.MESSAGE_SUCCESS, Messages.format(validEvent)),
                 commandResult.getFeedbackToUser());
     }
 
     @Test
     public void execute_noEvent_throwsCommandException() {
-        LocalDateTime eventTime = LocalDateTime.parse(DEFAULT_END_TIME_STRING, DATE_TIME_STRING_FORMATTER);
-        DeleteEventCommand deleteEventCommand = new DeleteEventCommand(eventTime);
+        DeleteEventCommand deleteEventCommand = new DeleteEventCommand(secondTime);
         DeleteEventCommandTest.ModelStub modelStub = new DeleteEventCommandTest.ModelStubWithNoEvent();
 
         assertThrows(CommandException.class, DeleteEventCommand.MESSAGE_NO_EVENT, () -> deleteEventCommand
                 .execute(modelStub));
+    }
+
+    @Test
+    public void equals() {
+        DeleteEventCommand deleteFirstEventCommand = new DeleteEventCommand(firstTime);
+        DeleteEventCommand deleteSecondEventCommand = new DeleteEventCommand(secondTime);
+
+        // same object -> returns true
+        assertTrue(deleteFirstEventCommand.equals(deleteFirstEventCommand));
+
+        // same values -> returns true
+        DeleteEventCommand deleteFirstEventCommandCopy = new DeleteEventCommand(firstTime);
+        assertTrue(deleteFirstEventCommand.equals(deleteFirstEventCommandCopy));
+
+        // different types -> returns false
+        assertFalse(deleteFirstEventCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(deleteFirstEventCommand.equals(null));
+
+        // different person -> returns false
+        assertFalse(deleteFirstEventCommand.equals(deleteSecondEventCommand));
+    }
+
+    @Test
+    public void toStringMethod() {
+        DeleteEventCommand deleteFirstEventCommand = new DeleteEventCommand(firstTime);
+        String expected = DeleteEventCommand.class.getCanonicalName() + "{toDeleteAt=" + firstTime + "}";
+        assertEquals(expected, deleteFirstEventCommand.toString());
     }
 
     /**
