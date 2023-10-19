@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
          title="MediFlowR" minWidth="700" minHeight="700" onCloseRequest="#handleExit">
   <icons>
@@ -39,12 +40,14 @@
             <padding>
               <Insets top="10" right="10" bottom="10" left="10" />
             </padding>
+            <Label fx:id="patientsLabel" text="Patients" styleClass="header_label" />
             <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
           </VBox>
           <VBox fx:id="appointmentList" styleClass="pane-with-border" minWidth="350" prefWidth="350" HBox.hgrow="ALWAYS">
             <padding>
               <Insets top="10" right="10" bottom="10" left="10" />
             </padding>
+            <Label fx:id="appointmentsLabel" text="Appointments" styleClass="header_label" />
             <StackPane fx:id="appointmentListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
           </VBox>
         </HBox>

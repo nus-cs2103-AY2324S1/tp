@@ -149,7 +149,7 @@ public class ModelManager implements Model {
     @Override
     public void addAppointment(Appointment appointment) {
         addressBook.addAppointment(appointment);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
     }
 
     @Override

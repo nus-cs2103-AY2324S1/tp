@@ -2,18 +2,18 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 /**
- * Represents a Person's remark in the address book.
- * Guarantees: immutable; is always valid
+ * Represents a Person's birthdate in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidBirthdate(String)}
  */
 public class Birthdate {
-    public static final String MESSAGE_CONSTRAINTS = "Birthdates should be of the form MM/DD/YYYY";
+    public static final String MESSAGE_CONSTRAINTS = "Birthdates should be of the form YYYY/MM/DD";
 
-    /*
-     * The first character of the birthdate must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String VALIDATION_REGEX = "\\d{2}\\/\\d{2}\\/\\d{4}";
+    public static final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 
     public final String value;
 
@@ -31,7 +31,12 @@ public class Birthdate {
      * Returns if a given string is a valid birthdate.
      */
     public static boolean isValidBirthdate(String test) {
-        return test.matches(VALIDATION_REGEX);
+        try {
+            LocalDate.parse(test, FORMAT);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
     }
 
     @Override
