@@ -4,12 +4,17 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.NavigableMap;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  * Manages the SingleDayEventList objects for every day.
  */
 public class AllDaysEventListManager {
     private final NavigableMap<String, SingleDayEventList> dayToEventListMap;
+
 
     /**
      * Creates a AllDaysEventListManager to manage the daily events.
@@ -90,6 +95,14 @@ public class AllDaysEventListManager {
      */
     public boolean isEmpty() {
         return this.dayToEventListMap.isEmpty();
+    }
+
+    public ObservableList<Event> asUnmodifiableObservableList() {
+        List<Event> list = dayToEventListMap.values().stream()
+                .flatMap(singleDayEventList -> singleDayEventList.getDayEventList().stream())
+                .collect(Collectors.toList());
+
+        return FXCollections.observableList(list);
     }
 
     @Override

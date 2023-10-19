@@ -2,6 +2,10 @@ package seedu.address.model.calendar;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.List;
+
+import javafx.collections.ObservableList;
+import seedu.address.model.ReadOnlyCalendar;
 import seedu.address.model.event.AllDaysEventListManager;
 import seedu.address.model.event.Event;
 
@@ -71,6 +75,11 @@ public class Calendar {
      */
     public boolean isEmpty() {
         return this.eventManager.isEmpty();
+    }
+
+    @Override
+    public ObservableList<Event> getEventList() {
+        return eventManager.asUnmodifiableObservableList();
     }
 
     @Override
