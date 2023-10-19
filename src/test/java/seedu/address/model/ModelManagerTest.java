@@ -117,6 +117,26 @@ public class ModelManagerTest {
     public void getFilteredEventList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredEventList().remove(0));
     }
+    @Test
+    public void deleteEvents() {
+        modelManager.createEvent(AURORA_BOREALIS);
+        modelManager.createEvent(BOXING_DAY);
+
+        modelManager.deleteEvent(AURORA_BOREALIS);
+
+        assertTrue(modelManager.hasEvent(BOXING_DAY));
+        assertFalse(modelManager.hasEvent(AURORA_BOREALIS));
+    }
+
+    @Test
+    public void updateEvents() {
+        modelManager.createEvent(AURORA_BOREALIS);
+
+        modelManager.setEvent(AURORA_BOREALIS, BOXING_DAY);
+
+        assertTrue(modelManager.hasEvent(BOXING_DAY));
+        assertFalse(modelManager.hasEvent(AURORA_BOREALIS));
+    }
 
     @Test
     public void equals() {

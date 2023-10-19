@@ -143,7 +143,7 @@ Examples:
 
 ### Add Member to an Event: `add /member /event`
 
-Adds a member to an event. 
+Adds a member to an event.
 
 Format: `add /member MEMBER_INDEX /event EVENT_INDEX`
 

@@ -26,13 +26,13 @@ public class MemberListPanel extends UiPart<Region> {
     public MemberListPanel(ObservableList<Member> memberList) {
         super(FXML);
         memberListView.setItems(memberList);
-        memberListView.setCellFactory(listView -> new PersonListViewCell());
+        memberListView.setCellFactory(listView -> new MemberListViewCell());
     }
 
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Member} using a {@code MemberCard}.
      */
-    class PersonListViewCell extends ListCell<Member> {
+    class MemberListViewCell extends ListCell<Member> {
         @Override
         protected void updateItem(Member member, boolean empty) {
             super.updateItem(member, empty);

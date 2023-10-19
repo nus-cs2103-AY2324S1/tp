@@ -13,7 +13,7 @@ import seedu.address.model.event.Event;
 public class EventUtil {
 
     /**
-     * Returns an create command string for adding the {@code event}.
+     * Returns a create command string for adding the {@code event}.
      */
     public static String getCreateEventCommand(Event event) {
         return CreateEventCommand.COMMAND_WORD + " " + getEventDetails(event);
