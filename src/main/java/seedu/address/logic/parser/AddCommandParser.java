@@ -1,6 +1,5 @@
 package seedu.address.logic.parser;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -8,6 +7,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LICENCE_PLATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_EXPIRY_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_ISSUE_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
@@ -40,7 +42,8 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_NRIC,
-                        PREFIX_LICENCE_PLATE, PREFIX_ADDRESS, PREFIX_TAG);
+                        PREFIX_LICENCE_PLATE, PREFIX_ADDRESS, PREFIX_TAG, PREFIX_POLICY_NUMBER,
+                        PREFIX_POLICY_ISSUE_DATE, PREFIX_POLICY_EXPIRY_DATE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_NRIC,
                 PREFIX_LICENCE_PLATE, PREFIX_ADDRESS)
@@ -57,12 +60,21 @@ public class AddCommandParser implements Parser<AddCommand> {
         LicencePlate licencePlate = ParserUtil.parseLicencePlate(argMultimap.getValue(PREFIX_LICENCE_PLATE).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+
         // temporary variables to change
-        PolicyNumber policyNumber = new PolicyNumber("1");
+        PolicyNumber policyNumber = new PolicyNumber(PolicyNumber.DEFAULT_VALUE);
         PolicyDate policyIssueDate = new PolicyDate(PolicyDate.DEFAULT_VALUE);
         PolicyDate policyExpiryDate = new PolicyDate(PolicyDate.DEFAULT_VALUE);
+
+        // if all details about policy exists
+        if (arePrefixesPresent(argMultimap, PREFIX_POLICY_NUMBER, PREFIX_POLICY_ISSUE_DATE,
+                PREFIX_POLICY_EXPIRY_DATE)
+                || !argMultimap.getPreamble().isEmpty()) {
+            policyNumber = ParserUtil.parsePolicyNumber(argMultimap.getValue(PREFIX_POLICY_NUMBER).get());
+            policyIssueDate = ParserUtil.parsePolicyIssueDate(argMultimap.getValue(PREFIX_POLICY_ISSUE_DATE).get());
+            policyExpiryDate = ParserUtil.parsePolicyExpiryDate(argMultimap.getValue(PREFIX_POLICY_EXPIRY_DATE).get());
+        }
         Policy policy = new Policy(policyNumber, policyIssueDate, policyExpiryDate);
-        //
 
         Person person = new Person(name, phone, email, address, tagList, nric, licencePlate, policy);
 

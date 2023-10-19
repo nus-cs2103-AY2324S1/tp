@@ -28,7 +28,8 @@ public class PersonBuilder {
     private static final String DEFAULT_NRIC = "567A";
     private static final String DEFAULT_LICENCE_PLATE = "SBC123D";
     private static final String DEFAULT_POLICY_NUMBER = "AIA1234";
-    private static final String DEFAULT_POLICY_DATE = "01-01-2023";
+    private static final String DEFAULT_POLICY_ISSUE_DATE = "01-01-2023";
+    private static final String DEFAULT_POLICY_EXPIRY_DATE = "01-01-2030";
 
     private Name name;
     private Phone phone;
@@ -51,8 +52,8 @@ public class PersonBuilder {
         nric = new Nric(DEFAULT_NRIC);
         licencePlate = new LicencePlate(DEFAULT_LICENCE_PLATE);
         PolicyNumber policyNumber = new PolicyNumber(DEFAULT_POLICY_NUMBER);
-        PolicyDate policyIssueDate = new PolicyDate(DEFAULT_POLICY_DATE);
-        PolicyDate policyExpiryDate = new PolicyDate(DEFAULT_POLICY_DATE);
+        PolicyDate policyIssueDate = new PolicyDate(DEFAULT_POLICY_ISSUE_DATE);
+        PolicyDate policyExpiryDate = new PolicyDate(DEFAULT_POLICY_EXPIRY_DATE);
         policy = new Policy(policyNumber, policyIssueDate, policyExpiryDate);
     }
 
