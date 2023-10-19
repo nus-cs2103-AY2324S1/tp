@@ -40,6 +40,8 @@ public class ApplicantCard extends UiPart<Region> {
     private Label email;
     @FXML
     private FlowPane interviews;
+    @FXML
+    private Label status;
 
     /**
      * Creates a {@code ApplicantCode} with the given {@code Applicant} and index to display.
@@ -55,5 +57,6 @@ public class ApplicantCard extends UiPart<Region> {
         applicant.getInterviews().stream()
                 .sorted(Comparator.comparing(interview -> interview.type))
                 .forEach(interview -> interviews.getChildren().add(new Label(interview.type)));
+        status.setText(applicant.getStatus().toString());
     }
 }
