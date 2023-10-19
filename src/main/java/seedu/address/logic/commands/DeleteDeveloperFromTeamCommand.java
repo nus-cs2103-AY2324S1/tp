@@ -10,6 +10,9 @@ import seedu.address.model.Model;
 import seedu.address.model.person.IdentityCode;
 import seedu.address.model.person.Name;
 
+/**
+ * Represents a DeleteDeveloperFromTeamCommand with the associated logic to remove a developer from a team.
+ */
 public class DeleteDeveloperFromTeamCommand extends Command {
 
     public static final String COMMAND_WORD = "deletedev";
@@ -25,12 +28,26 @@ public class DeleteDeveloperFromTeamCommand extends Command {
 
     private final Name developerToDelete;
     private final String teamName;
+    /**
+     * Constructs an {@code DeleteDeveloperFromTeamCommand} to delete the developer identified by the provided name
+     * from the specified team.
+     *
+     * @param teamName The name of the team from which the developer is to be removed.
+     * @param developerToDelete The name of the developer to be removed from the team.
+     */
     public DeleteDeveloperFromTeamCommand(String teamName, Name developerToDelete) {
         this.developerToDelete = developerToDelete;
         this.teamName = teamName;
 
     }
 
+    /**
+     * Executes the DeleteDeveloperFromTeamCommand by removing the specified developer from the given team in the model.
+     *
+     * @param model The current state of the application model.
+     * @return A CommandResult indicating the result of executing this command on the given model.
+     * @throws CommandException if the team name or developer name is invalid, or if the developer is not part of the team.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
