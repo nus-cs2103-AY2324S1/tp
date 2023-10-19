@@ -21,14 +21,13 @@ public class StatusCommand extends Command {
     public static final String COMMAND_WORD = "status";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the status of the applicant identified "
-            + "by the index number used in the displayed applicant list. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) " + "[u(ndecided)/o(ffered)/r(ejected)].";
+            + "by the index number used in the displayed applicant list.\n"
+            + "Parameters: INDEX (must be a positive integer) " + "STATUS [u(ndecided)/o(ffered)/r(ejected)].";
 
     public static final String MESSAGE_EDIT_STATUS_SUCCESS = "Edited Applicant Status: %1$s";
     public static final String MESSAGE_NO_STATUS = "Missing Status, please follow the following parameters."
             + "Parameters: INDEX (must be a positive integer) "
-            + "[u(ndecided)/o(ffered)/r(ejected)].";
+            + "STATUS [u(ndecided)/o(ffered)/r(ejected)].";
 
     private final Index index;
     private final Status status;
