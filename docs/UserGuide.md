@@ -208,9 +208,7 @@ Format: `clear`
 
 ### Sorting all entries by lexicographical order: `sort`
 
-Sorts all the entries in lexicographical order. After sorting the list, the ordering of the entries will be changed.
-As a result, performing delete operations that require indexing will reference the new ordering that is currently 
-displayed on the screen.
+Sorts all the entries in lexicographical order. After sorting the list, the ordering of the entries will be changed. As a result, performing delete operations that require indexing will reference the new ordering that is currently displayed on the screen.
 
 Format: `sort`
 
@@ -254,7 +252,7 @@ _Details coming soon ..._
 ## Command summary
 
 Action | Format, Examples
---------|------------------
+--------|-----------------
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS nk/NEXT_KIN nkp/NEXT_KIN_PHONE [t/TAG]…​` <br> e.g., `add n/John p/80101010 e/johndoe@gmail.com a/Punggol Central Blk 444 #15-32 820123 nk/Brennan nkp/82020202 [t/TAG]…​`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
