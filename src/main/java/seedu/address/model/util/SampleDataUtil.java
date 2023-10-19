@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ManageHr;
+import seedu.address.model.ReadOnlyManageHr;
 import seedu.address.model.department.Department;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -40,8 +40,8 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
+    public static ReadOnlyManageHr getSampleManageHr() {
+        ManageHr sampleAb = new ManageHr();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
         }
