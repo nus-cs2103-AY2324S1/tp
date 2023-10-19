@@ -35,6 +35,15 @@ public class ListCommand extends Command {
         this.sortingComparator = sortingComparator;
     }
 
+    /**
+     * Gets the sorting comparator currently set for sorting the list of persons.
+     *
+     * @return The Comparator<Person> used for sorting the list.
+     */
+    public Comparator<Person> getSortingComparator() {
+        return sortingComparator;
+    }
+
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
