@@ -14,6 +14,7 @@ public class Card {
     private final Question question;
     private final Answer answer;
     private String difficulty;
+    private Integer priority;
 
     /**
      * Every field must be present and not null.
@@ -23,6 +24,7 @@ public class Card {
         this.question = question;
         this.answer = answer;
         this.difficulty = difficulty;
+        this.priority = Integer.MAX_VALUE;
     }
 
     public void setDifficulty(String difficulty) {
@@ -39,6 +41,12 @@ public class Card {
 
     public Answer getAnswer() {
         return answer;
+    }
+    public Integer getPriority() {
+        return priority;
+    }
+    public void setPriority(Integer priority) {
+        this.priority = priority;
     }
 
     /**

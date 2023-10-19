@@ -2,10 +2,13 @@ package seedu.address.model.card;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalCards.CS1101S;
 import static seedu.address.testutil.TypicalCards.CS2100;
+import static seedu.address.testutil.TypicalCards.high;
+import static seedu.address.testutil.TypicalCards.low;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -160,5 +163,26 @@ public class UniqueCardListTest {
     @Test
     public void toStringMethod() {
         assertEquals(uniqueCardList.asUnmodifiableObservableList().toString(), uniqueCardList.toString());
+    }
+
+    @Test
+    public void add_cardWithHigherPriority() {
+        low.setPriority(0);
+        uniqueCardList.add(low);
+        uniqueCardList.add(high);
+        UniqueCardList otherList = new UniqueCardList();
+        otherList.add(high);
+        otherList.add(low);
+        assertEquals(uniqueCardList, otherList);
+    }
+
+    @Test
+    public void add_cardWithSamePriority() {
+        uniqueCardList.add(low);
+        uniqueCardList.add(high);
+        UniqueCardList otherList = new UniqueCardList();
+        otherList.add(high);
+        otherList.add(low);
+        assertNotEquals(uniqueCardList, otherList);
     }
 }
