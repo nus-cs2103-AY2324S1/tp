@@ -1,7 +1,9 @@
 package seedu.address.testutil;
 
 import java.time.MonthDay;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -10,6 +12,7 @@ import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Linkedin;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Telegram;
@@ -37,6 +40,8 @@ public class PersonBuilder {
     private Optional<Integer> id;
     private Set<Tag> tags;
 
+    private List<Note> notes;
+
     /**
      * Creates a {@code PersonBuilder} with the default details.
      */
@@ -51,6 +56,7 @@ public class PersonBuilder {
         telegram = Optional.empty(); // No telegram by default
         tags = new HashSet<>();
         id = Optional.empty();
+        notes = new ArrayList<>();
     }
 
     /**
@@ -67,6 +73,7 @@ public class PersonBuilder {
         telegram = personToCopy.getTelegram();
         tags = new HashSet<>(personToCopy.getTags());
         id = personToCopy.getId();
+        notes = personToCopy.getNotes();
     }
 
     /**
@@ -151,10 +158,20 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code Notes} of the {@code Person} that we are building.
+     * @param notes
+     * @return
+     */
+    public PersonBuilder withNotes(String... notes) {
+        this.notes = SampleDataUtil.getNoteList(notes);
+        return this;
+    }
+
+    /**
      * Builds a {@code Person}.
      */
     public Person build() {
-        return new Person(name, phone, email, address, birthday, linkedin, secondaryEmail, telegram, tags, id);
+        return new Person(name, phone, email, address, birthday, linkedin, secondaryEmail, telegram, tags, id, notes);
     }
 
 }

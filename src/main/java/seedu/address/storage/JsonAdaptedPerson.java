@@ -18,6 +18,7 @@ import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Linkedin;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Telegram;
@@ -42,6 +43,8 @@ class JsonAdaptedPerson {
     private final Optional<Integer> id;
     private Avatar avatar = new Avatar();
 
+    private final List<JsonAdaptedNote> notes = new ArrayList<>();
+
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
@@ -52,7 +55,8 @@ class JsonAdaptedPerson {
             @JsonProperty("secondaryEmail") Optional<String> secondaryEmail,
             @JsonProperty("telegram") Optional<String> telegram,
             @JsonProperty("tags") List<JsonAdaptedTag> tags,
-            @JsonProperty("id") Optional<Integer> id
+            @JsonProperty("id") Optional<Integer> id,
+            @JsonProperty("notes") List<JsonAdaptedNote> notes
     ) {
         this.name = name;
         this.phone = phone;
@@ -66,6 +70,9 @@ class JsonAdaptedPerson {
             this.tags.addAll(tags);
         }
         this.id = id;
+        if (notes != null) {
+            this.notes.addAll(notes);
+        }
     }
 
     /**
@@ -84,7 +91,12 @@ class JsonAdaptedPerson {
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
         id = source.getId().map(x -> x.intValue());
+
         avatar = source.getAvatar();
+
+        notes.addAll(source.getNotes().stream()
+            .map(JsonAdaptedNote::new)
+            .collect(Collectors.toList()));
     }
 
     /**
@@ -96,6 +108,10 @@ class JsonAdaptedPerson {
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
+        }
+        final List<Note> personNotes = new ArrayList<>();
+        for (JsonAdaptedNote note : notes) {
+            personNotes.add(note.toModelType());
         }
 
         if (name == null) {
@@ -144,10 +160,13 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         final Optional<Integer> modelID = id.map(x -> x.intValue());
+
         final Avatar modelAvatar = new Avatar(avatar);
 
+        final List<Note> modelNotes = new ArrayList<>(personNotes);
+
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelBirthday, modelLinkedin,
-                modelSecondaryEmail, modelTelegram, modelTags, modelID, modelAvatar);
+                modelSecondaryEmail, modelTelegram, modelTags, modelID, modelAvatar, modelNotes);
     }
 
 }

@@ -15,6 +15,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.time.MonthDay;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -24,9 +26,15 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Birthday;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Linkedin;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Telegram;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
+
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
@@ -37,14 +45,15 @@ public class EditCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
+        Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
         Person editedPerson = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+        EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
+        expectedModel.setPerson(model.getFilteredPersonList().get(indexLastPerson.getZeroBased()), editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -71,30 +80,19 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, new EditPersonDescriptor());
-        Person editedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
-
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
     public void execute_filteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
 
-        Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personInFilteredList = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
         Person editedPerson = new PersonBuilder(personInFilteredList).withName(VALID_NAME_BOB).build();
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
-                new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
+        EditPersonDescriptor descriptor = new EditCommand.EditPersonDescriptor();
+        descriptor.setName(new Name(VALID_NAME_BOB));
+        EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
+        expectedModel.setPerson(personInFilteredList, editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -144,6 +142,80 @@ public class EditCommandTest {
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_editEmptyAltInfo_failure() {
+        EditPersonDescriptor descriptor = new EditCommand.EditPersonDescriptor();
+        descriptor.setBirthday(new Birthday(MonthDay.of(6, 9)));
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_EDIT_ALTERNATIVE_FAIL);
+
+        descriptor = new EditCommand.EditPersonDescriptor();
+        descriptor.setTelegram(new Telegram("@alice"));
+        editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_EDIT_ALTERNATIVE_FAIL);
+
+        descriptor = new EditCommand.EditPersonDescriptor();
+        descriptor.setLinkedin(new Linkedin("alice"));
+        editCommand = new EditCommand(Index.fromOneBased(3), descriptor);
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_EDIT_ALTERNATIVE_FAIL);
+
+        descriptor = new EditCommand.EditPersonDescriptor();
+        descriptor.setSecondaryEmail(new Email("alice@email.com"));
+        editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_EDIT_ALTERNATIVE_FAIL);
+    }
+
+    @Test
+    public void execute_editsAltInfoNoChange_failure() {
+        EditPersonDescriptor descriptor = new EditCommand.EditPersonDescriptor();
+        descriptor.setLinkedin(new Linkedin("alice"));
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+        assertCommandFailure(editCommand, model, String.format(EditCommand.MESSAGE_EDIT_FIELDS_SAME, "Alice Pauline"));
+
+        descriptor = new EditCommand.EditPersonDescriptor();
+        descriptor.setLinkedin(new Linkedin("bensonmeier"));
+        descriptor.setSecondaryEmail(new Email("ben10@gmail.com"));
+        descriptor.setTelegram(new Telegram("@benson"));
+        descriptor.setBirthday(new Birthday(MonthDay.of(10, 10)));
+        editCommand = new EditCommand(INDEX_SECOND_PERSON, descriptor);
+        assertCommandFailure(editCommand, model, String.format(EditCommand.MESSAGE_EDIT_FIELDS_SAME, "Benson Meier"));
+    }
+
+    @Test
+    public void execute_noEditAltInfo_success() {
+        Person editedPerson = new PersonBuilder().withName("Benjamin")
+                .withAddress("311, Clementi Ave 2, #02-25")
+                .withEmail("johnd@example.com").withPhone("98765432")
+                .withBirthday(MonthDay.of(10, 10))
+                .withLinkedin("bensonmeier")
+                .withSecondaryEmail("ben10@gmail.com")
+                .withTelegram("@benson")
+                .withTags("owesMoney", "friends")
+                .withId(1)
+                .build();
+        Person personInFilteredList = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+
+        EditPersonDescriptor descriptor = new EditCommand.EditPersonDescriptor();
+        descriptor.setName(new Name("Benjamin"));
+        EditCommand editCommand = new EditCommand(INDEX_SECOND_PERSON, descriptor);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(personInFilteredList, editedPerson);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_editSecondaryEmail_failure() {
+        EditPersonDescriptor descriptor = new EditCommand.EditPersonDescriptor();
+        descriptor.setSecondaryEmail(new Email("johnd@example.com"));
+        EditCommand editCommand = new EditCommand(INDEX_SECOND_PERSON, descriptor);
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_DUPLICATE_EMAIL, "Benson Meier");
+        assertCommandFailure(editCommand, model, expectedMessage);
     }
 
     @Test

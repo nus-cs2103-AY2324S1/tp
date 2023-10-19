@@ -2,10 +2,14 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LINKEDIN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SECONDARY_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -26,6 +30,7 @@ import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Linkedin;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Telegram;
@@ -47,13 +52,23 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_SECONDARY_EMAIL + "SECONDARYEMAIL]...\n"
+            + "[" + PREFIX_LINKEDIN + "LINKEDIN]...\n"
+            + "[" + PREFIX_BIRTHDAY + "BIRTHDAY]...\n"
+            + "[" + PREFIX_TELEGRAM + "TELEGRAM]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_EDIT_FIELDS_SAME = "The input fields of this person: %1$s you are editing"
+            + " is the same.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_EDIT_DUPLICATE_EMAIL = "Both primary and secondary email are the same "
+            + "for Person: %1$s";
+    public static final String MESSAGE_EDIT_ALTERNATIVE_FAIL = "The current alternative contact field is empty."
+            + " Use the addalt command to fill in the alternative contact details.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -95,22 +110,40 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor)
+            throws CommandException {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Optional<Birthday> updatedBirthday = personToEdit.getBirthday(); // TODO: Allow edit of birthday here?
-        Optional<Linkedin> linkedin = personToEdit.getLinkedin();
-        Optional<Email> secondaryEmail = personToEdit.getSecondaryEmail();
-        Optional<Telegram> telegram = personToEdit.getTelegram();
+        Optional<Birthday> updatedBirthday = editPersonDescriptor.getBirthday().or(() -> personToEdit.getBirthday());
+        Optional<Linkedin> updatedLinkedin = editPersonDescriptor.getLinkedin().or(() -> personToEdit.getLinkedin());
+        Optional<Email> updatedSecondaryEmail = editPersonDescriptor.getSecondaryEmail()
+                .or(() -> personToEdit.getSecondaryEmail());
+        Optional<Telegram> updatedTelegram = editPersonDescriptor.getTelegram().or(() -> personToEdit.getTelegram());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Optional<Integer> id = personToEdit.getId();
+        List<Note> notes = personToEdit.getNotes();
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedBirthday,
-                linkedin, secondaryEmail, telegram, updatedTags, id);
+        Person updatedPerson = new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedBirthday,
+                updatedLinkedin, updatedSecondaryEmail, updatedTelegram, updatedTags, id, notes);
+
+        if ((!personToEdit.hasValidBirthday() && !updatedBirthday.equals(Optional.empty()))
+                || (!personToEdit.hasValidLinkedin() && !updatedLinkedin.equals(Optional.empty()))
+                || (!personToEdit.hasValidTelegram() && !updatedTelegram.equals(Optional.empty()))
+                || (!personToEdit.hasValidSecondaryEmail() && !updatedSecondaryEmail.equals(Optional.empty()))) {
+            throw new CommandException(MESSAGE_EDIT_ALTERNATIVE_FAIL);
+        } else if (updatedPerson.equals(personToEdit)) {
+            throw new CommandException(String.format(MESSAGE_EDIT_FIELDS_SAME, updatedName));
+        } else if (updatedPerson.hasValidSecondaryEmail()) {
+            if (updatedPerson.hasRepeatedEmail()) {
+                throw new CommandException(String.format(MESSAGE_EDIT_DUPLICATE_EMAIL, updatedName));
+            }
+        }
+
+        return updatedPerson;
     }
 
     @Override
@@ -147,6 +180,10 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
+        private Birthday birthday;
+        private Linkedin linkedin;
+        private Email secondaryEmail;
+        private Telegram telegram;
 
         public EditPersonDescriptor() {}
 
@@ -159,6 +196,10 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
+            setSecondaryEmail(toCopy.secondaryEmail);
+            setTelegram(toCopy.telegram);
+            setBirthday(toCopy.birthday);
+            setLinkedin(toCopy.linkedin);
             setTags(toCopy.tags);
         }
 
@@ -166,7 +207,8 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address,
+                    birthday, linkedin, telegram, secondaryEmail, tags);
         }
 
         public void setName(Name name) {
@@ -199,6 +241,38 @@ public class EditCommand extends Command {
 
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
+        }
+
+        public void setLinkedin(Linkedin linkedin) {
+            this.linkedin = linkedin;
+        }
+
+        public Optional<Linkedin> getLinkedin() {
+            return Optional.ofNullable(linkedin);
+        }
+
+        public void setBirthday(Birthday birthday) {
+            this.birthday = birthday;
+        }
+
+        public Optional<Birthday> getBirthday() {
+            return Optional.ofNullable(birthday);
+        }
+
+        public void setTelegram(Telegram telegram) {
+            this.telegram = telegram;
+        }
+
+        public Optional<Telegram> getTelegram() {
+            return Optional.ofNullable(telegram);
+        }
+
+        public void setSecondaryEmail(Email secondaryEmail) {
+            this.secondaryEmail = secondaryEmail;
+        }
+
+        public Optional<Email> getSecondaryEmail() {
+            return Optional.ofNullable(secondaryEmail);
         }
 
         /**
@@ -234,6 +308,10 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
+                    && Objects.equals(birthday, otherEditPersonDescriptor.birthday)
+                    && Objects.equals(linkedin, otherEditPersonDescriptor.linkedin)
+                    && Objects.equals(secondaryEmail, otherEditPersonDescriptor.secondaryEmail)
+                    && Objects.equals(telegram, otherEditPersonDescriptor.telegram)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
@@ -245,6 +323,10 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("tags", tags)
+                    .add("birthday", birthday)
+                    .add("linkedin", linkedin)
+                    .add("secondaryEmail", secondaryEmail)
+                    .add("telegram", telegram)
                     .toString();
         }
     }

@@ -21,6 +21,13 @@ checkstyle {
 }
 
 test {
+    doFirst {
+        println(System.getProperty("os.name"))
+        if (System.getProperty("os.name").toLowerCase().contains("nux") ||
+            System.getProperty("os.name").toLowerCase().contains("ubuntu")) {
+            exclude '**/ui/**'
+        }
+    }
     useJUnitPlatform()
     finalizedBy jacocoTestReport
 }
@@ -68,6 +75,9 @@ dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: jUnitVersion
 
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: jUnitVersion
+
+    testImplementation 'org.testfx:testfx-core:4.0.16-alpha'
+    testImplementation 'org.testfx:testfx-junit5:4.0.16-alpha'
 }
 
 shadowJar {

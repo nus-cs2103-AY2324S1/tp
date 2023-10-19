@@ -3,6 +3,7 @@ package seedu.address.ui;
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -12,7 +13,7 @@ import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * A UI component that displays information of a {@code Person}.
  */
 public class PersonCard extends UiPart<Region> {
 
@@ -45,6 +46,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label secondaryEmail;
     @FXML
+    private Label birthday;
+    @FXML
     private Label telegram;
     @FXML
     private FlowPane tags;
@@ -52,6 +55,9 @@ public class PersonCard extends UiPart<Region> {
     private Label uniqueId;
     @FXML
     private ImageView avatar;
+    @FXML
+    private Button notesButton;
+
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -68,6 +74,7 @@ public class PersonCard extends UiPart<Region> {
         secondaryEmail.setText(person.getSecondaryEmail().map(e -> e.value).orElse(""));
         telegram.setText(person.getTelegram().map(t -> t.value).orElse(""));
         avatar.setImage(person.getAvatar().getImage());
+        birthday.setText(person.getBirthday().map(b -> b.toString()).orElse(""));
         person.getEmergencyTags().stream()
             .sorted(Comparator.comparing(tag -> tag.tagName))
             .forEach(tag -> {
@@ -80,5 +87,21 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         uniqueId.setText(person.getId().map(x -> Integer.toString(x)).orElse("NONE"));
 
+        int numberOfNotes = person.getNotes().size();
+        notesButton.setText("Notes (" + numberOfNotes + ")");
+
+    }
+
+    /**
+     * Opens a new window to display the notes of the person.
+     */
+    @FXML
+    public void handleNotesButtonClick() {
+        try {
+            NotesWindow notesWindow = new NotesWindow(person);
+            notesWindow.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -9,13 +9,14 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Telegram {
     public static final String MESSAGE_CONSTRAINTS = "Telegram should start with the '@' symbol, "
-            + "should not contain whitespace, and should not be blank";
+            + "should not contain whitespace, should not be blank, with a minimum length of 5 characters. Use "
+            + "a-z, 0-9 and underscores.";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "@[^\\s]+";
+    public static final String VALIDATION_REGEX = "@[a-z0-9_]{5,}$";
 
     public final String value;
 

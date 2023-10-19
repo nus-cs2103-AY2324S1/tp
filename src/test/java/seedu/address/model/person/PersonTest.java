@@ -12,9 +12,14 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
+import java.time.MonthDay;
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
+
 
 public class PersonTest {
 
@@ -88,6 +93,51 @@ public class PersonTest {
         // different tags -> returns false
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
+
+        // different birthday -> returns false
+        editedAlice = new PersonBuilder(ALICE).withBirthday(MonthDay.of(6, 9)).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different linkedin -> returns false
+        editedAlice = new PersonBuilder(ALICE).withLinkedin("linkedin").build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different secondaryEmail -> returns false
+        editedAlice = new PersonBuilder(ALICE).withSecondaryEmail("alice@hotmail.com").build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different telegram -> returns false
+        editedAlice = new PersonBuilder(ALICE).withTelegram("@telegram").build();
+        assertFalse(ALICE.equals(editedAlice));
+    }
+
+    @Test
+    public void hasValid() {
+        Person person = new PersonBuilder().build();
+        assertFalse(person.hasValidTelegram());
+        assertFalse(person.hasValidBirthday());
+        assertFalse(person.hasValidLinkedin());
+        assertFalse(person.hasValidSecondaryEmail());
+        person = new PersonBuilder()
+                .withBirthday(MonthDay.of(6, 9))
+                .withLinkedin("linkedin")
+                .withTelegram("@telegram")
+                .withSecondaryEmail("email@email.com")
+                .build();
+        assertTrue(person.hasValidTelegram());
+        assertTrue(person.hasValidBirthday());
+        assertTrue(person.hasValidLinkedin());
+        assertTrue(person.hasValidSecondaryEmail());
+    }
+
+    @Test
+    public void hasSameEmailMethod() {
+        Person person = new PersonBuilder().withEmail("email@email.com").withSecondaryEmail("email@email.com").build();
+        assertTrue(person.hasRepeatedEmail());
+        person = new PersonBuilder().withEmail("email@email.com").withSecondaryEmail("email@gmail.com").build();
+        assertFalse(person.hasRepeatedEmail());
+        person = new PersonBuilder().withEmail("email@email.com").build();
+        assertFalse(person.hasRepeatedEmail());
     }
 
     @Test
@@ -95,5 +145,28 @@ public class PersonTest {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
+    }
+
+    @Test
+    public void getNonEmergencyTags() {
+        Person person = new PersonBuilder().withTags("RA", "SOS", "Friend", "Buddy").build();
+        Set<Tag> nonEmergencyTags = person.getNonEmergencyTags();
+        System.out.println(nonEmergencyTags);
+        assertEquals(nonEmergencyTags.size(), 2);
+        assertFalse(nonEmergencyTags.contains(new Tag("RA")));
+        assertFalse(nonEmergencyTags.contains(new Tag("SOS")));
+        assertTrue(nonEmergencyTags.contains(new Tag("Friend")));
+        assertTrue(nonEmergencyTags.contains(new Tag("Buddy")));
+    }
+
+    @Test
+    public void getEmergencyTags() {
+        Person person = new PersonBuilder().withTags("RA", "SOS", "Friend", "Buddy").build();
+        Set<Tag> emergencyTags = person.getEmergencyTags();
+        assertEquals(emergencyTags.size(), 2);
+        assertTrue(emergencyTags.contains(new Tag("RA")));
+        assertTrue(emergencyTags.contains(new Tag("SOS")));
+        assertFalse(emergencyTags.contains(new Tag("Friend")));
+        assertFalse(emergencyTags.contains(new Tag("Buddy")));
     }
 }

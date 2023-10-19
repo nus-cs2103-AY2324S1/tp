@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.Button?>
 
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <ImageView fx:id="avatar" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
@@ -40,6 +41,10 @@
       <Label fx:id="linkedin" styleClass="cell_small_label" text="\$linkedin" />
       <Label fx:id="secondaryEmail" styleClass="cell_small_label" text="\$secondaryEmail" />
       <Label fx:id="telegram" styleClass="cell_small_label" text="\$telegram" />
+      <Label fx:id="birthday" styleClass="cell_small_label" text="\$birthday" />
+      <HBox spacing="5" alignment="CENTER_RIGHT">
+        <Button fx:id="notesButton" onAction="#handleNotesButtonClick" text="Notes (0)" />
+      </HBox>
     </VBox>
   </GridPane>
 </HBox>

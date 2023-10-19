@@ -2,6 +2,7 @@ package seedu.address.model.util;
 
 import java.time.MonthDay;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -12,6 +13,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -40,7 +42,10 @@ public class SampleDataUtil {
                 Optional.empty(),
                 Optional.empty(),
                 Optional.empty(),
-                getTagSet("classmates"), Optional.empty()),
+                getTagSet("classmates"),
+                Optional.empty(),
+                getNoteList("Irfan has a cool sister.")),
+
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"),
                 getTagSet("colleagues"))
@@ -66,6 +71,15 @@ public class SampleDataUtil {
         return Arrays.stream(strings)
                 .map(Tag::new)
                 .collect(Collectors.toSet());
+    }
+
+    /**
+     * Returns a notes set containing the notes of strings given.
+     */
+    public static List<Note> getNoteList(String... strings) {
+        return Arrays.stream(strings)
+            .map(Note::new)
+            .collect(Collectors.toList());
     }
 
 }

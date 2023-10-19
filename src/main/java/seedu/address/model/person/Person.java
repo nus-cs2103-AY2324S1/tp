@@ -2,8 +2,10 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
@@ -34,6 +36,8 @@ public class Person {
     private Optional<Integer> id;
     private Avatar avatar = new Avatar();
 
+    private List<Note> notes;
+
     /**
      * Every field must be present and not null.
      */
@@ -49,6 +53,7 @@ public class Person {
         this.telegram = Optional.empty();
         this.tags.addAll(tags);
         this.id = Optional.empty();
+        this.notes = new ArrayList<>();
     }
 
     /**
@@ -56,7 +61,8 @@ public class Person {
      */
     public Person(Name name, Phone phone, Email email, Address address, Optional<Birthday> birthday,
                   Optional<Linkedin> linkedin, Optional<Email> secondaryEmail,
-                  Optional<Telegram> telegram, Set<Tag> tags, Optional<Integer> id) {
+                  Optional<Telegram> telegram, Set<Tag> tags, Optional<Integer> id,
+                  List<Note> notes) {
         requireAllNonNull(name, phone, email, address, birthday, tags);
         this.name = name;
         this.phone = phone;
@@ -68,14 +74,16 @@ public class Person {
         this.telegram = telegram;
         this.tags.addAll(tags);
         this.id = id;
+        this.notes = notes;
     }
 
     /**
-     * Constructor allowing to add avatar.
+     * Constructor allowing to add all attributes.
      */
     public Person(Name name, Phone phone, Email email, Address address, Optional<Birthday> birthday,
                   Optional<Linkedin> linkedin, Optional<Email> secondaryEmail,
-                  Optional<Telegram> telegram, Set<Tag> tags, Optional<Integer> id, Avatar avatar) {
+                  Optional<Telegram> telegram, Set<Tag> tags, Optional<Integer> id,
+                  Avatar avatar, List<Note> notes) {
         requireAllNonNull(name, phone, email, address, birthday, tags);
         this.name = name;
         this.phone = phone;
@@ -88,6 +96,7 @@ public class Person {
         this.tags.addAll(tags);
         this.id = id;
         this.avatar = avatar;
+        this.notes = notes;
     }
 
     public Name getName() {
@@ -104,10 +113,6 @@ public class Person {
 
     public Address getAddress() {
         return address;
-    }
-
-    public void setBirthday(Birthday birthday) {
-        this.birthday = Optional.of(birthday);
     }
 
     public Optional<Birthday> getBirthday() {
@@ -144,8 +149,8 @@ public class Person {
      */
     public Set<Tag> getNonEmergencyTags() {
         return tags.stream()
-            .filter(tag -> !Tag.EmergencyTags.isEmergencyTag(tag.tagName))
-            .collect(Collectors.toSet());
+                .filter(tag -> !Tag.EmergencyTags.isEmergencyTag(tag.tagName))
+                .collect(Collectors.toSet());
     }
 
     /**
@@ -154,8 +159,8 @@ public class Person {
      */
     public Set<Tag> getEmergencyTags() {
         return tags.stream()
-            .filter(tag -> Tag.EmergencyTags.isEmergencyTag(tag.tagName))
-            .collect(Collectors.toSet());
+                .filter(tag -> Tag.EmergencyTags.isEmergencyTag(tag.tagName))
+                .collect(Collectors.toSet());
     }
     public Optional<Integer> getId() {
         return id;
@@ -182,6 +187,22 @@ public class Person {
                 && otherPerson.getName().equals(getName());
     }
 
+    /**
+     * Adds a note to the person.
+     * @param note
+     */
+    public void addNote(Note note) {
+        notes.add(note);
+    }
+
+    /**
+     * Removes a note from the person.
+     * @param idx
+     * @throws Exception
+     */
+    public void removeNote(int idx) {
+        notes.remove(idx);
+    }
 
     /**
      * Returns true if both persons have the same identity and data fields.
@@ -203,7 +224,53 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
+                && telegram.equals(otherPerson.telegram)
+                && linkedin.equals(otherPerson.linkedin)
+                && birthday.equals(otherPerson.birthday)
+                && secondaryEmail.equals(otherPerson.secondaryEmail)
                 && tags.equals(otherPerson.tags);
+    }
+
+    public List<Note> getNotes() {
+        return notes;
+    }
+
+    /**
+     * Returns true if birthday has a value.
+     */
+    public boolean hasValidBirthday() {
+        return !birthday.equals(Optional.empty());
+    }
+
+    /**
+     * Returns true if linkedin has a value.
+     */
+    public boolean hasValidLinkedin() {
+        return !linkedin.equals(Optional.empty());
+    }
+
+    /**
+     * Returns true if secondaryEmail has a value.
+     */
+    public boolean hasValidSecondaryEmail() {
+        return !secondaryEmail.equals(Optional.empty());
+    }
+
+    /**
+     * Returns true if telegram has a value.
+     */
+    public boolean hasValidTelegram() {
+        return !telegram.equals(Optional.empty());
+    }
+
+    /**
+     * Returns true if the person has same primary and secondary email.
+     */
+    public boolean hasRepeatedEmail() {
+        if (secondaryEmail.equals(Optional.empty())) {
+            return false;
+        }
+        return email.equals(secondaryEmail.get());
     }
 
     @Override
@@ -222,5 +289,4 @@ public class Person {
                 .add("tags", tags)
                 .toString();
     }
-
 }
