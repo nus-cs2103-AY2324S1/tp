@@ -27,6 +27,11 @@ public class DeleteEventCommand extends Command {
     public static final String MESSAGE_NO_EVENT = "There is no valid existing event at this timing.";
     private final LocalDateTime eventTime;
 
+    /**
+     * Creates a DeleteEventCommand to delete an event from the calendar.
+     *
+     * @param eventTime time of the event to delete.
+     */
     public DeleteEventCommand(LocalDateTime eventTime) {
         requireNonNull(eventTime);
         this.eventTime = eventTime;

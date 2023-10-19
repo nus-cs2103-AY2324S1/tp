@@ -128,6 +128,11 @@ public class AllDaysEventListManager {
         return this.dayToEventListMap.isEmpty();
     }
 
+    /**
+     * Checks if there are any events at all in the manager.
+     *
+     * @return true if there are any events in the manager, false otherwise.
+     */
     public boolean hasEvents() {
         if (!this.isEmpty()) {
             return dayToEventListMap.values().stream().map(SingleDayEventList::isEmpty).allMatch(x -> x.equals(true));

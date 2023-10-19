@@ -7,13 +7,13 @@ import static seedu.address.model.event.EventPeriod.DATE_TIME_STRING_FORMATTER;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.EventBuilder.DEFAULT_START_TIME_STRING;
 
+import java.time.LocalDateTime;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.event.AllDaysEventListManager;
 import seedu.address.model.event.Event;
 import seedu.address.testutil.EventBuilder;
-
-import java.time.LocalDateTime;
 
 public class CalendarTest {
     private final Calendar calendar = new Calendar();
@@ -81,7 +81,7 @@ public class CalendarTest {
     }
 
     @Test
-    public void findEventAt_validEvent_Successful() {
+    public void findEventAt_validEvent_successful() {
         Calendar oneEventCalendar = new Calendar();
         Event sample = new EventBuilder().build();
         oneEventCalendar.addEvent(sample);

@@ -95,6 +95,11 @@ public class Calendar {
         return this.eventManager.isEmpty();
     }
 
+    /**
+     * Checks if there are any events at all in the calendar.
+     *
+     * @return true if there are events in the calendar, false otherwise.
+     */
     public boolean hasEvents() {
         if (!this.isEmpty()) {
             return !eventManager.hasEvents();

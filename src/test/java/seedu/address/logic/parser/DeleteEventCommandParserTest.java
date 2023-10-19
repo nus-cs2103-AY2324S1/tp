@@ -1,16 +1,15 @@
 package seedu.address.logic.parser;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.logic.commands.AddEventCommand;
-import seedu.address.logic.commands.DeleteEventCommand;
-import seedu.address.model.event.EventDescription;
-
-import java.time.LocalDateTime;
-
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.model.event.EventPeriod.DATE_TIME_STRING_FORMATTER;
+
+import java.time.LocalDateTime;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.commands.DeleteEventCommand;
 
 class DeleteEventCommandParserTest {
     private static final DeleteEventCommandParser parser = new DeleteEventCommandParser();
