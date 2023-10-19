@@ -37,7 +37,7 @@ public class TypicalCards {
         return ab;
     }
     public static List<Card> getTypicalCards() {
-        low.setPriority(Integer.MIN_VALUE);
-        return new ArrayList<>(Arrays.asList(CS2100, CS1101S, CS1231S, high, low));
+        LOW.setPriority(Integer.MIN_VALUE);
+        return new ArrayList<>(Arrays.asList(CS2100, CS1101S, CS1231S, HIGH, LOW));
     }
 }
