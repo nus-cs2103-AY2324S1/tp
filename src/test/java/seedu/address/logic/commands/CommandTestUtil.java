@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEAREST_MRT_STATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEC_LEVEL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_IN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -80,6 +81,14 @@ public class CommandTestUtil {
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
+
+    public static final String VALID_SEQUENCE_ASC = "ASC";
+    public static final String VALID_SEQUENCE_DESC = "DESC";
+
+    public static final String SEQUENCE_ASC = " " + PREFIX_SORT_IN + VALID_SEQUENCE_ASC;
+    public static final String SEQUENCE_DESC = " " + PREFIX_SORT_IN + VALID_SEQUENCE_DESC;
+
+
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)

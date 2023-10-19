@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.SortIn;
 import seedu.address.model.person.Student;
 
 /**
@@ -56,7 +57,8 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
-     * Returns true if a student with the same identity as {@code student} exists in the address book.
+     * Returns true if a student with the same identity as {@code student} exists in
+     * the address book.
      */
     boolean hasPerson(Student student);
 
@@ -80,17 +82,32 @@ public interface Model {
      */
     void setPerson(Student target, Student editedStudent);
 
+    // =========== Filtered Student List Accessors
+    // =============================================================
+
+    // =========== Filtered Student List Accessors
+    // =============================================================
+
+    // =========== Filtered Student List Accessors
+    // =============================================================
+
     /** Returns an unmodifiable view of the filtered student list */
     ObservableList<Student> getFilteredPersonList();
 
     /**
-     * Updates the filter of the filtered student list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered student list to filter by the given
+     * {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Student> predicate);
 
+    void updateSortedPersonList(SortIn sortIn);
+
     /**
-     * Get the student object from filtered student list by name if exists, return None if the student does not exist.
+     * Get the student object from filtered student list by name if exists, return
+     * None if the student does not exist.
+     *
      * @param name the name of the student the caller want to get.
      * @return The student object in the filteredlist at the given index.
      */

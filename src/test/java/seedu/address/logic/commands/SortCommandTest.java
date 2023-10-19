@@ -2,14 +2,9 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -18,8 +13,6 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.Messages;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -27,65 +20,27 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.SortIn;
 import seedu.address.model.person.Student;
-import seedu.address.testutil.PersonBuilder;
 
-public class AddCommandTest {
-
-    @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
-    }
+public class SortCommandTest {
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
+    public void execute_personAcceptedByModel_sortSuccessful() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Student validStudent = new PersonBuilder().build();
+        SortIn validSortIn = new SortIn("ASC");
 
-        CommandResult commandResult = new AddCommand(validStudent).execute(modelStub);
+        CommandResult commandResult = new SortCommand(validSortIn).execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validStudent)),
-                commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validStudent), modelStub.personsAdded);
-    }
-
-    @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Student validStudent = new PersonBuilder().build();
-        AddCommand addCommand = new AddCommand(validStudent);
-        ModelStub modelStub = new ModelStubWithPerson(validStudent);
-
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
-    }
-
-    @Test
-    public void equals() {
-        Student alice = new PersonBuilder().withName("Alice").build();
-        Student bob = new PersonBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
-
-        // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
-
-        // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
-
-        // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
-
-        // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
-
-        // different student -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        assertEquals(String.format(SortCommand.MESSAGE_SUCCESS), commandResult.getFeedbackToUser());
     }
 
     @Test
     public void toStringMethod() {
-        AddCommand addCommand = new AddCommand(ALICE);
-        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
-        assertEquals(expected, addCommand.toString());
+        String sequence = "ASC";
+        SortIn validSortIn = new SortIn(sequence);
+
+        SortCommand sortCommand = new SortCommand(validSortIn);
+        String expected = SortCommand.class.getCanonicalName() + "{sortIn=" + sequence + "}";
+        assertEquals(expected, sortCommand.toString());
     }
 
     /**
@@ -154,7 +109,7 @@ public class AddCommandTest {
 
         @Override
         public ObservableList<Student> getFilteredPersonList() {
-            throw new AssertionError("This method should not be called.");
+            return null;
         }
 
         @Override
@@ -163,37 +118,34 @@ public class AddCommandTest {
         }
 
         @Override
-        public void updateSortedPersonList(SortIn sequence) {
-            throw new AssertionError("You shall not sort.");
+        public void updateSortedPersonList(SortIn sortIn) {
+
         }
 
+        /**
+         * Get the student object from filtered student list by name if exists, return
+         * None if the student does not exist.
+         *
+         * @param name the name of the student the caller want to get.
+         * @return The student object in the filteredlist at the given index.
+         */
         @Override
         public Optional<Student> getStudentFromFilteredPersonListByName(Name name) {
-            throw new AssertionError("This method should not be called.");
+            return Optional.empty();
         }
 
+        /**
+         * Get the student object from filtered student list by index if exists, return
+         * None if the student does not exist.
+         *
+         * @param index the index of the student the caller want to get.
+         * @return The student object in the filteredlist with the given name.
+         */
         @Override
         public Optional<Student> getStudentFromFilteredPersonListByIndex(Index index) {
-            throw new AssertionError("This method should not be called.");
-        }
-    }
-
-    /**
-     * A Model stub that contains a single student.
-     */
-    private class ModelStubWithPerson extends ModelStub {
-        private final Student student;
-
-        ModelStubWithPerson(Student student) {
-            requireNonNull(student);
-            this.student = student;
+            return Optional.empty();
         }
 
-        @Override
-        public boolean hasPerson(Student student) {
-            requireNonNull(student);
-            return this.student.isSamePerson(student);
-        }
     }
 
     /**
