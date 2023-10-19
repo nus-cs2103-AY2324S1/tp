@@ -17,7 +17,7 @@ public class AddBandCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a band to the address book. "
             + "Parameters: "
-            + PREFIX_NAME + "NAME "
+            + PREFIX_NAME + "NAME\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "My garage band";
 

@@ -79,12 +79,10 @@ public class UniqueMusicianList implements Iterable<Musician> {
             throw new MusicianNotFoundException();
         }
     }
-
     public void setMusicians(UniqueMusicianList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
-
     /**
      * Replaces the contents of this list with {@code musicians}.
      * {@code musicians} must not contain duplicate musicians.
@@ -97,7 +95,9 @@ public class UniqueMusicianList implements Iterable<Musician> {
 
         internalList.setAll(musicians);
     }
-
+    public Musician getMusician(int index) {
+        return internalList.get(index);
+    }
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
