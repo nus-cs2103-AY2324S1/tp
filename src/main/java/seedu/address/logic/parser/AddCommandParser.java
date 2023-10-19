@@ -48,7 +48,28 @@ public class AddCommandParser implements Parser<AddCommand> {
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_NRIC,
                 PREFIX_LICENCE_PLATE, PREFIX_ADDRESS)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            String errorMessage = "Error: Some of the required fields are missing. " +
+                    "\n"
+                    + "Please include the following: ";
+            if (argMultimap.getValue(PREFIX_NAME).isEmpty()) {
+                errorMessage += "- Name(n/) ";
+            }
+            if (argMultimap.getValue(PREFIX_PHONE).isEmpty()) {
+                errorMessage += "- Phone(p/) ";
+            }
+            if (argMultimap.getValue(PREFIX_EMAIL).isEmpty()) {
+                errorMessage += "- Email(e/) ";
+            }
+            if (argMultimap.getValue(PREFIX_NRIC).isEmpty()) {
+                errorMessage += "- NRIC(i/) ";
+            }
+            if (argMultimap.getValue(PREFIX_LICENCE_PLATE).isEmpty()) {
+                errorMessage += "- License Plate(I/) ";
+            }
+            if (argMultimap.getValue(PREFIX_ADDRESS).isEmpty()) {
+                errorMessage += "- Address(a/) ";
+            }
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, errorMessage));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_NRIC,
@@ -60,6 +81,26 @@ public class AddCommandParser implements Parser<AddCommand> {
         LicencePlate licencePlate = ParserUtil.parseLicencePlate(argMultimap.getValue(PREFIX_LICENCE_PLATE).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+
+        if (!arePrefixesAbsent(argMultimap, PREFIX_POLICY_NUMBER, PREFIX_POLICY_ISSUE_DATE,
+                PREFIX_POLICY_EXPIRY_DATE)) {
+            if (!arePrefixesPresent(argMultimap, PREFIX_POLICY_NUMBER, PREFIX_POLICY_ISSUE_DATE,
+                    PREFIX_POLICY_EXPIRY_DATE)) {
+                String errorMessage = "Please include either all or none of the policy variables. "
+                        + "\n"
+                        + "You are missing the following: ";
+                if (argMultimap.getValue(PREFIX_POLICY_NUMBER).isEmpty()) {
+                    errorMessage += "- Policy Number(pn/) ";
+                }
+                if (argMultimap.getValue(PREFIX_POLICY_ISSUE_DATE).isEmpty()) {
+                    errorMessage += "- Policy Issue Date(pi/) ";
+                }
+                if (argMultimap.getValue(PREFIX_POLICY_EXPIRY_DATE).isEmpty()) {
+                    errorMessage += "- Policy Expiry Date(pe/) ";
+                }
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, errorMessage));
+            }
+        }
 
         // temporary variables to change
         PolicyNumber policyNumber = new PolicyNumber(PolicyNumber.DEFAULT_VALUE);
@@ -87,6 +128,14 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    /**
+     * Returns true if all of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean arePrefixesAbsent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isEmpty());
     }
 
 }
