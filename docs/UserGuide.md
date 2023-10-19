@@ -6,15 +6,15 @@ title: User Guide
 # Table of Contents
 
 - [Introduction](#Introduction)
-- [Quick Start](#Quick Start)
-- [GUI Summary](#GUI Summary)
+- [Quick Start](#QuickStart)
+- [GUI Summary](#GUISummary)
 - [Features](#Features)
-- [Frequently Asked Questions](#FAQ)
-- [Known Issues](#Known Issues)
-- [Command Summary](#Command Summary)
-  - [General Command](##General Command)
-  - [Application Management Command](##Application Management Command)
-  - [Interview Management Command](##Interview Management Command)
+- [Frequently Asked Questions](#FrequentlyAskedQuetions)
+- [Known Issues](#KnownIssues)
+- [Command Summary](#CommandSummary)
+  - [General Command](##GeneralCommand)
+  - [Application Management Command](##ApplicationManagementCommand)
+  - [Interview Management Command](##InterviewManagementCommand)
 - [Glossary](#Glossary)
 
 --------------------------------------------------------------------------------------------------------------------
