@@ -94,6 +94,16 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void addEvent_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.addEvent(null));
+    }
+
+    @Test
+    public void deleteEvent_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.deleteEventAt(null));
+    }
+
+    @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
