@@ -33,8 +33,8 @@ public class AppointmentCard extends UiPart<Region> {
         super(FXML);
         this.appointment = appointment;
         id.setText(displayedIndex + ". ");
-        name.setText(appointment.getName());
-        date.setText(appointment.getDate());
-        time.setText(appointment.getTime());
+        name.setText(appointment.getName().fullName);
+        date.setText("Date: " + appointment.getDate());
+        time.setText("Time: " + appointment.getTime());
     }
 }
