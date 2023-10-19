@@ -45,6 +45,11 @@ public class TagMatchesPredicate implements Predicate<Musician> {
     }
 
     @Override
+    public int hashCode() {
+        return tagNames.hashCode();
+    }
+
+    @Override
     public String toString() {
         return new ToStringBuilder(this).add("tags", tagNames).toString();
     }

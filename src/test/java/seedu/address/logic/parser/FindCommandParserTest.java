@@ -4,8 +4,8 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -35,7 +35,7 @@ public class FindCommandParserTest {
     @Test
     public void parse_validArgsWithNameKeywords_returnsFindCommand() {
         // no leading and trailing whitespaces
-        ArrayList<Predicate<Musician>> predicates = new ArrayList<>(Arrays.asList(
+        HashSet<Predicate<Musician>> predicates = new HashSet<>(Arrays.asList(
                 new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob"))
         ));
         FindCommand expectedFindCommand =
@@ -49,7 +49,7 @@ public class FindCommandParserTest {
     @Test
     public void parse_validArgsWithTagMatches_returnsFindCommand() {
         // no leading and trailing whitespaces
-        ArrayList<Predicate<Musician>> predicates = new ArrayList<>(Arrays.asList(
+        HashSet<Predicate<Musician>> predicates = new HashSet<>(Arrays.asList(
                 new TagMatchesPredicate(Arrays.asList("friends", "cool"))
         ));
         FindCommand expectedFindCommand =
@@ -62,7 +62,7 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_validArgsWithMixedPredicates_returnsFindCommand() {
-        ArrayList<Predicate<Musician>> predicates = new ArrayList<>(Arrays.asList(
+        HashSet<Predicate<Musician>> predicates = new HashSet<>(Arrays.asList(
                 new NameContainsKeywordsPredicate(Arrays.asList("Alice")),
                 new InstrumentMatchesPredicate(Arrays.asList("guitar", "drums")),
                 new GenreMatchesPredicate(Arrays.asList("rock"))

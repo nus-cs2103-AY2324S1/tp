@@ -7,8 +7,8 @@ import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MUSICIAN;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -74,7 +74,7 @@ public class AddressBookParserTest {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " n/" + keywords.stream().collect(Collectors.joining(" n/")));
-        ArrayList<Predicate<Musician>> predicates = new ArrayList<>(Arrays.asList(
+        HashSet<Predicate<Musician>> predicates = new HashSet<>(Arrays.asList(
                 new NameContainsKeywordsPredicate(keywords)
         ));
         assertEquals(new FindCommand(predicates), command);

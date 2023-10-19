@@ -6,7 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_INSTRUMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -42,7 +42,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         List<String> instruments = argMultimap.getAllValues(PREFIX_INSTRUMENT);
         List<String> genres = argMultimap.getAllValues(PREFIX_GENRE);
 
-        ArrayList<Predicate<Musician>> predicates = new ArrayList<>();
+        HashSet<Predicate<Musician>> predicates = new HashSet<>();
         if (!names.isEmpty()) {
             predicates.add(new NameContainsKeywordsPredicate(names));
         }

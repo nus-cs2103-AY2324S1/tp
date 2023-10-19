@@ -6,7 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_INSTRUMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -32,14 +32,14 @@ public class FindCommand extends Command {
             + "[" + PREFIX_GENRE + "GENRE]...\n"
             + "Example: " + COMMAND_WORD + " n/Alice i/piano";
 
-    private final ArrayList<Predicate<Musician>> predicates;
+    private final HashSet<Predicate<Musician>> predicates;
 
     /**
      * Creates a FindCommand to find the specified {@code Musician}.
      *
      * @param predicates the list of predicates to filter the list of musicians.
      */
-    public FindCommand(ArrayList<Predicate<Musician>> predicates) {
+    public FindCommand(HashSet<Predicate<Musician>> predicates) {
         this.predicates = predicates;
     }
 

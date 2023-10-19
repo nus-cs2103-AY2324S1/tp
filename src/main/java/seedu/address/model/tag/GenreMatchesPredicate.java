@@ -39,6 +39,11 @@ public class GenreMatchesPredicate extends TagMatchesPredicate {
     }
 
     @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
     public String toString() {
         return new ToStringBuilder(this).add("genres", super.getTagNames()).toString();
     }
