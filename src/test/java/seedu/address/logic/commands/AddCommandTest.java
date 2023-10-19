@@ -178,6 +178,11 @@ public class AddCommandTest {
         public void updateFilteredInterviewList(Predicate<Interview> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+        
+        @Override
+        public void deleteInterview(Interview interview) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
