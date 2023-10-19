@@ -124,6 +124,7 @@ public class ModelManager implements Model {
         requireAllNonNull(band);
         addressBook.addBand(band);
     }
+
     @Override
     public boolean hasMusicianInBand(int bandIndex, int musicianIndex) {
         requireNonNull(bandIndex);
@@ -136,6 +137,7 @@ public class ModelManager implements Model {
         requireNonNull(musicianIndex);
         addressBook.addMusicianToBand(bandIndex, filteredMusicians.get(musicianIndex));
     }
+
 
 
     //=========== Filtered Musician List Accessors =============================================================
@@ -167,6 +169,10 @@ public class ModelManager implements Model {
 
     //=========== Filtered Band List Accessors =============================================================
 
+    /**
+     * Returns an unmodifiable view of the list of {@code Band} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
     @Override
     public ObservableList<Band> getFilteredBandList() {
         return filteredBands;
