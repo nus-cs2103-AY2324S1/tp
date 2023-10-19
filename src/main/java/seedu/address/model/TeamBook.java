@@ -6,6 +6,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.person.IdentityCode;
+import seedu.address.model.person.Name;
 import seedu.address.model.team.Team;
 import seedu.address.model.team.UniqueTeamList;
 import seedu.address.model.team.exceptions.TeamNotFoundException;
@@ -91,6 +92,24 @@ public class TeamBook implements ReadOnlyTeamBook {
     }
 
     /**
+     * Retrieves the Team Leader Identity code of the team from the TeamBook by his team name.
+     *
+     * @param teamName The name of the team to retrieve its team leader Identity code.
+     * @return The Team Leader Identity code if found, or null if the team does not exist.
+     */
+    public IdentityCode getTeamLeaderIDOfTeam(String teamName) {
+        requireNonNull(teamName);
+        return teams.getTeamLeaderIDOfTeam(teamName);
+    }
+
+    public void setTeamLeaderOfTeam(String teamName, IdentityCode newTeamLeaderID) {
+        requireNonNull(teamName);
+        requireNonNull(newTeamLeaderID);
+        teams.setTeamLeaderOfTeam(teamName, newTeamLeaderID);
+
+    }
+
+    /**
      * Adds a new team to the TeamBook.
      *
      * @param team Team to be added.
@@ -141,6 +160,10 @@ public class TeamBook implements ReadOnlyTeamBook {
 
     public void addDevToTeam(String teamToAddTo, IdentityCode devToAddIdentityCode) {
         teams.addDevToTeam(teamToAddTo, devToAddIdentityCode);
+    }
+
+    public void editTeamName(String originalTeamName, String newTeamName) {
+        teams.editTeamName(originalTeamName, newTeamName);
     }
 
     @Override

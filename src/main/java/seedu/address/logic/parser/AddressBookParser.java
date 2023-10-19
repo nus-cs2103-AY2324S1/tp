@@ -60,6 +60,12 @@ public class AddressBookParser {
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
+        case EditTeamNameCommand.COMMAND_WORD:
+            return new EditTeamNameCommandParser().parse(arguments);
+
+        case EditTeamLeaderCommand.COMMAND_WORD:
+            return new EditTeamLeaderCommandParser().parse(arguments);
+
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 

@@ -27,7 +27,7 @@ public class AddDevToTeamCommand extends Command {
             + "\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TEAMNAME + "ABC "
-            + PREFIX_NAME + "John Doe ";
+            + PREFIX_NAME + "John Doe";
 
 
     public static final String MESSAGE_SUCCESS = "New developer added: %1$s";
