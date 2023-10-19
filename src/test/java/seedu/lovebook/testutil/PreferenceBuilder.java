@@ -1,7 +1,10 @@
 package seedu.lovebook.testutil;
 
 import seedu.lovebook.logic.commands.SetPrefCommand;
-import seedu.lovebook.model.person.*;
+import seedu.lovebook.model.person.Age;
+import seedu.lovebook.model.person.Gender;
+import seedu.lovebook.model.person.Height;
+import seedu.lovebook.model.person.Income;
 import seedu.lovebook.model.person.horoscope.Horoscope;
 
 public class PreferenceBuilder {

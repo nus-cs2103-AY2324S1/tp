@@ -42,6 +42,13 @@ public class SetPrefCommandTest {
                 commandResult.getFeedbackToUser());
     }
 
+    @Test
+    public void execute_emptyPreference_throwException() throws Exception {
+        ModelStubAcceptingPreferenceAdded modelStub = new ModelStubAcceptingPreferenceAdded();
+        SetPrefCommand.SetPreferenceDescriptor emptyPreference = new SetPrefCommand.SetPreferenceDescriptor();
+        assertThrows(RuntimeException.class, () -> new SetPrefCommand(emptyPreference).execute(modelStub));
+    }
+
     /**
      * A default model stub that have all of the methods failing.
      */

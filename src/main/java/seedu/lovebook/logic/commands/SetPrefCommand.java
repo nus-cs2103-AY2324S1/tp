@@ -58,7 +58,9 @@ public class SetPrefCommand extends Command {
      */
     public SetPrefCommand(SetPreferenceDescriptor setPreferenceDescriptor) {
         requireNonNull(setPreferenceDescriptor);
-
+        if (!setPreferenceDescriptor.isAnyFieldEdited()) {
+            throw new RuntimeException("SetPreferenceDescriptor cannot have empty fields");
+        }
         this.setPreferenceDescriptor = new SetPreferenceDescriptor(setPreferenceDescriptor);
     }
 
