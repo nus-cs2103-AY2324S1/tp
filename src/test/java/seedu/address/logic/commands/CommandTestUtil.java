@@ -131,11 +131,13 @@ public class CommandTestUtil {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
-        List<Member> expectedFilteredList = new ArrayList<>(actualModel.getFilteredMemberList());
+        List<Member> expectedFilteredMemberList = new ArrayList<>(actualModel.getFilteredMemberList());
+        List<Event> expectedFilteredEventList = new ArrayList<>(actualModel.getFilteredEventList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
-        assertEquals(expectedFilteredList, actualModel.getFilteredMemberList());
+        assertEquals(expectedFilteredMemberList, actualModel.getFilteredMemberList());
+        assertEquals(expectedFilteredEventList, actualModel.getFilteredEventList());
     }
     /**
      * Updates {@code model}'s filtered list to show only the member at the given {@code targetIndex} in the

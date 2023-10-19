@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.event.Event;
 import seedu.address.model.member.Member;
 
 /**
@@ -19,6 +20,15 @@ public class AddressBookBuilder {
     public AddressBookBuilder(AddressBook addressBook) {
         this.addressBook = addressBook;
     }
+
+    /**
+     * Adds a new {@code Event} to the {@code AddressBook} that we are building.
+     */
+    public AddressBookBuilder withEvent(Event event) {
+        addressBook.createEvent(event);
+        return this;
+    }
+
 
     /**
      * Adds a new {@code Member} to the {@code AddressBook} that we are building.

@@ -325,7 +325,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3a. The given index is invalid.
 
     * 3a1. CCACommander shows an error message and requests for a valid index from the user.
-    * 3a2. User enters new index. 
+    * 3a2. User enters new index.
     * Steps 3a1-3a2 are repeated until index given by the user is correct.
 
       Use case resumes at step 4.
@@ -514,13 +514,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **CCA**: Co-Curricular Activities
-* **CLI**: Command Line Interface  
+* **CLI**: Command Line Interface
 * **Data archiving**: A feature related to data storage and archiving
-* **Event**: An activity entity of the application 
+* **Event**: An activity entity of the application
 * **Extensions**: Variations or deviations from the main success scenario in a use case
 * **GUI**: Graphical User Interface
 * **Jar file**: A Java Archive file used to distribute and run Java applications
-* **Mainstream OS**: Windows, Linux, Unix, OS-X 
+* **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Member**: An individual entity of the application
 * **MSS**: Main Success Scenario
 * **Non-Functional Requirements**: Constraints under which system is developed and operated

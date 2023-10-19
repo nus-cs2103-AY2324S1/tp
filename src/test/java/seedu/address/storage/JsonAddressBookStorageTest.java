@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalMembers.ALICE;
@@ -65,6 +66,9 @@ public class JsonAddressBookStorageTest {
         Path filePath = testFolder.resolve("TempAddressBook.json");
         AddressBook original = getTypicalAddressBook();
         JsonAddressBookStorage jsonAddressBookStorage = new JsonAddressBookStorage(filePath);
+
+        // Ensure there is a file path
+        assertNotNull(jsonAddressBookStorage.getAddressBookFilePath());
 
         // Save in new file and read back
         jsonAddressBookStorage.saveAddressBook(original, filePath);

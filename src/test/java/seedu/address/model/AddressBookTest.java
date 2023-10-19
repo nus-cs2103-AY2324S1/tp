@@ -90,6 +90,10 @@ public class AddressBookTest {
     public void getMemberList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getMemberList().remove(0));
     }
+    @Test
+    public void getEventList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> addressBook.getEventList().remove(0));
+    }
 
     @Test
     public void resetData_withDuplicateEvents_throwsDuplicateEventException() {
