@@ -74,6 +74,7 @@ public class ListAttendanceCommand extends ListCommand {
             model.addFilter(courseTutorialPredicate);
             numberOfStudents = model.getFilteredPersonList().size();
             model.addFilter(absencePredicate);
+
             int numberOfAbsentees = model.getFilteredPersonList().size();
             int numberOfPresentees = numberOfStudents - numberOfAbsentees;
 
@@ -81,7 +82,6 @@ public class ListAttendanceCommand extends ListCommand {
                     numberOfStudents, tn.getOneBased(), tag.getTagName());
             return new CommandResult(attendanceSummary + MESSAGE_SUCCESS);
         }
-
 
         model.addFilter(absencePredicate);
 
