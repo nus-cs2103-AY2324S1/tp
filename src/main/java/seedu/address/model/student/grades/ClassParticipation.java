@@ -50,4 +50,8 @@ public class ClassParticipation {
         return isParticipated == otherClassParticipation.isParticipated;
     }
 
+    @Override
+    public int hashCode() {
+        return Boolean.hashCode(isParticipated);
+    }
 }

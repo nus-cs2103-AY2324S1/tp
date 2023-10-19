@@ -52,4 +52,21 @@ public class AssignmentTrackerTest {
                 + "Assignment 2: 0 / 100\n"
                 + "Assignment 3: 0 / 100\n", assignmentTracker.toString());
     }
+
+    @Test
+    public void test_hashCode() {
+        AssignmentTracker assignmentTracker = new AssignmentTracker(13);
+
+        // same values -> returns true
+        assertTrue(assignmentTracker.hashCode() == new AssignmentTracker(13).hashCode());
+
+        // same object -> returns true
+        assertTrue(assignmentTracker.hashCode() == assignmentTracker.hashCode());
+
+        // null -> returns false
+        assertFalse(assignmentTracker.hashCode() == 0);
+
+        // different values -> returns false
+        assertFalse(assignmentTracker.hashCode() == new AssignmentTracker(26).hashCode());
+    }
 }

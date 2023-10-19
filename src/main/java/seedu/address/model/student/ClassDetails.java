@@ -3,6 +3,8 @@ package seedu.address.model.student;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.Objects;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.student.grades.AssignmentTracker;
@@ -11,30 +13,26 @@ import seedu.address.model.student.grades.ClassParticipationTracker;
 import seedu.address.storage.JsonAdaptedClassDetails;
 
 /**
- * Represents a Student's Class Number
- * in the address book.
+ * Represents a Student's Class Number in Class Manager.
  * Guarantees: immutable; is valid as declared in {@link #isValidClassDetails(String)}
  */
 public class ClassDetails {
 
-    public static final int TEMP_LENGTH = 10;
-
     public static final String MESSAGE_CONSTRAINTS = "Class number can take any values, and it should not be blank";
     public static final String MESSAGE_INVALID_GRADE = "Grade should be between 0 and 100";
     public static final String MESSAGE_INVALID_ASSIGNMENT_NUMBER = "Assignment number should "
-            + "be between 1 and " + TEMP_LENGTH;
+            + "be between 1 and %s";
     public static final String MESSAGE_INVALID_TUTORIAL_SESSION_NUMBER = "Tutorial session number should "
-            + "be between 1 and " + TEMP_LENGTH;
+            + "be between 1 and %s";
     public static final String MESSAGE_UNEQUAL_LENGTH = "The number of tutorial sessions and "
-            + "attendance records should be equal to " + TEMP_LENGTH;
+            + "attendance records should be equal.";
 
-    /*
-     * The class number should start with "T".
-     */
+    // The class number should start with "T".
     public static final String VALIDATION_REGEX = "T.*";
+    private static int tutorialCount = 10;
+    private static int assignmentCount = 10;
 
-    public final String value;
-
+    public final String classDetails;
     public final AttendanceTracker attendanceTracker;
     public final AssignmentTracker assignmentTracker;
     public final ClassParticipationTracker classParticipationTracker;
@@ -42,27 +40,27 @@ public class ClassDetails {
     /**
      * Constructs an {@code ClassDetails}.
      *
-     * @param classNumber A valid Class Number
+     * @param classDetails A valid Class Number
      *
      */
-    public ClassDetails(String classNumber) {
-        requireNonNull(classNumber);
-        checkArgument(isValidClassDetails(classNumber), MESSAGE_CONSTRAINTS);
-        value = classNumber;
-        attendanceTracker = new AttendanceTracker(TEMP_LENGTH);
-        classParticipationTracker = new ClassParticipationTracker(TEMP_LENGTH);
-        assignmentTracker = new AssignmentTracker(TEMP_LENGTH);
+    public ClassDetails(String classDetails) {
+        requireNonNull(classDetails);
+        checkArgument(isValidClassDetails(classDetails), MESSAGE_CONSTRAINTS);
+        this.classDetails = classDetails;
+        attendanceTracker = new AttendanceTracker(tutorialCount);
+        classParticipationTracker = new ClassParticipationTracker(tutorialCount);
+        assignmentTracker = new AssignmentTracker(assignmentCount);
     }
 
     /**
      * Constructs an {@code ClassDetails}, with the given class number, attendance tracker,
      * assignment tracker and class participation tracker.
      */
-    public ClassDetails(String classNumber, AttendanceTracker attendanceTracker,
+    public ClassDetails(String classDetails, AttendanceTracker attendanceTracker,
                         AssignmentTracker assignmentTracker, ClassParticipationTracker classParticipationTracker) {
-        requireNonNull(classNumber);
-        checkArgument(isValidClassDetails(classNumber), MESSAGE_CONSTRAINTS);
-        value = classNumber;
+        requireNonNull(classDetails);
+        checkArgument(isValidClassDetails(classDetails), MESSAGE_CONSTRAINTS);
+        this.classDetails = classDetails;
         this.attendanceTracker = attendanceTracker;
         this.classParticipationTracker = classParticipationTracker;
         this.assignmentTracker = assignmentTracker;
@@ -75,9 +73,25 @@ public class ClassDetails {
         return (test.matches(VALIDATION_REGEX));
     }
 
+    public static void setTutorialCount(int tutorialCount) {
+        ClassDetails.tutorialCount = tutorialCount;
+    }
+
+    public static int getTutorialCount() {
+        return tutorialCount;
+    }
+
+    public static void setAssignmentCount(int assignmentCount) {
+        ClassDetails.assignmentCount = assignmentCount;
+    }
+
+    public static int getAssignmentCount() {
+        return assignmentCount;
+    }
+
     @Override
     public String toString() {
-        return value;
+        return classDetails;
     }
 
     @Override
@@ -92,12 +106,15 @@ public class ClassDetails {
         }
 
         ClassDetails otherAddress = (ClassDetails) other;
-        return value.equals(otherAddress.value);
+        return classDetails.equals(otherAddress.classDetails)
+                && attendanceTracker.equals(otherAddress.attendanceTracker)
+                && classParticipationTracker.equals(otherAddress.classParticipationTracker)
+                && assignmentTracker.equals(otherAddress.assignmentTracker);
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return Objects.hash(classDetails, attendanceTracker, classParticipationTracker, assignmentTracker);
     }
 
     /**
@@ -107,8 +124,9 @@ public class ClassDetails {
      * @throws CommandException if the assignment number or grade is invalid
      */
     public void setAssignGrade(int assignmentNumber, int grade) throws CommandException {
-        if (assignmentNumber > TEMP_LENGTH || assignmentNumber <= 0) {
-            throw new CommandException(MESSAGE_INVALID_ASSIGNMENT_NUMBER);
+        if (assignmentNumber > assignmentCount || assignmentNumber <= 0) {
+            throw new CommandException(
+                    String.format(MESSAGE_INVALID_ASSIGNMENT_NUMBER, assignmentCount));
         }
         if (grade < 0 || grade > 100) {
             throw new CommandException(MESSAGE_INVALID_GRADE);
@@ -128,8 +146,9 @@ public class ClassDetails {
      * Records the class participation of the student for a particular tutorial session.
      */
     public void recordClassPart(int sessionNumber, boolean participated) throws CommandException {
-        if (sessionNumber > TEMP_LENGTH || sessionNumber <= 0) {
-            throw new CommandException(MESSAGE_INVALID_TUTORIAL_SESSION_NUMBER);
+        if (sessionNumber > tutorialCount || sessionNumber <= 0) {
+            throw new CommandException(
+                    String.format(MESSAGE_INVALID_TUTORIAL_SESSION_NUMBER, tutorialCount));
         }
 
         classParticipationTracker.markParticipation(Index.fromOneBased(sessionNumber), participated);
@@ -144,7 +163,7 @@ public class ClassDetails {
     }
 
     public JsonAdaptedClassDetails getJsonAdaptedClassDetails() {
-        return new JsonAdaptedClassDetails(value,
+        return new JsonAdaptedClassDetails(classDetails,
                 attendanceTracker.getJsonAttendanceTracker(),
                 assignmentTracker.getJsonAssignmentTracker(),
                 classParticipationTracker.getJsonClassParticipationTracker());

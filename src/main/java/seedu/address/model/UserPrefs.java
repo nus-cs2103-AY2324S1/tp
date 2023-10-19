@@ -15,6 +15,9 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
     private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
+    private boolean isConfigured = false;
+    private int tutorialCount = 10;
+    private int assignmentCount = 10;
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -36,6 +39,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
         setAddressBookFilePath(newUserPrefs.getAddressBookFilePath());
+        setConfigured(newUserPrefs.getConfigured());
     }
 
     public GuiSettings getGuiSettings() {
@@ -49,6 +53,14 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     public Path getAddressBookFilePath() {
         return addressBookFilePath;
+    }
+
+    public boolean getConfigured() {
+        return isConfigured;
+    }
+
+    public void setConfigured(boolean isConfigured) {
+        this.isConfigured = isConfigured;
     }
 
     public void setAddressBookFilePath(Path addressBookFilePath) {
@@ -69,20 +81,37 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
         UserPrefs otherUserPrefs = (UserPrefs) other;
         return guiSettings.equals(otherUserPrefs.guiSettings)
-                && addressBookFilePath.equals(otherUserPrefs.addressBookFilePath);
+                && addressBookFilePath.equals(otherUserPrefs.addressBookFilePath)
+                && isConfigured == otherUserPrefs.isConfigured;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(guiSettings, addressBookFilePath);
+        return Objects.hash(guiSettings, addressBookFilePath, isConfigured);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Gui Settings : " + guiSettings);
-        sb.append("\nLocal data file location : " + addressBookFilePath);
+        sb.append("Gui Settings : ").append(guiSettings);
+        sb.append("\nLocal data file location : ").append(addressBookFilePath);
+        sb.append("\nModule information configured : ").append(isConfigured);
         return sb.toString();
     }
 
+    public void setAssignmentCount(int assignmentCount) {
+        this.assignmentCount = assignmentCount;
+    }
+
+    public int getAssignmentCount() {
+        return assignmentCount;
+    }
+
+    public void setTutorialCount(int tutorialCount) {
+        this.tutorialCount = tutorialCount;
+    }
+
+    public int getTutorialCount() {
+        return tutorialCount;
+    }
 }

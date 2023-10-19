@@ -52,6 +52,6 @@ public class Assignment {
 
     @Override
     public int hashCode() {
-        return this.hashCode();
+        return marks.hashCode();
     }
 }

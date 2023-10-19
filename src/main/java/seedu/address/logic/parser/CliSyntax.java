@@ -18,4 +18,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_ASSIGNMENT = new Prefix("a/");
     public static final Prefix PREFIX_TUTORIAL_SESSION = new Prefix("tut/");
     public static final Prefix PREFIX_PARTICIPATION = new Prefix("part/");
+    public static final Prefix PREFIX_TUTORIAL_COUNT = new Prefix("#t/");
+    public static final Prefix PREFIX_ASSIGNMENT_COUNT = new Prefix("#a/");
 }

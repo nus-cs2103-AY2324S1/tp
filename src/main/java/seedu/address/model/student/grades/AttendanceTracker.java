@@ -85,7 +85,7 @@ public class AttendanceTracker {
     public String toString() {
         StringBuilder ret = new StringBuilder("Attendance:\n");
         for (int i = 0; i < attendanceList.length; i++) {
-            ret.append("Tutorial " + (i + 1) + ": " + attendanceList[i].toString() + "\n");
+            ret.append("Tutorial ").append(i + 1).append(": ").append(attendanceList[i].toString()).append("\n");
         }
         return ret.toString();
     }
@@ -107,7 +107,6 @@ public class AttendanceTracker {
 
     @Override
     public int hashCode() {
-        return attendanceList.hashCode();
+        return Arrays.hashCode(attendanceList);
     }
-
 }

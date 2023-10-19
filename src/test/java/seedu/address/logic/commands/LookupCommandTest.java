@@ -140,4 +140,12 @@ public class LookupCommandTest {
         String expected = LookupCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
         assertEquals(expected, lookupCommand.toString());
     }
+
+    @Test
+    public void test_hashCode() {
+        StudentContainsKeywordsPredicate predicate = new StudentContainsKeywordsPredicate("T11",
+                null, TypicalStudents.KEYWORD_MATCHING_MEIER, null, null, null);
+        LookupCommand lookupCommand = new LookupCommand(predicate);
+        assertEquals(lookupCommand.hashCode(), lookupCommand.hashCode());
+    }
 }

@@ -11,9 +11,8 @@ import java.util.stream.IntStream;
 import seedu.address.commons.core.index.Index;
 
 /**
- * Represents a Student's class participation grades
- * in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidClassParticipationTracker(int)}
+ * Represents a Student's class participation grades in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidClassPart(int)}
  */
 public class ClassParticipationTracker {
 
@@ -28,7 +27,6 @@ public class ClassParticipationTracker {
      *
      */
     public ClassParticipationTracker(int numOfTut) {
-        requireNonNull(numOfTut);
         checkArgument(isValidClassPart(numOfTut), MESSAGE_CONSTRAINTS);
         classPartList = new ClassParticipation[numOfTut];
         IntStream.range(0, numOfTut).forEach(i -> classPartList[i] = new ClassParticipation());
@@ -100,7 +98,7 @@ public class ClassParticipationTracker {
     public String toString() {
         StringBuilder ret = new StringBuilder("Class Part Tracker:\n");
         for (int i = 0; i < classPartList.length; i++) {
-            ret.append("Tutorial " + (i + 1) + ": " + classPartList[i].toString() + "\n");
+            ret.append("Tutorial ").append(i + 1).append(": ").append(classPartList[i].toString()).append("\n");
         }
         return ret.toString();
     }
@@ -122,7 +120,6 @@ public class ClassParticipationTracker {
 
     @Override
     public int hashCode() {
-        return classPartList.hashCode();
+        return Arrays.hashCode(classPartList);
     }
-
 }
