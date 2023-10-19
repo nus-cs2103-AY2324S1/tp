@@ -42,6 +42,12 @@ public class Band {
         return Collections.unmodifiableSet(musicians);
     }
 
+    public Set<Musician> getModifiableMusicianList() {
+        return musicians;
+    }
+    public boolean hasMusician(Musician musician) {
+        return musicians.contains(musician);
+    }
     /**
      * Returns true if both bands have the same name.
      * This defines a weaker notion of equality between two persons.

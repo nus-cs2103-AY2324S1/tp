@@ -19,6 +19,7 @@ public class Messages {
     public static final String MESSAGE_MUSICIANS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_INVALID_BAND_DISPLAYED_INDEX = "The band index provided is invalid";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -49,11 +50,23 @@ public class Messages {
     }
 
     /**
-     * Formats the {@code musician} for display to the user.
+     * Formats the {@code band} for display to the user.
      */
     public static String format(Band band) {
         final StringBuilder builder = new StringBuilder();
         builder.append(band.getName());
+        return builder.toString();
+    }
+
+    /**
+     * Formats the {@code band} for display to the user.
+     */
+    public static String format(int band, int musician) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append("Band Index: ")
+                .append(band)
+                .append("; Musician Index:")
+                .append(musician);
         return builder.toString();
     }
 

@@ -166,6 +166,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void updateFilteredMusicianList(int bandIndex) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredBandList(Predicate<Band> predicate) {
             throw new AssertionError("This method should not be called.");
         }
@@ -176,12 +181,22 @@ public class AddCommandTest {
         }
 
         @Override
-        public void updateFilteredMusicianListFromBands() {
+        public void addBand(Band band) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void addBand(Band band) {
+        public boolean hasMusicianInBand(int addInto, int toAdd) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addMusicianToBand(int addInto, int toAdd) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteBand(Band target) {
             throw new AssertionError("This method should not be called.");
         }
     }

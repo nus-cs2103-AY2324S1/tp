@@ -120,15 +120,29 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Replaces the given musician {@code target} in the list with {@code editedMusician}.
-     * {@code target} must exist in the address book.
-     * The musician identity of {@code editedMusician} must not be the same as another existing musician in the
-     * address book.
+     * Returns true if the musician already exists in the band.
      */
-    public void setBand(Band target, Band editedBand) {
-        requireNonNull(editedBand);
+    public boolean hasMusicianInBand(int bandIndex, int musicianIndex) {
+        requireNonNull(bandIndex);
+        requireNonNull(musicianIndex);
+        return bands.hasMusician(bandIndex, musicians.getMusician(musicianIndex));
+    }
 
-        bands.setBand(target, editedBand);
+    /**
+     * Adds a musician to a band.
+     */
+    public void addMusicianToBand(int bandIndex, Musician musician) {
+        requireNonNull(bandIndex);
+        requireNonNull(musician);
+        bands.addMusician(bandIndex, musician);
+    }
+
+    /**
+     * Removes a band from the address book.
+     * The band must exist in the address book.
+     */
+    public void removeBand(Band key) {
+        bands.remove(key);
     }
 
     //// util methods

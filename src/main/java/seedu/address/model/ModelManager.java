@@ -13,6 +13,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.band.Band;
 import seedu.address.model.musician.Musician;
+import seedu.address.model.musician.MusicianInBandPredicate;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -124,6 +125,26 @@ public class ModelManager implements Model {
         requireAllNonNull(band);
         addressBook.addBand(band);
     }
+
+    @Override
+    public boolean hasMusicianInBand(int bandIndex, int musicianIndex) {
+        requireNonNull(bandIndex);
+        requireNonNull(musicianIndex);
+        return addressBook.hasMusicianInBand(bandIndex, musicianIndex);
+    }
+
+    @Override
+    public void addMusicianToBand(int bandIndex, int musicianIndex) {
+        requireNonNull(bandIndex);
+        requireNonNull(musicianIndex);
+        addressBook.addMusicianToBand(bandIndex, filteredMusicians.get(musicianIndex));
+    }
+
+    @Override
+    public void deleteBand(Band target) {
+        addressBook.removeBand(target);
+    }
+
     //=========== Filtered Musician List Accessors =============================================================
 
     /**
@@ -141,18 +162,18 @@ public class ModelManager implements Model {
         filteredMusicians.setPredicate(predicate);
     }
 
-    /**
-     * Updates the {@code FilteredMusicianList} to contain all musicians in the {@code FilteredBands}.
-     */
-    public void updateFilteredMusicianListFromBands() {
-        requireNonNull(filteredBands);
-        for (Band b : filteredBands) {
-            filteredMusicians.addAll(b.getMusicians());
-        }
+    @Override
+    public void updateFilteredMusicianList(int bandIndex) {
+        Predicate<Musician> predicate = new MusicianInBandPredicate(filteredBands.get(bandIndex));
+        filteredMusicians.setPredicate(predicate);
     }
 
     //=========== Filtered Band List Accessors =============================================================
 
+    /**
+     * Returns an unmodifiable view of the list of {@code Band} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
     @Override
     public ObservableList<Band> getFilteredBandList() {
         return filteredBands;

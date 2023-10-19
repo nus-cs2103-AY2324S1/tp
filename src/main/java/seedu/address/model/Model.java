@@ -81,17 +81,27 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered musician list */
     ObservableList<Musician> getFilteredMusicianList();
 
-    ObservableList<Band> getFilteredBandList();
-
     /**
      * Updates the filter of the filtered musician list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredMusicianList(Predicate<Musician> predicate);
 
+    /**
+     * Updates the {@code FilteredMusicianList} to contain all musicians in the {@code Band}
+     * at the specified index.
+     */
+    void updateFilteredMusicianList(int bandIndex);
+
+    /** Returns an unmodifiable view of the filtered band list */
+    ObservableList<Band> getFilteredBandList();
+
+    /**
+     * Updates the filter of the filtered band list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
     void updateFilteredBandList(Predicate<Band> predicate);
 
-    void updateFilteredMusicianListFromBands();
     /**
      * Returns true if a band with the same identity as {@code band} exists in the address book.
      */
@@ -102,4 +112,22 @@ public interface Model {
      * {@code band} must not already exist in the address book.
      */
     void addBand(Band band);
+
+    /**
+     * Deletes the given band.
+     * The band must exist in the address book.
+     */
+    void deleteBand(Band bandToDelete);
+
+    /**
+     * Returns true if a band already contains the musician.
+     * {@code musician} must not already exist in the band.
+     */
+    boolean hasMusicianInBand(int addInto, int toAdd);
+
+    /**
+     * Adds the given musician into the band.
+     * {@code musician} must not already exist in the band.
+     */
+    void addMusicianToBand(int addInto, int toAdd);
 }
