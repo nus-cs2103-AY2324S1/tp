@@ -30,6 +30,9 @@ public class Specialisation {
      * Returns true if a given string is a valid course.
      */
     public static boolean isValidSpecialisation(String test) {
+        if (test.startsWith(" ")) {
+            return false;
+        }
         for (String word : test.split(" ")) {
             if ((word.equals(""))) {
                 return false;
