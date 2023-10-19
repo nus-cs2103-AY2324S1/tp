@@ -4,68 +4,10 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# ProjectPRO Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
-System: ProjectPRO<br>
-Use case: Creating contact<br>
-Actor: user<br>
-
-
-MSS:<br>
-1.User requests to add contact.<br>
-2.System adds new contact.<br>
-3.User gets back success command result.<br>
-Use case ends
-
-Extensions:<br>
-1a. System detects error in input.<br>
-1a1. System requests for the correct data.<br>
-1a2. User enters new data.<br>
-1a3. Steps 1a1-1a2 are repeated until the data entered are correct.<br>
-Repeat from step 2
-
-1b. System detects duplicate contact requested by user..<br>
-1b1. System displays corresponding error message..<br>
-Use case ends.
-
-
-System: ProjectPRO<br>
-Use case: Delete contact<br>
-Actor: user<br>
-
-MSS:<br>
-1.User requests to delete contact
-2.System deletes contact.
-3.System produces a success message.
-Use Case ends
-
-Extensions:<br>
-1a. System detects incorrect data entered.<br>
-1a1. System requests for the correct data.<br>
-1a2. User enters new data.<br>
-1a3. Steps 1a1-1a2 are repeated until the data entered are correct.<br>
-Use case resumes from step 2.
-
-System: ProjectPRO<br>
-Use case: Add contact to group<br>
-Actor: user<br>
-
-MSS:<br>
-1.User requests to add a contact into a group.<br>
-2.System adds user into the group successfully.<br>
-3.System displays a success message.<br>
-Use Case ends
-
-Extensions:<br>
-1a. System detects an error in the data entered.<br>
-1a1. System requests for the correct data.<br>
-1a2. User enters new data.<br>
-1a3. Steps 1a1-1a2 are repeated until the data entered are correct.<br>
-Use case resumes from step 2.
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
@@ -92,7 +34,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2324S1-CS2103T-T10-3/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2324S1-CS2103T-T10-3/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -124,13 +66,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2324S1-CS2103T-T10-3/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2324S1-CS2103T-T10-3/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2324S1-CS2103T-T10-3/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -141,7 +83,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2324S1-CS2103T-T10-3/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -172,7 +114,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-T10-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
@@ -195,7 +137,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-T10-3/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -326,8 +268,8 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* University students often spend a lot of time coordinating project meetup 
-* sessions and waiting for replies and they are not aware of one another’s schedules. 
+* University students often spend a lot of time coordinating project meetup
+* sessions and waiting for replies and they are not aware of one another’s schedules.
 * This app can help to save time by listing available time slots of individuals in a team.
 
 
@@ -337,56 +279,87 @@ responsibilities of each member. Our app will track the schedule of each contact
 
 ### User stories
 
-| Priority | As a ...                                    | I want to ...                | So that I can ...                                                     |
+| Priority | As a ...                                    | I want to ...                | So that I can ...                                                      |
 |----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `***`    | student                                    | add a new contact            | keep track of any new contacts                                        |
+| `***`    | student                                    | add a new contact            | keep track of any new contacts                                         |
 | `***`    | student with many contacts                 | organize contacts into groups | easily keep track and manage my contacts                               |
 | `***`    | student with many team members             | record team members' info     | keep track of my team members' contact information                     |
-| `***`    | student with many projects                 | delete a group               | avoid clutter and unnecessary attention to completed projects           |
-| `***`    | student with many contacts                 | search for group members     | quickly access contact details using name, contact number, or address  |
-| `***`    | user                                       | save entered information      | avoid repetitive data entry                                           |
-| `**`     | team leader                                | add tasks to contacts        | remember who is responsible for which task                            |
+| `***`    | student with many projects                 | delete a group               | avoid clutter and unnecessary attention to completed projects          |
+| `***`    | student with many contacts                 | search for group members     | quickly access contact details using name, contact number              |
+| `***`    | user                                       | save entered information      | avoid repetitive data entry                                            |
+| `**`     | team leader                                | add tasks to contacts        | remember who is responsible for which task                             |
 | `**`     | student                                    | filter contacts by project   | easily view tasks for a specific project group                         |
-| `**`     | user                                       | prioritize tasks             | work on important tasks first                                         |
+| `**`     | user                                       | prioritize tasks             | work on important tasks first                                          |
 | `**`     | student                                    | add time slots of group mates| find a suitable meeting time when everyone is available                |
 | `**`     | new user                                   | access a help command        | quickly learn about application functions without reading a long guide |
 | `*`      | impatient user                             | access the user guide        | quickly learn how to use the application                               |
-| `*`      | technology-challenged student              | read the user guide          | gain a better understanding of how to use the application               |
-| `*`      | fast but inaccurate typer                  | undo a previous command      | correct typing mistakes                                               |
+| `*`      | technology-challenged student              | read the user guide          | gain a better understanding of how to use the application              |
+| `*`      | fast but inaccurate typer                  | undo a previous command      | correct typing mistakes                                                |
 | `*`      | forgetful student                          | add a reminder               | ensure attendance at upcoming project meetings                         |
 | `*`      | student with many projects                 | color code projects          | differentiate between various project groups                           |
 | `*`      | lazy user                                  | minimize typing/clicking     | achieve tasks with minimal effort                                      |
 | `*`      | student with an irregular schedule         | edit contact information     | easily manage changes in contact details                               |
-| `*`      | user                                       | filter contacts by courses   | view contacts based on shared courses or projects                       |
-| `*`      | user                                       | upload attachments/files     | improve collaboration and reference for tasks and projects              |
+| `*`      | user                                       | filter contacts by courses   | view contacts based on shared courses or projects                      |
+| `*`      | user                                       | upload attachments/files     | improve collaboration and reference for tasks and projects             |
 | `*`      | user                                       | view contact profiles        | access course schedules, contact details, and profile pictures         |
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `ProjectPRO` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Creating contact**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User requests to add contact
+2. ProjectPRO adds new contact
+3. User gets back success command result 
 
-    Use case ends.
+   Use Case ends.
+
+**Extensions:**
+* 1a.  System detects error in input
+    * 1a1.  User gets error message
+    * Use case repeats from step 1
+
+* 1b. System detects duplicate contact requested by user.
+    * 1b1. System displays corresponding error message. 
+    * Use case ends.
+
+    
+**Use case: Delete contact**
+
+**MSS**
+
+1. User requests to delete contact 
+2. System deletes contact. 
+3. System produces a success message.
+
+   Use Case ends
 
 **Extensions**
+* 1a. System detects incorrect data entered. 
+    * 1a1. System requests for the correct data. 
+    * 1a2. User enters new data 
+    * 1a3. Steps 1a1-1a2 are repeated until the data entered are correct.
+    * Use case resumes from step 2.
 
-* 2a. The list is empty.
+**Use case: Add contact to group**
 
-  Use case ends.
+**MSS**
 
-* 3a. The given index is invalid.
+1. User requests to add a contact into a group. 
+2. System adds user into the group successfully. 
+3. System displays a success message.
 
-    * 3a1. AddressBook shows an error message.
+   Use Case ends
 
-      Use case resumes at step 2.
+**Extensions**
+* 1a. System detects an error in the data entered.
+    * 1a1. System requests for the correct data. 
+    * 1a2. User enters new data 
+    * 1a3. Steps 1a1-1a2 are repeated until the data entered are correct. 
+    * Use case resumes from step 2.
 
 *{More to be added}*
 

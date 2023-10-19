@@ -1,17 +1,20 @@
 package seedu.address.logic.commands;
 
-import seedu.address.logic.Messages;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Group;
-import seedu.address.model.Model;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUPTAG;
 
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.group.Group;
+import seedu.address.model.Model;
+
+/**
+ * Adds a group to projectPRO
+ */
 public class CreateGroupCommand extends Command {
     public static final String COMMAND_WORD = "new";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a group to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a group to the address book. \n"
             + "Parameters: "
             + PREFIX_GROUPTAG + "GROUPNAME \n"
             + "Example: " + COMMAND_WORD + " "
@@ -22,6 +25,9 @@ public class CreateGroupCommand extends Command {
 
     private final Group toAdd;
 
+    /**
+     * Creates an newCommand to add the specified {@code Group}
+     */
     public CreateGroupCommand(Group group) {
         requireNonNull(group);
         toAdd = group;
