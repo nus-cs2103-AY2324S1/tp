@@ -4,10 +4,8 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.AddressBook;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
@@ -29,7 +27,8 @@ public class Appointment {
      * @param appointmentTime The scheduled time for the appointment.
      * @param appointmentDescription The description for the appointment.
      */
-    public Appointment(Name patientName, AppointmentTime appointmentTime, AppointmentDescription appointmentDescription) {
+    public Appointment(
+            Name patientName, AppointmentTime appointmentTime, AppointmentDescription appointmentDescription) {
         requireAllNonNull(patientName, appointmentTime, appointmentDescription);
         this.patientName = patientName;
         this.appointmentTime = appointmentTime;
