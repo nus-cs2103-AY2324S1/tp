@@ -176,6 +176,15 @@ Examples:
   <br>
   ![result for 'filter Physics'](images/ug_images/filterResult.png)
 
+### Sorting data : `sort`
+
+Sort the list of students data that fulfills the given conditions.
+
+Format: `sort /by [DESCRIPTION]`
+
+Examples:
+* `sort by/ ASC`
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -231,5 +240,6 @@ Action     | Format, Examples
 **Search** | `search [KEYWORD]`<br> e.g., `search Lee`
 **Delete** | `delete NAME`<br> or `delete JOE` <br> e.g., `delete Joe`
 **Filter** | `filter prefix/FIELD_VALUE [MORE FIELDS]` <br> e.g., `filter g/F s/English s/Physics`
+**Sort**   | `sort by/[DESCRIPTION]` <br> e.g., `sort by/ ASC`
 **Clear**  | `clear`
 **Help**   | `help`
