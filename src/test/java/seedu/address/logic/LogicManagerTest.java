@@ -47,8 +47,8 @@ public class LogicManagerTest {
     public void setUp() {
         JsonContactsStorage contactsStorage =
                 new JsonContactsStorage(temporaryFolder.resolve("contacts.json"));
-        JsonSettingsStorage userPrefsStorage = new JsonSettingsStorage(temporaryFolder.resolve("settings.json"));
-        StorageManager storage = new StorageManager(contactsStorage, userPrefsStorage);
+        JsonSettingsStorage settingsStorage = new JsonSettingsStorage(temporaryFolder.resolve("settings.json"));
+        StorageManager storage = new StorageManager(contactsStorage, settingsStorage);
         logic = new LogicManager(model, storage);
     }
 
