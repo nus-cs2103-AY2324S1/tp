@@ -36,8 +36,8 @@ public class PersonTest {
                 .withEmails(List.of(VALID_EMAIL_BOB))
                 .withLinks(List.of(VALID_LINK_BOB))
                 .withGraduation(VALID_GRADUATION_BOB)
-                .withCourse(VALID_COURSE_BOB)
-                .withSpecialisation(VALID_SPECIALISATION_BOB)
+                .withCourses(List.of(VALID_COURSE_BOB))
+                .withSpecialisations(List.of(VALID_SPECIALISATION_BOB))
                 .withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(TypicalPersons.AMY.isSame(editedAmy));
@@ -100,11 +100,13 @@ public class PersonTest {
         assertFalse(TypicalPersons.AMY.equals(editedAmy));
 
         // different course -> returns false
-        editedAmy = new PersonBuilder(TypicalPersons.AMY).withCourse(VALID_COURSE_BOB).build();
+        editedAmy = new PersonBuilder(TypicalPersons.AMY).withCourses(List.of(VALID_COURSE_BOB)).build();
         assertFalse(TypicalPersons.AMY.equals(editedAmy));
 
         // different specialisation -> returns false
-        editedAmy = new PersonBuilder(TypicalPersons.AMY).withSpecialisation(VALID_SPECIALISATION_BOB).build();
+        editedAmy = new PersonBuilder(TypicalPersons.AMY)
+                .withSpecialisations(List.of(VALID_SPECIALISATION_BOB))
+                .build();
         assertFalse(TypicalPersons.AMY.equals(editedAmy));
 
         // different tags -> returns false
@@ -120,8 +122,8 @@ public class PersonTest {
                 + ", emails=" + TypicalPersons.AMY.getEmails()
                 + ", links=" + TypicalPersons.AMY.getLinks()
                 + ", graduation=" + TypicalPersons.AMY.getGraduation().get()
-                + ", course=" + TypicalPersons.AMY.getCourse().get()
-                + ", specialisation=" + TypicalPersons.AMY.getSpecialisation().get()
+                + ", courses=" + TypicalPersons.AMY.getCourses()
+                + ", specialisations=" + TypicalPersons.AMY.getSpecialisations()
                 + ", tags=" + TypicalPersons.AMY.getTags() + ", priority=" + TypicalPersons.AMY.getPriority().get()
                 + "}";
         assertEquals(expected, TypicalPersons.AMY.toString());

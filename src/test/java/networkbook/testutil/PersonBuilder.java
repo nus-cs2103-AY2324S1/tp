@@ -35,8 +35,8 @@ public class PersonBuilder {
     private UniqueList<Email> emails;
     private UniqueList<Link> links;
     private Graduation graduation;
-    private Course course;
-    private Specialisation specialisation;
+    private UniqueList<Course> courses;
+    private UniqueList<Specialisation> specialisations;
     private UniqueList<Tag> tags;
     private Priority priority;
 
@@ -49,8 +49,9 @@ public class PersonBuilder {
         emails = new UniqueList<Email>().setItems(List.of(new Email(DEFAULT_EMAIL)));
         links = new UniqueList<Link>().setItems(List.of(new Link(DEFAULT_LINK)));
         graduation = new Graduation(DEFAULT_GRADUATION);
-        course = new Course(DEFAULT_COURSE);
-        specialisation = new Specialisation(DEFAULT_SPECIALISATION);
+        courses = new UniqueList<Course>().setItems(List.of(new Course(DEFAULT_COURSE)));
+        specialisations = new UniqueList<Specialisation>()
+                .setItems(List.of(new Specialisation(DEFAULT_SPECIALISATION)));
         tags = new UniqueList<>();
         priority = null;
     }
@@ -64,8 +65,8 @@ public class PersonBuilder {
         emails = personToCopy.getEmails();
         links = personToCopy.getLinks();
         graduation = personToCopy.getGraduation().orElse(null);
-        course = personToCopy.getCourse().orElse(null);
-        specialisation = personToCopy.getSpecialisation().orElse(null);
+        courses = personToCopy.getCourses();
+        specialisations = personToCopy.getSpecialisations();
         tags = personToCopy.getTags();
         priority = personToCopy.getPriority().orElse(null);
     }
@@ -111,18 +112,36 @@ public class PersonBuilder {
     }
 
     /**
+     * Adds a course to the person we are building.
+     */
+    public PersonBuilder addCourse(String course) {
+        this.courses.add(new Course(course));
+        return this;
+    }
+
+    /**
      * Sets the {@code Course} of the {@code Person} that we are building.
      */
-    public PersonBuilder withCourse(String course) {
-        this.course = new Course(course);
+    public PersonBuilder withCourses(List<String> courses) {
+        this.courses = new UniqueList<Course>()
+                .setItems(courses.stream().map(Course::new).collect(Collectors.toList()));
+        return this;
+    }
+
+    /**
+     * Adds a specialisation to the person we are building.
+     */
+    public PersonBuilder addSpecialisation(String specialisation) {
+        this.specialisations.add(new Specialisation(specialisation));
         return this;
     }
 
     /**
      * Sets the {@code Specialisation} of the {@code Person} that we are building.
      */
-    public PersonBuilder withSpecialisation(String specialisation) {
-        this.specialisation = new Specialisation(specialisation);
+    public PersonBuilder withSpecialisations(List<String> specialisations) {
+        this.specialisations = new UniqueList<Specialisation>()
+                .setItems(specialisations.stream().map(Specialisation::new).collect(Collectors.toList()));
         return this;
     }
 
@@ -172,15 +191,15 @@ public class PersonBuilder {
         this.emails = new UniqueList<>();
         this.links = new UniqueList<>();
         this.graduation = null;
-        this.course = null;
-        this.specialisation = null;
+        this.courses = new UniqueList<>();
+        this.specialisations = new UniqueList<>();
         this.tags = new UniqueList<>();
         this.priority = null;
         return this;
     }
 
     public Person build() {
-        return new Person(name, phones, emails, links, graduation, course, specialisation, tags, priority);
+        return new Person(name, phones, emails, links, graduation, courses, specialisations, tags, priority);
     }
 
 }

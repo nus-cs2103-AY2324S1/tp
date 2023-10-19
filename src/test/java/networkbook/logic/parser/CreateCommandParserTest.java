@@ -185,8 +185,8 @@ public class CreateCommandParserTest {
                 .withEmails(List.of(VALID_EMAIL_AMY))
                 .withLinks(List.of(VALID_LINK_AMY))
                 .withGraduation(VALID_GRADUATION_AMY)
-                .withCourse(VALID_COURSE_AMY)
-                .withSpecialisation(VALID_SPECIALISATION_AMY)
+                .withCourses(List.of(VALID_COURSE_AMY))
+                .withSpecialisations(List.of(VALID_SPECIALISATION_AMY))
                 .withPriority(VALID_PRIORITY_AMY)
                 .build();
         CommandParserTestUtil.assertParseSuccess(parser,
@@ -202,8 +202,8 @@ public class CreateCommandParserTest {
                 .withPhones(List.of(VALID_PHONE_AMY))
                 .withLinks(List.of(VALID_LINK_AMY))
                 .withGraduation(VALID_GRADUATION_AMY)
-                .withCourse(VALID_COURSE_AMY)
-                .withSpecialisation(VALID_SPECIALISATION_AMY)
+                .withCourses(List.of(VALID_COURSE_AMY))
+                .withSpecialisations(List.of(VALID_SPECIALISATION_AMY))
                 .withPriority(VALID_PRIORITY_AMY)
                 .build();
         CommandParserTestUtil.assertParseSuccess(parser,
@@ -219,8 +219,8 @@ public class CreateCommandParserTest {
                 .withPhones(List.of(VALID_PHONE_AMY))
                 .withEmails(List.of(VALID_EMAIL_AMY))
                 .withGraduation(VALID_GRADUATION_AMY)
-                .withCourse(VALID_COURSE_AMY)
-                .withSpecialisation(VALID_SPECIALISATION_AMY)
+                .withCourses(List.of(VALID_COURSE_AMY))
+                .withSpecialisations(List.of(VALID_SPECIALISATION_AMY))
                 .withPriority(VALID_PRIORITY_AMY)
                 .build();
         CommandParserTestUtil.assertParseSuccess(parser,
@@ -236,8 +236,8 @@ public class CreateCommandParserTest {
                 .withPhones(List.of(VALID_PHONE_AMY))
                 .withEmails(List.of(VALID_EMAIL_AMY))
                 .withLinks(List.of(VALID_LINK_AMY))
-                .withCourse(VALID_COURSE_AMY)
-                .withSpecialisation(VALID_SPECIALISATION_AMY)
+                .withCourses(List.of(VALID_COURSE_AMY))
+                .withSpecialisations(List.of(VALID_SPECIALISATION_AMY))
                 .withPriority(VALID_PRIORITY_AMY)
                 .build();
         CommandParserTestUtil.assertParseSuccess(parser,
@@ -254,7 +254,7 @@ public class CreateCommandParserTest {
                 .withEmails(List.of(VALID_EMAIL_AMY))
                 .withLinks(List.of(VALID_LINK_AMY))
                 .withGraduation(VALID_GRADUATION_AMY)
-                .withSpecialisation(VALID_SPECIALISATION_AMY)
+                .withSpecialisations(List.of(VALID_SPECIALISATION_AMY))
                 .withPriority(VALID_PRIORITY_AMY)
                 .build();
         CommandParserTestUtil.assertParseSuccess(parser,
@@ -271,7 +271,7 @@ public class CreateCommandParserTest {
                 .withEmails(List.of(VALID_EMAIL_AMY))
                 .withLinks(List.of(VALID_LINK_AMY))
                 .withGraduation(VALID_GRADUATION_AMY)
-                .withCourse(VALID_COURSE_AMY)
+                .withCourses(List.of(VALID_COURSE_AMY))
                 .withPriority(VALID_PRIORITY_AMY)
                 .build();
         CommandParserTestUtil.assertParseSuccess(parser,

@@ -100,14 +100,14 @@ public class AddCommand extends Command {
         UniqueList<Phone> updatedPhones = addPhones(personToAddInfo, editPersonDescriptor);
         UniqueList<Email> updatedEmails = addEmails(personToAddInfo, editPersonDescriptor);
         UniqueList<Link> updatedLinks = addLinks(personToAddInfo, editPersonDescriptor);
-        Graduation updatedGraduation = addGraduation(personToAddInfo, editPersonDescriptor);
-        Course updatedCourse = addCourse(personToAddInfo, editPersonDescriptor);
-        Specialisation updatedSpecialisation = addSpecialisation(personToAddInfo, editPersonDescriptor);
+        Graduation updatedGraduatingYear = addGraduation(personToAddInfo, editPersonDescriptor);
+        UniqueList<Course> updatedCourses = addCourses(personToAddInfo, editPersonDescriptor);
+        UniqueList<Specialisation> updatedSpecialisations = addSpecialisations(personToAddInfo, editPersonDescriptor);
         UniqueList<Tag> updatedTags = addTags(personToAddInfo, editPersonDescriptor);
         Priority updatedPriority = addPriority(personToAddInfo, editPersonDescriptor);
 
-        return new Person(currentName, updatedPhones, updatedEmails, updatedLinks, updatedGraduation,
-                updatedCourse, updatedSpecialisation, updatedTags, updatedPriority);
+        return new Person(currentName, updatedPhones, updatedEmails, updatedLinks, updatedGraduatingYear,
+                updatedCourses, updatedSpecialisations, updatedTags, updatedPriority);
     }
 
     // TODO: for non-unique fields, change respective model to use list and append to the list
@@ -136,23 +136,17 @@ public class AddCommand extends Command {
         }
         return newGraduation.orElse(oldGraduation.orElse(null));
     }
-    private Course addCourse(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor)
-            throws CommandException {
-        Optional<Course> oldCourse = personToAddInfo.getCourse();
-        Optional<Course> newCourse = editPersonDescriptor.getCourse();
-        if (oldCourse.isPresent() && newCourse.isPresent()) {
-            throw new CommandException(MESSAGE_MULTIPLE_UNIQUE_FIELD);
-        }
-        return newCourse.orElse(oldCourse.orElse(null));
+    private UniqueList<Course> addCourses(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor) {
+        UniqueList<Course> courses = personToAddInfo.getCourses();
+        editPersonDescriptor.getCourses().ifPresent(courses::addAllFromList);
+        return courses;
     }
-    private Specialisation addSpecialisation(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor)
-            throws CommandException {
-        Optional<Specialisation> oldSpecialisation = personToAddInfo.getSpecialisation();
-        Optional<Specialisation> newSpecialisation = editPersonDescriptor.getSpecialisation();
-        if (oldSpecialisation.isPresent() && newSpecialisation.isPresent()) {
-            throw new CommandException(MESSAGE_MULTIPLE_UNIQUE_FIELD);
-        }
-        return newSpecialisation.orElse(oldSpecialisation.orElse(null));
+    private UniqueList<Specialisation> addSpecialisations(Person personToAddInfo,
+                                                           EditPersonDescriptor editPersonDescriptor) {
+        UniqueList<Specialisation> specs = personToAddInfo.getSpecialisations();
+        editPersonDescriptor.getSpecialisations().ifPresent(specs::addAllFromList);
+        return specs;
+
     }
     private UniqueList<Tag> addTags(Person personToAddInfo, EditPersonDescriptor editPersonDescriptor) {
         UniqueList<Tag> tags = personToAddInfo.getTags();

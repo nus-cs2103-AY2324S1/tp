@@ -11,9 +11,11 @@ import networkbook.logic.Messages;
 import networkbook.logic.commands.EditCommand;
 import networkbook.logic.commands.EditCommand.EditPersonDescriptor;
 import networkbook.logic.parser.exceptions.ParseException;
+import networkbook.model.person.Course;
 import networkbook.model.person.Email;
 import networkbook.model.person.Link;
 import networkbook.model.person.Phone;
+import networkbook.model.person.Specialisation;
 import networkbook.model.tag.Tag;
 import networkbook.model.util.UniqueList;
 
@@ -97,14 +99,10 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setGraduation(
                     ParserUtil.parseGraduation(argMultimap.getValue(CliSyntax.PREFIX_GRADUATION).get()));
         }
-        if (argMultimap.getValue(CliSyntax.PREFIX_COURSE).isPresent()) {
-            editPersonDescriptor.setCourse(
-                    ParserUtil.parseCourse(argMultimap.getValue(CliSyntax.PREFIX_COURSE).get()));
-        }
-        if (argMultimap.getValue(CliSyntax.PREFIX_SPECIALISATION).isPresent()) {
-            editPersonDescriptor.setSpecialisation(
-                    ParserUtil.parseSpecialisation(argMultimap.getValue(CliSyntax.PREFIX_SPECIALISATION).get()));
-        }
+        parseCoursesForEdit(argMultimap.getAllValues(CliSyntax.PREFIX_COURSE))
+                .ifPresent(editPersonDescriptor::setCourses);
+        parseSpecialisationsForEdit(argMultimap.getAllValues(CliSyntax.PREFIX_SPECIALISATION))
+                .ifPresent(editPersonDescriptor::setSpecialisations);
         parseTagsForEdit(argMultimap.getAllValues(CliSyntax.PREFIX_TAG))
                 .ifPresent(editPersonDescriptor::setTags);
         if (argMultimap.getValue(CliSyntax.PREFIX_PRIORITY).isPresent()) {
@@ -152,6 +150,18 @@ public class EditCommandParser implements Parser<EditCommand> {
     }
 
     /**
+     * Parses {@code Collection<String> courses} into a {@code UniqueList<Course>} wrapped in an {@code Optional}.
+     */
+    private static Optional<UniqueList<Course>> parseCoursesForEdit(Collection<String> courses) throws ParseException {
+        requireNonNull(courses);
+
+        if (courses.isEmpty()) {
+            return Optional.empty();
+        }
+        return Optional.of(ParserUtil.parseCourses(courses));
+    }
+
+    /**
      * Parses {@code Collection<String> tags} into a {@code UniqueList<Tag>} if {@code tags} is non-empty.
      * If {@code tags} contain only one element which is an empty string, it will be parsed into a
      * {@code UniqueList<Tag>} containing zero tags.
@@ -166,4 +176,17 @@ public class EditCommandParser implements Parser<EditCommand> {
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
 
+    /**
+     * Parses {@code Coolection<String> specialisations} into a {@code UniqueList<Specialisation>} wrapped in an
+     * {@code Optional}.
+     */
+    private static Optional<UniqueList<Specialisation>> parseSpecialisationsForEdit(Collection<String> specisalisations)
+            throws ParseException {
+        requireNonNull(specisalisations);
+
+        if (specisalisations.isEmpty()) {
+            return Optional.empty();
+        }
+        return Optional.of(ParserUtil.parseSpecialisations(specisalisations));
+    }
 }

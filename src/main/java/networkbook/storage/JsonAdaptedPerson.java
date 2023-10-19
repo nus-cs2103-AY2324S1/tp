@@ -32,8 +32,8 @@ class JsonAdaptedPerson {
     private final List<JsonAdaptedProperty<Email>> emails = new ArrayList<>();
     private final List<JsonAdaptedProperty<Link>> links = new ArrayList<>();
     private final String graduation;
-    private final String course;
-    private final String specialisation;
+    private final List<JsonAdaptedProperty<Course>> courses = new ArrayList<>();
+    private final List<JsonAdaptedProperty<Specialisation>> specialisations = new ArrayList<>();
     private final List<JsonAdaptedProperty<Tag>> tags = new ArrayList<>();
     private final String priority;
 
@@ -46,8 +46,8 @@ class JsonAdaptedPerson {
                              @JsonProperty("emails") List<JsonAdaptedProperty<Email>> emails,
                              @JsonProperty("links") List<JsonAdaptedProperty<Link>> links,
                              @JsonProperty("graduation") String graduation,
-                             @JsonProperty("course") String course,
-                             @JsonProperty("specialisation") String specialisation,
+                             @JsonProperty("courses") List<JsonAdaptedProperty<Course>> courses,
+                             @JsonProperty("specialisations") List<JsonAdaptedProperty<Specialisation>> specialisations,
                              @JsonProperty("tags") List<JsonAdaptedProperty<Tag>> tags,
                              @JsonProperty("priority") String priority) {
         this.name = name;
@@ -61,8 +61,12 @@ class JsonAdaptedPerson {
             this.links.addAll(links);
         }
         this.graduation = graduation;
-        this.course = course;
-        this.specialisation = specialisation;
+        if (courses != null) {
+            this.courses.addAll(courses);
+        }
+        if (specialisations != null) {
+            this.specialisations.addAll(specialisations);
+        }
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -84,8 +88,12 @@ class JsonAdaptedPerson {
                 .map(JsonAdaptedProperty::new)
                 .collect(Collectors.toList()));
         graduation = source.getGraduation().map(Graduation::toString).orElse(null);
-        course = source.getCourse().map(Course::toString).orElse(null);
-        specialisation = source.getSpecialisation().map(Specialisation::toString).orElse(null);
+        courses.addAll(source.getCourses().stream()
+                .map(JsonAdaptedProperty::new)
+                .collect(Collectors.toList()));
+        specialisations.addAll(source.getSpecialisations().stream()
+                .map(JsonAdaptedProperty::new)
+                .collect(Collectors.toList()));
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedProperty::new)
                 .collect(Collectors.toList()));
@@ -139,20 +147,21 @@ class JsonAdaptedPerson {
         }
 
         Course modelCourse = null;
-        if (course != null) {
-            if (!Course.isValidCourse(course)) {
-                throw new IllegalValueException(Course.MESSAGE_CONSTRAINTS);
-            }
-            modelCourse = new Course(course);
+        if (!courses.stream()
+                .map(JsonAdaptedProperty::getName)
+                .allMatch(Course::isValidCourse)) {
+            throw new IllegalValueException(Course.MESSAGE_CONSTRAINTS);
         }
+        final UniqueList<Course> modelCourses = new UniqueList<>();
+        courses.forEach(course -> modelCourses.add(new Course(course.getName())));
 
-        Specialisation modelSpecialisation = null;
-        if (specialisation != null) {
-            if (!Specialisation.isValidSpecialisation(specialisation)) {
-                throw new IllegalValueException(Specialisation.MESSAGE_CONSTRAINTS);
-            }
-            modelSpecialisation = new Specialisation(specialisation);
+        if (!specialisations.stream()
+                .map(JsonAdaptedProperty::getName)
+                .allMatch(Specialisation::isValidSpecialisation)) {
+            throw new IllegalValueException(Specialisation.MESSAGE_CONSTRAINTS);
         }
+        final UniqueList<Specialisation> modelSpecs = new UniqueList<>();
+        specialisations.forEach(spec -> modelSpecs.add(new Specialisation(spec.getName())));
 
         final UniqueList<Tag> modelTags = new UniqueList<>();
         for (JsonAdaptedProperty<Tag> tag : tags) {
@@ -167,8 +176,8 @@ class JsonAdaptedPerson {
             modelPriority = new Priority(priority);
         }
 
-        return new Person(modelName, modelPhones, modelEmails, modelLinks, modelGraduation, modelCourse,
-                modelSpecialisation, modelTags, modelPriority);
+        return new Person(modelName, modelPhones, modelEmails, modelLinks, modelGraduation, modelCourses,
+                modelSpecs, modelTags, modelPriority);
     }
 
 }

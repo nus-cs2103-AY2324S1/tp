@@ -5,11 +5,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import networkbook.logic.parser.Prefix;
-import networkbook.model.person.Course;
 import networkbook.model.person.Graduation;
 import networkbook.model.person.Person;
 import networkbook.model.person.Priority;
-import networkbook.model.person.Specialisation;
 
 /**
  * Container for user visible messages.
@@ -49,14 +47,8 @@ public class Messages {
             builder.append("; Graduation: ");
             builder.append(g.getFullString());
         });
-        person.getCourse().ifPresent((Course c) -> {
-            builder.append("; Course: ");
-            builder.append(c);
-        });
-        person.getSpecialisation().ifPresent((Specialisation s) -> {
-            builder.append("; Specialisation: ");
-            builder.append(s);
-        });
+        builder.append("; Courses: ").append(person.getCourses());
+        builder.append("; Specialisations ").append(person.getSpecialisations());
         builder.append("; Tags: ");
         person.getTags().forEach(builder::append);
         person.getPriority().ifPresent((Priority p) -> {

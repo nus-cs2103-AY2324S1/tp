@@ -9,6 +9,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -49,20 +51,22 @@ public class PersonCardTest {
 
     @Test
     public void constructor_hasValidCourse_showsValidCourse() {
-        Person person = new PersonBuilder().withName("Bob").withCourse(VALID_COURSE_BOB).build();
+        Person person = new PersonBuilder().withName("Bob").withCourses(List.of(VALID_COURSE_BOB)).build();
         PersonCard personCard = new PersonCard(person, 1);
         Label course = personCard.getCourse();
-        assertEquals("Course: " + VALID_COURSE_BOB, course.getText());
+        assertEquals("Courses: [" + VALID_COURSE_BOB + "]", course.getText());
         assertTrue(course.isVisible());
     }
 
     @Test
     public void constructor_hasValidSpecialisation_showsValidSpecialisation() {
-        Person person = new PersonBuilder().withName("Bob").withSpecialisation(VALID_SPECIALISATION_BOB).build();
+        Person person = new PersonBuilder().withName("Bob")
+                .withSpecialisations(List.of(VALID_SPECIALISATION_BOB))
+                .build();
         PersonCard personCard = new PersonCard(person, 1);
-        Label specialisation = personCard.getSpecialisation();
-        assertEquals("Specialisation: " + VALID_SPECIALISATION_BOB, specialisation.getText());
-        assertTrue(specialisation.isVisible());
+        Label specialisations = personCard.getSpecialisations();
+        assertEquals("Specialisations: [" + VALID_SPECIALISATION_BOB + "]", specialisations.getText());
+        assertTrue(specialisations.isVisible());
     }
 
     @Test

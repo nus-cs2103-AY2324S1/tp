@@ -103,16 +103,16 @@ public class EditCommand extends Command {
         UniqueList<Link> updatedLink = editPersonDescriptor.getLinks().orElse(personToEdit.getLinks());
         Graduation updatedGraduation = editPersonDescriptor.getGraduation()
                 .orElse(personToEdit.getGraduation().orElse(null));
-        Course updatedCourse = editPersonDescriptor.getCourse().orElse(personToEdit.getCourse()
-                .orElse(null));
-        Specialisation updatedSpecialisation = editPersonDescriptor.getSpecialisation()
-                .orElse(personToEdit.getSpecialisation().orElse(null));
+        UniqueList<Course> updatedCourses = editPersonDescriptor.getCourses().orElse(personToEdit.getCourses());
+        UniqueList<Specialisation> updatedSpecialisations = editPersonDescriptor
+                .getSpecialisations()
+                .orElse(personToEdit.getSpecialisations());
         UniqueList<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Priority updatedPriority = editPersonDescriptor.getPriority().orElse(personToEdit.getPriority()
                                                                      .orElse(null));
 
         return new Person(updatedName, updatedPhones, updatedEmails, updatedLink, updatedGraduation,
-                updatedCourse, updatedSpecialisation, updatedTags, updatedPriority);
+                updatedCourses, updatedSpecialisations, updatedTags, updatedPriority);
     }
 
     @Override
@@ -149,8 +149,8 @@ public class EditCommand extends Command {
         private Optional<UniqueList<Email>> emails = Optional.empty();
         private Optional<UniqueList<Link>> links = Optional.empty();
         private Graduation graduation;
-        private Course course;
-        private Specialisation specialisation;
+        private Optional<UniqueList<Course>> courses = Optional.empty();
+        private Optional<UniqueList<Specialisation>> specialisations = Optional.empty();
         private UniqueList<Tag> tags;
         private Priority priority;
 
@@ -166,8 +166,8 @@ public class EditCommand extends Command {
             setEmails(toCopy.emails.map(UniqueList::copy).orElse(null));
             setLinks(toCopy.links.map(UniqueList::copy).orElse(null));
             setGraduation(toCopy.graduation);
-            setCourse(toCopy.course);
-            setSpecialisation(toCopy.specialisation);
+            setCourses(toCopy.courses.map(UniqueList::copy).orElse(null));
+            setSpecialisations(toCopy.specialisations.map(UniqueList::copy).orElse(null));
             setTags(toCopy.getTags().map(UniqueList::copy).orElse(null));
             setPriority(toCopy.priority);
         }
@@ -176,11 +176,12 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, graduation, course,
-                        specialisation, tags, priority)
+            return CollectionUtil.isAnyNonNull(name, graduation, tags, priority)
                     || (phones.isPresent() && !phones.get().isEmpty())
                     || (emails.isPresent() && !emails.get().isEmpty())
-                    || (links.isPresent() && !links.get().isEmpty());
+                    || (links.isPresent() && !links.get().isEmpty())
+                    || (courses.isPresent() && !courses.get().isEmpty())
+                    || (specialisations.isPresent() && !specialisations.get().isEmpty());
         }
 
         public void setName(Name name) {
@@ -220,7 +221,6 @@ public class EditCommand extends Command {
 
         /**
          * Adds {@code email} to the list of {@code emails}
-         * @param email
          */
         public void addEmail(Email email) {
             this.emails = this.emails.map(emails -> {
@@ -243,7 +243,6 @@ public class EditCommand extends Command {
 
         /**
          * Adds {@code link} to the list of {@code links}.
-         * @param link
          */
         public void addLink(Link link) {
             this.links = this.links.map(links -> {
@@ -268,20 +267,48 @@ public class EditCommand extends Command {
             return Optional.ofNullable(graduation);
         }
 
-        public void setCourse(Course course) {
-            this.course = course;
+        public void setCourses(UniqueList<Course> courses) {
+            this.courses = Optional.ofNullable(courses);
         }
 
-        public Optional<Course> getCourse() {
-            return Optional.ofNullable(course);
+        /**
+         * Adds {@code specialisations} to the list of {@code specialisations}.
+         */
+        public void addCourse(Course course) {
+            this.courses = this.courses.map(courses -> {
+                courses.add(course);
+                return courses;
+            }).or(() -> {
+                UniqueList<Course> uniqueList = new UniqueList<>();
+                uniqueList.add(course);
+                return Optional.of(uniqueList);
+            });
         }
 
-        public void setSpecialisation(Specialisation specialisation) {
-            this.specialisation = specialisation;
+        public Optional<UniqueList<Course>> getCourses() {
+            return courses;
         }
 
-        public Optional<Specialisation> getSpecialisation() {
-            return Optional.ofNullable(specialisation);
+        public void setSpecialisations(UniqueList<Specialisation> specialisations) {
+            this.specialisations = Optional.ofNullable(specialisations);
+        }
+
+        /**
+         * Adds {@code specialisations} to the list of {@code specialisations}.
+         */
+        public void addSpecialisation(Specialisation specialisation) {
+            this.specialisations = this.specialisations.map(specialisations -> {
+                specialisations.add(specialisation);
+                return specialisations;
+            }).or(() -> {
+                UniqueList<Specialisation> uniqueList = new UniqueList<>();
+                uniqueList.add(specialisation);
+                return Optional.of(uniqueList);
+            });
+        }
+
+        public Optional<UniqueList<Specialisation>> getSpecialisations() {
+            return specialisations;
         }
 
         /**
@@ -334,8 +361,8 @@ public class EditCommand extends Command {
                     && Objects.equals(emails, otherEditPersonDescriptor.emails)
                     && Objects.equals(links, otherEditPersonDescriptor.links)
                     && Objects.equals(graduation, otherEditPersonDescriptor.graduation)
-                    && Objects.equals(course, otherEditPersonDescriptor.course)
-                    && Objects.equals(specialisation, otherEditPersonDescriptor.specialisation)
+                    && Objects.equals(courses, otherEditPersonDescriptor.courses)
+                    && Objects.equals(specialisations, otherEditPersonDescriptor.specialisations)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags)
                     && Objects.equals(priority, otherEditPersonDescriptor.priority);
         }
@@ -348,8 +375,8 @@ public class EditCommand extends Command {
                     .add("emails", emails.orElse(null))
                     .add("links", links.orElse(null))
                     .add("graduation", graduation)
-                    .add("course", course)
-                    .add("specialisation", specialisation)
+                    .add("courses", courses.orElse(null))
+                    .add("specialisations", specialisations.orElse(null))
                     .add("tags", tags);
             if (priority != null) {
                 tsb.add("priority", priority);

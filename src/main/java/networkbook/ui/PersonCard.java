@@ -1,5 +1,7 @@
 package networkbook.ui;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
@@ -7,11 +9,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import networkbook.model.person.Course;
 import networkbook.model.person.Graduation;
 import networkbook.model.person.Person;
 import networkbook.model.person.Priority;
-import networkbook.model.person.Specialisation;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -23,8 +23,8 @@ public class PersonCard extends UiPart<Region> {
     private static final String EMAILS_HEADER = "Emails: ";
     private static final String LINKS_HEADER = "Links: ";
     private static final String GRADUATION_HEADER = "Graduation: ";
-    private static final String COURSE_HEADER = "Course: ";
-    private static final String SPECIALISATION_HEADER = "Specialisation: ";
+    private static final String COURSE_HEADER = "Courses: ";
+    private static final String SPECIALISATION_HEADER = "Specialisations: ";
     private static final String PRIORITY_HEADER = "Priority: ";
 
     /**
@@ -50,9 +50,9 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label graduation;
     @FXML
-    private Label course;
+    private Label courses;
     @FXML
-    private Label specialisation;
+    private Label specialisations;
     @FXML
     private Label emails;
     @FXML
@@ -65,6 +65,7 @@ public class PersonCard extends UiPart<Region> {
      */
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
+        requireNonNull(person);
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
@@ -73,10 +74,8 @@ public class PersonCard extends UiPart<Region> {
         links.setText(LINKS_HEADER + person.getLinks().toString());
         person.getGraduation().ifPresentOrElse((Graduation g) ->
                 graduation.setText(GRADUATION_HEADER + g.getFullString()), () -> graduation.setVisible(false));
-        person.getCourse().ifPresentOrElse((Course c) ->
-                course.setText(COURSE_HEADER + c), () -> course.setVisible(false));
-        person.getSpecialisation().ifPresentOrElse((Specialisation s) ->
-                specialisation.setText(SPECIALISATION_HEADER + s), () -> specialisation.setVisible(false));
+        courses.setText(COURSE_HEADER + person.getCourses().toString());
+        specialisations.setText(SPECIALISATION_HEADER + person.getSpecialisations().toString());
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.getValue()))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.getValue())));
@@ -91,10 +90,10 @@ public class PersonCard extends UiPart<Region> {
         return graduation;
     }
     public Label getCourse() {
-        return course;
+        return courses;
     }
-    public Label getSpecialisation() {
-        return specialisation;
+    public Label getSpecialisations() {
+        return specialisations;
     }
     public Label getPriority() {
         return priority; // getter method for testing

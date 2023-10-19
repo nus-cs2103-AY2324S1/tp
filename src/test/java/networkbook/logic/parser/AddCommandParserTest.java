@@ -198,33 +198,14 @@ public class AddCommandParserTest {
 
         // valid followed by invalid
         Index targetIndex = TypicalIndexes.INDEX_FIRST_PERSON;
-        String userInput = targetIndex.getOneBased()
-                + CommandTestUtil.INVALID_PHONE_DESC + CommandTestUtil.PHONE_DESC_BOB;
-
-        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_PHONE));
-
-        // invalid followed by valid
-        userInput = targetIndex.getOneBased() + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.INVALID_PHONE_DESC;
-
-        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_PHONE));
 
         // mulltiple valid fields repeated
-        userInput = targetIndex.getOneBased() + CommandTestUtil.PHONE_DESC_AMY + CommandTestUtil.LINK_DESC_AMY
+        String userInput = targetIndex.getOneBased() + CommandTestUtil.PHONE_DESC_AMY + CommandTestUtil.LINK_DESC_AMY
                 + CommandTestUtil.EMAIL_DESC_AMY + CommandTestUtil.TAG_DESC_FRIEND + CommandTestUtil.PHONE_DESC_AMY
                 + CommandTestUtil.LINK_DESC_AMY + CommandTestUtil.EMAIL_DESC_AMY + CommandTestUtil.TAG_DESC_FRIEND
                 + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.LINK_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB
                 + CommandTestUtil.TAG_DESC_HUSBAND;
 
-        assertParseFailure(parser, userInput,
-                Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_PHONE));
-
-        // multiple invalid values
-        userInput = targetIndex.getOneBased()
-                + CommandTestUtil.INVALID_PHONE_DESC + CommandTestUtil.INVALID_LINK_DESC
-                + CommandTestUtil.INVALID_EMAIL_DESC + CommandTestUtil.INVALID_PHONE_DESC
-                + CommandTestUtil.INVALID_LINK_DESC + CommandTestUtil.INVALID_EMAIL_DESC;
-
-        assertParseFailure(parser, userInput,
-                Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_PHONE));
+        assertParseFailure(parser, userInput, ParserUtil.MESSAGE_PHONE_DUPLICATE);
     }
 }

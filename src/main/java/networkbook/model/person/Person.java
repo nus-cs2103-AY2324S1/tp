@@ -24,8 +24,8 @@ public class Person implements Identifiable<Person> {
     // Data fields
     private final UniqueList<Link> links;
     private final Graduation graduation;
-    private final Course course;
-    private final Specialisation specialisation;
+    private final UniqueList<Course> courses;
+    private final UniqueList<Specialisation> specialisations;
     private final UniqueList<Tag> tags;
     private final Priority priority;
 
@@ -38,8 +38,8 @@ public class Person implements Identifiable<Person> {
                   UniqueList<Email> emails,
                   UniqueList<Link> links,
                   Graduation graduation,
-                  Course course,
-                  Specialisation specialisation,
+                  UniqueList<Course> courses,
+                  UniqueList<Specialisation> specialisations,
                   UniqueList<Tag> tags,
                   Priority priority) {
         requireAllNonNull(name);
@@ -48,8 +48,8 @@ public class Person implements Identifiable<Person> {
         this.emails = emails.copy();
         this.links = links.copy();
         this.graduation = graduation;
-        this.course = course;
-        this.specialisation = specialisation;
+        this.courses = courses.copy();
+        this.specialisations = specialisations.copy();
         this.tags = tags.copy();
         this.priority = priority;
     }
@@ -71,11 +71,11 @@ public class Person implements Identifiable<Person> {
     public Optional<Graduation> getGraduation() {
         return Optional.ofNullable(graduation);
     }
-    public Optional<Course> getCourse() {
-        return Optional.ofNullable(course);
+    public UniqueList<Course> getCourses() {
+        return courses.copy();
     }
-    public Optional<Specialisation> getSpecialisation() {
-        return Optional.ofNullable(specialisation);
+    public UniqueList<Specialisation> getSpecialisations() {
+        return specialisations.copy();
     }
     public UniqueList<Tag> getTags() {
         return this.tags.copy();
@@ -128,8 +128,8 @@ public class Person implements Identifiable<Person> {
                 && Objects.equals(emails, otherPerson.emails)
                 && Objects.equals(links, otherPerson.links)
                 && Objects.equals(graduation, otherPerson.graduation)
-                && Objects.equals(course, otherPerson.course)
-                && Objects.equals(specialisation, otherPerson.specialisation)
+                && Objects.equals(courses, otherPerson.courses)
+                && Objects.equals(specialisations, otherPerson.specialisations)
                 && Objects.equals(tags, otherPerson.tags)
                 && Objects.equals(priority, otherPerson.priority);
     }
@@ -137,7 +137,7 @@ public class Person implements Identifiable<Person> {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phones, emails, links, graduation, course, specialisation, tags, priority);
+        return Objects.hash(name, phones, emails, links, graduation, courses, specialisations, tags, priority);
     }
 
     @Override
@@ -156,11 +156,11 @@ public class Person implements Identifiable<Person> {
         if (graduation != null) {
             tsb.add("graduation", graduation);
         }
-        if (course != null) {
-            tsb.add("course", course);
+        if (courses != null) {
+            tsb.add("courses", courses);
         }
-        if (specialisation != null) {
-            tsb.add("specialisation", specialisation);
+        if (!Objects.equals(specialisations, new UniqueList<Specialisation>())) {
+            tsb.add("specialisations", specialisations);
         }
         if (!Objects.equals(tags, new UniqueList<Tag>())) {
             tsb.add("tags", tags);
