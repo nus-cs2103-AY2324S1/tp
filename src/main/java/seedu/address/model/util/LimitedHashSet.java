@@ -2,6 +2,8 @@ package seedu.address.model.util;
 
 import java.util.HashSet;
 
+import seedu.address.model.risklevel.exceptions.ExceedMaxRiskLevelSizeException;
+
 /**
  * This class inherits from a HashSet but specifies a maximum size.
  *
@@ -18,7 +20,7 @@ public class LimitedHashSet<T> extends HashSet<T> {
     @Override
     public boolean add(T element) {
         if (size() >= maxSize) {
-            return false;
+            throw new ExceedMaxRiskLevelSizeException(maxSize);
         }
 
         return super.add(element);
