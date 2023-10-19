@@ -45,11 +45,14 @@ public class AddCommandParser implements Parser<AddCommand> {
                         PREFIX_LICENCE_PLATE, PREFIX_ADDRESS, PREFIX_TAG, PREFIX_POLICY_NUMBER,
                         PREFIX_POLICY_ISSUE_DATE, PREFIX_POLICY_EXPIRY_DATE);
 
+        if (!argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        }
+
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_NRIC,
-                PREFIX_LICENCE_PLATE, PREFIX_ADDRESS)
-                || !argMultimap.getPreamble().isEmpty()) {
-            String errorMessage = "Error: Some of the required fields are missing. " +
-                    "\n"
+                PREFIX_LICENCE_PLATE, PREFIX_ADDRESS)) {
+            String errorMessage = "Error: Some of the required fields are missing. "
+                    + "\n"
                     + "Please include the following: ";
             if (argMultimap.getValue(PREFIX_NAME).isEmpty()) {
                 errorMessage += "- Name(n/) ";
@@ -64,7 +67,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                 errorMessage += "- NRIC(i/) ";
             }
             if (argMultimap.getValue(PREFIX_LICENCE_PLATE).isEmpty()) {
-                errorMessage += "- License Plate(I/) ";
+                errorMessage += "- License Plate(l/) ";
             }
             if (argMultimap.getValue(PREFIX_ADDRESS).isEmpty()) {
                 errorMessage += "- Address(a/) ";
@@ -102,7 +105,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             }
         }
 
-        // temporary variables to change
+        // temporary variables for when no policy paramers were inputed
         PolicyNumber policyNumber = new PolicyNumber(PolicyNumber.DEFAULT_VALUE);
         PolicyDate policyIssueDate = new PolicyDate(PolicyDate.DEFAULT_VALUE);
         PolicyDate policyExpiryDate = new PolicyDate(PolicyDate.DEFAULT_VALUE);
@@ -115,6 +118,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             policyIssueDate = ParserUtil.parsePolicyIssueDate(argMultimap.getValue(PREFIX_POLICY_ISSUE_DATE).get());
             policyExpiryDate = ParserUtil.parsePolicyExpiryDate(argMultimap.getValue(PREFIX_POLICY_EXPIRY_DATE).get());
         }
+
         Policy policy = new Policy(policyNumber, policyIssueDate, policyExpiryDate);
 
         Person person = new Person(name, phone, email, address, tagList, nric, licencePlate, policy);
