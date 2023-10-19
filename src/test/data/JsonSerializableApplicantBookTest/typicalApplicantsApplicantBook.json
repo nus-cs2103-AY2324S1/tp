@@ -13,6 +13,12 @@
     "position" : "Frontend Engineer",
     "interviews" : [ "technical" ]
   }, {
+    "name" : "Bob Choo",
+    "phone" : "22222222",
+    "email" : "bob@example.com",
+    "position" : "Block 123, Bobby Street 3",
+    "interviews" : []
+  }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
     "email" : "carl@example.com",

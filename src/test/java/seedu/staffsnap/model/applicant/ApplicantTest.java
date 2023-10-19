@@ -3,10 +3,8 @@ package seedu.staffsnap.model.applicant;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_POSITION_BOB;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_TYPE_BEHAVIORAL;
@@ -35,18 +33,21 @@ public class ApplicantTest {
         // null -> returns false
         assertFalse(AMY.isSameApplicant(null));
 
-        // same email, all other attributes different -> returns true
-        Applicant editedAmy = new ApplicantBuilder(BOB).withEmail(VALID_EMAIL_AMY).build();
-        assertTrue(AMY.isSameApplicant(editedAmy));
-
         // same phone number, all other attributes different -> returns true
-        editedAmy = new ApplicantBuilder(BOB).withPhone(VALID_PHONE_AMY).build();
-        assertTrue(AMY.isSameApplicant(editedAmy));
+        Applicant editedAlice = new ApplicantBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
+        assertTrue(BOB.isSameApplicant(editedAlice));
 
-        // different email and phone number, all other attributes same -> returns false
-        editedAmy = new ApplicantBuilder(AMY).withEmail(VALID_EMAIL_BOB)
-                .withPhone(VALID_PHONE_BOB).build();
-        assertFalse(AMY.isSameApplicant(editedAmy));
+        // same email, all other attributes different -> returns true
+        editedAlice = new ApplicantBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
+        assertTrue(BOB.isSameApplicant(editedAlice));
+
+        // same email and same phone number, all other attributes different -> returns true
+        editedAlice = new ApplicantBuilder(ALICE).withEmail(VALID_EMAIL_BOB).withPhone(VALID_PHONE_BOB).build();
+        assertTrue(BOB.isSameApplicant(editedAlice));
+
+        // different phone number and email, all other attributes same -> returns false
+        editedAlice = new ApplicantBuilder(ALICE).withEmail(VALID_EMAIL_BOB).withPhone(VALID_PHONE_BOB).build();
+        assertFalse(ALICE.isSameApplicant(editedAlice));
 
         // email differs in case, all other attributes same -> returns true
         Applicant editedBob = new ApplicantBuilder(BOB).withEmail(VALID_EMAIL_BOB.toUpperCase()).build();

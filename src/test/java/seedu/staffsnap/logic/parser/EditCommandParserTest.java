@@ -53,7 +53,13 @@ public class EditCommandParserTest {
         // no field specified
         assertParseFailure(parser, "1", EditCommand.MESSAGE_NOT_EDITED);
 
+        // no prefix specified
+        assertParseFailure(parser, "1" + VALID_NAME_AMY, MESSAGE_INVALID_FORMAT);
+
         // no index and no field specified
+        assertParseFailure(parser, "" + PREFIX_EMAIL, MESSAGE_INVALID_FORMAT);
+
+        // nothing specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
     }
 
@@ -70,6 +76,9 @@ public class EditCommandParserTest {
 
         // invalid prefix being parsed as preamble
         assertParseFailure(parser, "1 i/ string", MESSAGE_INVALID_FORMAT);
+
+        // whitespace being parsed as preamble
+        assertParseFailure(parser, " ", MESSAGE_INVALID_FORMAT);
     }
 
     @Test
