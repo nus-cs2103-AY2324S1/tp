@@ -57,7 +57,7 @@ Output if error : `The index you have provided is out of bounds of your current 
 
 ### Editing your profile `editP`
 
-Format: `editP name/NAME age/AGE gender/GENDER height/HEIGHT horoscope/HOROSCOPE income/INCOME`
+Format: `setP name/NAME age/AGE gender/GENDER height/HEIGHT horoscope/HOROSCOPE income/INCOME`
 
 Parameter constraints:
 - Name should be non-empty string.
@@ -65,7 +65,7 @@ Parameter constraints:
 - Gender should be a character (M/F).
 - Horoscope should be a non-empty string.
 
-Example: `editP name/Ryann age/22 gender/F height/1.76 horoscope/Taurus income/2000`
+Example: `setP name/Ryann age/22 gender/F height/1.76 horoscope/Taurus income/2000`
 
 Expected output: `User profile has been successfully updated!`
 
