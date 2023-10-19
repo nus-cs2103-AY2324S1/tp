@@ -34,8 +34,11 @@ public class Person {
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, NextOfKinName nextOfKinName,
-                  NextOfKinPhone nextOfKinPhone, Set<FinancialPlan> financialPlans, Set<Tag> tags, Appointment appointment) {
-        requireAllNonNull(name, phone, email, address, nextOfKinName, nextOfKinPhone, financialPlans, tags, appointment);
+                  NextOfKinPhone nextOfKinPhone, Set<FinancialPlan> financialPlans,
+                  Set<Tag> tags, Appointment appointment) {
+
+        requireAllNonNull(name, phone, email, address, nextOfKinName, nextOfKinPhone,
+                financialPlans, tags, appointment);
 
         this.name = name;
         this.phone = phone;
@@ -140,7 +143,7 @@ public class Person {
                 && nextOfKinName.equals(otherPerson.nextOfKinName)
                 && nextOfKinPhone.equals(otherPerson.nextOfKinPhone)
                 && tags.equals(otherPerson.tags)
-                && appointment.equals(otherPerson.appointment);
+                && appointment.equals(otherPerson.appointment)
                 && financialPlans.equals(otherPerson.financialPlans)
                 && tags.equals(otherPerson.tags);
     }

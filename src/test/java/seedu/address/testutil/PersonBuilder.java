@@ -145,8 +145,13 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Builds a Person
+     *
+     * @return The Person built.
+     */
     public Person build() {
-        return new Person(name, phone, email, address, nextOfKinName, nextOfKinPhone, financialPlans, tags, appointment);
+        return new Person(name, phone, email, address, nextOfKinName, nextOfKinPhone,
+                financialPlans, tags, appointment);
     }
-
 }

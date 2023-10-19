@@ -82,6 +82,6 @@ public class ScheduleCommand extends Command {
     private Person createPersonWithAppointment(Person personToEdit) {
         return new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getNextOfKinName(), personToEdit.getNextOfKinPhone(),
-                personToEdit.getTags(), toAdd);
+                personToEdit.getFinancialPlans(), personToEdit.getTags(), toAdd);
     }
 }

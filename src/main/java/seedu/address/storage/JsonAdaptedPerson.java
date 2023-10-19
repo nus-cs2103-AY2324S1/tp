@@ -50,7 +50,6 @@ class JsonAdaptedPerson {
                              @JsonProperty("financialPlans") List<JsonAdaptedFinancialPlan> financialPlans,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags,
                              @JsonProperty("appointment") JsonAdaptedAppointment appointment) {
-      
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -151,7 +150,6 @@ class JsonAdaptedPerson {
         final NextOfKinPhone modelNextOfKinPhone = new NextOfKinPhone(nextOfKinPhone);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-      
         final Set<FinancialPlan> modelFinancialPlans = new HashSet<>(personFinancialPlans);
 
         if (appointment == null) {

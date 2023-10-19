@@ -53,7 +53,6 @@ public class Messages {
         person.getFinancialPlans().forEach(builder::append);
         builder.append("; Tags: ");
         person.getTags().forEach(builder::append);
-      
         return builder.toString();
     }
 
