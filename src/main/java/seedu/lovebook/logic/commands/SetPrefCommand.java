@@ -111,6 +111,17 @@ public class SetPrefCommand extends Command {
         public SetPreferenceDescriptor() {}
 
         /**
+         * Constructor that accepts default values for each metric
+         */
+        public SetPreferenceDescriptor(Age age, Gender gender, Height height, Income income, Horoscope horoscope) {
+            setAge(age);
+            setGender(gender);
+            setHeight(height);
+            setIncome(income);
+            setHoroscope(horoscope);
+        }
+
+        /**
          * Copy Constructor
          * A defensive copy of {@code tags} is used internally.
          */
@@ -168,6 +179,7 @@ public class SetPrefCommand extends Command {
         public Optional<Horoscope> getHoroscope() {
             return Optional.ofNullable(horoscope);
         }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {

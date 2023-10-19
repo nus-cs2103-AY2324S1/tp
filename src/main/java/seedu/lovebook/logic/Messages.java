@@ -4,6 +4,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import seedu.lovebook.logic.commands.SetPrefCommand;
 import seedu.lovebook.logic.parser.Prefix;
 import seedu.lovebook.model.DatePrefs;
 import seedu.lovebook.model.person.Date;
@@ -68,6 +69,24 @@ public class Messages {
                 .append(datePrefs.getIncome())
                 .append("; Horoscope: ")
                 .append(datePrefs.getHoroscope());
+        return builder.toString();
+    }
+
+    /**
+     * Formats the {@code datePrefs} for display to the user.
+     */
+    public static String format(SetPrefCommand.SetPreferenceDescriptor descriptor) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append("Age: ")
+                .append(descriptor.getAge().get())
+                .append("; Gender: ")
+                .append(descriptor.getGender().get())
+                .append("; Height: ")
+                .append(descriptor.getHeight().get())
+                .append("; Income: ")
+                .append(descriptor.getIncome().get())
+                .append("; Horoscope: ")
+                .append(descriptor.getHoroscope().get());
         return builder.toString();
     }
 
