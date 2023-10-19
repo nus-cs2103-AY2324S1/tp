@@ -2,7 +2,11 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
@@ -14,6 +18,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Status;
 import seedu.address.model.person.StatusTypes;
 import seedu.address.model.tag.Tag;
+
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -150,7 +155,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code Collection<String> status} into a {@code Set<String> of status}.
+     * Parses {@code Collection<String> status} into a {@code List<String> of status}.
      */
     public static List<String> parseSearchStatusParams(Collection<String> statuses) throws ParseException {
         requireNonNull(statuses);
@@ -166,6 +171,9 @@ public class ParserUtil {
         return statusList;
     }
 
+    /**
+     * Parses {@code Collection<String> names} into a {@code List<String> of names}.
+     */
     public static List<String> parseSearchNameParams(Collection<String> names) throws ParseException {
         requireNonNull(names);
         String[] nameArr = parseSearchParams(names);

@@ -5,7 +5,14 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.*;
+import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.CARL;
+import static seedu.address.testutil.TypicalPersons.DANIEL;
+import static seedu.address.testutil.TypicalPersons.ELLE;
+import static seedu.address.testutil.TypicalPersons.FIONA;
+import static seedu.address.testutil.TypicalPersons.GEORGE;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -119,13 +126,13 @@ public class FindCommandTest {
 
     private List<Predicate<Person>> preparePredicateList(String nameKeywords, String statusKeywords) {
         List<Predicate<Person>> predicatesList = new ArrayList<>() {{
-            if (!nameKeywords.isEmpty()) {
-                add(prepareNamePredicate(nameKeywords));
-            }
-            if (!statusKeywords.isEmpty()) {
-                add(prepareStatusPredicate(statusKeywords));
-            }
-        }};
+                if (!nameKeywords.isEmpty()) {
+                    add(prepareNamePredicate(nameKeywords));
+                }
+                if (!statusKeywords.isEmpty()) {
+                    add(prepareStatusPredicate(statusKeywords));
+                }
+            }};
 
         return predicatesList;
     }

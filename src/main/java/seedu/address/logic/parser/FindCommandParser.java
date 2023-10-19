@@ -5,8 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
@@ -63,13 +61,13 @@ public class FindCommandParser implements Parser<FindCommand> {
                                                       NameContainsKeywordsPredicate namePredicate,
                                                       StatusContainsKeywordsPredicate statusPredicate) {
         List<Predicate<Person>> predicatesList = new ArrayList<>() {{
-            if (!nameKeywords.isEmpty()) {
-                add(namePredicate);
-            }
-            if (!statusKeywords.isEmpty()) {
-                add(statusPredicate);
-            }
-        }};
+                if (!nameKeywords.isEmpty()) {
+                    add(namePredicate);
+                }
+                if (!statusKeywords.isEmpty()) {
+                    add(statusPredicate);
+                }
+            }};
 
         return predicatesList;
     }
