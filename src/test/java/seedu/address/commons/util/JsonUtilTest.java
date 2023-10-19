@@ -1,7 +1,6 @@
 package seedu.address.commons.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.testutil.TestData.JSON_STRING_REPRESENTATION;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -9,14 +8,23 @@ import java.nio.file.Path;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import seedu.address.testutil.SerializableTestClass;
+import seedu.address.testutil.SerializableClass;
 
 
 
-/**
- * Tests JSON Read and Write
- */
 public class JsonUtilTest {
+    private static final String TEST_CLASS_JSON = String.format("{%n"
+            + "  \"name\" : \"This is a test class\",%n"
+            + "  \"listOfLocalDateTimes\" : "
+            + "[ \"-999999999-01-01T00:00:00\", \"+999999999-12-31T23:59:59.999999999\", "
+            + "\"0001-01-01T01:01:00\" ],%n"
+            + "  \"mapOfIntegerToString\" : {%n"
+            + "    \"1\" : \"One\",%n"
+            + "    \"2\" : \"Two\",%n"
+            + "    \"3\" : \"Three\"%n"
+            + "  }%n"
+            + "}");
+
     @TempDir
     public static Path TEMP_DIR;
 
@@ -25,24 +33,28 @@ public class JsonUtilTest {
     }
 
     @Test
-    public void serializeObjectToJsonFile_noExceptionThrown() throws IOException {
-        SerializableTestClass serializableTestClass = new SerializableTestClass();
-        serializableTestClass.setTestValues();
+    public void serializeToFile_successfullySaved() throws IOException {
+        SerializableClass serializable = new SerializableClass();
+        JsonUtil.serializeToFile(this.getSerializationPath(), serializable);
 
-        JsonUtil.serializeObjectToJsonFile(this.getSerializationPath(), serializableTestClass);
-
-        assertEquals(FileUtil.readFromFile(this.getSerializationPath()), JSON_STRING_REPRESENTATION);
+        assertEquals(
+            JsonUtilTest.TEST_CLASS_JSON,
+            FileUtil.readFromFile(this.getSerializationPath())
+        );
     }
 
     @Test
-    public void deserializeObjectFromJsonFile_noExceptionThrown() throws IOException {
-        FileUtil.writeToFile(this.getSerializationPath(), JSON_STRING_REPRESENTATION);
+    public void deserializeFromFile_successfullyRead() throws IOException {
+        FileUtil.writeToFile(this.getSerializationPath(), JsonUtilTest.TEST_CLASS_JSON);
 
-        SerializableTestClass serializableTestClass = JsonUtil
-                .deserializeObjectFromJsonFile(this.getSerializationPath(), SerializableTestClass.class);
+        SerializableClass expected = new SerializableClass();
+        SerializableClass actual = JsonUtil.deserializeFromFile(
+            this.getSerializationPath(),
+            SerializableClass.class
+        );
 
-        assertEquals(serializableTestClass.getName(), SerializableTestClass.getNameTestValue());
-        assertEquals(serializableTestClass.getListOfLocalDateTimes(), SerializableTestClass.getListTestValues());
-        assertEquals(serializableTestClass.getMapOfIntegerToString(), SerializableTestClass.getHashMapTestValues());
+        assertEquals(expected.getName(), actual.getName());
+        assertEquals(expected.getList(), actual.getList());
+        assertEquals(expected.integerToStringMap, actual.integerToStringMap);
     }
 }
