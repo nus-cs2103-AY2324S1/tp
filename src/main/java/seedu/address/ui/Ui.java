@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import javafx.stage.Stage;
+import seedu.address.model.lessons.Lesson;
 import seedu.address.model.person.Person;
 
 /**
@@ -23,5 +24,5 @@ public interface Ui {
      *
      * @param lesson The specified lesson to show the details of.
      */
-    void showLessonDetails(Person lesson); //TODO
+    void showLessonDetails(Lesson lesson); //TODO
 }

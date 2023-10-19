@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.lessons.Lesson;
 import seedu.address.model.person.Person;
 import seedu.address.ui.Ui;
 
@@ -14,6 +15,8 @@ import seedu.address.ui.Ui;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Lesson> PREDICATE_SHOW_ALL_LESSONS = unused -> true;
+
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -36,17 +39,35 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' schedule list file path.
+     */
+    Path getScheduleListFilePath();
+
+    /**
+     * Sets the user prefs' schedule list file path.
+     */
+    void setScheduleListFilePath(Path scheduleListFilePath);
+
+    /**
+     * Replaces schedule list data with the data in {@code scheduleList}.
+     */
+    void setScheduleList(ReadOnlySchedule scheduleList);
+
+    /** Returns the ScheduleList */
+    ReadOnlySchedule getScheduleList();
+
+    /**
+     * Returns the user prefs' schedule list file path.
      */
     Path getAddressBookFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' schedule list file path.
      */
     void setAddressBookFilePath(Path addressBookFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces schedule list data with the data in {@code scheduleList}.
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);
 
@@ -91,12 +112,42 @@ public interface Model {
      * The person must exist in the address book.
      */
     void showPerson(Person personToShow);
+    /**
+     * Returns true if a lesson with the same identity as {@code lesson} exists in the schedule list.
+     */
+    boolean hasLesson(Lesson lesson);
 
+    /**
+     * Deletes the given lesson.
+     * The lesson must exist in the schedule list.
+     */
+    void deleteLesson(Lesson target);
+
+    /**
+     * Adds the given lesson.
+     * {@code lesson} must not already exist in the schedule list.
+     */
+    void addLesson(Lesson lesson);
+
+    /**
+     * Replaces the given lesson {@code target} with {@code editedLesson}.
+     * {@code target} must exist in the schedule list.
+     * The lesson identity of {@code editedLesson} must not be the same as another existing lesson in the schedule list.
+     */
+    void setLesson(Lesson target, Lesson editedLesson);
+    // NOTE: TO ADD FILTERED FILTEREDLESSONLIST METHODS HERE.
     /**
      * Shows the details of the given lesson.
      * The lesson must exist in the application.
      */
-    void showLesson(Person lessonToShow); //TODO
+    void showLesson(Lesson lessonToShow); //TODO
+    ObservableList<Lesson> getFilteredScheduleList();
+
+    /**
+     * Updates the filter of the filtered lesson list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredScheduleList(Predicate<Lesson> predicate);
 
     /**
      * Links the Ui of the Application.

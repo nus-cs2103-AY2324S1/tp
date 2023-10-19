@@ -32,6 +32,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.JsonScheduleListStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
 import seedu.address.testutil.PersonBuilder;
@@ -53,7 +54,9 @@ public class LogicManagerTest {
         JsonAddressBookStorage addressBookStorage =
                 new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        JsonScheduleListStorage scheduleListStorage =
+                new JsonScheduleListStorage(temporaryFolder.resolve("scheduleList.json"));
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, scheduleListStorage);
         logicManager = new LogicManager(model, storage);
         logic = logicManager;
     }
@@ -138,7 +141,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getScheduleList());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
@@ -175,7 +178,9 @@ public class LogicManagerTest {
 
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        JsonScheduleListStorage scheduleListStorage =
+                new JsonScheduleListStorage(temporaryFolder.resolve("ExceptionScheduleList.json"));
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, scheduleListStorage);
 
         logic = new LogicManager(model, storage);
 

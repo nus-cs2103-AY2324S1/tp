@@ -26,6 +26,7 @@ public class Person {
     private final Set<Subject> subjects = new HashSet<>();
     private final Set<Tag> tags = new HashSet<>();
 
+
     /**
      * Every field must be present and not null.
      */
@@ -37,6 +38,7 @@ public class Person {
         this.address = address;
         this.subjects.addAll(subjects);
         this.tags.addAll(tags);
+
     }
 
     public Name getName() {
@@ -69,6 +71,7 @@ public class Person {
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
     }
+
 
     /**
      * Returns true if both persons have the same name.
@@ -105,6 +108,7 @@ public class Person {
                 && address.equals(otherPerson.address)
                 && subjects.equals(otherPerson.subjects)
                 && tags.equals(otherPerson.tags);
+
     }
 
     @Override

@@ -21,7 +21,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlySchedule;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.lessons.Lesson;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.ui.Ui;
@@ -108,7 +110,6 @@ public class AddCommandTest {
         public void setGuiSettings(GuiSettings guiSettings) {
             throw new AssertionError("This method should not be called.");
         }
-
         @Override
         public Path getAddressBookFilePath() {
             throw new AssertionError("This method should not be called.");
@@ -160,15 +161,60 @@ public class AddCommandTest {
         }
 
         @Override
-        public void showPerson(Person personToShow) {
+        public Path getScheduleListFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void showLesson(Person lessonToShow) {
+        public void setScheduleListFilePath(Path scheduleListFilePath) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void addLesson(Lesson lesson) {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public void setScheduleList(ReadOnlySchedule newData) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlySchedule getScheduleList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasLesson(Lesson lesson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteLesson(Lesson target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setLesson(Lesson target, Lesson editedLesson) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public ObservableList<Lesson> getFilteredScheduleList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredScheduleList(Predicate<Lesson> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void showLesson(Lesson lessonToShow) {
+            //TODO
+        }
+        @Override
+        public void showPerson(Person personToShow) {
+            throw new AssertionError("This method should not be called.");
+        }
         @Override
         public void linkUi(Ui ui) {
             throw new AssertionError("This method should not be called.");

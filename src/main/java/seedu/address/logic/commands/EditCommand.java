@@ -22,6 +22,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.lessons.Schedule;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -143,6 +144,7 @@ public class EditCommand extends Command {
         private Address address;
         private Set<Subject> subjects;
         private Set<Tag> tags;
+        private Schedule schedule;
 
         public EditPersonDescriptor() {}
 
@@ -157,13 +159,14 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setSubjects(toCopy.subjects);
             setTags(toCopy.tags);
+            setSchedule(toCopy.schedule);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, subjects, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, subjects, tags, schedule);
         }
 
         public void setName(Name name) {
@@ -231,6 +234,15 @@ public class EditCommand extends Command {
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
+
+        public void setSchedule(Schedule schedule) {
+            this.schedule = schedule;
+        }
+
+        public Optional<Schedule> getSchedule() {
+            return Optional.ofNullable(schedule);
+        }
+
 
         @Override
         public boolean equals(Object other) {

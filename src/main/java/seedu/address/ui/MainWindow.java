@@ -19,6 +19,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.lessons.Lesson;
 import seedu.address.model.person.Person;
 
 /**
@@ -272,7 +273,7 @@ public class MainWindow extends UiPart<Stage> {
      *
      * @param lesson The lesson to show the details of.
      */
-    public void handleShowLesson(Person lesson) { //TODO
+    public void handleShowLesson(Lesson lesson) { //TODO
         lessonDetailList.setVisible(true);
         // lessonDetailListPanel.setLessonDetails(lesson);
     }

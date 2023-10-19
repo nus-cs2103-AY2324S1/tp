@@ -1,11 +1,15 @@
 package seedu.address.model.util;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlySchedule;
+import seedu.address.model.ScheduleList;
+import seedu.address.model.lessons.Lesson;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -18,6 +22,7 @@ import seedu.address.model.tag.Tag;
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
+    public static final String SAMPLE_SCHEDULE = "Mon 1200 1400 weekly";
     public static Person[] getSamplePersons() {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
@@ -66,5 +71,29 @@ public class SampleDataUtil {
                 .map(Subject::new)
                 .collect(Collectors.toSet());
     }
+
+    public static Lesson[] getSampleLessons() {
+        LocalDateTime startLesson1 = LocalDateTime.of(2022, 10, 10, 14, 30);
+        LocalDateTime endLesson1 = LocalDateTime.of(2022, 10, 10, 16, 30);
+        LocalDateTime startLesson2 = LocalDateTime.of(2022, 10, 20, 14, 30);
+        LocalDateTime endLesson2 = LocalDateTime.of(2022, 10, 18, 16, 30);
+        LocalDateTime startLesson3 = LocalDateTime.of(2022, 11, 20, 10, 30);
+        LocalDateTime endLesson3 = LocalDateTime.of(2022, 10, 18, 12, 30);
+        Subject math = new Subject("MATHEMATICS");
+        Subject bio = new Subject("BIOLOGY");
+        return new Lesson[] {
+            new Lesson(startLesson1, endLesson1, math, "Alex Yeoh"),
+            new Lesson(startLesson2, endLesson2, math, "David Li"),
+            new Lesson(startLesson3, endLesson3, bio, "Bernice Yu"),
+        };
+    }
+    public static ReadOnlySchedule getSampleSchedule() {
+        ScheduleList sampleSchedule = new ScheduleList();
+        for (Lesson sampleLesson : getSampleLessons()) {
+            sampleSchedule.addLesson(sampleLesson);
+        }
+        return sampleSchedule;
+    }
+
 
 }
