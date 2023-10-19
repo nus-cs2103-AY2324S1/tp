@@ -10,8 +10,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ListAttendanceCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListStudentsCommand;
-import seedu.address.model.person.AbsentFromTutorialNumPredicate;
-import seedu.address.model.person.ContainsCourseTutorialPredicate;
+import seedu.address.model.predicate.AbsentFromTutorialPredicate;
+import seedu.address.model.predicate.ContainsTagPredicate;
 import seedu.address.model.tag.Tag;
 
 public class ListCommandParserTest {
@@ -47,7 +47,7 @@ public class ListCommandParserTest {
         Tag tag = new Tag("CS2103T");
         Index index = Index.fromOneBased(1);
         ListAttendanceCommand expectedListAttendanceCommand = new ListAttendanceCommand(tag, index,
-                new ContainsCourseTutorialPredicate(tag), new AbsentFromTutorialNumPredicate(index, tag));
+                new ContainsTagPredicate(tag), new AbsentFromTutorialPredicate(index, tag));
         assertParseSuccess(parser, " attendance coursetg/CS2103T tn/1", expectedListAttendanceCommand);
 
         // multiple whitespaces between keywords

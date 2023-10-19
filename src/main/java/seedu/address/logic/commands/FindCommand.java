@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.ContainsKeywordsPredicate;
+import seedu.address.model.predicate.SerializablePredicate;
 
 /**
  * Finds and lists all student in contact list whose name or ID contains any of the argument keywords.
@@ -18,16 +18,17 @@ public class FindCommand extends Command {
             + "Parameters: /name STUDENTNAME | /id STUDENTID\n"
             + "Example: " + COMMAND_WORD + " /name Anthony";
 
-    private final ContainsKeywordsPredicate predicate;
+    private final SerializablePredicate predicate;
 
-    public FindCommand(ContainsKeywordsPredicate predicate) {
+    public FindCommand(SerializablePredicate predicate) {
         this.predicate = predicate;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
+        model.clearFilters();
+        model.addFilter(predicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }

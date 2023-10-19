@@ -21,6 +21,13 @@ import seedu.address.model.tag.Tag;
  */
 public class ParserUtil {
 
+    /**
+     * Enum for filter operations.
+     */
+    public static enum FilterOperation {
+        ADD, DELETE, CLEAR
+    }
+
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
     /**
@@ -137,5 +144,25 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses {@code String operation} into a {@code FilterOperation}.
+     *
+     * @throws ParseException if the given {@code operation} is invalid.
+     */
+    public static FilterOperation parseFilterOperation(String operation) throws ParseException {
+        requireNonNull(operation);
+        String trimmedOperation = operation.trim().toLowerCase();
+        switch (trimmedOperation) {
+        case "add":
+            return FilterOperation.ADD;
+        case "delete":
+            return FilterOperation.DELETE;
+        case "clear":
+            return FilterOperation.CLEAR;
+        default:
+            throw new ParseException("Invalid filter operation");
+        }
     }
 }

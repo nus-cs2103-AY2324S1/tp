@@ -13,8 +13,8 @@ import seedu.address.logic.commands.ListAttendanceCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListStudentsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.AbsentFromTutorialNumPredicate;
-import seedu.address.model.person.ContainsCourseTutorialPredicate;
+import seedu.address.model.predicate.AbsentFromTutorialPredicate;
+import seedu.address.model.predicate.ContainsTagPredicate;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -66,8 +66,8 @@ public class ListCommandParser implements Parser<ListCommand> {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         ListAttendanceCommand.MESSAGE_USAGE));
             }
-            return new ListAttendanceCommand(tag, tn, new ContainsCourseTutorialPredicate(tag),
-                    new AbsentFromTutorialNumPredicate(tn, tag));
+            return new ListAttendanceCommand(tag, tn, new ContainsTagPredicate(tag),
+                    new AbsentFromTutorialPredicate(tn, tag));
         default:
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     ListCommand.MESSAGE_USAGE));

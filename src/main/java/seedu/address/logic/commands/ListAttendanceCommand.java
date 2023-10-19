@@ -7,8 +7,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALNUMBER;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.AbsentFromTutorialNumPredicate;
-import seedu.address.model.person.ContainsCourseTutorialPredicate;
+import seedu.address.model.predicate.AbsentFromTutorialPredicate;
+import seedu.address.model.predicate.ContainsTagPredicate;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -26,9 +26,9 @@ public class ListAttendanceCommand extends ListCommand {
     public static final String MESSAGE_SUCCESS = "Listed all absent students:";
 
     private final Index tn;
-    private final AbsentFromTutorialNumPredicate absencePredicate;
+    private final AbsentFromTutorialPredicate absencePredicate;
     private final Tag tag;
-    private final ContainsCourseTutorialPredicate courseTutorialPredicate;
+    private final ContainsTagPredicate courseTutorialPredicate;
 
     /**
      * @param tag Tutorial group to list
@@ -37,8 +37,8 @@ public class ListAttendanceCommand extends ListCommand {
      * @param absencePredicate Predicate used to filter for students absent
      */
     public ListAttendanceCommand(Tag tag, Index tn,
-                                 ContainsCourseTutorialPredicate courseTutorialPredicate,
-                                 AbsentFromTutorialNumPredicate absencePredicate) {
+                                 ContainsTagPredicate courseTutorialPredicate,
+                                 AbsentFromTutorialPredicate absencePredicate) {
         requireNonNull(tn);
         this.tn = tn;
         this.absencePredicate = absencePredicate;
@@ -71,9 +71,10 @@ public class ListAttendanceCommand extends ListCommand {
 
 
         if (!tag.equals(placeholder)) {
-            model.updateFilteredPersonList(courseTutorialPredicate);
+            model.addFilter(courseTutorialPredicate);
             numberOfStudents = model.getFilteredPersonList().size();
-            model.updateFilteredPersonList(absencePredicate);
+            model.addFilter(absencePredicate);
+
             int numberOfAbsentees = model.getFilteredPersonList().size();
             int numberOfPresentees = numberOfStudents - numberOfAbsentees;
 
@@ -82,8 +83,8 @@ public class ListAttendanceCommand extends ListCommand {
             return new CommandResult(attendanceSummary + MESSAGE_SUCCESS);
         }
 
+        model.addFilter(absencePredicate);
 
-        model.updateFilteredPersonList(absencePredicate);
         int numberOfAbsentees = model.getFilteredPersonList().size();
         int numberOfPresentees = numberOfStudents - numberOfAbsentees;
 
