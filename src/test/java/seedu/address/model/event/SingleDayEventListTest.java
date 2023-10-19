@@ -1,5 +1,6 @@
 package seedu.address.model.event;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION;
@@ -8,7 +9,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_LATER;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_EARLIER;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_LATER;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_UNUSED_DESCRIPTION;
+import static seedu.address.model.event.EventPeriod.DATE_TIME_STRING_FORMATTER;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.EventBuilder.DEFAULT_START_TIME_STRING;
 
 import org.junit.jupiter.api.Test;
 
@@ -16,6 +19,8 @@ import seedu.address.model.event.exceptions.ConflictingEventException;
 import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.testutil.EventBuilder;
 import seedu.address.testutil.SingleDayEventListBuilder;
+
+import java.time.LocalDateTime;
 
 public class SingleDayEventListTest {
     @Test
@@ -137,6 +142,15 @@ public class SingleDayEventListTest {
 
         assertFalse(dayEventList.getDayEventList().isEmpty());
         assertTrue(dayEventList.getDayEventList().contains(toBeAdded));
+    }
+
+    @Test
+    public void eventAtTimeTest() {
+        SingleDayEventList dayEventList = new SingleDayEventListBuilder().build();
+        Event toBeAdded = new EventBuilder().build();
+        dayEventList.addEvent(toBeAdded);
+        LocalDateTime expectedDateTime = LocalDateTime.parse(DEFAULT_START_TIME_STRING, DATE_TIME_STRING_FORMATTER);
+        assertEquals(dayEventList.eventAtTime(expectedDateTime).get(), toBeAdded);
     }
 
     @Test

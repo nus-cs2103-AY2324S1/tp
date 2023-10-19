@@ -97,7 +97,7 @@ public class AllDaysEventListManager {
     public Optional<Event> eventAt(LocalDateTime dateTime) {
         String key = dateTime.toLocalDate().toString();
         if (dayToEventListMap.containsKey((key))) {
-            return dayToEventListMap.get(key).hasEventAtTime(dateTime);
+            return dayToEventListMap.get(key).eventAtTime(dateTime);
         }
         return Optional.empty();
     }
@@ -126,6 +126,13 @@ public class AllDaysEventListManager {
      */
     public boolean isEmpty() {
         return this.dayToEventListMap.isEmpty();
+    }
+
+    public boolean hasEvents() {
+        if (!this.isEmpty()) {
+            return dayToEventListMap.values().stream().map(SingleDayEventList::isEmpty).allMatch(x -> x.equals(true));
+        }
+        return true;
     }
 
     @Override

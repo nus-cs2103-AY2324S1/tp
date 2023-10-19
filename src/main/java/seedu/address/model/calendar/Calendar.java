@@ -95,6 +95,13 @@ public class Calendar {
         return this.eventManager.isEmpty();
     }
 
+    public boolean hasEvents() {
+        if (!this.isEmpty()) {
+            return !eventManager.hasEvents();
+        }
+        return true;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (this == other) {

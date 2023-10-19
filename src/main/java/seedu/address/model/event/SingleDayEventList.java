@@ -84,7 +84,7 @@ public class SingleDayEventList {
      * @param dateTime the specified time
      * @return an {@code @Optional} containing the event if there is an event at the time, empty optional otherwise.
      */
-    public Optional<Event> hasEventAtTime(LocalDateTime dateTime) {
+    public Optional<Event> eventAtTime(LocalDateTime dateTime) {
         requireNonNull(dateTime);
         for (Event event : this.eventTree.values()) {
             if (event.isDuring(dateTime)) {
@@ -117,6 +117,15 @@ public class SingleDayEventList {
     public ObservableList<Event> getDayEventList() {
         return FXCollections.<Event>observableArrayList(this.eventTree.values()
                 .toArray(new Event[0]));
+    }
+
+    /**
+     * Checks if there are no events present in this list.
+     *
+     * @return true if there are no events present, false otherwise.
+     */
+    public boolean isEmpty() {
+        return eventTree.isEmpty();
     }
 
     @Override
