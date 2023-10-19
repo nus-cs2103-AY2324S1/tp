@@ -3,9 +3,11 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EVENTS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_MEMBERS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalEvents.AURORA_BOREALIS;
+import static seedu.address.testutil.TypicalEvents.BOXING_DAY;
 import static seedu.address.testutil.TypicalMembers.ALICE;
 import static seedu.address.testutil.TypicalMembers.BENSON;
 
@@ -16,6 +18,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.event.EventNameContainsKeywordsPredicate;
 import seedu.address.model.member.MemberNameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
@@ -117,7 +120,8 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withMember(ALICE).withMember(BENSON).build();
+        AddressBook addressBook = new AddressBookBuilder().withMember(ALICE).withMember(BENSON)
+                .withEvent(AURORA_BOREALIS).withEvent(BOXING_DAY).build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -139,12 +143,15 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
 
         // different filteredList -> returns false
-        String[] keywords = ALICE.getName().name.split("\\s+");
-        modelManager.updateFilteredMemberList(new MemberNameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        String[] memberKeywords = ALICE.getName().name.split("\\s+");
+        String[] eventKeywords = AURORA_BOREALIS.getName().name.split("\\s+");
+        modelManager.updateFilteredMemberList(new MemberNameContainsKeywordsPredicate(Arrays.asList(memberKeywords)));
+        modelManager.updateFilteredEventList(new EventNameContainsKeywordsPredicate(Arrays.asList(eventKeywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredMemberList(PREDICATE_SHOW_ALL_MEMBERS);
+        modelManager.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();

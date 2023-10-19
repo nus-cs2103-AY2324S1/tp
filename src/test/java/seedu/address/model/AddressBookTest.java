@@ -126,6 +126,12 @@ public class AddressBookTest {
                 .build();
         assertFalse(addressBook.hasEvent(editedAurora));
     }
+
+    @Test
+    public void getEventList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> addressBook.getEventList().remove(0));
+    }
+
     @Test
     public void toStringMethod() {
         String expected = AddressBook.class.getCanonicalName() + "{members=" + addressBook.getMemberList()

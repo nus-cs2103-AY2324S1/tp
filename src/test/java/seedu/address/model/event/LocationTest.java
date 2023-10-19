@@ -1,4 +1,4 @@
-package seedu.location.model.event;
+package seedu.address.model.event;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
