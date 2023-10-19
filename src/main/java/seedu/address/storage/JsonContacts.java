@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import seedu.address.annotation.Nullable;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.Messages;
 import seedu.address.model.Contacts;
@@ -38,9 +39,11 @@ class JsonContacts {
 
     @JsonCreator
     public JsonContacts(
-        @JsonProperty("contacts") List<JsonContact> contacts
+        @JsonProperty("contacts") @Nullable List<JsonContact> contacts
     ) {
-        this.contacts.addAll(contacts);
+        if (contacts != null) {
+            this.contacts.addAll(contacts);
+        }
     }
 
     /**

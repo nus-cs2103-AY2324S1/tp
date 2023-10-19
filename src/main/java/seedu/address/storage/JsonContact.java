@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import seedu.address.annotation.Nullable;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.Messages;
 import seedu.address.model.contact.Contact;
@@ -27,10 +28,10 @@ import seedu.address.model.tag.Tag;
  * JSON. Checks are done when converting {@link #toModelType()}.
  */
 class JsonContact {
-    private final String name;
-    private final String phone;
-    private final String email;
-    private final String note;
+    private final @Nullable String name;
+    private final @Nullable String phone;
+    private final @Nullable String email;
+    private final @Nullable String note;
     private final List<JsonTag> tags = new ArrayList<>();
 
     /**
@@ -51,17 +52,20 @@ class JsonContact {
 
     @JsonCreator
     public JsonContact(
-        @JsonProperty("name") String name,
-        @JsonProperty("phone") String phone,
-        @JsonProperty("email") String email,
-        @JsonProperty("note") String note,
-        @JsonProperty("tags") List<JsonTag> tags
+        @JsonProperty("name") @Nullable String name,
+        @JsonProperty("phone") @Nullable String phone,
+        @JsonProperty("email") @Nullable String email,
+        @JsonProperty("note") @Nullable String note,
+        @JsonProperty("tags") @Nullable List<JsonTag> tags
     ) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.note = note;
-        this.tags.addAll(tags);
+
+        if (tags != null) {
+            this.tags.addAll(tags);
+        }
     }
 
     /**
