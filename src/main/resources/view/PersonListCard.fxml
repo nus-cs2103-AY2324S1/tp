@@ -52,11 +52,11 @@
           </ImageView>
           <Label fx:id="email" styleClass="cell_small_label" text="\$email">
             <HBox.margin>
-              <Insets left="-5.0" />
+              <Insets />
             </HBox.margin></Label>
         </children>
         <VBox.margin>
-          <Insets bottom="6.0" right="5.0" top="6.0" />
+          <Insets bottom="6.0" left="-3.0" right="5.0" top="6.0" />
         </VBox.margin>
       </HBox>
     </VBox>
