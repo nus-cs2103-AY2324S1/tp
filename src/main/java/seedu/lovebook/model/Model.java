@@ -80,6 +80,11 @@ public interface Model {
     ObservableList<Date> getFilteredPersonList();
 
     /**
+     * Returns a random date from the date list.
+     */
+    public void getRandomPerson();
+
+    /**
      * Updates the filter of the filtered date list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
