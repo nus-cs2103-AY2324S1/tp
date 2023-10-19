@@ -1,68 +1,59 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static seedu.address.testutil.TestData.getTypicalContactsManager;
 
 import java.nio.file.Path;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.ContactList;
-import seedu.address.model.ContactsManager;
-import seedu.address.model.UserPrefs;
+import seedu.address.model.ReadOnlyContacts;
+import seedu.address.model.ReadOnlySettings;
+import seedu.address.model.Settings;
+import seedu.address.testutil.TestData;
+
+
 
 public class StorageManagerTest {
-
     @TempDir
-    public Path testFolder;
+    public static Path TEMP_DIR;
 
-    private StorageManager storageManager;
+    private StorageManager manager;
 
-    @BeforeEach
-    public void setUp() {
-        JsonContactsStorage contactsStorage = new JsonContactsStorage(getTempFilePath("ab"));
-        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(contactsStorage, userPrefsStorage);
+    public StorageManagerTest() {
+        this.manager = new StorageManager(
+            new JsonContactsStorage(StorageManagerTest.TEMP_DIR.resolve("contacts.json")),
+            new JsonSettingsStorage(StorageManagerTest.TEMP_DIR.resolve("settings.json"))
+        );
     }
 
-    private Path getTempFilePath(String fileName) {
-        return testFolder.resolve(fileName);
-    }
-
+    /**
+     * Integration test that verifies {@link StorageManager} is properly wired
+     * to {@link SettingsStorage}.
+     */
     @Test
-    public void prefsReadSave() throws Exception {
-        /*
-         * Note: This is an integration test that verifies the StorageManager is properly wired to the
-         * {@link JsonUserPrefsStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link JsonUserPrefsStorageTest} class.
-         */
-        UserPrefs original = new UserPrefs();
-        original.setGuiSettings(new GuiSettings(300, 600, 4, 6));
-        storageManager.saveUserPrefs(original);
-        UserPrefs retrieved = storageManager.readUserPrefs().get();
-        assertEquals(original, retrieved);
+    public void saveSettings_saveRead_equal() throws Exception {
+        Settings expected = new Settings();
+        expected.setGuiSettings(new GuiSettings(300, 600, 4, 6));
+        this.manager.saveSettings(expected);
+
+        ReadOnlySettings actual = this.manager.readSettings().get();
+
+        assertEquals(expected, actual);
     }
 
+    /**
+     * Integration test that verifies {@link StorageManager} is properly wired
+     * to {@link ContactsStorage}.
+     */
     @Test
-    public void contactsManagerReadSave() throws Exception {
-        /*
-         * Note: This is an integration test that verifies the StorageManager is properly wired to the
-         * {@link JsonContactsStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link JsonContactsStorageTest} class.
-         */
-        ContactsManager original = getTypicalContactsManager();
-        storageManager.saveContactsManager(original);
-        ContactList retrieved = storageManager.readContactsManager().get();
-        assertEquals(original, new ContactsManager(retrieved));
-    }
+    public void saveContacts_saveRead_equal() throws Exception {
+        ReadOnlyContacts expected = TestData.getTypicalContacts();
+        this.manager.saveContacts(expected);
 
-    @Test
-    public void getContactsManagerFilePath() {
-        assertNotNull(storageManager.getConTextFilePath());
-    }
+        ReadOnlyContacts actual = this.manager.readContacts().get();
 
+        assertEquals(expected, actual);
+    }
 }
