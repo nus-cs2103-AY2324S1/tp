@@ -29,22 +29,22 @@ public class SpecialisationTest {
         assertFalse(Specialisation.isValidSpecialisation(" ")); // spaces only
         assertFalse(Specialisation
                 .isValidSpecialisation("I once saw a  balloon")); // more than one space between words
-        assertFalse(Specialisation.isValidSpecialisation("AIa")); // uppercase letters beyond the first character
-        assertFalse(Specialisation.isValidSpecialisation(", but")); // starting a word with comma, period, dash
-        assertFalse(Specialisation.isValidSpecialisation(".exe"));
-        assertFalse(Specialisation.isValidSpecialisation("-ish"));
+        assertFalse(Specialisation.isValidSpecialisation(" I once went to Kentucky")); // spaces in the beginning
 
         // valid specialisations
         assertTrue(Specialisation.isValidSpecialisation("Software Engineering"));
         assertTrue(Specialisation.isValidSpecialisation("AAA Gaming")); // all uppercase words (acronyms)
-        assertTrue(Specialisation.isValidSpecialisation("Networking and Distributed Systems")); // long address
         assertTrue(Specialisation
                 .isValidSpecialisation("Leader of the Multinational Party of Czechoslovakia and the "
-                        + "Associations Within the Umbrella of the Multinational Party.")); // very long address
+                        + "Associations Within the Umbrella of the Multinational Party.")); // very long specialisation
         assertTrue(Specialisation
                 .isValidSpecialisation("Industry 4.0 and AI planning, "
-                        + "decision-making")); // commas, periods, dashes not at the front
+                        + "decision-making")); // commas, periods, dashes
         assertTrue(Specialisation.isValidSpecialisation("developed moon.exe"));
+        assertTrue(Specialisation.isValidSpecialisation("AIa")); // uppercase letters beyond the first character
+        assertTrue(Specialisation.isValidSpecialisation(", but")); // starting a word with comma, period, dash
+        assertTrue(Specialisation.isValidSpecialisation(".exe"));
+        assertTrue(Specialisation.isValidSpecialisation("-ish"));
     }
 
     @Test

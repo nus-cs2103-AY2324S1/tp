@@ -11,24 +11,12 @@ public class Specialisation {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Specialisations can take any value, but should not be blank.\n"
-            + "Additionally, only the first letter of each word may be uppercase,\n"
-            + "and more than one space between each word is not allowed";
-
-    /*
-     * The first character of the specialisation must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     * Proceeding letters of a word should not be uppercase, unless...
-     */
-    public static final String NOT_ALL_CAPITALIZED_REGEX = "^[A-Za-z0-9][a-z0-9.,_-]{0,99}$";
-    /*
-     * The word is in all uppercase, such as for acronyms are also acceptable.
-     */
-    public static final String ALL_CAPITALIZED_REGEX = "^[A-Z]+$";
+            + "Additionally, the specialisation cannot start with spaces or have more than 1 space between words.";
 
     private final String specialisation;
 
     /**
-     * Constructs an {@code Course}.
+     * Constructs an {@code Specialisation}.
      *
      * @param specialisation A valid specialisation.
      */
@@ -42,11 +30,8 @@ public class Specialisation {
      * Returns true if a given string is a valid course.
      */
     public static boolean isValidSpecialisation(String test) {
-        if (test.startsWith(" ")) {
-            return false;
-        }
         for (String word : test.split(" ")) {
-            if (!(word.matches(NOT_ALL_CAPITALIZED_REGEX) || word.matches(ALL_CAPITALIZED_REGEX))) {
+            if ((word.equals(""))) {
                 return false;
             }
         }
