@@ -179,10 +179,10 @@ public class UniqueCardListTest {
     @Test
     public void add_cardWithSamePriority() {
         UniqueCardList otherList = new UniqueCardList();
-        uniqueCardList.add(LOW);
+        uniqueCardList.add(CS2100);
         uniqueCardList.add(HIGH);
         otherList.add(HIGH);
-        otherList.add(LOW);
+        otherList.add(CS2100);
         assertFalse(uniqueCardList.equals(otherList));
     }
 
@@ -197,6 +197,5 @@ public class UniqueCardListTest {
         otherList.add(low);
         otherList.add(HIGH);
         assertTrue(uniqueCardList.equals(otherList));
-        LOW.setPriority(Integer.MAX_VALUE);
     }
 }
