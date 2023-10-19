@@ -206,6 +206,15 @@ Clears all entries from the address book.
 
 Format: `clear`
 
+### Sorting all entries by lexicographical order: `sort`
+
+Sorts all the entries in lexicographical order. After sorting the list, the ordering of the entries will be changed.
+As a result, performing delete operations that require indexing will reference the new ordering that is currently 
+displayed on the screen
+
+Format: `sort`
+
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -254,3 +263,4 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
+**Sort** | `sort`
