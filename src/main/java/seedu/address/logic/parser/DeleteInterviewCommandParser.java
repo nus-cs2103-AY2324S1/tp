@@ -15,7 +15,7 @@ public class DeleteInterviewCommandParser implements Parser<DeleteInterviewComma
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteInterviewCommand
      * and returns a DeleteInterviewCommand object for execution.
-     * @throws seedu.address.logic.parser.exceptions.ParseException if the user input does not conform 
+     * @throws seedu.address.logic.parser.exceptions.ParseException if the user input does not conform
      *     the expected format
      */
     public DeleteInterviewCommand parse(String args) throws ParseException {
