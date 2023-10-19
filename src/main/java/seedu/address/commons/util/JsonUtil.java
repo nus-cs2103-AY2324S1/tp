@@ -39,13 +39,13 @@ public class JsonUtil {
                     .addSerializer(Level.class, new ToStringSerializer())
                     .addDeserializer(Level.class, new LevelDeserializer(Level.class)));
 
-    static <T> void serializeObjectToJsonFile(Path jsonFile, T objectToSerialize) throws IOException {
+    static <T> void serializeToFile(Path jsonFile, T objectToSerialize) throws IOException {
         FileUtil.writeToFile(jsonFile, toJsonString(objectToSerialize));
     }
 
-    static <T> T deserializeObjectFromJsonFile(Path jsonFile, Class<T> classOfObjectToDeserialize)
+    static <T> T deserializeFromFile(Path jsonFile, Class<T> clazz)
             throws IOException {
-        return fromJsonString(FileUtil.readFromFile(jsonFile), classOfObjectToDeserialize);
+        return fromJsonString(FileUtil.readFromFile(jsonFile), clazz);
     }
 
     /**
@@ -53,11 +53,11 @@ public class JsonUtil {
      * If any values are missing from the file, default values will be used, as long as the file is a valid JSON file.
      *
      * @param filePath cannot be null.
-     * @param classOfObjectToDeserialize JSON file has to correspond to the structure in the class given here.
+     * @param clazz JSON file has to correspond to the structure in the class given here.
      * @throws DataLoadingException if loading of the JSON file failed.
      */
     public static <T> Optional<T> readJsonFile(
-            Path filePath, Class<T> classOfObjectToDeserialize) throws DataLoadingException {
+            Path filePath, Class<T> clazz) throws DataLoadingException {
         requireNonNull(filePath);
 
         if (!Files.exists(filePath)) {
@@ -68,7 +68,7 @@ public class JsonUtil {
         T jsonFile;
 
         try {
-            jsonFile = deserializeObjectFromJsonFile(filePath, classOfObjectToDeserialize);
+            jsonFile = deserializeFromFile(filePath, clazz);
         } catch (IOException e) {
             logger.warning("Error reading from jsonFile file " + filePath + ": " + e);
             throw new DataLoadingException(e);
@@ -88,7 +88,7 @@ public class JsonUtil {
         requireNonNull(filePath);
         requireNonNull(jsonFile);
 
-        serializeObjectToJsonFile(filePath, jsonFile);
+        serializeToFile(filePath, jsonFile);
     }
 
 
