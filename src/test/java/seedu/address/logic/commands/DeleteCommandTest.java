@@ -71,7 +71,7 @@ public class DeleteCommandTest {
         showContactAtIndex(model, INDEX_FIRST_CONTACT);
 
         Index outOfBoundIndex = INDEX_SECOND_CONTACT;
-        // ensures that outOfBoundIndex is still in bounds of address book list
+        // ensures that outOfBoundIndex is still in bounds of Contacts
         assertTrue(outOfBoundIndex.getZeroBased() < model.getContacts().getUnmodifiableList().size());
 
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);

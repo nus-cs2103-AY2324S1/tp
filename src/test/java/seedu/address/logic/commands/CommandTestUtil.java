@@ -48,10 +48,13 @@ public class CommandTestUtil {
     }
 
     /**
-     * Executes the given {@code command}, confirms that <br>
-     * - a {@code CommandException} is thrown <br>
-     * - the CommandException message matches {@code expectedMessage} <br>
-     * - the address book, filtered contact list and selected contact in {@code actualModel} remain unchanged
+     * Executes the specified {@link Command}.
+     *
+     * Asserts that a {@link CommandException} is thrown whose messages matches
+     * the specified one.
+     *
+     * Asserts that the {@link Contacts} and filtered contact list in the
+     * {@link Model} remain unchanged.
      */
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
@@ -60,12 +63,14 @@ public class CommandTestUtil {
         List<Contact> expectedFilteredList = new ArrayList<>(actualModel.getFilteredContactList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
+
         assertEquals(expectedContactsManager, actualModel.getContacts());
         assertEquals(expectedFilteredList, actualModel.getFilteredContactList());
     }
     /**
-     * Updates {@code model}'s filtered list to show only the contact at the given {@code targetIndex} in the
-     * {@code model}'s address book.
+     * Updates the specified {@link Model}'s filtered list to show only the
+     * {@link Contact} at the specified {@link Index} in {@link Model}'s
+     * {@link Contacts}.
      */
     public static void showContactAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredContactList().size());
