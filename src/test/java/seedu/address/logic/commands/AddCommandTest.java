@@ -196,6 +196,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void removeMusicianFromBand(int bandIndex, int musicianIndex) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deleteBand(Band target) {
             throw new AssertionError("This method should not be called.");
         }

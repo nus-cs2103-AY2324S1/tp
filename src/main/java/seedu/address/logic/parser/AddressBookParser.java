@@ -21,6 +21,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListBandCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.RemoveMusicianFromBandCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -89,6 +90,9 @@ public class AddressBookParser {
 
         case AddMusiciantoBandCommand.COMMAND_WORD:
             return new AddMusiciantoBandCommandParser().parse(arguments);
+
+        case RemoveMusicianFromBandCommand.COMMAND_WORD:
+            return new RemoveMusicianFromBandCommandParser().parse(arguments);
 
         case DeleteBandCommand.COMMAND_WORD:
             return new DeleteBandCommandParser().parse(arguments);
