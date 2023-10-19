@@ -57,7 +57,7 @@ organise and manage patient details faster than traditional GUI apps.
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
-* The word `or` indicates that at least one of the fields has to be supplied by the user. 
+* The word `or` indicates that at least one of the fields has to be supplied by the user.
   The output `or` will return the above field that was supplied by the user.
 * `[field]` are optional tags that can be added after a command.
 
@@ -153,7 +153,7 @@ Format: `edit n/NAME or id/IC_NUMBER [field] ...`
 Example commands:
  * `edit n/John Doe p/91234567 e/johndoe@example.com`
 
- 
+
 Expected outputs when the command succeeds:
 * `Patient John Doe has been updated with the fields:  p/91234567 e/johndoe@example.com`
 
@@ -263,7 +263,7 @@ _Details coming soon ..._
 
 ## Known issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only 
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only
    the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by
    the application before running the application again.
 

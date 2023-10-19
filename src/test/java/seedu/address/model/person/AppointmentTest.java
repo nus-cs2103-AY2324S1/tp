@@ -22,7 +22,7 @@ public class AppointmentTest {
 
     @Test
     public void constructor_invalidAppointment_throwsIllegalArgumentException() {
-        String invalidAppointment = "";
+        String invalidAppointment = " ";
         assertThrows(IllegalArgumentException.class, () -> new Appointment(invalidAppointment));
     }
 

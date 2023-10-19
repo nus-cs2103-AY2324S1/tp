@@ -5,7 +5,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's Appointment in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidAppointment(String)}
+ * Guarantees: immutable; is valid as declared in
+ * {@link #isValidAppointment(String)}
  */
 public class Appointment {
 
