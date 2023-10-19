@@ -112,7 +112,7 @@ Examples:
 *  `list attendance tn/1` Shows a summary of attendance records of all students for Tutorial #1.
 *  `list attendance tn/3 coursetg/CS2103T` Shows a summary of attendance records of the students in CS2103T for Tutorial #3.
 
-### Searching for student's contact via keyword : `find` [Coming Soon]
+### Searching for student's contact via keyword : `find`
 
 Finds a student's contact either via their name or student ID.
 
