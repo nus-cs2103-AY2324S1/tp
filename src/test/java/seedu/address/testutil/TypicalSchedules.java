@@ -8,6 +8,7 @@ import java.util.List;
 import seedu.address.model.AddressBook;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.Schedule;
+import seedu.address.model.schedule.Status;
 
 /**
  * A utility class containing a list of {@code Schedule} objects to be used in tests.
@@ -18,12 +19,14 @@ public class TypicalSchedules {
             .withTutor(TypicalPersons.ALICE)
             .withStartTime(LocalDateTime.of(2023, 1, 1, 9, 0, 0))
             .withEndTime(LocalDateTime.of(2023, 1, 1, 11, 0, 0))
+            .withStatus(Status.PENDING)
             .build();
 
     public static final Schedule SCHEDULE_BOB_SECOND_JAN = new ScheduleBuilder()
             .withTutor(TypicalPersons.BOB)
             .withStartTime(LocalDateTime.of(2023, 1, 2, 20, 0, 0))
             .withEndTime(LocalDateTime.of(2023, 1, 2, 22, 0, 0))
+            .withStatus(Status.PENDING)
             .build();
 
     private TypicalSchedules() {} // prevents instantiation

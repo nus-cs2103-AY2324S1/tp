@@ -17,6 +17,7 @@ public class Schedule {
     private final Person tutor;
     private final StartTime startTime;
     private final EndTime endTime;
+    private final Status status;
 
     /**
      * Every field must be present and not null.
@@ -28,6 +29,20 @@ public class Schedule {
         this.tutor = tutor;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.status = Status.PENDING;
+    }
+
+    /**
+     * Every field must be present and not null.
+     */
+    public Schedule(Person tutor, StartTime startTime, EndTime endTime, Status status) {
+        requireAllNonNull(tutor, startTime, endTime, status);
+        checkArgument(isValidSchedule(startTime, endTime), MESSAGE_CONSTRAINTS);
+
+        this.tutor = tutor;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.status = status;
     }
 
     private boolean isValidSchedule(StartTime startTime, EndTime endTime) {
@@ -44,6 +59,10 @@ public class Schedule {
 
     public EndTime getEndTime() {
         return endTime;
+    }
+
+    public Status getStatus() {
+        return status;
     }
 
     /**
@@ -82,13 +101,14 @@ public class Schedule {
         Schedule otherSchedule = (Schedule) other;
         return tutor.equals(otherSchedule.tutor)
                 && startTime.equals(otherSchedule.startTime)
-                && endTime.equals(otherSchedule.endTime);
+                && endTime.equals(otherSchedule.endTime)
+                && status.equals(otherSchedule.status);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(tutor, startTime, endTime);
+        return Objects.hash(tutor, startTime, endTime, status);
     }
 
     @Override
@@ -97,6 +117,7 @@ public class Schedule {
                 .add("tutor", tutor)
                 .add("startTime", startTime)
                 .add("endTime", endTime)
+                .add("status", status)
                 .toString();
     }
 }

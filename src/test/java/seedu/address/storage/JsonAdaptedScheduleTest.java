@@ -23,10 +23,12 @@ public class JsonAdaptedScheduleTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_STARTTIME = "15/02/2023 6pm";
     private static final String INVALID_ENDTIME = "14/02/2023 6pm";
+    private static final String INVALID_STATUS = "status";
 
     private static final String VALID_NAME = SCHEDULE_ALICE_FIRST_JAN.getTutor().getName().toString();
     private static final String VALID_STARTTIME = SCHEDULE_ALICE_FIRST_JAN.getStartTime().getTime().format(formatter);
     private static final String VALID_ENDTIME = SCHEDULE_ALICE_FIRST_JAN.getEndTime().getTime().format(formatter);
+    private static final String VALID_STATUS = SCHEDULE_ALICE_FIRST_JAN.getStatus().toString();
 
     private static final AddressBook original = TypicalSchedules.getTypicalAddressBook();
 
@@ -40,14 +42,14 @@ public class JsonAdaptedScheduleTest {
     @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
         JsonAdaptedSchedule schedule =
-                new JsonAdaptedSchedule(INVALID_NAME, VALID_STARTTIME, VALID_ENDTIME);
+                new JsonAdaptedSchedule(INVALID_NAME, VALID_STARTTIME, VALID_ENDTIME, VALID_STATUS);
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, () -> schedule.toModelType(original));
     }
 
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
-        JsonAdaptedSchedule schedule = new JsonAdaptedSchedule(null, VALID_STARTTIME, VALID_ENDTIME);
+        JsonAdaptedSchedule schedule = new JsonAdaptedSchedule(null, VALID_STARTTIME, VALID_ENDTIME, VALID_STATUS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, () -> schedule.toModelType(original));
     }
@@ -55,14 +57,14 @@ public class JsonAdaptedScheduleTest {
     @Test
     public void toModelType_invalidStartTime_throwsIllegalValueException() {
         JsonAdaptedSchedule schedule =
-                new JsonAdaptedSchedule(VALID_NAME, INVALID_STARTTIME, INVALID_ENDTIME);
+                new JsonAdaptedSchedule(VALID_NAME, INVALID_STARTTIME, VALID_ENDTIME, VALID_STATUS);
         String expectedMessage = StartTime.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, () -> schedule.toModelType(original));
     }
 
     @Test
     public void toModelType_nullStartTime_throwsIllegalValueException() {
-        JsonAdaptedSchedule schedule = new JsonAdaptedSchedule(VALID_NAME, null, VALID_ENDTIME);
+        JsonAdaptedSchedule schedule = new JsonAdaptedSchedule(VALID_NAME, null, VALID_ENDTIME, VALID_STATUS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, StartTime.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, () -> schedule.toModelType(original));
     }
@@ -70,16 +72,29 @@ public class JsonAdaptedScheduleTest {
     @Test
     public void toModelType_invalidEndTime_throwsIllegalValueException() {
         JsonAdaptedSchedule schedule =
-                new JsonAdaptedSchedule(VALID_NAME, VALID_STARTTIME, INVALID_ENDTIME);
+                new JsonAdaptedSchedule(VALID_NAME, VALID_STARTTIME, INVALID_ENDTIME, VALID_STATUS);
         String expectedMessage = EndTime.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, () -> schedule.toModelType(original));
     }
 
     @Test
     public void toModelType_nullEndTime_throwsIllegalValueException() {
-        JsonAdaptedSchedule schedule = new JsonAdaptedSchedule(VALID_NAME, VALID_STARTTIME, null);
+        JsonAdaptedSchedule schedule = new JsonAdaptedSchedule(VALID_NAME, VALID_STARTTIME, null, VALID_STATUS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, EndTime.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, () -> schedule.toModelType(original));
+    }
+
+    @Test
+    public void toModelType_invalidStatus_throwsIllegalArgumentException() {
+        JsonAdaptedSchedule schedule =
+            new JsonAdaptedSchedule(VALID_NAME, VALID_STARTTIME, VALID_ENDTIME, INVALID_STATUS);
+        assertThrows(IllegalArgumentException.class, () -> schedule.toModelType(original));
+    }
+
+    @Test
+    public void toModelType_nullStatus_throwsIllegalValueException() {
+        JsonAdaptedSchedule schedule = new JsonAdaptedSchedule(VALID_NAME, VALID_STARTTIME, VALID_ENDTIME, null);
+        assertThrows(IllegalValueException.class, () -> schedule.toModelType(original));
     }
 
 }

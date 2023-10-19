@@ -164,13 +164,20 @@ class ScheduleTest {
                 .withEndTime(LocalDateTime.of(2023, 1, 2, 10, 0, 0))
                 .build();
         assertFalse(SCHEDULE_ALICE_FIRST_JAN.equals(editedOne));
+
+        // different status -> returns false
+        editedOne = new ScheduleBuilder(SCHEDULE_ALICE_FIRST_JAN)
+            .withStatus(Status.COMPLETED)
+            .build();
+        assertFalse(SCHEDULE_ALICE_FIRST_JAN.equals(editedOne));
     }
 
     @Test
     public void toStringMethod() {
         String expected = Schedule.class.getCanonicalName() + "{tutor=" + SCHEDULE_ALICE_FIRST_JAN.getTutor()
                 + ", startTime=" + SCHEDULE_ALICE_FIRST_JAN.getStartTime()
-                + ", endTime=" + SCHEDULE_ALICE_FIRST_JAN.getEndTime() + "}";
+                + ", endTime=" + SCHEDULE_ALICE_FIRST_JAN.getEndTime()
+                + ", status=" + SCHEDULE_ALICE_FIRST_JAN.getStatus() + "}";
         assertEquals(expected, SCHEDULE_ALICE_FIRST_JAN.toString());
     }
 }

@@ -18,6 +18,7 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.schedule.EndTime;
 import seedu.address.model.schedule.Schedule;
 import seedu.address.model.schedule.StartTime;
+import seedu.address.model.schedule.Status;
 
 /**
  * Jackson-friendly version of {@link seedu.address.model.schedule.Schedule}.
@@ -26,21 +27,24 @@ class JsonAdaptedSchedule {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Schedule's %s field is missing!";
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATETIME_INPUT_FORMAT);
+
     private final String name;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DATETIME_INPUT_FORMAT)
     private final String startTime;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DATETIME_INPUT_FORMAT)
     private final String endTime;
+    private final String status;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
     public JsonAdaptedSchedule(@JsonProperty("name") String name, @JsonProperty("startTime") String startTime,
-                               @JsonProperty("endTime") String endTime) {
+                               @JsonProperty("endTime") String endTime, @JsonProperty("status") String status) {
         this.name = name;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.status = status;
     }
 
     /**
@@ -50,6 +54,7 @@ class JsonAdaptedSchedule {
         name = source.getTutor().getName().fullName;
         startTime = source.getStartTime().getTime().format(formatter);
         endTime = source.getEndTime().getTime().format(formatter);
+        status = source.getStatus().toString();
     }
 
     /**
@@ -83,7 +88,11 @@ class JsonAdaptedSchedule {
         }
         final EndTime modelEndTime = new EndTime(LocalDateTime.parse(endTime, formatter));
 
-        return new Schedule(getTutorFromName(modelName, addressBook), modelStartTime, modelEndTime);
+        if (status == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Status.class.getSimpleName()));
+        }
+        return new Schedule(getTutorFromName(modelName, addressBook), modelStartTime, modelEndTime,
+            Status.valueOf(status));
     }
 
     /**

@@ -1,9 +1,14 @@
 package seedu.address.ui;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
 import seedu.address.model.schedule.Schedule;
 
 /**
@@ -12,6 +17,12 @@ import seedu.address.model.schedule.Schedule;
 public class ScheduleCard extends UiPart<Region> {
 
     private static final String FXML = "ScheduleListCard.fxml";
+    private static final Background MISSED_STATUS_BACKGROUND = new Background(new BackgroundFill(Color.RED,
+        new CornerRadii(5), Insets.EMPTY));
+    private static final Background COMPLETED_STATUS_BACKGROUND = new Background(new BackgroundFill(Color.GREEN,
+        new CornerRadii(5), Insets.EMPTY));
+    private static final Background PENDING_STATUS_BACKGROUND = new Background(new BackgroundFill(Color.GRAY,
+        new CornerRadii(5), Insets.EMPTY));
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -33,6 +44,8 @@ public class ScheduleCard extends UiPart<Region> {
     private Label startTime;
     @FXML
     private Label endTime;
+    @FXML
+    private Label status;
 
     /**
      * Creates a {@code ScheduleCode} with the given {@code Schedule} and index to display.
@@ -44,5 +57,18 @@ public class ScheduleCard extends UiPart<Region> {
         name.setText(schedule.getTutor().getName().fullName);
         startTime.setText(schedule.getStartTime().toString());
         endTime.setText(schedule.getEndTime().toString());
+        status.setText(schedule.getStatus().toString());
+        switch (schedule.getStatus()) {
+        case MISSED:
+            status.setBackground(MISSED_STATUS_BACKGROUND);
+            break;
+        case COMPLETED:
+            status.setBackground(COMPLETED_STATUS_BACKGROUND);
+            break;
+        case PENDING:
+        default:
+            status.setBackground(PENDING_STATUS_BACKGROUND);
+        }
+        status.setPadding(new Insets(2));
     }
 }
