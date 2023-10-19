@@ -14,8 +14,6 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand.EditContactDescriptor;
 import seedu.address.model.Contacts;
-import seedu.address.model.ReadOnlyContacts;
-import seedu.address.model.ReadOnlySettings;
 import seedu.address.model.Settings;
 import seedu.address.model.contact.Contact;
 
