@@ -23,6 +23,7 @@ public class HelpCommand extends Command {
             + GatherCommand.COMMAND_WORD + ", "
             + COMMAND_WORD + ", "
             + ListCommand.COMMAND_WORD + ", "
+            + ScheduleCommand.COMMAND_WORD + ", "
             + SortCommand.COMMAND_WORD;
 
     @Override
