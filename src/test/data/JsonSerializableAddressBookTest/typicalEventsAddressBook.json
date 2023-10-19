@@ -2,39 +2,39 @@
   "_comment": "AddressBook save file which contains the same Event values as in TypicalEvents#getTypicalAddressBook()",
   "members" : [],
   "events" : [ {
-    "name" : "Study Session",
-    "eventDate" : "2023-04-23",
-    "location" : "Central Library",
+    "name" : "Aurora Borealis",
+    "eventDate" : "2023-11-30",
+    "location" : "Greenland",
     "tags" : [ ]
   }, {
-    "name" : "Track Training",
-    "eventDate" : "2023-10-19",
-    "location" : "NUS Track",
+    "name" : "Boxing Day",
+    "eventDate" : "2023-12-26",
+    "location" : "Ridge View Residential College",
     "tags" : [ ]
   }, {
-    "name" : "Event Planning Meeting",
-    "eventDate" : "2023-09-20",
-    "location" : "Planning Room",
+    "name" : "Chinese New Year",
+    "eventDate" : "2024-02-10",
+    "location" : "Communal Hall",
     "tags" : [ ]
   }, {
-    "name" : "CCA Committee Election Day",
-    "eventDate" : "2023-08-06",
-    "location" : "UTown Auditorium",
+    "name" : "Dog Celebration Day",
+    "eventDate" : "2024-08-26",
+    "location" : "UTown Pitstop",
     "tags" : [ ]
   }, {
-    "name" : "Stakeholders Meeting",
-    "eventDate" : "2023-12-01",
-    "location" : "Shopback's Pasir Panjang Office",
+    "name" : "Echo Day",
+    "eventDate" : "2023-05-05",
+    "location" : "Batu Cave",
     "tags" : [ ]
   }, {
-    "name" : "Group Party",
-    "eventDate" : "2023-04-19",
-    "location" : "Planning Room",
+    "name" : "Festival",
+    "eventDate" : "2023-10-05",
+    "location" : "Clementi 321",
     "tags" : [ ]
   }, {
-    "name" : "Store Keeping",
-    "eventDate" : "2023-07-25",
-    "location" : "Storeroom",
+    "name" : "Gravity Discovery Day",
+    "eventDate" : "1666-06-18",
+    "location" : "Cambridge University",
     "tags" : [ ]
   } ]
 }

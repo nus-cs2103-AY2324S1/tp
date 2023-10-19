@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalMembers.ALICE;
+import static seedu.address.testutil.TypicalEvents.BOXING_DAY;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -24,70 +24,70 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.event.Event;
 import seedu.address.model.member.Member;
-import seedu.address.testutil.MemberBuilder;
+import seedu.address.testutil.EventBuilder;
 
-public class CreateMemberCommandTest {
+public class CreateEventCommandTest {
 
     @Test
-    public void constructor_nullMember_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new CreateMemberCommand(null));
+    public void constructor_nullEvent_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new CreateEventCommand(null));
     }
 
     @Test
-    public void execute_memberAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingMemberAdded modelStub = new ModelStubAcceptingMemberAdded();
-        Member validMember = new MemberBuilder().build();
+    public void execute_eventAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingEventAdded modelStub = new ModelStubAcceptingEventAdded();
+        Event validEvent = new EventBuilder().build();
 
-        CommandResult commandResult = new CreateMemberCommand(validMember).execute(modelStub);
+        CommandResult commandResult = new CreateEventCommand(validEvent).execute(modelStub);
 
-        assertEquals(String.format(CreateMemberCommand.MESSAGE_SUCCESS, Messages.format(validMember)),
+        assertEquals(String.format(CreateEventCommand.MESSAGE_SUCCESS, Messages.format(validEvent)),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validMember), modelStub.membersAdded);
+        assertEquals(Arrays.asList(validEvent), modelStub.eventsAdded);
     }
 
     @Test
-    public void execute_duplicateMember_throwsCommandException() {
-        Member validMember = new MemberBuilder().build();
-        CreateMemberCommand createMemberCommand = new CreateMemberCommand(validMember);
-        ModelStub modelStub = new ModelStubWithMember(validMember);
+    public void execute_duplicateEvent_throwsCommandException() {
+        Event validEvent = new EventBuilder().build();
+        CreateEventCommand createEventCommand = new CreateEventCommand(validEvent);
+        ModelStub modelStub = new ModelStubWithEvent(validEvent);
 
         assertThrows(CommandException.class,
-                CreateMemberCommand.MESSAGE_DUPLICATE_MEMBER, () -> createMemberCommand.execute(modelStub));
+                CreateEventCommand.MESSAGE_DUPLICATE_EVENT, () -> createEventCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
-        Member alice = new MemberBuilder().withName("Alice").build();
-        Member bob = new MemberBuilder().withName("Bob").build();
-        CreateMemberCommand addAliceCommand = new CreateMemberCommand(alice);
-        CreateMemberCommand addBobCommand = new CreateMemberCommand(bob);
+        Event party = new EventBuilder().withName("Party").build();
+        Event marathon = new EventBuilder().withName("Marathon").build();
+        CreateEventCommand addPartyCommand = new CreateEventCommand(party);
+        CreateEventCommand addMarathonCommand = new CreateEventCommand(marathon);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertTrue(addPartyCommand.equals(addPartyCommand));
 
         // same values -> returns true
-        CreateMemberCommand addAliceCommandCopy = new CreateMemberCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        CreateEventCommand addPartyCommandCopy = new CreateEventCommand(party);
+        assertTrue(addPartyCommand.equals(addPartyCommandCopy));
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertFalse(addPartyCommand.equals(1));
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertFalse(addPartyCommand.equals(null));
 
         // different member -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        assertFalse(addPartyCommand.equals(addMarathonCommand));
     }
 
     @Test
     public void toStringMethod() {
-        CreateMemberCommand createMemberCommand = new CreateMemberCommand(ALICE);
-        String expected = CreateMemberCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
-        assertEquals(expected, createMemberCommand.toString());
+        CreateEventCommand createEventCommand = new CreateEventCommand(BOXING_DAY);
+        String expected = CreateEventCommand.class.getCanonicalName() + "{toAdd=" + BOXING_DAY + "}";
+        assertEquals(expected, createEventCommand.toString());
     }
 
     /**
-     * A default model stub that have all of the methods failing.
+     * A default model stub that has all the methods failing.
      */
     private class ModelStub implements Model {
         @Override
@@ -193,37 +193,37 @@ public class CreateMemberCommandTest {
     /**
      * A Model stub that contains a single member.
      */
-    private class ModelStubWithMember extends ModelStub {
-        private final Member member;
+    private class ModelStubWithEvent extends ModelStub {
+        private final Event event;
 
-        ModelStubWithMember(Member member) {
-            requireNonNull(member);
-            this.member = member;
+        ModelStubWithEvent(Event event) {
+            requireNonNull(event);
+            this.event = event;
         }
 
         @Override
-        public boolean hasMember(Member member) {
-            requireNonNull(member);
-            return this.member.isSameMember(member);
+        public boolean hasEvent(Event event) {
+            requireNonNull(event);
+            return this.event.isSameEvent(event);
         }
     }
 
     /**
-     * A Model stub that always accept the member being added.
+     * A Model stub that always accept the event being added.
      */
-    private class ModelStubAcceptingMemberAdded extends ModelStub {
-        final ArrayList<Member> membersAdded = new ArrayList<>();
+    private class ModelStubAcceptingEventAdded extends ModelStub {
+        final ArrayList<Event> eventsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasMember(Member member) {
-            requireNonNull(member);
-            return membersAdded.stream().anyMatch(member::isSameMember);
+        public boolean hasEvent(Event event) {
+            requireNonNull(event);
+            return eventsAdded.stream().anyMatch(event::isSameEvent);
         }
 
         @Override
-        public void createMember(Member member) {
-            requireNonNull(member);
-            membersAdded.add(member);
+        public void createEvent(Event event) {
+            requireNonNull(event);
+            eventsAdded.add(event);
         }
 
         @Override

@@ -12,6 +12,30 @@ import seedu.address.model.member.Member;
  */
 public class TypicalAddressBook {
     /**
+     * Returns an {@code AddressBook} with only typical members.
+     */
+    public static AddressBook getTypicalMemberAddressBook() {
+        AddressBook ab = new AddressBook();
+        for (Member member : getTypicalMembers()) {
+            ab.createMember(member);
+        }
+
+        return ab;
+    }
+
+    /**
+     * Returns an {@code AddressBook} with only typical events.
+     */
+    public static AddressBook getTypicalEventAddressBook() {
+        AddressBook ab = new AddressBook();
+        for (Event event: getTypicalEvents()) {
+            ab.createEvent(event);
+        }
+
+        return ab;
+    }
+
+    /**
      * Returns an {@code AddressBook} with all the typical members and events.
      */
     public static AddressBook getTypicalAddressBook() {
@@ -21,7 +45,7 @@ public class TypicalAddressBook {
         }
 
         for (Event event: getTypicalEvents()) {
-            ab.addEvent(event);
+            ab.createEvent(event);
         }
 
         return ab;

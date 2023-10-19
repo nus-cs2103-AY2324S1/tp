@@ -34,13 +34,13 @@ public class UniqueEventListTest {
 
     @Test
     public void contains_eventInList_returnsTrue() {
-        uniqueEventList.addEvent(AURORA_BOREALIS);
+        uniqueEventList.createEvent(AURORA_BOREALIS);
         assertTrue(uniqueEventList.contains(AURORA_BOREALIS));
     }
 
     @Test
     public void contains_eventWithSameIdentityFieldsInList_returnsTrue() {
-        uniqueEventList.addEvent(AURORA_BOREALIS);
+        uniqueEventList.createEvent(AURORA_BOREALIS);
         Event editedAurora = new EventBuilder(AURORA_BOREALIS).withLocation(VALID_LOCATION_BOXING)
                 .build();
         assertFalse(uniqueEventList.contains(editedAurora));
@@ -48,13 +48,13 @@ public class UniqueEventListTest {
 
     @Test
     public void add_nullEvent_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueEventList.addEvent(null));
+        assertThrows(NullPointerException.class, () -> uniqueEventList.createEvent(null));
     }
 
     @Test
     public void add_duplicateEvent_throwsDuplicateEventException() {
-        uniqueEventList.addEvent(AURORA_BOREALIS);
-        assertThrows(DuplicateEventException.class, () -> uniqueEventList.addEvent(AURORA_BOREALIS));
+        uniqueEventList.createEvent(AURORA_BOREALIS);
+        assertThrows(DuplicateEventException.class, () -> uniqueEventList.createEvent(AURORA_BOREALIS));
     }
 
     @Test
@@ -74,37 +74,37 @@ public class UniqueEventListTest {
 
     @Test
     public void setEvent_editedEventIsSameEvent_success() {
-        uniqueEventList.addEvent(AURORA_BOREALIS);
+        uniqueEventList.createEvent(AURORA_BOREALIS);
         uniqueEventList.setEvent(AURORA_BOREALIS, AURORA_BOREALIS);
         UniqueEventList expectedUniqueEventList = new UniqueEventList();
-        expectedUniqueEventList.addEvent(AURORA_BOREALIS);
+        expectedUniqueEventList.createEvent(AURORA_BOREALIS);
         assertEquals(expectedUniqueEventList, uniqueEventList);
     }
 
     @Test
     public void setEvent_editedEventHasSameIdentity_success() {
-        uniqueEventList.addEvent(AURORA_BOREALIS);
+        uniqueEventList.createEvent(AURORA_BOREALIS);
         Event editedAurora = new EventBuilder(AURORA_BOREALIS).withLocation(VALID_LOCATION_BOXING)
                 .build();
         uniqueEventList.setEvent(AURORA_BOREALIS, editedAurora);
         UniqueEventList expectedUniqueEventList = new UniqueEventList();
-        expectedUniqueEventList.addEvent(editedAurora);
+        expectedUniqueEventList.createEvent(editedAurora);
         assertEquals(expectedUniqueEventList, uniqueEventList);
     }
 
     @Test
     public void setEvent_editedEventHasDifferentIdentity_success() {
-        uniqueEventList.addEvent(AURORA_BOREALIS);
+        uniqueEventList.createEvent(AURORA_BOREALIS);
         uniqueEventList.setEvent(AURORA_BOREALIS, BOXING_DAY);
         UniqueEventList expectedUniqueEventList = new UniqueEventList();
-        expectedUniqueEventList.addEvent(BOXING_DAY);
+        expectedUniqueEventList.createEvent(BOXING_DAY);
         assertEquals(expectedUniqueEventList, uniqueEventList);
     }
 
     @Test
     public void setEvent_editedEventHasNonUniqueIdentity_throwsDuplicateEventException() {
-        uniqueEventList.addEvent(AURORA_BOREALIS);
-        uniqueEventList.addEvent(BOXING_DAY);
+        uniqueEventList.createEvent(AURORA_BOREALIS);
+        uniqueEventList.createEvent(BOXING_DAY);
         assertThrows(DuplicateEventException.class, () -> uniqueEventList.setEvent(AURORA_BOREALIS, BOXING_DAY));
     }
 
@@ -120,7 +120,7 @@ public class UniqueEventListTest {
 
     @Test
     public void remove_existingEvent_removesEvent() {
-        uniqueEventList.addEvent(AURORA_BOREALIS);
+        uniqueEventList.createEvent(AURORA_BOREALIS);
         uniqueEventList.remove(AURORA_BOREALIS);
         UniqueEventList expectedUniqueEventList = new UniqueEventList();
         assertEquals(expectedUniqueEventList, uniqueEventList);
@@ -133,9 +133,9 @@ public class UniqueEventListTest {
 
     @Test
     public void setEvents_uniqueEventList_replacesOwnListWithProvidedUniqueEventList() {
-        uniqueEventList.addEvent(AURORA_BOREALIS);
+        uniqueEventList.createEvent(AURORA_BOREALIS);
         UniqueEventList expectedUniqueEventList = new UniqueEventList();
-        expectedUniqueEventList.addEvent(BOXING_DAY);
+        expectedUniqueEventList.createEvent(BOXING_DAY);
         uniqueEventList.setEvents(expectedUniqueEventList);
         assertEquals(expectedUniqueEventList, uniqueEventList);
     }
@@ -147,11 +147,11 @@ public class UniqueEventListTest {
 
     @Test
     public void setEvents_list_replacesOwnListWithProvidedList() {
-        uniqueEventList.addEvent(AURORA_BOREALIS);
+        uniqueEventList.createEvent(AURORA_BOREALIS);
         List<Event> eventList = Collections.singletonList(BOXING_DAY);
         uniqueEventList.setEvents(eventList);
         UniqueEventList expectedUniqueEventList = new UniqueEventList();
-        expectedUniqueEventList.addEvent(BOXING_DAY);
+        expectedUniqueEventList.createEvent(BOXING_DAY);
         assertEquals(expectedUniqueEventList, uniqueEventList);
     }
 

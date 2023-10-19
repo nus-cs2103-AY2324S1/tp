@@ -121,8 +121,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Adds an event to the address book.
      * The event must not already exist in the address book.
      */
-    public void addEvent(Event e) {
-        events.addEvent(e);
+    public void createEvent(Event e) {
+        events.createEvent(e);
     }
 
     /**

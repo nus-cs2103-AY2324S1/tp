@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.CreateEventCommand;
 import seedu.address.logic.commands.CreateMemberCommand;
 import seedu.address.logic.commands.DeleteEventCommand;
 import seedu.address.logic.commands.DeleteMemberCommand;
@@ -25,18 +26,22 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.event.Event;
 import seedu.address.model.member.Member;
 import seedu.address.model.member.MemberNameContainsKeywordsPredicate;
 import seedu.address.testutil.EditMemberDescriptorBuilder;
+import seedu.address.testutil.EventBuilder;
+import seedu.address.testutil.EventUtil;
 import seedu.address.testutil.MemberBuilder;
 import seedu.address.testutil.MemberUtil;
+
 
 public class AddressBookParserTest {
 
     private final AddressBookParser parser = new AddressBookParser();
 
     @Test
-    public void parseCommand_create() throws Exception {
+    public void parseCommand_createMember() throws Exception {
         Member member = new MemberBuilder().build();
         CreateMemberCommand command = (CreateMemberCommand) parser.parseCommand(
                 MemberUtil.getCreateMemberCommand(member));
@@ -54,6 +59,13 @@ public class AddressBookParserTest {
         DeleteMemberCommand command = (DeleteMemberCommand) parser.parseCommand(
                 DeleteMemberCommand.COMMAND_WORD + " " + INDEX_FIRST_MEMBER.getOneBased());
         assertEquals(new DeleteMemberCommand(INDEX_FIRST_MEMBER), command);
+    }
+
+    public void parseCommand_createEvent() throws Exception {
+        Event event = new EventBuilder().build();
+        CreateEventCommand command = (CreateEventCommand) parser.parseCommand(
+                EventUtil.getCreateEventCommand(event));
+        assertEquals(new CreateEventCommand(event), command);
     }
 
     @Test

@@ -114,13 +114,13 @@ public class AddressBookTest {
 
     @Test
     public void hasEvent_eventInAddressBook_returnsTrue() {
-        addressBook.addEvent(AURORA_BOREALIS);
+        addressBook.createEvent(AURORA_BOREALIS);
         assertTrue(addressBook.hasEvent(AURORA_BOREALIS));
     }
 
     @Test
     public void hasEvent_eventWithSameNameInAddressBook_returnsFalse() {
-        addressBook.addEvent(AURORA_BOREALIS);
+        addressBook.createEvent(AURORA_BOREALIS);
         Event editedAurora = new EventBuilder(AURORA_BOREALIS).withDate(VALID_DATE_BOXING)
                 .withLocation(VALID_LOCATION_BOXING)
                 .build();

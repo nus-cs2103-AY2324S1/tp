@@ -114,8 +114,25 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasEvent(Event event) {
+        requireNonNull(event);
+        return addressBook.hasEvent(event);
+    }
+    @Override
     public void deleteEvent(Event target) {
         addressBook.removeEvent(target);
+    }
+
+    @Override
+    public void createEvent(Event event) {
+        addressBook.createEvent(event);
+        updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
+    }
+
+    @Override
+    public void setEvent(Event target, Event editedEvent) {
+        requireAllNonNull(target, editedEvent);
+        addressBook.setEvent(target, editedEvent);
     }
 
     //=========== Filtered Member List Accessors =============================================================

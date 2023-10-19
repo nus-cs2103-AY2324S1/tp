@@ -40,12 +40,12 @@ public class UniqueEventList implements Iterable<Event> {
      * Adds an event to the list.
      * The event must not already exist in the list.
      */
-    public void addEvent(Event eventToAdd) {
-        requireNonNull(eventToAdd);
-        if (contains(eventToAdd)) {
+    public void createEvent(Event eventToCreate) {
+        requireNonNull(eventToCreate);
+        if (contains(eventToCreate)) {
             throw new DuplicateEventException();
         }
-        internalList.add(eventToAdd);
+        internalList.add(eventToCreate);
     }
 
     /**

@@ -3,8 +3,10 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -62,12 +64,21 @@ public class CommandTestUtil {
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
+    public static final String NAME_DESC_AURORA = " " + PREFIX_NAME + VALID_NAME_AURORA;
+    public static final String NAME_DESC_BOXING = " " + PREFIX_NAME + VALID_NAME_BOXING;
+    public static final String DATE_DESC_AURORA = " " + PREFIX_DATE + VALID_DATE_AURORA;
+    public static final String DATE_DESC_BOXING = " " + PREFIX_DATE + VALID_DATE_BOXING;
+    public static final String LOCATION_DESC_AURORA = " " + PREFIX_LOCATION + VALID_LOCATION_AURORA;
+    public static final String LOCATION_DESC_BOXING = " " + PREFIX_LOCATION + VALID_LOCATION_BOXING;
+
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_GENDER_DESC = " " + PREFIX_GENDER + "F"; // "F" not allowed in gender
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_LOCATION_DESC = " " + PREFIX_LOCATION + "  "; // cannot be spaces only
+    public static final String INVALID_DATE_DESC = " " + PREFIX_DATE + "2005 12 12"; // wrong date format
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
