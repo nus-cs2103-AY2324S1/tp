@@ -7,6 +7,9 @@ import seedu.lovebook.model.person.Height;
 import seedu.lovebook.model.person.Income;
 import seedu.lovebook.model.person.horoscope.Horoscope;
 
+/**
+ * A utility class to help with building preference objects.
+ */
 public class PreferenceBuilder {
     public static final String DEFAULT_AGE = "49";
     public static final String DEFAULT_GENDER = "M";
