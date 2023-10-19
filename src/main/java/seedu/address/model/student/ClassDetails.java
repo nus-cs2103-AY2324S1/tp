@@ -71,6 +71,15 @@ public class ClassDetails {
     }
 
     /**
+     * Marks the specific tutorial as present.
+     */
+    public ClassDetails markPresent(Index tutNum) {
+        updateAssignmentAndTutorialCount();
+        this.attendanceTracker.markPresent(tutNum);
+        return this;
+    }
+
+    /**
      * Returns true if a given string is a valid class number.
      */
     public static boolean isValidClassDetails(String test) {
