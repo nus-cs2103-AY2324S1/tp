@@ -180,10 +180,10 @@ Examples:
 
 Sort the list of students data that fulfills the given conditions.
 
-Format: `sort /by [DESCRIPTION]`
+Format: `sort in/ [DESCRIPTION]`
 
 Examples:
-* `sort by/ ASC`
+* `sort in/ ASC`
 
 ### Clearing all entries : `clear`
 
@@ -238,8 +238,8 @@ Action     | Format, Examples
 **Import** | `import FILENAME.csv`<br> e.g., `import student_data.csv`
 **Edit**   | `edit INDEX prefix1/[field1] prefix2/[field2]`  <br> or `edit NAME prefix/[field] prefix/[field] prefix/[field]` <br> e.g., `edit John Doe n/Joe e/johndoe@example.com t/English`
 **Search** | `search [KEYWORD]`<br> e.g., `search Lee`
-**Delete** | `delete NAME`<br> or `delete JOE` <br> e.g., `delete Joe`
+**Delete** | `delete ME`<br> or `delete JOE` <br> e.g., `delete Joe`
 **Filter** | `filter prefix/FIELD_VALUE [MORE FIELDS]` <br> e.g., `filter g/F s/English s/Physics`
-**Sort**   | `sort by/[DESCRIPTION]` <br> e.g., `sort by/ ASC`
+**Sort**   | `sort in/ [DESCRIPTION]` <br> e.g., `sort in/ ASC`
 **Clear**  | `clear`
 **Help**   | `help`
