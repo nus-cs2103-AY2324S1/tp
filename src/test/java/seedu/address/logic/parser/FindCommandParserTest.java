@@ -33,10 +33,10 @@ public class FindCommandParserTest {
     private FindCommandParser parser = new FindCommandParser();
 
     @Test
-    public void parse_emptyArg_throwsParseException() {
-        assertParseComplexFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+    public void parse_invalidArg_throwsParseException() {
+        assertParseComplexFailure(parser, " invalid input", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 FindCommand.MESSAGE_USAGE_PATIENT), PersonType.PATIENT);
-        assertParseComplexFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        assertParseComplexFailure(parser, "  invalid input", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 FindCommand.MESSAGE_USAGE_SPECIALIST), PersonType.SPECIALIST);
     }
 
