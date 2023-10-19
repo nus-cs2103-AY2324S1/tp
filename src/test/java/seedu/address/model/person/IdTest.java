@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test class for the ID model.
  */
-public class IDTest {
+public class IdTest {
 
     /**
      * Tests the construction of ID with null input.
