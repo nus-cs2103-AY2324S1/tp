@@ -2,26 +2,26 @@
 .DS_Store
 
 # IDEA files
-.idea/
-out/
-*.iml
+/.idea/
+/out/
+/*.iml
 
 # VSCode extension build files
-bin/
+/bin/
 
 # JVM crash logs
-hs_err_pid[0-9]*.log
+/hs_err_pid[0-9]*.log
 
 # Gradle build files
-.gradle/
-build/
-src/main/resources/docs/
+/.gradle/
+/build/
+/src/main/resources/docs/
 
 # Test sandbox files
-src/test/data/sandbox/
+/src/test/data/sandbox/
 
 # App data/log files
-data/
-config.json
-settings.json
-*.log.*
+/data/
+/config.json
+/settings.json
+/*.log.*
