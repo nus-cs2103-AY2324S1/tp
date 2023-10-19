@@ -9,6 +9,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_APPOINTMENTS;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -99,4 +100,11 @@ public class RescheduleCommand extends Command {
         return index.equals(e.index);
     }
 
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("targetIndex", index)
+                .add("appointmentTime", appointmentTime)
+                .toString();
+    }
 }
