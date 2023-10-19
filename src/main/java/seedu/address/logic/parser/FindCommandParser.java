@@ -4,7 +4,6 @@ import java.util.Arrays;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.contact.NameContainsKeywordsPredicate;
 
@@ -23,7 +22,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
-                Messages.commandInvalidFormat(HelpCommand.MESSAGE_USAGE)
+                Messages.commandInvalidFormat(FindCommand.MESSAGE_USAGE)
             );
         }
 
