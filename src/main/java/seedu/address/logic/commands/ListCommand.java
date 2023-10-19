@@ -6,13 +6,13 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 
+
+
 /**
- * Lists all contacts in the address book to the user.
+ * Lists all {@link Contact}s.
  */
 public class ListCommand extends Command {
-
     public static final String COMMAND_WORD = "list";
-
 
     @Override
     public CommandResult execute(Model model) {
