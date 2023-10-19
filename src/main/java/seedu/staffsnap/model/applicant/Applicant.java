@@ -26,6 +26,7 @@ public class Applicant implements Comparable<Applicant> {
     private final Email email;
     private final Position position;
     private final List<Interview> interviews = new ArrayList<>();
+    private Status status;
 
     /**
      * Every field must be present and not null.
@@ -37,6 +38,7 @@ public class Applicant implements Comparable<Applicant> {
         this.email = email;
         this.position = position;
         this.interviews.addAll(interviews);
+        this.status = Status.UNDECIDED;
     }
 
     public Name getName() {
@@ -114,6 +116,7 @@ public class Applicant implements Comparable<Applicant> {
                 .add("email", email)
                 .add("position", position)
                 .add("interviews", interviews)
+                .add("status", status)
                 .toString();
     }
 
@@ -175,5 +178,21 @@ public class Applicant implements Comparable<Applicant> {
     public void addInterview(Interview interviewToAdd) {
         interviews.add(interviewToAdd);
         Collections.sort(interviews);
+    }
+
+    /**
+     * Get the status of an Applicant.
+     * @return Status of applicant
+     */
+    public Status getStatus() {
+        return status;
+    }
+
+    /**
+     * Set the status of an Applicant.
+     * @param status Status to be set
+     */
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }

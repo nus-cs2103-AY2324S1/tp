@@ -45,6 +45,8 @@ public class Messages {
                 .append(applicant.getPosition())
                 .append("; Interviews: ");
         applicant.getInterviews().forEach(builder::append);
+        builder.append("; Status: ")
+                .append(applicant.getStatus());
         return builder.toString();
     }
 
