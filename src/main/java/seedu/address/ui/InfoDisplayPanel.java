@@ -30,7 +30,7 @@ public class InfoDisplayPanel extends UiPart<Region> {
         super(FXML);
     }
 
-    public void setViewedPerson(Pair<Person, Meeting> pair) {
+    public void setViewedModel(Pair<Person, Meeting> pair) {
         Person person = pair.getKey();
         Meeting meeting = pair.getValue();
         tags.getChildren().clear();
