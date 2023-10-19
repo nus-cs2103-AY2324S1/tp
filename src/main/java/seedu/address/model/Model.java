@@ -87,6 +87,12 @@ public interface Model {
      */
     void updateFilteredMusicianList(Predicate<Musician> predicate);
 
+    /**
+     * Updates the {@code FilteredMusicianList} to contain all musicians in the {@code Band}
+     * at the specified index.
+     */
+    void updateFilteredMusicianList(int bandIndex);
+
     /** Returns an unmodifiable view of the filtered band list */
     ObservableList<Band> getFilteredBandList();
 
@@ -95,7 +101,7 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredBandList(Predicate<Band> predicate);
-    void updateFilteredMusicianListFromBands();
+
     /**
      * Returns true if a band with the same identity as {@code band} exists in the address book.
      */
