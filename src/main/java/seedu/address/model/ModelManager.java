@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.calendar.Calendar;
+import seedu.address.model.calendar.ReadOnlyCalendar;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 

@@ -12,7 +12,7 @@ import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.JsonUtil;
-import seedu.address.model.ReadOnlyCalendar;
+import seedu.address.model.calendar.ReadOnlyCalendar;
 
 /**
  * A class to access Calendar data stored as a json file on the hard disk.

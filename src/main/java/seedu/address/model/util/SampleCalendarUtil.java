@@ -2,6 +2,7 @@ package seedu.address.model.util;
 
 import seedu.address.model.ReadOnlyCalendar;
 import seedu.address.model.calendar.Calendar;
+import seedu.address.model.calendar.ReadOnlyCalendar;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventDescription;
 import seedu.address.model.event.EventPeriod;
