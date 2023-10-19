@@ -5,13 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
-import java.util.Collection;
 import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import seedu.address.model.contact.Contact;
 import seedu.address.testutil.ContactBuilder;
 import seedu.address.testutil.TestData;
