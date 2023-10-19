@@ -170,6 +170,7 @@ public class TeamBook implements ReadOnlyTeamBook {
     public ObservableList<Team> getTeamList() {
         return teams.asUnmodifiableObservableList();
     }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

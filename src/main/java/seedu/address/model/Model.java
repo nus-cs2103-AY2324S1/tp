@@ -165,5 +165,4 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredTeamList(Predicate<Team> predicate);
-
 }
