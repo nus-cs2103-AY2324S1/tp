@@ -7,8 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalCards.CS1101S;
 import static seedu.address.testutil.TypicalCards.CS2100;
-import static seedu.address.testutil.TypicalCards.high;
-import static seedu.address.testutil.TypicalCards.low;
+import static seedu.address.testutil.TypicalCards.HIGH;
+import static seedu.address.testutil.TypicalCards.LOW;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -167,22 +167,22 @@ public class UniqueCardListTest {
 
     @Test
     public void add_cardWithHigherPriority() {
-        low.setPriority(0);
-        uniqueCardList.add(low);
-        uniqueCardList.add(high);
+        LOW.setPriority(0);
+        uniqueCardList.add(LOW);
+        uniqueCardList.add(HIGH);
         UniqueCardList otherList = new UniqueCardList();
-        otherList.add(high);
-        otherList.add(low);
+        otherList.add(HIGH);
+        otherList.add(LOW);
         assertEquals(uniqueCardList, otherList);
     }
 
     @Test
     public void add_cardWithSamePriority() {
-        uniqueCardList.add(low);
-        uniqueCardList.add(high);
+        uniqueCardList.add(LOW);
+        uniqueCardList.add(HIGH);
         UniqueCardList otherList = new UniqueCardList();
-        otherList.add(high);
-        otherList.add(low);
+        otherList.add(HIGH);
+        otherList.add(LOW);
         assertNotEquals(uniqueCardList, otherList);
     }
 }

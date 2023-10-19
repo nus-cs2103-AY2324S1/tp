@@ -18,9 +18,9 @@ public class TypicalCards {
             .withAnswer("Reflexive, Symmetric, Transitive").build();
     public static final Card CS1101S = new CardBuilder().withQuestion("What is the language used for this mod?")
             .withAnswer("Source").build();
-    public static final Card high = new CardBuilder().withQuestion("High Priority?")
+    public static final Card HIGH = new CardBuilder().withQuestion("High Priority?")
             .withAnswer("True").build();
-    public static final Card low = new CardBuilder().withQuestion("Low Priority?")
+    public static final Card LOW = new CardBuilder().withQuestion("Low Priority?")
             .withAnswer("True").build();
 
     private TypicalCards() {} // prevents instantiation
