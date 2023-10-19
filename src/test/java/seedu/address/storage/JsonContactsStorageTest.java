@@ -18,15 +18,15 @@ import seedu.address.testutil.TestData;
 
 
 public class JsonContactsStorageTest {
-    @TempDir
-    public static Path TEMP_DIR;
-
     private static final Path TEST_DATA_FOLDER = Paths.get(
         "src",
         "test",
         "data",
         "JsonContactsStorageTest"
     );
+
+    @TempDir
+    public static Path tempDir;
 
     private Optional<? extends ReadOnlyContacts> read(String fileName) throws DataLoadingException {
         return new JsonContactsStorage(
@@ -50,7 +50,7 @@ public class JsonContactsStorageTest {
 
     @Test
     public void saveContacts() throws DataLoadingException, IOException {
-        Path tempPath = JsonContactsStorageTest.TEMP_DIR.resolve("tempContacts.json");
+        Path tempPath = JsonContactsStorageTest.tempDir.resolve("tempContacts.json");
 
         Contacts contacts = TestData.getTypicalContacts();
 

@@ -17,6 +17,9 @@ public class SerializableClass {
     protected List<LocalDateTime> localDateTimeList = new ArrayList<>();
     public HashMap<Integer, String> integerToStringMap = new HashMap<>();
 
+    /**
+     * Constructs with default values.
+     */
     public SerializableClass() {
         this.localDateTimeList.add(LocalDateTime.MIN);
         this.localDateTimeList.add(LocalDateTime.MAX);

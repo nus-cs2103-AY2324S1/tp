@@ -61,10 +61,8 @@ public class Settings implements ReadOnlySettings {
         }
         Settings otherSettings = (Settings)other;
 
-        return (
-            this.contactsPath.equals(otherSettings.contactsPath)
-            && this.guiSettings.equals(otherSettings.guiSettings)
-        );
+        return this.contactsPath.equals(otherSettings.contactsPath)
+                && this.guiSettings.equals(otherSettings.guiSettings);
     }
 
     @Override

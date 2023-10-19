@@ -17,14 +17,14 @@ import seedu.address.testutil.TestData;
 
 public class StorageManagerTest {
     @TempDir
-    public static Path TEMP_DIR;
+    public static Path tempDir;
 
     private StorageManager manager;
 
     public StorageManagerTest() {
         this.manager = new StorageManager(
-            new JsonContactsStorage(StorageManagerTest.TEMP_DIR.resolve("contacts.json")),
-            new JsonSettingsStorage(StorageManagerTest.TEMP_DIR.resolve("settings.json"))
+            new JsonContactsStorage(StorageManagerTest.tempDir.resolve("contacts.json")),
+            new JsonSettingsStorage(StorageManagerTest.tempDir.resolve("settings.json"))
         );
     }
 

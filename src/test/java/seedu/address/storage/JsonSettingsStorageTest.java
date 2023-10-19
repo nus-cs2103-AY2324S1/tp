@@ -19,15 +19,15 @@ import seedu.address.testutil.TestData;
 
 
 public class JsonSettingsStorageTest {
-    @TempDir
-    public static Path TEMP_DIR;
-
     private static final Path TEST_DATA_FOLDER = Paths.get(
         "src",
         "test",
         "data",
         "JsonSettingsStorageTest"
     );
+
+    @TempDir
+    public static Path tempDir;
 
     private Optional<? extends ReadOnlySettings> read(String fileName) throws DataLoadingException {
         return new JsonSettingsStorage(
@@ -51,7 +51,7 @@ public class JsonSettingsStorageTest {
 
     @Test
     public void saveSettings() throws DataLoadingException, IOException {
-        Path tempPath = JsonSettingsStorageTest.TEMP_DIR.resolve("tempSettings.json");
+        Path tempPath = JsonSettingsStorageTest.tempDir.resolve("tempSettings.json");
 
         Settings settings = new Settings();
         settings.setGuiSettings(new GuiSettings(1200, 200, 0, 2));

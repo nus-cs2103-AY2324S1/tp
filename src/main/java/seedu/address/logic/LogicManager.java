@@ -24,6 +24,9 @@ public class LogicManager implements Logic {
     private Model model;
     private Storage storage;
 
+    /**
+     * Constructs with the specified values.
+     */
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;

@@ -38,10 +38,8 @@ public class Config {
         }
         Config otherConfig = (Config)other;
 
-        return (
-            Objects.equals(this.settingsPath, otherConfig.settingsPath)
-            && Objects.equals(this.logLevel, otherConfig.logLevel)
-        );
+        return Objects.equals(this.settingsPath, otherConfig.settingsPath)
+                && Objects.equals(this.logLevel, otherConfig.logLevel);
     }
 
     @Override

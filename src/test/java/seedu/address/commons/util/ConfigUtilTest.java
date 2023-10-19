@@ -20,14 +20,14 @@ import seedu.address.testutil.TestData;
 
 
 public class ConfigUtilTest {
-    @TempDir
-    public static Path TEMP_DIR;
-
     private static final Path TEST_DATA_FOLDER = Paths.get(
         "src",
         "test",
         "data"
     );
+
+    @TempDir
+    public static Path tempDir;
 
     private Optional<Config> read(String fileName) throws DataLoadingException {
         return ConfigUtil.readConfig(
@@ -61,7 +61,7 @@ public class ConfigUtilTest {
 
     @Test
     public void saveConfig() throws DataLoadingException, IOException {
-        Path tempPath = ConfigUtilTest.TEMP_DIR.resolve("tempConfig.json");
+        Path tempPath = ConfigUtilTest.tempDir.resolve("tempConfig.json");
 
         Config config = TestData.getTypicalConfig();
 

@@ -21,6 +21,9 @@ public class StorageManager implements Storage {
     private ContactsStorage contactsStorage;
     private SettingsStorage settingsStorage;
 
+    /**
+     * Constructs with the specified values.
+     */
     public StorageManager(
         ContactsStorage contactsStorage,
         SettingsStorage settingsStorage

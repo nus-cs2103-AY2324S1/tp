@@ -28,10 +28,10 @@ public class JsonUtilTest {
     );
 
     @TempDir
-    public static Path TEMP_DIR;
+    public static Path tempDir;
 
     private Path getSerializationPath() {
-        return JsonUtilTest.TEMP_DIR.resolve("serialization.json");
+        return JsonUtilTest.tempDir.resolve("serialization.json");
     }
 
     @Test

@@ -31,6 +31,9 @@ public class ModelManager implements Model {
         this(new Contacts(), new Settings());
     }
 
+    /**
+     * Constructs with the specified values.
+     */
     public ModelManager(ReadOnlyContacts contacts, ReadOnlySettings settings) {
         this.contacts = new Contacts(contacts);
         this.settings = new Settings(settings);
@@ -112,10 +115,8 @@ public class ModelManager implements Model {
         }
         ModelManager otherManager = (ModelManager)other;
 
-        return (
-            this.contacts.equals(otherManager.contacts)
-            && this.settings.equals(otherManager.settings)
-            && this.filteredContacts.equals(otherManager.filteredContacts)
-        );
+        return this.contacts.equals(otherManager.contacts)
+                && this.settings.equals(otherManager.settings)
+                && this.filteredContacts.equals(otherManager.filteredContacts);
     }
 }
