@@ -24,11 +24,14 @@ public class Person {
     // Data fields
     private final Address address;
 
-    private final Remark remark;
     private final Set<Tag> tags = new HashSet<>();
     private LinkedIn linkedIn = new LinkedIn("");
     private Github github = new Github("");
+
+    private Remark remark;
     private final Status currentStatus = new Status();
+
+
 
     /**
      * Every field must be present and not null.
