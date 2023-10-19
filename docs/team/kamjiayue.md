@@ -1,6 +1,6 @@
 ---
 layout: default.md
-title: "Tiw Kang Xu's Project Portfolio Page"
+title: "Kam Jia Yue's Project Portfolio Page"
 ---
 
 ### Project: Tutorium
@@ -19,12 +19,14 @@ Given below are my contributions to the project.
 
 * **Documentation**:
     * User Guide:
-        * to be added soon
+        * Update add command
+        * Update student fields
     * Developer Guide:
-        * to be added soon
+        * Update product name
 
 * **Team-based tasks**:
-    * to be added soon
+    * Update Markbind
+    * Update student attributes
 
 * **Review/mentoring contributions**:
     * to be added soon

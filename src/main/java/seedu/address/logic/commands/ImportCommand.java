@@ -27,14 +27,14 @@ public class ImportCommand extends Command {
 
     public static final String MESSAGE_USAGE =
             COMMAND_WORD + ": Import a csv file with students details to the address book. "
-            + "Parameters: File Path\n"
-            + "Example: " + COMMAND_WORD + " StudentData.csv\n"
-            + "Note that the order of column should be "
-            + "\"" + MESSAGE_NAME + "\" , \"" + MESSAGE_PHONE + "\" , \"" + MESSAGE_EMAIL
-            + "\" , \"" + MESSAGE_ADDRESS + "\" , \"" + MESSAGE_GENDER + "\" , \""
-            + MESSAGE_SEC_LEVEL + "\" , \"" + MESSAGE_MRT_STATION + "\" , \"" + MESSAGE_SUBJECT + "\"";
+                    + "Parameters: File Path\n"
+                    + "Example: " + COMMAND_WORD + " StudentData.csv\n"
+                    + "Note that the order of column should be "
+                    + "\"" + MESSAGE_NAME + "\" , \"" + MESSAGE_PHONE + "\" , \"" + MESSAGE_EMAIL
+                    + "\" , \"" + MESSAGE_ADDRESS + "\" , \"" + MESSAGE_GENDER + "\" , \""
+                    + MESSAGE_SEC_LEVEL + "\" , \"" + MESSAGE_MRT_STATION + "\" , \"" + MESSAGE_SUBJECT + "\"";
 
-    public static final String MESSAGE_SUCCESS = "All students data imported";
+    public static final String MESSAGE_SUCCESS = " students data imported";
     public static final String MESSAGE_DUPLICATE_PERSON = "has duplicates";
 
     private final String filePath;
@@ -72,7 +72,7 @@ public class ImportCommand extends Command {
             throw new CommandException(duplicates + MESSAGE_DUPLICATE_PERSON);
         }
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS));
+        return new CommandResult(String.format(students.size() + MESSAGE_SUCCESS));
     }
 
     @Override
