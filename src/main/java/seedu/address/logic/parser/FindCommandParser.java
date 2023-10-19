@@ -7,7 +7,8 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.ContainsKeywordsPredicate;
+import seedu.address.model.predicate.IdContainsKeywordsPredicate;
+import seedu.address.model.predicate.NameContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -22,7 +23,6 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindCommand parse(String args) throws ParseException {
-        String identifier;
         String[] keywords;
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ID);
@@ -36,13 +36,11 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             keywords = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()).fullName.split("\\s+");
-            identifier = "name";
+            return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         } else {
             keywords = ParserUtil.parseId(argMultimap.getValue(PREFIX_ID).get()).value.split("\\s+");
-            identifier = "id";
+            return new FindCommand(new IdContainsKeywordsPredicate(Arrays.asList(keywords)));
         }
-
-        return new FindCommand(new ContainsKeywordsPredicate(Arrays.asList(keywords), identifier));
     }
 
     /**

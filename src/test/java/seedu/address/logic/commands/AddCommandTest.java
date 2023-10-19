@@ -10,11 +10,11 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.FilterSettings;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -23,6 +23,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.predicate.SerializablePredicate;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -109,6 +110,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public FilterSettings getFilterSettings() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setFilterSettings(FilterSettings filterSettings) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public Path getAddressBookFilePath() {
             throw new AssertionError("This method should not be called.");
         }
@@ -154,7 +165,17 @@ public class AddCommandTest {
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<Person> predicate) {
+        public void addFilter(SerializablePredicate predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteFilter(SerializablePredicate predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void clearFilters() {
             throw new AssertionError("This method should not be called.");
         }
     }

@@ -17,9 +17,9 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.AbsentFromTutorialNumPredicate;
 import seedu.address.model.person.Attendance;
-import seedu.address.model.person.ContainsCourseTutorialPredicate;
+import seedu.address.model.predicate.AbsentFromTutorialPredicate;
+import seedu.address.model.predicate.ContainsTagPredicate;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -44,19 +44,19 @@ public class ListAttendanceCommandTest {
         Index secondIndex = Index.fromOneBased(2);
 
         ListAttendanceCommand listAttendanceFirstCommand = new ListAttendanceCommand(firstTag, firstIndex,
-                new ContainsCourseTutorialPredicate(firstTag),
-                new AbsentFromTutorialNumPredicate(firstIndex, firstTag));
+                new ContainsTagPredicate(firstTag),
+                new AbsentFromTutorialPredicate(firstIndex, firstTag));
         ListAttendanceCommand listAttendanceSecondCommand = new ListAttendanceCommand(secondTag, secondIndex,
-                new ContainsCourseTutorialPredicate(secondTag),
-                new AbsentFromTutorialNumPredicate(secondIndex, firstTag));
+                new ContainsTagPredicate(secondTag),
+                new AbsentFromTutorialPredicate(secondIndex, firstTag));
 
         // same object -> returns true
         assertTrue(listAttendanceFirstCommand.equals(listAttendanceFirstCommand));
 
         // same values -> returns true
         ListAttendanceCommand listAttendanceFirstCommandCopy = new ListAttendanceCommand(firstTag, firstIndex,
-                new ContainsCourseTutorialPredicate(firstTag),
-                new AbsentFromTutorialNumPredicate(firstIndex, firstTag));
+                new ContainsTagPredicate(firstTag),
+                new AbsentFromTutorialPredicate(firstIndex, firstTag));
         assertTrue(listAttendanceFirstCommand.equals(listAttendanceFirstCommandCopy));
 
         // different types -> returns false
@@ -75,11 +75,12 @@ public class ListAttendanceCommandTest {
         Tag tag = new Tag("CS2040S");
         Index index = Index.fromOneBased(1);
         ListAttendanceCommand command = new ListAttendanceCommand(tag, index,
-                new ContainsCourseTutorialPredicate(tag), new AbsentFromTutorialNumPredicate(index, tag));
+                new ContainsTagPredicate(tag), new AbsentFromTutorialPredicate(index, tag));
 
         String expectedSummary = String.format(Messages.MESSAGE_ATTENDANCE_SUMMARY_WITH_TAG, 0, 1, 1, tag.getTagName());
 
-        expectedModel.updateFilteredPersonList(new AbsentFromTutorialNumPredicate(index, tag));
+        expectedModel.addFilter(new ContainsTagPredicate(tag));
+        expectedModel.addFilter(new AbsentFromTutorialPredicate(index, tag));
         CommandResult expectedCommandResult = new CommandResult(expectedSummary + MESSAGE_SUCCESS);
 
         assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
@@ -92,12 +93,12 @@ public class ListAttendanceCommandTest {
         Tag tag = new Tag("PLACEHOLDER");
         Index index = Index.fromOneBased(1);
         ListAttendanceCommand command = new ListAttendanceCommand(tag, index,
-                new ContainsCourseTutorialPredicate(tag), new AbsentFromTutorialNumPredicate(index, tag));
+                new ContainsTagPredicate(tag), new AbsentFromTutorialPredicate(index, tag));
 
         int total = expectedModel.getFilteredPersonList().size();
         String expectedSummary = String.format(Messages.MESSAGE_ATTENDANCE_SUMMARY_NO_TAG, total - 1, total, 1);
 
-        expectedModel.updateFilteredPersonList(new AbsentFromTutorialNumPredicate(index, tag));
+        expectedModel.addFilter(new AbsentFromTutorialPredicate(index, tag));
         CommandResult expectedCommandResult = new CommandResult(expectedSummary + MESSAGE_SUCCESS);
 
         assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
