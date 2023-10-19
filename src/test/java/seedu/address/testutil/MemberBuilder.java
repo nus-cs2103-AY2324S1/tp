@@ -95,7 +95,7 @@ public class MemberBuilder {
     }
 
     /**
-     * Sets the {@code Email} of the {@code Member} that we are building.
+     * Sets the {@code Gender} of the {@code Member} that we are building.
      */
     public MemberBuilder withGender(String gender) {
         this.gender = new Gender(gender);
