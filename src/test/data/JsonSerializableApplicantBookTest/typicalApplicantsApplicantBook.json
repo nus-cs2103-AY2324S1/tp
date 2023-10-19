@@ -4,43 +4,43 @@
     "name" : "Alice Pauline",
     "phone" : "94351253",
     "email" : "alice@example.com",
-    "position" : "123, Jurong West Ave 6, #08-111",
-    "interviews" : [ "friends" ]
+    "position" : "Software Engineer",
+    "interviews" : [ ]
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
-    "email" : "johnd@example.com",
-    "position" : "311, Clementi Ave 2, #02-25",
-    "interviews" : [ "owesMoney", "friends" ]
+    "email" : "benson@example.com",
+    "position" : "Frontend Engineer",
+    "interviews" : [ "technical" ]
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
-    "email" : "heinz@example.com",
-    "position" : "wall street",
+    "email" : "carl@example.com",
+    "position" : "Backend Engineer",
     "interviews" : [ ]
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
-    "email" : "cornelia@example.com",
-    "position" : "10th street",
-    "interviews" : [ "friends" ]
+    "email" : "daniel@example.com",
+    "position" : "Testing Engineer",
+    "interviews" : [ "screening" ]
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
-    "email" : "werner@example.com",
-    "position" : "michegan ave",
+    "email" : "elle@example.com",
+    "position" : "Frontend Engineer",
     "interviews" : [ ]
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
-    "email" : "lydia@example.com",
-    "position" : "little tokyo",
+    "email" : "fiona@example.com",
+    "position" : "Backend Engineer",
     "interviews" : [ ]
   }, {
     "name" : "George Best",
     "phone" : "9482442",
-    "email" : "anna@example.com",
-    "position" : "4th street",
+    "email" : "george@example.com",
+    "position" : "Software Engineer",
     "interviews" : [ ]
   } ]
 }

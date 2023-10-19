@@ -52,9 +52,7 @@ public class ApplicantUtil {
         descriptor.getPosition().ifPresent(position -> sb.append(PREFIX_POSITION).append(position.value).append(" "));
         if (descriptor.getInterviews().isPresent()) {
             List<Interview> interviews = descriptor.getInterviews().get();
-            if (interviews.isEmpty()) {
-                sb.append(PREFIX_TYPE);
-            } else {
+            if (!interviews.isEmpty()) {
                 interviews.forEach(s -> sb.append(PREFIX_TYPE).append(s.type).append(" "));
             }
         }

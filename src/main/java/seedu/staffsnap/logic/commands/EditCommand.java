@@ -5,7 +5,6 @@ import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_POSITION;
-import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_TYPE;
 import static seedu.staffsnap.model.Model.PREDICATE_SHOW_ALL_APPLICANTS;
 
 import java.util.ArrayList;
@@ -41,8 +40,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_POSITION + "POSITION] "
-            + "[" + PREFIX_TYPE + "INTERVIEW]...\n"
+            + "[" + PREFIX_POSITION + "POSITION]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -99,8 +97,7 @@ public class EditCommand extends Command {
         Phone updatedPhone = editApplicantDescriptor.getPhone().orElse(applicantToEdit.getPhone());
         Email updatedEmail = editApplicantDescriptor.getEmail().orElse(applicantToEdit.getEmail());
         Position updatedPosition = editApplicantDescriptor.getPosition().orElse(applicantToEdit.getPosition());
-        List<Interview> updatedInterviews = editApplicantDescriptor
-                .getInterviews().orElse(applicantToEdit.getInterviews());
+        List<Interview> updatedInterviews = applicantToEdit.getInterviews();
 
         return new Applicant(updatedName, updatedPhone, updatedEmail, updatedPosition, updatedInterviews);
     }
@@ -158,7 +155,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, position, interviews);
+            return CollectionUtil.isAnyNonNull(name, phone, email, position);
         }
 
         public void setName(Name name) {
@@ -225,8 +222,7 @@ public class EditCommand extends Command {
             return Objects.equals(name, otherEditApplicantDescriptor.name)
                     && Objects.equals(phone, otherEditApplicantDescriptor.phone)
                     && Objects.equals(email, otherEditApplicantDescriptor.email)
-                    && Objects.equals(position, otherEditApplicantDescriptor.position)
-                    && Objects.equals(interviews, otherEditApplicantDescriptor.interviews);
+                    && Objects.equals(position, otherEditApplicantDescriptor.position);
         }
 
         @Override
@@ -236,7 +232,6 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("position", position)
-                    .add("interviews", interviews)
                     .toString();
         }
     }
