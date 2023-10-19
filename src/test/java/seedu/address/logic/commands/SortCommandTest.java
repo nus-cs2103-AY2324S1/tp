@@ -52,7 +52,7 @@ public class SortCommandTest {
         SortCommand command = new SortCommand(comparator);
         expectedModel.sortFilteredPersonList(comparator);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, BENSON, ALICE, GEORGE, FIONA, ELLE, DANIEL), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(CARL, BENSON, GEORGE, FIONA, ELLE, DANIEL, ALICE), model.getFilteredPersonList());
     }
 
 }
