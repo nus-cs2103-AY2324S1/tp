@@ -17,9 +17,6 @@
 /build/
 /src/main/resources/docs/
 
-# Test sandbox files
-/src/test/data/sandbox/
-
 # App data/log files
 /data/
 /config.json

@@ -16,12 +16,18 @@ import org.junit.jupiter.api.io.TempDir;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.exceptions.DataLoadingException;
 
+
+
 public class ConfigUtilTest {
-
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "ConfigUtilTest");
-
     @TempDir
-    public Path tempDir;
+    public static Path TEMP_DIR;
+
+    private static final Path TEST_DATA_FOLDER = Paths.get(
+        "src",
+        "test",
+        "data",
+        "ConfigUtilTest"
+    );
 
     @Test
     public void read_null_throwsNullPointerException() {
@@ -64,7 +70,7 @@ public class ConfigUtilTest {
     private Config getTypicalConfig() {
         Config config = new Config();
         config.setLogLevel(Level.INFO);
-        config.setUserPrefsFilePath(Paths.get("preferences.json"));
+        config.setSettingsPath(Paths.get("preferences.json"));
         return config;
     }
 
@@ -87,7 +93,7 @@ public class ConfigUtilTest {
     public void saveConfig_allInOrder_success() throws DataLoadingException, IOException {
         Config original = getTypicalConfig();
 
-        Path configFilePath = tempDir.resolve("TempConfig.json");
+        Path configFilePath = ConfigUtilTest.TEMP_DIR.resolve("TempConfig.json");
 
         //Try writing when the file doesn't exist
         ConfigUtil.saveConfig(original, configFilePath);
@@ -111,6 +117,4 @@ public class ConfigUtilTest {
                                   ? TEST_DATA_FOLDER.resolve(configFileInTestDataFolder)
                                   : null;
     }
-
-
 }

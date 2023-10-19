@@ -7,33 +7,39 @@ import java.io.IOException;
 import java.nio.file.Path;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.testutil.SerializableTestClass;
-import seedu.address.testutil.TestUtil;
+
+
 
 /**
  * Tests JSON Read and Write
  */
 public class JsonUtilTest {
+    @TempDir
+    public static Path TEMP_DIR;
 
-    private static final Path SERIALIZATION_FILE = TestUtil.getFilePathInSandboxFolder("serialize.json");
+    private Path getSerializationPath() {
+        return JsonUtilTest.TEMP_DIR.resolve("serialization.json");
+    }
 
     @Test
     public void serializeObjectToJsonFile_noExceptionThrown() throws IOException {
         SerializableTestClass serializableTestClass = new SerializableTestClass();
         serializableTestClass.setTestValues();
 
-        JsonUtil.serializeObjectToJsonFile(SERIALIZATION_FILE, serializableTestClass);
+        JsonUtil.serializeObjectToJsonFile(this.getSerializationPath(), serializableTestClass);
 
-        assertEquals(FileUtil.readFromFile(SERIALIZATION_FILE), JSON_STRING_REPRESENTATION);
+        assertEquals(FileUtil.readFromFile(this.getSerializationPath()), JSON_STRING_REPRESENTATION);
     }
 
     @Test
     public void deserializeObjectFromJsonFile_noExceptionThrown() throws IOException {
-        FileUtil.writeToFile(SERIALIZATION_FILE, JSON_STRING_REPRESENTATION);
+        FileUtil.writeToFile(this.getSerializationPath(), JSON_STRING_REPRESENTATION);
 
         SerializableTestClass serializableTestClass = JsonUtil
-                .deserializeObjectFromJsonFile(SERIALIZATION_FILE, SerializableTestClass.class);
+                .deserializeObjectFromJsonFile(this.getSerializationPath(), SerializableTestClass.class);
 
         assertEquals(serializableTestClass.getName(), SerializableTestClass.getNameTestValue());
         assertEquals(serializableTestClass.getListOfLocalDateTimes(), SerializableTestClass.getListTestValues());
