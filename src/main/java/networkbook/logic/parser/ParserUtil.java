@@ -35,7 +35,7 @@ public class ParserUtil {
     public static final String MESSAGE_TAG_DUPLICATE = "Your list of tags contains duplicates. \n"
             + "Please ensure that you do not input the same tag more than once.";
 
-    public static final String MESSAGE_SPEC_DUPLICATE = "Your list of specialisations contains duplicats. \n"
+    public static final String MESSAGE_SPEC_DUPLICATE = "Your list of specialisations contains duplicates. \n"
             + "Please ensure that you do not input the same specialisation more than once.";
 
     /**
