@@ -13,11 +13,12 @@ import seedu.address.logic.commands.EditCommand.EditContactDescriptor;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.tag.Tag;
 
-/**
- * A utility class for Contact.
- */
-public class ContactUtil {
 
+
+/**
+ * Contains utility methods for testing {@link Command}s.
+ */
+public class CommandUtil {
     /**
      * Returns an add command string for adding the {@code contact}.
      */
@@ -30,12 +31,12 @@ public class ContactUtil {
      */
     public static String getContactDetails(Contact contact) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_NAME + contact.getName().fullName + " ");
+        sb.append(PREFIX_NAME + contact.getName().value + " ");
         sb.append(PREFIX_PHONE + contact.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + contact.getEmail().value + " ");
-        sb.append(PREFIX_NOTE + contact.getNote().text + " ");
+        sb.append(PREFIX_NOTE + contact.getNote().value + " ");
         contact.getTags().stream().forEach(
-            s -> sb.append(PREFIX_TAG + s.name + " ")
+            s -> sb.append(PREFIX_TAG + s.value + " ")
         );
         return sb.toString();
     }
@@ -45,16 +46,16 @@ public class ContactUtil {
      */
     public static String getEditContactDescriptorDetails(EditContactDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
-        descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
+        descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.value).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
-        descriptor.getNote().ifPresent(note -> sb.append(PREFIX_NOTE).append(note.text).append(" "));
+        descriptor.getNote().ifPresent(note -> sb.append(PREFIX_NOTE).append(note.value).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {
                 sb.append(PREFIX_TAG);
             } else {
-                tags.forEach(s -> sb.append(PREFIX_TAG).append(s.name).append(" "));
+                tags.forEach(s -> sb.append(PREFIX_TAG).append(s.value).append(" "));
             }
         }
         return sb.toString();
