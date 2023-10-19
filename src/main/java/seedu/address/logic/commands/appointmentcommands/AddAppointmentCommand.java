@@ -62,7 +62,7 @@ public class AddAppointmentCommand extends Command {
         ObservableList<Appointment> appList = model.getFilteredAppointmentList();
 
 
-        if ((patientIndex) >= latestPersonList.size()) {
+        if (patientIndex > latestPersonList.size() || patientIndex <= 0) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
