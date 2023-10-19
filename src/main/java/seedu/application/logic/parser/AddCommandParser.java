@@ -1,9 +1,7 @@
 package seedu.application.logic.parser;
 
 import static seedu.application.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.application.logic.parser.CliSyntax.PREFIX_COMPANY;
-import static seedu.application.logic.parser.CliSyntax.PREFIX_DEADLINE;
-import static seedu.application.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.application.logic.parser.CliSyntax.*;
 
 import java.util.stream.Stream;
 
@@ -28,21 +26,25 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(args, PREFIX_ROLE, PREFIX_COMPANY, PREFIX_DEADLINE);
+            ArgumentTokenizer.tokenize(args, PREFIX_ROLE, PREFIX_COMPANY, PREFIX_DEADLINE, PREFIX_STATUS);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_ROLE, PREFIX_COMPANY)
             || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ROLE, PREFIX_COMPANY, PREFIX_DEADLINE);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ROLE, PREFIX_COMPANY, PREFIX_DEADLINE, PREFIX_STATUS);
         Role role = ParserUtil.parseRole(argMultimap.getValue(PREFIX_ROLE).get());
         Company company = ParserUtil.parseCompany(argMultimap.getValue(PREFIX_COMPANY).get());
-        Status status = Status.DEFAULT_STATUS; // Add command does not add status
         Deadline deadline = Deadline.EMPTY_DEADLINE; // Deadline is an optional field for add command
+        Status status = Status.DEFAULT_STATUS; // Status is an optional field for add command
 
         if (argMultimap.getValue(PREFIX_DEADLINE).isPresent()) {
             deadline = ParserUtil.parseDeadline(argMultimap.getValue(PREFIX_DEADLINE).get());
+        }
+
+        if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
+            status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
         }
 
         Job job = new Job(role, company, deadline, status);
