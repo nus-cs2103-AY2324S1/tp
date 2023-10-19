@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_BOOKING_PERIOD_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -48,8 +48,8 @@ public class EditBookingDescriptorTest {
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
-        // different address -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withAddress(VALID_ADDRESS_BOB).build();
+        // different booking period -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withBookingPeriod(VALID_BOOKING_PERIOD_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different tags -> returns false
@@ -61,11 +61,11 @@ public class EditBookingDescriptorTest {
     public void toStringMethod() {
         EditCommand.EditRoomDescriptor editRoomDescriptor = new EditCommand.EditRoomDescriptor();
         String expected = EditCommand.EditRoomDescriptor.class.getCanonicalName() + "{room="
+                + editRoomDescriptor.getEmail().orElse(null) + ", booking period="
                 + editRoomDescriptor.getRoom().orElse(null) + ", name="
                 + editRoomDescriptor.getName().orElse(null) + ", phone="
                 + editRoomDescriptor.getPhone().orElse(null) + ", email="
-                + editRoomDescriptor.getEmail().orElse(null) + ", address="
-                + editRoomDescriptor.getAddress().orElse(null) + ", tags="
+                + editRoomDescriptor.getBookingPeriod().orElse(null) + ", tags="
                 + editRoomDescriptor.getTags().orElse(null) + "}";
         assertEquals(expected, editRoomDescriptor.toString());
     }

@@ -81,10 +81,11 @@ public class EditCommand extends Command {
         Name updatedName = editRoomDescriptor.getName().orElse(bookingToEdit.getName());
         Phone updatedPhone = editRoomDescriptor.getPhone().orElse(bookingToEdit.getPhone());
         Email updatedEmail = editRoomDescriptor.getEmail().orElse(bookingToEdit.getEmail());
-        BookingPeriod updatedBookingPeriod = editRoomDescriptor.getAddress().orElse(bookingToEdit.getBookingPeriod());
+        BookingPeriod updatedBookingPeriod = editRoomDescriptor.getBookingPeriod()
+                .orElse(bookingToEdit.getBookingPeriod());
         Set<Tag> updatedTags = editRoomDescriptor.getTags().orElse(bookingToEdit.getTags());
 
-        return new Booking(updatedRoom, updatedName, updatedPhone, updatedEmail, updatedBookingPeriod, updatedTags);
+        return new Booking(updatedRoom, updatedBookingPeriod, updatedName, updatedPhone, updatedEmail, updatedTags);
     }
 
     @Override
@@ -156,7 +157,7 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
-            setAddress(toCopy.bookingPeriod);
+            setBookingPeriod(toCopy.bookingPeriod);
             setTags(toCopy.tags);
         }
 
@@ -164,7 +165,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(room, name, phone, email, bookingPeriod, tags);
+            return CollectionUtil.isAnyNonNull(room, bookingPeriod, name, phone, email, tags);
         }
 
         public Optional<Room> getRoom() {
@@ -199,11 +200,11 @@ public class EditCommand extends Command {
             this.email = email;
         }
 
-        public Optional<BookingPeriod> getAddress() {
+        public Optional<BookingPeriod> getBookingPeriod() {
             return Optional.ofNullable(bookingPeriod);
         }
 
-        public void setAddress(BookingPeriod bookingPeriod) {
+        public void setBookingPeriod(BookingPeriod bookingPeriod) {
             this.bookingPeriod = bookingPeriod;
         }
 
@@ -237,10 +238,10 @@ public class EditCommand extends Command {
 
             EditRoomDescriptor otherEditRoomDescriptor = (EditRoomDescriptor) other;
             return Objects.equals(room, otherEditRoomDescriptor.room)
+                    && Objects.equals(bookingPeriod, otherEditRoomDescriptor.bookingPeriod)
                     && Objects.equals(name, otherEditRoomDescriptor.name)
                     && Objects.equals(phone, otherEditRoomDescriptor.phone)
                     && Objects.equals(email, otherEditRoomDescriptor.email)
-                    && Objects.equals(bookingPeriod, otherEditRoomDescriptor.bookingPeriod)
                     && Objects.equals(tags, otherEditRoomDescriptor.tags);
         }
 
@@ -248,10 +249,10 @@ public class EditCommand extends Command {
         public String toString() {
             return new ToStringBuilder(this)
                     .add("room", room)
+                    .add("booking period", bookingPeriod)
                     .add("name", name)
                     .add("phone", phone)
                     .add("email", email)
-                    .add("address", bookingPeriod)
                     .add("tags", tags)
                     .toString();
         }

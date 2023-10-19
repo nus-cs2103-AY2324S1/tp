@@ -88,13 +88,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code address} is invalid.
      */
-    public static BookingPeriod parseAddress(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!BookingPeriod.isValidBookingPeriod(trimmedAddress)) {
+    public static BookingPeriod parseBookingPeriod(String bookingPeriod) throws ParseException {
+        requireNonNull(bookingPeriod);
+        String trimmedBookingPeriod = bookingPeriod.trim();
+        if (!BookingPeriod.isValidBookingPeriod(trimmedBookingPeriod)) {
             throw new ParseException(BookingPeriod.MESSAGE_CONSTRAINTS);
         }
-        return new BookingPeriod(trimmedAddress);
+        return new BookingPeriod(trimmedBookingPeriod);
     }
 
     /**

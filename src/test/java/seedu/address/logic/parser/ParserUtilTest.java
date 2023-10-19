@@ -29,7 +29,7 @@ public class ParserUtilTest {
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
-    private static final String VALID_ADDRESS = "123 Main Street #0505";
+    private static final String VALID_BOOKING_PERIOD = "2023-01-01 to 2023-01-02";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
@@ -104,25 +104,25 @@ public class ParserUtilTest {
 
     @Test
     public void parseAddress_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseAddress((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseBookingPeriod((String) null));
     }
 
     @Test
     public void parseAddress_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseAddress(INVALID_ADDRESS));
+        assertThrows(ParseException.class, () -> ParserUtil.parseBookingPeriod(INVALID_ADDRESS));
     }
 
     @Test
     public void parseAddress_validValueWithoutWhitespace_returnsAddress() throws Exception {
-        BookingPeriod expectedBookingPeriod = new BookingPeriod(VALID_ADDRESS);
-        assertEquals(expectedBookingPeriod, ParserUtil.parseAddress(VALID_ADDRESS));
+        BookingPeriod expectedBookingPeriod = new BookingPeriod(VALID_BOOKING_PERIOD);
+        assertEquals(expectedBookingPeriod, ParserUtil.parseBookingPeriod(VALID_BOOKING_PERIOD));
     }
 
     @Test
     public void parseAddress_validValueWithWhitespace_returnsTrimmedAddress() throws Exception {
-        String addressWithWhitespace = WHITESPACE + VALID_ADDRESS + WHITESPACE;
-        BookingPeriod expectedBookingPeriod = new BookingPeriod(VALID_ADDRESS);
-        assertEquals(expectedBookingPeriod, ParserUtil.parseAddress(addressWithWhitespace));
+        String addressWithWhitespace = WHITESPACE + VALID_BOOKING_PERIOD + WHITESPACE;
+        BookingPeriod expectedBookingPeriod = new BookingPeriod(VALID_BOOKING_PERIOD);
+        assertEquals(expectedBookingPeriod, ParserUtil.parseBookingPeriod(addressWithWhitespace));
     }
 
     @Test

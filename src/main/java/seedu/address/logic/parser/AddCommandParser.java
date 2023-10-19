@@ -42,23 +42,25 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_ROOM, PREFIX_NAME, PREFIX_PHONE,
-                        PREFIX_EMAIL, PREFIX_BOOKING_PERIOD, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_ROOM, PREFIX_BOOKING_PERIOD, PREFIX_NAME, PREFIX_PHONE,
+                        PREFIX_EMAIL, PREFIX_TAG);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_ROOM, PREFIX_NAME, PREFIX_BOOKING_PERIOD, PREFIX_PHONE, PREFIX_EMAIL)
+        if (!arePrefixesPresent(argMultimap, PREFIX_ROOM, PREFIX_BOOKING_PERIOD, PREFIX_NAME,
+                PREFIX_PHONE, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ROOM, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_BOOKING_PERIOD);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ROOM, PREFIX_BOOKING_PERIOD, PREFIX_NAME, PREFIX_PHONE,
+                PREFIX_EMAIL);
         Room room = ParserUtil.parseRoom(argMultimap.getValue(PREFIX_ROOM).get());
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-        BookingPeriod bookingPeriod = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_BOOKING_PERIOD).get());
+        BookingPeriod bookingPeriod = ParserUtil.parseBookingPeriod(argMultimap.getValue(PREFIX_BOOKING_PERIOD).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Booking booking = new Booking(room, name, phone, email, bookingPeriod, tagList);
+        Booking booking = new Booking(room, bookingPeriod, name, phone, email, tagList);
 
         return new AddCommand(booking);
     }

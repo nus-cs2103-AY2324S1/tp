@@ -43,7 +43,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ROOM, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_BOOKING_PERIOD);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ROOM, PREFIX_NAME, PREFIX_PHONE,
+                PREFIX_EMAIL, PREFIX_BOOKING_PERIOD);
 
         EditCommand.EditRoomDescriptor editRoomDescriptor = new EditCommand.EditRoomDescriptor();
 
@@ -61,7 +62,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             editRoomDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
         }
         if (argMultimap.getValue(PREFIX_BOOKING_PERIOD).isPresent()) {
-            editRoomDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_BOOKING_PERIOD).get()));
+            editRoomDescriptor.setBookingPeriod(ParserUtil.parseBookingPeriod(argMultimap
+                    .getValue(PREFIX_BOOKING_PERIOD).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editRoomDescriptor::setTags);
 

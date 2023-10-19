@@ -20,28 +20,24 @@ public class BookingPeriodTest {
     }
 
     @Test
-    public void isValidAddress() {
-        // null address
+    public void isBookingPeriod() {
+        // null
         assertThrows(NullPointerException.class, () -> BookingPeriod.isValidBookingPeriod(null));
 
-        // invalid addresses
+        // invalid
         assertFalse(BookingPeriod.isValidBookingPeriod("")); // empty string
         assertFalse(BookingPeriod.isValidBookingPeriod(" ")); // spaces only
 
-        // valid addresses
-        assertTrue(BookingPeriod.isValidBookingPeriod("Blk 456, Den Road, #01-355"));
-        assertTrue(BookingPeriod.isValidBookingPeriod("-")); // one character
-        assertTrue(BookingPeriod.isValidBookingPeriod("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA")); //
-        // long
-        // address
+        // valid
+        assertTrue(BookingPeriod.isValidBookingPeriod("2023-01-01 to 2023-01-02"));
     }
 
     @Test
     public void equals() {
-        BookingPeriod bookingPeriod = new BookingPeriod("Valid Address");
+        BookingPeriod bookingPeriod = new BookingPeriod("2023-01-01 to 2023-01-02");
 
         // same values -> returns true
-        assertTrue(bookingPeriod.equals(new BookingPeriod("Valid Address")));
+        assertTrue(bookingPeriod.equals(new BookingPeriod("2023-01-01 to 2023-01-02")));
 
         // same object -> returns true
         assertTrue(bookingPeriod.equals(bookingPeriod));
@@ -53,6 +49,6 @@ public class BookingPeriodTest {
         assertFalse(bookingPeriod.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(bookingPeriod.equals(new BookingPeriod("Other Valid Address")));
+        assertFalse(bookingPeriod.equals(new BookingPeriod("2023-01-03 to 2023-01-04")));
     }
 }
