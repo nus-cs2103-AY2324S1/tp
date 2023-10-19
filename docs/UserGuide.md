@@ -3,9 +3,10 @@ layout: page
 title: User Guide
 ---
 
-UNOFAS (One Financial Advisors app) is a **desktop app for Financial Advisors to manage client's contacts, 
-optimized for use via a Command Line Interface** (CLI) while still having the benefits of a 
-Graphical User Interface (GUI). If you can type fast, UNO FAs can help you manage and retrieve client's information better than traditional GUI apps.
+UNOFAS (One Financial Advisors app) is a **desktop app for Financial Advisors to manage client's contacts,
+optimized for use via a Command Line Interface** (CLI) while still having the benefits of a
+Graphical User Interface (GUI). If you can type fast, UNOFAS can help you manage and retrieve client's information
+better than traditional GUI apps.
 
 **Table of Contents**
 * Quick Start
@@ -64,7 +65,7 @@ Graphical User Interface (GUI). If you can type fast, UNO FAs can help you manag
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Any input parameters that do not adhere to the accepted values will result in the command **failing and not executing**. 
+* Any input parameters that do not adhere to the accepted values will result in the command **failing and not executing**.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -87,7 +88,7 @@ Add a client’s contacts to address book (name, phone number, email, home addre
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS nk/NEXT_KIN nkp/NEXT_KIN_PHONE [fp/FINANCIAL_PLAN] [t/TAG]…​`
 
-Acceptable Values: 
+Acceptable Values:
 1. NAME - any value is possible
 2. PHONE_NUMBER - Numbers (0-9) and symbols, but no alphabets
 3. EMAIL - string in valid email format
