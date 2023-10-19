@@ -47,11 +47,11 @@ public class ListCommand extends Command {
         requireNonNull(model);
 
         if (sortingComparator != null) {
-            // If a sorting comparator is provided, sort the list using it
             model.sortPersonList(sortingComparator);
         }
 
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
