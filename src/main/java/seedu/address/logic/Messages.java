@@ -41,6 +41,8 @@ public class Messages {
                 .append(person.getPhone())
                 .append("; Email: ")
                 .append(person.getEmail())
+                .append("; IsPaid: ")
+                .append(person.getPaid())
                 .append("; Address: ")
                 .append(person.getAddress())
                 .append("; Day: ")
