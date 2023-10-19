@@ -1,6 +1,5 @@
 package seedu.address.model.person;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
@@ -23,7 +22,8 @@ public class Status {
     public static final String DEFAULT_STATUS = "NIL";
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Status should be 1 of { Prospective, Active, Inactive, Claimant, Renewal }, and it should not be blank";
+            "Status should be 1 of { NIL, Prospective, Active, Inactive, Claimant, Renewal } or blank.\n"
+            + "Will be set to NIL by default if left blank.";
 
     public final String value;
 
@@ -33,16 +33,15 @@ public class Status {
      * @param status A valid status.
      */
     public Status(String status) {
-        requireNonNull(status);
         checkArgument(isValidStatus(status), MESSAGE_CONSTRAINTS);
-        this.value = (status == "") ? DEFAULT_STATUS : status;
+        this.value = (status == null || status.isEmpty()) ? DEFAULT_STATUS : status;
     }
 
     /**
      * Returns true if a given string is a valid status.
      */
     public static boolean isValidStatus(String input) {
-        if (input == "") {
+        if (input == null || input.isEmpty()) {
             return true;
         }
         for (statusList enumValue : statusList.class.getEnumConstants()) {

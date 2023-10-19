@@ -8,6 +8,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
+import seedu.address.model.person.Status;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -19,11 +20,13 @@ public class PersonBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
+    public static final String DEFAULT_STATUS = "";
     public static final String DEFAULT_REMARK = "";
 
     private Name name;
     private Phone phone;
     private Email email;
+    private Status status;
     private Remark remark;
     private Set<Tag> tags;
 
@@ -34,6 +37,7 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
+        status = new Status(DEFAULT_STATUS);
         remark = new Remark(DEFAULT_REMARK);
         tags = new HashSet<>();
     }
@@ -45,6 +49,7 @@ public class PersonBuilder {
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
+        status = personToCopy.getStatus();
         remark = personToCopy.getRemark();
         tags = new HashSet<>(personToCopy.getTags());
     }
@@ -66,7 +71,7 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code remark} of the {@code Person} that we are building.
+     * Sets the {@code Remark} of the {@code Person} that we are building.
      */
     public PersonBuilder withRemark(String remark) {
         this.remark = new Remark(remark);
@@ -89,8 +94,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Status} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withStatus(String status) {
+        this.status = new Status(status);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, remark, tags);
+        return new Person(name, phone, email, status, remark, tags);
     }
 
 }

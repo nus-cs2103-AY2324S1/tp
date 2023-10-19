@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TITLE;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -41,6 +42,8 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_START_MEETING1 = "20.09.2023 1000";
+    public static final String VALID_STATUS_AMY = "";
+    public static final String VALID_STATUS_BOB = "Prospective";
     public static final String VALID_REMARK_AMY = "Likes to swim";
     public static final String VALID_REMARK_BOB = "";
     public static final String VALID_END_MEETING1 = "20.09.2023 1200";
@@ -59,6 +62,8 @@ public class CommandTestUtil {
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
     public static final String START_DESC_MEETING1 = " " + PREFIX_START + VALID_START_MEETING1;
+    public static final String STATUS_DESC_AMY = " " + PREFIX_STATUS + "NIL";
+    public static final String STATUS_DESC_BOB = " " + PREFIX_STATUS + VALID_STATUS_BOB;
     public static final String REMARK_DESC_AMY = " " + PREFIX_REMARK + VALID_REMARK_AMY;
     public static final String REMARK_DESC_BOB = " " + PREFIX_REMARK + VALID_REMARK_BOB;
     public static final String END_DESC_MEETING1 = " " + PREFIX_END + VALID_END_MEETING1;
@@ -72,6 +77,7 @@ public class CommandTestUtil {
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_LOCATION_DESC = " " + PREFIX_LOCATION + " "; // blank is not allowed in Location
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
+    public static final String INVALID_STATUS_DESC = " " + PREFIX_STATUS + "Insured"; // not in predefined status list
     public static final String INVALID_START_DESC = " " + PREFIX_START + "99.99.9999 9999";
     public static final String INVALID_END_DESC = " " + PREFIX_END + "99.99.9999 9999";
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
