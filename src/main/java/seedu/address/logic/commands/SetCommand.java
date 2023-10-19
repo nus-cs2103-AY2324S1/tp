@@ -58,8 +58,9 @@ public class SetCommand extends Command {
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
         personToEdit.getStatus().setStatusType(newStatus);
+        model.setLastViewedPersonIndex(index);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_SET_PERSON_SUCCESS, Messages.format(personToEdit)));
+        return new CommandResult(String.format(MESSAGE_SET_PERSON_SUCCESS, Messages.format(personToEdit)), true);
     }
 
     @Override
