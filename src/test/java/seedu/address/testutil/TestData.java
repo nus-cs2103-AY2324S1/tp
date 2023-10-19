@@ -10,10 +10,13 @@ import java.nio.file.Paths;
 import java.util.logging.Level;
 
 import seedu.address.commons.core.Config;
+import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand.EditContactDescriptor;
 import seedu.address.model.Contacts;
 import seedu.address.model.ReadOnlyContacts;
+import seedu.address.model.ReadOnlySettings;
+import seedu.address.model.Settings;
 import seedu.address.model.contact.Contact;
 
 
@@ -175,9 +178,21 @@ public final class TestData {
     }
 
     /**
-     * Returns {@link ReadOnlyContacts} matching typicalContacts.json.
+     * Returns {@link Settings} matching typicalSettings.json.
      */
-    public static ReadOnlyContacts getTypicalContacts() {
+    public static Settings getTypicalSettings() {
+        Settings settings = new Settings();
+        settings.setContactsPath(Paths.get("myDocuments/contacts.json"));
+        settings.setGuiSettings(
+            new GuiSettings(1000, 500, 300, 100)
+        );
+        return settings;
+    }
+
+    /**
+     * Returns {@link Contacts} matching typicalContacts.json.
+     */
+    public static Contacts getTypicalContacts() {
         Contacts contacts = new Contacts();
         contacts.add(TestData.ALICE);
         contacts.add(TestData.BENSON);

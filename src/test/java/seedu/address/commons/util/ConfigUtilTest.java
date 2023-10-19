@@ -26,17 +26,12 @@ public class ConfigUtilTest {
     private static final Path TEST_DATA_FOLDER = Paths.get(
         "src",
         "test",
-        "data",
-        "ConfigUtilTest"
+        "data"
     );
-
-    private static Path getConfigPath(String fileName) {
-        return ConfigUtilTest.TEST_DATA_FOLDER.resolve(fileName);
-    }
 
     private Optional<Config> read(String fileName) throws DataLoadingException {
         return ConfigUtil.readConfig(
-            ConfigUtilTest.getConfigPath(fileName)
+            ConfigUtilTest.TEST_DATA_FOLDER.resolve(fileName)
         );
     }
 
@@ -66,20 +61,20 @@ public class ConfigUtilTest {
 
     @Test
     public void saveConfig() throws DataLoadingException, IOException {
-        Path path = ConfigUtilTest.TEMP_DIR.resolve("tempConfig.json");
+        Path tempPath = ConfigUtilTest.TEMP_DIR.resolve("tempConfig.json");
 
         Config config = TestData.getTypicalConfig();
 
         // Try writing when the file doesn't exist
-        ConfigUtil.saveConfig(config, path);
-        Config readBack = ConfigUtil.readConfig(path).get();
+        ConfigUtil.saveConfig(config, tempPath);
+        Config readBack = ConfigUtil.readConfig(tempPath).get();
         assertEquals(config, readBack);
 
         config.setLogLevel(Level.FINE);
 
         // Try saving when the file exists
-        ConfigUtil.saveConfig(config, path);
-        readBack = ConfigUtil.readConfig(path).get();
+        ConfigUtil.saveConfig(config, tempPath);
+        readBack = ConfigUtil.readConfig(tempPath).get();
         assertEquals(config, readBack);
     }
 }

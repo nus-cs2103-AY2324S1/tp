@@ -14,6 +14,8 @@ import seedu.address.model.Settings;
 
 /**
  * Implementation of the Storage component.
+ *
+ * Contains immutable {@link Path}s.
  */
 public class StorageManager implements Storage {
     private ContactsStorage contactsStorage;

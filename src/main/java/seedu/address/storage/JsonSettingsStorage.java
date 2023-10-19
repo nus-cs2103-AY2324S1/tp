@@ -14,6 +14,8 @@ import seedu.address.model.Settings;
 /**
  * Handles reading and saving {@link Settings} to and from the settings storage
  * JSON file.
+ *
+ * Contains an immutable {@link Path}.
  */
 public class JsonSettingsStorage implements SettingsStorage {
     private final Path path;

@@ -1,4 +1,5 @@
 {
+  "_comment": "//NOTE This should match TestData.getTypicalSettings().",
   "contactsPath" : "myDocuments/contacts.json",
   "guiSettings" : {
     "windowWidth" : 1000.0,

@@ -18,6 +18,8 @@ import seedu.address.model.ReadOnlyContacts;
 /**
  * Handles reading and saving {@link Contacts} to and from the contacts storage
  * JSON file.
+ *
+ * Contains an immutable {@link Path}.
  */
 public class JsonContactsStorage implements ContactsStorage {
     private static final Logger logger = LogsCenter.getLogger(JsonContactsStorage.class);
