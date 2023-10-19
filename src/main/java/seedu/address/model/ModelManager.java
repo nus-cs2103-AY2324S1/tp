@@ -135,6 +135,8 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+
+
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate1, Predicate<Person> predicate2) {
         requireNonNull(predicate1);
@@ -142,17 +144,10 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(person -> predicate1.test(person) && predicate2.test(person));
     }
 
-    //  TODO: fix the sorting
     @Override
     public void sortPersonList(Comparator<Person> comparator) {
         requireNonNull(comparator);
-
-        List<Person> sortedList = new ArrayList<>(getFilteredPersonList());
-        sortedList.sort(comparator);
-
-        // Update the filtered list
-        Predicate<Person> predicate = sortedList::contains;
-        updateFilteredPersonList(predicate);
+        addressBook.sortAddressBook(comparator);
     }
 
 
