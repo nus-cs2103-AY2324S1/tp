@@ -53,10 +53,10 @@ Table of Contents
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME [d/Department]` can be used as `n/John Doe d/Investment` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[d/DEPARTMENTS]…​` can be used as ` ` (i.e. 0 times), `d/Investment`, `d/Sales d/Logistic` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -69,7 +69,7 @@ Table of Contents
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the user guide.
+Shows a message explaining how to access the user guide.
 
 Format: `help`
 
@@ -95,30 +95,31 @@ Expected outputs:
 
 Adds a person to ManageHR’s entries.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DEPARTMENT`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SALARY d/DEPARTMENT`
 - Adds an employee with the above fields
 - All fields must be provided
 
 Examples:
-* `add n/Johnny p/91242712 e/johnnysins@gmail.com a/Johnny street, block 69, #05-05 d/ R&D`
-* `add n/Elon p/12345678 e/elonma@gmail.com a/Elon street, block 140, #20-01 d/R&D`
+* `add n/Johnny p/91242712 e/johnnysins@gmail.com a/Johnny street, block 69, #05-05 s/ 5300 d/ R&D`
+* `add n/Elon p/12345678 e/elonma@gmail.com a/Elon street, block 140, #20-01 s/ 2100 d/R&D`
 
 Acceptable values for each parameter:
 
 | Parameters | Accepted input |
-| --- | --- |
+| --- |  |
 | `NAME` | Alphabets |
 | `PHONE_NUMBER` | 8 digits |
 | `EMAIL` | Email with the pattern x@x.com where ‘x’ are alphanumerics |
 | `ADDRESS` | Alphanumerics and ascii characters i.e. #, - |
+| `SALARY` | Numerals |
 | `DEPARTMENT` | Alphabets and ascii characters i.e. &, - |
 
 Expected outputs:
 
-| Outcome | Output |
-| --- | --- |
-| **Success** | Employee added! Johnny \| 12345678 \| johnnysins@gmail.com \| Johnny Street, block 69, #05-05 \| R&D |
-| **Fail** | Please check the parameter inputs |
+| Outcome | Output                                                                                                       |
+| --- |--------------------------------------------------------------------------------------------------------------|
+| **Success** | Employee added! Johnny \| 12345678 \| johnnysins@gmail.com \| Johnny Street, block 69, #05-05 \| 5300 \| R&D |
+| **Fail** | Please check the parameter inputs                                                                            |
 
 ### Listing all employees : `list`
 
@@ -146,7 +147,7 @@ Fail:
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [d/DEPARTMENT]​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SALARY] [d/DEPARTMENT]​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
 * At least one of the optional fields must be provided.
