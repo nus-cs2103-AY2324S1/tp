@@ -17,7 +17,7 @@ public class SetCommandTest {
     }
 
     @Test
-    public void setCommandString_success(){
+    public void setCommandString_success() {
         assertEquals((new SetCommand(Index.fromOneBased(1), StatusTypes.INTERVIEWED)).toString(),
                 "seedu.address.logic.commands."
                         + "SetCommand{targetIndex=seedu.address.commons.core.index.Index{zeroBasedIndex=0}," +
