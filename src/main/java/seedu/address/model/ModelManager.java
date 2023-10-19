@@ -13,6 +13,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.lessons.Lesson;
 import seedu.address.model.person.Person;
+import seedu.address.model.state.State;
 import seedu.address.ui.Ui;
 
 /**
@@ -27,7 +28,7 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Lesson> filteredLessons;
     private Ui ui = null;
-    private String state = "SCHEDULE"; // Default state of app. Can be either SCHEDULE or STUDENTS
+    private State state = State.SCHEDULE; // Default state of app. Can be either SCHEDULE or STUDENTS
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -245,17 +246,17 @@ public class ModelManager implements Model {
     //=========== App State Changing =============================================================
 
     @Override
-    public String getState() {
+    public State getState() {
         return state;
     }
 
     @Override
-    public void setState(String state) {
+    public void setState(State state) {
         this.state = state;
     }
 
     @Override
-    public boolean sameState(String state) {
+    public boolean sameState(State state) {
         return this.state.equals(state);
     }
 

@@ -25,6 +25,7 @@ import seedu.address.model.ReadOnlySchedule;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.lessons.Lesson;
 import seedu.address.model.person.Person;
+import seedu.address.model.state.State;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.ui.Ui;
 
@@ -221,17 +222,17 @@ public class AddCommandTest {
         }
 
         @Override
-        public String getState() {
+        public State getState() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setState(String state) {
+        public void setState(State state) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean sameState(String state) {
+        public boolean sameState(State state) {
             throw new AssertionError("This method should not be called.");
         }
     }

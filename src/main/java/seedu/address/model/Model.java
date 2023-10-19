@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.lessons.Lesson;
 import seedu.address.model.person.Person;
+import seedu.address.model.state.State;
 import seedu.address.ui.Ui;
 
 /**
@@ -157,17 +158,17 @@ public interface Model {
     /**
      * Gets the current app state.
      */
-    String getState();
+    State getState();
 
     /**
      * Sets the app state.
      * @param state New app state
      */
-    void setState(String state);
+    void setState(State state);
 
     /**
      * Checks if the given state is the same as the current app state.
      * @param state State to check against app
      */
-    boolean sameState(String state);
+    boolean sameState(State state);
 }

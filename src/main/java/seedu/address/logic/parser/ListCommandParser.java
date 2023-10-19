@@ -7,6 +7,7 @@ import java.util.Arrays;
 
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.state.State;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -43,10 +44,10 @@ public class ListCommandParser implements Parser<ListCommand> {
         switch (keywords[0]) {
         case "":
         case "SCHEDULE":
-            return new ListCommand("SCHEDULE");
+            return new ListCommand(State.SCHEDULE);
 
         case "STUDENTS":
-            return new ListCommand("STUDENTS", displayParams);
+            return new ListCommand(State.STUDENT, displayParams);
 
         default:
             throw new ParseException(

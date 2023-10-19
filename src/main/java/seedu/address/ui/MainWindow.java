@@ -21,6 +21,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lessons.Lesson;
 import seedu.address.model.person.Person;
+import seedu.address.model.state.State;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -231,15 +232,15 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
-            if (!commandResult.getState().equals("")) {
-                String state = commandResult.getState();
+            if (!commandResult.getState().equals(State.NONE)) {
+                State state = commandResult.getState();
                 double[] dividerPositions = contentSplitPane.getDividerPositions();
                 switch (state) {
-                case "SCHEDULE":
+                case SCHEDULE:
                     contentSplitPane.getItems().removeAll(personList, studentDetailList);
                     contentSplitPane.getItems().addAll(scheduleList, lessonDetailList);
                     break;
-                case "STUDENTS":
+                case STUDENT:
                     contentSplitPane.getItems().removeAll(scheduleList, lessonDetailList);
                     contentSplitPane.getItems().addAll(personList, studentDetailList);
                     break;
