@@ -12,8 +12,8 @@ import seedu.address.model.contact.UniqueContactList;
 /**
  * Mutable {@link Contact}s, both readable and writable.
  *
- * Duplicate {@link Contact}s are not allowed. Each {@link Contact} should be
- * unique as determined by {@link Contacts#contains}.
+ * Duplicate {@link Contact}s are not allowed. Each {@link Contact} must be
+ * unique as determined by {@link #contains(Contact)}.
  */
 public class Contacts implements ReadOnlyContacts {
     private UniqueContactList uniqueList = new UniqueContactList();
@@ -68,7 +68,7 @@ public class Contacts implements ReadOnlyContacts {
      * Adds the specified {@link Contact}.
      *
      * The {@link Contact} must not already exist as determined by
-     * {@link Contacts#contains}.
+     * {@link #contains(Contact)}.
      */
     public void add(Contact contact) {
         this.uniqueList.add(contact);
@@ -86,7 +86,7 @@ public class Contacts implements ReadOnlyContacts {
      * Replaces the old {@link Contact} with the new one.
      *
      * The new {@link Contact} must not already exist as determined by
-     * {@link Contacts#contains}.
+     * {@link #contains(Contact)}.
      *
      * @param old The old contact to replace.
      * @param updated The new, unique contact to take its place.

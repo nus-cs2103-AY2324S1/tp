@@ -8,7 +8,7 @@ import seedu.address.commons.util.ToStringBuilder;
 
 
 /**
- * Represents an immutable snapshot of GUI settings.
+ * Immutably represents GUI settings.
  */
 public class GuiSettings {
     private static final double DEFAULT_HEIGHT = 600;

@@ -22,12 +22,9 @@ public final class JsonTag {
      * Constructs by converting the specified {@link Tag}.
      */
     public JsonTag(Tag tag) {
-        this(tag.name);
+        this(tag.value);
     }
 
-    /**
-     * Constructs for the specified name.
-     */
     @JsonCreator
     public JsonTag(String name) {
         this.name = name;
@@ -44,7 +41,7 @@ public final class JsonTag {
      * @throws IllegalValueException If any data this contains is invalid.
      */
     public Tag toModelType() throws IllegalValueException {
-        if (!Tag.isValidName(this.name)) {
+        if (!Tag.isValid(this.name)) {
             throw new IllegalValueException(
                 Messages.tagInvalid(this.name)
             );
