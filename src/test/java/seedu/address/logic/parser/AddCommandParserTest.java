@@ -1,6 +1,9 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_MISSING_FIELDS_FOR_ADD_COMMAND;
+import static seedu.address.logic.Messages.MESSAGE_MISSING_FIELDS_POLICY_FOR_ADD_COMMAND;
+import static seedu.address.logic.Messages.MESSAGE_PREAMBLE_DETECTED;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
@@ -153,9 +156,7 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_someButNotAllOptionalFieldsPresent_failure() {
-        String errorMessage = "Please include either all or none of the policy variables. "
-                + "\n"
-                + "You are missing the following: - Policy Expiry Date(pe/) ";
+        String errorMessage = MESSAGE_MISSING_FIELDS_POLICY_FOR_ADD_COMMAND + "- Policy Expiry Date(pe/) ";
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, errorMessage);
         assertParseFailure(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
@@ -167,9 +168,7 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String errorMessage = "Error: Some of the required fields are missing. "
-                + "\n"
-                + "Please include the following: ";
+        String errorMessage = MESSAGE_MISSING_FIELDS_FOR_ADD_COMMAND;
 
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, errorMessage);
 
@@ -244,6 +243,6 @@ public class AddCommandParserTest {
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + NRIC_DESC_BOB
                 + LICENSE_PLATE_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_PREAMBLE_DETECTED));
     }
 }

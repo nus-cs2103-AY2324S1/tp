@@ -1,6 +1,9 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_MISSING_FIELDS_FOR_ADD_COMMAND;
+import static seedu.address.logic.Messages.MESSAGE_MISSING_FIELDS_POLICY_FOR_ADD_COMMAND;
+import static seedu.address.logic.Messages.MESSAGE_PREAMBLE_DETECTED;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LICENCE_PLATE;
@@ -46,14 +49,12 @@ public class AddCommandParser implements Parser<AddCommand> {
                         PREFIX_POLICY_ISSUE_DATE, PREFIX_POLICY_EXPIRY_DATE);
 
         if (!argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_PREAMBLE_DETECTED));
         }
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_NRIC,
                 PREFIX_LICENCE_PLATE, PREFIX_ADDRESS)) {
-            String errorMessage = "Error: Some of the required fields are missing. "
-                    + "\n"
-                    + "Please include the following: ";
+            String errorMessage = MESSAGE_MISSING_FIELDS_FOR_ADD_COMMAND;
             if (argMultimap.getValue(PREFIX_NAME).isEmpty()) {
                 errorMessage += "- Name(n/) ";
             }
@@ -89,9 +90,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                 PREFIX_POLICY_EXPIRY_DATE)) {
             if (!arePrefixesPresent(argMultimap, PREFIX_POLICY_NUMBER, PREFIX_POLICY_ISSUE_DATE,
                     PREFIX_POLICY_EXPIRY_DATE)) {
-                String errorMessage = "Please include either all or none of the policy variables. "
-                        + "\n"
-                        + "You are missing the following: ";
+                String errorMessage = MESSAGE_MISSING_FIELDS_POLICY_FOR_ADD_COMMAND;
                 if (argMultimap.getValue(PREFIX_POLICY_NUMBER).isEmpty()) {
                     errorMessage += "- Policy Number(pn/) ";
                 }
