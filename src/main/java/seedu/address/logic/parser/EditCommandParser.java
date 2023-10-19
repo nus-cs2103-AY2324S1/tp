@@ -26,8 +26,8 @@ import seedu.address.model.tag.Tag;
  */
 public class EditCommandParser implements Parser<EditCommand> {
     /**
-     * Parses the given {@code String} of arguments in the ContactsManager of the EditCommand
-     * and returns an EditCommand object for execution.
+     * Returns an {@link EditCommand} from parsing the specified arguments.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditCommand parse(String args) throws ParseException {

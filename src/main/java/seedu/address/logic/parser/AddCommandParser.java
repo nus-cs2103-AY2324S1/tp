@@ -26,8 +26,8 @@ import seedu.address.model.tag.Tag;
  */
 public class AddCommandParser implements Parser<AddCommand> {
     /**
-     * Parses the given {@code String} of arguments in the ContactsManager of the AddCommand
-     * and returns an AddCommand object for execution.
+     * Returns an {@link AddCommand} from parsing the specified arguments.
+     * .
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddCommand parse(String args) throws ParseException {

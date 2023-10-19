@@ -12,8 +12,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class DeleteCommandParser implements Parser<DeleteCommand> {
     /**
-     * Parses the given {@code String} of arguments in the ContactsManager of the DeleteCommand
-     * and returns a DeleteCommand object for execution.
+     * Returns a {@link DeleteCommand} from parsing the specified arguments.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteCommand parse(String args) throws ParseException {
