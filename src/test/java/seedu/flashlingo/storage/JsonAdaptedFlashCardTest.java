@@ -1,24 +1,22 @@
 package seedu.flashlingo.storage;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.flashlingo.storage.JsonAdaptedFlashCard.DATE_PATTERN;
 import static seedu.flashlingo.storage.JsonAdaptedFlashCard.INVALID_DATE_FORMAT_MESSAGE;
 import static seedu.flashlingo.storage.JsonAdaptedFlashCard.MISSING_FIELD_MESSAGE_FORMAT;
-
-import org.junit.jupiter.api.Test;
-import seedu.flashlingo.commons.exceptions.IllegalValueException;
-import seedu.flashlingo.model.flashcard.ProficiencyLevel;
-import seedu.flashlingo.model.flashcard.words.OriginalWord;
-import seedu.flashlingo.model.flashcard.words.TranslatedWord;
+import static seedu.flashlingo.testutil.Assert.assertThrows;
+import static seedu.flashlingo.testutil.TypicalFlashCards.WORD;
 
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.flashlingo.testutil.Assert.assertThrows;
-import static seedu.flashlingo.testutil.TypicalFlashCards.WORD;
+import org.junit.jupiter.api.Test;
 
+import seedu.flashlingo.commons.exceptions.IllegalValueException;
+import seedu.flashlingo.model.flashcard.ProficiencyLevel;
+import seedu.flashlingo.model.flashcard.words.OriginalWord;
+import seedu.flashlingo.model.flashcard.words.TranslatedWord;
 public class JsonAdaptedFlashCardTest {
     private static final String INVALID_ORIGINAL_WORD_LANGUAGE = "English! ";
     private static final String INVALID_TRANSLATED_WORD_LANGUAGE = "Fre1ch";
@@ -29,8 +27,8 @@ public class JsonAdaptedFlashCardTest {
     private static final String VALID_ORIGINAL_WORD_LANGUAGE = WORD.getOriginalWord().getLanguage();
     private static final String VALID_TRANSLATED_WORD = WORD.getTranslatedWord().getWord();
     private static final String VALID_TRANSLATED_WORD_LANGUAGE = WORD.getTranslatedWord().getLanguage();
-    private static final String VALID_WHEN_TO_REVIEW = DateTimeFormatter.ofPattern(DATE_PATTERN).
-            format(ZonedDateTime.ofInstant(WORD.getWhenToReview().toInstant(), ZoneOffset.UTC));
+    private static final String VALID_WHEN_TO_REVIEW = DateTimeFormatter.ofPattern(DATE_PATTERN)
+            .format(ZonedDateTime.ofInstant(WORD.getWhenToReview().toInstant(), ZoneOffset.UTC));
     private static final int VALID_LEVEL = WORD.getProficiencyLevel().getLevel();
 
     @Test

@@ -1,12 +1,12 @@
 package seedu.flashlingo.testutil;
 
+import java.time.Instant;
+import java.util.Date;
+
 import seedu.flashlingo.model.flashcard.FlashCard;
 import seedu.flashlingo.model.flashcard.ProficiencyLevel;
 import seedu.flashlingo.model.flashcard.words.OriginalWord;
 import seedu.flashlingo.model.flashcard.words.TranslatedWord;
-
-import java.time.Instant;
-import java.util.Date;
 
 /**
  * A utility class to help with building FlashCard objects.

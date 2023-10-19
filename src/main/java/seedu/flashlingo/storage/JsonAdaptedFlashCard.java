@@ -108,8 +108,8 @@ public class JsonAdaptedFlashCard {
         final int modelLevel = level;
 
         return new FlashCard(new OriginalWord(modelOriginalWord, modelOriginalWordLanguage),
-                new TranslatedWord(modelTranslatedWord, modelTranslatedWordLanguage), modelWhenToReview,
-                new ProficiencyLevel(modelLevel));
+                new TranslatedWord(modelTranslatedWord, modelTranslatedWordLanguage),
+                modelWhenToReview, new ProficiencyLevel(modelLevel));
     }
     //TODO: turn expressions to constant(also in test); error handling
 }
