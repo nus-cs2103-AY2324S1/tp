@@ -1,5 +1,7 @@
 package seedu.application.testutil;
 
+import static seedu.application.logic.commands.CommandTestUtil.*;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -8,8 +10,6 @@ import seedu.application.model.ApplicationBook;
 import seedu.application.model.job.Deadline;
 import seedu.application.model.job.Job;
 import seedu.application.model.job.Status;
-
-import static seedu.application.logic.commands.CommandTestUtil.*;
 
 /**
  * A utility class containing a list of {@code Job} objects to be used in tests.
