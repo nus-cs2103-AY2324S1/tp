@@ -26,12 +26,11 @@ public class FilterCommand extends Command {
             + "add"
             + PREFIX_COURSETUTORIAL + "CS2103T"
             + PREFIX_TUTORIALNUMBER + "1";
-    
+
     public static final String MESSAGE_ADD_SUCCESS = "Added %1$s";
     public static final String MESSAGE_DELETE_SUCCESS = "Removed %1$s";
     public static final String MESSAGE_CLEAR_SUCCESS = "Cleared all filters";
     public static final String MESSAGE_INVALID_OPERATION_FAILURE = "Invalid operation";
-
 
     private final FilterOperation operation;
     private final ContainsTagPredicate predicate;

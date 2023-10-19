@@ -1,29 +1,20 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.Messages;
 import seedu.address.logic.parser.ParserUtil.FilterOperation;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
 import seedu.address.model.predicate.ContainsTagPredicate;
 import seedu.address.model.tag.Tag;
 
 public class FilterCommandTest {
-    
+
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
@@ -44,7 +35,7 @@ public class FilterCommandTest {
     public void execute_removeValidFilter_success() {
         Tag tag = new Tag("CS2103T");
         ContainsTagPredicate predicate = new ContainsTagPredicate(tag);
-    
+
         model.addFilter(predicate);
 
         FilterCommand filterCommand = new FilterCommand(FilterOperation.DELETE, tag);
@@ -62,7 +53,7 @@ public class FilterCommandTest {
         Tag secondTag = new Tag("CS2101");
         ContainsTagPredicate firstPredicate = new ContainsTagPredicate(firstTag);
         ContainsTagPredicate secondPredicate = new ContainsTagPredicate(secondTag);
-    
+
         model.addFilter(firstPredicate);
         model.addFilter(secondPredicate);
 
