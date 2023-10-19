@@ -140,6 +140,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void removeMusicianFromBand(int bandIndex, int musicianIndex) {
+        addressBook.removeMusicianFromBand(bandIndex, filteredMusicians.get(musicianIndex));
+    }
+
+    @Override
     public void deleteBand(Band target) {
         addressBook.removeBand(target);
     }
