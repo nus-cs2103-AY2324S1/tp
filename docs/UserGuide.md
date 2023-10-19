@@ -251,13 +251,13 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action | Format, Examples
---------|-----------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS nk/NEXT_KIN nkp/NEXT_KIN_PHONE [t/TAG]…​` <br> e.g., `add n/John p/80101010 e/johndoe@gmail.com a/Punggol Central Blk 444 #15-32 820123 nk/Brennan nkp/82020202 [t/TAG]…​`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit ENTRY_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nk/NEXT_KIN] [nkp/NEXT_KIN_PHONE] [t/TAG]…​`<br> e.g.,`edit 1 n/john doe a/23 woodlands ave 123`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
-**Sort** | `sort`
+| Action     | Format, Examples                                                                                                                                                                                                        |
+|------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS nk/NEXT_KIN nkp/NEXT_KIN_PHONE [t/TAG]…​` <br> e.g., `add n/John p/80101010 e/johndoe@gmail.com a/Punggol Central Blk 444 #15-32 820123 nk/Brennan nkp/82020202 [t/TAG]…​` |
+| **Clear**  | `clear`                                                                                                                                                                                                                 |
+| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                     |
+| **Edit**   | `edit ENTRY_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nk/NEXT_KIN] [nkp/NEXT_KIN_PHONE] [t/TAG]…​`<br> e.g.,`edit 1 n/john doe a/23 woodlands ave 123`                                                     |
+| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                              |
+| **List**   | `list`                                                                                                                                                                                                                  |
+| **Help**   | `help`                                                                                                                                                                                                                  |
+| **Sort**   | `sort`                                                                                                                                                                                                                  |
