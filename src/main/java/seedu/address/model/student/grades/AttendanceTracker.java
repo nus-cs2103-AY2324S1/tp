@@ -12,9 +12,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.model.student.grades.exceptions.InvalidTutorialIndexException;
 
 /**
- * Represents a Student's AttendanceTracker grades
- * in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidAttendanceTracker(int)}
+ * Represents a Student's AttendanceTracker grades in the class manager.
+ * Guarantees: is valid as declared in {@link #isValidAttendance(int)}
  */
 public class AttendanceTracker {
 

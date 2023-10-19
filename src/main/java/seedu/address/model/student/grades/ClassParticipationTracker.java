@@ -11,8 +11,8 @@ import java.util.stream.IntStream;
 import seedu.address.commons.core.index.Index;
 
 /**
- * Represents a Student's class participation grades in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidClassPart(int)}
+ * Represents a Student's class participation grades in the class manager.
+ * Guarantees: is valid as declared in {@link #isValidClassPart(int)}
  */
 public class ClassParticipationTracker {
 

@@ -14,7 +14,7 @@ import seedu.address.storage.JsonAdaptedClassDetails;
 
 /**
  * Represents a Student in the address book.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Guarantees: details are present and not null, field values are validated.
  */
 public class Student {
 

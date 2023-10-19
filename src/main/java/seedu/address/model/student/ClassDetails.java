@@ -14,7 +14,7 @@ import seedu.address.storage.JsonAdaptedClassDetails;
 
 /**
  * Represents a Student's Class Number in Class Manager.
- * Guarantees: immutable; is valid as declared in {@link #isValidClassDetails(String)}
+ * Guarantees: is valid as declared in {@link #isValidClassDetails(String)}
  */
 public class ClassDetails {
 
