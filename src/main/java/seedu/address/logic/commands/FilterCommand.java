@@ -26,6 +26,12 @@ public class FilterCommand extends Command {
             + "add"
             + PREFIX_COURSETUTORIAL + "CS2103T"
             + PREFIX_TUTORIALNUMBER + "1";
+    
+    public static final String MESSAGE_ADD_SUCCESS = "Added %1$s";
+    public static final String MESSAGE_DELETE_SUCCESS = "Removed %1$s";
+    public static final String MESSAGE_CLEAR_SUCCESS = "Cleared all filters";
+    public static final String MESSAGE_INVALID_OPERATION_FAILURE = "Invalid operation";
+
 
     private final FilterOperation operation;
     private final ContainsTagPredicate predicate;
@@ -56,18 +62,22 @@ public class FilterCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        if (operation == null) {
+            throw new CommandException(MESSAGE_INVALID_OPERATION_FAILURE);
+        }
+
         switch (operation) {
         case ADD:
             model.addFilter(predicate);
-            return new CommandResult("Added " + predicate);
+            return new CommandResult(String.format(MESSAGE_ADD_SUCCESS, predicate));
         case DELETE:
             model.deleteFilter(predicate);
-            return new CommandResult("Removed " + predicate);
+            return new CommandResult(String.format(MESSAGE_DELETE_SUCCESS, predicate));
         case CLEAR:
             model.clearFilters();
-            return new CommandResult("Cleared all filters");
+            return new CommandResult(MESSAGE_CLEAR_SUCCESS);
         default:
-            throw new CommandException("Invalid operation");
+            throw new CommandException(MESSAGE_INVALID_OPERATION_FAILURE);
         }
     }
 
