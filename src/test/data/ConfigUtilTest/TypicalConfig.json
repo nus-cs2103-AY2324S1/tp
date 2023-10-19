@@ -1,4 +1,5 @@
 {
-  "logLevel" : "INFO",
-  "settingsPath" : "myFolder/settings.json"
+  "_comment": "//NOTE This should match ConfigUtilTest.getTypicalConfig().",
+  "settingsPath" : "myFolder/settings.json",
+  "logLevel" : "INFO"
 }
