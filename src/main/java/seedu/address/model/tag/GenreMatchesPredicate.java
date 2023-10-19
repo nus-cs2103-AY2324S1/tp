@@ -2,6 +2,7 @@ package seedu.address.model.tag;
 
 import java.util.List;
 
+import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.musician.Musician;
 
@@ -19,7 +20,7 @@ public class GenreMatchesPredicate extends TagMatchesPredicate {
         List<String> genres = super.getTagNames();
         return genres.stream()
                 .anyMatch(genreToMatch -> musician.getGenres().stream().anyMatch(
-                        musicianGenre -> genreToMatch.equals(musicianGenre.tagName)
+                        musicianGenre -> StringUtil.containsWordIgnoreCase(musicianGenre.tagName, genreToMatch)
                 ));
     }
 

@@ -1,6 +1,10 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GENRE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INSTRUMENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
 import java.util.function.Predicate;
@@ -18,10 +22,16 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all musicians whose names, tags, "
+            + "instruments, and genres contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+            + "Parameters: At least one of the following prefixes with at least one argument must be provided: "
+            + "[" + PREFIX_NAME + "NAME]... "
+            + "[" + PREFIX_TAG + "TAG]..."
+            + "[" + PREFIX_INSTRUMENT + "INSTRUMENT]..."
+            + "[" + PREFIX_GENRE + "GENRE]...\n"
+            + "Example: " + COMMAND_WORD + " n/Alice i/piano";
+
     private final ArrayList<Predicate<Musician>> predicates;
 
     /**
@@ -37,8 +47,9 @@ public class FindCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         // predicates is guaranteed to have at least one element because we cannot pass
-        // empty arguments to the FindCommand
-        Predicate<Musician> combinedPredicate = predicates.stream().reduce(predicates.get(0), Predicate::and);
+        // empty arguments to the FindCommand. Hence, we can safely pass the identity as x -> true
+        // since it will always be overridden by the first predicate.
+        Predicate<Musician> combinedPredicate = predicates.stream().reduce(x -> true, Predicate::and);
         model.updateFilteredMusicianList(combinedPredicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_MUSICIANS_LISTED_OVERVIEW, model.getFilteredMusicianList().size()));

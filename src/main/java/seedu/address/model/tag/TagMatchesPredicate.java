@@ -3,6 +3,7 @@ package seedu.address.model.tag;
 import java.util.List;
 import java.util.function.Predicate;
 
+import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.musician.Musician;
 
@@ -20,7 +21,7 @@ public class TagMatchesPredicate implements Predicate<Musician> {
     public boolean test(Musician musician) {
         return tagNames.stream()
                 .anyMatch(tagToMatch -> musician.getTags().stream().anyMatch(
-                        musicianTag -> tagToMatch.equals(musicianTag.tagName)
+                        musicianTag -> StringUtil.containsWordIgnoreCase(musicianTag.tagName, tagToMatch)
                 ));
     }
 
