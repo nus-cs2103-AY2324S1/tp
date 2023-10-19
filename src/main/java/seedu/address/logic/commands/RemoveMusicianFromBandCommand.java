@@ -30,6 +30,8 @@ public class RemoveMusicianFromBandCommand extends Command {
 
     public static final String MESSAGE_REMOVE_MUSICIAN_SUCCESS = "Removed musician from Band: %1$s";
 
+    public static final String MESSAGE_MUSICIAN_NOT_IN_BAND = "Musician %1$s is not in the band";
+
     private final Index bandTargetIndex;
     private final Index musicianTargetIndex;
 
@@ -46,6 +48,16 @@ public class RemoveMusicianFromBandCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        Musician musicianToRemove = getMusician(model);
+        if (!model.hasMusicianInBand(bandTargetIndex.getZeroBased(), musicianTargetIndex.getZeroBased())) {
+            throw new CommandException(String.format(MESSAGE_MUSICIAN_NOT_IN_BAND, Messages.format(musicianToRemove)));
+        }
+
+        model.removeMusicianFromBand(bandTargetIndex.getZeroBased(), musicianTargetIndex.getZeroBased());
+        return new CommandResult(String.format(MESSAGE_REMOVE_MUSICIAN_SUCCESS, Messages.format(musicianToRemove)));
+    }
+
+    private Musician getMusician(Model model) throws CommandException {
         List<Band> lastShownBandList = model.getFilteredBandList();
         List<Musician> lastShownMusicianList = model.getFilteredMusicianList();
 
@@ -55,8 +67,6 @@ public class RemoveMusicianFromBandCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_MUSICIAN_DISPLAYED_INDEX);
         }
 
-        Musician musicianToRemove = lastShownMusicianList.get(musicianTargetIndex.getZeroBased());
-        model.removeMusicianFromBand(bandTargetIndex.getZeroBased(), musicianTargetIndex.getZeroBased());
-        return new CommandResult(String.format(MESSAGE_REMOVE_MUSICIAN_SUCCESS, Messages.format(musicianToRemove)));
+        return lastShownMusicianList.get(musicianTargetIndex.getZeroBased());
     }
 }
