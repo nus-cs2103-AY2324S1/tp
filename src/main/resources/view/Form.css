@@ -1,0 +1,77 @@
+.white-box {
+    -fx-background-color: #fff;
+    -fx-border-color: #ccc;
+    -fx-padding: 20px;
+    -fx-pref-width: 300px;
+    -fx-margin: 0;
+    -fx-effect: drop shadow(three-pass-box, #888, 2, 2, 5, 0);
+    -fx-background-radius: 5px;
+}
+
+.text-field {
+    -fx-background-color: #333333;
+    -fx-border-color: #fff;
+    -fx-padding: 3px;
+    -fx-margin: 10px;
+    -fx-background-radius: 3px;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 12px;
+    -fx-text-fill: #fff;
+}
+
+.box {
+    -fx-padding: 10px;
+    -fx-background-color: #0074d9;
+    -fx-text-fill: #fff;
+    -fx-border-width: 0;
+    -fx-cursor: hand;
+    -fx-background-radius: 3px;
+}
+
+.box:hover {
+    -fx-background-color: #0056b3;
+}
+
+.stage-button {
+    -fx-background-color: #ccc;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-padding: 5px 10px;
+    -fx-background-radius: 50;
+}
+
+.offered-button {
+    -fx-background-color: #00FF00;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 5px 10px;
+    -fx-background-radius: 50;
+}
+
+.rejected-button {
+    -fx-background-color: #ff0000;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 5px 10px;
+    -fx-background-radius: 50;
+}
+
+.connection-line {
+    -fx-border-style: solid;
+    -fx-border-color: grey;
+    -fx-border-width: 1px;
+}
+
+.connection-box {
+    -fx-padding: 5 0;
+}
+
+.connection-line {
+    -fx-fill: #ccc;
+    -fx-stroke: #ccc;
+    -fx-stroke-width: 4px;
+    -fx-min-width: 100px;
+    -fx-max-width: 200px;
+    -fx-min-height: 2px;
+    -fx-max-height: 2px;
+}

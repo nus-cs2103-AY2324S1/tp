@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
@@ -14,6 +13,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.Person;
 
 /**
@@ -25,6 +25,9 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+
+    private Index lastViewedPersonIndex;
+
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -135,14 +138,28 @@ public class ModelManager implements Model {
     public void sortPersonList(Comparator<Person> comparator) {
         requireNonNull(comparator);
         addressBook.sortAddressBook(comparator);
+  
+    @Override
+    public void updateFilteredPersonList(List<Predicate<Person>> predicatesList) {
+        requireNonNull(predicatesList);
+        Predicate<Person> combinedPredicate = predicatesList.stream()
+                .reduce(Predicate::and)
+                .orElse(person -> true);
+        filteredPersons.setPredicate(combinedPredicate);
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate1, Predicate<Person> predicate2) {
-        requireNonNull(predicate1);
-        requireNonNull(predicate2);;
-        filteredPersons.setPredicate(person -> predicate1.test(person) && predicate2.test(person));
+    public void setLastViewedPersonIndex(Index index) {
+        requireNonNull(index);
+        lastViewedPersonIndex = index;
     }
+
+    @Override
+    public Index getLastViewedPersonIndex() {
+        return lastViewedPersonIndex;
+    }
+
+
 
     @Override
     public boolean equals(Object other) {
