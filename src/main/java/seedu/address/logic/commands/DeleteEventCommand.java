@@ -28,6 +28,7 @@ public class DeleteEventCommand extends Command {
     private final LocalDateTime eventTime;
 
     public DeleteEventCommand(LocalDateTime eventTime) {
+        requireNonNull(eventTime);
         this.eventTime = eventTime;
     }
 

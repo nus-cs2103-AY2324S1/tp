@@ -15,9 +15,9 @@ public class DeleteEventCommandParser implements Parser<DeleteEventCommand> {
     @Override
     public DeleteEventCommand parse(String userInput) throws ParseException {
         try {
-            String startString = userInput.trim();
-            LocalDateTime startTime = LocalDateTime.parse(startString, DATE_TIME_STRING_FORMATTER);
-            return new DeleteEventCommand(startTime);
+            String eventString = userInput.trim();
+            LocalDateTime eventTime = LocalDateTime.parse(eventString, DATE_TIME_STRING_FORMATTER);
+            return new DeleteEventCommand(eventTime);
         } catch (Exception pe) {
             throw new ParseException(String.format(
                     MESSAGE_INVALID_COMMAND_FORMAT, DeleteEventCommand.MESSAGE_USAGE));
