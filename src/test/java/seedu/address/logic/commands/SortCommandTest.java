@@ -5,16 +5,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.SortIn;
 import seedu.address.model.person.Student;
 
@@ -117,6 +120,30 @@ public class SortCommandTest {
         @Override
         public void updateSortedPersonList(SortIn sortIn) {
 
+        }
+
+        /**
+         * Get the student object from filtered student list by name if exists, return
+         * None if the student does not exist.
+         *
+         * @param name the name of the student the caller want to get.
+         * @return The student object in the filteredlist at the given index.
+         */
+        @Override
+        public Optional<Student> getStudentFromFilteredPersonListByName(Name name) {
+            return Optional.empty();
+        }
+
+        /**
+         * Get the student object from filtered student list by index if exists, return
+         * None if the student does not exist.
+         *
+         * @param index the index of the student the caller want to get.
+         * @return The student object in the filteredlist with the given name.
+         */
+        @Override
+        public Optional<Student> getStudentFromFilteredPersonListByIndex(Index index) {
+            return Optional.empty();
         }
 
     }

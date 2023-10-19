@@ -97,19 +97,17 @@ public interface Model {
     /**
      * Updates the filter of the filtered student list to filter by the given
      * {@code predicate}.
-     * 
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Student> predicate);
 
-    <<<<<<<HEAD
-
-    void updateSortedPersonList(SortIn sortIn);=======
+    void updateSortedPersonList(SortIn sortIn);
 
     /**
      * Get the student object from filtered student list by name if exists, return
      * None if the student does not exist.
-     * 
+     *
      * @param name the name of the student the caller want to get.
      * @return The student object in the filteredlist at the given index.
      */
@@ -120,5 +118,5 @@ public interface Model {
      * @param index the index of the student the caller want to get.
      * @return The student object in the filteredlist with the given name.
      */
-    public Optional<Student> getStudentFromFilteredPersonListByIndex(Index index);>>>>>>>f1eff9da914cde73a5a17a8ca45b44d4d5310068
+    public Optional<Student> getStudentFromFilteredPersonListByIndex(Index index);
 }

@@ -31,7 +31,7 @@ public class ParserUtil {
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading
      * and trailing whitespaces will be
      * trimmed.
-     * 
+     *
      * @throws ParseException if the specified index is invalid (not non-zero
      *                        unsigned integer).
      */
@@ -190,7 +190,7 @@ public class ParserUtil {
     /**
      * Parses preamble of user input, preamble in edit command can either be index
      * or student's name
-     * 
+     *
      * @param preamble text before the first valid prefix in user input.
      * @return either Index object or Name object.
      * @throws ParseException
