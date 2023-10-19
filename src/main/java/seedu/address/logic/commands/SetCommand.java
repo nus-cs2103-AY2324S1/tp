@@ -67,7 +67,7 @@ public class SetCommand extends Command {
         return new ToStringBuilder(this).add("targetIndex", index).add("newStatus", newStatus).toString();
     }
 
-    public boolean equals(SetCommand this, SetCommand other){
+    public boolean equals(SetCommand this, SetCommand other) {
         return this.index.equals(other.index) && this.newStatus.equals(other.newStatus);
     }
 }
