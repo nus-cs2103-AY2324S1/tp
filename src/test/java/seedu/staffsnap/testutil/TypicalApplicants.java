@@ -109,14 +109,14 @@ public class TypicalApplicants {
     }
 
     public static List<Applicant> getTypicalApplicants() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(ALICE, BENSON, BOB, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 
     public static List<Applicant> getApplicantsSortedByName() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(ALICE, BENSON, BOB, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 
     public static List<Applicant> getApplicantsSortedByPhone() {
-        return new ArrayList<>(Arrays.asList(DANIEL, ALICE, ELLE, FIONA, GEORGE, CARL, BENSON));
+        return new ArrayList<>(Arrays.asList(BOB, DANIEL, ALICE, ELLE, FIONA, GEORGE, CARL, BENSON));
     }
 }
