@@ -10,9 +10,11 @@ import static seedu.address.testutil.TypicalPersons.BENSON;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.HashSet;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.FilterSettings;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.predicate.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
@@ -25,6 +27,7 @@ public class ModelManagerTest {
     public void constructor() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
+        assertEquals(new FilterSettings(), modelManager.getFilterSettings());
         assertEquals(new AddressBook(), new AddressBook(modelManager.getAddressBook()));
     }
 
@@ -38,6 +41,7 @@ public class ModelManagerTest {
         UserPrefs userPrefs = new UserPrefs();
         userPrefs.setAddressBookFilePath(Paths.get("address/book/file/path"));
         userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
+        userPrefs.setFilterSettings(new FilterSettings(new HashSet<>()));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
 
@@ -57,6 +61,18 @@ public class ModelManagerTest {
         GuiSettings guiSettings = new GuiSettings(1, 2, 3, 4);
         modelManager.setGuiSettings(guiSettings);
         assertEquals(guiSettings, modelManager.getGuiSettings());
+    }
+
+    @Test
+    public void setFilterSettings_nullFilterSettings_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setFilterSettings(null));
+    }
+
+    @Test
+    public void setFilterSettings_validFilterSettings_setsFilterSettings() {
+        FilterSettings filterSettings = new FilterSettings(new HashSet<>());
+        modelManager.setFilterSettings(filterSettings);
+        assertEquals(filterSettings, modelManager.getFilterSettings());
     }
 
     @Test
