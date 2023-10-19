@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import networkbook.commons.util.ToStringBuilder;
 import networkbook.logic.Messages;
 import networkbook.model.Model;
-import networkbook.model.person.NameContainsKeywordsPredicate;
+import networkbook.model.person.NameContainsKeyTermsPredicate;
 
 /**
  * Finds and lists all persons in network book whose name contains any of the argument keywords.
@@ -20,9 +20,9 @@ public class FindCommand extends Command {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie";
 
-    private final NameContainsKeywordsPredicate predicate;
+    private final NameContainsKeyTermsPredicate predicate;
 
-    public FindCommand(NameContainsKeywordsPredicate predicate) {
+    public FindCommand(NameContainsKeyTermsPredicate predicate) {
         this.predicate = predicate;
     }
 
