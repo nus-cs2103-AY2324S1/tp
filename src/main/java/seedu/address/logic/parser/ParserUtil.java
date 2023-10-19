@@ -180,26 +180,6 @@ public class ParserUtil {
     }
 
     /**
-     * Used in AddAppointmentCommandParser class to parse out the patient's index
-     *
-     * @param patientIndex string number containing patient's index
-     * @return integer that was conveyed in the string
-     * @throws ParseException input text does not contain a number
-     */
-    public static int parsePatientIndex(String patientIndex) throws ParseException {
-        requireNonNull(patientIndex);
-        String trimmedDateTime = patientIndex.trim();
-        int index;
-        try {
-            index = Integer.parseInt(trimmedDateTime);
-        } catch (NumberFormatException e) {
-            throw new ParseException("Input Patient Index is not a number.");
-        }
-
-        return index;
-    }
-
-    /**
      * Parses a {@code String description} into a {@code AppointmentDescription}.
      * Leading and trailing whitespaces will be trimmed.
      *

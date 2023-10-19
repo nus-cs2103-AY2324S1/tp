@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
@@ -18,6 +19,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.AppointmentTime;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
@@ -42,18 +44,18 @@ public class ScheduleCommand extends Command {
 
     private final Appointment currAppointment;
 
-    private int patientIndex;
+    private final Name patientName;
 
     /**
      * Creates a ScheduleCommand to add the specified {@code Appointment}
      */
-    public ScheduleCommand(Appointment appointment, int patientIndex) {
+    public ScheduleCommand(Appointment appointment, Name patientName) {
 
         // Check that appointment is non-null.
         requireNonNull(appointment);
         // Save the appointment to currAppointment during initialisation.
         this.currAppointment = appointment;
-        this.patientIndex = patientIndex;
+        this.patientName = patientName;
     }
 
     @Override
@@ -62,12 +64,12 @@ public class ScheduleCommand extends Command {
         List<Person> latestPersonList = model.getFilteredPersonList();
         ObservableList<Appointment> appList = model.getFilteredAppointmentList();
 
-
-        if (patientIndex > latestPersonList.size() || patientIndex <= 0) {
+        if (!model.hasPerson(patientName)) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToAdd = latestPersonList.get(patientIndex - 1);
+        Person personToAdd = latestPersonList
+                .stream().filter(person -> person.getName().equals(patientName)).collect(Collectors.toList()).get(0);
 
         // Add the Person patient to the current appointment
         currAppointment.setPatient(personToAdd);
@@ -108,7 +110,8 @@ public class ScheduleCommand extends Command {
         if (other instanceof ScheduleCommand) {
             ScheduleCommand otherAppointment = (ScheduleCommand) other;
 
-            return currAppointment.equals(otherAppointment.currAppointment);
+            return currAppointment.equals(otherAppointment.currAppointment)
+                    && patientName.equals(otherAppointment.patientName);
         }
         return false;
     }

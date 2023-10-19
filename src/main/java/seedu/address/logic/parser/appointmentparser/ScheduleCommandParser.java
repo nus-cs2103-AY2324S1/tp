@@ -19,11 +19,12 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.AppointmentDescription;
 import seedu.address.model.appointment.AppointmentTime;
+import seedu.address.model.person.Name;
 
 /**
- * Parses input arguments and creates a new AddCommand object
+ * Parses input arguments and creates a new ScheduleCommand object
  */
-public class AddAppointmentCommandParser implements Parser<ScheduleCommand> {
+public class ScheduleCommandParser implements Parser<ScheduleCommand> {
 
     /**
      * Parses {@code userInput} into a command and returns it.
@@ -59,11 +60,11 @@ public class AddAppointmentCommandParser implements Parser<ScheduleCommand> {
             throw new ParseException(AppointmentTime.MESSAGE_CONSTRAINTS);
         }
 
-        int patientIndex = ParserUtil.parsePatientIndex(argMultimap.getValue(PREFIX_APPOINTMENT_PATIENT).get());
+        Name patient = ParserUtil.parseName(argMultimap.getValue(PREFIX_APPOINTMENT_PATIENT).get());
 
-        Appointment appointment = new Appointment(patientIndex, appointmentTime, appointmentDescription);
+        Appointment appointment = new Appointment(patient, appointmentTime, appointmentDescription);
 
-        return new ScheduleCommand(appointment, patientIndex);
+        return new ScheduleCommand(appointment, patient);
 
     }
 
