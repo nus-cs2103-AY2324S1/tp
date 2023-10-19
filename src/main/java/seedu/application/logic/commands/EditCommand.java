@@ -2,6 +2,7 @@ package seedu.application.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_COMPANY;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_ROLE;
 
 import java.util.List;
@@ -14,7 +15,11 @@ import seedu.application.commons.util.ToStringBuilder;
 import seedu.application.logic.Messages;
 import seedu.application.logic.commands.exceptions.CommandException;
 import seedu.application.model.Model;
-import seedu.application.model.job.*;
+import seedu.application.model.job.Company;
+import seedu.application.model.job.Deadline;
+import seedu.application.model.job.Job;
+import seedu.application.model.job.Role;
+import seedu.application.model.job.Status;
 
 /**
  * Edits the details of an existing job in the application book.
@@ -24,17 +29,23 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the job identified "
-            + "by the index number used in the displayed job list. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_ROLE + "ROLE] "
-            + "[" + PREFIX_COMPANY + "COMPANY] \n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_ROLE + "Software Engineer "
-            + PREFIX_COMPANY + "Google";
+        + "by the index number used in the displayed job list. "
+        + "Existing values will be overwritten by the input values.\n"
+        + "Parameters: INDEX (must be a positive integer) "
+        + "[" + PREFIX_ROLE + "ROLE] "
+        + "[" + PREFIX_COMPANY + "COMPANY] "
+        + "[" + PREFIX_DEADLINE + "DEADLINE] "
+        + "Example: " + COMMAND_WORD + " 1 "
+        + PREFIX_ROLE + "Software Engineer "
+        + PREFIX_COMPANY + "Google"
+        + PREFIX_DEADLINE + "Dec 31 2023 1200";
 
     public static final String MESSAGE_EDIT_JOB_SUCCESS = "Edited Job: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided. \n"
+        + "c/ for Company\n"
+        + "r/ for Role\n"
+        + "s/ for Status"
+        + "d/ for Deadline\n";
     public static final String MESSAGE_DUPLICATE_JOB = "This job already exists in the application book.";
 
     private final Index index;
@@ -83,7 +94,7 @@ public class EditCommand extends Command {
         Role updatedRole = editJobDescriptor.getRole().orElse(jobToEdit.getRole());
         Company updatedCompany = editJobDescriptor.getCompany().orElse(jobToEdit.getCompany());
         Status updatedStatus = jobToEdit.getStatus(); // Edit Command does not edit status
-        Deadline updatedDeadline = jobToEdit.getDeadline(); // Edit Command does not edit deadline
+        Deadline updatedDeadline = editJobDescriptor.getDeadline().orElse(jobToEdit.getDeadline());
 
         return new Job(updatedRole, updatedCompany, updatedStatus, updatedDeadline);
     }
@@ -101,15 +112,15 @@ public class EditCommand extends Command {
 
         EditCommand otherEditCommand = (EditCommand) other;
         return index.equals(otherEditCommand.index)
-                && editJobDescriptor.equals(otherEditCommand.editJobDescriptor);
+            && editJobDescriptor.equals(otherEditCommand.editJobDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("index", index)
-                .add("editJobDescriptor", editJobDescriptor)
-                .toString();
+            .add("index", index)
+            .add("editJobDescriptor", editJobDescriptor)
+            .toString();
     }
 
     /**
@@ -119,6 +130,7 @@ public class EditCommand extends Command {
     public static class EditJobDescriptor {
         private Company company;
         private Role role;
+        private Deadline deadline;
 
         public EditJobDescriptor() {
         }
@@ -129,13 +141,14 @@ public class EditCommand extends Command {
         public EditJobDescriptor(EditJobDescriptor toCopy) {
             setCompany(toCopy.company);
             setRole(toCopy.role);
+            setDeadline(toCopy.deadline);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(company, role);
+            return CollectionUtil.isAnyNonNull(company, role, deadline);
         }
 
         public void setCompany(Company company) {
@@ -145,12 +158,21 @@ public class EditCommand extends Command {
         public Optional<Company> getCompany() {
             return Optional.ofNullable(company);
         }
+
         public void setRole(Role role) {
             this.role = role;
         }
 
         public Optional<Role> getRole() {
             return Optional.ofNullable(role);
+        }
+
+        public void setDeadline(Deadline deadline) {
+            this.deadline = deadline;
+        }
+
+        public Optional<Deadline> getDeadline() {
+            return Optional.ofNullable(deadline);
         }
 
 
@@ -167,15 +189,17 @@ public class EditCommand extends Command {
 
             EditJobDescriptor otherEditJobDescriptor = (EditJobDescriptor) other;
             return Objects.equals(company, otherEditJobDescriptor.company)
-                   && Objects.equals(role, otherEditJobDescriptor.role);
+                && Objects.equals(role, otherEditJobDescriptor.role)
+                && Objects.equals(deadline, otherEditJobDescriptor.deadline);
         }
 
         @Override
         public String toString() {
             return new ToStringBuilder(this)
-                    .add("company", company)
-                    .add("role", role)
-                    .toString();
+                .add("company", company)
+                .add("role", role)
+                .add("deadline", deadline)
+                .toString();
         }
     }
 }
