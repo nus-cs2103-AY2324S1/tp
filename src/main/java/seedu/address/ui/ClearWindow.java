@@ -71,7 +71,7 @@ public class ClearWindow extends UiPart<Stage> {
      *     </ul>
      */
     public void show() {
-        logger.fine("Showing help page about the application.");
+        logger.fine("Showing confirm clear window.");
         getRoot().show();
         getRoot().centerOnScreen();
     }
