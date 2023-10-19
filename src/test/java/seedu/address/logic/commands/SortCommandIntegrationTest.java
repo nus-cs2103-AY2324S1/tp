@@ -12,7 +12,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.SortIn;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code AddCommand}.
+ * Contains integration tests (interaction with the Model) for {@code SortCommand}.
  */
 public class SortCommandIntegrationTest {
 
