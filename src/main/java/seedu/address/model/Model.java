@@ -127,7 +127,7 @@ public interface Model {
      * Adds the given lesson.
      * {@code lesson} must not already exist in the schedule list.
      */
-    void addLesson(Lesson person);
+    void addLesson(Lesson lesson);
 
     /**
      * Replaces the given lesson {@code target} with {@code editedLesson}.
@@ -136,6 +136,11 @@ public interface Model {
      */
     void setLesson(Lesson target, Lesson editedLesson);
     // NOTE: TO ADD FILTERED FILTEREDLESSONLIST METHODS HERE.
+    /**
+     * Shows the details of the given lesson.
+     * The lesson must exist in the application.
+     */
+    void showLesson(Lesson lessonToShow); //TODO
     /**
      * Links the Ui of the Application.
      */

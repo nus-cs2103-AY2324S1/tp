@@ -184,7 +184,14 @@ public class ModelManager implements Model {
 
         scheduleList.setLesson(target, editedLesson);
     }
-
+    /**
+     * Shows the details of the given lesson.
+     * The lesson must exist in the application.
+     */
+    @Override
+    public void showLesson(Lesson lessonToShow) {
+        //TODO
+    }
     //=========== Ui Changing =============================================================
 
     public void linkUi(Ui ui) {
