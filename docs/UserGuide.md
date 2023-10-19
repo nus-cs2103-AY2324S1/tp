@@ -184,7 +184,7 @@ Format: `find-applicants KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Applicants matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
@@ -202,7 +202,7 @@ Format: `find-jobs KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g. `Software Engineer` will match `Engineer Software`
 * Only the job description is searched.
 * Only full words will be matched e.g. `Analyst` will not match `Analysts`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Applicants matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Software Engineer` will return `Software Developer`, `System Engineer`
 
 Examples:
