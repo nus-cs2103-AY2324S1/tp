@@ -24,7 +24,7 @@ public class SortCommandParser implements Parser<SortCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         } else if (trimmedArgs.equals("sort")) { //sort name by lexicographical order
             return new SortCommand(new SortByNameComparator());
-        } else if (trimmedArgs.equals("appointment")){ //sort appointments by time
+        } else if (trimmedArgs.equals("appointment")) { //sort appointments by time
             return new SortCommand(new SortByAppointmentComparator());
         } else {
             throw new ParseException(

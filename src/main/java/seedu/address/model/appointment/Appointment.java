@@ -96,7 +96,7 @@ public class Appointment implements Comparable<Appointment> {
 
     @Override
     public int compareTo(Appointment appointment) {
-        if(appointment instanceof NullAppointment) {
+        if (appointment instanceof NullAppointment) {
             return 0;
         } else {
             return this.date.compareTo(appointment.date);
