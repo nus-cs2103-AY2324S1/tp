@@ -166,24 +166,39 @@ public class UniqueCardListTest {
 
     @Test
     public void add_cardWithHigherPriority() {
-        LOW.setPriority(0);
-        uniqueCardList.add(LOW);
+        Card low = new CardBuilder(LOW).build();
+        low.setPriority(0);
+        uniqueCardList.add(low);
         uniqueCardList.add(HIGH);
         UniqueCardList otherList = new UniqueCardList();
         otherList.add(HIGH);
-        otherList.add(LOW);
+        otherList.add(low);
         assertTrue(uniqueCardList.equals(otherList));
     }
 
     @Test
     public void add_cardWithSamePriority() {
         UniqueCardList otherList = new UniqueCardList();
-
         uniqueCardList.add(LOW);
         uniqueCardList.add(HIGH);
         otherList.add(HIGH);
         otherList.add(LOW);
-
+        System.out.println(uniqueCardList);
+        System.out.println(otherList);
         assertFalse(uniqueCardList.equals(otherList));
+    }
+
+    @Test
+    public void add_cardThenChangePriority() {
+        Card low = new CardBuilder(LOW).build();
+        uniqueCardList.add(HIGH);
+        uniqueCardList.add(low);
+        low.setPriority(0);
+        uniqueCardList.setCard(low, low);
+        UniqueCardList otherList = new UniqueCardList();
+        otherList.add(low);
+        otherList.add(HIGH);
+        assertTrue(uniqueCardList.equals(otherList));
+        LOW.setPriority(Integer.MAX_VALUE);
     }
 }
