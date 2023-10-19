@@ -109,6 +109,21 @@ Examples:
 *  `remark 1 r/Great attitude, hardworking` Edits the remark of the 1st person on the list to have a remark `Great attitude, hardworking`
 *  `remark 1 r/` Empties the remark of the 1st person.
 
+### Viewing a person's details: `view`
+
+Creates a complete view for details of a person in the address book
+
+Format: `view INDEX`
+
+* Shows the complete details of the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* The index used will be the same as the index used in the `list` command.
+* Compatible with search and other features that change the order and content of the list.
+
+Examples:
+* `view 1`  
+  Shows the complete details of the 1st person on the list.
+
+
 ### Adding Github/LinkedIn username for a user: 'add linkedin/github'
 
 Adds the username for their social profile [LinkedIn/Github] to the existing contact details of users
@@ -285,6 +300,7 @@ Action                     | Format, Examples
 ---------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Add**                    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Remark**                 | `remark r/REMARK` <br> e.g., `remark 1 r/Great attitude, hardworking`
+**View**                   | `view INDEX` <br> e.g., `view 1`
 **Add Github/LinkedIn**    | `addL INDEX u/USERNAME` or `addG INDEX u/USERNAME` e.g., `addL 1 u/alex-yeoh`, `addG 2 u/bernicesanders123`
 **Open Github/LinkedIn**   | `linkedin INDEX` or `github INDEX` e.g., `linkedin 1`, `github 2`
 **Clear**                  | `clear`
