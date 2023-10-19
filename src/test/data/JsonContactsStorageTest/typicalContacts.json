@@ -1,5 +1,5 @@
 {
-  "_comment": "ContactsManager save file which contains the same Contact values as in TypicalContacts#getTypicalContactsManager()",
+  "_comment": "Contacts storage JSON file containing certain contacts that are the same as in TestData.java.",
   "contacts" : [{
     "name" : "Alice Pauline",
     "phone" : "94351253",
