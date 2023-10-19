@@ -2,6 +2,7 @@ package seedu.address.model.schedule;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalSchedules.SCHEDULE_ALICE_FIRST_JAN;
@@ -170,6 +171,25 @@ class ScheduleTest {
             .withStatus(Status.COMPLETED)
             .build();
         assertFalse(SCHEDULE_ALICE_FIRST_JAN.equals(editedOne));
+    }
+
+    @Test
+    public void hashcode() {
+        // same values -> returns same hashcode
+        assertEquals(SCHEDULE_ALICE_FIRST_JAN.hashCode(), new ScheduleBuilder()
+            .withTutor(TypicalPersons.ALICE)
+            .withStartTime(LocalDateTime.of(2023, 1, 1, 9, 0, 0))
+            .withEndTime(LocalDateTime.of(2023, 1, 1, 11, 0, 0))
+            .withStatus(Status.PENDING)
+            .build().hashCode());
+
+        // same values -> returns same hashcode
+        assertNotEquals(SCHEDULE_BOB_SECOND_JAN.hashCode(), new ScheduleBuilder()
+            .withTutor(TypicalPersons.ALICE)
+            .withStartTime(LocalDateTime.of(2023, 1, 1, 9, 0, 0))
+            .withEndTime(LocalDateTime.of(2023, 1, 1, 11, 0, 0))
+            .withStatus(Status.PENDING)
+            .build().hashCode());
     }
 
     @Test
