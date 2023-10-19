@@ -2,7 +2,7 @@ package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX;
-import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.Messages.COMMAND_UNKNOWN;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TestData.EMAIL_DESC_AMY;
 import static seedu.address.testutil.TestData.NAME_DESC_AMY;
@@ -22,13 +22,13 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.ContactList;
+import seedu.address.model.ReadOnlyContacts;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
+import seedu.address.model.Settings;
 import seedu.address.model.contact.Contact;
 import seedu.address.storage.JsonContactsStorage;
-import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.JsonSettingsStorage;
 import seedu.address.storage.StorageManager;
 import seedu.address.testutil.ContactBuilder;
 import seedu.address.testutil.TestData;
@@ -46,8 +46,8 @@ public class LogicManagerTest {
     @BeforeEach
     public void setUp() {
         JsonContactsStorage contactsStorage =
-                new JsonContactsStorage(temporaryFolder.resolve("ConText.json"));
-        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
+                new JsonContactsStorage(temporaryFolder.resolve("contacts.json"));
+        JsonSettingsStorage userPrefsStorage = new JsonSettingsStorage(temporaryFolder.resolve("settings.json"));
         StorageManager storage = new StorageManager(contactsStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
@@ -55,7 +55,7 @@ public class LogicManagerTest {
     @Test
     public void execute_invalidCommandFormat_throwsParseException() {
         String invalidCommand = "uicfhmowqewca";
-        assertParseException(invalidCommand, MESSAGE_UNKNOWN_COMMAND);
+        assertParseException(invalidCommand, COMMAND_UNKNOWN);
     }
 
     @Test
@@ -123,7 +123,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getContactList(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getContacts(), new Settings());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
@@ -147,24 +147,24 @@ public class LogicManagerTest {
      * @param expectedMessage the message expected inside exception thrown by the Logic component
      */
     private void assertCommandFailureForExceptionFromStorage(IOException e, String expectedMessage) {
-        Path prefPath = temporaryFolder.resolve("ExceptionUserPrefs.json");
-
         // Inject LogicManager with an contactsStorage that throws the IOException e when saving
-        JsonContactsStorage contactsStorage = new JsonContactsStorage(prefPath) {
+        JsonContactsStorage contactsStorage = new JsonContactsStorage(
+            temporaryFolder.resolve("contacts.json")
+        ) {
             @Override
-            public void saveContactsManager(ContactList contactList, Path filePath)
-                    throws IOException {
+            public void saveContacts(ReadOnlyContacts contactList) throws IOException {
                 throw e;
             }
         };
 
-        JsonUserPrefsStorage userPrefsStorage =
-                new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(contactsStorage, userPrefsStorage);
+        JsonSettingsStorage settingsStorage = new JsonSettingsStorage(
+            temporaryFolder.resolve("settings.json")
+        );
+        StorageManager storage = new StorageManager(contactsStorage, settingsStorage);
 
         logic = new LogicManager(model, storage);
 
-        // Triggers the saveContactsManager method by executing an add command
+        // Triggers the saveContacts method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
                 + EMAIL_DESC_AMY + NOTE_DESC_AMY;
         Contact expectedContact = new ContactBuilder(TestData.Valid.Contact.AMY).withTags().build();
