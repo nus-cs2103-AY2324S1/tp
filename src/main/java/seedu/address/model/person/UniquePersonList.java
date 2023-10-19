@@ -109,7 +109,8 @@ public class UniquePersonList implements Iterable<Person> {
 
     //bypasses the hashcode methods for now
     public Person getPerson(Name name) {
-        Optional<Person> foundPerson = internalList.filtered(person -> person.getName().equals(name)).stream().findFirst();
+        Optional<Person> foundPerson = internalList.filtered(
+                person -> person.getName().equals(name)).stream().findFirst();
         return foundPerson.orElse(null);
     }
 

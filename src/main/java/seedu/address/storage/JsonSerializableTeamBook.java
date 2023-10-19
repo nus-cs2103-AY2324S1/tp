@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.ReadOnlyTeamBook;
 import seedu.address.model.TeamBook;
-import seedu.address.model.person.Team;
+import seedu.address.model.team.Team;
 
 /**
  * A class to serialize a TeamBook into a JSON file.

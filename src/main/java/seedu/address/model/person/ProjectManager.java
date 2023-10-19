@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import seedu.address.model.tag.Tag;
+import seedu.address.model.team.Team;
 
 /**
  * Represents a Project Manager in the address book.

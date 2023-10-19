@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.person.IdentityCode;
-import seedu.address.model.person.Team;
+import seedu.address.model.team.Team;
 
 /**
  * A utility class to help with building Team objects for testing.

@@ -6,9 +6,9 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.person.IdentityCode;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Team;
-import seedu.address.model.person.UniqueTeamList;
+import seedu.address.model.team.Team;
+import seedu.address.model.team.UniqueTeamList;
+import seedu.address.model.team.exceptions.TeamNotFoundException;
 
 /**
  * Represents a TeamBook in the address book.
@@ -80,6 +80,17 @@ public class TeamBook implements ReadOnlyTeamBook {
     }
 
     /**
+     * Retrieves a team from the TeamBook by its name.
+     *
+     * @param teamName The name of the team to retrieve.
+     * @return The Team object if found, or null if the team does not exist.
+     */
+    public Team getTeam(String teamName) {
+        requireNonNull(teamName);
+        return teams.getTeamByName(teamName);
+    }
+
+    /**
      * Adds a new team to the TeamBook.
      *
      * @param team Team to be added.
@@ -95,6 +106,14 @@ public class TeamBook implements ReadOnlyTeamBook {
      */
     public void removeTeamByName(String teamName) {
         teams.removeTeamByName(teamName);
+    }
+
+    public void removeDeveloperFromTeam(String teamName, IdentityCode developerIdentityCode) {
+        if (teams.containsTeamByName(teamName)) {
+            teams.removeDeveloperFromTeam(teamName, developerIdentityCode);
+        } else {
+            throw new TeamNotFoundException();
+        }
     }
 
     /**
