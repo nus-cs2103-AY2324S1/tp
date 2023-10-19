@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
@@ -19,8 +20,6 @@ public class ContentDisplay extends UiPart<Region> {
     private static final String FXML = "ContentDisplay.fxml";
     private final Logger logger = LogsCenter.getLogger(ContentDisplay.class);
 
-    private Person selectedPerson;
-
     private ClientProfilePanel clientProfilePanel;
 
     @FXML
@@ -31,15 +30,19 @@ public class ContentDisplay extends UiPart<Region> {
     private VBox clientProfilePanelPlaceholder;
 
     /**
-     * Creates a {@code ContentDisplay} with the given {@code ObservableList}.
+     * Creates a {@code ContentDisplay} with the given {@code personList} and {@code selectedPerson}.
      */
-    public ContentDisplay(ObservableList<Person> personList) {
+    public ContentDisplay(ObservableList<Person> personList, SimpleObjectProperty<Person> selectedPerson) {
         super(FXML);
+
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
         personListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            this.selectedPerson = newValue;
-            clientProfilePanel = new ClientProfilePanel(selectedPerson);
+            selectedPerson.setValue(newValue);
+        });
+
+        selectedPerson.addListener((observable, oldValue, newValue) -> {
+            clientProfilePanel = new ClientProfilePanel(newValue);
             clientProfilePanelPlaceholder.getChildren().clear();
             clientProfilePanelPlaceholder.getChildren().add(clientProfilePanel.getRoot());
         });

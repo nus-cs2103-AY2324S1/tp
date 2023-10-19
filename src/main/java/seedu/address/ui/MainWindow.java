@@ -110,7 +110,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        contentDisplay = new ContentDisplay(logic.getFilteredPersonList());
+        contentDisplay = new ContentDisplay(logic.getFilteredPersonList(), logic.getSelectedPerson());
         contentDisplayPlaceholder.getChildren().add(contentDisplay.getRoot());
 
         resultDisplay = new ResultDisplay();
