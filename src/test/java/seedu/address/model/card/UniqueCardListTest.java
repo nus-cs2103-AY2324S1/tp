@@ -184,7 +184,6 @@ public class UniqueCardListTest {
         otherList.add(HIGH);
         otherList.add(LOW);
         System.out.println(uniqueCardList);
-        System.out.println(otherList);
         assertFalse(uniqueCardList.equals(otherList));
     }
 
