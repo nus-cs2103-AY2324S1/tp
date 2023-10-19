@@ -60,6 +60,9 @@ public class ClassDetails {
     public ClassDetails(String classDetails, AttendanceTracker attendanceTracker,
                         AssignmentTracker assignmentTracker, ClassParticipationTracker classParticipationTracker) {
         requireNonNull(classDetails);
+        requireNonNull(attendanceTracker);
+        requireNonNull(assignmentTracker);
+        requireNonNull(classParticipationTracker);
         checkArgument(isValidClassDetails(classDetails), MESSAGE_CONSTRAINTS);
         this.classDetails = classDetails;
         this.attendanceTracker = attendanceTracker;
@@ -78,16 +81,8 @@ public class ClassDetails {
         ClassDetails.tutorialCount = tutorialCount;
     }
 
-    public static int getTutorialCount() {
-        return tutorialCount;
-    }
-
     public static void setAssignmentCount(int assignmentCount) {
         ClassDetails.assignmentCount = assignmentCount;
-    }
-
-    public static int getAssignmentCount() {
-        return assignmentCount;
     }
 
     @Override
