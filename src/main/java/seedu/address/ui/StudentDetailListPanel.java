@@ -58,6 +58,11 @@ public class StudentDetailListPanel extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+
+        // Clears the previous items in the FlowPane for Tags and Subjects
+        tags.getChildren().clear();
+        subjects.getChildren().clear();
+
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
