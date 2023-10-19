@@ -19,7 +19,7 @@ public class Member {
 
     // Identity fields
     private final Name name;
-    //    private final Gender gender;
+    private final Gender gender;
     private final Phone phone;
     private final Email email;
 
@@ -30,9 +30,10 @@ public class Member {
     /**
      * Every field must be present and not null.
      */
-    public Member(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Member(Name name, Gender gender, Phone phone, Email email, Address address, Set<Tag> tags) {
+        requireAllNonNull(name, gender, phone, email, address, tags);
         this.name = name;
+        this.gender = gender;
         this.phone = phone;
         this.email = email;
         this.address = address;
@@ -43,9 +44,9 @@ public class Member {
         return name;
     }
 
-    //    public Gender getGender() {
-    //        return gender;
-    //    }
+    public Gender getGender() {
+        return gender;
+    }
 
     public Phone getPhone() {
         return phone;
@@ -97,7 +98,7 @@ public class Member {
 
         Member otherMember = (Member) other;
         return name.equals(otherMember.name)
-                // && gender.equals(otherMember.gender)
+                && gender.equals(otherMember.gender)
                 && phone.equals(otherMember.phone)
                 && email.equals(otherMember.email)
                 && address.equals(otherMember.address)
@@ -114,7 +115,7 @@ public class Member {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
-                // .add("gender", gender)
+                .add("gender", gender)
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)

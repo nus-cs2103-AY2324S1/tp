@@ -8,6 +8,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditMemberDescriptor;
 import seedu.address.model.member.Address;
 import seedu.address.model.member.Email;
+import seedu.address.model.member.Gender;
 import seedu.address.model.member.Member;
 import seedu.address.model.member.Phone;
 import seedu.address.model.shared.Name;
@@ -34,6 +35,7 @@ public class EditMemberDescriptorBuilder {
     public EditMemberDescriptorBuilder(Member member) {
         descriptor = new EditCommand.EditMemberDescriptor();
         descriptor.setName(member.getName());
+        descriptor.setGender(member.getGender());
         descriptor.setPhone(member.getPhone());
         descriptor.setEmail(member.getEmail());
         descriptor.setAddress(member.getAddress());
@@ -45,6 +47,14 @@ public class EditMemberDescriptorBuilder {
      */
     public EditMemberDescriptorBuilder withName(String name) {
         descriptor.setName(new Name(name));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Gender} of the {@code EditMemberDescriptor} that we are building.
+     */
+    public EditMemberDescriptorBuilder withGender(String gender) {
+        descriptor.setGender(new Gender(gender));
         return this;
     }
 

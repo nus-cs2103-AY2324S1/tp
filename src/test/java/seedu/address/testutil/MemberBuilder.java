@@ -5,6 +5,7 @@ import java.util.Set;
 
 import seedu.address.model.member.Address;
 import seedu.address.model.member.Email;
+import seedu.address.model.member.Gender;
 import seedu.address.model.member.Member;
 import seedu.address.model.member.Phone;
 import seedu.address.model.shared.Name;
@@ -17,11 +18,13 @@ import seedu.address.model.util.SampleDataUtil;
 public class MemberBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
+    public static final String DEFAULT_GENDER = "Female";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
     private Name name;
+    private Gender gender;
     private Phone phone;
     private Email email;
     private Address address;
@@ -32,6 +35,7 @@ public class MemberBuilder {
      */
     public MemberBuilder() {
         name = new Name(DEFAULT_NAME);
+        gender = new Gender(DEFAULT_GENDER);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
@@ -43,6 +47,7 @@ public class MemberBuilder {
      */
     public MemberBuilder(Member memberToCopy) {
         name = memberToCopy.getName();
+        gender = memberToCopy.getGender();
         phone = memberToCopy.getPhone();
         email = memberToCopy.getEmail();
         address = memberToCopy.getAddress();
@@ -89,8 +94,16 @@ public class MemberBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Gender} of the {@code Member} that we are building.
+     */
+    public MemberBuilder withGender(String gender) {
+        this.gender = new Gender(gender);
+        return this;
+    }
+
     public Member build() {
-        return new Member(name, phone, email, address, tags);
+        return new Member(name, gender, phone, email, address, tags);
     }
 
 }
