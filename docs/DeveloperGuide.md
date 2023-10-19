@@ -496,11 +496,9 @@ Case 7: Access to Financial Reports
 - **Accountant**: A professional who is responsible for managing a company/institution's financial records. 
 - **Expense**: Costs incurred, including staff salaries and product costs.
 - **Mainstream OS**: Windows, Linux, Unix, OS-X.
-- **Private contact detail**: A contact detail that is not meant to be shared with others.
 - **Revenue**: Money received, such as sales revenue.
 - **Transaction**: An exchange of money, which includes buying and selling activities.
 - **Transactor/Party**: The person or entity that carried out the transaction or is related to it.
-- **Transaction**: An exchange of money (e.g. Buying, Selling).
 - **Transactor/Party**: Person or group that carried out the transaction or is related to the transaction.
 
 ---
