@@ -2,11 +2,11 @@ package seedu.address.model.calendar;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.address.model.event.AllDaysEventListManager;
-import seedu.address.model.event.Event;
-
 import java.time.LocalDateTime;
 import java.util.Optional;
+
+import seedu.address.model.event.AllDaysEventListManager;
+import seedu.address.model.event.Event;
 
 /**
  * Represents a calendar that stores and manages events.
@@ -59,6 +59,11 @@ public class Calendar {
         eventManager.deleteEventAt(dateTime);
     }
 
+    /**
+     * Looks for an event at specified time.
+     * @param dateTime the specified time.
+     * @return an optional containing the event if there is an event at the time, an empty optional otherwise.
+     */
     public Optional<Event> findEventAt(LocalDateTime dateTime) {
         requireNonNull(dateTime);
         return eventManager.eventAt(dateTime);

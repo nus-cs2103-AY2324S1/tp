@@ -1,7 +1,5 @@
 package seedu.address.model.event;
 
-import seedu.address.model.event.exceptions.EventNotFoundException;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -9,6 +7,8 @@ import java.util.NavigableMap;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.TreeMap;
+
+import seedu.address.model.event.exceptions.EventNotFoundException;
 
 /**
  * Manages the SingleDayEventList objects for every day.
