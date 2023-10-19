@@ -4,7 +4,7 @@ import static networkbook.logic.commands.CommandTestUtil.assertCommandFailure;
 import static networkbook.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static networkbook.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
@@ -84,22 +84,30 @@ public class DeleteCommandTest {
         DeleteCommand deleteSecondCommand = new DeleteCommand(TypicalIndexes.INDEX_SECOND_PERSON);
 
         // same object -> returns true
-        assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
+        assertEquals(deleteFirstCommand, deleteFirstCommand);
 
         // same values -> returns true
         DeleteCommand deleteFirstCommandCopy = new DeleteCommand(TypicalIndexes.INDEX_FIRST_PERSON);
-        assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
+        assertEquals(deleteFirstCommand, deleteFirstCommandCopy);
 
         // different types -> returns false
-        assertFalse(deleteFirstCommand.equals(1));
+        assertNotEquals(deleteFirstCommand, 1);
 
         // null -> returns false
-        assertFalse(deleteFirstCommand.equals(null));
+        assertNotEquals(deleteFirstCommand, null);
 
         // different person -> returns false
-        assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
-    }
+        assertNotEquals(deleteFirstCommand, deleteSecondCommand);
 
+        // both have null index -> returns true
+        DeleteCommand deleteNull = new DeleteCommand(null);
+        DeleteCommand deleteNull2 = new DeleteCommand(null);
+        assertEquals(deleteNull, deleteNull2);
+
+        // one has null index -> returns false
+        assertNotEquals(deleteNull, deleteFirstCommand);
+        assertNotEquals(deleteFirstCommand, deleteNull);
+    }
     @Test
     public void toStringMethod() {
         Index targetIndex = Index.fromOneBased(1);
