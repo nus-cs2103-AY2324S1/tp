@@ -203,7 +203,7 @@ public class ParserUtil {
      * Parses a {@code String description} into a {@code AppointmentDescription}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code dateAndTime} is invalid.
+     * @throws ParseException if the given {@code description} is invalid.
      */
     public static AppointmentDescription parseDescription(String description) throws ParseException {
         requireNonNull(description);

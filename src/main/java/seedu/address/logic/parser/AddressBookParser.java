@@ -12,10 +12,10 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.appointmentcommands.AddAppointmentCommand;
+import seedu.address.logic.commands.appointmentcommands.AppointmentsCommand;
 import seedu.address.logic.commands.appointmentcommands.CancelCommand;
 import seedu.address.logic.commands.appointmentcommands.RescheduleCommand;
-import seedu.address.logic.commands.appointmentcommands.ViewCommand;
+import seedu.address.logic.commands.appointmentcommands.ScheduleCommand;
 import seedu.address.logic.commands.personcommands.AddCommand;
 import seedu.address.logic.commands.personcommands.DeleteCommand;
 import seedu.address.logic.commands.personcommands.EditCommand;
@@ -72,7 +72,7 @@ public class AddressBookParser {
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
-        case AddAppointmentCommand.COMMAND_WORD:
+        case ScheduleCommand.COMMAND_WORD:
             return new AddAppointmentCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
@@ -93,8 +93,8 @@ public class AddressBookParser {
         case CancelCommand.COMMAND_WORD:
             return new CancelCommandParser().parse(arguments);
 
-        case ViewCommand.COMMAND_WORD:
-            return new ViewCommand();
+        case AppointmentsCommand.COMMAND_WORD:
+            return new AppointmentsCommand();
 
         case RescheduleCommand.COMMAND_WORD:
             return new RescheduleCommandParser().parse(arguments);
