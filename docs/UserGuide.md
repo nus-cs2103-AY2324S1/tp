@@ -67,8 +67,8 @@ Example usage:
 * `add 2 /phone +11234567890`
 
 Parameters:
-* `[phone]` is a valid phone number (Country code must be included with + (plus sign) present.)
 * `[index]` is the index of the contact in the list.
+* `[phone]` is a valid phone number (Country code must be included with + (plus sign) present.)
 
 When the command succeeds:
 * `add 1 /phone +6591234567`
@@ -96,9 +96,9 @@ Example usage:
 * `add 2 /email test@example.com`
 
 Parameters:
+* `[index]` is the index of the contact in the list.
 * `[email]` is a valid email (`@` (at sign) must be present, 
 and `.` (period) must be present after `@` (at sign)).
-* `[index]` is the index of the contact in the list.
 
 When the command succeeds:
 * `add 1 /email nknguyentdn@gmail.com`
@@ -126,23 +126,21 @@ You can add a social link to an existing contact.
 A new link will be added to the contact's list of links,
 and no new contact will be created.
 
-Format: `add [index] /link [link] [note]`
+Format: `add [index] /link [link]`
 
 Example usage:
-* `add 1 /link https://nknguyenhc.github.io/ website`
+* `add 1 /link https://nknguyenhc.github.io/`
 * `add 2 /link https://www.linkedin.com/in/nguyen-khoi-nguyen-6279341a8/`
 
 Parameters:
+* `[index]` is the index of the contact in the list.
 * `[link]` is a valid URL linking to a contact’s social media page.
-* `[note]` is a note on the URL for your own reference. 
-This parameter is optional, and should be separated.
-* `[index]` is the index of the person in the list.
 
 When the command succeeds:
-* `add 1 /link https://nknguyenhc.github.io/ /note website`
+* `add 1 /link https://nknguyenhc.github.io/`
 
 `Noted, I have added https://nknguyenhc.github.io/ 
-as the “website” of your contact at index 1.`
+as a link to your contact at index 1.`
 
 * `add 2 /link https://www.linkedin.com/in/nguyen-khoi-nguyen-6279341a8/`
 
@@ -158,38 +156,35 @@ When the command fails:
 
 ### Add course to a contact: `add [index] /course`
 
-You can add a course to an existing contact.  A new course will be added to the contact's list of courses, and no new contact will be created.
-The courses will be sorted by start_date. If there are multiple courses with the same code, the old course detail is replaced with the new course detail
+You can add a course of study to an existing contact.  A new course will be added to the contact's list of courses, and no new contact will be created.
 
-Format: `add [index] /course [course code] /date [start date] [end date]`
+Format: `add [index] /course [course] /date [start date] [end date]`
 
 Example usage:
 * `add 1 /course CS1101S /date 01-08-2022 07-12-2022`
 * `add 2 /course CS2030S /date 02-01-2023`
 
 Parameters:
-* `course code` is the code of a course the contact is taking. The course should not be longer than 8 characters (NUS course code).
-* `index` is the index of the contact.
+* `index` is the index of the contact in the list.
+* `course` is the contact's course of study.
 * `start date` is when the contact started taking this course.
 * `end date` is when the contact finished taking this course, optional (not finished reading the course).
 
 When the command succeeds:
 * `add 1 /course CS1101S /date 01-08-2022 07-12-2022`
 
-`Added course CS1101S to [name of contact]`
+`Added Computer Science to [name of contact]`
 
 ![add priority success](images/add-remark/add-course.png)
 
 When the command fails:
-* `add 1 /course CS1101S /date 1`
+* `add 1 /course Computer Science /date 1`
   * `Incorrect format for start date/end date`
-* `add 1 /course CS1101S /date 30-02-2022`
+* `add 1 /course Information Systems /date 30-02-2022`
   * `Invalid date entered`
-* `add 1 /course CS1234567S /date 01-08-2022`
-  * `Course code should not be longer than 8 characters`
-* `add /course CS1101S`
-  * `Course index date missing`
-* `add 20000 /course CS1101S /date 01-08-2022 07-12-2022`
+* `add /course Computer Science`
+  * `Index of contact missing`
+* `add 20000 /course Computer Engineering /date 01-08-2022 07-12-2022`
   * `Student with index 20000 cannot be found`
 
 ### Add specialisation: `add [index] /spec`
@@ -236,7 +231,7 @@ Example usage:
 - `add 23 /priority m`
 
 Parameters:
-
+- `[index]` is the index of the person in the list
 - `[priority level]` is a word or letter representing the priority level to be assigned to the contact.
 
   There are three priority levels, **high, medium and low**, 
@@ -245,7 +240,6 @@ Parameters:
 
   and they are not case-sensitive.
 
-- `[index]` is the index of the person in the list
 
 When the command succeeds:
 
@@ -283,9 +277,9 @@ Example usage:
 - `add 18 /tag internship`
 
 Parameters:
-
-- `[tag name]` is the name of the tag to associate the contact with
 - `[index]` is the index of the person in the list
+- `[tag name]` is the name of the tag to associate the contact with
+
 
 When the command succeeds:
 
@@ -331,8 +325,9 @@ Parameters:
   * `grad`
   * `priority`
   * `tag`
-* `[new parameter value]` is the new value of the parameter. The new value must follow the formatting of the parameter.
 * `[index]` is the index of the contact in the list.
+* `[new parameter value]` is the new value of the parameter. The new value must follow the formatting of the parameter.
+
 
 When command succeeds:
 * `edit 1 /name nkn`
@@ -403,28 +398,28 @@ When the command fails:
 
 ### <u>Category 3 - Find contacts</u>
 
-### Search for a contact: `search /name`
+### Find a contact: `find [name]`
 
-You can use the `search` command to search for contacts by their name if you wish to quickly reference a particular contact’s details.
+You can use the `find` command to search for contacts by their name if you wish to quickly reference a particular contact’s details.
 
-Format: `search /name [name]`
+Format: `find [name]`
 
 Example usage:
-* `search /name Jack`
-* `search /name Kai Jie`
+* `find Jack`
+* `find Kai Jie`
 
 Parameters:
 * `[name]` is the name of the contact, or a part of it.
 
 When the command succeeds:
-* `search /name Jack`
+* `find Jack`
 
 `Here is the list of contacts with the name "Jack": [list of relevant contacts]`
 
 ![search success](images/find/search-success.png)
 
 When the command fails:
-* `search /name`:
+* `find`:
 
 `Oops, it seems you did not include a search term.`
 
@@ -499,5 +494,5 @@ name, grad, course, spec/specialization, priority.`
 |----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**  | `create /name [name] [/phone /email /link /grad /course /spec /priority /tag]` <br> e.g., `create /name Oreki /phone +6598765432 /grad AY2526-S2`<br><br>`add [index] /phone [phone]` <br> e.g., `add 1 /phone +6591234567`<br><br>`add [index] /email [email]` <br> e.g., `add 2 /email test@example.com`<br><br>`add [index] /link [link] [note]`<br>e.g., `add 1 /link https://nknguyenhc.github.io/ website`<br><br>`add [index] /course [course code] /date [start date] [end date]`<br>e.g., `add 1 /course CS1101S /date 01-08-2022 07-12-2022`<br><br>`add [index] /spec [specialisation]`<br>e.g., `add 1 /spec Robotics & AI`<br><br>`add [index] /priority [priority level]`<br>e.g., `add 1 /priority high`<br><br>`add [index] /tag [tag name]`<br>e.g., `add 1 /tag friend` |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |  
 | **Edit** | `update [index] /[parameter name] [new parameter value]`<br> e.g.,`update /name nkn /index 1`<br><br>`delete [index]`<br>e.g., `delete 1`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| **Find** | `search /name [name]` <br> e.g., `search /name Ness`<br><br>`sort /by [field] /order [order]`<br>e.g., `sort /by name /order asc`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |  
+| **Find** | `find [name]` <br> e.g., `find Ness`<br><br>`sort /by [field] /order [order]`<br>e.g., `sort /by name /order asc`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |  
 
