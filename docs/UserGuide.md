@@ -1,7 +1,7 @@
 ---
   layout: default.md
-  title: "User Guide"
-  pageNav: 3
+    title: "User Guide"
+    pageNav: 3
 ---
 
 # Tutorium User Guide
@@ -28,15 +28,15 @@ Tutorium is a **desktop application for tuition centre staff** to obtain data an
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/12345678 e/johnd@example.com a/John street, block 123, #01-01 g/M l/2 m/KR mrt s/English` : Adds a contact named `John Doe` to the Address Book.
+    * `add n/John Doe p/12345678 e/johnd@example.com a/John street, block 123, #01-01 g/M l/2 m/KR mrt s/English` : Adds a contact named `John Doe` to the Address Book.
 
-   * `delete John Doe` : Deletes the contact with matching name in the current list.
+    * `delete John Doe` : Deletes the contact with matching name in the current list.
 
-   * `clear` : Deletes all contacts.
+    * `clear` : Deletes all contacts.
 
-   * `exit` : Exits the app.
+    * `exit` : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -64,7 +64,7 @@ Tutorium is a **desktop application for tuition centre staff** to obtain data an
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</box>
+  </box>
 
 ### Viewing help : `help`
 
@@ -87,25 +87,46 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS g/GENDER l/SEC_LEVEL m/MRT 
 </box>
 
 Examples:
-* `add n/John Doe p/12345678 e/johnd@example.com a/John street, block 123, #01-01 g/M l/2 m/KR mrt s/Chemistry`
+* `add n/John Doe p/12345678 e/johnd@example.com a/John street, block 123, #01-01 g/M l/2 m/KR mrt s/Chemistry s/Physics`
 * `add n/Betsy Crowe p/87654321 e/betsycrowe@example.com a/Newgate Prison g/F l/2 m/KR mrt s/Mathematics`
-  ![result for 'add n/Joe p/32101234 e/joe@example.com a/John street, block 123, #01-01 t/Math'](images/ug_images/addedJoeResult.png)
+  <br>  
+  ![result for 'add n/Betsy Crowe p/87654321 e/betsycrowe@example.com a/Newgate Prison g/F l/2 m/KR mrt s/Mathematics'](images/ug_images/addedResult.png)
+
+### Importing data from .csv file: `import`
+
+Imports students datas to the address book.
+1. Move your .csv file into the folder containing Tutorium.
+2. Enter the command with the following format.
+
+Format: `import FILENAME.csv`
+
+<box type="tip" seamless>
+
+**Note:** The column should have "Name", "Phone", "Email", "Address", "Gender", "Sec level", "Nearest Mrt Station", "Subject"
+</box>
+
+Examples:
+* `import student_data.csv`
+  <br>
+  ![result for 'import student_data.csv'](images/ug_images/importResult.png)
+
 
 ### Editing a student's data : `edit`
 
 Edits an existing student's data in the address book.
 
 Format:
-1. `edit INDEX prefix/[field name] or edit NAME prefix/[field name]` (you can either specify the student you want to edit by index or his/her name)
+1. `edit INDEX prefix/[field name]` or `edit NAME prefix/[field name]` (you can either specify the student you want to edit by index or his/her name)
 2. `edit INDEX prefix1/[field1] prefix2/[field2]`  or `edit NAME prefix/[field] prefix/[field] prefix/[field]` (change multiple fields)
 
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
 Examples:
-*  `edit joee n/joe` specify that you want to edit joee's name to "joe".
-*  `edit 2 n/joey e/joey123@example.com` Edits the student(with index 2)'s name and email to be `joey` and `joey123@example.com`.
-   ![result for 'edit Chuan Yuan'](images/ug_images/editChuanYuanResult.png)
+*  `edit John Doe n/Joe` specify that you want to edit John Doe's name to "Joe".
+*  `edit 2 n/joey e/joey123@example.com` Edits the student (with index 2)'s name and email to be `joey` and `joey123@example.com`.
+   <br>
+   ![result for 'edit John Doe n/Joe'](images/ug_images/editedResult.png)
 
 ### Searching for data : `search`
 
@@ -120,8 +141,9 @@ Format: `search KEYWORD`
   e.g. `Alfred` will return `alfred`, `Alfred Tan`
 
 Examples:
-* `search Yuan` returns `Chuan Yuan` and `Li Yuan`<br>
-  ![result for 'search Yuan'](images/ug_images/searchYuanResult.png)
+* `search Lee` returns `Benjamin Lee` and `Eva Lee`<br>
+  <br>
+  ![result for 'search Lee'](images/ug_images/searchResult.png)
 
 ### Deleting data : `delete`
 
@@ -135,9 +157,8 @@ Format: `delete [NAME]` or `delete [INDEX]`
 Examples:
 * `delete John Doe`
 * `delete 1`
-<br></br>
-* `delete Chuan Yuan` deletes student data that contains name `Chuan Yuan`
-  ![result for 'delete Chuan Yuan'](images/ug_images/deleteJoeResult.png)
+  <br>
+  ![result for 'delete John Doe'](images/ug_images/deletedResult.png)
 
 ### Filtering data : `filter`
 
@@ -151,8 +172,9 @@ Format: `filter prefix/FIELD_VALUE [MORE FIELDS]`
 
 Examples:
 * `filter g/F s/English s/Physics`
-* `filter s/Maths` returns `Chuan Yuan`, `Li Yuan` and `Alfred` <br>
-  ![result for 'filter Maths'](images/ug_images/filterMathsResult.png)
+* `filter s/Physics` returns all students taking Physics subject <br>
+  <br>
+  ![result for 'filter Physics'](images/ug_images/filterResult.png)
 
 ### Clearing all entries : `clear`
 
@@ -204,9 +226,10 @@ _Details coming soon ..._
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/Chemistry`
-**Delete** | `delete n/[NAME]`<br> e.g., `delete Joe`
-**Edit**   | `edit n/[NAME]`<br> `e/[NEW_EMAIL] t/[NEW_TAG] a/[NEW_ADRESS]` <br> e.g., `edit n/John Doe`<br> `e/johndoe@example.com t/English`
-**Search** | `search [KEYWORD]`<br> e.g., `search Yuan`
-**Group**  | `group /by [TAG_NAME]` <br> e.g., `group /by English`
+**Import** | `import FILENAME.csv`<br> e.g., `import student_data.csv`
+**Edit**   | `edit INDEX prefix1/[field1] prefix2/[field2]`  <br> or `edit NAME prefix/[field] prefix/[field] prefix/[field]` <br> e.g., `edit John Doe n/Joe e/johndoe@example.com t/English`
+**Search** | `search [KEYWORD]`<br> e.g., `search Lee`
+**Delete** | `delete NAME`<br> or `delete JOE` <br> e.g., `delete Joe`
+**Filter** | `filter prefix/FIELD_VALUE [MORE FIELDS]` <br> e.g., `filter g/F s/English s/Physics`
 **Clear**  | `clear`
 **Help**   | `help`

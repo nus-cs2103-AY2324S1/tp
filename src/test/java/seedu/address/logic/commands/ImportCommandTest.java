@@ -60,7 +60,7 @@ class ImportCommandTest {
 
         CommandResult commandResult = new ImportCommand(expectedList1, fileName1).execute(modelStub);
 
-        assertEquals(String.format(ImportCommand.MESSAGE_SUCCESS),
+        assertEquals(String.format(expectedList1.size() + ImportCommand.MESSAGE_SUCCESS),
                 commandResult.getFeedbackToUser());
     }
 
