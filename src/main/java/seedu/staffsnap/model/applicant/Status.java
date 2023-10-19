@@ -1,5 +1,8 @@
 package seedu.staffsnap.model.applicant;
 
+/**
+ * Status enum for valid statuses
+ */
 public enum Status {
     UNDECIDED, OFFERED, REJECTED;
 
@@ -11,7 +14,7 @@ public enum Status {
     public static Status findByName(String name) {
         Status result = null;
         for (Status status : values()) {
-            if (status.name().equalsIgnoreCase(name) || status.name().substring(0,1).equalsIgnoreCase(name)) {
+            if (status.name().equalsIgnoreCase(name) || status.name().substring(0, 1).equalsIgnoreCase(name)) {
                 result = status;
                 break;
             }

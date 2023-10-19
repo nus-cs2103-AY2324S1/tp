@@ -1,5 +1,9 @@
 package seedu.staffsnap.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.List;
+
 import seedu.staffsnap.commons.core.index.Index;
 import seedu.staffsnap.logic.Messages;
 import seedu.staffsnap.logic.commands.exceptions.CommandException;
@@ -7,9 +11,7 @@ import seedu.staffsnap.model.Model;
 import seedu.staffsnap.model.applicant.Applicant;
 import seedu.staffsnap.model.applicant.Status;
 
-import java.util.List;
 
-import static java.util.Objects.requireNonNull;
 
 /**
  * Edits the details of an existing applicant in the applicant book.
@@ -18,7 +20,10 @@ public class StatusCommand extends Command {
 
     public static final String COMMAND_WORD = "status";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the status of the applicant identified " + "by the index number used in the displayed applicant list. " + "Existing values will be overwritten by the input values.\n" + "Parameters: INDEX (must be a positive integer) " + "[u(ndecided)/o(ffered)/r(ejected)].";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the status of the applicant identified "
+            + "by the index number used in the displayed applicant list. "
+            + "Existing values will be overwritten by the input values.\n"
+            + "Parameters: INDEX (must be a positive integer) " + "[u(ndecided)/o(ffered)/r(ejected)].";
 
     public static final String MESSAGE_EDIT_STATUS_SUCCESS = "Edited Applicant Status: %1$s";
     public static final String MESSAGE_NO_STATUS = "Missing Status, please follow the following parameters."

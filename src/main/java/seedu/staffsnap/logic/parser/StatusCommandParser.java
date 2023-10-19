@@ -1,14 +1,18 @@
 package seedu.staffsnap.logic.parser;
 
+import static seedu.staffsnap.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
+import java.util.stream.Stream;
+
 import seedu.staffsnap.commons.core.index.Index;
 import seedu.staffsnap.logic.commands.StatusCommand;
 import seedu.staffsnap.logic.parser.exceptions.ParseException;
 import seedu.staffsnap.model.applicant.Status;
 
-import java.util.stream.Stream;
 
-import static seedu.staffsnap.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
+/**
+ * Parses inputs and returns a StatusCommand
+ */
 public class StatusCommandParser {
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
