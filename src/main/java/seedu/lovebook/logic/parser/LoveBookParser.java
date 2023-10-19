@@ -8,17 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.lovebook.commons.core.LogsCenter;
-import seedu.lovebook.logic.commands.AddCommand;
-import seedu.lovebook.logic.commands.ClearCommand;
-import seedu.lovebook.logic.commands.Command;
-import seedu.lovebook.logic.commands.DeleteCommand;
-import seedu.lovebook.logic.commands.EditCommand;
-import seedu.lovebook.logic.commands.ExitCommand;
-import seedu.lovebook.logic.commands.FilterCommand;
-import seedu.lovebook.logic.commands.FindCommand;
-import seedu.lovebook.logic.commands.HelpCommand;
-import seedu.lovebook.logic.commands.ListCommand;
-import seedu.lovebook.logic.commands.SetPrefCommand;
+import seedu.lovebook.logic.commands.*;
 import seedu.lovebook.logic.parser.exceptions.ParseException;
 
 /**
@@ -84,6 +74,9 @@ public class LoveBookParser {
 
         case FilterCommand.COMMAND_WORD:
             return new FilterCommandParser().parse(arguments);
+
+        case RandomCommand.COMMAND_WORD:
+            return new RandomCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
