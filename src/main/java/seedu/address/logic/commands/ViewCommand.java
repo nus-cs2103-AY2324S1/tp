@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.ViewCommandParser.APPOINTMENT_CATEGORY;
 import static seedu.address.logic.parser.ViewCommandParser.STUDENT_CATEGORY;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_APPOINTMENTS;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -40,7 +40,7 @@ public class ViewCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         if (this.category.equals(STUDENT_CATEGORY)) {
-            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
             return new CommandResult(MESSAGE_SUCCESS_STUDENT);
         } else if (this.category.equals(APPOINTMENT_CATEGORY)) {
             model.updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);

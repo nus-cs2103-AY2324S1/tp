@@ -27,7 +27,7 @@ public class AppointmentCard extends UiPart<Region> {
     private Label time;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code StudentCode} with the given {@code Student} and index to display.
      */
     public AppointmentCard(Appointment appointment, int displayedIndex) {
         super(FXML);
