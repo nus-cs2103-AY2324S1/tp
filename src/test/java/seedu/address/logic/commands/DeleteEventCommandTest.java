@@ -8,8 +8,6 @@ import static seedu.address.model.event.EventPeriod.DATE_TIME_STRING_FORMATTER;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.EventBuilder.DEFAULT_END_TIME_STRING;
 import static seedu.address.testutil.EventBuilder.DEFAULT_START_TIME_STRING;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 
 import java.nio.file.Path;
 import java.time.LocalDateTime;

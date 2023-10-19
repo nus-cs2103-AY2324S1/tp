@@ -102,9 +102,9 @@ public class Calendar {
      */
     public boolean hasEvents() {
         if (!this.isEmpty()) {
-            return !eventManager.hasEvents();
+            return eventManager.hasEvents();
         }
-        return true;
+        return false;
     }
 
     @Override

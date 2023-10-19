@@ -135,9 +135,9 @@ public class AllDaysEventListManager {
      */
     public boolean hasEvents() {
         if (!this.isEmpty()) {
-            return dayToEventListMap.values().stream().map(SingleDayEventList::isEmpty).allMatch(x -> x.equals(true));
+            return dayToEventListMap.values().stream().map(SingleDayEventList::isEmpty).allMatch(x -> x.equals(false));
         }
-        return true;
+        return false;
     }
 
     @Override
