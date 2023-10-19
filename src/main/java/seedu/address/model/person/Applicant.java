@@ -23,7 +23,7 @@ public class Applicant extends Person {
 
     /**
      * Returns true if both applicants have the same name and phone.
-     * This defines a weaker notion of equality between two members.
+     * This defines a weaker notion of equality between two applicants.
      */
     @Override
     public boolean isSamePerson(Person other) {
