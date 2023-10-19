@@ -69,7 +69,7 @@ public interface Model {
      * Deletes the given person.
      * The person must exist in the address book.
      */
-    void deletePerson(Person target);
+    Person deletePerson(String personName) throws CommandException;
 
     /**
      * Adds the given person.
@@ -112,7 +112,7 @@ public interface Model {
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
-    public void removeGroup(Group key);
+    public Group deleteGroup(String groupName) throws CommandException;
 
     /**
      * Assign person to group and return corresponding person and group object in a pair
