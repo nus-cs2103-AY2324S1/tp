@@ -23,8 +23,8 @@ public class AddressBookBuilder {
     /**
      * Adds a new {@code Person} to the {@code AddressBook} that we are building.
      */
-    public AddressBookBuilder withPerson(Applicant applicant) {
-        addressBook.addPerson(applicant);
+    public AddressBookBuilder withApplicant(Applicant applicant) {
+        addressBook.addApplicant(applicant);
         return this;
     }
 

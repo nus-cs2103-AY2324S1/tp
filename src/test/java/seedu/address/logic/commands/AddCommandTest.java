@@ -29,7 +29,7 @@ import seedu.address.testutil.ApplicantBuilder;
 public class AddCommandTest {
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
+    public void constructor_nullApplicant_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddCommand(null));
     }
 
@@ -46,12 +46,13 @@ public class AddCommandTest {
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
+    public void execute_duplicateApplicant_throwsCommandException() {
         Applicant validApplicant = new ApplicantBuilder().build();
         AddCommand addCommand = new AddCommand(validApplicant);
         ModelStub modelStub = new ModelStubWithApplicant(validApplicant);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class,
+                AddCommand.MESSAGE_DUPLICATE_APPLICANT, () -> addCommand.execute(modelStub));
     }
 
     @Test
