@@ -54,6 +54,14 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
+     * Replaces calendar data with the data in {@code calendar}.
+     */
+    void setCalendar(ReadOnlyCalendar calendar);
+
+    /** Returns the Calendar */
+    ReadOnlyCalendar getCalendar();
+
+    /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
     boolean hasPerson(Person person);
