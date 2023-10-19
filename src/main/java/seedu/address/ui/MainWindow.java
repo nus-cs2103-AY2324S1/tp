@@ -41,7 +41,6 @@ public class MainWindow extends UiPart<Stage> {
     private LessonDetailListPanel lessonDetailListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
-    private ShowPersonWindow showPersonWindow;
 
     @FXML
     private AnchorPane showPersonPanelPlaceholder;
@@ -97,7 +96,6 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
-        showPersonWindow = new ShowPersonWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -162,6 +160,9 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        studentDetailList.setVisible(false);
+        lessonDetailList.setVisible(false);
 
         contentSplitPane.getItems().removeAll(personList, studentDetailList);
     }
@@ -257,16 +258,22 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Opens the Person Details window or focuses on it if it's already opened.
+     * Sets the Person Details in the Student Detail Panel and shows it.
      *
      * @param person The person to show the details of.
      */
     public void handleShowPerson(Person person) {
-        showPersonWindow.setPersonDetails(person);
-        if (!showPersonWindow.isShowing()) {
-            showPersonWindow.show();
-        } else {
-            showPersonWindow.focus();
-        }
+        studentDetailList.setVisible(true);
+        studentDetailListPanel.setPersonDetails(person);
+    }
+
+    /**
+     * Sets the Lesson Details in the Lesson Detail Panel and shows it.
+     *
+     * @param lesson The lesson to show the details of.
+     */
+    public void handleShowLesson(Person lesson) { //TODO
+        lessonDetailList.setVisible(true);
+        // lessonDetailListPanel.setLessonDetails(lesson);
     }
 }

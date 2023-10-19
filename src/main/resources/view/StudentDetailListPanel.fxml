@@ -1,10 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
-    <Label styleClass="panel-label" text="Student Details" />
-    <ListView fx:id="studentDetailListView" VBox.vgrow="ALWAYS" />
-</VBox>
+<AnchorPane prefHeight="340.0" prefWidth="340.0" style="-fx-background-color: #322D46; -fx-background-radius: 10;" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="10.0" layoutY="6.0" style="-fx-text-fill: white;" styleClass="panel-label" text="Student Details" />
+      <VBox layoutX="10.0" layoutY="48.0" prefHeight="200.0" prefWidth="320.0" spacing="10.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="48.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="21.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/user.png" />
+                     </image>
+                  </ImageView>
+                     <TextField fx:id="name" editable="false" prefHeight="25.0" prefWidth="184.0" style="-fx-background-color: transparent; -fx-text-fill: white;" text="\$user" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="120.0">
+               <children>
+                     <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@../images/phone.png" />
+                        </image>
+                     </ImageView>
+                     <TextField fx:id="phone" alignment="BOTTOM_LEFT" editable="false" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: transparent; -fx-text-fill: white;" text="\$phone" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="254.0">
+               <children>
+                  <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/mail.png" />
+                     </image>
+                  </ImageView>
+                     <TextField fx:id="email" editable="false" style="-fx-background-color: transparent; -fx-text-fill: white;" text="\$email" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="80.0" prefHeight="25.0" prefWidth="254.0">
+               <children>
+                  <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/map-pin.png" />
+                     </image>
+                  </ImageView>
+                  <TextField fx:id="address" editable="false" style="-fx-background-color: transparent; -fx-text-fill: white;" text="\$address" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <FlowPane fx:id="tags" prefHeight="55.0" prefWidth="320.0" />
+            <FlowPane fx:id="subjects" prefHeight="61.0" prefWidth="320.0" />
+         </children>
+      </VBox>
+      </children>
+   </AnchorPane>

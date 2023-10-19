@@ -1,10 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
-    <Label styleClass="panel-label" text="Lesson Details" />
-    <ListView fx:id="lessonDetailListView" VBox.vgrow="ALWAYS" />
-</VBox>
+<AnchorPane prefHeight="340.0" prefWidth="340.0" style="-fx-background-color: #322D46; -fx-background-radius: 10;" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="10.0" layoutY="10.0" style="-fx-text-fill: white;" styleClass="panel-label" text="Lesson Details" />
+      <VBox layoutX="20.0" layoutY="58.0" prefHeight="200.0" prefWidth="320.0" spacing="10.0" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="48.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="120.0">
+               <children>
+                  <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/calendar.png" />
+                     </image>
+                  </ImageView>
+                  <TextField fx:id="date" alignment="BOTTOM_LEFT" editable="false" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: transparent; -fx-text-fill: white;" text="Thursday, 18/10/2023" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="120.0">
+               <children>
+                  <Label style="-fx-text-fill: white;" text="Start Time: " />
+                  <TextField fx:id="startTime" alignment="BOTTOM_LEFT" editable="false" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: transparent; -fx-text-fill: white;" text="1100" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="254.0">
+               <children>
+                  <Label style="-fx-text-fill: white;" text="End Time: " />
+                  <TextField fx:id="endTime" editable="false" style="-fx-background-color: transparent; -fx-text-fill: white;" text="1200" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="254.0">
+               <children>
+                  <Label style="-fx-text-fill: white;" text="Subject:" />
+                  <TextField fx:id="subject" editable="false" style="-fx-background-color: transparent; -fx-text-fill: white;" text="Mathematics" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="80.0" prefHeight="25.0" prefWidth="254.0">
+               <children>
+                  <Label style="-fx-text-fill: white;" text="Student: " />
+                  <TextField fx:id="student" editable="false" style="-fx-background-color: transparent; -fx-text-fill: white;" text="Marcus" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </VBox>
+   </children>
+</AnchorPane>

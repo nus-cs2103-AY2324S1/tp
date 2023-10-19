@@ -17,4 +17,11 @@ public interface Ui {
      * @param person The specified person to show the details of.
      */
     void showPersonDetails(Person person);
+
+    /**
+     * Shows the details of the specified lesson.
+     *
+     * @param lesson The specified lesson to show the details of.
+     */
+    void showLessonDetails(Person lesson); //TODO
 }
