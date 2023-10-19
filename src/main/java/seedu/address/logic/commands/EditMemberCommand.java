@@ -57,7 +57,7 @@ public class EditMemberCommand extends Command {
     private final EditMemberDescriptor editMemberDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
+     * @param index                of the person in the filtered person list to edit
      * @param editMemberDescriptor details to edit the person with
      */
     public EditMemberCommand(Index index, EditMemberDescriptor editMemberDescriptor) {
@@ -140,7 +140,8 @@ public class EditMemberCommand extends Command {
         private Telegram telegram;
         private Set<Tag> tags;
 
-        public EditMemberDescriptor() {}
+        public EditMemberDescriptor() {
+        }
 
         /**
          * Copy constructor.

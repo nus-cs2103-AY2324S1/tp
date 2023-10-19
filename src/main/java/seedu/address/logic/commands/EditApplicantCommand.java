@@ -44,7 +44,7 @@ public class EditApplicantCommand extends Command {
     private final EditApplicantDescriptor editApplicantDescriptor;
 
     /**
-     * @param index of the applicant in the filtered applicant list to edit
+     * @param index                   of the applicant in the filtered applicant list to edit
      * @param editApplicantDescriptor details to edit the applicant with
      */
     public EditApplicantCommand(Index index, EditApplicantDescriptor editApplicantDescriptor) {
@@ -122,7 +122,8 @@ public class EditApplicantCommand extends Command {
         private Name name;
         private Phone phone;
 
-        public EditApplicantDescriptor() {}
+        public EditApplicantDescriptor() {
+        }
 
         /**
          * Copy constructor.

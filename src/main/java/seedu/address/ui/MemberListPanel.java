@@ -11,7 +11,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Member;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of members.
  */
 public class MemberListPanel extends UiPart<Region> {
     private static final String FXML = "MemberListPanel.fxml";
@@ -21,7 +21,7 @@ public class MemberListPanel extends UiPart<Region> {
     private ListView<Member> memberListView;
 
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Creates a {@code MemberListPanel} with the given {@code ObservableList}.
      */
     public MemberListPanel(ObservableList<Member> memberList) {
         super(FXML);
@@ -30,7 +30,7 @@ public class MemberListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Member} using a {@code MemberCard}.
      */
     class MemberListViewCell extends ListCell<Member> {
         @Override
