@@ -11,10 +11,10 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.logic.Messages;
-import seedu.address.model.ContactsManager;
+import seedu.address.model.Contacts;
 import seedu.address.testutil.TestData;
 
-public class JsonSerializableContactsTest {
+public class JsonContactsTest {
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonSerializableContactsTest");
     private static final Path TYPICAL_CONTACTS_FILE = TEST_DATA_FOLDER.resolve("typicalContactsConText.json");
@@ -23,25 +23,25 @@ public class JsonSerializableContactsTest {
 
     @Test
     public void toModelType_typicalContactsFile_success() throws Exception {
-        JsonSerializableContacts dataFromFile = JsonUtil.readJsonFile(TYPICAL_CONTACTS_FILE,
-                JsonSerializableContacts.class).get();
-        ContactsManager conTextFromFile = dataFromFile.toModelType();
-        ContactsManager typicalContactsContactsManager = TestData.getTypicalContactsManager();
+        JsonContacts dataFromFile = JsonUtil.readJsonFile(TYPICAL_CONTACTS_FILE,
+                JsonContacts.class).get();
+        Contacts conTextFromFile = dataFromFile.toModelType();
+        Contacts typicalContactsContactsManager = TestData.getTypicalContacts();
         assertEquals(conTextFromFile, typicalContactsContactsManager);
     }
 
     @Test
     public void toModelType_invalidContactFile_throwsIllegalValueException() throws Exception {
-        JsonSerializableContacts dataFromFile = JsonUtil.readJsonFile(INVALID_CONTACT_FILE,
-                JsonSerializableContacts.class).get();
+        JsonContacts dataFromFile = JsonUtil.readJsonFile(INVALID_CONTACT_FILE,
+                JsonContacts.class).get();
         assertThrows(IllegalValueException.class, dataFromFile::toModelType);
     }
 
     @Test
     public void toModelType_duplicateContacts_throwsIllegalValueException() throws Exception {
-        JsonSerializableContacts dataFromFile = JsonUtil.readJsonFile(DUPLICATE_CONTACT_FILE,
-                JsonSerializableContacts.class).get();
-        assertThrows(IllegalValueException.class, Messages.MESSAGE_CONTAIN_DUPLICATE_CONTACT,
+        JsonContacts dataFromFile = JsonUtil.readJsonFile(DUPLICATE_CONTACT_FILE,
+                JsonContacts.class).get();
+        assertThrows(IllegalValueException.class, Messages.CONVERT_CONTACTS_DUPLICATE,
                 dataFromFile::toModelType);
     }
 
