@@ -21,7 +21,10 @@ import seedu.address.model.tag.Tag;
 
 
 /**
- * Jackson-friendly version of {@link Contact}.
+ * Immutable, Jackson-friendly version of {@link Contact}.
+ *
+ * The data it contains may be invalid if the instance was deserialized from
+ * JSON. Checks are done when converting {@link #toModelType()}.
  */
 class JsonContact {
     private final String name;
@@ -31,42 +34,40 @@ class JsonContact {
     private final List<JsonTag> tags = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonAdaptedContact} with the given contact details.
-     */
-    @JsonCreator
-    public JsonContact(
-        @JsonProperty("name") String _name,
-        @JsonProperty("phone") String _phone,
-        @JsonProperty("email") String _email,
-        @JsonProperty("note") String _note,
-        @JsonProperty("tags") List<JsonTag> _tags
-    ) {
-        this.name = _name;
-        this.phone = _phone;
-        this.email = _email;
-        this.note = _note;
-        if (_tags != null) {
-            this.tags.addAll(_tags);
-        }
-    }
-
-    /**
-     * Converts a given {@code Contact} into this class for Jackson use.
+     * Constructs by converting the specified {@link Contact}.
      */
     public JsonContact(Contact contact) {
-        name = contact.getName().fullName;
-        phone = contact.getPhone().value;
-        email = contact.getEmail().value;
-        note = contact.getNote().text;
-        tags.addAll(contact.getTags().stream()
-                .map(JsonTag::new)
-                .collect(Collectors.toList()));
+        this(
+            contact.getName().value,
+            contact.getPhone().value,
+            contact.getEmail().value,
+            contact.getNote().value,
+            contact.getTags()
+                    .stream()
+                    .map(JsonTag::new)
+                    .collect(Collectors.toList())
+        );
+    }
+
+    @JsonCreator
+    public JsonContact(
+        @JsonProperty("name") String name,
+        @JsonProperty("phone") String phone,
+        @JsonProperty("email") String email,
+        @JsonProperty("note") String note,
+        @JsonProperty("tags") List<JsonTag> tags
+    ) {
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.note = note;
+        this.tags.addAll(tags);
     }
 
     /**
-     * Converts this Jackson-friendly adapted contact object into the model's {@code Contact} object.
+     * Attempts to convert this to the model's {@link Contact} type.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted contact.
+     * @throws IllegalValueException If any data this contains is invalid.
      */
     public Contact toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
@@ -77,7 +78,7 @@ class JsonContact {
         if (name == null) {
             throw new IllegalValueException(String.format(Messages.MESSAGE_FIELD_MISSING, Name.class.getSimpleName()));
         }
-        if (!Name.isValidName(name)) {
+        if (!Name.isValid(name)) {
             throw new IllegalValueException(Messages.MESSAGE_NAME_CONSTRAINTS);
         }
         final Name modelName = new Name(name);
@@ -85,7 +86,7 @@ class JsonContact {
         if (phone == null) {
             throw new IllegalValueException(String.format(Messages.MESSAGE_FIELD_MISSING, Phone.class.getSimpleName()));
         }
-        if (!Phone.isValidPhone(phone)) {
+        if (!Phone.isValid(phone)) {
             throw new IllegalValueException(Messages.MESSAGE_PHONE_CONSTRAINTS);
         }
         final Phone modelPhone = new Phone(phone);
@@ -93,8 +94,8 @@ class JsonContact {
         if (email == null) {
             throw new IllegalValueException(String.format(Messages.MESSAGE_FIELD_MISSING, Email.class.getSimpleName()));
         }
-        if (!Email.isValidEmail(email)) {
-            throw new IllegalValueException(Messages.MESSAGE_EMAIL_CONSTRAINTS);
+        if (!Email.isValid(email)) {
+            throw new IllegalValueException(Messages.EMAIL_INVALID);
         }
         final Email modelEmail = new Email(email);
 
@@ -106,5 +107,4 @@ class JsonContact {
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Contact(modelName, modelPhone, modelEmail, modelNote, modelTags);
     }
-
 }

@@ -47,7 +47,6 @@ public final class Messages {
 
     // Messages associated with Storage
     public static final String MESSAGE_FIELD_MISSING = "Contact's %s field is missing.";
-    public static final String MESSAGE_CONTAIN_DUPLICATE_CONTACT = "Contact list contains duplicate contact(s).";
 
     //TODO refine the messages above this line
 
@@ -56,7 +55,7 @@ public final class Messages {
     private static final String UNFORMATTED_COMMAND_INVALID_FORMAT =
             "Invalid command format.\n%s";
 
-    // Commands
+    // Specific commands
     public static final String COMMAND_CLEAR_SUCCESS = "All contacts have been removed!";
     public static final String COMMAND_EXIT_SUCCESS = "Exiting app...";
 
@@ -66,6 +65,9 @@ public final class Messages {
 
     public static final String EMAIL_INVALID =
             "Emails must roughly be of the form \"example_email@foo-domain.sg.\"";
+
+    // JSON
+    public static final String CONVERT_CONTACTS_DUPLICATE = "Encountered duplicate while converting contacts.";
 
     /**
      * Returns a formatted message about the command format being invalid, with

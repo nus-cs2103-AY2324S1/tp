@@ -10,13 +10,13 @@ import seedu.address.model.tag.Tag;
 
 
 /**
- * Jackson-friendly version of {@link Tag}.
+ * Immutable, Jackson-friendly version of {@link Tag}.
  *
  * The data it contains may be invalid if the instance was deserialized from
  * JSON. Checks are done when converting {@link #toModelType()}.
  */
 public final class JsonTag {
-    private final String name;
+    private final String value;
 
     /**
      * Constructs by converting the specified {@link Tag}.
@@ -26,13 +26,13 @@ public final class JsonTag {
     }
 
     @JsonCreator
-    public JsonTag(String name) {
-        this.name = name;
+    public JsonTag(String value) {
+        this.value = value;
     }
 
     @JsonValue
-    public String getName() {
-        return this.name;
+    public String getValue() {
+        return this.value;
     }
 
     /**
@@ -41,12 +41,12 @@ public final class JsonTag {
      * @throws IllegalValueException If any data this contains is invalid.
      */
     public Tag toModelType() throws IllegalValueException {
-        if (!Tag.isValid(this.name)) {
+        if (!Tag.isValid(this.value)) {
             throw new IllegalValueException(
-                Messages.tagInvalid(this.name)
+                Messages.tagInvalid(this.value)
             );
         }
 
-        return new Tag(this.name);
+        return new Tag(this.value);
     }
 }
