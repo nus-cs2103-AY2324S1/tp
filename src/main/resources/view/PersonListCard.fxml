@@ -28,10 +28,10 @@
         <Label fx:id="room" text="\$first" styleClass="cell_big_label" />
       </HBox>
       <FlowPane fx:id="tags" />
+      <Label fx:id="bookingPeriod" styleClass="cell_small_label" text="\$bookingPeriod" />
       <Label fx:id="name" styleClass="cell_small_label" text="\$name" />
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
-      <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
     </VBox>
   </GridPane>
 </HBox>

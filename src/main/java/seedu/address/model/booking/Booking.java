@@ -23,19 +23,19 @@ public class Booking {
     private final Email email;
 
     // Data fields
-    private final Address address;
+    private final BookingPeriod bookingPeriod;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Booking(Room room, Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Booking(Room room, BookingPeriod bookingPeriod, Name name, Phone phone, Email email, Set<Tag> tags) {
+        requireAllNonNull(name, bookingPeriod, phone, email, tags);
         this.room = room;
+        this.bookingPeriod = bookingPeriod;
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
         this.tags.addAll(tags);
     }
 
@@ -54,8 +54,8 @@ public class Booking {
         return email;
     }
 
-    public Address getAddress() {
-        return address;
+    public BookingPeriod getBookingPeriod() {
+        return bookingPeriod;
     }
 
     /**
@@ -97,27 +97,27 @@ public class Booking {
 
         Booking otherBooking = (Booking) other;
         return room.equals(otherBooking.room)
+                && bookingPeriod.equals(otherBooking.bookingPeriod)
                 && name.equals(otherBooking.name)
                 && phone.equals(otherBooking.phone)
                 && email.equals(otherBooking.email)
-                && address.equals(otherBooking.address)
                 && tags.equals(otherBooking.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(room, name, phone, email, address, tags);
+        return Objects.hash(room, bookingPeriod, name, phone, email, tags);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("room", room)
+                .add("booking period", bookingPeriod)
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
-                .add("address", address)
                 .add("tags", tags)
                 .toString();
     }
