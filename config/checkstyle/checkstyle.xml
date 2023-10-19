@@ -88,7 +88,7 @@
         </module>
 
         <module name="TypeName">
-            <!-- Validates static, final fields against the expression "^[A-Z][a-zA-Z0-9]*$". -->
+            <!-- Validates type names against the expression "^[A-Z][a-zA-Z0-9]*$". -->
             <metadata name="altname" value="TypeName"/>
             <property name="severity" value="warning"/>
         </module>
