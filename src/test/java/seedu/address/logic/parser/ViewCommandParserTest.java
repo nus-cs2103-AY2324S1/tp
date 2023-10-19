@@ -14,15 +14,25 @@ import seedu.address.logic.commands.ViewCommand;
 
 public class ViewCommandParserTest {
     private ViewCommandParser parser = new ViewCommandParser();
-    private final String category = "appointments";
+    private final String validCategory1 = "appointments";
+    private final String validCategory2 = "students";
 
     @Test
     public void parse_indexSpecified_success() {
         // have remark
-        String userInput = " " + PREFIX_CATEGORY + category;
-        ViewCommand expectedCommand = new ViewCommand(category);
+        String userInput = " " + PREFIX_CATEGORY + validCategory1;
+        ViewCommand expectedCommand = new ViewCommand(validCategory1);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
+
+    @Test
+    public void parse_indexSpecified2_success() {
+        // have remark
+        String userInput = " " + PREFIX_CATEGORY + validCategory2;
+        ViewCommand expectedCommand = new ViewCommand(validCategory2);
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
 
     @Test
     public void parse_missingCompulsoryField_failure() {
