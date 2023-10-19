@@ -6,6 +6,9 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -30,7 +33,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         groups = new GroupList();
     }
 
-    public AddressBook() {}
+    public AddressBook() {
+
+    }
 
     /**
      * Creates an AddressBook using the Persons in the {@code toBeCopied}
@@ -51,15 +56,31 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the group list with {@code groups}.
+     * {@code groups} must not contain duplicate groups.
+     */
+    public void setGroups(List<Group> groups) {
+        this.groups.setGroups(groups);
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
-
+        setGroups(newData.getGroupList());
         setPersons(newData.getPersonList());
     }
 
     //// person-level operations
+
+    /**
+     * Returns the list of fields of {@code person} that exists in the address book.
+     */
+    public boolean[] usedFields(Person person) {
+        requireNonNull(person);
+        return persons.usedFields(person);
+    }
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
@@ -98,6 +119,12 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     //// group-level operations
 
+    public void addPersonToGroup(Person person, Group group) {
+        requireNonNull(person);
+        requireNonNull(group);
+        GroupList groups = person.getGroups();
+    }
+
     /**
      * Returns true if a group with the same identity as {@code group} exists in the address book.
      */
@@ -114,12 +141,16 @@ public class AddressBook implements ReadOnlyAddressBook {
         groups.add(g);
     }
 
+//    public void addGroup(Group g, Person toAdd) throws CommandException {
+//        groups.add(g, toAdd);
+//    }
+
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
-    public void removeGroup(Group key) {
-        groups.remove(key);
+    public void removeGroup(Group g) {
+        groups.remove(g);
     }
 
     //// util methods
@@ -131,11 +162,26 @@ public class AddressBook implements ReadOnlyAddressBook {
                 .toString();
     }
 
+    public Person getPerson(String personName) throws CommandException {
+        // person list get that person object with same name
+       return persons.getPerson(personName);
+    }
+
+    public Group getGroup(String groupName) throws CommandException {
+        // group list get that group object with same name
+        return groups.getGroup(groupName);
+    }
+
+
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
     }
 
+    @Override
+    public ObservableList<Group> getGroupList() {
+        return groups.asUnmodifiableObservableList();
+    }
     @Override
     public boolean equals(Object other) {
         if (other == this) {
