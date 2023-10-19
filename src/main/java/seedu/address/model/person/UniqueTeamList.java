@@ -1,29 +1,22 @@
 package seedu.address.model.person;
 
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Team;
 import seedu.address.model.person.exceptions.DuplicateTeamException;
 import seedu.address.model.person.exceptions.TeamNotFoundException;
 
 /**
- * A list of Teams that enforces uniqueness between its elements and does not allow nulls.
- * A team is considered unique by comparing using {@code Team#isSameTeam(Team)}. As such, adding and updating of
- * Teams uses Team#isSameTeam(Team) for equality so as to ensure that the Team being added or updated is
- * unique in terms of identity in the UniqueTeamList. However, the removal of a Team uses Team#equals(Object) so
- * as to ensure that the Team with exactly the same fields will be removed.
+ * A list of teams that enforces uniqueness between its elements and does not allow nulls.
+ * A team is considered unique by comparing using {@code Team#equals(Object)}.
  *
  * Supports a minimal set of list operations.
- *
- * @see Team#isSameTeam(Team)
  */
 public class UniqueTeamList implements Iterable<Team> {
 
@@ -32,39 +25,61 @@ public class UniqueTeamList implements Iterable<Team> {
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent Team as the given argument.
+     * Returns true if the list contains a team with the same name as the given argument.
      */
-    public boolean contains(Team toCheck) {
-        requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSameTeam);
+    public boolean containsTeamByName(String teamName) {
+        requireNonNull(teamName);
+        return internalList.stream().anyMatch(team -> team.getTeamName().equals(teamName));
+    }
+    public boolean teamContainsPerson(String teamToAddTo, IdentityCode devToAddIdentityCode) {
+        requireNonNull(teamToAddTo);
+        requireNonNull(devToAddIdentityCode);
+        Team teamBeingAddedTo = getTeamByName(teamToAddTo);
+        Set<IdentityCode> devSet = teamBeingAddedTo.getDeveloperIdentityCodes();
+        for (IdentityCode identityCode : devSet) {
+            if (identityCode.equals(devToAddIdentityCode)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private Team getTeamByName(String teamToAddTo) {
+        requireNonNull(teamToAddTo);
+        Team teamToAdd = internalList.filtered(team -> team.getTeamName().equals(teamToAddTo)).get(0);
+        return teamToAdd;
     }
 
     /**
-     * Adds a Team to the list.
-     * The Team must not already exist in the list.
+     * Adds a team to the list.
+     * The team must not already exist in the list.
      */
     public void add(Team toAdd) {
         requireNonNull(toAdd);
-        if (contains(toAdd)) {
+        if (containsTeamByName(toAdd.getTeamName())) {
             throw new DuplicateTeamException();
         }
         internalList.add(toAdd);
     }
 
-    /**
-     * Replaces the Team {@code target} in the list with {@code editedTeam}.
-     * {@code target} must exist in the list.
-     * The Team identity of {@code editedTeam} must not be the same as another existing Team in the list.
-     */
-    public void setTeam(Team target, Team editedTeam) {
-        requireAllNonNull(target, editedTeam);
+    public void addDevToTeam(String teamToAddTo, IdentityCode devToAddIdentityCode) {
+        Team team = getTeamByName(teamToAddTo);
+        team.addDeveloper(devToAddIdentityCode);
+    }
 
-        int index = internalList.indexOf(target);
+    /**
+     * Replaces the team with the given name in the list with {@code editedTeam}.
+     * The team with the given name must exist in the list.
+     */
+    public void setTeamByName(String teamName, Team editedTeam) {
+        requireAllNonNull(teamName, editedTeam);
+
+        int index = internalList.indexOf(new Team(null, teamName));
         if (index == -1) {
             throw new TeamNotFoundException();
         }
 
-        if (!target.isSameTeam(editedTeam) && contains(editedTeam)) {
+        if (containsTeamByName(editedTeam.getTeamName())) {
             throw new DuplicateTeamException();
         }
 
@@ -72,12 +87,12 @@ public class UniqueTeamList implements Iterable<Team> {
     }
 
     /**
-     * Removes the equivalent Team from the list.
-     * The Team must exist in the list.
+     * Removes the team with the given name from the list.
+     * The team with the given name must exist in the list.
      */
-    public void remove(Team toRemove) {
-        requireNonNull(toRemove);
-        if (!internalList.remove(toRemove)) {
+    public void removeTeamByName(String teamName) {
+        requireNonNull(teamName);
+        if (!internalList.remove(new Team(null, teamName))) {
             throw new TeamNotFoundException();
         }
     }
@@ -88,34 +103,16 @@ public class UniqueTeamList implements Iterable<Team> {
     }
 
     /**
-     * Replaces the contents of this list with {@code Teams}.
-     * {@code Teams} must not contain duplicate Teams.
+     * Replaces the contents of this list with {@code teams}.
+     * {@code teams} must not contain duplicate teams.
      */
-    public void setTeams(List<Team> Teams) {
-        requireAllNonNull(Teams);
-        if (!TeamsAreUnique(Teams)) {
+    public void setTeams(List<Team> teams) {
+        requireAllNonNull(teams);
+        if (!teamsAreUnique(teams)) {
             throw new DuplicateTeamException();
         }
 
-        internalList.setAll(Teams);
-    }
-
-
-    //todo: more data protection. Maybe have two functions. One for displaying and one for editing.
-    public Team getTeamByName(String name) {
-        Team foundTeam = null;
-        for (Team t : internalList) {
-            if (t.getTeamName().equals(name)) {
-                foundTeam = t;
-                break;
-            }
-        }
-
-        if (foundTeam != null) {
-            return foundTeam;
-        } else {
-            throw new TeamNotFoundException();
-        }
+        internalList.setAll(teams);
     }
 
     /**
@@ -156,17 +153,18 @@ public class UniqueTeamList implements Iterable<Team> {
     }
 
     /**
-     * Returns true if {@code Teams} contains only unique Teams.
+     * Returns true if {@code teams} contains only unique teams.
      */
-    private boolean TeamsAreUnique(List<Team> Teams) {
-        for (int i = 0; i < Teams.size() - 1; i++) {
-            for (int j = i + 1; j < Teams.size(); j++) {
-                if (Teams.get(i).isSameTeam(Teams.get(j))) {
+    private boolean teamsAreUnique(List<Team> teams) {
+        for (int i = 0; i < teams.size() - 1; i++) {
+            for (int j = i + 1; j < teams.size(); j++) {
+                if (teams.get(i).getTeamName().equals(teams.get(j).getTeamName())) {
                     return false;
                 }
             }
         }
         return true;
     }
-}
 
+
+}

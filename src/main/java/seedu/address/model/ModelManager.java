@@ -11,8 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Team;
+import seedu.address.model.person.*;
 
 /**
  * Represents the management model for address and team books.
@@ -149,11 +148,17 @@ public class ModelManager implements Model {
         this.addressBook.resetData(addressBook);
     }
 
+    public AddressBook getWritableAddressBook() {
+        return addressBook;
+    }
+
+
     /**
      * Returns the current address book.
      *
      * @return the address book.
      */
+
     @Override
     public ReadOnlyAddressBook getAddressBook() {
         return addressBook;
@@ -177,6 +182,16 @@ public class ModelManager implements Model {
     public boolean hasPerson(Person person) {
         requireNonNull(person);
         return addressBook.hasPerson(person);
+    }
+    @Override
+    public boolean hasPerson(Name name) {
+        requireNonNull(name);
+        return addressBook.hasPerson(name);
+    }
+
+    @Override
+    public Person getPersonByName(Name name) {
+        return addressBook.getPersonByName(name);
     }
 
     /**
@@ -213,6 +228,11 @@ public class ModelManager implements Model {
 
         addressBook.setPerson(target, editedPerson);
     }
+
+    @Override
+    public IdentityCode getIdentityCodeByName(Name devName) {
+        return addressBook.getPersonByName(devName).getIdentityCode();
+    }
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -234,23 +254,6 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
     }
-
-    //    @Override
-    //    public boolean equals(Object other) {
-    //        if (other == this) {
-    //            return true;
-    //        }
-    //
-    //        // instanceof handles nulls
-    //        if (!(other instanceof ModelManager)) {
-    //            return false;
-    //        }
-    //
-    //        ModelManager otherModelManager = (ModelManager) other;
-    //        return addressBook.equals(otherModelManager.addressBook)
-    //                && userPrefs.equals(otherModelManager.userPrefs)
-    //                && filteredPersons.equals(otherModelManager.filteredPersons);
-    //    }
 
     //=========== TeamBook ================================================================================
 
@@ -280,11 +283,6 @@ public class ModelManager implements Model {
      * @param teamName the name of the team to check.
      * @return true if the team exists, false otherwise.
      */
-    @Override
-    public boolean hasTeam(String teamName) {
-        requireNonNull(teamName);
-        return teamBook.hasTeam(teamName);
-    }
 
     /**
      * Deletes a team with the specified team name from the team book.
@@ -304,6 +302,12 @@ public class ModelManager implements Model {
     public void addTeam(Team team) {
         teamBook.addTeam(team);
         updateFilteredTeamList(PREDICATE_SHOW_ALL_TEAMS);
+    }
+
+    @Override
+    public boolean personAlreadyInTeam(String teamToAddTo, Name devToAdd) {
+        IdentityCode devToAddIdentityCode = getIdentityCodeByName(devToAdd);
+        return teamBook.personAlreadyInTeam(teamToAddTo, devToAddIdentityCode);
     }
 
 
@@ -354,5 +358,20 @@ public class ModelManager implements Model {
                 && filteredTeams.equals(otherModelManager.filteredTeams);
     }
 
+    //team level operations
+    public boolean hasTeam(String teamName) {
+        requireNonNull(teamName);
+        return teamBook.hasTeam(teamName);
+    }
+
+    public boolean invalidAddToTeam(String teamToAddTo) {
+        return teamBook.invalidAddToTeam(teamToAddTo);
+    }
+
+    //only run when you know that team exists
+    public void addToTeam(String teamToAddTo, Name devToAdd) {
+        IdentityCode devToAddIdentityCode = getIdentityCodeByName(devToAdd);
+        teamBook.addDevToTeam(teamToAddTo, devToAddIdentityCode);
+    }
 
 }
