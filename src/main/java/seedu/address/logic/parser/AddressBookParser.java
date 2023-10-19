@@ -18,7 +18,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.UploadPhotoCommand;
+import seedu.address.logic.commands.UpdatePhotoCommand;
 import seedu.address.logic.commands.NoteCommand;
 import seedu.address.logic.commands.RemoveNoteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -63,8 +63,8 @@ public class AddressBookParser {
         case AddAltCommand.COMMAND_WORD:
             return new AddAltCommandParser().parse(arguments);
 
-        case UploadPhotoCommand.COMMAND_WORD:
-            return new UploadPhotoCommandParser().parse(arguments);
+        case UpdatePhotoCommand.COMMAND_WORD:
+            return new UpdatePhotoCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
@@ -100,3 +100,4 @@ public class AddressBookParser {
     }
 
 }
+

@@ -22,14 +22,14 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Tag;
 
-public class UploadPhotoCommand extends Command {
+public class UpdatePhotoCommand extends Command {
 
-    public static final String COMMAND_WORD = "uploadphoto";
-    public static final String MESSAGE_SUCCESS = "Photo uploaded";
+    public static final String COMMAND_WORD = "updatephoto";
+    public static final String MESSAGE_SUCCESS = "Photo updated";
     private final int zeroBasedIdx;
     private final String path;
 
-    public UploadPhotoCommand(int idx, String path) {
+    public UpdatePhotoCommand(int idx, String path) {
         zeroBasedIdx = idx - 1;
         this.path = path;
     }
@@ -70,3 +70,4 @@ public class UploadPhotoCommand extends Command {
                 linkedin, secondaryEmail, telegram, updatedTags, id, new Avatar(path), notes);
     }
 }
+
