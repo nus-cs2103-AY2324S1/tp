@@ -18,7 +18,7 @@ public class AssignmentTracker {
 
     public static final String MESSAGE_CONSTRAINTS = "Assignment Tracker needs to have positive number of assignments.";
 
-    public final Assignment[] assignments;
+    private Assignment[] assignments;
 
     /**
      * Constructs an {@code AssignmentTracker}.
@@ -101,4 +101,21 @@ public class AssignmentTracker {
         return Arrays.hashCode(assignments);
     }
 
+    /**
+     * Updates the length of the assignment tracker. Whenever the assignment count changes.
+     */
+    public void updateAssignmentCountChange(int assignmentCount) {
+        if (assignmentCount == assignments.length) {
+            return;
+        }
+        Assignment[] newAssignments = new Assignment[assignmentCount];
+        for (int i = 0; i < assignmentCount; i++) {
+            if (i < assignments.length) {
+                newAssignments[i] = assignments[i];
+            } else {
+                newAssignments[i] = new Assignment();
+            }
+        }
+        assignments = newAssignments;
+    }
 }

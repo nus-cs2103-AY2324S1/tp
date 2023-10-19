@@ -38,7 +38,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredStudents = new FilteredList<>(this.addressBook.getPersonList());
 
-        logger.info("Set the tutorial count to " + this.userPrefs.getAssignmentCount());
+        logger.info("Set the tutorial count to " + this.userPrefs.getTutorialCount());
         logger.info("Set the assignment count to " + this.userPrefs.getAssignmentCount());
         ClassDetails.setTutorialCount(this.userPrefs.getTutorialCount());
         ClassDetails.setAssignmentCount(this.userPrefs.getAssignmentCount());

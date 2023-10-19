@@ -29,8 +29,9 @@ public class ClassDetails {
 
     // The class number should start with "T".
     public static final String VALIDATION_REGEX = "T.*";
-    private static int tutorialCount = 10;
-    private static int assignmentCount = 10;
+    public static final int DEFAULT_COUNT = 10;
+    private static int tutorialCount = DEFAULT_COUNT;
+    private static int assignmentCount = DEFAULT_COUNT;
 
     public final String classDetails;
     public final AttendanceTracker attendanceTracker;
@@ -131,6 +132,7 @@ public class ClassDetails {
         if (grade < 0 || grade > 100) {
             throw new CommandException(MESSAGE_INVALID_GRADE);
         }
+        updateAssignmentAndTutorialCount();
         assignmentTracker.editMarks(Index.fromOneBased(assignmentNumber), grade);
     }
 
@@ -150,8 +152,19 @@ public class ClassDetails {
             throw new CommandException(
                     String.format(MESSAGE_INVALID_TUTORIAL_SESSION_NUMBER, tutorialCount));
         }
-
+        updateAssignmentAndTutorialCount();
         classParticipationTracker.markParticipation(Index.fromOneBased(sessionNumber), participated);
+    }
+
+    /**
+     * Updates the assignment and tutorial count in the attendance tracker,
+     * class participation tracker and assignment tracker. Whenever the assignment count
+     * or tutorial count is changed.
+     */
+    private void updateAssignmentAndTutorialCount() {
+        attendanceTracker.updateTutorialCountChange(tutorialCount);
+        classParticipationTracker.updateTutorialCountChange(tutorialCount);
+        assignmentTracker.updateAssignmentCountChange(assignmentCount);
     }
 
     /**

@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.util.Objects;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.student.ClassDetails;
 
 /**
  * Represents User's preferences.
@@ -16,8 +17,8 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     private GuiSettings guiSettings = new GuiSettings();
     private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
     private boolean isConfigured = false;
-    private int tutorialCount = 10;
-    private int assignmentCount = 10;
+    private int tutorialCount = ClassDetails.DEFAULT_COUNT;
+    private int assignmentCount = ClassDetails.DEFAULT_COUNT;
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -40,6 +41,8 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         setGuiSettings(newUserPrefs.getGuiSettings());
         setAddressBookFilePath(newUserPrefs.getAddressBookFilePath());
         setConfigured(newUserPrefs.getConfigured());
+        setAssignmentCount(newUserPrefs.getAssignmentCount());
+        setTutorialCount(newUserPrefs.getTutorialCount());
     }
 
     public GuiSettings getGuiSettings() {

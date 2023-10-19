@@ -19,7 +19,7 @@ public class AttendanceTracker {
 
     public static final String MESSAGE_CONSTRAINTS = "Attendance Tracker needs to have positive number of tutorials.";
 
-    private final Attendance[] attendanceList;
+    private Attendance[] attendanceList;
 
     /**
      * Constructs an {@code AttendanceTracker}.
@@ -108,5 +108,23 @@ public class AttendanceTracker {
     @Override
     public int hashCode() {
         return Arrays.hashCode(attendanceList);
+    }
+
+    /**
+     * Updates the length of the attendance tracker. Whenever the tutorial count changes.
+     */
+    public void updateTutorialCountChange(int tutorialCount) {
+        if (tutorialCount == attendanceList.length) {
+            return;
+        }
+        Attendance[] newAttendanceList = new Attendance[tutorialCount];
+        for (int i = 0; i < tutorialCount; i++) {
+            if (i < attendanceList.length) {
+                newAttendanceList[i] = attendanceList[i];
+            } else {
+                newAttendanceList[i] = new Attendance();
+            }
+        }
+        attendanceList = newAttendanceList;
     }
 }

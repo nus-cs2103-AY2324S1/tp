@@ -95,6 +95,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public void setAssignmentCount(int assignmentCount) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setTutorialCount(int tutorialCount) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ReadOnlyUserPrefs getUserPrefs() {
             throw new AssertionError("This method should not be called.");
         }

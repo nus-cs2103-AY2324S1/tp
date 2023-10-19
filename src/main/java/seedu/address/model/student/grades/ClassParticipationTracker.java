@@ -18,7 +18,7 @@ public class ClassParticipationTracker {
 
     public static final String MESSAGE_CONSTRAINTS = "Class Participation needs to be a positive integer";
 
-    private final ClassParticipation[] classPartList;
+    private ClassParticipation[] classPartList;
 
     /**
      * Constructs an {@code ClassParticipationTracker}.
@@ -121,5 +121,23 @@ public class ClassParticipationTracker {
     @Override
     public int hashCode() {
         return Arrays.hashCode(classPartList);
+    }
+
+    /**
+     * Updates the length of the class participation tracker. Whenever the tutorial count changes.
+     */
+    public void updateTutorialCountChange(int tutorialCount) {
+        if (tutorialCount == classPartList.length) {
+            return;
+        }
+        ClassParticipation[] newClassPartList = new ClassParticipation[tutorialCount];
+        for (int i = 0; i < tutorialCount; i++) {
+            if (i < classPartList.length) {
+                newClassPartList[i] = classPartList[i];
+            } else {
+                newClassPartList[i] = new ClassParticipation();
+            }
+        }
+        classPartList = newClassPartList;
     }
 }

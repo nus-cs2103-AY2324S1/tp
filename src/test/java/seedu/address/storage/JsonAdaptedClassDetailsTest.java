@@ -13,6 +13,9 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.student.ClassDetails;
 import seedu.address.model.student.grades.Assignment;
+import seedu.address.model.student.grades.AssignmentTracker;
+import seedu.address.model.student.grades.AttendanceTracker;
+import seedu.address.model.student.grades.ClassParticipationTracker;
 
 public class JsonAdaptedClassDetailsTest {
     private static final String INVALID_CLASS_NUMBER = "11";
@@ -28,7 +31,10 @@ public class JsonAdaptedClassDetailsTest {
                 VALID_ATTENDANCE_TRACKER,
                 VALID_ASSIGNMENT_TRACKER,
                 VALID_CLASS_PARTICIPATION_TRACKER);
-        ClassDetails expectedClassDetails = new ClassDetails(VALID_CLASS_NUMBER);
+        ClassDetails expectedClassDetails = new ClassDetails(VALID_CLASS_NUMBER,
+                new AttendanceTracker(VALID_ATTENDANCE_TRACKER),
+                new AssignmentTracker(VALID_ASSIGNMENT_TRACKER),
+                new ClassParticipationTracker(VALID_CLASS_PARTICIPATION_TRACKER));
         assertEquals(expectedClassDetails, classDetails.toModelType());
     }
 
