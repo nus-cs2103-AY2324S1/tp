@@ -3,6 +3,7 @@ package networkbook.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Objects;
 
 import networkbook.commons.core.index.Index;
 import networkbook.commons.util.ToStringBuilder;
@@ -57,7 +58,7 @@ public class DeleteCommand extends Command {
         }
 
         DeleteCommand otherDeleteCommand = (DeleteCommand) other;
-        return targetIndex.equals(otherDeleteCommand.targetIndex);
+        return Objects.equals(this.targetIndex, otherDeleteCommand.targetIndex);
     }
 
     @Override
