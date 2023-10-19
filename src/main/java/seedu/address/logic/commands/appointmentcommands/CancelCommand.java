@@ -1,5 +1,10 @@
 package seedu.address.logic.commands.appointmentcommands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+
+import java.util.List;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
@@ -8,11 +13,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.appointment.Appointment;
 
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
-
+/**
+ * Cancels an appointment identified using it's displayed index from the address book.
+ */
 public class CancelCommand extends Command {
     public static final String COMMAND_WORD = "cancel";
 
@@ -41,7 +44,8 @@ public class CancelCommand extends Command {
 
         Appointment appointmentToCancel = lastShownList.get(targetIndex.getZeroBased());
         model.deleteAppointment(appointmentToCancel);
-        return new CommandResult(String.format(MESSAGE_CANCEL_APPOINTMENT_SUCCESS, Messages.format(appointmentToCancel)));
+        return new CommandResult(String.format(MESSAGE_CANCEL_APPOINTMENT_SUCCESS,
+                Messages.format(appointmentToCancel)));
     }
 
     @Override
