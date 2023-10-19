@@ -6,12 +6,13 @@ import static seedu.address.logic.parser.ViewCommandParser.STUDENT_CATEGORY;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_APPOINTMENTS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 
 /**
- * Lists all students in the address book to the user.
+ * Lists all appointments or students in WellNus to the user.
  */
 public class ViewCommand extends Command {
 
@@ -61,5 +62,12 @@ public class ViewCommand extends Command {
 
         ViewCommand e = (ViewCommand) other;
         return category.equals(e.category);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("category", category)
+                .toString();
     }
 }
