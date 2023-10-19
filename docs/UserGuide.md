@@ -225,7 +225,7 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/Chemistry`
+**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS g/GENDER l/SEC_LEVEL m/MRT STATION [s/SUBJECT]…​` <br> e.g., `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 s/Chemistry`
 **Import** | `import FILENAME.csv`<br> e.g., `import student_data.csv`
 **Edit**   | `edit INDEX prefix1/[field1] prefix2/[field2]`  <br> or `edit NAME prefix/[field] prefix/[field] prefix/[field]` <br> e.g., `edit John Doe n/Joe e/johndoe@example.com t/English`
 **Search** | `search [KEYWORD]`<br> e.g., `search Lee`
