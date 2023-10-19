@@ -36,7 +36,7 @@ public class Messages {
     }
 
     /**
-     * Formats the {@code person} for display to the user.
+     * Formats the {@code applicant} for display to the user.
      */
     public static String formatApplicant(Applicant applicant) {
         final StringBuilder builder = new StringBuilder();

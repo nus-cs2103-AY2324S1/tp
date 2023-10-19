@@ -8,7 +8,7 @@ import seedu.address.model.interview.Interview;
 
 /**
  * A utility class containing a list of {@code Interview} objects to be used in tests.
- * Adapted from AB3 TypicalPersons class.
+ * Adapted from AB3 TypicalApplicants class.
  */
 public class TypicalInterviews {
     public static final Interview STANDARD_INTERVIEW = new Interview(TypicalApplicants.ALICE,
@@ -26,7 +26,7 @@ public class TypicalInterviews {
     public static final Interview STANDARD_INTERVIEW_DIFFERENT_TIME = new Interview(TypicalApplicants.ALICE,
             "StandardJobRole", "DifferentStandardTime");
 
-    /** Prevents instantiation - Code reused and adapted from AB3 TypicalPersons.java */
+    /** Prevents instantiation - Code reused and adapted from AB3 TypicalApplicants.java */
     private TypicalInterviews() {}
 
     public static List<Interview> getTypicalInterviews() {

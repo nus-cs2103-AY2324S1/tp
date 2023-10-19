@@ -42,7 +42,7 @@ public class ApplicantBuilder {
     }
 
     /**
-     * Initializes the ApplicantBuilder with the data of {@code personToCopy}.
+     * Initializes the ApplicantBuilder with the data of {@code applicantToCopy}.
      */
     public ApplicantBuilder(Applicant applicantToCopy) {
         name = applicantToCopy.getName();

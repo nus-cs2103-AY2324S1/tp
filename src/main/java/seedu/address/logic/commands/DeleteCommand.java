@@ -12,18 +12,18 @@ import seedu.address.model.Model;
 import seedu.address.model.applicant.Applicant;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes an applicant identified using it's displayed index from the address book.
  */
 public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete-a";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
+            + ": Deletes the applicant identified by the index number used in the displayed applicant list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_APPLICANT_SUCCESS = "Deleted Applicant: %1$s";
 
     private final Index targetIndex;
 
@@ -42,7 +42,7 @@ public class DeleteCommand extends Command {
 
         Applicant applicantToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteApplicant(applicantToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS,
+        return new CommandResult(String.format(MESSAGE_DELETE_APPLICANT_SUCCESS,
                 Messages.formatApplicant(applicantToDelete)));
     }
 

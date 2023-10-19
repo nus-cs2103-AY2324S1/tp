@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the Interview object methods
- * Adapted from AB3 PersonTest class
+ * Adapted from AB3 ApplicantTest class
  */
 public class InterviewTest {
 
@@ -51,7 +51,7 @@ public class InterviewTest {
         // different type -> returns false
         assertFalse(STANDARD_INTERVIEW.equals(5));
 
-        // different person -> returns false
+        // different applicant -> returns false
         assertFalse(STANDARD_INTERVIEW.equals(STANDARD_INTERVIEW_2));
 
         // different Applicant -> returns false

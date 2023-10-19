@@ -19,7 +19,7 @@ import seedu.address.model.interview.exceptions.InterviewNotFoundException;
  * However, the removal of an interview uses Interview#equals(Object) so as to ensure that the interview
  * with exactly the same fields will be removed.
  * Supports a minimal set of list operations.
- * Adapted from AB3 UniquePersonList
+ * Adapted from AB3 UniqueApplicantList
  */
 public class UniqueInterviewList implements Iterable<Interview> {
 

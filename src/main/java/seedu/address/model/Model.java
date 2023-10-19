@@ -72,9 +72,9 @@ public interface Model {
     void addApplicant(Applicant applicant);
 
     /**
-     * Replaces the given applicant {@code target} with {@code editedPerson}.
+     * Replaces the given applicant {@code target} with {@code editedApplicant}.
      * {@code target} must exist in the address book.
-     * The applicant identity of {@code editedPerson} must not be the same
+     * The applicant identity of {@code editedApplicant} must not be the same
      * as another existing applicant in the address book.
      */
     void setApplicant(Applicant target, Applicant editedApplicant);
