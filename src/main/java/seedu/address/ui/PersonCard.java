@@ -4,6 +4,8 @@ import java.util.Comparator;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -48,6 +50,8 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private Label uniqueId;
+    @FXML
+    private ImageView avatar;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -63,6 +67,7 @@ public class PersonCard extends UiPart<Region> {
         linkedin.setText(person.getLinkedin().map(l -> l.value).orElse(""));
         secondaryEmail.setText(person.getSecondaryEmail().map(e -> e.value).orElse(""));
         telegram.setText(person.getTelegram().map(t -> t.value).orElse(""));
+        avatar.setImage(person.getAvatar().getImage());
         person.getEmergencyTags().stream()
             .sorted(Comparator.comparing(tag -> tag.tagName))
             .forEach(tag -> {

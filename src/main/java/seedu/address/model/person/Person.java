@@ -9,6 +9,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javafx.scene.image.Image;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 
@@ -31,6 +32,7 @@ public class Person {
     private Optional<Telegram> telegram;
     private final Set<Tag> tags = new HashSet<>();
     private Optional<Integer> id;
+    private Avatar avatar = new Avatar();
 
     /**
      * Every field must be present and not null.
@@ -66,6 +68,26 @@ public class Person {
         this.telegram = telegram;
         this.tags.addAll(tags);
         this.id = id;
+    }
+
+    /**
+     * Constructor allowing to add avatar.
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Optional<Birthday> birthday,
+                  Optional<Linkedin> linkedin, Optional<Email> secondaryEmail,
+                  Optional<Telegram> telegram, Set<Tag> tags, Optional<Integer> id, Avatar avatar) {
+        requireAllNonNull(name, phone, email, address, birthday, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.birthday = birthday;
+        this.linkedin = linkedin;
+        this.secondaryEmail = secondaryEmail;
+        this.telegram = telegram;
+        this.tags.addAll(tags);
+        this.id = id;
+        this.avatar = avatar;
     }
 
     public Name getName() {
@@ -104,6 +126,10 @@ public class Person {
         return telegram;
     }
 
+    public Avatar getAvatar() {
+        return avatar;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -137,6 +163,10 @@ public class Person {
     public int setId(int id) {
         this.id = Optional.of(id);
         return id;
+    }
+
+    public void setAvatar(String path) {
+        this.avatar.setAvatar(path);
     }
 
     /**

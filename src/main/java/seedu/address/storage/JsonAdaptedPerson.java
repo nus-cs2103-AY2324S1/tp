@@ -13,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Avatar;
 import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Linkedin;
@@ -39,6 +40,7 @@ class JsonAdaptedPerson {
     private final Optional<String> telegram;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final Optional<Integer> id;
+    private Avatar avatar = new Avatar();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -82,6 +84,7 @@ class JsonAdaptedPerson {
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
         id = source.getId().map(x -> x.intValue());
+        avatar = source.getAvatar();
     }
 
     /**
@@ -125,6 +128,10 @@ class JsonAdaptedPerson {
         if (!Address.isValidAddress(address)) {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
+        /*
+        To add checking for photo
+         */
+
         final Address modelAddress = new Address(address);
 
         final Optional<Birthday> modelBirthday = birthday.map(monthDay -> new Birthday(monthDay));
@@ -137,9 +144,10 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         final Optional<Integer> modelID = id.map(x -> x.intValue());
+        final Avatar modelAvatar = new Avatar(avatar);
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelBirthday, modelLinkedin,
-                modelSecondaryEmail, modelTelegram, modelTags, modelID);
+                modelSecondaryEmail, modelTelegram, modelTags, modelID, modelAvatar);
     }
 
 }
