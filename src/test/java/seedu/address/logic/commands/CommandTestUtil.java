@@ -4,8 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LICENCE_PLATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_EXPIRY_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_ISSUE_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -35,11 +40,11 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
-    public static final String VALID_NRIC_AMY = "000A";
+    public static final String VALID_NRIC_AMY = "567A";
     public static final String VALID_NRIC_BOB = "123Z";
-    public static final String VALID_LICENCE_PLATE_AMY = "SBA1234A";
+    public static final String VALID_LICENCE_PLATE_AMY = "SBC123D";
     public static final String VALID_LICENCE_PLATE_BOB = "SYZ4321Z";
-    public static final String VALID_POLICY_NO_AMY = "AAAA1111";
+    public static final String VALID_POLICY_NO_AMY = "AIA1234";
     public static final String VALID_POLICY_NO_BOB = "BBBB2";
     public static final String VALID_POLICY_ISSUE_DATE_AMY = "01-01-2023";
     public static final String VALID_POLICY_ISSUE_DATE_BOB = "01-01-2013";
@@ -53,11 +58,24 @@ public class CommandTestUtil {
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
+    public static final String NRIC_DESC_AMY = " " + PREFIX_NRIC + VALID_NRIC_AMY;
+    public static final String NRIC_DESC_BOB = " " + PREFIX_NRIC + VALID_NRIC_BOB;
+    public static final String LICENSE_PLATE_DESC_AMY = " " + PREFIX_LICENCE_PLATE + VALID_LICENCE_PLATE_AMY;
+    public static final String LICENSE_PLATE_DESC_BOB = " " + PREFIX_LICENCE_PLATE + VALID_LICENCE_PLATE_BOB;
     public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
-
+    public static final String POLICY_NO_DESC_AMY = " " + PREFIX_POLICY_NUMBER + VALID_POLICY_NO_AMY;
+    public static final String POLICY_NO_DESC_BOB = " " + PREFIX_POLICY_NUMBER + VALID_POLICY_NO_BOB;
+    public static final String POLICY_ISSUE_DATE_DESC_AMY = " " + PREFIX_POLICY_ISSUE_DATE
+            + VALID_POLICY_ISSUE_DATE_AMY;
+    public static final String POLICY_ISSUE_DATE_DESC_BOB = " " + PREFIX_POLICY_ISSUE_DATE
+            + VALID_POLICY_ISSUE_DATE_BOB;
+    public static final String POLICY_EXPIRY_DATE_DESC_AMY = " " + PREFIX_POLICY_EXPIRY_DATE
+            + VALID_POLICY_EXPIRY_DATE_AMY;
+    public static final String POLICY_EXPIRY_DATE_DESC_BOB = " " + PREFIX_POLICY_EXPIRY_DATE
+            + VALID_POLICY_EXPIRY_DATE_BOB;
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
