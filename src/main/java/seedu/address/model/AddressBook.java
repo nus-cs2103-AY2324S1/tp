@@ -123,6 +123,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         interviews.add(i);
     }
 
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeInterview(Interview key) {
+        interviews.remove(key);
+    }
+
     //// util methods
 
     @Override

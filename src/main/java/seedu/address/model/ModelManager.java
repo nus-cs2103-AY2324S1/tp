@@ -127,6 +127,11 @@ public class ModelManager implements Model {
         updateFilteredInterviewList(PREDICATE_SHOW_ALL_INTERVIEWS);
     }
 
+    @Override
+    public void deleteInterview(Interview target) {
+        addressBook.removeInterview(target);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**

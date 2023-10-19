@@ -12,7 +12,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.interview.Interview;
 
 /**
- * Parses input arguments and creates a new AddCommand object
+ * Parses input arguments and creates a new AddInterviewCommand object
  * Adapted from AB3's AddCommandParser class
  */
 public class AddInterviewCommandParser implements Parser<AddInterviewCommand> {
