@@ -76,7 +76,7 @@ better than traditional GUI apps.
 ### Viewing help : `help`
 > :warning: Due to new features, help page is currently being updated.
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page, as well as a list of available keywords.
 
 ![help message](images/helpMessage.png)
 
@@ -202,9 +202,14 @@ Low Jun Yu is removed.`
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from the address book. UNOFAS will ask for confirmation first to ensure it is not a mistake. Click
+the clear button to confirm.
 
 Format: `clear`
+
+Example:
+* `clear`
+  ![confirm clear window](images/confirmClear.png)
 
 ### Sorting all entries by lexicographical order: `sort`
 
@@ -258,6 +263,7 @@ _Details coming soon ..._
 | **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                     |
 | **Edit**   | `edit ENTRY_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nk/NEXT_KIN] [nkp/NEXT_KIN_PHONE] [t/TAG]…​`<br> e.g.,`edit 1 n/john doe a/23 woodlands ave 123`                                                     |
 | **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                              |
+| **Gather** | `gather FINANCIAL_PLAN_NAME` <br> e.g., `gather Basic Insurance Plan`                                                                                                                                                   |
 | **List**   | `list`                                                                                                                                                                                                                  |
 | **Help**   | `help`                                                                                                                                                                                                                  |
 | **Sort**   | `sort`                                                                                                                                                                                                                  |
