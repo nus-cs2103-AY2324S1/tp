@@ -5,10 +5,13 @@ import java.io.FileNotFoundException;
 
 import javafx.scene.image.Image;
 
+/**
+ * Represents displayed photo of a contact in the address book.
+ */
 public class Avatar {
 
-    private String path;
     private static final String DEFAULT_PATH = "/images/default_photo.png";
+    private String path;
 
     public Avatar() {
         this.path = DEFAULT_PATH;
@@ -39,3 +42,4 @@ public class Avatar {
         return path;
     }
 }
+

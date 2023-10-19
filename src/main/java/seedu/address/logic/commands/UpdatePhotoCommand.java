@@ -22,6 +22,9 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Tag;
 
+/**
+ * Updates the photo of an existing contact in the address book.
+ */
 public class UpdatePhotoCommand extends Command {
 
     public static final String COMMAND_WORD = "updatephoto";
@@ -29,6 +32,13 @@ public class UpdatePhotoCommand extends Command {
     private final int zeroBasedIdx;
     private final String path;
 
+    /**
+     * Creates an UpdatePhotoCommand to replace the current photo
+     * of a specific contact by the photo given by the path.
+     *
+     * @param idx one-based index of the contact to update photo
+     * @param path String path to the photo to be used
+     */
     public UpdatePhotoCommand(int idx, String path) {
         zeroBasedIdx = idx - 1;
         this.path = path;
@@ -70,4 +80,5 @@ public class UpdatePhotoCommand extends Command {
                 linkedin, secondaryEmail, telegram, updatedTags, id, new Avatar(path), notes);
     }
 }
+
 
