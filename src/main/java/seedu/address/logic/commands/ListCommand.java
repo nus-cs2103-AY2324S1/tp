@@ -49,7 +49,6 @@ public class ListCommand extends Command {
         if (sortingComparator != null) {
             model.sortPersonList(sortingComparator);
         }
-        model.sortPersonList(sortingComparator);
 
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
