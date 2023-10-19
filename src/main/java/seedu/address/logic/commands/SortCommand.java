@@ -25,7 +25,7 @@ public class SortCommand extends Command {
     private Comparator<Person> personComparator;
 
     /**
-     * Constructor for SortCommand, takes in parameters specifying the sort required.
+     * Constructor for SortCommand, creates a comparator to sort by Person's full name.
      */
     public SortCommand() {
         this.personComparator = (o1, o2) -> {

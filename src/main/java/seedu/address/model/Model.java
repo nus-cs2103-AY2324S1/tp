@@ -103,8 +103,8 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
-     * Sorts the filtered person list by the given {@code predicate}.
-     * @throws NullPointerException if {@code predicate} is null.
+     * Sorts the filtered person list by the given {@code comparator}.
+     * @throws NullPointerException if {@code comparator} is null.
      */
     void sortPersonList(Comparator<Person> personComparator);
 }
