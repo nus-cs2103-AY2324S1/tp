@@ -25,7 +25,7 @@ public enum StatusTypes {
      * @param input The string status to be checked for validity.
      * @return {@code true} if the status is valid, {@code false} otherwise.
      */
-    public static boolean isValidStatusType(String input){
+    public static boolean isValidStatusType(String input) {
         return input.equals("interviewed") || input.equals("preliminary")
                 || input.equals("rejected")
                 || input.equals("offered");

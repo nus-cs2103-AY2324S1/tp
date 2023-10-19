@@ -68,11 +68,9 @@ public class ParserUtil {
             return StatusTypes.REJECTED;
         case "preliminary":
             return StatusTypes.PRELIMINARY;
-        case "default":
+        default:
             throw new ParseException("e");
         }
-        return StatusTypes.PRELIMINARY;
-
     }
 
     /**
