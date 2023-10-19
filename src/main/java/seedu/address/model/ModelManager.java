@@ -13,6 +13,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.band.Band;
 import seedu.address.model.musician.Musician;
+import seedu.address.model.musician.MusicianInBandPredicate;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -161,14 +162,10 @@ public class ModelManager implements Model {
         filteredMusicians.setPredicate(predicate);
     }
 
-    /**
-     * Updates the {@code FilteredMusicianList} to contain all musicians in the {@code FilteredBands}.
-     */
-    public void updateFilteredMusicianListFromBands() {
-        requireNonNull(filteredBands);
-        for (Band b : filteredBands) {
-            filteredMusicians.addAll(b.getMusicians());
-        }
+    @Override
+    public void updateFilteredMusicianList(int bandIndex) {
+        Predicate<Musician> predicate = new MusicianInBandPredicate(filteredBands.get(bandIndex));
+        filteredMusicians.setPredicate(predicate);
     }
 
     //=========== Filtered Band List Accessors =============================================================
