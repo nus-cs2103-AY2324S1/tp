@@ -15,7 +15,6 @@ public class ViewApplicantsCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
-        //TODO implement this
         requireNonNull(model);
         model.updateFilteredApplicantList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(MESSAGE_SUCCESS);

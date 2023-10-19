@@ -13,7 +13,6 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Applicant;
 import seedu.address.model.person.Member;
-import seedu.address.model.person.Person;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -23,7 +22,6 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
     private final FilteredList<Member> filteredMembers;
     private final FilteredList<Applicant> filteredApplicants;
 
@@ -37,7 +35,6 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredMembers = new FilteredList<>(this.addressBook.getMemberList());
         filteredApplicants = new FilteredList<>(this.addressBook.getApplicantList());
     }
@@ -94,12 +91,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
-    }
-
-    @Override
     public boolean hasMember(Member member) {
         requireNonNull(member);
         return addressBook.hasMember(member);
@@ -109,11 +100,6 @@ public class ModelManager implements Model {
     public boolean hasApplicant(Applicant applicant) {
         requireNonNull(applicant);
         return addressBook.hasApplicant(applicant);
-    }
-
-    @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
     }
 
     @Override
@@ -127,15 +113,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-    }
-
-    @Override
     public void addMember(Member member) {
         addressBook.addMember(member);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        updateFilteredMemberList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
@@ -145,10 +125,10 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
+    public void setMember(Member target, Member editedMember) {
+        requireAllNonNull(target, editedMember);
 
-        addressBook.setPerson(target, editedPerson);
+        addressBook.setMember(target, editedMember);
     }
 
     @Override
@@ -158,26 +138,10 @@ public class ModelManager implements Model {
         addressBook.setApplicant(target, editedApplicant);
     }
 
-    @Override
-    public void setMember(Member target, Member editedMember) {
-        requireAllNonNull(target, editedMember);
-
-        addressBook.setMember(target, editedMember);
-    }
-
     //=========== Filtered Person List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
-     */
-    @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
-    }
-
-    /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Member} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
@@ -195,13 +159,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
-        requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
-    }
-
-    @Override
-    public void updateFilteredMembersList(Predicate<? super Member> predicate) {
+    public void updateFilteredMemberList(Predicate<? super Member> predicate) {
         requireNonNull(predicate);
         filteredMembers.setPredicate(predicate);
     }
@@ -226,7 +184,8 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredMembers.equals(otherModelManager.filteredMembers)
+                && filteredApplicants.equals(otherModelManager.filteredApplicants);
     }
 
 }
