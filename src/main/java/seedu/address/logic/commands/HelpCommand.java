@@ -96,4 +96,23 @@ public class HelpCommand extends Command {
             throw new CommandException("Unexpected input");
         }
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof HelpCommand)) {
+            return false;
+        }
+
+        HelpCommand otherHelpCommand = (HelpCommand) other;
+
+        boolean showAllIsEqual = willShowAll == otherHelpCommand.willShowAll;
+        boolean isRecognizableIsEqual = isRecognizable == otherHelpCommand.isRecognizable;
+        boolean toShowIsEqual = toShow.equals(otherHelpCommand.toShow);
+        return showAllIsEqual && isRecognizableIsEqual && toShowIsEqual;
+    }
 }

@@ -53,7 +53,7 @@ public class HelpCommandParser implements Parser<HelpCommand> {
 
             double maxScore = Collections.max(similarityScores);
 
-            if (maxScore < 0.5) {
+            if (maxScore < 0.25) {
                 return new HelpCommand(false);
             }
 
