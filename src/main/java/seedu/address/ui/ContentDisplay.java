@@ -45,6 +45,9 @@ public class ContentDisplay extends UiPart<Region> {
             clientProfilePanel = new ClientProfilePanel(newValue);
             clientProfilePanelPlaceholder.getChildren().clear();
             clientProfilePanelPlaceholder.getChildren().add(clientProfilePanel.getRoot());
+
+            // set focus within the list if the change is from a `view` command
+            personListView.getSelectionModel().select(newValue);
         });
     }
 
