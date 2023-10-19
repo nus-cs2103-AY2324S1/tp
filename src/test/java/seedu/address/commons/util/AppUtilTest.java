@@ -5,11 +5,14 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-public class AppUtilTest {
+import seedu.address.ui.UiManager;
 
+
+
+public class AppUtilTest {
     @Test
-    public void getImage_exitingImage() {
-        assertNotNull(AppUtil.getImage("/images/address_book_32.png"));
+    public void getImage_appIconNotNull() {
+        assertNotNull(AppUtil.getImage(UiManager.PATH_APP_ICON));
     }
 
     @Test
