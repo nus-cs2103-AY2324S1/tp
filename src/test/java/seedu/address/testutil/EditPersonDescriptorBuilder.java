@@ -8,6 +8,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.FreeTime;
+import seedu.address.model.person.Hour;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -108,6 +109,14 @@ public class EditPersonDescriptorBuilder {
         return this;
     }
 
+    /**
+     * Parses the {@code hour}  and set it to the {@code EditPersonDescriptor}
+     * that we are building.
+     */
+    public EditPersonDescriptorBuilder withHour(String hour) {
+        descriptor.setHour(new Hour(hour));
+        return this;
+    }
     public EditPersonDescriptor build() {
         return descriptor;
     }

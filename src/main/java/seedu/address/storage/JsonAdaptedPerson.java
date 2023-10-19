@@ -13,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.FreeTime;
+import seedu.address.model.person.Hour;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -36,6 +37,7 @@ class JsonAdaptedPerson {
     private final String to;
 
     private final List<JsonAdaptedMod> mods = new ArrayList<>();
+    private final String hour;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -45,7 +47,8 @@ class JsonAdaptedPerson {
             @JsonProperty("email") String email, @JsonProperty("telegram") String telegram,
             @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("from") String from,
             @JsonProperty("to") String to,
-            @JsonProperty("mods") List<JsonAdaptedMod> mods) {
+            @JsonProperty("mods") List<JsonAdaptedMod> mods,
+            @JsonProperty("hour") String hour) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -58,6 +61,7 @@ class JsonAdaptedPerson {
         if (mods != null) {
             this.mods.addAll(mods);
         }
+        this.hour = hour;
     }
 
     /**
@@ -76,6 +80,7 @@ class JsonAdaptedPerson {
         mods.addAll(source.getMods().stream()
                 .map(JsonAdaptedMod::new)
                 .collect(Collectors.toList()));
+        hour = source.getHour().value;
     }
 
     /**
@@ -143,7 +148,16 @@ class JsonAdaptedPerson {
         }
 
         final Set<Mod> modelMods = new HashSet<>(personMods);
-        return new Person(modelName, modelPhone, modelEmail, modelTelegram, modelTags, modelFreeTime, modelMods);
+
+        if (hour == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Hour.class.getSimpleName()));
+        }
+        if (!Hour.isValidHour(hour)) {
+            throw new IllegalValueException(Hour.MESSAGE_CONSTRAINTS);
+        }
+        final Hour modelHour = new Hour(hour);
+        return new Person(modelName, modelPhone, modelEmail, modelTelegram, modelTags,
+                modelFreeTime, modelMods, modelHour);
     }
 
 }
