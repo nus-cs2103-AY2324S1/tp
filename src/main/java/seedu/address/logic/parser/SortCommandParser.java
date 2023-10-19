@@ -8,13 +8,13 @@ import seedu.address.model.person.SortByAppointmentComparator;
 import seedu.address.model.person.SortByNameComparator;
 
 /**
- * Parses input arguments and creates a new FindCommand object
+ * Parses input arguments and creates a new SortCommand object
  */
 public class SortCommandParser implements Parser<SortCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the FindCommand
-     * and returns a FindCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the SortCommand
+     * and returns a SortCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public SortCommand parse(String args) throws ParseException {
@@ -22,13 +22,13 @@ public class SortCommandParser implements Parser<SortCommand> {
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
-        } else if (trimmedArgs.equals("sort")) {
+        } else if (trimmedArgs.equals("sort")) { //sort name by lexicographical order
             return new SortCommand(new SortByNameComparator());
-        } else if (trimmedArgs.equals("appointment")){
+        } else if (trimmedArgs.equals("appointment")){ //sort appointments by time
             return new SortCommand(new SortByAppointmentComparator());
         } else {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.INVALID_COMMAND));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
     }
 }

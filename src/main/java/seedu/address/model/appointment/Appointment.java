@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 /**
  * Represents an Appointment in the address book.
  */
-public class Appointment {
+public class Appointment implements Comparable<Appointment> {
     public static final String MESSAGE_CONSTRAINTS = "Input Date should be in format of dd-MM-yyyy HH:mm";
     public static final String MESSAGE_DATE_CONSTRAINTS = "Invalid date or time given";
     public static final String MESSAGE_APT_CONSTRAINTS = "Invalid appointment string. "
@@ -94,7 +94,12 @@ public class Appointment {
         return new Appointment(valueField, parseAppointmentDate(dateField));
     }
 
+    @Override
     public int compareTo(Appointment appointment) {
-        return this.date.compareTo(appointment.date);
+        if(appointment instanceof NullAppointment) {
+            return 0;
+        } else {
+            return this.date.compareTo(appointment.date);
+        }
     }
 }

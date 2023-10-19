@@ -26,4 +26,9 @@ public class NullAppointment extends Appointment {
 
         return true;
     }
+
+    @Override
+    public int compareTo(Appointment appointment) {
+        return 1;
+    }
 }

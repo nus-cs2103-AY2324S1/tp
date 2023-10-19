@@ -6,7 +6,6 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.SortByNameComparator;
 
 import java.util.Comparator;
 
@@ -18,14 +17,19 @@ public class SortCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts the current list based on alphabetical "
-            + "order and displays the sorted list back.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
-    public static final Object INVALID_COMMAND = COMMAND_WORD + ": MESSAGE TO BE WRITTEN LATER";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts the current list based currently available "
+            + "sort functions.\n"
+            + "Currently available sorting variations: \n"
+            + "-sort (lexicographical name sort)\n -appointment (earliest timing first)\n"
+            + "Parameters: sort [variation]...\n"
+            + "Example: sort sort";
 
     private Comparator<Person> comparator;
 
+    /**
+     * Default constructor for a SortCommand.
+     * @param comparator comparator to be used to sort the list.
+     */
     public SortCommand(Comparator<Person> comparator) {
         this.comparator = comparator;
     }

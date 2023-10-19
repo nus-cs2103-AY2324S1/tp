@@ -33,7 +33,7 @@ public class TypicalPersons {
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253").withNextOfKinName("Alice Dad").withNextOfKinPhone("94351111")
             .withFinancialPlans("Sample Financial Plan 1", "Sample Financial Plan 2")
-            .withTags("friends").build();
+            .withTags("friends").withAppointment("test, 11-11-2023 00:00").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25").withEmail("johnd@example.com")
             .withPhone("98765432").withNextOfKinName("Benson Dad").withNextOfKinPhone("98761111")
@@ -42,7 +42,8 @@ public class TypicalPersons {
 
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withNextOfKinName("Carl Dad")
-            .withNextOfKinPhone("95351111").withAddress("wall street").build();
+            .withNextOfKinPhone("95351111").withAddress("wall street")
+            .withAppointment("Review insurance, 01-05-2023 07:00").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street").withNextOfKinName("Daniel Dad")
             .withNextOfKinPhone("87651111").withTags("friends").build();

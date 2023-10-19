@@ -5,8 +5,8 @@ import java.util.Comparator;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Compares a {@code Person}'s {@code Name} to another {@code Person}'s {@code Name} to determine
- * appointment ordering of the names.
+ * Compares a {@code Person}'s {@code Appointment} to another {@code Person}'s {@code Appointment} to determine
+ * appointment ordering.
  */
 public class SortByAppointmentComparator implements Comparator<Person> {
 
