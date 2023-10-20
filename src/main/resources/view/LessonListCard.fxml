@@ -40,7 +40,7 @@
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
         </Label>
-      </VBox>  
+      </VBox>
 <!--      <FlowPane fx:id="tags" />-->
     </VBox>
       <rowConstraints>

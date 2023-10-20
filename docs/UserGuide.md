@@ -124,10 +124,10 @@ Here is the list of students:
 Here is the list of students:
 1. Leah
    Subjects: Chemistry, Math
-   Phone Number: 98765432 
+   Phone Number: 98765432
 2. John
    Subjects: Math, Biology
-   Phone Number: 98125132 
+   Phone Number: 98125132
 3. Adam
    Subjects: Physics
    Phone Number: 98777732

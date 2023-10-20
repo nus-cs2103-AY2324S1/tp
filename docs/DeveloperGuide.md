@@ -316,7 +316,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use case: Install the app [UC01]
 
-MSS 
+MSS
 1. User executes the installation package
 2. The app asks to continue or cancel the installation
 3. User responds by indicating continue
@@ -368,7 +368,7 @@ Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty (No students added). 
+* 2a. The list is empty (No students added).
       Use case ends.
 * 3a. The given index is invalid.
   * 3a1. TutorMate shows an error message.
@@ -425,7 +425,7 @@ Extensions
     * Steps 2a2 - 2a3 are repeated until the data entered is correct.
     * Use case resumes from step 2.
 
-    
+
 ### Use case: See a day's schedule [UC07]
 
 **MSS**
