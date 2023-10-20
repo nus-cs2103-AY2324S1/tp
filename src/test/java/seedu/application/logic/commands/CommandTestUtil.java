@@ -6,7 +6,7 @@ import static seedu.application.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_STATUS;
-import static seedu.application.model.job.Role.ROLE_FIND_SPECIFIER;
+import static seedu.application.model.job.Role.ROLE_SPECIFIER;
 import static seedu.application.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -113,7 +113,7 @@ public class CommandTestUtil {
         Job job = model.getFilteredJobList().get(targetIndex.getZeroBased());
         final String[] splitRole = job.getRole().description.split("\\s+");
         model.updateFilteredJobList(
-            new FieldContainsKeywordsPredicate(ROLE_FIND_SPECIFIER, Arrays.asList(splitRole[0])));
+            new FieldContainsKeywordsPredicate(ROLE_SPECIFIER, Arrays.asList(splitRole[0])));
 
         assertEquals(1, model.getFilteredJobList().size());
     }

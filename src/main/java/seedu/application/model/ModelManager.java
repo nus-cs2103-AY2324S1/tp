@@ -11,6 +11,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.application.commons.core.GuiSettings;
 import seedu.application.commons.core.LogsCenter;
 import seedu.application.commons.util.CollectionUtil;
+import seedu.application.model.job.FieldComparator;
 import seedu.application.model.job.Job;
 
 /**
@@ -130,11 +131,14 @@ public class ModelManager implements Model {
 
     //=========== Sorted Job List Accessors =============================================================
 
-    /**
-     * Restores the jobs in {@code applicationBook} to the original unsorted order.
-     */
+    @Override
     public void unsortJobs() {
         applicationBook.unsortJobs();
+    }
+
+    @Override
+    public void sortJobs(FieldComparator comparator) {
+        applicationBook.sortJobs(comparator);
     }
 
     @Override

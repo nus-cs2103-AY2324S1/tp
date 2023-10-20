@@ -6,6 +6,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.application.commons.util.ToStringBuilder;
+import seedu.application.model.job.FieldComparator;
 import seedu.application.model.job.Job;
 import seedu.application.model.job.UniqueJobList;
 
@@ -99,6 +100,14 @@ public class ApplicationBook implements ReadOnlyApplicationBook {
      */
     public void unsortJobs() {
         jobs.unsortJobs();
+    }
+
+    /**
+     * Sorts the jobs in the application book based on the comparator provided.
+     * @param comparator The comparator used to compare 2 jobs.
+     */
+    public void sortJobs(FieldComparator comparator) {
+        jobs.sortJobs(comparator);
     }
 
     //// util methods

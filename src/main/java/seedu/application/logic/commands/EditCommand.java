@@ -34,7 +34,7 @@ public class EditCommand extends Command {
         + "Parameters: INDEX (must be a positive integer) "
         + "[" + PREFIX_ROLE + "ROLE] "
         + "[" + PREFIX_COMPANY + "COMPANY] "
-        + "[" + PREFIX_DEADLINE + "DEADLINE] "
+        + "[" + PREFIX_DEADLINE + "DEADLINE] \n\n"
         + "Example: " + COMMAND_WORD + " 1 "
         + PREFIX_ROLE + "Software Engineer "
         + PREFIX_COMPANY + "Google"

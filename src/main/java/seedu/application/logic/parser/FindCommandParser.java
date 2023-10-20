@@ -1,6 +1,7 @@
 package seedu.application.logic.parser;
 
 import static seedu.application.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.application.logic.Messages.MESSAGE_INVALID_SPECIFIER;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,7 @@ public class FindCommandParser implements Parser<FindCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
      * and returns a FindCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     * @throws ParseException if the user input does not conform to the expected format.
      */
     public FindCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
@@ -31,7 +32,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         String specifier = specifierAndKeywords[0];
         if (!(FieldContainsKeywordsPredicate.isValidSpecifier(specifier))) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_INVALID_SPECIFIER));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_INVALID_SPECIFIER));
         }
 
         return new FindCommand(new FieldContainsKeywordsPredicate(specifier, keywords));
