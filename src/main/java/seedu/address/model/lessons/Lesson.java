@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.Objects;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Subject;
 
 /**
@@ -24,7 +23,7 @@ public class Lesson {
     private ArrayList<String> students;
 
     /**
-     * Constructor for a Lesson Object with one student.
+     * Constructor for a Lesson Object with at least one student.
      * Note: parse the string before giving it to the constructor.
      *
      * @param start The start time of the lesson
@@ -41,13 +40,18 @@ public class Lesson {
         this.students = new ArrayList<>(Arrays.asList(studentNames));
     }
 
+    /**
+     * Alternative constructor for a Lesson Object without subject
+     */
     public Lesson(LocalDateTime start, LocalDateTime end, String... studentNames) {
         requireAllNonNull(start, end);
         this.start = start;
         this.end = end;
         this.students = new ArrayList<>(Arrays.asList(studentNames));
     }
-
+    /**
+     * Alternative constructor for a Lesson Object with an ArrayList of students
+     */
     public Lesson(LocalDateTime start, LocalDateTime end, Subject subject, ArrayList<String> studentNames) {
         requireAllNonNull(start, end, subject);
         this.start = start;
@@ -179,6 +183,11 @@ public class Lesson {
                 && otherLesson.getEnd().equals(getEnd());
     }
 
+    /**
+     * Returns true if both lessons have the same identity and data fields.
+     * @param otherLesson The other lesson to compare with
+     * @return true if the lessons clash
+     */
     public boolean isClashWith(Lesson otherLesson) {
         requireAllNonNull(otherLesson);
         if (otherLesson == this) {
@@ -190,11 +199,21 @@ public class Lesson {
     }
     @Override
     public String toString() {
+        /* this leads to `New lesson added: seedu.address.model.lessons.Lesson
+        {start=2023-10-20T13:40, end=2023-10-20T14:00, subject=null, students=[name1]}`
         return new ToStringBuilder(this)
                 .add("start", start)
                 .add("end", end)
                 .add("subject", subject)
                 .add("students", students)
                 .toString();
+
+        not sure why the above code works for Person but not for Lesson
+        */
+
+        String subjectStr = subject == null
+                             ? ""
+                             : " for " + subject;
+        return "Lesson from " + start + " to " + end + subjectStr + " with " + students;
     }
 }

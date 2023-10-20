@@ -67,9 +67,20 @@ public class ScheduleList implements ReadOnlySchedule {
         return lessons.contains(lesson);
     }
 
+    /**
+     * Returns true if a lesson with the same identity as {@code lesson} exists in the schedule list.
+     */
     public boolean hasLessonClashWith(Lesson lesson) {
         requireNonNull(lesson);
         return lessons.hasLessonClashWith(lesson);
+    }
+
+    /**
+     * Returns the lesson that clashes with {@code lesson} if any. Else returns null.
+     */
+    public Lesson getLessonClashWith(Lesson lesson) {
+        requireNonNull(lesson);
+        return lessons.getLessonClashWith(lesson);
     }
 
     /**

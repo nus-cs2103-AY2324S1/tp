@@ -234,6 +234,16 @@ public class AddCommandTest {
         public boolean sameState(String state) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public boolean hasLessonClashWith(Lesson lesson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Lesson getLessonClashWith(Lesson lesson) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

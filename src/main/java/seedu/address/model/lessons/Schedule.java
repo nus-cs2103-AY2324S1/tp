@@ -66,9 +66,24 @@ public class Schedule implements Iterable<Lesson> {
         return internalSchedule.stream().anyMatch(toCheck::isSameLesson);
     }
 
+    /**
+     * Returns true if the list contains a lesson that clashes with the given argument.
+     * @param toCheck Lesson to check
+     * @return true if the list contains a lesson that clashes with the given argument.
+     */
     public boolean hasLessonClashWith(Lesson toCheck) {
         requireNonNull(toCheck);
         return internalSchedule.stream().anyMatch(toCheck::isClashWith);
+    }
+
+    /**
+     * Returns the lesson that clashes with the given argument.
+     * @param toCheck Lesson to check
+     * @return Lesson that clashes with the given argument.
+     */
+    public Lesson getLessonClashWith(Lesson toCheck) {
+        requireNonNull(toCheck);
+        return internalSchedule.stream().filter(toCheck::isClashWith).findFirst().get();
     }
 
     /**

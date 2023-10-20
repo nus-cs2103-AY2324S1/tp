@@ -169,9 +169,19 @@ public class ModelManager implements Model {
         return scheduleList.hasLesson(lesson);
     }
 
-    public boolean hasLessonClashWith(Lesson lesson){
+    /**
+     * Returns true if a lesson with the same identity as {@code lesson} exists in the schedule list.
+     * @param lesson The lesson to check
+     * @return true if the lessons clash
+     */
+    public boolean hasLessonClashWith(Lesson lesson) {
         requireNonNull(lesson);
         return scheduleList.hasLessonClashWith(lesson);
+    }
+
+    public Lesson getLessonClashWith(Lesson lesson) {
+        requireNonNull(lesson);
+        return scheduleList.getLessonClashWith(lesson);
     }
 
     @Override
