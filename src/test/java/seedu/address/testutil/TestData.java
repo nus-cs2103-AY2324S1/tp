@@ -6,13 +6,15 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.nio.file.Paths;
+import java.util.logging.Level;
 
+import seedu.address.commons.core.Config;
+import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand.EditContactDescriptor;
-import seedu.address.model.ContactsManager;
+import seedu.address.model.Contacts;
+import seedu.address.model.Settings;
 import seedu.address.model.contact.Contact;
 
 /**
@@ -32,7 +34,6 @@ public final class TestData {
         public static final Index FIRST_CONTACT = Index.fromOneBased(1);
         public static final Index SECOND_CONTACT = Index.fromOneBased(2);
         public static final Index THIRD_CONTACT = Index.fromOneBased(3);
-
     }
 
     /**
@@ -164,18 +165,18 @@ public final class TestData {
                             .build();
 
             /**
-             * Returns an {@code ContactsManager} with all the typical contacts.
+             * Returns {@link Contacts} matching typicalContacts.json.
              */
-            public static ContactsManager getTypicalContactsManager() {
-                ContactsManager ab = new ContactsManager();
-                for (seedu.address.model.contact.Contact contact : getTypicalContacts()) {
-                    ab.addContact(contact);
-                }
-                return ab;
-            }
-
-            public static List<seedu.address.model.contact.Contact> getTypicalContacts() {
-                return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+            public static Contacts getTypicalContacts() {
+                Contacts contacts = new Contacts();
+                contacts.add(ALICE);
+                contacts.add(BENSON);
+                contacts.add(CARL);
+                contacts.add(DANIEL);
+                contacts.add(ELLE);
+                contacts.add(FIONA);
+                contacts.add(GEORGE);
+                return contacts;
             }
         }
 
@@ -227,6 +228,30 @@ public final class TestData {
 
     public static final String WHITESPACE = "\t  \r  \n";
     public static final String EXTRA_WORDS = "extra words here";
+
+    /**
+     * Returns {@link Config} matching typicalConfig.json.
+     */
+    public static Config getTypicalConfig() {
+        Config config = new Config();
+        config.setSettingsPath(Paths.get("myFolder", "settings.json"));
+        config.setLogLevel(Level.INFO);
+        return config;
+    }
+
+    /**
+     * Returns {@link Settings} matching typicalSettings.json.
+     */
+    public static Settings getTypicalSettings() {
+        Settings settings = new Settings();
+        settings.setContactsPath(Paths.get("myDocuments/contacts.json"));
+        settings.setGuiSettings(
+            new GuiSettings(1000, 500, 300, 100)
+        );
+        return settings;
+    }
+
+
 
     private TestData() {
         // No instantiation

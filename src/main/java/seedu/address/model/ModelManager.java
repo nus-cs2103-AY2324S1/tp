@@ -1,131 +1,106 @@
 package seedu.address.model;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
-import java.nio.file.Path;
 import java.util.function.Predicate;
-import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.contact.Contact;
 
+
+
 /**
- * Represents the in-memory model of the address book data.
+ * Implementation of the Model component.
  */
 public class ModelManager implements Model {
-    private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
+    /**
+     * {@link Predicate} that always evaluates to true. Using this as the filter
+     * for the filtered contact list will not filter out any {@link Contact}s.
+    */
+    public static final Predicate<Contact> FILTER_NONE = (_contact) -> true;
 
-    private final ContactsManager contactsManager;
-    private final UserPrefs userPrefs;
+    private final Contacts contacts;
+    private final Settings settings;
+
     private final FilteredList<Contact> filteredContacts;
 
     /**
-     * Initializes a ModelManager with the given ContactsManager and userPrefs.
+     * Constructs with default values.
      */
-    public ModelManager(ContactList contactList, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(contactList, userPrefs);
-
-        logger.fine("Initializing with address book: " + contactList + " and user prefs " + userPrefs);
-
-        this.contactsManager = new ContactsManager(contactList);
-        this.userPrefs = new UserPrefs(userPrefs);
-        filteredContacts = new FilteredList<>(this.contactsManager.getContactList());
-    }
-
     public ModelManager() {
-        this(new ContactsManager(), new UserPrefs());
+        this(new Contacts(), new Settings());
     }
 
-    //=========== UserPrefs ==================================================================================
+    /**
+     * Constructs with the specified values.
+     */
+    public ModelManager(ReadOnlyContacts contacts, ReadOnlySettings settings) {
+        this.contacts = new Contacts(contacts);
+        this.settings = new Settings(settings);
 
-    @Override
-    public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
-        requireNonNull(userPrefs);
-        this.userPrefs.resetData(userPrefs);
+        this.filteredContacts = new FilteredList<>(this.contacts.getUnmodifiableList());
     }
 
     @Override
-    public ReadOnlyUserPrefs getUserPrefs() {
-        return userPrefs;
+    public ReadOnlyContacts getContacts() {
+        return this.contacts;
+    }
+
+    /**
+     * Adds the specified {@link Contact}.
+     *
+     * Also resets the contacts filter.
+     */
+    @Override
+    public void addContact(Contact contact) {
+        this.contacts.add(contact);
+
+        this.setContactsFilter(ModelManager.FILTER_NONE);
+    }
+
+    @Override
+    public boolean containsContact(Contact contact) {
+        return this.contacts.contains(contact);
+    }
+
+    @Override
+    public void updateContact(Contact old, Contact updated) {
+        this.contacts.update(old, updated);
+    }
+
+    @Override
+    public void removeContact(Contact contact) {
+        this.contacts.remove(contact);
+    }
+
+    @Override
+    public void removeAllContacts() {
+        this.contacts.removeAll();
+    }
+
+    @Override
+    public Settings getSettings() {
+        return this.settings;
     }
 
     @Override
     public GuiSettings getGuiSettings() {
-        return userPrefs.getGuiSettings();
+        return this.settings.getGuiSettings();
     }
 
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
-        requireNonNull(guiSettings);
-        userPrefs.setGuiSettings(guiSettings);
+        this.settings.setGuiSettings(guiSettings);
     }
 
     @Override
-    public Path getConTextFilePath() {
-        return userPrefs.getConTextFilePath();
+    public void setContactsFilter(Predicate<Contact> predicate) {
+        this.filteredContacts.setPredicate(predicate);
     }
 
-    @Override
-    public void setContactsManagerFilePath(Path conTextFilePath) {
-        requireNonNull(conTextFilePath);
-        userPrefs.setContactsManagerFilePath(conTextFilePath);
-    }
-
-    //=========== ContactsManager ================================================================================
-
-    @Override
-    public void setContactsManager(ContactList contactList) {
-        this.contactsManager.resetData(contactsManager);
-    }
-
-    @Override
-    public ContactList getContactList() {
-        return contactsManager;
-    }
-
-    @Override
-    public boolean hasContact(Contact contact) {
-        requireNonNull(contact);
-        return contactsManager.hasContact(contact);
-    }
-
-    @Override
-    public void deleteContact(Contact target) {
-        contactsManager.removeContact(target);
-    }
-
-    @Override
-    public void addContact(Contact contact) {
-        contactsManager.addContact(contact);
-        updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
-    }
-
-    @Override
-    public void setContact(Contact target, Contact editedContact) {
-        requireAllNonNull(target, editedContact);
-
-        contactsManager.setContact(target, editedContact);
-    }
-
-    //=========== Filtered Contact List Accessors =============================================================
-
-    /**
-     * Returns an unmodifiable view of the list of {@code Contact} backed by the internal list of
-     * {@code versionedConText}
-     */
     @Override
     public ObservableList<Contact> getFilteredContactList() {
-        return filteredContacts;
-    }
-
-    @Override
-    public void updateFilteredContactList(Predicate<Contact> predicate) {
-        requireNonNull(predicate);
-        filteredContacts.setPredicate(predicate);
+        return this.filteredContacts;
     }
 
     @Override
@@ -134,15 +109,14 @@ public class ModelManager implements Model {
             return true;
         }
 
-        // instanceof handles nulls
+        // instanceof also handles nulls
         if (!(other instanceof ModelManager)) {
             return false;
         }
+        ModelManager otherManager = (ModelManager)other;
 
-        ModelManager otherModelManager = (ModelManager) other;
-        return contactsManager.equals(otherModelManager.contactsManager)
-                && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredContacts.equals(otherModelManager.filteredContacts);
+        return this.contacts.equals(otherManager.contacts)
+                && this.settings.equals(otherManager.settings)
+                && this.filteredContacts.equals(otherManager.filteredContacts);
     }
-
 }

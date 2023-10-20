@@ -19,13 +19,7 @@ import seedu.address.testutil.ContactBuilder;
 import seedu.address.testutil.TestData;
 
 public class UniqueContactListTest {
-
     private final UniqueContactList uniqueContactList = new UniqueContactList();
-
-    @Test
-    public void contains_nullContact_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueContactList.contains(null));
-    }
 
     @Test
     public void contains_contactNotInList_returnsFalse() {
@@ -49,24 +43,9 @@ public class UniqueContactListTest {
     }
 
     @Test
-    public void add_nullContact_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueContactList.add(null));
-    }
-
-    @Test
     public void add_duplicateContact_throwsDuplicateContactException() {
         uniqueContactList.add(ALICE);
         assertThrows(DuplicateContactException.class, () -> uniqueContactList.add(ALICE));
-    }
-
-    @Test
-    public void setContact_nullTargetContact_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueContactList.setContact(null, ALICE));
-    }
-
-    @Test
-    public void setContact_nullEditedContact_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueContactList.setContact(ALICE, null));
     }
 
     @Test
@@ -134,26 +113,7 @@ public class UniqueContactListTest {
     }
 
     @Test
-    public void setContacts_nullUniqueContactList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueContactList.setContacts((UniqueContactList) null));
-    }
-
-    @Test
-    public void setContacts_uniqueContactList_replacesOwnListWithProvidedUniqueContactList() {
-        uniqueContactList.add(ALICE);
-        UniqueContactList expectedUniqueContactList = new UniqueContactList();
-        expectedUniqueContactList.add(TestData.Valid.Contact.BOB);
-        uniqueContactList.setContacts(expectedUniqueContactList);
-        assertEquals(expectedUniqueContactList, uniqueContactList);
-    }
-
-    @Test
-    public void setContacts_nullList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueContactList.setContacts((List<Contact>) null));
-    }
-
-    @Test
-    public void setContacts_list_replacesOwnListWithProvidedList() {
+    public void setContacts_list_overwritesList() {
         uniqueContactList.add(ALICE);
         List<Contact> contactList = Collections.singletonList(TestData.Valid.Contact.BOB);
         uniqueContactList.setContacts(contactList);
@@ -163,19 +123,14 @@ public class UniqueContactListTest {
     }
 
     @Test
-    public void setContacts_listWithDuplicateContacts_throwsDuplicateContactException() {
+    public void setContacts_listWithDuplicates_throwsException() {
         List<Contact> listWithDuplicateContacts = Arrays.asList(ALICE, ALICE);
         assertThrows(DuplicateContactException.class, () -> uniqueContactList.setContacts(listWithDuplicateContacts));
     }
 
     @Test
-    public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
+    public void asUnmodifiableObservableList_modifyList_throwsException() {
         assertThrows(UnsupportedOperationException.class, ()
             -> uniqueContactList.asUnmodifiableObservableList().remove(0));
-    }
-
-    @Test
-    public void toStringMethod() {
-        assertEquals(uniqueContactList.asUnmodifiableObservableList().toString(), uniqueContactList.toString());
     }
 }

@@ -5,41 +5,35 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataLoadingException;
-import seedu.address.model.ContactList;
+import seedu.address.model.Contacts;
+import seedu.address.model.ReadOnlyContacts;
+
+
 
 /**
- * Represents a storage for {@link seedu.address.model.ContactsManager}.
+ * Represents a storage for {@link Contacts}.
  */
 public interface ContactsStorage {
-
     /**
-     * Returns the file path of the data file.
+     * Returns the {@link Path} of the contacts storage file.
      */
-    Path getConTextFilePath();
+    public Path getContactsPath();
 
     /**
-     * Returns ContactsManager data as a {@link ContactList}.
-     * Returns {@code Optional.empty()} if storage file is not found.
+     * Returns {@link Optional} {@link Contacts} by reading the contacts
+     * storage file.
      *
-     * @throws DataLoadingException if loading the data from storage failed.
+     * If no file is found, returns {@link Optional.empty} instead.
+     *
+     * @throws DataLoadingException If loading data from the file fails.
      */
-    Optional<ContactList> readContactsManager() throws DataLoadingException;
+    public Optional<Contacts> readContacts() throws DataLoadingException;
 
     /**
-     * @see #getConTextFilePath()
+     * Saves the specified {@link ReadOnlyContacts} to the contacts storage
+     * file.
+     *
+     * @throws IOException If writing data to the file fails.
      */
-    Optional<ContactList> readContactsManager(Path filePath) throws DataLoadingException;
-
-    /**
-     * Saves the given {@link ContactList} to the storage.
-     * @param contactList cannot be null.
-     * @throws IOException if there was any problem writing to the file.
-     */
-    void saveContactsManager(ContactList contactList) throws IOException;
-
-    /**
-     * @see #saveContactsManager(ContactList)
-     */
-    void saveContactsManager(ContactList contactList, Path filePath) throws IOException;
-
+    public void saveContacts(ReadOnlyContacts contacts) throws IOException;
 }

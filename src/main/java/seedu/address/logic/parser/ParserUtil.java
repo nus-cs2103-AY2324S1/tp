@@ -45,7 +45,7 @@ public class ParserUtil {
     public static Name parseName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
-        if (!Name.isValidName(trimmedName)) {
+        if (!Name.isValid(trimmedName)) {
             throw new ParseException(Messages.MESSAGE_NAME_CONSTRAINTS);
         }
         return new Name(trimmedName);
@@ -60,7 +60,7 @@ public class ParserUtil {
     public static Phone parsePhone(String phone) throws ParseException {
         requireNonNull(phone);
         String trimmedPhone = phone.trim();
-        if (!Phone.isValidPhone(trimmedPhone)) {
+        if (!Phone.isValid(trimmedPhone)) {
             throw new ParseException(Messages.MESSAGE_PHONE_CONSTRAINTS);
         }
         return new Phone(trimmedPhone);
@@ -75,8 +75,8 @@ public class ParserUtil {
     public static Email parseEmail(String email) throws ParseException {
         requireNonNull(email);
         String trimmedEmail = email.trim();
-        if (!Email.isValidEmail(trimmedEmail)) {
-            throw new ParseException(Messages.MESSAGE_EMAIL_CONSTRAINTS);
+        if (!Email.isValid(trimmedEmail)) {
+            throw new ParseException(Messages.EMAIL_INVALID);
         }
         return new Email(trimmedEmail);
     }
@@ -105,7 +105,7 @@ public class ParserUtil {
     public static Tag parseTag(String tagName) throws ParseException {
         String trimmed = tagName.trim();
 
-        if (!Tag.isValidName(trimmed)) {
+        if (!Tag.isValid(trimmed)) {
             throw new ParseException(
                 Messages.tagInvalid(trimmed)
             );

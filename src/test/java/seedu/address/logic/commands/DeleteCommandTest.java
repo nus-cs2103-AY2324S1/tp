@@ -8,7 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showContactAtIndex;
 import static seedu.address.testutil.TestData.IndexContact.FIRST_CONTACT;
 import static seedu.address.testutil.TestData.IndexContact.SECOND_CONTACT;
-import static seedu.address.testutil.TestData.Valid.Contact.getTypicalContactsManager;
+import static seedu.address.testutil.TestData.Valid.Contact.getTypicalContacts;
 
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +16,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
+import seedu.address.model.Settings;
 import seedu.address.model.contact.Contact;
 
 /**
@@ -25,7 +25,7 @@ import seedu.address.model.contact.Contact;
  */
 public class DeleteCommandTest {
 
-    private Model model = new ModelManager(getTypicalContactsManager(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalContacts(), new Settings());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -35,8 +35,8 @@ public class DeleteCommandTest {
         String expectedMessage = String.format(Messages.MESSAGE_DELETE_COMMAND_SUCCESS,
                 Contact.format(contactToDelete));
 
-        ModelManager expectedModel = new ModelManager(model.getContactList(), new UserPrefs());
-        expectedModel.deleteContact(contactToDelete);
+        ModelManager expectedModel = new ModelManager(model.getContacts(), new Settings());
+        expectedModel.removeContact(contactToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
@@ -59,8 +59,8 @@ public class DeleteCommandTest {
         String expectedMessage = String.format(Messages.MESSAGE_DELETE_COMMAND_SUCCESS,
                 Contact.format(contactToDelete));
 
-        Model expectedModel = new ModelManager(model.getContactList(), new UserPrefs());
-        expectedModel.deleteContact(contactToDelete);
+        Model expectedModel = new ModelManager(model.getContacts(), new Settings());
+        expectedModel.removeContact(contactToDelete);
         showNoContact(expectedModel);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
@@ -72,7 +72,7 @@ public class DeleteCommandTest {
 
         Index outOfBoundIndex = SECOND_CONTACT;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getContactList().getContactList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getContacts().getUnmodifiableList().size());
 
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
@@ -113,7 +113,7 @@ public class DeleteCommandTest {
      * Updates {@code model}'s filtered list to show no one.
      */
     private void showNoContact(Model model) {
-        model.updateFilteredContactList(p -> false);
+        model.setContactsFilter(p -> false);
 
         assertTrue(model.getFilteredContactList().isEmpty());
     }

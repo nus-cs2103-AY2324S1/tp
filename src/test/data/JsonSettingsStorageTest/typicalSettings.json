@@ -1,4 +1,6 @@
 {
+  "_comment": "//NOTE This should match TestData.getTypicalSettings().",
+  "contactsPath" : "myDocuments/contacts.json",
   "guiSettings" : {
     "windowWidth" : 1000.0,
     "windowHeight" : 500.0,
@@ -6,6 +8,5 @@
       "x" : 300,
       "y" : 100
     }
-  },
-  "ConTextFilePath" : "ConText.json"
+  }
 }

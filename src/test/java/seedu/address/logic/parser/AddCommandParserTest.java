@@ -1,6 +1,5 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
@@ -30,8 +29,6 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.contact.Contact;
 import seedu.address.testutil.ContactBuilder;
 import seedu.address.testutil.TestData;
-
-
 
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
@@ -129,7 +126,7 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+        String expectedMessage = Messages.commandInvalidFormat(AddCommand.MESSAGE_USAGE);
 
         // missing name prefix
         assertParseFailure(parser, NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + NOTE_DESC_BOB,
@@ -164,7 +161,7 @@ public class AddCommandParserTest {
 
         // invalid email
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC + NOTE_DESC_BOB
-                + TestData.Valid.Tag.FLAG_ALPHANUMERIC, Messages.MESSAGE_EMAIL_CONSTRAINTS);
+                + TestData.Valid.Tag.FLAG_ALPHANUMERIC, Messages.EMAIL_INVALID);
 
         // invalid tag
         assertParseFailure(
@@ -184,6 +181,6 @@ public class AddCommandParserTest {
         // non-empty preamble
         assertParseFailure(parser, TestData.EXTRA_WORDS + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + NOTE_DESC_BOB + TestData.Valid.Tag.FLAG_ALPHANUMERIC,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+                Messages.commandInvalidFormat(AddCommand.MESSAGE_USAGE));
     }
 }

@@ -7,18 +7,20 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.contact.NameContainsKeywordsPredicate;
 
+
+
 /**
- * Finds and lists all contacts in address book whose name contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Finds and lists {@link Contact}s whose names match any of the specified
+ * words in full. Case insensitive.
  */
 public class FindCommand extends Command {
-
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all contacts whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Finds and lists all contacts whose names match any of the"
+            + " specified words in full. Case insensitive."
+            + "\nParameters: KEYWORD [MORE_KEYWORDS]..."
+            + "\nExample: " + COMMAND_WORD + " alice bob charlie";
 
     private final NameContainsKeywordsPredicate predicate;
 
@@ -29,7 +31,7 @@ public class FindCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredContactList(predicate);
+        model.setContactsFilter(predicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_CONTACTS_LISTED_OVERVIEW, model.getFilteredContactList().size()));
     }

@@ -4,8 +4,7 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.address.model.ContactList;
-import seedu.address.model.ContactsManager;
+import seedu.address.model.Contacts;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.Email;
 import seedu.address.model.contact.Name;
@@ -13,11 +12,15 @@ import seedu.address.model.contact.Note;
 import seedu.address.model.contact.Phone;
 import seedu.address.model.tag.Tag;
 
+
+
 /**
- * Contains utility methods for populating {@code ContactsManager} with sample data.
+ * Contains utility methods for working with sample {@link Contact}s.
  */
-public class SampleDataUtil {
-    public static Contact[] getSampleContacts() {
+public class SampleContactsUtil {
+    private static Contact[] getSampleContactsArray() {
+        //TODO access these from a production data file. Help command text could reuse these valid data strings
+        // Ensure test JSONs are also updated
         return new Contact[] {
             new Contact(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Note("CS2103 tutorial mate."),
@@ -40,16 +43,8 @@ public class SampleDataUtil {
         };
     }
 
-    public static ContactList getSampleContactsManager() {
-        ContactsManager sampleAb = new ContactsManager();
-        for (Contact sampleContact : getSampleContacts()) {
-            sampleAb.addContact(sampleContact);
-        }
-        return sampleAb;
-    }
-
     /**
-     * Returns a tag set containing the list of strings given.
+     * Returns a {@link Set} of {@link Tag}s for the specified strings.
      */
     public static Set<Tag> getTagSet(String... strings) {
         return Arrays.stream(strings)
@@ -57,4 +52,14 @@ public class SampleDataUtil {
                 .collect(Collectors.toSet());
     }
 
+    /**
+     * Returns a {@link Contacts} instance populated with sample {@link Contact}s.
+     */
+    public static Contacts getSampleContacts() {
+        Contacts contacts = new Contacts();
+        for (Contact contact : getSampleContactsArray()) {
+            contacts.add(contact);
+        }
+        return contacts;
+    }
 }

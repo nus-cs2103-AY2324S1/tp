@@ -1,59 +1,60 @@
 package seedu.address.model.tag;
 
 import seedu.address.model.contact.Contact;
+import seedu.address.model.contact.Name;
 
 
 
 /**
- * Represents a {@link Contact}'s Tag.
+ * Immutably represents a {@link Contact}'s tag.
  *
- * A Tag must be an alphanumeric string but may contain spaces.
+ * Constructor arguments must be valid as determined by
+ * {@link #isValid(String)}.
  */
 public final class Tag {
-    public final String name;
+    public final String value;
 
     /**
-     * Returns whether the specified name is valid for constructing a Tag.
+     * Returns whether the specified value is valid.
      *
-     * @param name Name to check.
+     * Tags must be an alphanumeric and may contain spaces, but cannot start with a space.
      */
-    public static boolean isValidName(String name) {
-        return name.matches("[a-zA-Z\\d ]+");
+    public static boolean isValid(String value) {
+        return value.matches(Name.REGEX_VALID);
     }
 
     /**
-     * Constructs a Tag with the specified name.
+     * Constructs with the specified value.
      *
-     * The provided name must already be valid.
-     *
-     * @param _name Valid name.
+     * Constructor arguments must be valid as determined by
+     * {@link #isValid(String)}.
      */
-    public Tag(String _name) {
-        this.name = _name;
+    public Tag(String value) {
+        this.value = value;
     }
 
     @Override
     public String toString() {
-        return this.name;
+        return this.value;
     }
 
     @Override
     public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
         // instanceof also handles nulls
         if (!(other instanceof Tag)) {
             return false;
         }
         Tag otherTag = (Tag)other;
 
-        if (otherTag == this) {
-            return true;
-        }
-
-        return this.name.equals(otherTag.name);
+        return this.value.equals(otherTag.value);
     }
 
     @Override
     public int hashCode() {
-        return this.name.hashCode();
+        return this.value.hashCode();
     }
 }

@@ -1,7 +1,5 @@
 package seedu.address.storage;
 
-import static java.util.Objects.requireNonNull;
-
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
@@ -10,71 +8,61 @@ import java.util.logging.Logger;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.JsonUtil;
-import seedu.address.model.ContactList;
+import seedu.address.commons.util.StringUtil;
+import seedu.address.model.Contacts;
+import seedu.address.model.ReadOnlyContacts;
+
+
 
 /**
- * A class to access ContactsManager data stored as a json file on the hard disk.
+ * Handles reading and saving {@link Contacts} to and from the contacts storage
+ * JSON file.
+ *
+ * Contains an immutable {@link Path}.
  */
 public class JsonContactsStorage implements ContactsStorage {
-
     private static final Logger logger = LogsCenter.getLogger(JsonContactsStorage.class);
 
-    private Path filePath;
+    private final Path path;
 
-    public JsonContactsStorage(Path filePath) {
-        this.filePath = filePath;
-    }
-
-    public Path getConTextFilePath() {
-        return filePath;
+    public JsonContactsStorage(Path path) {
+        this.path = path;
     }
 
     @Override
-    public Optional<ContactList> readContactsManager() throws DataLoadingException {
-        return readContactsManager(filePath);
+    public Path getContactsPath() {
+        return this.path;
     }
 
-    /**
-     * Similar to {@link #readContactsManager()}.
-     *
-     * @param filePath location of the data. Cannot be null.
-     * @throws DataLoadingException if loading the data from storage failed.
-     */
-    public Optional<ContactList> readContactsManager(Path filePath) throws DataLoadingException {
-        requireNonNull(filePath);
-
-        Optional<JsonSerializableContacts> jsonConText = JsonUtil.readJsonFile(
-                filePath, JsonSerializableContacts.class);
-        if (!jsonConText.isPresent()) {
+    @Override
+    public Optional<Contacts> readContacts() throws DataLoadingException {
+        Optional<JsonContacts> jsonContactsOptional = JsonUtil.readJsonFile(
+            this.path,
+            JsonContacts.class
+        );
+        if (!jsonContactsOptional.isPresent()) {
             return Optional.empty();
         }
+        JsonContacts jsonContacts = jsonContactsOptional.get();
 
         try {
-            return Optional.of(jsonConText.get().toModelType());
-        } catch (IllegalValueException ive) {
-            logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
-            throw new DataLoadingException(ive);
+            Contacts contacts = jsonContacts.toModelType();
+            return Optional.of(contacts);
+        } catch (IllegalValueException e) {
+            logger.info(String.format(
+                "Found illegal values after reading contacts storage JSON file."
+                + "\nPath: %s"
+                + "\nDetails: %s",
+                this.path,
+                StringUtil.getDetails(e)
+            ));
+            throw new DataLoadingException(e);
         }
     }
 
     @Override
-    public void saveContactsManager(ContactList contactList) throws IOException {
-        saveContactsManager(contactList, filePath);
+    public void saveContacts(ReadOnlyContacts contacts) throws IOException {
+        JsonUtil.saveJsonFile(new JsonContacts(contacts), this.path);
     }
-
-    /**
-     * Similar to {@link #saveContactsManager(ContactList)}.
-     *
-     * @param filePath location of the data. Cannot be null.
-     */
-    public void saveContactsManager(ContactList contactList, Path filePath) throws IOException {
-        requireNonNull(contactList);
-        requireNonNull(filePath);
-
-        FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableContacts(contactList), filePath);
-    }
-
 }

@@ -8,7 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TestData.Valid.Contact.CARL;
 import static seedu.address.testutil.TestData.Valid.Contact.ELLE;
 import static seedu.address.testutil.TestData.Valid.Contact.FIONA;
-import static seedu.address.testutil.TestData.Valid.Contact.getTypicalContactsManager;
+import static seedu.address.testutil.TestData.Valid.Contact.getTypicalContacts;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -17,15 +17,15 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
+import seedu.address.model.Settings;
 import seedu.address.model.contact.NameContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
-    private Model model = new ModelManager(getTypicalContactsManager(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalContactsManager(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalContacts(), new Settings());
+    private Model expectedModel = new ModelManager(getTypicalContacts(), new Settings());
 
     @Test
     public void equals() {
@@ -59,7 +59,7 @@ public class FindCommandTest {
         String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 0);
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredContactList(predicate);
+        expectedModel.setContactsFilter(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredContactList());
     }
@@ -69,7 +69,7 @@ public class FindCommandTest {
         String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 3);
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredContactList(predicate);
+        expectedModel.setContactsFilter(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredContactList());
     }

@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CONTACTS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -21,6 +20,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.Email;
 import seedu.address.model.contact.Name;
@@ -29,13 +29,14 @@ import seedu.address.model.contact.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing contact in the address book.
+ * Edits an existing {@link Contact}.
  */
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the contact identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Edits the details of the contact identified "
             + "by the index number used in the displayed contact list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
@@ -75,12 +76,12 @@ public class EditCommand extends Command {
         Contact contactToEdit = lastShownList.get(index.getZeroBased());
         Contact editedContact = createEditedContact(contactToEdit, editContactDescriptor);
 
-        if (!contactToEdit.isSameContact(editedContact) && model.hasContact(editedContact)) {
+        if (!contactToEdit.isSameContact(editedContact) && model.containsContact(editedContact)) {
             throw new CommandException(Messages.MESSAGE_COMMAND_DUPLICATE_CONTACT);
         }
 
-        model.setContact(contactToEdit, editedContact);
-        model.updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
+        model.updateContact(contactToEdit, editedContact);
+        model.setContactsFilter(ModelManager.FILTER_NONE);
         return new CommandResult(String.format(Messages.MESSAGE_EDIT_COMMAND_SUCCESS, Contact.format(editedContact)));
     }
 

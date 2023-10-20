@@ -1,5 +1,5 @@
 {
-  "_comment": "ContactsManager save file which contains the same Contact values as in TypicalContacts#getTypicalContactsManager()",
+  "_comment": "//NOTE This should match TestData.getTypicalContacts().",
   "contacts" : [{
     "name" : "Alice Pauline",
     "phone" : "94351253",

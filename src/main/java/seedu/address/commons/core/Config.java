@@ -7,31 +7,23 @@ import java.util.logging.Level;
 
 import seedu.address.commons.util.ToStringBuilder;
 
+
+
 /**
- * Config values used by the app
+ * Configuration for the app, read from a file.
  */
 public class Config {
+    public static final Path DEFAULT_PATH = Paths.get("config.json");
 
-    public static final Path DEFAULT_CONFIG_FILE = Paths.get("config.json");
-
-    // Config values customizable through config file
+    private Path settingsPath = Paths.get("settings.json");
     private Level logLevel = Level.INFO;
-    private Path userPrefsFilePath = Paths.get("preferences.json");
 
-    public Level getLogLevel() {
-        return logLevel;
-    }
-
-    public void setLogLevel(Level logLevel) {
-        this.logLevel = logLevel;
-    }
-
-    public Path getUserPrefsFilePath() {
-        return userPrefsFilePath;
-    }
-
-    public void setUserPrefsFilePath(Path userPrefsFilePath) {
-        this.userPrefsFilePath = userPrefsFilePath;
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("settingsPath", this.settingsPath)
+                .add("logLevel", this.logLevel)
+                .toString();
     }
 
     @Override
@@ -40,27 +32,34 @@ public class Config {
             return true;
         }
 
-        // instanceof handles nulls
+        // instanceof also handles nulls
         if (!(other instanceof Config)) {
             return false;
         }
+        Config otherConfig = (Config)other;
 
-        Config otherConfig = (Config) other;
-        return Objects.equals(logLevel, otherConfig.logLevel)
-                && Objects.equals(userPrefsFilePath, otherConfig.userPrefsFilePath);
+        return Objects.equals(this.settingsPath, otherConfig.settingsPath)
+                && Objects.equals(this.logLevel, otherConfig.logLevel);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(logLevel, userPrefsFilePath);
+        return Objects.hash(this.logLevel, this.settingsPath);
     }
 
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .add("logLevel", logLevel)
-                .add("userPrefsFilePath", userPrefsFilePath)
-                .toString();
+    public Path getSettingsPath() {
+        return this.settingsPath;
     }
 
+    public void setSettingsPath(Path settingsPath) {
+        this.settingsPath = settingsPath;
+    }
+
+    public Level getLogLevel() {
+        return this.logLevel;
+    }
+
+    public void setLogLevel(Level logLevel) {
+        this.logLevel = logLevel;
+    }
 }

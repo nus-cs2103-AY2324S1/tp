@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TestData.Valid.Contact.getTypicalContactsManager;
+import static seedu.address.testutil.TestData.Valid.Contact.getTypicalContacts;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
+import seedu.address.model.Settings;
 import seedu.address.model.contact.Contact;
 import seedu.address.testutil.ContactBuilder;
 
@@ -23,14 +23,14 @@ public class AddCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalContactsManager(), new UserPrefs());
+        model = new ModelManager(getTypicalContacts(), new Settings());
     }
 
     @Test
     public void execute_newContact_success() {
         Contact validContact = new ContactBuilder().build();
 
-        Model expectedModel = new ModelManager(model.getContactList(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getContacts(), new Settings());
         expectedModel.addContact(validContact);
 
         assertCommandSuccess(new AddCommand(validContact), model,
@@ -40,7 +40,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_duplicateContact_throwsCommandException() {
-        Contact contactInList = model.getContactList().getContactList().get(0);
+        Contact contactInList = model.getContacts().getUnmodifiableList().get(0);
         assertCommandFailure(new AddCommand(contactInList), model,
                 Messages.MESSAGE_COMMAND_DUPLICATE_CONTACT);
     }

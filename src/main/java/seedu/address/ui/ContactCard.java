@@ -44,13 +44,13 @@ public class ContactCard extends UiPart<Region> {
         this.contact = contact;
 
         id.setText(displayedIndex + ". ");
-        name.setText(contact.getName().fullName);
+        name.setText(contact.getName().value);
         phone.setText(contact.getPhone().value);
         email.setText(contact.getEmail().value);
-        note.setText(contact.getNote().text);
+        note.setText(contact.getNote().value);
 
         contact.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.name))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.name)));
+                .sorted(Comparator.comparing(tag -> tag.value))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.value)));
     }
 }

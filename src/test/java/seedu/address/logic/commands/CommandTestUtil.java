@@ -10,7 +10,7 @@ import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.ContactsManager;
+import seedu.address.model.Contacts;
 import seedu.address.model.Model;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.NameContainsKeywordsPredicate;
@@ -48,31 +48,36 @@ public class CommandTestUtil {
     }
 
     /**
-     * Executes the given {@code command}, confirms that <br>
-     * - a {@code CommandException} is thrown <br>
-     * - the CommandException message matches {@code expectedMessage} <br>
-     * - the address book, filtered contact list and selected contact in {@code actualModel} remain unchanged
+     * Executes the specified {@link Command}.
+     *
+     * Asserts that a {@link CommandException} is thrown whose messages matches
+     * the specified one.
+     *
+     * Asserts that the {@link Contacts} and filtered contact list in the
+     * {@link Model} remain unchanged.
      */
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        ContactsManager expectedContactsManager = new ContactsManager(actualModel.getContactList());
+        Contacts expectedContacts = new Contacts(actualModel.getContacts());
         List<Contact> expectedFilteredList = new ArrayList<>(actualModel.getFilteredContactList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
-        assertEquals(expectedContactsManager, actualModel.getContactList());
+
+        assertEquals(expectedContacts, actualModel.getContacts());
         assertEquals(expectedFilteredList, actualModel.getFilteredContactList());
     }
     /**
-     * Updates {@code model}'s filtered list to show only the contact at the given {@code targetIndex} in the
-     * {@code model}'s address book.
+     * Updates the specified {@link Model}'s filtered list to show only the
+     * {@link Contact} at the specified {@link Index} in {@link Model}'s
+     * {@link Contacts}.
      */
     public static void showContactAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredContactList().size());
 
         Contact contact = model.getFilteredContactList().get(targetIndex.getZeroBased());
-        final String[] splitName = contact.getName().fullName.split("\\s+");
-        model.updateFilteredContactList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        final String[] splitName = contact.getName().value.split("\\s+");
+        model.setContactsFilter(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredContactList().size());
     }

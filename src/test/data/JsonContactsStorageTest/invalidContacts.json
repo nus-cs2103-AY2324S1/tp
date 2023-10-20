@@ -1,0 +1,14 @@
+{
+  "contacts": [{
+    "name": "Contact With Invalid Name Ha!ns Mu@ster",
+    "phone": "9482424",
+    "email": "hans@example.com",
+    "note": ""
+  },
+  {
+    "name": "Contact With Invalid Email",
+    "phone": "98765432",
+    "email": "hans@example.x",
+    "note": "My note."
+  }]
+}
