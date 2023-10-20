@@ -116,7 +116,7 @@ Format: `add-patient n/NAME ic/IC g/GENDER p/PHONE_NUMBER ec/EMERGENCY_CONTACT e
 - Blood type must be a combination of A/B/AB/O and +/-
 
 Examples:
-* `add-patient n/John Doe ic/S9851386G g/M p/98765432 ec/90123456 e/johnd@example.com a/John street, block 123, #01-01 d/T0123456H c/pneumothorax b/O+`  
+* `add-patient n/John Doe ic/S9851386G g/M p/98765432 ec/90123456 e/johnd@example.com a/John street, block 123, #01-01 d/T0123456H c/pneumothorax b/O+`
 * `add-patient n/Betsy Crowe ic/S9851586G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/High Priority pt/T0123556H`
 
 ### Listing all persons : `list`
@@ -131,7 +131,7 @@ Edits an existing person in the MediLink Contacts.
 
 Format: `edit NRIC [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the person at the specified `NRIC`. The NRIC **must be a valid IC number** 
+* Edits the person at the specified `NRIC`. The NRIC **must be a valid IC number**
 * At least one of the optional fields must be provided.
 * Must edit appropriate fields based on whether the person is a patient or doctor (e.g. can't update condition of a doctor)
 * Existing values will be updated to the input values.

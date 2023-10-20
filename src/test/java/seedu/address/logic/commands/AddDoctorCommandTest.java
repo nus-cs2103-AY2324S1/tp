@@ -49,7 +49,7 @@ public class AddDoctorCommandTest {
     @Test
     public void execute_duplicateDoctor_throwsCommandException() {
         Doctor validDoctor = new DoctorBuilder().build();
-        AddCommand addCommand = new AddCommand(validDoctor);
+        AddDoctorCommand addCommand = new AddDoctorCommand(validDoctor);
         ModelStub modelStub = new ModelStubWithDoctor(validDoctor);
 
         assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
@@ -59,14 +59,14 @@ public class AddDoctorCommandTest {
     public void equals() {
         Doctor bruce = new DoctorBuilder().withName("Bruce").build();
         Doctor barry = new DoctorBuilder().withName("Barry").build();
-        AddCommand addBruceCommand = new AddCommand(bruce);
-        AddCommand addBarryCommand = new AddCommand(barry);
+        AddDoctorCommand addBruceCommand = new AddDoctorCommand(bruce);
+        AddDoctorCommand addBarryCommand = new AddDoctorCommand(barry);
 
         // same object -> returns true
         assertTrue(addBruceCommand.equals(addBruceCommand));
 
         // same values -> returns true
-        AddCommand addBruceCommandCopy = new AddCommand(bruce);
+        AddDoctorCommand addBruceCommandCopy = new AddDoctorCommand(bruce);
         assertTrue(addBruceCommand.equals(addBruceCommandCopy));
 
         // different types -> returns false
@@ -75,14 +75,14 @@ public class AddDoctorCommandTest {
         // null -> returns false
         assertFalse(addBruceCommand.equals(null));
 
-        // different patient -> returns false
+        // different doctor -> returns false
         assertFalse(addBruceCommand.equals(addBarryCommand));
     }
 
     @Test
     public void toStringMethod() {
-        AddCommand addCommand = new AddCommand(WAYNE);
-        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + WAYNE + "}";
+        AddDoctorCommand addCommand = new AddDoctorCommand(WAYNE);
+        String expected = AddDoctorCommand.class.getCanonicalName() + "{toAdd=" + WAYNE + "}";
         assertEquals(expected, addCommand.toString());
     }
 
