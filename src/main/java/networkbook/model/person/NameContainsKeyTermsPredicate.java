@@ -41,4 +41,8 @@ public class NameContainsKeyTermsPredicate implements Predicate<Person> {
     public String toString() {
         return new ToStringBuilder(this).add("key terms", keyTerms).toString();
     }
+
+    public List<String> getKeyTerms() {
+        return keyTerms;
+    }
 }
