@@ -13,12 +13,15 @@ import java.util.regex.Pattern;
  * Represents an Appointment in the address book.
  */
 public class Appointment {
-    public static final String MESSAGE_CONSTRAINTS = "Input Date should be in format of dd-MM-yyyy HH:mm";
-    public static final String MESSAGE_DATE_CONSTRAINTS = "Invalid date or time given";
+    public static final String MESSAGE_DATE_CONSTRAINTS = "Input Date should be in format of dd-MM-yyyy HH:mm";
+    public static final String MESSAGE_INVALID_DATE = "Please ensure you input a valid date and time";
+    public static final String MESSAGE_DESC_CONSTRAINTS = "Appointment description should only contain alphanumeric "
+            + "characters and spaces, and it should not be blank";
     public static final String MESSAGE_APT_CONSTRAINTS = "Invalid appointment string. "
             + "Should be (description), (date) (time)";
     public static final String VALIDATION_DATE_REGEX = "\\d{2}-\\d{2}-\\d{4} \\d{2}:\\d{2}";
-    public static final String VALIDATION_APT_REGEX = "^(.*), (\\d{2}-\\d{2}-\\d{4} \\d{2}:\\d{2})$";
+    public static final String VALIDATION_DESC_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_APT_REGEX = "^([\\p{Alnum}][\\p{Alnum} ]*), (\\d{2}-\\d{2}-\\d{4} \\d{2}:\\d{2})$";
     public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 
     public final String value;
@@ -60,11 +63,12 @@ public class Appointment {
     public int hashCode() {
         return Objects.hash(value, date);
     }
-
+    public static boolean isValidDesc(String desc) {
+        return desc.matches(VALIDATION_DESC_REGEX);
+    }
     public static boolean isValidDate(String date) {
         return date.matches(VALIDATION_DATE_REGEX);
     }
-
     public static boolean isValidAppointment(String appointment) {
         return appointment.matches(VALIDATION_APT_REGEX);
     }

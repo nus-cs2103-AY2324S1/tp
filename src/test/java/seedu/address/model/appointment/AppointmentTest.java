@@ -12,4 +12,10 @@ class AppointmentTest {
         assertThrows(NullPointerException.class, () -> new Appointment(null,
                 LocalDateTime.of(2023, 1, 1, 1, 1)));
     }
+
+    @Test
+    public void isValidAppointment() {
+
+    }
+
 }
