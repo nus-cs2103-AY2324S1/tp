@@ -37,6 +37,7 @@ Given below is a quick overview of main components and how they interact with ea
 **Main components of the architecture**
 
 **`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -100,7 +101,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
+1. When `Logic` is called upon to execute a command, it is passed to an `NetworkBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
@@ -110,7 +111,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `NetworkBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `NetworkBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
@@ -126,7 +127,7 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `NetworkBook`, which `Person` references. This allows `NetworkBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -141,12 +142,12 @@ The `Model` component,
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* inherits from both `NetworkBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.networkbook.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -158,37 +159,37 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The proposed undo/redo mechanism is facilitated by `VersionedNetworkBook`. It extends `NetworkBook` with an undo/redo history, stored internally as an `networkBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+* `VersionedNetworkBook#commit()` — Saves the current address book state in its history.
+* `VersionedNetworkBook#undo()` — Restores the previous address book state from its history.
+* `VersionedNetworkBook#redo()` — Restores a previously undone address book state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+These operations are exposed in the `Model` interface as `Model#commitNetworkBook()`, `Model#undoNetworkBook()` and `Model#redoNetworkBook()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `VersionedNetworkBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitNetworkBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `networkBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitNetworkBook()`, causing another modified address book state to be saved into the `networkBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitNetworkBook()`, so the address book state will not be saved into the `networkBookStateList`.
 
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoNetworkBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial NetworkBook state, then there are no previous NetworkBook states to restore. The `undo` command uses `Model#canUndoNetworkBook()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
 </div>
@@ -201,17 +202,17 @@ The following sequence diagram shows how the undo operation works:
 
 </div>
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite — it calls `Model#redoNetworkBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `networkBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone NetworkBook states to restore. The `redo` command uses `Model#canRedoNetworkBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitNetworkBook()`, `Model#undoNetworkBook()` or `Model#redoNetworkBook()`. Thus, the `networkBookStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitNetworkBook()`. Since the `currentStatePointer` is not pointing at the end of the `networkBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
@@ -280,24 +281,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                 | I want to …​                                                                               | So that I can…​                                                          |
 |---------|-------------------------|--------------------------------------------------------------------------------------------|-------------------------------------------------------------------------|
-| `* * *` | new user                | see usage instructions                                                                     | refer to instructions when I forget how to use the App                  |
+| `* * *` | new user                | see usage instructions in the app                                                          | refer to instructions when I forget how to use the app                |
 | `* * *` | user                    | create a new contact                                                                       | keep a record of individuals in my network                              |
 | `* * *` | user                    | add more details about an existing contact                                                 | store information about my contacts for future reference                |
-| `* * *` | user                    | update details of a contact                                                                | replace outdated details with more accurate information                 |
-| `* * *` | user                    | delete a contact                                                                           | remove entries that are no longer relevant                              |
+| `* * *` | user                    | edit details of a contact                                                                  | replace outdated details with more accurate information                 |
+| `* * *` | user                    | delete a contact                                                                           | remove individuals I no longer keep contact with |
 | `* *`   | user                    | find a contact by name                                                                     | locate details of contacts without having to go through the entire list |
 | `* *`   | user with many contacts | sort contacts by their details                                                             | locate contacts with special characteristics that I am looking for      |
 | `*`     | user with many contacts | filter contacts based on their details                                                     | locate contacts who fulfil certain conditions that I am looking for     |
-| `* *`   | new user                | have a quick-start guide                                                                   | start using the basic functionality of the app as soon as possible      |
-| `* *`   | new user                | use commonly-available keyboard shortcuts (e.g. ctrl-c for copy, ctrl-v for paste)         | use the shortcuts I am accustomed to                                    |
-| `* *`   | user                    | use simple and easy-to-remember shortcuts                                                  | have no trouble remembering and executing the shortcuts                 |
-| `*`     | user                    | open my email app from my NetworkBook app                                                  | quickly send an email when needed                                       |
-| `* *`   | user                    | use keyboard shortcuts that are easy to press                                              | use them more conveniently                                              |
-| `* *`   | user                    | open the relevant social media platform from the NetworkBook app                           | quickly contact them on social media                                    |
+| `* *`   | new user                | use commonly-available keyboard shortcuts (e.g. ctrl-c for copy, ctrl-v for paste)         | provide input more efficiently with shortcuts I am accustomed to |
+| `* *`   | user                    | use simple and easy-to-press shortcuts                                                     | remember and execute the shortcuts more easily |
+| `* *`   | user                    | open my email app by clicking on my contact's email                                        | send emails to my contacts more efficiently |
+| `* *`   | user                    | open the relevant website by clicking on my contact's social link                          | conveniently access their social links when needed |
 | `* *`   | user                    | an easily accessible and static online page containing a download link to the mobile app   | quickly download the app on my device when needed                       |
-| `* *`   | user                    | visit an easily accessible and static online page containing a user manual                 | quickly refer to instructions when needed                               |
-| `*`     | user                    | navigate to the relevant section of the online manual directly from the catalogue          | quickly find instructions on the feature I want to use                  |
-| `* *`   | user                    | export my contacts in the form of readable text                                            | easily share my contacts with others                                    |
+| `* *`   | new user                | have a quick-start guide                                                                   | start using the basic functionality of the app as soon as possible |
+| `* *`   | user                    | visit an online page containing the complete user manual                                   | refer to the full set of instructions when needed            |
+| `*`     | user                    | navigate to the relevant section of the online manual directly from the catalogue | quickly find instructions on the feature I want to use       |
+| `*`     | user                    | export my contacts in the form of readable text                                            | easily share my contacts with others                                    |
+| `*`     | user with many devices  | import data from my exported contacts                                                      | sync my contact details across different devices |
 
 ### Use cases
 
@@ -325,7 +326,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   - 1ba. All the details provided are in the correct format.
 
-    - 1ba1. NetworkBook adds a contact with all included details.
+    - 1ba1. NetworkBook creates a contact with all included details.
 
       Use case ends.
 
@@ -337,7 +338,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 1c. The name is not unique.
 
-  - 1c1. NetworkBook requests user to select from one of three options: create a new contact, delete the old contact and add the new one, or abort the current add operation.
+  - 1c1. NetworkBook requests user to select from one of three options: create a new contact, delete the old contact and add the new one, or abort the current create operation.
 
     - 1c1a. User selects option to create a new contact.
 
@@ -397,9 +398,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 2.
 
+- 3c. The given phone number is already present in the contact's list of phone numbers.
+
+  - Use case resumes at step 5.
+
 **Use case: Add graduation year to a contact**
 
-(This use case is also applicable to adding **priority** to a contact. For each contact, each of these fields is a single value instead of a list. New entries added to a field will replace the field's original value.)
+(This use case is also applicable to adding **priority** to a contact. For each contact, each of these fields is a single value instead of a list. They cannot be added if the value is already present.)
 
 **MSS**
 
@@ -409,7 +414,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 3. User requests to add graduation year to a specific contact in the list.
 
-4. NetworkBook updates the graduation year of the contact to the new value.
+4. NetworkBook adds the graduation year to the contact.
 
 5. NetworkBook informs user of the contact's new graduation year.
 
@@ -436,6 +441,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - 3c. The given graduation year is in an invalid format.
 
   - 3c1. NetworkBook shows an error message.
+
+    Use case resumes at step 2.
+
+- 3d. The contact already has a graduation year.
+
+  - 3d1. NetworkBook shows an error message.
 
     Use case resumes at step 2.
 
@@ -515,7 +526,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 3. User requests to add social link a specific contact in the list.
 
-4. NetworkBook adds the social link to the contact's list of links
+4. NetworkBook adds the social link to the contact's list of links.
 
 5. NetworkBook informs user of the contact's new list of links.
 
@@ -558,9 +569,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list contacts.
-2.  System shows a list of contacts
-3.  User requests to edit some attribute of a specific contact in the list 
-4.  System updates the contact
+2.  NetworkBook shows a list of contacts.
+3.  User requests to edit some field of a specific contact in the list.
+4.  NetworkBook updates the contact.
 
     Use case ends.
 
@@ -572,13 +583,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. System shows an error message.
+    * 3a1. NetworkBook shows an error message.
 
       Use case resumes at step 2.
 
-* 3b. Attributes are incorrectly entered or invalid.
+* 3b. Some of the fields provided are not correctly formatted.
 
-    * 3b1. System shows an error message.
+    * 3b1. NetworkBook shows an error message.
 
       Use case resumes at step 2.
 
@@ -586,10 +597,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list contacts
-2.  NetworkBook shows a list of contacts
-3.  User requests to delete a specific contact in the list
-4.  NetworkBook deletes the contact
+1.  User requests to list contacts.
+2.  NetworkBook shows a list of contacts.
+3.  User requests to delete a specific contact in the list.
+4.  NetworkBook deletes the contact.
 
     Use case ends.
 
@@ -610,39 +621,45 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User chooses what field to sort by (e.g. name, specialization, graduation year) and which order to sort by (ascending or descending).
+1.  User chooses to sort based on a field (e.g. name, graduation year, priority) and an order (ascending or descending).
 
-2.  System shows list of user’s contacts, sorted by the specified field and in the specified order.
+2.  NetworkBook shows list of user’s contacts, sorted by the specified field and in the specified order.
 
 **Extensions**
 
-* 1a. The user has no contacts to sort.
+* 1a. User has no contacts to sort.
 
-    * 1a1. System shows an empty contact list.
-
-      Use case ends.
-
-* 1a. The specified field is missing.
-
-    * 1a1. System shows an error message.
+    * 1a1. NetworkBook shows an empty contact list.
 
       Use case ends.
 
-* 1a. The specified field is invalid.
+* 1b. User does not specify a field.
 
-    * 1a1. System shows an error message.
-
-      Use case ends.
-
- * 1a. The specified sorting order is invalid.
-
-    * 1a1. System shows an error message.
+    * 1b1. NetworkBook shows an error message.
 
       Use case ends.
 
- * 1a. Certain contacts do not have any data in the specified field (e.g. no email address stored)
+* 1c. The specified field is invalid.
 
-    * 1a1. System shows list of user’s contacts, sorted by the specified field and in the specified order. Any contacts without that field specified are put at the end of the list.
+    * 1c1. NetworkBook shows an error message.
+
+      Use case ends.
+
+* 1d. User does not specify an order.
+
+    * 1d1. Networkbook shows list of user's contacts, sorted by the specified field and ascending order by default.
+
+        Use case ends.
+
+* 1e. The specified sorting order is invalid.
+
+    * 1e1. NetworkBook shows an error message.
+
+      Use case ends.
+
+* 1f. Certain contacts do not have any data in the specified field (e.g. no email address stored)
+
+    * 1f1. NetworkBook shows sorted list of user's contacts who have data in the specified field. Any contacts without that field specified are put at the end of the list.
 
       Use case ends.
 
@@ -652,25 +669,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User specifies the text they would like to search.
 
-2.  System shows list of user’s contacts with names containing the searched text.
+2.  NetworkBook shows list of user’s contacts with names containing the searched text.
 
 **Extensions**
 
 * 1a. The user has no contacts to search.
 
-    * 1a1. System shows an empty contact list.
+    * 1a1. NetworkBook shows an empty contact list.
 
       Use case ends.
 
-* 1a. The search text is not specified.
+* 1b. The search text is not specified.
 
-    * 1a1. System shows an error message.
+    * 1b1. NetworkBook shows an error message.
 
       Use case ends.
 
- * 1a. There are no contacts matching the searched name.
+ * 1c. There are no contacts with names containing the searched text.
 
-    * 1a1. System shows a message saying that there are no matches.
+    * 1c1. NetworkBook shows a message saying that there are no matches.
 
       Use case ends.
 
@@ -679,10 +696,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list contacts.
-2.  NetworkBook shows a list of contacts.
-3.  User requests to email a specific contact in the list.
-4.  NetworkBook loads the default email app of the user and pre-fills the contact's email in the recipient field.
+1. User requests to list contacts.
+
+2. NetworkBook shows a list of contacts.
+
+3. User requests to email a specific contact in the list.
+
+4.  NetworkBook loads the default email app of the user.
+
+5.  NetworkBook pre-fills the contact's email in the recipient field.
 
     Use case ends.
 
@@ -692,20 +714,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The user has not logged in to his default email app.
+* 4a. The user has not logged in to his default email app.
 
-    * 3a1. User will be taken to the sign-in page of his default email app.
+    * 4a1. User will be taken to the sign-in page of his default email app.
 
       Use case ends.
 
-**Use case: Open social media platform from NetworkBook**
+**Use case: Open social link from NetworkBook**
 
 **MSS**
 
-1.  User requests to list contacts.
-2.  NetworkBook shows a list of contacts.
-3.  User requests to contact a specific contact in the list via a particular social media platform.
-4.  NetworkBook loads the social media platform page of the specific contact in the list.
+1. User requests to list contacts.
+
+2. NetworkBook shows a list of contacts.
+
+3. User requests to open a social link of a contact stored in the app.
+
+4.  NetworkBook loads the default browser app of the user.
+
+5.  NetworkBook visits the requested social link in the browser.
 
     Use case ends.
 
@@ -715,31 +742,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The social media platform page link is invalid.
+* 4a. The social link is invalid.
 
-    * 3a1. The user will see the error page displayed by the browser used to load the page link.
-
-      Use case ends.
-
-* 3b. The page is valid but fails to load.
-
-    * 3b1. The user will see the error page displayed by the browser used to load the page link.
+    * 4a1. The user will see the error page displayed by the browser used to load the page link.
 
       Use case ends.
 
-* 3c. The user has not logged in to his social media app.
+* 4b. The page is valid but fails to load.
 
-    * 3c1. The user will be taken to the sign-in page of his social media app.
+    * 4b1. The user will see the error page displayed by the browser used to load the page link.
 
       Use case ends.
 
-**Use case: Download link to mobile app from online page**
+* 4c. The social link directs to a social media app which the user has not logged in.
+
+    * 4c1. The user will be taken to the sign-in page of the social media app.
+
+      Use case ends.
+
+**Use case: Download mobile app from online page**
 
 **MSS**
 
 1. User requests to visit the online page. 
 2. The online page renders.
-3. User selects download link to mobile app.
+3. User selects link to download the mobile app.
 4. Mobile app starts downloading on the user's device.
 
     Use case ends.
@@ -783,7 +810,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User chooses a manual section title within the catalog.
+1. User chooses a manual section title within the catalogue.
 2. Browser navigates to display relevant section of online manual. 
 
     Use case ends.
@@ -805,15 +832,55 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
+**Use case: Import data from exported contacts**
+
+**MSS**
+
+1. User requests to import contacts data.
+
+2. NetworkBook loads the user's file explorer.
+
+3. User selects a file containing exported contacts.
+
+4. NetworkBook creates new contacts with details specified in the export file.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. User exits the file explorer without selecting any file.
+
+  * 2a1. NetworkBook shows an error message.
+
+    Use case ends.
+
+* 3a. The file chosen is not in the correct format.
+
+  * 3a1. NetworkBook shows an error message.
+
+    Use case ends.
+
+* 3b. NetworkBook does not have permission to read the file.
+
+  * 3b1. NetworkBook shows an error message.
+
+    Use case ends.
+
+- 3c. The file contains contacts with same names as some existing contacts.
+
+  - 3c1. NetworkBook skips these contacts and only creates new contacts whose names are not present yet.
+
+  - 3c2. NetworkBook shows the skipped contacts.
+
+    Use case ends.
+
 
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 1. Should be able to hold up to 1000 contacts without a noticeable sluggishness in performance for typical usage.
 1. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-1. A new user should be able to familiarise him/herself 
-with most of the basic features of the app
-upon finishing going through the quick-start guide.
+1. A new user should be able to familiarise him/herself with most of the basic features of the app upon finishing going through the quick-start guide.
 1. A user should be able to use commonly available and easy-to-remember keyboard shorcuts
    * Ctrl+C: copy text
    * Ctrl+V: paste text
@@ -822,21 +889,18 @@ upon finishing going through the quick-start guide.
    * Ctrl+F: find a contact
    * Ctrl+H/Ctrl+R/Ctrl+G: edit a contact
    * Up/down arrow keys: access previous commands
-1. Keywords to be used in commands must be self-explanatory.
+1. A new user should be able to understand the meaning of a command just by looking at the keywords used in the command.
 
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X.
-* **Command**: a string keyed in by the user in the GUI text input
-  that signifies an action to be done by the app.
-* **Contact**: a contact of the user whose information is stored in the app,
-which includes name, phone number, emails, links, courses taken, specialisations, 
-graduation year, priority level and tags of/associated with the person.
-* **Course taken**: a module that a person has taken in university or outside
-(for e.g. CS2103T module in NUS).
-* **Specialization**: the specialization students can
-take in their Computer Science university degree in NUS (e.g. Software Engineering, Artificial Intelligence).
+* **Command**: a string keyed in by the user in the GUI text input that signifies an action to be done by the app.
+* **Contact**: a contact of the user whose information is stored in the app, which includes name, phone numbers, emails, links, graduation year, courses taken, specialisations, priority level and tags of/associated with the person.
+* **Field**: an attribute of a contact that describes information about the contact and can take different values. Possible fields of a contact are elaborated in the **contact** term above.
+* **Course taken**: a module that a person has taken in university or outside (for e.g. CS2103T module in NUS).
+* **Specialisation**: the specialisation a person can take in their computing degree in NUS (e.g. Software Engineering, Artificial Intelligence).
+* **Graduation year**: the year and semester that a person will graduate / has graduated from NUS (e.g. AY2526-S2, meaning the second semester of the academic year spanning from 2025 to 2026).
 * **Link**: a web link which directs to a contact's profile page on a social platform (e.g. LinkedIn, GitHub).
 * **Tag**: an annotation to a person. This can be anything memorable of the person.
 * **Priority**: the priority level of a contact set by the user. Its value can be either high, medium or low.
@@ -876,7 +940,7 @@ testers are expected to do more *exploratory* testing.
    
    2. Test case: `update /name Test 1`
       
-      Expected: Name of the first contact should change to `Test`. System should show details of the old and new name of the contact.
+      Expected: Name of the first contact should change to `Test`. NetworkBook should show details of the old and new name of the contact.
    
    3. Test case: `update /name Test 0`
 
@@ -886,11 +950,11 @@ testers are expected to do more *exploratory* testing.
 
    2. Test case: `update /phone 12345678 1`
 
-      Expected: Phone number of first contact should change to `12345678`. System should show details of old and new phone number.
+      Expected: Phone number of first contact should change to `12345678`. NetworkBook should show details of old and new phone number.
 
    3. Test case: `update /email test@email.com 1`
 
-      Expected: Email of first contact should change to `test@email.com`. System should show details of the old and new email of the contact.
+      Expected: Email of first contact should change to `test@email.com`. NetworkBook should show details of the old and new email of the contact.
 
    4. _{ Likewise for `course`, `specialisation`, `link`, `grad`, `priority`, `tag` }_
 
