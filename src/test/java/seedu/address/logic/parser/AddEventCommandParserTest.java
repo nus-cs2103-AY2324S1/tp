@@ -75,22 +75,22 @@ public class AddEventCommandParserTest {
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String exepectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE);
 
         String missingDescription = " " + PREFIX_EVENT_START_DATE_TIME + VALID_START_DATE_EARLIER
                 + " " + PREFIX_EVENT_END_DATE_TIME + VALID_END_DATE_EARLIER;
 
-        assertParseFailure(parser, missingDescription, exepectedMessage);
+        assertParseFailure(parser, missingDescription, expectedMessage);
 
         String missingStartDate = " " + PREFIX_EVENT_DESCRIPTION + VALID_DESCRIPTION
                 + " " + PREFIX_EVENT_END_DATE_TIME + VALID_END_DATE_EARLIER;
 
-        assertParseFailure(parser, missingStartDate, exepectedMessage);
+        assertParseFailure(parser, missingStartDate, expectedMessage);
 
         String missingEndDate = " " + PREFIX_EVENT_DESCRIPTION + VALID_DESCRIPTION
                 + " " + PREFIX_EVENT_START_DATE_TIME + VALID_START_DATE_EARLIER;
 
-        assertParseFailure(parser, missingEndDate, exepectedMessage);
+        assertParseFailure(parser, missingEndDate, expectedMessage);
     }
 
     @Test

@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -21,6 +22,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.calendar.ReadOnlyCalendar;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EventBuilder;
 
@@ -142,6 +144,17 @@ public class AddEventCommandTest {
 
         @Override
         public void addEvent(Event event) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteEventAt(LocalDateTime dateTime) throws EventNotFoundException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+
+        public Event findEventAt(LocalDateTime dateTime) throws EventNotFoundException {
             throw new AssertionError("This method should not be called.");
         }
 

@@ -21,7 +21,7 @@ public class EventPeriod implements Comparable<EventPeriod> {
             + "    -'MM' is the month.\n"
             + "    -'dd' is the day.\n"
             + "    -'HH:mm' is the time in 24-hour format.";
-    private static final DateTimeFormatter DATE_TIME_STRING_FORMATTER = DateTimeFormatter.ofPattern(
+    public static final DateTimeFormatter DATE_TIME_STRING_FORMATTER = DateTimeFormatter.ofPattern(
             "yyyy-MM-dd HH:mm");
 
     private final LocalDateTime start;
@@ -83,6 +83,17 @@ public class EventPeriod implements Comparable<EventPeriod> {
         requireNonNull(other);
 
         return this.start.isBefore(other.end) && other.start.isBefore(this.end);
+    }
+
+    /**
+     * Checks if a specified {@code @LocalDateTime} is within the {@code @EventPeriod}.
+     *
+     * @param dateTime the specified {@code @LocalDateTime}.
+     * @return True if it is within the period, false otherwise.
+     */
+    public boolean isWithin(LocalDateTime dateTime) {
+        requireNonNull(dateTime);
+        return (start.isEqual(dateTime) || start.isBefore(dateTime)) && end.isAfter(dateTime);
     }
 
     /**

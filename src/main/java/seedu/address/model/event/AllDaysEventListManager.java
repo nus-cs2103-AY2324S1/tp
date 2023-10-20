@@ -1,13 +1,18 @@
 package seedu.address.model.event;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NavigableMap;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
+import seedu.address.model.event.exceptions.EventNotFoundException;
 
 /**
  * Manages the SingleDayEventList objects for every day.
@@ -88,6 +93,37 @@ public class AllDaysEventListManager {
     }
 
     /**
+     * Checks if there is an event at the specified time.
+     *
+     * @param dateTime the specified time.
+     * @return an optional containing the event at the specified time if there is an event, an empty optional otherwise.
+     */
+    public Optional<Event> eventAt(LocalDateTime dateTime) {
+        String key = dateTime.toLocalDate().toString();
+        if (dayToEventListMap.containsKey((key))) {
+            return dayToEventListMap.get(key).eventAtTime(dateTime);
+        }
+        return Optional.empty();
+    }
+
+    /**
+     * Looks for an event at specified time and deletes it if found.
+     *
+     * @param dateTime the specified time.
+     * @throws EventNotFoundException if no event is found.
+     */
+    public void deleteEventAt(LocalDateTime dateTime) throws EventNotFoundException {
+        Optional<Event> optionalToDelete = eventAt(dateTime);
+        try {
+            Event toDelete = optionalToDelete.orElseThrow();
+            List<LocalDate> days = toDelete.getEventDays();
+            days.stream().map(LocalDate::toString)
+                    .forEach(x -> dayToEventListMap.get(x).remove(toDelete));
+        } catch (NoSuchElementException e) {
+            throw new EventNotFoundException();
+        }
+    }
+    /**
      * Checks if the manager is empty.
      *
      * @return true if the manager has no events stored, false otherwise.
@@ -105,6 +141,17 @@ public class AllDaysEventListManager {
                 .collect(Collectors.toList());
 
         return FXCollections.observableList(list);
+     
+    /**
+     * Checks if there are any events at all in the manager.
+     *
+     * @return true if there are any events in the manager, false otherwise.
+     */
+    public boolean hasEvents() {
+        if (!this.isEmpty()) {
+            return dayToEventListMap.values().stream().map(SingleDayEventList::isEmpty).allMatch(x -> x.equals(false));
+        }
+        return false;
     }
 
     @Override

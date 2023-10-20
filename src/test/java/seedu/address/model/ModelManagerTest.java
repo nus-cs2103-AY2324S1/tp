@@ -4,20 +4,25 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.event.EventPeriod.DATE_TIME_STRING_FORMATTER;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.EventBuilder.DEFAULT_START_TIME_STRING;
 import static seedu.address.testutil.TypicalEvents.TEST_EVENT_A;
 import static seedu.address.testutil.TypicalEvents.TEST_EVENT_B;
+
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.calendar.Calendar;
+import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.CalendarBuilder;
@@ -107,6 +112,27 @@ public class ModelManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void addEvent_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.addEvent(null));
+    }
+
+    @Test
+    public void deleteEvent_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.deleteEventAt(null));
+    }
+
+    @Test
+    public void findEvent_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.findEventAt(null));
+    }
+
+    @Test
+    public void findEvent_throwsEventNotFoundException() {
+        LocalDateTime eventTime = LocalDateTime.parse(DEFAULT_START_TIME_STRING, DATE_TIME_STRING_FORMATTER);
+        assertThrows(EventNotFoundException.class, () -> modelManager.findEventAt(eventTime));
     }
 
     @Test

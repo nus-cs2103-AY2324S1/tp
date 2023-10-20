@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -62,7 +63,7 @@ public class Event {
     public boolean isConflicting(Event other) {
         requireNonNull(other);
 
-        return this.eventPeriod.isOverlapping(other.eventPeriod);
+        return eventPeriod.isOverlapping(other.eventPeriod);
     }
 
     /**
@@ -94,6 +95,18 @@ public class Event {
      */
     public List<LocalDate> getEventDays() {
         return this.eventPeriod.getDates();
+    }
+
+    /**
+     * Checks if the {@code @LocalDateTime} is during the event.
+     *
+     * @param dateTime the specified {@code @LocalDateTime}.
+     * @return true if the time is during the event, false otherwise.
+     */
+    public boolean isDuring(LocalDateTime dateTime) {
+        requireNonNull(dateTime);
+
+        return this.eventPeriod.isWithin(dateTime);
     }
 
     @Override

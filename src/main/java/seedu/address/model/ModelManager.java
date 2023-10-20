@@ -4,7 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.Comparator;
+import java.util.NoSuchElementException;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -15,6 +17,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.calendar.Calendar;
 import seedu.address.model.calendar.ReadOnlyCalendar;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.model.person.Person;
 
 /**
@@ -154,9 +157,33 @@ public class ModelManager implements Model {
 
     @Override
     public void addEvent(Event event) {
-        requireAllNonNull(event);
+        requireNonNull(event);
 
         calendar.addEvent(event);
+    }
+
+    /**
+     * Deletes an event at the specified time.
+     *
+     * @param dateTime The specified time.
+     * @throws EventNotFoundException if no event is found at the specified time.
+     */
+    @Override
+    public void deleteEventAt(LocalDateTime dateTime) throws EventNotFoundException {
+        requireNonNull(dateTime);
+
+        calendar.deleteEventAt(dateTime);
+    }
+
+    @Override
+    public Event findEventAt(LocalDateTime dateTime) throws EventNotFoundException {
+        requireNonNull(dateTime);
+
+        try {
+            return calendar.findEventAt(dateTime).orElseThrow();
+        } catch (NoSuchElementException e) {
+            throw new EventNotFoundException();
+        }
     }
 
     //=========== Filtered Person List Accessors =============================================================

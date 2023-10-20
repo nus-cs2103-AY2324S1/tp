@@ -3,7 +3,11 @@ package seedu.address.model.calendar;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.model.event.EventPeriod.DATE_TIME_STRING_FORMATTER;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.EventBuilder.DEFAULT_START_TIME_STRING;
+
+import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
 
@@ -62,6 +66,33 @@ public class CalendarTest {
         assertTrue(this.calendar.contains(validEvent));
     }
 
+    @Test
+    public void deleteEvent_validEvent_successful() {
+        Calendar oneEventCalendar = new Calendar();
+        oneEventCalendar.addEvent(new EventBuilder().build());
+        LocalDateTime expectedDateTime = LocalDateTime.parse(DEFAULT_START_TIME_STRING, DATE_TIME_STRING_FORMATTER);
+        oneEventCalendar.deleteEventAt(expectedDateTime);
+        assertFalse(oneEventCalendar.hasEvents());
+    }
+
+    @Test
+    public void deleteEvent_nullEvent_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> calendar.deleteEventAt(null));
+    }
+
+    @Test
+    public void findEventAt_validEvent_successful() {
+        Calendar oneEventCalendar = new Calendar();
+        Event sample = new EventBuilder().build();
+        oneEventCalendar.addEvent(sample);
+        LocalDateTime expectedDateTime = LocalDateTime.parse(DEFAULT_START_TIME_STRING, DATE_TIME_STRING_FORMATTER);
+        assertEquals(sample, oneEventCalendar.findEventAt(expectedDateTime).get());
+    }
+
+    @Test
+    public void findEvent_nullEvent_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> calendar.findEventAt(null));
+    }
 
     @Test
     public void isEqualsValid_nullValue_returnsFalse() {

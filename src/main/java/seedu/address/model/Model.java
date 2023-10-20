@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.function.Predicate;
 
@@ -8,6 +9,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.calendar.ReadOnlyCalendar;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.model.person.Person;
 
 /**
@@ -111,6 +113,22 @@ public interface Model {
      * @param event event to be added
      */
     void addEvent(Event event);
+
+    /**
+     * Deletes an event at the specified time.
+     *
+     * @param dateTime The specified time.
+     * @throws EventNotFoundException if there is no event found at the specified time.
+     */
+    void deleteEventAt(LocalDateTime dateTime) throws EventNotFoundException;
+
+    /**
+     * Checks for an event at the specified time.
+     * @param dateTime the specified time.
+     * @return the Event
+     * @throws EventNotFoundException if there is no event at the specified time.
+     */
+    Event findEventAt(LocalDateTime dateTime) throws EventNotFoundException;
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
