@@ -32,7 +32,7 @@ public class EditInterviewCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_INTERVIEW + "INTERVIEW_INDEX "
-            + "[" + PREFIX_TYPE + "TYPE] \n"
+            + PREFIX_TYPE + "TYPE\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_INTERVIEW + "2 "
             + PREFIX_TYPE + "Behavioral";

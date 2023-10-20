@@ -7,7 +7,6 @@ import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_TYPE;
 import static seedu.staffsnap.logic.parser.ParserUtil.arePrefixesPresent;
 
 import seedu.staffsnap.commons.core.index.Index;
-import seedu.staffsnap.logic.commands.AddInterviewCommand;
 import seedu.staffsnap.logic.commands.EditInterviewCommand;
 import seedu.staffsnap.logic.commands.EditInterviewCommand.EditInterviewDescriptor;
 import seedu.staffsnap.logic.parser.exceptions.ParseException;
@@ -38,7 +37,7 @@ public class EditInterviewCommandParser implements Parser<EditInterviewCommand> 
         }
 
         if (!arePrefixesPresent(argMultimap, PREFIX_INTERVIEW, PREFIX_TYPE)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddInterviewCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditInterviewCommand.MESSAGE_USAGE));
         }
 
         interviewIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INTERVIEW).get());
