@@ -61,7 +61,6 @@ public class RescheduleCommand extends Command {
         requireNonNull(model);
         List<Appointment> lastShownList = model.getFilteredAppointmentList();
 
-        System.out.println(index);
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(MESSAGE_NO_APPOINTMENT_FOUND);
         }
