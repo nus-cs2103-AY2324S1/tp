@@ -13,7 +13,7 @@ import seedu.address.model.card.Question;
  */
 class JsonAdaptedCard {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "card's %s field is missing!";
 
     private final String question;
     private final String answer;
@@ -21,7 +21,7 @@ class JsonAdaptedCard {
 
 
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given person details.
+     * Constructs a {@code JsonAdaptedCard} with the given card details.
      */
     @JsonCreator
     public JsonAdaptedCard(@JsonProperty("question") String question, @JsonProperty("answer") String answer,
@@ -34,7 +34,7 @@ class JsonAdaptedCard {
     }
 
     /**
-     * Converts a given {@code Person} into this class for Jackson use.
+     * Converts a given {@code card} into this class for Jackson use.
      */
     public JsonAdaptedCard(Card source) {
         question = source.getQuestion().question;
@@ -43,9 +43,9 @@ class JsonAdaptedCard {
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
+     * Converts this Jackson-friendly adapted card object into the model's {@code card} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted card.
      */
     public Card toModelType() throws IllegalValueException {
 

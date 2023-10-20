@@ -13,7 +13,7 @@ import seedu.address.model.Model;
 import seedu.address.model.card.Card;
 
 /**
- * Practises a question using it's displayed index from the address book.
+ * Practises a question using it's displayed index from the deck.
  */
 public class PractiseCommand extends Command {
 

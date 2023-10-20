@@ -10,7 +10,7 @@ import seedu.address.model.card.Card;
 import seedu.address.model.card.UniqueCardList;
 
 /**
- * Wraps all data at the address-book level
+ * Wraps all data at the Deck level
  * Duplicates are not allowed (by .isSameCard comparison)
  */
 public class Deck implements ReadOnlyDeck {
@@ -78,8 +78,8 @@ public class Deck implements ReadOnlyDeck {
 
     /**
      * Replaces the given card {@code target} in the list with {@code editedCard}.
-     * {@code target} must exist in the address book.
-     * The card identity of {@code editedCard} must not be the same as another existing card in the address book.
+     * {@code target} must exist in the deck.
+     * The card identity of {@code editedCard} must not be the same as another existing card in the deck.
      */
     public void setCard(Card target, Card editedCard) {
         requireNonNull(editedCard);
@@ -88,8 +88,8 @@ public class Deck implements ReadOnlyDeck {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes {@code key} from this {@code Deck}.
+     * {@code key} must exist in the deck.
      */
     public void removeCard(Card key) {
         cards.remove(key);
