@@ -53,7 +53,6 @@ public class ParserUtil {
     public static Name parseName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
-        System.out.println(trimmedName + "/");
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
@@ -99,7 +98,6 @@ public class ParserUtil {
     public static ID parseId(String id) throws ParseException {
         requireNonNull(id);
         String trimmedID = id.trim();
-        System.out.println(trimmedID + "/");
         if (!ID.isValidID(trimmedID)) {
             throw new ParseException(ID.MESSAGE_CONSTRAINTS);
         }

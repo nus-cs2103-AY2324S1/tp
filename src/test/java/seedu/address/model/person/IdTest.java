@@ -43,10 +43,13 @@ public class IdTest {
         assertFalse(ID.isValidID("12345678")); // 8 numbers
         assertFalse(ID.isValidID("A12345678Z")); // 2 letters
         assertFalse(ID.isValidID("A1234567")); // missing last letter
+        assertFalse(ID.isValidID("A1234567B A0252")); // only first id is valid
+        assertFalse(ID.isValidID("A1234567 A1234567E")); // only second id is valid
 
         // valid IDs
         assertTrue(ID.isValidID("A1234567E"));
         assertTrue(ID.isValidID("A9876543Z"));
+        assertTrue(ID.isValidID("A1234567F A1234567E"));
     }
 
     /**
