@@ -86,13 +86,13 @@ public class LoveBookParser {
 
         case FilterCommand.COMMAND_WORD:
             return new FilterCommandParser().parse(arguments);
-            
+
         case RandomCommand.COMMAND_WORD:
             return new RandomCommand();
-            
+
         case ListPrefsCommand.COMMAND_WORD:
             return new ListPrefsCommand();
-            
+
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
