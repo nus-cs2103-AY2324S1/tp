@@ -13,11 +13,7 @@ import seedu.application.commons.util.ToStringBuilder;
 import seedu.application.logic.Messages;
 import seedu.application.logic.commands.exceptions.CommandException;
 import seedu.application.model.Model;
-import seedu.application.model.job.Company;
-import seedu.application.model.job.Deadline;
-import seedu.application.model.job.Job;
-import seedu.application.model.job.Role;
-import seedu.application.model.job.Status;
+import seedu.application.model.job.*;
 
 /**
  * Edits the details of an existing job in the application book.
@@ -34,18 +30,21 @@ public class EditCommand extends Command {
         + "[" + PREFIX_COMPANY + "COMPANY] "
         + "[" + PREFIX_DEADLINE + "DEADLINE] "
         + "[" + PREFIX_STATUS + "STATUS] "
+        + "[" + PREFIX_INDUSTRY + "INDUSTRY] "
         + "Example: " + COMMAND_WORD + " 1 "
         + PREFIX_ROLE + "Software Engineer "
-        + PREFIX_COMPANY + "Google"
-        + PREFIX_DEADLINE + "Dec 31 2023 1200"
-        + PREFIX_STATUS + "Pending";
+        + PREFIX_COMPANY + "Google "
+        + PREFIX_DEADLINE + "Dec 31 2023 1200 "
+        + PREFIX_STATUS + "Pending "
+        + PREFIX_INDUSTRY + "Healthcare ";
 
     public static final String MESSAGE_EDIT_JOB_SUCCESS = "Edited Job: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided. \n"
         + "c/ for Company\n"
         + "r/ for Role\n"
         + "d/ for Deadline\n"
-        + "s/ for Status";
+        + "s/ for Status"
+        + "i/ for Industry";
     public static final String MESSAGE_DUPLICATE_JOB = "This job already exists in the application book.";
 
     private final Index index;
@@ -95,8 +94,9 @@ public class EditCommand extends Command {
         Company updatedCompany = editJobDescriptor.getCompany().orElse(jobToEdit.getCompany());
         Deadline updatedDeadline = editJobDescriptor.getDeadline().orElse(jobToEdit.getDeadline());
         Status updatedStatus = editJobDescriptor.getStatus().orElse(jobToEdit.getStatus());
+        Industry updatedIndustry = editJobDescriptor.getIndustry().orElse(jobToEdit.getIndustry());
 
-        return new Job(updatedRole, updatedCompany, updatedDeadline, updatedStatus);
+        return new Job(updatedRole, updatedCompany, updatedDeadline, updatedStatus, updatedIndustry);
     }
 
     @Override
@@ -132,6 +132,7 @@ public class EditCommand extends Command {
         private Role role;
         private Deadline deadline;
         private Status status;
+        private Industry industry;
 
         public EditJobDescriptor() {
         }
@@ -144,13 +145,14 @@ public class EditCommand extends Command {
             setRole(toCopy.role);
             setDeadline(toCopy.deadline);
             setStatus(toCopy.status);
+            setIndustry(toCopy.industry);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(company, role, deadline, status);
+            return CollectionUtil.isAnyNonNull(company, role, deadline, status, industry);
         }
 
         public void setCompany(Company company) {
@@ -185,6 +187,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(status);
         }
 
+        public void setIndustry(Industry industry) {
+            this.industry = industry;
+        }
+
+        public Optional<Industry> getIndustry() {
+            return Optional.ofNullable(industry);
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -200,7 +210,8 @@ public class EditCommand extends Command {
             return Objects.equals(company, otherEditJobDescriptor.company)
                 && Objects.equals(role, otherEditJobDescriptor.role)
                 && Objects.equals(deadline, otherEditJobDescriptor.deadline)
-                && Objects.equals(status, otherEditJobDescriptor.status);
+                && Objects.equals(status, otherEditJobDescriptor.status)
+                && Objects.equals(industry, otherEditJobDescriptor.industry);
         }
 
         @Override
@@ -210,6 +221,7 @@ public class EditCommand extends Command {
                 .add("role", role)
                 .add("deadline", deadline)
                 .add("status", status)
+                .add("industry", industry)
                 .toString();
         }
     }

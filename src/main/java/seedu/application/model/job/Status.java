@@ -41,7 +41,7 @@ public class Status {
     }
 
     /**
-     * Returns true if a given string is a valid role.
+     * Returns true if a given string is a valid status.
      */
     public static boolean isValidStatus(String test) {
         for (JobStatus s : JobStatus.values()) {

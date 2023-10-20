@@ -22,7 +22,7 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(args, PREFIX_ROLE, PREFIX_COMPANY, PREFIX_DEADLINE, PREFIX_STATUS);
+            ArgumentTokenizer.tokenize(args, PREFIX_ROLE, PREFIX_COMPANY, PREFIX_DEADLINE, PREFIX_STATUS, PREFIX_INDUSTRY);
 
         Index index;
 
@@ -32,7 +32,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ROLE, PREFIX_COMPANY, PREFIX_DEADLINE, PREFIX_STATUS);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ROLE, PREFIX_COMPANY, PREFIX_DEADLINE, PREFIX_STATUS, PREFIX_INDUSTRY);
 
         EditCommand.EditJobDescriptor editJobDescriptor = new EditCommand.EditJobDescriptor();
 
@@ -48,6 +48,10 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
             editJobDescriptor.setStatus(ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get()));
+        }
+
+        if (argMultimap.getValue(PREFIX_INDUSTRY).isPresent()) {
+            editJobDescriptor.setIndustry(ParserUtil.parseIndustry(argMultimap.getValue(PREFIX_INDUSTRY).get()));
         }
 
         if (!editJobDescriptor.isAnyFieldEdited()) {

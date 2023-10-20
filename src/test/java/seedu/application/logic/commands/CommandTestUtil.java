@@ -6,6 +6,7 @@ import static seedu.application.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_STATUS;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_INDUSTRY;
 import static seedu.application.model.job.Role.ROLE_FIND_SPECIFIER;
 import static seedu.application.testutil.Assert.assertThrows;
 
@@ -34,6 +35,8 @@ public class CommandTestUtil {
     public static final String VALID_STATUS_CLEANER = "rejected";
     public static final String VALID_DEADLINE_CHEF = "Dec 31 2030 1200";
     public static final String VALID_DEADLINE_CLEANER = "Dec 31 2040 1200";
+    public static final String VALID_INDUSTRY_CHEF = "Culinary";
+    public static final String VALID_INDUSTRY_CLEANER = "Cleaning";
     public static final String ROLE_DESC_CHEF = " " + PREFIX_ROLE + VALID_ROLE_CHEF;
     public static final String ROLE_DESC_CLEANER = " " + PREFIX_ROLE + VALID_ROLE_CLEANER;
     public static final String COMPANY_DESC_CHEF = " " + PREFIX_COMPANY + VALID_COMPANY_CHEF;
