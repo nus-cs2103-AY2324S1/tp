@@ -46,42 +46,51 @@ public class DeleteStaffCommandTest {
     public void execute_invalidIndexUnfilteredList_throwsCommandException() throws CommandException {
         Integer outOfBoundId = model.getFilteredPersonList().size() + 1;
         DeleteStaffCommand deleteStaffCommand = new DeleteStaffCommand(outOfBoundId);
-        // System.out.println(deleteStaffCommand.execute(model).toString());
 
-        assertCommandFailure(deleteStaffCommand, model, Messages.getInvalidPersonIndexMessageForId(outOfBoundId));
+        assertCommandFailure(deleteStaffCommand, model,
+                String.format(Messages.MESSAGE_INVALID_PERSON_ID, outOfBoundId));
     }
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        /* Not needed for now, since we do not identify a person based on their position in the list
-        showPersonAtId(model, ID_FIRST_PERSON);
-
-        Person personToDelete = model.getFilteredPersonList().get(ID_FIRST_PERSON);
-        DeleteStaffCommand deleteStaffCommand = new DeleteStaffCommand(ID_FIRST_PERSON);
-
-        String expectedMessage = String.format(DeleteStaffCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-                Messages.format(personToDelete));
-
-        Model expectedModel = new ModelManager(model.getAddressBook(), model.getTransactionBook(), new UserPrefs());
-        expectedModel.deletePerson(personToDelete.getPersonId());
-        showNoPerson(expectedModel);
-
-        assertCommandSuccess(deleteStaffCommand, model, expectedMessage, expectedModel);
+        /*
+         * Not needed for now, since we do not identify a person based on their position
+         * in the list
+         * showPersonAtId(model, ID_FIRST_PERSON);
+         *
+         * Person personToDelete = model.getFilteredPersonList().get(ID_FIRST_PERSON);
+         * DeleteStaffCommand deleteStaffCommand = new
+         * DeleteStaffCommand(ID_FIRST_PERSON);
+         *
+         * String expectedMessage =
+         * String.format(DeleteStaffCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+         * Messages.format(personToDelete));
+         *
+         * Model expectedModel = new ModelManager(model.getAddressBook(),
+         * model.getTransactionBook(), new UserPrefs());
+         * expectedModel.deletePerson(personToDelete.getPersonId());
+         * showNoPerson(expectedModel);
+         *
+         * assertCommandSuccess(deleteStaffCommand, model, expectedMessage,
+         * expectedModel);
          */
     }
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        /* Not needed for now, since we do not identify a person based on their position in the list
-        showPersonAtId(model, ID_FIRST_PERSON);
-
-        Integer outOfBoundId = ID_SECOND_PERSON;
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundId < model.getAddressBook().getPersonList().size());
-
-        DeleteStaffCommand deleteStaffCommand = new DeleteStaffCommand(outOfBoundId);
-
-        assertCommandFailure(deleteStaffCommand, model, Messages.getInvalidPersonIndexMessageForId(outOfBoundId));
+        /*
+         * Not needed for now, since we do not identify a person based on their position
+         * in the list
+         * showPersonAtId(model, ID_FIRST_PERSON);
+         *
+         * Integer outOfBoundId = ID_SECOND_PERSON;
+         * // ensures that outOfBoundIndex is still in bounds of address book list
+         * assertTrue(outOfBoundId < model.getAddressBook().getPersonList().size());
+         *
+         * DeleteStaffCommand deleteStaffCommand = new DeleteStaffCommand(outOfBoundId);
+         *
+         * assertCommandFailure(deleteStaffCommand, model,
+         * Messages.getInvalidPersonIndexMessageForId(outOfBoundId));
          */
     }
 
@@ -110,14 +119,5 @@ public class DeleteStaffCommandTest {
         DeleteStaffCommand deleteStaffCommand = new DeleteStaffCommand(targetId);
         String expected = DeleteStaffCommand.class.getCanonicalName() + "{personId=" + targetId + "}";
         assertEquals(expected, deleteStaffCommand.toString());
-    }
-
-    /**
-     * Updates {@code model}'s filtered list to show no one.
-     */
-    private void showNoPerson(Model model) {
-        model.updateFilteredPersonList(p -> false);
-
-        assertTrue(model.getFilteredPersonList().isEmpty());
     }
 }

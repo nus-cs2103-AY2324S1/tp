@@ -37,9 +37,9 @@ public class EditStaffCommand extends Command {
     public static final String COMMAND_WORD = "editstaff";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
+            + "by their unqiue id displayed in the person list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a non-negative integer) "
+            + "Parameters: ID (must be a non-negative integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
@@ -59,7 +59,7 @@ public class EditStaffCommand extends Command {
 
     /**
      * @param personId
-     *            of the person in the filtered person list to edit
+     *            of the person to edit
      * @param editPersonDescriptor
      *            details to edit the person with
      */
@@ -103,7 +103,8 @@ public class EditStaffCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(personToEdit.getPersonId(), updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(personToEdit.getPersonId(), updatedName, updatedPhone, updatedEmail, updatedAddress,
+                updatedTags);
     }
 
     @Override

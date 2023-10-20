@@ -2,7 +2,6 @@ package transact.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static transact.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static transact.logic.Messages.getInvalidPersonIndexMessageForId;
 import static transact.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static transact.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static transact.logic.commands.CommandTestUtil.NAME_DESC_AMY;
@@ -66,7 +65,7 @@ public class LogicManagerTest {
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteStaffCommand = DeleteStaffCommand.COMMAND_WORD + " 9";
-        assertCommandException(deleteStaffCommand, getInvalidPersonIndexMessageForId(9));
+        assertCommandException(deleteStaffCommand, String.format(Messages.MESSAGE_INVALID_PERSON_ID, 9));
     }
 
     @Test
@@ -173,7 +172,8 @@ public class LogicManagerTest {
     private void assertCommandFailureForExceptionFromStorage(IOException e, String expectedMessage) {
         Path prefPath = temporaryFolder.resolve("ExceptionUserPrefs.json");
 
-        // Inject LogicManager with AddressBookStorage, TransactionBookStorage that throws the IOException e
+        // Inject LogicManager with AddressBookStorage, TransactionBookStorage that
+        // throws the IOException e
         // when saving
         JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(prefPath) {
             @Override

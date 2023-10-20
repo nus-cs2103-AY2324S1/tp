@@ -27,16 +27,16 @@ import transact.model.transaction.info.TransactionType;
 import transact.ui.MainWindow.TabWindow;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing transaction.
  */
 public class EditTransactionCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the transaction identified "
-            + "by the index number used in the displayed transactions list. "
+            + "by its unique id displayed transactions list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: ID (must be a positive integer) "
             + "[" + PREFIX_TYPE + "TYPE] "
             + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] "
             + "[" + PREFIX_AMOUNT + "AMOUNT] "
@@ -55,9 +55,9 @@ public class EditTransactionCommand extends Command {
 
     /**
      * @param transactionId
-     *            of the person in the filtered person list to edit
+     *            of the transaction to edit
      * @param editTransactionDescriptor
-     *            details to edit the person with
+     *            details to edit the transaction with
      */
     public EditTransactionCommand(Integer transactionId, EditTransactionDescriptor editTransactionDescriptor) {
         requireAllNonNull(transactionId, editTransactionDescriptor);
