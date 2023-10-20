@@ -3,6 +3,7 @@ package seedu.address.model.lessons;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
@@ -61,6 +62,22 @@ public class Lesson {
         this.subject = subject;
         this.students = students;
     }
+
+    /**
+     * Gets a one-line overview of the lesson.
+     *
+     * If a lesson is on Thursday, 10 Oct 10 am - 12 pm, it will be formatted as:
+     *
+     * 10 am - 12 pm // TODO
+     * @return
+     */
+    public String getLessonOverview() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a");
+        String formattedStart = start.format(formatter);
+        String formattedEnd = end.format(formatter);
+        return formattedStart + " - " + formattedEnd;
+    }
+
 
     // TODO: Tasks
     // private TaskContainer tasks;
