@@ -20,14 +20,14 @@ import seedu.address.model.card.Card;
 import seedu.address.model.card.Question;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing card in the deck.
  */
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the card identified "
-            + "by the index number used in the displayed person list. "
+            + "by the index number used in the displayed card list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_QUESTION + "QUESTION] "
@@ -35,14 +35,14 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_CARD_SUCCESS = "Edited Card: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_CARD = "This card already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_CARD = "This card already exists in the deck.";
 
     private final Index index;
     private final EditCardDescriptor editCardDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
-     * @param editCardDescriptor details to edit the person with
+     * @param index of the card in the filtered card list to edit
+     * @param editCardDescriptor details to edit the card with
      */
     public EditCommand(Index index, EditCardDescriptor editCardDescriptor) {
         requireNonNull(index);
@@ -61,20 +61,20 @@ public class EditCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_CARD_DISPLAYED_INDEX);
         }
 
-        Card personToEdit = lastShownList.get(index.getZeroBased());
-        Card editedCard = createEditedCard(personToEdit, editCardDescriptor);
+        Card cardToEdit = lastShownList.get(index.getZeroBased());
+        Card editedCard = createEditedCard(cardToEdit, editCardDescriptor);
 
-        if (!personToEdit.isSameCard(editedCard) && model.hasCard(editedCard)) {
+        if (!cardToEdit.isSameCard(editedCard) && model.hasCard(editedCard)) {
             throw new CommandException(MESSAGE_DUPLICATE_CARD);
         }
 
-        model.setCard(personToEdit, editedCard);
+        model.setCard(cardToEdit, editedCard);
         model.updateFilteredCardList(PREDICATE_SHOW_ALL_CARDS);
         return new CommandResult(String.format(MESSAGE_EDIT_CARD_SUCCESS, Messages.format(editedCard)));
     }
 
     /**
-     * Creates and returns a {@code Card} with the details of {@code personToEdit}
+     * Creates and returns a {@code Card} with the details of {@code cardToEdit}
      * edited with {@code editCardDescriptor}.
      */
     private static Card createEditedCard(Card cardToEdit, EditCardDescriptor editCardDescriptor) {
@@ -111,8 +111,8 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the card with. Each non-empty field value will replace the
+     * corresponding field value of the card.
      */
     public static class EditCardDescriptor {
         private Question question;

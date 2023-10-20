@@ -11,13 +11,13 @@ import seedu.address.model.Model;
 import seedu.address.model.card.Card;
 
 /**
- * Adds a person to the address book.
+ * Adds a card to the deck.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a card to the deck. "
             + "Parameters: "
             + PREFIX_QUESTION + "QUESTION "
             + PREFIX_ANSWER + "ANSWER ";
@@ -28,7 +28,7 @@ public class AddCommand extends Command {
     private final Card toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddCommand to add the specified {@code card}
      */
     public AddCommand(Card card) {
         requireNonNull(card);

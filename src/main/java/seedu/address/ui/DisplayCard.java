@@ -7,7 +7,7 @@ import javafx.scene.layout.Region;
 import seedu.address.model.card.Card;
 
 /**
- * DisplayCard class to showcase the question and the answr
+ * DisplayCard class to showcase the question and the answer
  */
 public class DisplayCard extends UiPart<Region> {
     private static final String FXML = "DisplayListCard.fxml";

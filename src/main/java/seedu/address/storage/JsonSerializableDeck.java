@@ -14,7 +14,7 @@ import seedu.address.model.ReadOnlyDeck;
 import seedu.address.model.card.Card;
 
 /**
- * An Immutable AddressBook that is serializable to JSON format.
+ * An Immutable Deck that is serializable to JSON format.
  */
 @JsonRootName(value = "deck")
 class JsonSerializableDeck {
@@ -24,7 +24,7 @@ class JsonSerializableDeck {
     private final List<JsonAdaptedCard> cards = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given cards.
+     * Constructs a {@code JsonSerializableDeck} with the given cards.
      */
     @JsonCreator
     public JsonSerializableDeck(@JsonProperty("cards") List<JsonAdaptedCard> cards) {
@@ -32,16 +32,16 @@ class JsonSerializableDeck {
     }
 
     /**
-     * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
+     * Converts a given {@code ReadOnlyDeck} into this class for Jackson use.
      *
-     * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
+     * @param source future changes to this will not affect the created {@code JsonSerializableDeck}.
      */
     public JsonSerializableDeck(ReadOnlyDeck source) {
         cards.addAll(source.getCardList().stream().map(JsonAdaptedCard::new).collect(Collectors.toList()));
     }
 
     /**
-     * Converts this address book into the model's {@code AddressBook} object.
+     * Converts this address book into the model's {@code Deck} object.
      *
      * @throws IllegalValueException if there were any data co nstraints violated.
      */
