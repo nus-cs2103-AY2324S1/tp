@@ -87,7 +87,7 @@ Examples:
 * `add n/Fu Yiqiao p/91234567 e/fyq@gmail.com id/A1234567E`
 * `add n/Fu Yiqiao p/91234567 e/fyq@gmail.com id/A1234567E t/CS2103T G2`
 
-### Marking attendance of student: `mark` [Coming Soon]
+### Marking attendance of student: `mark`
 
 Format: `mark /name STUDENTNAME | /id STUDENTID /attendance ATTENDANCE`
 * Marks the attendance of a student corresponding to the student name or student ID.
