@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MINDEX;
 
 import java.util.stream.Stream;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddMusiciantoBandCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -25,9 +26,14 @@ public class AddMusiciantoBandCommandParser {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddMusiciantoBandCommand.MESSAGE_USAGE));
         }
-        int bandIndex = Integer.parseInt(argMultimap.getValue(PREFIX_BINDEX).get());
-        int musicianIndex = Integer.parseInt(argMultimap.getValue(PREFIX_MINDEX).get());
-        return new AddMusiciantoBandCommand(bandIndex, musicianIndex);
+        try {
+            Index bandIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_BINDEX).get());
+            Index musicianIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_MINDEX).get());
+            return new AddMusiciantoBandCommand(bandIndex, musicianIndex);
+        } catch (ParseException pe) {
+            throw new ParseException(
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddMusiciantoBandCommand.MESSAGE_USAGE), pe);
+        }
     }
 
     /**
