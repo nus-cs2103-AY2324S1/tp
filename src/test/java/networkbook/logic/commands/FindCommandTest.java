@@ -9,7 +9,6 @@ import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
-import networkbook.logic.Messages;
 import networkbook.model.Model;
 import networkbook.model.ModelManager;
 import networkbook.model.UserPrefs;
@@ -52,7 +51,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_zeroKeywords_noPersonFound() {
-        String expectedMessage = String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        String expectedMessage = String.format(FindCommand.MESSAGE_SUCCESS, "");
         NameContainsKeyTermsPredicate predicate = preparePredicate(" ");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
@@ -62,7 +61,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_singleUnmatchedKeyword_noPersonFound() {
-        String expectedMessage = String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        String expectedMessage = String.format(FindCommand.MESSAGE_SUCCESS, "\"Ulfred\"");
         NameContainsKeyTermsPredicate predicate = preparePredicate("Ulfred");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
@@ -72,7 +71,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_multipleUnmatchedKeywords_noPersonFound() {
-        String expectedMessage = String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        String expectedMessage = String.format(FindCommand.MESSAGE_SUCCESS, "\"Ulfred\", \"Snyder\"");
         NameContainsKeyTermsPredicate predicate = preparePredicate("Ulfred  Snyder");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
@@ -82,7 +81,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_singleUniqueKeyword_matchingPersonFound() {
-        String expectedMessage = String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        String expectedMessage = String.format(FindCommand.MESSAGE_SUCCESS, "\"Fiona\"");
         NameContainsKeyTermsPredicate predicate = preparePredicate("Fiona");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
@@ -95,7 +94,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_multipleUniqueKeywords_matchingPersonFound() {
-        String expectedMessage = String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        String expectedMessage = String.format(FindCommand.MESSAGE_SUCCESS, "\"Fiona\", \"Kunz\"");
         NameContainsKeyTermsPredicate predicate = preparePredicate("Fiona   Kunz");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
@@ -108,7 +107,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_singleSharedKeyword_multiplePersonsFound() {
-        String expectedMessage = String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        String expectedMessage = String.format(FindCommand.MESSAGE_SUCCESS, "\"Ku\"");
         NameContainsKeyTermsPredicate predicate = preparePredicate("Ku");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
@@ -121,7 +120,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
-        String expectedMessage = String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+        String expectedMessage = String.format(FindCommand.MESSAGE_SUCCESS, "\"Kurz\", \"Elle\", \"Kunz\"");
         NameContainsKeyTermsPredicate predicate = preparePredicate("Kurz Elle Kunz");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);

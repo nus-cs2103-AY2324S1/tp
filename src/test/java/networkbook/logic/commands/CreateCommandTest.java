@@ -14,6 +14,7 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import networkbook.commons.core.GuiSettings;
 import networkbook.logic.Messages;
@@ -40,7 +41,8 @@ public class CreateCommandTest {
 
         CommandResult commandResult = new CreateCommand(validPerson).execute(modelStub);
 
-        assertEquals(String.format(CreateCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+        assertEquals(String.format(CreateCommand.MESSAGE_SUCCESS, Messages.format(validPerson))
+                        + "\nat index 1",
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
     }
@@ -152,7 +154,11 @@ public class CreateCommandTest {
 
         @Override
         public ObservableList<Person> getFilteredPersonList() {
-            throw new AssertionError("This method should not be called.");
+            // Invoked during the create command test
+            // Emulate the addition of a new Person into the list
+            ObservableList<Person> listToFill = FXCollections.observableArrayList();
+            listToFill.add(new PersonBuilder().build());
+            return listToFill;
         }
 
         @Override
