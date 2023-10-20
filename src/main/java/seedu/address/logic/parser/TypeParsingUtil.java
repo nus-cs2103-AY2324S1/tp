@@ -294,16 +294,4 @@ public class TypeParsingUtil {
             throw new ParseException("Flag " + flag + " not found");
         }
     }
-
-    /**
-     * Validates the pattern from the input string
-     * @param pattern the pattern to validate
-     * @param input the input string where the flag is to be parsed from
-     * @return true if the pattern matches the input string
-     */
-    public static boolean validate(String pattern, String input) {
-        Pattern p = Pattern.compile(pattern);
-        Matcher m = p.matcher(input.toLowerCase());
-        return m.matches();
-    }
 }
