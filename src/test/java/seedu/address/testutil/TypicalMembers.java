@@ -22,47 +22,47 @@ import seedu.address.model.person.Member;
  */
 public class TypicalMembers {
 
-    public static final Member ALICE = new MemberBuilder().withName("Alice Pauline")
+    public static final Member ALAN_MEMBER = new MemberBuilder().withName("Alan Pauline")
             .withPhone("94351253")
             .withEmail("alicep@example.com")
-            .withTelegram("@alicepauline")
+            .withTelegram("@alanpauline")
             .withTags("friends").build();
-    public static final Member BENSON = new MemberBuilder().withName("Benson Meier")
+    public static final Member BETTY_MEMBER = new MemberBuilder().withName("Betty Meier")
             .withPhone("98765432")
             .withEmail("johnd@example.com")
-            .withTelegram("@bensonmeier")
+            .withTelegram("@bettymeier")
             .withTags("owesMoney", "friends").build();
-    public static final Member CARL = new MemberBuilder().withName("Carl Kurz")
+    public static final Member CHARLES_MEMBER = new MemberBuilder().withName("Charles Kurz")
             .withPhone("95352563")
             .withEmail("heinz@example.com")
-            .withTelegram("@carlkurz").build();
-    public static final Member DANIEL = new MemberBuilder().withName("Daniel Meier")
+            .withTelegram("@charleskurz").build();
+    public static final Member DENISE_MEMBER = new MemberBuilder().withName("Denise Meier")
             .withPhone("87652533")
             .withEmail("cornelia@example.com")
-            .withTelegram("@danielmeier")
+            .withTelegram("@denisemeier")
             .withTags("friends").build();
-    public static final Member ELLE = new MemberBuilder().withName("Elle Meyer")
+    public static final Member ETHAN_MEMBER = new MemberBuilder().withName("Ethan Meyer")
             .withPhone("9482224")
             .withEmail("werner@example.com")
-            .withTelegram("@ellemeyer").build();
-    public static final Member FIONA = new MemberBuilder().withName("Fiona Kunz")
+            .withTelegram("@ethanmeyer").build();
+    public static final Member FRED_MEMBER = new MemberBuilder().withName("Fred Kunz")
             .withPhone("9482427")
             .withEmail("lydia@example.com")
-            .withTelegram("@fionakunz").build();
-    public static final Member GEORGE = new MemberBuilder().withName("George Best")
+            .withTelegram("@fredkunz").build();
+    public static final Member GISELLE_MEMBER = new MemberBuilder().withName("Giselle Best")
             .withPhone("9482442")
             .withEmail("anna@example.com")
-            .withTelegram("@georgebest").build();
+            .withTelegram("@gisellebest").build();
 
     // Manually added
-    public static final Member HOON = new MemberBuilder().withName("Hoon Meier")
+    public static final Member HUGO_MEMBER = new MemberBuilder().withName("Hugo Meier")
             .withPhone("8482424")
             .withEmail("stefan@example.com")
-            .withTelegram("@hoonmeier").build();
-    public static final Member IDA = new MemberBuilder().withName("Ida Mueller")
+            .withTelegram("@hugomeier").build();
+    public static final Member ISABELLE_MEMBER = new MemberBuilder().withName("Isabelle Mueller")
             .withPhone("8482131")
             .withEmail("hans@example.com")
-            .withTelegram("@idamueller").build();
+            .withTelegram("@isabellemueller").build();
 
     // Manually added - Member's details found in {@code CommandTestUtil}
     public static final Member AMY_MEMBER = new MemberBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
@@ -88,6 +88,7 @@ public class TypicalMembers {
     }
 
     public static List<Member> getTypicalMembers() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(ALAN_MEMBER, BETTY_MEMBER, CHARLES_MEMBER, DENISE_MEMBER,
+                ETHAN_MEMBER, FRED_MEMBER, GISELLE_MEMBER));
     }
 }
