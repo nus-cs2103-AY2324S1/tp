@@ -6,29 +6,30 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.AddressBook;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
  * Represents an Appointment in the address book.
  * Guarantees: details are present and not null, field values are validated.
  */
-
 public class Appointment {
     private final AppointmentTime appointmentTime;
     private final AppointmentDescription appointmentDescription;
-    private int patientId;
+    private final Name patientName;
     private Person patient;
 
     /**
      * Constructs an {@code Appointment}.
      *
+     * @param patientName The name of the patient associated with the appointment.
      * @param appointmentTime The scheduled time for the appointment.
      * @param appointmentDescription The description for the appointment.
      */
-    public Appointment(int patientId, AppointmentTime appointmentTime, AppointmentDescription appointmentDescription) {
-        requireAllNonNull(appointmentTime);
-        this.patientId = patientId;
+    public Appointment(
+            Name patientName, AppointmentTime appointmentTime, AppointmentDescription appointmentDescription) {
+        requireAllNonNull(patientName, appointmentTime, appointmentDescription);
+        this.patientName = patientName;
         this.appointmentTime = appointmentTime;
         this.patient = null;
         this.appointmentDescription = appointmentDescription;
@@ -45,6 +46,7 @@ public class Appointment {
         requireAllNonNull(appointmentTime);
         this.appointmentTime = appointmentTime;
         this.patient = patient;
+        this.patientName = patient.getName();
         this.appointmentDescription = appointmentDescription;
     }
 
@@ -56,16 +58,8 @@ public class Appointment {
         this.patient = patient;
     }
 
-    /**
-     * Overloaded method to set patient when reading appointments from json file.
-     * @param addressBook The AddressBook model
-     */
-    public void setPatient(AddressBook addressBook) {
-        this.patient = addressBook.getPersonList().get(patientId - 1);
-    }
-
-    public int getPatientId() {
-        return this.patientId;
+    public Name getPatientName() {
+        return this.patientName;
     }
 
     public AppointmentTime getAppointmentTime() {
@@ -86,10 +80,6 @@ public class Appointment {
 
     public Person getPerson() {
         return this.patient;
-    }
-
-    public String getPatientName() {
-        return this.patient.getName().fullName;
     }
 
     /**

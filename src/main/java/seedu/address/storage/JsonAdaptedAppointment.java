@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -11,6 +12,8 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.AppointmentDescription;
 import seedu.address.model.appointment.AppointmentTime;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
 
 /**
  * Jackson-friendly version of {@link Appointment}.
@@ -19,7 +22,7 @@ class JsonAdaptedAppointment {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Patient's %s field is missing!";
 
-    private final String patientId;
+    private final String patientName;
     private final String appointmentTime;
     private LocalDateTime start;
     private LocalDateTime end;
@@ -29,10 +32,10 @@ class JsonAdaptedAppointment {
      * Constructs a {@code JsonAdaptedAppointment} with the given appointment details.
      */
     @JsonCreator
-    public JsonAdaptedAppointment(@JsonProperty("patientId") String patientId,
+    public JsonAdaptedAppointment(@JsonProperty("patientName") String patientName,
                                   @JsonProperty("appointmentTime") String appointmentTime,
                                   @JsonProperty("description") String description) {
-        this.patientId = patientId;
+        this.patientName = patientName;
         this.appointmentTime = appointmentTime;
         this.description = description;
     }
@@ -42,7 +45,7 @@ class JsonAdaptedAppointment {
      */
     public JsonAdaptedAppointment(Appointment source) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
-        patientId = String.valueOf(source.getPatientId());
+        patientName = String.valueOf(source.getPatientName());
         appointmentTime = source.getAppointmentTime().toString();
         start = source.getStartTime();
         end = source.getEndTime();
@@ -55,6 +58,19 @@ class JsonAdaptedAppointment {
      * @throws IllegalValueException if there were any data constraints violated in the adapted appointment.
      */
     public Appointment toModelType(AddressBook addressBook) throws IllegalValueException {
+        if (patientName == null) {
+            throw new IllegalValueException("Patient name");
+        }
+        if (!addressBook.hasPerson(new Name(patientName))) {
+            throw new IllegalValueException("Patient does not exist");
+        }
+        if (!Name.isValidName(patientName)) {
+            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+        }
+        final Person patient = addressBook
+                .getPersonList().stream().filter(person -> person.getName().fullName.equals(patientName))
+                .collect(Collectors.toList()).get(0);
+
         if (appointmentTime == null) {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, AppointmentTime.class.getSimpleName()));
@@ -72,10 +88,9 @@ class JsonAdaptedAppointment {
             throw new IllegalValueException(AppointmentDescription.MESSAGE_CONSTRAINTS);
         }
         final AppointmentDescription modelAppointmentDescription = new AppointmentDescription(description);
-        Appointment appointment = new Appointment(
-                Integer.parseInt(patientId), modelAppointmentTime, modelAppointmentDescription);
-        appointment.setPatient(addressBook);
-        return appointment;
+
+        return new Appointment(
+                patient, modelAppointmentTime, modelAppointmentDescription);
     }
 
 }

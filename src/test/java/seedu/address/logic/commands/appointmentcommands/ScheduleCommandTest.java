@@ -15,12 +15,13 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 public class ScheduleCommandTest {
     @Test
     public void constructor_nullAppointment_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new ScheduleCommand(null, 1));
+        assertThrows(NullPointerException.class, () -> new ScheduleCommand(null, null));
     }
 
     /**
@@ -79,6 +80,11 @@ public class ScheduleCommandTest {
 
         @Override
         public boolean hasPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasPerson(Name name) {
             throw new AssertionError("This method should not be called.");
         }
 

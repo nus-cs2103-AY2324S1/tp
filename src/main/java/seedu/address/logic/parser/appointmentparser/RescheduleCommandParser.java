@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_START;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 
 import java.time.LocalDateTime;
 
@@ -31,15 +30,21 @@ public class RescheduleCommandParser implements Parser<RescheduleCommand> {
     public RescheduleCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_ID, PREFIX_APPOINTMENT_START, PREFIX_APPOINTMENT_END);
+                ArgumentTokenizer.tokenize(args, PREFIX_APPOINTMENT_START, PREFIX_APPOINTMENT_END);
 
         Index index;
 
-        if (argMultimap.getValue(PREFIX_ID).isEmpty() || argMultimap.getValue(PREFIX_ID).isEmpty()
-                || argMultimap.getValue(PREFIX_ID).isEmpty()) {
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (ParseException pe) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, RescheduleCommand.MESSAGE_USAGE), pe);
+        }
+
+        if (!argMultimap.arePrefixesPresent(PREFIX_APPOINTMENT_START, PREFIX_APPOINTMENT_END)
+                || argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RescheduleCommand.MESSAGE_USAGE));
         }
-        index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_ID).get());
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_APPOINTMENT_START, PREFIX_APPOINTMENT_END);
 
