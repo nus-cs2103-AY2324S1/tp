@@ -46,10 +46,10 @@ public class PersonUtil {
             sb.append(PREFIX_TO + person.getFreeTime().getTo() + " ");
         }
         person.getTags().stream().forEach(
-                s -> sb.append(PREFIX_TAG + s.tagName + " ")
+                s -> sb.append(PREFIX_TAG + s.name + " ")
         );
         person.getMods().stream().forEach(
-            s -> sb.append(PREFIX_MOD + s.tagName + " ")
+            s -> sb.append(PREFIX_MOD + s.name + " ")
         );
         sb.append(PREFIX_HOUR + person.getHour().value + " ");
         return sb.toString();
@@ -69,11 +69,11 @@ public class PersonUtil {
 
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
-            tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
+            tags.forEach(s -> sb.append(PREFIX_TAG).append(s.name).append(" "));
         }
         if (descriptor.getMods().isPresent()) {
             Set<Mod> mods = descriptor.getMods().get();
-            mods.forEach(s -> sb.append(PREFIX_MOD).append(s.tagName).append(" "));
+            mods.forEach(s -> sb.append(PREFIX_MOD).append(s.name).append(" "));
         }
         descriptor.getHour().ifPresent(hour -> sb.append(PREFIX_HOUR).append(hour.value).append(" "));
         return sb.toString();

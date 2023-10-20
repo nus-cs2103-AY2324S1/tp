@@ -113,7 +113,7 @@ public class ParserUtil {
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+        return Tag.of(trimmedTag);
     }
 
     /**
@@ -157,7 +157,7 @@ public class ParserUtil {
         if (!Mod.isValidModName(trimmedMod)) {
             throw new ParseException(Mod.MESSAGE_CONSTRAINTS);
         }
-        return new Mod(trimmedMod);
+        return Mod.of(trimmedMod);
     }
 
     /**
