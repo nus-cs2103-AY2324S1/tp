@@ -76,7 +76,7 @@ abstract class Word {
             return false;
         }
         Word otherWord = (Word) other;
-        return otherWord.word.equals(this.word);
+        return otherWord.word.equals(this.word) && otherWord.language.equals(this.language);
     }
 
     /**
