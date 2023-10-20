@@ -49,7 +49,7 @@ public class IdTest {
         // valid IDs
         assertTrue(ID.isValidID("A1234567E"));
         assertTrue(ID.isValidID("A9876543Z"));
-        assertTrue(ID.isValidID("A1234567F A1234567E")); // only second id is valid
+        assertTrue(ID.isValidID("A1234567F A1234567E"));
     }
 
     /**
