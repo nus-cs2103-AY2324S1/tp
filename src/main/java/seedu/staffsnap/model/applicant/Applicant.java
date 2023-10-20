@@ -31,14 +31,19 @@ public class Applicant implements Comparable<Applicant> {
     /**
      * Every field must be present and not null.
      */
-    public Applicant(Name name, Phone phone, Email email, Position position, List<Interview> interviews) {
+    public Applicant(Name name, Phone phone, Email email, Position position, List<Interview> interviews,
+                     Status status) {
         requireAllNonNull(name, phone, email, position, interviews);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.position = position;
         this.interviews.addAll(interviews);
-        this.status = Status.UNDECIDED;
+        if (status == null) {
+            this.status = Status.UNDECIDED;
+        } else {
+            this.status = status;
+        }
     }
 
     public Name getName() {

@@ -109,7 +109,7 @@ public class EditCommand extends Command {
         List<Interview> updatedInterviews = editApplicantDescriptor
                 .getInterviews().orElse(applicantToEdit.getInterviews());
 
-        return new Applicant(updatedName, updatedPhone, updatedEmail, updatedPosition, updatedInterviews);
+        return new Applicant(updatedName, updatedPhone, updatedEmail, updatedPosition, updatedInterviews, null);
     }
 
     @Override

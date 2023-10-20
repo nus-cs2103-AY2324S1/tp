@@ -158,4 +158,17 @@ public class ModelManager implements Model {
                 && filteredApplicants.equals(otherModelManager.filteredApplicants);
     }
 
+    /**
+     * Refreshes the applicant list with the same predicate
+     */
+    public void refreshApplicantList() {
+        Predicate predicate = filteredApplicants.getPredicate();
+        if (predicate == null) {
+            return;
+        }
+        updateFilteredApplicantList(PREDICATE_HIDE_ALL_APPLICANTS);
+        updateFilteredApplicantList(PREDICATE_SHOW_ALL_APPLICANTS);
+        updateFilteredApplicantList(predicate);
+    }
+
 }

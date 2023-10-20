@@ -169,6 +169,11 @@ public class AddCommandTest {
         public void updateSortedApplicantList(Descriptor descriptor) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void refreshApplicantList() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

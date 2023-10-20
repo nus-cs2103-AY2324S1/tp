@@ -6,6 +6,9 @@ package seedu.staffsnap.model.applicant;
 public enum Status {
     UNDECIDED, OFFERED, REJECTED;
 
+    public static final String MESSAGE_CONSTRAINTS = "Status can take the following values: "
+            + "[u(ndecided)/o(ffered)/r(ejected)]";
+
     /**
      * Finds the correct descriptor by the string given
      * @param name name of the descriptor
@@ -19,6 +22,7 @@ public enum Status {
                 break;
             }
         }
+        System.out.println(result);
         return result;
     }
 }

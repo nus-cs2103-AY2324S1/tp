@@ -55,7 +55,8 @@ public class StatusCommand extends Command {
 
         Applicant applicantToEdit = lastShownList.get(index.getZeroBased());
         applicantToEdit.setStatus(this.status);
-        System.out.println(applicantToEdit.getStatus());
+
+        model.refreshApplicantList();
 
         return new CommandResult(String.format(MESSAGE_EDIT_STATUS_SUCCESS, Messages.format(applicantToEdit)));
     }

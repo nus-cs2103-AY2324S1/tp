@@ -46,7 +46,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Position position = ParserUtil.parsePosition(argMultimap.getValue(PREFIX_POSITION).get());
         List<Interview> interviewList = new ArrayList<>();
 
-        Applicant applicant = new Applicant(name, phone, email, position, interviewList);
+        Applicant applicant = new Applicant(name, phone, email, position, interviewList, null);
 
         return new AddCommand(applicant);
     }
