@@ -1,6 +1,7 @@
 package seedu.address.model.person;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  * Represents a Student's attendance in the address book.
@@ -11,19 +12,16 @@ public class Attendance {
             + "absent and 1 indicates student is present";
     private final LocalDate date;
     private boolean isPresent;
-    private final String moduleName;
 
     /**
      * Constructs an {@code Attendance}.
      *
      * @param date A valid date.
      * @param isPresent A valid attendance status.
-     * @param moduleName A valid module name.
      */
-    public Attendance(LocalDate date, boolean isPresent, String moduleName) {
+    public Attendance(LocalDate date, boolean isPresent) {
         this.date = date;
         this.isPresent = isPresent;
-        this.moduleName = moduleName;
     }
 
     /**
@@ -45,15 +43,6 @@ public class Attendance {
     }
 
     /**
-     * Returns the module name.
-     *
-     * @return A String representing the module name.
-     */
-    public String getModuleName() {
-        return moduleName;
-    }
-
-    /**
      * Sets the attendance for the person.
      * @param isPresent The attendance record to set.
      */
@@ -71,17 +60,16 @@ public class Attendance {
         }
         Attendance otherAttendance = (Attendance) other;
         return date.equals(otherAttendance.date)
-                && isPresent == otherAttendance.isPresent
-                && moduleName.equals(otherAttendance.moduleName);
+                && isPresent == otherAttendance.isPresent;
     }
 
     @Override
     public int hashCode() {
-        return date.hashCode() + (isPresent ? 1 : 0) + moduleName.hashCode();
+        return Objects.hash(date, isPresent);
     }
 
     @Override
     public String toString() {
-        return "Date: " + date + ", Module: " + moduleName + ", Present: " + isPresent;
+        return "Date: " + date + ", Present: " + isPresent;
     }
 }
