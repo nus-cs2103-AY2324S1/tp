@@ -70,7 +70,7 @@ public class ListAttendanceCommandTest {
     }
     @Test
     public void execute_listAttendanceWithTag_success() {
-        ALICE.addAttendance(new Attendance(LocalDate.now(), false, "CS2040S"));
+        ALICE.addAttendance(new Attendance(LocalDate.now(), false));
 
         Tag tag = new Tag("CS2040S");
         Index index = Index.fromOneBased(1);
@@ -88,7 +88,7 @@ public class ListAttendanceCommandTest {
 
     @Test
     public void execute_listAttendanceNoTag_success() {
-        ALICE.addAttendance(new Attendance(LocalDate.now(), false, "CS2040S"));
+        ALICE.addAttendance(new Attendance(LocalDate.now(), false));
 
         Tag tag = new Tag("PLACEHOLDER");
         Index index = Index.fromOneBased(1);

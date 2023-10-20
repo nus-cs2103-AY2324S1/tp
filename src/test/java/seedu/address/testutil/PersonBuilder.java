@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.ID;
 import seedu.address.model.person.Name;
@@ -86,6 +87,14 @@ public class PersonBuilder {
      */
     public PersonBuilder withId(String id) {
         this.id = new ID(id);
+        return this;
+    }
+
+    /**
+     * Adds an attendance record to the {@code Person} that we are building.
+     */
+    public PersonBuilder withAttendance(Attendance attendance) {
+        this.build().addAttendance(attendance);
         return this;
     }
 

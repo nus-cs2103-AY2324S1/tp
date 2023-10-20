@@ -87,7 +87,7 @@ Examples:
 * `add n/Fu Yiqiao p/91234567 e/fyq@gmail.com id/A1234567E`
 * `add n/Fu Yiqiao p/91234567 e/fyq@gmail.com id/A1234567E t/CS2103T G2`
 
-### Marking attendance of student: `mark` [Coming Soon]
+### Marking attendance of student: `mark`
 
 Format: `mark /name STUDENTNAME | /id STUDENTID /attendance ATTENDANCE`
 * Marks the attendance of a student corresponding to the student name or student ID.
@@ -112,7 +112,7 @@ Examples:
 *  `list attendance tn/1` Shows a summary of attendance records of all students for Tutorial #1.
 *  `list attendance tn/3 coursetg/CS2103T` Shows a summary of attendance records of the students in CS2103T for Tutorial #3.
 
-### Searching for student's contact via keyword : `find` [Coming Soon]
+### Searching for student's contact via keyword : `find`
 
 Finds a student's contact either via their name or student ID.
 

@@ -20,6 +20,8 @@ public class MarkAttendanceCommand extends Command {
             + "/name STUDENTNAME | /id STUDENTID "
             + "/attendance ATTENDANCE "
             + "Example: " + COMMAND_WORD + " /name Zong Jin /attendance 1";
+    public static final String MESSAGE_SUCCESS = "Attendance marked for person: ";
+    public static final String MESSAGE_PERSON_NOT_FOUND = "Person not found.";
     private final String identifier; // This can be either studentName or studentID
     private final boolean isPresent;
     private final LocalDate date;
@@ -49,13 +51,30 @@ public class MarkAttendanceCommand extends Command {
                 .orElse(null);
 
         if (targetPerson == null) {
-            throw new CommandException("Person not found.");
+            throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
         }
 
         // TODO - Possibly implement module inclusion for attendance and modify UG appropriately
-        Attendance attendance = new Attendance(date, isPresent, null);
+        Attendance attendance = new Attendance(date, isPresent);
         targetPerson.addAttendance(attendance);
 
-        return new CommandResult(String.format("Attendance marked for person: %s", targetPerson.getName()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS + "%s", targetPerson.getName()));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof MarkAttendanceCommand)) {
+            return false;
+        }
+
+        MarkAttendanceCommand otherMarkAttendanceCommand = (MarkAttendanceCommand) other;
+        return identifier.equals(otherMarkAttendanceCommand.identifier)
+                && isPresent == otherMarkAttendanceCommand.isPresent
+                && date.equals(otherMarkAttendanceCommand.date);
     }
 }
