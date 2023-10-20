@@ -72,7 +72,7 @@ public class Lesson {
      * @return
      */
     public String getLessonOverview() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm a");
         String formattedStart = start.format(formatter);
         String formattedEnd = end.format(formatter);
         return formattedStart + " - " + formattedEnd;

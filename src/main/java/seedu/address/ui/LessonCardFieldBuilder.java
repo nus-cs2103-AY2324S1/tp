@@ -42,6 +42,8 @@ public class LessonCardFieldBuilder {
 //        }
     }
 
+
+
     static void buildPhone(Person person, VBox fields, FlowPane tags) {
         Label phone = new Label(person.getPhone().value);
         phone.getStyleClass().add("cell_small_label");

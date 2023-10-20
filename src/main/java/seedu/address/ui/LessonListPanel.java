@@ -17,7 +17,7 @@ import seedu.address.model.lessons.Lesson;
  * Panel containing the schedule.
  */
 public class LessonListPanel extends UiPart<Region> {
-    private static final String FXML = "ScheduleListPanel.fxml";
+    private static final String FXML = "LessonListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(LessonListPanel.class);
 
     private Logic logic;

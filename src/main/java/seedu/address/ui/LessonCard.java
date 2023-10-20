@@ -59,21 +59,10 @@ public class LessonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(lesson.getLessonOverview());
         for (String field : displayFields) {
-            PersonCardFieldBuilder.build(field, person, fields, tags);
+            // TODO: Implement the schedule detail
+//            LessonCardFieldBuilder.build(field, person, fields, tags);
         }
     }
 
 
-//    /**
-//     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
-//     */
-//    public LessonCard(Person person, int displayedIndex, String[] displayFields) {
-//        super(FXML);
-//        this.person = person;
-//        id.setText(displayedIndex + ". ");
-//        name.setText(person.getName().fullName);
-//        for (String field : displayFields) {
-//            PersonCardFieldBuilder.build(field, person, fields, tags);
-//        }
-//    }
 }
