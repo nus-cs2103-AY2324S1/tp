@@ -59,7 +59,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                 errorMessage += "- Name("  + PREFIX_NAME + ") ";
             }
             if (argMultimap.getValue(PREFIX_PHONE).isEmpty()) {
-                errorMessage += "- Phone(p/) ";
+                errorMessage += "- Phone(" + PREFIX_PHONE + ") ";
             }
             if (argMultimap.getValue(PREFIX_EMAIL).isEmpty()) {
                 errorMessage += "- Email(e/) ";
