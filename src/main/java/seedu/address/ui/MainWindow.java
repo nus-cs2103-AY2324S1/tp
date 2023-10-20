@@ -14,7 +14,6 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.TableCommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -191,9 +190,8 @@ public class MainWindow extends UiPart<Stage> {
                 handleHelp();
             }
 
-            if (commandResult instanceof TableCommandResult) {
-                TableCommandResult tableCommandResult = (TableCommandResult) commandResult;
-                TableWindow tableWindow = new TableWindow(tableCommandResult.getColumns(), tableCommandResult.getValues());
+            if (commandResult.isShowTable()) {
+                TableWindow tableWindow = new TableWindow(commandResult);
                 handleTable(tableWindow);
             }
 

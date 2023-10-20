@@ -44,6 +44,10 @@ public class CommandResult {
         return showHelp;
     }
 
+    public boolean isShowTable() {
+        return false;
+    }
+
     public boolean isExit() {
         return exit;
     }

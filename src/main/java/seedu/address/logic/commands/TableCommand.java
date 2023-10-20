@@ -7,6 +7,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 
 import javafx.collections.ObservableList;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -42,7 +44,7 @@ public class TableCommand extends Command {
     }
 
     @Override
-    public TableCommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         switch(this.args) {
         case "g/":
@@ -58,7 +60,9 @@ public class TableCommand extends Command {
     }
 
 
-    private TableCommandResult executeGender(Model model) {
+    private GenderTableCommandResult executeGender(Model model) {
+        Map<String, Long> columnValueMapping = new HashMap<>();
+
         String[] titles = new String[]{"Male", "Female"};
 
         ObservableList<Student> studentList = model.getFilteredPersonList();
@@ -71,10 +75,15 @@ public class TableCommand extends Command {
                 .map(p -> studentList.stream().filter(p).count())
                 .toArray(Long[]::new);
 
-        return new TableCommandResult(titles, values, MESSAGE_SHOW_SUCCESS);
+        for (int i = 0; i < titles.length; i++) {
+            columnValueMapping.put(titles[i], values[i]);
+        }
+
+        return new GenderTableCommandResult(columnValueMapping);
     }
 
-    private TableCommandResult executeSecLevel(Model model) {
+    private SecLevelTableCommandResult executeSecLevel(Model model) {
+        Map<String, Long> columnValueMapping = new HashMap<>();
         String[] titles = new String[] {"Sec 1", "Sec 2", "Sec 3", "Sec 4"};
 
         ObservableList<Student> studentList = model.getFilteredPersonList();
@@ -95,10 +104,16 @@ public class TableCommand extends Command {
                 .map(p -> studentList.stream().filter(p).count())
                 .toArray(Long[]::new);
 
-        return new TableCommandResult(titles, values, MESSAGE_SHOW_SUCCESS);
+        for (int i = 0; i < titles.length; i++) {
+            columnValueMapping.put(titles[i], values[i]);
+        }
+
+        return new SecLevelTableCommandResult(columnValueMapping);
     }
 
-    private TableCommandResult executeSubject(Model model) {
+    private SubjectTableCommandResult executeSubject(Model model) {
+        Map<String, Long> columnValueMapping = new HashMap<>();
+
         String[] titles = new String[] {Subject.MATHS, Subject.CS, Subject.CHEMI, Subject.BIO,
                 Subject.ENG, Subject.PHY};
 
@@ -124,7 +139,11 @@ public class TableCommand extends Command {
                 .map(p -> studentList.stream().filter(p).count())
                 .toArray(Long[]::new);
 
-        return new TableCommandResult(titles, values, MESSAGE_SHOW_SUCCESS);
+        for (int i = 0; i < titles.length; i++) {
+            columnValueMapping.put(titles[i], values[i]);
+        }
+
+        return new SubjectTableCommandResult(columnValueMapping);
     }
 
 }
