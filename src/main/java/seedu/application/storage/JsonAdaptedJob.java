@@ -82,7 +82,7 @@ class JsonAdaptedJob {
         }
         final Deadline modelDeadline = new Deadline(deadline);
 
-        return new Job(modelRole, modelCompany, modelStatus, modelDeadline);
+        return new Job(modelRole, modelCompany, modelDeadline, modelStatus);
     }
 
 }
