@@ -112,17 +112,34 @@ Expected Output: `A random date entry is printed`
 Output if error: ```No dates in list!```
 
 ### Filter by Metric
-Format: `filter METRIC/ARG`
+Format: `filter METRIC/ ARG`
 
 Parameter constraints:
 - Filter must be from list of metrics
-- Metric is limited to `gender, age, horoscope, name` only
+- Metric is limited to `gender, age, horoscope, name, income, height` only
 
 Example:
-- `filter name/Cleon`
-- `filter gender/M`
+- `filter name/ Cleon`
+- `filter gender/ M`
+- `filter gender/ M name/ Cleon`
 
 Expected Output: `Lists the dates with the metric specified`
+
+Output if error: ```No dates found!```
+
+### Sorting list of dates by Metric
+Format: `sort METRIC/`
+
+Parameter constraints:
+- Sort must be from list of metrics
+- Metric is limited to `age, horoscope, name, income, height` only
+
+Example:
+- `sort name/`
+- `sort horoscope/`
+- `filter income/ height/`
+
+Expected Output: `Lists the dates in the order specified`
 
 Output if error: ```No dates found!```
 
