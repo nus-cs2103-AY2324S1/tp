@@ -37,6 +37,7 @@ public class Applicant implements Comparable<Applicant> {
         this.email = email;
         this.position = position;
         this.interviews.addAll(interviews);
+        Collections.sort(this.interviews);
     }
 
     public Name getName() {
@@ -185,5 +186,9 @@ public class Applicant implements Comparable<Applicant> {
     public void deleteInterview(Interview interviewToDelete) {
         interviews.remove(interviewToDelete);
         Collections.sort(interviews);
+    }
+
+    public int getInterviewIndexForApplicantCard(Interview interview) {
+        return interviews.indexOf(interview) + 1;
     }
 }

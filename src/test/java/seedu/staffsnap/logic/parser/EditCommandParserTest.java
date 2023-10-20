@@ -3,10 +3,7 @@ package seedu.staffsnap.logic.parser;
 import static seedu.staffsnap.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
-import static seedu.staffsnap.logic.commands.CommandTestUtil.INTERVIEW_DESC_FRIEND;
-import static seedu.staffsnap.logic.commands.CommandTestUtil.INTERVIEW_DESC_HUSBAND;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
-import static seedu.staffsnap.logic.commands.CommandTestUtil.INVALID_INTERVIEW_DESC;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.INVALID_POSITION_DESC;
@@ -16,14 +13,11 @@ import static seedu.staffsnap.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.POSITION_DESC_AMY;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.POSITION_DESC_BOB;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
-import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_INTERVIEW_FRIEND;
-import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_INTERVIEW_HUSBAND;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_POSITION_AMY;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_INTERVIEW;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_POSITION;
 import static seedu.staffsnap.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -42,12 +36,9 @@ import seedu.staffsnap.model.applicant.Email;
 import seedu.staffsnap.model.applicant.Name;
 import seedu.staffsnap.model.applicant.Phone;
 import seedu.staffsnap.model.applicant.Position;
-import seedu.staffsnap.model.interview.Interview;
 import seedu.staffsnap.testutil.EditApplicantDescriptorBuilder;
 
 public class EditCommandParserTest {
-
-    private static final String INTERVIEW_EMPTY = " " + PREFIX_INTERVIEW;
 
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
@@ -62,7 +53,13 @@ public class EditCommandParserTest {
         // no field specified
         assertParseFailure(parser, "1", EditCommand.MESSAGE_NOT_EDITED);
 
+        // no prefix specified
+        assertParseFailure(parser, "1" + VALID_NAME_AMY, MESSAGE_INVALID_FORMAT);
+
         // no index and no field specified
+        assertParseFailure(parser, "" + PREFIX_EMAIL, MESSAGE_INVALID_FORMAT);
+
+        // nothing specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
     }
 
@@ -79,6 +76,9 @@ public class EditCommandParserTest {
 
         // invalid prefix being parsed as preamble
         assertParseFailure(parser, "1 i/ string", MESSAGE_INVALID_FORMAT);
+
+        // whitespace being parsed as preamble
+        assertParseFailure(parser, " ", MESSAGE_INVALID_FORMAT);
     }
 
     @Test
@@ -87,19 +87,9 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone
         assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
         assertParseFailure(parser, "1" + INVALID_POSITION_DESC, Position.MESSAGE_CONSTRAINTS); // invalid position
-        assertParseFailure(parser, "1" + INVALID_INTERVIEW_DESC, Interview.MESSAGE_CONSTRAINTS); // invalid interview
 
         // invalid phone followed by valid email
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC + EMAIL_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
-
-        // while parsing {@code PREFIX_INTERVIEW} alone will reset the interviews of the {@code Applicant} being edited,
-        // parsing it together with a valid interview results in error
-        assertParseFailure(parser, "1"
-                + INTERVIEW_DESC_FRIEND + INTERVIEW_DESC_HUSBAND + INTERVIEW_EMPTY, Interview.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1"
-                + INTERVIEW_DESC_FRIEND + INTERVIEW_EMPTY + INTERVIEW_DESC_HUSBAND, Interview.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1"
-                + INTERVIEW_EMPTY + INTERVIEW_DESC_FRIEND + INTERVIEW_DESC_HUSBAND, Interview.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC
@@ -109,12 +99,11 @@ public class EditCommandParserTest {
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_APPLICANT;
-        String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + INTERVIEW_DESC_HUSBAND
-                + EMAIL_DESC_AMY + POSITION_DESC_AMY + NAME_DESC_AMY + INTERVIEW_DESC_FRIEND;
+        String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB
+                + EMAIL_DESC_AMY + POSITION_DESC_AMY + NAME_DESC_AMY;
 
         EditApplicantDescriptor descriptor = new EditApplicantDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withPosition(VALID_POSITION_AMY)
-                .withInterviews(VALID_INTERVIEW_HUSBAND, VALID_INTERVIEW_FRIEND).build();
+                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withPosition(VALID_POSITION_AMY).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -158,12 +147,6 @@ public class EditCommandParserTest {
         descriptor = new EditApplicantDescriptorBuilder().withPosition(VALID_POSITION_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
-
-        // interviews
-        userInput = targetIndex.getOneBased() + INTERVIEW_DESC_FRIEND;
-        descriptor = new EditApplicantDescriptorBuilder().withInterviews(VALID_INTERVIEW_FRIEND).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor);
-        assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test
@@ -182,11 +165,10 @@ public class EditCommandParserTest {
 
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
-        // mulltiple valid fields repeated
+        // multiple valid fields repeated
         userInput = targetIndex.getOneBased() + PHONE_DESC_AMY + POSITION_DESC_AMY + EMAIL_DESC_AMY
-                + INTERVIEW_DESC_FRIEND + PHONE_DESC_AMY + POSITION_DESC_AMY + EMAIL_DESC_AMY
-                + INTERVIEW_DESC_FRIEND + PHONE_DESC_BOB + POSITION_DESC_BOB + EMAIL_DESC_BOB
-                + INTERVIEW_DESC_HUSBAND;
+                 + PHONE_DESC_AMY + POSITION_DESC_AMY + EMAIL_DESC_AMY
+                 + PHONE_DESC_BOB + POSITION_DESC_BOB + EMAIL_DESC_BOB;
 
         assertParseFailure(parser, userInput,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_POSITION));
@@ -197,16 +179,5 @@ public class EditCommandParserTest {
 
         assertParseFailure(parser, userInput,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_POSITION));
-    }
-
-    @Test
-    public void parse_resetInterviews_success() {
-        Index targetIndex = INDEX_THIRD_APPLICANT;
-        String userInput = targetIndex.getOneBased() + INTERVIEW_EMPTY;
-
-        EditApplicantDescriptor descriptor = new EditApplicantDescriptorBuilder().withInterviews().build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
-
-        assertParseSuccess(parser, userInput, expectedCommand);
     }
 }

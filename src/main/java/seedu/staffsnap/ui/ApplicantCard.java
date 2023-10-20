@@ -1,7 +1,5 @@
 package seedu.staffsnap.ui;
 
-import java.util.Comparator;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -53,7 +51,9 @@ public class ApplicantCard extends UiPart<Region> {
         position.setText(applicant.getPosition().value);
         email.setText(applicant.getEmail().value);
         applicant.getInterviews().stream()
-                .sorted(Comparator.comparing(interview -> interview.type))
-                .forEach(interview -> interviews.getChildren().add(new Label(interview.type)));
+                .forEach(interview -> {
+                    interviews.getChildren().add(new Label(applicant.getInterviewIndexForApplicantCard(interview)
+                            + ". " + interview.type));
+                });
     }
 }

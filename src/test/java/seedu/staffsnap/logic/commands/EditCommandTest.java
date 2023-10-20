@@ -5,8 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.DESC_BOB;
-import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_INTERVIEW_HUSBAND;
+import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -56,11 +58,10 @@ public class EditCommandTest {
         Applicant lastApplicant = model.getFilteredApplicantList().get(indexLastApplicant.getZeroBased());
 
         ApplicantBuilder applicantInList = new ApplicantBuilder(lastApplicant);
-        Applicant editedApplicant = applicantInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withInterviews(VALID_INTERVIEW_HUSBAND).build();
+        Applicant editedApplicant = applicantInList.withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY).build();
 
-        EditApplicantDescriptor descriptor = new EditApplicantDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withInterviews(VALID_INTERVIEW_HUSBAND).build();
+        EditApplicantDescriptor descriptor = new EditApplicantDescriptorBuilder().withName(VALID_NAME_AMY)
+                .withPhone(VALID_PHONE_AMY).build();
         EditCommand editCommand = new EditCommand(indexLastApplicant, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_APPLICANT_SUCCESS,
@@ -90,9 +91,9 @@ public class EditCommandTest {
         showApplicantAtIndex(model, INDEX_FIRST_APPLICANT);
 
         Applicant applicantInFilteredList = model.getFilteredApplicantList().get(INDEX_FIRST_APPLICANT.getZeroBased());
-        Applicant editedApplicant = new ApplicantBuilder(applicantInFilteredList).withName(VALID_NAME_BOB).build();
+        Applicant editedApplicant = new ApplicantBuilder(applicantInFilteredList).withName(VALID_NAME_AMY).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_APPLICANT,
-                new EditApplicantDescriptorBuilder().withName(VALID_NAME_BOB).build());
+                new EditApplicantDescriptorBuilder().withName(VALID_NAME_AMY).build());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_APPLICANT_SUCCESS,
                 Messages.format(editedApplicant));
@@ -121,6 +122,56 @@ public class EditCommandTest {
                 .getApplicantList().get(INDEX_SECOND_APPLICANT.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_APPLICANT,
                 new EditApplicantDescriptorBuilder(applicantInList).build());
+
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_APPLICANT);
+    }
+
+    @Test
+    public void execute_duplicateEmailUnfilteredList_failure() {
+        Applicant firstApplicant = model.getFilteredApplicantList().get(INDEX_FIRST_APPLICANT.getZeroBased());
+        EditApplicantDescriptor descriptor = new EditApplicantDescriptorBuilder(firstApplicant)
+                .withEmail(VALID_EMAIL_BOB).build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_APPLICANT, descriptor);
+
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_APPLICANT);
+    }
+
+    @Test
+    public void execute_duplicateEmailFilteredList_failure() {
+        showApplicantAtIndex(model, INDEX_FIRST_APPLICANT);
+
+        // edit applicant in filtered list into a duplicate in applicant book
+        Applicant applicantInList = model.getApplicantBook()
+                .getApplicantList().get(INDEX_FIRST_APPLICANT.getZeroBased());
+        EditApplicantDescriptor descriptor = new EditApplicantDescriptorBuilder(applicantInList)
+                .withEmail(VALID_EMAIL_BOB).build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_APPLICANT,
+                new EditApplicantDescriptorBuilder(descriptor).build());
+
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_APPLICANT);
+    }
+
+    @Test
+    public void execute_duplicatePhoneUnfilteredList_failure() {
+        Applicant firstApplicant = model.getFilteredApplicantList().get(INDEX_FIRST_APPLICANT.getZeroBased());
+        EditApplicantDescriptor descriptor = new EditApplicantDescriptorBuilder(firstApplicant)
+                .withPhone(VALID_PHONE_BOB).build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_APPLICANT, descriptor);
+
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_APPLICANT);
+    }
+
+    @Test
+    public void execute_duplicatePhoneFilteredList_failure() {
+        showApplicantAtIndex(model, INDEX_FIRST_APPLICANT);
+
+        // edit applicant in filtered list into a duplicate in applicant book
+        Applicant applicantInList = model.getApplicantBook()
+                .getApplicantList().get(INDEX_FIRST_APPLICANT.getZeroBased());
+        EditApplicantDescriptor descriptor = new EditApplicantDescriptorBuilder(applicantInList)
+                .withPhone(VALID_PHONE_BOB).build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_APPLICANT,
+                new EditApplicantDescriptorBuilder(descriptor).build());
 
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_APPLICANT);
     }

@@ -61,6 +61,12 @@ public interface Model {
     boolean hasApplicant(Applicant applicant);
 
     /**
+     * Returns true if an applicant with the same identity as {@code applicant} exists in the applicant book
+     * and they are not the same applicant.
+     */
+    boolean isDuplicateApplicant(Applicant applicant);
+
+    /**
      * Deletes the given applicant.
      * The applicant must exist in the applicant book.
      */

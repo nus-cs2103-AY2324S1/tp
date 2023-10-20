@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_INTERVIEW_HUSBAND;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_POSITION_BOB;
@@ -52,10 +51,6 @@ public class EditApplicantDescriptorTest {
         // different position -> returns false
         editedAmy = new EditApplicantDescriptorBuilder(DESC_AMY).withPosition(VALID_POSITION_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
-
-        // different interviews -> returns false
-        editedAmy = new EditApplicantDescriptorBuilder(DESC_AMY).withInterviews(VALID_INTERVIEW_HUSBAND).build();
-        assertFalse(DESC_AMY.equals(editedAmy));
     }
 
     @Test
@@ -65,8 +60,7 @@ public class EditApplicantDescriptorTest {
                 + editApplicantDescriptor.getName().orElse(null) + ", phone="
                 + editApplicantDescriptor.getPhone().orElse(null) + ", email="
                 + editApplicantDescriptor.getEmail().orElse(null) + ", position="
-                + editApplicantDescriptor.getPosition().orElse(null) + ", interviews="
-                + editApplicantDescriptor.getInterviews().orElse(null) + "}";
+                + editApplicantDescriptor.getPosition().orElse(null) + "}";
         assertEquals(expected, editApplicantDescriptor.toString());
     }
 }
