@@ -95,7 +95,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                     errorMessage += "- Policy Number(" + PREFIX_POLICY_NUMBER + ") ";
                 }
                 if (argMultimap.getValue(PREFIX_POLICY_ISSUE_DATE).isEmpty()) {
-                    errorMessage += "- Policy Issue Date(pi/) ";
+                    errorMessage += "- Policy Issue Date(" + PREFIX_POLICY_ISSUE_DATE + ") ";
                 }
                 if (argMultimap.getValue(PREFIX_POLICY_EXPIRY_DATE).isEmpty()) {
                     errorMessage += "- Policy Expiry Date(" + PREFIX_POLICY_EXPIRY_DATE + ") ";
