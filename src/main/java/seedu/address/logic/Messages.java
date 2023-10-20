@@ -18,7 +18,17 @@ public class Messages {
 
     public static final String MESSAGE_IMPOSSIBLE_INDEX = "Error: The parameter is not of the type positive integer";
 
+    public static final String MESSAGE_PREAMBLE_DETECTED = "Error: Preamble Detected";
 
+    public static final String MESSAGE_MISSING_FIELDS_FOR_ADD_COMMAND =
+            "Error: Some of the required fields are missing. "
+            + "\n"
+            + "Please include the following: ";
+
+    public static final String MESSAGE_MISSING_FIELDS_POLICY_FOR_ADD_COMMAND =
+            "Please include either all or none of the policy variables. "
+            + "\n"
+            + "You are missing the following: ";
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
