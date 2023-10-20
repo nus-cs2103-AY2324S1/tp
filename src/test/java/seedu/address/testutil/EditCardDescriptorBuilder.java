@@ -1,9 +1,9 @@
 package seedu.address.testutil;
 
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.model.person.Answer;
-import seedu.address.model.person.Card;
-import seedu.address.model.person.Question;
+import seedu.address.model.card.Answer;
+import seedu.address.model.card.Card;
+import seedu.address.model.card.Question;
 
 /**
  * A utility class to help with building EditCardDescriptor objects.

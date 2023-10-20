@@ -1,26 +1,27 @@
-package seedu.address.model.person;
+package seedu.address.model.card;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.exceptions.CardNotFoundException;
-import seedu.address.model.person.exceptions.DuplicateCardException;
+import seedu.address.model.card.exceptions.CardNotFoundException;
+import seedu.address.model.card.exceptions.DuplicateCardException;
 
 /**
- * A list of persons that enforces uniqueness between its elements and does not allow nulls.
- * A person is considered unique by comparing using {@code Person#isSamePerson(Person)}. As such, adding and updating of
- * persons uses Person#isSamePerson(Person) for equality so as to ensure that the person being added or updated is
- * unique in terms of identity in the UniquePersonList. However, the removal of a person uses Person#equals(Object) so
- * as to ensure that the person with exactly the same fields will be removed.
+ * A list of cards that enforces uniqueness between its elements and does not allow nulls.
+ * A card is considered unique by comparing using {@code Card#isSameCard(Card)}. As such, adding and updating of
+ * cards uses Card#isSameCard(Card) for equality so as to ensure that the card being added or updated is
+ * unique in terms of identity in the UniqueCardList. However, the removal of a card uses Card#equals(Object) so
+ * as to ensure that the card with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
- * @see Person#isSamePerson(Person)
+ * @see Card#isSameCard(Card)
  */
 public class UniqueCardList implements Iterable<Card> {
 
@@ -29,7 +30,7 @@ public class UniqueCardList implements Iterable<Card> {
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent person as the given argument.
+     * Returns true if the list contains an equivalent card as the given argument.
      */
     public boolean contains(Card toCheck) {
         requireNonNull(toCheck);
@@ -37,21 +38,33 @@ public class UniqueCardList implements Iterable<Card> {
     }
 
     /**
-     * Adds a person to the list.
-     * The person must not already exist in the list.
+     * Adds a card to the list.
+     * The card must not already exist in the list.
      */
     public void add(Card toAdd) {
         requireNonNull(toAdd);
+
+        // Check if the card is already in the list
         if (contains(toAdd)) {
             throw new DuplicateCardException();
         }
+
+        // Add the card to the list
         internalList.add(toAdd);
+        sort();
     }
 
     /**
-     * Replaces the person {@code target} in the list with {@code editedPerson}.
+     * Sort the list based on card priorities.
+     */
+    private void sort() {
+        internalList.sort(Comparator.comparingInt(Card::getPriority));
+    }
+
+    /**
+     * Replaces the card {@code target} in the list with {@code editedCard}.
      * {@code target} must exist in the list.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
+     * The card identity of {@code editedCard} must not be the same as another existing card in the list.
      */
     public void setCard(Card target, Card editedCard) {
         requireAllNonNull(target, editedCard);
@@ -66,27 +79,30 @@ public class UniqueCardList implements Iterable<Card> {
         }
 
         internalList.set(index, editedCard);
+        sort();
     }
 
     /**
-     * Removes the equivalent person from the list.
-     * The person must exist in the list.
+     * Removes the equivalent card from the list.
+     * The card must exist in the list.
      */
     public void remove(Card toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
             throw new CardNotFoundException();
         }
+        sort();
     }
 
     public void setCards(UniqueCardList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
+        sort();
     }
 
     /**
-     * Replaces the contents of this list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of this list with {@code cards}.
+     * {@code cards} must not contain duplicate cards.
      */
     public void setCards(List<Card> cards) {
         requireAllNonNull(cards);
@@ -95,6 +111,7 @@ public class UniqueCardList implements Iterable<Card> {
         }
 
         internalList.setAll(cards);
+        sort();
     }
 
     /**
@@ -135,14 +152,14 @@ public class UniqueCardList implements Iterable<Card> {
     }
 
     /**
-     * Returns true if {@code persons} contains only unique persons.
+     * Returns true if {@code cards} contains only unique cards.
      */
-    private boolean cardsAreUnique(List<Card> persons) {
+    private boolean cardsAreUnique(List<Card> cards) {
         boolean isUnique = true;
 
-        for (int i = 0; i < persons.size() - 1; i++) {
-            for (int j = i + 1; j < persons.size(); j++) {
-                if (persons.get(i).isSameCard(persons.get(j))) {
+        for (int i = 0; i < cards.size() - 1; i++) {
+            for (int j = i + 1; j < cards.size(); j++) {
+                if (cards.get(i).isSameCard(cards.get(j))) {
                     isUnique = false;
                 }
             }

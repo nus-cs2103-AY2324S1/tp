@@ -11,7 +11,7 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Card;
+import seedu.address.model.card.Card;
 import seedu.address.testutil.CardBuilder;
 
 /**

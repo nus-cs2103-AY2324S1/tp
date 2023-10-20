@@ -9,7 +9,7 @@ import static seedu.address.testutil.TypicalCards.CS2100;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.person.exceptions.CardNotFoundException;
+import seedu.address.model.card.exceptions.CardNotFoundException;
 import seedu.address.testutil.DeckBuilder;
 
 public class DeckTest {

@@ -6,8 +6,8 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.Card;
-import seedu.address.model.person.UniqueCardList;
+import seedu.address.model.card.Card;
+import seedu.address.model.card.UniqueCardList;
 
 /**
  * Wraps all data at the address-book level

@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.card;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalCards.CS1101S;
 import static seedu.address.testutil.TypicalCards.CS2100;
+import static seedu.address.testutil.TypicalCards.HIGH;
+import static seedu.address.testutil.TypicalCards.LOW;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -13,8 +15,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.person.exceptions.CardNotFoundException;
-import seedu.address.model.person.exceptions.DuplicateCardException;
+import seedu.address.model.card.exceptions.CardNotFoundException;
+import seedu.address.model.card.exceptions.DuplicateCardException;
 import seedu.address.testutil.CardBuilder;
 
 public class UniqueCardListTest {
@@ -160,5 +162,40 @@ public class UniqueCardListTest {
     @Test
     public void toStringMethod() {
         assertEquals(uniqueCardList.asUnmodifiableObservableList().toString(), uniqueCardList.toString());
+    }
+
+    @Test
+    public void add_cardWithHigherPriority() {
+        Card low = new CardBuilder(LOW).build();
+        low.setPriority(0);
+        uniqueCardList.add(low);
+        uniqueCardList.add(HIGH);
+        UniqueCardList otherList = new UniqueCardList();
+        otherList.add(HIGH);
+        otherList.add(low);
+        assertTrue(uniqueCardList.equals(otherList));
+    }
+
+    @Test
+    public void add_cardWithSamePriority() {
+        UniqueCardList otherList = new UniqueCardList();
+        uniqueCardList.add(CS2100);
+        uniqueCardList.add(HIGH);
+        otherList.add(HIGH);
+        otherList.add(CS2100);
+        assertFalse(uniqueCardList.equals(otherList));
+    }
+
+    @Test
+    public void add_cardThenChangePriority() {
+        Card low = new CardBuilder(LOW).build();
+        uniqueCardList.add(HIGH);
+        uniqueCardList.add(low);
+        low.setPriority(0);
+        uniqueCardList.setCard(low, low);
+        UniqueCardList otherList = new UniqueCardList();
+        otherList.add(low);
+        otherList.add(HIGH);
+        assertTrue(uniqueCardList.equals(otherList));
     }
 }
