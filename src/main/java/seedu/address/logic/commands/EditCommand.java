@@ -51,7 +51,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_SALARY + " SALARY] "
             + "[" + PREFIX_ANNUAL_LEAVE + " ANNUAL_LEAVE]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + " 91234567 "
+            + PREFIX_PHONE + " 91234568 "
             + PREFIX_EMAIL + " johndoe@example.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Employee: %1$s";
