@@ -56,7 +56,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                 PREFIX_LICENCE_PLATE, PREFIX_ADDRESS)) {
             String errorMessage = MESSAGE_MISSING_FIELDS_FOR_ADD_COMMAND;
             if (argMultimap.getValue(PREFIX_NAME).isEmpty()) {
-                errorMessage += "- Name("  + PREFIX_NAME + ") ";
+                errorMessage += "- Name(" + PREFIX_NAME + ") ";
             }
             if (argMultimap.getValue(PREFIX_PHONE).isEmpty()) {
                 errorMessage += "- Phone(" + PREFIX_PHONE + ") ";
