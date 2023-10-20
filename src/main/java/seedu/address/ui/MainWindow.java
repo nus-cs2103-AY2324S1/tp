@@ -276,6 +276,6 @@ public class MainWindow extends UiPart<Stage> {
      */
     public void handleShowLesson(Lesson lesson) {
         lessonDetailList.setVisible(true);
-         lessonDetailListPanel.setLessonDetails(lesson);
+        lessonDetailListPanel.setLessonDetails(lesson);
     }
 }

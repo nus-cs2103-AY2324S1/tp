@@ -79,12 +79,15 @@ public class SampleDataUtil {
         LocalDateTime endLesson2 = LocalDateTime.of(2022, 10, 18, 16, 30);
         LocalDateTime startLesson3 = LocalDateTime.of(2022, 11, 20, 10, 30);
         LocalDateTime endLesson3 = LocalDateTime.of(2022, 10, 20, 12, 30);
+        LocalDateTime startLesson4 = LocalDateTime.of(2022, 9, 20, 13, 30);
+        LocalDateTime endLesson4 = LocalDateTime.of(2022, 9, 20, 15, 30);
         Subject math = new Subject("MATHEMATICS");
         Subject bio = new Subject("BIOLOGY");
         return new Lesson[] {
             new Lesson(startLesson1, endLesson1, math, "Alex Yeoh"),
             new Lesson(startLesson2, endLesson2, math, "David Li"),
             new Lesson(startLesson3, endLesson3, bio, "Bernice Yu"),
+            new Lesson(startLesson4, endLesson4, bio, "Bernice Yu"),
         };
     }
     public static ReadOnlySchedule getSampleSchedule() {

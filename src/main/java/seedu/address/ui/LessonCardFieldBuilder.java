@@ -1,12 +1,8 @@
 package seedu.address.ui;
 
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import seedu.address.model.lessons.Lesson;
-import seedu.address.model.person.Person;
-
-import java.util.Comparator;
 
 
 /**
@@ -20,25 +16,6 @@ public class LessonCardFieldBuilder {
      * @param fields the fields
      */
     public static void build(String fieldName, Lesson lesson, VBox fields) {
-//        switch (fieldName) {
-//        case "phone":
-//            buildPhone(person, fields, tags);
-//            break;
-//        case "address":
-//            buildAddress(person, fields, tags);
-//            break;
-//        case "email":
-//            buildEmail(person, fields, tags);
-//            break;
-//        case "tags":
-//            buildTags(person, fields, tags);
-//            break;
-//        case "subjects":
-//            buildSubjects(person, fields, tags);
-//            break;
-//        default:
-//            break;
-//        }
         switch (fieldName) {
         case "date":
             buildDate(lesson, fields);
