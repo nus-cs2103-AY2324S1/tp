@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_DESCRIPTIO
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_PATIENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_START;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.List;
 import java.util.stream.Collectors;
