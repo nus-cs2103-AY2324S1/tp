@@ -3,6 +3,7 @@ package seedu.application.model.job;
 import static java.util.Objects.requireNonNull;
 import static seedu.application.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -25,6 +26,7 @@ import seedu.application.model.job.exceptions.JobNotFoundException;
 public class UniqueJobList implements Iterable<Job> {
 
     private final ObservableList<Job> internalList = FXCollections.observableArrayList();
+    private List<Job> unsortedInternalList = new ArrayList<>();
     private final ObservableList<Job> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
@@ -46,6 +48,7 @@ public class UniqueJobList implements Iterable<Job> {
             throw new DuplicateJobException();
         }
         internalList.add(toAdd);
+        unsortedInternalList.add(toAdd);
     }
 
     /**
@@ -66,6 +69,17 @@ public class UniqueJobList implements Iterable<Job> {
         }
 
         internalList.set(index, editedJob);
+
+        index = unsortedInternalList.indexOf(target);
+        if (index == -1) {
+            throw new JobNotFoundException();
+        }
+
+        if (!target.isSameJob(editedJob) && contains(editedJob)) {
+            throw new DuplicateJobException();
+        }
+
+        unsortedInternalList.set(index, editedJob);
     }
 
     /**
@@ -77,11 +91,16 @@ public class UniqueJobList implements Iterable<Job> {
         if (!internalList.remove(toRemove)) {
             throw new JobNotFoundException();
         }
+        unsortedInternalList.remove(toRemove);
     }
 
     public void setJobs(UniqueJobList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
+    }
+
+    public void unsortJobs() {
+        internalList.setAll(unsortedInternalList);
     }
 
     /**

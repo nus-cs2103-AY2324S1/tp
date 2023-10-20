@@ -11,7 +11,7 @@ import seedu.application.model.job.UniqueJobList;
 
 /**
  * Wraps all data at the application-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Duplicates are not allowed (by .isSameJob comparison)
  */
 public class ApplicationBook implements ReadOnlyApplicationBook {
 
@@ -57,7 +57,7 @@ public class ApplicationBook implements ReadOnlyApplicationBook {
         setJobs(newData.getJobList());
     }
 
-    //// person-level operations
+    //// job-level operations
 
     /**
      * Returns true if a job with the same identity as {@code job} exists in the application book.
@@ -92,6 +92,13 @@ public class ApplicationBook implements ReadOnlyApplicationBook {
      */
     public void removeJob(Job key) {
         jobs.remove(key);
+    }
+
+    /**
+     * Restores {@code jobs} to the original unsorted order.
+     */
+    public void unsortJobs() {
+        jobs.unsortJobs();
     }
 
     //// util methods

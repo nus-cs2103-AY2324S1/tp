@@ -111,13 +111,12 @@ public class ModelManager implements Model {
         applicationBook.setJob(target, editedJob);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Job List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Job} backed by the internal list of
      * {@code versionedApplicationBook}
      */
-
     @Override
     public ObservableList<Job> getFilteredJobList() {
         return filteredJobs;
@@ -127,6 +126,15 @@ public class ModelManager implements Model {
     public void updateFilteredJobList(Predicate<Job> predicate) {
         requireNonNull(predicate);
         filteredJobs.setPredicate(predicate);
+    }
+
+    //=========== Sorted Job List Accessors =============================================================
+
+    /**
+     * Restores the jobs in {@code applicationBook} to the original unsorted order.
+     */
+    public void unsortJobs() {
+        applicationBook.unsortJobs();
     }
 
     @Override
