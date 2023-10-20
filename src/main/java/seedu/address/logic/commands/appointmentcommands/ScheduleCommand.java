@@ -62,7 +62,7 @@ public class ScheduleCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> latestPersonList = model.getFilteredPersonList();
-        ObservableList<Appointment> appList = model.getFilteredAppointmentList();
+        List<Appointment> lastShownList = model.getFilteredAppointmentList();
 
         if (!model.hasPerson(patientName)) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -74,13 +74,8 @@ public class ScheduleCommand extends Command {
         // Add the Person patient to the current appointment
         currAppointment.setPatient(personToAdd);
 
-        // Timeslot is invalid
-        if (!AppointmentTime.isValidAppointmentTime(currAppointment.getStartTime(), currAppointment.getEndTime())) {
-            throw new CommandException((Messages.MESSAGE_INVALID_START_AND_END_TIMES));
-        }
-
         // Clash in appointment slot
-        if (!AppointmentTime.isValidTimeSlot(appList, currAppointment)) {
+        if (!AppointmentTime.isValidTimeSlot(lastShownList, currAppointment)) {
             throw new CommandException(Messages.MESSAGE_DUPLICATE_TIMESLOT);
         }
 

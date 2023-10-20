@@ -3,7 +3,6 @@ package seedu.address.logic.commands.appointmentcommands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_START;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_APPOINTMENTS;
 
 import java.util.List;
@@ -30,10 +29,10 @@ public class RescheduleCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Reschedules the appointment identified "
             + "by the index number used in the displayed appointment list.\n"
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: " + PREFIX_ID + "(must be a positive integer) "
+            + "Parameters: INDEX (index must be a positive integer) "
             + "[" + PREFIX_APPOINTMENT_START + "APPOINTMENT START DATE AND TIME] "
             + "[" + PREFIX_APPOINTMENT_END + "APPOINTMENT END DATE AND TIME]\n"
-            + "Example: " + PREFIX_ID + " 1 "
+            + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_APPOINTMENT_START + "2023/05/02 09:00 "
             + PREFIX_APPOINTMENT_END + "2023/05/02 11:00 ";
 
@@ -70,9 +69,14 @@ public class RescheduleCommand extends Command {
         Appointment appointmentToReschedule = lastShownList.get(index.getZeroBased());
         Appointment rescheduledAppointment = createRescheduledAppointment(appointmentToReschedule, appointmentTime);
 
-        if (!appointmentToReschedule.isSameAppointment(rescheduledAppointment)
-                && model.hasAppointment(rescheduledAppointment)) {
-            throw new CommandException(MESSAGE_DUPLICATE_APPOINTMENT);
+        // Clash in appointment slot
+        if (!AppointmentTime.isValidTimeSlot(lastShownList, rescheduledAppointment)) {
+            throw new CommandException(Messages.MESSAGE_DUPLICATE_TIMESLOT);
+        }
+
+        // Appointment already exists
+        if (model.hasAppointment(rescheduledAppointment)) {
+            throw new CommandException(Messages.MESSAGE_DUPLICATE_APPOINTMENT);
         }
 
         model.setAppointment(appointmentToReschedule, rescheduledAppointment);

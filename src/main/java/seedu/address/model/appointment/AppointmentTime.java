@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Objects;
 
 import javafx.collections.ObservableList;
@@ -56,7 +57,7 @@ public class AppointmentTime {
      * @param appointment The appointment to check.
      * @return True if the appointment is valid, false otherwise.
      */
-    public static Boolean isValidTimeSlot(ObservableList<Appointment> appointmentList, Appointment appointment) {
+    public static Boolean isValidTimeSlot(List<Appointment> appointmentList, Appointment appointment) {
         LocalDateTime start = appointment.getStartTime();
         LocalDateTime end = appointment.getEndTime();
 
