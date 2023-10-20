@@ -3,6 +3,7 @@ package seedu.address.model.event;
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.NavigableMap;
 import java.util.Optional;
@@ -78,6 +79,22 @@ public class SingleDayEventList {
     }
 
     /**
+     * Check if there is an event at specified time
+     *
+     * @param dateTime the specified time
+     * @return an {@code @Optional} containing the event if there is an event at the time, empty optional otherwise.
+     */
+    public Optional<Event> eventAtTime(LocalDateTime dateTime) {
+        requireNonNull(dateTime);
+        for (Event event : this.eventTree.values()) {
+            if (event.isDuring(dateTime)) {
+                return Optional.of(event);
+            }
+        }
+        return Optional.empty();
+    }
+
+    /**
      * Removes the event from the list. The event must exist in the list.
      * @param toRemove event to be removed.
      */
@@ -100,6 +117,15 @@ public class SingleDayEventList {
     public ObservableList<Event> getDayEventList() {
         return FXCollections.<Event>observableArrayList(this.eventTree.values()
                 .toArray(new Event[0]));
+    }
+
+    /**
+     * Checks if there are no events present in this list.
+     *
+     * @return true if there are no events present, false otherwise.
+     */
+    public boolean isEmpty() {
+        return eventTree.isEmpty();
     }
 
     @Override

@@ -2,6 +2,9 @@ package seedu.address.model.calendar;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDateTime;
+import java.util.Optional;
+
 import seedu.address.model.event.AllDaysEventListManager;
 import seedu.address.model.event.Event;
 
@@ -9,7 +12,7 @@ import seedu.address.model.event.Event;
  * Represents a calendar that stores and manages events.
  */
 public class Calendar {
-    private AllDaysEventListManager eventManager;
+    private final AllDaysEventListManager eventManager;
 
     /**
      * Constructs a Calendar object with an empty event tree.
@@ -34,7 +37,7 @@ public class Calendar {
      * @return true if it can be added, false otherwise.
      */
     public boolean canAddEvent(Event event) {
-        return this.eventManager.canAddEvent(event);
+        return eventManager.canAddEvent(event);
     }
 
     /**
@@ -44,7 +47,26 @@ public class Calendar {
      */
     public void addEvent(Event event) {
         requireNonNull(event);
-        this.eventManager.addEvent(event);
+        eventManager.addEvent(event);
+    }
+
+    /**
+     * Checks if there is an event at specified time and deletes it if there is.
+     * @param dateTime the specified time
+     */
+    public void deleteEventAt(LocalDateTime dateTime) {
+        requireNonNull(dateTime);
+        eventManager.deleteEventAt(dateTime);
+    }
+
+    /**
+     * Looks for an event at specified time.
+     * @param dateTime the specified time.
+     * @return an optional containing the event if there is an event at the time, an empty optional otherwise.
+     */
+    public Optional<Event> findEventAt(LocalDateTime dateTime) {
+        requireNonNull(dateTime);
+        return eventManager.eventAt(dateTime);
     }
 
     /**
@@ -71,6 +93,18 @@ public class Calendar {
      */
     public boolean isEmpty() {
         return this.eventManager.isEmpty();
+    }
+
+    /**
+     * Checks if there are any events at all in the calendar.
+     *
+     * @return true if there are events in the calendar, false otherwise.
+     */
+    public boolean hasEvents() {
+        if (!this.isEmpty()) {
+            return eventManager.hasEvents();
+        }
+        return false;
     }
 
     @Override

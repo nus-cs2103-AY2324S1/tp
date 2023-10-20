@@ -2,12 +2,15 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.model.event.EventPeriod.DATE_TIME_STRING_FORMATTER;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.EventBuilder.DEFAULT_END_TIME_STRING;
+import static seedu.address.testutil.EventBuilder.DEFAULT_START_TIME_STRING;
 
 import java.nio.file.Path;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.function.Predicate;
 
@@ -25,31 +28,60 @@ import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EventBuilder;
 
-public class AddEventCommandTest {
+
+class DeleteEventCommandTest {
+    private static LocalDateTime firstTime = LocalDateTime.parse(DEFAULT_START_TIME_STRING, DATE_TIME_STRING_FORMATTER);
+    private static LocalDateTime secondTime = LocalDateTime.parse(DEFAULT_END_TIME_STRING, DATE_TIME_STRING_FORMATTER);
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddEventCommand(null));
+        assertThrows(NullPointerException.class, () -> new DeleteEventCommand(null));
     }
 
     @Test
-    public void constructor_eventAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingEventAdded modelStub = new ModelStubAcceptingEventAdded();
+    public void constructor_eventDeletedFromModel_deleteSuccessful() throws Exception {
         Event validEvent = new EventBuilder().build();
-
-        CommandResult commandResult = new AddEventCommand(validEvent).execute(modelStub);
-        assertEquals(String.format(AddEventCommand.MESSAGE_SUCCESS, Messages.format(validEvent)),
+        DeleteEventCommandTest.ModelStubWithEvent modelStub = new DeleteEventCommandTest.ModelStubWithEvent(validEvent);
+        CommandResult commandResult = new DeleteEventCommand(firstTime).execute(modelStub);
+        assertEquals(String.format(DeleteEventCommand.MESSAGE_SUCCESS, Messages.format(validEvent)),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validEvent), modelStub.eventsAdded);
     }
 
     @Test
-    public void execute_conflictingEvent_throwsCommandException() {
-        Event validEvent = new EventBuilder().build();
-        AddEventCommand addEventCommand = new AddEventCommand(validEvent);
-        ModelStub modelStub = new ModelStubWithEvent(validEvent);
+    public void execute_noEvent_throwsCommandException() {
+        DeleteEventCommand deleteEventCommand = new DeleteEventCommand(secondTime);
+        DeleteEventCommandTest.ModelStub modelStub = new DeleteEventCommandTest.ModelStubWithNoEvent();
 
-        assertThrows(CommandException.class, AddEventCommand.MESSAGE_EVENT_CONFLICT, () -> addEventCommand
+        assertThrows(CommandException.class, DeleteEventCommand.MESSAGE_NO_EVENT, () -> deleteEventCommand
                 .execute(modelStub));
+    }
+
+    @Test
+    public void equals() {
+        DeleteEventCommand deleteFirstEventCommand = new DeleteEventCommand(firstTime);
+        DeleteEventCommand deleteSecondEventCommand = new DeleteEventCommand(secondTime);
+
+        // same object -> returns true
+        assertTrue(deleteFirstEventCommand.equals(deleteFirstEventCommand));
+
+        // same values -> returns true
+        DeleteEventCommand deleteFirstEventCommandCopy = new DeleteEventCommand(firstTime);
+        assertTrue(deleteFirstEventCommand.equals(deleteFirstEventCommandCopy));
+
+        // different types -> returns false
+        assertFalse(deleteFirstEventCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(deleteFirstEventCommand.equals(null));
+
+        // different person -> returns false
+        assertFalse(deleteFirstEventCommand.equals(deleteSecondEventCommand));
+    }
+
+    @Test
+    public void toStringMethod() {
+        DeleteEventCommand deleteFirstEventCommand = new DeleteEventCommand(firstTime);
+        String expected = DeleteEventCommand.class.getCanonicalName() + "{toDeleteAt=" + firstTime + "}";
+        assertEquals(expected, deleteFirstEventCommand.toString());
     }
 
     /**
@@ -155,7 +187,15 @@ public class AddEventCommandTest {
     /**
      * A Model stub that contains a single event.
      */
-    private class ModelStubWithEvent extends AddEventCommandTest.ModelStub {
+    private class ModelStubWithNoEvent extends DeleteEventCommandTest.ModelStub {
+
+        @Override
+        public Event findEventAt(LocalDateTime dateTime) {
+            throw new EventNotFoundException();
+        }
+    }
+
+    private class ModelStubWithEvent extends DeleteEventCommandTest.ModelStub {
         private final Event event;
 
         ModelStubWithEvent(Event event) {
@@ -164,27 +204,13 @@ public class AddEventCommandTest {
         }
 
         @Override
-        public boolean canAddEvent(Event other) {
-            return !event.isConflicting(other);
-        }
-    }
-
-    /**
-     * A Model stub that always accept the person being added.
-     */
-    private class ModelStubAcceptingEventAdded extends AddEventCommandTest.ModelStub {
-        final ArrayList<Event> eventsAdded = new ArrayList<Event>();
-
-        @Override
-        public boolean canAddEvent(Event event) {
-            requireNonNull(event);
-            return eventsAdded.stream().anyMatch(x -> !x.isConflicting(event)) || eventsAdded.isEmpty();
+        public Event findEventAt(LocalDateTime dateTime) {
+            return event;
         }
 
         @Override
-        public void addEvent(Event event) {
-            requireNonNull(event);
-            eventsAdded.add(event);
+        public void deleteEventAt(LocalDateTime dateTime) {
+            return;
         }
     }
 }
