@@ -33,10 +33,18 @@ public class FindCommandParserTest {
     private FindCommandParser parser = new FindCommandParser();
 
     @Test
-    public void parse_invalidArg_throwsParseException() {
+    public void parse_invalidPreambleOnly_throwsParseException() {
         assertParseComplexFailure(parser, " invalid input", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 FindCommand.MESSAGE_USAGE_PATIENT), PersonType.PATIENT);
         assertParseComplexFailure(parser, "  invalid input", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                FindCommand.MESSAGE_USAGE_SPECIALIST), PersonType.SPECIALIST);
+    }
+
+    @Test
+    public void parse_invalidPreambleValidPrefix_throwsParseException() {
+        assertParseComplexFailure(parser, " invalid input n/Alex", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                FindCommand.MESSAGE_USAGE_PATIENT), PersonType.PATIENT);
+        assertParseComplexFailure(parser, "  invalid input p/98736621", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 FindCommand.MESSAGE_USAGE_SPECIALIST), PersonType.SPECIALIST);
     }
 
