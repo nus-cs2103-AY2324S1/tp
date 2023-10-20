@@ -2,8 +2,7 @@ package seedu.staffsnap.logic.parser;
 
 import static seedu.staffsnap.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_DESCRIPTOR;
-
-import java.util.stream.Stream;
+import static seedu.staffsnap.logic.parser.ParserUtil.arePrefixesPresent;
 
 import seedu.staffsnap.logic.commands.SortCommand;
 import seedu.staffsnap.logic.parser.exceptions.ParseException;
@@ -32,13 +31,5 @@ public class SortCommandParser implements Parser<SortCommand> {
         Descriptor descriptor = ParserUtil.parseDescriptor(argMultimap.getValue(PREFIX_DESCRIPTOR).get());
 
         return new SortCommand(descriptor);
-    }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }

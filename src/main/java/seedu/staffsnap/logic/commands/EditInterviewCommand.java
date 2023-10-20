@@ -26,8 +26,9 @@ public class EditInterviewCommand extends Command {
 
     public static final String COMMAND_WORD = "editi";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of a specified interview of an "
-            + "applicant identified by the index number used in the displayed applicant list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Edits the applicant's specified interview identified by the index number "
+            + "used in the displayed applicant list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_INTERVIEW + "INTERVIEW_INDEX "
@@ -84,14 +85,7 @@ public class EditInterviewCommand extends Command {
 
         applicantToEdit.deleteInterview(interviewToEdit);
         applicantToEdit.addInterview(editedInterview);
-        /*
-         This is a workaround to javaFX not updating the list shown to the user unless the predicate is changed
-         Possible fix in the future is to read the current predicate, then store it to be reused
-         Might be an issue when implementing filter()
-         TODO:
-         store current predicate in temp variable
-         use stored predicate when refreshing the filtered list
-        */
+
         model.updateFilteredApplicantList(PREDICATE_HIDE_ALL_APPLICANTS);
         model.updateFilteredApplicantList(PREDICATE_SHOW_ALL_APPLICANTS);
         return new CommandResult(String.format(MESSAGE_EDIT_INTERVIEW_SUCCESS, Messages.format(applicantToEdit)));
