@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MOD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -32,8 +33,9 @@ public class AddCommand extends Command {
             + PREFIX_TELEGRAM + "TELEGRAM "
             + "[" + PREFIX_FROM + "FROM "
             + PREFIX_TO + "TO] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "[" + PREFIX_MOD + "MOD]...\n"
+            + "[" + PREFIX_TAG + "TAG]... "
+            + "[" + PREFIX_MOD + "MOD]... "
+            + PREFIX_HOUR + "HOUR \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
@@ -42,7 +44,8 @@ public class AddCommand extends Command {
             + PREFIX_FROM + "10:00 "
             + PREFIX_TO + "12:00 "
             + PREFIX_TAG + "fulltime "
-            + PREFIX_MOD + "CS1231S ";
+            + PREFIX_MOD + "CS1231S "
+            + PREFIX_HOUR + "10";
 
     public static final String MESSAGE_SUCCESS = "New teaching assistant added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This teaching assistant already exists in the address book";

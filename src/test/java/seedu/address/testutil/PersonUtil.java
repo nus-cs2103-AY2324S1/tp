@@ -2,6 +2,7 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MOD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -39,6 +40,7 @@ public class PersonUtil {
         sb.append(PREFIX_PHONE + person.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
         sb.append(PREFIX_TELEGRAM + person.getTelegram().value + " ");
+
         if (!person.getFreeTime().equals(FreeTime.EMPTY_FREE_TIME)) {
             sb.append(PREFIX_FROM + person.getFreeTime().getFrom() + " ");
             sb.append(PREFIX_TO + person.getFreeTime().getTo() + " ");
@@ -49,6 +51,7 @@ public class PersonUtil {
         person.getMods().stream().forEach(
             s -> sb.append(PREFIX_MOD + s.name + " ")
         );
+        sb.append(PREFIX_HOUR + person.getHour().value + " ");
         return sb.toString();
     }
 
@@ -72,6 +75,7 @@ public class PersonUtil {
             Set<Mod> mods = descriptor.getMods().get();
             mods.forEach(s -> sb.append(PREFIX_MOD).append(s.name).append(" "));
         }
+        descriptor.getHour().ifPresent(hour -> sb.append(PREFIX_HOUR).append(hour.value).append(" "));
         return sb.toString();
     }
 }
