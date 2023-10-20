@@ -139,4 +139,38 @@ public class Person {
                 .toString();
     }
 
+    /**
+     * Returns true if the person has a phone number.
+     */
+    public boolean hasPhone() {
+        return getPhone() != Phone.NULL_PHONE && getPhone() != null;
+    }
+
+    /**
+     * Returns true if the person has an email.
+     */
+    public boolean hasEmail() {
+        return getEmail() != Email.NULL_EMAIL && getEmail() != null;
+    }
+
+    /**
+     * Returns true if the person has an address.
+     */
+    public boolean hasAddress() {
+        return getAddress() != Address.NULL_ADDRESS && getAddress() != null;
+    }
+    /**
+     * Returns true if the person has a birthday.
+     */
+    public boolean hasBirthday() {
+        return getBirthday() != Birthday.NULL_BIRTHDAY && getBirthday() != null;
+    }
+    /**
+     * Returns true if the person has groups.
+     */
+    public boolean hasGroups() {
+        return !getGroups().isEmpty();
+    }
+
+
 }

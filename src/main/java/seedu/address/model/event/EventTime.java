@@ -11,7 +11,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class EventTime {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "The time must be in HHmm format, i.e. 2359, and it should not be blank";
+            "The time must be in HHmm format, i.e. 2359";
 
     public static final String TIME_REGEX = "([01][0-9]|2[0-3])[0-5][0-9]";
 
@@ -33,7 +33,7 @@ public class EventTime {
      * @param eventTime the event time in HHmm format.
      * @throws ParseException if the given eventTime does not follow the format.
      */
-    public EventTime(String eventTime) throws ParseException {
+    private EventTime(String eventTime) throws ParseException {
         try {
             this.eventTime = LocalTime.parse(eventTime, TIME_FORMATTER);
         } catch (Exception e) {
@@ -46,14 +46,14 @@ public class EventTime {
      * Because time is optional, a blank string is considered valid.
      */
     public static boolean isValidTime(String trimmedTime) {
-        //to represent the case of optional time.
-        if (trimmedTime.isBlank()) {
-            return true;
-        } else if (!trimmedTime.matches(TIME_REGEX)) {
-            return false;
-        }
-
         try {
+            //to represent the case of optional time.
+            if (trimmedTime.isBlank()) {
+                return true;
+            } else if (!trimmedTime.matches(TIME_REGEX)) {
+                return false;
+            }
+
             LocalTime parsedTime = LocalTime.parse(trimmedTime, TIME_FORMATTER);
             return true;
         } catch (Exception e) {
@@ -90,15 +90,16 @@ public class EventTime {
      * @throws ParseException if the given eventTime does not follow the format.
      */
     public static EventTime of(String eventTime) throws ParseException {
-        if (eventTime.isBlank()) {
-            return NULL_EVENT_TIME;
-        }
         if (!isValidTime(eventTime)) {
             throw new ParseException(MESSAGE_CONSTRAINTS);
         }
+
+        if (eventTime.isBlank()) {
+            return NULL_EVENT_TIME;
+        }
+
         return new EventTime(eventTime);
     }
-
 
     /**
      * ToString for the event time.

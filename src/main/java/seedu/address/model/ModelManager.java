@@ -195,6 +195,16 @@ public class ModelManager implements Model {
         }
     }
 
+    @Override
+    public void updateAssignedPersons(Person personToDelete) {
+        for (Event event : this.events) {
+            if (event.getNames().contains(personToDelete.getName())) {
+                event.getNames().remove(personToDelete.getName());
+                setEvent(event, event); //update event in the storage
+            }
+        }
+    }
+
     private Event createUpdatedEvent(Event event, Person personToEdit, Person editedPerson) {
 
         //add other switch statements for future event types
