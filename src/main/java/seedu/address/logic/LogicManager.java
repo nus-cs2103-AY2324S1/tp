@@ -15,6 +15,7 @@ import seedu.address.logic.parser.UniMateParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 import seedu.address.storage.Storage;
 
@@ -65,6 +66,11 @@ public class LogicManager implements Logic {
     @Override
     public ReadOnlyAddressBook getAddressBook() {
         return model.getAddressBook();
+    }
+
+    @Override
+    public ObservableList<Event> getEventList() {
+        return model.getEventList();
     }
 
     @Override

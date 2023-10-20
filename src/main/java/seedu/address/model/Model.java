@@ -130,6 +130,9 @@ public interface Model {
      */
     Event findEventAt(LocalDateTime dateTime) throws EventNotFoundException;
 
+    /** Returns a view of the event list */
+    ObservableList<Event> getEventList();
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 

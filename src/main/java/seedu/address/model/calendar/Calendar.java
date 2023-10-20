@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.event.AllDaysEventListManager;
 import seedu.address.model.event.Event;
@@ -15,6 +16,7 @@ import seedu.address.model.event.Event;
  */
 public class Calendar implements ReadOnlyCalendar {
     private final AllDaysEventListManager eventManager;
+    private final ObservableList<Event> internalList = FXCollections.observableArrayList();
 
     /**
      * Constructs a Calendar object with an empty event tree.
@@ -77,6 +79,7 @@ public class Calendar implements ReadOnlyCalendar {
     public void addEvent(Event event) {
         requireNonNull(event);
         eventManager.addEvent(event);
+        internalList.setAll(eventManager.asUnmodifiableObservableList());
     }
 
     /**
@@ -86,6 +89,7 @@ public class Calendar implements ReadOnlyCalendar {
     public void deleteEventAt(LocalDateTime dateTime) {
         requireNonNull(dateTime);
         eventManager.deleteEventAt(dateTime);
+        internalList.setAll(eventManager.asUnmodifiableObservableList());
     }
 
     /**
@@ -138,7 +142,7 @@ public class Calendar implements ReadOnlyCalendar {
 
     @Override
     public ObservableList<Event> getEventList() {
-        return eventManager.asUnmodifiableObservableList();
+        return internalList;
     }
 
     @Override
