@@ -15,8 +15,8 @@ abstract class Word {
      * @param language The input Word's language
      */
     public Word(String word, String language) {
-        this.word = word;
-        this.language = language;
+        this.word = word.trim();
+        this.language = language.trim();
     }
 
     /**
@@ -36,7 +36,7 @@ abstract class Word {
      * @return The word encapsulated by this
      */
     public String getWord() {
-        return word.trim();
+        return word;
     }
 
     /**
@@ -44,7 +44,7 @@ abstract class Word {
      * @return Language of this word
      */
     public String getLanguage() {
-        return language.trim();
+        return language;
     }
 
     /**
@@ -57,7 +57,7 @@ abstract class Word {
     }
 
     public boolean isSameLanguage(String language) {
-        return this.language.trim().equals(language.trim());
+        return this.language.equals(language);
     }
 
     /**
