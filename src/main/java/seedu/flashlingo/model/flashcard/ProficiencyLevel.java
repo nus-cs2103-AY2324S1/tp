@@ -9,7 +9,7 @@ package seedu.flashlingo.model.flashcard;
  */
 public class ProficiencyLevel {
     private int level; // Base level of 1
-    private int deleteThreshold; // After which level of proficiency to permanently remove flashcard
+    private int deleteThreshold = 5; // After which level of proficiency to permanently remove flashcard
     public ProficiencyLevel(int level) {
         this.level = level;
     }
