@@ -1,18 +1,7 @@
 package seedu.staffsnap.ui;
 
-import java.util.Comparator;
-import java.util.concurrent.Flow;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
-import javafx.geometry.HPos;
-import javafx.geometry.Orientation;
-import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
@@ -83,7 +72,9 @@ public class ApplicantCard extends UiPart<Region> {
         position.getChildren().add(positionLabel);
 
         applicant.getInterviews().stream()
-                .sorted(Comparator.comparing(interview -> interview.type))
-                .forEach(interview -> interviews.getChildren().add(new Label(interview.type)));
+                .forEach(interview -> {
+                    interviews.getChildren().add(new Label(applicant.getInterviewIndexForApplicantCard(interview)
+                            + ". " + interview.type));
+                });
     }
 }

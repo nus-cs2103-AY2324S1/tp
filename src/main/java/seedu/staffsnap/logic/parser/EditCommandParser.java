@@ -3,21 +3,14 @@ package seedu.staffsnap.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.staffsnap.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_INTERVIEW;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_POSITION;
-
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
 
 import seedu.staffsnap.commons.core.index.Index;
 import seedu.staffsnap.logic.commands.EditCommand;
 import seedu.staffsnap.logic.commands.EditCommand.EditApplicantDescriptor;
 import seedu.staffsnap.logic.parser.exceptions.ParseException;
-import seedu.staffsnap.model.interview.Interview;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -33,7 +26,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                        PREFIX_POSITION, PREFIX_INTERVIEW);
+                        PREFIX_POSITION);
 
         Index index;
 
@@ -54,14 +47,11 @@ public class EditCommandParser implements Parser<EditCommand> {
             editApplicantDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
         }
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            editApplicantDescriptor.setEmail(ParserUtil.parseEmail(
-                    argMultimap.getValue(PREFIX_EMAIL).get()));
+            editApplicantDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
         }
         if (argMultimap.getValue(PREFIX_POSITION).isPresent()) {
             editApplicantDescriptor.setPosition(ParserUtil.parsePosition(argMultimap.getValue(PREFIX_POSITION).get()));
         }
-        parseInterviewsForEdit(argMultimap.getAllValues(PREFIX_INTERVIEW))
-                .ifPresent(editApplicantDescriptor::setInterviews);
 
         if (!editApplicantDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
@@ -69,21 +59,4 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         return new EditCommand(index, editApplicantDescriptor);
     }
-
-    /**
-     * Parses {@code Collection<String> interviews} into a {@code List<Interview>} if {@code interviews} is non-empty.
-     * If {@code interviews} contain only one element which is an empty string, it will be parsed into a
-     * {@code List<Interview>} containing zero interviews.
-     */
-    private Optional<List<Interview>> parseInterviewsForEdit(Collection<String> interviews) throws ParseException {
-        assert interviews != null;
-
-        if (interviews.isEmpty()) {
-            return Optional.empty();
-        }
-        Collection<String> interviewList = interviews.size() == 1 && interviews.contains("")
-                ? Collections.emptyList() : interviews;
-        return Optional.of(ParserUtil.parseInterviews(interviewList));
-    }
-
 }

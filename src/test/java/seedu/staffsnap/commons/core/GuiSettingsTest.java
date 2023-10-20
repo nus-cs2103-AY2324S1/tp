@@ -13,4 +13,16 @@ public class GuiSettingsTest {
                 + guiSettings.getWindowCoordinates() + "}";
         assertEquals(expected, guiSettings.toString());
     }
+
+    @Test
+    public void equalsMethod() {
+        GuiSettings defaultGuiSettings = new GuiSettings();
+        assertEquals(defaultGuiSettings, defaultGuiSettings);
+    }
+
+    @Test
+    public void hashCodeMethod() {
+        GuiSettings defaultGuiSettings = new GuiSettings();
+        assertEquals(defaultGuiSettings.hashCode(), defaultGuiSettings.hashCode());
+    }
 }

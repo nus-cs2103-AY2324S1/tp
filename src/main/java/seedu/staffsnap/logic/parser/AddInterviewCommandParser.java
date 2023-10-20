@@ -1,7 +1,6 @@
 package seedu.staffsnap.logic.parser;
 
 import static seedu.staffsnap.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_INTERVIEW;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import java.util.stream.Stream;
@@ -34,13 +33,12 @@ public class AddInterviewCommandParser implements Parser<AddInterviewCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddInterviewCommand.MESSAGE_USAGE), pe);
         }
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_INTERVIEW)) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_TYPE)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddInterviewCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TYPE);
         String type = ParserUtil.parseType(argMultimap.getValue(PREFIX_TYPE).get());
-
         Interview interview = new Interview(type);
 
         return new AddInterviewCommand(index, interview);
