@@ -2,7 +2,7 @@
 
 [![CI Status](https://github.com/AY2324S1-CS2103T-T11-3/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2324S1-CS2103T-T11-3/tp/actions)
 
-TutorMate is a desktop app targeted to tuition teachers for managing contacts of tuition students. 
+TutorMate is a desktop app targeted to tuition teachers for managing contacts of tuition students.
 
 It is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, TutorMate can get your administrative tasks done faster than traditional GUI apps.
 
@@ -10,7 +10,7 @@ This project is based on the [AddressBook-Level3 project](https://se-education.o
 
 ## Quick Start
 1. Ensure you have Java `11` or above installed in your Computer.
-2. Go to this installation package from [here](https://github.com/AY2324S1-CS2103T-T11-3/tp/releases). 
+2. Go to this installation package from [here](https://github.com/AY2324S1-CS2103T-T11-3/tp/releases).
 3. Download the .dmg file for Mac OS, .exe file for Windows, and .jar file for Linux.
 4. To continue ...
 
