@@ -16,8 +16,8 @@ public class Messages {
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX = "The student index provided is invalid";
     public static final String MESSAGE_NONEXISTENT_STUDENT_NUMBER = "The student number provided does not exist here.";
-    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "Lookup successful!\n"
-            + "%1$d persons listed!";
+    public static final String MESSAGE_STUDENTS_LISTED_OVERVIEW = "Lookup successful!\n"
+            + "%1$d students listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_STUDENT_DOES_NOT_EXIST = "There is no student with the given student number.";
