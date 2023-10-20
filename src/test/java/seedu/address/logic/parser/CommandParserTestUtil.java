@@ -2,15 +2,9 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.List;
-import java.util.function.Predicate;
-
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonType;
-import seedu.address.testutil.TypicalPersons;
 
 
 /**
@@ -72,26 +66,6 @@ public class CommandParserTestUtil {
             throw new AssertionError("The expected ParseException was not thrown.");
         } catch (ParseException pe) {
             assertEquals(expectedMessage, pe.getMessage());
-        }
-    }
-
-    /**
-     *
-     */
-    public static void assertParseFindSuccess(FindCommandParser parser,
-                                              String userInputArgs, Predicate<Person> expectedPredicate,
-                                              PersonType personType) {
-        try {
-            FindCommand command = parser.parse(personType, userInputArgs);
-            assertEquals(command.getPersonType(), personType);
-            List<Person> testPersons = TypicalPersons.getTypicalPersons();
-            for (Person currPerson : testPersons) {
-                boolean actualRes = command.getPredicate().test(currPerson);
-                boolean expectedRes = expectedPredicate.test(currPerson);
-                assertEquals(expectedRes, actualRes);
-            }
-        } catch (ParseException pe) {
-            throw new IllegalArgumentException("Invalid userInput.", pe);
         }
     }
 }

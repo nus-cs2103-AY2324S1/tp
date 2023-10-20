@@ -5,7 +5,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Specialist;
 
 /**
  * Container for user visible messages.
@@ -47,6 +49,22 @@ public class Messages {
                 .append(person.getEmail())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
+
+        if (person instanceof Patient) {
+            Patient patient = (Patient) person;
+            builder.insert(0, "Patient ")
+                    .append("; Age: ")
+                    .append(patient.getAge())
+                    .append("; Medical History: ")
+                    .append(patient.getMedicalHistory());
+        }
+
+        if (person instanceof Specialist) {
+            Specialist specialist = (Specialist) person;
+            builder.insert(0, "Specialist ")
+                    .append("; Specialty: ")
+                    .append(specialist.getSpecialty());
+        }
         return builder.toString();
     }
 

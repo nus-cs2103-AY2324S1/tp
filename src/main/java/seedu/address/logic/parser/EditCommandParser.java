@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
@@ -21,6 +22,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPatientDescriptor;
 import seedu.address.logic.commands.EditCommand.EditSpecialistDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.MedicalHistory;
 import seedu.address.model.person.PersonType;
 import seedu.address.model.tag.Tag;
 
@@ -41,7 +43,7 @@ public class EditCommandParser implements ParserComplex<EditCommand> {
         } else if (personType.equals(PersonType.SPECIALIST)) {
             return parseSpecialist(args);
         } else {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_INVALID_PERSON_TYPE));
         }
     }
 
@@ -52,13 +54,14 @@ public class EditCommandParser implements ParserComplex<EditCommand> {
                         PREFIX_TAG, PREFIX_AGE, PREFIX_MEDICALHISTORY);
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_AGE, PREFIX_MEDICALHISTORY);
+                PREFIX_AGE);
 
         Index index;
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    EditCommand.MESSAGE_USAGE_PATIENT), pe);
         }
 
         EditPatientDescriptor editPatientDescriptor = new EditPatientDescriptor();
@@ -72,14 +75,13 @@ public class EditCommandParser implements ParserComplex<EditCommand> {
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
             editPatientDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
         }
-        if (argMultimap.getValue(PREFIX_MEDICALHISTORY).isPresent()) {
-            editPatientDescriptor.setMedicalHistory(ParserUtil.parseMedicalHistory(argMultimap
-                    .getValue(PREFIX_MEDICALHISTORY).get()));
-        }
+
         if (argMultimap.getValue(PREFIX_AGE).isPresent()) {
             editPatientDescriptor.setAge(ParserUtil.parseAge(argMultimap
                     .getValue(PREFIX_AGE).get()));
         }
+        parseMedicalHistoriesForEdit(argMultimap.getAllValues(PREFIX_MEDICALHISTORY))
+                .ifPresent(editPatientDescriptor::setMedicalHistory);
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPatientDescriptor::setTags);
 
         if (!editPatientDescriptor.isAnyFieldEdited()) {
@@ -99,7 +101,8 @@ public class EditCommandParser implements ParserComplex<EditCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    EditCommand.MESSAGE_USAGE_SPECIALIST), pe);
         }
 
         EditSpecialistDescriptor editSpecialistDescriptor = new EditSpecialistDescriptor();
@@ -143,4 +146,22 @@ public class EditCommandParser implements ParserComplex<EditCommand> {
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
 
+    /**
+     * Parses {@code Collection<String> medicalHistories} into a {@code Set<MedicalHistory>}
+     * if {@code medicalHistories} is non-empty.
+     * If {@code medicalHistories} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<MedicalHistories>} containing zero medical history.
+     */
+    private Optional<Set<MedicalHistory>> parseMedicalHistoriesForEdit(Collection<String> medicalHistories)
+            throws ParseException {
+        assert medicalHistories != null;
+
+        if (medicalHistories.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> medHistSet = medicalHistories.size() == 1 && medicalHistories.contains("")
+                ? Collections.emptySet()
+                : medicalHistories;
+        return Optional.of(ParserUtil.parseMedicalHistories(medHistSet));
+    }
 }

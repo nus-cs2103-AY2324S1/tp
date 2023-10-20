@@ -52,36 +52,39 @@ public class EditCommandParserTest {
 
     private static final String TAG_EMPTY = " " + PREFIX_TAG;
 
-    private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
+    private static final String MESSAGE_INVALID_SPECIALIST =
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE_SPECIALIST);
+
+    private static final String MESSAGE_INVALID_PATIENT =
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE_PATIENT);
 
     private EditCommandParser parser = new EditCommandParser();
 
     @Test
     public void parse_missingParts_failure() {
         // no index specified
-        assertParseComplexFailure(parser, VALID_NAME_AMY, MESSAGE_INVALID_FORMAT, PersonType.SPECIALIST);
+        assertParseComplexFailure(parser, VALID_NAME_AMY, MESSAGE_INVALID_SPECIALIST, PersonType.SPECIALIST);
 
         // no field specified
         assertParseComplexFailure(parser, "1", EditCommand.MESSAGE_NOT_EDITED, PersonType.SPECIALIST);
 
         // no index and no field specified
-        assertParseComplexFailure(parser, "", MESSAGE_INVALID_FORMAT, PersonType.SPECIALIST);
+        assertParseComplexFailure(parser, "", MESSAGE_INVALID_SPECIALIST, PersonType.SPECIALIST);
     }
 
     @Test
     public void parse_invalidPreamble_failure() {
         // negative index
-        assertParseComplexFailure(parser, "-5" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT, PersonType.SPECIALIST);
+        assertParseComplexFailure(parser, "-5" + NAME_DESC_AMY, MESSAGE_INVALID_SPECIALIST, PersonType.SPECIALIST);
 
         // zero index
-        assertParseComplexFailure(parser, "0" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT, PersonType.SPECIALIST);
+        assertParseComplexFailure(parser, "0" + NAME_DESC_AMY, MESSAGE_INVALID_SPECIALIST, PersonType.SPECIALIST);
 
         // invalid arguments being parsed as preamble
-        assertParseComplexFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT, PersonType.SPECIALIST);
+        assertParseComplexFailure(parser, "1 some random string", MESSAGE_INVALID_SPECIALIST, PersonType.SPECIALIST);
 
         // invalid prefix being parsed as preamble
-        assertParseComplexFailure(parser, "1 i/ string", MESSAGE_INVALID_FORMAT, PersonType.SPECIALIST);
+        assertParseComplexFailure(parser, "1 i/ string", MESSAGE_INVALID_SPECIALIST, PersonType.SPECIALIST);
     }
 
     @Test
