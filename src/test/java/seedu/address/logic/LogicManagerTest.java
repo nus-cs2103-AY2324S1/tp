@@ -102,7 +102,7 @@ public class LogicManagerTest {
         assertEquals(0, fieldsNames.length);
         logicManager.setDisplayedFieldsList(new String[] {"phone"});
         assertEquals(1, logic.getDisplayedFieldsList().length);
-        assertEquals(6, ListCommandParser.DISPLAYABLE_FIELDS.size());
+        assertEquals(5, ListCommandParser.DISPLAYABLE_FIELDS.size());
     }
 
     /**
