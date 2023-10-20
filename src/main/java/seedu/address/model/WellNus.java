@@ -57,8 +57,8 @@ public class WellNus implements ReadOnlyWellNus {
      */
     public void resetData(ReadOnlyWellNus newData) {
         requireNonNull(newData);
-
         setStudents(newData.getStudentList());
+        setAppointments(newData.getAppointmentList());
     }
 
     //// student-level operations
@@ -117,6 +117,14 @@ public class WellNus implements ReadOnlyWellNus {
      */
     public void removeAppointment(Appointment key) {
         appointments.remove(key);
+    }
+
+    /**
+     * Replaces the contents of the appointment list with {@code appointments}.
+     * {@code appointments} must not contain duplicate appointments.
+     */
+    public void setAppointments(List<Appointment> appointments) {
+        this.appointments.setAppointments(appointments);
     }
     //// util methods
 
