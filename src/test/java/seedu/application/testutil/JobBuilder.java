@@ -71,7 +71,7 @@ public class JobBuilder {
     }
 
     public Job build() {
-        return new Job(role, company, status, deadline);
+        return new Job(role, company, deadline, status);
     }
 
 }

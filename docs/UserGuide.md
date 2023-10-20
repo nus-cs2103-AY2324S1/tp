@@ -82,28 +82,23 @@ applications.
 
 Adds an application to a company to the list.
 
-**Format:** `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`
+**Format:** `add c/COMPANY r/ROLE d/DEADLINE s/STATUS`
 
-* Users must input a company `NAME`
-* Details of the company such as `PHONE_NUMBER`, `EMAIL` and `ADDRESS` are optional
-
-**Successful command:**
-print “Application to (Company name) has been added.”
-
-**Failed command:**
-print “Error: ” and error message for:
-
-* `NAME` is not in the command: “Name of company was not included in the command.”
+* Users must input a company `COMPANY` and a role `ROLE`
+* Details of the company such as `DEADLINE` and `STATUS` are optional
 
 **Examples:**
 
-* `add n/Microsoft p/98765432 e/microsoft@gmail.com a/182 Cecil St, #13-01, Singapore 069547`
-  Adds a company called microsoft, adds their phone number, email and address
-* `add n/The Coca-Cola Company e/cocacola@yahoo.com`
-  Adds a company called The Coca-Cola Company, adds their email
+* `add c/Microsoft r/Software Engineer d/Nov 12 2022 1200 s/pending`
+  Adds a company called microsoft, with the role Software Engineer, 
+  deadline Nov 12 2022 1200 and status as pending.
+* `add c/Google r/Cleaner`
+  Adds a company called Google, with the role Cleaner,
+  deadline TO_BE_ADDED and status TO_BE_SUBMITTED.
 
 **UI mockup:**
 ![AddCommand](images/user-guide/AddCommand.png)
+
 ---
 
 ### Deleting an application : `delete`
@@ -116,15 +111,6 @@ Deletes the specified application from the list.
 * The `INDEX` refers to the index number shown in the displayed application list.
 * The `INDEX` must be a _positive integer_ 1, 2, 3, …
 
-**Successful command:**
-print “Application to (Company name) has been deleted.”
-
-**Failed command:**
-print “Error: ” and error message for:
-
-* `INDEX` is not a positive integer: “Index must be a positive integer.”
-* `INDEX` is larger than list size: “No such company at index (`INDEX`).”
-
 **Examples:**
 
 * `list` followed by `delete 2`
@@ -132,6 +118,7 @@ print “Error: ” and error message for:
 
 **UI mockup:**
 ![DeleteCommand](images/user-guide/DeleteCommand.png)
+
 ---
 
 ### Listing all applications : `list`
@@ -140,80 +127,11 @@ Shows a list of all applications in the list.
 
 **Format:** `list`
 
-**Successful command:**
-List out all applications to companies in the list with index.
-
-**Failed command:**
-print “Error: ” and error message for:
-
 * List is empty: “List is empty.”
 * Arguments passed after the list command: “Unexpected arguments.”
 
 **UI mockup:**
 ![ListCommand](images/user-guide/ListCommand.png)
-
----
-
-### Marking the status of an application : `mark`
-
-Marks the status of an existing application in the list.
-
-**Format:** `mark INDEX s/STATUS`
-
-* Marks the status of the application at the specified `INDEX` as submitted, pending, accepted, or rejected.
-* The `INDEX` refers to the index number shown in the displayed application list.
-* The `INDEX` must be a _positive integer_ 1, 2, 3, …
-
-**Successful command:**
-print “Application to (Company name) has been marked as `STATUS`.”
-
-**Failed command:**
-print “Error: ” and error message for:
-
-* `INDEX` is not a positive integer: “Index must be a positive integer.”
-* `INDEX` is larger than list size: “No such company at index (`INDEX`).”
-
-**Examples:**
-
-* `mark 1 submitted`
-  Marks the status of the company application at index 1 as submitted.
-* `mark 2 rejected`
-  Marks the status of the company application at index 1 as rejected.
-
-**UI mockup:**
-![MarkCommand](images/user-guide/MarkCommand.png)
-
----
-
-### Setting the deadline for an application submission : `deadline`
-
-Sets submission deadline for an existing application in the list.
-
-**Format:** `deadline INDEX d/DEADLINE`
-
-* Sets deadline for the existing application at the specified `INDEX`.
-* The `INDEX` refers to the index number shown in the displayed application list.
-* The `INDEX` must be a _positive integer_ 1, 2, 3, …
-* `DEADLINE` must be provided in the accepted `DATETIME` Format: Nov 12 2022 1200
-
-**Successful command:**
-print “(Company Name)’s application deadline has been set to `DEADLINE`.”
-
-**Failed command:**
-Prints the associated error messsage:
-
-* No arguments provided: "Invalid command format!" and provides the command format.
-* Invalid specifier: "Invalid command format!"
-* `INDEX` is not a positive integer: “Index must be a positive integer.”
-* `INDEX` is larger than list size: “No such company at index (index).”
-
-**Examples:**
-
-* `deadline 1 d/Nov 12 2022 1200`
-  Sets deadline for application at index 1 to be Nov 12 2022 1200.
-
-**UI mockup:**
-![DeadlineCommand](images/user-guide/DeadlineCommand.png)
 
 ---
 
@@ -242,6 +160,8 @@ Prints the associated error message.
 
 * `deadline 1 d/Nov 12 2022 1200`
   Sets deadline for application at index 1 to be Nov 12 2022 1200.
+
+---
 
 ### Asking for help: `help`
 
