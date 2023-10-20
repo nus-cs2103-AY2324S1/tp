@@ -40,7 +40,7 @@ public class ListCommandParser implements Parser<ListCommand> {
      * Creates a sorting comparator based on the specified sorting attribute.
      *
      * @param sortingAttribute The attribute by which the list should be sorted (e.g., "name" or "email").
-     * @return A Comparator<Person> for sorting based on the specified attribute.
+     * @return A comparator for sorting based on the specified attribute.
      */
     private Comparator<Person> createSortingComparator(String sortingAttribute) {
         if ("name".equalsIgnoreCase(sortingAttribute)) {

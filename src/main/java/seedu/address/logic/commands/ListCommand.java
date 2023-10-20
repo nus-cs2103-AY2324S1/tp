@@ -1,8 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Comparator;
 
@@ -38,7 +38,7 @@ public class ListCommand extends Command {
     /**
      * Gets the sorting comparator currently set for sorting the list of persons.
      *
-     * @return The Comparator<Person> used for sorting the list.
+     * @return The comparator used for sorting the list.
      */
     public Comparator<Person> getSortingComparator() {
         return sortingComparator;
