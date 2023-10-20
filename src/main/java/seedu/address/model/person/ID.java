@@ -15,7 +15,7 @@ public class ID {
     /*
      * The ID format is A followed by 7 digits and ending with a letter.
      */
-    public static final String VALIDATION_REGEX = "A\\d{7}[A-Za-z](?:\\s+A\\d{7}[A-Za-z])*"; //"A\\d{7}[A-Za-z] A\\d{7}[A-Za-z] *";
+    public static final String VALIDATION_REGEX = "A\\d{7}[A-Za-z](?:\\s+A\\d{7}[A-Za-z])*";
 
     public final String value;
 
