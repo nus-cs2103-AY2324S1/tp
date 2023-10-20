@@ -62,7 +62,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                 errorMessage += "- Phone(" + PREFIX_PHONE + ") ";
             }
             if (argMultimap.getValue(PREFIX_EMAIL).isEmpty()) {
-                errorMessage += "- Email(" + PREFIX_EMAIL" + ") ";
+                errorMessage += "- Email(" + PREFIX_EMAIL + ") ";
             }
             if (argMultimap.getValue(PREFIX_NRIC).isEmpty()) {
                 errorMessage += "- NRIC(+ " PREFIX_NRIC + ") ";
