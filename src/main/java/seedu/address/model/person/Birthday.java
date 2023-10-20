@@ -25,7 +25,7 @@ public class Birthday {
     public Birthday(String birthday) {
         checkArgument(isValidBirthday(birthday), MESSAGE_CONSTRAINTS);
         this.stringValue = birthday;
-        if (birthday.trim().equals("")) {
+        if (birthday.trim().isEmpty()) {
             this.value = null;
             return;
         }
@@ -41,7 +41,7 @@ public class Birthday {
      * Returns true if a given string is a valid birthday.
      */
     public static boolean isValidBirthday(String test) {
-        if (test.trim().equals("")) {
+        if (test.trim().isEmpty()) {
             return true;
         }
         return test.matches(VALIDATION_REGEX);
@@ -69,6 +69,13 @@ public class Birthday {
 
         Birthday otherBirthday = (Birthday) other;
         return value.equals(otherBirthday.value);
+    }
+
+    /**
+     * Returns a string for display.
+     */
+    public String forDisplay() {
+        return (value == null) ? "" : value.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
     }
     @Override
     public int hashCode() {

@@ -124,4 +124,10 @@ public interface Model {
      * @param editedPerson person with the edited details
      */
     void updateAssignedPersons(Person personToEdit, Person editedPerson);
+
+    /**
+     * Overloaded method to update any events where the person to delete is assigned to.
+     * @param personToDelete person to delete
+     */
+    void updateAssignedPersons(Person personToDelete);
 }

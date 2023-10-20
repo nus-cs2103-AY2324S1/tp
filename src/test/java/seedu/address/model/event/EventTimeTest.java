@@ -14,22 +14,17 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class EventTimeTest {
 
     @Test
-    public void constructor_null_throwsNullPointerException() {
-        assertThrows(ParseException.class, () -> new EventTime(null));
+    public void factoryMethod_null_throwsParseException() {
+        assertThrows(ParseException.class, () -> EventTime.of(null));
     }
 
-    @Test
-    public void constructor_invalidEventTime_throwsIllegalArgumentException() {
-        String invalidEventTime = "";
-        assertThrows(ParseException.class, () -> new EventTime(invalidEventTime));
-    }
 
     @Test
     public void equals() throws ParseException {
-        EventTime eventTime = new EventTime("1200");
+        EventTime eventTime = EventTime.of("1200");
 
         // same values -> returns true
-        assertTrue(eventTime.equals(new EventTime("1200")));
+        assertTrue(eventTime.equals(EventTime.of("1200")));
 
         // same object -> returns true
         assertTrue(eventTime.equals(eventTime));
@@ -41,14 +36,11 @@ public class EventTimeTest {
         assertFalse(eventTime.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(eventTime.equals(new EventTime("1300")));
+        assertFalse(eventTime.equals(EventTime.of("1300")));
     }
 
     @Test
     public void isValidEventTime() {
-        // null times
-        assertThrows(NullPointerException.class, () -> EventTime.isValidTime(null));
-
         // invalid times
         assertFalse(() -> EventTime.isValidTime("2400")); // invalid time
         assertFalse(() -> EventTime.isValidTime("123")); // invalid time
@@ -63,13 +55,13 @@ public class EventTimeTest {
 
     @Test
     public void toStringTest() throws ParseException {
-        EventTime eventTime = new EventTime("1200");
+        EventTime eventTime = EventTime.of("1200");
         assertTrue(eventTime.toString().equals("1200"));
     }
 
     @Test
     public void forDisplayTest() throws ParseException {
-        EventTime eventTime = new EventTime("1200");
+        EventTime eventTime = EventTime.of("1200");
         assertTrue(eventTime.forDisplay().equals("12:00"));
     }
 
@@ -86,7 +78,7 @@ public class EventTimeTest {
 
     @Test
     public void getEventTimeTest() throws ParseException {
-        EventTime eventTime = new EventTime("1200");
+        EventTime eventTime = EventTime.of("1200");
         assertTrue(eventTime.getEventTime().equals(LocalTime.of(12, 0)));
     }
 }

@@ -51,17 +51,33 @@ public class Messages {
      */
     public static String format(Person person) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(person.getName())
-                .append("; Phone: ")
-                .append(person.getPhone())
-                .append("; Email: ")
-                .append(person.getEmail())
-                .append("; Address: ")
-                .append(person.getAddress())
-                .append("; Birthday: ")
-                .append(person.getBirthday())
-                .append("; Groups: ");
-        person.getGroups().forEach(builder::append);
+        builder.append(person.getName());
+
+        if (person.hasPhone()) {
+            builder.append("; Phone: ")
+                    .append(person.getPhone());
+        }
+
+        if (person.hasEmail()) {
+            builder.append("; Email: ")
+                    .append(person.getEmail());
+        }
+
+        if (person.hasAddress()) {
+            builder.append("; Address: ")
+                    .append(person.getAddress());
+        }
+
+        if (person.hasBirthday()) {
+            builder.append("; Birthday: ")
+                    .append(person.getBirthday().forDisplay());
+        }
+
+        if (person.hasGroups()) {
+            builder.append("; Groups: ");
+            person.getGroups().forEach(builder::append);
+        }
+
         return builder.toString();
     }
 
