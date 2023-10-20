@@ -13,6 +13,7 @@ import seedu.application.commons.util.AppUtil;
  */
 public class Deadline {
 
+    public static final String DEADLINE_SPECIFIER = "-d";
     public static final String MESSAGE_CONSTRAINTS =
         "Deadline should be in valid DateTime format: "
             + "MMM dd yyyy HHmm\n"
@@ -60,6 +61,33 @@ public class Deadline {
 
     private static boolean isEmptyDeadline(String test) {
         return test.equals(TO_ADD_DEADLINE);
+    }
+
+    /**
+     * Checks if the date and time represented by this {@code Deadline} is earlier
+     * than the other Deadline. Empty deadlines are considered to be earlier.
+     * @param other The other {@code Deadline} to be compared to.
+     * @return -1 if this deadline is earlier, 0 if they are equal, and 1 if this deadline is later.
+     */
+    public int compareTo(Deadline other) {
+        if (this.deadline.equals(TO_ADD_DEADLINE)) {
+            return other.deadline.equals(TO_ADD_DEADLINE) ? 0 : -1;
+        }
+
+        if (other.deadline.equals(TO_ADD_DEADLINE)) {
+            return 1;
+        }
+
+        LocalDateTime thisDateTime = LocalDateTime.parse(this.deadline, DATE_TIME_FORMATTER);
+        LocalDateTime otherDateTime = LocalDateTime.parse(other.deadline, DATE_TIME_FORMATTER);
+
+        if (thisDateTime.equals(otherDateTime)) {
+            return 0;
+        } else if (thisDateTime.isAfter(otherDateTime)) {
+            return 1;
+        } else {
+            return -1;
+        }
     }
 
     @Override

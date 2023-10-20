@@ -1,8 +1,8 @@
 package seedu.application.model.job;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static seedu.application.model.job.Company.COMPANY_FIND_SPECIFIER;
-import static seedu.application.model.job.Role.ROLE_FIND_SPECIFIER;
+import static seedu.application.model.job.Company.COMPANY_SPECIFIER;
+import static seedu.application.model.job.Role.ROLE_SPECIFIER;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -22,16 +22,16 @@ public class FieldContainsKeywordsPredicateTest {
         List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
 
         FieldContainsKeywordsPredicate firstPredicate = new FieldContainsKeywordsPredicate(
-                ROLE_FIND_SPECIFIER, firstPredicateKeywordList);
+                ROLE_SPECIFIER, firstPredicateKeywordList);
         FieldContainsKeywordsPredicate secondPredicate = new FieldContainsKeywordsPredicate(
-                ROLE_FIND_SPECIFIER, secondPredicateKeywordList);
+                ROLE_SPECIFIER, secondPredicateKeywordList);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
         FieldContainsKeywordsPredicate firstPredicateCopy =
-                new FieldContainsKeywordsPredicate(ROLE_FIND_SPECIFIER, firstPredicateKeywordList);
+                new FieldContainsKeywordsPredicate(ROLE_SPECIFIER, firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -47,8 +47,8 @@ public class FieldContainsKeywordsPredicateTest {
     @Test
     public void isValidSpecifier() {
         // valid specifier -> does not throw error
-        assertTrue(FieldContainsKeywordsPredicate.isValidSpecifier(COMPANY_FIND_SPECIFIER));
-        assertTrue(FieldContainsKeywordsPredicate.isValidSpecifier(ROLE_FIND_SPECIFIER));
+        assertTrue(FieldContainsKeywordsPredicate.isValidSpecifier(COMPANY_SPECIFIER));
+        assertTrue(FieldContainsKeywordsPredicate.isValidSpecifier(ROLE_SPECIFIER));
 
         // invalid specifier -> throws error
         assertFalse(FieldContainsKeywordsPredicate.isValidSpecifier(INVALID_SPECIFIER));
@@ -58,19 +58,19 @@ public class FieldContainsKeywordsPredicateTest {
     public void test_roleContainsKeywords_returnsTrue() {
         // One keyword
         FieldContainsKeywordsPredicate predicate = new FieldContainsKeywordsPredicate(
-                ROLE_FIND_SPECIFIER, Collections.singletonList("Software"));
+                ROLE_SPECIFIER, Collections.singletonList("Software"));
         assertTrue(predicate.test(new JobBuilder().withRole("Software Engineer").build()));
 
         // Multiple keywords
-        predicate = new FieldContainsKeywordsPredicate(ROLE_FIND_SPECIFIER, Arrays.asList("Software", "Engineer"));
+        predicate = new FieldContainsKeywordsPredicate(ROLE_SPECIFIER, Arrays.asList("Software", "Engineer"));
         assertTrue(predicate.test(new JobBuilder().withRole("Software Engineer").build()));
 
         // Only one matching keyword
-        predicate = new FieldContainsKeywordsPredicate(ROLE_FIND_SPECIFIER, Arrays.asList("Mechanical", "Engineer"));
+        predicate = new FieldContainsKeywordsPredicate(ROLE_SPECIFIER, Arrays.asList("Mechanical", "Engineer"));
         assertTrue(predicate.test(new JobBuilder().withRole("Software Engineer").build()));
 
         // Mixed-case keywords
-        predicate = new FieldContainsKeywordsPredicate(ROLE_FIND_SPECIFIER, Arrays.asList("sOFtwaRe", "EnGIneer"));
+        predicate = new FieldContainsKeywordsPredicate(ROLE_SPECIFIER, Arrays.asList("sOFtwaRe", "EnGIneer"));
         assertTrue(predicate.test(new JobBuilder().withRole("Software Engineer").build()));
     }
 
@@ -78,15 +78,15 @@ public class FieldContainsKeywordsPredicateTest {
     public void test_roleDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         FieldContainsKeywordsPredicate predicate = new FieldContainsKeywordsPredicate(
-                ROLE_FIND_SPECIFIER, Collections.emptyList());
+                ROLE_SPECIFIER, Collections.emptyList());
         assertFalse(predicate.test(new JobBuilder().withRole("Engineer").build()));
 
         // Non-matching keyword
-        predicate = new FieldContainsKeywordsPredicate(ROLE_FIND_SPECIFIER, Arrays.asList("Chef"));
+        predicate = new FieldContainsKeywordsPredicate(ROLE_SPECIFIER, Arrays.asList("Chef"));
         assertFalse(predicate.test(new JobBuilder().withRole("Software Engineer").build()));
 
         // Keywords match company, but does not match role
-        predicate = new FieldContainsKeywordsPredicate(ROLE_FIND_SPECIFIER, Arrays.asList("Google"));
+        predicate = new FieldContainsKeywordsPredicate(ROLE_SPECIFIER, Arrays.asList("Google"));
         assertFalse(predicate.test(new JobBuilder().withRole("Software Engineer").withCompany("Google").build()));
     }
 
@@ -94,19 +94,19 @@ public class FieldContainsKeywordsPredicateTest {
     public void test_companyContainsKeywords_returnsTrue() {
         // One keyword
         FieldContainsKeywordsPredicate predicate = new FieldContainsKeywordsPredicate(
-                COMPANY_FIND_SPECIFIER, Collections.singletonList("Google"));
+                COMPANY_SPECIFIER, Collections.singletonList("Google"));
         assertTrue(predicate.test(new JobBuilder().withCompany("Google Singapore").build()));
 
         // Multiple keywords
-        predicate = new FieldContainsKeywordsPredicate(COMPANY_FIND_SPECIFIER, Arrays.asList("Google", "Singapore"));
+        predicate = new FieldContainsKeywordsPredicate(COMPANY_SPECIFIER, Arrays.asList("Google", "Singapore"));
         assertTrue(predicate.test(new JobBuilder().withCompany("Google Singapore").build()));
 
         // Only one matching keyword
-        predicate = new FieldContainsKeywordsPredicate(COMPANY_FIND_SPECIFIER, Arrays.asList("Google", "Malaysia"));
+        predicate = new FieldContainsKeywordsPredicate(COMPANY_SPECIFIER, Arrays.asList("Google", "Malaysia"));
         assertTrue(predicate.test(new JobBuilder().withCompany("Google Malaysia").build()));
 
         // Mixed-case keywords
-        predicate = new FieldContainsKeywordsPredicate(COMPANY_FIND_SPECIFIER, Arrays.asList("gOOgLe", "SinGApOre"));
+        predicate = new FieldContainsKeywordsPredicate(COMPANY_SPECIFIER, Arrays.asList("gOOgLe", "SinGApOre"));
         assertTrue(predicate.test(new JobBuilder().withCompany("Google Singapore").build()));
     }
 
@@ -114,22 +114,22 @@ public class FieldContainsKeywordsPredicateTest {
     public void test_companyDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         FieldContainsKeywordsPredicate predicate = new FieldContainsKeywordsPredicate(
-                COMPANY_FIND_SPECIFIER, Collections.emptyList());
+                COMPANY_SPECIFIER, Collections.emptyList());
         assertFalse(predicate.test(new JobBuilder().withCompany("Google").build()));
 
         // Non-matching keyword
-        predicate = new FieldContainsKeywordsPredicate(COMPANY_FIND_SPECIFIER, Arrays.asList("Apple"));
+        predicate = new FieldContainsKeywordsPredicate(COMPANY_SPECIFIER, Arrays.asList("Apple"));
         assertFalse(predicate.test(new JobBuilder().withCompany("Google Singapore").build()));
 
         // Keywords match role, but does not match company
-        predicate = new FieldContainsKeywordsPredicate(COMPANY_FIND_SPECIFIER, Arrays.asList("Software"));
+        predicate = new FieldContainsKeywordsPredicate(COMPANY_SPECIFIER, Arrays.asList("Software"));
         assertFalse(predicate.test(new JobBuilder().withRole("Software Engineer").withCompany("Google").build()));
     }
 
     @Test
     public void toStringMethod() {
         List<String> keywords = List.of("keyword1", "keyword2");
-        FieldContainsKeywordsPredicate predicate = new FieldContainsKeywordsPredicate(ROLE_FIND_SPECIFIER, keywords);
+        FieldContainsKeywordsPredicate predicate = new FieldContainsKeywordsPredicate(ROLE_SPECIFIER, keywords);
         String expected = FieldContainsKeywordsPredicate.class.getCanonicalName() + "{keywords=" + keywords + "}";
         assertEquals(expected, predicate.toString());
     }
