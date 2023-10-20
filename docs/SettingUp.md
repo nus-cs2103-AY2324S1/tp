@@ -3,8 +3,9 @@ layout: page
 title: Setting up and getting started
 ---
 
-* Table of Contents
-{:toc}
+# Table of Contents
+1. [Setting up the project in your computer](#setting-up-the-project-in-your-computer)
+2. [Before writing code](#before-writing-code)
 
 
 --------------------------------------------------------------------------------------------------------------------

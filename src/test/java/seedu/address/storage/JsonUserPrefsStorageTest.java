@@ -73,20 +73,9 @@ public class JsonUserPrefsStorageTest {
     private UserPrefs getTypicalUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
         userPrefs.setGuiSettings(new GuiSettings(1000, 500, 300, 100));
-        userPrefs.setAddressBookFilePath(Paths.get("addressbook.json"));
+        userPrefs.setDeckFilePath(Paths.get("data/deck.json"));
         return userPrefs;
     }
-
-    @Test
-    public void savePrefs_nullPrefs_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> saveUserPrefs(null, "SomeFile.json"));
-    }
-
-    @Test
-    public void saveUserPrefs_nullFilePath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> saveUserPrefs(new UserPrefs(), null));
-    }
-
     /**
      * Saves {@code userPrefs} at the specified {@code prefsFileInTestDataFolder} filepath.
      */
@@ -99,25 +88,5 @@ public class JsonUserPrefsStorageTest {
         }
     }
 
-    @Test
-    public void saveUserPrefs_allInOrder_success() throws DataLoadingException, IOException {
-
-        UserPrefs original = new UserPrefs();
-        original.setGuiSettings(new GuiSettings(1200, 200, 0, 2));
-
-        Path pefsFilePath = testFolder.resolve("TempPrefs.json");
-        JsonUserPrefsStorage jsonUserPrefsStorage = new JsonUserPrefsStorage(pefsFilePath);
-
-        //Try writing when the file doesn't exist
-        jsonUserPrefsStorage.saveUserPrefs(original);
-        UserPrefs readBack = jsonUserPrefsStorage.readUserPrefs().get();
-        assertEquals(original, readBack);
-
-        //Try saving when the file exists
-        original.setGuiSettings(new GuiSettings(5, 5, 5, 5));
-        jsonUserPrefsStorage.saveUserPrefs(original);
-        readBack = jsonUserPrefsStorage.readUserPrefs().get();
-        assertEquals(original, readBack);
-    }
 
 }

@@ -39,4 +39,5 @@ public class Prefix {
         Prefix otherPrefix = (Prefix) other;
         return prefix.equals(otherPrefix.prefix);
     }
+
 }

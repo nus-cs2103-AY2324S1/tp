@@ -7,13 +7,15 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Person;
+import seedu.address.model.Model;
+import seedu.address.model.ReadOnlyDeck;
+import seedu.address.model.card.Card;
 
 /**
  * API of the Logic component
  */
 public interface Logic {
+
     /**
      * Executes the command and returns the result.
      * @param commandText The command as entered by the user.
@@ -24,19 +26,19 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
-     * Returns the AddressBook.
+     * Returns the Deck.
      *
-     * @see seedu.address.model.Model#getAddressBook()
+     * @see Model#getDeck()
      */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyDeck getDeck();
 
-    /** Returns an unmodifiable view of the filtered list of persons */
-    ObservableList<Person> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered list of cards */
+    ObservableList<Card> getFilteredCardList();
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' deck file path.
      */
-    Path getAddressBookFilePath();
+    Path getDeckFilePath();
 
     /**
      * Returns the user prefs' GUI settings.
@@ -47,4 +49,5 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
 }

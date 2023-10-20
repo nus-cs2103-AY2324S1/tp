@@ -3,8 +3,9 @@ layout: page
 title: Testing guide
 ---
 
-* Table of Contents
-{:toc}
+# Table of Contents
+1. [Running tests](#running-tests)
+2. [Type of tests](#types-of-tests)
 
 --------------------------------------------------------------------------------------------------------------------
 

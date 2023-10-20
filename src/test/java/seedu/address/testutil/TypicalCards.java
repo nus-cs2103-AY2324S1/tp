@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.person.Card;
+import seedu.address.model.Deck;
+import seedu.address.model.card.Card;
 
 /**
  * A utility class containing a list of {@code Card} objects to be used in tests.
@@ -17,9 +18,26 @@ public class TypicalCards {
             .withAnswer("Reflexive, Symmetric, Transitive").build();
     public static final Card CS1101S = new CardBuilder().withQuestion("What is the language used for this mod?")
             .withAnswer("Source").build();
+    public static final Card HIGH = new CardBuilder().withQuestion("High Priority?")
+            .withAnswer("True").build();
+    public static final Card LOW = new CardBuilder().withQuestion("Low Priority?")
+            .withAnswer("True").build();
+
     private TypicalCards() {} // prevents instantiation
 
-    public static List<Card> getTypicalCard() {
-        return new ArrayList<>(Arrays.asList(CS2100, CS1101S, CS1231S));
+
+    /**
+     * Returns an {@code Deck} with all the typical card.
+     */
+    public static Deck getTypicalDeck() {
+        Deck ab = new Deck();
+        for (Card card : getTypicalCards()) {
+            ab.addCard(card);
+        }
+        return ab;
+    }
+    public static List<Card> getTypicalCards() {
+        LOW.setPriority(Integer.MIN_VALUE);
+        return new ArrayList<>(Arrays.asList(CS2100, CS1101S, CS1231S, HIGH, LOW));
     }
 }
