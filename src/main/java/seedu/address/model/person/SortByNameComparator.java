@@ -16,6 +16,19 @@ public class SortByNameComparator implements Comparator<Person> {
         return o1.getName().compareTo(o2.getName());
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof SortByNameComparator)) {
+            return false;
+        }
+        return true;
+    }
+
 
     @Override
     public String toString() {

@@ -16,6 +16,18 @@ public class SortByAppointmentComparator implements Comparator<Person> {
         return o1.getAppointment().compareTo(o2.getAppointment());
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof SortByAppointmentComparator)) {
+            return false;
+        }
+        return true;
+    }
 
     @Override
     public String toString() {

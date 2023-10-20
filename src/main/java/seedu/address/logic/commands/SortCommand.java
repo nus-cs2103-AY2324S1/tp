@@ -26,7 +26,7 @@ public class SortCommand extends Command {
             + "Parameters: sort [variation]...\n"
             + "Example: sort sort";
 
-    private Comparator<Person> comparator;
+    private final Comparator<Person> comparator;
 
     /**
      * Default constructor for a SortCommand.
@@ -42,6 +42,21 @@ public class SortCommand extends Command {
         model.sortFilteredPersonList(comparator);
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof SortCommand)) {
+            return false;
+        }
+
+        SortCommand otherSortCommand = (SortCommand) other;
+        return comparator.equals(otherSortCommand.comparator);
     }
 
     @Override
