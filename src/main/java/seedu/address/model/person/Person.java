@@ -109,8 +109,8 @@ public class Person {
      * @return the updated set of interactions
      */
     public Set<Interaction> addInteractions(Set<Interaction> interactions) {
-        interactions.addAll(interactions);
-        return interactions;
+        this.interactions.addAll(interactions);
+        return this.interactions;
     }
 
     /**
