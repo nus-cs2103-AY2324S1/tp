@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.student.ClassDetails;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
@@ -84,6 +85,32 @@ public class StudentBuilder {
      */
     public StudentBuilder withClassDetails(String classDetails) {
         this.classDetails = new ClassDetails(classDetails);
+        return this;
+    }
+
+    /**
+     * Sets a {@code Assignment} in {@code AssignmentTracker} of the
+     * {@code ClassDetails} that we are building.
+     */
+    public StudentBuilder withAssignmentDetails(int assignmentNumber, int marks) {
+        try {
+            this.classDetails.setAssignGrade(assignmentNumber, marks);
+        } catch (CommandException e) {
+            e.printStackTrace();
+        }
+        return this;
+    }
+
+    /**
+     * Sets a {@code ClassParticipation} in {@code ClassParticipationTracker} of the
+     * {@code ClassDetails} that we are building.
+     */
+    public StudentBuilder withClassPartDetails(int tutNum, boolean isPresent) {
+        try {
+            this.classDetails.recordClassPart(tutNum, isPresent);
+        } catch (CommandException e) {
+            e.printStackTrace();
+        }
         return this;
     }
 

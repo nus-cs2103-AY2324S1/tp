@@ -6,6 +6,8 @@ import static seedu.address.logic.Messages.MESSAGE_CLASS_MANAGER_ALREADY_CONFIGU
 import static seedu.address.logic.Messages.MESSAGE_CLASS_MANAGER_NOT_CONFIGURED;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.STUDENT_NUMBER_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_NUMBER_AMY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_COUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_COUNT;
@@ -28,10 +30,13 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.LoadCommand;
 import seedu.address.logic.commands.LookupCommand;
+import seedu.address.logic.commands.RecordClassPartCommand;
+import seedu.address.logic.commands.SetGradeCommand;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentContainsKeywordsPredicate;
+import seedu.address.model.student.StudentNumber;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
 import seedu.address.testutil.PersonUtil;
 import seedu.address.testutil.StudentBuilder;
@@ -93,6 +98,27 @@ public class AddressBookParserTest {
                 LookupCommand.COMMAND_WORD + " c/t11 n/alice", true);
         assertEquals(new LookupCommand(new StudentContainsKeywordsPredicate("t11", null,
                 "alice", null, null, null)), command);
+    }
+
+    @Test
+    public void parseCommand_setGrade() throws Exception {
+        SetGradeCommand command = (SetGradeCommand) parser.parseCommand(SetGradeCommand.COMMAND_WORD
+                + STUDENT_NUMBER_DESC_AMY + SetGradeCommandParserTest.VALID_ASSIGNMENT_DESC
+                + SetGradeCommandParserTest.VALID_GRADE_DESC, true);
+        assertEquals(new SetGradeCommand(new StudentNumber(VALID_STUDENT_NUMBER_AMY),
+                Integer.parseInt(SetGradeCommandParserTest.VALID_ASSIGNMENT),
+                Integer.parseInt(SetGradeCommandParserTest.VALID_GRADE)), command);
+    }
+
+    @Test
+    public void parseCommand_recordClassPart() throws Exception {
+        RecordClassPartCommand command = (RecordClassPartCommand) parser.parseCommand(
+                RecordClassPartCommand.COMMAND_WORD
+                + STUDENT_NUMBER_DESC_AMY + RecordClassPartCommandParserTest.VALID_TUT_DESC
+                + RecordClassPartCommandParserTest.VALID_PARTICIPATION_DESC, true);
+        assertEquals(new RecordClassPartCommand(new StudentNumber(VALID_STUDENT_NUMBER_AMY),
+                Integer.parseInt(RecordClassPartCommandParserTest.VALID_TUT),
+                true), command);
     }
 
     @Test

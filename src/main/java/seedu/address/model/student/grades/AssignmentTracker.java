@@ -1,19 +1,24 @@
 package seedu.address.model.student.grades;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.IntStream;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
- * Represents an array of assignments to track the students grades.
+ * Represents an array of assignments to track the student's grades.
  */
 public class AssignmentTracker {
 
     public static final String MESSAGE_CONSTRAINTS = "Assignment Tracker needs to have positive number of assignments.";
 
-    public final Assignment[] assignments;
+    private Assignment[] assignments;
 
     /**
      * Constructs an {@code AssignmentTracker}.
@@ -24,7 +29,20 @@ public class AssignmentTracker {
     public AssignmentTracker(int numOfAssignments) {
         checkArgument(isValidAssignments(numOfAssignments), MESSAGE_CONSTRAINTS);
         assignments = new Assignment[numOfAssignments];
-        Arrays.fill(assignments, new Assignment());
+        IntStream.range(0, numOfAssignments).forEach(i -> assignments[i] = new Assignment());
+    }
+
+    /**
+     * Constructs an {@code AssignmentTracker}. With the given assignment tracker list.
+     *
+     * @param assignmentTracker A list of integer to represent marks for the assignments.
+     */
+    public AssignmentTracker(List<Integer> assignmentTracker) throws IllegalValueException {
+        requireNonNull(assignmentTracker);
+        assignments = new Assignment[assignmentTracker.size()];
+        for (int i = 0; i < assignmentTracker.size(); i++) {
+            assignments[i] = new Assignment(assignmentTracker.get(i));
+        }
     }
 
     /**
@@ -41,6 +59,17 @@ public class AssignmentTracker {
      */
     public void editMarks(Index index, int marks) {
         assignments[index.getZeroBased()].setMarks(marks);
+    }
+
+    /**
+     * Returns a Json friendly version of the assignmentTracker.
+     */
+    public List<Integer> getJsonAssignmentTracker() {
+        List<Integer> assignmentTracker = new ArrayList<>();
+        for (Assignment assignment : assignments) {
+            assignmentTracker.add(assignment.getMarks());
+        }
+        return assignmentTracker;
     }
 
     @Override
@@ -70,5 +99,23 @@ public class AssignmentTracker {
     @Override
     public int hashCode() {
         return Arrays.hashCode(assignments);
+    }
+
+    /**
+     * Updates the length of the assignment tracker. Whenever the assignment count changes.
+     */
+    public void updateAssignmentCountChange(int assignmentCount) {
+        if (assignmentCount == assignments.length) {
+            return;
+        }
+        Assignment[] newAssignments = new Assignment[assignmentCount];
+        for (int i = 0; i < assignmentCount; i++) {
+            if (i < assignments.length) {
+                newAssignments[i] = assignments[i];
+            } else {
+                newAssignments[i] = new Assignment();
+            }
+        }
+        assignments = newAssignments;
     }
 }

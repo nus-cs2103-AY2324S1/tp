@@ -57,6 +57,8 @@ public class ConfigCommand extends Command {
             ClassDetails.setTutorialCount(tutorialCount);
             ClassDetails.setAssignmentCount(assignmentCount);
             model.setConfigured(true);
+            model.setAssignmentCount(assignmentCount);
+            model.setTutorialCount(tutorialCount);
             return new CommandResult(String.format(MESSAGE_CONFIG_SUCCESS, tutorialCount, assignmentCount));
         } catch (Exception e) {
             return new CommandResult(MESSAGE_CONFIG_FAILED);

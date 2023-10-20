@@ -1,13 +1,25 @@
 package seedu.address.model.student.grades;
 
+import seedu.address.commons.exceptions.IllegalValueException;
+
 /**
  * Represents an Assignment of a Student in the address book.
  */
 public class Assignment {
-
+    public static final String MESSAGE_CONSTRAINTS = "Assignment marks should be between 0 and 100";
     private Integer marks = 0;
 
     public Assignment() {
+    }
+
+    /**
+     * Constructs a {@code Assignment}. With a given mark between 0 and 100.
+     */
+    public Assignment(Integer marks) throws IllegalValueException {
+        if (marks > 100 || marks < 0) {
+            throw new IllegalValueException(MESSAGE_CONSTRAINTS);
+        }
+        this.marks = marks;
     }
 
     public void setMarks(int marks) {

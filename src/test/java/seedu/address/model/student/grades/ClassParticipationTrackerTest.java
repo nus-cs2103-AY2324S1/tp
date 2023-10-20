@@ -27,6 +27,17 @@ public class ClassParticipationTrackerTest {
     }
 
     @Test
+    public void updateTutorialCountChange() {
+        ClassParticipationTracker classParticipationTracker = new ClassParticipationTracker(3);
+        ClassParticipationTracker expectedClassParticipationTracker = new ClassParticipationTracker(1);
+        classParticipationTracker.updateTutorialCountChange(1);
+        assertEquals(expectedClassParticipationTracker, classParticipationTracker);
+        expectedClassParticipationTracker = new ClassParticipationTracker(5);
+        classParticipationTracker.updateTutorialCountChange(5);
+        assertEquals(expectedClassParticipationTracker, classParticipationTracker);
+    }
+
+    @Test
     public void equals() {
         ClassParticipationTracker classParticipationTracker = new ClassParticipationTracker(13);
 

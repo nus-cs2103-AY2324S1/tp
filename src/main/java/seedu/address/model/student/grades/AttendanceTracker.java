@@ -1,22 +1,25 @@
 package seedu.address.model.student.grades;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.IntStream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.student.grades.exceptions.InvalidTutorialIndexException;
 
 /**
- * Represents a Student's AttendanceTracker grades
- * in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidAttendanceTracker(int)}
+ * Represents a Student's AttendanceTracker grades in the class manager.
+ * Guarantees: is valid as declared in {@link #isValidAttendance(int)}
  */
 public class AttendanceTracker {
 
     public static final String MESSAGE_CONSTRAINTS = "Attendance Tracker needs to have positive number of tutorials.";
 
-    private final Attendance[] attendanceList;
+    private Attendance[] attendanceList;
 
     /**
      * Constructs an {@code AttendanceTracker}.
@@ -27,7 +30,19 @@ public class AttendanceTracker {
     public AttendanceTracker(int numOfTut) {
         checkArgument(isValidAttendance(numOfTut), MESSAGE_CONSTRAINTS);
         attendanceList = new Attendance[numOfTut];
-        Arrays.fill(attendanceList, new Attendance());
+        IntStream.range(0, numOfTut).forEach(i -> attendanceList[i] = new Attendance());
+    }
+
+    /**
+     * Constructs an {@code AttendanceTracker}. With a given attendance tracker list.
+     *
+     * @param attendanceTracker A list of booleans to represent attendance.
+     */
+    public AttendanceTracker(List<Boolean> attendanceTracker) {
+        requireNonNull(attendanceTracker);
+        attendanceList = new Attendance[attendanceTracker.size()];
+        IntStream.range(0, attendanceTracker.size())
+                .forEach(i -> attendanceList[i] = new Attendance(attendanceTracker.get(i)));
     }
 
     /**
@@ -38,7 +53,7 @@ public class AttendanceTracker {
     }
 
     /**
-     * Marks attendanceTracker of student as present.
+     * Marks attendanceTracker of a student as present.
      *
      * @param tutNum The tutorial number.
      */
@@ -50,12 +65,23 @@ public class AttendanceTracker {
     }
 
     /**
-     * Marks attendanceTracker of student as absent.
+     * Marks attendanceTracker of a student as absent.
      *
      * @param tutNum The tutorial number.
      */
     public void markAbsent(Index tutNum) {
         attendanceList[tutNum.getZeroBased()].unmark();
+    }
+
+    /**
+     * Returns a Json friendly version of the attendanceTracker.
+     */
+    public List<Boolean> getJsonAttendanceTracker() {
+        List<Boolean> attendanceTracker = new ArrayList<>();
+        for (Attendance attendance : this.attendanceList) {
+            attendanceTracker.add(attendance.getIsPresent());
+        }
+        return attendanceTracker;
     }
 
     /**
@@ -92,5 +118,23 @@ public class AttendanceTracker {
     @Override
     public int hashCode() {
         return Arrays.hashCode(attendanceList);
+    }
+
+    /**
+     * Updates the length of the attendance tracker. Whenever the tutorial count changes.
+     */
+    public void updateTutorialCountChange(int tutorialCount) {
+        if (tutorialCount == attendanceList.length) {
+            return;
+        }
+        Attendance[] newAttendanceList = new Attendance[tutorialCount];
+        for (int i = 0; i < tutorialCount; i++) {
+            if (i < attendanceList.length) {
+                newAttendanceList[i] = attendanceList[i];
+            } else {
+                newAttendanceList[i] = new Attendance();
+            }
+        }
+        attendanceList = newAttendanceList;
     }
 }

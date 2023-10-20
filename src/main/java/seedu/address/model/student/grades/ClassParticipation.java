@@ -5,27 +5,34 @@ package seedu.address.model.student.grades;
  */
 public class ClassParticipation {
 
-    private boolean participated;
+    private boolean isParticipated;
 
     public ClassParticipation() {
-        participated = false;
+        isParticipated = false;
+    }
+
+    /**
+     * Constructs a {@code ClassParticipation} with the given isParticipated value.
+     */
+    public ClassParticipation(boolean isParticipated) {
+        this.isParticipated = isParticipated;
     }
 
     public void mark() {
-        participated = true;
+        isParticipated = true;
     }
 
     public void unmark() {
-        participated = false;
+        isParticipated = false;
     }
 
     public boolean getParticipated() {
-        return participated;
+        return isParticipated;
     }
 
     @Override
     public String toString() {
-        return participated ? "Participated" : "Did not Participate";
+        return isParticipated ? "Participated" : "Did not Participate";
     }
 
     @Override
@@ -40,11 +47,11 @@ public class ClassParticipation {
         }
 
         ClassParticipation otherClassParticipation = (ClassParticipation) other;
-        return participated == otherClassParticipation.participated;
+        return isParticipated == otherClassParticipation.isParticipated;
     }
 
     @Override
     public int hashCode() {
-        return Boolean.hashCode(participated);
+        return Boolean.hashCode(isParticipated);
     }
 }

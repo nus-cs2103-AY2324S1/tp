@@ -14,4 +14,8 @@ public interface ReadOnlyUserPrefs {
     Path getAddressBookFilePath();
 
     boolean getConfigured();
+
+    int getAssignmentCount();
+
+    int getTutorialCount();
 }

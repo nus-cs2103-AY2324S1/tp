@@ -10,10 +10,11 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
+import seedu.address.storage.JsonAdaptedClassDetails;
 
 /**
  * Represents a Student in the address book.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Guarantees: details are present and not null, field values are validated.
  */
 public class Student {
 
@@ -74,6 +75,10 @@ public class Student {
 
     public ClassDetails getClassDetails() {
         return classDetails;
+    }
+
+    public JsonAdaptedClassDetails getJsonAdaptedClassDetails() {
+        return classDetails.getJsonAdaptedClassDetails();
     }
 
     /**

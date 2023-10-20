@@ -27,6 +27,17 @@ public class AttendanceTrackerTest {
     }
 
     @Test
+    public void updateTutorialCountChange() {
+        AttendanceTracker attendanceTracker = new AttendanceTracker(3);
+        AttendanceTracker expectedAttendanceTracker = new AttendanceTracker(1);
+        attendanceTracker.updateTutorialCountChange(1);
+        assertEquals(expectedAttendanceTracker, attendanceTracker);
+        expectedAttendanceTracker = new AttendanceTracker(5);
+        attendanceTracker.updateTutorialCountChange(5);
+        assertEquals(expectedAttendanceTracker, attendanceTracker);
+    }
+
+    @Test
     public void equals() {
         AttendanceTracker attendanceTracker = new AttendanceTracker(13);
 
