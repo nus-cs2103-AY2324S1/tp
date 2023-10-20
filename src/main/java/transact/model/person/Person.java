@@ -146,7 +146,7 @@ public class Person implements Entry {
         }
 
         Person otherPerson = (Person) otherEntry;
-        return otherPerson.getName().equals(getName());
+        return otherPerson.getPersonId().equals(personId);
     }
 
     /**

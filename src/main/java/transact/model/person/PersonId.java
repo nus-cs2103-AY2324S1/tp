@@ -31,7 +31,7 @@ public class PersonId implements Comparable<PersonId> {
      */
     public PersonId(Integer id) {
         requireNonNull(id);
-        checkArgument(isValidTransactionId(id), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidPersonId(id), MESSAGE_CONSTRAINTS);
         value = id;
         usedIds.add(value);
     }
@@ -54,7 +54,7 @@ public class PersonId implements Comparable<PersonId> {
     /**
      * Returns true if a given integer is a valid Person ID.
      */
-    public static boolean isValidTransactionId(Integer test) {
+    public static boolean isValidPersonId(Integer test) {
         return !usedIds.contains(test);
     }
 

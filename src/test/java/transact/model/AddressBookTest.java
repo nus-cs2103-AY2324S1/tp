@@ -46,7 +46,7 @@ public class AddressBookTest {
 
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
-        // Two persons with the same identity fields
+        // Two persons with the same identity fields (but assuming they were mistakenly put with the wrong person ID keys)
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
@@ -86,7 +86,7 @@ public class AddressBookTest {
 
     @Test
     public void toStringMethod() {
-        String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList() + "}";
+        String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonMap() + "}";
         assertEquals(expected, addressBook.toString());
     }
 
@@ -100,6 +100,11 @@ public class AddressBookTest {
 
         AddressBookStub(Collection<Person> persons) {
             this.persons.setAll(persons);
+            for (Person person : persons) {
+                // We instantiate unique arbitrary person IDs for testing that UniqueEntryHashmap still enforces
+                // uniqueness among values (not just keys)
+                this.personMap.put(new PersonId(), person);
+            }
         }
 
         @Override

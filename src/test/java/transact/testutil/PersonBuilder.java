@@ -106,7 +106,7 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Email} of the {@code Person} that we are building.
+     * Sets the {@code Email} of the {@code Person} that we are building.(
      */
     public PersonBuilder withEmail(String email) {
         this.email = new Email(email);

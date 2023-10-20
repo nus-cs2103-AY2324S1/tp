@@ -40,6 +40,10 @@ public class EditStaffCommandParser implements Parser<EditStaffCommand> {
 
         try {
             personId = Integer.parseInt(argMultimap.getPreamble());
+            if (personId < 0) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        EditStaffCommand.MESSAGE_USAGE));
+            }
         } catch (NumberFormatException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditStaffCommand.MESSAGE_USAGE), pe);
         }

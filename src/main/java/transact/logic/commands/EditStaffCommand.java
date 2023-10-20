@@ -39,7 +39,7 @@ public class EditStaffCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: INDEX (must be a non-negative integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
@@ -75,7 +75,7 @@ public class EditStaffCommand extends Command {
         requireNonNull(model);
 
         for (PersonId id : model.getAddressBook().getPersonMap().keySet()) {
-            if (id.getValue() == personId) {
+            if (Objects.equals(id.getValue(), personId)) {
                 Person personToEdit = model.getPerson(id);
                 Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
@@ -87,9 +87,7 @@ public class EditStaffCommand extends Command {
                         TabWindow.ADDRESSBOOK);
             }
         }
-        return new CommandResult(
-                String.format(MESSAGE_PERSON_ID_NOT_FOUND, personId),
-                TabWindow.ADDRESSBOOK);
+        throw new CommandException(String.format(MESSAGE_PERSON_ID_NOT_FOUND, personId));
     }
 
     /**
@@ -105,7 +103,7 @@ public class EditStaffCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(personToEdit.getPersonId(), updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
     }
 
     @Override

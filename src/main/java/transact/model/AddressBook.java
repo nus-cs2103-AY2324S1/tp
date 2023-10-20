@@ -20,6 +20,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniqueEntryHashmap<PersonId, Person> persons;
     private ObservableList<Person> personList;
+    private ObservableList<Person> internalUnmodifiablePersonList;
 
     /*
      * The 'unusual' code block below is a non-static initialization block,
@@ -34,6 +35,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     {
         persons = new UniqueEntryHashmap<>();
         personList = FXCollections.observableArrayList();
+        internalUnmodifiablePersonList = FXCollections.unmodifiableObservableList(personList);
 
         getPersonMap()
                 .addListener((MapChangeListener.Change<? extends PersonId, ? extends Person> change) -> {
@@ -143,9 +145,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     public ObservableMap<PersonId, Person> getPersonMap() {
         return persons.asUnmodifiableObservableMap();
     }
+
     @Override
     public ObservableList<Person> getPersonList() {
-        return personList;
+        return internalUnmodifiablePersonList;
     }
 
     @Override

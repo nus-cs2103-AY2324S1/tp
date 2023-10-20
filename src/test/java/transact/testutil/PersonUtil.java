@@ -10,7 +10,9 @@ import java.util.Set;
 
 import transact.logic.commands.AddStaffCommand;
 import transact.logic.commands.EditStaffCommand.EditPersonDescriptor;
+import transact.model.AddressBook;
 import transact.model.person.Person;
+import transact.model.person.PersonId;
 import transact.model.tag.Tag;
 
 /**
@@ -58,5 +60,14 @@ public class PersonUtil {
             }
         }
         return sb.toString();
+    }
+
+    /**
+     * Clears the {@code PersonId} used by {@code addressBook} to avoid duplicate IDs when testing
+     */
+    public static void clearAddressBookPersonIdUniqueness(AddressBook addressBook) {
+        for (Person person : addressBook.getPersonList()) {
+            PersonId.freeUsedPersonIds(person.getPersonId().value);
+        }
     }
 }

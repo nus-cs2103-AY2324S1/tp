@@ -10,7 +10,6 @@ import static transact.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static transact.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static transact.logic.commands.CommandTestUtil.assertCommandFailure;
 import static transact.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static transact.logic.commands.CommandTestUtil.showPersonAtId;
 import static transact.testutil.TypicalIndexes.ID_FIRST_PERSON;
 import static transact.testutil.TypicalIndexes.ID_SECOND_PERSON;
 import static transact.testutil.TypicalPersons.getTypicalAddressBook;
@@ -39,7 +38,7 @@ public class EditStaffCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Person editedPerson = new PersonBuilder().build();
+        Person editedPerson = new PersonBuilder().withId(model.getFilteredPersonList().get(ID_FIRST_PERSON).getPersonId()).build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
         EditStaffCommand editStaffCommand = new EditStaffCommand(ID_FIRST_PERSON, descriptor);
 
@@ -48,17 +47,17 @@ public class EditStaffCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
                 new TransactionBook(model.getTransactionBook()), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(0).getPersonId(), editedPerson);
+        expectedModel.setPerson(model.getFilteredPersonList().get(ID_FIRST_PERSON).getPersonId(), editedPerson);
 
         assertCommandSuccess(editStaffCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
-        Integer lastPersonId = model.getFilteredPersonList().size();
-        Person lastPerson = model.getFilteredPersonList().get(lastPersonId);
+        Integer lastPersonId = ID_SECOND_PERSON;
+        Person secondPerson = model.getFilteredPersonList().get(lastPersonId);
 
-        PersonBuilder personInList = new PersonBuilder(lastPerson);
+        PersonBuilder personInList = new PersonBuilder(secondPerson);
         Person editedPerson = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
 
@@ -71,7 +70,7 @@ public class EditStaffCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
                 new TransactionBook(model.getTransactionBook()), new UserPrefs());
-        expectedModel.setPerson(lastPerson.getPersonId(), editedPerson);
+        expectedModel.setPerson(secondPerson.getPersonId(), editedPerson);
 
         assertCommandSuccess(editStaffCommand, model, expectedMessage, expectedModel);
     }
@@ -92,6 +91,7 @@ public class EditStaffCommandTest {
 
     @Test
     public void execute_filteredList_success() {
+        /* Not needed for now, since we do not identify a person based on their position in the list
         showPersonAtId(model, ID_FIRST_PERSON);
 
         Person personInFilteredList = model.getFilteredPersonList().get(ID_FIRST_PERSON);
@@ -107,19 +107,23 @@ public class EditStaffCommandTest {
         expectedModel.setPerson(model.getFilteredPersonList().get(0).getPersonId(), editedPerson);
 
         assertCommandSuccess(editStaffCommand, model, expectedMessage, expectedModel);
+         */
     }
 
     @Test
     public void execute_duplicatePersonUnfilteredList_failure() {
+        /* Not needed, since we are not able to edit person ID which is the only way to create a duplicate person
         Person firstPerson = model.getFilteredPersonList().get(ID_FIRST_PERSON);
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(firstPerson).build();
         EditStaffCommand editStaffCommand = new EditStaffCommand(ID_SECOND_PERSON, descriptor);
 
         assertCommandFailure(editStaffCommand, model, EditStaffCommand.MESSAGE_DUPLICATE_PERSON);
+         */
     }
 
     @Test
     public void execute_duplicatePersonFilteredList_failure() {
+        /* Not needed, since we are not able to edit person ID which is the only way to create a duplicate person
         showPersonAtId(model, ID_FIRST_PERSON);
 
         // edit person in filtered list into a duplicate in address book
@@ -128,6 +132,7 @@ public class EditStaffCommandTest {
                 new EditPersonDescriptorBuilder(personInList).build());
 
         assertCommandFailure(editStaffCommand, model, EditStaffCommand.MESSAGE_DUPLICATE_PERSON);
+         */
     }
 
     @Test
@@ -145,6 +150,7 @@ public class EditStaffCommandTest {
      */
     @Test
     public void execute_invalidPersonIndexFilteredList_failure() {
+        /* Not needed for now, since we do not identify a person based on their position in the list
         showPersonAtId(model, ID_FIRST_PERSON);
         Integer outOfBoundId = ID_SECOND_PERSON;
         // ensures that outOfBoundIndex is still in bounds of address book list
@@ -154,6 +160,7 @@ public class EditStaffCommandTest {
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         assertCommandFailure(editStaffCommand, model, Messages.getInvalidPersonIndexMessageForId(outOfBoundId));
+         */
     }
 
     @Test
@@ -183,7 +190,7 @@ public class EditStaffCommandTest {
         Integer id = 1;
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         EditStaffCommand editStaffCommand = new EditStaffCommand(id, editPersonDescriptor);
-        String expected = EditStaffCommand.class.getCanonicalName() + "{index=" + id + ", editPersonDescriptor="
+        String expected = EditStaffCommand.class.getCanonicalName() + "{personId=" + id + ", editPersonDescriptor="
                 + editPersonDescriptor + "}";
         assertEquals(expected, editStaffCommand.toString());
     }
