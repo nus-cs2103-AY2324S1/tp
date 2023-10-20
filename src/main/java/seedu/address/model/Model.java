@@ -71,6 +71,7 @@ public interface Model {
     boolean hasPerson(Name name);
     Person getPersonByName(Name name);
     IdentityCode getIdentityCodeByName(Name developerName);
+    Name getNameByIdentityCode(IdentityCode developerID);
     boolean invalidAddToTeam(String teamToAddTo);
     /**
      * Deletes the given person.
@@ -150,6 +151,12 @@ public interface Model {
 
     boolean personAlreadyInTeam(String teamToAddTo, Name devToAdd);
 
+    void editTeamName(String originalTeamName, String newTeamName);
+
+    Name getTeamLeaderOfTeam(String teamName);
+
+    void setTeamLeaderOfTeam(String teamName, IdentityCode newTeamLeaderID);
+
     /** Returns an unmodifiable view of the filtered team list */
     ObservableList<Team> getFilteredTeamList();
 
@@ -158,5 +165,4 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredTeamList(Predicate<Team> predicate);
-
 }

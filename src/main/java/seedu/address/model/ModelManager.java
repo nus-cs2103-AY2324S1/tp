@@ -152,6 +152,7 @@ public class ModelManager implements Model {
         this.addressBook.resetData(addressBook);
     }
 
+    @Override
     public AddressBook getWritableAddressBook() {
         return addressBook;
     }
@@ -201,6 +202,11 @@ public class ModelManager implements Model {
     @Override
     public IdentityCode getIdentityCodeByName(Name developerName) {
         return addressBook.getPersonByName(developerName).getIdentityCode();
+    }
+
+    @Override
+    public Name getNameByIdentityCode(IdentityCode developerID) {
+        return addressBook.getPersonByIdentityCode(developerID).getName();
     }
 
     /**
@@ -308,6 +314,8 @@ public class ModelManager implements Model {
     public void deleteDeveloperFromTeam(String teamName, IdentityCode developerIdentityCode) {
         teamBook.removeDeveloperFromTeam(teamName, developerIdentityCode);
     }
+
+    @Override
     public boolean personAlreadyInTeam(String teamToAddTo, Name devToAdd) {
         IdentityCode devToAddIdentityCode = getIdentityCodeByName(devToAdd);
         return teamBook.personAlreadyInTeam(teamToAddTo, devToAddIdentityCode);
@@ -318,20 +326,40 @@ public class ModelManager implements Model {
      * @param teamName the name of the team to check.
      * @return true if the team exists, false otherwise.
      */
+    @Override
     public boolean hasTeam(String teamName) {
         requireNonNull(teamName);
         return teamBook.hasTeam(teamName);
     }
 
+    @Override
     public boolean invalidAddToTeam(String teamToAddTo) {
         return teamBook.invalidAddToTeam(teamToAddTo);
     }
 
     //only run when you know that team exists
+    @Override
     public void addToTeam(String teamToAddTo, Name devToAdd) {
         IdentityCode devToAddIdentityCode = getIdentityCodeByName(devToAdd);
         teamBook.addDevToTeam(teamToAddTo, devToAddIdentityCode);
     }
+
+    @Override
+    public void editTeamName(String originalTeamName, String newTeamName) {
+        teamBook.editTeamName(originalTeamName, newTeamName);
+    }
+
+    @Override
+    public Name getTeamLeaderOfTeam(String teamName) {
+        IdentityCode teamLeaderID = teamBook.getTeamLeaderIDOfTeam(teamName);
+        return getNameByIdentityCode(teamLeaderID);
+    }
+
+    @Override
+    public void setTeamLeaderOfTeam(String teamName, IdentityCode newTeamLeaderID) {
+        teamBook.setTeamLeaderOfTeam(teamName, newTeamLeaderID);
+    }
+
     //=========== Filtered Team List Accessors =============================================================
 
     /**

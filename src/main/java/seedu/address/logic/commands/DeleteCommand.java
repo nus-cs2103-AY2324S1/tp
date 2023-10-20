@@ -12,7 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Represents a DeleteCommand with the associated logic to delete a person based on their displayed index.
  */
 public class DeleteCommand extends Command {
 
@@ -27,10 +27,22 @@ public class DeleteCommand extends Command {
 
     private final Index targetIndex;
 
+    /**
+     * Constructs an {@code DeleteCommand} to delete the person identified by the specified index.
+     *
+     * @param targetIndex The index of the person to be deleted.
+     */
     public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
+    /**
+     * Executes the DeleteCommand by deleting the person identified by the target index from the model.
+     *
+     * @param model The current state of the application model.
+     * @return A CommandResult indicating the result of executing this command on the given model.
+     * @throws CommandException if the target index is invalid for the current list of displayed persons.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -45,6 +57,12 @@ public class DeleteCommand extends Command {
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
 
+    /**
+     * Checks whether another object is equal to this DeleteCommand.
+     *
+     * @param other The object to compare with.
+     * @return true if the other object is a DeleteCommand with the same target index, false otherwise.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -60,6 +78,11 @@ public class DeleteCommand extends Command {
         return targetIndex.equals(otherDeleteCommand.targetIndex);
     }
 
+    /**
+     * Returns a string representation of this DeleteCommand, primarily indicating the target index.
+     *
+     * @return A string representing this command, including the target index.
+     */
     @Override
     public String toString() {
         return new ToStringBuilder(this)

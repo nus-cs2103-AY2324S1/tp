@@ -82,6 +82,7 @@ public class LogicManager implements Logic {
     public ReadOnlyTeamBook getTeamBook() {
         return model.getTeamBook();
     }
+
     @Override
     public ObservableList<Team> getFilteredTeamList() {
         return model.getFilteredTeamList();

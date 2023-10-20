@@ -30,6 +30,7 @@ public class AddDevToTeamParser implements Parser<AddDevToTeamCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TEAMNAME, PREFIX_NAME);
+        // Should it be parseTeamName here? Instead of parseName?
         String teamName = ParserUtil.parseName(argMultimap.getValue(PREFIX_TEAMNAME).get()).toString();
         Name devToAdd = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         return new AddDevToTeamCommand(teamName, devToAdd);

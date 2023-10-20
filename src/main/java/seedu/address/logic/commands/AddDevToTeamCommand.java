@@ -13,7 +13,8 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Name;
 
 /**
- * Adds a person to the address book.
+ * Represents an AddDevToTeam command with hidden internal logic and the ability to be executed.
+ * Adds a developer to a team in the address book.
  */
 public class AddDevToTeamCommand extends Command {
 
@@ -26,7 +27,7 @@ public class AddDevToTeamCommand extends Command {
             + "\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TEAMNAME + "ABC "
-            + PREFIX_NAME + "John Doe ";
+            + PREFIX_NAME + "John Doe";
 
 
     public static final String MESSAGE_SUCCESS = "New developer added: %1$s";
@@ -37,7 +38,10 @@ public class AddDevToTeamCommand extends Command {
     private final String teamToAddTo;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Constructs an {@code AddDevToTeamCommand} to add the specified developer to a team.
+     *
+     * @param teamName The name of the team to which the developer will be added.
+     * @param developer The developer's name that will be added to the team.
      */
     public AddDevToTeamCommand(String teamName, Name developer) {
         requireNonNull(teamName);
@@ -46,6 +50,13 @@ public class AddDevToTeamCommand extends Command {
         this.teamToAddTo = teamName;
     }
 
+    /**
+     * Executes the AddDevToTeamCommand, adding a developer to a specified team.
+     *
+     * @param model The current state of the application model.
+     * @return A CommandResult indicating the result of executing this command on the given model.
+     * @throws CommandException if the team doesn't exist, the developer is already in the team, or the developer doesn't exist.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -62,6 +73,12 @@ public class AddDevToTeamCommand extends Command {
         }
     }
 
+    /**
+     * Checks whether another object is equal to this AddDevToTeamCommand.
+     *
+     * @param other the object to compare with.
+     * @return true if the other object is an AddDevToTeamCommand with the same developer name, false otherwise.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -77,6 +94,11 @@ public class AddDevToTeamCommand extends Command {
         return devToAdd.equals(otherAddCommand.devToAdd);
     }
 
+    /**
+     * Returns a string representation of this AddDevToTeamCommand, including the developer's name.
+     *
+     * @return A string representing this command, including the developer's name.
+     */
     @Override
     public String toString() {
         return new ToStringBuilder(this)

@@ -22,7 +22,7 @@ import seedu.address.model.team.exceptions.TeamNotFoundException;
  */
 public class UniqueTeamList implements Iterable<Team> {
 
-    private final ObservableList<Team> internalList = FXCollections.observableArrayList();
+        private final ObservableList<Team> internalList = FXCollections.observableArrayList();
     private final ObservableList<Team> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
@@ -79,6 +79,14 @@ public class UniqueTeamList implements Iterable<Team> {
         team.addDeveloper(devToAddIdentityCode);
     }
 
+    public void editTeamName(String originalTeamName, String newTeamName) {
+        getTeamByName(originalTeamName).setTeamName(newTeamName);
+    }
+
+    public void setTeamLeaderOfTeam(String teamName, IdentityCode newTeamLeaderID) {
+        getTeamByName(teamName).setTeamLeader(newTeamLeaderID);
+    }
+
 
     /**
      * Replaces the team with the given name in the list with {@code editedTeam}.
@@ -121,6 +129,10 @@ public class UniqueTeamList implements Iterable<Team> {
         } else {
             throw new DeveloperNotFoundException();
         }
+    }
+
+    public IdentityCode getTeamLeaderIDOfTeam(String teamName) {
+        return getTeamByName(teamName).getTeamLeaderIdentityCode();
     }
 
     public void setTeams(UniqueTeamList replacement) {

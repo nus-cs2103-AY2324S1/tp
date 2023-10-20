@@ -14,7 +14,8 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Adds a person to the address book.
+ * Represents an AddDevCommand with the associated logic and the ability to be executed.
+ * Adds a developer to the address book.
  */
 public class AddDevCommand extends Command {
 
@@ -41,13 +42,22 @@ public class AddDevCommand extends Command {
     private final Person devToAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Constructs an {@code AddDevCommand} to add the specified developer to the address book.
+     *
+     * @param person The developer to be added.
      */
     public AddDevCommand(Person person) {
         requireNonNull(person);
         devToAdd = person;
     }
 
+    /**
+     * Executes the AddDevCommand, adding a developer to the address book.
+     *
+     * @param model The current state of the application model.
+     * @return A CommandResult indicating the result of executing this command on the given model.
+     * @throws CommandException if the developer already exists in the address book.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -60,6 +70,12 @@ public class AddDevCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(devToAdd)));
     }
 
+    /**
+     * Checks whether another object is equal to this AddDevCommand.
+     *
+     * @param other The object to compare with.
+     * @return true if the other object is an AddDevCommand with the same developer details, false otherwise.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -75,6 +91,11 @@ public class AddDevCommand extends Command {
         return devToAdd.equals(otherAddCommand.devToAdd);
     }
 
+    /**
+     * Returns a string representation of this AddDevCommand, including the developer's details.
+     *
+     * @return A string representing this command, including the developer's details.
+     */
     @Override
     public String toString() {
         return new ToStringBuilder(this)

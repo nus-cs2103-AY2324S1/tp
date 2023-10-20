@@ -114,6 +114,12 @@ public class UniquePersonList implements Iterable<Person> {
         return foundPerson.orElse(null);
     }
 
+    public Person getPerson(IdentityCode identityCode) {
+        Optional<Person> foundPerson = internalList.filtered(
+                person -> person.getIdentityCode().equals(identityCode)).stream().findFirst();
+        return foundPerson.orElse(null);
+    }
+
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */

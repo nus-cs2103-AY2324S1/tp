@@ -56,6 +56,15 @@ public class Team {
     }
 
     /**
+     * Updates the Team Name of the team.
+     *
+     * @param newTeamName The new Team Name.
+     */
+    public void setTeamName(String newTeamName) {
+        this.teamName = newTeamName;
+    }
+
+    /**
      * Retrieves the TeamLeader's IdentityCode of the team.
      *
      * @return The TeamLeader's IdentityCode.
