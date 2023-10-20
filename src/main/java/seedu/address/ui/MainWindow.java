@@ -120,7 +120,7 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         sidebar = new Sidebar();
         sidebarPlaceholder.getChildren().add(sidebar.getRoot());
-        
+
         profileDetails = new ProfileDetails();
         profileDetailsPlaceholder.getChildren().add(profileDetails.getRoot());
 

@@ -54,7 +54,6 @@
                 <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
               </VBox>
               <!-- Selected Profile -->
-              
               <StackPane fx:id="profileDetailsPlaceholder" styleClass="pane-with-border" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
                 <padding>
                   <Insets top="40" right="30" bottom="40" left="30" />
