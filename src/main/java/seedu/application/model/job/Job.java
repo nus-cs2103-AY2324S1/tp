@@ -14,18 +14,18 @@ public class Job {
     // Identity fields
     private final Role role;
     private final Company company;
-    private final Status status;
     private final Deadline deadline;
+    private final Status status;
 
     /**
      * Not all fields are compulsory
      */
-    public Job(Role role, Company company, Status status, Deadline deadline) {
+    public Job(Role role, Company company, Deadline deadline, Status status) {
         CollectionUtil.requireAllNonNull(role, company);
         this.role = role;
         this.company = company;
-        this.status = status;
         this.deadline = deadline;
+        this.status = status;
     }
 
     public Role getRole() {
@@ -36,12 +36,12 @@ public class Job {
         return company;
     }
 
-    public Status getStatus() {
-        return status;
-    }
-
     public Deadline getDeadline() {
         return deadline;
+    }
+
+    public Status getStatus() {
+        return status;
     }
 
     /**
@@ -76,8 +76,8 @@ public class Job {
         Job otherJob = (Job) other;
         return role.equals(otherJob.role)
             && company.equals(otherJob.company)
-            && status.equals(otherJob.status)
-            && deadline.equals(otherJob.deadline);
+            && deadline.equals(otherJob.deadline)
+            && status.equals(otherJob.status);
     }
 
     @Override
@@ -91,8 +91,8 @@ public class Job {
         return new ToStringBuilder(this)
             .add("role", role)
             .add("company", company)
-            .add("status", status)
             .add("deadline", deadline)
+            .add("status", status)
             .toString();
     }
 }

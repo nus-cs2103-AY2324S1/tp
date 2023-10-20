@@ -24,8 +24,8 @@ public class AddCommand extends Command {
         + PREFIX_COMPANY + "COMPANY "
         + PREFIX_ROLE + "ROLE\n"
         + "[Optional] "
-        + PREFIX_STATUS + "STATUS "
-        + PREFIX_DEADLINE + "DEADLINE \n\n"
+        + PREFIX_DEADLINE + "DEADLINE "
+        + PREFIX_STATUS + "STATUS\n\n"
         + "Example: \n"
         + COMMAND_WORD + " "
         + PREFIX_COMPANY + "Google"
@@ -33,8 +33,8 @@ public class AddCommand extends Command {
         + "OR\n" + COMMAND_WORD + " "
         + PREFIX_COMPANY + "Google"
         + PREFIX_ROLE + "Software Engineer "
-        + PREFIX_STATUS + "pending"
-        + PREFIX_DEADLINE + "Dec 31 2030 1200\n";
+        + PREFIX_DEADLINE + "Dec 31 2030 1200"
+        + PREFIX_STATUS + "pending\n";
 
     public static final String MESSAGE_SUCCESS = "New job added: %1$s";
     public static final String MESSAGE_DUPLICATE_JOB = "This job already exists in the application book";
