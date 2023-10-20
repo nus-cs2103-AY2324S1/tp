@@ -1,7 +1,5 @@
 package seedu.address.logic;
 
-import seedu.address.model.contact.Email;
-
 
 
 //TODO we could avoid static imports, and instead refer to strings as
@@ -17,8 +15,6 @@ import seedu.address.model.contact.Email;
  * populated by calling their associated methods.
  */
 public final class Messages {
-    public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
-    public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format!\n%s";
     public static final String MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX = "The contact index provided is invalid";
     public static final String MESSAGE_CONTACTS_LISTED_OVERVIEW = "%d contacts listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
@@ -28,8 +24,7 @@ public final class Messages {
 
     // Messages associated with various Commands
     public static final String MESSAGE_ADD_COMMAND_SUCCESS = "New contact added: %1$s";
-    public static final String MESSAGE_COMMAND_DUPLICATE_CONTACT = "This contact already exists in Context";
-    public static final String MESSAGE_CLEAR_COMMAND_SUCCESS = "Address book has been cleared!";
+    public static final String MESSAGE_COMMAND_DUPLICATE_CONTACT = "This contact is already in your contact list.";
     public static final String MESSAGE_DELETE_COMMAND_SUCCESS = "Deleted Contact: %1$s";
     public static final String MESSAGE_EDIT_COMMAND_SUCCESS = "Edited Contact: %1$s";
     public static final String MESSAGE_EDIT_COMMAND_NOT_EDITED = "At least one field to edit must be provided.";
@@ -47,42 +42,53 @@ public final class Messages {
             "Names should only contain alphanumeric characters and spaces, and it should not be blank";
     public static final String MESSAGE_PHONE_CONSTRAINTS =
             "Phone numbers should only contain numbers, and it should be at least 3 digits long";
-    public static final String MESSAGE_EMAIL_CONSTRAINTS = "Emails should be of the format local-part@domain "
-            + "and adhere to the following constraints:\n"
-            + "1. The local-part should only contain alphanumeric characters and these special characters, excluding "
-            + "the parentheses, (" + Email.SPECIAL_CHARACTERS
-            + "). The local-part may not start or end with any special "
-            + "characters.\n"
-            + "2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels "
-            + "separated by periods.\n"
-            + "The domain name must:\n"
-            + "    - end with a domain label at least 2 characters long\n"
-            + "    - have each domain label start and end with alphanumeric characters\n"
-            + "    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.";
 
     // Messages associated with Storage
     public static final String MESSAGE_FIELD_MISSING = "Contact's %s field is missing.";
-    public static final String MESSAGE_CONTAIN_DUPLICATE_CONTACT = "Contact list contains duplicate contact(s).";
 
     //TODO refine the messages above this line
 
-    // Tag
+    // Generic commands
+    public static final String COMMAND_UNKNOWN = "Unknown command.";
+    private static final String UNFORMATTED_COMMAND_INVALID_FORMAT =
+            "Invalid command format.\n%s";
+
+    // Specific commands
+    public static final String COMMAND_CLEAR_SUCCESS = "All contacts have been removed!";
+    public static final String COMMAND_EXIT_SUCCESS = "Exiting app...";
+
+    // Contacts
     private static final String UNFORMATTED_TAG_INVALID =
             "\"%s\" is not a valid tag. Tags must be alphanumeric (spaces allowed).";
 
-    private Messages() {
-        // No instantiation
+    public static final String EMAIL_INVALID =
+            "Emails must roughly be of the form \"example_email@foo-domain.sg.\"";
+
+    // JSON
+    public static final String CONVERT_CONTACTS_DUPLICATE = "Encountered duplicate while converting contacts.";
+
+    /**
+     * Returns a formatted message about the command format being invalid, with
+     * the specified help text.
+     */
+    public static String commandInvalidFormat(String helpText) {
+        return String.format(
+            Messages.UNFORMATTED_COMMAND_INVALID_FORMAT,
+            helpText
+        );
     }
 
     /**
-     * Returns a formatted message for the specified invalid tag name.
-     *
-     * @param invalidName Invalid name.
+     * Returns a formatted message about the specified tag name being invalid.
      */
     public static String tagInvalid(String invalidName) {
         return String.format(
-            UNFORMATTED_TAG_INVALID,
+            Messages.UNFORMATTED_TAG_INVALID,
             invalidName
         );
+    }
+
+    private Messages() {
+        // No instantiation
     }
 }

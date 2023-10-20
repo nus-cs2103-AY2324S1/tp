@@ -6,13 +6,15 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.nio.file.Paths;
+import java.util.logging.Level;
 
+import seedu.address.commons.core.Config;
+import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand.EditContactDescriptor;
-import seedu.address.model.ContactsManager;
+import seedu.address.model.Contacts;
+import seedu.address.model.Settings;
 import seedu.address.model.contact.Contact;
 
 
@@ -58,21 +60,6 @@ public final class TestData {
     public static final Index INDEX_SECOND_CONTACT = Index.fromOneBased(2);
     public static final Index INDEX_THIRD_CONTACT = Index.fromOneBased(3);
 
-    // These are used for JsonUtilTest test cases
-    public static final String JSON_STRING_REPRESENTATION = String.format("{%n"
-            + "  \"name\" : \"This is a test class\",%n"
-            + "  \"listOfLocalDateTimes\" : "
-            + "[ \"-999999999-01-01T00:00:00\", \"+999999999-12-31T23:59:59.999999999\", "
-            + "\"0001-01-01T01:01:00\" ],%n"
-            + "  \"mapOfIntegerToString\" : {%n"
-            + "    \"1\" : \"One\",%n"
-            + "    \"2\" : \"Two\",%n"
-            + "    \"3\" : \"Three\"%n"
-            + "  }%n"
-            + "}");
-
-    public static final String NAME_TEST_VALUE = "This is a test class";
-
     // These contain {@code Contact} objects that are used in test cases.
     public static final Contact ALICE = new ContactBuilder().withName("Alice Pauline")
             .withNote("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
@@ -99,22 +86,6 @@ public final class TestData {
     public static final Contact IDA = new ContactBuilder().withName("Ida Mueller").withPhone("8482131")
             .withEmail("hans@example.com").withNote("chicago ave").build();
 
-    /**
-     * Returns an {@code ContactsManager} with all the typical contacts.
-     */
-    public static ContactsManager getTypicalContactsManager() {
-        ContactsManager ab = new ContactsManager();
-        for (Contact contact : getTypicalContacts()) {
-            ab.addContact(contact);
-        }
-        return ab;
-    }
-
-    public static List<Contact> getTypicalContacts() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
-    }
-
-    //TODO Refine the various test data above this line
     /**
      * Holds valid test data.
      */
@@ -158,13 +129,13 @@ public final class TestData {
          */
         public static final class EditDescriptor {
             public static final EditContactDescriptor AMY =
-                new EditContactDescriptorBuilder()
-                        .withName(VALID_NAME_AMY)
-                        .withPhone(VALID_PHONE_AMY)
-                        .withEmail(VALID_EMAIL_AMY)
-                        .withNote(VALID_NOTE_AMY)
-                        .withTags(TestData.Valid.Tag.ALPHANUMERIC)
-                        .build();
+                    new EditContactDescriptorBuilder()
+                            .withName(VALID_NAME_AMY)
+                            .withPhone(VALID_PHONE_AMY)
+                            .withEmail(VALID_EMAIL_AMY)
+                            .withNote(VALID_NOTE_AMY)
+                            .withTags(TestData.Valid.Tag.ALPHANUMERIC)
+                            .build();
             public static final EditContactDescriptor BOB =
                     new EditContactDescriptorBuilder()
                             .withName(VALID_NAME_BOB)
@@ -193,6 +164,43 @@ public final class TestData {
 
     public static final String WHITESPACE = "\t  \r  \n";
     public static final String EXTRA_WORDS = "extra words here";
+
+    /**
+     * Returns {@link Config} matching typicalConfig.json.
+     */
+    public static Config getTypicalConfig() {
+        Config config = new Config();
+        config.setSettingsPath(Paths.get("myFolder", "settings.json"));
+        config.setLogLevel(Level.INFO);
+        return config;
+    }
+
+    /**
+     * Returns {@link Settings} matching typicalSettings.json.
+     */
+    public static Settings getTypicalSettings() {
+        Settings settings = new Settings();
+        settings.setContactsPath(Paths.get("myDocuments/contacts.json"));
+        settings.setGuiSettings(
+            new GuiSettings(1000, 500, 300, 100)
+        );
+        return settings;
+    }
+
+    /**
+     * Returns {@link Contacts} matching typicalContacts.json.
+     */
+    public static Contacts getTypicalContacts() {
+        Contacts contacts = new Contacts();
+        contacts.add(TestData.ALICE);
+        contacts.add(TestData.BENSON);
+        contacts.add(TestData.CARL);
+        contacts.add(TestData.DANIEL);
+        contacts.add(TestData.ELLE);
+        contacts.add(TestData.FIONA);
+        contacts.add(TestData.GEORGE);
+        return contacts;
+    }
 
     private TestData() {
         // No instantiation

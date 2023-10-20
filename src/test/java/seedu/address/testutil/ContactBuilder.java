@@ -14,13 +14,14 @@ import seedu.address.model.contact.Name;
 import seedu.address.model.contact.Note;
 import seedu.address.model.contact.Phone;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.util.SampleDataUtil;
+import seedu.address.model.util.SampleContactsUtil;
+
+
 
 /**
- * A utility class to help with building Contact objects.
+ * Builds {@link Contact}s more conveniently.
  */
 public class ContactBuilder {
-
     private Name name;
     private Phone phone;
     private Email email;
@@ -61,7 +62,7 @@ public class ContactBuilder {
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Contact} that we are building.
      */
     public ContactBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
+        this.tags = SampleContactsUtil.getTagSet(tags);
         return this;
     }
 
@@ -92,5 +93,4 @@ public class ContactBuilder {
     public Contact build() {
         return new Contact(name, phone, email, note, tags);
     }
-
 }

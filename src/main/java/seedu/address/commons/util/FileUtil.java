@@ -6,64 +6,13 @@ import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+
+
 /**
- * Writes and reads files
+ * Contains utility methods for reading/writing files and working with {@link Path}s.
  */
 public class FileUtil {
-
     private static final String CHARSET = "UTF-8";
-
-    public static boolean isFileExists(Path file) {
-        return Files.exists(file) && Files.isRegularFile(file);
-    }
-
-    /**
-     * Returns true if {@code path} can be converted into a {@code Path} via {@link Paths#get(String)},
-     * otherwise returns false.
-     * @param path A string representing the file path. Cannot be null.
-     */
-    public static boolean isValidPath(String path) {
-        try {
-            Paths.get(path);
-        } catch (InvalidPathException ipe) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * Creates a file if it does not exist along with its missing parent directories.
-     * @throws IOException if the file or directory cannot be created.
-     */
-    public static void createIfMissing(Path file) throws IOException {
-        if (!isFileExists(file)) {
-            createFile(file);
-        }
-    }
-
-    /**
-     * Creates a file if it does not exist along with its missing parent directories.
-     */
-    public static void createFile(Path file) throws IOException {
-        if (Files.exists(file)) {
-            return;
-        }
-
-        createParentDirsOfFile(file);
-
-        Files.createFile(file);
-    }
-
-    /**
-     * Creates parent directories of file if it has a parent directory
-     */
-    public static void createParentDirsOfFile(Path file) throws IOException {
-        Path parentDir = file.getParent();
-
-        if (parentDir != null) {
-            Files.createDirectories(parentDir);
-        }
-    }
 
     /**
      * Assumes file exists
@@ -80,4 +29,17 @@ public class FileUtil {
         Files.write(file, content.getBytes(CHARSET));
     }
 
+    /**
+     * Returns true if {@code path} can be converted into a {@code Path} via {@link Paths#get(String)},
+     * otherwise returns false.
+     * @param path A string representing the file path. Cannot be null.
+     */
+    public static boolean isValidPath(String path) {
+        try {
+            Paths.get(path);
+        } catch (InvalidPathException ipe) {
+            return false;
+        }
+        return true;
+    }
 }

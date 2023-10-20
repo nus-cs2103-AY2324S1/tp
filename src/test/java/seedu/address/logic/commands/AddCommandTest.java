@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TestData.ALICE;
 
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Predicate;
@@ -18,15 +17,16 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.ContactList;
-import seedu.address.model.ContactsManager;
+import seedu.address.model.Contacts;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.ReadOnlyContacts;
+import seedu.address.model.Settings;
 import seedu.address.model.contact.Contact;
 import seedu.address.testutil.ContactBuilder;
 
-public class AddCommandTest {
 
+
+public class AddCommandTest {
     @Test
     public void constructor_nullContact_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddCommand(null));
@@ -86,19 +86,10 @@ public class AddCommandTest {
     }
 
     /**
-     * A default model stub that have all of the methods failing.
+     * Default Stub of {@link Model} whose methods all throw an
+     * {@link AssertionError}.
      */
     private class ModelStub implements Model {
-        @Override
-        public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ReadOnlyUserPrefs getUserPrefs() {
-            throw new AssertionError("This method should not be called.");
-        }
-
         @Override
         public GuiSettings getGuiSettings() {
             throw new AssertionError("This method should not be called.");
@@ -110,42 +101,27 @@ public class AddCommandTest {
         }
 
         @Override
-        public Path getConTextFilePath() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setContactsManagerFilePath(Path conTextFilePath) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void addContact(Contact contact) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setContactsManager(ContactList newData) {
+        public ReadOnlyContacts getContacts() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ContactList getContactList() {
+        public boolean containsContact(Contact contact) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean hasContact(Contact contact) {
+        public void removeContact(Contact target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deleteContact(Contact target) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setContact(Contact target, Contact editedContact) {
+        public void updateContact(Contact target, Contact editedContact) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -155,7 +131,17 @@ public class AddCommandTest {
         }
 
         @Override
-        public void updateFilteredContactList(Predicate<Contact> predicate) {
+        public void setContactsFilter(Predicate<Contact> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void removeAllContacts() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Settings getSettings() {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -172,7 +158,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasContact(Contact contact) {
+        public boolean containsContact(Contact contact) {
             requireNonNull(contact);
             return this.contact.isSameContact(contact);
         }
@@ -185,7 +171,7 @@ public class AddCommandTest {
         final ArrayList<Contact> contactsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasContact(Contact contact) {
+        public boolean containsContact(Contact contact) {
             requireNonNull(contact);
             return contactsAdded.stream().anyMatch(contact::isSameContact);
         }
@@ -197,9 +183,8 @@ public class AddCommandTest {
         }
 
         @Override
-        public ContactList getContactList() {
-            return new ContactsManager();
+        public ReadOnlyContacts getContacts() {
+            return new Contacts();
         }
     }
-
 }

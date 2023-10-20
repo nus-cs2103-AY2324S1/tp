@@ -3,42 +3,37 @@ package seedu.address.model.contact;
 
 
 /**
- * Represents an arbitrary note string.
+ * Immutably represents a {@link Contact}'s note.
  */
 public class Note {
-    public final String text;
+    public final String value;
 
-    /**
-     * Constructs a Note.
-     *
-     * @param _text Note string.
-     */
-    public Note(String _text) {
-        this.text = _text;
+    public Note(String value) {
+        this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return this.value;
     }
 
     @Override
     public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
         // instanceof also handles nulls
         if (!(other instanceof Note)) {
             return false;
         }
         Note otherNote = (Note)other;
 
-        if (otherNote == this) {
-            return true;
-        }
-
-        return this.text.equals(otherNote.text);
+        return this.value.equals(otherNote.value);
     }
 
     @Override
     public int hashCode() {
-        return this.text.hashCode();
-    }
-
-    @Override
-    public String toString() {
-        return this.text;
+        return this.value.hashCode();
     }
 }

@@ -3,12 +3,12 @@
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "alice@example.com",
-    "note": "123, Jurong West Ave 6, #08-111",
+    "note": "Note.",
     "tags": ["friends"]
   }, {
     "name": "Alice Pauline",
-    "phone": "94351253",
+    "phone": "65433456",
     "email": "pauline@example.com",
-    "note": ""
+    "note": "Different note."
   }]
 }

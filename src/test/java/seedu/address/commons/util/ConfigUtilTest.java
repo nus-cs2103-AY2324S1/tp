@@ -15,102 +15,66 @@ import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.commons.core.Config;
 import seedu.address.commons.exceptions.DataLoadingException;
+import seedu.address.testutil.TestData;
+
+
 
 public class ConfigUtilTest {
-
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "ConfigUtilTest");
+    private static final Path TEST_DATA_FOLDER = Paths.get(
+        "src",
+        "test",
+        "data"
+    );
 
     @TempDir
-    public Path tempDir;
+    public static Path tempDir;
 
-    @Test
-    public void read_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> read(null));
+    private Optional<Config> read(String fileName) throws DataLoadingException {
+        return ConfigUtil.readConfig(
+            ConfigUtilTest.TEST_DATA_FOLDER.resolve(fileName)
+        );
     }
 
     @Test
-    public void read_missingFile_emptyResult() throws DataLoadingException {
-        assertFalse(read("NonExistentFile.json").isPresent());
+    public void readConfig_missingFile_emptyOptionalReturned() throws DataLoadingException {
+        assertFalse(this.read("nonExistent.json").isPresent());
     }
 
     @Test
-    public void read_notJsonFormat_exceptionThrown() {
-        assertThrows(DataLoadingException.class, () -> read("NotJsonFormatConfig.json"));
+    public void readConfig_notJson_exceptionThrown() {
+        assertThrows(DataLoadingException.class, () -> this.read("notJson.json"));
     }
 
     @Test
-    public void read_fileInOrder_successfullyRead() throws DataLoadingException {
-
-        Config expected = getTypicalConfig();
-
-        Config actual = read("TypicalConfig.json").get();
+    public void readConfig_typical_successfullyRead() throws DataLoadingException {
+        Config expected = TestData.getTypicalConfig();
+        Config actual = this.read("ConfigUtilTest/typicalConfig.json").get();
         assertEquals(expected, actual);
     }
 
     @Test
-    public void read_valuesMissingFromFile_defaultValuesUsed() throws DataLoadingException {
-        Config actual = read("EmptyConfig.json").get();
-        assertEquals(new Config(), actual);
-    }
-
-    @Test
-    public void read_extraValuesInFile_extraValuesIgnored() throws DataLoadingException {
-        Config expected = getTypicalConfig();
-        Config actual = read("ExtraValuesConfig.json").get();
-
+    public void readConfig_missingEntries_defaultsUsed() throws DataLoadingException {
+        Config expected = new Config();
+        Config actual = read("empty.json").get();
         assertEquals(expected, actual);
     }
 
-    private Config getTypicalConfig() {
-        Config config = new Config();
-        config.setLogLevel(Level.INFO);
-        config.setUserPrefsFilePath(Paths.get("preferences.json"));
-        return config;
-    }
-
-    private Optional<Config> read(String configFileInTestDataFolder) throws DataLoadingException {
-        Path configFilePath = addToTestDataPathIfNotNull(configFileInTestDataFolder);
-        return ConfigUtil.readConfig(configFilePath);
-    }
-
     @Test
-    public void save_nullConfig_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> save(null, "SomeFile.json"));
+    public void saveConfig() throws DataLoadingException, IOException {
+        Path tempPath = ConfigUtilTest.tempDir.resolve("tempConfig.json");
+
+        Config config = TestData.getTypicalConfig();
+
+        // Try writing when the file doesn't exist
+        ConfigUtil.saveConfig(config, tempPath);
+        Config readBack = ConfigUtil.readConfig(tempPath).get();
+        assertEquals(config, readBack);
+
+        config.setLogLevel(Level.FINE);
+
+        // Try saving when the file exists
+        ConfigUtil.saveConfig(config, tempPath);
+        readBack = ConfigUtil.readConfig(tempPath).get();
+        assertEquals(config, readBack);
     }
-
-    @Test
-    public void save_nullFile_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> save(new Config(), null));
-    }
-
-    @Test
-    public void saveConfig_allInOrder_success() throws DataLoadingException, IOException {
-        Config original = getTypicalConfig();
-
-        Path configFilePath = tempDir.resolve("TempConfig.json");
-
-        //Try writing when the file doesn't exist
-        ConfigUtil.saveConfig(original, configFilePath);
-        Config readBack = ConfigUtil.readConfig(configFilePath).get();
-        assertEquals(original, readBack);
-
-        //Try saving when the file exists
-        original.setLogLevel(Level.FINE);
-        ConfigUtil.saveConfig(original, configFilePath);
-        readBack = ConfigUtil.readConfig(configFilePath).get();
-        assertEquals(original, readBack);
-    }
-
-    private void save(Config config, String configFileInTestDataFolder) throws IOException {
-        Path configFilePath = addToTestDataPathIfNotNull(configFileInTestDataFolder);
-        ConfigUtil.saveConfig(config, configFilePath);
-    }
-
-    private Path addToTestDataPathIfNotNull(String configFileInTestDataFolder) {
-        return configFileInTestDataFolder != null
-                                  ? TEST_DATA_FOLDER.resolve(configFileInTestDataFolder)
-                                  : null;
-    }
-
-
 }

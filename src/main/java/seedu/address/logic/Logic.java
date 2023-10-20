@@ -7,44 +7,29 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.ContactList;
 import seedu.address.model.contact.Contact;
 
+
+
 /**
- * API of the Logic component
+ * API of the Logic component.
  */
 public interface Logic {
-    /**
-     * Executes the command and returns the result.
-     * @param commandText The command as entered by the user.
-     * @return the result of the command execution.
-     * @throws CommandException If an error occurs during command execution.
-     * @throws ParseException If an error occurs during parsing.
-     */
-    CommandResult execute(String commandText) throws CommandException, ParseException;
+    public GuiSettings getGuiSettings();
+    public void setGuiSettings(GuiSettings guiSettings);
+
+    public ObservableList<Contact> getFilteredContactList();
+
+    public Path getContactsPath();
 
     /**
-     * Returns the ContactList.
+     * Returns the {@link CommandResult} of executing the specified command
+     * text.
      *
-     * @see seedu.address.model.Model#getContactList()
+     * @throws ParseException If an error occurs during parsing.
+     * @throws CommandException If an error occurs during command execution.
      */
-    ContactList getContactList();
-
-    /** Returns an unmodifiable view of the filtered list of contacts */
-    ObservableList<Contact> getFilteredContactList();
-
-    /**
-     * Returns the user prefs' address book file path.
-     */
-    Path getConTextFilePath();
-
-    /**
-     * Returns the user prefs' GUI settings.
-     */
-    GuiSettings getGuiSettings();
-
-    /**
-     * Set the user prefs' GUI settings.
-     */
-    void setGuiSettings(GuiSettings guiSettings);
+    public CommandResult execute(
+        String commandText
+    ) throws ParseException, CommandException;
 }

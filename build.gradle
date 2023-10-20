@@ -93,5 +93,5 @@ checkstyle {
 }
 
 shadowJar {
-    archiveFileName = 'ConText.jar'
+    archiveFileName = 'context.jar'
 }

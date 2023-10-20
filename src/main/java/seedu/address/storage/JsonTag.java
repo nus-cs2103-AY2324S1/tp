@@ -10,48 +10,43 @@ import seedu.address.model.tag.Tag;
 
 
 /**
- * Jackson-friendly version of {@link Tag}.
+ * Immutable, Jackson-friendly version of {@link Tag}.
  *
  * The data it contains may be invalid if the instance was deserialized from
- * JSON. Checks are done when converting to model type.
+ * JSON. Checks are done when converting {@link #toModelType()}.
  */
 public final class JsonTag {
-    private final String name;
+    private final String value;
 
     /**
-     * Constructs a JsonTag with the specified name.
-     *
-     * @param _name Name.
-     */
-    @JsonCreator
-    public JsonTag(String _name) {
-        this.name = _name;
-    }
-
-    /**
-     * Constructs a JsonTag by converting the specified {@code Tag}.
+     * Constructs by converting the specified {@link Tag}.
      */
     public JsonTag(Tag tag) {
-        this.name = tag.name;
+        this(tag.value);
+    }
+
+    @JsonCreator
+    public JsonTag(String value) {
+        this.value = value;
     }
 
     @JsonValue
-    public String getName() {
-        return this.name;
+    public String getValue() {
+        return this.value;
     }
 
     /**
-     * Attempts to convert this to the model's {@code Tag} type.
+     * Attempts to convert this to the model's {@link Tag} type.
      *
      * @throws IllegalValueException If any data this contains is invalid.
      */
     public Tag toModelType() throws IllegalValueException {
-        if (!Tag.isValidName(this.name)) {
+        if (!Tag.isValid(this.value)) {
             throw new IllegalValueException(
-                Messages.tagInvalid(this.name)
+                Messages.tagInvalid(this.value)
             );
         }
 
-        return new Tag(this.name);
+        return new Tag(this.value);
     }
 }
