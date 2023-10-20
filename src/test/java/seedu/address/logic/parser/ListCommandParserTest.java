@@ -46,6 +46,23 @@ public class ListCommandParserTest {
     }
 
     @Test
+    public void parse_validArgs_noneWithOthers() {
+        assertParseSuccess(parser, "STUDENTS phone none email", new ListCommand(State.STUDENT, new String[]{"none"}));
+    }
+
+    @Test
+    public void parse_validArgs_all() {
+        assertParseSuccess(parser, "STUDENTS all", new ListCommand(State.STUDENT,
+                parser.DISPLAYABLE_FIELDS.toArray(new String[0])));
+    }
+
+    @Test
+    public void parse_validArgs_allWithOthers() {
+        assertParseSuccess(parser, "STUDENTS email all subjects",
+                new ListCommand(State.STUDENT, parser.DISPLAYABLE_FIELDS.toArray(new String[0])));
+    }
+
+    @Test
     public void parse_invalidArgsKeyword_studentsGender() {
         assertParseFailure(parser, "STUDENTS gender",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
