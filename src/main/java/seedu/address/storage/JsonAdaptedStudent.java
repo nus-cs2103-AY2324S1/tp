@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.student.ClassNumber;
+import seedu.address.model.student.ClassDetails;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
@@ -29,7 +29,7 @@ class JsonAdaptedStudent {
     private final String phone;
     private final String email;
     private final String studentNumber;
-    private final String classNumber;
+    private final String classDetails;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -38,13 +38,13 @@ class JsonAdaptedStudent {
     @JsonCreator
     public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                               @JsonProperty("email") String email, @JsonProperty("studentNumber") String studentNumber,
-                              @JsonProperty("classNumber") String classNumber,
+                              @JsonProperty("classDetails") String classDetails,
                               @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.studentNumber = studentNumber;
-        this.classNumber = classNumber;
+        this.classDetails = classDetails;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -58,7 +58,7 @@ class JsonAdaptedStudent {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         studentNumber = source.getStudentNumber().value;
-        classNumber = source.getClassNumber().value;
+        classDetails = source.getClassDetails().classDetails;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -108,17 +108,17 @@ class JsonAdaptedStudent {
         }
         final StudentNumber modelStudentNumber = new StudentNumber(studentNumber);
 
-        if (classNumber == null) {
+        if (classDetails == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    ClassNumber.class.getSimpleName()));
+                    ClassDetails.class.getSimpleName()));
         }
-        if (!ClassNumber.isValidClassNumber(classNumber)) {
-            throw new IllegalValueException(ClassNumber.MESSAGE_CONSTRAINTS);
+        if (!ClassDetails.isValidClassDetails(classDetails)) {
+            throw new IllegalValueException(ClassDetails.MESSAGE_CONSTRAINTS);
         }
-        final ClassNumber modelClassNumber = new ClassNumber(classNumber);
+        final ClassDetails modelClassDetails = new ClassDetails(classDetails);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Student(modelName, modelPhone, modelEmail, modelStudentNumber, modelClassNumber, modelTags);
+        return new Student(modelName, modelPhone, modelEmail, modelStudentNumber, modelClassDetails, modelTags);
     }
 
 }

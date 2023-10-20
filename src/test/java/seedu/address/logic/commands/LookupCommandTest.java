@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalStudents.ALICE;
 import static seedu.address.testutil.TypicalStudents.BENSON;
 import static seedu.address.testutil.TypicalStudents.DANIEL;
 import static seedu.address.testutil.TypicalStudents.HOON;
@@ -34,8 +35,8 @@ public class LookupCommandTest {
                 new StudentContainsKeywordsPredicate("T11", null,
                         TypicalStudents.KEYWORD_MATCHING_MEIER, null, null, null);
         StudentContainsKeywordsPredicate secondPredicate =
-                new StudentContainsKeywordsPredicate("T10", null,
-                        null, null, null, null);
+                new StudentContainsKeywordsPredicate("T11", null,
+                        TypicalStudents.KEYWORD_MATCHING_MEIER, null, null, "testTag");
 
         LookupCommand lookupFirstCommand = new LookupCommand(firstPredicate);
         LookupCommand lookupSecondCommand = new LookupCommand(secondPredicate);
@@ -63,8 +64,11 @@ public class LookupCommandTest {
         assertFalse(lookupSecondCommand.equals(lookupFirstCommand));
     }
 
+    /* Note, the underlying logics of StudentContainsKeywordsPredicate allow
+       all students to be found if no keywords are provided. But the lookupCommandParser
+       will not allow this to happen. */
     @Test
-    public void execute_zeroKeywords_allPersonFound() {
+    public void execute_zeroKeywords_allStudentFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW,
                 expectedModel.getFilteredStudentList().size());
         StudentContainsKeywordsPredicate predicate = new StudentContainsKeywordsPredicate(null,
@@ -75,7 +79,7 @@ public class LookupCommandTest {
     }
 
     @Test
-    public void execute_singleKeywords_multiplePersonsFound() {
+    public void execute_singlePrefix_multipleStudentsFound() {
         expectedModel.addStudent(HOON);
         model.addStudent(HOON);
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
@@ -90,19 +94,27 @@ public class LookupCommandTest {
     }
 
     @Test
-    public void execute_multipleKeywords_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
-        StudentContainsKeywordsPredicate predicate = new StudentContainsKeywordsPredicate(null,
-                null, TypicalStudents.KEYWORD_MATCHING_MEIER, null, null, "friends");
+    public void execute_multiplePrefixes_multipleStudentsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+        StudentContainsKeywordsPredicate predicate = new StudentContainsKeywordsPredicate("T11 T12 T9",
+                null, null, null, null, "friends");
         LookupCommand command = new LookupCommand(predicate);
+        expectedModel.updateFilteredStudentList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(ALICE, BENSON, DANIEL), model.getFilteredStudentList());
+
+        expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        predicate = new StudentContainsKeywordsPredicate(null,
+                null, TypicalStudents.KEYWORD_MATCHING_MEIER, null, null, "friends");
+        command = new LookupCommand(predicate);
         expectedModel.updateFilteredStudentList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(BENSON, DANIEL), model.getFilteredStudentList());
     }
 
     @Test
-    public void execute_nonExistentKeywords_noPersonsFound() {
-        // single keyword
+    public void execute_nonExistentKeywords_noStudentsFound() {
+        // single prefix
         String expectedMessage = LookupCommand.MESSAGE_NO_MATCH;
         StudentContainsKeywordsPredicate predicate = new StudentContainsKeywordsPredicate("T9999",
                 null, null, null, null, null);
@@ -111,7 +123,7 @@ public class LookupCommandTest {
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredStudentList());
 
-        // multiple keywords
+        // multiple prefixes
         predicate = new StudentContainsKeywordsPredicate("T11",
                 null, "thisIsATestName", null, null, "tagTagTag");
         command = new LookupCommand(predicate);
@@ -127,5 +139,13 @@ public class LookupCommandTest {
         LookupCommand lookupCommand = new LookupCommand(predicate);
         String expected = LookupCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
         assertEquals(expected, lookupCommand.toString());
+    }
+
+    @Test
+    public void test_hashCode() {
+        StudentContainsKeywordsPredicate predicate = new StudentContainsKeywordsPredicate("T11",
+                null, TypicalStudents.KEYWORD_MATCHING_MEIER, null, null, null);
+        LookupCommand lookupCommand = new LookupCommand(predicate);
+        assertEquals(lookupCommand.hashCode(), lookupCommand.hashCode());
     }
 }

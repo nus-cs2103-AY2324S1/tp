@@ -29,11 +29,18 @@ public class LookupCommandParserTest {
         assertParseSuccess(parser, " n/alice p/12345", expectedLookupCommand);
         assertParseSuccess(parser, " p/12345 n/alice ", expectedLookupCommand);
 
-        // prefix present but no keywords
+        // prefix present but no keywords are ignored when other keywords present
         assertParseSuccess(parser, " c/ n/alice p/12345", expectedLookupCommand);
 
         // multiple whitespaces between keywords
         assertParseSuccess(parser, " \n n/ \n alice \n p/\t \n12345  \t", expectedLookupCommand);
+
+        expectedLookupCommand = new LookupCommand(new StudentContainsKeywordsPredicate(
+                null, "email1 email2", "alice", "12345 54321",
+                null, "tag1 tag2"));
+
+        // multiple keywords for prefix
+        assertParseSuccess(parser, " p/12345 54321 n/alice e/email1 email2 t/tag1 tag2", expectedLookupCommand);
     }
 
     @Test
@@ -44,12 +51,14 @@ public class LookupCommandParserTest {
         assertParseFailure(parser, " /n Alice",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, LookupCommand.MESSAGE_USAGE));
 
-        // multiple keywords in one prefix
-        assertParseFailure(parser, " n/Alice Bob", LookupCommand.MESSAGE_ADDITIONAL_KEYWORDS);
-        assertParseFailure(parser, " c/t11 t12 t13", LookupCommand.MESSAGE_ADDITIONAL_KEYWORDS);
-
         // no leading whitespaces
         assertParseFailure(parser, "n/Alice",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, LookupCommand.MESSAGE_USAGE));
+
+        // no keyword for prefix
+        assertParseFailure(parser, " p/",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, LookupCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " c/ n/",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, LookupCommand.MESSAGE_USAGE));
     }
 

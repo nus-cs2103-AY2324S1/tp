@@ -9,7 +9,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.student.ClassNumber;
+import seedu.address.model.student.ClassDetails;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
@@ -17,7 +17,7 @@ import seedu.address.model.student.StudentNumber;
 import seedu.address.model.tag.Tag;
 
 /**
- * Contains utility methods used for parsing strings in the various *Parser classes.
+ * Contains utility methods used for parsing arguments in the various *Parser classes.
  */
 public class ParserUtil {
 
@@ -66,7 +66,6 @@ public class ParserUtil {
         return new Phone(trimmedPhone);
     }
 
-
     /**
      * Parses a {@code String email} into an {@code Email}.
      * Leading and trailing whitespaces will be trimmed.
@@ -98,21 +97,19 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String classNumber} into an {@code ClassNumber}.
+     * Parses a {@code String classDetails} into an {@code ClassDetails}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code classNumber} is invalid.
+     * @throws ParseException if the given {@code classDetails} is invalid.
      */
-    public static ClassNumber parseClassNumber(String classNumber) throws ParseException {
-        requireNonNull(classNumber);
-        String trimmedClassNumber = classNumber.trim();
-        if (!ClassNumber.isValidClassNumber(trimmedClassNumber)) {
-            throw new ParseException(ClassNumber.MESSAGE_CONSTRAINTS);
+    public static ClassDetails parseClassDetails(String classDetails) throws ParseException {
+        requireNonNull(classDetails);
+        String trimmedClassDetails = classDetails.trim();
+        if (!ClassDetails.isValidClassDetails(trimmedClassDetails)) {
+            throw new ParseException(ClassDetails.MESSAGE_CONSTRAINTS);
         }
-        return new ClassNumber(trimmedClassNumber);
+        return new ClassDetails(trimmedClassDetails);
     }
-
-
 
     /**
      * Parses a {@code String tag} into a {@code Tag}.
@@ -140,6 +137,4 @@ public class ParserUtil {
         }
         return tagSet;
     }
-
-
 }

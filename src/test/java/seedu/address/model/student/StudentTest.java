@@ -36,13 +36,13 @@ public class StudentTest {
 
         // same name, all other attributes different -> returns false
         Student editedAlice = new StudentBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withStudentNumber(VALID_STUDENT_NUMBER_BOB).withClassNumber(VALID_CLASS_NUMBER_BOB)
+                .withStudentNumber(VALID_STUDENT_NUMBER_BOB).withClassDetails(VALID_CLASS_NUMBER_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.isSamePerson(editedAlice));
 
         // same student number, all other attributes different -> returns true
         editedAlice = new StudentBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withName(VALID_NAME_BOB).withClassNumber(VALID_CLASS_NUMBER_BOB)
+                .withName(VALID_NAME_BOB).withClassDetails(VALID_CLASS_NUMBER_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
@@ -88,7 +88,7 @@ public class StudentTest {
     public void toStringMethod() {
         String expected = Student.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", student number=" + ALICE.getStudentNumber()
-                + ", class number=" + ALICE.getClassNumber() + ", tags=" + ALICE.getTags() + "}";
+                + ", class number=" + ALICE.getClassDetails() + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

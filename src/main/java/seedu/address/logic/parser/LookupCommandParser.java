@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.HashMap;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.LookupCommand;
@@ -36,42 +37,34 @@ public class LookupCommandParser implements Parser<LookupCommand> {
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, prefixList);
         argMultimap.verifyNoDuplicatePrefixesFor(prefixList);
-        if (!isPrefixPresent(argMultimap, prefixList)) {
+        HashMap<Prefix, String> prefixMap = new HashMap<>();
+        for (Prefix prefix : prefixList) {
+            String keywords = argMultimap.getValue(prefix).orElse("");
+            if (keywords.isEmpty()) {
+                continue;
+            }
+            prefixMap.put(prefix, keywords);
+        }
+        if (!isPrefixPresent(prefixMap, prefixList)) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, LookupCommand.MESSAGE_USAGE));
         }
-        for (Prefix prefix : prefixList) {
-            String value = argMultimap.getValue(prefix).orElse("");
-            if (value.split("\\s+").length > 1) {
-                throw new ParseException(LookupCommand.MESSAGE_ADDITIONAL_KEYWORDS);
-            }
-        }
-
-        String classNumber = argMultimap.getValue(PREFIX_CLASS_NUMBER)
-                .filter(s -> !s.isEmpty()).orElse(null);
-        String email = argMultimap.getValue(PREFIX_EMAIL)
-                .filter(s -> !s.isEmpty()).orElse(null);
-        String name = argMultimap.getValue(PREFIX_NAME)
-                .filter(s -> !s.isEmpty()).orElse(null);
-        String phone = argMultimap.getValue(PREFIX_PHONE)
-                .filter(s -> !s.isEmpty()).orElse(null);
-        String studentNumber = argMultimap.getValue(PREFIX_STUDENT_NUMBER)
-                .filter(s -> !s.isEmpty()).orElse(null);
-        String tag = argMultimap.getValue(PREFIX_TAG)
-                .filter(s -> !s.isEmpty()).orElse(null);
-
-        StudentContainsKeywordsPredicate predicate = new StudentContainsKeywordsPredicate(classNumber,
-                email, name, phone, studentNumber, tag);
+        StudentContainsKeywordsPredicate predicate = new StudentContainsKeywordsPredicate(
+                prefixMap.get(PREFIX_CLASS_NUMBER),
+                prefixMap.get(PREFIX_EMAIL),
+                prefixMap.get(PREFIX_NAME),
+                prefixMap.get(PREFIX_PHONE),
+                prefixMap.get(PREFIX_STUDENT_NUMBER),
+                prefixMap.get(PREFIX_TAG));
         return new LookupCommand(predicate);
     }
 
     /**
-     * Returns true if at least one prefix contains non-empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
+     * Returns true if at least one prefix contains non-empty values in the given
+     * {@code prefixMap}.
      */
-    private static boolean isPrefixPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes)
-                .anyMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    private static boolean isPrefixPresent(HashMap<Prefix, String> prefixMap, Prefix... prefixes) {
+        return Stream.of(prefixes).anyMatch(prefixMap::containsKey);
     }
 
 }

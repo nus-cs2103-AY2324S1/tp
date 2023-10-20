@@ -4,35 +4,35 @@
     "phone" : "87438807",
     "email" : "alexyeoh@example.com",
     "studentNumber" : "A0247243A",
-    "classNumber" : "T11",
+    "classDetails" : "T11",
     "tags" : [ "friends" ]
   }, {
     "name" : "Charlotte Oliveiro",
     "phone" : "93210283",
     "email" : "charlotte@example.com",
     "studentNumber" : "A0241243A",
-    "classNumber" : "T12",
+    "classDetails" : "T12",
     "tags" : [ "neighbours" ]
   }, {
     "name" : "David Li",
     "phone" : "91031282",
     "email" : "lidavid@example.com",
     "studentNumber" : "A0123243A",
-    "classNumber" : "T11",
+    "classDetails" : "T11",
     "tags" : [ "family" ]
   }, {
     "name" : "Irfan Ibrahim",
     "phone" : "92492021",
     "email" : "irfan@example.com",
     "studentNumber" : "A0234543A",
-    "classNumber" : "T10",
+    "classDetails" : "T10",
     "tags" : [ "classmates" ]
   }, {
     "name" : "Roy Balakrishnan",
     "phone" : "92624417",
     "email" : "royb@example.com",
     "studentNumber" : "A0224543A",
-    "classNumber" : "T11",
+    "classDetails" : "T11",
     "tags" : [ "colleagues" ]
   } ]
 }

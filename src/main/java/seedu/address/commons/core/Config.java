@@ -62,5 +62,4 @@ public class Config {
                 .add("userPrefsFilePath", userPrefsFilePath)
                 .toString();
     }
-
 }

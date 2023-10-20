@@ -15,13 +15,18 @@ public class Messages {
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The student index provided is invalid";
-    public static final String MESSAGE_INVALID_STUDENT_NUMBER = "The student number provided is invalid";
     public static final String MESSAGE_NONEXISTENT_STUDENT_NUMBER = "The student number provided does not exist here.";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "Lookup successful!\n"
             + "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_STUDENT_DOES_NOT_EXIST = "There is no student with the given student number.";
+    public static final String MESSAGE_INVALID_TUTORIAL_INDEX = "Index is invalid.";
+    public static final String MESSAGE_CLASS_MANAGER_NOT_CONFIGURED = "Class Manager is not configured yet. "
+            + "Please enter config to configure Class Manager.";
+    public static final String MESSAGE_CLASS_MANAGER_ALREADY_CONFIGURED = "Class Manager has been configured "
+            + "previously. You are not allowed to configure it again.";
+    public static final String MESSAGE_USER_PREFS_CANNOT_LOAD = "Unable to load user preferences from preferences.json";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -48,7 +53,7 @@ public class Messages {
                 .append(";\n Student Number: ")
                 .append(student.getStudentNumber())
                 .append(";\n Class Number: ")
-                .append(student.getClassNumber())
+                .append(student.getClassDetails())
                 .append(";\n Tags: ");
         student.getTags().forEach(builder::append);
         return builder.toString();

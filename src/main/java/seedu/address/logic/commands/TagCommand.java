@@ -22,10 +22,10 @@ public class TagCommand extends Command {
     public static final String ADD_TAGS = "add";
     public static final String DELETE_TAGS = "delete";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Edits the tags of the student identified by the student number.\n"
+            + ": Edits the tags of the student identified by the student number. "
             + "Existing tags will be overwritten by the input.\n"
-            + "Use /add or /delete to add/delete tags without overwriting all tags.\n"
-            + "Parameters: Student number (must be exist in address book) [/add] [/delete] t/[TAG]\n"
+            + "Use /add to add or /delete to delete tags without overwriting all tags.\n"
+            + "Parameters: STUDENT_NUMBER (exists in address book) [/add] [/delete] t/[TAG]\n"
             + "Example: " + COMMAND_WORD + " A1234567N /add t/smart.";
     public static final String MESSAGE_ADD_TAG_SUCCESS = "Added following tags to Student %1$s:\n";
     public static final String MESSAGE_DELETE_TAG_SUCCESS = "Removed following tags from Student %1$s:\n";
@@ -42,7 +42,6 @@ public class TagCommand extends Command {
      */
     public TagCommand(StudentNumber studentNumber, Set<Tag> tags) {
         requireAllNonNull(studentNumber, tags);
-
         this.studentNumber = studentNumber;
         this.tags = tags;
     }
@@ -60,7 +59,7 @@ public class TagCommand extends Command {
 
         Student editedStudent = new Student(
                 studentToTag.getName(), studentToTag.getPhone(), studentToTag.getEmail(),
-                studentToTag.getStudentNumber(), studentToTag.getClassNumber(), this.tags);
+                studentToTag.getStudentNumber(), studentToTag.getClassDetails(), this.tags);
 
         model.setStudent(studentToTag, editedStudent);
         model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_PERSONS);

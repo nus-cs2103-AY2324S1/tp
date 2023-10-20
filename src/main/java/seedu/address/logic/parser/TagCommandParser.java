@@ -37,7 +37,7 @@ public class TagCommandParser implements Parser<TagCommand> {
 
         if (!StudentNumber.isValidStudentNumber(argMultimap.getPreamble())) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                TagCommand.MESSAGE_TAG_FAILED + TagCommand.MESSAGE_USAGE));
+                    TagCommand.MESSAGE_USAGE));
         }
 
         StudentNumber studentNumber = new StudentNumber(argMultimap.getPreamble());
@@ -68,13 +68,10 @@ public class TagCommandParser implements Parser<TagCommand> {
      */
     private Optional<Set<Tag>> parseTags(Collection<String> tags) throws ParseException {
         assert tags != null;
-
         if (tags.isEmpty()) {
             return Optional.empty();
         }
-
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
-
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
 

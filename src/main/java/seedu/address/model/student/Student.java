@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 
@@ -22,7 +23,7 @@ public class Student {
     private final Email email;
 
     private final StudentNumber studentNumber;
-    private final ClassNumber classNumber;
+    private final ClassDetails classDetails;
 
     // Data fields
 
@@ -38,20 +39,20 @@ public class Student {
         this.studentNumber = studentNumber;
         this.phone = null;
         this.email = null;
-        this.classNumber = null;
+        this.classDetails = null;
     }
 
     /**
      * Every field must be present and not null.
      */
     public Student(Name name, Phone phone, Email email, StudentNumber studentNumber,
-                   ClassNumber classNumber , Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, studentNumber, classNumber, tags);
+                   ClassDetails classDetails, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, studentNumber, classDetails, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.studentNumber = studentNumber;
-        this.classNumber = classNumber;
+        this.classDetails = classDetails;
         this.tags.addAll(tags);
     }
 
@@ -71,8 +72,8 @@ public class Student {
         return studentNumber;
     }
 
-    public ClassNumber getClassNumber() {
-        return classNumber;
+    public ClassDetails getClassDetails() {
+        return classDetails;
     }
 
     /**
@@ -94,6 +95,14 @@ public class Student {
 
         return otherStudent != null
                 && otherStudent.getStudentNumber().equals(getStudentNumber());
+    }
+
+    /**
+     * Marks the specific tutorial as present.
+     */
+    public Student markPresent(Index tutNum) {
+        return new Student(this.name, this.phone, this.email,
+                this.studentNumber, this.classDetails.markPresent(tutNum), this.tags);
     }
 
     /**
@@ -119,7 +128,7 @@ public class Student {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, studentNumber, classNumber, tags);
+        return Objects.hash(name, phone, email, studentNumber, classDetails, tags);
     }
 
     @Override
@@ -129,7 +138,7 @@ public class Student {
                 .add("phone", phone)
                 .add("email", email)
                 .add("student number", studentNumber)
-                .add("class number", classNumber)
+                .add("class number", classDetails)
                 .add("tags", tags)
                 .toString();
     }

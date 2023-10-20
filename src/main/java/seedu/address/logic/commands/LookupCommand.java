@@ -23,22 +23,21 @@ public class LookupCommand extends Command {
     public static final String COMMAND_WORD = "lookup";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Finds and lists all persons who's details contain any of"
-            + "the specified keywords (case-insensitive) \nand displays them "
+            + ": Finds and lists all persons who's details contain any of "
+            + "the specified keywords (case-insensitive) and displays them "
             + "as a list with index numbers.\n"
-            + "Parameters: \n"
+            + "Parameters: "
             + "[" + PREFIX_CLASS_NUMBER + "CLASS_NUMBER] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_STUDENT_NUMBER + "STUDENT_NUMBER] "
             + "[" + PREFIX_TAG + "TAG]\n"
-            + "Example: \n"
-            + COMMAND_WORD + " " + PREFIX_NAME + "li\n"
+            + "Examples (Comma separated): "
+            + COMMAND_WORD + " " + PREFIX_NAME + "li, "
             + COMMAND_WORD + " " + PREFIX_TAG + "t11";
 
     public static final String MESSAGE_NO_MATCH = "No match found!";
-    public static final String MESSAGE_ADDITIONAL_KEYWORDS = "Only one keyword is allowed for each prefix.";
 
     private final StudentContainsKeywordsPredicate predicate;
 
@@ -70,6 +69,11 @@ public class LookupCommand extends Command {
 
         LookupCommand otherLookupCommand = (LookupCommand) other;
         return predicate.equals(otherLookupCommand.predicate);
+    }
+
+    @Override
+    public int hashCode() {
+        return predicate.hashCode();
     }
 
     @Override

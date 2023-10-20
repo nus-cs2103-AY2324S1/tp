@@ -76,7 +76,7 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-### Adding a student: `add`
+### Adding a student : `add`
 
 This feature in Class Manager 2023 is a robust tool that empowers CS2103T TAs to add new student information according
 to the specified parameters (FIRST NAME, LAST NAME, SCHOOL EMAIL, CLASS NUMBER, and STUDENT NUMBER, TAG[Optional]).
@@ -116,7 +116,7 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower` Edits the name of the 2nd student to be `Betsy Crower`.
 
-### Tagging a student: `tag`
+### Tagging a student : `tag`
 
 Tags the existing student in the address book.
 
@@ -133,7 +133,7 @@ Examples:
 * `tag A1234567N /delete t/shy` removes the shy tag from the specified student.
 * `tag A1234567N t/` clear all tags from the specified student.
 
-### Lookup students: `lookup`
+### Lookup students : `lookup`
 
 **TL;DR:** Lookup student details containing any of the given fields.
 
@@ -154,15 +154,14 @@ _At least one_ of the optional fields must be provided. `lookup` alone is not al
 * The command is **case-insensitive**. e.g. `hans` will match `Hans`
 * Only **full words** will be matched e.g. `Han` will not match `Hans`
 * The order of the fields does **not** matter. e.g. `lookup n/li c/T11` will return the same result as `lookup c/T11 n/li`
-* Field with nothing will be **accepted** as a valid input. e.g. `lookup c/` will return all classes.
-* This command can only take one word per field. e.g. `lookup c/T11 T12` is _**not** allowed_.
-* Taking multiple words per field _coming soon_ in future versions.
+* Field with nothing will be ignored. e.g. `lookup n/ c/T11` will return the same result as `lookup c/T11`.
+* This command can take multiple words per field. e.g. `lookup c/T11 T12` will return all students in `T11` or `T12`.
 
 Examples:
 
-* `lookup n/li` returns `Alex Li`, `David Li`<br>
-  ![result for 'lookup n/li'](images/lookupLastNameResult.png) </br></br>
-* `lookup c/T11` return all students in class number 111<br>
+* `lookup n/Alex David` returns `Alex Li`, `David Li`<br>
+  ![result for 'lookup n/Alex David'](images/lookupLastNameResult.png) </br></br>
+* `lookup c/T11` returns all students in class number T11<br>
   ![result for 'lookup c/T11'](images/lookupClassResult.png)
 
 ### Deleting a student : `delete`
@@ -212,6 +211,17 @@ Format: `load f/FILE_NAME`
 
 Examples:
 * `load f/export-v1` loads the export-v1.json file in the data folder.
+
+### Configuring Class Manager: `config`
+
+Configures Class Manager 2023 with the module information, such as tutorial count and assignment count. 
+
+Format: `config #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT`
+* Parameters can be in any order.
+* Parameters must be zero or greater.
+
+Examples:
+* `config #t/2 #a/3` sets the tutorial count to 2 and assignment count to 3.
 
 ### Archiving data files `[coming in v2.0]`
 

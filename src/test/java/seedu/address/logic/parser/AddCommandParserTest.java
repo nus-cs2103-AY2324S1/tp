@@ -42,7 +42,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.model.student.ClassNumber;
+import seedu.address.model.student.ClassDetails;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
@@ -214,7 +214,7 @@ public class AddCommandParserTest {
 
         // invalid class number
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + STUDENT_NUMBER_DESC_BOB
-                + INVALID_CLASS_NUMBER_DESC + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, ClassNumber.MESSAGE_CONSTRAINTS);
+                + INVALID_CLASS_NUMBER_DESC + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, ClassDetails.MESSAGE_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + STUDENT_NUMBER_DESC_BOB

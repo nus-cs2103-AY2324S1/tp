@@ -14,7 +14,7 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.student.ClassNumber;
+import seedu.address.model.student.ClassDetails;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
@@ -129,21 +129,21 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseClassNumber_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseClassNumber(INVALID_CLASS_NUMBER));
+    public void parseClassDetails_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseClassDetails(INVALID_CLASS_NUMBER));
     }
 
     @Test
-    public void parseClassNumber_validValueWithoutWhitespace_returnsClassNumber() throws Exception {
-        ClassNumber expectedClassNumber = new ClassNumber(VALID_CLASS_NUMBER);
-        assertEquals(expectedClassNumber, ParserUtil.parseClassNumber(VALID_CLASS_NUMBER));
+    public void parseClassDetails_validValueWithoutWhitespace_returnsClassDetails() throws Exception {
+        ClassDetails expectedClassDetails = new ClassDetails(VALID_CLASS_NUMBER);
+        assertEquals(expectedClassDetails, ParserUtil.parseClassDetails(VALID_CLASS_NUMBER));
     }
 
     @Test
-    public void parseClassNumber_validValueWithWhitespace_returnsTrimmedClassNumber() throws Exception {
-        String classNumberWithWhitespace = WHITESPACE + VALID_CLASS_NUMBER + WHITESPACE;
-        ClassNumber expectedClassNumber = new ClassNumber(VALID_CLASS_NUMBER);
-        assertEquals(expectedClassNumber, ParserUtil.parseClassNumber(classNumberWithWhitespace));
+    public void parseClassDetails_validValueWithWhitespace_returnsTrimmedClassDetails() throws Exception {
+        String classDetailsWithWhitespace = WHITESPACE + VALID_CLASS_NUMBER + WHITESPACE;
+        ClassDetails expectedClassDetails = new ClassDetails(VALID_CLASS_NUMBER);
+        assertEquals(expectedClassDetails, ParserUtil.parseClassDetails(classDetailsWithWhitespace));
     }
 
     @Test
