@@ -19,7 +19,7 @@ import seedu.address.model.tag.Tag;
  */
 public class SampleDataUtil {
 
-    public static Student[] getSamplePersons() {
+    public static Student[] getSampleStudents() {
         return new Student[] {
             new Student(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new StudentNumber("A0247243A"), new ClassDetails("T11"),
@@ -44,7 +44,7 @@ public class SampleDataUtil {
 
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
-        for (Student sampleStudent : getSamplePersons()) {
+        for (Student sampleStudent : getSampleStudents()) {
             sampleAb.addStudent(sampleStudent);
         }
         return sampleAb;

@@ -23,7 +23,7 @@ public class DeleteCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_STUDENT_NUMBER + "A0245234A";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Student: %1$s";
+    public static final String MESSAGE_DELETE_STUDENT_SUCCESS = "Deleted Student: %1$s";
 
     private final StudentNumber targetStudentNumber;
 
@@ -42,7 +42,7 @@ public class DeleteCommand extends Command {
         Student studentToDelete = model.getStudent(targetStudentNumber);
 
         model.deleteStudent(studentToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(studentToDelete)));
+        return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, Messages.format(studentToDelete)));
     }
 
     @Override

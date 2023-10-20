@@ -24,23 +24,23 @@ public class UniqueStudentListTest {
     private final UniqueStudentList uniqueStudentList = new UniqueStudentList();
 
     @Test
-    public void contains_nullPerson_throwsNullPointerException() {
+    public void contains_nullStudent_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueStudentList.contains(null));
     }
 
     @Test
-    public void contains_personNotInList_returnsFalse() {
+    public void contains_studentNotInList_returnsFalse() {
         assertFalse(uniqueStudentList.contains(ALICE));
     }
 
     @Test
-    public void contains_personInList_returnsTrue() {
+    public void contains_studentInList_returnsTrue() {
         uniqueStudentList.add(ALICE);
         assertTrue(uniqueStudentList.contains(ALICE));
     }
 
     @Test
-    public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
+    public void contains_studentWithSameIdentityFieldsInList_returnsTrue() {
         uniqueStudentList.add(ALICE);
         Student editedAlice = new StudentBuilder(ALICE).withClassDetails(VALID_CLASS_NUMBER_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
@@ -60,23 +60,23 @@ public class UniqueStudentListTest {
 
     @Test
     public void setPerson_nullTargetPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueStudentList.setPerson(null, ALICE));
+        assertThrows(NullPointerException.class, () -> uniqueStudentList.setStudent(null, ALICE));
     }
 
     @Test
     public void setPerson_nullEditedPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueStudentList.setPerson(ALICE, null));
+        assertThrows(NullPointerException.class, () -> uniqueStudentList.setStudent(ALICE, null));
     }
 
     @Test
     public void setPerson_targetPersonNotInList_throwsPersonNotFoundException() {
-        assertThrows(StudentNotFoundException.class, () -> uniqueStudentList.setPerson(ALICE, ALICE));
+        assertThrows(StudentNotFoundException.class, () -> uniqueStudentList.setStudent(ALICE, ALICE));
     }
 
     @Test
     public void setPerson_editedPersonIsSamePerson_success() {
         uniqueStudentList.add(ALICE);
-        uniqueStudentList.setPerson(ALICE, ALICE);
+        uniqueStudentList.setStudent(ALICE, ALICE);
         UniqueStudentList expectedUniqueStudentList = new UniqueStudentList();
         expectedUniqueStudentList.add(ALICE);
         assertEquals(expectedUniqueStudentList, uniqueStudentList);
@@ -87,7 +87,7 @@ public class UniqueStudentListTest {
         uniqueStudentList.add(ALICE);
         Student editedAlice = new StudentBuilder(ALICE).withClassDetails(VALID_CLASS_NUMBER_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
-        uniqueStudentList.setPerson(ALICE, editedAlice);
+        uniqueStudentList.setStudent(ALICE, editedAlice);
         UniqueStudentList expectedUniqueStudentList = new UniqueStudentList();
         expectedUniqueStudentList.add(editedAlice);
         assertEquals(expectedUniqueStudentList, uniqueStudentList);
@@ -96,7 +96,7 @@ public class UniqueStudentListTest {
     @Test
     public void setPerson_editedPersonHasDifferentIdentity_success() {
         uniqueStudentList.add(ALICE);
-        uniqueStudentList.setPerson(ALICE, BOB);
+        uniqueStudentList.setStudent(ALICE, BOB);
         UniqueStudentList expectedUniqueStudentList = new UniqueStudentList();
         expectedUniqueStudentList.add(BOB);
         assertEquals(expectedUniqueStudentList, uniqueStudentList);
@@ -106,7 +106,7 @@ public class UniqueStudentListTest {
     public void setPerson_editedPersonHasNonUniqueIdentity_throwsDuplicatePersonException() {
         uniqueStudentList.add(ALICE);
         uniqueStudentList.add(BOB);
-        assertThrows(DuplicateStudentException.class, () -> uniqueStudentList.setPerson(ALICE, BOB));
+        assertThrows(DuplicateStudentException.class, () -> uniqueStudentList.setStudent(ALICE, BOB));
     }
 
     @Test
@@ -129,7 +129,7 @@ public class UniqueStudentListTest {
 
     @Test
     public void setPersons_nullUniquePersonList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueStudentList.setPersons((UniqueStudentList) null));
+        assertThrows(NullPointerException.class, () -> uniqueStudentList.setStudents((UniqueStudentList) null));
     }
 
     @Test
@@ -137,20 +137,20 @@ public class UniqueStudentListTest {
         uniqueStudentList.add(ALICE);
         UniqueStudentList expectedUniqueStudentList = new UniqueStudentList();
         expectedUniqueStudentList.add(BOB);
-        uniqueStudentList.setPersons(expectedUniqueStudentList);
+        uniqueStudentList.setStudents(expectedUniqueStudentList);
         assertEquals(expectedUniqueStudentList, uniqueStudentList);
     }
 
     @Test
     public void setPersons_nullList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueStudentList.setPersons((List<Student>) null));
+        assertThrows(NullPointerException.class, () -> uniqueStudentList.setStudents((List<Student>) null));
     }
 
     @Test
     public void setPersons_list_replacesOwnListWithProvidedList() {
         uniqueStudentList.add(ALICE);
         List<Student> studentList = Collections.singletonList(BOB);
-        uniqueStudentList.setPersons(studentList);
+        uniqueStudentList.setStudents(studentList);
         UniqueStudentList expectedUniqueStudentList = new UniqueStudentList();
         expectedUniqueStudentList.add(BOB);
         assertEquals(expectedUniqueStudentList, uniqueStudentList);
@@ -159,7 +159,7 @@ public class UniqueStudentListTest {
     @Test
     public void setPersons_listWithDuplicatePersons_throwsDuplicatePersonException() {
         List<Student> listWithDuplicateStudents = Arrays.asList(ALICE, ALICE);
-        assertThrows(DuplicateStudentException.class, () -> uniqueStudentList.setPersons(listWithDuplicateStudents));
+        assertThrows(DuplicateStudentException.class, () -> uniqueStudentList.setStudents(listWithDuplicateStudents));
     }
 
     @Test

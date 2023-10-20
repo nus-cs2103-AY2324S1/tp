@@ -108,7 +108,7 @@ public class ModelManager implements Model {
     @Override
     public boolean hasStudent(Student student) {
         requireNonNull(student);
-        return addressBook.hasPerson(student);
+        return addressBook.hasStudent(student);
     }
 
     @Override

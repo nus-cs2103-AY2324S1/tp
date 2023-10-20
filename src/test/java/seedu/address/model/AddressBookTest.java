@@ -56,18 +56,18 @@ public class AddressBookTest {
 
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasPerson(null));
+        assertThrows(NullPointerException.class, () -> addressBook.hasStudent(null));
     }
 
     @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasPerson(ALICE));
+        assertFalse(addressBook.hasStudent(ALICE));
     }
 
     @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
         addressBook.addStudent(ALICE);
-        assertTrue(addressBook.hasPerson(ALICE));
+        assertTrue(addressBook.hasStudent(ALICE));
     }
 
     @Test
@@ -75,7 +75,7 @@ public class AddressBookTest {
         addressBook.addStudent(ALICE);
         Student editedAlice = new StudentBuilder(ALICE).withClassDetails(VALID_CLASS_NUMBER_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(addressBook.hasPerson(editedAlice));
+        assertTrue(addressBook.hasStudent(editedAlice));
     }
 
     @Test

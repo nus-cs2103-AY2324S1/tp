@@ -14,7 +14,7 @@ import seedu.address.model.Model;
 import seedu.address.model.student.StudentContainsKeywordsPredicate;
 
 /**
- * Lookup all persons in class manager whose details contain any of
+ * Lookup all students in class manager whose details contain any of
  * the argument keywords.
  * Keyword matching is case-insensitive.
  */
@@ -23,7 +23,7 @@ public class LookupCommand extends Command {
     public static final String COMMAND_WORD = "lookup";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Finds and lists all persons who's details contain any of "
+            + ": Finds and lists all students who's details contain any of "
             + "the specified keywords (case-insensitive) and displays them "
             + "as a list with index numbers.\n"
             + "Parameters: "
