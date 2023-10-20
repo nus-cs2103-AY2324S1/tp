@@ -33,7 +33,7 @@ public class EditCommand extends Command {
         + "[" + PREFIX_ROLE + "ROLE] "
         + "[" + PREFIX_COMPANY + "COMPANY] "
         + "[" + PREFIX_DEADLINE + "DEADLINE] "
-        + "[" + PREFIX_STATUS + "STATUS] "
+        + "[" + PREFIX_STATUS + "STATUS]\n\n"
         + "Example: " + COMMAND_WORD + " 1 "
         + PREFIX_ROLE + "Software Engineer "
         + PREFIX_COMPANY + "Google"

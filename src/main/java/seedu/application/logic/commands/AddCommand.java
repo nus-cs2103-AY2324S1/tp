@@ -23,18 +23,18 @@ public class AddCommand extends Command {
         + "Parameters: "
         + PREFIX_COMPANY + "COMPANY "
         + PREFIX_ROLE + "ROLE\n"
-        + "[Optional] "
-        + PREFIX_DEADLINE + "DEADLINE "
-        + PREFIX_STATUS + "STATUS\n\n"
+        + "[" + PREFIX_DEADLINE + "DEADLINE] "
+        + "[" + PREFIX_STATUS + "STATUS]\n\n"
         + "Example: \n"
         + COMMAND_WORD + " "
-        + PREFIX_COMPANY + "Google"
+        + PREFIX_COMPANY + "Google "
         + PREFIX_ROLE + "Software Engineer\n"
-        + "OR\n" + COMMAND_WORD + " "
-        + PREFIX_COMPANY + "Google"
+        + "OR\n"
+        + COMMAND_WORD + " "
+        + PREFIX_COMPANY + "Google "
         + PREFIX_ROLE + "Software Engineer "
-        + PREFIX_DEADLINE + "Dec 31 2030 1200"
-        + PREFIX_STATUS + "pending\n";
+        + PREFIX_DEADLINE + "Dec 31 2030 1200 "
+        + PREFIX_STATUS + "Pending\n";
 
     public static final String MESSAGE_SUCCESS = "New job added: %1$s";
     public static final String MESSAGE_DUPLICATE_JOB = "This job already exists in the application book";

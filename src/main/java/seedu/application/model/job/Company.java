@@ -9,7 +9,7 @@ import seedu.application.commons.util.AppUtil;
  * Guarantees: immutable; is valid as declared in {@link #isValidCompany(String)}
  */
 public class Company {
-    public static final String COMPANY_FIND_SPECIFIER = "-c";
+    public static final String COMPANY_SPECIFIER = "-c";
     public static final String MESSAGE_CONSTRAINTS =
             "Company names should adhere to the following constraints:\n"
                     + "1. Start with an alphanumeric character\n"
