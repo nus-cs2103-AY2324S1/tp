@@ -89,6 +89,17 @@ public class Lesson {
      * @return A formatted overview of the time of the lesson
      */
     public String getLessonOverview() {
+        return getLessonDate() + " • " + getSubject();
+    }
+    /**
+     * Gets a one-line overview of the lesson.
+     *
+     * If a lesson is on Thursday, 10 Oct 10 am - 12 pm, it will be formatted as:
+     *
+     * 10 am - 12 pm
+     * @return A formatted overview of the time of the lesson
+     */
+    public String getLessonDuration() {
         return getStartTime() + " - " + getEndTime();
     }
 

@@ -8,7 +8,7 @@ import javafx.scene.layout.VBox;
 import seedu.address.model.lessons.Lesson;
 
 /**
- * A UI component that displays information of a {@code Person}.
+ * A UI component that displays information of a {@code Lesson}.
  */
 public class LessonCard extends UiPart<Region> {
 
@@ -29,9 +29,11 @@ public class LessonCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
-    private Label name;
+    private Label overview;
     @FXML
     private Label id;
+    @FXML
+    private Label duration;
     // @FXML
     // private FlowPane tags;
 
@@ -42,7 +44,8 @@ public class LessonCard extends UiPart<Region> {
         super(FXML);
         this.lesson = lesson;
         id.setText(displayedIndex + ". ");
-        name.setText(lesson.getLessonOverview());
+        overview.setText(lesson.getLessonDate());
+        duration.setText(lesson.getLessonDuration());
         for (String field : displayFields) {
             // TODO: Implement the schedule detail
             LessonCardFieldBuilder.build(field, lesson, fields);

@@ -78,7 +78,7 @@ public class SampleDataUtil {
         LocalDateTime startLesson2 = LocalDateTime.of(2022, 10, 18, 14, 30);
         LocalDateTime endLesson2 = LocalDateTime.of(2022, 10, 18, 16, 30);
         LocalDateTime startLesson3 = LocalDateTime.of(2022, 11, 20, 10, 30);
-        LocalDateTime endLesson3 = LocalDateTime.of(2022, 10, 20, 12, 30);
+        LocalDateTime endLesson3 = LocalDateTime.of(2022, 11, 20, 12, 30);
         LocalDateTime startLesson4 = LocalDateTime.of(2022, 9, 20, 13, 30);
         LocalDateTime endLesson4 = LocalDateTime.of(2022, 9, 20, 15, 30);
         Subject math = new Subject("MATHEMATICS");
