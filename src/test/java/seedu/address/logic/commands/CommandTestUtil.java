@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FINANCIAL_PLAN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -69,6 +71,8 @@ public class CommandTestUtil {
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String FINANCIAL_PLAN_DESC_1 = " " + PREFIX_FINANCIAL_PLAN + VALID_FINANCIAL_PLAN_1;
     public static final String FINANCIAL_PLAN_DESC_2 = " " + PREFIX_FINANCIAL_PLAN + VALID_FINANCIAL_PLAN_2;
+    public static final String APPOINTMENT_NAME_DESC = " " + PREFIX_APPOINTMENT + VALID_APPOINTMENT_NAME;
+    public static final String APPOINTMENT_DATE_DESC = " " + PREFIX_APPOINTMENT_DATE + VALID_APPOINTMENT_DATE;
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
@@ -80,8 +84,10 @@ public class CommandTestUtil {
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_FINANCIAL_PLAN_DESC = " " + PREFIX_FINANCIAL_PLAN
             + "financial_plan"; // '_' not allowed in financial plan names
-    public static final String INVALID_APPOINTMENT_TIME_FORMAT = "01-01-2023 12pm";
-    public static final String INVALID_APPOINTMENT_DATE_FORMAT = "1 Jan 2023 18:00";
+    public static final String INVALID_APPOINTMENT_NAME_DESC = " " + PREFIX_APPOINTMENT + "Review *&Insurance";
+    public static final String INVALID_APPOINTMENT_TIME_FORMAT = " " + PREFIX_APPOINTMENT_DATE + "01-01-2023 12pm";
+    public static final String INVALID_APPOINTMENT_DATE_FORMAT = " " + PREFIX_APPOINTMENT_DATE + "1 Jan 2023 18:00";
+    public static final String INVALID_APPOINTMENT_DATE = " " + PREFIX_APPOINTMENT_DATE + "10-13-2023 00:00";
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 

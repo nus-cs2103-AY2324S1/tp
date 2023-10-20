@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -170,22 +171,18 @@ public class ParserUtil {
 
         String trimmedAppointmentName = appointmentName.trim();
 
-//        if (trimmedAppointmentName.equals("")) {
-//            throw new ParseException(Appointment.MESSAGE_DESC_CONSTRAINTS);
-//        }
-
         if (!Appointment.isValidDesc(appointmentName)) {
             throw new ParseException(Appointment.MESSAGE_DESC_CONSTRAINTS);
         }
 
-        if (!Appointment.isValidDate(appointmentDateString)) {
+        if (!Appointment.isValidDateFormat(appointmentDateString)) {
             throw new ParseException(Appointment.MESSAGE_DATE_CONSTRAINTS);
         }
 
         LocalDateTime appointmentDate;
         try {
             appointmentDate = Appointment.parseAppointmentDate(appointmentDateString);
-        } catch (IllegalArgumentException e) {
+        } catch (DateTimeParseException e) {
             throw new ParseException(Appointment.MESSAGE_INVALID_DATE);
         }
 

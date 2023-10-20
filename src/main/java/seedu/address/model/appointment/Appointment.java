@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Objects;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -21,7 +22,8 @@ public class Appointment {
             + "Should be (description), (date) (time)";
     public static final String VALIDATION_DATE_REGEX = "\\d{2}-\\d{2}-\\d{4} \\d{2}:\\d{2}";
     public static final String VALIDATION_DESC_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
-    public static final String VALIDATION_APT_REGEX = "^([\\p{Alnum}][\\p{Alnum} ]*), (\\d{2}-\\d{2}-\\d{4} \\d{2}:\\d{2})$";
+    public static final String VALIDATION_APT_REGEX = "^([\\p{Alnum}][\\p{Alnum} ]*), "
+            + "(\\d{2}-\\d{2}-\\d{4} \\d{2}:\\d{2})$";
     public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 
     public final String value;
@@ -63,13 +65,28 @@ public class Appointment {
     public int hashCode() {
         return Objects.hash(value, date);
     }
+
+    /**
+     * Returns true if given string is valid appointment description.
+     */
     public static boolean isValidDesc(String desc) {
+        requireNonNull(desc);
         return desc.matches(VALIDATION_DESC_REGEX);
     }
-    public static boolean isValidDate(String date) {
+
+    /**
+     * Returns true if given string is valid date time.
+     */
+    public static boolean isValidDateFormat(String date) {
+        requireNonNull(date);
         return date.matches(VALIDATION_DATE_REGEX);
     }
+
+    /**
+     * Returns true if given string is valid appointment.
+     */
     public static boolean isValidAppointment(String appointment) {
+        requireNonNull(appointment);
         return appointment.matches(VALIDATION_APT_REGEX);
     }
 
@@ -80,7 +97,7 @@ public class Appointment {
      * @return The LocaleDateTime object representing Appointment date.
      * @throws IllegalArgumentException If input date does not match specified format.
      */
-    public static LocalDateTime parseAppointmentDate(String input) throws IllegalArgumentException {
+    public static LocalDateTime parseAppointmentDate(String input) throws DateTimeParseException {
         return LocalDateTime.parse(input, DATE_FORMATTER);
     }
 
