@@ -53,12 +53,22 @@ public class WellNus implements ReadOnlyWellNus {
     }
 
     /**
+     * Replaces the contents of the appointment list with {@code appointments}.
+     * {@code appointments} must not contain duplicate appointments.
+     */
+    public void setAppointments(List<Appointment> appointments) {
+        this.appointments.setAppointments(appointments);
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyWellNus newData) {
         requireNonNull(newData);
 
         setStudents(newData.getStudentList());
+        setAppointments(newData.getAppointmentList());
+
     }
 
     //// student-level operations
@@ -100,15 +110,20 @@ public class WellNus implements ReadOnlyWellNus {
     }
 
     /**
-     * Returns true if an appointment with the same identity as {@code appointment} exists in the address book.
+     * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
-    public boolean hasAppointment(Appointment key) {
-        requireNonNull(key);
-        return appointments.contains(key);
+    public boolean hasAppointment(Appointment appointment) {
+        requireNonNull(appointment);
+        return appointments.contains(appointment);
     }
 
-    public void addAppointment(Appointment appointment) {
-        appointments.add(appointment);
+
+    /**
+     * Adds a person to the address book.
+     * The person must not already exist in the address book.
+     */
+    public void addAppointment(Appointment a) {
+        appointments.add(a);
     }
 
     /**
