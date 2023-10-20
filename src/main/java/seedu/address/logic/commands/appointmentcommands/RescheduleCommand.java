@@ -30,8 +30,8 @@ public class RescheduleCommand extends Command {
             + "by the index number used in the displayed appointment list.\n"
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (index must be a positive integer) "
-            + "[" + PREFIX_APPOINTMENT_START + "APPOINTMENT START DATE AND TIME] "
-            + "[" + PREFIX_APPOINTMENT_END + "APPOINTMENT END DATE AND TIME]\n"
+            + PREFIX_APPOINTMENT_START + "START "
+            + PREFIX_APPOINTMENT_END + "END\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_APPOINTMENT_START + "2023/05/02 09:00 "
             + PREFIX_APPOINTMENT_END + "2023/05/02 11:00 ";

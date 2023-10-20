@@ -32,10 +32,9 @@ public class ScheduleCommand extends Command {
             + PREFIX_APPOINTMENT_PATIENT + "PATIENT "
             + PREFIX_APPOINTMENT_START + "START "
             + PREFIX_APPOINTMENT_END + "END "
-            + PREFIX_APPOINTMENT_DESCRIPTION + "DESCRIPTION "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + PREFIX_APPOINTMENT_DESCRIPTION + "DESCRIPTION\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_APPOINTMENT_PATIENT + "1 "
+            + PREFIX_APPOINTMENT_PATIENT + "Alex Yeoh "
             + PREFIX_APPOINTMENT_START + "2023/10/20 12:00 "
             + PREFIX_APPOINTMENT_END + "2023/10/20 13:00 "
             + PREFIX_APPOINTMENT_DESCRIPTION + "Follow up on Chest X-Ray ";
