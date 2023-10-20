@@ -1,6 +1,7 @@
 package seedu.staffsnap.commons.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.staffsnap.testutil.Assert.assertThrows;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -39,7 +40,13 @@ public class JsonUtilTest {
         assertEquals(serializableTestClass.getMapOfIntegerToString(), SerializableTestClass.getHashMapTestValues());
     }
 
+    @Test
+    public void fromJsonString_nullString_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> JsonUtil.fromJsonString(null, SerializableTestClass.class));
+    }
+
     //TODO: @Test jsonUtil_readJsonStringToObjectInstance_correctObject()
 
     //TODO: @Test jsonUtil_writeThenReadObjectToJson_correctObject()
+
 }

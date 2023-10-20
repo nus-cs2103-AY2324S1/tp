@@ -59,22 +59,4 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         return new EditCommand(index, editApplicantDescriptor);
     }
-
-    //    /**
-    //     * Parses {@code Collection<String> interviews} into a {@code List<Interview>} if {@code interviews} is
-    //     non-empty.
-    //     * If {@code interviews} contain only one element which is an empty string, it will be parsed into a
-    //     * {@code List<Interview>} containing zero interviews.
-    //     */
-    //    private Optional<List<Interview>> parseInterviewsForEdit(Collection<String> interviews) throws
-    //    ParseException {
-    //        assert interviews != null;
-    //
-    //        if (interviews.isEmpty()) {
-    //            return Optional.empty();
-    //        }
-    //        Collection<String> interviewList = interviews.size() == 1 && interviews.contains("")
-    //                ? Collections.emptyList() : interviews;
-    //        return Optional.of(ParserUtil.parseInterviews(interviewList));
-    //    }
 }

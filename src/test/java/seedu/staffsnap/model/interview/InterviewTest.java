@@ -36,18 +36,29 @@ public class InterviewTest {
     }
 
     @Test
-    void testEquals() {
+    void testEquals_nullInterview() {
+        assertEquals(BENSON.getInterviews().get(0).equals(null), false);
     }
 
     @Test
-    void testHashCode() {
+    public void testEquals_sameInterview() {
+        assertEquals(BENSON.getInterviews().get(0).equals(BENSON.getInterviews().get(0)), true);
     }
 
     @Test
-    void testToString() {
+    public void testEquals_differentType() {
+        assertEquals(BENSON.getInterviews().get(0).equals(new Interview("HR")), false);
+    }
+
+    @Test
+    public void testHashCode() {
+        assertEquals(BENSON.getInterviews().get(0).hashCode(), BENSON.getInterviews().get(0).hashCode());
     }
 
     @Test
     void compareTo() {
+        assertEquals((new Interview("a")).compareTo(new Interview("a")), 0);
+        assertEquals((new Interview("a")).compareTo(new Interview("b")), -1);
+        assertEquals((new Interview("b")).compareTo(new Interview("a")), 1);
     }
 }
