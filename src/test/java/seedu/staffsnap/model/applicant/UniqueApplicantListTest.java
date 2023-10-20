@@ -3,8 +3,8 @@ package seedu.staffsnap.model.applicant;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_INTERVIEW_HUSBAND;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_POSITION_BOB;
+import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_TYPE_BEHAVIORAL;
 import static seedu.staffsnap.testutil.Assert.assertThrows;
 import static seedu.staffsnap.testutil.TypicalApplicants.ALICE;
 import static seedu.staffsnap.testutil.TypicalApplicants.BOB;
@@ -43,7 +43,7 @@ public class UniqueApplicantListTest {
     public void contains_applicantWithSameIdentityFieldsInList_returnsTrue() {
         uniqueApplicantList.add(ALICE);
         Applicant editedAlice = new ApplicantBuilder(ALICE)
-                .withPosition(VALID_POSITION_BOB).withInterviews(VALID_INTERVIEW_HUSBAND).build();
+                .withPosition(VALID_POSITION_BOB).withInterviews(VALID_TYPE_BEHAVIORAL).build();
         assertTrue(uniqueApplicantList.contains(editedAlice));
     }
 
@@ -86,7 +86,7 @@ public class UniqueApplicantListTest {
     public void setApplicant_editedApplicantHasSameIdentity_success() {
         uniqueApplicantList.add(ALICE);
         Applicant editedAlice = new ApplicantBuilder(ALICE)
-                .withPosition(VALID_POSITION_BOB).withInterviews(VALID_INTERVIEW_HUSBAND).build();
+                .withPosition(VALID_POSITION_BOB).withInterviews(VALID_TYPE_BEHAVIORAL).build();
         uniqueApplicantList.setApplicant(ALICE, editedAlice);
         UniqueApplicantList expectedUniqueApplicantList = new UniqueApplicantList();
         expectedUniqueApplicantList.add(editedAlice);
