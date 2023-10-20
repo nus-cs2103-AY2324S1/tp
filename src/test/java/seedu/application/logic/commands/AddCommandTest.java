@@ -21,6 +21,7 @@ import seedu.application.logic.commands.exceptions.CommandException;
 import seedu.application.model.Model;
 import seedu.application.model.ReadOnlyApplicationBook;
 import seedu.application.model.ReadOnlyUserPrefs;
+import seedu.application.model.job.FieldComparator;
 import seedu.application.model.job.Job;
 import seedu.application.testutil.JobBuilder;
 
@@ -154,6 +155,16 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredJobList(Predicate<Job> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void unsortJobs() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortJobs(FieldComparator comparator) {
             throw new AssertionError("This method should not be called.");
         }
     }

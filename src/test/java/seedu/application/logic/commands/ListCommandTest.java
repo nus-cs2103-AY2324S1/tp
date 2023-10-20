@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import seedu.application.model.Model;
 import seedu.application.model.ModelManager;
 import seedu.application.model.UserPrefs;
+import seedu.application.model.job.FieldComparator;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
@@ -28,12 +29,14 @@ public class ListCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ListCommand(new FieldComparator(FieldComparator.EMPTY_COMPARATOR_SPECIFIER)),
+            model, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
         showJobAtIndex(model, INDEX_FIRST_JOB);
-        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ListCommand(new FieldComparator(FieldComparator.EMPTY_COMPARATOR_SPECIFIER)),
+            model, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 }
