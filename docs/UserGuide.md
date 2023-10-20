@@ -29,17 +29,17 @@ JobApplicationsBook Pro (JABPro) is a **desktop app for hiring managers of compa
    Some example commands you can try:
 
     * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`: adds an applicant with the specified contact details
-   
+
     * `remark 1 r/Great attitude, hardworking`: edits the remark of the 1st person on the list to have a remark `Great attitude, hardworking`
-   
+
     * `search n/John`: Searches for applicants whose names contain the keyword `John`
 
     * `delete 3` : Deletes the 3rd contact shown in the current list.
 
     * `set` : sets the applicant status to either of: (Preliminary, Interviewed, Rejected, Offered)
-   
+
     * `add linkedin 1 alexyeoh`: Adds LinkedIn account to candidate's existing contact information
-   
+
     * `github Alex Yeoh`: Redirects the user to the Github account of the candidate
 
 
@@ -120,7 +120,7 @@ Format: `view INDEX`
 * Compatible with search and other features that change the order and content of the list.
 
 Examples:
-* `view 1`  
+* `view 1`
   Shows the complete details of the 1st person on the list.
 
 
@@ -148,12 +148,14 @@ Examples:
 
 Shows a list of all persons in the address book.
 
-Format: `list s/ATTRIBUTE`
+Format: `list so/ATTRIBUTE`
 
-* `s/ATTRIBUTE` is completely **optional**, on default will NOT be sorted.
+* `so/ATTRIBUTE` is completely **optional**, on default will NOT be sorted.
 * As of v1.2, the attributes that are supported are `name` and `email`.
-* Attribute is case-insensitive: `list s/NAME` and `list s/name` return the same result.
+* Attribute is case-insensitive: `list so/NAME` and `list so/name` return the same result.
 * The result will be sorted in **ascending** order.
+* Note: as of v1.2, the sorting algorithm is case-sensitive, which means it will treat uppercase and 
+lowercase letters as distinct. This may result in names being sorted as A B C a b c, rather than A a B b C c.
 
 Examples:
 * `list` Shows a list of all persons.

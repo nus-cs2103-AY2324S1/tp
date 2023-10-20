@@ -82,8 +82,6 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
-
-
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
@@ -97,8 +95,9 @@ public interface Model {
     void updateFilteredPersonList(List<Predicate<Person>> predicatesList);
 
     /**
-     * Sorts the filtered person list by the given {@code comparator}.
-     * @param comparator  The comparator to sort the list by.
+     * Sorts the list of persons using the provided comparator.
+     *
+     * @param comparator The comparator used to determine the sorting order.
      */
     void sortPersonList(Comparator<Person> comparator);
 
