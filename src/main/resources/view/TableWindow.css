@@ -1,0 +1,22 @@
+.table-view {
+    -fx-background-color: #f2f2f2;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #0076a3;
+    -fx-text-fill: white;
+}
+
+.table-view .table-row-cell {
+    -fx-background-color: white;
+    -fx-text-fill: #0076a3;
+}
+
+.table-view .table-row-cell:hover {
+    -fx-background-color: #e0e0e0;
+}
+
+.table-view .table-row-cell:odd {
+    -fx-background-color: #f2f2f2;
+}
+

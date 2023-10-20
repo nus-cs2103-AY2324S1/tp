@@ -18,6 +18,14 @@ public class Subject {
     private static final String VALIDATION_REGEX = "[\\p{Alnum} ]+";
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy MMM", Locale.ENGLISH);
 
+    public static final String MATHS = "Mathematics";
+    public static final String CS = "Computer Science";
+    public static final String PHY = "Physics";
+    public static final String CHEMI = "Chemistry";
+    public static final String BIO = "Biology";
+    public static final String ENG = "English";
+
+
     public final String subjectName;
     public final YearMonth enrolDate;
 
