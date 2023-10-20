@@ -59,10 +59,6 @@ public class TypicalMembers {
             .withPhone("8482424")
             .withEmail("stefan@example.com")
             .withTelegram("@hugomeier").build();
-    public static final Member ISABELLE_MEMBER = new MemberBuilder().withName("Isabelle Mueller")
-            .withPhone("8482131")
-            .withEmail("hans@example.com")
-            .withTelegram("@isabellemueller").build();
 
     // Manually added - Member's details found in {@code CommandTestUtil}
     public static final Member AMY_MEMBER = new MemberBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)

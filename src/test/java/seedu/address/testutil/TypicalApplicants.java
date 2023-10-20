@@ -35,8 +35,6 @@ public class TypicalApplicants {
     // Manually added
     public static final Applicant HOON_APPLICANT =
             new ApplicantBuilder().withName("Hoon Meier").withPhone("8482424").build();
-    public static final Applicant IDA_APPLICANT =
-            new ApplicantBuilder().withName("Ida Mueller").withPhone("8482131").build();
 
     // Manually added - Applicant's details found in {@code CommandTestUtil}
     public static final Applicant AMY_APPLICANT =
@@ -46,7 +44,8 @@ public class TypicalApplicants {
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
-    private TypicalApplicants() {} // prevents instantiation
+    private TypicalApplicants() {
+    } // prevents instantiation
 
     /**
      * Returns an {@code AddressBook} with all the typical applicants.
