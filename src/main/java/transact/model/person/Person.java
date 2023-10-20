@@ -18,7 +18,7 @@ import transact.model.tag.Tag;
  */
 public class Person implements Entry {
 
-    public static final Person NullPerson = new Person() {
+    public static final Person NULL_PERSON = new Person() {
 
         @Override
         public Name getName() {
@@ -91,7 +91,7 @@ public class Person implements Entry {
     }
 
     /**
-     * Creates mew Person
+     * Creates new Person
      *
      * @param name
      * @param phone

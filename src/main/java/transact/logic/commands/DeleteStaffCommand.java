@@ -34,16 +34,14 @@ public class DeleteStaffCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         for (PersonId id : model.getAddressBook().getPersonMap().keySet()) {
-            if (id.getValue() == personId) {
+            if (id.getValue().equals(personId)) {
                 Person deletedPerson = model.deletePerson(id);
                 return new CommandResult(
                         String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(deletedPerson)),
                         TabWindow.ADDRESSBOOK);
             }
         }
-        return new CommandResult(
-                String.format(MESSAGE_DELETE_PERSON_FAILURE, personId),
-                TabWindow.ADDRESSBOOK);
+        throw new CommandException(String.format(MESSAGE_DELETE_PERSON_FAILURE, personId));
     }
 
     @Override

@@ -85,11 +85,11 @@ public class PersonId implements Comparable<PersonId> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof transact.model.person.PersonId)) {
+        if (!(other instanceof PersonId)) {
             return false;
         }
 
-        transact.model.person.PersonId otherId = (transact.model.person.PersonId) other;
+        PersonId otherId = (PersonId) other;
         return value.equals(otherId.value);
     }
 

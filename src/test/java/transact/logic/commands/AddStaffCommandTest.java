@@ -53,7 +53,7 @@ public class AddStaffCommandTest {
     public void execute_duplicatePerson_throwsCommandException() {
         Person validPerson = new PersonBuilder().build();
         AddStaffCommand addStaffCommand = new AddStaffCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithPerson(validPerson.getPersonId());
+        ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
         assertThrows(CommandException.class, AddStaffCommand.MESSAGE_DUPLICATE_PERSON,
                 () -> addStaffCommand.execute(modelStub));
@@ -234,17 +234,17 @@ public class AddStaffCommandTest {
      * A Model stub that contains a single person.
      */
     private class ModelStubWithPerson extends ModelStub {
-        private final PersonId personId;
+        private final Person person;
 
-        ModelStubWithPerson(PersonId personId) {
-            requireNonNull(personId);
-            this.personId = personId;
+        ModelStubWithPerson(Person person) {
+            requireNonNull(person);
+            this.person = person;
         }
 
         @Override
         public boolean hasPerson(PersonId personId) {
             requireNonNull(personId);
-            return getPerson(this.personId).isSameEntry(getPerson(personId));
+            return this.person.getPersonId().equals(personId);
         }
     }
 
@@ -257,7 +257,7 @@ public class AddStaffCommandTest {
         @Override
         public boolean hasPerson(PersonId personId) {
             requireNonNull(personId);
-            return personsAdded.stream().anyMatch(getPerson(personId)::isSameEntry);
+            return personsAdded.stream().anyMatch(p -> p.getPersonId().equals(personId));
         }
 
         @Override

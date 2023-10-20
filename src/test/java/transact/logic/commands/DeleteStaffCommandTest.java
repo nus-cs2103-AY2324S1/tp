@@ -14,6 +14,7 @@ import static transact.testutil.TypicalTransactions.getTypicalTransactionBook;
 import org.junit.jupiter.api.Test;
 
 import transact.logic.Messages;
+import transact.logic.commands.exceptions.CommandException;
 import transact.model.Model;
 import transact.model.ModelManager;
 import transact.model.UserPrefs;
@@ -43,11 +44,12 @@ public class DeleteStaffCommandTest {
     }
 
     @Test
-    public void execute_invalidIndexUnfilteredList_throwsCommandException() {
+    public void execute_invalidIndexUnfilteredList_throwsCommandException() throws CommandException {
         Integer outOfBoundId = model.getFilteredPersonList().size() + 1;
         DeleteStaffCommand deleteStaffCommand = new DeleteStaffCommand(outOfBoundId);
+        // System.out.println(deleteStaffCommand.execute(model).toString());
 
-        assertCommandFailure(deleteStaffCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteStaffCommand, model, Messages.getInvalidPersonIndexMessageForId(outOfBoundId));
     }
 
     @Test
@@ -77,7 +79,7 @@ public class DeleteStaffCommandTest {
 
         DeleteStaffCommand deleteStaffCommand = new DeleteStaffCommand(outOfBoundId);
 
-        assertCommandFailure(deleteStaffCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteStaffCommand, model, Messages.getInvalidPersonIndexMessageForId(outOfBoundId));
     }
 
     @Test
@@ -103,7 +105,7 @@ public class DeleteStaffCommandTest {
     public void toStringMethod() {
         Integer targetId = 1;
         DeleteStaffCommand deleteStaffCommand = new DeleteStaffCommand(targetId);
-        String expected = DeleteStaffCommand.class.getCanonicalName() + "{targetIndex=" + targetId + "}";
+        String expected = DeleteStaffCommand.class.getCanonicalName() + "{personId=" + targetId + "}";
         assertEquals(expected, deleteStaffCommand.toString());
     }
 

@@ -1,8 +1,8 @@
 package transact.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static transact.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static transact.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static transact.logic.Messages.getInvalidPersonIndexMessageForId;
 import static transact.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static transact.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static transact.logic.commands.CommandTestUtil.NAME_DESC_AMY;
@@ -66,7 +66,7 @@ public class LogicManagerTest {
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteStaffCommand = DeleteStaffCommand.COMMAND_WORD + " 9";
-        assertCommandException(deleteStaffCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandException(deleteStaffCommand, getInvalidPersonIndexMessageForId(9));
     }
 
     @Test
@@ -202,7 +202,7 @@ public class LogicManagerTest {
         // Triggers the saveAddressBook method by executing an add command
         String addStaffCommand = AddStaffCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
+        Person expectedPerson = new PersonBuilder(AMY).withTags().withNextIdAndFree().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);
         assertCommandFailure(addStaffCommand, CommandException.class, expectedMessage, expectedModel);

@@ -59,15 +59,15 @@ public class SampleDataUtil {
     public static Transaction[] getSampleTransactions() {
         return new Transaction[] {
             new Transaction(TransactionType.EXPENSE, new Description("Expense 1"), new Amount(100),
-                    new Date("11/11/2023"), Person.NullPerson),
+                    new Date("11/11/2023"), Person.NULL_PERSON),
             new Transaction(TransactionType.EXPENSE, new Description("Expense 2"), new Amount(200),
-                    new Date("11/11/2023"), Person.NullPerson),
+                    new Date("11/11/2023"), Person.NULL_PERSON),
             new Transaction(TransactionType.EXPENSE, new Description("Expense 3"), new Amount(300),
-                    new Date("11/11/2023"), Person.NullPerson),
+                    new Date("11/11/2023"), Person.NULL_PERSON),
             new Transaction(TransactionType.REVENUE, new Description("Revenue 1"), new Amount(1000),
-                    new Date("11/11/2023"), Person.NullPerson),
+                    new Date("11/11/2023"), Person.NULL_PERSON),
             new Transaction(TransactionType.REVENUE, new Description("Revenue 2"), new Amount(1200),
-                    new Date("11/11/2023"), Person.NullPerson),
+                    new Date("11/11/2023"), Person.NULL_PERSON),
         };
     }
 

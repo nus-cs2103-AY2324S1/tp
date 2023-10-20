@@ -7,6 +7,7 @@ import transact.model.person.Address;
 import transact.model.person.Email;
 import transact.model.person.Name;
 import transact.model.person.Person;
+import transact.model.person.PersonId;
 import transact.model.person.Phone;
 import transact.model.tag.Tag;
 import transact.model.util.SampleDataUtil;
@@ -21,6 +22,7 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
+    private PersonId personId;
     private Name name;
     private Phone phone;
     private Email email;
@@ -42,11 +44,32 @@ public class PersonBuilder {
      * Initializes the PersonBuilder with the data of {@code personToCopy}.
      */
     public PersonBuilder(Person personToCopy) {
+        personId = personToCopy.getPersonId();
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
+    }
+
+    /**
+     * Sets the {@code PersonId} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withId(PersonId id) {
+        this.personId = id;
+        return this;
+    }
+
+    /**
+     * Sets the {@code PersonId} of the {@code Person} that we are building
+     * to a new PersonID, and frees it from the set so the next PersonID to
+     * be created (from a command for example) will have the same ID for
+     * comparison
+     */
+    public PersonBuilder withNextIdAndFree() {
+        PersonId id = new PersonId();
+        PersonId.freeUsedPersonIds(id.value);
+        return withId(id);
     }
 
     /**
@@ -90,7 +113,13 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Builds a person with the provided parameters
+     */
     public Person build() {
+        if (personId != null) {
+            return new Person(personId, name, phone, email, address, tags);
+        }
         return new Person(name, phone, email, address, tags);
     }
 
