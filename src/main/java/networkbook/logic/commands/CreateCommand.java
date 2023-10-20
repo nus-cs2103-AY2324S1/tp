@@ -34,7 +34,8 @@ public class CreateCommand extends Command {
             + CliSyntax.PREFIX_TAG + " friends "
             + CliSyntax.PREFIX_TAG + " owesMoney";
 
-    public static final String MESSAGE_SUCCESS = "New contact created: %1$s";
+    public static final String MESSAGE_SUCCESS = "Noted, created new contact: \n%1$s";
+    public static final String MESSAGE_SUCCESS_INDEX = "\nAt index %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This contact already exists in the network book";
 
     private final Person toAdd;
@@ -56,7 +57,8 @@ public class CreateCommand extends Command {
         }
 
         model.addPerson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd))
+            + String.format(MESSAGE_SUCCESS_INDEX, model.getFilteredPersonList().size()));
     }
 
     @Override

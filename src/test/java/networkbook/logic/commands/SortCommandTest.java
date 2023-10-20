@@ -55,7 +55,7 @@ public class SortCommandTest {
     public void execute_descendingNameSort_correctlySorted() {
         List<Person> expectedPersons = TypicalPersons.getTypicalPersons();
         Collections.reverse(expectedPersons);
-        String expectedMessage = String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, expectedPersons.size());
+        String expectedMessage = String.format(Messages.MESSAGE_PERSONS_SORTED_OVERVIEW, expectedPersons.size());
         PersonSortComparator comparator = new PersonSortComparator(SortField.NAME, SortOrder.DESCENDING);
         Model model = new ModelManager(TypicalPersons.getTypicalNetworkBook(), new UserPrefs());
         Model expectedModel = new ModelManager(TypicalPersons.getTypicalNetworkBook(), new UserPrefs());
