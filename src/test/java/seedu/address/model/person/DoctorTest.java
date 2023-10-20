@@ -24,7 +24,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.testutil.DoctorBuilder;
 
 
-
 //@Disabled("Disabled since we will be moving Person class to abstract in the future")
 public class DoctorTest {
 
