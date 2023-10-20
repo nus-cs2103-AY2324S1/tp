@@ -1,10 +1,7 @@
 package seedu.application.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.application.logic.parser.CliSyntax.PREFIX_COMPANY;
-import static seedu.application.logic.parser.CliSyntax.PREFIX_DEADLINE;
-import static seedu.application.logic.parser.CliSyntax.PREFIX_ROLE;
-import static seedu.application.logic.parser.CliSyntax.PREFIX_STATUS;
+import static seedu.application.logic.parser.CliSyntax.*;
 
 import seedu.application.commons.util.ToStringBuilder;
 import seedu.application.logic.Messages;
@@ -25,16 +22,18 @@ public class AddCommand extends Command {
         + PREFIX_ROLE + "ROLE\n"
         + "[Optional] "
         + PREFIX_STATUS + "STATUS "
-        + PREFIX_DEADLINE + "DEADLINE \n\n"
+        + PREFIX_DEADLINE + "DEADLINE "
+        + PREFIX_JOBTYPE + "JOBTYPE \n\n"
         + "Example: \n"
         + COMMAND_WORD + " "
         + PREFIX_COMPANY + "Google"
         + PREFIX_ROLE + "Software Engineer\n"
         + "OR\n" + COMMAND_WORD + " "
-        + PREFIX_COMPANY + "Google"
+        + PREFIX_COMPANY + "Google "
         + PREFIX_ROLE + "Software Engineer "
-        + PREFIX_STATUS + "pending"
-        + PREFIX_DEADLINE + "Dec 31 2030 1200\n";
+        + PREFIX_STATUS + "PENDING "
+        + PREFIX_DEADLINE + "Dec 31 2030 1200 "
+        + PREFIX_JOBTYPE + "INTERNSHIP\n";
 
     public static final String MESSAGE_SUCCESS = "New job added: %1$s";
     public static final String MESSAGE_DUPLICATE_JOB = "This job already exists in the application book";

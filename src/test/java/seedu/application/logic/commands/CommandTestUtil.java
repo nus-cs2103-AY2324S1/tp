@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_DEADLINE;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_JOBTYPE;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.application.model.job.Role.ROLE_FIND_SPECIFIER;
@@ -34,6 +35,9 @@ public class CommandTestUtil {
     public static final String VALID_STATUS_CLEANER = "rejected";
     public static final String VALID_DEADLINE_CHEF = "Dec 31 2030 1200";
     public static final String VALID_DEADLINE_CLEANER = "Dec 31 2040 1200";
+    public static final String VALID_JOBTYPE_CHEF = "FULL_TIME";
+    public static final String VALID_JOBTYPE_CLEANER = "PART_TIME";
+
     public static final String ROLE_DESC_CHEF = " " + PREFIX_ROLE + VALID_ROLE_CHEF;
     public static final String ROLE_DESC_CLEANER = " " + PREFIX_ROLE + VALID_ROLE_CLEANER;
     public static final String COMPANY_DESC_CHEF = " " + PREFIX_COMPANY + VALID_COMPANY_CHEF;
@@ -42,11 +46,15 @@ public class CommandTestUtil {
     public static final String STATUS_DESC_CLEANER = " " + PREFIX_STATUS + VALID_STATUS_CLEANER;
     public static final String DEADLINE_DESC_CHEF = " " + PREFIX_DEADLINE + VALID_DEADLINE_CHEF;
     public static final String DEADLINE_DESC_CLEANER = " " + PREFIX_DEADLINE + VALID_DEADLINE_CLEANER;
+    public static final String JOBTYPE_DESC_CHEF = " " + PREFIX_JOBTYPE + VALID_JOBTYPE_CHEF;
+    public static final String JOBTYPE_DESC_CLEANER = " " + PREFIX_JOBTYPE + VALID_JOBTYPE_CLEANER;
     public static final String INVALID_ROLE_DESC = " " + PREFIX_ROLE + "&"; // '&' not allowed in roles
     public static final String INVALID_COMPANY_DESC = " " + PREFIX_COMPANY + "    "; // company cannot be blank
     public static final String INVALID_STATUS_DESC = " " + PREFIX_STATUS + "SUBMITTED";
     public static final String INVALID_DEADLINE_DESC =
         " " + PREFIX_DEADLINE + "Nov 12 2023"; // deadline must be in the future
+    public static final String INVALID_JOBTYPE_DESC =
+            " " + PREFIX_JOBTYPE + "OTHER"; // job type must be selected from the list of options
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 

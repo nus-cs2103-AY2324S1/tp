@@ -11,12 +11,14 @@ public class JobBuilder {
     public static final String DEFAULT_COMPANY = "Sparkletots";
     public static final String DEFAULT_STATUS = Status.IN_PROGRESS;
     public static final String DEFAULT_DEADLINE = Deadline.TO_ADD_DEADLINE;
+    public static final String DEFAULT_JOBTYPE = JobType.TO_ADD_JOB_TYPE;
 
     private Role role;
     private Company company;
 
     private Status status;
     private Deadline deadline;
+    private JobType jobType;
 
     /**
      * Creates a {@code JobBuilder} with the default details.
@@ -26,6 +28,7 @@ public class JobBuilder {
         company = new Company(DEFAULT_COMPANY);
         status = new Status(DEFAULT_STATUS);
         deadline = new Deadline(DEFAULT_DEADLINE);
+        jobType = new JobType(DEFAULT_JOBTYPE);
     }
 
     /**
@@ -36,6 +39,7 @@ public class JobBuilder {
         company = jobToCopy.getCompany();
         status = jobToCopy.getStatus();
         deadline = jobToCopy.getDeadline();
+        jobType = jobToCopy.getJobType();
     }
 
     /**
@@ -70,8 +74,16 @@ public class JobBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code JobType} of the {@code Job} that we are building.
+     */
+    public JobBuilder withJobType(String jobType) {
+        this.jobType = new JobType(jobType);
+        return this;
+    }
+
     public Job build() {
-        return new Job(role, company, status, deadline);
+        return new Job(role, company, status, deadline, jobType);
     }
 
 }

@@ -28,6 +28,7 @@
             <Label fx:id="role" styleClass="cell_small_label" text="\$first"/>
             <Label fx:id="status" styleClass="cell_small_label" text="\$status"/>
             <Label fx:id="deadline" styleClass="cell_small_label" text="\$deadline"/>
+            <Label fx:id="jobType" styleClass="cell_small_label" text="\$jobType"/>
         </VBox>
     </GridPane>
 </HBox>

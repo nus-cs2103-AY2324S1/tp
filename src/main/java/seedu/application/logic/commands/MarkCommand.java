@@ -62,7 +62,8 @@ public class MarkCommand extends Command {
 
         Job jobToMark = lastShownList.get(targetIndex.getZeroBased());
         Job markedJob = new Job(
-                jobToMark.getRole(), jobToMark.getCompany(), status, jobToMark.getDeadline());
+                jobToMark.getRole(), jobToMark.getCompany(), status,
+                jobToMark.getDeadline(), jobToMark.getJobType());
 
         model.setJob(jobToMark, markedJob);
         model.updateFilteredJobList(Model.PREDICATE_SHOW_ALL_JOBS);

@@ -53,7 +53,9 @@ public class EditJobDescriptorTest {
         String expected = EditJobDescriptor.class.getCanonicalName() + "{company="
             + editJobDescriptor.getCompany().orElse(null) + ", role="
             + editJobDescriptor.getRole().orElse(null) + ", deadline="
-            + editJobDescriptor.getDeadline().orElse(null) + "}";
+            + editJobDescriptor.getDeadline().orElse(null) + ", status="
+            + editJobDescriptor.getStatus().orElse(null) + ", jobType="
+            + editJobDescriptor.getJobType().orElse(null) + "}";
         assertEquals(expected, editJobDescriptor.toString());
     }
 }

@@ -17,17 +17,20 @@ class JsonAdaptedJob {
     private final String company;
     private final String status;
     private final String deadline;
+    private final String jobType;
 
     /**
      * Constructs a {@code JsonAdaptedJob} with the given job details.
      */
     @JsonCreator
     public JsonAdaptedJob(@JsonProperty("role") String role, @JsonProperty("company") String company,
-                          @JsonProperty("status") String status, @JsonProperty("deadline") String deadline) {
+                          @JsonProperty("status") String status, @JsonProperty("deadline") String deadline,
+                          @JsonProperty("jobType") String jobType) {
         this.role = role;
         this.company = company;
         this.status = status;
         this.deadline = deadline;
+        this.jobType = jobType;
     }
 
     /**
@@ -38,6 +41,7 @@ class JsonAdaptedJob {
         company = source.getCompany().name;
         status = source.getStatus().status;
         deadline = source.getDeadline().deadline;
+        jobType = source.getJobType().jobType;
     }
 
     /**
@@ -82,7 +86,17 @@ class JsonAdaptedJob {
         }
         final Deadline modelDeadline = new Deadline(deadline);
 
-        return new Job(modelRole, modelCompany, modelStatus, modelDeadline);
+        if (jobType == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    JobType.class.getSimpleName()));
+        }
+
+        if (!JobType.isValidJobType(jobType)) {
+            throw new IllegalValueException(JobType.MESSAGE_CONSTRAINTS);
+        }
+        final JobType modelJobType = new JobType(jobType);
+
+        return new Job(modelRole, modelCompany, modelStatus, modelDeadline, modelJobType);
     }
 
 }

@@ -7,6 +7,7 @@ import seedu.application.commons.util.StringUtil;
 import seedu.application.logic.parser.exceptions.ParseException;
 import seedu.application.model.job.Company;
 import seedu.application.model.job.Deadline;
+import seedu.application.model.job.JobType;
 import seedu.application.model.job.Role;
 import seedu.application.model.job.Status;
 
@@ -89,6 +90,21 @@ public class ParserUtil {
             throw new ParseException(Status.MESSAGE_CONSTRAINTS);
         }
         return new Status(trimmedStatus);
+    }
+
+    /**
+     * Parses a {@code String JobType} into a {@code JobType}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code jobType} is invalid.
+     */
+    public static JobType parseJobType(String jobType) throws ParseException {
+        requireNonNull(jobType);
+        String trimmedJobType = jobType.trim();
+        if (!JobType.isValidJobType(trimmedJobType)) {
+            throw new ParseException(JobType.MESSAGE_CONSTRAINTS);
+        }
+        return new JobType(trimmedJobType);
     }
 
 }
