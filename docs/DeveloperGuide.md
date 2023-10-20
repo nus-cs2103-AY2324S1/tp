@@ -284,21 +284,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *` | new user                | see usage instructions in the app                                                          | refer to instructions when I forget how to use the app                |
 | `* * *` | user                    | create a new contact                                                                       | keep a record of individuals in my network                              |
 | `* * *` | user                    | add more details about an existing contact                                                 | store information about my contacts for future reference                |
-| `* * *` | user                    | edit details of a contact                                                             | replace outdated details with more accurate information                 |
+| `* * *` | user                    | edit details of a contact                                                                  | replace outdated details with more accurate information                 |
 | `* * *` | user                    | delete a contact                                                                           | remove individuals I no longer keep contact with |
 | `* *`   | user                    | find a contact by name                                                                     | locate details of contacts without having to go through the entire list |
 | `* *`   | user with many contacts | sort contacts by their details                                                             | locate contacts with special characteristics that I am looking for      |
 | `*`     | user with many contacts | filter contacts based on their details                                                     | locate contacts who fulfil certain conditions that I am looking for     |
 | `* *`   | new user                | use commonly-available keyboard shortcuts (e.g. ctrl-c for copy, ctrl-v for paste)         | provide input more efficiently with shortcuts I am accustomed to |
-| `* *`   | user                    | use simple and easy-to-press shortcuts                                             | remember and execute the shortcuts more easily |
-| `* *`   | user                    | open my email app by clicking on my contact's email             | send emails to my contacts more efficiently |
-| `* *`   | user                    | open the relevant website by clicking on my contact's social link | conveniently access their social links when needed |
+| `* *`   | user                    | use simple and easy-to-press shortcuts                                                     | remember and execute the shortcuts more easily |
+| `* *`   | user                    | open my email app by clicking on my contact's email                                        | send emails to my contacts more efficiently |
+| `* *`   | user                    | open the relevant website by clicking on my contact's social link                          | conveniently access their social links when needed |
 | `* *`   | user                    | an easily accessible and static online page containing a download link to the mobile app   | quickly download the app on my device when needed                       |
-| `* *`    | new user                | have a quick-start guide                                     | start using the basic functionality of the app as soon as possible |
-| `* *`    | user                    | visit an online page containing the complete user manual     | refer to the full set of instructions when needed            |
-| `*`      | user                    | navigate to the relevant section of the online manual directly from the catalogue | quickly find instructions on the feature I want to use       |
-| `*`   | user                    | export my contacts in the form of readable text                                            | easily share my contacts with others                                    |
-| `*` | user with many devices | import data from my exported contacts | sync my contact details across different devices |
+| `* *`   | new user                | have a quick-start guide                                                                   | start using the basic functionality of the app as soon as possible |
+| `* *`   | user                    | visit an online page containing the complete user manual                                   | refer to the full set of instructions when needed            |
+| `*`     | user                    | navigate to the relevant section of the online manual directly from the catalogue | quickly find instructions on the feature I want to use       |
+| `*`     | user                    | export my contacts in the form of readable text                                            | easily share my contacts with others                                    |
+| `*`     | user with many devices  | import data from my exported contacts                                                      | sync my contact details across different devices |
 
 ### Use cases
 
@@ -401,7 +401,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - 3c. The given phone number is already present in the contact's list of phone numbers.
 
   - Use case resumes at step 5.
-
 
 **Use case: Add graduation year to a contact**
 
@@ -571,7 +570,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to list contacts.
 2.  NetworkBook shows a list of contacts.
-3.  User requests to edit some field of a specific contact in the list .
+3.  User requests to edit some field of a specific contact in the list.
 4.  NetworkBook updates the contact.
 
     Use case ends.
@@ -705,7 +704,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 4.  NetworkBook loads the default email app of the user.
 
-4.  NetworkBook pre-fills the contact's email in the recipient field.
+5.  NetworkBook pre-fills the contact's email in the recipient field.
 
     Use case ends.
 
@@ -733,7 +732,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 4.  NetworkBook loads the default browser app of the user.
 
-4.  NetworkBook visits the requested social link in the browser.
+5.  NetworkBook visits the requested social link in the browser.
 
     Use case ends.
 
