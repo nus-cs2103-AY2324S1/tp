@@ -14,7 +14,7 @@ public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
-    public static final String MESSAGE_INVALID_BOOKING_DISPLAYED_INDEX = "The person index provided is invalid";
+    public static final String MESSAGE_INVALID_BOOKING_DISPLAYED_INDEX = "The booking index provided is invalid";
     public static final String MESSAGE_BOOKINGS_LISTED_OVERVIEW = "%1$d bookings listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
@@ -36,13 +36,16 @@ public class Messages {
      */
     public static String format(Booking booking) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(booking.getName())
+        builder.append("Room number: ")
+                .append(booking.getRoom())
+                .append("; Name: ")
+                .append(booking.getName())
+                .append("; Booking Period: ")
+                .append(booking.getBookingPeriod())
                 .append("; Phone: ")
                 .append(booking.getPhone())
                 .append("; Email: ")
                 .append(booking.getEmail())
-                .append("; Address: ")
-                .append(booking.getBookingPeriod())
                 .append("; Tags: ");
         booking.getTags().forEach(builder::append);
         return builder.toString();
