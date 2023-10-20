@@ -75,7 +75,7 @@ public class Subject {
     }
 
     /**
-     * Format state as text for viewing.
+     * Format subject as text for viewing.
      */
     public String toString() {
         return '[' + subjectName.toString() + ']';

@@ -3,7 +3,10 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.Arrays;
+
 import seedu.address.model.Model;
+import seedu.address.model.state.State;
 
 /**
  * Lists all persons in the address book to the user.
@@ -22,7 +25,7 @@ public class ListCommand extends Command {
             + "Example: " + COMMAND_WORD + " SCHEDULE\n"
             + "Example: " + COMMAND_WORD + " STUDENTS phone email\n";
 
-    private final String state;
+    private final State state;
     private final String[] displayParams;
 
     /**
@@ -31,16 +34,16 @@ public class ListCommand extends Command {
      * @param state Name of the state.
      * @param displayParams Array of strings specifying details to display for each student.
      */
-    public ListCommand(String state, String[] displayParams) {
+    public ListCommand(State state, String[] displayParams) {
         this.state = state;
         this.displayParams = displayParams;
     }
 
     public ListCommand() {
-        this("", new String[0]);
+        this(State.NONE, new String[0]);
     }
 
-    public ListCommand(String state) {
+    public ListCommand(State state) {
         this(state, new String[0]);
     }
 
@@ -48,11 +51,27 @@ public class ListCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        if (state.equals("") || model.sameState(state)) {
+        if (model.sameState(state)) {
             return new CommandResult(MESSAGE_SUCCESS, displayParams);
         } else {
             model.setState(state); // Only can pass in "STUDENTS" or "SCHEDULE", has been filtered by parser
             return new CommandResult(MESSAGE_SUCCESS, state, displayParams);
         }
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ListCommand)) {
+            return false;
+        }
+
+        ListCommand otherListCommand = (ListCommand) other;
+        return state.equals(otherListCommand.state)
+                && Arrays.equals(displayParams, otherListCommand.displayParams);
     }
 }

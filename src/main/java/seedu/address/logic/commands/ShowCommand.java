@@ -46,12 +46,12 @@ public class ShowCommand extends Command {
 
         // Handle different cases of show command based on app state
         switch (model.getState()) {
-        case "STUDENTS":
+        case STUDENT:
             // Show student details
             Person personToShow = lastShownList.get(targetIndex.getZeroBased());
             model.showPerson(personToShow);
             return new CommandResult(String.format(MESSAGE_SHOW_PERSON_SUCCESS, Messages.format(personToShow)));
-        case "SCHEDULE":
+        case SCHEDULE:
             // Show lesson details
             // Just a placeholder for now
             Lesson lessonToShow = lastShownSchedule.get(targetIndex.getZeroBased());

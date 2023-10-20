@@ -3,6 +3,7 @@ package seedu.address.model.lessons;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -28,6 +29,7 @@ public class Schedule implements Iterable<Lesson> {
 
     // private ArrayList<Lesson> lessons = new ArrayList<>();
     private final ObservableList<Lesson> internalSchedule = FXCollections.observableArrayList();
+    private final LessonComparator lessonComparator = new LessonComparator();
     private final ObservableList<Lesson> internalUnmodifiableSchedule =
             FXCollections.unmodifiableObservableList(internalSchedule);
 
@@ -96,6 +98,7 @@ public class Schedule implements Iterable<Lesson> {
             throw new DuplicateLessonException();
         }
         internalSchedule.add(toAdd);
+        internalSchedule.sort(lessonComparator);
     }
 
     /**
@@ -116,6 +119,7 @@ public class Schedule implements Iterable<Lesson> {
         }
 
         internalSchedule.set(index, editedLesson);
+        internalSchedule.sort(lessonComparator);
     }
 
     /**
@@ -132,6 +136,7 @@ public class Schedule implements Iterable<Lesson> {
     public void setLessons(Schedule replacement) {
         requireNonNull(replacement);
         internalSchedule.setAll(replacement.internalSchedule);
+        internalSchedule.sort(lessonComparator);
     }
 
     /**
@@ -145,6 +150,7 @@ public class Schedule implements Iterable<Lesson> {
         }
 
         internalSchedule.setAll(lessons);
+        internalSchedule.sort(lessonComparator);
     }
 
     /**
@@ -196,5 +202,12 @@ public class Schedule implements Iterable<Lesson> {
             }
         }
         return true;
+    }
+    class LessonComparator implements Comparator<Lesson> {
+        @Override
+        public int compare(Lesson lesson1, Lesson lesson2) {
+            return lesson1.getStart()
+                    .compareTo(lesson2.getStart());
+        }
     }
 }

@@ -21,6 +21,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lessons.Lesson;
 import seedu.address.model.person.Person;
+import seedu.address.model.state.State;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -37,7 +38,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
-    private ScheduleListPanel scheduleListPanel;
+    private LessonListPanel lessonListPanel;
     private StudentDetailListPanel studentDetailListPanel;
     private LessonDetailListPanel lessonDetailListPanel;
     private ResultDisplay resultDisplay;
@@ -144,8 +145,8 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic);
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        scheduleListPanel = new ScheduleListPanel(logic);
-        scheduleListPanelPlaceholder.getChildren().add(scheduleListPanel.getRoot());
+        lessonListPanel = new LessonListPanel(logic);
+        scheduleListPanelPlaceholder.getChildren().add(lessonListPanel.getRoot());
 
         studentDetailListPanel = new StudentDetailListPanel(logic);
         studentDetailListPanelPlaceholder.getChildren().add(studentDetailListPanel.getRoot());
@@ -231,15 +232,15 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
-            if (!commandResult.getState().equals("")) {
-                String state = commandResult.getState();
+            if (!commandResult.getState().equals(State.NONE)) {
+                State state = commandResult.getState();
                 double[] dividerPositions = contentSplitPane.getDividerPositions();
                 switch (state) {
-                case "SCHEDULE":
+                case SCHEDULE:
                     contentSplitPane.getItems().removeAll(personList, studentDetailList);
                     contentSplitPane.getItems().addAll(scheduleList, lessonDetailList);
                     break;
-                case "STUDENTS":
+                case STUDENT:
                     contentSplitPane.getItems().removeAll(scheduleList, lessonDetailList);
                     contentSplitPane.getItems().addAll(personList, studentDetailList);
                     break;
@@ -273,8 +274,8 @@ public class MainWindow extends UiPart<Stage> {
      *
      * @param lesson The lesson to show the details of.
      */
-    public void handleShowLesson(Lesson lesson) { //TODO
+    public void handleShowLesson(Lesson lesson) {
         lessonDetailList.setVisible(true);
-        // lessonDetailListPanel.setLessonDetails(lesson);
+        lessonDetailListPanel.setLessonDetails(lesson);
     }
 }
