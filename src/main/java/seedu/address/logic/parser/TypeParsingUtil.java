@@ -48,14 +48,26 @@ public class TypeParsingUtil {
     public static LocalTime parseTime(String flagName, String input, boolean isOptional) throws ParseException {
         if (isOptional) {
             try {
-                return parseTime(parseFlag(flagName, input));
+                parseFlag(flagName, input);
             } catch (ParseException e) {
                 return null;
             }
         }
         return parseTime(parseFlag(flagName, input));
     }
-
+    private static Integer findMaxDay(int year, int month) {
+        if (month == 2) {
+            if (year % 4 == 0) {
+                return 29;
+            } else {
+                return 28;
+            }
+        } else if (month == 4 || month == 6 || month == 9 || month == 11) {
+            return 30;
+        } else {
+            return 31;
+        }
+    }
     /**
      * Parses the date from the input string, which can be in the following formats:
      * 1. dd, then the date will be the current month and year
@@ -82,16 +94,16 @@ public class TypeParsingUtil {
                 year += 2000;
             }
             int month = TypeParsingUtil.parseNum(yearMonthDayM.group(2), 1, 12);
-            int day = TypeParsingUtil.parseNum(yearMonthDayM.group(3), 1, 31);
+            int day = TypeParsingUtil.parseNum(yearMonthDayM.group(3), 1, findMaxDay(year, month));
             return LocalDate.of(year, month, day);
         } else if (monthDayM.matches()) {
             LocalDate now = LocalDate.now();
             int month = TypeParsingUtil.parseNum(monthDayM.group(1), 1, 12);
-            int day = TypeParsingUtil.parseNum(monthDayM.group(2), 1, 31);
+            int day = TypeParsingUtil.parseNum(monthDayM.group(2), 1, findMaxDay(now.getYear(), month));
             return LocalDate.of(now.getYear(), month, day);
         } else if (dayM.matches()) {
             LocalDate now = LocalDate.now();
-            int day = TypeParsingUtil.parseNum(dayM.group(1), 1, 31);
+            int day = TypeParsingUtil.parseNum(dayM.group(1), 1, findMaxDay(now.getYear(), now.getMonthValue()));
             return LocalDate.of(now.getYear(), now.getMonth(), day);
         } else {
             throw new ParseException(input + " is not a valid date");
@@ -111,7 +123,7 @@ public class TypeParsingUtil {
     public static LocalDate parseDate(String flagName, String input, boolean isOptional) throws ParseException {
         if (isOptional) {
             try {
-                return parseDate(parseFlag(flagName, input));
+                parseFlag(flagName, input);
             } catch (ParseException e) {
                 return null;
             }
@@ -131,7 +143,7 @@ public class TypeParsingUtil {
         try {
             int num = Integer.parseInt(input);
             if (num < min || num > max) {
-                throw new ParseException("Number " + input + " of range: " + min + "-" + max);
+                throw new ParseException("Number " + input + " is not of range: " + min + "-" + max);
             }
             return num;
         } catch (NumberFormatException e) {
@@ -166,7 +178,7 @@ public class TypeParsingUtil {
     public static Integer parseNum(String flagName, String input, boolean isOptional) throws ParseException {
         if (isOptional) {
             try {
-                return parseNum(parseFlag(flagName, input));
+                parseFlag(flagName, input);
             } catch (ParseException e) {
                 return null;
             }
@@ -191,7 +203,7 @@ public class TypeParsingUtil {
     public static String parseStr(String flagName, String input, boolean isOptional) throws ParseException {
         if (isOptional) {
             try {
-                return parseStr(parseFlag(flagName, input));
+                parseFlag(flagName, input);
             } catch (ParseException e) {
                 return null;
             }
@@ -224,7 +236,7 @@ public class TypeParsingUtil {
     public static Subject parseSubject(String flagName, String input, boolean isOptional) throws ParseException {
         if (isOptional) {
             try {
-                return parseSubject(parseFlag(flagName, input));
+                parseFlag(flagName, input);
             } catch (ParseException e) {
                 return null;
             }
@@ -259,7 +271,7 @@ public class TypeParsingUtil {
     public static DayOfWeek parseDayOfWeek(String flagName, String input, boolean isOptional) throws ParseException {
         if (isOptional) {
             try {
-                return parseDayOfWeek(parseFlag(flagName, input));
+                parseFlag(flagName, input);
             } catch (ParseException e) {
                 return null;
             }
