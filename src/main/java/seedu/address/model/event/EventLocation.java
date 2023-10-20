@@ -16,7 +16,7 @@ public class EventLocation {
 
     /**
      * Construct an {@code EventLocation} object from {@code String}
-     * 
+     *
      * @param location The location in String
      * @return The {@code EventLocation} object
      */
@@ -26,7 +26,7 @@ public class EventLocation {
 
     /**
      * Get the String representation of this {@code EventLocation} object
-     * 
+     *
      * @return The String representation of this {@code EventLocation} object
      */
     @Override
