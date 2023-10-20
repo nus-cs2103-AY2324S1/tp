@@ -123,7 +123,7 @@ public class CommandTestUtil {
         final String[] splitName = member.getName().fullName.split("\\s+");
         model.updateFilteredMemberList(new MemberContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
-        assertEquals(1, model.getFilteredApplicantList().size());
+        assertEquals(1, model.getFilteredMemberList().size());
     }
 
     /**
