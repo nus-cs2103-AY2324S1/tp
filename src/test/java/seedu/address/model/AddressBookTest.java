@@ -6,10 +6,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalApplicants.ALICE_APPLICANT;
-import static seedu.address.testutil.TypicalApplicants.getTypicalAddressBookWithApplicants;
+import static seedu.address.testutil.TypicalMembers.ALAN_MEMBER;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookWithMembersApplicants;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +20,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Applicant;
 import seedu.address.model.person.Member;
+import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.ApplicantBuilder;
+import seedu.address.testutil.MemberBuilder;
 
 public class AddressBookTest {
 
@@ -36,38 +41,25 @@ public class AddressBookTest {
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        // TODO: check with members also
-        AddressBook newData = getTypicalAddressBookWithApplicants();
+        AddressBook newData = getTypicalAddressBookWithMembersApplicants();
         addressBook.resetData(newData);
         assertEquals(newData, addressBook);
     }
 
-    //    @Test
-    //    public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
-    //        // Two persons with the same identity fields
-    //        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-    //                .build();
-    //        List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-    //        AddressBookStub newData = new AddressBookStub(newPersons);
-    //
-    //        assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
-    //    }
-
     @Test
-    public void resetData_withDuplicateMembers_throwsDuplicatePersonException() {
-        // TODO: implement this
-    }
+    public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
+        // Two applicants with the same identity fields
+        Applicant editedAlice = new ApplicantBuilder(ALICE_APPLICANT).withName(VALID_NAME_BOB)
+                .build();
+        List<Applicant> newApplicants = Arrays.asList(ALICE_APPLICANT, editedAlice);
 
-    @Test
-    public void resetData_withDuplicateApplicants_throwsDuplicatePersonException() {
-        // Two persons with the same identity fields
-        // TODO: need to pass in newMembers into AddressBookStub
-        //        Applicant editedAlice = new ApplicantBuilder(ALICE_APPLICANT).withName(VALID_NAME_BOB)
-        //                .build();
-        //        List<Applicant> newApplicants = Arrays.asList(ALICE_APPLICANT, editedAlice);
-        //        AddressBookStub newData = new AddressBookStub(newMembers, newApplicants);
-        //
-        //        assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
+        // Two members with the same identity fields
+        Member editedAlan = new MemberBuilder(ALAN_MEMBER).withName(VALID_NAME_BOB)
+                .build();
+        List<Member> newMembers = Arrays.asList(ALAN_MEMBER, editedAlan);
+
+        AddressBookStub newData = new AddressBookStub(newMembers, newApplicants);
+        assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
     }
 
     @Test
@@ -80,14 +72,9 @@ public class AddressBookTest {
         assertThrows(NullPointerException.class, () -> addressBook.hasApplicant(null));
     }
 
-    //    @Test
-    //    public void hasPerson_personNotInAddressBook_returnsFalse() {
-    //        assertFalse(addressBook.hasPerson(ALICE));
-    //    }
-
     @Test
     public void hasMember_memberNotInAddressBook_returnsFalse() {
-        // TODO: implement this
+        assertFalse(addressBook.hasMember(ALAN_MEMBER));
     }
 
     @Test
@@ -95,15 +82,11 @@ public class AddressBookTest {
         assertFalse(addressBook.hasApplicant(ALICE_APPLICANT));
     }
 
-    //    @Test
-    //    public void hasPerson_personInAddressBook_returnsTrue() {
-    //        addressBook.addPerson(ALICE);
-    //        assertTrue(addressBook.hasPerson(ALICE));
-    //    }
 
     @Test
     public void hasMember_memberInAddressBook_returnsTrue() {
-        // TODO: implement this
+        addressBook.addMember(ALAN_MEMBER);
+        assertTrue(addressBook.hasMember(ALAN_MEMBER));
     }
 
     @Test
@@ -112,17 +95,12 @@ public class AddressBookTest {
         assertTrue(addressBook.hasApplicant(ALICE_APPLICANT));
     }
 
-    //    @Test
-    //    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-    //        addressBook.addPerson(ALICE);
-    //        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-    //                .build();
-    //        assertTrue(addressBook.hasPerson(editedAlice));
-    //    }
-
     @Test
     public void hasMember_memberWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        // TODO: implement this
+        addressBook.addMember(ALAN_MEMBER);
+        Member editedAlan = new MemberBuilder(ALAN_MEMBER).withName(VALID_NAME_BOB)
+                .build();
+        assertTrue(addressBook.hasMember(editedAlan));
     }
 
     @Test
@@ -132,11 +110,6 @@ public class AddressBookTest {
                 .build();
         assertTrue(addressBook.hasApplicant(editedAlice));
     }
-
-    //    @Test
-    //    public void getPersonList_modifyList_throwsUnsupportedOperationException() {
-    //        assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
-    //    }
 
     @Test
     public void getMemberList_modifyList_throwsUnsupportedOperationException() {
