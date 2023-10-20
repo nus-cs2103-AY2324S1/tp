@@ -28,23 +28,23 @@ public class SalaryTest {
         assertFalse(Salary.isValidSalary(" ")); // spaces only
         assertFalse(Salary.isValidSalary("$")); // no digits
         assertFalse(Salary.isValidSalary("salary")); // non-numeric
-        assertFalse(Salary.isValidSalary("9,000")); // missing starting '$'
-        assertFalse(Salary.isValidSalary("$9000")); // missing ',' for thousands separators
+        assertFalse(Salary.isValidSalary("9,000")); // contains ','
+        assertFalse(Salary.isValidSalary("$9000")); // contains '$'
         assertFalse(Salary.isValidSalary("90p0")); // alphabets within digits
         assertFalse(Salary.isValidSalary("9 000")); // spaces within digits
 
         // valid salaries
-        assertTrue(Salary.isValidSalary("$9")); // at least 1 number
-        assertTrue(Salary.isValidSalary("$9,000"));
-        assertTrue(Salary.isValidSalary("$10,000,000,000")); // long salary
+        assertTrue(Salary.isValidSalary("9")); // at least 1 number
+        assertTrue(Salary.isValidSalary("9000"));
+        assertTrue(Salary.isValidSalary("10000000000")); // long salary
     }
 
     @Test
     public void equals() {
-        Salary salary = new Salary("$9,000");
+        Salary salary = new Salary("9000");
 
         // same values -> returns true
-        assertTrue(salary.equals(new Salary("$9,000")));
+        assertTrue(salary.equals(new Salary("9000")));
 
         // same object -> returns true
         assertTrue(salary.equals(salary));
@@ -56,6 +56,6 @@ public class SalaryTest {
         assertFalse(salary.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(salary.equals(new Salary("$1,000")));
+        assertFalse(salary.equals(new Salary("1000")));
     }
 }

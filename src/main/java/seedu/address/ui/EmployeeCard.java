@@ -57,7 +57,7 @@ public class EmployeeCard extends UiPart<Region> {
         employeeId.setText(employee.getId().value);
         phone.setText(employee.getPhone().toString());
         email.setText(employee.getEmail().value);
-        salary.setText(employee.getSalary().value);
+        salary.setText(employee.getSalary().toString());
         employee.getDepartments().stream()
                 .sorted(Comparator.comparing(department -> department.departmentName))
                 .forEach(department -> departments.getChildren().add(new Label(department.departmentName)));

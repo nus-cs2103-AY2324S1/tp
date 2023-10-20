@@ -23,7 +23,7 @@ public class EmployeeBuilder {
     public static final String DEFAULT_ID = "EID0102-0304";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_SALARY = "$12,000";
+    public static final String DEFAULT_SALARY = "12000";
 
     private Name name;
     private Position position;

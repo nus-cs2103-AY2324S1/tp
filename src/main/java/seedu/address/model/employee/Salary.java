@@ -9,10 +9,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Salary implements Comparable<Salary> {
 
-    public static final String MESSAGE_CONSTRAINTS = "Salary should begin with '$' and contain numbers. \n"
-        + "Numbers should have commas for thousands separators and may or may not have decimal places.";
+    public static final String MESSAGE_CONSTRAINTS = "Salary should contain numbers only.";
 
-    public static final String VALIDATION_REGEX = "\\$\\d{1,3}(,\\d{3})*(\\.\\d{2})?";
+    public static final String VALIDATION_REGEX = "\\d{1,}";
 
     public final String value;
 
@@ -36,7 +35,7 @@ public class Salary implements Comparable<Salary> {
 
     @Override
     public String toString() {
-        return value;
+        return "$" + value;
     }
 
     @Override
