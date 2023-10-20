@@ -67,6 +67,11 @@ public class ScheduleList implements ReadOnlySchedule {
         return lessons.contains(lesson);
     }
 
+    public boolean hasLessonClashWith(Lesson lesson) {
+        requireNonNull(lesson);
+        return lessons.hasLessonClashWith(lesson);
+    }
+
     /**
      * Adds a lesson to the schedule list.
      * The lesson must not already exist in the schedule list.

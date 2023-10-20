@@ -117,6 +117,8 @@ public interface Model {
      */
     boolean hasLesson(Lesson lesson);
 
+    boolean hasLessonClashWith(Lesson lesson);
+
     /**
      * Deletes the given lesson.
      * The lesson must exist in the schedule list.

@@ -30,36 +30,30 @@ public class Lesson {
      * @param start The start time of the lesson
      * @param end The end time of the lesson
      * @param subject The subject of this lesson
-     * @param studentName The student attending this lesson. Note: Converted to ArrayList when stored
+     * @param studentNames The student attending this lesson. Note: Converted to ArrayList when stored
      * @see seedu.address.logic.parser.ParserUtil
      */
-    public Lesson(LocalDateTime start, LocalDateTime end, Subject subject, String studentName) {
-        requireAllNonNull(start, end, subject, studentName);
+    public Lesson(LocalDateTime start, LocalDateTime end, Subject subject, String... studentNames) {
+        requireAllNonNull(start, end, subject);
         this.start = start;
         this.end = end;
         this.subject = subject;
-        ArrayList<String> p = new ArrayList<>();
-        p.add(studentName);
-        this.students = p;
+        this.students = new ArrayList<>(Arrays.asList(studentNames));
     }
 
-    /**
-     * Constructor for a Lesson Object
-     * Note: This constructor is for the case where the students is already an ArrayList
-     * Note: parse the string before giving it to the constructor.
-     *
-     * @param start The start time of the lesson
-     * @param end The end time of the lesson
-     * @param subject The subject of this lesson
-     * @param students The student attending this lesson. Note: Converted to ArrayList when stored
-     * @see seedu.address.logic.parser.ParserUtil
-     */
-    public Lesson(LocalDateTime start, LocalDateTime end, Subject subject, ArrayList<String> students) {
-        requireAllNonNull(start, end, subject, students);
+    public Lesson(LocalDateTime start, LocalDateTime end, String... studentNames) {
+        requireAllNonNull(start, end);
+        this.start = start;
+        this.end = end;
+        this.students = new ArrayList<>(Arrays.asList(studentNames));
+    }
+
+    public Lesson(LocalDateTime start, LocalDateTime end, Subject subject, ArrayList<String> studentNames) {
+        requireAllNonNull(start, end, subject);
         this.start = start;
         this.end = end;
         this.subject = subject;
-        this.students = students;
+        this.students = studentNames;
     }
 
     // TODO: Tasks
@@ -68,8 +62,32 @@ public class Lesson {
     public LocalDateTime getStart() {
         return start;
     }
+    public void setStart(LocalDateTime start) {
+        this.start = start;
+    }
+
     public LocalDateTime getEnd() {
         return end;
+    }
+
+    public void setEnd(LocalDateTime end) {
+        this.end = end;
+    }
+
+    public Subject getSubject() {
+        return subject;
+    }
+
+    public void setSubject(Subject subject) {
+        this.subject = subject;
+    }
+
+    public ArrayList<String> getStudents() {
+        return students;
+    }
+
+    public void setStudents(ArrayList<String> students) {
+        this.students = students;
     }
     /**
      * Serializes the start date to a String
@@ -159,6 +177,16 @@ public class Lesson {
         return otherLesson != null
                 && otherLesson.getStart().equals(getStart())
                 && otherLesson.getEnd().equals(getEnd());
+    }
+
+    public boolean isClashWith(Lesson otherLesson) {
+        requireAllNonNull(otherLesson);
+        if (otherLesson == this) {
+            return true;
+        }
+        return otherLesson != null
+                && otherLesson.getStart().isBefore(getEnd())
+                && otherLesson.getEnd().isAfter(getStart());
     }
     @Override
     public String toString() {

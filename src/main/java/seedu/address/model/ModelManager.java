@@ -169,6 +169,11 @@ public class ModelManager implements Model {
         return scheduleList.hasLesson(lesson);
     }
 
+    public boolean hasLessonClashWith(Lesson lesson){
+        requireNonNull(lesson);
+        return scheduleList.hasLessonClashWith(lesson);
+    }
+
     @Override
     public void deleteLesson(Lesson target) {
         scheduleList.removeLesson(target);

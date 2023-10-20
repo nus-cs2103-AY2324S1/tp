@@ -62,7 +62,13 @@ public class Schedule implements Iterable<Lesson> {
      */
     public boolean contains(Lesson toCheck) {
         requireNonNull(toCheck);
+        System.out.println(internalSchedule);
         return internalSchedule.stream().anyMatch(toCheck::isSameLesson);
+    }
+
+    public boolean hasLessonClashWith(Lesson toCheck) {
+        requireNonNull(toCheck);
+        return internalSchedule.stream().anyMatch(toCheck::isClashWith);
     }
 
     /**
