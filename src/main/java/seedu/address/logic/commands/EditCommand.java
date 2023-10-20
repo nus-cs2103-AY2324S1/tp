@@ -2,9 +2,14 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BEGIN;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -22,10 +27,14 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Begin;
+import seedu.address.model.person.Day;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.End;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Subject;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -43,7 +52,12 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_SUBJECT + "SUBJECT] "
+            + "[" + PREFIX_DAY + "DAY] "
+            + "[" + PREFIX_BEGIN + "BEGIN] "
+            + "[" + PREFIX_END + "END] "
             + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_PAID + "PAID]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -73,7 +87,7 @@ public class EditCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_TUTEE_DISPLAYED_INDEX);
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
@@ -99,9 +113,15 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        Subject updatedSubject = editPersonDescriptor.getSubject().orElse(personToEdit.getSubject());
+        Day updatedDay = editPersonDescriptor.getDay().orElse(personToEdit.getDay());
+        Begin updatedBegin = editPersonDescriptor.getBegin().orElse(personToEdit.getBegin());
+        End updatedEnd = editPersonDescriptor.getEnd().orElse(personToEdit.getEnd());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Boolean updatedPaid = editPersonDescriptor.getPaid().orElse(personToEdit.getPaid());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedSubject, updatedDay,
+                updatedBegin, updatedEnd, updatedTags, updatedPaid);
     }
 
     @Override
@@ -137,7 +157,14 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
+        private Subject subject;
+        private Day day;
+        private Begin begin;
+        private End end;
+
         private Set<Tag> tags;
+
+        private Boolean paid;
 
         public EditPersonDescriptor() {}
 
@@ -150,14 +177,20 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
+            setSubject(toCopy.subject);
+            setDay(toCopy.day);
+            setBegin(toCopy.begin);
+            setEnd(toCopy.end);
+
             setTags(toCopy.tags);
+            setPaid(toCopy.paid);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, subject, day, begin, end, tags, paid);
         }
 
         public void setName(Name name) {
@@ -192,6 +225,40 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
+
+        public void setSubject(Subject subject) {
+            this.subject = subject;
+        }
+
+        public Optional<Subject> getSubject() {
+            return Optional.ofNullable(subject);
+        }
+
+        public void setDay(Day day) {
+            this.day = day;
+        }
+
+        public Optional<Day> getDay() {
+            return Optional.ofNullable(day);
+        }
+
+        public void setBegin(Begin begin) {
+            this.begin = begin;
+        }
+
+        public Optional<Begin> getBegin() {
+            return Optional.ofNullable(begin);
+        }
+
+        public void setEnd(End end) {
+            this.end = end;
+        }
+
+        public Optional<End> getEnd() {
+            return Optional.ofNullable(end);
+        }
+
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -207,6 +274,14 @@ public class EditCommand extends Command {
          */
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        }
+
+        public void setPaid(Boolean paid) {
+            this.paid = paid;
+        }
+
+        public Optional<Boolean> getPaid() {
+            return Optional.ofNullable(paid);
         }
 
         @Override
@@ -225,7 +300,13 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(subject, otherEditPersonDescriptor.subject)
+                    && Objects.equals(day, otherEditPersonDescriptor.day)
+                    && Objects.equals(begin, otherEditPersonDescriptor.begin)
+                    && Objects.equals(end, otherEditPersonDescriptor.end)
+                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
+                    && Objects.equals(paid, otherEditPersonDescriptor.paid);
+
         }
 
         @Override
@@ -235,7 +316,9 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
+                    .add("day", day)
                     .add("tags", tags)
+                    .add("paid", paid)
                     .toString();
         }
     }
