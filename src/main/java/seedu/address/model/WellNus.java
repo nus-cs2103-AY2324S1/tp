@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.appointment.Appointment;
@@ -101,6 +100,18 @@ public class WellNus implements ReadOnlyWellNus {
     }
 
     /**
+     * Returns true if an appointment with the same identity as {@code appointment} exists in the address book.
+     */
+    public boolean hasAppointment(Appointment key) {
+        requireNonNull(key);
+        return appointments.contains(key);
+    }
+
+    public void addAppointment(Appointment appointment) {
+        appointments.add(appointment);
+    }
+
+    /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
@@ -121,13 +132,10 @@ public class WellNus implements ReadOnlyWellNus {
         return students.asUnmodifiableObservableList();
     }
 
-    //TODO: make use of Appointment List class once created
     @Override
     public ObservableList<Appointment> getAppointmentList() {
-        return FXCollections.observableArrayList();
+        return appointments.asUnmodifiableObservableList();
     }
-
-
 
     @Override
     public boolean equals(Object other) {

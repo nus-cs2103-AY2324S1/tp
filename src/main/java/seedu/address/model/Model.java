@@ -80,6 +80,10 @@ public interface Model {
      */
     void setStudent(Student target, Student editedStudent);
 
+    boolean hasAppointment(Appointment appointment);
+
+    void addAppointment(Appointment appointment);
+
     /**
      * Deletes the given appointment.
      * The appointment must exist in the address book.

@@ -76,6 +76,16 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public void addAppointment(Appointment appointment) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public boolean hasAppointment(Appointment appointment) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public void deleteAppointment(Appointment target) {
         throw new AssertionError("This method should not be called.");
     }
