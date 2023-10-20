@@ -8,6 +8,10 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
 
+/**
+ * A UI component for displaying detailed information about a person's profile. This component
+ * displays the person's name, phone number, address, email, salary, and the departments they belong to.
+ */
 public class ProfileDetails extends UiPart<Region> {
     private static final String FXML = "ProfileDetails.fxml";
 
@@ -34,6 +38,13 @@ public class ProfileDetails extends UiPart<Region> {
         this.getRoot().setVisible(false);
     }
 
+    /**
+     * Updates the details displayed in the profile component based on the provided {@code Person} object.
+     * If the person is null, the component is hidden. Otherwise, it displays the person's information,
+     * including name, phone, address, email, salary, and departments.
+     *
+     * @param person The {@code Person} object for which to display the details.
+     */
     public void updateDetails(Person person) {
         if (person == null) {
             this.getRoot().setVisible(false);
