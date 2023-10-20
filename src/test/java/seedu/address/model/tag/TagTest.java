@@ -7,8 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.TestData;
 
-
-
 public class TagTest {
     @Test
     public void isValidName_alphanumeric_true() {

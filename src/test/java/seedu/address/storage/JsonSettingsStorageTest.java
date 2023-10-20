@@ -16,8 +16,6 @@ import seedu.address.model.ReadOnlySettings;
 import seedu.address.model.Settings;
 import seedu.address.testutil.TestData;
 
-
-
 public class JsonSettingsStorageTest {
     private static final Path TEST_DATA_FOLDER = Paths.get(
         "src",

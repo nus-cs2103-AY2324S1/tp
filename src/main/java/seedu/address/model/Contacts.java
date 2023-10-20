@@ -7,8 +7,6 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.UniqueContactList;
 
-
-
 /**
  * Mutable {@link Contact}s, both readable and writable.
  *

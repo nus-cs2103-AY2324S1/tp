@@ -17,8 +17,6 @@ import seedu.address.commons.core.Config;
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.testutil.TestData;
 
-
-
 public class ConfigUtilTest {
     private static final Path TEST_DATA_FOLDER = Paths.get(
         "src",

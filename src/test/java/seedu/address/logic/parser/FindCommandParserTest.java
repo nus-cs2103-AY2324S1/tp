@@ -11,8 +11,6 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.model.contact.NameContainsKeywordsPredicate;
 
-
-
 public class FindCommandParserTest {
     private FindCommandParser parser = new FindCommandParser();
 

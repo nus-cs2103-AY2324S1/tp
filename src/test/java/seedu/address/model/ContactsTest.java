@@ -13,8 +13,6 @@ import seedu.address.model.contact.Contact;
 import seedu.address.testutil.ContactBuilder;
 import seedu.address.testutil.TestData;
 
-
-
 public class ContactsTest {
     @Test
     public void constructor_nothing_isEmpty() {
@@ -26,15 +24,15 @@ public class ContactsTest {
         Contacts contacts = new Contacts();
 
         // Does not contain
-        assertFalse(contacts.contains(TestData.ALICE));
+        assertFalse(contacts.contains(TestData.Valid.Contact.ALICE));
 
         // Contains identical object
-        contacts.add(TestData.ALICE);
-        assertTrue(contacts.contains(TestData.ALICE));
+        contacts.add(TestData.Valid.Contact.ALICE);
+        assertTrue(contacts.contains(TestData.Valid.Contact.ALICE));
 
         // Contains similar Contact deemed the same
-        Contact edited = new ContactBuilder(TestData.ALICE)
-                .withNote(TestData.VALID_NOTE_BOB)
+        Contact edited = new ContactBuilder(TestData.Valid.Contact.ALICE)
+                .withNote(TestData.Valid.NOTE_BOB)
                 .withTags(TestData.Valid.Tag.ALPHANUMERIC_SPACES)
                 .build();
         assertTrue(contacts.contains(edited));
@@ -44,7 +42,7 @@ public class ContactsTest {
     public void getUnmodifiableList_modifyList_throwsException() {
         assertThrows(
             UnsupportedOperationException.class,
-            () -> TestData.getTypicalContacts().getUnmodifiableList().remove(0)
+            () -> TestData.Valid.Contact.getTypicalContacts().getUnmodifiableList().remove(0)
         );
     }
 }

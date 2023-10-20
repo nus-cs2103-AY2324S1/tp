@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TestData.ALICE;
+import static seedu.address.testutil.TestData.Valid.Contact.ALICE;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,8 +23,6 @@ import seedu.address.model.ReadOnlyContacts;
 import seedu.address.model.Settings;
 import seedu.address.model.contact.Contact;
 import seedu.address.testutil.ContactBuilder;
-
-
 
 public class AddCommandTest {
     @Test

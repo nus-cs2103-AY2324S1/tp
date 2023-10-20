@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TestData.ALICE;
-import static seedu.address.testutil.TestData.VALID_NOTE_BOB;
+import static seedu.address.testutil.TestData.Valid.Contact.ALICE;
+import static seedu.address.testutil.TestData.Valid.NOTE_BOB;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -17,8 +17,6 @@ import seedu.address.model.contact.exceptions.ContactNotFoundException;
 import seedu.address.model.contact.exceptions.DuplicateContactException;
 import seedu.address.testutil.ContactBuilder;
 import seedu.address.testutil.TestData;
-
-
 
 public class UniqueContactListTest {
     private final UniqueContactList uniqueContactList = new UniqueContactList();
@@ -38,7 +36,7 @@ public class UniqueContactListTest {
     public void contains_contactWithSameIdentityFieldsInList_returnsTrue() {
         uniqueContactList.add(ALICE);
         Contact editedAlice = new ContactBuilder(ALICE)
-                .withNote(VALID_NOTE_BOB)
+                .withNote(NOTE_BOB)
                 .withTags(TestData.Valid.Tag.ALPHANUMERIC_SPACES)
                 .build();
         assertTrue(uniqueContactList.contains(editedAlice));
@@ -68,7 +66,7 @@ public class UniqueContactListTest {
     public void setContact_editedContactHasSameIdentity_success() {
         uniqueContactList.add(ALICE);
         Contact editedAlice = new ContactBuilder(ALICE)
-                .withNote(VALID_NOTE_BOB)
+                .withNote(NOTE_BOB)
                 .withTags(TestData.Valid.Tag.ALPHANUMERIC_SPACES)
                 .build();
         uniqueContactList.setContact(ALICE, editedAlice);

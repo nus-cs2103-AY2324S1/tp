@@ -15,8 +15,6 @@ import seedu.address.model.Contacts;
 import seedu.address.model.ReadOnlyContacts;
 import seedu.address.testutil.TestData;
 
-
-
 public class JsonContactsStorageTest {
     private static final Path TEST_DATA_FOLDER = Paths.get(
         "src",
@@ -36,7 +34,7 @@ public class JsonContactsStorageTest {
 
     @Test
     public void readContacts_typical_successfullyRead() throws DataLoadingException {
-        ReadOnlyContacts expected = TestData.getTypicalContacts();
+        ReadOnlyContacts expected = TestData.Valid.Contact.getTypicalContacts();
         ReadOnlyContacts actual = this.read("typicalContacts.json").get();
         assertEquals(expected, actual);
     }
@@ -52,7 +50,7 @@ public class JsonContactsStorageTest {
     public void saveContacts() throws DataLoadingException, IOException {
         Path tempPath = JsonContactsStorageTest.tempDir.resolve("tempContacts.json");
 
-        Contacts contacts = TestData.getTypicalContacts();
+        Contacts contacts = TestData.Valid.Contact.getTypicalContacts();
 
         ContactsStorage storage = new JsonContactsStorage(tempPath);
 
@@ -61,8 +59,8 @@ public class JsonContactsStorageTest {
         ReadOnlyContacts readBack = storage.readContacts().get();
         assertEquals(contacts, readBack);
 
-        contacts.add(TestData.HOON);
-        contacts.remove(TestData.ALICE);
+        contacts.add(TestData.Valid.Contact.AMY);
+        contacts.remove(TestData.Valid.Contact.ALICE);
 
         // Try saving when the file exists
         storage.saveContacts(contacts);

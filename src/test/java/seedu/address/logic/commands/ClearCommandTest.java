@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TestData.getTypicalContacts;
+import static seedu.address.testutil.TestData.Valid.Contact.getTypicalContacts;
 
 import org.junit.jupiter.api.Test;
 
@@ -9,8 +9,6 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.Settings;
-
-
 
 public class ClearCommandTest {
     @Test

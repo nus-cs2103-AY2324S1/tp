@@ -7,8 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.ui.UiManager;
 
-
-
 public class AppUtilTest {
     @Test
     public void getImage_appIcon_imageReturned() {

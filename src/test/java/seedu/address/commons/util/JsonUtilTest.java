@@ -10,8 +10,6 @@ import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.testutil.SerializableClass;
 
-
-
 public class JsonUtilTest {
     private static final String TEST_CLASS_JSON = String.format(
         "{"

@@ -2,10 +2,7 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TestData.BENSON;
-import static seedu.address.testutil.TestData.INVALID_EMAIL;
-import static seedu.address.testutil.TestData.INVALID_NAME;
-import static seedu.address.testutil.TestData.INVALID_PHONE;
+import static seedu.address.testutil.TestData.Valid.Contact.BENSON;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +37,7 @@ public class JsonContactTest {
     @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
         JsonContact contact =
-                new JsonContact(INVALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_NOTE, VALID_TAGS);
+                new JsonContact(TestData.Invalid.NAME, VALID_PHONE, VALID_EMAIL, VALID_NOTE, VALID_TAGS);
         String expectedMessage = Messages.MESSAGE_NAME_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, contact::toModelType);
     }
@@ -55,7 +52,7 @@ public class JsonContactTest {
     @Test
     public void toModelType_invalidPhone_throwsIllegalValueException() {
         JsonContact contact =
-                new JsonContact(VALID_NAME, INVALID_PHONE, VALID_EMAIL, VALID_NOTE, VALID_TAGS);
+                new JsonContact(VALID_NAME, TestData.Invalid.PHONE, VALID_EMAIL, VALID_NOTE, VALID_TAGS);
         String expectedMessage = Messages.MESSAGE_PHONE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, contact::toModelType);
     }
@@ -70,7 +67,7 @@ public class JsonContactTest {
     @Test
     public void toModelType_invalidEmail_throwsIllegalValueException() {
         JsonContact contact =
-                new JsonContact(VALID_NAME, VALID_PHONE, INVALID_EMAIL, VALID_NOTE, VALID_TAGS);
+                new JsonContact(VALID_NAME, VALID_PHONE, TestData.Invalid.EMAIL, VALID_NOTE, VALID_TAGS);
         String expectedMessage = Messages.EMAIL_INVALID;
         assertThrows(IllegalValueException.class, expectedMessage, contact::toModelType);
     }

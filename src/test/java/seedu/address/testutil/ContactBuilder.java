@@ -16,8 +16,6 @@ import seedu.address.model.contact.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleContactsUtil;
 
-
-
 /**
  * Builds {@link Contact}s more conveniently.
  */

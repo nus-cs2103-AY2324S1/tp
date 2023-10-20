@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-
-
 /**
  * Dummy class with fields used for testing serialization/deserialization.
  *

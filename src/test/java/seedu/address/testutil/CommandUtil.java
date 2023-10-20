@@ -14,8 +14,6 @@ import seedu.address.logic.commands.EditCommand.EditContactDescriptor;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.tag.Tag;
 
-
-
 /**
  * Contains utility methods for testing {@link Command}s.
  */

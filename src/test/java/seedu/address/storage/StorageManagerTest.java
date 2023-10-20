@@ -13,8 +13,6 @@ import seedu.address.model.ReadOnlySettings;
 import seedu.address.model.Settings;
 import seedu.address.testutil.TestData;
 
-
-
 public class StorageManagerTest {
     @TempDir
     public static Path tempDir;
@@ -49,7 +47,7 @@ public class StorageManagerTest {
      */
     @Test
     public void saveContacts_saveRead_equal() throws Exception {
-        ReadOnlyContacts expected = TestData.getTypicalContacts();
+        ReadOnlyContacts expected = TestData.Valid.Contact.getTypicalContacts();
         this.manager.saveContacts(expected);
 
         ReadOnlyContacts actual = this.manager.readContacts().get();

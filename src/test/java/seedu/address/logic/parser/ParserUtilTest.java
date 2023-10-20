@@ -4,14 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TestData.INDEX_FIRST_CONTACT;
-import static seedu.address.testutil.TestData.INVALID_EMAIL;
-import static seedu.address.testutil.TestData.INVALID_NAME;
-import static seedu.address.testutil.TestData.INVALID_PHONE;
-import static seedu.address.testutil.TestData.VALID_EMAIL_AMY;
-import static seedu.address.testutil.TestData.VALID_NAME_AMY;
-import static seedu.address.testutil.TestData.VALID_NOTE_BOB;
-import static seedu.address.testutil.TestData.VALID_PHONE_AMY;
+import static seedu.address.testutil.TestData.IndexContact.FIRST_CONTACT;
+import static seedu.address.testutil.TestData.Invalid.EMAIL;
+import static seedu.address.testutil.TestData.Invalid.NAME;
+import static seedu.address.testutil.TestData.Invalid.PHONE;
+import static seedu.address.testutil.TestData.Valid.EMAIL_AMY;
+import static seedu.address.testutil.TestData.Valid.NAME_AMY;
+import static seedu.address.testutil.TestData.Valid.NOTE_BOB;
+import static seedu.address.testutil.TestData.Valid.PHONE_AMY;
 import static seedu.address.testutil.TestData.WHITESPACE;
 
 import java.util.Arrays;
@@ -29,7 +29,6 @@ import seedu.address.model.contact.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.TestData;
 
-
 public class ParserUtilTest {
 
     @Test
@@ -46,10 +45,10 @@ public class ParserUtilTest {
     @Test
     public void parseIndex_validInput_success() throws Exception {
         // No whitespaces
-        assertEquals(INDEX_FIRST_CONTACT, ParserUtil.parseIndex("1"));
+        assertEquals(FIRST_CONTACT, ParserUtil.parseIndex("1"));
 
         // Leading and trailing whitespaces
-        assertEquals(INDEX_FIRST_CONTACT, ParserUtil.parseIndex("  1  "));
+        assertEquals(FIRST_CONTACT, ParserUtil.parseIndex("  1  "));
     }
 
     @Test
@@ -59,19 +58,19 @@ public class ParserUtilTest {
 
     @Test
     public void parseName_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseName(INVALID_NAME));
+        assertThrows(ParseException.class, () -> ParserUtil.parseName(NAME));
     }
 
     @Test
     public void parseName_validValueWithoutWhitespace_returnsName() throws Exception {
-        Name expectedName = new Name(VALID_NAME_AMY);
-        assertEquals(expectedName, ParserUtil.parseName(VALID_NAME_AMY));
+        Name expectedName = new Name(NAME_AMY);
+        assertEquals(expectedName, ParserUtil.parseName(NAME_AMY));
     }
 
     @Test
     public void parseName_validValueWithWhitespace_returnsTrimmedName() throws Exception {
-        String nameWithWhitespace = WHITESPACE + VALID_NAME_AMY + WHITESPACE;
-        Name expectedName = new Name(VALID_NAME_AMY);
+        String nameWithWhitespace = WHITESPACE + NAME_AMY + WHITESPACE;
+        Name expectedName = new Name(NAME_AMY);
         assertEquals(expectedName, ParserUtil.parseName(nameWithWhitespace));
     }
 
@@ -82,19 +81,19 @@ public class ParserUtilTest {
 
     @Test
     public void parsePhone_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parsePhone(INVALID_PHONE));
+        assertThrows(ParseException.class, () -> ParserUtil.parsePhone(PHONE));
     }
 
     @Test
     public void parsePhone_validValueWithoutWhitespace_returnsPhone() throws Exception {
-        Phone expectedPhone = new Phone(VALID_PHONE_AMY);
-        assertEquals(expectedPhone, ParserUtil.parsePhone(VALID_PHONE_AMY));
+        Phone expectedPhone = new Phone(PHONE_AMY);
+        assertEquals(expectedPhone, ParserUtil.parsePhone(PHONE_AMY));
     }
 
     @Test
     public void parsePhone_validValueWithWhitespace_returnsTrimmedPhone() throws Exception {
-        String phoneWithWhitespace = WHITESPACE + VALID_PHONE_AMY + WHITESPACE;
-        Phone expectedPhone = new Phone(VALID_PHONE_AMY);
+        String phoneWithWhitespace = WHITESPACE + PHONE_AMY + WHITESPACE;
+        Phone expectedPhone = new Phone(PHONE_AMY);
         assertEquals(expectedPhone, ParserUtil.parsePhone(phoneWithWhitespace));
     }
 
@@ -105,19 +104,19 @@ public class ParserUtilTest {
 
     @Test
     public void parseEmail_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseEmail(INVALID_EMAIL));
+        assertThrows(ParseException.class, () -> ParserUtil.parseEmail(EMAIL));
     }
 
     @Test
     public void parseEmail_validValueWithoutWhitespace_returnsEmail() throws Exception {
-        Email expectedEmail = new Email(VALID_EMAIL_AMY);
-        assertEquals(expectedEmail, ParserUtil.parseEmail(VALID_EMAIL_AMY));
+        Email expectedEmail = new Email(EMAIL_AMY);
+        assertEquals(expectedEmail, ParserUtil.parseEmail(EMAIL_AMY));
     }
 
     @Test
     public void parseEmail_validValueWithWhitespace_returnsTrimmedEmail() throws Exception {
-        String emailWithWhitespace = WHITESPACE + VALID_EMAIL_AMY + WHITESPACE;
-        Email expectedEmail = new Email(VALID_EMAIL_AMY);
+        String emailWithWhitespace = WHITESPACE + EMAIL_AMY + WHITESPACE;
+        Email expectedEmail = new Email(EMAIL_AMY);
         assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
     }
 
@@ -128,14 +127,14 @@ public class ParserUtilTest {
 
     @Test
     public void parseNote_validValueWithoutWhitespace_returnsNote() throws Exception {
-        Note expectedAddress = new Note(VALID_NOTE_BOB);
-        assertEquals(expectedAddress, ParserUtil.parseNote(VALID_NOTE_BOB));
+        Note expectedAddress = new Note(NOTE_BOB);
+        assertEquals(expectedAddress, ParserUtil.parseNote(NOTE_BOB));
     }
 
     @Test
     public void parseNote_validValueWithWhitespace_returnsTrimmedNote() throws Exception {
-        String addressWithWhitespace = WHITESPACE + VALID_NOTE_BOB + WHITESPACE;
-        Note expectedAddress = new Note(VALID_NOTE_BOB);
+        String addressWithWhitespace = WHITESPACE + NOTE_BOB + WHITESPACE;
+        Note expectedAddress = new Note(NOTE_BOB);
         assertEquals(expectedAddress, ParserUtil.parseNote(addressWithWhitespace));
     }
 
