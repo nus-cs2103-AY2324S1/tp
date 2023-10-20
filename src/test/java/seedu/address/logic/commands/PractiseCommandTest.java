@@ -1,10 +1,12 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.testutil.TypicalCards.getTypicalDeck;
+
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
-import static seedu.address.testutil.TypicalCards.getTypicalDeck;
+
 
 public class PractiseCommandTest {
 
