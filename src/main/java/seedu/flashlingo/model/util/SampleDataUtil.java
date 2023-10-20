@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import seedu.flashlingo.model.Flashlingo;
 import seedu.flashlingo.model.ReadOnlyFlashlingo;
 import seedu.flashlingo.model.flashcard.FlashCard;
+import seedu.flashlingo.model.flashcard.ProficiencyLevel;
 import seedu.flashlingo.model.flashcard.words.OriginalWord;
 import seedu.flashlingo.model.flashcard.words.TranslatedWord;
 import seedu.flashlingo.model.tag.Tag;
@@ -17,9 +18,10 @@ import seedu.flashlingo.model.tag.Tag;
  */
 public class SampleDataUtil {
     public static FlashCard[] getSampleFlashCards() {
-        //TODO: Add sample data/import from file
-        return new FlashCard[]{new FlashCard(new OriginalWord("sorry", "eng"), new TranslatedWord("gomen", "jap"), new Date(), 1),
-                new FlashCard(new OriginalWord("hi", "eng"), new TranslatedWord("konnichiwa", "jap"), new Date(), 2)
+        return new FlashCard[]{new FlashCard(new OriginalWord("sorry", "eng"),
+            new TranslatedWord("gomen", "jap"), new Date(), new ProficiencyLevel(1)),
+            new FlashCard(new OriginalWord("hi", "eng"),
+                    new TranslatedWord("konnichiwa", "jap"), new Date(), new ProficiencyLevel(2))
         };
     }
 

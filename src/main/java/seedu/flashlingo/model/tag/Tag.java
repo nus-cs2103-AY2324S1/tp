@@ -1,9 +1,8 @@
 package seedu.flashlingo.model.tag;
 
-import seedu.flashlingo.commons.util.AppUtil;
-
 import static java.util.Objects.requireNonNull;
-import static seedu.flashlingo.commons.util.AppUtil.checkArgument;
+
+import seedu.flashlingo.commons.util.AppUtil;
 
 /**
  * Represents a Tag in the address book.

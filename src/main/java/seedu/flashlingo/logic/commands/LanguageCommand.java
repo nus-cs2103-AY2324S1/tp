@@ -1,11 +1,11 @@
 package seedu.flashlingo.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.flashlingo.commons.util.ToStringBuilder;
 import seedu.flashlingo.logic.Messages;
 import seedu.flashlingo.model.Model;
 import seedu.flashlingo.model.flashcard.WordLanguagePredicate;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Finds and lists all flashcards in flashlingo whose original words or translation is a certain language.

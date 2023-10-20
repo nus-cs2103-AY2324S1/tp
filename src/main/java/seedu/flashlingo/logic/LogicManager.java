@@ -5,7 +5,6 @@ import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.flashlingo.commons.core.GuiSettings;
 import seedu.flashlingo.commons.core.LogsCenter;
@@ -17,7 +16,6 @@ import seedu.flashlingo.logic.parser.exceptions.ParseException;
 import seedu.flashlingo.model.Model;
 import seedu.flashlingo.model.ReadOnlyFlashlingo;
 import seedu.flashlingo.model.flashcard.FlashCard;
-import seedu.flashlingo.model.person.Person;
 import seedu.flashlingo.storage.Storage;
 
 /**
@@ -71,12 +69,6 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<FlashCard> getFilteredFlashCardList() {
         return model.getFilteredFlashCardList();
-    }
-
-    //TODO: Temp for ui to work
-    @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return FXCollections.observableArrayList();
     }
 
     @Override

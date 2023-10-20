@@ -1,6 +1,5 @@
 package seedu.flashlingo.ui;
 
-import java.util.Date;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -10,9 +9,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.flashlingo.commons.core.LogsCenter;
 import seedu.flashlingo.model.flashcard.FlashCard;
-import seedu.flashlingo.model.flashcard.words.OriginalWord;
-import seedu.flashlingo.model.flashcard.words.TranslatedWord;
-import seedu.flashlingo.model.person.Person;
 
 /**
  * Panel containing the list of persons.
