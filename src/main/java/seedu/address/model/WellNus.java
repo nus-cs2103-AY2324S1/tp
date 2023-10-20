@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.appointment.Appointment;
@@ -54,12 +53,22 @@ public class WellNus implements ReadOnlyWellNus {
     }
 
     /**
+     * Replaces the contents of the appointment list with {@code appointments}.
+     * {@code appointments} must not contain duplicate appointments.
+     */
+    public void setAppointments(List<Appointment> appointments) {
+        this.appointments.setAppointments(appointments);
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyWellNus newData) {
         requireNonNull(newData);
 
         setStudents(newData.getStudentList());
+        setAppointments(newData.getAppointmentList());
+
     }
 
     //// student-level operations
@@ -101,6 +110,23 @@ public class WellNus implements ReadOnlyWellNus {
     }
 
     /**
+     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     */
+    public boolean hasAppointment(Appointment appointment) {
+        requireNonNull(appointment);
+        return appointments.contains(appointment);
+    }
+
+
+    /**
+     * Adds a person to the address book.
+     * The person must not already exist in the address book.
+     */
+    public void addAppointment(Appointment a) {
+        appointments.add(a);
+    }
+
+    /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
@@ -121,13 +147,10 @@ public class WellNus implements ReadOnlyWellNus {
         return students.asUnmodifiableObservableList();
     }
 
-    //TODO: make use of Appointment List class once created
     @Override
     public ObservableList<Appointment> getAppointmentList() {
-        return FXCollections.observableArrayList();
+        return appointments.asUnmodifiableObservableList();
     }
-
-
 
     @Override
     public boolean equals(Object other) {
