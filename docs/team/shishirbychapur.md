@@ -14,13 +14,13 @@ journey.
 
 Given below are my contributions to the project.
 
-* **New Feature**: 
-    * What it does: 
-    * Justification: 
-    * Highlights: 
-    * Credits: 
+* **New Feature**:
+    * What it does:
+    * Justification:
+    * Highlights:
+    * Credits:
 
-* **New Feature**: 
+* **New Feature**:
 
 * **Code contributed**: [RepoSense link]()
 
