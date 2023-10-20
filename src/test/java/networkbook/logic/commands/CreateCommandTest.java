@@ -42,7 +42,7 @@ public class CreateCommandTest {
         CommandResult commandResult = new CreateCommand(validPerson).execute(modelStub);
 
         assertEquals(String.format(CreateCommand.MESSAGE_SUCCESS, Messages.format(validPerson))
-                        + "\nat index 1",
+                        + "\nAt index 1",
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
     }
