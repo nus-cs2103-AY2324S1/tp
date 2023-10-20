@@ -119,6 +119,11 @@ public class SetPrefCommandTest {
         }
 
         @Override
+        public void getRandomPerson() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredPersonList(Predicate<Date> predicate) {
             throw new AssertionError("This method should not be called.");
         }

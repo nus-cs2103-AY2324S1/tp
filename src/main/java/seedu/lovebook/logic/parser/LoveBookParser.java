@@ -19,6 +19,7 @@ import seedu.lovebook.logic.commands.FindCommand;
 import seedu.lovebook.logic.commands.HelpCommand;
 import seedu.lovebook.logic.commands.ListCommand;
 import seedu.lovebook.logic.commands.ListPrefsCommand;
+import seedu.lovebook.logic.commands.RandomCommand;
 import seedu.lovebook.logic.commands.SetPrefCommand;
 import seedu.lovebook.logic.parser.exceptions.ParseException;
 
@@ -85,6 +86,9 @@ public class LoveBookParser {
 
         case FilterCommand.COMMAND_WORD:
             return new FilterCommandParser().parse(arguments);
+
+        case RandomCommand.COMMAND_WORD:
+            return new RandomCommand();
 
         case ListPrefsCommand.COMMAND_WORD:
             return new ListPrefsCommand();

@@ -22,6 +22,8 @@ public class Messages {
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String WELCOME_MESSAGE = "Hey there, fabulous single!" + "\n"
             + "Get ready to embark on an exciting journey with LoveBook to find your perfect match ❤︎₊ ⊹";
+    public static final String MESSAGE_RANDOM_PERSON_SUCCESS = "Here's a random date for you!";
+    public static final String MESSAGE_NO_PERSONS = "There are no dates in your list!";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
