@@ -27,8 +27,8 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyWellNus;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.student.Student;
-import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.JsonWellNusStorage;
 import seedu.address.storage.StorageManager;
 import seedu.address.testutil.StudentBuilder;
 
@@ -44,8 +44,8 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonAddressBookStorage addressBookStorage =
-                new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonWellNusStorage addressBookStorage =
+                new JsonWellNusStorage(temporaryFolder.resolve("addressBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
@@ -149,9 +149,9 @@ public class LogicManagerTest {
         Path prefPath = temporaryFolder.resolve("ExceptionUserPrefs.json");
 
         // Inject LogicManager with an AddressBookStorage that throws the IOException e when saving
-        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(prefPath) {
+        JsonWellNusStorage addressBookStorage = new JsonWellNusStorage(prefPath) {
             @Override
-            public void saveAddressBook(ReadOnlyWellNus addressBook, Path filePath)
+            public void saveWellNus(ReadOnlyWellNus wellNus, Path filePath)
                     throws IOException {
                 throw e;
             }
