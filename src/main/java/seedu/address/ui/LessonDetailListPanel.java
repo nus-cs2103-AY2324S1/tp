@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
+import seedu.address.model.lessons.Lesson;
 
 
 /**
@@ -22,13 +23,13 @@ public class LessonDetailListPanel extends UiPart<Region> {
     private TextField date;
 
     @FXML
-    private TextField endTime;
-
-    @FXML
     private TextField startTime;
 
     @FXML
-    private TextField student;
+    private TextField endTime;
+
+    @FXML
+    private TextField students;
 
     @FXML
     private TextField subject;
@@ -43,13 +44,17 @@ public class LessonDetailListPanel extends UiPart<Region> {
     }
 
 
-//    /**
-//     * Sets the Details of the lesson to be shown.
-//     *
-//     * @param lesson The lesson whose details are to be shown.
-//     */
-//    public void setLessonDetails(Person lesson) {
-        //TODO
-//    }
+    /**
+     * Sets the Details of the lesson to be shown.
+     *
+     * @param lesson The lesson whose details are to be shown.
+     */
+    public void setLessonDetails(Lesson lesson) {
+        date.setText(lesson.getLessonDate());
+        startTime.setText(lesson.getStartTime());
+        endTime.setText(lesson.getEndTime());
+        students.setText(lesson.getStudents());
+        subject.setText(lesson.getSubject());
+    }
 
 }

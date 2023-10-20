@@ -18,9 +18,8 @@ public class LessonCardFieldBuilder {
      * @param fieldName the name of the field
      * @param lesson the lesson
      * @param fields the fields
-     * @param tags the tags
      */
-    public static void build(String fieldName, Lesson lesson, VBox fields, FlowPane tags) {
+    public static void build(String fieldName, Lesson lesson, VBox fields) {
 //        switch (fieldName) {
 //        case "phone":
 //            buildPhone(person, fields, tags);
@@ -40,41 +39,37 @@ public class LessonCardFieldBuilder {
 //        default:
 //            break;
 //        }
+        switch (fieldName) {
+        case "date":
+            buildDate(lesson, fields);
+            break;
+        case "students":
+            buildStudents(lesson, fields);
+            break;
+        case "subjects":
+            buildSubjects(lesson, fields);
+            break;
+        default:
+
+            break;
+        }
     }
 
-
-
-    static void buildPhone(Person person, VBox fields, FlowPane tags) {
-        Label phone = new Label(person.getPhone().value);
-        phone.getStyleClass().add("cell_small_label");
-        fields.getChildren().add(phone);
+    static void buildDate(Lesson lesson, VBox fields) {
+        Label date = new Label(lesson.getLessonDate());
+        date.getStyleClass().add("cell_small_label");
+        fields.getChildren().add(date);
     }
 
-    static void buildAddress(Person person, VBox fields, FlowPane tags) {
-        Label address = new Label(person.getAddress().value);
-        address.getStyleClass().add("cell_small_label");
-        fields.getChildren().add(address);
+    static void buildStudents(Lesson lesson, VBox fields) {
+        Label students = new Label(lesson.getStudents());
+        students.getStyleClass().add("cell_small_label");
+        fields.getChildren().add(students);
+    }
+    static void buildSubjects(Lesson lesson, VBox fields) {
+        Label subject = new Label(lesson.getSubject());
+        subject.getStyleClass().add("cell_small_label");
+        fields.getChildren().add(subject);
     }
 
-    static void buildEmail(Person person, VBox fields, FlowPane tags) {
-        Label email = new Label(person.getEmail().value);
-        email.getStyleClass().add("cell_small_label");
-        fields.getChildren().add(email);
-    }
-
-    static void buildTags(Person person, VBox fields, FlowPane tags) {
-        //why creating a new pane tags and push to fields does not work?
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-    }
-    static void buildSubjects(Person person, VBox fields, FlowPane tags) {
-        FlowPane subjects = new FlowPane();
-        person.getSubjects().stream()
-                .sorted(Comparator.comparing(subject -> subject.subjectName))
-                .forEach(subject -> subjects.getChildren()
-                        .add(new ColoredTextEntry(subject.subjectName.toString(), subject.getColour())));
-        subjects.setHgap(10);
-        fields.getChildren().add(subjects);
-    }
 }

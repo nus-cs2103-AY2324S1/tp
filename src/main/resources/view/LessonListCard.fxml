@@ -28,7 +28,7 @@
         </Label>
         <Label fx:id="name" styleClass="cell_big_label" text="\$first" textFill="WHITE" />
       </HBox>
-      <FlowPane fx:id="tags" />
+<!--      <FlowPane fx:id="tags" />-->
     </VBox>
       <rowConstraints>
          <RowConstraints />

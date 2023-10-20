@@ -47,8 +47,8 @@ public class LessonCard extends UiPart<Region> {
     private Label name;
     @FXML
     private Label id;
-    @FXML
-    private FlowPane tags;
+    // @FXML
+    // private FlowPane tags;
 
     /**
      * Creates a {@code LessonCard} with the given {@code Lesson} and index to display.
@@ -60,7 +60,7 @@ public class LessonCard extends UiPart<Region> {
         name.setText(lesson.getLessonOverview());
         for (String field : displayFields) {
             // TODO: Implement the schedule detail
-//            LessonCardFieldBuilder.build(field, person, fields, tags);
+            LessonCardFieldBuilder.build(field, lesson, fields);
         }
     }
 

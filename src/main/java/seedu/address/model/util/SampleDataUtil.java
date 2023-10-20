@@ -75,10 +75,10 @@ public class SampleDataUtil {
     public static Lesson[] getSampleLessons() {
         LocalDateTime startLesson1 = LocalDateTime.of(2022, 10, 10, 14, 30);
         LocalDateTime endLesson1 = LocalDateTime.of(2022, 10, 10, 16, 30);
-        LocalDateTime startLesson2 = LocalDateTime.of(2022, 10, 20, 14, 30);
+        LocalDateTime startLesson2 = LocalDateTime.of(2022, 10, 18, 14, 30);
         LocalDateTime endLesson2 = LocalDateTime.of(2022, 10, 18, 16, 30);
         LocalDateTime startLesson3 = LocalDateTime.of(2022, 11, 20, 10, 30);
-        LocalDateTime endLesson3 = LocalDateTime.of(2022, 10, 18, 12, 30);
+        LocalDateTime endLesson3 = LocalDateTime.of(2022, 10, 20, 12, 30);
         Subject math = new Subject("MATHEMATICS");
         Subject bio = new Subject("BIOLOGY");
         return new Lesson[] {

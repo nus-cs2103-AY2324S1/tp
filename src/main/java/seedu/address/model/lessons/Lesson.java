@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Subject;
 
@@ -22,7 +23,7 @@ public class Lesson {
     private LocalDateTime end;
     // Data fields
     private Subject subject;
-    private ArrayList<String> students;
+    private ArrayList<String> students; // TOOD: change to student object
 
     /**
      * Constructor for a Lesson Object with one student.
@@ -64,20 +65,65 @@ public class Lesson {
     }
 
     /**
+     * Gets the start time formatted in 12h
+     */
+    public String getStartTime() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm a");
+        return start.format(formatter);
+    }
+
+    /**
+     * Gets the end time formatted in 12h
+     */
+    public String getEndTime() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm a");
+        return end.format(formatter);
+    }
+
+    /**
      * Gets a one-line overview of the lesson.
      *
      * If a lesson is on Thursday, 10 Oct 10 am - 12 pm, it will be formatted as:
      *
      * 10 am - 12 pm // TODO
-     * @return
+     * @return A formatted overview of the time of the lesson
      */
     public String getLessonOverview() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm a");
-        String formattedStart = start.format(formatter);
-        String formattedEnd = end.format(formatter);
-        return formattedStart + " - " + formattedEnd;
+        return getStartTime() + " - " + getEndTime();
     }
 
+    /**
+     * Gets the date of a lesson.
+     * If the start and end date are the same, then only one date string is returned.
+     * Else, the date will be returned as: [start date] - [end date]
+     * @return
+     */
+    public String getLessonDate() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy");
+        String formattedStart = start.format(formatter);
+        if (isSameDay()) {
+            return formattedStart;
+        } else {
+            String formattedEnd = end.format(formatter);
+            return formattedStart + " - " + formattedEnd;
+        }
+    }
+
+    /**
+     * Returns a comma-separated list of students.
+     * @return
+     */
+    public String getStudents() {
+        return StringUtil.joinArray(this.students, ", ");
+    }
+
+    /**
+     * Returns the subject.
+     * @return
+     */
+    public String getSubject() {
+        return serializeSubject(); // TODO - change to something more concrete
+    }
 
     // TODO: Tasks
     // private TaskContainer tasks;
@@ -185,5 +231,13 @@ public class Lesson {
                 .add("subject", subject)
                 .add("students", students)
                 .toString();
+    }
+
+    /**
+     * Returns true if this Lesson's start and end date are the same.
+     * @return
+     */
+    private boolean isSameDay() {
+        return start.toLocalDate().isEqual(end.toLocalDate());
     }
 }

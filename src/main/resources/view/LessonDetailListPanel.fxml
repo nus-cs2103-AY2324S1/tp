@@ -21,31 +21,31 @@
                         <Image url="@../images/calendar.png" />
                      </image>
                   </ImageView>
-                  <TextField fx:id="date" alignment="BOTTOM_LEFT" editable="false" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: transparent; -fx-text-fill: white;" text="Thursday, 18/10/2023" HBox.hgrow="ALWAYS" />
+                  <TextField fx:id="date" alignment="BOTTOM_LEFT" editable="false" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: transparent; -fx-text-fill: white;" text="\$date" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="120.0">
                <children>
                   <Label style="-fx-text-fill: white;" text="Start Time: " />
-                  <TextField fx:id="startTime" alignment="BOTTOM_LEFT" editable="false" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: transparent; -fx-text-fill: white;" text="1100" HBox.hgrow="ALWAYS" />
+                  <TextField fx:id="startTime" alignment="BOTTOM_LEFT" editable="false" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: transparent; -fx-text-fill: white;" text="\$startTime" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="254.0">
                <children>
                   <Label style="-fx-text-fill: white;" text="End Time: " />
-                  <TextField fx:id="endTime" editable="false" style="-fx-background-color: transparent; -fx-text-fill: white;" text="1200" HBox.hgrow="ALWAYS" />
+                  <TextField fx:id="endTime" editable="false" style="-fx-background-color: transparent; -fx-text-fill: white;" text="\$endTime" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="254.0">
                <children>
                   <Label style="-fx-text-fill: white;" text="Subject:" />
-                  <TextField fx:id="subject" editable="false" style="-fx-background-color: transparent; -fx-text-fill: white;" text="Mathematics" HBox.hgrow="ALWAYS" />
+                  <TextField fx:id="subject" editable="false" style="-fx-background-color: transparent; -fx-text-fill: white;" text="\$subject" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="80.0" prefHeight="25.0" prefWidth="254.0">
                <children>
-                  <Label style="-fx-text-fill: white;" text="Student: " />
-                  <TextField fx:id="student" editable="false" style="-fx-background-color: transparent; -fx-text-fill: white;" text="Marcus" HBox.hgrow="ALWAYS" />
+                  <Label style="-fx-text-fill: white;" text="Student(s): " />
+                  <TextField fx:id="students" editable="false" style="-fx-background-color: transparent; -fx-text-fill: white;" text="\$students" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
          </children>

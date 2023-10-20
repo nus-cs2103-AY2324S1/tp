@@ -5,7 +5,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 /**
  * Helper functions for handling strings.
@@ -64,5 +66,15 @@ public class StringUtil {
         } catch (NumberFormatException nfe) {
             return false;
         }
+    }
+
+    /**
+     * Converts an array into a string.
+     * @param array The array to convert
+     * @param delimiter What to put inbetween each element of the array
+     * @return The result string
+     */
+    public static String joinArray(ArrayList<String> array, String delimiter) {
+        return array.stream().collect(Collectors.joining(delimiter));
     }
 }

@@ -273,8 +273,8 @@ public class MainWindow extends UiPart<Stage> {
      *
      * @param lesson The lesson to show the details of.
      */
-    public void handleShowLesson(Lesson lesson) { //TODO
+    public void handleShowLesson(Lesson lesson) {
         lessonDetailList.setVisible(true);
-        // lessonDetailListPanel.setLessonDetails(lesson);
+         lessonDetailListPanel.setLessonDetails(lesson);
     }
 }
