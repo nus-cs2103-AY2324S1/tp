@@ -30,7 +30,7 @@ public class AddTeamCommandParser implements Parser<AddTeamCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TEAMNAME, PREFIX_TEAMLEADER);
-        String teamName = ParserUtil.parseName(argMultimap.getValue(PREFIX_TEAMNAME).get()).toString(); //returns the string representation of team
+        String teamName = ParserUtil.parseTeamName(argMultimap.getValue(PREFIX_TEAMNAME).get()); //returns the string representation of team
         Name teamLeaderName = ParserUtil.parseTeamLeader(argMultimap.getValue(PREFIX_TEAMLEADER).get());
 
 
