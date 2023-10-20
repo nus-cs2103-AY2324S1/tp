@@ -89,17 +89,17 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
+     * Updates the filter of the filtered person list to filter by the given {@code predicates}.
+     * @throws NullPointerException if any of the {@code predicatesList} is null.
+     */
+    void updateFilteredPersonList(List<Predicate<Person>> predicatesList);
+
+    /**
      * Sorts the list of persons using the provided comparator.
      *
      * @param comparator The comparator used to determine the sorting order.
      */
     void sortPersonList(Comparator<Person> comparator);
-
-    /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicates}.
-     * @throws NullPointerException if any of the {@code predicatesList} is null.
-     */
-    void updateFilteredPersonList(List<Predicate<Person>> predicatesList);
 
     /**
      * Returns the Index of the last view command called.
