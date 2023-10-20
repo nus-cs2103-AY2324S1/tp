@@ -22,7 +22,7 @@ public class AddBandCommand extends Command {
             + PREFIX_NAME + "My garage band";
 
     public static final String MESSAGE_SUCCESS = "New band added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This band already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_BAND = "This band already exists in the address book";
 
     private final Band toAdd;
 
@@ -39,7 +39,7 @@ public class AddBandCommand extends Command {
         requireNonNull(model);
 
         if (model.hasBand(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_BAND);
         }
 
         model.addBand(toAdd);
