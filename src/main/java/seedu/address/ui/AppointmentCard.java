@@ -34,7 +34,7 @@ public class AppointmentCard extends UiPart<Region> {
         this.appointment = appointment;
         id.setText(displayedIndex + ". ");
         name.setText(appointment.getName().fullName);
-        dateTime.setText(appointment.getDateTime().value);
-        description.setText(appointment.getDescription().value);
+        dateTime.setText("Date: " + appointment.getDateTime().value);
+        description.setText("Time: " + appointment.getDescription().value);
     }
 }

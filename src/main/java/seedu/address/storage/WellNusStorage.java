@@ -11,36 +11,36 @@ import seedu.address.model.WellNus;
 /**
  * Represents a storage for {@link WellNus}.
  */
-public interface AddressBookStorage {
+public interface WellNusStorage {
 
     /**
      * Returns the file path of the data file.
      */
-    Path getAddressBookFilePath();
+    Path getWellNusFilePath();
 
     /**
-     * Returns AddressBook data as a {@link ReadOnlyWellNus}.
+     * Returns WellNus data as a {@link ReadOnlyWellNus}.
      * Returns {@code Optional.empty()} if storage file is not found.
      *
      * @throws DataLoadingException if loading the data from storage failed.
      */
-    Optional<ReadOnlyWellNus> readAddressBook() throws DataLoadingException;
+    Optional<ReadOnlyWellNus> readWellNus() throws DataLoadingException;
 
     /**
-     * @see #getAddressBookFilePath()
+     * @see #getWellNusFilePath()
      */
-    Optional<ReadOnlyWellNus> readAddressBook(Path filePath) throws DataLoadingException;
+    Optional<ReadOnlyWellNus> readWellNus(Path filePath) throws DataLoadingException;
 
     /**
      * Saves the given {@link ReadOnlyWellNus} to the storage.
-     * @param addressBook cannot be null.
+     * @param wellNus cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveAddressBook(ReadOnlyWellNus addressBook) throws IOException;
+    void saveWellNus(ReadOnlyWellNus wellNus) throws IOException;
 
     /**
-     * @see #saveAddressBook(ReadOnlyWellNus)
+     * @see #saveWellNus(ReadOnlyWellNus)
      */
-    void saveAddressBook(ReadOnlyWellNus addressBook, Path filePath) throws IOException;
+    void saveWellNus(ReadOnlyWellNus wellNus, Path filePath) throws IOException;
 
 }
