@@ -6,14 +6,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.DateTime;
 import seedu.address.model.appointment.Description;
-import seedu.address.model.person.*;
-import seedu.address.model.risklevel.RiskLevel;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
+import seedu.address.model.student.Name;
 
 public class JsonAdaptedAppointment {
 
@@ -38,7 +31,7 @@ public class JsonAdaptedAppointment {
      * Converts a given {@code Appointment} into this class for JSON use.
      */
     public JsonAdaptedAppointment(Appointment source) {
-        dateTime = source.getTime();
+        dateTime = source.getDateTime().value;
         name = source.getName().fullName;
         description = source.getDescription().value;
     }

@@ -5,7 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.Name;
+import seedu.address.model.student.Name;
 
 /**
  * Represents an appointment with a date and time, a student, and a description.
@@ -13,41 +13,33 @@ import seedu.address.model.person.Name;
 public class Appointment {
 
     private final DateTime dateTime;
-    private final Name student;
+    private final Name name;
     private final Description description;
 
     /**
      * Constructs an Appointment object with the specified date and time, student, and description.
      *
      * @param dateTime    The date and time of the appointment.
-     * @param student     The student associated with the appointment.
+     * @param name     The name of the student associated with the appointment.
      * @param description A description of the appointment.
      */
-    public Appointment(DateTime dateTime, Name student, Description description) {
-        requireAllNonNull(dateTime, student, description);
+    public Appointment(DateTime dateTime, Name name, Description description) {
+        requireAllNonNull(dateTime, name, description);
         this.dateTime = dateTime;
-        this.student = student;
+        this.name = name;
         this.description = description;
     }
 
     public DateTime getDateTime() {
-        return dateTime;
-    }
-
-    public String getDate() {
-        return dateTime.getDate();
-    }
-
-    public String getTime() {
-        return dateTime.getTime();
+        return this.dateTime;
     }
 
     public Name getName() {
-        return student;
+        return this.name;
     }
 
     public Description getDescription() {
-        return description;
+        return this.description;
     }
 
     /**
@@ -65,7 +57,7 @@ public class Appointment {
         }
 
         Appointment otherAppointment = (Appointment) other;
-        return student.equals(otherAppointment.student)
+        return this.name.equals(otherAppointment.name)
                 && description.equals(otherAppointment.description)
                 && dateTime.equals(otherAppointment.dateTime);
     }
@@ -73,13 +65,13 @@ public class Appointment {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(student, description, dateTime);
+        return Objects.hash(name, description, dateTime);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("student", student)
+                .add("student", name)
                 .add("description", description)
                 .add("dateTime", dateTime)
                 .toString();

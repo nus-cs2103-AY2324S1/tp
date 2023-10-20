@@ -9,7 +9,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.ReadOnlyWellNus;
 import seedu.address.model.appointment.Appointment;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
 
 /**
  * A ModelStub class used for unit testing
@@ -46,7 +46,7 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public void addPerson(Person person) {
+    public void addStudent(Student student) {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -61,17 +61,27 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public boolean hasPerson(Person person) {
+    public boolean hasStudent(Student student) {
         throw new AssertionError("This method should not be called.");
     }
 
     @Override
-    public void deletePerson(Person target) {
+    public void deleteStudent(Student target) {
         throw new AssertionError("This method should not be called.");
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
+    public void setStudent(Student target, Student editedStudent) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void addAppointment(Appointment appointment) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public boolean hasAppointment(Appointment appointment) {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -81,7 +91,7 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
+    public ObservableList<Student> getFilteredStudentList() {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -91,7 +101,7 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredStudentList(Predicate<Student> predicate) {
         throw new AssertionError("This method should not be called.");
     }
 

@@ -4,7 +4,7 @@ title: User Guide
 ---
 
 WellNUS is a **desktop application used by NUS Counsellors to manage and schedule appointments with their student clients**
-It is optimised for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). 
+It is optimised for use via a **Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). 
 If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
@@ -42,8 +42,8 @@ If you can type fast, AB3 can get your contact management tasks done faster than
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-e.g. in `add student n/NAME c/CONTACT_NUMBER`, `NAME` and `CONTACT_NUMBER` are parameters 
-which can be used as `add student n/John Doe c/98172645`.
+e.g. in `add n/NAME c/CONTACT_NUMBER`, `NAME` and `CONTACT_NUMBER` are parameters 
+which can be used as `add n/John Doe c/98172645`.
 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
@@ -72,19 +72,19 @@ Format: `help`
 
 Adds a student with his/her relevant details.
 
-Format: `add student n/<NAME> c/<CONTACT_NUMBER> a/<HOME_ADDRESS>`
+Format: `add n/<NAME> c/<CONTACT_NUMBER> a/<HOME_ADDRESS>`
 
 **Parameters**:
 1. Name
    - Alphabetical characters only
 2. Contact Number
-   - Numerical characters only
+   - Numerical characters only, must be 8 characters long
 3. Home Address
    - No restrictions
 
 Examples:
-* `add student n/John c/81349705 a/Yishun Street 56 Blk 21 #05-07`
-* `add student n/Sally c/94149785 a/Woodlands Street 11 Blk 888 #08-08`
+* `add n/John c/81349705 a/Yishun Street 56 Blk 21 #05-07`
+* `add n/Sally c/94149785 a/Woodlands Street 11 Blk 888 #08-08`
 
 
 ### View all students
@@ -101,7 +101,7 @@ Format: `delete <INDEX>`
 
 **Parameters**:
 1. Appointment Index
-    - Numerical characters only
+    - Index must be a number more than 0
 
 
 
@@ -191,15 +191,15 @@ _Details coming soon ..._
 
 
 
-| Action                          | Format, Examples                                                                                                                          |
-|---------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add a student**               | `add student n/<NAME> p/<PHONE_NUMBER> e/<EMAIL> a/<ADDRESS>` <br> e.g., `add student n/John c/81349705 a/Yishun Street 56 Blk 21 #05-07` |
-| **View all students**           | `view students`                                                                                                                           |
-| **Delete a student**            | `delete student <INDEX>`<br> e.g., `delete student 3`                                                                                     |
-| **Tag a student to risk level** | `tag_student <INDEX> <RISK_LEVEL>`<br> e.g.,`tag_student 4 HIGH`                                                                          |
-| **Add an appointment**          | `add appointment d/<DATETIME_OF_APPOINMENT> n/<NAME_OF_STUDENT>`<br> e.g., `add appointment d/2023-12-31 16:30 n/Jon`                     |
-| **View all appointments**       | `view appointments`                                                                                                                       |
-| **Delete an appointment**       | `delete appointment <INDEX>`<br> e.g., `delete appointment 3`                                                                             |
-| **Help**                        | `help`                                                                                                                                    |
-| **Exit**                        | `exit`                                                                                                                                    |
+| Action                          | Format, Examples                                                                                                      |
+|---------------------------------|-----------------------------------------------------------------------------------------------------------------------|
+| **Add a student**               | `add n/<NAME> c/<PHONE_NUMBER> a/<ADDRESS>` <br> e.g., `add n/John c/81349705 a/Yishun Street 56 Blk 21 #05-07`       |
+| **View all students**           | `view students`                                                                                                       |
+| **Delete a student**            | `delete <INDEX>`<br> e.g., `delete 3`                                                                                 |
+| **Tag a student to risk level** | `tag_student <INDEX> <RISK_LEVEL>`<br> e.g.,`tag_student 4 HIGH`                                                      |
+| **Add an appointment**          | `add appointment d/<DATETIME_OF_APPOINMENT> n/<NAME_OF_STUDENT>`<br> e.g., `add appointment d/2023-12-31 16:30 n/Jon` |
+| **View all appointments**       | `view appointments`                                                                                                   |
+| **Delete an appointment**       | `delete appointment <INDEX>`<br> e.g., `delete appointment 3`                                                         |
+| **Help**                        | `help`                                                                                                                |
+| **Exit**                        | `exit`                                                                                                                |
 

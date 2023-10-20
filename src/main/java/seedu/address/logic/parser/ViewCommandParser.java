@@ -32,7 +32,6 @@ public class ViewCommandParser implements Parser<ViewCommand> {
 
         String category = argMultimap.getValue(PREFIX_CATEGORY).orElse("");
         if (!category.equals(STUDENT_CATEGORY) && !category.equals(APPOINTMENT_CATEGORY)) {
-            System.out.println(category);
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
         }

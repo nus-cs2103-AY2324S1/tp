@@ -12,7 +12,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.ReadOnlyWellNus;
 import seedu.address.model.WellNus;
 import seedu.address.model.appointment.Appointment;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
@@ -20,19 +20,19 @@ import seedu.address.model.person.Person;
 @JsonRootName(value = "addressbook")
 class JsonSerializableAddressBook {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_STUDENT = "Students list contains duplicate student(s).";
     public static final String MESSAGE_DUPLICATE_APPOINTMENT = "Persons list contains duplicate person(s).";
 
-    private final List<JsonAdaptedPerson> persons = new ArrayList<>();
+    private final List<JsonAdaptedStudent> students = new ArrayList<>();
     private final List<JsonAdaptedAppointment> appointments = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons.
+     * Constructs a {@code JsonSerializableAddressBook} with the given students.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
+    public JsonSerializableAddressBook(@JsonProperty("students") List<JsonAdaptedStudent> students,
                                         @JsonProperty("appointments") List<JsonAdaptedAppointment> appointments) {
-        this.persons.addAll(persons);
+        this.students.addAll(students);
         this.appointments.addAll(appointments);
     }
 
@@ -42,7 +42,7 @@ class JsonSerializableAddressBook {
      * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
      */
     public JsonSerializableAddressBook(ReadOnlyWellNus source) {
-        persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        students.addAll(source.getStudentList().stream().map(JsonAdaptedStudent::new).collect(Collectors.toList()));
         appointments.addAll(source.getAppointmentList().
                 stream().map(JsonAdaptedAppointment::new).collect(Collectors.toList()));
     }
@@ -54,12 +54,12 @@ class JsonSerializableAddressBook {
      */
     public WellNus toModelType() throws IllegalValueException {
         WellNus wellNus = new WellNus();
-        for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
-            Person person = jsonAdaptedPerson.toModelType();
-            if (wellNus.hasPerson(person)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+        for (JsonAdaptedStudent jsonAdaptedStudent : students) {
+            Student student = jsonAdaptedStudent.toModelType();
+            if (wellNus.hasStudent(student)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_STUDENT);
             }
-            wellNus.addPerson(person);
+            wellNus.addStudent(student);
         }
         for (JsonAdaptedAppointment jsonAdaptedAppointment : appointments) {
             Appointment appointment = jsonAdaptedAppointment.toModelType();

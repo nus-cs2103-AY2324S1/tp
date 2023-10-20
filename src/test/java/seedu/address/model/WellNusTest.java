@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_RISK_LEVEL_LOW;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalStudents.ALICE;
+import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -19,9 +19,9 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.appointment.Appointment;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.exceptions.DuplicateStudentException;
+import seedu.address.testutil.StudentBuilder;
 
 public class WellNusTest {
 
@@ -29,7 +29,7 @@ public class WellNusTest {
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), wellNus.getPersonList());
+        assertEquals(Collections.emptyList(), wellNus.getStudentList());
     }
 
     @Test
@@ -45,65 +45,65 @@ public class WellNusTest {
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
-        // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_RISK_LEVEL_LOW)
+    public void resetData_withDuplicateStudents_throwsDuplicateStudentException() {
+        // Two students with the same identity fields
+        Student editedAlice = new StudentBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_RISK_LEVEL_LOW)
                 .build();
-        List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        WellNusStub newData = new WellNusStub(newPersons);
+        List<Student> newStudents = Arrays.asList(ALICE, editedAlice);
+        WellNusStub newData = new WellNusStub(newStudents);
 
-        assertThrows(DuplicatePersonException.class, () -> wellNus.resetData(newData));
+        assertThrows(DuplicateStudentException.class, () -> wellNus.resetData(newData));
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> wellNus.hasPerson(null));
+    public void hasStudent_nullStudent_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> wellNus.hasStudent(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(wellNus.hasPerson(ALICE));
+    public void hasStudent_studentNotInAddressBook_returnsFalse() {
+        assertFalse(wellNus.hasStudent(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        wellNus.addPerson(ALICE);
-        assertTrue(wellNus.hasPerson(ALICE));
+    public void hasStudent_studentInAddressBook_returnsTrue() {
+        wellNus.addStudent(ALICE);
+        assertTrue(wellNus.hasStudent(ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        wellNus.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_RISK_LEVEL_LOW)
+    public void hasStudent_studentWithSameIdentityFieldsInAddressBook_returnsTrue() {
+        wellNus.addStudent(ALICE);
+        Student editedAlice = new StudentBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_RISK_LEVEL_LOW)
                 .build();
-        assertTrue(wellNus.hasPerson(editedAlice));
+        assertTrue(wellNus.hasStudent(editedAlice));
     }
 
     @Test
-    public void getPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> wellNus.getPersonList().remove(0));
+    public void getStudentList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> wellNus.getStudentList().remove(0));
     }
 
     @Test
     public void toStringMethod() {
-        String expected = WellNus.class.getCanonicalName() + "{persons=" + wellNus.getPersonList() + "}";
+        String expected = WellNus.class.getCanonicalName() + "{students=" + wellNus.getStudentList() + "}";
         assertEquals(expected, wellNus.toString());
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
+     * A stub ReadOnlyAddressBook whose students list can violate interface constraints.
      */
     private static class WellNusStub implements ReadOnlyWellNus {
-        private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableList<Student> students = FXCollections.observableArrayList();
         private final ObservableList<Appointment> appointments = FXCollections.observableArrayList();
 
-        WellNusStub(Collection<Person> persons) {
-            this.persons.setAll(persons);
+        WellNusStub(Collection<Student> students) {
+            this.students.setAll(students);
         }
 
         @Override
-        public ObservableList<Person> getPersonList() {
-            return persons;
+        public ObservableList<Student> getStudentList() {
+            return students;
         }
 
         @Override

@@ -11,7 +11,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyWellNus;
 import seedu.address.model.appointment.Appointment;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
 
 /**
  * A LogicStub class used for unit testing for MainWindow
@@ -31,8 +31,8 @@ public class LogicStub implements Logic {
     }
 
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return new FilteredList<Person>(FXCollections.observableArrayList());
+    public ObservableList<Student> getFilteredStudentList() {
+        return new FilteredList<Student>(FXCollections.observableArrayList());
     }
 
     @Override
