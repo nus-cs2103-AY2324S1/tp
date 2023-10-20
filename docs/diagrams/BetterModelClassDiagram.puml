@@ -10,7 +10,7 @@ UniqueTagList -[hidden]down- UniqueStudentList
 UniqueTagList -[hidden]down- UniqueStudentList
 
 UniqueTagList -right-> "*" Tag
-UniquePersonList -right-> Person
+UniqueStudentList -right-> Student
 
 Person -up-> "*" Tag
 

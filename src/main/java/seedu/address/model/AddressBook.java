@@ -32,7 +32,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public AddressBook() {}
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an AddressBook using the Students in the {@code toBeCopied}
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
@@ -54,7 +54,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
-        setStudents(newData.getPersonList());
+        setStudents(newData.getStudentList());
     }
 
     //// student-level operations
@@ -115,7 +115,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public ObservableList<Student> getPersonList() {
+    public ObservableList<Student> getStudentList() {
         return students.asUnmodifiableObservableList();
     }
 
