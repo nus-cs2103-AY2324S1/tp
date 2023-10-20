@@ -13,11 +13,13 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Details;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Income;
+import seedu.address.model.person.Interaction.Outcome;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Profession;
 import seedu.address.model.person.TelegramHandle;
 import seedu.address.model.tag.Tag;
+
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -178,6 +180,19 @@ public class ParserUtil {
         return new Details(trimmedDetails);
     }
 
+    /**
+     * Parses a {@code String outcome} into a {@code Outcome}.
+     *
+     * @throws ParseException if the given {@code outcome} is invalid.
+     */
+    public static Outcome parseOutcome(String outcome) throws ParseException {
+        requireNonNull(outcome);
+        String trimmedOutcome = outcome.trim();
+        if (!Outcome.isValidOutcome(trimmedOutcome)) {
+            throw new ParseException(Outcome.MESSAGE_CONSTRAINTS);
+        }
+        return Outcome.valueOf(trimmedOutcome);
+    }
 
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
