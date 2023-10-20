@@ -27,7 +27,6 @@ public class InteractionCommandParser implements Parser<Command> {
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_OUTCOME);
-        System.out.println(argMultimap.getPreamble());
 
         Index index;
 
@@ -46,19 +45,19 @@ public class InteractionCommandParser implements Parser<Command> {
         if (argMultimap.getValue(PREFIX_OUTCOME).isPresent()) {
             String outcomeString = argMultimap.getValue(PREFIX_OUTCOME).get().split("\\s+")[0];
             outcome = ParserUtil.parseOutcome(outcomeString);
-            String[] trimmedArgsParts = trimmedArgs.split("\\s+", 4);
-            if (trimmedArgsParts.length < 4) {
+            String[] trimmedArgsParts = trimmedArgs.split("\\s+", 3);
+            if (trimmedArgsParts.length < 3) {
                 note = "";
             } else {
-                note = trimmedArgsParts[3];
+                note = trimmedArgsParts[2];
             }
         } else {
-            String[] trimmedArgsParts = trimmedArgs.split("\\s+", 3);
+            String[] trimmedArgsParts = trimmedArgs.split("\\s+", 2);
             if (trimmedArgsParts.length < 3) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         InteractionCommand.MESSAGE_USAGE));
             }
-            note = trimmedArgsParts[2];
+            note = trimmedArgsParts[1];
         }
 
         return new InteractionCommand(index, new Interaction(note, outcome));
