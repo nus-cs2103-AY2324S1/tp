@@ -36,7 +36,7 @@ abstract class Word {
      * @return The word encapsulated by this
      */
     public String getWord() {
-        return word;
+        return word.trim();
     }
 
     /**
@@ -44,7 +44,7 @@ abstract class Word {
      * @return Language of this word
      */
     public String getLanguage() {
-        return language;
+        return language.trim();
     }
 
     /**
@@ -57,7 +57,7 @@ abstract class Word {
     }
 
     public boolean isSameLanguage(String language) {
-        return this.language.equals(language);
+        return this.language.trim().equals(language.trim());
     }
 
     /**
