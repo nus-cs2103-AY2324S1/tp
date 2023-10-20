@@ -86,7 +86,6 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
         if (!appointmentsAreUnique(appointments)) {
             throw new DuplicateStudentException();
         }
-
         internalList.setAll(appointments);
     }
 
