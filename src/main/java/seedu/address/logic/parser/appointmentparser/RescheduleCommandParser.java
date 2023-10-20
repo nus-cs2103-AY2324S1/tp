@@ -35,8 +35,8 @@ public class RescheduleCommandParser implements Parser<RescheduleCommand> {
 
         Index index;
 
-        if (argMultimap.getValue(PREFIX_ID).isEmpty() || argMultimap.getValue(PREFIX_ID).isEmpty()
-                || argMultimap.getValue(PREFIX_ID).isEmpty()) {
+        if (argMultimap.getValue(PREFIX_ID).isEmpty() || argMultimap.getValue(PREFIX_APPOINTMENT_START).isEmpty()
+                || argMultimap.getValue(PREFIX_APPOINTMENT_END).isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RescheduleCommand.MESSAGE_USAGE));
         }
         index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_ID).get());

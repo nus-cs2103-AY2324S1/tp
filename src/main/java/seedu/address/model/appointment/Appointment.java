@@ -13,7 +13,6 @@ import seedu.address.model.person.Person;
  * Represents an Appointment in the address book.
  * Guarantees: details are present and not null, field values are validated.
  */
-
 public class Appointment {
     private final AppointmentTime appointmentTime;
     private final AppointmentDescription appointmentDescription;
