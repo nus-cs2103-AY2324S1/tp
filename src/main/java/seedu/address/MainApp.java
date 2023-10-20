@@ -22,8 +22,12 @@ import seedu.address.model.ReadOnlyWellNus;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.WellNus;
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.storage.*;
+import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.JsonWellNusStorage;
+import seedu.address.storage.Storage;
+import seedu.address.storage.StorageManager;
+import seedu.address.storage.UserPrefsStorage;
+import seedu.address.storage.WellNusStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 

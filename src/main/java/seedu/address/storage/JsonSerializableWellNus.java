@@ -43,8 +43,8 @@ class JsonSerializableWellNus {
      */
     public JsonSerializableWellNus(ReadOnlyWellNus source) {
         students.addAll(source.getStudentList().stream().map(JsonAdaptedStudent::new).collect(Collectors.toList()));
-        appointments.addAll(source.getAppointmentList().
-                stream().map(JsonAdaptedAppointment::new).collect(Collectors.toList()));
+        appointments.addAll(source.getAppointmentList()
+                .stream().map(JsonAdaptedAppointment::new).collect(Collectors.toList()));
     }
 
     /**
