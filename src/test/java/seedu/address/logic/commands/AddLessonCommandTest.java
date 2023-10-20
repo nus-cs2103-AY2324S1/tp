@@ -1,9 +1,9 @@
 package seedu.address.logic.commands;
 
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
+import static seedu.address.testutil.Assert.assertThrows;
 
 import java.time.LocalDateTime;
 
@@ -13,6 +13,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.lessons.Lesson;
+
 
 
 
@@ -39,6 +40,7 @@ class AddLessonCommandTest {
             assertFalse(model.hasLessonClashWith(lesson));
             addLessonCommand.execute(model);
             assertTrue(model.hasLessonClashWith(lesson));
+            assertThrows(CommandException.class, () -> addLessonCommand.execute(model));
         } catch (CommandException e) {
             fail();
         }
