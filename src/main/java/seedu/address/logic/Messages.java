@@ -36,13 +36,16 @@ public class Messages {
      */
     public static String format(Booking booking) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(booking.getName())
+        builder.append("Room number: ")
+                .append(booking.getRoom())
+                .append("; Name: ")
+                .append(booking.getName())
+                .append("; Booking Period: ")
+                .append(booking.getBookingPeriod())
                 .append("; Phone: ")
                 .append(booking.getPhone())
                 .append("; Email: ")
                 .append(booking.getEmail())
-                .append("; Address: ")
-                .append(booking.getBookingPeriod())
                 .append("; Tags: ");
         booking.getTags().forEach(builder::append);
         return builder.toString();
