@@ -3,15 +3,17 @@ package seedu.address.model.calendar;
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
+import javafx.collections.ObservableList;
 import seedu.address.model.event.AllDaysEventListManager;
 import seedu.address.model.event.Event;
 
 /**
  * Represents a calendar that stores and manages events.
  */
-public class Calendar {
+public class Calendar implements ReadOnlyCalendar {
     private final AllDaysEventListManager eventManager;
 
     /**
@@ -19,6 +21,33 @@ public class Calendar {
      */
     public Calendar() {
         this.eventManager = new AllDaysEventListManager();
+    }
+
+    /**
+     * Creates a Calendar using the Events in the {@code toBeCopied}
+     */
+    public Calendar(ReadOnlyCalendar toBeCopied) {
+        this();
+        resetData(toBeCopied);
+    }
+
+    //// overwrite operations
+
+    /**
+     * Replaces the contents of the Calendar with {@code events}.
+     * {@code events} must not contain duplicate events.
+     */
+    public void setEvents(List<Event> events) {
+        events.forEach(this::addEvent);
+    }
+
+    /**
+     * Resets the existing data of this {@code Calendar} with {@code newData}.
+     */
+    public void resetData(ReadOnlyCalendar newData) {
+        requireNonNull(newData);
+
+        setEvents(newData.getEventList());
     }
 
     /**
@@ -105,6 +134,11 @@ public class Calendar {
             return eventManager.hasEvents();
         }
         return false;
+    }
+
+    @Override
+    public ObservableList<Event> getEventList() {
+        return eventManager.asUnmodifiableObservableList();
     }
 
     @Override

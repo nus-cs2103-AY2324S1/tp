@@ -129,6 +129,17 @@ public class EventPeriod implements Comparable<EventPeriod> {
         return listOfDates;
     }
 
+    /**
+     * Get the string representation of the EventPeriod.
+     *
+     * @return string representation of the period the eventPeriod spans.
+     */
+    public String getFormattedPeriod() {
+        String startString = start.format(DATE_TIME_STRING_FORMATTER);
+        String endString = end.format(DATE_TIME_STRING_FORMATTER);
+        return startString + " - " + endString;
+    }
+
     @Override
     public boolean equals(Object other) {
         requireNonNull(other);

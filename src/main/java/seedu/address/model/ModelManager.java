@@ -15,6 +15,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.calendar.Calendar;
+import seedu.address.model.calendar.ReadOnlyCalendar;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.model.person.Person;
@@ -26,27 +27,26 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
+    private final Calendar calendar;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
 
-    private final Calendar calendar;
-
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given addressBook, calendar and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyCalendar calendar, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
+        this.calendar = new Calendar(calendar);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        calendar = new Calendar();
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new Calendar(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -84,6 +84,16 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
+    @Override
+    public Path getCalendarFilePath() {
+        return userPrefs.getCalendarFilePath();
+    }
+
+    @Override
+    public void setCalendarFilePath(Path calendarFilePath) {
+        requireNonNull(calendarFilePath);
+        userPrefs.setCalendarFilePath(calendarFilePath);
+    }
 
 
     //=========== AddressBook ================================================================================
@@ -129,6 +139,17 @@ public class ModelManager implements Model {
     }
 
     //=========== Calendar ===================================================================================
+
+    @Override
+    public void setCalendar(ReadOnlyCalendar calendar) {
+        this.calendar.resetData(calendar);
+    }
+
+    @Override
+    public ReadOnlyCalendar getCalendar() {
+        return calendar;
+    }
+
     @Override
     public boolean canAddEvent(Event event) {
         return calendar.canAddEvent(event);
@@ -195,6 +216,7 @@ public class ModelManager implements Model {
 
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
+                && calendar.equals(otherModelManager.calendar)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }

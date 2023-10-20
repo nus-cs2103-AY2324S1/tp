@@ -7,6 +7,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.calendar.ReadOnlyCalendar;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.model.person.Person;
@@ -55,6 +56,24 @@ public interface Model {
 
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
+
+    /**
+     * Returns the user prefs' calendar file path.
+     */
+    Path getCalendarFilePath();
+
+    /**
+     * Sets the user prefs' calendar file path.
+     */
+    void setCalendarFilePath(Path calendarFilePath);
+
+    /**
+     * Replaces calendar data with the data in {@code calendar}.
+     */
+    void setCalendar(ReadOnlyCalendar calendar);
+
+    /** Returns the Calendar */
+    ReadOnlyCalendar getCalendar();
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.

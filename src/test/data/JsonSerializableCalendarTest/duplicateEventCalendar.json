@@ -1,0 +1,9 @@
+{
+  "events" : [ {
+    "description" : "Weekly team meeting",
+    "eventPeriod" : "2023-10-25 09:00 - 2023-10-25 10:30"
+  }, {
+    "description" : "Weekly team meeting",
+    "eventPeriod" : "2023-10-25 09:00 - 2023-10-25 10:30"
+  } ]
+}

@@ -7,7 +7,10 @@ import java.util.NavigableMap;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.model.event.exceptions.EventNotFoundException;
 
 /**
@@ -126,6 +129,17 @@ public class AllDaysEventListManager {
      */
     public boolean isEmpty() {
         return this.dayToEventListMap.isEmpty();
+    }
+
+    /**
+     * Returns the event list as an unmodifiable {@code ObservableList}.
+     */
+    public ObservableList<Event> asUnmodifiableObservableList() {
+        List<Event> list = dayToEventListMap.values().stream()
+                .flatMap(singleDayEventList -> singleDayEventList.getDayEventList().stream())
+                .collect(Collectors.toList());
+
+        return FXCollections.observableList(list);
     }
 
     /**
