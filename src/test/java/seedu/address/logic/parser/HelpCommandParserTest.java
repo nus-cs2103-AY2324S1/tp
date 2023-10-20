@@ -1,9 +1,10 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.commands.HelpCommand;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.commands.HelpCommand;
 
 public class HelpCommandParserTest {
 
